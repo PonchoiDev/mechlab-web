@@ -1,5 +1,6 @@
 import type { Item } from '../types/item';
-import type { ArmorState, Loadout, MechComponents, Zone } from '../types/mech';
+import type { ArmorState, Loadout, Mech, MechComponents, Zone } from '../types/mech';
+import { getItemAmmoFamily, getItemAmmoFamilyLabel, isJumpJet } from './items';
 import { mapZones } from './zones';
 
 const ARMOR_POINTS_PER_TON = 32;
@@ -150,3 +151,62 @@ export const calculateFirepower = (loadout: Loadout): number =>
 
 export const calculateHeatSpike = (loadout: Loadout): number =>
   roundTo(sumBy(getWeaponPerformance(loadout), weapon => weapon.heat), 1);
+
+export interface AmmunitionGroup {
+  family: string;
+  label: string;
+  capacity: number;
+  bins: number;
+}
+
+export const groupAmmunition = (loadout: Loadout): AmmunitionGroup[] => {
+  const groups = new Map<string, AmmunitionGroup>();
+
+  for (const item of getEquippedItems(loadout).filter(equippedItem => equippedItem.type === 'ammo')) {
+    const family = getItemAmmoFamily(item) ?? item.id;
+    const group = groups.get(family) ?? { family, label: getItemAmmoFamilyLabel(item), capacity: 0, bins: 0 };
+    group.capacity += item.capacity ?? 0;
+    group.bins += 1;
+    groups.set(family, group);
+  }
+
+  return [...groups.values()];
+};
+
+export interface BuildSummary {
+  equipmentWeight: number;
+  armorWeight: number;
+  totalWeight: number;
+  armorPoints: number;
+  maxArmorPoints: number;
+  firepower: number;
+  heatSpike: number;
+  coolingRate: number | null;
+  topSpeed: number;
+  jumpJetCount: number;
+  maxWeaponRange: number;
+  weapons: WeaponPerformance[];
+  ammunition: AmmunitionGroup[];
+}
+
+export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState): BuildSummary => {
+  const equipmentWeight = calculateEquippedWeight(loadout);
+  const armorWeight = calculateArmorWeight(armor);
+  const weapons = getWeaponPerformance(loadout);
+
+  return {
+    equipmentWeight,
+    armorWeight,
+    totalWeight: mech.baseTonnage + equipmentWeight + armorWeight,
+    armorPoints: calculateArmorPoints(armor),
+    maxArmorPoints: sumBy(Object.values(mech.components), component => component.maxArmor),
+    firepower: calculateFirepower(loadout),
+    heatSpike: calculateHeatSpike(loadout),
+    coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate),
+    topSpeed: calculateTopSpeed(mech.baseSpeed),
+    jumpJetCount: getEquippedItems(loadout).filter(isJumpJet).length,
+    maxWeaponRange: weapons.reduce((max, weapon) => Math.max(max, weapon.range ?? 0), 0),
+    weapons,
+    ammunition: groupAmmunition(loadout)
+  };
+};
