@@ -1,6 +1,6 @@
 import type { Item } from '../types/item';
-import type { ComponentData, EquippedItem, Hardpoint } from '../types/mech';
-import { getItemSupportedSlotTypes, getItemWeaponType, SIZE_RANK } from './items';
+import type { ComponentData, EquippedItem, Hardpoint, Loadout, Zone } from '../types/mech';
+import { getItemSupportedSlotTypes, getItemWeaponType, isAmmoCompatibleWithWeapon, SIZE_RANK } from './items';
 
 const GENERAL_SLOT_TYPE = 'General_SlotType';
 
@@ -101,3 +101,20 @@ export const createEquippedItem = (item: Item, equippedSlotType?: string): Equip
   ...(equippedSlotType ? { equippedSlotType } : {}),
   instanceId: `item-${++nextInstanceId}`
 });
+
+export const getEquippableItems = (
+  catalog: Item[],
+  componentData: ComponentData,
+  loadout: Loadout,
+  zone: Zone
+): Item[] => {
+  const zoneItems = loadout[zone];
+  const equippedWeapons = Object.values(loadout).flat().filter(item => item.type === 'weapon');
+
+  return catalog.filter(item => {
+    if (!canEquipItem(item, componentData, zoneItems)) return false;
+    if (item.type !== 'ammo') return true;
+
+    return equippedWeapons.some(weapon => isAmmoCompatibleWithWeapon(item, weapon));
+  });
+};

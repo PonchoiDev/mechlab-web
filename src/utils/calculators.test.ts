@@ -8,7 +8,9 @@ import {
   calculateHeatSpike,
   calculateTopSpeed,
   createDefaultArmor,
+  getBuildSummary,
   getWeaponPerformance,
+  groupAmmunition,
   maximizeArmor
 } from './calculators';
 import { allMechs, getItem, getMech, makeItem, makeLoadout } from '../test/fixtures';
@@ -238,5 +240,61 @@ describe('getWeaponPerformance', () => {
     });
 
     expect(getWeaponPerformance(loadout).map(weapon => weapon.item.id)).toEqual(['Autocannon20']);
+  });
+});
+
+describe('groupAmmunition', () => {
+  it('agrupa la munición por familia sumando capacidad y contenedores', () => {
+    const loadout = makeLoadout({
+      leftTorso: [getItem('AC20_Standard_AmmoEquipment'), getItem('AC20_Standard_Half_AmmoEquipment')],
+      rightTorso: [getItem('LRM_AmmoEquipment'), getItem('MediumLaser')]
+    });
+    const fullBin = getItem('AC20_Standard_AmmoEquipment').capacity ?? 0;
+    const halfBin = getItem('AC20_Standard_Half_AmmoEquipment').capacity ?? 0;
+
+    expect(groupAmmunition(loadout)).toEqual([
+      { family: 'ac20', label: 'AC/20', capacity: fullBin + halfBin, bins: 2 },
+      { family: 'lrm', label: 'LRM', capacity: getItem('LRM_AmmoEquipment').capacity, bins: 1 }
+    ]);
+  });
+
+  it('devuelve una lista vacía sin munición', () => {
+    expect(groupAmmunition(makeLoadout({ leftArm: [getItem('MediumLaser')] }))).toEqual([]);
+  });
+});
+
+describe('getBuildSummary', () => {
+  it('reúne todas las estadísticas del build', () => {
+    const mech = getMech('AS7-D');
+    const armor = createDefaultArmor(mech.components);
+    const loadout = makeLoadout({
+      leftArm: [getItem('MediumLaser')],
+      leftTorso: [getItem('LRM20'), getItem('LRM_AmmoEquipment')],
+      centerTorso: [getItem('JumpJet_Class3_Equipment'), getItem('SingleHeatSink')]
+    });
+
+    const summary = getBuildSummary(mech, loadout, armor);
+
+    expect(summary).toMatchObject({
+      equipmentWeight: calculateEquippedWeight(loadout),
+      armorWeight: calculateArmorWeight(armor),
+      totalWeight: mech.baseTonnage + calculateEquippedWeight(loadout) + calculateArmorWeight(armor),
+      armorPoints: calculateArmorPoints(armor),
+      maxArmorPoints: calculateArmorPoints(armor),
+      firepower: calculateFirepower(loadout),
+      heatSpike: calculateHeatSpike(loadout),
+      coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate),
+      topSpeed: calculateTopSpeed(mech.baseSpeed),
+      jumpJetCount: 1,
+      maxWeaponRange: 900
+    });
+    expect(summary.weapons.map(weapon => weapon.item.id)).toEqual(['LRM20', 'MediumLaser']);
+    expect(summary.ammunition).toEqual(groupAmmunition(loadout));
+  });
+
+  it('no tiene alcance máximo sin armas', () => {
+    const mech = getMech('AS7-D');
+
+    expect(getBuildSummary(mech, makeLoadout(), createDefaultArmor(mech.components)).maxWeaponRange).toBe(0);
   });
 });

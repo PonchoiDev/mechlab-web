@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { canEquipItem, createEquippedItem, getAvailableSlotType } from './equipment';
-import { getItem, makeComponent } from '../test/fixtures';
+import { canEquipItem, createEquippedItem, getAvailableSlotType, getEquippableItems } from './equipment';
+import { getItem, makeComponent, makeLoadout } from '../test/fixtures';
 
 describe('getAvailableSlotType', () => {
   it('usa ranuras generales mientras quede espacio', () => {
@@ -148,5 +148,37 @@ describe('createEquippedItem', () => {
 
     expect(heatSink).not.toHaveProperty('instanceId');
     expect(heatSink).not.toHaveProperty('equippedSlotType');
+  });
+});
+
+describe('getEquippableItems', () => {
+  const catalog = [
+    getItem('MediumLaser'),
+    getItem('LargeLaser'),
+    getItem('Autocannon20'),
+    getItem('SingleHeatSink'),
+    getItem('AC20_Standard_AmmoEquipment'),
+    getItem('LRM_AmmoEquipment')
+  ];
+  const component = makeComponent({ maxSlots: 2, hardpoints: [{ type: 'energy', size: 'medium' }] });
+
+  it('muestra solo armas que caben en los anclajes libres y equipo que cabe en las ranuras', () => {
+    const ids = getEquippableItems(catalog, component, makeLoadout(), 'leftArm').map(item => item.id);
+
+    expect(ids).toEqual(['MediumLaser', 'SingleHeatSink']);
+  });
+
+  it('muestra la munición solo si hay un arma compatible en cualquier zona', () => {
+    const loadout = makeLoadout({ rightTorso: [getItem('Autocannon20')] });
+    const ids = getEquippableItems(catalog, component, loadout, 'leftArm').map(item => item.id);
+
+    expect(ids).toContain('AC20_Standard_AmmoEquipment');
+    expect(ids).not.toContain('LRM_AmmoEquipment');
+  });
+
+  it('tiene en cuenta lo que ya hay equipado en la zona', () => {
+    const loadout = makeLoadout({ leftArm: [getItem('SmallLaser'), getItem('SingleHeatSink'), getItem('SingleHeatSink')] });
+
+    expect(getEquippableItems(catalog, component, loadout, 'leftArm')).toEqual([]);
   });
 });
