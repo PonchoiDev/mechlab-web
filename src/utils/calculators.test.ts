@@ -7,6 +7,7 @@ import {
   calculateFirepower,
   calculateHeatSpike,
   calculateTopSpeed,
+  clampArmorValue,
   createDefaultArmor,
   getBuildSummary,
   getWeaponPerformance,
@@ -296,5 +297,21 @@ describe('getBuildSummary', () => {
     const mech = getMech('AS7-D');
 
     expect(getBuildSummary(mech, makeLoadout(), createDefaultArmor(mech.components)).maxWeaponRange).toBe(0);
+  });
+});
+
+describe('clampArmorValue', () => {
+  it('mantiene los valores válidos', () => {
+    expect(clampArmorValue(30, 10, 60)).toBe(30);
+    expect(clampArmorValue(50, 10, 60)).toBe(50);
+  });
+
+  it('no permite valores negativos', () => {
+    expect(clampArmorValue(-1, 10, 60)).toBe(0);
+  });
+
+  it('limita la suma de delantera y trasera al máximo de la zona', () => {
+    expect(clampArmorValue(55, 10, 60)).toBe(50);
+    expect(clampArmorValue(1, 60, 60)).toBe(0);
   });
 });
