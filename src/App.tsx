@@ -2,10 +2,11 @@ import { useState, useEffect, type KeyboardEvent } from 'react';
 import './App.css';
 import mechsData from './data/mechs.json';
 import itemsData from './data/items.json';
-import type { Mech } from './types/mech';
-import { getItemAmmoFamily, getItemAmmoFamilyLabel, isAmmoCompatibleWithWeapon, isJumpJet, type Item } from './types/item';
+import type { ArmorState, EquippedLoadout, Mech, Zone } from './types/mech';
+import type { Item } from './types/item';
+import { getItemAmmoFamily, getItemAmmoFamilyLabel, isAmmoCompatibleWithWeapon, isJumpJet, SIZE_RANK } from './utils/items';
 import { canEquipItem, getAvailableSlotType } from './utils/equipment';
-import type { EquippedLoadout, ArmorState } from './utils/calculators';
+import { createEmptyArmor, createEmptyLoadout, ZONE_LABELS, ZONES } from './utils/zones';
 import { ComponentPanel } from './components/ComponentPanel';
 import { 
   calculateEquippedWeight, 
@@ -19,12 +20,6 @@ import {
   maximizeArmor,
   createDefaultArmor
 } from './utils/calculators';
-
-const SIZE_RANK: Record<Item['size'], number> = {
-  small: 1,
-  medium: 2,
-  large: 3
-};
 
 interface SarnaMechAsset {
   imageUrl: string | null;
@@ -69,16 +64,12 @@ export default function App() {
   const [isSarnaLoading, setIsSarnaLoading] = useState(true);
   const [viewMode, setViewMode] = useState<ViewMode>('workbench');
 
-  const [loadout, setLoadout] = useState<EquippedLoadout>({
-    head: [], centerTorso: [], leftTorso: [], rightTorso: [], leftArm: [], rightArm: [], leftLeg: [], rightLeg: []
-  });
+  const [loadout, setLoadout] = useState<EquippedLoadout>(createEmptyLoadout);
 
-  const [activeZone, setActiveZone] = useState<keyof EquippedLoadout | null>(null);
+  const [activeZone, setActiveZone] = useState<Zone | null>(null);
   const [weaponSortOrder, setWeaponSortOrder] = useState<'large-first' | 'small-first'>('large-first');
 
-  const [armor, setArmor] = useState<ArmorState>({
-    head: { front: 0, rear: 0 }, centerTorso: { front: 0, rear: 0 }, leftTorso: { front: 0, rear: 0 }, rightTorso: { front: 0, rear: 0 }, leftArm: { front: 0, rear: 0 }, rightArm: { front: 0, rear: 0 }, leftLeg: { front: 0, rear: 0 }, rightLeg: { front: 0, rear: 0 }
-  });
+  const [armor, setArmor] = useState<ArmorState>(createEmptyArmor);
 
   const filteredMechs = mechs
     .map((mech, index) => ({ mech, index }))
@@ -135,7 +126,7 @@ export default function App() {
     const defaultArmor = createDefaultArmor(currentMech.components);
     
     setArmor(defaultArmor);
-    setLoadout({ head: [], centerTorso: [], leftTorso: [], rightTorso: [], leftArm: [], rightArm: [], leftLeg: [], rightLeg: [] });
+    setLoadout(createEmptyLoadout());
     setActiveZone(null);
   }, [selectedIndex, currentMech]);
 
@@ -255,7 +246,7 @@ export default function App() {
     return () => controller.abort();
   }, [currentMech.name, currentMech.variant, currentMech.sarnaName, currentMech.techBase]);
 
-  const handleArmorChange = (zone: keyof ArmorState, type: 'front' | 'rear', value: number) => {
+  const handleArmorChange = (zone: Zone, type: 'front' | 'rear', value: number) => {
     setArmor(prev => ({ ...prev, [zone]: { ...prev[zone], [type]: value } }));
   };
 
@@ -275,15 +266,13 @@ export default function App() {
     setLoadout({ ...loadout, [activeZone]: [...currentZoneItems, equippedItem] });
   };
 
-  const handleRemoveItem = (zone: keyof EquippedLoadout, indexToRemove: number) => {
+  const handleRemoveItem = (zone: Zone, indexToRemove: number) => {
     const updatedZone = loadout[zone].filter((_, index) => index !== indexToRemove);
     setLoadout({ ...loadout, [zone]: updatedZone });
   };
 
   const handleClearArmor = () => {
-    setArmor(Object.fromEntries(
-      Object.keys(currentMech.components).map(zone => [zone, { front: 0, rear: 0 }])
-    ) as ArmorState);
+    setArmor(createEmptyArmor());
   };
 
   const handleMaximizeArmor = () => {
@@ -300,7 +289,7 @@ export default function App() {
     ) as EquippedLoadout);
   };
 
-  const handleTierChange = (zone: keyof EquippedLoadout, itemIndex: number, tier: string) => {
+  const handleTierChange = (zone: Zone, itemIndex: number, tier: string) => {
     setLoadout(prev => ({
       ...prev,
       [zone]: prev[zone].map((item, index) => index === itemIndex ? { ...item, tier } : item)
@@ -332,16 +321,6 @@ export default function App() {
       : SIZE_RANK[first.size] - SIZE_RANK[second.size]
   );
   const otherItems = displayedItems.filter(item => item.type !== 'weapon');
-  const componentZones: { zone: keyof EquippedLoadout; label: string; position: string }[] = [
-    { zone: 'head', label: 'Head', position: 'head' },
-    { zone: 'centerTorso', label: 'Center torso', position: 'center-torso' },
-    { zone: 'leftTorso', label: 'Left torso', position: 'left-torso' },
-    { zone: 'rightTorso', label: 'Right torso', position: 'right-torso' },
-    { zone: 'leftArm', label: 'Left arm', position: 'left-arm' },
-    { zone: 'rightArm', label: 'Right arm', position: 'right-arm' },
-    { zone: 'leftLeg', label: 'Left leg', position: 'left-leg' },
-    { zone: 'rightLeg', label: 'Right leg', position: 'right-leg' }
-  ];
   const mechIllustration = sarnaAsset?.imageUrl ? (
     <img
       className="mech-image"
@@ -639,10 +618,10 @@ export default function App() {
             <span className="component-count">8 SECTIONS</span>
           </header>
           <div className="component-stack">
-            {componentZones.map(({ zone }) => (
+            {ZONES.map(({ zone, label }) => (
               <ComponentPanel
                 key={zone}
-                title={zone.replace(/([A-Z])/g, ' $1')}
+                title={label}
                 baseData={currentMech.components[zone]}
                 equippedItems={loadout[zone]}
                 isActive={activeZone === zone}
@@ -670,7 +649,7 @@ export default function App() {
               {mechIllustration}
               {sarnaSource}
             </div>
-            {componentZones.map(({ zone, label, position }) => {
+            {ZONES.map(({ zone, label, position }) => {
               const items = loadout[zone];
               const weapons = items.filter(item => item.type === 'weapon');
               const equipment = items.filter(item => item.type !== 'weapon');
@@ -753,7 +732,7 @@ export default function App() {
                     {weapons.map(({ item, zone, damage, heat, rpm, dps, range }, index) => (
                       <tr key={`${item.id}-${zone}-${index}`}>
                         <td>{item.name}</td>
-                        <td>{zone.replace(/([A-Z])/g, ' $1')}</td>
+                        <td>{ZONE_LABELS[zone]}</td>
                         <td>{damage.toFixed(1)}</td>
                         <td>{heat.toFixed(1)}</td>
                         <td>{rpm > 0 ? rpm.toFixed(1) : '—'}</td>

@@ -1,5 +1,64 @@
-import type { ComponentData } from '../types/mech';
-import { getItemSupportedSlotTypes, SIZE_RANK, type Item } from '../types/item';
+import type { Item } from '../types/item';
+import type { ComponentData, Hardpoint } from '../types/mech';
+import { getItemSupportedSlotTypes, getItemWeaponType, SIZE_RANK } from './items';
+
+const GENERAL_SLOT_TYPE = 'General_SlotType';
+
+const SLOT_TYPE_LABELS: Record<string, string> = {
+  EngineHeatsink_SlotType: 'Engine Heat Sink',
+  ECM_SlotType: 'ECM',
+  BAP_SlotType: 'Active Probe',
+  AMS_SlotType: 'AMS',
+  MASC_MKI_SlotType: 'Motive Upgrade MK I',
+  MASC_MKII_SlotType: 'Motive Upgrade MK II',
+  MASC_MKIII_SlotType: 'Motive Upgrade MK III',
+  MASC_MKIV_SlotType: 'Motive Upgrade MK IV',
+  MASC_MKV_SlotType: 'Motive Upgrade MK V',
+  JumpJetClass1_SlotType: 'Jump Jets Class I',
+  JumpJetClass2_SlotType: 'Jump Jets Class II',
+  JumpJetClass3_SlotType: 'Jump Jets Class III',
+  JumpJetClass4_SlotType: 'Jump Jets Class IV',
+  JumpJetClass5_SlotType: 'Jump Jets Class V'
+};
+
+export const getSlotTypeLabel = (slotType: string): string =>
+  SLOT_TYPE_LABELS[slotType] ?? slotType.replace(/_SlotType$/, '').replace(/_/g, ' ');
+
+export const getUsedGeneralSlots = (equippedItems: Item[]): number =>
+  equippedItems
+    .filter(item => item.type !== 'weapon' && (item.equippedSlotType ?? GENERAL_SLOT_TYPE) === GENERAL_SLOT_TYPE)
+    .reduce((total, item) => total + item.slots, 0);
+
+export const getHardpointOccupancy = (
+  hardpoints: Hardpoint[] = [],
+  equippedItems: Item[] = []
+): { occupiedIndices: Set<number>; weaponAssignments: Map<number, Item> } => {
+  const weapons = equippedItems
+    .filter((item) => item.type === 'weapon')
+    .sort((first, second) => SIZE_RANK[second.size] - SIZE_RANK[first.size]);
+
+  const occupiedIndices = new Set<number>();
+  const weaponAssignments = new Map<number, Item>();
+
+  for (const weapon of weapons) {
+    const weaponType = getItemWeaponType(weapon);
+    if (!weaponType) continue;
+
+    const hardpointIndex = hardpoints.findIndex(
+      (hardpoint, index) =>
+        !occupiedIndices.has(index) &&
+        hardpoint.type === weaponType &&
+        (weaponType === 'melee' || SIZE_RANK[hardpoint.size] >= SIZE_RANK[weapon.size])
+    );
+
+    if (hardpointIndex !== -1) {
+      occupiedIndices.add(hardpointIndex);
+      weaponAssignments.set(hardpointIndex, weapon);
+    }
+  }
+
+  return { occupiedIndices, weaponAssignments };
+};
 
 export const getAvailableSlotType = (
   item: Item,
@@ -7,12 +66,8 @@ export const getAvailableSlotType = (
   equippedItems: Item[]
 ): string | null => {
   for (const slotType of getItemSupportedSlotTypes(item)) {
-    if (slotType === 'General_SlotType') {
-      const usedSlots = equippedItems
-        .filter(equippedItem => equippedItem.type !== 'weapon' &&
-          (equippedItem.equippedSlotType ?? 'General_SlotType') === 'General_SlotType')
-        .reduce((total, equippedItem) => total + equippedItem.slots, 0);
-      if (usedSlots + item.slots <= componentData.maxSlots) return slotType;
+    if (slotType === GENERAL_SLOT_TYPE) {
+      if (getUsedGeneralSlots(equippedItems) + item.slots <= componentData.maxSlots) return slotType;
       continue;
     }
 
@@ -29,26 +84,12 @@ export const getAvailableSlotType = (
   return null;
 };
 
-export const canEquipItem = (item: Item, componentData: ComponentData, equippedItems: Item[]) => {
+export const canEquipItem = (item: Item, componentData: ComponentData, equippedItems: Item[]): boolean => {
   if (item.type !== 'weapon') return getAvailableSlotType(item, componentData, equippedItems) !== null;
 
-  const weapons = [...equippedItems, item]
-    .filter(equippedItem => equippedItem.type === 'weapon')
-    .sort((first, second) => SIZE_RANK[second.size] - SIZE_RANK[first.size]);
-  const usedHardpoints = new Set<number>();
+  const candidateItems = [...equippedItems, item];
+  const weaponCount = candidateItems.filter(candidate => candidate.type === 'weapon').length;
+  const { weaponAssignments } = getHardpointOccupancy(componentData.hardpoints, candidateItems);
 
-  for (const weapon of weapons) {
-    if (!weapon.weaponType) return false;
-
-    const hardpointIndex = componentData.hardpoints.findIndex((hardpoint, index) =>
-      !usedHardpoints.has(index) &&
-      hardpoint.type.toLowerCase() === weapon.weaponType?.toLowerCase() &&
-      (weapon.weaponType === 'melee' || SIZE_RANK[hardpoint.size] >= SIZE_RANK[weapon.size])
-    );
-
-    if (hardpointIndex === -1) return false;
-    usedHardpoints.add(hardpointIndex);
-  }
-
-  return true;
+  return weaponAssignments.size === weaponCount;
 };
