@@ -69,6 +69,9 @@ export const createDefaultArmor = (components: MechComponents): ArmorState =>
     return { front: components[zone].maxArmor - rear, rear };
   });
 
+export const clampArmorValue = (value: number, otherSideValue: number, maxArmor: number): number =>
+  Math.min(Math.max(value, 0), maxArmor - otherSideValue);
+
 const getAffordableArmorPoints = (availableTonnage: number): number => {
   let points = Math.max(0, Math.floor(availableTonnage * ARMOR_POINTS_PER_TON));
 
