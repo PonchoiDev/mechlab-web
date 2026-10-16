@@ -1,6 +1,8 @@
 import React from 'react';
-import { getSlotTypeLabel, type ComponentData } from '../types/mech';
-import { type Item, getItemWeaponType, getHardpointOccupancy } from '../types/item';
+import type { ComponentData } from '../types/mech';
+import type { Item } from '../types/item';
+import { getItemWeaponType } from '../utils/items';
+import { getHardpointOccupancy, getSlotTypeLabel, getUsedGeneralSlots } from '../utils/equipment';
 
 interface Props {
   title: string;
@@ -31,9 +33,7 @@ export const ComponentPanel: React.FC<Props> = ({
   onTierChange,
   onArmorChange 
 }) => {
-  const slotsUsed = equippedItems
-    .filter(item => item.type !== 'weapon' && (item.equippedSlotType ?? 'General_SlotType') === 'General_SlotType')
-    .reduce((total, item) => total + item.slots, 0);
+  const slotsUsed = getUsedGeneralSlots(equippedItems);
   const specialSlots = Object.entries(baseData.specialSlots ?? {}).filter(([, count]) => count > 0);
   const hasJumpJetClassSlots = specialSlots.some(([slotType]) => slotType.startsWith('JumpJetClass'));
   const jumpJetSlotsUsed = equippedItems.filter(item => item.equippedSlotType?.startsWith('JumpJetClass')).length;

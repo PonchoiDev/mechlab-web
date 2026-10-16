@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import {
-  getHardpointOccupancy,
   getItemAmmoFamily,
   getItemAmmoFamilyLabel,
   getItemAmmoType,
@@ -8,8 +7,9 @@ import {
   getItemWeaponType,
   isAmmoCompatibleWithWeapon,
   isJumpJet
-} from './item';
-import { getSlotTypeLabel, type Hardpoint } from './mech';
+} from './items';
+import { getHardpointOccupancy, getSlotTypeLabel } from './equipment';
+import type { Hardpoint } from '../types/mech';
 import { allItems, getItem, makeItem } from '../test/fixtures';
 
 describe('isJumpJet', () => {

@@ -1,8 +1,7 @@
 import itemsData from '../data/items.json';
 import mechsData from '../data/mechs.json';
 import type { Item } from '../types/item';
-import type { ComponentData, Mech } from '../types/mech';
-import type { EquippedLoadout } from '../utils/calculators';
+import type { ComponentData, EquippedLoadout, Mech } from '../types/mech';
 
 export const allItems = Object.values(itemsData) as Item[];
 export const allMechs = mechsData as unknown as Mech[];

@@ -9,11 +9,10 @@ import {
   calculateTopSpeed,
   createDefaultArmor,
   getWeaponPerformance,
-  maximizeArmor,
-  type ArmorState
+  maximizeArmor
 } from './calculators';
 import { allMechs, getItem, getMech, makeItem, makeLoadout } from '../test/fixtures';
-import type { MechComponents } from '../types/mech';
+import type { ArmorState, MechComponents } from '../types/mech';
 
 const ZONES = Object.keys(makeLoadout()) as (keyof MechComponents)[];
 
