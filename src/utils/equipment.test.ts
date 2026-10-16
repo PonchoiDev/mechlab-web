@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canEquipItem, getAvailableSlotType } from './equipment';
+import { canEquipItem, createEquippedItem, getAvailableSlotType } from './equipment';
 import { getItem, makeComponent } from '../test/fixtures';
 
 describe('getAvailableSlotType', () => {
@@ -124,5 +124,29 @@ describe('canEquipItem', () => {
 
     expect(canEquipItem(ammo, makeComponent({ maxSlots: 1 }), [])).toBe(true);
     expect(canEquipItem(ammo, makeComponent({ maxSlots: 1 }), [ammo])).toBe(false);
+  });
+});
+
+describe('createEquippedItem', () => {
+  it('asigna un identificador distinto a cada item equipado', () => {
+    const laser = getItem('MediumLaser');
+    const first = createEquippedItem(laser);
+    const second = createEquippedItem(laser);
+
+    expect(first.instanceId).not.toBe(second.instanceId);
+    expect(first).toMatchObject({ id: 'MediumLaser', name: 'Medium Laser' });
+  });
+
+  it('guarda la ranura solo cuando se indica', () => {
+    expect(createEquippedItem(getItem('SingleHeatSink'), 'EngineHeatsink_SlotType').equippedSlotType).toBe('EngineHeatsink_SlotType');
+    expect(createEquippedItem(getItem('MediumLaser'))).not.toHaveProperty('equippedSlotType');
+  });
+
+  it('no modifica el item original', () => {
+    const heatSink = getItem('SingleHeatSink');
+    createEquippedItem(heatSink, 'General_SlotType');
+
+    expect(heatSink).not.toHaveProperty('instanceId');
+    expect(heatSink).not.toHaveProperty('equippedSlotType');
   });
 });

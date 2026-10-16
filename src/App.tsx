@@ -1,12 +1,14 @@
-import { useState, useEffect, type KeyboardEvent } from 'react';
+import { useState, type KeyboardEvent } from 'react';
 import './App.css';
 import mechsData from './data/mechs.json';
 import itemsData from './data/items.json';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from './types/mech';
 import type { Item } from './types/item';
 import { getItemAmmoFamily, getItemAmmoFamilyLabel, isAmmoCompatibleWithWeapon, isJumpJet, SIZE_RANK } from './utils/items';
-import { canEquipItem, getAvailableSlotType } from './utils/equipment';
+import { canEquipItem, createEquippedItem, getAvailableSlotType } from './utils/equipment';
 import { createEmptyArmor, createEmptyLoadout, ZONE_LABELS, ZONES } from './utils/zones';
+import { getSarnaTitle } from './services/sarna';
+import { useSarnaAsset } from './hooks/useSarnaAsset';
 import { ComponentPanel } from './components/ComponentPanel';
 import { 
   calculateEquippedWeight, 
@@ -21,47 +23,25 @@ import {
   createDefaultArmor
 } from './utils/calculators';
 
-interface SarnaMechAsset {
-  imageUrl: string | null;
-  pageUrl: string;
-}
-
-interface SarnaApiResponse {
-  query?: {
-    pages?: Record<string, {
-      title: string;
-      thumbnail?: { source: string };
-      images?: { title: string }[];
-      links?: { title: string }[];
-      imageinfo?: { thumburl?: string; url?: string }[];
-    }>;
-  };
-}
-
-const SARNA_TITLE_ALIASES: Record<string, string> = {
-  loaderking: 'Loader King'
-};
-
 type ViewMode = 'workbench' | 'preview';
 
+const mechs = mechsData as unknown as Mech[];
+const items = Object.values(itemsData) as Item[];
+
 const getMechDisplayName = (mech: Mech): string => {
-  const canonicalName = mech.sarnaName ?? mech.name;
-  const alias = SARNA_TITLE_ALIASES[canonicalName.toLowerCase()] ?? canonicalName;
-  return alias.toLocaleLowerCase() !== mech.name.toLocaleLowerCase()
-    ? `${mech.name} (${alias})`
+  const sarnaTitle = getSarnaTitle(mech);
+  return sarnaTitle.toLocaleLowerCase() !== mech.name.toLocaleLowerCase()
+    ? `${mech.name} (${sarnaTitle})`
     : mech.name;
 };
 
 export default function App() {
-  const mechs = mechsData as unknown as Mech[];
-  const items = Object.values(itemsData) as Item[];
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [mechSearchQuery, setMechSearchQuery] = useState('');
   const [isMechPickerOpen, setIsMechPickerOpen] = useState(false);
   const [activeMechOption, setActiveMechOption] = useState(0);
   const currentMech = mechs[selectedIndex];
-  const [sarnaAsset, setSarnaAsset] = useState<SarnaMechAsset | null>(null);
-  const [isSarnaLoading, setIsSarnaLoading] = useState(true);
+  const { asset: sarnaAsset, isLoading: isSarnaLoading, markImageBroken } = useSarnaAsset(currentMech);
   const [viewMode, setViewMode] = useState<ViewMode>('workbench');
 
   const [loadout, setLoadout] = useState<EquippedLoadout>(createEmptyLoadout);
@@ -69,15 +49,13 @@ export default function App() {
   const [activeZone, setActiveZone] = useState<Zone | null>(null);
   const [weaponSortOrder, setWeaponSortOrder] = useState<'large-first' | 'small-first'>('large-first');
 
-  const [armor, setArmor] = useState<ArmorState>(createEmptyArmor);
+  const [armor, setArmor] = useState<ArmorState>(() => createDefaultArmor(currentMech.components));
 
   const filteredMechs = mechs
     .map((mech, index) => ({ mech, index }))
     .filter(({ mech }) => {
       const query = mechSearchQuery.trim().toLocaleLowerCase();
-      const sarnaName = mech.sarnaName ?? mech.name;
-      const alias = SARNA_TITLE_ALIASES[sarnaName.toLowerCase()] ?? sarnaName;
-      return !query || [mech.name, sarnaName, alias, mech.variant, mech.id]
+      return !query || [mech.name, mech.sarnaName ?? mech.name, getSarnaTitle(mech), mech.variant, mech.id]
         .some(value => value.toLocaleLowerCase().includes(query));
     });
 
@@ -96,7 +74,12 @@ export default function App() {
   };
 
   const selectMech = (index: number) => {
-    setSelectedIndex(index);
+    if (index !== selectedIndex) {
+      setSelectedIndex(index);
+      setArmor(createDefaultArmor(mechs[index].components));
+      setLoadout(createEmptyLoadout());
+      setActiveZone(null);
+    }
     setMechSearchQuery('');
     setIsMechPickerOpen(false);
   };
@@ -121,131 +104,6 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
-    if (!currentMech) return;
-    const defaultArmor = createDefaultArmor(currentMech.components);
-    
-    setArmor(defaultArmor);
-    setLoadout(createEmptyLoadout());
-    setActiveZone(null);
-  }, [selectedIndex, currentMech]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const rawSarnaTitle = currentMech.sarnaName ??
-      (currentMech.name.toLowerCase() === 'puma' ? 'Adder' : currentMech.name);
-    const sarnaTitle = SARNA_TITLE_ALIASES[rawSarnaTitle.toLowerCase()] ?? rawSarnaTitle;
-    const isClanRefit = /\(C\)$/i.test(currentMech.variant);
-    const variantImageTerms = isClanRefit
-      ? [...new Set([
-          `${sarnaTitle} C`,
-          currentMech.variant
-        ])]
-      : [];
-    setSarnaAsset(null);
-    setIsSarnaLoading(true);
-
-    const loadSarnaImage = async () => {
-      try {
-        const fetchSarnaPages = async (titles: string, prop: string) => {
-          const params = new URLSearchParams({
-            action: 'query',
-            format: 'json',
-            prop,
-            piprop: 'thumbnail',
-            pithumbsize: '900',
-            imlimit: 'max',
-            pllimit: 'max',
-            redirects: '1',
-            origin: '*',
-            titles
-          });
-          const response = await fetch(`https://www.sarna.net/wiki/api.php?${params}`, {
-            signal: controller.signal
-          });
-          if (!response.ok) throw new Error('No se pudo consultar Sarna');
-          const data = await response.json() as SarnaApiResponse;
-          return Object.values(data.query?.pages ?? {});
-        };
-
-        const getImageUrl = async (title: string) => {
-          const params = new URLSearchParams({
-            action: 'query',
-            format: 'json',
-            prop: 'imageinfo',
-            iiprop: 'url',
-            iiurlwidth: '900',
-            origin: '*',
-            titles: title
-          });
-          const response = await fetch(`https://www.sarna.net/wiki/api.php?${params}`, {
-            signal: controller.signal
-          });
-          if (!response.ok) return null;
-          const data = await response.json() as SarnaApiResponse;
-          const imagePage = Object.values(data.query?.pages ?? {})[0];
-          return imagePage?.imageinfo?.[0]?.thumburl ?? imagePage?.imageinfo?.[0]?.url ?? null;
-        };
-
-        const pages = await fetchSarnaPages(sarnaTitle, 'pageimages|images|links');
-        if (controller.signal.aborted) return;
-
-        let page = pages[0];
-        let imageUrl = page?.thumbnail?.source ?? null;
-
-        if (!imageUrl && page?.links) {
-          const mechLink = page.links.find(link => /\(BattleMech\)$/i.test(link.title)) ??
-            page.links.find(link => /\(OmniMech\)$/i.test(link.title));
-          if (mechLink) {
-            const mechPages = await fetchSarnaPages(mechLink.title, 'pageimages|images');
-            page = mechPages[0] ?? page;
-            imageUrl = page.thumbnail?.source ?? null;
-          }
-        }
-
-        const normalizeImageTitle = (title: string) => title
-          .replace(/^File:/i, '')
-          .toLocaleLowerCase()
-          .replace(/[^a-z0-9]/g, '');
-        const variantImage = variantImageTerms
-          .map(term => page?.images?.find(image => normalizeImageTitle(image.title).includes(normalizeImageTitle(term))))
-          .find((image): image is { title: string } => image !== undefined);
-        const galleryImage = variantImage ?? (!imageUrl
-          ? page?.images?.find(image => !/(disambig|logo|publisher)/i.test(image.title))
-          : undefined);
-
-        if (galleryImage) {
-          try {
-            imageUrl = await getImageUrl(galleryImage.title) ?? imageUrl;
-          } catch {
-            if (controller.signal.aborted) return;
-          }
-        }
-
-        if (controller.signal.aborted) return;
-        const pageTitle = page?.title ?? sarnaTitle;
-        const pagePath = pageTitle.replace(/ /g, '_');
-        setSarnaAsset({
-          imageUrl,
-          pageUrl: `https://www.sarna.net/wiki/${encodeURIComponent(pagePath)}`
-        });
-      } catch {
-        if (!controller.signal.aborted) {
-          const pagePath = sarnaTitle.replace(/ /g, '_');
-          setSarnaAsset({
-            imageUrl: null,
-            pageUrl: `https://www.sarna.net/wiki/${encodeURIComponent(pagePath)}`
-          });
-        }
-      } finally {
-        if (!controller.signal.aborted) setIsSarnaLoading(false);
-      }
-    };
-
-    void loadSarnaImage();
-    return () => controller.abort();
-  }, [currentMech.name, currentMech.variant, currentMech.sarnaName, currentMech.techBase]);
-
   const handleArmorChange = (zone: Zone, type: 'front' | 'rear', value: number) => {
     setArmor(prev => ({ ...prev, [zone]: { ...prev[zone], [type]: value } }));
   };
@@ -253,22 +111,23 @@ export default function App() {
   const handleEquipItem = (item: Item) => {
     if (!activeZone) return;
 
-    const currentZoneItems = loadout[activeZone];
-    const componentData = currentMech.components[activeZone];
-    if (!canEquipItem(item, componentData, currentZoneItems)) return;
+    const zone = activeZone;
+    const componentData = currentMech.components[zone];
+    setLoadout(prev => {
+      const zoneItems = prev[zone];
+      if (!canEquipItem(item, componentData, zoneItems)) return prev;
 
-    const slotType = item.type === 'weapon'
-      ? undefined
-      : getAvailableSlotType(item, componentData, currentZoneItems);
-    if (item.type !== 'weapon' && !slotType) return;
+      const slotType = item.type === 'weapon'
+        ? undefined
+        : getAvailableSlotType(item, componentData, zoneItems) ?? undefined;
+      if (item.type !== 'weapon' && !slotType) return prev;
 
-    const equippedItem = slotType ? { ...item, equippedSlotType: slotType } : item;
-    setLoadout({ ...loadout, [activeZone]: [...currentZoneItems, equippedItem] });
+      return { ...prev, [zone]: [...zoneItems, createEquippedItem(item, slotType)] };
+    });
   };
 
-  const handleRemoveItem = (zone: Zone, indexToRemove: number) => {
-    const updatedZone = loadout[zone].filter((_, index) => index !== indexToRemove);
-    setLoadout({ ...loadout, [zone]: updatedZone });
+  const handleRemoveItem = (zone: Zone, instanceId: string) => {
+    setLoadout(prev => ({ ...prev, [zone]: prev[zone].filter(item => item.instanceId !== instanceId) }));
   };
 
   const handleClearArmor = () => {
@@ -277,7 +136,7 @@ export default function App() {
 
   const handleMaximizeArmor = () => {
     const availableTonnage = currentMech.tonnageMax - currentMech.baseTonnage - equipmentWeight;
-    setArmor(maximizeArmor(currentMech.components, availableTonnage, armor));
+    setArmor(prev => maximizeArmor(currentMech.components, availableTonnage, prev));
   };
 
   const handleRemoveLoadoutItems = (type: 'weapon' | 'ammo') => {
@@ -289,10 +148,10 @@ export default function App() {
     ) as EquippedLoadout);
   };
 
-  const handleTierChange = (zone: Zone, itemIndex: number, tier: string) => {
+  const handleTierChange = (zone: Zone, instanceId: string, tier: string) => {
     setLoadout(prev => ({
       ...prev,
-      [zone]: prev[zone].map((item, index) => index === itemIndex ? { ...item, tier } : item)
+      [zone]: prev[zone].map(item => item.instanceId === instanceId ? { ...item, tier } : item)
     }));
   };
 
@@ -326,7 +185,7 @@ export default function App() {
       className="mech-image"
       src={sarnaAsset.imageUrl}
       alt={`${currentMech.name} ${currentMech.variant}`}
-      onError={() => setSarnaAsset(asset => asset ? { ...asset, imageUrl: null } : asset)}
+      onError={markImageBroken}
     />
   ) : (
     <p className="image-status">
@@ -628,8 +487,8 @@ export default function App() {
                 armorFront={armor[zone]?.front || 0}
                 armorRear={armor[zone]?.rear || 0}
                 onSelect={() => setActiveZone(zone)}
-                onRemoveItem={(index) => handleRemoveItem(zone, index)}
-                onTierChange={(index, tier) => handleTierChange(zone, index, tier)}
+                onRemoveItem={(instanceId) => handleRemoveItem(zone, instanceId)}
+                onTierChange={(instanceId, tier) => handleTierChange(zone, instanceId, tier)}
                 onArmorChange={(type, value) => handleArmorChange(zone, type, value)}
               />
             ))}
@@ -683,16 +542,16 @@ export default function App() {
                     {weapons.length > 0 && (
                       <section className="preview-item-group">
                         <h4>WEAPONS</h4>
-                        {weapons.map((item, index) => (
-                          <span key={`${item.id}-${index}`} className="preview-equipped-item">{item.name}</span>
+                        {weapons.map(item => (
+                          <span key={item.instanceId} className="preview-equipped-item">{item.name}</span>
                         ))}
                       </section>
                     )}
                     {equipment.length > 0 && (
                       <section className="preview-item-group">
                         <h4>EQUIPMENT / AMMO</h4>
-                        {equipment.map((item, index) => (
-                          <span key={`${item.id}-${index}`} className="preview-equipped-item">{item.name}</span>
+                        {equipment.map(item => (
+                          <span key={item.instanceId} className="preview-equipped-item">{item.name}</span>
                         ))}
                       </section>
                     )}

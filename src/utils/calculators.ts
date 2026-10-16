@@ -1,5 +1,5 @@
 import type { Item } from '../types/item';
-import type { ArmorState, EquippedLoadout, MechComponents, Zone } from '../types/mech';
+import type { ArmorState, Loadout, MechComponents, Zone } from '../types/mech';
 import { mapZones } from './zones';
 
 const ARMOR_POINTS_PER_TON = 32;
@@ -19,7 +19,7 @@ const armorPointsToTons = (points: number): number => roundTo(points / ARMOR_POI
 const sumBy = <T>(values: T[], getValue: (value: T) => number): number =>
   values.reduce((total, value) => total + getValue(value), 0);
 
-const getEquippedItems = (loadout: EquippedLoadout): Item[] => Object.values(loadout).flat();
+const getEquippedItems = (loadout: Loadout): Item[] => Object.values(loadout).flat();
 
 const getTierStats = (item: Item) =>
   item.tiers?.[item.tier ?? '1'] ?? item.tiers?.['1'];
@@ -50,7 +50,7 @@ export interface WeaponPerformance {
   range: number | null;
 }
 
-export const calculateEquippedWeight = (loadout: EquippedLoadout): number =>
+export const calculateEquippedWeight = (loadout: Loadout): number =>
   sumBy(getEquippedItems(loadout), item => item.tonnage);
 
 export const calculateArmorPoints = (armor: ArmorState): number =>
@@ -117,7 +117,7 @@ export const maximizeArmor = (
 };
 
 export const calculateCoolingRate = (
-  loadout: EquippedLoadout,
+  loadout: Loadout,
   baseCoolingRate?: number
 ): number | null => baseCoolingRate === undefined
   ? null
@@ -126,7 +126,7 @@ export const calculateCoolingRate = (
 export const calculateTopSpeed = (baseSpeed: number): number =>
   roundTo(baseSpeed * GAME_SPEED_DISPLAY_FACTOR, 1);
 
-export const getWeaponPerformance = (loadout: EquippedLoadout): WeaponPerformance[] =>
+export const getWeaponPerformance = (loadout: Loadout): WeaponPerformance[] =>
   (Object.entries(loadout) as [Zone, Item[]][]).flatMap(([zone, items]) => items
     .filter(item => item.type === 'weapon')
     .map(item => {
@@ -145,8 +145,8 @@ export const getWeaponPerformance = (loadout: EquippedLoadout): WeaponPerformanc
       };
     }));
 
-export const calculateFirepower = (loadout: EquippedLoadout): number =>
+export const calculateFirepower = (loadout: Loadout): number =>
   roundTo(sumBy(getWeaponPerformance(loadout), weapon => weapon.damage), 1);
 
-export const calculateHeatSpike = (loadout: EquippedLoadout): number =>
+export const calculateHeatSpike = (loadout: Loadout): number =>
   roundTo(sumBy(getWeaponPerformance(loadout), weapon => weapon.heat), 1);
