@@ -42,6 +42,12 @@ export interface Mech {
   components: MechComponents;
 }
 
-export type EquippedLoadout = Record<Zone, Item[]>;
+export interface EquippedItem extends Item {
+  instanceId: string;
+}
+
+export type Loadout<T extends Item = Item> = Record<Zone, T[]>;
+
+export type EquippedLoadout = Loadout<EquippedItem>;
 
 export type ArmorState = Record<Zone, { front: number; rear: number }>;

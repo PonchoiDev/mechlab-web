@@ -1,8 +1,10 @@
 import type { Item } from '../types/item';
-import type { ComponentData, Hardpoint } from '../types/mech';
+import type { ComponentData, EquippedItem, Hardpoint } from '../types/mech';
 import { getItemSupportedSlotTypes, getItemWeaponType, SIZE_RANK } from './items';
 
 const GENERAL_SLOT_TYPE = 'General_SlotType';
+
+let nextInstanceId = 0;
 
 const SLOT_TYPE_LABELS: Record<string, string> = {
   EngineHeatsink_SlotType: 'Engine Heat Sink',
@@ -93,3 +95,9 @@ export const canEquipItem = (item: Item, componentData: ComponentData, equippedI
 
   return weaponAssignments.size === weaponCount;
 };
+
+export const createEquippedItem = (item: Item, equippedSlotType?: string): EquippedItem => ({
+  ...item,
+  ...(equippedSlotType ? { equippedSlotType } : {}),
+  instanceId: `item-${++nextInstanceId}`
+});

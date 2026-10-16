@@ -1,7 +1,7 @@
 import itemsData from '../data/items.json';
 import mechsData from '../data/mechs.json';
 import type { Item } from '../types/item';
-import type { ComponentData, EquippedLoadout, Mech } from '../types/mech';
+import type { ComponentData, Loadout, Mech } from '../types/mech';
 
 export const allItems = Object.values(itemsData) as Item[];
 export const allMechs = mechsData as unknown as Mech[];
@@ -38,7 +38,7 @@ export const makeComponent = (overrides: Partial<ComponentData> = {}): Component
   ...overrides
 });
 
-export const makeLoadout = (overrides: Partial<EquippedLoadout> = {}): EquippedLoadout => ({
+export const makeLoadout = (overrides: Partial<Loadout> = {}): Loadout => ({
   head: [],
   centerTorso: [],
   leftTorso: [],

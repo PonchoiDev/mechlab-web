@@ -1,21 +1,20 @@
 import React from 'react';
-import type { ComponentData } from '../types/mech';
-import type { Item } from '../types/item';
+import type { ComponentData, EquippedItem } from '../types/mech';
 import { getItemWeaponType } from '../utils/items';
 import { getHardpointOccupancy, getSlotTypeLabel, getUsedGeneralSlots } from '../utils/equipment';
 
 interface Props {
   title: string;
   baseData: ComponentData;
-  equippedItems: Item[];
+  equippedItems: EquippedItem[];
   isActive: boolean;
   selectedHardpointIndex?: number | null;
   armorFront: number;
   armorRear: number;
   onSelect: () => void;
   onSelectHardpoint?: (index: number) => void;
-  onRemoveItem: (index: number) => void;
-  onTierChange: (index: number, tier: string) => void;
+  onRemoveItem: (instanceId: string) => void;
+  onTierChange: (instanceId: string, tier: string) => void;
   onArmorChange: (type: 'front' | 'rear', value: number) => void;
 }
 
@@ -212,10 +211,10 @@ export const ComponentPanel: React.FC<Props> = ({
       </div>
       
       <div style={{ minHeight: '30px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-        {equippedItems.map((item, index) => {
+        {equippedItems.map((item) => {
           const wType = getItemWeaponType(item) || item.weaponType;
           return (
-          <div key={index} style={{ backgroundColor: '#252525', padding: '5px 8px', fontSize: '13px', borderLeft: `3px solid ${wType ? getHardpointColor(wType) : '#888'}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '0 4px 4px 0' }}>
+          <div key={item.instanceId} style={{ backgroundColor: '#252525', padding: '5px 8px', fontSize: '13px', borderLeft: `3px solid ${wType ? getHardpointColor(wType) : '#888'}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '0 4px 4px 0' }}>
             <span>{item.name} <span style={{ color: '#888' }}>({item.slots}s)</span></span>
             {item.type === 'weapon' && item.tiers && (
               <div role="group" aria-label={`Tier de ${item.name}`} style={{ display: 'flex', alignItems: 'center', gap: '2px', flexShrink: 0 }}>
@@ -228,7 +227,7 @@ export const ComponentPanel: React.FC<Props> = ({
                     title="Tier 0"
                     onClick={(event) => {
                       event.stopPropagation();
-                      onTierChange(index, '0');
+                      onTierChange(item.instanceId, '0');
                     }}
                     style={{ padding: '0 2px', color: (item.tier ?? '1') === '0' ? '#fff' : '#87938a', background: 'transparent', border: 0, font: '500 9px var(--work-mono)', cursor: 'pointer' }}
                   >0</button>
@@ -249,7 +248,7 @@ export const ComponentPanel: React.FC<Props> = ({
                       title={`Tier ${tier}`}
                       onClick={(event) => {
                         event.stopPropagation();
-                        onTierChange(index, tier);
+                        onTierChange(item.instanceId, tier);
                       }}
                       style={{ width: '12px', height: '10px', padding: 0, border: selectedTier === tier ? '1px solid #fff' : '1px solid #555', borderRadius: '1px', backgroundColor: isFilled ? tierColor : '#303238', cursor: 'pointer' }}
                     />
@@ -263,7 +262,7 @@ export const ComponentPanel: React.FC<Props> = ({
                     title="Tier 5 legendario"
                     onClick={(event) => {
                       event.stopPropagation();
-                      onTierChange(index, '5');
+                      onTierChange(item.instanceId, '5');
                     }}
                     style={{ marginLeft: '2px', padding: '0 2px', color: (item.tier ?? '1') === '5' ? '#ff9d00' : '#a96b18', background: 'transparent', border: 0, font: '600 9px var(--work-mono)', cursor: 'pointer' }}
                   >5</button>
@@ -276,14 +275,14 @@ export const ComponentPanel: React.FC<Props> = ({
                     title="Clan tier"
                     onClick={(event) => {
                       event.stopPropagation();
-                      onTierChange(index, 'Clan');
+                      onTierChange(item.instanceId, 'Clan');
                     }}
                     style={{ marginLeft: '2px', padding: '0 2px', color: (item.tier ?? '1').toLowerCase() === 'clan' ? '#c3ed62' : '#849451', background: 'transparent', border: 0, font: '700 9px var(--work-mono)', cursor: 'pointer' }}
                   >C</button>
                 )}
               </div>
             )}
-            <button onClick={(e) => { e.stopPropagation(); onRemoveItem(index); }} style={{ background: 'none', border: 'none', color: '#ff4444', cursor: 'pointer', fontWeight: 'bold' }}>✕</button>
+            <button onClick={(e) => { e.stopPropagation(); onRemoveItem(item.instanceId); }} style={{ background: 'none', border: 'none', color: '#ff4444', cursor: 'pointer', fontWeight: 'bold' }}>✕</button>
           </div>
           );
         })}
