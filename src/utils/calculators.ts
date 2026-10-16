@@ -18,14 +18,20 @@ const GAME_SPEED_DISPLAY_FACTOR = 7 / 6;
 const getTierStats = (item: Item) =>
   item.tiers?.[item.tier ?? '1'] ?? item.tiers?.['1'];
 
-const getWeaponDamage = (item: Item): number => {
-  const damage = getTierStats(item)?.damage ?? item.damage ?? 0;
+const getMissileCount = (item: Item): number => {
   const missileRack = item.type === 'weapon' && item.weaponType === 'missile'
     ? item.id.match(/^(?:LRM|StreakSRM|SRM)(\d+)/)
     : null;
-  const missileCount = Number(missileRack?.[1] ?? 1);
 
-  return damage * missileCount;
+  return Number(missileRack?.[1] ?? 1);
+};
+
+const getWeaponDamage = (item: Item): number =>
+  (getTierStats(item)?.damage ?? item.damage ?? 0) * getMissileCount(item);
+
+const getWeaponHeat = (item: Item): number => {
+  const stats = getTierStats(item);
+  return (stats?.heatPerShot ?? stats?.heat ?? item.heat ?? 0) * getMissileCount(item);
 };
 
 export interface WeaponPerformance {
@@ -133,7 +139,7 @@ export const getWeaponPerformance = (loadout: EquippedLoadout): WeaponPerformanc
     .map(item => {
       const stats = getTierStats(item);
       const damage = getWeaponDamage(item);
-      const heat = stats?.heatPerShot ?? stats?.heat ?? item.heat ?? 0;
+      const heat = getWeaponHeat(item);
       const rpm = stats?.rpm ?? (stats?.cooldown ? 60 / stats.cooldown : 0);
 
       return {
@@ -164,8 +170,7 @@ export const calculateHeatSpike = (loadout: EquippedLoadout): number => {
   Object.values(loadout).forEach((items) => {
     items.forEach((item) => {
       if (item.type === 'weapon') {
-        const stats = getTierStats(item);
-        heat += stats?.heatPerShot ?? stats?.heat ?? item.heat ?? 0;
+        heat += getWeaponHeat(item);
       }
     });
   });
