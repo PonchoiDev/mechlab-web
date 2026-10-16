@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="AC2_Standard_Half_AmmoEquipment"
+   Capacity=100.000000
+   ExplosionDamagePerRound=2.000000
+   AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Standard.AC2")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[DA29FB4E406E81DFAC6421B3BF5C22D5]", "3AA8332548FF2B5AB1E15BADE844F4B8", "AC/2 Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=2300.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=1000.000000
+   CBillBaseValueBigInt=(Value=1000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=1.000000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_AC2_Half_512_UIX.Ammo_AC2_Half_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_AC2_Market_STM.Ammo_AC2_Market_STM
+   Description=NSLOCTEXT("[DA29FB4E406E81DFAC6421B3BF5C22D5]", "1E83E8E14C933672218B7386D9E94887", "One-half ton of ammunition for the Autocannon/2.")
+End Object

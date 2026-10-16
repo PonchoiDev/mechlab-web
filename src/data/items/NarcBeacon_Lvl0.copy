@@ -1,0 +1,33 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="NarcBeacon_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=200000,CBillBaseValueBigInt=(Value=200000),MissileStats=(NumberOfMissiles=1,MissileInterval=0.100000,Projectile=(NumberOfProjectiles=1,bSpreadProjectileSingleBulletAlignment=True,Speed=80000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=5000.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/LRM_5_Fire.LRM_5_Fire,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/SRM_Projectile.SRM_Projectile,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_heavy.single_recoil_heavy_C,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=60.000000,BrushStrength=1.500000))),Cooldown=3.500000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(OptimalRange=27000.000000,MaxRange=27000.000000),AmmoType=(TagName="Ammo.Missile.NARC"),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=450,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="NarcBeacon")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   bCanFireOutsideMaxRange=True
+   bNarcsTargetOnHit=True
+   NarcBeaconDataAssetId=(Id="MWNarcBeaconDataAsset:NarcBeaconData")
+   BattleValueAdjustment=-6
+   Name=NSLOCTEXT("[524BCBBE4B8A0725664FF4B75836EDF2]", "6B269ACB43A0EB394B55F084909175E8", "Narc Missile Beacon")
+   ShortName=NSLOCTEXT("[524BCBBE4B8A0725664FF4B75836EDF2]", "DBB9D7264BADD8603781BA88E1A72314", "Narc")
+   Manufacturer="I.W.W. Mk.XP1"
+   WeaponType=(TagName="Weapon.Missile.NARC")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=3.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:NARC_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.327778,G=0.708376,B=0.177888,A=1.000000)
+   IntroDate=3035.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/NARC_512_UIX.NARC_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.800000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Equipment_NarcBeacon_Market_STM.Equipment_NarcBeacon_Market_STM
+   Description=NSLOCTEXT("", "85ABA88C435CF27F245B6F9C74FD5736", "Specialized missile launcher that fires a projectile that affixes to its target.  Improves missile locks and accuracy.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.012500,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.011750,FeedbackDuration=0.020000,bUseSmallMotors=True)
+End Object

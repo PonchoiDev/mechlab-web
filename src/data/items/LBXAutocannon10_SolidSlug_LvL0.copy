@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="LBXAutocannon10_SolidSlug_LvL0"
+   StatsData=(DEPRECATED_CBillBaseValue=800000,CBillBaseValueBigInt=(Value=800000),Projectile=(NumberOfProjectiles=1,Damage=10.000000,Speed=80000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=2500.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/AC10_Fire.AC10_Fire,FireReloadSound=/Game/Audio/Events/Weapons/Ballistics/AC10_Reload.AC10_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC10/Projectile_AC10.Projectile_AC10_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Medium.Shockwave_Medium_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_heavy.single_recoil_heavy_C,HeatGenerated=1.500000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=2.250000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=54000.000000,MaxRange=54000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.LBX.LBX10"),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=450,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LBXAutocannon10_SolidSlug")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   BattleValueAdjustment=-28
+   Name=NSLOCTEXT("[12833FF34C5C2DBE7466689E70C2B2FE]", "A4C0D505487583996F5AF3B53826405A", "LB 10-X Autocannon Solid Slug")
+   ShortName=NSLOCTEXT("[12833FF34C5C2DBE7466689E70C2B2FE]", "FECDFB7F4605B9CC24FC408CA36B9A80", "LB 10-X AC-SLD")
+   Manufacturer="LB-X-P Type 10"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX10.SolidSlug")
+   TechBase=(TagName="TechBase.LosTech")
+   Tonnage=11.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LBX10_SolidSlug_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=3035.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=3.000000,RemoveTimeInDays=3.000000,RepairTimeInDays=3.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/LB10X_512_UIX.LB10X_512_UIX
+   SalvageShareCost=3
+   SalvageChance=0.800000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/Weapon_LBX10_Market_STM.Weapon_LBX10_Market_STM
+   Description=NSLOCTEXT("", "C3D1BC84485D8E3EA0C87DB778087427", "Ballistic weapon that fires solid slug rounds at long range.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.250000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.125000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

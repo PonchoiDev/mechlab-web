@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="SRM4_Artemis_Stream_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=320000,CBillBaseValueBigInt=(Value=320000),MissileStats=(NumberOfMissiles=4,MissileInterval=0.090000,Projectile=(bSpreadProjectileSingleBulletAlignment=True,Damage=2.400000,Speed=40000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=700.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/SRM_Launcher.SRM_Launcher,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/Projectile_STREAM.Projectile_STREAM,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=0.675000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=150.000000,BrushStrength=1.500000))),Cooldown=2.130000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(OptimalRange=27000.000000,MaxRange=27000.000000),AmmoType=(TagName="Ammo.Missile.SRM.Artemis"),MissileTurnRate=65.000000,SpreadMissileRadius=213.000000,SpreadMissileDistance=7500.000000,MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=270,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="SRM4_Artemis_Stream")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   MissilePath=/Game/Objects/Weapons/_common/MissilePaths/SRMSpreadPath.SRMSpreadPath_C
+   bCanFireInsideMinRange=True
+   bCanFireOutsideMaxRange=True
+   BattleValueAdjustment=-11
+   Name=NSLOCTEXT("[BC01D37F497FDDEC30F8D2B11BA38DBC]", "842B5DE04C01AFEE1291FB99780072ED", "SRM 4 Stream + Artemis IV")
+   ShortName=NSLOCTEXT("[BC01D37F497FDDEC30F8D2B11BA38DBC]", "B8AA22764DC0EC24F7B581B3B58E5F12", "SRM 4-ST + Art IV")
+   Manufacturer="Valiant"
+   WeaponType=(TagName="Weapon.ArtemisMissile.SRM.SRM4.Stream")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=3.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:SRM4_Artemis_SlotType")
+   WeaponDisplayColour=(R=0.496933,G=0.597202,B=0.246201,A=1.000000)
+   IntroDate=3035.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/ASRM4_512_UIX.ASRM4_512_UIX
+   SalvageShareCost=1
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_ASRM4_Market_STM.Weapon_ASRM4_Market_STM
+   Description=NSLOCTEXT("[BC01D37F497FDDEC30F8D2B11BA38DBC]", "D651990242A5A5B530312F9E43B7AFDC", "Short-range missile system that fires 4 unguided missiles with improved spread in a stream.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

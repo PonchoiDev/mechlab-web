@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="Autocannon10_Turret_Lvl4"
+   StatsData=(DEPRECATED_CBillBaseValue=400000,CBillBaseValueBigInt=(Value=400000),Projectile=(NumberOfProjectiles=1,Damage=10.000000,Speed=60000.000000,GravityScale=0.300000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=2500.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/AC5_Fire.AC5_Fire,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC10/Projectile_AC10.Projectile_AC10_C,CameraShake=/Game/Objects/Weapons/_common/Shake/SmallHorizontalRecoil.SmallHorizontalRecoil_C,HeatGenerated=2.250000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=3.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=45000.000000,MaxRange=90000.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=450,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="AutoCannon10_Turret")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=1.150000)))
+   TechLevel=4
+   FieldRefitGroup=(TagName="UnitType.Vehicle.Tracked.Tank")
+   Name=NSLOCTEXT("[C70C46D246DF42B97B66E188C8D11537]", "F9180DE0487095EBC2CD43BE4C42C95D", "Autocannon/10")
+   ShortName=NSLOCTEXT("[C70C46D246DF42B97B66E188C8D11537]", "FC936ECC4C21DA2C3543B59A2531575D", "AC/10")
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.Standard.AC10")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=12.000000
+   WeaponSize=Invalid
+   WeaponDisplayColour=(R=1.000000,G=1.000000,B=1.000000,A=1.000000)
+   IntroDate=2460.01.01-14.00.00
+   RefitCosts=(InstallTimeInDays=3.000000,RemoveTimeInDays=3.000000,RepairTimeInDays=3.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   bNonSalvageable=True
+   SalvageChance=0.900000
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   OnImpactForceFeedback=(FeedbackIntensity=0.200000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

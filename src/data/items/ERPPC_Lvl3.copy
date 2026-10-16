@@ -1,0 +1,35 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="ERPPC_Lvl3"
+   StatsData=(DEPRECATED_CBillBaseValue=600000,CBillBaseValueBigInt=(Value=600000),Projectile=(NumberOfProjectiles=1,Damage=10.000000,Speed=164556.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=1500.000000,FireSound=/Game/Audio/Events/Weapons/Energy/PPC.PPC,ProjectileFlightSound=/Game/Audio/Events/Weapons/Energy/PPC_Trail.PPC_Trail,Class=/Game/Objects/Projectiles/PPC/PPCProjectile.PPCProjectile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Medium.Shockwave_Medium_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_heavy.single_recoil_heavy_C,HeatGenerated=11.000000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=5.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop_PPC.Cooldown_Trace_Loop_PPC,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Range=(OptimalRange=75000.000000,MaxRange=150000.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=810,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1620,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="ERPPC")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.140000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.650000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   bDestroyProjectilePastMaxRange=True
+   ProjectileSelfDestructSound=/Game/Audio/Events/Physics/WeaponImpacts/PPC_Impact.PPC_Impact
+   TechLevel=3
+   BattleValueAdjustment=46
+   Name=NSLOCTEXT("[277B884A480DD05BAA886689E1EDF673]", "504F2A124263C2B89A8399A513DC3A43", "ER PPC")
+   ShortName=NSLOCTEXT("[277B884A480DD05BAA886689E1EDF673]", "AD1BEEF9434750DE0BE931BBE7969380", "ER PPC")
+   Manufacturer="Magna Firestar"
+   WeaponType=(TagName="Weapon.Energy.ParticleCannon.ERPPC")
+   TechBase=(TagName="TechBase.LosTech")
+   Tonnage=7.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:ERPPC_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=3037.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/PPC_ER_512_UIX.PPC_ER_512_UIX
+   SalvageShareCost=6
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_PPC_ER_Market_STM.Weapon_PPC_ER_Market_STM
+   Description=NSLOCTEXT("", "44AED1434337C785084F878B07FCB0DA", "Extended-range particle projector cannon that fires high-energy ion bolts.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.200000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.200000,bUseLargeMotors=True,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

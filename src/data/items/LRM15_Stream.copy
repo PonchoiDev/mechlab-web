@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="LRM15_Stream"
+   StatsData=(DEPRECATED_CBillBaseValue=350000,CBillBaseValueBigInt=(Value=350000),MissileStats=(NumberOfMissiles=15,MissileInterval=0.050000,Projectile=(Damage=1.200000,Speed=20000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=500.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/LRM_20_Fire.LRM_20_Fire,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/LRM_Projectile.LRM_Projectile,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=0.300000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000))),Cooldown=4.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(NullRange=18000.000000,MinRange=18000.000000,OptimalRange=90000.000000,MaxRange=90000.000000),AmmoType=(TagName="Ammo.Missile.LRM"),MissileTurnRate=150.000000,LongRangeMissileRadius=825.000000,MWO_RangeData=(Ranges=((InterpolationType="step"),(Distance=180,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LRM15_Stream")
+   MissilePath=/Game/Objects/Weapons/_common/MissilePaths/LongRangeMissilePathV2.LongRangeMissilePathV2_C
+   bCanFireOutsideMaxRange=True
+   TechLevel=1
+   Name=NSLOCTEXT("[C99E22D84D429EBEFEF326AAAD86D9BE]", "CD37D76B4E66571E6A5186967D6CF11F", "LRM 15 Stream")
+   ShortName=NSLOCTEXT("[C99E22D84D429EBEFEF326AAAD86D9BE]", "8C7D47424C35165559E744A072186F60", "LRM 15-ST")
+   Manufacturer="Coventry Star Fire"
+   WeaponType=(TagName="Weapon.Missile.LRM.LRM15.Stream")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=7.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LRM15_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.496933,G=0.597202,B=0.246201,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/LRM15_512_UIX.LRM15_512_UIX
+   SalvageShareCost=2
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_LRM15_Market_STM.Weapon_LRM15_Market_STM
+   Description=NSLOCTEXT("[C99E22D84D429EBEFEF326AAAD86D9BE]", "D23D4E214FA3A60D3E72669AE51F3EF8", "Long-range missile system that fires a stream of 15 guided missiles.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

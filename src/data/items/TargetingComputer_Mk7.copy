@@ -1,0 +1,27 @@
+Begin Object Class=/Script/MechWarrior.MWTargetingComputerDataAsset Name="TargetingComputer_Mk7"
+   Begin Object Class=/Script/MechWarrior.KelLoadoutRestrictionFunction_UniqueEquipment Name="KelLoadoutRestrictionFunction_UniqueEquipment_1"
+   End Object
+   Begin Object Name="KelLoadoutRestrictionFunction_UniqueEquipment_1"
+      EquipmentTag=(TagName="Equipment.TargetingComputer")
+   End Object
+   TargetingComputerType=(TagName="Equipment.TargetingComputer.Mk7")
+   EquipmentType=(TagName="Equipment.TargetingComputer.Mk7")
+   TechBase=(TagName="TechBase.Clan")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[5D16599A43591F12C42241866799BA01]", "EEB3CAEB427720ABC8E46794E17BC2C7", "Targeting Computer Mk7")
+   TechLevel=-1
+   Tons=7.000000
+   Slots=7
+   IntroDate=2860.01.01-14.00.00
+   DEPRECATED_CBillBaseValue=140000.000000
+   CBillBaseValueBigInt=(Value=140000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   SalvageShareCost=3
+   DamageChance=0.200000
+   EquipmentTrait=MWMechTraitDataAsset'"/Game/Objects/Mechs/_common/MechTraits/EquipmentTraits/TargetingComputerMk7_Trait.TargetingComputerMk7_Trait"'
+   EquipRestrictions(0)=KelLoadoutRestrictionFunction_UniqueEquipment'"KelLoadoutRestrictionFunction_UniqueEquipment_1"'
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Equipment/Clan_Targeting_Computer_512_UIX.Clan_Targeting_Computer_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanEquipment/Model/Clan_Targeting_Computer_Market_STM.Clan_Targeting_Computer_Market_STM
+   Description=NSLOCTEXT("", "0F940E9F424AB1E5A5AE8EB61B9CBF46", "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges.  Only 1 targeting computer can be installed into a \'Mech.")
+   AssociatedDLC=(TagName="DLC.DLC7")
+End Object

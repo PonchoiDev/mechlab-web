@@ -1,0 +1,4805 @@
+{
+  "AC10_LBX_AmmoEquipment": {
+    "id": "AC10_LBX_AmmoEquipment",
+    "name": "LB 10-X AC Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 40
+  },
+  "AC10_LBX_Half_AmmoEquipment": {
+    "id": "AC10_LBX_Half_AmmoEquipment",
+    "name": "LB 10-X AC Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 20
+  },
+  "AC10_Standard_AmmoEquipment": {
+    "id": "AC10_Standard_AmmoEquipment",
+    "name": "AC/10 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 40
+  },
+  "AC10_Standard_Half_AmmoEquipment": {
+    "id": "AC10_Standard_Half_AmmoEquipment",
+    "name": "AC/10 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 20
+  },
+  "AC20_Standard_AmmoEquipment": {
+    "id": "AC20_Standard_AmmoEquipment",
+    "name": "AC/20 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 20
+  },
+  "AC20_Standard_Half_AmmoEquipment": {
+    "id": "AC20_Standard_Half_AmmoEquipment",
+    "name": "AC/20 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 10
+  },
+  "AC2_Standard_AmmoEquipment": {
+    "id": "AC2_Standard_AmmoEquipment",
+    "name": "AC/2 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 200
+  },
+  "AC2_Standard_Half_AmmoEquipment": {
+    "id": "AC2_Standard_Half_AmmoEquipment",
+    "name": "AC/2 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 100
+  },
+  "AC5_Standard_AmmoEquipment": {
+    "id": "AC5_Standard_AmmoEquipment",
+    "name": "AC/5 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 80
+  },
+  "AC5_Standard_Half_AmmoEquipment": {
+    "id": "AC5_Standard_Half_AmmoEquipment",
+    "name": "AC/5 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 40
+  },
+  "AC5_Ultra_AmmoEquipment": {
+    "id": "AC5_Ultra_AmmoEquipment",
+    "name": "Ultra AC/5 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 80
+  },
+  "AC5_Ultra_Half_AmmoEquipment": {
+    "id": "AC5_Ultra_Half_AmmoEquipment",
+    "name": "Ultra AC/5 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 40
+  },
+  "AMS_AmmoEquipment": {
+    "id": "AMS_AmmoEquipment",
+    "name": "AMS Ammo",
+    "type": "ammo",
+    "weaponType": "ams",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 2000
+  },
+  "AMS_Half_AmmoEquipment": {
+    "id": "AMS_Half_AmmoEquipment",
+    "name": "AMS Half Ammo",
+    "type": "ammo",
+    "weaponType": "ams",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 1000
+  },
+  "AntiMissileSystem": {
+    "id": "AntiMissileSystem",
+    "name": "AMS",
+    "type": "weapon",
+    "weaponType": "ams",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 160.0,
+        "rpm": 0.0
+      },
+      "1": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 200.0,
+        "rpm": 0.0
+      },
+      "2": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 210.0,
+        "rpm": 0.0
+      },
+      "3": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 220.0,
+        "rpm": 0.0
+      },
+      "4": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 230.0,
+        "rpm": 0.0
+      },
+      "5": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 250.0,
+        "rpm": 0.0
+      }
+    }
+  },
+  "Autocannon10": {
+    "id": "Autocannon10",
+    "name": "Autocannon/10",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 12.0,
+    "slots": 7,
+    "tiers": {
+      "0": {
+        "damage": 10.0,
+        "heatPerShot": 3.9,
+        "cooldown": 3.6,
+        "range": 360.0,
+        "rpm": 16.7
+      },
+      "1": {
+        "damage": 10.0,
+        "heatPerShot": 3.0,
+        "cooldown": 3.0,
+        "range": 450.0,
+        "rpm": 20.0
+      },
+      "2": {
+        "damage": 10.5,
+        "heatPerShot": 2.85,
+        "cooldown": 2.85,
+        "range": 472.5,
+        "rpm": 21.1
+      },
+      "3": {
+        "damage": 11.0,
+        "heatPerShot": 2.7,
+        "cooldown": 2.7,
+        "range": 495.0,
+        "rpm": 22.2
+      },
+      "4": {
+        "damage": 12.0,
+        "heatPerShot": 2.55,
+        "cooldown": 2.55,
+        "range": 517.5,
+        "rpm": 23.5
+      },
+      "5": {
+        "damage": 13.0,
+        "heatPerShot": 2.325,
+        "cooldown": 2.25,
+        "range": 562.5,
+        "rpm": 26.7
+      }
+    }
+  },
+  "Autocannon10_Auto": {
+    "id": "Autocannon10_Auto",
+    "name": "Autocannon/10 rapid-fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 12.0,
+    "slots": 7,
+    "tiers": {
+      "0": {
+        "damage": 4.0,
+        "heatPerShot": 0.9,
+        "cooldown": 0.9,
+        "range": 360.0,
+        "rpm": 66.7
+      },
+      "1": {
+        "damage": 5.0,
+        "heatPerShot": 0.75,
+        "cooldown": 0.75,
+        "range": 450.0,
+        "rpm": 80.0
+      },
+      "2": {
+        "damage": 5.25,
+        "heatPerShot": 0.712,
+        "cooldown": 0.712,
+        "range": 472.5,
+        "rpm": 84.3
+      },
+      "3": {
+        "damage": 5.5,
+        "heatPerShot": 0.675,
+        "cooldown": 0.675,
+        "range": 495.0,
+        "rpm": 88.9
+      },
+      "4": {
+        "damage": 6.0,
+        "heatPerShot": 0.637,
+        "cooldown": 0.637,
+        "range": 517.5,
+        "rpm": 94.2
+      },
+      "5": {
+        "damage": 6.5,
+        "heatPerShot": 0.562,
+        "cooldown": 0.562,
+        "range": 562.5,
+        "rpm": 106.8
+      }
+    }
+  },
+  "Autocannon10_Burst": {
+    "id": "Autocannon10_Burst",
+    "name": "Autocannon/10 Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 12.0,
+    "slots": 7,
+    "tiers": {
+      "0": {
+        "damage": 2.0,
+        "heatPerShot": 0.52,
+        "cooldown": 2.88,
+        "range": 360.0,
+        "rpm": 20.8
+      },
+      "1": {
+        "damage": 2.0,
+        "heatPerShot": 0.4,
+        "cooldown": 2.4,
+        "range": 450.0,
+        "rpm": 25.0
+      },
+      "2": {
+        "damage": 2.1,
+        "heatPerShot": 0.38,
+        "cooldown": 2.28,
+        "range": 472.5,
+        "rpm": 26.3
+      },
+      "3": {
+        "damage": 2.2,
+        "heatPerShot": 0.36,
+        "cooldown": 2.16,
+        "range": 495.0,
+        "rpm": 27.8
+      },
+      "4": {
+        "damage": 2.4,
+        "heatPerShot": 0.34,
+        "cooldown": 2.04,
+        "range": 517.5,
+        "rpm": 29.4
+      },
+      "5": {
+        "damage": 2.6,
+        "heatPerShot": 0.31,
+        "cooldown": 1.8,
+        "range": 562.5,
+        "rpm": 33.3
+      }
+    }
+  },
+  "Autocannon2": {
+    "id": "Autocannon2",
+    "name": "Autocannon/2",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 6.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.0,
+        "heatPerShot": 0.52,
+        "cooldown": 0.72,
+        "range": 576.0,
+        "rpm": 83.3
+      },
+      "1": {
+        "damage": 2.0,
+        "heatPerShot": 0.4,
+        "cooldown": 0.6,
+        "range": 720.0,
+        "rpm": 100.0
+      },
+      "2": {
+        "damage": 2.1,
+        "heatPerShot": 0.38,
+        "cooldown": 0.57,
+        "range": 756.0,
+        "rpm": 105.3
+      },
+      "3": {
+        "damage": 2.2,
+        "heatPerShot": 0.36,
+        "cooldown": 0.54,
+        "range": 792.0,
+        "rpm": 111.1
+      },
+      "4": {
+        "damage": 2.4,
+        "heatPerShot": 0.34,
+        "cooldown": 0.51,
+        "range": 828.0,
+        "rpm": 117.6
+      },
+      "5": {
+        "damage": 2.6,
+        "heatPerShot": 0.31,
+        "cooldown": 0.45,
+        "range": 900.0,
+        "rpm": 133.3
+      }
+    }
+  },
+  "Autocannon20": {
+    "id": "Autocannon20",
+    "name": "Autocannon/20",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 14.0,
+    "slots": 10,
+    "tiers": {
+      "0": {
+        "damage": 20.0,
+        "heatPerShot": 7.8,
+        "cooldown": 5.76,
+        "range": 216.0,
+        "rpm": 10.4
+      },
+      "1": {
+        "damage": 20.0,
+        "heatPerShot": 6.0,
+        "cooldown": 4.8,
+        "range": 270.0,
+        "rpm": 12.5
+      },
+      "2": {
+        "damage": 21.0,
+        "heatPerShot": 5.7,
+        "cooldown": 4.56,
+        "range": 283.5,
+        "rpm": 13.2
+      },
+      "3": {
+        "damage": 22.0,
+        "heatPerShot": 5.4,
+        "cooldown": 4.32,
+        "range": 297.0,
+        "rpm": 13.9
+      },
+      "4": {
+        "damage": 24.0,
+        "heatPerShot": 5.1,
+        "cooldown": 4.08,
+        "range": 310.5,
+        "rpm": 14.7
+      },
+      "5": {
+        "damage": 26.0,
+        "heatPerShot": 4.65,
+        "cooldown": 3.6,
+        "range": 337.5,
+        "rpm": 16.7
+      }
+    }
+  },
+  "Autocannon20_Auto": {
+    "id": "Autocannon20_Auto",
+    "name": "Autocannon/20 rapid-fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 14.0,
+    "slots": 10,
+    "tiers": {
+      "0": {
+        "damage": 6.4,
+        "heatPerShot": 1.8,
+        "cooldown": 1.44,
+        "range": 216.0,
+        "rpm": 41.7
+      },
+      "1": {
+        "damage": 8.0,
+        "heatPerShot": 1.5,
+        "cooldown": 1.2,
+        "range": 270.0,
+        "rpm": 50.0
+      },
+      "2": {
+        "damage": 8.4,
+        "heatPerShot": 1.425,
+        "cooldown": 1.14,
+        "range": 283.5,
+        "rpm": 52.6
+      },
+      "3": {
+        "damage": 8.96,
+        "heatPerShot": 1.35,
+        "cooldown": 1.08,
+        "range": 297.0,
+        "rpm": 55.6
+      },
+      "4": {
+        "damage": 9.6,
+        "heatPerShot": 1.275,
+        "cooldown": 1.02,
+        "range": 310.5,
+        "rpm": 58.8
+      },
+      "5": {
+        "damage": 10.4,
+        "heatPerShot": 1.125,
+        "cooldown": 0.9,
+        "range": 337.5,
+        "rpm": 66.7
+      }
+    }
+  },
+  "Autocannon20_Burst": {
+    "id": "Autocannon20_Burst",
+    "name": "Autocannon/20 Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 14.0,
+    "slots": 10,
+    "tiers": {
+      "0": {
+        "damage": 2.0,
+        "heatPerShot": 0.455,
+        "cooldown": 4.608,
+        "range": 216.0,
+        "rpm": 13.0
+      },
+      "1": {
+        "damage": 2.0,
+        "heatPerShot": 0.35,
+        "cooldown": 3.84,
+        "range": 270.0,
+        "rpm": 15.6
+      },
+      "2": {
+        "damage": 2.1,
+        "heatPerShot": 0.332,
+        "cooldown": 3.648,
+        "range": 283.5,
+        "rpm": 16.4
+      },
+      "3": {
+        "damage": 2.2,
+        "heatPerShot": 0.315,
+        "cooldown": 3.456,
+        "range": 297.0,
+        "rpm": 17.4
+      },
+      "4": {
+        "damage": 2.4,
+        "heatPerShot": 0.297,
+        "cooldown": 3.264,
+        "range": 310.5,
+        "rpm": 18.4
+      },
+      "5": {
+        "damage": 2.6,
+        "heatPerShot": 0.271,
+        "cooldown": 2.88,
+        "range": 337.5,
+        "rpm": 20.8
+      }
+    }
+  },
+  "Autocannon2_Auto": {
+    "id": "Autocannon2_Auto",
+    "name": "Autocannon/2 rapid-fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 6.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 0.8,
+        "heatPerShot": 0.24,
+        "cooldown": 0.18,
+        "range": 576.0,
+        "rpm": 333.3
+      },
+      "1": {
+        "damage": 1.0,
+        "heatPerShot": 0.2,
+        "cooldown": 0.15,
+        "range": 720.0,
+        "rpm": 400.0
+      },
+      "2": {
+        "damage": 1.07,
+        "heatPerShot": 0.19,
+        "cooldown": 0.142,
+        "range": 756.0,
+        "rpm": 422.5
+      },
+      "3": {
+        "damage": 1.12,
+        "heatPerShot": 0.18,
+        "cooldown": 0.135,
+        "range": 792.0,
+        "rpm": 444.4
+      },
+      "4": {
+        "damage": 1.22,
+        "heatPerShot": 0.17,
+        "cooldown": 0.128,
+        "range": 828.0,
+        "rpm": 468.8
+      },
+      "5": {
+        "damage": 1.35,
+        "heatPerShot": 0.15,
+        "cooldown": 0.112,
+        "range": 900.0,
+        "rpm": 535.7
+      }
+    }
+  },
+  "Autocannon2_Burst": {
+    "id": "Autocannon2_Burst",
+    "name": "Autocannon/2 Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 6.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 0.6,
+        "heatPerShot": 0.117,
+        "cooldown": 0.602,
+        "range": 576.0,
+        "rpm": 99.7
+      },
+      "1": {
+        "damage": 0.6,
+        "heatPerShot": 0.09,
+        "cooldown": 0.502,
+        "range": 720.0,
+        "rpm": 119.5
+      },
+      "2": {
+        "damage": 0.63,
+        "heatPerShot": 0.085,
+        "cooldown": 0.477,
+        "range": 756.0,
+        "rpm": 125.8
+      },
+      "3": {
+        "damage": 0.66,
+        "heatPerShot": 0.081,
+        "cooldown": 0.452,
+        "range": 792.0,
+        "rpm": 132.7
+      },
+      "4": {
+        "damage": 0.72,
+        "heatPerShot": 0.076,
+        "cooldown": 0.427,
+        "range": 828.0,
+        "rpm": 140.5
+      },
+      "5": {
+        "damage": 0.78,
+        "heatPerShot": 0.07,
+        "cooldown": 0.377,
+        "range": 900.0,
+        "rpm": 159.2
+      }
+    }
+  },
+  "Autocannon5": {
+    "id": "Autocannon5",
+    "name": "Autocannon/5",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 8.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 5.0,
+        "heatPerShot": 0.65,
+        "cooldown": 1.8,
+        "range": 496.0,
+        "rpm": 33.3
+      },
+      "1": {
+        "damage": 5.0,
+        "heatPerShot": 0.5,
+        "cooldown": 1.5,
+        "range": 620.0,
+        "rpm": 40.0
+      },
+      "2": {
+        "damage": 5.25,
+        "heatPerShot": 0.475,
+        "cooldown": 1.425,
+        "range": 651.0,
+        "rpm": 42.1
+      },
+      "3": {
+        "damage": 5.5,
+        "heatPerShot": 0.45,
+        "cooldown": 1.35,
+        "range": 682.0,
+        "rpm": 44.4
+      },
+      "4": {
+        "damage": 6.0,
+        "heatPerShot": 0.425,
+        "cooldown": 1.275,
+        "range": 713.0,
+        "rpm": 47.1
+      },
+      "5": {
+        "damage": 6.5,
+        "heatPerShot": 0.388,
+        "cooldown": 1.125,
+        "range": 775.0,
+        "rpm": 53.3
+      }
+    }
+  },
+  "Autocannon5_Auto": {
+    "id": "Autocannon5_Auto",
+    "name": "Autocannon/5 rapid-fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 8.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 2.0,
+        "heatPerShot": 0.3,
+        "cooldown": 0.45,
+        "range": 496.0,
+        "rpm": 133.3
+      },
+      "1": {
+        "damage": 2.5,
+        "heatPerShot": 0.25,
+        "cooldown": 0.375,
+        "range": 620.0,
+        "rpm": 160.0
+      },
+      "2": {
+        "damage": 2.62,
+        "heatPerShot": 0.237,
+        "cooldown": 0.356,
+        "range": 651.0,
+        "rpm": 168.5
+      },
+      "3": {
+        "damage": 2.8,
+        "heatPerShot": 0.225,
+        "cooldown": 0.33,
+        "range": 682.0,
+        "rpm": 181.8
+      },
+      "4": {
+        "damage": 3.1,
+        "heatPerShot": 0.212,
+        "cooldown": 0.3,
+        "range": 713.0,
+        "rpm": 200.0
+      },
+      "5": {
+        "damage": 3.38,
+        "heatPerShot": 0.188,
+        "cooldown": 0.27,
+        "range": 775.0,
+        "rpm": 222.2
+      }
+    }
+  },
+  "Autocannon5_Burst": {
+    "id": "Autocannon5_Burst",
+    "name": "Autocannon/5 Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 8.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 2.0,
+        "heatPerShot": 0.208,
+        "cooldown": 1.488,
+        "range": 496.0,
+        "rpm": 40.3
+      },
+      "1": {
+        "damage": 2.0,
+        "heatPerShot": 0.16,
+        "cooldown": 1.24,
+        "range": 620.0,
+        "rpm": 48.4
+      },
+      "2": {
+        "damage": 2.1,
+        "heatPerShot": 0.152,
+        "cooldown": 1.178,
+        "range": 651.0,
+        "rpm": 50.9
+      },
+      "3": {
+        "damage": 2.2,
+        "heatPerShot": 0.144,
+        "cooldown": 1.116,
+        "range": 682.0,
+        "rpm": 53.8
+      },
+      "4": {
+        "damage": 2.4,
+        "heatPerShot": 0.136,
+        "cooldown": 1.054,
+        "range": 713.0,
+        "rpm": 56.9
+      },
+      "5": {
+        "damage": 2.6,
+        "heatPerShot": 0.124,
+        "cooldown": 0.93,
+        "range": 775.0,
+        "rpm": 64.5
+      }
+    }
+  },
+  "BinaryLaser": {
+    "id": "BinaryLaser",
+    "name": "Binary Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 9.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 14.4,
+        "heatPerShot": 16.8,
+        "cooldown": 8.4,
+        "range": 360.0,
+        "rpm": 7.1
+      },
+      "1": {
+        "damage": 18.0,
+        "heatPerShot": 14.0,
+        "cooldown": 7.0,
+        "range": 450.0,
+        "rpm": 8.6
+      },
+      "2": {
+        "damage": 18.9,
+        "heatPerShot": 13.3,
+        "cooldown": 6.65,
+        "range": 495.0,
+        "rpm": 9.0
+      },
+      "3": {
+        "damage": 20.16,
+        "heatPerShot": 12.6,
+        "cooldown": 6.3,
+        "range": 517.5,
+        "rpm": 9.5
+      },
+      "4": {
+        "damage": 21.96,
+        "heatPerShot": 11.9,
+        "cooldown": 5.95,
+        "range": 540.0,
+        "rpm": 10.1
+      },
+      "5": {
+        "damage": 24.3,
+        "heatPerShot": 10.5,
+        "cooldown": 5.25,
+        "range": 562.5,
+        "rpm": 11.4
+      }
+    }
+  },
+  "DoubleHeatSink": {
+    "id": "DoubleHeatSink",
+    "name": "Double Heat Sink",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 3,
+    "cooling": 0.2,
+    "tiers": null
+  },
+  "ERLargeLaser": {
+    "id": "ERLargeLaser",
+    "name": "ER Large Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 10.0,
+        "heatPerShot": 12.6,
+        "cooldown": 6.3,
+        "range": 540.0,
+        "rpm": 9.5
+      },
+      "1": {
+        "damage": 10.0,
+        "heatPerShot": 10.5,
+        "cooldown": 5.25,
+        "range": 675.0,
+        "rpm": 11.4
+      },
+      "2": {
+        "damage": 10.5,
+        "heatPerShot": 9.975,
+        "cooldown": 5.119,
+        "range": 708.8,
+        "rpm": 11.7
+      },
+      "3": {
+        "damage": 11.0,
+        "heatPerShot": 9.45,
+        "cooldown": 4.987,
+        "range": 742.5,
+        "rpm": 12.0
+      },
+      "4": {
+        "damage": 12.0,
+        "heatPerShot": 8.925,
+        "cooldown": 4.83,
+        "range": 776.2,
+        "rpm": 12.4
+      },
+      "5": {
+        "damage": 13.0,
+        "heatPerShot": 7.875,
+        "cooldown": 4.462,
+        "range": 843.8,
+        "rpm": 13.4
+      }
+    }
+  },
+  "ERLargeLaser_ShortBurst": {
+    "id": "ERLargeLaser_ShortBurst",
+    "name": "ER Large Laser Short Burst",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 7.0,
+        "heatPerShot": 7.32,
+        "cooldown": 4.32,
+        "range": 540.0,
+        "rpm": 13.9
+      },
+      "1": {
+        "damage": 7.0,
+        "heatPerShot": 6.1,
+        "cooldown": 3.6,
+        "range": 675.0,
+        "rpm": 16.7
+      },
+      "2": {
+        "damage": 7.35,
+        "heatPerShot": 5.795,
+        "cooldown": 3.51,
+        "range": 708.8,
+        "rpm": 17.1
+      },
+      "3": {
+        "damage": 7.7,
+        "heatPerShot": 5.49,
+        "cooldown": 3.42,
+        "range": 742.5,
+        "rpm": 17.5
+      },
+      "4": {
+        "damage": 8.4,
+        "heatPerShot": 5.185,
+        "cooldown": 3.312,
+        "range": 776.2,
+        "rpm": 18.1
+      },
+      "5": {
+        "damage": 9.1,
+        "heatPerShot": 4.575,
+        "cooldown": 3.06,
+        "range": 843.8,
+        "rpm": 19.6
+      }
+    }
+  },
+  "ERPPC": {
+    "id": "ERPPC",
+    "name": "ER PPC",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 10.0,
+        "heatPerShot": 13.2,
+        "cooldown": 6.0,
+        "range": 600.0,
+        "rpm": 10.0
+      },
+      "1": {
+        "damage": 10.0,
+        "heatPerShot": 11.0,
+        "cooldown": 5.0,
+        "range": 750.0,
+        "rpm": 12.0
+      },
+      "2": {
+        "damage": 10.5,
+        "heatPerShot": 10.45,
+        "cooldown": 4.875,
+        "range": 787.5,
+        "rpm": 12.3
+      },
+      "3": {
+        "damage": 11.4,
+        "heatPerShot": 9.9,
+        "cooldown": 4.75,
+        "range": 825.0,
+        "rpm": 12.6
+      },
+      "4": {
+        "damage": 12.5,
+        "heatPerShot": 9.35,
+        "cooldown": 4.6,
+        "range": 862.5,
+        "rpm": 13.0
+      },
+      "5": {
+        "damage": 14.0,
+        "heatPerShot": 8.525,
+        "cooldown": 4.25,
+        "range": 937.5,
+        "rpm": 14.1
+      }
+    }
+  },
+  "Flamer": {
+    "id": "Flamer",
+    "name": "Flamer",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.0,
+        "heatPerShot": 0.48,
+        "cooldown": 0.1,
+        "range": 72.0,
+        "rpm": 600.0
+      },
+      "1": {
+        "damage": 2.0,
+        "heatPerShot": 0.4,
+        "cooldown": 0.1,
+        "range": 90.0,
+        "rpm": 600.0
+      },
+      "2": {
+        "damage": 2.2,
+        "heatPerShot": 0.38,
+        "cooldown": 0.1,
+        "range": 94.5,
+        "rpm": 600.0
+      },
+      "3": {
+        "damage": 2.5,
+        "heatPerShot": 0.36,
+        "cooldown": 0.1,
+        "range": 99.0,
+        "rpm": 600.0
+      },
+      "4": {
+        "damage": 2.8,
+        "heatPerShot": 0.34,
+        "cooldown": 0.1,
+        "range": 103.5,
+        "rpm": 600.0
+      },
+      "5": {
+        "damage": 3.2,
+        "heatPerShot": 0.3,
+        "cooldown": 0.1,
+        "range": 112.5,
+        "rpm": 600.0
+      }
+    }
+  },
+  "GaussRifle": {
+    "id": "GaussRifle",
+    "name": "Gauss Rifle",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 15.0,
+    "slots": 7,
+    "tiers": {
+      "0": {
+        "damage": 15.0,
+        "heatPerShot": 1.3,
+        "cooldown": 7.2,
+        "range": 528.0,
+        "rpm": 8.3
+      },
+      "1": {
+        "damage": 15.0,
+        "heatPerShot": 1.0,
+        "cooldown": 6.0,
+        "range": 660.0,
+        "rpm": 10.0
+      },
+      "2": {
+        "damage": 15.75,
+        "heatPerShot": 0.95,
+        "cooldown": 5.85,
+        "range": 693.0,
+        "rpm": 10.3
+      },
+      "3": {
+        "damage": 17.1,
+        "heatPerShot": 0.9,
+        "cooldown": 5.7,
+        "range": 726.0,
+        "rpm": 10.5
+      },
+      "4": {
+        "damage": 18.75,
+        "heatPerShot": 0.85,
+        "cooldown": 5.52,
+        "range": 759.0,
+        "rpm": 10.9
+      },
+      "5": {
+        "damage": 21.0,
+        "heatPerShot": 0.85,
+        "cooldown": 5.1,
+        "range": 825.0,
+        "rpm": 11.8
+      }
+    }
+  },
+  "Gauss_Standard_AmmoEquipment": {
+    "id": "Gauss_Standard_AmmoEquipment",
+    "name": "Gauss Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 26
+  },
+  "Gauss_Standard_Half_AmmoEquipment": {
+    "id": "Gauss_Standard_Half_AmmoEquipment",
+    "name": "Gauss Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 13
+  },
+  "Greatsword_Assault": {
+    "id": "Greatsword_Assault",
+    "name": "Assault Greatsword",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 8.0,
+    "slots": 4,
+    "tiers": {
+      "0": {
+        "damage": 68.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.8,
+        "range": 20.0,
+        "rpm": 12.5
+      },
+      "1": {
+        "damage": 85.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.0,
+        "range": 20.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 90.95,
+        "heatPerShot": 0.0,
+        "cooldown": 3.8,
+        "range": 20.0,
+        "rpm": 15.8
+      },
+      "3": {
+        "damage": 95.2,
+        "heatPerShot": 0.0,
+        "cooldown": 3.6,
+        "range": 20.0,
+        "rpm": 16.7
+      },
+      "4": {
+        "damage": 103.7,
+        "heatPerShot": 0.0,
+        "cooldown": 3.4,
+        "range": 20.0,
+        "rpm": 17.6
+      },
+      "5": {
+        "damage": 110.5,
+        "heatPerShot": 0.0,
+        "cooldown": 3.2,
+        "range": 20.0,
+        "rpm": 18.8
+      }
+    }
+  },
+  "Hammer_Heavy": {
+    "id": "Hammer_Heavy",
+    "name": "Heavy Hammer",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 56.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.56,
+        "range": 20.0,
+        "rpm": 13.2
+      },
+      "1": {
+        "damage": 70.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.8,
+        "range": 20.0,
+        "rpm": 15.8
+      },
+      "2": {
+        "damage": 75.6,
+        "heatPerShot": 0.0,
+        "cooldown": 3.61,
+        "range": 20.0,
+        "rpm": 16.6
+      },
+      "3": {
+        "damage": 81.2,
+        "heatPerShot": 0.0,
+        "cooldown": 3.42,
+        "range": 20.0,
+        "rpm": 17.5
+      },
+      "4": {
+        "damage": 86.1,
+        "heatPerShot": 0.0,
+        "cooldown": 3.23,
+        "range": 20.0,
+        "rpm": 18.6
+      },
+      "5": {
+        "damage": 94.5,
+        "heatPerShot": 0.0,
+        "cooldown": 2.85,
+        "range": 20.0,
+        "rpm": 21.1
+      }
+    }
+  },
+  "HeavyRifle": {
+    "id": "HeavyRifle",
+    "name": "Heavy Rifle",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 8.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 18.0,
+        "heatPerShot": 13.0,
+        "cooldown": 12.0,
+        "range": 528.0,
+        "rpm": 5.0
+      },
+      "1": {
+        "damage": 18.0,
+        "heatPerShot": 10.0,
+        "cooldown": 10.0,
+        "range": 660.0,
+        "rpm": 6.0
+      },
+      "2": {
+        "damage": 18.9,
+        "heatPerShot": 9.5,
+        "cooldown": 9.5,
+        "range": 693.0,
+        "rpm": 6.3
+      },
+      "3": {
+        "damage": 19.8,
+        "heatPerShot": 9.0,
+        "cooldown": 9.0,
+        "range": 726.0,
+        "rpm": 6.7
+      },
+      "4": {
+        "damage": 21.6,
+        "heatPerShot": 8.5,
+        "cooldown": 8.5,
+        "range": 759.0,
+        "rpm": 7.1
+      },
+      "5": {
+        "damage": 23.4,
+        "heatPerShot": 7.75,
+        "cooldown": 7.5,
+        "range": 825.0,
+        "rpm": 8.0
+      }
+    }
+  },
+  "HeavyRifle_AmmoEquipment": {
+    "id": "HeavyRifle_AmmoEquipment",
+    "name": "Heavy Rifle Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 12
+  },
+  "HeavyRifle_Burst": {
+    "id": "HeavyRifle_Burst",
+    "name": "Heavy Rifle Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 8.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 5.6,
+        "heatPerShot": 3.6,
+        "cooldown": 12.0,
+        "range": 528.0,
+        "rpm": 5.0
+      },
+      "1": {
+        "damage": 7.0,
+        "heatPerShot": 3.0,
+        "cooldown": 10.0,
+        "range": 660.0,
+        "rpm": 6.0
+      },
+      "2": {
+        "damage": 7.35,
+        "heatPerShot": 2.85,
+        "cooldown": 9.5,
+        "range": 693.0,
+        "rpm": 6.3
+      },
+      "3": {
+        "damage": 7.84,
+        "heatPerShot": 2.79,
+        "cooldown": 9.0,
+        "range": 759.0,
+        "rpm": 6.7
+      },
+      "4": {
+        "damage": 8.4,
+        "heatPerShot": 2.7,
+        "cooldown": 8.5,
+        "range": 792.0,
+        "rpm": 7.1
+      },
+      "5": {
+        "damage": 9.45,
+        "heatPerShot": 2.46,
+        "cooldown": 8.5,
+        "range": 792.0,
+        "rpm": 7.1
+      }
+    }
+  },
+  "HeavyRifle_Half_AmmoEquipment": {
+    "id": "HeavyRifle_Half_AmmoEquipment",
+    "name": "Heavy Rifle Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 6
+  },
+  "JumpJet_Class1_Equipment": {
+    "id": "JumpJet_Class1_Equipment",
+    "name": "Jump Jets Class I",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": null,
+    "equipmentType": "jumpJet"
+  },
+  "JumpJet_Class2_Equipment": {
+    "id": "JumpJet_Class2_Equipment",
+    "name": "Jump Jets Class II",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "equipmentType": "jumpJet"
+  },
+  "JumpJet_Class3_Equipment": {
+    "id": "JumpJet_Class3_Equipment",
+    "name": "Jump Jets Class III",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "equipmentType": "jumpJet"
+  },
+  "JumpJet_Class4_Equipment": {
+    "id": "JumpJet_Class4_Equipment",
+    "name": "Jump Jets Class IV",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "equipmentType": "jumpJet"
+  },
+  "JumpJet_Class5_Equipment": {
+    "id": "JumpJet_Class5_Equipment",
+    "name": "Jump Jets Class V",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "equipmentType": "jumpJet"
+  },
+  "LBXAutocannon10": {
+    "id": "LBXAutocannon10",
+    "name": "LB 10-X Autocannon",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 11.0,
+    "slots": 6,
+    "tiers": {
+      "0": {
+        "damage": 1.0,
+        "heatPerShot": 1.69,
+        "cooldown": 2.7,
+        "range": 432.0,
+        "rpm": 22.2
+      },
+      "1": {
+        "damage": 1.0,
+        "heatPerShot": 1.3,
+        "cooldown": 2.25,
+        "range": 540.0,
+        "rpm": 26.7
+      },
+      "2": {
+        "damage": 1.05,
+        "heatPerShot": 1.17,
+        "cooldown": 2.137,
+        "range": 567.0,
+        "rpm": 28.1
+      },
+      "3": {
+        "damage": 1.15,
+        "heatPerShot": 1.17,
+        "cooldown": 2.025,
+        "range": 594.0,
+        "rpm": 29.6
+      },
+      "4": {
+        "damage": 1.2,
+        "heatPerShot": 1.105,
+        "cooldown": 1.912,
+        "range": 621.0,
+        "rpm": 31.4
+      },
+      "5": {
+        "damage": 1.3,
+        "heatPerShot": 1.008,
+        "cooldown": 1.688,
+        "range": 675.0,
+        "rpm": 35.5
+      }
+    }
+  },
+  "LBXAutocannon10_SolidSlug": {
+    "id": "LBXAutocannon10_SolidSlug",
+    "name": "LB 10-X Autocannon Solid Slug",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 11.0,
+    "slots": 6,
+    "tiers": {
+      "0": {
+        "damage": 10.0,
+        "heatPerShot": 1.95,
+        "cooldown": 2.7,
+        "range": 432.0,
+        "rpm": 22.2
+      },
+      "1": {
+        "damage": 10.0,
+        "heatPerShot": 1.5,
+        "cooldown": 2.25,
+        "range": 540.0,
+        "rpm": 26.7
+      },
+      "2": {
+        "damage": 10.5,
+        "heatPerShot": 1.425,
+        "cooldown": 2.137,
+        "range": 567.0,
+        "rpm": 28.1
+      },
+      "3": {
+        "damage": 11.0,
+        "heatPerShot": 1.35,
+        "cooldown": 2.025,
+        "range": 594.0,
+        "rpm": 29.6
+      },
+      "4": {
+        "damage": 12.0,
+        "heatPerShot": 1.275,
+        "cooldown": 1.912,
+        "range": 621.0,
+        "rpm": 31.4
+      },
+      "5": {
+        "damage": 13.0,
+        "heatPerShot": 1.163,
+        "cooldown": 1.688,
+        "range": 675.0,
+        "rpm": 35.5
+      }
+    }
+  },
+  "LRM10": {
+    "id": "LRM10",
+    "name": "LRM 10",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.324,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.306,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM10_Artemis": {
+    "id": "LRM10_Artemis",
+    "name": "LRM 10 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 6.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.324,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.306,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM10_Artemis_Stream": {
+    "id": "LRM10_Artemis_Stream",
+    "name": "LRM 10 Stream + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 6.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.324,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.306,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM10_Stream": {
+    "id": "LRM10_Stream",
+    "name": "LRM 10 Stream",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.324,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.306,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM15": {
+    "id": "LRM15",
+    "name": "LRM 15",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.3,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.285,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.27,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.255,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.225,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM15_Artemis": {
+    "id": "LRM15_Artemis",
+    "name": "LRM 15 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 8.0,
+    "slots": 4,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.3,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.285,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.27,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.255,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.225,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM15_Artemis_Stream": {
+    "id": "LRM15_Artemis_Stream",
+    "name": "LRM 15 Stream + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 8.0,
+    "slots": 4,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.3,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.285,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.27,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.255,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.225,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM15_Stream": {
+    "id": "LRM15_Stream",
+    "name": "LRM 15 Stream",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.3,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.285,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.27,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.255,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.225,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM20": {
+    "id": "LRM20",
+    "name": "LRM 20",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 10.0,
+    "slots": 5,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.324,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.27,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.257,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.243,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.23,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.203,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM20_Artemis": {
+    "id": "LRM20_Artemis",
+    "name": "LRM 20 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 11.0,
+    "slots": 6,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.324,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.27,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.26,
+        "heatPerShot": 0.243,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.243,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.23,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.203,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM20_Artemis_Stream": {
+    "id": "LRM20_Artemis_Stream",
+    "name": "LRM 20 Stream + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 11.0,
+    "slots": 6,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.324,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.27,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.257,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.243,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.23,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.203,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM20_Stream": {
+    "id": "LRM20_Stream",
+    "name": "LRM 20 Stream",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 10.0,
+    "slots": 5,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.324,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.27,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.257,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.243,
+        "cooldown": 3.8,
+        "range": 990.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.23,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.203,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM5": {
+    "id": "LRM5",
+    "name": "LRM 5",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.288,
+        "cooldown": 3.7,
+        "range": 990.0,
+        "rpm": 16.2
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.306,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM5_Artemis": {
+    "id": "LRM5_Artemis",
+    "name": "LRM 5 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.288,
+        "cooldown": 3.7,
+        "range": 990.0,
+        "rpm": 16.2
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.306,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM5_Artemis_Stream": {
+    "id": "LRM5_Artemis_Stream",
+    "name": "LRM 5 Stream + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.288,
+        "cooldown": 3.7,
+        "range": 990.0,
+        "rpm": 16.2
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.306,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM5_Stream": {
+    "id": "LRM5_Stream",
+    "name": "LRM 5 Stream",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 720.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 900.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 945.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.306,
+        "cooldown": 3.7,
+        "range": 990.0,
+        "rpm": 16.2
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.288,
+        "cooldown": 3.6,
+        "range": 1035.0,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    }
+  },
+  "LRM_AmmoEquipment": {
+    "id": "LRM_AmmoEquipment",
+    "name": "LRM Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 440
+  },
+  "LRM_Artemis_AmmoEquipment": {
+    "id": "LRM_Artemis_AmmoEquipment",
+    "name": "LRM Artemis Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 440
+  },
+  "LRM_Artemis_Half_AmmoEquipment": {
+    "id": "LRM_Artemis_Half_AmmoEquipment",
+    "name": "LRM Artemis Half Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 220
+  },
+  "LRM_Half_AmmoEquipment": {
+    "id": "LRM_Half_AmmoEquipment",
+    "name": "LRM Half Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 220
+  },
+  "Lance_Medium": {
+    "id": "Lance_Medium",
+    "name": "Medium Lance",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 28.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.6,
+        "range": 22.0,
+        "rpm": 16.7
+      },
+      "1": {
+        "damage": 35.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.0,
+        "range": 22.0,
+        "rpm": 20.0
+      },
+      "2": {
+        "damage": 37.8,
+        "heatPerShot": 0.0,
+        "cooldown": 2.85,
+        "range": 22.0,
+        "rpm": 21.1
+      },
+      "3": {
+        "damage": 39.2,
+        "heatPerShot": 0.0,
+        "cooldown": 2.7,
+        "range": 22.0,
+        "rpm": 22.2
+      },
+      "4": {
+        "damage": 42.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.55,
+        "range": 22.0,
+        "rpm": 23.5
+      },
+      "5": {
+        "damage": 45.5,
+        "heatPerShot": 0.0,
+        "cooldown": 2.25,
+        "range": 22.0,
+        "rpm": 26.7
+      }
+    }
+  },
+  "LargeChemLaser_AmmoEquipment": {
+    "id": "LargeChemLaser_AmmoEquipment",
+    "name": "L Chem Laser Ammo",
+    "type": "ammo",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 62
+  },
+  "LargeChemLaser_Half_AmmoEquipment": {
+    "id": "LargeChemLaser_Half_AmmoEquipment",
+    "name": "L Chem Laser Half Ammo",
+    "type": "ammo",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 31
+  },
+  "LargeChemicalLaser": {
+    "id": "LargeChemicalLaser",
+    "name": "Large Chemical Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 8.0,
+        "heatPerShot": 3.0,
+        "cooldown": 5.4,
+        "range": 360.0,
+        "rpm": 11.1
+      },
+      "1": {
+        "damage": 8.0,
+        "heatPerShot": 2.5,
+        "cooldown": 4.5,
+        "range": 450.0,
+        "rpm": 13.3
+      },
+      "2": {
+        "damage": 8.4,
+        "heatPerShot": 2.375,
+        "cooldown": 4.388,
+        "range": 472.5,
+        "rpm": 13.7
+      },
+      "3": {
+        "damage": 8.8,
+        "heatPerShot": 2.25,
+        "cooldown": 4.275,
+        "range": 495.0,
+        "rpm": 14.0
+      },
+      "4": {
+        "damage": 9.6,
+        "heatPerShot": 2.125,
+        "cooldown": 4.14,
+        "range": 517.5,
+        "rpm": 14.5
+      },
+      "5": {
+        "damage": 10.4,
+        "heatPerShot": 1.875,
+        "cooldown": 3.825,
+        "range": 562.5,
+        "rpm": 15.7
+      }
+    }
+  },
+  "LargeLaser": {
+    "id": "LargeLaser",
+    "name": "Large Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 10.0,
+        "heatPerShot": 9.0,
+        "cooldown": 6.3,
+        "range": 360.0,
+        "rpm": 9.5
+      },
+      "1": {
+        "damage": 10.0,
+        "heatPerShot": 7.5,
+        "cooldown": 5.25,
+        "range": 450.0,
+        "rpm": 11.4
+      },
+      "2": {
+        "damage": 10.5,
+        "heatPerShot": 7.125,
+        "cooldown": 5.119,
+        "range": 472.5,
+        "rpm": 11.7
+      },
+      "3": {
+        "damage": 11.0,
+        "heatPerShot": 6.75,
+        "cooldown": 4.987,
+        "range": 495.0,
+        "rpm": 12.0
+      },
+      "4": {
+        "damage": 12.0,
+        "heatPerShot": 6.375,
+        "cooldown": 4.83,
+        "range": 517.5,
+        "rpm": 12.4
+      },
+      "5": {
+        "damage": 13.0,
+        "heatPerShot": 5.625,
+        "cooldown": 4.462,
+        "range": 562.5,
+        "rpm": 13.4
+      }
+    }
+  },
+  "LargeLaser_ShortBurst": {
+    "id": "LargeLaser_ShortBurst",
+    "name": "Large Laser Short Burst",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 7.0,
+        "heatPerShot": 4.92,
+        "cooldown": 4.32,
+        "range": 360.0,
+        "rpm": 13.9
+      },
+      "1": {
+        "damage": 7.0,
+        "heatPerShot": 4.1,
+        "cooldown": 3.6,
+        "range": 450.0,
+        "rpm": 16.7
+      },
+      "2": {
+        "damage": 7.35,
+        "heatPerShot": 3.895,
+        "cooldown": 3.51,
+        "range": 472.5,
+        "rpm": 17.1
+      },
+      "3": {
+        "damage": 7.7,
+        "heatPerShot": 3.69,
+        "cooldown": 3.42,
+        "range": 495.0,
+        "rpm": 17.5
+      },
+      "4": {
+        "damage": 8.4,
+        "heatPerShot": 3.485,
+        "cooldown": 3.312,
+        "range": 517.5,
+        "rpm": 18.1
+      },
+      "5": {
+        "damage": 9.1,
+        "heatPerShot": 3.075,
+        "cooldown": 3.06,
+        "range": 562.5,
+        "rpm": 19.6
+      }
+    }
+  },
+  "LargePulseLaser": {
+    "id": "LargePulseLaser",
+    "name": "Large Pulse Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 12.0,
+        "heatPerShot": 7.8,
+        "cooldown": 5.4,
+        "range": 292.0,
+        "rpm": 11.1
+      },
+      "1": {
+        "damage": 12.0,
+        "heatPerShot": 6.5,
+        "cooldown": 4.5,
+        "range": 365.0,
+        "rpm": 13.3
+      },
+      "2": {
+        "damage": 12.6,
+        "heatPerShot": 6.175,
+        "cooldown": 4.388,
+        "range": 383.2,
+        "rpm": 13.7
+      },
+      "3": {
+        "damage": 13.2,
+        "heatPerShot": 5.85,
+        "cooldown": 4.275,
+        "range": 401.5,
+        "rpm": 14.0
+      },
+      "4": {
+        "damage": 14.4,
+        "heatPerShot": 5.525,
+        "cooldown": 4.14,
+        "range": 419.7,
+        "rpm": 14.5
+      },
+      "5": {
+        "damage": 15.6,
+        "heatPerShot": 4.875,
+        "cooldown": 3.825,
+        "range": 456.2,
+        "rpm": 15.7
+      }
+    }
+  },
+  "LightRifle": {
+    "id": "LightRifle",
+    "name": "Light Rifle",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 7.0,
+        "heatPerShot": 2.86,
+        "cooldown": 8.4,
+        "range": 288.0,
+        "rpm": 7.1
+      },
+      "1": {
+        "damage": 7.0,
+        "heatPerShot": 2.2,
+        "cooldown": 7.0,
+        "range": 360.0,
+        "rpm": 8.6
+      },
+      "2": {
+        "damage": 7.35,
+        "heatPerShot": 2.09,
+        "cooldown": 6.65,
+        "range": 378.0,
+        "rpm": 9.0
+      },
+      "3": {
+        "damage": 7.7,
+        "heatPerShot": 1.98,
+        "cooldown": 6.3,
+        "range": 396.0,
+        "rpm": 9.5
+      },
+      "4": {
+        "damage": 8.4,
+        "heatPerShot": 1.87,
+        "cooldown": 5.95,
+        "range": 414.0,
+        "rpm": 10.1
+      },
+      "5": {
+        "damage": 9.1,
+        "heatPerShot": 1.705,
+        "cooldown": 5.25,
+        "range": 450.0,
+        "rpm": 11.4
+      }
+    }
+  },
+  "LightRifle_AmmoEquipment": {
+    "id": "LightRifle_AmmoEquipment",
+    "name": "Light Rifle Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 34
+  },
+  "LightRifle_Burst": {
+    "id": "LightRifle_Burst",
+    "name": "Light Rifle Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.6,
+        "heatPerShot": 0.6,
+        "cooldown": 8.4,
+        "range": 288.0,
+        "rpm": 7.1
+      },
+      "1": {
+        "damage": 2.0,
+        "heatPerShot": 0.5,
+        "cooldown": 7.0,
+        "range": 360.0,
+        "rpm": 8.6
+      },
+      "2": {
+        "damage": 2.16,
+        "heatPerShot": 0.475,
+        "cooldown": 6.65,
+        "range": 396.0,
+        "rpm": 9.0
+      },
+      "3": {
+        "damage": 2.24,
+        "heatPerShot": 0.45,
+        "cooldown": 6.3,
+        "range": 414.0,
+        "rpm": 9.5
+      },
+      "4": {
+        "damage": 2.44,
+        "heatPerShot": 0.41,
+        "cooldown": 5.74,
+        "range": 432.0,
+        "rpm": 10.5
+      },
+      "5": {
+        "damage": 2.7,
+        "heatPerShot": 0.375,
+        "cooldown": 5.25,
+        "range": 468.0,
+        "rpm": 11.4
+      }
+    }
+  },
+  "LightRifle_Half_AmmoEquipment": {
+    "id": "LightRifle_Half_AmmoEquipment",
+    "name": "Light Rifle Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 17
+  },
+  "MachineGun": {
+    "id": "MachineGun",
+    "name": "Machine Gun",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.36,
+        "heatPerShot": 0.0,
+        "cooldown": 0.1,
+        "range": 104.0,
+        "rpm": 600.0
+      },
+      "1": {
+        "damage": 1.5,
+        "heatPerShot": 0.0,
+        "cooldown": 0.1,
+        "range": 130.0,
+        "rpm": 600.0
+      },
+      "2": {
+        "damage": 1.65,
+        "heatPerShot": 0.0,
+        "cooldown": 0.1,
+        "range": 143.0,
+        "rpm": 600.0
+      },
+      "3": {
+        "damage": 1.88,
+        "heatPerShot": 0.0,
+        "cooldown": 0.1,
+        "range": 162.5,
+        "rpm": 600.0
+      },
+      "4": {
+        "damage": 2.1,
+        "heatPerShot": 0.0,
+        "cooldown": 0.1,
+        "range": 182.0,
+        "rpm": 600.0
+      },
+      "5": {
+        "damage": 2.4,
+        "heatPerShot": 0.0,
+        "cooldown": 0.1,
+        "range": 208.0,
+        "rpm": 600.0
+      }
+    }
+  },
+  "MachineGun_Standard_AmmoEquipment": {
+    "id": "MachineGun_Standard_AmmoEquipment",
+    "name": "Machine Gun Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 5200
+  },
+  "MachineGun_Standard_Half_AmmoEquipment": {
+    "id": "MachineGun_Standard_Half_AmmoEquipment",
+    "name": "Machine Gun Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 2600
+  },
+  "MediumChemLaser_AmmoEquipment": {
+    "id": "MediumChemLaser_AmmoEquipment",
+    "name": "M Chem Laser Ammo",
+    "type": "ammo",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 115
+  },
+  "MediumChemLaser_Half_AmmoEquipment": {
+    "id": "MediumChemLaser_Half_AmmoEquipment",
+    "name": "M Chem Laser Half Ammo",
+    "type": "ammo",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 57
+  },
+  "MediumChemicalLaser": {
+    "id": "MediumChemicalLaser",
+    "name": "Medium Chemical Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 4.0,
+        "heatPerShot": 1.2,
+        "cooldown": 3.9,
+        "range": 216.0,
+        "rpm": 15.4
+      },
+      "1": {
+        "damage": 4.0,
+        "heatPerShot": 1.0,
+        "cooldown": 3.25,
+        "range": 270.0,
+        "rpm": 18.5
+      },
+      "2": {
+        "damage": 4.2,
+        "heatPerShot": 0.95,
+        "cooldown": 3.169,
+        "range": 283.5,
+        "rpm": 18.9
+      },
+      "3": {
+        "damage": 4.4,
+        "heatPerShot": 0.9,
+        "cooldown": 3.087,
+        "range": 297.0,
+        "rpm": 19.4
+      },
+      "4": {
+        "damage": 4.8,
+        "heatPerShot": 0.85,
+        "cooldown": 2.99,
+        "range": 310.5,
+        "rpm": 20.1
+      },
+      "5": {
+        "damage": 5.2,
+        "heatPerShot": 0.75,
+        "cooldown": 2.762,
+        "range": 337.5,
+        "rpm": 21.7
+      }
+    }
+  },
+  "MediumLaser": {
+    "id": "MediumLaser",
+    "name": "Medium Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 5.0,
+        "heatPerShot": 2.7,
+        "cooldown": 4.8,
+        "range": 216.0,
+        "rpm": 12.5
+      },
+      "1": {
+        "damage": 5.0,
+        "heatPerShot": 2.25,
+        "cooldown": 4.0,
+        "range": 270.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 5.25,
+        "heatPerShot": 2.137,
+        "cooldown": 3.9,
+        "range": 283.5,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 5.5,
+        "heatPerShot": 2.025,
+        "cooldown": 3.8,
+        "range": 297.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 6.0,
+        "heatPerShot": 1.912,
+        "cooldown": 3.68,
+        "range": 310.5,
+        "rpm": 16.3
+      },
+      "5": {
+        "damage": 6.5,
+        "heatPerShot": 1.688,
+        "cooldown": 3.4,
+        "range": 337.5,
+        "rpm": 17.6
+      }
+    }
+  },
+  "MediumLaser_ShortBurst": {
+    "id": "MediumLaser_ShortBurst",
+    "name": "Medium Laser Short Burst",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 3.5,
+        "heatPerShot": 1.8,
+        "cooldown": 3.12,
+        "range": 216.0,
+        "rpm": 19.2
+      },
+      "1": {
+        "damage": 3.5,
+        "heatPerShot": 1.5,
+        "cooldown": 2.6,
+        "range": 270.0,
+        "rpm": 23.1
+      },
+      "2": {
+        "damage": 3.68,
+        "heatPerShot": 1.425,
+        "cooldown": 2.535,
+        "range": 283.5,
+        "rpm": 23.7
+      },
+      "3": {
+        "damage": 3.85,
+        "heatPerShot": 1.35,
+        "cooldown": 2.47,
+        "range": 297.0,
+        "rpm": 24.3
+      },
+      "4": {
+        "damage": 4.2,
+        "heatPerShot": 1.275,
+        "cooldown": 2.392,
+        "range": 310.5,
+        "rpm": 25.1
+      },
+      "5": {
+        "damage": 4.55,
+        "heatPerShot": 1.125,
+        "cooldown": 2.21,
+        "range": 337.5,
+        "rpm": 27.1
+      }
+    }
+  },
+  "MediumPulseLaser": {
+    "id": "MediumPulseLaser",
+    "name": "Medium Pulse Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 6.0,
+        "heatPerShot": 3.12,
+        "cooldown": 3.9,
+        "range": 176.0,
+        "rpm": 15.4
+      },
+      "1": {
+        "damage": 6.0,
+        "heatPerShot": 2.6,
+        "cooldown": 3.25,
+        "range": 220.0,
+        "rpm": 18.5
+      },
+      "2": {
+        "damage": 6.3,
+        "heatPerShot": 2.47,
+        "cooldown": 3.169,
+        "range": 231.0,
+        "rpm": 18.9
+      },
+      "3": {
+        "damage": 6.6,
+        "heatPerShot": 2.34,
+        "cooldown": 3.087,
+        "range": 242.0,
+        "rpm": 19.4
+      },
+      "4": {
+        "damage": 7.2,
+        "heatPerShot": 2.21,
+        "cooldown": 2.99,
+        "range": 253.0,
+        "rpm": 20.1
+      },
+      "5": {
+        "damage": 7.8,
+        "heatPerShot": 1.95,
+        "cooldown": 2.762,
+        "range": 275.0,
+        "rpm": 21.7
+      }
+    }
+  },
+  "MediumRifle": {
+    "id": "MediumRifle",
+    "name": "Medium Rifle",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 12.0,
+        "heatPerShot": 5.85,
+        "cooldown": 9.6,
+        "range": 360.0,
+        "rpm": 6.2
+      },
+      "1": {
+        "damage": 12.0,
+        "heatPerShot": 4.5,
+        "cooldown": 8.0,
+        "range": 450.0,
+        "rpm": 7.5
+      },
+      "2": {
+        "damage": 12.6,
+        "heatPerShot": 4.275,
+        "cooldown": 7.6,
+        "range": 472.5,
+        "rpm": 7.9
+      },
+      "3": {
+        "damage": 13.68,
+        "heatPerShot": 4.05,
+        "cooldown": 7.2,
+        "range": 495.0,
+        "rpm": 8.3
+      },
+      "4": {
+        "damage": 15.0,
+        "heatPerShot": 3.825,
+        "cooldown": 6.8,
+        "range": 517.5,
+        "rpm": 8.8
+      },
+      "5": {
+        "damage": 16.8,
+        "heatPerShot": 3.488,
+        "cooldown": 6.0,
+        "range": 562.5,
+        "rpm": 10.0
+      }
+    }
+  },
+  "MediumRifle_AmmoEquipment": {
+    "id": "MediumRifle_AmmoEquipment",
+    "name": "Medium Rifle Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 22
+  },
+  "MediumRifle_Burst": {
+    "id": "MediumRifle_Burst",
+    "name": "Medium Rifle Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 4.0,
+        "heatPerShot": 1.3,
+        "cooldown": 9.6,
+        "range": 360.0,
+        "rpm": 6.2
+      },
+      "1": {
+        "damage": 4.0,
+        "heatPerShot": 1.0,
+        "cooldown": 8.0,
+        "range": 450.0,
+        "rpm": 7.5
+      },
+      "2": {
+        "damage": 4.2,
+        "heatPerShot": 0.95,
+        "cooldown": 7.6,
+        "range": 472.5,
+        "rpm": 7.9
+      },
+      "3": {
+        "damage": 4.56,
+        "heatPerShot": 0.9,
+        "cooldown": 7.2,
+        "range": 495.0,
+        "rpm": 8.3
+      },
+      "4": {
+        "damage": 5.0,
+        "heatPerShot": 0.85,
+        "cooldown": 6.8,
+        "range": 517.5,
+        "rpm": 8.8
+      },
+      "5": {
+        "damage": 5.6,
+        "heatPerShot": 0.775,
+        "cooldown": 6.0,
+        "range": 562.5,
+        "rpm": 10.0
+      }
+    }
+  },
+  "MediumRifle_Half_AmmoEquipment": {
+    "id": "MediumRifle_Half_AmmoEquipment",
+    "name": "Medium Rifle Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 11
+  },
+  "NARC_AmmoEquipment": {
+    "id": "NARC_AmmoEquipment",
+    "name": "Narc Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 20
+  },
+  "NARC_Half_AmmoEquipment": {
+    "id": "NARC_Half_AmmoEquipment",
+    "name": "Narc Half Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 10
+  },
+  "NarcBeacon": {
+    "id": "NarcBeacon",
+    "name": "Narc Missile Beacon",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.85,
+        "range": 216.0,
+        "rpm": 15.6
+      },
+      "1": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.5,
+        "range": 270.0,
+        "rpm": 17.1
+      },
+      "2": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.413,
+        "range": 283.5,
+        "rpm": 17.6
+      },
+      "3": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.238,
+        "range": 297.0,
+        "rpm": 18.5
+      },
+      "4": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.975,
+        "range": 310.5,
+        "rpm": 20.2
+      },
+      "5": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.188,
+        "range": 337.5,
+        "rpm": 27.4
+      }
+    }
+  },
+  "NarcBeaconData": {
+    "id": "NarcBeaconData",
+    "name": "NarcBeaconData",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 0.0,
+    "slots": 1,
+    "tiers": null
+  },
+  "PPC": {
+    "id": "PPC",
+    "name": "PPC",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 10.0,
+        "heatPerShot": 9.6,
+        "cooldown": 6.0,
+        "range": 368.0,
+        "rpm": 10.0
+      },
+      "1": {
+        "damage": 10.0,
+        "heatPerShot": 8.0,
+        "cooldown": 5.0,
+        "range": 460.0,
+        "rpm": 12.0
+      },
+      "2": {
+        "damage": 10.5,
+        "heatPerShot": 7.6,
+        "cooldown": 4.875,
+        "range": 483.0,
+        "rpm": 12.3
+      },
+      "3": {
+        "damage": 11.4,
+        "heatPerShot": 7.2,
+        "cooldown": 4.75,
+        "range": 506.0,
+        "rpm": 12.6
+      },
+      "4": {
+        "damage": 12.5,
+        "heatPerShot": 6.8,
+        "cooldown": 4.6,
+        "range": 529.0,
+        "rpm": 13.0
+      },
+      "5": {
+        "damage": 14.0,
+        "heatPerShot": 6.2,
+        "cooldown": 4.25,
+        "range": 575.0,
+        "rpm": 14.1
+      }
+    }
+  },
+  "PPC_Shotgun": {
+    "id": "PPC_Shotgun",
+    "name": "PPC-X",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 8.4,
+        "cooldown": 3.0,
+        "range": 300.0,
+        "rpm": 20.0
+      },
+      "1": {
+        "damage": 3.0,
+        "heatPerShot": 7.0,
+        "cooldown": 2.5,
+        "range": 300.0,
+        "rpm": 24.0
+      },
+      "2": {
+        "damage": 3.15,
+        "heatPerShot": 6.65,
+        "cooldown": 2.438,
+        "range": 300.0,
+        "rpm": 24.6
+      },
+      "3": {
+        "damage": 3.45,
+        "heatPerShot": 6.51,
+        "cooldown": 2.375,
+        "range": 300.0,
+        "rpm": 25.3
+      },
+      "4": {
+        "damage": 3.75,
+        "heatPerShot": 6.16,
+        "cooldown": 2.275,
+        "range": 300.0,
+        "rpm": 26.4
+      },
+      "5": {
+        "damage": 4.11,
+        "heatPerShot": 6.02,
+        "cooldown": 2.075,
+        "range": 300.0,
+        "rpm": 28.9
+      }
+    }
+  },
+  "SRM2": {
+    "id": "SRM2",
+    "name": "SRM 2",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 1.08,
+        "cooldown": 3.08,
+        "range": 216.0,
+        "rpm": 19.5
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.9,
+        "cooldown": 2.8,
+        "range": 270.0,
+        "rpm": 21.4
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.855,
+        "cooldown": 2.66,
+        "range": 283.5,
+        "rpm": 22.6
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.81,
+        "cooldown": 2.52,
+        "range": 297.0,
+        "rpm": 23.8
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.765,
+        "cooldown": 2.38,
+        "range": 310.5,
+        "rpm": 25.2
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 2.1,
+        "range": 337.5,
+        "rpm": 28.6
+      }
+    }
+  },
+  "SRM2_Artemis": {
+    "id": "SRM2_Artemis",
+    "name": "SRM 2 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 1.08,
+        "cooldown": 3.08,
+        "range": 216.0,
+        "rpm": 19.5
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.9,
+        "cooldown": 2.8,
+        "range": 270.0,
+        "rpm": 21.4
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.855,
+        "cooldown": 2.66,
+        "range": 283.5,
+        "rpm": 22.6
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.81,
+        "cooldown": 2.52,
+        "range": 297.0,
+        "rpm": 23.8
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.765,
+        "cooldown": 2.38,
+        "range": 310.5,
+        "rpm": 25.2
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 2.1,
+        "range": 337.5,
+        "rpm": 28.6
+      }
+    }
+  },
+  "SRM2_Artemis_Stream": {
+    "id": "SRM2_Artemis_Stream",
+    "name": "SRM 2 Stream + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 1.08,
+        "cooldown": 2.343,
+        "range": 216.0,
+        "rpm": 25.6
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.9,
+        "cooldown": 2.13,
+        "range": 270.0,
+        "rpm": 28.2
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.855,
+        "cooldown": 2.023,
+        "range": 283.5,
+        "rpm": 29.7
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.81,
+        "cooldown": 1.917,
+        "range": 297.0,
+        "rpm": 31.3
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.765,
+        "cooldown": 1.81,
+        "range": 310.5,
+        "rpm": 33.1
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 1.597,
+        "range": 337.5,
+        "rpm": 37.6
+      }
+    }
+  },
+  "SRM2_Stream": {
+    "id": "SRM2_Stream",
+    "name": "SRM 2 Stream",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 0.918,
+        "cooldown": 2.508,
+        "range": 216.0,
+        "rpm": 23.9
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.9,
+        "cooldown": 2.28,
+        "range": 270.0,
+        "rpm": 26.3
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.855,
+        "cooldown": 2.166,
+        "range": 283.5,
+        "rpm": 27.7
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.81,
+        "cooldown": 2.052,
+        "range": 297.0,
+        "rpm": 29.2
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.765,
+        "cooldown": 1.938,
+        "range": 310.5,
+        "rpm": 31.0
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 1.71,
+        "range": 337.5,
+        "rpm": 35.1
+      }
+    }
+  },
+  "SRM4": {
+    "id": "SRM4",
+    "name": "SRM 4",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 0.81,
+        "cooldown": 3.74,
+        "range": 216.0,
+        "rpm": 16.0
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.675,
+        "cooldown": 3.4,
+        "range": 270.0,
+        "rpm": 17.6
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.641,
+        "cooldown": 3.23,
+        "range": 283.5,
+        "rpm": 18.6
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.608,
+        "cooldown": 3.06,
+        "range": 297.0,
+        "rpm": 19.6
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.574,
+        "cooldown": 2.89,
+        "range": 310.5,
+        "rpm": 20.8
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.506,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    }
+  },
+  "SRM4_Artemis": {
+    "id": "SRM4_Artemis",
+    "name": "SRM 4 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 0.81,
+        "cooldown": 3.74,
+        "range": 216.0,
+        "rpm": 16.0
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.675,
+        "cooldown": 3.4,
+        "range": 270.0,
+        "rpm": 17.6
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.641,
+        "cooldown": 3.23,
+        "range": 283.5,
+        "rpm": 18.6
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.608,
+        "cooldown": 3.06,
+        "range": 297.0,
+        "rpm": 19.6
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.574,
+        "cooldown": 2.89,
+        "range": 310.5,
+        "rpm": 20.8
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.506,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    }
+  },
+  "SRM4_Artemis_Stream": {
+    "id": "SRM4_Artemis_Stream",
+    "name": "SRM 4 Stream + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 0.81,
+        "cooldown": 2.343,
+        "range": 216.0,
+        "rpm": 25.6
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.675,
+        "cooldown": 2.13,
+        "range": 270.0,
+        "rpm": 28.2
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.641,
+        "cooldown": 2.023,
+        "range": 283.5,
+        "rpm": 29.7
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.608,
+        "cooldown": 1.917,
+        "range": 297.0,
+        "rpm": 31.3
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.574,
+        "cooldown": 1.81,
+        "range": 310.5,
+        "rpm": 33.1
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.506,
+        "cooldown": 1.597,
+        "range": 337.5,
+        "rpm": 37.6
+      }
+    }
+  },
+  "SRM4_Stream": {
+    "id": "SRM4_Stream",
+    "name": "SRM 4 Stream",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 0.81,
+        "cooldown": 2.255,
+        "range": 216.0,
+        "rpm": 26.6
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.675,
+        "cooldown": 2.05,
+        "range": 270.0,
+        "rpm": 29.3
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.641,
+        "cooldown": 1.947,
+        "range": 283.5,
+        "rpm": 30.8
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.608,
+        "cooldown": 1.845,
+        "range": 297.0,
+        "rpm": 32.5
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.574,
+        "cooldown": 1.742,
+        "range": 310.5,
+        "rpm": 34.4
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.506,
+        "cooldown": 1.537,
+        "range": 337.5,
+        "rpm": 39.0
+      }
+    }
+  },
+  "SRM6": {
+    "id": "SRM6",
+    "name": "SRM 6",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 0.72,
+        "cooldown": 3.74,
+        "range": 216.0,
+        "rpm": 16.0
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.6,
+        "cooldown": 3.4,
+        "range": 270.0,
+        "rpm": 17.6
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.57,
+        "cooldown": 3.23,
+        "range": 283.5,
+        "rpm": 18.6
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.54,
+        "cooldown": 3.06,
+        "range": 297.0,
+        "rpm": 19.6
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.51,
+        "cooldown": 2.89,
+        "range": 310.5,
+        "rpm": 20.8
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.45,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    }
+  },
+  "SRM6_Artemis": {
+    "id": "SRM6_Artemis",
+    "name": "SRM 6 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 4.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 0.72,
+        "cooldown": 3.74,
+        "range": 216.0,
+        "rpm": 16.0
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.6,
+        "cooldown": 3.4,
+        "range": 270.0,
+        "rpm": 17.6
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.57,
+        "cooldown": 3.23,
+        "range": 283.5,
+        "rpm": 18.6
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.54,
+        "cooldown": 3.06,
+        "range": 297.0,
+        "rpm": 19.6
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.51,
+        "cooldown": 2.89,
+        "range": 310.5,
+        "rpm": 20.8
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.45,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    }
+  },
+  "SRM6_Artemis_Stream": {
+    "id": "SRM6_Artemis_Stream",
+    "name": "SRM 6 Stream + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 4.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 0.72,
+        "cooldown": 2.255,
+        "range": 216.0,
+        "rpm": 26.6
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.6,
+        "cooldown": 2.05,
+        "range": 270.0,
+        "rpm": 29.3
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.57,
+        "cooldown": 1.947,
+        "range": 283.5,
+        "rpm": 30.8
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.54,
+        "cooldown": 1.845,
+        "range": 297.0,
+        "rpm": 32.5
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.51,
+        "cooldown": 1.742,
+        "range": 310.5,
+        "rpm": 34.4
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.45,
+        "cooldown": 1.537,
+        "range": 337.5,
+        "rpm": 39.0
+      }
+    }
+  },
+  "SRM6_Stream": {
+    "id": "SRM6_Stream",
+    "name": "SRM 6 Stream",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 0.72,
+        "cooldown": 2.255,
+        "range": 216.0,
+        "rpm": 26.6
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.6,
+        "cooldown": 2.05,
+        "range": 270.0,
+        "rpm": 29.3
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.6,
+        "cooldown": 1.947,
+        "range": 283.5,
+        "rpm": 30.8
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.6,
+        "cooldown": 1.845,
+        "range": 297.0,
+        "rpm": 32.5
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.6,
+        "cooldown": 1.742,
+        "range": 310.5,
+        "rpm": 34.4
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.6,
+        "cooldown": 1.537,
+        "range": 337.5,
+        "rpm": 39.0
+      }
+    }
+  },
+  "SRM_AmmoEquipment": {
+    "id": "SRM_AmmoEquipment",
+    "name": "SRM Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 320
+  },
+  "SRM_Artemis_AmmoEquipment": {
+    "id": "SRM_Artemis_AmmoEquipment",
+    "name": "SRM Artemis Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 320
+  },
+  "SRM_Artemis_Half_AmmoEquipment": {
+    "id": "SRM_Artemis_Half_AmmoEquipment",
+    "name": "SRM Artemis Half Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 160
+  },
+  "SRM_Half_AmmoEquipment": {
+    "id": "SRM_Half_AmmoEquipment",
+    "name": "SRM Half Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 160
+  },
+  "SRM_Streak_AmmoEquipment": {
+    "id": "SRM_Streak_AmmoEquipment",
+    "name": "Streak SRM Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 320
+  },
+  "SRM_Streak_Half_AmmoEquipment": {
+    "id": "SRM_Streak_Half_AmmoEquipment",
+    "name": "Streak SRM Half Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 160
+  },
+  "SUPERCHARGER_Arena_MKII": {
+    "id": "SUPERCHARGER_Arena_MKII",
+    "name": "Arena Supercharger MK II",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": null
+  },
+  "SingleHeatSink": {
+    "id": "SingleHeatSink",
+    "name": "Single Heat Sink",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "cooling": 0.1,
+    "tiers": null
+  },
+  "SmallChemLaser_AmmoEquipment": {
+    "id": "SmallChemLaser_AmmoEquipment",
+    "name": "S Chem Laser Ammo",
+    "type": "ammo",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 180
+  },
+  "SmallChemLaser_Half_AmmoEquipment": {
+    "id": "SmallChemLaser_Half_AmmoEquipment",
+    "name": "S Chem Laser Half Ammo",
+    "type": "ammo",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 90
+  },
+  "SmallChemicalLaser": {
+    "id": "SmallChemicalLaser",
+    "name": "Small Chemical Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.5,
+        "heatPerShot": 0.12,
+        "cooldown": 2.16,
+        "range": 120.0,
+        "rpm": 27.8
+      },
+      "1": {
+        "damage": 2.5,
+        "heatPerShot": 0.1,
+        "cooldown": 1.8,
+        "range": 150.0,
+        "rpm": 33.3
+      },
+      "2": {
+        "damage": 2.62,
+        "heatPerShot": 0.095,
+        "cooldown": 1.755,
+        "range": 157.5,
+        "rpm": 34.2
+      },
+      "3": {
+        "damage": 2.75,
+        "heatPerShot": 0.09,
+        "cooldown": 1.71,
+        "range": 165.0,
+        "rpm": 35.1
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.085,
+        "cooldown": 1.656,
+        "range": 172.5,
+        "rpm": 36.2
+      },
+      "5": {
+        "damage": 3.25,
+        "heatPerShot": 0.075,
+        "cooldown": 1.53,
+        "range": 187.5,
+        "rpm": 39.2
+      }
+    }
+  },
+  "SmallLaser": {
+    "id": "SmallLaser",
+    "name": "Small Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 3.0,
+        "heatPerShot": 0.9,
+        "cooldown": 2.7,
+        "range": 120.0,
+        "rpm": 22.2
+      },
+      "1": {
+        "damage": 3.0,
+        "heatPerShot": 0.75,
+        "cooldown": 2.25,
+        "range": 150.0,
+        "rpm": 26.7
+      },
+      "2": {
+        "damage": 3.15,
+        "heatPerShot": 0.712,
+        "cooldown": 2.194,
+        "range": 157.5,
+        "rpm": 27.3
+      },
+      "3": {
+        "damage": 3.3,
+        "heatPerShot": 0.675,
+        "cooldown": 2.137,
+        "range": 165.0,
+        "rpm": 28.1
+      },
+      "4": {
+        "damage": 3.6,
+        "heatPerShot": 0.637,
+        "cooldown": 2.07,
+        "range": 172.5,
+        "rpm": 29.0
+      },
+      "5": {
+        "damage": 3.9,
+        "heatPerShot": 0.562,
+        "cooldown": 1.912,
+        "range": 187.5,
+        "rpm": 31.4
+      }
+    }
+  },
+  "SmallLaser_ShortBurst": {
+    "id": "SmallLaser_ShortBurst",
+    "name": "Small Laser Short Burst",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.0,
+        "heatPerShot": 0.48,
+        "cooldown": 1.8,
+        "range": 120.0,
+        "rpm": 33.3
+      },
+      "1": {
+        "damage": 2.0,
+        "heatPerShot": 0.4,
+        "cooldown": 1.5,
+        "range": 150.0,
+        "rpm": 40.0
+      },
+      "2": {
+        "damage": 2.1,
+        "heatPerShot": 0.38,
+        "cooldown": 1.462,
+        "range": 157.5,
+        "rpm": 41.0
+      },
+      "3": {
+        "damage": 2.2,
+        "heatPerShot": 0.36,
+        "cooldown": 1.425,
+        "range": 165.0,
+        "rpm": 42.1
+      },
+      "4": {
+        "damage": 2.4,
+        "heatPerShot": 0.34,
+        "cooldown": 1.38,
+        "range": 172.5,
+        "rpm": 43.5
+      },
+      "5": {
+        "damage": 2.6,
+        "heatPerShot": 0.3,
+        "cooldown": 1.275,
+        "range": 187.5,
+        "rpm": 47.1
+      }
+    }
+  },
+  "SmallPulseLaser": {
+    "id": "SmallPulseLaser",
+    "name": "Small Pulse Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 3.0,
+        "heatPerShot": 1.2,
+        "cooldown": 2.28,
+        "range": 88.0,
+        "rpm": 26.3
+      },
+      "1": {
+        "damage": 3.0,
+        "heatPerShot": 1.0,
+        "cooldown": 1.9,
+        "range": 110.0,
+        "rpm": 31.6
+      },
+      "2": {
+        "damage": 3.15,
+        "heatPerShot": 0.95,
+        "cooldown": 1.852,
+        "range": 115.5,
+        "rpm": 32.4
+      },
+      "3": {
+        "damage": 3.3,
+        "heatPerShot": 0.9,
+        "cooldown": 1.805,
+        "range": 121.0,
+        "rpm": 33.2
+      },
+      "4": {
+        "damage": 3.6,
+        "heatPerShot": 0.85,
+        "cooldown": 1.748,
+        "range": 126.5,
+        "rpm": 34.3
+      },
+      "5": {
+        "damage": 3.9,
+        "heatPerShot": 0.75,
+        "cooldown": 1.615,
+        "range": 137.5,
+        "rpm": 37.2
+      }
+    }
+  },
+  "StreakSRM2": {
+    "id": "StreakSRM2",
+    "name": "Streak SRM 2",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 1.08,
+        "cooldown": 2.2,
+        "range": 216.0,
+        "rpm": 27.3
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.9,
+        "cooldown": 2.0,
+        "range": 270.0,
+        "rpm": 30.0
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.855,
+        "cooldown": 1.9,
+        "range": 283.5,
+        "rpm": 31.6
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.81,
+        "cooldown": 1.8,
+        "range": 297.0,
+        "rpm": 33.3
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.765,
+        "cooldown": 1.7,
+        "range": 310.5,
+        "rpm": 35.3
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 1.5,
+        "range": 337.5,
+        "rpm": 40.0
+      }
+    }
+  },
+  "StreakSRM2_Stream": {
+    "id": "StreakSRM2_Stream",
+    "name": "Streak SRM 2 Stream",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 1.08,
+        "cooldown": 1.98,
+        "range": 216.0,
+        "rpm": 30.3
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.9,
+        "cooldown": 1.8,
+        "range": 270.0,
+        "rpm": 33.3
+      },
+      "2": {
+        "damage": 2.52,
+        "heatPerShot": 0.855,
+        "cooldown": 1.71,
+        "range": 283.5,
+        "rpm": 35.1
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.81,
+        "cooldown": 1.62,
+        "range": 297.0,
+        "rpm": 37.0
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.765,
+        "cooldown": 1.53,
+        "range": 310.5,
+        "rpm": 39.2
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 1.35,
+        "range": 337.5,
+        "rpm": 44.4
+      }
+    }
+  },
+  "Supercharger_Arena_MKI": {
+    "id": "Supercharger_Arena_MKI",
+    "name": "Arena Supercharger MK I",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 1,
+    "tiers": null
+  },
+  "Supercharger_Arena_MKIII": {
+    "id": "Supercharger_Arena_MKIII",
+    "name": "Arena Supercharger MK III",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 4.5,
+    "slots": 3,
+    "tiers": null
+  },
+  "Supercharger_Arena_MKIV": {
+    "id": "Supercharger_Arena_MKIV",
+    "name": "Arena Supercharger MK IV",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 6.0,
+    "slots": 4,
+    "tiers": null
+  },
+  "Supercharger_Arena_MKV": {
+    "id": "Supercharger_Arena_MKV",
+    "name": "Arena Supercharger MK V",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 7.5,
+    "slots": 5,
+    "tiers": null
+  },
+  "TAG": {
+    "id": "TAG",
+    "name": "Target Acquisition Gear",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 360.0,
+        "rpm": 0.0
+      },
+      "1": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 450.0,
+        "rpm": 0.0
+      },
+      "2": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 472.5,
+        "rpm": 0.0
+      },
+      "3": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 495.0,
+        "rpm": 0.0
+      },
+      "4": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 517.5,
+        "rpm": 0.0
+      },
+      "5": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 562.5,
+        "rpm": 0.0
+      }
+    }
+  },
+  "TargetingComputer_Mk1": {
+    "id": "TargetingComputer_Mk1",
+    "name": "Targeting Computer Mk1",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null
+  },
+  "TargetingComputer_Mk2": {
+    "id": "TargetingComputer_Mk2",
+    "name": "Targeting Computer Mk2",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 2,
+    "tiers": null
+  },
+  "TargetingComputer_Mk3": {
+    "id": "TargetingComputer_Mk3",
+    "name": "Targeting Computer Mk3",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 3,
+    "tiers": null
+  },
+  "TargetingComputer_Mk4": {
+    "id": "TargetingComputer_Mk4",
+    "name": "Targeting Computer Mk4",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 4.0,
+    "slots": 4,
+    "tiers": null
+  },
+  "TargetingComputer_Mk5": {
+    "id": "TargetingComputer_Mk5",
+    "name": "Targeting Computer Mk5",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 5.0,
+    "slots": 5,
+    "tiers": null
+  },
+  "TargetingComputer_Mk6": {
+    "id": "TargetingComputer_Mk6",
+    "name": "Targeting Computer Mk6",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 6.0,
+    "slots": 6,
+    "tiers": null
+  },
+  "TargetingComputer_Mk7": {
+    "id": "TargetingComputer_Mk7",
+    "name": "Targeting Computer Mk7",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 7.0,
+    "slots": 7,
+    "tiers": null
+  },
+  "UltraAutocannon5": {
+    "id": "UltraAutocannon5",
+    "name": "Ultra Autocannon/5 Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 9.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 1.52,
+        "heatPerShot": 0.227,
+        "cooldown": 1.26,
+        "range": 480.0,
+        "rpm": 47.6
+      },
+      "1": {
+        "damage": 1.52,
+        "heatPerShot": 0.175,
+        "cooldown": 1.05,
+        "range": 600.0,
+        "rpm": 57.1
+      },
+      "2": {
+        "damage": 1.6,
+        "heatPerShot": 0.166,
+        "cooldown": 0.997,
+        "range": 630.0,
+        "rpm": 60.2
+      },
+      "3": {
+        "damage": 1.68,
+        "heatPerShot": 0.158,
+        "cooldown": 0.945,
+        "range": 660.0,
+        "rpm": 63.5
+      },
+      "4": {
+        "damage": 1.83,
+        "heatPerShot": 0.149,
+        "cooldown": 0.892,
+        "range": 690.0,
+        "rpm": 67.3
+      },
+      "5": {
+        "damage": 1.98,
+        "heatPerShot": 0.136,
+        "cooldown": 0.788,
+        "range": 750.0,
+        "rpm": 76.1
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+Begin Object Class=/Script/MechWarrior.MWAMSWeaponDataAsset Name="AntiMissileSystem"
+   DEPRECATED_CBillBaseValue=200000
+   CBillBaseValueBigInt=(Value=200000)
+   AmmoType=(TagName="Ammo.Ballistic.AMS")
+   MissileDestructionRate=3.500000
+   RateOfFire=30.000000
+   EffectsAsset=/Game/Objects/Projectiles/AMS/AMSEffects.AMSEffects_C
+   Ranges=(OptimalRange=20000.000000,MaxRange=20000.000000)
+   TechLevel=1
+   Name=NSLOCTEXT("[3278C0B944570D86B05648ADB3E2CE78]", "37D3CF434503EE878290D7BD3E3ADEDF", "AMS")
+   ShortName=NSLOCTEXT("[3278C0B944570D86B05648ADB3E2CE78]", "3DCBD17B43BB0B1AD1AC87AF0CF274CD", "AMS")
+   Manufacturer="SureFire 444"
+   WeaponType=(TagName="Weapon.AMS")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=0.500000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:AMS_SlotType")
+   WeaponDisplayColour=(R=0.473532,G=0.084376,B=0.093059,A=1.000000)
+   IntroDate=3040.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   Image=/Game/UI/Textures/Marketplace_Equipment/AMS_512_UIX.AMS_512_UIX
+   SalvageShareCost=2
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_AMS.WeaponEmitter_AMS_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Equipment/Model/Equipment_AMS_Market_STM.Equipment_AMS_Market_STM
+   Description=NSLOCTEXT("", "6F5C17254F071EEEAC52489900914491", "Automated rapid-fire weapon that tracks and shoots down missiles.")
+End Object

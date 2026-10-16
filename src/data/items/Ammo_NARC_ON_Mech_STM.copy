@@ -1,0 +1,41 @@
+Begin Object Class=/Script/Engine.StaticMesh Name="Ammo_NARC_ON_Mech_STM"
+   Begin Object Class=/Script/UnrealEd.SceneThumbnailInfo Name="SceneThumbnailInfo_0"
+   End Object
+   Begin Object Class=/Script/NavigationSystem.NavCollision Name="NavCollision_1"
+   End Object
+   Begin Object Class=/Script/UnrealEd.FbxStaticMeshImportData Name="FbxStaticMeshImportData_0"
+   End Object
+   Begin Object Class=/Script/Engine.BodySetup Name="BodySetup_0"
+   End Object
+   Begin Object Class=/Script/Engine.AssetImportData Name="AssetImportData"
+   End Object
+   Begin Object Name="SceneThumbnailInfo_0"
+   End Object
+   Begin Object Name="NavCollision_1"
+   End Object
+   Begin Object Name="FbxStaticMeshImportData_0"
+      ImportMaterialOriginalNameData(0)="Material #48"
+      ImportMaterialOriginalNameData(1)="Material #49"
+      ImportMeshLodData(0)=(SectionOriginalMaterialName=("Material #48","Material #49"))
+   End Object
+   Begin Object Name="BodySetup_0"
+      AggGeom=(ConvexElems=((VertexData=((X=9.099602,Y=28.025400,Z=-18.974602),(X=9.099602,Y=11.349602,Z=-35.650398),(X=9.099602,Y=-11.349590,Z=-35.650402),(X=9.099602,Y=-28.025398,Z=-18.974596),(X=9.099602,Y=-28.025400,Z=18.974594),(X=9.099602,Y=-11.349598,Z=35.650398),(X=9.099602,Y=11.349600,Z=35.650402),(X=9.099602,Y=28.025398,Z=18.974604),(X=-114.468925,Y=-14.156080,Z=-14.156073),(X=-114.468925,Y=14.156073,Z=-14.156073),(X=-114.468925,Y=14.156078,Z=14.156076),(X=-114.468925,Y=-14.156075,Z=14.156073),(X=-90.465469,Y=38.159531,Z=-8.840468),(X=-1.034538,Y=38.159531,Z=-8.840466),(X=-1.034534,Y=38.159531,Z=8.840462),(X=-90.465462,Y=38.159531,Z=8.840465),(X=-1.034800,Y=-38.159798,Z=-8.840196),(X=-90.465202,Y=-38.159798,Z=-8.840202),(X=-90.465202,Y=-38.159798,Z=8.840194),(X=-1.034798,Y=-38.159798,Z=8.840197),(X=-90.466087,Y=8.841091,Z=38.158909),(X=6.591095,Y=8.841091,Z=38.158909),(X=6.591098,Y=-8.841089,Z=38.158909),(X=-90.466103,Y=-8.841084,Z=38.158909),(X=-90.465446,Y=-8.840446,Z=-38.159557),(X=6.590439,Y=-8.840443,Z=-38.159557),(X=6.590440,Y=8.840441,Z=-38.159557),(X=-90.465446,Y=8.840443,Z=-38.159557),(X=-105.125000,Y=23.500002,Z=23.500000),(X=-105.125000,Y=-23.499989,Z=-23.499998),(X=-105.125000,Y=23.500000,Z=-23.500000),(X=-105.125000,Y=-23.499998,Z=23.500000)),ElemBox=(Min=(X=-114.468925,Y=-38.159798,Z=-38.159557),Max=(X=9.099602,Y=38.159531,Z=38.158909),IsValid=1))))
+      DefaultInstance=(ObjectType=ECC_WorldStatic,CollisionProfileName="BlockAll")
+   End Object
+   Begin Object Name="AssetImportData"
+   End Object
+   SourceModels(0)=(BuildSettings=(bRecomputeNormals=False))
+   SectionInfoMap=(Map=((0, ()),(1, (MaterialIndex=1))))
+   OriginalSectionInfoMap=(Map=((0, ()),(1, (MaterialIndex=1))))
+   ImportVersion=1
+   LightmapUVVersion=6
+   StaticMaterials(0)=(MaterialInterface=MaterialInstanceConstant'"/Game/Objects/Marketplace/weapons/Material/Ammo_Missiles_MTI.Ammo_Missiles_MTI"',MaterialSlotName="Narc_Missile_Sub",ImportedMaterialSlotName="Material #48",UVChannelData=(bInitialized=True,LocalUVDensities[0]=337.714325,LocalUVDensities[1]=219.955399))
+   StaticMaterials(1)=(MaterialInterface=Material'"/Game/Objects/Weapons/NarcBeacon/Ammo_NARC_ON_Mech_Glow_MAT.Ammo_NARC_ON_Mech_Glow_MAT"',MaterialSlotName="Narc_Glow_Sub",ImportedMaterialSlotName="Material #49",UVChannelData=(bInitialized=True,LocalUVDensities[0]=167.036652,LocalUVDensities[1]=220.093735))
+   LightmapUVDensity=219.957916
+   LightMapResolution=64
+   LightMapCoordinateIndex=1
+   AssetImportData=FbxStaticMeshImportData'"FbxStaticMeshImportData_0"'
+   ThumbnailInfo=SceneThumbnailInfo'"SceneThumbnailInfo_0"'
+   EditorCameraPosition=(bIsSet=True,CamOrbitPoint=(X=11.667502,Y=11.592470,Z=-0.000137),CamOrbitZoom=(X=-6.067373,Y=231.692963,Z=138.438431),CamOrbitRotation=(Pitch=-30.850018,Yaw=-181.500076,Roll=-0.000008))
+   ExtendedBounds=(Origin=(X=-52.684662,Y=-0.000130,Z=-0.000324),BoxExtent=(X=61.684265,Y=38.059669,Z=38.059235),SphereRadius=70.782043)
+End Object

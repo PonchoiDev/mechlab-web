@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="UltraAutocannon5_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=400000,CBillBaseValueBigInt=(Value=400000),Projectile=(NumberOfTimesToFire=4,DelayBetweenFiring=0.150000,NumberOfProjectiles=1,SpreadRadius=350.000000,SpreadDistance=35000.000000,Damage=1.525000,Speed=120000.000000,GravityScale=0.500000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=450.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/UAC5_Fire.UAC5_Fire,Class=/Game/Objects/Projectiles/UAC5/Projectile_UltraAC5.Projectile_UltraAC5_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Tny.Shockwave_Tny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/burst_recoil_medium.burst_recoil_medium_C,HeatGenerated=0.175000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=1.050000,bCooldownInterruptable=True,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,bWeaponCanJam=True,MaxJamChance=0.300000,WeaponJammingData=((ClearTime=6.000000,CooldownBarRatio=33.330002),(ClearTime=4.000000,CooldownBarRatio=33.330002),(ClearTime=3.000000,CooldownBarRatio=33.330002)),Range=(OptimalRange=60000.000000,MaxRange=60000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Ultra.AC5"),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=600,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1200,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="UltraAutocannon5")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/IdealJamRatio_Quirk.IdealJamRatio_Quirk_C"',Value=-10.000000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   BattleValueAdjustment=-26
+   Name=NSLOCTEXT("[53D86DA5467C3B37CD8F23A144C24718]", "32675B514141CE0CB6C9EC84FC25C2E8", "Ultra Autocannon/5 Burst Fire")
+   ShortName=NSLOCTEXT("[53D86DA5467C3B37CD8F23A144C24718]", "C4E8E88A47782ED80196969E677787EE", "UAC/5-BF")
+   Manufacturer="Deleon 5UB"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.Ultra.AC5.Burst")
+   TechBase=(TagName="TechBase.LosTech")
+   Tonnage=9.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:UltraAC5_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=3035.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/UAC5_512_UIX.UAC5_512_UIX
+   SalvageShareCost=2
+   SalvageChance=0.800000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/UAC5_STM.UAC5_STM
+   Description=NSLOCTEXT("", "A1BB3E734EE2C0579BCF8880DCED2256", "Ballistic weapon with long range and medium damage.  Can be fired during its cooldown, but at the risk of jamming.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.150000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.075000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

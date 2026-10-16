@@ -1,0 +1,26 @@
+Begin Object Class=/Script/MechWarrior.MWJumpJetDataAsset Name="JumpJet_Class5_Equipment"
+   InitialVelocityZ=1250.000000
+   BurnTime=2.750000
+   RegenTime=8.000000
+   UpwardBias=0.150000
+   ChangeOfDirectionMultiplier=2.000000
+   HeatGenerationCurve=CurveFloat'"/Game/Objects/Mechs/_common/Equipment/JumpJets/Config/JumpJet_Class5_HeatGeneration_Curve.JumpJet_Class5_HeatGeneration_Curve"'
+   AccelZCurve=CurveFloat'"/Game/Objects/Mechs/_common/Equipment/JumpJets/Config/JumpJet_Class5_AccelZ_Curve.JumpJet_Class5_AccelZ_Curve"'
+   AccelXYCurve=CurveFloat'"/Game/Objects/Mechs/_common/Equipment/JumpJets/Config/JumpJet_Class5_AccelXY_Curve.JumpJet_Class5_AccelXY_Curve"'
+   EquipmentType=(TagName="Equipment.JumpJets.Class5")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:JumpJetClass5_SlotType")
+   Name=NSLOCTEXT("[D33FFA2743113009829282828B6A5E19]", "B622AF944A4E47D47FCF97AE5F202F39", "Jump Jets Class V")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=2471.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=44000.000000
+   CBillBaseValueBigInt=(Value=44000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   SalvageShareCost=1
+   SalvageChance=0.400000
+   EquipmentImage=/Game/UI/Textures/Marketplace_Equipment/Jumpjet_512_UIX.Jumpjet_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Equipment/Model/Equipment_Jumpjet_Market_STM.Equipment_Jumpjet_Market_STM
+   Description=NSLOCTEXT("[D33FFA2743113009829282828B6A5E19]", "45C70BEC4B524B5D3B90B5B0ECD69C8E", "A thruster that allows a \'Mech to temporarily take flight.  Designed for \'Mechs weighing 20 - 35 tons.")
+End Object

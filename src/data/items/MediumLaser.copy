@@ -1,0 +1,33 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="MediumLaser"
+   StatsData=(DEPRECATED_CBillBaseValue=80000,CBillBaseValueBigInt=(Value=80000),Cooldown=4.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownErrorEvent=/Game/Audio/Events/Cockpit/Cooldown_Error.Cooldown_Error,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=5.000000,HeatGeneratedOverDuration=2.250000,Duration=1.000000,RayAsset=/Game/Objects/Projectiles/MediumLaser/Ray_MediumLaser.Ray_MediumLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/medium_laser.medium_laser,TraceBypassSound=/Game/Audio/Events/Weapons/Energy/MLaser_Beam.MLaser_Beam,DamagePaintStats=(BrushStrength=0.600000)),Ranges=(OptimalRange=27000.000000,MaxRange=40500.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MediumLaser")
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=1.500000
+   TechLevel=1
+   Name=NSLOCTEXT("[EC4CC067477EFE06D03661B66B4BB999]", "9A9D02CE4D7331C3CABC7A98719B7512", "Medium Laser")
+   ShortName=NSLOCTEXT("[EC4CC067477EFE06D03661B66B4BB999]", "D12C994A4DAA7F2DC7385CB212418727", "M Laser")
+   Manufacturer="Magna Mk.II"
+   WeaponType=(TagName="Weapon.Energy.Laser.Standard.Medium")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=1.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MediumLaser_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Laser_M_512_UIX.Laser_M_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_Laser_M_Market_STM.Weapon_Laser_M_Market_STM
+   Description=NSLOCTEXT("", "18A6E73443D6A1D1BE009EAFBCA5C5B1", "Medium-powered energy weapon with medium range and medium damage.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.035000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.015000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

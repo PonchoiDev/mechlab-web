@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="LRM_Artemis_Half_AmmoEquipment"
+   Capacity=220.000000
+   ExplosionDamagePerRound=1.000000
+   AmmoType=(TagName="Ammo.Missile.LRM.Artemis")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[4D3BF6D4404DD1AD596066B9679A40BC]", "837211A34CCD4C575D1945B3943ED8F2", "LRM Artemis Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=3035.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=60000.000000
+   CBillBaseValueBigInt=(Value=60000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=0.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_ALRM_Half_512_UIX.Ammo_ALRM_Half_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/weapons/Model/Ammo_ALRM_Market_STM.Ammo_ALRM_Market_STM
+   Description=NSLOCTEXT("[4D3BF6D4404DD1AD596066B9679A40BC]", "CC24176247D37FFF3097298BDF0ABDAA", "One-half ton of ammunition for the Artemis IV equipped long-range missile launchers.")
+End Object

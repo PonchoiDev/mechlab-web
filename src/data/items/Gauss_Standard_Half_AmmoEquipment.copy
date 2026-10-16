@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="Gauss_Standard_Half_AmmoEquipment"
+   Capacity=13.000000
+   AmmoType=(TagName="Ammo.Ballistic.Gauss.Standard")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[E60B39CF4EC1D8C124FA6691877BF667]", "7448BEEA40E0529383712FB7100718DE", "Gauss Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=3040.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=20000.000000
+   CBillBaseValueBigInt=(Value=20000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_Gauss_Half_512_UIX.Ammo_Gauss_Half_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_Gauss_Market_STM.Ammo_Gauss_Market_STM
+   Description=NSLOCTEXT("[E60B39CF4EC1D8C124FA6691877BF667]", "93A47F554BC3420C0893C593DDA42257", "One-half ton of ammunition for the Gauss Rifle.")
+End Object

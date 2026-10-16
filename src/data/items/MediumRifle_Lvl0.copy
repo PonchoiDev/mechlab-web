@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="MediumRifle_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=75500,CBillBaseValueBigInt=(Value=75500),Projectile=(NumberOfProjectiles=1,Damage=12.000000,Speed=90000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=3000.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/Rifle_Medium.Rifle_Medium,FireReloadSound=/Game/Audio/Events/Weapons/Ballistics/AC5_Reload.AC5_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/MechRifle/Projectile_MechRifle_Large.Projectile_MechRifle_Large_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Medium.Shockwave_Medium_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_heavy.single_recoil_heavy_C,HeatGenerated=4.500000,DamagePaintStats=(BrushRadius=150.000000,BrushStrength=2.000000)),Cooldown=8.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=45000.000000,MaxRange=45000.000000),AmmoType=(TagName="Ammo.Ballistic.Rifle.Medium"),MWO_RangeData=(Ranges=((Distance=1,InterpolationType="linear"),(Distance=720,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1440,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MediumRifle")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   Name=NSLOCTEXT("[7B7C8BE24673A0A790E45D87F3AF201B]", "B917B3A345297963805578AF493FD701", "Medium Rifle")
+   ShortName=NSLOCTEXT("[7B7C8BE24673A0A790E45D87F3AF201B]", "E21A6B284E10C81BA34D2990C33F912C", "Medium Rifle")
+   Manufacturer="Circinus Federated"
+   WeaponType=(TagName="Weapon.Ballistic.Rifle.MediumRifle")
+   TechBase=(TagName="TechBase.Retro")
+   Tonnage=5.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Ballistic_Medium_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=2000,RemoveCBillCost=2000,RepairCBillCost=2000)
+   DamageChance=0.150000
+   Image=/Game/DLC1/UI/Textures/Marketplace_Weapons/Mech_Rifle_M_512_UIX.Mech_Rifle_M_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC1/Objects/Marketplace/Weapons/Model/Weapon_Mech_Rifle_M_Market_STM.Weapon_Mech_Rifle_M_Market_STM
+   Description=NSLOCTEXT("[7B7C8BE24673A0A790E45D87F3AF201B]", "848BE4954301C8EDAE37058DB146DCFD", "Single shell cannon dealing high upfront damage, but at the cost of a lengthy reload cycle.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+   OnImpactForceFeedback=(FeedbackIntensity=0.275000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.137500,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

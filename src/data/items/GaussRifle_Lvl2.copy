@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="GaussRifle_Lvl2"
+   StatsData=(DEPRECATED_CBillBaseValue=600000,CBillBaseValueBigInt=(Value=600000),Projectile=(NumberOfProjectiles=1,Damage=15.000000,Speed=200000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=3000.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/Gauss_Fire.Gauss_Fire,Class=/Game/Objects/Projectiles/Gauss/Projectile_Gauss.Projectile_Gauss_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Tny.Shockwave_Tny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_assault.single_recoil_assault_C,HeatGenerated=1.000000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=6.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=66000.000000,MaxRange=66000.000000),AmmoType=(TagName="Ammo.Ballistic.Gauss.Standard"),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=660,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1320,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="GaussRifle")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/Damage_Quirk.Damage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.025000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.250000)))
+   TechLevel=2
+   BattleValueAdjustment=37
+   Name=NSLOCTEXT("[2F85927F4BE048CDEA0C898DF2C09F1B]", "C223A62A4670FE55B4B773AB74C194A5", "Gauss Rifle")
+   ShortName=NSLOCTEXT("[2F85927F4BE048CDEA0C898DF2C09F1B]", "834E059942B62C71F33A38B96F157636", "Gauss")
+   Manufacturer="Zeus Slingshot"
+   WeaponType=(TagName="Weapon.Ballistic.GaussRifle.Gauss")
+   TechBase=(TagName="TechBase.LosTech")
+   Tonnage=15.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:GaussRifle_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=3040.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=30.000000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Gauss_512_UIX.Gauss_512_UIX
+   SalvageShareCost=5
+   bMechEquippable=True
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_Gauss_Market_STM.Weapon_Gauss_Market_STM
+   Description=NSLOCTEXT("", "0965471043E756579E4E8BBD77FF3FF4", "Ballistic weapon with very long range and high damage.  Will explode if destroyed.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.350000,FeedbackDuration=0.100000,bUseLargeMotors=True,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.175000,FeedbackDuration=0.100000,bUseLargeMotors=True,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

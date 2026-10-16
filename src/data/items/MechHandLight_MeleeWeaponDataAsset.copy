@@ -1,0 +1,22 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="MechHandLight_MeleeWeaponDataAsset"
+   StatsData=(Cooldown=3.250000,Melee=(Damage=10.000000,Duration=1.000000,ActivationTime=0.500000,Impulse=1250000.000000,MeleePriority=10,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_L_Punch.MechMeleeStrike_L_Punch_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_Punch/Melee_ArmSwing.Melee_ArmSwing,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000)),Ranges=(OptimalRange=1750.000000,MaxRange=1750.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MechHandActuator_Light")
+   BuildingDamageModifier=5.000000
+   TechLevel=-1
+   Name=NSLOCTEXT("[3EFFE30449B4D6B2D29B1C8730ABAD69]", "5EE50CB447F2FF4B34FD8191C6AE0F7E", "Light Hand Actuator")
+   ShortName=NSLOCTEXT("[3EFFE30449B4D6B2D29B1C8730ABAD69]", "D0640ABB46C252678822DA950DA749DC", "Light Hand")
+   WeaponType=(TagName="Weapon.Melee.Light.Punch")
+   TechBase=(TagName="TechBase.InnerSphere")
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MeleeHandActuatorLight_SlotType")
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   RefitCosts=(bAutoRepair=True)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Punch_512_UIX.Melee_Punch_512_UIX
+   bNonSalvageable=True
+   SalvageChance=0.000000
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   Description=NSLOCTEXT("[3EFFE30449B4D6B2D29B1C8730ABAD69]", "55FA6C414378F18A710842879F0D45FF", "Light \'Mech melee punch.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

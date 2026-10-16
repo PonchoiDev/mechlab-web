@@ -1,0 +1,35 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="MediumChemicalLaser_Lvl3"
+   StatsData=(DEPRECATED_CBillBaseValue=40000,CBillBaseValueBigInt=(Value=40000),Cooldown=3.250000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=4.000000,HeatGeneratedOverDuration=1.000000,Duration=0.800000,RayAsset=/Game/Objects/Projectiles/MediumLaser/Ray_MediumChemLaser.Ray_MediumChemLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/ChemLaser_Medium.ChemLaser_Medium,DamagePaintStats=(BrushStrength=0.600000)),Ranges=(OptimalRange=27000.000000,MaxRange=40500.000000),AmmoType=(TagName="Ammo.Energy.ChemLaser.Medium"))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MediumChemicalLaser")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.650000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=1.500000
+   TechLevel=3
+   Name=NSLOCTEXT("[506827BC4C21A5258AD25B84208141E1]", "F713542B49ED65B9AFEEA7BADEFA9AE1", "Medium Chemical Laser")
+   ShortName=NSLOCTEXT("[506827BC4C21A5258AD25B84208141E1]", "7B1D14424B1C589062AA7B9F378EE0A0", "M Chem Laser")
+   Manufacturer="COIL Type OC402"
+   WeaponType=(TagName="Weapon.Energy.Laser.Chemical.Medium")
+   TechBase=(TagName="TechBase.Retro")
+   Tonnage=1.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MediumLaser_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC1/UI/Textures/Marketplace_Weapons/Laser_Chem_M_512_UIX.Laser_Chem_M_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC1/Objects/Marketplace/Weapons/Model/Weapon_Laser_Chem_M_Market_STM.Weapon_Laser_Chem_M_Market_STM
+   Description=NSLOCTEXT("[506827BC4C21A5258AD25B84208141E1]", "F9218ADC42E1A45D74DDF7ACCB4FE042", "A medium range energy weapon that utilizes externally stored chemicals to produce a powered, short burst beam. ")
+   AssociatedDLC=(TagName="DLC.DLC1")
+   OnImpactForceFeedback=(FeedbackIntensity=0.035000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.015000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="Autocannon2_Burst_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=150000,CBillBaseValueBigInt=(Value=150000),Projectile=(NumberOfTimesToFire=4,DelayBetweenFiring=0.060000,NumberOfProjectiles=1,SpreadRadius=160.000000,SpreadDistance=35000.000000,Damage=0.600000,Speed=120000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=350.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/AC2_Burst_Fire.AC2_Burst_Fire,FireReloadSound=/Game/Audio/Events/Weapons/Ballistics/AC2_Reload.AC2_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC2/Projectile_AC2.Projectile_AC2_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Tny.Shockwave_Tny_C,CameraShake=/Game/Objects/Dropships/_common/CameraShakes/burst_recoil_light.burst_recoil_light_C,HeatGenerated=0.090000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=0.502000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=72000.000000,MaxRange=72000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Standard.AC2"),MWO_RangeData=(Ranges=((Distance=1,InterpolationType="linear"),(Distance=720,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1440,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Autocannon2_Burst")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   BattleValueAdjustment=-9
+   Name=NSLOCTEXT("[090F997F4033B454B6B3CE83B228CB2E]", "1464EB5D433024CDEAB6D6A92300CA83", "Autocannon/2 Burst Fire")
+   ShortName=NSLOCTEXT("[090F997F4033B454B6B3CE83B228CB2E]", "DC0E20E64A8E6B0C288BDA8DE5BA5626", "AC/2-BF")
+   Manufacturer="Quickscell"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.Standard.AC2.Burst")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=6.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:AC2_SlotType")
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/AC2_512_UIX.AC2_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.800000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/AC2_STM.AC2_STM
+   Description=NSLOCTEXT("[090F997F4033B454B6B3CE83B228CB2E]", "60A7402A4CA9CCA4CF8223B1E6CA9396", "Burst-fire ballistic weapon with very long range but very low damage.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

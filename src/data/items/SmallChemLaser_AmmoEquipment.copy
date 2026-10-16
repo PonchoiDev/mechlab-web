@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="SmallChemLaser_AmmoEquipment"
+   Capacity=180.000000
+   ExplosionDamagePerRound=3.000000
+   AmmoType=(TagName="Ammo.Energy.ChemLaser.Small")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[408DE4DA4EA5B1E32E199BA8C31FC0E1]", "428494E54B6896FA87D016A84B870F37", "S Chem Laser Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=2301.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=40000.000000
+   CBillBaseValueBigInt=(Value=40000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=1.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC1/UI/Textures/Marketplace_Weapons/Ammo_Chem_S_512_UIX.Ammo_Chem_S_512_UIX
+   UIXEquipment3DModel=/Game/DLC1/Objects/Marketplace/Weapons/Model/Ammo_Chem_Laser_S_Market_STM.Ammo_Chem_Laser_S_Market_STM
+   Description=NSLOCTEXT("[408DE4DA4EA5B1E32E199BA8C31FC0E1]", "875437F04F96B257B58FC092534C0BD0", "One ton of ammunition for the Small Chemical Laser.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

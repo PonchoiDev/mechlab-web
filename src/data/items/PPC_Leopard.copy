@@ -1,0 +1,28 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="PPC_Leopard"
+   StatsData=(DEPRECATED_CBillBaseValue=400000,CBillBaseValueBigInt=(Value=400000),Projectile=(NumberOfProjectiles=1,Damage=10.000000,Speed=104000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=1200.000000,FireSound=/Game/Audio/Events/Weapons/Energy/PPC.PPC,ProjectileFlightSound=/Game/Audio/Events/Weapons/Energy/PPC_Trail.PPC_Trail,Class=/Game/Objects/Projectiles/PPC/PPCProjectile.PPCProjectile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Medium.Shockwave_Medium_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_medium.single_recoil_medium_C,HeatGenerated=8.000000,DamagePaintStats=(BrushRadius=400.000000,BrushStrength=0.900000)),Cooldown=5.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop_PPC.Cooldown_Trace_Loop_PPC,CooldownErrorEvent=/Game/Audio/Events/Cockpit/Cooldown_Error.Cooldown_Error,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Range=(OptimalRange=46000.000000,MaxRange=92000.000000),MWO_RangeData=(Ranges=((InterpolationType="linear"),(Distance=90,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1080,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="PPC")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=-0.667000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   bDestroyProjectilePastMaxRange=True
+   ProjectileSelfDestructSound=/Game/Audio/Events/Physics/WeaponImpacts/PPC_Impact.PPC_Impact
+   TechLevel=1
+   FieldRefitGroup=(TagName="UnitType.Dropship")
+   Name=NSLOCTEXT("[0FD65EE046D925608A98D4A2BDEE2B2A]", "39BA5CF64D1993A826FF1DAC4AFF7FAF", "PPC")
+   ShortName=NSLOCTEXT("[0FD65EE046D925608A98D4A2BDEE2B2A]", "5BD2FCFA42AD5C120CF702A24CF22AA3", "PPC")
+   WeaponType=(TagName="Weapon.Energy.ParticleCannon.PPC")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=7.000000
+   WeaponSize=Invalid
+   WeaponDisplayColour=(R=1.000000,G=1.000000,B=1.000000,A=1.000000)
+   IntroDate=2460.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   bNonSalvageable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   OnImpactForceFeedback=(FeedbackIntensity=0.200000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.200000,bUseLargeMotors=True,bUseSmallMotors=True)
+End Object

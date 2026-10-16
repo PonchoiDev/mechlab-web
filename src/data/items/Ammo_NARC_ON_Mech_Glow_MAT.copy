@@ -1,0 +1,109 @@
+Begin Object Class=/Script/Engine.Material Name="Ammo_NARC_ON_Mech_Glow_MAT"
+   Begin Object Class=/Script/UnrealEd.SceneThumbnailInfoWithPrimitive Name="SceneThumbnailInfoWithPrimitive_0"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionVectorParameter Name="MaterialExpressionVectorParameter_1"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionVectorParameter Name="MaterialExpressionVectorParameter_0"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTime Name="MaterialExpressionTime_0"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionSine Name="MaterialExpressionSine_0"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_0"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionReroute Name="MaterialExpressionReroute_0"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionLinearInterpolate Name="MaterialExpressionLinearInterpolate_0"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionDivide Name="MaterialExpressionDivide_0"
+   End Object
+   Begin Object Name="SceneThumbnailInfoWithPrimitive_0"
+   End Object
+   Begin Object Name="MaterialExpressionVectorParameter_1"
+      DefaultValue=(R=0.000000,G=0.000000,B=0.000000,A=1.000000)
+      ParameterName="clr_000"
+      ExpressionGUID=B6B5ABC8408FCF7C767147AFA0C50E9E
+      MaterialExpressionEditorX=-496
+      MaterialExpressionEditorY=-64
+      MaterialExpressionGuid=A66725854673E644579F0B8058288A06
+      Material=Material'"Ammo_NARC_ON_Mech_Glow_MAT"'
+   End Object
+   Begin Object Name="MaterialExpressionVectorParameter_0"
+      DefaultValue=(R=1.000000,G=0.000000,B=0.000000,A=1.000000)
+      ParameterName="clr_001"
+      ExpressionGUID=33056324451406E8550CBDA7C2AA8874
+      MaterialExpressionEditorX=-496
+      MaterialExpressionEditorY=128
+      MaterialExpressionGuid=E96E466C42CFCF34B2A71999B162826F
+      Material=Material'"Ammo_NARC_ON_Mech_Glow_MAT"'
+   End Object
+   Begin Object Name="MaterialExpressionTime_0"
+      MaterialExpressionEditorX=-784
+      MaterialExpressionEditorY=304
+      MaterialExpressionGuid=C1923D9340704BC7F6CBF692028B1D7C
+      Material=Material'"Ammo_NARC_ON_Mech_Glow_MAT"'
+   End Object
+   Begin Object Name="MaterialExpressionSine_0"
+      Input=(Expression=MaterialExpressionDivide'"Ammo_NARC_ON_Mech_Glow_MAT:MaterialExpressionDivide_0"')
+      MaterialExpressionEditorX=-480
+      MaterialExpressionEditorY=320
+      MaterialExpressionGuid=E5EAF35540D8732A0C7BF6A426E5C213
+      Material=Material'"Ammo_NARC_ON_Mech_Glow_MAT"'
+   End Object
+   Begin Object Name="MaterialExpressionScalarParameter_0"
+      DefaultValue=0.725000
+      SliderMin=0.001000
+      SliderMax=10.000000
+      ParameterName="length"
+      ExpressionGUID=F83360964CB40B24169F928E1CA2FD8A
+      MaterialExpressionEditorX=-784
+      MaterialExpressionEditorY=416
+      MaterialExpressionGuid=2B70252043F2EFA40CBCE7A437B8C2C6
+      Material=Material'"Ammo_NARC_ON_Mech_Glow_MAT"'
+   End Object
+   Begin Object Name="MaterialExpressionReroute_0"
+      Input=(Expression=MaterialExpressionSine'"Ammo_NARC_ON_Mech_Glow_MAT:MaterialExpressionSine_0"')
+      MaterialExpressionEditorX=-272
+      MaterialExpressionEditorY=352
+      MaterialExpressionGuid=90A6EA204464738089DA9EB5437FCFF4
+      Material=Material'"Ammo_NARC_ON_Mech_Glow_MAT"'
+   End Object
+   Begin Object Name="MaterialExpressionLinearInterpolate_0"
+      A=(Expression=MaterialExpressionVectorParameter'"Ammo_NARC_ON_Mech_Glow_MAT:MaterialExpressionVectorParameter_1"',Mask=1,MaskR=1,MaskG=1,MaskB=1)
+      B=(Expression=MaterialExpressionVectorParameter'"Ammo_NARC_ON_Mech_Glow_MAT:MaterialExpressionVectorParameter_0"',Mask=1,MaskR=1,MaskG=1,MaskB=1)
+      Alpha=(Expression=MaterialExpressionReroute'"Ammo_NARC_ON_Mech_Glow_MAT:MaterialExpressionReroute_0"')
+      MaterialExpressionEditorX=-192
+      MaterialExpressionEditorY=112
+      MaterialExpressionGuid=349E046D4C26F245CD7657B490C0B72C
+      Material=Material'"Ammo_NARC_ON_Mech_Glow_MAT"'
+   End Object
+   Begin Object Name="MaterialExpressionDivide_0"
+      A=(Expression=MaterialExpressionTime'"Ammo_NARC_ON_Mech_Glow_MAT:MaterialExpressionTime_0"')
+      B=(Expression=MaterialExpressionScalarParameter'"Ammo_NARC_ON_Mech_Glow_MAT:MaterialExpressionScalarParameter_0"')
+      ConstB=5.000000
+      MaterialExpressionEditorX=-624
+      MaterialExpressionEditorY=320
+      MaterialExpressionGuid=2CBD7EB14D298C0F4A8830B7A24C7F85
+      Material=Material'"Ammo_NARC_ON_Mech_Glow_MAT"'
+   End Object
+   EmissiveColor=(Expression=MaterialExpressionLinearInterpolate'"MaterialExpressionLinearInterpolate_0"')
+   ShadingModel=MSM_Unlit
+   ShadingModels=(ShadingModelField=1)
+   Expressions(0)=MaterialExpressionLinearInterpolate'"MaterialExpressionLinearInterpolate_0"'
+   Expressions(1)=MaterialExpressionSine'"MaterialExpressionSine_0"'
+   Expressions(2)=MaterialExpressionTime'"MaterialExpressionTime_0"'
+   Expressions(3)=MaterialExpressionVectorParameter'"MaterialExpressionVectorParameter_0"'
+   Expressions(4)=MaterialExpressionVectorParameter'"MaterialExpressionVectorParameter_1"'
+   Expressions(5)=MaterialExpressionDivide'"MaterialExpressionDivide_0"'
+   Expressions(6)=MaterialExpressionScalarParameter'"MaterialExpressionScalarParameter_0"'
+   Expressions(7)=MaterialExpressionReroute'"MaterialExpressionReroute_0"'
+   ParameterGroupData(0)=(GroupName="None")
+   ParameterGroupData(1)=(GroupName="None")
+   ParameterGroupData(2)=(GroupName="None")
+   bCanMaskedBeAssumedOpaque=True
+   StateId=D7E4199C44408BEB4B1243ACD054BCE1
+   CachedExpressionData=(Parameters=(RuntimeEntries[0]=(NameHashes=(14395478350767625660),ParameterInfos=((Name="length")),ExpressionGuids=(F83360964CB40B24169F928E1CA2FD8A),Overrides=(False)),RuntimeEntries[1]=(NameHashes=(3627473165061506956,4135721587041186573),ParameterInfos=((Name="clr_000"),(Name="clr_001")),ExpressionGuids=(B6B5ABC8408FCF7C767147AFA0C50E9E,33056324451406E8550CBDA7C2AA8874),Overrides=(False,False)),ScalarValues=(0.725000),VectorValues=((R=0.000000,G=0.000000,B=0.000000,A=1.000000),(R=1.000000,G=0.000000,B=0.000000,A=1.000000)),ScalarMinMaxValues=((X=0.001000,Y=10.000000)),ScalarCurveValues=(None),ScalarCurveAtlasValues=(None),VectorChannelNameValues=((),()),VectorUsedAsChannelMaskValues=(False,False)),QualityLevelsUsed=(False,False,False,False))
+   ThumbnailInfo=SceneThumbnailInfoWithPrimitive'"SceneThumbnailInfoWithPrimitive_0"'
+   ParameterOverviewExpansion=(("-12None", True))
+   LightingGuid=629BF11D419DE2F44C781285057B24BD
+End Object

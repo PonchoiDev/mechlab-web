@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="LargeChemicalLaser"
+   StatsData=(DEPRECATED_CBillBaseValue=100000,CBillBaseValueBigInt=(Value=100000),Cooldown=4.500000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=8.000000,HeatGeneratedOverDuration=2.500000,Duration=1.200000,RayAsset=/Game/Objects/Projectiles/LargeLaser/Ray_LargeChemLaser.Ray_LargeChemLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/ChemLaser_Large.ChemLaser_Large,DamagePaintStats=(BrushRadius=55.000000,BrushStrength=0.800000)),Ranges=(OptimalRange=45000.000000,MaxRange=67500.000000),AmmoType=(TagName="Ammo.Energy.ChemLaser.Large"))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LargeChemicalLaser")
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=3.000000
+   TechLevel=1
+   Name=NSLOCTEXT("[06093B7240885F64BAC82FAFCC6282DF]", "BDDFCD1144DD775C9C2E548014A7E059", "Large Chemical Laser")
+   ShortName=NSLOCTEXT("[06093B7240885F64BAC82FAFCC6282DF]", "C5BC1EC44C06755545A64C8746921DFA", "L Chem Laser")
+   Manufacturer="Ozone Burner 5000"
+   WeaponType=(TagName="Weapon.Energy.Laser.Chemical.Large")
+   TechBase=(TagName="TechBase.Retro")
+   Tonnage=5.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LargeLaser_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=2301.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC1/UI/Textures/Marketplace_Weapons/Laser_Chem_L_512_UIX.Laser_Chem_L_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC1/Objects/Marketplace/Weapons/Model/Weapon_Laser_Chem_L_Market_STM.Weapon_Laser_Chem_L_Market_STM
+   Description=NSLOCTEXT("[06093B7240885F64BAC82FAFCC6282DF]", "F4236CB548DCE83BDBA8F88FE36B7FA4", "A large caliber, long-range energy weapon that utilizes externally stored chemicals to produce a high-powered, short burst beam. ")
+   AssociatedDLC=(TagName="DLC.DLC1")
+   OnImpactForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.035000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

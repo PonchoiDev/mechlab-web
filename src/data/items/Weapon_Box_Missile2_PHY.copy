@@ -1,0 +1,12 @@
+Begin Object Class=/Script/Engine.PhysicsAsset Name="Weapon_Box_Missile2_PHY"
+   Begin Object Class=/Script/Engine.SkeletalBodySetup Name="SkeletalBodySetup_1"
+   End Object
+   Begin Object Name="SkeletalBodySetup_1"
+      AggGeom=(SphylElems=((Center=(X=-0.000397,Y=-0.000000,Z=-26.156158),Radius=54.033257,Length=70.526924)))
+      BoneName="Animation"
+      CollisionTraceFlag=CTF_UseSimpleAsComplex
+   End Object
+   PreviewSkeletalMesh=/Game/Objects/Weapons/Missile2/Weapon_Box_Missile2_SKM.Weapon_Box_Missile2_SKM
+   BoundsBodies(0)=0
+   SkeletalBodySetups(0)=SkeletalBodySetup'"SkeletalBodySetup_1"'
+End Object

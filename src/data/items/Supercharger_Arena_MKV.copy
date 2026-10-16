@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMASCDataAsset Name="Supercharger_Arena_MKV"
+   MASCStats=(GaugeFill=0.200000,GaugeDrain=0.300000,GaugeWarningPoint=0.550000,GaugeDamagePoint=0.750000,BoostSpeed=1.200000,BoostAccel=7.000000,BoostTurn=-0.750000,DamageMin=0.700000,DamageMax=3.250000,DamageRate=0.750000,DamageParts=(CenterTorso),Type=SuperCharger)
+   EquipmentType=(TagName="Equipment.ArenaSuperCharger.Class5")
+   TechBase=(TagName="TechBase.Arena")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:MASC_MKV_SlotType")
+   Name=NSLOCTEXT("[099BE76840E82E4E796FFD884927D173]", "7E4F5DB84C96076E74596B94B671A401", "Arena Supercharger MK V")
+   TechLevel=-1
+   Tons=7.500000
+   Slots=5
+   IntroDate=2439.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=140000.000000
+   CBillBaseValueBigInt=(Value=140000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   SalvageShareCost=2
+   EquipmentImage=/Game/DLC1/UI/Textures/Marketplace_Equipment/Supercharger_512_UIX.Supercharger_512_UIX
+   UIXEquipment3DModel=/Game/DLC1/Objects/Marketplace/Equipment/Model/Equipment_Supercharger_STM.Equipment_Supercharger_STM
+   Description=NSLOCTEXT("[099BE76840E82E4E796FFD884927D173]", "93CFB5944D2631BBC99736B4EE044359", "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk V hardpoints on 90-100 ton \'Mechs.")
+   AssociatedDLC=(TagName="DLC.DLC6")
+End Object

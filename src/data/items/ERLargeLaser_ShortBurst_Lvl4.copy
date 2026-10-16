@@ -1,0 +1,35 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="ERLargeLaser_ShortBurst_Lvl4"
+   StatsData=(DEPRECATED_CBillBaseValue=400000,CBillBaseValueBigInt=(Value=400000),Cooldown=3.600000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=7.000000,HeatGeneratedOverDuration=6.100000,Duration=0.550000,RayAsset=/Game/Objects/Projectiles/LargeLaser/Ray_LargeLaser.Ray_LargeLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/Large_Laser_Burst_Fire.Large_Laser_Burst_Fire,TraceBypassSound=/Game/Audio/Events/Weapons/Energy/LALaser_Beam.LALaser_Beam,DamagePaintStats=(BrushStrength=0.600000)),Ranges=(OptimalRange=67500.000000,MaxRange=101250.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=675,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1350,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="ERLargeLaser_ShortBurst")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=-0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.080000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=1.150000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=3.000000
+   TechLevel=4
+   BattleValueAdjustment=82
+   Name=NSLOCTEXT("[65BAC7C74771B58A42CE2A9E1527D3B3]", "243FFE994C3C07E4768B7E97AB73E12D", "ER Large Laser Short Burst")
+   ShortName=NSLOCTEXT("[65BAC7C74771B58A42CE2A9E1527D3B3]", "E5D7E92E42EAEFAC333E1A94F365CFE6", "ER L Laser-SB")
+   Manufacturer="Exo Star"
+   WeaponType=(TagName="Weapon.Energy.Laser.ER.Large.ShortBurst")
+   TechBase=(TagName="TechBase.LosTech")
+   Tonnage=5.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:ERLargeLaser_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=3037.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Laser_ER_L_512_UIX.Laser_ER_L_512_UIX
+   SalvageShareCost=5
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_Laser_ER_L_Market_STM.Weapon_Laser_ER_L_Market_STM
+   Description=NSLOCTEXT("[65BAC7C74771B58A42CE2A9E1527D3B3]", "F0AE4EAE4E1B714C896AFFBD5A0AE877", "High-powered energy weapon like the standard short burst large laser, but with extended range at the cost of greater heat.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+   OnImpactForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.035000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

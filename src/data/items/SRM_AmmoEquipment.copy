@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="SRM_AmmoEquipment"
+   Capacity=320.000000
+   ExplosionDamagePerRound=2.150000
+   AmmoType=(TagName="Ammo.Missile.SRM")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[05650A4644536264D94DB9ADACB700BB]", "1AB8B5D24DD0CF7A2C8E66B1CB426047", "SRM Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=2370.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=54000.000000
+   CBillBaseValueBigInt=(Value=54000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=1.075000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_SRM_512_UIX.Ammo_SRM_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_SRM_Market_STM.Ammo_SRM_Market_STM
+   Description=NSLOCTEXT("[05650A4644536264D94DB9ADACB700BB]", "26D4E5EB4F072475445ED294531FA441", "One ton of ammunition for the standard short-range missile launchers.")
+End Object

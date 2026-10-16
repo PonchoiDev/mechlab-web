@@ -1,0 +1,32 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="MediumPulseLaser"
+   StatsData=(DEPRECATED_CBillBaseValue=120000,CBillBaseValueBigInt=(Value=120000),Cooldown=3.250000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=6.000000,HeatGeneratedOverDuration=2.600000,Duration=0.650000,RayAsset=/Game/Objects/Projectiles/MediumLaser/Ray_MediumPulseLaser.Ray_MediumPulseLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/Medium_Pulse_Laser.Medium_Pulse_Laser,DamagePaintStats=(BrushStrength=0.600000)),Ranges=(OptimalRange=22000.000000,MaxRange=33000.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=220,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=440,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MediumPulseLaser")
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=1.500000
+   TechLevel=1
+   Name=NSLOCTEXT("[D5E51FFA4DF51B90A3F6ACAF4CAC03BC]", "326C4463403758E1175B6AABD3BE1A72", "Medium Pulse Laser")
+   ShortName=NSLOCTEXT("[D5E51FFA4DF51B90A3F6ACAF4CAC03BC]", "F66149884BFD356B267558BB6D069AA2", "MP Laser")
+   Manufacturer="Magna 400P"
+   WeaponType=(TagName="Weapon.Energy.Laser.Pulse.Medium")
+   TechBase=(TagName="TechBase.LosTech")
+   Tonnage=2.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MediumPulseLaser_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=3037.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Laser_Pulse_M_512_UIX.Laser_Pulse_M_512_UIX
+   SalvageShareCost=1
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_Laser_Pulse_M_Market_STM.Weapon_Laser_Pulse_M_Market_STM
+   Description=NSLOCTEXT("", "819B5AEB4FFE996FA4144CB78AC225EE", "Medium-powered energy weapon with medium range, medium damage, and shorter duration to concentrate damage.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.035000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.015000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

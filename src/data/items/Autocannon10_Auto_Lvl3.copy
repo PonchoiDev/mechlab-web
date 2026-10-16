@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="Autocannon10_Auto_Lvl3"
+   StatsData=(DEPRECATED_CBillBaseValue=400000,CBillBaseValueBigInt=(Value=400000),Projectile=(NumberOfProjectiles=1,Damage=5.000000,Speed=95000.000000,GravityScale=0.300000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=2500.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/AC10_Rapid_Fire.AC10_Rapid_Fire,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC10/Projectile_AC10.Projectile_AC10_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Medium.Shockwave_Medium_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_medium.single_recoil_medium_C,HeatGenerated=0.750000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=0.750000,Range=(OptimalRange=45000.000000,MaxRange=45000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Standard.AC10"),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=450,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="AutoCannon10_Auto")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.650000)))
+   TechLevel=3
+   Name=NSLOCTEXT("[D1C16F1742B535AF0488419D07FBB086]", "6E8AA01E4385105A4127809DD9A24BC4", "Autocannon/10 rapid-fire")
+   ShortName=NSLOCTEXT("[D1C16F1742B535AF0488419D07FBB086]", "9CA2434E43C020195B3AE0B4A6C6F284", "AC/10-RF")
+   Manufacturer="Armstrong Buster"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.Standard.AC10.Rapid")
+   TechBase=(TagName="TechBase.Arena")
+   Tonnage=12.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:AC10_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=2460.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=3.000000,RemoveTimeInDays=3.000000,RepairTimeInDays=3.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/AC10_512_UIX.AC10_512_UIX
+   SalvageShareCost=4
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/AC10_STM.AC10_STM
+   Description=NSLOCTEXT("[D1C16F1742B535AF0488419D07FBB086]", "ABF7EDC5498A389A26EB5DAEA8E890A7", "A Rapid Fire Ballistic weapon with medium range and high damage.")
+   AssociatedDLC=(TagName="DLC.DLC6")
+   OnImpactForceFeedback=(FeedbackIntensity=0.200000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

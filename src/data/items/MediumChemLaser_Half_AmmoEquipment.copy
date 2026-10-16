@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="MediumChemLaser_Half_AmmoEquipment"
+   Capacity=57.000000
+   ExplosionDamagePerRound=5.000000
+   AmmoType=(TagName="Ammo.Energy.ChemLaser.Medium")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[1B67726147331A497847848D31A8BB45]", "562877A14420D45C8A5F129111EBD912", "M Chem Laser Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=2301.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=20000.000000
+   CBillBaseValueBigInt=(Value=20000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=2.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC1/UI/Textures/Marketplace_Weapons/Ammo_Chem_M_Half_512_UIX.Ammo_Chem_M_Half_512_UIX
+   UIXEquipment3DModel=/Game/DLC1/Objects/Marketplace/Weapons/Model/Ammo_Chem_Laser_M_Market_STM.Ammo_Chem_Laser_M_Market_STM
+   Description=NSLOCTEXT("[1B67726147331A497847848D31A8BB45]", "C284F800439C787EA317E0AA01D176C5", "One half ton of ammunition for the Medium Chemical Laser.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="AC5_Ultra_AmmoEquipment"
+   Capacity=80.000000
+   ExplosionDamagePerRound=5.000000
+   AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Ultra.AC5")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[B4DC9ACC43EA604AA0691EA693658CA0]", "DD9B66AC4D72DE6D6F76C49DF102025D", "Ultra AC/5 Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=3035.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=18000.000000
+   CBillBaseValueBigInt=(Value=18000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=2.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_UAC5_512_UIX.Ammo_UAC5_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_UAC5_Market_STM.Ammo_UAC5_Market_STM
+   Description=NSLOCTEXT("[B4DC9ACC43EA604AA0691EA693658CA0]", "5430E80946C1B469053D8A9C2A772939", "One ton of ammunition for the Ultra Autocannon/5.")
+End Object

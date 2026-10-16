@@ -1,0 +1,26 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="LightRifle_Half_AmmoEquipment"
+   Capacity=17.000000
+   ExplosionDamagePerRound=6.000000
+   AmmoType=(TagName="Ammo.Ballistic.Rifle.Light")
+   MultipleAssociatedDLC=(GameplayTags=((TagName="DLC.DLC1"),(TagName="DLC.DLC6")))
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[9C601CE24ADE4C7A79A6DD9A9BF52F55]", "162B51B44710F49B3B3D1293411554E2", "Light Rifle Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=2300.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=400.000000
+   CBillBaseValueBigInt=(Value=400)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=3.000000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC1/UI/Textures/Marketplace_Weapons/Ammo_Rifle_L_Half_512_UIX.Ammo_Rifle_L_Half_512_UIX
+   UIXEquipment3DModel=/Game/DLC1/Objects/Marketplace/Weapons/Model/Ammo_Rifle_L_Market_STM.Ammo_Rifle_L_Market_STM
+   Description=NSLOCTEXT("[9C601CE24ADE4C7A79A6DD9A9BF52F55]", "9CD7696B44EC8BA7C7723B9D612E2828", "Half a ton of ammunition for the Light Rifle.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

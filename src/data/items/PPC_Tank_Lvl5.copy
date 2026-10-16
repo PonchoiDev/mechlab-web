@@ -1,0 +1,27 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="PPC_Tank_Lvl5"
+   StatsData=(DEPRECATED_CBillBaseValue=400000,CBillBaseValueBigInt=(Value=400000),Projectile=(NumberOfProjectiles=1,Damage=10.000000,Speed=104000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=1200.000000,FireSound=/Game/Audio/Events/Weapons/Energy/PPC.PPC,Class=/Game/Objects/Projectiles/PPC/PPCProjectile.PPCProjectile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Medium.Shockwave_Medium_C,HeatGenerated=8.000000,DamagePaintStats=(BrushRadius=250.000000,BrushStrength=0.900000)),Cooldown=5.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Range=(OptimalRange=46000.000000,MaxRange=92000.000000),MWO_RangeData=(Ranges=((InterpolationType="linear"),(Distance=90,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1080,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="PPC_Tank")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.400000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.225000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   bDestroyProjectilePastMaxRange=True
+   ProjectileSelfDestructSound=/Game/Audio/Events/Physics/WeaponImpacts/PPC_Impact.PPC_Impact
+   TechLevel=5
+   FieldRefitGroup=(TagName="UnitType.Vehicle.Tracked.Tank")
+   Name=NSLOCTEXT("[A3B7262F45166E55864AE9AC28608EB7]", "1C4C45F1432803B16EDAFEAB326581E3", "PPC")
+   ShortName=NSLOCTEXT("[A3B7262F45166E55864AE9AC28608EB7]", "A90AE0F64D34F4363748C09C61F40104", "PPC")
+   WeaponType=(TagName="Weapon.Energy.ParticleCannon.PPC")
+   TechBase=(TagName="TechBase.InnerSphere")
+   WeaponSize=Invalid
+   WeaponDisplayColour=(R=1.000000,G=1.000000,B=1.000000,A=1.000000)
+   IntroDate=2460.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   bNonSalvageable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   OnImpactForceFeedback=(FeedbackIntensity=0.200000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.200000,bUseLargeMotors=True,bUseSmallMotors=True)
+End Object

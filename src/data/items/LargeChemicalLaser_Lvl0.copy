@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="LargeChemicalLaser_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=100000,CBillBaseValueBigInt=(Value=100000),Cooldown=4.500000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=8.000000,HeatGeneratedOverDuration=2.500000,Duration=1.200000,RayAsset=/Game/Objects/Projectiles/LargeLaser/Ray_LargeChemLaser.Ray_LargeChemLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/ChemLaser_Large.ChemLaser_Large,DamagePaintStats=(BrushRadius=55.000000,BrushStrength=0.800000)),Ranges=(OptimalRange=45000.000000,MaxRange=67500.000000),AmmoType=(TagName="Ammo.Energy.ChemLaser.Large"))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LargeChemicalLaser")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Cooldown_Quirk.Cooldown_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=3.000000
+   Name=NSLOCTEXT("[97923DC64B8418D41D160597853367ED]", "FE92AC5443C72138C9EA238469D50B2F", "Large Chemical Laser")
+   ShortName=NSLOCTEXT("[97923DC64B8418D41D160597853367ED]", "7359CF2F4B25FA74D8A1E1B5FE878601", "L Chem Laser")
+   Manufacturer="Grimm Chemfire"
+   WeaponType=(TagName="Weapon.Energy.Laser.Chemical.Large")
+   TechBase=(TagName="TechBase.Retro")
+   Tonnage=5.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LargeLaser_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=2301.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC1/UI/Textures/Marketplace_Weapons/Laser_Chem_L_512_UIX.Laser_Chem_L_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC1/Objects/Marketplace/Weapons/Model/Weapon_Laser_Chem_L_Market_STM.Weapon_Laser_Chem_L_Market_STM
+   Description=NSLOCTEXT("", "42EEB0974BE03D7F099D9392D3DACCCA", "A large caliber, long-range energy weapon that utilizes externally stored chemicals to produce a high-powered, short burst beam. ")
+   AssociatedDLC=(TagName="DLC.DLC1")
+   OnImpactForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.035000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

@@ -1,0 +1,27 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="SRM6_Turret_Lvl5"
+   StatsData=(DEPRECATED_CBillBaseValue=160000,CBillBaseValueBigInt=(Value=160000),MissileStats=(NumberOfMissiles=6,Projectile=(Damage=2.400000,Speed=40000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=600.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/TurretMissile.TurretMissile,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/SRM_Projectile.SRM_Projectile,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=0.600000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=150.000000,BrushStrength=1.500000))),Cooldown=3.400000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(OptimalRange=27000.000000,MaxRange=27000.000000),MissileTurnRate=65.000000,SpreadMissileRadius=500.000000,SpreadMissileDistance=7500.000000,MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=270,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="SRM6_Turret")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.400000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   MissilePath=/Game/Objects/Weapons/_common/MissilePaths/SRMSpreadPath.SRMSpreadPath_C
+   bCanFireInsideMinRange=True
+   bCanFireOutsideMaxRange=True
+   TechLevel=5
+   FieldRefitGroup=(TagName="UnitType.Vehicle.Tracked.Tank")
+   Name=NSLOCTEXT("[44C46D48482D4FB9EFA864A233ED7650]", "7B3C16B64699CC8B253782BC25CC965E", "SRM 6")
+   ShortName=NSLOCTEXT("[44C46D48482D4FB9EFA864A233ED7650]", "0FF8917B41A9D8733175F485C14EEC64", "SRM 6")
+   WeaponType=(TagName="Weapon.Missile.SRM.SRM6")
+   TechBase=(TagName="TechBase.InnerSphere")
+   WeaponSize=Invalid
+   WeaponDisplayColour=(R=1.000000,G=1.000000,B=1.000000,A=1.000000)
+   IntroDate=2370.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   bNonSalvageable=True
+   SalvageChance=0.900000
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.075000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

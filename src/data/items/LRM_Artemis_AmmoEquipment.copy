@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="LRM_Artemis_AmmoEquipment"
+   Capacity=440.000000
+   ExplosionDamagePerRound=1.000000
+   AmmoType=(TagName="Ammo.Missile.LRM.Artemis")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[A6CD4928403544F9AC8A159D3ADBA52E]", "9CE30EA3466FE19D28277487BCDF7382", "LRM Artemis Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=3035.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=120000.000000
+   CBillBaseValueBigInt=(Value=120000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=0.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_ALRM_512_UIX.Ammo_ALRM_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_ALRM_Market_STM.Ammo_ALRM_Market_STM
+   Description=NSLOCTEXT("[A6CD4928403544F9AC8A159D3ADBA52E]", "A0A8FE53409D302FF2255BB4A4E2FFE9", "One ton of ammunition for the Artemis IV equipped long-range missile launchers.")
+End Object

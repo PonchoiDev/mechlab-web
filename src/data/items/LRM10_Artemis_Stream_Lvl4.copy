@@ -1,0 +1,32 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="LRM10_Artemis_Stream_Lvl4"
+   StatsData=(DEPRECATED_CBillBaseValue=400000,CBillBaseValueBigInt=(Value=400000),MissileStats=(NumberOfMissiles=10,MissileInterval=0.050000,Projectile=(bSpreadProjectileSingleBulletAlignment=True,Damage=1.200000,Speed=20000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=500.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/LRM_10_Fire.LRM_10_Fire,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/Projectile_STREAM.Projectile_STREAM,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/SmallHorizontalRecoil.SmallHorizontalRecoil_C,HeatGenerated=0.360000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000))),Cooldown=4.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(NullRange=18000.000000,MinRange=18000.000000,OptimalRange=90000.000000,MaxRange=90000.000000),AmmoType=(TagName="Ammo.Missile.LRM.Artemis"),MissileTurnRate=150.000000,LongRangeMissileRadius=525.000000,MWO_RangeData=(Ranges=((InterpolationType="step"),(Distance=180,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LRM10_Artemis_Stream")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/MinRangePercentage_Quirk.MinRangePercentage_Quirk_C"',Value=-0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=1.500000)))
+   MissilePath=/Game/Objects/Weapons/_common/MissilePaths/LongRangeMissilePathV2.LongRangeMissilePathV2_C
+   bCanFireOutsideMaxRange=True
+   TechLevel=4
+   BattleValueAdjustment=61
+   Name=NSLOCTEXT("[59294CDF48D0F0D8EF3EB59AECCE2AB5]", "9116D5B340A95CD1CF9583B4C3FF9291", "LRM 10 Stream + Artemis IV")
+   ShortName=NSLOCTEXT("[59294CDF48D0F0D8EF3EB59AECCE2AB5]", "D96B194B44E5C9F98223B08CD9881ACB", "LRM 10-ST + Art IV")
+   Manufacturer="FireFire"
+   WeaponType=(TagName="Weapon.ArtemisMissile.LRM.LRM10.Stream")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=6.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LRM10_Artemis_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.496933,G=0.597202,B=0.246201,A=1.000000)
+   IntroDate=3035.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=3.000000,RemoveTimeInDays=3.000000,RepairTimeInDays=3.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/ALRM10_512_UIX.ALRM10_512_UIX
+   SalvageShareCost=6
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/Weapon_ALRM10_Market_STM.Weapon_ALRM10_Market_STM
+   Description=NSLOCTEXT("", "64C99D8340076B0590B7DBA57CDD69C8", "Long-range missile system that fires a stream of 10 guided missiles with improved spread.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.200000,bUseSmallMotors=True)
+End Object

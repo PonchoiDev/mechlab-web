@@ -1,0 +1,21 @@
+Begin Object Class=/Script/MechWarrior.MWHeatSinkDataAsset Name="DoubleHeatSink"
+   HeatSink=(HealthyCapacity=2.000000,DamagedCapacity=1.000000,HealthyEfficiency=0.200000,DamagedEfficiency=0.100000)
+   EquipmentType=(TagName="Equipment.HeatSinks.Double")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   SupportedSlotTypesAssetId(1)=(Id="MWSlotTypeDataAsset:EngineHeatsink_SlotType")
+   Name=NSLOCTEXT("[D6905EFC45DC72DB0EC0FEB09F710161]", "0385150A49A0FC07CBFE90B22355F3C1", "Double Heat Sink")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=3
+   IntroDate=3040.01.01-14.00.00
+   DEPRECATED_CBillBaseValue=12000.000000
+   CBillBaseValueBigInt=(Value=12000)
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   SalvageShareCost=3
+   SalvageChance=0.600000
+   DamageChance=0.250000
+   EquipmentImage=/Game/UI/Textures/Marketplace_Equipment/DoubleHeatsink_512_UIX.DoubleHeatsink_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Equipment/Model/Equipment_HeatsinkDouble_Market_STM.Equipment_HeatsinkDouble_Market_STM
+   Description=NSLOCTEXT("[D6905EFC45DC72DB0EC0FEB09F710161]", "3771AC3E4A16B2B7D2C4838B42051EAA", "A double heat sink.  More powerful but bulkier than standard heat sinks.")
+End Object

@@ -1,0 +1,26 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="MediumRifle_AmmoEquipment"
+   Capacity=22.000000
+   ExplosionDamagePerRound=12.000000
+   AmmoType=(TagName="Ammo.Ballistic.Rifle.Medium")
+   MultipleAssociatedDLC=(GameplayTags=((TagName="DLC.DLC1"),(TagName="DLC.DLC6")))
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[EDCDABD04FC46A01F9A3EA9E2E946426]", "94DD49AB43FDB04F72C29691740A60F8", "Medium Rifle Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=2300.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=1000.000000
+   CBillBaseValueBigInt=(Value=1000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=6.000000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC1/UI/Textures/Marketplace_Weapons/Ammo_Rifle_M_512_UIX.Ammo_Rifle_M_512_UIX
+   UIXEquipment3DModel=/Game/DLC1/Objects/Marketplace/Weapons/Model/Ammo_Rifle_M_Market_STM.Ammo_Rifle_M_Market_STM
+   Description=NSLOCTEXT("[EDCDABD04FC46A01F9A3EA9E2E946426]", "B42FAF064A63EFE1F68FE99FDC0FE1A4", "One ton of ammunition for the Medium Rifle.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

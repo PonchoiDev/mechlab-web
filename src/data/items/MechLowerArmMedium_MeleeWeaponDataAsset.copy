@@ -1,0 +1,23 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="MechLowerArmMedium_MeleeWeaponDataAsset"
+   StatsData=(Cooldown=3.250000,Melee=(Damage=7.500000,Duration=1.250000,ActivationTime=0.500000,Impulse=1250000.000000,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_M_Punch.MechMeleeStrike_M_Punch_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_Punch/Melee_ArmSwing.Melee_ArmSwing,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000)),Ranges=(OptimalRange=1750.000000,MaxRange=1750.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MechLowerArmActuator_Medium")
+   BuildingDamageModifier=5.000000
+   TechLevel=-1
+   Name=NSLOCTEXT("[942A9F9D4117D3682BD0EC9ABF93E478]", "A3E9C0C2481650F58176FEA66632188D", "Medium Lower Arm")
+   ShortName=NSLOCTEXT("[942A9F9D4117D3682BD0EC9ABF93E478]", "5F4FA5934126A2A6554FB892C973D91F", "Medium Lower Arm")
+   WeaponType=(TagName="Weapon.Melee.Medium.Punch")
+   TechBase=(TagName="TechBase.InnerSphere")
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MeleeLowerArmActuatorMedium_SlotType")
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   IntroDate=0001.01.01-14.00.00
+   RefitCosts=(bAutoRepair=True)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Punch_512_UIX.Melee_Punch_512_UIX
+   bNonSalvageable=True
+   SalvageChance=0.000000
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   Description=NSLOCTEXT("[942A9F9D4117D3682BD0EC9ABF93E478]", "E964C176479221C03F47389FBE7B7279", "Medium \'Mech melee lower arm strike.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

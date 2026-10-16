@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="MachineGun_Lvl5"
+   StatsData=(DEPRECATED_CBillBaseValue=10000,CBillBaseValueBigInt=(Value=10000),Cooldown=0.100000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,Trace=(DamageOverDuration=1.500000,RateOfFire=10.000000,RayAsset=/Game/Objects/Projectiles/MachineGun/Ray_MachineGun.Ray_MachineGun_C,FireSound=/Game/Audio/Events/Weapons/Ballistics/MachineGun.MachineGun,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=10.000000,BrushStrength=1.000000)),Ranges=(OptimalRange=13000.000000,MaxRange=13000.000000),AmmoType=(TagName="Ammo.Ballistic.MachineGun.Standard"))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MachineGun")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.600000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.600000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   BuildingDamageModifier=7.000000
+   TechLevel=5
+   BattleValueAdjustment=6
+   Name=NSLOCTEXT("[4DC5095C4FC178F11F79C396D22D22A6]", "FD83617C4DE73E1A4505D08A17744826", "Machine Gun")
+   ShortName=NSLOCTEXT("[4DC5095C4FC178F11F79C396D22D22A6]", "9553923E45BDA47DE0FC03806A600282", "Machine Gun")
+   Manufacturer="Tri-Axe"
+   WeaponType=(TagName="Weapon.Ballistic.MG.MachineGun")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=0.500000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MachineGun_SlotType")
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=1949.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/MG_512_UIX.MG_512_UIX
+   SalvageShareCost=1
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_MG_Heavy_Market_STM.Weapon_MG_Heavy_Market_STM
+   Description=NSLOCTEXT("[4DC5095C4FC178F11F79C396D22D22A6]", "ACAE14094CBA25C77FF56580EFFFF1E6", "Low-damage ballistic weapon with short range but an extremely rapid rate of fire.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.012500,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.011750,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

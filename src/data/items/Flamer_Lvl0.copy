@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="Flamer_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=15000,CBillBaseValueBigInt=(Value=15000),Cooldown=0.100000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=2.000000,HeatDamageOverDuration=0.500000,HeatGeneratedOverDuration=0.400000,RayAsset=/Game/Objects/Projectiles/Flamer/Ray_Flamer.Ray_Flamer_C,FireSound=/Game/Audio/Events/Weapons/Flamer/Flamer.Flamer,DamagePaintStats=(BrushStrength=0.600000)),Ranges=(OptimalRange=9000.000000,MaxRange=9000.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=90,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Flamer")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   BuildingDamageModifier=2.000000
+   BattleValueAdjustment=-2
+   Name=NSLOCTEXT("[ED3E374E452A7BC3378045B4F6017481]", "E6EE0F77483B3E5A021479B1811CC30C", "Flamer")
+   ShortName=NSLOCTEXT("[ED3E374E452A7BC3378045B4F6017481]", "C8931D9F480D97CD60A8638C0BD4AFA9", "Flamer")
+   Manufacturer="Dragon\'s Breath"
+   WeaponType=(TagName="Weapon.Energy.Flamer")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=1.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Flamer_SlotType")
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=2025.01.01-14.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Flamer_512_UIX.Flamer_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.800000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_Flamer_Market_STM.Weapon_Flamer_Market_STM
+   Description=NSLOCTEXT("[ED3E374E452A7BC3378045B4F6017481]", "0C65F54E45DCE2683EEC638072A8A530", "Fusion-powered plasma flamer that both deals damage and increases the heat level of its target.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.012500,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.011750,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

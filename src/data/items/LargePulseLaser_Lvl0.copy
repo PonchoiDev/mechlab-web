@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="LargePulseLaser_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=350000,CBillBaseValueBigInt=(Value=350000),Cooldown=4.500000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=12.000000,HeatGeneratedOverDuration=6.500000,Duration=0.800000,RayAsset=/Game/Objects/Projectiles/LargeLaser/Ray_LargePulseLaser.Ray_LargePulseLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/Large_Pulse_Laser.Large_Pulse_Laser,DamagePaintStats=(BrushStrength=0.600000)),Ranges=(OptimalRange=36500.000000,MaxRange=54750.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=365,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=730,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LargePulseLaser")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=3.000000
+   BattleValueAdjustment=-24
+   Name=NSLOCTEXT("[079B1C174D93EBA4559248BBDE044878]", "147EBC8942700FD654A918B74E18C06A", "Large Pulse Laser")
+   ShortName=NSLOCTEXT("[079B1C174D93EBA4559248BBDE044878]", "456CC639419D07BB7D8C28B735EB40B3", "LP Laser")
+   Manufacturer="Omnicron 950"
+   WeaponType=(TagName="Weapon.Energy.Laser.Pulse.Large")
+   TechBase=(TagName="TechBase.LosTech")
+   Tonnage=7.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LargePulseLaser_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=3037.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Laser_Pulse_L_512_UIX.Laser_Pulse_L_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.800000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_Laser_Pulse_L_Market_STM.Weapon_Laser_Pulse_L_Market_STM
+   Description=NSLOCTEXT("", "F003552C489F0E9F0A2CAB9A9A65C8B2", "High-powered energy weapon with long range, high damage, and shorter duration to concentrate damage.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.035000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

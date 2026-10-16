@@ -1,0 +1,23 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="NARC_AmmoEquipment"
+   Capacity=20.000000
+   ExplosionDamagePerRound=2.000000
+   AmmoType=(TagName="Ammo.Missile.NARC")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[45BD467141D768D995834FBA93E0584E]", "2655F1A847A4286F8593B5A0E62A4724", "Narc Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=3035.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=12000.000000
+   CBillBaseValueBigInt=(Value=12000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_NARC_512_UIX.Ammo_NARC_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_NARC_Market_STM.Ammo_NARC_Market_STM
+   Description=NSLOCTEXT("[45BD467141D768D995834FBA93E0584E]", "4A9CD7CA44E1508A83A40787EC827654", "One ton of ammunition for the Narc Missile Beacon.")
+End Object

@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="SRM_Streak_AmmoEquipment"
+   Capacity=320.000000
+   ExplosionDamagePerRound=2.000000
+   AmmoType=(TagName="Ammo.Missile.SRM.Streak")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[DCA153E244F80DB19DDE84AE1A8A1DDA]", "83D4F26C478D90C104D7B2BBF72D7A3C", "Streak SRM Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=3035.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=108000.000000
+   CBillBaseValueBigInt=(Value=108000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=1.000000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_SSRM_512_UIX.Ammo_SSRM_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_SSRM_Market_STM.Ammo_SSRM_Market_STM
+   Description=NSLOCTEXT("[DCA153E244F80DB19DDE84AE1A8A1DDA]", "9B48A16841DAD327F2572A87B36F6BA7", "One ton of ammunition for the streak short-range missile launchers.")
+End Object

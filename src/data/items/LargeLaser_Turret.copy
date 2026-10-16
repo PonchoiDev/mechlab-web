@@ -1,0 +1,27 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="LargeLaser_Turret"
+   StatsData=(DEPRECATED_CBillBaseValue=1000,CBillBaseValueBigInt=(Value=1000),Cooldown=6.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=6.000000,HeatGeneratedOverDuration=6.000000,Duration=1.000000,RayAsset=/Game/Objects/Projectiles/LargeLaser/Ray_LargeLaser.Ray_LargeLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/Laser_M_Turret_Fire.Laser_M_Turret_Fire,TraceBypassSound=/Game/Audio/Events/Weapons/Energy/Laser_Flyby.Laser_Flyby,DamagePaintStats=(BrushRadius=55.000000,BrushStrength=0.800000)),Ranges=(OptimalRange=45000.000000,MaxRange=45000.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Largelaser_Turret")
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=3.000000
+   TechLevel=1
+   FieldRefitGroup=(TagName="UnitType.Vehicle.Tracked.Tank")
+   Name=NSLOCTEXT("[0679F0124FCDF00FE6BE1EB7624B28D5]", "95038178474B510F0AE5BB9782815D79", "Large Laser")
+   ShortName=NSLOCTEXT("[0679F0124FCDF00FE6BE1EB7624B28D5]", "CBFB3ABD4E6B2D4ECDE625A37BEAEA2D", "L Laser")
+   WeaponType=(TagName="Weapon.Energy.Laser.Standard.Large")
+   TechBase=(TagName="TechBase.InnerSphere")
+   WeaponSize=Invalid
+   WeaponDisplayColour=(R=1.000000,G=1.000000,B=1.000000,A=1.000000)
+   IntroDate=2316.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   bNonSalvageable=True
+   SalvageChance=0.900000
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   OnImpactForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.035000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

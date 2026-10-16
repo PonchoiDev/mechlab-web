@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="AC2_Standard_AmmoEquipment"
+   Capacity=200.000000
+   ExplosionDamagePerRound=2.000000
+   AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Standard.AC2")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[96AAB7364801882AD6CCB998BF48A1A0]", "FFC6114144C4E95BBCABB4A92D731D9A", "AC/2 Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=2300.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=2000.000000
+   CBillBaseValueBigInt=(Value=2000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=1.000000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_AC2_512_UIX.Ammo_AC2_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_AC2_Market_STM.Ammo_AC2_Market_STM
+   Description=NSLOCTEXT("[96AAB7364801882AD6CCB998BF48A1A0]", "E36308EE4EC7328F95227D90DD4F2D27", "One ton of ammunition for the Autocannon/2.")
+End Object

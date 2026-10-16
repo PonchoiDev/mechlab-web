@@ -1,0 +1,23 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="MechBattleFistHeavy_MeleeWeaponDataAsset"
+   StatsData=(Cooldown=3.125000,Melee=(Damage=25.000000,Duration=1.500000,ActivationTime=0.625000,Impulse=1250000.000000,MeleePriority=15,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_H_Punch.MechMeleeStrike_H_Punch_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_Punch/Melee_ArmSwing.Melee_ArmSwing,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000)),Ranges=(OptimalRange=1750.000000,MaxRange=1750.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MechBattleFist_Heavy")
+   BuildingDamageModifier=5.000000
+   TechLevel=-1
+   Name=NSLOCTEXT("[36835A6A4626572DC92D588FE5C3A140]", "A402C1A540F02102841416AC82C439CA", "Heavy Battle Fist Actuator")
+   ShortName=NSLOCTEXT("[36835A6A4626572DC92D588FE5C3A140]", "7BE8AB074D9C57BA3D4C598445D1095B", "Heavy Battle Fist")
+   WeaponType=(TagName="Weapon.Melee.Heavy.Punch")
+   TechBase=(TagName="TechBase.InnerSphere")
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MeleeBattleFistActuatorHeavy_SlotType")
+   WeaponSlotTypeRestrictionList(0)=(Id="MWSlotTypeDataAsset:MeleeBattleFistActuatorHeavy_SlotType")
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   RefitCosts=(bAutoRepair=True)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Punch_512_UIX.Melee_Punch_512_UIX
+   bNonSalvageable=True
+   SalvageChance=0.000000
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   Description=NSLOCTEXT("[36835A6A4626572DC92D588FE5C3A140]", "E096722C4EFAB548A901D4BFC0B48FF2", "Heavy \'Mech melee punch.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

@@ -1,0 +1,33 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="SmallLaser_ShortBurst"
+   StatsData=(DEPRECATED_CBillBaseValue=22500,CBillBaseValueBigInt=(Value=22500),Cooldown=1.500000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=2.000000,HeatGeneratedOverDuration=0.400000,Duration=0.425000,RayAsset=/Game/Objects/Projectiles/SmallLaser/Ray_SmallLaser.Ray_SmallLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/Small_Laser_Burst_Fire.Small_Laser_Burst_Fire,TraceBypassSound=/Game/Audio/Events/Weapons/Energy/SMLaser_Beam.SMLaser_Beam,DamagePaintStats=(BrushRadius=35.000000,BrushStrength=0.400000)),Ranges=(OptimalRange=15000.000000,MaxRange=22500.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=150,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=300,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="SmallLaser_ShortBurst")
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=4.000000
+   TechLevel=1
+   Name=NSLOCTEXT("[EB5D5E804BDB9A2FC6F0E1BF6472F188]", "97A15B084D3608FACD3A728399B219FA", "Small Laser Short Burst")
+   ShortName=NSLOCTEXT("[EB5D5E804BDB9A2FC6F0E1BF6472F188]", "ECD3733A4ABB7E27A787908930729A4D", "S Laser-SB")
+   Manufacturer="Victory"
+   WeaponType=(TagName="Weapon.Energy.Laser.Standard.Small.ShortBurst")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=0.500000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:SmallLaser_SlotType")
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Laser_S_512_UIX.Laser_S_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.800000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_Laser_S_Market_STM.Weapon_Laser_S_Market_STM
+   Description=NSLOCTEXT("", "CCAFCA7F4303BC4908F448B7FC803FCD", "Point defence energy weapon firing a close range, short burst beam for low heat.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.011750,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

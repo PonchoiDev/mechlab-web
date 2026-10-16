@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="Autocannon2_Lvl5"
+   StatsData=(DEPRECATED_CBillBaseValue=150000,CBillBaseValueBigInt=(Value=150000),Projectile=(NumberOfProjectiles=1,Damage=2.000000,Speed=120000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=700.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/AC2_fire.AC2_fire,FireReloadSound=/Game/Audio/Events/Weapons/Ballistics/AC2_Reload.AC2_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC2/Projectile_AC2.Projectile_AC2_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Tny.Shockwave_Tny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_light.single_recoil_light_C,HeatGenerated=0.400000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=0.600000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=72000.000000,MaxRange=72000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Standard.AC2"),MWO_RangeData=(Ranges=((Distance=1,InterpolationType="linear"),(Distance=720,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1440,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Autocannon2")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.225000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   TechLevel=5
+   BattleValueAdjustment=42
+   Name=NSLOCTEXT("[E7118BE742056933183A878D98FC52BD]", "D5DF94744643BAF01D911B8C3CDE30BE", "Autocannon/2")
+   ShortName=NSLOCTEXT("[E7118BE742056933183A878D98FC52BD]", "5A7CA99C44EC8E3E7891619350A0978F", "AC/2")
+   Manufacturer="Stormvanger Assemblies"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.Standard.AC2")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=6.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:AC2_SlotType")
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/AC2_512_UIX.AC2_512_UIX
+   SalvageShareCost=3
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/AC2_STM.AC2_STM
+   Description=NSLOCTEXT("", "645E07684F95A8B803A4239420BFB1F9", "Ballistic weapon with very long range but very low damage.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

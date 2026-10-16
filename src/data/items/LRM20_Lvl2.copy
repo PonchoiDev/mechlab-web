@@ -1,0 +1,33 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="LRM20_Lvl2"
+   StatsData=(DEPRECATED_CBillBaseValue=500000,CBillBaseValueBigInt=(Value=500000),MissileStats=(NumberOfMissiles=20,Projectile=(Damage=1.200000,Speed=20000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=600.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/LRM_20_Fire.LRM_20_Fire,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/LRM_Projectile.LRM_Projectile,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=0.270000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000))),Cooldown=4.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(NullRange=18000.000000,MinRange=18000.000000,OptimalRange=90000.000000,MaxRange=90000.000000),AmmoType=(TagName="Ammo.Missile.LRM"),MissileTurnRate=150.000000,LongRangeMissileRadius=1000.000000,MWO_RangeData=(Ranges=((InterpolationType="step"),(Distance=180,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LRM20")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.060000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.025000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.060000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/MinRangePercentage_Quirk.MinRangePercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.250000)))
+   MissilePath=/Game/Objects/Weapons/_common/MissilePaths/LongRangeMissilePathV2.LongRangeMissilePathV2_C
+   bCanFireOutsideMaxRange=True
+   TechLevel=2
+   BattleValueAdjustment=21
+   Name=NSLOCTEXT("[DE42E23E469AF53D2186D18FBB0E8486]", "C9915BBC41CCC8EFC2301599FC50E1F3", "LRM 20")
+   ShortName=NSLOCTEXT("[DE42E23E469AF53D2186D18FBB0E8486]", "010A91944E98C9DBE7C7DC9F03166DC4", "LRM 20")
+   Manufacturer="Holly"
+   WeaponType=(TagName="Weapon.Missile.LRM.LRM20")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=10.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LRM20_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.496933,G=0.597202,B=0.246201,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=5.000000,RemoveTimeInDays=5.000000,RepairTimeInDays=5.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/LRM20_512_UIX.LRM20_512_UIX
+   SalvageShareCost=4
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_LRM20_Market_STM.Weapon_LRM20_Market_STM
+   Description=NSLOCTEXT("", "6B7646E34D0DA72DCB3E84A014EE6F68", "Long-range missile system that fires 20 guided missiles.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.250000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

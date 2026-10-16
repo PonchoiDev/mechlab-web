@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="MachineGun_Standard_AmmoEquipment"
+   Capacity=5200.000000
+   ExplosionDamagePerRound=0.040000
+   AmmoType=(TagName="Ammo.Ballistic.MachineGun.Standard")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[50A37C094A831CF1BACBA295E1B0E933]", "71067DD24119E40F2C9A75A62ED99BCF", "Machine Gun Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=1949.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=2000.000000
+   CBillBaseValueBigInt=(Value=2000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=0.040000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_MG_512_UIX.Ammo_MG_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_MG_Market_STM.Ammo_MG_Market_STM
+   Description=NSLOCTEXT("[50A37C094A831CF1BACBA295E1B0E933]", "AB6BB3D947861188D7335BAF159F6E06", "One ton of ammunition for the Machine Gun.")
+End Object

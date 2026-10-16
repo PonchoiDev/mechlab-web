@@ -1,0 +1,35 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="PPC_Shotgun_Lvl2"
+   StatsData=(DEPRECATED_CBillBaseValue=400000,CBillBaseValueBigInt=(Value=400000),Projectile=(NumberOfProjectiles=8,SpreadRadius=700.000000,SpreadDistance=12000.000000,bSpreadProjectileSingleBulletAlignment=True,Damage=3.000000,bHasDamageFalloff=True,Speed=104000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=1200.000000,FireSound=/Game/Audio/Events/Weapons/Energy/Snub_PPC_Fire.Snub_PPC_Fire,ProjectileFlightSound=/Game/Audio/Events/Weapons/Energy/PPC_Trail.PPC_Trail,Class=/Game/Objects/Projectiles/PPC/PPCProjectile_Shotgun.PPCProjectile_Shotgun_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Tny.Shockwave_Tny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_medium.single_recoil_medium_C,HeatGenerated=7.000000,DamagePaintStats=(BrushRadius=400.000000,BrushStrength=0.900000)),Cooldown=2.500000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop_PPC.Cooldown_Trace_Loop_PPC,CooldownErrorEvent=/Game/Audio/Events/Cockpit/Cooldown_Error.Cooldown_Error,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Range=(OptimalRange=30000.000000,MaxRange=60000.000000),MWO_RangeData=(Ranges=((InterpolationType="linear"),(Distance=90,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1080,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="PPC_Shotgun")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.025000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.025000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.250000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   bDestroyProjectilePastMaxRange=True
+   ProjectileSelfDestructSound=/Game/Audio/Events/Physics/WeaponImpacts/PPC_Impact.PPC_Impact
+   TechLevel=2
+   Name=NSLOCTEXT("[F1321A284E663DD0A795AE9EB990685A]", "C0C9BC9C4A4B4728740A2C8A226A65F4", "PPC-X")
+   ShortName=NSLOCTEXT("[F1321A284E663DD0A795AE9EB990685A]", "29940F054DA36CE0932B0DA4841B0C40", "PPC-X")
+   Manufacturer="Solaris Arms"
+   WeaponType=(TagName="Weapon.Energy.ParticleCannon.PPC-X")
+   TechBase=(TagName="TechBase.Arena")
+   Tonnage=7.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:PPC_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=3028.12.31-17.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/PPC_512_UIX.PPC_512_UIX
+   SalvageShareCost=3
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_PPC_Market_STM.Weapon_PPC_Market_STM
+   Description=NSLOCTEXT("[F1321A284E663DD0A795AE9EB990685A]", "E9B410964AA7C3C7728968B661DC5246", "Particle projector cannon equipped with an ion separator that fires eight high-energy ion bolts. Creates multiple brief disruption fields within 90m of the impact.")
+   AssociatedDLC=(TagName="DLC.DLC6")
+   OnImpactForceFeedback=(FeedbackIntensity=0.200000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.200000,bUseLargeMotors=True,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

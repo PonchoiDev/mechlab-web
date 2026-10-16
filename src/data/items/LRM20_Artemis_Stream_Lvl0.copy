@@ -1,0 +1,32 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="LRM20_Artemis_Stream_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=700000,CBillBaseValueBigInt=(Value=700000),MissileStats=(NumberOfMissiles=20,MissileInterval=0.050000,Projectile=(bSpreadProjectileSingleBulletAlignment=True,Damage=1.200000,Speed=20000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=500.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/LRM_20_Fire.LRM_20_Fire,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/Projectile_STREAM.Projectile_STREAM,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=0.270000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000))),Cooldown=4.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(NullRange=18000.000000,MinRange=18000.000000,OptimalRange=90000.000000,MaxRange=90000.000000),AmmoType=(TagName="Ammo.Missile.LRM.Artemis"),MissileTurnRate=150.000000,LongRangeMissileRadius=675.000000,MWO_RangeData=(Ranges=((InterpolationType="step"),(Distance=180,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LRM20_Artemis_Stream")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/MinRangePercentage_Quirk.MinRangePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   MissilePath=/Game/Objects/Weapons/_common/MissilePaths/LongRangeMissilePathV2.LongRangeMissilePathV2_C
+   bCanFireOutsideMaxRange=True
+   BattleValueAdjustment=-49
+   Name=NSLOCTEXT("[B463F3B240C54B108C6289AF171E8592]", "5378B20F4992B9F1C45C7381C9568145", "LRM 20 Stream + Artemis IV")
+   ShortName=NSLOCTEXT("[B463F3B240C54B108C6289AF171E8592]", "9559D7304DB4690DB8A31BBCD422ED22", "LRM 20-ST + Art IV")
+   Manufacturer="SturmFeur"
+   WeaponType=(TagName="Weapon.ArtemisMissile.LRM.LRM20.Stream")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=11.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LRM20_Artemis_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.496933,G=0.597202,B=0.246201,A=1.000000)
+   IntroDate=3035.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=6.000000,RemoveTimeInDays=6.000000,RepairTimeInDays=6.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/ALRM20_512_UIX.ALRM20_512_UIX
+   SalvageShareCost=2
+   SalvageChance=0.800000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_ALRM20_Market_STM.Weapon_ALRM20_Market_STM
+   Description=NSLOCTEXT("", "BD24A5D34E665F3C2D5D869A80671409", "Long-range missile system that fires a stream of 20 guided missiles with improved spread.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

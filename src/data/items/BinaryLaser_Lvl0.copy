@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="BinaryLaser_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=200000,CBillBaseValueBigInt=(Value=200000),Cooldown=7.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownErrorEvent=/Game/Audio/Events/Cockpit/Cooldown_Error.Cooldown_Error,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=18.000000,HeatGeneratedOverDuration=14.000000,Duration=1.600000,RayAsset=/Game/Objects/Projectiles/LargeLaser/Ray_LargeBinaryLaser.Ray_LargeBinaryLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/Binary_Laser.Binary_Laser,TraceBypassSound=/Game/Audio/Events/Weapons/Energy/LALaser_Beam.LALaser_Beam,DamagePaintStats=(BrushRadius=55.000000,BrushStrength=0.800000)),Ranges=(OptimalRange=45000.000000,MaxRange=67500.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="BinaryLaser")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=3.000000
+   Name=NSLOCTEXT("[0D1BB99A40437B7037D2DBB3E1412930]", "73018A264A3A7B71EACF0BBCAD1CC1D0", "Binary Laser")
+   ShortName=NSLOCTEXT("[0D1BB99A40437B7037D2DBB3E1412930]", "33257609462116813D7D0B85A96202AA", "B Laser")
+   Manufacturer="Magna Mk.III"
+   WeaponType=(TagName="Weapon.Energy.Laser.Binary.Large")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=9.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LargeLaser_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=2316.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Laser_L_512_UIX.Laser_L_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_Laser_L_Market_STM.Weapon_Laser_L_Market_STM
+   Description=NSLOCTEXT("[0D1BB99A40437B7037D2DBB3E1412930]", "7E2B010042BB81BD766233957E3D759C", "A potent energy weapon with long range and very high damage, but produces massive heat.")
+   AssociatedDLC=(TagName="DLC.DLC6")
+   OnImpactForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.035000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

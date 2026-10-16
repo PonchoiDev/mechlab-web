@@ -1,0 +1,26 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="LightRifle_AmmoEquipment"
+   Capacity=34.000000
+   ExplosionDamagePerRound=6.000000
+   AmmoType=(TagName="Ammo.Ballistic.Rifle.Light")
+   MultipleAssociatedDLC=(GameplayTags=((TagName="DLC.DLC1"),(TagName="DLC.DLC6")))
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[45983812426139E85E94AB8F862D6E94]", "22369405488EBE607C0D5BA7886AE6B0", "Light Rifle Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=2300.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=800.000000
+   CBillBaseValueBigInt=(Value=800)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=3.000000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC1/UI/Textures/Marketplace_Weapons/Ammo_Rifle_L_512_UIX.Ammo_Rifle_L_512_UIX
+   UIXEquipment3DModel=/Game/DLC1/Objects/Marketplace/Weapons/Model/Ammo_Rifle_L_Market_STM.Ammo_Rifle_L_Market_STM
+   Description=NSLOCTEXT("[45983812426139E85E94AB8F862D6E94]", "95B63B9148CEFF05CE9E2BB67C252155", "One ton of ammunition for the Light Rifle.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

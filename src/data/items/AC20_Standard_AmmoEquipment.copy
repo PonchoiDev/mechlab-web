@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="AC20_Standard_AmmoEquipment"
+   Capacity=20.000000
+   ExplosionDamagePerRound=20.000000
+   AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Standard.AC20")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[9FDE1A12481612A5015410AA62D29FFF]", "7D324F3B41DF0DBCC73C40B12E6A2279", "AC/20 Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=2500.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=20000.000000
+   CBillBaseValueBigInt=(Value=20000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=10.000000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/UI/Textures/Marketplace_Weapons/Ammo_AC20_512_UIX.Ammo_AC20_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/Weapons/Model/Ammo_AC20_Market_STM.Ammo_AC20_Market_STM
+   Description=NSLOCTEXT("[9FDE1A12481612A5015410AA62D29FFF]", "C5E0275648B063E039A0B59841CE9750", "One ton of ammunition for the Autocannon/20.")
+End Object

@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="Autocannon20_Demolisher_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=600000,CBillBaseValueBigInt=(Value=600000),Projectile=(NumberOfProjectiles=1,Damage=20.000000,Speed=40000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=5000.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/AC20_fire.AC20_fire,FireReloadSound=/Game/Audio/Events/Weapons/Ballistics/AC20_Reload.AC20_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC20/Projectile_AC20.Projectile_AC20_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Large.Shockwave_Large_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_assault.single_recoil_assault_C,HeatGenerated=6.000000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=150.000000,BrushStrength=2.500000)),Cooldown=4.800000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=27000.000000,MaxRange=27000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Standard.AC20"),MWO_RangeData=(Ranges=((InterpolationType="linear"),(Distance=270,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Autocannon20")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=1.000000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=-0.250000)))
+   FieldRefitGroup=(TagName="UnitType.Vehicle.Tracked.Tank")
+   Name=NSLOCTEXT("[FA8F299640DD102E49E0BA989552F8A8]", "8290735143AEFB9834DAD699F30016BA", "Autocannon/20")
+   ShortName=NSLOCTEXT("[FA8F299640DD102E49E0BA989552F8A8]", "C84FEF634F9E81B46197C7B2586E1BE3", "AC/20")
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.Standard.AC20")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=14.000000
+   WeaponSize=Invalid
+   WeaponDisplayColour=(R=1.000000,G=1.000000,B=1.000000,A=1.000000)
+   IntroDate=2500.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   bNonSalvageable=True
+   SalvageChance=0.900000
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   OnImpactForceFeedback=(FeedbackIntensity=0.300000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.150000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+End Object

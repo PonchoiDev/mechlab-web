@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="MediumPulseLaser_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=120000,CBillBaseValueBigInt=(Value=120000),Cooldown=3.250000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=6.000000,HeatGeneratedOverDuration=2.600000,Duration=0.650000,RayAsset=/Game/Objects/Projectiles/MediumLaser/Ray_MediumPulseLaser.Ray_MediumPulseLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/Medium_Pulse_Laser.Medium_Pulse_Laser,DamagePaintStats=(BrushStrength=0.600000)),Ranges=(OptimalRange=22000.000000,MaxRange=33000.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=220,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=440,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MediumPulseLaser")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=1.500000
+   BattleValueAdjustment=-10
+   Name=NSLOCTEXT("[1296C62E416A25AE80569A8711E7C468]", "B7E6C9AE42F3661493726BABF811C686", "Medium Pulse Laser")
+   ShortName=NSLOCTEXT("[1296C62E416A25AE80569A8711E7C468]", "4B3A7E1A4BB2C81A1C6D0BBD3120F3B9", "MP Laser")
+   Manufacturer="Omnicron XP100"
+   WeaponType=(TagName="Weapon.Energy.Laser.Pulse.Medium")
+   TechBase=(TagName="TechBase.LosTech")
+   Tonnage=2.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MediumPulseLaser_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=3037.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Laser_Pulse_M_512_UIX.Laser_Pulse_M_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.800000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/Weapons/Model/Weapon_Laser_Pulse_M_Market_STM.Weapon_Laser_Pulse_M_Market_STM
+   Description=NSLOCTEXT("", "A2E822C047C5C3733BBC7EB015EB12E3", "Medium-powered energy weapon with medium range, medium damage, and shorter duration to concentrate damage.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.035000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.015000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

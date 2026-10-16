@@ -1,0 +1,23 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="MechInductiveClawsMedium_MeleeWeaponDataAsset"
+   StatsData=(DEPRECATED_CBillBaseValue=40000,CBillBaseValueBigInt=(Value=40000),Cooldown=2.000000,Melee=(Damage=36.000000,HeatDamage=10.000000,Duration=1.250000,ActivationTime=0.500000,Impulse=1250000.000000,MeleePriority=25,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_M_Punch.MechMeleeStrike_M_Punch_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_Punch/Melee_ArmSwing.Melee_ArmSwing),Ranges=(OptimalRange=1875.000000,MaxRange=1875.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Medium_InductiveClaws")
+   BuildingDamageModifier=5.000000
+   TechLevel=5
+   BattleValueAdjustment=15
+   Name=NSLOCTEXT("[AC42E82F40626274F182CEBA648DBB63]", "4D7773424B1198B0D46651AF9092622A", "Medium Inductive Claws")
+   ShortName=NSLOCTEXT("[AC42E82F40626274F182CEBA648DBB63]", "94DEE3ED4EB0855E36B174B99EA789B4", "Medium Inductive Claws")
+   WeaponType=(TagName="Weapon.Melee.Medium.Claw")
+   TechBase=(TagName="TechBase.InnerSphere")
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MeleeInductiveClaws_SlotType")
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   RefitCosts=(bAutoRepair=True)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Medium_Claw_512_UIX.Melee_Medium_Claw_512_UIX
+   bNonSalvageable=True
+   SalvageChance=0.000000
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   Description=NSLOCTEXT("[AC42E82F40626274F182CEBA648DBB63]", "8E48A5604C37247D7763EB8EA3820406", "A heavily modified and energized version of standard \'Mech claws that deals damage and increases the heat level on impacted targets.")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object
