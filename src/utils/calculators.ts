@@ -122,24 +122,26 @@ export const calculateCoolingRate = (
 export const calculateTopSpeed = (baseSpeed: number): number =>
   roundTo(baseSpeed * GAME_SPEED_DISPLAY_FACTOR, 1);
 
+export type WeaponStats = Omit<WeaponPerformance, 'zone' | 'item'>;
+
+export const getWeaponStats = (item: Item): WeaponStats => {
+  const stats = getTierStats(item);
+  const damage = getWeaponDamage(item);
+  const rpm = stats?.rpm ?? (stats?.cooldown ? 60 / stats.cooldown : 0);
+
+  return {
+    damage,
+    heat: getWeaponHeat(item),
+    rpm,
+    dps: damage * rpm / 60,
+    range: stats?.range ?? null
+  };
+};
+
 export const getWeaponPerformance = (loadout: Loadout): WeaponPerformance[] =>
   (Object.entries(loadout) as [Zone, Item[]][]).flatMap(([zone, items]) => items
     .filter(item => item.type === 'weapon')
-    .map(item => {
-      const stats = getTierStats(item);
-      const damage = getWeaponDamage(item);
-      const rpm = stats?.rpm ?? (stats?.cooldown ? 60 / stats.cooldown : 0);
-
-      return {
-        zone,
-        item,
-        damage,
-        heat: getWeaponHeat(item),
-        rpm,
-        dps: damage * rpm / 60,
-        range: stats?.range ?? null
-      };
-    }));
+    .map(item => ({ zone, item, ...getWeaponStats(item) })));
 
 export const calculateFirepower = (loadout: Loadout): number =>
   roundTo(sumBy(getWeaponPerformance(loadout), weapon => weapon.damage), 1);
@@ -152,17 +154,36 @@ export interface AmmunitionGroup {
   label: string;
   capacity: number;
   bins: number;
+  // Salvas completas disparando a la vez todas las armas que la usan, y segundos de fuego continuo.
+  volleys: number | null;
+  seconds: number | null;
 }
 
 export const groupAmmunition = (loadout: Loadout): AmmunitionGroup[] => {
+  const equipped = getEquippedItems(loadout);
   const groups = new Map<string, AmmunitionGroup>();
 
-  for (const item of getEquippedItems(loadout).filter(equippedItem => equippedItem.type === 'ammo')) {
+  for (const item of equipped.filter(equippedItem => equippedItem.type === 'ammo')) {
     const ammoType = item.ammoType ?? item.id;
-    const group = groups.get(ammoType) ?? { ammoType, label: getAmmoLabel(item), capacity: 0, bins: 0 };
+    const group = groups.get(ammoType) ?? {
+      ammoType,
+      label: getAmmoLabel(item),
+      capacity: 0,
+      bins: 0,
+      volleys: null,
+      seconds: null
+    };
     group.capacity += item.capacity ?? 0;
     group.bins += 1;
     groups.set(ammoType, group);
+  }
+
+  for (const group of groups.values()) {
+    const users = equipped.filter(item => item.type === 'weapon' && item.ammoType === group.ammoType);
+    const ammoPerVolley = sumBy(users, item => item.ammoPerVolley ?? 1);
+    const ammoPerSecond = sumBy(users, item => (item.ammoPerVolley ?? 1) * getWeaponStats(item).rpm / 60);
+    group.volleys = ammoPerVolley > 0 ? Math.floor(group.capacity / ammoPerVolley) : null;
+    group.seconds = ammoPerSecond > 0 ? Math.round(group.capacity / ammoPerSecond) : null;
   }
 
   return [...groups.values()];

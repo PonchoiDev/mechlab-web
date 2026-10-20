@@ -8,7 +8,8 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 - Equipamiento por componente respetando el tipo y tamaño de los anclajes y las ranuras especiales (motor, jump jets por clase, supercargadores).
 - Tiers de armas (0–5) que cambian sus estadísticas.
 - Armadura delantera y trasera por zona, con botones para vaciarla o maximizarla según el tonelaje libre.
-- Vista de taller y vista previa del build completo.
+- Tablero con el 'Mech en el centro y sus componentes alrededor; al pulsar un componente o un anclaje se abre un panel lateral para equiparlo, con filtros por texto, base tecnológica y tipo de arma.
+- Resumen de pendientes de la build (anclajes libres, armas sin munición, armadura incompleta, sobrepeso) y duración de la munición instalada.
 - Tabla de rendimiento de armas (daño, calor, RPM, DPS y alcance) y resumen de munición.
 - Imagen de referencia de cada 'Mech obtenida de [Sarna.net](https://www.sarna.net).
 
@@ -60,7 +61,7 @@ python3 tools/generar_items.py
 
 `generar_mechs.py` lee los archivos de `tools/datos-juego/mda/` y escribe `src/data/mechs.json`. Descarta las variantes no jugables (campaña, tutorial, jefes y cinemáticas), listadas en `ARCHIVOS_NO_JUGABLES`, y avisa si encuentra variantes repetidas. Para cada anclaje cuerpo a cuerpo guarda su tamaño (S antebrazo, M mano, L brazo de arma), la clase de peso del 'Mech y, si lo tiene, el arma especial que usa cuando el anclaje está vacío.
 
-`generar_items.py` lee los archivos de `tools/datos-juego/items/` y escribe `src/data/items.json`. Agrupa los tiers de cada arma (`_Lvl0` a `_Lvl5`) aplicando sus quirks, guarda el tipo de munición de cada arma y munición, y los multiplicadores de la salva (proyectiles para el daño, misiles y disparos de ráfaga para el calor). Las armas no guardan slots, porque en MW5 Mercenaries solo ocupan un anclaje. Ignora los archivos que no son objetos equipables y, al terminar, avisa de las municiones que faltan.
+`generar_items.py` lee los archivos de `tools/datos-juego/items/` y escribe `src/data/items.json`. Agrupa los tiers de cada arma (`_Lvl0` a `_Lvl5`) aplicando sus quirks, guarda la base tecnológica de cada objeto, el tipo de munición de cada arma y munición, los multiplicadores de la salva (proyectiles para el daño, misiles y disparos de ráfaga para el calor) y la munición que gasta cada arma por salva. Las armas no guardan slots, porque en MW5 Mercenaries solo ocupan un anclaje. Ignora los archivos que no son objetos equipables y, al terminar, avisa de las municiones que faltan.
 
 Ambos aceptan opcionalmente otra ruta de destino como argumento.
 

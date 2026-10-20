@@ -22,7 +22,10 @@ REGEX_TIPO_MUNICION = re.compile(r'AmmoType=\(TagName="([^"]+)"\)')
 REGEX_MISILES = re.compile(r'(?<![A-Za-z])NumberOfMissiles=([0-9]+)')
 REGEX_PROYECTILES = re.compile(r'(?<![A-Za-z])NumberOfProjectiles=([0-9]+)')
 REGEX_DISPAROS = re.compile(r'(?<![A-Za-z])NumberOfTimesToFire=([0-9]+)')
+REGEX_CONSUME_POR_DISPARO = re.compile(r'bConsumeAmmoOnSubsequentFire=True')
 CLASE_TIPO_DE_RANURA = "MWSlotTypeDataAsset"
+REGEX_RANURAS_ADMITIDAS = re.compile(r'SupportedSlotTypesAssetId(?:\(\d+\))?=\(Id="MWSlotTypeDataAsset:([^"]+)"')
+REGEX_TECH_BASE = re.compile(r'TechBase=\(TagName="TechBase\.(\w+)"')
 REGEX_CLASE_CUERPO_A_CUERPO = re.compile(r'WeaponType=\(TagName="Weapon\.Melee\.(Light|Medium|Heavy|Assault)\.', re.IGNORECASE)
 
 REGEX_DAMAGE = re.compile(r'(?:DamageOverDuration|(?<![a-zA-Z])Damage)=([0-9.]+)')
@@ -191,6 +194,15 @@ def obtener_multiplicadores_salva(contenido):
     return (misiles or proyectiles or 1) * disparos, (misiles or 1) * disparos
 
 
+def obtener_municion_por_salva(contenido):
+    # Los misiles gastan uno cada uno; las ráfagas solo gastan en cada disparo si el arma lo indica,
+    # y los perdigones de un LB-X no gastan munición propia.
+    misiles = int(buscar_texto(REGEX_MISILES, contenido, 0))
+    disparos = int(buscar_texto(REGEX_DISPAROS, contenido, 0)) or 1
+    por_disparo = misiles or 1
+    return por_disparo * disparos if REGEX_CONSUME_POR_DISPARO.search(contenido) else por_disparo
+
+
 def construir_item(id_base, tiers):
     contenido = tiers["1"] if "1" in tiers else tiers[sorted(tiers)[0]]
     tipo_general = determinar_tipo_general(buscar_texto(REGEX_CLASE, contenido))
@@ -209,6 +221,12 @@ def construir_item(id_base, tiers):
     slots = determinar_slots(tipo_general, int(slots_archivo) if slots_archivo else None)
     if slots is not None:
         item["slots"] = slots
+
+    if tipo_general != "weapon":
+        # Ranuras donde se puede montar, con las especiales primero (p. ej. motor antes que general).
+        ranuras = REGEX_RANURAS_ADMITIDAS.findall(contenido)
+        if ranuras:
+            item["specialSlotTypes"] = sorted(ranuras, key=lambda ranura: ranura == "General_SlotType")
 
     refrigeracion = buscar_numero(REGEX_REFRIGERACION, contenido)
     if refrigeracion is not None:
@@ -231,9 +249,15 @@ def construir_item(id_base, tiers):
         if clase_de_peso:
             item["weightClass"] = clase_de_peso.lower()
 
+    tech_base = buscar_texto(REGEX_TECH_BASE, contenido)
+    if tech_base:
+        item["techBase"] = tech_base
+
     tipo_municion = buscar_texto(REGEX_TIPO_MUNICION, contenido)
     if tipo_municion and tipo_general in ("weapon", "ammo"):
         item["ammoType"] = tipo_municion
+        if tipo_general == "weapon":
+            item["ammoPerVolley"] = obtener_municion_por_salva(contenido)
 
     return item
 

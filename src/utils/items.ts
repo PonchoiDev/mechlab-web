@@ -49,7 +49,52 @@ export const isAmmoCompatibleWithWeapon = (ammo: Item, weapon: Item): boolean =>
   ammo.ammoType !== undefined &&
   ammo.ammoType === weapon.ammoType;
 
-export const getSizeLabel = (item: Item): string => item.size.charAt(0).toUpperCase();
+const SIZE_NAMES: Record<ItemSize, string> = { small: 'Small', medium: 'Medium', large: 'Large' };
+
+const WEAPON_TYPE_NAMES: Record<WeaponType, string> = {
+  energy: 'Energy',
+  ballistic: 'Ballistic',
+  missile: 'Missile',
+  ams: 'AMS',
+  melee: 'Melee'
+};
+
+export const getSizeName = (size: ItemSize): string => SIZE_NAMES[size];
+
+export const getWeaponTypeName = (weaponType: WeaponType): string => WEAPON_TYPE_NAMES[weaponType];
+
+export const isClanTech = (item: Item): boolean => item.techBase === 'Clan';
+
+export const getTierName = (item: Item): string | null => {
+  if (item.type !== 'weapon' || !item.tiers) return null;
+  // Las armas Clan tienen un único nivel, que el juego muestra como tier Clan.
+  if (isClanTech(item)) return 'Clan tier';
+  const tier = item.tier ?? '1';
+  if (tier.toLowerCase() === 'clan') return 'Clan tier';
+  return tier === '5' ? 'Lost Tech tier' : `Tier ${tier}`;
+};
+
+const TECH_BASE_NAMES: Record<string, string> = {
+  InnerSphere: 'Inner Sphere',
+  LosTech: 'LosTech'
+};
+
+export const getTechBaseName = (techBase: string): string => TECH_BASE_NAMES[techBase] ?? techBase;
+
+export interface ItemFilters {
+  search?: string;
+  techBase?: string | null;
+  weaponType?: WeaponType | null;
+}
+
+export const filterItems = (items: Item[], { search = '', techBase = null, weaponType = null }: ItemFilters): Item[] => {
+  const query = search.trim().toLowerCase();
+  return items.filter(item =>
+    (!query || item.name.toLowerCase().includes(query)) &&
+    (!techBase || item.techBase === techBase) &&
+    (!weaponType || getItemWeaponType(item) === weaponType)
+  );
+};
 
 export const getSlotsLabel = (item: Item): string => {
   const slots = item.slots ?? 0;

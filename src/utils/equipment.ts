@@ -1,6 +1,7 @@
 import type { Item } from '../types/item';
 import type { ComponentData, EquippedItem, Hardpoint, Loadout, Zone } from '../types/mech';
 import { getItemSupportedSlotTypes, getItemWeaponType, isAmmoCompatibleWithWeapon, SIZE_RANK } from './items';
+import { mapZones } from './zones';
 
 const GENERAL_SLOT_TYPE = 'General_SlotType';
 
@@ -45,16 +46,35 @@ const fitsHardpoint = (hardpoint: Hardpoint, weapon: Item, weaponType: Hardpoint
       : SIZE_RANK[hardpoint.size] >= SIZE_RANK[weapon.size]
   );
 
+export const weaponFitsHardpoint = (hardpoint: Hardpoint, weapon: Item): boolean => {
+  const weaponType = getItemWeaponType(weapon);
+  return weapon.type === 'weapon' && weaponType !== null && fitsHardpoint(hardpoint, weapon, weaponType);
+};
+
+type PlacedItem = Item & { hardpointIndex?: number };
+
+// Las armas con hardpointIndex se quedan en el anclaje donde se equiparon; el resto se reparte
+// empezando por las más grandes en el primer anclaje libre compatible.
 export const getHardpointOccupancy = (
   hardpoints: Hardpoint[] = [],
-  equippedItems: Item[] = []
+  equippedItems: PlacedItem[] = []
 ): { occupiedIndices: Set<number>; weaponAssignments: Map<number, Item> } => {
-  const weapons = equippedItems
-    .filter((item) => item.type === 'weapon')
-    .sort((first, second) => SIZE_RANK[second.size] - SIZE_RANK[first.size]);
-
   const occupiedIndices = new Set<number>();
   const weaponAssignments = new Map<number, Item>();
+  const unplaced: Item[] = [];
+
+  for (const weapon of equippedItems.filter(item => item.type === 'weapon')) {
+    const index = weapon.hardpointIndex;
+    const hardpoint = index !== undefined ? hardpoints[index] : undefined;
+    if (index !== undefined && hardpoint && !occupiedIndices.has(index) && weaponFitsHardpoint(hardpoint, weapon)) {
+      occupiedIndices.add(index);
+      weaponAssignments.set(index, weapon);
+    } else {
+      unplaced.push(weapon);
+    }
+  }
+
+  const weapons = unplaced.sort((first, second) => SIZE_RANK[second.size] - SIZE_RANK[first.size]);
 
   for (const weapon of weapons) {
     const weaponType = getItemWeaponType(weapon);
@@ -112,11 +132,27 @@ export const canEquipItem = (item: Item, componentData: ComponentData, equippedI
   return weaponAssignments.size === weaponCount;
 };
 
-export const createEquippedItem = (item: Item, equippedSlotType?: string): EquippedItem => ({
+export const createEquippedItem = (item: Item, equippedSlotType?: string, hardpointIndex?: number): EquippedItem => ({
   ...item,
   ...(equippedSlotType ? { equippedSlotType } : {}),
+  ...(hardpointIndex !== undefined ? { hardpointIndex } : {}),
   instanceId: `item-${++nextInstanceId}`
 });
+
+// Anclaje libre donde colocar un arma: el más pequeño que le sirva, para no gastar los grandes.
+export const findHardpointForWeapon = (
+  hardpoints: Hardpoint[],
+  equippedItems: PlacedItem[],
+  weapon: Item
+): number | null => {
+  const { occupiedIndices } = getHardpointOccupancy(hardpoints, equippedItems);
+  const candidates = hardpoints
+    .map((hardpoint, index) => ({ hardpoint, index }))
+    .filter(({ hardpoint, index }) => !occupiedIndices.has(index) && weaponFitsHardpoint(hardpoint, weapon))
+    .sort((first, second) => SIZE_RANK[first.hardpoint.size] - SIZE_RANK[second.hardpoint.size] || first.index - second.index);
+
+  return candidates[0]?.index ?? null;
+};
 
 export const getEquippableItems = (
   catalog: Item[],
@@ -135,9 +171,104 @@ export const getEquippableItems = (
   });
 };
 
-export const getActiveBuiltInMeleeWeapons = (hardpoints: Hardpoint[], equippedItems: Item[]): string[] => {
+
+export interface HardpointView {
+  index: number;
+  hardpoint: Hardpoint;
+  weapon?: Item;
+  builtInWeapon?: string;
+}
+
+export const getHardpointViews = (hardpoints: Hardpoint[], equippedItems: Item[]): HardpointView[] => {
   const { weaponAssignments } = getHardpointOccupancy(hardpoints, equippedItems);
-  return hardpoints
-    .filter((hardpoint, index) => hardpoint.defaultWeapon && !weaponAssignments.has(index))
-    .map(hardpoint => hardpoint.defaultWeapon as string);
+  return hardpoints.map((hardpoint, index) => {
+    const weapon = weaponAssignments.get(index);
+    return {
+      index,
+      hardpoint,
+      weapon,
+      builtInWeapon: !weapon ? hardpoint.defaultWeapon : undefined
+    };
+  });
+};
+
+export interface SpecialSlotStatus {
+  slotType: string;
+  used: number;
+  capacity: number;
+}
+
+export interface ComponentStatus {
+  usedSlots: number;
+  maxSlots: number;
+  freeHardpoints: number;
+  freeHardpointIndices: number[];
+  specialSlots: SpecialSlotStatus[];
+  isOverSlots: boolean;
+  hasFreeSpace: boolean;
+}
+
+export const getComponentStatus = (componentData: ComponentData, equippedItems: Item[]): ComponentStatus => {
+  const usedSlots = getUsedGeneralSlots(equippedItems);
+  // Un anclaje con arma especial de serie no se considera libre: si se deja vacío, se usa esa arma.
+  const freeHardpointIndices = getHardpointViews(componentData.hardpoints, equippedItems)
+    .filter(view => !view.weapon && !view.builtInWeapon)
+    .map(view => view.index);
+  const freeHardpoints = freeHardpointIndices.length;
+  const specialSlots = Object.entries(componentData.specialSlots ?? {})
+    .filter(([, capacity]) => capacity > 0)
+    .map(([slotType, capacity]) => ({
+      slotType,
+      capacity,
+      used: equippedItems.filter(item => item.equippedSlotType === slotType).length
+    }));
+
+  return {
+    usedSlots,
+    maxSlots: componentData.maxSlots,
+    freeHardpoints,
+    freeHardpointIndices,
+    specialSlots,
+    isOverSlots: usedSlots > componentData.maxSlots,
+    hasFreeSpace: freeHardpoints > 0 || usedSlots < componentData.maxSlots ||
+      specialSlots.some(slot => slot.used < slot.capacity)
+  };
+};
+
+export const getWeaponsForHardpoint = (
+  catalog: Item[],
+  componentData: ComponentData,
+  equippedItems: PlacedItem[],
+  hardpointIndex: number
+): Item[] => {
+  const hardpoint = componentData.hardpoints[hardpointIndex];
+  if (!hardpoint) return [];
+  if (getHardpointOccupancy(componentData.hardpoints, equippedItems).occupiedIndices.has(hardpointIndex)) return [];
+
+  return catalog.filter(item => weaponFitsHardpoint(hardpoint, item));
+};
+
+export interface AmmoWarning {
+  kind: 'missing-ammo' | 'unused-ammo';
+  itemName: string;
+}
+
+// Armas que usan munición sin ninguna compatible en el mech, y munición que no sirve a ningún arma equipada.
+export const getAmmoWarnings = (loadout: Loadout): Record<Zone, AmmoWarning[]> => {
+  const equipped = Object.values(loadout).flat();
+  const weapons = equipped.filter(item => item.type === 'weapon');
+  const ammo = equipped.filter(item => item.type === 'ammo');
+
+  return mapZones(zone => {
+    const warnings = new Map<string, AmmoWarning>();
+    for (const item of loadout[zone]) {
+      if (item.type === 'weapon' && item.ammoType && !ammo.some(bin => isAmmoCompatibleWithWeapon(bin, item))) {
+        warnings.set(`missing-${item.name}`, { kind: 'missing-ammo', itemName: item.name });
+      }
+      if (item.type === 'ammo' && !weapons.some(weapon => isAmmoCompatibleWithWeapon(item, weapon))) {
+        warnings.set(`unused-${item.name}`, { kind: 'unused-ammo', itemName: item.name });
+      }
+    }
+    return [...warnings.values()];
+  });
 };

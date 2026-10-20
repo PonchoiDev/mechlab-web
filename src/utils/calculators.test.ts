@@ -11,6 +11,7 @@ import {
   createDefaultArmor,
   getBuildSummary,
   getWeaponPerformance,
+  getWeaponStats,
   groupAmmunition,
   maximizeArmor
 } from './calculators';
@@ -267,8 +268,8 @@ describe('groupAmmunition', () => {
     const halfBin = getItem('AC20_Standard_Half_AmmoEquipment').capacity ?? 0;
 
     expect(groupAmmunition(loadout)).toEqual([
-      { ammoType: 'Ammo.Ballistic.AutoCannon.Standard.AC20', label: 'AC/20', capacity: fullBin + halfBin, bins: 2 },
-      { ammoType: 'Ammo.Missile.LRM', label: 'LRM', capacity: getItem('LRM_AmmoEquipment').capacity, bins: 1 }
+      { ammoType: 'Ammo.Ballistic.AutoCannon.Standard.AC20', label: 'AC/20', capacity: fullBin + halfBin, bins: 2, volleys: null, seconds: null },
+      { ammoType: 'Ammo.Missile.LRM', label: 'LRM', capacity: getItem('LRM_AmmoEquipment').capacity, bins: 1, volleys: null, seconds: null }
     ]);
   });
 
@@ -326,5 +327,40 @@ describe('clampArmorValue', () => {
   it('limita la suma de delantera y trasera al máximo de la zona', () => {
     expect(clampArmorValue(55, 10, 60)).toBe(50);
     expect(clampArmorValue(1, 60, 60)).toBe(0);
+  });
+});
+
+describe('getWeaponStats', () => {
+  it('da las estadísticas de un arma suelta igual que en la tabla de rendimiento', () => {
+    const lrm = getItem('LRM20');
+    const [performance] = getWeaponPerformance(makeLoadout({ leftTorso: [lrm] }));
+
+    expect(performance).toMatchObject(getWeaponStats(lrm));
+  });
+});
+
+describe('duración de la munición', () => {
+  it('calcula salvas y segundos de fuego con las armas que la usan', () => {
+    const lrmAmmo = getItem('LRM_AmmoEquipment');
+    const [group] = groupAmmunition(makeLoadout({ leftTorso: [getItem('LRM20'), lrmAmmo] }));
+    const lrm = getWeaponStats(getItem('LRM20'));
+
+    expect(group.volleys).toBe(Math.floor((lrmAmmo.capacity ?? 0) / 20));
+    expect(group.seconds).toBe(Math.round((lrmAmmo.capacity ?? 0) / (20 * lrm.rpm / 60)));
+  });
+
+  it('reparte la munición entre todas las armas que la usan', () => {
+    const ammo = getItem('AC20_Standard_AmmoEquipment');
+    const [single] = groupAmmunition(makeLoadout({ rightArm: [getItem('Autocannon20')], leftLeg: [ammo] }));
+    const [shared] = groupAmmunition(makeLoadout({ rightArm: [getItem('Autocannon20')], leftArm: [getItem('Autocannon20_Burst')], leftLeg: [ammo] }));
+
+    expect(single.volleys).toBe(ammo.capacity);
+    expect(shared.volleys).toBe(Math.floor((ammo.capacity ?? 0) / 2));
+  });
+
+  it('las ráfagas solo gastan munición por disparo cuando el arma lo indica', () => {
+    expect(getItem('Autocannon20_Burst').ammoPerVolley).toBe(1);
+    expect(getItem('C-LRM20').ammoPerVolley).toBe(20);
+    expect(getItem('LBXAutocannon10').ammoPerVolley).toBe(1);
   });
 });

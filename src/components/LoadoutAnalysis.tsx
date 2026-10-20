@@ -1,6 +1,11 @@
 import type { AmmunitionGroup, WeaponPerformance } from '../utils/calculators';
 import { ZONE_LABELS } from '../utils/zones';
 
+const formatDuration = (seconds: number): string => {
+  const minutes = Math.floor(seconds / 60);
+  return minutes > 0 ? `${minutes}m ${String(seconds % 60).padStart(2, '0')}s` : `${seconds}s`;
+};
+
 interface LoadoutAnalysisProps {
   weapons: WeaponPerformance[];
   ammunition: AmmunitionGroup[];
@@ -58,10 +63,17 @@ export function LoadoutAnalysis({ weapons, ammunition }: LoadoutAnalysisProps) {
               <h2>Installed ammunition</h2>
             </div>
           </header>
-          {ammunition.map(({ ammoType, label, capacity, bins }) => (
+          {ammunition.map(({ ammoType, label, capacity, bins, volleys, seconds }) => (
             <div className="ammunition-row" key={ammoType}>
               <span>{label}<small>{bins} {bins === 1 ? 'bin' : 'bins'}</small></span>
-              <strong>{capacity} rounds</strong>
+              <span className="ammunition-amount">
+                <strong>{capacity} rounds</strong>
+                <small>
+                  {volleys === null
+                    ? 'no weapon uses it'
+                    : `${volleys} ${volleys === 1 ? 'volley' : 'volleys'}${seconds !== null ? ` · ${formatDuration(seconds)} of fire` : ''}`}
+                </small>
+              </span>
             </div>
           ))}
         </div>
