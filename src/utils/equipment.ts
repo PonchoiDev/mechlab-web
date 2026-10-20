@@ -29,7 +29,7 @@ export const getSlotTypeLabel = (slotType: string): string =>
 export const getUsedGeneralSlots = (equippedItems: Item[]): number =>
   equippedItems
     .filter(item => item.type !== 'weapon' && (item.equippedSlotType ?? GENERAL_SLOT_TYPE) === GENERAL_SLOT_TYPE)
-    .reduce((total, item) => total + item.slots, 0);
+    .reduce((total, item) => total + (item.slots ?? 0), 0);
 
 // Cuerpo a cuerpo: el arma debe ser de la clase de peso del mech. Los antebrazos (S) solo
 // admiten Hammerfist (S); las manos (M) y los brazos de arma (L) admiten armas de su tamaño o menores, salvo S.
@@ -88,7 +88,7 @@ export const getAvailableSlotType = (
 ): string | null => {
   for (const slotType of getItemSupportedSlotTypes(item)) {
     if (slotType === GENERAL_SLOT_TYPE) {
-      if (getUsedGeneralSlots(equippedItems) + item.slots <= componentData.maxSlots) return slotType;
+      if (getUsedGeneralSlots(equippedItems) + (item.slots ?? 0) <= componentData.maxSlots) return slotType;
       continue;
     }
 

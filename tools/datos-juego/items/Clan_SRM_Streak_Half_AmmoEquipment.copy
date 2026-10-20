@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="Clan_SRM_Streak_Half_AmmoEquipment"
+   Capacity=160.000000
+   ExplosionDamagePerRound=2.000000
+   AmmoType=(TagName="Ammo.Missile.SRM.Streak.Clan")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.Clan")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[F65A76204BD9D3AD8622D9AC48D652D0]", "987AB87740DD037E2C1A279087095A3A", "Clan Streak SRM Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=3035.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=108000.000000
+   CBillBaseValueBigInt=(Value=108000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=1.000000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_SSRM_Half_512_UIX.Clan_Ammo_SSRM_Half_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Ammo_SSRM_Market_STM.Clan_Ammo_SSRM_Market_STM
+   Description=NSLOCTEXT("[F65A76204BD9D3AD8622D9AC48D652D0]", "9CE7FA964B0C800AA5845FA1D341DCBB", "One ton of ammunition for the streak short-range missile launchers.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

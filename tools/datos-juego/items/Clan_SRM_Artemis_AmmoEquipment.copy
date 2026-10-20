@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="Clan_SRM_Artemis_AmmoEquipment"
+   Capacity=320.000000
+   ExplosionDamagePerRound=2.150000
+   AmmoType=(TagName="Ammo.Missile.SRM.Artemis.Clan")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.Clan")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[C2D6F6AB43398571CBC8EAA22AC5BD2D]", "A5D6FA88423B64F3AC22899254984286", "Clan SRM Artemis Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=3035.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=108000.000000
+   CBillBaseValueBigInt=(Value=108000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=1.075000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_ASRM_512_UIX.Clan_Ammo_ASRM_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Ammo_ASRM_Market_STM.Clan_Ammo_ASRM_Market_STM
+   Description=NSLOCTEXT("[C2D6F6AB43398571CBC8EAA22AC5BD2D]", "2E4736B041CFD2C93399B39CD6D31AA8", "One ton of ammunition for the Artemis IV equipped short-range missile launchers.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="Clan_AC2_Ultra_Half_AmmoEquipment"
+   Capacity=90.000000
+   ExplosionDamagePerRound=2.000000
+   AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.Clan")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[AE548696479B7AFFC2F9BB8BE1152473]", "AF4C87F946836C03177D748C4A5A8AC7", "Clan Ultra AC/2 Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=3040.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=18000.000000
+   CBillBaseValueBigInt=(Value=18000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=2.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_UAC2_Half_512_UIX.Clan_Ammo_UAC2_Half_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Ammo_UAC2_Market_STM.Clan_Ammo_UAC2_Market_STM
+   Description=NSLOCTEXT("[AE548696479B7AFFC2F9BB8BE1152473]", "7F9AD1BE43190EF6BDB00685E4E658D4", "One ton of ammunition for the Clan Ultra Autocannon/2.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

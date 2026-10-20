@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="ArrowIV_AmmoEquipment"
+   Capacity=10.000000
+   ExplosionDamagePerRound=2.150000
+   AmmoType=(TagName="Ammo.Missile.ArrowIV")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[F59EB496405EF27E2E2F1C87F31C5CDA]", "475F3258421AC947FD333A9CD49404D8", "Arrow IV Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=3045.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=20000.000000
+   CBillBaseValueBigInt=(Value=20000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=1.075000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC8/UI/Textures/marketplace_weapons/Ammo_ArrowIV_512_UIX.Ammo_ArrowIV_512_UIX
+   UIXEquipment3DModel=/Game/DLC8/Objects/Marketplace/clanweapons/Model/Ammo_ArrowIV_Market_STM.Ammo_ArrowIV_Market_STM
+   Description=NSLOCTEXT("[F59EB496405EF27E2E2F1C87F31C5CDA]", "FDEEE898458A1C541F72AB92516FEB04", "One ton of ammunition for the Arrow IV artillery missile.")
+   AssociatedDLC=(TagName="DLC.DLC8")
+End Object

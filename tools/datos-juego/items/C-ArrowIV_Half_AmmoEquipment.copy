@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="C-ArrowIV_Half_AmmoEquipment"
+   Capacity=5.000000
+   ExplosionDamagePerRound=2.150000
+   AmmoType=(TagName="Ammo.Missile.ArrowIV.Clan")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.Clan")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[78AC82444924A33708B9C3885E926139]", "2BBD60AA4A0EF2C59F88248A77C5252C", "C-Arrow IV Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=3035.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=20000.000000
+   CBillBaseValueBigInt=(Value=20000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=1.075000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC8/UI/Textures/marketplace_weapons/Ammo_ArrowIV_Half_512_UIX.Ammo_ArrowIV_Half_512_UIX
+   UIXEquipment3DModel=/Game/DLC8/Objects/Marketplace/clanweapons/Model/Ammo_ArrowIV_Market_STM.Ammo_ArrowIV_Market_STM
+   Description=NSLOCTEXT("[78AC82444924A33708B9C3885E926139]", "9B73C1FB4112ACE2FA3482BA64DB56DA", "One-half ton of ammunition for the C-Arrow IV artillery missile.")
+   AssociatedDLC=(TagName="DLC.DLC8")
+End Object
