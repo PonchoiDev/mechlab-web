@@ -1,0 +1,33 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="SmallXPulseLaser"
+   StatsData=(DEPRECATED_CBillBaseValue=62000,CBillBaseValueBigInt=(Value=62000),Cooldown=0.250000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=1.000000,HeatGeneratedOverDuration=0.400000,Duration=0.250000,RayAsset=/Game/Objects/Projectiles/SmallLaser/Ray_SmallXPulseLaser.Ray_SmallXPulseLaser_C,FireSound=/Game/Audio/Events/Clan_Weapons/Energy/SFX_X_Pulse_Laser_Medium.SFX_X_Pulse_Laser_Medium,DamagePaintStats=(BrushStrength=0.600000)),Ranges=(OptimalRange=16000.000000,MaxRange=24000.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=110,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=220,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="SmallXPulseLaser")
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=1.500000
+   TechLevel=1
+   Name=NSLOCTEXT("[6854AB2C463D927B4C35A3B1B12D036B]", "3C91D65A468D2E4D0EA037B2B099010A", "Small X Pulse Laser")
+   ShortName=NSLOCTEXT("[6854AB2C463D927B4C35A3B1B12D036B]", "2952183F4D03314130BC92A450428D99", "SXP Laser")
+   Manufacturer="General Motors"
+   WeaponType=(TagName="Weapon.Energy.Laser.Pulse.Small.XPulse")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=1.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Energy_Small_SlotType")
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=3057.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Laser_ER_S_512_UIX.Clan_Laser_ER_S_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Laser_ER_S_Market_STM.Clan_Laser_ER_S_Market_STM
+   Description=NSLOCTEXT("", "05FDEBBD4A1D9CF43B26239DF3EAD311", "A modified variant of the Pulse Laser, this version has extended range and a continuous beam.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.035000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.015000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

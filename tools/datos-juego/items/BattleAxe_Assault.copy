@@ -1,0 +1,28 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="BattleAxe_Assault"
+   StatsData=(DEPRECATED_CBillBaseValue=70000,CBillBaseValueBigInt=(Value=70000),Cooldown=3.800000,Melee=(Damage=80.000000,Duration=1.750000,ActivationTime=0.700000,Impulse=1250000.000000,MeleePriority=25,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_A_BattleAxe.MechMeleeStrike_A_BattleAxe_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_BattleAxe/Melee_A_BattleAxe_Swing.Melee_A_BattleAxe_Swing),Ranges=(OptimalRange=2000.000000,MaxRange=2000.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Assault_BattleAxe")
+   BuildingDamageModifier=5.000000
+   TechLevel=1
+   Name=NSLOCTEXT("[CD8CD2F0421F1A75785A84ABC5A709BB]", "5933025D40E1A211F15699BFBA16D32F", "Assault Battle Axe")
+   ShortName=NSLOCTEXT("[CD8CD2F0421F1A75785A84ABC5A709BB]", "0E1969394925621160AE7BB864810032", "Assault Battle Axe")
+   Manufacturer="Defiance Type 1"
+   WeaponType=(TagName="Weapon.Melee.Assault.BattleAxe")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=7.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Assault_Melee_Weapon_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   RefitCosts=(InstallTimeInDays=1.000000,InstallCBillCost=2000,RepairCBillCost=1000)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Assault_Battleaxe_512_UIX.Melee_Assault_Battleaxe_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   UIXWeapon3DModel=/Game/DLC3/Objects/Marketplace/Weapons/Model/BattleAxe_Assault_Market_STM.BattleAxe_Assault_Market_STM
+   Description=NSLOCTEXT("[CD8CD2F0421F1A75785A84ABC5A709BB]", "2B1C78DB4C3EC06944737C93489442F9", "A \'Mech Hatchet heavy melee weapon fashioned for assault \'Mech use.")
+   AssociatedDLC=(TagName="DLC.DLC3")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

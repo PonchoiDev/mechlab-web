@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="Mace_Medium_Lvl3"
+   StatsData=(DEPRECATED_CBillBaseValue=40000,CBillBaseValueBigInt=(Value=40000),Cooldown=3.500000,Melee=(Damage=50.000000,Duration=1.250000,ActivationTime=0.500000,Impulse=1250000.000000,MeleePriority=25,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_M_Mace.MechMeleeStrike_M_Mace_C,FireSound=/Game/Audio/Events/Weapons/Melee/M_Mace/Melee_M_Mace_Swing.Melee_M_Mace_Swing),Ranges=(OptimalRange=2000.000000,MaxRange=2000.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Medium_Mace")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.650000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Damage_Quirk.Damage_Quirk_C"',Value=5.000000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Cooldown_Quirk.Cooldown_Quirk_C"',Value=-0.250000)))
+   BuildingDamageModifier=5.000000
+   TechLevel=3
+   BattleValueAdjustment=4
+   Name=NSLOCTEXT("[75C6ED4048DE508EBEACC5958512BC6A]", "B681A423452C77531E6EAFB3D718636A", "Medium Mace")
+   ShortName=NSLOCTEXT("[75C6ED4048DE508EBEACC5958512BC6A]", "A75FB6BC40FB00F6706D5B919E70617F", "Medium Mace")
+   Manufacturer="Achernar Beater"
+   WeaponType=(TagName="Weapon.Melee.Medium.Mace")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=4.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Medium_Melee_Weapon_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   RefitCosts=(InstallTimeInDays=1.000000,InstallCBillCost=2000,RepairCBillCost=1000)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Medium_Mace_512_UIX.Melee_Medium_Mace_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   UIXWeapon3DModel=/Game/DLC3/Objects/Marketplace/Weapons/Model/Mace_Medium_Market_STM.Mace_Medium_Market_STM
+   Description=NSLOCTEXT("[75C6ED4048DE508EBEACC5958512BC6A]", "8486B67D41D0B7099C1F9A9EC9310D05", "A mace designed as a heavy melee weapon for medium \'Mech use.")
+   AssociatedDLC=(TagName="DLC.DLC3")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

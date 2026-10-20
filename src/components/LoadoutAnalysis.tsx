@@ -58,8 +58,8 @@ export function LoadoutAnalysis({ weapons, ammunition }: LoadoutAnalysisProps) {
               <h2>Installed ammunition</h2>
             </div>
           </header>
-          {ammunition.map(({ family, label, capacity, bins }) => (
-            <div className="ammunition-row" key={family}>
+          {ammunition.map(({ ammoType, label, capacity, bins }) => (
+            <div className="ammunition-row" key={ammoType}>
               <span>{label}<small>{bins} {bins === 1 ? 'bin' : 'bins'}</small></span>
               <strong>{capacity} rounds</strong>
             </div>

@@ -2,6 +2,8 @@ export type WeaponType = 'energy' | 'ballistic' | 'missile' | 'ams' | 'melee';
 
 export type ItemSize = 'small' | 'medium' | 'large';
 
+export type WeightClass = 'light' | 'medium' | 'heavy' | 'assault';
+
 export interface ItemTierStats {
   damage: number;
   heatPerShot?: number;
@@ -26,6 +28,10 @@ export interface Item {
   heat?: number;
   cooling?: number;
   capacity?: number;
+  ammoType?: string;
+  volleyProjectiles?: number;
+  volleyHeatShots?: number;
+  weightClass?: WeightClass;
   tiers?: Record<string, ItemTierStats> | null;
   tier?: string;
 }

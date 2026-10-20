@@ -1,0 +1,35 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="C-ERPPC"
+   StatsData=(DEPRECATED_CBillBaseValue=700000,CBillBaseValueBigInt=(Value=700000),Projectile=(NumberOfProjectiles=1,Damage=15.000000,Speed=164556.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=1200.000000,FireSound=/Game/Audio/Events/Clan_Weapons/Energy/SFX_Wpn_ERPPC_Fire.SFX_Wpn_ERPPC_Fire,ProjectileFlightSound=/Game/Audio/Events/Clan_Weapons/Energy/SFX_Wpn_ERPPC_Projectile.SFX_Wpn_ERPPC_Projectile,Class=/Game/Objects/Projectiles/PPC/PPCProjectile.PPCProjectile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Medium.Shockwave_Medium_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_medium.single_recoil_medium_C,HeatGenerated=13.000000,DamagePaintStats=(BrushRadius=400.000000,BrushStrength=0.900000)),Cooldown=5.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop_PPC.Cooldown_Trace_Loop_PPC,CooldownErrorEvent=/Game/Audio/Events/Cockpit/Cooldown_Error.Cooldown_Error,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Range=(OptimalRange=81000.000000,MaxRange=162000.000000),MWO_RangeData=(Ranges=((InterpolationType="linear"),(Distance=90,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1080,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="C-ERPPC")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.225000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   bDestroyProjectilePastMaxRange=True
+   ProjectileSelfDestructSound=/Game/Audio/Events/Physics/WeaponImpacts/PPC_Impact.PPC_Impact
+   TechLevel=6
+   Name=NSLOCTEXT("[9A2D2F13446873BF3835079E24A8EDB5]", "235308D845125E860211FCA07158B142", "Clan ER PPC")
+   ShortName=NSLOCTEXT("[9A2D2F13446873BF3835079E24A8EDB5]", "2EDC9B5E4DE53DFD2FF4328B44823B25", "C-ER PPC")
+   Manufacturer="Strana Mechty MechWorks"
+   WeaponType=(TagName="Weapon.Energy.ParticleCannon.ERPPC.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=6.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Energy_Large_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_PPC_ER_512_UIX.Clan_PPC_ER_512_UIX
+   SalvageShareCost=14
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_PPC_ER_Market_STM.Clan_PPC_ER_Market_STM
+   Description=NSLOCTEXT("[9A2D2F13446873BF3835079E24A8EDB5]", "40FAC5104F0AE99F40CEF5943980D7A1", "Extended-range particle projector cannon that fires high-energy ion bolts. The Clan version is lighter and more powerful.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.200000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.200000,bUseLargeMotors=True,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

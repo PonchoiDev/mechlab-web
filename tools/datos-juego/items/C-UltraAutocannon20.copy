@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="C-UltraAutocannon20"
+   StatsData=(DEPRECATED_CBillBaseValue=1200000,CBillBaseValueBigInt=(Value=1200000),Projectile=(NumberOfTimesToFire=16,DelayBetweenFiring=0.041800,NumberOfProjectiles=1,SpreadRadius=350.000000,SpreadDistance=35000.000000,Damage=1.525000,Speed=80000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=5000.000000,FireSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_UAC_20_Fire_Burst.SFX_Wpn_UAC_20_Fire_Burst,FireReloadSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_UAC_20_Reload.SFX_Wpn_UAC_20_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC20/Projectile_AC20.Projectile_AC20_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Large.Shockwave_Large_C,CameraShake=/Game/Objects/Weapons/_common/Shake/burst_recoil_assault.burst_recoil_assault_C,HeatGenerated=0.262500,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=150.000000,BrushStrength=2.500000)),Cooldown=4.000000,bCooldownInterruptable=True,bWeaponCanJam=True,MaxJamChance=0.300000,WeaponJammingData=((ClearTime=6.000000,CooldownBarRatio=33.330002,JamSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_UAC_20_Jam.SFX_Wpn_UAC_20_Jam),(ClearTime=4.000000,CooldownBarRatio=33.330002,JamSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_UAC_20_Jam.SFX_Wpn_UAC_20_Jam),(ClearTime=3.000000,CooldownBarRatio=33.330002,JamSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_UAC_20_Jam.SFX_Wpn_UAC_20_Jam)),Range=(OptimalRange=36000.000000,MaxRange=36000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan"),MWO_RangeData=(Ranges=((InterpolationType="linear"),(Distance=270,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="C-UltraAutocannon20")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.225000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/IdealJamRatio_Quirk.IdealJamRatio_Quirk_C"',Value=50.000000)))
+   TechLevel=6
+   Name=NSLOCTEXT("[722EA9A14F054BEAD630E8A022A76A5B]", "5CFA4FA24B13EAC45118C7A9CC10E836", "C-Ultra Autocannon/20 Burst")
+   ShortName=NSLOCTEXT("[722EA9A14F054BEAD630E8A022A76A5B]", "F6421C6A4B48B47FA326FCA38C851DC0", "C-UAC/20 BF")
+   Manufacturer="Type DL"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.Ultra.AC20.Burst.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=12.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Ballistic_Large_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=3.000000,RemoveTimeInDays=3.000000,RepairTimeInDays=3.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_UAC20_512_UIX.Clan_UAC20_512_UIX
+   SalvageShareCost=15
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_UAC20_Market_STM.Clan_UAC20_Market_STM
+   Description=NSLOCTEXT("[722EA9A14F054BEAD630E8A022A76A5B]", "3114787F486550CA2B0205A2B98990A6", "Ballistic weapon that fires a burst of solid slug rounds at short range and heavy damage. Can be fired during its cooldown, but at the risk of jamming.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.250000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.125000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

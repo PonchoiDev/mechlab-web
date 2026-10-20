@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="MRM20"
+   StatsData=(DEPRECATED_CBillBaseValue=250000,CBillBaseValueBigInt=(Value=250000),MissileStats=(NumberOfMissiles=20,MissileInterval=0.005000,Projectile=(NumberOfTimesToFire=1,Damage=1.200000,Speed=50000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=700.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/SRM_Launcher.SRM_Launcher,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/Projectile_STREAM.Projectile_STREAM,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=0.270000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=150.000000,BrushStrength=1.500000))),Cooldown=4.100000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(OptimalRange=55000.000000,MaxRange=55000.000000),AmmoType=(TagName="Ammo.Missile.MRM"),MissileTurnRate=65.000000,SpreadMissileRadius=600.000000,SpreadMissileDistance=7500.000000,MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=270,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="MRM20")
+   MissilePath=/Game/Objects/Weapons/_common/MissilePaths/SRMSpreadPath.SRMSpreadPath_C
+   bCanFireOutsideMaxRange=True
+   HomingMissileTargetExposedInternalsChance=0.050000
+   HomingMissilePartWeighting=(HeadWeighting=1,CenterTorsoWeighting=1,LeftTorsoWeighting=2,RightTorsoWeighting=2,LeftArmWeighting=2,RightArmWeighting=2,LeftLegWeighting=2,RightLegWeighting=2)
+   TechLevel=1
+   Name=NSLOCTEXT("[601A1D144588757AEF2595AA5EF34BE8]", "B075E2754036A222001792A8A39C4044", "MRM 20")
+   ShortName=NSLOCTEXT("[601A1D144588757AEF2595AA5EF34BE8]", "8764E5D04EE5D97BBF38BAA7BDE42E9F", "MRM 20")
+   Manufacturer="Hellespont Industrials"
+   WeaponType=(TagName="Weapon.Missile.MRM.MRM20")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=7.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Missile_Medium_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.496933,G=0.597202,B=0.246201,A=1.000000)
+   IntroDate=3058.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/MRM20_512_UIX.MRM20_512_UIX
+   SalvageShareCost=2
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/Weapon_MRM20_Market_STM.Weapon_MRM20_Market_STM
+   Description=NSLOCTEXT("[601A1D144588757AEF2595AA5EF34BE8]", "D1BE8BAF4706874DCBA176A8FF999B61", "Medium-range missile system that fires 20 unguided missiles with a wide spread.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.200000,bUseSmallMotors=True)
+End Object

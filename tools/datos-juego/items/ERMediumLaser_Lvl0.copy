@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="ERMediumLaser_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=80000,CBillBaseValueBigInt=(Value=80000),Cooldown=4.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,CooldownErrorEvent=/Game/Audio/Events/Cockpit/Cooldown_Error.Cooldown_Error,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Trace.Cooldown_Complete_Trace,Trace=(DamageOverDuration=5.000000,HeatGeneratedOverDuration=5.000000,Duration=1.000000,RayAsset=/Game/Objects/Projectiles/MediumLaser/Ray_MediumLaser.Ray_MediumLaser_C,FireSound=/Game/Audio/Events/Weapons/Energy/ER_Medium_Fire.ER_Medium_Fire,TraceBypassSound=/Game/Audio/Events/Weapons/Energy/ER_MLaser_Flyby.ER_MLaser_Flyby,DamagePaintStats=(BrushStrength=0.600000)),Ranges=(OptimalRange=36000.000000,MaxRange=54000.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="ERMediumLaser",Table=DataTable'"/Game/DLC9/Objects/Weapons/DLC9_TraceWeaponStats.DLC9_TraceWeaponStats"')
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=1.500000
+   Name=NSLOCTEXT("[04DE9EB24D267D4D5069AF97541A9876]", "33F4E7A44831B5810F20468C8DFDE467", "Extended Range Medium Laser")
+   ShortName=NSLOCTEXT("[04DE9EB24D267D4D5069AF97541A9876]", "7D50F942415B202DEFC9FC992B92683E", "ER M Laser")
+   Manufacturer="Bright-Bloom"
+   WeaponType=(TagName="Weapon.Energy.Laser.ER.Medium")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=1.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Energy_Medium_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=3058.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Laser_ER_M_512_UIX.Clan_Laser_ER_M_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Laser_ER_M_Market_STM.Clan_Laser_ER_M_Market_STM
+   Description=NSLOCTEXT("[04DE9EB24D267D4D5069AF97541A9876]", "2D42BD204378203978E30FB1669D82C1", "Medium-powered energy weapon like the standard medium laser, but with extended range at the cost of greater heat")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.035000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.015000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

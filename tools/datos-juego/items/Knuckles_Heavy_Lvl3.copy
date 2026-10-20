@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="Knuckles_Heavy_Lvl3"
+   StatsData=(DEPRECATED_CBillBaseValue=25000,CBillBaseValueBigInt=(Value=25000),Cooldown=3.125000,Melee=(Damage=25.000000,Duration=1.500000,ActivationTime=0.625000,Impulse=1250000.000000,MeleePriority=15,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_H_Punch.MechMeleeStrike_H_Punch_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_Punch/Melee_ArmSwing.Melee_ArmSwing,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000)),Ranges=(OptimalRange=1750.000000,MaxRange=1750.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Heavy_Knuckles")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.650000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Damage_Quirk.Damage_Quirk_C"',Value=5.000000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Cooldown_Quirk.Cooldown_Quirk_C"',Value=-0.250000)))
+   BuildingDamageModifier=5.000000
+   TechLevel=3
+   BattleValueAdjustment=3
+   Name=NSLOCTEXT("[8E6B306C46C2B3316E4631B33F4D5DF6]", "DBC4AE5D4E1DB7DF0AD6C888B843935B", "Heavy Knuckles")
+   ShortName=NSLOCTEXT("[8E6B306C46C2B3316E4631B33F4D5DF6]", "AEC0AE1A4AD99349C3D6AC9155B767BB", "Heavy Knuckles")
+   Manufacturer="Doom Fist"
+   WeaponType=(TagName="Weapon.Melee.Heavy.Punch")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=1.500000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MeleeHandActuatorHeavy_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Punch_512_UIX.Melee_Punch_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   UIXWeapon3DModel=/Game/DLC3/Objects/Marketplace/Weapons/Model/Knuckles_Assault_Market_STM.Knuckles_Assault_Market_STM
+   Description=NSLOCTEXT("", "901A58C94D96CAB4A32DC18D2329B2B9", "Reinforced heavy \'Mech hand actuators for enhanced melee capabilities.")
+   AssociatedDLC=(TagName="DLC.DLC3")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

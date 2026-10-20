@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="C-LightMachineGun"
+   StatsData=(DEPRECATED_CBillBaseValue=30000,CBillBaseValueBigInt=(Value=30000),Cooldown=0.100000,Trace=(DamageOverDuration=1.000000,RateOfFire=10.000000,RayAsset=/Game/Objects/Projectiles/MachineGun/Ray_ClanLightMachineGun.Ray_ClanLightMachineGun_C,FireSound=/Game/Audio/Events/Clan_Weapons/Ballistic/Clan_Light_MachineGun.Clan_Light_MachineGun,TraceBypassSound=/Game/Audio/Events/Clan_Weapons/SFX_Wpn_Machinegun_Fire_Stop.SFX_Wpn_Machinegun_Fire_Stop,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=10.000000,BrushStrength=1.000000)),Ranges=(OptimalRange=36000.000000,MaxRange=54000.000000),AmmoType=(TagName="Ammo.Ballistic.MachineGun.Light.Clan"))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="C-LightMachineGun")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.600000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.600000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   BuildingDamageModifier=7.000000
+   TechLevel=6
+   Name=NSLOCTEXT("[F2D6B6254A68033ABA992EA960BBF96D]", "2EA412394B6C411C243758960AB53C24", "Clan Light Machine Gun")
+   ShortName=NSLOCTEXT("[F2D6B6254A68033ABA992EA960BBF96D]", "BD0281D4417A41CAB6EA58AEFF11843C", "C-Light Machine Gun")
+   Manufacturer="Strana Mechty MechWorks"
+   WeaponType=(TagName="Weapon.Ballistic.MG.LightMachineGun.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=0.250000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Ballistic_Small_SlotType")
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=3059.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_MG_512_UIX.Clan_MG_512_UIX
+   SalvageShareCost=1
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_MG_Market_STM.Clan_MG_Market_STM
+   Description=NSLOCTEXT("[F2D6B6254A68033ABA992EA960BBF96D]", "269991B14D445E4C7F71669F22520303", "A lighter version of a standard Clan machine gun offering longer range at the cost of reduced damage.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.012500,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.011750,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

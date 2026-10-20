@@ -1,7 +1,8 @@
-import type { ComponentData, EquippedItem } from '../types/mech';
+import type { Item } from '../types/item';
+import type { ComponentData, EquippedItem, Hardpoint } from '../types/mech';
 import { clampArmorValue } from '../utils/calculators';
-import { getItemWeaponType } from '../utils/items';
-import { getHardpointOccupancy, getSlotTypeLabel, getUsedGeneralSlots } from '../utils/equipment';
+import { getItemWeaponType, getSlotsLabel } from '../utils/items';
+import { getActiveBuiltInMeleeWeapons, getHardpointOccupancy, getSlotTypeLabel, getUsedGeneralSlots } from '../utils/equipment';
 import { ArmorControl } from './ArmorControl';
 import { TierSelector } from './TierSelector';
 
@@ -17,6 +18,15 @@ interface ComponentPanelProps {
   onTierChange: (instanceId: string, tier: string) => void;
   onArmorChange: (type: 'front' | 'rear', value: number) => void;
 }
+
+const getHardpointTitle = (hardpoint: Hardpoint, assignedWeapon?: Item): string => {
+  const weightClass = hardpoint.weightClass ? `, ${hardpoint.weightClass} class` : '';
+  const description = `${hardpoint.type} hardpoint (${hardpoint.size}${weightClass})`;
+  if (assignedWeapon) return `${description}: occupied by ${assignedWeapon.name}`;
+  return hardpoint.defaultWeapon
+    ? `${description}: free, uses the built-in ${hardpoint.defaultWeapon} when empty`
+    : `${description}: free`;
+};
 
 export function ComponentPanel({
   title,
@@ -35,6 +45,7 @@ export function ComponentPanel({
   const hasJumpJetClassSlots = specialSlots.some(([slotType]) => slotType.startsWith('JumpJetClass'));
   const jumpJetSlotsUsed = equippedItems.filter(item => item.equippedSlotType?.startsWith('JumpJetClass')).length;
   const { weaponAssignments } = getHardpointOccupancy(baseData.hardpoints, equippedItems);
+  const builtInMeleeWeapons = getActiveBuiltInMeleeWeapons(baseData.hardpoints, equippedItems);
 
   return (
     <div onClick={onSelect} className={isActive ? 'component-panel is-active' : 'component-panel'}>
@@ -70,11 +81,10 @@ export function ComponentPanel({
               <button
                 key={index}
                 type="button"
-                className={assignedWeapon ? 'hardpoint is-occupied' : 'hardpoint'}
+                className={['hardpoint', assignedWeapon ? 'is-occupied' : '', hardpoint.defaultWeapon ? 'has-built-in' : '']
+                  .filter(Boolean).join(' ')}
                 data-weapon-type={hardpoint.type}
-                title={assignedWeapon
-                  ? `${hardpoint.type} hardpoint (${hardpoint.size}): occupied by ${assignedWeapon.name}`
-                  : `${hardpoint.type} hardpoint (${hardpoint.size}): free`}
+                title={getHardpointTitle(hardpoint, assignedWeapon)}
                 onClick={(event) => { event.stopPropagation(); onSelect(); }}
               >
                 <span className="hardpoint-dot" />
@@ -124,9 +134,23 @@ export function ComponentPanel({
       </div>
 
       <div className="equipped-list">
+        {builtInMeleeWeapons.map((weaponName, index) => (
+          <div
+            key={`built-in-${index}`}
+            className="equipped-item is-built-in"
+            data-weapon-type="melee"
+            title="Used automatically while no melee weapon is equipped in this hardpoint"
+          >
+            <span>{weaponName}</span>
+            <span className="built-in-tag">BUILT-IN</span>
+          </div>
+        ))}
         {equippedItems.map(item => (
           <div key={item.instanceId} className="equipped-item" data-weapon-type={getItemWeaponType(item) ?? undefined}>
-            <span>{item.name} <span className="equipped-item-slots">({item.slots}s)</span></span>
+            <span>
+              {item.name}
+              {item.type !== 'weapon' && <span className="equipped-item-slots"> ({getSlotsLabel(item)})</span>}
+            </span>
             {item.type === 'weapon' && item.tiers && (
               <TierSelector item={item} onChange={(tier) => onTierChange(item.instanceId, tier)} />
             )}

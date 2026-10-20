@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="Claws_Medium_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=40000,CBillBaseValueBigInt=(Value=40000),Cooldown=2.000000,Melee=(Damage=30.000000,Duration=1.250000,ActivationTime=0.500000,Impulse=1250000.000000,MeleePriority=25,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_M_Claw.MechMeleeStrike_M_Claw_C,FireSound=/Game/Audio/Events/Weapons/Melee/M_Claw/Melee_M_Claw_Swing.Melee_M_Claw_Swing),Ranges=(OptimalRange=1875.000000,MaxRange=1875.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Medium_Claw")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Damage_Quirk.Damage_Quirk_C"',Value=-10.000000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Cooldown_Quirk.Cooldown_Quirk_C"',Value=0.250000)))
+   BuildingDamageModifier=5.000000
+   BattleValueAdjustment=-3
+   Name=NSLOCTEXT("[AF1A507B4FD50B207A7CF98C0B0872B2]", "65981CA24994E1C2038B79A7D41F061C", "Medium Claw")
+   ShortName=NSLOCTEXT("[AF1A507B4FD50B207A7CF98C0B0872B2]", "4503C1CF4AD257405EB56C9A7EBF52C2", "Medium Claw")
+   Manufacturer="Tortuga Heart Ripper"
+   WeaponType=(TagName="Weapon.Melee.Medium.Claw")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=4.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Medium_Melee_Weapon_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   RefitCosts=(InstallTimeInDays=1.000000,InstallCBillCost=2000,RepairCBillCost=1000)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Medium_Claw_512_UIX.Melee_Medium_Claw_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   UIXWeapon3DModel=/Game/DLC3/Objects/Marketplace/Weapons/Model/Claws_Medium_Market_STM.Claws_Medium_Market_STM
+   Description=NSLOCTEXT("[AF1A507B4FD50B207A7CF98C0B0872B2]", "38D40E9E40E6DD12B2908FA97D2B94EF", "A large battle claw designed as a heavy melee weapon for medium \'Mech use.")
+   AssociatedDLC=(TagName="DLC.DLC3")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

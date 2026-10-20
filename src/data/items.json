@@ -8,7 +8,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 40
+    "capacity": 40,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
   },
   "AC10_LBX_Half_AmmoEquipment": {
     "id": "AC10_LBX_Half_AmmoEquipment",
@@ -19,7 +20,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 20
+    "capacity": 20,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
   },
   "AC10_Standard_AmmoEquipment": {
     "id": "AC10_Standard_AmmoEquipment",
@@ -30,7 +32,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 40
+    "capacity": 40,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
   },
   "AC10_Standard_Half_AmmoEquipment": {
     "id": "AC10_Standard_Half_AmmoEquipment",
@@ -41,7 +44,32 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 20
+    "capacity": 20,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
+  },
+  "AC10_Ultra_AmmoEquipment": {
+    "id": "AC10_Ultra_AmmoEquipment",
+    "name": "Ultra AC/10 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 40,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10"
+  },
+  "AC10_Ultra_Half_AmmoEquipment": {
+    "id": "AC10_Ultra_Half_AmmoEquipment",
+    "name": "Ultra AC/10 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 20,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10"
   },
   "AC20_Standard_AmmoEquipment": {
     "id": "AC20_Standard_AmmoEquipment",
@@ -52,7 +80,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 20
+    "capacity": 20,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
   },
   "AC20_Standard_Half_AmmoEquipment": {
     "id": "AC20_Standard_Half_AmmoEquipment",
@@ -63,7 +92,32 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 10
+    "capacity": 10,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
+  },
+  "AC20_Ultra_AmmoEquipment": {
+    "id": "AC20_Ultra_AmmoEquipment",
+    "name": "Ultra AC/20 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 20,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20"
+  },
+  "AC20_Ultra_Half_AmmoEquipment": {
+    "id": "AC20_Ultra_Half_AmmoEquipment",
+    "name": "Ultra AC/20 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 10,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20"
   },
   "AC2_Standard_AmmoEquipment": {
     "id": "AC2_Standard_AmmoEquipment",
@@ -74,7 +128,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 200
+    "capacity": 200,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
   },
   "AC2_Standard_Half_AmmoEquipment": {
     "id": "AC2_Standard_Half_AmmoEquipment",
@@ -85,7 +140,32 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 100
+    "capacity": 100,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
+  },
+  "AC2_Ultra_AmmoEquipment": {
+    "id": "AC2_Ultra_AmmoEquipment",
+    "name": "Ultra AC/2 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 90,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2"
+  },
+  "AC2_Ultra_Half_AmmoEquipment": {
+    "id": "AC2_Ultra_Half_AmmoEquipment",
+    "name": "Ultra AC/2 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 45,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2"
   },
   "AC5_Standard_AmmoEquipment": {
     "id": "AC5_Standard_AmmoEquipment",
@@ -96,7 +176,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 80
+    "capacity": 80,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
   },
   "AC5_Standard_Half_AmmoEquipment": {
     "id": "AC5_Standard_Half_AmmoEquipment",
@@ -107,7 +188,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 40
+    "capacity": 40,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
   },
   "AC5_Ultra_AmmoEquipment": {
     "id": "AC5_Ultra_AmmoEquipment",
@@ -118,7 +200,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 80
+    "capacity": 80,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
   },
   "AC5_Ultra_Half_AmmoEquipment": {
     "id": "AC5_Ultra_Half_AmmoEquipment",
@@ -129,7 +212,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 40
+    "capacity": 40,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
   },
   "AMS_AmmoEquipment": {
     "id": "AMS_AmmoEquipment",
@@ -140,7 +224,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 2000
+    "capacity": 2000,
+    "ammoType": "Ammo.Ballistic.AMS"
   },
   "AMS_Half_AmmoEquipment": {
     "id": "AMS_Half_AmmoEquipment",
@@ -151,7 +236,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 1000
+    "capacity": 1000,
+    "ammoType": "Ammo.Ballistic.AMS"
   },
   "AntiMissileSystem": {
     "id": "AntiMissileSystem",
@@ -204,7 +290,290 @@
         "range": 250.0,
         "rpm": 0.0
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AMS"
+  },
+  "ArenaFist_Assault": {
+    "id": "ArenaFist_Assault",
+    "name": "Assault Arena Fist",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "medium",
+    "tonnage": 7.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -200.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.75,
+        "range": 17.5,
+        "rpm": 34.3
+      },
+      "1": {
+        "damage": 50.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.75,
+        "range": 17.5,
+        "rpm": 34.3
+      },
+      "2": {
+        "damage": 175.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.75,
+        "range": 17.5,
+        "rpm": 34.3
+      },
+      "3": {
+        "damage": 300.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.75,
+        "range": 17.5,
+        "rpm": 34.3
+      },
+      "4": {
+        "damage": 425.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.75,
+        "range": 17.5,
+        "rpm": 34.3
+      },
+      "5": {
+        "damage": 675.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.75,
+        "range": 17.5,
+        "rpm": 34.3
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "assault"
+  },
+  "ArenaFist_Heavy": {
+    "id": "ArenaFist_Heavy",
+    "name": "Heavy Arena Fist",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "medium",
+    "tonnage": 5.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -140.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.5,
+        "range": 17.5,
+        "rpm": 40.0
+      },
+      "1": {
+        "damage": 35.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.5,
+        "range": 17.5,
+        "rpm": 40.0
+      },
+      "2": {
+        "damage": 122.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.5,
+        "range": 17.5,
+        "rpm": 40.0
+      },
+      "3": {
+        "damage": 210.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.5,
+        "range": 17.5,
+        "rpm": 40.0
+      },
+      "4": {
+        "damage": 297.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.5,
+        "range": 17.5,
+        "rpm": 40.0
+      },
+      "5": {
+        "damage": 472.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.5,
+        "range": 17.5,
+        "rpm": 40.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "heavy"
+  },
+  "ArenaFist_Light": {
+    "id": "ArenaFist_Light",
+    "name": "Light Arena Fist",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "medium",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -52.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.0,
+        "range": 17.5,
+        "rpm": 60.0
+      },
+      "1": {
+        "damage": 13.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.0,
+        "range": 17.5,
+        "rpm": 60.0
+      },
+      "2": {
+        "damage": 45.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.0,
+        "range": 17.5,
+        "rpm": 60.0
+      },
+      "3": {
+        "damage": 78.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.0,
+        "range": 17.5,
+        "rpm": 60.0
+      },
+      "4": {
+        "damage": 110.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.0,
+        "range": 17.5,
+        "rpm": 60.0
+      },
+      "5": {
+        "damage": 175.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.0,
+        "range": 17.5,
+        "rpm": 60.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "light"
+  },
+  "ArenaFist_Medium": {
+    "id": "ArenaFist_Medium",
+    "name": "Medium Arena Fist",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "medium",
+    "tonnage": 4.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -100.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.25,
+        "range": 17.5,
+        "rpm": 48.0
+      },
+      "1": {
+        "damage": 25.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.25,
+        "range": 17.5,
+        "rpm": 48.0
+      },
+      "2": {
+        "damage": 87.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.25,
+        "range": 17.5,
+        "rpm": 48.0
+      },
+      "3": {
+        "damage": 150.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.25,
+        "range": 17.5,
+        "rpm": 48.0
+      },
+      "4": {
+        "damage": 212.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.25,
+        "range": 17.5,
+        "rpm": 48.0
+      },
+      "5": {
+        "damage": 337.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.25,
+        "range": 17.5,
+        "rpm": 48.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "medium"
+  },
+  "ArrowIV": {
+    "id": "ArrowIV",
+    "name": "Arrow IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 15.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 10.0,
+        "heatPerShot": 24.0,
+        "cooldown": 8.8,
+        "range": 3600.0,
+        "rpm": 6.8
+      },
+      "1": {
+        "damage": 10.0,
+        "heatPerShot": 20.0,
+        "cooldown": 8.0,
+        "range": 4500.0,
+        "rpm": 7.5
+      },
+      "2": {
+        "damage": 10.6,
+        "heatPerShot": 19.0,
+        "cooldown": 7.6,
+        "range": 4725.0,
+        "rpm": 7.9
+      },
+      "3": {
+        "damage": 11.0,
+        "heatPerShot": 18.0,
+        "cooldown": 7.2,
+        "range": 4950.0,
+        "rpm": 8.3
+      },
+      "4": {
+        "damage": 12.5,
+        "heatPerShot": 17.0,
+        "cooldown": 6.8,
+        "range": 5175.0,
+        "rpm": 8.8
+      },
+      "5": {
+        "damage": 14.0,
+        "heatPerShot": 15.0,
+        "cooldown": 6.0,
+        "range": 5625.0,
+        "rpm": 10.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Missile.ArrowIV"
   },
   "Autocannon10": {
     "id": "Autocannon10",
@@ -257,7 +626,10 @@
         "range": 562.5,
         "rpm": 26.7
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
   },
   "Autocannon10_Auto": {
     "id": "Autocannon10_Auto",
@@ -310,7 +682,10 @@
         "range": 562.5,
         "rpm": 106.8
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
   },
   "Autocannon10_Burst": {
     "id": "Autocannon10_Burst",
@@ -363,7 +738,10 @@
         "range": 562.5,
         "rpm": 33.3
       }
-    }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
   },
   "Autocannon2": {
     "id": "Autocannon2",
@@ -416,7 +794,10 @@
         "range": 900.0,
         "rpm": 133.3
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
   },
   "Autocannon20": {
     "id": "Autocannon20",
@@ -469,7 +850,10 @@
         "range": 337.5,
         "rpm": 16.7
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
   },
   "Autocannon20_Auto": {
     "id": "Autocannon20_Auto",
@@ -522,7 +906,10 @@
         "range": 337.5,
         "rpm": 66.7
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
   },
   "Autocannon20_Burst": {
     "id": "Autocannon20_Burst",
@@ -575,7 +962,10 @@
         "range": 337.5,
         "rpm": 20.8
       }
-    }
+    },
+    "volleyProjectiles": 12,
+    "volleyHeatShots": 12,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
   },
   "Autocannon2_Auto": {
     "id": "Autocannon2_Auto",
@@ -628,7 +1018,10 @@
         "range": 900.0,
         "rpm": 535.7
       }
-    }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
   },
   "Autocannon2_Burst": {
     "id": "Autocannon2_Burst",
@@ -681,7 +1074,10 @@
         "range": 900.0,
         "rpm": 159.2
       }
-    }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
   },
   "Autocannon5": {
     "id": "Autocannon5",
@@ -734,7 +1130,10 @@
         "range": 775.0,
         "rpm": 53.3
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
   },
   "Autocannon5_Auto": {
     "id": "Autocannon5_Auto",
@@ -787,7 +1186,10 @@
         "range": 775.0,
         "rpm": 222.2
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
   },
   "Autocannon5_Burst": {
     "id": "Autocannon5_Burst",
@@ -840,7 +1242,122 @@
         "range": 775.0,
         "rpm": 64.5
       }
-    }
+    },
+    "volleyProjectiles": 3,
+    "volleyHeatShots": 3,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
+  },
+  "Axe_Heavy": {
+    "id": "Axe_Heavy",
+    "name": "Heavy Axe",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": -540.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.531,
+        "range": 20.0,
+        "rpm": 13.2
+      },
+      "1": {
+        "damage": 60.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.625,
+        "range": 20.0,
+        "rpm": 16.6
+      },
+      "2": {
+        "damage": 210.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.172,
+        "range": 20.0,
+        "rpm": 18.9
+      },
+      "3": {
+        "damage": 360.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.719,
+        "range": 20.0,
+        "rpm": 22.1
+      },
+      "4": {
+        "damage": 510.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.266,
+        "range": 20.0,
+        "rpm": 26.5
+      },
+      "5": {
+        "damage": 810.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.359,
+        "range": 20.0,
+        "rpm": 44.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "heavy"
+  },
+  "BattleAxe_Assault": {
+    "id": "BattleAxe_Assault",
+    "name": "Assault Battle Axe",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 4,
+    "tiers": {
+      "0": {
+        "damage": -720.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.75,
+        "range": 20.0,
+        "rpm": 12.6
+      },
+      "1": {
+        "damage": 80.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.8,
+        "range": 20.0,
+        "rpm": 15.8
+      },
+      "2": {
+        "damage": 280.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.325,
+        "range": 20.0,
+        "rpm": 18.0
+      },
+      "3": {
+        "damage": 480.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.85,
+        "range": 20.0,
+        "rpm": 21.1
+      },
+      "4": {
+        "damage": 680.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.375,
+        "range": 20.0,
+        "rpm": 25.3
+      },
+      "5": {
+        "damage": 1080.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.425,
+        "range": 20.0,
+        "rpm": 42.1
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "assault"
   },
   "BinaryLaser": {
     "id": "BinaryLaser",
@@ -893,7 +1410,1349 @@
         "range": 562.5,
         "rpm": 11.4
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-ATM12": {
+    "id": "C-ATM12",
+    "name": "Clan ATM 12",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 4.2,
+        "heatPerShot": 0.225,
+        "cooldown": 2.661,
+        "range": 337.5,
+        "rpm": 22.5
+      }
+    },
+    "volleyProjectiles": 12,
+    "volleyHeatShots": 12,
+    "ammoType": "Ammo.Missile.ATM"
+  },
+  "C-ATM3": {
+    "id": "C-ATM3",
+    "name": "Clan ATM 3",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 4.2,
+        "heatPerShot": 0.375,
+        "cooldown": 2.887,
+        "range": 337.5,
+        "rpm": 20.8
+      }
+    },
+    "volleyProjectiles": 3,
+    "volleyHeatShots": 3,
+    "ammoType": "Ammo.Missile.ATM"
+  },
+  "C-ATM6": {
+    "id": "C-ATM6",
+    "name": "Clan ATM 6",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 3.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 4.2,
+        "heatPerShot": 0.338,
+        "cooldown": 2.784,
+        "range": 337.5,
+        "rpm": 21.6
+      }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.ATM"
+  },
+  "C-ATM9": {
+    "id": "C-ATM9",
+    "name": "Clan ATM 9",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 4.2,
+        "heatPerShot": 0.3,
+        "cooldown": 2.681,
+        "range": 337.5,
+        "rpm": 22.4
+      }
+    },
+    "volleyProjectiles": 9,
+    "volleyHeatShots": 9,
+    "ammoType": "Ammo.Missile.ATM"
+  },
+  "C-AntiMissileSystem": {
+    "id": "C-AntiMissileSystem",
+    "name": "Clan AMS",
+    "type": "weapon",
+    "weaponType": "ams",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 300.0,
+        "rpm": 0.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AMS.Clan"
+  },
+  "C-ArrowIV": {
+    "id": "C-ArrowIV",
+    "name": "Clan Arrow IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 12.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 14.0,
+        "heatPerShot": 15.0,
+        "cooldown": 6.6,
+        "range": 5625.0,
+        "rpm": 9.1
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Missile.ArrowIV.Clan"
+  },
+  "C-ERLargeLaser": {
+    "id": "C-ERLargeLaser",
+    "name": "Clan ER Large Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 4.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 15.6,
+        "heatPerShot": 7.875,
+        "cooldown": 4.037,
+        "range": 1012.5,
+        "rpm": 14.9
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-ERMediumLaser": {
+    "id": "C-ERMediumLaser",
+    "name": "Clan Extended Range Medium Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 9.1,
+        "heatPerShot": 4.125,
+        "cooldown": 3.825,
+        "range": 562.5,
+        "rpm": 15.7
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-ERPPC": {
+    "id": "C-ERPPC",
+    "name": "Clan ER PPC",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 6.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 19.5,
+        "heatPerShot": 10.075,
+        "cooldown": 3.75,
+        "range": 1012.5,
+        "rpm": 16.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-ERSmallLaser": {
+    "id": "C-ERSmallLaser",
+    "name": "Clan Extended Range Small Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 6.5,
+        "heatPerShot": 1.312,
+        "cooldown": 2.337,
+        "range": 375.0,
+        "rpm": 25.7
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-Flamer": {
+    "id": "C-Flamer",
+    "name": "Clan Flamer",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.2,
+        "heatPerShot": 0.3,
+        "cooldown": 0.1,
+        "range": 112.5,
+        "rpm": 600.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-GaussRifle": {
+    "id": "C-GaussRifle",
+    "name": "Clan Gauss Rifle",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 12.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 21.0,
+        "heatPerShot": 0.775,
+        "cooldown": 4.5,
+        "range": 825.0,
+        "rpm": 13.3
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.Gauss.Clan"
+  },
+  "C-HeavyLargeLaser": {
+    "id": "C-HeavyLargeLaser",
+    "name": "Clan Heavy Large Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 4.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 23.4,
+        "heatPerShot": 10.875,
+        "cooldown": 4.462,
+        "range": 562.5,
+        "rpm": 13.4
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-HeavyMachineGun": {
+    "id": "C-HeavyMachineGun",
+    "name": "Clan Heavy Machine Gun",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 4.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.1,
+        "range": 192.0,
+        "rpm": 600.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan"
+  },
+  "C-HeavyMediumLaser": {
+    "id": "C-HeavyMediumLaser",
+    "name": "Clan Heavy Medium Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 13.0,
+        "heatPerShot": 6.0,
+        "cooldown": 4.037,
+        "range": 337.5,
+        "rpm": 14.9
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-HeavySmallLaser": {
+    "id": "C-HeavySmallLaser",
+    "name": "Clan Heavy Small Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 8.45,
+        "heatPerShot": 1.5,
+        "cooldown": 2.72,
+        "range": 187.5,
+        "rpm": 22.1
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-LBXAutocannon10": {
+    "id": "C-LBXAutocannon10",
+    "name": "C-LB 10-X Autocannon",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 10.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 1.3,
+        "heatPerShot": 1.008,
+        "cooldown": 1.35,
+        "range": 675.0,
+        "rpm": 44.4
+      }
+    },
+    "volleyProjectiles": 13,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
+  },
+  "C-LBXAutocannon10_Slug": {
+    "id": "C-LBXAutocannon10_Slug",
+    "name": "C-LB 10-X Autocannon Slug",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 10.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 13.0,
+        "heatPerShot": 1.163,
+        "cooldown": 1.688,
+        "range": 675.0,
+        "rpm": 35.5
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
+  },
+  "C-LBXAutocannon10_Slug_BurstFire": {
+    "id": "C-LBXAutocannon10_Slug_BurstFire",
+    "name": "C-LB 10-X Autocannon Slug Burst",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 10.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 2.6,
+        "heatPerShot": 0.171,
+        "cooldown": 1.5,
+        "range": 675.0,
+        "rpm": 40.0
+      }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
+  },
+  "C-LBXAutocannon2": {
+    "id": "C-LBXAutocannon2",
+    "name": "C-LB 2-X Autocannon",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 5.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.3,
+        "heatPerShot": 0.232,
+        "cooldown": 0.375,
+        "range": 1125.0,
+        "rpm": 160.0
+      }
+    },
+    "volleyProjectiles": 3,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
+  },
+  "C-LBXAutocannon20": {
+    "id": "C-LBXAutocannon20",
+    "name": "C-LB 20-X Autocannon",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 12.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.3,
+        "heatPerShot": 3.255,
+        "cooldown": 2.25,
+        "range": 450.0,
+        "rpm": 26.7
+      }
+    },
+    "volleyProjectiles": 25,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
+  },
+  "C-LBXAutocannon20_SLD": {
+    "id": "C-LBXAutocannon20_SLD",
+    "name": "C-LB 20-X Autocannon Solid Slug",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 12.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 26.0,
+        "heatPerShot": 3.875,
+        "cooldown": 2.88,
+        "range": 450.0,
+        "rpm": 20.8
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
+  },
+  "C-LBXAutocannon20_SLD_Burst": {
+    "id": "C-LBXAutocannon20_SLD_Burst",
+    "name": "C-LB 20-X Autocannon Solid Burst",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 12.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 2.6,
+        "heatPerShot": 0.256,
+        "cooldown": 2.55,
+        "range": 450.0,
+        "rpm": 23.5
+      }
+    },
+    "volleyProjectiles": 12,
+    "volleyHeatShots": 12,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
+  },
+  "C-LBXAutocannon2_Slug": {
+    "id": "C-LBXAutocannon2_Slug",
+    "name": "C-LB 2-X Autocannon Slug",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 5.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 2.6,
+        "heatPerShot": 0.31,
+        "cooldown": 0.6,
+        "range": 1125.0,
+        "rpm": 100.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
+  },
+  "C-LBXAutocannon2_Slug_Burst": {
+    "id": "C-LBXAutocannon2_Slug_Burst",
+    "name": "C-LB 2-X Autocannon Slug Burst",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 5.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 0.78,
+        "heatPerShot": 0.058,
+        "cooldown": 0.45,
+        "range": 1125.0,
+        "rpm": 133.3
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
+  },
+  "C-LBXAutocannon5": {
+    "id": "C-LBXAutocannon5",
+    "name": "C-LB 5-X Autocannon",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 7.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 1.3,
+        "heatPerShot": 0.31,
+        "cooldown": 0.675,
+        "range": 900.0,
+        "rpm": 88.9
+      }
+    },
+    "volleyProjectiles": 7,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
+  },
+  "C-LBXAutocannon5_Solid": {
+    "id": "C-LBXAutocannon5_Solid",
+    "name": "C-LB 5-X Autocannon Solid Slug",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 7.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 6.5,
+        "heatPerShot": 0.388,
+        "cooldown": 0.93,
+        "range": 900.0,
+        "rpm": 64.5
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
+  },
+  "C-LBXAutocannon5_Solid_Burst": {
+    "id": "C-LBXAutocannon5_Solid_Burst",
+    "name": "C-LB 5-X Autocannon Solid Burst",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 7.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 2.6,
+        "heatPerShot": 0.103,
+        "cooldown": 0.6,
+        "range": 900.0,
+        "rpm": 100.0
+      }
+    },
+    "volleyProjectiles": 3,
+    "volleyHeatShots": 3,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
+  },
+  "C-LRM10": {
+    "id": "C-LRM10",
+    "name": "Clan LRM 10",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.094,
+        "range": 1125.0,
+        "rpm": 19.4
+      }
+    },
+    "volleyProjectiles": 10,
+    "volleyHeatShots": 10,
+    "ammoType": "Ammo.Missile.LRM.Clan"
+  },
+  "C-LRM10_Artemis": {
+    "id": "C-LRM10_Artemis",
+    "name": "Clan LRM 10 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 3.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.094,
+        "range": 1125.0,
+        "rpm": 19.4
+      }
+    },
+    "volleyProjectiles": 10,
+    "volleyHeatShots": 10,
+    "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
+  },
+  "C-LRM15": {
+    "id": "C-LRM15",
+    "name": "Clan LRM 15",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 3.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.68,
+        "heatPerShot": 0.225,
+        "cooldown": 2.887,
+        "range": 1125.0,
+        "rpm": 20.8
+      }
+    },
+    "volleyProjectiles": 15,
+    "volleyHeatShots": 15,
+    "ammoType": "Ammo.Missile.LRM.Clan"
+  },
+  "C-LRM15_Artemis": {
+    "id": "C-LRM15_Artemis",
+    "name": "Clan LRM 15 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 4.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.68,
+        "heatPerShot": 0.225,
+        "cooldown": 2.887,
+        "range": 1125.0,
+        "rpm": 20.8
+      }
+    },
+    "volleyProjectiles": 15,
+    "volleyHeatShots": 15,
+    "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
+  },
+  "C-LRM20": {
+    "id": "C-LRM20",
+    "name": "Clan LRM 20",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.68,
+        "heatPerShot": 0.203,
+        "cooldown": 2.681,
+        "range": 1125.0,
+        "rpm": 22.4
+      }
+    },
+    "volleyProjectiles": 20,
+    "volleyHeatShots": 20,
+    "ammoType": "Ammo.Missile.LRM.Clan"
+  },
+  "C-LRM20_Artemis": {
+    "id": "C-LRM20_Artemis",
+    "name": "Clan LRM 20 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 6.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.68,
+        "heatPerShot": 0.203,
+        "cooldown": 2.681,
+        "range": 1125.0,
+        "rpm": 22.4
+      }
+    },
+    "volleyProjectiles": 20,
+    "volleyHeatShots": 20,
+    "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
+  },
+  "C-LRM5": {
+    "id": "C-LRM5",
+    "name": "Clan LRM 5",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    },
+    "volleyProjectiles": 5,
+    "volleyHeatShots": 5,
+    "ammoType": "Ammo.Missile.LRM.Clan"
+  },
+  "C-LRM5_Artemis": {
+    "id": "C-LRM5_Artemis",
+    "name": "Clan LRM 5 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 1125.0,
+        "rpm": 18.2
+      }
+    },
+    "volleyProjectiles": 5,
+    "volleyHeatShots": 5,
+    "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
+  },
+  "C-LargePulseLaser": {
+    "id": "C-LargePulseLaser",
+    "name": "Clan Large Pulse Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 6.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 19.5,
+        "heatPerShot": 5.625,
+        "cooldown": 3.825,
+        "range": 750.0,
+        "rpm": 15.7
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-LightMachineGun": {
+    "id": "C-LightMachineGun",
+    "name": "Clan Light Machine Gun",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.25,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.6,
+        "heatPerShot": 0.0,
+        "cooldown": 0.1,
+        "range": 576.0,
+        "rpm": 600.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.MachineGun.Light.Clan"
+  },
+  "C-MachineGun": {
+    "id": "C-MachineGun",
+    "name": "Clan Machine Gun",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.25,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.0,
+        "cooldown": 0.1,
+        "range": 240.0,
+        "rpm": 600.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.MachineGun.Clan"
+  },
+  "C-MediumPulseLaser": {
+    "id": "C-MediumPulseLaser",
+    "name": "Clan Medium Pulse Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 10.4,
+        "heatPerShot": 2.25,
+        "cooldown": 2.55,
+        "range": 450.0,
+        "rpm": 23.5
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-NarcBeacon": {
+    "id": "C-NarcBeacon",
+    "name": "Clan Narc Missile Beacon",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.188,
+        "range": 450.0,
+        "rpm": 27.4
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Missile.NARC.Clan"
+  },
+  "C-SRM2": {
+    "id": "C-SRM2",
+    "name": "Clan SRM 2",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 2.1,
+        "range": 337.5,
+        "rpm": 28.6
+      }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM.Clan"
+  },
+  "C-SRM2_Artemis": {
+    "id": "C-SRM2_Artemis",
+    "name": "Clan SRM 2 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 2.1,
+        "range": 337.5,
+        "rpm": 28.6
+      }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
+  },
+  "C-SRM4": {
+    "id": "C-SRM4",
+    "name": "Clan SRM 4",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.36,
+        "heatPerShot": 0.506,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Missile.SRM.Clan"
+  },
+  "C-SRM4_Artemis": {
+    "id": "C-SRM4_Artemis",
+    "name": "Clan SRM 4  + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.36,
+        "heatPerShot": 0.506,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
+  },
+  "C-SRM6": {
+    "id": "C-SRM6",
+    "name": "Clan SRM 6",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.36,
+        "heatPerShot": 0.45,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.SRM.Clan"
+  },
+  "C-SRM6_Artemis": {
+    "id": "C-SRM6_Artemis",
+    "name": "Clan SRM 6 + Artemis IV",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 2.5,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.36,
+        "heatPerShot": 0.45,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
+  },
+  "C-SmallPulselLaser": {
+    "id": "C-SmallPulselLaser",
+    "name": "Clan Small Pulse Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 6.5,
+        "heatPerShot": 0.75,
+        "cooldown": 1.615,
+        "range": 275.0,
+        "rpm": 37.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "C-StreakSRM2": {
+    "id": "C-StreakSRM2",
+    "name": "Clan Streak SRM 2",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 1.8,
+        "range": 450.0,
+        "rpm": 33.3
+      }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM.Streak.Clan"
+  },
+  "C-StreakSRM4": {
+    "id": "C-StreakSRM4",
+    "name": "Clan Streak SRM 4",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 1.98,
+        "range": 450.0,
+        "rpm": 30.3
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Missile.SRM.Streak.Clan"
+  },
+  "C-StreakSRM6": {
+    "id": "C-StreakSRM6",
+    "name": "Clan Streak SRM 6",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 3.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 1.98,
+        "range": 450.0,
+        "rpm": 30.3
+      }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.SRM.Streak.Clan"
+  },
+  "C-UltraAutocannon10_BurstFire": {
+    "id": "C-UltraAutocannon10_BurstFire",
+    "name": "C-Ultra Autocannon 10 Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 10.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 1.98,
+        "heatPerShot": 0.291,
+        "cooldown": 1.8,
+        "range": 675.0,
+        "rpm": 33.3
+      }
+    },
+    "volleyProjectiles": 8,
+    "volleyHeatShots": 8,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan"
+  },
+  "C-UltraAutocannon10_Single": {
+    "id": "C-UltraAutocannon10_Single",
+    "name": "C-Ultra Autocannon 10",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 10.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 13.0,
+        "heatPerShot": 2.325,
+        "cooldown": 2.25,
+        "range": 675.0,
+        "rpm": 26.7
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan"
+  },
+  "C-UltraAutocannon2": {
+    "id": "C-UltraAutocannon2",
+    "name": "C-Ultra Autocannon/2 Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 5.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 0.78,
+        "heatPerShot": 0.07,
+        "cooldown": 0.45,
+        "range": 1012.5,
+        "rpm": 133.3
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan"
+  },
+  "C-UltraAutocannon20": {
+    "id": "C-UltraAutocannon20",
+    "name": "C-Ultra Autocannon/20 Burst",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 12.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 1.98,
+        "heatPerShot": 0.203,
+        "cooldown": 3.0,
+        "range": 450.0,
+        "rpm": 20.0
+      }
+    },
+    "volleyProjectiles": 16,
+    "volleyHeatShots": 16,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan"
+  },
+  "C-UltraAutocannon20_Single": {
+    "id": "C-UltraAutocannon20_Single",
+    "name": "C-Ultra Autocannon/20",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 12.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 26.0,
+        "heatPerShot": 4.65,
+        "cooldown": 3.6,
+        "range": 450.0,
+        "rpm": 16.7
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan"
+  },
+  "C-UltraAutocannon2_Single": {
+    "id": "C-UltraAutocannon2_Single",
+    "name": "C-Ultra Autocannon/2",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 5.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 2.6,
+        "heatPerShot": 0.31,
+        "cooldown": 0.45,
+        "range": 1012.5,
+        "rpm": 133.3
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan"
+  },
+  "C-UltraAutocannon5": {
+    "id": "C-UltraAutocannon5",
+    "name": "C-Ultra Autocannon/5 Burst",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 7.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 1.98,
+        "heatPerShot": 0.136,
+        "cooldown": 0.788,
+        "range": 787.5,
+        "rpm": 76.1
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan"
+  },
+  "C-UltraAutocannon5_Single": {
+    "id": "C-UltraAutocannon5_Single",
+    "name": "C-Ultra Autocannon/5",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 7.0,
+    "slots": 2,
+    "tiers": {
+      "1": {
+        "damage": 6.5,
+        "heatPerShot": 0.698,
+        "cooldown": 1.125,
+        "range": 787.5,
+        "rpm": 53.3
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan"
+  },
+  "Claws_Medium": {
+    "id": "Claws_Medium",
+    "name": "Medium Claw",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 4.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": -270.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.5,
+        "range": 18.8,
+        "rpm": 24.0
+      },
+      "1": {
+        "damage": 30.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.0,
+        "range": 18.8,
+        "rpm": 30.0
+      },
+      "2": {
+        "damage": 105.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.75,
+        "range": 18.8,
+        "rpm": 34.3
+      },
+      "3": {
+        "damage": 180.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.5,
+        "range": 18.8,
+        "rpm": 40.0
+      },
+      "4": {
+        "damage": 255.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.25,
+        "range": 18.8,
+        "rpm": 48.0
+      },
+      "5": {
+        "damage": 405.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.75,
+        "range": 18.8,
+        "rpm": 80.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "medium"
+  },
+  "Claymore_Assault": {
+    "id": "Claymore_Assault",
+    "name": "Assault Claymore",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 6.0,
+    "slots": 4,
+    "tiers": {
+      "0": {
+        "damage": -630.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.812,
+        "range": 20.0,
+        "rpm": 15.7
+      },
+      "1": {
+        "damage": 70.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.05,
+        "range": 20.0,
+        "rpm": 19.7
+      },
+      "2": {
+        "damage": 245.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.669,
+        "range": 20.0,
+        "rpm": 22.5
+      },
+      "3": {
+        "damage": 420.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.287,
+        "range": 20.0,
+        "rpm": 26.2
+      },
+      "4": {
+        "damage": 595.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.906,
+        "range": 20.0,
+        "rpm": 31.5
+      },
+      "5": {
+        "damage": 945.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.144,
+        "range": 20.0,
+        "rpm": 52.4
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "assault"
   },
   "DoubleHeatSink": {
     "id": "DoubleHeatSink",
@@ -957,7 +2816,9 @@
         "range": 843.8,
         "rpm": 13.4
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "ERLargeLaser_ShortBurst": {
     "id": "ERLargeLaser_ShortBurst",
@@ -1010,7 +2871,64 @@
         "range": 843.8,
         "rpm": 19.6
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "ERMediumLaser": {
+    "id": "ERMediumLaser",
+    "name": "Extended Range Medium Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 5.0,
+        "heatPerShot": 6.0,
+        "cooldown": 4.8,
+        "range": 288.0,
+        "rpm": 12.5
+      },
+      "1": {
+        "damage": 5.0,
+        "heatPerShot": 5.0,
+        "cooldown": 4.0,
+        "range": 360.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 5.25,
+        "heatPerShot": 4.75,
+        "cooldown": 3.9,
+        "range": 378.0,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 5.5,
+        "heatPerShot": 4.5,
+        "cooldown": 3.8,
+        "range": 396.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 6.0,
+        "heatPerShot": 4.25,
+        "cooldown": 3.68,
+        "range": 414.0,
+        "rpm": 16.3
+      },
+      "5": {
+        "damage": 6.5,
+        "heatPerShot": 3.75,
+        "cooldown": 3.4,
+        "range": 450.0,
+        "rpm": 17.6
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "ERPPC": {
     "id": "ERPPC",
@@ -1063,7 +2981,64 @@
         "range": 937.5,
         "rpm": 14.1
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "ERSmallLaser": {
+    "id": "ERSmallLaser",
+    "name": "Extended Range Small Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 3.0,
+        "heatPerShot": 2.4,
+        "cooldown": 2.7,
+        "range": 160.0,
+        "rpm": 22.2
+      },
+      "1": {
+        "damage": 3.0,
+        "heatPerShot": 2.0,
+        "cooldown": 2.25,
+        "range": 200.0,
+        "rpm": 26.7
+      },
+      "2": {
+        "damage": 3.15,
+        "heatPerShot": 1.9,
+        "cooldown": 2.194,
+        "range": 210.0,
+        "rpm": 27.3
+      },
+      "3": {
+        "damage": 3.3,
+        "heatPerShot": 1.8,
+        "cooldown": 2.137,
+        "range": 220.0,
+        "rpm": 28.1
+      },
+      "4": {
+        "damage": 3.6,
+        "heatPerShot": 1.7,
+        "cooldown": 2.07,
+        "range": 230.0,
+        "rpm": 29.0
+      },
+      "5": {
+        "damage": 3.9,
+        "heatPerShot": 1.5,
+        "cooldown": 1.912,
+        "range": 250.0,
+        "rpm": 31.4
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "Flamer": {
     "id": "Flamer",
@@ -1116,7 +3091,9 @@
         "range": 112.5,
         "rpm": 600.0
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "GaussRifle": {
     "id": "GaussRifle",
@@ -1169,7 +3146,10 @@
         "range": 825.0,
         "rpm": 11.8
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.Gauss.Standard"
   },
   "Gauss_Standard_AmmoEquipment": {
     "id": "Gauss_Standard_AmmoEquipment",
@@ -1180,7 +3160,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 26
+    "capacity": 26,
+    "ammoType": "Ammo.Ballistic.Gauss.Standard"
   },
   "Gauss_Standard_Half_AmmoEquipment": {
     "id": "Gauss_Standard_Half_AmmoEquipment",
@@ -1191,7 +3172,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 13
+    "capacity": 13,
+    "ammoType": "Ammo.Ballistic.Gauss.Standard"
   },
   "Greatsword_Assault": {
     "id": "Greatsword_Assault",
@@ -1244,7 +3226,234 @@
         "range": 20.0,
         "rpm": 18.8
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "assault"
+  },
+  "HammerFist_Assault": {
+    "id": "HammerFist_Assault",
+    "name": "Assault Hammerfist",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -100.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.812,
+        "range": 17.5,
+        "rpm": 15.7
+      },
+      "1": {
+        "damage": 25.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.05,
+        "range": 17.5,
+        "rpm": 19.7
+      },
+      "2": {
+        "damage": 87.5,
+        "heatPerShot": 0.0,
+        "cooldown": 2.669,
+        "range": 17.5,
+        "rpm": 22.5
+      },
+      "3": {
+        "damage": 150.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.287,
+        "range": 17.5,
+        "rpm": 26.2
+      },
+      "4": {
+        "damage": 212.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.906,
+        "range": 17.5,
+        "rpm": 31.5
+      },
+      "5": {
+        "damage": 337.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.144,
+        "range": 17.5,
+        "rpm": 52.4
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "assault"
+  },
+  "HammerFist_Heavy": {
+    "id": "HammerFist_Heavy",
+    "name": "Heavy Hammerfist",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -80.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.906,
+        "range": 17.5,
+        "rpm": 15.4
+      },
+      "1": {
+        "damage": 20.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.125,
+        "range": 17.5,
+        "rpm": 19.2
+      },
+      "2": {
+        "damage": 70.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.734,
+        "range": 17.5,
+        "rpm": 21.9
+      },
+      "3": {
+        "damage": 120.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.344,
+        "range": 17.5,
+        "rpm": 25.6
+      },
+      "4": {
+        "damage": 170.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.953,
+        "range": 17.5,
+        "rpm": 30.7
+      },
+      "5": {
+        "damage": 270.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.172,
+        "range": 17.5,
+        "rpm": 51.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "heavy"
+  },
+  "HammerFist_Light": {
+    "id": "HammerFist_Light",
+    "name": "Light Hammerfist",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -40.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.062,
+        "range": 17.5,
+        "rpm": 14.8
+      },
+      "1": {
+        "damage": 10.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.25,
+        "range": 17.5,
+        "rpm": 18.5
+      },
+      "2": {
+        "damage": 35.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.844,
+        "range": 17.5,
+        "rpm": 21.1
+      },
+      "3": {
+        "damage": 60.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.438,
+        "range": 17.5,
+        "rpm": 24.6
+      },
+      "4": {
+        "damage": 85.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.031,
+        "range": 17.5,
+        "rpm": 29.5
+      },
+      "5": {
+        "damage": 135.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.219,
+        "range": 17.5,
+        "rpm": 49.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "light"
+  },
+  "HammerFist_Medium": {
+    "id": "HammerFist_Medium",
+    "name": "Medium Hammerfist",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -60.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.062,
+        "range": 17.5,
+        "rpm": 14.8
+      },
+      "1": {
+        "damage": 15.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.25,
+        "range": 17.5,
+        "rpm": 18.5
+      },
+      "2": {
+        "damage": 52.5,
+        "heatPerShot": 0.0,
+        "cooldown": 2.844,
+        "range": 17.5,
+        "rpm": 21.1
+      },
+      "3": {
+        "damage": 90.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.438,
+        "range": 17.5,
+        "rpm": 24.6
+      },
+      "4": {
+        "damage": 127.5,
+        "heatPerShot": 0.0,
+        "cooldown": 2.031,
+        "range": 17.5,
+        "rpm": 29.5
+      },
+      "5": {
+        "damage": 202.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.219,
+        "range": 17.5,
+        "rpm": 49.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "medium"
   },
   "Hammer_Heavy": {
     "id": "Hammer_Heavy",
@@ -1297,7 +3506,146 @@
         "range": 20.0,
         "rpm": 21.1
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "heavy"
+  },
+  "Hatchet_Medium": {
+    "id": "Hatchet_Medium",
+    "name": "Medium Hatchet",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": -360.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.062,
+        "range": 20.0,
+        "rpm": 14.8
+      },
+      "1": {
+        "damage": 40.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.25,
+        "range": 20.0,
+        "rpm": 18.5
+      },
+      "2": {
+        "damage": 140.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.844,
+        "range": 20.0,
+        "rpm": 21.1
+      },
+      "3": {
+        "damage": 240.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.438,
+        "range": 20.0,
+        "rpm": 24.6
+      },
+      "4": {
+        "damage": 340.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.031,
+        "range": 20.0,
+        "rpm": 29.5
+      },
+      "5": {
+        "damage": 540.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.219,
+        "range": 20.0,
+        "rpm": 49.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "medium"
+  },
+  "HeavyGaussRifle": {
+    "id": "HeavyGaussRifle",
+    "name": "Heavy Gauss Rifle",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 18.0,
+    "slots": 11,
+    "tiers": {
+      "0": {
+        "damage": 25.0,
+        "heatPerShot": 2.6,
+        "cooldown": 7.2,
+        "range": 312.0,
+        "rpm": 8.3
+      },
+      "1": {
+        "damage": 25.0,
+        "heatPerShot": 2.0,
+        "cooldown": 6.0,
+        "range": 390.0,
+        "rpm": 10.0
+      },
+      "2": {
+        "damage": 26.25,
+        "heatPerShot": 1.9,
+        "cooldown": 5.85,
+        "range": 409.5,
+        "rpm": 10.3
+      },
+      "3": {
+        "damage": 28.5,
+        "heatPerShot": 1.8,
+        "cooldown": 5.7,
+        "range": 429.0,
+        "rpm": 10.5
+      },
+      "4": {
+        "damage": 31.25,
+        "heatPerShot": 1.7,
+        "cooldown": 5.52,
+        "range": 448.5,
+        "rpm": 10.9
+      },
+      "5": {
+        "damage": 35.0,
+        "heatPerShot": 1.7,
+        "cooldown": 5.1,
+        "range": 487.5,
+        "rpm": 11.8
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.Gauss.Heavy"
+  },
+  "HeavyGauss_AmmoEquipment": {
+    "id": "HeavyGauss_AmmoEquipment",
+    "name": "Heavy Gauss Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 8,
+    "ammoType": "Ammo.Ballistic.Gauss.Heavy"
+  },
+  "HeavyGauss_Half_AmmoEquipment": {
+    "id": "HeavyGauss_Half_AmmoEquipment",
+    "name": "Heavy Gauss Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 4,
+    "ammoType": "Ammo.Ballistic.Gauss.Heavy"
   },
   "HeavyRifle": {
     "id": "HeavyRifle",
@@ -1350,7 +3698,10 @@
         "range": 825.0,
         "rpm": 8.0
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.Rifle.Heavy"
   },
   "HeavyRifle_AmmoEquipment": {
     "id": "HeavyRifle_AmmoEquipment",
@@ -1361,7 +3712,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 12
+    "capacity": 12,
+    "ammoType": "Ammo.Ballistic.Rifle.Heavy"
   },
   "HeavyRifle_Burst": {
     "id": "HeavyRifle_Burst",
@@ -1414,7 +3766,10 @@
         "range": 792.0,
         "rpm": 7.1
       }
-    }
+    },
+    "volleyProjectiles": 3,
+    "volleyHeatShots": 3,
+    "ammoType": "Ammo.Ballistic.Rifle.Heavy"
   },
   "HeavyRifle_Half_AmmoEquipment": {
     "id": "HeavyRifle_Half_AmmoEquipment",
@@ -1425,7 +3780,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 6
+    "capacity": 6,
+    "ammoType": "Ammo.Ballistic.Rifle.Heavy"
   },
   "JumpJet_Class1_Equipment": {
     "id": "JumpJet_Class1_Equipment",
@@ -1482,6 +3838,358 @@
     "tiers": null,
     "equipmentType": "jumpJet"
   },
+  "Katana_Assault": {
+    "id": "Katana_Assault",
+    "name": "Assault Katana",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 6.0,
+    "slots": 4,
+    "tiers": {
+      "0": {
+        "damage": -495.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.188,
+        "range": 22.5,
+        "rpm": 18.8
+      },
+      "1": {
+        "damage": 55.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.55,
+        "range": 22.5,
+        "rpm": 23.5
+      },
+      "2": {
+        "damage": 192.5,
+        "heatPerShot": 0.0,
+        "cooldown": 2.231,
+        "range": 22.5,
+        "rpm": 26.9
+      },
+      "3": {
+        "damage": 330.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.912,
+        "range": 22.5,
+        "rpm": 31.4
+      },
+      "4": {
+        "damage": 467.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.721,
+        "range": 22.5,
+        "rpm": 34.9
+      },
+      "5": {
+        "damage": 742.5,
+        "heatPerShot": 0.0,
+        "cooldown": 0.956,
+        "range": 22.5,
+        "rpm": 62.8
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "assault"
+  },
+  "Knuckles_Assault": {
+    "id": "Knuckles_Assault",
+    "name": "Assault Knuckles",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "medium",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -120.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.812,
+        "range": 17.5,
+        "rpm": 15.7
+      },
+      "1": {
+        "damage": 30.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.05,
+        "range": 17.5,
+        "rpm": 19.7
+      },
+      "2": {
+        "damage": 105.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.669,
+        "range": 17.5,
+        "rpm": 22.5
+      },
+      "3": {
+        "damage": 180.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.287,
+        "range": 17.5,
+        "rpm": 26.2
+      },
+      "4": {
+        "damage": 255.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.906,
+        "range": 17.5,
+        "rpm": 31.5
+      },
+      "5": {
+        "damage": 405.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.144,
+        "range": 17.5,
+        "rpm": 52.4
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "assault"
+  },
+  "Knuckles_Heavy": {
+    "id": "Knuckles_Heavy",
+    "name": "Heavy Knuckles",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "medium",
+    "tonnage": 1.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -100.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.906,
+        "range": 17.5,
+        "rpm": 15.4
+      },
+      "1": {
+        "damage": 25.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.125,
+        "range": 17.5,
+        "rpm": 19.2
+      },
+      "2": {
+        "damage": 87.5,
+        "heatPerShot": 0.0,
+        "cooldown": 2.734,
+        "range": 17.5,
+        "rpm": 21.9
+      },
+      "3": {
+        "damage": 150.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.344,
+        "range": 17.5,
+        "rpm": 25.6
+      },
+      "4": {
+        "damage": 212.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.953,
+        "range": 17.5,
+        "rpm": 30.7
+      },
+      "5": {
+        "damage": 337.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.172,
+        "range": 17.5,
+        "rpm": 51.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "heavy"
+  },
+  "Knuckles_Light": {
+    "id": "Knuckles_Light",
+    "name": "Light Knuckles",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "medium",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -60.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.062,
+        "range": 17.5,
+        "rpm": 14.8
+      },
+      "1": {
+        "damage": 15.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.25,
+        "range": 17.5,
+        "rpm": 18.5
+      },
+      "2": {
+        "damage": 52.5,
+        "heatPerShot": 0.0,
+        "cooldown": 2.844,
+        "range": 17.5,
+        "rpm": 21.1
+      },
+      "3": {
+        "damage": 90.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.438,
+        "range": 17.5,
+        "rpm": 24.6
+      },
+      "4": {
+        "damage": 127.5,
+        "heatPerShot": 0.0,
+        "cooldown": 2.031,
+        "range": 17.5,
+        "rpm": 29.5
+      },
+      "5": {
+        "damage": 202.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.219,
+        "range": 17.5,
+        "rpm": 49.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "light"
+  },
+  "Knuckles_Medium": {
+    "id": "Knuckles_Medium",
+    "name": "Medium Knuckles",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "medium",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": -80.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.062,
+        "range": 17.5,
+        "rpm": 14.8
+      },
+      "1": {
+        "damage": 20.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.25,
+        "range": 17.5,
+        "rpm": 18.5
+      },
+      "2": {
+        "damage": 70.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.844,
+        "range": 17.5,
+        "rpm": 21.1
+      },
+      "3": {
+        "damage": 120.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.438,
+        "range": 17.5,
+        "rpm": 24.6
+      },
+      "4": {
+        "damage": 170.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.031,
+        "range": 17.5,
+        "rpm": 29.5
+      },
+      "5": {
+        "damage": 270.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.219,
+        "range": 17.5,
+        "rpm": 49.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "medium"
+  },
+  "LBX20_AmmoEquipment": {
+    "id": "LBX20_AmmoEquipment",
+    "name": "LB 20-X AC Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 20,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20"
+  },
+  "LBX20_Half_AmmoEquipment": {
+    "id": "LBX20_Half_AmmoEquipment",
+    "name": "LB 20-X AC Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 10,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20"
+  },
+  "LBX2_AmmoEquipment": {
+    "id": "LBX2_AmmoEquipment",
+    "name": "LB 2-X AC Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 180,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2"
+  },
+  "LBX2_Half_AmmoEquipment": {
+    "id": "LBX2_Half_AmmoEquipment",
+    "name": "LB 2-X AC Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 90,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2"
+  },
+  "LBX5_AmmoEquipment": {
+    "id": "LBX5_AmmoEquipment",
+    "name": "LB 5-X AC Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 80,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5"
+  },
+  "LBX5_Half_AmmoEquipment": {
+    "id": "LBX5_Half_AmmoEquipment",
+    "name": "LB 5-X AC Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 40,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5"
+  },
   "LBXAutocannon10": {
     "id": "LBXAutocannon10",
     "name": "LB 10-X Autocannon",
@@ -1533,7 +4241,122 @@
         "range": 675.0,
         "rpm": 35.5
       }
-    }
+    },
+    "volleyProjectiles": 13,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
+  },
+  "LBXAutocannon10_BurstFire": {
+    "id": "LBXAutocannon10_BurstFire",
+    "name": "LB 10-X Autocannon Burst Fire",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 11.0,
+    "slots": 6,
+    "tiers": {
+      "0": {
+        "damage": 1.0,
+        "heatPerShot": 0.715,
+        "cooldown": 2.7,
+        "range": 432.0,
+        "rpm": 22.2
+      },
+      "1": {
+        "damage": 1.0,
+        "heatPerShot": 0.55,
+        "cooldown": 2.25,
+        "range": 540.0,
+        "rpm": 26.7
+      },
+      "2": {
+        "damage": 1.05,
+        "heatPerShot": 0.495,
+        "cooldown": 2.137,
+        "range": 567.0,
+        "rpm": 28.1
+      },
+      "3": {
+        "damage": 1.15,
+        "heatPerShot": 0.481,
+        "cooldown": 2.025,
+        "range": 594.0,
+        "rpm": 29.6
+      },
+      "4": {
+        "damage": 1.2,
+        "heatPerShot": 0.468,
+        "cooldown": 1.912,
+        "range": 621.0,
+        "rpm": 31.4
+      },
+      "5": {
+        "damage": 1.3,
+        "heatPerShot": 0.426,
+        "cooldown": 1.688,
+        "range": 675.0,
+        "rpm": 35.5
+      }
+    },
+    "volleyProjectiles": 15,
+    "volleyHeatShots": 3,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
+  },
+  "LBXAutocannon10_Slug_BurstFire": {
+    "id": "LBXAutocannon10_Slug_BurstFire",
+    "name": "LB 10-X Autocannon Slug Burst",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 11.0,
+    "slots": 6,
+    "tiers": {
+      "0": {
+        "damage": 3.0,
+        "heatPerShot": 0.65,
+        "cooldown": 2.7,
+        "range": 432.0,
+        "rpm": 22.2
+      },
+      "1": {
+        "damage": 3.0,
+        "heatPerShot": 0.5,
+        "cooldown": 2.25,
+        "range": 540.0,
+        "rpm": 26.7
+      },
+      "2": {
+        "damage": 3.15,
+        "heatPerShot": 0.475,
+        "cooldown": 2.137,
+        "range": 567.0,
+        "rpm": 28.1
+      },
+      "3": {
+        "damage": 3.3,
+        "heatPerShot": 0.45,
+        "cooldown": 2.025,
+        "range": 594.0,
+        "rpm": 29.6
+      },
+      "4": {
+        "damage": 3.6,
+        "heatPerShot": 0.425,
+        "cooldown": 1.912,
+        "range": 621.0,
+        "rpm": 31.4
+      },
+      "5": {
+        "damage": 3.9,
+        "heatPerShot": 0.388,
+        "cooldown": 1.688,
+        "range": 675.0,
+        "rpm": 35.5
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
   },
   "LBXAutocannon10_SolidSlug": {
     "id": "LBXAutocannon10_SolidSlug",
@@ -1586,7 +4409,178 @@
         "range": 675.0,
         "rpm": 35.5
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
+  },
+  "LBXAutocannon2": {
+    "id": "LBXAutocannon2",
+    "name": "LB 2-X Autocannon",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 6.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 0.75,
+        "heatPerShot": 0.39,
+        "cooldown": 0.9,
+        "range": 720.0,
+        "rpm": 66.7
+      },
+      "1": {
+        "damage": 0.75,
+        "heatPerShot": 0.3,
+        "cooldown": 0.75,
+        "range": 900.0,
+        "rpm": 80.0
+      },
+      "2": {
+        "damage": 0.79,
+        "heatPerShot": 0.27,
+        "cooldown": 0.712,
+        "range": 945.0,
+        "rpm": 84.3
+      },
+      "3": {
+        "damage": 0.86,
+        "heatPerShot": 0.27,
+        "cooldown": 0.675,
+        "range": 990.0,
+        "rpm": 88.9
+      },
+      "4": {
+        "damage": 0.9,
+        "heatPerShot": 0.255,
+        "cooldown": 0.637,
+        "range": 1035.0,
+        "rpm": 94.2
+      },
+      "5": {
+        "damage": 0.98,
+        "heatPerShot": 0.232,
+        "cooldown": 0.562,
+        "range": 1125.0,
+        "rpm": 106.8
+      }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2"
+  },
+  "LBXAutocannon20": {
+    "id": "LBXAutocannon20",
+    "name": "LB 20-X Autocannon",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 14.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 5.0,
+        "heatPerShot": 5.46,
+        "cooldown": 3.6,
+        "range": 288.0,
+        "rpm": 16.7
+      },
+      "1": {
+        "damage": 5.0,
+        "heatPerShot": 4.2,
+        "cooldown": 3.0,
+        "range": 360.0,
+        "rpm": 20.0
+      },
+      "2": {
+        "damage": 5.25,
+        "heatPerShot": 3.78,
+        "cooldown": 2.85,
+        "range": 378.0,
+        "rpm": 21.1
+      },
+      "3": {
+        "damage": 5.75,
+        "heatPerShot": 3.78,
+        "cooldown": 2.7,
+        "range": 396.0,
+        "rpm": 22.2
+      },
+      "4": {
+        "damage": 6.0,
+        "heatPerShot": 3.57,
+        "cooldown": 2.55,
+        "range": 414.0,
+        "rpm": 23.5
+      },
+      "5": {
+        "damage": 6.5,
+        "heatPerShot": 3.255,
+        "cooldown": 2.25,
+        "range": 450.0,
+        "rpm": 26.7
+      }
+    },
+    "volleyProjectiles": 5,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20"
+  },
+  "LBXAutocannon5": {
+    "id": "LBXAutocannon5",
+    "name": "LB 5-X Autocannon",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 8.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 1.75,
+        "heatPerShot": 0.52,
+        "cooldown": 1.08,
+        "range": 576.0,
+        "rpm": 55.6
+      },
+      "1": {
+        "damage": 1.75,
+        "heatPerShot": 0.4,
+        "cooldown": 0.9,
+        "range": 720.0,
+        "rpm": 66.7
+      },
+      "2": {
+        "damage": 1.84,
+        "heatPerShot": 0.36,
+        "cooldown": 0.855,
+        "range": 756.0,
+        "rpm": 70.2
+      },
+      "3": {
+        "damage": 2.01,
+        "heatPerShot": 0.36,
+        "cooldown": 0.81,
+        "range": 792.0,
+        "rpm": 74.1
+      },
+      "4": {
+        "damage": 2.1,
+        "heatPerShot": 0.34,
+        "cooldown": 0.765,
+        "range": 828.0,
+        "rpm": 78.4
+      },
+      "5": {
+        "damage": 2.27,
+        "heatPerShot": 0.31,
+        "cooldown": 0.675,
+        "range": 900.0,
+        "rpm": 88.9
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5"
   },
   "LRM10": {
     "id": "LRM10",
@@ -1639,7 +4633,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 10,
+    "volleyHeatShots": 10,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM10_Artemis": {
     "id": "LRM10_Artemis",
@@ -1692,7 +4689,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 10,
+    "volleyHeatShots": 10,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
   },
   "LRM10_Artemis_Stream": {
     "id": "LRM10_Artemis_Stream",
@@ -1745,7 +4745,66 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 10,
+    "volleyHeatShots": 10,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
+  },
+  "LRM10_Hotloaded": {
+    "id": "LRM10_Hotloaded",
+    "name": "LRM 10 Hotloaded",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 5.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 600.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 750.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 787.5,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.324,
+        "cooldown": 3.8,
+        "range": 825.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.306,
+        "cooldown": 3.6,
+        "range": 862.5,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 937.5,
+        "rpm": 18.2
+      }
+    },
+    "volleyProjectiles": 10,
+    "volleyHeatShots": 10,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM10_Stream": {
     "id": "LRM10_Stream",
@@ -1798,7 +4857,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 10,
+    "volleyHeatShots": 10,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM15": {
     "id": "LRM15",
@@ -1851,7 +4913,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 15,
+    "volleyHeatShots": 15,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM15_Artemis": {
     "id": "LRM15_Artemis",
@@ -1904,7 +4969,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 15,
+    "volleyHeatShots": 15,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
   },
   "LRM15_Artemis_Stream": {
     "id": "LRM15_Artemis_Stream",
@@ -1957,7 +5025,66 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 15,
+    "volleyHeatShots": 15,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
+  },
+  "LRM15_Hotloaded": {
+    "id": "LRM15_Hotloaded",
+    "name": "LRM 15 Hotloaded",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.4,
+        "range": 600.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.3,
+        "cooldown": 4.0,
+        "range": 750.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.285,
+        "cooldown": 3.9,
+        "range": 787.5,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.27,
+        "cooldown": 3.8,
+        "range": 825.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.255,
+        "cooldown": 3.6,
+        "range": 862.5,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.225,
+        "cooldown": 3.3,
+        "range": 937.5,
+        "rpm": 18.2
+      }
+    },
+    "volleyProjectiles": 15,
+    "volleyHeatShots": 15,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM15_Stream": {
     "id": "LRM15_Stream",
@@ -2010,7 +5137,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 15,
+    "volleyHeatShots": 15,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM20": {
     "id": "LRM20",
@@ -2063,7 +5193,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 20,
+    "volleyHeatShots": 20,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM20_Artemis": {
     "id": "LRM20_Artemis",
@@ -2116,7 +5249,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 20,
+    "volleyHeatShots": 20,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
   },
   "LRM20_Artemis_Stream": {
     "id": "LRM20_Artemis_Stream",
@@ -2169,7 +5305,66 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 20,
+    "volleyHeatShots": 20,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
+  },
+  "LRM20_Hotloaded": {
+    "id": "LRM20_Hotloaded",
+    "name": "LRM 20 Hotloaded",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 10.0,
+    "slots": 5,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.324,
+        "cooldown": 4.4,
+        "range": 600.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.27,
+        "cooldown": 4.0,
+        "range": 750.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.257,
+        "cooldown": 3.9,
+        "range": 787.5,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.243,
+        "cooldown": 3.8,
+        "range": 825.0,
+        "rpm": 15.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.23,
+        "cooldown": 3.6,
+        "range": 862.5,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.203,
+        "cooldown": 3.3,
+        "range": 937.5,
+        "rpm": 18.2
+      }
+    },
+    "volleyProjectiles": 20,
+    "volleyHeatShots": 20,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM20_Stream": {
     "id": "LRM20_Stream",
@@ -2222,7 +5417,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 20,
+    "volleyHeatShots": 20,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM5": {
     "id": "LRM5",
@@ -2275,7 +5473,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 5,
+    "volleyHeatShots": 5,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM5_Artemis": {
     "id": "LRM5_Artemis",
@@ -2328,7 +5529,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 5,
+    "volleyHeatShots": 5,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
   },
   "LRM5_Artemis_Stream": {
     "id": "LRM5_Artemis_Stream",
@@ -2381,7 +5585,66 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 5,
+    "volleyHeatShots": 5,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
+  },
+  "LRM5_Hotloaded": {
+    "id": "LRM5_Hotloaded",
+    "name": "LRM 5 Hotloaded",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.432,
+        "cooldown": 4.4,
+        "range": 600.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.36,
+        "cooldown": 4.0,
+        "range": 750.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.342,
+        "cooldown": 3.9,
+        "range": 787.5,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.38,
+        "heatPerShot": 0.306,
+        "cooldown": 3.7,
+        "range": 825.0,
+        "rpm": 16.2
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.288,
+        "cooldown": 3.6,
+        "range": 862.5,
+        "rpm": 16.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.27,
+        "cooldown": 3.3,
+        "range": 937.5,
+        "rpm": 18.2
+      }
+    },
+    "volleyProjectiles": 5,
+    "volleyHeatShots": 5,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM5_Stream": {
     "id": "LRM5_Stream",
@@ -2434,7 +5697,10 @@
         "range": 1125.0,
         "rpm": 18.2
       }
-    }
+    },
+    "volleyProjectiles": 5,
+    "volleyHeatShots": 5,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM_AmmoEquipment": {
     "id": "LRM_AmmoEquipment",
@@ -2445,7 +5711,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 440
+    "capacity": 440,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "LRM_Artemis_AmmoEquipment": {
     "id": "LRM_Artemis_AmmoEquipment",
@@ -2456,7 +5723,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 440
+    "capacity": 440,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
   },
   "LRM_Artemis_Half_AmmoEquipment": {
     "id": "LRM_Artemis_Half_AmmoEquipment",
@@ -2467,7 +5735,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 220
+    "capacity": 220,
+    "ammoType": "Ammo.Missile.LRM.Artemis"
   },
   "LRM_Half_AmmoEquipment": {
     "id": "LRM_Half_AmmoEquipment",
@@ -2478,7 +5747,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 220
+    "capacity": 220,
+    "ammoType": "Ammo.Missile.LRM"
   },
   "Lance_Medium": {
     "id": "Lance_Medium",
@@ -2531,7 +5801,10 @@
         "range": 22.0,
         "rpm": 26.7
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "medium"
   },
   "LargeChemLaser_AmmoEquipment": {
     "id": "LargeChemLaser_AmmoEquipment",
@@ -2542,7 +5815,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 62
+    "capacity": 62,
+    "ammoType": "Ammo.Energy.ChemLaser.Large"
   },
   "LargeChemLaser_Half_AmmoEquipment": {
     "id": "LargeChemLaser_Half_AmmoEquipment",
@@ -2553,7 +5827,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 31
+    "capacity": 31,
+    "ammoType": "Ammo.Energy.ChemLaser.Large"
   },
   "LargeChemicalLaser": {
     "id": "LargeChemicalLaser",
@@ -2606,7 +5881,10 @@
         "range": 562.5,
         "rpm": 15.7
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Energy.ChemLaser.Large"
   },
   "LargeLaser": {
     "id": "LargeLaser",
@@ -2659,7 +5937,9 @@
         "range": 562.5,
         "rpm": 13.4
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "LargeLaser_ShortBurst": {
     "id": "LargeLaser_ShortBurst",
@@ -2712,7 +5992,9 @@
         "range": 562.5,
         "rpm": 19.6
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "LargePulseLaser": {
     "id": "LargePulseLaser",
@@ -2765,7 +6047,256 @@
         "range": 456.2,
         "rpm": 15.7
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "LargeXPulse": {
+    "id": "LargeXPulse",
+    "name": "Large X Pulse Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "large",
+    "tonnage": 7.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 1.8,
+        "cooldown": 0.275,
+        "range": 360.0,
+        "rpm": 218.2
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 1.5,
+        "cooldown": 0.25,
+        "range": 450.0,
+        "rpm": 240.0
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 1.425,
+        "cooldown": 0.237,
+        "range": 472.5,
+        "rpm": 253.2
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 1.35,
+        "cooldown": 0.225,
+        "range": 495.0,
+        "rpm": 266.7
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 1.275,
+        "cooldown": 0.212,
+        "range": 517.5,
+        "rpm": 283.0
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 1.125,
+        "cooldown": 0.188,
+        "range": 562.5,
+        "rpm": 319.1
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "LightAutocannon2": {
+    "id": "LightAutocannon2",
+    "name": "Light Autocannon/2",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 4.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.0,
+        "heatPerShot": 0.6,
+        "cooldown": 0.748,
+        "range": 432.0,
+        "rpm": 80.2
+      },
+      "1": {
+        "damage": 2.0,
+        "heatPerShot": 0.5,
+        "cooldown": 0.68,
+        "range": 540.0,
+        "rpm": 88.2
+      },
+      "2": {
+        "damage": 2.12,
+        "heatPerShot": 0.475,
+        "cooldown": 0.646,
+        "range": 567.0,
+        "rpm": 92.9
+      },
+      "3": {
+        "damage": 2.2,
+        "heatPerShot": 0.45,
+        "cooldown": 0.612,
+        "range": 594.0,
+        "rpm": 98.0
+      },
+      "4": {
+        "damage": 2.5,
+        "heatPerShot": 0.425,
+        "cooldown": 0.578,
+        "range": 621.0,
+        "rpm": 103.8
+      },
+      "5": {
+        "damage": 2.8,
+        "heatPerShot": 0.375,
+        "cooldown": 0.51,
+        "range": 675.0,
+        "rpm": 117.6
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC2"
+  },
+  "LightAutocannon5": {
+    "id": "LightAutocannon5",
+    "name": "Light Autocannon/5",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 5.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 5.0,
+        "heatPerShot": 0.72,
+        "cooldown": 1.87,
+        "range": 288.0,
+        "rpm": 32.1
+      },
+      "1": {
+        "damage": 5.0,
+        "heatPerShot": 0.6,
+        "cooldown": 1.7,
+        "range": 360.0,
+        "rpm": 35.3
+      },
+      "2": {
+        "damage": 5.3,
+        "heatPerShot": 0.57,
+        "cooldown": 1.615,
+        "range": 378.0,
+        "rpm": 37.2
+      },
+      "3": {
+        "damage": 5.5,
+        "heatPerShot": 0.54,
+        "cooldown": 1.53,
+        "range": 396.0,
+        "rpm": 39.2
+      },
+      "4": {
+        "damage": 6.25,
+        "heatPerShot": 0.51,
+        "cooldown": 1.445,
+        "range": 414.0,
+        "rpm": 41.5
+      },
+      "5": {
+        "damage": 7.0,
+        "heatPerShot": 0.45,
+        "cooldown": 1.275,
+        "range": 450.0,
+        "rpm": 47.1
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC5"
+  },
+  "LightGaussRifle": {
+    "id": "LightGaussRifle",
+    "name": "Light Gauss Rifle",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 12.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 8.0,
+        "heatPerShot": 1.3,
+        "cooldown": 3.6,
+        "range": 408.0,
+        "rpm": 16.7
+      },
+      "1": {
+        "damage": 8.0,
+        "heatPerShot": 1.0,
+        "cooldown": 3.0,
+        "range": 510.0,
+        "rpm": 20.0
+      },
+      "2": {
+        "damage": 8.4,
+        "heatPerShot": 0.95,
+        "cooldown": 2.925,
+        "range": 535.5,
+        "rpm": 20.5
+      },
+      "3": {
+        "damage": 9.12,
+        "heatPerShot": 0.9,
+        "cooldown": 2.85,
+        "range": 561.0,
+        "rpm": 21.1
+      },
+      "4": {
+        "damage": 10.0,
+        "heatPerShot": 0.85,
+        "cooldown": 2.76,
+        "range": 586.5,
+        "rpm": 21.7
+      },
+      "5": {
+        "damage": 11.2,
+        "heatPerShot": 0.85,
+        "cooldown": 2.55,
+        "range": 637.5,
+        "rpm": 23.5
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.Gauss.Light"
+  },
+  "LightGauss_AmmoEquipment": {
+    "id": "LightGauss_AmmoEquipment",
+    "name": "Light Gauss Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 32,
+    "ammoType": "Ammo.Ballistic.Gauss.Light"
+  },
+  "LightGauss_Half_AmmoEquipment": {
+    "id": "LightGauss_Half_AmmoEquipment",
+    "name": "Light Gauss Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "tiers": null,
+    "capacity": 16,
+    "ammoType": "Ammo.Ballistic.Gauss.Light"
   },
   "LightRifle": {
     "id": "LightRifle",
@@ -2818,7 +6349,10 @@
         "range": 450.0,
         "rpm": 11.4
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.Rifle.Light"
   },
   "LightRifle_AmmoEquipment": {
     "id": "LightRifle_AmmoEquipment",
@@ -2829,7 +6363,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 34
+    "capacity": 34,
+    "ammoType": "Ammo.Ballistic.Rifle.Light"
   },
   "LightRifle_Burst": {
     "id": "LightRifle_Burst",
@@ -2882,7 +6417,10 @@
         "range": 468.0,
         "rpm": 11.4
       }
-    }
+    },
+    "volleyProjectiles": 5,
+    "volleyHeatShots": 5,
+    "ammoType": "Ammo.Ballistic.Rifle.Light"
   },
   "LightRifle_Half_AmmoEquipment": {
     "id": "LightRifle_Half_AmmoEquipment",
@@ -2893,7 +6431,344 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 17
+    "capacity": 17,
+    "ammoType": "Ammo.Ballistic.Rifle.Light"
+  },
+  "Longsword_Heavy": {
+    "id": "Longsword_Heavy",
+    "name": "Heavy Longsword",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 5.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": -450.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.906,
+        "range": 20.0,
+        "rpm": 15.4
+      },
+      "1": {
+        "damage": 50.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.125,
+        "range": 20.0,
+        "rpm": 19.2
+      },
+      "2": {
+        "damage": 175.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.734,
+        "range": 20.0,
+        "rpm": 21.9
+      },
+      "3": {
+        "damage": 300.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.344,
+        "range": 20.0,
+        "rpm": 25.6
+      },
+      "4": {
+        "damage": 425.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.953,
+        "range": 20.0,
+        "rpm": 30.7
+      },
+      "5": {
+        "damage": 675.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.172,
+        "range": 20.0,
+        "rpm": 51.2
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "heavy"
+  },
+  "MRM10": {
+    "id": "MRM10",
+    "name": "MRM 10",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.42,
+        "cooldown": 4.29,
+        "range": 440.0,
+        "rpm": 14.0
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.35,
+        "cooldown": 3.9,
+        "range": 550.0,
+        "rpm": 15.4
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.332,
+        "cooldown": 3.705,
+        "range": 577.5,
+        "rpm": 16.2
+      },
+      "3": {
+        "damage": 1.32,
+        "heatPerShot": 0.315,
+        "cooldown": 3.51,
+        "range": 605.0,
+        "rpm": 17.1
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.297,
+        "cooldown": 3.315,
+        "range": 632.5,
+        "rpm": 18.1
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.262,
+        "cooldown": 2.925,
+        "range": 687.5,
+        "rpm": 20.5
+      }
+    },
+    "volleyProjectiles": 10,
+    "volleyHeatShots": 10,
+    "ammoType": "Ammo.Missile.MRM"
+  },
+  "MRM20": {
+    "id": "MRM20",
+    "name": "MRM 20",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 7.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.324,
+        "cooldown": 4.51,
+        "range": 440.0,
+        "rpm": 13.3
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.27,
+        "cooldown": 4.1,
+        "range": 550.0,
+        "rpm": 14.6
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.257,
+        "cooldown": 3.895,
+        "range": 577.5,
+        "rpm": 15.4
+      },
+      "3": {
+        "damage": 1.32,
+        "heatPerShot": 0.243,
+        "cooldown": 3.69,
+        "range": 605.0,
+        "rpm": 16.3
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.23,
+        "cooldown": 3.485,
+        "range": 632.5,
+        "rpm": 17.2
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.203,
+        "cooldown": 3.075,
+        "range": 687.5,
+        "rpm": 19.5
+      }
+    },
+    "volleyProjectiles": 20,
+    "volleyHeatShots": 20,
+    "ammoType": "Ammo.Missile.MRM"
+  },
+  "MRM30": {
+    "id": "MRM30",
+    "name": "MRM 30",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 10.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.312,
+        "cooldown": 4.73,
+        "range": 440.0,
+        "rpm": 12.7
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.26,
+        "cooldown": 4.3,
+        "range": 550.0,
+        "rpm": 14.0
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.247,
+        "cooldown": 4.085,
+        "range": 577.5,
+        "rpm": 14.7
+      },
+      "3": {
+        "damage": 1.32,
+        "heatPerShot": 0.234,
+        "cooldown": 3.87,
+        "range": 605.0,
+        "rpm": 15.5
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.221,
+        "cooldown": 3.655,
+        "range": 632.5,
+        "rpm": 16.4
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.195,
+        "cooldown": 3.225,
+        "range": 687.5,
+        "rpm": 18.6
+      }
+    },
+    "volleyProjectiles": 30,
+    "volleyHeatShots": 30,
+    "ammoType": "Ammo.Missile.MRM"
+  },
+  "MRM40": {
+    "id": "MRM40",
+    "name": "MRM 40",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "large",
+    "tonnage": 12.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.2,
+        "heatPerShot": 0.3,
+        "cooldown": 4.95,
+        "range": 440.0,
+        "rpm": 12.1
+      },
+      "1": {
+        "damage": 1.2,
+        "heatPerShot": 0.25,
+        "cooldown": 4.5,
+        "range": 550.0,
+        "rpm": 13.3
+      },
+      "2": {
+        "damage": 1.27,
+        "heatPerShot": 0.237,
+        "cooldown": 4.275,
+        "range": 577.5,
+        "rpm": 14.0
+      },
+      "3": {
+        "damage": 1.32,
+        "heatPerShot": 0.225,
+        "cooldown": 4.05,
+        "range": 605.0,
+        "rpm": 14.8
+      },
+      "4": {
+        "damage": 1.5,
+        "heatPerShot": 0.212,
+        "cooldown": 3.825,
+        "range": 632.5,
+        "rpm": 15.7
+      },
+      "5": {
+        "damage": 1.68,
+        "heatPerShot": 0.188,
+        "cooldown": 3.375,
+        "range": 687.5,
+        "rpm": 17.8
+      }
+    },
+    "volleyProjectiles": 40,
+    "volleyHeatShots": 40,
+    "ammoType": "Ammo.Missile.MRM"
+  },
+  "Mace_Medium": {
+    "id": "Mace_Medium",
+    "name": "Medium Mace",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 4.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": -450.0,
+        "heatPerShot": 0.0,
+        "cooldown": 4.375,
+        "range": 20.0,
+        "rpm": 13.7
+      },
+      "1": {
+        "damage": 50.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.5,
+        "range": 20.0,
+        "rpm": 17.1
+      },
+      "2": {
+        "damage": 175.0,
+        "heatPerShot": 0.0,
+        "cooldown": 3.062,
+        "range": 20.0,
+        "rpm": 19.6
+      },
+      "3": {
+        "damage": 300.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.625,
+        "range": 20.0,
+        "rpm": 22.9
+      },
+      "4": {
+        "damage": 425.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.188,
+        "range": 20.0,
+        "rpm": 27.4
+      },
+      "5": {
+        "damage": 675.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.312,
+        "range": 20.0,
+        "rpm": 45.7
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "medium"
   },
   "MachineGun": {
     "id": "MachineGun",
@@ -2946,7 +6821,10 @@
         "range": 208.0,
         "rpm": 600.0
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.MachineGun.Standard"
   },
   "MachineGun_Standard_AmmoEquipment": {
     "id": "MachineGun_Standard_AmmoEquipment",
@@ -2957,7 +6835,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 5200
+    "capacity": 5200,
+    "ammoType": "Ammo.Ballistic.MachineGun.Standard"
   },
   "MachineGun_Standard_Half_AmmoEquipment": {
     "id": "MachineGun_Standard_Half_AmmoEquipment",
@@ -2968,7 +6847,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 2600
+    "capacity": 2600,
+    "ammoType": "Ammo.Ballistic.MachineGun.Standard"
   },
   "MediumChemLaser_AmmoEquipment": {
     "id": "MediumChemLaser_AmmoEquipment",
@@ -2979,7 +6859,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 115
+    "capacity": 115,
+    "ammoType": "Ammo.Energy.ChemLaser.Medium"
   },
   "MediumChemLaser_Half_AmmoEquipment": {
     "id": "MediumChemLaser_Half_AmmoEquipment",
@@ -2990,7 +6871,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 57
+    "capacity": 57,
+    "ammoType": "Ammo.Energy.ChemLaser.Medium"
   },
   "MediumChemicalLaser": {
     "id": "MediumChemicalLaser",
@@ -3043,7 +6925,10 @@
         "range": 337.5,
         "rpm": 21.7
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Energy.ChemLaser.Medium"
   },
   "MediumLaser": {
     "id": "MediumLaser",
@@ -3096,7 +6981,9 @@
         "range": 337.5,
         "rpm": 17.6
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "MediumLaser_ShortBurst": {
     "id": "MediumLaser_ShortBurst",
@@ -3149,7 +7036,9 @@
         "range": 337.5,
         "rpm": 27.1
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "MediumPulseLaser": {
     "id": "MediumPulseLaser",
@@ -3202,7 +7091,9 @@
         "range": 275.0,
         "rpm": 21.7
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "MediumRifle": {
     "id": "MediumRifle",
@@ -3255,7 +7146,10 @@
         "range": 562.5,
         "rpm": 10.0
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.Rifle.Medium"
   },
   "MediumRifle_AmmoEquipment": {
     "id": "MediumRifle_AmmoEquipment",
@@ -3266,7 +7160,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 22
+    "capacity": 22,
+    "ammoType": "Ammo.Ballistic.Rifle.Medium"
   },
   "MediumRifle_Burst": {
     "id": "MediumRifle_Burst",
@@ -3319,7 +7214,10 @@
         "range": 562.5,
         "rpm": 10.0
       }
-    }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Ballistic.Rifle.Medium"
   },
   "MediumRifle_Half_AmmoEquipment": {
     "id": "MediumRifle_Half_AmmoEquipment",
@@ -3330,7 +7228,63 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 11
+    "capacity": 11,
+    "ammoType": "Ammo.Ballistic.Rifle.Medium"
+  },
+  "MediumXPulseLaser": {
+    "id": "MediumXPulseLaser",
+    "name": "Medium X Pulse Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "medium",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.5,
+        "heatPerShot": 1.08,
+        "cooldown": 0.275,
+        "range": 216.0,
+        "rpm": 218.2
+      },
+      "1": {
+        "damage": 1.5,
+        "heatPerShot": 0.9,
+        "cooldown": 0.25,
+        "range": 270.0,
+        "rpm": 240.0
+      },
+      "2": {
+        "damage": 1.59,
+        "heatPerShot": 0.855,
+        "cooldown": 0.237,
+        "range": 283.5,
+        "rpm": 253.2
+      },
+      "3": {
+        "damage": 1.65,
+        "heatPerShot": 0.81,
+        "cooldown": 0.225,
+        "range": 297.0,
+        "rpm": 266.7
+      },
+      "4": {
+        "damage": 1.88,
+        "heatPerShot": 0.765,
+        "cooldown": 0.212,
+        "range": 310.5,
+        "rpm": 283.0
+      },
+      "5": {
+        "damage": 2.1,
+        "heatPerShot": 0.675,
+        "cooldown": 0.188,
+        "range": 337.5,
+        "rpm": 319.1
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "NARC_AmmoEquipment": {
     "id": "NARC_AmmoEquipment",
@@ -3341,7 +7295,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 20
+    "capacity": 20,
+    "ammoType": "Ammo.Missile.NARC"
   },
   "NARC_Half_AmmoEquipment": {
     "id": "NARC_Half_AmmoEquipment",
@@ -3352,7 +7307,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 10
+    "capacity": 10,
+    "ammoType": "Ammo.Missile.NARC"
   },
   "NarcBeacon": {
     "id": "NarcBeacon",
@@ -3405,17 +7361,10 @@
         "range": 337.5,
         "rpm": 27.4
       }
-    }
-  },
-  "NarcBeaconData": {
-    "id": "NarcBeaconData",
-    "name": "NarcBeaconData",
-    "type": "equipment",
-    "weaponType": null,
-    "size": "small",
-    "tonnage": 0.0,
-    "slots": 1,
-    "tiers": null
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Missile.NARC"
   },
   "PPC": {
     "id": "PPC",
@@ -3468,7 +7417,9 @@
         "range": 575.0,
         "rpm": 14.1
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "PPC_Shotgun": {
     "id": "PPC_Shotgun",
@@ -3521,7 +7472,9 @@
         "range": 300.0,
         "rpm": 28.9
       }
-    }
+    },
+    "volleyProjectiles": 8,
+    "volleyHeatShots": 1
   },
   "SRM2": {
     "id": "SRM2",
@@ -3574,7 +7527,10 @@
         "range": 337.5,
         "rpm": 28.6
       }
-    }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM2_Artemis": {
     "id": "SRM2_Artemis",
@@ -3627,7 +7583,10 @@
         "range": 337.5,
         "rpm": 28.6
       }
-    }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM.Artemis"
   },
   "SRM2_Artemis_Stream": {
     "id": "SRM2_Artemis_Stream",
@@ -3680,7 +7639,66 @@
         "range": 337.5,
         "rpm": 37.6
       }
-    }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM.Artemis"
+  },
+  "SRM2_Inferno": {
+    "id": "SRM2_Inferno",
+    "name": "SRM 2 Inferno",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.8,
+        "heatPerShot": 0.9,
+        "cooldown": 3.08,
+        "range": 216.0,
+        "rpm": 19.5
+      },
+      "1": {
+        "damage": 1.8,
+        "heatPerShot": 0.75,
+        "cooldown": 2.8,
+        "range": 270.0,
+        "rpm": 21.4
+      },
+      "2": {
+        "damage": 1.91,
+        "heatPerShot": 0.712,
+        "cooldown": 2.66,
+        "range": 283.5,
+        "rpm": 22.6
+      },
+      "3": {
+        "damage": 1.98,
+        "heatPerShot": 0.675,
+        "cooldown": 2.52,
+        "range": 297.0,
+        "rpm": 23.8
+      },
+      "4": {
+        "damage": 2.25,
+        "heatPerShot": 0.637,
+        "cooldown": 2.38,
+        "range": 310.5,
+        "rpm": 25.2
+      },
+      "5": {
+        "damage": 2.52,
+        "heatPerShot": 0.562,
+        "cooldown": 2.1,
+        "range": 337.5,
+        "rpm": 28.6
+      }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM2_Stream": {
     "id": "SRM2_Stream",
@@ -3733,7 +7751,10 @@
         "range": 337.5,
         "rpm": 35.1
       }
-    }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM4": {
     "id": "SRM4",
@@ -3786,7 +7807,10 @@
         "range": 337.5,
         "rpm": 23.5
       }
-    }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM4_Artemis": {
     "id": "SRM4_Artemis",
@@ -3839,7 +7863,10 @@
         "range": 337.5,
         "rpm": 23.5
       }
-    }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Missile.SRM.Artemis"
   },
   "SRM4_Artemis_Stream": {
     "id": "SRM4_Artemis_Stream",
@@ -3892,7 +7919,66 @@
         "range": 337.5,
         "rpm": 37.6
       }
-    }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Missile.SRM.Artemis"
+  },
+  "SRM4_Inferno": {
+    "id": "SRM4_Inferno",
+    "name": "SRM 4 Inferno",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.8,
+        "heatPerShot": 0.9,
+        "cooldown": 3.74,
+        "range": 216.0,
+        "rpm": 16.0
+      },
+      "1": {
+        "damage": 1.8,
+        "heatPerShot": 0.75,
+        "cooldown": 3.4,
+        "range": 270.0,
+        "rpm": 17.6
+      },
+      "2": {
+        "damage": 1.91,
+        "heatPerShot": 0.712,
+        "cooldown": 3.23,
+        "range": 283.5,
+        "rpm": 18.6
+      },
+      "3": {
+        "damage": 1.98,
+        "heatPerShot": 0.675,
+        "cooldown": 3.06,
+        "range": 297.0,
+        "rpm": 19.6
+      },
+      "4": {
+        "damage": 2.25,
+        "heatPerShot": 0.637,
+        "cooldown": 2.89,
+        "range": 310.5,
+        "rpm": 20.8
+      },
+      "5": {
+        "damage": 2.52,
+        "heatPerShot": 0.562,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM4_Stream": {
     "id": "SRM4_Stream",
@@ -3945,7 +8031,10 @@
         "range": 337.5,
         "rpm": 39.0
       }
-    }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM6": {
     "id": "SRM6",
@@ -3998,7 +8087,10 @@
         "range": 337.5,
         "rpm": 23.5
       }
-    }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM6_Artemis": {
     "id": "SRM6_Artemis",
@@ -4051,7 +8143,10 @@
         "range": 337.5,
         "rpm": 23.5
       }
-    }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.SRM.Artemis"
   },
   "SRM6_Artemis_Stream": {
     "id": "SRM6_Artemis_Stream",
@@ -4104,7 +8199,66 @@
         "range": 337.5,
         "rpm": 39.0
       }
-    }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.SRM.Artemis"
+  },
+  "SRM6_Inferno": {
+    "id": "SRM6_Inferno",
+    "name": "SRM 6 Inferno",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 3.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 1.8,
+        "heatPerShot": 0.9,
+        "cooldown": 3.74,
+        "range": 216.0,
+        "rpm": 16.0
+      },
+      "1": {
+        "damage": 1.8,
+        "heatPerShot": 0.75,
+        "cooldown": 3.4,
+        "range": 270.0,
+        "rpm": 17.6
+      },
+      "2": {
+        "damage": 1.91,
+        "heatPerShot": 0.712,
+        "cooldown": 3.23,
+        "range": 283.5,
+        "rpm": 18.6
+      },
+      "3": {
+        "damage": 1.98,
+        "heatPerShot": 0.675,
+        "cooldown": 3.06,
+        "range": 297.0,
+        "rpm": 19.6
+      },
+      "4": {
+        "damage": 2.25,
+        "heatPerShot": 0.637,
+        "cooldown": 2.89,
+        "range": 310.5,
+        "rpm": 20.8
+      },
+      "5": {
+        "damage": 2.52,
+        "heatPerShot": 0.562,
+        "cooldown": 2.55,
+        "range": 337.5,
+        "rpm": 23.5
+      }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM6_Stream": {
     "id": "SRM6_Stream",
@@ -4157,7 +8311,10 @@
         "range": 337.5,
         "rpm": 39.0
       }
-    }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM_AmmoEquipment": {
     "id": "SRM_AmmoEquipment",
@@ -4168,7 +8325,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 320
+    "capacity": 320,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM_Artemis_AmmoEquipment": {
     "id": "SRM_Artemis_AmmoEquipment",
@@ -4179,7 +8337,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 320
+    "capacity": 320,
+    "ammoType": "Ammo.Missile.SRM.Artemis"
   },
   "SRM_Artemis_Half_AmmoEquipment": {
     "id": "SRM_Artemis_Half_AmmoEquipment",
@@ -4190,7 +8349,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 160
+    "capacity": 160,
+    "ammoType": "Ammo.Missile.SRM.Artemis"
   },
   "SRM_Half_AmmoEquipment": {
     "id": "SRM_Half_AmmoEquipment",
@@ -4201,7 +8361,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 160
+    "capacity": 160,
+    "ammoType": "Ammo.Missile.SRM"
   },
   "SRM_Streak_AmmoEquipment": {
     "id": "SRM_Streak_AmmoEquipment",
@@ -4212,7 +8373,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 320
+    "capacity": 320,
+    "ammoType": "Ammo.Missile.SRM.Streak"
   },
   "SRM_Streak_Half_AmmoEquipment": {
     "id": "SRM_Streak_Half_AmmoEquipment",
@@ -4223,7 +8385,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 160
+    "capacity": 160,
+    "ammoType": "Ammo.Missile.SRM.Streak"
   },
   "SUPERCHARGER_Arena_MKII": {
     "id": "SUPERCHARGER_Arena_MKII",
@@ -4255,7 +8418,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "capacity": 180
+    "capacity": 180,
+    "ammoType": "Ammo.Energy.ChemLaser.Small"
   },
   "SmallChemLaser_Half_AmmoEquipment": {
     "id": "SmallChemLaser_Half_AmmoEquipment",
@@ -4266,7 +8430,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "capacity": 90
+    "capacity": 90,
+    "ammoType": "Ammo.Energy.ChemLaser.Small"
   },
   "SmallChemicalLaser": {
     "id": "SmallChemicalLaser",
@@ -4319,7 +8484,10 @@
         "range": 187.5,
         "rpm": 39.2
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Energy.ChemLaser.Small"
   },
   "SmallLaser": {
     "id": "SmallLaser",
@@ -4372,7 +8540,9 @@
         "range": 187.5,
         "rpm": 31.4
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "SmallLaser_ShortBurst": {
     "id": "SmallLaser_ShortBurst",
@@ -4425,7 +8595,9 @@
         "range": 187.5,
         "rpm": 47.1
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "SmallPulseLaser": {
     "id": "SmallPulseLaser",
@@ -4478,7 +8650,64 @@
         "range": 137.5,
         "rpm": 37.2
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
+  },
+  "SmallXPulseLaser": {
+    "id": "SmallXPulseLaser",
+    "name": "Small X Pulse Laser",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 1.0,
+        "heatPerShot": 0.48,
+        "cooldown": 0.275,
+        "range": 128.0,
+        "rpm": 218.2
+      },
+      "1": {
+        "damage": 1.0,
+        "heatPerShot": 0.4,
+        "cooldown": 0.25,
+        "range": 160.0,
+        "rpm": 240.0
+      },
+      "2": {
+        "damage": 1.06,
+        "heatPerShot": 0.38,
+        "cooldown": 0.237,
+        "range": 168.0,
+        "rpm": 253.2
+      },
+      "3": {
+        "damage": 1.1,
+        "heatPerShot": 0.36,
+        "cooldown": 0.225,
+        "range": 176.0,
+        "rpm": 266.7
+      },
+      "4": {
+        "damage": 1.25,
+        "heatPerShot": 0.34,
+        "cooldown": 0.212,
+        "range": 184.0,
+        "rpm": 283.0
+      },
+      "5": {
+        "damage": 1.4,
+        "heatPerShot": 0.3,
+        "cooldown": 0.188,
+        "range": 200.0,
+        "rpm": 319.1
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "StreakSRM2": {
     "id": "StreakSRM2",
@@ -4531,7 +8760,10 @@
         "range": 337.5,
         "rpm": 40.0
       }
-    }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM.Streak"
   },
   "StreakSRM2_Stream": {
     "id": "StreakSRM2_Stream",
@@ -4584,7 +8816,122 @@
         "range": 337.5,
         "rpm": 44.4
       }
-    }
+    },
+    "volleyProjectiles": 2,
+    "volleyHeatShots": 2,
+    "ammoType": "Ammo.Missile.SRM.Streak"
+  },
+  "StreakSRM4": {
+    "id": "StreakSRM4",
+    "name": "Streak SRM 4",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 1.08,
+        "cooldown": 2.2,
+        "range": 216.0,
+        "rpm": 27.3
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.9,
+        "cooldown": 2.0,
+        "range": 270.0,
+        "rpm": 30.0
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.855,
+        "cooldown": 1.9,
+        "range": 283.5,
+        "rpm": 31.6
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.81,
+        "cooldown": 1.8,
+        "range": 297.0,
+        "rpm": 33.3
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.765,
+        "cooldown": 1.7,
+        "range": 310.5,
+        "rpm": 35.3
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 1.5,
+        "range": 337.5,
+        "rpm": 40.0
+      }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Missile.SRM.Streak"
+  },
+  "StreakSRM6": {
+    "id": "StreakSRM6",
+    "name": "Streak SRM 6",
+    "type": "weapon",
+    "weaponType": "missile",
+    "size": "medium",
+    "tonnage": 4.5,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.4,
+        "heatPerShot": 1.08,
+        "cooldown": 2.2,
+        "range": 216.0,
+        "rpm": 27.3
+      },
+      "1": {
+        "damage": 2.4,
+        "heatPerShot": 0.9,
+        "cooldown": 2.0,
+        "range": 270.0,
+        "rpm": 30.0
+      },
+      "2": {
+        "damage": 2.54,
+        "heatPerShot": 0.855,
+        "cooldown": 1.9,
+        "range": 283.5,
+        "rpm": 31.6
+      },
+      "3": {
+        "damage": 2.64,
+        "heatPerShot": 0.81,
+        "cooldown": 1.8,
+        "range": 297.0,
+        "rpm": 33.3
+      },
+      "4": {
+        "damage": 3.0,
+        "heatPerShot": 0.765,
+        "cooldown": 1.7,
+        "range": 310.5,
+        "rpm": 35.3
+      },
+      "5": {
+        "damage": 3.36,
+        "heatPerShot": 0.675,
+        "cooldown": 1.5,
+        "range": 337.5,
+        "rpm": 40.0
+      }
+    },
+    "volleyProjectiles": 6,
+    "volleyHeatShots": 6,
+    "ammoType": "Ammo.Missile.SRM.Streak"
   },
   "Supercharger_Arena_MKI": {
     "id": "Supercharger_Arena_MKI",
@@ -4677,7 +9024,9 @@
         "range": 562.5,
         "rpm": 0.0
       }
-    }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   },
   "TargetingComputer_Mk1": {
     "id": "TargetingComputer_Mk1",
@@ -4749,6 +9098,230 @@
     "slots": 7,
     "tiers": null
   },
+  "TrenchBlade_Heavy": {
+    "id": "TrenchBlade_Heavy",
+    "name": "Heavy Trench Blade",
+    "type": "weapon",
+    "weaponType": "melee",
+    "size": "large",
+    "tonnage": 4.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": -360.0,
+        "heatPerShot": 0.0,
+        "cooldown": 2.031,
+        "range": 18.8,
+        "rpm": 29.5
+      },
+      "1": {
+        "damage": 40.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.625,
+        "range": 18.8,
+        "rpm": 36.9
+      },
+      "2": {
+        "damage": 140.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.422,
+        "range": 18.8,
+        "rpm": 42.2
+      },
+      "3": {
+        "damage": 240.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.219,
+        "range": 18.8,
+        "rpm": 49.2
+      },
+      "4": {
+        "damage": 340.0,
+        "heatPerShot": 0.0,
+        "cooldown": 1.016,
+        "range": 18.8,
+        "rpm": 59.1
+      },
+      "5": {
+        "damage": 540.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.609,
+        "range": 18.8,
+        "rpm": 98.5
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "weightClass": "heavy"
+  },
+  "UltraAutocannon10_Single": {
+    "id": "UltraAutocannon10_Single",
+    "name": "Ultra Autocannon 10",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 13.0,
+    "slots": 2,
+    "tiers": {
+      "0": {
+        "damage": 10.0,
+        "heatPerShot": 3.9,
+        "cooldown": 4.4,
+        "range": 432.0,
+        "rpm": 13.6
+      },
+      "1": {
+        "damage": 10.0,
+        "heatPerShot": 3.0,
+        "cooldown": 4.0,
+        "range": 540.0,
+        "rpm": 15.0
+      },
+      "2": {
+        "damage": 10.5,
+        "heatPerShot": 2.85,
+        "cooldown": 3.8,
+        "range": 567.0,
+        "rpm": 15.8
+      },
+      "3": {
+        "damage": 11.0,
+        "heatPerShot": 2.7,
+        "cooldown": 3.6,
+        "range": 594.0,
+        "rpm": 16.7
+      },
+      "4": {
+        "damage": 12.0,
+        "heatPerShot": 2.55,
+        "cooldown": 3.4,
+        "range": 621.0,
+        "rpm": 17.6
+      },
+      "5": {
+        "damage": 13.0,
+        "heatPerShot": 2.325,
+        "cooldown": 3.0,
+        "range": 675.0,
+        "rpm": 20.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10"
+  },
+  "UltraAutocannon20_Single": {
+    "id": "UltraAutocannon20_Single",
+    "name": "Ultra Autocannon 20",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "large",
+    "tonnage": 15.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 20.0,
+        "heatPerShot": 7.8,
+        "cooldown": 5.5,
+        "range": 288.0,
+        "rpm": 10.9
+      },
+      "1": {
+        "damage": 20.0,
+        "heatPerShot": 6.0,
+        "cooldown": 5.0,
+        "range": 360.0,
+        "rpm": 12.0
+      },
+      "2": {
+        "damage": 21.0,
+        "heatPerShot": 5.7,
+        "cooldown": 4.75,
+        "range": 378.0,
+        "rpm": 12.6
+      },
+      "3": {
+        "damage": 22.0,
+        "heatPerShot": 5.4,
+        "cooldown": 4.5,
+        "range": 396.0,
+        "rpm": 13.3
+      },
+      "4": {
+        "damage": 24.0,
+        "heatPerShot": 5.1,
+        "cooldown": 4.25,
+        "range": 414.0,
+        "rpm": 14.1
+      },
+      "5": {
+        "damage": 26.0,
+        "heatPerShot": 4.65,
+        "cooldown": 3.75,
+        "range": 450.0,
+        "rpm": 16.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20"
+  },
+  "UltraAutocannon2_Single": {
+    "id": "UltraAutocannon2_Single",
+    "name": "Ultra Autocannon 2",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 7.0,
+    "slots": 1,
+    "tiers": {
+      "0": {
+        "damage": 2.0,
+        "heatPerShot": 0.52,
+        "cooldown": 0.99,
+        "range": 648.0,
+        "rpm": 60.6
+      },
+      "1": {
+        "damage": 2.0,
+        "heatPerShot": 0.4,
+        "cooldown": 0.9,
+        "range": 810.0,
+        "rpm": 66.7
+      },
+      "2": {
+        "damage": 2.1,
+        "heatPerShot": 0.38,
+        "cooldown": 0.855,
+        "range": 850.5,
+        "rpm": 70.2
+      },
+      "3": {
+        "damage": 2.2,
+        "heatPerShot": 0.36,
+        "cooldown": 0.81,
+        "range": 891.0,
+        "rpm": 74.1
+      },
+      "4": {
+        "damage": 2.4,
+        "heatPerShot": 0.34,
+        "cooldown": 0.765,
+        "range": 931.5,
+        "rpm": 78.4
+      },
+      "5": {
+        "damage": 2.6,
+        "heatPerShot": 0.31,
+        "cooldown": 0.675,
+        "range": 1012.5,
+        "rpm": 88.9
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2"
+  },
   "UltraAutocannon5": {
     "id": "UltraAutocannon5",
     "name": "Ultra Autocannon/5 Burst Fire",
@@ -4800,6 +9373,85 @@
         "range": 750.0,
         "rpm": 76.1
       }
-    }
+    },
+    "volleyProjectiles": 4,
+    "volleyHeatShots": 4,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
+  },
+  "UltraAutocannon5_Single": {
+    "id": "UltraAutocannon5_Single",
+    "name": "Ultra Autocannon/5",
+    "type": "weapon",
+    "weaponType": "ballistic",
+    "size": "medium",
+    "tonnage": 9.0,
+    "slots": 3,
+    "tiers": {
+      "0": {
+        "damage": 5.0,
+        "heatPerShot": 1.17,
+        "cooldown": 1.65,
+        "range": 480.0,
+        "rpm": 36.4
+      },
+      "1": {
+        "damage": 5.0,
+        "heatPerShot": 0.9,
+        "cooldown": 1.5,
+        "range": 600.0,
+        "rpm": 40.0
+      },
+      "2": {
+        "damage": 5.25,
+        "heatPerShot": 0.855,
+        "cooldown": 1.425,
+        "range": 630.0,
+        "rpm": 42.1
+      },
+      "3": {
+        "damage": 5.5,
+        "heatPerShot": 0.81,
+        "cooldown": 1.35,
+        "range": 660.0,
+        "rpm": 44.4
+      },
+      "4": {
+        "damage": 6.0,
+        "heatPerShot": 0.765,
+        "cooldown": 1.275,
+        "range": 690.0,
+        "rpm": 47.1
+      },
+      "5": {
+        "damage": 6.5,
+        "heatPerShot": 0.698,
+        "cooldown": 1.125,
+        "range": 750.0,
+        "rpm": 53.3
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1,
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
+  },
+  "c-TAG": {
+    "id": "c-TAG",
+    "name": "Clan Target Acquisition Gear",
+    "type": "weapon",
+    "weaponType": "energy",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "tiers": {
+      "1": {
+        "damage": 0.0,
+        "heatPerShot": 0.0,
+        "cooldown": 0.0,
+        "range": 562.5,
+        "rpm": 0.0
+      }
+    },
+    "volleyProjectiles": 1,
+    "volleyHeatShots": 1
   }
 }

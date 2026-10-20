@@ -31,6 +31,20 @@ export const getUsedGeneralSlots = (equippedItems: Item[]): number =>
     .filter(item => item.type !== 'weapon' && (item.equippedSlotType ?? GENERAL_SLOT_TYPE) === GENERAL_SLOT_TYPE)
     .reduce((total, item) => total + item.slots, 0);
 
+// Cuerpo a cuerpo: el arma debe ser de la clase de peso del mech. Los antebrazos (S) solo
+// admiten Hammerfist (S); las manos (M) y los brazos de arma (L) admiten armas de su tamaño o menores, salvo S.
+const fitsMeleeHardpoint = (hardpoint: Hardpoint, weapon: Item): boolean =>
+  hardpoint.weightClass === weapon.weightClass &&
+  (hardpoint.size === 'small') === (weapon.size === 'small') &&
+  SIZE_RANK[hardpoint.size] >= SIZE_RANK[weapon.size];
+
+const fitsHardpoint = (hardpoint: Hardpoint, weapon: Item, weaponType: Hardpoint['type']): boolean =>
+  hardpoint.type === weaponType && (
+    weaponType === 'melee'
+      ? fitsMeleeHardpoint(hardpoint, weapon)
+      : SIZE_RANK[hardpoint.size] >= SIZE_RANK[weapon.size]
+  );
+
 export const getHardpointOccupancy = (
   hardpoints: Hardpoint[] = [],
   equippedItems: Item[] = []
@@ -47,10 +61,7 @@ export const getHardpointOccupancy = (
     if (!weaponType) continue;
 
     const hardpointIndex = hardpoints.findIndex(
-      (hardpoint, index) =>
-        !occupiedIndices.has(index) &&
-        hardpoint.type === weaponType &&
-        (weaponType === 'melee' || SIZE_RANK[hardpoint.size] >= SIZE_RANK[weapon.size])
+      (hardpoint, index) => !occupiedIndices.has(index) && fitsHardpoint(hardpoint, weapon, weaponType)
     );
 
     if (hardpointIndex !== -1) {
@@ -60,6 +71,14 @@ export const getHardpointOccupancy = (
   }
 
   return { occupiedIndices, weaponAssignments };
+};
+
+// Solo para componentes sin specialSlots: los mechs actuales siempre los traen, con una
+// única clase de jump jet, y no se debe permitir otra clase usando el total de jumpJetSlots.
+const getLegacySlotCapacity = (slotType: string, componentData: ComponentData): number => {
+  if (slotType.startsWith('JumpJetClass')) return componentData.jumpJetSlots;
+  if (slotType === 'EngineHeatsink_SlotType') return componentData.engineHeatsinkSlots ?? 0;
+  return 0;
 };
 
 export const getAvailableSlotType = (
@@ -73,12 +92,9 @@ export const getAvailableSlotType = (
       continue;
     }
 
-    const fallbackCapacity = slotType.startsWith('JumpJetClass')
-      ? componentData.jumpJetSlots
-      : slotType === 'EngineHeatsink_SlotType'
-        ? componentData.engineHeatsinkSlots ?? 0
-        : 0;
-    const capacity = componentData.specialSlots?.[slotType] ?? fallbackCapacity;
+    const capacity = componentData.specialSlots
+      ? componentData.specialSlots[slotType] ?? 0
+      : getLegacySlotCapacity(slotType, componentData);
     const usedSlots = equippedItems.filter(equippedItem => equippedItem.equippedSlotType === slotType).length;
     if (usedSlots < capacity) return slotType;
   }
@@ -117,4 +133,11 @@ export const getEquippableItems = (
 
     return equippedWeapons.some(weapon => isAmmoCompatibleWithWeapon(item, weapon));
   });
+};
+
+export const getActiveBuiltInMeleeWeapons = (hardpoints: Hardpoint[], equippedItems: Item[]): string[] => {
+  const { weaponAssignments } = getHardpointOccupancy(hardpoints, equippedItems);
+  return hardpoints
+    .filter((hardpoint, index) => hardpoint.defaultWeapon && !weaponAssignments.has(index))
+    .map(hardpoint => hardpoint.defaultWeapon as string);
 };

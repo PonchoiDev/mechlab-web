@@ -1,0 +1,35 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="LRM10_Hotloaded_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=200000,CBillBaseValueBigInt=(Value=200000),MissileStats=(NumberOfMissiles=10,MissileInterval=0.050000,Projectile=(Damage=1.200000,Speed=20000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=500.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/LRM_10_Fire.LRM_10_Fire,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/Projectile_STREAM.Projectile_STREAM,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=0.360000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000))),Cooldown=4.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(OptimalRange=75000.000000,MaxRange=75000.000000),AmmoType=(TagName="Ammo.Missile.LRM"),MissileTurnRate=125.000000,LongRangeMissileRadius=900.000000,MWO_RangeData=(Ranges=((InterpolationType="step"),(Distance=180,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LRM10_Hotloaded")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   MissilePath=/Game/DLC7/Objects/Weapons/LongRangeHotloadMissilePathV2.LongRangeHotloadMissilePathV2_C
+   bCanFireOutsideMaxRange=True
+   HomingMissileTargetExposedInternalsChance=0.050000
+   HomingMissilePartWeighting=(HeadWeighting=1,CenterTorsoWeighting=1,LeftTorsoWeighting=2,RightTorsoWeighting=2,LeftArmWeighting=2,RightArmWeighting=2,LeftLegWeighting=2,RightLegWeighting=2)
+   BattleValueAdjustment=-21
+   Name=NSLOCTEXT("[D6E0B55D400EBE57BCB9ECB942CCB6AC]", "C9F8755D4E4A2EF768C4B1A553622C24", "LRM 10 Hotloaded")
+   ShortName=NSLOCTEXT("[D6E0B55D400EBE57BCB9ECB942CCB6AC]", "6386015648043C60E10BFCBBEDB23511", "LRM 10-HL")
+   Manufacturer="Federated"
+   WeaponType=(TagName="Weapon.Missile.LRM.LRM10.Hotloaded")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=5.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:LRM10_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.496933,G=0.597202,B=0.246201,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/LRM10_512_UIX.LRM10_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/Weapon_LRM10_Market_STM.Weapon_LRM10_Market_STM
+   Description=NSLOCTEXT("[D6E0B55D400EBE57BCB9ECB942CCB6AC]", "3547214B4C7DB8B44BA4A6AEC396E613", "Long-range missile system that fires 10 guided missiles. Armed before they leave the launcher, hotloaded missiles have increased spread and no minimum range.")
+   AssociatedDLC=(TagName="DLC.DLC7")
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.200000,bUseSmallMotors=True)
+End Object

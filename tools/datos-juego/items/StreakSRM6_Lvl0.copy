@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="StreakSRM6_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=180000,CBillBaseValueBigInt=(Value=180000),MissileStats=(NumberOfMissiles=6,Projectile=(Damage=2.400000,Speed=40000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=800.000000,FireSound=/Game/Audio/Events/Weapons/Missiles/SSRM4.SSRM4,ProjectileFlightSound=/Game/Audio/Events/Weapons/Missiles/SRM_Projectile.SRM_Projectile,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=0.900000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=150.000000,BrushStrength=1.500000))),Cooldown=2.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(OptimalRange=27000.000000,MaxRange=27000.000000),AmmoType=(TagName="Ammo.Missile.SRM.Streak"),MissileTurnRate=360.000000,MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=270,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="StreakSRM6",Table=DataTable'"/Game/DLC9/Objects/Weapons/DLC9_MissileWeaponStats.DLC9_MissileWeaponStats"')
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   MissilePath=/Game/Objects/Weapons/_common/MissilePaths/HomingStreakPath.HomingStreakPath_C
+   bRequiresMissileLockToFire=True
+   bCanFireInsideMinRange=True
+   HomingMissileTargetExposedInternalsChance=0.250000
+   HomingMissilePartWeighting=(HeadWeighting=1,CenterTorsoWeighting=2,LeftTorsoWeighting=2,RightTorsoWeighting=2,LeftArmWeighting=2,RightArmWeighting=2,LeftLegWeighting=2,RightLegWeighting=2)
+   Name=NSLOCTEXT("[FC7FE097420A3D3368A530B2D7D39B34]", "323C89D943599B86AC6C2286209D3988", "Streak SRM 6")
+   ShortName=NSLOCTEXT("[FC7FE097420A3D3368A530B2D7D39B34]", "0B1ADDAC4BA7B38ED4B5A0A34849CB25", "SSRM6")
+   Manufacturer="Hovertec"
+   WeaponType=(TagName="Weapon.Missile.SRM.Streak.SRM6")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=4.500000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Missile_Medium_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.496933,G=0.597202,B=0.246201,A=1.000000)
+   IntroDate=3058.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/SSRM6_512_UIX.SSRM6_512_UIX
+   SalvageShareCost=1
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/Weapon_SSRM6_Market_STM.Weapon_SSRM6_Market_STM
+   Description=NSLOCTEXT("[FC7FE097420A3D3368A530B2D7D39B34]", "79B52BD242C6198849C5579AAAFC3C49", "Short-range missile system that fires 6 guided missiles.  Can only be fired with a missile lock.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.050000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

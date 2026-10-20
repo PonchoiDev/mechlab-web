@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="c-TAG"
+   StatsData=(DEPRECATED_CBillBaseValue=100000,CBillBaseValueBigInt=(Value=100000),CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Trace_Loop.Cooldown_Trace_Loop,Trace=(Duration=-1.000000,RayAsset=/Game/Objects/Projectiles/TAG/Ray_TAG.Ray_TAG_C,DamagePaintStats=(ApplyDamageGlow=False,ApplyDamagePaint=False,BrushRadius=0.000000,BrushStrength=0.000000)),Ranges=(OptimalRange=45000.000000,MaxRange=45000.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=750,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="C-TAG")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   BuildingDamageModifier=1.000000
+   bTagsTargetOnHit=True
+   TagTargetStatusEffectOnHit=(Id="MWTagStatusEffectDataAsset:TagStatusEffect_LVL5")
+   TechLevel=6
+   Name=NSLOCTEXT("[2B0C800640366B82C574CCBBF2D0D2D2]", "D9492BB34AECA089EED83891154D5DC5", "Clan Target Acquisition Gear")
+   ShortName=NSLOCTEXT("[2B0C800640366B82C574CCBBF2D0D2D2]", "BD7209324336752C4E4443AF43FDCB33", "C-TAG")
+   Manufacturer="Strana Mechty MechWorks"
+   WeaponType=(TagName="Weapon.Energy.TAG.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=1.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:TAG_SlotType")
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=2830.01.02-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Equipment/Clan_Tag_512_UIX.Clan_Tag_512_UIX
+   SalvageShareCost=2
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanEquipment/Model/Clan_TAG_Market_STM.Clan_TAG_Market_STM
+   Description=NSLOCTEXT("[2B0C800640366B82C574CCBBF2D0D2D2]", "4248FC61472128E575B83FB8C73DAADE", "Specialized laser that does no damage but improves missile locks and accuracy while painted on a target. The Clan version retains the same properties of the highest quality ever produced for the Star League.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   bAimAssistable=True
+End Object

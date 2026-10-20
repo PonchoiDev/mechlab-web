@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="ArrowIV"
+   StatsData=(DEPRECATED_CBillBaseValue=1200000,CBillBaseValueBigInt=(Value=1200000),MissileStats=(NumberOfMissiles=1,NumberOfRequiredInterceptions=15,Projectile=(Damage=10.000000,Speed=30000.000000,bUseVelocityOverTimeCurve=True,VelocityOverTimeCurve=CurveFloat'"/Game/DLC8/Objects/Weapons/ArrowIV/ArrowIV_ProjectileSpeedCurve.ArrowIV_ProjectileSpeedCurve"',WorldDamage=20.000000,WorldDamageRadius=500.000000,Impulse=1500.000000,FireSound=/Game/Audio/Events/Clan_Weapons/Arrow_Fire.Arrow_Fire,FireReloadSound=/Game/Audio/Events/Weapons/Ballistics/AC20_Reload.AC20_Reload,ProjectileFlightSound=/Game/Audio/Events/Clan_Weapons/Arrow_Projectile.Arrow_Projectile,Class=/Game/DLC8/Objects/Projectiles/ArrowIV/Projectile_Arrow.Projectile_Arrow_C,ExplosionClass=/Game/DLC8/Objects/Projectiles/ArrowIV/Arrow_Explosion.Arrow_Explosion_C,CachedExplosionDamageDisplay=20.000000,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=20.000000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000))),Cooldown=8.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(NullRange=18000.000000,MinRange=18000.000000,OptimalRange=450000.000000,MaxRange=450000.000000),AmmoType=(TagName="Ammo.Missile.ArrowIV"),MissileTrackingRampTime=1.750000,MissileTurnRate=400.000000,LongRangeMissileRadius=2500.000000,MissileRotationUpdateRate=0.030000,MWO_RangeData=(Ranges=((InterpolationType="step"),(Distance=180,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="ArrowIV")
+   MissilePath=/Game/DLC8/Objects/Weapons/ArrowIV/ArrowIVMissilePath.ArrowIVMissilePath_C
+   bCanFireOutsideMaxRange=True
+   TechLevel=1
+   Name=NSLOCTEXT("[A6E051124F3D8C36ABCF7AB23E31D385]", "2A6CB6C348ECA1868D59AF8719CCB0FC", "Arrow IV")
+   ShortName=NSLOCTEXT("[A6E051124F3D8C36ABCF7AB23E31D385]", "59303EC148C5BD129CEF83866E87AE39", "Arrow IV")
+   Manufacturer="Luthien Armor Works"
+   WeaponType=(TagName="Weapon.Artillery.ArrowIV")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=15.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:ArtilleryMissile_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.327778,G=0.708376,B=0.177888,A=1.000000)
+   IntroDate=3045.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC8/UI/Textures/marketplace_weapons/ArrowIV_512_UIX.ArrowIV_512_UIX
+   SalvageShareCost=7
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC8/Objects/Marketplace/clanweapons/Model/Weapon_ArrowIV_Market_STM.Weapon_ArrowIV_Market_STM
+   Description=NSLOCTEXT("[A6E051124F3D8C36ABCF7AB23E31D385]", "403C95534B6F2328EF4A0E83D593DA8F", "Artillery missile with extreme range. Has a large blast radius.")
+   AssociatedDLC=(TagName="DLC.DLC8")
+   OnImpactForceFeedback=(FeedbackIntensity=0.012500,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.011750,FeedbackDuration=0.020000,bUseSmallMotors=True)
+End Object

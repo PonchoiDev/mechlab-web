@@ -1,0 +1,23 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="LightGauss_Half_AmmoEquipment"
+   Capacity=16.000000
+   AmmoType=(TagName="Ammo.Ballistic.Gauss.Light")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[80129F9440E031FF722765BC21F67E49]", "04018ADA45DB562BAFAACE8364680E12", "Light Gauss Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=3056.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=20000.000000
+   CBillBaseValueBigInt=(Value=20000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   ExplosionDamage=2.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_LBX20_512_UIX.Clan_Ammo_LBX20_512_UIX
+   UIXEquipment3DModel=/Game/Objects/Marketplace/weapons/Model/Ammo_Gauss_Market_STM.Ammo_Gauss_Market_STM
+   Description=NSLOCTEXT("[80129F9440E031FF722765BC21F67E49]", "297299B44937185FFEFD20A82B12277D", "Half ton of ammunition for the Light Gauss Rifle")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

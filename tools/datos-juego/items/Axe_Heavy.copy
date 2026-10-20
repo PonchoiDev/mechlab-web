@@ -1,0 +1,28 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="Axe_Heavy"
+   StatsData=(DEPRECATED_CBillBaseValue=50000,CBillBaseValueBigInt=(Value=50000),Cooldown=3.625000,Melee=(Damage=60.000000,Duration=1.500000,ActivationTime=0.625000,Impulse=1250000.000000,MeleePriority=25,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_H_Axe.MechMeleeStrike_H_Axe_C,FireSound=/Game/Audio/Events/Weapons/Melee/H_Axe/Melee_H_Axe_Swing.Melee_H_Axe_Swing),Ranges=(OptimalRange=2000.000000,MaxRange=2000.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Heavy_Axe")
+   BuildingDamageModifier=5.000000
+   TechLevel=1
+   Name=NSLOCTEXT("[9BDB639D4627A26D44B282B6591E74D0]", "F62022C64AA975990939EA9A32B5B28B", "Heavy Axe")
+   ShortName=NSLOCTEXT("[9BDB639D4627A26D44B282B6591E74D0]", "494C0593427B630FCD96129FF810BDC7", "Heavy Axe")
+   Manufacturer="Defiance Type 1"
+   WeaponType=(TagName="Weapon.Melee.Heavy.Axe")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=5.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Heavy_Melee_Weapon_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   RefitCosts=(InstallTimeInDays=1.000000,InstallCBillCost=2000,RepairCBillCost=1000)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Heavy_Axe_512_UIX.Melee_Heavy_Axe_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   UIXWeapon3DModel=/Game/DLC3/Objects/Marketplace/Weapons/Model/Axe_Heavy_Market_STM.Axe_Heavy_Market_STM
+   Description=NSLOCTEXT("[9BDB639D4627A26D44B282B6591E74D0]", "568EEB5E4F077CDE9D26F1BAAD6CFFFD", "A \'Mech Hatchet heavy melee weapon fashioned for heavy \'Mech use.  ")
+   AssociatedDLC=(TagName="DLC.DLC3")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

@@ -1,6 +1,6 @@
 import type { Item } from '../types/item';
 import type { Zone } from '../types/mech';
-import { SIZE_RANK } from '../utils/items';
+import { getSizeLabel, getSlotsLabel, SIZE_RANK } from '../utils/items';
 
 export type WeaponSortOrder = 'large-first' | 'small-first';
 
@@ -18,19 +18,24 @@ interface InventoryPanelProps {
 }
 
 export function InventoryPanel({ activeZone, items, sortOrder, onSortOrderChange, onEquip }: InventoryPanelProps) {
+  const direction = sortOrder === 'large-first' ? -1 : 1;
   const weaponItems = items
     .filter(item => item.type === 'weapon')
     .sort((first, second) =>
-      sortOrder === 'large-first'
-        ? SIZE_RANK[second.size] - SIZE_RANK[first.size]
-        : SIZE_RANK[first.size] - SIZE_RANK[second.size]
+      direction * (SIZE_RANK[first.size] - SIZE_RANK[second.size]) ||
+      direction * (first.tonnage - second.tonnage) ||
+      first.name.localeCompare(second.name)
     );
   const otherItems = items.filter(item => item.type !== 'weapon');
 
   const renderItems = (groupItems: Item[]) => groupItems.map(item => (
     <button key={item.id} type="button" onClick={() => onEquip(item)} className="inventory-item">
       <span className="inventory-item-name">{item.name}</span>
-      <span className="inventory-item-spec">{item.size} <i /> {item.tonnage}t <i /> {item.slots}s</span>
+      <span className="inventory-item-spec">
+        {item.type === 'weapon'
+          ? <>{getSizeLabel(item)} <i /> {item.tonnage} t</>
+          : <>{item.tonnage} t <i /> {getSlotsLabel(item)}</>}
+      </span>
     </button>
   ));
 

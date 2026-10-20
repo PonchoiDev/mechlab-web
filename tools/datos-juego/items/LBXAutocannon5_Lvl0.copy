@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="LBXAutocannon5_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=250000,CBillBaseValueBigInt=(Value=250000),Projectile=(NumberOfProjectiles=4,SpreadRadius=550.000000,SpreadDistance=35000.000000,bSpreadProjectileSingleBulletAlignment=True,Damage=1.750000,Speed=70000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=300.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/LBX5.LBX5,FireReloadSound=/Game/Audio/Events/Weapons/Ballistics/LBX_Reload.LBX_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC2/Projectile_AC2.Projectile_AC2_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Tny.Shockwave_Tny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_medium.single_recoil_medium_C,HeatGenerated=0.400000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=0.900000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=72000.000000,MaxRange=72000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.LBX.LBX5"),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1620,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LBXAutocannon5_Cluster",Table=DataTable'"/Game/DLC9/Objects/Weapons/DLC9_ProjectileWeaponStats.DLC9_ProjectileWeaponStats"')
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   Name=NSLOCTEXT("[1179FCB34E30581265BB518FF103C71B]", "401EEAA243AD4697177656AD3D38205C", "LB 5-X Autocannon")
+   ShortName=NSLOCTEXT("[1179FCB34E30581265BB518FF103C71B]", "20E0B1DD41DF71339B6E4F8EF3718B67", "LB 5-X AC")
+   Manufacturer="Quikscell Company"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX5")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=8.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Ballistic_Medium_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=3058.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_LBX2_512_UIX.Clan_LBX2_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/AC2_STM.AC2_STM
+   Description=NSLOCTEXT("[1179FCB34E30581265BB518FF103C71B]", "E17898F648EA106D676877B85E573401", "Inner Sphere version of the LB 5-X Autocannon firing a smaller cluster of higher damage projectiles than the Clan counterpart")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.300000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.150000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+End Object

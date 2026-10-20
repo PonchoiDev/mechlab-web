@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="ArenaFist_Heavy_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=50000,CBillBaseValueBigInt=(Value=50000),Cooldown=1.500000,Melee=(Damage=35.000000,Duration=1.500000,ActivationTime=0.625000,Impulse=1250000.000000,MeleePriority=15,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_H_Punch.MechMeleeStrike_H_Punch_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_Punch/Melee_ArmSwing.Melee_ArmSwing,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000)),Ranges=(OptimalRange=1750.000000,MaxRange=1750.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="ArenaFist_Heavy")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Damage_Quirk.Damage_Quirk_C"',Value=-5.000000)))
+   BuildingDamageModifier=5.000000
+   BattleValueAdjustment=-5
+   Name=NSLOCTEXT("[641A7ADF47B1A7A666F4A0A17D8DF288]", "4BAF5409437EEE649C705A91C8704BDB", "Heavy Arena Fist")
+   ShortName=NSLOCTEXT("[641A7ADF47B1A7A666F4A0A17D8DF288]", "5287968D4FD0AF9D9682B0822202A635", "Heavy Arena Fist")
+   Manufacturer="Streamlined Actuators"
+   WeaponType=(TagName="Weapon.Melee.Heavy.Punch")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=5.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MeleeHandActuatorHeavy_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Punch_512_UIX.Melee_Punch_512_UIX
+   bNonSalvageable=True
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   UIXWeapon3DModel=/Game/DLC3/Objects/Marketplace/Weapons/Model/Knuckles_Assault_Market_STM.Knuckles_Assault_Market_STM
+   Description=NSLOCTEXT("", "9F2FAD654AF3312C65691FAC63614E13", "Heavy \'Mech hand actuators favored by arena fighters for fast attacks.")
+   AssociatedDLC=(TagName="DLC.DLC4")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

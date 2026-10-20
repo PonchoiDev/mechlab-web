@@ -1,0 +1,8 @@
+Begin Object Class=/Script/MechWarrior.MWSlotTypeDataAsset Name="Ballistic_ExtraLarge_SlotType"
+   SlotName=NSLOCTEXT("[BC390EB9441BA4DE1A1970B3D17CE241]", "760D58E34F95B972573C8EB22EABBF65", "Extra Large Ballistic")
+   SlotColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   SlotSize=11
+   WeaponSize=Large
+   WeaponTypesTagContainer=(GameplayTags=((TagName="Weapon.Ballistic")))
+   bShowFixedSlotBorder=True
+End Object

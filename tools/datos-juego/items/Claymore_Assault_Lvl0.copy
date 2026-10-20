@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="Claymore_Assault_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=60000,CBillBaseValueBigInt=(Value=60000),Cooldown=3.050000,Melee=(Damage=70.000000,Duration=1.750000,ActivationTime=0.700000,Impulse=1250000.000000,MeleePriority=25,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_A_Claymore.MechMeleeStrike_A_Claymore_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_Claymore/Melee_A_Claymore_Swing.Melee_A_Claymore_Swing),Ranges=(OptimalRange=2000.000000,MaxRange=2000.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Assault_Claymore")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Damage_Quirk.Damage_Quirk_C"',Value=-10.000000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Cooldown_Quirk.Cooldown_Quirk_C"',Value=0.250000)))
+   BuildingDamageModifier=5.000000
+   BattleValueAdjustment=-6
+   Name=NSLOCTEXT("[F3D0E722433869836093B68F9D15E83B]", "2559ED2943C1264780A4BC833CD02D6D", "Assault Claymore")
+   ShortName=NSLOCTEXT("[F3D0E722433869836093B68F9D15E83B]", "6E91E77447A9FAA4EB784FAB8619E660", "Assault Claymore")
+   Manufacturer="Glasgow Special"
+   WeaponType=(TagName="Weapon.Melee.Assault.Claymore")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=6.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Assault_Melee_Weapon_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   RefitCosts=(InstallTimeInDays=1.000000,InstallCBillCost=2000,RepairCBillCost=1000)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Assault_Claymore_512_UIX.Melee_Assault_Claymore_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   UIXWeapon3DModel=/Game/DLC3/Objects/Marketplace/Weapons/Model/Claymore_Assault_Market_STM.Claymore_Assault_Market_STM
+   Description=NSLOCTEXT("[F3D0E722433869836093B68F9D15E83B]", "1F14EFF946012FCCDBCF1CA4C73E8F2A", "A large claymore designed as a heavy melee weapon for assault \'Mech use.")
+   AssociatedDLC=(TagName="DLC.DLC3")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

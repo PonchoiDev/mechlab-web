@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWAMSWeaponDataAsset Name="C-AntiMissileSystem"
+   DEPRECATED_CBillBaseValue=800000
+   CBillBaseValueBigInt=(Value=800000)
+   AmmoType=(TagName="Ammo.Ballistic.AMS.Clan")
+   MissileDestructionRate=6.125000
+   RateOfFire=15.000000
+   EffectsAsset=/Game/Objects/Projectiles/AMS/AMSEffects.AMSEffects_C
+   Ranges=(OptimalRange=30000.000000,MaxRange=30000.000000)
+   TechLevel=6
+   Name=NSLOCTEXT("[D64941A94CA9F4693572A3A4E67E002A]", "0CBDF6E1412B4ABE77FD65B33C5A1540", "Clan AMS")
+   ShortName=NSLOCTEXT("[D64941A94CA9F4693572A3A4E67E002A]", "494E00DF4113C18E5519D1AE208E1D31", "C-AMS")
+   Manufacturer="Strana Mechty MechWorks"
+   WeaponType=(TagName="Weapon.AMS.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=0.500000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:AMS_SlotType")
+   WeaponDisplayColour=(R=0.473532,G=0.084376,B=0.093059,A=1.000000)
+   IntroDate=3040.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   Image=/Game/DLC7/UI/Textures/Marketplace_Equipment/Clan_AMS_512_UIX.Clan_AMS_512_UIX
+   SalvageShareCost=5
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_AMS.WeaponEmitter_AMS_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanEquipment/Model/Clan_AMS_Market_STM.Clan_AMS_Market_STM
+   Description=NSLOCTEXT("[D64941A94CA9F4693572A3A4E67E002A]", "A6A0099A43C53FC53F83148EDFEE712F", "Automated rapid-fire weapon that tracks and shoots down missiles. The Clan version is more ammo efficient.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

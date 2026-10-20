@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="C-LBXAutocannon5"
+   StatsData=(DEPRECATED_CBillBaseValue=500000,CBillBaseValueBigInt=(Value=500000),Projectile=(NumberOfProjectiles=7,SpreadRadius=475.000000,SpreadDistance=35000.000000,bSpreadProjectileSingleBulletAlignment=True,Damage=1.000000,Speed=140000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=300.000000,FireSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_LBX5_Cluster_Fire.SFX_Wpn_LBX5_Cluster_Fire,FireReloadSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_UAC_5_Reload.SFX_Wpn_UAC_5_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/LBX10/Projectile_LBX10.Projectile_LBX10_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Tny.Shockwave_Tny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/burst_recoil_medium.burst_recoil_medium_C,HeatGenerated=0.400000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=0.900000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=72000.000000,MaxRange=72000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1620,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="C-LBXAutocannon5_Cluster")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.225000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   TechLevel=6
+   Name=NSLOCTEXT("[4480C84A43E9D192AA9C898A416F761F]", "7C8D8ED84A2A44E545E3179E42464C00", "C-LB 5-X Autocannon")
+   ShortName=NSLOCTEXT("[4480C84A43E9D192AA9C898A416F761F]", "1B25B7444175ADFE63562CBAAAF34A8B", "C-LB 5-X AC")
+   Manufacturer="Strana Mechty MechWorks"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX5.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=7.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Ballistic_Medium_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_LBX5_512_UIX.Clan_LBX5_512_UIX
+   SalvageShareCost=10
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_LBX5_Market_STM.Clan_LBX5_Market_STM
+   Description=NSLOCTEXT("[4480C84A43E9D192AA9C898A416F761F]", "7915579E451EBC278D6175AE81BC9C46", "Ballistic weapon that fires cluster rounds at long range.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.150000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.075000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object
