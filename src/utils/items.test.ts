@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   getAmmoLabel,
-  getSizeLabel,
+  filterItems,
+  getSizeName,
+  getTierName,
+  getWeaponTypeName,
   getSlotsLabel,
   getItemSupportedSlotTypes,
   getItemWeaponType,
@@ -185,10 +188,27 @@ describe('getSlotTypeLabel', () => {
 });
 
 describe('etiquetas de inventario', () => {
-  it('muestra el tamaño con la letra de los anclajes', () => {
-    expect(getSizeLabel(getItem('SmallLaser'))).toBe('S');
-    expect(getSizeLabel(getItem('MediumLaser'))).toBe('M');
-    expect(getSizeLabel(getItem('LargeLaser'))).toBe('L');
+  it('escribe el tamaño y el tipo de anclaje con su nombre completo', () => {
+    expect(getSizeName('small')).toBe('Small');
+    expect(getSizeName('large')).toBe('Large');
+    expect(getWeaponTypeName('ballistic')).toBe('Ballistic');
+    expect(getWeaponTypeName('ams')).toBe('AMS');
+  });
+
+  it('indica el tier de las armas que lo tienen', () => {
+    expect(getTierName(getItem('MediumLaser'))).toBe('Tier 1');
+    expect(getTierName(getItem('MediumLaser', { tier: '4' }))).toBe('Tier 4');
+    expect(getTierName(getItem('SingleHeatSink'))).toBeNull();
+  });
+
+  it('muestra las armas Clan con su tier Clan', () => {
+    expect(getTierName(getItem('C-LightMachineGun'))).toBe('Clan tier');
+    expect(getTierName(getItem('C-ERMediumLaser'))).toBe('Clan tier');
+    expect(getTierName(getItem('LRM20'))).toBe('Tier 1');
+  });
+
+  it('llama Lost Tech al tier 5', () => {
+    expect(getTierName(getItem('MediumLaser', { tier: '5' }))).toBe('Lost Tech tier');
   });
 
   it('las armas no guardan slots porque solo ocupan un anclaje', () => {
@@ -199,5 +219,23 @@ describe('etiquetas de inventario', () => {
   it('escribe los slots en singular o plural', () => {
     expect(getSlotsLabel(getItem('SingleHeatSink'))).toBe('1 slot');
     expect(getSlotsLabel(getItem('DoubleHeatSink'))).toBe('3 slots');
+  });
+});
+
+describe('filterItems', () => {
+  const items = [getItem('MediumLaser'), getItem('C-ERMediumLaser'), getItem('LRM20'), getItem('C-LRM20')];
+
+  it('filtra por texto sin distinguir mayúsculas', () => {
+    expect(filterItems(items, { search: ' lrm ' }).map(item => item.id)).toEqual(['LRM20', 'C-LRM20']);
+  });
+
+  it('filtra por base tecnológica y por tipo de arma', () => {
+    expect(filterItems(items, { techBase: 'Clan' }).map(item => item.id)).toEqual(['C-ERMediumLaser', 'C-LRM20']);
+    expect(filterItems(items, { weaponType: 'energy' }).map(item => item.id)).toEqual(['MediumLaser', 'C-ERMediumLaser']);
+    expect(filterItems(items, { techBase: 'Clan', weaponType: 'missile' }).map(item => item.id)).toEqual(['C-LRM20']);
+  });
+
+  it('sin filtros devuelve todo', () => {
+    expect(filterItems(items, {})).toHaveLength(4);
   });
 });

@@ -1,5 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { canEquipItem, createEquippedItem, getActiveBuiltInMeleeWeapons, getAvailableSlotType, getEquippableItems } from './equipment';
+import {
+  canEquipItem,
+  createEquippedItem,
+  findHardpointForWeapon,
+  getAmmoWarnings,
+  getAvailableSlotType,
+  getComponentStatus,
+  getEquippableItems,
+  getHardpointViews,
+  getWeaponsForHardpoint
+} from './equipment';
 import { allItems, allMechs, getItem, getMech, makeComponent, makeLoadout } from '../test/fixtures';
 
 describe('getAvailableSlotType', () => {
@@ -181,11 +191,14 @@ describe('canEquipItem', () => {
     });
 
     it('indica qué armas especiales se usan mientras su anclaje está vacío', () => {
-      const leftArm = getMech('SHD-2H').components.leftArm;
+      const builtIns = (mechId: string, items: ReturnType<typeof getItem>[] = []) =>
+        getHardpointViews(getMech(mechId).components.leftArm.hardpoints, items)
+          .map(view => view.builtInWeapon)
+          .filter(Boolean);
 
-      expect(getActiveBuiltInMeleeWeapons(leftArm.hardpoints, [])).toEqual(['Battle Fist']);
-      expect(getActiveBuiltInMeleeWeapons(leftArm.hardpoints, [getItem('Knuckles_Medium')])).toEqual([]);
-      expect(getActiveBuiltInMeleeWeapons(getMech('ASN-21').components.leftArm.hardpoints, [])).toEqual([]);
+      expect(builtIns('SHD-2H')).toEqual(['Battle Fist']);
+      expect(builtIns('SHD-2H', [getItem('Knuckles_Medium')])).toEqual([]);
+      expect(builtIns('ASN-21')).toEqual([]);
     });
 
     it('los Kodiak tienen sus manos como anclajes cuerpo a cuerpo', () => {
@@ -266,5 +279,134 @@ describe('getEquippableItems', () => {
     const loadout = makeLoadout({ leftArm: [getItem('SmallLaser'), getItem('SingleHeatSink'), getItem('SingleHeatSink')] });
 
     expect(getEquippableItems(catalog, component, loadout, 'leftArm')).toEqual([]);
+  });
+});
+
+describe('getHardpointViews', () => {
+  it('indica qué arma ocupa cada anclaje', () => {
+    const hardpoints = [{ type: 'energy', size: 'large' }, { type: 'energy', size: 'small' }] as const;
+    const views = getHardpointViews([...hardpoints], [getItem('SmallLaser'), getItem('LargeLaser')]);
+
+    expect(views.map(view => view.weapon?.id)).toEqual(['LargeLaser', 'SmallLaser']);
+  });
+});
+
+describe('getComponentStatus', () => {
+  const component = makeComponent({
+    maxSlots: 3,
+    hardpoints: [{ type: 'energy', size: 'medium' }, { type: 'ballistic', size: 'large' }],
+    specialSlots: { EngineHeatsink_SlotType: 1 }
+  });
+
+  it('cuenta slots usados, anclajes libres y ranuras especiales', () => {
+    const status = getComponentStatus(component, [
+      getItem('MediumLaser'),
+      getItem('AC20_Standard_AmmoEquipment'),
+      { ...getItem('SingleHeatSink'), equippedSlotType: 'EngineHeatsink_SlotType' }
+    ]);
+
+    expect(status).toMatchObject({ usedSlots: 1, maxSlots: 3, freeHardpoints: 1, isOverSlots: false, hasFreeSpace: true });
+    expect(status.specialSlots).toEqual([{ slotType: 'EngineHeatsink_SlotType', capacity: 1, used: 1 }]);
+  });
+
+  it('marca el componente lleno cuando no queda ningún hueco', () => {
+    const status = getComponentStatus(component, [
+      getItem('MediumLaser'),
+      getItem('Autocannon20'),
+      getItem('AC20_Standard_AmmoEquipment'),
+      getItem('AC20_Standard_AmmoEquipment'),
+      getItem('AC20_Standard_AmmoEquipment'),
+      { ...getItem('SingleHeatSink'), equippedSlotType: 'EngineHeatsink_SlotType' }
+    ]);
+
+    expect(status).toMatchObject({ freeHardpoints: 0, hasFreeSpace: false, isOverSlots: false });
+  });
+
+  it('detecta cuando se superan los slots', () => {
+    const ammo = getItem('AC20_Standard_AmmoEquipment');
+    expect(getComponentStatus(component, [ammo, ammo, ammo, ammo]).isOverSlots).toBe(true);
+  });
+
+  it('no cuenta como libre un anclaje con arma especial de serie', () => {
+    expect(getComponentStatus(getMech('SHD-2H').components.leftArm, []).freeHardpoints).toBe(0);
+  });
+});
+
+describe('getWeaponsForHardpoint', () => {
+  const component = makeComponent({
+    hardpoints: [{ type: 'energy', size: 'small' }, { type: 'ballistic', size: 'large' }]
+  });
+  const catalog = [getItem('SmallLaser'), getItem('MediumLaser'), getItem('Autocannon20'), getItem('SingleHeatSink')];
+
+  it('solo devuelve las armas que caben en el anclaje elegido', () => {
+    expect(getWeaponsForHardpoint(catalog, component, [], 0).map(item => item.id)).toEqual(['SmallLaser']);
+    expect(getWeaponsForHardpoint(catalog, component, [], 1).map(item => item.id)).toEqual(['Autocannon20']);
+  });
+
+  it('devuelve una lista vacía para un anclaje inexistente', () => {
+    expect(getWeaponsForHardpoint(catalog, component, [], 5)).toEqual([]);
+  });
+});
+
+describe('anclaje fijo de cada arma', () => {
+  const twoEnergy = [{ type: 'energy', size: 'large' }, { type: 'energy', size: 'large' }] as const;
+
+  it('mantiene el arma en el anclaje donde se equipó', () => {
+    const laser = createEquippedItem(getItem('MediumLaser'), undefined, 1);
+    const views = getHardpointViews([...twoEnergy], [laser]);
+
+    expect(views.map(view => view.weapon?.id)).toEqual([undefined, 'MediumLaser']);
+  });
+
+  it('reparte automáticamente las armas sin anclaje asignado o con uno no válido', () => {
+    const misplaced = createEquippedItem(getItem('LargeLaser'), undefined, 5);
+    const views = getHardpointViews([...twoEnergy], [misplaced]);
+
+    expect(views.map(view => view.weapon?.id)).toEqual(['LargeLaser', undefined]);
+  });
+
+  it('elige el anclaje libre más pequeño que le sirve al arma', () => {
+    const hardpoints = [{ type: 'energy', size: 'large' }, { type: 'energy', size: 'small' }] as const;
+
+    expect(findHardpointForWeapon([...hardpoints], [], getItem('SmallLaser'))).toBe(1);
+    expect(findHardpointForWeapon([...hardpoints], [], getItem('LargeLaser'))).toBe(0);
+    expect(findHardpointForWeapon([...hardpoints], [createEquippedItem(getItem('SmallLaser'), undefined, 1)], getItem('SmallLaser'))).toBe(0);
+    expect(findHardpointForWeapon([...hardpoints], [], getItem('Autocannon20'))).toBeNull();
+  });
+
+  it('no ofrece armas para un anclaje ya ocupado', () => {
+    const component = makeComponent({ hardpoints: [...twoEnergy] });
+    const laser = createEquippedItem(getItem('MediumLaser'), undefined, 0);
+
+    expect(getWeaponsForHardpoint([getItem('SmallLaser')], component, [laser], 0)).toEqual([]);
+    expect(getWeaponsForHardpoint([getItem('SmallLaser')], component, [laser], 1).map(item => item.id)).toEqual(['SmallLaser']);
+  });
+});
+
+describe('getAmmoWarnings', () => {
+  it('avisa de armas sin munición compatible en el mech', () => {
+    const warnings = getAmmoWarnings(makeLoadout({ rightTorso: [getItem('LBXAutocannon10'), getItem('LBXAutocannon10')] }));
+
+    expect(warnings.rightTorso).toEqual([{ kind: 'missing-ammo', itemName: getItem('LBXAutocannon10').name }]);
+  });
+
+  it('no avisa cuando la munición está en otro componente', () => {
+    const warnings = getAmmoWarnings(makeLoadout({
+      rightTorso: [getItem('LBXAutocannon10')],
+      leftLeg: [getItem('AC10_LBX_AmmoEquipment')]
+    }));
+
+    expect(Object.values(warnings).flat()).toEqual([]);
+  });
+
+  it('avisa de munición que no sirve a ningún arma equipada', () => {
+    const warnings = getAmmoWarnings(makeLoadout({ leftTorso: [getItem('LRM_AmmoEquipment')], leftArm: [getItem('SRM6')] }));
+
+    expect(warnings.leftTorso).toEqual([{ kind: 'unused-ammo', itemName: 'LRM Ammo' }]);
+    expect(warnings.leftArm).toEqual([{ kind: 'missing-ammo', itemName: getItem('SRM6').name }]);
+  });
+
+  it('no avisa de armas que no usan munición', () => {
+    expect(Object.values(getAmmoWarnings(makeLoadout({ leftArm: [getItem('MediumLaser')] }))).flat()).toEqual([]);
   });
 });

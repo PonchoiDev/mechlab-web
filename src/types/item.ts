@@ -32,6 +32,8 @@ export interface Item {
   volleyProjectiles?: number;
   volleyHeatShots?: number;
   weightClass?: WeightClass;
+  techBase?: string;
+  ammoPerVolley?: number;
   tiers?: Record<string, ItemTierStats> | null;
   tier?: string;
 }

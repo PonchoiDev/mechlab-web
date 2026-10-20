@@ -9,6 +9,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
   },
   "AC10_LBX_Half_AmmoEquipment": {
@@ -21,6 +22,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
   },
   "AC10_Standard_AmmoEquipment": {
@@ -33,6 +35,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
   },
   "AC10_Standard_Half_AmmoEquipment": {
@@ -45,6 +48,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
   },
   "AC10_Ultra_AmmoEquipment": {
@@ -57,6 +61,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10"
   },
   "AC10_Ultra_Half_AmmoEquipment": {
@@ -69,6 +74,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10"
   },
   "AC20_Standard_AmmoEquipment": {
@@ -81,6 +87,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
   },
   "AC20_Standard_Half_AmmoEquipment": {
@@ -93,6 +100,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 10,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
   },
   "AC20_Ultra_AmmoEquipment": {
@@ -105,6 +113,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20"
   },
   "AC20_Ultra_Half_AmmoEquipment": {
@@ -117,6 +126,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 10,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20"
   },
   "AC2_Standard_AmmoEquipment": {
@@ -129,6 +139,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 200,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
   },
   "AC2_Standard_Half_AmmoEquipment": {
@@ -141,6 +152,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 100,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
   },
   "AC2_Ultra_AmmoEquipment": {
@@ -153,6 +165,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 90,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2"
   },
   "AC2_Ultra_Half_AmmoEquipment": {
@@ -165,6 +178,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 45,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2"
   },
   "AC5_Standard_AmmoEquipment": {
@@ -177,6 +191,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 80,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
   },
   "AC5_Standard_Half_AmmoEquipment": {
@@ -189,6 +204,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
   },
   "AC5_Ultra_AmmoEquipment": {
@@ -201,6 +217,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 80,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
   },
   "AC5_Ultra_Half_AmmoEquipment": {
@@ -213,6 +230,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
   },
   "AMS_AmmoEquipment": {
@@ -225,6 +243,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 2000,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AMS"
   },
   "AMS_Half_AmmoEquipment": {
@@ -237,6 +256,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 1000,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AMS"
   },
   "AntiMissileSystem": {
@@ -292,7 +312,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AMS"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AMS",
+    "ammoPerVolley": 1
   },
   "ArenaFist_Assault": {
     "id": "ArenaFist_Assault",
@@ -347,7 +369,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "assault"
+    "weightClass": "assault",
+    "techBase": "InnerSphere"
   },
   "ArenaFist_Heavy": {
     "id": "ArenaFist_Heavy",
@@ -402,7 +425,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "heavy"
+    "weightClass": "heavy",
+    "techBase": "InnerSphere"
   },
   "ArenaFist_Light": {
     "id": "ArenaFist_Light",
@@ -457,7 +481,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "light"
+    "weightClass": "light",
+    "techBase": "InnerSphere"
   },
   "ArenaFist_Medium": {
     "id": "ArenaFist_Medium",
@@ -512,7 +537,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "medium"
+    "weightClass": "medium",
+    "techBase": "InnerSphere"
   },
   "ArrowIV": {
     "id": "ArrowIV",
@@ -567,7 +593,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Missile.ArrowIV"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.ArrowIV",
+    "ammoPerVolley": 1
   },
   "ArrowIV_AmmoEquipment": {
     "id": "ArrowIV_AmmoEquipment",
@@ -579,6 +607,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 10,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.ArrowIV"
   },
   "ArrowIV_Half_AmmoEquipment": {
@@ -591,6 +620,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 5,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.ArrowIV"
   },
   "Autocannon10": {
@@ -646,7 +676,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10",
+    "ammoPerVolley": 1
   },
   "Autocannon10_Auto": {
     "id": "Autocannon10_Auto",
@@ -701,7 +733,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
+    "techBase": "Arena",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10",
+    "ammoPerVolley": 1
   },
   "Autocannon10_Burst": {
     "id": "Autocannon10_Burst",
@@ -756,7 +790,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10",
+    "ammoPerVolley": 1
   },
   "Autocannon2": {
     "id": "Autocannon2",
@@ -811,7 +847,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2",
+    "ammoPerVolley": 1
   },
   "Autocannon20": {
     "id": "Autocannon20",
@@ -866,7 +904,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20",
+    "ammoPerVolley": 1
   },
   "Autocannon20_Auto": {
     "id": "Autocannon20_Auto",
@@ -921,7 +961,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
+    "techBase": "Arena",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20",
+    "ammoPerVolley": 1
   },
   "Autocannon20_Burst": {
     "id": "Autocannon20_Burst",
@@ -976,7 +1018,9 @@
     },
     "volleyProjectiles": 12,
     "volleyHeatShots": 12,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20",
+    "ammoPerVolley": 1
   },
   "Autocannon2_Auto": {
     "id": "Autocannon2_Auto",
@@ -1031,7 +1075,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
+    "techBase": "Arena",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2",
+    "ammoPerVolley": 2
   },
   "Autocannon2_Burst": {
     "id": "Autocannon2_Burst",
@@ -1086,7 +1132,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2",
+    "ammoPerVolley": 1
   },
   "Autocannon5": {
     "id": "Autocannon5",
@@ -1141,7 +1189,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5",
+    "ammoPerVolley": 1
   },
   "Autocannon5_Auto": {
     "id": "Autocannon5_Auto",
@@ -1196,7 +1246,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
+    "techBase": "Arena",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5",
+    "ammoPerVolley": 1
   },
   "Autocannon5_Burst": {
     "id": "Autocannon5_Burst",
@@ -1251,7 +1303,9 @@
     },
     "volleyProjectiles": 3,
     "volleyHeatShots": 3,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5",
+    "ammoPerVolley": 1
   },
   "Axe_Heavy": {
     "id": "Axe_Heavy",
@@ -1306,7 +1360,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "heavy"
+    "weightClass": "heavy",
+    "techBase": "InnerSphere"
   },
   "BattleAxe_Assault": {
     "id": "BattleAxe_Assault",
@@ -1361,7 +1416,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "assault"
+    "weightClass": "assault",
+    "techBase": "InnerSphere"
   },
   "BinaryLaser": {
     "id": "BinaryLaser",
@@ -1415,7 +1471,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "C-AMS_AmmoEquipment": {
     "id": "C-AMS_AmmoEquipment",
@@ -1427,6 +1484,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 2000,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AMS.Clan"
   },
   "C-AMS_Half_AmmoEquipment": {
@@ -1439,6 +1497,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 1000,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AMS.Clan"
   },
   "C-ATM12": {
@@ -1459,7 +1518,9 @@
     },
     "volleyProjectiles": 12,
     "volleyHeatShots": 12,
-    "ammoType": "Ammo.Missile.ATM"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.ATM",
+    "ammoPerVolley": 12
   },
   "C-ATM3": {
     "id": "C-ATM3",
@@ -1479,7 +1540,9 @@
     },
     "volleyProjectiles": 3,
     "volleyHeatShots": 3,
-    "ammoType": "Ammo.Missile.ATM"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.ATM",
+    "ammoPerVolley": 3
   },
   "C-ATM6": {
     "id": "C-ATM6",
@@ -1499,7 +1562,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.ATM"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.ATM",
+    "ammoPerVolley": 6
   },
   "C-ATM9": {
     "id": "C-ATM9",
@@ -1519,7 +1584,9 @@
     },
     "volleyProjectiles": 9,
     "volleyHeatShots": 9,
-    "ammoType": "Ammo.Missile.ATM"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.ATM",
+    "ammoPerVolley": 9
   },
   "C-AntiMissileSystem": {
     "id": "C-AntiMissileSystem",
@@ -1539,7 +1606,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AMS.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AMS.Clan",
+    "ammoPerVolley": 1
   },
   "C-ArrowIV": {
     "id": "C-ArrowIV",
@@ -1559,7 +1628,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Missile.ArrowIV.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.ArrowIV.Clan",
+    "ammoPerVolley": 1
   },
   "C-ArrowIV_AmmoEquipment": {
     "id": "C-ArrowIV_AmmoEquipment",
@@ -1571,6 +1642,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 10,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.ArrowIV.Clan"
   },
   "C-ArrowIV_Half_AmmoEquipment": {
@@ -1583,6 +1655,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 5,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.ArrowIV.Clan"
   },
   "C-ERLargeLaser": {
@@ -1602,7 +1675,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-ERMediumLaser": {
     "id": "C-ERMediumLaser",
@@ -1621,7 +1695,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-ERPPC": {
     "id": "C-ERPPC",
@@ -1640,7 +1715,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-ERSmallLaser": {
     "id": "C-ERSmallLaser",
@@ -1659,7 +1735,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-Flamer": {
     "id": "C-Flamer",
@@ -1678,7 +1755,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-GaussRifle": {
     "id": "C-GaussRifle",
@@ -1698,7 +1776,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.Gauss.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.Gauss.Clan",
+    "ammoPerVolley": 1
   },
   "C-HeavyLargeLaser": {
     "id": "C-HeavyLargeLaser",
@@ -1717,7 +1797,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-HeavyMachineGun": {
     "id": "C-HeavyMachineGun",
@@ -1737,7 +1818,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan",
+    "ammoPerVolley": 1
   },
   "C-HeavyMediumLaser": {
     "id": "C-HeavyMediumLaser",
@@ -1756,7 +1839,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-HeavySmallLaser": {
     "id": "C-HeavySmallLaser",
@@ -1775,7 +1859,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-LBXAutocannon10": {
     "id": "C-LBXAutocannon10",
@@ -1795,7 +1880,9 @@
     },
     "volleyProjectiles": 13,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon10_Slug": {
     "id": "C-LBXAutocannon10_Slug",
@@ -1815,7 +1902,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon10_Slug_BurstFire": {
     "id": "C-LBXAutocannon10_Slug_BurstFire",
@@ -1835,7 +1924,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon2": {
     "id": "C-LBXAutocannon2",
@@ -1855,7 +1946,9 @@
     },
     "volleyProjectiles": 3,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon20": {
     "id": "C-LBXAutocannon20",
@@ -1875,7 +1968,9 @@
     },
     "volleyProjectiles": 25,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon20_SLD": {
     "id": "C-LBXAutocannon20_SLD",
@@ -1895,7 +1990,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon20_SLD_Burst": {
     "id": "C-LBXAutocannon20_SLD_Burst",
@@ -1915,7 +2012,9 @@
     },
     "volleyProjectiles": 12,
     "volleyHeatShots": 12,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon2_Slug": {
     "id": "C-LBXAutocannon2_Slug",
@@ -1935,7 +2034,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon2_Slug_Burst": {
     "id": "C-LBXAutocannon2_Slug_Burst",
@@ -1955,7 +2056,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon5": {
     "id": "C-LBXAutocannon5",
@@ -1975,7 +2078,9 @@
     },
     "volleyProjectiles": 7,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon5_Solid": {
     "id": "C-LBXAutocannon5_Solid",
@@ -1995,7 +2100,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan",
+    "ammoPerVolley": 1
   },
   "C-LBXAutocannon5_Solid_Burst": {
     "id": "C-LBXAutocannon5_Solid_Burst",
@@ -2015,7 +2122,9 @@
     },
     "volleyProjectiles": 3,
     "volleyHeatShots": 3,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan",
+    "ammoPerVolley": 1
   },
   "C-LRM10": {
     "id": "C-LRM10",
@@ -2035,7 +2144,9 @@
     },
     "volleyProjectiles": 10,
     "volleyHeatShots": 10,
-    "ammoType": "Ammo.Missile.LRM.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.LRM.Clan",
+    "ammoPerVolley": 10
   },
   "C-LRM10_Artemis": {
     "id": "C-LRM10_Artemis",
@@ -2055,7 +2166,9 @@
     },
     "volleyProjectiles": 10,
     "volleyHeatShots": 10,
-    "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.LRM.Artemis.Clan",
+    "ammoPerVolley": 10
   },
   "C-LRM15": {
     "id": "C-LRM15",
@@ -2075,7 +2188,9 @@
     },
     "volleyProjectiles": 15,
     "volleyHeatShots": 15,
-    "ammoType": "Ammo.Missile.LRM.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.LRM.Clan",
+    "ammoPerVolley": 15
   },
   "C-LRM15_Artemis": {
     "id": "C-LRM15_Artemis",
@@ -2095,7 +2210,9 @@
     },
     "volleyProjectiles": 15,
     "volleyHeatShots": 15,
-    "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.LRM.Artemis.Clan",
+    "ammoPerVolley": 15
   },
   "C-LRM20": {
     "id": "C-LRM20",
@@ -2115,7 +2232,9 @@
     },
     "volleyProjectiles": 20,
     "volleyHeatShots": 20,
-    "ammoType": "Ammo.Missile.LRM.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.LRM.Clan",
+    "ammoPerVolley": 20
   },
   "C-LRM20_Artemis": {
     "id": "C-LRM20_Artemis",
@@ -2135,7 +2254,9 @@
     },
     "volleyProjectiles": 20,
     "volleyHeatShots": 20,
-    "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.LRM.Artemis.Clan",
+    "ammoPerVolley": 20
   },
   "C-LRM5": {
     "id": "C-LRM5",
@@ -2155,7 +2276,9 @@
     },
     "volleyProjectiles": 5,
     "volleyHeatShots": 5,
-    "ammoType": "Ammo.Missile.LRM.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.LRM.Clan",
+    "ammoPerVolley": 5
   },
   "C-LRM5_Artemis": {
     "id": "C-LRM5_Artemis",
@@ -2175,7 +2298,9 @@
     },
     "volleyProjectiles": 5,
     "volleyHeatShots": 5,
-    "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.LRM.Artemis.Clan",
+    "ammoPerVolley": 5
   },
   "C-LargePulseLaser": {
     "id": "C-LargePulseLaser",
@@ -2194,7 +2319,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-LightMachineGun": {
     "id": "C-LightMachineGun",
@@ -2214,7 +2340,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.MachineGun.Light.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.MachineGun.Light.Clan",
+    "ammoPerVolley": 1
   },
   "C-MachineGun": {
     "id": "C-MachineGun",
@@ -2234,7 +2362,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.MachineGun.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.MachineGun.Clan",
+    "ammoPerVolley": 1
   },
   "C-MediumPulseLaser": {
     "id": "C-MediumPulseLaser",
@@ -2253,7 +2383,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-NarcBeacon": {
     "id": "C-NarcBeacon",
@@ -2273,7 +2404,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Missile.NARC.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.NARC.Clan",
+    "ammoPerVolley": 1
   },
   "C-SRM2": {
     "id": "C-SRM2",
@@ -2293,7 +2426,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.SRM.Clan",
+    "ammoPerVolley": 2
   },
   "C-SRM2_Artemis": {
     "id": "C-SRM2_Artemis",
@@ -2313,7 +2448,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.SRM.Artemis.Clan",
+    "ammoPerVolley": 2
   },
   "C-SRM4": {
     "id": "C-SRM4",
@@ -2333,7 +2470,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Missile.SRM.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.SRM.Clan",
+    "ammoPerVolley": 4
   },
   "C-SRM4_Artemis": {
     "id": "C-SRM4_Artemis",
@@ -2353,7 +2492,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.SRM.Artemis.Clan",
+    "ammoPerVolley": 4
   },
   "C-SRM6": {
     "id": "C-SRM6",
@@ -2373,7 +2514,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.SRM.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.SRM.Clan",
+    "ammoPerVolley": 6
   },
   "C-SRM6_Artemis": {
     "id": "C-SRM6_Artemis",
@@ -2393,7 +2536,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.SRM.Artemis.Clan",
+    "ammoPerVolley": 6
   },
   "C-SmallPulselLaser": {
     "id": "C-SmallPulselLaser",
@@ -2412,7 +2557,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   },
   "C-StreakSRM2": {
     "id": "C-StreakSRM2",
@@ -2432,7 +2578,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM.Streak.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.SRM.Streak.Clan",
+    "ammoPerVolley": 2
   },
   "C-StreakSRM4": {
     "id": "C-StreakSRM4",
@@ -2452,7 +2600,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Missile.SRM.Streak.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.SRM.Streak.Clan",
+    "ammoPerVolley": 4
   },
   "C-StreakSRM6": {
     "id": "C-StreakSRM6",
@@ -2472,7 +2622,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.SRM.Streak.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Missile.SRM.Streak.Clan",
+    "ammoPerVolley": 6
   },
   "C-UltraAutocannon10_BurstFire": {
     "id": "C-UltraAutocannon10_BurstFire",
@@ -2492,7 +2644,9 @@
     },
     "volleyProjectiles": 8,
     "volleyHeatShots": 8,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan",
+    "ammoPerVolley": 1
   },
   "C-UltraAutocannon10_Single": {
     "id": "C-UltraAutocannon10_Single",
@@ -2512,7 +2666,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan",
+    "ammoPerVolley": 1
   },
   "C-UltraAutocannon2": {
     "id": "C-UltraAutocannon2",
@@ -2532,7 +2688,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan",
+    "ammoPerVolley": 1
   },
   "C-UltraAutocannon20": {
     "id": "C-UltraAutocannon20",
@@ -2552,7 +2710,9 @@
     },
     "volleyProjectiles": 16,
     "volleyHeatShots": 16,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan",
+    "ammoPerVolley": 1
   },
   "C-UltraAutocannon20_Single": {
     "id": "C-UltraAutocannon20_Single",
@@ -2572,7 +2732,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan",
+    "ammoPerVolley": 1
   },
   "C-UltraAutocannon2_Single": {
     "id": "C-UltraAutocannon2_Single",
@@ -2592,7 +2754,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan",
+    "ammoPerVolley": 1
   },
   "C-UltraAutocannon5": {
     "id": "C-UltraAutocannon5",
@@ -2612,7 +2776,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan",
+    "ammoPerVolley": 1
   },
   "C-UltraAutocannon5_Single": {
     "id": "C-UltraAutocannon5_Single",
@@ -2632,7 +2798,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan"
+    "techBase": "Clan",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan",
+    "ammoPerVolley": 1
   },
   "Clan_AC10_Ultra_AmmoEquipment": {
     "id": "Clan_AC10_Ultra_AmmoEquipment",
@@ -2644,6 +2812,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan"
   },
   "Clan_AC10_Ultra_Half_AmmoEquipment": {
@@ -2656,6 +2825,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan"
   },
   "Clan_AC20_Ultra_AmmoEquipment": {
@@ -2668,6 +2838,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan"
   },
   "Clan_AC20_Ultra_Half_AmmoEquipment": {
@@ -2680,6 +2851,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 10,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan"
   },
   "Clan_AC2_Ultra_AmmoEquipment": {
@@ -2692,6 +2864,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 180,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan"
   },
   "Clan_AC2_Ultra_Half_AmmoEquipment": {
@@ -2704,6 +2877,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 90,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan"
   },
   "Clan_AC5_Ultra_AmmoEquipment": {
@@ -2716,6 +2890,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 80,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan"
   },
   "Clan_AC5_Ultra_Half_AmmoEquipment": {
@@ -2728,6 +2903,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan"
   },
   "Clan_ATM_AmmoEquipment": {
@@ -2740,6 +2916,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 316,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.ATM"
   },
   "Clan_ATM_Half_AmmoEquipment": {
@@ -2752,6 +2929,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 158,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.ATM"
   },
   "Clan_GaussRifle_AmmoEquipment": {
@@ -2764,6 +2942,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 32,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.Gauss.Clan"
   },
   "Clan_GaussRifle_Half_AmmoEquipment": {
@@ -2776,6 +2955,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 16,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.Gauss.Clan"
   },
   "Clan_HeavyMachineGun_AmmoEquipment": {
@@ -2788,6 +2968,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 2500,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan"
   },
   "Clan_HeavyMachineGun_Half_AmmoEquipment": {
@@ -2800,6 +2981,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 1250,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan"
   },
   "Clan_LBX10_AmmoEquipment": {
@@ -2812,6 +2994,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
   },
   "Clan_LBX10_Half_AmmoEquipment": {
@@ -2824,6 +3007,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
   },
   "Clan_LBX20_AmmoEquipment": {
@@ -2836,6 +3020,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
   },
   "Clan_LBX20_Half_AmmoEquipment": {
@@ -2848,6 +3033,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 10,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
   },
   "Clan_LBX2_AmmoEquipment": {
@@ -2860,6 +3046,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 180,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
   },
   "Clan_LBX2_Half_AmmoEquipment": {
@@ -2872,6 +3059,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 90,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
   },
   "Clan_LBX5_AmmoEquipment": {
@@ -2884,6 +3072,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 80,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
   },
   "Clan_LBX5_Half_AmmoEquipment": {
@@ -2896,6 +3085,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
   },
   "Clan_LRM_AmmoEquipment": {
@@ -2908,6 +3098,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 440,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.LRM.Clan"
   },
   "Clan_LRM_Artemis_AmmoEquipment": {
@@ -2920,6 +3111,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 440,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
   },
   "Clan_LRM_Half_AmmoEquipment": {
@@ -2932,6 +3124,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 220,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.LRM.Clan"
   },
   "Clan_LRM_Half_Artemis_AmmoEquipment": {
@@ -2944,6 +3137,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 220,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
   },
   "Clan_LightMachineGun_AmmoEquipment": {
@@ -2956,6 +3150,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 7500,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.MachineGun.Light.Clan"
   },
   "Clan_LightMachineGun_Half_AmmoEquipment": {
@@ -2968,6 +3163,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 3750,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.MachineGun.Light.Clan"
   },
   "Clan_MachineGun_AmmoEquipment": {
@@ -2980,6 +3176,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 5200,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.MachineGun.Clan"
   },
   "Clan_MachineGun_Half_AmmoEquipment": {
@@ -2992,6 +3189,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 2600,
+    "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.MachineGun.Clan"
   },
   "Clan_NARC_AmmoEquipment": {
@@ -3004,6 +3202,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.NARC.Clan"
   },
   "Clan_NARC_Half_AmmoEquipment": {
@@ -3016,6 +3215,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 10,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.NARC.Clan"
   },
   "Clan_SRM_AmmoEquipment": {
@@ -3028,6 +3228,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 320,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.SRM.Clan"
   },
   "Clan_SRM_Artemis_AmmoEquipment": {
@@ -3040,6 +3241,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 320,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
   },
   "Clan_SRM_Artemis_Half_AmmoEquipment": {
@@ -3052,6 +3254,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 160,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
   },
   "Clan_SRM_Half_AmmoEquipment": {
@@ -3064,6 +3267,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 160,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.SRM.Clan"
   },
   "Clan_SRM_Streak_AmmoEquipment": {
@@ -3076,6 +3280,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 320,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.SRM.Streak.Clan"
   },
   "Clan_SRM_Streak_Half_AmmoEquipment": {
@@ -3088,6 +3293,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 160,
+    "techBase": "Clan",
     "ammoType": "Ammo.Missile.SRM.Streak.Clan"
   },
   "Claws_Medium": {
@@ -3143,7 +3349,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "medium"
+    "weightClass": "medium",
+    "techBase": "InnerSphere"
   },
   "Claymore_Assault": {
     "id": "Claymore_Assault",
@@ -3198,7 +3405,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "assault"
+    "weightClass": "assault",
+    "techBase": "InnerSphere"
   },
   "DoubleHeatSink": {
     "id": "DoubleHeatSink",
@@ -3209,7 +3417,8 @@
     "tonnage": 1.0,
     "slots": 3,
     "cooling": 0.2,
-    "tiers": null
+    "tiers": null,
+    "techBase": "InnerSphere"
   },
   "ERLargeLaser": {
     "id": "ERLargeLaser",
@@ -3263,7 +3472,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "LosTech"
   },
   "ERLargeLaser_ShortBurst": {
     "id": "ERLargeLaser_ShortBurst",
@@ -3317,7 +3527,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "LosTech"
   },
   "ERMediumLaser": {
     "id": "ERMediumLaser",
@@ -3371,7 +3582,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "ERPPC": {
     "id": "ERPPC",
@@ -3425,7 +3637,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "LosTech"
   },
   "ERSmallLaser": {
     "id": "ERSmallLaser",
@@ -3479,7 +3692,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "Flamer": {
     "id": "Flamer",
@@ -3533,7 +3747,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "GaussRifle": {
     "id": "GaussRifle",
@@ -3588,7 +3803,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.Gauss.Standard"
+    "techBase": "LosTech",
+    "ammoType": "Ammo.Ballistic.Gauss.Standard",
+    "ammoPerVolley": 1
   },
   "Gauss_Standard_AmmoEquipment": {
     "id": "Gauss_Standard_AmmoEquipment",
@@ -3600,6 +3817,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 26,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Gauss.Standard"
   },
   "Gauss_Standard_Half_AmmoEquipment": {
@@ -3612,6 +3830,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 13,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Gauss.Standard"
   },
   "Greatsword_Assault": {
@@ -3667,7 +3886,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "assault"
+    "weightClass": "assault",
+    "techBase": "InnerSphere"
   },
   "HammerFist_Assault": {
     "id": "HammerFist_Assault",
@@ -3722,7 +3942,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "assault"
+    "weightClass": "assault",
+    "techBase": "InnerSphere"
   },
   "HammerFist_Heavy": {
     "id": "HammerFist_Heavy",
@@ -3777,7 +3998,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "heavy"
+    "weightClass": "heavy",
+    "techBase": "InnerSphere"
   },
   "HammerFist_Light": {
     "id": "HammerFist_Light",
@@ -3832,7 +4054,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "light"
+    "weightClass": "light",
+    "techBase": "InnerSphere"
   },
   "HammerFist_Medium": {
     "id": "HammerFist_Medium",
@@ -3887,7 +4110,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "medium"
+    "weightClass": "medium",
+    "techBase": "InnerSphere"
   },
   "Hammer_Heavy": {
     "id": "Hammer_Heavy",
@@ -3942,7 +4166,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "heavy"
+    "weightClass": "heavy",
+    "techBase": "InnerSphere"
   },
   "Hatchet_Medium": {
     "id": "Hatchet_Medium",
@@ -3997,7 +4222,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "medium"
+    "weightClass": "medium",
+    "techBase": "InnerSphere"
   },
   "HeavyGaussRifle": {
     "id": "HeavyGaussRifle",
@@ -4052,7 +4278,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.Gauss.Heavy"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.Gauss.Heavy",
+    "ammoPerVolley": 1
   },
   "HeavyGauss_AmmoEquipment": {
     "id": "HeavyGauss_AmmoEquipment",
@@ -4064,6 +4292,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 8,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Gauss.Heavy"
   },
   "HeavyGauss_Half_AmmoEquipment": {
@@ -4076,6 +4305,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 4,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Gauss.Heavy"
   },
   "HeavyRifle": {
@@ -4131,7 +4361,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.Rifle.Heavy"
+    "techBase": "Retro",
+    "ammoType": "Ammo.Ballistic.Rifle.Heavy",
+    "ammoPerVolley": 1
   },
   "HeavyRifle_AmmoEquipment": {
     "id": "HeavyRifle_AmmoEquipment",
@@ -4143,6 +4375,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 12,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Rifle.Heavy"
   },
   "HeavyRifle_Burst": {
@@ -4198,7 +4431,9 @@
     },
     "volleyProjectiles": 3,
     "volleyHeatShots": 3,
-    "ammoType": "Ammo.Ballistic.Rifle.Heavy"
+    "techBase": "Retro",
+    "ammoType": "Ammo.Ballistic.Rifle.Heavy",
+    "ammoPerVolley": 1
   },
   "HeavyRifle_Half_AmmoEquipment": {
     "id": "HeavyRifle_Half_AmmoEquipment",
@@ -4210,6 +4445,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 6,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Rifle.Heavy"
   },
   "JumpJet_Class1_Equipment": {
@@ -4221,7 +4457,8 @@
     "tonnage": 2.0,
     "slots": 1,
     "tiers": null,
-    "equipmentType": "jumpJet"
+    "equipmentType": "jumpJet",
+    "techBase": "InnerSphere"
   },
   "JumpJet_Class2_Equipment": {
     "id": "JumpJet_Class2_Equipment",
@@ -4232,7 +4469,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "equipmentType": "jumpJet"
+    "equipmentType": "jumpJet",
+    "techBase": "InnerSphere"
   },
   "JumpJet_Class3_Equipment": {
     "id": "JumpJet_Class3_Equipment",
@@ -4243,7 +4481,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "tiers": null,
-    "equipmentType": "jumpJet"
+    "equipmentType": "jumpJet",
+    "techBase": "InnerSphere"
   },
   "JumpJet_Class4_Equipment": {
     "id": "JumpJet_Class4_Equipment",
@@ -4254,7 +4493,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "equipmentType": "jumpJet"
+    "equipmentType": "jumpJet",
+    "techBase": "InnerSphere"
   },
   "JumpJet_Class5_Equipment": {
     "id": "JumpJet_Class5_Equipment",
@@ -4265,7 +4505,8 @@
     "tonnage": 0.5,
     "slots": 1,
     "tiers": null,
-    "equipmentType": "jumpJet"
+    "equipmentType": "jumpJet",
+    "techBase": "InnerSphere"
   },
   "Katana_Assault": {
     "id": "Katana_Assault",
@@ -4320,7 +4561,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "assault"
+    "weightClass": "assault",
+    "techBase": "InnerSphere"
   },
   "Knuckles_Assault": {
     "id": "Knuckles_Assault",
@@ -4375,7 +4617,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "assault"
+    "weightClass": "assault",
+    "techBase": "InnerSphere"
   },
   "Knuckles_Heavy": {
     "id": "Knuckles_Heavy",
@@ -4430,7 +4673,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "heavy"
+    "weightClass": "heavy",
+    "techBase": "InnerSphere"
   },
   "Knuckles_Light": {
     "id": "Knuckles_Light",
@@ -4485,7 +4729,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "light"
+    "weightClass": "light",
+    "techBase": "InnerSphere"
   },
   "Knuckles_Medium": {
     "id": "Knuckles_Medium",
@@ -4540,7 +4785,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "medium"
+    "weightClass": "medium",
+    "techBase": "InnerSphere"
   },
   "LBX20_AmmoEquipment": {
     "id": "LBX20_AmmoEquipment",
@@ -4552,6 +4798,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20"
   },
   "LBX20_Half_AmmoEquipment": {
@@ -4564,6 +4811,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 10,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20"
   },
   "LBX2_AmmoEquipment": {
@@ -4576,6 +4824,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 180,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2"
   },
   "LBX2_Half_AmmoEquipment": {
@@ -4588,6 +4837,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 90,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2"
   },
   "LBX5_AmmoEquipment": {
@@ -4600,6 +4850,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 80,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5"
   },
   "LBX5_Half_AmmoEquipment": {
@@ -4612,6 +4863,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 40,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5"
   },
   "LBXAutocannon10": {
@@ -4667,7 +4919,9 @@
     },
     "volleyProjectiles": 13,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
+    "techBase": "LosTech",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10",
+    "ammoPerVolley": 1
   },
   "LBXAutocannon10_BurstFire": {
     "id": "LBXAutocannon10_BurstFire",
@@ -4722,7 +4976,9 @@
     },
     "volleyProjectiles": 15,
     "volleyHeatShots": 3,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
+    "techBase": "LosTech",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10",
+    "ammoPerVolley": 1
   },
   "LBXAutocannon10_Slug_BurstFire": {
     "id": "LBXAutocannon10_Slug_BurstFire",
@@ -4777,7 +5033,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
+    "techBase": "LosTech",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10",
+    "ammoPerVolley": 1
   },
   "LBXAutocannon10_SolidSlug": {
     "id": "LBXAutocannon10_SolidSlug",
@@ -4832,7 +5090,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
+    "techBase": "LosTech",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10",
+    "ammoPerVolley": 1
   },
   "LBXAutocannon2": {
     "id": "LBXAutocannon2",
@@ -4887,7 +5147,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2",
+    "ammoPerVolley": 1
   },
   "LBXAutocannon20": {
     "id": "LBXAutocannon20",
@@ -4942,7 +5204,9 @@
     },
     "volleyProjectiles": 5,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20",
+    "ammoPerVolley": 1
   },
   "LBXAutocannon5": {
     "id": "LBXAutocannon5",
@@ -4997,7 +5261,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5",
+    "ammoPerVolley": 1
   },
   "LRM10": {
     "id": "LRM10",
@@ -5052,7 +5318,9 @@
     },
     "volleyProjectiles": 10,
     "volleyHeatShots": 10,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 10
   },
   "LRM10_Artemis": {
     "id": "LRM10_Artemis",
@@ -5107,7 +5375,9 @@
     },
     "volleyProjectiles": 10,
     "volleyHeatShots": 10,
-    "ammoType": "Ammo.Missile.LRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM.Artemis",
+    "ammoPerVolley": 10
   },
   "LRM10_Artemis_Stream": {
     "id": "LRM10_Artemis_Stream",
@@ -5162,7 +5432,9 @@
     },
     "volleyProjectiles": 10,
     "volleyHeatShots": 10,
-    "ammoType": "Ammo.Missile.LRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM.Artemis",
+    "ammoPerVolley": 10
   },
   "LRM10_Hotloaded": {
     "id": "LRM10_Hotloaded",
@@ -5217,7 +5489,9 @@
     },
     "volleyProjectiles": 10,
     "volleyHeatShots": 10,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 10
   },
   "LRM10_Stream": {
     "id": "LRM10_Stream",
@@ -5272,7 +5546,9 @@
     },
     "volleyProjectiles": 10,
     "volleyHeatShots": 10,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 10
   },
   "LRM15": {
     "id": "LRM15",
@@ -5327,7 +5603,9 @@
     },
     "volleyProjectiles": 15,
     "volleyHeatShots": 15,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 15
   },
   "LRM15_Artemis": {
     "id": "LRM15_Artemis",
@@ -5382,7 +5660,9 @@
     },
     "volleyProjectiles": 15,
     "volleyHeatShots": 15,
-    "ammoType": "Ammo.Missile.LRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM.Artemis",
+    "ammoPerVolley": 15
   },
   "LRM15_Artemis_Stream": {
     "id": "LRM15_Artemis_Stream",
@@ -5437,7 +5717,9 @@
     },
     "volleyProjectiles": 15,
     "volleyHeatShots": 15,
-    "ammoType": "Ammo.Missile.LRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM.Artemis",
+    "ammoPerVolley": 15
   },
   "LRM15_Hotloaded": {
     "id": "LRM15_Hotloaded",
@@ -5492,7 +5774,9 @@
     },
     "volleyProjectiles": 15,
     "volleyHeatShots": 15,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 15
   },
   "LRM15_Stream": {
     "id": "LRM15_Stream",
@@ -5547,7 +5831,9 @@
     },
     "volleyProjectiles": 15,
     "volleyHeatShots": 15,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 15
   },
   "LRM20": {
     "id": "LRM20",
@@ -5602,7 +5888,9 @@
     },
     "volleyProjectiles": 20,
     "volleyHeatShots": 20,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 20
   },
   "LRM20_Artemis": {
     "id": "LRM20_Artemis",
@@ -5657,7 +5945,9 @@
     },
     "volleyProjectiles": 20,
     "volleyHeatShots": 20,
-    "ammoType": "Ammo.Missile.LRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM.Artemis",
+    "ammoPerVolley": 20
   },
   "LRM20_Artemis_Stream": {
     "id": "LRM20_Artemis_Stream",
@@ -5712,7 +6002,9 @@
     },
     "volleyProjectiles": 20,
     "volleyHeatShots": 20,
-    "ammoType": "Ammo.Missile.LRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM.Artemis",
+    "ammoPerVolley": 20
   },
   "LRM20_Hotloaded": {
     "id": "LRM20_Hotloaded",
@@ -5767,7 +6059,9 @@
     },
     "volleyProjectiles": 20,
     "volleyHeatShots": 20,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 20
   },
   "LRM20_Stream": {
     "id": "LRM20_Stream",
@@ -5822,7 +6116,9 @@
     },
     "volleyProjectiles": 20,
     "volleyHeatShots": 20,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 20
   },
   "LRM5": {
     "id": "LRM5",
@@ -5877,7 +6173,9 @@
     },
     "volleyProjectiles": 5,
     "volleyHeatShots": 5,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 5
   },
   "LRM5_Artemis": {
     "id": "LRM5_Artemis",
@@ -5932,7 +6230,9 @@
     },
     "volleyProjectiles": 5,
     "volleyHeatShots": 5,
-    "ammoType": "Ammo.Missile.LRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM.Artemis",
+    "ammoPerVolley": 5
   },
   "LRM5_Artemis_Stream": {
     "id": "LRM5_Artemis_Stream",
@@ -5987,7 +6287,9 @@
     },
     "volleyProjectiles": 5,
     "volleyHeatShots": 5,
-    "ammoType": "Ammo.Missile.LRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM.Artemis",
+    "ammoPerVolley": 5
   },
   "LRM5_Hotloaded": {
     "id": "LRM5_Hotloaded",
@@ -6042,7 +6344,9 @@
     },
     "volleyProjectiles": 5,
     "volleyHeatShots": 5,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 5
   },
   "LRM5_Stream": {
     "id": "LRM5_Stream",
@@ -6097,7 +6401,9 @@
     },
     "volleyProjectiles": 5,
     "volleyHeatShots": 5,
-    "ammoType": "Ammo.Missile.LRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.LRM",
+    "ammoPerVolley": 5
   },
   "LRM_AmmoEquipment": {
     "id": "LRM_AmmoEquipment",
@@ -6109,6 +6415,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 440,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.LRM"
   },
   "LRM_Artemis_AmmoEquipment": {
@@ -6121,6 +6428,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 440,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.LRM.Artemis"
   },
   "LRM_Artemis_Half_AmmoEquipment": {
@@ -6133,6 +6441,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 220,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.LRM.Artemis"
   },
   "LRM_Half_AmmoEquipment": {
@@ -6145,6 +6454,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 220,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.LRM"
   },
   "Lance_Medium": {
@@ -6200,7 +6510,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "medium"
+    "weightClass": "medium",
+    "techBase": "InnerSphere"
   },
   "LargeChemLaser_AmmoEquipment": {
     "id": "LargeChemLaser_AmmoEquipment",
@@ -6212,6 +6523,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 62,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Energy.ChemLaser.Large"
   },
   "LargeChemLaser_Half_AmmoEquipment": {
@@ -6224,6 +6536,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 31,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Energy.ChemLaser.Large"
   },
   "LargeChemicalLaser": {
@@ -6279,7 +6592,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Energy.ChemLaser.Large"
+    "techBase": "Retro",
+    "ammoType": "Ammo.Energy.ChemLaser.Large",
+    "ammoPerVolley": 1
   },
   "LargeLaser": {
     "id": "LargeLaser",
@@ -6333,7 +6648,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "LargeLaser_ShortBurst": {
     "id": "LargeLaser_ShortBurst",
@@ -6387,7 +6703,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "LargePulseLaser": {
     "id": "LargePulseLaser",
@@ -6441,7 +6758,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "LosTech"
   },
   "LargeXPulse": {
     "id": "LargeXPulse",
@@ -6495,7 +6813,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "LightAutocannon2": {
     "id": "LightAutocannon2",
@@ -6550,7 +6869,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC2"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC2",
+    "ammoPerVolley": 1
   },
   "LightAutocannon5": {
     "id": "LightAutocannon5",
@@ -6605,7 +6926,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC5"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC5",
+    "ammoPerVolley": 1
   },
   "LightGaussRifle": {
     "id": "LightGaussRifle",
@@ -6660,7 +6983,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.Gauss.Light"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.Gauss.Light",
+    "ammoPerVolley": 1
   },
   "LightGauss_AmmoEquipment": {
     "id": "LightGauss_AmmoEquipment",
@@ -6672,6 +6997,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 32,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Gauss.Light"
   },
   "LightGauss_Half_AmmoEquipment": {
@@ -6684,6 +7010,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 16,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Gauss.Light"
   },
   "LightRifle": {
@@ -6739,7 +7066,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.Rifle.Light"
+    "techBase": "Retro",
+    "ammoType": "Ammo.Ballistic.Rifle.Light",
+    "ammoPerVolley": 1
   },
   "LightRifle_AmmoEquipment": {
     "id": "LightRifle_AmmoEquipment",
@@ -6751,6 +7080,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 34,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Rifle.Light"
   },
   "LightRifle_Burst": {
@@ -6806,7 +7136,9 @@
     },
     "volleyProjectiles": 5,
     "volleyHeatShots": 5,
-    "ammoType": "Ammo.Ballistic.Rifle.Light"
+    "techBase": "Retro",
+    "ammoType": "Ammo.Ballistic.Rifle.Light",
+    "ammoPerVolley": 1
   },
   "LightRifle_Half_AmmoEquipment": {
     "id": "LightRifle_Half_AmmoEquipment",
@@ -6818,6 +7150,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 17,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Rifle.Light"
   },
   "Longsword_Heavy": {
@@ -6873,7 +7206,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "heavy"
+    "weightClass": "heavy",
+    "techBase": "InnerSphere"
   },
   "MRM10": {
     "id": "MRM10",
@@ -6928,7 +7262,9 @@
     },
     "volleyProjectiles": 10,
     "volleyHeatShots": 10,
-    "ammoType": "Ammo.Missile.MRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.MRM",
+    "ammoPerVolley": 10
   },
   "MRM20": {
     "id": "MRM20",
@@ -6983,7 +7319,9 @@
     },
     "volleyProjectiles": 20,
     "volleyHeatShots": 20,
-    "ammoType": "Ammo.Missile.MRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.MRM",
+    "ammoPerVolley": 20
   },
   "MRM30": {
     "id": "MRM30",
@@ -7038,7 +7376,9 @@
     },
     "volleyProjectiles": 30,
     "volleyHeatShots": 30,
-    "ammoType": "Ammo.Missile.MRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.MRM",
+    "ammoPerVolley": 30
   },
   "MRM40": {
     "id": "MRM40",
@@ -7093,7 +7433,9 @@
     },
     "volleyProjectiles": 40,
     "volleyHeatShots": 40,
-    "ammoType": "Ammo.Missile.MRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.MRM",
+    "ammoPerVolley": 40
   },
   "Mace_Medium": {
     "id": "Mace_Medium",
@@ -7148,7 +7490,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "medium"
+    "weightClass": "medium",
+    "techBase": "InnerSphere"
   },
   "MachineGun": {
     "id": "MachineGun",
@@ -7203,7 +7546,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.MachineGun.Standard"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.MachineGun.Standard",
+    "ammoPerVolley": 1
   },
   "MachineGun_Standard_AmmoEquipment": {
     "id": "MachineGun_Standard_AmmoEquipment",
@@ -7215,6 +7560,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 5200,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.MachineGun.Standard"
   },
   "MachineGun_Standard_Half_AmmoEquipment": {
@@ -7227,6 +7573,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 2600,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.MachineGun.Standard"
   },
   "MediumChemLaser_AmmoEquipment": {
@@ -7239,6 +7586,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 115,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Energy.ChemLaser.Medium"
   },
   "MediumChemLaser_Half_AmmoEquipment": {
@@ -7251,6 +7599,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 57,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Energy.ChemLaser.Medium"
   },
   "MediumChemicalLaser": {
@@ -7306,7 +7655,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Energy.ChemLaser.Medium"
+    "techBase": "Retro",
+    "ammoType": "Ammo.Energy.ChemLaser.Medium",
+    "ammoPerVolley": 1
   },
   "MediumLaser": {
     "id": "MediumLaser",
@@ -7360,7 +7711,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "MediumLaser_ShortBurst": {
     "id": "MediumLaser_ShortBurst",
@@ -7414,7 +7766,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "MediumPulseLaser": {
     "id": "MediumPulseLaser",
@@ -7468,7 +7821,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "LosTech"
   },
   "MediumRifle": {
     "id": "MediumRifle",
@@ -7523,7 +7877,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.Rifle.Medium"
+    "techBase": "Retro",
+    "ammoType": "Ammo.Ballistic.Rifle.Medium",
+    "ammoPerVolley": 1
   },
   "MediumRifle_AmmoEquipment": {
     "id": "MediumRifle_AmmoEquipment",
@@ -7535,6 +7891,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 22,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Rifle.Medium"
   },
   "MediumRifle_Burst": {
@@ -7590,7 +7947,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Ballistic.Rifle.Medium"
+    "techBase": "Retro",
+    "ammoType": "Ammo.Ballistic.Rifle.Medium",
+    "ammoPerVolley": 1
   },
   "MediumRifle_Half_AmmoEquipment": {
     "id": "MediumRifle_Half_AmmoEquipment",
@@ -7602,6 +7961,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 11,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.Rifle.Medium"
   },
   "MediumXPulseLaser": {
@@ -7656,7 +8016,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "NARC_AmmoEquipment": {
     "id": "NARC_AmmoEquipment",
@@ -7668,6 +8029,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 20,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.NARC"
   },
   "NARC_Half_AmmoEquipment": {
@@ -7680,6 +8042,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 10,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.NARC"
   },
   "NarcBeacon": {
@@ -7735,7 +8098,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Missile.NARC"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.NARC",
+    "ammoPerVolley": 1
   },
   "PPC": {
     "id": "PPC",
@@ -7789,7 +8154,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "PPC_Shotgun": {
     "id": "PPC_Shotgun",
@@ -7843,7 +8209,8 @@
       }
     },
     "volleyProjectiles": 8,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Arena"
   },
   "SRM2": {
     "id": "SRM2",
@@ -7898,7 +8265,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM",
+    "ammoPerVolley": 2
   },
   "SRM2_Artemis": {
     "id": "SRM2_Artemis",
@@ -7953,7 +8322,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Artemis",
+    "ammoPerVolley": 2
   },
   "SRM2_Artemis_Stream": {
     "id": "SRM2_Artemis_Stream",
@@ -8008,7 +8379,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Artemis",
+    "ammoPerVolley": 2
   },
   "SRM2_Inferno": {
     "id": "SRM2_Inferno",
@@ -8063,7 +8436,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM",
+    "ammoPerVolley": 2
   },
   "SRM2_Stream": {
     "id": "SRM2_Stream",
@@ -8118,7 +8493,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM",
+    "ammoPerVolley": 2
   },
   "SRM4": {
     "id": "SRM4",
@@ -8173,7 +8550,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Missile.SRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM",
+    "ammoPerVolley": 4
   },
   "SRM4_Artemis": {
     "id": "SRM4_Artemis",
@@ -8228,7 +8607,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Missile.SRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Artemis",
+    "ammoPerVolley": 4
   },
   "SRM4_Artemis_Stream": {
     "id": "SRM4_Artemis_Stream",
@@ -8283,7 +8664,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Missile.SRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Artemis",
+    "ammoPerVolley": 4
   },
   "SRM4_Inferno": {
     "id": "SRM4_Inferno",
@@ -8338,7 +8721,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Missile.SRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM",
+    "ammoPerVolley": 4
   },
   "SRM4_Stream": {
     "id": "SRM4_Stream",
@@ -8393,7 +8778,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Missile.SRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM",
+    "ammoPerVolley": 4
   },
   "SRM6": {
     "id": "SRM6",
@@ -8448,7 +8835,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.SRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM",
+    "ammoPerVolley": 6
   },
   "SRM6_Artemis": {
     "id": "SRM6_Artemis",
@@ -8503,7 +8892,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.SRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Artemis",
+    "ammoPerVolley": 6
   },
   "SRM6_Artemis_Stream": {
     "id": "SRM6_Artemis_Stream",
@@ -8558,7 +8949,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.SRM.Artemis"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Artemis",
+    "ammoPerVolley": 6
   },
   "SRM6_Inferno": {
     "id": "SRM6_Inferno",
@@ -8613,7 +9006,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.SRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM",
+    "ammoPerVolley": 6
   },
   "SRM6_Stream": {
     "id": "SRM6_Stream",
@@ -8668,7 +9063,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.SRM"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM",
+    "ammoPerVolley": 6
   },
   "SRM_AmmoEquipment": {
     "id": "SRM_AmmoEquipment",
@@ -8680,6 +9077,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 320,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.SRM"
   },
   "SRM_Artemis_AmmoEquipment": {
@@ -8692,6 +9090,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 320,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.SRM.Artemis"
   },
   "SRM_Artemis_Half_AmmoEquipment": {
@@ -8704,6 +9103,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 160,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.SRM.Artemis"
   },
   "SRM_Half_AmmoEquipment": {
@@ -8716,6 +9116,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 160,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.SRM"
   },
   "SRM_Streak_AmmoEquipment": {
@@ -8728,6 +9129,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 320,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.SRM.Streak"
   },
   "SRM_Streak_Half_AmmoEquipment": {
@@ -8740,6 +9142,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 160,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.SRM.Streak"
   },
   "SUPERCHARGER_Arena_MKII": {
@@ -8750,7 +9153,8 @@
     "size": "small",
     "tonnage": 3.0,
     "slots": 2,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Arena"
   },
   "SingleHeatSink": {
     "id": "SingleHeatSink",
@@ -8761,7 +9165,8 @@
     "tonnage": 1.0,
     "slots": 1,
     "cooling": 0.1,
-    "tiers": null
+    "tiers": null,
+    "techBase": "InnerSphere"
   },
   "SmallChemLaser_AmmoEquipment": {
     "id": "SmallChemLaser_AmmoEquipment",
@@ -8773,6 +9178,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 180,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Energy.ChemLaser.Small"
   },
   "SmallChemLaser_Half_AmmoEquipment": {
@@ -8785,6 +9191,7 @@
     "slots": 1,
     "tiers": null,
     "capacity": 90,
+    "techBase": "InnerSphere",
     "ammoType": "Ammo.Energy.ChemLaser.Small"
   },
   "SmallChemicalLaser": {
@@ -8840,7 +9247,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Energy.ChemLaser.Small"
+    "techBase": "Retro",
+    "ammoType": "Ammo.Energy.ChemLaser.Small",
+    "ammoPerVolley": 1
   },
   "SmallLaser": {
     "id": "SmallLaser",
@@ -8894,7 +9303,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "SmallLaser_ShortBurst": {
     "id": "SmallLaser_ShortBurst",
@@ -8948,7 +9358,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "SmallPulseLaser": {
     "id": "SmallPulseLaser",
@@ -9002,7 +9413,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "LosTech"
   },
   "SmallXPulseLaser": {
     "id": "SmallXPulseLaser",
@@ -9056,7 +9468,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "StreakSRM2": {
     "id": "StreakSRM2",
@@ -9111,7 +9524,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM.Streak"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Streak",
+    "ammoPerVolley": 2
   },
   "StreakSRM2_Stream": {
     "id": "StreakSRM2_Stream",
@@ -9166,7 +9581,9 @@
     },
     "volleyProjectiles": 2,
     "volleyHeatShots": 2,
-    "ammoType": "Ammo.Missile.SRM.Streak"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Streak",
+    "ammoPerVolley": 2
   },
   "StreakSRM4": {
     "id": "StreakSRM4",
@@ -9221,7 +9638,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Missile.SRM.Streak"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Streak",
+    "ammoPerVolley": 4
   },
   "StreakSRM6": {
     "id": "StreakSRM6",
@@ -9276,7 +9695,9 @@
     },
     "volleyProjectiles": 6,
     "volleyHeatShots": 6,
-    "ammoType": "Ammo.Missile.SRM.Streak"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.SRM.Streak",
+    "ammoPerVolley": 6
   },
   "Supercharger_Arena_MKI": {
     "id": "Supercharger_Arena_MKI",
@@ -9286,7 +9707,8 @@
     "size": "small",
     "tonnage": 1.5,
     "slots": 1,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Arena"
   },
   "Supercharger_Arena_MKIII": {
     "id": "Supercharger_Arena_MKIII",
@@ -9296,7 +9718,8 @@
     "size": "small",
     "tonnage": 4.5,
     "slots": 3,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Arena"
   },
   "Supercharger_Arena_MKIV": {
     "id": "Supercharger_Arena_MKIV",
@@ -9306,7 +9729,8 @@
     "size": "small",
     "tonnage": 6.0,
     "slots": 4,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Arena"
   },
   "Supercharger_Arena_MKV": {
     "id": "Supercharger_Arena_MKV",
@@ -9316,7 +9740,8 @@
     "size": "small",
     "tonnage": 7.5,
     "slots": 5,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Arena"
   },
   "TAG": {
     "id": "TAG",
@@ -9370,7 +9795,8 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "InnerSphere"
   },
   "TargetingComputer_Mk1": {
     "id": "TargetingComputer_Mk1",
@@ -9380,7 +9806,8 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Clan"
   },
   "TargetingComputer_Mk2": {
     "id": "TargetingComputer_Mk2",
@@ -9390,7 +9817,8 @@
     "size": "small",
     "tonnage": 2.0,
     "slots": 2,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Clan"
   },
   "TargetingComputer_Mk3": {
     "id": "TargetingComputer_Mk3",
@@ -9400,7 +9828,8 @@
     "size": "small",
     "tonnage": 3.0,
     "slots": 3,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Clan"
   },
   "TargetingComputer_Mk4": {
     "id": "TargetingComputer_Mk4",
@@ -9410,7 +9839,8 @@
     "size": "small",
     "tonnage": 4.0,
     "slots": 4,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Clan"
   },
   "TargetingComputer_Mk5": {
     "id": "TargetingComputer_Mk5",
@@ -9420,7 +9850,8 @@
     "size": "small",
     "tonnage": 5.0,
     "slots": 5,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Clan"
   },
   "TargetingComputer_Mk6": {
     "id": "TargetingComputer_Mk6",
@@ -9430,7 +9861,8 @@
     "size": "small",
     "tonnage": 6.0,
     "slots": 6,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Clan"
   },
   "TargetingComputer_Mk7": {
     "id": "TargetingComputer_Mk7",
@@ -9440,7 +9872,8 @@
     "size": "small",
     "tonnage": 7.0,
     "slots": 7,
-    "tiers": null
+    "tiers": null,
+    "techBase": "Clan"
   },
   "TrenchBlade_Heavy": {
     "id": "TrenchBlade_Heavy",
@@ -9495,7 +9928,8 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "weightClass": "heavy"
+    "weightClass": "heavy",
+    "techBase": "InnerSphere"
   },
   "UltraAutocannon10_Single": {
     "id": "UltraAutocannon10_Single",
@@ -9550,7 +9984,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10",
+    "ammoPerVolley": 1
   },
   "UltraAutocannon20_Single": {
     "id": "UltraAutocannon20_Single",
@@ -9605,7 +10041,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20",
+    "ammoPerVolley": 1
   },
   "UltraAutocannon2_Single": {
     "id": "UltraAutocannon2_Single",
@@ -9660,7 +10098,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2"
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2",
+    "ammoPerVolley": 1
   },
   "UltraAutocannon5": {
     "id": "UltraAutocannon5",
@@ -9715,7 +10155,9 @@
     },
     "volleyProjectiles": 4,
     "volleyHeatShots": 4,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
+    "techBase": "LosTech",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5",
+    "ammoPerVolley": 1
   },
   "UltraAutocannon5_Single": {
     "id": "UltraAutocannon5_Single",
@@ -9770,7 +10212,9 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
-    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
+    "techBase": "LosTech",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5",
+    "ammoPerVolley": 1
   },
   "c-TAG": {
     "id": "c-TAG",
@@ -9789,6 +10233,7 @@
       }
     },
     "volleyProjectiles": 1,
-    "volleyHeatShots": 1
+    "volleyHeatShots": 1,
+    "techBase": "Clan"
   }
 }

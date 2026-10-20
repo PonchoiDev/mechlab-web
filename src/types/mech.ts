@@ -46,6 +46,7 @@ export interface Mech {
 
 export interface EquippedItem extends Item {
   instanceId: string;
+  hardpointIndex?: number;
 }
 
 export type Loadout<T extends Item = Item> = Record<Zone, T[]>;

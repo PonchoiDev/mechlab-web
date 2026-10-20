@@ -1,54 +1,46 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import './App.css';
 import mechsData from './data/mechs.json';
 import itemsData from './data/items.json';
-import type { Mech } from './types/mech';
+import type { Mech, Zone } from './types/mech';
 import type { Item } from './types/item';
 import { getBuildSummary } from './utils/calculators';
-import { getEquippableItems } from './utils/equipment';
-import { ZONES } from './utils/zones';
+import { getBuildIssues } from './utils/issues';
+import { ZONE_LABELS } from './utils/zones';
 import { useMechBuild } from './hooks/useMechBuild';
 import { useSarnaAsset } from './hooks/useSarnaAsset';
-import { BuildPreview } from './components/BuildPreview';
-import { ComponentPanel } from './components/ComponentPanel';
-import { InventoryPanel, type WeaponSortOrder } from './components/InventoryPanel';
+import { BuildStatus } from './components/BuildStatus';
+import { ComponentEditor } from './components/ComponentEditor';
 import { LoadoutAnalysis } from './components/LoadoutAnalysis';
+import { MechBoard } from './components/MechBoard';
 import { MechImage, SarnaSourceLink } from './components/MechReference';
 import { MechPicker } from './components/MechPicker';
 import { StatsReadout } from './components/StatsReadout';
 import { UtilityToolbar } from './components/UtilityToolbar';
-
-type ViewMode = 'workbench' | 'preview';
-
-const VIEW_OPTIONS: [ViewMode, string][] = [
-  ['workbench', 'Workshop'],
-  ['preview', 'Build preview']
-];
 
 const mechs = mechsData as unknown as Mech[];
 const items = Object.values(itemsData) as Item[];
 
 export default function App() {
   const build = useMechBuild(mechs);
-  const { mech, loadout, armor, activeZone } = build;
+  const { mech, loadout, armor, activeZone, setActiveZone } = build;
   const sarna = useSarnaAsset(mech);
-  const [viewMode, setViewMode] = useState<ViewMode>('workbench');
-  const [weaponSortOrder, setWeaponSortOrder] = useState<WeaponSortOrder>('large-first');
 
   const summary = useMemo(() => getBuildSummary(mech, loadout, armor), [mech, loadout, armor]);
-  const equippableItems = useMemo(
-    () => activeZone ? getEquippableItems(items, mech.components[activeZone], loadout, activeZone) : [],
-    [activeZone, mech, loadout]
-  );
+  const issues = useMemo(() => getBuildIssues(mech, loadout, armor), [mech, loadout, armor]);
   const equippedItems = Object.values(loadout).flat();
-
-  const mechImage = (
-    <MechImage mech={mech} asset={sarna.asset} isLoading={sarna.isLoading} onImageError={sarna.markImageBroken} />
-  );
-  const sourceLink = <SarnaSourceLink asset={sarna.asset} />;
+  const [selectedHardpoint, setSelectedHardpoint] = useState<number | null>(null);
+  const selectZone = (zone: Zone, hardpointIndex: number | null) => {
+    setActiveZone(zone);
+    setSelectedHardpoint(hardpointIndex);
+  };
+  const closeEditor = useCallback(() => {
+    setActiveZone(null);
+    setSelectedHardpoint(null);
+  }, [setActiveZone, setSelectedHardpoint]);
 
   return (
-    <div className="mechlab-shell">
+    <div className={activeZone ? 'mechlab-shell has-editor' : 'mechlab-shell'}>
       <header className="topbar">
         <div className="brand-lockup">
           <span className="brand-mark" aria-hidden="true">M</span>
@@ -58,24 +50,13 @@ export default function App() {
           </div>
         </div>
         <div className="topbar-tools">
-          <div className="view-switch" role="group" aria-label="Application view">
-            {VIEW_OPTIONS.map(([mode, label]) => (
-              <button
-                key={mode}
-                type="button"
-                aria-pressed={viewMode === mode}
-                className={viewMode === mode ? 'view-switch-button is-active' : 'view-switch-button'}
-                onClick={() => setViewMode(mode)}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
           <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={build.selectMech} />
         </div>
       </header>
 
       <StatsReadout mech={mech} summary={summary} />
+
+      <BuildStatus issues={issues} onSelectZone={selectZone} />
 
       <UtilityToolbar
         canClearArmor={summary.armorPoints > 0}
@@ -87,62 +68,45 @@ export default function App() {
         onRemoveItems={build.removeItemsOfType}
       />
 
-      {viewMode === 'workbench' ? (
-        <div className="workbench">
-          <InventoryPanel
-            activeZone={activeZone}
-            items={equippableItems}
-            sortOrder={weaponSortOrder}
-            onSortOrderChange={setWeaponSortOrder}
-            onEquip={build.equipItem}
-          />
+      <main className="workspace">
+        <MechBoard
+          mech={mech}
+          loadout={loadout}
+          armor={armor}
+          activeZone={activeZone}
+          selectedHardpoint={selectedHardpoint}
+          onSelectZone={selectZone}
+          onArmorChange={build.changeArmor}
+          reference={(
+            <>
+              <MechImage mech={mech} asset={sarna.asset} isLoading={sarna.isLoading} onImageError={sarna.markImageBroken} />
+              <SarnaSourceLink asset={sarna.asset} />
+            </>
+          )}
+        />
 
-          <main className="mech-stage">
-            <div className="stage-heading">
-              <div>
-                <p className="eyebrow">02 / VISUAL REFERENCE</p>
-                <h2>{mech.name}</h2>
-              </div>
-              <span className="variant-tag">{mech.variant}</span>
-            </div>
-            <div className="image-well">
-              {mechImage}
-            </div>
-            {sourceLink}
-          </main>
+        <LoadoutAnalysis weapons={summary.weapons} ammunition={summary.ammunition} />
+      </main>
 
-          <aside className="components-column">
-            <header className="section-heading components-heading">
-              <div>
-                <p className="eyebrow">03 / HARDPOINTS</p>
-                <h2>Components</h2>
-              </div>
-              <span className="component-count">{ZONES.length} SECTIONS</span>
-            </header>
-            <div className="component-stack">
-              {ZONES.map(({ zone, label }) => (
-                <ComponentPanel
-                  key={zone}
-                  title={label}
-                  baseData={mech.components[zone]}
-                  equippedItems={loadout[zone]}
-                  isActive={activeZone === zone}
-                  armorFront={armor[zone].front}
-                  armorRear={armor[zone].rear}
-                  onSelect={() => build.setActiveZone(zone)}
-                  onRemoveItem={(instanceId) => build.removeItem(zone, instanceId)}
-                  onTierChange={(instanceId, tier) => build.changeTier(zone, instanceId, tier)}
-                  onArmorChange={(type, value) => build.changeArmor(zone, type, value)}
-                />
-              ))}
-            </div>
-          </aside>
-        </div>
-      ) : (
-        <BuildPreview mech={mech} loadout={loadout} armor={armor} reference={<>{mechImage}{sourceLink}</>} />
+      {activeZone && (
+        <ComponentEditor
+          key={activeZone}
+          zone={activeZone}
+          label={ZONE_LABELS[activeZone]}
+          componentData={mech.components[activeZone]}
+          catalog={items}
+          loadout={loadout}
+          armorFront={armor[activeZone].front}
+          armorRear={armor[activeZone].rear}
+          selectedHardpoint={selectedHardpoint}
+          onSelectHardpoint={setSelectedHardpoint}
+          onEquip={build.equipItem}
+          onRemoveItem={(instanceId) => build.removeItem(activeZone, instanceId)}
+          onTierChange={(instanceId, tier) => build.changeTier(activeZone, instanceId, tier)}
+          onArmorChange={(type, value) => build.changeArmor(activeZone, type, value)}
+          onClose={closeEditor}
+        />
       )}
-
-      <LoadoutAnalysis weapons={summary.weapons} ammunition={summary.ammunition} />
     </div>
   );
 }

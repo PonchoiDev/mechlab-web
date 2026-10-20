@@ -2,7 +2,14 @@ import { useState } from 'react';
 import type { Item } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import { calculateEquippedWeight, createDefaultArmor, maximizeArmor } from '../utils/calculators';
-import { canEquipItem, createEquippedItem, getAvailableSlotType } from '../utils/equipment';
+import {
+  canEquipItem,
+  createEquippedItem,
+  findHardpointForWeapon,
+  getAvailableSlotType,
+  getHardpointOccupancy,
+  weaponFitsHardpoint
+} from '../utils/equipment';
 import { createEmptyArmor, createEmptyLoadout } from '../utils/zones';
 
 export const useMechBuild = (mechs: Mech[]) => {
@@ -21,19 +28,27 @@ export const useMechBuild = (mechs: Mech[]) => {
     setActiveZone(null);
   };
 
-  const equipItem = (item: Item) => {
+  const equipItem = (item: Item, targetHardpoint?: number) => {
     if (!activeZone) return;
 
     const zone = activeZone;
     const componentData = mech.components[zone];
     setLoadout(prev => {
       const zoneItems = prev[zone];
-      if (!canEquipItem(item, componentData, zoneItems)) return prev;
 
-      const slotType = item.type === 'weapon'
-        ? undefined
-        : getAvailableSlotType(item, componentData, zoneItems) ?? undefined;
-      if (item.type !== 'weapon' && !slotType) return prev;
+      if (item.type === 'weapon') {
+        const hardpointIndex = targetHardpoint ?? findHardpointForWeapon(componentData.hardpoints, zoneItems, item);
+        if (hardpointIndex === null) return prev;
+        const hardpoint = componentData.hardpoints[hardpointIndex];
+        const { occupiedIndices } = getHardpointOccupancy(componentData.hardpoints, zoneItems);
+        if (!hardpoint || occupiedIndices.has(hardpointIndex) || !weaponFitsHardpoint(hardpoint, item)) return prev;
+
+        return { ...prev, [zone]: [...zoneItems, createEquippedItem(item, undefined, hardpointIndex)] };
+      }
+
+      if (!canEquipItem(item, componentData, zoneItems)) return prev;
+      const slotType = getAvailableSlotType(item, componentData, zoneItems);
+      if (!slotType) return prev;
 
       return { ...prev, [zone]: [...zoneItems, createEquippedItem(item, slotType)] };
     });
