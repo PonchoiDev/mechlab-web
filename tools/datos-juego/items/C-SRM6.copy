@@ -1,0 +1,33 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="C-SRM6"
+   StatsData=(DEPRECATED_CBillBaseValue=320000,CBillBaseValueBigInt=(Value=320000),MissileStats=(NumberOfMissiles=6,Projectile=(Damage=2.400000,Speed=40000.000000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=600.000000,FireSound=/Game/Audio/Events/Clan_Weapons/Missiles/SFX_Wpn_Missiles_SRM_6_Fire.SFX_Wpn_Missiles_SRM_6_Fire,ProjectileFlightSound=/Game/Audio/Events/Clan_Weapons/Missiles/SFX_Wpn_Missiles_SRM_6_Projectile.SFX_Wpn_Missiles_SRM_6_Projectile,Class=/Game/Objects/Projectiles/Missile/Projectile_Missile.Projectile_Missile_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_VeryTiny.Shockwave_VeryTiny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=0.600000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=150.000000,BrushStrength=1.500000))),Cooldown=3.400000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(OptimalRange=27000.000000,MaxRange=27000.000000),AmmoType=(TagName="Ammo.Missile.SRM.Clan"),MissileTurnRate=65.000000,SpreadMissileRadius=500.000000,SpreadMissileDistance=7500.000000,MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=270,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="C-SRM6")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.400000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   MissilePath=/Game/Objects/Weapons/_common/MissilePaths/SRMSpreadPath.SRMSpreadPath_C
+   bCanFireInsideMinRange=True
+   bCanFireOutsideMaxRange=True
+   TechLevel=6
+   Name=NSLOCTEXT("[4FE1DFC840ED99DB2582FF860D9036F9]", "6FE2F20F4755F40B926BC39CFBFBCD97", "Clan SRM 6")
+   ShortName=NSLOCTEXT("[4FE1DFC840ED99DB2582FF860D9036F9]", "0DE097E049BEB38C919C369E8E3D83F8", "C-SRM 6")
+   Manufacturer="Strana Mechty MechWorks"
+   WeaponType=(TagName="Weapon.Missile.SRM.SRM6.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=1.500000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Missile_Small_SlotType")
+   WeaponDisplayColour=(R=0.496933,G=0.597202,B=0.246201,A=1.000000)
+   IntroDate=2370.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_SRM6_512_UIX.Clan_SRM6_512_UIX
+   SalvageShareCost=7
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_SRM6_Market_STM.Clan_SRM6_Market_STM
+   Description=NSLOCTEXT("[4FE1DFC840ED99DB2582FF860D9036F9]", "0B216D8E4B244B9FB42A18870FF5E084", "Short-range missile system that fires 6 unguided missiles. The Clan version is lighter.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.100000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.075000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

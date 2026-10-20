@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="C-LBXAutocannon10"
+   StatsData=(DEPRECATED_CBillBaseValue=900000,CBillBaseValueBigInt=(Value=900000),Projectile=(NumberOfProjectiles=13,SpreadRadius=700.000000,SpreadDistance=35000.000000,bSpreadProjectileSingleBulletAlignment=True,Damage=1.000000,Speed=90000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=300.000000,FireSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_LBX10_Cluster_Fire.SFX_Wpn_LBX10_Cluster_Fire,FireReloadSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_LBX10_Reload.SFX_Wpn_LBX10_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/LBX10/Projectile_LBX10.Projectile_LBX10_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Tny.Shockwave_Tny_C,CameraShake=/Game/Objects/Weapons/_common/Shake/burst_recoil_heavy.burst_recoil_heavy_C,HeatGenerated=1.300000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=1.800000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=54000.000000,MaxRange=54000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1620,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="C-LBXAutocannon10_Cluster")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.225000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.150000)))
+   TechLevel=6
+   Name=NSLOCTEXT("[E6E1EC4D49278B6ED1EFB2B1A48E5ED6]", "B4DD48B1481F1D3173E45B9B65D08507", "C-LB 10-X Autocannon")
+   ShortName=NSLOCTEXT("[E6E1EC4D49278B6ED1EFB2B1A48E5ED6]", "7ACACB194CB38380A1D24D9502B5F55C", "C-LB 10-X AC")
+   Manufacturer="Strana Mechty MechWorks"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX10.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=10.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Ballistic_Medium_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=3.000000,RemoveTimeInDays=3.000000,RepairTimeInDays=3.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_LBX10_512_UIX.Clan_LBX10_512_UIX
+   SalvageShareCost=15
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_LBX10_Market_STM.Clan_LBX10_Market_STM
+   Description=NSLOCTEXT("[E6E1EC4D49278B6ED1EFB2B1A48E5ED6]", "A18AE1A64B09A22D3A601081CF4BE9C9", "Ballistic weapon that fires cluster rounds at long range. Clan engineers refined the design, lowering the weight and improving characteristics.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.250000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.125000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

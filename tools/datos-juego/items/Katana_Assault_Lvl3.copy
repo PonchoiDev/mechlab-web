@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="Katana_Assault_Lvl3"
+   StatsData=(DEPRECATED_CBillBaseValue=60000,CBillBaseValueBigInt=(Value=60000),Cooldown=2.550000,Melee=(Damage=55.000000,Duration=1.750000,ActivationTime=0.700000,Impulse=1250000.000000,MeleePriority=25,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_A_Katana.MechMeleeStrike_A_Katana_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_Katana/Melee_Katana_Swing.Melee_Katana_Swing),Ranges=(OptimalRange=2250.000000,MaxRange=2250.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Assault_Katana")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.650000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Damage_Quirk.Damage_Quirk_C"',Value=5.000000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/Cooldown_Quirk.Cooldown_Quirk_C"',Value=-0.250000)))
+   BuildingDamageModifier=5.000000
+   TechLevel=3
+   BattleValueAdjustment=5
+   Name=NSLOCTEXT("[7F89F79C40D29A37A950D0906959E197]", "AC058101461A4B1BF3A7CC8EB020D789", "Assault Katana")
+   ShortName=NSLOCTEXT("[7F89F79C40D29A37A950D0906959E197]", "C97AEC63482ED9C5A7CD9285E85FC458", "Assault Katana")
+   Manufacturer="Katanakaji"
+   WeaponType=(TagName="Weapon.Melee.Assault.Katana")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=6.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Assault_Melee_Weapon_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   RefitCosts=(InstallTimeInDays=1.000000,InstallCBillCost=2000,RepairCBillCost=1000)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_Assault_Katana_512_UIX.Melee_Assault_Katana_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   UIXWeapon3DModel=/Game/DLC3/Objects/Marketplace/Weapons/Model/Katana_Assault_Market_STM.Katana_Assault_Market_STM
+   Description=NSLOCTEXT("[7F89F79C40D29A37A950D0906959E197]", "4F38518D48826468A82000BCF3173C63", "A katana designed as a heavy melee weapon for assault \'Mech use.")
+   AssociatedDLC=(TagName="DLC.DLC3")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

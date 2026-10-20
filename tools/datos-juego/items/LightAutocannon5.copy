@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="LightAutocannon5"
+   StatsData=(DEPRECATED_CBillBaseValue=300000,CBillBaseValueBigInt=(Value=300000),Projectile=(NumberOfProjectiles=1,Damage=5.000000,Speed=60000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=2000.000000,Impulse=1250.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/AC5_Fire.AC5_Fire,FireReloadSound=/Game/Audio/Events/Weapons/Ballistics/AC5_Reload.AC5_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC5/Projectile_AC5.Projectile_AC5_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Sml.Shockwave_Sml_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_medium.single_recoil_medium_C,HeatGenerated=0.600000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000)),Cooldown=1.700000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=36000.000000,MaxRange=36000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Light.AC5"),MWO_RangeData=(Ranges=((Distance=1,InterpolationType="linear"),(Distance=620,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1240,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LightAutocannon5")
+   TechLevel=1
+   Name=NSLOCTEXT("[5EFEB7484932EE067E760CBDFAC546DC]", "A0B09E38457053351F62179C0ABF92D2", "Light Autocannon/5")
+   ShortName=NSLOCTEXT("[5EFEB7484932EE067E760CBDFAC546DC]", "5A5CC7014EC9839BFAD5D7B7881755EA", "LAC/5")
+   Manufacturer="Mydron Snakekiller"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.Standard.AC5.Light")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=5.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Ballistic_Small_SlotType")
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=3058.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/UI/Textures/Marketplace_Weapons/AC5_512_UIX.AC5_512_UIX
+   SalvageShareCost=2
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/AC5_STM.AC5_STM
+   Description=NSLOCTEXT("", "7A5382864326DDC626569CBA0DAE3E67", "A lighter version of the standard Autocannon/5 with reduced range and rate of fire.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.150000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.075000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

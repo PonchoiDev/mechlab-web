@@ -67,7 +67,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -86,7 +87,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -189,7 +191,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -208,7 +211,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -305,7 +309,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -324,7 +329,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -417,7 +423,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -432,7 +439,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -731,7 +739,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -754,7 +763,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -863,7 +873,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -890,7 +901,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -1014,7 +1026,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -1041,7 +1054,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -1156,7 +1170,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -1179,7 +1194,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -1422,7 +1438,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -1441,7 +1459,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -1562,7 +1582,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -1577,7 +1598,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -1686,7 +1708,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -1705,7 +1729,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -1818,7 +1844,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -1837,7 +1865,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -1958,7 +1988,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -1977,7 +2009,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2089,7 +2123,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2108,7 +2144,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2222,7 +2260,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2241,7 +2281,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2368,7 +2410,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2391,7 +2435,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2506,7 +2552,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2525,7 +2573,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2637,7 +2687,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2664,7 +2716,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2780,7 +2834,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -2799,7 +2854,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -2916,7 +2972,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -2935,7 +2993,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -3048,7 +3108,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -3067,7 +3129,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -3184,7 +3248,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -3203,7 +3269,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -3312,7 +3380,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -3335,7 +3404,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -3443,7 +3513,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -3462,7 +3534,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -3580,7 +3654,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -3599,7 +3674,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -3704,7 +3780,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -3723,7 +3800,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -3827,7 +3905,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -3846,7 +3925,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -3951,7 +4031,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -3970,7 +4051,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -4081,7 +4163,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -4100,7 +4183,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -4215,7 +4299,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -4234,7 +4319,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -4337,7 +4423,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -4356,7 +4444,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -4459,7 +4548,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -4478,7 +4569,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -4585,7 +4677,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -4604,7 +4698,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -4707,7 +4802,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -4726,7 +4823,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -4844,7 +4942,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -4863,7 +4963,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -4972,7 +5073,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -4991,7 +5094,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -5104,7 +5208,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -5123,7 +5229,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -5240,7 +5348,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -5259,7 +5369,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -6138,7 +6250,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6161,7 +6274,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6279,7 +6393,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6302,7 +6417,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6419,7 +6535,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6442,7 +6559,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6547,7 +6665,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6570,7 +6689,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6687,7 +6807,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6710,7 +6831,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6827,7 +6949,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6850,7 +6973,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -6958,7 +7082,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "heavy"
           },
           {
             "type": "energy",
@@ -6985,7 +7110,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -7120,7 +7246,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -7236,7 +7363,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7255,7 +7383,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7375,7 +7504,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           },
           {
             "type": "ballistic",
@@ -7398,7 +7528,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7522,7 +7653,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7541,7 +7673,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7669,7 +7802,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7688,7 +7822,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7808,7 +7943,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7827,7 +7963,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7950,7 +8087,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -7969,7 +8107,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8089,7 +8228,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8108,7 +8248,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8232,7 +8373,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8251,7 +8393,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8364,7 +8507,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8379,7 +8523,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8484,7 +8629,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8499,7 +8645,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8612,7 +8759,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8627,7 +8775,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8746,7 +8895,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8761,7 +8911,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8895,7 +9046,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -8910,7 +9062,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -9014,7 +9167,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -9033,7 +9187,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -9133,7 +9288,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -9152,7 +9308,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -10433,7 +10590,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -10452,7 +10610,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -10561,7 +10720,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -10580,7 +10740,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -10697,7 +10858,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -10720,7 +10882,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -10828,7 +10991,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -10847,7 +11011,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -10960,7 +11125,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -10979,7 +11145,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -11100,7 +11267,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -11119,7 +11287,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -11912,7 +12081,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -11931,7 +12102,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -12045,7 +12217,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -12060,7 +12234,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -12174,7 +12349,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -12189,7 +12365,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -12298,7 +12475,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -12317,7 +12496,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -12430,7 +12610,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -12449,7 +12631,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -12566,7 +12749,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -12585,7 +12770,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -13425,7 +13611,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -13542,7 +13729,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -13565,7 +13753,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -13667,7 +13856,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -13686,7 +13876,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -13790,7 +13981,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -13809,7 +14001,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -13907,7 +14100,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -13926,7 +14120,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -14023,7 +14218,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -14135,7 +14331,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -14247,7 +14444,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14266,7 +14464,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14359,7 +14558,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14378,7 +14578,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14475,7 +14676,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14494,7 +14696,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14593,7 +14796,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14612,7 +14816,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14709,7 +14914,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14732,7 +14938,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14828,7 +15035,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14851,7 +15059,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -14960,7 +15169,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15087,7 +15297,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15228,7 +15439,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15348,7 +15560,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15367,7 +15580,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15480,7 +15694,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15499,7 +15714,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15608,7 +15824,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15627,7 +15844,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15736,7 +15954,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15755,7 +15974,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15874,7 +16094,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -15897,7 +16118,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -16011,7 +16233,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -16030,7 +16253,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -17245,7 +17469,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17264,7 +17489,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17366,7 +17592,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17385,7 +17612,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17489,7 +17717,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17508,7 +17737,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17614,7 +17844,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17633,7 +17864,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17735,7 +17967,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17754,7 +17987,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -17872,7 +18106,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -17899,7 +18134,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18005,7 +18241,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18028,7 +18265,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18134,7 +18372,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18157,7 +18396,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18271,7 +18511,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18298,7 +18539,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18408,7 +18650,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18435,7 +18678,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18541,7 +18785,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18564,7 +18809,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18670,7 +18916,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18693,7 +18940,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18799,7 +19047,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18822,7 +19071,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18941,7 +19191,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -18968,7 +19219,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19078,7 +19330,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19101,7 +19354,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19215,7 +19469,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19238,7 +19493,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19344,7 +19600,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19379,7 +19636,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19481,7 +19739,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19504,7 +19763,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19606,7 +19866,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19629,7 +19890,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19737,7 +19999,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19760,7 +20023,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19864,7 +20128,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19887,7 +20152,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -19995,7 +20261,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20014,7 +20281,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20116,7 +20384,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20135,7 +20404,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20243,7 +20513,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20266,7 +20537,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20370,7 +20642,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           },
           {
             "type": "ballistic",
@@ -20393,7 +20666,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20497,7 +20771,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20516,7 +20791,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20629,7 +20905,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20648,7 +20925,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20757,7 +21035,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20776,7 +21055,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20880,7 +21160,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20899,7 +21180,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -20998,7 +21280,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -21017,7 +21300,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -21121,7 +21405,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -21140,7 +21425,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -21244,7 +21530,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -21263,7 +21550,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -21374,7 +21662,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -21498,7 +21787,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -21521,7 +21811,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -21634,7 +21925,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -21657,7 +21949,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -21766,7 +22059,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -21785,7 +22079,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -22032,7 +22327,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -22047,7 +22343,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -23251,7 +23548,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -23363,7 +23662,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -23382,7 +23683,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -23487,7 +23790,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -23506,7 +23811,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -23611,7 +23918,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -23630,7 +23939,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -23738,7 +24049,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -23769,7 +24081,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -23871,7 +24184,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -23894,7 +24208,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24130,7 +24445,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24157,7 +24473,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24256,7 +24573,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24279,7 +24597,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24388,7 +24707,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24431,7 +24751,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24527,7 +24848,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24550,7 +24872,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24651,7 +24974,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24670,7 +24994,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24771,7 +25096,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -24790,7 +25116,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -25398,7 +25725,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25425,7 +25753,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25524,7 +25853,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25539,7 +25869,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25634,7 +25965,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25659,7 +25991,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25754,7 +26087,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25769,7 +26103,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25872,7 +26207,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25891,7 +26227,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -25990,7 +26327,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -26005,7 +26343,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -26124,7 +26463,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26147,7 +26487,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26267,7 +26608,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26290,7 +26632,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26409,7 +26752,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26432,7 +26776,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26551,7 +26896,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26574,7 +26920,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26683,7 +27030,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26702,7 +27050,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26812,7 +27161,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26835,7 +27185,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26959,7 +27310,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -26982,7 +27334,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -27102,7 +27455,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -27125,7 +27479,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -27235,7 +27590,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           },
           {
             "type": "ballistic",
@@ -27258,7 +27614,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           },
           {
             "type": "ballistic",
@@ -27372,7 +27729,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27391,7 +27749,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27494,7 +27853,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27513,7 +27873,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27616,7 +27977,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27639,7 +28001,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27759,7 +28122,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27774,7 +28138,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27872,7 +28237,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27887,7 +28253,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -27977,7 +28344,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -28016,7 +28384,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -28132,7 +28501,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28151,7 +28521,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28269,7 +28640,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28288,7 +28660,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28401,7 +28774,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28420,7 +28794,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28541,7 +28916,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28556,7 +28932,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28673,7 +29050,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28692,7 +29070,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28814,7 +29193,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28829,7 +29209,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28942,7 +29323,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -28961,7 +29343,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -29078,7 +29461,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29101,7 +29486,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29201,7 +29588,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29220,7 +29609,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29320,7 +29711,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -29343,7 +29735,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -29443,7 +29836,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29470,7 +29865,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29576,7 +29973,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29595,7 +29994,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29700,7 +30101,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29719,7 +30122,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29822,7 +30227,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29841,7 +30248,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29943,7 +30352,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -29962,7 +30373,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30060,7 +30473,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -30079,7 +30493,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -30189,7 +30604,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30208,7 +30625,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30326,7 +30745,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30345,7 +30766,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30467,7 +30890,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30486,7 +30911,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30597,7 +31024,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30620,7 +31049,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30725,7 +31156,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Inductive Claws"
           }
         ]
       },
@@ -30744,7 +31177,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Inductive Claws"
           }
         ]
       },
@@ -30851,7 +31286,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30870,7 +31307,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -30980,7 +31419,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -31003,7 +31444,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -31112,7 +31555,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -31131,7 +31575,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -31244,7 +31689,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31267,7 +31713,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31371,7 +31818,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31386,7 +31834,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31494,7 +31943,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31517,7 +31967,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31640,7 +32091,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31655,7 +32107,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31767,7 +32220,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31782,7 +32236,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -31879,7 +32334,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -31898,7 +32354,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -32004,7 +32461,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -32023,7 +32481,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -32132,7 +32591,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -32147,7 +32607,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -32261,7 +32722,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -32396,7 +32858,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -32415,7 +32878,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -32527,7 +32991,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -32546,7 +33011,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -32658,7 +33124,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -32781,7 +33248,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -32800,7 +33268,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -32912,7 +33381,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -32931,7 +33401,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33043,7 +33514,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33062,7 +33534,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33178,7 +33651,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33197,7 +33671,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33309,7 +33784,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33328,7 +33804,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33441,7 +33918,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33560,7 +34038,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33575,7 +34054,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33679,7 +34159,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -33698,7 +34180,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33802,7 +34285,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -33821,7 +34306,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -33925,7 +34411,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -33944,7 +34432,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -34043,7 +34532,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -34062,7 +34553,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -34170,7 +34662,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -34185,7 +34678,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -34296,7 +34790,13 @@
         "maxArmor": 20.0,
         "structure": 10.0,
         "hasRearArmor": false,
-        "hardpoints": []
+        "hardpoints": [
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
+          }
+        ]
       },
       "rightArm": {
         "maxSlots": 3,
@@ -34314,6 +34814,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -34424,7 +34929,13 @@
         "maxArmor": 20.0,
         "structure": 10.0,
         "hasRearArmor": false,
-        "hardpoints": []
+        "hardpoints": [
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
+          }
+        ]
       },
       "rightArm": {
         "maxSlots": 4,
@@ -34438,6 +34949,11 @@
           {
             "type": "missile",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -34548,7 +35064,13 @@
         "maxArmor": 20.0,
         "structure": 10.0,
         "hasRearArmor": false,
-        "hardpoints": []
+        "hardpoints": [
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
+          }
+        ]
       },
       "rightArm": {
         "maxSlots": 0,
@@ -34562,6 +35084,11 @@
           {
             "type": "ballistic",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -34672,7 +35199,13 @@
         "maxArmor": 20.0,
         "structure": 10.0,
         "hasRearArmor": false,
-        "hardpoints": []
+        "hardpoints": [
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
+          }
+        ]
       },
       "rightArm": {
         "maxSlots": 5,
@@ -34686,6 +35219,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -34801,7 +35339,13 @@
         "maxArmor": 20.0,
         "structure": 10.0,
         "hasRearArmor": false,
-        "hardpoints": []
+        "hardpoints": [
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
+          }
+        ]
       },
       "rightArm": {
         "maxSlots": 3,
@@ -34819,6 +35363,11 @@
           {
             "type": "missile",
             "size": "medium"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -36765,7 +37314,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -36780,7 +37330,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -36884,7 +37435,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -36899,7 +37451,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -37007,7 +37560,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -37022,7 +37576,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -37134,7 +37689,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -37157,7 +37713,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -37283,6 +37840,11 @@
           {
             "type": "energy",
             "size": "medium"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37310,6 +37872,11 @@
           {
             "type": "energy",
             "size": "medium"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37423,6 +37990,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37442,6 +38014,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37558,6 +38135,11 @@
           {
             "type": "energy",
             "size": "medium"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37589,6 +38171,11 @@
           {
             "type": "energy",
             "size": "medium"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37697,6 +38284,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37712,6 +38304,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37817,6 +38414,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37832,6 +38434,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37947,6 +38554,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -37962,6 +38574,11 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -38090,7 +38707,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -38186,7 +38804,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -38205,7 +38824,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -38315,7 +38935,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -38415,7 +39036,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -38434,7 +39056,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -38563,7 +39186,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -38673,7 +39297,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -38692,7 +39317,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -39625,7 +40251,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -39640,7 +40267,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -39752,7 +40380,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -39771,7 +40400,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -39883,7 +40513,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -39902,7 +40533,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -40010,7 +40642,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -40033,7 +40666,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -40141,7 +40775,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -40164,7 +40799,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -40278,7 +40914,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -40301,7 +40938,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -40406,7 +41044,13 @@
         "maxArmor": 40.0,
         "structure": 20.0,
         "hasRearArmor": false,
-        "hardpoints": []
+        "hardpoints": [
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "heavy"
+          }
+        ]
       },
       "rightArm": {
         "maxSlots": 1,
@@ -40416,7 +41060,13 @@
         "maxArmor": 40.0,
         "structure": 20.0,
         "hasRearArmor": false,
-        "hardpoints": []
+        "hardpoints": [
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "heavy"
+          }
+        ]
       },
       "leftLeg": {
         "maxSlots": 2,
@@ -40538,7 +41188,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -40553,7 +41204,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -40657,6 +41309,11 @@
           {
             "type": "missile",
             "size": "medium"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -40676,6 +41333,11 @@
           {
             "type": "missile",
             "size": "medium"
+          },
+          {
+            "type": "melee",
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -40779,7 +41441,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -40794,7 +41457,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -41679,7 +42343,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -41702,7 +42367,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -41812,7 +42478,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -41831,7 +42498,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -41948,7 +42616,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -41967,7 +42636,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -42072,7 +42742,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           },
           {
             "type": "energy",
@@ -42099,7 +42770,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -42215,7 +42887,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -42234,7 +42907,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -42349,7 +43023,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -42368,7 +43043,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -43480,7 +44156,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -43503,7 +44180,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -43606,7 +44284,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -43629,7 +44308,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -43732,7 +44412,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -43755,7 +44436,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -43858,7 +44540,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -43881,7 +44564,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -43984,7 +44668,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -44007,7 +44692,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -44111,7 +44797,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -44134,7 +44821,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -44242,7 +44930,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -44265,7 +44954,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -44372,7 +45062,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -44395,7 +45086,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -44503,7 +45195,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -44526,7 +45219,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -44634,7 +45328,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           },
           {
             "type": "ballistic",
@@ -44657,7 +45352,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           },
           {
             "type": "ballistic",
@@ -45050,7 +45746,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45069,7 +45766,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45187,7 +45885,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45206,7 +45905,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45320,7 +46020,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45343,7 +46044,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45453,7 +46155,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45472,7 +46175,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45600,7 +46304,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45619,7 +46324,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45737,7 +46443,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45756,7 +46463,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -45876,7 +46584,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -45895,7 +46604,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46002,7 +46712,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46029,7 +46740,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46123,7 +46835,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46142,7 +46855,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46240,7 +46954,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46263,7 +46978,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46367,7 +47083,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46386,7 +47103,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46494,7 +47212,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46517,7 +47236,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -46617,7 +47337,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -46644,7 +47365,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -46758,7 +47480,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -46856,7 +47579,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -46875,7 +47599,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -46987,7 +47712,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -47079,7 +47805,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -47106,7 +47833,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -47227,7 +47955,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -47262,7 +47991,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -47365,7 +48095,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -47388,7 +48119,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -47483,7 +48215,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -47506,7 +48239,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -47609,7 +48343,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -47632,7 +48367,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -47727,7 +48463,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -47742,7 +48479,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -47960,7 +48698,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -47983,7 +48722,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -48667,7 +49407,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -48789,7 +49530,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -48908,7 +49650,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -49125,7 +49868,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -49164,7 +49908,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -49293,7 +50038,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -49320,7 +50066,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -49432,7 +50179,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -49451,7 +50199,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -49564,7 +50313,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -49583,7 +50333,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -49691,7 +50442,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -49710,7 +50462,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -49813,7 +50566,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -49836,7 +50590,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -49944,7 +50699,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -49967,7 +50723,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -50073,7 +50830,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -50096,7 +50854,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -50203,7 +50962,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -50226,7 +50986,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -50319,7 +51080,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -50342,7 +51104,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -50439,7 +51202,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -50458,7 +51222,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -50555,7 +51320,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -50574,7 +51340,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -50675,7 +51442,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -50694,7 +51462,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -50805,7 +51574,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -50832,7 +51602,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -50929,7 +51700,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -50952,7 +51724,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51049,7 +51822,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51076,7 +51850,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51176,7 +51951,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51203,7 +51979,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51301,7 +52078,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51324,7 +52102,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51430,7 +52209,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51457,7 +52237,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51562,7 +52343,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51585,7 +52367,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51689,7 +52472,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51716,7 +52500,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -51834,7 +52619,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -51853,7 +52639,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -51971,7 +52758,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -51990,7 +52778,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52105,7 +52894,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52124,7 +52914,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52246,7 +53037,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52265,7 +53057,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52387,7 +53180,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52406,7 +53200,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52524,7 +53319,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52539,7 +53335,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52654,7 +53451,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52673,7 +53471,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52787,7 +53586,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -52802,7 +53602,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -54560,7 +55361,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -54575,7 +55377,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -54673,7 +55476,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -54688,7 +55492,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -54794,7 +55599,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -54809,7 +55615,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -54910,7 +55717,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -54933,7 +55741,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -55021,7 +55830,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -55060,7 +55870,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -55257,7 +56068,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -55361,7 +56173,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -55376,7 +56189,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -55471,7 +56285,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -55490,7 +56305,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -55594,7 +56410,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -55617,7 +56434,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -55714,7 +56532,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -55733,7 +56552,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -55834,7 +56654,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -55853,7 +56674,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -55954,7 +56776,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -55969,7 +56792,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -56084,7 +56908,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -56107,7 +56932,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -56216,7 +57042,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -56239,7 +57066,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -56678,7 +57506,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -56926,7 +57755,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -56945,7 +57775,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -57064,7 +57895,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57083,7 +57916,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57202,7 +58037,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57221,7 +58058,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57331,7 +58170,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57350,7 +58191,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57455,7 +58298,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57470,7 +58315,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57577,7 +58424,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57596,7 +58445,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57706,7 +58557,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57725,7 +58578,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57843,7 +58698,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57866,7 +58723,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -57986,7 +58845,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58005,7 +58865,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58125,7 +58986,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58144,7 +59006,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58255,7 +59118,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58274,7 +59138,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58397,7 +59262,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58412,7 +59278,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58536,7 +59403,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58555,7 +59423,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -58659,7 +59528,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -58682,7 +59552,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -58777,7 +59648,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -58800,7 +59672,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -58913,7 +59786,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -58936,7 +59810,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -59039,7 +59914,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -59062,7 +59938,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -59166,7 +60043,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -59181,7 +60059,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -59276,7 +60155,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -59291,7 +60171,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -60061,7 +60942,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -60080,7 +60963,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium",
+            "defaultWeapon": "Battle Fist"
           }
         ]
       },
@@ -60791,7 +61676,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -60814,7 +61700,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -60913,7 +61800,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -60936,7 +61824,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61041,7 +61930,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61064,7 +61954,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61167,7 +62058,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61190,7 +62082,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61288,7 +62181,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61307,7 +62201,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61415,7 +62310,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61438,7 +62334,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61557,7 +62454,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61580,7 +62478,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -61706,7 +62605,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -61725,7 +62625,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -61839,7 +62740,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -61858,7 +62760,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -61967,7 +62870,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -61986,7 +62890,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -62096,7 +63001,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -62115,7 +63021,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -62233,7 +63140,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -62252,7 +63160,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -62361,7 +63270,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -62380,7 +63290,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -62498,7 +63409,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           },
           {
             "type": "energy",
@@ -62525,7 +63437,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           },
           {
             "type": "energy",
@@ -62631,7 +63544,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           },
           {
             "type": "energy",
@@ -62662,7 +63576,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -63419,7 +64334,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -63438,7 +64354,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -63546,7 +64463,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -63565,7 +64483,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -63681,7 +64600,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -63700,7 +64620,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -63820,7 +64741,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -63843,7 +64765,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -63954,7 +64877,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -63969,7 +64893,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           },
           {
             "type": "ballistic",
@@ -64077,7 +65002,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64096,7 +65022,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64200,7 +65127,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64219,7 +65147,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64327,7 +65256,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64346,7 +65276,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64454,7 +65385,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64473,7 +65405,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64581,7 +65514,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64600,7 +65534,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64712,7 +65647,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64731,7 +65667,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64859,7 +65796,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64959,7 +65897,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -64978,7 +65917,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -65105,7 +66045,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -65128,7 +66069,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -65228,7 +66170,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -65251,7 +66194,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -65379,7 +66323,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -65636,7 +66581,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -65759,7 +66705,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -65882,7 +66829,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -65901,7 +66849,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66005,7 +66954,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66128,7 +67078,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66261,7 +67212,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66393,7 +67345,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66412,7 +67365,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66520,7 +67474,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66646,7 +67601,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66661,7 +67617,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66769,7 +67726,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66796,7 +67754,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66899,7 +67858,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -66922,7 +67882,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -67024,7 +67985,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -67043,7 +68005,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -67155,7 +68118,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67174,7 +68138,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67290,7 +68255,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67309,7 +68275,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67433,7 +68400,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67452,7 +68420,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67576,7 +68545,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67595,7 +68565,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67719,7 +68690,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67738,7 +68710,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67862,7 +68835,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67881,7 +68855,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -67985,7 +68960,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -68004,7 +68980,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -68107,7 +69084,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -68126,7 +69104,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -68233,7 +69212,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -68252,7 +69232,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -68359,7 +69340,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -68378,7 +69360,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -68487,7 +69470,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "light"
           }
         ]
       },
@@ -68506,7 +69490,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "light"
           }
         ]
       },
@@ -68606,7 +69591,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -68633,7 +69619,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -68738,7 +69725,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -68761,7 +69749,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -68862,7 +69851,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "large",
+            "weightClass": "medium"
           }
         ]
       },
@@ -68881,7 +69871,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -68986,7 +69977,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -69005,7 +69997,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -69110,7 +70103,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -69129,7 +70123,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -69236,7 +70231,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -69267,7 +70263,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "medium"
           }
         ]
       },
@@ -69391,7 +70388,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -69410,7 +70408,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -69534,7 +70533,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -69553,7 +70553,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "heavy"
           }
         ]
       },
@@ -69661,7 +70662,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -69680,7 +70682,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -69788,7 +70792,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -69807,7 +70812,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -69915,7 +70922,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -69934,7 +70942,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -70042,7 +71052,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -70061,7 +71072,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -70169,7 +71182,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -70188,7 +71202,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },
@@ -70290,7 +71306,8 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           },
           {
             "type": "ballistic",
@@ -70309,7 +71326,9 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           },
           {
             "type": "missile",
@@ -70435,7 +71454,8 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "small",
+            "weightClass": "assault"
           }
         ]
       },
@@ -70458,7 +71478,9 @@
           },
           {
             "type": "melee",
-            "size": "medium"
+            "size": "medium",
+            "weightClass": "assault",
+            "defaultWeapon": "Barrel Fist"
           }
         ]
       },

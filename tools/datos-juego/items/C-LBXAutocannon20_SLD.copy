@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="C-LBXAutocannon20_SLD"
+   StatsData=(DEPRECATED_CBillBaseValue=1200000,CBillBaseValueBigInt=(Value=1200000),Projectile=(NumberOfProjectiles=1,Damage=20.000000,Speed=50000.000000,GravityScale=0.392000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=300.000000,FireSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_LBX20_Slug_Fire.SFX_Wpn_LBX20_Slug_Fire,FireReloadSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_LBX20_Reload.SFX_Wpn_LBX20_Reload,ProjectileFlightSound=/Game/Audio/Events/Weapons/Ballistics/Ballistic_Projectile.Ballistic_Projectile,Class=/Game/Objects/Projectiles/AC20/Projectile_AC20.Projectile_AC20_C,ExplosionClass=/Game/Objects/Projectiles/_common/Shockwave_Large.Shockwave_Large_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_assault.single_recoil_assault_C,HeatGenerated=5.000000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=75.000000,BrushStrength=1.000000)),Cooldown=3.840000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Projectile_Loop.Cooldown_Projectile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Projectile.Cooldown_Complete_Projectile,Range=(OptimalRange=36000.000000,MaxRange=36000.000000),AmmoType=(TagName="Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=540,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=1620,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="C-LBXAutocannon20_SolidSlug")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.225000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   TechLevel=6
+   Name=NSLOCTEXT("[F33225324D9DD1B44D5C9EA70E3A5A41]", "BBE524194AF2DEAF3589ADBFEB1B933D", "C-LB 20-X Autocannon Solid Slug")
+   ShortName=NSLOCTEXT("[F33225324D9DD1B44D5C9EA70E3A5A41]", "149642C7442B0BF0F84B5DB0E8FE02D3", "C-LB 20-X AC SLD")
+   Manufacturer="Strana Mechty MechWorks"
+   WeaponType=(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX20.SolidSlug.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=12.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Ballistic_Large_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=2300.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=3.000000,RemoveTimeInDays=3.000000,RepairTimeInDays=3.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_LBX20_512_UIX.Clan_LBX20_512_UIX
+   SalvageShareCost=15
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_LBX20_Market_STM.Clan_LBX20_Market_STM
+   Description=NSLOCTEXT("[F33225324D9DD1B44D5C9EA70E3A5A41]", "184D10F646852DD603452C9C79E8FE0B", "Ballistic weapon that fires a solid slug round at short range and heavy damage.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.250000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.125000,FeedbackDuration=0.100000,bUseSmallMotors=True)
+End Object

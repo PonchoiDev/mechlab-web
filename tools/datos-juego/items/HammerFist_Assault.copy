@@ -1,0 +1,28 @@
+Begin Object Class=/Script/MechWarrior.MWMeleeWeaponDataAsset Name="HammerFist_Assault"
+   StatsData=(DEPRECATED_CBillBaseValue=15000,CBillBaseValueBigInt=(Value=15000),Cooldown=3.050000,Melee=(Damage=25.000000,Duration=1.750000,ActivationTime=0.700000,Impulse=1250000.000000,MeleePriority=10,MeleeStrikeAsset=/Game/Objects/Projectiles/Melee/MechMeleeStrike_A_Punch.MechMeleeStrike_A_Punch_C,FireSound=/Game/Audio/Events/Weapons/Melee/A_Punch/Melee_ArmSwing.Melee_ArmSwing,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000)),Ranges=(OptimalRange=1750.000000,MaxRange=1750.000000))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="Assault_Hammerfist")
+   BuildingDamageModifier=5.000000
+   TechLevel=1
+   Name=NSLOCTEXT("[D800906040742CEA53188199DC7FF95D]", "24DC82E64AEE0C99D8F7559347304767", "Assault Hammerfist")
+   ShortName=NSLOCTEXT("[D800906040742CEA53188199DC7FF95D]", "EFE0394A4617FD319C6ECE9142F401FC", "Assault Hammerfist")
+   Manufacturer="FerroSteel"
+   WeaponType=(TagName="Weapon.Melee.Assault.Punch")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=2.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:MeleeLowerArmActuatorAssault_SlotType")
+   WeaponSlotTypeRestrictionList(0)=(Id="MWSlotTypeDataAsset:MeleeLowerArmActuatorAssault_SlotType")
+   WeaponSlotTypeRestrictionList(1)=(Id="MWSlotTypeDataAsset:MeleeBarrelFistActuatorAssault_SlotType")
+   WeaponDisplayColour=(R=1.000000,G=0.850000,B=0.000000,A=1.000000)
+   Image=/Game/UI/Textures/Marketplace_Weapons/Melee_HammerFist_512_UIX.Melee_HammerFist_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Melee.WeaponEmitter_Melee_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   UIXWeapon3DModel=/Game/DLC3/Objects/Marketplace/Weapons/Model/HammerFist_Assault_Market_STM.HammerFist_Assault_Market_STM
+   Description=NSLOCTEXT("", "3A50C534444BB0DC2D528EA9859B703F", "Reinforced assault \'Mech arm actuators for enhanced melee capabilities.")
+   AssociatedDLC=(TagName="DLC.DLC3")
+   OnImpactForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.020000,FeedbackDuration=0.200000,bUseLargeMotors=True)
+End Object

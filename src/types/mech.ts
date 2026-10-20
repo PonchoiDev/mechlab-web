@@ -1,8 +1,10 @@
-import type { Item, ItemSize, WeaponType } from './item';
+import type { Item, ItemSize, WeaponType, WeightClass } from './item';
 
 export interface Hardpoint {
   type: WeaponType;
   size: ItemSize;
+  weightClass?: WeightClass;
+  defaultWeapon?: string;
 }
 
 export interface ComponentData {

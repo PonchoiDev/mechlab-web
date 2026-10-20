@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
-  getItemAmmoFamily,
-  getItemAmmoFamilyLabel,
-  getItemAmmoType,
+  getAmmoLabel,
+  getSizeLabel,
+  getSlotsLabel,
   getItemSupportedSlotTypes,
   getItemWeaponType,
   isAmmoCompatibleWithWeapon,
@@ -54,7 +54,7 @@ describe('getItemSupportedSlotTypes', () => {
   });
 });
 
-describe('getItemWeaponType y getItemAmmoType', () => {
+describe('getItemWeaponType', () => {
   it('devuelve el tipo de arma declarado', () => {
     expect(getItemWeaponType(getItem('MediumLaser'))).toBe('energy');
     expect(getItemWeaponType(getItem('Autocannon20'))).toBe('ballistic');
@@ -65,81 +65,49 @@ describe('getItemWeaponType y getItemAmmoType', () => {
   it('trata el AMS como ams aunque el dato diga otra cosa', () => {
     expect(getItemWeaponType(getItem('AntiMissileSystem'))).toBe('ams');
     expect(getItemWeaponType(makeItem({ id: 'AntiMissileSystem_Lvl2', weaponType: 'ballistic' }))).toBe('ams');
-    expect(getItemAmmoType(makeItem({ id: 'AMS_AmmoEquipment', weaponType: 'ballistic' }))).toBe('ams');
   });
 
   it('devuelve null para equipo sin tipo de arma', () => {
     expect(getItemWeaponType(getItem('SingleHeatSink'))).toBeNull();
-    expect(getItemAmmoType(getItem('SingleHeatSink'))).toBeNull();
   });
 });
 
-describe('getItemAmmoFamily', () => {
-  it.each([
-    ['AC20_Standard_AmmoEquipment', 'ac20'],
-    ['AC20_Standard_Half_AmmoEquipment', 'ac20'],
-    ['AC10_LBX_AmmoEquipment', 'lbx-ac10'],
-    ['AC5_Ultra_AmmoEquipment', 'ultra-ac5'],
-    ['LRM_Artemis_AmmoEquipment', 'lrm-artemis'],
-    ['SRM_Streak_AmmoEquipment', 'streak-srm'],
-    ['AMS_AmmoEquipment', 'ams']
-  ])('la munición %s pertenece a la familia %s', (id, family) => {
-    expect(getItemAmmoFamily(getItem(id))).toBe(family);
-  });
-
-  it.each([
-    ['Autocannon2', 'ac2'],
-    ['Autocannon20', 'ac20'],
-    ['Autocannon20_Burst', 'ac20'],
-    ['LBXAutocannon10_SolidSlug', 'lbx-ac10'],
-    ['UltraAutocannon5', 'ultra-ac5'],
-    ['LRM10', 'lrm'],
-    ['LRM10_Artemis', 'lrm-artemis'],
-    ['LRM10_Artemis_Stream', 'lrm-artemis'],
-    ['SRM6_Artemis', 'srm-artemis'],
-    ['StreakSRM2', 'streak-srm'],
-    ['AntiMissileSystem', 'ams']
-  ])('el arma %s pertenece a la familia %s', (id, family) => {
-    expect(getItemAmmoFamily(getItem(id))).toBe(family);
-  });
-
-  it('devuelve null para armas sin munición', () => {
-    expect(getItemAmmoFamily(getItem('MediumLaser'))).toBeNull();
-    expect(getItemAmmoFamily(getItem('PPC'))).toBeNull();
-  });
-
-  it('asigna familia a toda la munición de items.json', () => {
-    const ammoWithoutFamily = allItems
-      .filter(item => item.type === 'ammo' && getItemAmmoFamily(item) === null)
-      .map(item => item.id);
-    expect(ammoWithoutFamily).toEqual([]);
-  });
-});
-
-describe('getItemAmmoFamilyLabel', () => {
-  it('usa la etiqueta de la familia o el nombre del item', () => {
-    expect(getItemAmmoFamilyLabel(getItem('AC20_Standard_Half_AmmoEquipment'))).toBe('AC/20');
-    expect(getItemAmmoFamilyLabel(getItem('LRM_Artemis_AmmoEquipment'))).toBe('LRM Artemis');
-    expect(getItemAmmoFamilyLabel(getItem('MediumLaser'))).toBe('Medium Laser');
+describe('getAmmoLabel', () => {
+  it('quita "Ammo" y "Half Ammo" del nombre de la munición', () => {
+    expect(getAmmoLabel(getItem('AC20_Standard_AmmoEquipment'))).toBe('AC/20');
+    expect(getAmmoLabel(getItem('AC20_Standard_Half_AmmoEquipment'))).toBe('AC/20');
+    expect(getAmmoLabel(getItem('LRM_Artemis_AmmoEquipment'))).toBe('LRM Artemis');
+    expect(getAmmoLabel(getItem('LBX20_AmmoEquipment'))).toBe('LB 20-X AC');
   });
 });
 
 describe('isAmmoCompatibleWithWeapon', () => {
-  it('acepta munición de la misma familia', () => {
+  it('acepta munición con el mismo tipo de munición que el arma', () => {
     expect(isAmmoCompatibleWithWeapon(getItem('AC20_Standard_AmmoEquipment'), getItem('Autocannon20_Burst'))).toBe(true);
     expect(isAmmoCompatibleWithWeapon(getItem('LRM_Artemis_AmmoEquipment'), getItem('LRM10_Artemis'))).toBe(true);
     expect(isAmmoCompatibleWithWeapon(getItem('AMS_AmmoEquipment'), getItem('AntiMissileSystem'))).toBe(true);
+    expect(isAmmoCompatibleWithWeapon(getItem('LRM_AmmoEquipment'), getItem('LRM20_Hotloaded'))).toBe(true);
+    expect(isAmmoCompatibleWithWeapon(getItem('HeavyGauss_AmmoEquipment'), getItem('HeavyGaussRifle'))).toBe(true);
   });
 
-  it('rechaza munición de otra familia', () => {
+  it('rechaza munición de otro tipo', () => {
     expect(isAmmoCompatibleWithWeapon(getItem('AC20_Standard_AmmoEquipment'), getItem('Autocannon2'))).toBe(false);
     expect(isAmmoCompatibleWithWeapon(getItem('LRM_AmmoEquipment'), getItem('LRM10_Artemis'))).toBe(false);
     expect(isAmmoCompatibleWithWeapon(getItem('SRM_AmmoEquipment'), getItem('StreakSRM2'))).toBe(false);
+    expect(isAmmoCompatibleWithWeapon(getItem('LRM_AmmoEquipment'), getItem('C-LRM20'))).toBe(false);
+  });
+
+  it('rechaza armas que no usan munición', () => {
+    expect(isAmmoCompatibleWithWeapon(getItem('AC20_Standard_AmmoEquipment'), getItem('MediumLaser'))).toBe(false);
   });
 
   it('rechaza combinaciones que no son munición y arma', () => {
     expect(isAmmoCompatibleWithWeapon(getItem('Autocannon20'), getItem('Autocannon20'))).toBe(false);
     expect(isAmmoCompatibleWithWeapon(getItem('AC20_Standard_AmmoEquipment'), getItem('AC20_Standard_AmmoEquipment'))).toBe(false);
+  });
+
+  it('toda la munición de items.json tiene tipo de munición', () => {
+    expect(allItems.filter(item => item.type === 'ammo' && !item.ammoType).map(item => item.id)).toEqual([]);
   });
 
   it('toda la munición de items.json sirve para al menos un arma', () => {
@@ -179,12 +147,13 @@ describe('getHardpointOccupancy', () => {
     expect(weaponAssignments.size).toBe(0);
   });
 
-  it('ignora el tamaño en anclajes cuerpo a cuerpo', () => {
+  it('coloca las armas cuerpo a cuerpo en un anclaje de su clase y tamaño', () => {
     const { weaponAssignments } = getHardpointOccupancy(
-      [{ type: 'melee', size: 'medium' }],
-      [getItem('Greatsword_Assault')]
+      [{ type: 'melee', size: 'medium', weightClass: 'assault' }, { type: 'melee', size: 'large', weightClass: 'assault' }],
+      [getItem('Knuckles_Assault'), getItem('Greatsword_Assault')]
     );
-    expect(weaponAssignments.get(0)?.id).toBe('Greatsword_Assault');
+    expect(weaponAssignments.get(0)?.id).toBe('Knuckles_Assault');
+    expect(weaponAssignments.get(1)?.id).toBe('Greatsword_Assault');
   });
 
   it('no ocupa anclajes con equipo ni munición', () => {
@@ -204,5 +173,18 @@ describe('getSlotTypeLabel', () => {
 
   it('genera una etiqueta legible para ranuras desconocidas', () => {
     expect(getSlotTypeLabel('Custom_Module_SlotType')).toBe('Custom Module');
+  });
+});
+
+describe('etiquetas de inventario', () => {
+  it('muestra el tamaño con la letra de los anclajes', () => {
+    expect(getSizeLabel(getItem('SmallLaser'))).toBe('S');
+    expect(getSizeLabel(getItem('MediumLaser'))).toBe('M');
+    expect(getSizeLabel(getItem('LargeLaser'))).toBe('L');
+  });
+
+  it('escribe los slots en singular o plural', () => {
+    expect(getSlotsLabel(getItem('SingleHeatSink'))).toBe('1 slot');
+    expect(getSlotsLabel(getItem('DoubleHeatSink'))).toBe('3 slots');
   });
 });

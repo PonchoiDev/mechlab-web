@@ -1,0 +1,32 @@
+Begin Object Class=/Script/MechWarrior.MWProjectileWeaponDataAsset Name="LightGaussRifle_Lvl0"
+   StatsData=(DEPRECATED_CBillBaseValue=275000,CBillBaseValueBigInt=(Value=275000),Projectile=(NumberOfTimesToFire=1,NumberOfProjectiles=1,bSpreadProjectileSingleBulletAlignment=True,Damage=8.000000,Speed=220000.000000,GravityScale=0.300000,WorldDamage=1.000000,WorldDamageRadius=500.000000,Impulse=300.000000,FireSound=/Game/Audio/Events/Weapons/Ballistics/Light_Gauss_Fire.Light_Gauss_Fire,FireReloadSound=/Game/Audio/Events/Weapons/CoolDown/Gauss_Cool.Gauss_Cool,ProjectileFlightSound=/Game/Audio/Events/Clan_Weapons/Ballistic/SFX_Wpn_Gauss_Projectile.SFX_Wpn_Gauss_Projectile,Class=/Game/DLC9/Objects/Weapons/LightGauss/Projectile_Gauss_Light.Projectile_Gauss_Light_C,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_medium.single_recoil_medium_C,HeatGenerated=1.000000),Cooldown=3.000000,Range=(OptimalRange=51000.000000,MaxRange=75000.000000),AmmoType=(TagName="Ammo.Ballistic.Gauss.Light"))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="LightGaussRifle",Table=DataTable'"/Game/DLC9/Objects/Weapons/DLC9_ProjectileWeaponStats.DLC9_ProjectileWeaponStats"')
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=-0.500000)))
+   Name=NSLOCTEXT("[57D851514417E37D610DA29E561DEAEE]", "A2D1330547801D2908828B817CBE71F7", "Light Gauss Rifle")
+   ShortName=NSLOCTEXT("[57D851514417E37D610DA29E561DEAEE]", "1FF1C4964D23A1E83308EE958D9C5851", "Light Gauss")
+   Manufacturer="Michaelson Heavy Industries"
+   WeaponType=(TagName="Weapon.Ballistic.GaussRifle.LightGauss")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=12.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Ballistic_Medium_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.309469,G=0.219526,B=0.479320,A=1.000000)
+   IntroDate=3056.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=4.000000,RemoveTimeInDays=4.000000,RepairTimeInDays=4.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=8.000000
+   Image=/Game/UI/Textures/Marketplace_Weapons/Gauss_512_UIX.Gauss_512_UIX
+   SalvageShareCost=1
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Projectile.WeaponEmitter_Projectile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/Objects/Marketplace/weapons/Model/Weapon_Gauss_Market_STM.Weapon_Gauss_Market_STM
+   Description=NSLOCTEXT("[57D851514417E37D610DA29E561DEAEE]", "6E817F3549A1C182BA937D8FF15433C7", "A lighter, smaller version of the Gauss Rifle with extreme range, higher velocity, and moderate damage")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.300000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.150000,FeedbackDuration=0.100000,bUseLargeMotors=True)
+End Object

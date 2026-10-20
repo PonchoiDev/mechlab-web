@@ -908,6 +908,33 @@
 .tier-pip.is-filled { background-color: var(--tier-color); }
 .tier-pip.is-selected { border-color: #fff; }
 
+.hardpoint.has-built-in:not(.is-occupied) {
+  border-style: dashed;
+  border-color: #fff;
+}
+
+.equipped-item.is-built-in {
+  border-left-style: dashed;
+  background-color: transparent;
+  color: #ccc;
+  font-style: italic;
+}
+
+.built-in-tag {
+  padding: 1px 5px;
+  border: 1px solid var(--weapon-color);
+  border-radius: 3px;
+  color: var(--weapon-color);
+  font: 600 9px var(--work-mono);
+  font-style: normal;
+  letter-spacing: 0.05em;
+}
+
+.preview-equipped-item.is-built-in {
+  font-style: italic;
+  opacity: 0.8;
+}
+
 .remove-item {
   border: none;
   background: none;

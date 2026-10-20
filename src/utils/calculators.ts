@@ -1,6 +1,6 @@
 import type { Item } from '../types/item';
 import type { ArmorState, Loadout, Mech, MechComponents, Zone } from '../types/mech';
-import { getItemAmmoFamily, getItemAmmoFamilyLabel, isJumpJet } from './items';
+import { getAmmoLabel, isJumpJet } from './items';
 import { mapZones } from './zones';
 
 const ARMOR_POINTS_PER_TON = 32;
@@ -25,20 +25,12 @@ const getEquippedItems = (loadout: Loadout): Item[] => Object.values(loadout).fl
 const getTierStats = (item: Item) =>
   item.tiers?.[item.tier ?? '1'] ?? item.tiers?.['1'];
 
-const getMissileCount = (item: Item): number => {
-  const missileRack = item.type === 'weapon' && item.weaponType === 'missile'
-    ? item.id.match(/^(?:LRM|StreakSRM|SRM)(\d+)/)
-    : null;
-
-  return Number(missileRack?.[1] ?? 1);
-};
-
 const getWeaponDamage = (item: Item): number =>
-  (getTierStats(item)?.damage ?? item.damage ?? 0) * getMissileCount(item);
+  (getTierStats(item)?.damage ?? item.damage ?? 0) * (item.volleyProjectiles ?? 1);
 
 const getWeaponHeat = (item: Item): number => {
   const stats = getTierStats(item);
-  return (stats?.heatPerShot ?? stats?.heat ?? item.heat ?? 0) * getMissileCount(item);
+  return (stats?.heatPerShot ?? stats?.heat ?? item.heat ?? 0) * (item.volleyHeatShots ?? 1);
 };
 
 export interface WeaponPerformance {
@@ -156,7 +148,7 @@ export const calculateHeatSpike = (loadout: Loadout): number =>
   roundTo(sumBy(getWeaponPerformance(loadout), weapon => weapon.heat), 1);
 
 export interface AmmunitionGroup {
-  family: string;
+  ammoType: string;
   label: string;
   capacity: number;
   bins: number;
@@ -166,11 +158,11 @@ export const groupAmmunition = (loadout: Loadout): AmmunitionGroup[] => {
   const groups = new Map<string, AmmunitionGroup>();
 
   for (const item of getEquippedItems(loadout).filter(equippedItem => equippedItem.type === 'ammo')) {
-    const family = getItemAmmoFamily(item) ?? item.id;
-    const group = groups.get(family) ?? { family, label: getItemAmmoFamilyLabel(item), capacity: 0, bins: 0 };
+    const ammoType = item.ammoType ?? item.id;
+    const group = groups.get(ammoType) ?? { ammoType, label: getAmmoLabel(item), capacity: 0, bins: 0 };
     group.capacity += item.capacity ?? 0;
     group.bins += 1;
-    groups.set(family, group);
+    groups.set(ammoType, group);
   }
 
   return [...groups.values()];

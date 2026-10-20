@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWMissileWeaponDataAsset Name="ArrowIV_Vehicle_Lvl2"
+   StatsData=(DEPRECATED_CBillBaseValue=1200000,MissileStats=(NumberOfMissiles=1,Projectile=(Damage=0.100000,Speed=15000.000000,WorldDamage=20.000000,WorldDamageRadius=3000.000000,Impulse=1000.000000,FireSound=/Game/Audio/Events/Clan_Weapons/Missiles/SFX_Wpn_Missiles_LRM_Common_Fire.SFX_Wpn_Missiles_LRM_Common_Fire,ProjectileFlightSound=/Game/Audio/Events/Clan_Weapons/Missiles/SFX_Wpn_Missiles_LRM_5_Projectile.SFX_Wpn_Missiles_LRM_5_Projectile,Class=/Game/DLC8/Objects/Projectiles/ArrowIV/Projectile_Arrow.Projectile_Arrow_C,ExplosionClass=/Game/DLC8/Objects/Projectiles/ArrowIV/Arrow_Explosion.Arrow_Explosion_C,CachedExplosionDamageDisplay=20.000000,CameraShake=/Game/Objects/Weapons/_common/Shake/single_recoil_verylight.single_recoil_verylight_C,HeatGenerated=20.000000,DamagePaintStats=(ApplyDamageGlow=False,BrushRadius=100.000000,BrushStrength=1.500000))),Cooldown=10.000000,CooldownLoopEvent=/Game/Audio/Events/Cockpit/Cooldown_Missile_Loop.Cooldown_Missile_Loop,CooldownCompleteEvent=/Game/Audio/Events/Weapons/CoolDown/Cooldown_Complete_Missile.Cooldown_Complete_Missile,Range=(NullRange=18000.000000,MinRange=18000.000000,OptimalRange=450000.000000,MaxRange=450000.000000),AmmoType=(TagName="Ammo.Missile.ArrowIV"),MissileTurnRate=400.000000,LongRangeMissileRadius=500.000000,MWO_RangeData=(Ranges=((InterpolationType="step"),(Distance=180,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=900,DamageMultiplier=1.000000,InterpolationType="linear"))))
+   Stats=(KeyName="C-ArrowIV")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.060000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=0.250000)))
+   MissilePath=/Game/DLC8/Objects/Weapons/ArrowIV/ArrowIVMissilePath.ArrowIVMissilePath_C
+   bCanFireOutsideMaxRange=True
+   TechLevel=2
+   FieldRefitGroup=(TagName="UnitType.Vehicle.Tracked.Tank")
+   Name=NSLOCTEXT("[65E490814F44DD5644B117A02F063B8A]", "FFFC61C34E155A97DAD100B9EA0BA359", "Arrow IV")
+   ShortName=NSLOCTEXT("[65E490814F44DD5644B117A02F063B8A]", "FA272FB440E16C5F1EBD6999151B0197", "Arrow IV")
+   WeaponType=(TagName="Weapon.Artillery.ArrowIV")
+   TechBase=(TagName="TechBase.InnerSphere")
+   Tonnage=12.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:ArtilleryMissile_SlotType")
+   WeaponSize=Large
+   WeaponDisplayColour=(R=0.327778,G=0.708376,B=0.177888,A=1.000000)
+   IntroDate=3040.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC8/UI/Textures/marketplace_weapons/ArrowIV_512_UIX.ArrowIV_512_UIX
+   bNonSalvageable=True
+   SalvageShareCost=7
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Missile.WeaponEmitter_Missile_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC8/Objects/Marketplace/clanweapons/Model/Weapon_ArrowIV_Market_STM.Weapon_ArrowIV_Market_STM
+   Description=NSLOCTEXT("[65E490814F44DD5644B117A02F063B8A]", "22D021334A41F6FEAD77F48F18A6DFDB", "Artillery missile with extreme range. Has a large blast radius.")
+   AssociatedDLC=(TagName="DLC.DLC8")
+   OnImpactForceFeedback=(FeedbackIntensity=0.012500,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.011750,FeedbackDuration=0.020000,bUseSmallMotors=True)
+End Object

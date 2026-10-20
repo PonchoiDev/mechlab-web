@@ -1,0 +1,35 @@
+Begin Object Class=/Script/MechWarrior.MWTraceWeaponDataAsset Name="C-HeavyMediumLaser"
+   StatsData=(DEPRECATED_CBillBaseValue=200000,CBillBaseValueBigInt=(Value=200000),Cooldown=4.750000,Trace=(DamageOverDuration=10.000000,HeatGeneratedOverDuration=8.000000,Duration=1.200000,RayAsset=/Game/Objects/Projectiles/MediumLaser/Ray_HeavyMediumLaser.Ray_HeavyMediumLaser_C,FireSound=/Game/Audio/Events/Clan_Weapons/Energy/HeavyLaser_Medium_Fire.HeavyLaser_Medium_Fire,TraceBypassSound=/Game/Audio/Events/Clan_Weapons/Energy/Heavy_Medium_Laser_Beam.Heavy_Medium_Laser_Beam,DamagePaintStats=(BrushRadius=35.000000,BrushStrength=0.400000)),Ranges=(OptimalRange=27000.000000,MaxRange=54000.000000),MWO_RangeData=(Ranges=((DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=150,DamageMultiplier=1.000000,InterpolationType="linear"),(Distance=300,InterpolationType="linear"))))
+   bReadFromTableOnSave=True
+   Stats=(KeyName="C-HeavyMediumLaser")
+   QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.300000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CBillValuePercentage_Quirk.CBillValuePercentage_Quirk_C"',Value=2.500000)))
+   bHasDamageFalloff=True
+   DamageScaleAtMaxRange=0.200000
+   BuildingDamageModifier=1.500000
+   TechLevel=6
+   Name=NSLOCTEXT("[28EA3C3B481D3B804746E29785787A9C]", "AC767CF0440A683E9F28C586CF82FFB1", "Clan Heavy Medium Laser")
+   ShortName=NSLOCTEXT("[28EA3C3B481D3B804746E29785787A9C]", "F13987A4446B364C066DEEAA23D678BD", "C-H M Laser")
+   Manufacturer="Strana Mechty MechWorks"
+   WeaponType=(TagName="Weapon.Energy.Laser.Heavy.Medium.Clan")
+   TechBase=(TagName="TechBase.Clan")
+   Tonnage=1.000000
+   WeaponSlotTypeAssetId=(Id="MWSlotTypeDataAsset:Energy_Medium_SlotType")
+   WeaponSize=Medium
+   WeaponDisplayColour=(R=0.033105,G=0.226966,B=1.000000,A=1.000000)
+   IntroDate=3059.01.01-00.00.00
+   RefitCosts=(InstallTimeInDays=2.000000,RemoveTimeInDays=2.000000,RepairTimeInDays=2.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   DamageChance=0.150000
+   Image=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Laser_ER_S_512_UIX.Clan_Laser_ER_S_512_UIX
+   SalvageShareCost=4
+   SalvageChance=0.900000
+   bMechEquippable=True
+   EmitterClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponEmitter_Trace.WeaponEmitter_Trace_C
+   CooldownClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponCooldownComponent.WeaponCooldownComponent_C
+   JammingClass=/Game/Objects/Weapons/_common/WeaponComponents/WeaponJammingComponent.WeaponJammingComponent_C
+   UIXWeapon3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Laser_ER_S_Market_STM.Clan_Laser_ER_S_Market_STM
+   Description=NSLOCTEXT("[28EA3C3B481D3B804746E29785787A9C]", "4943C8034D76E34A546C40896E34FC70", "Modified laser that boosts damage in exchange for increased heat and reduced range.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+   OnImpactForceFeedback=(FeedbackIntensity=0.035000,FeedbackDuration=0.020000,bUseSmallMotors=True)
+   OnFireForceFeedback=(FeedbackIntensity=0.015000,bUseSmallMotors=True)
+   bAimAssistable=True
+End Object

@@ -31,6 +31,14 @@ MAPA_COMPONENTES = {
 }
 COMPONENTES_CON_ARMADURA_TRASERA = {"centerTorso", "leftTorso", "rightTorso"}
 
+# Clases de peso de MW5 por tonelaje máximo: las armas cuerpo a cuerpo solo encajan en su clase.
+CLASES_DE_PESO = ((35, "light"), (55, "medium"), (75, "heavy"))
+ARMAS_ESPECIALES_CUERPO_A_CUERPO = {
+    "battle_fist": "Battle Fist",
+    "barrelfist": "Barrel Fist",
+    "inductiveclaws": "Inductive Claws"
+}
+
 ARCHIVOS_NO_JUGABLES = {
     "A1M4_JR7-D_MDA.copy",
     "ANH-1A_Boss_MDA.copy",
@@ -109,7 +117,7 @@ def obtener_parte_cuerpo(hp_str):
     for lado in ("left", "right"):
         if lado not in hp_lower:
             continue
-        if "arm" in hp_lower:
+        if "arm" in hp_lower or "hand" in hp_lower:
             return f"{lado}Arm"
         if "leg" in hp_lower:
             return f"{lado}Leg"
@@ -153,6 +161,35 @@ def obtener_tamano_arma(hp_str):
     return "medium"
 
 
+def obtener_clase_de_peso(tonelaje):
+    for limite, clase in CLASES_DE_PESO:
+        if tonelaje <= limite:
+            return clase
+    return "assault"
+
+
+def obtener_anclaje_cuerpo_a_cuerpo(hp_str, contenido, clase_de_peso):
+    # S = antebrazo (solo Hammerfist), M = mano (puños), L = brazo de arma (espadas, hachas...).
+    hp_lower = hp_str.lower()
+    especial = next((nombre for clave, nombre in ARMAS_ESPECIALES_CUERPO_A_CUERPO.items() if clave in hp_lower), None)
+
+    if "lowerarm" in hp_lower or "lower_actuator" in hp_lower:
+        tamano = "small"
+    elif "meleeweapon" in hp_lower:
+        tamano = "large"
+    elif "hand" in hp_lower or especial:
+        tamano = "medium"
+    else:
+        # Anclaje genérico (Arm_Left_Melee): es una mano si ese brazo tiene actuador de antebrazo.
+        lado = "Left" if "left" in hp_lower else "Right"
+        tamano = "medium" if f"{lado}Arm_LowerActuator" in contenido else "small"
+
+    anclaje = {"type": "melee", "size": tamano, "weightClass": clase_de_peso}
+    if especial:
+        anclaje["defaultWeapon"] = especial
+    return anclaje
+
+
 def obtener_valores_por_componente(regex, contenido):
     valores = {}
     coincidencia = regex.search(contenido)
@@ -180,23 +217,27 @@ def obtener_ranuras(contenido):
     return ranuras_generales, ranuras_especiales
 
 
-def obtener_hardpoints(contenido):
+def obtener_hardpoints(contenido, clase_de_peso):
     hardpoints = {componente: [] for componente in MAPA_COMPONENTES.values()}
     coincidencia = REGEX_HARDPOINTS.search(contenido)
     if coincidencia:
         for hp in re.findall(r'"([^"]+)"', coincidencia.group(1)):
             parte = obtener_parte_cuerpo(hp)
             tipo = obtener_tipo_arma(hp)
-            if parte and tipo:
+            if not parte or not tipo:
+                continue
+            if tipo == "melee":
+                hardpoints[parte].append(obtener_anclaje_cuerpo_a_cuerpo(hp, contenido, clase_de_peso))
+            else:
                 hardpoints[parte].append({"type": tipo, "size": obtener_tamano_arma(hp)})
     return hardpoints
 
 
-def construir_componentes(contenido):
+def construir_componentes(contenido, clase_de_peso):
     ranuras_generales, ranuras_especiales = obtener_ranuras(contenido)
     armadura = obtener_valores_por_componente(REGEX_MAX_ARMOR, contenido)
     estructura = obtener_valores_por_componente(REGEX_MAX_STRUCT, contenido)
-    hardpoints = obtener_hardpoints(contenido)
+    hardpoints = obtener_hardpoints(contenido, clase_de_peso)
 
     componentes = {}
     for componente in MAPA_COMPONENTES.values():
@@ -226,15 +267,16 @@ def parsear_mech(contenido, variante):
     tech_base = buscar_texto(REGEX_TECH_BASE, contenido)
     refrigeracion_base = buscar_numero(REGEX_BASE_COOLING_RATE, contenido, None)
     velocidad_raw = buscar_numero(REGEX_SPEED, contenido, 0.0)
+    tonelaje = buscar_numero(REGEX_TONS, contenido, 0.0)
 
     mech = {
         "id": variante,
         "name": chasis,
         "variant": variante,
-        "tonnageMax": buscar_numero(REGEX_TONS, contenido, 0.0),
+        "tonnageMax": tonelaje,
         "baseTonnage": buscar_numero(REGEX_BASE_TONS, contenido, 0.0),
         "baseSpeed": round((velocidad_raw / 3150.0) * 97.2, 1) if velocidad_raw > 0 else 0.0,
-        "components": construir_componentes(contenido)
+        "components": construir_componentes(contenido, obtener_clase_de_peso(tonelaje))
     }
     if refrigeracion_base is not None:
         mech["BaseCoolingRate"] = refrigeracion_base

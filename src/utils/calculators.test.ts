@@ -189,6 +189,19 @@ describe('daño y calor', () => {
       .toBe(Math.round((getItem('Autocannon20').tiers?.['1']?.heatPerShot ?? 0) * 10) / 10);
   });
 
+  it('multiplica el daño por cada proyectil de la salva', () => {
+    expect(calculateFirepower(makeLoadout({ rightArm: [getItem('LBXAutocannon10')] }))).toBe(13);
+    expect(calculateFirepower(makeLoadout({ rightArm: [getItem('Autocannon20_Burst')] }))).toBe(24);
+    expect(calculateFirepower(makeLoadout({ leftTorso: [getItem('MRM20')] }))).toBe(24);
+    expect(calculateFirepower(makeLoadout({ leftTorso: [getItem('C-LRM20')] }))).toBe(33.6);
+  });
+
+  it('multiplica el calor por misil y por disparo de ráfaga, pero no por perdigón', () => {
+    expect(calculateHeatSpike(makeLoadout({ rightArm: [getItem('LBXAutocannon10')] }))).toBe(1.3);
+    expect(calculateHeatSpike(makeLoadout({ rightArm: [getItem('Autocannon20_Burst')] }))).toBe(4.2);
+    expect(calculateHeatSpike(makeLoadout({ leftTorso: [getItem('MRM20')] }))).toBe(5.4);
+  });
+
   it('usa las estadísticas del tier seleccionado', () => {
     const mediumLaser = getItem('MediumLaser');
     const tierZero = makeLoadout({ leftArm: [{ ...mediumLaser, tier: '0' }] });
@@ -254,8 +267,8 @@ describe('groupAmmunition', () => {
     const halfBin = getItem('AC20_Standard_Half_AmmoEquipment').capacity ?? 0;
 
     expect(groupAmmunition(loadout)).toEqual([
-      { family: 'ac20', label: 'AC/20', capacity: fullBin + halfBin, bins: 2 },
-      { family: 'lrm', label: 'LRM', capacity: getItem('LRM_AmmoEquipment').capacity, bins: 1 }
+      { ammoType: 'Ammo.Ballistic.AutoCannon.Standard.AC20', label: 'AC/20', capacity: fullBin + halfBin, bins: 2 },
+      { ammoType: 'Ammo.Missile.LRM', label: 'LRM', capacity: getItem('LRM_AmmoEquipment').capacity, bins: 1 }
     ]);
   });
 

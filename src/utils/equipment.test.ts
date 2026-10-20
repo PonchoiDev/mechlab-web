@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { canEquipItem, createEquippedItem, getAvailableSlotType, getEquippableItems } from './equipment';
-import { getItem, makeComponent, makeLoadout } from '../test/fixtures';
+import { canEquipItem, createEquippedItem, getActiveBuiltInMeleeWeapons, getAvailableSlotType, getEquippableItems } from './equipment';
+import { allItems, allMechs, getItem, getMech, makeComponent, makeLoadout } from '../test/fixtures';
 
 describe('getAvailableSlotType', () => {
   it('usa ranuras generales mientras quede espacio', () => {
@@ -63,6 +63,28 @@ describe('getAvailableSlotType', () => {
     expect(getAvailableSlotType(getItem('JumpJet_Class2_Equipment'), component, [])).toBeNull();
   });
 
+  it('no admite jump jets de otra clase aunque queden ranuras de jump jet', () => {
+    const centerTorso = getMech('ASN-101').components.centerTorso;
+    const classFour = { ...getItem('JumpJet_Class4_Equipment'), equippedSlotType: 'JumpJetClass4_SlotType' };
+
+    expect(getAvailableSlotType(getItem('JumpJet_Class4_Equipment'), centerTorso, [])).toBe('JumpJetClass4_SlotType');
+    expect(getAvailableSlotType(getItem('JumpJet_Class3_Equipment'), centerTorso, [])).toBeNull();
+    expect(getAvailableSlotType(getItem('JumpJet_Class4_Equipment'), centerTorso, [classFour])).toBeNull();
+    expect(getAvailableSlotType(getItem('JumpJet_Class3_Equipment'), centerTorso, [classFour])).toBeNull();
+  });
+
+  it('cada mech solo admite jump jets de una clase en todo su cuerpo', () => {
+    for (const mech of allMechs) {
+      const classes = new Set(
+        allItems
+          .filter(item => item.equipmentType === 'jumpJet')
+          .filter(item => Object.values(mech.components).some(component => getAvailableSlotType(item, component, []) !== null))
+          .map(item => item.id)
+      );
+      expect(classes.size, mech.id).toBeLessThanOrEqual(1);
+    }
+  });
+
   it('usa jumpJetSlots cuando no hay specialSlots', () => {
     const component = makeComponent({ jumpJetSlots: 1 });
 
@@ -101,10 +123,74 @@ describe('canEquipItem', () => {
     expect(canEquipItem(getItem('LargeLaser'), component, [getItem('SmallLaser')])).toBe(true);
   });
 
-  it('ignora el tamaño en anclajes cuerpo a cuerpo', () => {
-    const component = makeComponent({ hardpoints: [{ type: 'melee', size: 'medium' }] });
+  describe('cuerpo a cuerpo', () => {
+    const forearm = makeComponent({ hardpoints: [{ type: 'melee', size: 'small', weightClass: 'medium' }] });
+    const hand = makeComponent({ hardpoints: [{ type: 'melee', size: 'medium', weightClass: 'medium' }] });
+    const weaponArm = makeComponent({ hardpoints: [{ type: 'melee', size: 'large', weightClass: 'medium' }] });
 
-    expect(canEquipItem(getItem('Greatsword_Assault'), component, [])).toBe(true);
+    it('el antebrazo (S) solo admite Hammerfist', () => {
+      expect(canEquipItem(getItem('HammerFist_Medium'), forearm, [])).toBe(true);
+      expect(canEquipItem(getItem('Knuckles_Medium'), forearm, [])).toBe(false);
+      expect(canEquipItem(getItem('Mace_Medium'), forearm, [])).toBe(false);
+    });
+
+    it('la mano (M) admite puños pero no armas grandes ni Hammerfist', () => {
+      expect(canEquipItem(getItem('Knuckles_Medium'), hand, [])).toBe(true);
+      expect(canEquipItem(getItem('ArenaFist_Medium'), hand, [])).toBe(true);
+      expect(canEquipItem(getItem('Mace_Medium'), hand, [])).toBe(false);
+      expect(canEquipItem(getItem('HammerFist_Medium'), hand, [])).toBe(false);
+    });
+
+    it('el brazo de arma (L) admite armas L y M, pero no Hammerfist', () => {
+      expect(canEquipItem(getItem('Mace_Medium'), weaponArm, [])).toBe(true);
+      expect(canEquipItem(getItem('Knuckles_Medium'), weaponArm, [])).toBe(true);
+      expect(canEquipItem(getItem('HammerFist_Medium'), weaponArm, [])).toBe(false);
+    });
+
+    it('exige que el arma sea de la clase de peso del mech', () => {
+      expect(canEquipItem(getItem('Knuckles_Heavy'), hand, [])).toBe(false);
+      expect(canEquipItem(getItem('Knuckles_Light'), hand, [])).toBe(false);
+      expect(canEquipItem(getItem('Greatsword_Assault'), weaponArm, [])).toBe(false);
+    });
+
+    const meleeOptions = (mechId: string, zone: keyof ReturnType<typeof getMech>['components']) =>
+      allItems
+        .filter(item => item.weaponType === 'melee' && canEquipItem(item, getMech(mechId).components[zone], []))
+        .map(item => item.id)
+        .sort();
+
+    it('coincide con lo comprobado en el juego', () => {
+      expect(meleeOptions('ASN-21', 'leftArm')).toEqual(['ArenaFist_Medium', 'Knuckles_Medium']);
+      expect(meleeOptions('ASN-25', 'leftArm')).toEqual(
+        ['ArenaFist_Medium', 'Claws_Medium', 'Hatchet_Medium', 'Knuckles_Medium', 'Lance_Medium', 'Mace_Medium']
+      );
+      expect(meleeOptions('ANH-1A', 'leftArm')).toEqual(['HammerFist_Assault']);
+      expect(meleeOptions('GAR-A', 'leftArm')).toEqual(['ArenaFist_Assault', 'Knuckles_Assault']);
+      expect(meleeOptions('GAR-A', 'rightArm')).toEqual(['HammerFist_Assault']);
+      expect(meleeOptions('AS7-D-H', 'leftArm')).toEqual(['ArenaFist_Assault', 'Knuckles_Assault']);
+      expect(meleeOptions('HBR-A', 'leftArm')).toEqual(['HammerFist_Heavy']);
+      expect(meleeOptions('SHD-2H', 'leftArm')).toEqual(['ArenaFist_Medium', 'Knuckles_Medium']);
+      expect(meleeOptions('CGR-1A1', 'leftArm')).toEqual(['ArenaFist_Assault', 'Knuckles_Assault']);
+    });
+
+    it('los anclajes con arma especial indican cuál se usa si quedan vacíos', () => {
+      expect(getMech('SHD-2H').components.leftArm.hardpoints.find(hardpoint => hardpoint.type === 'melee')?.defaultWeapon)
+        .toBe('Battle Fist');
+      expect(getMech('CGR-1A1').components.leftArm.hardpoints.find(hardpoint => hardpoint.type === 'melee')?.defaultWeapon)
+        .toBe('Barrel Fist');
+    });
+
+    it('indica qué armas especiales se usan mientras su anclaje está vacío', () => {
+      const leftArm = getMech('SHD-2H').components.leftArm;
+
+      expect(getActiveBuiltInMeleeWeapons(leftArm.hardpoints, [])).toEqual(['Battle Fist']);
+      expect(getActiveBuiltInMeleeWeapons(leftArm.hardpoints, [getItem('Knuckles_Medium')])).toEqual([]);
+      expect(getActiveBuiltInMeleeWeapons(getMech('ASN-21').components.leftArm.hardpoints, [])).toEqual([]);
+    });
+
+    it('los Kodiak tienen sus manos como anclajes cuerpo a cuerpo', () => {
+      expect(meleeOptions('KDK-1', 'leftArm')).toEqual(['ArenaFist_Assault', 'Knuckles_Assault']);
+    });
   });
 
   it('acepta el AMS en anclajes ams', () => {
