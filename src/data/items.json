@@ -7,6 +7,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
@@ -20,6 +23,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
@@ -33,6 +39,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
@@ -46,6 +55,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
@@ -59,6 +71,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
@@ -72,6 +87,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
@@ -85,6 +103,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
@@ -98,6 +119,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 10,
     "techBase": "InnerSphere",
@@ -111,6 +135,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
@@ -124,6 +151,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 10,
     "techBase": "InnerSphere",
@@ -137,6 +167,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 200,
     "techBase": "InnerSphere",
@@ -150,6 +183,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 100,
     "techBase": "InnerSphere",
@@ -163,6 +199,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 90,
     "techBase": "InnerSphere",
@@ -176,6 +215,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 45,
     "techBase": "InnerSphere",
@@ -189,6 +231,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 80,
     "techBase": "InnerSphere",
@@ -202,6 +247,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
@@ -215,6 +263,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 80,
     "techBase": "InnerSphere",
@@ -228,6 +279,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
@@ -241,6 +295,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 2000,
     "techBase": "InnerSphere",
@@ -254,6 +311,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 1000,
     "techBase": "InnerSphere",
@@ -605,6 +665,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 10,
     "techBase": "InnerSphere",
@@ -618,6 +681,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 5,
     "techBase": "InnerSphere",
@@ -1482,6 +1548,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 2000,
     "techBase": "Clan",
@@ -1495,6 +1564,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 1000,
     "techBase": "Clan",
@@ -1640,6 +1712,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 10,
     "techBase": "Clan",
@@ -1653,6 +1728,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 5,
     "techBase": "Clan",
@@ -2810,6 +2888,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "Clan",
@@ -2823,6 +2904,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
@@ -2836,6 +2920,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
@@ -2849,6 +2936,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 10,
     "techBase": "Clan",
@@ -2862,6 +2952,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 180,
     "techBase": "Clan",
@@ -2875,6 +2968,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 90,
     "techBase": "Clan",
@@ -2888,6 +2984,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 80,
     "techBase": "Clan",
@@ -2901,6 +3000,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "Clan",
@@ -2914,6 +3016,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 316,
     "techBase": "Clan",
@@ -2927,6 +3032,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 158,
     "techBase": "Clan",
@@ -2940,6 +3048,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 32,
     "techBase": "Clan",
@@ -2953,6 +3064,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 16,
     "techBase": "Clan",
@@ -2966,6 +3080,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 2500,
     "techBase": "Clan",
@@ -2979,6 +3096,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 1250,
     "techBase": "Clan",
@@ -2992,6 +3112,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "Clan",
@@ -3005,6 +3128,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
@@ -3018,6 +3144,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
@@ -3031,6 +3160,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 10,
     "techBase": "Clan",
@@ -3044,6 +3176,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 180,
     "techBase": "Clan",
@@ -3057,6 +3192,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 90,
     "techBase": "Clan",
@@ -3070,6 +3208,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 80,
     "techBase": "Clan",
@@ -3083,6 +3224,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "Clan",
@@ -3096,6 +3240,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 440,
     "techBase": "Clan",
@@ -3109,6 +3256,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 440,
     "techBase": "Clan",
@@ -3122,6 +3272,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 220,
     "techBase": "Clan",
@@ -3135,6 +3288,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 220,
     "techBase": "Clan",
@@ -3148,6 +3304,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 7500,
     "techBase": "Clan",
@@ -3161,6 +3320,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 3750,
     "techBase": "Clan",
@@ -3174,6 +3336,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 5200,
     "techBase": "Clan",
@@ -3187,6 +3352,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 2600,
     "techBase": "Clan",
@@ -3200,6 +3368,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
@@ -3213,6 +3384,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 10,
     "techBase": "Clan",
@@ -3226,6 +3400,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 320,
     "techBase": "Clan",
@@ -3239,6 +3416,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 320,
     "techBase": "Clan",
@@ -3252,6 +3432,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 160,
     "techBase": "Clan",
@@ -3265,6 +3448,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 160,
     "techBase": "Clan",
@@ -3278,6 +3464,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 320,
     "techBase": "Clan",
@@ -3291,6 +3480,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 160,
     "techBase": "Clan",
@@ -3416,6 +3608,10 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 3,
+    "specialSlotTypes": [
+      "EngineHeatsink_SlotType",
+      "General_SlotType"
+    ],
     "cooling": 0.2,
     "tiers": null,
     "techBase": "InnerSphere"
@@ -3815,6 +4011,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 26,
     "techBase": "InnerSphere",
@@ -3828,6 +4027,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 13,
     "techBase": "InnerSphere",
@@ -4290,6 +4492,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 8,
     "techBase": "InnerSphere",
@@ -4303,6 +4508,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 4,
     "techBase": "InnerSphere",
@@ -4373,6 +4581,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 12,
     "techBase": "InnerSphere",
@@ -4443,6 +4654,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 6,
     "techBase": "InnerSphere",
@@ -4456,6 +4670,9 @@
     "size": "small",
     "tonnage": 2.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "JumpJetClass1_SlotType"
+    ],
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere"
@@ -4468,6 +4685,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "JumpJetClass2_SlotType"
+    ],
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere"
@@ -4480,6 +4700,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "JumpJetClass3_SlotType"
+    ],
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere"
@@ -4492,6 +4715,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "JumpJetClass4_SlotType"
+    ],
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere"
@@ -4504,6 +4730,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "JumpJetClass5_SlotType"
+    ],
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere"
@@ -4796,6 +5025,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
@@ -4809,6 +5041,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 10,
     "techBase": "InnerSphere",
@@ -4822,6 +5057,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 180,
     "techBase": "InnerSphere",
@@ -4835,6 +5073,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 90,
     "techBase": "InnerSphere",
@@ -4848,6 +5089,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 80,
     "techBase": "InnerSphere",
@@ -4861,6 +5105,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
@@ -6413,6 +6660,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 440,
     "techBase": "InnerSphere",
@@ -6426,6 +6676,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 440,
     "techBase": "InnerSphere",
@@ -6439,6 +6692,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 220,
     "techBase": "InnerSphere",
@@ -6452,6 +6708,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 220,
     "techBase": "InnerSphere",
@@ -6521,6 +6780,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 62,
     "techBase": "InnerSphere",
@@ -6534,6 +6796,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 31,
     "techBase": "InnerSphere",
@@ -6995,6 +7260,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 32,
     "techBase": "InnerSphere",
@@ -7008,6 +7276,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 16,
     "techBase": "InnerSphere",
@@ -7078,6 +7349,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 34,
     "techBase": "InnerSphere",
@@ -7148,6 +7422,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 17,
     "techBase": "InnerSphere",
@@ -7558,6 +7835,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 5200,
     "techBase": "InnerSphere",
@@ -7571,6 +7851,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 2600,
     "techBase": "InnerSphere",
@@ -7584,6 +7867,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 115,
     "techBase": "InnerSphere",
@@ -7597,6 +7883,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 57,
     "techBase": "InnerSphere",
@@ -7889,6 +8178,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 22,
     "techBase": "InnerSphere",
@@ -7959,6 +8251,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 11,
     "techBase": "InnerSphere",
@@ -8027,6 +8322,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
@@ -8040,6 +8338,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 10,
     "techBase": "InnerSphere",
@@ -9075,6 +9376,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 320,
     "techBase": "InnerSphere",
@@ -9088,6 +9392,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 320,
     "techBase": "InnerSphere",
@@ -9101,6 +9408,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 160,
     "techBase": "InnerSphere",
@@ -9114,6 +9424,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 160,
     "techBase": "InnerSphere",
@@ -9127,6 +9440,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 320,
     "techBase": "InnerSphere",
@@ -9140,6 +9456,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 160,
     "techBase": "InnerSphere",
@@ -9153,6 +9472,9 @@
     "size": "small",
     "tonnage": 3.0,
     "slots": 2,
+    "specialSlotTypes": [
+      "MASC_MKII_SlotType"
+    ],
     "tiers": null,
     "techBase": "Arena"
   },
@@ -9164,6 +9486,10 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "EngineHeatsink_SlotType",
+      "General_SlotType"
+    ],
     "cooling": 0.1,
     "tiers": null,
     "techBase": "InnerSphere"
@@ -9176,6 +9502,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 180,
     "techBase": "InnerSphere",
@@ -9189,6 +9518,9 @@
     "size": "small",
     "tonnage": 0.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "capacity": 90,
     "techBase": "InnerSphere",
@@ -9707,6 +10039,9 @@
     "size": "small",
     "tonnage": 1.5,
     "slots": 1,
+    "specialSlotTypes": [
+      "MASC_MKI_SlotType"
+    ],
     "tiers": null,
     "techBase": "Arena"
   },
@@ -9718,6 +10053,9 @@
     "size": "small",
     "tonnage": 4.5,
     "slots": 3,
+    "specialSlotTypes": [
+      "MASC_MKIII_SlotType"
+    ],
     "tiers": null,
     "techBase": "Arena"
   },
@@ -9729,6 +10067,9 @@
     "size": "small",
     "tonnage": 6.0,
     "slots": 4,
+    "specialSlotTypes": [
+      "MASC_MKIV_SlotType"
+    ],
     "tiers": null,
     "techBase": "Arena"
   },
@@ -9740,6 +10081,9 @@
     "size": "small",
     "tonnage": 7.5,
     "slots": 5,
+    "specialSlotTypes": [
+      "MASC_MKV_SlotType"
+    ],
     "tiers": null,
     "techBase": "Arena"
   },
@@ -9806,6 +10150,9 @@
     "size": "small",
     "tonnage": 1.0,
     "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "techBase": "Clan"
   },
@@ -9817,6 +10164,9 @@
     "size": "small",
     "tonnage": 2.0,
     "slots": 2,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "techBase": "Clan"
   },
@@ -9828,6 +10178,9 @@
     "size": "small",
     "tonnage": 3.0,
     "slots": 3,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "techBase": "Clan"
   },
@@ -9839,6 +10192,9 @@
     "size": "small",
     "tonnage": 4.0,
     "slots": 4,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "techBase": "Clan"
   },
@@ -9850,6 +10206,9 @@
     "size": "small",
     "tonnage": 5.0,
     "slots": 5,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "techBase": "Clan"
   },
@@ -9861,6 +10220,9 @@
     "size": "small",
     "tonnage": 6.0,
     "slots": 6,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "techBase": "Clan"
   },
@@ -9872,6 +10234,9 @@
     "size": "small",
     "tonnage": 7.0,
     "slots": 7,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
     "tiers": null,
     "techBase": "Clan"
   },

@@ -770,9 +770,19 @@
 .component-card-hardpoints,
 .component-card-equipment,
 .editor-hardpoints {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
   gap: 4px;
+}
+
+.component-card-equipment {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
+}
+
+.component-card-hardpoints .hardpoint-chip,
+.editor-hardpoints .hardpoint-chip,
+.component-card-equipment .component-card-item {
+  width: 100%;
 }
 
 .component-card-empty {
@@ -785,15 +795,13 @@
   --item-color: var(--work-lime);
   max-width: 100%;
   padding: 5px 10px;
-  overflow: hidden;
   border: 1px solid var(--work-line);
   border-left: 3px solid var(--item-color);
   border-radius: 2px;
   background: var(--work-panel-raised);
   font-size: 13px;
   font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .component-card-item[data-category="ammo"] { --item-color: var(--weapon-color); }
@@ -906,15 +914,15 @@
 .hardpoint-chip-content {
   display: flex;
   align-items: baseline;
+  justify-content: space-between;
   gap: 6px;
-  max-width: 100%;
+  width: 100%;
   min-width: 0;
 }
 
 .hardpoint-chip-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .hardpoint-chip-tier {

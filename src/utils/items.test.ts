@@ -51,6 +51,12 @@ describe('getItemSupportedSlotTypes', () => {
     expect(getItemSupportedSlotTypes(getItem('Supercharger_Arena_MKV'))).toEqual(['MASC_MKV_SlotType']);
   });
 
+  it('toma las ranuras del propio objeto cuando el juego las indica', () => {
+    expect(getItem('SingleHeatSink').specialSlotTypes).toEqual(['EngineHeatsink_SlotType', 'General_SlotType']);
+    expect(getItem('JumpJet_Class3_Equipment').specialSlotTypes).toEqual(['JumpJetClass3_SlotType']);
+    expect(getItemSupportedSlotTypes(makeItem({ id: 'ECM_Equipment', specialSlotTypes: ['ECM_SlotType'] }))).toEqual(['ECM_SlotType']);
+  });
+
   it('usa la ranura general para el resto', () => {
     expect(getItemSupportedSlotTypes(getItem('TargetingComputer_Mk1'))).toEqual(['General_SlotType']);
     expect(getItemSupportedSlotTypes(getItem('AC20_Standard_AmmoEquipment'))).toEqual(['General_SlotType']);

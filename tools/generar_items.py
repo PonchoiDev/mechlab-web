@@ -24,6 +24,7 @@ REGEX_PROYECTILES = re.compile(r'(?<![A-Za-z])NumberOfProjectiles=([0-9]+)')
 REGEX_DISPAROS = re.compile(r'(?<![A-Za-z])NumberOfTimesToFire=([0-9]+)')
 REGEX_CONSUME_POR_DISPARO = re.compile(r'bConsumeAmmoOnSubsequentFire=True')
 CLASE_TIPO_DE_RANURA = "MWSlotTypeDataAsset"
+REGEX_RANURAS_ADMITIDAS = re.compile(r'SupportedSlotTypesAssetId(?:\(\d+\))?=\(Id="MWSlotTypeDataAsset:([^"]+)"')
 REGEX_TECH_BASE = re.compile(r'TechBase=\(TagName="TechBase\.(\w+)"')
 REGEX_CLASE_CUERPO_A_CUERPO = re.compile(r'WeaponType=\(TagName="Weapon\.Melee\.(Light|Medium|Heavy|Assault)\.', re.IGNORECASE)
 
@@ -220,6 +221,12 @@ def construir_item(id_base, tiers):
     slots = determinar_slots(tipo_general, int(slots_archivo) if slots_archivo else None)
     if slots is not None:
         item["slots"] = slots
+
+    if tipo_general != "weapon":
+        # Ranuras donde se puede montar, con las especiales primero (p. ej. motor antes que general).
+        ranuras = REGEX_RANURAS_ADMITIDAS.findall(contenido)
+        if ranuras:
+            item["specialSlotTypes"] = sorted(ranuras, key=lambda ranura: ranura == "General_SlotType")
 
     refrigeracion = buscar_numero(REGEX_REFRIGERACION, contenido)
     if refrigeracion is not None:
