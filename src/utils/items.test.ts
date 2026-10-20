@@ -90,6 +90,14 @@ describe('isAmmoCompatibleWithWeapon', () => {
     expect(isAmmoCompatibleWithWeapon(getItem('HeavyGauss_AmmoEquipment'), getItem('HeavyGaussRifle'))).toBe(true);
   });
 
+  it('las armas Clan usan su propia munición Clan', () => {
+    expect(isAmmoCompatibleWithWeapon(getItem('Clan_LRM_AmmoEquipment'), getItem('C-LRM20'))).toBe(true);
+    expect(isAmmoCompatibleWithWeapon(getItem('Clan_ATM_AmmoEquipment'), getItem('C-ATM6'))).toBe(true);
+    expect(isAmmoCompatibleWithWeapon(getItem('Clan_AC5_Ultra_AmmoEquipment'), getItem('C-UltraAutocannon5'))).toBe(true);
+    expect(isAmmoCompatibleWithWeapon(getItem('Clan_LRM_AmmoEquipment'), getItem('LRM20'))).toBe(false);
+    expect(isAmmoCompatibleWithWeapon(getItem('LRM_AmmoEquipment'), getItem('C-LRM20'))).toBe(false);
+  });
+
   it('rechaza munición de otro tipo', () => {
     expect(isAmmoCompatibleWithWeapon(getItem('AC20_Standard_AmmoEquipment'), getItem('Autocannon2'))).toBe(false);
     expect(isAmmoCompatibleWithWeapon(getItem('LRM_AmmoEquipment'), getItem('LRM10_Artemis'))).toBe(false);
@@ -181,6 +189,11 @@ describe('etiquetas de inventario', () => {
     expect(getSizeLabel(getItem('SmallLaser'))).toBe('S');
     expect(getSizeLabel(getItem('MediumLaser'))).toBe('M');
     expect(getSizeLabel(getItem('LargeLaser'))).toBe('L');
+  });
+
+  it('las armas no guardan slots porque solo ocupan un anclaje', () => {
+    expect(allItems.filter(item => item.type === 'weapon' && item.slots !== undefined).map(item => item.id)).toEqual([]);
+    expect(allItems.filter(item => item.type !== 'weapon' && item.slots === undefined).map(item => item.id)).toEqual([]);
   });
 
   it('escribe los slots en singular o plural', () => {

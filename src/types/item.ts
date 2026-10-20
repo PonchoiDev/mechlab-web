@@ -23,7 +23,7 @@ export interface Item {
   weaponType?: WeaponType | null;
   size: ItemSize;
   tonnage: number;
-  slots: number;
+  slots?: number;
   damage?: number;
   heat?: number;
   cooling?: number;

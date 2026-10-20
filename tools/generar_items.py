@@ -19,7 +19,6 @@ REGEX_REFRIGERACION = re.compile(r'HeatSink=\([^)]*HealthyEfficiency=([0-9.]+)')
 REGEX_TIER = re.compile(r'_Lvl(\d+)$', re.IGNORECASE)
 REGEX_COPIA = re.compile(r'\(\d+\)$')
 REGEX_TIPO_MUNICION = re.compile(r'AmmoType=\(TagName="([^"]+)"\)')
-REGEX_SLOT_SIZE = re.compile(r'SlotSize=([0-9]+)')
 REGEX_MISILES = re.compile(r'(?<![A-Za-z])NumberOfMissiles=([0-9]+)')
 REGEX_PROYECTILES = re.compile(r'(?<![A-Za-z])NumberOfProjectiles=([0-9]+)')
 REGEX_DISPAROS = re.compile(r'(?<![A-Za-z])NumberOfTimesToFire=([0-9]+)')
@@ -32,51 +31,6 @@ REGEX_COOLDOWN = re.compile(r'(?<![a-zA-Z])Cooldown=([0-9.]+)')
 REGEX_RANGE = re.compile(r'(?<![A-Za-z])(?:OptimalRange|MaxRange)=([0-9.]+)')
 REGEX_QUIRK = re.compile(r"/Game/Quirks/([A-Za-z0-9_]+)\.[^\"]+\"',Value=([+-]?[0-9.]+)")
 
-# Ranuras críticas de las armas según su tipo de ranura (no vienen en los archivos de armas).
-SLOTS_POR_TIPO_DE_RANURA = {
-    "MachineGun_SlotType": 1,
-    "AC2_SlotType": 1,
-    "AC5_SlotType": 3,
-    "UltraAC5_SlotType": 3,
-    "AC10_SlotType": 7,
-    "LBX10_SlotType": 6,
-    "LBX10_SolidSlug_SlotType": 6,
-    "AC20_SlotType": 10,
-    "GaussRifle_SlotType": 7,
-    "Ballistic_Small_SlotType": 1,
-    "Ballistic_Medium_SlotType": 2,
-    "SmallLaser_SlotType": 1,
-    "SmallPulseLaser_SlotType": 1,
-    "MediumLaser_SlotType": 1,
-    "MediumPulseLaser_SlotType": 1,
-    "LargeLaser_SlotType": 2,
-    "LargePulseLaser_SlotType": 2,
-    "ERLargeLaser_SlotType": 2,
-    "PPC_SlotType": 3,
-    "ERPPC_SlotType": 3,
-    "Flamer_SlotType": 1,
-    "AMS_SlotType": 1,
-    "TAG_SlotType": 1,
-    "SRM2_SlotType": 1,
-    "SRM2_Artemis_SlotType": 1,
-    "StreakSRM2_SlotType": 1,
-    "SRM4_SlotType": 1,
-    "SRM4_Artemis_SlotType": 2,
-    "SRM6_SlotType": 2,
-    "SRM6_Artemis_SlotType": 3,
-    "LRM5_SlotType": 1,
-    "LRM5_Artemis_SlotType": 2,
-    "LRM10_SlotType": 2,
-    "LRM10_Artemis_SlotType": 3,
-    "LRM15_SlotType": 3,
-    "LRM15_Artemis_SlotType": 4,
-    "LRM20_SlotType": 5,
-    "LRM20_Artemis_SlotType": 6,
-    "NARC_SlotType": 2,
-    "Assault_Melee_Weapon_SlotType": 4,
-    "Heavy_Melee_Weapon_SlotType": 3,
-    "Medium_Melee_Weapon_SlotType": 2
-}
 
 
 def leer_archivo(ruta_archivo):
@@ -140,32 +94,15 @@ def determinar_tamano(tamano_arma, tipo_ranura, tipo_general):
     return "small"
 
 
-def determinar_slots(tipo_general, tipo_ranura, slots_archivo, nombre, tamanos_de_ranura):
-    if tipo_general in ("equipment", "ammo"):
-        return slots_archivo if slots_archivo is not None else 1
-    if tipo_ranura in tamanos_de_ranura:
-        return tamanos_de_ranura[tipo_ranura]
-    if tipo_ranura in SLOTS_POR_TIPO_DE_RANURA:
-        return SLOTS_POR_TIPO_DE_RANURA[tipo_ranura]
-    if "Binary" in nombre:
-        return 4
-    if "HeavyRifle" in nombre:
-        return 3
+def determinar_slots(tipo_general, slots_archivo):
+    # En MW5 Mercenaries las armas solo ocupan un anclaje; los slots son del equipo y la munición.
+    if tipo_general == "weapon":
+        return None
     return slots_archivo if slots_archivo is not None else 1
-
-
-def slots_conocidos(tipo_ranura, nombre, tamanos_de_ranura):
-    return (
-        tipo_ranura in tamanos_de_ranura
-        or tipo_ranura in SLOTS_POR_TIPO_DE_RANURA
-        or "Binary" in nombre
-        or "HeavyRifle" in nombre
-    )
 
 
 def agrupar_archivos_por_item(errores, copias):
     archivos_por_item = {}
-    tamanos_de_ranura = {}
     procesados = 0
 
     for archivo in sorted(os.listdir(RUTA_ORIGEN)):
@@ -183,9 +120,6 @@ def agrupar_archivos_por_item(errores, copias):
             continue
         nombre_archivo = os.path.splitext(archivo)[0]
         if clase == CLASE_TIPO_DE_RANURA:
-            tamano = buscar_texto(REGEX_SLOT_SIZE, contenido)
-            if tamano:
-                tamanos_de_ranura[nombre_archivo] = int(tamano)
             continue
         if REGEX_COPIA.search(nombre_archivo):
             copias.append(archivo)
@@ -206,7 +140,7 @@ def agrupar_archivos_por_item(errores, copias):
         archivos_por_item.setdefault(id_base, {})[tier] = contenido
         procesados += 1
 
-    return archivos_por_item, tamanos_de_ranura, procesados
+    return archivos_por_item, procesados
 
 
 def obtener_estadisticas_base(contenido):
@@ -257,7 +191,7 @@ def obtener_multiplicadores_salva(contenido):
     return (misiles or proyectiles or 1) * disparos, (misiles or 1) * disparos
 
 
-def construir_item(id_base, tiers, tamanos_de_ranura):
+def construir_item(id_base, tiers):
     contenido = tiers["1"] if "1" in tiers else tiers[sorted(tiers)[0]]
     tipo_general = determinar_tipo_general(buscar_texto(REGEX_CLASE, contenido))
     nombre = buscar_texto(REGEX_NOMBRE, contenido, id_base).strip()
@@ -270,9 +204,11 @@ def construir_item(id_base, tiers, tamanos_de_ranura):
         "type": tipo_general,
         "weaponType": determinar_subtipo_arma(buscar_texto(REGEX_TAG, contenido, "")),
         "size": determinar_tamano(buscar_texto(REGEX_WEAPON_SIZE, contenido), tipo_ranura, tipo_general),
-        "tonnage": buscar_numero(REGEX_TONS, contenido, 0.0),
-        "slots": determinar_slots(tipo_general, tipo_ranura, int(slots_archivo) if slots_archivo else None, nombre, tamanos_de_ranura)
+        "tonnage": buscar_numero(REGEX_TONS, contenido, 0.0)
     }
+    slots = determinar_slots(tipo_general, int(slots_archivo) if slots_archivo else None)
+    if slots is not None:
+        item["slots"] = slots
 
     refrigeracion = buscar_numero(REGEX_REFRIGERACION, contenido)
     if refrigeracion is not None:
@@ -311,22 +247,11 @@ def main():
 
     errores = []
     copias = []
-    archivos_por_item, tamanos_de_ranura, procesados = agrupar_archivos_por_item(errores, copias)
-    catalogo = {
-        id_base: construir_item(id_base, tiers, tamanos_de_ranura)
-        for id_base, tiers in archivos_por_item.items()
-    }
+    archivos_por_item, procesados = agrupar_archivos_por_item(errores, copias)
+    catalogo = {id_base: construir_item(id_base, tiers) for id_base, tiers in archivos_por_item.items()}
 
     armas = [item for item in catalogo.values() if item["type"] == "weapon"]
     municiones = {item["ammoType"] for item in catalogo.values() if item["type"] == "ammo" and "ammoType" in item}
-    sin_slots = [
-        item["id"] for item in armas
-        if not slots_conocidos(
-            buscar_texto(REGEX_SLOT_TYPE, archivos_por_item[item["id"]].get("1", ""), ""),
-            item["name"],
-            tamanos_de_ranura
-        )
-    ]
     sin_municion = sorted({item["ammoType"] for item in armas if "ammoType" in item and item["ammoType"] not in municiones})
 
     os.makedirs(os.path.dirname(ruta_destino) or ".", exist_ok=True)
@@ -337,9 +262,6 @@ def main():
     print(f"📊 Se procesaron {procesados} archivos en {len(catalogo)} objetos únicos.")
     if copias:
         print(f"\n⚠️ Se ignoraron {len(copias)} archivos duplicados: {', '.join(copias)}")
-    if sin_slots:
-        print(f"\n⚠️ {len(sin_slots)} armas sin tamaño de ranura conocido (se usa 1 slot):")
-        print(f"  {', '.join(sin_slots)}")
     if sin_municion:
         print(f"\n⚠️ {len(sin_municion)} tipos de munición usados por armas sin archivo de munición:")
         for tipo in sin_municion:

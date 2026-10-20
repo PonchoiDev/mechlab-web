@@ -51,4 +51,7 @@ export const isAmmoCompatibleWithWeapon = (ammo: Item, weapon: Item): boolean =>
 
 export const getSizeLabel = (item: Item): string => item.size.charAt(0).toUpperCase();
 
-export const getSlotsLabel = (item: Item): string => `${item.slots} ${item.slots === 1 ? 'slot' : 'slots'}`;
+export const getSlotsLabel = (item: Item): string => {
+  const slots = item.slots ?? 0;
+  return `${slots} ${slots === 1 ? 'slot' : 'slots'}`;
+};

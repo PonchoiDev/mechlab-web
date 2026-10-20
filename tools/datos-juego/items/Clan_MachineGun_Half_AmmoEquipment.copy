@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="Clan_MachineGun_Half_AmmoEquipment"
+   Capacity=2600.000000
+   ExplosionDamagePerRound=0.040000
+   AmmoType=(TagName="Ammo.Ballistic.MachineGun.Clan")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.Clan")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[716CCF854BB642750C441F9ABFC19AEC]", "63BA43794AD7705FEA270481401BC67B", "Clan Machine Gun Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=3040.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=18000.000000
+   CBillBaseValueBigInt=(Value=18000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=2.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_MG_Half_512_UIX.Clan_Ammo_MG_Half_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Ammo_MG_Market_STM.Clan_Ammo_MG_Market_STM
+   Description=NSLOCTEXT("[716CCF854BB642750C441F9ABFC19AEC]", "3F50F9EE42853EB8516707AEB5DA25F0", "One ton of ammunition for the Clan Machine Gun.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

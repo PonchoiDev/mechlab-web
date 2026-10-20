@@ -1,0 +1,21 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="Clan_GaussRifle_Half_AmmoEquipment"
+   Capacity=16.000000
+   AmmoType=(TagName="Ammo.Ballistic.Gauss.Clan")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.Clan")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[6E5594D74C869A4A9FEB8A8B0D68620B]", "A31B99AB4C04BEDC5B93009DF29E4C2A", "Clan Gauss Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=3040.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=18000.000000
+   CBillBaseValueBigInt=(Value=18000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_Gauss_Half_512_UIX.Clan_Ammo_Gauss_Half_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Ammo_Gauss_Market_STM.Clan_Ammo_Gauss_Market_STM
+   Description=NSLOCTEXT("[6E5594D74C869A4A9FEB8A8B0D68620B]", "4859999F4702582828D75B9EBDE3FF10", "One ton of ammunition for the Clan Gauss Rifle")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

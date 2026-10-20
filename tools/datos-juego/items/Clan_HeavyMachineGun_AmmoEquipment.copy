@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="Clan_HeavyMachineGun_AmmoEquipment"
+   Capacity=2500.000000
+   ExplosionDamagePerRound=0.040000
+   AmmoType=(TagName="Ammo.Ballistic.MachineGun.Heavy.Clan")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.Clan")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[9900FFD94BB980DA26943695DAE6FBD4]", "09B87A0646839B8597152ABDBECFE694", "Clan Heavy Machine Gun Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=3059.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=18000.000000
+   CBillBaseValueBigInt=(Value=18000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=2.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_MG_512_UIX.Clan_Ammo_MG_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Ammo_MG_Market_STM.Clan_Ammo_MG_Market_STM
+   Description=NSLOCTEXT("[9900FFD94BB980DA26943695DAE6FBD4]", "EB65F7DE4DF52DAB5D02C48BD3562777", "One ton of ammunition for the Clan Heavy Machine Gun.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

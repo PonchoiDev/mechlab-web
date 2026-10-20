@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="Clan_LBX20_AmmoEquipment"
+   Capacity=20.000000
+   ExplosionDamagePerRound=20.000000
+   AmmoType=(TagName="Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.Clan")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[86CC8F404EA5E933249B7FB32455B06B]", "D8CC7F6742DDD8AF392E90962FE58C3D", "Clan LB 20-X Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=3040.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=18000.000000
+   CBillBaseValueBigInt=(Value=18000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=2.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_LBX20_512_UIX.Clan_Ammo_LBX20_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Ammo_LBX20_Market_STM.Clan_Ammo_LBX20_Market_STM
+   Description=NSLOCTEXT("[86CC8F404EA5E933249B7FB32455B06B]", "E481774547B15CBA4AD5CB93CBAAE634", "One ton of ammunition for the Clan LB 20-X Autocannon.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

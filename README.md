@@ -60,7 +60,7 @@ python3 tools/generar_items.py
 
 `generar_mechs.py` lee los archivos de `tools/datos-juego/mda/` y escribe `src/data/mechs.json`. Descarta las variantes no jugables (campaña, tutorial, jefes y cinemáticas), listadas en `ARCHIVOS_NO_JUGABLES`, y avisa si encuentra variantes repetidas. Para cada anclaje cuerpo a cuerpo guarda su tamaño (S antebrazo, M mano, L brazo de arma), la clase de peso del 'Mech y, si lo tiene, el arma especial que usa cuando el anclaje está vacío.
 
-`generar_items.py` lee los archivos de `tools/datos-juego/items/` y escribe `src/data/items.json`. Agrupa los tiers de cada arma (`_Lvl0` a `_Lvl5`) aplicando sus quirks, guarda el tipo de munición de cada arma y munición, y los multiplicadores de la salva (proyectiles para el daño, misiles y disparos de ráfaga para el calor). Ignora los archivos que no son objetos equipables y, al terminar, avisa de las armas sin tamaño de ranura conocido y de las municiones que faltan.
+`generar_items.py` lee los archivos de `tools/datos-juego/items/` y escribe `src/data/items.json`. Agrupa los tiers de cada arma (`_Lvl0` a `_Lvl5`) aplicando sus quirks, guarda el tipo de munición de cada arma y munición, y los multiplicadores de la salva (proyectiles para el daño, misiles y disparos de ráfaga para el calor). Las armas no guardan slots, porque en MW5 Mercenaries solo ocupan un anclaje. Ignora los archivos que no son objetos equipables y, al terminar, avisa de las municiones que faltan.
 
 Ambos aceptan opcionalmente otra ruta de destino como argumento.
 
