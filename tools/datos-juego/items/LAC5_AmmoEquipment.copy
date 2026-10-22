@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="LAC5_AmmoEquipment"
+   Capacity=80.000000
+   ExplosionDamagePerRound=5.000000
+   AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Light.AC5")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[0E4848EB4EDFD4804B35539D979BC7E9]", "BA2717F54D1E35EC7D3B2EAE8B1DE3DB", "Light AC/5 Ammo")
+   TechLevel=-1
+   Tons=1.000000
+   Slots=1
+   IntroDate=3058.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=18000.000000
+   CBillBaseValueBigInt=(Value=18000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=2.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_UAC5_512_UIX.Clan_Ammo_UAC5_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Ammo_UAC5_Market_STM.Clan_Ammo_UAC5_Market_STM
+   Description=NSLOCTEXT("[0E4848EB4EDFD4804B35539D979BC7E9]", "EA8B488948F446650B6DD180EDB1CC16", "One ton of ammunition for the Light Autocannon/5.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

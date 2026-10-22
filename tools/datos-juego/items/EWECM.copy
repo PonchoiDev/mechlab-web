@@ -1,0 +1,26 @@
+Begin Object Class=/Script/MechWarrior.MWECMDataAsset Name="EWECM"
+   DisruptModeRange=16000.000000
+   CounterModeRange=32000.000000
+   ShieldingSensorModifier=0.800000
+   SuppressionSensorModifier=0.650000
+   LRMSpreadModifier=1.100000
+   StreakTrackingModifer=0.900000
+   AIAccuracyModifier=0.800000
+   EquipmentType=(TagName="Equipment.ECM.EWECM")
+   TechBase=(TagName="TechBase.Retro")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:ECM_SlotType")
+   Name=NSLOCTEXT("[2BBB423743FCB4750BECA2B3F4DACBE2]", "0EFF9609416B35065437908DEBF8062C", "EW Countermeasures")
+   TechLevel=-1
+   Tons=3.500000
+   Slots=2
+   IntroDate=3025.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=200000.000000
+   CBillBaseValueBigInt=(Value=200000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   SalvageShareCost=3
+   DamageChance=0.150000
+   EquipmentImage=/Game/DLC1/UI/Textures/Marketplace_Equipment/EWECM_512_UIX.EWECM_512_UIX
+   UIXEquipment3DModel=/Game/DLC1/Objects/Marketplace/Equipment/Model/Equipment_EWECM_Market_STM.Equipment_EWECM_Market_STM
+   Description=NSLOCTEXT("[2BBB423743FCB4750BECA2B3F4DACBE2]", "247C8F1645B6FFD6B09908927843196B", "A prototype suite of electronic warfare countermeasures that, by default, shields friendly units within its disrupt range from hostile sensors and homing missiles. Hostiles within the disrupt range have their sensors further suppressed, and suffer accuracy penalties, against all units. Can be toggled into counter mode, which disables all hostile ECMs within its range. Compatible with ECM hardpoints.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

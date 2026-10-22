@@ -1429,6 +1429,34 @@
     "weightClass": "heavy",
     "techBase": "InnerSphere"
   },
+  "BM_Arena_ActiveProbe": {
+    "id": "BM_Arena_ActiveProbe",
+    "name": "Black Market Probe",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 2,
+    "specialSlotTypes": [
+      "BAP_SlotType"
+    ],
+    "tiers": null,
+    "techBase": "Arena"
+  },
+  "BM_Arena_ECM": {
+    "id": "BM_Arena_ECM",
+    "name": "Black Market Countermeasures",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 2,
+    "specialSlotTypes": [
+      "ECM_SlotType"
+    ],
+    "tiers": null,
+    "techBase": "Arena"
+  },
   "BattleAxe_Assault": {
     "id": "BattleAxe_Assault",
     "name": "Assault Battle Axe",
@@ -1484,6 +1512,20 @@
     "volleyHeatShots": 1,
     "weightClass": "assault",
     "techBase": "InnerSphere"
+  },
+  "BeagleActiveProbe": {
+    "id": "BeagleActiveProbe",
+    "name": "Beagle Active Probe",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 2,
+    "specialSlotTypes": [
+      "BAP_SlotType"
+    ],
+    "tiers": null,
+    "techBase": "LosTech"
   },
   "BinaryLaser": {
     "id": "BinaryLaser",
@@ -2880,6 +2922,51 @@
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan",
     "ammoPerVolley": 1
   },
+  "ClanActiveProbe": {
+    "id": "ClanActiveProbe",
+    "name": "Clan Active Probe",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "specialSlotTypes": [
+      "BAP_SlotType",
+      "General_SlotType"
+    ],
+    "tiers": null,
+    "techBase": "Clan"
+  },
+  "ClanDoubleHeatSink": {
+    "id": "ClanDoubleHeatSink",
+    "name": "Clan Double Heat Sink",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 2,
+    "specialSlotTypes": [
+      "EngineHeatsink_SlotType",
+      "General_SlotType"
+    ],
+    "cooling": 0.2,
+    "tiers": null,
+    "techBase": "Clan"
+  },
+  "ClanECM": {
+    "id": "ClanECM",
+    "name": "Clan ECM",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "specialSlotTypes": [
+      "ECM_SlotType"
+    ],
+    "tiers": null,
+    "techBase": "Clan"
+  },
   "Clan_AC10_Ultra_AmmoEquipment": {
     "id": "Clan_AC10_Ultra_AmmoEquipment",
     "name": "Clan Ultra AC/10 Ammo",
@@ -3891,6 +3978,34 @@
     "volleyHeatShots": 1,
     "techBase": "InnerSphere"
   },
+  "EWActiveProbe": {
+    "id": "EWActiveProbe",
+    "name": "EW Active Probe",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 3.5,
+    "slots": 2,
+    "specialSlotTypes": [
+      "BAP_SlotType"
+    ],
+    "tiers": null,
+    "techBase": "Retro"
+  },
+  "EWECM": {
+    "id": "EWECM",
+    "name": "EW Countermeasures",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 3.5,
+    "slots": 2,
+    "specialSlotTypes": [
+      "ECM_SlotType"
+    ],
+    "tiers": null,
+    "techBase": "Retro"
+  },
   "Flamer": {
     "id": "Flamer",
     "name": "Flamer",
@@ -4090,6 +4205,20 @@
     "volleyHeatShots": 1,
     "weightClass": "assault",
     "techBase": "InnerSphere"
+  },
+  "GuardianECM": {
+    "id": "GuardianECM",
+    "name": "Guardian ECM",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 2,
+    "specialSlotTypes": [
+      "ECM_SlotType"
+    ],
+    "tiers": null,
+    "techBase": "LosTech"
   },
   "HammerFist_Assault": {
     "id": "HammerFist_Assault",
@@ -5016,6 +5145,70 @@
     "volleyHeatShots": 1,
     "weightClass": "medium",
     "techBase": "InnerSphere"
+  },
+  "LAC2_AmmoEquipment": {
+    "id": "LAC2_AmmoEquipment",
+    "name": "Light AC/2 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
+    "tiers": null,
+    "capacity": 180,
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC2"
+  },
+  "LAC2_Half_AmmoEquipment": {
+    "id": "LAC2_Half_AmmoEquipment",
+    "name": "Light AC/2 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
+    "tiers": null,
+    "capacity": 90,
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC2"
+  },
+  "LAC5_AmmoEquipment": {
+    "id": "LAC5_AmmoEquipment",
+    "name": "Light AC/5 Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
+    "tiers": null,
+    "capacity": 80,
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC5"
+  },
+  "LAC5_Half_AmmoEquipment": {
+    "id": "LAC5_Half_AmmoEquipment",
+    "name": "Light AC/5 Half Ammo",
+    "type": "ammo",
+    "weaponType": "ballistic",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
+    "tiers": null,
+    "capacity": 40,
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC5"
   },
   "LBX20_AmmoEquipment": {
     "id": "LBX20_AmmoEquipment",
@@ -7713,6 +7906,38 @@
     "techBase": "InnerSphere",
     "ammoType": "Ammo.Missile.MRM",
     "ammoPerVolley": 40
+  },
+  "MRM_AmmoEquipment": {
+    "id": "MRM_AmmoEquipment",
+    "name": "MRM Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
+    "tiers": null,
+    "capacity": 700,
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.MRM"
+  },
+  "MRM_Half_AmmoEquipment": {
+    "id": "MRM_Half_AmmoEquipment",
+    "name": "MRM Half Ammo",
+    "type": "ammo",
+    "weaponType": "missile",
+    "size": "small",
+    "tonnage": 0.5,
+    "slots": 1,
+    "specialSlotTypes": [
+      "General_SlotType"
+    ],
+    "tiers": null,
+    "capacity": 350,
+    "techBase": "InnerSphere",
+    "ammoType": "Ammo.Missile.MRM"
   },
   "Mace_Medium": {
     "id": "Mace_Medium",

@@ -99,6 +99,21 @@ describe('isAmmoCompatibleWithWeapon', () => {
     expect(isAmmoCompatibleWithWeapon(getItem('HeavyGauss_AmmoEquipment'), getItem('HeavyGaussRifle'))).toBe(true);
   });
 
+  it('los MRM y los Light AC tienen su propia munición', () => {
+    expect(isAmmoCompatibleWithWeapon(getItem('MRM_AmmoEquipment'), getItem('MRM40'))).toBe(true);
+    expect(isAmmoCompatibleWithWeapon(getItem('LAC2_AmmoEquipment'), getItem('LightAutocannon2'))).toBe(true);
+    expect(isAmmoCompatibleWithWeapon(getItem('AC2_Standard_AmmoEquipment'), getItem('LightAutocannon2'))).toBe(false);
+  });
+
+  it('todas las armas que usan munición tienen alguna en items.json', () => {
+    const ammo = allItems.filter(item => item.type === 'ammo');
+    const withoutAmmo = allItems
+      .filter(item => item.type === 'weapon' && item.ammoType)
+      .filter(weapon => !ammo.some(bin => isAmmoCompatibleWithWeapon(bin, weapon)))
+      .map(weapon => weapon.id);
+    expect(withoutAmmo).toEqual([]);
+  });
+
   it('las armas Clan usan su propia munición Clan', () => {
     expect(isAmmoCompatibleWithWeapon(getItem('Clan_LRM_AmmoEquipment'), getItem('C-LRM20'))).toBe(true);
     expect(isAmmoCompatibleWithWeapon(getItem('Clan_ATM_AmmoEquipment'), getItem('C-ATM6'))).toBe(true);
