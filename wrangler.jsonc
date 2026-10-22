@@ -17,6 +17,9 @@
   // Envío de los mensajes de feedback por Cloudflare Email Routing. La dirección de destino es el
   // secreto FEEDBACK_TO, configurado en el panel de Cloudflare.
   "send_email": [{ "name": "FEEDBACK_EMAIL" }],
-  // Necesario para las vistas previas de cada pull request (npx wrangler preview).
-  "previews": {}
+  // Necesario para las vistas previas de cada pull request (npx wrangler preview). Las vistas
+  // previas no heredan los enlaces de producción, así que el de correo se declara también aquí.
+  "previews": {
+    "send_email": [{ "name": "FEEDBACK_EMAIL" }]
+  }
 }
