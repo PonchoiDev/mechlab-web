@@ -362,7 +362,54 @@
         line-height: 1.6;
       }
 
-      .site-footer a { color: var(--muted); }
+      .site-footer p { margin: 0; }
+      .site-footer p + p { margin-top: 10px; }
+      .site-footer p > a:not(.support-link) { color: var(--muted); }
+
+      .topbar-side {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .support-note {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 14px;
+        color: var(--text);
+        font-size: 13px;
+      }
+
+      .support-link {
+        display: inline-flex;
+        flex-shrink: 0;
+        align-items: center;
+        gap: 6px;
+        min-height: 30px;
+        padding: 0 12px;
+        border: 1px solid var(--amber);
+        border-radius: 2px;
+        color: var(--amber);
+        background: rgba(242, 183, 94, 0.08);
+        font: 600 10px var(--mono);
+        letter-spacing: 0.04em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color 120ms ease, background-color 120ms ease;
+      }
+
+      .support-link-icon {
+        font-size: 17px;
+        line-height: 1;
+      }
+
+      .support-link:hover,
+      .support-link:focus-visible {
+        color: #18200f;
+        background: var(--amber);
+        outline: none;
+      }
 
       @media (max-width: 600px) {
         .shell { padding: 16px 16px 24px; }
@@ -388,7 +435,12 @@
             <h1>MW Builder <span>MECHLAB</span></h1>
           </div>
         </div>
-        <p class="topbar-note">LOADOUT TOOLS<br />FOR MECHWARRIOR GAMES</p>
+        <div class="topbar-side">
+          <p class="topbar-note">LOADOUT TOOLS<br />FOR MECHWARRIOR GAMES</p>
+          <a class="support-link" href="https://ko-fi.com/ponchoidev" target="_blank" rel="noreferrer" title="Life in the Inner Sphere is rough. Consider supporting this merc!">
+            <span class="support-link-icon" aria-hidden="true">☕</span> Support
+          </a>
+        </div>
       </header>
 
       <main>
@@ -440,9 +492,17 @@
       </main>
 
       <footer class="site-footer">
-        Fan-made tool, not affiliated with or endorsed by Piranha Games, Microsoft or the MechWarrior and BattleTech
-        trademark holders. Game data belongs to its respective owners. 'Mech artwork from
-        <a href="https://www.sarna.net" target="_blank" rel="noreferrer">Sarna.net</a>.
+        <p class="support-note">
+          <span>Life in the Inner Sphere is rough. MW Builder is free and ad-free, so if it helps you, consider supporting this merc!</span>
+          <a class="support-link" href="https://ko-fi.com/ponchoidev" target="_blank" rel="noreferrer">
+            <span class="support-link-icon" aria-hidden="true">☕</span> Support on Ko-fi
+          </a>
+        </p>
+        <p>
+          Fan-made tool, not affiliated with or endorsed by Piranha Games, Microsoft or the MechWarrior and BattleTech
+          trademark holders. Game data belongs to its respective owners. 'Mech artwork from
+          <a href="https://www.sarna.net" target="_blank" rel="noreferrer">Sarna.net</a>.
+        </p>
       </footer>
     </div>
   </body>

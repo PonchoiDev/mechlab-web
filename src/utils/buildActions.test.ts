@@ -163,7 +163,7 @@ describe('añadir munición', () => {
     const result = addAmmoForWeapon(archer, full, allItems, lrm, 1, ['leftLeg']);
 
     expect(result.loadout).toBe(full);
-    expect(result.message).toBe('No free slots for LRM Ammo — 1 t not assigned');
+    expect(result.message).toBe('No free slots for LRM Ammo, 1 t not assigned');
   });
 });
 

@@ -328,7 +328,7 @@ export const addAmmoForWeapon = (
 
   const ammoName = (full ?? half)!.name.replace(/\s*Half(?=\s+Ammo$)/i, '');
   const missing = Math.round((tons - placedTons) * 10) / 10;
-  if (placedTons === 0) return unchanged(loadout, `No free slots for ${ammoName} — ${formatTons(tons)} not assigned`);
+  if (placedTons === 0) return unchanged(loadout, `No free slots for ${ammoName}, ${formatTons(tons)} not assigned`);
 
   return {
     loadout: next,

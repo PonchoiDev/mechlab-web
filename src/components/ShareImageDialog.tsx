@@ -50,7 +50,7 @@ export function ShareImageDialog({ build, isImageLoading, buildUrl, onCopyLink, 
 
   const copyBuildImage = async () => {
     if (image.status !== 'ready') return;
-    onMessage(await copyImage(image.blob) ? 'Build image copied' : 'Your browser cannot copy images — use Download instead');
+    onMessage(await copyImage(image.blob) ? 'Build image copied' : 'Your browser cannot copy images. Use Download instead');
   };
 
   return (
@@ -69,7 +69,7 @@ export function ShareImageDialog({ build, isImageLoading, buildUrl, onCopyLink, 
 
         <p className="share-dialog-hint">
           Post the image and paste the build link next to it so others can open the build.
-          {!canCopyImages() && ' Copying images needs a secure (HTTPS) connection here — download the PNG instead.'}
+          {!canCopyImages() && ' Copying images needs a secure (HTTPS) connection here, so download the PNG instead.'}
         </p>
         <div className="share-dialog-link">
           <input type="text" readOnly value={buildUrl} aria-label="Build link" onFocus={(event) => event.currentTarget.select()} />
