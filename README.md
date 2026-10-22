@@ -48,7 +48,7 @@ src/
   data/                mechs.json e items.json que usa la web
   test/                Datos de prueba compartidos por los tests
 worker/                Script del Worker de Cloudflare (proxy de imágenes de Sarna)
-site/                  Archivos de la raíz del dominio (redirección a /mercs/), copiados al build
+site/                  Portada de la raíz del dominio, copiada al build
 tools/
   generar_mechs.py     Genera src/data/mechs.json a partir de los datos del juego
   generar_items.py     Genera src/data/items.json a partir de los datos del juego
@@ -70,7 +70,7 @@ Ambos aceptan opcionalmente otra ruta de destino como argumento.
 
 ## Publicación
 
-La web está publicada en **https://mw-builder.com/mercs/** con Cloudflare Workers (`wrangler.jsonc`). Cada juego tiene su propia ruta en el dominio; de momento solo existe `/mercs/` (MW5: Mercenaries) y la raíz redirige a ella (`site/_redirects`).
+La web está publicada en **https://mw-builder.com/mercs/** con Cloudflare Workers (`wrangler.jsonc`). Cada juego tiene su propia ruta en el dominio; de momento solo existe `/mercs/` (MW5: Mercenaries). La raíz es una portada estática (`site/index.html`) con una carátula por juego.
 
 `npm run build` genera la web en `dist/mercs/` y copia el contenido de `site/` en la raíz de `dist/`.
 
