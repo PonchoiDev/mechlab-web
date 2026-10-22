@@ -17,6 +17,7 @@ import { copyText } from './services/clipboard';
 import { BuildStatus } from './components/BuildStatus';
 import { ComponentEditor } from './components/ComponentEditor';
 import { ContextMenu } from './components/ContextMenu';
+import { FeedbackDialog } from './components/FeedbackDialog';
 import { getEquipmentMenu, getHardpointMenu, type MenuDefinition } from './components/menus';
 import { LoadoutAnalysis } from './components/LoadoutAnalysis';
 import { MechBoard } from './components/MechBoard';
@@ -34,6 +35,9 @@ const mechs = mechsData as unknown as Mech[];
 const items = Object.values(itemsData) as Item[];
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
 const linkedBuild = readBuildFromLocation(mechs, items);
+// La portada enlaza a /mercs/#feedback para abrir directamente el formulario.
+const openFeedbackOnLoad = window.location.hash === '#feedback';
+if (openFeedbackOnLoad) window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
 
 export default function App() {
   const build = useMechBuild(mechs, linkedBuild?.build);
@@ -59,6 +63,7 @@ export default function App() {
   const [isSharingImage, setIsSharingImage] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(openFeedbackOnLoad);
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
   const saved = useSavedBuilds();
   const closeMenu = useCallback(() => setMenu(null), []);
@@ -67,6 +72,7 @@ export default function App() {
   const closeShareImage = useCallback(() => setIsSharingImage(false), []);
   const closeBuilds = useCallback(() => setIsBuildsOpen(false), [setIsBuildsOpen]);
   const closeSave = useCallback(() => setIsSaveOpen(false), [setIsSaveOpen]);
+  const closeFeedback = useCallback(() => setIsFeedbackOpen(false), [setIsFeedbackOpen]);
   const buildCode = encodeBuild(mech, loadout, armor, items);
   const buildUrl = getBuildUrl(buildCode);
   const hasUnsavedChanges = equippedItems.length > 0 && !saved.builds.some(savedBuild => savedBuild.code === buildCode);
@@ -137,6 +143,9 @@ export default function App() {
           </div>
         </a>
         <div className="topbar-tools">
+          <button type="button" className="feedback-button" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>
+            Feedback
+          </button>
           <SupportLink compact />
           <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={selectMech} />
         </div>
@@ -208,6 +217,10 @@ export default function App() {
           <span>Life in the Inner Sphere is rough. MechLab is free and ad-free, so if it helps you, consider supporting this merc!</span>
           <SupportLink />
         </p>
+        <p className="feedback-note">
+          Found a bug or a wrong number, or have an idea?
+          <button type="button" className="feedback-inline" onClick={() => setIsFeedbackOpen(true)}>Send feedback</button>
+        </p>
         <p>
           Fan-made tool, not affiliated with or endorsed by Piranha Games, Microsoft or the MechWarrior and BattleTech
           trademark holders. Game data belongs to its respective owners.
@@ -222,6 +235,13 @@ export default function App() {
           onCopyLink={() => copyBuildLink()}
           onMessage={showToast}
           onClose={closeShareImage}
+        />
+      )}
+      {isFeedbackOpen && (
+        <FeedbackDialog
+          buildUrl={equippedItems.length > 0 ? buildUrl : null}
+          onMessage={showToast}
+          onClose={closeFeedback}
         />
       )}
       {isSaveOpen && (

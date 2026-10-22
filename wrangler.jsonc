@@ -14,6 +14,9 @@
     "not_found_handling": "single-page-application",
     "run_worker_first": ["/mercs/api/*"]
   },
+  // Envío de los mensajes de feedback por Cloudflare Email Routing. La dirección de destino es el
+  // secreto FEEDBACK_TO, configurado en el panel de Cloudflare.
+  "send_email": [{ "name": "FEEDBACK_EMAIL" }],
   // Necesario para las vistas previas de cada pull request (npx wrangler preview).
   "previews": {}
 }

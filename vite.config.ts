@@ -2,6 +2,7 @@ import { cpSync, rmSync } from 'node:fs'
 import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig, type Connect, type Plugin } from 'vite'
+import { FEEDBACK_PATH, parseFeedback } from './worker/feedback.ts'
 import { fetchSarnaImage, getSarnaImageTarget, SARNA_IMAGE_PATH } from './worker/sarnaImage.ts'
 
 // Cada juego vive en su propia ruta del dominio (mw-builder.com/mercs/). Lo que va en la raíz
@@ -20,8 +21,8 @@ const rootSite = (): Plugin => ({
   }
 })
 
-// En desarrollo no hay Worker: el servidor de Vite hace de proxy de las imágenes de Sarna.
-const sarnaImageProxy = (): Plugin => {
+// En desarrollo no hay Worker: el servidor de Vite hace sus veces para las rutas /mercs/api/*.
+const workerApi = (): Plugin => {
   const handle: Connect.NextHandleFunction = async (req, res) => {
     const target = getSarnaImageTarget(new URL(req.originalUrl ?? '', 'http://localhost'))
     const response = target ? await fetchSarnaImage(target) : new Response('Invalid image URL', { status: 400 })
@@ -30,10 +31,30 @@ const sarnaImageProxy = (): Plugin => {
     res.end(Buffer.from(await response.arrayBuffer()))
   }
 
+  // Sin Email Routing en local, el mensaje se escribe en la terminal en lugar de enviarse.
+  const handleFeedback: Connect.NextHandleFunction = (req, res) => {
+    let body = ''
+    req.on('data', chunk => { body += chunk })
+    req.on('end', () => {
+      let feedback = null
+      try { feedback = parseFeedback(JSON.parse(body)) } catch { /* cuerpo no válido */ }
+      res.setHeader('Content-Type', 'application/json')
+      res.statusCode = feedback ? 200 : 400
+      if (feedback) console.log('[feedback]', feedback)
+      res.end(JSON.stringify(feedback ? { ok: true } : { error: 'Invalid message' }))
+    })
+  }
+
   return {
-    name: 'sarna-image-proxy',
-    configureServer: server => { server.middlewares.use(SARNA_IMAGE_PATH, handle) },
-    configurePreviewServer: server => { server.middlewares.use(SARNA_IMAGE_PATH, handle) }
+    name: 'worker-api',
+    configureServer: server => {
+      server.middlewares.use(SARNA_IMAGE_PATH, handle)
+      server.middlewares.use(FEEDBACK_PATH, handleFeedback)
+    },
+    configurePreviewServer: server => {
+      server.middlewares.use(SARNA_IMAGE_PATH, handle)
+      server.middlewares.use(FEEDBACK_PATH, handleFeedback)
+    }
   }
 }
 
@@ -42,5 +63,5 @@ export default defineConfig({
   build: {
     outDir: `dist/${GAME_PATH}`
   },
-  plugins: [react(), rootSite(), sarnaImageProxy()],
+  plugins: [react(), rootSite(), workerApi()],
 })
