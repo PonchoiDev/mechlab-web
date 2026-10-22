@@ -5,11 +5,13 @@ import itemsData from './data/items.json';
 import type { EquippedLoadout, Mech, Zone } from './types/mech';
 import type { Item } from './types/item';
 import { replaceWeapon, type ActionResult } from './utils/buildActions';
+import { encodeBuild, getBuildUrl, readBuildFromLocation } from './utils/buildCode';
 import { getBuildSummary } from './utils/calculators';
 import { getBuildIssues } from './utils/issues';
 import { ZONE_LABELS } from './utils/zones';
 import { useMechBuild } from './hooks/useMechBuild';
 import { useSarnaAsset } from './hooks/useSarnaAsset';
+import { copyText } from './services/clipboard';
 import { BuildStatus } from './components/BuildStatus';
 import { ComponentEditor } from './components/ComponentEditor';
 import { ContextMenu } from './components/ContextMenu';
@@ -18,15 +20,18 @@ import { LoadoutAnalysis } from './components/LoadoutAnalysis';
 import { MechBoard } from './components/MechBoard';
 import { MechImage, SarnaSourceLink } from './components/MechReference';
 import { MechPicker } from './components/MechPicker';
+import { ShareImageDialog } from './components/ShareImageDialog';
 import { StatsReadout } from './components/StatsReadout';
 import { Toast } from './components/Toast';
 import { UtilityToolbar } from './components/UtilityToolbar';
 
 const mechs = mechsData as unknown as Mech[];
 const items = Object.values(itemsData) as Item[];
+// Se lee una sola vez al cargar la página: la dirección queda limpia después.
+const linkedBuild = readBuildFromLocation(mechs, items);
 
 export default function App() {
-  const build = useMechBuild(mechs);
+  const build = useMechBuild(mechs, linkedBuild?.build);
   const { mech, loadout, armor, activeZone, setActiveZone } = build;
   const sarna = useSarnaAsset(mech);
 
@@ -44,15 +49,36 @@ export default function App() {
   }, [setActiveZone, setSelectedHardpoint]);
 
   const [menu, setMenu] = useState<(MenuDefinition & { x: number; y: number }) | null>(null);
-  const [toast, setToast] = useState<{ id: number; message: string } | null>(null);
+  const [toast, setToast] = useState<{ id: number; message: string } | null>(() =>
+    linkedBuild && !linkedBuild.build ? { id: 0, message: 'This build link is not valid' } : null);
+  const [isSharingImage, setIsSharingImage] = useState(false);
   const closeMenu = useCallback(() => setMenu(null), []);
   const dismissToast = useCallback(() => setToast(null), []);
+  const showToast = useCallback((message: string) => setToast({ id: Date.now(), message }), []);
+  const closeShareImage = useCallback(() => setIsSharingImage(false), []);
+  const buildUrl = getBuildUrl(encodeBuild(mech, loadout, armor, items));
+  const shareImageInput = useMemo(
+    () => ({ mech, loadout, armor, summary, imageUrl: sarna.asset?.imageUrl ?? null }),
+    [mech, loadout, armor, summary, sarna.asset]
+  );
+  const copyBuildLink = async () => {
+    showToast(await copyText(buildUrl) ? 'Build link copied' : 'Could not copy the link — copy it from the image dialog');
+  };
+  const openShareMenu = (anchor: DOMRect) => setMenu({
+    title: 'Share build',
+    x: anchor.left,
+    y: anchor.bottom + 4,
+    entries: [
+      { kind: 'action', label: 'Copy build link', onSelect: () => { setMenu(null); copyBuildLink(); } },
+      { kind: 'action', label: 'Generate build image', onSelect: () => { setMenu(null); setIsSharingImage(true); } }
+    ]
+  });
   const menuContext = {
     mech,
     loadout,
     catalog: items,
     run: (action: (current: EquippedLoadout) => ActionResult) => {
-      setToast({ id: Date.now(), message: build.runAction(action) });
+      showToast(build.runAction(action));
       setMenu(null);
     },
     openEditor: (zone: Zone, hardpointIndex: number | null) => {
@@ -94,6 +120,7 @@ export default function App() {
         onClearArmor={build.clearArmor}
         onMaximizeArmor={build.maximizeArmor}
         onRemoveItems={build.removeItemsOfType}
+        onShare={openShareMenu}
       />
 
       <main className="workspace">
@@ -144,6 +171,16 @@ export default function App() {
         trademark holders. Game data belongs to its respective owners.
       </footer>
 
+      {isSharingImage && (
+        <ShareImageDialog
+          build={shareImageInput}
+          isImageLoading={sarna.isLoading}
+          buildUrl={buildUrl}
+          onCopyLink={copyBuildLink}
+          onMessage={showToast}
+          onClose={closeShareImage}
+        />
+      )}
       {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={closeMenu} />}
       {toast && <Toast key={toast.id} message={toast.message} onDismiss={dismissToast} />}
     </div>

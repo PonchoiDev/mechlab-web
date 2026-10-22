@@ -1,6 +1,13 @@
 import type { ComponentData, EquippedItem } from '../types/mech';
 import { clampArmorValue } from '../utils/calculators';
-import { getComponentStatus, getHardpointViews, getSlotTypeLabel, type AmmoWarning } from '../utils/equipment';
+import {
+  getComponentStatus,
+  getEquipmentCategory,
+  getHardpointViews,
+  getSlotTypeLabel,
+  groupEquipment,
+  type AmmoWarning
+} from '../utils/equipment';
 import { ArmorControl } from './ArmorControl';
 import { useLongPress } from '../hooks/useLongPress';
 import { getMenuPosition } from '../utils/menuPosition';
@@ -54,13 +61,6 @@ function EquipmentChip({ item, count, category, onMenu }: EquipmentChipProps) {
   );
 }
 
-const getEquipmentCategory = (item: EquippedItem): string => {
-  if (item.type === 'ammo') return 'ammo';
-  if (item.equipmentType === 'jumpJet') return 'jump-jet';
-  if (item.cooling !== undefined) return 'heat-sink';
-  return 'module';
-};
-
 const AMMO_WARNING_TEXT: Record<AmmoWarning['kind'], string> = {
   'missing-ammo': 'no ammo',
   'unused-ammo': 'no weapon uses it'
@@ -83,16 +83,7 @@ export function ComponentCard({
 }: ComponentCardProps) {
   const status = getComponentStatus(componentData, equippedItems);
   const hardpoints = getHardpointViews(componentData.hardpoints, equippedItems);
-  const equipment = Array.from(
-    equippedItems
-      .filter(item => item.type !== 'weapon')
-      .reduce((groups, item) => {
-        const group = groups.get(item.name) ?? { item, count: 0 };
-        group.count += 1;
-        return groups.set(item.name, group);
-      }, new Map<string, { item: EquippedItem; count: number }>())
-      .values()
-  );
+  const equipment = groupEquipment(equippedItems);
   const armorTotal = armorFront + armorRear;
   const isArmorLow = armorTotal < componentData.maxArmor;
   const stateClass = status.isOverSlots ? 'is-over' : status.hasFreeSpace ? 'has-free-space' : 'is-full';

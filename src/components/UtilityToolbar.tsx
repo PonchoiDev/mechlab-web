@@ -6,6 +6,7 @@ interface UtilityToolbarProps {
   onClearArmor: () => void;
   onMaximizeArmor: () => void;
   onRemoveItems: (type: 'weapon' | 'ammo') => void;
+  onShare: (anchor: DOMRect) => void;
 }
 
 export function UtilityToolbar({
@@ -15,7 +16,8 @@ export function UtilityToolbar({
   hasAmmo,
   onClearArmor,
   onMaximizeArmor,
-  onRemoveItems
+  onRemoveItems,
+  onShare
 }: UtilityToolbarProps) {
   return (
     <nav className="utility-toolbar" aria-label="Loadout utilities">
@@ -40,6 +42,17 @@ export function UtilityToolbar({
         </button>
         <button type="button" className="utility-button" onClick={() => onRemoveItems('ammo')} disabled={!hasAmmo}>
           Remove ammo
+        </button>
+      </div>
+      <div className="utility-group">
+        <span className="utility-label">BUILD</span>
+        <button
+          type="button"
+          className="utility-button utility-button-primary"
+          aria-haspopup="menu"
+          onClick={(event) => onShare(event.currentTarget.getBoundingClientRect())}
+        >
+          Share ▾
         </button>
       </div>
     </nav>
