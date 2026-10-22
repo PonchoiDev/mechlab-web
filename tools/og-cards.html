@@ -1,0 +1,184 @@
+<!doctype html>
+<!--
+  Plantilla de las imágenes de vista previa (og:image) de 1200 × 630.
+  Se capturan con Firefox desde un servidor que sirva dist/ con el proxy de Sarna:
+    firefox --headless --window-size=1200,630 --screenshot site/og-image.png "http://localhost:4180/og-cards.html?card=root"
+    firefox --headless --window-size=1200,630 --screenshot public/og-image.png "http://localhost:4180/og-cards.html?card=mercs"
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Manrope:wght@500;700;800&display=swap" />
+    <style>
+      :root {
+        --bg: #101310;
+        --line: #343d34;
+        --text: #e8eee5;
+        --muted: #929d90;
+        --lime: #c3ed62;
+        --mono: 'IBM Plex Mono', monospace;
+        --sans: 'Manrope', sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        width: 1200px;
+        height: 630px;
+        margin: 0;
+        overflow: hidden;
+        color: var(--text);
+        background-color: var(--bg);
+        background-image:
+          radial-gradient(ellipse 70% 80% at 78% 50%, rgba(105, 217, 206, 0.14), transparent 70%),
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: auto, 32px 32px, 32px 32px;
+        font-family: var(--sans);
+      }
+
+      .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 64px 72px;
+        border-top: 6px solid var(--lime);
+      }
+
+      .art {
+        position: absolute;
+        top: 30px;
+        right: 20px;
+        width: 560px;
+        height: 580px;
+        object-fit: contain;
+        filter: invert(1) sepia(1) hue-rotate(40deg) saturate(1.6) brightness(0.95);
+        mix-blend-mode: screen;
+        opacity: 0.6;
+        mask-image: radial-gradient(ellipse 48% 50% at 50% 50%, #000 55%, transparent 100%);
+      }
+
+      .brand {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 64px;
+        height: 64px;
+        color: #18200f;
+        background: var(--lime);
+        font: 600 34px var(--mono);
+      }
+
+      .eyebrow {
+        margin: 0 0 4px;
+        color: var(--muted);
+        font: 500 15px var(--mono);
+        letter-spacing: 0.1em;
+      }
+
+      .name {
+        margin: 0;
+        font-size: 34px;
+        font-weight: 700;
+      }
+
+      .name span {
+        color: var(--lime);
+        font: 600 26px var(--mono);
+      }
+
+      h1 {
+        position: relative;
+        max-width: 640px;
+        margin: auto 0 0;
+        font-size: 62px;
+        font-weight: 800;
+        line-height: 1.04;
+        letter-spacing: -0.01em;
+      }
+
+      h1 em {
+        color: var(--lime);
+        font-style: normal;
+      }
+
+      .tags {
+        position: relative;
+        display: flex;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .tags span {
+        padding: 8px 14px;
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        background: rgba(16, 19, 16, 0.8);
+        color: var(--muted);
+        font: 600 16px var(--mono);
+        text-transform: uppercase;
+      }
+
+      .tags .is-lime {
+        color: #18200f;
+        background: var(--lime);
+        border-color: var(--lime);
+      }
+
+      .url {
+        position: absolute;
+        right: 72px;
+        bottom: 56px;
+        color: var(--lime);
+        font: 600 20px var(--mono);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <img
+        class="art"
+        src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fthumb%2Fc%2Fc6%2FAtlas_RGilClan_v24.png%2F900px-66y81tw2o4i7ufe7yan0zx3ndigj3lu.png"
+        alt=""
+      />
+      <div class="brand">
+        <span class="mark">M</span>
+        <div>
+          <p class="eyebrow">FIELD CONFIGURATION SYSTEM</p>
+          <p class="name" id="name"></p>
+        </div>
+      </div>
+      <h1 id="title"></h1>
+      <div class="tags" id="tags"></div>
+      <span class="url" id="url"></span>
+    </div>
+    <script>
+      const cards = {
+        root: {
+          name: 'MW Builder <span>MECHLAB</span>',
+          title: 'Loadout tools for <em>MechWarrior games.</em>',
+          tags: ['<span class="is-lime">MW5: Mercenaries</span>', '<span>DLC 9 ready</span>', '<span>Free</span>'],
+          url: 'mw-builder.com'
+        },
+        mercs: {
+          name: 'MechLab <span>MW5: MERCENARIES</span>',
+          title: 'Build your \'Mech, <em>share it in one link.</em>',
+          tags: ['<span class="is-lime">DLC 9 ready</span>', '<span>552 variants</span>', '<span>Free</span>'],
+          url: 'mw-builder.com/mercs'
+        }
+      };
+      const card = cards[new URLSearchParams(location.search).get('card')] ?? cards.root;
+      document.getElementById('name').innerHTML = card.name;
+      document.getElementById('title').innerHTML = card.title;
+      document.getElementById('tags').innerHTML = card.tags.join('');
+      document.getElementById('url').textContent = card.url;
+    </script>
+  </body>
+</html>

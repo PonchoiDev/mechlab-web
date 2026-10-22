@@ -13,6 +13,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 - Tabla de rendimiento de armas (daño, calor, RPM, DPS y alcance) y resumen de munición.
 - Imagen de referencia de cada 'Mech obtenida de [Sarna.net](https://www.sarna.net).
 - Builds guardadas en el navegador (localStorage): botón Save build para guardar la actual o actualizar la que se está editando (solo en su mismo chasis), y My builds para cargarlas, duplicarlas, renombrarlas, borrarlas y exportarlas o importarlas en un archivo JSON.
+- Formulario de feedback (botón Feedback de la cabecera o `/mercs/#feedback`): los mensajes llegan por correo sin mostrar la dirección del desarrollador.
 - Compartir la build: un enlace que la abre tal cual (`/mercs/?b=…`) y una imagen PNG con el 'Mech, su equipo y sus estadísticas, lista para copiar o descargar.
 
 ## Requisitos
@@ -48,11 +49,12 @@ src/
   types/               Tipos de TypeScript
   data/                mechs.json e items.json que usa la web
   test/                Datos de prueba compartidos por los tests
-worker/                Script del Worker de Cloudflare (proxy de imágenes de Sarna)
+worker/                Script del Worker de Cloudflare (proxy de imágenes de Sarna y feedback)
 site/                  Portada de la raíz del dominio, copiada al build
 tools/
   generar_mechs.py     Genera src/data/mechs.json a partir de los datos del juego
   generar_items.py     Genera src/data/items.json a partir de los datos del juego
+  og-cards.html        Plantilla de las imágenes de vista previa (og-image.png)
   datos-juego/         Archivos exportados del juego (mda/ para 'Mechs, items/ para equipo)
 ```
 
@@ -76,6 +78,15 @@ La web está publicada en **https://mw-builder.com/mercs/** con Cloudflare Worke
 `npm run build` genera la web en `dist/mercs/` y copia el contenido de `site/` en la raíz de `dist/`.
 
 El Worker solo ejecuta código en `/mercs/api/*`; el resto lo sirven los assets estáticos. Ahí está `/mercs/api/sarna-image`, un proxy que sirve desde el dominio las imágenes de Sarna (solo de su wiki) para poder dibujarlas en la imagen de la build, porque su servidor de imágenes no envía cabeceras CORS. Guarda cada imagen en la caché de Cloudflare. En desarrollo, el servidor de Vite hace el mismo papel.
+
+
+`/mercs/api/feedback` recibe los mensajes del formulario y los envía por correo con Cloudflare Email Routing (enlace `send_email` en `wrangler.jsonc`). Para que funcione:
+
+1. En la zona mw-builder.com, activar **Email → Email Routing**.
+2. En **Destination addresses**, añadir el correo donde se quieren recibir los mensajes y verificarlo.
+3. En el Worker `mechlab-web`, **Settings → Variables and secrets**, añadir el secreto `FEEDBACK_TO` con ese correo.
+
+Sin esa configuración, la ruta responde 503 y el formulario muestra un error. En desarrollo, el servidor de Vite escribe el mensaje en la terminal en lugar de enviarlo.
 
 Cada fusión en `main` se publica automáticamente y cada pull request tiene una URL de vista previa.
 
