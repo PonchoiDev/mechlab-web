@@ -12,6 +12,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 - Resumen de pendientes de la build (anclajes libres, armas sin munición, armadura incompleta, sobrepeso) y duración de la munición instalada.
 - Tabla de rendimiento de armas (daño, calor, RPM, DPS y alcance) y resumen de munición.
 - Imagen de referencia de cada 'Mech obtenida de [Sarna.net](https://www.sarna.net).
+- Builds guardadas en el navegador (localStorage): botón Save build para guardar la actual o actualizar la que se está editando (solo en su mismo chasis), y My builds para cargarlas, duplicarlas, renombrarlas, borrarlas y exportarlas o importarlas en un archivo JSON.
 - Compartir la build: un enlace que la abre tal cual (`/mercs/?b=…`) y una imagen PNG con el 'Mech, su equipo y sus estadísticas, lista para copiar o descargar.
 
 ## Requisitos
@@ -41,7 +42,7 @@ npm run dev -- --host 0.0.0.0   # accesible desde otros dispositivos de la red
 src/
   App.tsx              Componente principal
   components/          Componentes de la interfaz
-  hooks/               Hooks de React (imagen de Sarna)
+  hooks/               Hooks de React (build, builds guardadas e imagen de Sarna)
   services/            Acceso a la API de Sarna e imagen de la build
   utils/               Lógica del configurador: cálculos, equipo, items y zonas
   types/               Tipos de TypeScript

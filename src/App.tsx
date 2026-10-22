@@ -6,11 +6,13 @@ import type { EquippedLoadout, Mech, Zone } from './types/mech';
 import type { Item } from './types/item';
 import { replaceWeapon, type ActionResult } from './utils/buildActions';
 import { encodeBuild, getBuildUrl, readBuildFromLocation } from './utils/buildCode';
+import { normalizeBuildName } from './utils/savedBuilds';
 import { getBuildSummary } from './utils/calculators';
 import { getBuildIssues } from './utils/issues';
 import { ZONE_LABELS } from './utils/zones';
 import { useMechBuild } from './hooks/useMechBuild';
 import { useSarnaAsset } from './hooks/useSarnaAsset';
+import { useSavedBuilds } from './hooks/useSavedBuilds';
 import { copyText } from './services/clipboard';
 import { BuildStatus } from './components/BuildStatus';
 import { ComponentEditor } from './components/ComponentEditor';
@@ -20,6 +22,8 @@ import { LoadoutAnalysis } from './components/LoadoutAnalysis';
 import { MechBoard } from './components/MechBoard';
 import { MechImage, SarnaSourceLink } from './components/MechReference';
 import { MechPicker } from './components/MechPicker';
+import { MyBuildsDialog } from './components/MyBuildsDialog';
+import { SaveBuildDialog } from './components/SaveBuildDialog';
 import { ShareImageDialog } from './components/ShareImageDialog';
 import { StatsReadout } from './components/StatsReadout';
 import { Toast } from './components/Toast';
@@ -52,17 +56,45 @@ export default function App() {
   const [toast, setToast] = useState<{ id: number; message: string } | null>(() =>
     linkedBuild && !linkedBuild.build ? { id: 0, message: 'This build link is not valid' } : null);
   const [isSharingImage, setIsSharingImage] = useState(false);
+  const [isBuildsOpen, setIsBuildsOpen] = useState(false);
+  const [isSaveOpen, setIsSaveOpen] = useState(false);
+  const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
+  const saved = useSavedBuilds();
   const closeMenu = useCallback(() => setMenu(null), []);
   const dismissToast = useCallback(() => setToast(null), []);
   const showToast = useCallback((message: string) => setToast({ id: Date.now(), message }), []);
   const closeShareImage = useCallback(() => setIsSharingImage(false), []);
-  const buildUrl = getBuildUrl(encodeBuild(mech, loadout, armor, items));
+  const closeBuilds = useCallback(() => setIsBuildsOpen(false), [setIsBuildsOpen]);
+  const closeSave = useCallback(() => setIsSaveOpen(false), [setIsSaveOpen]);
+  const buildCode = encodeBuild(mech, loadout, armor, items);
+  const buildUrl = getBuildUrl(buildCode);
+  const hasUnsavedChanges = equippedItems.length > 0 && !saved.builds.some(savedBuild => savedBuild.code === buildCode);
+  // La build guardada abierta solo se puede actualizar mientras se sigue en su chasis: al cambiar
+  // de chasis se desvincula, para no sobrescribirla sin querer.
+  const activeBuild = saved.builds.find(savedBuild => savedBuild.id === activeSavedId) ?? null;
+  const defaultBuildName = `${mech.name} ${mech.variant}`;
+  const selectMech = (index: number) => {
+    if (index !== build.selectedIndex) setActiveSavedId(null);
+    build.selectMech(index);
+  };
+  const saveAsNew = (name: string) => {
+    const savedBuild = saved.saveBuild(normalizeBuildName(name, defaultBuildName), buildCode);
+    setActiveSavedId(savedBuild.id);
+    setIsSaveOpen(false);
+    showToast(`Saved “${savedBuild.name}”`);
+  };
+  const updateActiveBuild = () => {
+    if (!activeBuild) return;
+    saved.updateBuild(activeBuild.id, { code: buildCode });
+    setIsSaveOpen(false);
+    showToast(`Updated “${activeBuild.name}”`);
+  };
   const shareImageInput = useMemo(
     () => ({ mech, loadout, armor, summary, imageUrl: sarna.asset?.imageUrl ?? null }),
     [mech, loadout, armor, summary, sarna.asset]
   );
-  const copyBuildLink = async () => {
-    showToast(await copyText(buildUrl) ? 'Build link copied' : 'Could not copy the link — copy it from the image dialog');
+  const copyBuildLink = async (url = buildUrl) => {
+    showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link — copy it from the image dialog');
   };
   const openShareMenu = (anchor: DOMRect) => setMenu({
     title: 'Share build',
@@ -104,7 +136,7 @@ export default function App() {
           </div>
         </div>
         <div className="topbar-tools">
-          <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={build.selectMech} />
+          <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={selectMech} />
         </div>
       </header>
 
@@ -120,6 +152,9 @@ export default function App() {
         onClearArmor={build.clearArmor}
         onMaximizeArmor={build.maximizeArmor}
         onRemoveItems={build.removeItemsOfType}
+        savedBuildCount={saved.builds.length}
+        onSaveBuild={() => setIsSaveOpen(true)}
+        onOpenBuilds={() => setIsBuildsOpen(true)}
         onShare={openShareMenu}
       />
 
@@ -176,9 +211,39 @@ export default function App() {
           build={shareImageInput}
           isImageLoading={sarna.isLoading}
           buildUrl={buildUrl}
-          onCopyLink={copyBuildLink}
+          onCopyLink={() => copyBuildLink()}
           onMessage={showToast}
           onClose={closeShareImage}
+        />
+      )}
+      {isSaveOpen && (
+        <SaveBuildDialog
+          defaultName={defaultBuildName}
+          activeBuild={activeBuild}
+          isActiveUpToDate={activeBuild?.code === buildCode}
+          onSaveNew={saveAsNew}
+          onUpdate={updateActiveBuild}
+          onClose={closeSave}
+        />
+      )}
+      {isBuildsOpen && (
+        <MyBuildsDialog
+          saved={saved}
+          mechs={mechs}
+          catalog={items}
+          currentCode={buildCode}
+          hasUnsavedChanges={hasUnsavedChanges}
+          activeId={activeSavedId}
+          onActiveChange={setActiveSavedId}
+          onLoad={(sharedBuild, name) => {
+            build.loadBuild(sharedBuild);
+            setSelectedHardpoint(null);
+            setIsBuildsOpen(false);
+            showToast(`Loaded “${name}”`);
+          }}
+          onCopyLink={(code) => copyBuildLink(getBuildUrl(code))}
+          onMessage={showToast}
+          onClose={closeBuilds}
         />
       )}
       {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={closeMenu} />}
