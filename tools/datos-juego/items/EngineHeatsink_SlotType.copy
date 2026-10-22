@@ -1,0 +1,9 @@
+Begin Object Class=/Script/MechWarrior.MWSlotTypeDataAsset Name="EngineHeatsink_SlotType"
+   SlotName=NSLOCTEXT("", "CCE5D5534FAEC7E2D8CF5A8524C1A0B8", "Engine Heatsink")
+   SlotColour=(R=0.584314,G=0.000000,B=1.000000,A=1.000000)
+   SlotSize=1
+   WeaponSize=Invalid
+   bShowFixedSlotBorder=True
+   bOverrideSlotSizeForInstalledEquipment=True
+   bImmuneToDamage=True
+End Object

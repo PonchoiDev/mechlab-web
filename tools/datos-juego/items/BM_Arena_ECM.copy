@@ -1,0 +1,26 @@
+Begin Object Class=/Script/MechWarrior.MWECMDataAsset Name="BM_Arena_ECM"
+   DisruptModeRange=5000.000000
+   CounterModeRange=10000.000000
+   ShieldingSensorModifier=0.800000
+   SuppressionSensorModifier=0.650000
+   LRMSpreadModifier=1.800000
+   StreakTrackingModifer=0.900000
+   AIAccuracyModifier=0.550000
+   EquipmentType=(TagName="Equipment.ECM.Arena")
+   TechBase=(TagName="TechBase.Arena")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:ECM_SlotType")
+   Name=NSLOCTEXT("[3999C200456D9AFA16C34B8CBC4432AF]", "16CBAF7042F07D1DDCB301B8C1D92C49", "Black Market Countermeasures")
+   TechLevel=-1
+   Tons=2.000000
+   Slots=2
+   IntroDate=3025.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=200000.000000
+   CBillBaseValueBigInt=(Value=200000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   SalvageShareCost=3
+   DamageChance=0.150000
+   EquipmentImage=/Game/DLC1/UI/Textures/Marketplace_Equipment/EWECM_512_UIX.EWECM_512_UIX
+   UIXEquipment3DModel=/Game/DLC1/Objects/Marketplace/Equipment/Model/Equipment_EWECM_Market_STM.Equipment_EWECM_Market_STM
+   Description=NSLOCTEXT("[3999C200456D9AFA16C34B8CBC4432AF]", "58E5F04E4B0D4DB5E19EA6ADA89725B9", "This prototype electronic warfare suite shields the \'Mech from hostile sensors and homing missiles, serving as an effective defensive tool in arena combat. In counter mode, it suppresses sensors and disables hostile ECMs within its range. Compatible with ECM hardpoints")
+   AssociatedDLC=(TagName="DLC.DLC6")
+End Object

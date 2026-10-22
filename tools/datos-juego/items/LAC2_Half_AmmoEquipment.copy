@@ -1,0 +1,25 @@
+Begin Object Class=/Script/MechWarrior.MWAmmoDataAsset Name="LAC2_Half_AmmoEquipment"
+   Capacity=90.000000
+   ExplosionDamagePerRound=2.000000
+   AmmoType=(TagName="Ammo.Ballistic.AutoCannon.Light.AC2")
+   EquipmentType=(TagName="Equipment.Ammo")
+   TechBase=(TagName="TechBase.InnerSphere")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:General_SlotType")
+   Name=NSLOCTEXT("[AC561B8F49C30024056FD6AB957041A1]", "6246953542FFA0B701DCDF9B8B421100", "Light AC/2 Half Ammo")
+   TechLevel=-1
+   Tons=0.500000
+   Slots=1
+   IntroDate=3058.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=18000.000000
+   CBillBaseValueBigInt=(Value=18000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000)
+   SalvageShareCost=1
+   DamageChance=0.150000
+   bExplodes=True
+   ExplosionDamage=2.500000
+   ExplosionClass=/Game/Objects/Mechs/_common/Equipment/ExplosionActors/DefaultMechEquipmentExplosion.DefaultMechEquipmentExplosion_C
+   EquipmentImage=/Game/DLC7/UI/Textures/Marketplace_Weapons/Clan_Ammo_UAC2_512_UIX.Clan_Ammo_UAC2_512_UIX
+   UIXEquipment3DModel=/Game/DLC7/Objects/Marketplace/ClanWeapons/Model/Clan_Ammo_UAC2_Market_STM.Clan_Ammo_UAC2_Market_STM
+   Description=NSLOCTEXT("[AC561B8F49C30024056FD6AB957041A1]", "0EF148B3456423E6710C5AA1772B84D0", "One-half ton of ammunition for the Light Autocannon/2.")
+   Attributes=(GameplayTags=((TagName="Attributes.ClanCoreContent")))
+End Object

@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWDestructiblePieceMaterialOverrideAsset Name="Generator_Active_Ally"
+   OverrideMaterials(0)=(MaterialToOverride=MaterialInstanceConstant'"/Game/Objects/_common/Materials/Emissive/Emissive_Blinker_Off_MTI.Emissive_Blinker_Off_MTI"',OverrideMaterial=MaterialInstanceConstant'"/Game/Objects/_common/Materials/Emissive/Emissive_Generator_Blue_MTI.Emissive_Generator_Blue_MTI"')
+End Object

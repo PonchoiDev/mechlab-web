@@ -410,3 +410,28 @@ describe('getAmmoWarnings', () => {
     expect(Object.values(getAmmoWarnings(makeLoadout({ leftArm: [getItem('MediumLaser')] }))).flat()).toEqual([]);
   });
 });
+
+describe('ECM y sondas activas', () => {
+  const adderArm = getMech('ADR-S').components.leftArm;
+
+  it('el ECM va en la ranura ECM del componente', () => {
+    expect(getAvailableSlotType(getItem('GuardianECM'), adderArm, [])).toBe('ECM_SlotType');
+    expect(getAvailableSlotType(getItem('ClanECM'), adderArm, [])).toBe('ECM_SlotType');
+  });
+
+  it('solo cabe un ECM por ranura y no puede ir en ranuras generales', () => {
+    const installed = { ...getItem('GuardianECM'), equippedSlotType: 'ECM_SlotType' };
+
+    expect(getAvailableSlotType(getItem('ClanECM'), adderArm, [installed])).toBeNull();
+    expect(getAvailableSlotType(getItem('GuardianECM'), makeComponent({ maxSlots: 10 }), [])).toBeNull();
+  });
+
+  it('las sondas usan su ranura y la Clan Active Probe también admite la general', () => {
+    const generalOnly = makeComponent({ maxSlots: 4 });
+
+    expect(getAvailableSlotType(getItem('BeagleActiveProbe'), generalOnly, [])).toBeNull();
+    expect(getAvailableSlotType(getItem('ClanActiveProbe'), generalOnly, [])).toBe('General_SlotType');
+    expect(getAvailableSlotType(getItem('BeagleActiveProbe'), makeComponent({ specialSlots: { BAP_SlotType: 1 } }), []))
+      .toBe('BAP_SlotType');
+  });
+});
