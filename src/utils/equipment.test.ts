@@ -8,6 +8,7 @@ import {
   getComponentStatus,
   getEquippableItems,
   getHardpointViews,
+  getReplacementWeapons,
   getWeaponsForHardpoint
 } from './equipment';
 import { allItems, allMechs, getItem, getMech, makeComponent, makeLoadout } from '../test/fixtures';
@@ -433,5 +434,14 @@ describe('ECM y sondas activas', () => {
     expect(getAvailableSlotType(getItem('ClanActiveProbe'), generalOnly, [])).toBe('General_SlotType');
     expect(getAvailableSlotType(getItem('BeagleActiveProbe'), makeComponent({ specialSlots: { BAP_SlotType: 1 } }), []))
       .toBe('BAP_SlotType');
+  });
+});
+
+describe('getReplacementWeapons', () => {
+  it('ofrece las armas que caben en el anclaje aunque esté ocupado', () => {
+    const component = makeComponent({ hardpoints: [{ type: 'energy', size: 'medium' }] });
+    const catalog = [getItem('SmallLaser'), getItem('MediumLaser'), getItem('LargeLaser'), getItem('Autocannon20')];
+
+    expect(getReplacementWeapons(catalog, component, 0).map(item => item.id)).toEqual(['SmallLaser', 'MediumLaser']);
   });
 });

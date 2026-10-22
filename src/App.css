@@ -804,6 +804,15 @@
   overflow-wrap: anywhere;
 }
 
+button.component-card-item {
+  color: var(--work-text);
+  font-family: var(--work-sans);
+  text-align: left;
+  cursor: pointer;
+}
+
+button.component-card-item:hover { border-color: var(--item-color); }
+
 .component-card-item[data-category="ammo"] { --item-color: var(--weapon-color); }
 .component-card-item[data-category="heat-sink"] { --item-color: var(--work-cyan); }
 .component-card-item[data-category="jump-jet"] { --item-color: var(--work-amber); }
@@ -1087,6 +1096,11 @@ button.hardpoint-chip:hover { background: #2c342c; }
   color: var(--work-text);
   font: 600 12px var(--work-mono);
   text-transform: uppercase;
+}
+
+.editor-section-heading h3 .editor-weapon-name {
+  color: var(--weapon-color);
+  font: inherit;
 }
 
 .editor-section-heading h3 span,
@@ -1394,4 +1408,186 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .ammunition-amount small {
   color: var(--work-muted);
   font: 500 11px var(--work-mono);
+}
+
+/* Menú contextual y avisos */
+
+.context-menu {
+  position: fixed;
+  z-index: 40;
+  min-width: 260px;
+  max-width: 360px;
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px;
+  border: 1px solid var(--work-line);
+  border-radius: 3px;
+  background: var(--work-panel-raised);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+  color: var(--work-text);
+  font-family: var(--work-sans);
+}
+
+.context-submenu { z-index: 41; }
+
+.context-menu-title {
+  margin: 0;
+  padding: 6px 8px 7px;
+  border-bottom: 1px solid var(--work-line);
+  color: var(--work-lime);
+  font: 600 11px var(--work-mono);
+  text-transform: uppercase;
+}
+
+.context-menu-list {
+  margin: 0;
+  padding: 3px 0 0;
+  list-style: none;
+}
+
+.context-menu-item { position: relative; }
+
+.context-menu-section {
+  padding: 7px 8px 3px;
+  color: var(--work-muted);
+  font: 500 10px var(--work-mono);
+  text-transform: uppercase;
+}
+
+.context-menu-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: inherit;
+  font: 500 13px var(--work-sans);
+  text-align: left;
+  cursor: pointer;
+}
+
+.context-menu-button small,
+.context-menu-label small {
+  margin-left: auto;
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+  white-space: nowrap;
+}
+
+.context-menu-label {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.context-menu-arrow { color: var(--work-muted); }
+
+.context-menu-button:hover:not(:disabled),
+.context-menu-button:focus-visible,
+.context-menu-item.has-submenu:hover > .context-menu-button:not(:disabled) {
+  outline: none;
+  background: rgba(105, 217, 206, 0.12);
+}
+
+.context-menu-button:disabled {
+  color: #5d665c;
+  cursor: default;
+}
+
+.context-menu-button.is-danger:not(:disabled) { color: var(--work-red); }
+
+.context-menu-item.has-options {
+  display: grid;
+  gap: 4px;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.context-menu-options,
+.context-menu-confirm-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.context-menu-option {
+  min-width: 38px;
+  min-height: 24px;
+  padding: 0 7px;
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  background: var(--work-panel);
+  color: var(--work-text);
+  font: 500 11px var(--work-mono);
+  cursor: pointer;
+}
+
+.context-menu-option:hover:not(:disabled),
+.context-menu-option:focus-visible {
+  outline: none;
+  border-color: var(--work-cyan);
+  color: var(--work-cyan);
+}
+
+.context-menu-option:disabled {
+  color: #5d665c;
+  cursor: default;
+}
+
+.context-menu-option.is-danger {
+  border-color: rgba(255, 121, 108, 0.5);
+  color: var(--work-red);
+}
+
+.context-menu-confirm {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+}
+
+.context-menu-confirm p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.context-menu-confirm-actions { justify-content: flex-end; }
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(640px, calc(100vw - 32px));
+  padding: 10px 12px 10px 14px;
+  border: 1px solid var(--work-line);
+  border-left: 3px solid var(--work-lime);
+  border-radius: 3px;
+  background: var(--work-panel-raised);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+  color: var(--work-text);
+  font-size: 13px;
+  transform: translateX(-50%);
+  animation: toast-in 160ms ease-out;
+}
+
+@keyframes toast-in {
+  from { transform: translate(-50%, 8px); }
+  to { transform: translate(-50%, 0); }
+}
+
+.toast-close {
+  flex-shrink: 0;
+  border: 0;
+  background: none;
+  color: var(--work-muted);
+  cursor: pointer;
 }

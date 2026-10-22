@@ -1,4 +1,6 @@
 import type { MouseEvent } from 'react';
+import { useLongPress } from '../hooks/useLongPress';
+import { getMenuPosition } from '../utils/menuPosition';
 import type { HardpointView } from '../utils/equipment';
 import { getSizeName, getTierName, getWeaponTypeName } from '../utils/items';
 
@@ -8,7 +10,9 @@ interface HardpointChipProps {
   // Con un arma montada, muestra solo el arma (el anclaje queda en el tooltip).
   emphasizeWeapon?: boolean;
   onClick?: () => void;
+  onContextMenu?: (x: number, y: number) => void;
 }
+
 
 const getHardpointName = ({ hardpoint }: HardpointView): string =>
   `${getWeaponTypeName(hardpoint.type)} · ${getSizeName(hardpoint.size)}`;
@@ -22,7 +26,8 @@ const getHardpointTitle = (view: HardpointView): string => {
   return `${description}: free`;
 };
 
-export function HardpointChip({ view, isSelected = false, emphasizeWeapon = false, onClick }: HardpointChipProps) {
+export function HardpointChip({ view, isSelected = false, emphasizeWeapon = false, onClick, onContextMenu }: HardpointChipProps) {
+  const longPress = useLongPress((x, y) => onContextMenu?.(x, y));
   const { hardpoint, weapon, builtInWeapon } = view;
   const tierName = weapon ? getTierName(weapon) : null;
   const className = [
@@ -50,6 +55,14 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
     onClick();
   };
 
+  const handleContextMenu = (event: MouseEvent) => {
+    if (!onContextMenu) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const { x, y } = getMenuPosition(event);
+    onContextMenu(x, y);
+  };
+
   return (
     <button
       type="button"
@@ -58,6 +71,8 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
       aria-pressed={isSelected}
       title={getHardpointTitle(view)}
       onClick={handleClick}
+      onContextMenu={handleContextMenu}
+      {...(onContextMenu ? longPress : {})}
     >
       {content}
     </button>
