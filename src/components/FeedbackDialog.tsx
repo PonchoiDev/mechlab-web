@@ -10,7 +10,7 @@ interface FeedbackDialogProps {
   onClose: () => void;
 }
 
-type SendState = 'idle' | 'sending' | 'failed';
+type SendState = 'idle' | 'sending' | 'failed' | 'unavailable';
 
 export function FeedbackDialog({ buildUrl, onMessage, onClose }: FeedbackDialogProps) {
   const [category, setCategory] = useState(CATEGORIES[0]);
@@ -36,6 +36,11 @@ export function FeedbackDialog({ buildUrl, onMessage, onClose }: FeedbackDialogP
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ category, message, contact, website, buildUrl: attachBuild ? buildUrl : '' })
       });
+      // 503: el envío de correo aún no está configurado en Cloudflare.
+      if (response.status === 503) {
+        setState('unavailable');
+        return;
+      }
       if (!response.ok) throw new Error(String(response.status));
       onMessage('Thanks! Your message was sent');
       onClose();
@@ -123,6 +128,9 @@ export function FeedbackDialog({ buildUrl, onMessage, onClose }: FeedbackDialogP
 
           {state === 'failed' && (
             <p className="feedback-error">The message could not be sent. Please try again in a moment.</p>
+          )}
+          {state === 'unavailable' && (
+            <p className="feedback-error">Feedback is not available right now. Please try again later.</p>
           )}
 
           <footer className="share-dialog-actions">
