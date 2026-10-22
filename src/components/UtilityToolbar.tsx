@@ -6,6 +6,9 @@ interface UtilityToolbarProps {
   onClearArmor: () => void;
   onMaximizeArmor: () => void;
   onRemoveItems: (type: 'weapon' | 'ammo') => void;
+  savedBuildCount: number;
+  onSaveBuild: () => void;
+  onOpenBuilds: () => void;
   onShare: (anchor: DOMRect) => void;
 }
 
@@ -17,6 +20,9 @@ export function UtilityToolbar({
   onClearArmor,
   onMaximizeArmor,
   onRemoveItems,
+  savedBuildCount,
+  onSaveBuild,
+  onOpenBuilds,
   onShare
 }: UtilityToolbarProps) {
   return (
@@ -46,6 +52,12 @@ export function UtilityToolbar({
       </div>
       <div className="utility-group">
         <span className="utility-label">BUILD</span>
+        <button type="button" className="utility-button" aria-haspopup="dialog" onClick={onSaveBuild}>
+          Save build
+        </button>
+        <button type="button" className="utility-button" aria-haspopup="dialog" onClick={onOpenBuilds}>
+          My builds{savedBuildCount > 0 && <span className="utility-count">{savedBuildCount}</span>}
+        </button>
         <button
           type="button"
           className="utility-button utility-button-primary"

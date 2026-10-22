@@ -30,6 +30,13 @@ export const useMechBuild = (mechs: Mech[], initialBuild: SharedBuild | null = n
     setActiveZone(null);
   };
 
+  const loadBuild = (build: SharedBuild) => {
+    setSelectedIndex(Math.max(0, mechs.indexOf(build.mech)));
+    setLoadout(build.loadout);
+    setArmor(build.armor);
+    setActiveZone(null);
+  };
+
   const equipItem = (item: Item, targetHardpoint?: number) => {
     if (!activeZone) return;
 
@@ -100,6 +107,7 @@ export const useMechBuild = (mechs: Mech[], initialBuild: SharedBuild | null = n
     mech,
     selectedIndex,
     selectMech,
+    loadBuild,
     loadout,
     armor,
     activeZone,
