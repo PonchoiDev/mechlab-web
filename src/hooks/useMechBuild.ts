@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Item } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
+import type { ActionResult } from '../utils/buildActions';
 import { calculateEquippedWeight, createDefaultArmor, maximizeArmor } from '../utils/calculators';
 import {
   canEquipItem,
@@ -82,6 +83,13 @@ export const useMechBuild = (mechs: Mech[]) => {
     setArmor(createEmptyArmor());
   };
 
+  // Aplica una acción del menú contextual sobre la build actual y devuelve su mensaje.
+  const runAction = (action: (current: EquippedLoadout) => ActionResult): string => {
+    const result = action(loadout);
+    if (result.loadout !== loadout) setLoadout(result.loadout);
+    return result.message;
+  };
+
   const maximizeMechArmor = () => {
     const availableTonnage = mech.tonnageMax - mech.baseTonnage - calculateEquippedWeight(loadout);
     setArmor(prev => maximizeArmor(mech.components, availableTonnage, prev));
@@ -101,6 +109,7 @@ export const useMechBuild = (mechs: Mech[]) => {
     changeTier,
     changeArmor,
     clearArmor,
-    maximizeArmor: maximizeMechArmor
+    maximizeArmor: maximizeMechArmor,
+    runAction
   };
 };

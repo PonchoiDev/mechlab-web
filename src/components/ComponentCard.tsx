@@ -2,6 +2,8 @@ import type { ComponentData, EquippedItem } from '../types/mech';
 import { clampArmorValue } from '../utils/calculators';
 import { getComponentStatus, getHardpointViews, getSlotTypeLabel, type AmmoWarning } from '../utils/equipment';
 import { ArmorControl } from './ArmorControl';
+import { useLongPress } from '../hooks/useLongPress';
+import { getMenuPosition } from '../utils/menuPosition';
 import { HardpointChip } from './HardpointChip';
 import { SlotBar } from './SlotBar';
 
@@ -17,6 +19,39 @@ interface ComponentCardProps {
   selectedHardpoint: number | null;
   onSelect: (hardpointIndex: number | null) => void;
   onArmorChange: (type: 'front' | 'rear', value: number) => void;
+  onHardpointMenu: (hardpointIndex: number, x: number, y: number) => void;
+  onEquipmentMenu: (itemName: string, x: number, y: number) => void;
+}
+
+interface EquipmentChipProps {
+  item: EquippedItem;
+  count: number;
+  category: string;
+  onMenu: (x: number, y: number) => void;
+}
+
+function EquipmentChip({ item, count, category, onMenu }: EquipmentChipProps) {
+  const longPress = useLongPress(onMenu);
+
+  return (
+    <button
+      type="button"
+      className="component-card-item"
+      data-category={category}
+      data-weapon-type={item.type === 'ammo' ? item.weaponType ?? undefined : undefined}
+      title={`${item.name} — right-click for options`}
+      onContextMenu={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const { x, y } = getMenuPosition(event);
+        onMenu(x, y);
+      }}
+      {...longPress}
+    >
+      {item.name}
+      {count > 1 && <small>×{count}</small>}
+    </button>
+  );
 }
 
 const getEquipmentCategory = (item: EquippedItem): string => {
@@ -42,7 +77,9 @@ export function ComponentCard({
   isActive,
   selectedHardpoint,
   onSelect,
-  onArmorChange
+  onArmorChange,
+  onHardpointMenu,
+  onEquipmentMenu
 }: ComponentCardProps) {
   const status = getComponentStatus(componentData, equippedItems);
   const hardpoints = getHardpointViews(componentData.hardpoints, equippedItems);
@@ -88,6 +125,7 @@ export function ComponentCard({
               isSelected={isActive && selectedHardpoint === view.index}
               emphasizeWeapon
               onClick={() => onSelect(view.index)}
+              onContextMenu={(x, y) => onHardpointMenu(view.index, x, y)}
             />
           ))}
         </div>
@@ -96,16 +134,13 @@ export function ComponentCard({
       {equipment.length > 0 && (
         <div className="component-card-equipment">
           {equipment.map(({ item, count }) => (
-            <span
+            <EquipmentChip
               key={item.name}
-              className="component-card-item"
-              data-category={getEquipmentCategory(item)}
-              data-weapon-type={item.type === 'ammo' ? item.weaponType ?? undefined : undefined}
-              title={item.name}
-            >
-              {item.name}
-              {count > 1 && <small>×{count}</small>}
-            </span>
+              item={item}
+              count={count}
+              category={getEquipmentCategory(item)}
+              onMenu={(x, y) => onEquipmentMenu(item.name, x, y)}
+            />
           ))}
         </div>
       )}

@@ -272,3 +272,9 @@ export const getAmmoWarnings = (loadout: Loadout): Record<Zone, AmmoWarning[]> =
     return [...warnings.values()];
   });
 };
+
+// Armas que pueden ir en un anclaje concreto, esté libre u ocupado (para sustituir la montada).
+export const getReplacementWeapons = (catalog: Item[], componentData: ComponentData, hardpointIndex: number): Item[] => {
+  const hardpoint = componentData.hardpoints[hardpointIndex];
+  return hardpoint ? catalog.filter(item => weaponFitsHardpoint(hardpoint, item)) : [];
+};

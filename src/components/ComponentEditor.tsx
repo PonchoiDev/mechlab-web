@@ -6,6 +6,7 @@ import {
   getComponentStatus,
   getEquippableItems,
   getHardpointViews,
+  getReplacementWeapons,
   getSlotTypeLabel,
   getWeaponsForHardpoint
 } from '../utils/equipment';
@@ -50,6 +51,7 @@ interface ComponentEditorProps {
   selectedHardpoint: number | null;
   onSelectHardpoint: (hardpointIndex: number | null) => void;
   onEquip: (item: Item, hardpointIndex?: number) => void;
+  onReplace: (item: Item, hardpointIndex: number) => void;
   onRemoveItem: (instanceId: string) => void;
   onTierChange: (instanceId: string, tier: string) => void;
   onArmorChange: (type: 'front' | 'rear', value: number) => void;
@@ -105,6 +107,7 @@ export function ComponentEditor({
   selectedHardpoint,
   onSelectHardpoint,
   onEquip,
+  onReplace,
   onRemoveItem,
   onTierChange,
   onArmorChange,
@@ -126,10 +129,13 @@ export function ComponentEditor({
     () => getEquippableItems(catalog, componentData, loadout, zone),
     [catalog, componentData, loadout, zone]
   );
-  const candidateWeapons = useMemo(() => selectedHardpoint === null
+  const currentWeapon = selectedView?.weapon;
+  const candidateWeapons = selectedHardpoint === null
     ? equippable.filter(item => item.type === 'weapon')
-    : getWeaponsForHardpoint(catalog, componentData, zoneItems, selectedHardpoint),
-  [catalog, componentData, equippable, selectedHardpoint, zoneItems]);
+    : currentWeapon
+      ? getReplacementWeapons(catalog, componentData, selectedHardpoint)
+        .filter(item => !(item.id === currentWeapon.id && (item.tier ?? '1') === (currentWeapon.tier ?? '1')))
+      : getWeaponsForHardpoint(catalog, componentData, zoneItems, selectedHardpoint);
   const techBaseOptions = [...new Set(candidateWeapons.map(item => item.techBase).filter((value): value is string => !!value))].sort();
   const weaponTypeOptions = [...new Set(candidateWeapons.map(getItemWeaponType).filter((value): value is WeaponType => !!value))];
   const weapons = sortWeapons(filterItems(candidateWeapons, {
@@ -144,6 +150,10 @@ export function ComponentEditor({
   const ammoCount = equippable.filter(item => item.type === 'ammo').length;
 
   const equipWeapon = (item: Item) => {
+    if (selectedHardpoint !== null && currentWeapon) {
+      onReplace(item, selectedHardpoint);
+      return;
+    }
     if (selectedHardpoint === null) {
       onEquip(item);
       return;
@@ -178,7 +188,17 @@ export function ComponentEditor({
     };
   }, [onClose]);
 
-  const weaponsTitle = selectedView
+  const weaponsTitle = selectedView?.weapon
+    ? (
+      <>
+        Replace{' '}
+        <span className="editor-weapon-name" data-weapon-type={selectedView.hardpoint.type}>
+          {selectedView.weapon.name}
+        </span>{' '}
+        with
+      </>
+    )
+    : selectedView
     ? `Weapons for ${getWeaponTypeName(selectedView.hardpoint.type)} · ${getSizeName(selectedView.hardpoint.size)}`
     : 'Compatible weapons';
 
@@ -218,7 +238,7 @@ export function ComponentEditor({
       {hardpoints.length > 0 && (
         <section className="editor-section">
           <div className="editor-section-heading">
-            <h3>{weaponsTitle} <span>{selectedView?.weapon ? 0 : weapons.length}</span></h3>
+            <h3>{weaponsTitle} <span className="editor-count">{weapons.length}</span></h3>
             <div className="sort-controls" role="group" aria-label="Sort weapons by size">
               {(['large-first', 'small-first'] as const).map(order => (
                 <button
@@ -233,9 +253,9 @@ export function ComponentEditor({
               ))}
             </div>
           </div>
-          {selectedView?.weapon ? (
+          {selectedView?.weapon && (
             <div className="editor-occupied">
-              <p className="editor-empty">Occupied by {selectedView.weapon.name}.</p>
+              <p className="editor-empty">Pick a weapon below to swap it in this hardpoint.</p>
               <button
                 type="button"
                 className="editor-link"
@@ -244,7 +264,8 @@ export function ComponentEditor({
                 Remove it
               </button>
             </div>
-          ) : candidateWeapons.length > 0 ? (
+          )}
+          {candidateWeapons.length > 0 ? (
             <>
               <div className="editor-filters">
                 <input

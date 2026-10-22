@@ -13,6 +13,8 @@ interface MechBoardProps {
   reference: ReactNode;
   onSelectZone: (zone: Zone, hardpointIndex: number | null) => void;
   onArmorChange: (zone: Zone, type: 'front' | 'rear', value: number) => void;
+  onHardpointMenu: (zone: Zone, hardpointIndex: number, x: number, y: number) => void;
+  onEquipmentMenu: (zone: Zone, itemName: string, x: number, y: number) => void;
 }
 
 export function MechBoard({
@@ -23,7 +25,9 @@ export function MechBoard({
   selectedHardpoint,
   reference,
   onSelectZone,
-  onArmorChange
+  onArmorChange,
+  onHardpointMenu,
+  onEquipmentMenu
 }: MechBoardProps) {
   const ammoWarnings = getAmmoWarnings(loadout);
 
@@ -50,6 +54,8 @@ export function MechBoard({
           selectedHardpoint={selectedHardpoint}
           onSelect={(hardpointIndex) => onSelectZone(zone, hardpointIndex)}
           onArmorChange={(type, value) => onArmorChange(zone, type, value)}
+          onHardpointMenu={(index, x, y) => onHardpointMenu(zone, index, x, y)}
+          onEquipmentMenu={(itemName, x, y) => onEquipmentMenu(zone, itemName, x, y)}
         />
       ))}
     </section>
