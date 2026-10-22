@@ -43,7 +43,8 @@ const json = (body: unknown, status = 200) =>
 
 const handleFeedback = async (request: Request, env: Env): Promise<Response> => {
   if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
-  if (!env.FEEDBACK_EMAIL || !env.FEEDBACK_TO) return json({ error: 'Feedback is not configured' }, 503);
+  if (!env.FEEDBACK_EMAIL) return json({ error: 'Feedback is not configured', missing: 'send_email binding' }, 503);
+  if (!env.FEEDBACK_TO) return json({ error: 'Feedback is not configured', missing: 'FEEDBACK_TO secret' }, 503);
 
   const feedback = parseFeedback(await request.json().catch(() => null));
   if (!feedback) return json({ error: 'Invalid message' }, 400);
