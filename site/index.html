@@ -283,18 +283,22 @@
       .cover-meta {
         display: flex;
         flex-wrap: wrap;
-        gap: 4px 10px;
+        align-items: center;
+        gap: 6px 10px;
         margin: 12px 0 0;
-        padding: 0;
-        list-style: none;
         color: var(--muted);
         font: 500 10px var(--mono);
         text-transform: uppercase;
       }
 
-      .cover-meta li + li::before {
-        content: '·';
-        margin-right: 10px;
+      .cover-dlc {
+        padding: 3px 8px;
+        border-radius: 2px;
+        color: #18200f;
+        background: var(--lime);
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        box-shadow: 0 0 14px rgba(195, 237, 98, 0.35);
       }
 
       .cover-action {
@@ -418,12 +422,10 @@
               <div class="cover-title">
                 <small>MECHWARRIOR 5</small>
                 <strong>Mercenaries <span>MechLab</span></strong>
-                <ul class="cover-meta">
-                  <li>552 variants</li>
-                  <li>Tiers</li>
-                  <li>Ammo</li>
-                  <li>Share builds</li>
-                </ul>
+                <p class="cover-meta">
+                  <span>552 variants</span>
+                  <span class="cover-dlc">DLC 9 READY</span>
+                </p>
               </div>
               <div class="cover-action">Open MechLab <span aria-hidden="true">→</span></div>
             </a>
