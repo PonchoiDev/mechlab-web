@@ -1591,3 +1591,12 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   color: var(--work-muted);
   cursor: pointer;
 }
+
+.site-footer {
+  margin-top: 24px;
+  padding: 14px 0 4px;
+  border-top: 1px solid var(--work-line);
+  color: var(--work-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
