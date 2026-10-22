@@ -26,6 +26,7 @@ import { MyBuildsDialog } from './components/MyBuildsDialog';
 import { SaveBuildDialog } from './components/SaveBuildDialog';
 import { ShareImageDialog } from './components/ShareImageDialog';
 import { StatsReadout } from './components/StatsReadout';
+import { SupportLink } from './components/SupportLink';
 import { Toast } from './components/Toast';
 import { UtilityToolbar } from './components/UtilityToolbar';
 
@@ -94,7 +95,7 @@ export default function App() {
     [mech, loadout, armor, summary, sarna.asset]
   );
   const copyBuildLink = async (url = buildUrl) => {
-    showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link — copy it from the image dialog');
+    showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link. Copy it from the image dialog');
   };
   const openShareMenu = (anchor: DOMRect) => setMenu({
     title: 'Share build',
@@ -128,14 +129,15 @@ export default function App() {
   return (
     <div className={activeZone ? 'mechlab-shell has-editor' : 'mechlab-shell'}>
       <header className="topbar">
-        <div className="brand-lockup">
+        <a className="brand-lockup" href="/" title="Back to MW Builder">
           <span className="brand-mark" aria-hidden="true">M</span>
           <div>
             <p className="eyebrow">FIELD CONFIGURATION SYSTEM</p>
             <h1>MechLab <span>MW5: MERCENARIES</span></h1>
           </div>
-        </div>
+        </a>
         <div className="topbar-tools">
+          <SupportLink compact />
           <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={selectMech} />
         </div>
       </header>
@@ -202,8 +204,14 @@ export default function App() {
       )}
 
       <footer className="site-footer">
-        Fan-made tool, not affiliated with or endorsed by Piranha Games, Microsoft or the MechWarrior and BattleTech
-        trademark holders. Game data belongs to its respective owners.
+        <p className="support-note">
+          <span>Life in the Inner Sphere is rough. MechLab is free and ad-free, so if it helps you, consider supporting this merc!</span>
+          <SupportLink />
+        </p>
+        <p>
+          Fan-made tool, not affiliated with or endorsed by Piranha Games, Microsoft or the MechWarrior and BattleTech
+          trademark holders. Game data belongs to its respective owners.
+        </p>
       </footer>
 
       {isSharingImage && (

@@ -52,6 +52,21 @@
 .brand-lockup {
   justify-content: flex-start;
   gap: 13px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-lockup .brand-mark {
+  transition: box-shadow 160ms ease;
+}
+
+.brand-lockup:hover .brand-mark,
+.brand-lockup:focus-visible .brand-mark {
+  box-shadow: 0 0 0 2px var(--work-bg), 0 0 0 3px var(--work-lime), 0 0 16px rgba(195, 237, 98, 0.35);
+}
+
+.brand-lockup:focus-visible {
+  outline: none;
 }
 
 .brand-mark {
@@ -1593,12 +1608,59 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 .site-footer {
+  display: grid;
+  gap: 10px;
   margin-top: 24px;
   padding: 14px 0 4px;
   border-top: 1px solid var(--work-line);
   color: var(--work-muted);
   font-size: 11px;
   line-height: 1.5;
+}
+
+.support-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  color: var(--work-text);
+  font-size: 13px;
+}
+
+.support-link {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--work-amber);
+  border-radius: 2px;
+  color: var(--work-amber);
+  background: rgba(242, 183, 94, 0.08);
+  font: 600 10px var(--work-mono);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 120ms ease, background-color 120ms ease;
+}
+
+.support-link:hover,
+.support-link:focus-visible {
+  color: #18200f;
+  background: var(--work-amber);
+  outline: none;
+}
+
+.support-link-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.support-link.is-compact {
+  align-self: flex-end;
+  min-height: 34px;
 }
 
 .share-dialog-backdrop {

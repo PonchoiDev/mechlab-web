@@ -46,7 +46,7 @@ function EquipmentChip({ item, count, category, onMenu }: EquipmentChipProps) {
       className="component-card-item"
       data-category={category}
       data-weapon-type={item.type === 'ammo' ? item.weaponType ?? undefined : undefined}
-      title={`${item.name} — right-click for options`}
+      title={`${item.name}: right-click for options`}
       onContextMenu={(event) => {
         event.preventDefault();
         event.stopPropagation();
