@@ -22,7 +22,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 
 ```sh
 npm install
-npm run dev          # servidor de desarrollo
+npm run dev          # servidor de desarrollo en http://localhost:5173/mercs/
 npm run dev -- --host 0.0.0.0   # accesible desde otros dispositivos de la red
 ```
 
@@ -46,6 +46,7 @@ src/
   types/               Tipos de TypeScript
   data/                mechs.json e items.json que usa la web
   test/                Datos de prueba compartidos por los tests
+site/                  Archivos de la raíz del dominio (redirección a /mercs/), copiados al build
 tools/
   generar_mechs.py     Genera src/data/mechs.json a partir de los datos del juego
   generar_items.py     Genera src/data/items.json a partir de los datos del juego
@@ -64,6 +65,12 @@ python3 tools/generar_items.py
 `generar_items.py` lee los archivos de `tools/datos-juego/items/` y escribe `src/data/items.json`. Agrupa los tiers de cada arma (`_Lvl0` a `_Lvl5`) aplicando sus quirks, guarda la base tecnológica de cada objeto, el tipo de munición de cada arma y munición, los multiplicadores de la salva (proyectiles para el daño, misiles y disparos de ráfaga para el calor) y la munición que gasta cada arma por salva. Las armas no guardan slots, porque en MW5 Mercenaries solo ocupan un anclaje. Ignora los archivos que no son objetos equipables y, al terminar, avisa de las municiones que faltan.
 
 Ambos aceptan opcionalmente otra ruta de destino como argumento.
+
+## Publicación
+
+La web está publicada en **https://mw-builder.com/mercs/** con Cloudflare Workers (`wrangler.jsonc`). Cada juego tiene su propia ruta en el dominio; de momento solo existe `/mercs/` (MW5: Mercenaries) y la raíz redirige a ella (`site/_redirects`).
+
+`npm run build` genera la web en `dist/mercs/` y copia el contenido de `site/` en la raíz de `dist/`. Cada fusión en `main` se publica automáticamente y cada pull request tiene una URL de vista previa.
 
 ## Integración continua
 

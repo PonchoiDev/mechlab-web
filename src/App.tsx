@@ -139,6 +139,11 @@ export default function App() {
         />
       )}
 
+      <footer className="site-footer">
+        Fan-made tool, not affiliated with or endorsed by Piranha Games, Microsoft or the MechWarrior and BattleTech
+        trademark holders. Game data belongs to its respective owners.
+      </footer>
+
       {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={closeMenu} />}
       {toast && <Toast key={toast.id} message={toast.message} onDismiss={dismissToast} />}
     </div>
