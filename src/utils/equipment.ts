@@ -1,6 +1,6 @@
 import type { Item } from '../types/item';
 import type { ComponentData, EquippedItem, Hardpoint, Loadout, Zone } from '../types/mech';
-import { getItemSupportedSlotTypes, getItemWeaponType, isAmmoCompatibleWithWeapon, SIZE_RANK } from './items';
+import { getItemSupportedSlotTypes, getItemWeaponType, getSizeName, getWeaponTypeName, isAmmoCompatibleWithWeapon, SIZE_RANK } from './items';
 import { mapZones } from './zones';
 
 const GENERAL_SLOT_TYPE = 'General_SlotType';
@@ -26,6 +26,29 @@ const SLOT_TYPE_LABELS: Record<string, string> = {
 
 export const getSlotTypeLabel = (slotType: string): string =>
   SLOT_TYPE_LABELS[slotType] ?? slotType.replace(/_SlotType$/, '').replace(/_/g, ' ');
+
+export const getHardpointName = (hardpoint: Hardpoint): string =>
+  `${getWeaponTypeName(hardpoint.type)} · ${getSizeName(hardpoint.size)}`;
+
+// Categoría del equipo instalado, que decide su color en las tarjetas del tablero.
+export const getEquipmentCategory = (item: Item): 'ammo' | 'jump-jet' | 'heat-sink' | 'module' => {
+  if (item.type === 'ammo') return 'ammo';
+  if (item.equipmentType === 'jumpJet') return 'jump-jet';
+  if (item.cooling !== undefined) return 'heat-sink';
+  return 'module';
+};
+
+// Equipo y munición de un componente agrupados por nombre, en el orden en que se instalaron.
+export const groupEquipment = <T extends Item>(equippedItems: T[]): { item: T; count: number }[] => Array.from(
+  equippedItems
+    .filter(item => item.type !== 'weapon')
+    .reduce((groups, item) => {
+      const group = groups.get(item.name) ?? { item, count: 0 };
+      group.count += 1;
+      return groups.set(item.name, group);
+    }, new Map<string, { item: T; count: number }>())
+    .values()
+);
 
 export const getUsedGeneralSlots = (equippedItems: Item[]): number =>
   equippedItems

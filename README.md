@@ -12,6 +12,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 - Resumen de pendientes de la build (anclajes libres, armas sin munición, armadura incompleta, sobrepeso) y duración de la munición instalada.
 - Tabla de rendimiento de armas (daño, calor, RPM, DPS y alcance) y resumen de munición.
 - Imagen de referencia de cada 'Mech obtenida de [Sarna.net](https://www.sarna.net).
+- Compartir la build: un enlace que la abre tal cual (`/mercs/?b=…`) y una imagen PNG con el 'Mech, su equipo y sus estadísticas, lista para copiar o descargar.
 
 ## Requisitos
 
@@ -41,11 +42,12 @@ src/
   App.tsx              Componente principal
   components/          Componentes de la interfaz
   hooks/               Hooks de React (imagen de Sarna)
-  services/            Acceso a la API de Sarna
+  services/            Acceso a la API de Sarna e imagen de la build
   utils/               Lógica del configurador: cálculos, equipo, items y zonas
   types/               Tipos de TypeScript
   data/                mechs.json e items.json que usa la web
   test/                Datos de prueba compartidos por los tests
+worker/                Script del Worker de Cloudflare (proxy de imágenes de Sarna)
 site/                  Archivos de la raíz del dominio (redirección a /mercs/), copiados al build
 tools/
   generar_mechs.py     Genera src/data/mechs.json a partir de los datos del juego
@@ -70,7 +72,11 @@ Ambos aceptan opcionalmente otra ruta de destino como argumento.
 
 La web está publicada en **https://mw-builder.com/mercs/** con Cloudflare Workers (`wrangler.jsonc`). Cada juego tiene su propia ruta en el dominio; de momento solo existe `/mercs/` (MW5: Mercenaries) y la raíz redirige a ella (`site/_redirects`).
 
-`npm run build` genera la web en `dist/mercs/` y copia el contenido de `site/` en la raíz de `dist/`. Cada fusión en `main` se publica automáticamente y cada pull request tiene una URL de vista previa.
+`npm run build` genera la web en `dist/mercs/` y copia el contenido de `site/` en la raíz de `dist/`.
+
+El Worker solo ejecuta código en `/mercs/api/*`; el resto lo sirven los assets estáticos. Ahí está `/mercs/api/sarna-image`, un proxy que sirve desde el dominio las imágenes de Sarna (solo de su wiki) para poder dibujarlas en la imagen de la build, porque su servidor de imágenes no envía cabeceras CORS. Guarda cada imagen en la caché de Cloudflare. En desarrollo, el servidor de Vite hace el mismo papel.
+
+Cada fusión en `main` se publica automáticamente y cada pull request tiene una URL de vista previa.
 
 ## Integración continua
 

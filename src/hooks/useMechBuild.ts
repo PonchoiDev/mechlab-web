@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Item } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import type { ActionResult } from '../utils/buildActions';
+import type { SharedBuild } from '../utils/buildCode';
 import { calculateEquippedWeight, createDefaultArmor, maximizeArmor } from '../utils/calculators';
 import {
   canEquipItem,
@@ -13,11 +14,11 @@ import {
 } from '../utils/equipment';
 import { createEmptyArmor, createEmptyLoadout } from '../utils/zones';
 
-export const useMechBuild = (mechs: Mech[]) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+export const useMechBuild = (mechs: Mech[], initialBuild: SharedBuild | null = null) => {
+  const [selectedIndex, setSelectedIndex] = useState(() => Math.max(0, initialBuild ? mechs.indexOf(initialBuild.mech) : 0));
   const mech = mechs[selectedIndex];
-  const [loadout, setLoadout] = useState<EquippedLoadout>(createEmptyLoadout);
-  const [armor, setArmor] = useState<ArmorState>(() => createDefaultArmor(mech.components));
+  const [loadout, setLoadout] = useState<EquippedLoadout>(() => initialBuild?.loadout ?? createEmptyLoadout());
+  const [armor, setArmor] = useState<ArmorState>(() => initialBuild?.armor ?? createDefaultArmor(mech.components));
   const [activeZone, setActiveZone] = useState<Zone | null>(null);
 
   const selectMech = (index: number) => {

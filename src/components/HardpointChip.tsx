@@ -1,8 +1,8 @@
 import type { MouseEvent } from 'react';
 import { useLongPress } from '../hooks/useLongPress';
 import { getMenuPosition } from '../utils/menuPosition';
-import type { HardpointView } from '../utils/equipment';
-import { getSizeName, getTierName, getWeaponTypeName } from '../utils/items';
+import { getHardpointName, type HardpointView } from '../utils/equipment';
+import { getTierName } from '../utils/items';
 
 interface HardpointChipProps {
   view: HardpointView;
@@ -13,14 +13,10 @@ interface HardpointChipProps {
   onContextMenu?: (x: number, y: number) => void;
 }
 
-
-const getHardpointName = ({ hardpoint }: HardpointView): string =>
-  `${getWeaponTypeName(hardpoint.type)} · ${getSizeName(hardpoint.size)}`;
-
 const getHardpointTitle = (view: HardpointView): string => {
   const { hardpoint, weapon, builtInWeapon } = view;
   const weightClass = hardpoint.weightClass ? ` (${hardpoint.weightClass} class)` : '';
-  const description = `${getHardpointName(view)} hardpoint${weightClass}`;
+  const description = `${getHardpointName(hardpoint)} hardpoint${weightClass}`;
   if (weapon) return `${description}: ${weapon.name}`;
   if (builtInWeapon) return `${description}: free, uses the built-in ${builtInWeapon}`;
   return `${description}: free`;
@@ -38,7 +34,7 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
   ].filter(Boolean).join(' ');
   const content = (
     <>
-      {!(weapon && emphasizeWeapon) && <span className="hardpoint-chip-label">{getHardpointName(view)}</span>}
+      {!(weapon && emphasizeWeapon) && <span className="hardpoint-chip-label">{getHardpointName(hardpoint)}</span>}
       <span className="hardpoint-chip-content">
         <span className="hardpoint-chip-name">{weapon?.name ?? builtInWeapon ?? 'Free'}</span>
         {tierName && <span className="hardpoint-chip-tier">{tierName}</span>}
