@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { getMechDisplayName, matchesMechQuery } from './mechs';
+import {
+  EMPTY_MECH_FILTERS,
+  getHardpointCounts,
+  getMechDisplayName,
+  hasJumpJets,
+  matchesMechFilters,
+  matchesMechQuery,
+  parseMechQuery,
+  type MechFilters
+} from './mechs';
 import { allMechs, getMech } from '../test/fixtures';
 
 describe('getMechDisplayName', () => {
@@ -35,5 +44,40 @@ describe('matchesMechQuery', () => {
 
   it('descarta los mechs que no coinciden', () => {
     expect(matchesMechQuery(adder, 'atlas')).toBe(false);
+  });
+});
+
+describe('filtros del selector de chasis', () => {
+  const archer = getMech('ARC-2R');
+  const adder = getMech('ADR-PRIME');
+  const catapult = getMech('CPLT-C3');
+
+  it('cuenta los anclajes por tipo sin el cuerpo a cuerpo', () => {
+    expect(getHardpointCounts(archer)).toMatchObject({ energy: 4, missile: 2, ballistic: 0, omni: 0 });
+    expect(getHardpointCounts(adder)).toMatchObject({ energy: 1, omni: 2 });
+    expect(getHardpointCounts(catapult).artillery).toBe(1);
+  });
+
+  it('filtra por clase, tecnología y jump jets', () => {
+    expect(matchesMechFilters(archer, { ...EMPTY_MECH_FILTERS, weightClasses: ['heavy'] })).toBe(true);
+    expect(matchesMechFilters(archer, { ...EMPTY_MECH_FILTERS, weightClasses: ['light', 'medium'] })).toBe(false);
+    expect(matchesMechFilters(adder, { ...EMPTY_MECH_FILTERS, techBase: 'Clan' })).toBe(true);
+    expect(matchesMechFilters(archer, { ...EMPTY_MECH_FILTERS, techBase: 'Clan' })).toBe(false);
+    expect(allMechs.filter(hasJumpJets).length).toBeGreaterThan(0);
+    expect(allMechs.filter(mech => !hasJumpJets(mech)).every(mech => !matchesMechFilters(mech, { ...EMPTY_MECH_FILTERS, jumpJets: true }))).toBe(true);
+  });
+
+  it('usa los anclajes omni como comodín, contando cada uno una sola vez', () => {
+    const minimums = (minHardpoints: MechFilters['minHardpoints']) => ({ ...EMPTY_MECH_FILTERS, minHardpoints });
+    expect(matchesMechFilters(adder, minimums({ energy: 3 }))).toBe(true);
+    expect(matchesMechFilters(adder, minimums({ energy: 2, missile: 1 }))).toBe(true);
+    expect(matchesMechFilters(adder, minimums({ energy: 2, missile: 2 }))).toBe(false);
+    expect(matchesMechFilters(adder, minimums({ omni: 2, energy: 2 }))).toBe(false);
+    expect(matchesMechFilters(adder, minimums({ ams: 1 }))).toBe(false);
+  });
+
+  it('entiende los atajos del buscador', () => {
+    expect(parseMechQuery('archer 3e 2M jj')).toEqual({ text: 'archer', filters: { jumpJets: true, minHardpoints: { energy: 3, missile: 2 } } });
+    expect(parseMechQuery('1art')).toEqual({ text: '', filters: { jumpJets: false, minHardpoints: { artillery: 1 } } });
   });
 });
