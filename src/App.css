@@ -131,24 +131,149 @@
 
 .mech-picker-input::placeholder { color: var(--work-muted); }
 
-.mech-options {
+.mech-options-panel {
   position: absolute;
   z-index: 10;
   top: calc(100% + 4px);
   right: 0;
-  left: 0;
-  max-height: min(360px, 60vh);
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: min(460px, calc(100vw - 32px));
+  max-height: min(560px, 75vh);
   border: 1px solid var(--work-line);
   background: #151a15;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.48);
+}
+
+.mech-options {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.mech-picker-filter-count {
+  margin-left: 8px;
+  padding: 0 5px;
+  border-radius: 2px;
+  color: #18200f;
+  background: var(--work-cyan);
+  font-weight: 600;
+}
+
+.mech-filters {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border-bottom: 1px solid var(--work-line);
+  background: var(--work-panel);
+}
+
+.mech-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.mech-filter-label {
+  margin-right: 2px;
+  color: var(--work-muted);
+  font: 500 9px var(--work-mono);
+  letter-spacing: 0.06em;
+}
+
+.mech-filter-label:not(:first-child) {
+  margin-left: 8px;
+}
+
+.mech-filter-chip {
+  min-height: 26px;
+  padding: 0 8px;
+  color: var(--work-text);
+  background: var(--work-panel-raised);
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  cursor: pointer;
+  font: 500 10px var(--work-mono);
+}
+
+.mech-filter-chip:hover { border-color: var(--work-cyan); }
+
+.mech-filter-chip[aria-pressed='true'] {
+  color: #18200f;
+  background: var(--work-lime);
+  border-color: var(--work-lime);
+}
+
+.mech-filter-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  font: 600 10px var(--work-mono);
+}
+
+.mech-filter-stepper.is-active { border-color: var(--weapon-color); }
+
+.mech-filter-stepper > span {
+  min-width: 26px;
+  color: var(--weapon-color);
+  text-align: center;
+}
+
+.mech-filter-stepper button {
+  width: 22px;
+  height: 24px;
+  padding: 0;
+  color: var(--work-text);
+  background: var(--work-panel-raised);
+  border: 0;
+  cursor: pointer;
+  font: 500 12px var(--work-mono);
+}
+
+.mech-filter-stepper button:disabled { opacity: 0.35; cursor: default; }
+.mech-filter-stepper button:hover:not(:disabled) { color: var(--work-cyan); }
+
+.mech-filter-summary {
+  justify-content: space-between;
+  color: var(--work-muted);
+  font: 500 10px var(--work-mono);
+}
+
+.mech-filter-clear {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--work-cyan);
+  cursor: pointer;
+  font: inherit;
+  text-decoration: underline;
+}
+
+.mech-option-hardpoints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.mech-hardpoint-tag {
+  padding: 0 4px;
+  border: 1px solid var(--weapon-color, var(--work-line));
+  border-radius: 2px;
+  color: var(--weapon-color, var(--work-text));
+  font: 600 9px/14px var(--work-mono);
+}
+
+.mech-hardpoint-tag.is-jump-jets {
+  --weapon-color: var(--work-amber);
 }
 
 .mech-option {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 3px 12px;
+  gap: 4px 12px;
   min-height: 42px;
   padding: 7px 10px;
   color: var(--work-text);
@@ -163,9 +288,9 @@
 }
 
 .mech-option small {
-  grid-column: 1 / -1;
   color: var(--work-muted);
   font: 400 10px var(--work-mono);
+  text-align: right;
 }
 
 .mech-option:hover,
