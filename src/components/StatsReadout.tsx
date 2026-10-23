@@ -1,5 +1,5 @@
 import type { Mech } from '../types/mech';
-import type { BuildSummary } from '../utils/calculators';
+import { truncateTo, type BuildSummary } from '../utils/calculators';
 
 interface StatsReadoutProps {
   mech: Mech;
@@ -15,6 +15,7 @@ export function StatsReadout({ mech, summary }: StatsReadoutProps) {
     topSpeed,
     jumpJetCount,
     firepower,
+    meleeDamage,
     heatSpike,
     coolingRate,
     maxWeaponRange
@@ -25,7 +26,7 @@ export function StatsReadout({ mech, summary }: StatsReadoutProps) {
       <div className="readout-cell">
         <span className="readout-label">TONNAGE</span>
         <strong className={totalWeight > mech.tonnageMax ? 'readout-warning' : ''}>
-          {totalWeight.toFixed(2)} <small>/ {mech.tonnageMax} t</small>
+          {truncateTo(totalWeight, 2).toFixed(2)} <small>/ {mech.tonnageMax} t</small>
         </strong>
       </div>
       <div className="readout-cell">
@@ -34,15 +35,23 @@ export function StatsReadout({ mech, summary }: StatsReadoutProps) {
       </div>
       <div className="readout-cell">
         <span className="readout-label">ARMOR MASS</span>
-        <strong>{armorWeight.toFixed(2)} <small>t</small></strong>
+        <strong>{truncateTo(armorWeight, 2).toFixed(2)} <small>t</small></strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label">TOP SPEED</span>
-        <strong>{topSpeed.toFixed(1)} <small>km/h · {jumpJetCount} JJ</small></strong>
+        <strong>{topSpeed.toFixed(1)} <small>km/h</small></strong>
+      </div>
+      <div className="readout-cell">
+        <span className="readout-label">JUMP JETS</span>
+        <strong>{jumpJetCount}</strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label">VOLLEY DAMAGE</span>
         <strong>{firepower}</strong>
+      </div>
+      <div className="readout-cell">
+        <span className="readout-label" title="Melee weapons and punches from empty hands, lower arms and fists">MELEE DAMAGE</span>
+        <strong>{meleeDamage}</strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label">HEAT SPIKE</span>

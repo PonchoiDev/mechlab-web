@@ -3,7 +3,7 @@ import type { Item } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import type { ActionResult } from '../utils/buildActions';
 import { getStockBuild, type SharedBuild } from '../utils/buildCode';
-import { calculateEquippedWeight, createDefaultArmor, maximizeArmor } from '../utils/calculators';
+import { calculateEquippedWeight, createDefaultArmor, getArmorPointsPerTon, maximizeArmor } from '../utils/calculators';
 import {
   canEquipItem,
   createEquippedItem,
@@ -105,7 +105,7 @@ export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: Share
 
   const maximizeMechArmor = () => {
     const availableTonnage = mech.tonnageMax - mech.baseTonnage - calculateEquippedWeight(loadout);
-    setArmor(prev => maximizeArmor(mech.components, availableTonnage, prev));
+    setArmor(prev => maximizeArmor(mech.components, availableTonnage, prev, getArmorPointsPerTon(mech)));
   };
 
   return {

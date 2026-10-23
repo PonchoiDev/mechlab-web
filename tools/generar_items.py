@@ -32,6 +32,8 @@ REGEX_DAMAGE = re.compile(r'(?:DamageOverDuration|(?<![a-zA-Z])Damage)=([0-9.]+)
 REGEX_HEAT = re.compile(r'(?:HeatGeneratedOverDuration|(?<![a-zA-Z])HeatGenerated)=([0-9.]+)')
 REGEX_COOLDOWN = re.compile(r'(?<![a-zA-Z])Cooldown=([0-9.]+)')
 REGEX_RANGE = re.compile(r'(?<![A-Za-z])(?:OptimalRange|MaxRange)=([0-9.]+)')
+# Alcance máximo: el juego muestra este como "Max range" (PPC 920 frente a 460 de óptimo).
+REGEX_MAX_RANGE = re.compile(r'(?<![A-Za-z])MaxRange=([0-9.]+)')
 REGEX_QUIRK = re.compile(r"/Game/Quirks/([A-Za-z0-9_]+)\.[^\"]+\"',Value=([+-]?[0-9.]+)")
 
 
@@ -151,11 +153,13 @@ def agrupar_archivos_por_item(errores, copias):
 
 def obtener_estadisticas_base(contenido):
     rango = buscar_numero(REGEX_RANGE, contenido)
+    rango_maximo = buscar_numero(REGEX_MAX_RANGE, contenido)
     return {
         "damage": buscar_numero(REGEX_DAMAGE, contenido, 0.0),
         "heatPerShot": buscar_numero(REGEX_HEAT, contenido, 0.0),
         "cooldown": buscar_numero(REGEX_COOLDOWN, contenido, 0.0),
-        "range": round(rango / 100.0, 1) if rango is not None else 0.0
+        "range": round(rango / 100.0, 1) if rango is not None else 0.0,
+        "maxRange": round((rango_maximo if rango_maximo is not None else rango or 0.0) / 100.0, 1)
     }
 
 
@@ -171,6 +175,7 @@ def calcular_tier(contenido, base):
         calor = round(base["heatPerShot"] * (1.0 + q_heat), 3)
         enfriamiento = round(base["cooldown"] * (1.0 + q_cd), 3)
         rango = round(base["range"] * (1.0 + q_rng), 1)
+        rango_maximo = round(base["maxRange"] * (1.0 + q_rng), 1)
     else:
         # Sin quirks: tier 1 o armas con valores directos, como el AMS.
         propias = obtener_estadisticas_base(contenido)
@@ -178,12 +183,14 @@ def calcular_tier(contenido, base):
         calor = round(propias["heatPerShot"], 3) if REGEX_HEAT.search(contenido) else base["heatPerShot"]
         enfriamiento = round(propias["cooldown"], 3) if REGEX_COOLDOWN.search(contenido) else base["cooldown"]
         rango = propias["range"] if REGEX_RANGE.search(contenido) else base["range"]
+        rango_maximo = propias["maxRange"] if REGEX_RANGE.search(contenido) else base["maxRange"]
 
     return {
         "damage": dano,
         "heatPerShot": calor,
         "cooldown": enfriamiento,
         "range": rango,
+        "maxRange": rango_maximo,
         "rpm": round(60.0 / enfriamiento, 1) if enfriamiento > 0 else 0.0
     }
 

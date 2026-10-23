@@ -1,5 +1,5 @@
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
-import { calculateArmorWeight, calculateEquippedWeight } from './calculators';
+import { calculateArmorWeight, calculateEquippedWeight, getArmorPointsPerTon } from './calculators';
 import { getAmmoWarnings, getComponentStatus } from './equipment';
 import { ZONE_LABELS, ZONE_KEYS } from './zones';
 
@@ -19,7 +19,7 @@ const plural = (count: number, singular: string, pluralForm = `${singular}s`) =>
 // Lo que falta o sobra para terminar la build, del más grave al más leve.
 export const getBuildIssues = (mech: Mech, loadout: EquippedLoadout, armor: ArmorState): BuildIssue[] => {
   const issues: BuildIssue[] = [];
-  const totalWeight = mech.baseTonnage + calculateEquippedWeight(loadout) + calculateArmorWeight(armor);
+  const totalWeight = mech.baseTonnage + calculateEquippedWeight(loadout) + calculateArmorWeight(armor, getArmorPointsPerTon(mech));
   const overweight = Math.round((totalWeight - mech.tonnageMax) * 100) / 100;
 
   if (overweight > 0) {
