@@ -13,6 +13,7 @@ import { ZONE_LABELS } from './utils/zones';
 import { useMechBuild } from './hooks/useMechBuild';
 import { useSarnaAsset } from './hooks/useSarnaAsset';
 import { useSavedBuilds } from './hooks/useSavedBuilds';
+import { useViewPreferences } from './hooks/useViewPreferences';
 import { copyText } from './services/clipboard';
 import { BuildStatus } from './components/BuildStatus';
 import { ComponentEditor } from './components/ComponentEditor';
@@ -67,6 +68,7 @@ export default function App() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(openFeedbackOnLoad);
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
   const saved = useSavedBuilds();
+  const view = useViewPreferences();
   const closeMenu = useCallback(() => setMenu(null), []);
   const dismissToast = useCallback(() => setToast(null), []);
   const showToast = useCallback((message: string) => setToast({ id: Date.now(), message }), []);
@@ -140,7 +142,7 @@ export default function App() {
   };
 
   return (
-    <div className={activeZone ? 'mechlab-shell has-editor' : 'mechlab-shell'}>
+    <div className={['mechlab-shell', activeZone ? `has-editor is-editor-${view.editorSide}` : ''].filter(Boolean).join(' ')}>
       <header className="topbar">
         <a className="brand-lockup" href="/" title="Back to MW Builder">
           <span className="brand-mark" aria-hidden="true">M</span>
@@ -185,7 +187,38 @@ export default function App() {
       />
 
       <main className="workspace">
+        <div className="view-toggles" aria-label="View options">
+          <span className="utility-label">VIEW</span>
+          <button
+            type="button"
+            className="utility-button"
+            aria-pressed={view.expandedSlots}
+            title="Show every slot as a cell, like the Details view of the in-game mechlab"
+            onClick={view.toggleExpandedSlots}
+          >
+            {view.expandedSlots ? 'Hide slot cells' : 'Show slot cells'}
+          </button>
+          <button
+            type="button"
+            className="utility-button"
+            aria-pressed={view.compactBoard}
+            title="Hide the 'Mech image and lay the components out in five columns"
+            onClick={view.toggleCompactBoard}
+          >
+            Compact board
+          </button>
+          <button
+            type="button"
+            className="utility-button"
+            title="Side of the screen where the component panel opens"
+            onClick={view.toggleEditorSide}
+          >
+            Panel {view.editorSide} ⇄
+          </button>
+        </div>
         <MechBoard
+          expandedSlots={view.expandedSlots}
+          compact={view.compactBoard}
           mech={mech}
           loadout={loadout}
           armor={armor}
@@ -208,6 +241,8 @@ export default function App() {
 
       {activeZone && (
         <ComponentEditor
+          side={view.editorSide}
+          onToggleSide={view.toggleEditorSide}
           key={activeZone}
           zone={activeZone}
           label={ZONE_LABELS[activeZone]}

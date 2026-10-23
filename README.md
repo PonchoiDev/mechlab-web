@@ -17,6 +17,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 - Imagen de referencia de cada 'Mech obtenida de [Sarna.net](https://www.sarna.net).
 - Builds guardadas en el navegador (localStorage): botón Save build para guardar la actual o actualizar la que se está editando (solo en su mismo chasis), y My builds para cargarlas, duplicarlas, renombrarlas, borrarlas y exportarlas o importarlas en un archivo JSON.
 - Campana de novedades en la cabecera, con un punto cuando hay algo que el usuario no ha visto. Las novedades están en `src/data/changelog.ts`: para anunciar un cambio, se añade una entrada al principio.
+- Opciones de vista (barra VIEW, guardadas en el navegador): ranuras como celdas, tablero compacto en cinco columnas sin la imagen de Sarna y panel de componente a la izquierda o a la derecha.
 - Formulario de feedback (botón Feedback de la cabecera o `/mercs/#feedback`): los mensajes llegan por correo sin mostrar la dirección del desarrollador.
 - Compartir la build: un enlace que la abre tal cual (`/mercs/?b=…`) y una imagen PNG con el 'Mech, su equipo y sus estadísticas, lista para copiar o descargar.
 

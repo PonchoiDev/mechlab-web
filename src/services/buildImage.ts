@@ -13,7 +13,7 @@ import {
   type HardpointView
 } from '../utils/equipment';
 import { getItemWeaponType, getTierName } from '../utils/items';
-import { getMechDisplayName, getMechSpecs } from '../utils/mechs';
+import { getMechDisplayName, getMechSpecs, type SpecKind } from '../utils/mechs';
 import { ZONE_LABELS } from '../utils/zones';
 
 // Tarjeta de la build en PNG con la misma distribución que el tablero de la web, para publicarla
@@ -49,6 +49,16 @@ const WEAPON_COLORS: Record<HardpointType, string> = {
   ams: '#e91e63',
   melee: '#9c27b0',
   omni: '#d8dfd4'
+};
+
+// Colores de las especificaciones, los mismos que la cabecera del mechlab del juego (MechSpecs).
+const SPEC_COLORS: Record<SpecKind, string> = {
+  engine: COLORS.text,
+  xl: '#ffd23f',
+  dhs: '#5fa8ff',
+  endo: '#b48cff',
+  ferro: '#ff5a4f',
+  ap: COLORS.cyan
 };
 
 const EQUIPMENT_COLORS = { 'heat-sink': COLORS.cyan, 'jump-jet': COLORS.amber, module: COLORS.lime };
@@ -378,7 +388,7 @@ const drawHeader = (context: Context, mech: Mech) => {
   const brandWidth = drawText(context, 'MechLab', PADDING + 55, PADDING + 38, `700 24px ${SANS}`, COLORS.text);
   drawText(context, 'MW5: MERCENARIES', PADDING + 55 + brandWidth + 8, PADDING + 38, `600 17px ${MONO}`, COLORS.lime);
 
-  drawText(context, [`${mech.tonnageMax} t`, getWeightClassName(mech.tonnageMax), getMechSpecs(mech).map(spec => spec.label).join(' ')].filter(Boolean).join(' · '), WIDTH - PADDING, PADDING + 12, `500 10px ${MONO}`, COLORS.muted, {
+  drawText(context, `${mech.tonnageMax} t · ${getWeightClassName(mech.tonnageMax)}`, WIDTH - PADDING, PADDING + 12, `500 10px ${MONO}`, COLORS.muted, {
     align: 'right'
   });
   const variantWidth = drawText(context, mech.variant, WIDTH - PADDING, PADDING + 38, `600 17px ${MONO}`, COLORS.lime, { align: 'right' });
@@ -432,8 +442,14 @@ const drawReference = (context: Context, mech: Mech, image: HTMLImageElement | n
   strokeBox(context, tagX, y + 12, tagWidth, 24, withAlpha(COLORS.cyan, 0.45));
   drawText(context, mech.variant, tagX + tagWidth / 2, y + 28, `500 11px ${MONO}`, COLORS.cyan, { align: 'center' });
 
-  const imageTop = y + 48;
-  const imageHeight = height - 48 - 12;
+  // Motor, disipadores, estructura y armadura bajo el nombre, como en el tablero de la web.
+  let specX = x + 12;
+  for (const spec of getMechSpecs(mech)) {
+    specX += drawText(context, spec.label, specX, y + 56, `600 13px ${MONO}`, SPEC_COLORS[spec.kind]) + 8;
+  }
+
+  const imageTop = y + 70;
+  const imageHeight = height - 70 - 12;
   if (!image) {
     drawText(context, 'No reference image available.', x + width / 2, imageTop + imageHeight / 2, `500 13px ${SANS}`, COLORS.muted, { align: 'center' });
     return;
