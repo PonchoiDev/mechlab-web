@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-23-remove-equipment',
+    date: '2026-10-23',
+    title: 'Remove equipment',
+    items: [
+      'Remove equipment in the toolbar clears heat sinks, jump jets and the rest of the equipment in one click, next to Remove weapons and Remove ammo'
+    ]
+  },
+  {
     id: '2026-10-23-game-stats',
     date: '2026-10-23',
     title: 'Stats now match the game',

@@ -3,9 +3,10 @@ interface UtilityToolbarProps {
   canMaximizeArmor: boolean;
   hasWeapons: boolean;
   hasAmmo: boolean;
+  hasEquipment: boolean;
   onClearArmor: () => void;
   onMaximizeArmor: () => void;
-  onRemoveItems: (type: 'weapon' | 'ammo') => void;
+  onRemoveItems: (type: 'weapon' | 'ammo' | 'equipment') => void;
   canLoadStock: boolean;
   onLoadStock: () => void;
   savedBuildCount: number;
@@ -19,6 +20,7 @@ export function UtilityToolbar({
   canMaximizeArmor,
   hasWeapons,
   hasAmmo,
+  hasEquipment,
   onClearArmor,
   onMaximizeArmor,
   onRemoveItems,
@@ -61,6 +63,15 @@ export function UtilityToolbar({
         </button>
         <button type="button" className="utility-button" onClick={() => onRemoveItems('ammo')} disabled={!hasAmmo}>
           Remove ammo
+        </button>
+        <button
+          type="button"
+          className="utility-button"
+          onClick={() => onRemoveItems('equipment')}
+          disabled={!hasEquipment}
+          title="Remove heat sinks, jump jets and the rest of the equipment"
+        >
+          Remove equipment
         </button>
       </div>
       <div className="utility-group">

@@ -168,6 +168,7 @@ export default function App() {
         canMaximizeArmor={summary.armorPoints < summary.maxArmorPoints && summary.totalWeight < mech.tonnageMax}
         hasWeapons={equippedItems.some(item => item.type === 'weapon')}
         hasAmmo={equippedItems.some(item => item.type === 'ammo')}
+        hasEquipment={equippedItems.some(item => item.type === 'equipment')}
         onClearArmor={build.clearArmor}
         onMaximizeArmor={build.maximizeArmor}
         onRemoveItems={build.removeItemsOfType}
