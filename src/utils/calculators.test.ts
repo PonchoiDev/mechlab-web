@@ -13,7 +13,9 @@ import {
   getWeaponPerformance,
   getWeaponStats,
   groupAmmunition,
-  maximizeArmor
+  maximizeArmor,
+  getArmorPointsPerTon,
+  calculateMeleeDamage
 } from './calculators';
 import { allMechs, getItem, getMech, makeItem, makeLoadout } from '../test/fixtures';
 import type { ArmorState, MechComponents } from '../types/mech';
@@ -47,9 +49,10 @@ describe('armadura', () => {
     expect(calculateArmorPoints(armor)).toBe(35);
   });
 
-  it('convierte puntos en toneladas a razón de 32 por tonelada, redondeando a centésimas', () => {
+  it('convierte puntos en toneladas a razón de 32 por tonelada, o 35,84 con Ferro-Fibrosa', () => {
     expect(calculateArmorWeight(makeArmor({ head: { front: 32, rear: 0 } }))).toBe(1);
-    expect(calculateArmorWeight(makeArmor({ centerTorso: { front: 70, rear: 30 } }))).toBe(3.13);
+    expect(calculateArmorWeight(makeArmor({ centerTorso: { front: 70, rear: 30 } }))).toBe(3.125);
+    expect(calculateArmorWeight(makeArmor({ head: { front: 35.84, rear: 0 } }), getArmorPointsPerTon({ armorType: 'ferroFibrous' }))).toBe(1);
     expect(calculateArmorWeight(makeArmor())).toBe(0);
   });
 
@@ -106,11 +109,9 @@ describe('maximizeArmor', () => {
     expect(armor.leftTorso).toEqual({ front: 4, rear: 0 });
   });
 
-  it('aprovecha el margen del redondeo a centésimas', () => {
-    const armor = maximizeArmor(atlas, 0.03, makeArmor());
-
-    expect(calculateArmorPoints(armor)).toBe(1);
-    expect(armor.head).toEqual({ front: 1, rear: 0 });
+  it('no pasa del tonelaje disponible', () => {
+    expect(calculateArmorPoints(maximizeArmor(atlas, 0.03, makeArmor()))).toBe(0);
+    expect(calculateArmorPoints(maximizeArmor(atlas, 1, makeArmor(), 35.84))).toBe(35);
   });
 
   it('no asigna armadura sin tonelaje disponible', () => {
@@ -296,9 +297,10 @@ describe('getBuildSummary', () => {
       totalWeight: mech.baseTonnage + calculateEquippedWeight(loadout) + calculateArmorWeight(armor),
       armorPoints: calculateArmorPoints(armor),
       maxArmorPoints: calculateArmorPoints(armor),
-      firepower: calculateFirepower(loadout),
+      // Los dos Battle Fist del Atlas suman 30 cada uno.
+      firepower: calculateFirepower(loadout) + calculateMeleeDamage(mech, loadout),
       heatSpike: calculateHeatSpike(loadout),
-      coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate),
+      coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType),
       topSpeed: calculateTopSpeed(mech.baseSpeed),
       jumpJetCount: 1,
       maxWeaponRange: 900

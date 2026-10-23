@@ -14,6 +14,7 @@ export interface ItemTierStats {
   heat?: number;
   cooldown?: number;
   range?: number;
+  maxRange?: number;
   rpm?: number;
 }
 

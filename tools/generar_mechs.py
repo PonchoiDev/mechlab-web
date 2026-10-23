@@ -26,6 +26,8 @@ REGEX_TONS = re.compile(r'Tons\s*=\s*([0-9.]+)', re.IGNORECASE)
 REGEX_BASE_TONS = re.compile(r'BaseTons\s*=\s*([0-9.]+)', re.IGNORECASE)
 REGEX_SPEED = re.compile(r'TopSpeed\s*=\s*([0-9.]+)', re.IGNORECASE)
 REGEX_BASE_COOLING_RATE = re.compile(r'BaseCoolingRate\s*=\s*([0-9.]+)', re.IGNORECASE)
+REGEX_TIPO_ARMADURA = re.compile(r'ArmorDataAssetId=\(Id="MWArmorDataAsset:([^"]+)"')
+REGEX_TIPO_DISIPADORES = re.compile(r'AllowedHeatSinkType=\(TagName="Equipment\.HeatSinks\.([^"]+)"')
 
 REGEX_MAX_ARMOR = re.compile(r'MaxArmor=\((.*?)\)', re.DOTALL)
 REGEX_MAX_STRUCT = re.compile(r'MaxStructure=\((.*?)\)', re.DOTALL)
@@ -352,12 +354,18 @@ def parsear_mech(contenido, variante):
         "variant": variante,
         "tonnageMax": tonelaje,
         "baseTonnage": buscar_numero(REGEX_BASE_TONS, contenido, 0.0),
-        "baseSpeed": round((velocidad_raw / 3150.0) * 97.2, 1) if velocidad_raw > 0 else 0.0,
+        "baseSpeed": round((velocidad_raw / 3150.0) * 97.2, 4) if velocidad_raw > 0 else 0.0,
         "components": construir_componentes(contenido, obtener_clase_de_peso(tonelaje))
     }
     if refrigeracion_base is not None:
         mech["BaseCoolingRate"] = refrigeracion_base
     mech["sarnaName"] = obtener_nombre_sarna(contenido, chasis, variante, tech_base)
+    # La armadura Ferro-Fibrosa da más puntos por tonelada, y los disipadores dobles de la Esfera
+    # Interior cambian la refrigeración del motor (src/utils/calculators.ts).
+    armadura = buscar_texto(REGEX_TIPO_ARMADURA, contenido) or ""
+    mech["armorType"] = "ferroFibrous" if "ferro" in armadura.lower() else "standard"
+    disipadores = (buscar_texto(REGEX_TIPO_DISIPADORES, contenido) or "Single").lower()
+    mech["heatSinkType"] = "clanDouble" if disipadores == "double.clan" else "double" if disipadores == "double" else "single"
     if tech_base is not None:
         mech["techBase"] = tech_base
     return mech

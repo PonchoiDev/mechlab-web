@@ -9,6 +9,18 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-23-game-stats',
+    date: '2026-10-23',
+    title: 'Stats now match the game',
+    items: [
+      'Firepower adds punches from empty hands, lower arms and Battle Fists, like the in-game mechlab',
+      'Max range uses each weapon\'s maximum range (PPC 920 m, ER PPC 1500 m)',
+      'Inner Sphere double heat sinks add the extra engine cooling',
+      'Ferro-Fibrous armor gives 12% more points per ton, so those \'Mechs weigh what they should',
+      'Checked against the stock loadouts of eight \'Mechs in the game'
+    ]
+  },
+  {
     id: '2026-10-23-stock-builds',
     date: '2026-10-23',
     title: 'Stock loadouts and intro years',

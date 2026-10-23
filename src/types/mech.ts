@@ -43,6 +43,10 @@ export interface Mech {
   techBase?: string;
   // Build de fábrica con el formato de los enlaces de Share, y datos de su unit card.
   stockBuild?: string;
+  // La Ferro-Fibrosa da más puntos de armadura por tonelada; los disipadores dobles de la Esfera
+  // Interior hacen que los 10 disipadores internos del motor enfríen el doble.
+  armorType?: 'standard' | 'ferroFibrous';
+  heatSinkType?: 'single' | 'double' | 'clanDouble';
   introYear?: number;
   role?: string;
   components: MechComponents;

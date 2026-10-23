@@ -11,6 +11,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 - Armadura delantera y trasera por zona, con botones para vaciarla o maximizarla según el tonelaje libre.
 - Tablero con el 'Mech en el centro y sus componentes alrededor; al pulsar un componente o un anclaje se abre un panel lateral para equiparlo, con filtros por texto, base tecnológica y tipo de arma.
 - Resumen de pendientes de la build (anclajes libres, armas sin munición, armadura incompleta, sobrepeso) y duración de la munición instalada.
+- Estadísticas comprobadas contra el mechlab del juego (`src/utils/gameReference.test.ts`): la potencia de fuego suma los puñetazos de los anclajes cuerpo a cuerpo vacíos, el alcance máximo es el de las armas, los disipadores dobles de la Esfera Interior añaden +1,0 de refrigeración del motor, la Ferro-Fibrosa da 35,84 puntos por tonelada y el tonelaje se trunca como en el juego.
 - Tabla de rendimiento de armas (daño, calor, RPM, DPS y alcance) y resumen de munición.
 - Imagen de referencia de cada 'Mech obtenida de [Sarna.net](https://www.sarna.net).
 - Builds guardadas en el navegador (localStorage): botón Save build para guardar la actual o actualizar la que se está editando (solo en su mismo chasis), y My builds para cargarlas, duplicarlas, renombrarlas, borrarlas y exportarlas o importarlas en un archivo JSON.

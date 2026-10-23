@@ -1,6 +1,6 @@
 import type { HardpointType } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
-import type { BuildSummary } from '../utils/calculators';
+import { truncateTo, type BuildSummary } from '../utils/calculators';
 import {
   getAmmoWarnings,
   getComponentStatus,
@@ -350,9 +350,9 @@ const layoutCard = (measuring: Context, input: BuildImageInput, zone: Zone, widt
 // --- Composición ---------------------------------------------------------------------------------
 
 const getReadouts = ({ mech, summary }: BuildImageInput) => [
-  { label: 'TONNAGE', value: summary.totalWeight.toFixed(2), unit: `/ ${mech.tonnageMax} t`, warn: summary.totalWeight > mech.tonnageMax },
+  { label: 'TONNAGE', value: truncateTo(summary.totalWeight, 2).toFixed(2), unit: `/ ${mech.tonnageMax} t`, warn: summary.totalWeight > mech.tonnageMax },
   { label: 'ARMOR POINTS', value: summary.armorPoints.toFixed(0), unit: `/ ${summary.maxArmorPoints.toFixed(0)}` },
-  { label: 'ARMOR MASS', value: summary.armorWeight.toFixed(2), unit: 't' },
+  { label: 'ARMOR MASS', value: truncateTo(summary.armorWeight, 2).toFixed(2), unit: 't' },
   { label: 'TOP SPEED', value: summary.topSpeed.toFixed(1), unit: `km/h · ${summary.jumpJetCount} JJ` },
   { label: 'VOLLEY DAMAGE', value: String(summary.firepower) },
   { label: 'HEAT SPIKE', value: String(summary.heatSpike) },

@@ -332,6 +332,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 160.0,
+        "maxRange": 160.0,
         "rpm": 0.0
       },
       "1": {
@@ -339,6 +340,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 200.0,
+        "maxRange": 200.0,
         "rpm": 0.0
       },
       "2": {
@@ -346,6 +348,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 210.0,
+        "maxRange": 210.0,
         "rpm": 0.0
       },
       "3": {
@@ -353,6 +356,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 220.0,
+        "maxRange": 220.0,
         "rpm": 0.0
       },
       "4": {
@@ -360,6 +364,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 230.0,
+        "maxRange": 230.0,
         "rpm": 0.0
       },
       "5": {
@@ -367,6 +372,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 250.0,
+        "maxRange": 250.0,
         "rpm": 0.0
       }
     },
@@ -389,6 +395,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 34.3
       },
       "1": {
@@ -396,6 +403,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 34.3
       },
       "2": {
@@ -403,6 +411,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 34.3
       },
       "3": {
@@ -410,6 +419,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 34.3
       },
       "4": {
@@ -417,6 +427,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 34.3
       },
       "5": {
@@ -424,6 +435,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 34.3
       }
     },
@@ -445,6 +457,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 40.0
       },
       "1": {
@@ -452,6 +465,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 40.0
       },
       "2": {
@@ -459,6 +473,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 40.0
       },
       "3": {
@@ -466,6 +481,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 40.0
       },
       "4": {
@@ -473,6 +489,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 40.0
       },
       "5": {
@@ -480,6 +497,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 40.0
       }
     },
@@ -501,6 +519,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 60.0
       },
       "1": {
@@ -508,6 +527,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 60.0
       },
       "2": {
@@ -515,6 +535,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 60.0
       },
       "3": {
@@ -522,6 +543,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 60.0
       },
       "4": {
@@ -529,6 +551,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 60.0
       },
       "5": {
@@ -536,6 +559,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 60.0
       }
     },
@@ -557,6 +581,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 48.0
       },
       "1": {
@@ -564,6 +589,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 48.0
       },
       "2": {
@@ -571,6 +597,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 48.0
       },
       "3": {
@@ -578,6 +605,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 48.0
       },
       "4": {
@@ -585,6 +613,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 48.0
       },
       "5": {
@@ -592,6 +621,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 48.0
       }
     },
@@ -613,6 +643,7 @@
         "heatPerShot": 24.0,
         "cooldown": 8.8,
         "range": 3600.0,
+        "maxRange": 3600.0,
         "rpm": 6.8
       },
       "1": {
@@ -620,6 +651,7 @@
         "heatPerShot": 20.0,
         "cooldown": 8.0,
         "range": 4500.0,
+        "maxRange": 4500.0,
         "rpm": 7.5
       },
       "2": {
@@ -627,6 +659,7 @@
         "heatPerShot": 19.0,
         "cooldown": 7.6,
         "range": 4725.0,
+        "maxRange": 4725.0,
         "rpm": 7.9
       },
       "3": {
@@ -634,6 +667,7 @@
         "heatPerShot": 18.0,
         "cooldown": 7.2,
         "range": 4950.0,
+        "maxRange": 4950.0,
         "rpm": 8.3
       },
       "4": {
@@ -641,6 +675,7 @@
         "heatPerShot": 17.0,
         "cooldown": 6.8,
         "range": 5175.0,
+        "maxRange": 5175.0,
         "rpm": 8.8
       },
       "5": {
@@ -648,6 +683,7 @@
         "heatPerShot": 15.0,
         "cooldown": 6.0,
         "range": 5625.0,
+        "maxRange": 5625.0,
         "rpm": 10.0
       }
     },
@@ -702,6 +738,7 @@
         "heatPerShot": 3.9,
         "cooldown": 3.6,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 16.7
       },
       "1": {
@@ -709,6 +746,7 @@
         "heatPerShot": 3.0,
         "cooldown": 3.0,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 20.0
       },
       "2": {
@@ -716,6 +754,7 @@
         "heatPerShot": 2.85,
         "cooldown": 2.85,
         "range": 472.5,
+        "maxRange": 472.5,
         "rpm": 21.1
       },
       "3": {
@@ -723,6 +762,7 @@
         "heatPerShot": 2.7,
         "cooldown": 2.7,
         "range": 495.0,
+        "maxRange": 495.0,
         "rpm": 22.2
       },
       "4": {
@@ -730,6 +770,7 @@
         "heatPerShot": 2.55,
         "cooldown": 2.55,
         "range": 517.5,
+        "maxRange": 517.5,
         "rpm": 23.5
       },
       "5": {
@@ -737,6 +778,7 @@
         "heatPerShot": 2.325,
         "cooldown": 2.25,
         "range": 562.5,
+        "maxRange": 562.5,
         "rpm": 26.7
       }
     },
@@ -759,6 +801,7 @@
         "heatPerShot": 0.9,
         "cooldown": 0.9,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 66.7
       },
       "1": {
@@ -766,6 +809,7 @@
         "heatPerShot": 0.75,
         "cooldown": 0.75,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 80.0
       },
       "2": {
@@ -773,6 +817,7 @@
         "heatPerShot": 0.712,
         "cooldown": 0.712,
         "range": 472.5,
+        "maxRange": 472.5,
         "rpm": 84.3
       },
       "3": {
@@ -780,6 +825,7 @@
         "heatPerShot": 0.675,
         "cooldown": 0.675,
         "range": 495.0,
+        "maxRange": 495.0,
         "rpm": 88.9
       },
       "4": {
@@ -787,6 +833,7 @@
         "heatPerShot": 0.637,
         "cooldown": 0.637,
         "range": 517.5,
+        "maxRange": 517.5,
         "rpm": 94.2
       },
       "5": {
@@ -794,6 +841,7 @@
         "heatPerShot": 0.562,
         "cooldown": 0.562,
         "range": 562.5,
+        "maxRange": 562.5,
         "rpm": 106.8
       }
     },
@@ -816,6 +864,7 @@
         "heatPerShot": 0.52,
         "cooldown": 2.88,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 20.8
       },
       "1": {
@@ -823,6 +872,7 @@
         "heatPerShot": 0.4,
         "cooldown": 2.4,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 25.0
       },
       "2": {
@@ -830,6 +880,7 @@
         "heatPerShot": 0.38,
         "cooldown": 2.28,
         "range": 472.5,
+        "maxRange": 472.5,
         "rpm": 26.3
       },
       "3": {
@@ -837,6 +888,7 @@
         "heatPerShot": 0.36,
         "cooldown": 2.16,
         "range": 495.0,
+        "maxRange": 495.0,
         "rpm": 27.8
       },
       "4": {
@@ -844,6 +896,7 @@
         "heatPerShot": 0.34,
         "cooldown": 2.04,
         "range": 517.5,
+        "maxRange": 517.5,
         "rpm": 29.4
       },
       "5": {
@@ -851,6 +904,7 @@
         "heatPerShot": 0.31,
         "cooldown": 1.8,
         "range": 562.5,
+        "maxRange": 562.5,
         "rpm": 33.3
       }
     },
@@ -873,6 +927,7 @@
         "heatPerShot": 0.52,
         "cooldown": 0.72,
         "range": 576.0,
+        "maxRange": 576.0,
         "rpm": 83.3
       },
       "1": {
@@ -880,6 +935,7 @@
         "heatPerShot": 0.4,
         "cooldown": 0.6,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 100.0
       },
       "2": {
@@ -887,6 +943,7 @@
         "heatPerShot": 0.38,
         "cooldown": 0.57,
         "range": 756.0,
+        "maxRange": 756.0,
         "rpm": 105.3
       },
       "3": {
@@ -894,6 +951,7 @@
         "heatPerShot": 0.36,
         "cooldown": 0.54,
         "range": 792.0,
+        "maxRange": 792.0,
         "rpm": 111.1
       },
       "4": {
@@ -901,6 +959,7 @@
         "heatPerShot": 0.34,
         "cooldown": 0.51,
         "range": 828.0,
+        "maxRange": 828.0,
         "rpm": 117.6
       },
       "5": {
@@ -908,6 +967,7 @@
         "heatPerShot": 0.31,
         "cooldown": 0.45,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 133.3
       }
     },
@@ -930,6 +990,7 @@
         "heatPerShot": 7.8,
         "cooldown": 5.76,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 10.4
       },
       "1": {
@@ -937,6 +998,7 @@
         "heatPerShot": 6.0,
         "cooldown": 4.8,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 12.5
       },
       "2": {
@@ -944,6 +1006,7 @@
         "heatPerShot": 5.7,
         "cooldown": 4.56,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 13.2
       },
       "3": {
@@ -951,6 +1014,7 @@
         "heatPerShot": 5.4,
         "cooldown": 4.32,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 13.9
       },
       "4": {
@@ -958,6 +1022,7 @@
         "heatPerShot": 5.1,
         "cooldown": 4.08,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 14.7
       },
       "5": {
@@ -965,6 +1030,7 @@
         "heatPerShot": 4.65,
         "cooldown": 3.6,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 16.7
       }
     },
@@ -987,6 +1053,7 @@
         "heatPerShot": 1.8,
         "cooldown": 1.44,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 41.7
       },
       "1": {
@@ -994,6 +1061,7 @@
         "heatPerShot": 1.5,
         "cooldown": 1.2,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 50.0
       },
       "2": {
@@ -1001,6 +1069,7 @@
         "heatPerShot": 1.425,
         "cooldown": 1.14,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 52.6
       },
       "3": {
@@ -1008,6 +1077,7 @@
         "heatPerShot": 1.35,
         "cooldown": 1.08,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 55.6
       },
       "4": {
@@ -1015,6 +1085,7 @@
         "heatPerShot": 1.275,
         "cooldown": 1.02,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 58.8
       },
       "5": {
@@ -1022,6 +1093,7 @@
         "heatPerShot": 1.125,
         "cooldown": 0.9,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 66.7
       }
     },
@@ -1044,6 +1116,7 @@
         "heatPerShot": 0.455,
         "cooldown": 4.608,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 13.0
       },
       "1": {
@@ -1051,6 +1124,7 @@
         "heatPerShot": 0.35,
         "cooldown": 3.84,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 15.6
       },
       "2": {
@@ -1058,6 +1132,7 @@
         "heatPerShot": 0.332,
         "cooldown": 3.648,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 16.4
       },
       "3": {
@@ -1065,6 +1140,7 @@
         "heatPerShot": 0.315,
         "cooldown": 3.456,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 17.4
       },
       "4": {
@@ -1072,6 +1148,7 @@
         "heatPerShot": 0.297,
         "cooldown": 3.264,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 18.4
       },
       "5": {
@@ -1079,6 +1156,7 @@
         "heatPerShot": 0.271,
         "cooldown": 2.88,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 20.8
       }
     },
@@ -1101,6 +1179,7 @@
         "heatPerShot": 0.24,
         "cooldown": 0.18,
         "range": 576.0,
+        "maxRange": 576.0,
         "rpm": 333.3
       },
       "1": {
@@ -1108,6 +1187,7 @@
         "heatPerShot": 0.2,
         "cooldown": 0.15,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 400.0
       },
       "2": {
@@ -1115,6 +1195,7 @@
         "heatPerShot": 0.19,
         "cooldown": 0.142,
         "range": 756.0,
+        "maxRange": 756.0,
         "rpm": 422.5
       },
       "3": {
@@ -1122,6 +1203,7 @@
         "heatPerShot": 0.18,
         "cooldown": 0.135,
         "range": 792.0,
+        "maxRange": 792.0,
         "rpm": 444.4
       },
       "4": {
@@ -1129,6 +1211,7 @@
         "heatPerShot": 0.17,
         "cooldown": 0.128,
         "range": 828.0,
+        "maxRange": 828.0,
         "rpm": 468.8
       },
       "5": {
@@ -1136,6 +1219,7 @@
         "heatPerShot": 0.15,
         "cooldown": 0.112,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 535.7
       }
     },
@@ -1158,6 +1242,7 @@
         "heatPerShot": 0.117,
         "cooldown": 0.602,
         "range": 576.0,
+        "maxRange": 576.0,
         "rpm": 99.7
       },
       "1": {
@@ -1165,6 +1250,7 @@
         "heatPerShot": 0.09,
         "cooldown": 0.502,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 119.5
       },
       "2": {
@@ -1172,6 +1258,7 @@
         "heatPerShot": 0.085,
         "cooldown": 0.477,
         "range": 756.0,
+        "maxRange": 756.0,
         "rpm": 125.8
       },
       "3": {
@@ -1179,6 +1266,7 @@
         "heatPerShot": 0.081,
         "cooldown": 0.452,
         "range": 792.0,
+        "maxRange": 792.0,
         "rpm": 132.7
       },
       "4": {
@@ -1186,6 +1274,7 @@
         "heatPerShot": 0.076,
         "cooldown": 0.427,
         "range": 828.0,
+        "maxRange": 828.0,
         "rpm": 140.5
       },
       "5": {
@@ -1193,6 +1282,7 @@
         "heatPerShot": 0.07,
         "cooldown": 0.377,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 159.2
       }
     },
@@ -1215,6 +1305,7 @@
         "heatPerShot": 0.65,
         "cooldown": 1.8,
         "range": 496.0,
+        "maxRange": 496.0,
         "rpm": 33.3
       },
       "1": {
@@ -1222,6 +1313,7 @@
         "heatPerShot": 0.5,
         "cooldown": 1.5,
         "range": 620.0,
+        "maxRange": 620.0,
         "rpm": 40.0
       },
       "2": {
@@ -1229,6 +1321,7 @@
         "heatPerShot": 0.475,
         "cooldown": 1.425,
         "range": 651.0,
+        "maxRange": 651.0,
         "rpm": 42.1
       },
       "3": {
@@ -1236,6 +1329,7 @@
         "heatPerShot": 0.45,
         "cooldown": 1.35,
         "range": 682.0,
+        "maxRange": 682.0,
         "rpm": 44.4
       },
       "4": {
@@ -1243,6 +1337,7 @@
         "heatPerShot": 0.425,
         "cooldown": 1.275,
         "range": 713.0,
+        "maxRange": 713.0,
         "rpm": 47.1
       },
       "5": {
@@ -1250,6 +1345,7 @@
         "heatPerShot": 0.388,
         "cooldown": 1.125,
         "range": 775.0,
+        "maxRange": 775.0,
         "rpm": 53.3
       }
     },
@@ -1272,6 +1368,7 @@
         "heatPerShot": 0.3,
         "cooldown": 0.45,
         "range": 496.0,
+        "maxRange": 496.0,
         "rpm": 133.3
       },
       "1": {
@@ -1279,6 +1376,7 @@
         "heatPerShot": 0.25,
         "cooldown": 0.375,
         "range": 620.0,
+        "maxRange": 620.0,
         "rpm": 160.0
       },
       "2": {
@@ -1286,6 +1384,7 @@
         "heatPerShot": 0.237,
         "cooldown": 0.356,
         "range": 651.0,
+        "maxRange": 651.0,
         "rpm": 168.5
       },
       "3": {
@@ -1293,6 +1392,7 @@
         "heatPerShot": 0.225,
         "cooldown": 0.33,
         "range": 682.0,
+        "maxRange": 682.0,
         "rpm": 181.8
       },
       "4": {
@@ -1300,6 +1400,7 @@
         "heatPerShot": 0.212,
         "cooldown": 0.3,
         "range": 713.0,
+        "maxRange": 713.0,
         "rpm": 200.0
       },
       "5": {
@@ -1307,6 +1408,7 @@
         "heatPerShot": 0.188,
         "cooldown": 0.27,
         "range": 775.0,
+        "maxRange": 775.0,
         "rpm": 222.2
       }
     },
@@ -1329,6 +1431,7 @@
         "heatPerShot": 0.208,
         "cooldown": 1.488,
         "range": 496.0,
+        "maxRange": 496.0,
         "rpm": 40.3
       },
       "1": {
@@ -1336,6 +1439,7 @@
         "heatPerShot": 0.16,
         "cooldown": 1.24,
         "range": 620.0,
+        "maxRange": 620.0,
         "rpm": 48.4
       },
       "2": {
@@ -1343,6 +1447,7 @@
         "heatPerShot": 0.152,
         "cooldown": 1.178,
         "range": 651.0,
+        "maxRange": 651.0,
         "rpm": 50.9
       },
       "3": {
@@ -1350,6 +1455,7 @@
         "heatPerShot": 0.144,
         "cooldown": 1.116,
         "range": 682.0,
+        "maxRange": 682.0,
         "rpm": 53.8
       },
       "4": {
@@ -1357,6 +1463,7 @@
         "heatPerShot": 0.136,
         "cooldown": 1.054,
         "range": 713.0,
+        "maxRange": 713.0,
         "rpm": 56.9
       },
       "5": {
@@ -1364,6 +1471,7 @@
         "heatPerShot": 0.124,
         "cooldown": 0.93,
         "range": 775.0,
+        "maxRange": 775.0,
         "rpm": 64.5
       }
     },
@@ -1386,6 +1494,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.531,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 13.2
       },
       "1": {
@@ -1393,6 +1502,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.625,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 16.6
       },
       "2": {
@@ -1400,6 +1510,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.172,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 18.9
       },
       "3": {
@@ -1407,6 +1518,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.719,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 22.1
       },
       "4": {
@@ -1414,6 +1526,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.266,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 26.5
       },
       "5": {
@@ -1421,6 +1534,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.359,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 44.2
       }
     },
@@ -1470,6 +1584,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.75,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 12.6
       },
       "1": {
@@ -1477,6 +1592,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.8,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 15.8
       },
       "2": {
@@ -1484,6 +1600,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.325,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 18.0
       },
       "3": {
@@ -1491,6 +1608,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.85,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 21.1
       },
       "4": {
@@ -1498,6 +1616,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.375,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 25.3
       },
       "5": {
@@ -1505,6 +1624,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.425,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 42.1
       }
     },
@@ -1540,6 +1660,7 @@
         "heatPerShot": 16.8,
         "cooldown": 8.4,
         "range": 360.0,
+        "maxRange": 540.0,
         "rpm": 7.1
       },
       "1": {
@@ -1547,6 +1668,7 @@
         "heatPerShot": 14.0,
         "cooldown": 7.0,
         "range": 450.0,
+        "maxRange": 675.0,
         "rpm": 8.6
       },
       "2": {
@@ -1554,6 +1676,7 @@
         "heatPerShot": 13.3,
         "cooldown": 6.65,
         "range": 495.0,
+        "maxRange": 742.5,
         "rpm": 9.0
       },
       "3": {
@@ -1561,6 +1684,7 @@
         "heatPerShot": 12.6,
         "cooldown": 6.3,
         "range": 517.5,
+        "maxRange": 776.2,
         "rpm": 9.5
       },
       "4": {
@@ -1568,6 +1692,7 @@
         "heatPerShot": 11.9,
         "cooldown": 5.95,
         "range": 540.0,
+        "maxRange": 810.0,
         "rpm": 10.1
       },
       "5": {
@@ -1575,6 +1700,7 @@
         "heatPerShot": 10.5,
         "cooldown": 5.25,
         "range": 562.5,
+        "maxRange": 843.8,
         "rpm": 11.4
       }
     },
@@ -1627,6 +1753,7 @@
         "heatPerShot": 0.225,
         "cooldown": 2.661,
         "range": 337.5,
+        "maxRange": 1375.0,
         "rpm": 22.5
       }
     },
@@ -1649,6 +1776,7 @@
         "heatPerShot": 0.375,
         "cooldown": 2.887,
         "range": 337.5,
+        "maxRange": 1375.0,
         "rpm": 20.8
       }
     },
@@ -1671,6 +1799,7 @@
         "heatPerShot": 0.338,
         "cooldown": 2.784,
         "range": 337.5,
+        "maxRange": 1375.0,
         "rpm": 21.6
       }
     },
@@ -1693,6 +1822,7 @@
         "heatPerShot": 0.3,
         "cooldown": 2.681,
         "range": 337.5,
+        "maxRange": 1375.0,
         "rpm": 22.4
       }
     },
@@ -1715,6 +1845,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 300.0,
+        "maxRange": 300.0,
         "rpm": 0.0
       }
     },
@@ -1737,6 +1868,7 @@
         "heatPerShot": 15.0,
         "cooldown": 6.6,
         "range": 5625.0,
+        "maxRange": 5625.0,
         "rpm": 9.1
       }
     },
@@ -1791,6 +1923,7 @@
         "heatPerShot": 7.875,
         "cooldown": 4.037,
         "range": 1012.5,
+        "maxRange": 1518.8,
         "rpm": 14.9
       }
     },
@@ -1811,6 +1944,7 @@
         "heatPerShot": 4.125,
         "cooldown": 3.825,
         "range": 562.5,
+        "maxRange": 843.8,
         "rpm": 15.7
       }
     },
@@ -1831,6 +1965,7 @@
         "heatPerShot": 10.075,
         "cooldown": 3.75,
         "range": 1012.5,
+        "maxRange": 2025.0,
         "rpm": 16.0
       }
     },
@@ -1851,6 +1986,7 @@
         "heatPerShot": 1.312,
         "cooldown": 2.337,
         "range": 375.0,
+        "maxRange": 562.5,
         "rpm": 25.7
       }
     },
@@ -1871,6 +2007,7 @@
         "heatPerShot": 0.3,
         "cooldown": 0.1,
         "range": 112.5,
+        "maxRange": 112.5,
         "rpm": 600.0
       }
     },
@@ -1891,6 +2028,7 @@
         "heatPerShot": 0.775,
         "cooldown": 4.5,
         "range": 825.0,
+        "maxRange": 825.0,
         "rpm": 13.3
       }
     },
@@ -1913,6 +2051,7 @@
         "heatPerShot": 10.875,
         "cooldown": 4.462,
         "range": 562.5,
+        "maxRange": 843.8,
         "rpm": 13.4
       }
     },
@@ -1933,6 +2072,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.1,
         "range": 192.0,
+        "maxRange": 384.0,
         "rpm": 600.0
       }
     },
@@ -1955,6 +2095,7 @@
         "heatPerShot": 6.0,
         "cooldown": 4.037,
         "range": 337.5,
+        "maxRange": 675.0,
         "rpm": 14.9
       }
     },
@@ -1975,6 +2116,7 @@
         "heatPerShot": 1.5,
         "cooldown": 2.72,
         "range": 187.5,
+        "maxRange": 281.2,
         "rpm": 22.1
       }
     },
@@ -1995,6 +2137,7 @@
         "heatPerShot": 1.008,
         "cooldown": 1.35,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 44.4
       }
     },
@@ -2017,6 +2160,7 @@
         "heatPerShot": 1.163,
         "cooldown": 1.688,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 35.5
       }
     },
@@ -2039,6 +2183,7 @@
         "heatPerShot": 0.171,
         "cooldown": 1.5,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 40.0
       }
     },
@@ -2061,6 +2206,7 @@
         "heatPerShot": 0.232,
         "cooldown": 0.375,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 160.0
       }
     },
@@ -2083,6 +2229,7 @@
         "heatPerShot": 3.255,
         "cooldown": 2.25,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 26.7
       }
     },
@@ -2105,6 +2252,7 @@
         "heatPerShot": 3.875,
         "cooldown": 2.88,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 20.8
       }
     },
@@ -2127,6 +2275,7 @@
         "heatPerShot": 0.256,
         "cooldown": 2.55,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 23.5
       }
     },
@@ -2149,6 +2298,7 @@
         "heatPerShot": 0.31,
         "cooldown": 0.6,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 100.0
       }
     },
@@ -2171,6 +2321,7 @@
         "heatPerShot": 0.058,
         "cooldown": 0.45,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 133.3
       }
     },
@@ -2193,6 +2344,7 @@
         "heatPerShot": 0.31,
         "cooldown": 0.675,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 88.9
       }
     },
@@ -2215,6 +2367,7 @@
         "heatPerShot": 0.388,
         "cooldown": 0.93,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 64.5
       }
     },
@@ -2237,6 +2390,7 @@
         "heatPerShot": 0.103,
         "cooldown": 0.6,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 100.0
       }
     },
@@ -2259,6 +2413,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.094,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 19.4
       }
     },
@@ -2281,6 +2436,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.094,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 19.4
       }
     },
@@ -2303,6 +2459,7 @@
         "heatPerShot": 0.225,
         "cooldown": 2.887,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 20.8
       }
     },
@@ -2325,6 +2482,7 @@
         "heatPerShot": 0.225,
         "cooldown": 2.887,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 20.8
       }
     },
@@ -2347,6 +2505,7 @@
         "heatPerShot": 0.203,
         "cooldown": 2.681,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 22.4
       }
     },
@@ -2369,6 +2528,7 @@
         "heatPerShot": 0.203,
         "cooldown": 2.681,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 22.4
       }
     },
@@ -2391,6 +2551,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -2413,6 +2574,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -2435,6 +2597,7 @@
         "heatPerShot": 5.625,
         "cooldown": 3.825,
         "range": 750.0,
+        "maxRange": 1125.0,
         "rpm": 15.7
       }
     },
@@ -2455,6 +2618,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.1,
         "range": 576.0,
+        "maxRange": 864.0,
         "rpm": 600.0
       }
     },
@@ -2477,6 +2641,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.1,
         "range": 240.0,
+        "maxRange": 480.0,
         "rpm": 600.0
       }
     },
@@ -2499,6 +2664,7 @@
         "heatPerShot": 2.25,
         "cooldown": 2.55,
         "range": 450.0,
+        "maxRange": 675.0,
         "rpm": 23.5
       }
     },
@@ -2519,6 +2685,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.188,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 27.4
       }
     },
@@ -2541,6 +2708,7 @@
         "heatPerShot": 0.675,
         "cooldown": 2.1,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 28.6
       }
     },
@@ -2563,6 +2731,7 @@
         "heatPerShot": 0.675,
         "cooldown": 2.1,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 28.6
       }
     },
@@ -2585,6 +2754,7 @@
         "heatPerShot": 0.506,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -2607,6 +2777,7 @@
         "heatPerShot": 0.506,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -2629,6 +2800,7 @@
         "heatPerShot": 0.45,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -2651,6 +2823,7 @@
         "heatPerShot": 0.45,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -2673,6 +2846,7 @@
         "heatPerShot": 0.75,
         "cooldown": 1.615,
         "range": 275.0,
+        "maxRange": 412.5,
         "rpm": 37.2
       }
     },
@@ -2693,6 +2867,7 @@
         "heatPerShot": 0.675,
         "cooldown": 1.8,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 33.3
       }
     },
@@ -2715,6 +2890,7 @@
         "heatPerShot": 0.675,
         "cooldown": 1.98,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 30.3
       }
     },
@@ -2737,6 +2913,7 @@
         "heatPerShot": 0.675,
         "cooldown": 1.98,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 30.3
       }
     },
@@ -2759,6 +2936,7 @@
         "heatPerShot": 0.291,
         "cooldown": 1.8,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 33.3
       }
     },
@@ -2781,6 +2959,7 @@
         "heatPerShot": 2.325,
         "cooldown": 2.25,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 26.7
       }
     },
@@ -2803,6 +2982,7 @@
         "heatPerShot": 0.07,
         "cooldown": 0.45,
         "range": 1012.5,
+        "maxRange": 1012.5,
         "rpm": 133.3
       }
     },
@@ -2825,6 +3005,7 @@
         "heatPerShot": 0.203,
         "cooldown": 3.0,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 20.0
       }
     },
@@ -2847,6 +3028,7 @@
         "heatPerShot": 4.65,
         "cooldown": 3.6,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 16.7
       }
     },
@@ -2869,6 +3051,7 @@
         "heatPerShot": 0.31,
         "cooldown": 0.45,
         "range": 1012.5,
+        "maxRange": 1012.5,
         "rpm": 133.3
       }
     },
@@ -2891,6 +3074,7 @@
         "heatPerShot": 0.136,
         "cooldown": 0.788,
         "range": 787.5,
+        "maxRange": 787.5,
         "rpm": 76.1
       }
     },
@@ -2913,6 +3097,7 @@
         "heatPerShot": 0.698,
         "cooldown": 1.125,
         "range": 787.5,
+        "maxRange": 787.5,
         "rpm": 53.3
       }
     },
@@ -3588,6 +3773,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.5,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 24.0
       },
       "1": {
@@ -3595,6 +3781,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.0,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 30.0
       },
       "2": {
@@ -3602,6 +3789,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 34.3
       },
       "3": {
@@ -3609,6 +3797,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 40.0
       },
       "4": {
@@ -3616,6 +3805,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 48.0
       },
       "5": {
@@ -3623,6 +3813,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.75,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 80.0
       }
     },
@@ -3644,6 +3835,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.812,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 15.7
       },
       "1": {
@@ -3651,6 +3843,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.05,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 19.7
       },
       "2": {
@@ -3658,6 +3851,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.669,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 22.5
       },
       "3": {
@@ -3665,6 +3859,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.287,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 26.2
       },
       "4": {
@@ -3672,6 +3867,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.906,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 31.5
       },
       "5": {
@@ -3679,6 +3875,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.144,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 52.4
       }
     },
@@ -3716,6 +3913,7 @@
         "heatPerShot": 12.6,
         "cooldown": 6.3,
         "range": 540.0,
+        "maxRange": 810.0,
         "rpm": 9.5
       },
       "1": {
@@ -3723,6 +3921,7 @@
         "heatPerShot": 10.5,
         "cooldown": 5.25,
         "range": 675.0,
+        "maxRange": 1012.5,
         "rpm": 11.4
       },
       "2": {
@@ -3730,6 +3929,7 @@
         "heatPerShot": 9.975,
         "cooldown": 5.119,
         "range": 708.8,
+        "maxRange": 1063.1,
         "rpm": 11.7
       },
       "3": {
@@ -3737,6 +3937,7 @@
         "heatPerShot": 9.45,
         "cooldown": 4.987,
         "range": 742.5,
+        "maxRange": 1113.8,
         "rpm": 12.0
       },
       "4": {
@@ -3744,6 +3945,7 @@
         "heatPerShot": 8.925,
         "cooldown": 4.83,
         "range": 776.2,
+        "maxRange": 1164.4,
         "rpm": 12.4
       },
       "5": {
@@ -3751,6 +3953,7 @@
         "heatPerShot": 7.875,
         "cooldown": 4.462,
         "range": 843.8,
+        "maxRange": 1265.6,
         "rpm": 13.4
       }
     },
@@ -3771,6 +3974,7 @@
         "heatPerShot": 7.32,
         "cooldown": 4.32,
         "range": 540.0,
+        "maxRange": 810.0,
         "rpm": 13.9
       },
       "1": {
@@ -3778,6 +3982,7 @@
         "heatPerShot": 6.1,
         "cooldown": 3.6,
         "range": 675.0,
+        "maxRange": 1012.5,
         "rpm": 16.7
       },
       "2": {
@@ -3785,6 +3990,7 @@
         "heatPerShot": 5.795,
         "cooldown": 3.51,
         "range": 708.8,
+        "maxRange": 1063.1,
         "rpm": 17.1
       },
       "3": {
@@ -3792,6 +3998,7 @@
         "heatPerShot": 5.49,
         "cooldown": 3.42,
         "range": 742.5,
+        "maxRange": 1113.8,
         "rpm": 17.5
       },
       "4": {
@@ -3799,6 +4006,7 @@
         "heatPerShot": 5.185,
         "cooldown": 3.312,
         "range": 776.2,
+        "maxRange": 1164.4,
         "rpm": 18.1
       },
       "5": {
@@ -3806,6 +4014,7 @@
         "heatPerShot": 4.575,
         "cooldown": 3.06,
         "range": 843.8,
+        "maxRange": 1265.6,
         "rpm": 19.6
       }
     },
@@ -3826,6 +4035,7 @@
         "heatPerShot": 6.0,
         "cooldown": 4.8,
         "range": 288.0,
+        "maxRange": 432.0,
         "rpm": 12.5
       },
       "1": {
@@ -3833,6 +4043,7 @@
         "heatPerShot": 5.0,
         "cooldown": 4.0,
         "range": 360.0,
+        "maxRange": 540.0,
         "rpm": 15.0
       },
       "2": {
@@ -3840,6 +4051,7 @@
         "heatPerShot": 4.75,
         "cooldown": 3.9,
         "range": 378.0,
+        "maxRange": 567.0,
         "rpm": 15.4
       },
       "3": {
@@ -3847,6 +4059,7 @@
         "heatPerShot": 4.5,
         "cooldown": 3.8,
         "range": 396.0,
+        "maxRange": 594.0,
         "rpm": 15.8
       },
       "4": {
@@ -3854,6 +4067,7 @@
         "heatPerShot": 4.25,
         "cooldown": 3.68,
         "range": 414.0,
+        "maxRange": 621.0,
         "rpm": 16.3
       },
       "5": {
@@ -3861,6 +4075,7 @@
         "heatPerShot": 3.75,
         "cooldown": 3.4,
         "range": 450.0,
+        "maxRange": 675.0,
         "rpm": 17.6
       }
     },
@@ -3881,6 +4096,7 @@
         "heatPerShot": 13.2,
         "cooldown": 6.0,
         "range": 600.0,
+        "maxRange": 1200.0,
         "rpm": 10.0
       },
       "1": {
@@ -3888,6 +4104,7 @@
         "heatPerShot": 11.0,
         "cooldown": 5.0,
         "range": 750.0,
+        "maxRange": 1500.0,
         "rpm": 12.0
       },
       "2": {
@@ -3895,6 +4112,7 @@
         "heatPerShot": 10.45,
         "cooldown": 4.875,
         "range": 787.5,
+        "maxRange": 1575.0,
         "rpm": 12.3
       },
       "3": {
@@ -3902,6 +4120,7 @@
         "heatPerShot": 9.9,
         "cooldown": 4.75,
         "range": 825.0,
+        "maxRange": 1650.0,
         "rpm": 12.6
       },
       "4": {
@@ -3909,6 +4128,7 @@
         "heatPerShot": 9.35,
         "cooldown": 4.6,
         "range": 862.5,
+        "maxRange": 1725.0,
         "rpm": 13.0
       },
       "5": {
@@ -3916,6 +4136,7 @@
         "heatPerShot": 8.525,
         "cooldown": 4.25,
         "range": 937.5,
+        "maxRange": 1875.0,
         "rpm": 14.1
       }
     },
@@ -3936,6 +4157,7 @@
         "heatPerShot": 2.4,
         "cooldown": 2.7,
         "range": 160.0,
+        "maxRange": 240.0,
         "rpm": 22.2
       },
       "1": {
@@ -3943,6 +4165,7 @@
         "heatPerShot": 2.0,
         "cooldown": 2.25,
         "range": 200.0,
+        "maxRange": 300.0,
         "rpm": 26.7
       },
       "2": {
@@ -3950,6 +4173,7 @@
         "heatPerShot": 1.9,
         "cooldown": 2.194,
         "range": 210.0,
+        "maxRange": 315.0,
         "rpm": 27.3
       },
       "3": {
@@ -3957,6 +4181,7 @@
         "heatPerShot": 1.8,
         "cooldown": 2.137,
         "range": 220.0,
+        "maxRange": 330.0,
         "rpm": 28.1
       },
       "4": {
@@ -3964,6 +4189,7 @@
         "heatPerShot": 1.7,
         "cooldown": 2.07,
         "range": 230.0,
+        "maxRange": 345.0,
         "rpm": 29.0
       },
       "5": {
@@ -3971,6 +4197,7 @@
         "heatPerShot": 1.5,
         "cooldown": 1.912,
         "range": 250.0,
+        "maxRange": 375.0,
         "rpm": 31.4
       }
     },
@@ -4019,6 +4246,7 @@
         "heatPerShot": 0.48,
         "cooldown": 0.1,
         "range": 72.0,
+        "maxRange": 72.0,
         "rpm": 600.0
       },
       "1": {
@@ -4026,6 +4254,7 @@
         "heatPerShot": 0.4,
         "cooldown": 0.1,
         "range": 90.0,
+        "maxRange": 90.0,
         "rpm": 600.0
       },
       "2": {
@@ -4033,6 +4262,7 @@
         "heatPerShot": 0.38,
         "cooldown": 0.1,
         "range": 94.5,
+        "maxRange": 94.5,
         "rpm": 600.0
       },
       "3": {
@@ -4040,6 +4270,7 @@
         "heatPerShot": 0.36,
         "cooldown": 0.1,
         "range": 99.0,
+        "maxRange": 99.0,
         "rpm": 600.0
       },
       "4": {
@@ -4047,6 +4278,7 @@
         "heatPerShot": 0.34,
         "cooldown": 0.1,
         "range": 103.5,
+        "maxRange": 103.5,
         "rpm": 600.0
       },
       "5": {
@@ -4054,6 +4286,7 @@
         "heatPerShot": 0.3,
         "cooldown": 0.1,
         "range": 112.5,
+        "maxRange": 112.5,
         "rpm": 600.0
       }
     },
@@ -4074,6 +4307,7 @@
         "heatPerShot": 1.3,
         "cooldown": 7.2,
         "range": 528.0,
+        "maxRange": 528.0,
         "rpm": 8.3
       },
       "1": {
@@ -4081,6 +4315,7 @@
         "heatPerShot": 1.0,
         "cooldown": 6.0,
         "range": 660.0,
+        "maxRange": 660.0,
         "rpm": 10.0
       },
       "2": {
@@ -4088,6 +4323,7 @@
         "heatPerShot": 0.95,
         "cooldown": 5.85,
         "range": 693.0,
+        "maxRange": 693.0,
         "rpm": 10.3
       },
       "3": {
@@ -4095,6 +4331,7 @@
         "heatPerShot": 0.9,
         "cooldown": 5.7,
         "range": 726.0,
+        "maxRange": 726.0,
         "rpm": 10.5
       },
       "4": {
@@ -4102,6 +4339,7 @@
         "heatPerShot": 0.85,
         "cooldown": 5.52,
         "range": 759.0,
+        "maxRange": 759.0,
         "rpm": 10.9
       },
       "5": {
@@ -4109,6 +4347,7 @@
         "heatPerShot": 0.85,
         "cooldown": 5.1,
         "range": 825.0,
+        "maxRange": 825.0,
         "rpm": 11.8
       }
     },
@@ -4163,6 +4402,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.8,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 12.5
       },
       "1": {
@@ -4170,6 +4410,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.0,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 15.0
       },
       "2": {
@@ -4177,6 +4418,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.8,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 15.8
       },
       "3": {
@@ -4184,6 +4426,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.6,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 16.7
       },
       "4": {
@@ -4191,6 +4434,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.4,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 17.6
       },
       "5": {
@@ -4198,6 +4442,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.2,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 18.8
       }
     },
@@ -4233,6 +4478,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.812,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 15.7
       },
       "1": {
@@ -4240,6 +4486,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.05,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 19.7
       },
       "2": {
@@ -4247,6 +4494,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.669,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 22.5
       },
       "3": {
@@ -4254,6 +4502,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.287,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 26.2
       },
       "4": {
@@ -4261,6 +4510,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.906,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 31.5
       },
       "5": {
@@ -4268,6 +4518,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.144,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 52.4
       }
     },
@@ -4289,6 +4540,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.906,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 15.4
       },
       "1": {
@@ -4296,6 +4548,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.125,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 19.2
       },
       "2": {
@@ -4303,6 +4556,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.734,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 21.9
       },
       "3": {
@@ -4310,6 +4564,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.344,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 25.6
       },
       "4": {
@@ -4317,6 +4572,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.953,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 30.7
       },
       "5": {
@@ -4324,6 +4580,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.172,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 51.2
       }
     },
@@ -4345,6 +4602,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.062,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 14.8
       },
       "1": {
@@ -4352,6 +4610,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 18.5
       },
       "2": {
@@ -4359,6 +4618,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.844,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 21.1
       },
       "3": {
@@ -4366,6 +4626,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.438,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 24.6
       },
       "4": {
@@ -4373,6 +4634,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.031,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 29.5
       },
       "5": {
@@ -4380,6 +4642,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.219,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 49.2
       }
     },
@@ -4401,6 +4664,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.062,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 14.8
       },
       "1": {
@@ -4408,6 +4672,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 18.5
       },
       "2": {
@@ -4415,6 +4680,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.844,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 21.1
       },
       "3": {
@@ -4422,6 +4688,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.438,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 24.6
       },
       "4": {
@@ -4429,6 +4696,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.031,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 29.5
       },
       "5": {
@@ -4436,6 +4704,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.219,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 49.2
       }
     },
@@ -4457,6 +4726,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.56,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 13.2
       },
       "1": {
@@ -4464,6 +4734,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.8,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 15.8
       },
       "2": {
@@ -4471,6 +4742,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.61,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 16.6
       },
       "3": {
@@ -4478,6 +4750,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.42,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 17.5
       },
       "4": {
@@ -4485,6 +4758,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.23,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 18.6
       },
       "5": {
@@ -4492,6 +4766,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.85,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 21.1
       }
     },
@@ -4513,6 +4788,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.062,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 14.8
       },
       "1": {
@@ -4520,6 +4796,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.25,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 18.5
       },
       "2": {
@@ -4527,6 +4804,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.844,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 21.1
       },
       "3": {
@@ -4534,6 +4812,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.438,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 24.6
       },
       "4": {
@@ -4541,6 +4820,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.031,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 29.5
       },
       "5": {
@@ -4548,6 +4828,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.219,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 49.2
       }
     },
@@ -4569,6 +4850,7 @@
         "heatPerShot": 2.6,
         "cooldown": 7.2,
         "range": 312.0,
+        "maxRange": 800.0,
         "rpm": 8.3
       },
       "1": {
@@ -4576,6 +4858,7 @@
         "heatPerShot": 2.0,
         "cooldown": 6.0,
         "range": 390.0,
+        "maxRange": 1000.0,
         "rpm": 10.0
       },
       "2": {
@@ -4583,6 +4866,7 @@
         "heatPerShot": 1.9,
         "cooldown": 5.85,
         "range": 409.5,
+        "maxRange": 1050.0,
         "rpm": 10.3
       },
       "3": {
@@ -4590,6 +4874,7 @@
         "heatPerShot": 1.8,
         "cooldown": 5.7,
         "range": 429.0,
+        "maxRange": 1100.0,
         "rpm": 10.5
       },
       "4": {
@@ -4597,6 +4882,7 @@
         "heatPerShot": 1.7,
         "cooldown": 5.52,
         "range": 448.5,
+        "maxRange": 1150.0,
         "rpm": 10.9
       },
       "5": {
@@ -4604,6 +4890,7 @@
         "heatPerShot": 1.7,
         "cooldown": 5.1,
         "range": 487.5,
+        "maxRange": 1250.0,
         "rpm": 11.8
       }
     },
@@ -4658,6 +4945,7 @@
         "heatPerShot": 13.0,
         "cooldown": 12.0,
         "range": 528.0,
+        "maxRange": 528.0,
         "rpm": 5.0
       },
       "1": {
@@ -4665,6 +4953,7 @@
         "heatPerShot": 10.0,
         "cooldown": 10.0,
         "range": 660.0,
+        "maxRange": 660.0,
         "rpm": 6.0
       },
       "2": {
@@ -4672,6 +4961,7 @@
         "heatPerShot": 9.5,
         "cooldown": 9.5,
         "range": 693.0,
+        "maxRange": 693.0,
         "rpm": 6.3
       },
       "3": {
@@ -4679,6 +4969,7 @@
         "heatPerShot": 9.0,
         "cooldown": 9.0,
         "range": 726.0,
+        "maxRange": 726.0,
         "rpm": 6.7
       },
       "4": {
@@ -4686,6 +4977,7 @@
         "heatPerShot": 8.5,
         "cooldown": 8.5,
         "range": 759.0,
+        "maxRange": 759.0,
         "rpm": 7.1
       },
       "5": {
@@ -4693,6 +4985,7 @@
         "heatPerShot": 7.75,
         "cooldown": 7.5,
         "range": 825.0,
+        "maxRange": 825.0,
         "rpm": 8.0
       }
     },
@@ -4731,6 +5024,7 @@
         "heatPerShot": 3.6,
         "cooldown": 12.0,
         "range": 528.0,
+        "maxRange": 528.0,
         "rpm": 5.0
       },
       "1": {
@@ -4738,6 +5032,7 @@
         "heatPerShot": 3.0,
         "cooldown": 10.0,
         "range": 660.0,
+        "maxRange": 660.0,
         "rpm": 6.0
       },
       "2": {
@@ -4745,6 +5040,7 @@
         "heatPerShot": 2.85,
         "cooldown": 9.5,
         "range": 693.0,
+        "maxRange": 693.0,
         "rpm": 6.3
       },
       "3": {
@@ -4752,6 +5048,7 @@
         "heatPerShot": 2.79,
         "cooldown": 9.0,
         "range": 759.0,
+        "maxRange": 759.0,
         "rpm": 6.7
       },
       "4": {
@@ -4759,6 +5056,7 @@
         "heatPerShot": 2.7,
         "cooldown": 8.5,
         "range": 792.0,
+        "maxRange": 792.0,
         "rpm": 7.1
       },
       "5": {
@@ -4766,6 +5064,7 @@
         "heatPerShot": 2.46,
         "cooldown": 8.5,
         "range": 792.0,
+        "maxRange": 792.0,
         "rpm": 7.1
       }
     },
@@ -4879,6 +5178,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.188,
         "range": 22.5,
+        "maxRange": 22.5,
         "rpm": 18.8
       },
       "1": {
@@ -4886,6 +5186,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.55,
         "range": 22.5,
+        "maxRange": 22.5,
         "rpm": 23.5
       },
       "2": {
@@ -4893,6 +5194,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.231,
         "range": 22.5,
+        "maxRange": 22.5,
         "rpm": 26.9
       },
       "3": {
@@ -4900,6 +5202,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.912,
         "range": 22.5,
+        "maxRange": 22.5,
         "rpm": 31.4
       },
       "4": {
@@ -4907,6 +5210,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.721,
         "range": 22.5,
+        "maxRange": 22.5,
         "rpm": 34.9
       },
       "5": {
@@ -4914,6 +5218,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.956,
         "range": 22.5,
+        "maxRange": 22.5,
         "rpm": 62.8
       }
     },
@@ -4935,6 +5240,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.812,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 15.7
       },
       "1": {
@@ -4942,6 +5248,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.05,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 19.7
       },
       "2": {
@@ -4949,6 +5256,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.669,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 22.5
       },
       "3": {
@@ -4956,6 +5264,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.287,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 26.2
       },
       "4": {
@@ -4963,6 +5272,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.906,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 31.5
       },
       "5": {
@@ -4970,6 +5280,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.144,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 52.4
       }
     },
@@ -4991,6 +5302,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.906,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 15.4
       },
       "1": {
@@ -4998,6 +5310,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.125,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 19.2
       },
       "2": {
@@ -5005,6 +5318,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.734,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 21.9
       },
       "3": {
@@ -5012,6 +5326,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.344,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 25.6
       },
       "4": {
@@ -5019,6 +5334,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.953,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 30.7
       },
       "5": {
@@ -5026,6 +5342,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.172,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 51.2
       }
     },
@@ -5047,6 +5364,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.062,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 14.8
       },
       "1": {
@@ -5054,6 +5372,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 18.5
       },
       "2": {
@@ -5061,6 +5380,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.844,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 21.1
       },
       "3": {
@@ -5068,6 +5388,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.438,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 24.6
       },
       "4": {
@@ -5075,6 +5396,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.031,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 29.5
       },
       "5": {
@@ -5082,6 +5404,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.219,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 49.2
       }
     },
@@ -5103,6 +5426,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.062,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 14.8
       },
       "1": {
@@ -5110,6 +5434,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.25,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 18.5
       },
       "2": {
@@ -5117,6 +5442,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.844,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 21.1
       },
       "3": {
@@ -5124,6 +5450,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.438,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 24.6
       },
       "4": {
@@ -5131,6 +5458,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.031,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 29.5
       },
       "5": {
@@ -5138,6 +5466,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.219,
         "range": 17.5,
+        "maxRange": 17.5,
         "rpm": 49.2
       }
     },
@@ -5319,6 +5648,7 @@
         "heatPerShot": 1.69,
         "cooldown": 2.7,
         "range": 432.0,
+        "maxRange": 432.0,
         "rpm": 22.2
       },
       "1": {
@@ -5326,6 +5656,7 @@
         "heatPerShot": 1.3,
         "cooldown": 2.25,
         "range": 540.0,
+        "maxRange": 540.0,
         "rpm": 26.7
       },
       "2": {
@@ -5333,6 +5664,7 @@
         "heatPerShot": 1.17,
         "cooldown": 2.137,
         "range": 567.0,
+        "maxRange": 567.0,
         "rpm": 28.1
       },
       "3": {
@@ -5340,6 +5672,7 @@
         "heatPerShot": 1.17,
         "cooldown": 2.025,
         "range": 594.0,
+        "maxRange": 594.0,
         "rpm": 29.6
       },
       "4": {
@@ -5347,6 +5680,7 @@
         "heatPerShot": 1.105,
         "cooldown": 1.912,
         "range": 621.0,
+        "maxRange": 621.0,
         "rpm": 31.4
       },
       "5": {
@@ -5354,6 +5688,7 @@
         "heatPerShot": 1.008,
         "cooldown": 1.688,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 35.5
       }
     },
@@ -5376,6 +5711,7 @@
         "heatPerShot": 0.715,
         "cooldown": 2.7,
         "range": 432.0,
+        "maxRange": 432.0,
         "rpm": 22.2
       },
       "1": {
@@ -5383,6 +5719,7 @@
         "heatPerShot": 0.55,
         "cooldown": 2.25,
         "range": 540.0,
+        "maxRange": 540.0,
         "rpm": 26.7
       },
       "2": {
@@ -5390,6 +5727,7 @@
         "heatPerShot": 0.495,
         "cooldown": 2.137,
         "range": 567.0,
+        "maxRange": 567.0,
         "rpm": 28.1
       },
       "3": {
@@ -5397,6 +5735,7 @@
         "heatPerShot": 0.481,
         "cooldown": 2.025,
         "range": 594.0,
+        "maxRange": 594.0,
         "rpm": 29.6
       },
       "4": {
@@ -5404,6 +5743,7 @@
         "heatPerShot": 0.468,
         "cooldown": 1.912,
         "range": 621.0,
+        "maxRange": 621.0,
         "rpm": 31.4
       },
       "5": {
@@ -5411,6 +5751,7 @@
         "heatPerShot": 0.426,
         "cooldown": 1.688,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 35.5
       }
     },
@@ -5433,6 +5774,7 @@
         "heatPerShot": 0.65,
         "cooldown": 2.7,
         "range": 432.0,
+        "maxRange": 432.0,
         "rpm": 22.2
       },
       "1": {
@@ -5440,6 +5782,7 @@
         "heatPerShot": 0.5,
         "cooldown": 2.25,
         "range": 540.0,
+        "maxRange": 540.0,
         "rpm": 26.7
       },
       "2": {
@@ -5447,6 +5790,7 @@
         "heatPerShot": 0.475,
         "cooldown": 2.137,
         "range": 567.0,
+        "maxRange": 567.0,
         "rpm": 28.1
       },
       "3": {
@@ -5454,6 +5798,7 @@
         "heatPerShot": 0.45,
         "cooldown": 2.025,
         "range": 594.0,
+        "maxRange": 594.0,
         "rpm": 29.6
       },
       "4": {
@@ -5461,6 +5806,7 @@
         "heatPerShot": 0.425,
         "cooldown": 1.912,
         "range": 621.0,
+        "maxRange": 621.0,
         "rpm": 31.4
       },
       "5": {
@@ -5468,6 +5814,7 @@
         "heatPerShot": 0.388,
         "cooldown": 1.688,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 35.5
       }
     },
@@ -5490,6 +5837,7 @@
         "heatPerShot": 1.95,
         "cooldown": 2.7,
         "range": 432.0,
+        "maxRange": 432.0,
         "rpm": 22.2
       },
       "1": {
@@ -5497,6 +5845,7 @@
         "heatPerShot": 1.5,
         "cooldown": 2.25,
         "range": 540.0,
+        "maxRange": 540.0,
         "rpm": 26.7
       },
       "2": {
@@ -5504,6 +5853,7 @@
         "heatPerShot": 1.425,
         "cooldown": 2.137,
         "range": 567.0,
+        "maxRange": 567.0,
         "rpm": 28.1
       },
       "3": {
@@ -5511,6 +5861,7 @@
         "heatPerShot": 1.35,
         "cooldown": 2.025,
         "range": 594.0,
+        "maxRange": 594.0,
         "rpm": 29.6
       },
       "4": {
@@ -5518,6 +5869,7 @@
         "heatPerShot": 1.275,
         "cooldown": 1.912,
         "range": 621.0,
+        "maxRange": 621.0,
         "rpm": 31.4
       },
       "5": {
@@ -5525,6 +5877,7 @@
         "heatPerShot": 1.163,
         "cooldown": 1.688,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 35.5
       }
     },
@@ -5547,6 +5900,7 @@
         "heatPerShot": 0.39,
         "cooldown": 0.9,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 66.7
       },
       "1": {
@@ -5554,6 +5908,7 @@
         "heatPerShot": 0.3,
         "cooldown": 0.75,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 80.0
       },
       "2": {
@@ -5561,6 +5916,7 @@
         "heatPerShot": 0.27,
         "cooldown": 0.712,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 84.3
       },
       "3": {
@@ -5568,6 +5924,7 @@
         "heatPerShot": 0.27,
         "cooldown": 0.675,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 88.9
       },
       "4": {
@@ -5575,6 +5932,7 @@
         "heatPerShot": 0.255,
         "cooldown": 0.637,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 94.2
       },
       "5": {
@@ -5582,6 +5940,7 @@
         "heatPerShot": 0.232,
         "cooldown": 0.562,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 106.8
       }
     },
@@ -5604,6 +5963,7 @@
         "heatPerShot": 5.46,
         "cooldown": 3.6,
         "range": 288.0,
+        "maxRange": 288.0,
         "rpm": 16.7
       },
       "1": {
@@ -5611,6 +5971,7 @@
         "heatPerShot": 4.2,
         "cooldown": 3.0,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 20.0
       },
       "2": {
@@ -5618,6 +5979,7 @@
         "heatPerShot": 3.78,
         "cooldown": 2.85,
         "range": 378.0,
+        "maxRange": 378.0,
         "rpm": 21.1
       },
       "3": {
@@ -5625,6 +5987,7 @@
         "heatPerShot": 3.78,
         "cooldown": 2.7,
         "range": 396.0,
+        "maxRange": 396.0,
         "rpm": 22.2
       },
       "4": {
@@ -5632,6 +5995,7 @@
         "heatPerShot": 3.57,
         "cooldown": 2.55,
         "range": 414.0,
+        "maxRange": 414.0,
         "rpm": 23.5
       },
       "5": {
@@ -5639,6 +6003,7 @@
         "heatPerShot": 3.255,
         "cooldown": 2.25,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 26.7
       }
     },
@@ -5661,6 +6026,7 @@
         "heatPerShot": 0.52,
         "cooldown": 1.08,
         "range": 576.0,
+        "maxRange": 576.0,
         "rpm": 55.6
       },
       "1": {
@@ -5668,6 +6034,7 @@
         "heatPerShot": 0.4,
         "cooldown": 0.9,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 66.7
       },
       "2": {
@@ -5675,6 +6042,7 @@
         "heatPerShot": 0.36,
         "cooldown": 0.855,
         "range": 756.0,
+        "maxRange": 756.0,
         "rpm": 70.2
       },
       "3": {
@@ -5682,6 +6050,7 @@
         "heatPerShot": 0.36,
         "cooldown": 0.81,
         "range": 792.0,
+        "maxRange": 792.0,
         "rpm": 74.1
       },
       "4": {
@@ -5689,6 +6058,7 @@
         "heatPerShot": 0.34,
         "cooldown": 0.765,
         "range": 828.0,
+        "maxRange": 828.0,
         "rpm": 78.4
       },
       "5": {
@@ -5696,6 +6066,7 @@
         "heatPerShot": 0.31,
         "cooldown": 0.675,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 88.9
       }
     },
@@ -5718,6 +6089,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -5725,6 +6097,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -5732,6 +6105,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -5739,6 +6113,7 @@
         "heatPerShot": 0.324,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -5746,6 +6121,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -5753,6 +6129,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -5775,6 +6152,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -5782,6 +6160,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -5789,6 +6168,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -5796,6 +6176,7 @@
         "heatPerShot": 0.324,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -5803,6 +6184,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -5810,6 +6192,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -5832,6 +6215,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -5839,6 +6223,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -5846,6 +6231,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -5853,6 +6239,7 @@
         "heatPerShot": 0.324,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -5860,6 +6247,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -5867,6 +6255,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -5889,6 +6278,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 600.0,
+        "maxRange": 600.0,
         "rpm": 13.6
       },
       "1": {
@@ -5896,6 +6286,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 750.0,
+        "maxRange": 750.0,
         "rpm": 15.0
       },
       "2": {
@@ -5903,6 +6294,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 787.5,
+        "maxRange": 787.5,
         "rpm": 15.4
       },
       "3": {
@@ -5910,6 +6302,7 @@
         "heatPerShot": 0.324,
         "cooldown": 3.8,
         "range": 825.0,
+        "maxRange": 825.0,
         "rpm": 15.8
       },
       "4": {
@@ -5917,6 +6310,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.6,
         "range": 862.5,
+        "maxRange": 862.5,
         "rpm": 16.7
       },
       "5": {
@@ -5924,6 +6318,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 937.5,
+        "maxRange": 937.5,
         "rpm": 18.2
       }
     },
@@ -5946,6 +6341,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -5953,6 +6349,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -5960,6 +6357,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -5967,6 +6365,7 @@
         "heatPerShot": 0.324,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -5974,6 +6373,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -5981,6 +6381,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6003,6 +6404,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6010,6 +6412,7 @@
         "heatPerShot": 0.3,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6017,6 +6420,7 @@
         "heatPerShot": 0.285,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6024,6 +6428,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -6031,6 +6436,7 @@
         "heatPerShot": 0.255,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6038,6 +6444,7 @@
         "heatPerShot": 0.225,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6060,6 +6467,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6067,6 +6475,7 @@
         "heatPerShot": 0.3,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6074,6 +6483,7 @@
         "heatPerShot": 0.285,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6081,6 +6491,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -6088,6 +6499,7 @@
         "heatPerShot": 0.255,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6095,6 +6507,7 @@
         "heatPerShot": 0.225,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6117,6 +6530,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6124,6 +6538,7 @@
         "heatPerShot": 0.3,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6131,6 +6546,7 @@
         "heatPerShot": 0.285,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6138,6 +6554,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -6145,6 +6562,7 @@
         "heatPerShot": 0.255,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6152,6 +6570,7 @@
         "heatPerShot": 0.225,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6174,6 +6593,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.4,
         "range": 600.0,
+        "maxRange": 600.0,
         "rpm": 13.6
       },
       "1": {
@@ -6181,6 +6601,7 @@
         "heatPerShot": 0.3,
         "cooldown": 4.0,
         "range": 750.0,
+        "maxRange": 750.0,
         "rpm": 15.0
       },
       "2": {
@@ -6188,6 +6609,7 @@
         "heatPerShot": 0.285,
         "cooldown": 3.9,
         "range": 787.5,
+        "maxRange": 787.5,
         "rpm": 15.4
       },
       "3": {
@@ -6195,6 +6617,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.8,
         "range": 825.0,
+        "maxRange": 825.0,
         "rpm": 15.8
       },
       "4": {
@@ -6202,6 +6625,7 @@
         "heatPerShot": 0.255,
         "cooldown": 3.6,
         "range": 862.5,
+        "maxRange": 862.5,
         "rpm": 16.7
       },
       "5": {
@@ -6209,6 +6633,7 @@
         "heatPerShot": 0.225,
         "cooldown": 3.3,
         "range": 937.5,
+        "maxRange": 937.5,
         "rpm": 18.2
       }
     },
@@ -6231,6 +6656,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6238,6 +6664,7 @@
         "heatPerShot": 0.3,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6245,6 +6672,7 @@
         "heatPerShot": 0.285,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6252,6 +6680,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -6259,6 +6688,7 @@
         "heatPerShot": 0.255,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6266,6 +6696,7 @@
         "heatPerShot": 0.225,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6288,6 +6719,7 @@
         "heatPerShot": 0.324,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6295,6 +6727,7 @@
         "heatPerShot": 0.27,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6302,6 +6735,7 @@
         "heatPerShot": 0.257,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6309,6 +6743,7 @@
         "heatPerShot": 0.243,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -6316,6 +6751,7 @@
         "heatPerShot": 0.23,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6323,6 +6759,7 @@
         "heatPerShot": 0.203,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6345,6 +6782,7 @@
         "heatPerShot": 0.324,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6352,6 +6790,7 @@
         "heatPerShot": 0.27,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6359,6 +6798,7 @@
         "heatPerShot": 0.243,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6366,6 +6806,7 @@
         "heatPerShot": 0.243,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -6373,6 +6814,7 @@
         "heatPerShot": 0.23,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6380,6 +6822,7 @@
         "heatPerShot": 0.203,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6402,6 +6845,7 @@
         "heatPerShot": 0.324,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6409,6 +6853,7 @@
         "heatPerShot": 0.27,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6416,6 +6861,7 @@
         "heatPerShot": 0.257,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6423,6 +6869,7 @@
         "heatPerShot": 0.243,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -6430,6 +6877,7 @@
         "heatPerShot": 0.23,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6437,6 +6885,7 @@
         "heatPerShot": 0.203,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6459,6 +6908,7 @@
         "heatPerShot": 0.324,
         "cooldown": 4.4,
         "range": 600.0,
+        "maxRange": 600.0,
         "rpm": 13.6
       },
       "1": {
@@ -6466,6 +6916,7 @@
         "heatPerShot": 0.27,
         "cooldown": 4.0,
         "range": 750.0,
+        "maxRange": 750.0,
         "rpm": 15.0
       },
       "2": {
@@ -6473,6 +6924,7 @@
         "heatPerShot": 0.257,
         "cooldown": 3.9,
         "range": 787.5,
+        "maxRange": 787.5,
         "rpm": 15.4
       },
       "3": {
@@ -6480,6 +6932,7 @@
         "heatPerShot": 0.243,
         "cooldown": 3.8,
         "range": 825.0,
+        "maxRange": 825.0,
         "rpm": 15.8
       },
       "4": {
@@ -6487,6 +6940,7 @@
         "heatPerShot": 0.23,
         "cooldown": 3.6,
         "range": 862.5,
+        "maxRange": 862.5,
         "rpm": 16.7
       },
       "5": {
@@ -6494,6 +6948,7 @@
         "heatPerShot": 0.203,
         "cooldown": 3.3,
         "range": 937.5,
+        "maxRange": 937.5,
         "rpm": 18.2
       }
     },
@@ -6516,6 +6971,7 @@
         "heatPerShot": 0.324,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6523,6 +6979,7 @@
         "heatPerShot": 0.27,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6530,6 +6987,7 @@
         "heatPerShot": 0.257,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6537,6 +6995,7 @@
         "heatPerShot": 0.243,
         "cooldown": 3.8,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 15.8
       },
       "4": {
@@ -6544,6 +7003,7 @@
         "heatPerShot": 0.23,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6551,6 +7011,7 @@
         "heatPerShot": 0.203,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6573,6 +7034,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6580,6 +7042,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6587,6 +7050,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6594,6 +7058,7 @@
         "heatPerShot": 0.288,
         "cooldown": 3.7,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 16.2
       },
       "4": {
@@ -6601,6 +7066,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6608,6 +7074,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6630,6 +7097,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6637,6 +7105,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6644,6 +7113,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6651,6 +7121,7 @@
         "heatPerShot": 0.288,
         "cooldown": 3.7,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 16.2
       },
       "4": {
@@ -6658,6 +7129,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6665,6 +7137,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6687,6 +7160,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6694,6 +7168,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6701,6 +7176,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6708,6 +7184,7 @@
         "heatPerShot": 0.288,
         "cooldown": 3.7,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 16.2
       },
       "4": {
@@ -6715,6 +7192,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6722,6 +7200,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6744,6 +7223,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 600.0,
+        "maxRange": 600.0,
         "rpm": 13.6
       },
       "1": {
@@ -6751,6 +7231,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 750.0,
+        "maxRange": 750.0,
         "rpm": 15.0
       },
       "2": {
@@ -6758,6 +7239,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 787.5,
+        "maxRange": 787.5,
         "rpm": 15.4
       },
       "3": {
@@ -6765,6 +7247,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.7,
         "range": 825.0,
+        "maxRange": 825.0,
         "rpm": 16.2
       },
       "4": {
@@ -6772,6 +7255,7 @@
         "heatPerShot": 0.288,
         "cooldown": 3.6,
         "range": 862.5,
+        "maxRange": 862.5,
         "rpm": 16.7
       },
       "5": {
@@ -6779,6 +7263,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 937.5,
+        "maxRange": 937.5,
         "rpm": 18.2
       }
     },
@@ -6801,6 +7286,7 @@
         "heatPerShot": 0.432,
         "cooldown": 4.4,
         "range": 720.0,
+        "maxRange": 720.0,
         "rpm": 13.6
       },
       "1": {
@@ -6808,6 +7294,7 @@
         "heatPerShot": 0.36,
         "cooldown": 4.0,
         "range": 900.0,
+        "maxRange": 900.0,
         "rpm": 15.0
       },
       "2": {
@@ -6815,6 +7302,7 @@
         "heatPerShot": 0.342,
         "cooldown": 3.9,
         "range": 945.0,
+        "maxRange": 945.0,
         "rpm": 15.4
       },
       "3": {
@@ -6822,6 +7310,7 @@
         "heatPerShot": 0.306,
         "cooldown": 3.7,
         "range": 990.0,
+        "maxRange": 990.0,
         "rpm": 16.2
       },
       "4": {
@@ -6829,6 +7318,7 @@
         "heatPerShot": 0.288,
         "cooldown": 3.6,
         "range": 1035.0,
+        "maxRange": 1035.0,
         "rpm": 16.7
       },
       "5": {
@@ -6836,6 +7326,7 @@
         "heatPerShot": 0.27,
         "cooldown": 3.3,
         "range": 1125.0,
+        "maxRange": 1125.0,
         "rpm": 18.2
       }
     },
@@ -6922,6 +7413,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.6,
         "range": 22.0,
+        "maxRange": 22.0,
         "rpm": 16.7
       },
       "1": {
@@ -6929,6 +7421,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.0,
         "range": 22.0,
+        "maxRange": 22.0,
         "rpm": 20.0
       },
       "2": {
@@ -6936,6 +7429,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.85,
         "range": 22.0,
+        "maxRange": 22.0,
         "rpm": 21.1
       },
       "3": {
@@ -6943,6 +7437,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.7,
         "range": 22.0,
+        "maxRange": 22.0,
         "rpm": 22.2
       },
       "4": {
@@ -6950,6 +7445,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.55,
         "range": 22.0,
+        "maxRange": 22.0,
         "rpm": 23.5
       },
       "5": {
@@ -6957,6 +7453,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.25,
         "range": 22.0,
+        "maxRange": 22.0,
         "rpm": 26.7
       }
     },
@@ -7010,6 +7507,7 @@
         "heatPerShot": 3.0,
         "cooldown": 5.4,
         "range": 360.0,
+        "maxRange": 540.0,
         "rpm": 11.1
       },
       "1": {
@@ -7017,6 +7515,7 @@
         "heatPerShot": 2.5,
         "cooldown": 4.5,
         "range": 450.0,
+        "maxRange": 675.0,
         "rpm": 13.3
       },
       "2": {
@@ -7024,6 +7523,7 @@
         "heatPerShot": 2.375,
         "cooldown": 4.388,
         "range": 472.5,
+        "maxRange": 708.8,
         "rpm": 13.7
       },
       "3": {
@@ -7031,6 +7531,7 @@
         "heatPerShot": 2.25,
         "cooldown": 4.275,
         "range": 495.0,
+        "maxRange": 742.5,
         "rpm": 14.0
       },
       "4": {
@@ -7038,6 +7539,7 @@
         "heatPerShot": 2.125,
         "cooldown": 4.14,
         "range": 517.5,
+        "maxRange": 776.2,
         "rpm": 14.5
       },
       "5": {
@@ -7045,6 +7547,7 @@
         "heatPerShot": 1.875,
         "cooldown": 3.825,
         "range": 562.5,
+        "maxRange": 843.8,
         "rpm": 15.7
       }
     },
@@ -7067,6 +7570,7 @@
         "heatPerShot": 9.0,
         "cooldown": 6.3,
         "range": 360.0,
+        "maxRange": 540.0,
         "rpm": 9.5
       },
       "1": {
@@ -7074,6 +7578,7 @@
         "heatPerShot": 7.5,
         "cooldown": 5.25,
         "range": 450.0,
+        "maxRange": 675.0,
         "rpm": 11.4
       },
       "2": {
@@ -7081,6 +7586,7 @@
         "heatPerShot": 7.125,
         "cooldown": 5.119,
         "range": 472.5,
+        "maxRange": 708.8,
         "rpm": 11.7
       },
       "3": {
@@ -7088,6 +7594,7 @@
         "heatPerShot": 6.75,
         "cooldown": 4.987,
         "range": 495.0,
+        "maxRange": 742.5,
         "rpm": 12.0
       },
       "4": {
@@ -7095,6 +7602,7 @@
         "heatPerShot": 6.375,
         "cooldown": 4.83,
         "range": 517.5,
+        "maxRange": 776.2,
         "rpm": 12.4
       },
       "5": {
@@ -7102,6 +7610,7 @@
         "heatPerShot": 5.625,
         "cooldown": 4.462,
         "range": 562.5,
+        "maxRange": 843.8,
         "rpm": 13.4
       }
     },
@@ -7122,6 +7631,7 @@
         "heatPerShot": 4.92,
         "cooldown": 4.32,
         "range": 360.0,
+        "maxRange": 540.0,
         "rpm": 13.9
       },
       "1": {
@@ -7129,6 +7639,7 @@
         "heatPerShot": 4.1,
         "cooldown": 3.6,
         "range": 450.0,
+        "maxRange": 675.0,
         "rpm": 16.7
       },
       "2": {
@@ -7136,6 +7647,7 @@
         "heatPerShot": 3.895,
         "cooldown": 3.51,
         "range": 472.5,
+        "maxRange": 708.8,
         "rpm": 17.1
       },
       "3": {
@@ -7143,6 +7655,7 @@
         "heatPerShot": 3.69,
         "cooldown": 3.42,
         "range": 495.0,
+        "maxRange": 742.5,
         "rpm": 17.5
       },
       "4": {
@@ -7150,6 +7663,7 @@
         "heatPerShot": 3.485,
         "cooldown": 3.312,
         "range": 517.5,
+        "maxRange": 776.2,
         "rpm": 18.1
       },
       "5": {
@@ -7157,6 +7671,7 @@
         "heatPerShot": 3.075,
         "cooldown": 3.06,
         "range": 562.5,
+        "maxRange": 843.8,
         "rpm": 19.6
       }
     },
@@ -7177,6 +7692,7 @@
         "heatPerShot": 7.8,
         "cooldown": 5.4,
         "range": 292.0,
+        "maxRange": 438.0,
         "rpm": 11.1
       },
       "1": {
@@ -7184,6 +7700,7 @@
         "heatPerShot": 6.5,
         "cooldown": 4.5,
         "range": 365.0,
+        "maxRange": 547.5,
         "rpm": 13.3
       },
       "2": {
@@ -7191,6 +7708,7 @@
         "heatPerShot": 6.175,
         "cooldown": 4.388,
         "range": 383.2,
+        "maxRange": 574.9,
         "rpm": 13.7
       },
       "3": {
@@ -7198,6 +7716,7 @@
         "heatPerShot": 5.85,
         "cooldown": 4.275,
         "range": 401.5,
+        "maxRange": 602.2,
         "rpm": 14.0
       },
       "4": {
@@ -7205,6 +7724,7 @@
         "heatPerShot": 5.525,
         "cooldown": 4.14,
         "range": 419.7,
+        "maxRange": 629.6,
         "rpm": 14.5
       },
       "5": {
@@ -7212,6 +7732,7 @@
         "heatPerShot": 4.875,
         "cooldown": 3.825,
         "range": 456.2,
+        "maxRange": 684.4,
         "rpm": 15.7
       }
     },
@@ -7232,6 +7753,7 @@
         "heatPerShot": 1.8,
         "cooldown": 0.275,
         "range": 360.0,
+        "maxRange": 540.0,
         "rpm": 218.2
       },
       "1": {
@@ -7239,6 +7761,7 @@
         "heatPerShot": 1.5,
         "cooldown": 0.25,
         "range": 450.0,
+        "maxRange": 675.0,
         "rpm": 240.0
       },
       "2": {
@@ -7246,6 +7769,7 @@
         "heatPerShot": 1.425,
         "cooldown": 0.237,
         "range": 472.5,
+        "maxRange": 708.8,
         "rpm": 253.2
       },
       "3": {
@@ -7253,6 +7777,7 @@
         "heatPerShot": 1.35,
         "cooldown": 0.225,
         "range": 495.0,
+        "maxRange": 742.5,
         "rpm": 266.7
       },
       "4": {
@@ -7260,6 +7785,7 @@
         "heatPerShot": 1.275,
         "cooldown": 0.212,
         "range": 517.5,
+        "maxRange": 776.2,
         "rpm": 283.0
       },
       "5": {
@@ -7267,6 +7793,7 @@
         "heatPerShot": 1.125,
         "cooldown": 0.188,
         "range": 562.5,
+        "maxRange": 843.8,
         "rpm": 319.1
       }
     },
@@ -7287,6 +7814,7 @@
         "heatPerShot": 0.6,
         "cooldown": 0.748,
         "range": 432.0,
+        "maxRange": 432.0,
         "rpm": 80.2
       },
       "1": {
@@ -7294,6 +7822,7 @@
         "heatPerShot": 0.5,
         "cooldown": 0.68,
         "range": 540.0,
+        "maxRange": 540.0,
         "rpm": 88.2
       },
       "2": {
@@ -7301,6 +7830,7 @@
         "heatPerShot": 0.475,
         "cooldown": 0.646,
         "range": 567.0,
+        "maxRange": 567.0,
         "rpm": 92.9
       },
       "3": {
@@ -7308,6 +7838,7 @@
         "heatPerShot": 0.45,
         "cooldown": 0.612,
         "range": 594.0,
+        "maxRange": 594.0,
         "rpm": 98.0
       },
       "4": {
@@ -7315,6 +7846,7 @@
         "heatPerShot": 0.425,
         "cooldown": 0.578,
         "range": 621.0,
+        "maxRange": 621.0,
         "rpm": 103.8
       },
       "5": {
@@ -7322,6 +7854,7 @@
         "heatPerShot": 0.375,
         "cooldown": 0.51,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 117.6
       }
     },
@@ -7344,6 +7877,7 @@
         "heatPerShot": 0.72,
         "cooldown": 1.87,
         "range": 288.0,
+        "maxRange": 288.0,
         "rpm": 32.1
       },
       "1": {
@@ -7351,6 +7885,7 @@
         "heatPerShot": 0.6,
         "cooldown": 1.7,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 35.3
       },
       "2": {
@@ -7358,6 +7893,7 @@
         "heatPerShot": 0.57,
         "cooldown": 1.615,
         "range": 378.0,
+        "maxRange": 378.0,
         "rpm": 37.2
       },
       "3": {
@@ -7365,6 +7901,7 @@
         "heatPerShot": 0.54,
         "cooldown": 1.53,
         "range": 396.0,
+        "maxRange": 396.0,
         "rpm": 39.2
       },
       "4": {
@@ -7372,6 +7909,7 @@
         "heatPerShot": 0.51,
         "cooldown": 1.445,
         "range": 414.0,
+        "maxRange": 414.0,
         "rpm": 41.5
       },
       "5": {
@@ -7379,6 +7917,7 @@
         "heatPerShot": 0.45,
         "cooldown": 1.275,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 47.1
       }
     },
@@ -7401,6 +7940,7 @@
         "heatPerShot": 1.3,
         "cooldown": 3.6,
         "range": 408.0,
+        "maxRange": 600.0,
         "rpm": 16.7
       },
       "1": {
@@ -7408,6 +7948,7 @@
         "heatPerShot": 1.0,
         "cooldown": 3.0,
         "range": 510.0,
+        "maxRange": 750.0,
         "rpm": 20.0
       },
       "2": {
@@ -7415,6 +7956,7 @@
         "heatPerShot": 0.95,
         "cooldown": 2.925,
         "range": 535.5,
+        "maxRange": 787.5,
         "rpm": 20.5
       },
       "3": {
@@ -7422,6 +7964,7 @@
         "heatPerShot": 0.9,
         "cooldown": 2.85,
         "range": 561.0,
+        "maxRange": 825.0,
         "rpm": 21.1
       },
       "4": {
@@ -7429,6 +7972,7 @@
         "heatPerShot": 0.85,
         "cooldown": 2.76,
         "range": 586.5,
+        "maxRange": 862.5,
         "rpm": 21.7
       },
       "5": {
@@ -7436,6 +7980,7 @@
         "heatPerShot": 0.85,
         "cooldown": 2.55,
         "range": 637.5,
+        "maxRange": 937.5,
         "rpm": 23.5
       }
     },
@@ -7490,6 +8035,7 @@
         "heatPerShot": 2.86,
         "cooldown": 8.4,
         "range": 288.0,
+        "maxRange": 288.0,
         "rpm": 7.1
       },
       "1": {
@@ -7497,6 +8043,7 @@
         "heatPerShot": 2.2,
         "cooldown": 7.0,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 8.6
       },
       "2": {
@@ -7504,6 +8051,7 @@
         "heatPerShot": 2.09,
         "cooldown": 6.65,
         "range": 378.0,
+        "maxRange": 378.0,
         "rpm": 9.0
       },
       "3": {
@@ -7511,6 +8059,7 @@
         "heatPerShot": 1.98,
         "cooldown": 6.3,
         "range": 396.0,
+        "maxRange": 396.0,
         "rpm": 9.5
       },
       "4": {
@@ -7518,6 +8067,7 @@
         "heatPerShot": 1.87,
         "cooldown": 5.95,
         "range": 414.0,
+        "maxRange": 414.0,
         "rpm": 10.1
       },
       "5": {
@@ -7525,6 +8075,7 @@
         "heatPerShot": 1.705,
         "cooldown": 5.25,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 11.4
       }
     },
@@ -7563,6 +8114,7 @@
         "heatPerShot": 0.6,
         "cooldown": 8.4,
         "range": 288.0,
+        "maxRange": 288.0,
         "rpm": 7.1
       },
       "1": {
@@ -7570,6 +8122,7 @@
         "heatPerShot": 0.5,
         "cooldown": 7.0,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 8.6
       },
       "2": {
@@ -7577,6 +8130,7 @@
         "heatPerShot": 0.475,
         "cooldown": 6.65,
         "range": 396.0,
+        "maxRange": 396.0,
         "rpm": 9.0
       },
       "3": {
@@ -7584,6 +8138,7 @@
         "heatPerShot": 0.45,
         "cooldown": 6.3,
         "range": 414.0,
+        "maxRange": 414.0,
         "rpm": 9.5
       },
       "4": {
@@ -7591,6 +8146,7 @@
         "heatPerShot": 0.41,
         "cooldown": 5.74,
         "range": 432.0,
+        "maxRange": 432.0,
         "rpm": 10.5
       },
       "5": {
@@ -7598,6 +8154,7 @@
         "heatPerShot": 0.375,
         "cooldown": 5.25,
         "range": 468.0,
+        "maxRange": 468.0,
         "rpm": 11.4
       }
     },
@@ -7636,6 +8193,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.906,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 15.4
       },
       "1": {
@@ -7643,6 +8201,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.125,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 19.2
       },
       "2": {
@@ -7650,6 +8209,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.734,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 21.9
       },
       "3": {
@@ -7657,6 +8217,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.344,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 25.6
       },
       "4": {
@@ -7664,6 +8225,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.953,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 30.7
       },
       "5": {
@@ -7671,6 +8233,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.172,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 51.2
       }
     },
@@ -7692,6 +8255,7 @@
         "heatPerShot": 0.42,
         "cooldown": 4.29,
         "range": 440.0,
+        "maxRange": 440.0,
         "rpm": 14.0
       },
       "1": {
@@ -7699,6 +8263,7 @@
         "heatPerShot": 0.35,
         "cooldown": 3.9,
         "range": 550.0,
+        "maxRange": 550.0,
         "rpm": 15.4
       },
       "2": {
@@ -7706,6 +8271,7 @@
         "heatPerShot": 0.332,
         "cooldown": 3.705,
         "range": 577.5,
+        "maxRange": 577.5,
         "rpm": 16.2
       },
       "3": {
@@ -7713,6 +8279,7 @@
         "heatPerShot": 0.315,
         "cooldown": 3.51,
         "range": 605.0,
+        "maxRange": 605.0,
         "rpm": 17.1
       },
       "4": {
@@ -7720,6 +8287,7 @@
         "heatPerShot": 0.297,
         "cooldown": 3.315,
         "range": 632.5,
+        "maxRange": 632.5,
         "rpm": 18.1
       },
       "5": {
@@ -7727,6 +8295,7 @@
         "heatPerShot": 0.262,
         "cooldown": 2.925,
         "range": 687.5,
+        "maxRange": 687.5,
         "rpm": 20.5
       }
     },
@@ -7749,6 +8318,7 @@
         "heatPerShot": 0.324,
         "cooldown": 4.51,
         "range": 440.0,
+        "maxRange": 440.0,
         "rpm": 13.3
       },
       "1": {
@@ -7756,6 +8326,7 @@
         "heatPerShot": 0.27,
         "cooldown": 4.1,
         "range": 550.0,
+        "maxRange": 550.0,
         "rpm": 14.6
       },
       "2": {
@@ -7763,6 +8334,7 @@
         "heatPerShot": 0.257,
         "cooldown": 3.895,
         "range": 577.5,
+        "maxRange": 577.5,
         "rpm": 15.4
       },
       "3": {
@@ -7770,6 +8342,7 @@
         "heatPerShot": 0.243,
         "cooldown": 3.69,
         "range": 605.0,
+        "maxRange": 605.0,
         "rpm": 16.3
       },
       "4": {
@@ -7777,6 +8350,7 @@
         "heatPerShot": 0.23,
         "cooldown": 3.485,
         "range": 632.5,
+        "maxRange": 632.5,
         "rpm": 17.2
       },
       "5": {
@@ -7784,6 +8358,7 @@
         "heatPerShot": 0.203,
         "cooldown": 3.075,
         "range": 687.5,
+        "maxRange": 687.5,
         "rpm": 19.5
       }
     },
@@ -7806,6 +8381,7 @@
         "heatPerShot": 0.312,
         "cooldown": 4.73,
         "range": 440.0,
+        "maxRange": 440.0,
         "rpm": 12.7
       },
       "1": {
@@ -7813,6 +8389,7 @@
         "heatPerShot": 0.26,
         "cooldown": 4.3,
         "range": 550.0,
+        "maxRange": 550.0,
         "rpm": 14.0
       },
       "2": {
@@ -7820,6 +8397,7 @@
         "heatPerShot": 0.247,
         "cooldown": 4.085,
         "range": 577.5,
+        "maxRange": 577.5,
         "rpm": 14.7
       },
       "3": {
@@ -7827,6 +8405,7 @@
         "heatPerShot": 0.234,
         "cooldown": 3.87,
         "range": 605.0,
+        "maxRange": 605.0,
         "rpm": 15.5
       },
       "4": {
@@ -7834,6 +8413,7 @@
         "heatPerShot": 0.221,
         "cooldown": 3.655,
         "range": 632.5,
+        "maxRange": 632.5,
         "rpm": 16.4
       },
       "5": {
@@ -7841,6 +8421,7 @@
         "heatPerShot": 0.195,
         "cooldown": 3.225,
         "range": 687.5,
+        "maxRange": 687.5,
         "rpm": 18.6
       }
     },
@@ -7863,6 +8444,7 @@
         "heatPerShot": 0.3,
         "cooldown": 4.95,
         "range": 440.0,
+        "maxRange": 440.0,
         "rpm": 12.1
       },
       "1": {
@@ -7870,6 +8452,7 @@
         "heatPerShot": 0.25,
         "cooldown": 4.5,
         "range": 550.0,
+        "maxRange": 550.0,
         "rpm": 13.3
       },
       "2": {
@@ -7877,6 +8460,7 @@
         "heatPerShot": 0.237,
         "cooldown": 4.275,
         "range": 577.5,
+        "maxRange": 577.5,
         "rpm": 14.0
       },
       "3": {
@@ -7884,6 +8468,7 @@
         "heatPerShot": 0.225,
         "cooldown": 4.05,
         "range": 605.0,
+        "maxRange": 605.0,
         "rpm": 14.8
       },
       "4": {
@@ -7891,6 +8476,7 @@
         "heatPerShot": 0.212,
         "cooldown": 3.825,
         "range": 632.5,
+        "maxRange": 632.5,
         "rpm": 15.7
       },
       "5": {
@@ -7898,6 +8484,7 @@
         "heatPerShot": 0.188,
         "cooldown": 3.375,
         "range": 687.5,
+        "maxRange": 687.5,
         "rpm": 17.8
       }
     },
@@ -7952,6 +8539,7 @@
         "heatPerShot": 0.0,
         "cooldown": 4.375,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 13.7
       },
       "1": {
@@ -7959,6 +8547,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.5,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 17.1
       },
       "2": {
@@ -7966,6 +8555,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.062,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 19.6
       },
       "3": {
@@ -7973,6 +8563,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.625,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 22.9
       },
       "4": {
@@ -7980,6 +8571,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.188,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 27.4
       },
       "5": {
@@ -7987,6 +8579,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.312,
         "range": 20.0,
+        "maxRange": 20.0,
         "rpm": 45.7
       }
     },
@@ -8008,6 +8601,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.1,
         "range": 104.0,
+        "maxRange": 104.0,
         "rpm": 600.0
       },
       "1": {
@@ -8015,6 +8609,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.1,
         "range": 130.0,
+        "maxRange": 130.0,
         "rpm": 600.0
       },
       "2": {
@@ -8022,6 +8617,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.1,
         "range": 143.0,
+        "maxRange": 143.0,
         "rpm": 600.0
       },
       "3": {
@@ -8029,6 +8625,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.1,
         "range": 162.5,
+        "maxRange": 162.5,
         "rpm": 600.0
       },
       "4": {
@@ -8036,6 +8633,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.1,
         "range": 182.0,
+        "maxRange": 182.0,
         "rpm": 600.0
       },
       "5": {
@@ -8043,6 +8641,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.1,
         "range": 208.0,
+        "maxRange": 208.0,
         "rpm": 600.0
       }
     },
@@ -8129,6 +8728,7 @@
         "heatPerShot": 1.2,
         "cooldown": 3.9,
         "range": 216.0,
+        "maxRange": 324.0,
         "rpm": 15.4
       },
       "1": {
@@ -8136,6 +8736,7 @@
         "heatPerShot": 1.0,
         "cooldown": 3.25,
         "range": 270.0,
+        "maxRange": 405.0,
         "rpm": 18.5
       },
       "2": {
@@ -8143,6 +8744,7 @@
         "heatPerShot": 0.95,
         "cooldown": 3.169,
         "range": 283.5,
+        "maxRange": 425.2,
         "rpm": 18.9
       },
       "3": {
@@ -8150,6 +8752,7 @@
         "heatPerShot": 0.9,
         "cooldown": 3.087,
         "range": 297.0,
+        "maxRange": 445.5,
         "rpm": 19.4
       },
       "4": {
@@ -8157,6 +8760,7 @@
         "heatPerShot": 0.85,
         "cooldown": 2.99,
         "range": 310.5,
+        "maxRange": 465.7,
         "rpm": 20.1
       },
       "5": {
@@ -8164,6 +8768,7 @@
         "heatPerShot": 0.75,
         "cooldown": 2.762,
         "range": 337.5,
+        "maxRange": 506.2,
         "rpm": 21.7
       }
     },
@@ -8186,6 +8791,7 @@
         "heatPerShot": 2.7,
         "cooldown": 4.8,
         "range": 216.0,
+        "maxRange": 324.0,
         "rpm": 12.5
       },
       "1": {
@@ -8193,6 +8799,7 @@
         "heatPerShot": 2.25,
         "cooldown": 4.0,
         "range": 270.0,
+        "maxRange": 405.0,
         "rpm": 15.0
       },
       "2": {
@@ -8200,6 +8807,7 @@
         "heatPerShot": 2.137,
         "cooldown": 3.9,
         "range": 283.5,
+        "maxRange": 425.2,
         "rpm": 15.4
       },
       "3": {
@@ -8207,6 +8815,7 @@
         "heatPerShot": 2.025,
         "cooldown": 3.8,
         "range": 297.0,
+        "maxRange": 445.5,
         "rpm": 15.8
       },
       "4": {
@@ -8214,6 +8823,7 @@
         "heatPerShot": 1.912,
         "cooldown": 3.68,
         "range": 310.5,
+        "maxRange": 465.7,
         "rpm": 16.3
       },
       "5": {
@@ -8221,6 +8831,7 @@
         "heatPerShot": 1.688,
         "cooldown": 3.4,
         "range": 337.5,
+        "maxRange": 506.2,
         "rpm": 17.6
       }
     },
@@ -8241,6 +8852,7 @@
         "heatPerShot": 1.8,
         "cooldown": 3.12,
         "range": 216.0,
+        "maxRange": 324.0,
         "rpm": 19.2
       },
       "1": {
@@ -8248,6 +8860,7 @@
         "heatPerShot": 1.5,
         "cooldown": 2.6,
         "range": 270.0,
+        "maxRange": 405.0,
         "rpm": 23.1
       },
       "2": {
@@ -8255,6 +8868,7 @@
         "heatPerShot": 1.425,
         "cooldown": 2.535,
         "range": 283.5,
+        "maxRange": 425.2,
         "rpm": 23.7
       },
       "3": {
@@ -8262,6 +8876,7 @@
         "heatPerShot": 1.35,
         "cooldown": 2.47,
         "range": 297.0,
+        "maxRange": 445.5,
         "rpm": 24.3
       },
       "4": {
@@ -8269,6 +8884,7 @@
         "heatPerShot": 1.275,
         "cooldown": 2.392,
         "range": 310.5,
+        "maxRange": 465.7,
         "rpm": 25.1
       },
       "5": {
@@ -8276,6 +8892,7 @@
         "heatPerShot": 1.125,
         "cooldown": 2.21,
         "range": 337.5,
+        "maxRange": 506.2,
         "rpm": 27.1
       }
     },
@@ -8296,6 +8913,7 @@
         "heatPerShot": 3.12,
         "cooldown": 3.9,
         "range": 176.0,
+        "maxRange": 264.0,
         "rpm": 15.4
       },
       "1": {
@@ -8303,6 +8921,7 @@
         "heatPerShot": 2.6,
         "cooldown": 3.25,
         "range": 220.0,
+        "maxRange": 330.0,
         "rpm": 18.5
       },
       "2": {
@@ -8310,6 +8929,7 @@
         "heatPerShot": 2.47,
         "cooldown": 3.169,
         "range": 231.0,
+        "maxRange": 346.5,
         "rpm": 18.9
       },
       "3": {
@@ -8317,6 +8937,7 @@
         "heatPerShot": 2.34,
         "cooldown": 3.087,
         "range": 242.0,
+        "maxRange": 363.0,
         "rpm": 19.4
       },
       "4": {
@@ -8324,6 +8945,7 @@
         "heatPerShot": 2.21,
         "cooldown": 2.99,
         "range": 253.0,
+        "maxRange": 379.5,
         "rpm": 20.1
       },
       "5": {
@@ -8331,6 +8953,7 @@
         "heatPerShot": 1.95,
         "cooldown": 2.762,
         "range": 275.0,
+        "maxRange": 412.5,
         "rpm": 21.7
       }
     },
@@ -8351,6 +8974,7 @@
         "heatPerShot": 5.85,
         "cooldown": 9.6,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 6.2
       },
       "1": {
@@ -8358,6 +8982,7 @@
         "heatPerShot": 4.5,
         "cooldown": 8.0,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 7.5
       },
       "2": {
@@ -8365,6 +8990,7 @@
         "heatPerShot": 4.275,
         "cooldown": 7.6,
         "range": 472.5,
+        "maxRange": 472.5,
         "rpm": 7.9
       },
       "3": {
@@ -8372,6 +8998,7 @@
         "heatPerShot": 4.05,
         "cooldown": 7.2,
         "range": 495.0,
+        "maxRange": 495.0,
         "rpm": 8.3
       },
       "4": {
@@ -8379,6 +9006,7 @@
         "heatPerShot": 3.825,
         "cooldown": 6.8,
         "range": 517.5,
+        "maxRange": 517.5,
         "rpm": 8.8
       },
       "5": {
@@ -8386,6 +9014,7 @@
         "heatPerShot": 3.488,
         "cooldown": 6.0,
         "range": 562.5,
+        "maxRange": 562.5,
         "rpm": 10.0
       }
     },
@@ -8424,6 +9053,7 @@
         "heatPerShot": 1.3,
         "cooldown": 9.6,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 6.2
       },
       "1": {
@@ -8431,6 +9061,7 @@
         "heatPerShot": 1.0,
         "cooldown": 8.0,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 7.5
       },
       "2": {
@@ -8438,6 +9069,7 @@
         "heatPerShot": 0.95,
         "cooldown": 7.6,
         "range": 472.5,
+        "maxRange": 472.5,
         "rpm": 7.9
       },
       "3": {
@@ -8445,6 +9077,7 @@
         "heatPerShot": 0.9,
         "cooldown": 7.2,
         "range": 495.0,
+        "maxRange": 495.0,
         "rpm": 8.3
       },
       "4": {
@@ -8452,6 +9085,7 @@
         "heatPerShot": 0.85,
         "cooldown": 6.8,
         "range": 517.5,
+        "maxRange": 517.5,
         "rpm": 8.8
       },
       "5": {
@@ -8459,6 +9093,7 @@
         "heatPerShot": 0.775,
         "cooldown": 6.0,
         "range": 562.5,
+        "maxRange": 562.5,
         "rpm": 10.0
       }
     },
@@ -8497,6 +9132,7 @@
         "heatPerShot": 1.08,
         "cooldown": 0.275,
         "range": 216.0,
+        "maxRange": 324.0,
         "rpm": 218.2
       },
       "1": {
@@ -8504,6 +9140,7 @@
         "heatPerShot": 0.9,
         "cooldown": 0.25,
         "range": 270.0,
+        "maxRange": 405.0,
         "rpm": 240.0
       },
       "2": {
@@ -8511,6 +9148,7 @@
         "heatPerShot": 0.855,
         "cooldown": 0.237,
         "range": 283.5,
+        "maxRange": 425.2,
         "rpm": 253.2
       },
       "3": {
@@ -8518,6 +9156,7 @@
         "heatPerShot": 0.81,
         "cooldown": 0.225,
         "range": 297.0,
+        "maxRange": 445.5,
         "rpm": 266.7
       },
       "4": {
@@ -8525,6 +9164,7 @@
         "heatPerShot": 0.765,
         "cooldown": 0.212,
         "range": 310.5,
+        "maxRange": 465.7,
         "rpm": 283.0
       },
       "5": {
@@ -8532,6 +9172,7 @@
         "heatPerShot": 0.675,
         "cooldown": 0.188,
         "range": 337.5,
+        "maxRange": 506.2,
         "rpm": 319.1
       }
     },
@@ -8584,6 +9225,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.85,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 15.6
       },
       "1": {
@@ -8591,6 +9233,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.5,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 17.1
       },
       "2": {
@@ -8598,6 +9241,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.413,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 17.6
       },
       "3": {
@@ -8605,6 +9249,7 @@
         "heatPerShot": 0.0,
         "cooldown": 3.238,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 18.5
       },
       "4": {
@@ -8612,6 +9257,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.975,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 20.2
       },
       "5": {
@@ -8619,6 +9265,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.188,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 27.4
       }
     },
@@ -8641,6 +9288,7 @@
         "heatPerShot": 9.6,
         "cooldown": 6.0,
         "range": 368.0,
+        "maxRange": 736.0,
         "rpm": 10.0
       },
       "1": {
@@ -8648,6 +9296,7 @@
         "heatPerShot": 8.0,
         "cooldown": 5.0,
         "range": 460.0,
+        "maxRange": 920.0,
         "rpm": 12.0
       },
       "2": {
@@ -8655,6 +9304,7 @@
         "heatPerShot": 7.6,
         "cooldown": 4.875,
         "range": 483.0,
+        "maxRange": 966.0,
         "rpm": 12.3
       },
       "3": {
@@ -8662,6 +9312,7 @@
         "heatPerShot": 7.2,
         "cooldown": 4.75,
         "range": 506.0,
+        "maxRange": 1012.0,
         "rpm": 12.6
       },
       "4": {
@@ -8669,6 +9320,7 @@
         "heatPerShot": 6.8,
         "cooldown": 4.6,
         "range": 529.0,
+        "maxRange": 1058.0,
         "rpm": 13.0
       },
       "5": {
@@ -8676,6 +9328,7 @@
         "heatPerShot": 6.2,
         "cooldown": 4.25,
         "range": 575.0,
+        "maxRange": 1150.0,
         "rpm": 14.1
       }
     },
@@ -8696,6 +9349,7 @@
         "heatPerShot": 8.4,
         "cooldown": 3.0,
         "range": 300.0,
+        "maxRange": 600.0,
         "rpm": 20.0
       },
       "1": {
@@ -8703,6 +9357,7 @@
         "heatPerShot": 7.0,
         "cooldown": 2.5,
         "range": 300.0,
+        "maxRange": 600.0,
         "rpm": 24.0
       },
       "2": {
@@ -8710,6 +9365,7 @@
         "heatPerShot": 6.65,
         "cooldown": 2.438,
         "range": 300.0,
+        "maxRange": 600.0,
         "rpm": 24.6
       },
       "3": {
@@ -8717,6 +9373,7 @@
         "heatPerShot": 6.51,
         "cooldown": 2.375,
         "range": 300.0,
+        "maxRange": 600.0,
         "rpm": 25.3
       },
       "4": {
@@ -8724,6 +9381,7 @@
         "heatPerShot": 6.16,
         "cooldown": 2.275,
         "range": 300.0,
+        "maxRange": 600.0,
         "rpm": 26.4
       },
       "5": {
@@ -8731,6 +9389,7 @@
         "heatPerShot": 6.02,
         "cooldown": 2.075,
         "range": 300.0,
+        "maxRange": 600.0,
         "rpm": 28.9
       }
     },
@@ -8751,6 +9410,7 @@
         "heatPerShot": 1.08,
         "cooldown": 3.08,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 19.5
       },
       "1": {
@@ -8758,6 +9418,7 @@
         "heatPerShot": 0.9,
         "cooldown": 2.8,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 21.4
       },
       "2": {
@@ -8765,6 +9426,7 @@
         "heatPerShot": 0.855,
         "cooldown": 2.66,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 22.6
       },
       "3": {
@@ -8772,6 +9434,7 @@
         "heatPerShot": 0.81,
         "cooldown": 2.52,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 23.8
       },
       "4": {
@@ -8779,6 +9442,7 @@
         "heatPerShot": 0.765,
         "cooldown": 2.38,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 25.2
       },
       "5": {
@@ -8786,6 +9450,7 @@
         "heatPerShot": 0.675,
         "cooldown": 2.1,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 28.6
       }
     },
@@ -8808,6 +9473,7 @@
         "heatPerShot": 1.08,
         "cooldown": 3.08,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 19.5
       },
       "1": {
@@ -8815,6 +9481,7 @@
         "heatPerShot": 0.9,
         "cooldown": 2.8,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 21.4
       },
       "2": {
@@ -8822,6 +9489,7 @@
         "heatPerShot": 0.855,
         "cooldown": 2.66,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 22.6
       },
       "3": {
@@ -8829,6 +9497,7 @@
         "heatPerShot": 0.81,
         "cooldown": 2.52,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 23.8
       },
       "4": {
@@ -8836,6 +9505,7 @@
         "heatPerShot": 0.765,
         "cooldown": 2.38,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 25.2
       },
       "5": {
@@ -8843,6 +9513,7 @@
         "heatPerShot": 0.675,
         "cooldown": 2.1,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 28.6
       }
     },
@@ -8865,6 +9536,7 @@
         "heatPerShot": 1.08,
         "cooldown": 2.343,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 25.6
       },
       "1": {
@@ -8872,6 +9544,7 @@
         "heatPerShot": 0.9,
         "cooldown": 2.13,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 28.2
       },
       "2": {
@@ -8879,6 +9552,7 @@
         "heatPerShot": 0.855,
         "cooldown": 2.023,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 29.7
       },
       "3": {
@@ -8886,6 +9560,7 @@
         "heatPerShot": 0.81,
         "cooldown": 1.917,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 31.3
       },
       "4": {
@@ -8893,6 +9568,7 @@
         "heatPerShot": 0.765,
         "cooldown": 1.81,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 33.1
       },
       "5": {
@@ -8900,6 +9576,7 @@
         "heatPerShot": 0.675,
         "cooldown": 1.597,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 37.6
       }
     },
@@ -8922,6 +9599,7 @@
         "heatPerShot": 0.9,
         "cooldown": 3.08,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 19.5
       },
       "1": {
@@ -8929,6 +9607,7 @@
         "heatPerShot": 0.75,
         "cooldown": 2.8,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 21.4
       },
       "2": {
@@ -8936,6 +9615,7 @@
         "heatPerShot": 0.712,
         "cooldown": 2.66,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 22.6
       },
       "3": {
@@ -8943,6 +9623,7 @@
         "heatPerShot": 0.675,
         "cooldown": 2.52,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 23.8
       },
       "4": {
@@ -8950,6 +9631,7 @@
         "heatPerShot": 0.637,
         "cooldown": 2.38,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 25.2
       },
       "5": {
@@ -8957,6 +9639,7 @@
         "heatPerShot": 0.562,
         "cooldown": 2.1,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 28.6
       }
     },
@@ -8979,6 +9662,7 @@
         "heatPerShot": 0.918,
         "cooldown": 2.508,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 23.9
       },
       "1": {
@@ -8986,6 +9670,7 @@
         "heatPerShot": 0.9,
         "cooldown": 2.28,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 26.3
       },
       "2": {
@@ -8993,6 +9678,7 @@
         "heatPerShot": 0.855,
         "cooldown": 2.166,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 27.7
       },
       "3": {
@@ -9000,6 +9686,7 @@
         "heatPerShot": 0.81,
         "cooldown": 2.052,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 29.2
       },
       "4": {
@@ -9007,6 +9694,7 @@
         "heatPerShot": 0.765,
         "cooldown": 1.938,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 31.0
       },
       "5": {
@@ -9014,6 +9702,7 @@
         "heatPerShot": 0.675,
         "cooldown": 1.71,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 35.1
       }
     },
@@ -9036,6 +9725,7 @@
         "heatPerShot": 0.81,
         "cooldown": 3.74,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 16.0
       },
       "1": {
@@ -9043,6 +9733,7 @@
         "heatPerShot": 0.675,
         "cooldown": 3.4,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 17.6
       },
       "2": {
@@ -9050,6 +9741,7 @@
         "heatPerShot": 0.641,
         "cooldown": 3.23,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 18.6
       },
       "3": {
@@ -9057,6 +9749,7 @@
         "heatPerShot": 0.608,
         "cooldown": 3.06,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 19.6
       },
       "4": {
@@ -9064,6 +9757,7 @@
         "heatPerShot": 0.574,
         "cooldown": 2.89,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 20.8
       },
       "5": {
@@ -9071,6 +9765,7 @@
         "heatPerShot": 0.506,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -9093,6 +9788,7 @@
         "heatPerShot": 0.81,
         "cooldown": 3.74,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 16.0
       },
       "1": {
@@ -9100,6 +9796,7 @@
         "heatPerShot": 0.675,
         "cooldown": 3.4,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 17.6
       },
       "2": {
@@ -9107,6 +9804,7 @@
         "heatPerShot": 0.641,
         "cooldown": 3.23,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 18.6
       },
       "3": {
@@ -9114,6 +9812,7 @@
         "heatPerShot": 0.608,
         "cooldown": 3.06,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 19.6
       },
       "4": {
@@ -9121,6 +9820,7 @@
         "heatPerShot": 0.574,
         "cooldown": 2.89,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 20.8
       },
       "5": {
@@ -9128,6 +9828,7 @@
         "heatPerShot": 0.506,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -9150,6 +9851,7 @@
         "heatPerShot": 0.81,
         "cooldown": 2.343,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 25.6
       },
       "1": {
@@ -9157,6 +9859,7 @@
         "heatPerShot": 0.675,
         "cooldown": 2.13,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 28.2
       },
       "2": {
@@ -9164,6 +9867,7 @@
         "heatPerShot": 0.641,
         "cooldown": 2.023,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 29.7
       },
       "3": {
@@ -9171,6 +9875,7 @@
         "heatPerShot": 0.608,
         "cooldown": 1.917,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 31.3
       },
       "4": {
@@ -9178,6 +9883,7 @@
         "heatPerShot": 0.574,
         "cooldown": 1.81,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 33.1
       },
       "5": {
@@ -9185,6 +9891,7 @@
         "heatPerShot": 0.506,
         "cooldown": 1.597,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 37.6
       }
     },
@@ -9207,6 +9914,7 @@
         "heatPerShot": 0.9,
         "cooldown": 3.74,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 16.0
       },
       "1": {
@@ -9214,6 +9922,7 @@
         "heatPerShot": 0.75,
         "cooldown": 3.4,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 17.6
       },
       "2": {
@@ -9221,6 +9930,7 @@
         "heatPerShot": 0.712,
         "cooldown": 3.23,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 18.6
       },
       "3": {
@@ -9228,6 +9938,7 @@
         "heatPerShot": 0.675,
         "cooldown": 3.06,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 19.6
       },
       "4": {
@@ -9235,6 +9946,7 @@
         "heatPerShot": 0.637,
         "cooldown": 2.89,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 20.8
       },
       "5": {
@@ -9242,6 +9954,7 @@
         "heatPerShot": 0.562,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -9264,6 +9977,7 @@
         "heatPerShot": 0.81,
         "cooldown": 2.255,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 26.6
       },
       "1": {
@@ -9271,6 +9985,7 @@
         "heatPerShot": 0.675,
         "cooldown": 2.05,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 29.3
       },
       "2": {
@@ -9278,6 +9993,7 @@
         "heatPerShot": 0.641,
         "cooldown": 1.947,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 30.8
       },
       "3": {
@@ -9285,6 +10001,7 @@
         "heatPerShot": 0.608,
         "cooldown": 1.845,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 32.5
       },
       "4": {
@@ -9292,6 +10009,7 @@
         "heatPerShot": 0.574,
         "cooldown": 1.742,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 34.4
       },
       "5": {
@@ -9299,6 +10017,7 @@
         "heatPerShot": 0.506,
         "cooldown": 1.537,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 39.0
       }
     },
@@ -9321,6 +10040,7 @@
         "heatPerShot": 0.72,
         "cooldown": 3.74,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 16.0
       },
       "1": {
@@ -9328,6 +10048,7 @@
         "heatPerShot": 0.6,
         "cooldown": 3.4,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 17.6
       },
       "2": {
@@ -9335,6 +10056,7 @@
         "heatPerShot": 0.57,
         "cooldown": 3.23,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 18.6
       },
       "3": {
@@ -9342,6 +10064,7 @@
         "heatPerShot": 0.54,
         "cooldown": 3.06,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 19.6
       },
       "4": {
@@ -9349,6 +10072,7 @@
         "heatPerShot": 0.51,
         "cooldown": 2.89,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 20.8
       },
       "5": {
@@ -9356,6 +10080,7 @@
         "heatPerShot": 0.45,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -9378,6 +10103,7 @@
         "heatPerShot": 0.72,
         "cooldown": 3.74,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 16.0
       },
       "1": {
@@ -9385,6 +10111,7 @@
         "heatPerShot": 0.6,
         "cooldown": 3.4,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 17.6
       },
       "2": {
@@ -9392,6 +10119,7 @@
         "heatPerShot": 0.57,
         "cooldown": 3.23,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 18.6
       },
       "3": {
@@ -9399,6 +10127,7 @@
         "heatPerShot": 0.54,
         "cooldown": 3.06,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 19.6
       },
       "4": {
@@ -9406,6 +10135,7 @@
         "heatPerShot": 0.51,
         "cooldown": 2.89,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 20.8
       },
       "5": {
@@ -9413,6 +10143,7 @@
         "heatPerShot": 0.45,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -9435,6 +10166,7 @@
         "heatPerShot": 0.72,
         "cooldown": 2.255,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 26.6
       },
       "1": {
@@ -9442,6 +10174,7 @@
         "heatPerShot": 0.6,
         "cooldown": 2.05,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 29.3
       },
       "2": {
@@ -9449,6 +10182,7 @@
         "heatPerShot": 0.57,
         "cooldown": 1.947,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 30.8
       },
       "3": {
@@ -9456,6 +10190,7 @@
         "heatPerShot": 0.54,
         "cooldown": 1.845,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 32.5
       },
       "4": {
@@ -9463,6 +10198,7 @@
         "heatPerShot": 0.51,
         "cooldown": 1.742,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 34.4
       },
       "5": {
@@ -9470,6 +10206,7 @@
         "heatPerShot": 0.45,
         "cooldown": 1.537,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 39.0
       }
     },
@@ -9492,6 +10229,7 @@
         "heatPerShot": 0.9,
         "cooldown": 3.74,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 16.0
       },
       "1": {
@@ -9499,6 +10237,7 @@
         "heatPerShot": 0.75,
         "cooldown": 3.4,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 17.6
       },
       "2": {
@@ -9506,6 +10245,7 @@
         "heatPerShot": 0.712,
         "cooldown": 3.23,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 18.6
       },
       "3": {
@@ -9513,6 +10253,7 @@
         "heatPerShot": 0.675,
         "cooldown": 3.06,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 19.6
       },
       "4": {
@@ -9520,6 +10261,7 @@
         "heatPerShot": 0.637,
         "cooldown": 2.89,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 20.8
       },
       "5": {
@@ -9527,6 +10269,7 @@
         "heatPerShot": 0.562,
         "cooldown": 2.55,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 23.5
       }
     },
@@ -9549,6 +10292,7 @@
         "heatPerShot": 0.72,
         "cooldown": 2.255,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 26.6
       },
       "1": {
@@ -9556,6 +10300,7 @@
         "heatPerShot": 0.6,
         "cooldown": 2.05,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 29.3
       },
       "2": {
@@ -9563,6 +10308,7 @@
         "heatPerShot": 0.6,
         "cooldown": 1.947,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 30.8
       },
       "3": {
@@ -9570,6 +10316,7 @@
         "heatPerShot": 0.6,
         "cooldown": 1.845,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 32.5
       },
       "4": {
@@ -9577,6 +10324,7 @@
         "heatPerShot": 0.6,
         "cooldown": 1.742,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 34.4
       },
       "5": {
@@ -9584,6 +10332,7 @@
         "heatPerShot": 0.6,
         "cooldown": 1.537,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 39.0
       }
     },
@@ -9764,6 +10513,7 @@
         "heatPerShot": 0.12,
         "cooldown": 2.16,
         "range": 120.0,
+        "maxRange": 180.0,
         "rpm": 27.8
       },
       "1": {
@@ -9771,6 +10521,7 @@
         "heatPerShot": 0.1,
         "cooldown": 1.8,
         "range": 150.0,
+        "maxRange": 225.0,
         "rpm": 33.3
       },
       "2": {
@@ -9778,6 +10529,7 @@
         "heatPerShot": 0.095,
         "cooldown": 1.755,
         "range": 157.5,
+        "maxRange": 236.2,
         "rpm": 34.2
       },
       "3": {
@@ -9785,6 +10537,7 @@
         "heatPerShot": 0.09,
         "cooldown": 1.71,
         "range": 165.0,
+        "maxRange": 247.5,
         "rpm": 35.1
       },
       "4": {
@@ -9792,6 +10545,7 @@
         "heatPerShot": 0.085,
         "cooldown": 1.656,
         "range": 172.5,
+        "maxRange": 258.8,
         "rpm": 36.2
       },
       "5": {
@@ -9799,6 +10553,7 @@
         "heatPerShot": 0.075,
         "cooldown": 1.53,
         "range": 187.5,
+        "maxRange": 281.2,
         "rpm": 39.2
       }
     },
@@ -9821,6 +10576,7 @@
         "heatPerShot": 0.9,
         "cooldown": 2.7,
         "range": 120.0,
+        "maxRange": 180.0,
         "rpm": 22.2
       },
       "1": {
@@ -9828,6 +10584,7 @@
         "heatPerShot": 0.75,
         "cooldown": 2.25,
         "range": 150.0,
+        "maxRange": 225.0,
         "rpm": 26.7
       },
       "2": {
@@ -9835,6 +10592,7 @@
         "heatPerShot": 0.712,
         "cooldown": 2.194,
         "range": 157.5,
+        "maxRange": 236.2,
         "rpm": 27.3
       },
       "3": {
@@ -9842,6 +10600,7 @@
         "heatPerShot": 0.675,
         "cooldown": 2.137,
         "range": 165.0,
+        "maxRange": 247.5,
         "rpm": 28.1
       },
       "4": {
@@ -9849,6 +10608,7 @@
         "heatPerShot": 0.637,
         "cooldown": 2.07,
         "range": 172.5,
+        "maxRange": 258.8,
         "rpm": 29.0
       },
       "5": {
@@ -9856,6 +10616,7 @@
         "heatPerShot": 0.562,
         "cooldown": 1.912,
         "range": 187.5,
+        "maxRange": 281.2,
         "rpm": 31.4
       }
     },
@@ -9876,6 +10637,7 @@
         "heatPerShot": 0.48,
         "cooldown": 1.8,
         "range": 120.0,
+        "maxRange": 180.0,
         "rpm": 33.3
       },
       "1": {
@@ -9883,6 +10645,7 @@
         "heatPerShot": 0.4,
         "cooldown": 1.5,
         "range": 150.0,
+        "maxRange": 225.0,
         "rpm": 40.0
       },
       "2": {
@@ -9890,6 +10653,7 @@
         "heatPerShot": 0.38,
         "cooldown": 1.462,
         "range": 157.5,
+        "maxRange": 236.2,
         "rpm": 41.0
       },
       "3": {
@@ -9897,6 +10661,7 @@
         "heatPerShot": 0.36,
         "cooldown": 1.425,
         "range": 165.0,
+        "maxRange": 247.5,
         "rpm": 42.1
       },
       "4": {
@@ -9904,6 +10669,7 @@
         "heatPerShot": 0.34,
         "cooldown": 1.38,
         "range": 172.5,
+        "maxRange": 258.8,
         "rpm": 43.5
       },
       "5": {
@@ -9911,6 +10677,7 @@
         "heatPerShot": 0.3,
         "cooldown": 1.275,
         "range": 187.5,
+        "maxRange": 281.2,
         "rpm": 47.1
       }
     },
@@ -9931,6 +10698,7 @@
         "heatPerShot": 1.2,
         "cooldown": 2.28,
         "range": 88.0,
+        "maxRange": 132.0,
         "rpm": 26.3
       },
       "1": {
@@ -9938,6 +10706,7 @@
         "heatPerShot": 1.0,
         "cooldown": 1.9,
         "range": 110.0,
+        "maxRange": 165.0,
         "rpm": 31.6
       },
       "2": {
@@ -9945,6 +10714,7 @@
         "heatPerShot": 0.95,
         "cooldown": 1.852,
         "range": 115.5,
+        "maxRange": 173.2,
         "rpm": 32.4
       },
       "3": {
@@ -9952,6 +10722,7 @@
         "heatPerShot": 0.9,
         "cooldown": 1.805,
         "range": 121.0,
+        "maxRange": 181.5,
         "rpm": 33.2
       },
       "4": {
@@ -9959,6 +10730,7 @@
         "heatPerShot": 0.85,
         "cooldown": 1.748,
         "range": 126.5,
+        "maxRange": 189.7,
         "rpm": 34.3
       },
       "5": {
@@ -9966,6 +10738,7 @@
         "heatPerShot": 0.75,
         "cooldown": 1.615,
         "range": 137.5,
+        "maxRange": 206.2,
         "rpm": 37.2
       }
     },
@@ -9986,6 +10759,7 @@
         "heatPerShot": 0.48,
         "cooldown": 0.275,
         "range": 128.0,
+        "maxRange": 192.0,
         "rpm": 218.2
       },
       "1": {
@@ -9993,6 +10767,7 @@
         "heatPerShot": 0.4,
         "cooldown": 0.25,
         "range": 160.0,
+        "maxRange": 240.0,
         "rpm": 240.0
       },
       "2": {
@@ -10000,6 +10775,7 @@
         "heatPerShot": 0.38,
         "cooldown": 0.237,
         "range": 168.0,
+        "maxRange": 252.0,
         "rpm": 253.2
       },
       "3": {
@@ -10007,6 +10783,7 @@
         "heatPerShot": 0.36,
         "cooldown": 0.225,
         "range": 176.0,
+        "maxRange": 264.0,
         "rpm": 266.7
       },
       "4": {
@@ -10014,6 +10791,7 @@
         "heatPerShot": 0.34,
         "cooldown": 0.212,
         "range": 184.0,
+        "maxRange": 276.0,
         "rpm": 283.0
       },
       "5": {
@@ -10021,6 +10799,7 @@
         "heatPerShot": 0.3,
         "cooldown": 0.188,
         "range": 200.0,
+        "maxRange": 300.0,
         "rpm": 319.1
       }
     },
@@ -10041,6 +10820,7 @@
         "heatPerShot": 1.08,
         "cooldown": 2.2,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 27.3
       },
       "1": {
@@ -10048,6 +10828,7 @@
         "heatPerShot": 0.9,
         "cooldown": 2.0,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 30.0
       },
       "2": {
@@ -10055,6 +10836,7 @@
         "heatPerShot": 0.855,
         "cooldown": 1.9,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 31.6
       },
       "3": {
@@ -10062,6 +10844,7 @@
         "heatPerShot": 0.81,
         "cooldown": 1.8,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 33.3
       },
       "4": {
@@ -10069,6 +10852,7 @@
         "heatPerShot": 0.765,
         "cooldown": 1.7,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 35.3
       },
       "5": {
@@ -10076,6 +10860,7 @@
         "heatPerShot": 0.675,
         "cooldown": 1.5,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 40.0
       }
     },
@@ -10098,6 +10883,7 @@
         "heatPerShot": 1.08,
         "cooldown": 1.98,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 30.3
       },
       "1": {
@@ -10105,6 +10891,7 @@
         "heatPerShot": 0.9,
         "cooldown": 1.8,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 33.3
       },
       "2": {
@@ -10112,6 +10899,7 @@
         "heatPerShot": 0.855,
         "cooldown": 1.71,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 35.1
       },
       "3": {
@@ -10119,6 +10907,7 @@
         "heatPerShot": 0.81,
         "cooldown": 1.62,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 37.0
       },
       "4": {
@@ -10126,6 +10915,7 @@
         "heatPerShot": 0.765,
         "cooldown": 1.53,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 39.2
       },
       "5": {
@@ -10133,6 +10923,7 @@
         "heatPerShot": 0.675,
         "cooldown": 1.35,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 44.4
       }
     },
@@ -10155,6 +10946,7 @@
         "heatPerShot": 1.08,
         "cooldown": 2.2,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 27.3
       },
       "1": {
@@ -10162,6 +10954,7 @@
         "heatPerShot": 0.9,
         "cooldown": 2.0,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 30.0
       },
       "2": {
@@ -10169,6 +10962,7 @@
         "heatPerShot": 0.855,
         "cooldown": 1.9,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 31.6
       },
       "3": {
@@ -10176,6 +10970,7 @@
         "heatPerShot": 0.81,
         "cooldown": 1.8,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 33.3
       },
       "4": {
@@ -10183,6 +10978,7 @@
         "heatPerShot": 0.765,
         "cooldown": 1.7,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 35.3
       },
       "5": {
@@ -10190,6 +10986,7 @@
         "heatPerShot": 0.675,
         "cooldown": 1.5,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 40.0
       }
     },
@@ -10212,6 +11009,7 @@
         "heatPerShot": 1.08,
         "cooldown": 2.2,
         "range": 216.0,
+        "maxRange": 216.0,
         "rpm": 27.3
       },
       "1": {
@@ -10219,6 +11017,7 @@
         "heatPerShot": 0.9,
         "cooldown": 2.0,
         "range": 270.0,
+        "maxRange": 270.0,
         "rpm": 30.0
       },
       "2": {
@@ -10226,6 +11025,7 @@
         "heatPerShot": 0.855,
         "cooldown": 1.9,
         "range": 283.5,
+        "maxRange": 283.5,
         "rpm": 31.6
       },
       "3": {
@@ -10233,6 +11033,7 @@
         "heatPerShot": 0.81,
         "cooldown": 1.8,
         "range": 297.0,
+        "maxRange": 297.0,
         "rpm": 33.3
       },
       "4": {
@@ -10240,6 +11041,7 @@
         "heatPerShot": 0.765,
         "cooldown": 1.7,
         "range": 310.5,
+        "maxRange": 310.5,
         "rpm": 35.3
       },
       "5": {
@@ -10247,6 +11049,7 @@
         "heatPerShot": 0.675,
         "cooldown": 1.5,
         "range": 337.5,
+        "maxRange": 337.5,
         "rpm": 40.0
       }
     },
@@ -10325,6 +11128,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 0.0
       },
       "1": {
@@ -10332,6 +11136,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 0.0
       },
       "2": {
@@ -10339,6 +11144,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 472.5,
+        "maxRange": 472.5,
         "rpm": 0.0
       },
       "3": {
@@ -10346,6 +11152,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 495.0,
+        "maxRange": 495.0,
         "rpm": 0.0
       },
       "4": {
@@ -10353,6 +11160,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 517.5,
+        "maxRange": 517.5,
         "rpm": 0.0
       },
       "5": {
@@ -10360,6 +11168,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 562.5,
+        "maxRange": 562.5,
         "rpm": 0.0
       }
     },
@@ -10478,6 +11287,7 @@
         "heatPerShot": 0.0,
         "cooldown": 2.031,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 29.5
       },
       "1": {
@@ -10485,6 +11295,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.625,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 36.9
       },
       "2": {
@@ -10492,6 +11303,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.422,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 42.2
       },
       "3": {
@@ -10499,6 +11311,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.219,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 49.2
       },
       "4": {
@@ -10506,6 +11319,7 @@
         "heatPerShot": 0.0,
         "cooldown": 1.016,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 59.1
       },
       "5": {
@@ -10513,6 +11327,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.609,
         "range": 18.8,
+        "maxRange": 18.8,
         "rpm": 98.5
       }
     },
@@ -10534,6 +11349,7 @@
         "heatPerShot": 3.9,
         "cooldown": 4.4,
         "range": 432.0,
+        "maxRange": 432.0,
         "rpm": 13.6
       },
       "1": {
@@ -10541,6 +11357,7 @@
         "heatPerShot": 3.0,
         "cooldown": 4.0,
         "range": 540.0,
+        "maxRange": 540.0,
         "rpm": 15.0
       },
       "2": {
@@ -10548,6 +11365,7 @@
         "heatPerShot": 2.85,
         "cooldown": 3.8,
         "range": 567.0,
+        "maxRange": 567.0,
         "rpm": 15.8
       },
       "3": {
@@ -10555,6 +11373,7 @@
         "heatPerShot": 2.7,
         "cooldown": 3.6,
         "range": 594.0,
+        "maxRange": 594.0,
         "rpm": 16.7
       },
       "4": {
@@ -10562,6 +11381,7 @@
         "heatPerShot": 2.55,
         "cooldown": 3.4,
         "range": 621.0,
+        "maxRange": 621.0,
         "rpm": 17.6
       },
       "5": {
@@ -10569,6 +11389,7 @@
         "heatPerShot": 2.325,
         "cooldown": 3.0,
         "range": 675.0,
+        "maxRange": 675.0,
         "rpm": 20.0
       }
     },
@@ -10591,6 +11412,7 @@
         "heatPerShot": 7.8,
         "cooldown": 5.5,
         "range": 288.0,
+        "maxRange": 288.0,
         "rpm": 10.9
       },
       "1": {
@@ -10598,6 +11420,7 @@
         "heatPerShot": 6.0,
         "cooldown": 5.0,
         "range": 360.0,
+        "maxRange": 360.0,
         "rpm": 12.0
       },
       "2": {
@@ -10605,6 +11428,7 @@
         "heatPerShot": 5.7,
         "cooldown": 4.75,
         "range": 378.0,
+        "maxRange": 378.0,
         "rpm": 12.6
       },
       "3": {
@@ -10612,6 +11436,7 @@
         "heatPerShot": 5.4,
         "cooldown": 4.5,
         "range": 396.0,
+        "maxRange": 396.0,
         "rpm": 13.3
       },
       "4": {
@@ -10619,6 +11444,7 @@
         "heatPerShot": 5.1,
         "cooldown": 4.25,
         "range": 414.0,
+        "maxRange": 414.0,
         "rpm": 14.1
       },
       "5": {
@@ -10626,6 +11452,7 @@
         "heatPerShot": 4.65,
         "cooldown": 3.75,
         "range": 450.0,
+        "maxRange": 450.0,
         "rpm": 16.0
       }
     },
@@ -10648,6 +11475,7 @@
         "heatPerShot": 0.52,
         "cooldown": 0.99,
         "range": 648.0,
+        "maxRange": 648.0,
         "rpm": 60.6
       },
       "1": {
@@ -10655,6 +11483,7 @@
         "heatPerShot": 0.4,
         "cooldown": 0.9,
         "range": 810.0,
+        "maxRange": 810.0,
         "rpm": 66.7
       },
       "2": {
@@ -10662,6 +11491,7 @@
         "heatPerShot": 0.38,
         "cooldown": 0.855,
         "range": 850.5,
+        "maxRange": 850.5,
         "rpm": 70.2
       },
       "3": {
@@ -10669,6 +11499,7 @@
         "heatPerShot": 0.36,
         "cooldown": 0.81,
         "range": 891.0,
+        "maxRange": 891.0,
         "rpm": 74.1
       },
       "4": {
@@ -10676,6 +11507,7 @@
         "heatPerShot": 0.34,
         "cooldown": 0.765,
         "range": 931.5,
+        "maxRange": 931.5,
         "rpm": 78.4
       },
       "5": {
@@ -10683,6 +11515,7 @@
         "heatPerShot": 0.31,
         "cooldown": 0.675,
         "range": 1012.5,
+        "maxRange": 1012.5,
         "rpm": 88.9
       }
     },
@@ -10705,6 +11538,7 @@
         "heatPerShot": 0.227,
         "cooldown": 1.26,
         "range": 480.0,
+        "maxRange": 480.0,
         "rpm": 47.6
       },
       "1": {
@@ -10712,6 +11546,7 @@
         "heatPerShot": 0.175,
         "cooldown": 1.05,
         "range": 600.0,
+        "maxRange": 600.0,
         "rpm": 57.1
       },
       "2": {
@@ -10719,6 +11554,7 @@
         "heatPerShot": 0.166,
         "cooldown": 0.997,
         "range": 630.0,
+        "maxRange": 630.0,
         "rpm": 60.2
       },
       "3": {
@@ -10726,6 +11562,7 @@
         "heatPerShot": 0.158,
         "cooldown": 0.945,
         "range": 660.0,
+        "maxRange": 660.0,
         "rpm": 63.5
       },
       "4": {
@@ -10733,6 +11570,7 @@
         "heatPerShot": 0.149,
         "cooldown": 0.892,
         "range": 690.0,
+        "maxRange": 690.0,
         "rpm": 67.3
       },
       "5": {
@@ -10740,6 +11578,7 @@
         "heatPerShot": 0.136,
         "cooldown": 0.788,
         "range": 750.0,
+        "maxRange": 750.0,
         "rpm": 76.1
       }
     },
@@ -10762,6 +11601,7 @@
         "heatPerShot": 1.17,
         "cooldown": 1.65,
         "range": 480.0,
+        "maxRange": 480.0,
         "rpm": 36.4
       },
       "1": {
@@ -10769,6 +11609,7 @@
         "heatPerShot": 0.9,
         "cooldown": 1.5,
         "range": 600.0,
+        "maxRange": 600.0,
         "rpm": 40.0
       },
       "2": {
@@ -10776,6 +11617,7 @@
         "heatPerShot": 0.855,
         "cooldown": 1.425,
         "range": 630.0,
+        "maxRange": 630.0,
         "rpm": 42.1
       },
       "3": {
@@ -10783,6 +11625,7 @@
         "heatPerShot": 0.81,
         "cooldown": 1.35,
         "range": 660.0,
+        "maxRange": 660.0,
         "rpm": 44.4
       },
       "4": {
@@ -10790,6 +11633,7 @@
         "heatPerShot": 0.765,
         "cooldown": 1.275,
         "range": 690.0,
+        "maxRange": 690.0,
         "rpm": 47.1
       },
       "5": {
@@ -10797,6 +11641,7 @@
         "heatPerShot": 0.698,
         "cooldown": 1.125,
         "range": 750.0,
+        "maxRange": 750.0,
         "rpm": 53.3
       }
     },
@@ -10819,6 +11664,7 @@
         "heatPerShot": 0.0,
         "cooldown": 0.0,
         "range": 562.5,
+        "maxRange": 562.5,
         "rpm": 0.0
       }
     },
