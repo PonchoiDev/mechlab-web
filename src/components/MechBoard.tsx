@@ -16,6 +16,8 @@ interface MechBoardProps {
   onArmorChange: (zone: Zone, type: 'front' | 'rear', value: number) => void;
   onHardpointMenu: (zone: Zone, hardpointIndex: number, x: number, y: number) => void;
   onEquipmentMenu: (zone: Zone, itemName: string, x: number, y: number) => void;
+  expandedSlots: boolean;
+  compact: boolean;
 }
 
 export function MechBoard({
@@ -28,19 +30,21 @@ export function MechBoard({
   onSelectZone,
   onArmorChange,
   onHardpointMenu,
-  onEquipmentMenu
+  onEquipmentMenu,
+  expandedSlots,
+  compact
 }: MechBoardProps) {
   const ammoWarnings = getAmmoWarnings(loadout);
 
   return (
-    <section className="mech-board" aria-label={`${mech.name} ${mech.variant} components`}>
+    <section className={compact ? 'mech-board is-compact' : 'mech-board'} aria-label={`${mech.name} ${mech.variant} components`}>
       <div className="mech-board-reference">
         <div className="mech-board-title">
           <h2>{mech.name}</h2>
           <span className="variant-tag">{mech.variant}</span>
         </div>
         <MechSpecs mech={mech} />
-        <div className="mech-board-image">{reference}</div>
+        {!compact && <div className="mech-board-image">{reference}</div>}
       </div>
       {ZONES.map(({ zone, label, position }) => (
         <ComponentCard
@@ -58,6 +62,7 @@ export function MechBoard({
           onArmorChange={(type, value) => onArmorChange(zone, type, value)}
           onHardpointMenu={(index, x, y) => onHardpointMenu(zone, index, x, y)}
           onEquipmentMenu={(itemName, x, y) => onEquipmentMenu(zone, itemName, x, y)}
+          expandedSlots={expandedSlots}
         />
       ))}
     </section>

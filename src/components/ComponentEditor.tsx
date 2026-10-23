@@ -56,6 +56,8 @@ interface ComponentEditorProps {
   onTierChange: (instanceId: string, tier: string) => void;
   onArmorChange: (type: 'front' | 'rear', value: number) => void;
   onClose: () => void;
+  side: 'left' | 'right';
+  onToggleSide: () => void;
 }
 
 const sortWeapons = (weapons: Item[], order: WeaponSortOrder) => {
@@ -111,7 +113,9 @@ export function ComponentEditor({
   onRemoveItem,
   onTierChange,
   onArmorChange,
-  onClose
+  onClose,
+  side,
+  onToggleSide
 }: ComponentEditorProps) {
   const [equipmentTab, setEquipmentTab] = useState<EquipmentTab>('equipment');
   const [search, setSearch] = useState('');
@@ -203,13 +207,24 @@ export function ComponentEditor({
     : 'Compatible weapons';
 
   return (
-    <aside className="component-editor" aria-label={`${label} editor`} ref={panelRef} tabIndex={-1}>
+    <aside className={side === 'left' ? 'component-editor is-left' : 'component-editor'} aria-label={`${label} editor`} ref={panelRef} tabIndex={-1}>
       <header className="editor-header">
         <div>
           <p className="eyebrow">COMPONENT</p>
           <h2>{label}</h2>
         </div>
-        <button type="button" className="editor-close" aria-label="Close editor" onClick={onClose}>✕</button>
+        <span className="editor-header-actions">
+          <button
+            type="button"
+            className="editor-side"
+            aria-label={side === 'right' ? 'Move panel to the left' : 'Move panel to the right'}
+            title={side === 'right' ? 'Move panel to the left' : 'Move panel to the right'}
+            onClick={onToggleSide}
+          >
+            ⇄
+          </button>
+          <button type="button" className="editor-close" aria-label="Close editor" onClick={onClose}>✕</button>
+        </span>
       </header>
 
       <section className="editor-section">

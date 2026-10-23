@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { ComponentData, EquippedItem } from '../types/mech';
 import { clampArmorValue } from '../utils/calculators';
 import {
@@ -28,6 +29,8 @@ interface ComponentCardProps {
   onArmorChange: (type: 'front' | 'rear', value: number) => void;
   onHardpointMenu: (hardpointIndex: number, x: number, y: number) => void;
   onEquipmentMenu: (itemName: string, x: number, y: number) => void;
+  // Vista expandida: cada ranura es una celda y cada pieza ocupa las que usa.
+  expandedSlots?: boolean;
 }
 
 interface EquipmentChipProps {
@@ -35,15 +38,18 @@ interface EquipmentChipProps {
   count: number;
   category: string;
   onMenu: (x: number, y: number) => void;
+  // En la vista expandida, número de celdas que ocupa.
+  slots?: number;
 }
 
-function EquipmentChip({ item, count, category, onMenu }: EquipmentChipProps) {
+function EquipmentChip({ item, count, category, onMenu, slots }: EquipmentChipProps) {
   const longPress = useLongPress(onMenu);
 
   return (
     <button
       type="button"
-      className="component-card-item"
+      className={slots ? 'component-card-item slot-cell-item' : 'component-card-item'}
+      style={slots ? { '--slots': slots } as CSSProperties : undefined}
       data-category={category}
       data-weapon-type={item.type === 'ammo' ? item.weaponType ?? undefined : undefined}
       title={`${item.name}: right-click for options`}
@@ -58,6 +64,41 @@ function EquipmentChip({ item, count, category, onMenu }: EquipmentChipProps) {
       {item.name}
       {count > 1 && <small>×{count}</small>}
     </button>
+  );
+}
+
+const GENERAL_SLOT_TYPE = 'General_SlotType';
+
+interface SlotCellsProps {
+  label: string;
+  items: EquippedItem[];
+  capacity: number;
+  slotsOf: (item: EquippedItem) => number;
+  onMenu: (itemName: string, x: number, y: number) => void;
+}
+
+// Ranuras de un tipo como celdas: las piezas ocupan sus celdas y los huecos libres quedan a la vista.
+function SlotCells({ label, items, capacity, slotsOf, onMenu }: SlotCellsProps) {
+  const used = items.reduce((total, item) => total + slotsOf(item), 0);
+  if (capacity === 0 && items.length === 0) return null;
+
+  return (
+    <div className="slot-cells" aria-label={`${label}: ${used} of ${capacity} slots`}>
+      <span className="slot-cells-label">{label} <small>{used}/{capacity}</small></span>
+      {items.map(item => (
+        <EquipmentChip
+          key={item.instanceId}
+          item={item}
+          count={1}
+          category={getEquipmentCategory(item)}
+          slots={Math.max(1, slotsOf(item))}
+          onMenu={(x, y) => onMenu(item.name, x, y)}
+        />
+      ))}
+      {Array.from({ length: Math.max(0, capacity - used) }, (_, index) => (
+        <span key={`empty-${index}`} className="slot-cell-empty" aria-hidden="true" />
+      ))}
+    </div>
   );
 }
 
@@ -79,7 +120,8 @@ export function ComponentCard({
   onSelect,
   onArmorChange,
   onHardpointMenu,
-  onEquipmentMenu
+  onEquipmentMenu,
+  expandedSlots = false
 }: ComponentCardProps) {
   const status = getComponentStatus(componentData, equippedItems);
   const hardpoints = getHardpointViews(componentData.hardpoints, equippedItems);
@@ -122,7 +164,29 @@ export function ComponentCard({
         </div>
       )}
 
-      {equipment.length > 0 && (
+      {expandedSlots && (
+        <div className="component-card-slots">
+          <SlotCells
+            label="Slots"
+            items={equippedItems.filter(item => item.type !== 'weapon' && (item.equippedSlotType ?? GENERAL_SLOT_TYPE) === GENERAL_SLOT_TYPE)}
+            capacity={status.maxSlots}
+            slotsOf={item => item.slots ?? 0}
+            onMenu={onEquipmentMenu}
+          />
+          {status.specialSlots.map(slot => (
+            <SlotCells
+              key={slot.slotType}
+              label={getSlotTypeLabel(slot.slotType)}
+              items={equippedItems.filter(item => item.equippedSlotType === slot.slotType)}
+              capacity={slot.capacity}
+              slotsOf={() => 1}
+              onMenu={onEquipmentMenu}
+            />
+          ))}
+        </div>
+      )}
+
+      {!expandedSlots && equipment.length > 0 && (
         <div className="component-card-equipment">
           {equipment.map(({ item, count }) => (
             <EquipmentChip
@@ -146,7 +210,7 @@ export function ComponentCard({
         </ul>
       )}
 
-      <div className="component-card-footer">
+      {!expandedSlots && <div className="component-card-footer">
         <SlotBar used={status.usedSlots} capacity={status.maxSlots} label="Slots" />
         {status.specialSlots.map(slot => (
           <SlotBar
@@ -157,7 +221,7 @@ export function ComponentCard({
             variant="special"
           />
         ))}
-      </div>
+      </div>}
 
       <div className={isArmorLow ? 'component-card-armor is-low' : 'component-card-armor'}>
         <span className="component-card-armor-total" title={`Armor ${armorTotal} / ${componentData.maxArmor}`}>
