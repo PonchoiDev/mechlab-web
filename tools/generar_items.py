@@ -16,6 +16,8 @@ REGEX_SLOT_TYPE = re.compile(r'(?:WeaponSlotTypeAssetId|SupportedSlotTypesAssetI
 REGEX_WEAPON_SIZE = re.compile(r'WeaponSize=([A-Za-z0-9_]+)')
 REGEX_CAPACITY = re.compile(r'Capacity=([0-9.]+)')
 REGEX_REFRIGERACION = re.compile(r'HeatSink=\([^)]*HealthyEfficiency=([0-9.]+)')
+# MASC y Supercharger: aumento de velocidad mientras se usan (0.5 = +50 %).
+REGEX_IMPULSO = re.compile(r'MASCStats=\([^)]*BoostSpeed=([0-9.]+)')
 REGEX_TIER = re.compile(r'_Lvl(\d+)$', re.IGNORECASE)
 REGEX_COPIA = re.compile(r'\(\d+\)$')
 REGEX_TIPO_MUNICION = re.compile(r'AmmoType=\(TagName="([^"]+)"\)')
@@ -241,6 +243,9 @@ def construir_item(id_base, tiers):
     refrigeracion = buscar_numero(REGEX_REFRIGERACION, contenido)
     if refrigeracion is not None:
         item["cooling"] = refrigeracion
+    impulso = buscar_numero(REGEX_IMPULSO, contenido)
+    if impulso is not None:
+        item["speedBoost"] = impulso
     item["tiers"] = {} if tipo_general == "weapon" else None
 
     if "jumpjet" in id_base.lower() or "jump jet" in nombre.lower():

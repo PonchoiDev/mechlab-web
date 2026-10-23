@@ -353,7 +353,11 @@ const getReadouts = ({ mech, summary }: BuildImageInput) => [
   { label: 'TONNAGE', value: truncateTo(summary.totalWeight, 2).toFixed(2), unit: `/ ${mech.tonnageMax} t`, warn: summary.totalWeight > mech.tonnageMax },
   { label: 'ARMOR POINTS', value: summary.armorPoints.toFixed(0), unit: `/ ${summary.maxArmorPoints.toFixed(0)}` },
   { label: 'ARMOR MASS', value: truncateTo(summary.armorWeight, 2).toFixed(2), unit: 't' },
-  { label: 'TOP SPEED', value: summary.topSpeed.toFixed(1), unit: 'km/h' },
+  {
+    label: 'TOP SPEED',
+    value: summary.topSpeed.toFixed(1),
+    unit: summary.boostedSpeed !== null ? `km/h · ${summary.boostedSpeed.toFixed(1)} boost` : 'km/h'
+  },
   { label: 'JUMP JETS', value: String(summary.jumpJetCount) },
   { label: 'VOLLEY DAMAGE', value: String(summary.firepower) },
   { label: 'MELEE DAMAGE', value: String(summary.meleeDamage) },

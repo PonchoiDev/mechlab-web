@@ -32,6 +32,8 @@ export interface Item {
   damage?: number;
   heat?: number;
   cooling?: number;
+  // MASC y Supercharger: aumento de velocidad mientras se usan (0.5 = +50 %).
+  speedBoost?: number;
   capacity?: number;
   ammoType?: string;
   volleyProjectiles?: number;

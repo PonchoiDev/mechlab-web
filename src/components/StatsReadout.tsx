@@ -13,6 +13,7 @@ export function StatsReadout({ mech, summary }: StatsReadoutProps) {
     maxArmorPoints,
     armorWeight,
     topSpeed,
+    boostedSpeed,
     jumpJetCount,
     firepower,
     meleeDamage,
@@ -39,7 +40,9 @@ export function StatsReadout({ mech, summary }: StatsReadoutProps) {
       </div>
       <div className="readout-cell">
         <span className="readout-label">TOP SPEED</span>
-        <strong>{topSpeed.toFixed(1)} <small>km/h</small></strong>
+        <strong>
+          {topSpeed.toFixed(1)} <small>km/h{boostedSpeed !== null && ` · ${boostedSpeed.toFixed(1)} boost`}</small>
+        </strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label">JUMP JETS</span>

@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-23-masc',
+    date: '2026-10-23',
+    title: 'MASC and Superchargers',
+    items: [
+      'MASC, Clan MASC and Superchargers are in the catalog, so the stock loadouts that carry them are complete',
+      'Top speed also shows the boosted speed while MASC or the Supercharger is active'
+    ]
+  },
+  {
     id: '2026-10-23-remove-equipment',
     date: '2026-10-23',
     title: 'Remove equipment',

@@ -14,7 +14,8 @@ import {
   getWeaponStats,
   groupAmmunition,
   maximizeArmor,
-  getArmorPointsPerTon
+  getArmorPointsPerTon,
+  calculateBoostedSpeed
 } from './calculators';
 import { allMechs, getItem, getMech, makeItem, makeLoadout } from '../test/fixtures';
 import type { ArmorState, MechComponents } from '../types/mech';
@@ -364,5 +365,12 @@ describe('duración de la munición', () => {
     expect(getItem('Autocannon20_Burst').ammoPerVolley).toBe(1);
     expect(getItem('C-LRM20').ammoPerVolley).toBe(20);
     expect(getItem('LBXAutocannon10').ammoPerVolley).toBe(1);
+  });
+});
+
+describe('MASC y Supercharger', () => {
+  it('muestran la velocidad con el impulso del más potente montado', () => {
+    expect(calculateBoostedSpeed(makeLoadout(), 54)).toBeNull();
+    expect(calculateBoostedSpeed(makeLoadout({ leftTorso: [getItem('MASC_MKI')] }), 54)).toBe(94.5);
   });
 });

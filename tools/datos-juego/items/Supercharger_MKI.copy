@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMASCDataAsset Name="Supercharger_MKI"
+   MASCStats=(GaugeFill=0.035000,GaugeDrain=0.012500,GaugeWarningPoint=0.550000,GaugeDamagePoint=0.750000,BoostSpeed=0.500000,BoostAccel=4.000000,DamageMin=0.060000,DamageMax=0.600000,DamageRate=0.750000,DamageParts=(CenterTorso),Type=SuperCharger)
+   EquipmentType=(TagName="Equipment.SuperCharger.Class1")
+   TechBase=(TagName="TechBase.Retro")
+   SupportedSlotTypesAssetId(0)=(Id="MWSlotTypeDataAsset:MASC_MKI_SlotType")
+   Name=NSLOCTEXT("[4EAE2018474EB7ACA789C8AC984E9076]", "81E3542E401DB567C5540BA5B029196C", "Supercharger MK I")
+   TechLevel=-1
+   Tons=1.500000
+   Slots=1
+   IntroDate=2439.01.01-00.00.00
+   DEPRECATED_CBillBaseValue=4000.000000
+   CBillBaseValueBigInt=(Value=4000)
+   RefitCosts=(InstallTimeInDays=1.000000,RemoveTimeInDays=1.000000,RepairTimeInDays=1.000000,InstallCBillCost=1000,RemoveCBillCost=1000,RepairCBillCost=1000)
+   SalvageShareCost=1
+   EquipmentImage=/Game/DLC1/UI/Textures/Marketplace_Equipment/Supercharger_512_UIX.Supercharger_512_UIX
+   UIXEquipment3DModel=/Game/DLC1/Objects/Marketplace/Equipment/Model/Equipment_Supercharger_STM.Equipment_Supercharger_STM
+   Description=NSLOCTEXT("[4EAE2018474EB7ACA789C8AC984E9076]", "EA3232E742F67BEC97CF1088D0BF77CB", "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk I hardpoints on 20-25 ton \'Mechs.")
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object
