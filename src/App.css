@@ -246,7 +246,7 @@
 .mech-filter-stepper button:hover:not(:disabled) { color: var(--work-cyan); }
 
 .mech-filter-year {
-  width: 96px;
+  width: 110px;
   min-height: 26px;
   padding: 0 8px;
   color: var(--work-text);

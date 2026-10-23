@@ -18,7 +18,8 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Max range uses each weapon\'s maximum range (PPC 920 m, ER PPC 1500 m)',
       'Inner Sphere double heat sinks add the extra engine cooling',
       'Ferro-Fibrous armor gives 12% more points per ton, so those \'Mechs weigh what they should',
-      'Checked against the stock loadouts of eight \'Mechs in the game'
+      'Checked against the stock loadouts of eight \'Mechs in the game',
+      'Available by now starts in 3015, when the campaign begins, and Clan \'Mechs show up from the 3050 invasion'
     ]
   },
   {

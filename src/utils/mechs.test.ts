@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   EMPTY_MECH_FILTERS,
+  getAvailableYear,
   getHardpointCounts,
   getMechDisplayName,
   hasEcm,
@@ -75,11 +76,21 @@ describe('filtros del selector de chasis', () => {
     expect(allMechs.filter(hasEcm)).toHaveLength(37);
   });
 
-  it('filtra por año de aparición', () => {
+  it('filtra por año de la campaña, que empieza en 3015', () => {
     const atlas = getMech('AS7-D');
-    expect(atlas.introYear).toBe(2755);
+    const novaCat = getMech('NCT-PRIME');
+    expect(getAvailableYear(atlas)).toBe(3015);
+    expect(getAvailableYear(novaCat)).toBe(3059);
     expect(matchesMechFilters(atlas, { ...EMPTY_MECH_FILTERS, maxYear: 3015 })).toBe(true);
-    expect(matchesMechFilters(atlas, { ...EMPTY_MECH_FILTERS, maxYear: 2700 })).toBe(false);
+    expect(matchesMechFilters(novaCat, { ...EMPTY_MECH_FILTERS, maxYear: 3050 })).toBe(false);
+    expect(matchesMechFilters(novaCat, { ...EMPTY_MECH_FILTERS, maxYear: 3059 })).toBe(true);
+  });
+
+  it('los Clan no están disponibles hasta la invasión, aunque su fecha sea anterior', () => {
+    const timberWolf = getMech('TBR-PRIME');
+    expect(timberWolf.introYear).toBe(2935);
+    expect(getAvailableYear(timberWolf)).toBe(3050);
+    expect(matchesMechFilters(timberWolf, { ...EMPTY_MECH_FILTERS, maxYear: 3049 })).toBe(false);
   });
 
   it('usa los anclajes omni como comodín, contando cada uno una sola vez', () => {

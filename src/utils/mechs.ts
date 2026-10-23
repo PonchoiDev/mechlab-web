@@ -49,6 +49,17 @@ export const hasJumpJets = (mech: Mech): boolean =>
     component.jumpJetSlots > 0 ||
     Object.entries(component.specialSlots ?? {}).some(([slotType, count]) => slotType.startsWith('JumpJet') && Number(count) > 0));
 
+// La campaña de MW5: Mercenaries empieza en 3015: los mechs de antes ya están disponibles desde
+// entonces. Los Clan traen la fecha del lore de los Clanes, pero un mercenario no los consigue
+// hasta la invasión de la Esfera Interior.
+export const GAME_START_YEAR = 3015;
+export const CLAN_INVASION_YEAR = 3050;
+
+export const getAvailableYear = (mech: Mech): number => Math.max(
+  mech.introYear ?? GAME_START_YEAR,
+  mech.techBase === 'Clan' ? CLAN_INVASION_YEAR : GAME_START_YEAR
+);
+
 // Solo pueden montar ECM los mechs con una ranura especial para él.
 export const hasEcm = (mech: Mech): boolean =>
   Object.values(mech.components).some(component => (component.specialSlots?.ECM_SlotType ?? 0) > 0);
@@ -98,7 +109,7 @@ export const matchesMechFilters = (mech: Mech, filters: MechFilters): boolean =>
   (!filters.techBase || (mech.techBase ?? 'InnerSphere') === filters.techBase) &&
   (!filters.jumpJets || hasJumpJets(mech)) &&
   (!filters.ecm || hasEcm(mech)) &&
-  (filters.maxYear === null || (mech.introYear ?? Number.POSITIVE_INFINITY) <= filters.maxYear) &&
+  (filters.maxYear === null || getAvailableYear(mech) <= filters.maxYear) &&
   meetsHardpointMinimums(getHardpointCounts(mech), filters.minHardpoints);
 
 const QUERY_HARDPOINT_TOKEN = /^(\d+)(e|b|m|o|art|ams)$/i;

@@ -5,7 +5,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 ## Funcionalidades
 
 - Builds de fábrica: al elegir un chasis se carga su loadout del juego (armas con su tier, equipo, munición y armadura), y el botón Stock loadout lo recupera.
-- Selector de chasis con búsqueda por nombre, variante o ID (639 variantes jugables), resumen de anclajes de cada variante (3E 2B 1M 2 Omni, JJ) y filtros por clase, tecnología, jump jets, ECM, AMS y mínimo de anclajes por tipo, también escribiendo atajos como `3e 2m jj ecm` en el buscador. Cada variante muestra también su año de aparición y su rol, y se puede filtrar por los mechs disponibles en un año. Los anclajes omni cuentan como comodín para energía, balística y misiles.
+- Selector de chasis con búsqueda por nombre, variante o ID (639 variantes jugables), resumen de anclajes de cada variante (3E 2B 1M 2 Omni, JJ) y filtros por clase, tecnología, jump jets, ECM, AMS y mínimo de anclajes por tipo, también escribiendo atajos como `3e 2m jj ecm` en el buscador. Cada variante muestra también el año en que está disponible en la campaña (desde 3015, y los Clan desde la invasión de 3050) y su rol, y se puede filtrar por los mechs disponibles en un año. Los anclajes omni cuentan como comodín para energía, balística y misiles.
 - Equipamiento por componente respetando el tipo y tamaño de los anclajes y las ranuras especiales (motor, jump jets por clase, supercargadores).
 - Tiers de armas (0–5) que cambian sus estadísticas.
 - Armadura delantera y trasera por zona, con botones para vaciarla o maximizarla según el tonelaje libre.
