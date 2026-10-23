@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="QKD-4P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:QKD-4P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=25,IntroDate=3025.01.01-00.00.00,Tier=5,BattleValue=1186,FactionRarity=(((Id="MWFactionAsset:JumpJetFuel"), Uncommon),((Id="MWFactionAsset:Kurita"), VeryRare),((Id="MWFactionAsset:BrionsLegion"), VeryRare),((Id="MWFactionAsset:WacoRangers"), VeryRare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

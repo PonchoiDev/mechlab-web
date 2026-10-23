@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Jr7-IIC-3_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:Jr7-IIC-3_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Light")),CombatRole=(GameplayTags=((TagName="Unit.Role.Striker"))),IntroUsage=(TagName="Unit.Usage.Clan"),IntroDate=3048.01.01-00.00.00,Tier=10,BattleValue=788,FactionRarity=(((Id="MWFactionAsset:ClanDiamondShark"), VeryRare),((Id="MWFactionAsset:ClanJadeFalcon"), VeryRare),((Id="MWFactionAsset:ClanNovaCat"), Common),((Id="MWFactionAsset:ClanNovaCatAbjured"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC8")
+End Object

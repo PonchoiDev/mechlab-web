@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="WHM-6L_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:WHM-6L_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=39,IntroDate=2825.01.01-00.00.00,Tier=7,BattleValue=1311,FactionRarity=(((Id="MWFactionAsset:MuscleBound"), Uncommon),((Id="MWFactionAsset:SolarisArms"), Uncommon),((Id="MWFactionAsset:Independent"), Uncommon),((Id="MWFactionAsset:Liao"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC2")
+End Object

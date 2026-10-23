@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="HTM-26T_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:HTM-26T_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=48,IntroDate=3039.04.01-00.00.00,Tier=5,BattleValue=1536,FactionRarity=(((Id="MWFactionAsset:FreeRasalhagueRepublic"), VeryRare),((Id="MWFactionAsset:Kurita"), Uncommon),((Id="MWFactionAsset:BrionsLegion"), Uncommon),((Id="MWFactionAsset:Thumpers"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

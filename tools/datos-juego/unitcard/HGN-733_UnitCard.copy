@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="HGN-733_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:HGN-733_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=58,IntroDate=2866.01.01-00.00.00,Tier=9,BattleValue=1801,FactionRarity=(((Id="MWFactionAsset:JumpJetFuel"), Rare),((Id="MWFactionAsset:FederatedCommonwealth"), VeryRare),((Id="MWFactionAsset:Independent"), VeryRare),((Id="MWFactionAsset:Kurita"), Rare),((Id="MWFactionAsset:Liao"), Rare),((Id="MWFactionAsset:LyranAlliance"), VeryRare),((Id="MWFactionAsset:Steiner"), VeryRare),((Id="MWFactionAsset:Blackhearts"), VeryRare),((Id="MWFactionAsset:BrionsLegion"), Rare),((Id="MWFactionAsset:FilthyLucre"), VeryRare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

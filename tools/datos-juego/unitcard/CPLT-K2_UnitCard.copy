@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="CPLT-K2_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:CPLT-K2_Loadout"),OverrideCombatRange=60000.000000,UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=39,IntroDate=2603.01.01-00.00.00,Tier=7,BattleValue=1319,FactionRarity=(((Id="MWFactionAsset:EarthwerksIncorporated"), Rare),((Id="MWFactionAsset:SolarisArms"), Uncommon),((Id="MWFactionAsset:VEST"), Rare),((Id="MWFactionAsset:FreeRasalhagueRepublic"), Uncommon),((Id="MWFactionAsset:Kurita"), Uncommon),((Id="MWFactionAsset:BrionsLegion"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

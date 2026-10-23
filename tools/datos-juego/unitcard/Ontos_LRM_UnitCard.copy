@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Ontos_LRM_UnitCard"
+   UnitCard=(UnitClass=/Game/DLC9/Objects/Tanks/Ontos/Ontos_LRM.Ontos_LRM_C,Name=NSLOCTEXT("[083BF0FB464DA282AF602BAE3CCD206F]", "91499C344FE65C650F37B0A04A2FA1E0", "Ontos (LRM)"),UnitType=(UnitType=(TagName="UnitType.Vehicle.Tracked.Tank.Ontos")),CombatRole=(GameplayTags=((TagName="Unit.Role.MissileBoat"))),IntroDifficulty=60,IntroDate=2876.01.01-00.00.00,Tier=3,BattleValue=900,FactionRarity=(((Id="MWFactionAsset:Davion"), Uncommon),((Id="MWFactionAsset:FederatedCommonwealth"), Uncommon),((Id="MWFactionAsset:Liao"), Common),((Id="MWFactionAsset:LyranAlliance"), Uncommon),((Id="MWFactionAsset:Marik"), Common),((Id="MWFactionAsset:Steiner"), Uncommon)))
+End Object

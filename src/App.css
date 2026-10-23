@@ -245,6 +245,22 @@
 .mech-filter-stepper button:disabled { opacity: 0.35; cursor: default; }
 .mech-filter-stepper button:hover:not(:disabled) { color: var(--work-cyan); }
 
+.mech-filter-year {
+  width: 96px;
+  min-height: 26px;
+  padding: 0 8px;
+  color: var(--work-text);
+  background: var(--work-panel-raised);
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  font: 500 11px var(--work-mono);
+}
+
+.mech-filter-year:focus-visible {
+  outline: 1px solid var(--work-lime);
+  border-color: var(--work-lime);
+}
+
 .mech-filter-summary {
   justify-content: space-between;
   color: var(--work-muted);

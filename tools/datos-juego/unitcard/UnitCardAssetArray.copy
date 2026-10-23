@@ -1,0 +1,10 @@
+Begin Object Class=/Script/Engine.UserDefinedStruct Name="UnitCardAssetArray"
+   Begin Object Class=/Script/UnrealEd.UserDefinedStructEditorData Name="UserDefinedStructEditorData_0"
+   End Object
+   Begin Object Name="UserDefinedStructEditorData_0"
+      UniqueNameId=4
+      VariablesDescriptions(0)=(VarName="UnitCardAssetArray_3_68C0931C487EB08DC7B029ABC6CF1F42",VarGuid=68C0931C487EB08DC7B029ABC6CF1F42,FriendlyName="UnitCardAssetArray",Category="object",SubCategoryObject=/Script/MechWarrior.MWUnitCardAsset,ContainerType=Array)
+   End Object
+   EditorData=UserDefinedStructEditorData'"UserDefinedStructEditorData_0"'
+   Guid=38B4078043F8AA2A74CCB99980E8E496
+End Object

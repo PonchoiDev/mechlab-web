@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="STK-3FB_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:STK-3FB_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"),(TagName="Unit.Role.MissileBoat"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=62,IntroDate=2705.01.01-00.00.00,Tier=9,BattleValue=2029,FactionRarity=(((Id="MWFactionAsset:ClanNovaCatAbjured"), VeryRare),((Id="MWFactionAsset:ComStar"), VeryRare),((Id="MWFactionAsset:WordOfBlake"), VeryRare),((Id="MWFactionAsset:Thumpers"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

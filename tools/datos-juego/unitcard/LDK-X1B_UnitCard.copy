@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="LDK-X1B_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:LDK-X1B_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=41,IntroDate=3028.01.01-00.00.00,Tier=8,BattleValue=1123,FactionRarity=(((Id="MWFactionAsset:HighImpactBallistics"), Common),((Id="MWFactionAsset:IroncladSystems"), Common),((Id="MWFactionAsset:LedouxEnterprises"), Uncommon),((Id="MWFactionAsset:MuscleBound"), Common),((Id="MWFactionAsset:NovaTech"), Uncommon),((Id="MWFactionAsset:StarfallCorp"), Uncommon),((Id="MWFactionAsset:VanguardIndustries"), Common),((Id="MWFactionAsset:VEST"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC6")
+End Object

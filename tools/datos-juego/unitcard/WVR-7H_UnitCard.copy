@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="WVR-7H_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:WVR-7H_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"),(TagName="Unit.Role.Scout"))),IntroUsage=(TagName="Unit.Usage.Special"),IntroDifficulty=18,IntroDate=2770.01.01-00.00.00,Tier=6,BattleValue=1235)
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

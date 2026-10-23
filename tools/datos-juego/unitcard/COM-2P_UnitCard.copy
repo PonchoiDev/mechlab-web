@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="COM-2P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:COM-2P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Light")),CombatRole=(GameplayTags=((TagName="Unit.Role.Striker"),(TagName="Unit.Role.Scout"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDate=2692.01.01-00.00.00,Tier=2,BattleValue=590,FactionRarity=(((Id="MWFactionAsset:BullheadArmor"), Uncommon),((Id="MWFactionAsset:IroncladSystems"), Uncommon),((Id="MWFactionAsset:LedouxEnterprises"), Uncommon),((Id="MWFactionAsset:MuscleBound"), VeryCommon),((Id="MWFactionAsset:NovaTech"), Uncommon),((Id="MWFactionAsset:SolarisArms"), Rare),((Id="MWFactionAsset:StarfallCorp"), Uncommon),((Id="MWFactionAsset:VanguardIndustries"), Uncommon),((Id="MWFactionAsset:VEST"), Rare),((Id="MWFactionAsset:Independent"), Rare),((Id="MWFactionAsset:Mercenaries"), Rare),((Id="MWFactionAsset:Outlaws"), Common),((Id="MWFactionAsset:Periphery"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

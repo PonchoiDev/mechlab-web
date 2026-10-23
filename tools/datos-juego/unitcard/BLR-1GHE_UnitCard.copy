@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="BLR-1GHE_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:BLR-1GHE_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=56,IntroDate=2750.01.01-00.00.00,Tier=9,BattleValue=1764)
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

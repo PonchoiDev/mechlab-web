@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="PoHeavyTank_LightGauss_UnitCard"
+   UnitCard=(UnitClass=/Game/DLC9/Objects/Tanks/Po/PoHeavyTank_LightGauss.PoHeavyTank_LightGauss_C,Name=NSLOCTEXT("[55AB025B47DFCA40731ECABF3ECF922E]", "33E87A2F4ADEC42C40D8A0B701CBD7CD", "Po (Light Gauss)"),UnitType=(UnitType=(TagName="UnitType.Vehicle.Tracked.Tank.Po")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroDifficulty=50,IntroDate=3059.01.01-00.00.00,Tier=3,BattleValue=550,FactionRarity=(((Id="MWFactionAsset:Marik"), Common)))
+   AssociatedDLC=(TagName="DLC.DLC9")
+End Object

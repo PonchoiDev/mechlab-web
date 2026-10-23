@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="TDR-5SD_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:TDR-5SD_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"),(TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=42,IntroDate=2666.01.01-00.00.00,Tier=6,BattleValue=1392,FactionRarity=(((Id="MWFactionAsset:EarthwerksIncorporated"), Uncommon),((Id="MWFactionAsset:SolarisArms"), Uncommon),((Id="MWFactionAsset:ComStar"), VeryRare),((Id="MWFactionAsset:WordOfBlake"), VeryRare),((Id="MWFactionAsset:HansensRoughRiders"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC2")
+End Object

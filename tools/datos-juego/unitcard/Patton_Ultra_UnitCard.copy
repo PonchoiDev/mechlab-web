@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Patton_Ultra_UnitCard"
+   UnitCard=(UnitClass=/Game/DLC9/Objects/Tanks/Patton/Patton_Ultra.Patton_Ultra_C,Name=NSLOCTEXT("[FE3F683445128820615073B80D3F6EAF]", "09BFF21D467F46965EF0778D1FC3DAB9", "Patton (Ultra)"),UnitType=(UnitType=(TagName="UnitType.Vehicle.Tracked.Tank.Patton")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroDifficulty=40,IntroDate=3062.01.01-00.00.00,Tier=2,BattleValue=800,FactionRarity=(((Id="MWFactionAsset:ClanWolfInExile"), Uncommon),((Id="MWFactionAsset:Davion"), Uncommon),((Id="MWFactionAsset:FederatedCommonwealth"), Uncommon),((Id="MWFactionAsset:LyranAlliance"), Uncommon),((Id="MWFactionAsset:Steiner"), Uncommon)))
+   AssociatedDLC=(TagName="DLC.DLC9")
+End Object

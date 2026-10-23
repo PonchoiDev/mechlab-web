@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="SNV-1_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:SNV-1_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Clan"),IntroDate=2846.01.01-00.00.00,Tier=10,BattleValue=2801,FactionRarity=(((Id="MWFactionAsset:ClanDiamondShark"), Common),((Id="MWFactionAsset:ClanGhostBear"), Rare),((Id="MWFactionAsset:ClanHellsHorses"), Uncommon),((Id="MWFactionAsset:ClanJadeFalcon"), Rare),((Id="MWFactionAsset:ClanNovaCat"), Uncommon),((Id="MWFactionAsset:ClanNovaCatAbjured"), Uncommon),((Id="MWFactionAsset:ClanSmokeJaguar"), Uncommon),((Id="MWFactionAsset:ClanSteelViper"), Rare),((Id="MWFactionAsset:ClanWolf"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market"),(TagName="Attributes.ClanCoreContent")))
+   AssociatedDLC=(TagName="DLC.DLC9")
+End Object

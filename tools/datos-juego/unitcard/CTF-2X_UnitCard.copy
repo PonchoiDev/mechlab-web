@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="CTF-2X_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:CTF-2X_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"),(TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=37,IntroDate=3027.01.01-00.00.00,Tier=6,BattleValue=1344,FactionRarity=(((Id="MWFactionAsset:EarthwerksIncorporated"), Common),((Id="MWFactionAsset:BlackInferno"), Rare),((Id="MWFactionAsset:Davion"), Uncommon),((Id="MWFactionAsset:FederatedCommonwealth"), Rare),((Id="MWFactionAsset:Independent"), VeryRare),((Id="MWFactionAsset:Liao"), Uncommon),((Id="MWFactionAsset:Mercenaries"), Rare),((Id="MWFactionAsset:NorthwindHighlanders"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

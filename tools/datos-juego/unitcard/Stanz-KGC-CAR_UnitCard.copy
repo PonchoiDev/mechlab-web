@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Stanz-KGC-CAR_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:KGC-CAR_Loadout"),PersonaAsset=(Id="MWPersonaAsset:Stanz"),UnitSkinCustomization=(MechSkinAssetId=(Id="MWUnitSkinAsset:Kingcrab_KGC-CAR_SKN")),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Special"),IntroDifficulty=58,IntroDate=3040.01.01-00.00.00,Tier=10,BattleValue=1857)
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

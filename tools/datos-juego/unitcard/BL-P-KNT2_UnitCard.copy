@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="BL-P-KNT2_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:BL-P-KNT2_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=48,IntroDate=3039.01.01-00.00.00,Tier=8,BattleValue=1630,FactionRarity=(((Id="MWFactionAsset:Davion"), Unique),((Id="MWFactionAsset:NorthwindHighlanders"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC3")
+End Object

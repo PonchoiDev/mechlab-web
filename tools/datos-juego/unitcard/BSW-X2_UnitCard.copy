@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="BSW-X2_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:BSW-X2_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=40,IntroDate=3054.01.01-00.00.00,Tier=4,BattleValue=1193,FactionRarity=(((Id="MWFactionAsset:EarthwerksIncorporated"), VeryCommon),((Id="MWFactionAsset:SolarisArms"), Rare),((Id="MWFactionAsset:Davion"), Rare),((Id="MWFactionAsset:FederatedCommonwealth"), Uncommon),((Id="MWFactionAsset:LyranAlliance"), Common),((Id="MWFactionAsset:Mercenaries"), VeryRare),((Id="MWFactionAsset:Steiner"), Uncommon),((Id="MWFactionAsset:EridaniLightHorse"), Rare),((Id="MWFactionAsset:GrayDeathLegion"), Uncommon),((Id="MWFactionAsset:KellHounds"), Uncommon),((Id="MWFactionAsset:MobileFire"), Rare),((Id="MWFactionAsset:WolfsDragoons"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC8")
+End Object

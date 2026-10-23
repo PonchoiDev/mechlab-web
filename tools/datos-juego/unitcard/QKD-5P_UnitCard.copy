@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="QKD-5P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:QKD-5P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=25,IntroDate=3024.01.01-00.00.00,Tier=5,BattleValue=1190,FactionRarity=(((Id="MWFactionAsset:BullheadArmor"), Common),((Id="MWFactionAsset:EarthwerksIncorporated"), Rare),((Id="MWFactionAsset:IroncladSystems"), Common),((Id="MWFactionAsset:JumpJetFuel"), Common),((Id="MWFactionAsset:LedouxEnterprises"), Uncommon),((Id="MWFactionAsset:MuscleBound"), Common),((Id="MWFactionAsset:NovaTech"), Uncommon),((Id="MWFactionAsset:StarfallCorp"), Uncommon),((Id="MWFactionAsset:TripleF"), Uncommon),((Id="MWFactionAsset:VanguardIndustries"), Common),((Id="MWFactionAsset:Independent"), Rare),((Id="MWFactionAsset:Outlaws"), Common),((Id="MWFactionAsset:Periphery"), VeryCommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC3")
+End Object

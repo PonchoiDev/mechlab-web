@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="KTO-20_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:KTO-20_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=20,IntroDate=3035.03.22-00.00.00,Tier=6,BattleValue=1357,FactionRarity=(((Id="MWFactionAsset:BlackInferno"), Rare),((Id="MWFactionAsset:ComStar"), Uncommon),((Id="MWFactionAsset:Kurita"), Common),((Id="MWFactionAsset:WordOfBlake"), Uncommon),((Id="MWFactionAsset:BrionsLegion"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

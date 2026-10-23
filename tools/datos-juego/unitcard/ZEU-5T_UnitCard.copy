@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="ZEU-5T_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:ZEU-5T_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=53,IntroDate=2787.01.01-00.00.00,Tier=8,BattleValue=1729,FactionRarity=(((Id="MWFactionAsset:ComStar"), Rare),((Id="MWFactionAsset:WordOfBlake"), VeryRare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC2")
+End Object

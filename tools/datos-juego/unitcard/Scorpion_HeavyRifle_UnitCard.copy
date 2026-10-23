@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Scorpion_HeavyRifle_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Tanks/Scorpion/Scorpion_HeavyRifle.Scorpion_HeavyRifle_C,InitialPowerState=Off,Name=NSLOCTEXT("[F0A0710E4EF6AAEFAC0FE390FE1E40D0]", "BF56F85443EDDEE7D97AC492169AB193", "Scorpion Light Tank (Rifle)"),WeaponLevel=0,AIBehaviourConfig=(BaseAccuracyBonus=-0.150000),UnitType=(UnitType=(TagName="UnitType.Vehicle.Tracked.Tank.Scorpion")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroDifficulty=40,IntroDate=2876.01.01-00.00.00,Tier=1,BattleValue=169,FactionRarity=(((Id="MWFactionAsset:Independent"), Uncommon),((Id="MWFactionAsset:Mercenaries"), VeryRare),((Id="MWFactionAsset:Outlaws"), VeryCommon),((Id="MWFactionAsset:Periphery"), VeryCommon)))
+   AssociatedDLC=(TagName="DLC.DLC6")
+   RequiredEntitlements=(GameplayTags=((TagName="DLC.DLC6")))
+End Object

@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="CN9-Tutorial_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:Tutorial_Centurion"),InitialPowerState=Off,AIControllerOverride=/Game/AI/_common/NullAIController.NullAIController_C,bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroDifficulty=25,IntroDate=2801.01.01-00.00.00,Tier=3,BattleValue=945,bDiagnosticCheck=True)
+End Object

@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="FS9-E_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:FS9-E_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Light")),CombatRole=(GameplayTags=((TagName="Unit.Role.Scout"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=4,IntroDate=3015.01.01-00.00.00,Tier=2,BattleValue=575,FactionRarity=(((Id="MWFactionAsset:Outlaws"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="DRG-1N_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:DRG-1N_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=25,IntroDate=2754.01.01-00.00.00,Tier=4,BattleValue=1025,FactionRarity=(((Id="MWFactionAsset:SolarisArms"), Uncommon),((Id="MWFactionAsset:BlackInferno"), Uncommon),((Id="MWFactionAsset:FreeRasalhagueRepublic"), VeryCommon),((Id="MWFactionAsset:Kurita"), VeryCommon),((Id="MWFactionAsset:Mercenaries"), Uncommon),((Id="MWFactionAsset:Outlaws"), VeryRare),((Id="MWFactionAsset:Periphery"), VeryRare),((Id="MWFactionAsset:BrionsLegion"), VeryCommon),((Id="MWFactionAsset:WolfsDragoons"), VeryCommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="KGC-0000_A2M4_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:KGC-0000_Loadout_Cinematic1"),AIBehaviourConfig=(AIBehaviourConfigAsset=(Id="MWAIBehaviourConfigAsset:Boss_BehaviorConfig"),bFocusCommander=True,DelayBetweenShots=0.500000),PersonaAsset=(Id="MWPersonaAsset:Kane"),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Special"),IntroDifficulty=58,IntroDate=2815.01.01-00.00.00,Tier=6,BattleValue=1810)
+End Object

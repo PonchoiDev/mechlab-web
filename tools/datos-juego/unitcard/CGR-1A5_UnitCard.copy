@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="CGR-1A5_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:CGR-1A5_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=44,IntroDate=3023.01.01-00.00.00,Tier=4,BattleValue=1468,FactionRarity=(((Id="MWFactionAsset:HighImpactBallistics"), Rare),((Id="MWFactionAsset:SolarisArms"), Uncommon),((Id="MWFactionAsset:Independent"), VeryRare),((Id="MWFactionAsset:Liao"), Uncommon),((Id="MWFactionAsset:Mercenaries"), VeryRare),((Id="MWFactionAsset:Outlaws"), VeryRare),((Id="MWFactionAsset:Thumpers"), VeryCommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

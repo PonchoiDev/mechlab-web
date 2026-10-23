@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="MAL-MX90_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:MAL-MX90_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=38,IntroDate=3038.06.27-00.00.00,Tier=9,BattleValue=1290,FactionRarity=(((Id="MWFactionAsset:FreeRasalhagueRepublic"), VeryRare),((Id="MWFactionAsset:Independent"), VeryRare),((Id="MWFactionAsset:Kurita"), Rare),((Id="MWFactionAsset:Mercenaries"), VeryRare),((Id="MWFactionAsset:BrionsLegion"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

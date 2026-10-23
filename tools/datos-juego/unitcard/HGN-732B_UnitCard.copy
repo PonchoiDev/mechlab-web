@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="HGN-732B_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:HGN-732B_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.MissileBoat"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=78,IntroDate=2598.01.01-00.00.00,Tier=9,BattleValue=2335,FactionRarity=(((Id="MWFactionAsset:ClanNovaCatAbjured"), VeryRare),((Id="MWFactionAsset:ComStar"), Rare),((Id="MWFactionAsset:WordOfBlake"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+End Object

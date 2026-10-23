@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="MAL-KO_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:MAL-KO_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=54,IntroDate=3045.01.03-00.00.00,Tier=10,BattleValue=1702,FactionRarity=(((Id="MWFactionAsset:FederatedCommonwealth"), Unique),((Id="MWFactionAsset:LyranAlliance"), Unique),((Id="MWFactionAsset:Steiner"), Unique),((Id="MWFactionAsset:Blackhearts"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

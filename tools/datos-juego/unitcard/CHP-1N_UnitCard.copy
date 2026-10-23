@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="CHP-1N_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:CHP-1N_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=35,IntroDate=2602.01.01-00.00.00,Tier=4,BattleValue=1233,FactionRarity=(((Id="MWFactionAsset:BullheadArmor"), Uncommon),((Id="MWFactionAsset:VEST"), Rare),((Id="MWFactionAsset:BlackInferno"), Rare),((Id="MWFactionAsset:ComStar"), Uncommon),((Id="MWFactionAsset:WordOfBlake"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

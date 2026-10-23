@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="DemolisherII_UnitCard"
+   UnitCard=(UnitClass=/Game/DLC9/Objects/Tanks/DemolisherII/DemolisherII.DemolisherII_C,Name=NSLOCTEXT("[BB9AF0794F324BE8C0DE22B7865E81DB]", "2FA5595140E45BE28A7C2C9EC0F022D3", "Demolisher II"),UnitType=(UnitType=(TagName="UnitType.Vehicle.Tracked.Tank.DemolisherII")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroDifficulty=60,IntroDate=3059.01.01-00.00.00,Tier=3,BattleValue=1200,FactionRarity=(((Id="MWFactionAsset:ClanWolfInExile"), Rare),((Id="MWFactionAsset:Davion"), Uncommon),((Id="MWFactionAsset:LyranAlliance"), Uncommon)))
+   AssociatedDLC=(TagName="DLC.DLC9")
+End Object

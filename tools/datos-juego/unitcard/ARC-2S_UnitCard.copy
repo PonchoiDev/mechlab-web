@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="ARC-2S_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:ARC-2S_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.MissileBoat"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=43,IntroDate=2915.01.01-00.00.00,Tier=6,BattleValue=1393,FactionRarity=(((Id="MWFactionAsset:FederatedCommonwealth"), Common),((Id="MWFactionAsset:LyranAlliance"), VeryCommon),((Id="MWFactionAsset:Steiner"), VeryCommon),((Id="MWFactionAsset:Blackhearts"), VeryCommon),((Id="MWFactionAsset:FilthyLucre"), VeryCommon),((Id="MWFactionAsset:GrayDeathLegion"), VeryCommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC2")
+End Object

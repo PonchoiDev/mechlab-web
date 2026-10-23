@@ -35,6 +35,8 @@ const WEIGHT_CLASSES: { value: WeightClassName; label: string }[] = [
 // pedir escribiéndolos en el buscador (1art, 1ams).
 const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 'omni'];
 const MAX_MINIMUM = 9;
+const MIN_YEAR = 2400;
+const MAX_YEAR = 3100;
 
 const filterMechs = (mechs: Mech[], query: string, filters: MechFilters) => {
   const parsed = parseMechQuery(query);
@@ -163,7 +165,12 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
       {isOpen && (
         <div className="mech-options-panel">
           {/* Los botones no se llevan el foco del buscador, para seguir navegando con el teclado. */}
-          <div className="mech-filters" onMouseDown={(event) => event.preventDefault()}>
+          <div
+            className="mech-filters"
+            onMouseDown={(event) => {
+              if (event.target instanceof Element && event.target.closest('button')) event.preventDefault();
+            }}
+          >
             <div className="mech-filter-row">
               <span className="mech-filter-label">CLASS</span>
               {WEIGHT_CLASSES.map(({ value, label }) => (
@@ -238,6 +245,27 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
               })}
             </div>
 
+            <div className="mech-filter-row">
+              <label className="mech-filter-label" htmlFor="mech-filter-year">AVAILABLE BY</label>
+              <input
+                id="mech-filter-year"
+                className="mech-filter-year"
+                type="number"
+                inputMode="numeric"
+                min={MIN_YEAR}
+                max={MAX_YEAR}
+                placeholder="Any year"
+                value={filters.maxYear ?? ''}
+                onChange={(event) => {
+                  const year = Number.parseInt(event.target.value, 10);
+                  updateFilters(() => ({ maxYear: Number.isFinite(year) ? year : null }));
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Escape') close();
+                }}
+              />
+            </div>
+
             <div className="mech-filter-row mech-filter-summary">
               <span>{filteredMechs.length} {filteredMechs.length === 1 ? 'variant' : 'variants'}</span>
               {activeFilterCount > 0 && (
@@ -263,7 +291,9 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 <span>{getMechDisplayName(mech)}</span>
                 <strong>{mech.variant}</strong>
                 <HardpointSummary mech={mech} />
-                <small>{mech.tonnageMax} t{mech.id !== mech.variant ? ` · ${mech.id}` : ''}</small>
+                <small>
+                  {[`${mech.tonnageMax} t`, mech.introYear, mech.role, mech.id !== mech.variant ? mech.id : null].filter(Boolean).join(' · ')}
+                </small>
               </div>
             )) : (
               <p className="mech-no-results">No chassis match these filters</p>

@@ -64,8 +64,11 @@ const fitsMeleeHardpoint = (hardpoint: Hardpoint, weapon: Item): boolean =>
 
 const OMNI_WEAPON_TYPES: WeaponType[] = ['energy', 'ballistic', 'missile'];
 
+// Los anclajes de artillería admiten el Arrow IV y también misiles normales; el Arrow IV solo cabe en ellos.
 const fitsHardpointType = (hardpoint: Hardpoint, weaponType: WeaponType): boolean =>
-  hardpoint.type === weaponType || (hardpoint.type === 'omni' && OMNI_WEAPON_TYPES.includes(weaponType));
+  hardpoint.type === weaponType ||
+  (hardpoint.type === 'omni' && OMNI_WEAPON_TYPES.includes(weaponType)) ||
+  (hardpoint.type === 'artillery' && weaponType === 'missile');
 
 const fitsHardpoint = (hardpoint: Hardpoint, weapon: Item, weaponType: WeaponType): boolean =>
   fitsHardpointType(hardpoint, weaponType) && (

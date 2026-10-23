@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="ZEU-6T_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:ZEU-6T_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"),(TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=44,IntroDate=3026.08.19-00.00.00,Tier=7,BattleValue=1436,FactionRarity=(((Id="MWFactionAsset:SolarisArms"), Uncommon),((Id="MWFactionAsset:Davion"), VeryRare),((Id="MWFactionAsset:FederatedCommonwealth"), Uncommon),((Id="MWFactionAsset:Independent"), VeryRare),((Id="MWFactionAsset:LyranAlliance"), VeryCommon),((Id="MWFactionAsset:Steiner"), VeryCommon),((Id="MWFactionAsset:Blackhearts"), VeryCommon),((Id="MWFactionAsset:CraterCobras"), VeryRare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

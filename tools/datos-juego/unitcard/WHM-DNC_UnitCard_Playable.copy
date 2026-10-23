@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="WHM-DNC_UnitCard_Playable"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:WHM-DNC_Loadout_Playable"),AIBehaviourConfig=(AIBehaviourConfigAsset=(Id="MWAIBehaviourConfigAsset:Boss_BehaviorConfig"),LethalityBonus=1.000000,bIsBoss=True),PersonaAsset=(Id="MWPersonaAsset:DuncanFisher_Helmet"),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=40,IntroDate=3042.01.01-00.00.00,Tier=7,BattleValue=1431,FactionRarity=(((Id="MWFactionAsset:SolarisSponsors"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC6")
+End Object

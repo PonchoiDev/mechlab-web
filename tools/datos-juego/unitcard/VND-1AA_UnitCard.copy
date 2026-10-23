@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="VND-1AA_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:VND-1AA_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=5,IntroDate=2863.01.01-00.00.00,Tier=4,BattleValue=966,FactionRarity=(((Id="MWFactionAsset:BullheadArmor"), Rare),((Id="MWFactionAsset:FreeRasalhagueRepublic"), Uncommon),((Id="MWFactionAsset:Liao"), Rare),((Id="MWFactionAsset:WacoRangers"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

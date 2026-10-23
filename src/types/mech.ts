@@ -41,6 +41,10 @@ export interface Mech {
   BaseCoolingRate?: number;
   sarnaName?: string;
   techBase?: string;
+  // Build de fábrica con el formato de los enlaces de Share, y datos de su unit card.
+  stockBuild?: string;
+  introYear?: number;
+  role?: string;
   components: MechComponents;
 }
 

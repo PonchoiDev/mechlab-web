@@ -9,6 +9,29 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-23-stock-builds',
+    date: '2026-10-23',
+    title: 'Stock loadouts and intro years',
+    items: [
+      'Picking a chassis now loads its stock loadout from the game: weapons with their tiers, equipment, ammo and armor',
+      'Stock loadout in the toolbar brings it back after you change things',
+      'Each variant in the chassis list shows the year it appears and its combat role',
+      'New Available by filter: only the \'Mechs that exist in a given year of your campaign'
+    ]
+  },
+  {
+    id: '2026-10-23-hardpoint-fixes',
+    date: '2026-10-23',
+    title: 'Hardpoint fixes',
+    items: [
+      'Banshee BNC-LM and BNC-SR hero hardpoints are back, in the head and left arm',
+      'Loki HBR-A arms now match the game: UAC/5 on the right, ER Large Lasers on the left',
+      'Timber Wolf TBR-A gets back its three energy hardpoints in the left torso',
+      'Hardpoints that carry a bigger stock weapon now fit it, like the Large Laser of the BSK-6 or the AC/20 of the CN9-YLW',
+      'Artillery hardpoints also take regular missiles'
+    ]
+  },
+  {
     id: '2026-10-23-chassis-filters',
     date: '2026-10-23',
     title: 'Chassis filters',

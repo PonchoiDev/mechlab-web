@@ -5,7 +5,7 @@ import itemsData from './data/items.json';
 import type { EquippedLoadout, Mech, Zone } from './types/mech';
 import type { Item } from './types/item';
 import { replaceWeapon, type ActionResult } from './utils/buildActions';
-import { encodeBuild, getBuildUrl, readBuildFromLocation } from './utils/buildCode';
+import { encodeBuild, getBuildUrl, getStockBuild, readBuildFromLocation } from './utils/buildCode';
 import { normalizeBuildName } from './utils/savedBuilds';
 import { getBuildSummary } from './utils/calculators';
 import { getBuildIssues } from './utils/issues';
@@ -41,7 +41,7 @@ const openFeedbackOnLoad = window.location.hash === '#feedback';
 if (openFeedbackOnLoad) window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
 
 export default function App() {
-  const build = useMechBuild(mechs, linkedBuild?.build);
+  const build = useMechBuild(mechs, items, linkedBuild?.build);
   const { mech, loadout, armor, activeZone, setActiveZone } = build;
   const sarna = useSarnaAsset(mech);
 
@@ -76,7 +76,13 @@ export default function App() {
   const closeFeedback = useCallback(() => setIsFeedbackOpen(false), [setIsFeedbackOpen]);
   const buildCode = encodeBuild(mech, loadout, armor, items);
   const buildUrl = getBuildUrl(buildCode);
-  const hasUnsavedChanges = equippedItems.length > 0 && !saved.builds.some(savedBuild => savedBuild.code === buildCode);
+  const stockCode = useMemo(() => {
+    const stock = getStockBuild(mech, mechs, items);
+    return stock ? encodeBuild(mech, stock.loadout, stock.armor, items) : null;
+  }, [mech]);
+  // La build de fábrica sin tocar no cuenta como cambios sin guardar.
+  const hasUnsavedChanges = equippedItems.length > 0 && buildCode !== stockCode &&
+    !saved.builds.some(savedBuild => savedBuild.code === buildCode);
   // La build guardada abierta solo se puede actualizar mientras se sigue en su chasis: al cambiar
   // de chasis se desvincula, para no sobrescribirla sin querer.
   const activeBuild = saved.builds.find(savedBuild => savedBuild.id === activeSavedId) ?? null;
@@ -165,6 +171,12 @@ export default function App() {
         onClearArmor={build.clearArmor}
         onMaximizeArmor={build.maximizeArmor}
         onRemoveItems={build.removeItemsOfType}
+        canLoadStock={stockCode !== null && buildCode !== stockCode}
+        onLoadStock={() => {
+          build.loadStockBuild();
+          setSelectedHardpoint(null);
+          showToast(`Loaded the stock ${mech.variant} loadout`);
+        }}
         savedBuildCount={saved.builds.length}
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
