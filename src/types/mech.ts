@@ -47,6 +47,10 @@ export interface Mech {
   // Interior hacen que los 10 disipadores internos del motor enfríen el doble.
   armorType?: 'standard' | 'ferroFibrous';
   heatSinkType?: 'single' | 'double' | 'clanDouble';
+  structureType?: 'standard' | 'endoSteel';
+  engine?: { rating: number; xl: boolean };
+  activeProbe?: boolean;
+  hero?: boolean;
   introYear?: number;
   role?: string;
   components: MechComponents;

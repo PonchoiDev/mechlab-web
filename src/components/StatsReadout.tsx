@@ -66,7 +66,7 @@ export function StatsReadout({ mech, summary }: StatsReadoutProps) {
       </div>
       <div className="readout-cell">
         <span className="readout-label">MAX WEAPON RANGE</span>
-        <strong>{maxWeaponRange > 0 ? `${maxWeaponRange.toFixed(0)} m` : '—'}</strong>
+        <strong>{maxWeaponRange > 0 ? `${Math.floor(maxWeaponRange)} m` : '—'}</strong>
       </div>
     </section>
   );

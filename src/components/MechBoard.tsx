@@ -3,6 +3,7 @@ import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import { getAmmoWarnings } from '../utils/equipment';
 import { ZONES } from '../utils/zones';
 import { ComponentCard } from './ComponentCard';
+import { MechSpecs } from './MechSpecs';
 
 interface MechBoardProps {
   mech: Mech;
@@ -38,6 +39,7 @@ export function MechBoard({
           <h2>{mech.name}</h2>
           <span className="variant-tag">{mech.variant}</span>
         </div>
+        <MechSpecs mech={mech} />
         <div className="mech-board-image">{reference}</div>
       </div>
       {ZONES.map(({ zone, label, position }) => (

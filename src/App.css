@@ -318,9 +318,9 @@
 }
 
 .mech-option small {
+  grid-column: 1 / -1;
   color: var(--work-muted);
   font: 400 10px var(--work-mono);
-  text-align: right;
 }
 
 .mech-option:hover,
@@ -2278,4 +2278,36 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   color: var(--work-text);
   font-size: 12px;
   line-height: 1.45;
+}
+
+.mech-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.mech-spec {
+  color: var(--work-text);
+  font: 600 10px/14px var(--work-mono);
+}
+
+/* Colores de la cabecera del mechlab del juego. */
+.mech-spec.is-xl { color: #ffd23f; }
+.mech-spec.is-dhs { color: #5fa8ff; }
+.mech-spec.is-endo { color: #b48cff; }
+.mech-spec.is-ferro { color: #ff5a4f; }
+.mech-spec.is-ap { color: var(--work-cyan); }
+
+.mech-hardpoint-tag small {
+  margin-left: 2px;
+  color: var(--work-muted);
+  font-size: 8px;
+}
+
+.mech-option .mech-specs {
+  justify-content: flex-end;
+}
+
+.mech-board-reference .mech-specs {
+  margin-top: -2px;
 }
