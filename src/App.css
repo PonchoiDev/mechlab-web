@@ -279,6 +279,10 @@
   --weapon-color: var(--work-amber);
 }
 
+.mech-hardpoint-tag.is-ecm {
+  --weapon-color: #b9a4ff;
+}
+
 .mech-option {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
