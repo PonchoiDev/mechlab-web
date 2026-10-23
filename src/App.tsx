@@ -196,7 +196,7 @@ export default function App() {
             title="Show every slot as a cell, like the Details view of the in-game mechlab"
             onClick={view.toggleExpandedSlots}
           >
-            Slot cells
+            {view.expandedSlots ? 'Hide slot cells' : 'Show slot cells'}
           </button>
           <button
             type="button"

@@ -13,7 +13,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-10-23',
     title: 'View options',
     items: [
-      'Slot cells shows every slot as a cell, like the Details view of the in-game mechlab, so you can see the free space while you build',
+      'Show slot cells displays every slot as a cell, like the Details view of the in-game mechlab, so you can see the free space while you build',
       'Compact board hides the \'Mech image and lays the components out in five columns',
       'The component panel can open on the left or on the right, from the View bar or the ⇄ button in the panel',
       'Your view choices are remembered in this browser'

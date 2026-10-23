@@ -2351,6 +2351,12 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   border-color: var(--work-cyan);
 }
 
+.utility-button[aria-pressed='true']:hover:not(:disabled) {
+  color: #18200f;
+  background: #93e8df;
+  border-color: #93e8df;
+}
+
 /* Vista de ranuras expandida: una celda por ranura, como la vista Detalles del juego. */
 .component-card-slots {
   display: grid;
