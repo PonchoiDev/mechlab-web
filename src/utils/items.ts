@@ -55,6 +55,7 @@ const WEAPON_TYPE_NAMES: Record<HardpointType, string> = {
   energy: 'Energy',
   ballistic: 'Ballistic',
   missile: 'Missile',
+  artillery: 'Artillery',
   ams: 'AMS',
   melee: 'Melee',
   omni: 'Omni'

@@ -470,3 +470,22 @@ describe('anclajes omni', () => {
     expect(omni).toHaveLength(2);
   });
 });
+
+describe('anclajes de artillería', () => {
+  const artillery = { type: 'artillery' as const, size: 'large' as const };
+
+  it('el Arrow IV solo va en anclajes de artillería', () => {
+    expect(weaponFitsHardpoint(artillery, getItem('ArrowIV'))).toBe(true);
+    expect(weaponFitsHardpoint(artillery, getItem('C-ArrowIV'))).toBe(true);
+    expect(weaponFitsHardpoint({ type: 'missile', size: 'large' }, getItem('ArrowIV'))).toBe(false);
+    expect(weaponFitsHardpoint({ type: 'omni', size: 'large' }, getItem('ArrowIV'))).toBe(false);
+  });
+
+  it('los anclajes de artillería no admiten otros misiles', () => {
+    expect(weaponFitsHardpoint(artillery, getItem('LRM15'))).toBe(false);
+  });
+
+  it('el Catapult CPLT-C3 tiene su anclaje de artillería en el brazo derecho', () => {
+    expect(getMech('CPLT-C3').components.rightArm.hardpoints).toContainEqual(artillery);
+  });
+});

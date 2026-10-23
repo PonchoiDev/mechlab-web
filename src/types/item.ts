@@ -1,4 +1,5 @@
-export type WeaponType = 'energy' | 'ballistic' | 'missile' | 'ams' | 'melee';
+// La artillería (Arrow IV) solo va en sus propios anclajes, ni en los de misiles ni en los omni.
+export type WeaponType = 'energy' | 'ballistic' | 'missile' | 'artillery' | 'ams' | 'melee';
 
 // Los anclajes omni de los omnimechs admiten armas de energía, balísticas o de misiles.
 export type HardpointType = WeaponType | 'omni';
