@@ -72,7 +72,7 @@ export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: Share
     setLoadout(prev => ({ ...prev, [zone]: prev[zone].filter(item => item.instanceId !== instanceId) }));
   };
 
-  const removeItemsOfType = (type: 'weapon' | 'ammo') => {
+  const removeItemsOfType = (type: 'weapon' | 'ammo' | 'equipment') => {
     setLoadout(prev => Object.fromEntries(
       Object.entries(prev).map(([zone, equippedItems]) => [
         zone,
