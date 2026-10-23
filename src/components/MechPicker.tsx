@@ -3,6 +3,8 @@ import type { Mech } from '../types/mech';
 import {
   countActiveFilters,
   EMPTY_MECH_FILTERS,
+  GAME_START_YEAR,
+  getAvailableYear,
   getHardpointCounts,
   getMechDisplayName,
   hasEcm,
@@ -35,8 +37,7 @@ const WEIGHT_CLASSES: { value: WeightClassName; label: string }[] = [
 // pedir escribiéndolos en el buscador (1art, 1ams).
 const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 'omni'];
 const MAX_MINIMUM = 9;
-const MIN_YEAR = 2400;
-const MAX_YEAR = 3100;
+
 
 const filterMechs = (mechs: Mech[], query: string, filters: MechFilters) => {
   const parsed = parseMechQuery(query);
@@ -69,6 +70,11 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
   const currentMech = mechs[selectedIndex];
   const filteredMechs = useMemo(() => filterMechs(mechs, query, filters), [mechs, query, filters]);
   const activeFilterCount = countActiveFilters(filters);
+  // Años de la campaña en los que aparece algún mech nuevo, desde su inicio.
+  const years = useMemo(() => {
+    const lastYear = Math.max(GAME_START_YEAR, ...mechs.map(getAvailableYear));
+    return Array.from({ length: lastYear - GAME_START_YEAR + 1 }, (_, index) => GAME_START_YEAR + index);
+  }, [mechs]);
 
   const close = () => {
     setQuery('');
@@ -247,14 +253,9 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
 
             <div className="mech-filter-row">
               <label className="mech-filter-label" htmlFor="mech-filter-year">AVAILABLE BY</label>
-              <input
+              <select
                 id="mech-filter-year"
                 className="mech-filter-year"
-                type="number"
-                inputMode="numeric"
-                min={MIN_YEAR}
-                max={MAX_YEAR}
-                placeholder="Any year"
                 value={filters.maxYear ?? ''}
                 onChange={(event) => {
                   const year = Number.parseInt(event.target.value, 10);
@@ -263,7 +264,10 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 onKeyDown={(event) => {
                   if (event.key === 'Escape') close();
                 }}
-              />
+              >
+                <option value="">Any year</option>
+                {years.map(year => <option key={year} value={year}>{year}</option>)}
+              </select>
             </div>
 
             <div className="mech-filter-row mech-filter-summary">
@@ -292,7 +296,7 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 <strong>{mech.variant}</strong>
                 <HardpointSummary mech={mech} />
                 <small>
-                  {[`${mech.tonnageMax} t`, mech.introYear, mech.role, mech.id !== mech.variant ? mech.id : null].filter(Boolean).join(' · ')}
+                  {[`${mech.tonnageMax} t`, mech.introYear ? getAvailableYear(mech) : null, mech.role, mech.id !== mech.variant ? mech.id : null].filter(Boolean).join(' · ')}
                 </small>
               </div>
             )) : (
