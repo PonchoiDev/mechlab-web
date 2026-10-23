@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="ARC-2K_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:ARC-2K_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.MissileBoat"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=42,IntroDate=2856.01.01-00.00.00,Tier=6,BattleValue=1356,FactionRarity=(((Id="MWFactionAsset:EarthwerksIncorporated"), Rare),((Id="MWFactionAsset:FreeRasalhagueRepublic"), Common),((Id="MWFactionAsset:Kurita"), Common),((Id="MWFactionAsset:BrionsLegion"), Common),((Id="MWFactionAsset:WacoRangers"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC2")
+End Object

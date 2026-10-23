@@ -58,18 +58,21 @@ export interface MechFilters {
   techBase: 'InnerSphere' | 'Clan' | null;
   jumpJets: boolean;
   ecm: boolean;
+  // Solo los mechs que ya existen en ese año de la campaña (fecha de aparición de su unit card).
+  maxYear: number | null;
   minHardpoints: Partial<Record<HardpointFilterType, number>>;
 }
 
 type QueryFilters = Pick<MechFilters, 'jumpJets' | 'ecm' | 'minHardpoints'>;
 
-export const EMPTY_MECH_FILTERS: MechFilters = { weightClasses: [], techBase: null, jumpJets: false, ecm: false, minHardpoints: {} };
+export const EMPTY_MECH_FILTERS: MechFilters = { weightClasses: [], techBase: null, jumpJets: false, ecm: false, maxYear: null, minHardpoints: {} };
 
 export const countActiveFilters = (filters: MechFilters): number =>
   filters.weightClasses.length +
   (filters.techBase ? 1 : 0) +
   (filters.jumpJets ? 1 : 0) +
   (filters.ecm ? 1 : 0) +
+  (filters.maxYear !== null ? 1 : 0) +
   Object.values(filters.minHardpoints).filter(count => (count ?? 0) > 0).length;
 
 const OMNI_COMPATIBLE: HardpointFilterType[] = ['energy', 'ballistic', 'missile'];
@@ -95,6 +98,7 @@ export const matchesMechFilters = (mech: Mech, filters: MechFilters): boolean =>
   (!filters.techBase || (mech.techBase ?? 'InnerSphere') === filters.techBase) &&
   (!filters.jumpJets || hasJumpJets(mech)) &&
   (!filters.ecm || hasEcm(mech)) &&
+  (filters.maxYear === null || (mech.introYear ?? Number.POSITIVE_INFINITY) <= filters.maxYear) &&
   meetsHardpointMinimums(getHardpointCounts(mech), filters.minHardpoints);
 
 const QUERY_HARDPOINT_TOKEN = /^(\d+)(e|b|m|o|art|ams)$/i;

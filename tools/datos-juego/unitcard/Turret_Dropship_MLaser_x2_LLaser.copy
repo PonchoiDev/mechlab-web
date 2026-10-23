@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Turret_Dropship_MLaser_x2_LLaser"
+   UnitCard=(UnitClass=/Game/Objects/Dropships/_common/Turrets/Turret_Dropship_MLaser_x2_LLaser.Turret_Dropship_MLaser_x2_LLaser_C,WeaponLevel=0,bOptOutOfFieldRefit=True,bReadFromFileOnSave=False,IntroUsage=(TagName="Unit.Usage.Special"),BattleValue=1)
+End Object

@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="ENF-GH_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:ENF-GH_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=49,IntroDate=3045.10.19-00.00.00,Tier=6,BattleValue=1677,FactionRarity=(((Id="MWFactionAsset:Mercenaries"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

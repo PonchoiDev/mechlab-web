@@ -1,3 +1,4 @@
+import base64
 import json
 import os
 import re
@@ -5,6 +6,9 @@ import sys
 
 DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_ORIGEN = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "mda")
+RUTA_LOADOUTS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "loadout")
+RUTA_UNIT_CARDS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "unitcard")
+RUTA_ITEMS_JSON = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "items.json")
 RUTA_DESTINO_POR_DEFECTO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "mechs.json")
 
 REGEX_VARIANTE = re.compile(r'VariantName\s*=\s*INVTEXT\("([^"]+)"\)', re.IGNORECASE)
@@ -142,7 +146,8 @@ def obtener_parte_cuerpo(hp_str):
             return f"{lado}Arm"
         if "leg" in hp_lower:
             return f"{lado}Leg"
-        if "torso" in hp_lower or "clavicle" in hp_lower:
+        # Los hombros (Shoulder_Left_EH1, Timber Wolf A) van en el torso.
+        if "torso" in hp_lower or "clavicle" in hp_lower or "shoulder" in hp_lower:
             return f"{lado}Torso"
     return None
 
@@ -260,6 +265,32 @@ def obtener_hardpoints(contenido, clase_de_peso):
     return hardpoints
 
 
+REGEX_CLAVE_ANCLAJE = re.compile(r'^(.*?_[a-z]{2}\d+)')
+
+
+def clave_anclaje(nombre):
+    # Componente, tipo y número del anclaje sin el arma del final: Torso_Left_EH1_ppc -> torso_left_eh1.
+    coincidencia = REGEX_CLAVE_ANCLAJE.match(nombre.lower())
+    return coincidencia.group(1) if coincidencia else nombre.lower()
+
+
+def obtener_indices_anclajes(contenido):
+    # Mismo recorrido que obtener_hardpoints: para cada anclaje, su componente y su índice, por su
+    # nombre completo y por su clave (por si el loadout lo nombra con otra arma al final).
+    indices = {}
+    contadores = {componente: 0 for componente in MAPA_COMPONENTES.values()}
+    coincidencia = REGEX_HARDPOINTS.search(contenido)
+    if coincidencia:
+        for hp in re.findall(r'"([^"]+)"', coincidencia.group(1)):
+            parte = obtener_parte_cuerpo(hp)
+            if not parte or not obtener_tipo_arma(hp):
+                continue
+            indices[hp.lower()] = (parte, contadores[parte])
+            indices.setdefault(clave_anclaje(hp), (parte, contadores[parte]))
+            contadores[parte] += 1
+    return indices
+
+
 def construir_componentes(contenido, clase_de_peso):
     ranuras_generales, ranuras_especiales = obtener_ranuras(contenido)
     armadura = obtener_valores_por_componente(REGEX_MAX_ARMOR, contenido)
@@ -325,12 +356,177 @@ def parsear_mech(contenido, variante):
     return mech
 
 
+# --- Builds de fábrica (loadouts) y datos de las unit cards ------------------------------------
+
+# Orden de los componentes en el código de build de la web (ZONE_KEYS en src/utils/zones.ts).
+ZONAS_BUILD = ["head", "centerTorso", "leftTorso", "rightTorso", "leftArm", "rightArm", "leftLeg", "rightLeg"]
+VERSION_CODIGO_BUILD = 1
+
+REGEX_DEFAULT_MECH = re.compile(r'DefaultMech=\(Id="MWMechLoadoutAsset:([^"]+)"')
+REGEX_ARMADURA_INSTALADA = re.compile(r'InstalledArmor=\(([^)]*)\)')
+REGEX_ARMADURA_TRASERA = re.compile(r'InstalledRearArmor=\(([^)]*)\)')
+REGEX_ARMA_INSTALADA = re.compile(r'\(HardpointSlotID="([^"]+)",WeaponData=\(WeaponId=\(Id="MW[A-Za-z]+:([^"]+)"\)')
+REGEX_EQUIPO_CON_RANURA = re.compile(r'SlotTypeAssetId=\(Id="MWSlotTypeDataAsset:([^"]+)"\),EquipmentData=\(EquipmentId=\(Id="MW[A-Za-z]+:([^"]+)"\)')
+REGEX_NIVEL = re.compile(r'_Lvl(\d+)$', re.IGNORECASE)
+
+REGEX_PLANTILLA_LOADOUT = re.compile(r'MechLoadoutTemplate=\(Id="MWMechLoadoutAsset:([^"]+)"')
+REGEX_FECHA_INTRO = re.compile(r'IntroDate=(\d{3,4})\.')
+REGEX_USO_INTRO = re.compile(r'IntroUsage=\(TagName="([^"]+)"')
+REGEX_ROL = re.compile(r'TagName="Unit\.Role\.([A-Za-z]+)"')
+ROLES = {
+    "skirmisher": "Skirmisher", "sniper": "Sniper", "brawler": "Brawler", "striker": "Striker",
+    "scout": "Scout", "juggernaut": "Juggernaut", "missileboat": "Missile Boat", "ambusher": "Ambusher"
+}
+
+
+def cargar_archivos_por_nombre(ruta):
+    if not os.path.isdir(ruta):
+        return {}
+    return {os.path.splitext(archivo)[0].lower(): os.path.join(ruta, archivo) for archivo in os.listdir(ruta)}
+
+
+def cargar_catalogo():
+    with open(os.path.normpath(RUTA_ITEMS_JSON), encoding="utf-8") as archivo:
+        return {item_id.lower(): item for item_id, item in json.load(archivo).items()}
+
+
+def buscar_item(catalogo, item_id):
+    # Los loadouts escriben los ids con otras mayúsculas (Mediumlaser) y el tier como sufijo (_Lvl3).
+    nivel = REGEX_NIVEL.search(item_id)
+    base = REGEX_NIVEL.sub("", item_id).lower()
+    item = catalogo.get(base)
+    return (item, nivel.group(1) if nivel else None) if item else (None, None)
+
+
+def valores_armadura(regex, contenido, sufijo=""):
+    coincidencia = regex.search(contenido)
+    valores = {}
+    if coincidencia:
+        for parte, cantidad in re.findall(r'([A-Za-z]+)=([0-9.]+)', coincidencia.group(1)):
+            parte = parte[:-len(sufijo)] if sufijo and parte.endswith(sufijo) else parte
+            if parte in MAPA_COMPONENTES:
+                valores[MAPA_COMPONENTES[parte]] = int(round(float(cantidad)))
+    return valores
+
+
+def codificar_build(datos):
+    texto = json.dumps(datos, separators=(",", ":"), ensure_ascii=False)
+    return base64.urlsafe_b64encode(texto.encode("utf-8")).decode("ascii").rstrip("=")
+
+
+def construir_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, avisos):
+    variante = mech["id"]
+    # Genera el mismo código que el enlace de Share (src/utils/buildCode.ts), para que la web la
+    # reconstruya con las reglas del taller.
+    indices = obtener_indices_anclajes(contenido_mda)
+    zonas = {zona: [] for zona in ZONAS_BUILD}
+
+    for anclaje, arma_id in REGEX_ARMA_INSTALADA.findall(contenido_loadout):
+        item, nivel = buscar_item(catalogo, arma_id)
+        posicion = indices.get(anclaje.lower()) or indices.get(clave_anclaje(anclaje))
+        if not item or not posicion:
+            avisos.append(f"{variante}: arma {arma_id} en {anclaje}")
+            continue
+        zona, indice = posicion
+        zonas[zona].append([item["id"], indice, nivel] if nivel and nivel != item.get("tier") else [item["id"], indice])
+
+    # El equipo va agrupado por componente: cada trozo empieza en MechPart=<Componente>.
+    equipo = contenido_loadout.split("Equipment=(MechPartEquipment=", 1)[-1] if "MechPartEquipment=" in contenido_loadout else ""
+    for trozo in equipo.split("MechPart=")[1:]:
+        parte, bloque = re.match(r'([A-Za-z]+)(.*)', trozo, re.DOTALL).groups()
+        zona = MAPA_COMPONENTES.get(parte)
+        if not zona:
+            continue
+        # Algunas builds de fábrica traen más equipo del que caben en las ranuras del MDA; el juego
+        # lo quita al cargar el loadout por defecto, así que aquí también se deja fuera.
+        componente = mech["components"][zona]
+        generales = 0
+        especiales = {}
+        for tipo_ranura, equipo_id in REGEX_EQUIPO_CON_RANURA.findall(bloque):
+            item, _ = buscar_item(catalogo, equipo_id)
+            if not item:
+                avisos.append(f"{variante}: equipo {equipo_id} en {parte}")
+                continue
+            if tipo_ranura == "General_SlotType":
+                cabe = generales + (item.get("slots") or 0) <= componente["maxSlots"]
+                if cabe:
+                    generales += item.get("slots") or 0
+            else:
+                cabe = especiales.get(tipo_ranura, 0) < componente["specialSlots"].get(tipo_ranura, 0)
+                if cabe:
+                    especiales[tipo_ranura] = especiales.get(tipo_ranura, 0) + 1
+            if cabe:
+                zonas[zona].append(item["id"])
+            else:
+                avisos.append(f"{variante}: {item['name']} no cabe en {parte}")
+
+    frontal = valores_armadura(REGEX_ARMADURA_INSTALADA, contenido_loadout)
+    trasera = valores_armadura(REGEX_ARMADURA_TRASERA, contenido_loadout, "Rear")
+    armadura = [valor for zona in ZONAS_BUILD for valor in (frontal.get(zona, 0), trasera.get(zona, 0))]
+    return codificar_build([VERSION_CODIGO_BUILD, variante, armadura, [zonas[zona] for zona in ZONAS_BUILD]])
+
+
+ORDEN_TAMANOS = {"small": 0, "medium": 1, "large": 2}
+
+
+def ajustar_a_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, ajustes):
+    # El juego no guarda el tamaño de los anclajes en el MDA (se deduce del nombre). La build de
+    # fábrica muestra lo que el juego monta, así que cada anclaje es al menos del tamaño de su arma de serie.
+    indices = obtener_indices_anclajes(contenido_mda)
+    for anclaje, arma_id in REGEX_ARMA_INSTALADA.findall(contenido_loadout):
+        item, _ = buscar_item(catalogo, arma_id)
+        posicion = indices.get(anclaje.lower()) or indices.get(clave_anclaje(anclaje))
+        if not item or not posicion or item.get("size") not in ORDEN_TAMANOS:
+            continue
+        zona, indice = posicion
+        hardpoint = mech["components"][zona]["hardpoints"][indice]
+        if hardpoint["type"] != "melee" and ORDEN_TAMANOS[item["size"]] > ORDEN_TAMANOS.get(hardpoint["size"], 0):
+            ajustes.append(f"{mech['id']} {zona}: anclaje {hardpoint['type']} {hardpoint['size']} -> {item['size']} ({item['name']})")
+            hardpoint["size"] = item["size"]
+
+
+def cargar_unit_cards(rutas):
+    # Por loadout, la unit card que usa el juego para el mercado: la que se llama como la variante
+    # (<VARIANTE>_UnitCard) o, si no, la de uso Market; las de campaña o misiones quedan detrás.
+    por_loadout = {}
+    for nombre, ruta in rutas.items():
+        contenido = leer_archivo(ruta)
+        plantilla = buscar_texto(REGEX_PLANTILLA_LOADOUT, contenido)
+        if not plantilla:
+            continue
+        uso = buscar_texto(REGEX_USO_INTRO, contenido) or ""
+        prioridad = 0 if nombre == f"{plantilla.lower().removesuffix('_loadout')}_unitcard" else 1 if uso.endswith("Market") else 2
+        actual = por_loadout.get(plantilla.lower())
+        if actual is None or prioridad < actual[0]:
+            por_loadout[plantilla.lower()] = (prioridad, contenido)
+    return {plantilla: contenido for plantilla, (_, contenido) in por_loadout.items()}
+
+
+def datos_unit_card(contenido):
+    datos = {}
+    fecha = buscar_texto(REGEX_FECHA_INTRO, contenido)
+    if fecha:
+        datos["introYear"] = int(fecha)
+    rol = buscar_texto(REGEX_ROL, contenido)
+    if rol:
+        datos["role"] = ROLES.get(rol.lower(), separar_palabras(rol))
+    return datos
+
+
 def main():
     ruta_destino = sys.argv[1] if len(sys.argv) > 1 else os.path.normpath(RUTA_DESTINO_POR_DEFECTO)
 
     if not os.path.exists(RUTA_ORIGEN):
         print(f"❌ La ruta origen no existe: {RUTA_ORIGEN}")
         sys.exit(1)
+
+    catalogo = cargar_catalogo()
+    loadouts = cargar_archivos_por_nombre(RUTA_LOADOUTS)
+    unit_cards = cargar_unit_cards(cargar_archivos_por_nombre(RUTA_UNIT_CARDS))
+    avisos_builds = []
+    ajustes_fabrica = []
+    sin_build = []
+    sin_unit_card = []
 
     base_de_datos = []
     errores = []
@@ -355,6 +551,19 @@ def main():
             variantes_vistas[variante] = archivo
 
             mech = parsear_mech(contenido, variante)
+            # Algunas variantes nuevas heredan el DefaultMech de su padre aunque tengan su propio loadout.
+            propio = f"{variante.lower()}_loadout"
+            loadout = propio if propio in loadouts else (buscar_texto(REGEX_DEFAULT_MECH, contenido) or "").lower()
+            if loadout in loadouts:
+                contenido_loadout = leer_archivo(loadouts[loadout])
+                ajustar_a_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, ajustes_fabrica)
+                mech["stockBuild"] = construir_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, avisos_builds)
+            else:
+                sin_build.append(variante)
+            if loadout in unit_cards:
+                mech.update(datos_unit_card(unit_cards[loadout]))
+            else:
+                sin_unit_card.append(variante)
             if "BaseCoolingRate" not in mech:
                 sin_refrigeracion_base.append(archivo)
             base_de_datos.append(mech)
@@ -364,6 +573,19 @@ def main():
     os.makedirs(os.path.dirname(ruta_destino) or ".", exist_ok=True)
     with open(ruta_destino, 'w', encoding='utf-8') as f_out:
         json.dump(base_de_datos, f_out, indent=2, ensure_ascii=False)
+
+    if sin_build:
+        print(f"\n⚠️ Variantes sin loadout de fábrica ({len(sin_build)}): {', '.join(sorted(sin_build))}")
+    if sin_unit_card:
+        print(f"\n⚠️ Variantes sin unit card ({len(sin_unit_card)}): {', '.join(sorted(sin_unit_card))}")
+    if ajustes_fabrica:
+        print(f"\nℹ️ Datos del taller ajustados a la build de fábrica ({len(ajustes_fabrica)}):")
+        for ajuste in ajustes_fabrica:
+            print(f"  - {ajuste}")
+    if avisos_builds:
+        print(f"\n⚠️ Piezas de las builds de fábrica que se quedan fuera, porque no están en el catálogo o no caben ({len(avisos_builds)}):")
+        for aviso in avisos_builds:
+            print(f"  - {aviso}")
 
     sin_archivo = sorted(set(REFRIGERACION_PARCHEADA) - set(variantes_vistas))
     if sin_archivo:

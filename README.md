@@ -4,7 +4,8 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 
 ## Funcionalidades
 
-- Selector de chasis con búsqueda por nombre, variante o ID (639 variantes jugables), resumen de anclajes de cada variante (3E 2B 1M 2 Omni, JJ) y filtros por clase, tecnología, jump jets, ECM, AMS y mínimo de anclajes por tipo, también escribiendo atajos como `3e 2m jj ecm` en el buscador. Los anclajes omni cuentan como comodín para energía, balística y misiles.
+- Builds de fábrica: al elegir un chasis se carga su loadout del juego (armas con su tier, equipo, munición y armadura), y el botón Stock loadout lo recupera.
+- Selector de chasis con búsqueda por nombre, variante o ID (639 variantes jugables), resumen de anclajes de cada variante (3E 2B 1M 2 Omni, JJ) y filtros por clase, tecnología, jump jets, ECM, AMS y mínimo de anclajes por tipo, también escribiendo atajos como `3e 2m jj ecm` en el buscador. Cada variante muestra también su año de aparición y su rol, y se puede filtrar por los mechs disponibles en un año. Los anclajes omni cuentan como comodín para energía, balística y misiles.
 - Equipamiento por componente respetando el tipo y tamaño de los anclajes y las ranuras especiales (motor, jump jets por clase, supercargadores).
 - Tiers de armas (0–5) que cambian sus estadísticas.
 - Armadura delantera y trasera por zona, con botones para vaciarla o maximizarla según el tonelaje libre.
@@ -56,7 +57,7 @@ tools/
   generar_mechs.py     Genera src/data/mechs.json a partir de los datos del juego
   generar_items.py     Genera src/data/items.json a partir de los datos del juego
   og-cards.html        Plantilla de las imágenes de vista previa (og-image.png)
-  datos-juego/         Archivos exportados del juego (mda/ para 'Mechs, items/ para equipo)
+  datos-juego/         Archivos exportados del juego (mda/ 'Mechs, items/ equipo, loadout/ builds de fábrica, unitcard/ año y rol)
 ```
 
 ## Regenerar los datos
@@ -67,6 +68,8 @@ python3 tools/generar_items.py
 ```
 
 `generar_mechs.py` lee los archivos de `tools/datos-juego/mda/` y escribe `src/data/mechs.json`. Descarta las variantes no jugables (campaña, tutorial, jefes y cinemáticas), listadas en `ARCHIVOS_NO_JUGABLES`, y avisa si encuentra variantes repetidas. Para cada anclaje cuerpo a cuerpo guarda su tamaño (S antebrazo, M mano, L brazo de arma), la clase de peso del 'Mech y, si lo tiene, el arma especial que usa cuando el anclaje está vacío.
+
+De `loadout/` saca la build de fábrica de cada variante (el loadout con su nombre o, si no existe, el de su `DefaultMech`) y la guarda en `stockBuild` con el formato de los enlaces de Share. Esa build también sirve para corregir datos que el MDA no trae bien: cada anclaje es al menos del tamaño de su arma de serie y cada componente tiene al menos las ranuras que ocupa su equipo de serie. De `unitcard/` saca el año de aparición (`introYear`) y el rol (`role`) de cada variante. Al terminar avisa de las piezas de las builds de fábrica que no están en el catálogo.
 
 `generar_items.py` lee los archivos de `tools/datos-juego/items/` y escribe `src/data/items.json`. Agrupa los tiers de cada arma (`_Lvl0` a `_Lvl5`) aplicando sus quirks, guarda la base tecnológica de cada objeto, el tipo de munición de cada arma y munición, los multiplicadores de la salva (proyectiles para el daño, misiles y disparos de ráfaga para el calor) y la munición que gasta cada arma por salva. Las armas no guardan slots, porque en MW5 Mercenaries solo ocupan un anclaje. Ignora los archivos que no son objetos equipables y, al terminar, avisa de las municiones que faltan.
 

@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="MAD-3D_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:MAD-3D_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=45,IntroDate=2834.01.01-00.00.00,Tier=7,BattleValue=1470,FactionRarity=(((Id="MWFactionAsset:SolarisArms"), Uncommon),((Id="MWFactionAsset:Davion"), Uncommon),((Id="MWFactionAsset:FederatedCommonwealth"), Rare),((Id="MWFactionAsset:NorthwindHighlanders"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC2")
+End Object

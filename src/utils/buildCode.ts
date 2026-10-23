@@ -105,6 +105,10 @@ export const decodeBuild = (code: string, mechs: Mech[], catalog: Item[]): Share
   return { mech, loadout, armor };
 };
 
+// Build de fábrica del mech (su loadout del juego), con las mismas reglas que un enlace compartido.
+export const getStockBuild = (mech: Mech, mechs: Mech[], catalog: Item[]): SharedBuild | null =>
+  mech.stockBuild ? decodeBuild(mech.stockBuild, mechs, catalog) : null;
+
 export const getBuildUrl = (code: string): string => {
   const url = new URL(import.meta.env.BASE_URL, window.location.origin);
   url.searchParams.set(BUILD_PARAM, code);

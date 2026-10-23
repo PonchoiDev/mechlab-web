@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="ENF-4P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:ENF-4P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"),(TagName="Unit.Role.Scout"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=12,IntroDate=2856.01.01-00.00.00,Tier=6,BattleValue=1171,FactionRarity=(((Id="MWFactionAsset:HighImpactBallistics"), Common),((Id="MWFactionAsset:SolarisArms"), Common),((Id="MWFactionAsset:StarfallCorp"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+End Object

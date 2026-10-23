@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="BNC-LM_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:BNC-LM_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=58,IntroDate=3019.11.02-00.00.00,Tier=8,BattleValue=1822,FactionRarity=(((Id="MWFactionAsset:Mercenaries"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

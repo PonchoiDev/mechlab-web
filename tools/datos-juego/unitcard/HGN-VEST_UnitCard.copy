@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="HGN-VEST_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:HGN-VEST_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=56,IntroDate=3029.01.01-00.00.00,Tier=9,BattleValue=1619,FactionRarity=(((Id="MWFactionAsset:BullheadArmor"), Uncommon),((Id="MWFactionAsset:IroncladSystems"), Uncommon),((Id="MWFactionAsset:JumpJetFuel"), Common),((Id="MWFactionAsset:LedouxEnterprises"), Common),((Id="MWFactionAsset:MuscleBound"), Common),((Id="MWFactionAsset:NovaTech"), Common),((Id="MWFactionAsset:StarfallCorp"), Uncommon),((Id="MWFactionAsset:VanguardIndustries"), Common),((Id="MWFactionAsset:VEST"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC6")
+End Object

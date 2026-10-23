@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-24-stock-builds',
+    date: '2026-10-24',
+    title: 'Stock loadouts and intro years',
+    items: [
+      'Picking a chassis now loads its stock loadout from the game: weapons with their tiers, equipment, ammo and armor',
+      'Stock loadout in the toolbar brings it back after you change things',
+      'Each variant in the chassis list shows the year it appears and its combat role',
+      'New Available by filter: only the \'Mechs that exist in a given year of your campaign'
+    ]
+  },
+  {
     id: '2026-10-23-chassis-filters',
     date: '2026-10-23',
     title: 'Chassis filters',
@@ -25,6 +36,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     title: 'Arrow IV fix',
     items: [
       'Arrow IV now fits artillery hardpoints only, as in the game, instead of regular missile hardpoints',
+      'Artillery hardpoints also take regular missiles',
       'Artillery hardpoints have their own color and filter'
     ]
   }

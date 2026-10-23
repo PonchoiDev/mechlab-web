@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Bowen-MAD-3R_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:MAD-3R_Loadout"),PersonaAsset=(Id="MWPersonaAsset:Bowen"),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=44,IntroDate=2819.01.01-00.00.00,Tier=7,BattleValue=1363)
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

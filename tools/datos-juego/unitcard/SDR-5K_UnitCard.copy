@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="SDR-5K_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:SDR-5K_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Light")),CombatRole=(GameplayTags=((TagName="Unit.Role.Scout"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDate=2850.01.01-00.00.00,Tier=1,BattleValue=503,FactionRarity=(((Id="MWFactionAsset:BullheadArmor"), Rare),((Id="MWFactionAsset:HighImpactBallistics"), Rare),((Id="MWFactionAsset:MuscleBound"), Common),((Id="MWFactionAsset:FreeRasalhagueRepublic"), Uncommon),((Id="MWFactionAsset:Kurita"), Uncommon),((Id="MWFactionAsset:Mercenaries"), Uncommon),((Id="MWFactionAsset:Outlaws"), Uncommon),((Id="MWFactionAsset:Periphery"), Uncommon),((Id="MWFactionAsset:BrionsLegion"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

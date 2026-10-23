@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="VonLuckner_K70_UnitCard"
+   UnitCard=(UnitClass=/Game/DLC9/Objects/Tanks/VonLuckner/VonLuckner_K70.VonLuckner_K70_C,Name=NSLOCTEXT("[8AEA0213474DAA17D1E3BAA452EC8F57]", "BDDBAA004B8D860918E421AD0C2D002D", "Von Luckner VNL-K70"),UnitType=(UnitType=(TagName="UnitType.Vehicle.Tracked.Tank.VonLuckner")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroDifficulty=50,IntroDate=3008.01.01-00.00.00,Tier=3,BattleValue=900,FactionRarity=(((Id="MWFactionAsset:FreeRasalhagueRepublic"), Rare),((Id="MWFactionAsset:Kurita"), Uncommon)))
+End Object

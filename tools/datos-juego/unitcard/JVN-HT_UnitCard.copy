@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="JVN-HT_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:JVN-HT_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Light")),CombatRole=(GameplayTags=((TagName="Unit.Role.Striker"),(TagName="Unit.Role.Scout"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDate=3015.01.01-00.00.00,Tier=2,BattleValue=886,FactionRarity=(((Id="MWFactionAsset:Davion"), Unique),((Id="MWFactionAsset:EridaniLightHorse"), Unique),((Id="MWFactionAsset:LindonsCompany"), Unique),((Id="MWFactionAsset:NorthwindHighlanders"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

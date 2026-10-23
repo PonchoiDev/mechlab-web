@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="D7_Investigate_BossMech_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:D7_Investigate_BossMech_Loadout"),Name=NSLOCTEXT("[FB0F09F94658A2B51324B78D5979839C]", "5F72DB234FF030FBB02B75A927469112", "The Boss"),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDate=3001.01.01-00.00.00,Tier=10,BattleValue=2749)
+   AssociatedDLC=(TagName="DLC.DLC7")
+End Object

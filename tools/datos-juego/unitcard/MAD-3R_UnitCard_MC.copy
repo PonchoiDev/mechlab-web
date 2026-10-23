@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="MAD-3R_UnitCard_MC"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:MAD-3R_Loadout_mechcon"),AIBehaviourConfig=(AIBehaviourConfigAsset=(Id="MWAIBehaviourConfigAsset:Boss_BehaviorConfig")),UnitType=(UnitType=(TagName="UnitType.Mech")),BattleValue=1089)
+End Object

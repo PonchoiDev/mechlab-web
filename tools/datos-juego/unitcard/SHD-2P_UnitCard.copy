@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="SHD-2P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:SHD-2P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=11,IntroDate=2846.01.01-00.00.00,Tier=4,BattleValue=1058,FactionRarity=(((Id="MWFactionAsset:EarthwerksIncorporated"), Rare),((Id="MWFactionAsset:MuscleBound"), Common),((Id="MWFactionAsset:VEST"), Rare),((Id="MWFactionAsset:Independent"), Common),((Id="MWFactionAsset:Mercenaries"), Rare),((Id="MWFactionAsset:Outlaws"), Common),((Id="MWFactionAsset:Periphery"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

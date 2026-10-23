@@ -1,0 +1,6 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="PXH-KB_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:PXH-KB_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Special"),IntroDifficulty=6,IntroDate=3000.01.01-00.00.00,Tier=4,BattleValue=1125)
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+   RequiredEntitlements=(GameplayTags=((TagName="DLC.DLC1.MSMech")))
+End Object

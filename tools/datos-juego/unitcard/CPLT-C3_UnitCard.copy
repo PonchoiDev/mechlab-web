@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="CPLT-C3_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:CPLT-C3_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.MissileBoat"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=42,IntroDate=3049.01.01-00.00.00,Tier=8,BattleValue=1368,FactionRarity=(((Id="MWFactionAsset:ComStar"), Common),((Id="MWFactionAsset:Davion"), Rare),((Id="MWFactionAsset:FederatedCommonwealth"), Rare),((Id="MWFactionAsset:Independent"), Uncommon),((Id="MWFactionAsset:Kurita"), Uncommon),((Id="MWFactionAsset:Liao"), VeryCommon),((Id="MWFactionAsset:WordOfBlake"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC8")
+End Object

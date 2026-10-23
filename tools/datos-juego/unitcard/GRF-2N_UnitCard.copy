@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="GRF-2N_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:GRF-2N_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=15,IntroDate=2751.01.01-00.00.00,Tier=5,BattleValue=1606,FactionRarity=(((Id="MWFactionAsset:EarthwerksIncorporated"), Uncommon),((Id="MWFactionAsset:ClanNovaCatAbjured"), Rare),((Id="MWFactionAsset:ComStar"), Rare),((Id="MWFactionAsset:WordOfBlake"), Rare),((Id="MWFactionAsset:TheBadDream"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

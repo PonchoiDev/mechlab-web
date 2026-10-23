@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Hetzer_LBX_UnitCard"
+   UnitCard=(UnitClass=/Game/DLC9/Objects/Tanks/Hetzer/Hetzer_LBX.Hetzer_LBX_C,Name=NSLOCTEXT("", "78C3CD5342491C7776ABC0A26D96A0B4", "Hetzer (LBX)"),UnitType=(UnitType=(TagName="UnitType.Vehicle.Wheeled.Hetzer")),CombatRole=(GameplayTags=((TagName="Unit.Role.Ambusher"))),IntroDifficulty=60,IntroDate=3063.01.01-00.00.00,Tier=1,BattleValue=575,FactionRarity=(((Id="MWFactionAsset:Liao"), Common)))
+   AssociatedDLC=(TagName="DLC.DLC9")
+End Object

@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="WVR-6K_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:WVR-6K_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"),(TagName="Unit.Role.Scout"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=18,IntroDate=2598.01.01-00.00.00,Tier=5,BattleValue=1248,FactionRarity=(((Id="MWFactionAsset:FreeRasalhagueRepublic"), Uncommon),((Id="MWFactionAsset:Kurita"), VeryCommon),((Id="MWFactionAsset:BrionsLegion"), VeryCommon),((Id="MWFactionAsset:WacoRangers"), VeryCommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

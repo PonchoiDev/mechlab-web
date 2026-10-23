@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="LDK-SA5_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:LDK-SA5_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=44,IntroDate=3032.01.01-00.00.00,Tier=6,BattleValue=1434,FactionRarity=(((Id="MWFactionAsset:HighImpactBallistics"), Uncommon),((Id="MWFactionAsset:IroncladSystems"), Uncommon),((Id="MWFactionAsset:LedouxEnterprises"), Uncommon),((Id="MWFactionAsset:MuscleBound"), Uncommon),((Id="MWFactionAsset:NovaTech"), Uncommon),((Id="MWFactionAsset:SolarisArms"), Common),((Id="MWFactionAsset:StarfallCorp"), Uncommon),((Id="MWFactionAsset:VanguardIndustries"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC6")
+End Object

@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="KGC-KJ_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:KGC-KJ_Loadout"),AIBehaviourConfig=(DelayBetweenShots=0.500000),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=70,IntroDate=3032.11.12-00.00.00,Tier=10,BattleValue=2117,FactionRarity=(((Id="MWFactionAsset:Mercenaries"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

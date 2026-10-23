@@ -1,0 +1,14 @@
+Begin Object Class=/Script/Engine.Texture2D Name="MechLoadOutInfoPanel_STD_UIX"
+   Begin Object Class=/Script/Engine.AssetImportData Name="AssetImportData"
+   End Object
+   Begin Object Name="AssetImportData"
+   End Object
+   ImportedSize=(X=212,Y=21)
+   Source=(Id=CD3F808A49819ED5FBC7D3A55444367F,SizeX=212,SizeY=21,NumSlices=1,NumMips=1,bPNGCompressed=True,Format=TSF_BGRA8)
+   LightingGuid=7C871B494F4F0E3F85C5509BB8B5F042
+   AssetImportData=AssetImportData'"AssetImportData"'
+   AlphaCoverageThresholds=(X=0.000000,Y=0.000000,Z=0.000000,W=1.000000)
+   MipGenSettings=TMGS_NoMipmaps
+   LODGroup=TEXTUREGROUP_UI
+   NeverStream=True
+End Object

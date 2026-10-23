@@ -481,8 +481,9 @@ describe('anclajes de artillería', () => {
     expect(weaponFitsHardpoint({ type: 'omni', size: 'large' }, getItem('ArrowIV'))).toBe(false);
   });
 
-  it('los anclajes de artillería no admiten otros misiles', () => {
-    expect(weaponFitsHardpoint(artillery, getItem('LRM15'))).toBe(false);
+  it('los anclajes de artillería admiten también misiles normales', () => {
+    expect(weaponFitsHardpoint(artillery, getItem('LRM15'))).toBe(true);
+    expect(weaponFitsHardpoint(artillery, getItem('MediumLaser'))).toBe(false);
   });
 
   it('el Catapult CPLT-C3 tiene su anclaje de artillería en el brazo derecho', () => {

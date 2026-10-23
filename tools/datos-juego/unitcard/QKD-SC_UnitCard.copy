@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="QKD-SC_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:QKD-SC_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Special"),IntroDifficulty=25,IntroDate=3029.01.01-00.00.00,Tier=5,BattleValue=1118,FactionRarity=(((Id="MWFactionAsset:Outlaws"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC3")
+End Object

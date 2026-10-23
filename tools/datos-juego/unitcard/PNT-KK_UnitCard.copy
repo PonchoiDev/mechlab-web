@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="PNT-KK_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:PNT-KK_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Light")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDate=3021.09.21-00.00.00,Tier=2,BattleValue=958,FactionRarity=(((Id="MWFactionAsset:Kurita"), Unique),((Id="MWFactionAsset:BrionsLegion"), Unique),((Id="MWFactionAsset:WacoRangers"), Unique)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

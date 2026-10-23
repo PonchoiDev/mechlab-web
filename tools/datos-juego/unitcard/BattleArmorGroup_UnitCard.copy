@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="BattleArmorGroup_UnitCard"
+   UnitCard=(UnitClass=/Game/DLC8/Objects/BattleArmor/BP_BattleArmorGroup.BP_BattleArmorGroup_C,UnitType=(UnitType=(TagName="UnitType.Vehicle")),CombatRole=(GameplayTags=((TagName="Unit.Role.Ambusher"))),IntroDifficulty=20,IntroDate=3052.01.01-00.00.00,Tier=3,BattleValue=500,FactionRarity=(((Id="MWFactionAsset:ComStar"), Uncommon),((Id="MWFactionAsset:Davion"), Rare),((Id="MWFactionAsset:FederatedCommonwealth"), Rare),((Id="MWFactionAsset:FreeRasalhagueRepublic"), Rare),((Id="MWFactionAsset:Kurita"), Rare),((Id="MWFactionAsset:Liao"), Rare),((Id="MWFactionAsset:LyranAlliance"), Rare),((Id="MWFactionAsset:Marik"), Rare),((Id="MWFactionAsset:Mercenaries"), VeryRare),((Id="MWFactionAsset:Steiner"), Rare),((Id="MWFactionAsset:WordOfBlake"), Uncommon),((Id="MWFactionAsset:KellHounds"), VeryRare)))
+   AssociatedDLC=(TagName="DLC.DLC8")
+End Object

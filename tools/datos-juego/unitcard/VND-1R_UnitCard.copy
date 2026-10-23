@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="VND-1R_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:VND-1R_Loadout"),OverrideCombatRange=50000.000000,UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"),(TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=5,IntroDate=2826.01.01-00.00.00,Tier=4,BattleValue=1024,FactionRarity=(((Id="MWFactionAsset:BullheadArmor"), Rare),((Id="MWFactionAsset:SolarisArms"), Rare),((Id="MWFactionAsset:BlackInferno"), Common),((Id="MWFactionAsset:Independent"), Common),((Id="MWFactionAsset:Liao"), VeryCommon),((Id="MWFactionAsset:Mercenaries"), Common),((Id="MWFactionAsset:Outlaws"), Uncommon),((Id="MWFactionAsset:Periphery"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

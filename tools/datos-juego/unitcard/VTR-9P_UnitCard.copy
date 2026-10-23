@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="VTR-9P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:VTR-9P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=38,IntroDate=3027.01.01-00.00.00,Tier=7,BattleValue=1263,FactionRarity=(((Id="MWFactionAsset:BullheadArmor"), Common),((Id="MWFactionAsset:HighImpactBallistics"), Common),((Id="MWFactionAsset:IroncladSystems"), Common),((Id="MWFactionAsset:JumpJetFuel"), Common),((Id="MWFactionAsset:LedouxEnterprises"), Uncommon),((Id="MWFactionAsset:MuscleBound"), Common),((Id="MWFactionAsset:NovaTech"), Uncommon),((Id="MWFactionAsset:StarfallCorp"), Uncommon),((Id="MWFactionAsset:TripleF"), Uncommon),((Id="MWFactionAsset:VanguardIndustries"), Common),((Id="MWFactionAsset:Independent"), Rare),((Id="MWFactionAsset:Outlaws"), Rare),((Id="MWFactionAsset:Periphery"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC3")
+End Object

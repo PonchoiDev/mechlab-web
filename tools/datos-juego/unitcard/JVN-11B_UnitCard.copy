@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="JVN-11B_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:JVN-11B_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Light")),CombatRole=(GameplayTags=((TagName="Unit.Role.Striker"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=40,IntroDate=3054.01.01-00.00.00,Tier=2,BattleValue=678,FactionRarity=(((Id="MWFactionAsset:Davion"), Common),((Id="MWFactionAsset:FederatedCommonwealth"), Common),((Id="MWFactionAsset:Mercenaries"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market"),(TagName="Attributes.ClanCoreContent")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="CDA-3C_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:CDA-3C_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Scout"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=3,IntroDate=2840.01.01-00.00.00,Tier=2,BattleValue=771,FactionRarity=(((Id="MWFactionAsset:SolarisArms"), Uncommon),((Id="MWFactionAsset:Independent"), Rare),((Id="MWFactionAsset:Liao"), Common),((Id="MWFactionAsset:Periphery"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

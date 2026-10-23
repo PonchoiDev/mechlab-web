@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="GHR-5P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:GHR-5P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=55,IntroDate=2880.01.01-00.00.00,Tier=7,BattleValue=1718,FactionRarity=(((Id="MWFactionAsset:JumpJetFuel"), Common),((Id="MWFactionAsset:MuscleBound"), Uncommon),((Id="MWFactionAsset:HansensRoughRiders"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+End Object

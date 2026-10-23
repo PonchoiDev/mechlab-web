@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="LGB-HS_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:LGB-HS_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.MissileBoat"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=53,IntroDate=3045.01.01-00.00.00,Tier=9,BattleValue=1688)
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC5")
+End Object

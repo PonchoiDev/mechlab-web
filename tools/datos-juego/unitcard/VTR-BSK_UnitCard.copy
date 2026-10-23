@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="VTR-BSK_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:VTR-BSK_Loadout"),UnitSkinCustomization=(MechSkinAssetId=(Id="MWUnitSkinAsset:Victor_VTR-BSK_SKN")),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Special"),IntroDifficulty=49,IntroDate=3045.01.01-00.00.00,Tier=8,BattleValue=1634)
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

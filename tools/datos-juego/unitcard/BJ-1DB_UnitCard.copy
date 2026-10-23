@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="BJ-1DB_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:BJ-1DB_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=5,IntroDate=3022.04.15-00.00.00,Tier=3,BattleValue=1015,FactionRarity=(((Id="MWFactionAsset:JumpJetFuel"), Common),((Id="MWFactionAsset:VEST"), Rare),((Id="MWFactionAsset:Davion"), Uncommon),((Id="MWFactionAsset:FederatedCommonwealth"), Rare),((Id="MWFactionAsset:LyranAlliance"), VeryRare),((Id="MWFactionAsset:CraterCobras"), Uncommon),((Id="MWFactionAsset:EridaniLightHorse"), Uncommon),((Id="MWFactionAsset:HarlocksWarriors"), Uncommon),((Id="MWFactionAsset:KellHounds"), Uncommon),((Id="MWFactionAsset:LindonsCompany"), Uncommon),((Id="MWFactionAsset:NorthwindHighlanders"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC2")
+End Object

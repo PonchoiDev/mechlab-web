@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="D7_Hunting_CDA-RCX_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:D7_Hunting_CDA-RCX_Loadout"),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Scout"))),IntroUsage=(TagName="Unit.Usage.Unique"),IntroDifficulty=4,IntroDate=2785.01.01-00.00.00,Tier=4,BattleValue=854)
+End Object

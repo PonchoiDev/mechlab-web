@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="MAD-4A_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:MAD-4A_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=67,IntroDate=3012.01.01-00.00.00,Tier=6,BattleValue=2073,FactionRarity=(((Id="MWFactionAsset:BlackInferno"), VeryRare),((Id="MWFactionAsset:Mercenaries"), Rare),((Id="MWFactionAsset:WolfsDragoons"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

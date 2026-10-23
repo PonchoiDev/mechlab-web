@@ -6,6 +6,8 @@ interface UtilityToolbarProps {
   onClearArmor: () => void;
   onMaximizeArmor: () => void;
   onRemoveItems: (type: 'weapon' | 'ammo') => void;
+  canLoadStock: boolean;
+  onLoadStock: () => void;
   savedBuildCount: number;
   onSaveBuild: () => void;
   onOpenBuilds: () => void;
@@ -20,6 +22,8 @@ export function UtilityToolbar({
   onClearArmor,
   onMaximizeArmor,
   onRemoveItems,
+  canLoadStock,
+  onLoadStock,
   savedBuildCount,
   onSaveBuild,
   onOpenBuilds,
@@ -43,6 +47,15 @@ export function UtilityToolbar({
       </div>
       <div className="utility-group">
         <span className="utility-label">LOADOUT</span>
+        <button
+          type="button"
+          className="utility-button"
+          onClick={onLoadStock}
+          disabled={!canLoadStock}
+          title="Load the factory loadout of this variant"
+        >
+          Stock loadout
+        </button>
         <button type="button" className="utility-button" onClick={() => onRemoveItems('weapon')} disabled={!hasWeapons}>
           Remove weapons
         </button>

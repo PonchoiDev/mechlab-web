@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="BL-9-KNT_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:BL-9-KNT_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Special.Salvageable"),IntroDifficulty=40,IntroDate=3053.01.01-00.00.00,Tier=7,BattleValue=1678,FactionRarity=(((Id="MWFactionAsset:ComStar"), Rare),((Id="MWFactionAsset:FreeRasalhagueRepublic"), VeryRare),((Id="MWFactionAsset:WordOfBlake"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC8")
+End Object

@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="A2M2_HBK-4H_UnitCardZombie"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:A2M2_HBK-4H_LoadoutZombie"),AIBehaviourConfig=(AIBehaviourConfigAsset=(Id="MWAIBehaviourConfigAsset:Recruit_BehaviorConfig")),UnitSkinCustomization=(MechSkinAssetId=(Id="MWUnitSkinAsset:Hunchback_BlackInferno_SKN")),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Special"),IntroDifficulty=30,IntroDate=2819.01.01-00.00.00,Tier=3,BattleValue=1067)
+End Object

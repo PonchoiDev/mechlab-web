@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Fransson-DRG-SDW_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:DRG-SDW_Loadout"),PersonaAsset=(Id="MWPersonaAsset:Fransson"),UnitSkinCustomization=(MechSkinAssetId=(Id="MWUnitSkinAsset:Dragon_DRG-SDW_SKN")),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Special"),IntroDifficulty=47,IntroDate=3040.01.01-00.00.00,Tier=6,BattleValue=1539)
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

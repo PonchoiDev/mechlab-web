@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="LGB-8V_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:LGB-8V_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.MissileBoat"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=60,IntroDate=3068.01.01-00.00.00,Tier=8,BattleValue=1808,FactionRarity=(((Id="MWFactionAsset:Davion"), Rare),((Id="MWFactionAsset:FreeRasalhagueRepublic"), Rare),((Id="MWFactionAsset:LyranAlliance"), Rare),((Id="MWFactionAsset:Marik"), Rare),((Id="MWFactionAsset:Mercenaries"), Rare),((Id="MWFactionAsset:Steiner"), Rare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction"),(TagName="Unit.Usage.Market")))
+   AssociatedDLC=(TagName="DLC.DLC8")
+End Object

@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="SDR-5V_UnitCard_MC"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:SDR-5V_Loadout_mechcon"),UnitType=(UnitType=(TagName="UnitType.Mech")),BattleValue=514)
+End Object

@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="BNC-3P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:BNC-3P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=52,IntroDate=2703.01.01-00.00.00,Tier=8,BattleValue=1655,FactionRarity=(((Id="MWFactionAsset:EarthwerksIncorporated"), Rare),((Id="MWFactionAsset:IroncladSystems"), Common),((Id="MWFactionAsset:MuscleBound"), Uncommon),((Id="MWFactionAsset:Independent"), Uncommon),((Id="MWFactionAsset:Mercenaries"), Rare),((Id="MWFactionAsset:Outlaws"), Uncommon),((Id="MWFactionAsset:Periphery"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="WHM-6D_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:WHM-6D_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=40,IntroDate=2835.01.01-00.00.00,Tier=7,BattleValue=1471,FactionRarity=(((Id="MWFactionAsset:MuscleBound"), Uncommon),((Id="MWFactionAsset:VEST"), Rare),((Id="MWFactionAsset:Davion"), Uncommon),((Id="MWFactionAsset:FederatedCommonwealth"), Uncommon),((Id="MWFactionAsset:CraterCobras"), Uncommon),((Id="MWFactionAsset:LindonsCompany"), Uncommon),((Id="MWFactionAsset:NorthwindHighlanders"), Uncommon)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+End Object

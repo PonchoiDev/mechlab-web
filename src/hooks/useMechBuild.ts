@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Item } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import type { ActionResult } from '../utils/buildActions';
-import type { SharedBuild } from '../utils/buildCode';
+import { getStockBuild, type SharedBuild } from '../utils/buildCode';
 import { calculateEquippedWeight, createDefaultArmor, maximizeArmor } from '../utils/calculators';
 import {
   canEquipItem,
@@ -14,28 +14,33 @@ import {
 } from '../utils/equipment';
 import { createEmptyArmor, createEmptyLoadout } from '../utils/zones';
 
-export const useMechBuild = (mechs: Mech[], initialBuild: SharedBuild | null = null) => {
+// Al elegir un chasis se carga su build de fábrica; si no la tiene, queda vacío con la armadura por defecto.
+const getStartingBuild = (mech: Mech, mechs: Mech[], catalog: Item[]): Pick<SharedBuild, 'loadout' | 'armor'> =>
+  getStockBuild(mech, mechs, catalog) ?? { loadout: createEmptyLoadout(), armor: createDefaultArmor(mech.components) };
+
+export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: SharedBuild | null = null) => {
   const [selectedIndex, setSelectedIndex] = useState(() => Math.max(0, initialBuild ? mechs.indexOf(initialBuild.mech) : 0));
   const mech = mechs[selectedIndex];
-  const [loadout, setLoadout] = useState<EquippedLoadout>(() => initialBuild?.loadout ?? createEmptyLoadout());
-  const [armor, setArmor] = useState<ArmorState>(() => initialBuild?.armor ?? createDefaultArmor(mech.components));
+  const [startingBuild] = useState(() => initialBuild ?? getStartingBuild(mech, mechs, catalog));
+  const [loadout, setLoadout] = useState<EquippedLoadout>(startingBuild.loadout);
+  const [armor, setArmor] = useState<ArmorState>(startingBuild.armor);
   const [activeZone, setActiveZone] = useState<Zone | null>(null);
 
-  const selectMech = (index: number) => {
-    if (index === selectedIndex) return;
-
+  const applyBuild = (index: number, build: Pick<SharedBuild, 'loadout' | 'armor'>) => {
     setSelectedIndex(index);
-    setArmor(createDefaultArmor(mechs[index].components));
-    setLoadout(createEmptyLoadout());
-    setActiveZone(null);
-  };
-
-  const loadBuild = (build: SharedBuild) => {
-    setSelectedIndex(Math.max(0, mechs.indexOf(build.mech)));
     setLoadout(build.loadout);
     setArmor(build.armor);
     setActiveZone(null);
   };
+
+  const selectMech = (index: number) => {
+    if (index === selectedIndex) return;
+    applyBuild(index, getStartingBuild(mechs[index], mechs, catalog));
+  };
+
+  const loadStockBuild = () => applyBuild(selectedIndex, getStartingBuild(mech, mechs, catalog));
+
+  const loadBuild = (build: SharedBuild) => applyBuild(Math.max(0, mechs.indexOf(build.mech)), build);
 
   const equipItem = (item: Item, targetHardpoint?: number) => {
     if (!activeZone) return;
@@ -108,6 +113,7 @@ export const useMechBuild = (mechs: Mech[], initialBuild: SharedBuild | null = n
     selectedIndex,
     selectMech,
     loadBuild,
+    loadStockBuild,
     loadout,
     armor,
     activeZone,

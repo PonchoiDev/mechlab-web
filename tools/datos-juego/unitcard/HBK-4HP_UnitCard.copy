@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="HBK-4HP_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:HBK-4HP_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Medium")),CombatRole=(GameplayTags=((TagName="Unit.Role.Juggernaut"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=7,IntroDate=3025.01.01-00.00.00,Tier=3,BattleValue=995,FactionRarity=(((Id="MWFactionAsset:BullheadArmor"), Common),((Id="MWFactionAsset:IroncladSystems"), Uncommon),((Id="MWFactionAsset:LedouxEnterprises"), Uncommon),((Id="MWFactionAsset:MuscleBound"), Common),((Id="MWFactionAsset:NovaTech"), Uncommon),((Id="MWFactionAsset:StarfallCorp"), Common),((Id="MWFactionAsset:TripleF"), Uncommon),((Id="MWFactionAsset:VanguardIndustries"), Uncommon),((Id="MWFactionAsset:Independent"), Rare),((Id="MWFactionAsset:Outlaws"), Uncommon),((Id="MWFactionAsset:Periphery"), Uncommon),((Id="MWFactionAsset:TheBadDream"), VeryRare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC3")
+End Object

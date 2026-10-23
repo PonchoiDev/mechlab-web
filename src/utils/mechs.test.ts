@@ -75,6 +75,13 @@ describe('filtros del selector de chasis', () => {
     expect(allMechs.filter(hasEcm)).toHaveLength(37);
   });
 
+  it('filtra por año de aparición', () => {
+    const atlas = getMech('AS7-D');
+    expect(atlas.introYear).toBe(2755);
+    expect(matchesMechFilters(atlas, { ...EMPTY_MECH_FILTERS, maxYear: 3015 })).toBe(true);
+    expect(matchesMechFilters(atlas, { ...EMPTY_MECH_FILTERS, maxYear: 2700 })).toBe(false);
+  });
+
   it('usa los anclajes omni como comodín, contando cada uno una sola vez', () => {
     const minimums = (minHardpoints: MechFilters['minHardpoints']) => ({ ...EMPTY_MECH_FILTERS, minHardpoints });
     expect(matchesMechFilters(adder, minimums({ energy: 3 }))).toBe(true);

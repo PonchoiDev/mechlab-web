@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="BLR-1P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:BLR-1P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Assault")),CombatRole=(GameplayTags=((TagName="Unit.Role.Brawler"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=45,IntroDate=3025.01.01-00.00.00,Tier=8,BattleValue=1492,FactionRarity=(((Id="MWFactionAsset:EarthwerksIncorporated"), Common),((Id="MWFactionAsset:SolarisArms"), Rare),((Id="MWFactionAsset:FederatedCommonwealth"), VeryRare),((Id="MWFactionAsset:Kurita"), VeryRare),((Id="MWFactionAsset:LyranAlliance"), VeryRare),((Id="MWFactionAsset:Marik"), VeryRare),((Id="MWFactionAsset:Steiner"), VeryRare),((Id="MWFactionAsset:Blackhearts"), VeryRare),((Id="MWFactionAsset:BrionsLegion"), VeryRare),((Id="MWFactionAsset:WacoRangers"), VeryRare)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

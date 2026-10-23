@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="A2M2_Zombie_LCT-1E_UnitCard1"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:A2M2_Zombie_LCT-1E_Loadout1"),AIBehaviourConfig=(AIBehaviourConfigAsset=(Id="MWAIBehaviourConfigAsset:Boss_BehaviorConfig")),UnitSkinCustomization=(MechSkinAssetId=(Id="MWUnitSkinAsset:Locust_BlackInferno_SKN")),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech")),IntroUsage=(TagName="Unit.Usage.Special"),BattleValue=484)
+End Object

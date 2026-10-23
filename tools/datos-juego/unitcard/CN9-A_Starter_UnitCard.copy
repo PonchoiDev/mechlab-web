@@ -1,0 +1,3 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="CN9-A_Starter_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:CN9-A_Starter_Loadout"),bReadFromFileOnSave=False,IntroUsage=(TagName="Unit.Usage.Unique"),BattleValue=1)
+End Object

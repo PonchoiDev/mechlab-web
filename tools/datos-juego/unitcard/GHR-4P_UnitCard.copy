@@ -1,0 +1,5 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="GHR-4P_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:GHR-4P_Loadout"),UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Skirmisher"))),IntroUsage=(TagName="Unit.Usage.Market"),IntroDifficulty=46,IntroDate=2881.01.01-00.00.00,Tier=6,BattleValue=1483,FactionRarity=(((Id="MWFactionAsset:JumpJetFuel"), Common),((Id="MWFactionAsset:Independent"), Uncommon),((Id="MWFactionAsset:Mercenaries"), Rare),((Id="MWFactionAsset:Outlaws"), Uncommon),((Id="MWFactionAsset:Periphery"), Uncommon),((Id="MWFactionAsset:HansensRoughRiders"), Common)))
+   Attributes=(GameplayTags=((TagName="Unit.Usage.InstantAction")))
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object

@@ -1,0 +1,4 @@
+Begin Object Class=/Script/MechWarrior.MWUnitCardAsset Name="Vaughn-RFL-DNA_UnitCard"
+   UnitCard=(UnitClass=/Game/Objects/Mechs/DerivedMech.DerivedMech_C,MechLoadoutTemplate=(Id="MWMechLoadoutAsset:RFL-DNA_Loadout"),PersonaAsset=(Id="MWPersonaAsset:Vaughn"),UnitSkinCustomization=(MechSkinAssetId=(Id="MWUnitSkinAsset:Rifleman_RFL-DNA_SKN")),bReadFromFileOnSave=False,UnitType=(UnitType=(TagName="UnitType.Mech.Heavy")),CombatRole=(GameplayTags=((TagName="Unit.Role.Sniper"))),IntroUsage=(TagName="Unit.Usage.Special"),IntroDifficulty=48,IntroDate=3040.01.01-00.00.00,Tier=8,BattleValue=1613)
+   AssociatedDLC=(TagName="DLC.DLC1")
+End Object
