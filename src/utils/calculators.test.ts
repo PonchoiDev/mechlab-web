@@ -14,8 +14,7 @@ import {
   getWeaponStats,
   groupAmmunition,
   maximizeArmor,
-  getArmorPointsPerTon,
-  calculateMeleeDamage
+  getArmorPointsPerTon
 } from './calculators';
 import { allMechs, getItem, getMech, makeItem, makeLoadout } from '../test/fixtures';
 import type { ArmorState, MechComponents } from '../types/mech';
@@ -297,8 +296,9 @@ describe('getBuildSummary', () => {
       totalWeight: mech.baseTonnage + calculateEquippedWeight(loadout) + calculateArmorWeight(armor),
       armorPoints: calculateArmorPoints(armor),
       maxArmorPoints: calculateArmorPoints(armor),
-      // Los dos Battle Fist del Atlas suman 30 cada uno.
-      firepower: calculateFirepower(loadout) + calculateMeleeDamage(mech, loadout),
+      firepower: calculateFirepower(loadout),
+      // Los dos Battle Fist del Atlas pegan 30 cada uno.
+      meleeDamage: 60,
       heatSpike: calculateHeatSpike(loadout),
       coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType),
       topSpeed: calculateTopSpeed(mech.baseSpeed),

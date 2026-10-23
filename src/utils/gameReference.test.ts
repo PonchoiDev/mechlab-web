@@ -5,6 +5,7 @@ import { allItems, allMechs, getMech } from '../test/fixtures';
 
 // Cifras del mechlab del juego con el loadout por defecto de cada mech (capturas del 23 de octubre
 // de 2026). Si un cambio de datos o de cálculo las rompe, la web deja de coincidir con el juego.
+// La potencia de fuego del juego incluye el cuerpo a cuerpo, que la web muestra aparte.
 const GAME_REFERENCE = [
   { id: 'WHM-6D', tons: 69.93, armor: 446, firepower: 56, cooling: 2, speed: 64.8, range: 920 },
   { id: 'CRD-2R', tons: 65, armor: 384, firepower: 108.2, cooling: 2, speed: 64.8, range: 900 },
@@ -25,7 +26,7 @@ describe('cifras del juego', () => {
     expect({
       tons: truncateTo(summary.totalWeight, 2),
       armor: summary.armorPoints,
-      firepower: summary.firepower,
+      firepower: Math.round((summary.firepower + summary.meleeDamage) * 10) / 10,
       cooling: summary.coolingRate,
       speed: summary.topSpeed,
       range: Math.floor(summary.maxWeaponRange)

@@ -339,7 +339,7 @@
 
 .readout-strip {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   margin: 14px 0;
   border: 1px solid var(--work-line);
   background: rgba(25, 29, 25, 0.88);
@@ -355,13 +355,11 @@
   padding: 11px 14px;
 }
 
-.readout-cell:nth-child(4n + 2),
-.readout-cell:nth-child(4n + 3),
-.readout-cell:nth-child(4n + 4) {
+.readout-cell:not(:nth-child(5n + 1)) {
   border-left: 1px solid var(--work-line);
 }
 
-.readout-cell:nth-child(n + 5) {
+.readout-cell:nth-child(n + 6) {
   border-top: 1px solid var(--work-line);
 }
 
@@ -771,8 +769,8 @@
   .readout-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .readout-cell { padding: 10px; }
   .readout-cell:nth-child(odd) { border-left: 0; }
-  .readout-cell:nth-child(3) { border-left: 0; border-top: 1px solid var(--work-line); }
-  .readout-cell:nth-child(4) { border-top: 1px solid var(--work-line); }
+  .readout-cell:nth-child(even) { border-left: 1px solid var(--work-line); }
+  .readout-cell:nth-child(n + 3) { border-top: 1px solid var(--work-line); }
   .readout-cell strong { font-size: 13px; }
   .loadout-analysis { grid-template-columns: minmax(0, 1fr); }
   .analysis-heading { align-items: flex-start; }

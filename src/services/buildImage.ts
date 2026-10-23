@@ -353,8 +353,10 @@ const getReadouts = ({ mech, summary }: BuildImageInput) => [
   { label: 'TONNAGE', value: truncateTo(summary.totalWeight, 2).toFixed(2), unit: `/ ${mech.tonnageMax} t`, warn: summary.totalWeight > mech.tonnageMax },
   { label: 'ARMOR POINTS', value: summary.armorPoints.toFixed(0), unit: `/ ${summary.maxArmorPoints.toFixed(0)}` },
   { label: 'ARMOR MASS', value: truncateTo(summary.armorWeight, 2).toFixed(2), unit: 't' },
-  { label: 'TOP SPEED', value: summary.topSpeed.toFixed(1), unit: `km/h · ${summary.jumpJetCount} JJ` },
+  { label: 'TOP SPEED', value: summary.topSpeed.toFixed(1), unit: 'km/h' },
+  { label: 'JUMP JETS', value: String(summary.jumpJetCount) },
   { label: 'VOLLEY DAMAGE', value: String(summary.firepower) },
+  { label: 'MELEE DAMAGE', value: String(summary.meleeDamage) },
   { label: 'HEAT SPIKE', value: String(summary.heatSpike) },
   {
     label: 'TOTAL COOLING RATE',
@@ -385,21 +387,22 @@ const drawHeader = (context: Context, mech: Mech) => {
 };
 
 const READOUT_HEIGHT = 64;
+const READOUT_COLUMNS = 5;
 
-// Franja de estadísticas en 4 × 2, como la de la web.
+// Franja de estadísticas en 5 × 2, como la de la web.
 const drawReadouts = (context: Context, input: BuildImageInput, y: number) => {
   const width = WIDTH - PADDING * 2;
-  const cellWidth = width / 4;
+  const cellWidth = width / READOUT_COLUMNS;
   context.fillStyle = COLORS.panel;
   context.fillRect(PADDING, y, width, READOUT_HEIGHT * 2);
   strokeBox(context, PADDING, y, width, READOUT_HEIGHT * 2, COLORS.line);
   context.fillStyle = COLORS.line;
   context.fillRect(PADDING, y + READOUT_HEIGHT, width, 1);
-  for (let column = 1; column < 4; column += 1) context.fillRect(PADDING + column * cellWidth, y, 1, READOUT_HEIGHT * 2);
+  for (let column = 1; column < READOUT_COLUMNS; column += 1) context.fillRect(PADDING + column * cellWidth, y, 1, READOUT_HEIGHT * 2);
 
   getReadouts(input).forEach((readout, index) => {
-    const x = PADDING + (index % 4) * cellWidth + 14;
-    const cellY = y + Math.floor(index / 4) * READOUT_HEIGHT;
+    const x = PADDING + (index % READOUT_COLUMNS) * cellWidth + 14;
+    const cellY = y + Math.floor(index / READOUT_COLUMNS) * READOUT_HEIGHT;
     drawText(context, readout.label, x, cellY + 22, `500 10px ${MONO}`, COLORS.muted);
     const valueWidth = drawText(context, readout.value, x, cellY + 48, `600 18px ${MONO}`, readout.warn ? COLORS.red : COLORS.lime);
     if (readout.unit) drawText(context, readout.unit, x + valueWidth + 7, cellY + 48, `400 11px ${MONO}`, COLORS.muted);

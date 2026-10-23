@@ -13,7 +13,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-10-23',
     title: 'Stats now match the game',
     items: [
-      'Firepower adds punches from empty hands, lower arms and Battle Fists, like the in-game mechlab',
+      'New Melee damage stat: melee weapons plus punches from empty hands, lower arms and Battle Fists',
+      'Jump jets get their own spot in the stats bar',
       'Max range uses each weapon\'s maximum range (PPC 920 m, ER PPC 1500 m)',
       'Inner Sphere double heat sinks add the extra engine cooling',
       'Ferro-Fibrous armor gives 12% more points per ton, so those \'Mechs weigh what they should',

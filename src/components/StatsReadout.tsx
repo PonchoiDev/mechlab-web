@@ -15,6 +15,7 @@ export function StatsReadout({ mech, summary }: StatsReadoutProps) {
     topSpeed,
     jumpJetCount,
     firepower,
+    meleeDamage,
     heatSpike,
     coolingRate,
     maxWeaponRange
@@ -38,11 +39,19 @@ export function StatsReadout({ mech, summary }: StatsReadoutProps) {
       </div>
       <div className="readout-cell">
         <span className="readout-label">TOP SPEED</span>
-        <strong>{topSpeed.toFixed(1)} <small>km/h · {jumpJetCount} JJ</small></strong>
+        <strong>{topSpeed.toFixed(1)} <small>km/h</small></strong>
+      </div>
+      <div className="readout-cell">
+        <span className="readout-label">JUMP JETS</span>
+        <strong>{jumpJetCount}</strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label">VOLLEY DAMAGE</span>
         <strong>{firepower}</strong>
+      </div>
+      <div className="readout-cell">
+        <span className="readout-label" title="Melee weapons and punches from empty hands, lower arms and fists">MELEE DAMAGE</span>
+        <strong>{meleeDamage}</strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label">HEAT SPIKE</span>

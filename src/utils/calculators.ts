@@ -169,11 +169,15 @@ export const getWeaponPerformance = (loadout: Loadout): WeaponPerformance[] =>
     .filter(item => item.type === 'weapon')
     .map(item => ({ zone, item, ...getWeaponStats(item) })));
 
-export const calculateFirepower = (loadout: Loadout): number =>
-  roundTo(sumBy(getWeaponPerformance(loadout), weapon => weapon.damage), 1);
+const isMeleeWeapon = (item: Item) => item.weaponType === 'melee';
 
-// Daño de los anclajes cuerpo a cuerpo vacíos, que el juego suma a la potencia de fuego: una mano
-// pega como el Hammerfist de su clase, un antebrazo la mitad y los puños especiales como los Knuckles.
+// Potencia de fuego de las armas a distancia; el cuerpo a cuerpo se cuenta aparte (calculateMeleeDamage).
+export const calculateFirepower = (loadout: Loadout): number =>
+  roundTo(sumBy(getWeaponPerformance(loadout).filter(weapon => !isMeleeWeapon(weapon.item)), weapon => weapon.damage), 1);
+
+// Daño cuerpo a cuerpo: las armas cuerpo a cuerpo montadas y los anclajes vacíos, que pegan con la
+// mano (como el Hammerfist de su clase), el antebrazo (la mitad) o el puño especial (como los Knuckles).
+// El mechlab del juego lo suma a la potencia de fuego; aquí se muestra aparte.
 const HAND_DAMAGE = { light: 10, medium: 15, heavy: 20, assault: 25 };
 const FIST_DAMAGE = { light: 15, medium: 20, heavy: 25, assault: 30 };
 
@@ -181,7 +185,8 @@ export const calculateMeleeDamage = (mech: Mech, loadout: Loadout): number =>
   roundTo(sumBy(Object.keys(mech.components) as Zone[], zone =>
     sumBy(getHardpointViews(mech.components[zone].hardpoints, loadout[zone]), view => {
       const { hardpoint } = view;
-      if (hardpoint.type !== 'melee' || view.weapon) return 0;
+      if (hardpoint.type !== 'melee') return 0;
+      if (view.weapon) return getWeaponStats(view.weapon).damage;
       const weightClass = hardpoint.weightClass ?? 'medium';
       if (hardpoint.defaultWeapon) return FIST_DAMAGE[weightClass];
       return hardpoint.size === 'small' ? HAND_DAMAGE[weightClass] / 2 : HAND_DAMAGE[weightClass];
@@ -237,6 +242,7 @@ export interface BuildSummary {
   armorPoints: number;
   maxArmorPoints: number;
   firepower: number;
+  meleeDamage: number;
   heatSpike: number;
   coolingRate: number | null;
   topSpeed: number;
@@ -257,7 +263,8 @@ export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState)
     totalWeight: mech.baseTonnage + equipmentWeight + armorWeight,
     armorPoints: calculateArmorPoints(armor),
     maxArmorPoints: sumBy(Object.values(mech.components), component => component.maxArmor),
-    firepower: roundTo(calculateFirepower(loadout) + calculateMeleeDamage(mech, loadout), 1),
+    firepower: calculateFirepower(loadout),
+    meleeDamage: calculateMeleeDamage(mech, loadout),
     heatSpike: calculateHeatSpike(loadout),
     coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType),
     topSpeed: calculateTopSpeed(mech.baseSpeed),
