@@ -1,0 +1,7 @@
+Begin Object Class=/Script/MechWarrior.MWSlotTypeDataAsset Name="MASC_MKIII_SlotType"
+   SlotName=NSLOCTEXT("[ED5D0DD24479BCEDB8FC57AABFBC335B]", "07C90EFF49D71B42B1B2B58F3AAF1420", "Motive Upgrade MK III Slot")
+   SlotColour=(R=0.009721,G=1.000000,B=0.514918,A=1.000000)
+   SlotSize=3
+   WeaponSize=Invalid
+   bShowFixedSlotBorder=True
+End Object

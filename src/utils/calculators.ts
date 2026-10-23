@@ -147,6 +147,11 @@ export const calculateCoolingRate = (
 export const calculateTopSpeed = (baseSpeed: number): number =>
   roundTo(baseSpeed * GAME_SPEED_DISPLAY_FACTOR, 1);
 
+export const calculateBoostedSpeed = (loadout: Loadout, baseSpeed: number): number | null => {
+  const boost = Math.max(0, ...getEquippedItems(loadout).map(item => item.speedBoost ?? 0));
+  return boost > 0 ? roundTo(baseSpeed * GAME_SPEED_DISPLAY_FACTOR * (1 + boost), 1) : null;
+};
+
 export type WeaponStats = Omit<WeaponPerformance, 'zone' | 'item'>;
 
 export const getWeaponStats = (item: Item): WeaponStats => {
@@ -246,6 +251,8 @@ export interface BuildSummary {
   heatSpike: number;
   coolingRate: number | null;
   topSpeed: number;
+  // Velocidad con el impulso del MASC o Supercharger montado, si lo hay.
+  boostedSpeed: number | null;
   jumpJetCount: number;
   maxWeaponRange: number;
   weapons: WeaponPerformance[];
@@ -268,6 +275,7 @@ export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState)
     heatSpike: calculateHeatSpike(loadout),
     coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType),
     topSpeed: calculateTopSpeed(mech.baseSpeed),
+    boostedSpeed: calculateBoostedSpeed(loadout, mech.baseSpeed),
     jumpJetCount: getEquippedItems(loadout).filter(isJumpJet).length,
     maxWeaponRange: weapons.reduce((max, weapon) => Math.max(max, weapon.maxRange ?? 0), 0),
     weapons,

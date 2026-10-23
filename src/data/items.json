@@ -8242,6 +8242,81 @@
     "weightClass": "heavy",
     "techBase": "InnerSphere"
   },
+  "MASC_MKI": {
+    "id": "MASC_MKI",
+    "name": "MASC MK I",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "specialSlotTypes": [
+      "MASC_MKI_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "LosTech"
+  },
+  "MASC_MKII": {
+    "id": "MASC_MKII",
+    "name": "MASC MK II",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 2,
+    "specialSlotTypes": [
+      "MASC_MKII_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "LosTech"
+  },
+  "MASC_MKIII": {
+    "id": "MASC_MKIII",
+    "name": "MASC MK III",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 3,
+    "specialSlotTypes": [
+      "MASC_MKIII_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "LosTech"
+  },
+  "MASC_MKIV": {
+    "id": "MASC_MKIV",
+    "name": "MASC MK IV",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 4.0,
+    "slots": 4,
+    "specialSlotTypes": [
+      "MASC_MKIV_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "LosTech"
+  },
+  "MASC_MKV": {
+    "id": "MASC_MKV",
+    "name": "MASC MK V",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 5.0,
+    "slots": 5,
+    "specialSlotTypes": [
+      "MASC_MKV_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "LosTech"
+  },
   "MRM10": {
     "id": "MRM10",
     "name": "MRM 10",
@@ -10449,6 +10524,7 @@
     "specialSlotTypes": [
       "MASC_MKII_SlotType"
     ],
+    "speedBoost": 0.9,
     "tiers": null,
     "techBase": "Arena"
   },
@@ -11070,6 +11146,7 @@
     "specialSlotTypes": [
       "MASC_MKI_SlotType"
     ],
+    "speedBoost": 0.85,
     "tiers": null,
     "techBase": "Arena"
   },
@@ -11084,6 +11161,7 @@
     "specialSlotTypes": [
       "MASC_MKIII_SlotType"
     ],
+    "speedBoost": 1.0,
     "tiers": null,
     "techBase": "Arena"
   },
@@ -11098,6 +11176,7 @@
     "specialSlotTypes": [
       "MASC_MKIV_SlotType"
     ],
+    "speedBoost": 1.1,
     "tiers": null,
     "techBase": "Arena"
   },
@@ -11112,8 +11191,84 @@
     "specialSlotTypes": [
       "MASC_MKV_SlotType"
     ],
+    "speedBoost": 1.2,
     "tiers": null,
     "techBase": "Arena"
+  },
+  "Supercharger_MKI": {
+    "id": "Supercharger_MKI",
+    "name": "Supercharger MK I",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.5,
+    "slots": 1,
+    "specialSlotTypes": [
+      "MASC_MKI_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Retro"
+  },
+  "Supercharger_MKII": {
+    "id": "Supercharger_MKII",
+    "name": "Supercharger MK II",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 2,
+    "specialSlotTypes": [
+      "MASC_MKII_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Retro"
+  },
+  "Supercharger_MKIII": {
+    "id": "Supercharger_MKIII",
+    "name": "Supercharger MK III",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 4.5,
+    "slots": 3,
+    "specialSlotTypes": [
+      "MASC_MKIII_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Retro"
+  },
+  "Supercharger_MKIV": {
+    "id": "Supercharger_MKIV",
+    "name": "Supercharger MK IV",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 6.0,
+    "slots": 4,
+    "specialSlotTypes": [
+      "MASC_MKIV_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Retro"
+  },
+  "Supercharger_MKV": {
+    "id": "Supercharger_MKV",
+    "name": "Supercharger MK V",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 7.5,
+    "slots": 5,
+    "specialSlotTypes": [
+      "MASC_MKV_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Retro"
   },
   "TAG": {
     "id": "TAG",
@@ -11650,6 +11805,81 @@
     "techBase": "LosTech",
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5",
     "ammoPerVolley": 1
+  },
+  "c-MASC_MKI": {
+    "id": "c-MASC_MKI",
+    "name": "C-MASC MK I",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 1.0,
+    "slots": 1,
+    "specialSlotTypes": [
+      "MASC_MKI_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Clan"
+  },
+  "c-MASC_MKII": {
+    "id": "c-MASC_MKII",
+    "name": "C-MASC MK II",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 2.0,
+    "slots": 2,
+    "specialSlotTypes": [
+      "MASC_MKII_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Clan"
+  },
+  "c-MASC_MKIII": {
+    "id": "c-MASC_MKIII",
+    "name": "C-MASC MK III",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 3.0,
+    "slots": 3,
+    "specialSlotTypes": [
+      "MASC_MKIII_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Clan"
+  },
+  "c-MASC_MKIV": {
+    "id": "c-MASC_MKIV",
+    "name": "C-MASC MK IV",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 4.0,
+    "slots": 4,
+    "specialSlotTypes": [
+      "MASC_MKIV_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Clan"
+  },
+  "c-MASC_MKV": {
+    "id": "c-MASC_MKV",
+    "name": "C-MASC MK V",
+    "type": "equipment",
+    "weaponType": null,
+    "size": "small",
+    "tonnage": 5.0,
+    "slots": 5,
+    "specialSlotTypes": [
+      "MASC_MKV_SlotType"
+    ],
+    "speedBoost": 0.5,
+    "tiers": null,
+    "techBase": "Clan"
   },
   "c-TAG": {
     "id": "c-TAG",
