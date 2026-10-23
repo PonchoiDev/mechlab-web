@@ -5,6 +5,7 @@ import {
   EMPTY_MECH_FILTERS,
   getHardpointCounts,
   getMechDisplayName,
+  hasEcm,
   HARDPOINT_ABBREVIATIONS,
   HARDPOINT_FILTER_TYPES,
   hasJumpJets,
@@ -53,6 +54,7 @@ function HardpointSummary({ mech }: { mech: Mech }) {
         </span>
       ))}
       {hasJumpJets(mech) && <span className="mech-hardpoint-tag is-jump-jets">JJ</span>}
+      {hasEcm(mech) && <span className="mech-hardpoint-tag is-ecm">ECM</span>}
     </span>
   );
 }
@@ -199,6 +201,26 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 onClick={() => updateFilters(current => ({ jumpJets: !current.jumpJets }))}
               >
                 Jump jets
+              </button>
+              <button
+                type="button"
+                className="mech-filter-chip"
+                aria-pressed={filters.ecm}
+                title="Only 'Mechs with an ECM slot"
+                onClick={() => updateFilters(current => ({ ecm: !current.ecm }))}
+              >
+                ECM
+              </button>
+              <button
+                type="button"
+                className="mech-filter-chip"
+                aria-pressed={(filters.minHardpoints.ams ?? 0) > 0}
+                title="Only 'Mechs with an AMS hardpoint"
+                onClick={() => updateFilters(current => ({
+                  minHardpoints: { ...current.minHardpoints, ams: (current.minHardpoints.ams ?? 0) > 0 ? 0 : 1 }
+                }))}
+              >
+                AMS
               </button>
             </div>
 

@@ -49,19 +49,27 @@ export const hasJumpJets = (mech: Mech): boolean =>
     component.jumpJetSlots > 0 ||
     Object.entries(component.specialSlots ?? {}).some(([slotType, count]) => slotType.startsWith('JumpJet') && Number(count) > 0));
 
+// Solo pueden montar ECM los mechs con una ranura especial para él.
+export const hasEcm = (mech: Mech): boolean =>
+  Object.values(mech.components).some(component => (component.specialSlots?.ECM_SlotType ?? 0) > 0);
+
 export interface MechFilters {
   weightClasses: WeightClassName[];
   techBase: 'InnerSphere' | 'Clan' | null;
   jumpJets: boolean;
+  ecm: boolean;
   minHardpoints: Partial<Record<HardpointFilterType, number>>;
 }
 
-export const EMPTY_MECH_FILTERS: MechFilters = { weightClasses: [], techBase: null, jumpJets: false, minHardpoints: {} };
+type QueryFilters = Pick<MechFilters, 'jumpJets' | 'ecm' | 'minHardpoints'>;
+
+export const EMPTY_MECH_FILTERS: MechFilters = { weightClasses: [], techBase: null, jumpJets: false, ecm: false, minHardpoints: {} };
 
 export const countActiveFilters = (filters: MechFilters): number =>
   filters.weightClasses.length +
   (filters.techBase ? 1 : 0) +
   (filters.jumpJets ? 1 : 0) +
+  (filters.ecm ? 1 : 0) +
   Object.values(filters.minHardpoints).filter(count => (count ?? 0) > 0).length;
 
 const OMNI_COMPATIBLE: HardpointFilterType[] = ['energy', 'ballistic', 'missile'];
@@ -86,15 +94,16 @@ export const matchesMechFilters = (mech: Mech, filters: MechFilters): boolean =>
   (filters.weightClasses.length === 0 || filters.weightClasses.includes(getMechWeightClass(mech))) &&
   (!filters.techBase || (mech.techBase ?? 'InnerSphere') === filters.techBase) &&
   (!filters.jumpJets || hasJumpJets(mech)) &&
+  (!filters.ecm || hasEcm(mech)) &&
   meetsHardpointMinimums(getHardpointCounts(mech), filters.minHardpoints);
 
 const QUERY_HARDPOINT_TOKEN = /^(\d+)(e|b|m|o|art|ams)$/i;
 const TOKEN_TYPES: Record<string, HardpointFilterType> = { e: 'energy', b: 'ballistic', m: 'missile', o: 'omni', art: 'artillery', ams: 'ams' };
 
-// Separa del texto de búsqueda los atajos de filtro: "3e 2m jj" pide al menos 3 de energía,
-// 2 de misiles y jump jets. El resto del texto se busca en el nombre, la variante y el ID.
-export const parseMechQuery = (query: string): { text: string; filters: Pick<MechFilters, 'jumpJets' | 'minHardpoints'> } => {
-  const filters: Pick<MechFilters, 'jumpJets' | 'minHardpoints'> = { jumpJets: false, minHardpoints: {} };
+// Separa del texto de búsqueda los atajos de filtro: "3e 2m jj ecm" pide al menos 3 de energía,
+// 2 de misiles, jump jets y ECM. El resto del texto se busca en el nombre, la variante y el ID.
+export const parseMechQuery = (query: string): { text: string; filters: QueryFilters } => {
+  const filters: QueryFilters = { jumpJets: false, ecm: false, minHardpoints: {} };
   const words: string[] = [];
   for (const word of query.trim().split(/\s+/).filter(Boolean)) {
     const hardpoint = QUERY_HARDPOINT_TOKEN.exec(word);
@@ -102,6 +111,8 @@ export const parseMechQuery = (query: string): { text: string; filters: Pick<Mec
       filters.minHardpoints[TOKEN_TYPES[hardpoint[2].toLowerCase()]] = Number(hardpoint[1]);
     } else if (word.toLowerCase() === 'jj') {
       filters.jumpJets = true;
+    } else if (word.toLowerCase() === 'ecm') {
+      filters.ecm = true;
     } else {
       words.push(word);
     }
@@ -110,9 +121,10 @@ export const parseMechQuery = (query: string): { text: string; filters: Pick<Mec
 };
 
 // Combina los filtros del panel con los escritos en el buscador, quedándose con el más exigente.
-export const mergeMechFilters = (filters: MechFilters, extra: Pick<MechFilters, 'jumpJets' | 'minHardpoints'>): MechFilters => ({
+export const mergeMechFilters = (filters: MechFilters, extra: QueryFilters): MechFilters => ({
   ...filters,
   jumpJets: filters.jumpJets || extra.jumpJets,
+  ecm: filters.ecm || extra.ecm,
   minHardpoints: Object.fromEntries(HARDPOINT_FILTER_TYPES.map(type => [
     type,
     Math.max(filters.minHardpoints[type] ?? 0, extra.minHardpoints[type] ?? 0)

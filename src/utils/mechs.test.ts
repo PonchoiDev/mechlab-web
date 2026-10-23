@@ -3,6 +3,7 @@ import {
   EMPTY_MECH_FILTERS,
   getHardpointCounts,
   getMechDisplayName,
+  hasEcm,
   hasJumpJets,
   matchesMechFilters,
   matchesMechQuery,
@@ -67,6 +68,13 @@ describe('filtros del selector de chasis', () => {
     expect(allMechs.filter(mech => !hasJumpJets(mech)).every(mech => !matchesMechFilters(mech, { ...EMPTY_MECH_FILTERS, jumpJets: true }))).toBe(true);
   });
 
+  it('filtra por ranura de ECM', () => {
+    expect(hasEcm(getMech('ARC-T'))).toBe(true);
+    expect(hasEcm(archer)).toBe(false);
+    expect(matchesMechFilters(archer, { ...EMPTY_MECH_FILTERS, ecm: true })).toBe(false);
+    expect(allMechs.filter(hasEcm)).toHaveLength(37);
+  });
+
   it('usa los anclajes omni como comodín, contando cada uno una sola vez', () => {
     const minimums = (minHardpoints: MechFilters['minHardpoints']) => ({ ...EMPTY_MECH_FILTERS, minHardpoints });
     expect(matchesMechFilters(adder, minimums({ energy: 3 }))).toBe(true);
@@ -77,7 +85,7 @@ describe('filtros del selector de chasis', () => {
   });
 
   it('entiende los atajos del buscador', () => {
-    expect(parseMechQuery('archer 3e 2M jj')).toEqual({ text: 'archer', filters: { jumpJets: true, minHardpoints: { energy: 3, missile: 2 } } });
-    expect(parseMechQuery('1art')).toEqual({ text: '', filters: { jumpJets: false, minHardpoints: { artillery: 1 } } });
+    expect(parseMechQuery('archer 3e 2M jj ECM')).toEqual({ text: 'archer', filters: { jumpJets: true, ecm: true, minHardpoints: { energy: 3, missile: 2 } } });
+    expect(parseMechQuery('1art')).toEqual({ text: '', filters: { jumpJets: false, ecm: false, minHardpoints: { artillery: 1 } } });
   });
 });
