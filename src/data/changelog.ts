@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-23-chassis-specs',
+    date: '2026-10-23',
+    title: 'Chassis specs',
+    items: [
+      'The chassis list and the \'Mech panel show the engine, heat sinks, structure and armor like the in-game mechlab: 325 C-XL DHS C-ENDO C-FERRO AP',
+      'Hardpoints in the chassis list now show their size too: 2E·L 1E·M',
+      'Engine ratings match the game, even for OmniMechs whose files list the wrong one'
+    ]
+  },
+  {
     id: '2026-10-23-masc',
     date: '2026-10-23',
     title: 'MASC and Superchargers',

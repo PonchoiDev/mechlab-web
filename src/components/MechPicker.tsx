@@ -1,15 +1,15 @@
 import { useMemo, useState, type KeyboardEvent } from 'react';
 import type { Mech } from '../types/mech';
+import { MechSpecs } from './MechSpecs';
 import {
   countActiveFilters,
   EMPTY_MECH_FILTERS,
   GAME_START_YEAR,
   getAvailableYear,
-  getHardpointCounts,
+  getHardpointGroups,
   getMechDisplayName,
   hasEcm,
   HARDPOINT_ABBREVIATIONS,
-  HARDPOINT_FILTER_TYPES,
   hasJumpJets,
   matchesMechFilters,
   matchesMechQuery,
@@ -48,12 +48,11 @@ const filterMechs = (mechs: Mech[], query: string, filters: MechFilters) => {
 };
 
 function HardpointSummary({ mech }: { mech: Mech }) {
-  const counts = getHardpointCounts(mech);
   return (
     <span className="mech-option-hardpoints">
-      {HARDPOINT_FILTER_TYPES.filter(type => counts[type] > 0).map(type => (
-        <span key={type} className="mech-hardpoint-tag" data-weapon-type={type}>
-          {counts[type]}{HARDPOINT_ABBREVIATIONS[type]}
+      {getHardpointGroups(mech).map(({ type, size, sizeLetter, count }) => (
+        <span key={`${type}-${size}`} className="mech-hardpoint-tag" data-weapon-type={type} title={`${count} ${size} ${type} hardpoint${count > 1 ? 's' : ''}`}>
+          {count}{HARDPOINT_ABBREVIATIONS[type]}<small>{sizeLetter}</small>
         </span>
       ))}
       {hasJumpJets(mech) && <span className="mech-hardpoint-tag is-jump-jets">JJ</span>}
@@ -295,6 +294,7 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 <span>{getMechDisplayName(mech)}</span>
                 <strong>{mech.variant}</strong>
                 <HardpointSummary mech={mech} />
+                <MechSpecs mech={mech} />
                 <small>
                   {[`${mech.tonnageMax} t`, mech.introYear ? getAvailableYear(mech) : null, mech.role, mech.id !== mech.variant ? mech.id : null].filter(Boolean).join(' · ')}
                 </small>

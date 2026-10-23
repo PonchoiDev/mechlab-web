@@ -3,6 +3,8 @@ import {
   EMPTY_MECH_FILTERS,
   getAvailableYear,
   getHardpointCounts,
+  getHardpointGroups,
+  getMechSpecs,
   getMechDisplayName,
   hasEcm,
   hasJumpJets,
@@ -105,5 +107,22 @@ describe('filtros del selector de chasis', () => {
   it('entiende los atajos del buscador', () => {
     expect(parseMechQuery('archer 3e 2M jj ECM')).toEqual({ text: 'archer', filters: { jumpJets: true, ecm: true, minHardpoints: { energy: 3, missile: 2 } } });
     expect(parseMechQuery('1art')).toEqual({ text: '', filters: { jumpJets: false, ecm: false, minHardpoints: { artillery: 1 } } });
+  });
+});
+
+describe('especificaciones del chasis', () => {
+  it('se muestran como en la cabecera del mechlab del juego', () => {
+    const label = (id: string) => getMechSpecs(getMech(id)).map(spec => spec.label).join(' ');
+    expect(label('HBR-A')).toBe('325 C-XL DHS C-ENDO C-FERRO AP');
+    expect(label('BNC-LM')).toBe('380 XL DHS ENDO');
+    expect(label('CRD-2R')).toBe('260 STD DHS ENDO');
+    expect(label('HGN-732')).toBe('270 STD FERRO');
+    expect(label('WHM-6D')).toBe('280 STD');
+    expect(label('ASN-26')).toBe('280 XL DHS ENDO');
+  });
+
+  it('agrupan los anclajes por tipo y tamaño', () => {
+    expect(getHardpointGroups(getMech('HBR-A')).map(group => `${group.count}${group.type[0]}${group.sizeLetter}`))
+      .toEqual(['2eL', '1eM', '2bS', '2mL', '1oL']);
   });
 });

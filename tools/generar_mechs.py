@@ -28,6 +28,10 @@ REGEX_SPEED = re.compile(r'TopSpeed\s*=\s*([0-9.]+)', re.IGNORECASE)
 REGEX_BASE_COOLING_RATE = re.compile(r'BaseCoolingRate\s*=\s*([0-9.]+)', re.IGNORECASE)
 REGEX_TIPO_ARMADURA = re.compile(r'ArmorDataAssetId=\(Id="MWArmorDataAsset:([^"]+)"')
 REGEX_TIPO_DISIPADORES = re.compile(r'AllowedHeatSinkType=\(TagName="Equipment\.HeatSinks\.([^"]+)"')
+REGEX_TIPO_ESTRUCTURA = re.compile(r'StructureDataAssetId=\(Id="MWStructureDataAsset:([^"]+)"')
+REGEX_POTENCIA_MOTOR = re.compile(r'EngineRating=(\d+)')
+# En MW5, velocidad máxima (km/h) = potencia del motor / tonelaje * 16,2.
+FACTOR_VELOCIDAD_MOTOR = 16.2
 
 REGEX_MAX_ARMOR = re.compile(r'MaxArmor=\((.*?)\)', re.DOTALL)
 REGEX_MAX_STRUCT = re.compile(r'MaxStructure=\((.*?)\)', re.DOTALL)
@@ -341,6 +345,17 @@ def obtener_chasis(contenido, variante):
     return separar_palabras(clave) if clave else variante.split('-')[0]
 
 
+def obtener_potencia_motor(contenido, velocidad_raw, tonelaje):
+    # Muchos MDA traen dos potencias (la del mech y la de una plantilla), y en algunos omnimechs
+    # ninguna cuadra (el Adder trae 180 y 375, pero su velocidad es la de un motor 210). La velocidad
+    # sí está comprobada con el juego, así que la potencia se calcula con ella, en pasos de 5.
+    if velocidad_raw > 0 and tonelaje > 0:
+        velocidad = (velocidad_raw / 3150.0) * 97.2 * 7 / 6
+        return int(round(velocidad * tonelaje / FACTOR_VELOCIDAD_MOTOR / 5) * 5)
+    potencias = sorted({int(valor) for valor in REGEX_POTENCIA_MOTOR.findall(contenido)})
+    return potencias[0] if potencias else 0
+
+
 def parsear_mech(contenido, variante):
     chasis = obtener_chasis(contenido, variante)
     tech_base = buscar_texto(REGEX_TECH_BASE, contenido)
@@ -366,6 +381,14 @@ def parsear_mech(contenido, variante):
     mech["armorType"] = "ferroFibrous" if "ferro" in armadura.lower() else "standard"
     disipadores = (buscar_texto(REGEX_TIPO_DISIPADORES, contenido) or "Single").lower()
     mech["heatSinkType"] = "clanDouble" if disipadores == "double.clan" else "double" if disipadores == "double" else "single"
+    estructura = (buscar_texto(REGEX_TIPO_ESTRUCTURA, contenido) or "").lower()
+    mech["structureType"] = "endoSteel" if "endo" in estructura else "standard"
+    mech["engine"] = {"rating": obtener_potencia_motor(contenido, velocidad_raw, tonelaje), "xl": "bXLEngine=True" in contenido}
+    # Sonda activa de serie: el mechlab del juego la marca como AP junto al motor.
+    if "bBeagleActiveProbe=True" in contenido:
+        mech["activeProbe"] = True
+    if "bIsHeroMech=True" in contenido:
+        mech["hero"] = True
     if tech_base is not None:
         mech["techBase"] = tech_base
     return mech

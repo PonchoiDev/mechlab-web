@@ -145,3 +145,40 @@ export const mergeMechFilters = (filters: MechFilters, extra: QueryFilters): Mec
     Math.max(filters.minHardpoints[type] ?? 0, extra.minHardpoints[type] ?? 0)
   ]))
 });
+
+const SIZE_ORDER: Record<string, number> = { large: 0, medium: 1, small: 2 };
+const SIZE_LETTERS: Record<string, string> = { large: 'L', medium: 'M', small: 'S' };
+
+// Anclajes agrupados por tipo y tamaño, de mayor a menor: 2E·M 1E·L se muestra como 1E·L 2E·M.
+export const getHardpointGroups = (mech: Mech): { type: HardpointFilterType; size: string; sizeLetter: string; count: number }[] => {
+  const groups = new Map<string, { type: HardpointFilterType; size: string; sizeLetter: string; count: number }>();
+  for (const component of Object.values(mech.components)) {
+    for (const hardpoint of component.hardpoints) {
+      if (!(HARDPOINT_FILTER_TYPES as readonly string[]).includes(hardpoint.type)) continue;
+      const type = hardpoint.type as HardpointFilterType;
+      const key = `${type}:${hardpoint.size}`;
+      const group = groups.get(key) ?? { type, size: hardpoint.size, sizeLetter: SIZE_LETTERS[hardpoint.size] ?? '', count: 0 };
+      group.count += 1;
+      groups.set(key, group);
+    }
+  }
+  return [...groups.values()].sort((a, b) =>
+    HARDPOINT_FILTER_TYPES.indexOf(a.type) - HARDPOINT_FILTER_TYPES.indexOf(b.type) || SIZE_ORDER[a.size] - SIZE_ORDER[b.size]);
+};
+
+export type SpecKind = 'engine' | 'xl' | 'dhs' | 'endo' | 'ferro' | 'ap';
+
+// Especificaciones del chasis como las muestra el mechlab del juego: 325 C-XL DHS C-ENDO C-FERRO AP.
+export const getMechSpecs = (mech: Mech): { kind: SpecKind; label: string }[] => {
+  const clan = mech.techBase === 'Clan' ? 'C-' : '';
+  const specs: { kind: SpecKind; label: string }[] = [];
+  if (mech.engine) {
+    specs.push({ kind: 'engine', label: String(mech.engine.rating) });
+    specs.push(mech.engine.xl ? { kind: 'xl', label: `${clan}XL` } : { kind: 'engine', label: 'STD' });
+  }
+  if (mech.heatSinkType === 'double' || mech.heatSinkType === 'clanDouble') specs.push({ kind: 'dhs', label: 'DHS' });
+  if (mech.structureType === 'endoSteel') specs.push({ kind: 'endo', label: `${clan}ENDO` });
+  if (mech.armorType === 'ferroFibrous') specs.push({ kind: 'ferro', label: `${clan}FERRO` });
+  if (mech.activeProbe) specs.push({ kind: 'ap', label: 'AP' });
+  return specs;
+};

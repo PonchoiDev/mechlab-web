@@ -13,7 +13,7 @@ import {
   type HardpointView
 } from '../utils/equipment';
 import { getItemWeaponType, getTierName } from '../utils/items';
-import { getMechDisplayName } from '../utils/mechs';
+import { getMechDisplayName, getMechSpecs } from '../utils/mechs';
 import { ZONE_LABELS } from '../utils/zones';
 
 // Tarjeta de la build en PNG con la misma distribución que el tablero de la web, para publicarla
@@ -367,7 +367,7 @@ const getReadouts = ({ mech, summary }: BuildImageInput) => [
     value: summary.coolingRate === null ? 'N/A' : summary.coolingRate.toFixed(1),
     unit: summary.coolingRate === null ? undefined : 'heat/s'
   },
-  { label: 'MAX WEAPON RANGE', value: summary.maxWeaponRange > 0 ? `${summary.maxWeaponRange.toFixed(0)} m` : '—' }
+  { label: 'MAX WEAPON RANGE', value: summary.maxWeaponRange > 0 ? `${Math.floor(summary.maxWeaponRange)} m` : '—' }
 ];
 
 const drawHeader = (context: Context, mech: Mech) => {
@@ -378,7 +378,7 @@ const drawHeader = (context: Context, mech: Mech) => {
   const brandWidth = drawText(context, 'MechLab', PADDING + 55, PADDING + 38, `700 24px ${SANS}`, COLORS.text);
   drawText(context, 'MW5: MERCENARIES', PADDING + 55 + brandWidth + 8, PADDING + 38, `600 17px ${MONO}`, COLORS.lime);
 
-  drawText(context, `${mech.tonnageMax} t · ${getWeightClassName(mech.tonnageMax)}`, WIDTH - PADDING, PADDING + 12, `500 10px ${MONO}`, COLORS.muted, {
+  drawText(context, [`${mech.tonnageMax} t`, getWeightClassName(mech.tonnageMax), getMechSpecs(mech).map(spec => spec.label).join(' ')].filter(Boolean).join(' · '), WIDTH - PADDING, PADDING + 12, `500 10px ${MONO}`, COLORS.muted, {
     align: 'right'
   });
   const variantWidth = drawText(context, mech.variant, WIDTH - PADDING, PADDING + 38, `600 17px ${MONO}`, COLORS.lime, { align: 'right' });
