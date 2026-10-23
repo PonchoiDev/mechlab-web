@@ -150,6 +150,9 @@ def obtener_parte_cuerpo(hp_str):
 def obtener_tipo_arma(hp_str):
     hp_upper = hp_str.upper()
     # _OH: anclaje omni de los omnimechs, que admite energía, balística o misiles.
+    # Los de artillería (Arrow IV) se llaman _MH1_Artillery y solo admiten artillería.
+    if "ARTILLERY" in hp_upper:
+        return "artillery"
     for marcador, tipo in (("_EH", "energy"), ("_BH", "ballistic"), ("_MH", "missile"), ("_OH", "omni"), ("_AH", "ams"), ("MELEE", "melee")):
         if marcador in hp_upper:
             return tipo
@@ -158,6 +161,8 @@ def obtener_tipo_arma(hp_str):
 
 def obtener_tamano_arma(hp_str):
     hp_lower = hp_str.lower()
+    if "artillery" in hp_lower:
+        return "large"
 
     for tamano in ("large", "medium", "small"):
         if tamano in hp_lower:

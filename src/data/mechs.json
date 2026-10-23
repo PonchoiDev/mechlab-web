@@ -13376,8 +13376,8 @@
         "hasRearArmor": true,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -13391,8 +13391,8 @@
         "hasRearArmor": true,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -20214,8 +20214,8 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -46296,8 +46296,8 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -50784,8 +50784,8 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -50799,8 +50799,8 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -55061,8 +55061,8 @@
         "hasRearArmor": true,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -55076,8 +55076,8 @@
         "hasRearArmor": true,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -57037,8 +57037,8 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -57052,8 +57052,8 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },
@@ -74922,8 +74922,8 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
-            "type": "missile",
-            "size": "medium"
+            "type": "artillery",
+            "size": "large"
           }
         ]
       },

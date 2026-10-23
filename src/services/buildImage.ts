@@ -45,6 +45,7 @@ const WEAPON_COLORS: Record<HardpointType, string> = {
   energy: '#00d2ff',
   ballistic: '#ffb703',
   missile: '#4caf50',
+  artillery: '#ff7a45',
   ams: '#e91e63',
   melee: '#9c27b0',
   omni: '#d8dfd4'

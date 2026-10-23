@@ -69,7 +69,10 @@ def determinar_tipo_general(clase_ue4):
     return "equipment"
 
 
-def determinar_subtipo_arma(tag):
+def determinar_subtipo_arma(tag, tipo_ranura=""):
+    # El Arrow IV va en anclajes de artillería, aunque su primera etiqueta sea la de su munición (Ammo.Missile).
+    if tipo_ranura.lower().startswith("artillery"):
+        return "artillery"
     tag_lower = tag.lower()
     if "ams" in tag_lower:
         return "ams"
@@ -214,7 +217,7 @@ def construir_item(id_base, tiers):
         "id": id_base,
         "name": nombre,
         "type": tipo_general,
-        "weaponType": determinar_subtipo_arma(buscar_texto(REGEX_TAG, contenido, "")),
+        "weaponType": determinar_subtipo_arma(buscar_texto(REGEX_TAG, contenido, ""), tipo_ranura),
         "size": determinar_tamano(buscar_texto(REGEX_WEAPON_SIZE, contenido), tipo_ranura, tipo_general),
         "tonnage": buscar_numero(REGEX_TONS, contenido, 0.0)
     }
@@ -275,6 +278,11 @@ def main():
     catalogo = {id_base: construir_item(id_base, tiers) for id_base, tiers in archivos_por_item.items()}
 
     armas = [item for item in catalogo.values() if item["type"] == "weapon"]
+    # La munición toma el tipo del arma que la usa, para que la de artillería no figure como de misiles.
+    tipo_por_municion = {arma["ammoType"]: arma["weaponType"] for arma in armas if arma.get("ammoType")}
+    for item in catalogo.values():
+        if item["type"] == "ammo" and tipo_por_municion.get(item.get("ammoType")) == "artillery":
+            item["weaponType"] = "artillery"
     municiones = {item["ammoType"] for item in catalogo.values() if item["type"] == "ammo" and "ammoType" in item}
     sin_municion = sorted({item["ammoType"] for item in armas if "ammoType" in item and item["ammoType"] not in municiones})
 

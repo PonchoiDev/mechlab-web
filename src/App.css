@@ -477,6 +477,7 @@
 [data-weapon-type="energy"] { --weapon-color: #00d2ff; }
 [data-weapon-type="ballistic"] { --weapon-color: #ffb703; }
 [data-weapon-type="missile"] { --weapon-color: #4caf50; }
+[data-weapon-type="artillery"] { --weapon-color: #ff7a45; }
 [data-weapon-type="ams"] { --weapon-color: #e91e63; }
 [data-weapon-type="melee"] { --weapon-color: #9c27b0; }
 [data-weapon-type="omni"] { --weapon-color: #d8dfd4; }
