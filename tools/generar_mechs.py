@@ -135,6 +135,13 @@ def obtener_nombre_sarna(contenido, chasis, variante, tech_base):
 
 def obtener_parte_cuerpo(hp_str):
     hp_lower = hp_str.lower()
+    # Anclajes de los mechs Hero (Banshee BNC-LM, BNC-SR): Hero_Left/Hero_Right van en el brazo
+    # de ese lado y Hero_ sin lado en la cabeza, según el mechlab del juego.
+    if hp_lower.startswith("hero_"):
+        for lado in ("left", "right"):
+            if hp_lower.startswith(f"hero_{lado}_"):
+                return f"{lado}Arm"
+        return "head"
     if "head" in hp_lower:
         return "head"
     if "center" in hp_lower:
@@ -414,6 +421,29 @@ def codificar_build(datos):
     return base64.urlsafe_b64encode(texto.encode("utf-8")).decode("ascii").rstrip("=")
 
 
+def espejo(nombre):
+    contrarios = {"left": "right", "right": "left", "Left": "Right", "Right": "Left", "LEFT": "RIGHT", "RIGHT": "LEFT"}
+    return re.sub(r'left|right', lambda lado: contrarios.get(lado.group(0), lado.group(0)), nombre, flags=re.IGNORECASE)
+
+
+def corregir_lados_con_loadout(contenido_mda, contenido_loadout, ajustes, variante):
+    # Algunos MDA (HBR-A) tienen los brazos al revés que su loadout, que es lo que muestra el juego:
+    # si un anclaje no está en el loadout pero el del lado contrario sí, se usa el del loadout.
+    en_loadout = {anclaje.lower() for anclaje, _ in REGEX_ARMA_INSTALADA.findall(contenido_loadout)}
+    coincidencia = REGEX_HARDPOINTS.search(contenido_mda)
+    if not coincidencia:
+        return contenido_mda
+    bloque = coincidencia.group(1)
+    nombres = re.findall(r'"([^"]+)"', bloque)
+    corregido = bloque
+    for nombre in nombres:
+        contrario = espejo(nombre)
+        if nombre.lower() not in en_loadout and contrario.lower() in en_loadout and contrario not in nombres:
+            corregido = corregido.replace(f'"{nombre}"', f'"{contrario}"')
+            ajustes.append(f"{variante}: anclaje {nombre} -> {contrario}")
+    return contenido_mda.replace(bloque, corregido)
+
+
 def construir_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, avisos):
     variante = mech["id"]
     # Genera el mismo código que el enlace de Share (src/utils/buildCode.ts), para que la web la
@@ -550,12 +580,15 @@ def main():
                 continue
             variantes_vistas[variante] = archivo
 
-            mech = parsear_mech(contenido, variante)
             # Algunas variantes nuevas heredan el DefaultMech de su padre aunque tengan su propio loadout.
             propio = f"{variante.lower()}_loadout"
             loadout = propio if propio in loadouts else (buscar_texto(REGEX_DEFAULT_MECH, contenido) or "").lower()
-            if loadout in loadouts:
-                contenido_loadout = leer_archivo(loadouts[loadout])
+            contenido_loadout = leer_archivo(loadouts[loadout]) if loadout in loadouts else None
+            if contenido_loadout:
+                contenido = corregir_lados_con_loadout(contenido, contenido_loadout, ajustes_fabrica, variante)
+
+            mech = parsear_mech(contenido, variante)
+            if contenido_loadout:
                 ajustar_a_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, ajustes_fabrica)
                 mech["stockBuild"] = construir_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, avisos_builds)
             else:

@@ -12477,7 +12477,12 @@
         "maxArmor": 30.0,
         "structure": 15.0,
         "hasRearArmor": false,
-        "hardpoints": []
+        "hardpoints": [
+          {
+            "type": "energy",
+            "size": "small"
+          }
+        ]
       },
       "centerTorso": {
         "maxSlots": 2,
@@ -12535,6 +12540,10 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
+            "type": "energy",
+            "size": "large"
+          },
+          {
             "type": "melee",
             "size": "medium",
             "weightClass": "assault"
@@ -12585,7 +12594,7 @@
     "BaseCoolingRate": 1.0,
     "sarnaName": "Banshee",
     "techBase": "InnerSphere",
-    "stockBuild": "WzEsIkJOQy1MTSIsWzE4LDAsODQsMzQsNjAsMjAsNjAsMjAsNjQsMCw2NCwwLDY4LDAsNjgsMF0sW1tdLFsiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayIsIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayJdLFtbIkF1dG9jYW5ub24xMCIsMF0sWyJNZWRpdW1QdWxzZUxhc2VyIiwxXSwiQUMxMF9TdGFuZGFyZF9BbW1vRXF1aXBtZW50Il0sW1siTFJNMTUiLDBdLCJEb3VibGVIZWF0U2luayIsIkxSTV9BbW1vRXF1aXBtZW50IiwiTFJNX0FtbW9FcXVpcG1lbnQiXSxbXSxbWyJMYXJnZVB1bHNlTGFzZXIiLDBdXSxbXSxbXV1d",
+    "stockBuild": "WzEsIkJOQy1MTSIsWzE4LDAsODQsMzQsNjAsMjAsNjAsMjAsNjQsMCw2NCwwLDY4LDAsNjgsMF0sW1tbIlNtYWxsUHVsc2VMYXNlciIsMF1dLFsiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayIsIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayJdLFtbIkF1dG9jYW5ub24xMCIsMF0sWyJNZWRpdW1QdWxzZUxhc2VyIiwxXSwiQUMxMF9TdGFuZGFyZF9BbW1vRXF1aXBtZW50Il0sW1siTFJNMTUiLDBdLCJEb3VibGVIZWF0U2luayIsIkxSTV9BbW1vRXF1aXBtZW50IiwiTFJNX0FtbW9FcXVpcG1lbnQiXSxbWyJQUEMiLDBdXSxbWyJMYXJnZVB1bHNlTGFzZXIiLDBdXSxbXSxbXV1d",
     "introYear": 3019,
     "role": "Brawler"
   },
@@ -12659,6 +12668,18 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
+            "type": "energy",
+            "size": "large"
+          },
+          {
+            "type": "energy",
+            "size": "medium"
+          },
+          {
+            "type": "energy",
+            "size": "medium"
+          },
+          {
             "type": "melee",
             "size": "medium",
             "weightClass": "assault"
@@ -12713,7 +12734,7 @@
     "BaseCoolingRate": 1.0,
     "sarnaName": "Banshee",
     "techBase": "InnerSphere",
-    "stockBuild": "WzEsIkJOQy1TUiIsWzE4LDAsODAsMzQsNjAsMjAsNjAsMjAsNDIsMCw0MiwwLDUyLDAsNTIsMF0sW1tdLFsiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayIsIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiXSxbWyJMQlhBdXRvY2Fubm9uMTAiLDBdLCJBQzEwX0xCWF9BbW1vRXF1aXBtZW50Il0sW1siRVJQUEMiLDBdXSxbXSxbWyJTUk00IiwwXSwiU1JNX0FtbW9FcXVpcG1lbnQiXSxbIkp1bXBKZXRfQ2xhc3MxX0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3MxX0VxdWlwbWVudCJdLFsiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50Il1dXQ",
+    "stockBuild": "WzEsIkJOQy1TUiIsWzE4LDAsODAsMzQsNjAsMjAsNjAsMjAsNDIsMCw0MiwwLDUyLDAsNTIsMF0sW1tdLFsiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayIsIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiXSxbWyJMQlhBdXRvY2Fubm9uMTAiLDBdLCJBQzEwX0xCWF9BbW1vRXF1aXBtZW50Il0sW1siRVJQUEMiLDBdXSxbWyJFUlBQQyIsMF0sWyJNZWRpdW1MYXNlciIsMV0sWyJNZWRpdW1MYXNlciIsMl1dLFtbIlNSTTQiLDBdLCJTUk1fQW1tb0VxdWlwbWVudCJdLFsiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50Il0sWyJKdW1wSmV0X0NsYXNzMV9FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzMV9FcXVpcG1lbnQiXV1d",
     "introYear": 3047,
     "role": "Brawler"
   },
@@ -37606,7 +37627,11 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
-            "type": "omni",
+            "type": "energy",
+            "size": "large"
+          },
+          {
+            "type": "energy",
             "size": "large"
           },
           {
@@ -37626,11 +37651,7 @@
         "hasRearArmor": false,
         "hardpoints": [
           {
-            "type": "energy",
-            "size": "large"
-          },
-          {
-            "type": "energy",
+            "type": "omni",
             "size": "large"
           },
           {
@@ -37664,7 +37685,7 @@
     "BaseCoolingRate": 2.0,
     "sarnaName": "Hellbringer",
     "techBase": "Clan",
-    "stockBuild": "WzEsIkhCUi1BIixbMTgsMCwzNCwxNiwyOCwxNCwyOCwxNCwyMiwwLDIyLDAsMzAsMCwzMCwwXSxbW1siQy1FUk1lZGl1bUxhc2VyIiwwXV0sWyJDbGFuX01hY2hpbmVHdW5fQW1tb0VxdWlwbWVudCIsIkNsYW5Eb3VibGVIZWF0U2luayIsIkNsYW5Eb3VibGVIZWF0U2luayIsIkNsYW5Eb3VibGVIZWF0U2luayJdLFtbIkMtTmFyY0JlYWNvbiIsMF0sIkNsYW5fTkFSQ19BbW1vRXF1aXBtZW50IiwiQ2xhbkFjdGl2ZVByb2JlIl0sW1siQy1NYWNoaW5lR3VuIiwyXSxbIkMtTWFjaGluZUd1biIsMV0sWyJDLUxSTTIwIiwwXSwiQ2xhbl9MUk1fQW1tb0VxdWlwbWVudCJdLFtdLFsiQ2xhbl9BQzVfVWx0cmFfQW1tb0VxdWlwbWVudCJdLFtdLFtdXV0",
+    "stockBuild": "WzEsIkhCUi1BIixbMTgsMCwzNCwxNiwyOCwxNCwyOCwxNCwyMiwwLDIyLDAsMzAsMCwzMCwwXSxbW1siQy1FUk1lZGl1bUxhc2VyIiwwXV0sWyJDbGFuX01hY2hpbmVHdW5fQW1tb0VxdWlwbWVudCIsIkNsYW5Eb3VibGVIZWF0U2luayIsIkNsYW5Eb3VibGVIZWF0U2luayIsIkNsYW5Eb3VibGVIZWF0U2luayJdLFtbIkMtTmFyY0JlYWNvbiIsMF0sIkNsYW5fTkFSQ19BbW1vRXF1aXBtZW50IiwiQ2xhbkFjdGl2ZVByb2JlIl0sW1siQy1NYWNoaW5lR3VuIiwyXSxbIkMtTWFjaGluZUd1biIsMV0sWyJDLUxSTTIwIiwwXSwiQ2xhbl9MUk1fQW1tb0VxdWlwbWVudCJdLFtbIkMtRVJMYXJnZUxhc2VyIiwwXSxbIkMtRVJMYXJnZUxhc2VyIiwxXV0sW1siQy1VbHRyYUF1dG9jYW5ub241IiwwXSwiQ2xhbl9BQzVfVWx0cmFfQW1tb0VxdWlwbWVudCJdLFtdLFtdXV0",
     "introYear": 2926,
     "role": "Striker"
   },
