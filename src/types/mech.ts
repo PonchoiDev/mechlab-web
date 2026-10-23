@@ -1,7 +1,7 @@
-import type { Item, ItemSize, WeaponType, WeightClass } from './item';
+import type { HardpointType, Item, ItemSize, WeightClass } from './item';
 
 export interface Hardpoint {
-  type: WeaponType;
+  type: HardpointType;
   size: ItemSize;
   weightClass?: WeightClass;
   defaultWeapon?: string;

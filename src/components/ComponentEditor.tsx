@@ -192,7 +192,7 @@ export function ComponentEditor({
     ? (
       <>
         Replace{' '}
-        <span className="editor-weapon-name" data-weapon-type={selectedView.hardpoint.type}>
+        <span className="editor-weapon-name" data-weapon-type={getItemWeaponType(selectedView.weapon) ?? selectedView.hardpoint.type}>
           {selectedView.weapon.name}
         </span>{' '}
         with

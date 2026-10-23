@@ -2,7 +2,7 @@ import type { MouseEvent } from 'react';
 import { useLongPress } from '../hooks/useLongPress';
 import { getMenuPosition } from '../utils/menuPosition';
 import { getHardpointName, type HardpointView } from '../utils/equipment';
-import { getTierName } from '../utils/items';
+import { getItemWeaponType, getTierName } from '../utils/items';
 
 interface HardpointChipProps {
   view: HardpointView;
@@ -26,6 +26,8 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
   const longPress = useLongPress((x, y) => onContextMenu?.(x, y));
   const { hardpoint, weapon, builtInWeapon } = view;
   const tierName = weapon ? getTierName(weapon) : null;
+  // Un anclaje omni con arma toma el color del arma; vacío, el suyo propio.
+  const colorType = (weapon && getItemWeaponType(weapon)) || hardpoint.type;
   const className = [
     'hardpoint-chip',
     weapon ? 'is-occupied' : builtInWeapon ? 'is-built-in' : 'is-free',
@@ -43,7 +45,7 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
   );
 
   if (!onClick) {
-    return <span className={className} data-weapon-type={hardpoint.type} title={getHardpointTitle(view)}>{content}</span>;
+    return <span className={className} data-weapon-type={colorType} title={getHardpointTitle(view)}>{content}</span>;
   }
 
   const handleClick = (event: MouseEvent) => {
@@ -63,7 +65,7 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
     <button
       type="button"
       className={className}
-      data-weapon-type={hardpoint.type}
+      data-weapon-type={colorType}
       aria-pressed={isSelected}
       title={getHardpointTitle(view)}
       onClick={handleClick}

@@ -4,7 +4,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un 
 
 ## Funcionalidades
 
-- Selector de chasis con búsqueda por nombre, variante o ID (552 variantes jugables).
+- Selector de chasis con búsqueda por nombre, variante o ID (639 variantes jugables).
 - Equipamiento por componente respetando el tipo y tamaño de los anclajes y las ranuras especiales (motor, jump jets por clase, supercargadores).
 - Tiers de armas (0–5) que cambian sus estadísticas.
 - Armadura delantera y trasera por zona, con botones para vaciarla o maximizarla según el tonelaje libre.

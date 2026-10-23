@@ -1,4 +1,4 @@
-import type { WeaponType } from '../types/item';
+import type { HardpointType } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import type { BuildSummary } from '../utils/calculators';
 import {
@@ -12,7 +12,7 @@ import {
   type AmmoWarning,
   type HardpointView
 } from '../utils/equipment';
-import { getTierName } from '../utils/items';
+import { getItemWeaponType, getTierName } from '../utils/items';
 import { getMechDisplayName } from '../utils/mechs';
 import { ZONE_LABELS } from '../utils/zones';
 
@@ -41,12 +41,13 @@ const COLORS = {
   meter: '#2a312a'
 };
 
-const WEAPON_COLORS: Record<WeaponType, string> = {
+const WEAPON_COLORS: Record<HardpointType, string> = {
   energy: '#00d2ff',
   ballistic: '#ffb703',
   missile: '#4caf50',
   ams: '#e91e63',
-  melee: '#9c27b0'
+  melee: '#9c27b0',
+  omni: '#d8dfd4'
 };
 
 const EQUIPMENT_COLORS = { 'heat-sink': COLORS.cyan, 'jump-jet': COLORS.amber, module: COLORS.lime };
@@ -182,8 +183,8 @@ const getChipHeight = (context: Context, view: HardpointView, width: number) =>
   view.weapon ? WEAPON_CHIP_HEIGHT + (getWeaponLines(context, view, width).length - 1) * WEAPON_LINE_HEIGHT : FREE_CHIP_HEIGHT;
 
 const drawHardpointChip = (context: Context, view: HardpointView, x: number, y: number, width: number, height: number) => {
-  const color = WEAPON_COLORS[view.hardpoint.type];
   const { weapon } = view;
+  const color = WEAPON_COLORS[(weapon && getItemWeaponType(weapon)) || view.hardpoint.type];
 
   if (weapon) {
     const gradient = context.createLinearGradient(x, 0, x + width * 0.7, 0);

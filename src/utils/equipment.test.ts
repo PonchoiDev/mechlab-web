@@ -9,7 +9,8 @@ import {
   getEquippableItems,
   getHardpointViews,
   getReplacementWeapons,
-  getWeaponsForHardpoint
+  getWeaponsForHardpoint,
+  weaponFitsHardpoint
 } from './equipment';
 import { allItems, allMechs, getItem, getMech, makeComponent, makeLoadout } from '../test/fixtures';
 
@@ -443,5 +444,29 @@ describe('getReplacementWeapons', () => {
     const catalog = [getItem('SmallLaser'), getItem('MediumLaser'), getItem('LargeLaser'), getItem('Autocannon20')];
 
     expect(getReplacementWeapons(catalog, component, 0).map(item => item.id)).toEqual(['SmallLaser', 'MediumLaser']);
+  });
+});
+
+describe('anclajes omni', () => {
+  const omniLarge = { type: 'omni' as const, size: 'large' as const };
+
+  it('admiten energía, balística y misiles de su tamaño, pero no AMS ni cuerpo a cuerpo', () => {
+    expect(weaponFitsHardpoint(omniLarge, getItem('ERPPC'))).toBe(true);
+    expect(weaponFitsHardpoint(omniLarge, getItem('LRM15'))).toBe(true);
+    expect(weaponFitsHardpoint(omniLarge, getItem('Autocannon20'))).toBe(true);
+    expect(weaponFitsHardpoint({ type: 'omni', size: 'small' }, getItem('LRM15'))).toBe(false);
+    expect(weaponFitsHardpoint(omniLarge, getItem('AntiMissileSystem'))).toBe(false);
+  });
+
+  it('se usan después de los anclajes del tipo exacto', () => {
+    const hardpoints = [omniLarge, { type: 'energy' as const, size: 'large' as const }];
+    expect(findHardpointForWeapon(hardpoints, [], getItem('ERPPC'))).toBe(1);
+    expect(findHardpointForWeapon(hardpoints, [], getItem('LRM15'))).toBe(0);
+  });
+
+  it('el Adder Prime tiene sus dos anclajes omni en los brazos', () => {
+    const adder = getMech('ADR-PRIME');
+    const omni = Object.values(adder.components).flatMap(component => component.hardpoints).filter(hardpoint => hardpoint.type === 'omni');
+    expect(omni).toHaveLength(2);
   });
 });

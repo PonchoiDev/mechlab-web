@@ -1,5 +1,8 @@
 export type WeaponType = 'energy' | 'ballistic' | 'missile' | 'ams' | 'melee';
 
+// Los anclajes omni de los omnimechs admiten armas de energía, balísticas o de misiles.
+export type HardpointType = WeaponType | 'omni';
+
 export type ItemSize = 'small' | 'medium' | 'large';
 
 export type WeightClass = 'light' | 'medium' | 'heavy' | 'assault';
