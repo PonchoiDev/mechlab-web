@@ -1,4 +1,4 @@
-import type { Item } from '../types/item';
+import type { Item, WeaponType } from '../types/item';
 import type { ComponentData, EquippedItem, Hardpoint, Loadout, Zone } from '../types/mech';
 import { getItemSupportedSlotTypes, getItemWeaponType, getSizeName, getWeaponTypeName, isAmmoCompatibleWithWeapon, SIZE_RANK } from './items';
 import { mapZones } from './zones';
@@ -62,8 +62,13 @@ const fitsMeleeHardpoint = (hardpoint: Hardpoint, weapon: Item): boolean =>
   (hardpoint.size === 'small') === (weapon.size === 'small') &&
   SIZE_RANK[hardpoint.size] >= SIZE_RANK[weapon.size];
 
-const fitsHardpoint = (hardpoint: Hardpoint, weapon: Item, weaponType: Hardpoint['type']): boolean =>
-  hardpoint.type === weaponType && (
+const OMNI_WEAPON_TYPES: WeaponType[] = ['energy', 'ballistic', 'missile'];
+
+const fitsHardpointType = (hardpoint: Hardpoint, weaponType: WeaponType): boolean =>
+  hardpoint.type === weaponType || (hardpoint.type === 'omni' && OMNI_WEAPON_TYPES.includes(weaponType));
+
+const fitsHardpoint = (hardpoint: Hardpoint, weapon: Item, weaponType: WeaponType): boolean =>
+  fitsHardpointType(hardpoint, weaponType) && (
     weaponType === 'melee'
       ? fitsMeleeHardpoint(hardpoint, weapon)
       : SIZE_RANK[hardpoint.size] >= SIZE_RANK[weapon.size]
@@ -103,9 +108,10 @@ export const getHardpointOccupancy = (
     const weaponType = getItemWeaponType(weapon);
     if (!weaponType) continue;
 
-    const hardpointIndex = hardpoints.findIndex(
-      (hardpoint, index) => !occupiedIndices.has(index) && fitsHardpoint(hardpoint, weapon, weaponType)
-    );
+    // Primero un anclaje de su tipo; los omni, que admiten más armas, quedan para el final.
+    const fits = (hardpoint: Hardpoint, index: number) => !occupiedIndices.has(index) && fitsHardpoint(hardpoint, weapon, weaponType);
+    const exactIndex = hardpoints.findIndex((hardpoint, index) => hardpoint.type !== 'omni' && fits(hardpoint, index));
+    const hardpointIndex = exactIndex !== -1 ? exactIndex : hardpoints.findIndex(fits);
 
     if (hardpointIndex !== -1) {
       occupiedIndices.add(hardpointIndex);
@@ -162,7 +168,8 @@ export const createEquippedItem = (item: Item, equippedSlotType?: string, hardpo
   instanceId: `item-${++nextInstanceId}`
 });
 
-// Anclaje libre donde colocar un arma: el más pequeño que le sirva, para no gastar los grandes.
+// Anclaje libre donde colocar un arma: el más pequeño que le sirva, para no gastar los grandes,
+// y a igual tamaño uno de su tipo antes que uno omni.
 export const findHardpointForWeapon = (
   hardpoints: Hardpoint[],
   equippedItems: PlacedItem[],
@@ -172,7 +179,10 @@ export const findHardpointForWeapon = (
   const candidates = hardpoints
     .map((hardpoint, index) => ({ hardpoint, index }))
     .filter(({ hardpoint, index }) => !occupiedIndices.has(index) && weaponFitsHardpoint(hardpoint, weapon))
-    .sort((first, second) => SIZE_RANK[first.hardpoint.size] - SIZE_RANK[second.hardpoint.size] || first.index - second.index);
+    .sort((first, second) =>
+      SIZE_RANK[first.hardpoint.size] - SIZE_RANK[second.hardpoint.size] ||
+      Number(first.hardpoint.type === 'omni') - Number(second.hardpoint.type === 'omni') ||
+      first.index - second.index);
 
   return candidates[0]?.index ?? null;
 };

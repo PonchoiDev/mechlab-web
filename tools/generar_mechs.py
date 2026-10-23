@@ -11,6 +11,10 @@ REGEX_VARIANTE = re.compile(r'VariantName\s*=\s*INVTEXT\("([^"]+)"\)', re.IGNORE
 REGEX_KEYNAME = re.compile(r'KeyName\s*=\s*"([^"]+)"', re.IGNORECASE)
 REGEX_TAGNAME = re.compile(r'TagName\s*=\s*"Mech\.[^.]+\.[^.]+\.([^"]+)"', re.IGNORECASE)
 REGEX_CHASIS = re.compile(r'ChassisFullName\s*=\s*INVTEXT\("([^"]+)"\)', re.IGNORECASE)
+# Los archivos más recientes no traen el texto, sino una clave de la tabla de textos del juego:
+# VariantName=LOCTABLE(..., "Mech_Warhammer_WHM-7S_VariantName") y ChassisFullName=LOCTABLE(..., "Mech_Warhammer_ChassisName").
+REGEX_VARIANTE_LOCTABLE = re.compile(r'VariantName\s*=\s*LOCTABLE\(', re.IGNORECASE)
+REGEX_CHASIS_LOCTABLE = re.compile(r'ChassisFullName\s*=\s*LOCTABLE\("[^"]*",\s*"Mech_(.+?)_ChassisName"\)', re.IGNORECASE)
 REGEX_MECH_TYPE_NAME = re.compile(r'MechType=\(TagName="Mech\.[^.]+\.([^.\"]+)', re.IGNORECASE)
 REGEX_TECH_BASE = re.compile(r'TechBase=\(TagName="TechBase\.([^.\"]+)', re.IGNORECASE)
 
@@ -76,8 +80,25 @@ def buscar_numero(regex, contenido, por_defecto):
     return float(coincidencia.group(1)) if coincidencia else por_defecto
 
 
+# Disipación de calor base cambiada por un parche del juego que todavía no recogen los archivos
+# exportados. Se aplica por encima del BaseCoolingRate del archivo; el HTM-SG aparece en las notas
+# del parche como HTM-SH.
+REFRIGERACION_PARCHEADA = {
+    **dict.fromkeys([
+        "ARC-5S", "BJ2-O", "CDA-3F", "CN9-D3D", "CRD-6T", "CTF-3D", "CTF-3L", "DV-7P", "ENF-5D",
+        "HBK-6S", "HTM-SG", "KGC-A", "LCT-3M", "LGB-OC", "NSR-10P", "NSR-9FC", "NSR-WP", "PRS-P1",
+        "PRS-P1B", "PXH-R", "VT-5M", "VT-5S", "VTR-9B-LI", "WHM-7S", "ZEU-9S2"
+    ], 2.0),
+    "AWS-9Q": 1.8,
+    **dict.fromkeys(["JVN-11A", "JVN-11B", "VND-5L"], 1.4),
+}
+
+
 def obtener_variante(contenido):
-    for regex in (REGEX_VARIANTE, REGEX_KEYNAME, REGEX_TAGNAME):
+    # Con LOCTABLE, KeyName apunta a la variante de la que hereda el archivo; la etiqueta del mech
+    # (Mech.Heavy.Warhammer.WHM-7S) es la que lleva la variante real.
+    orden = (REGEX_TAGNAME, REGEX_KEYNAME) if REGEX_VARIANTE_LOCTABLE.search(contenido) else (REGEX_KEYNAME, REGEX_TAGNAME)
+    for regex in (REGEX_VARIANTE, *orden):
         variante = buscar_texto(regex, contenido)
         if variante:
             return variante
@@ -104,7 +125,7 @@ def quitar_sufijo_variante(chasis, variante):
 def obtener_nombre_sarna(contenido, chasis, variante, tech_base):
     if tech_base and tech_base.lower() == 'clan':
         tipo_mech = buscar_texto(REGEX_MECH_TYPE_NAME, contenido)
-        return re.sub(r'(?<=[a-z0-9])(?=[A-Z])', ' ', tipo_mech).strip() if tipo_mech else chasis
+        return separar_palabras(tipo_mech) if tipo_mech else chasis
     return quitar_sufijo_variante(chasis, variante)
 
 
@@ -128,7 +149,8 @@ def obtener_parte_cuerpo(hp_str):
 
 def obtener_tipo_arma(hp_str):
     hp_upper = hp_str.upper()
-    for marcador, tipo in (("_EH", "energy"), ("_BH", "ballistic"), ("_MH", "missile"), ("_AH", "ams"), ("MELEE", "melee")):
+    # _OH: anclaje omni de los omnimechs, que admite energía, balística o misiles.
+    for marcador, tipo in (("_EH", "energy"), ("_BH", "ballistic"), ("_MH", "missile"), ("_OH", "omni"), ("_AH", "ams"), ("MELEE", "melee")):
         if marcador in hp_upper:
             return tipo
     return None
@@ -262,10 +284,22 @@ def construir_componentes(contenido, clase_de_peso):
     return componentes
 
 
+def separar_palabras(clave):
+    return re.sub(r'(?<=[a-z0-9])(?=[A-Z])', ' ', clave.replace('_', ' ')).strip()
+
+
+def obtener_chasis(contenido, variante):
+    chasis = buscar_texto(REGEX_CHASIS, contenido)
+    if chasis:
+        return chasis
+    clave = buscar_texto(REGEX_CHASIS_LOCTABLE, contenido)
+    return separar_palabras(clave) if clave else variante.split('-')[0]
+
+
 def parsear_mech(contenido, variante):
-    chasis = buscar_texto(REGEX_CHASIS, contenido) or variante.split('-')[0]
+    chasis = obtener_chasis(contenido, variante)
     tech_base = buscar_texto(REGEX_TECH_BASE, contenido)
-    refrigeracion_base = buscar_numero(REGEX_BASE_COOLING_RATE, contenido, None)
+    refrigeracion_base = REFRIGERACION_PARCHEADA.get(variante, buscar_numero(REGEX_BASE_COOLING_RATE, contenido, None))
     velocidad_raw = buscar_numero(REGEX_SPEED, contenido, 0.0)
     tonelaje = buscar_numero(REGEX_TONS, contenido, 0.0)
 
@@ -325,6 +359,10 @@ def main():
     os.makedirs(os.path.dirname(ruta_destino) or ".", exist_ok=True)
     with open(ruta_destino, 'w', encoding='utf-8') as f_out:
         json.dump(base_de_datos, f_out, indent=2, ensure_ascii=False)
+
+    sin_archivo = sorted(set(REFRIGERACION_PARCHEADA) - set(variantes_vistas))
+    if sin_archivo:
+        print(f"\n⚠️ Variantes con disipación parcheada que no están en los archivos: {', '.join(sin_archivo)}")
 
     print(f"\n✅ ¡Proceso completado! Se actualizaron {len(base_de_datos)} mechs en {ruta_destino}")
     if duplicados:

@@ -1,4 +1,4 @@
-import type { Item, ItemSize, WeaponType } from '../types/item';
+import type { HardpointType, Item, ItemSize, WeaponType } from '../types/item';
 
 export const SIZE_RANK: Record<ItemSize, number> = {
   small: 1,
@@ -51,17 +51,18 @@ export const isAmmoCompatibleWithWeapon = (ammo: Item, weapon: Item): boolean =>
 
 const SIZE_NAMES: Record<ItemSize, string> = { small: 'Small', medium: 'Medium', large: 'Large' };
 
-const WEAPON_TYPE_NAMES: Record<WeaponType, string> = {
+const WEAPON_TYPE_NAMES: Record<HardpointType, string> = {
   energy: 'Energy',
   ballistic: 'Ballistic',
   missile: 'Missile',
   ams: 'AMS',
-  melee: 'Melee'
+  melee: 'Melee',
+  omni: 'Omni'
 };
 
 export const getSizeName = (size: ItemSize): string => SIZE_NAMES[size];
 
-export const getWeaponTypeName = (weaponType: WeaponType): string => WEAPON_TYPE_NAMES[weaponType];
+export const getWeaponTypeName = (weaponType: HardpointType): string => WEAPON_TYPE_NAMES[weaponType];
 
 export const isClanTech = (item: Item): boolean => item.techBase === 'Clan';
 
