@@ -30,6 +30,7 @@ import { StatsReadout } from './components/StatsReadout';
 import { SupportLink } from './components/SupportLink';
 import { Toast } from './components/Toast';
 import { UtilityToolbar } from './components/UtilityToolbar';
+import { WhatsNew } from './components/WhatsNew';
 
 const mechs = mechsData as unknown as Mech[];
 const items = Object.values(itemsData) as Item[];
@@ -143,6 +144,7 @@ export default function App() {
           </div>
         </a>
         <div className="topbar-tools">
+          <WhatsNew />
           <button type="button" className="feedback-button" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>
             Feedback
           </button>

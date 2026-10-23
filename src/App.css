@@ -2160,3 +2160,108 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   color: var(--work-red);
   font-size: 12px;
 }
+
+.whats-new {
+  position: relative;
+  align-self: flex-end;
+}
+
+.whats-new-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  color: var(--work-muted);
+  background: var(--work-panel-raised);
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.whats-new-button:hover,
+.whats-new-button:focus-visible,
+.whats-new-button[aria-expanded='true'] {
+  color: var(--work-lime);
+  border-color: var(--work-lime);
+  outline: none;
+}
+
+.whats-new-button.has-unread {
+  color: var(--work-text);
+}
+
+.whats-new-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--work-lime);
+  box-shadow: 0 0 0 2px var(--work-panel-raised), 0 0 8px rgba(195, 237, 98, 0.6);
+}
+
+.whats-new-panel {
+  position: absolute;
+  z-index: 12;
+  top: calc(100% + 6px);
+  right: 0;
+  width: min(380px, calc(100vw - 32px));
+  max-height: min(520px, 70vh);
+  overflow-y: auto;
+  border: 1px solid var(--work-line);
+  border-top: 3px solid var(--work-lime);
+  background: var(--work-panel);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+.whats-new-header {
+  padding: 12px 14px 8px;
+  border-bottom: 1px solid var(--work-line);
+}
+
+.whats-new-header h2 {
+  margin: 0;
+  color: var(--work-text);
+  font: 600 12px var(--work-mono);
+  text-transform: uppercase;
+}
+
+.whats-new-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.whats-new-entry {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(52, 61, 52, 0.6);
+}
+
+.whats-new-entry:last-child {
+  border-bottom: 0;
+}
+
+.whats-new-entry time {
+  color: var(--work-muted);
+  font: 500 10px var(--work-mono);
+}
+
+.whats-new-entry h3 {
+  margin: 3px 0 6px;
+  color: var(--work-lime);
+  font-size: 14px;
+}
+
+.whats-new-entry ul {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding-left: 16px;
+  color: var(--work-text);
+  font-size: 12px;
+  line-height: 1.45;
+}
