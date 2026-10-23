@@ -216,9 +216,19 @@
 .mech-filter-stepper.is-active { border-color: var(--weapon-color); }
 
 .mech-filter-stepper > span {
-  min-width: 26px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  min-width: 30px;
+  padding: 0 5px;
+  justify-content: center;
   color: var(--weapon-color);
-  text-align: center;
+  font-weight: 500;
+}
+
+.mech-filter-stepper > span b {
+  color: var(--work-text);
+  font-weight: 600;
 }
 
 .mech-filter-stepper button {

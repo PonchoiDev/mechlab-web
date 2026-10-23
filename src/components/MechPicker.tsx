@@ -133,7 +133,7 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
     >
       <span>
         CHASSIS / VARIANT
-        {activeFilterCount > 0 && <span className="mech-picker-filter-count">{activeFilterCount} FILTERS</span>}
+        {activeFilterCount > 0 && <span className="mech-picker-filter-count">{activeFilterCount} {activeFilterCount === 1 ? 'FILTER' : 'FILTERS'}</span>}
       </span>
       <input
         type="search"
@@ -209,7 +209,7 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 return (
                   <span key={type} className={value > 0 ? 'mech-filter-stepper is-active' : 'mech-filter-stepper'} data-weapon-type={type}>
                     <button type="button" aria-label={`Fewer ${type} hardpoints`} disabled={value === 0} onClick={() => changeMinimum(type, -1)}>−</button>
-                    <span>{value}{HARDPOINT_ABBREVIATIONS[type]}</span>
+                    <span><b>{value}</b>{HARDPOINT_ABBREVIATIONS[type].trim()}</span>
                     <button type="button" aria-label={`More ${type} hardpoints`} disabled={value === MAX_MINIMUM} onClick={() => changeMinimum(type, 1)}>+</button>
                   </span>
                 );

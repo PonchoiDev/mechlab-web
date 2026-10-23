@@ -24,11 +24,12 @@ export const getMechWeightClass = (mech: Mech): WeightClassName =>
 export const HARDPOINT_FILTER_TYPES = ['energy', 'ballistic', 'missile', 'omni', 'artillery', 'ams'] as const;
 export type HardpointFilterType = typeof HARDPOINT_FILTER_TYPES[number];
 
+// El omni se escribe entero: "2O" se confunde con "20" en la fuente monoespaciada.
 export const HARDPOINT_ABBREVIATIONS: Record<HardpointFilterType, string> = {
   energy: 'E',
   ballistic: 'B',
   missile: 'M',
-  omni: 'O',
+  omni: ' Omni',
   artillery: 'ART',
   ams: 'AMS'
 };
