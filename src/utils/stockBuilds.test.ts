@@ -33,4 +33,11 @@ describe('tamaño de los anclajes', () => {
     expect(sizes('NSR-WP', 'rightTorso')).toEqual(['missile large', 'missile large']);
     expect(sizes('NSR-WP', 'rightArm')).toEqual(['energy large', 'energy medium', 'melee medium']);
   });
+
+  it('KFX-S: omni mediano aunque su build de fábrica traiga ahí un láser grande', () => {
+    expect(sizes('KFX-S', 'rightArm')).toEqual(['omni medium', 'energy large', 'melee medium']);
+    expect(sizes('KFX-S', 'leftArm')).toEqual(['energy medium', 'missile medium', 'melee medium']);
+    expect(sizes('KFX-S', 'leftTorso')).toEqual(['ballistic small']);
+    expect(sizes('KFX-S', 'rightTorso')).toEqual(['ballistic medium']);
+  });
 });

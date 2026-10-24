@@ -545,6 +545,12 @@ def construir_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo,
             avisos.append(f"{variante}: arma {arma_id} en {anclaje}")
             continue
         zona, indice = posicion
+        # Igual que con el equipo, un arma más grande que su anclaje se deja fuera (Clan Large Pulse
+        # Laser en el omni mediano del KFX-S).
+        tamano_anclaje = mech["components"][zona]["hardpoints"][indice].get("size")
+        if ORDEN_TAMANOS.get(item.get("size"), 0) > ORDEN_TAMANOS.get(tamano_anclaje, 2):
+            avisos.append(f"{variante}: {item['name']} no cabe en {anclaje}")
+            continue
         zonas[zona].append([item["id"], indice, nivel] if nivel and nivel != item.get("tier") else [item["id"], indice])
 
     # El equipo va agrupado por componente: cada trozo empieza en MechPart=<Componente>.
@@ -586,14 +592,17 @@ def construir_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo,
 ORDEN_TAMANOS = {"small": 0, "medium": 1, "large": 2}
 
 
-def ajustar_a_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, ajustes):
-    # El juego no guarda el tamaño de los anclajes en el MDA (se deduce del nombre). La build de
-    # fábrica muestra lo que el juego monta, así que cada anclaje es al menos del tamaño de su arma de serie.
+def ajustar_a_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, ajustes, tamanos_anclajes=None):
+    # Cuando el tamaño de un anclaje se deduce de su nombre (no está en el HPS), la build de fábrica
+    # muestra lo que el juego monta, así que el anclaje es al menos del tamaño de su arma de serie.
+    # Los tamaños del HPS no se tocan: el loadout del KFX-S pone un láser grande en un omni mediano
+    # y el juego muestra el anclaje mediano.
     indices = obtener_indices_anclajes(contenido_mda)
+    del_modelo = {posicion for nombre, posicion in indices.items() if nombre in (tamanos_anclajes or {})}
     for anclaje, arma_id in REGEX_ARMA_INSTALADA.findall(contenido_loadout):
         item, _ = buscar_item(catalogo, arma_id)
         posicion = indices.get(anclaje.lower()) or indices.get(clave_anclaje(anclaje))
-        if not item or not posicion or item.get("size") not in ORDEN_TAMANOS:
+        if not item or not posicion or posicion in del_modelo or item.get("size") not in ORDEN_TAMANOS:
             continue
         zona, indice = posicion
         hardpoint = mech["components"][zona]["hardpoints"][indice]
@@ -681,7 +690,7 @@ def main():
                 sin_modelo.append(variante)
             mech = parsear_mech(contenido, variante, tamanos_por_modelo.get(modelo))
             if contenido_loadout:
-                ajustar_a_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, ajustes_fabrica)
+                ajustar_a_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, ajustes_fabrica, tamanos_por_modelo.get(modelo))
                 mech["stockBuild"] = construir_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, avisos_builds)
             else:
                 sin_build.append(variante)
