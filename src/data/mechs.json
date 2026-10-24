@@ -3913,7 +3913,7 @@
           },
           {
             "type": "missile",
-            "size": "large"
+            "size": "medium"
           }
         ]
       },
@@ -4073,7 +4073,7 @@
           },
           {
             "type": "missile",
-            "size": "large"
+            "size": "medium"
           }
         ]
       },
@@ -4092,7 +4092,7 @@
           },
           {
             "type": "missile",
-            "size": "large"
+            "size": "medium"
           }
         ]
       },
@@ -4373,7 +4373,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "medium"
           }
         ]
       },
@@ -18778,7 +18778,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "small"
           }
         ]
       },
@@ -28022,7 +28022,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "medium"
+            "size": "small"
           },
           {
             "type": "melee",
@@ -79141,7 +79141,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "medium"
           }
         ]
       },
@@ -79156,7 +79156,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "medium"
           }
         ]
       },
@@ -82030,7 +82030,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "medium"
+            "size": "small"
           }
         ]
       },
@@ -82047,7 +82047,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "medium"
+            "size": "small"
           }
         ]
       },
@@ -82179,7 +82179,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "medium"
+            "size": "small"
           },
           {
             "type": "energy",
@@ -82198,7 +82198,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "medium"
+            "size": "small"
           },
           {
             "type": "energy",
@@ -82323,7 +82323,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "small"
           }
         ]
       },
@@ -82462,7 +82462,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "small"
           }
         ]
       },
@@ -82597,7 +82597,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "small"
           }
         ]
       },
@@ -82736,7 +82736,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "medium"
           }
         ]
       },
@@ -82876,7 +82876,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "medium"
           }
         ]
       },
@@ -83015,7 +83015,7 @@
         "hardpoints": [
           {
             "type": "missile",
-            "size": "large"
+            "size": "small"
           }
         ]
       },

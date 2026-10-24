@@ -290,6 +290,7 @@ REGEX_RANURA_ANCLAJE = re.compile(r'HardpointSlotID="([^"]+)"(?:(?!HardpointSlot
 REGEX_RANURA_ARMA = re.compile(r'WeaponSlotTypeAssetId=\(Id="MWSlotTypeDataAsset:([^"]+)"')
 REGEX_RANURA_GENERICA = re.compile(r'^(?:energy|ballistic|missile|omni)_(xs|small|medium|large)', re.IGNORECASE)
 REGEX_TAMANO_ARMA = re.compile(r'WeaponSize=([A-Za-z]+)')
+REGEX_SUFIJO_RANURA = re.compile(r'(?:_(?:stream|burst|auto|shortburst))+(?=_slottype$)')
 
 
 def cargar_tamanos_de_ranuras():
@@ -312,7 +313,9 @@ def tamano_de_ranura(ranura, tamanos_de_ranuras):
     if generica:
         tamano = generica.group(1).lower()
         return "small" if tamano == "xs" else tamano
-    return tamanos_de_ranuras.get(ranura.lower())
+    # Las de versiones de un arma (LRM15_Stream, AC20_Burst, MediumLaser_Shortburst) miden lo que el arma base.
+    ranura = ranura.lower()
+    return tamanos_de_ranuras.get(ranura) or tamanos_de_ranuras.get(REGEX_SUFIJO_RANURA.sub("", ranura))
 
 
 def cargar_tamanos_anclajes():
