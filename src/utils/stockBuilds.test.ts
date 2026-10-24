@@ -22,3 +22,15 @@ describe('builds de fábrica', () => {
     expect(lost).toEqual([]);
   });
 });
+
+// Tamaños de los anclajes sacados del modelo (HPS), comprobados en el juego.
+describe('tamaño de los anclajes', () => {
+  const sizes = (id: string, zone: keyof NonNullable<(typeof allMechs)[number]>['components']) =>
+    allMechs.find(mech => mech.id === id)!.components[zone].hardpoints.map(hardpoint => `${hardpoint.type} ${hardpoint.size}`);
+
+  it('NSR-WP: cuatro anclajes grandes de misiles en los torsos', () => {
+    expect(sizes('NSR-WP', 'leftTorso')).toEqual(['missile large', 'missile large']);
+    expect(sizes('NSR-WP', 'rightTorso')).toEqual(['missile large', 'missile large']);
+    expect(sizes('NSR-WP', 'rightArm')).toEqual(['energy large', 'energy medium', 'melee medium']);
+  });
+});
