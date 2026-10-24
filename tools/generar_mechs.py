@@ -8,6 +8,9 @@ DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_ORIGEN = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "mda")
 RUTA_LOADOUTS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "loadout")
 RUTA_UNIT_CARDS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "unitcard")
+RUTA_MODELOS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "mdl")
+RUTA_ANCLAJES = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "hps")
+RUTA_ITEMS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "items")
 RUTA_ITEMS_JSON = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "items.json")
 RUTA_DESTINO_POR_DEFECTO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "mechs.json")
 
@@ -262,7 +265,10 @@ def obtener_ranuras(contenido):
     return ranuras_generales, ranuras_especiales
 
 
-def obtener_hardpoints(contenido, clase_de_peso):
+def obtener_hardpoints(contenido, clase_de_peso, tamanos_anclajes=None):
+    # tamanos_anclajes: tamaño de cada anclaje del modelo (HPS), por su nombre en minúsculas. Si un
+    # anclaje no está ahí, el tamaño se deduce del nombre.
+    tamanos_anclajes = tamanos_anclajes or {}
     hardpoints = {componente: [] for componente in MAPA_COMPONENTES.values()}
     coincidencia = REGEX_HARDPOINTS.search(contenido)
     if coincidencia:
@@ -274,8 +280,61 @@ def obtener_hardpoints(contenido, clase_de_peso):
             if tipo == "melee":
                 hardpoints[parte].append(obtener_anclaje_cuerpo_a_cuerpo(hp, contenido, clase_de_peso))
             else:
-                hardpoints[parte].append({"type": tipo, "size": obtener_tamano_arma(hp)})
+                hardpoints[parte].append({"type": tipo, "size": tamanos_anclajes.get(hp.lower()) or obtener_tamano_arma(hp)})
     return hardpoints
+
+
+REGEX_MODELO = re.compile(r"MechModel=MWMechModelDataAsset'\"?[^'\"]*/([^/.'\"]+)\.")
+REGEX_ASSET_ANCLAJES = re.compile(r'WeaponHardpointAsset=\(Id="MWMechHardpointAsset:([^"]+)"')
+REGEX_RANURA_ANCLAJE = re.compile(r'HardpointSlotID="([^"]+)"(?:(?!HardpointSlotID=).)*?SlotTypeAssetId=\(Id="MWSlotTypeDataAsset:([^"]+)"\)', re.DOTALL)
+REGEX_RANURA_ARMA = re.compile(r'WeaponSlotTypeAssetId=\(Id="MWSlotTypeDataAsset:([^"]+)"')
+REGEX_RANURA_GENERICA = re.compile(r'^(?:energy|ballistic|missile|omni)_(xs|small|medium|large)', re.IGNORECASE)
+REGEX_TAMANO_ARMA = re.compile(r'WeaponSize=([A-Za-z]+)')
+REGEX_SUFIJO_RANURA = re.compile(r'(?:_(?:stream|burst|auto|shortburst))+(?=_slottype$)')
+
+
+def cargar_tamanos_de_ranuras():
+    # Las ranuras de un arma concreta (MediumLaser_SlotType) tienen el tamaño de las armas que las usan.
+    # Sin WeaponSize, UE4 toma el primer valor del enum, Small (igual que generar_items.py).
+    tamanos = {}
+    for ruta in cargar_archivos_por_nombre(RUTA_ITEMS).values():
+        contenido = leer_archivo(ruta)
+        ranura = buscar_texto(REGEX_RANURA_ARMA, contenido)
+        if ranura:
+            tamano = (buscar_texto(REGEX_TAMANO_ARMA, contenido) or "small").lower()
+            if tamano in ORDEN_TAMANOS:
+                tamanos.setdefault(ranura.lower(), tamano)
+    return tamanos
+
+
+def tamano_de_ranura(ranura, tamanos_de_ranuras):
+    # Ranuras genéricas: Missile_Large_SlotType, Omni_MediumReduced_SlotType; XS es extra pequeña.
+    generica = REGEX_RANURA_GENERICA.match(ranura)
+    if generica:
+        tamano = generica.group(1).lower()
+        return "small" if tamano == "xs" else tamano
+    # Las de versiones de un arma (LRM15_Stream, AC20_Burst, MediumLaser_Shortburst) miden lo que el arma base.
+    ranura = ranura.lower()
+    return tamanos_de_ranuras.get(ranura) or tamanos_de_ranuras.get(REGEX_SUFIJO_RANURA.sub("", ranura))
+
+
+def cargar_tamanos_anclajes():
+    # Por modelo (Atlas_MDL), el tamaño de cada anclaje según su HPS: MDA -> MDL -> HPS.
+    modelos = cargar_archivos_por_nombre(RUTA_MODELOS)
+    asset_anclajes = cargar_archivos_por_nombre(RUTA_ANCLAJES)
+    tamanos_de_ranuras = cargar_tamanos_de_ranuras()
+    por_modelo = {}
+    for modelo, ruta in modelos.items():
+        hps = (buscar_texto(REGEX_ASSET_ANCLAJES, leer_archivo(ruta)) or "").lower()
+        if hps not in asset_anclajes:
+            continue
+        tamanos = {}
+        for anclaje, ranura in REGEX_RANURA_ANCLAJE.findall(leer_archivo(asset_anclajes[hps])):
+            tamano = tamano_de_ranura(ranura, tamanos_de_ranuras)
+            if tamano:
+                tamanos.setdefault(anclaje.lower(), tamano)
+        por_modelo[modelo] = tamanos
+    return por_modelo
 
 
 REGEX_CLAVE_ANCLAJE = re.compile(r'^(.*?_[a-z]{2}\d+)')
@@ -304,11 +363,11 @@ def obtener_indices_anclajes(contenido):
     return indices
 
 
-def construir_componentes(contenido, clase_de_peso):
+def construir_componentes(contenido, clase_de_peso, tamanos_anclajes=None):
     ranuras_generales, ranuras_especiales = obtener_ranuras(contenido)
     armadura = obtener_valores_por_componente(REGEX_MAX_ARMOR, contenido)
     estructura = obtener_valores_por_componente(REGEX_MAX_STRUCT, contenido)
-    hardpoints = obtener_hardpoints(contenido, clase_de_peso)
+    hardpoints = obtener_hardpoints(contenido, clase_de_peso, tamanos_anclajes)
 
     componentes = {}
     for componente in MAPA_COMPONENTES.values():
@@ -356,7 +415,7 @@ def obtener_potencia_motor(contenido, velocidad_raw, tonelaje):
     return potencias[0] if potencias else 0
 
 
-def parsear_mech(contenido, variante):
+def parsear_mech(contenido, variante, tamanos_anclajes=None):
     chasis = obtener_chasis(contenido, variante)
     tech_base = buscar_texto(REGEX_TECH_BASE, contenido)
     refrigeracion_base = REFRIGERACION_PARCHEADA.get(variante, buscar_numero(REGEX_BASE_COOLING_RATE, contenido, None))
@@ -370,7 +429,7 @@ def parsear_mech(contenido, variante):
         "tonnageMax": tonelaje,
         "baseTonnage": buscar_numero(REGEX_BASE_TONS, contenido, 0.0),
         "baseSpeed": round((velocidad_raw / 3150.0) * 97.2, 4) if velocidad_raw > 0 else 0.0,
-        "components": construir_componentes(contenido, obtener_clase_de_peso(tonelaje))
+        "components": construir_componentes(contenido, obtener_clase_de_peso(tonelaje), tamanos_anclajes)
     }
     if refrigeracion_base is not None:
         mech["BaseCoolingRate"] = refrigeracion_base
@@ -489,6 +548,12 @@ def construir_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo,
             avisos.append(f"{variante}: arma {arma_id} en {anclaje}")
             continue
         zona, indice = posicion
+        # Igual que con el equipo, un arma más grande que su anclaje se deja fuera (Clan Large Pulse
+        # Laser en el omni mediano del KFX-S).
+        tamano_anclaje = mech["components"][zona]["hardpoints"][indice].get("size")
+        if ORDEN_TAMANOS.get(item.get("size"), 0) > ORDEN_TAMANOS.get(tamano_anclaje, 2):
+            avisos.append(f"{variante}: {item['name']} no cabe en {anclaje}")
+            continue
         zonas[zona].append([item["id"], indice, nivel] if nivel and nivel != item.get("tier") else [item["id"], indice])
 
     # El equipo va agrupado por componente: cada trozo empieza en MechPart=<Componente>.
@@ -530,14 +595,17 @@ def construir_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo,
 ORDEN_TAMANOS = {"small": 0, "medium": 1, "large": 2}
 
 
-def ajustar_a_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, ajustes):
-    # El juego no guarda el tamaño de los anclajes en el MDA (se deduce del nombre). La build de
-    # fábrica muestra lo que el juego monta, así que cada anclaje es al menos del tamaño de su arma de serie.
+def ajustar_a_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, ajustes, tamanos_anclajes=None):
+    # Cuando el tamaño de un anclaje se deduce de su nombre (no está en el HPS), la build de fábrica
+    # muestra lo que el juego monta, así que el anclaje es al menos del tamaño de su arma de serie.
+    # Los tamaños del HPS no se tocan: el loadout del KFX-S pone un láser grande en un omni mediano
+    # y el juego muestra el anclaje mediano.
     indices = obtener_indices_anclajes(contenido_mda)
+    del_modelo = {posicion for nombre, posicion in indices.items() if nombre in (tamanos_anclajes or {})}
     for anclaje, arma_id in REGEX_ARMA_INSTALADA.findall(contenido_loadout):
         item, _ = buscar_item(catalogo, arma_id)
         posicion = indices.get(anclaje.lower()) or indices.get(clave_anclaje(anclaje))
-        if not item or not posicion or item.get("size") not in ORDEN_TAMANOS:
+        if not item or not posicion or posicion in del_modelo or item.get("size") not in ORDEN_TAMANOS:
             continue
         zona, indice = posicion
         hardpoint = mech["components"][zona]["hardpoints"][indice]
@@ -584,6 +652,8 @@ def main():
     catalogo = cargar_catalogo()
     loadouts = cargar_archivos_por_nombre(RUTA_LOADOUTS)
     unit_cards = cargar_unit_cards(cargar_archivos_por_nombre(RUTA_UNIT_CARDS))
+    tamanos_por_modelo = cargar_tamanos_anclajes()
+    sin_modelo = []
     avisos_builds = []
     ajustes_fabrica = []
     sin_build = []
@@ -618,9 +688,12 @@ def main():
             if contenido_loadout:
                 contenido = corregir_lados_con_loadout(contenido, contenido_loadout, ajustes_fabrica, variante)
 
-            mech = parsear_mech(contenido, variante)
+            modelo = (buscar_texto(REGEX_MODELO, contenido) or "").lower()
+            if modelo not in tamanos_por_modelo:
+                sin_modelo.append(variante)
+            mech = parsear_mech(contenido, variante, tamanos_por_modelo.get(modelo))
             if contenido_loadout:
-                ajustar_a_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, ajustes_fabrica)
+                ajustar_a_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, ajustes_fabrica, tamanos_por_modelo.get(modelo))
                 mech["stockBuild"] = construir_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, avisos_builds)
             else:
                 sin_build.append(variante)
@@ -642,6 +715,8 @@ def main():
         print(f"\n⚠️ Variantes sin loadout de fábrica ({len(sin_build)}): {', '.join(sorted(sin_build))}")
     if sin_unit_card:
         print(f"\n⚠️ Variantes sin unit card ({len(sin_unit_card)}): {', '.join(sorted(sin_unit_card))}")
+    if sin_modelo:
+        print(f"\n⚠️ Variantes sin modelo (MDL/HPS), con el tamaño de los anclajes deducido del nombre ({len(sin_modelo)}): {', '.join(sorted(sin_modelo))}")
     if ajustes_fabrica:
         print(f"\nℹ️ Datos del taller ajustados a la build de fábrica ({len(ajustes_fabrica)}):")
         for ajuste in ajustes_fabrica:

@@ -22,3 +22,22 @@ describe('builds de fábrica', () => {
     expect(lost).toEqual([]);
   });
 });
+
+// Tamaños de los anclajes sacados del modelo (HPS), comprobados en el juego.
+describe('tamaño de los anclajes', () => {
+  const sizes = (id: string, zone: keyof NonNullable<(typeof allMechs)[number]>['components']) =>
+    allMechs.find(mech => mech.id === id)!.components[zone].hardpoints.map(hardpoint => `${hardpoint.type} ${hardpoint.size}`);
+
+  it('NSR-WP: cuatro anclajes grandes de misiles en los torsos', () => {
+    expect(sizes('NSR-WP', 'leftTorso')).toEqual(['missile large', 'missile large']);
+    expect(sizes('NSR-WP', 'rightTorso')).toEqual(['missile large', 'missile large']);
+    expect(sizes('NSR-WP', 'rightArm')).toEqual(['energy large', 'energy medium', 'melee medium']);
+  });
+
+  it('KFX-S: omni mediano aunque su build de fábrica traiga ahí un láser grande', () => {
+    expect(sizes('KFX-S', 'rightArm')).toEqual(['omni medium', 'energy large', 'melee medium']);
+    expect(sizes('KFX-S', 'leftArm')).toEqual(['energy medium', 'missile medium', 'melee medium']);
+    expect(sizes('KFX-S', 'leftTorso')).toEqual(['ballistic small']);
+    expect(sizes('KFX-S', 'rightTorso')).toEqual(['ballistic medium']);
+  });
+});

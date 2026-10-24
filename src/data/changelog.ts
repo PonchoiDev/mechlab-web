@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-24-hardpoint-sizes',
+    date: '2026-10-24',
+    title: 'Hardpoint sizes from the game',
+    items: [
+      'Hardpoint sizes now come from each \'Mech model in the game files instead of being guessed from the stock weapon',
+      'Nearly 200 variants change, like the Nightstar NSR-WP, whose four torso missile hardpoints are all large',
+      'Extra small hardpoints, like the Adder ADR-S torso ballistics, count as small'
+    ]
+  },
+  {
     id: '2026-10-23-view-options',
     date: '2026-10-23',
     title: 'View options',
