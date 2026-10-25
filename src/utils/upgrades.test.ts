@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { decodeBuild, encodeBuild, getStockBuild } from './buildCode';
-import { createDefaultArmor, formatCoolingRate, getBuildSummary } from './calculators';
+import {
+  createDefaultArmor,
+  formatArmorPoints,
+  formatCoolingRate,
+  getArmorScale,
+  getBuildSummary,
+  scaleArmorPoints,
+  unscaleArmorPoints
+} from './calculators';
 import { canInstallUpgrade, getUpgradeModifiers, getUpgrades, sanitizeUpgrades } from './upgrades';
 import { mapZones } from './zones';
 import { allItems, allMechs, getMech } from '../test/fixtures';
@@ -49,6 +57,26 @@ describe('mejoras de la cantina en el juego', () => {
     expect(Math.floor(upgraded.armorPoints)).toBe(424);
     expect(upgraded.maxArmorPoints).toBeCloseTo(424.35, 2);
     expect(upgraded.totalWeight).toBe(base.totalWeight);
+  });
+});
+
+// Captura del juego con un Battlemaster BLR-1P con 528 de armadura: cada lado de cada componente se
+// multiplica y se trunca, y el total de arriba no se trunca.
+describe('Refined Armor por componente en el juego', () => {
+  const scale = getArmorScale(getUpgrades(['IncreasedArmor_Trait1']));
+
+  it('lados y máximos: 56 -> 57, 16 -> 16, 86 -> 88, 22 -> 22, 67 -> 68, 30 -> 30, 72 -> 73, 108 -> 110', () => {
+    expect([56, 16, 86, 22, 67, 30, 72, 108].map(points => scaleArmorPoints(points, scale))).toEqual([57, 16, 88, 22, 68, 30, 73, 110]);
+  });
+
+  it('un valor escrito con la mejora se guarda como el punto base más bajo que lo alcanza', () => {
+    expect([57, 88, 30, 68].map(shown => unscaleArmorPoints(shown, scale))).toEqual([56, 86, 30, 67]);
+  });
+
+  it('total: 528 -> 541,2', () => {
+    expect(formatArmorPoints(528 * scale)).toBe('541.2');
+    expect(formatArmorPoints(414 * scale)).toBe('424.35');
+    expect(formatArmorPoints(528)).toBe('528');
   });
 });
 

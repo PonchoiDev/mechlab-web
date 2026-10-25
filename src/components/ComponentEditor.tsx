@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Item } from '../types/item';
 import type { ComponentData, EquippedItem, Loadout, Zone } from '../types/mech';
-import { clampArmorValue, getWeaponStats } from '../utils/calculators';
+import { clampArmorValue, getWeaponStats, scaleArmorPoints } from '../utils/calculators';
 import {
   getComponentStatus,
   getEquippableItems,
@@ -48,6 +48,8 @@ interface ComponentEditorProps {
   loadout: Loadout<EquippedItem>;
   armorFront: number;
   armorRear: number;
+  // Refined Armor: los puntos se muestran multiplicados.
+  armorScale?: number;
   selectedHardpoint: number | null;
   onSelectHardpoint: (hardpointIndex: number | null) => void;
   onEquip: (item: Item, hardpointIndex?: number) => void;
@@ -106,6 +108,7 @@ export function ComponentEditor({
   loadout,
   armorFront,
   armorRear,
+  armorScale = 1,
   selectedHardpoint,
   onSelectHardpoint,
   onEquip,
@@ -435,13 +438,18 @@ export function ComponentEditor({
 
       <section className="editor-section">
         <div className="editor-section-heading">
-          <h3>Armor <span>{armorFront + armorRear} / {componentData.maxArmor}</span></h3>
+          <h3>
+            Armor <span>
+              {scaleArmorPoints(armorFront, armorScale) + scaleArmorPoints(armorRear, armorScale)} / {scaleArmorPoints(componentData.maxArmor, armorScale)}
+            </span>
+          </h3>
           <span className="editor-note">Structure {componentData.structure}</span>
         </div>
         <ArmorControl
           label={`${label} front armor`}
           shortLabel="F"
           value={armorFront}
+          scale={armorScale}
           onChange={(value) => onArmorChange('front', clampArmorValue(value, armorRear, componentData.maxArmor))}
         />
         {componentData.hasRearArmor && (
@@ -449,6 +457,7 @@ export function ComponentEditor({
             label={`${label} rear armor`}
             shortLabel="R"
             value={armorRear}
+            scale={armorScale}
             onChange={(value) => onArmorChange('rear', clampArmorValue(value, armorFront, componentData.maxArmor))}
           />
         )}

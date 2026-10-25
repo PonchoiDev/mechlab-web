@@ -1,7 +1,7 @@
 import type { HardpointType } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import type { Upgrade } from '../types/upgrade';
-import { formatCoolingRate, truncateTo, type BuildSummary } from '../utils/calculators';
+import { formatArmorPoints, formatCoolingRate, getArmorScale, scaleArmorPoints, truncateTo, type BuildSummary } from '../utils/calculators';
 import {
   getAmmoWarnings,
   getComponentStatus,
@@ -352,9 +352,12 @@ const layoutCard = (measuring: Context, input: BuildImageInput, zone: Zone, widt
     context.fillRect(left, armorTop + 13, 46, 5);
     context.fillStyle = isLow ? COLORS.amber : COLORS.lime;
     context.fillRect(left, armorTop + 13, component.maxArmor > 0 ? 46 * Math.min(1, total / component.maxArmor) : 0, 5);
-    drawText(context, `ARMOR ${total} / ${component.maxArmor}`, left + 54, armorTop + 20, `500 10px ${MONO}`, armorColor);
+    // Con Refined Armor, cada lado multiplicado y truncado, como en el juego.
+    const scale = getArmorScale(input.upgrades);
+    const [shownFront, shownRear] = [scaleArmorPoints(front, scale), scaleArmorPoints(rear, scale)];
+    drawText(context, `ARMOR ${shownFront + shownRear} / ${scaleArmorPoints(component.maxArmor, scale)}`, left + 54, armorTop + 20, `500 10px ${MONO}`, armorColor);
     if (component.hasRearArmor) {
-      drawText(context, `FRONT ${front} · REAR ${rear}`, x + width - CARD_PADDING, armorTop + 20, `500 10px ${MONO}`, armorColor, { align: 'right' });
+      drawText(context, `FRONT ${shownFront} · REAR ${shownRear}`, x + width - CARD_PADDING, armorTop + 20, `500 10px ${MONO}`, armorColor, { align: 'right' });
     }
   };
 
@@ -365,7 +368,7 @@ const layoutCard = (measuring: Context, input: BuildImageInput, zone: Zone, widt
 
 const getReadouts = ({ mech, summary }: BuildImageInput) => [
   { label: 'TONNAGE', value: truncateTo(summary.totalWeight, 2).toFixed(2), unit: `/ ${mech.tonnageMax} t`, warn: summary.totalWeight > mech.tonnageMax },
-  { label: 'ARMOR POINTS', value: summary.armorPoints.toFixed(0), unit: `/ ${summary.maxArmorPoints.toFixed(0)}` },
+  { label: 'ARMOR POINTS', value: formatArmorPoints(summary.armorPoints), unit: `/ ${formatArmorPoints(summary.maxArmorPoints)}` },
   { label: 'ARMOR MASS', value: truncateTo(summary.armorWeight, 2).toFixed(2), unit: 't' },
   {
     label: 'TOP SPEED',

@@ -1,5 +1,5 @@
 import type { Mech } from '../types/mech';
-import { formatCoolingRate, truncateTo, type BuildSummary } from '../utils/calculators';
+import { formatArmorPoints, formatCoolingRate, truncateTo, type BuildSummary } from '../utils/calculators';
 
 interface StatsReadoutProps {
   mech: Mech;
@@ -29,7 +29,7 @@ export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
     coolingRate,
     maxWeaponRange
   } = summary;
-  const formatArmor = (points: number) => truncateTo(points, 0).toFixed(0);
+  const formatArmor = formatArmorPoints;
   const formatCooling = (rate: number | null) => rate === null ? 'N/A' : formatCoolingRate(rate);
   const formatRange = (range: number) => range > 0 ? `${Math.floor(range)} m` : '—';
 

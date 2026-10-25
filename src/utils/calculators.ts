@@ -26,6 +26,18 @@ export const getArmorPointsPerTon = (mech: Pick<Mech, 'armorType'>): number =>
   mech.armorType === 'ferroFibrous' ? FERRO_FIBROUS_POINTS_PER_TON : ARMOR_POINTS_PER_TON;
 
 // El juego trunca las cifras en vez de redondearlas (69,9375 t se muestra como 69,93).
+// Refined Armor sube los puntos sin cambiar el peso. La armadura se guarda en puntos base y el juego
+// muestra cada lado de cada componente multiplicado y truncado (56 -> 57 con +2,5 %), y el total de
+// arriba sin truncar (528 -> 541,2).
+export const scaleArmorPoints = (points: number, scale: number): number => truncateTo(points * scale, 0);
+
+// Punto base más bajo que llega a un valor mostrado con la mejora (57 con +2,5 % -> 56).
+export const unscaleArmorPoints = (shown: number, scale: number): number => Math.ceil(shown / scale - 1e-9);
+
+export const formatArmorPoints = (points: number): string => String(Number(points.toFixed(2)));
+
+export const getArmorScale = (upgrades: Upgrade[]): number => 1 + getUpgradeModifiers(upgrades).armor;
+
 // Refrigeración con un decimal, o dos si los tiene, como el juego (3.0, 2.21).
 export const formatCoolingRate = (rate: number): string => {
   const twoDecimals = rate.toFixed(2);

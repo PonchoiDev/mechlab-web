@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { ComponentData, EquippedItem } from '../types/mech';
-import { clampArmorValue } from '../utils/calculators';
+import { clampArmorValue, scaleArmorPoints } from '../utils/calculators';
 import {
   getComponentStatus,
   getEquipmentCategory,
@@ -31,6 +31,8 @@ interface ComponentCardProps {
   onEquipmentMenu: (itemName: string, x: number, y: number) => void;
   // Vista expandida: cada ranura es una celda y cada pieza ocupa las que usa.
   expandedSlots?: boolean;
+  // Refined Armor: los puntos se muestran multiplicados.
+  armorScale?: number;
 }
 
 interface EquipmentChipProps {
@@ -121,13 +123,16 @@ export function ComponentCard({
   onArmorChange,
   onHardpointMenu,
   onEquipmentMenu,
-  expandedSlots = false
+  expandedSlots = false,
+  armorScale = 1
 }: ComponentCardProps) {
   const status = getComponentStatus(componentData, equippedItems);
   const hardpoints = getHardpointViews(componentData.hardpoints, equippedItems);
   const equipment = groupEquipment(equippedItems);
   const armorTotal = armorFront + armorRear;
   const isArmorLow = armorTotal < componentData.maxArmor;
+  const shownArmor = scaleArmorPoints(armorFront, armorScale) + scaleArmorPoints(armorRear, armorScale);
+  const shownMaxArmor = scaleArmorPoints(componentData.maxArmor, armorScale);
   const stateClass = status.isOverSlots ? 'is-over' : status.hasFreeSpace ? 'has-free-space' : 'is-full';
 
   return (
@@ -224,17 +229,18 @@ export function ComponentCard({
       </div>}
 
       <div className={isArmorLow ? 'component-card-armor is-low' : 'component-card-armor'}>
-        <span className="component-card-armor-total" title={`Armor ${armorTotal} / ${componentData.maxArmor}`}>
+        <span className="component-card-armor-total" title={`Armor ${shownArmor} / ${shownMaxArmor}`}>
           <span className="armor-meter" aria-hidden="true">
             <span style={{ width: `${componentData.maxArmor > 0 ? armorTotal / componentData.maxArmor * 100 : 0}%` }} />
           </span>
-          Armor {armorTotal} / {componentData.maxArmor}
+          Armor {shownArmor} / {shownMaxArmor}
         </span>
         <span className="component-card-armor-controls">
           <ArmorControl
             label={`${label} front armor`}
             shortLabel={componentData.hasRearArmor ? 'Front' : 'Armor'}
             value={armorFront}
+            scale={armorScale}
             onChange={(value) => onArmorChange('front', clampArmorValue(value, armorRear, componentData.maxArmor))}
           />
           {componentData.hasRearArmor && (
@@ -242,6 +248,7 @@ export function ComponentCard({
               label={`${label} rear armor`}
               shortLabel="Rear"
               value={armorRear}
+              scale={armorScale}
               onChange={(value) => onArmorChange('rear', clampArmorValue(value, armorFront, componentData.maxArmor))}
             />
           )}

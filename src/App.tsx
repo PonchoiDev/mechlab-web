@@ -7,7 +7,7 @@ import type { Item } from './types/item';
 import { replaceWeapon, type ActionResult } from './utils/buildActions';
 import { encodeBuild, getBuildUrl, getStockBuild, readBuildFromLocation } from './utils/buildCode';
 import { normalizeBuildName } from './utils/savedBuilds';
-import { getBuildSummary } from './utils/calculators';
+import { getArmorScale, getBuildSummary } from './utils/calculators';
 import { getUpgrades, getUsedUpgradeSlots } from './utils/upgrades';
 import { getBuildIssues } from './utils/issues';
 import { ZONE_LABELS } from './utils/zones';
@@ -55,6 +55,7 @@ export default function App() {
     () => upgrades.length > 0 ? getBuildSummary(mech, loadout, armor) : undefined,
     [mech, loadout, armor, upgrades]
   );
+  const armorScale = getArmorScale(upgrades);
   const [isUpgradesOpen, setIsUpgradesOpen] = useState(false);
   const issues = useMemo(() => getBuildIssues(mech, loadout, armor), [mech, loadout, armor]);
   const equippedItems = Object.values(loadout).flat();
@@ -242,6 +243,7 @@ export default function App() {
         <MechBoard
           expandedSlots={view.expandedSlots}
           compact={view.compactBoard}
+          armorScale={armorScale}
           mech={mech}
           loadout={loadout}
           armor={armor}
@@ -274,6 +276,7 @@ export default function App() {
           loadout={loadout}
           armorFront={armor[activeZone].front}
           armorRear={armor[activeZone].rear}
+          armorScale={armorScale}
           selectedHardpoint={selectedHardpoint}
           onSelectHardpoint={setSelectedHardpoint}
           onEquip={build.equipItem}
