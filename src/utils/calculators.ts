@@ -1,7 +1,9 @@
 import type { Item } from '../types/item';
 import type { ArmorState, Loadout, Mech, MechComponents, Zone } from '../types/mech';
+import type { Upgrade } from '../types/upgrade';
 import { getHardpointViews } from './equipment';
 import { getAmmoLabel, isJumpJet } from './items';
+import { getUpgradeModifiers, NO_UPGRADE_MODIFIERS, type UpgradeModifiers } from './upgrades';
 import { mapZones } from './zones';
 
 const ARMOR_POINTS_PER_TON = 32;
@@ -144,12 +146,12 @@ export const calculateCoolingRate = (
     1
   );
 
-export const calculateTopSpeed = (baseSpeed: number): number =>
-  roundTo(baseSpeed * GAME_SPEED_DISPLAY_FACTOR, 1);
+export const calculateTopSpeed = (baseSpeed: number, speedBonus = 0): number =>
+  roundTo(baseSpeed * GAME_SPEED_DISPLAY_FACTOR * (1 + speedBonus), 1);
 
-export const calculateBoostedSpeed = (loadout: Loadout, baseSpeed: number): number | null => {
+export const calculateBoostedSpeed = (loadout: Loadout, baseSpeed: number, speedBonus = 0): number | null => {
   const boost = Math.max(0, ...getEquippedItems(loadout).map(item => item.speedBoost ?? 0));
-  return boost > 0 ? roundTo(baseSpeed * GAME_SPEED_DISPLAY_FACTOR * (1 + boost), 1) : null;
+  return boost > 0 ? roundTo(baseSpeed * GAME_SPEED_DISPLAY_FACTOR * (1 + speedBonus) * (1 + boost), 1) : null;
 };
 
 export type WeaponStats = Omit<WeaponPerformance, 'zone' | 'item'>;
@@ -169,25 +171,42 @@ export const getWeaponStats = (item: Item): WeaponStats => {
   };
 };
 
-export const getWeaponPerformance = (loadout: Loadout): WeaponPerformance[] =>
+// Con las mejoras de la cantina, el daño y el alcance de cada tipo de arma suben en su porcentaje.
+const applyWeaponModifiers = (item: Item, stats: WeaponStats, modifiers: UpgradeModifiers): WeaponStats => {
+  const weaponType = item.weaponType ?? undefined;
+  const damageBonus = weaponType ? modifiers.damage[weaponType] ?? 0 : 0;
+  const rangeBonus = weaponType ? modifiers.range[weaponType] ?? 0 : 0;
+  if (damageBonus === 0 && rangeBonus === 0) return stats;
+  const damage = stats.damage * (1 + damageBonus);
+  return {
+    ...stats,
+    damage,
+    dps: damage * stats.rpm / 60,
+    range: stats.range === null ? null : stats.range * (1 + rangeBonus),
+    maxRange: stats.maxRange === null ? null : stats.maxRange * (1 + rangeBonus)
+  };
+};
+
+export const getWeaponPerformance = (loadout: Loadout, modifiers = NO_UPGRADE_MODIFIERS): WeaponPerformance[] =>
   (Object.entries(loadout) as [Zone, Item[]][]).flatMap(([zone, items]) => items
     .filter(item => item.type === 'weapon')
-    .map(item => ({ zone, item, ...getWeaponStats(item) })));
+    .map(item => ({ zone, item, ...applyWeaponModifiers(item, getWeaponStats(item), modifiers) })));
 
 const isMeleeWeapon = (item: Item) => item.weaponType === 'melee';
 
 // Potencia de fuego de las armas a distancia; el cuerpo a cuerpo se cuenta aparte (calculateMeleeDamage).
-export const calculateFirepower = (loadout: Loadout): number =>
-  roundTo(sumBy(getWeaponPerformance(loadout).filter(weapon => !isMeleeWeapon(weapon.item)), weapon => weapon.damage), 1);
+export const calculateFirepower = (loadout: Loadout, modifiers = NO_UPGRADE_MODIFIERS): number =>
+  roundTo(sumBy(getWeaponPerformance(loadout, modifiers).filter(weapon => !isMeleeWeapon(weapon.item)), weapon => weapon.damage), 1);
 
 // Daño cuerpo a cuerpo: las armas cuerpo a cuerpo montadas y los anclajes vacíos, que pegan con la
 // mano (como el Hammerfist de su clase), el antebrazo (la mitad) o el puño especial (como los Knuckles).
-// El mechlab del juego lo suma a la potencia de fuego; aquí se muestra aparte.
+// El mechlab del juego lo suma a la potencia de fuego; aquí se muestra aparte. Las mejoras de daño
+// cuerpo a cuerpo (Damage Tuning) cuentan también para los puñetazos.
 const HAND_DAMAGE = { light: 10, medium: 15, heavy: 20, assault: 25 };
 const FIST_DAMAGE = { light: 15, medium: 20, heavy: 25, assault: 30 };
 
-export const calculateMeleeDamage = (mech: Mech, loadout: Loadout): number =>
-  roundTo(sumBy(Object.keys(mech.components) as Zone[], zone =>
+export const calculateMeleeDamage = (mech: Mech, loadout: Loadout, modifiers = NO_UPGRADE_MODIFIERS): number =>
+  roundTo((1 + (modifiers.damage.melee ?? 0)) * sumBy(Object.keys(mech.components) as Zone[], zone =>
     sumBy(getHardpointViews(mech.components[zone].hardpoints, loadout[zone]), view => {
       const { hardpoint } = view;
       if (hardpoint.type !== 'melee') return 0;
@@ -259,23 +278,27 @@ export interface BuildSummary {
   ammunition: AmmunitionGroup[];
 }
 
-export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState): BuildSummary => {
+// Las mejoras de la cantina suben las cifras sin cambiar el peso: Refined Armor I da +2,5 % de
+// puntos de armadura (en el juego, 414/414 -> 424/424,35 con las mismas toneladas).
+export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState, upgrades: Upgrade[] = []): BuildSummary => {
+  const modifiers = getUpgradeModifiers(upgrades);
   const equipmentWeight = calculateEquippedWeight(loadout);
   const armorWeight = calculateArmorWeight(armor, getArmorPointsPerTon(mech));
-  const weapons = getWeaponPerformance(loadout);
+  const weapons = getWeaponPerformance(loadout, modifiers);
+  const coolingRate = calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType);
 
   return {
     equipmentWeight,
     armorWeight,
     totalWeight: mech.baseTonnage + equipmentWeight + armorWeight,
-    armorPoints: calculateArmorPoints(armor),
-    maxArmorPoints: sumBy(Object.values(mech.components), component => component.maxArmor),
-    firepower: calculateFirepower(loadout),
-    meleeDamage: calculateMeleeDamage(mech, loadout),
+    armorPoints: calculateArmorPoints(armor) * (1 + modifiers.armor),
+    maxArmorPoints: sumBy(Object.values(mech.components), component => component.maxArmor) * (1 + modifiers.armor),
+    firepower: calculateFirepower(loadout, modifiers),
+    meleeDamage: calculateMeleeDamage(mech, loadout, modifiers),
     heatSpike: calculateHeatSpike(loadout),
-    coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType),
-    topSpeed: calculateTopSpeed(mech.baseSpeed),
-    boostedSpeed: calculateBoostedSpeed(loadout, mech.baseSpeed),
+    coolingRate: coolingRate === null ? null : roundTo(coolingRate * (1 + modifiers.cooling), 1),
+    topSpeed: calculateTopSpeed(mech.baseSpeed, modifiers.topSpeed),
+    boostedSpeed: calculateBoostedSpeed(loadout, mech.baseSpeed, modifiers.topSpeed),
     jumpJetCount: getEquippedItems(loadout).filter(isJumpJet).length,
     maxWeaponRange: weapons.reduce((max, weapon) => Math.max(max, weapon.maxRange ?? 0), 0),
     weapons,

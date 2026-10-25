@@ -1,0 +1,541 @@
+[
+  {
+    "id": "IncreasedAccelerationDeceleration_Trait1",
+    "name": "Responsive Movement I",
+    "category": "Mobility",
+    "slots": 1,
+    "description": "+10% ACCELERATION & DECELERATION",
+    "effects": []
+  },
+  {
+    "id": "IncreasedAccelerationDeceleration_Trait2",
+    "name": "Responsive Movement II",
+    "category": "Mobility",
+    "slots": 2,
+    "description": "+20% ACCELERATION & DECELERATION",
+    "effects": []
+  },
+  {
+    "id": "IncreasedArmor_Trait1",
+    "name": "Refined Armor I",
+    "category": "Defense",
+    "slots": 1,
+    "description": "+2.5% ARMOR",
+    "effects": [
+      {
+        "stat": "armor",
+        "value": 0.025
+      }
+    ]
+  },
+  {
+    "id": "IncreasedArmor_Trait2",
+    "name": "Refined Armor II",
+    "category": "Defense",
+    "slots": 2,
+    "description": "+5% ARMOR",
+    "effects": [
+      {
+        "stat": "armor",
+        "value": 0.05
+      }
+    ]
+  },
+  {
+    "id": "IncreasedBallisticDamage_Trait1",
+    "name": "Superior Detonation I",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "+5% BALLISTIC DAMAGE",
+    "effects": [
+      {
+        "stat": "damage",
+        "value": 0.05,
+        "weaponTypes": [
+          "ballistic"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedBallisticDamage_Trait2",
+    "name": "Superior Detonation II",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "+10% BALLISTIC DAMAGE",
+    "effects": [
+      {
+        "stat": "damage",
+        "value": 0.1,
+        "weaponTypes": [
+          "ballistic"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedBallisticRangeAndSpeed_Trait1",
+    "name": "Faster Projectiles I",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "+7.5% BALLISTIC RANGE AND VELOCITY",
+    "effects": [
+      {
+        "stat": "range",
+        "value": 0.075,
+        "weaponTypes": [
+          "ballistic"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedBallisticRangeAndSpeed_Trait2",
+    "name": "Faster Projectiles II",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "+15% BALLISTIC RANGE AND VELOCITY",
+    "effects": [
+      {
+        "stat": "range",
+        "value": 0.15,
+        "weaponTypes": [
+          "ballistic"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedEnergyDamage_Trait1",
+    "name": "Enhanced Energy Output I",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "+5% ENERGY DAMAGE",
+    "effects": [
+      {
+        "stat": "damage",
+        "value": 0.05,
+        "weaponTypes": [
+          "energy"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedEnergyDamage_Trait2",
+    "name": "Enhanced Energy Output II",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "+10% ENERGY DAMAGE",
+    "effects": [
+      {
+        "stat": "damage",
+        "value": 0.1,
+        "weaponTypes": [
+          "energy"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedEnergyRangeAndSpeed_Trait1",
+    "name": "Accurate Focusing Arrays I",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "+7.5% ENERGY RANGE AND VELOCITY",
+    "effects": [
+      {
+        "stat": "range",
+        "value": 0.075,
+        "weaponTypes": [
+          "energy"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedEnergyRangeAndSpeed_Trait2",
+    "name": "Accurate Focusing Arrays II",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "+15% ENERGY RANGE AND VELOCITY",
+    "effects": [
+      {
+        "stat": "range",
+        "value": 0.15,
+        "weaponTypes": [
+          "energy"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedHeatCapacity_Trait1",
+    "name": "Heat Containment I",
+    "category": "Heat",
+    "slots": 1,
+    "description": "+5% HEAT CAPACITY",
+    "effects": []
+  },
+  {
+    "id": "IncreasedHeatCapacity_Trait2",
+    "name": "Heat Containment II",
+    "category": "Heat",
+    "slots": 2,
+    "description": "+10% HEAT CAPACITY",
+    "effects": []
+  },
+  {
+    "id": "IncreasedHeatCooling_Trait1",
+    "name": "Faster Cooling",
+    "category": "Heat",
+    "slots": 1,
+    "description": "+5% HEAT DISSIPATION",
+    "effects": [
+      {
+        "stat": "cooling",
+        "value": 0.05
+      }
+    ]
+  },
+  {
+    "id": "IncreasedJJAccelXYZ_Trait1",
+    "name": "Jump Jet Thrust",
+    "category": "Mobility",
+    "slots": 1,
+    "description": "+15% JUMP JET ACCELERATION",
+    "effects": []
+  },
+  {
+    "id": "IncreasedJJFuelBurnTime_Trait1",
+    "name": "Longer Burn Time",
+    "category": "Mobility",
+    "slots": 1,
+    "description": "+15% JUMP JET BURN TIME",
+    "effects": []
+  },
+  {
+    "id": "IncreasedJJFuelRegenTime_Trait1",
+    "name": "Rapid Jump Jet Recharge",
+    "category": "Mobility",
+    "slots": 1,
+    "description": "+20% JUMP JET REFUEL RATE",
+    "effects": []
+  },
+  {
+    "id": "IncreasedLockRetentionAndLoseLockTime_Trait1",
+    "name": "Target Lock Retention",
+    "category": "Targeting",
+    "slots": 1,
+    "description": "+25% TARGET LOCK RETENTION AND LOSE LOCK TIME",
+    "effects": []
+  },
+  {
+    "id": "IncreasedMissileDamage_Trait1",
+    "name": "Potent Warheads I",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "+5% MISSILE DAMAGE",
+    "effects": [
+      {
+        "stat": "damage",
+        "value": 0.05,
+        "weaponTypes": [
+          "missile"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedMissileDamage_Trait2",
+    "name": "Potent Warheads II",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "+10% MISSILE DAMAGE",
+    "effects": [
+      {
+        "stat": "damage",
+        "value": 0.1,
+        "weaponTypes": [
+          "missile"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedMissileRangeAndSpeed_Trait1",
+    "name": "Aerodynamic Hull I",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "+7.5% MISSILE RANGE AND VELOCITY",
+    "effects": [
+      {
+        "stat": "range",
+        "value": 0.075,
+        "weaponTypes": [
+          "missile"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedMissileRangeAndSpeed_Trait2",
+    "name": "Aerodynamic Hull II",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "+15% MISSILE RANGE AND VELOCITY",
+    "effects": [
+      {
+        "stat": "range",
+        "value": 0.15,
+        "weaponTypes": [
+          "missile"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedSensorRange_Trait1",
+    "name": "Expanded Sensor Range I",
+    "category": "Targeting",
+    "slots": 1,
+    "description": "+10% SENSOR RANGE",
+    "effects": []
+  },
+  {
+    "id": "IncreasedSensorRange_Trait2",
+    "name": "Expanded Sensor Range II",
+    "category": "Targeting",
+    "slots": 2,
+    "description": "+20% SENSOR RANGE",
+    "effects": []
+  },
+  {
+    "id": "IncreasedStructure_Trait1",
+    "name": "Fortified Internal Structure I",
+    "category": "Defense",
+    "slots": 1,
+    "description": "+5% INTERNAL STRUCTURE",
+    "effects": []
+  },
+  {
+    "id": "IncreasedStructure_Trait2",
+    "name": "Fortified Internal Structure II",
+    "category": "Defense",
+    "slots": 2,
+    "description": "+10% INTERNAL STRUCTURE",
+    "effects": []
+  },
+  {
+    "id": "IncreasedTopSpeed_Trait1",
+    "name": "Boosted Top Speed",
+    "category": "Mobility",
+    "slots": 1,
+    "description": "+15% TOP SPEED",
+    "effects": [
+      {
+        "stat": "topSpeed",
+        "value": 0.15
+      }
+    ]
+  },
+  {
+    "id": "IncreasedTorsoTwistRate_Trait1",
+    "name": "Torso Twist Speed",
+    "category": "Mobility",
+    "slots": 1,
+    "description": "+20% TORSO TWIST SPEED",
+    "effects": []
+  },
+  {
+    "id": "IncreasedTurnSpeed_Trait1",
+    "name": "Anchor Turn I",
+    "category": "Mobility",
+    "slots": 1,
+    "description": "+7.5% TURN SPEED",
+    "effects": []
+  },
+  {
+    "id": "IncreasedTurnSpeed_Trait2",
+    "name": "Anchor Turn II",
+    "category": "Mobility",
+    "slots": 2,
+    "description": "+15% TURN SPEED",
+    "effects": []
+  },
+  {
+    "id": "IncreasedWeaponDamage_Trait1",
+    "name": "Damage Tuning",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "+5% WEAPON DAMAGE",
+    "effects": [
+      {
+        "stat": "damage",
+        "value": 0.05,
+        "weaponTypes": [
+          "artillery",
+          "ballistic",
+          "energy",
+          "melee",
+          "missile"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IncreasedWeaponRangeAndSpeed_Trait1",
+    "name": "Improved Range",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "+10% WEAPON RANGE AND VELOCITY",
+    "effects": [
+      {
+        "stat": "range",
+        "value": 0.1,
+        "weaponTypes": [
+          "artillery",
+          "ballistic",
+          "energy",
+          "missile"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ReducedBallisticCooldown_Trait1",
+    "name": "Quick Ammo Feed I",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "-5% BALLISTIC COOLDOWN TIME",
+    "effects": []
+  },
+  {
+    "id": "ReducedBallisticCooldown_Trait2",
+    "name": "Quick Ammo Feed II",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "-10% BALLISTIC COOLDOWN TIME",
+    "effects": []
+  },
+  {
+    "id": "ReducedBallisticHeat_Trait1",
+    "name": "Ballistic Heat Transfer I",
+    "category": "Heat",
+    "slots": 1,
+    "description": "-2.5% BALLISTIC HEAT",
+    "effects": []
+  },
+  {
+    "id": "ReducedBallisticHeat_Trait2",
+    "name": "Ballistic Heat Transfer II",
+    "category": "Heat",
+    "slots": 2,
+    "description": "-5% BALLISTIC HEAT",
+    "effects": []
+  },
+  {
+    "id": "ReducedEnergyCooldown_Trait1",
+    "name": "Condensed Cycle Time I",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "-5% ENERGY COOLDOWN TIME",
+    "effects": []
+  },
+  {
+    "id": "ReducedEnergyCooldown_Trait2",
+    "name": "Condensed Cycle Time II",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "-10% ENERGY COOLDOWN TIME",
+    "effects": []
+  },
+  {
+    "id": "ReducedEnergyHeat_Trait1",
+    "name": "Reduced Power Consumption I",
+    "category": "Heat",
+    "slots": 1,
+    "description": "-2.5% ENERGY HEAT",
+    "effects": []
+  },
+  {
+    "id": "ReducedEnergyHeat_Trait2",
+    "name": "Reduced Power Consumption II",
+    "category": "Heat",
+    "slots": 2,
+    "description": "-5% ENERGY HEAT",
+    "effects": []
+  },
+  {
+    "id": "ReducedHeatGeneration_Trait1",
+    "name": "Reduced Heat Spikes",
+    "category": "Heat",
+    "slots": 1,
+    "description": "-5% HEAT GENERATION",
+    "effects": []
+  },
+  {
+    "id": "ReducedLaserDuration_Trait1",
+    "name": "Shorter Burn Time",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "-7.5% LASER DURATION",
+    "effects": []
+  },
+  {
+    "id": "ReducedMissileCooldown_Trait1",
+    "name": "Faster Missile Reload I",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "-5% MISSILE COOLDOWN TIME",
+    "effects": []
+  },
+  {
+    "id": "ReducedMissileCooldown_Trait2",
+    "name": "Faster Missile Reload II",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "-10% MISSILE COOLDOWN TIME",
+    "effects": []
+  },
+  {
+    "id": "ReducedMissileHeat_Trait1",
+    "name": "Missile Exhaust Venting I",
+    "category": "Heat",
+    "slots": 1,
+    "description": "-2.5% MISSILE HEAT",
+    "effects": []
+  },
+  {
+    "id": "ReducedMissileHeat_Trait2",
+    "name": "Missile Exhaust Venting II",
+    "category": "Heat",
+    "slots": 2,
+    "description": "-5% MISSILE HEAT",
+    "effects": []
+  },
+  {
+    "id": "ReducedMissileSpread_Trait1",
+    "name": "Tighter Missile Clusters",
+    "category": "Firepower",
+    "slots": 1,
+    "description": "-7.5% MISSILE SPREAD",
+    "effects": []
+  },
+  {
+    "id": "ReducedWeaponCooldown_Trait1",
+    "name": "Faster Weapon Cycling",
+    "category": "Firepower",
+    "slots": 2,
+    "description": "-7.5% WEAPON COOLDOWN TIME",
+    "effects": []
+  },
+  {
+    "id": "ReducedWeaponHeat_Trait1",
+    "name": "Weapon Heat Transfer",
+    "category": "Heat",
+    "slots": 2,
+    "description": "-2.5% WEAPON HEAT",
+    "effects": []
+  }
+]

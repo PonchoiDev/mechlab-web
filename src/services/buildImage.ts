@@ -1,5 +1,6 @@
 import type { HardpointType } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
+import type { Upgrade } from '../types/upgrade';
 import { truncateTo, type BuildSummary } from '../utils/calculators';
 import {
   getAmmoWarnings,
@@ -14,6 +15,7 @@ import {
 } from '../utils/equipment';
 import { getItemWeaponType, getTierName } from '../utils/items';
 import { getMechDisplayName, getMechSpecs, type SpecKind } from '../utils/mechs';
+import { getUsedUpgradeSlots } from '../utils/upgrades';
 import { ZONE_LABELS } from '../utils/zones';
 
 // Tarjeta de la build en PNG con la misma distribución que el tablero de la web, para publicarla
@@ -75,7 +77,9 @@ export interface BuildImageInput {
   mech: Mech;
   loadout: EquippedLoadout;
   armor: ArmorState;
+  // Con las mejoras de la cantina ya aplicadas a summary.
   summary: BuildSummary;
+  upgrades: Upgrade[];
   imageUrl: string | null;
 }
 
@@ -423,6 +427,49 @@ const drawReadouts = (context: Context, input: BuildImageInput, y: number) => {
   });
 };
 
+const UPGRADE_CHIP_HEIGHT = 24;
+const UPGRADE_FONT = `500 11px ${MONO}`;
+
+// Franja con las mejoras de la cantina instaladas, en fichas que pasan a la línea siguiente si no caben.
+const layoutUpgrades = (context: Context, input: BuildImageInput) => {
+  const { mech, upgrades } = input;
+  if (upgrades.length === 0) return { height: 0, draw: () => undefined };
+
+  const width = WIDTH - PADDING * 2;
+  const title = `CANTINA UPGRADES ${getUsedUpgradeSlots(upgrades)}/${mech.upgradeSlots ?? 0}`;
+  const startX = PADDING + 14 + measure(context, title, `500 10px ${MONO}`) + 14;
+  const chips: { text: string; x: number; row: number; width: number }[] = [];
+  let x = startX;
+  let row = 0;
+  for (const upgrade of upgrades) {
+    const text = `${upgrade.name} · ${upgrade.description}`;
+    const chipWidth = measure(context, text, UPGRADE_FONT) + 16;
+    if (x + chipWidth > PADDING + width - 14 && x > startX) {
+      x = startX;
+      row += 1;
+    }
+    chips.push({ text, x, row, width: chipWidth });
+    x += chipWidth + 6;
+  }
+  const height = (row + 1) * (UPGRADE_CHIP_HEIGHT + 6) + 14;
+
+  const draw = (target: Context, y: number) => {
+    target.fillStyle = COLORS.panel;
+    target.fillRect(PADDING, y, width, height);
+    strokeBox(target, PADDING, y, width, height, COLORS.line);
+    drawText(target, title, PADDING + 14, y + 26, `500 10px ${MONO}`, COLORS.muted);
+    for (const chip of chips) {
+      const chipY = y + 10 + chip.row * (UPGRADE_CHIP_HEIGHT + 6);
+      target.fillStyle = withAlpha(COLORS.cyan, 0.1);
+      target.fillRect(chip.x, chipY, chip.width, UPGRADE_CHIP_HEIGHT);
+      strokeBox(target, chip.x, chipY, chip.width, UPGRADE_CHIP_HEIGHT, withAlpha(COLORS.cyan, 0.45));
+      drawText(target, chip.text, chip.x + 8, chipY + 16, UPGRADE_FONT, COLORS.cyan);
+    }
+  };
+
+  return { height, draw };
+};
+
 // Panel central con el nombre y el dibujo del mech, entre los torsos y los brazos.
 const drawReference = (context: Context, mech: Mech, image: HTMLImageElement | null, x: number, y: number, width: number, height: number) => {
   const glow = context.createRadialGradient(x + width / 2, y + height / 2, 0, x + width / 2, y + height / 2, width * 0.6);
@@ -497,7 +544,9 @@ export const renderBuildImage = async (input: BuildImageInput): Promise<Blob> =>
   }
 
   const readoutY = PADDING + 64;
-  const boardY = readoutY + READOUT_HEIGHT * 2 + 16;
+  const upgradesLayout = layoutUpgrades(measuring, input);
+  const upgradesY = readoutY + READOUT_HEIGHT * 2 + 16;
+  const boardY = upgradesY + (upgradesLayout.height > 0 ? upgradesLayout.height + 16 : 0);
   const boardHeight = rowHeights.reduce((sum, height) => sum + height, 0) + GAP * (rows.length - 1);
   const footerY = boardY + boardHeight + 20;
   const height = footerY + 44;
@@ -517,6 +566,7 @@ export const renderBuildImage = async (input: BuildImageInput): Promise<Blob> =>
 
   drawHeader(context, mech);
   drawReadouts(context, input, readoutY);
+  upgradesLayout.draw(context, upgradesY);
 
   let rowY = boardY;
   rows.forEach((row, rowIndex) => {

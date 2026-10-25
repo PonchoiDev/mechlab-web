@@ -1,0 +1,42 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Background_ClanSmokeJaguar_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/FactionOriginTrait.FactionOriginTrait_C Name="ComposedTrait_BP_C_0.FactionOriginTrait_C_0"
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/MobilityTrait.MobilityTrait_C Name="MobilityTrait_C_0"
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="ComposedTrait_BP_C_0.FactionOriginTrait_C_0"
+         FactionName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/MainFactionStringTable.MainFactionStringTable", "Faction_Clan_Smoke_Jaguar")
+         UnitTraits=
+      End Object
+      Begin Object Name="MobilityTrait_C_0"
+         Top Speed Percent=0.050000
+         TurnSpeedPercent=0.050000
+         MiscInfo=NSLOCTEXT("[CCBFE4234254F68C264A22A7913E48DD]", "956338F144C2BE6FEDCA3E8A7B33B1ED", "{MobilityQuirkList}")
+         UnitTraits=
+      End Object
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.200000
+         SalaryAdjustmentPercent=0.200000
+         InjuryChanceIncreasePercentage=-0.100000
+         InjuryRecoveryAdjustmentPercent=-0.100000
+         DeathChanceIncreasePercentage=-0.150000
+         MissionXPAdjustmentPercent=0.150000
+         TrainingTimeAdjustmentPercent=-0.150000
+      End Object
+      MiscInfo=NSLOCTEXT("[CCBFE4234254F68C264A22A7913E48DD]", "1A03E88F4E5896EF4D98D9AA4F644626", "{MobilityQuirkList}")
+      UnitTraits(0)=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+      UnitTraits(1)=MobilityTrait_C'"MobilityTrait_C_0"'
+      UnitTraits(2)=FactionOriginTrait_C'"ComposedTrait_BP_C_0.FactionOriginTrait_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Background_Clan_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Background_Clan_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Background_Clan_ShortDesc")
+   AvailableDate=3054.01.01-14.00.00
+   Icon=/Game/DLC7/ClusterOwners/FactionLogos/ghost_32px_factionlogo_SmokeJaguar.ghost_32px_factionlogo_SmokeJaguar
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Exclusive.SocialStatus")))
+   UnitTrait=ComposedTrait_BP_C'"ComposedTrait_BP_C_0"'
+End Object

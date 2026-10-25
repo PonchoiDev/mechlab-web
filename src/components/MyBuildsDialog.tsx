@@ -4,6 +4,7 @@ import type { Mech } from '../types/mech';
 import type { useSavedBuilds } from '../hooks/useSavedBuilds';
 import { decodeBuild, type SharedBuild } from '../utils/buildCode';
 import { getBuildSummary } from '../utils/calculators';
+import { getUpgrades } from '../utils/upgrades';
 import { getMechDisplayName } from '../utils/mechs';
 import { createExportFile, normalizeBuildName, parseImportFile, type SavedBuild } from '../utils/savedBuilds';
 
@@ -69,7 +70,7 @@ export function MyBuildsDialog({
   // Cada build se reconstruye para mostrar su mech y sus cifras con los datos actuales del juego.
   const rows = useMemo(() => builds.map(build => {
     const shared = decodeBuild(build.code, mechs, catalog);
-    const summary = shared ? getBuildSummary(shared.mech, shared.loadout, shared.armor) : null;
+    const summary = shared ? getBuildSummary(shared.mech, shared.loadout, shared.armor, getUpgrades(shared.upgrades)) : null;
     return { build, shared, summary };
   }), [builds, mechs, catalog]);
 

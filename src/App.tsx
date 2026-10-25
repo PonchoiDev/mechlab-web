@@ -8,6 +8,7 @@ import { replaceWeapon, type ActionResult } from './utils/buildActions';
 import { encodeBuild, getBuildUrl, getStockBuild, readBuildFromLocation } from './utils/buildCode';
 import { normalizeBuildName } from './utils/savedBuilds';
 import { getBuildSummary } from './utils/calculators';
+import { getUpgrades, getUsedUpgradeSlots } from './utils/upgrades';
 import { getBuildIssues } from './utils/issues';
 import { ZONE_LABELS } from './utils/zones';
 import { useMechBuild } from './hooks/useMechBuild';
@@ -30,6 +31,7 @@ import { ShareImageDialog } from './components/ShareImageDialog';
 import { StatsReadout } from './components/StatsReadout';
 import { SupportLink } from './components/SupportLink';
 import { Toast } from './components/Toast';
+import { UpgradesPanel } from './components/UpgradesPanel';
 import { UtilityToolbar } from './components/UtilityToolbar';
 import { WhatsNew } from './components/WhatsNew';
 
@@ -43,10 +45,17 @@ if (openFeedbackOnLoad) window.history.replaceState(window.history.state, '', wi
 
 export default function App() {
   const build = useMechBuild(mechs, items, linkedBuild?.build);
-  const { mech, loadout, armor, activeZone, setActiveZone } = build;
+  const { mech, loadout, armor, upgradeIds, activeZone, setActiveZone } = build;
   const sarna = useSarnaAsset(mech);
 
-  const summary = useMemo(() => getBuildSummary(mech, loadout, armor), [mech, loadout, armor]);
+  const upgrades = useMemo(() => getUpgrades(upgradeIds), [upgradeIds]);
+  const summary = useMemo(() => getBuildSummary(mech, loadout, armor, upgrades), [mech, loadout, armor, upgrades]);
+  // Sin mejoras, para mostrar junto a las cifras mejoradas lo que cambian.
+  const baseSummary = useMemo(
+    () => upgrades.length > 0 ? getBuildSummary(mech, loadout, armor) : undefined,
+    [mech, loadout, armor, upgrades]
+  );
+  const [isUpgradesOpen, setIsUpgradesOpen] = useState(false);
   const issues = useMemo(() => getBuildIssues(mech, loadout, armor), [mech, loadout, armor]);
   const equippedItems = Object.values(loadout).flat();
   const [selectedHardpoint, setSelectedHardpoint] = useState<number | null>(null);
@@ -76,7 +85,8 @@ export default function App() {
   const closeBuilds = useCallback(() => setIsBuildsOpen(false), [setIsBuildsOpen]);
   const closeSave = useCallback(() => setIsSaveOpen(false), [setIsSaveOpen]);
   const closeFeedback = useCallback(() => setIsFeedbackOpen(false), [setIsFeedbackOpen]);
-  const buildCode = encodeBuild(mech, loadout, armor, items);
+  const buildCode = encodeBuild(mech, loadout, armor, items, upgradeIds);
+  const loadoutCode = encodeBuild(mech, loadout, armor, items);
   const buildUrl = getBuildUrl(buildCode);
   const stockCode = useMemo(() => {
     const stock = getStockBuild(mech, mechs, items);
@@ -106,8 +116,8 @@ export default function App() {
     showToast(`Updated “${activeBuild.name}”`);
   };
   const shareImageInput = useMemo(
-    () => ({ mech, loadout, armor, summary, imageUrl: sarna.asset?.imageUrl ?? null }),
-    [mech, loadout, armor, summary, sarna.asset]
+    () => ({ mech, loadout, armor, summary, upgrades, imageUrl: sarna.asset?.imageUrl ?? null }),
+    [mech, loadout, armor, summary, upgrades, sarna.asset]
   );
   const copyBuildLink = async (url = buildUrl) => {
     showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link. Copy it from the image dialog');
@@ -161,7 +171,7 @@ export default function App() {
         </div>
       </header>
 
-      <StatsReadout mech={mech} summary={summary} />
+      <StatsReadout mech={mech} summary={summary} base={baseSummary} />
 
       <BuildStatus issues={issues} onSelectZone={selectZone} />
 
@@ -174,17 +184,30 @@ export default function App() {
         onClearArmor={build.clearArmor}
         onMaximizeArmor={build.maximizeArmor}
         onRemoveItems={build.removeItemsOfType}
-        canLoadStock={stockCode !== null && buildCode !== stockCode}
+        canLoadStock={stockCode !== null && loadoutCode !== stockCode}
         onLoadStock={() => {
           build.loadStockBuild();
           setSelectedHardpoint(null);
           showToast(`Loaded the stock ${mech.variant} loadout`);
         }}
+        upgradeSlots={{ used: getUsedUpgradeSlots(upgrades), capacity: mech.upgradeSlots ?? 0 }}
+        isUpgradesOpen={isUpgradesOpen}
+        onToggleUpgrades={() => setIsUpgradesOpen(open => !open)}
         savedBuildCount={saved.builds.length}
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
         onShare={openShareMenu}
       />
+
+      {isUpgradesOpen && (
+        <UpgradesPanel
+          mech={mech}
+          installed={upgrades}
+          onToggle={build.toggleUpgrade}
+          onClear={build.clearUpgrades}
+          onClose={() => setIsUpgradesOpen(false)}
+        />
+      )}
 
       <main className="workspace">
         <div className="view-toggles" aria-label="View options">

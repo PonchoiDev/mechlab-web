@@ -1,0 +1,26 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Firebug_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+      End Object
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.100000
+         SalaryAdjustmentPercent=0.100000
+      End Object
+      Begin Object Name="Weapon_TraitBP_C_0"
+         SupportedWeapons=(GameplayTags=((TagName="Weapon.Missile.SRM.SRM2.Inferno"),(TagName="Weapon.Missile.SRM.SRM4.Inferno"),(TagName="Weapon.Missile.SRM.SRM6.Inferno"),(TagName="Weapon.Energy.Flamer")))
+         QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatDamagePercentage_Quirk.HeatDamagePercentage_Quirk_C"',Value=0.100000)
+      End Object
+      UnitTraits(0)=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+      UnitTraits(1)=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+   End Object
+   PilotTraitName=NSLOCTEXT("[E1FF84C94B3DE0AAE7BC97A0BCC9E370]", "952587384FBCC5F1228087910165C416", "Firebug")
+   PilotTraitLongDescription=NSLOCTEXT("[E1FF84C94B3DE0AAE7BC97A0BCC9E370]", "438E046747BF52C8B45F64A4F2881AA7", "Some people just want to watch the world burn. This pilot applies {0}% additional heat damage to targets with Flamers and Inferno SRMs.")
+   PilotTraitShortDescription=NSLOCTEXT("[E1FF84C94B3DE0AAE7BC97A0BCC9E370]", "6DFB217C40EC336F7263A78B2CB4F132", "Increases heat applied by fire-based weapons by {0}%.")
+   Icon=/Game/UI/_common/Textures/Icons/Weapons/Flamer_ICN_48px.Flamer_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training")))
+   UnitTrait=ComposedTrait_BP_C'"ComposedTrait_BP_C_0"'
+End Object

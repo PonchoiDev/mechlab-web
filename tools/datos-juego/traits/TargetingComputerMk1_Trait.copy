@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="TargetingComputerMk1_Trait"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/EquipmentTraits/TargetingComputerTrait_BP.TargetingComputerTrait_BP_C Name="TargetingComputerTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/UnitCardTrait_BP.UnitCardTrait_BP_C Name="UnitCardTrait_BP_C_0"
+      End Object
+   End Object
+   Begin Object Name="TargetingComputerTrait_BP_C_0"
+      Begin Object Name="UnitCardTrait_BP_C_0"
+         AccuracyBonusPercentage=0.010000
+         LethalityBonusPercentage=0.010000
+      End Object
+      MechSensorRangeIncrease=0.100000
+      SupportedBallisticWeapons=(GameplayTags=((TagName="Weapon.Ballistic.AutoCannon.Ultra"),(TagName="Weapon.Ballistic.AutoCannon.Standard"),(TagName="Weapon.Ballistic.AutoCannon.Rotary"),(TagName="Weapon.Ballistic.GaussRifle"),(TagName="Weapon.Energy.ParticleCannon"),(TagName="Weapon.Ballistic.Rifle")))
+      ProjectileSpeedIncreaseQuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.050000)
+      SupportedLaserWeapons=(GameplayTags=((TagName="Weapon.Energy.Laser")))
+      LaserRangeIncraseQuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.040000)
+      UnitTraits(0)=UnitCardTrait_BP_C'"UnitCardTrait_BP_C_0"'
+   End Object
+   MechTraitName=NSLOCTEXT("[84C49E7D425F2A092141C097AF8679D1]", "FF8B7F6E4AC7FB673F559EA5F7D50140", "Targeting Computer Mk1")
+   UnitTrait=TargetingComputerTrait_BP_C'"TargetingComputerTrait_BP_C_0"'
+End Object

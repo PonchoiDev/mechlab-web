@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedMissileDamage_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+   End Object
+   Begin Object Name="Weapon_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.ArtemisMissile"),(TagName="Weapon.Missile")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.050000)
+   End Object
+   MechTraitName=NSLOCTEXT("[253627A44A4254BDC7030F85CE5D4B1C]", "219BDB4448A3BDBCE8269DBF86E3495C", "Potent Warheads I")
+   MechTraitLongDescription=NSLOCTEXT("[253627A44A4254BDC7030F85CE5D4B1C]", "293DA05D4B2226830D6070BF6174D019", "A new warhead design directs the same explosive charge more efficiently towards the target.")
+   MechTraitShortDescription=NSLOCTEXT("[253627A44A4254BDC7030F85CE5D4B1C]", "776A64784D99DA9D4AD947AB5184CC0C", "{0}% MISSILE DAMAGE")
+   SlotSize=1
+   CBillInstallCost=300000
+   TimeInstallCost=8.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Missile_DMG_1_ICN_UIX.Missile_DMG_1_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+End Object

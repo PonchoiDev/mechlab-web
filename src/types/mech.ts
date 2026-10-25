@@ -53,6 +53,8 @@ export interface Mech {
   hero?: boolean;
   introYear?: number;
   role?: string;
+  // Ranuras para las mejoras de la cantina.
+  upgradeSlots?: number;
   components: MechComponents;
 }
 

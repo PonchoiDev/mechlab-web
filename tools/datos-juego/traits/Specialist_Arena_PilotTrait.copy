@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Specialist_Arena_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComplexWeaponTrait.ComplexWeaponTrait_C Name="ComplexWeaponTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/ComplexWeaponTrait.Default__ComplexWeaponTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="ComplexWeaponTrait_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.200000
+         SalaryAdjustmentPercent=0.200000
+      End Object
+      WeaponQuirks=(((TagName="Weapon.Melee"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.100000)))),((TagName="Weapon.Ballistic.Rifle"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.100000)))),((TagName="Weapon.Energy.ParticleCannon.PPC-X"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.100000)))),((TagName="Weapon.Energy.Laser.Binary"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.050000)))),((TagName="Weapon.Energy.Laser.Chemical"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.100000)))),((TagName="Weapon.Missile.SRM"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.100000)))))
+      UnitTraits(0)="PilotTrait_BP_C_0"
+   End Object
+   PilotTraitName=NSLOCTEXT("[ED0F384749E5B03A881CFD87EA883F31]", "A01F5EFC4161A9422440AEA3C32BBDED", "Arena Specialist")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Specialist_Arena_LongDesc")
+   PilotTraitShortDescription=NSLOCTEXT("[ED0F384749E5B03A881CFD87EA883F31]", "7902C38B453D3FE50D535F93709C0DDC", "This pilot has a knack for fighting up close in the arenas.")
+   Icon=/Game/UI/FrontEnd/Mechlab/Textures/Filter_Melee_Icon.Filter_Melee_Icon
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation")))
+   UnitTrait=ComplexWeaponTrait_C'"ComplexWeaponTrait_C_0"'
+End Object

@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="ReducedWeaponHeat_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+   End Object
+   Begin Object Name="Weapon_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.ArtemisMissile"),(TagName="Weapon.Missile"),(TagName="Weapon.Ballistic"),(TagName="Weapon.Energy"),(TagName="Weapon.Artillery")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.025000)
+   End Object
+   MechTraitName=NSLOCTEXT("[2BE3029342DB3EDBE1F6C3ACC8504D8F]", "6A1569854A3B592AF827C2A981386954", "Weapon Heat Transfer")
+   MechTraitLongDescription=NSLOCTEXT("[2BE3029342DB3EDBE1F6C3ACC8504D8F]", "9A3D829A4603FFB99706AD92EA1BFF9B", "Improved cooling jackets move heat from weapons to heat sinks more efficiently, reducing overall weapon heat.")
+   MechTraitShortDescription=NSLOCTEXT("[2BE3029342DB3EDBE1F6C3ACC8504D8F]", "E4D3BB6D4035B000F5FA978AFC65DD93", "{0}% WEAPON HEAT")
+   SlotSize=2
+   CBillInstallCost=2000000
+   TimeInstallCost=40.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=7.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/All_Weapons_HEAT_1_ICN_UIX.All_Weapons_HEAT_1_ICN_UIX
+   Type=Heat
+   MechTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+End Object

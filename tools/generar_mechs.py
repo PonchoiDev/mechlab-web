@@ -33,6 +33,8 @@ REGEX_TIPO_ARMADURA = re.compile(r'ArmorDataAssetId=\(Id="MWArmorDataAsset:([^"]
 REGEX_TIPO_DISIPADORES = re.compile(r'AllowedHeatSinkType=\(TagName="Equipment\.HeatSinks\.([^"]+)"')
 REGEX_TIPO_ESTRUCTURA = re.compile(r'StructureDataAssetId=\(Id="MWStructureDataAsset:([^"]+)"')
 REGEX_POTENCIA_MOTOR = re.compile(r'EngineRating=(\d+)')
+# Ranuras para las mejoras de la cantina (cada mejora ocupa 1 o 2).
+REGEX_RANURAS_MEJORA = re.compile(r'TotalTraitSlots=(\d+)')
 # En MW5, velocidad máxima (km/h) = potencia del motor / tonelaje * 16,2.
 FACTOR_VELOCIDAD_MOTOR = 16.2
 
@@ -448,6 +450,9 @@ def parsear_mech(contenido, variante, tamanos_anclajes=None):
         mech["activeProbe"] = True
     if "bIsHeroMech=True" in contenido:
         mech["hero"] = True
+    ranuras_mejora = buscar_texto(REGEX_RANURAS_MEJORA, contenido)
+    if ranuras_mejora:
+        mech["upgradeSlots"] = int(ranuras_mejora)
     if tech_base is not None:
         mech["techBase"] = tech_base
     return mech

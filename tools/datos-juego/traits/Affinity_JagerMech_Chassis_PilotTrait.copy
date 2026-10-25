@@ -1,0 +1,31 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Affinity_JagerMech_Chassis_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.MechAffinityTrait_C Name="MechAffinityQuirk_C_0"
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_1"
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.Default__MechAffinityTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="MechAffinityQuirk_C_0"
+      Begin Object Name="Weapon_TraitBP_C_1"
+         SupportedWeapons=(GameplayTags=((TagName="Weapon.Ballistic")))
+         QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.050000)
+         WeaponTypeText=LOCTABLE("/Game/Quirks/QuirkFriendlyNameStringTable.QuirkFriendlyNameStringTable", "Ballistic")
+      End Object
+      Begin Object Name="PilotTrait_BP_C_0"
+      End Object
+      Top Speed Percent=0.100000
+      TorsoTwistSpeedPercent=0.100000
+      TurnSpeedPercent=0.100000
+      MechType=(TagName="Mech.Heavy.Jagermech")
+      MechTypeText=INVTEXT("JagerMech")
+      MechTypes=(GameplayTags=((TagName="Mech.Heavy.Jagermech")))
+      MiscInfo=INVTEXT("{WeaponTraitQuirk} ({WeaponType})")
+      UnitTraits(1)=Weapon_TraitBP_C'"Weapon_TraitBP_C_1"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_ShortDesc")
+   Icon=/Game/UI/_common/Textures/HUD/Minimap_Panel/map_icons/MiniMap_Mech_Heavy_ICN_STD_UIX.MiniMap_Mech_Heavy_ICN_STD_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Type.MechAffinity.Heavy")))
+   UnitTrait=MechAffinityTrait_C'"MechAffinityQuirk_C_0"'
+End Object

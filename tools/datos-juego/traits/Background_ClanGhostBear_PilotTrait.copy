@@ -1,0 +1,43 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Background_ClanGhostBear_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/FactionOriginTrait.FactionOriginTrait_C Name="FactionOriginTrait_C_0"
+      End Object
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/ArmorTraits/IncreasedArmor_TraitBP.IncreasedArmor_TraitBP_C Name="IncreasedArmor_TraitBP_C_0"
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="FactionOriginTrait_C_0"
+         FactionName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/MainFactionStringTable.MainFactionStringTable", "Faction_Clan_Ghost_Bear")
+         UnitTraits=
+      End Object
+      Begin Object Name="IncreasedArmor_TraitBP_C_0"
+         Increased Armor Percent=0.025000
+         ApplicableMechParts(0)=Head
+         ApplicableMechParts(1)=CenterTorso
+         ApplicableMechParts(2)=LeftLeg
+         ApplicableMechParts(3)=RightLeg
+      End Object
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.200000
+         SalaryAdjustmentPercent=0.200000
+         InjuryChanceIncreasePercentage=-0.100000
+         InjuryRecoveryAdjustmentPercent=-0.100000
+         DeathChanceIncreasePercentage=-0.150000
+         MissionXPAdjustmentPercent=0.150000
+         TrainingTimeAdjustmentPercent=-0.150000
+      End Object
+      MiscInfo=INVTEXT("{ArmorQuirk}")
+      UnitTraits(0)=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+      UnitTraits(1)=IncreasedArmor_TraitBP_C'"IncreasedArmor_TraitBP_C_0"'
+      UnitTraits(2)=FactionOriginTrait_C'"FactionOriginTrait_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Background_Clan_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Background_Clan_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Background_Clan_ShortDesc")
+   AvailableDate=3054.01.01-14.00.00
+   Icon=/Game/DLC7/ClusterOwners/FactionLogos/ghost_32px_factionlogo_GhostBear.ghost_32px_factionlogo_GhostBear
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Exclusive.SocialStatus")))
+   UnitTrait=ComposedTrait_BP_C'"ComposedTrait_BP_C_0"'
+End Object

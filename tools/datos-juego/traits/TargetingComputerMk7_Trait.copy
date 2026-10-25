@@ -1,0 +1,22 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="TargetingComputerMk7_Trait"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/EquipmentTraits/TargetingComputerTrait_BP.TargetingComputerTrait_BP_C Name="TargetingComputerTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/UnitCardTrait_BP.UnitCardTrait_BP_C Name="UnitCardTrait_BP_C_0"
+      End Object
+   End Object
+   Begin Object Name="TargetingComputerTrait_BP_C_0"
+      Begin Object Name="UnitCardTrait_BP_C_0"
+         AccuracyBonusPercentage=0.070000
+         LethalityBonusPercentage=0.070000
+      End Object
+      MechSensorRangeIncrease=0.220000
+      SupportedBallisticWeapons=(GameplayTags=((TagName="Weapon.Ballistic.AutoCannon.Rotary"),(TagName="Weapon.Ballistic.AutoCannon.Standard"),(TagName="Weapon.Ballistic.AutoCannon.Ultra"),(TagName="Weapon.Ballistic.GaussRifle"),(TagName="Weapon.Ballistic.Rifle"),(TagName="Weapon.Energy.ParticleCannon")))
+      ProjectileSpeedIncreaseQuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.350000)
+      SupportedLaserWeapons=(GameplayTags=((TagName="Weapon.Energy.Laser")))
+      LaserRangeIncraseQuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.100000)
+      UnitTraits(0)=UnitCardTrait_BP_C'"UnitCardTrait_BP_C_0"'
+   End Object
+   MechTraitName=NSLOCTEXT("[E988EDA644D1C576749434B866EA3973]", "1A62072748D9013B1235C2B7505F2F66", "Targeting Computer Mk1")
+   MechTraitLongDescription=NSLOCTEXT("[E988EDA644D1C576749434B866EA3973]", "6242BDA1410B3AB877DB24B677E20C4E", "Additional insulation around critical engine systems allows for greater heat buildup before the shutdown safety system becomes necessary.")
+   MechTraitShortDescription=NSLOCTEXT("[E988EDA644D1C576749434B866EA3973]", "70A1F6E548BE7743F17E8185E46E2EA5", "{0}% HEAT CAPACITY")
+   UnitTrait=TargetingComputerTrait_BP_C'"TargetingComputerTrait_BP_C_0"'
+End Object

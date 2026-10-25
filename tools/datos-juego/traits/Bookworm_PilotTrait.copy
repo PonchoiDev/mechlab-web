@@ -1,0 +1,13 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Bookworm_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="AdjustPilotSalary_BP_C_0"
+   End Object
+   Begin Object Name="AdjustPilotSalary_BP_C_0"
+      AcademyXPAdjustmentPercent=0.150000
+   End Object
+   PilotTraitName=NSLOCTEXT("[555BFB034F1C1372C47DAD9E8682CB64]", "4D0285BA4B1149169361D992D8C88141", "Bookworm")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Generation_Bookworm_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Generation_Bookworm_ShortDesc")
+   Icon=/Game/UI/FrontEnd/Mechlab/Textures/icon_C-Bill_UIX.icon_C-Bill_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Type.Metagame")))
+   UnitTrait=PilotTrait_BP_C'"AdjustPilotSalary_BP_C_0"'
+End Object

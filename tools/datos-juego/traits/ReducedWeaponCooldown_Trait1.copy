@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="ReducedWeaponCooldown_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+   End Object
+   Begin Object Name="Weapon_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.ArtemisMissile"),(TagName="Weapon.Ballistic"),(TagName="Weapon.Energy"),(TagName="Weapon.Missile"),(TagName="Weapon.Artillery")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.075000)
+   End Object
+   MechTraitName=NSLOCTEXT("[279D84D04E18BBB14B4EA69433B956BB]", "8D682EB94C48B3D099232E8BB9C56939", "Faster Weapon Cycling")
+   MechTraitLongDescription=NSLOCTEXT("[279D84D04E18BBB14B4EA69433B956BB]", "4711C1F946F0E74A3772F98BEA822350", "Fine-tuning the power flow system increases electrical output to both capacitors and ammunition feed motors, reducing the interval between firing for all systems.")
+   MechTraitShortDescription=NSLOCTEXT("[279D84D04E18BBB14B4EA69433B956BB]", "0B2750834D4FFBF492A277ABA61A1DC9", "{0}% WEAPON COOLDOWN TIME")
+   SlotSize=2
+   CBillInstallCost=800000
+   TimeInstallCost=10.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=7.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/All_Weapons_COOL_TIME_1_ICN_UIX.All_Weapons_COOL_TIME_1_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+End Object

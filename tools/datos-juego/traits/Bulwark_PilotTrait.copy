@@ -1,0 +1,33 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Bulwark_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+      End Object
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/ArmorTraits/IncreasedArmor_TraitBP.IncreasedArmor_TraitBP_C Name="IncreasedArmor_TraitBP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.150000
+         SalaryAdjustmentPercent=0.150000
+      End Object
+      Begin Object Name="IncreasedArmor_TraitBP_C_0"
+         Increased Armor Percent=0.050000
+         ApplicableMechParts(0)=Head
+         ApplicableMechParts(1)=CenterTorso
+         ApplicableMechParts(2)=LeftTorso
+         ApplicableMechParts(3)=LeftArm
+         ApplicableMechParts(4)=LeftLeg
+         ApplicableMechParts(5)=RightTorso
+         ApplicableMechParts(6)=RightArm
+         ApplicableMechParts(7)=RightLeg
+      End Object
+      UnitTraits(0)=IncreasedArmor_TraitBP_C'"IncreasedArmor_TraitBP_C_0"'
+      UnitTraits(1)=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+   End Object
+   PilotTraitName=NSLOCTEXT("[F704599B489E0ADE90835791D7EBCB2C]", "3130AFE94DADC1E43AD69DAF069FEC27", "Bulwark")
+   PilotTraitLongDescription=NSLOCTEXT("[F704599B489E0ADE90835791D7EBCB2C]", "360952BB4A9DC9F60513F78DE8622E21", "Getting the most out of their armor by careful angling and torso twisting, this pilot\'s \'Mech effectively has {0}% additional armor.")
+   PilotTraitShortDescription=NSLOCTEXT("[F704599B489E0ADE90835791D7EBCB2C]", "506040BC4ED582DF121C9FA8092F2CE0", "Increases armor by {0}%.")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Shielding_ICN_48PX_UIX.Shielding_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training")))
+   UnitTrait=ComposedTrait_BP_C'"ComposedTrait_BP_C_0"'
+End Object

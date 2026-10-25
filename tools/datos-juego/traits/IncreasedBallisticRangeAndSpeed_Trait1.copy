@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedBallisticRangeAndSpeed_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="IncreasedWeaponRange_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedWeaponRange_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Ballistic")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.075000)
+   End Object
+   MechTraitName=NSLOCTEXT("[038DF0F14898D1F87C8760BCB2F936D5]", "C663C487488BF3BD10B48AB3A728291F", "Faster Projectiles I")
+   MechTraitLongDescription=NSLOCTEXT("[038DF0F14898D1F87C8760BCB2F936D5]", "E20CB8FE42A927EDAF7CE08F443E53D6", "More powerful propellant charges give greater range and velocity to ballistic projectiles.")
+   MechTraitShortDescription=NSLOCTEXT("[038DF0F14898D1F87C8760BCB2F936D5]", "3A05A17446073D018C0F1E9D810594BE", "{0}% BALLISTIC RANGE AND VELOCITY")
+   SlotSize=1
+   CBillInstallCost=250000
+   TimeInstallCost=6.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Ballistic_RNG_SP_1_ICN_UIX.Ballistic_RNG_SP_1_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+End Object

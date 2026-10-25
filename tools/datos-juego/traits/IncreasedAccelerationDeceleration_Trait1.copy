@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedAccelerationDeceleration_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/MobilityTraits/IncreasedAccelerationDeceleration_TraitBP.IncreasedAccelerationDeceleration_TraitBP_C Name="IncreasedAccelerationDeceleration_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedAccelerationDeceleration_TraitBP_C_0"
+      Acceleration Percent=0.100000
+      Deceleration Percent=0.100000
+   End Object
+   MechTraitName=NSLOCTEXT("[237BDA6B4F4C58771011369D876F3EA0]", "818B04204E56C893EAA50E86D0FA9F70", "Responsive Movement I")
+   MechTraitLongDescription=NSLOCTEXT("[237BDA6B4F4C58771011369D876F3EA0]", "014E79B54CFBDD1D66182C89A46128B2", "Additional electrical connections to myomer bundles decrease signal reaction time across the bundle, increasing both acceleration and deceleration performance.")
+   MechTraitShortDescription=NSLOCTEXT("[237BDA6B4F4C58771011369D876F3EA0]", "40BE9EC94100FB19D3FE6396A43BF03F", "{0}% ACCELERATION & DECELERATION")
+   SlotSize=1
+   CBillInstallCost=150000
+   TimeInstallCost=5.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/AccelDecel_1_ICN_UIX.AccelDecel_1_ICN_UIX
+   Type=Mobility
+   MechTrait=IncreasedAccelerationDeceleration_TraitBP_C'"IncreasedAccelerationDeceleration_TraitBP_C_0"'
+   UnitTrait=IncreasedAccelerationDeceleration_TraitBP_C'"IncreasedAccelerationDeceleration_TraitBP_C_0"'
+End Object

@@ -2438,3 +2438,157 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .mech-board.is-compact .mech-board-title {
   width: auto;
 }
+
+/* Mejoras de la cantina: panel bajo la barra de herramientas, para ver los cambios en las cifras de arriba. */
+.upgrades-panel {
+  margin: -14px 0 14px;
+  padding: 12px;
+  border: 1px solid var(--work-line);
+  border-top: 0;
+  background: rgba(25, 29, 25, 0.94);
+}
+
+.upgrades-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-bottom: 12px;
+}
+
+.upgrades-header h2 {
+  margin: 0;
+  color: var(--work-text);
+  font: 600 13px var(--work-mono);
+  letter-spacing: 0.06em;
+}
+
+.upgrades-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.upgrades-meter > span {
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--work-muted);
+}
+
+.upgrades-meter > span.is-used {
+  background: var(--work-cyan);
+  border-color: var(--work-cyan);
+}
+
+.upgrades-meter small {
+  margin-left: 6px;
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+}
+
+.upgrades-hint {
+  flex: 1 1 260px;
+  margin: 0;
+  color: var(--work-muted);
+  font-size: 12px;
+}
+
+.upgrades-header .share-dialog-close {
+  font-size: 16px;
+}
+
+.upgrades-categories {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.upgrades-category {
+  display: grid;
+  gap: 6px;
+}
+
+.upgrades-category h3 {
+  margin: 0 0 2px;
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+  letter-spacing: 0.06em;
+}
+
+.upgrade-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 3px 8px;
+  padding: 7px 8px;
+  text-align: left;
+  color: var(--work-text);
+  background: var(--work-panel-raised);
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.upgrade-option:hover:not(:disabled) {
+  border-color: var(--work-cyan);
+}
+
+.upgrade-option[aria-pressed='true'] {
+  background: rgba(105, 217, 206, 0.14);
+  border-color: var(--work-cyan);
+}
+
+.upgrade-option:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.upgrade-option:focus-visible {
+  outline: 2px solid var(--work-lime);
+  outline-offset: 2px;
+}
+
+.upgrade-name {
+  font: 600 12px var(--work-sans);
+}
+
+.upgrade-slots {
+  display: inline-flex;
+  gap: 3px;
+  align-self: center;
+}
+
+.upgrade-slots > span {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--work-muted);
+}
+
+.upgrade-option[aria-pressed='true'] .upgrade-slots > span {
+  background: var(--work-cyan);
+  border-color: var(--work-cyan);
+}
+
+.upgrade-effect {
+  grid-column: 1 / -1;
+  color: var(--work-muted);
+  font: 500 10px var(--work-mono);
+}
+
+.upgrade-option[aria-pressed='true'] .upgrade-effect {
+  color: var(--work-cyan);
+}
+
+/* Cifras con mejoras: el valor base y, en verde, el mejorado, como en el juego. */
+.readout-upgraded {
+  color: var(--work-lime);
+}
+
+@media (max-width: 1000px) {
+  .upgrades-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .upgrades-categories { grid-template-columns: minmax(0, 1fr); }
+}

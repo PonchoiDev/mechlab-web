@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedTopSpeed_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/MobilityTraits/IncreasedTopSpeed_TraitBP.IncreasedTopSpeed_TraitBP_C Name="IncreasedTopSpeed_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedTopSpeed_TraitBP_C_0"
+      Top Speed Percent=0.150000
+      Reverse Top Speed Percent=0.150000
+   End Object
+   MechTraitName=NSLOCTEXT("[5869687F44882223551932932583894B]", "858D7CB040533D106FDF809AE6672056", "Boosted Top Speed")
+   MechTraitLongDescription=NSLOCTEXT("[5869687F44882223551932932583894B]", "EEFC09844FA5BBF66BD8F98A84A639B8", "Adding redundant electrical subsystems, and replacing key stress components with tougher materials, allows technicians to tune the \'Mech for increased top speed with a negligible increase in risk of failure.")
+   MechTraitShortDescription=NSLOCTEXT("[5869687F44882223551932932583894B]", "23E1F51E4AB95062D29375974CC895E9", "{0}% TOP SPEED")
+   SlotSize=1
+   CBillInstallCost=1500000
+   TimeInstallCost=25.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/SpeedMax_1_ICN_UIX.SpeedMax_1_ICN_UIX
+   Type=Mobility
+   MechTrait=IncreasedTopSpeed_TraitBP_C'"IncreasedTopSpeed_TraitBP_C_0"'
+   UnitTrait=IncreasedTopSpeed_TraitBP_C'"IncreasedTopSpeed_TraitBP_C_0"'
+End Object

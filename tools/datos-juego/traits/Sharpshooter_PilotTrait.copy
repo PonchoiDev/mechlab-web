@@ -1,0 +1,22 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Sharpshooter_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/UnitCardTrait_BP.UnitCardTrait_BP_C Name="UnitCardTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+      End Object
+   End Object
+   Begin Object Name="UnitCardTrait_BP_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.150000
+         SalaryAdjustmentFlat=1000
+         SalaryAdjustmentPercent=0.150000
+      End Object
+      AccuracyBonusPercentage=0.050000
+      LethalityBonusPercentage=0.150000
+      UnitTraits(0)=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+   End Object
+   PilotTraitName=NSLOCTEXT("[2E37437E4C9EA60A1F580C8F6B02CAD6]", "8C43378E47978DCD0FB05A89B4F02D62", "Sharpshooter")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Sharpshooter_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Sharpshooter_ShortDesc")
+   Icon=/Game/UI/_common/Textures/Icons/Sensors/Target_ICN_48px.Target_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Hero"),(TagName="PilotTrait.Training")))
+   UnitTrait=UnitCardTrait_BP_C'"UnitCardTrait_BP_C_0"'
+End Object

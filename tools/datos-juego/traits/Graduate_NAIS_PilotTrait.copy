@@ -1,0 +1,21 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Graduate_NAIS_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/GraduateTrait.GraduateTrait_C Name="GraduateTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/GraduateTrait.Default__GraduateTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="GraduateTrait_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+      End Object
+      Top Speed Percent=0.050000
+      Reverse Top Speed Percent=0.050000
+      TorsoTwistSpeedPercent=0.100000
+      TurnSpeedPercent=0.100000
+      WeaponQuirks=(((TagName="Weapon.Ballistic.AutoCannon"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.050000)))),((TagName="Weapon.Energy.Laser"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=-0.050000)))),((TagName="Weapon.Missile"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/MinRangePercentage_Quirk.MinRangePercentage_Quirk_C"',Value=-0.330000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.100000)))),((TagName="Weapon.ArtemisMissile"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/MinRangePercentage_Quirk.MinRangePercentage_Quirk_C"',Value=-0.330000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.100000)))))
+   End Object
+   PilotTraitName=NSLOCTEXT("[A722866C4882FC62296321B73ACB977C]", "B913361D4E2E83896CEDADB24D210324", "NAIS Graduate")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Graduate_NAIS_LongDesc")
+   PilotTraitShortDescription=NSLOCTEXT("[A722866C4882FC62296321B73ACB977C]", "43B02B2C497607CD597D69A91C2BC360", "This pilot has graduated from NAIS.")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Commendation_ICN_48PX_UIX.Commendation_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Type.Graduate.NAIS")))
+   UnitTrait=GraduateTrait_C'"GraduateTrait_C_0"'
+End Object

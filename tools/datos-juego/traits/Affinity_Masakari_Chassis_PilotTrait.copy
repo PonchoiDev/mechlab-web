@@ -1,0 +1,42 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Affinity_Masakari_Chassis_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.MechAffinityTrait_C Name="MechAffinityQuirk_C_0"
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.Default__MechAffinityTrait_C:PilotTrait_BP_C_0'
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ElectronicsTrait.ElectronicsTrait_C Name="ElectronicsTrait_C_0"
+      End Object
+   End Object
+   Begin Object Name="MechAffinityQuirk_C_0"
+      Begin Object Name="Weapon_TraitBP_C_0"
+         SupportedWeapons=(GameplayTags=((TagName="Weapon.Energy.ParticleCannon")))
+         QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.050000)
+         WeaponTypeText=NSLOCTEXT("[8415B7B74B069E22604227B3C3FF5F7C]", "36F9D6E043B89B030818CC892E73F685", "PPC")
+      End Object
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.150000
+         SalaryAdjustmentPercent=0.150000
+      End Object
+      Begin Object Name="ElectronicsTrait_C_0"
+         SensorRangeMultiplier=1.050000
+         UnitTraits=
+      End Object
+      Top Speed Percent=0.100000
+      TorsoTwistSpeedPercent=0.100000
+      TurnSpeedPercent=0.050000
+      MechType=(TagName="Mech.Assault.Warhawk")
+      MechTypeText=INVTEXT("Masakari")
+      MechTypes=(GameplayTags=((TagName="Mech.Assault.Warhawk")))
+      MiscInfo=NSLOCTEXT("[8415B7B74B069E22604227B3C3FF5F7C]", "0DE37A96489975C4F4EDC78FDA12870B", "{SensorRangeQuirk}\r\n{WeaponTraitQuirk} ({WeaponType})")
+      UnitTraits(0)="PilotTrait_BP_C_0"
+      UnitTraits(1)=ElectronicsTrait_C'"ElectronicsTrait_C_0"'
+      UnitTraits(2)=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_ShortDesc")
+   AvailableDate=3054.01.01-14.00.00
+   Icon=/Game/UI/_common/Textures/HUD/Minimap_Panel/map_icons/MiniMap_Mech_Assault_ICN_STD_UIX.MiniMap_Mech_Assault_ICN_STD_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Type.MechAffinity.Assault"),(TagName="PilotTrait.Hero"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Generation"),(TagName="DLC.DLC7")))
+   UnitTrait=MechAffinityTrait_C'"MechAffinityQuirk_C_0"'
+End Object

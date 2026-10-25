@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="BitterEnd_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+      End Object
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/StructureTraits/IncreasedStructure_TraitBP.IncreasedStructure_TraitBP_C Name="IncreasedStructure_TraitBP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.100000
+         SalaryAdjustmentPercent=0.100000
+         InjuryChanceIncreasePercentage=-0.150000
+      End Object
+      Begin Object Name="IncreasedStructure_TraitBP_C_0"
+         Increased Structure Percent=0.500000
+         ApplicableMechParts(0)=Head
+         ApplicableMechParts(1)=CenterTorso
+      End Object
+      MiscInfo=NSLOCTEXT("[20F371FF4676677C1EA7A59D362AB637]", "4F745CE6418A6941F0D020B09FFAECD9", "{PilotTraitQuirkList}")
+      UnitTraits(0)=IncreasedStructure_TraitBP_C'"IncreasedStructure_TraitBP_C_0"'
+      UnitTraits(1)=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+   End Object
+   PilotTraitName=NSLOCTEXT("[20F371FF4676677C1EA7A59D362AB637]", "C3CB20FB427A0A564E38C0BF19A4B9E2", "Bitter End")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "BitterEnd_LongDesc")
+   PilotTraitShortDescription=NSLOCTEXT("[20F371FF4676677C1EA7A59D362AB637]", "272CD49449687590DE53339C08878319", "Increases head and CT structure.")
+   Icon=/Game/UI/_common/Textures/Icons/States/Structure_ICN_48px.Structure_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training")))
+   UnitTrait=ComposedTrait_BP_C'"ComposedTrait_BP_C_0"'
+End Object

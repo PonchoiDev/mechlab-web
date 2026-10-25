@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Affinity_Jenner_Chassis_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.MechAffinityTrait_C Name="MechAffinityQuirk_C_0"
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/HeatTraits/ReducedJJHeatGeneration_TraitBP.ReducedJJHeatGeneration_TraitBP_C Name="ReducedJJHeatGeneration_TraitBP_C_0"
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.Default__MechAffinityTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="MechAffinityQuirk_C_0"
+      Begin Object Name="ReducedJJHeatGeneration_TraitBP_C_0"
+         Jump Jet Heat Reduction Percent=0.050000
+      End Object
+      Begin Object Name="PilotTrait_BP_C_0"
+      End Object
+      Top Speed Percent=0.100000
+      TorsoTwistSpeedPercent=0.100000
+      TurnSpeedPercent=0.100000
+      MechType=(TagName="Mech.Light.Jenner")
+      MechTypeText=INVTEXT("Jenner")
+      MechTypes=(GameplayTags=((TagName="Mech.Light.Jenner"),(TagName="Mech.Light.JennerIIC")))
+      MiscInfo=NSLOCTEXT("[0E9199864531D5D1347C5CBABD2D40D6]", "3138D2B248634D8D61CF2C89A886584E", "{JJHeatGenQuirk}")
+      UnitTraits(1)=ReducedJJHeatGeneration_TraitBP_C'"ReducedJJHeatGeneration_TraitBP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_ShortDesc")
+   Icon=/Game/UI/_common/Textures/HUD/Minimap_Panel/map_icons/MiniMap_Mech_Light_ICN_STD_UIX.MiniMap_Mech_Light_ICN_STD_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Type.MechAffinity.Light")))
+   UnitTrait=MechAffinityTrait_C'"MechAffinityQuirk_C_0"'
+End Object

@@ -1,0 +1,15 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Frail_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+   End Object
+   Begin Object Name="PilotTrait_BP_C_0"
+      HiringCostAdjustmentPercent=-0.100000
+      SalaryAdjustmentPercent=-0.100000
+      DeathChanceIncreasePercentage=0.150000
+   End Object
+   PilotTraitName=NSLOCTEXT("[CE1FD82D4D3A04E8D456DB893318E1D1]", "3C77910E43272070B9BBDF81E72E9CF8", "Frail")
+   PilotTraitLongDescription=NSLOCTEXT("[CE1FD82D4D3A04E8D456DB893318E1D1]", "AB1DB90141E96E37A6A208B1F7869892", "Increases chance of death by {DeathPct}%")
+   PilotTraitShortDescription=NSLOCTEXT("[CE1FD82D4D3A04E8D456DB893318E1D1]", "6318EB934AAEE27532AEF28C6929D533", "This pilot isn\'t as tough as other pilots.")
+   Icon=/Game/UI/FrontEnd/Starmap/Textures/UI/ic_skull_challenge.ic_skull_challenge
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Negative"),(TagName="PilotTrait.Exclusive.Survival")))
+   UnitTrait=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+End Object

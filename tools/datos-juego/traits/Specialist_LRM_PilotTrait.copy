@@ -1,0 +1,27 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Specialist_LRM_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="ComposedTrait_BP_C_0.PilotTrait_BP_C_0"
+      End Object
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="ComposedTrait_BP_C_0.PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.100000
+         SalaryAdjustmentPercent=0.100000
+      End Object
+      Begin Object Name="Weapon_TraitBP_C_0"
+         SupportedWeapons=(GameplayTags=((TagName="Weapon.Missile.LRM"),(TagName="Weapon.ArtemisMissile.LRM")))
+         QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.150000)
+         WeaponTypeText=NSLOCTEXT("[E6AC0F0F489DB5DD21C5B48EC6672775]", "9B584A9D4733BBE33214248E713997F5", "LRM")
+      End Object
+      UnitTraits(0)=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+      UnitTraits(1)=PilotTrait_BP_C'"ComposedTrait_BP_C_0.PilotTrait_BP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Specialist_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Specialist_Missile_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Specialist_Missile_Trait_LongDesc")
+   Icon=/Game/UI/_common/Textures/Icons/Weapons/LongRangeMissile_ICN_48px.LongRangeMissile_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Type.WeaponExpert.Missile")))
+   UnitTrait=ComposedTrait_BP_C'"ComposedTrait_BP_C_0"'
+End Object

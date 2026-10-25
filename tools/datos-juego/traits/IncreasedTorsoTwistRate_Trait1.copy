@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedTorsoTwistRate_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/MobilityTraits/IncreasedTorsoTwistRate_TraitBP.IncreasedTorsoTwistRate_TraitBP_C Name="IncreasedTorsoTwistRate_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedTorsoTwistRate_TraitBP_C_0"
+      Torso Twist Rate Percent=0.200000
+   End Object
+   MechTraitName=NSLOCTEXT("[9663DBF748B1D5E8B01585B4028ECADA]", "BDD659B04496F18945AA11805F127329", "Torso Twist Speed")
+   MechTraitLongDescription=NSLOCTEXT("[9663DBF748B1D5E8B01585B4028ECADA]", "B8297A8C41D5F63E31EC83886E336EB4", "Replacing the entire core section\'s myomer bundles with an unusual arrangement of longer strands increases twist speed.")
+   MechTraitShortDescription=NSLOCTEXT("[9663DBF748B1D5E8B01585B4028ECADA]", "4FF9606E49F8129A04612BB8D361EDFC", "{0}% TORSO TWIST SPEED")
+   SlotSize=1
+   CBillInstallCost=750000
+   TimeInstallCost=15.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/TorsoTwist_Speed_1_ICN_UIX.TorsoTwist_Speed_1_ICN_UIX
+   Type=Mobility
+   MechTrait=IncreasedTorsoTwistRate_TraitBP_C'"IncreasedTorsoTwistRate_TraitBP_C_0"'
+   UnitTrait=IncreasedTorsoTwistRate_TraitBP_C'"IncreasedTorsoTwistRate_TraitBP_C_0"'
+End Object

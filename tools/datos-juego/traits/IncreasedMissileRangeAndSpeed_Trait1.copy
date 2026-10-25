@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedMissileRangeAndSpeed_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="IncreasedWeaponRange_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedWeaponRange_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.ArtemisMissile"),(TagName="Weapon.Missile")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.075000)
+   End Object
+   MechTraitName=NSLOCTEXT("[AEEF772641862AA23BA5F9AE2F619962]", "0DA5F81D4085E0D41A93D8BCDCB1C45A", "Aerodynamic Hull I")
+   MechTraitLongDescription=NSLOCTEXT("[AEEF772641862AA23BA5F9AE2F619962]", "2B578EB443433CFB1F52558AB6897D74", "A new aerodynamic hull with less drag allows missiles to travel faster and farther.")
+   MechTraitShortDescription=NSLOCTEXT("[AEEF772641862AA23BA5F9AE2F619962]", "D98030A2409EFDB49A0CB79E775F0223", "{0}% MISSILE RANGE AND VELOCITY")
+   SlotSize=1
+   CBillInstallCost=250000
+   TimeInstallCost=6.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Missile_RNG_SP_1_ICN_UIX.Missile_RNG_SP_1_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+End Object

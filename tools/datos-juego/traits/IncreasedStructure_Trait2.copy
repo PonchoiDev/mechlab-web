@@ -1,0 +1,27 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedStructure_Trait2"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/StructureTraits/IncreasedStructure_TraitBP.IncreasedStructure_TraitBP_C Name="IncreasedStructure_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedStructure_TraitBP_C_0"
+      Increased Structure Percent=0.100000
+      ApplicableMechParts(0)=Head
+      ApplicableMechParts(1)=CenterTorso
+      ApplicableMechParts(2)=LeftTorso
+      ApplicableMechParts(3)=LeftArm
+      ApplicableMechParts(4)=LeftLeg
+      ApplicableMechParts(5)=RightTorso
+      ApplicableMechParts(6)=RightArm
+      ApplicableMechParts(7)=RightLeg
+   End Object
+   MechTraitName=NSLOCTEXT("[366637CB40840218C4D07895E39F251E]", "C424A91A4D6E5D9BB485CCAA4FB46249", "Fortified Internal Structure II")
+   MechTraitLongDescription=NSLOCTEXT("[366637CB40840218C4D07895E39F251E]", "BD66EC934081F05E328654BF72767C31", "New, more shock-resistant fasteners are installed throughout the internal structure to allow for higher stress before failure.")
+   MechTraitShortDescription=NSLOCTEXT("[366637CB40840218C4D07895E39F251E]", "AA0B930F4AE002701D3D46A701CBD2CC", "{0}% INTERNAL STRUCTURE")
+   SlotSize=2
+   CBillInstallCost=1000000
+   TimeInstallCost=20.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=7.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/All_Structure_2_ICN_UIX.All_Structure_2_ICN_UIX
+   Type=Defense
+   MechTrait=IncreasedStructure_TraitBP_C'"IncreasedStructure_TraitBP_C_0"'
+   UnitTrait=IncreasedStructure_TraitBP_C'"IncreasedStructure_TraitBP_C_0"'
+End Object

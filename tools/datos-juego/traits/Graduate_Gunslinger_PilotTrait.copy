@@ -1,0 +1,27 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Graduate_Gunslinger_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/GunslingerGraduateTrait.GunslingerGraduateTrait_C Name="GunslingerGraduateTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/GunslingerGraduateTrait.Default__GunslingerGraduateTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="GunslingerGraduateTrait_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.500000
+         SalaryAdjustmentFlat=2500
+         SalaryAdjustmentPercent=0.250000
+         InjuryChanceIncreasePercentage=-0.100000
+         DeathChanceIncreasePercentage=-0.100000
+      End Object
+      GlobalDamagePercentBoost=0.050000
+      ClanOppositionDamagePercentBoost=0.100000
+      LethalityBonusPercent=0.100000
+      AccuracyBonusPercent=0.100000
+      UnitTraits(0)="PilotTrait_BP_C_0"
+   End Object
+   PilotTraitName=NSLOCTEXT("[C4B5ED5D4319095CFFFD798C8C9C0F81]", "815084164FAE9F91CED2C3BBAC26FA7D", "Gunslinger Graduate")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Graduate_Gunslinger_LongDesc")
+   PilotTraitShortDescription=NSLOCTEXT("[C4B5ED5D4319095CFFFD798C8C9C0F81]", "291AD6B04FE914936BB3B5AABC56EE08", "This pilot has graduated from the Gunslinger Program.")
+   AvailableDate=3062.01.01-00.00.00
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Commendation_ICN_48PX_UIX.Commendation_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Type.Graduate.Gunslinger")))
+   UnitTrait=GunslingerGraduateTrait_C'"GunslingerGraduateTrait_C_0"'
+End Object

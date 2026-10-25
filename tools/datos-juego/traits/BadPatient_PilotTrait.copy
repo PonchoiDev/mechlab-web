@@ -1,0 +1,15 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="BadPatient_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+   End Object
+   Begin Object Name="PilotTrait_BP_C_0"
+      HiringCostAdjustmentPercent=-0.050000
+      SalaryAdjustmentPercent=-0.050000
+      InjuryRecoveryAdjustmentPercent=0.150000
+   End Object
+   PilotTraitName=NSLOCTEXT("[31C6FF3044B4F3380445D79175995DF1]", "DBEC44C7453B688FF2FFACB5A339B32D", "Bad Patient")
+   PilotTraitLongDescription=NSLOCTEXT("[31C6FF3044B4F3380445D79175995DF1]", "3881EC93480C1ADA818A9D839E1CD46B", "This pilot recovers from injury {InjuryRecoveryAdjPct}% slower.")
+   PilotTraitShortDescription=NSLOCTEXT("[31C6FF3044B4F3380445D79175995DF1]", "A9EF2BA14DB331886A6FA686691A578F", "This pilot takes longer to heal.")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Time_ICN_48PX_UIX.Time_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Negative"),(TagName="PilotTrait.Exclusive.Recovery")))
+   UnitTrait=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+End Object

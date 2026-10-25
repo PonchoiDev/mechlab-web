@@ -1,0 +1,26 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="ClusterHitter_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+      End Object
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.150000
+         SalaryAdjustmentPercent=0.150000
+      End Object
+      Begin Object Name="Weapon_TraitBP_C_0"
+         SupportedWeapons=(GameplayTags=((TagName="Weapon.Ballistic.AutoCannon.LBX.LBX2"),(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX20"),(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX5"),(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX10"),(TagName="Weapon.Energy.ParticleCannon.PPC-X"),(TagName="Weapon.ArtemisMissile.SRM"),(TagName="Weapon.Missile.SRM"),(TagName="Weapon.ArtemisMissile.LRM"),(TagName="Weapon.Missile.LRM"),(TagName="Weapon.Missile.MRM"),(TagName="Weapon.Missile.ATM")))
+         QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.100000)
+      End Object
+      UnitTraits(0)=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+      UnitTraits(1)=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+   End Object
+   PilotTraitName=NSLOCTEXT("[4135C03D40DA2C413DC0228B9259DDAE]", "44AAAD8645AF1B0B71BEAF9B128B1166", "Cluster Hitter")
+   PilotTraitLongDescription=NSLOCTEXT("[4135C03D40DA2C413DC0228B9259DDAE]", "B7EE6DF243E8C30571BD4287300DE013", "Reduces spread radius by {0}% for all varieties of LBX, SRM, LRM, and PPC-X.")
+   PilotTraitShortDescription=NSLOCTEXT("[4135C03D40DA2C413DC0228B9259DDAE]", "F9618C3C4A3BA6D5B95246A7545EECF7", "Reduces spread radius by {0}%.")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Objectives_ICN_48PX_UIX.Objectives_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training")))
+   UnitTrait=ComposedTrait_BP_C'"ComposedTrait_BP_C_0"'
+End Object

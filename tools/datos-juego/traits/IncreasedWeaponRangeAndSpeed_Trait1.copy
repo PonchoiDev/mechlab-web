@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedWeaponRangeAndSpeed_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="IncreasedWeaponRange_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedWeaponRange_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Ballistic"),(TagName="Weapon.Energy"),(TagName="Weapon.ArtemisMissile"),(TagName="Weapon.Missile"),(TagName="Weapon.Artillery")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.100000)
+   End Object
+   MechTraitName=NSLOCTEXT("[6B7ABDE749728594DA460484DB08BE23]", "56CDF8E540AD79C2751BB5B04B72A0E0", "Improved Range")
+   MechTraitLongDescription=NSLOCTEXT("[6B7ABDE749728594DA460484DB08BE23]", "055859814B4F9953F70D44881B3B8179", "Classified documentation regarding several weapon targeting systems gives your technicians the ability to tune yours to much higher tolerances, maintaining accurate delivery at increased range.")
+   MechTraitShortDescription=NSLOCTEXT("[6B7ABDE749728594DA460484DB08BE23]", "A990B0FC4937A49E0527F58B01D17655", "{0}% WEAPON RANGE AND VELOCITY")
+   SlotSize=2
+   CBillInstallCost=800000
+   TimeInstallCost=10.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=7.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/All_Weapons_RNG_SP_1_ICN_UIX.All_Weapons_RNG_SP_1_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+End Object

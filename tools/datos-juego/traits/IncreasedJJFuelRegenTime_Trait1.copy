@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedJJFuelRegenTime_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/MobilityTraits/IncreasedJJFuelRegenTime_TraitBP.IncreasedJJFuelRegenTime_TraitBP_C Name="IncreasedJJFuelRegenTime_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedJJFuelRegenTime_TraitBP_C_0"
+      Jump Jet Fuel Regen Percent=0.200000
+   End Object
+   MechTraitName=NSLOCTEXT("[68BB30C0464D3669633FBD8C5612E092]", "CBD45C0848FBBA34C29E72A3EC514918", "Rapid Jump Jet Recharge")
+   MechTraitLongDescription=NSLOCTEXT("[68BB30C0464D3669633FBD8C5612E092]", "616B2D79481AFF285F8F139853C043EF", "Additional heat conducting materials are installed around Jump Jets, cooling the jet between uses faster and allowing for repeated use over shorter periods.")
+   MechTraitShortDescription=NSLOCTEXT("[68BB30C0464D3669633FBD8C5612E092]", "57FB98684AF3F084BF766180A22B6407", "{0}% JUMP JET REFUEL RATE")
+   SlotSize=1
+   CBillInstallCost=100000
+   TimeInstallCost=5.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/JJ_Regen_SPD_1_ICN_UIX.JJ_Regen_SPD_1_ICN_UIX
+   Type=Mobility
+   MechTrait=IncreasedJJFuelRegenTime_TraitBP_C'"IncreasedJJFuelRegenTime_TraitBP_C_0"'
+   UnitTrait=IncreasedJJFuelRegenTime_TraitBP_C'"IncreasedJJFuelRegenTime_TraitBP_C_0"'
+End Object

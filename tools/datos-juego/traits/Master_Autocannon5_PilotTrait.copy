@@ -1,0 +1,23 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Master_Autocannon5_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/WeaponQuirkSetTrait.WeaponQuirkSetTrait_C Name="WeaponQuirkSetTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="WeaponQuirkSetTrait_C_0.PilotTrait_BP_C_0"
+      End Object
+   End Object
+   Begin Object Name="WeaponQuirkSetTrait_C_0"
+      Begin Object Name="WeaponQuirkSetTrait_C_0.PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.200000
+         SalaryAdjustmentPercent=0.200000
+      End Object
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Ballistic.AutoCannon.LBX.LBX5"),(TagName="Weapon.Ballistic.AutoCannon.Standard.AC5"),(TagName="Weapon.Ballistic.AutoCannon.Ultra.AC5")))
+      WeaponType=NSLOCTEXT("[295FE7EB4826C27E0E2ADD945DF31EA5]", "B80841B144E2A002A96CF9AFF10A00C0", "AC/5")
+      QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.100000)))
+      MiscInfo=NSLOCTEXT("[295FE7EB4826C27E0E2ADD945DF31EA5]", "9CA9BEA24CAF1061D5D4409F2E98469B", "(Also applies to LB 5-X and UAC/5)")
+      UnitTraits(0)=PilotTrait_BP_C'"WeaponQuirkSetTrait_C_0.PilotTrait_BP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Master_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Master_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Master_Trait_ShortDesc")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Ballistic_ICN_48PX_UIX.Ballistic_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Generation")))
+   UnitTrait=WeaponQuirkSetTrait_C'"WeaponQuirkSetTrait_C_0"'
+End Object

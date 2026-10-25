@@ -1,0 +1,34 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Affinity_Puma_Chassis_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.MechAffinityTrait_C Name="MechAffinityQuirk_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.Default__MechAffinityTrait_C:PilotTrait_BP_C_0'
+      End Object
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/ArmorTraits/IncreasedArmor_TraitBP.IncreasedArmor_TraitBP_C Name="IncreasedArmor_TraitBP_C_0"
+      End Object
+   End Object
+   Begin Object Name="MechAffinityQuirk_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.150000
+         SalaryAdjustmentPercent=0.150000
+      End Object
+      Begin Object Name="IncreasedArmor_TraitBP_C_0"
+         Increased Armor Percent=0.050000
+         ApplicableMechParts(0)=CenterTorso
+      End Object
+      Top Speed Percent=0.100000
+      TorsoTwistSpeedPercent=0.100000
+      TurnSpeedPercent=0.150000
+      MechType=(TagName="Mech.Light.Adder")
+      MechTypeText=INVTEXT("Puma")
+      MechTypes=(GameplayTags=((TagName="Mech.Light.Adder")))
+      MiscInfo=NSLOCTEXT("[4ADE66894988C1038827A5A8DB8EB753]", "AECEEFCB4E80730E66DCBB9789C79ABF", "{ArmorQuirk}")
+      UnitTraits(0)="PilotTrait_BP_C_0"
+      UnitTraits(1)=IncreasedArmor_TraitBP_C'"IncreasedArmor_TraitBP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_ShortDesc")
+   AvailableDate=3054.01.01-14.00.00
+   Icon=/Game/UI/_common/Textures/HUD/Minimap_Panel/map_icons/MiniMap_Mech_Light_ICN_STD_UIX.MiniMap_Mech_Light_ICN_STD_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Type.MechAffinity.Light"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="DLC.DLC7")))
+   UnitTrait=MechAffinityTrait_C'"MechAffinityQuirk_C_0"'
+End Object

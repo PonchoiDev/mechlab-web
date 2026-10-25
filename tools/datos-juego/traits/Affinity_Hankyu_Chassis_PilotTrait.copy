@@ -1,0 +1,35 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Affinity_Hankyu_Chassis_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.MechAffinityTrait_C Name="MechAffinityQuirk_C_0"
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.Default__MechAffinityTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="MechAffinityQuirk_C_0"
+      Begin Object Name="Weapon_TraitBP_C_0"
+         SupportedWeapons=(GameplayTags=((TagName="Weapon.Energy.Flamer")))
+         QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatDamagePercentage_Quirk.HeatDamagePercentage_Quirk_C"',Value=0.050000)
+         WeaponTypeText=NSLOCTEXT("[89554264428A5542FEF7FD9F76D3D2DE]", "29E017F2476D67EBF1CFA8A6DA832CCE", "Flamer")
+      End Object
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.150000
+         SalaryAdjustmentPercent=0.150000
+      End Object
+      Top Speed Percent=0.100000
+      TorsoTwistSpeedPercent=0.100000
+      TurnSpeedPercent=0.150000
+      MechType=(TagName="Mech.Light.ArcticCheetah")
+      MechTypeText=INVTEXT("Hankyu")
+      MechTypes=(GameplayTags=((TagName="Mech.Light.ArcticCheetah")))
+      MiscInfo=INVTEXT("{WeaponTraitQuirk} ({WeaponType})")
+      UnitTraits(0)="PilotTrait_BP_C_0"
+      UnitTraits(1)=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_ShortDesc")
+   AvailableDate=3054.01.01-14.00.00
+   Icon=/Game/UI/_common/Textures/HUD/Minimap_Panel/map_icons/MiniMap_Mech_Light_ICN_STD_UIX.MiniMap_Mech_Light_ICN_STD_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Type.MechAffinity.Light"),(TagName="DLC.DLC9")))
+   UnitTrait=MechAffinityTrait_C'"MechAffinityQuirk_C_0"'
+End Object

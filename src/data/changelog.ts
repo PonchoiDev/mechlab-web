@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-25-cantina-upgrades',
+    date: '2026-10-25',
+    title: 'Cantina upgrades',
+    items: [
+      'Upgrades in the toolbar opens the cantina upgrades: install them in the \'Mech upgrade slots, like the in-game Upgrades screen',
+      'Stats show the base value and, in green, the upgraded one: armor, volley and melee damage, cooling, top speed and range',
+      'Bonuses add up as in the game: Enhanced Energy Output I and II give +15% energy damage',
+      'Upgrades are saved in build links, My builds and the build image'
+    ]
+  },
+  {
     id: '2026-10-24-hardpoint-sizes',
     date: '2026-10-24',
     title: 'Hardpoint sizes from the game',

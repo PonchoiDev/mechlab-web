@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="ReducedBallisticHeat_Trait2"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+   End Object
+   Begin Object Name="Weapon_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Ballistic")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.050000)
+   End Object
+   MechTraitName=NSLOCTEXT("[DB43024C46C0D4695AA7B9B7971D6309]", "3E2A54754CCEE33235146DA8814661A3", "Ballistic Heat Transfer II")
+   MechTraitLongDescription=NSLOCTEXT("[DB43024C46C0D4695AA7B9B7971D6309]", "4E7027B44638E587D1E4589940C1E888", "Additional heat conducting materials are integrated into and around weapon barrels, transferring a small amount of excess heat into spent casings just before they are ejected.")
+   MechTraitShortDescription=NSLOCTEXT("[DB43024C46C0D4695AA7B9B7971D6309]", "EAAB9CF64660254F5F4FCC8AE3A060A0", "{0}% BALLISTIC HEAT")
+   SlotSize=2
+   CBillInstallCost=1500000
+   TimeInstallCost=30.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=7.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Ballistic_HEAT_2_ICN_UIX.Ballistic_HEAT_2_ICN_UIX
+   Type=Heat
+   MechTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+End Object

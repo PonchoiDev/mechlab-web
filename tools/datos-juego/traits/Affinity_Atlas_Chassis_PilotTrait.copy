@@ -1,0 +1,30 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Affinity_Atlas_Chassis_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.MechAffinityTrait_C Name="MechAffinityQuirk_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.Default__MechAffinityTrait_C:PilotTrait_BP_C_0'
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ElectronicsTrait.ElectronicsTrait_C Name="ElectronicsTrait_C_0"
+      End Object
+   End Object
+   Begin Object Name="MechAffinityQuirk_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+      End Object
+      Begin Object Name="ElectronicsTrait_C_0"
+         SensorRangeMultiplier=1.100000
+         UnitTraits=
+      End Object
+      Top Speed Percent=0.100000
+      TorsoTwistSpeedPercent=0.100000
+      TurnSpeedPercent=0.100000
+      MechType=(TagName="Mech.Assault.Atlas")
+      MechTypeText=INVTEXT("Atlas")
+      MechTypes=(GameplayTags=((TagName="Mech.Assault.Atlas"),(TagName="Mech.Assault.AtlasII")))
+      MiscInfo=INVTEXT("{SensorRangeQuirk}")
+      UnitTraits(1)=ElectronicsTrait_C'"ElectronicsTrait_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Affinity_Trait_ShortDesc")
+   Icon=/Game/UI/_common/Textures/HUD/Minimap_Panel/map_icons/MiniMap_Mech_Assault_ICN_STD_UIX.MiniMap_Mech_Assault_ICN_STD_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Type.MechAffinity.Assault")))
+   UnitTrait=MechAffinityTrait_C'"MechAffinityQuirk_C_0"'
+End Object

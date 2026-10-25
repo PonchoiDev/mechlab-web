@@ -1,0 +1,27 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Specialist_Laser_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="ComposedTrait_BP_C_0.PilotTrait_BP_C_0"
+      End Object
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="ComposedTrait_BP_C_0.PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.100000
+         SalaryAdjustmentPercent=0.100000
+      End Object
+      Begin Object Name="Weapon_TraitBP_C_0"
+         SupportedWeapons=(GameplayTags=((TagName="Weapon.Energy.Laser")))
+         QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.050000)
+         WeaponTypeText=NSLOCTEXT("[09C8A717421A9C9B7F9A0B93C093FEF2]", "10ACD6D84872F4855206E3BFB9D67331", "Laser")
+      End Object
+      UnitTraits(0)=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+      UnitTraits(1)=PilotTrait_BP_C'"ComposedTrait_BP_C_0.PilotTrait_BP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Specialist_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Specialist_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Specialist_Trait_ShortDesc")
+   Icon=/Game/UI/_common/Textures/Icons/Weapons/ERangeLaser_ICN_48px.ERangeLaser_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Type.WeaponExpert.Energy")))
+   UnitTrait=ComposedTrait_BP_C'"ComposedTrait_BP_C_0"'
+End Object

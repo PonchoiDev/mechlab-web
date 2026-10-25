@@ -8,6 +8,7 @@ import {
   getHardpointOccupancy,
   weaponFitsHardpoint
 } from './equipment';
+import { sanitizeUpgrades } from './upgrades';
 import { createEmptyArmor, createEmptyLoadout, ZONE_KEYS } from './zones';
 
 // Versión del formato del enlace, para poder cambiarlo sin romper los enlaces ya compartidos.
@@ -16,12 +17,15 @@ export const BUILD_PARAM = 'b';
 
 // Las armas guardan su anclaje y, si no es el de catálogo, su tier. El resto solo su id.
 type CodedItem = string | [id: string, hardpointIndex: number, tier?: string];
-type CodedBuild = [version: number, mechId: string, armor: number[], zones: CodedItem[][]];
+// Las mejoras de la cantina van al final y solo si hay alguna, para que las builds sin mejoras
+// tengan el mismo código que antes.
+type CodedBuild = [version: number, mechId: string, armor: number[], zones: CodedItem[][], upgrades?: string[]];
 
 export interface SharedBuild {
   mech: Mech;
   loadout: EquippedLoadout;
   armor: ArmorState;
+  upgrades: string[];
 }
 
 const toBase64Url = (text: string) =>
@@ -35,7 +39,13 @@ const fromBase64Url = (code: string) => {
   return new TextDecoder().decode(Uint8Array.from(binary, char => char.charCodeAt(0)));
 };
 
-export const encodeBuild = (mech: Mech, loadout: EquippedLoadout, armor: ArmorState, catalog: Item[]): string => {
+export const encodeBuild = (
+  mech: Mech,
+  loadout: EquippedLoadout,
+  armor: ArmorState,
+  catalog: Item[],
+  upgrades: string[] = []
+): string => {
   const catalogTiers = new Map(catalog.map(item => [item.id, item.tier]));
   const zones = ZONE_KEYS.map(zone => loadout[zone].map((item): CodedItem => {
     if (item.type !== 'weapon' || item.hardpointIndex === undefined) return item.id;
@@ -49,6 +59,7 @@ export const encodeBuild = (mech: Mech, loadout: EquippedLoadout, armor: ArmorSt
     ZONE_KEYS.flatMap(zone => [armor[zone].front, armor[zone].rear]),
     zones
   ];
+  if (upgrades.length > 0) build.push(upgrades);
   return toBase64Url(JSON.stringify(build));
 };
 
@@ -63,7 +74,7 @@ export const decodeBuild = (code: string, mechs: Mech[], catalog: Item[]): Share
   }
   if (!Array.isArray(parsed) || parsed[0] !== BUILD_CODE_VERSION) return null;
 
-  const [, mechId, codedArmor, codedZones] = parsed as CodedBuild;
+  const [, mechId, codedArmor, codedZones, codedUpgrades] = parsed as CodedBuild;
   const mech = mechs.find(candidate => candidate.id === mechId);
   if (!mech || !Array.isArray(codedArmor) || !Array.isArray(codedZones)) return null;
 
@@ -102,7 +113,7 @@ export const decodeBuild = (code: string, mechs: Mech[], catalog: Item[]): Share
     }
   });
 
-  return { mech, loadout, armor };
+  return { mech, loadout, armor, upgrades: sanitizeUpgrades(mech, codedUpgrades) };
 };
 
 // Build de fábrica del mech (su loadout del juego), con las mismas reglas que un enlace compartido.
