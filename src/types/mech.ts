@@ -53,6 +53,10 @@ export interface Mech {
   hero?: boolean;
   introYear?: number;
   role?: string;
+  // Movimiento y calor del chasis: giro de pie y del torso en °/s, y capacidad de calor sin disipadores.
+  turnSpeed?: number;
+  torsoTwist?: { yaw: number; pitch: number };
+  baseHeatCapacity?: number;
   // Ranuras para las mejoras de la cantina.
   upgradeSlots?: number;
   components: MechComponents;

@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { decodeBuild, encodeBuild, getStockBuild } from './buildCode';
 import {
+  calculateHeatCapacity,
   createDefaultArmor,
   formatArmorPoints,
   formatCoolingRate,
+  formatTurnRate,
   getArmorScale,
   getBuildSummary,
   scaleArmorPoints,
@@ -94,6 +96,50 @@ describe('Faster Cooling en el juego', () => {
   });
 });
 
+// Resumen de la pantalla de mejoras del juego: DRG-1G-S y BLR-1P.
+describe('resumen del mech en el juego', () => {
+  const battlemaster = getMech('BLR-1P');
+  const summaryOf = (mech: typeof dragon, ids: string[] = []) =>
+    getBuildSummary(mech, mapZones(() => []), createDefaultArmor(mech.components), getUpgrades(ids));
+
+  it('estructura total: 207 y 269', () => {
+    expect(summaryOf(dragon).structurePoints).toBe(207);
+    expect(summaryOf(battlemaster).structurePoints).toBe(269);
+  });
+
+  it('giro de pie y del torso: 108, 135, 84 y 64,7, 85,5, 53,4', () => {
+    const turns = (mech: typeof dragon) => {
+      const { turnSpeed, torsoYaw, torsoPitch } = summaryOf(mech);
+      return [turnSpeed!, torsoYaw!, torsoPitch!].map(formatTurnRate);
+    };
+    expect(turns(dragon)).toEqual(['108', '135', '84']);
+    expect(turns(battlemaster)).toEqual(['64.7', '85.5', '53.4']);
+  });
+
+  it('Anchor Turn I y II se suman: 108 -> 116 -> 132', () => {
+    expect(formatTurnRate(summaryOf(dragon, ['IncreasedTurnSpeed_Trait1']).turnSpeed!)).toBe('116');
+    expect(formatTurnRate(summaryOf(dragon, ['IncreasedTurnSpeed_Trait1', 'IncreasedTurnSpeed_Trait2']).turnSpeed!)).toBe('132');
+  });
+
+  it('capacidad de calor: la del chasis más 2 por disipador doble y 1 por simple (66 y 51)', () => {
+    const sinks = (doubles: number, singles: number) => mapZones(zone => zone === 'centerTorso'
+      ? [...Array(doubles).fill(allItems.find(item => item.id === 'DoubleHeatSink')!), ...Array(singles).fill(allItems.find(item => item.id === 'SingleHeatSink')!)]
+      : []);
+    expect(calculateHeatCapacity(dragon, sinks(6, 4))).toBe(66);
+    expect(calculateHeatCapacity(battlemaster, sinks(3, 5))).toBe(51);
+  });
+
+  it('sensor y fijación de blanco: 800 m, 2 s y 1,35 s', () => {
+    const { sensorRange, lockRetentionTime, loseLockTime } = summaryOf(dragon);
+    expect([sensorRange, lockRetentionTime, loseLockTime]).toEqual([800, 2, 1.35]);
+  });
+
+  it('velocidad del SRM 4: 460 m/s en tier 4 y 500 en tier 5', () => {
+    const srm = allItems.find(item => item.id === 'SRM4')!;
+    expect([srm.tiers?.['4']?.speed, srm.tiers?.['5']?.speed]).toEqual([460, 500]);
+  });
+});
+
 describe('reglas de instalación', () => {
   const [energyI, energyII] = getUpgrades(['IncreasedEnergyDamage_Trait1', 'IncreasedEnergyDamage_Trait2']);
 
@@ -117,7 +163,7 @@ describe('reglas de instalación', () => {
 
   it('Damage Tuning cuenta para todos los tipos de arma, también el cuerpo a cuerpo', () => {
     const modifiers = getUpgradeModifiers(getUpgrades(['IncreasedWeaponDamage_Trait1', 'IncreasedEnergyDamage_Trait1']));
-    expect(modifiers.damage).toEqual({ artillery: 0.05, ballistic: 0.05, energy: 0.1, melee: 0.05, missile: 0.05 });
+    expect(modifiers.weapon.damage).toEqual({ artillery: 0.05, ballistic: 0.05, energy: 0.1, melee: 0.05, missile: 0.05 });
   });
 });
 

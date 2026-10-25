@@ -2,8 +2,25 @@ import type { WeaponType } from './item';
 
 export type UpgradeCategory = 'Firepower' | 'Defense' | 'Heat' | 'Mobility' | 'Targeting';
 
-// Estadísticas de la web que cambia una mejora. Las demás (cooldown, giro, sensores...) solo se describen.
-export type UpgradeStat = 'armor' | 'cooling' | 'topSpeed' | 'damage' | 'range';
+// Estadísticas que cambia una mejora. Las demás (aceleración, saltos, duración del láser, dispersión)
+// solo se describen. heatGeneration es el multiplicador de calor generado de todo el mech.
+export type MechUpgradeStat =
+  | 'armor'
+  | 'structure'
+  | 'cooling'
+  | 'heatCapacity'
+  | 'heatGeneration'
+  | 'topSpeed'
+  | 'turnSpeed'
+  | 'torsoTwist'
+  | 'sensorRange'
+  | 'lockRetention'
+  | 'loseLockTime';
+
+// Por tipo de arma. range sube también la velocidad del proyectil.
+export type WeaponUpgradeStat = 'damage' | 'range' | 'cooldown' | 'heat';
+
+export type UpgradeStat = MechUpgradeStat | WeaponUpgradeStat;
 
 export interface UpgradeEffect {
   stat: UpgradeStat;

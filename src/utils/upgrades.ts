@@ -1,7 +1,7 @@
 import upgradesData from '../data/traits.json';
 import type { WeaponType } from '../types/item';
 import type { Mech } from '../types/mech';
-import type { Upgrade, UpgradeCategory } from '../types/upgrade';
+import type { MechUpgradeStat, Upgrade, UpgradeCategory, UpgradeStat, WeaponUpgradeStat } from '../types/upgrade';
 
 export const UPGRADES = upgradesData as Upgrade[];
 
@@ -32,22 +32,37 @@ export const sanitizeUpgrades = (mech: Mech, ids: unknown): string[] => {
   return installed.map(upgrade => upgrade.id);
 };
 
-export interface UpgradeModifiers {
-  armor: number;
-  cooling: number;
-  topSpeed: number;
-  damage: Partial<Record<WeaponType, number>>;
-  range: Partial<Record<WeaponType, number>>;
-}
+// Fracción que suma cada estadística del mech y, por tipo de arma, cada estadística de arma.
+export type UpgradeModifiers = Record<MechUpgradeStat, number> & {
+  weapon: Record<WeaponUpgradeStat, Partial<Record<WeaponType, number>>>;
+};
 
-export const NO_UPGRADE_MODIFIERS: UpgradeModifiers = { armor: 0, cooling: 0, topSpeed: 0, damage: {}, range: {} };
+const WEAPON_STATS: WeaponUpgradeStat[] = ['damage', 'range', 'cooldown', 'heat'];
+const isWeaponStat = (stat: UpgradeStat): stat is WeaponUpgradeStat => (WEAPON_STATS as UpgradeStat[]).includes(stat);
+
+const createModifiers = (): UpgradeModifiers => ({
+  armor: 0,
+  structure: 0,
+  cooling: 0,
+  heatCapacity: 0,
+  heatGeneration: 0,
+  topSpeed: 0,
+  turnSpeed: 0,
+  torsoTwist: 0,
+  sensorRange: 0,
+  lockRetention: 0,
+  loseLockTime: 0,
+  weapon: { damage: {}, range: {}, cooldown: {}, heat: {} }
+});
+
+export const NO_UPGRADE_MODIFIERS: UpgradeModifiers = createModifiers();
 
 // Los porcentajes se suman: Enhanced Energy Output I y II juntos dan +15 % (en el juego, 7,8 -> 8,97).
 export const getUpgradeModifiers = (upgrades: Upgrade[]): UpgradeModifiers => {
-  const modifiers: UpgradeModifiers = { armor: 0, cooling: 0, topSpeed: 0, damage: {}, range: {} };
+  const modifiers = createModifiers();
   for (const effect of upgrades.flatMap(upgrade => upgrade.effects)) {
-    if (effect.stat === 'damage' || effect.stat === 'range') {
-      const byWeapon = modifiers[effect.stat];
+    if (isWeaponStat(effect.stat)) {
+      const byWeapon = modifiers.weapon[effect.stat];
       for (const weaponType of effect.weaponTypes ?? []) byWeapon[weaponType] = (byWeapon[weaponType] ?? 0) + effect.value;
     } else {
       modifiers[effect.stat] += effect.value;
@@ -55,3 +70,7 @@ export const getUpgradeModifiers = (upgrades: Upgrade[]): UpgradeModifiers => {
   }
   return modifiers;
 };
+
+// Bonus de una estadística de arma para un tipo de arma.
+export const getWeaponBonus = (modifiers: UpgradeModifiers, stat: WeaponUpgradeStat, weaponType: WeaponType | null | undefined): number =>
+  weaponType ? modifiers.weapon[stat][weaponType] ?? 0 : 0;

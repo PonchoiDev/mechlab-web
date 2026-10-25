@@ -19,15 +19,26 @@ REGEX_QUIRK = re.compile(r"/Game/Quirks/([A-Za-z]+)_Quirk\.[^\"]+\"',Value=([+-]
 REGEX_ARMAS = re.compile(r'SupportedWeapons=\(GameplayTags=\((.*?)\)\)\n')
 REGEX_ETIQUETA_ARMA = re.compile(r'TagName="Weapon\.([A-Za-z]+)(?:\.([A-Za-z]+))?"')
 
-# Efectos que cambian las estadísticas de la web. El resto solo se describe.
+# Efectos que cambian las estadísticas de la web. El resto (aceleración, saltos, duración del láser,
+# dispersión de misiles) solo se describe.
 ESTADISTICA_DE_PARAMETRO = {
     "Increased Armor Percent": "armor",
+    "Increased Structure Percent": "structure",
     "Heat Cooling Percent": "cooling",
+    "Heat Capacity Percent": "heatCapacity",
+    "Heat Reduction Percent": "heatGeneration",
     "Top Speed Percent": "topSpeed",
+    "Turn Speed Percent": "turnSpeed",
+    "Torso Twist Rate Percent": "torsoTwist",
+    "Increased Sensor Range Percent": "sensorRange",
+    "Increased Lock Retention Time Percent": "lockRetention",
+    "Increased Lose Lock Time Percent": "loseLockTime",
 }
 ESTADISTICA_DE_QUIRK = {
     "DamagePercentage": "damage",
     "RangeAndSpeedPercentage": "range",
+    "CooldownPercentage": "cooldown",
+    "HeatGeneratedPercentage": "heat",
 }
 TIPO_DE_ARMA = {
     "Ballistic": "ballistic", "Energy": "energy", "Missile": "missile", "ArtemisMissile": "missile",
@@ -72,7 +83,8 @@ def parsear_mejora(id_mejora, contenido):
     efectos = []
     for nombre, valor in parametros.items():
         if nombre in ESTADISTICA_DE_PARAMETRO:
-            efectos.append({"stat": ESTADISTICA_DE_PARAMETRO[nombre], "value": valor})
+            signo = -1 if nombre in PARAMETROS_DE_REDUCCION else 1
+            efectos.append({"stat": ESTADISTICA_DE_PARAMETRO[nombre], "value": signo * valor})
     if quirk and quirk.group(1) in ESTADISTICA_DE_QUIRK:
         efectos.append({"stat": ESTADISTICA_DE_QUIRK[quirk.group(1)], "value": float(quirk.group(2)), "weaponTypes": armas})
 

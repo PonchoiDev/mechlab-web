@@ -1,17 +1,12 @@
 import type { Mech } from '../types/mech';
 import { formatArmorPoints, formatCoolingRate, truncateTo, type BuildSummary } from '../utils/calculators';
+import { UpgradedValue } from './UpgradedValue';
 
 interface StatsReadoutProps {
   mech: Mech;
   summary: BuildSummary;
   // Resumen sin las mejoras de la cantina, si hay alguna instalada.
   base?: BuildSummary;
-}
-
-// Con mejoras, el valor sin ellas y, en verde, el mejorado (como el mechlab del juego: 76,6 ▲ 78,2).
-function Upgraded({ value, base }: { value: string; base?: string }) {
-  if (base === undefined || base === value) return <>{value}</>;
-  return <>{base} <span className="readout-upgraded">▲ {value}</span></>;
 }
 
 export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
@@ -44,7 +39,7 @@ export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
       <div className="readout-cell">
         <span className="readout-label">ARMOR POINTS</span>
         <strong>
-          <Upgraded value={formatArmor(armorPoints)} base={base && formatArmor(base.armorPoints)} />
+          <UpgradedValue value={formatArmor(armorPoints)} base={base && formatArmor(base.armorPoints)} />
           {' '}<small>/ {formatArmor(maxArmorPoints)}</small>
         </strong>
       </div>
@@ -55,7 +50,7 @@ export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
       <div className="readout-cell">
         <span className="readout-label">TOP SPEED</span>
         <strong>
-          <Upgraded value={topSpeed.toFixed(1)} base={base?.topSpeed.toFixed(1)} />
+          <UpgradedValue value={topSpeed.toFixed(1)} base={base?.topSpeed.toFixed(1)} />
           {' '}<small>km/h{boostedSpeed !== null && ` · ${boostedSpeed.toFixed(1)} boost`}</small>
         </strong>
       </div>
@@ -65,11 +60,11 @@ export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
       </div>
       <div className="readout-cell">
         <span className="readout-label">VOLLEY DAMAGE</span>
-        <strong><Upgraded value={String(firepower)} base={base && String(base.firepower)} /></strong>
+        <strong><UpgradedValue value={String(firepower)} base={base && String(base.firepower)} /></strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label" title="Melee weapons and punches from empty hands, lower arms and fists">MELEE DAMAGE</span>
-        <strong><Upgraded value={String(meleeDamage)} base={base && String(base.meleeDamage)} /></strong>
+        <strong><UpgradedValue value={String(meleeDamage)} base={base && String(base.meleeDamage)} /></strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label">HEAT SPIKE</span>
@@ -78,13 +73,13 @@ export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
       <div className="readout-cell">
         <span className="readout-label">TOTAL COOLING RATE</span>
         <strong>
-          <Upgraded value={formatCooling(coolingRate)} base={base && formatCooling(base.coolingRate)} />
+          <UpgradedValue value={formatCooling(coolingRate)} base={base && formatCooling(base.coolingRate)} />
           {coolingRate !== null && <> <small>heat/s</small></>}
         </strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label">MAX WEAPON RANGE</span>
-        <strong><Upgraded value={formatRange(maxWeaponRange)} base={base && formatRange(base.maxWeaponRange)} /></strong>
+        <strong><UpgradedValue value={formatRange(maxWeaponRange)} base={base && formatRange(base.maxWeaponRange)} /></strong>
       </div>
     </section>
   );

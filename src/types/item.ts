@@ -16,6 +16,8 @@ export interface ItemTierStats {
   range?: number;
   maxRange?: number;
   rpm?: number;
+  // Velocidad del proyectil en m/s; los láseres no tienen.
+  speed?: number;
 }
 
 export interface Item {
@@ -32,6 +34,8 @@ export interface Item {
   damage?: number;
   heat?: number;
   cooling?: number;
+  // Capacidad de calor que suma un disipador.
+  heatCapacity?: number;
   // MASC y Supercharger: aumento de velocidad mientras se usan (0.5 = +50 %).
   speedBoost?: number;
   capacity?: number;

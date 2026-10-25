@@ -261,7 +261,7 @@ export default function App() {
           )}
         />
 
-        <LoadoutAnalysis weapons={summary.weapons} ammunition={summary.ammunition} />
+        <LoadoutAnalysis mech={mech} summary={summary} base={baseSummary} />
       </main>
 
       {activeZone && (

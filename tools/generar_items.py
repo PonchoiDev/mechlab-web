@@ -16,6 +16,10 @@ REGEX_SLOT_TYPE = re.compile(r'(?:WeaponSlotTypeAssetId|SupportedSlotTypesAssetI
 REGEX_WEAPON_SIZE = re.compile(r'WeaponSize=([A-Za-z0-9_]+)')
 REGEX_CAPACITY = re.compile(r'Capacity=([0-9.]+)')
 REGEX_REFRIGERACION = re.compile(r'HeatSink=\([^)]*HealthyEfficiency=([0-9.]+)')
+# Capacidad de calor que suma cada disipador (doble 2, simple 1).
+REGEX_CAPACIDAD_CALOR = re.compile(r'HeatSink=\([^)]*HealthyCapacity=([0-9.]+)')
+# Velocidad del proyectil en cm/s; los láseres no tienen.
+REGEX_VELOCIDAD = re.compile(r'(?<![A-Za-z])Speed=([0-9.]+)')
 # MASC y Supercharger: aumento de velocidad mientras se usan (0.5 = +50 %).
 REGEX_IMPULSO = re.compile(r'MASCStats=\([^)]*BoostSpeed=([0-9.]+)')
 REGEX_TIER = re.compile(r'_Lvl(\d+)$', re.IGNORECASE)
@@ -161,7 +165,8 @@ def obtener_estadisticas_base(contenido):
         "heatPerShot": buscar_numero(REGEX_HEAT, contenido, 0.0),
         "cooldown": buscar_numero(REGEX_COOLDOWN, contenido, 0.0),
         "range": round(rango / 100.0, 1) if rango is not None else 0.0,
-        "maxRange": round((rango_maximo if rango_maximo is not None else rango or 0.0) / 100.0, 1)
+        "maxRange": round((rango_maximo if rango_maximo is not None else rango or 0.0) / 100.0, 1),
+        "speed": round(buscar_numero(REGEX_VELOCIDAD, contenido, 0.0) / 100.0, 1)
     }
 
 
@@ -178,6 +183,8 @@ def calcular_tier(contenido, base):
         enfriamiento = round(base["cooldown"] * (1.0 + q_cd), 3)
         rango = round(base["range"] * (1.0 + q_rng), 1)
         rango_maximo = round(base["maxRange"] * (1.0 + q_rng), 1)
+        q_vel = quirks.get("SpeedPercentage_Quirk", quirks.get("RangeAndSpeedPercentage_Quirk", 0.0))
+        velocidad = round(base["speed"] * (1.0 + q_vel), 1)
     else:
         # Sin quirks: tier 1 o armas con valores directos, como el AMS.
         propias = obtener_estadisticas_base(contenido)
@@ -186,8 +193,9 @@ def calcular_tier(contenido, base):
         enfriamiento = round(propias["cooldown"], 3) if REGEX_COOLDOWN.search(contenido) else base["cooldown"]
         rango = propias["range"] if REGEX_RANGE.search(contenido) else base["range"]
         rango_maximo = propias["maxRange"] if REGEX_RANGE.search(contenido) else base["maxRange"]
+        velocidad = propias["speed"] if REGEX_VELOCIDAD.search(contenido) else base["speed"]
 
-    return {
+    estadisticas = {
         "damage": dano,
         "heatPerShot": calor,
         "cooldown": enfriamiento,
@@ -195,6 +203,9 @@ def calcular_tier(contenido, base):
         "maxRange": rango_maximo,
         "rpm": round(60.0 / enfriamiento, 1) if enfriamiento > 0 else 0.0
     }
+    if velocidad > 0:
+        estadisticas["speed"] = velocidad
+    return estadisticas
 
 
 def obtener_multiplicadores_salva(contenido):
@@ -243,6 +254,9 @@ def construir_item(id_base, tiers):
     refrigeracion = buscar_numero(REGEX_REFRIGERACION, contenido)
     if refrigeracion is not None:
         item["cooling"] = refrigeracion
+    capacidad_calor = buscar_numero(REGEX_CAPACIDAD_CALOR, contenido)
+    if capacidad_calor is not None:
+        item["heatCapacity"] = capacidad_calor
     impulso = buscar_numero(REGEX_IMPULSO, contenido)
     if impulso is not None:
         item["speedBoost"] = impulso

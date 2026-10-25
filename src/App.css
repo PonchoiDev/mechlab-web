@@ -452,10 +452,13 @@
 }
 
 .loadout-analysis {
+  margin-top: 14px;
+}
+
+.analysis-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
   gap: 14px;
-  margin-top: 14px;
 }
 
 .analysis-table-wrap,
@@ -772,7 +775,7 @@
   .readout-cell:nth-child(even) { border-left: 1px solid var(--work-line); }
   .readout-cell:nth-child(n + 3) { border-top: 1px solid var(--work-line); }
   .readout-cell strong { font-size: 13px; }
-  .loadout-analysis { grid-template-columns: minmax(0, 1fr); }
+  .analysis-body { grid-template-columns: minmax(0, 1fr); }
   .analysis-heading { align-items: flex-start; }
   .utility-toolbar { align-items: stretch; flex-direction: column; }
   .utility-group + .utility-group {
@@ -2591,4 +2594,141 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 @media (max-width: 600px) {
   .upgrades-categories { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Pestañas de la sección de abajo: armas y resumen del mech. */
+.analysis-tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  border-bottom: 1px solid var(--work-line);
+}
+
+.analysis-tabs .analysis-note {
+  margin-left: auto;
+  padding-bottom: 8px;
+}
+
+.analysis-tab {
+  min-height: 32px;
+  margin-bottom: -1px;
+  padding: 0 16px;
+  color: var(--work-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom-color: var(--work-line);
+  border-radius: 2px 2px 0 0;
+  cursor: pointer;
+  font: 500 11px var(--work-mono);
+  text-transform: uppercase;
+}
+
+.analysis-tab:hover {
+  color: var(--work-cyan);
+}
+
+.analysis-tab[aria-selected='true'] {
+  color: var(--work-lime);
+  background: rgba(25, 29, 25, 0.94);
+  border-color: var(--work-line);
+  border-bottom-color: rgba(25, 29, 25, 0.94);
+}
+
+.analysis-tab:focus-visible {
+  outline: 2px solid var(--work-lime);
+  outline-offset: 2px;
+}
+
+.loadout-analysis .analysis-table-wrap,
+.loadout-analysis .ammunition-list {
+  border-top: 0;
+}
+
+.weapon-table tfoot td {
+  color: var(--work-text);
+  font-weight: 600;
+  border-bottom: 0;
+}
+
+.weapon-table tfoot small {
+  color: var(--work-muted);
+  font-weight: 400;
+}
+
+.weapon-table tfoot td:first-child {
+  color: var(--work-muted);
+  font-family: var(--work-mono);
+  text-transform: uppercase;
+}
+
+.analysis-empty {
+  margin: 0;
+  padding: 16px 14px;
+  color: var(--work-muted);
+  font-size: 13px;
+}
+
+.mech-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.mech-stats-group {
+  min-width: 0;
+  padding: 12px 14px;
+}
+
+.mech-stats-group + .mech-stats-group {
+  border-left: 1px solid var(--work-line);
+}
+
+.mech-stats-group h3 {
+  margin: 0 0 8px;
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+  letter-spacing: 0.06em;
+}
+
+.mech-stats-group dl {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+}
+
+.mech-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(52, 61, 52, 0.72);
+}
+
+.mech-stat dt {
+  color: var(--work-muted);
+  font-size: 12px;
+}
+
+.mech-stat dd {
+  margin: 0;
+  color: var(--work-lime);
+  font: 600 12px var(--work-mono);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.mech-stat dd small {
+  color: var(--work-muted);
+  font-weight: 400;
+}
+
+@media (max-width: 1200px) {
+  .mech-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mech-stats-group + .mech-stats-group { border-left: 0; }
+  .mech-stats-group { border-bottom: 1px solid var(--work-line); }
+}
+
+@media (max-width: 600px) {
+  .mech-stats { grid-template-columns: minmax(0, 1fr); }
+  .analysis-tabs .analysis-note { display: none; }
 }
