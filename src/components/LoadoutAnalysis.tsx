@@ -200,7 +200,6 @@ function MechTab({ mech, summary, base }: { mech: Mech; summary: BuildSummary; b
           <p className="eyebrow">05 / CHASSIS DATA</p>
           <h2>{mech.name} {mech.variant}</h2>
         </div>
-        <span className="analysis-note">LIKE THE SUMMARY OF THE IN-GAME UPGRADES SCREEN</span>
       </header>
       <div className="mech-stats">
         {MECH_STATS.map(group => (
