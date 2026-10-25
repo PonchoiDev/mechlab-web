@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { decodeBuild, encodeBuild, getStockBuild } from './buildCode';
-import { createDefaultArmor, getBuildSummary } from './calculators';
+import { createDefaultArmor, formatCoolingRate, getBuildSummary } from './calculators';
 import { canInstallUpgrade, getUpgradeModifiers, getUpgrades, sanitizeUpgrades } from './upgrades';
 import { mapZones } from './zones';
 import { allItems, allMechs, getMech } from '../test/fixtures';
@@ -49,6 +49,20 @@ describe('mejoras de la cantina en el juego', () => {
     expect(Math.floor(upgraded.armorPoints)).toBe(424);
     expect(upgraded.maxArmorPoints).toBeCloseTo(424.35, 2);
     expect(upgraded.totalWeight).toBe(base.totalWeight);
+  });
+});
+
+// Captura del juego con un Battlemaster BLR-1P de 2,1 heat/s: Faster Cooling sube la refrigeración total.
+describe('Faster Cooling en el juego', () => {
+  it('2,1 -> 2,21 heat/s', () => {
+    const battlemaster = { ...getMech('BLR-1P'), BaseCoolingRate: 2.1, heatSinkType: 'single' as const };
+    const empty = mapZones(() => []);
+    const armor = createDefaultArmor(battlemaster.components);
+    expect(getBuildSummary(battlemaster, empty, armor).coolingRate).toBe(2.1);
+    const upgraded = getBuildSummary(battlemaster, empty, armor, getUpgrades(['IncreasedHeatCooling_Trait1']));
+    expect(upgraded.coolingRate).toBe(2.21);
+    expect(formatCoolingRate(upgraded.coolingRate!)).toBe('2.21');
+    expect(formatCoolingRate(3)).toBe('3.0');
   });
 });
 

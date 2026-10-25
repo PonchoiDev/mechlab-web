@@ -26,6 +26,12 @@ export const getArmorPointsPerTon = (mech: Pick<Mech, 'armorType'>): number =>
   mech.armorType === 'ferroFibrous' ? FERRO_FIBROUS_POINTS_PER_TON : ARMOR_POINTS_PER_TON;
 
 // El juego trunca las cifras en vez de redondearlas (69,9375 t se muestra como 69,93).
+// Refrigeración con un decimal, o dos si los tiene, como el juego (3.0, 2.21).
+export const formatCoolingRate = (rate: number): string => {
+  const twoDecimals = rate.toFixed(2);
+  return twoDecimals.endsWith('0') ? rate.toFixed(1) : twoDecimals;
+};
+
 export const truncateTo = (value: number, decimals: number): number => {
   const factor = 10 ** decimals;
   return Math.floor(value * factor + 1e-6) / factor;
@@ -296,7 +302,8 @@ export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState,
     firepower: calculateFirepower(loadout, modifiers),
     meleeDamage: calculateMeleeDamage(mech, loadout, modifiers),
     heatSpike: calculateHeatSpike(loadout),
-    coolingRate: coolingRate === null ? null : roundTo(coolingRate * (1 + modifiers.cooling), 1),
+    // Faster Cooling sube la refrigeración total, y el juego la muestra con dos decimales (2,1 -> 2,21).
+    coolingRate: coolingRate === null ? null : roundTo(coolingRate * (1 + modifiers.cooling), 2),
     topSpeed: calculateTopSpeed(mech.baseSpeed, modifiers.topSpeed),
     boostedSpeed: calculateBoostedSpeed(loadout, mech.baseSpeed, modifiers.topSpeed),
     jumpJetCount: getEquippedItems(loadout).filter(isJumpJet).length,

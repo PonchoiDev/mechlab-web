@@ -1,7 +1,7 @@
 import type { HardpointType } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import type { Upgrade } from '../types/upgrade';
-import { truncateTo, type BuildSummary } from '../utils/calculators';
+import { formatCoolingRate, truncateTo, type BuildSummary } from '../utils/calculators';
 import {
   getAmmoWarnings,
   getComponentStatus,
@@ -378,7 +378,7 @@ const getReadouts = ({ mech, summary }: BuildImageInput) => [
   { label: 'HEAT SPIKE', value: String(summary.heatSpike) },
   {
     label: 'TOTAL COOLING RATE',
-    value: summary.coolingRate === null ? 'N/A' : summary.coolingRate.toFixed(1),
+    value: summary.coolingRate === null ? 'N/A' : formatCoolingRate(summary.coolingRate),
     unit: summary.coolingRate === null ? undefined : 'heat/s'
   },
   { label: 'MAX WEAPON RANGE', value: summary.maxWeaponRange > 0 ? `${Math.floor(summary.maxWeaponRange)} m` : '—' }
