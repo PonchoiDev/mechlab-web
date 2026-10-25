@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="ReducedMissileSpread_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="IncreasedWeaponRange_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedWeaponRange_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.ArtemisMissile"),(TagName="Weapon.Missile")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.075000)
+   End Object
+   MechTraitName=NSLOCTEXT("[6D02AB2B4D282C61691A4C8D44037A31]", "1B6663A94902B0BCD680E0AEE1C10590", "Tighter Missile Clusters")
+   MechTraitLongDescription=NSLOCTEXT("[6D02AB2B4D282C61691A4C8D44037A31]", "251A698F4F451F36D42689BB04A13A2C", "Stronger inter-missile signaling receivers allow missiles to fly in closer proximity to each other without risk of collisions.")
+   MechTraitShortDescription=NSLOCTEXT("[6D02AB2B4D282C61691A4C8D44037A31]", "700BCEC646D8D124B79A44B0FFF66018", "{0}% MISSILE SPREAD")
+   SlotSize=1
+   CBillInstallCost=300000
+   TimeInstallCost=8.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Missile_SPREAD_1_ICN_UIX.Missile_SPREAD_1_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+End Object

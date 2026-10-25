@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedLockRetentionAndLoseLockTime_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/IncreasedLockRetentionAndLoseLockTime_TraitBP.IncreasedLockRetentionAndLoseLockTime_TraitBP_C Name="IncreasedLockRetentionAndLoseLockTime_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedLockRetentionAndLoseLockTime_TraitBP_C_0"
+      Increased Lock Retention Time Percent=0.250000
+      Increased Lose Lock Time Percent=0.250000
+   End Object
+   MechTraitName=NSLOCTEXT("[F0A5B1EA4AA2D8552D80D580EE73204E]", "0E9F45254EDFADF045CD7A94C8B2029B", "Target Lock Retention")
+   MechTraitLongDescription=NSLOCTEXT("[F0A5B1EA4AA2D8552D80D580EE73204E]", "C4BC8E44462B4DAB56095391CEEF716A", "New software for predicting enemy movement and additional magnetic anomaly sensors installed in the \'Mech increase precision for targeting systems, retaining target lock longer, and through brief interruptions of line of sight.")
+   MechTraitShortDescription=NSLOCTEXT("[F0A5B1EA4AA2D8552D80D580EE73204E]", "ED44E39B4EAD33EC3B6BEEB66754AC1A", "{0}% TARGET LOCK RETENTION AND LOSE LOCK TIME")
+   SlotSize=1
+   CBillInstallCost=75000
+   TimeInstallCost=4.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/LoseRet_LOCK_TIME_1_ICN_UIX.LoseRet_LOCK_TIME_1_ICN_UIX
+   Type=Targeting
+   MechTrait=IncreasedLockRetentionAndLoseLockTime_TraitBP_C'"IncreasedLockRetentionAndLoseLockTime_TraitBP_C_0"'
+   UnitTrait=IncreasedLockRetentionAndLoseLockTime_TraitBP_C'"IncreasedLockRetentionAndLoseLockTime_TraitBP_C_0"'
+End Object

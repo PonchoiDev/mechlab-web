@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedTurnSpeed_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/MobilityTraits/IncreasedTurnSpeed_TraitBP.IncreasedTurnSpeed_TraitBP_C Name="IncreasedTurnSpeed_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedTurnSpeed_TraitBP_C_0"
+      Turn Speed Percent=0.075000
+   End Object
+   MechTraitName=NSLOCTEXT("[1838F00C480BBDD90523BEAF2FADFD03]", "D145E632413A3D4A3774AEBA621F77EF", "Anchor Turn I")
+   MechTraitLongDescription=NSLOCTEXT("[1838F00C480BBDD90523BEAF2FADFD03]", "33E3EA1646AC39FB1DC3CDA056047AAD", "Refitting the \'Mech\'s gyro to support slightly larger rotors increases both control and turn assistance.")
+   MechTraitShortDescription=NSLOCTEXT("[1838F00C480BBDD90523BEAF2FADFD03]", "9685B3A94F5CF2A0E9EAF7B2022EC6A5", "{0}% TURN SPEED")
+   SlotSize=1
+   CBillInstallCost=250000
+   TimeInstallCost=6.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Turn_Speed_1_ICN_UIX.Turn_Speed_1_ICN_UIX
+   Type=Mobility
+   MechTrait=IncreasedTurnSpeed_TraitBP_C'"IncreasedTurnSpeed_TraitBP_C_0"'
+   UnitTrait=IncreasedTurnSpeed_TraitBP_C'"IncreasedTurnSpeed_TraitBP_C_0"'
+End Object

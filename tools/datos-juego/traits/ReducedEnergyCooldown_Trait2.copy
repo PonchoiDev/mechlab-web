@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="ReducedEnergyCooldown_Trait2"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+   End Object
+   Begin Object Name="Weapon_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Energy")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.100000)
+   End Object
+   MechTraitName=NSLOCTEXT("[5A0F33CC4D72487A4ABB998D35410B33]", "2EE70D0F4D79FC89120706BFCACB5F67", "Condensed Cycle Time II")
+   MechTraitLongDescription=NSLOCTEXT("[5A0F33CC4D72487A4ABB998D35410B33]", "B9AAF4B6459029327BBF60BB755CF3F1", "Rapid charging capacitors reduce cycle time for energy weapons.")
+   MechTraitShortDescription=NSLOCTEXT("[5A0F33CC4D72487A4ABB998D35410B33]", "418895BD4E7DECB2E6318FB393583A44", "{0}% ENERGY COOLDOWN TIME")
+   SlotSize=2
+   CBillInstallCost=500000
+   TimeInstallCost=10.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=7.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Energy_COOL_TIME_2_ICN_UIX.Energy_COOL_TIME_2_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+End Object

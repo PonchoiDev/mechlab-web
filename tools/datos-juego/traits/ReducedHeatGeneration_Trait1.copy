@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="ReducedHeatGeneration_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/HeatTraits/ReducedHeatGeneration_TraitBP.ReducedHeatGeneration_TraitBP_C Name="HeatReduction_TraitBP_C_2"
+   End Object
+   Begin Object Name="HeatReduction_TraitBP_C_2"
+      Heat Reduction Percent=0.050000
+   End Object
+   MechTraitName=NSLOCTEXT("[2B0F31244815E95C165158AD250D6533]", "B74A83EC4446F3E644445FA7D7436CA7", "Reduced Heat Spikes")
+   MechTraitLongDescription=NSLOCTEXT("[2B0F31244815E95C165158AD250D6533]", "C07EC01C42F6EDAFB693EC98F25FAF66", "A new coolant pump within the \'Mech moves extra coolant through systems as they are used, reducing heat spikes.")
+   MechTraitShortDescription=NSLOCTEXT("[2B0F31244815E95C165158AD250D6533]", "6476B9E64036D38922D4E88553919D54", "{0}% HEAT GENERATION")
+   SlotSize=1
+   CBillInstallCost=2000000
+   TimeInstallCost=40.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Heat_GEN_1_ICN_UIX.Heat_GEN_1_ICN_UIX
+   Type=Heat
+   MechTrait=ReducedHeatGeneration_TraitBP_C'"HeatReduction_TraitBP_C_2"'
+   UnitTrait=ReducedHeatGeneration_TraitBP_C'"HeatReduction_TraitBP_C_2"'
+End Object

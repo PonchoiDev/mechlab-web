@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="ReducedEnergyHeat_Trait2"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+   End Object
+   Begin Object Name="Weapon_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Energy")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.050000)
+   End Object
+   MechTraitName=NSLOCTEXT("[9FA12A2D4BDEB50F2C46CEA015E1C048]", "78B7130C458AE321CE8F7CBC6035B475", "Reduced Power Consumption II")
+   MechTraitLongDescription=NSLOCTEXT("[9FA12A2D4BDEB50F2C46CEA015E1C048]", "790269C945BC290BACAE2BAD1CBCFF20", "More efficient electronic components consume less power, reducing the amount of waste heat generated while operating.")
+   MechTraitShortDescription=NSLOCTEXT("[9FA12A2D4BDEB50F2C46CEA015E1C048]", "73CF5F024B340C063858C49FB5FFEB08", "{0}% ENERGY HEAT")
+   SlotSize=2
+   CBillInstallCost=1500000
+   TimeInstallCost=30.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=7.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Energy_HEAT_2_ICN_UIX.Energy_HEAT_2_ICN_UIX
+   Type=Heat
+   MechTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+End Object

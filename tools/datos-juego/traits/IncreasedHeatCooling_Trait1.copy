@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedHeatCooling_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/HeatTraits/IncreasedHeatCooling_TraitBP.IncreasedHeatCooling_TraitBP_C Name="HeatCoolingTrait_BP_C_0"
+   End Object
+   Begin Object Name="HeatCoolingTrait_BP_C_0"
+      Heat Cooling Percent=0.050000
+   End Object
+   MechTraitName=NSLOCTEXT("[3B1C5D7B451CDFF20642CD976724ECA2]", "7D6575F040D3A868BB6D6181E55D733A", "Faster Cooling")
+   MechTraitLongDescription=NSLOCTEXT("[3B1C5D7B451CDFF20642CD976724ECA2]", "24110A9345E324B37E6FD08AA5C81B84", "A new design for the cooling enclosure around the fusion reactor reduces the engine\'s load on heat sinks, allowing them to cool the \'Mech faster.")
+   MechTraitShortDescription=NSLOCTEXT("[3B1C5D7B451CDFF20642CD976724ECA2]", "3EB529804AE59D9F54E6F4B37A9A1F68", "{0}% HEAT DISSIPATION")
+   SlotSize=1
+   CBillInstallCost=1000000
+   TimeInstallCost=20.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Cooling_1_ICN_UIX.Cooling_1_ICN_UIX
+   Type=Heat
+   MechTrait=IncreasedHeatCooling_TraitBP_C'"HeatCoolingTrait_BP_C_0"'
+   UnitTrait=IncreasedHeatCooling_TraitBP_C'"HeatCoolingTrait_BP_C_0"'
+End Object

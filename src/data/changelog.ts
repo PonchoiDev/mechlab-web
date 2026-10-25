@@ -9,6 +9,28 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-25-cantina-upgrades',
+    date: '2026-10-25',
+    title: 'Cantina upgrades',
+    items: [
+      'Upgrades in the toolbar opens the cantina upgrades: install them in the \'Mech upgrade slots, like the in-game Upgrades screen',
+      'Stats show the base value and, in green, the upgraded one: armor, volley and melee damage, cooling, top speed and range',
+      'Bonuses add up as in the game: Enhanced Energy Output I and II give +15% energy damage',
+      'Refined Armor also raises the armor of each component, as in the game',
+      'Upgrades are saved in build links, My builds and the build image'
+    ]
+  },
+  {
+    id: '2026-10-25-stats-tabs',
+    date: '2026-10-25',
+    title: 'Weapon and \'Mech stats',
+    items: [
+      'The weapon table now shows max range, projectile velocity and totals for DPS and heat while firing',
+      'New \'Mech tab with the chassis stats of the in-game Upgrades screen: structure, heat capacity, turn and torso twist speed, sensor range and target lock',
+      'Every stat a cantina upgrade changes shows its base and upgraded value'
+    ]
+  },
+  {
     id: '2026-10-24-hardpoint-sizes',
     date: '2026-10-24',
     title: 'Hardpoint sizes from the game',

@@ -1,0 +1,13 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Frugal_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="AdjustPilotSalary_BP_C_0"
+   End Object
+   Begin Object Name="AdjustPilotSalary_BP_C_0"
+      SalaryAdjustmentPercent=-0.150000
+   End Object
+   PilotTraitName=NSLOCTEXT("[AA23AF2E4A4F0A2244A2D2970D3673A4]", "B69F42A74A1846149C5797A4C3E2D675", "Frugal")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Generation_Frugal_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Generation_Frugal_ShortDesc")
+   Icon=/Game/UI/FrontEnd/Mechlab/Textures/icon_C-Bill_UIX.icon_C-Bill_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Exclusive.Salary")))
+   UnitTrait=PilotTrait_BP_C'"AdjustPilotSalary_BP_C_0"'
+End Object

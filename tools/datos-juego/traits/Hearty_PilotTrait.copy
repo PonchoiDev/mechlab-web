@@ -1,0 +1,15 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Hearty_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+   End Object
+   Begin Object Name="PilotTrait_BP_C_0"
+      HiringCostAdjustmentPercent=0.100000
+      SalaryAdjustmentPercent=0.100000
+      InjuryChanceIncreasePercentage=-0.150000
+   End Object
+   PilotTraitName=NSLOCTEXT("[932CC235443370481D395DAC9B8953E4]", "6E1F6CBE4092AAB04B0624A02B3CE23D", "Hearty")
+   PilotTraitLongDescription=NSLOCTEXT("[932CC235443370481D395DAC9B8953E4]", "02444C3247219A94EB932DAF9763A81C", "Reduces chance of injury by {InjuryChancePct}%.")
+   PilotTraitShortDescription=NSLOCTEXT("[932CC235443370481D395DAC9B8953E4]", "B53F9D4B445FB0C1BDBB7080E9BF50C0", "This pilot is made of tougher stuff.")
+   Icon=/Game/UI/Textures/MechLab/Balance_BTN_Plus_UIX.Balance_BTN_Plus_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Exclusive.Health")))
+   UnitTrait=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+End Object

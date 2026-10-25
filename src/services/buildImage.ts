@@ -1,6 +1,7 @@
 import type { HardpointType } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
-import { truncateTo, type BuildSummary } from '../utils/calculators';
+import type { Upgrade } from '../types/upgrade';
+import { formatArmorPoints, formatCoolingRate, getArmorScale, scaleArmorPoints, truncateTo, type BuildSummary } from '../utils/calculators';
 import {
   getAmmoWarnings,
   getComponentStatus,
@@ -14,6 +15,7 @@ import {
 } from '../utils/equipment';
 import { getItemWeaponType, getTierName } from '../utils/items';
 import { getMechDisplayName, getMechSpecs, type SpecKind } from '../utils/mechs';
+import { getUsedUpgradeSlots } from '../utils/upgrades';
 import { ZONE_LABELS } from '../utils/zones';
 
 // Tarjeta de la build en PNG con la misma distribución que el tablero de la web, para publicarla
@@ -75,7 +77,9 @@ export interface BuildImageInput {
   mech: Mech;
   loadout: EquippedLoadout;
   armor: ArmorState;
+  // Con las mejoras de la cantina ya aplicadas a summary.
   summary: BuildSummary;
+  upgrades: Upgrade[];
   imageUrl: string | null;
 }
 
@@ -348,9 +352,12 @@ const layoutCard = (measuring: Context, input: BuildImageInput, zone: Zone, widt
     context.fillRect(left, armorTop + 13, 46, 5);
     context.fillStyle = isLow ? COLORS.amber : COLORS.lime;
     context.fillRect(left, armorTop + 13, component.maxArmor > 0 ? 46 * Math.min(1, total / component.maxArmor) : 0, 5);
-    drawText(context, `ARMOR ${total} / ${component.maxArmor}`, left + 54, armorTop + 20, `500 10px ${MONO}`, armorColor);
+    // Con Refined Armor, cada lado multiplicado y truncado, como en el juego.
+    const scale = getArmorScale(input.upgrades);
+    const [shownFront, shownRear] = [scaleArmorPoints(front, scale), scaleArmorPoints(rear, scale)];
+    drawText(context, `ARMOR ${shownFront + shownRear} / ${scaleArmorPoints(component.maxArmor, scale)}`, left + 54, armorTop + 20, `500 10px ${MONO}`, armorColor);
     if (component.hasRearArmor) {
-      drawText(context, `FRONT ${front} · REAR ${rear}`, x + width - CARD_PADDING, armorTop + 20, `500 10px ${MONO}`, armorColor, { align: 'right' });
+      drawText(context, `FRONT ${shownFront} · REAR ${shownRear}`, x + width - CARD_PADDING, armorTop + 20, `500 10px ${MONO}`, armorColor, { align: 'right' });
     }
   };
 
@@ -361,7 +368,7 @@ const layoutCard = (measuring: Context, input: BuildImageInput, zone: Zone, widt
 
 const getReadouts = ({ mech, summary }: BuildImageInput) => [
   { label: 'TONNAGE', value: truncateTo(summary.totalWeight, 2).toFixed(2), unit: `/ ${mech.tonnageMax} t`, warn: summary.totalWeight > mech.tonnageMax },
-  { label: 'ARMOR POINTS', value: summary.armorPoints.toFixed(0), unit: `/ ${summary.maxArmorPoints.toFixed(0)}` },
+  { label: 'ARMOR POINTS', value: formatArmorPoints(summary.armorPoints), unit: `/ ${formatArmorPoints(summary.maxArmorPoints)}` },
   { label: 'ARMOR MASS', value: truncateTo(summary.armorWeight, 2).toFixed(2), unit: 't' },
   {
     label: 'TOP SPEED',
@@ -374,7 +381,7 @@ const getReadouts = ({ mech, summary }: BuildImageInput) => [
   { label: 'HEAT SPIKE', value: String(summary.heatSpike) },
   {
     label: 'TOTAL COOLING RATE',
-    value: summary.coolingRate === null ? 'N/A' : summary.coolingRate.toFixed(1),
+    value: summary.coolingRate === null ? 'N/A' : formatCoolingRate(summary.coolingRate),
     unit: summary.coolingRate === null ? undefined : 'heat/s'
   },
   { label: 'MAX WEAPON RANGE', value: summary.maxWeaponRange > 0 ? `${Math.floor(summary.maxWeaponRange)} m` : '—' }
@@ -421,6 +428,49 @@ const drawReadouts = (context: Context, input: BuildImageInput, y: number) => {
     const valueWidth = drawText(context, readout.value, x, cellY + 48, `600 18px ${MONO}`, readout.warn ? COLORS.red : COLORS.lime);
     if (readout.unit) drawText(context, readout.unit, x + valueWidth + 7, cellY + 48, `400 11px ${MONO}`, COLORS.muted);
   });
+};
+
+const UPGRADE_CHIP_HEIGHT = 24;
+const UPGRADE_FONT = `500 11px ${MONO}`;
+
+// Franja con las mejoras de la cantina instaladas, en fichas que pasan a la línea siguiente si no caben.
+const layoutUpgrades = (context: Context, input: BuildImageInput) => {
+  const { mech, upgrades } = input;
+  if (upgrades.length === 0) return { height: 0, draw: () => undefined };
+
+  const width = WIDTH - PADDING * 2;
+  const title = `CANTINA UPGRADES ${getUsedUpgradeSlots(upgrades)}/${mech.upgradeSlots ?? 0}`;
+  const startX = PADDING + 14 + measure(context, title, `500 10px ${MONO}`) + 14;
+  const chips: { text: string; x: number; row: number; width: number }[] = [];
+  let x = startX;
+  let row = 0;
+  for (const upgrade of upgrades) {
+    const text = `${upgrade.name} · ${upgrade.description}`;
+    const chipWidth = measure(context, text, UPGRADE_FONT) + 16;
+    if (x + chipWidth > PADDING + width - 14 && x > startX) {
+      x = startX;
+      row += 1;
+    }
+    chips.push({ text, x, row, width: chipWidth });
+    x += chipWidth + 6;
+  }
+  const height = (row + 1) * (UPGRADE_CHIP_HEIGHT + 6) + 14;
+
+  const draw = (target: Context, y: number) => {
+    target.fillStyle = COLORS.panel;
+    target.fillRect(PADDING, y, width, height);
+    strokeBox(target, PADDING, y, width, height, COLORS.line);
+    drawText(target, title, PADDING + 14, y + 26, `500 10px ${MONO}`, COLORS.muted);
+    for (const chip of chips) {
+      const chipY = y + 10 + chip.row * (UPGRADE_CHIP_HEIGHT + 6);
+      target.fillStyle = withAlpha(COLORS.cyan, 0.1);
+      target.fillRect(chip.x, chipY, chip.width, UPGRADE_CHIP_HEIGHT);
+      strokeBox(target, chip.x, chipY, chip.width, UPGRADE_CHIP_HEIGHT, withAlpha(COLORS.cyan, 0.45));
+      drawText(target, chip.text, chip.x + 8, chipY + 16, UPGRADE_FONT, COLORS.cyan);
+    }
+  };
+
+  return { height, draw };
 };
 
 // Panel central con el nombre y el dibujo del mech, entre los torsos y los brazos.
@@ -497,7 +547,9 @@ export const renderBuildImage = async (input: BuildImageInput): Promise<Blob> =>
   }
 
   const readoutY = PADDING + 64;
-  const boardY = readoutY + READOUT_HEIGHT * 2 + 16;
+  const upgradesLayout = layoutUpgrades(measuring, input);
+  const upgradesY = readoutY + READOUT_HEIGHT * 2 + 16;
+  const boardY = upgradesY + (upgradesLayout.height > 0 ? upgradesLayout.height + 16 : 0);
   const boardHeight = rowHeights.reduce((sum, height) => sum + height, 0) + GAP * (rows.length - 1);
   const footerY = boardY + boardHeight + 20;
   const height = footerY + 44;
@@ -517,6 +569,7 @@ export const renderBuildImage = async (input: BuildImageInput): Promise<Blob> =>
 
   drawHeader(context, mech);
   drawReadouts(context, input, readoutY);
+  upgradesLayout.draw(context, upgradesY);
 
   let rowY = boardY;
   rows.forEach((row, rowIndex) => {

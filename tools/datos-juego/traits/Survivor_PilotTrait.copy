@@ -1,0 +1,15 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Survivor_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_1"
+   End Object
+   Begin Object Name="PilotTrait_BP_C_1"
+      HiringCostAdjustmentPercent=0.100000
+      SalaryAdjustmentPercent=0.100000
+      DeathChanceIncreasePercentage=-0.250000
+   End Object
+   PilotTraitName=NSLOCTEXT("[C791ACF141E9361263B0B785D791E7CF]", "8F68841F4ECDBE90B5B5F98AF204D765", "Survivor")
+   PilotTraitLongDescription=NSLOCTEXT("[C791ACF141E9361263B0B785D791E7CF]", "725D3416411CB97F168855B3A7861880", "Reduces chance of pilot death by {DeathPct}%.")
+   PilotTraitShortDescription=NSLOCTEXT("[C791ACF141E9361263B0B785D791E7CF]", "5F46FE6D4F0160257E7AE4B7AF09168F", "Reduced chance of death.")
+   Icon=/Game/UI/FrontEnd/Starmap/Textures/UI/ic_skull_challenge.ic_skull_challenge
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Exclusive.Survival")))
+   UnitTrait=PilotTrait_BP_C'"PilotTrait_BP_C_1"'
+End Object

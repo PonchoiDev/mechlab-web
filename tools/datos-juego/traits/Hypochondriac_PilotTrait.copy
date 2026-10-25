@@ -1,0 +1,15 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Hypochondriac_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+   End Object
+   Begin Object Name="PilotTrait_BP_C_0"
+      HiringCostAdjustmentPercent=-0.100000
+      SalaryAdjustmentPercent=-0.100000
+      InjuryChanceIncreasePercentage=0.150000
+   End Object
+   PilotTraitName=NSLOCTEXT("[4110F43040BBBF5A7739C9AA5DE875BA]", "94C10F7E4F4B3F20D8FB3B857C95A924", "Hypochondriac")
+   PilotTraitLongDescription=NSLOCTEXT("[4110F43040BBBF5A7739C9AA5DE875BA]", "85378D6E46BB336164CC178171F9A14D", "Increases chance of injury by {InjuryChancePct}%.")
+   PilotTraitShortDescription=NSLOCTEXT("[4110F43040BBBF5A7739C9AA5DE875BA]", "4125C07E45862DF68FEA1E8DD76ED5CC", "This pilot will visit the infirmary at the drop of a hat.")
+   Icon=/Game/UI/Textures/MechLab/Balance_BTN_Plus_UIX.Balance_BTN_Plus_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Negative"),(TagName="PilotTrait.Exclusive.Health")))
+   UnitTrait=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+End Object

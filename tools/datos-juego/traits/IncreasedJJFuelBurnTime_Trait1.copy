@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedJJFuelBurnTime_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/MobilityTraits/IncreasedJJFuelBurnTime_TraitBP.IncreasedJJFuelBurnTime_TraitBP_C Name="IncreasedJJFuelBurnTime_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedJJFuelBurnTime_TraitBP_C_0"
+      Jump Jet Fuel Burn Time Percent=0.150000
+   End Object
+   MechTraitName=NSLOCTEXT("[332978C74B60A450824A72993BAAB992]", "E1B05D754BE28E932ED65490212BABE7", "Longer Burn Time")
+   MechTraitLongDescription=NSLOCTEXT("[332978C74B60A450824A72993BAAB992]", "1F2815FC42CF4C9277079ABCADE01AC5", "A compact magnetic shielding system allows more space to be used for insulation, allowing the Jump Jet to operate longer before overheating prevents operation.")
+   MechTraitShortDescription=NSLOCTEXT("[332978C74B60A450824A72993BAAB992]", "78BF6BA94F76BAD0658A548BE46E0DDD", "{0}% JUMP JET BURN TIME")
+   SlotSize=1
+   CBillInstallCost=75000
+   TimeInstallCost=4.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/JJ_Fuel_BURN_TIME_1_ICN_UIX.JJ_Fuel_BURN_TIME_1_ICN_UIX
+   Type=Mobility
+   MechTrait=IncreasedJJFuelBurnTime_TraitBP_C'"IncreasedJJFuelBurnTime_TraitBP_C_0"'
+   UnitTrait=IncreasedJJFuelBurnTime_TraitBP_C'"IncreasedJJFuelBurnTime_TraitBP_C_0"'
+End Object

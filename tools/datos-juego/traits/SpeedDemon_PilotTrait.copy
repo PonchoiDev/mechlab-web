@@ -1,0 +1,24 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="SpeedDemon_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/MobilityTrait.MobilityTrait_C Name="MobilityTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/MobilityTrait.Default__MobilityTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="MobilityTrait_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.200000
+         SalaryAdjustmentPercent=0.200000
+      End Object
+      Top Speed Percent=0.125000
+      TurnSpeedPercent=0.100000
+      JumpJetZ Percent Boost=0.050000
+      JumpJetXY Percent Boost=0.050000
+      Fuel Burn Time Trait Percent=0.050000
+      UnitTraits(0)="PilotTrait_BP_C_0"
+   End Object
+   PilotTraitName=NSLOCTEXT("[60CC9D944189E655212FB6A5DA63B62C]", "C2778DE746CA476C1420E0A3B4D66313", "Speed Demon")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "SpeedDemon_LongDesc")
+   PilotTraitShortDescription=NSLOCTEXT("[60CC9D944189E655212FB6A5DA63B62C]", "2FE57B874A0F2D248E4FE69A3D3EE8AE", "Increases top speed, turn rate, and jump jet mobility.")
+   Icon=/Game/UI/_common/Textures/Icons/States/Mobility_ICN_48px.Mobility_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training")))
+   UnitTrait=MobilityTrait_C'"MobilityTrait_C_0"'
+End Object

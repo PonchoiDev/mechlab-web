@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedJJAccelXYZ_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/MobilityTraits/IncreasedJJAccelXYZ_TraitBP.IncreasedJJAccelXYZ_TraitBP_C Name="IncreasedJJAccelXYZ_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedJJAccelXYZ_TraitBP_C_0"
+      Jump Jet Accel XY Percent=0.150000
+      Jump Jet Accel Z Percent=0.150000
+   End Object
+   MechTraitName=NSLOCTEXT("[9A6868CF40D681074DF60290BFB7CE38]", "4E94779A45DFBAB5AE1CBEB4FE22105D", "Jump Jet Thrust")
+   MechTraitLongDescription=NSLOCTEXT("[9A6868CF40D681074DF60290BFB7CE38]", "5E77270E454429D4359D459001B99862", "Larger turbo-compressors feed more reaction mass into the jet, which increases compression efficiency and acceleration.")
+   MechTraitShortDescription=NSLOCTEXT("[9A6868CF40D681074DF60290BFB7CE38]", "15792EE746758D99101FC8A8ED9F6826", "{0}% JUMP JET ACCELERATION")
+   SlotSize=1
+   CBillInstallCost=100000
+   TimeInstallCost=5.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/JJ_XYXAccel_1_ICN_UIX.JJ_XYXAccel_1_ICN_UIX
+   Type=Mobility
+   MechTrait=IncreasedJJAccelXYZ_TraitBP_C'"IncreasedJJAccelXYZ_TraitBP_C_0"'
+   UnitTrait=IncreasedJJAccelXYZ_TraitBP_C'"IncreasedJJAccelXYZ_TraitBP_C_0"'
+End Object

@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedHeatCapacity_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/HeatTraits/IncreasedHeatCapacity_TraitBP.IncreasedHeatCapacity_TraitBP_C Name="IncreasedHeatCapacityTrait_BP_C_0"
+   End Object
+   Begin Object Name="IncreasedHeatCapacityTrait_BP_C_0"
+      Heat Capacity Percent=0.050000
+   End Object
+   MechTraitName=NSLOCTEXT("[BFBAA8C947CA42AF92908BAF75FFA810]", "3B82400A435366488D95329B1F3FA571", "Heat Containment I")
+   MechTraitLongDescription=NSLOCTEXT("[BFBAA8C947CA42AF92908BAF75FFA810]", "09D12C284D3DE91ED085E998A44C974B", "Additional insulation around critical engine systems allows for greater heat buildup before the shutdown safety system becomes necessary.")
+   MechTraitShortDescription=NSLOCTEXT("[BFBAA8C947CA42AF92908BAF75FFA810]", "ACEFFD6E40AE74BBF04C3A9379E22F77", "{0}% HEAT CAPACITY")
+   SlotSize=1
+   CBillInstallCost=250000
+   TimeInstallCost=6.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Heat_MAX_1_ICN_UIX.Heat_MAX_1_ICN_UIX
+   Type=Heat
+   MechTrait=IncreasedHeatCapacity_TraitBP_C'"IncreasedHeatCapacityTrait_BP_C_0"'
+   UnitTrait=IncreasedHeatCapacity_TraitBP_C'"IncreasedHeatCapacityTrait_BP_C_0"'
+End Object

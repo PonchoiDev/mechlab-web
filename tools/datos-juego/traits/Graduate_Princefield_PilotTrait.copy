@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Graduate_Princefield_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/GraduateTrait.GraduateTrait_C Name="GraduateTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/GraduateTrait.Default__GraduateTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="GraduateTrait_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+      End Object
+      TurnSpeedPercent=0.100000
+      Increased Sensor Range Percent=0.100000
+      Reduced Lock On Time Percent=0.100000
+      WeaponQuirks=(((TagName="Weapon.Energy.Laser.Standard.Large"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.100000)))),((TagName="Weapon.Missile.LRM"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.100000)))),((TagName="Weapon.ArtemisMissile.LRM"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.100000)))),((TagName="Weapon.Energy.Laser.ER"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.100000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.100000)))))
+   End Object
+   PilotTraitName=NSLOCTEXT("[83B1FB854208B00CE1D7518757244AA8]", "F1BE988E488131463A409095BF5D8ECA", "Princefield Graduate")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Graduate_Princefield_LongDesc")
+   PilotTraitShortDescription=NSLOCTEXT("[83B1FB854208B00CE1D7518757244AA8]", "93D5680446E551407A4E219D89F50DE1", "This pilot has graduated from Princefield Military Academy.")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Commendation_ICN_48PX_UIX.Commendation_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Type.Graduate.Princefield")))
+   UnitTrait=GraduateTrait_C'"GraduateTrait_C_0"'
+End Object

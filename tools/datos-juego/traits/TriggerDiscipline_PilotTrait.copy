@@ -1,0 +1,35 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="TriggerDiscipline_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComplexWeaponTrait.ComplexWeaponTrait_C Name="ComplexWeaponTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/WeaponQuirkSetTrait.WeaponQuirkSetTrait_C Name="WeaponQuirkSetTrait_C_0"
+         Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="ComplexWeaponTrait_C_0.WeaponQuirkSetTrait_C_0.ComplexWeaponTrait_C_0.PilotTrait_BP_C_0"
+         End Object
+      End Object
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/ComplexWeaponTrait.Default__ComplexWeaponTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="ComplexWeaponTrait_C_0"
+      Begin Object Name="WeaponQuirkSetTrait_C_0"
+         Begin Object Name="ComplexWeaponTrait_C_0.WeaponQuirkSetTrait_C_0.ComplexWeaponTrait_C_0.PilotTrait_BP_C_0"
+            HiringCostAdjustmentPercent=0.150000
+            SalaryAdjustmentPercent=0.150000
+         End Object
+         SupportedWeapons=(GameplayTags=((TagName="Weapon.Ballistic.AutoCannon.Ultra")))
+         WeaponType=NSLOCTEXT("[9E105B3A4D6F9CF8ABD7129269F695FF]", "F3B53CF941A15FF32218918FC949C99C", "Ultra Autocannon")
+         QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/MaxJamChance_Quirk.MaxJamChance_Quirk_C"',Value=-0.250000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/MinimumCooldownPercentage_Quirk.MinimumCooldownPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/IdealJamRatio_Quirk.IdealJamRatio_Quirk_C"',Value=25.000000)))
+         UnitTraits(0)=PilotTrait_BP_C'"ComplexWeaponTrait_C_0.WeaponQuirkSetTrait_C_0.ComplexWeaponTrait_C_0.PilotTrait_BP_C_0"'
+      End Object
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.150000
+         SalaryAdjustmentPercent=0.150000
+      End Object
+      WeaponQuirks=(((TagName="Weapon.Ballistic.AutoCannon.Ultra"), (QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/MinimumCooldownPercentage_Quirk.MinimumCooldownPercentage_Quirk_C"',Value=-0.200000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/IdealJamRatio_Quirk.IdealJamRatio_Quirk_C"',Value=25.000000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/MaxJamChance_Quirk.MaxJamChance_Quirk_C"',Value=-0.250000)))))
+      UnitTraits(0)="PilotTrait_BP_C_0"
+      UnitTraits(1)=WeaponQuirkSetTrait_C'"WeaponQuirkSetTrait_C_0"'
+   End Object
+   PilotTraitName=NSLOCTEXT("[9E105B3A4D6F9CF8ABD7129269F695FF]", "E64CDAAC41EFC8D654F07FACFAF3BF29", "Trigger Discipline")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "TriggerDiscipline_LongDesc")
+   PilotTraitShortDescription=NSLOCTEXT("[9E105B3A4D6F9CF8ABD7129269F695FF]", "C8F3E97B4C5996992308B5B9E5687A9F", "Reduces the cooldown and jam duration of UACs.")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Ballistic_ICN_48PX_UIX.Ballistic_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Hero")))
+   UnitTrait=WeaponQuirkSetTrait_C'"ComplexWeaponTrait_C_0.WeaponQuirkSetTrait_C_0"'
+End Object

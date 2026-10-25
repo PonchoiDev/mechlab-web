@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Criminal_Kurita_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/FactionCriminalWith_BP.FactionCriminalWith_BP_C Name="FactionCriminalWith_BP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="FactionCriminalWith_BP_C_0"
+         CriminalNegotiatedCBillAdjustmentPercent=-0.050000
+         BlackMarketPriceAdjustmentPercent=-0.100000
+         FactionsCriminalWith(0)=(FactionId_8_FCD668A64072BE2992B32BBF7CC88E83=(Id="MWFactionAsset:Kurita"),OverrideFactionDisplayName_12_6F47A73141C451B8C8EBFDAF7BDF14C2=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/MainFactionStringTable.MainFactionStringTable", "Faction_Draconis_Combine"))
+      End Object
+      UnitTraits(0)=FactionCriminalWith_BP_C'"FactionCriminalWith_BP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Criminal_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Criminal_LongDescription")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Criminal_ShortDesc")
+   Icon=/Game/UI/Textures/Factions/main_factions/Faction_Bandits_Logo_32px_UIX.Faction_Bandits_Logo_32px_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Exclusive.SocialStatus"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Type.Faction")))
+   UnitTrait=FactionCriminalWith_BP_C'"ComposedTrait_BP_C_0.FactionCriminalWith_BP_C_0"'
+End Object

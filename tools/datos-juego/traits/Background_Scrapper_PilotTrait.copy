@@ -1,0 +1,15 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Background_Scrapper_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+   End Object
+   Begin Object Name="PilotTrait_BP_C_0"
+      HiringCostAdjustmentPercent=0.100000
+      SalaryAdjustmentPercent=0.100000
+      SalvageAdjustmentFlat=3
+   End Object
+   PilotTraitName=NSLOCTEXT("[21D4A80649BB5C6081C749A9A8B90252]", "5AC103664705A87D9D99F29C4B89C76E", "Scrapper")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Background_Scrapper_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Background_Scrapper_ShortDesc")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Wrench_ICN_48PX_UIX.Wrench_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Exclusive.SocialStatus")))
+   UnitTrait=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+End Object

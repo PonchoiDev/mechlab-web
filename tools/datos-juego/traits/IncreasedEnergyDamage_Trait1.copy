@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedEnergyDamage_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+   End Object
+   Begin Object Name="Weapon_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Energy")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DamagePercentage_Quirk.DamagePercentage_Quirk_C"',Value=0.050000)
+   End Object
+   MechTraitName=NSLOCTEXT("[5AA9337249AECEFD22ED11A076034AF4]", "A2DB2D5D41E53AA66C6C9CA7B9FD1880", "Enhanced Energy Output I")
+   MechTraitLongDescription=NSLOCTEXT("[5AA9337249AECEFD22ED11A076034AF4]", "8074704544DD3C6FF0DE68882CBB3A2C", "Adjusting the fusion reactor to allow for higher electrical output, and swapping some minor components to use the extra load, increases the damage potential of energy weapon systems.")
+   MechTraitShortDescription=NSLOCTEXT("[5AA9337249AECEFD22ED11A076034AF4]", "E13F07A54AD41C5F9DD7E08A588A61C3", "{0}% ENERGY DAMAGE")
+   SlotSize=1
+   CBillInstallCost=300000
+   TimeInstallCost=8.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Energy_DMG_1_ICN_UIX.Energy_DMG_1_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+End Object

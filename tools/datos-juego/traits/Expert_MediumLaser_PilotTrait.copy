@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Expert_MediumLaser_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/WeaponQuirkSetTrait.WeaponQuirkSetTrait_C Name="WeaponQuirkSetTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/WeaponQuirkSetTrait.Default__WeaponQuirkSetTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="WeaponQuirkSetTrait_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+      End Object
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Energy.Laser.Chemical.Medium"),(TagName="Weapon.Energy.Laser.ER.Medium"),(TagName="Weapon.Energy.Laser.Pulse.Medium"),(TagName="Weapon.Energy.Laser.Standard.Medium"),(TagName="Weapon.Energy.Laser.Heavy.Medium")))
+      WeaponType=INVTEXT("Medium Laser")
+      QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=-0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.050000)))
+      MiscInfo=NSLOCTEXT("[2CDCB84F459340D779AE9F85436F56A1]", "9246A7CB48AD2E6EF7050EB8D7CE54E4", "(Applies to all Medium class lasers)")
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Expert_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Expert_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Expert_Trait_ShortDesc")
+   Icon=/Game/UI/_common/Textures/Icons/Weapons/ERangeLaser_ICN_48px.ERangeLaser_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Type.WeaponExpert.Energy")))
+   UnitTrait=WeaponQuirkSetTrait_C'"WeaponQuirkSetTrait_C_0"'
+End Object

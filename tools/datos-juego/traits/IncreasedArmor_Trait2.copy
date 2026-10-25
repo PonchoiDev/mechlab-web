@@ -1,0 +1,27 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedArmor_Trait2"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/ArmorTraits/IncreasedArmor_TraitBP.IncreasedArmor_TraitBP_C Name="IncreasedArmor_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedArmor_TraitBP_C_0"
+      Increased Armor Percent=0.050000
+      ApplicableMechParts(0)=Head
+      ApplicableMechParts(1)=CenterTorso
+      ApplicableMechParts(2)=LeftTorso
+      ApplicableMechParts(3)=LeftArm
+      ApplicableMechParts(4)=LeftLeg
+      ApplicableMechParts(5)=RightTorso
+      ApplicableMechParts(6)=RightArm
+      ApplicableMechParts(7)=RightLeg
+   End Object
+   MechTraitName=NSLOCTEXT("[1C6B12204B6FA9D15D0321B3793E22C3]", "732AB7C64B8E40DABD1B0EA946056F84", "Refined Armor II")
+   MechTraitLongDescription=NSLOCTEXT("[1C6B12204B6FA9D15D0321B3793E22C3]", "7580B5E442ACB8EDF1B71E8F21F7B0DB", "Improvements in lamination techniques, and a more efficient arrangement of ceramic components, have created a refined version of the standard armor plating that reduces penetration without using any new materials or increased mass.")
+   MechTraitShortDescription=NSLOCTEXT("[1C6B12204B6FA9D15D0321B3793E22C3]", "B75140E546D9C361DE2A3D9DAE15AC09", "{0}% ARMOR")
+   SlotSize=2
+   CBillInstallCost=1500000
+   TimeInstallCost=30.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=7.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/All_Armor_2_ICN_UIX.All_Armor_2_ICN_UIX
+   Type=Defense
+   MechTrait=IncreasedArmor_TraitBP_C'"IncreasedArmor_TraitBP_C_0"'
+   UnitTrait=IncreasedArmor_TraitBP_C'"IncreasedArmor_TraitBP_C_0"'
+End Object

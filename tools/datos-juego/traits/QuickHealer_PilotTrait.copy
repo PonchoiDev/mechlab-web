@@ -1,0 +1,15 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="QuickHealer_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+   End Object
+   Begin Object Name="PilotTrait_BP_C_0"
+      HiringCostAdjustmentPercent=0.050000
+      SalaryAdjustmentPercent=0.050000
+      InjuryRecoveryAdjustmentPercent=-0.150000
+   End Object
+   PilotTraitName=NSLOCTEXT("[46FC10414DAE02850C1C47A68EE33F28]", "134C909F408C17B189C196BED4B8C70D", "Quick Healer")
+   PilotTraitLongDescription=NSLOCTEXT("[46FC10414DAE02850C1C47A68EE33F28]", "03AA53E3426782FB2B583BA348D5AC2B", "This pilot recovers from injury {InjuryRecoveryAdjPct}% faster.")
+   PilotTraitShortDescription=NSLOCTEXT("[46FC10414DAE02850C1C47A68EE33F28]", "550C777D4B15692F8E240A88A251459D", "Recovers from injury faster")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Time_ICN_48PX_UIX.Time_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Exclusive.Recovery")))
+   UnitTrait=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+End Object

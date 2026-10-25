@@ -9,6 +9,9 @@ interface UtilityToolbarProps {
   onRemoveItems: (type: 'weapon' | 'ammo' | 'equipment') => void;
   canLoadStock: boolean;
   onLoadStock: () => void;
+  upgradeSlots: { used: number; capacity: number };
+  isUpgradesOpen: boolean;
+  onToggleUpgrades: () => void;
   savedBuildCount: number;
   onSaveBuild: () => void;
   onOpenBuilds: () => void;
@@ -26,6 +29,9 @@ export function UtilityToolbar({
   onRemoveItems,
   canLoadStock,
   onLoadStock,
+  upgradeSlots,
+  isUpgradesOpen,
+  onToggleUpgrades,
   savedBuildCount,
   onSaveBuild,
   onOpenBuilds,
@@ -72,6 +78,18 @@ export function UtilityToolbar({
           title="Remove heat sinks, jump jets and the rest of the equipment"
         >
           Remove equipment
+        </button>
+      </div>
+      <div className="utility-group">
+        <span className="utility-label">CANTINA</span>
+        <button
+          type="button"
+          className="utility-button"
+          aria-expanded={isUpgradesOpen}
+          title="Cantina upgrades installed on this 'Mech"
+          onClick={onToggleUpgrades}
+        >
+          Upgrades{upgradeSlots.used > 0 && <span className="utility-count">{upgradeSlots.used}/{upgradeSlots.capacity}</span>}
         </button>
       </div>
       <div className="utility-group">

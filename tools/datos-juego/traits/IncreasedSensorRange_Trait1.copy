@@ -1,0 +1,19 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedSensorRange_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/SensorTraits/IncreasedSensorRange_TraitBP.IncreasedSensorRange_TraitBP_C Name="IncreasedSensorRange_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedSensorRange_TraitBP_C_0"
+      Increased Sensor Range Percent=0.100000
+   End Object
+   MechTraitName=NSLOCTEXT("[9D437D654E79E7D09BE2749D0BE87A07]", "21667ED6496031E8DFB61CB78CA164E1", "Expanded Sensor Range I")
+   MechTraitLongDescription=NSLOCTEXT("[9D437D654E79E7D09BE2749D0BE87A07]", "A3CB147C407FCF9634E88680F30D4047", "Larger and more precise optics, broader electromagnetic spectrum perception, and updated unit recognition software extend target detection range.")
+   MechTraitShortDescription=NSLOCTEXT("[9D437D654E79E7D09BE2749D0BE87A07]", "0A3680024095E402485EC0AB7D73A24A", "{0}% SENSOR RANGE")
+   SlotSize=1
+   CBillInstallCost=75000
+   TimeInstallCost=4.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Sensor_RNG_1_ICN_UIX.Sensor_RNG_1_ICN_UIX
+   Type=Targeting
+   MechTrait=IncreasedSensorRange_TraitBP_C'"IncreasedSensorRange_TraitBP_C_0"'
+   UnitTrait=IncreasedSensorRange_TraitBP_C'"IncreasedSensorRange_TraitBP_C_0"'
+End Object

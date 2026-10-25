@@ -1,0 +1,23 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Noble_Davion_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/FactionNobleWith_BP.FactionNobleWith_BP_C Name="FactionNobleWith_BP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="FactionNobleWith_BP_C_0"
+         HiringCostAdjustmentPercent=0.150000
+         SalaryAdjustmentPercent=0.150000
+         NobleNegotiatedCBillAdjustmentPercent=0.050000
+         MarketPriceAdjustmentPercent=-0.050000
+         FactionsNobleWith(0)=(FactionId_8_FCD668A64072BE2992B32BBF7CC88E83=(Id="MWFactionAsset:Davion"),OverrideFactionDisplayName_12_6F47A73141C451B8C8EBFDAF7BDF14C2="")
+         FactionsNobleWith(1)=(Date_7_634CD69F4B835815D4D3EE94B33225A4=3041.01.01-07.00.00,FactionId_8_FCD668A64072BE2992B32BBF7CC88E83=(Id="MWFactionAsset:FederatedCommonwealth"),OverrideFactionDisplayName_12_6F47A73141C451B8C8EBFDAF7BDF14C2=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/MainFactionStringTable.MainFactionStringTable", "Faction_House_Davion"))
+      End Object
+      UnitTraits(0)=FactionNobleWith_BP_C'"FactionNobleWith_BP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Noble_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Noble_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Noble_ShortDesc")
+   Icon=/Game/UI/Textures/Factions/main_factions/Faction_Davion_Logo_32px_UIX.Faction_Davion_Logo_32px_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Exclusive.SocialStatus"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Type.Faction"),(TagName="PilotTrait.Exclusive.Noble"),(TagName="Persona.Faction.Davion"),(TagName="PilotTrait.Exclusive.Hatred.Davion")))
+   UnitTrait=FactionNobleWith_BP_C'"ComposedTrait_BP_C_0.FactionNobleWith_BP_C_0"'
+End Object

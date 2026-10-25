@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Expert_AC5_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/WeaponQuirkSetTrait.WeaponQuirkSetTrait_C Name="WeaponQuirkSetTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/WeaponQuirkSetTrait.Default__WeaponQuirkSetTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="WeaponQuirkSetTrait_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+      End Object
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Ballistic.AutoCannon.LBX.LBX5"),(TagName="Weapon.Ballistic.AutoCannon.Standard.AC5"),(TagName="Weapon.Ballistic.AutoCannon.Ultra.AC5")))
+      WeaponType=INVTEXT("AC/5")
+      QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.050000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.050000)))
+      MiscInfo=NSLOCTEXT("[FF2760544A40190E5A26D190618B76ED]", "BC29B9A14961E2E00AB0748A748548FE", "(Also applies to LB X-5 AC and UAC/5)")
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Expert_Trait_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Expert_Trait_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Expert_Trait_ShortDesc")
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Ballistic_ICN_48PX_UIX.Ballistic_ICN_48PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training"),(TagName="PilotTrait.Type.WeaponExpert.Ballistic")))
+   UnitTrait=WeaponQuirkSetTrait_C'"WeaponQuirkSetTrait_C_0"'
+End Object

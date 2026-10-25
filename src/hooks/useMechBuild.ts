@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Item } from '../types/item';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
+import type { Upgrade } from '../types/upgrade';
 import type { ActionResult } from '../utils/buildActions';
 import { getStockBuild, type SharedBuild } from '../utils/buildCode';
 import { calculateEquippedWeight, createDefaultArmor, getArmorPointsPerTon, maximizeArmor } from '../utils/calculators';
@@ -12,11 +13,12 @@ import {
   getHardpointOccupancy,
   weaponFitsHardpoint
 } from '../utils/equipment';
+import { canInstallUpgrade, getUpgrades } from '../utils/upgrades';
 import { createEmptyArmor, createEmptyLoadout } from '../utils/zones';
 
 // Al elegir un chasis se carga su build de fábrica; si no la tiene, queda vacío con la armadura por defecto.
-const getStartingBuild = (mech: Mech, mechs: Mech[], catalog: Item[]): Pick<SharedBuild, 'loadout' | 'armor'> =>
-  getStockBuild(mech, mechs, catalog) ?? { loadout: createEmptyLoadout(), armor: createDefaultArmor(mech.components) };
+const getStartingBuild = (mech: Mech, mechs: Mech[], catalog: Item[]): Omit<SharedBuild, 'mech'> =>
+  getStockBuild(mech, mechs, catalog) ?? { loadout: createEmptyLoadout(), armor: createDefaultArmor(mech.components), upgrades: [] };
 
 export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: SharedBuild | null = null) => {
   const [selectedIndex, setSelectedIndex] = useState(() => Math.max(0, initialBuild ? mechs.indexOf(initialBuild.mech) : 0));
@@ -24,12 +26,14 @@ export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: Share
   const [startingBuild] = useState(() => initialBuild ?? getStartingBuild(mech, mechs, catalog));
   const [loadout, setLoadout] = useState<EquippedLoadout>(startingBuild.loadout);
   const [armor, setArmor] = useState<ArmorState>(startingBuild.armor);
+  const [upgradeIds, setUpgradeIds] = useState<string[]>(startingBuild.upgrades);
   const [activeZone, setActiveZone] = useState<Zone | null>(null);
 
-  const applyBuild = (index: number, build: Pick<SharedBuild, 'loadout' | 'armor'>) => {
+  const applyBuild = (index: number, build: Omit<SharedBuild, 'mech'>) => {
     setSelectedIndex(index);
     setLoadout(build.loadout);
     setArmor(build.armor);
+    setUpgradeIds(build.upgrades);
     setActiveZone(null);
   };
 
@@ -38,7 +42,8 @@ export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: Share
     applyBuild(index, getStartingBuild(mechs[index], mechs, catalog));
   };
 
-  const loadStockBuild = () => applyBuild(selectedIndex, getStartingBuild(mech, mechs, catalog));
+  // Las mejoras son del mech, no del loadout: se mantienen al volver a la build de fábrica.
+  const loadStockBuild = () => applyBuild(selectedIndex, { ...getStartingBuild(mech, mechs, catalog), upgrades: upgradeIds });
 
   const loadBuild = (build: SharedBuild) => applyBuild(Math.max(0, mechs.indexOf(build.mech)), build);
 
@@ -92,6 +97,15 @@ export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: Share
     setArmor(prev => ({ ...prev, [zone]: { ...prev[zone], [type]: value } }));
   };
 
+  const toggleUpgrade = (upgrade: Upgrade) => {
+    setUpgradeIds(prev => {
+      if (prev.includes(upgrade.id)) return prev.filter(id => id !== upgrade.id);
+      return canInstallUpgrade(mech, getUpgrades(prev), upgrade) ? [...prev, upgrade.id] : prev;
+    });
+  };
+
+  const clearUpgrades = () => setUpgradeIds([]);
+
   const clearArmor = () => {
     setArmor(createEmptyArmor());
   };
@@ -116,6 +130,9 @@ export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: Share
     loadStockBuild,
     loadout,
     armor,
+    upgradeIds,
+    toggleUpgrade,
+    clearUpgrades,
     activeZone,
     setActiveZone,
     equipItem,

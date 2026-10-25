@@ -1,0 +1,13 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="FastLearner_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="AdjustPilotSalary_BP_C_0"
+   End Object
+   Begin Object Name="AdjustPilotSalary_BP_C_0"
+      TrainingTimeAdjustmentPercent=-0.250000
+   End Object
+   PilotTraitName=NSLOCTEXT("[03913E5C467A6EE062BB23AFBB61FA70]", "3AB6423D47B3114BBA9989A5F2A95B38", "Fast Learner")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Generation_FastLearner_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Generation_FastLearner_ShortDesc")
+   Icon=/Game/UI/FrontEnd/Mechlab/Textures/icon_C-Bill_UIX.icon_C-Bill_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Type.Metagame")))
+   UnitTrait=PilotTrait_BP_C'"AdjustPilotSalary_BP_C_0"'
+End Object

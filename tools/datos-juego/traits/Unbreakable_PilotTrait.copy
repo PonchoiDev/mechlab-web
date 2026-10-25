@@ -1,0 +1,17 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Unbreakable_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0"
+   End Object
+   Begin Object Name="PilotTrait_BP_C_0"
+      HiringCostAdjustmentPercent=0.100000
+      SalaryAdjustmentPercent=0.100000
+      InjuryChanceIncreasePercentage=-0.500000
+      InjuryRecoveryAdjustmentPercent=-0.250000
+      DeathChanceIncreasePercentage=-0.250000
+   End Object
+   PilotTraitName=NSLOCTEXT("[812E54FB4FD0EA73978DD6A59BE3088B]", "11B95E2C49C625ACF349CBACD5C804A0", "Unbreakable")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "PilotTrait_Unbreakable_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "PilotTrait_Unbreakable_ShortDesc")
+   Icon=/Game/UI/Textures/MechLab/Balance_BTN_Plus_UIX.Balance_BTN_Plus_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Exclusive.Recovery"),(TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation")))
+   UnitTrait=PilotTrait_BP_C'"PilotTrait_BP_C_0"'
+End Object

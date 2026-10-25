@@ -1,0 +1,23 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="ObliqueArtilleryman_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/WeaponQuirkSetTrait.WeaponQuirkSetTrait_C Name="WeaponQuirkSetTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/WeaponQuirkSetTrait.Default__WeaponQuirkSetTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="WeaponQuirkSetTrait_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.150000
+         SalaryAdjustmentPercent=0.250000
+      End Object
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Artillery")))
+      WeaponType=INVTEXT("Artillery")
+      QuirkSet=(QuirkList=((Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangePercentage_Quirk.RangePercentage_Quirk_C"',Value=0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpreadRadiusPercentage_Quirk.SpreadRadiusPercentage_Quirk_C"',Value=-0.150000),(Quirk=BlueprintGeneratedClass'"/Game/Quirks/SpeedPercentage_Quirk.SpeedPercentage_Quirk_C"',Value=0.150000)))
+      UnitTraits(0)="PilotTrait_BP_C_0"
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "ObliqueArtilleryman_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "ObliqueArtilleryman_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "ObliqueArtilleryman_ShortDesc")
+   AvailableDate=3045.01.01-00.00.00
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Artillery_ICN_1024PX_UIX.Artillery_ICN_1024PX_UIX
+   Attributes=(GameplayTags=((TagName="PilotTrait.Training"),(TagName="DLC.DLC8"),(TagName="PilotTrait.Type.WeaponExpert.Artillery"),(TagName="PilotTrait.Hero")))
+   UnitTrait=WeaponQuirkSetTrait_C'"WeaponQuirkSetTrait_C_0"'
+End Object

@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="IncreasedEnergyRangeAndSpeed_Trait2"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="IncreasedWeaponRange_TraitBP_C_0"
+   End Object
+   Begin Object Name="IncreasedWeaponRange_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.Energy")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.150000)
+   End Object
+   MechTraitName=NSLOCTEXT("[FEFD03934617DECABC1ADC84EF62F3D5]", "2C2CE3C348CE55FB2197D08533A2C7D4", "Accurate Focusing Arrays II")
+   MechTraitLongDescription=NSLOCTEXT("[FEFD03934617DECABC1ADC84EF62F3D5]", "7EB21D694FD135EF0DE1358E3544EF8A", "Improvements to focusing arrays for both optical and electromagnetic systems increase range and velocity of energy based weapon systems.")
+   MechTraitShortDescription=NSLOCTEXT("[FEFD03934617DECABC1ADC84EF62F3D5]", "235653D3437F8C46EA575CB136965462", "{0}% ENERGY RANGE AND VELOCITY")
+   SlotSize=2
+   CBillInstallCost=500000
+   TimeInstallCost=10.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=7.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Energy_RNG_SP_2_ICN_UIX.Energy_RNG_SP_2_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"IncreasedWeaponRange_TraitBP_C_0"'
+End Object

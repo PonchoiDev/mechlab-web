@@ -18,6 +18,8 @@ interface MechBoardProps {
   onEquipmentMenu: (zone: Zone, itemName: string, x: number, y: number) => void;
   expandedSlots: boolean;
   compact: boolean;
+  // Refined Armor: los puntos se muestran multiplicados.
+  armorScale?: number;
 }
 
 export function MechBoard({
@@ -32,7 +34,8 @@ export function MechBoard({
   onHardpointMenu,
   onEquipmentMenu,
   expandedSlots,
-  compact
+  compact,
+  armorScale
 }: MechBoardProps) {
   const ammoWarnings = getAmmoWarnings(loadout);
 
@@ -63,6 +66,7 @@ export function MechBoard({
           onHardpointMenu={(index, x, y) => onHardpointMenu(zone, index, x, y)}
           onEquipmentMenu={(itemName, x, y) => onEquipmentMenu(zone, itemName, x, y)}
           expandedSlots={expandedSlots}
+          armorScale={armorScale}
         />
       ))}
     </section>

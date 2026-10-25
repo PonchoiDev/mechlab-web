@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="ReducedMissileCooldown_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+   End Object
+   Begin Object Name="Weapon_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.ArtemisMissile"),(TagName="Weapon.Missile")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/CooldownPercentage_Quirk.CooldownPercentage_Quirk_C"',Value=-0.050000)
+   End Object
+   MechTraitName=NSLOCTEXT("[F1CD1F804839443F5617639CDC6D3FCB]", "C1D9A62548D6C164FB18B3BF7A1A2C62", "Faster Missile Reload I")
+   MechTraitLongDescription=NSLOCTEXT("[F1CD1F804839443F5617639CDC6D3FCB]", "68A8F0D44959BBBFA15EBB88D3C8E05C", "Faster missile tube feed mechanisms deliver missiles to racks in record time.")
+   MechTraitShortDescription=NSLOCTEXT("[F1CD1F804839443F5617639CDC6D3FCB]", "280836214A641758D61D9496EC2EA9C1", "{0}% MISSILE COOLDOWN TIME")
+   SlotSize=1
+   CBillInstallCost=250000
+   TimeInstallCost=6.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Missile_COOL_TIME_1_ICN_UIX.Missile_COOL_TIME_1_ICN_UIX
+   Type=Firepower
+   MechTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+End Object

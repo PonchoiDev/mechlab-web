@@ -1,0 +1,20 @@
+Begin Object Class=/Script/MechWarrior.MWMechTraitDataAsset Name="ReducedMissileHeat_Trait1"
+   Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/WeaponTraits/Weapon_TraitBP.Weapon_TraitBP_C Name="Weapon_TraitBP_C_0"
+   End Object
+   Begin Object Name="Weapon_TraitBP_C_0"
+      SupportedWeapons=(GameplayTags=((TagName="Weapon.ArtemisMissile"),(TagName="Weapon.Missile")))
+      QuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/HeatGeneratedPercentage_Quirk.HeatGeneratedPercentage_Quirk_C"',Value=-0.025000)
+   End Object
+   MechTraitName=NSLOCTEXT("[EA6F86174C2DE7C439EA97BB2C0116AD]", "4B7E72F544A9CE4B5B1307B230DE87BB", "Missile Exhaust Venting I")
+   MechTraitLongDescription=NSLOCTEXT("[EA6F86174C2DE7C439EA97BB2C0116AD]", "A5D9E5D7424EBA5C4A7B86890F1AA42E", "Faster missile exhaust venting reduces heat buildup within the \'Mech when firing missiles.")
+   MechTraitShortDescription=NSLOCTEXT("[EA6F86174C2DE7C439EA97BB2C0116AD]", "3577C1824209F4F14C405EBB44D95F33", "{0}% MISSILE HEAT")
+   SlotSize=1
+   CBillInstallCost=750000
+   TimeInstallCost=15.000000
+   CBillRemovalCost=10000
+   TimeRemovalCost=5.000000
+   Icon=/Game/UI/Textures/GenericButtons_Icons/Missile_HEAT_1_ICN_UIX.Missile_HEAT_1_ICN_UIX
+   Type=Heat
+   MechTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+   UnitTrait=Weapon_TraitBP_C'"Weapon_TraitBP_C_0"'
+End Object

@@ -1,0 +1,48 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Hatred_Steiner_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/HatedFaction_BP.HatedFaction_BP_C Name="HatedFaction_BP_C_0"
+         Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/UnitCardTrait_BP.UnitCardTrait_BP_C Name="UnitCardTrait_BP_C_0"
+         End Object
+         Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/HeatTraits/IncreasedHeatCapacity_TraitBP.IncreasedHeatCapacity_TraitBP_C Name="IncreasedHeatCapacity_TraitBP_C_0"
+         End Object
+         Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/MechAffinityTrait.MechAffinityTrait_C Name="MechAffinityTrait_C_0"
+         End Object
+         Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/StructureTraits/IncreasedStructure_TraitBP.IncreasedStructure_TraitBP_C Name="ComposedTrait_BP_C_0.IncreasedStructure_TraitBP_C_0"
+         End Object
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="HatedFaction_BP_C_0"
+         Begin Object Name="UnitCardTrait_BP_C_0"
+            AccuracyBonusPercentage=0.100000
+         End Object
+         Begin Object Name="IncreasedHeatCapacity_TraitBP_C_0"
+         End Object
+         Begin Object Name="MechAffinityTrait_C_0"
+            AccelerationPercent=0.100000
+            UnitTraits=
+         End Object
+         Begin Object Name="ComposedTrait_BP_C_0.IncreasedStructure_TraitBP_C_0"
+            Increased Structure Percent=0.150000
+            ApplicableMechParts(0)=CenterTorso
+            ApplicableMechParts(1)=Head
+         End Object
+         HiringCostAdjustmentPercent=0.100000
+         SalaryAdjustmentPercent=0.100000
+         HatedFactions(0)=(FactionId_8_FCD668A64072BE2992B32BBF7CC88E83=(Id="MWFactionAsset:Steiner"),OverrideFactionDisplayName_12_6F47A73141C451B8C8EBFDAF7BDF14C2="")
+         HatedFactions(1)=(Date_7_634CD69F4B835815D4D3EE94B33225A4=3041.01.01-07.00.00,FactionId_8_FCD668A64072BE2992B32BBF7CC88E83=(Id="MWFactionAsset:FederatedCommonwealth"),OverrideFactionDisplayName_12_6F47A73141C451B8C8EBFDAF7BDF14C2=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/MainFactionStringTable.MainFactionStringTable", "Faction_House_Steiner"))
+         MiscInfo=NSLOCTEXT("", "42F1215F41EBF24EEA14BBBA7399D3CE", "{StructureQuirk}\r\n{QuirkList}\r\n{HeatCapacityQuirk}\r\n{UnitCardQuirkList}")
+         UnitTraits(0)=IncreasedStructure_TraitBP_C'"ComposedTrait_BP_C_0.IncreasedStructure_TraitBP_C_0"'
+         UnitTraits(1)=MechAffinityTrait_C'"MechAffinityTrait_C_0"'
+         UnitTraits(2)=IncreasedHeatCapacity_TraitBP_C'"IncreasedHeatCapacity_TraitBP_C_0"'
+         UnitTraits(3)=UnitCardTrait_BP_C'"UnitCardTrait_BP_C_0"'
+      End Object
+      UnitTraits(0)=HatedFaction_BP_C'"HatedFaction_BP_C_0"'
+   End Object
+   PilotTraitName=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Hated_Name")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Hated_LongDesc")
+   PilotTraitShortDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "Hated_ShortDesc")
+   Icon=/Game/UI/_common/Textures/Icons/Objectives/Assassination_ICN_48px.Assassination_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Type.Faction"),(TagName="PilotTrait.Exclusive.Hatred.Steiner")))
+   UnitTrait=HatedFaction_BP_C'"ComposedTrait_BP_C_0.HatedFaction_BP_C_0"'
+End Object

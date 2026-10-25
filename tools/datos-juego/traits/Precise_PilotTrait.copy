@@ -1,0 +1,29 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="Precise_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ComposedTrait_BP.ComposedTrait_BP_C Name="ComposedTrait_BP_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="ComposedTrait_BP_C_0.PilotTrait_BP_C_0"
+      End Object
+      Begin Object Class=/Game/Objects/Mechs/_common/MechTraits/EquipmentTraits/TargetingComputerTrait_BP.TargetingComputerTrait_BP_C Name="TargetingComputerTrait_BP_C_0"
+      End Object
+   End Object
+   Begin Object Name="ComposedTrait_BP_C_0"
+      Begin Object Name="ComposedTrait_BP_C_0.PilotTrait_BP_C_0"
+         HiringCostAdjustmentPercent=0.100000
+         SalaryAdjustmentPercent=0.100000
+      End Object
+      Begin Object Name="TargetingComputerTrait_BP_C_0"
+         MechSensorRangeIncrease=0.050000
+         SupportedBallisticWeapons=(GameplayTags=((TagName="Weapon.Ballistic.AutoCannon.LBX.LBX10.SolidSlug"),(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX2.SolidSlug"),(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX20.SolidSlug"),(TagName="Weapon.Ballistic.AutoCannon.LBX.LBX5.SolidSlug"),(TagName="Weapon.Ballistic.AutoCannon.Standard.AC10"),(TagName="Weapon.Ballistic.AutoCannon.Standard.AC2"),(TagName="Weapon.Ballistic.AutoCannon.Standard.AC20"),(TagName="Weapon.Ballistic.AutoCannon.Standard.AC5"),(TagName="Weapon.Ballistic.GaussRifle"),(TagName="Weapon.Ballistic.Rifle.HeavyRifle"),(TagName="Weapon.Ballistic.Rifle.LightRifle"),(TagName="Weapon.Ballistic.Rifle.MediumRifle"),(TagName="Weapon.Energy.ParticleCannon.HPPC"),(TagName="Weapon.Energy.ParticleCannon.LPPC"),(TagName="Weapon.Energy.ParticleCannon.PPC"),(TagName="Weapon.Energy.ParticleCannon.ERPPC")))
+         ProjectileSpeedIncreaseQuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/RangeAndSpeedPercentage_Quirk.RangeAndSpeedPercentage_Quirk_C"',Value=0.100000)
+         SupportedLaserWeapons=(GameplayTags=((TagName="Weapon.Energy.Laser")))
+         LaserRangeIncraseQuirkInfo=(Quirk=BlueprintGeneratedClass'"/Game/Quirks/DurationPercentage_Quirk.DurationPercentage_Quirk_C"',Value=-0.100000)
+      End Object
+      UnitTraits(0)=TargetingComputerTrait_BP_C'"TargetingComputerTrait_BP_C_0"'
+      UnitTraits(1)=PilotTrait_BP_C'"ComposedTrait_BP_C_0.PilotTrait_BP_C_0"'
+   End Object
+   PilotTraitName=NSLOCTEXT("[0F18EF7D4CCBA3D150E3598428B22E11]", "4E5FAD3F472BF7BB81CC44A427381341", "Precise")
+   PilotTraitLongDescription=NSLOCTEXT("[0F18EF7D4CCBA3D150E3598428B22E11]", "6308413E4AA42E53D76B12851E14B40E", "This pilot prefers putting focused damage on a single location. Increases range and velocity for standard autocannons, solid slug LBX autocannons, gauss rifles, rifles, and single projectile PPCs by {ProjectileQuirk}%. Also reduces laser duration by {LaserQuirk}%.")
+   PilotTraitShortDescription=NSLOCTEXT("[0F18EF7D4CCBA3D150E3598428B22E11]", "FD3F2DF845A471849E21B4BEFBE6D458", "This pilot prefers putting focused damage on a single location.")
+   Icon=/Game/UI/_common/Textures/Icons/Sensors/Target_ICN_48px.Target_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training")))
+   UnitTrait=ComposedTrait_BP_C'"ComposedTrait_BP_C_0"'
+End Object

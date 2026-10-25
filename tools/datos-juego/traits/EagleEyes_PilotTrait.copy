@@ -1,0 +1,17 @@
+Begin Object Class=/Script/MechWarrior.MWPilotTraitDataAsset Name="EagleEyes_PilotTrait"
+   Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/ElectronicsTrait.ElectronicsTrait_C Name="ElectronicsTrait_C_0"
+      Begin Object Class=/Game/DLC7/TOIs/PilotTraining/Quirks/PilotTrait_BP.PilotTrait_BP_C Name="PilotTrait_BP_C_0" Archetype=PilotTrait_BP_C'/Game/DLC7/TOIs/PilotTraining/Quirks/ElectronicsTrait.Default__ElectronicsTrait_C:PilotTrait_BP_C_0'
+      End Object
+   End Object
+   Begin Object Name="ElectronicsTrait_C_0"
+      Begin Object Name="PilotTrait_BP_C_0"
+      End Object
+      NonLosBonus_Meters=150.000000
+   End Object
+   PilotTraitName=NSLOCTEXT("[9F87EFDF4EAD34D38EEB8C8646E70F84]", "40E9F0254B2F04AE5CD9CD9CB60187C7", "Eagle Eyes")
+   PilotTraitLongDescription=LOCTABLE("/Game/DLC7/TOIs/PilotTraining/PilotTraits/_common/PilotTraitStringTable.PilotTraitStringTable", "EagleEyes_LongDesc")
+   PilotTraitShortDescription=NSLOCTEXT("[9F87EFDF4EAD34D38EEB8C8646E70F84]", "D8CC564B40CB5D56BB76449D67C0FAE9", "This pilot gains {NonLosQuirk}")
+   Icon=/Game/UI/_common/Textures/Icons/Sensors/Sensor_ICN_48px.Sensor_ICN_48px
+   Attributes=(GameplayTags=((TagName="PilotTrait.Hero"),(TagName="PilotTrait.Generation"),(TagName="PilotTrait.Training")))
+   UnitTrait=ElectronicsTrait_C'"ElectronicsTrait_C_0"'
+End Object
