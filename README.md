@@ -1,38 +1,89 @@
 # MechLab MW5
 
-Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir un chasis, equipar armas y equipo en sus anclajes y ranuras, repartir la armadura y ver al momento el peso, el daño por salva, el calor, la refrigeración y el rendimiento de cada arma.
+🇪🇸 Español · [🇬🇧 English](README.en.md)
 
-## Funcionalidades
+Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno de los 639 chasis jugables, equiparlo respetando las reglas del mechlab del juego, aplicarle las mejoras de la cantina y ver al momento cómo cambian el peso, el daño, el calor, la velocidad y el resto de estadísticas. Las builds se pueden guardar, compartir con un enlace o exportar como imagen.
 
-- MASC y Supercharger: la velocidad muestra también la velocidad con el impulso del más potente montado.
-- Builds de fábrica: al elegir un chasis se carga su loadout del juego (armas con su tier, equipo, munición y armadura), y el botón Stock loadout lo recupera.
-- Selector de chasis con búsqueda por nombre, variante o ID (639 variantes jugables), resumen de anclajes de cada variante por tipo y tamaño (2E·L 1E·M, JJ), especificaciones del chasis como en el mechlab del juego (325 C-XL DHS C-ENDO C-FERRO AP) y filtros por clase, tecnología, jump jets, ECM, AMS y mínimo de anclajes por tipo, también escribiendo atajos como `3e 2m jj ecm` en el buscador. Cada variante muestra también el año en que está disponible en la campaña (desde 3015, y los Clan desde la invasión de 3050) y su rol, y se puede filtrar por los mechs disponibles en un año. Los anclajes omni cuentan como comodín para energía, balística y misiles.
-- Equipamiento por componente respetando el tipo y tamaño de los anclajes y las ranuras especiales (motor, jump jets por clase, supercargadores).
-- Tiers de armas (0–5) que cambian sus estadísticas.
-- Armadura delantera y trasera por zona, con botones para vaciarla o maximizarla según el tonelaje libre.
-- Tablero con el 'Mech en el centro y sus componentes alrededor; al pulsar un componente o un anclaje se abre un panel lateral para equiparlo, con filtros por texto, base tecnológica y tipo de arma.
-- Resumen de pendientes de la build (anclajes libres, armas sin munición, armadura incompleta, sobrepeso) y duración de la munición instalada.
-- Estadísticas comprobadas contra el mechlab del juego (`src/utils/gameReference.test.ts`): el daño cuerpo a cuerpo (armas cuerpo a cuerpo y puñetazos de los anclajes vacíos) se muestra aparte de la potencia de fuego, que el juego suma, el alcance máximo es el de las armas, los disipadores dobles de la Esfera Interior añaden +1,0 de refrigeración del motor, la Ferro-Fibrosa da 35,84 puntos por tonelada y el tonelaje se trunca como en el juego.
-- Tabla de rendimiento de armas (daño, calor, RPM, DPS y alcance) y resumen de munición.
-- Imagen de referencia de cada 'Mech obtenida de [Sarna.net](https://www.sarna.net).
-- Builds guardadas en el navegador (localStorage): botón Save build para guardar la actual o actualizar la que se está editando (solo en su mismo chasis), y My builds para cargarlas, duplicarlas, renombrarlas, borrarlas y exportarlas o importarlas en un archivo JSON.
-- Campana de novedades en la cabecera, con un punto cuando hay algo que el usuario no ha visto. Las novedades están en `src/data/changelog.ts`: para anunciar un cambio, se añade una entrada al principio.
-- Opciones de vista (barra VIEW, guardadas en el navegador): ranuras como celdas, tablero compacto en cinco columnas sin la imagen de Sarna y panel de componente a la izquierda o a la derecha.
-- Formulario de feedback (botón Feedback de la cabecera o `/mercs/#feedback`): los mensajes llegan por correo sin mostrar la dirección del desarrollador.
-- Compartir la build: un enlace que la abre tal cual (`/mercs/?b=…`) y una imagen PNG con el 'Mech, su equipo y sus estadísticas, lista para copiar o descargar.
+| | |
+|---|---|
+| **Web en producción** | **https://mw-builder.com/mercs/** |
+| Presentación (slides) | _pendiente_ |
+| Vídeo explicativo | _pendiente_ |
+| Login | No tiene: la web se usa sin registro y las builds se guardan en el navegador |
 
-## Requisitos
+## Descripción general
 
-- Node.js 24 o superior
-- Python 3 (solo para regenerar los datos de los 'Mechs)
+*MechWarrior 5: Mercenaries* tiene un mechlab propio, pero solo se puede usar dentro de una partida y con los 'Mechs que tengas en el hangar. MechLab permite planificar builds de cualquier chasis desde el navegador, sin instalar nada ni registrarse, y compartirlas con otros jugadores.
 
-## Uso
+Los datos no se han copiado a mano: se extraen de los archivos del juego (exportados con el editor de mods oficial) con unos scripts de Python que generan los JSON que usa la web. Así hay 639 variantes y 342 objetos con sus estadísticas reales, y basta con volver a ejecutar los scripts cuando el juego se actualiza. Las cifras de la web están comprobadas contra capturas del mechlab del juego en tests automáticos.
+
+El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mechwarrior5), donde los comentarios de los jugadores guiaron varias de las funcionalidades: filtros de chasis, builds de fábrica, año de aparición y mejoras de la cantina.
+
+## Stack tecnológico
+
+| Área | Tecnología |
+|---|---|
+| Interfaz | React 19, TypeScript 6, CSS propio (sin framework de estilos) |
+| Build y desarrollo | Vite 8 |
+| Tests | Vitest 5 (228 tests) |
+| Análisis estático | oxlint |
+| Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
+| Correo del formulario de feedback | Cloudflare Email Routing |
+| Imágenes de los 'Mechs | API de [Sarna.net](https://www.sarna.net), a través de un proxy en el Worker |
+| Extracción de datos del juego | Python 3 (sin dependencias externas) |
+| Integración continua | GitHub Actions (lint, tests y build en cada push y pull request) |
+
+No usa base de datos ni backend propio: las builds guardadas viven en el `localStorage` del navegador y una build compartida viaja entera dentro de su enlace.
+
+## Funcionalidades principales
+
+**Selector de chasis**
+- Búsqueda por nombre, variante o ID entre 639 variantes jugables.
+- Resumen de anclajes de cada variante por tipo y tamaño (`2E·L 1E·M`), y especificaciones del chasis como en el juego (`325 C-XL DHS C-ENDO C-FERRO AP`).
+- Filtros por clase de peso, tecnología, jump jets, ECM, AMS, mínimo de anclajes por tipo y año de la campaña. Atajos en el buscador, como `3e 2m jj ecm`.
+- Año de aparición y rol de cada variante.
+
+**Configuración**
+- Tablero con el 'Mech en el centro y sus componentes alrededor. Al pulsar un componente se abre un panel para equiparlo, con filtros por texto, tecnología y tipo de arma.
+- Reglas del mechlab del juego: tipo y tamaño de cada anclaje (sacados de los modelos del juego), anclajes omni y de artillería, ranuras generales y especiales (motor, jump jets, supercargadores).
+- Tiers de armas (0 a 5) con sus estadísticas.
+- Armadura delantera y trasera por componente, con botones para vaciarla o maximizarla según el tonelaje libre.
+- Build de fábrica de cada variante, cargada al elegir el chasis y recuperable con un botón.
+- Avisos de la build: anclajes libres, armas sin munición, armadura incompleta y sobrepeso.
+- Opciones de vista: ranuras como celdas, tablero compacto y panel a la izquierda o a la derecha.
+
+**Mejoras de la cantina**
+- Las 50 mejoras de 'Mech del juego, agrupadas por categoría, con el límite de ranuras de cada chasis.
+- Reglas del juego: cada mejora se instala una vez, la I y la II se pueden combinar y sus porcentajes se suman.
+- Cada estadística afectada muestra el valor base y el mejorado (`52.9 ▲ 57.7`), como el juego.
+
+**Estadísticas**
+- Franja con tonelaje, armadura, velocidad, jump jets, daño por salva, daño cuerpo a cuerpo, pico de calor, refrigeración y alcance máximo.
+- Pestaña **Weapons**: daño, calor, RPM, DPS, alcance, alcance máximo y velocidad del proyectil de cada arma, con totales y duración de la munición.
+- Pestaña **'Mech**: estructura, capacidad de calor, giro de pie y del torso, sensor y fijación de blanco, como el resumen de la pantalla de mejoras del juego.
+
+**Guardar y compartir**
+- Builds guardadas en el navegador: guardar, actualizar, cargar, duplicar, renombrar, borrar, y exportar o importar en JSON.
+- Enlace que abre la build tal cual (`/mercs/?b=…`).
+- Imagen PNG de la build con el 'Mech, su equipo, sus mejoras y sus estadísticas, lista para copiar o descargar.
+
+**Otros**
+- Campana de novedades con los cambios que el usuario aún no ha visto.
+- Formulario de feedback que llega por correo sin mostrar la dirección del desarrollador.
+- Diseño adaptado a móvil.
+
+## Instalación y ejecución
+
+Requisitos: **Node.js 24** o superior. Python 3 solo hace falta para regenerar los datos del juego.
 
 ```sh
+git clone https://github.com/PonchoiDev/mechlab-web.git
+cd mechlab-web
 npm install
-npm run dev          # servidor de desarrollo en http://localhost:5173/mercs/
-npm run dev -- --host 0.0.0.0   # accesible desde otros dispositivos de la red
+npm run dev
 ```
+
+La web queda en http://localhost:5173/mercs/. Con `npm run dev -- --host 0.0.0.0` se puede abrir desde otros dispositivos de la red.
 
 | Script | Descripción |
 |---|---|
@@ -42,61 +93,72 @@ npm run dev -- --host 0.0.0.0   # accesible desde otros dispositivos de la red
 | `npm run build` | Comprobación de tipos y build de producción en `dist/` |
 | `npm run preview` | Sirve el build de producción |
 
-## Estructura
+En desarrollo, el servidor de Vite hace de proxy de las imágenes de Sarna, y el formulario de feedback escribe el mensaje en la terminal en vez de enviarlo.
+
+## Estructura del proyecto
 
 ```
 src/
-  App.tsx              Componente principal
-  components/          Componentes de la interfaz
-  hooks/               Hooks de React (build, builds guardadas e imagen de Sarna)
-  services/            Acceso a la API de Sarna e imagen de la build
-  utils/               Lógica del configurador: cálculos, equipo, items y zonas
-  types/               Tipos de TypeScript
-  data/                mechs.json e items.json que usa la web
-  test/                Datos de prueba compartidos por los tests
-worker/                Script del Worker de Cloudflare (proxy de imágenes de Sarna y feedback)
-site/                  Portada de la raíz del dominio, copiada al build
+  App.tsx               Componente principal: estado de la build y composición de la página
+  components/           Componentes de la interfaz (tablero, selector, panel de mejoras, diálogos…)
+  hooks/                Estado de la build, builds guardadas, preferencias de vista e imagen de Sarna
+  utils/                Lógica del configurador: cálculos, reglas de equipo, mejoras, código de las builds
+  services/             API de Sarna, portapapeles e imagen PNG de la build (canvas)
+  types/                Tipos de TypeScript
+  data/                 mechs.json, items.json y traits.json generados, y las novedades
+  test/                 Datos de prueba compartidos
+worker/                 Worker de Cloudflare: proxy de imágenes de Sarna y formulario de feedback
+site/                   Portada de la raíz del dominio (mw-builder.com)
 tools/
-  generar_mechs.py     Genera src/data/mechs.json a partir de los datos del juego
-  generar_items.py     Genera src/data/items.json a partir de los datos del juego
-  og-cards.html        Plantilla de las imágenes de vista previa (og-image.png)
-  datos-juego/         Archivos exportados del juego (mda/ 'Mechs, items/ equipo, loadout/ builds de fábrica, unitcard/ año y rol)
+  generar_mechs.py      Genera src/data/mechs.json
+  generar_items.py      Genera src/data/items.json
+  generar_traits.py     Genera src/data/traits.json (mejoras de la cantina)
+  datos-juego/          Archivos exportados del juego
+.github/workflows/      Integración continua
 ```
 
-## Regenerar los datos
+La lógica está separada de la interfaz: `src/utils/` son funciones puras con sus tests, y los componentes solo la usan. Por ejemplo, `calculators.ts` calcula el resumen de la build a partir del 'Mech, el equipo, la armadura y las mejoras, y `buildCode.ts` convierte una build en el código de su enlace y lo valida al abrirlo.
+
+## Datos del juego
+
+Los JSON de `src/data/` se generan a partir de los archivos del juego, exportados con el editor de mods de *MechWarrior 5: Mercenaries* a `tools/datos-juego/`:
+
+| Carpeta | Contenido | Se usa para |
+|---|---|---|
+| `mda/` | Datos de cada variante | Tonelaje, armadura, estructura, ranuras, motor, velocidad, giro |
+| `mdl/` y `hps/` | Modelo y anclajes de cada chasis | Tamaño real de cada anclaje |
+| `loadout/` | Builds de fábrica | Build de serie de cada variante |
+| `unitcard/` | Fichas de unidad | Año de aparición y rol |
+| `items/` | Armas, equipo y munición | Estadísticas por tier, munición, disipadores |
+| `traits/` | Mejoras | Mejoras de la cantina y sus efectos |
 
 ```sh
-python3 tools/generar_mechs.py
 python3 tools/generar_items.py
+python3 tools/generar_mechs.py
+python3 tools/generar_traits.py
 ```
 
-`generar_mechs.py` lee los archivos de `tools/datos-juego/mda/` y escribe `src/data/mechs.json`. Descarta las variantes no jugables (campaña, tutorial, jefes y cinemáticas), listadas en `ARCHIVOS_NO_JUGABLES`, y avisa si encuentra variantes repetidas. Para cada anclaje cuerpo a cuerpo guarda su tamaño (S antebrazo, M mano, L brazo de arma), la clase de peso del 'Mech y, si lo tiene, el arma especial que usa cuando el anclaje está vacío.
+`generar_mechs.py` lee también `items.json` para validar las builds de fábrica, así que se ejecuta después de `generar_items.py`. Los scripts descartan las variantes no jugables (campaña, tutorial, jefes y cinemáticas) y, al terminar, avisan de lo que no han podido cuadrar: piezas de las builds de fábrica que no caben, variantes sin ficha de unidad o anclajes cuyo tamaño se ha tenido que deducir.
 
-De `loadout/` saca la build de fábrica de cada variante (el loadout con su nombre o, si no existe, el de su `DefaultMech`) y la guarda en `stockBuild` con el formato de los enlaces de Share. Esa build también sirve para corregir datos que el MDA no trae bien: cada anclaje es al menos del tamaño de su arma de serie y cada componente tiene al menos las ranuras que ocupa su equipo de serie. De `unitcard/` saca el año de aparición (`introYear`) y el rol (`role`) de cada variante. Al terminar avisa de las piezas de las builds de fábrica que no están en el catálogo.
+## Calidad y comprobación contra el juego
 
-`generar_items.py` lee los archivos de `tools/datos-juego/items/` y escribe `src/data/items.json`. Agrupa los tiers de cada arma (`_Lvl0` a `_Lvl5`) aplicando sus quirks, guarda la base tecnológica de cada objeto, el tipo de munición de cada arma y munición, los multiplicadores de la salva (proyectiles para el daño, misiles y disparos de ráfaga para el calor) y la munición que gasta cada arma por salva. Las armas no guardan slots, porque en MW5 Mercenaries solo ocupan un anclaje. Ignora los archivos que no son objetos equipables y, al terminar, avisa de las municiones que faltan.
+- **228 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker.
+- `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
+- `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
+- GitHub Actions ejecuta lint, tests y build en cada push a `main` y en cada pull request.
 
-Ambos aceptan opcionalmente otra ruta de destino como argumento.
+## Despliegue
 
-## Publicación
+La web está publicada en **https://mw-builder.com/mercs/** con Cloudflare Workers (`wrangler.jsonc`). La raíz del dominio es una portada con una carátula por juego, y cada juego tiene su propia ruta; de momento solo existe `/mercs/`.
 
-La web está publicada en **https://mw-builder.com/mercs/** con Cloudflare Workers (`wrangler.jsonc`). Cada juego tiene su propia ruta en el dominio; de momento solo existe `/mercs/` (MW5: Mercenaries). La raíz es una portada estática (`site/index.html`) con una carátula por juego.
+- `npm run build` genera la web en `dist/mercs/` y copia `site/` en la raíz de `dist/`.
+- Los assets estáticos se sirven directamente. El Worker solo ejecuta código en `/mercs/api/*`:
+  - `/mercs/api/sarna-image`: proxy de las imágenes de Sarna, que no envían cabeceras CORS y por eso no se podrían dibujar en la imagen de la build. Guarda cada imagen en la caché de Cloudflare.
+  - `/mercs/api/feedback`: recibe los mensajes del formulario y los envía con Cloudflare Email Routing. La dirección de destino es el secreto `FEEDBACK_TO` del Worker, así que no aparece en el código.
+- Cada fusión en `main` se publica automáticamente, y cada pull request tiene una URL de vista previa.
 
-`npm run build` genera la web en `dist/mercs/` y copia el contenido de `site/` en la raíz de `dist/`.
+Para el formulario de feedback hay que activar **Email Routing** en la zona del dominio, verificar la dirección de destino y añadir el secreto `FEEDBACK_TO` en **Settings → Variables and secrets** del Worker. Sin esa configuración, la ruta responde 503 y el formulario muestra un error.
 
-El Worker solo ejecuta código en `/mercs/api/*`; el resto lo sirven los assets estáticos. Ahí está `/mercs/api/sarna-image`, un proxy que sirve desde el dominio las imágenes de Sarna (solo de su wiki) para poder dibujarlas en la imagen de la build, porque su servidor de imágenes no envía cabeceras CORS. Guarda cada imagen en la caché de Cloudflare. En desarrollo, el servidor de Vite hace el mismo papel.
+## Aviso legal
 
-
-`/mercs/api/feedback` recibe los mensajes del formulario y los envía por correo con Cloudflare Email Routing (enlace `send_email` en `wrangler.jsonc`). Para que funcione:
-
-1. En la zona mw-builder.com, activar **Email → Email Routing**.
-2. En **Destination addresses**, añadir el correo donde se quieren recibir los mensajes y verificarlo.
-3. En el Worker `mechlab-web`, **Settings → Variables and secrets**, añadir el secreto `FEEDBACK_TO` con ese correo.
-
-Sin esa configuración, la ruta responde 503 y el formulario muestra un error. En desarrollo, el servidor de Vite escribe el mensaje en la terminal en lugar de enviarlo.
-
-Cada fusión en `main` se publica automáticamente y cada pull request tiene una URL de vista previa.
-
-## Integración continua
-
-Cada push a `main` y cada pull request ejecuta lint, tests y build en GitHub Actions (`.github/workflows/ci.yml`).
+Herramienta hecha por un fan, sin relación con Piranha Games, Microsoft ni los titulares de las marcas MechWarrior y BattleTech. Los datos del juego pertenecen a sus respectivos propietarios. Las imágenes de los 'Mechs son de [Sarna.net](https://www.sarna.net).
