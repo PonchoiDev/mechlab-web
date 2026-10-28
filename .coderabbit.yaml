@@ -1,0 +1,59 @@
+# Configuración de CodeRabbit: revisa cada pull request con IA, en español y con las reglas del
+# proyecto. Complementa a la revisión de Copilot y al CI (lint, tests, cobertura y CodeQL).
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: es-ES
+tone_instructions: "Directo y concreto. Señala solo problemas reales; no repitas lo que ya comprueban el lint, los tests o CodeQL."
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: true
+  sequence_diagrams: false
+  auto_review:
+    enabled: true
+    drafts: false
+
+  # Los datos se generan con los scripts de tools/ y los archivos del juego son exportaciones: no se
+  # revisan a mano.
+  path_filters:
+    - "!src/data/*.json"
+    - "!tools/datos-juego/**"
+    - "!package-lock.json"
+    - "!dist/**"
+
+  path_instructions:
+    - path: "src/utils/**"
+      instructions: |
+        Lógica pura del configurador: sin React ni efectos secundarios. Cada regla nueva del juego
+        debe tener su test. Las cifras se comprueban contra el mechlab del juego; si un cálculo cambia,
+        pide el test de referencia (gameReference.test.ts o upgrades.test.ts) que lo justifique.
+    - path: "src/components/**"
+      instructions: |
+        Los componentes solo pintan y llaman a la lógica de src/utils. Los textos de la interfaz están
+        en inglés y sin guiones largos. Revisa la accesibilidad (roles, etiquetas, foco).
+    - path: "src/utils/buildCode.ts"
+      instructions: |
+        Los enlaces de build ya compartidos deben seguir abriéndose: cualquier cambio de formato tiene
+        que ser compatible hacia atrás y validar lo que llega del enlace.
+    - path: "worker/**"
+      instructions: |
+        Código expuesto a Internet. Revisa la validación de entradas, que el proxy solo acepte imágenes
+        de la wiki de Sarna y que ningún dato del usuario pueda inyectar cabeceras de correo.
+    - path: "tools/*.py"
+      instructions: |
+        Scripts que leen los archivos exportados del juego. Los IDs de las variantes no pueden cambiar
+        (los usan los enlaces y las builds guardadas). Las correcciones de datos llevan un comentario
+        que explique de dónde salen.
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "CLAUDE.md"
+      - "docs/*.md"

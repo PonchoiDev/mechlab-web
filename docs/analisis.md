@@ -35,10 +35,12 @@ Jugadores de *MechWarrior 5: Mercenaries*, sobre todo los que se mueven en la co
 | Guardar builds en el navegador, exportarlas e importarlas | Hecho |
 | Compartir una build con un enlace y como imagen | Hecho |
 | Recibir errores e ideas de los usuarios | Hecho (formulario de feedback) |
-| Filtro por DLC | Pendiente: los datos ya están en las fichas de unidad |
-| Aceleración y mejoras de saltos con números | Pendiente: faltan datos o calibración |
-| Rasgos de piloto | Pendiente: los archivos ya están exportados |
+| Filtro por DLC | Pendiente ([#43](https://github.com/PonchoiDev/mechlab-web/issues/43)): los datos ya están en las fichas de unidad |
+| Aceleración y mejoras de saltos con números | Pendiente ([#48](https://github.com/PonchoiDev/mechlab-web/issues/48)): faltan datos o calibración |
+| Rasgos de piloto | Pendiente ([#49](https://github.com/PonchoiDev/mechlab-web/issues/49)): los archivos ya están exportados |
 | Compatibilidad con el mod YAML | Descartado por ahora |
+
+El backlog completo, incluidas las tareas técnicas (tests de interfaz, cabeceras de seguridad, límite del formulario, comprobaciones en el juego), está en las [issues de GitHub](https://github.com/PonchoiDev/mechlab-web/issues).
 
 ## Requisitos no funcionales
 

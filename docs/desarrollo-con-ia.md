@@ -49,6 +49,10 @@ La IA no puede abrir el juego, y los archivos exportados no siempre cuentan toda
 
 Cada funcionalidad o corrección va en su rama y su pull request. Antes de abrirlo, la IA ejecuta lint, tests y build, y prueba los cambios de interfaz en un Firefox sin interfaz, con capturas de pantalla. En GitHub, cada pull request pasa por el CI (lint, tests con cobertura y build) y por el análisis de seguridad de CodeQL, y Cloudflare publica una vista previa para revisarlo en el navegador antes de fusionarlo.
 
+### Una IA escribe, otras revisan
+
+El código que escribe Claude Code lo revisan dos asistentes distintos antes de que el desarrollador lo fusione: **CodeRabbit**, configurado en `.coderabbit.yaml` con las reglas del proyecto (lógica pura con tests, compatibilidad de los enlaces, seguridad del Worker, IDs estables de los datos), y la **revisión de pull requests de GitHub Copilot**. Cada revisor parte de un modelo diferente, así que señalan problemas que al autor le pasan desapercibidos, y sus comentarios se atienden o se responden antes de fusionar.
+
 ### El contexto vive en el repositorio, no en la conversación
 
 El problema que apareció con Gemini (el modelo se pierde cuando la conversación acumula demasiado contexto) se evitó guardando el contexto importante en el propio repositorio: `CLAUDE.md` con las convenciones y las reglas del juego, `docs/` con el análisis y la arquitectura, y los tests como especificación de cada regla comprobada. Cualquier sesión nueva empieza leyendo esos archivos en lugar de depender de una conversación larga.

@@ -128,6 +128,7 @@ tools/
   generar_traits.py     Generates src/data/traits.json (cantina upgrades)
   datos-juego/          Files exported from the game
 .github/                Continuous integration, CodeQL and Dependabot
+.coderabbit.yaml        CodeRabbit code review settings
 CLAUDE.md               Project conventions for the AI assistant
 ```
 
@@ -165,6 +166,8 @@ python3 tools/generar_traits.py
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
 - GitHub Actions runs lint, tests with coverage and build on every push to `main` and on every pull request.
 - **CodeQL** scans the code (TypeScript, Python and the workflows) for security issues on every pull request and every week.
+- **AI code review:** CodeRabbit (set up in `.coderabbit.yaml`) and GitHub Copilot review every pull request.
+- The backlog lives in the [GitHub issues](https://github.com/PonchoiDev/mechlab-web/issues).
 - TypeScript in strict mode and static analysis with oxlint.
 - Dependabot proposes dependency updates every week and flags known vulnerabilities (`npm audit` reports none).
 
