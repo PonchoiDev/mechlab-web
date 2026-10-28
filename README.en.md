@@ -28,6 +28,7 @@ The design documents are in Spanish, the author's language.
 | [Analysis](docs/analisis.md) | Problem, users, scope, requirements and how player feedback changed them |
 | [Architecture](docs/arquitectura.md) | Data flow, layers, design decisions, principles (SOLID, DRY, KISS, YAGNI) and how it maps to Clean Architecture |
 | [UML diagrams](docs/uml.md) | Use cases, domain classes and the sequences for sharing a build and sending feedback |
+| [Specs](docs/specs/) | Spec Driven Development: requirements and acceptance criteria written before the code |
 | [Development with AI](docs/desarrollo-con-ia.md) | How the project was built with Claude Code and the practices that keep it reliable |
 | [CLAUDE.md](CLAUDE.md) | Project conventions and rules the AI assistant reads every session |
 
@@ -37,7 +38,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (235 tests, V8 coverage) |
+| Tests | Vitest 5 (245 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -52,7 +53,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 **Chassis picker**
 - Search by name, variant or ID across 639 playable variants.
 - Hardpoint summary for each variant by type and size (`2E·L 1E·M`), and chassis specs as in the game (`325 C-XL DHS C-ENDO C-FERRO AP`).
-- Filters by weight class, tech base, jump jets, ECM, AMS, minimum hardpoints per type and campaign year. Search shortcuts such as `3e 2m jj ecm`.
+- Filters by weight class, tech base, jump jets, ECM, AMS, hero variants, DLC (base game and DLC 1 to 9), minimum hardpoints per type and campaign year. Search shortcuts such as `3e 2m jj ecm` or `hero dlc7`.
 - Intro year and combat role of each variant.
 
 **Fitting**
@@ -161,7 +162,7 @@ python3 tools/generar_traits.py
 
 ## Quality and checks against the game
 
-- **235 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **245 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

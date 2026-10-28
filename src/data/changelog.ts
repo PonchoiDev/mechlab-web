@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-29-hero-dlc-filters',
+    date: '2026-10-29',
+    title: 'Hero and DLC filters',
+    items: [
+      'New Hero filter in the chassis list: only the 109 hero variants',
+      'New DLC row: pick the base game and the DLC you own to see only the \'Mechs you can get',
+      'Every variant shows a HERO tag and the DLC it comes with',
+      'Search shortcuts: type hero, base or dlc1 to dlc9, for example hero dlc7'
+    ]
+  },
+  {
     id: '2026-10-28-game-patch',
     date: '2026-10-28',
     title: 'Latest game patch',

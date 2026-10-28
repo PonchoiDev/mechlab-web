@@ -1,7 +1,7 @@
 # Especificación: filtros por DLC y por hero
 
 - **Issue:** [#43](https://github.com/PonchoiDev/mechlab-web/issues/43)
-- **Estado:** aprobada, pendiente de implementar
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Esta especificación se escribió antes que el código; los criterios de aceptación se convirtieron en tests (`src/utils/mechs.test.ts`) y después se implementó lo necesario para que pasaran.
 
 ## Contexto
@@ -76,3 +76,10 @@ En la lista, las etiquetas nuevas van con las de anclajes, JJ y ECM: `2E·M 1B·
 2. **Filtrado (CA3 a CA5, CA9, CA10):** `matchesMechFilters` y `countActiveFilters`.
 3. **Buscador (CA6 a CA8):** `parseMechQuery` y `mergeMechFilters`.
 4. **Interfaz:** comprobación en el navegador del filtro, los atajos y las etiquetas.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y la implementación, en tres commits separados del mismo pull request.
+- **Tests:** los diez criterios (CA1 a CA10) están en `src/utils/mechs.test.ts` y pasan. Solo cambió un test anterior, porque el resultado del buscador incluye ahora `hero` y `dlcs`.
+- **Interfaz:** comprobada en el navegador. `hero dlc7` deja 5 variantes, todas con las etiquetas HERO y DLC 7; Hero con Base y DLC 9 deja 65, la misma cifra que da `mechs.json`; Clear filters vuelve a las 639.
+- **Pendiente:** los nombres comerciales de los DLC, que no están en los archivos exportados.

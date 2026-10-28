@@ -299,6 +299,14 @@
   --weapon-color: #b9a4ff;
 }
 
+.mech-hardpoint-tag.is-hero {
+  --weapon-color: var(--work-lime);
+}
+
+.mech-hardpoint-tag.is-dlc {
+  --weapon-color: var(--work-muted);
+}
+
 .mech-option {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

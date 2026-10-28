@@ -57,6 +57,10 @@ El código que escribe Claude Code lo revisan dos asistentes distintos antes de 
 
 El problema que apareció con Gemini (el modelo se pierde cuando la conversación acumula demasiado contexto) se evitó guardando el contexto importante en el propio repositorio: `CLAUDE.md` con las convenciones y las reglas del juego, `docs/` con el análisis y la arquitectura, y los tests como especificación de cada regla comprobada. Cualquier sesión nueva empieza leyendo esos archivos en lugar de depender de una conversación larga.
 
+### Primero la especificación
+
+Las funcionalidades nuevas siguen Spec Driven Development: antes del código se escribe una especificación en `docs/specs/` con los requisitos, los criterios de aceptación y el plan de pruebas. La IA convierte cada criterio en un test, que falla, y después implementa hasta que todos pasan. Los filtros por DLC y por hero ([especificación](specs/filtros-dlc-hero.md)) se hicieron así, en tres commits separados: especificación, tests e implementación. Con una IA esto es especialmente útil: la especificación fija qué hay que construir antes de que el agente empiece, y los tests comprueban que lo ha hecho.
+
 ### Las correcciones se convierten en reglas
 
 Cuando el desarrollador corrige algo (una regla del juego, un comportamiento que no era un error, una forma de trabajar), la corrección queda escrita en `CLAUDE.md`. Por ejemplo: la IA subió dos veces commits a una rama cuyo pull request ya estaba fusionado, y desde entonces comprueba el estado del pull request antes de subir nada.

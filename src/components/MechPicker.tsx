@@ -2,10 +2,12 @@ import { useMemo, useState, type KeyboardEvent } from 'react';
 import type { Mech } from '../types/mech';
 import { MechSpecs } from './MechSpecs';
 import {
+  CONTENT_SOURCES,
   countActiveFilters,
   EMPTY_MECH_FILTERS,
   GAME_START_YEAR,
   getAvailableYear,
+  getContentSourceLabel,
   getHardpointGroups,
   getMechDisplayName,
   hasEcm,
@@ -57,6 +59,8 @@ function HardpointSummary({ mech }: { mech: Mech }) {
       ))}
       {hasJumpJets(mech) && <span className="mech-hardpoint-tag is-jump-jets">JJ</span>}
       {hasEcm(mech) && <span className="mech-hardpoint-tag is-ecm">ECM</span>}
+      {mech.hero && <span className="mech-hardpoint-tag is-hero" title="Hero 'Mech">HERO</span>}
+      {mech.dlc !== undefined && <span className="mech-hardpoint-tag is-dlc" title={`Comes with DLC ${mech.dlc}`}>{getContentSourceLabel(mech.dlc)}</span>}
     </span>
   );
 }
@@ -234,6 +238,34 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
               >
                 AMS
               </button>
+              <button
+                type="button"
+                className="mech-filter-chip"
+                aria-pressed={filters.hero}
+                title="Only hero 'Mechs"
+                onClick={() => updateFilters(current => ({ hero: !current.hero }))}
+              >
+                Hero
+              </button>
+            </div>
+
+            <div className="mech-filter-row">
+              <span className="mech-filter-label" title="Show only the 'Mechs from the base game and DLC you own">DLC</span>
+              {CONTENT_SOURCES.map(source => (
+                <button
+                  key={source}
+                  type="button"
+                  className="mech-filter-chip"
+                  aria-pressed={filters.dlcs.includes(source)}
+                  aria-label={source === 0 ? 'Base game' : `DLC ${source}`}
+                  title={source === 0 ? 'Base game' : `DLC ${source}`}
+                  onClick={() => updateFilters(current => ({
+                    dlcs: current.dlcs.includes(source) ? current.dlcs.filter(value => value !== source) : [...current.dlcs, source]
+                  }))}
+                >
+                  {source === 0 ? 'Base' : source}
+                </button>
+              ))}
             </div>
 
             <div className="mech-filter-row">

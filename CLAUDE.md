@@ -37,6 +37,7 @@ Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` si
 ## Flujo de trabajo
 
 - El backlog está en GitHub Issues. Cada pull request que resuelve una issue la enlaza con `Closes #n`.
+- Las funcionalidades nuevas siguen Spec Driven Development: especificación en `docs/specs/`, después los tests de sus criterios de aceptación y después el código, en commits separados.
 - Una rama y un pull request por cambio, desde `main` actualizado. Nunca commits directos a `main`.
 - Antes de subir más commits a una rama, comprobar que su pull request sigue abierto (`gh pr view <n> --json state`); si ya se fusionó, crear otra rama desde `main`.
 - Los commits y pull requests describen el cambio por sí mismos, sin referencias a conversaciones.
