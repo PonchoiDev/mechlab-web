@@ -192,6 +192,21 @@ describe('filtros por DLC y por hero', () => {
     expect(describeContentSources([1, 2, 9])).toBe('3 selected');
   });
 
+  it('CA11: el filtro de rol deja las variantes de los roles marcados', () => {
+    const result = filtered({ roles: ['Sniper', 'Scout'] });
+    expect(result).toHaveLength(163);
+    expect(result.every(mech => mech.role === 'Sniper' || mech.role === 'Scout')).toBe(true);
+  });
+
+  it('CA12: sin roles marcados no se descarta nada por el rol', () => {
+    expect(EMPTY_MECH_FILTERS.roles).toEqual([]);
+    expect(filtered({ roles: [] })).toHaveLength(allMechs.length);
+  });
+
+  it('CA13: varios roles cuentan como un solo filtro', () => {
+    expect(countActiveFilters({ ...EMPTY_MECH_FILTERS, roles: ['Sniper', 'Brawler'] })).toBe(1);
+  });
+
   it('CA10: el estado vacío no tiene Hero ni fuentes de DLC', () => {
     expect(EMPTY_MECH_FILTERS.hero).toBe(false);
     expect(EMPTY_MECH_FILTERS.dlcs).toEqual([]);
