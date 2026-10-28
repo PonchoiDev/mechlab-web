@@ -6,9 +6,16 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Los parches y versiones menores van juntos; cada versión mayor llega en su propio pull request,
+    # para revisarla por separado (por ejemplo, un TypeScript nuevo).
     groups:
       dependencias:
         patterns: ["*"]
+        update-types: [minor, patch]
+    ignore:
+      # Los tipos de Node siguen la versión que usan el CI y el README (Node 24).
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
     open-pull-requests-limit: 5
 
   - package-ecosystem: github-actions
