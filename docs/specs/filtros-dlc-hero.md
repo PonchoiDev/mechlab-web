@@ -26,9 +26,9 @@ Los jugadores pidieron en Reddit poder filtrar el selector de chasis por lo que 
 
 - **RF1.** `mechs.json` guarda en cada variante su DLC (`dlc`, del 1 al 9) cuando lo tiene. Las variantes del juego base no llevan el campo.
 - **RF2.** El selector de chasis tiene un filtro **Hero** que deja solo las variantes hero.
-- **RF3.** El selector tiene una fila **DLC** con una opción por fuente de contenido: **Base** y **DLC 1** … **DLC 9**. Se pueden marcar varias; la lista muestra las variantes de cualquiera de las fuentes marcadas. Sin ninguna marcada, se muestran todas.
+- **RF3.** El selector tiene un desplegable **DLC** con una casilla por fuente de contenido: **Base game** y **DLC 1** … **DLC 9**. Se pueden marcar varias; la lista muestra las variantes de cualquiera de las fuentes marcadas. Sin ninguna marcada, se muestran todas. El botón del desplegable resume la selección («All», «Base, DLC 7» o «4 selected»).
 - **RF4.** En el buscador, el atajo `hero` activa el filtro Hero, y `dlc1` … `dlc9` y `base` añaden esa fuente al filtro de DLC. Se combinan con los atajos existentes (`3e 2m jj hero dlc7`).
-- **RF5.** Cada variante de la lista muestra una etiqueta **HERO** si lo es, y una etiqueta con su DLC si no es del juego base.
+- **RF5.** Cada variante de la lista muestra una etiqueta **HERO** junto a sus siglas si lo es, y una etiqueta con su DLC junto a sus anclajes si no es del juego base.
 - **RF6.** Los filtros nuevos cuentan como filtros activos y se borran con **Clear filters**, como los demás.
 
 ## Requisitos no funcionales
@@ -36,7 +36,8 @@ Los jugadores pidieron en Reddit poder filtrar el selector de chasis por lo que 
 - **RNF1.** La lógica de filtrado es pura y está en `src/utils/mechs.ts`, con sus tests.
 - **RNF2.** Los IDs de las variantes no cambian.
 - **RNF3.** Los textos de la interfaz, en inglés y sin guiones largos.
-- **RNF4.** Los controles son botones con `aria-pressed`, como los filtros que ya existen.
+- **RNF4.** Los controles son accesibles: botones con `aria-pressed` como los filtros que ya existen, y en el desplegable de DLC un botón con `aria-expanded` y casillas con `role="checkbox"` y `aria-checked`.
+- **RNF5.** Los filtros se agrupan por tema: tamaño y tecnología, equipo, anclajes, y disponibilidad (año, DLC y hero).
 
 ## Criterios de aceptación
 
@@ -56,13 +57,22 @@ Los jugadores pidieron en Reddit poder filtrar el selector de chasis por lo que 
 ## Diseño de la interfaz
 
 ```
-CLASS  L M H A   TECH  IS Clan   Jump jets  ECM  AMS  Hero
+CLASS  L M H A        TECH  IS Clan
+EQUIPMENT  Jump jets  ECM  AMS
 MIN HARDPOINTS  …
-DLC  Base  1  2  3  4  5  6  7  8  9
-AVAILABLE BY  …
+AVAILABLE BY [Any year ▾]   DLC [All ▾]   Hero
+                            ┌──────────────┐
+                            │ ☑ Base game  │
+                            │ ☐ DLC 1      │
+                            │ …            │
+                            │ ☑ DLC 7      │
+                            │ Clear        │
+                            └──────────────┘
 ```
 
-En la lista, las etiquetas nuevas van con las de anclajes, JJ y ECM: `2E·M 1B·L JJ ECM HERO DLC 7`.
+En la lista, la etiqueta HERO va junto a las siglas de la variante (`ACH-C HERO`), donde se lee al momento, y la del DLC con los anclajes: `2E·M 1B·L JJ ECM DLC 7`.
+
+**Revisión del diseño.** La primera versión ponía Hero entre los filtros de equipo, el DLC como una fila de diez botones y la etiqueta HERO entre los anclajes. Al probarla, los filtros quedaban dispersos y HERO se perdía entre las etiquetas de anclajes, así que se reorganizó como arriba. Los criterios de aceptación no cambian: solo cambia la presentación.
 
 ## Fuera de alcance
 
