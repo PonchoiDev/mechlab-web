@@ -1,0 +1,17 @@
+# Dependabot abre pull requests con las actualizaciones de las dependencias y de las acciones del CI,
+# y avisa de las vulnerabilidades conocidas. El CI de cada pull request comprueba que nada se rompe.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      dependencias:
+        patterns: ["*"]
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

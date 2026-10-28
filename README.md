@@ -19,19 +19,28 @@ Los datos no se han copiado a mano: se extraen de los archivos del juego (export
 
 El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mechwarrior5), donde los comentarios de los jugadores guiaron varias de las funcionalidades: filtros de chasis, builds de fábrica, año de aparición y mejoras de la cantina.
 
+## Documentación
+
+| Documento | Contenido |
+|---|---|
+| [Análisis](docs/analisis.md) | Problema, usuarios, alcance, requisitos y cómo evolucionaron con el feedback |
+| [Arquitectura](docs/arquitectura.md) | Flujo de datos, capas de la web y decisiones de diseño, con diagramas |
+| [Desarrollo con IA](docs/desarrollo-con-ia.md) | Cómo se ha construido el proyecto con Claude Code y qué prácticas lo hacen fiable |
+| [CLAUDE.md](CLAUDE.md) | Convenciones y reglas del proyecto que lee el asistente de IA en cada sesión |
+
 ## Stack tecnológico
 
 | Área | Tecnología |
 |---|---|
 | Interfaz | React 19, TypeScript 6, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (228 tests) |
+| Tests | Vitest 5 (235 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
 | Imágenes de los 'Mechs | API de [Sarna.net](https://www.sarna.net), a través de un proxy en el Worker |
 | Extracción de datos del juego | Python 3 (sin dependencias externas) |
-| Integración continua | GitHub Actions (lint, tests y build en cada push y pull request) |
+| Integración continua | GitHub Actions (lint, tests con cobertura y build en cada push y pull request) |
 
 No usa base de datos ni backend propio: las builds guardadas viven en el `localStorage` del navegador y una build compartida viaja entera dentro de su enlace.
 
@@ -89,6 +98,7 @@ La web queda en http://localhost:5173/mercs/. Con `npm run dev -- --host 0.0.0.0
 |---|---|
 | `npm run dev` | Servidor de desarrollo con recarga en caliente |
 | `npm test` | Tests unitarios con Vitest |
+| `npm run coverage` | Tests con informe de cobertura en `coverage/` |
 | `npm run lint` | Análisis estático con oxlint |
 | `npm run build` | Comprobación de tipos y build de producción en `dist/` |
 | `npm run preview` | Sirve el build de producción |
@@ -109,12 +119,14 @@ src/
   test/                 Datos de prueba compartidos
 worker/                 Worker de Cloudflare: proxy de imágenes de Sarna y formulario de feedback
 site/                   Portada de la raíz del dominio (mw-builder.com)
+docs/                   Análisis, arquitectura y desarrollo con IA
 tools/
   generar_mechs.py      Genera src/data/mechs.json
   generar_items.py      Genera src/data/items.json
   generar_traits.py     Genera src/data/traits.json (mejoras de la cantina)
   datos-juego/          Archivos exportados del juego
-.github/workflows/      Integración continua
+.github/                Integración continua, CodeQL y Dependabot
+CLAUDE.md               Convenciones del proyecto para el asistente de IA
 ```
 
 La lógica está separada de la interfaz: `src/utils/` son funciones puras con sus tests, y los componentes solo la usan. Por ejemplo, `calculators.ts` calcula el resumen de la build a partir del 'Mech, el equipo, la armadura y las mejoras, y `buildCode.ts` convierte una build en el código de su enlace y lo valida al abrirlo.
@@ -143,10 +155,14 @@ python3 tools/generar_traits.py
 
 ## Calidad y comprobación contra el juego
 
-- **228 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker.
+- **235 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
-- GitHub Actions ejecuta lint, tests y build en cada push a `main` y en cada pull request.
+- GitHub Actions ejecuta lint, tests con cobertura y build en cada push a `main` y en cada pull request.
+- **CodeQL** analiza la seguridad del código (TypeScript, Python y los workflows) en cada pull request y cada semana.
+- TypeScript en modo estricto y análisis estático con oxlint.
+- Dependabot propone cada semana las actualizaciones de dependencias y avisa de las vulnerabilidades conocidas (`npm audit` sin vulnerabilidades).
 
 ## Despliegue
 

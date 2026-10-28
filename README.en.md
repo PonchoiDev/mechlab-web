@@ -19,19 +19,30 @@ The data was not typed in by hand. Python scripts extract it from the game files
 
 The project started as a master's final project and was posted on Reddit (r/Mechwarrior5), where player feedback shaped several features: chassis filters, stock loadouts, intro years and cantina upgrades.
 
+## Documentation
+
+The design documents are in Spanish, the author's language.
+
+| Document | Contents |
+|---|---|
+| [Analysis](docs/analisis.md) | Problem, users, scope, requirements and how player feedback changed them |
+| [Architecture](docs/arquitectura.md) | Data flow, app layers and design decisions, with diagrams |
+| [Development with AI](docs/desarrollo-con-ia.md) | How the project was built with Claude Code and the practices that keep it reliable |
+| [CLAUDE.md](CLAUDE.md) | Project conventions and rules the AI assistant reads every session |
+
 ## Tech stack
 
 | Area | Technology |
 |---|---|
 | UI | React 19, TypeScript 6, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (228 tests) |
+| Tests | Vitest 5 (235 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
 | 'Mech images | [Sarna.net](https://www.sarna.net) API, through a proxy in the Worker |
 | Game data extraction | Python 3 (no external dependencies) |
-| Continuous integration | GitHub Actions (lint, tests and build on every push and pull request) |
+| Continuous integration | GitHub Actions (lint, tests with coverage and build on every push and pull request) |
 
 There is no database or custom backend: saved builds live in the browser's `localStorage`, and a shared build travels whole inside its link.
 
@@ -89,6 +100,7 @@ The site runs at http://localhost:5173/mercs/. With `npm run dev -- --host 0.0.0
 |---|---|
 | `npm run dev` | Dev server with hot reload |
 | `npm test` | Unit tests with Vitest |
+| `npm run coverage` | Tests with a coverage report in `coverage/` |
 | `npm run lint` | Static analysis with oxlint |
 | `npm run build` | Type check and production build in `dist/` |
 | `npm run preview` | Serves the production build |
@@ -109,12 +121,14 @@ src/
   test/                 Shared test fixtures
 worker/                 Cloudflare Worker: Sarna image proxy and feedback form
 site/                   Landing page at the domain root (mw-builder.com)
+docs/                   Analysis, architecture and development with AI
 tools/
   generar_mechs.py      Generates src/data/mechs.json
   generar_items.py      Generates src/data/items.json
   generar_traits.py     Generates src/data/traits.json (cantina upgrades)
   datos-juego/          Files exported from the game
-.github/workflows/      Continuous integration
+.github/                Continuous integration, CodeQL and Dependabot
+CLAUDE.md               Project conventions for the AI assistant
 ```
 
 Logic is kept apart from the UI: `src/utils/` holds pure functions with their tests, and the components only call them. For example, `calculators.ts` builds the stats summary from the 'Mech, its equipment, armor and upgrades, and `buildCode.ts` turns a build into its link code and validates it when the link is opened.
@@ -145,10 +159,14 @@ python3 tools/generar_traits.py
 
 ## Quality and checks against the game
 
-- **228 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker.
+- **235 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
-- GitHub Actions runs lint, tests and build on every push to `main` and on every pull request.
+- GitHub Actions runs lint, tests with coverage and build on every push to `main` and on every pull request.
+- **CodeQL** scans the code (TypeScript, Python and the workflows) for security issues on every pull request and every week.
+- TypeScript in strict mode and static analysis with oxlint.
+- Dependabot proposes dependency updates every week and flags known vulnerabilities (`npm audit` reports none).
 
 ## Deployment
 
