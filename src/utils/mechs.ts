@@ -72,12 +72,19 @@ export const getContentSource = (mech: Mech): number => mech.dlc ?? BASE_GAME;
 
 export const getContentSourceLabel = (source: number): string => source === BASE_GAME ? 'Base' : `DLC ${source}`;
 
-// Resumen de las fuentes marcadas para el botón del desplegable: «All», «Base, DLC 7» o «4 selected».
-export const describeContentSources = (sources: number[]): string => {
-  if (sources.length === 0) return 'All';
-  if (sources.length > 2) return `${sources.length} selected`;
-  return [...sources].sort((a, b) => a - b).map(getContentSourceLabel).join(', ');
+// Resumen de una selección para el botón de un desplegable: «All», «Sniper, Scout» o «4 selected».
+export const describeSelection = (labels: string[]): string => {
+  if (labels.length === 0) return 'All';
+  if (labels.length > 2) return `${labels.length} selected`;
+  return labels.join(', ');
 };
+
+export const describeContentSources = (sources: number[]): string =>
+  describeSelection([...sources].sort((a, b) => a - b).map(getContentSourceLabel));
+
+// Roles de combate de las fichas de unidad (Sniper, Brawler…), en orden alfabético.
+export const getMechRoles = (mechs: Mech[]): string[] =>
+  [...new Set(mechs.flatMap(mech => mech.role ?? []))].sort();
 
 export interface MechFilters {
   weightClasses: WeightClassName[];
@@ -87,6 +94,8 @@ export interface MechFilters {
   hero: boolean;
   // Fuentes de contenido marcadas (juego base y DLC); vacío, todas.
   dlcs: number[];
+  // Roles de combate marcados; vacío, todos.
+  roles: string[];
   // Solo los mechs que ya existen en ese año de la campaña (fecha de aparición de su unit card).
   maxYear: number | null;
   minHardpoints: Partial<Record<HardpointFilterType, number>>;
@@ -101,6 +110,7 @@ export const EMPTY_MECH_FILTERS: MechFilters = {
   ecm: false,
   hero: false,
   dlcs: [],
+  roles: [],
   maxYear: null,
   minHardpoints: {}
 };
@@ -112,6 +122,7 @@ export const countActiveFilters = (filters: MechFilters): number =>
   (filters.ecm ? 1 : 0) +
   (filters.hero ? 1 : 0) +
   (filters.dlcs.length > 0 ? 1 : 0) +
+  (filters.roles.length > 0 ? 1 : 0) +
   (filters.maxYear !== null ? 1 : 0) +
   Object.values(filters.minHardpoints).filter(count => (count ?? 0) > 0).length;
 
@@ -140,6 +151,7 @@ export const matchesMechFilters = (mech: Mech, filters: MechFilters): boolean =>
   (!filters.ecm || hasEcm(mech)) &&
   (!filters.hero || mech.hero === true) &&
   (filters.dlcs.length === 0 || filters.dlcs.includes(getContentSource(mech))) &&
+  (filters.roles.length === 0 || (mech.role !== undefined && filters.roles.includes(mech.role))) &&
   (filters.maxYear === null || getAvailableYear(mech) <= filters.maxYear) &&
   meetsHardpointMinimums(getHardpointCounts(mech), filters.minHardpoints);
 

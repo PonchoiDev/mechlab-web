@@ -1,7 +1,7 @@
 # Especificación: filtros por DLC, hero y rol
 
 - **Issue:** [#43](https://github.com/PonchoiDev/mechlab-web/issues/43)
-- **Estado:** ampliada con el filtro de rol, pendiente de implementar esa parte
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Esta especificación se escribió antes que el código; los criterios de aceptación se convirtieron en tests (`src/utils/mechs.test.ts`) y después se implementó lo necesario para que pasaran.
 
 ## Contexto
@@ -97,6 +97,6 @@ En la lista, la etiqueta HERO va junto a las siglas de la variante (`ACH-C HERO`
 ## Resultado
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y la implementación, en tres commits separados del mismo pull request.
-- **Tests:** los diez criterios (CA1 a CA10) están en `src/utils/mechs.test.ts` y pasan. Solo cambió un test anterior, porque el resultado del buscador incluye ahora `hero` y `dlcs`.
-- **Interfaz:** comprobada en el navegador, también tras el rediseño: el desplegable de DLC resume la selección («Base, DLC 7»), Base y DLC 7 dejan 337 variantes (225 + 112), con Hero 54, y el foco se queda en el buscador mientras se marcan las casillas. `hero dlc7` deja 5 variantes, todas con las etiquetas HERO y DLC 7; Hero con Base y DLC 9 deja 65, la misma cifra que da `mechs.json`; Clear filters vuelve a las 639.
+- **Tests:** los trece criterios (CA1 a CA13) están en `src/utils/mechs.test.ts` y pasan. El filtro de rol se añadió después siguiendo el mismo orden: especificación, tests que fallaban e implementación. Solo cambió un test anterior, porque el resultado del buscador incluye ahora `hero` y `dlcs`.
+- **Interfaz:** comprobada en el navegador, también tras el rediseño: el desplegable de DLC resume la selección («Base, DLC 7»), Base y DLC 7 dejan 337 variantes (225 + 112), con Hero 54, y el foco se queda en el buscador mientras se marcan las casillas. Sniper y Scout dejan 163 variantes, y con DLC 7, 36; las dos cifras coinciden con `mechs.json`. DLC y rol comparten el componente `CheckboxDropdown`. `hero dlc7` deja 5 variantes, todas con las etiquetas HERO y DLC 7; Hero con Base y DLC 9 deja 65, la misma cifra que da `mechs.json`; Clear filters vuelve a las 639.
 - **Pendiente:** los nombres comerciales de los DLC, que no están en los archivos exportados.

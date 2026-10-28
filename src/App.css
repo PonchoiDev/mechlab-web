@@ -2737,20 +2737,21 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   .analysis-tabs .analysis-note { display: none; }
 }
 
-/* Desplegable de DLC del selector: casillas para marcar varias fuentes de contenido. */
-.dlc-filter {
+/* Desplegables con casillas del selector (DLC y rol): marcar varias opciones de un filtro. */
+.checkbox-dropdown {
   position: relative;
 }
 
-.dlc-filter-toggle span {
+.checkbox-dropdown-toggle span {
   margin-left: 4px;
   font-size: 9px;
 }
 
-.dlc-filter-menu {
+.checkbox-dropdown-menu {
   position: absolute;
   top: calc(100% + 4px);
-  left: 0;
+  /* Se abre hacia la izquierda: el selector está pegado al borde derecho de la pantalla. */
+  right: 0;
   z-index: 5;
   display: grid;
   min-width: 160px;
@@ -2761,7 +2762,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
-.dlc-filter-option {
+.checkbox-dropdown-option {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2775,13 +2776,13 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   text-align: left;
 }
 
-.dlc-filter-option:hover,
-.dlc-filter-option:focus-visible {
+.checkbox-dropdown-option:hover,
+.checkbox-dropdown-option:focus-visible {
   background: rgba(105, 217, 206, 0.12);
   outline: none;
 }
 
-.dlc-filter-box {
+.checkbox-dropdown-box {
   display: inline-grid;
   place-items: center;
   width: 14px;
@@ -2792,18 +2793,18 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font: 700 10px var(--work-mono);
 }
 
-.dlc-filter-option[aria-checked='true'] .dlc-filter-box {
+.checkbox-dropdown-option[aria-checked='true'] .checkbox-dropdown-box {
   background: var(--work-cyan);
   border-color: var(--work-cyan);
 }
 
-.dlc-filter-clear {
+.checkbox-dropdown-clear {
   justify-self: end;
   margin-top: 4px;
   font: 500 11px var(--work-mono);
 }
 
-.dlc-filter-clear:disabled {
+.checkbox-dropdown-clear:disabled {
   color: var(--work-muted);
   text-decoration: none;
   cursor: default;

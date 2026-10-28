@@ -1,9 +1,14 @@
 import { useMemo, useState, type KeyboardEvent } from 'react';
 import type { Mech } from '../types/mech';
-import { DlcFilter } from './DlcFilter';
+import { CheckboxDropdown } from './CheckboxDropdown';
 import { MechSpecs } from './MechSpecs';
 import {
+  BASE_GAME,
+  CONTENT_SOURCES,
   countActiveFilters,
+  describeContentSources,
+  describeSelection,
+  getMechRoles,
   EMPTY_MECH_FILTERS,
   GAME_START_YEAR,
   getAvailableYear,
@@ -41,6 +46,10 @@ const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 
 const MAX_MINIMUM = 9;
 
 
+// Marca o desmarca un valor de un filtro de varias opciones.
+const toggleValue = <T,>(values: T[], value: T): T[] =>
+  values.includes(value) ? values.filter(current => current !== value) : [...values, value];
+
 const filterMechs = (mechs: Mech[], query: string, filters: MechFilters) => {
   const parsed = parseMechQuery(query);
   const combined = mergeMechFilters(filters, parsed.filters);
@@ -72,6 +81,7 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
   const currentMech = mechs[selectedIndex];
   const filteredMechs = useMemo(() => filterMechs(mechs, query, filters), [mechs, query, filters]);
   const activeFilterCount = countActiveFilters(filters);
+  const roles = useMemo(() => getMechRoles(mechs), [mechs]);
   // Años de la campaña en los que aparece algún mech nuevo, desde su inicio.
   const years = useMemo(() => {
     const lastYear = Math.max(GAME_START_YEAR, ...mechs.map(getAvailableYear));
@@ -207,6 +217,16 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                   {techBase === 'InnerSphere' ? 'IS' : 'Clan'}
                 </button>
               ))}
+              <span className="mech-filter-label">ROLE</span>
+              <CheckboxDropdown
+                label="Role"
+                title="Combat role from the in-game unit card"
+                options={roles.map(role => ({ value: role, label: role }))}
+                selected={filters.roles}
+                summary={describeSelection(filters.roles)}
+                onToggle={(role) => updateFilters(current => ({ roles: toggleValue(current.roles, role) }))}
+                onClear={() => updateFilters(() => ({ roles: [] }))}
+              />
             </div>
 
             <div className="mech-filter-row">
@@ -274,11 +294,13 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 {years.map(year => <option key={year} value={year}>{year}</option>)}
               </select>
               <span className="mech-filter-label">DLC</span>
-              <DlcFilter
+              <CheckboxDropdown
+                label="DLC"
+                title="Show only the 'Mechs from the base game and DLC you own"
+                options={CONTENT_SOURCES.map(source => ({ value: source, label: source === BASE_GAME ? 'Base game' : `DLC ${source}` }))}
                 selected={filters.dlcs}
-                onToggle={(source) => updateFilters(current => ({
-                  dlcs: current.dlcs.includes(source) ? current.dlcs.filter(value => value !== source) : [...current.dlcs, source]
-                }))}
+                summary={describeContentSources(filters.dlcs)}
+                onToggle={(source) => updateFilters(current => ({ dlcs: toggleValue(current.dlcs, source) }))}
                 onClear={() => updateFilters(() => ({ dlcs: [] }))}
               />
               <button
