@@ -91,5 +91,5 @@ En la lista, la etiqueta HERO va junto a las siglas de la variante (`ACH-C HERO`
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y la implementación, en tres commits separados del mismo pull request.
 - **Tests:** los diez criterios (CA1 a CA10) están en `src/utils/mechs.test.ts` y pasan. Solo cambió un test anterior, porque el resultado del buscador incluye ahora `hero` y `dlcs`.
-- **Interfaz:** comprobada en el navegador. `hero dlc7` deja 5 variantes, todas con las etiquetas HERO y DLC 7; Hero con Base y DLC 9 deja 65, la misma cifra que da `mechs.json`; Clear filters vuelve a las 639.
+- **Interfaz:** comprobada en el navegador, también tras el rediseño: el desplegable de DLC resume la selección («Base, DLC 7»), Base y DLC 7 dejan 337 variantes (225 + 112), con Hero 54, y el foco se queda en el buscador mientras se marcan las casillas. `hero dlc7` deja 5 variantes, todas con las etiquetas HERO y DLC 7; Hero con Base y DLC 9 deja 65, la misma cifra que da `mechs.json`; Clear filters vuelve a las 639.
 - **Pendiente:** los nombres comerciales de los DLC, que no están en los archivos exportados.

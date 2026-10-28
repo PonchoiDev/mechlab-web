@@ -9,6 +9,7 @@ import {
   hasEcm,
   hasJumpJets,
   countActiveFilters,
+  describeContentSources,
   getContentSource,
   matchesMechFilters,
   matchesMechQuery,
@@ -183,6 +184,12 @@ describe('filtros por DLC y por hero', () => {
 
   it('CA9: Hero y el filtro de DLC cuentan como un filtro cada uno', () => {
     expect(countActiveFilters({ ...EMPTY_MECH_FILTERS, hero: true, dlcs: [0, 7] })).toBe(2);
+  });
+
+  it('RF3: el botón del desplegable resume las fuentes marcadas', () => {
+    expect(describeContentSources([])).toBe('All');
+    expect(describeContentSources([7, 0])).toBe('Base, DLC 7');
+    expect(describeContentSources([1, 2, 9])).toBe('3 selected');
   });
 
   it('CA10: el estado vacío no tiene Hero ni fuentes de DLC', () => {

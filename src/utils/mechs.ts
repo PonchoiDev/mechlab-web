@@ -72,6 +72,13 @@ export const getContentSource = (mech: Mech): number => mech.dlc ?? BASE_GAME;
 
 export const getContentSourceLabel = (source: number): string => source === BASE_GAME ? 'Base' : `DLC ${source}`;
 
+// Resumen de las fuentes marcadas para el botón del desplegable: «All», «Base, DLC 7» o «4 selected».
+export const describeContentSources = (sources: number[]): string => {
+  if (sources.length === 0) return 'All';
+  if (sources.length > 2) return `${sources.length} selected`;
+  return [...sources].sort((a, b) => a - b).map(getContentSourceLabel).join(', ');
+};
+
 export interface MechFilters {
   weightClasses: WeightClassName[];
   techBase: 'InnerSphere' | 'Clan' | null;

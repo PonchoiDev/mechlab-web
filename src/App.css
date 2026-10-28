@@ -299,10 +299,6 @@
   --weapon-color: #b9a4ff;
 }
 
-.mech-hardpoint-tag.is-hero {
-  --weapon-color: var(--work-lime);
-}
-
 .mech-hardpoint-tag.is-dlc {
   --weapon-color: var(--work-muted);
 }
@@ -2739,4 +2735,88 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 @media (max-width: 600px) {
   .mech-stats { grid-template-columns: minmax(0, 1fr); }
   .analysis-tabs .analysis-note { display: none; }
+}
+
+/* Desplegable de DLC del selector: casillas para marcar varias fuentes de contenido. */
+.dlc-filter {
+  position: relative;
+}
+
+.dlc-filter-toggle span {
+  margin-left: 4px;
+  font-size: 9px;
+}
+
+.dlc-filter-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 5;
+  display: grid;
+  min-width: 160px;
+  padding: 6px;
+  background: var(--work-panel-raised);
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.dlc-filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  color: var(--work-text);
+  background: transparent;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  font: 500 12px var(--work-sans);
+  text-align: left;
+}
+
+.dlc-filter-option:hover,
+.dlc-filter-option:focus-visible {
+  background: rgba(105, 217, 206, 0.12);
+  outline: none;
+}
+
+.dlc-filter-box {
+  display: inline-grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--work-muted);
+  border-radius: 2px;
+  color: #18200f;
+  font: 700 10px var(--work-mono);
+}
+
+.dlc-filter-option[aria-checked='true'] .dlc-filter-box {
+  background: var(--work-cyan);
+  border-color: var(--work-cyan);
+}
+
+.dlc-filter-clear {
+  justify-self: end;
+  margin-top: 4px;
+  font: 500 11px var(--work-mono);
+}
+
+.dlc-filter-clear:disabled {
+  color: var(--work-muted);
+  text-decoration: none;
+  cursor: default;
+}
+
+/* Etiqueta HERO junto a las siglas de la variante, donde se lee de un vistazo. */
+.mech-hero-tag {
+  margin-right: 6px;
+  padding: 0 4px;
+  border: 1px solid var(--work-lime);
+  border-radius: 2px;
+  color: #18200f;
+  background: var(--work-lime);
+  font: 700 9px/14px var(--work-mono);
+  vertical-align: 1px;
 }

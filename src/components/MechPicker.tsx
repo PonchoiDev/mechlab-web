@@ -1,8 +1,8 @@
 import { useMemo, useState, type KeyboardEvent } from 'react';
 import type { Mech } from '../types/mech';
+import { DlcFilter } from './DlcFilter';
 import { MechSpecs } from './MechSpecs';
 import {
-  CONTENT_SOURCES,
   countActiveFilters,
   EMPTY_MECH_FILTERS,
   GAME_START_YEAR,
@@ -59,7 +59,6 @@ function HardpointSummary({ mech }: { mech: Mech }) {
       ))}
       {hasJumpJets(mech) && <span className="mech-hardpoint-tag is-jump-jets">JJ</span>}
       {hasEcm(mech) && <span className="mech-hardpoint-tag is-ecm">ECM</span>}
-      {mech.hero && <span className="mech-hardpoint-tag is-hero" title="Hero 'Mech">HERO</span>}
       {mech.dlc !== undefined && <span className="mech-hardpoint-tag is-dlc" title={`Comes with DLC ${mech.dlc}`}>{getContentSourceLabel(mech.dlc)}</span>}
     </span>
   );
@@ -208,9 +207,12 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                   {techBase === 'InnerSphere' ? 'IS' : 'Clan'}
                 </button>
               ))}
+            </div>
+
+            <div className="mech-filter-row">
+              <span className="mech-filter-label">EQUIPMENT</span>
               <button
                 type="button"
-               
                 className="mech-filter-chip"
                 aria-pressed={filters.jumpJets}
                 title="Only 'Mechs that can mount jump jets"
@@ -238,34 +240,6 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
               >
                 AMS
               </button>
-              <button
-                type="button"
-                className="mech-filter-chip"
-                aria-pressed={filters.hero}
-                title="Only hero 'Mechs"
-                onClick={() => updateFilters(current => ({ hero: !current.hero }))}
-              >
-                Hero
-              </button>
-            </div>
-
-            <div className="mech-filter-row">
-              <span className="mech-filter-label" title="Show only the 'Mechs from the base game and DLC you own">DLC</span>
-              {CONTENT_SOURCES.map(source => (
-                <button
-                  key={source}
-                  type="button"
-                  className="mech-filter-chip"
-                  aria-pressed={filters.dlcs.includes(source)}
-                  aria-label={source === 0 ? 'Base game' : `DLC ${source}`}
-                  title={source === 0 ? 'Base game' : `DLC ${source}`}
-                  onClick={() => updateFilters(current => ({
-                    dlcs: current.dlcs.includes(source) ? current.dlcs.filter(value => value !== source) : [...current.dlcs, source]
-                  }))}
-                >
-                  {source === 0 ? 'Base' : source}
-                </button>
-              ))}
             </div>
 
             <div className="mech-filter-row">
@@ -299,6 +273,23 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 <option value="">Any year</option>
                 {years.map(year => <option key={year} value={year}>{year}</option>)}
               </select>
+              <span className="mech-filter-label">DLC</span>
+              <DlcFilter
+                selected={filters.dlcs}
+                onToggle={(source) => updateFilters(current => ({
+                  dlcs: current.dlcs.includes(source) ? current.dlcs.filter(value => value !== source) : [...current.dlcs, source]
+                }))}
+                onClear={() => updateFilters(() => ({ dlcs: [] }))}
+              />
+              <button
+                type="button"
+                className="mech-filter-chip"
+                aria-pressed={filters.hero}
+                title="Only hero 'Mechs"
+                onClick={() => updateFilters(current => ({ hero: !current.hero }))}
+              >
+                Hero
+              </button>
             </div>
 
             <div className="mech-filter-row mech-filter-summary">
@@ -324,7 +315,10 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 onClick={() => select(index)}
               >
                 <span>{getMechDisplayName(mech)}</span>
-                <strong>{mech.variant}</strong>
+                <strong>
+                  {mech.hero && <span className="mech-hero-tag" title="Hero 'Mech">HERO</span>}
+                  {mech.variant}
+                </strong>
                 <HardpointSummary mech={mech} />
                 <MechSpecs mech={mech} />
                 <small>
