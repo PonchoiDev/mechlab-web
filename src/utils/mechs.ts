@@ -79,6 +79,18 @@ export const describeSelection = (labels: string[]): string => {
   return labels.join(', ');
 };
 
+// Selección de DLC guardada en el navegador: se queda con las fuentes válidas, sin repetir, y
+// descarta lo que no lo sea (valores fuera de 0 a 9 o un texto que no es una lista).
+export const parseStoredContentSources = (raw: string | null): number[] => {
+  try {
+    const stored: unknown = JSON.parse(raw ?? '[]');
+    if (!Array.isArray(stored)) return [];
+    return [...new Set(stored.filter((value): value is number => CONTENT_SOURCES.includes(value as number)))];
+  } catch {
+    return [];
+  }
+};
+
 export const describeContentSources = (sources: number[]): string =>
   describeSelection([...sources].sort((a, b) => a - b).map(getContentSourceLabel));
 

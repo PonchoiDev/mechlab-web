@@ -25,6 +25,7 @@ export function CheckboxDropdown<T extends string | number>({
 }: CheckboxDropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   // Se cierra al pulsar fuera del desplegable.
   useEffect(() => {
@@ -44,10 +45,13 @@ export function CheckboxDropdown<T extends string | number>({
         if (event.key === 'Escape' && isOpen) {
           event.stopPropagation();
           setIsOpen(false);
+          // Las casillas desaparecen al cerrar: el foco vuelve al botón para no perderse.
+          toggleRef.current?.focus();
         }
       }}
     >
       <button
+        ref={toggleRef}
         type="button"
         className="mech-filter-chip checkbox-dropdown-toggle"
         aria-haspopup="true"
