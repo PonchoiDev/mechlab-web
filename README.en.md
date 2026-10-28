@@ -26,7 +26,8 @@ The design documents are in Spanish, the author's language.
 | Document | Contents |
 |---|---|
 | [Analysis](docs/analisis.md) | Problem, users, scope, requirements and how player feedback changed them |
-| [Architecture](docs/arquitectura.md) | Data flow, app layers and design decisions, with diagrams |
+| [Architecture](docs/arquitectura.md) | Data flow, layers, design decisions, principles (SOLID, DRY, KISS, YAGNI) and how it maps to Clean Architecture |
+| [UML diagrams](docs/uml.md) | Use cases, domain classes and the sequences for sharing a build and sending feedback |
 | [Development with AI](docs/desarrollo-con-ia.md) | How the project was built with Claude Code and the practices that keep it reliable |
 | [CLAUDE.md](CLAUDE.md) | Project conventions and rules the AI assistant reads every session |
 
@@ -121,7 +122,7 @@ src/
   test/                 Shared test fixtures
 worker/                 Cloudflare Worker: Sarna image proxy and feedback form
 site/                   Landing page at the domain root (mw-builder.com)
-docs/                   Analysis, architecture and development with AI
+docs/                   Analysis, architecture, UML diagrams and development with AI
 tools/
   generar_mechs.py      Generates src/data/mechs.json
   generar_items.py      Generates src/data/items.json
