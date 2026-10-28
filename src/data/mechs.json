@@ -8448,7 +8448,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Bloodasp",
+    "sarnaName": "Blood Asp",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -8607,7 +8607,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Bloodasp",
+    "sarnaName": "Blood Asp",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -8771,7 +8771,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Bloodasp",
+    "sarnaName": "Blood Asp",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -8935,7 +8935,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Bloodasp",
+    "sarnaName": "Blood Asp",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -36112,7 +36112,7 @@
   },
   {
     "id": "GAR-A",
-    "name": "Man O\\' War",
+    "name": "Man O' War",
     "variant": "GAR-A",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36261,7 +36261,7 @@
   },
   {
     "id": "GAR-D",
-    "name": "Man O\\' War",
+    "name": "Man O' War",
     "variant": "GAR-D",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36411,7 +36411,7 @@
   },
   {
     "id": "GAR-PRIME",
-    "name": "Man O\\' War",
+    "name": "Man O' War",
     "variant": "GAR-PRIME",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36557,7 +36557,7 @@
   },
   {
     "id": "GAR-P",
-    "name": "Man O\\' War",
+    "name": "Man O' War",
     "variant": "GAR-P",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36716,7 +36716,7 @@
   },
   {
     "id": "GAR-B",
-    "name": "Man O\\' War",
+    "name": "Man O' War",
     "variant": "GAR-B",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36853,7 +36853,7 @@
   },
   {
     "id": "GAR-C",
-    "name": "Man O\\' War",
+    "name": "Man O' War",
     "variant": "GAR-C",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -40592,7 +40592,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Hunchbackiic",
+    "sarnaName": "Hunchback IIC",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -40746,7 +40746,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Hunchbackiic",
+    "sarnaName": "Hunchback IIC",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -40896,7 +40896,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Hunchbackiic",
+    "sarnaName": "Hunchback IIC",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -41049,7 +41049,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Hunchbackiic",
+    "sarnaName": "Hunchback IIC",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -41196,7 +41196,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Hunchbackiic",
+    "sarnaName": "Hunchback IIC",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -79136,7 +79136,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Sunspider",
+    "sarnaName": "Sun Spider",
     "armorType": "ferroFibrous",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -79278,7 +79278,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Sunspider",
+    "sarnaName": "Sun Spider",
     "armorType": "ferroFibrous",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -79418,7 +79418,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Sunspider",
+    "sarnaName": "Sun Spider",
     "armorType": "ferroFibrous",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -79560,7 +79560,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Sunspider",
+    "sarnaName": "Sun Spider",
     "armorType": "ferroFibrous",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -81767,7 +81767,7 @@
       }
     },
     "BaseCoolingRate": 1.0,
-    "sarnaName": "Shadowhawk",
+    "sarnaName": "Shadow Hawk",
     "armorType": "standard",
     "heatSinkType": "single",
     "structureType": "standard",
@@ -91910,7 +91910,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Warhammeriic",
+    "sarnaName": "Warhammer IIC",
     "armorType": "ferroFibrous",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -92070,7 +92070,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Warhammeriic",
+    "sarnaName": "Warhammer IIC",
     "armorType": "ferroFibrous",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -92227,7 +92227,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Warhammeriic",
+    "sarnaName": "Warhammer IIC",
     "armorType": "ferroFibrous",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
@@ -92388,7 +92388,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Warhammeriic",
+    "sarnaName": "Warhammer IIC",
     "armorType": "ferroFibrous",
     "heatSinkType": "clanDouble",
     "structureType": "endoSteel",
