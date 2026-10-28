@@ -8,8 +8,11 @@ import {
   getMechDisplayName,
   hasEcm,
   hasJumpJets,
+  countActiveFilters,
+  getContentSource,
   matchesMechFilters,
   matchesMechQuery,
+  mergeMechFilters,
   parseMechQuery,
   type MechFilters
 } from './mechs';
@@ -124,5 +127,67 @@ describe('especificaciones del chasis', () => {
   it('agrupan los anclajes por tipo y tamaño', () => {
     expect(getHardpointGroups(getMech('HBR-A')).map(group => `${group.count}${group.type[0]}${group.sizeLetter}`))
       .toEqual(['2eL', '1eM', '2bS', '2mL', '1oL']);
+  });
+});
+
+// Criterios de aceptación de docs/specs/filtros-dlc-hero.md (issue #43).
+describe('filtros por DLC y por hero', () => {
+  const filtered = (filters: Partial<MechFilters>) => allMechs.filter(mech => matchesMechFilters(mech, { ...EMPTY_MECH_FILTERS, ...filters }));
+
+  it('CA1: cada variante guarda su DLC, y las del juego base no llevan', () => {
+    expect(getMech('ADR-A').dlc).toBe(7);
+    expect(getMech('ACW-A').dlc).toBe(9);
+    expect(getMech('AS7-D').dlc).toBeUndefined();
+    expect(getContentSource(getMech('AS7-D'))).toBe(0);
+    expect(getContentSource(getMech('ADR-A'))).toBe(7);
+  });
+
+  it('CA2: 109 variantes hero y 414 de algún DLC', () => {
+    expect(allMechs.filter(mech => mech.hero)).toHaveLength(109);
+    expect(allMechs.filter(mech => mech.dlc !== undefined)).toHaveLength(414);
+  });
+
+  it('CA3: el filtro Hero deja exactamente las variantes hero', () => {
+    const heroes = filtered({ hero: true });
+    expect(heroes).toHaveLength(109);
+    expect(heroes.every(mech => mech.hero)).toBe(true);
+  });
+
+  it('CA4: el filtro de DLC deja solo las fuentes marcadas', () => {
+    const result = filtered({ dlcs: [0, 7] });
+    expect(result.length).toBe(225 + 112);
+    expect(result.every(mech => [0, 7].includes(getContentSource(mech)))).toBe(true);
+  });
+
+  it('CA5: sin fuentes marcadas no se descarta nada por el DLC', () => {
+    expect(filtered({ dlcs: [] })).toHaveLength(allMechs.length);
+  });
+
+  it('CA6: el buscador entiende hero y dlc7, y no los busca como texto', () => {
+    const parsed = parseMechQuery('hero dlc7');
+    expect(parsed.text).toBe('');
+    expect(parsed.filters.hero).toBe(true);
+    expect(parsed.filters.dlcs).toEqual([7]);
+  });
+
+  it('CA7: el buscador entiende base como la fuente del juego base', () => {
+    expect(parseMechQuery('atlas base').filters.dlcs).toEqual([0]);
+    expect(parseMechQuery('atlas base').text).toBe('atlas');
+  });
+
+  it('CA8: los filtros del panel y los del buscador se combinan', () => {
+    const combined = mergeMechFilters({ ...EMPTY_MECH_FILTERS, dlcs: [1] }, parseMechQuery('hero dlc7').filters);
+    expect(combined.hero).toBe(true);
+    expect([...combined.dlcs].sort()).toEqual([1, 7]);
+  });
+
+  it('CA9: Hero y el filtro de DLC cuentan como un filtro cada uno', () => {
+    expect(countActiveFilters({ ...EMPTY_MECH_FILTERS, hero: true, dlcs: [0, 7] })).toBe(2);
+  });
+
+  it('CA10: el estado vacío no tiene Hero ni fuentes de DLC', () => {
+    expect(EMPTY_MECH_FILTERS.hero).toBe(false);
+    expect(EMPTY_MECH_FILTERS.dlcs).toEqual([]);
+    expect(countActiveFilters(EMPTY_MECH_FILTERS)).toBe(0);
   });
 });
