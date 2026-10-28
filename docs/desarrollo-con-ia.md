@@ -6,9 +6,9 @@ MechLab se ha desarrollado combinando tres asistentes de IA, cada uno en la etap
 
 | Etapa | Herramienta | Para qué se usó |
 |---|---|---|
-| **Planteamiento** (septiembre de 2026) | Gemini | Definir el objetivo, el alcance y el diseño inicial del proyecto. Primeras versiones de código. |
-| **Primera versión funcional** (hasta el 16 de octubre de 2026) | GitHub Copilot | Autocompletado y chat en el editor, y sobre todo el modo agente para construir la primera versión que funcionaba de principio a fin. |
-| **Calidad y evolución** (desde el 16 de octubre de 2026) | Claude Code | Limpieza masiva y refactorización, tests, integración continua, despliegue y todas las funcionalidades posteriores, con las verificaciones contra el juego. |
+| **Planteamiento** | Gemini | Definir el objetivo, el alcance y el diseño inicial del proyecto. Primeras versiones de código. |
+| **Primera versión funcional** | GitHub Copilot | Autocompletado y chat en el editor, y sobre todo el modo agente para construir la primera versión que funcionaba de principio a fin. |
+| **Calidad y evolución** | Claude Code | Limpieza masiva y refactorización, tests, integración continua, despliegue y todas las funcionalidades posteriores, con las verificaciones contra el juego. |
 
 ### Gemini: el planteamiento
 
