@@ -54,7 +54,6 @@ export function CheckboxDropdown<T extends string | number>({
         ref={toggleRef}
         type="button"
         className="mech-filter-chip checkbox-dropdown-toggle"
-        aria-haspopup="true"
         aria-expanded={isOpen}
         aria-pressed={selected.length > 0}
         aria-label={`${label}: ${summary}`}

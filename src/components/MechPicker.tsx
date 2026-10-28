@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
+import { useMemo, useState, type KeyboardEvent } from 'react';
 import type { Mech } from '../types/mech';
+import { readOwnedDlcs, useRememberOwnedDlcs } from '../hooks/useOwnedDlcs';
 import { CheckboxDropdown } from './CheckboxDropdown';
 import { MechSpecs } from './MechSpecs';
 import {
@@ -22,7 +23,6 @@ import {
   matchesMechQuery,
   mergeMechFilters,
   parseMechQuery,
-  parseStoredContentSources,
   type HardpointFilterType,
   type MechFilters,
   type WeightClassName
@@ -50,17 +50,6 @@ const MAX_MINIMUM = 9;
 // Marca o desmarca un valor de un filtro de varias opciones.
 const toggleValue = <T,>(values: T[], value: T): T[] =>
   values.includes(value) ? values.filter(current => current !== value) : [...values, value];
-
-// Los DLC marcados son los que tiene el jugador: se recuerdan en este navegador.
-const OWNED_DLC_STORAGE_KEY = 'mw-builder:mercs:owned-dlc';
-
-const readOwnedDlcs = (): number[] => {
-  try {
-    return parseStoredContentSources(window.localStorage.getItem(OWNED_DLC_STORAGE_KEY));
-  } catch {
-    return [];
-  }
-};
 
 const filterMechs = (mechs: Mech[], query: string, filters: MechFilters) => {
   const parsed = parseMechQuery(query);
@@ -90,14 +79,7 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
   const [isOpen, setIsOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(0);
   const [filters, setFilters] = useState<MechFilters>(() => ({ ...EMPTY_MECH_FILTERS, dlcs: readOwnedDlcs() }));
-
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(OWNED_DLC_STORAGE_KEY, JSON.stringify(filters.dlcs));
-    } catch {
-      // Sin almacenamiento (modo privado, cookies bloqueadas) el filtro funciona igual, solo no se recuerda.
-    }
-  }, [filters.dlcs]);
+  useRememberOwnedDlcs(filters.dlcs);
   const currentMech = mechs[selectedIndex];
   const filteredMechs = useMemo(() => filterMechs(mechs, query, filters), [mechs, query, filters]);
   const activeFilterCount = countActiveFilters(filters);
