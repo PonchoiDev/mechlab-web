@@ -143,10 +143,18 @@ def quitar_sufijo_variante(chasis, variante):
     return chasis
 
 
+def normalizar_nombre(nombre):
+    return re.sub(r'[^a-z0-9]', '', nombre.lower())
+
+
 def obtener_nombre_sarna(contenido, chasis, variante, tech_base):
     if tech_base and tech_base.lower() == 'clan':
+        # La etiqueta del mech lleva el nombre Clan (Mech.Light.Adder para el Puma), pero junta algunas
+        # palabras (Hunchbackiic, Bloodasp): si es el mismo nombre que el chasis, vale el del chasis.
         tipo_mech = buscar_texto(REGEX_MECH_TYPE_NAME, contenido)
-        return separar_palabras(tipo_mech) if tipo_mech else chasis
+        if not tipo_mech or normalizar_nombre(tipo_mech) == normalizar_nombre(chasis):
+            return chasis
+        return separar_palabras(tipo_mech)
     return quitar_sufijo_variante(chasis, variante)
 
 
@@ -436,6 +444,11 @@ def cargar_textos():
 
 
 def obtener_chasis(contenido, variante, textos=None):
+    # Los textos del juego escapan el apóstrofo (Man O\' War).
+    return _obtener_chasis(contenido, variante, textos).replace("\\'", "'")
+
+
+def _obtener_chasis(contenido, variante, textos=None):
     chasis = buscar_texto(REGEX_CHASIS, contenido)
     if chasis:
         return chasis
