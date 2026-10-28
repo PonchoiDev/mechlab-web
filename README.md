@@ -24,7 +24,8 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 | Documento | Contenido |
 |---|---|
 | [Análisis](docs/analisis.md) | Problema, usuarios, alcance, requisitos y cómo evolucionaron con el feedback |
-| [Arquitectura](docs/arquitectura.md) | Flujo de datos, capas de la web y decisiones de diseño, con diagramas |
+| [Arquitectura](docs/arquitectura.md) | Flujo de datos, capas, decisiones de diseño, principios (SOLID, DRY, KISS, YAGNI) y relación con Clean Architecture |
+| [Diagramas UML](docs/uml.md) | Casos de uso, clases del dominio y secuencias de compartir una build y del feedback |
 | [Desarrollo con IA](docs/desarrollo-con-ia.md) | Cómo se ha construido el proyecto con Claude Code y qué prácticas lo hacen fiable |
 | [CLAUDE.md](CLAUDE.md) | Convenciones y reglas del proyecto que lee el asistente de IA en cada sesión |
 
@@ -119,7 +120,7 @@ src/
   test/                 Datos de prueba compartidos
 worker/                 Worker de Cloudflare: proxy de imágenes de Sarna y formulario de feedback
 site/                   Portada de la raíz del dominio (mw-builder.com)
-docs/                   Análisis, arquitectura y desarrollo con IA
+docs/                   Análisis, arquitectura, diagramas UML y desarrollo con IA
 tools/
   generar_mechs.py      Genera src/data/mechs.json
   generar_items.py      Genera src/data/items.json

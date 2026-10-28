@@ -73,6 +73,14 @@ Con datos del juego, un cambio que parece pequeño puede afectar a cientos de va
 - **Un parche del juego.** Las notas del parche listaban 29 variantes con cambios de refrigeración. Al volver a exportar todos los datos, la IA comparó cada variante con su versión anterior y encontró 21 más que las notas no mencionaban, además de un cambio de formato en los archivos que confundía unas variantes con otras. Los enlaces y las builds guardadas de los usuarios siguieron funcionando.
 - **Seguridad antes de publicar el código.** Antes de hacer público el repositorio, la IA revisó todo el historial en busca de claves, tokens y correos.
 
+## Uso responsable de la IA
+
+- **Validación humana.** Nada llega a producción sin que el desarrollador lo revise y lo fusione, y todo lo que depende del juego se comprueba en el juego. La IA propone; la decisión es siempre del desarrollador.
+- **Ningún secreto en las conversaciones.** Las claves y la dirección de correo de destino viven como secretos de Cloudflare, nunca en el código ni en lo que se comparte con la IA. Antes de hacer público el repositorio se revisó todo el historial.
+- **Privacidad de los usuarios.** La web no pide cuenta ni datos personales y no usa IA en tiempo de ejecución: lo que hace el jugador no sale de su navegador, salvo el feedback que decide enviar.
+- **Respeto a los datos del juego.** Los datos se extraen con el editor de mods oficial y se usan para una herramienta de fans gratuita, sin publicidad y sin relación con Piranha Games. La web lo dice en su pie, y las imágenes se atribuyen a Sarna.net.
+- **Transparencia.** Este documento y `CLAUDE.md` explican qué herramientas se usaron y cómo, y los commits hechos con Claude Code lo indican en su firma.
+
 ## Lo aprendido al combinar herramientas
 
 - **Cada herramienta tiene su momento.** Un chat generalista es útil para pensar el problema; un agente en el editor acelera la primera versión; un agente con acceso al repositorio, a la terminal y al navegador es lo que permite mantener la calidad cuando el proyecto crece.
