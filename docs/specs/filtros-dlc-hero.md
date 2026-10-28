@@ -1,7 +1,7 @@
-# Especificación: filtros por DLC y por hero
+# Especificación: filtros por DLC, hero y rol
 
 - **Issue:** [#43](https://github.com/PonchoiDev/mechlab-web/issues/43)
-- **Estado:** implementada
+- **Estado:** ampliada con el filtro de rol, pendiente de implementar esa parte
 - **Método:** Spec Driven Development. Esta especificación se escribió antes que el código; los criterios de aceptación se convirtieron en tests (`src/utils/mechs.test.ts`) y después se implementó lo necesario para que pasaran.
 
 ## Contexto
@@ -10,6 +10,7 @@ Los jugadores pidieron en Reddit poder filtrar el selector de chasis por lo que 
 
 - **El DLC de cada variante.** Sin el DLC correspondiente, la variante no está disponible en la partida. Un jugador con solo algunos DLC quiere ver solo los ’Mechs que puede conseguir.
 - **Si la variante es un hero.** Los hero son variantes únicas, con nombre propio y bonificaciones, que no se compran en cualquier mercado. Los jugadores los buscan como grupo.
+- **El rol de combate.** La ficha de unidad de cada variante la clasifica como Sniper, Brawler, Missile Boat, Juggernaut… La web ya lo muestra en cada variante, pero no se puede filtrar por él.
 
 ## Datos
 
@@ -17,6 +18,7 @@ Los jugadores pidieron en Reddit poder filtrar el selector de chasis por lo que 
 |---|---|---|
 | DLC | `DLCAsset=(Id="MWDLCAsset:DLC_n")` en el MDA de la variante | 414 de 639 variantes, del DLC 1 al 9. Sin el campo: juego base (225) |
 | Hero | `bIsHeroMech=True` en el MDA | 109 de 639 variantes |
+| Rol | `CombatRole` de la ficha de unidad (ya en `mechs.json` como `role`) | 639 de 639: Skirmisher 126, Sniper 124, Brawler 114, Striker 93, Missile Boat 75, Juggernaut 64, Scout 39, Ambusher 4 |
 
 **Decisión:** el DLC se toma del MDA y no de las fichas de unidad, porque el MDA lo trae también en las variantes sin ficha (los campeones) y es el mismo archivo del que sale el resto de la variante.
 
@@ -30,6 +32,7 @@ Los jugadores pidieron en Reddit poder filtrar el selector de chasis por lo que 
 - **RF4.** En el buscador, el atajo `hero` activa el filtro Hero, y `dlc1` … `dlc9` y `base` añaden esa fuente al filtro de DLC. Se combinan con los atajos existentes (`3e 2m jj hero dlc7`).
 - **RF5.** Cada variante de la lista muestra una etiqueta **HERO** junto a sus siglas si lo es, y una etiqueta con su DLC junto a sus anclajes si no es del juego base.
 - **RF6.** Los filtros nuevos cuentan como filtros activos y se borran con **Clear filters**, como los demás.
+- **RF7.** El selector tiene un desplegable **ROLE** con una casilla por rol de combate. Se pueden marcar varios; la lista muestra las variantes de cualquiera de los roles marcados. Sin ninguno marcado, se muestran todas. Funciona igual que el desplegable de DLC y comparte su componente.
 
 ## Requisitos no funcionales
 
@@ -53,11 +56,14 @@ Los jugadores pidieron en Reddit poder filtrar el selector de chasis por lo que 
 | CA8 | Filtros del panel y atajos a la vez | se combinan | las fuentes de DLC se unen y Hero queda activo si lo está en cualquiera |
 | CA9 | Hero activo y dos fuentes de DLC | se cuentan los filtros activos | cuentan como dos filtros: Hero y DLC |
 | CA10 | Cualquier combinación | se pulsa Clear filters | Hero y DLC vuelven a su estado vacío |
+| CA11 | El filtro de rol con **Sniper** y **Scout** | se filtra la lista | quedan las 163 variantes de esos dos roles (124 + 39) y ninguna más |
+| CA12 | El filtro de rol vacío | se filtra la lista | no se descarta ninguna variante por su rol, y el estado vacío no tiene roles |
+| CA13 | Dos roles marcados | se cuentan los filtros activos | cuentan como un solo filtro |
 
 ## Diseño de la interfaz
 
 ```
-CLASS  L M H A        TECH  IS Clan
+CLASS  L M H A        TECH  IS Clan        ROLE [All ▾]
 EQUIPMENT  Jump jets  ECM  AMS
 MIN HARDPOINTS  …
 AVAILABLE BY [Any year ▾]   DLC [All ▾]   Hero
@@ -76,6 +82,7 @@ En la lista, la etiqueta HERO va junto a las siglas de la variante (`ACH-C HERO`
 
 ## Fuera de alcance
 
+- Atajos de rol en el buscador: los nombres de los roles son de varias palabras o se confundirían con búsquedas de texto.
 - Los nombres comerciales de los DLC (ver la limitación conocida).
 - Recordar en el navegador qué DLC tiene el jugador.
 - Mostrar el DLC fuera del selector (tablero, imagen de Share).
@@ -83,7 +90,7 @@ En la lista, la etiqueta HERO va junto a las siglas de la variante (`ACH-C HERO`
 ## Plan de pruebas
 
 1. **Datos (CA1, CA2):** tests sobre `mechs.json` en `src/utils/mechs.test.ts`.
-2. **Filtrado (CA3 a CA5, CA9, CA10):** `matchesMechFilters` y `countActiveFilters`.
+2. **Filtrado (CA3 a CA5, CA9 a CA13):** `matchesMechFilters` y `countActiveFilters`.
 3. **Buscador (CA6 a CA8):** `parseMechQuery` y `mergeMechFilters`.
 4. **Interfaz:** comprobación en el navegador del filtro, los atajos y las etiquetas.
 
