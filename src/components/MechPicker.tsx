@@ -1,11 +1,19 @@
 import { useMemo, useState, type KeyboardEvent } from 'react';
 import type { Mech } from '../types/mech';
+import { readOwnedDlcs, useRememberOwnedDlcs } from '../hooks/useOwnedDlcs';
+import { CheckboxDropdown } from './CheckboxDropdown';
 import { MechSpecs } from './MechSpecs';
 import {
+  BASE_GAME,
+  CONTENT_SOURCES,
   countActiveFilters,
+  describeContentSources,
+  describeSelection,
+  getMechRoles,
   EMPTY_MECH_FILTERS,
   GAME_START_YEAR,
   getAvailableYear,
+  getContentSourceLabel,
   getHardpointGroups,
   getMechDisplayName,
   hasEcm,
@@ -39,6 +47,10 @@ const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 
 const MAX_MINIMUM = 9;
 
 
+// Marca o desmarca un valor de un filtro de varias opciones.
+const toggleValue = <T,>(values: T[], value: T): T[] =>
+  values.includes(value) ? values.filter(current => current !== value) : [...values, value];
+
 const filterMechs = (mechs: Mech[], query: string, filters: MechFilters) => {
   const parsed = parseMechQuery(query);
   const combined = mergeMechFilters(filters, parsed.filters);
@@ -57,6 +69,7 @@ function HardpointSummary({ mech }: { mech: Mech }) {
       ))}
       {hasJumpJets(mech) && <span className="mech-hardpoint-tag is-jump-jets">JJ</span>}
       {hasEcm(mech) && <span className="mech-hardpoint-tag is-ecm">ECM</span>}
+      {mech.dlc !== undefined && <span className="mech-hardpoint-tag is-dlc" title={`Comes with DLC ${mech.dlc}`}>{getContentSourceLabel(mech.dlc)}</span>}
     </span>
   );
 }
@@ -65,10 +78,12 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(0);
-  const [filters, setFilters] = useState<MechFilters>(EMPTY_MECH_FILTERS);
+  const [filters, setFilters] = useState<MechFilters>(() => ({ ...EMPTY_MECH_FILTERS, dlcs: readOwnedDlcs() }));
+  useRememberOwnedDlcs(filters.dlcs);
   const currentMech = mechs[selectedIndex];
   const filteredMechs = useMemo(() => filterMechs(mechs, query, filters), [mechs, query, filters]);
   const activeFilterCount = countActiveFilters(filters);
+  const roles = useMemo(() => getMechRoles(mechs), [mechs]);
   // Años de la campaña en los que aparece algún mech nuevo, desde su inicio.
   const years = useMemo(() => {
     const lastYear = Math.max(GAME_START_YEAR, ...mechs.map(getAvailableYear));
@@ -204,9 +219,22 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                   {techBase === 'InnerSphere' ? 'IS' : 'Clan'}
                 </button>
               ))}
+              <span className="mech-filter-label">ROLE</span>
+              <CheckboxDropdown
+                label="Role"
+                title="Combat role from the in-game unit card"
+                options={roles.map(role => ({ value: role, label: role }))}
+                selected={filters.roles}
+                summary={describeSelection(filters.roles)}
+                onToggle={(role) => updateFilters(current => ({ roles: toggleValue(current.roles, role) }))}
+                onClear={() => updateFilters(() => ({ roles: [] }))}
+              />
+            </div>
+
+            <div className="mech-filter-row">
+              <span className="mech-filter-label">EQUIPMENT</span>
               <button
                 type="button"
-               
                 className="mech-filter-chip"
                 aria-pressed={filters.jumpJets}
                 title="Only 'Mechs that can mount jump jets"
@@ -267,6 +295,25 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 <option value="">Any year</option>
                 {years.map(year => <option key={year} value={year}>{year}</option>)}
               </select>
+              <span className="mech-filter-label">DLC</span>
+              <CheckboxDropdown
+                label="DLC"
+                title="Show only the 'Mechs from the base game and DLC you own"
+                options={CONTENT_SOURCES.map(source => ({ value: source, label: source === BASE_GAME ? 'Base game' : `DLC ${source}` }))}
+                selected={filters.dlcs}
+                summary={describeContentSources(filters.dlcs)}
+                onToggle={(source) => updateFilters(current => ({ dlcs: toggleValue(current.dlcs, source) }))}
+                onClear={() => updateFilters(() => ({ dlcs: [] }))}
+              />
+              <button
+                type="button"
+                className="mech-filter-chip"
+                aria-pressed={filters.hero}
+                title="Only hero 'Mechs"
+                onClick={() => updateFilters(current => ({ hero: !current.hero }))}
+              >
+                Hero
+              </button>
             </div>
 
             <div className="mech-filter-row mech-filter-summary">
@@ -292,7 +339,10 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
                 onClick={() => select(index)}
               >
                 <span>{getMechDisplayName(mech)}</span>
-                <strong>{mech.variant}</strong>
+                <strong>
+                  {mech.hero && <span className="mech-hero-tag" title="Hero 'Mech">HERO</span>}
+                  {mech.variant}
+                </strong>
                 <HardpointSummary mech={mech} />
                 <MechSpecs mech={mech} />
                 <small>

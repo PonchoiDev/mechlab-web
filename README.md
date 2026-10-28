@@ -26,6 +26,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 | [Análisis](docs/analisis.md) | Problema, usuarios, alcance, requisitos y cómo evolucionaron con el feedback |
 | [Arquitectura](docs/arquitectura.md) | Flujo de datos, capas, decisiones de diseño, principios (SOLID, DRY, KISS, YAGNI) y relación con Clean Architecture |
 | [Diagramas UML](docs/uml.md) | Casos de uso, clases del dominio y secuencias de compartir una build y del feedback |
+| [Especificaciones](docs/specs/) | Spec Driven Development: requisitos y criterios de aceptación escritos antes del código |
 | [Desarrollo con IA](docs/desarrollo-con-ia.md) | Cómo se ha construido el proyecto con Claude Code y qué prácticas lo hacen fiable |
 | [CLAUDE.md](CLAUDE.md) | Convenciones y reglas del proyecto que lee el asistente de IA en cada sesión |
 
@@ -35,7 +36,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (235 tests, cobertura con V8) |
+| Tests | Vitest 5 (249 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -50,7 +51,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 **Selector de chasis**
 - Búsqueda por nombre, variante o ID entre 639 variantes jugables.
 - Resumen de anclajes de cada variante por tipo y tamaño (`2E·L 1E·M`), y especificaciones del chasis como en el juego (`325 C-XL DHS C-ENDO C-FERRO AP`).
-- Filtros por clase de peso, tecnología, jump jets, ECM, AMS, mínimo de anclajes por tipo y año de la campaña. Atajos en el buscador, como `3e 2m jj ecm`.
+- Filtros por clase de peso, tecnología, jump jets, ECM, AMS, variantes hero, rol de combate, DLC (juego base y DLC 1 a 9), mínimo de anclajes por tipo y año de la campaña. Atajos en el buscador, como `3e 2m jj ecm` o `hero dlc7`.
 - Año de aparición y rol de cada variante.
 
 **Configuración**
@@ -157,7 +158,7 @@ python3 tools/generar_traits.py
 
 ## Calidad y comprobación contra el juego
 
-- **235 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **249 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

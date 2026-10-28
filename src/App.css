@@ -299,6 +299,10 @@
   --weapon-color: #b9a4ff;
 }
 
+.mech-hardpoint-tag.is-dlc {
+  --weapon-color: var(--work-muted);
+}
+
 .mech-option {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -2731,4 +2735,89 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 @media (max-width: 600px) {
   .mech-stats { grid-template-columns: minmax(0, 1fr); }
   .analysis-tabs .analysis-note { display: none; }
+}
+
+/* Desplegables con casillas del selector (DLC y rol): marcar varias opciones de un filtro. */
+.checkbox-dropdown {
+  position: relative;
+}
+
+.checkbox-dropdown-toggle span {
+  margin-left: 4px;
+  font-size: 9px;
+}
+
+.checkbox-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  /* Se abre hacia la izquierda: el selector está pegado al borde derecho de la pantalla. */
+  right: 0;
+  z-index: 5;
+  display: grid;
+  min-width: 160px;
+  padding: 6px;
+  background: var(--work-panel-raised);
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.checkbox-dropdown-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  color: var(--work-text);
+  background: transparent;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  font: 500 12px var(--work-sans);
+  text-align: left;
+}
+
+.checkbox-dropdown-option:hover,
+.checkbox-dropdown-option:focus-visible {
+  background: rgba(105, 217, 206, 0.12);
+  outline: none;
+}
+
+.checkbox-dropdown-box {
+  display: inline-grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--work-muted);
+  border-radius: 2px;
+  color: #18200f;
+  font: 700 10px var(--work-mono);
+}
+
+.checkbox-dropdown-option[aria-checked='true'] .checkbox-dropdown-box {
+  background: var(--work-cyan);
+  border-color: var(--work-cyan);
+}
+
+.checkbox-dropdown-clear {
+  justify-self: end;
+  margin-top: 4px;
+  font: 500 11px var(--work-mono);
+}
+
+.checkbox-dropdown-clear:disabled {
+  color: var(--work-muted);
+  text-decoration: none;
+  cursor: default;
+}
+
+/* Etiqueta HERO junto a las siglas de la variante, donde se lee de un vistazo. */
+.mech-hero-tag {
+  margin-right: 6px;
+  padding: 0 4px;
+  border: 1px solid var(--work-lime);
+  border-radius: 2px;
+  color: #18200f;
+  background: var(--work-lime);
+  font: 700 9px/14px var(--work-mono);
+  vertical-align: 1px;
 }

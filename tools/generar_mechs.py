@@ -45,6 +45,9 @@ REGEX_TIPO_DISIPADORES = re.compile(r'AllowedHeatSinkType=\(TagName="Equipment\.
 REGEX_TIPO_ESTRUCTURA = re.compile(r'StructureDataAssetId=\(Id="MWStructureDataAsset:([^"]+)"')
 REGEX_POTENCIA_MOTOR = re.compile(r'EngineRating=(\d+)')
 # Movimiento y calor del chasis, como los muestra el resumen de la pantalla de mejoras del juego.
+# DLC de la variante (DLC_1 … DLC_9); sin el campo, es del juego base. El MDA lo trae también en las
+# variantes sin ficha de unidad, como los campeones.
+REGEX_DLC = re.compile(r'MWDLCAsset:DLC_(\d+)')
 REGEX_GIRO = re.compile(r'(?<![A-Za-z])TurnSpeed=([0-9.]+)')
 REGEX_GIRO_TORSO = re.compile(r'TorsoTwistRate=\(Yaw=([0-9.]+),Pitch=([0-9.]+)')
 REGEX_CAPACIDAD_CALOR = re.compile(r'BaseHeatCapacity=([0-9.]+)')
@@ -503,6 +506,9 @@ def parsear_mech(contenido, variante, tamanos_anclajes=None, textos=None):
         mech["activeProbe"] = True
     if "bIsHeroMech=True" in contenido:
         mech["hero"] = True
+    dlc = buscar_texto(REGEX_DLC, contenido)
+    if dlc:
+        mech["dlc"] = int(dlc)
     giro = buscar_texto(REGEX_GIRO, contenido)
     if giro:
         mech["turnSpeed"] = round(float(giro), 2)

@@ -64,25 +64,77 @@ export const getAvailableYear = (mech: Mech): number => Math.max(
 export const hasEcm = (mech: Mech): boolean =>
   Object.values(mech.components).some(component => (component.specialSlots?.ECM_SlotType ?? 0) > 0);
 
+// Fuente de contenido de una variante: 0 para el juego base y 1 a 9 para su DLC.
+export const BASE_GAME = 0;
+export const CONTENT_SOURCES = [BASE_GAME, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+export const getContentSource = (mech: Mech): number => mech.dlc ?? BASE_GAME;
+
+export const getContentSourceLabel = (source: number): string => source === BASE_GAME ? 'Base' : `DLC ${source}`;
+
+// Resumen de una selección para el botón de un desplegable: «All», «Sniper, Scout» o «4 selected».
+export const describeSelection = (labels: string[]): string => {
+  if (labels.length === 0) return 'All';
+  if (labels.length > 2) return `${labels.length} selected`;
+  return labels.join(', ');
+};
+
+// Selección de DLC guardada en el navegador: se queda con las fuentes válidas, sin repetir, y
+// descarta lo que no lo sea (valores fuera de 0 a 9 o un texto que no es una lista).
+export const parseStoredContentSources = (raw: string | null): number[] => {
+  try {
+    const stored: unknown = JSON.parse(raw ?? '[]');
+    if (!Array.isArray(stored)) return [];
+    return [...new Set(stored.filter((value): value is number => CONTENT_SOURCES.includes(value as number)))];
+  } catch {
+    return [];
+  }
+};
+
+export const describeContentSources = (sources: number[]): string =>
+  describeSelection([...sources].sort((a, b) => a - b).map(getContentSourceLabel));
+
+// Roles de combate de las fichas de unidad (Sniper, Brawler…), en orden alfabético.
+export const getMechRoles = (mechs: Mech[]): string[] =>
+  [...new Set(mechs.flatMap(mech => mech.role ?? []))].sort();
+
 export interface MechFilters {
   weightClasses: WeightClassName[];
   techBase: 'InnerSphere' | 'Clan' | null;
   jumpJets: boolean;
   ecm: boolean;
+  hero: boolean;
+  // Fuentes de contenido marcadas (juego base y DLC); vacío, todas.
+  dlcs: number[];
+  // Roles de combate marcados; vacío, todos.
+  roles: string[];
   // Solo los mechs que ya existen en ese año de la campaña (fecha de aparición de su unit card).
   maxYear: number | null;
   minHardpoints: Partial<Record<HardpointFilterType, number>>;
 }
 
-type QueryFilters = Pick<MechFilters, 'jumpJets' | 'ecm' | 'minHardpoints'>;
+type QueryFilters = Pick<MechFilters, 'jumpJets' | 'ecm' | 'hero' | 'dlcs' | 'minHardpoints'>;
 
-export const EMPTY_MECH_FILTERS: MechFilters = { weightClasses: [], techBase: null, jumpJets: false, ecm: false, maxYear: null, minHardpoints: {} };
+export const EMPTY_MECH_FILTERS: MechFilters = {
+  weightClasses: [],
+  techBase: null,
+  jumpJets: false,
+  ecm: false,
+  hero: false,
+  dlcs: [],
+  roles: [],
+  maxYear: null,
+  minHardpoints: {}
+};
 
 export const countActiveFilters = (filters: MechFilters): number =>
   filters.weightClasses.length +
   (filters.techBase ? 1 : 0) +
   (filters.jumpJets ? 1 : 0) +
   (filters.ecm ? 1 : 0) +
+  (filters.hero ? 1 : 0) +
+  (filters.dlcs.length > 0 ? 1 : 0) +
+  (filters.roles.length > 0 ? 1 : 0) +
   (filters.maxYear !== null ? 1 : 0) +
   Object.values(filters.minHardpoints).filter(count => (count ?? 0) > 0).length;
 
@@ -109,16 +161,21 @@ export const matchesMechFilters = (mech: Mech, filters: MechFilters): boolean =>
   (!filters.techBase || (mech.techBase ?? 'InnerSphere') === filters.techBase) &&
   (!filters.jumpJets || hasJumpJets(mech)) &&
   (!filters.ecm || hasEcm(mech)) &&
+  (!filters.hero || mech.hero === true) &&
+  (filters.dlcs.length === 0 || filters.dlcs.includes(getContentSource(mech))) &&
+  (filters.roles.length === 0 || (mech.role !== undefined && filters.roles.includes(mech.role))) &&
   (filters.maxYear === null || getAvailableYear(mech) <= filters.maxYear) &&
   meetsHardpointMinimums(getHardpointCounts(mech), filters.minHardpoints);
 
 const QUERY_HARDPOINT_TOKEN = /^(\d+)(e|b|m|o|art|ams)$/i;
+const QUERY_DLC_TOKEN = /^dlc([1-9])$/i;
 const TOKEN_TYPES: Record<string, HardpointFilterType> = { e: 'energy', b: 'ballistic', m: 'missile', o: 'omni', art: 'artillery', ams: 'ams' };
 
 // Separa del texto de búsqueda los atajos de filtro: "3e 2m jj ecm" pide al menos 3 de energía,
-// 2 de misiles, jump jets y ECM. El resto del texto se busca en el nombre, la variante y el ID.
+// 2 de misiles, jump jets y ECM; "hero", las variantes hero; "dlc7" o "base", esa fuente de contenido.
+// El resto del texto se busca en el nombre, la variante y el ID.
 export const parseMechQuery = (query: string): { text: string; filters: QueryFilters } => {
-  const filters: QueryFilters = { jumpJets: false, ecm: false, minHardpoints: {} };
+  const filters: QueryFilters = { jumpJets: false, ecm: false, hero: false, dlcs: [], minHardpoints: {} };
   const words: string[] = [];
   for (const word of query.trim().split(/\s+/).filter(Boolean)) {
     const hardpoint = QUERY_HARDPOINT_TOKEN.exec(word);
@@ -128,6 +185,12 @@ export const parseMechQuery = (query: string): { text: string; filters: QueryFil
       filters.jumpJets = true;
     } else if (word.toLowerCase() === 'ecm') {
       filters.ecm = true;
+    } else if (word.toLowerCase() === 'hero') {
+      filters.hero = true;
+    } else if (word.toLowerCase() === 'base') {
+      filters.dlcs.push(BASE_GAME);
+    } else if (QUERY_DLC_TOKEN.test(word)) {
+      filters.dlcs.push(Number(QUERY_DLC_TOKEN.exec(word)![1]));
     } else {
       words.push(word);
     }
@@ -140,6 +203,9 @@ export const mergeMechFilters = (filters: MechFilters, extra: QueryFilters): Mec
   ...filters,
   jumpJets: filters.jumpJets || extra.jumpJets,
   ecm: filters.ecm || extra.ecm,
+  hero: filters.hero || extra.hero,
+  // Las fuentes se suman: el panel con DLC 1 y el buscador con dlc7 muestran las dos.
+  dlcs: [...new Set([...filters.dlcs, ...extra.dlcs])],
   minHardpoints: Object.fromEntries(HARDPOINT_FILTER_TYPES.map(type => [
     type,
     Math.max(filters.minHardpoints[type] ?? 0, extra.minHardpoints[type] ?? 0)

@@ -51,6 +51,8 @@ export interface Mech {
   engine?: { rating: number; xl: boolean };
   activeProbe?: boolean;
   hero?: boolean;
+  // DLC en el que llega la variante (1 a 9); sin el campo, es del juego base.
+  dlc?: number;
   introYear?: number;
   role?: string;
   // Movimiento y calor del chasis: giro de pie y del torso en °/s, y capacidad de calor sin disipadores.
