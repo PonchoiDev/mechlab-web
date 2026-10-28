@@ -19,6 +19,17 @@ The data was not typed in by hand. Python scripts extract it from the game files
 
 The project started as a master's final project and was posted on Reddit (r/Mechwarrior5), where player feedback shaped several features: chassis filters, stock loadouts, intro years and cantina upgrades.
 
+## Documentation
+
+The design documents are in Spanish, the author's language.
+
+| Document | Contents |
+|---|---|
+| [Analysis](docs/analisis.md) | Problem, users, scope, requirements and how player feedback changed them |
+| [Architecture](docs/arquitectura.md) | Data flow, app layers and design decisions, with diagrams |
+| [Development with AI](docs/desarrollo-con-ia.md) | How the project was built with Claude Code and the practices that keep it reliable |
+| [CLAUDE.md](CLAUDE.md) | Project conventions and rules the AI assistant reads every session |
+
 ## Tech stack
 
 | Area | Technology |
@@ -109,12 +120,14 @@ src/
   test/                 Shared test fixtures
 worker/                 Cloudflare Worker: Sarna image proxy and feedback form
 site/                   Landing page at the domain root (mw-builder.com)
+docs/                   Analysis, architecture and development with AI
 tools/
   generar_mechs.py      Generates src/data/mechs.json
   generar_items.py      Generates src/data/items.json
   generar_traits.py     Generates src/data/traits.json (cantina upgrades)
   datos-juego/          Files exported from the game
-.github/workflows/      Continuous integration
+.github/                Continuous integration and Dependabot
+CLAUDE.md               Project conventions for the AI assistant
 ```
 
 Logic is kept apart from the UI: `src/utils/` holds pure functions with their tests, and the components only call them. For example, `calculators.ts` builds the stats summary from the 'Mech, its equipment, armor and upgrades, and `buildCode.ts` turns a build into its link code and validates it when the link is opened.
@@ -149,6 +162,8 @@ python3 tools/generar_traits.py
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
 - GitHub Actions runs lint, tests and build on every push to `main` and on every pull request.
+- TypeScript in strict mode and static analysis with oxlint.
+- Dependabot proposes dependency updates every week and flags known vulnerabilities (`npm audit` reports none).
 
 ## Deployment
 

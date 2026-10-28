@@ -19,6 +19,15 @@ Los datos no se han copiado a mano: se extraen de los archivos del juego (export
 
 El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mechwarrior5), donde los comentarios de los jugadores guiaron varias de las funcionalidades: filtros de chasis, builds de fábrica, año de aparición y mejoras de la cantina.
 
+## Documentación
+
+| Documento | Contenido |
+|---|---|
+| [Análisis](docs/analisis.md) | Problema, usuarios, alcance, requisitos y cómo evolucionaron con el feedback |
+| [Arquitectura](docs/arquitectura.md) | Flujo de datos, capas de la web y decisiones de diseño, con diagramas |
+| [Desarrollo con IA](docs/desarrollo-con-ia.md) | Cómo se ha construido el proyecto con Claude Code y qué prácticas lo hacen fiable |
+| [CLAUDE.md](CLAUDE.md) | Convenciones y reglas del proyecto que lee el asistente de IA en cada sesión |
+
 ## Stack tecnológico
 
 | Área | Tecnología |
@@ -109,12 +118,14 @@ src/
   test/                 Datos de prueba compartidos
 worker/                 Worker de Cloudflare: proxy de imágenes de Sarna y formulario de feedback
 site/                   Portada de la raíz del dominio (mw-builder.com)
+docs/                   Análisis, arquitectura y desarrollo con IA
 tools/
   generar_mechs.py      Genera src/data/mechs.json
   generar_items.py      Genera src/data/items.json
   generar_traits.py     Genera src/data/traits.json (mejoras de la cantina)
   datos-juego/          Archivos exportados del juego
-.github/workflows/      Integración continua
+.github/                Integración continua y Dependabot
+CLAUDE.md               Convenciones del proyecto para el asistente de IA
 ```
 
 La lógica está separada de la interfaz: `src/utils/` son funciones puras con sus tests, y los componentes solo la usan. Por ejemplo, `calculators.ts` calcula el resumen de la build a partir del 'Mech, el equipo, la armadura y las mejoras, y `buildCode.ts` convierte una build en el código de su enlace y lo valida al abrirlo.
@@ -147,6 +158,8 @@ python3 tools/generar_traits.py
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
 - GitHub Actions ejecuta lint, tests y build en cada push a `main` y en cada pull request.
+- TypeScript en modo estricto y análisis estático con oxlint.
+- Dependabot propone cada semana las actualizaciones de dependencias y avisa de las vulnerabilidades conocidas (`npm audit` sin vulnerabilidades).
 
 ## Despliegue
 
