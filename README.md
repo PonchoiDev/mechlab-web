@@ -32,7 +32,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 
 | Área | Tecnología |
 |---|---|
-| Interfaz | React 19, TypeScript 6, CSS propio (sin framework de estilos) |
+| Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
 | Tests | Vitest 5 (235 tests, cobertura con V8) |
 | Análisis estático | oxlint |

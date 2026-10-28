@@ -1,6 +1,6 @@
 # MechLab MW5
 
-Configurador web de 'Mechs para *MechWarrior 5: Mercenaries* (no *MW5: Clans*), publicado en https://mw-builder.com/mercs/. React 19 + TypeScript 6 + Vite 8, desplegado en Cloudflare Workers. La arquitectura está en `docs/arquitectura.md` y los requisitos en `docs/analisis.md`.
+Configurador web de 'Mechs para *MechWarrior 5: Mercenaries* (no *MW5: Clans*), publicado en https://mw-builder.com/mercs/. React 19 + TypeScript 7 + Vite 8, desplegado en Cloudflare Workers. La arquitectura está en `docs/arquitectura.md` y los requisitos en `docs/analisis.md`.
 
 ## Comandos
 

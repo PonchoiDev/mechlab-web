@@ -34,7 +34,7 @@ The design documents are in Spanish, the author's language.
 
 | Area | Technology |
 |---|---|
-| UI | React 19, TypeScript 6, hand-written CSS (no styling framework) |
+| UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
 | Tests | Vitest 5 (235 tests, V8 coverage) |
 | Static analysis | oxlint |
