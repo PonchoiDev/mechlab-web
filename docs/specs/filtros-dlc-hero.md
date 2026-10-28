@@ -33,6 +33,7 @@ Los jugadores pidieron en Reddit poder filtrar el selector de chasis por lo que 
 - **RF5.** Cada variante de la lista muestra una etiqueta **HERO** junto a sus siglas si lo es, y una etiqueta con su DLC junto a sus anclajes si no es del juego base.
 - **RF6.** Los filtros nuevos cuentan como filtros activos y se borran con **Clear filters**, como los demás.
 - **RF7.** El selector tiene un desplegable **ROLE** con una casilla por rol de combate. Se pueden marcar varios; la lista muestra las variantes de cualquiera de los roles marcados. Sin ninguno marcado, se muestran todas. Funciona igual que el desplegable de DLC y comparte su componente.
+- **RF8.** La selección de DLC se guarda en el navegador, porque describe los DLC que tiene el jugador: al volver a la web, el filtro sigue marcado. Si lo guardado no es válido, se ignora.
 
 ## Requisitos no funcionales
 
@@ -59,6 +60,7 @@ Los jugadores pidieron en Reddit poder filtrar el selector de chasis por lo que 
 | CA11 | El filtro de rol con **Sniper** y **Scout** | se filtra la lista | quedan las 163 variantes de esos dos roles (124 + 39) y ninguna más |
 | CA12 | El filtro de rol vacío | se filtra la lista | no se descarta ninguna variante por su rol, y el estado vacío no tiene roles |
 | CA13 | Dos roles marcados | se cuentan los filtros activos | cuentan como un solo filtro |
+| CA14 | Una selección de DLC guardada en el navegador | se lee al abrir la web | se recuperan las fuentes válidas, sin repetir, y se descarta lo que no lo es (valores fuera de 0 a 9 o un texto que no es una lista) |
 
 ## Diseño de la interfaz
 
@@ -84,7 +86,6 @@ En la lista, la etiqueta HERO va junto a las siglas de la variante (`ACH-C HERO`
 
 - Atajos de rol en el buscador: los nombres de los roles son de varias palabras o se confundirían con búsquedas de texto.
 - Los nombres comerciales de los DLC (ver la limitación conocida).
-- Recordar en el navegador qué DLC tiene el jugador.
 - Mostrar el DLC fuera del selector (tablero, imagen de Share).
 
 ## Plan de pruebas

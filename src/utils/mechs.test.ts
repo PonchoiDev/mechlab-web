@@ -15,6 +15,7 @@ import {
   matchesMechQuery,
   mergeMechFilters,
   parseMechQuery,
+  parseStoredContentSources,
   type MechFilters
 } from './mechs';
 import { allMechs, getMech } from '../test/fixtures';
@@ -205,6 +206,14 @@ describe('filtros por DLC y por hero', () => {
 
   it('CA13: varios roles cuentan como un solo filtro', () => {
     expect(countActiveFilters({ ...EMPTY_MECH_FILTERS, roles: ['Sniper', 'Brawler'] })).toBe(1);
+  });
+
+  it('CA14: la selección de DLC guardada se recupera validada', () => {
+    expect(parseStoredContentSources('[0,7]')).toEqual([0, 7]);
+    expect(parseStoredContentSources('[7,7,12,-1,"3",2.5]')).toEqual([7]);
+    expect(parseStoredContentSources('no es json')).toEqual([]);
+    expect(parseStoredContentSources('{"dlc":7}')).toEqual([]);
+    expect(parseStoredContentSources(null)).toEqual([]);
   });
 
   it('CA10: el estado vacío no tiene Hero ni fuentes de DLC', () => {
