@@ -133,6 +133,7 @@ The JSON files in `src/data/` are generated from the game files, exported with t
 | `unitcard/` | Unit cards | Intro year and role |
 | `items/` | Weapons, equipment and ammo | Stats per tier, ammo, heat sinks |
 | `traits/` | Upgrades | Cantina upgrades and their effects |
+| `mech_string_table/` | `Mech_StringTable` text table exported as CSV | Chassis names |
 
 ```sh
 python3 tools/generar_items.py

@@ -1,7 +1,7 @@
 [
   {
     "id": "ACH-C",
-    "name": "Arctic Cheetah",
+    "name": "Hankyu",
     "variant": "ACH-C",
     "tonnageMax": 30.0,
     "baseTonnage": 12.23,
@@ -160,7 +160,7 @@
   },
   {
     "id": "ACH-E",
-    "name": "Arctic Cheetah",
+    "name": "Hankyu",
     "variant": "ACH-E",
     "tonnageMax": 30.0,
     "baseTonnage": 12.23,
@@ -327,7 +327,7 @@
   },
   {
     "id": "ACH-PRIME",
-    "name": "Arctic Cheetah",
+    "name": "Hankyu",
     "variant": "ACH-PRIME",
     "tonnageMax": 30.0,
     "baseTonnage": 12.23,
@@ -1257,7 +1257,7 @@
   },
   {
     "id": "ADR-A",
-    "name": "PUMA",
+    "name": "Puma",
     "variant": "ADR-A",
     "tonnageMax": 35.0,
     "baseTonnage": 10.05,
@@ -1319,7 +1319,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -1339,7 +1339,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -1403,7 +1403,7 @@
   },
   {
     "id": "ADR-B",
-    "name": "PUMA",
+    "name": "Puma",
     "variant": "ADR-B",
     "tonnageMax": 35.0,
     "baseTonnage": 10.05,
@@ -1465,7 +1465,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -1485,7 +1485,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -1543,13 +1543,13 @@
     "baseHeatCapacity": 44.400002,
     "upgradeSlots": 6,
     "techBase": "Clan",
-    "stockBuild": "WzEsIkFEUi1CIixbMTgsMCwzMiwxMiwyNCw4LDI0LDgsMjQsMCwyNCwwLDI4LDAsMjgsMF0sW1tdLFtbIkMtRmxhbWVyIiwwXV0sW1siQy1FUk1lZGl1bUxhc2VyIiwwXSwiQ2xhbkRvdWJsZUhlYXRTaW5rIl0sW1siQy1FUk1lZGl1bUxhc2VyIiwwXSwiQ2xhbkRvdWJsZUhlYXRTaW5rIl0sW1siQy1MQlhBdXRvY2Fubm9uNSIsMF1dLFtbIkMtTGFyZ2VQdWxzZUxhc2VyIiwwXV0sW10sW11dXQ",
+    "stockBuild": "WzEsIkFEUi1CIixbMTgsMCwzMiwxMiwyNCw4LDI0LDgsMjQsMCwyNCwwLDI4LDAsMjgsMF0sW1tdLFtbIkMtRmxhbWVyIiwwXV0sW1siQy1FUk1lZGl1bUxhc2VyIiwwXSwiQ2xhbkRvdWJsZUhlYXRTaW5rIl0sW1siQy1FUk1lZGl1bUxhc2VyIiwwXSwiQ2xhbkRvdWJsZUhlYXRTaW5rIl0sW1siQy1MQlhBdXRvY2Fubm9uNSIsMF0sIkNsYW5fTEJYNV9BbW1vRXF1aXBtZW50Il0sW1siQy1MYXJnZVB1bHNlTGFzZXIiLDBdXSxbXSxbXV1d",
     "introYear": 3012,
     "role": "Sniper"
   },
   {
     "id": "ADR-D",
-    "name": "PUMA",
+    "name": "Puma",
     "variant": "ADR-D",
     "tonnageMax": 35.0,
     "baseTonnage": 10.05,
@@ -1611,7 +1611,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -1631,7 +1631,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -1695,7 +1695,7 @@
   },
   {
     "id": "ADR-PRIME",
-    "name": "PUMA",
+    "name": "Puma",
     "variant": "ADR-PRIME",
     "tonnageMax": 35.0,
     "baseTonnage": 10.05,
@@ -1747,7 +1747,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -1767,7 +1767,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -1831,7 +1831,7 @@
   },
   {
     "id": "ADR-S",
-    "name": "PUMA",
+    "name": "Puma",
     "variant": "ADR-S",
     "tonnageMax": 35.0,
     "baseTonnage": 10.05,
@@ -1925,7 +1925,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {
@@ -1958,7 +1958,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -2793,7 +2793,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 0.8,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Annihilator",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
@@ -2808,7 +2808,7 @@
       "yaw": 58.5,
       "pitch": 36.56
     },
-    "baseHeatCapacity": 38.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "Clan",
     "stockBuild": "WzEsIkFOSC1HWiIsWzE4LDAsNTgsMjAsNTIsMTQsNTIsMTQsNTAsMCw1MCwwLDUyLDAsNTIsMF0sW1tdLFtdLFtbIkMtR2F1c3NSaWZsZSIsMF0sWyJDLUdhdXNzUmlmbGUiLDFdXSxbWyJDLUdhdXNzUmlmbGUiLDBdLCJDbGFuX0dhdXNzUmlmbGVfQW1tb0VxdWlwbWVudCIsIkNsYW5fR2F1c3NSaWZsZV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9HYXVzc1JpZmxlX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0dhdXNzUmlmbGVfQW1tb0VxdWlwbWVudCJdLFtbIkMtR2F1c3NSaWZsZSIsMF0sIkNsYW5fR2F1c3NSaWZsZV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9HYXVzc1JpZmxlX0FtbW9FcXVpcG1lbnQiXSxbWyJDLUdhdXNzUmlmbGUiLDBdLCJDbGFuX0dhdXNzUmlmbGVfQW1tb0VxdWlwbWVudCIsIkNsYW5fR2F1c3NSaWZsZV9BbW1vRXF1aXBtZW50Il0sWyJDbGFuRG91YmxlSGVhdFNpbmsiXSxbIkNsYW5Eb3VibGVIZWF0U2luayJdXV0",
@@ -2950,7 +2950,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Annihilator",
     "armorType": "standard",
     "heatSinkType": "single",
@@ -2965,7 +2965,7 @@
       "yaw": 58.5,
       "pitch": 36.56
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 8,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkFOSC1JUiIsWzE4LDAsMTAyLDIwLDY2LDE4LDY2LDE4LDY4LDAsNjgsMCw4MiwwLDgyLDBdLFtbXSxbIkFDNV9VbHRyYV9BbW1vRXF1aXBtZW50IiwiQUM1X1VsdHJhX0FtbW9FcXVpcG1lbnQiLCJEb3VibGVIZWF0U2luayIsIkRvdWJsZUhlYXRTaW5rIl0sW1siTWFjaGluZUd1biIsMV0sWyJMUk0xNV9Ib3Rsb2FkZWQiLDBdLFsiTWFjaGluZUd1biIsMl0sIkRvdWJsZUhlYXRTaW5rIl0sW1siTWFjaGluZUd1biIsMV0sWyJMUk0xNV9Ib3Rsb2FkZWQiLDBdLFsiTWFjaGluZUd1biIsMl0sIkRvdWJsZUhlYXRTaW5rIl0sW1siTWFjaGluZUd1biIsMV0sWyJVbHRyYUF1dG9jYW5ub241X1NpbmdsZSIsMF1dLFtbIlVsdHJhQXV0b2Nhbm5vbjVfU2luZ2xlIiwwXSxbIk1hY2hpbmVHdW4iLDFdXSxbIkxSTV9BbW1vRXF1aXBtZW50IiwiTWFjaGluZUd1bl9TdGFuZGFyZF9BbW1vRXF1aXBtZW50Il0sWyJMUk1fQW1tb0VxdWlwbWVudCIsIk1hY2hpbmVHdW5fU3RhbmRhcmRfQW1tb0VxdWlwbWVudCJdXV0",
@@ -3957,7 +3957,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -3978,7 +3978,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -4019,7 +4019,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Archer",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -4199,7 +4199,7 @@
       "yaw": 81.0,
       "pitch": 50.63
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 5,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkFSQy01UyIsWzE4LDAsNjYsMjAsNDgsMTIsNDgsMTIsNDQsMCw0NCwwLDUyLDAsNTIsMF0sW1tdLFtbIk1lZGl1bVB1bHNlTGFzZXIiLDBdLFsiTWVkaXVtUHVsc2VMYXNlciIsMV0sIkRvdWJsZUhlYXRTaW5rIl0sW1siTFJNMTUiLDBdLFsiTmFyY0JlYWNvbiIsMV1dLFtbIkxSTTE1IiwwXSwiTFJNX0FtbW9FcXVpcG1lbnQiLCJMUk1fQW1tb0VxdWlwbWVudCIsIkxSTV9BbW1vRXF1aXBtZW50IiwiU1JNX1N0cmVha19BbW1vRXF1aXBtZW50Il0sW1siU3RyZWFrU1JNMiIsMF0sWyJNZWRpdW1QdWxzZUxhc2VyIiwxXV0sW1siU3RyZWFrU1JNMiIsMF0sWyJNZWRpdW1QdWxzZUxhc2VyIiwxXV0sW10sWyJTUk1fU3RyZWFrX0FtbW9FcXVpcG1lbnQiLCJMUk1fQW1tb0VxdWlwbWVudCJdXV0",
@@ -4765,7 +4765,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -4789,7 +4789,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -7843,7 +7843,7 @@
   },
   {
     "id": "BANE-1",
-    "name": "Bane",
+    "name": "Kraken",
     "variant": "BANE-1",
     "tonnageMax": 100.0,
     "baseTonnage": 25.5,
@@ -8015,7 +8015,7 @@
   },
   {
     "id": "BANE-2",
-    "name": "Bane",
+    "name": "Kraken",
     "variant": "BANE-2",
     "tonnageMax": 100.0,
     "baseTonnage": 25.5,
@@ -8163,7 +8163,7 @@
   },
   {
     "id": "BANE-3",
-    "name": "Bane",
+    "name": "Kraken",
     "variant": "BANE-3",
     "tonnageMax": 100.0,
     "baseTonnage": 25.5,
@@ -8401,7 +8401,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -8421,7 +8421,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -8556,7 +8556,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -8580,7 +8580,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -8716,7 +8716,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -8744,7 +8744,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -8959,7 +8959,7 @@
   },
   {
     "id": "BHKU-OC",
-    "name": "Black Hawk KU",
+    "name": "Black Hawk-KU",
     "variant": "BHKU-OC",
     "tonnageMax": 60.0,
     "baseTonnage": 21.49,
@@ -9023,7 +9023,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "heavy"
           }
         ]
@@ -9043,7 +9043,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "heavy"
           }
         ]
@@ -9074,7 +9074,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Black Hawk KU",
+    "sarnaName": "Black Hawk-KU",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "standard",
@@ -9097,7 +9097,7 @@
   },
   {
     "id": "BHKU-OX",
-    "name": "Black Hawk KU",
+    "name": "Black Hawk-KU",
     "variant": "BHKU-OX",
     "tonnageMax": 60.0,
     "baseTonnage": 21.49,
@@ -9260,7 +9260,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Black Hawk KU",
+    "sarnaName": "Black Hawk-KU",
     "armorType": "standard",
     "heatSinkType": "clanDouble",
     "structureType": "standard",
@@ -9283,7 +9283,7 @@
   },
   {
     "id": "BHN-6H",
-    "name": "Stone Rhino",
+    "name": "Behemoth",
     "variant": "BHN-6H",
     "tonnageMax": 100.0,
     "baseTonnage": 21.5,
@@ -9361,7 +9361,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -9381,7 +9381,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -10449,7 +10449,7 @@
       "yaw": 103.5,
       "pitch": 64.69
     },
-    "baseHeatCapacity": 37.200001,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 5,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkJKMi1PIixbMTgsMCw0NCwxOCwzNiwxMiwzNiwxMiwyOCwwLDI4LDAsMzYsMCwzNiwwXSxbW10sWyJNYWNoaW5lR3VuX1N0YW5kYXJkX0hhbGZfQW1tb0VxdWlwbWVudCJdLFtbIk1hY2hpbmVHdW4iLDBdLFsiTWFjaGluZUd1biIsMV0sIkFDNV9VbHRyYV9BbW1vRXF1aXBtZW50Il0sW1siTWFjaGluZUd1biIsMF0sWyJNYWNoaW5lR3VuIiwxXSwiQUM1X1VsdHJhX0FtbW9FcXVpcG1lbnQiXSxbWyJVbHRyYUF1dG9jYW5ub241IiwwXSxbIk1lZGl1bUxhc2VyIiwxXSxbIk1lZGl1bUxhc2VyIiwyXSwiRG91YmxlSGVhdFNpbmsiXSxbWyJVbHRyYUF1dG9jYW5ub241IiwwXSxbIk1lZGl1bUxhc2VyIiwxXSxbIk1lZGl1bUxhc2VyIiwyXSwiRG91YmxlSGVhdFNpbmsiXSxbIkp1bXBKZXRfQ2xhc3M0X0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3M0X0VxdWlwbWVudCJdLFsiSnVtcEpldF9DbGFzczRfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczRfRXF1aXBtZW50Il1dXQ",
@@ -11381,7 +11381,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Black Knight",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -14197,7 +14197,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Bullshark",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -14368,7 +14368,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Bullshark",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -14538,7 +14538,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Bullshark",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -14693,7 +14693,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Bullshark",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -14862,7 +14862,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Bullshark",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -15020,7 +15020,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Bullshark",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -15170,7 +15170,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Bullshark",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -15328,7 +15328,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Bullshark",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -15448,7 +15448,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -15596,7 +15596,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -15751,7 +15751,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -15901,7 +15901,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -16052,7 +16052,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -16211,7 +16211,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -19488,7 +19488,7 @@
       "yaw": 126.0,
       "pitch": 78.75
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 8,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkNOOS1EM0QiLFsxOCwwLDQwLDEyLDMwLDEwLDMwLDEwLDI4LDAsMjgsMCw0MCwwLDQwLDBdLFtbXSxbWyJFUk1lZGl1bUxhc2VyIiwwXV0sW1siTFJNMTAiLDBdLCJMUk1fQW1tb0VxdWlwbWVudCJdLFtdLFsiTUFTQ19NS0lJSSJdLFtbIkxpZ2h0R2F1c3NSaWZsZSIsMF0sIkxpZ2h0R2F1c3NfQW1tb0VxdWlwbWVudCIsIkxpZ2h0R2F1c3NfQW1tb0VxdWlwbWVudCJdLFtdLFtdXV0",
@@ -26116,7 +26116,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -26140,7 +26140,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -26196,7 +26196,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Crusader",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -27096,7 +27096,7 @@
       "yaw": 90.0,
       "pitch": 56.25
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 7,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkNURi0zRCIsWzE4LDAsNTIsMTgsMzIsMTgsMzIsMTgsNDQsMCw0NCwwLDM3LDAsMzcsMF0sW1tdLFsiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayIsIlNpbmdsZUhlYXRTaW5rIl0sW1siTWVkaXVtTGFzZXIiLDBdLCJTaW5nbGVIZWF0U2luayIsIlNpbmdsZUhlYXRTaW5rIiwiQUMxMF9MQlhfQW1tb0VxdWlwbWVudCIsIkFDMTBfTEJYX0FtbW9FcXVpcG1lbnQiXSxbWyJMQlhBdXRvY2Fubm9uMTAiLDBdLFsiTWVkaXVtTGFzZXIiLDFdLCJBQzVfVWx0cmFfQW1tb0VxdWlwbWVudCJdLFtbIk1lZGl1bUxhc2VyIiwwXV0sW1siTWVkaXVtTGFzZXIiLDBdLFsiVWx0cmFBdXRvY2Fubm9uNSIsMV0sIkFDNV9VbHRyYV9BbW1vRXF1aXBtZW50Il0sWyJKdW1wSmV0X0NsYXNzM19FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzM19FcXVpcG1lbnQiXSxbIkp1bXBKZXRfQ2xhc3MzX0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3MzX0VxdWlwbWVudCJdXV0",
@@ -27248,7 +27248,7 @@
       "yaw": 90.0,
       "pitch": 56.25
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 7,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkNURi0zTCIsWzE4LDAsNTIsMTgsMzIsMTgsMzIsMTgsNDQsMCw0NCwwLDM3LDAsMzcsMF0sW1tdLFsiRG91YmxlSGVhdFNpbmsiXSxbWyJNZWRpdW1QdWxzZUxhc2VyIiwwXSwiRG91YmxlSGVhdFNpbmsiLCJNQVNDX01LSVYiXSxbWyJMQlhBdXRvY2Fubm9uMTAiLDBdLFsiTWVkaXVtUHVsc2VMYXNlciIsMV0sIkFDMTBfTEJYX0FtbW9FcXVpcG1lbnQiLCJBQzEwX0xCWF9BbW1vRXF1aXBtZW50Il0sW1siTWVkaXVtUHVsc2VMYXNlciIsMF0sIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiXSxbWyJNZWRpdW1QdWxzZUxhc2VyIiwxXSxbIkVSUFBDIiwwXSwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayJdLFtdLFtdXV0",
@@ -27611,7 +27611,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -27631,7 +27631,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -29465,7 +29465,7 @@
   },
   {
     "id": "DWF-A",
-    "name": "DAISHI",
+    "name": "Daishi",
     "variant": "DWF-A",
     "tonnageMax": 100.0,
     "baseTonnage": 27.5,
@@ -29610,7 +29610,7 @@
   },
   {
     "id": "DWF-B",
-    "name": "DAISHI",
+    "name": "Daishi",
     "variant": "DWF-B",
     "tonnageMax": 100.0,
     "baseTonnage": 27.5,
@@ -29778,7 +29778,7 @@
   },
   {
     "id": "DWF-PRIME",
-    "name": "DAISHI",
+    "name": "Daishi",
     "variant": "DWF-PRIME",
     "tonnageMax": 100.0,
     "baseTonnage": 27.5,
@@ -29938,7 +29938,7 @@
   },
   {
     "id": "DWF-P",
-    "name": "DAISHI",
+    "name": "Daishi",
     "variant": "DWF-P",
     "tonnageMax": 100.0,
     "baseTonnage": 27.5,
@@ -30097,7 +30097,7 @@
   },
   {
     "id": "DWF-S",
-    "name": "DAISHI",
+    "name": "Daishi",
     "variant": "DWF-S",
     "tonnageMax": 100.0,
     "baseTonnage": 27.5,
@@ -30265,7 +30265,7 @@
   },
   {
     "id": "DWF-W",
-    "name": "DAISHI",
+    "name": "Daishi",
     "variant": "DWF-W",
     "tonnageMax": 100.0,
     "baseTonnage": 27.5,
@@ -31829,7 +31829,7 @@
   },
   {
     "id": "EXE-A",
-    "name": "GLADIATOR",
+    "name": "Gladiator",
     "variant": "EXE-A",
     "tonnageMax": 95.0,
     "baseTonnage": 36.0,
@@ -31917,7 +31917,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -31997,7 +31997,7 @@
   },
   {
     "id": "EXE-B-A",
-    "name": "GLADIATOR-B",
+    "name": "Gladiator-B",
     "variant": "EXE-B-A",
     "tonnageMax": 95.0,
     "baseTonnage": 23.0,
@@ -32151,7 +32151,7 @@
   },
   {
     "id": "EXE-B-B",
-    "name": "GLADIATOR-B",
+    "name": "Gladiator-B",
     "variant": "EXE-B-B",
     "tonnageMax": 95.0,
     "baseTonnage": 23.0,
@@ -32304,7 +32304,7 @@
   },
   {
     "id": "EXE-B-C",
-    "name": "GLADIATOR-B",
+    "name": "Gladiator-B",
     "variant": "EXE-B-C",
     "tonnageMax": 95.0,
     "baseTonnage": 23.0,
@@ -32466,7 +32466,7 @@
   },
   {
     "id": "EXE-B-PRIME",
-    "name": "GLADIATOR-B",
+    "name": "Gladiator-B",
     "variant": "EXE-B-PRIME",
     "tonnageMax": 95.0,
     "baseTonnage": 23.0,
@@ -32549,7 +32549,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -32621,7 +32621,7 @@
   },
   {
     "id": "EXE-D",
-    "name": "GLADIATOR",
+    "name": "Gladiator",
     "variant": "EXE-D",
     "tonnageMax": 95.0,
     "baseTonnage": 36.0,
@@ -32686,7 +32686,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -32710,7 +32710,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -32802,7 +32802,7 @@
   },
   {
     "id": "EXE-PRIME",
-    "name": "GLADIATOR",
+    "name": "Gladiator",
     "variant": "EXE-PRIME",
     "tonnageMax": 95.0,
     "baseTonnage": 36.0,
@@ -32882,7 +32882,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -32948,13 +32948,13 @@
     "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "Clan",
-    "stockBuild": "WzEsIkVYRS1QUklNRSIsWzE4LDAsNzQsMTgsNDAsMjAsNDAsMjAsNjQsMCw2NCwwLDgwLDAsODAsMF0sW1tdLFsiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbkRvdWJsZUhlYXRTaW5rIl0sWyJjLU1BU0NfTUtJViIsIkNsYW5fR2F1c3NSaWZsZV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9HYXVzc1JpZmxlX0FtbW9FcXVpcG1lbnQiXSxbWyJDLU1hY2hpbmVHdW4iLDBdLFsiQy1NYWNoaW5lR3VuIiwxXSwiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbl9NYWNoaW5lR3VuX0FtbW9FcXVpcG1lbnQiXSxbWyJDLUdhdXNzUmlmbGUiLDBdLCJDbGFuRG91YmxlSGVhdFNpbmsiXSxbWyJDLUVSTGFyZ2VMYXNlciIsMF0sWyJDLUVSTGFyZ2VMYXNlciIsMV0sIkNsYW5Eb3VibGVIZWF0U2luayJdLFsiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50Il0sWyJKdW1wSmV0X0NsYXNzMV9FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzMV9FcXVpcG1lbnQiXV1d",
+    "stockBuild": "WzEsIkVYRS1QUklNRSIsWzE4LDAsNzQsMTgsNDAsMjAsNDAsMjAsNjQsMCw2NCwwLDgwLDAsODAsMF0sW1tdLFsiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbkRvdWJsZUhlYXRTaW5rIl0sWyJjLU1BU0NfTUtJViIsIkNsYW5fR2F1c3NSaWZsZV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9HYXVzc1JpZmxlX0FtbW9FcXVpcG1lbnQiXSxbWyJDLU1hY2hpbmVHdW4iLDBdLFsiQy1NYWNoaW5lR3VuIiwxXSwiQ2xhbkRvdWJsZUhlYXRTaW5rIiwiQ2xhbl9NYWNoaW5lR3VuX0FtbW9FcXVpcG1lbnQiXSxbWyJDLUdhdXNzUmlmbGUiLDBdLCJDbGFuRG91YmxlSGVhdFNpbmsiXSxbWyJDLUVSTGFyZ2VMYXNlciIsMF0sWyJDLUVSTGFyZ2VMYXNlciIsMV0sIkNsYW5Eb3VibGVIZWF0U2luayIsIkNsYW5Eb3VibGVIZWF0U2luayJdLFsiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50Il0sWyJKdW1wSmV0X0NsYXNzMV9FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzMV9FcXVpcG1lbnQiXV1d",
     "introYear": 3001,
     "role": "Sniper"
   },
   {
     "id": "EXE-B",
-    "name": "GLADIATOR",
+    "name": "Gladiator",
     "variant": "EXE-B",
     "tonnageMax": 95.0,
     "baseTonnage": 36.0,
@@ -33034,7 +33034,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -33102,7 +33102,7 @@
   },
   {
     "id": "EXE-C",
-    "name": "GLADIATOR",
+    "name": "Gladiator",
     "variant": "EXE-C",
     "tonnageMax": 95.0,
     "baseTonnage": 36.0,
@@ -33784,7 +33784,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 0.48,
+    "BaseCoolingRate": 1.0,
     "sarnaName": "Flea",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -33807,7 +33807,7 @@
   },
   {
     "id": "FMT-1",
-    "name": "DASHER",
+    "name": "Dasher",
     "variant": "FMT-1",
     "tonnageMax": 20.0,
     "baseTonnage": 8.37,
@@ -33865,7 +33865,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -33893,7 +33893,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -33965,7 +33965,7 @@
   },
   {
     "id": "FMT-A",
-    "name": "DASHER",
+    "name": "Dasher",
     "variant": "FMT-A",
     "tonnageMax": 20.0,
     "baseTonnage": 8.37,
@@ -34019,7 +34019,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -34039,7 +34039,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -34097,13 +34097,13 @@
     "baseHeatCapacity": 46.0,
     "upgradeSlots": 6,
     "techBase": "Clan",
-    "stockBuild": "WzEsIkZNVC1BIixbMTAsMCwxMCw0LDgsNCw4LDQsNiwwLDYsMCw4LDAsOCwwXSxbW10sWyJjLU1BU0NfTUtJIl0sWyJDbGFuRG91YmxlSGVhdFNpbmsiXSxbWyJDLVN0cmVha1NSTTQiLDBdLCJDbGFuRG91YmxlSGVhdFNpbmsiLCJDbGFuX1NSTV9TdHJlYWtfQW1tb0VxdWlwbWVudCJdLFtbIkMtQW50aU1pc3NpbGVTeXN0ZW0iLDBdLCJDLUFNU19BbW1vRXF1aXBtZW50Il0sW1siYy1UQUciLDBdXSxbXSxbXV1d",
+    "stockBuild": "WzEsIkZNVC1BIixbMTAsMCwxMCw0LDgsNCw4LDQsNiwwLDYsMCw4LDAsOCwwXSxbW10sWyJjLU1BU0NfTUtJIl0sWyJDbGFuRG91YmxlSGVhdFNpbmsiXSxbWyJDLVN0cmVha1NSTTQiLDBdLCJDbGFuRG91YmxlSGVhdFNpbmsiLCJDbGFuX1NSTV9TdHJlYWtfQW1tb0VxdWlwbWVudCJdLFtbIkMtQW50aU1pc3NpbGVTeXN0ZW0iLDBdLCJDLUFNU19BbW1vRXF1aXBtZW50Il0sW1siYy1UQUciLDBdLCJDbGFuQWN0aXZlUHJvYmUiXSxbXSxbXV1d",
     "introYear": 2874,
     "role": "Scout"
   },
   {
     "id": "FMT-B",
-    "name": "DASHER",
+    "name": "Dasher",
     "variant": "FMT-B",
     "tonnageMax": 20.0,
     "baseTonnage": 8.37,
@@ -34157,7 +34157,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -34177,7 +34177,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {
@@ -34247,7 +34247,7 @@
   },
   {
     "id": "FMT-C",
-    "name": "DASHER",
+    "name": "Dasher",
     "variant": "FMT-C",
     "tonnageMax": 20.0,
     "baseTonnage": 8.37,
@@ -34301,7 +34301,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -34321,7 +34321,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -34385,7 +34385,7 @@
   },
   {
     "id": "FMT-D",
-    "name": "DASHER",
+    "name": "Dasher",
     "variant": "FMT-D",
     "tonnageMax": 20.0,
     "baseTonnage": 8.37,
@@ -34443,7 +34443,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -34467,7 +34467,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -34535,7 +34535,7 @@
   },
   {
     "id": "FMT-PRIME",
-    "name": "DASHER",
+    "name": "Dasher",
     "variant": "FMT-PRIME",
     "tonnageMax": 20.0,
     "baseTonnage": 8.37,
@@ -34589,7 +34589,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -34613,7 +34613,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -36021,7 +36021,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -36045,7 +36045,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -36112,7 +36112,7 @@
   },
   {
     "id": "GAR-A",
-    "name": "MAN O\\' WAR",
+    "name": "Man O\\' War",
     "variant": "GAR-A",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36161,7 +36161,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -36261,7 +36261,7 @@
   },
   {
     "id": "GAR-D",
-    "name": "MAN O\\' WAR",
+    "name": "Man O\\' War",
     "variant": "GAR-D",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36411,7 +36411,7 @@
   },
   {
     "id": "GAR-PRIME",
-    "name": "MAN O\\' WAR",
+    "name": "Man O\\' War",
     "variant": "GAR-PRIME",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36557,7 +36557,7 @@
   },
   {
     "id": "GAR-P",
-    "name": "MAN O\\' WAR",
+    "name": "Man O\\' War",
     "variant": "GAR-P",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36628,7 +36628,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -36716,7 +36716,7 @@
   },
   {
     "id": "GAR-B",
-    "name": "MAN O\\' WAR",
+    "name": "Man O\\' War",
     "variant": "GAR-B",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36765,7 +36765,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -36853,7 +36853,7 @@
   },
   {
     "id": "GAR-C",
-    "name": "MAN O\\' WAR",
+    "name": "Man O\\' War",
     "variant": "GAR-C",
     "tonnageMax": 80.0,
     "baseTonnage": 40.720001,
@@ -36922,7 +36922,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -40150,7 +40150,7 @@
       "yaw": 108.0,
       "pitch": 67.5
     },
-    "baseHeatCapacity": 38.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 8,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkhCSy02UyIsWzE4LDAsNTIsMTAsNDAsOCw0MCw4LDMyLDAsMzIsMCw0MCwwLDQwLDBdLFtbXSxbXSxbWyJTUk02IiwwXSwiU1JNX0FtbW9FcXVpcG1lbnQiLCJMQlgyMF9BbW1vRXF1aXBtZW50IiwiTEJYMjBfQW1tb0VxdWlwbWVudCJdLFtbIkxCWEF1dG9jYW5ub24yMCIsMF1dLFtbIkVSTWVkaXVtTGFzZXIiLDBdXSxbWyJFUk1lZGl1bUxhc2VyIiwwXV0sW10sW11dXQ",
@@ -40219,7 +40219,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -40240,7 +40240,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -40545,7 +40545,7 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -40561,7 +40561,7 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -40699,7 +40699,7 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -40715,7 +40715,7 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -40849,7 +40849,7 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -40865,7 +40865,7 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -40994,7 +40994,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -41018,7 +41018,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -41149,7 +41149,7 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -41165,7 +41165,7 @@
         "hardpoints": [
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "medium"
           }
         ]
@@ -41437,7 +41437,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -41457,7 +41457,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -41497,7 +41497,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 0.8,
+    "BaseCoolingRate": 1.6,
     "sarnaName": "Hunchback",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -41520,7 +41520,7 @@
   },
   {
     "id": "HBR-A",
-    "name": "LOKI",
+    "name": "Loki",
     "variant": "HBR-A",
     "tonnageMax": 65.0,
     "baseTonnage": 26.200001,
@@ -41592,7 +41592,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -41616,7 +41616,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -41679,7 +41679,7 @@
   },
   {
     "id": "HBR-B",
-    "name": "LOKI",
+    "name": "Loki",
     "variant": "HBR-B",
     "tonnageMax": 65.0,
     "baseTonnage": 26.200001,
@@ -41825,7 +41825,7 @@
   },
   {
     "id": "HBR-F",
-    "name": "LOKI",
+    "name": "Loki",
     "variant": "HBR-F",
     "tonnageMax": 65.0,
     "baseTonnage": 26.200001,
@@ -41979,7 +41979,7 @@
   },
   {
     "id": "HBR-PRIME",
-    "name": "LOKI",
+    "name": "Loki",
     "variant": "HBR-PRIME",
     "tonnageMax": 65.0,
     "baseTonnage": 26.200001,
@@ -42144,7 +42144,7 @@
   },
   {
     "id": "HBR-P",
-    "name": "LOKI",
+    "name": "Loki",
     "variant": "HBR-P",
     "tonnageMax": 65.0,
     "baseTonnage": 26.200001,
@@ -44215,7 +44215,7 @@
   },
   {
     "id": "HMN-A",
-    "name": "Huntsman",
+    "name": "Nobori-Nin",
     "variant": "HMN-A",
     "tonnageMax": 50.0,
     "baseTonnage": 14.52,
@@ -44364,7 +44364,7 @@
   },
   {
     "id": "HMN-B",
-    "name": "Huntsman",
+    "name": "Nobori-Nin",
     "variant": "HMN-B",
     "tonnageMax": 50.0,
     "baseTonnage": 14.52,
@@ -44522,7 +44522,7 @@
   },
   {
     "id": "HMN-C",
-    "name": "Huntsman",
+    "name": "Nobori-Nin",
     "variant": "HMN-C",
     "tonnageMax": 50.0,
     "baseTonnage": 14.52,
@@ -44685,7 +44685,7 @@
   },
   {
     "id": "HMN-PRIME",
-    "name": "Huntsman",
+    "name": "Nobori-Nin",
     "variant": "HMN-PRIME",
     "tonnageMax": 50.0,
     "baseTonnage": 14.52,
@@ -44860,7 +44860,7 @@
   },
   {
     "id": "HMN-P",
-    "name": "Huntsman",
+    "name": "Nobori-Nin",
     "variant": "HMN-P",
     "tonnageMax": 50.0,
     "baseTonnage": 14.52,
@@ -45871,7 +45871,7 @@
   },
   {
     "id": "HTM-SG",
-    "name": "Hatamoto Chi",
+    "name": "Hatamoto-Chi",
     "variant": "HTM-SG",
     "tonnageMax": 80.0,
     "baseTonnage": 22.5,
@@ -45992,7 +45992,7 @@
       }
     },
     "BaseCoolingRate": 2.0,
-    "sarnaName": "Hatamoto Chi",
+    "sarnaName": "Hatamoto-Chi",
     "armorType": "standard",
     "heatSinkType": "single",
     "structureType": "endoSteel",
@@ -46006,7 +46006,7 @@
       "yaw": 90.0,
       "pitch": 56.42
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 7,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkhUTS1TRyIsWzE4LDAsNjgsMzIsNTAsMTgsNTAsMTgsNTIsMCw1MiwwLDY4LDAsNjgsMF0sW1tdLFsiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayIsIlNpbmdsZUhlYXRTaW5rIiwiU1JNX0FtbW9FcXVpcG1lbnQiXSxbWyJTUk02IiwwXSwiQUMxMF9MQlhfQW1tb0VxdWlwbWVudCIsIkFDMTBfTEJYX0FtbW9FcXVpcG1lbnQiLCJTaW5nbGVIZWF0U2luayIsIlNpbmdsZUhlYXRTaW5rIiwiU1JNX0FtbW9FcXVpcG1lbnQiXSxbWyJTUk02IiwwXSwiQUMxMF9MQlhfQW1tb0VxdWlwbWVudCIsIkFDMTBfTEJYX0FtbW9FcXVpcG1lbnQiLCJTaW5nbGVIZWF0U2luayIsIlNpbmdsZUhlYXRTaW5rIiwiU1JNX0FtbW9FcXVpcG1lbnQiXSxbWyJMQlhBdXRvY2Fubm9uMTAiLDBdXSxbWyJMQlhBdXRvY2Fubm9uMTAiLDBdXSxbXSxbXV1d",
@@ -46015,7 +46015,7 @@
   },
   {
     "id": "IFR-A",
-    "name": "Ice Ferret",
+    "name": "Fenris",
     "variant": "IFR-A",
     "tonnageMax": 45.0,
     "baseTonnage": 25.459999,
@@ -46157,7 +46157,7 @@
   },
   {
     "id": "IFR-B",
-    "name": "Ice Ferret",
+    "name": "Fenris",
     "variant": "IFR-B",
     "tonnageMax": 45.0,
     "baseTonnage": 25.459999,
@@ -46299,7 +46299,7 @@
   },
   {
     "id": "IFR-C",
-    "name": "Ice Ferret",
+    "name": "Fenris",
     "variant": "IFR-C",
     "tonnageMax": 45.0,
     "baseTonnage": 25.459999,
@@ -46442,7 +46442,7 @@
   },
   {
     "id": "IFR-PRIME",
-    "name": "Ice Ferret",
+    "name": "Fenris",
     "variant": "IFR-PRIME",
     "tonnageMax": 45.0,
     "baseTonnage": 25.459999,
@@ -46579,7 +46579,7 @@
   },
   {
     "id": "IFR-P",
-    "name": "Ice Ferret",
+    "name": "Fenris",
     "variant": "IFR-P",
     "tonnageMax": 45.0,
     "baseTonnage": 25.459999,
@@ -46799,7 +46799,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -46815,7 +46815,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -46956,7 +46956,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -46972,7 +46972,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -47109,7 +47109,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -47125,7 +47125,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -47262,7 +47262,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -47278,7 +47278,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -47420,7 +47420,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -47436,7 +47436,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -47758,7 +47758,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "JagerMech",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -50182,7 +50182,7 @@
       "yaw": 162.0,
       "pitch": 101.25
     },
-    "baseHeatCapacity": 37.200001,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkpWTi0xMUEiLFsxOCwwLDIzLDYsMTgsNiwxOCw2LDE4LDAsMTgsMCwyNCwwLDI0LDBdLFtbXSxbIkp1bXBKZXRfQ2xhc3M1X0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3M1X0VxdWlwbWVudCJdLFtbIk1lZGl1bUxhc2VyIiwwXSxbIk1lZGl1bUxhc2VyIiwxXSwiRG91YmxlSGVhdFNpbmsiXSxbWyJNZWRpdW1MYXNlciIsMF0sWyJNZWRpdW1MYXNlciIsMV0sIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiXSxbXSxbWyJNZWRpdW1MYXNlciIsMF0sWyJNZWRpdW1MYXNlciIsMV0sWyJNZWRpdW1MYXNlciIsMl1dLFsiSnVtcEpldF9DbGFzczVfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczVfRXF1aXBtZW50Il0sWyJKdW1wSmV0X0NsYXNzNV9FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzNV9FcXVpcG1lbnQiXV1d",
@@ -50318,7 +50318,7 @@
       "yaw": 162.0,
       "pitch": 101.25
     },
-    "baseHeatCapacity": 37.200001,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkpWTi0xMUIiLFsxOCwwLDIzLDYsMTgsNiwxOCw2LDE4LDAsMTgsMCwyNCwwLDI0LDBdLFtbXSxbXSxbWyJTUk00IiwwXSwiRG91YmxlSGVhdFNpbmsiLCJTUk1fQW1tb0VxdWlwbWVudCIsIlNSTV9BbW1vRXF1aXBtZW50IiwiR3VhcmRpYW5FQ00iXSxbWyJTUk00IiwwXSwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayIsIkJlYWdsZUFjdGl2ZVByb2JlIiwiU1JNX0FtbW9FcXVpcG1lbnQiXSxbXSxbXSxbXSxbXV1d",
@@ -50550,7 +50550,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -50582,7 +50582,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -50726,7 +50726,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -50750,7 +50750,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -50877,7 +50877,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -50913,7 +50913,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51060,7 +51060,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51080,7 +51080,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51208,7 +51208,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51228,7 +51228,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51366,7 +51366,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51386,7 +51386,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51451,7 +51451,7 @@
   },
   {
     "id": "KFX-C",
-    "name": "ULLER",
+    "name": "Uller",
     "variant": "KFX-C",
     "tonnageMax": 30.0,
     "baseTonnage": 6.75,
@@ -51498,7 +51498,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51525,7 +51525,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {
@@ -51603,7 +51603,7 @@
   },
   {
     "id": "KFX-D",
-    "name": "ULLER",
+    "name": "Uller",
     "variant": "KFX-D",
     "tonnageMax": 30.0,
     "baseTonnage": 6.75,
@@ -51650,7 +51650,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51674,7 +51674,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51742,7 +51742,7 @@
   },
   {
     "id": "KFX-E",
-    "name": "ULLER",
+    "name": "Uller",
     "variant": "KFX-E",
     "tonnageMax": 30.0,
     "baseTonnage": 6.75,
@@ -51793,7 +51793,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -51880,7 +51880,7 @@
   },
   {
     "id": "KFX-PRIME",
-    "name": "ULLER",
+    "name": "Uller",
     "variant": "KFX-PRIME",
     "tonnageMax": 30.0,
     "baseTonnage": 6.75,
@@ -51927,7 +51927,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -52019,7 +52019,7 @@
   },
   {
     "id": "KFX-P",
-    "name": "ULLER",
+    "name": "Uller",
     "variant": "KFX-P",
     "tonnageMax": 30.0,
     "baseTonnage": 6.75,
@@ -52084,7 +52084,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -52171,7 +52171,7 @@
   },
   {
     "id": "KFX-S",
-    "name": "ULLER",
+    "name": "Uller",
     "variant": "KFX-S",
     "tonnageMax": 30.0,
     "baseTonnage": 6.75,
@@ -52232,7 +52232,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -52256,7 +52256,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -52328,7 +52328,7 @@
   },
   {
     "id": "KFX-V",
-    "name": "ULLER",
+    "name": "Uller",
     "variant": "KFX-V",
     "tonnageMax": 30.0,
     "baseTonnage": 6.75,
@@ -52375,7 +52375,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -55566,7 +55566,7 @@
       "yaw": 225.0,
       "pitch": 140.66
     },
-    "baseHeatCapacity": 36.400002,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 7,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkxDVC0zTSIsWzE1LDAsMTIsNCwxMiw0LDEyLDQsOCwwLDgsMCwxNCwwLDE0LDBdLFtbXSxbWyJNZWRpdW1MYXNlciIsMF1dLFsiQU1TX0FtbW9FcXVpcG1lbnQiLCJBTVNfSGFsZl9BbW1vRXF1aXBtZW50Il0sW10sW1siU21hbGxMYXNlciIsMF0sWyJTbWFsbExhc2VyIiwxXSxbIkFudGlNaXNzaWxlU3lzdGVtIiwyXV0sW1siU21hbGxMYXNlciIsMF0sWyJTbWFsbExhc2VyIiwxXV0sWyJTaW5nbGVIZWF0U2luayIsIlNpbmdsZUhlYXRTaW5rIl0sWyJTaW5nbGVIZWF0U2luayIsIlNpbmdsZUhlYXRTaW5rIl1dXQ",
@@ -57551,7 +57551,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Longbow",
     "armorType": "standard",
     "heatSinkType": "single",
@@ -57565,7 +57565,7 @@
       "yaw": 85.5,
       "pitch": 61.88
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIkxHQi04ViIsWzE4LDAsODIsMjQsNTIsMjAsNTIsMjAsNTYsMCw1NiwwLDY2LDAsNjYsMF0sW1tbIlRBRyIsMF1dLFtbIkVSTGFyZ2VMYXNlciIsMF1dLFtbIk1lZGl1bVB1bHNlTGFzZXIiLDBdLCJBcnJvd0lWX0FtbW9FcXVpcG1lbnQiLCJBcnJvd0lWX0FtbW9FcXVpcG1lbnQiXSxbWyJNZWRpdW1QdWxzZUxhc2VyIiwwXSwiQXJyb3dJVl9BbW1vRXF1aXBtZW50IiwiQXJyb3dJVl9BbW1vRXF1aXBtZW50Il0sW1siQXJyb3dJViIsMF1dLFtbIkFycm93SVYiLDBdXSxbIkFycm93SVZfQW1tb0VxdWlwbWVudCIsIkFycm93SVZfQW1tb0VxdWlwbWVudCJdLFsiQXJyb3dJVl9BbW1vRXF1aXBtZW50IiwiQXJyb3dJVl9BbW1vRXF1aXBtZW50Il1dXQ",
@@ -58023,7 +58023,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Longbow",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -58171,7 +58171,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 1.0,
+    "BaseCoolingRate": 2.0,
     "sarnaName": "Longbow",
     "armorType": "standard",
     "heatSinkType": "double",
@@ -60066,7 +60066,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -60090,7 +60090,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -60218,7 +60218,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -60242,7 +60242,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -60377,7 +60377,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -60401,7 +60401,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -60541,7 +60541,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -60565,7 +60565,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -61554,7 +61554,7 @@
   },
   {
     "id": "MDD-A",
-    "name": "VULTURE",
+    "name": "Vulture",
     "variant": "MDD-A",
     "tonnageMax": 60.0,
     "baseTonnage": 20.9,
@@ -61713,7 +61713,7 @@
   },
   {
     "id": "MDD-B",
-    "name": "VULTURE",
+    "name": "Vulture",
     "variant": "MDD-B",
     "tonnageMax": 60.0,
     "baseTonnage": 20.9,
@@ -61776,7 +61776,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -61800,7 +61800,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -61872,7 +61872,7 @@
   },
   {
     "id": "MDD-C",
-    "name": "VULTURE",
+    "name": "Vulture",
     "variant": "MDD-C",
     "tonnageMax": 60.0,
     "baseTonnage": 20.9,
@@ -62005,7 +62005,7 @@
   },
   {
     "id": "MDD-PRIME",
-    "name": "VULTURE",
+    "name": "Vulture",
     "variant": "MDD-PRIME",
     "tonnageMax": 60.0,
     "baseTonnage": 20.9,
@@ -62156,7 +62156,7 @@
   },
   {
     "id": "MDD-S",
-    "name": "VULTURE",
+    "name": "Vulture",
     "variant": "MDD-S",
     "tonnageMax": 60.0,
     "baseTonnage": 20.9,
@@ -62309,7 +62309,7 @@
   },
   {
     "id": "MDD-V",
-    "name": "VULTURE",
+    "name": "Vulture",
     "variant": "MDD-V",
     "tonnageMax": 60.0,
     "baseTonnage": 20.9,
@@ -62368,7 +62368,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -62392,7 +62392,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -62460,7 +62460,7 @@
   },
   {
     "id": "MLX-A",
-    "name": "KOSHI",
+    "name": "Koshi",
     "variant": "MLX-A",
     "tonnageMax": 25.0,
     "baseTonnage": 6.99,
@@ -62511,7 +62511,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -62539,7 +62539,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -62611,7 +62611,7 @@
   },
   {
     "id": "MLX-B",
-    "name": "KOSHI",
+    "name": "Koshi",
     "variant": "MLX-B",
     "tonnageMax": 25.0,
     "baseTonnage": 6.99,
@@ -62662,7 +62662,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -62681,7 +62681,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -62753,7 +62753,7 @@
   },
   {
     "id": "MLX-C",
-    "name": "KOSHI",
+    "name": "Koshi",
     "variant": "MLX-C",
     "tonnageMax": 25.0,
     "baseTonnage": 6.99,
@@ -62804,7 +62804,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {
@@ -62826,7 +62826,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -62894,7 +62894,7 @@
   },
   {
     "id": "MLX-D",
-    "name": "KOSHI",
+    "name": "Koshi",
     "variant": "MLX-D",
     "tonnageMax": 25.0,
     "baseTonnage": 6.99,
@@ -62945,7 +62945,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {
@@ -62962,7 +62962,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -63030,7 +63030,7 @@
   },
   {
     "id": "MLX-PRIME",
-    "name": "KOSHI",
+    "name": "Koshi",
     "variant": "MLX-PRIME",
     "tonnageMax": 25.0,
     "baseTonnage": 6.99,
@@ -63081,7 +63081,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -63101,7 +63101,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -63173,7 +63173,7 @@
   },
   {
     "id": "MLX-P",
-    "name": "KOSHI",
+    "name": "Koshi",
     "variant": "MLX-P",
     "tonnageMax": 25.0,
     "baseTonnage": 6.99,
@@ -63233,7 +63233,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -63269,7 +63269,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -64079,7 +64079,7 @@
   },
   {
     "id": "NGA-II-A",
-    "name": "NAGA",
+    "name": "Naga",
     "variant": "NGA-II-A",
     "tonnageMax": 80.0,
     "baseTonnage": 37.5,
@@ -64226,7 +64226,7 @@
   },
   {
     "id": "NGA-II-B",
-    "name": "NAGA",
+    "name": "Naga",
     "variant": "NGA-II-B",
     "tonnageMax": 80.0,
     "baseTonnage": 37.5,
@@ -64377,7 +64377,7 @@
   },
   {
     "id": "NGA-II-PRIME",
-    "name": "NAGA",
+    "name": "Naga",
     "variant": "NGA-II-PRIME",
     "tonnageMax": 80.0,
     "baseTonnage": 37.5,
@@ -64520,7 +64520,7 @@
   },
   {
     "id": "NGA-PRIME",
-    "name": "NAGA",
+    "name": "Naga",
     "variant": "NGA-PRIME",
     "tonnageMax": 80.0,
     "baseTonnage": 37.5,
@@ -66002,7 +66002,7 @@
   },
   {
     "id": "NVA-A",
-    "name": "BLACK HAWK",
+    "name": "Black Hawk",
     "variant": "NVA-A",
     "tonnageMax": 50.0,
     "baseTonnage": 18.5,
@@ -66065,7 +66065,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66085,7 +66085,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66148,7 +66148,7 @@
   },
   {
     "id": "NVA-B",
-    "name": "BLACK HAWK",
+    "name": "Black Hawk",
     "variant": "NVA-B",
     "tonnageMax": 50.0,
     "baseTonnage": 18.5,
@@ -66211,7 +66211,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66231,7 +66231,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66294,7 +66294,7 @@
   },
   {
     "id": "NVA-C",
-    "name": "BLACK HAWK",
+    "name": "Black Hawk",
     "variant": "NVA-C",
     "tonnageMax": 50.0,
     "baseTonnage": 18.5,
@@ -66353,7 +66353,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66368,7 +66368,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66432,7 +66432,7 @@
   },
   {
     "id": "NVA-D",
-    "name": "BLACK HAWK",
+    "name": "Black Hawk",
     "variant": "NVA-D",
     "tonnageMax": 50.0,
     "baseTonnage": 18.5,
@@ -66481,7 +66481,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66496,7 +66496,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66559,7 +66559,7 @@
   },
   {
     "id": "NVA-PRIME",
-    "name": "BLACK HAWK",
+    "name": "Black Hawk",
     "variant": "NVA-PRIME",
     "tonnageMax": 50.0,
     "baseTonnage": 18.5,
@@ -66608,7 +66608,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66648,7 +66648,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66736,7 +66736,7 @@
   },
   {
     "id": "NVA-S",
-    "name": "BLACK HAWK",
+    "name": "Black Hawk",
     "variant": "NVA-S",
     "tonnageMax": 50.0,
     "baseTonnage": 18.5,
@@ -66808,7 +66808,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -66836,7 +66836,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -67708,7 +67708,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -67732,7 +67732,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -68635,7 +68635,7 @@
       "yaw": 90.0,
       "pitch": 56.25
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 5,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIlBSUy1QMUIiLFsxOCwwLDcyLDE4LDQ4LDE2LDQ4LDE2LDQyLDAsNDIsMCw2NCwwLDY0LDBdLFtbWyJBbnRpTWlzc2lsZVN5c3RlbSIsMF1dLFsiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayJdLFtbIkxhcmdlTGFzZXIiLDBdXSxbIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiLCJHYXVzc19TdGFuZGFyZF9BbW1vRXF1aXBtZW50Il0sW1siTGFyZ2VQdWxzZUxhc2VyIiwwXSxbIkxhcmdlUHVsc2VMYXNlciIsMV1dLFtbIkdhdXNzUmlmbGUiLDBdXSxbIkFNU19BbW1vRXF1aXBtZW50IiwiQU1TX0FtbW9FcXVpcG1lbnQiXSxbXV1d",
@@ -68799,7 +68799,7 @@
       "yaw": 90.0,
       "pitch": 56.25
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 5,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIlBSUy1QMSIsWzE4LDAsNzIsMTgsNDgsMTYsNDgsMTYsNDIsMCw0MiwwLDY0LDAsNjQsMF0sW1tbIkVSU21hbGxMYXNlciIsMF1dLFtbIlNSTTRfQXJ0ZW1pcyIsMF0sIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiXSxbWyJFUk1lZGl1bUxhc2VyIiwwXSxbIkVSTWVkaXVtTGFzZXIiLDFdLCJTUk1fQXJ0ZW1pc19BbW1vRXF1aXBtZW50IiwiRG91YmxlSGVhdFNpbmsiXSxbWyJFUk1lZGl1bUxhc2VyIiwwXSxbIkVSTWVkaXVtTGFzZXIiLDFdLCJBQzEwX1VsdHJhX0FtbW9FcXVpcG1lbnQiLCJBQzEwX1VsdHJhX0FtbW9FcXVpcG1lbnQiLCJMUk1fQXJ0ZW1pc19BbW1vRXF1aXBtZW50IiwiTFJNX0FydGVtaXNfQW1tb0VxdWlwbWVudCJdLFtbIkxSTTIwX0FydGVtaXMiLDBdLFsiTWVkaXVtUHVsc2VMYXNlciIsMV1dLFtbIlVsdHJhQXV0b2Nhbm5vbjEwX1NpbmdsZSIsMF1dLFtdLFtdXV0",
@@ -73264,7 +73264,7 @@
   },
   {
     "id": "SCR-A",
-    "name": "RYOKEN",
+    "name": "Ryoken",
     "variant": "SCR-A",
     "tonnageMax": 55.0,
     "baseTonnage": 21.85,
@@ -73321,7 +73321,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -73353,7 +73353,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -73417,7 +73417,7 @@
   },
   {
     "id": "SCR-C",
-    "name": "RYOKEN",
+    "name": "Ryoken",
     "variant": "SCR-C",
     "tonnageMax": 55.0,
     "baseTonnage": 21.85,
@@ -73474,7 +73474,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -73494,7 +73494,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -73558,7 +73558,7 @@
   },
   {
     "id": "SCR-D",
-    "name": "RYOKEN",
+    "name": "Ryoken",
     "variant": "SCR-D",
     "tonnageMax": 55.0,
     "baseTonnage": 21.85,
@@ -73619,7 +73619,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -73639,7 +73639,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -73703,7 +73703,7 @@
   },
   {
     "id": "SCR-PRIME",
-    "name": "RYOKEN",
+    "name": "Ryoken",
     "variant": "SCR-PRIME",
     "tonnageMax": 55.0,
     "baseTonnage": 21.85,
@@ -73755,7 +73755,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -73779,7 +73779,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -73847,7 +73847,7 @@
   },
   {
     "id": "SCR-B",
-    "name": "RYOKEN",
+    "name": "Ryoken",
     "variant": "SCR-B",
     "tonnageMax": 55.0,
     "baseTonnage": 21.85,
@@ -73894,7 +73894,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 0,
+        "maxSlots": 1,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -73914,7 +73914,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 1,
+        "maxSlots": 2,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75302,7 +75302,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75326,7 +75326,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75393,7 +75393,7 @@
   },
   {
     "id": "SHC-A",
-    "name": "SHADOW CAT",
+    "name": "Shadow Cat",
     "variant": "SHC-A",
     "tonnageMax": 45.0,
     "baseTonnage": 15.4,
@@ -75451,7 +75451,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75466,7 +75466,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75529,7 +75529,7 @@
   },
   {
     "id": "SHC-B",
-    "name": "SHADOW CAT",
+    "name": "Shadow Cat",
     "variant": "SHC-B",
     "tonnageMax": 45.0,
     "baseTonnage": 15.4,
@@ -75584,7 +75584,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75603,7 +75603,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 3,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75670,7 +75670,7 @@
   },
   {
     "id": "SHC-M",
-    "name": "SHADOW CAT",
+    "name": "Shadow Cat",
     "variant": "SHC-M",
     "tonnageMax": 45.0,
     "baseTonnage": 15.4,
@@ -75733,7 +75733,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75748,7 +75748,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75811,7 +75811,7 @@
   },
   {
     "id": "SHC-PRIME",
-    "name": "SHADOW CAT",
+    "name": "Shadow Cat",
     "variant": "SHC-PRIME",
     "tonnageMax": 45.0,
     "baseTonnage": 15.4,
@@ -75869,7 +75869,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75889,7 +75889,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -75952,7 +75952,7 @@
   },
   {
     "id": "SHC-P",
-    "name": "SHADOW CAT",
+    "name": "Shadow Cat",
     "variant": "SHC-P",
     "tonnageMax": 45.0,
     "baseTonnage": 15.4,
@@ -76018,7 +76018,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -76041,7 +76041,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -77391,7 +77391,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -77411,7 +77411,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -77550,7 +77550,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -77570,7 +77570,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -77700,7 +77700,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -77720,7 +77720,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -77866,7 +77866,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -77882,7 +77882,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -78022,7 +78022,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -78042,7 +78042,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -78106,7 +78106,7 @@
   },
   {
     "id": "SMN-B",
-    "name": "THOR",
+    "name": "Thor",
     "variant": "SMN-B",
     "tonnageMax": 70.0,
     "baseTonnage": 28.34,
@@ -78261,7 +78261,7 @@
   },
   {
     "id": "SMN-C",
-    "name": "THOR",
+    "name": "Thor",
     "variant": "SMN-C",
     "tonnageMax": 70.0,
     "baseTonnage": 28.34,
@@ -78408,7 +78408,7 @@
   },
   {
     "id": "SMN-D",
-    "name": "THOR",
+    "name": "Thor",
     "variant": "SMN-D",
     "tonnageMax": 70.0,
     "baseTonnage": 28.34,
@@ -78572,7 +78572,7 @@
   },
   {
     "id": "SMN-F",
-    "name": "THOR",
+    "name": "Thor",
     "variant": "SMN-F",
     "tonnageMax": 70.0,
     "baseTonnage": 28.34,
@@ -78728,7 +78728,7 @@
   },
   {
     "id": "SMN-M",
-    "name": "THOR",
+    "name": "Thor",
     "variant": "SMN-M",
     "tonnageMax": 70.0,
     "baseTonnage": 28.34,
@@ -78875,7 +78875,7 @@
   },
   {
     "id": "SMN-PRIME",
-    "name": "THOR",
+    "name": "Thor",
     "variant": "SMN-PRIME",
     "tonnageMax": 70.0,
     "baseTonnage": 28.34,
@@ -79811,7 +79811,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -79831,7 +79831,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -79974,7 +79974,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -79994,7 +79994,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -80045,7 +80045,7 @@
   },
   {
     "id": "SR-1",
-    "name": "Stone Rhino",
+    "name": "Behemoth",
     "variant": "SR-1",
     "tonnageMax": 100.0,
     "baseTonnage": 35.0,
@@ -80124,7 +80124,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -80144,7 +80144,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -80198,7 +80198,7 @@
   },
   {
     "id": "SR-2",
-    "name": "Stone Rhino",
+    "name": "Behemoth",
     "variant": "SR-2",
     "tonnageMax": 100.0,
     "baseTonnage": 25.5,
@@ -80293,7 +80293,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -80321,7 +80321,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -80375,7 +80375,7 @@
   },
   {
     "id": "SR-4",
-    "name": "Stone Rhino",
+    "name": "Behemoth",
     "variant": "SR-4",
     "tonnageMax": 100.0,
     "baseTonnage": 25.5,
@@ -80451,7 +80451,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 0,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -80478,7 +80478,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 0,
+        "maxSlots": 4,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -80547,13 +80547,13 @@
     "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "Clan",
-    "stockBuild": "WzEsIlNSLTQiLFsxOCwwLDc0LDI4LDQ2LDIyLDQ2LDIyLDYyLDAsNjIsMCw3NCwwLDc0LDBdLFtbXSxbIkp1bXBKZXRfQ2xhc3MxX0VxdWlwbWVudCIsIlNpbmdsZUhlYXRTaW5rIiwiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdLFtbIkMtVWx0cmFBdXRvY2Fubm9uMTBfQnVyc3RGaXJlIiwwXSxbIkMtTFJNMTAiLDFdLFsiQy1MUk0xMCIsMl0sIkNsYW5fTFJNX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0xSTV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9BQzEwX1VsdHJhX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0FDMTBfVWx0cmFfQW1tb0VxdWlwbWVudCJdLFtbIkMtVWx0cmFBdXRvY2Fubm9uMTBfQnVyc3RGaXJlIiwwXSxbIkMtTFJNMTAiLDFdLFsiQy1MUk0xMCIsMl0sIkNsYW5fTFJNX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0xSTV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9BQzEwX1VsdHJhX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0FDMTBfVWx0cmFfQW1tb0VxdWlwbWVudCJdLFtbIkMtRVJNZWRpdW1MYXNlciIsMF0sWyJDLUVSTWVkaXVtTGFzZXIiLDFdLFsiQy1NYWNoaW5lR3VuIiwyXSxbIkMtTWFjaGluZUd1biIsM11dLFtbIkMtRVJNZWRpdW1MYXNlciIsMF0sWyJDLUVSTWVkaXVtTGFzZXIiLDFdLFsiQy1NYWNoaW5lR3VuIiwyXSxbIkMtTWFjaGluZUd1biIsM11dLFsiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50IiwiU2luZ2xlSGVhdFNpbmsiXSxbIkp1bXBKZXRfQ2xhc3MxX0VxdWlwbWVudCIsIlNpbmdsZUhlYXRTaW5rIl1dXQ",
+    "stockBuild": "WzEsIlNSLTQiLFsxOCwwLDc0LDI4LDQ2LDIyLDQ2LDIyLDYyLDAsNjIsMCw3NCwwLDc0LDBdLFtbXSxbIkp1bXBKZXRfQ2xhc3MxX0VxdWlwbWVudCIsIlNpbmdsZUhlYXRTaW5rIiwiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdLFtbIkMtVWx0cmFBdXRvY2Fubm9uMTBfQnVyc3RGaXJlIiwwXSxbIkMtTFJNMTAiLDFdLFsiQy1MUk0xMCIsMl0sIkNsYW5fTFJNX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0xSTV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9BQzEwX1VsdHJhX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0FDMTBfVWx0cmFfQW1tb0VxdWlwbWVudCJdLFtbIkMtVWx0cmFBdXRvY2Fubm9uMTBfQnVyc3RGaXJlIiwwXSxbIkMtTFJNMTAiLDFdLFsiQy1MUk0xMCIsMl0sIkNsYW5fTFJNX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0xSTV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9BQzEwX1VsdHJhX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0FDMTBfVWx0cmFfQW1tb0VxdWlwbWVudCJdLFtbIkMtRVJNZWRpdW1MYXNlciIsMF0sWyJDLUVSTWVkaXVtTGFzZXIiLDFdLFsiQy1NYWNoaW5lR3VuIiwyXSxbIkMtTWFjaGluZUd1biIsM10sIlNpbmdsZUhlYXRTaW5rIiwiQ2xhbl9NYWNoaW5lR3VuX0FtbW9FcXVpcG1lbnQiXSxbWyJDLUVSTWVkaXVtTGFzZXIiLDBdLFsiQy1FUk1lZGl1bUxhc2VyIiwxXSxbIkMtTWFjaGluZUd1biIsMl0sWyJDLU1hY2hpbmVHdW4iLDNdLCJTaW5nbGVIZWF0U2luayIsIkNsYW5fTWFjaGluZUd1bl9BbW1vRXF1aXBtZW50Il0sWyJKdW1wSmV0X0NsYXNzMV9FcXVpcG1lbnQiLCJTaW5nbGVIZWF0U2luayJdLFsiSnVtcEpldF9DbGFzczFfRXF1aXBtZW50IiwiU2luZ2xlSGVhdFNpbmsiXV1d",
     "introYear": 2846,
     "role": "Juggernaut"
   },
   {
     "id": "SR-5",
-    "name": "Stone Rhino",
+    "name": "Behemoth",
     "variant": "SR-5",
     "tonnageMax": 100.0,
     "baseTonnage": 43.5,
@@ -80642,7 +80642,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -80670,7 +80670,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -80720,7 +80720,7 @@
   },
   {
     "id": "SR-6",
-    "name": "Stone Rhino",
+    "name": "Behemoth",
     "variant": "SR-6",
     "tonnageMax": 100.0,
     "baseTonnage": 42.299999,
@@ -81789,7 +81789,7 @@
   },
   {
     "id": "TBR-A",
-    "name": "MAD CAT",
+    "name": "Mad Cat",
     "variant": "TBR-A",
     "tonnageMax": 75.0,
     "baseTonnage": 29.5,
@@ -81861,7 +81861,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -81876,7 +81876,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -81935,7 +81935,7 @@
   },
   {
     "id": "TBR-C",
-    "name": "MAD CAT",
+    "name": "Mad Cat",
     "variant": "TBR-C",
     "tonnageMax": 75.0,
     "baseTonnage": 29.5,
@@ -82003,7 +82003,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -82022,7 +82022,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -82081,7 +82081,7 @@
   },
   {
     "id": "TBR-D",
-    "name": "MAD CAT",
+    "name": "Mad Cat",
     "variant": "TBR-D",
     "tonnageMax": 75.0,
     "baseTonnage": 29.5,
@@ -82153,7 +82153,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -82168,7 +82168,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -82227,7 +82227,7 @@
   },
   {
     "id": "TBR-PRIME",
-    "name": "MAD CAT",
+    "name": "Mad Cat",
     "variant": "TBR-PRIME",
     "tonnageMax": 75.0,
     "baseTonnage": 29.5,
@@ -82299,7 +82299,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -82318,7 +82318,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -82381,7 +82381,7 @@
   },
   {
     "id": "TBR-S",
-    "name": "MAD CAT",
+    "name": "Mad Cat",
     "variant": "TBR-S",
     "tonnageMax": 75.0,
     "baseTonnage": 29.5,
@@ -82461,7 +82461,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -82476,7 +82476,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -84911,7 +84911,7 @@
         "hardpoints": []
       }
     },
-    "BaseCoolingRate": 0.24,
+    "BaseCoolingRate": 1.0,
     "sarnaName": "UrbanMech",
     "armorType": "standard",
     "heatSinkType": "single",
@@ -86243,7 +86243,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 8,
+        "maxSlots": 9,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -86259,7 +86259,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 7,
+        "maxSlots": 8,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -87348,7 +87348,7 @@
       "yaw": 103.5,
       "pitch": 64.69
     },
-    "baseHeatCapacity": 37.200001,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 8,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIlZORC01TCIsWzE4LDAsNDAsMTQsMzIsMTIsMzIsMTIsMjgsMCwyOCwwLDM2LDAsMzYsMF0sW1tdLFsiSnVtcEpldF9DbGFzczRfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczRfRXF1aXBtZW50Il0sW1siTWVkaXVtTGFzZXIiLDBdLFsiU21hbGxMYXNlciIsMV0sWyJNZWRpdW1QdWxzZUxhc2VyIiwyXSwiRG91YmxlSGVhdFNpbmsiXSxbWyJNZWRpdW1MYXNlciIsMF0sWyJTbWFsbFB1bHNlTGFzZXIiLDFdLFsiTWVkaXVtUHVsc2VMYXNlciIsMl0sIkRvdWJsZUhlYXRTaW5rIl0sW1siSGF0Y2hldF9NZWRpdW0iLDBdXSxbWyJFUlBQQyIsMF0sIkRvdWJsZUhlYXRTaW5rIl0sWyJKdW1wSmV0X0NsYXNzNF9FcXVpcG1lbnQiXSxbIkp1bXBKZXRfQ2xhc3M0X0VxdWlwbWVudCJdXV0",
@@ -87357,7 +87357,7 @@
   },
   {
     "id": "VPR-A",
-    "name": "DRAGONFLY",
+    "name": "Dragonfly",
     "variant": "VPR-A",
     "tonnageMax": 40.0,
     "baseTonnage": 20.02,
@@ -87426,7 +87426,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -87441,7 +87441,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 6,
+        "maxSlots": 7,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -87509,7 +87509,7 @@
   },
   {
     "id": "VPR-B",
-    "name": "DRAGONFLY",
+    "name": "Dragonfly",
     "variant": "VPR-B",
     "tonnageMax": 40.0,
     "baseTonnage": 20.02,
@@ -87570,7 +87570,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -87590,7 +87590,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -87658,7 +87658,7 @@
   },
   {
     "id": "VPR-C",
-    "name": "DRAGONFLY",
+    "name": "Dragonfly",
     "variant": "VPR-C",
     "tonnageMax": 40.0,
     "baseTonnage": 20.02,
@@ -87732,7 +87732,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -87756,7 +87756,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -87828,7 +87828,7 @@
   },
   {
     "id": "VPR-D",
-    "name": "DRAGONFLY",
+    "name": "Dragonfly",
     "variant": "VPR-D",
     "tonnageMax": 40.0,
     "baseTonnage": 20.02,
@@ -87889,7 +87889,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -87909,7 +87909,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -87981,7 +87981,7 @@
   },
   {
     "id": "VPR-PRIME",
-    "name": "DRAGONFLY",
+    "name": "Dragonfly",
     "variant": "VPR-PRIME",
     "tonnageMax": 40.0,
     "baseTonnage": 20.02,
@@ -88046,7 +88046,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -88061,7 +88061,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -88133,7 +88133,7 @@
   },
   {
     "id": "VPR-P",
-    "name": "DRAGONFLY",
+    "name": "Dragonfly",
     "variant": "VPR-P",
     "tonnageMax": 40.0,
     "baseTonnage": 20.02,
@@ -88199,7 +88199,7 @@
         ]
       },
       "leftArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -88226,7 +88226,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 5,
+        "maxSlots": 6,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -88438,7 +88438,7 @@
       "yaw": 189.0,
       "pitch": 118.13
     },
-    "baseHeatCapacity": 39.599998,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 7,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIlZULTVNIixbMTYsMCwyMCwxMiwxNiw4LDE2LDgsMTIsMCwxMiwwLDIwLDAsMjAsMF0sW1tdLFsiSnVtcEpldF9DbGFzczRfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczRfRXF1aXBtZW50Il0sW1siTWVkaXVtUHVsc2VMYXNlciIsMF0sIkp1bXBKZXRfQ2xhc3M0X0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3M0X0VxdWlwbWVudCIsIk1hY2hpbmVHdW5fU3RhbmRhcmRfQW1tb0VxdWlwbWVudCJdLFtbIkxhcmdlUHVsc2VMYXNlciIsMF0sIkp1bXBKZXRfQ2xhc3M0X0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3M0X0VxdWlwbWVudCJdLFtbIk1hY2hpbmVHdW4iLDBdLCJEb3VibGVIZWF0U2luayJdLFtbIkZsYW1lciIsMF0sIkRvdWJsZUhlYXRTaW5rIl0sW10sW11dXQ",
@@ -88585,7 +88585,7 @@
       "yaw": 189.0,
       "pitch": 118.13
     },
-    "baseHeatCapacity": 39.599998,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 7,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIlZULTVTIixbMTYsMCwyMSwxMCwyMCwxMCwyMCwxMCwxMiwwLDEyLDAsMjQsMCwyNCwwXSxbW10sWyJKdW1wSmV0X0NsYXNzNF9FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzNF9FcXVpcG1lbnQiXSxbWyJNZWRpdW1MYXNlciIsMF0sIkp1bXBKZXRfQ2xhc3M0X0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3M0X0VxdWlwbWVudCIsIk1BU0NfTUtJSSIsIk1hY2hpbmVHdW5fU3RhbmRhcmRfQW1tb0VxdWlwbWVudCIsIkFDNV9VbHRyYV9IYWxmX0FtbW9FcXVpcG1lbnQiLCJTaW5nbGVIZWF0U2luayJdLFtbIlVsdHJhQXV0b2Nhbm5vbjUiLDBdLCJKdW1wSmV0X0NsYXNzNF9FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzNF9FcXVpcG1lbnQiLCJBQzVfVWx0cmFfQW1tb0VxdWlwbWVudCJdLFtbIk1hY2hpbmVHdW4iLDBdXSxbWyJGbGFtZXIiLDBdXSxbXSxbXV1d",
@@ -88905,7 +88905,7 @@
       "yaw": 99.0,
       "pitch": 61.88
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIlZUUi05Qi1MSSIsWzE4LDAsNjAsMzAsNDAsMjAsNDAsMjAsMzAsMCwzMCwwLDQwLDAsNDAsMF0sW1tdLFsiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayIsIkp1bXBKZXRfQ2xhc3MyX0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3MyX0VxdWlwbWVudCJdLFtbIkxSTTE1IiwwXSwiTFJNX0FtbW9FcXVpcG1lbnQiXSxbIlNpbmdsZUhlYXRTaW5rIiwiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayIsIlNpbmdsZUhlYXRTaW5rIiwiU2luZ2xlSGVhdFNpbmsiXSxbXSxbWyJNZWRpdW1MYXNlciIsMF0sWyJNZWRpdW1MYXNlciIsMV0sWyJNZWRpdW1MYXNlciIsMl0sWyJNZWRpdW1MYXNlciIsM10sWyJNZWRpdW1MYXNlciIsNF0sWyJNZWRpdW1MYXNlciIsNV0sWyJNZWRpdW1MYXNlciIsNl0sWyJNZWRpdW1MYXNlciIsN10sWyJNZWRpdW1MYXNlciIsOF0sWyJNZWRpdW1MYXNlciIsOV1dLFsiU2luZ2xlSGVhdFNpbmsiLCJKdW1wSmV0X0NsYXNzMl9FcXVpcG1lbnQiXSxbIlNpbmdsZUhlYXRTaW5rIiwiSnVtcEpldF9DbGFzczJfRXF1aXBtZW50Il1dXQ",
@@ -89928,7 +89928,7 @@
   },
   {
     "id": "WHK-A",
-    "name": "MASAKARI",
+    "name": "Masakari",
     "variant": "WHK-A",
     "tonnageMax": 85.0,
     "baseTonnage": 28.040001,
@@ -90074,7 +90074,7 @@
   },
   {
     "id": "WHK-B",
-    "name": "MASAKARI",
+    "name": "Masakari",
     "variant": "WHK-B",
     "tonnageMax": 85.0,
     "baseTonnage": 28.040001,
@@ -90233,7 +90233,7 @@
   },
   {
     "id": "WHK-C",
-    "name": "MASAKARI",
+    "name": "Masakari",
     "variant": "WHK-C",
     "tonnageMax": 85.0,
     "baseTonnage": 28.040001,
@@ -90379,7 +90379,7 @@
   },
   {
     "id": "WHK-PRIME",
-    "name": "MASAKARI",
+    "name": "Masakari",
     "variant": "WHK-PRIME",
     "tonnageMax": 85.0,
     "baseTonnage": 28.040001,
@@ -91463,7 +91463,7 @@
       "yaw": 81.0,
       "pitch": 50.63
     },
-    "baseHeatCapacity": 40.0,
+    "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "InnerSphere",
     "stockBuild": "WzEsIldITS03UyIsWzE4LDAsNDQsMTgsMzQsMTYsMzQsMTYsNDAsMCw0MCwwLDMwLDAsMzAsMF0sW1tdLFsiRG91YmxlSGVhdFNpbmsiLCJTUk1fU3RyZWFrX0FtbW9FcXVpcG1lbnQiXSxbWyJNZWRpdW1QdWxzZUxhc2VyIiwwXSxbIlNtYWxsTGFzZXIiLDFdLFsiU3RyZWFrU1JNMiIsMl0sIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayJdLFtbIk1lZGl1bVB1bHNlTGFzZXIiLDBdLFsiU21hbGxMYXNlciIsMV0sWyJTdHJlYWtTUk0yIiwyXSwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayIsIkRvdWJsZUhlYXRTaW5rIl0sW1siRVJQUEMiLDBdXSxbWyJFUlBQQyIsMF0sIkRvdWJsZUhlYXRTaW5rIl0sW10sW11dXQ",
@@ -91863,7 +91863,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -91883,7 +91883,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -92023,7 +92023,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -92043,7 +92043,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -92180,7 +92180,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -92200,7 +92200,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -92341,7 +92341,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -92361,7 +92361,7 @@
           },
           {
             "type": "melee",
-            "size": "medium",
+            "size": "small",
             "weightClass": "assault"
           }
         ]
@@ -95127,7 +95127,7 @@
         "hardpoints": []
       },
       "leftArm": {
-        "maxSlots": 4,
+        "maxSlots": 5,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},
@@ -95147,7 +95147,7 @@
         ]
       },
       "rightArm": {
-        "maxSlots": 2,
+        "maxSlots": 3,
         "jumpJetSlots": 0,
         "engineHeatsinkSlots": 0,
         "specialSlots": {},

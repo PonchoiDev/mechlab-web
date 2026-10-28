@@ -1,4 +1,5 @@
 import base64
+import csv
 import json
 import os
 import re
@@ -11,6 +12,9 @@ RUTA_UNIT_CARDS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "unitcard")
 RUTA_MODELOS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "mdl")
 RUTA_ANCLAJES = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "hps")
 RUTA_ITEMS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "items")
+# Tabla de textos del juego exportada a CSV desde el editor (Mech_StringTable): los archivos nuevos
+# solo traen la clave del nombre del chasis, no el texto.
+RUTA_TEXTOS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "mech_string_table")
 RUTA_ITEMS_JSON = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "items.json")
 RUTA_DESTINO_POR_DEFECTO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "mechs.json")
 
@@ -21,7 +25,14 @@ REGEX_CHASIS = re.compile(r'ChassisFullName\s*=\s*INVTEXT\("([^"]+)"\)', re.IGNO
 # Los archivos más recientes no traen el texto, sino una clave de la tabla de textos del juego:
 # VariantName=LOCTABLE(..., "Mech_Warhammer_WHM-7S_VariantName") y ChassisFullName=LOCTABLE(..., "Mech_Warhammer_ChassisName").
 REGEX_VARIANTE_LOCTABLE = re.compile(r'VariantName\s*=\s*LOCTABLE\(', re.IGNORECASE)
+REGEX_CLAVE_CHASIS = re.compile(r'ChassisFullName\s*=\s*LOCTABLE\("[^"]*",\s*"([^"]+)"\)', re.IGNORECASE)
 REGEX_CHASIS_LOCTABLE = re.compile(r'ChassisFullName\s*=\s*LOCTABLE\("[^"]*",\s*"Mech_(.+?)_ChassisName"\)', re.IGNORECASE)
+# La clave de texto de la variante la nombra siempre bien, también cuando la etiqueta del mech es la
+# del chasis base (los Timber Wolf A, C, D y S dicen TBR-PRIME) o la de un campeón (ArcherC).
+REGEX_VARIANTE_CLAVE = re.compile(r'VariantName\s*=\s*LOCTABLE\([^,]+,\s*"Mech_[A-Za-z0-9]+_(.+?)_VariantName"\)', re.IGNORECASE)
+# Los campeones se llamaban "ARC-2R (C)" con el formato anterior; se mantiene ese id para no romper
+# los enlaces y las builds guardadas.
+REGEX_SUFIJO_CAMPEON = re.compile(r'-(C2?)$')
 REGEX_MECH_TYPE_NAME = re.compile(r'MechType=\(TagName="Mech\.[^.]+\.([^.\"]+)', re.IGNORECASE)
 REGEX_TECH_BASE = re.compile(r'TechBase=\(TagName="TechBase\.([^.\"]+)', re.IGNORECASE)
 
@@ -99,21 +110,12 @@ def buscar_numero(regex, contenido, por_defecto):
     return float(coincidencia.group(1)) if coincidencia else por_defecto
 
 
-# Disipación de calor base cambiada por un parche del juego que todavía no recogen los archivos
-# exportados. Se aplica por encima del BaseCoolingRate del archivo; el HTM-SG aparece en las notas
-# del parche como HTM-SH.
-REFRIGERACION_PARCHEADA = {
-    **dict.fromkeys([
-        "ARC-5S", "BJ2-O", "CDA-3F", "CN9-D3D", "CRD-6T", "CTF-3D", "CTF-3L", "DV-7P", "ENF-5D",
-        "HBK-6S", "HTM-SG", "KGC-A", "LCT-3M", "LGB-OC", "NSR-10P", "NSR-9FC", "NSR-WP", "PRS-P1",
-        "PRS-P1B", "PXH-R", "VT-5M", "VT-5S", "VTR-9B-LI", "WHM-7S", "ZEU-9S2"
-    ], 2.0),
-    "AWS-9Q": 1.8,
-    **dict.fromkeys(["JVN-11A", "JVN-11B", "VND-5L"], 1.4),
-}
-
-
 def obtener_variante(contenido):
+    clave = buscar_texto(REGEX_VARIANTE_CLAVE, contenido)
+    if clave:
+        etiqueta = buscar_texto(REGEX_TAGNAME, contenido) or ""
+        es_campeon = re.fullmatch(r'[A-Za-z]+C2?', etiqueta) is not None
+        return REGEX_SUFIJO_CAMPEON.sub(r' (\1)', clave) if es_campeon else clave
     # Con LOCTABLE, KeyName apunta a la variante de la que hereda el archivo; la etiqueta del mech
     # (Mech.Heavy.Warhammer.WHM-7S) es la que lleva la variante real.
     orden = (REGEX_TAGNAME, REGEX_KEYNAME) if REGEX_VARIANTE_LOCTABLE.search(contenido) else (REGEX_KEYNAME, REGEX_TAGNAME)
@@ -284,7 +286,11 @@ def obtener_hardpoints(contenido, clase_de_peso, tamanos_anclajes=None):
             if not parte or not tipo:
                 continue
             if tipo == "melee":
-                hardpoints[parte].append(obtener_anclaje_cuerpo_a_cuerpo(hp, contenido, clase_de_peso))
+                anclaje = obtener_anclaje_cuerpo_a_cuerpo(hp, contenido, clase_de_peso)
+                # El HPS dice si es antebrazo, mano o brazo de arma; los actuadores del MDA no siempre
+                # coinciden (los Omni Clan los listan todos y en el juego son antebrazo).
+                anclaje["size"] = tamanos_anclajes.get(hp.lower()) or anclaje["size"]
+                hardpoints[parte].append(anclaje)
             else:
                 hardpoints[parte].append({"type": tipo, "size": tamanos_anclajes.get(hp.lower()) or obtener_tamano_arma(hp)})
     return hardpoints
@@ -313,7 +319,18 @@ def cargar_tamanos_de_ranuras():
     return tamanos
 
 
+# Anclajes cuerpo a cuerpo: S antebrazo, M mano o puño especial, L brazo de arma.
+TAMANOS_CUERPO_A_CUERPO = (
+    ("meleelowerarmactuator", "small"),
+    ("_melee_weapon_", "large"),
+    ("melee", "medium"),
+)
+
+
 def tamano_de_ranura(ranura, tamanos_de_ranuras):
+    for marca, tamano in TAMANOS_CUERPO_A_CUERPO:
+        if marca in ranura.lower():
+            return tamano
     # Ranuras genéricas: Missile_Large_SlotType, Omni_MediumReduced_SlotType; XS es extra pequeña.
     generica = REGEX_RANURA_GENERICA.match(ranura)
     if generica:
@@ -402,8 +419,27 @@ def separar_palabras(clave):
     return re.sub(r'(?<=[a-z0-9])(?=[A-Z])', ' ', clave.replace('_', ' ')).strip()
 
 
-def obtener_chasis(contenido, variante):
+def cargar_textos():
+    # Clave -> texto de las tablas de textos exportadas a CSV (Key, SourceString).
+    textos = {}
+    if not os.path.isdir(RUTA_TEXTOS):
+        return textos
+    # El editor la exporta en UTF-16; leer_archivo detecta la codificación. Los archivos sin la
+    # cabecera Key,SourceString (una copia vacía del asset, por ejemplo) se ignoran.
+    for archivo in sorted(os.listdir(RUTA_TEXTOS)):
+        lineas = leer_archivo(os.path.join(RUTA_TEXTOS, archivo)).lstrip("\ufeff").splitlines()
+        for fila in csv.DictReader(lineas):
+            clave, texto = fila.get("Key"), fila.get("SourceString")
+            if clave and texto:
+                textos[clave] = texto.strip()
+    return textos
+
+
+def obtener_chasis(contenido, variante, textos=None):
     chasis = buscar_texto(REGEX_CHASIS, contenido)
+    if chasis:
+        return chasis
+    chasis = (textos or {}).get(buscar_texto(REGEX_CLAVE_CHASIS, contenido) or "")
     if chasis:
         return chasis
     clave = buscar_texto(REGEX_CHASIS_LOCTABLE, contenido)
@@ -421,10 +457,10 @@ def obtener_potencia_motor(contenido, velocidad_raw, tonelaje):
     return potencias[0] if potencias else 0
 
 
-def parsear_mech(contenido, variante, tamanos_anclajes=None):
-    chasis = obtener_chasis(contenido, variante)
+def parsear_mech(contenido, variante, tamanos_anclajes=None, textos=None):
+    chasis = obtener_chasis(contenido, variante, textos)
     tech_base = buscar_texto(REGEX_TECH_BASE, contenido)
-    refrigeracion_base = REFRIGERACION_PARCHEADA.get(variante, buscar_numero(REGEX_BASE_COOLING_RATE, contenido, None))
+    refrigeracion_base = buscar_numero(REGEX_BASE_COOLING_RATE, contenido, None)
     velocidad_raw = buscar_numero(REGEX_SPEED, contenido, 0.0)
     tonelaje = buscar_numero(REGEX_TONS, contenido, 0.0)
 
@@ -671,6 +707,8 @@ def main():
     loadouts = cargar_archivos_por_nombre(RUTA_LOADOUTS)
     unit_cards = cargar_unit_cards(cargar_archivos_por_nombre(RUTA_UNIT_CARDS))
     tamanos_por_modelo = cargar_tamanos_anclajes()
+    textos = cargar_textos()
+    sin_nombre = []
     sin_modelo = []
     avisos_builds = []
     ajustes_fabrica = []
@@ -709,7 +747,9 @@ def main():
             modelo = (buscar_texto(REGEX_MODELO, contenido) or "").lower()
             if modelo not in tamanos_por_modelo:
                 sin_modelo.append(variante)
-            mech = parsear_mech(contenido, variante, tamanos_por_modelo.get(modelo))
+            mech = parsear_mech(contenido, variante, tamanos_por_modelo.get(modelo), textos)
+            if not buscar_texto(REGEX_CHASIS, contenido) and buscar_texto(REGEX_CLAVE_CHASIS, contenido) not in textos:
+                sin_nombre.append(variante)
             if contenido_loadout:
                 ajustar_a_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, ajustes_fabrica, tamanos_por_modelo.get(modelo))
                 mech["stockBuild"] = construir_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, avisos_builds)
@@ -733,6 +773,8 @@ def main():
         print(f"\n⚠️ Variantes sin loadout de fábrica ({len(sin_build)}): {', '.join(sorted(sin_build))}")
     if sin_unit_card:
         print(f"\n⚠️ Variantes sin unit card ({len(sin_unit_card)}): {', '.join(sorted(sin_unit_card))}")
+    if sin_nombre:
+        print(f"\n⚠️ Variantes sin el nombre del chasis en la tabla de textos ({len(sin_nombre)}); se deduce de la clave. Exporta Mech_StringTable a CSV en {RUTA_TEXTOS}")
     if sin_modelo:
         print(f"\n⚠️ Variantes sin modelo (MDL/HPS), con el tamaño de los anclajes deducido del nombre ({len(sin_modelo)}): {', '.join(sorted(sin_modelo))}")
     if ajustes_fabrica:
@@ -743,10 +785,6 @@ def main():
         print(f"\n⚠️ Piezas de las builds de fábrica que se quedan fuera, porque no están en el catálogo o no caben ({len(avisos_builds)}):")
         for aviso in avisos_builds:
             print(f"  - {aviso}")
-
-    sin_archivo = sorted(set(REFRIGERACION_PARCHEADA) - set(variantes_vistas))
-    if sin_archivo:
-        print(f"\n⚠️ Variantes con disipación parcheada que no están en los archivos: {', '.join(sin_archivo)}")
 
     print(f"\n✅ ¡Proceso completado! Se actualizaron {len(base_de_datos)} mechs en {ruta_destino}")
     if duplicados:

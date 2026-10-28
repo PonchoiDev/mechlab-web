@@ -131,6 +131,7 @@ Los JSON de `src/data/` se generan a partir de los archivos del juego, exportado
 | `unitcard/` | Fichas de unidad | Año de aparición y rol |
 | `items/` | Armas, equipo y munición | Estadísticas por tier, munición, disipadores |
 | `traits/` | Mejoras | Mejoras de la cantina y sus efectos |
+| `mech_string_table/` | Tabla de textos `Mech_StringTable` exportada a CSV | Nombres de los chasis |
 
 ```sh
 python3 tools/generar_items.py

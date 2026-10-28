@@ -17,7 +17,7 @@ import { allMechs, getMech } from '../test/fixtures';
 
 describe('getMechDisplayName', () => {
   it('añade el nombre de Sarna cuando es distinto del chasis', () => {
-    expect(getMechDisplayName(getMech('ADR-A'))).toBe('PUMA (Adder)');
+    expect(getMechDisplayName(getMech('ADR-A'))).toBe('Puma (Adder)');
   });
 
   it('usa solo el chasis cuando coincide con el nombre de Sarna', () => {
