@@ -36,7 +36,9 @@ Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` si
 
 ## Flujo de trabajo
 
+- El backlog está en GitHub Issues. Cada pull request que resuelve una issue la enlaza con `Closes #n`.
 - Una rama y un pull request por cambio, desde `main` actualizado. Nunca commits directos a `main`.
 - Antes de subir más commits a una rama, comprobar que su pull request sigue abierto (`gh pr view <n> --json state`); si ya se fusionó, crear otra rama desde `main`.
 - Los commits y pull requests describen el cambio por sí mismos, sin referencias a conversaciones.
 - Los cambios de interfaz se comprueban en el navegador, no solo con los tests.
+- CodeRabbit (`.coderabbit.yaml`) y Copilot revisan cada pull request. Sus comentarios se atienden o se responden explicando por qué no aplican antes de fusionar.
