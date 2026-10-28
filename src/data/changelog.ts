@@ -9,6 +9,18 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-28-game-patch',
+    date: '2026-10-28',
+    title: 'Latest game patch',
+    items: [
+      'Base heat dissipation updated for 48 \'Mechs, including the ones the patch notes did not list, like every Bullshark',
+      'Base heat capacity raised to 50 on 25 \'Mechs, as in the game',
+      'Arm slots updated on 97 variants, mostly Clan OmniMechs',
+      'Lower arm and hand melee hardpoints now come from each \'Mech model, which fixes the Blood Asp, Supernova, Hunchback IIC and others',
+      'Chassis names come from the game texts: Clan \'Mechs show their Inner Sphere name, like Puma (Adder) or Behemoth (Stone Rhino)'
+    ]
+  },
+  {
     id: '2026-10-25-cantina-upgrades',
     date: '2026-10-25',
     title: 'Cantina upgrades',
