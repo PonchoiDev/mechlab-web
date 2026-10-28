@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { cpSync, rmSync } from 'node:fs'
 import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
@@ -64,4 +65,13 @@ export default defineConfig({
     outDir: `dist/${GAME_PATH}`
   },
   plugins: [react(), rootSite(), workerApi()],
+  test: {
+    // Cobertura de la lógica y del Worker (npm run coverage); el CI publica el resumen.
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.{ts,tsx}', 'worker/**/*.ts'],
+      exclude: ['**/*.test.ts', 'src/test/**', 'src/main.tsx', '**/*.d.ts'],
+      reporter: ['text-summary', 'json-summary', 'html']
+    }
+  }
 })

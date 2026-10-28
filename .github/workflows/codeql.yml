@@ -1,0 +1,37 @@
+# Análisis de seguridad de CodeQL: revisa el código de la web, del Worker y de los scripts de datos en
+# cada pull request y cada semana. Los avisos aparecen en la pestaña Security del repositorio.
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 6 * * 1'
+
+jobs:
+  analyze:
+    name: Analizar ${{ matrix.language }}
+    # En repositorios privados CodeQL necesita GitHub Advanced Security; se activa al hacerlo público.
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      security-events: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript-typescript, python, actions]
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-and-quality
+
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:${{ matrix.language }}

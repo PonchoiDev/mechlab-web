@@ -95,4 +95,4 @@ Cuando una cifra no coincide con la del juego, se hace una captura del mechlab r
 
 - `npm run build` genera la web en `dist/mercs/` y copia `site/` en la raíz.
 - Cada fusión en `main` se publica automáticamente en Cloudflare Workers, y cada pull request tiene una URL de vista previa.
-- GitHub Actions ejecuta lint, tests y build en cada push y pull request. Dependabot propone las actualizaciones de dependencias.
+- GitHub Actions ejecuta lint, tests con cobertura y build en cada push y pull request, y CodeQL analiza la seguridad del código. Dependabot propone las actualizaciones de dependencias.

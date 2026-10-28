@@ -1,12 +1,39 @@
 # Desarrollo con IA
 
-MechLab se ha desarrollado con **Claude Code** (el asistente de programación de Anthropic) integrado en VS Code, trabajando como un programador más del proyecto. Este documento explica cómo se repartió el trabajo y qué prácticas hicieron que el resultado fuera fiable.
+MechLab se ha desarrollado combinando tres asistentes de IA, cada uno en la etapa del proyecto en la que mejor encajaba: **Gemini** para el planteamiento, **GitHub Copilot** para la primera versión funcional y **Claude Code** para la limpieza, la refactorización y todo lo que vino después. Este documento explica qué aportó cada uno, qué limitaciones aparecieron y qué prácticas hicieron que el resultado fuera fiable.
 
-## Reparto de papeles
+## Etapas y herramientas
 
-| Persona (desarrollador) | IA (Claude Code) |
+| Etapa | Herramienta | Para qué se usó |
+|---|---|---|
+| **Planteamiento** (septiembre de 2026) | Gemini | Definir el objetivo, el alcance y el diseño inicial del proyecto. Primeras versiones de código. |
+| **Primera versión funcional** (hasta el 16 de octubre de 2026) | GitHub Copilot | Autocompletado y chat en el editor, y sobre todo el modo agente para construir la primera versión que funcionaba de principio a fin. |
+| **Calidad y evolución** (desde el 16 de octubre de 2026) | Claude Code | Limpieza masiva y refactorización, tests, integración continua, despliegue y todas las funcionalidades posteriores, con las verificaciones contra el juego. |
+
+### Gemini: el planteamiento
+
+Gemini sirvió para pensar el proyecto antes de escribirlo: qué problema resolver, para quién, qué debía hacer la primera versión y cómo organizarla. También se escribieron con él las primeras versiones de código.
+
+Ahí apareció su límite: a medida que la conversación acumulaba contexto (el código, los datos del juego, los cambios anteriores), el modelo empezaba a fallar y a entrar en bucles, repitiendo propuestas o deshaciendo lo que ya funcionaba. Su modo agente tampoco permitía trabajar sobre el proyecto con la autonomía necesaria.
+
+### GitHub Copilot: la primera versión funcional
+
+Copilot se usó dentro del editor de tres formas: el autocompletado al escribir código, el chat para dudas concretas y, sobre todo, el **modo agente**, con el que se construyó la primera versión funcional del configurador: elegir un 'Mech, equiparlo y ver sus estadísticas. Esa versión es el commit «estado funcional del mechlab antes de la refactorización».
+
+### Claude Code: calidad y evolución
+
+Con una versión que ya funcionaba, el siguiente paso era convertirla en un proyecto mantenible. Claude Code, integrado en VS Code, empezó por una limpieza masiva: eliminar lógica duplicada, separar la lógica pura de la interfaz, dividir el componente principal y añadir los primeros tests y el CI. A partir de ahí se encargó de todo lo demás, trabajando como un programador más del proyecto:
+
+- El despliegue en un dominio propio con Cloudflare y la API mínima del Worker.
+- Las funcionalidades pedidas por los usuarios (filtros, builds de fábrica, año de aparición, mejoras de la cantina) y las propias (compartir por enlace e imagen, builds guardadas, novedades, feedback).
+- Los scripts que extraen los datos del juego y su adaptación a cada parche.
+- La documentación del proyecto.
+
+## Reparto de papeles con Claude Code
+
+| Desarrollador | Claude Code |
 |---|---|
-| Decide qué se construye y en qué orden, a partir del feedback de los usuarios | Propone cómo hacerlo y lo implementa |
+| Decide qué se construye y en qué orden, apoyándose en feedback de los usuarios tras el primer despliegue | Propone opciones de cómo hacerlo y lo implementa |
 | Exporta los datos del juego con el editor de mods | Escribe y mantiene los scripts que los convierten en JSON |
 | Comprueba las cifras en el juego y aporta capturas | Convierte cada captura en un test y ajusta el cálculo hasta que coincide |
 | Revisa y fusiona los pull requests | Trabaja en ramas, ejecuta lint, tests y build, prueba en el navegador y abre el pull request |
@@ -20,11 +47,15 @@ La IA no puede abrir el juego, y los archivos exportados no siempre cuentan toda
 
 ### Cambios pequeños y verificados
 
-Cada funcionalidad o corrección va en su rama y su pull request. Antes de abrirlo, la IA ejecuta lint, tests y build, y prueba los cambios de interfaz en un Firefox sin interfaz, con capturas de pantalla. El CI de GitHub Actions repite las comprobaciones, y Cloudflare publica una vista previa de cada pull request para revisarlo en el navegador antes de fusionarlo.
+Cada funcionalidad o corrección va en su rama y su pull request. Antes de abrirlo, la IA ejecuta lint, tests y build, y prueba los cambios de interfaz en un Firefox sin interfaz, con capturas de pantalla. En GitHub, cada pull request pasa por el CI (lint, tests con cobertura y build) y por el análisis de seguridad de CodeQL, y Cloudflare publica una vista previa para revisarlo en el navegador antes de fusionarlo.
+
+### El contexto vive en el repositorio, no en la conversación
+
+El problema que apareció con Gemini (el modelo se pierde cuando la conversación acumula demasiado contexto) se evitó guardando el contexto importante en el propio repositorio: `CLAUDE.md` con las convenciones y las reglas del juego, `docs/` con el análisis y la arquitectura, y los tests como especificación de cada regla comprobada. Cualquier sesión nueva empieza leyendo esos archivos en lugar de depender de una conversación larga.
 
 ### Las correcciones se convierten en reglas
 
-Cuando el desarrollador corrige algo (una regla del juego, un comportamiento que no era un error, una forma de trabajar), la corrección queda escrita en `CLAUDE.md`, que la IA lee al empezar cada sesión. Por ejemplo: la IA subió dos veces commits a una rama cuyo pull request ya estaba fusionado, y desde entonces comprueba el estado del pull request antes de subir nada.
+Cuando el desarrollador corrige algo (una regla del juego, un comportamiento que no era un error, una forma de trabajar), la corrección queda escrita en `CLAUDE.md`. Por ejemplo: la IA subió dos veces commits a una rama cuyo pull request ya estaba fusionado, y desde entonces comprueba el estado del pull request antes de subir nada.
 
 ### La IA explica antes de tocar los datos
 
@@ -37,6 +68,12 @@ Con datos del juego, un cambio que parece pequeño puede afectar a cientos de va
 - **Las mejoras de la cantina.** Las reglas (cada mejora una vez, la I y la II combinables, porcentajes sumados) salieron de capturas del juego con el Grand Dragon y el Battlemaster, y cada una quedó como un test.
 - **Un parche del juego.** Las notas del parche listaban 29 variantes con cambios de refrigeración. Al volver a exportar todos los datos, la IA comparó cada variante con su versión anterior y encontró 21 más que las notas no mencionaban, además de un cambio de formato en los archivos que confundía unas variantes con otras. Los enlaces y las builds guardadas de los usuarios siguieron funcionando.
 - **Seguridad antes de publicar el código.** Antes de hacer público el repositorio, la IA revisó todo el historial en busca de claves, tokens y correos.
+
+## Lo aprendido al combinar herramientas
+
+- **Cada herramienta tiene su momento.** Un chat generalista es útil para pensar el problema; un agente en el editor acelera la primera versión; un agente con acceso al repositorio, a la terminal y al navegador es lo que permite mantener la calidad cuando el proyecto crece.
+- **El contexto es el recurso limitado.** Las herramientas fallaban cuando dependían de una conversación cada vez más larga. Escribir el contexto en archivos del repositorio lo resolvió.
+- **La IA necesita una forma de comprobar su trabajo.** Los tests, el CI y, sobre todo, las capturas del juego son lo que convierte una propuesta plausible en una cifra correcta.
 
 ## Límites
 

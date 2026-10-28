@@ -29,8 +29,18 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Tests
-        run: npm test
+      - name: Tests con cobertura
+        run: npm run coverage
+
+      - name: Resumen de cobertura
+        if: always()
+        run: |
+          node -e '
+            const total = require("./coverage/coverage-summary.json").total;
+            const rows = ["lines", "statements", "functions", "branches"]
+              .map(key => `| ${key} | ${total[key].pct} % | ${total[key].covered} / ${total[key].total} |`);
+            console.log(["### Cobertura de tests", "", "| | % | Cubierto |", "|---|---|---|", ...rows].join("\n"));
+          ' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Build
         run: npm run build

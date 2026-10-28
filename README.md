@@ -34,13 +34,13 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 6, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (228 tests) |
+| Tests | Vitest 5 (235 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
 | Imágenes de los 'Mechs | API de [Sarna.net](https://www.sarna.net), a través de un proxy en el Worker |
 | Extracción de datos del juego | Python 3 (sin dependencias externas) |
-| Integración continua | GitHub Actions (lint, tests y build en cada push y pull request) |
+| Integración continua | GitHub Actions (lint, tests con cobertura y build en cada push y pull request) |
 
 No usa base de datos ni backend propio: las builds guardadas viven en el `localStorage` del navegador y una build compartida viaja entera dentro de su enlace.
 
@@ -98,6 +98,7 @@ La web queda en http://localhost:5173/mercs/. Con `npm run dev -- --host 0.0.0.0
 |---|---|
 | `npm run dev` | Servidor de desarrollo con recarga en caliente |
 | `npm test` | Tests unitarios con Vitest |
+| `npm run coverage` | Tests con informe de cobertura en `coverage/` |
 | `npm run lint` | Análisis estático con oxlint |
 | `npm run build` | Comprobación de tipos y build de producción en `dist/` |
 | `npm run preview` | Sirve el build de producción |
@@ -124,7 +125,7 @@ tools/
   generar_items.py      Genera src/data/items.json
   generar_traits.py     Genera src/data/traits.json (mejoras de la cantina)
   datos-juego/          Archivos exportados del juego
-.github/                Integración continua y Dependabot
+.github/                Integración continua, CodeQL y Dependabot
 CLAUDE.md               Convenciones del proyecto para el asistente de IA
 ```
 
@@ -154,10 +155,12 @@ python3 tools/generar_traits.py
 
 ## Calidad y comprobación contra el juego
 
-- **228 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker.
+- **235 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
-- GitHub Actions ejecuta lint, tests y build en cada push a `main` y en cada pull request.
+- GitHub Actions ejecuta lint, tests con cobertura y build en cada push a `main` y en cada pull request.
+- **CodeQL** analiza la seguridad del código (TypeScript, Python y los workflows) en cada pull request y cada semana.
 - TypeScript en modo estricto y análisis estático con oxlint.
 - Dependabot propone cada semana las actualizaciones de dependencias y avisa de las vulnerabilidades conocidas (`npm audit` sin vulnerabilidades).
 

@@ -7,6 +7,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries* (no *MW5: Clans*), 
 ```sh
 npm run dev      # http://localhost:5173/mercs/
 npm test         # Vitest
+npm run coverage # Vitest con informe de cobertura
 npm run lint     # oxlint
 npm run build    # tsc + build de producción
 
