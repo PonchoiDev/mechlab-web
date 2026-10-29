@@ -146,6 +146,14 @@ describe('calculateCoolingRate', () => {
     expect(calculateCoolingRate(loadout, 1)).toBe(1.4);
     expect(calculateCoolingRate(makeLoadout(), 1.8)).toBe(1.8);
   });
+
+  it('con dobles de la Esfera Interior refrigera al menos 0,2 por disipador interno del motor', () => {
+    expect(calculateCoolingRate(makeLoadout(), 0.72, 'double', 180)).toBe(1.4);
+    expect(calculateCoolingRate(makeLoadout(), 1, 'double', 400)).toBe(2);
+    expect(calculateCoolingRate(makeLoadout(), 2, 'double', 200)).toBe(2);
+    expect(calculateCoolingRate(makeLoadout(), 0.72, 'single', 180)).toBe(0.7);
+    expect(calculateCoolingRate(makeLoadout(), 1, 'clanDouble', 300)).toBe(1);
+  });
 });
 
 describe('calculateTopSpeed', () => {
@@ -301,7 +309,7 @@ describe('getBuildSummary', () => {
       // Los dos Battle Fist del Atlas pegan 30 cada uno.
       meleeDamage: 60,
       heatSpike: calculateHeatSpike(loadout),
-      coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType),
+      coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType, mech.engine?.rating),
       topSpeed: calculateTopSpeed(mech.baseSpeed),
       jumpJetCount: 1,
       maxWeaponRange: 900

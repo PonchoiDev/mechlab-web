@@ -151,20 +151,31 @@ export const maximizeArmor = (
   });
 };
 
-// Con disipadores dobles de la Esfera Interior, los 10 disipadores internos del motor enfrían el
-// doble: +1,0 heat/s sobre el valor del MDA (comprobado en el CRD-2R, el ASN-26 y los Banshee).
-// Los Clan ya traen esa refrigeración en su valor base.
-const DOUBLE_HEAT_SINK_ENGINE_BONUS = 1;
+// El motor lleva un disipador interno por cada 25 de rating, hasta 10. Con dobles de la Esfera
+// Interior enfrían 0,2 cada uno, como el disipador doble suelto, y el valor del MDA solo hace de
+// mínimo: el JVN-11A (base 1,4) y el BJ-3 (base 0,72), los dos con motor 180, refrigeran 1,4, y el
+// CTF-3L (base 2,0, motor 280) no pasa de 2,0. Los Clan ya traen esa refrigeración en su valor base.
+const ENGINE_RATING_PER_HEAT_SINK = 25;
+const MAX_ENGINE_HEAT_SINKS = 10;
+const DOUBLE_HEAT_SINK_COOLING = 0.2;
+
+const getBaseCoolingRate = (baseCoolingRate: number, heatSinkType?: Mech['heatSinkType'], engineRating?: number) =>
+  heatSinkType === 'double' && engineRating !== undefined
+    ? Math.max(
+      baseCoolingRate,
+      Math.min(engineRating / ENGINE_RATING_PER_HEAT_SINK, MAX_ENGINE_HEAT_SINKS) * DOUBLE_HEAT_SINK_COOLING
+    )
+    : baseCoolingRate;
 
 export const calculateCoolingRate = (
   loadout: Loadout,
   baseCoolingRate?: number,
-  heatSinkType?: Mech['heatSinkType']
+  heatSinkType?: Mech['heatSinkType'],
+  engineRating?: number
 ): number | null => baseCoolingRate === undefined
   ? null
   : roundTo(
-    baseCoolingRate +
-    (heatSinkType === 'double' ? DOUBLE_HEAT_SINK_ENGINE_BONUS : 0) +
+    getBaseCoolingRate(baseCoolingRate, heatSinkType, engineRating) +
     sumBy(getEquippedItems(loadout), item => item.cooling ?? 0),
     1
   );
@@ -340,7 +351,7 @@ export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState,
   const equipmentWeight = calculateEquippedWeight(loadout);
   const armorWeight = calculateArmorWeight(armor, getArmorPointsPerTon(mech));
   const weapons = getWeaponPerformance(loadout, modifiers);
-  const coolingRate = calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType);
+  const coolingRate = calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType, mech.engine?.rating);
   const heatCapacity = calculateHeatCapacity(mech, loadout);
   const rangedWeapons = weapons.filter(weapon => !isMeleeWeapon(weapon.item));
   const scale = (value: number | undefined, bonus: number) => value === undefined ? null : value * (1 + bonus);
