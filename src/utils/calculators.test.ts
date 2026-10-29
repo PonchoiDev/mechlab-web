@@ -147,12 +147,13 @@ describe('calculateCoolingRate', () => {
     expect(calculateCoolingRate(makeLoadout(), 1.8)).toBe(1.8);
   });
 
-  it('con dobles de la Esfera Interior refrigera al menos 0,2 por disipador interno del motor', () => {
+  it('con dobles refrigera al menos 0,2 por disipador interno entero del motor', () => {
     expect(calculateCoolingRate(makeLoadout(), 0.72, 'double', 180)).toBe(1.4);
+    expect(calculateCoolingRate(makeLoadout(), 0.84, 'double', 245)).toBe(1.8);
     expect(calculateCoolingRate(makeLoadout(), 1, 'double', 400)).toBe(2);
     expect(calculateCoolingRate(makeLoadout(), 2, 'double', 200)).toBe(2);
     expect(calculateCoolingRate(makeLoadout(), 0.72, 'single', 180)).toBe(0.7);
-    expect(calculateCoolingRate(makeLoadout(), 1, 'clanDouble', 300)).toBe(1);
+    expect(calculateCoolingRate(makeLoadout(), 1.4, 'clanDouble', 210)).toBe(1.6);
   });
 });
 

@@ -13,8 +13,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-10-29',
     title: 'Double heat sink cooling fix',
     items: [
-      'Inner Sphere \'Mechs with double heat sinks now show the same cooling as the game: the engine heat sinks cool 0.2 each, one per 25 engine rating up to 10',
-      'Fixes 67 variants, like the Catapult CTF-3L and the King Crab KGC-A, which showed 3.0 instead of 2.0, or the Javelin JVN-11A, which showed 2.4 instead of 1.4'
+      '\'Mechs with double heat sinks now show the same cooling as the game: the engine heat sinks cool 0.2 each, one per full 25 engine rating up to 10',
+      'Fixes 75 variants, like the Catapult CTF-3L and the King Crab KGC-A, which showed 3.0 instead of 2.0, the Javelin JVN-11A, which showed 2.4 instead of 1.4, or the Puma (Adder), which showed 1.4 instead of 1.6'
     ]
   },
   {
