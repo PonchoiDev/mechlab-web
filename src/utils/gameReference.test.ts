@@ -38,7 +38,8 @@ describe('cifras del juego', () => {
 // Refrigeración del juego con el 'Mech vacío (Strip 'Mech), capturas del 29 de octubre de 2026, ya
 // con el parche. Con dobles, el motor manda: el JVN-11A y el BJ-3 (motor 180) dan 1,4 con bases
 // distintas, el CTF-3L y el KGC-A (base 2,0) no pasan de 2,0, el FS9-X1 (motor 245) se queda en 1,8,
-// el FLE-RCX (motor 120) se queda en su base y el ADR-A, de Clan, sube de 1,4 a 1,6.
+// el FLE-RCX (motor 120) se queda en su base, y el ADR-A y el TDR-5S (C2), de Clan, suben de 1,4
+// a 1,6 y de 1,0 a 2,0.
 const EMPTY_MECH_COOLING = [
   { id: 'JVN-11A', cooling: 1.4 },
   { id: 'BJ-3', cooling: 1.4 },
@@ -46,7 +47,8 @@ const EMPTY_MECH_COOLING = [
   { id: 'KGC-A', cooling: 2 },
   { id: 'FS9-X1', cooling: 1.8 },
   { id: 'FLE-RCX', cooling: 1 },
-  { id: 'ADR-A', cooling: 1.6 }
+  { id: 'ADR-A', cooling: 1.6 },
+  { id: 'TDR-5S (C2)', cooling: 2 }
 ];
 
 describe('refrigeración del juego sin equipo', () => {
