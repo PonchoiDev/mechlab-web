@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { getStockBuild } from './buildCode';
 import { getBuildSummary, truncateTo } from './calculators';
 import { allItems, allMechs, getMech } from '../test/fixtures';
+import { createEmptyArmor, createEmptyLoadout } from './zones';
 
 // Cifras del mechlab del juego con el loadout por defecto de cada mech (capturas del 23 de octubre
 // de 2026). Si un cambio de datos o de cálculo las rompe, la web deja de coincidir con el juego.
@@ -31,5 +32,24 @@ describe('cifras del juego', () => {
       speed: summary.topSpeed,
       range: Math.floor(summary.maxWeaponRange)
     }).toEqual(expected);
+  });
+});
+
+// Refrigeración del juego con el 'Mech vacío (Strip 'Mech), capturas del 29 de octubre de 2026, ya
+// con el parche. Con dobles de la Esfera Interior, el motor manda: el JVN-11A y el BJ-3 (motor 180)
+// dan 1,4 con bases distintas, y el CTF-3L y el KGC-A (base 2,0) no pasan de 2,0.
+const EMPTY_MECH_COOLING = [
+  { id: 'JVN-11A', cooling: 1.4 },
+  { id: 'BJ-3', cooling: 1.4 },
+  { id: 'CTF-3L', cooling: 2 },
+  { id: 'KGC-A', cooling: 2 }
+];
+
+describe('refrigeración del juego sin equipo', () => {
+  it.each(EMPTY_MECH_COOLING)('$id refrigera $cooling vacío', ({ id, cooling }) => {
+    const mech = getMech(id);
+    const summary = getBuildSummary(mech, createEmptyLoadout(), createEmptyArmor());
+
+    expect(summary.coolingRate).toBe(cooling);
   });
 });
