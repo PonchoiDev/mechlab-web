@@ -7,7 +7,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 | | |
 |---|---|
 | **Live site** | **https://mw-builder.com/mercs/** |
-| Slides | [View on Google Slides](https://docs.google.com/presentation/d/1QIsoIARJuKBoQixEptbox3tRyaNdj21b/edit?usp=drive_link) (in Spanish) |
+| Slides | [View on Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) (in Spanish) |
 | Video walkthrough | [Watch on Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) (in Spanish) |
 | Login | None: the site works without an account and builds are saved in the browser |
 
