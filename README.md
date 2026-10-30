@@ -7,7 +7,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno
 | | |
 |---|---|
 | **Web en producción** | **https://mw-builder.com/mercs/** |
-| Presentación (slides) | _pendiente_ |
+| Presentación (slides) | [Ver en Google Slides](https://docs.google.com/presentation/d/1QIsoIARJuKBoQixEptbox3tRyaNdj21b/edit?usp=drive_link) |
 | Vídeo explicativo | [Ver en Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) |
 | Login | No tiene: la web se usa sin registro y las builds se guardan en el navegador |
 
