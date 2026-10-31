@@ -44,6 +44,7 @@ REGEX_TIPO_ARMADURA = re.compile(r'ArmorDataAssetId=\(Id="MWArmorDataAsset:([^"]
 REGEX_TIPO_DISIPADORES = re.compile(r'AllowedHeatSinkType=\(TagName="Equipment\.HeatSinks\.([^"]+)"')
 REGEX_TIPO_ESTRUCTURA = re.compile(r'StructureDataAssetId=\(Id="MWStructureDataAsset:([^"]+)"')
 REGEX_POTENCIA_MOTOR = re.compile(r'EngineRating=(\d+)')
+REGEX_RANURAS_LATERALES_MOTOR = re.compile(r'EngineSideTorsoSlots=(\d+)')
 # Movimiento y calor del chasis, como los muestra el resumen de la pantalla de mejoras del juego.
 # DLC de la variante (DLC_1 … DLC_9); sin el campo, es del juego base. El MDA lo trae también en las
 # variantes sin ficha de unidad, como los campeones.
@@ -500,7 +501,13 @@ def parsear_mech(contenido, variante, tamanos_anclajes=None, textos=None):
     mech["heatSinkType"] = "clanDouble" if disipadores == "double.clan" else "double" if disipadores == "double" else "single"
     estructura = (buscar_texto(REGEX_TIPO_ESTRUCTURA, contenido) or "").lower()
     mech["structureType"] = "endoSteel" if "endo" in estructura else "standard"
-    mech["engine"] = {"rating": obtener_potencia_motor(contenido, velocidad_raw, tonelaje), "xl": "bXLEngine=True" in contenido}
+    # Algunos archivos (KGC-A, BL-9-KNT, CHP-3N…) no traen bXLEngine, pero su motor ocupa ranuras en
+    # los torsos laterales y pesa como el XL de otras variantes del chasis: el juego lo muestra como XL.
+    ranuras_laterales = int(buscar_texto(REGEX_RANURAS_LATERALES_MOTOR, contenido) or 0)
+    mech["engine"] = {
+        "rating": obtener_potencia_motor(contenido, velocidad_raw, tonelaje),
+        "xl": "bXLEngine=True" in contenido or ranuras_laterales > 0,
+    }
     # Sonda activa de serie: el mechlab del juego la marca como AP junto al motor.
     if "bBeagleActiveProbe=True" in contenido:
         mech["activeProbe"] = True

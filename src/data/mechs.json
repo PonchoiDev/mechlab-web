@@ -4213,7 +4213,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 280,
-      "xl": false
+      "xl": true
     },
     "turnSpeed": 64.74,
     "torsoTwist": {
@@ -10484,7 +10484,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 200,
-      "xl": false
+      "xl": true
     },
     "dlc": 9,
     "turnSpeed": 82.51,
@@ -11434,7 +11434,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 300,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 60.73,
@@ -15556,7 +15556,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 275,
-      "xl": false
+      "xl": true
     },
     "hero": true,
     "dlc": 8,
@@ -15705,7 +15705,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 275,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 65.0,
@@ -15865,7 +15865,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 275,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 65.0,
@@ -16012,7 +16012,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 275,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 65.0,
@@ -16164,7 +16164,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 275,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 65.0,
@@ -16324,7 +16324,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 275,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 65.0,
@@ -18851,7 +18851,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 300,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 111.15,
@@ -27196,7 +27196,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 280,
-      "xl": false
+      "xl": true
     },
     "turnSpeed": 68.18,
     "torsoTwist": {
@@ -27348,7 +27348,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 280,
-      "xl": false
+      "xl": true
     },
     "dlc": 1,
     "turnSpeed": 68.18,
@@ -40304,7 +40304,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 300,
-      "xl": false
+      "xl": true
     },
     "dlc": 9,
     "turnSpeed": 79.07,
@@ -40450,7 +40450,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 250,
-      "xl": false
+      "xl": true
     },
     "hero": true,
     "dlc": 8,
@@ -46191,7 +46191,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 320,
-      "xl": false
+      "xl": true
     },
     "hero": true,
     "dlc": 9,
@@ -53347,7 +53347,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 340,
-      "xl": false
+      "xl": true
     },
     "hero": true,
     "dlc": 9,
@@ -54687,7 +54687,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 390,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 75.0,
@@ -54850,7 +54850,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 390,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 75.0,
@@ -55005,7 +55005,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 390,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 75.0,
@@ -55152,7 +55152,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 390,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 75.0,
@@ -57804,7 +57804,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 255,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 57.3,
@@ -59605,7 +59605,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 300,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 71.62,
@@ -68929,7 +68929,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 300,
-      "xl": false
+      "xl": true
     },
     "dlc": 9,
     "turnSpeed": 60.73,
@@ -69094,7 +69094,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 300,
-      "xl": false
+      "xl": true
     },
     "dlc": 9,
     "turnSpeed": 60.73,
@@ -72198,7 +72198,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 300,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 71.62,
@@ -85291,7 +85291,7 @@
     "structureType": "endoSteel",
     "engine": {
       "rating": 60,
-      "xl": false
+      "xl": true
     },
     "dlc": 8,
     "turnSpeed": 111.15,
@@ -88967,7 +88967,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 240,
-      "xl": false
+      "xl": true
     },
     "dlc": 1,
     "turnSpeed": 150.69,
@@ -92162,7 +92162,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 280,
-      "xl": false
+      "xl": true
     },
     "hero": true,
     "dlc": 6,
@@ -95315,7 +95315,7 @@
     "structureType": "standard",
     "engine": {
       "rating": 320,
-      "xl": false
+      "xl": true
     },
     "turnSpeed": 82.51,
     "torsoTwist": {

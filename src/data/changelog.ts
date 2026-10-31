@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-31-xl-engines',
+    date: '2026-10-31',
+    title: 'XL engine fix',
+    items: [
+      '29 variants now show their XL engine, as in the game, like the King Crab KGC-A (340 XL), the Battlemaster BL-9-KNT and the Bushwackers',
+      'Only the engine label changes: tonnage and stats were already right'
+    ]
+  },
+  {
     id: '2026-10-29-dhs-cooling',
     date: '2026-10-29',
     title: 'Double heat sink cooling fix',
