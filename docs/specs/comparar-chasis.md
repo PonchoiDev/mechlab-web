@@ -76,5 +76,6 @@ La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cad
 - **Decisiones durante el desarrollo:**
   - El selector va fuera de la tabla, porque un contenedor con desplazamiento recortaría su desplegable.
   - Con dos selectores en la página, cada uno genera sus propios `id` (`useId`).
-  - La diferencia se escribe hacia el centro: delante del valor en la columna izquierda y detrás en la derecha.
-  - En el móvil, las tarjetas van una debajo de otra y las cifras siguen en espejo, sin desplazamiento horizontal.
+  - Los controles para elegir con qué comparar van encima de las dos tarjetas, para que empiecen a la misma altura.
+  - Las cifras van en una tabla con una columna por 'Mech. En el calor, la diferencia lleva signo negativo (`▼ -1.6`), porque gana el valor más bajo.
+  - En el móvil, las tarjetas van una debajo de otra y la tabla cabe sin desplazamiento horizontal.

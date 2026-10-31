@@ -2992,106 +2992,77 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font-weight: 600;
 }
 
-/* Cifras en espejo: valor y barra de cada lado, la etiqueta en el centro. */
-/* Columnas que se rellenan seguidas: un grupo corto no deja hueco junto a uno largo. */
-.versus {
-  columns: 2;
-  column-gap: 28px;
+/* Cifras en una tabla: una columna por 'Mech, el ganador en verde y los empates atenuados. */
+.compare-table {
+  width: 100%;
   margin-top: 14px;
-}
-
-.versus-group {
-  display: grid;
-  gap: 2px;
-  margin-bottom: 12px;
-  break-inside: avoid;
-}
-
-.versus-group h3 {
-  margin: 0 0 4px;
-  color: var(--work-muted);
-  font: 500 11px var(--work-mono);
-  letter-spacing: 0.06em;
-  text-align: center;
-}
-
-.versus-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 132px minmax(0, 1fr);
-  gap: 10px;
-  align-items: center;
-  padding: 3px 0;
-  border-bottom: 1px solid rgba(52, 61, 52, 0.5);
-}
-
-.versus-label {
-  color: var(--work-muted);
-  font: 500 11px var(--work-mono);
-  text-align: center;
-}
-
-.versus-side {
-  display: grid;
-  gap: 3px;
-}
-
-.versus-side.is-right {
-  justify-items: end;
-  text-align: right;
-}
-
-.versus-value {
+  border-collapse: collapse;
   color: var(--work-text);
-  font: 600 13px var(--work-mono);
-  white-space: nowrap;
+  font: 500 13px var(--work-mono);
+  font-variant-numeric: tabular-nums;
 }
 
-.versus-value small {
+.compare-table th,
+.compare-table td {
+  padding: 6px 12px;
+  border-bottom: 1px solid rgba(52, 61, 52, 0.55);
+  text-align: left;
+}
+
+.compare-table thead th {
+  color: var(--work-cyan);
+  font-weight: 600;
+  border-bottom: 1px solid var(--work-line);
+}
+
+.compare-table thead th:first-child {
+  width: 26%;
+  color: var(--work-muted);
+  font-weight: 500;
+}
+
+.compare-table thead th small,
+.compare-table tbody th small,
+.compare-table td small {
   color: var(--work-muted);
   font-weight: 400;
 }
 
-.versus-bar {
-  display: flex;
-  width: 100%;
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(52, 61, 52, 0.6);
+.compare-table tbody th {
+  color: var(--work-muted);
+  font-weight: 400;
 }
 
-.versus-side.is-right .versus-bar {
-  justify-content: flex-end;
+.compare-table tbody th small {
+  margin-left: 6px;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.versus-bar span {
-  border-radius: 2px;
-  background: var(--work-muted);
-}
-
-.versus-side.is-better .versus-value {
+.compare-table td.is-better {
   color: var(--work-lime);
+  font-weight: 600;
 }
 
-.versus-side.is-better .versus-bar span {
-  background: var(--work-lime);
+.compare-table td.is-tie {
+  color: var(--work-muted);
 }
 
 .compare-difference {
-  margin-left: 6px;
+  margin-left: 10px;
   color: var(--work-lime);
+  font-size: 11px;
   font-weight: 400;
-  opacity: 0.8;
 }
 
-.versus-side.is-right .compare-difference {
-  margin: 0 6px 0 0;
+.compare-group th {
+  padding-top: 14px;
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+  letter-spacing: 0.06em;
 }
 
-@media (max-width: 1000px) {
-  .versus {
-    columns: 1;
-  }
-}
 
 /* En el móvil, las tarjetas una debajo de otra; las cifras siguen en espejo. */
 @media (max-width: 600px) {
@@ -3099,17 +3070,18 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .versus-row {
-    grid-template-columns: minmax(0, 1fr) 92px minmax(0, 1fr);
-    gap: 6px;
+  .compare-table {
+    font-size: 11px;
   }
 
-  .versus-value {
-    font-size: 12px;
+  .compare-table th,
+  .compare-table td {
+    padding: 6px 4px;
   }
 
   .compare-difference {
-    display: none;
+    display: block;
+    margin-left: 0;
   }
 
   .compare-loadout-zone {

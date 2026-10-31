@@ -25,7 +25,9 @@ export interface ComparisonRow {
   valueA: number | null;
   valueB: number | null;
   winner: Winner;
-  // Lo que saca el ganador al otro, con el mismo formato que los valores (+35).
+  // En el calor gana el valor más bajo, y la tabla lo indica.
+  lowerIsBetter: boolean;
+  // Lo que saca el ganador al otro, con el mismo formato que los valores (+35, o -1.8 en el calor).
   difference: string | null;
 }
 
@@ -140,7 +142,11 @@ const buildRow = (definition: RowDefinition, a: ComparedSide, b: ComparedSide): 
     valueA,
     valueB,
     winner,
-    difference: winner && valueA !== null && valueB !== null ? `+${definition.format(Math.abs(valueA - valueB))}` : null
+    lowerIsBetter: definition.better === 'lower',
+    // Con el signo del ganador: +35 si gana el más alto, -1.8 si gana el más bajo.
+    difference: winner && valueA !== null && valueB !== null
+      ? `${definition.better === 'lower' ? '-' : '+'}${definition.format(Math.abs(valueA - valueB))}`
+      : null
   };
 };
 
@@ -165,13 +171,6 @@ export const toComparedSide = (build: SharedBuild): ComparedSide => ({
 // Una build guardada se reconstruye como un enlace compartido; si su código ya no vale, no se compara.
 export const resolveSavedBuild = (saved: SavedBuild, mechs: Mech[], catalog: Item[]): SharedBuild | null =>
   decodeBuild(saved.code, mechs, catalog);
-
-// Ancho de cada barra respecto al mayor de los dos valores (1 = todo el ancho).
-export const getBarShares = (a: number | null, b: number | null): [number, number] => {
-  const max = Math.max(a ?? 0, b ?? 0);
-  if (max <= 0) return [0, 0];
-  return [Math.max(a ?? 0, 0) / max, Math.max(b ?? 0, 0) / max];
-};
 
 export interface LoadoutLine {
   name: string;

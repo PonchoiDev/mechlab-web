@@ -5,7 +5,6 @@ import { useSarnaAsset } from '../hooks/useSarnaAsset';
 import { getStockBuild, type SharedBuild } from '../utils/buildCode';
 import {
   compareBuilds,
-  getBarShares,
   getDefaultComparison,
   groupLoadout,
   resolveSavedBuild,
@@ -80,27 +79,16 @@ function CompareCard({ build, caption }: { build: SharedBuild; caption: string }
   );
 }
 
-// Una fila en espejo: valor y barra de cada lado, con la etiqueta en el centro.
-function VersusRow({ row }: { row: ComparisonRow }) {
-  const [shareA, shareB] = getBarShares(row.valueA, row.valueB);
-  const side = (value: string, share: number, isWinner: boolean, align: 'left' | 'right') => (
-    <div className={['versus-side', `is-${align}`, isWinner ? 'is-better' : ''].filter(Boolean).join(' ')}>
-      <span className="versus-value">
-        {/* La diferencia va hacia el centro: delante del valor en la columna izquierda. */}
-        {isWinner && row.difference && align === 'right' && <span className="compare-difference">{row.difference}</span>}
-        {value}
-        {row.unit && value !== '—' && <small> {row.unit}</small>}
-        {isWinner && row.difference && align === 'left' && <span className="compare-difference">{row.difference}</span>}
-      </span>
-      <span className="versus-bar" aria-hidden="true"><span style={{ width: `${Math.round(share * 100)}%` }} /></span>
-    </div>
-  );
+// Una celda de la tabla: el valor y, si gana, la diferencia con el otro.
+function CompareValue({ row, side }: { row: ComparisonRow; side: 'a' | 'b' }) {
+  const value = side === 'a' ? row.a : row.b;
+  const state = row.winner === side ? 'is-better' : row.winner === null ? 'is-tie' : undefined;
   return (
-    <div className="versus-row">
-      {side(row.a, shareA, row.winner === 'a', 'right')}
-      <span className="versus-label">{row.label}</span>
-      {side(row.b, shareB, row.winner === 'b', 'left')}
-    </div>
+    <td className={state}>
+      {value}
+      {row.unit && value !== '—' && <small> {row.unit}</small>}
+      {row.winner === side && row.difference && <span className="compare-difference">{row.lowerIsBetter ? '▼' : '▲'} {row.difference}</span>}
+    </td>
   );
 }
 
@@ -176,15 +164,33 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, onLoad, onC
           )}
       </div>
 
-      {groups.length > 0 && (
-        <div className="versus">
+      {groups.length > 0 && other && (
+        <table className="compare-table">
+          <thead>
+            <tr>
+              <th scope="col">Stat</th>
+              <th scope="col">{current.mech.variant} <small>current</small></th>
+              <th scope="col">{other.mech.variant} <small>{source === 'saved' ? 'saved' : 'stock'}</small></th>
+            </tr>
+          </thead>
           {groups.map(group => (
-            <section key={group.title} className="versus-group" aria-label={group.title}>
-              <h3>{group.title}</h3>
-              {group.rows.map(row => <VersusRow key={row.key} row={row} />)}
-            </section>
+            <tbody key={group.title}>
+              <tr className="compare-group">
+                <th scope="rowgroup" colSpan={3}>{group.title}</th>
+              </tr>
+              {group.rows.map(row => (
+                <tr key={row.key}>
+                  <th scope="row">
+                    {row.label}
+                    {row.lowerIsBetter && <small> lower is better</small>}
+                  </th>
+                  <CompareValue row={row} side="a" />
+                  <CompareValue row={row} side="b" />
+                </tr>
+              ))}
+            </tbody>
           ))}
-        </div>
+        </table>
       )}
     </section>
   );

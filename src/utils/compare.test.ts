@@ -56,6 +56,7 @@ describe('comparar dos chasis', () => {
   it('marca la diferencia en la fila que tiene ganador', () => {
     expect(rows.armor.difference).toBe('+35');
     expect(rows.ballistic.difference).toBe('+1');
+    expect(pickWinner(20, 30, 'lower')).toBe('a');
   });
 });
 
@@ -108,5 +109,7 @@ describe('tarjetas y builds guardadas', () => {
     expect(rows.heatSpike.lowerIsBetter).toBe(true);
     expect(rows.heatPerSecond.lowerIsBetter).toBe(true);
     expect(rows.armor.lowerIsBetter).toBe(false);
+    // El AS7-D calienta más disparando que el KGC-000: gana el King Crab, con la diferencia en negativo.
+    expect(rows.heatPerSecond).toMatchObject({ winner: 'b', difference: '-1.6' });
   });
 });

@@ -72,7 +72,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Franja con tonelaje, armadura, velocidad, jump jets, daño por salva, daño cuerpo a cuerpo, pico de calor, refrigeración y alcance máximo.
 - Pestaña **Weapons**: daño, calor, RPM, DPS, alcance, alcance máximo y velocidad del proyectil de cada arma, con totales y duración de la munición.
 - Pestaña **'Mech**: estructura, capacidad de calor, giro de pie y del torso, sensor y fijación de blanco, como el resumen de la pantalla de mejoras del juego.
-- **Comparar:** la build actual junto a otro 'Mech, con la imagen y el loadout de cada uno. Se compara con la build de serie de cualquier 'Mech o con una build guardada, y las cifras (anclajes, defensa, potencia de fuego, calor, movilidad y ranuras de mejora) van en espejo, con barras y el valor mejor en verde.
+- **Comparar:** la build actual junto a otro 'Mech, con la imagen y el loadout de cada uno. Se compara con la build de serie de cualquier 'Mech o con una build guardada, y las cifras (anclajes, defensa, potencia de fuego, calor, movilidad y ranuras de mejora) van en una tabla con una columna por 'Mech y el valor mejor en verde.
 
 **Guardar y compartir**
 - Builds guardadas en el navegador: guardar, actualizar, cargar, duplicar, renombrar, borrar, y exportar o importar en JSON.
