@@ -20,7 +20,7 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 - **RF1.** La barra de herramientas tiene un botón **Compare**, en el grupo BUILD, que abre y cierra un panel de comparación bajo ella, como el de las mejoras.
 - **RF2.** El panel tiene dos columnas. La de la derecha se elige con el mismo selector de chasis de la cabecera, con sus filtros y atajos, colocado encima de la tabla. Al abrirlo propone otra variante del mismo chasis si existe, o el primer 'Mech de la lista si no.
 - **RF3.** Cada columna muestra el nombre y las siglas, la ficha del motor (`300 XL DHS ENDO`) y los anclajes por tipo y tamaño (`4E·M 1B·L`).
-- **RF4.** Una tabla compara, agrupadas como la pestaña 'Mech: anclajes por tipo, defensa (armadura y estructura), potencia de fuego (daño por salva, cuerpo a cuerpo, DPS, alcance máximo), calor (refrigeración, capacidad, pico de calor, calor disparando), movilidad (velocidad, giro, giro del torso, jump jets) y ranuras de mejora.
+- **RF4.** Las cifras se agrupan, en este orden, en potencia de fuego (daño por salva, cuerpo a cuerpo, DPS, alcance máximo), defensa (armadura y estructura), calor (refrigeración, capacidad, pico de calor, calor disparando), movilidad (velocidad, giro, giro del torso horizontal y vertical, jump jets) y fijación de blanco (alcance del sensor, tiempo que se mantiene el blanco y tiempo en perderlo). Los anclajes no se repiten en las cifras: se ven en la tarjeta, junto a la imagen.
 - **RF5.** En cada fila se marca el valor mejor y la diferencia. Lo mejor es lo más alto, salvo el pico de calor y el calor disparando, donde gana lo más bajo. Si los dos valores son iguales o falta alguno, no gana ninguno.
 - **RF6.** Un botón **Load this 'Mech** carga en el tablero la build de la derecha y cierra el panel.
 - **RF7.** Cada lado muestra su 'Mech como una tarjeta: imagen de Sarna, nombre, ficha, anclajes y su loadout por componente (armas con su tier, equipo y munición, con las repeticiones agrupadas: `AC/20 Ammo ×2`).
@@ -39,7 +39,7 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
 | CA1 | El AS7-D y el KGC-000 con su build de serie | se comparan | el AS7-D gana en armadura (608 frente a 573), daño por salva (78,4 frente a 68) y refrigeración (1,9 frente a 1,5) |
-| CA2 | Los mismos | se comparan los anclajes | el KGC-000 gana en balísticos (2 frente a 1) y el AS7-D en energía (4 frente a 1) |
+| CA2 | Los mismos | se agrupan las cifras | los grupos son FIREPOWER, DEFENSE, HEAT, MOBILITY y TARGETING, en ese orden, y el AS7-D gana en giro (60,7 frente a 46,4 °/s) |
 | CA3 | Los mismos | se compara la velocidad, el pico de calor y el alcance máximo | empatan (48,6 km/h, 24 y 900 m) y no gana ninguno |
 | CA4 | Una fila de pico de calor con 20 y 30 | se decide el ganador | gana 20, porque menos calor es mejor |
 | CA5 | Un 'Mech comparado consigo mismo | se compara | ninguna fila tiene ganador |
@@ -64,7 +64,7 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 
 La primera versión era una tabla de tres columnas a todo el ancho: las cifras quedaban lejos unas de otras y no se veía qué llevaba cada 'Mech. Se rehízo con una tarjeta por 'Mech con su loadout, la comparación en espejo con barras y la opción de comparar con builds guardadas (RF7 a RF9, CA8 a CA11).
 
-La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cada línea tenía cuatro números de dos cifras distintas, las barras de valores iguales se veían llenas y, en el calor, la barra del ganador era la más corta. Se probó una sola tabla con una columna por 'Mech, pero con los dos valores tan separados seguía costando leerla. Al final cada tarjeta lleva sus propias cifras, alineadas fila a fila con las de la otra, como dos fichas del juego puestas lado a lado (RF9 y CA11 actuales).
+La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cada línea tenía cuatro números de dos cifras distintas, las barras de valores iguales se veían llenas y, en el calor, la barra del ganador era la más corta. Se probó una sola tabla con una columna por 'Mech, pero con los dos valores tan separados seguía costando leerla. Al final cada tarjeta lleva sus propias cifras, alineadas fila a fila con las de la otra, como dos fichas del juego puestas lado a lado (RF9 y CA11 actuales). En la misma revisión se quitaron de las cifras los anclajes y los datos del chasis, que ya están en la tarjeta, se ordenaron los grupos empezando por la potencia de fuego y se añadió la fijación de blanco (RF4 y CA2 actuales).
 
 ## Resultado
 

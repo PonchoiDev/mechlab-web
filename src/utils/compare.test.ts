@@ -31,9 +31,11 @@ describe('comparar dos chasis', () => {
     expect(rows.cooling).toMatchObject({ a: '1.9', b: '1.5', winner: 'a' });
   });
 
-  it('CA2: el KGC-000 gana en anclajes balísticos y el AS7-D en energía', () => {
-    expect(rows.ballistic).toMatchObject({ a: '1', b: '2', winner: 'b' });
-    expect(rows.energy).toMatchObject({ a: '4', b: '1', winner: 'a' });
+  it('CA2: las cifras van por grupos, empezando por la potencia de fuego, sin anclajes ni chasis', () => {
+    expect(compareBuilds(stockSide('AS7-D'), stockSide('KGC-000')).map(group => group.title))
+      .toEqual(['FIREPOWER', 'DEFENSE', 'HEAT', 'MOBILITY', 'TARGETING']);
+    expect(rows.turnSpeed).toMatchObject({ a: '60.7', b: '46.4', winner: 'a' });
+    expect(rows.sensorRange).toMatchObject({ a: '800', b: '800', winner: null });
   });
 
   it('CA3: empatan en velocidad, pico de calor y alcance máximo', () => {
@@ -55,7 +57,7 @@ describe('comparar dos chasis', () => {
 
   it('marca la diferencia en la fila que tiene ganador', () => {
     expect(rows.armor.difference).toBe('+35');
-    expect(rows.ballistic.difference).toBe('+1');
+    expect(rows.turnSpeed.difference).toBe('+14.3');
     expect(pickWinner(20, 30, 'lower')).toBe('a');
   });
 });
