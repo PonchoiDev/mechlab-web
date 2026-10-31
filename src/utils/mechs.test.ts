@@ -126,6 +126,16 @@ describe('especificaciones del chasis', () => {
     expect(label('ASN-26')).toBe('280 XL DHS ENDO');
   });
 
+  it('marcan como XL los motores que ocupan ranuras en los torsos laterales', () => {
+    // El archivo del KGC-A no trae bXLEngine, pero su motor ocupa tres ranuras en cada torso lateral
+    // y pesa como el del KGC-001: en el juego es un 340 XL. El UM-AIV (60 XL) y el WHM-DNC (280 XL)
+    // tampoco traen la marca, y el peso no los distingue: los confirman capturas del juego.
+    expect(getMech('KGC-A').engine?.xl).toBe(true);
+    expect(getMech('UM-AIV').engine?.xl).toBe(true);
+    expect(getMech('WHM-DNC').engine?.xl).toBe(true);
+    expect(getMech('KGC-000').engine?.xl).toBe(false);
+  });
+
   it('agrupan los anclajes por tipo y tamaño', () => {
     expect(getHardpointGroups(getMech('HBR-A')).map(group => `${group.count}${group.type[0]}${group.sizeLetter}`))
       .toEqual(['2eL', '1eM', '2bS', '2mL', '1oL']);
