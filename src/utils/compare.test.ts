@@ -3,7 +3,6 @@ import { encodeBuild, getStockBuild } from './buildCode';
 import { getBuildSummary } from './calculators';
 import {
   compareBuilds,
-  getBarShares,
   getDefaultComparison,
   groupLoadout,
   pickWinner,
@@ -104,11 +103,10 @@ describe('tarjetas y builds guardadas', () => {
     expect(resolveSavedBuild({ id: '2', name: 'Rota', code: 'no-es-un-codigo', savedAt: '2026-10-31' }, allMechs, allItems)).toBeNull();
   });
 
-  it('CA11: la barra del valor mayor ocupa todo el ancho y la otra, su proporción', () => {
-    const [a, b] = getBarShares(608, 573);
-    expect(a).toBe(1);
-    expect(b).toBeCloseTo(0.94, 2);
-    expect(getBarShares(0, 0)).toEqual([0, 0]);
-    expect(getBarShares(null, 5)).toEqual([0, 1]);
+  it('CA11: las filas en las que gana el valor más bajo lo indican', () => {
+    const rows = Object.fromEntries(compareBuilds(stockSide('AS7-D'), stockSide('KGC-000')).flatMap(group => group.rows).map(row => [row.key, row]));
+    expect(rows.heatSpike.lowerIsBetter).toBe(true);
+    expect(rows.heatPerSecond.lowerIsBetter).toBe(true);
+    expect(rows.armor.lowerIsBetter).toBe(false);
   });
 });

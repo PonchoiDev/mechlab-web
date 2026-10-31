@@ -25,7 +25,7 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 - **RF6.** Un botón **Load this 'Mech** carga en el tablero la build de la derecha y cierra el panel.
 - **RF7.** Cada lado muestra su 'Mech como una tarjeta: imagen de Sarna, nombre, ficha, anclajes y su loadout por componente (armas con su tier, equipo y munición, con las repeticiones agrupadas: `AC/20 Ammo ×2`).
 - **RF8.** La derecha se elige entre dos orígenes: **Stock 'Mech** (el selector de chasis) y **My builds** (las builds guardadas). Sin builds guardadas, se explica cómo guardar una.
-- **RF9.** Las cifras se comparan en espejo: el valor de la izquierda y el de la derecha a cada lado de la etiqueta, con una barra proporcional al mayor de los dos y el ganador resaltado.
+- **RF9.** Las cifras van en una sola tabla bajo las tarjetas: una columna por 'Mech, con sus siglas en la cabecera, y el ganador de cada fila en verde con la diferencia (`▲ +2`). Los empates se atenúan, y las filas en las que gana el valor más bajo lo indican en la etiqueta.
 
 ## Requisitos no funcionales
 
@@ -48,7 +48,7 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 | CA8 | La build de serie del AS7-D | se agrupa su loadout por componente | el torso derecho lleva el Autocannon/20 y `AC/20 Ammo ×2`, y no aparecen componentes vacíos |
 | CA9 | Una build guardada del AS7-D con Refined Armor II | se elige como origen de la derecha | se reconstruye con sus mejoras y su armadura supera la de la build de serie |
 | CA10 | Una build guardada cuyo código ya no es válido | se elige como origen | no hay build que comparar y no se rompe nada |
-| CA11 | Armadura 608 frente a 573 | se calculan las barras | la de 608 ocupa todo el ancho y la de 573, el 94 % |
+| CA11 | El pico de calor y la armadura | se comparan | la fila del pico de calor indica que gana el valor más bajo y la de la armadura no |
 
 ## Fuera de alcance
 
@@ -63,6 +63,8 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 ## Revisión del diseño
 
 La primera versión era una tabla de tres columnas a todo el ancho: las cifras quedaban lejos unas de otras y no se veía qué llevaba cada 'Mech. Se rehízo con una tarjeta por 'Mech con su loadout, la comparación en espejo con barras y la opción de comparar con builds guardadas (RF7 a RF9, CA8 a CA11).
+
+La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cada línea tenía cuatro números de dos cifras distintas, las barras de valores iguales se veían llenas y, en el calor, la barra del ganador era la más corta. Se cambió por una sola tabla con una columna por 'Mech, sin barras (RF9 y CA11 actuales).
 
 ## Resultado
 
