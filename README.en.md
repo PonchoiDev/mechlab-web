@@ -38,7 +38,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (260 tests, V8 coverage) |
+| Tests | Vitest 5 (268 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -74,6 +74,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - Strip with tonnage, armor, speed, jump jets, volley damage, melee damage, heat spike, cooling and max range.
 - **Weapons** tab: damage, heat, RPM, DPS, range, max range and projectile velocity of each weapon, with totals and ammo duration.
 - **'Mech** tab: structure, heat capacity, turn and torso twist speed, sensor range and target lock, like the summary on the in-game Upgrades screen.
+- **Compare:** the current build against the stock loadout of another 'Mech, row by row (hardpoints, defense, firepower, heat, mobility and upgrade slots), with the better value in green.
 
 **Save and share**
 - Builds saved in the browser: save, update, load, duplicate, rename, delete, and export or import as JSON.
@@ -162,7 +163,7 @@ python3 tools/generar_traits.py
 
 ## Quality and checks against the game
 
-- **260 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **268 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

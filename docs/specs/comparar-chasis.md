@@ -1,7 +1,7 @@
 # Especificación: comparar dos chasis
 
 - **Issue:** [#58](https://github.com/PonchoiDev/mechlab-web/issues/58)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/compare.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -17,8 +17,8 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 
 ## Requisitos funcionales
 
-- **RF1.** La barra de herramientas tiene un botón **Compare** que abre y cierra un panel de comparación bajo ella, como el de las mejoras.
-- **RF2.** El panel tiene dos columnas. La de la derecha se elige con el mismo selector de chasis de la cabecera, con sus filtros y atajos. Al abrirlo propone otra variante del mismo chasis si existe, o el primer 'Mech de la lista si no.
+- **RF1.** La barra de herramientas tiene un botón **Compare**, en el grupo BUILD, que abre y cierra un panel de comparación bajo ella, como el de las mejoras.
+- **RF2.** El panel tiene dos columnas. La de la derecha se elige con el mismo selector de chasis de la cabecera, con sus filtros y atajos, colocado encima de la tabla. Al abrirlo propone otra variante del mismo chasis si existe, o el primer 'Mech de la lista si no.
 - **RF3.** Cada columna muestra el nombre y las siglas, la ficha del motor (`300 XL DHS ENDO`) y los anclajes por tipo y tamaño (`4E·M 1B·L`).
 - **RF4.** Una tabla compara, agrupadas como la pestaña 'Mech: anclajes por tipo, defensa (armadura y estructura), potencia de fuego (daño por salva, cuerpo a cuerpo, DPS, alcance máximo), calor (refrigeración, capacidad, pico de calor, calor disparando), movilidad (velocidad, giro, giro del torso, jump jets) y ranuras de mejora.
 - **RF5.** En cada fila se marca el valor mejor y la diferencia. Lo mejor es lo más alto, salvo el pico de calor y el calor disparando, donde gana lo más bajo. Si los dos valores son iguales o falta alguno, no gana ninguno.
@@ -29,7 +29,7 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 - **RNF1.** La comparación es lógica pura en `src/utils/compare.ts`, con sus tests; el panel solo pinta.
 - **RNF2.** Las cifras son las mismas que la barra de estadísticas y la pestaña 'Mech: salen de `getBuildSummary`, sin cálculos nuevos.
 - **RNF3.** Textos de la interfaz en inglés y sin guiones largos.
-- **RNF4.** En el móvil, la tabla se desplaza en horizontal y mantiene los dos valores en la misma fila.
+- **RNF4.** En el móvil caben las tres columnas sin desplazarse: los dos valores se leen en la misma fila.
 
 ## Criterios de aceptación
 
@@ -53,3 +53,13 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 
 1. **Lógica (CA1 a CA7):** `compareBuilds` y `getDefaultComparison` en `src/utils/compare.test.ts`, con las builds de serie reales.
 2. **Interfaz:** comprobación en el navegador del panel, el selector, el marcado de ganadores y el botón de cargar.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban porque el módulo no existía) y la implementación, en commits separados.
+- **Tests:** los siete criterios (CA1 a CA7) están en `src/utils/compare.test.ts` y pasan, junto a uno más sobre la diferencia que se muestra.
+- **Interfaz:** comprobada en el navegador a 1920 × 1080 y a 390 × 844. Con el AS7-D abierto, el panel propone el AS7-BH; al elegir el KGC-000, la tabla marca lo mismo que los tests, y **Load this 'Mech** carga el KGC-000 y cierra el panel.
+- **Decisiones durante el desarrollo:**
+  - El selector va encima de la tabla y no en su cabecera, porque el contenedor de la tabla recortaría el desplegable.
+  - Con dos selectores en la página, cada uno genera sus propios `id` (`useId`), para no repetirlos.
+  - En el móvil, la primera versión obligaba a desplazarse en horizontal para ver la segunda columna; se compactó la tabla para que quepan las tres.

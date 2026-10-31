@@ -12,6 +12,8 @@ interface UtilityToolbarProps {
   upgradeSlots: { used: number; capacity: number };
   isUpgradesOpen: boolean;
   onToggleUpgrades: () => void;
+  isCompareOpen: boolean;
+  onToggleCompare: () => void;
   savedBuildCount: number;
   onSaveBuild: () => void;
   onOpenBuilds: () => void;
@@ -32,6 +34,8 @@ export function UtilityToolbar({
   upgradeSlots,
   isUpgradesOpen,
   onToggleUpgrades,
+  isCompareOpen,
+  onToggleCompare,
   savedBuildCount,
   onSaveBuild,
   onOpenBuilds,
@@ -94,6 +98,15 @@ export function UtilityToolbar({
       </div>
       <div className="utility-group">
         <span className="utility-label">BUILD</span>
+        <button
+          type="button"
+          className="utility-button"
+          aria-expanded={isCompareOpen}
+          title="Compare this build with the stock loadout of another 'Mech"
+          onClick={onToggleCompare}
+        >
+          Compare
+        </button>
         <button type="button" className="utility-button" aria-haspopup="dialog" onClick={onSaveBuild}>
           Save build
         </button>
