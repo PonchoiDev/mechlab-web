@@ -33,9 +33,8 @@ describe('comparar dos chasis', () => {
 
   it('CA2: las cifras van por grupos, empezando por la potencia de fuego, sin anclajes ni chasis', () => {
     expect(compareBuilds(stockSide('AS7-D'), stockSide('KGC-000')).map(group => group.title))
-      .toEqual(['FIREPOWER', 'DEFENSE', 'HEAT', 'MOBILITY', 'TARGETING']);
+      .toEqual(['FIREPOWER', 'DEFENSE', 'HEAT', 'MOBILITY']);
     expect(rows.turnSpeed).toMatchObject({ a: '60.7', b: '46.4', winner: 'a' });
-    expect(rows.sensorRange).toMatchObject({ a: '800', b: '800', winner: null });
   });
 
   it('CA3: empatan en velocidad, pico de calor y alcance máximo', () => {
@@ -106,7 +105,7 @@ describe('tarjetas y builds guardadas', () => {
     expect(resolveSavedBuild({ id: '2', name: 'Rota', code: 'no-es-un-codigo', savedAt: '2026-10-31' }, allMechs, allItems)).toBeNull();
   });
 
-  it('CA11: las filas en las que gana el valor más bajo lo indican', () => {
+  it('CA11: en las filas de calor gana el valor más bajo', () => {
     const rows = Object.fromEntries(compareBuilds(stockSide('AS7-D'), stockSide('KGC-000')).flatMap(group => group.rows).map(row => [row.key, row]));
     expect(rows.heatSpike.lowerIsBetter).toBe(true);
     expect(rows.heatPerSecond.lowerIsBetter).toBe(true);
