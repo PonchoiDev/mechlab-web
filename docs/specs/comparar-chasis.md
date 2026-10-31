@@ -66,10 +66,13 @@ La primera versión era una tabla de tres columnas a todo el ancho: las cifras q
 
 ## Resultado
 
-- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban porque el módulo no existía) y la implementación, en commits separados.
-- **Tests:** los siete criterios (CA1 a CA7) están en `src/utils/compare.test.ts` y pasan, junto a uno más sobre la diferencia que se muestra.
-- **Interfaz:** comprobada en el navegador a 1920 × 1080 y a 390 × 844. Con el AS7-D abierto, el panel propone el AS7-BH; al elegir el KGC-000, la tabla marca lo mismo que los tests, y **Load this 'Mech** carga el KGC-000 y cierra el panel.
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y la implementación, en commits separados. La revisión del diseño siguió el mismo orden: especificación y tests ampliados, después el código.
+- **Tests:** los once criterios (CA1 a CA11) están en `src/utils/compare.test.ts` y pasan, junto a uno más sobre la diferencia que se muestra.
+- **Interfaz:** comprobada en el navegador a 1920 × 1080 y a 390 × 844.
+  - Con el KGC-000 en el tablero, la tarjeta de la derecha propone el KGC-0000 con su build de serie; frente al AS7-D, el Atlas gana en energía, armadura, daño y refrigeración, y el King Crab en balísticos y en calor disparando.
+  - Una build guardada del AS7-D con Refined Armor II sale con sus mejoras (638,4 de armadura) y **Load this build** la abre en el tablero, vinculada para poder actualizarla.
 - **Decisiones durante el desarrollo:**
-  - El selector va encima de la tabla y no en su cabecera, porque el contenedor de la tabla recortaría el desplegable.
-  - Con dos selectores en la página, cada uno genera sus propios `id` (`useId`), para no repetirlos.
-  - En el móvil, la primera versión obligaba a desplazarse en horizontal para ver la segunda columna; se compactó la tabla para que quepan las tres.
+  - El selector va fuera de la tabla, porque un contenedor con desplazamiento recortaría su desplegable.
+  - Con dos selectores en la página, cada uno genera sus propios `id` (`useId`).
+  - La diferencia se escribe hacia el centro: delante del valor en la columna izquierda y detrás en la derecha.
+  - En el móvil, las tarjetas van una debajo de otra y las cifras siguen en espejo, sin desplazamiento horizontal.

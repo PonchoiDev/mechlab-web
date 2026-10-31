@@ -13,9 +13,10 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-10-31',
     title: 'Compare \'Mechs',
     items: [
-      'Compare in the toolbar puts your build next to the stock loadout of any other \'Mech: hardpoints, armor, firepower, heat, mobility and upgrade slots',
-      'The better value of each row is in green, with the difference',
-      'Load this \'Mech switches to the one you are comparing with'
+      'Compare in the toolbar shows your build next to another \'Mech, each with its image, specs and loadout by component',
+      'Compare with the stock loadout of any \'Mech or with one of your saved builds, upgrades included',
+      'Each stat is shown side by side with a bar, and the better value is in green with the difference',
+      'Load this build switches to the one you are comparing with'
     ]
   },
   {

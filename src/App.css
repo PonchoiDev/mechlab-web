@@ -2831,117 +2831,286 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   background: rgba(25, 29, 25, 0.94);
 }
 
-.compare-picker {
+.compare-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+.compare-other {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-source {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  gap: 10px 14px;
-  margin-bottom: 14px;
+  gap: 10px;
 }
 
-.compare-picker .utility-label {
+.compare-source-tabs {
+  display: flex;
+  gap: 6px;
   align-self: center;
 }
 
-.compare-scroll {
-  overflow-x: auto;
+.compare-saved {
+  display: grid;
+  gap: 6px;
+  min-width: 245px;
+  color: var(--work-muted);
+  font: 500 10px/1.3 var(--work-mono);
+  letter-spacing: 0.06em;
 }
 
-.compare-table {
-  width: 100%;
-  border-collapse: collapse;
+.compare-saved select {
+  min-height: 39px;
+  padding: 0 10px;
   color: var(--work-text);
-  font: 500 12px var(--work-mono);
+  background: var(--work-panel-raised);
+  border: 1px solid var(--work-line);
+  border-radius: 3px;
+  font: 500 13px var(--work-mono);
 }
 
-.compare-table th,
-.compare-table td {
-  padding: 7px 10px;
-  border-bottom: 1px solid rgba(52, 61, 52, 0.6);
-  text-align: left;
-  vertical-align: top;
+.compare-card {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--work-line);
+  border-radius: 4px;
+  background: var(--work-panel);
 }
 
-.compare-table thead th {
-  width: 40%;
-  border-bottom: 1px solid var(--work-line);
+.compare-card > .eyebrow {
+  margin: 0;
 }
 
-.compare-table thead th:first-child {
-  width: 20%;
+.compare-card-head {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
 }
 
-.compare-table tbody th {
+.compare-card-image {
+  display: grid;
+  place-items: center;
+  height: 112px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #f4f4f0;
+  color: #4a4f4a;
+  font: 500 11px var(--work-mono);
+}
+
+.compare-card-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.compare-card-title {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.compare-card-title h3 {
+  margin: 0;
+  color: var(--work-text);
+  font: 600 18px var(--work-sans);
+}
+
+.compare-card-title h3 span {
+  color: var(--work-cyan);
+  font: 600 13px var(--work-mono);
+}
+
+.compare-loadout {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.compare-loadout-zone {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 8px;
+  align-items: baseline;
+}
+
+.compare-loadout dt {
   color: var(--work-muted);
-  font-weight: 400;
+  font: 500 11px var(--work-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.compare-table td small {
+.compare-loadout dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+}
+
+.compare-item {
+  padding: 2px 7px;
+  border: 1px solid var(--work-line);
+  border-left: 3px solid var(--weapon-color, var(--work-line));
+  border-radius: 2px;
+  background: var(--work-panel-raised);
+  color: var(--work-text);
+  font: 500 12px var(--work-sans);
+}
+
+.compare-item small {
   color: var(--work-muted);
-  font-weight: 400;
 }
 
-.compare-table td.is-better {
+.compare-item.is-ammo {
+  border-left-color: var(--work-amber);
+  color: var(--work-muted);
+}
+
+.compare-item.is-equipment {
+  border-left-color: var(--work-cyan);
+}
+
+.compare-empty,
+.compare-upgrades {
+  margin: 0;
+  color: var(--work-muted);
+  font: 400 12px var(--work-sans);
+}
+
+.compare-upgrades b {
   color: var(--work-lime);
   font-weight: 600;
 }
 
+/* Cifras en espejo: valor y barra de cada lado, la etiqueta en el centro. */
+.versus {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 28px;
+  margin-top: 14px;
+}
+
+.versus-group {
+  display: grid;
+  gap: 2px;
+  align-content: start;
+}
+
+.versus-group h3 {
+  margin: 0 0 4px;
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.versus-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 132px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(52, 61, 52, 0.5);
+}
+
+.versus-label {
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+  text-align: center;
+}
+
+.versus-side {
+  display: grid;
+  gap: 3px;
+}
+
+.versus-side.is-right {
+  justify-items: end;
+  text-align: right;
+}
+
+.versus-value {
+  color: var(--work-text);
+  font: 600 13px var(--work-mono);
+  white-space: nowrap;
+}
+
+.versus-value small {
+  color: var(--work-muted);
+  font-weight: 400;
+}
+
+.versus-bar {
+  display: flex;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(52, 61, 52, 0.6);
+}
+
+.versus-side.is-right .versus-bar {
+  justify-content: flex-end;
+}
+
+.versus-bar span {
+  border-radius: 2px;
+  background: var(--work-muted);
+}
+
+.versus-side.is-better .versus-value {
+  color: var(--work-lime);
+}
+
+.versus-side.is-better .versus-bar span {
+  background: var(--work-lime);
+}
+
 .compare-difference {
-  margin-left: 8px;
+  margin-left: 6px;
   color: var(--work-lime);
   font-weight: 400;
   opacity: 0.8;
 }
 
-.compare-group th {
-  padding-top: 14px;
-  color: var(--work-muted);
-  font: 500 11px var(--work-mono);
-  letter-spacing: 0.06em;
+.versus-side.is-right .compare-difference {
+  margin: 0 6px 0 0;
 }
 
-.compare-heading {
-  display: grid;
-  gap: 6px;
+@media (max-width: 1000px) {
+  .versus {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.compare-heading .eyebrow {
-  margin: 0;
-}
-
-.compare-heading h3 {
-  margin: 0;
-  color: var(--work-text);
-  font: 600 16px var(--work-sans);
-}
-
-.compare-heading h3 span {
-  color: var(--work-cyan);
-  font: 600 13px var(--work-mono);
-}
-
-/* En el móvil caben las tres columnas: se compara sin desplazarse. */
+/* En el móvil, las tarjetas una debajo de otra; las cifras siguen en espejo. */
 @media (max-width: 600px) {
-  .compare-table {
-    font-size: 11px;
+  .compare-cards {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .compare-table th,
-  .compare-table td {
-    padding: 6px 4px;
+  .versus-row {
+    grid-template-columns: minmax(0, 1fr) 92px minmax(0, 1fr);
+    gap: 6px;
   }
 
-  .compare-table thead th,
-  .compare-table thead th:first-child {
-    width: 33%;
+  .versus-value {
+    font-size: 12px;
   }
 
   .compare-difference {
-    display: block;
-    margin-left: 0;
+    display: none;
   }
 
-  .compare-heading h3 {
-    font-size: 14px;
+  .compare-loadout-zone {
+    grid-template-columns: 84px minmax(0, 1fr);
   }
 }

@@ -1,6 +1,12 @@
-import type { Mech } from '../types/mech';
-import { formatArmorPoints, formatCoolingRate, formatTurnRate, type BuildSummary } from './calculators';
+import type { Item } from '../types/item';
+import type { EquippedLoadout, Mech, Zone } from '../types/mech';
+import { decodeBuild, type SharedBuild } from './buildCode';
+import { formatArmorPoints, formatCoolingRate, formatTurnRate, getBuildSummary, type BuildSummary } from './calculators';
+import { getTierName } from './items';
 import { getHardpointCounts, HARDPOINT_FILTER_TYPES, type HardpointFilterType } from './mechs';
+import type { SavedBuild } from './savedBuilds';
+import { getUpgrades } from './upgrades';
+import { ZONE_KEYS, ZONE_LABELS } from './zones';
 
 export interface ComparedSide {
   mech: Mech;
@@ -15,6 +21,9 @@ export interface ComparisonRow {
   unit?: string;
   a: string;
   b: string;
+  // Valores sin formato, para dibujar las barras.
+  valueA: number | null;
+  valueB: number | null;
   winner: Winner;
   // Lo que saca el ganador al otro, con el mismo formato que los valores (+35).
   difference: string | null;
@@ -128,6 +137,8 @@ const buildRow = (definition: RowDefinition, a: ComparedSide, b: ComparedSide): 
     unit: definition.unit,
     a: textA,
     b: textB,
+    valueA,
+    valueB,
     winner,
     difference: winner && valueA !== null && valueB !== null ? `+${definition.format(Math.abs(valueA - valueB))}` : null
   };
@@ -144,3 +155,53 @@ export const getDefaultComparison = (mechs: Mech[], current: Mech): number => {
   const sibling = mechs.findIndex(mech => mech.name === current.name && mech.id !== current.id);
   return sibling >= 0 ? sibling : mechs.findIndex(mech => mech.id !== current.id);
 };
+
+// Una build con su resumen de cifras, mejoras incluidas, lista para comparar.
+export const toComparedSide = (build: SharedBuild): ComparedSide => ({
+  mech: build.mech,
+  summary: getBuildSummary(build.mech, build.loadout, build.armor, getUpgrades(build.upgrades))
+});
+
+// Una build guardada se reconstruye como un enlace compartido; si su código ya no vale, no se compara.
+export const resolveSavedBuild = (saved: SavedBuild, mechs: Mech[], catalog: Item[]): SharedBuild | null =>
+  decodeBuild(saved.code, mechs, catalog);
+
+// Ancho de cada barra respecto al mayor de los dos valores (1 = todo el ancho).
+export const getBarShares = (a: number | null, b: number | null): [number, number] => {
+  const max = Math.max(a ?? 0, b ?? 0);
+  if (max <= 0) return [0, 0];
+  return [Math.max(a ?? 0, 0) / max, Math.max(b ?? 0, 0) / max];
+};
+
+export interface LoadoutLine {
+  name: string;
+  type: Item['type'];
+  weaponType: Item['weaponType'];
+  tier: string | null;
+  count: number;
+}
+
+export interface LoadoutGroup {
+  zone: Zone;
+  label: string;
+  items: LoadoutLine[];
+}
+
+const TYPE_ORDER: Record<Item['type'], number> = { weapon: 0, equipment: 1, ammo: 2 };
+
+// Loadout por componente para la tarjeta: armas, equipo y munición, con las repeticiones juntas
+// (AC/20 Ammo ×2) y sin los componentes vacíos.
+export const groupLoadout = (loadout: EquippedLoadout): LoadoutGroup[] => ZONE_KEYS
+  .map(zone => {
+    const lines = new Map<string, LoadoutLine>();
+    for (const item of loadout[zone]) {
+      const tier = getTierName(item);
+      const key = `${item.id}:${tier ?? ''}`;
+      const line = lines.get(key) ?? { name: item.name, type: item.type, weaponType: item.weaponType, tier, count: 0 };
+      line.count += 1;
+      lines.set(key, line);
+    }
+    const items = [...lines.values()].sort((a, b) => TYPE_ORDER[a.type] - TYPE_ORDER[b.type]);
+    return { zone, label: ZONE_LABELS[zone], items };
+  })
+  .filter(group => group.items.length > 0);

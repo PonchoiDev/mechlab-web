@@ -118,6 +118,7 @@ export default function App() {
     setIsSaveOpen(false);
     showToast(`Updated “${activeBuild.name}”`);
   };
+  const currentBuild = useMemo(() => ({ mech, loadout, armor, upgrades: upgradeIds }), [mech, loadout, armor, upgradeIds]);
   const shareImageInput = useMemo(
     () => ({ mech, loadout, armor, summary, upgrades, imageUrl: sarna.asset?.imageUrl ?? null }),
     [mech, loadout, armor, summary, upgrades, sarna.asset]
@@ -219,12 +220,14 @@ export default function App() {
           key={mech.id}
           mechs={mechs}
           catalog={items}
-          mech={mech}
-          summary={summary}
-          onLoad={(index) => {
-            selectMech(index);
+          current={currentBuild}
+          savedBuilds={saved.builds}
+          onLoad={(shared, label, savedId) => {
+            build.loadBuild(shared);
+            setActiveSavedId(savedId);
+            setSelectedHardpoint(null);
             setIsCompareOpen(false);
-            showToast(`Loaded the stock ${mechs[index].variant} loadout`);
+            showToast(`Loaded ${savedId ? `“${label}”` : `the ${label} loadout`}`);
           }}
           onClose={() => setIsCompareOpen(false)}
         />
