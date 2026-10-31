@@ -13,7 +13,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-10-31',
     title: 'XL engine fix',
     items: [
-      '29 variants now show their XL engine, as in the game, like the King Crab KGC-A (340 XL), the Battlemaster BL-9-KNT and the Bushwackers',
+      '29 variants now show their XL engine, as in the game, like the King Crab KGC-A (340 XL), the Black Knight BL-9-KNT and the Bushwackers',
       'Only the engine label changes: tonnage and stats were already right'
     ]
   },
