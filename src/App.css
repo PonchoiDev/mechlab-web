@@ -2935,6 +2935,21 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font: 600 13px var(--work-mono);
 }
 
+/* Anclajes más grandes que en el selector: aquí son lo primero que se compara. */
+.compare-card-title .mech-option-hardpoints {
+  gap: 6px;
+}
+
+.compare-card-title .mech-hardpoint-tag {
+  padding: 2px 8px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.compare-card-title .mech-hardpoint-tag small {
+  font-size: 11px;
+}
+
 .compare-loadout {
   display: grid;
   gap: 6px;

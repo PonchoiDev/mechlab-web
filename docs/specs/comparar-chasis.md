@@ -79,4 +79,5 @@ La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cad
   - Los controles para elegir con qué comparar van encima de la tarjeta de la derecha, en la misma rejilla, para que las dos tarjetas empiecen a la misma altura.
   - Las dos tarjetas comparten las filas de la rejilla (`subgrid`): aunque los loadouts midan distinto, las cifras empiezan a la misma altura y cada fila coincide con la del otro lado. Medido en el navegador: ninguna fila descuadrada.
   - En el calor, la diferencia lleva signo negativo (`▼ -16.5`), porque gana el valor más bajo.
+  - Los anclajes de la tarjeta van más grandes que en el selector (14 px), porque ya no se repiten en las cifras.
   - En el móvil, las tarjetas van una debajo de otra, cada una con sus cifras y el valor mejor resaltado.
