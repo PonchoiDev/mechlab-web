@@ -3027,8 +3027,8 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .compare-card-stats h4 {
   margin: 0 0 2px;
-  color: var(--work-muted);
-  font: 500 11px var(--work-mono);
+  color: var(--work-text);
+  font: 600 12px var(--work-mono);
   letter-spacing: 0.06em;
 }
 
