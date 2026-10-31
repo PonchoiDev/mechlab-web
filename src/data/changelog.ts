@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-10-31-compare',
+    date: '2026-10-31',
+    title: 'Compare \'Mechs',
+    items: [
+      'Compare in the toolbar shows your build next to another \'Mech, each with its image, specs and loadout by component',
+      'Compare with the stock loadout of any \'Mech or with one of your saved builds, upgrades included',
+      'Each card lists its stats in line with the other one, and the better value is highlighted in green with the difference',
+      'Load this build switches to the one you are comparing with'
+    ]
+  },
+  {
     id: '2026-10-31-xl-engines',
     date: '2026-10-31',
     title: 'XL engine fix',

@@ -1,4 +1,4 @@
-import { useMemo, useState, type KeyboardEvent } from 'react';
+import { useId, useMemo, useState, type KeyboardEvent } from 'react';
 import type { Mech } from '../types/mech';
 import { readOwnedDlcs, useRememberOwnedDlcs } from '../hooks/useOwnedDlcs';
 import { CheckboxDropdown } from './CheckboxDropdown';
@@ -59,7 +59,7 @@ const filterMechs = (mechs: Mech[], query: string, filters: MechFilters) => {
     .filter(({ mech }) => matchesMechQuery(mech, parsed.text) && matchesMechFilters(mech, combined));
 };
 
-function HardpointSummary({ mech }: { mech: Mech }) {
+export function HardpointSummary({ mech }: { mech: Mech }) {
   return (
     <span className="mech-option-hardpoints">
       {getHardpointGroups(mech).map(({ type, size, sizeLetter, count }) => (
@@ -78,6 +78,8 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(0);
+  // Puede haber dos selectores a la vez (cabecera y comparación): cada uno con sus propios ids.
+  const idPrefix = useId();
   const [filters, setFilters] = useState<MechFilters>(() => ({ ...EMPTY_MECH_FILTERS, dlcs: readOwnedDlcs() }));
   useRememberOwnedDlcs(filters.dlcs);
   const currentMech = mechs[selectedIndex];
@@ -165,9 +167,9 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
         aria-label="Search chassis by name, variant or ID"
         aria-autocomplete="list"
         aria-expanded={isOpen}
-        aria-controls="mech-options"
+        aria-controls={`${idPrefix}-options`}
         aria-activedescendant={isOpen && filteredMechs[activeOption]
-          ? `mech-option-${filteredMechs[activeOption].index}`
+          ? `${idPrefix}-option-${filteredMechs[activeOption].index}`
           : undefined}
         autoComplete="off"
         className="mech-picker-input"
@@ -279,9 +281,9 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
             </div>
 
             <div className="mech-filter-row">
-              <label className="mech-filter-label" htmlFor="mech-filter-year">AVAILABLE BY</label>
+              <label className="mech-filter-label" htmlFor={`${idPrefix}-year`}>AVAILABLE BY</label>
               <select
-                id="mech-filter-year"
+                id={`${idPrefix}-year`}
                 className="mech-filter-year"
                 value={filters.maxYear ?? ''}
                 onChange={(event) => {
@@ -326,11 +328,11 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
             </div>
           </div>
 
-          <div className="mech-options" id="mech-options" role="listbox" aria-label="Chassis results">
+          <div className="mech-options" id={`${idPrefix}-options`} role="listbox" aria-label="Chassis results">
             {filteredMechs.length > 0 ? filteredMechs.map(({ mech, index }, optionIndex) => (
               <div
                 key={mech.id}
-                id={`mech-option-${index}`}
+                id={`${idPrefix}-option-${index}`}
                 role="option"
                 aria-selected={index === selectedIndex}
                 className={optionIndex === activeOption ? 'mech-option is-active' : 'mech-option'}

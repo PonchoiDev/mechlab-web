@@ -36,7 +36,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (260 tests, cobertura con V8) |
+| Tests | Vitest 5 (272 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -72,6 +72,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Franja con tonelaje, armadura, velocidad, jump jets, daño por salva, daño cuerpo a cuerpo, pico de calor, refrigeración y alcance máximo.
 - Pestaña **Weapons**: daño, calor, RPM, DPS, alcance, alcance máximo y velocidad del proyectil de cada arma, con totales y duración de la munición.
 - Pestaña **'Mech**: estructura, capacidad de calor, giro de pie y del torso, sensor y fijación de blanco, como el resumen de la pantalla de mejoras del juego.
+- **Comparar:** la build actual junto a otro 'Mech, con la imagen y el loadout de cada uno. Se compara con la build de serie de cualquier 'Mech o con una build guardada, y cada tarjeta lleva sus cifras (potencia de fuego, defensa, calor y movilidad) alineadas con las de la otra, con el valor mejor resaltado en verde.
 
 **Guardar y compartir**
 - Builds guardadas en el navegador: guardar, actualizar, cargar, duplicar, renombrar, borrar, y exportar o importar en JSON.
@@ -158,7 +159,7 @@ python3 tools/generar_traits.py
 
 ## Calidad y comprobación contra el juego
 
-- **260 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **272 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

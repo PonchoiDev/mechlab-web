@@ -2821,3 +2821,307 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font: 700 9px/14px var(--work-mono);
   vertical-align: 1px;
 }
+
+/* Comparación de dos 'Mechs: un panel bajo la barra, como el de las mejoras. */
+.compare-panel {
+  margin: -14px 0 14px;
+  padding: 12px;
+  border: 1px solid var(--work-line);
+  border-top: 0;
+  background: rgba(25, 29, 25, 0.94);
+}
+
+.compare-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 14px;
+}
+
+.compare-title,
+.compare-source {
+  min-height: 39px;
+  margin-bottom: 14px;
+}
+
+.compare-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+}
+
+.compare-title h2 {
+  margin: 0;
+  color: var(--work-text);
+  font: 600 13px var(--work-mono);
+  letter-spacing: 0.06em;
+}
+
+.compare-title p {
+  margin: 0;
+  color: var(--work-muted);
+  font: 400 12px var(--work-sans);
+}
+
+.compare-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+/* Dentro del panel, «COMPARE WITH» ya dice qué es el selector: sin su etiqueta, todo queda en línea. */
+.compare-source .mech-picker > span {
+  display: none;
+}
+
+.compare-close {
+  margin-left: auto;
+}
+
+.compare-source-tabs {
+  display: flex;
+  gap: 6px;
+  align-self: center;
+}
+
+.compare-saved {
+  display: grid;
+  min-width: 245px;
+}
+
+.compare-saved select {
+  min-height: 39px;
+  padding: 0 10px;
+  color: var(--work-text);
+  background: var(--work-panel-raised);
+  border: 1px solid var(--work-line);
+  border-radius: 3px;
+  font: 500 13px var(--work-mono);
+}
+
+.compare-card {
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  align-content: start;
+  row-gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--work-line);
+  border-radius: 4px;
+  background: var(--work-panel);
+}
+
+.compare-card > .eyebrow {
+  margin: 0;
+}
+
+.compare-card-head {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.compare-card-image {
+  display: grid;
+  place-items: center;
+  height: 112px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #f4f4f0;
+  color: #4a4f4a;
+  font: 500 11px var(--work-mono);
+}
+
+.compare-card-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.compare-card-title {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.compare-card-title h3 {
+  margin: 0;
+  color: var(--work-text);
+  font: 600 18px var(--work-sans);
+}
+
+.compare-card-title h3 span {
+  color: var(--work-cyan);
+  font: 600 13px var(--work-mono);
+}
+
+/* Anclajes más grandes que en el selector: aquí son lo primero que se compara. */
+.compare-card-title .mech-option-hardpoints {
+  gap: 6px;
+}
+
+.compare-card-title .mech-hardpoint-tag {
+  padding: 2px 8px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.compare-card-title .mech-hardpoint-tag small {
+  font-size: 11px;
+}
+
+.compare-loadout {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.compare-loadout-zone {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 8px;
+  align-items: baseline;
+}
+
+.compare-loadout dt {
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.compare-loadout dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+}
+
+.compare-item {
+  padding: 2px 7px;
+  border: 1px solid var(--work-line);
+  border-left: 3px solid var(--weapon-color, var(--work-line));
+  border-radius: 2px;
+  background: var(--work-panel-raised);
+  color: var(--work-text);
+  font: 500 12px var(--work-sans);
+}
+
+.compare-item small {
+  color: var(--work-muted);
+}
+
+.compare-item.is-ammo {
+  border-left-color: var(--work-amber);
+  color: var(--work-muted);
+}
+
+.compare-item.is-equipment {
+  border-left-color: var(--work-cyan);
+}
+
+.compare-card > .compare-empty:only-child {
+  grid-row: span 5;
+}
+
+.compare-empty,
+.compare-upgrades {
+  margin: 0;
+  color: var(--work-muted);
+  font: 400 12px var(--work-sans);
+}
+
+.compare-upgrades b {
+  color: var(--work-lime);
+  font-weight: 600;
+}
+
+/* Cifras dentro de cada tarjeta: las dos listas tienen las mismas filas y comparten la rejilla,
+   así que cada cifra queda a la altura de la del otro 'Mech. */
+.compare-card-stats {
+  display: grid;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--work-line);
+}
+
+.compare-card-stats h4 {
+  margin: 0 0 2px;
+  color: var(--work-text);
+  font: 600 12px var(--work-mono);
+  letter-spacing: 0.06em;
+}
+
+.compare-card-stats dl {
+  display: grid;
+  margin: 0;
+}
+
+.compare-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.compare-stat:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.compare-stat dt {
+  color: var(--work-muted);
+  font: 400 13px var(--work-sans);
+}
+
+.compare-stat dd {
+  margin: 0;
+  color: var(--work-text);
+  font: 600 14px var(--work-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.compare-stat dd small {
+  color: var(--work-muted);
+  font-weight: 400;
+}
+
+.compare-stat.is-better {
+  background: rgba(195, 237, 98, 0.1);
+}
+
+.compare-stat.is-better dd {
+  color: var(--work-lime);
+}
+
+.compare-stat.is-tie dd {
+  color: var(--work-muted);
+  font-weight: 400;
+}
+
+.compare-difference {
+  margin-right: 10px;
+  color: var(--work-lime);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* En el móvil, las tarjetas una debajo de otra; las cifras siguen en espejo. */
+@media (max-width: 600px) {
+  .compare-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .compare-title {
+    min-height: 0;
+  }
+
+
+  .compare-loadout-zone {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+}

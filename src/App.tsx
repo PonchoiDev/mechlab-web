@@ -17,6 +17,7 @@ import { useSavedBuilds } from './hooks/useSavedBuilds';
 import { useViewPreferences } from './hooks/useViewPreferences';
 import { copyText } from './services/clipboard';
 import { BuildStatus } from './components/BuildStatus';
+import { ComparePanel } from './components/ComparePanel';
 import { ComponentEditor } from './components/ComponentEditor';
 import { ContextMenu } from './components/ContextMenu';
 import { FeedbackDialog } from './components/FeedbackDialog';
@@ -57,6 +58,7 @@ export default function App() {
   );
   const armorScale = getArmorScale(upgrades);
   const [isUpgradesOpen, setIsUpgradesOpen] = useState(false);
+  const [isCompareOpen, setIsCompareOpen] = useState(false);
   const issues = useMemo(() => getBuildIssues(mech, loadout, armor), [mech, loadout, armor]);
   const equippedItems = Object.values(loadout).flat();
   const [selectedHardpoint, setSelectedHardpoint] = useState<number | null>(null);
@@ -116,6 +118,7 @@ export default function App() {
     setIsSaveOpen(false);
     showToast(`Updated “${activeBuild.name}”`);
   };
+  const currentBuild = useMemo(() => ({ mech, loadout, armor, upgrades: upgradeIds }), [mech, loadout, armor, upgradeIds]);
   const shareImageInput = useMemo(
     () => ({ mech, loadout, armor, summary, upgrades, imageUrl: sarna.asset?.imageUrl ?? null }),
     [mech, loadout, armor, summary, upgrades, sarna.asset]
@@ -194,6 +197,8 @@ export default function App() {
         upgradeSlots={{ used: getUsedUpgradeSlots(upgrades), capacity: mech.upgradeSlots ?? 0 }}
         isUpgradesOpen={isUpgradesOpen}
         onToggleUpgrades={() => setIsUpgradesOpen(open => !open)}
+        isCompareOpen={isCompareOpen}
+        onToggleCompare={() => setIsCompareOpen(open => !open)}
         savedBuildCount={saved.builds.length}
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
@@ -207,6 +212,24 @@ export default function App() {
           onToggle={build.toggleUpgrade}
           onClear={build.clearUpgrades}
           onClose={() => setIsUpgradesOpen(false)}
+        />
+      )}
+
+      {isCompareOpen && (
+        <ComparePanel
+          key={mech.id}
+          mechs={mechs}
+          catalog={items}
+          current={currentBuild}
+          savedBuilds={saved.builds}
+          onLoad={(shared, label, savedId) => {
+            build.loadBuild(shared);
+            setActiveSavedId(savedId);
+            setSelectedHardpoint(null);
+            setIsCompareOpen(false);
+            showToast(`Loaded ${savedId ? `“${label}”` : `the ${label} loadout`}`);
+          }}
+          onClose={() => setIsCompareOpen(false)}
         />
       )}
 
