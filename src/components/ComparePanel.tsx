@@ -42,7 +42,7 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
               const state = row.winner === side ? 'is-better' : row.winner === null ? 'is-tie' : 'is-worse';
               return (
                 <div key={row.key} className={`compare-stat ${state}`}>
-                  <dt>{row.label}{row.lowerIsBetter && <small> lower is better</small>}</dt>
+                  <dt>{row.label}</dt>
                   <dd>
                     {row.winner === side && row.difference && (
                       <span className="compare-difference">{row.lowerIsBetter ? '▼' : '▲'} {row.difference}</span>

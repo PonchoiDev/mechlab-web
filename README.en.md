@@ -74,7 +74,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - Strip with tonnage, armor, speed, jump jets, volley damage, melee damage, heat spike, cooling and max range.
 - **Weapons** tab: damage, heat, RPM, DPS, range, max range and projectile velocity of each weapon, with totals and ammo duration.
 - **'Mech** tab: structure, heat capacity, turn and torso twist speed, sensor range and target lock, like the summary on the in-game Upgrades screen.
-- **Compare:** the current build next to another 'Mech, each with its image and loadout. Compare with the stock loadout of any 'Mech or with a saved build; each card lists its stats (firepower, defense, heat, mobility and targeting) in line with the other one, with the better value highlighted in green.
+- **Compare:** the current build next to another 'Mech, each with its image and loadout. Compare with the stock loadout of any 'Mech or with a saved build; each card lists its stats (firepower, defense, heat and mobility) in line with the other one, with the better value highlighted in green.
 
 **Save and share**
 - Builds saved in the browser: save, update, load, duplicate, rename, delete, and export or import as JSON.

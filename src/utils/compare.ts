@@ -91,15 +91,6 @@ const STAT_GROUPS: { title: string; rows: RowDefinition[] }[] = [
       { key: 'torsoPitch', label: 'Torso twist, pitch', unit: '°/s', value: side => side.summary.torsoPitch, format: formatTurnRate, better: 'higher' },
       { key: 'jumpJets', label: 'Jump jets', value: side => side.summary.jumpJetCount, format: value => String(value), better: 'higher' }
     ]
-  },
-  {
-    // Iguales en todos los chasis sin mejoras: solo cambian con las de la cantina.
-    title: 'TARGETING',
-    rows: [
-      { key: 'sensorRange', label: 'Sensor range', unit: 'm', value: side => side.summary.sensorRange, format: value => formatNumber(value, 0), better: 'higher' },
-      { key: 'lockRetention', label: 'Lock retention time', unit: 's', value: side => side.summary.lockRetentionTime, format: value => formatNumber(value), better: 'higher' },
-      { key: 'loseLock', label: 'Lose lock time', unit: 's', value: side => side.summary.loseLockTime, format: value => formatNumber(value), better: 'higher' }
-    ]
   }
 ];
 

@@ -3055,13 +3055,6 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font: 400 13px var(--work-sans);
 }
 
-.compare-stat dt small {
-  margin-left: 4px;
-  font: 500 9px var(--work-mono);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 .compare-stat dd {
   margin: 0;
   color: var(--work-text);
