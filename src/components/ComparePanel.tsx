@@ -9,7 +9,7 @@ import {
   groupLoadout,
   resolveSavedBuild,
   toComparedSide,
-  type ComparisonRow
+  type ComparisonGroup
 } from '../utils/compare';
 import { getMechDisplayName } from '../utils/mechs';
 import type { SavedBuild } from '../utils/savedBuilds';
@@ -28,11 +28,43 @@ interface ComparePanelProps {
   onClose: () => void;
 }
 
-// Tarjeta de un lado: el 'Mech con su imagen, su ficha y su loadout por componente.
-function CompareCard({ build, caption }: { build: SharedBuild; caption: string }) {
+// Cifras de un lado. Las dos tarjetas pintan las mismas filas en el mismo orden, así que quedan a
+// la misma altura y se comparan de un vistazo; el valor mejor va en verde.
+function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b' }) {
+  return (
+    <div className="compare-card-stats">
+      {groups.map(group => (
+        <section key={group.title} aria-label={group.title}>
+          <h4>{group.title}</h4>
+          <dl>
+            {group.rows.map(row => {
+              const value = side === 'a' ? row.a : row.b;
+              const state = row.winner === side ? 'is-better' : row.winner === null ? 'is-tie' : 'is-worse';
+              return (
+                <div key={row.key} className={`compare-stat ${state}`}>
+                  <dt>{row.label}{row.lowerIsBetter && <small> lower is better</small>}</dt>
+                  <dd>
+                    {row.winner === side && row.difference && (
+                      <span className="compare-difference">{row.lowerIsBetter ? '▼' : '▲'} {row.difference}</span>
+                    )}
+                    {value}
+                    {row.unit && value !== '—' && <small> {row.unit}</small>}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+// Tarjeta de un lado: el 'Mech con su imagen, su ficha, su loadout por componente y sus cifras.
+function CompareCard({ build, caption, groups, side }: { build: SharedBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b' }) {
   const { mech, loadout, upgrades } = build;
   const sarna = useSarnaAsset(mech);
-  const groups = groupLoadout(loadout);
+  const loadoutGroups = groupLoadout(loadout);
   const upgradeNames = getUpgrades(upgrades).map(upgrade => upgrade.name);
 
   return (
@@ -50,9 +82,9 @@ function CompareCard({ build, caption }: { build: SharedBuild; caption: string }
           <HardpointSummary mech={mech} />
         </div>
       </div>
-      {groups.length > 0 ? (
+      {loadoutGroups.length > 0 ? (
         <dl className="compare-loadout">
-          {groups.map(group => (
+          {loadoutGroups.map(group => (
             <div key={group.zone} className="compare-loadout-zone">
               <dt>{group.label}</dt>
               <dd>
@@ -74,21 +106,10 @@ function CompareCard({ build, caption }: { build: SharedBuild; caption: string }
       ) : (
         <p className="compare-empty">No equipment installed.</p>
       )}
-      {upgradeNames.length > 0 && <p className="compare-upgrades"><b>Upgrades:</b> {upgradeNames.join(', ')}</p>}
+      {/* Siempre presente, aunque esté vacío: cada tarjeta ocupa las mismas filas de la rejilla. */}
+      <p className="compare-upgrades">{upgradeNames.length > 0 && <><b>Upgrades:</b> {upgradeNames.join(', ')}</>}</p>
+      <CardStats groups={groups} side={side} />
     </article>
-  );
-}
-
-// Una celda de la tabla: el valor y, si gana, la diferencia con el otro.
-function CompareValue({ row, side }: { row: ComparisonRow; side: 'a' | 'b' }) {
-  const value = side === 'a' ? row.a : row.b;
-  const state = row.winner === side ? 'is-better' : row.winner === null ? 'is-tie' : undefined;
-  return (
-    <td className={state}>
-      {value}
-      {row.unit && value !== '—' && <small> {row.unit}</small>}
-      {row.winner === side && row.difference && <span className="compare-difference">{row.lowerIsBetter ? '▼' : '▲'} {row.difference}</span>}
-    </td>
   );
 }
 
@@ -113,48 +134,49 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, onLoad, onC
     <section className="compare-panel" aria-label="Compare 'Mechs">
       <header className="upgrades-header">
         <h2>COMPARE</h2>
-        <p className="upgrades-hint">Your current build next to another 'Mech. The better value of each row is in green.</p>
+        <p className="upgrades-hint">Your current build next to another 'Mech. The better value of each stat is in green.</p>
         <button type="button" className="share-dialog-close" aria-label="Close comparison" onClick={onClose}>✕</button>
       </header>
 
-      <div className="compare-source">
-        <span className="utility-label">COMPARE WITH</span>
-        <div className="compare-source-tabs" role="group" aria-label="Compare with">
-          <button type="button" className="mech-filter-chip" aria-pressed={source === 'stock'} onClick={() => setSource('stock')}>
-            Stock 'Mech
-          </button>
-          <button type="button" className="mech-filter-chip" aria-pressed={source === 'saved'} onClick={() => setSource('saved')}>
-            My builds{savedBuilds.length > 0 && <span className="utility-count">{savedBuilds.length}</span>}
-          </button>
-        </div>
-        {source === 'stock' ? (
-          <MechPicker mechs={mechs} selectedIndex={stockIndex} onSelect={setStockIndex} />
-        ) : savedBuilds.length > 0 ? (
-          <label className="compare-saved">
-            <span>SAVED BUILD</span>
-            <select value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
-              {savedBuilds.map(build => <option key={build.id} value={build.id}>{build.name}</option>)}
-            </select>
-          </label>
-        ) : (
-          <p className="compare-empty">No saved builds yet. Use Save build in the toolbar to keep one and compare it here.</p>
-        )}
-        {other && (
-          <button
-            type="button"
-            className="utility-button utility-button-primary"
-            onClick={() => onLoad(other, otherLabel, source === 'saved' ? savedId : null)}
-          >
-            Load this build
-          </button>
-        )}
-      </div>
-
-      {/* Los controles van encima de las dos tarjetas, para que empiecen a la misma altura. */}
+      {/* Rejilla de dos columnas: los controles van encima de la tarjeta comparada y las dos
+          tarjetas empiezan a la misma altura. */}
       <div className="compare-cards">
-        <CompareCard build={current} caption="CURRENT BUILD" />
+        <div className="compare-source-spacer" aria-hidden="true" />
+        <div className="compare-source">
+          <span className="utility-label">COMPARE WITH</span>
+          <div className="compare-source-tabs" role="group" aria-label="Compare with">
+            <button type="button" className="mech-filter-chip" aria-pressed={source === 'stock'} onClick={() => setSource('stock')}>
+              Stock 'Mech
+            </button>
+            <button type="button" className="mech-filter-chip" aria-pressed={source === 'saved'} onClick={() => setSource('saved')}>
+              My builds{savedBuilds.length > 0 && <span className="utility-count">{savedBuilds.length}</span>}
+            </button>
+          </div>
+          {source === 'stock' ? (
+            <MechPicker mechs={mechs} selectedIndex={stockIndex} onSelect={setStockIndex} />
+          ) : savedBuilds.length > 0 ? (
+            <label className="compare-saved">
+              <span>SAVED BUILD</span>
+              <select value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
+                {savedBuilds.map(build => <option key={build.id} value={build.id}>{build.name}</option>)}
+              </select>
+            </label>
+          ) : (
+            <p className="compare-empty">No saved builds yet. Use Save build in the toolbar to keep one and compare it here.</p>
+          )}
+          {other && (
+            <button
+              type="button"
+              className="utility-button utility-button-primary"
+              onClick={() => onLoad(other, otherLabel, source === 'saved' ? savedId : null)}
+            >
+              Load this build
+            </button>
+          )}
+        </div>
+        <CompareCard build={current} caption="CURRENT BUILD" groups={groups} side="a" />
         {other
-          ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} />
+          ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" />
           : (
             <article className="compare-card">
               <p className="compare-empty">
@@ -164,34 +186,6 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, onLoad, onC
           )}
       </div>
 
-      {groups.length > 0 && other && (
-        <table className="compare-table">
-          <thead>
-            <tr>
-              <th scope="col">Stat</th>
-              <th scope="col">{current.mech.variant} <small>current</small></th>
-              <th scope="col">{other.mech.variant} <small>{source === 'saved' ? 'saved' : 'stock'}</small></th>
-            </tr>
-          </thead>
-          {groups.map(group => (
-            <tbody key={group.title}>
-              <tr className="compare-group">
-                <th scope="rowgroup" colSpan={3}>{group.title}</th>
-              </tr>
-              {group.rows.map(row => (
-                <tr key={row.key}>
-                  <th scope="row">
-                    {row.label}
-                    {row.lowerIsBetter && <small> lower is better</small>}
-                  </th>
-                  <CompareValue row={row} side="a" />
-                  <CompareValue row={row} side="b" />
-                </tr>
-              ))}
-            </tbody>
-          ))}
-        </table>
-      )}
     </section>
   );
 }

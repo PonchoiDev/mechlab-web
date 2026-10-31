@@ -25,7 +25,7 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 - **RF6.** Un botón **Load this 'Mech** carga en el tablero la build de la derecha y cierra el panel.
 - **RF7.** Cada lado muestra su 'Mech como una tarjeta: imagen de Sarna, nombre, ficha, anclajes y su loadout por componente (armas con su tier, equipo y munición, con las repeticiones agrupadas: `AC/20 Ammo ×2`).
 - **RF8.** La derecha se elige entre dos orígenes: **Stock 'Mech** (el selector de chasis) y **My builds** (las builds guardadas). Sin builds guardadas, se explica cómo guardar una.
-- **RF9.** Las cifras van en una sola tabla bajo las tarjetas: una columna por 'Mech, con sus siglas en la cabecera, y el ganador de cada fila en verde con la diferencia (`▲ +2`). Los empates se atenúan, y las filas en las que gana el valor más bajo lo indican en la etiqueta.
+- **RF9.** Cada tarjeta muestra sus cifras bajo el loadout, en las mismas filas y a la misma altura que las de la otra tarjeta. El valor mejor de cada fila va resaltado en verde con la diferencia (`▲ +26.8`), los empates se atenúan y las filas en las que gana el valor más bajo lo indican, con la diferencia en negativo (`▼ -16.5`). Los controles para elegir con qué comparar van encima de la tarjeta de la derecha.
 
 ## Requisitos no funcionales
 
@@ -64,7 +64,7 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 
 La primera versión era una tabla de tres columnas a todo el ancho: las cifras quedaban lejos unas de otras y no se veía qué llevaba cada 'Mech. Se rehízo con una tarjeta por 'Mech con su loadout, la comparación en espejo con barras y la opción de comparar con builds guardadas (RF7 a RF9, CA8 a CA11).
 
-La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cada línea tenía cuatro números de dos cifras distintas, las barras de valores iguales se veían llenas y, en el calor, la barra del ganador era la más corta. Se cambió por una sola tabla con una columna por 'Mech, sin barras (RF9 y CA11 actuales).
+La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cada línea tenía cuatro números de dos cifras distintas, las barras de valores iguales se veían llenas y, en el calor, la barra del ganador era la más corta. Se probó una sola tabla con una columna por 'Mech, pero con los dos valores tan separados seguía costando leerla. Al final cada tarjeta lleva sus propias cifras, alineadas fila a fila con las de la otra, como dos fichas del juego puestas lado a lado (RF9 y CA11 actuales).
 
 ## Resultado
 
@@ -76,6 +76,7 @@ La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cad
 - **Decisiones durante el desarrollo:**
   - El selector va fuera de la tabla, porque un contenedor con desplazamiento recortaría su desplegable.
   - Con dos selectores en la página, cada uno genera sus propios `id` (`useId`).
-  - Los controles para elegir con qué comparar van encima de las dos tarjetas, para que empiecen a la misma altura.
-  - Las cifras van en una tabla con una columna por 'Mech. En el calor, la diferencia lleva signo negativo (`▼ -1.6`), porque gana el valor más bajo.
-  - En el móvil, las tarjetas van una debajo de otra y la tabla cabe sin desplazamiento horizontal.
+  - Los controles para elegir con qué comparar van encima de la tarjeta de la derecha, en la misma rejilla, para que las dos tarjetas empiecen a la misma altura.
+  - Las dos tarjetas comparten las filas de la rejilla (`subgrid`): aunque los loadouts midan distinto, las cifras empiezan a la misma altura y cada fila coincide con la del otro lado. Medido en el navegador: ninguna fila descuadrada.
+  - En el calor, la diferencia lleva signo negativo (`▼ -16.5`), porque gana el valor más bajo.
+  - En el móvil, las tarjetas van una debajo de otra, cada una con sus cifras y el valor mejor resaltado.

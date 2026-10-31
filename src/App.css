@@ -2834,8 +2834,12 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .compare-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  align-items: stretch;
+  column-gap: 14px;
+}
+
+.compare-source-spacer,
+.compare-source {
+  margin-bottom: 14px;
 }
 
 .compare-source {
@@ -2843,7 +2847,6 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 10px 14px;
-  margin-bottom: 14px;
 }
 
 .compare-source > .utility-label {
@@ -2877,8 +2880,10 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .compare-card {
   display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
   align-content: start;
-  gap: 10px;
+  row-gap: 10px;
   padding: 12px;
   border: 1px solid var(--work-line);
   border-radius: 4px;
@@ -2980,6 +2985,10 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   border-left-color: var(--work-cyan);
 }
 
+.compare-card > .compare-empty:only-child {
+  grid-row: span 5;
+}
+
 .compare-empty,
 .compare-upgrades {
   margin: 0;
@@ -2992,77 +3001,84 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font-weight: 600;
 }
 
-/* Cifras en una tabla: una columna por 'Mech, el ganador en verde y los empates atenuados. */
-.compare-table {
-  width: 100%;
-  margin-top: 14px;
-  border-collapse: collapse;
-  color: var(--work-text);
-  font: 500 13px var(--work-mono);
-  font-variant-numeric: tabular-nums;
+/* Cifras dentro de cada tarjeta: las dos listas tienen las mismas filas y comparten la rejilla,
+   así que cada cifra queda a la altura de la del otro 'Mech. */
+.compare-card-stats {
+  display: grid;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--work-line);
 }
 
-.compare-table th,
-.compare-table td {
-  padding: 6px 12px;
-  border-bottom: 1px solid rgba(52, 61, 52, 0.55);
-  text-align: left;
-}
-
-.compare-table thead th {
-  color: var(--work-cyan);
-  font-weight: 600;
-  border-bottom: 1px solid var(--work-line);
-}
-
-.compare-table thead th:first-child {
-  width: 26%;
-  color: var(--work-muted);
-  font-weight: 500;
-}
-
-.compare-table thead th small,
-.compare-table tbody th small,
-.compare-table td small {
-  color: var(--work-muted);
-  font-weight: 400;
-}
-
-.compare-table tbody th {
-  color: var(--work-muted);
-  font-weight: 400;
-}
-
-.compare-table tbody th small {
-  margin-left: 6px;
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.compare-table td.is-better {
-  color: var(--work-lime);
-  font-weight: 600;
-}
-
-.compare-table td.is-tie {
-  color: var(--work-muted);
-}
-
-.compare-difference {
-  margin-left: 10px;
-  color: var(--work-lime);
-  font-size: 11px;
-  font-weight: 400;
-}
-
-.compare-group th {
-  padding-top: 14px;
+.compare-card-stats h4 {
+  margin: 0 0 2px;
   color: var(--work-muted);
   font: 500 11px var(--work-mono);
   letter-spacing: 0.06em;
 }
 
+.compare-card-stats dl {
+  display: grid;
+  margin: 0;
+}
+
+.compare-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.compare-stat:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.compare-stat dt {
+  color: var(--work-muted);
+  font: 400 13px var(--work-sans);
+}
+
+.compare-stat dt small {
+  margin-left: 4px;
+  font: 500 9px var(--work-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.compare-stat dd {
+  margin: 0;
+  color: var(--work-text);
+  font: 600 14px var(--work-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.compare-stat dd small {
+  color: var(--work-muted);
+  font-weight: 400;
+}
+
+.compare-stat.is-better {
+  background: rgba(195, 237, 98, 0.1);
+}
+
+.compare-stat.is-better dd {
+  color: var(--work-lime);
+}
+
+.compare-stat.is-tie dd {
+  color: var(--work-muted);
+  font-weight: 400;
+}
+
+.compare-difference {
+  margin-right: 10px;
+  color: var(--work-lime);
+  font-size: 11px;
+  font-weight: 400;
+}
 
 /* En el móvil, las tarjetas una debajo de otra; las cifras siguen en espejo. */
 @media (max-width: 600px) {
@@ -3070,19 +3086,10 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .compare-table {
-    font-size: 11px;
+  .compare-source-spacer {
+    display: none;
   }
 
-  .compare-table th,
-  .compare-table td {
-    padding: 6px 4px;
-  }
-
-  .compare-difference {
-    display: block;
-    margin-left: 0;
-  }
 
   .compare-loadout-zone {
     grid-template-columns: 84px minmax(0, 1fr);
