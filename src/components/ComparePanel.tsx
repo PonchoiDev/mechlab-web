@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useState } from 'react';
 import type { Item } from '../types/item';
 import type { Mech } from '../types/mech';
 import { useSarnaAsset } from '../hooks/useSarnaAsset';
@@ -30,7 +30,7 @@ interface ComparePanelProps {
 }
 
 // Tarjeta de un lado: el 'Mech con su imagen, su ficha y su loadout por componente.
-function CompareCard({ build, caption, children }: { build: SharedBuild; caption: string; children?: ReactNode }) {
+function CompareCard({ build, caption }: { build: SharedBuild; caption: string }) {
   const { mech, loadout, upgrades } = build;
   const sarna = useSarnaAsset(mech);
   const groups = groupLoadout(loadout);
@@ -39,7 +39,6 @@ function CompareCard({ build, caption, children }: { build: SharedBuild; caption
   return (
     <article className="compare-card">
       <p className="eyebrow">{caption}</p>
-      {children}
       <div className="compare-card-head">
         <div className="compare-card-image">
           {sarna.asset?.imageUrl
@@ -130,44 +129,51 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, onLoad, onC
         <button type="button" className="share-dialog-close" aria-label="Close comparison" onClick={onClose}>✕</button>
       </header>
 
+      <div className="compare-source">
+        <span className="utility-label">COMPARE WITH</span>
+        <div className="compare-source-tabs" role="group" aria-label="Compare with">
+          <button type="button" className="mech-filter-chip" aria-pressed={source === 'stock'} onClick={() => setSource('stock')}>
+            Stock 'Mech
+          </button>
+          <button type="button" className="mech-filter-chip" aria-pressed={source === 'saved'} onClick={() => setSource('saved')}>
+            My builds{savedBuilds.length > 0 && <span className="utility-count">{savedBuilds.length}</span>}
+          </button>
+        </div>
+        {source === 'stock' ? (
+          <MechPicker mechs={mechs} selectedIndex={stockIndex} onSelect={setStockIndex} />
+        ) : savedBuilds.length > 0 ? (
+          <label className="compare-saved">
+            <span>SAVED BUILD</span>
+            <select value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
+              {savedBuilds.map(build => <option key={build.id} value={build.id}>{build.name}</option>)}
+            </select>
+          </label>
+        ) : (
+          <p className="compare-empty">No saved builds yet. Use Save build in the toolbar to keep one and compare it here.</p>
+        )}
+        {other && (
+          <button
+            type="button"
+            className="utility-button utility-button-primary"
+            onClick={() => onLoad(other, otherLabel, source === 'saved' ? savedId : null)}
+          >
+            Load this build
+          </button>
+        )}
+      </div>
+
+      {/* Los controles van encima de las dos tarjetas, para que empiecen a la misma altura. */}
       <div className="compare-cards">
         <CompareCard build={current} caption="CURRENT BUILD" />
-        <div className="compare-other">
-          <div className="compare-source">
-            <div className="compare-source-tabs" role="group" aria-label="Compare with">
-              <button type="button" className="mech-filter-chip" aria-pressed={source === 'stock'} onClick={() => setSource('stock')}>
-                Stock 'Mech
-              </button>
-              <button type="button" className="mech-filter-chip" aria-pressed={source === 'saved'} onClick={() => setSource('saved')}>
-                My builds{savedBuilds.length > 0 && <span className="utility-count">{savedBuilds.length}</span>}
-              </button>
-            </div>
-            {source === 'stock' ? (
-              <MechPicker mechs={mechs} selectedIndex={stockIndex} onSelect={setStockIndex} />
-            ) : savedBuilds.length > 0 ? (
-              <label className="compare-saved">
-                <span>SAVED BUILD</span>
-                <select value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
-                  {savedBuilds.map(build => <option key={build.id} value={build.id}>{build.name}</option>)}
-                </select>
-              </label>
-            ) : (
-              <p className="compare-empty">No saved builds yet. Use Save build in the toolbar to keep one and compare it here.</p>
-            )}
-            {other && (
-              <button
-                type="button"
-                className="utility-button utility-button-primary"
-                onClick={() => onLoad(other, otherLabel, source === 'saved' ? savedId : null)}
-              >
-                Load this build
-              </button>
-            )}
-          </div>
-          {other
-            ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} />
-            : source === 'saved' && savedBuild && <p className="compare-empty">This saved build can no longer be loaded.</p>}
-        </div>
+        {other
+          ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} />
+          : (
+            <article className="compare-card">
+              <p className="compare-empty">
+                {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
+              </p>
+            </article>
+          )}
       </div>
 
       {groups.length > 0 && (

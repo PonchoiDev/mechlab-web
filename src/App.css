@@ -2835,19 +2835,19 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
-  align-items: start;
-}
-
-.compare-other {
-  display: grid;
-  gap: 10px;
+  align-items: stretch;
 }
 
 .compare-source {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  gap: 10px;
+  gap: 10px 14px;
+  margin-bottom: 14px;
+}
+
+.compare-source > .utility-label {
+  align-self: center;
 }
 
 .compare-source-tabs {
@@ -2877,6 +2877,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .compare-card {
   display: grid;
+  align-content: start;
   gap: 10px;
   padding: 12px;
   border: 1px solid var(--work-line);
@@ -2992,17 +2993,18 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 /* Cifras en espejo: valor y barra de cada lado, la etiqueta en el centro. */
+/* Columnas que se rellenan seguidas: un grupo corto no deja hueco junto a uno largo. */
 .versus {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 28px;
+  columns: 2;
+  column-gap: 28px;
   margin-top: 14px;
 }
 
 .versus-group {
   display: grid;
   gap: 2px;
-  align-content: start;
+  margin-bottom: 12px;
+  break-inside: avoid;
 }
 
 .versus-group h3 {
@@ -3087,7 +3089,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 @media (max-width: 1000px) {
   .versus {
-    grid-template-columns: minmax(0, 1fr);
+    columns: 1;
   }
 }
 
