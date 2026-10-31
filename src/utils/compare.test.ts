@@ -1,7 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import { getStockBuild } from './buildCode';
+import { encodeBuild, getStockBuild } from './buildCode';
 import { getBuildSummary } from './calculators';
-import { compareBuilds, getDefaultComparison, pickWinner, type ComparedSide } from './compare';
+import {
+  compareBuilds,
+  getBarShares,
+  getDefaultComparison,
+  groupLoadout,
+  pickWinner,
+  resolveSavedBuild,
+  toComparedSide,
+  type ComparedSide
+} from './compare';
 import { allItems, allMechs, getMech } from '../test/fixtures';
 
 // Criterios de aceptación de docs/specs/comparar-chasis.md (issue #58).
@@ -63,5 +72,43 @@ describe('con quién comparar al abrir el panel', () => {
     const only = allMechs.find(mech => allMechs.filter(other => other.name === mech.name).length === 1)!;
     const proposed = allMechs[getDefaultComparison(allMechs, only)];
     expect(proposed.id).toBe(allMechs.find(mech => mech.id !== only.id)!.id);
+  });
+});
+
+describe('tarjetas y builds guardadas', () => {
+  const atlas = getMech('AS7-D');
+  const stock = getStockBuild(atlas, allMechs, allItems)!;
+
+  it('CA8: agrupa el loadout por componente, con las repeticiones juntas y sin componentes vacíos', () => {
+    const groups = groupLoadout(stock.loadout);
+    const rightTorso = groups.find(group => group.zone === 'rightTorso')!;
+    expect(rightTorso.items).toEqual(expect.arrayContaining([
+      expect.objectContaining({ name: 'Autocannon/20', type: 'weapon', count: 1 }),
+      expect.objectContaining({ name: 'AC/20 Ammo', type: 'ammo', count: 2 })
+    ]));
+    // Las armas van primero, como en el tablero.
+    expect(rightTorso.items[0].type).toBe('weapon');
+    expect(groups.every(group => group.items.length > 0)).toBe(true);
+  });
+
+  it('CA9: una build guardada se compara con sus mejoras', () => {
+    const code = encodeBuild(atlas, stock.loadout, stock.armor, allItems, ['IncreasedArmor_Trait2']);
+    const saved = resolveSavedBuild({ id: '1', name: 'Atlas blindado', code, savedAt: '2026-10-31' }, allMechs, allItems)!;
+    expect(saved.mech.id).toBe('AS7-D');
+    const withUpgrades = toComparedSide(saved);
+    const plain = toComparedSide(stock);
+    expect(withUpgrades.summary.armorPoints).toBeGreaterThan(plain.summary.armorPoints);
+  });
+
+  it('CA10: una build guardada con un código que ya no vale no se compara', () => {
+    expect(resolveSavedBuild({ id: '2', name: 'Rota', code: 'no-es-un-codigo', savedAt: '2026-10-31' }, allMechs, allItems)).toBeNull();
+  });
+
+  it('CA11: la barra del valor mayor ocupa todo el ancho y la otra, su proporción', () => {
+    const [a, b] = getBarShares(608, 573);
+    expect(a).toBe(1);
+    expect(b).toBeCloseTo(0.94, 2);
+    expect(getBarShares(0, 0)).toEqual([0, 0]);
+    expect(getBarShares(null, 5)).toEqual([0, 1]);
   });
 });

@@ -1,7 +1,7 @@
 # Especificación: comparar dos chasis
 
 - **Issue:** [#58](https://github.com/PonchoiDev/mechlab-web/issues/58)
-- **Estado:** implementada
+- **Estado:** implementada; ampliada tras la primera revisión (ver «Revisión del diseño»)
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/compare.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -11,7 +11,7 @@ Para decidir qué 'Mech comprar, o si compensa cambiar de chasis, hoy hay que ca
 ## Qué se compara
 
 - **Izquierda:** la build del tablero, tal como está, con sus mejoras de la cantina. Si no se ha tocado, es la build de serie del chasis.
-- **Derecha:** otra variante con su build de serie, la que trae de fábrica en el juego.
+- **Derecha:** otra variante con su build de serie, la que trae de fábrica en el juego, o una de las builds guardadas en *My builds*, con sus mejoras.
 
 Con la build sin tocar, la comparación es de chasis contra chasis. Con una build propia, responde a «¿me compensa mi build o la de serie de otro chasis?».
 
@@ -22,7 +22,10 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 - **RF3.** Cada columna muestra el nombre y las siglas, la ficha del motor (`300 XL DHS ENDO`) y los anclajes por tipo y tamaño (`4E·M 1B·L`).
 - **RF4.** Una tabla compara, agrupadas como la pestaña 'Mech: anclajes por tipo, defensa (armadura y estructura), potencia de fuego (daño por salva, cuerpo a cuerpo, DPS, alcance máximo), calor (refrigeración, capacidad, pico de calor, calor disparando), movilidad (velocidad, giro, giro del torso, jump jets) y ranuras de mejora.
 - **RF5.** En cada fila se marca el valor mejor y la diferencia. Lo mejor es lo más alto, salvo el pico de calor y el calor disparando, donde gana lo más bajo. Si los dos valores son iguales o falta alguno, no gana ninguno.
-- **RF6.** Un botón **Load this 'Mech** carga en el tablero la variante de la derecha con su build de serie y cierra el panel.
+- **RF6.** Un botón **Load this 'Mech** carga en el tablero la build de la derecha y cierra el panel.
+- **RF7.** Cada lado muestra su 'Mech como una tarjeta: imagen de Sarna, nombre, ficha, anclajes y su loadout por componente (armas con su tier, equipo y munición, con las repeticiones agrupadas: `AC/20 Ammo ×2`).
+- **RF8.** La derecha se elige entre dos orígenes: **Stock 'Mech** (el selector de chasis) y **My builds** (las builds guardadas). Sin builds guardadas, se explica cómo guardar una.
+- **RF9.** Las cifras se comparan en espejo: el valor de la izquierda y el de la derecha a cada lado de la etiqueta, con una barra proporcional al mayor de los dos y el ganador resaltado.
 
 ## Requisitos no funcionales
 
@@ -42,17 +45,24 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 | CA5 | Un 'Mech comparado consigo mismo | se compara | ninguna fila tiene ganador |
 | CA6 | El AS7-D | se propone con quién compararlo | se propone otra variante de Atlas |
 | CA7 | Un 'Mech que es la única variante de su chasis | se propone con quién compararlo | se propone el primer 'Mech de la lista que no sea él |
+| CA8 | La build de serie del AS7-D | se agrupa su loadout por componente | el torso derecho lleva el Autocannon/20 y `AC/20 Ammo ×2`, y no aparecen componentes vacíos |
+| CA9 | Una build guardada del AS7-D con Refined Armor II | se elige como origen de la derecha | se reconstruye con sus mejoras y su armadura supera la de la build de serie |
+| CA10 | Una build guardada cuyo código ya no es válido | se elige como origen | no hay build que comparar y no se rompe nada |
+| CA11 | Armadura 608 frente a 573 | se calculan las barras | la de 608 ocupa todo el ancho y la de 573, el 94 % |
 
 ## Fuera de alcance
 
 - Comparar más de dos 'Mechs a la vez.
-- Elegir una build guardada para la columna derecha: de momento, siempre su build de serie.
 - Compartir la comparación por enlace.
 
 ## Plan de pruebas
 
 1. **Lógica (CA1 a CA7):** `compareBuilds` y `getDefaultComparison` en `src/utils/compare.test.ts`, con las builds de serie reales.
 2. **Interfaz:** comprobación en el navegador del panel, el selector, el marcado de ganadores y el botón de cargar.
+
+## Revisión del diseño
+
+La primera versión era una tabla de tres columnas a todo el ancho: las cifras quedaban lejos unas de otras y no se veía qué llevaba cada 'Mech. Se rehízo con una tarjeta por 'Mech con su loadout, la comparación en espejo con barras y la opción de comparar con builds guardadas (RF7 a RF9, CA8 a CA11).
 
 ## Resultado
 
