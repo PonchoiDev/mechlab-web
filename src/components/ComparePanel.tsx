@@ -132,16 +132,14 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, onLoad, onC
 
   return (
     <section className="compare-panel" aria-label="Compare 'Mechs">
-      <header className="upgrades-header">
-        <h2>COMPARE</h2>
-        <p className="upgrades-hint">Your current build next to another 'Mech. The better value of each stat is in green.</p>
-        <button type="button" className="share-dialog-close" aria-label="Close comparison" onClick={onClose}>✕</button>
-      </header>
 
-      {/* Rejilla de dos columnas: los controles van encima de la tarjeta comparada y las dos
-          tarjetas empiezan a la misma altura. */}
+      {/* Rejilla de dos columnas: el título va encima de la build actual y los controles encima de
+          la comparada, en la misma fila, y las dos tarjetas empiezan a la misma altura. */}
       <div className="compare-cards">
-        <div className="compare-source-spacer" aria-hidden="true" />
+        <header className="compare-title">
+          <h2>COMPARE</h2>
+          <p>Your current build next to another 'Mech. The better value of each stat is in green.</p>
+        </header>
         <div className="compare-source">
           <span className="utility-label">COMPARE WITH</span>
           <div className="compare-source-tabs" role="group" aria-label="Compare with">
@@ -156,8 +154,7 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, onLoad, onC
             <MechPicker mechs={mechs} selectedIndex={stockIndex} onSelect={setStockIndex} />
           ) : savedBuilds.length > 0 ? (
             <label className="compare-saved">
-              <span>SAVED BUILD</span>
-              <select value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
+              <select aria-label="Saved build" value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
                 {savedBuilds.map(build => <option key={build.id} value={build.id}>{build.name}</option>)}
               </select>
             </label>
@@ -173,6 +170,7 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, onLoad, onC
               Load this build
             </button>
           )}
+          <button type="button" className="share-dialog-close compare-close" aria-label="Close comparison" onClick={onClose}>✕</button>
         </div>
         <CompareCard build={current} caption="CURRENT BUILD" groups={groups} side="a" />
         {other
