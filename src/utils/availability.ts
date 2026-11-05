@@ -1,5 +1,11 @@
 import type { AvailabilityData, GameDate, Market, MechAvailability, Quest, Rarity, StarmapData, UniqueMech } from '../types/starmap';
-import { countSystemsByOwner, normalize } from './starmap';
+import { getQuestRoute } from './quests';
+import { countSystemsByOwner, getOwnerAt, normalize } from './starmap';
+
+// Con pocos sistemas, la ficha los nombra: su color apenas se ve con el mapa entero.
+const SMALL_FACTION_SYSTEMS = 5;
+// Si las facciones que la venden suman pocos sistemas, el mapa los encuadra al elegir la variante.
+const FOCUS_SYSTEMS = 30;
 
 export const RARITY_ORDER: Rarity[] = ['veryCommon', 'common', 'uncommon', 'rare', 'veryRare', 'unique', 'unavailable'];
 
@@ -27,7 +33,7 @@ export const isProduced = (mech: MechAvailability, date: GameDate): boolean => m
 
 export interface RarityGroup {
   rarity: Rarity | null;
-  factions: { id: string; systems: number }[];
+  factions: { id: string; systems: number; systemIds?: number[] }[];
 }
 
 // Facciones con sistemas en la fecha, agrupadas de más a menos común; las que no la venden, al final.
@@ -35,7 +41,10 @@ export const getAvailabilityAt = (data: StarmapData, availability: AvailabilityD
   const groups = new Map<Rarity | null, RarityGroup['factions']>();
   for (const [id, systems] of countSystemsByOwner(data.systems, date)) {
     const rarity = getMarketRarity(availability, mech, id);
-    groups.set(rarity, [...(groups.get(rarity) ?? []), { id, systems }]);
+    const entry = systems <= SMALL_FACTION_SYSTEMS
+      ? { id, systems, systemIds: data.systems.filter(system => getOwnerAt(system, date) === id).map(system => system.id) }
+      : { id, systems };
+    groups.set(rarity, [...(groups.get(rarity) ?? []), entry]);
   }
   return [...RARITY_ORDER, null].flatMap(rarity => {
     const factions = groups.get(rarity);
@@ -65,8 +74,29 @@ export const getHeroMechs = (data: StarmapData, availability: AvailabilityData):
     .filter(({ sources }) => hasSources(sources))
     .sort((a, b) => a.mech.name.localeCompare(b.mech.name) || a.mech.id.localeCompare(b.mech.id));
 
+// Qué encuadrar al elegir una variante. Un hero con fuente fija, o una variante que no vende nadie, se
+// consigue en su HRQ (con la ruta marcada) o en su sistema; si la venden facciones pequeñas, sus
+// sistemas. Si se vende en todas partes, nada: ya se ve con el mapa entero.
+export const getMechFocus = (data: StarmapData, availability: AvailabilityData, mech: MechAvailability, date: GameDate): { systemIds: number[]; questId: string | null } => {
+  const selling = isProduced(mech, date)
+    ? data.systems.filter(system => {
+      const owner = getOwnerAt(system, date);
+      const rarity = owner ? getMarketRarity(availability, mech, owner) : null;
+      return rarity !== null && rarity !== 'unavailable';
+    })
+    : [];
+  const sources = getFixedSources(data, mech.id);
+  if ((mech.hero || selling.length === 0) && hasSources(sources)) {
+    const [quest] = sources.quests;
+    if (quest) return { systemIds: getQuestRoute(quest), questId: quest.id };
+    return { systemIds: [...new Set([...sources.uniques, ...sources.markets].map(source => source.system))], questId: null };
+  }
+  return { systemIds: selling.length <= FOCUS_SYSTEMS ? selling.map(system => system.id) : [], questId: null };
+};
+
 // Primero las variantes cuyo id empieza por el texto, después las que lo contienen y después por nombre.
-export const searchMechs = (availability: AvailabilityData, query: string, limit = 30): MechAvailability[] => {
+// Con fecha, solo las variantes que ya existen: buscar una que todavía no existe confunde.
+export const searchMechs = (availability: AvailabilityData, query: string, date?: GameDate, limit = 30): MechAvailability[] => {
   const needle = normalize(query);
   if (!needle) return [];
   const score = (mech: MechAvailability) => {
@@ -78,6 +108,7 @@ export const searchMechs = (availability: AvailabilityData, query: string, limit
     return -1;
   };
   return availability.mechs
+    .filter(mech => !date || isProduced(mech, date))
     .map(mech => ({ mech, score: score(mech) }))
     .filter(({ score: value }) => value >= 0)
     .sort((a, b) => a.score - b.score || a.mech.name.localeCompare(b.mech.name) || a.mech.id.localeCompare(b.mech.id))
