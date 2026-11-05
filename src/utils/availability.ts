@@ -116,6 +116,14 @@ export const searchMechs = (availability: AvailabilityData, query: string, date?
     .map(({ mech }) => mech);
 };
 
+// Fecha en que entra en producción la primera variante que coincide con la búsqueda, sin mirar la
+// fecha del mapa: para ofrecer ir a ella cuando todavía no existe ninguna.
+export const getFirstProduction = (availability: AvailabilityData, query: string): GameDate | null =>
+  searchMechs(availability, query, undefined, Infinity).reduce<GameDate | null>(
+    (first, mech) => (first === null || mech.from < first ? mech.from : first),
+    null
+  );
+
 export const parseMechQuery = (search: string, availability: AvailabilityData): string | null => {
   const id = new URLSearchParams(search).get('mech');
   return id && availability.mechs.some(mech => mech.id === id) ? id : null;

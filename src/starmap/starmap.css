@@ -911,6 +911,28 @@ button, input, select { font: inherit; color: inherit; }
 
 .starmap-mech-lab { padding: 12px 14px 14px; }
 
+/* El aviso de la lista es un bloque: la leyenda pone sus elementos en fila. */
+.starmap-legend li.starmap-quests-empty { display: block; padding: 6px 12px; }
+
+/* Más específico que los botones de la lista (.starmap-quests li button). */
+.starmap-quests li .starmap-mech-date {
+  display: block;
+  width: auto;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border: 1px solid #8be3ff;
+  color: #8be3ff;
+  background: rgba(139, 227, 255, 0.08);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.starmap-quests li .starmap-mech-date:hover,
+.starmap-quests li .starmap-mech-date:focus-visible { color: #000; background: #8be3ff; }
+
 .starmap-heroes-drawer .starmap-market-note {
   margin: 0 12px 6px;
   color: var(--map-muted);

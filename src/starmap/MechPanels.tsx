@@ -1,6 +1,6 @@
 import { Fragment, useMemo, useState, type CSSProperties } from 'react';
 import type { AvailabilityData, GameDate, MechAvailability, Quest, StarmapData } from '../types/starmap';
-import { getAvailabilityAt, getFixedSources, getHeroMechs, isProduced, RARITY_NAMES, searchMechs, type FixedSources } from '../utils/availability';
+import { getAvailabilityAt, getFirstProduction, getFixedSources, getHeroMechs, isProduced, RARITY_NAMES, searchMechs, type FixedSources } from '../utils/availability';
 import { formatGameDate } from '../utils/starmap';
 import { MechLink } from './MarketPanels';
 import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
@@ -18,13 +18,16 @@ const describeSources = (data: StarmapData, { quests, markets, uniques }: FixedS
 interface MechDrawerProps {
   availability: AvailabilityData | null;
   date: GameDate;
+  // Último día del mapa: después no se puede ir a una fecha.
+  lastDate: GameDate;
+  onDate: (date: GameDate) => void;
   selectedId: string | null;
   onOpen: () => void;
   onPick: (mechId: string) => void;
 }
 
 // Buscador de variantes, junto a Quests y Special markets. La rareza se carga al abrirlo.
-export function MechDrawer({ availability, date, selectedId, onOpen, onPick }: MechDrawerProps) {
+export function MechDrawer({ availability, date, lastDate, onDate, selectedId, onOpen, onPick }: MechDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const results = useMemo(() => (availability ? searchMechs(availability, query, date) : []), [availability, query, date]);
@@ -69,11 +72,26 @@ export function MechDrawer({ availability, date, selectedId, onOpen, onPick }: M
                 </button>
               </li>
             ))}
-            {availability && query.trim() && results.length === 0 && <li className="starmap-quests-empty">No &rsquo;Mechs in production on {formatGameDate(date)}</li>}
+            {availability && query.trim() && results.length === 0 && (
+              <NotInProduction first={getFirstProduction(availability, query)} date={date} lastDate={lastDate} onDate={onDate} />
+            )}
           </ul>
         </div>
       )}
     </section>
+  );
+}
+
+// Sin resultados en la fecha del mapa: si lo buscado existe más adelante, un botón lleva a esa fecha.
+function NotInProduction({ first, date, lastDate, onDate }: { first: GameDate | null; date: GameDate; lastDate: GameDate; onDate: (date: GameDate) => void }) {
+  if (!first) return <li className="starmap-quests-empty">No &rsquo;Mechs found</li>;
+  return (
+    <li className="starmap-quests-empty">
+      No &rsquo;Mechs in production on {formatGameDate(date)}.
+      {first <= lastDate
+        ? <button type="button" className="starmap-mech-date" onClick={() => onDate(first)}>Show from {formatGameDate(first)}</button>
+        : <> They enter production on {formatGameDate(first)}, after the map ends.</>}
+    </li>
   );
 }
 

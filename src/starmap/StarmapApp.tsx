@@ -354,6 +354,12 @@ export function StarmapApp() {
     focusOn(picked.offer);
   };
 
+  const changeDate = (next: GameDate, isJump: boolean) => {
+    const target = clampDate(next, data.range);
+    setJump(isJump ? { changedCount: getOwnerChanges(data.systems, date, target).length } : null);
+    setDate(target);
+  };
+
   // Al elegir una variante se cierran la ficha del sistema y la de la HRQ para que se vea la suya.
   const pickMech = (id: string) => {
     setMechId(id);
@@ -435,7 +441,15 @@ export function StarmapApp() {
             focusOn(systemId);
           }}
         />
-        <MechDrawer availability={availability} date={date} selectedId={mechId} onOpen={() => loadAvailability()} onPick={pickMech} />
+        <MechDrawer
+          availability={availability}
+          date={date}
+          lastDate={data.range.end}
+          onDate={next => changeDate(next, true)}
+          selectedId={mechId}
+          onOpen={() => loadAvailability()}
+          onPick={pickMech}
+        />
         <HeroDrawer data={data} availability={availability} selectedId={mechId} onOpen={() => loadAvailability()} onPick={pickMech} />
       </div>
       {isFeedbackOpen && (
@@ -452,11 +466,7 @@ export function StarmapApp() {
       <DateControl
         date={date}
         changedCount={jump?.changedCount ?? null}
-        onChange={(next, isJump) => {
-          const target = clampDate(next, data.range);
-          setJump(isJump ? { changedCount: getOwnerChanges(data.systems, date, target).length } : null);
-          setDate(target);
-        }}
+        onChange={changeDate}
       />
     </div>
   );
