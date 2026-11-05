@@ -1,18 +1,25 @@
 import type { GameDate, Quest, StarmapData } from '../types/starmap';
 import { normalize } from './starmap';
 
-// Busca por el nombre de la misión, por quien la encarga y por los sistemas donde se ofrece o se
-// juega. Sin texto, todas, por nombre.
+// Busca por el nombre de la misión, por quien la encarga, por los sistemas donde se ofrece o se
+// juega y por su recompensa ('Mechs, armas y equipo). Sin texto, todas, por nombre.
 export const searchQuests = (data: StarmapData, query: string): Quest[] => {
   const byName = (a: Quest, b: Quest) => a.name.localeCompare(b.name);
   const needle = normalize(query);
   if (!needle) return [...data.quests].sort(byName);
   const names = new Map(data.systems.map(system => [system.id, normalize(system.name)]));
   const systemsOf = (quest: Quest) => [quest.offer, ...quest.missions.map(mission => mission.system)].map(id => names.get(id) ?? '');
+  const rewardsOf = (quest: Quest) => quest.rewards.flatMap(reward => [
+    ...reward.mechs.map(mech => `${mech.name} ${mech.id}`),
+    ...reward.weapons.map(weapon => weapon.name),
+    ...reward.equipment.map(item => item.name)
+  ]).map(normalize);
   const inName = data.quests.filter(quest => normalize(quest.name).includes(needle)).sort(byName);
   const elsewhere = data.quests
     .filter(quest => !normalize(quest.name).includes(needle))
-    .filter(quest => normalize(quest.employer ?? '').includes(needle) || systemsOf(quest).some(name => name.includes(needle)))
+    .filter(quest => normalize(quest.employer ?? '').includes(needle)
+      || systemsOf(quest).some(name => name.includes(needle))
+      || rewardsOf(quest).some(text => text.includes(needle)))
     .sort(byName);
   return [...inName, ...elsewhere];
 };

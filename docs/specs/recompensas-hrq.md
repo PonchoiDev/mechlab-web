@@ -20,14 +20,15 @@ El objetivo de cada misión (`*_Prompt`, el mismo del que salen su título y su 
 | `ObjectiveReward.ItemRewards` | 'Mechs (`MechLoadouts`), armas y equipo, con su cantidad |
 | `RewardBriefing` | Texto de agradecimiento al terminar |
 
-`extraer_mapa.py` guarda la recompensa de cada objetivo junto a sus textos en `misiones.json`, y `generar_mapa.py` suma las de cada cadena en `starmap.json`, con los nombres de `mechs.json` e `items.json`.
+`extraer_mapa.py` guarda los objetivos que pagan de las carpetas de las HRQ en `tools/datos-juego/starmap/recompensas_misiones.json`, y `generar_mapa.py` suma los de cada cadena en `starmap.json`, con los nombres de `mechs.json` e `items.json`.
 
 **Decisiones sobre los datos:**
 
 - **Qué cuenta:** solo los objetivos con `bHasRewards`. Algunos sin esa marca traen una recompensa copiada de otro (la primera parte de Tributes for the Imperator repite la de la tercera) que el juego no entrega.
-- **Suma por cadena:** C-Bills y reputación de todas las misiones que pagan, y la lista de 'Mechs, armas y equipo, con las cantidades sumadas. Cada objetivo cuenta una vez aunque lo usen varias acciones.
+- **Todos los objetivos de la carpeta:** no solo los de las acciones con sistema, porque el pago final suele estar en un objetivo que activa el arco (A New March, de Adam Steiner, con 30 millones y un Bushwacker). Los de título entre corchetes (`[*] Campaign Complete`) son marcadores internos y no cuentan.
+- **Suma por cadena:** C-Bills y reputación de todos los objetivos que pagan, y la lista de 'Mechs, armas y equipo, con las cantidades sumadas. Si dos comparten título, son desenlaces alternativos (Armed Robbery en carrera tiene dos iguales) y cuenta uno.
 - **Campaña y carrera:** pagan distinto (Shipping Disruption da unos 300.000 C-Bills en campaña y 2,1 millones en carrera), así que cada modo conserva su recompensa.
-- **'Mechs:** el loadout de la recompensa lleva prefijos y sufijos (`11_2_Reward_FS9-A`, `COR-PVT_CareerSalvage`); la variante es la parte central.
+- **'Mechs:** el loadout de la recompensa lleva prefijos y sufijos en cualquier orden (`11_2_Reward_FS9-A`, `COR-PVT_CareerSalvage`, `RFL-DNA_Loadout_CareerSalvage`); la variante es la parte central.
 - **Armas:** con su tier, como en los mercados especiales.
 - **Texto final:** el `RewardBriefing` de la última misión que paga.
 

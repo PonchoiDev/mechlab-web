@@ -49,6 +49,18 @@ export interface QuestRequirement {
   excludes: string[];
 }
 
+// Lo que paga una HRQ al completarse, por modo (null en las de los DLC).
+export interface QuestReward {
+  mode: 'campaign' | 'career' | null;
+  cbills: number;
+  reputation: number;
+  mechs: { id: string; name: string }[];
+  weapons: { name: string; tier: string | null; count: number }[];
+  equipment: { name: string; count: number }[];
+  // Texto de agradecimiento de la última misión que paga.
+  debrief: string | null;
+}
+
 export interface Quest {
   id: string;
   name: string;
@@ -62,6 +74,7 @@ export interface Quest {
   missionTypes: string[];
   missions: QuestMission[];
   requirements: QuestRequirement[];
+  rewards: QuestReward[];
 }
 
 // Mercado con inventario fijo de la campaña de un DLC.
