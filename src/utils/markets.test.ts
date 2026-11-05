@@ -70,6 +70,11 @@ describe('búsqueda y enlace al MechLab', () => {
     expect(all).toHaveLength(data.markets.length + data.uniqueMechs.length);
     expect(all[0].unique?.mech).toBe('AS7-D-H');
     expect(all.slice(1).map(result => result.market!.dlc)).toEqual([...all.slice(1).map(result => result.market!.dlc)].sort((a, b) => a - b));
+    // Dentro de cada DLC, en el orden de su campaña.
+    const stagesOf = (dlc: number) => all.filter(result => result.market?.dlc === dlc).map(result => result.market!.stage);
+    expect(stagesOf(2)).toEqual(['Prologue', 'Act 1', 'Act 2', 'Act 3']);
+    const blackMarkets = all.filter(result => result.market?.dlc === 7).map(result => data.systems.find(system => system.id === result.system)?.name);
+    expect(blackMarkets).toEqual(['Alleghe', 'Rodigo', 'Last Frontier', 'Rasalhague', 'HD-438297']);
   });
 
   it('CA8: cada Mech se abre en el MechLab con su build de serie', () => {
