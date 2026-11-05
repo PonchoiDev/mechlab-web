@@ -15,6 +15,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       'New Star Map page at mw-builder.com/mercs/starmap/, with its own cover on the MW Builder home page',
       'Faction borders of the Inner Sphere on any date from 3015 to 3060, taken from the game files, with the events that move them',
+      'Jumping to an event fades the borders into the new ones and flashes every system that changed hands',
       'Clusters and industrial hubs, drawn as in the game, and a card with the owner history of each system',
       'Search a system by name and share the view: the date and the system go in the link'
     ]

@@ -364,6 +364,16 @@ button, input, select { font: inherit; color: inherit; }
   text-shadow: 0 0 16px rgba(255, 212, 0, 0.35);
 }
 
+.starmap-date-changes {
+  min-height: 18px;
+  margin: -2px 0 6px;
+  color: var(--map-text);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .starmap-date input[type='range'] {
   width: 100%;
   margin: 0;
@@ -522,7 +532,7 @@ button, input, select { font: inherit; color: inherit; }
   .starmap-date { right: 12px; bottom: 12px; width: calc(100vw - 24px); }
   .starmap-date-value { font-size: 32px; }
   /* Zoom y leyenda justo encima del panel de fecha, para no tapar la ficha del sistema. */
-  .starmap-zoom { left: auto; right: 12px; bottom: 188px; flex-direction: row; }
-  .starmap-legend { left: 12px; bottom: 188px; max-width: calc(100vw - 160px); }
+  .starmap-zoom { left: auto; right: 12px; bottom: 200px; flex-direction: row; }
+  .starmap-legend { left: 12px; bottom: 200px; max-width: calc(100vw - 160px); }
   .starmap-legend ul { max-height: 36vh; }
 }

@@ -10,6 +10,7 @@ import {
   getCurrentEvent,
   getNextEvent,
   getOwnerAt,
+  getOwnerChanges,
   getPreviousEvent,
   parseMapQuery,
   searchSystems,
@@ -79,7 +80,14 @@ function SystemPanel({ system, date, pinned, onClose }: { system: StarSystem; da
   );
 }
 
-function DateControl({ date, onChange }: { date: GameDate; onChange: (date: GameDate) => void }) {
+interface DateControlProps {
+  date: GameDate;
+  // Sistemas que cambiaron de dueño en el último salto entre eventos, o null si se movió el control.
+  changedCount: number | null;
+  onChange: (date: GameDate, isJump: boolean) => void;
+}
+
+function DateControl({ date, changedCount, onChange }: DateControlProps) {
   const current = getCurrentEvent(data.events, date);
   const previous = getPreviousEvent(data.events, date);
   const next = getNextEvent(data.events, date);
@@ -88,6 +96,9 @@ function DateControl({ date, onChange }: { date: GameDate; onChange: (date: Game
     <section className="starmap-date" aria-label="Date">
       <p className="starmap-date-era">{current ? current.name : 'Campaign start'}</p>
       <p className="starmap-date-value">{formatGameDate(date)}</p>
+      <p className="starmap-date-changes" aria-live="polite">
+        {changedCount !== null && (changedCount === 1 ? '1 system changed hands' : `${changedCount} systems changed hands`)}
+      </p>
       <input
         type="range"
         aria-label="Date"
@@ -95,7 +106,7 @@ function DateControl({ date, onChange }: { date: GameDate; onChange: (date: Game
         min={dateToDays(data.range.start)}
         max={dateToDays(data.range.end)}
         value={dateToDays(date)}
-        onChange={event => onChange(daysToDate(Number(event.target.value)))}
+        onChange={event => onChange(daysToDate(Number(event.target.value)), false)}
       />
       <div className="starmap-date-ticks" aria-hidden="true">
         {data.events.map(event => {
@@ -105,19 +116,19 @@ function DateControl({ date, onChange }: { date: GameDate; onChange: (date: Game
         })}
       </div>
       <div className="starmap-date-actions">
-        <button type="button" disabled={!previous} onClick={() => previous && onChange(previous.date)} aria-label="Previous event">◀</button>
+        <button type="button" disabled={!previous} onClick={() => previous && onChange(previous.date, true)} aria-label="Previous event">◀</button>
         <select
           aria-label="Jump to event"
           value={current && current.date === date ? current.id : ''}
           onChange={event => {
             const target = data.events.find(candidate => candidate.id === event.target.value);
-            if (target) onChange(target.date);
+            if (target) onChange(target.date, true);
           }}
         >
           <option value="">Jump to event…</option>
           {data.events.map(event => <option key={event.id} value={event.id}>{event.date.slice(0, 4)} · {event.name}</option>)}
         </select>
-        <button type="button" disabled={!next} onClick={() => next && onChange(next.date)} aria-label="Next event">▶</button>
+        <button type="button" disabled={!next} onClick={() => next && onChange(next.date, true)} aria-label="Next event">▶</button>
       </div>
     </section>
   );
@@ -194,6 +205,7 @@ function FactionLegend({ date }: { date: GameDate }) {
 export function StarmapApp() {
   const initial = useMemo(() => parseMapQuery(window.location.search, data), []);
   const [date, setDate] = useState<GameDate>(initial.date);
+  const [jump, setJump] = useState<{ changedCount: number } | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(initial.systemId);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [focus, setFocus] = useState<FocusRequest | null>(initial.systemId === null ? null : { systemId: initial.systemId, sequence: 0 });
@@ -220,6 +232,7 @@ export function StarmapApp() {
       <StarmapCanvas
         data={data}
         date={date}
+        animateDate={jump !== null}
         hoveredId={hoveredId}
         selectedId={selectedId}
         focus={focus}
@@ -242,7 +255,15 @@ export function StarmapApp() {
       {shown && <SystemPanel system={shown} date={date} pinned={isPinned} onClose={() => setSelectedId(null)} />}
 
       <FactionLegend date={date} />
-      <DateControl date={date} onChange={next => setDate(clampDate(next, data.range))} />
+      <DateControl
+        date={date}
+        changedCount={jump?.changedCount ?? null}
+        onChange={(next, isJump) => {
+          const target = clampDate(next, data.range);
+          setJump(isJump ? { changedCount: getOwnerChanges(data.systems, date, target).length } : null);
+          setDate(target);
+        }}
+      />
     </div>
   );
 }

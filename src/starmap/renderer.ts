@@ -19,6 +19,24 @@ const CLUSTER_PADDING = 7;
 const BORDER_WIDTH = 2;
 const BORDER_HALO = 7;
 const INNER_GLOW = 18;
+// Al saltar de un evento a otro, los territorios se funden y los sistemas que cambian de dueño
+// destellan con el color de su nueva facción.
+const FADE_MS = 900;
+const FLASH_MS = 3000;
+const FLASH_RADIUS = 14;
+const FLASH_MIN_PIXELS = 26;
+const FLASH_RING_START = 6;
+const FLASH_RING_GROWTH = 34;
+
+type Territory = { color: string; path: Path2D };
+
+interface Transition {
+  startedAt: number;
+  previous: Territory[];
+  changed: { x: number; y: number; color: string }[];
+}
+
+const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
 
 const hexToRgb = (hex: string): [number, number, number] => [
   parseInt(hex.slice(1, 3), 16),
@@ -51,7 +69,8 @@ export class StarmapRenderer {
   private readonly clusterOutlines: Point[][];
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
-  private territories: { color: string; path: Path2D }[] = [];
+  private territories: Territory[] = [];
+  private transition: Transition | null = null;
   private starfield: HTMLCanvasElement | null = null;
   private owners: (string | null)[] = [];
   private frame = 0;
@@ -95,7 +114,9 @@ export class StarmapRenderer {
     this.requestDraw();
   }
 
-  setDate(date: GameDate) {
+  setDate(date: GameDate, animate = false) {
+    const previousOwners = this.owners;
+    const previous = this.territories;
     this.owners = this.data.systems.map(system => getOwnerAt(system, date));
     // Un trazado por facción, en años luz: al mover o ampliar el mapa solo cambia la transformación.
     this.territories = [...getTerritoryContours(this.index, this.data.systems, date)].map(([faction, loops]) => {
@@ -106,6 +127,13 @@ export class StarmapRenderer {
       }
       return { color: this.data.factions[faction].color, path };
     });
+    const changed = animate && previous.length
+      ? this.data.systems.flatMap((system, i) => {
+        const owner = this.owners[i];
+        return owner !== previousOwners[i] ? [{ x: system.x, y: system.y, color: owner ? this.data.factions[owner].color : '#ffffff' }] : [];
+      })
+      : [];
+    this.transition = changed.length ? { startedAt: performance.now(), previous, changed } : null;
     this.requestDraw();
   }
 
@@ -185,22 +213,71 @@ export class StarmapRenderer {
     if (this.starfield) context.drawImage(this.starfield, 0, 0);
     context.setTransform(this.ratio, 0, 0, this.ratio, 0, 0);
 
-    this.drawTerritories();
+    const elapsed = this.transition ? performance.now() - this.transition.startedAt : Infinity;
+    if (this.transition && elapsed < FADE_MS) {
+      const t = easeInOut(elapsed / FADE_MS);
+      this.drawTerritories(this.transition.previous, 1 - t);
+      this.drawTerritories(this.territories, t);
+    } else {
+      this.drawTerritories(this.territories, 1);
+    }
+    if (this.transition && elapsed < FLASH_MS) this.drawChanges(this.transition.changed, elapsed / FLASH_MS);
     this.drawClusters();
     this.drawSystems();
+    if (this.transition) {
+      if (elapsed < FLASH_MS) this.requestDraw();
+      else this.transition = null;
+    }
   }
 
-  private drawTerritories() {
-    const context = this.context;
+  // Transformación de años luz a píxeles, con el norte arriba.
+  private setWorldTransform() {
     const { scale } = this.view;
-    // Transformación de años luz a píxeles, con el norte arriba.
-    context.save();
-    context.setTransform(
+    this.context.setTransform(
       this.ratio * scale, 0, 0, -this.ratio * scale,
       this.ratio * (this.width / 2 - this.view.x * scale), this.ratio * (this.height / 2 + this.view.y * scale)
     );
+  }
+
+  private drawChanges(changed: Transition['changed'], progress: number) {
+    // Cada sistema que cambia de dueño se ilumina con su nuevo color y lanza un anillo que se abre y
+    // se apaga. Los tamaños mínimos van en píxeles para que se vea también con el mapa entero.
+    const context = this.context;
+    const { scale } = this.view;
+    const glowAlpha = 0.9 * (1 - progress) ** 1.4;
+    const glowRadius = Math.max(FLASH_RADIUS, FLASH_MIN_PIXELS / scale);
+    const ringProgress = Math.min(1, progress * 1.6);
+    const ringRadius = (FLASH_RING_START + FLASH_RING_GROWTH * ringProgress) / scale;
+    context.save();
+    this.setWorldTransform();
+    context.globalCompositeOperation = 'lighter';
+    for (const { x, y, color } of changed) {
+      const gradient = context.createRadialGradient(x, y, 0, x, y, glowRadius);
+      gradient.addColorStop(0, withAlpha(color, glowAlpha));
+      gradient.addColorStop(1, withAlpha(color, 0));
+      context.fillStyle = gradient;
+      context.fillRect(x - glowRadius, y - glowRadius, glowRadius * 2, glowRadius * 2);
+    }
+    if (ringProgress < 1) {
+      context.lineWidth = 2 / scale;
+      for (const { x, y, color } of changed) {
+        context.strokeStyle = withAlpha(color, 1 - ringProgress);
+        context.beginPath();
+        context.arc(x, y, ringRadius, 0, Math.PI * 2);
+        context.stroke();
+      }
+    }
+    context.restore();
+  }
+
+  private drawTerritories(territories: Territory[], opacity: number) {
+    const context = this.context;
+    const { scale } = this.view;
+    context.save();
+    this.setWorldTransform();
+    context.globalAlpha = opacity;
     context.lineJoin = 'round';
-    for (const { color, path } of this.territories) {
+    for (const { color, path } of territories) {
       context.fillStyle = withAlpha(color, 0.2);
       context.fill(path, 'evenodd');
       // Brillo hacia dentro del borde, recortado al propio territorio para que no invada al vecino.
@@ -215,7 +292,7 @@ export class StarmapRenderer {
       context.restore();
     }
     // Los bordes van después de todos los rellenos: así ninguno queda tapado por el vecino.
-    for (const { color, path } of this.territories) {
+    for (const { color, path } of territories) {
       context.strokeStyle = withAlpha(color, 0.35);
       context.lineWidth = BORDER_HALO / scale;
       context.stroke(path);

@@ -11,6 +11,8 @@ export interface FocusRequest {
 interface StarmapCanvasProps {
   data: StarmapData;
   date: GameDate;
+  // true cuando la fecha cambia de golpe (un evento): el cambio se anima.
+  animateDate: boolean;
   hoveredId: number | null;
   selectedId: number | null;
   focus: FocusRequest | null;
@@ -32,7 +34,7 @@ const getBounds = (data: StarmapData) => {
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, hoveredId, selectedId, focus, onHover, onSelect }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, focus, onHover, onSelect }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
@@ -130,8 +132,8 @@ export function StarmapCanvas({ data, date, hoveredId, selectedId, focus, onHove
   }, [data]);
 
   useEffect(() => {
-    rendererRef.current?.setDate(date);
-  }, [date, data]);
+    rendererRef.current?.setDate(date, animateDate && !prefersReducedMotion());
+  }, [date, data, animateDate]);
 
   useEffect(() => {
     const renderer = rendererRef.current;
