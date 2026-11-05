@@ -310,6 +310,8 @@ export function StarmapApp() {
           <QuestCard
             data={data}
             quest={quest}
+            date={date}
+            onQuest={pickQuest}
             onSystem={systemId => {
               setSelectedId(systemId);
               focusOn(systemId);
@@ -320,7 +322,7 @@ export function StarmapApp() {
 
       <div className="starmap-drawers">
         <FactionLegend date={date} />
-        <QuestDrawer data={data} selectedId={questId} onPick={pickQuest} />
+        <QuestDrawer data={data} date={date} selectedId={questId} onPick={pickQuest} />
         <MarketDrawer
           data={data}
           onPick={systemId => {

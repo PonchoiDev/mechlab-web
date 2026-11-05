@@ -1,4 +1,4 @@
-import type { Quest, StarmapData } from '../types/starmap';
+import type { GameDate, Quest, StarmapData } from '../types/starmap';
 import { normalize } from './starmap';
 
 // Busca por el nombre de la misión, por quien la encarga y por los sistemas donde se ofrece o se
@@ -27,6 +27,24 @@ export const getQuestsForSystem = (data: StarmapData, systemId: number): { offer
 export const getQuestRoute = (quest: Quest): number[] =>
   [quest.offer, ...quest.missions.map(mission => mission.system)]
     .filter((system, index, route) => index === 0 || system !== route[index - 1]);
+
+export type QuestAvailability =
+  | { state: 'available' }
+  | { state: 'upcoming'; date: GameDate }
+  | { state: 'expired'; date: GameDate };
+
+// Si la HRQ se ofrece en esa fecha. Con varios modos basta con que se ofrezca en uno: aún no se
+// ofrece si todos tienen una fecha posterior, y ya no si todos caducaron.
+export const getQuestAvailability = (quest: Quest, date: GameDate): QuestAvailability => {
+  const { requirements } = quest;
+  if (requirements.length && requirements.every(requirement => requirement.from !== null && requirement.from > date)) {
+    return { state: 'upcoming', date: requirements.map(requirement => requirement.from!).sort()[0] };
+  }
+  if (requirements.length && requirements.every(requirement => requirement.until !== null && requirement.until <= date)) {
+    return { state: 'expired', date: requirements.map(requirement => requirement.until!).sort().at(-1)! };
+  }
+  return { state: 'available' };
+};
 
 export const parseQuestQuery = (search: string, data: StarmapData): string | null => {
   const id = new URLSearchParams(search).get('quest');

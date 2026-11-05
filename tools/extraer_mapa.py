@@ -221,6 +221,67 @@ def extraer_misiones(pak):
     return acciones
 
 
+# Los arcos de avisos y transmisiones recuerdan plazos, y los de inicio de la campaña del DLC3 son de
+# la campaña: ninguno decide cuándo se ofrece una HRQ.
+REGEX_ARCO_IGNORADO = re.compile(r"(Warning|Transmission|StartConditions|QuickStart|Campaign_Start)", re.IGNORECASE)
+
+
+def condiciones_de_eventos(nodo, condiciones, asset):
+    """Recorre los eventos de un arco y apunta sus condiciones de reputación y de fecha, y los
+    objetivos que el evento que la ofrece pide completar antes."""
+    if isinstance(nodo, dict):
+        disparo = nodo.get("TriggerConditions")
+        if isinstance(disparo, dict):
+            if re.search(r"(Offer|Show)", nodo.get("EventName") or ""):
+                for objetivo in disparo.get("Objectives", []):
+                    if objetivo.get("Condition", "").endswith("Completed") and isinstance(objetivo.get("Objective"), int) and objetivo["Objective"] < 0:
+                        # Invertida, la condición es «sin haber completado»: HRQ de bandos opuestos.
+                        clave = "excluye" if objetivo.get("bInvertCondition") else "requiere"
+                        condiciones[clave].append(asset.ruta_import(objetivo["Objective"])[0])
+            reputacion = disparo.get("ReputationLevel", {})
+            fecha = disparo.get("Date", {})
+            if reputacion.get("bCheck") and reputacion.get("Condition", "").endswith("GreaterThanEquals"):
+                condiciones["reputacion"].append(reputacion["Value"])
+            if fecha.get("bCheck") and fecha.get("Condition", "").endswith("GreaterThanEquals"):
+                # Un evento …Expired marca el fin de la oferta; el resto, desde cuándo se ofrece.
+                clave = "hasta" if "Expired" in (nodo.get("EventName") or "") else "desde"
+                condiciones[clave].append(fecha_de_ticks(fecha["Value"]))
+        for valor in nodo.values():
+            condiciones_de_eventos(valor, condiciones, asset)
+    elif isinstance(nodo, list):
+        for valor in nodo:
+            condiciones_de_eventos(valor, condiciones, asset)
+
+
+def extraer_condiciones_misiones(pak):
+    """Nivel de reputación mínimo y fechas de oferta de los arcos de campaña de cada HRQ."""
+    arcos = []
+    for ruta in sorted(pak.archivos):
+        if not ruta.endswith(".uasset") or not REGEX_MISIONES.match(ruta):
+            continue
+        nombre = os.path.basename(ruta)[: -len(".uasset")]
+        if REGEX_ARCO_IGNORADO.search(ruta[len(CONTENIDO):]):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        if "CampaignEventList" not in asset.nombres:
+            continue
+        condiciones = {"reputacion": [], "desde": [], "hasta": [], "requiere": [], "excluye": []}
+        for export in asset.exports:
+            if not export.startswith("Default__"):
+                condiciones_de_eventos(asset.propiedades(export), condiciones, asset)
+        if any(condiciones.values()):
+            arcos.append({
+                "carpeta": os.path.dirname(ruta)[len(CONTENIDO):],
+                "arco": nombre,
+                "reputacion": max(condiciones["reputacion"]) if condiciones["reputacion"] else None,
+                "desde": min(condiciones["desde"]) if condiciones["desde"] else None,
+                "hasta": min(condiciones["hasta"]) if condiciones["hasta"] else None,
+                "requiere": sorted(set(condiciones["requiere"])),
+                "excluye": sorted(set(condiciones["excluye"])),
+            })
+    return arcos
+
+
 def extraer_mercados(pak):
     """Mercados con inventario fijo de las campañas de los DLC. El CustomMarket genérico de Campaign
     es la plantilla del juego y no tiene sistema."""
@@ -374,6 +435,7 @@ def main():
     guardar("centros_industriales.json", extraer_centros_industriales(pak))
     guardar("textos.json", extraer_textos(pak))
     guardar("misiones.json", extraer_misiones(pak))
+    guardar("condiciones_misiones.json", extraer_condiciones_misiones(pak))
     guardar("mercados.json", extraer_mercados(pak))
     guardar("mechs_unicos.json", extraer_mechs_unicos(pak))
     extraer_logos(pak, facciones)

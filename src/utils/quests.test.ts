@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import starmapData from '../data/starmap.json';
 import type { Quest, StarmapData } from '../types/starmap';
-import { getQuestRoute, getQuestsForSystem, parseQuestQuery, searchQuests } from './quests';
+import { getQuestAvailability, getQuestRoute, getQuestsForSystem, parseQuestQuery, searchQuests } from './quests';
 import { toMapQuery } from './starmap';
 
 // Criterios de aceptación de docs/specs/misiones-hrq.md (issue #64).
@@ -86,5 +86,58 @@ describe('búsqueda, sistemas, ruta y URL', () => {
     expect(parseQuestQuery('?quest=bow-and-arrow', data)).toBe('bow-and-arrow');
     expect(parseQuestQuery('?quest=no-existe', data)).toBeNull();
     expect(toMapQuery({ date: '3042-01-21', systemId: null, questId: 'bow-and-arrow' }, data)).toBe('?date=3042-01-21&quest=bow-and-arrow');
+  });
+});
+
+// Criterios de aceptación de docs/specs/condiciones-hrq.md (issue #68).
+describe('condiciones de las HRQ', () => {
+  it('CA1: Bow and Arrow pide reputación 8 y se ofrece desde el 20 de diciembre de 3023', () => {
+    expect(quest('Bow and Arrow').requirements).toEqual([{ mode: null, reputation: 8, from: '3023-12-20', until: null, after: null, excludes: [] }]);
+  });
+
+  it('CA2: The False Flag pide 10 en campaña y 12 en carrera, sin fecha', () => {
+    const requirements = quest('The False Flag').requirements;
+    expect(requirements).toEqual(expect.arrayContaining([
+      { mode: 'campaign', reputation: 10, from: null, until: null, after: null, excludes: [] },
+      { mode: 'career', reputation: 12, from: null, until: null, after: null, excludes: [] }
+    ]));
+    expect(requirements).toHaveLength(2);
+  });
+
+  it('CA3: Adam Steiner solo se ofrece entre junio y diciembre de 3055', () => {
+    const adam = quest('Adam Steiner');
+    expect(adam.requirements[0]).toMatchObject({ from: '3055-06-20', until: '3055-12-15' });
+    expect(getQuestAvailability(adam, '3055-01-01')).toEqual({ state: 'upcoming', date: '3055-06-20' });
+    expect(getQuestAvailability(adam, '3055-07-01')).toEqual({ state: 'available' });
+    expect(getQuestAvailability(adam, '3056-01-01')).toEqual({ state: 'expired', date: '3055-12-15' });
+  });
+
+  it('CA4: Tributes for the Imperator no se ofrece hasta 3020', () => {
+    const tributes = quest('Tributes for the Imperator');
+    expect(getQuestAvailability(tributes, '3019-01-01').state).toBe('upcoming');
+    expect(getQuestAvailability(tributes, '3021-01-01').state).toBe('available');
+    expect(tributes.requirements[0].reputation).toBe(5);
+  });
+
+  it('CA5: Pirate Hunt no tiene fecha y se ofrece desde el principio', () => {
+    expect(getQuestAvailability(quest('Pirate Hunt'), '3015-01-01').state).toBe('available');
+  });
+
+  it('CA6: solo The Powder Keg y Pirate Raiders no tienen condiciones', () => {
+    const hasCondition = (candidate: Quest) => candidate.requirements.some(requirement => requirement.reputation !== null || requirement.from !== null || requirement.after !== null);
+    expect(data.quests.filter(candidate => !hasCondition(candidate)).map(candidate => candidate.name).sort()).toEqual(['Pirate Raiders', 'The Powder Keg']);
+    const withoutReputation = data.quests.filter(candidate => !candidate.requirements.some(requirement => requirement.reputation !== null));
+    expect(withoutReputation.map(candidate => candidate.name).sort()).toEqual(['Adam Steiner', 'Corporate Interests', 'Ideals of War', 'Pirate Raiders', 'The Powder Keg']);
+  });
+
+  it('CA8: Defense Support - Davion e Invasion Support - Kurita son excluyentes', () => {
+    expect(quest('Defense Support - Davion').requirements.every(requirement => requirement.excludes.includes('Invasion Support - Kurita') && requirement.after === null)).toBe(true);
+    expect(quest('Invasion Support - Kurita').requirements.every(requirement => requirement.excludes.includes('Defense Support - Davion'))).toBe(true);
+  });
+
+  it('CA7: Corporate Interests se ofrece después de Destabilization', () => {
+    const requirements = quest('Corporate Interests').requirements;
+    expect(requirements.map(requirement => requirement.mode).sort()).toEqual(['campaign', 'career']);
+    expect(requirements.every(requirement => requirement.after === 'Destabilization')).toBe(true);
   });
 });

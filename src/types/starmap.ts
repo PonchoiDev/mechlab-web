@@ -38,6 +38,17 @@ export interface QuestMission {
   system: number;
 }
 
+// Condiciones con las que el juego ofrece una HRQ, por modo (null en las de los DLC).
+export interface QuestRequirement {
+  mode: 'campaign' | 'career' | null;
+  reputation: number | null;
+  from: GameDate | null;
+  until: GameDate | null;
+  // HRQ que hay que completar antes, y HRQ de bandos opuestos: si se hace una, la otra ya no se ofrece.
+  after: string | null;
+  excludes: string[];
+}
+
 export interface Quest {
   id: string;
   name: string;
@@ -50,6 +61,7 @@ export interface Quest {
   visibleEverywhere: boolean;
   missionTypes: string[];
   missions: QuestMission[];
+  requirements: QuestRequirement[];
 }
 
 // Mercado con inventario fijo de la campaña de un DLC.
