@@ -685,7 +685,12 @@ button, input, select { font: inherit; color: inherit; }
   align-items: flex-end;
   gap: 8px;
   max-width: calc(100vw - 480px);
+  /* Con un cajón abierto, la caja ocupa mucho más que los propios cajones: el hueco entre ellos no
+     debe quedarse con el arrastre del mapa. */
+  pointer-events: none;
 }
+
+.starmap-drawers > * { pointer-events: auto; }
 
 .starmap-legend {
   max-width: 300px;
