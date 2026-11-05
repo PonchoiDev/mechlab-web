@@ -61,7 +61,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | CA12 | El ARC-AGC (hero, recompensa de Bow and Arrow) | se pide qué encuadrar | la ruta de Bow and Arrow, con su id para marcarla |
 | CA13 | El AS7-D-H, el ARC-2W en 3050, el AS7-D en 3025 y el ARC-T (hero sin rareza ni fuente fija) | se pide qué encuadrar | Romulus sin HRQ; Outreach, el único sistema de Wolf's Dragoons, que es quien lo vende; nada, porque lo venden facciones grandes; y nada |
 | CA14 | El AS7-D en 3025 | se agrupan las facciones | ComStar, con un sistema, trae ese sistema (Terra); Steiner, con cientos, no trae la lista |
-| CA15 | La búsqueda «as7-d-h» el 1 de enero de 3030 y la búsqueda «arctic wolf» | se pide la primera fecha de producción | la primera da el 11 de noviembre de 3041; la segunda, el 1 de enero de 3067, después del final del mapa; una búsqueda sin resultados, ninguna |
+| CA15 | Las búsquedas «as7-d-h» (el 1 de enero de 3030), «arctic wolf» y «acw-prime» | se pide la primera fecha de producción | la primera da el 11 de noviembre de 3041; la segunda, el 1 de enero de 3059 (el ACW-1, la primera variante); la tercera, el 1 de enero de 3067, después del final del mapa; una búsqueda sin resultados, ninguna |
 | CA10 | `availability.json` | se carga | todas sus variantes están en `mechs.json` con el mismo nombre, y todas las facciones del mapa salvo Arc-Royal Defense Cordon tienen tabla |
 
 ## Fuera de alcance

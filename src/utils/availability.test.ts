@@ -143,7 +143,9 @@ describe('rareza de cada variante por facción', () => {
   it('CA15: si lo buscado todavía no existe, se sabe desde cuándo', () => {
     expect(searchMechs(availability, 'as7-d-h', '3030-01-01')).toEqual([]);
     expect(getFirstProduction(availability, 'as7-d-h')).toBe('3041-11-11');
-    expect(getFirstProduction(availability, 'arctic wolf')).toBe('3067-01-01');
+    // El ACW-1 existe desde 3059, pero el ACW-PRIME no llega hasta después del final del mapa.
+    expect(getFirstProduction(availability, 'arctic wolf')).toBe('3059-01-01');
+    expect(getFirstProduction(availability, 'acw-prime')).toBe('3067-01-01');
     expect(getFirstProduction(availability, 'no existe')).toBeNull();
   });
 
