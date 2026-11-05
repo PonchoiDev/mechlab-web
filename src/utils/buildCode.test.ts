@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { decodeBuild, encodeBuild } from './buildCode';
+import { decodeBuild, encodeBuild, getStockBuildById } from './buildCode';
 import { createDefaultArmor } from './calculators';
 import { createEquippedItem } from './equipment';
 import { createEmptyLoadout } from './zones';
@@ -51,5 +51,15 @@ describe('enlace de la build', () => {
     expect(decodeBuild('no-es-una-build', allMechs, allItems)).toBeNull();
     expect(decodeBuild(toJson([1, 'NO-EXISTE', [], []]), allMechs, allItems)).toBeNull();
     expect(decodeBuild(toJson([99, 'ARC-2R', [], []]), allMechs, allItems)).toBeNull();
+  });
+});
+
+describe('enlace a una variante', () => {
+  // CA9 de docs/specs/mercados-especiales.md: el mapa abre cada Mech con ?mech=<id>.
+  it('abre la variante con su build de serie, o ninguna si el id no existe', () => {
+    const atlas = getStockBuildById('AS7-D-H', allMechs, allItems);
+    expect(atlas?.mech.id).toBe('AS7-D-H');
+    expect(Object.values(atlas!.loadout).flat().length).toBeGreaterThan(0);
+    expect(getStockBuildById('NO-EXISTE', allMechs, allItems)).toBeNull();
   });
 });

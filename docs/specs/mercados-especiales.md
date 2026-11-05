@@ -46,7 +46,7 @@ Las campañas de varios DLC abren mercados en sistemas concretos con un inventar
 | CA2 | Los mercados del juego | se cargan | son 21, ninguno sin sistema |
 | CA3 | El mercado del DLC4 en Rasalhague | se consulta | es de la etapa `Mission 5` y vende 9 'Mechs, entre ellos el TDR-5S y el BLR-1G |
 | CA4 | El mercado negro del DLC7 en Alleghe | se consulta | es un mercado negro y vende el STK-3H |
-| CA5 | El mercado del DLC9 en Bangor | se consultan sus armas | incluye una Ultra AC/10 con `Lost Tech tier` y cantidad 1 |
+| CA5 | El mercado del DLC9 en Bangor | se consultan sus armas | incluye una Ultra Autocannon 10 con `Lost Tech tier` y cantidad 1 |
 | CA6 | Rasalhague | se consultan sus mercados | tiene dos: el del DLC4 y el mercado negro del DLC7 |
 | CA7 | La búsqueda «atlas» | se busca | da los mercados que venden algún Atlas y el Atlas II de Romulus |
 | CA8 | El AS7-D-H | se pide su enlace al MechLab | es `/mercs/?mech=AS7-D-H` |
