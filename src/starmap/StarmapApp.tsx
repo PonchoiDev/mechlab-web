@@ -263,7 +263,7 @@ export function StarmapApp() {
   const quest = data.quests.find(candidate => candidate.id === questId) ?? null;
   // HRQ de la que la variante elegida es recompensa: su ruta se marca sin abrir su ficha.
   const [mechQuestId, setMechQuestId] = useState<string | null>(null);
-  // Sistema de la misión (fuera de las HRQ) donde se consigue la variante: se marca como una ruta.
+  // Sistema de la recompensa (fuera de las HRQ) donde se consigue la variante: se marca como una ruta.
   const [mechMissionSystem, setMechMissionSystem] = useState<number | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   // La rareza de los 'Mechs va en su propio archivo: se descarga al abrir Find a 'Mech o Hero 'Mechs, o
@@ -295,9 +295,9 @@ export function StarmapApp() {
     const picked = loaded.mechs.find(candidate => candidate.id === id);
     const target = picked ? getMechFocus(data, loaded, picked, date) : null;
     setMechQuestId(target?.questId ?? null);
-    // Si lo que se encuadra es la misión de una recompensa, se marca su sistema.
+    // Si lo que se encuadra es el sistema de una recompensa (una misión o el de Razer), se marca.
     const mission = target && !target.questId
-      ? getFixedSources(data, id).rewards.find(reward => reward.kind === 'mission' && reward.system !== undefined && target.systemIds.includes(reward.system))
+      ? getFixedSources(data, id).rewards.find(reward => reward.system !== undefined && target.systemIds.includes(reward.system))
       : undefined;
     setMechMissionSystem(mission?.system ?? null);
     if (target && target.systemIds.length > 0) focusOn(...target.systemIds);

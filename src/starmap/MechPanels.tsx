@@ -71,7 +71,7 @@ export function MechDrawer({ availability, date, lastDate, onDate, selectedId, o
                   }}
                 >
                   <span>{mech.name} <small>{mech.id}</small></span>
-                  {mech.hero && <small>Hero</small>}
+                  {(mech.otherName || mech.hero) && <small>{[mech.otherName, mech.hero && 'Hero'].filter(Boolean).join(' · ')}</small>}
                 </button>
               </li>
             ))}
@@ -192,7 +192,7 @@ export function MechCard({ data, availability, mech, date, onSystem, onMission, 
         <span className="starmap-quest-mark starmap-mech-mark" aria-hidden="true">{mech.hero ? 'H' : 'M'}</span>
         <div>
           <h2>{mech.name}</h2>
-          <p>{mech.id}{mech.hero && ' · Hero'}</p>
+          <p>{[mech.id, mech.otherName && `Also known as ${mech.otherName}`, mech.hero && 'Hero'].filter(Boolean).join(' · ')}</p>
         </div>
         <button type="button" className="starmap-close" onClick={onClose} aria-label="Close 'Mech details">✕</button>
       </div>

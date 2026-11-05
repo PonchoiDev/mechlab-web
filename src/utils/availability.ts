@@ -75,7 +75,8 @@ export const describeRewardSource = (reward: CampaignReward): string => {
   const dlc = reward.dlc ? ` (DLC ${reward.dlc})` : '';
   switch (reward.kind) {
     case 'promotion':
-      return `${reward.partner} promotion${reward.careerOnly ? ', career mode only' : ''}: arrives as a message (${reward.title})`;
+      // Con sistema, la ficha añade el sistema detrás: «… when you arrive at Valentina».
+      return `${reward.partner} promotion${reward.careerOnly ? ', career mode only' : ''}: arrives as a message (${reward.title})${reward.system === undefined ? '' : ' when you arrive'}`;
     case 'intel':
       return `Reach Bounty Hunter intel level ${reward.level}${dlc}`;
     case 'arenaRank':
@@ -130,8 +131,9 @@ export const searchMechs = (availability: AvailabilityData, query: string, date?
     const id = normalize(mech.id);
     if (id === needle) return 0;
     if (id.startsWith(needle)) return 1;
-    if (normalize(mech.name).startsWith(needle)) return 2;
-    if (id.includes(needle) || normalize(mech.name).includes(needle)) return 3;
+    const names = [mech.name, mech.otherName ?? ''].map(normalize);
+    if (names.some(name => name.startsWith(needle))) return 2;
+    if (id.includes(needle) || names.some(name => name.includes(needle))) return 3;
     return -1;
   };
   return availability.mechs

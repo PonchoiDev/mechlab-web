@@ -106,6 +106,8 @@ export type Rarity = 'veryCommon' | 'common' | 'uncommon' | 'rare' | 'veryRare' 
 export interface MechAvailability {
   id: string;
   name: string;
+  // Nombre en la Esfera Interior de los 'Mechs de los Clanes (el Puma es el Adder).
+  otherName?: string;
   hero?: boolean;
   // Hero que el juego puede poner a la venta (HeroMechsForPurchase): no tiene un sitio fijo.
   heroMarket?: boolean;

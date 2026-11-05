@@ -532,6 +532,11 @@ def disponibilidad_de_mechs(mechs, unit_cards, facciones, alianzas, heroes_en_ve
         anio, mes, dia = REGEX_FECHA_UNIT_CARD.search(ficha).groups()
         variante = {"id": id_mech, "name": mechs[id_mech]["name"], "from": f"{int(anio):04d}-{mes}-{dia}",
                     "rarity": {faccion: nivel for faccion, nivel in sorted(rareza.items()) if faccion in usadas}}
+        # Los 'Mechs de los Clanes tienen otro nombre en la Esfera Interior (el Puma es el Adder); el
+        # MechLab busca por los dos.
+        otro_nombre = mechs[id_mech].get("sarnaName")
+        if otro_nombre and otro_nombre != variante["name"]:
+            variante["otherName"] = otro_nombre
         if mechs[id_mech].get("hero"):
             variante["hero"] = True
         # Los hero de HeroMechsForPurchase pueden salir a la venta; el resto solo se consigue de otra forma.
