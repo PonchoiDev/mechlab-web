@@ -158,13 +158,18 @@ export default function App() {
   return (
     <div className={['mechlab-shell', activeZone ? `has-editor is-editor-${view.editorSide}` : ''].filter(Boolean).join(' ')}>
       <header className="topbar">
-        <a className="brand-lockup" href="/" title="Back to MW Builder">
-          <span className="brand-mark" aria-hidden="true">M</span>
-          <div>
-            <p className="eyebrow">FIELD CONFIGURATION SYSTEM</p>
-            <h1>MechLab <span>MW5: MERCENARIES</span></h1>
-          </div>
-        </a>
+        <div className="topbar-start">
+          <a className="brand-lockup" href="/" title="Back to MW Builder">
+            <span className="brand-mark" aria-hidden="true">M</span>
+            <div>
+              <p className="eyebrow">FIELD CONFIGURATION SYSTEM</p>
+              <h1>MechLab <span>MW5: MERCENARIES</span></h1>
+            </div>
+          </a>
+          <nav className="topbar-links" aria-label="MW Builder">
+            <a href="/mercs/starmap/"><small>MW5 Mercenaries</small> Star map</a>
+          </nav>
+        </div>
         <div className="topbar-tools">
           <WhatsNew />
           <button type="button" className="feedback-button" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>
