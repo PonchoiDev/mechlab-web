@@ -50,6 +50,8 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 - **RF7.** En la ficha, las facciones con 5 sistemas o menos muestran sus sistemas, con enlace a cada uno.
 - **RF8.** Si ninguna facción vende la variante, la ficha lo dice; y si además no tiene fuente fija, dice que el juego no le da un sitio fijo.
 
+- **RF12.** El título de una misión con sistema se puede pulsar: el mapa encuadra su sistema y lo marca como la ruta de una HRQ, sin cerrar la ficha del 'Mech. Al elegir un 'Mech que se encuadra por una de esas misiones, el sistema se marca solo.
+
 ## Requisitos no funcionales
 
 - **RNF1.** La lógica (tabla de cada facción, rareza en una fecha, fuentes fijas, lista de hero, búsqueda y URL) es pura y está en `src/utils/availability.ts`, con sus tests.
