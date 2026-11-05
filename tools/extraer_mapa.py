@@ -405,6 +405,11 @@ def extraer_recompensas_misiones(pak):
     return recompensas
 
 
+def tiene_uexp(pak, ruta):
+    # Asset.desde_pak lee también el .uexp: un .uasset sin él pararía los recorridos de todo el juego.
+    return sin_extension(ruta) + ".uexp" in pak.archivos
+
+
 def sistemas_de_objetivos(pak):
     """Sistema de cada objetivo según las acciones que lo colocan o lo ofrecen (Place…, Show…).
 
@@ -415,7 +420,7 @@ def sistemas_de_objetivos(pak):
     """
     sistemas = {}
     for ruta in pak.archivos:
-        if not ruta.endswith(".uasset") or "/Objects/" in ruta:
+        if not ruta.endswith(".uasset") or "/Objects/" in ruta or not tiene_uexp(pak, ruta):
             continue
         asset = Asset.desde_pak(pak, sin_extension(ruta))
         # Solo las acciones de arco (su clase hereda de una *_ArcAction) con sistema: el resto de assets
@@ -458,7 +463,7 @@ def extraer_recompensas_campana(pak):
     recompensas = []
     sistemas = sistemas_de_objetivos(pak)
     for ruta in sorted(pak.archivos):
-        if not ruta.endswith(".uasset") or "/Objects/" in ruta:
+        if not ruta.endswith(".uasset") or "/Objects/" in ruta or not tiene_uexp(pak, ruta):
             continue
         asset = Asset.desde_pak(pak, sin_extension(ruta))
         if "ObjectiveReward" not in asset.nombres or "MechLoadouts" not in asset.nombres:
