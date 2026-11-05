@@ -27,11 +27,16 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 
 ## Requisitos funcionales
 
-- **RF1.** Un panel **Find a 'Mech**, junto a Quests y Special markets, busca variantes por nombre o por variante (`atlas`, `AS7-D`).
+- **RF1.** Un panel **Find a 'Mech**, junto a Quests y Special markets, busca variantes por nombre o por variante (`atlas`, `AS7-D`). Solo muestra las que ya existen en la fecha del mapa: buscar una que todavía no existe confunde.
 - **RF2.** Al elegir una variante, el mapa colorea el territorio de cada facción según su rareza en la fecha elegida, de Very common a Very rare, con Unique y Unavailable aparte y el resto atenuado (no la vende). Al cerrar la ficha, el mapa vuelve a los colores de las facciones.
 - **RF3.** La ficha de la variante muestra su nombre, si ya existe en la fecha del mapa (`Not produced until 1 JAN 3045`), las facciones con sistemas en esa fecha agrupadas por rareza con su número de sistemas, sus fuentes fijas (HRQ, mercados especiales y 'Mech único, con enlace a cada una) y un enlace al MechLab con su build de serie.
 - **RF4.** Un panel **Hero 'Mechs** lista los 'Mechs hero con fuente fija, con la HRQ, el mercado o el sistema de cada uno. Al elegir uno, se abre su ficha.
 - **RF5.** La URL guarda la variante elegida (`?mech=AS7-D`), para compartir la vista.
+- **RF6.** Si la variante se consigue en un sitio pequeño, el mapa lo encuadra al elegirla, porque el color de un solo sistema no se ve con el mapa entero:
+  - un 'Mech hero con fuente fija, o una variante que no vende ninguna facción: su HRQ, con la ruta marcada como al elegir la HRQ, o el sistema del 'Mech único o del mercado especial;
+  - una variante que solo venden facciones con 30 sistemas o menos en total en esa fecha: esos sistemas.
+- **RF7.** En la ficha, las facciones con 5 sistemas o menos muestran sus sistemas, con enlace a cada uno.
+- **RF8.** Si ninguna facción vende la variante, la ficha lo dice; y si además no tiene fuente fija, dice que el juego no le da un sitio fijo.
 
 ## Requisitos no funcionales
 
@@ -52,6 +57,10 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | CA7 | Una variante hero sin rareza (BattleMaster BLR-1GHE) | se agrupan las facciones | todas van al grupo de no vendido |
 | CA8 | Las búsquedas «atlas», «as7-d» y vacía | se busca | la primera incluye el AS7-D y el AS7-D-H, la segunda da primero el AS7-D y la vacía no da nada |
 | CA9 | `?mech=AS7-D` | se lee y se escribe la URL | se lee el AS7-D; una variante que no existe se descarta; la URL del mapa con la variante lleva `mech=AS7-D` |
+| CA11 | La búsqueda «atlas» el 1 de enero de 3030 y el 1 de enero de 3045 | se busca | en 3030 no está el AS7-D-H, que existe desde noviembre de 3041; en 3045 sí |
+| CA12 | El ARC-AGC (hero, recompensa de Bow and Arrow) | se pide qué encuadrar | la ruta de Bow and Arrow, con su id para marcarla |
+| CA13 | El AS7-D-H, el ARC-2W en 3050, el AS7-D en 3025 y el ARC-T (hero sin rareza ni fuente fija) | se pide qué encuadrar | Romulus sin HRQ; Outreach, el único sistema de Wolf's Dragoons, que es quien lo vende; nada, porque lo venden facciones grandes; y nada |
+| CA14 | El AS7-D en 3025 | se agrupan las facciones | ComStar, con un sistema, trae ese sistema (Terra); Steiner, con cientos, no trae la lista |
 | CA10 | `availability.json` | se carga | todas sus variantes están en `mechs.json` con el mismo nombre, y todas las facciones del mapa salvo Arc-Royal Defense Cordon tienen tabla |
 
 ## Fuera de alcance
