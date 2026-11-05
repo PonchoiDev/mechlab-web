@@ -17,6 +17,10 @@ const LABEL_SCALE = 2.4;
 const CLUSTER_PADDING = 7;
 // Misiones de alta recompensa: icono de oferta y ruta de la elegida, en ámbar como en el juego.
 const QUEST_COLOR = '#f2b75e';
+// Mercados especiales (verde, o morado si es mercado negro) y 'Mechs únicos (estrella dorada).
+const MARKET_COLOR = '#7fdc8a';
+const BLACK_MARKET_COLOR = '#b98cff';
+const UNIQUE_COLOR = '#ffd400';
 // Grosores en píxeles de pantalla: el borde se ve igual de marcado con cualquier zoom.
 const BORDER_WIDTH = 2;
 const BORDER_HALO = 7;
@@ -72,6 +76,8 @@ export class StarmapRenderer {
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
   private readonly questOffers: Set<number>;
+  private readonly markets: Map<number, boolean>;
+  private date: GameDate = '';
   private territories: Territory[] = [];
   private transition: Transition | null = null;
   private starfield: HTMLCanvasElement | null = null;
@@ -100,6 +106,11 @@ export class StarmapRenderer {
     const hubs = getHubs(data);
     this.hubCapitals = new Set(hubs.map(hub => hub.capital.id));
     this.questOffers = new Set(data.quests.map(quest => quest.offer));
+    // Por sistema, si alguno de sus mercados es normal (verde) o todos son negros (morado).
+    this.markets = new Map();
+    for (const market of data.markets) {
+      this.markets.set(market.system, (this.markets.get(market.system) ?? false) || !market.blackMarket);
+    }
     this.clusterOutlines = [...byCluster.values()].map(points => getClusterOutline(points, CLUSTER_PADDING));
     // Los centros industriales se dibujan como en el juego: líneas discontinuas entre sus estrellas.
     const byId = new Map(data.systems.map(system => [system.id, system]));
@@ -121,6 +132,7 @@ export class StarmapRenderer {
   }
 
   setDate(date: GameDate, animate = false) {
+    this.date = date;
     const previousOwners = this.owners;
     const previous = this.territories;
     this.owners = this.data.systems.map(system => getOwnerAt(system, date));
@@ -362,6 +374,12 @@ export class StarmapRenderer {
     for (const system of visible) {
       if (this.hubCapitals.has(system.id)) this.drawHubIcon(...this.toScreen(system.x, system.y));
       if (this.questOffers.has(system.id)) this.drawQuestIcon(...this.toScreen(system.x, system.y));
+      if (this.markets.has(system.id)) this.drawMarketIcon(...this.toScreen(system.x, system.y), this.markets.get(system.id)!);
+    }
+    for (const unique of this.data.uniqueMechs) {
+      if (unique.from > this.date) continue;
+      const system = this.data.systems.find(candidate => candidate.id === unique.system);
+      if (system) this.drawUniqueIcon(...this.toScreen(system.x, system.y));
     }
 
     this.drawQuestRoute();
@@ -412,6 +430,49 @@ export class StarmapRenderer {
     context.fillStyle = '#140d02';
     context.fillRect(-0.9, -4.2, 1.8, 5);
     context.fillRect(-0.9, 2, 1.8, 1.6);
+    context.restore();
+  }
+
+  private drawMarketIcon(x: number, y: number, regular: boolean) {
+    // Moneda con el símbolo de C-Bills, arriba a la izquierda de la estrella.
+    const context = this.context;
+    context.save();
+    context.translate(x - 11, y - 9);
+    context.fillStyle = regular ? MARKET_COLOR : BLACK_MARKET_COLOR;
+    context.strokeStyle = '#06110a';
+    context.lineWidth = 1.2;
+    context.beginPath();
+    context.arc(0, 0, 5.5, 0, Math.PI * 2);
+    context.fill();
+    context.stroke();
+    context.fillStyle = '#06110a';
+    context.font = '700 9px "Barlow Condensed", "Arial Narrow", sans-serif';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText('C', 0, 0.5);
+    context.restore();
+  }
+
+  private drawUniqueIcon(x: number, y: number) {
+    // Estrella dorada abajo a la derecha: aquí hay un 'Mech único.
+    const context = this.context;
+    context.save();
+    context.translate(x + 11, y + 9);
+    context.fillStyle = UNIQUE_COLOR;
+    context.strokeStyle = '#140d02';
+    context.lineWidth = 1.2;
+    context.shadowColor = UNIQUE_COLOR;
+    context.shadowBlur = 8;
+    context.beginPath();
+    for (let i = 0; i < 10; i++) {
+      const radius = i % 2 === 0 ? 7 : 3;
+      const angle = -Math.PI / 2 + (i * Math.PI) / 5;
+      context.lineTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
+    }
+    context.closePath();
+    context.fill();
+    context.shadowBlur = 0;
+    context.stroke();
     context.restore();
   }
 

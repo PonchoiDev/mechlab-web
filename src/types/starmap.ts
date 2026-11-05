@@ -52,6 +52,29 @@ export interface Quest {
   missions: QuestMission[];
 }
 
+// Mercado con inventario fijo de la campaña de un DLC.
+export interface Market {
+  id: string;
+  system: number;
+  dlc: number;
+  // Momento de la campaña en que se abre: Prologue, Act 1, Mission 5, Black market…
+  stage: string;
+  blackMarket: boolean;
+  mechs: { id: string; name: string }[];
+  weapons: { name: string; tier: string | null; count: number }[];
+  equipment: { name: string; count: number }[];
+  pilots: { count: number; minSkill: number | null; maxSkill: number | null } | null;
+}
+
+// 'Mech que el juego coloca en un sistema a partir de una fecha, como el Atlas II en Romulus.
+export interface UniqueMech {
+  mech: string;
+  name: string;
+  dlc: number;
+  system: number;
+  from: GameDate;
+}
+
 export interface StarmapData {
   range: DateRange;
   colors: { cluster: string; hub: string };
@@ -62,4 +85,6 @@ export interface StarmapData {
   hubs: Record<string, { capital: number; links: [number, number][] }>;
   systems: StarSystem[];
   quests: Quest[];
+  markets: Market[];
+  uniqueMechs: UniqueMech[];
 }

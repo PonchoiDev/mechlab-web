@@ -20,6 +20,7 @@ import {
 import { getQuestRoute, parseQuestQuery } from '../utils/quests';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
+import { MarketDrawer, SystemMarkets } from './MarketPanels';
 import { QuestCard, QuestDrawer, SystemQuests } from './QuestPanels';
 import { StarmapCanvas, type FocusRequest } from './StarmapCanvas';
 
@@ -82,6 +83,7 @@ function SystemPanel({ system, date, pinned, onClose, onQuest }: SystemPanelProp
         </dl>
       )}
       <SystemQuests data={data} systemId={system.id} onPick={onQuest} />
+      <SystemMarkets data={data} systemId={system.id} date={date} />
       {system.owners.length > 0 && (
         <ol className="starmap-history" aria-label="Owners over time">
           {system.owners.map(([changedOn, faction], index) => (
@@ -319,6 +321,14 @@ export function StarmapApp() {
       <div className="starmap-drawers">
         <FactionLegend date={date} />
         <QuestDrawer data={data} selectedId={questId} onPick={pickQuest} />
+        <MarketDrawer
+          data={data}
+          onPick={systemId => {
+            setSelectedId(systemId);
+            setHoveredId(null);
+            focusOn(systemId);
+          }}
+        />
       </div>
       {isFeedbackOpen && (
         <FeedbackDialog

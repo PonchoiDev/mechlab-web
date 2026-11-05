@@ -221,6 +221,70 @@ def extraer_misiones(pak):
     return acciones
 
 
+def extraer_mercados(pak):
+    """Mercados con inventario fijo de las campañas de los DLC. El CustomMarket genérico de Campaign
+    es la plantilla del juego y no tiene sistema."""
+    mercados = []
+    for ruta in sorted(pak.archivos):
+        if not ruta.endswith(".uasset") or "CustomMarket" not in ruta or not re.match(CONTENIDO + r"DLC\d", ruta):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        for export in asset.exports:
+            if not export.startswith("Default__"):
+                continue
+            propiedades = asset.propiedades(export)
+            if "StarSystemId" not in propiedades:
+                continue
+            inventario = propiedades.get("Inventory", {})
+
+            def objetos(lista, campo):
+                return [[objeto["ItemData"][campo]["Id"]["PrimaryAssetName"], objeto["Count"]] for objeto in inventario.get(lista, [])]
+
+            mercados.append({
+                "carpeta": os.path.dirname(ruta)[len(CONTENIDO):],
+                "asset": os.path.basename(ruta)[: -len(".uasset")],
+                "sistema": propiedades["StarSystemId"],
+                "negro": bool(propiedades.get("bShouldShowAsBlackMarket")),
+                "mechs": [mech["Id"]["PrimaryAssetName"] for mech in inventario.get("MechLoadouts", [])],
+                "armas": objetos("Weapons", "WeaponId"),
+                "equipo": objetos("Equipment", "EquipmentId"),
+                "pilotos": {clave: propiedades.get(clave) for clave in ("NumberOfPilots", "MinimumSkill", "MaximumSkill")},
+            })
+    return mercados
+
+
+def extraer_mechs_unicos(pak):
+    """'Mechs que el juego coloca en un sistema concreto (HeroMechToPlace). La fecha desde la que
+    aparecen está en la condición del arco de mercado de la misma carpeta."""
+    unicos = []
+    for ruta in sorted(pak.archivos):
+        if not ruta.endswith(".uasset") or not re.match(CONTENIDO + r"DLC\d/CampaignData/", ruta):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        if "HeroMechToPlace" not in asset.nombres:
+            continue
+        for export in asset.exports:
+            if not export.startswith("Default__"):
+                continue
+            propiedades = asset.propiedades(export)
+            if not isinstance(propiedades.get("HeroMechToPlace"), int):
+                continue
+            carpeta = os.path.dirname(ruta)
+            fecha = None
+            for arco in pak.buscar(carpeta + "/"):
+                if arco.endswith("MarketArc.uasset"):
+                    texto = json.dumps(Asset.desde_pak(pak, sin_extension(arco)).propiedades(os.path.basename(arco)[: -len(".uasset")]))
+                    coincidencia = re.search(r'"Date": \{"bCheck": true, "Value": (\d+)', texto)
+                    fecha = fecha_de_ticks(int(coincidencia.group(1))) if coincidencia else None
+            unicos.append({
+                "carpeta": carpeta[len(CONTENIDO):],
+                "sistema": propiedades.get("Star System Id"),
+                "mech": asset.ruta_import(propiedades["HeroMechToPlace"])[1],
+                "fecha": fecha,
+            })
+    return unicos
+
+
 def extraer_textos(pak):
     textos = {}
     for ruta in TABLAS_DE_TEXTO:
@@ -310,6 +374,8 @@ def main():
     guardar("centros_industriales.json", extraer_centros_industriales(pak))
     guardar("textos.json", extraer_textos(pak))
     guardar("misiones.json", extraer_misiones(pak))
+    guardar("mercados.json", extraer_mercados(pak))
+    guardar("mechs_unicos.json", extraer_mechs_unicos(pak))
     extraer_logos(pak, facciones)
     if sin_asset:
         print(f"Aviso: facciones sin asset en el juego: {', '.join(sin_asset)}")

@@ -12,6 +12,10 @@ DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_ORIGEN = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "starmap")
 RUTA_DESTINO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "starmap.json")
 # Los logos los escribe extraer_mapa.py; aquí solo se enlaza cada facción con el suyo.
+# Los mercados nombran 'Mechs y armas por su id; los nombres salen de los datos del MechLab, que se
+# generan antes (generar_mechs.py y generar_items.py).
+RUTA_MECHS = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "mechs.json")
+RUTA_ITEMS = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "items.json")
 RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "starmap", "logos")
 
 # La partida empieza en 3015 y el último cambio de frontera del juego es de 3060. La tabla trae la
@@ -218,6 +222,89 @@ def cadenas_de_misiones(acciones, sistemas_validos):
     return sorted(cadenas.values(), key=lambda cadena: cadena["name"])
 
 
+REGEX_TIER = re.compile(r"_Lvl(\d)$")
+REGEX_DLC = re.compile(r"^DLC(\d)")
+
+
+def nombre_de_tier(tier):
+    # Como en el MechLab: Tier 1 a Tier 4 y Lost Tech para el 5.
+    return "Lost Tech tier" if tier == "5" else f"Tier {tier}"
+
+
+def etapa_de_mercado(mercado):
+    """Momento de la campaña en que se abre el mercado, sacado del nombre del asset o de su carpeta."""
+    if mercado["negro"]:
+        return "Black market"
+    if "Prologue" in mercado["asset"]:
+        return "Prologue"
+    acto = re.search(r"Act(\d)", mercado["asset"])
+    if acto:
+        return f"Act {acto.group(1)}"
+    mision = re.search(r"D4M(\d+)", mercado["carpeta"])
+    if mision:
+        return f"Mission {int(mision.group(1))}"
+    mision = re.search(r"Quest_([A-Za-z]+)", mercado["carpeta"])
+    if mision:
+        return separar_palabras(mision.group(1))
+    return "Campaign"
+
+
+def mercados_especiales(mercados_juego, mechs, items, sistemas_validos):
+    def mech(id_juego):
+        variante = re.sub(r"_(Loadout|MDA)$", "", id_juego)
+        return {"id": variante, "name": mechs[variante]["name"]} if variante in mechs else None
+
+    def objeto(id_juego, cantidad, con_tier):
+        tier = REGEX_TIER.search(id_juego)
+        base = REGEX_TIER.sub("", id_juego)
+        nombre = items[base]["name"] if base in items else separar_palabras(base)
+        resultado = {"name": nombre, "count": cantidad}
+        if con_tier:
+            resultado = {"name": nombre, "tier": nombre_de_tier(tier.group(1)) if tier else None, "count": cantidad}
+        return resultado
+
+    mercados = []
+    for mercado in mercados_juego:
+        if mercado["sistema"] not in sistemas_validos:
+            continue
+        pilotos = mercado["pilotos"]
+        mercados.append({
+            "id": identificador(re.sub(r"_?(CustomMarket\d*|ArcAction)", "", mercado["asset"])),
+            "system": mercado["sistema"],
+            "dlc": int(REGEX_DLC.match(mercado["carpeta"]).group(1)),
+            "stage": etapa_de_mercado(mercado),
+            "blackMarket": mercado["negro"],
+            "mechs": [encontrado for encontrado in (mech(id_juego) for id_juego in mercado["mechs"]) if encontrado],
+            # Algunas entradas vienen con cantidad 0 (SRM_Half_AmmoEquipment): no se venden.
+            "weapons": [objeto(id_juego, cantidad, True) for id_juego, cantidad in mercado["armas"] if cantidad > 0],
+            "equipment": [objeto(id_juego, cantidad, False) for id_juego, cantidad in mercado["equipo"] if cantidad > 0],
+            "pilots": {"count": pilotos["NumberOfPilots"], "minSkill": pilotos["MinimumSkill"], "maxSkill": pilotos["MaximumSkill"]}
+            if pilotos.get("NumberOfPilots") else None,
+        })
+    # En el orden de la campaña: prólogo, actos o misiones por número y después el resto. Si la etapa
+    # empata (los mercados negros del DLC7), sorted es estable y respeta el orden de extracción, que
+    # sigue la numeración de los assets (CustomMarket1 a CustomMarket5).
+    def orden(mercado):
+        numero = re.search(r"\d+", mercado["stage"])
+        return (mercado["dlc"], 0 if mercado["stage"] == "Prologue" else int(numero.group()) if numero else 100)
+
+    return sorted(mercados, key=orden)
+
+
+def mechs_unicos(unicos_juego, mechs):
+    resultado = []
+    for unico in unicos_juego:
+        variante = re.sub(r"_MDA$", "", unico["mech"])
+        resultado.append({
+            "mech": variante,
+            "name": mechs[variante]["name"],
+            "dlc": int(REGEX_DLC.match(unico["carpeta"]).group(1)),
+            "system": unico["sistema"],
+            "from": unico["fecha"],
+        })
+    return resultado
+
+
 def leer(nombre):
     with open(os.path.join(RUTA_ORIGEN, nombre), encoding="utf-8") as archivo:
         return json.load(archivo)
@@ -279,6 +366,12 @@ def main():
     centros = leer("centros_industriales.json")
     tablas = leer("textos.json")
     misiones_juego = leer("misiones.json")
+    mercados_juego = leer("mercados.json")
+    unicos_juego = leer("mechs_unicos.json")
+    with open(RUTA_MECHS, encoding="utf-8") as archivo:
+        mechs = {mech["id"]: mech for mech in json.load(archivo)}
+    with open(RUTA_ITEMS, encoding="utf-8") as archivo:
+        items = json.load(archivo)
 
     centro_de_sistema = {}
     for id_centro, centro in centros.items():
@@ -351,13 +444,23 @@ def main():
         },
         "systems": sistemas,
         "quests": cadenas_de_misiones(misiones_juego, {sistema["id"] for sistema in sistemas}),
+        "markets": mercados_especiales(mercados_juego, mechs, items, {sistema["id"] for sistema in sistemas}),
+        "uniqueMechs": mechs_unicos(unicos_juego, mechs),
     }
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"))
         archivo.write("\n")
 
     print(f"{len(sistemas)} sistemas, {len(facciones)} facciones, {len(eventos)} eventos, "
-          f"{len(clusteres)} clústeres, {len(centros)} centros industriales y {len(datos['quests'])} misiones de alta recompensa")
+          f"{len(clusteres)} clústeres, {len(centros)} centros industriales, {len(datos['quests'])} misiones de alta recompensa, "
+          f"{len(datos['markets'])} mercados especiales y {len(datos['uniqueMechs'])} 'Mechs únicos")
+    sin_mech = [mech for mercado in mercados_juego for mech in mercado["mechs"] if re.sub(r"_Loadout$", "", mech) not in mechs]
+    if sin_mech:
+        print(f"Aviso: 'Mechs de mercado que no están en mechs.json: {', '.join(sin_mech)}")
+    sin_nombre = sorted({REGEX_TIER.sub("", objeto) for mercado in mercados_juego for objeto, _ in mercado["armas"] + mercado["equipo"]
+                         if REGEX_TIER.sub("", objeto) not in items})
+    if sin_nombre:
+        print(f"Aviso: objetos de mercado que no están en items.json: {', '.join(sin_nombre)}")
     if sin_nombre:
         print(f"Aviso: clústeres sin nombre visible: {', '.join(sin_nombre)}")
     sin_lineas = [id_centro for id_centro, centro in datos["hubs"].items()
