@@ -18,7 +18,8 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Jumping to an event fades the borders into the new ones and flashes every system that changed hands',
       'Clusters and industrial hubs, drawn as in the game, and a card with the owner history of each system',
       'Search a system by name and share the view: the date and the system go in the link',
-      'The MW Builder home page now has the What\'s new bell too'
+      'Feedback and Support buttons on the map too, and feedback can attach a link to the map view',
+      'The MW Builder home page now has the What\'s new bell too, and the MechLab header links to the star map'
     ]
   },
   {

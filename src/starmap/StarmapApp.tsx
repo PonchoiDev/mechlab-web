@@ -16,11 +16,14 @@ import {
   searchSystems,
   toMapQuery
 } from '../utils/starmap';
+import { FeedbackDialog } from '../components/FeedbackDialog';
+import { SupportLink } from '../components/SupportLink';
 import { StarmapCanvas, type FocusRequest } from './StarmapCanvas';
 
 const data = starmapData as unknown as StarmapData;
 const LEGEND_MIN_SYSTEMS = 5;
 const URL_DELAY = 250;
+const NOTICE_DELAY = 4000;
 
 function FactionEmblem({ factionId }: { factionId: string | null }) {
   const faction = factionId ? data.factions[factionId] : null;
@@ -208,6 +211,14 @@ export function StarmapApp() {
   const [jump, setJump] = useState<{ changedCount: number } | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(initial.systemId);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!notice) return;
+    const timer = window.setTimeout(() => setNotice(null), NOTICE_DELAY);
+    return () => window.clearTimeout(timer);
+  }, [notice]);
   const [focus, setFocus] = useState<FocusRequest | null>(initial.systemId === null ? null : { systemId: initial.systemId, sequence: 0 });
 
   // La URL guarda la fecha y el sistema elegido, para compartir la vista. Se espera a que el
@@ -249,12 +260,26 @@ export function StarmapApp() {
         <nav className="starmap-links" aria-label="MW Builder">
           <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
         </nav>
+        <div className="starmap-actions">
+          <button type="button" className="starmap-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>
+          <SupportLink compact />
+        </div>
         <SystemSearch onPick={pickSystem} />
       </header>
 
       {shown && <SystemPanel system={shown} date={date} pinned={isPinned} onClose={() => setSelectedId(null)} />}
 
       <FactionLegend date={date} />
+      {isFeedbackOpen && (
+        <FeedbackDialog
+          buildUrl={window.location.href}
+          attachLabel="Attach a link to this map view"
+          onMessage={setNotice}
+          onClose={() => setIsFeedbackOpen(false)}
+        />
+      )}
+      {notice && <p className="starmap-notice" role="status">{notice}</p>}
+
       <DateControl
         date={date}
         changedCount={jump?.changedCount ?? null}
