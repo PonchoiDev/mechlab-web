@@ -281,10 +281,12 @@ def mercados_especiales(mercados_juego, mechs, items, sistemas_validos):
             "pilots": {"count": pilotos["NumberOfPilots"], "minSkill": pilotos["MinimumSkill"], "maxSkill": pilotos["MaximumSkill"]}
             if pilotos.get("NumberOfPilots") else None,
         })
-    # En el orden de la campaña: prólogo, actos o misiones por número y después el resto.
+    # En el orden de la campaña: prólogo, actos o misiones por número y después el resto. Si la etapa
+    # empata (los mercados negros del DLC7), sorted es estable y respeta el orden de extracción, que
+    # sigue la numeración de los assets (CustomMarket1 a CustomMarket5).
     def orden(mercado):
         numero = re.search(r"\d+", mercado["stage"])
-        return (mercado["dlc"], 0 if mercado["stage"] == "Prologue" else int(numero.group()) if numero else 100, mercado["id"])
+        return (mercado["dlc"], 0 if mercado["stage"] == "Prologue" else int(numero.group()) if numero else 100)
 
     return sorted(mercados, key=orden)
 
