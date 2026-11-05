@@ -50,6 +50,20 @@ button, input, select { font: inherit; color: inherit; }
 
 .starmap-canvas canvas:active { cursor: grabbing; }
 
+.starmap-hint {
+  position: absolute;
+  margin: 0;
+  padding: 3px 9px 3px 8px;
+  border-left: 3px solid var(--faction);
+  background: var(--map-panel);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
 /* Barra superior */
 
 .starmap-topbar {

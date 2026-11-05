@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { GameDate, StarmapData } from '../types/starmap';
 import { StarmapRenderer, type View } from './renderer';
 
@@ -39,6 +39,9 @@ export function StarmapCanvas({ data, date, hoveredId, selectedId, focus, onHove
   const fitScaleRef = useRef(1);
   const animationRef = useRef(0);
   const callbacksRef = useRef({ onHover, onSelect });
+  // Facción de la zona bajo el ratón cuando no hay una estrella cerca: la ficha es del sistema
+  // elegido, y sin esta etiqueta parecería que describe la zona.
+  const [territoryHint, setTerritoryHint] = useState<{ faction: string; x: number; y: number } | null>(null);
   const boundsRef = useRef(getBounds(data));
 
   useEffect(() => {
@@ -175,10 +178,16 @@ export function StarmapCanvas({ data, date, hoveredId, selectedId, focus, onHove
       const point = position(event);
       const previous = pointers.get(event.pointerId);
       if (!previous) {
-        if (event.pointerType === 'mouse') callbacksRef.current.onHover(renderer.systemAt(point.x, point.y)?.id ?? null);
+        if (event.pointerType === 'mouse') {
+          const system = renderer.systemAt(point.x, point.y);
+          const owner = system ? null : renderer.ownerAt(point.x, point.y);
+          callbacksRef.current.onHover(system?.id ?? null);
+          setTerritoryHint(owner ? { faction: owner, ...point } : null);
+        }
         return;
       }
       pointers.set(event.pointerId, point);
+      setTerritoryHint(null);
       if (pointers.size === 2) {
         const [a, b] = [...pointers.values()];
         const distance = Math.hypot(a.x - b.x, a.y - b.y);
@@ -215,7 +224,10 @@ export function StarmapCanvas({ data, date, hoveredId, selectedId, focus, onHove
       zoomAt(point.x, point.y, Math.exp(-event.deltaY * WHEEL_SPEED));
     };
 
-    const onLeave = () => callbacksRef.current.onHover(null);
+    const onLeave = () => {
+      callbacksRef.current.onHover(null);
+      setTerritoryHint(null);
+    };
 
     canvas.addEventListener('pointerdown', onPointerDown);
     canvas.addEventListener('pointermove', onPointerMove);
@@ -246,6 +258,14 @@ export function StarmapCanvas({ data, date, hoveredId, selectedId, focus, onHove
   return (
     <div className="starmap-canvas" ref={containerRef}>
       <canvas ref={canvasRef} role="img" aria-label="Star map of the Inner Sphere. Use the search box to find a system." />
+      {territoryHint && (
+        <p
+          className="starmap-hint"
+          style={{ left: territoryHint.x + 16, top: territoryHint.y + 14, '--faction': data.factions[territoryHint.faction].color } as CSSProperties}
+        >
+          {data.factions[territoryHint.faction].name}
+        </p>
+      )}
       <div className="starmap-zoom" role="group" aria-label="Zoom">
         <button type="button" onClick={() => zoomFromCenter(1.4)} aria-label="Zoom in">+</button>
         <button type="button" onClick={() => zoomFromCenter(1 / 1.4)} aria-label="Zoom out">−</button>

@@ -1,5 +1,5 @@
 import type { GameDate, StarSystem, StarmapData } from '../types/starmap';
-import { buildTerritoryIndex, getClusterOutline, getHubs, getOwnerAt, type TerritoryIndex } from '../utils/starmap';
+import { buildTerritoryIndex, getClusterOutline, getHubs, getOwnerAt, getTerritoryContours, type TerritoryIndex } from '../utils/starmap';
 
 export interface View {
   // Centro de la pantalla en años luz y píxeles por año luz.
@@ -10,17 +10,15 @@ export interface View {
 
 type Point = [number, number];
 
-// Una celda de la rejilla son 2 años luz y cada una ocupa 3 píxeles de la textura de territorios:
-// así el borde se suaviza al escalar sin que la textura pese demasiado.
+// Una celda de la rejilla son 2 años luz: los contornos salen de ella y se suavizan.
 const CELL_SIZE = 2;
-const TEXTURE_SCALE = 3;
-const GLOW_SCALE = 1.5;
-// Con este zoom (píxeles por año luz) el halo se ve entero; más cerca se atenúa.
-const GLOW_REFERENCE_SCALE = 1.4;
 const TERRITORY_RADIUS = 34;
-const EDGE_DEPTH = 10;
 const LABEL_SCALE = 2.4;
 const CLUSTER_PADDING = 7;
+// Grosores en píxeles de pantalla: el borde se ve igual de marcado con cualquier zoom.
+const BORDER_WIDTH = 2;
+const BORDER_HALO = 7;
+const INNER_GLOW = 18;
 
 const hexToRgb = (hex: string): [number, number, number] => [
   parseInt(hex.slice(1, 3), 16),
@@ -31,6 +29,11 @@ const hexToRgb = (hex: string): [number, number, number] => [
 const withAlpha = (hex: string, alpha: number) => {
   const [r, g, b] = hexToRgb(hex);
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
+const lighten = (hex: string, amount: number) => {
+  const [r, g, b] = hexToRgb(hex).map(channel => Math.round(channel + (255 - channel) * amount));
+  return `rgb(${r}, ${g}, ${b})`;
 };
 
 const createCanvas = (width: number, height: number) => {
@@ -45,10 +48,10 @@ export class StarmapRenderer {
   private readonly data: StarmapData;
   private readonly context: CanvasRenderingContext2D;
   private readonly index: TerritoryIndex;
-  private readonly factionIds: string[];
-  private readonly clusterOutlines: { points: Point[]; hub: boolean }[];
+  private readonly clusterOutlines: Point[][];
+  private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
-  private territory: { texture: HTMLCanvasElement; glow: HTMLCanvasElement } | null = null;
+  private territories: { color: string; path: Path2D }[] = [];
   private starfield: HTMLCanvasElement | null = null;
   private owners: (string | null)[] = [];
   private frame = 0;
@@ -65,7 +68,6 @@ export class StarmapRenderer {
     this.data = data;
     this.context = canvas.getContext('2d')!;
     this.index = buildTerritoryIndex(data.systems, { cellSize: CELL_SIZE, radius: TERRITORY_RADIUS, wobble: 0.18 });
-    this.factionIds = Object.keys(data.factions);
 
     const byCluster = new Map<string, Point[]>();
     for (const system of data.systems) {
@@ -73,10 +75,14 @@ export class StarmapRenderer {
     }
     const hubs = getHubs(data);
     this.hubCapitals = new Set(hubs.map(hub => hub.capital.id));
-    this.clusterOutlines = [
-      ...[...byCluster.values()].map(points => ({ points: getClusterOutline(points, CLUSTER_PADDING), hub: false })),
-      ...hubs.map(hub => ({ points: getClusterOutline(hub.systems.map(system => [system.x, system.y]), CLUSTER_PADDING), hub: true }))
-    ];
+    this.clusterOutlines = [...byCluster.values()].map(points => getClusterOutline(points, CLUSTER_PADDING));
+    // Los centros industriales se dibujan como en el juego: líneas discontinuas entre sus estrellas.
+    const byId = new Map(data.systems.map(system => [system.id, system]));
+    this.hubLinks = Object.values(data.hubs).flatMap(hub => hub.links.flatMap(([a, b]): [Point, Point][] => {
+      const from = byId.get(a);
+      const to = byId.get(b);
+      return from && to ? [[[from.x, from.y], [to.x, to.y]]] : [];
+    }));
   }
 
   resize(width: number, height: number, ratio: number) {
@@ -91,7 +97,15 @@ export class StarmapRenderer {
 
   setDate(date: GameDate) {
     this.owners = this.data.systems.map(system => getOwnerAt(system, date));
-    this.territory = this.buildTerritory();
+    // Un trazado por facción, en años luz: al mover o ampliar el mapa solo cambia la transformación.
+    this.territories = [...getTerritoryContours(this.index, this.data.systems, date)].map(([faction, loops]) => {
+      const path = new Path2D();
+      for (const loop of loops) {
+        loop.forEach(([x, y], i) => (i === 0 ? path.moveTo(x, y) : path.lineTo(x, y)));
+        path.closePath();
+      }
+      return { color: this.data.factions[faction].color, path };
+    });
     this.requestDraw();
   }
 
@@ -104,6 +118,17 @@ export class StarmapRenderer {
 
   toScreen(x: number, y: number): Point {
     return [this.width / 2 + (x - this.view.x) * this.view.scale, this.height / 2 - (y - this.view.y) * this.view.scale];
+  }
+
+  // De quién es el territorio bajo el puntero, aunque no haya una estrella cerca.
+  ownerAt(screenX: number, screenY: number): string | null {
+    const [x, y] = this.toWorld(screenX, screenY);
+    const { originX, originY, cellSize, cols, rows, nearest } = this.index;
+    const col = Math.round((x - originX) / cellSize);
+    const row = Math.round((y - originY) / cellSize);
+    if (col < 0 || row < 0 || col >= cols || row >= rows) return null;
+    const system = nearest[row * cols + col];
+    return system < 0 ? null : this.owners[system];
   }
 
   // El sistema más cercano al puntero, si está a menos de unos píxeles.
@@ -152,137 +177,85 @@ export class StarmapRenderer {
     return canvas;
   }
 
-  private buildTerritory() {
-    const { cols, rows, nearest } = this.index;
-    const ownerIndex = this.owners.map(owner => (owner ? this.factionIds.indexOf(owner) : -1));
-    const cells = new Int16Array(cols * rows);
-    for (let cell = 0; cell < cells.length; cell++) cells[cell] = nearest[cell] < 0 ? -1 : ownerIndex[nearest[cell]];
-
-    // Distancia de cada celda al borde de su territorio: el interior va oscuro y el borde brilla.
-    const depth = new Uint8Array(cells.length).fill(EDGE_DEPTH);
-    let queue: number[] = [];
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const cell = row * cols + col;
-        const owner = cells[cell];
-        if (owner < 0) continue;
-        const isEdge = col === 0 || row === 0 || col === cols - 1 || row === rows - 1
-          || cells[cell - 1] !== owner || cells[cell + 1] !== owner || cells[cell - cols] !== owner || cells[cell + cols] !== owner;
-        if (isEdge) {
-          depth[cell] = 0;
-          queue.push(cell);
-        }
-      }
-    }
-    for (let level = 1; level < EDGE_DEPTH && queue.length; level++) {
-      const next: number[] = [];
-      for (const cell of queue) {
-        for (const neighbour of [cell - 1, cell + 1, cell - cols, cell + cols]) {
-          if (neighbour >= 0 && neighbour < cells.length && cells[neighbour] >= 0 && depth[neighbour] > level) {
-            depth[neighbour] = level;
-            next.push(neighbour);
-          }
-        }
-      }
-      queue = next;
-    }
-
-    const colors = this.factionIds.map(id => hexToRgb(this.data.factions[id].color));
-    const fill = new ImageData(cols, rows);
-    const edge = new ImageData(cols, rows);
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const cell = row * cols + col;
-        const owner = cells[cell];
-        if (owner < 0) continue;
-        // La textura va con el norte arriba: la fila de la rejilla se invierte.
-        const pixel = ((rows - 1 - row) * cols + col) * 4;
-        const [r, g, b] = colors[owner];
-        const glow = Math.exp(-depth[cell] / 1.6);
-        fill.data[pixel] = r;
-        fill.data[pixel + 1] = g;
-        fill.data[pixel + 2] = b;
-        fill.data[pixel + 3] = Math.round(255 * (0.2 + 0.45 * glow));
-        if (depth[cell] === 0) {
-          edge.data[pixel] = Math.round(r + (255 - r) * 0.3);
-          edge.data[pixel + 1] = Math.round(g + (255 - g) * 0.3);
-          edge.data[pixel + 2] = Math.round(b + (255 - b) * 0.3);
-          edge.data[pixel + 3] = 255;
-        }
-      }
-    }
-
-    const fillCanvas = createCanvas(cols, rows);
-    fillCanvas.getContext('2d')!.putImageData(fill, 0, 0);
-    const edgeCanvas = createCanvas(cols, rows);
-    edgeCanvas.getContext('2d')!.putImageData(edge, 0, 0);
-
-    // El relleno se suaviza un poco para que no se vean las celdas, y el borde va nítido encima.
-    const texture = createCanvas(cols * TEXTURE_SCALE, rows * TEXTURE_SCALE);
-    const context = texture.getContext('2d')!;
-    context.imageSmoothingEnabled = true;
-    context.imageSmoothingQuality = 'high';
-    context.filter = 'blur(2px)';
-    context.drawImage(fillCanvas, 0, 0, texture.width, texture.height);
-    context.filter = 'blur(1px)';
-    context.globalAlpha = 0.85;
-    context.drawImage(edgeCanvas, 0, 0, texture.width, texture.height);
-
-    // El halo del borde va en otra textura, más pequeña porque es difusa, para atenuarlo al acercarse:
-    // si no, al ampliar se convierte en una banda blanca.
-    const glow = createCanvas(Math.round(cols * GLOW_SCALE), Math.round(rows * GLOW_SCALE));
-    const glowContext = glow.getContext('2d')!;
-    glowContext.imageSmoothingEnabled = true;
-    glowContext.filter = 'blur(4px)';
-    glowContext.drawImage(edgeCanvas, 0, 0, glow.width, glow.height);
-    return { texture, glow };
-  }
-
   private draw() {
     const context = this.context;
-    const { scale } = this.view;
     context.setTransform(1, 0, 0, 1, 0, 0);
     context.fillStyle = '#020309';
     context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.starfield) context.drawImage(this.starfield, 0, 0);
     context.setTransform(this.ratio, 0, 0, this.ratio, 0, 0);
 
-    if (this.territory) {
-      const { originX, originY, cellSize, cols, rows } = this.index;
-      const [left, top] = this.toScreen(originX - cellSize / 2, originY + (rows - 0.5) * cellSize);
-      const width = cols * cellSize * scale;
-      const height = rows * cellSize * scale;
-      context.imageSmoothingEnabled = true;
-      context.drawImage(this.territory.texture, left, top, width, height);
-      context.globalCompositeOperation = 'lighter';
-      context.globalAlpha = Math.min(0.9, GLOW_REFERENCE_SCALE / scale);
-      context.drawImage(this.territory.glow, left, top, width, height);
-      context.globalAlpha = 1;
-      context.globalCompositeOperation = 'source-over';
-    }
-
+    this.drawTerritories();
     this.drawClusters();
     this.drawSystems();
+  }
+
+  private drawTerritories() {
+    const context = this.context;
+    const { scale } = this.view;
+    // Transformación de años luz a píxeles, con el norte arriba.
+    context.save();
+    context.setTransform(
+      this.ratio * scale, 0, 0, -this.ratio * scale,
+      this.ratio * (this.width / 2 - this.view.x * scale), this.ratio * (this.height / 2 + this.view.y * scale)
+    );
+    context.lineJoin = 'round';
+    for (const { color, path } of this.territories) {
+      context.fillStyle = withAlpha(color, 0.2);
+      context.fill(path, 'evenodd');
+      // Brillo hacia dentro del borde, recortado al propio territorio para que no invada al vecino.
+      context.save();
+      context.clip(path, 'evenodd');
+      context.strokeStyle = withAlpha(color, 0.28);
+      context.lineWidth = (INNER_GLOW * 2) / scale;
+      context.stroke(path);
+      context.strokeStyle = withAlpha(color, 0.45);
+      context.lineWidth = (INNER_GLOW * 0.8) / scale;
+      context.stroke(path);
+      context.restore();
+    }
+    // Los bordes van después de todos los rellenos: así ninguno queda tapado por el vecino.
+    for (const { color, path } of this.territories) {
+      context.strokeStyle = withAlpha(color, 0.35);
+      context.lineWidth = BORDER_HALO / scale;
+      context.stroke(path);
+      context.strokeStyle = lighten(color, 0.35);
+      context.lineWidth = BORDER_WIDTH / scale;
+      context.stroke(path);
+    }
+    context.restore();
   }
 
   private drawClusters() {
     const context = this.context;
     context.lineJoin = 'round';
     for (const outline of this.clusterOutlines) {
-      const color = outline.hub ? this.data.colors.hub : this.data.colors.cluster;
       context.beginPath();
-      outline.points.forEach(([x, y], i) => {
+      outline.forEach(([x, y], i) => {
         const [sx, sy] = this.toScreen(x, y);
         if (i === 0) context.moveTo(sx, sy);
         else context.lineTo(sx, sy);
       });
       context.closePath();
-      context.fillStyle = withAlpha(color, outline.hub ? 0.16 : 0.1);
+      context.fillStyle = withAlpha(this.data.colors.cluster, 0.1);
       context.fill();
-      context.lineWidth = outline.hub ? 1.6 : 1.2;
-      context.strokeStyle = withAlpha(color, 0.75);
+      context.lineWidth = 1.2;
+      context.strokeStyle = withAlpha(this.data.colors.cluster, 0.75);
       context.stroke();
     }
+
+    context.setLineDash([5, 4]);
+    context.lineWidth = 1.6;
+    context.strokeStyle = withAlpha(this.data.colors.hub, 0.9);
+    context.beginPath();
+    for (const [[ax, ay], [bx, by]] of this.hubLinks) {
+      const [sx, sy] = this.toScreen(ax, ay);
+      const [ex, ey] = this.toScreen(bx, by);
+      context.moveTo(sx, sy);
+      context.lineTo(ex, ey);
+    }
+    context.stroke();
+    context.setLineDash([]);
   }
 
   private drawSystems() {
