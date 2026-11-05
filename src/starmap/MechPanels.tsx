@@ -1,6 +1,6 @@
 import { Fragment, useMemo, useState, type CSSProperties } from 'react';
 import type { AvailabilityData, GameDate, MechAvailability, Quest, StarmapData } from '../types/starmap';
-import { getAvailabilityAt, getFirstProduction, getFixedSources, getHeroMechs, isProduced, RARITY_NAMES, searchMechs, type FixedSources } from '../utils/availability';
+import { getAvailabilityAt, getLaterVariants, getFixedSources, getHeroMechs, isProduced, RARITY_NAMES, searchMechs, type FixedSources } from '../utils/availability';
 import { formatGameDate } from '../utils/starmap';
 import { MechLink } from './MarketPanels';
 import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
@@ -31,6 +31,7 @@ export function MechDrawer({ availability, date, lastDate, onDate, selectedId, o
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const results = useMemo(() => (availability ? searchMechs(availability, query, date) : []), [availability, query, date]);
+  const later = useMemo(() => (availability ? getLaterVariants(availability, query, date) : { count: 0, next: null }), [availability, query, date]);
 
   return (
     <section className={`starmap-legend starmap-quests starmap-mechs-drawer${isOpen ? ' is-open' : ''}`} aria-label="Find a 'Mech">
@@ -72,8 +73,8 @@ export function MechDrawer({ availability, date, lastDate, onDate, selectedId, o
                 </button>
               </li>
             ))}
-            {availability && query.trim() && results.length === 0 && (
-              <NotInProduction first={getFirstProduction(availability, query)} date={date} lastDate={lastDate} onDate={onDate} />
+            {availability && query.trim() && (
+              <LaterVariants {...later} hasResults={results.length > 0} date={date} lastDate={lastDate} onDate={onDate} />
             )}
           </ul>
         </div>
@@ -82,15 +83,24 @@ export function MechDrawer({ availability, date, lastDate, onDate, selectedId, o
   );
 }
 
-// Sin resultados en la fecha del mapa: si lo buscado existe más adelante, un botón lleva a esa fecha.
-function NotInProduction({ first, date, lastDate, onDate }: { first: GameDate | null; date: GameDate; lastDate: GameDate; onDate: (date: GameDate) => void }) {
-  if (!first) return <li className="starmap-quests-empty">No &rsquo;Mechs found</li>;
+// Variantes que llegan después de la fecha del mapa, al final de la lista o en lugar de ella: un botón
+// lleva a la fecha de la siguiente, si es antes del final del mapa.
+function LaterVariants({ count, next, hasResults, date, lastDate, onDate }: {
+  count: number;
+  next: GameDate | null;
+  hasResults: boolean;
+  date: GameDate;
+  lastDate: GameDate;
+  onDate: (date: GameDate) => void;
+}) {
+  if (!next) return hasResults ? null : <li className="starmap-quests-empty">No &rsquo;Mechs found</li>;
+  const variants = count === 1 ? 'variant enters' : 'variants enter';
   return (
     <li className="starmap-quests-empty">
-      No &rsquo;Mechs in production on {formatGameDate(date)}.
-      {first <= lastDate
-        ? <button type="button" className="starmap-mech-date" onClick={() => onDate(first)}>Show from {formatGameDate(first)}</button>
-        : <> They enter production on {formatGameDate(first)}, after the map ends.</>}
+      {hasResults ? `${count} more ${variants} production later.` : `No 'Mechs in production on ${formatGameDate(date)}.`}
+      {next <= lastDate
+        ? <button type="button" className="starmap-mech-date" onClick={() => onDate(next)}>Show from {formatGameDate(next)}</button>
+        : <> {hasResults ? 'The next one' : count === 1 ? 'It' : 'The first one'} enters production on {formatGameDate(next)}, after the map ends.</>}
     </li>
   );
 }

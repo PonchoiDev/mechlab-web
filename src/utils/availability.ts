@@ -116,13 +116,15 @@ export const searchMechs = (availability: AvailabilityData, query: string, date?
     .map(({ mech }) => mech);
 };
 
-// Fecha en que entra en producción la primera variante que coincide con la búsqueda, sin mirar la
-// fecha del mapa: para ofrecer ir a ella cuando todavía no existe ninguna.
-export const getFirstProduction = (availability: AvailabilityData, query: string): GameDate | null =>
-  searchMechs(availability, query, undefined, Infinity).reduce<GameDate | null>(
-    (first, mech) => (first === null || mech.from < first ? mech.from : first),
-    null
-  );
+// Variantes que coinciden con la búsqueda pero entran en producción después de la fecha del mapa, y la
+// fecha de la siguiente: la lista filtrada por fecha no debe hacer creer que no hay más.
+export const getLaterVariants = (availability: AvailabilityData, query: string, date: GameDate): { count: number; next: GameDate | null } => {
+  const later = searchMechs(availability, query, undefined, Infinity).filter(mech => !isProduced(mech, date));
+  return {
+    count: later.length,
+    next: later.reduce<GameDate | null>((next, mech) => (next === null || mech.from < next ? mech.from : next), null)
+  };
+};
 
 export const parseMechQuery = (search: string, availability: AvailabilityData): string | null => {
   const id = new URLSearchParams(search).get('mech');
