@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-zone-levels',
+    date: '2026-11-05',
+    title: 'Recommended reputation on the star map',
+    items: [
+      'The system card shows the recommended reputation and difficulty of its cluster and industrial hub, as in the game',
+      'Campaign and career ask for different levels, so each mode shows its own',
+      'Taurian Corridor now shows its own name instead of Outworlds Border'
+    ]
+  },
+  {
     id: '2026-11-05-quest-rewards',
     date: '2026-11-05',
     title: 'Quest rewards',

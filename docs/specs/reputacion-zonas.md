@@ -1,7 +1,7 @@
 # Especificación: reputación recomendada y dificultad de las zonas
 
 - **Issue:** [#72](https://github.com/PonchoiDev/mechlab-web/issues/72)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/starmap.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -71,3 +71,13 @@ Los assets están en tres sitios, uno por modo:
 
 1. **Datos y lógica (CA1 a CA9):** `src/utils/starmap.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, la ficha de un sistema de Liao/Davion Border (dos modos), de Diboll (centro industrial) y de Sarna (sin niveles).
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 236 `ClusterAsset` en el juego. De las 71 zonas del mapa, 60 tienen niveles; las 11 sin ninguno son zonas de un solo sistema de los DLC (Sarna, Vega…). Los 35 centros industriales tienen dificultad, y solo dos traen reputación, los dos en carrera: Diboll (1-2) y Chirala (4-6).
+- **Tests:** los nueve criterios (CA1 a CA9) están en `src/utils/starmap.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 con St. Loris (Liao/Davion Border, campaña y carrera) y Diboll (centro industrial, sin reputación en campaña), y a 390 × 844 con Sarna, que no muestra niveles.
+- **Decisiones durante el desarrollo:**
+  - Algunas zonas de carrera tienen dos assets con la misma reputación y distinta dificultad (Outworlds Alliance Border, 3-5 con dificultad 15 y 20): se muestran las dos líneas, como en los otros casos con dos assets distintos.
+  - `generar_mapa.py` usaba la misma variable para los clústeres sin nombre y los objetos de mercado sin nombre, así que el aviso de los clústeres no salía bien: ahora son dos variables.
