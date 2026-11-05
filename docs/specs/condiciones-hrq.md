@@ -1,7 +1,7 @@
 # Especificación: condiciones de las misiones de alta recompensa
 
 - **Issue:** [#68](https://github.com/PonchoiDev/mechlab-web/issues/68)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/quests.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -64,3 +64,14 @@ Cada HRQ tiene un arco de campaña (`MWCampaignArc`) en su carpeta, con eventos 
 
 1. **Datos y lógica (CA1 a CA6):** `src/utils/quests.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador: condiciones en la ficha de Bow and Arrow, de The False Flag y de Adam Steiner; aviso de disponibilidad en la lista y el icono atenuado antes de la fecha.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados. La especificación y los tests se ampliaron dos veces con lo que mostraron los datos (requisitos previos y HRQ excluyentes).
+- **Datos:** 140 arcos con condiciones. 59 de las 64 HRQ piden reputación; 20 tienen fecha de inicio (19 de los DLC y Errant Signal en carrera) y 2 del DLC8, de caducidad; 5 se ofrecen tras completar otra y 6 son excluyentes por parejas.
+- **Tests:** los ocho criterios (CA1 a CA8) están en `src/utils/quests.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador con Bow and Arrow en 3020 (aún no se ofrece), The False Flag (reputación distinta en campaña y en carrera), Adam Steiner en 3056 (ya no se ofrece), Defense Support - Davion (excluyente) y Corporate Interests (después de Destabilization).
+- **Decisiones durante el desarrollo:**
+  - Adam Steiner y Guerrero, del DLC8, no piden reputación: solo un intervalo de fechas.
+  - The Powder Keg se ofrece siempre y Pirate Raiders depende de un objetivo que no está en el juego, así que se quedan sin condiciones.
+  - Una condición de objetivo invertida (`bInvertCondition`) significa «sin haber completado»: marca las HRQ excluyentes. Si una HRQ pide completar una parte de otra y no haber completado otra parte, cuenta como requisito previo.
