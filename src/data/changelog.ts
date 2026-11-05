@@ -15,7 +15,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       'Pick any variant and the map shows how rare it is in each faction\'s market on the chosen date, from very common to very rare',
       'The card lists who sells it, when it enters production and where you can always get it: quest rewards and special markets',
-      'Hero \'Mechs lists the hero \'Mechs you can only get in one place, like the Atlas II on Romulus or the quest reward heroes',
+      'Hero \'Mechs lists the hero \'Mechs and special variants you can only get in one place, like the Atlas II on Romulus, the Bounty Hunter\'s Marauder or the Razer Wolverine',
+      'Cards show mission rewards outside the quests, like the DLC campaigns, and say when a hero can come up for sale',
       'Only variants already in production on the map date are listed, with a button to jump to the date they enter production, and the map zooms to small places, like a quest route or the only system of the faction that sells it',
       'Links keep the chosen variant, so you can share where to find it'
     ]
