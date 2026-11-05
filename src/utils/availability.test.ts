@@ -9,11 +9,13 @@ import {
   getFixedSources,
   getHeroMechs,
   getMarketRarity,
+  getMechFocus,
   isProduced,
   parseMechQuery,
   searchMechs
 } from './availability';
 import { toMapQuery } from './starmap';
+import { getQuestRoute } from './quests';
 
 // Criterios de aceptación de docs/specs/buscar-mech.md (issue #76).
 const data = starmapJson as unknown as StarmapData;
@@ -105,6 +107,36 @@ describe('rareza de cada variante por facción', () => {
     expect(parseMechQuery('?mech=AS7-D', availability)).toBe('AS7-D');
     expect(parseMechQuery('?mech=NO-EXISTE', availability)).toBeNull();
     expect(toMapQuery({ date: '3025-06-01', systemId: null, mechId: 'AS7-D' }, data)).toContain('mech=AS7-D');
+  });
+
+  it('CA11: la búsqueda solo muestra las variantes que ya existen en la fecha del mapa', () => {
+    expect(searchMechs(availability, 'atlas', '3030-01-01').map(found => found.id)).not.toContain('AS7-D-H');
+    expect(searchMechs(availability, 'atlas', '3045-01-01').map(found => found.id)).toContain('AS7-D-H');
+  });
+
+  it('CA12: un hero que es recompensa de una HRQ encuadra su ruta y la marca', () => {
+    const bowAndArrow = data.quests.find(quest => quest.name === 'Bow and Arrow')!;
+    expect(getMechFocus(data, availability, mech('ARC-AGC'), '3046-01-01')).toEqual({
+      systemIds: getQuestRoute(bowAndArrow),
+      questId: bowAndArrow.id
+    });
+  });
+
+  it('CA13: se encuadra el sitio pequeño donde se consigue, y nada si se vende en todas partes', () => {
+    const romulus = data.systems.find(system => system.name === 'Romulus')!;
+    const outreach = data.systems.find(system => system.name === 'Outreach')!;
+    expect(getMechFocus(data, availability, mech('AS7-D-H'), '3044-01-01')).toEqual({ systemIds: [romulus.id], questId: null });
+    expect(getMechFocus(data, availability, mech('ARC-2W'), '3050-06-01')).toEqual({ systemIds: [outreach.id], questId: null });
+    expect(getMechFocus(data, availability, mech('AS7-D'), '3025-06-01')).toEqual({ systemIds: [], questId: null });
+    expect(getMechFocus(data, availability, mech('ARC-T'), '3025-06-01')).toEqual({ systemIds: [], questId: null });
+  });
+
+  it('CA14: las facciones con pocos sistemas traen la lista de sus sistemas', () => {
+    const groups = getAvailabilityAt(data, availability, mech('AS7-D'), '3025-06-01');
+    const factions = groups.flatMap(group => group.factions);
+    const terra = data.systems.find(system => system.name === 'Terra')!;
+    expect(factions.find(entry => entry.id === 'ComStar')?.systemIds).toEqual([terra.id]);
+    expect(factions.find(entry => entry.id === 'Steiner')?.systemIds).toBeUndefined();
   });
 
   it('CA10: las variantes están en el MechLab y todas las facciones del mapa tienen tabla salvo el ARDC', () => {
