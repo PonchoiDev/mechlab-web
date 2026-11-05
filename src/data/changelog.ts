@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-markets',
+    date: '2026-11-05',
+    title: 'Special markets and unique \'Mechs',
+    items: [
+      'The star map shows the 22 fixed markets of the DLC campaigns, with their \'Mechs, weapons by tier, equipment and pilots',
+      'The Atlas II appears in Romulus from 10 May 3043, as in the game',
+      'The Markets list finds where to buy a \'Mech or a weapon',
+      'Every \'Mech opens in the MechLab with its stock build, and a mech link like /mercs/?mech=AS7-D-H opens any variant'
+    ]
+  },
+  {
     id: '2026-11-05-quests',
     date: '2026-11-05',
     title: 'High reward quests on the star map',

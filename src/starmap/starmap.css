@@ -740,6 +740,92 @@ button, input, select { font: inherit; color: inherit; }
 .starmap-quests li button[aria-pressed='true'] { border-left-color: #f2b75e; background: rgba(242, 183, 94, 0.18); }
 .starmap-quests-empty { padding: 6px 12px; color: var(--map-muted); font-size: 15px; }
 
+/* Mercados especiales y 'Mechs únicos en la ficha del sistema. */
+.starmap-markets {
+  display: grid;
+  gap: 10px;
+  margin: 12px 14px 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--map-line);
+}
+
+.starmap-market {
+  padding-left: 10px;
+  border-left: 3px solid #7fdc8a;
+}
+
+.starmap-market.is-black { border-left-color: #b98cff; }
+.starmap-market.is-unique { border-left-color: #ffd400; }
+
+.starmap-market h3 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.starmap-market h3 small {
+  margin-left: 6px;
+  color: var(--map-muted);
+  font-size: 14px;
+}
+
+.starmap-market p {
+  margin: 4px 0 0;
+  color: var(--map-muted);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.starmap-market-mechs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.starmap-mech-link {
+  color: var(--map-text);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(127, 220, 138, 0.6);
+  text-underline-offset: 3px;
+  text-transform: uppercase;
+}
+
+.starmap-mech-link small { color: var(--map-muted); font-size: 13px; }
+.starmap-mech-link:hover, .starmap-mech-link:focus-visible { color: #7fdc8a; outline: none; }
+.starmap-market.is-unique .starmap-mech-link { font-size: 20px; text-decoration-color: rgba(255, 212, 0, 0.6); }
+
+.starmap-market details { margin-top: 4px; }
+
+.starmap-market summary {
+  color: var(--map-muted);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.starmap-market details ul {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.starmap-market details small { color: var(--map-muted); }
+.starmap-market details b { color: var(--map-muted); font-weight: 600; }
+
 /* Ficha de una HRQ: misma caja que la del sistema, con las misiones numeradas. */
 .starmap-quest-mark {
   display: grid;
