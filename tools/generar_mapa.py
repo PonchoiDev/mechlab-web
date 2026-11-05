@@ -398,6 +398,10 @@ def recompensas_fuera_de_hrq(recompensas_juego, misiones_juego, mechs, sistemas_
                    "dlc": int(dlc.group(1)) if dlc else None, "mechs": variantes}
         if recompensa["sistema"] in sistemas_validos:
             entrada["system"] = recompensa["sistema"]
+        # Razer_Exclusive y MS_Exclusive son desbloqueos de promociones: llegan con un mensaje, sin
+        # misión ni sistema (el registro de eventos dice «Claimed Razer WVR-7H»).
+        if recompensa["carpeta"].endswith("_Exclusive"):
+            entrada["exclusive"] = True
         resultado.append(entrada)
     return resultado
 

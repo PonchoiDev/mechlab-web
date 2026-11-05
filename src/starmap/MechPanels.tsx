@@ -9,13 +9,14 @@ import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
 const systemName = (data: StarmapData, id: number) => data.systems.find(system => system.id === id)?.name ?? '';
 
 const describeReward = (reward: CampaignReward) => `${reward.title}${reward.dlc ? ` (DLC ${reward.dlc})` : ''}`;
+const rewardLabel = (reward: CampaignReward) => (reward.exclusive ? 'Promotional unlock' : 'Reward');
 
 // Una línea por fuente fija: la HRQ, el mercado especial, el sistema donde está colocado o la misión.
 const describeSources = (data: StarmapData, { quests, markets, uniques, rewards }: FixedSources): string[] => [
   ...quests.map(quest => `Quest reward: ${quest.name}`),
   ...markets.map(market => `Special market: ${systemName(data, market.system)}`),
   ...uniques.map(unique => `${systemName(data, unique.system)} from ${formatGameDate(unique.from)}`),
-  ...rewards.map(reward => `Reward: ${describeReward(reward)}`)
+  ...rewards.map(reward => `${rewardLabel(reward)}: ${describeReward(reward)}`)
 ];
 
 interface MechDrawerProps {
@@ -263,11 +264,16 @@ export function MechCard({ data, availability, mech, date, onSystem, onQuest, on
                   const { system } = reward;
                   return (
                     <li key={reward.id}>
-                      Reward: {describeReward(reward)}
+                      {rewardLabel(reward)}: {describeReward(reward)}
                       {system !== undefined && (
                         <> at <button type="button" className="starmap-system-link" onClick={() => onSystem(system)}>{systemName(data, system)}</button></>
                       )}
                       {reward.summary && reward.summary !== reward.title && <small className="starmap-mech-reward">{reward.summary}</small>}
+                      {system === undefined && (
+                        <small className="starmap-mech-reward">
+                          {reward.exclusive ? 'It arrives as a message once unlocked, not at a place on the map' : 'Not tied to a place on the map'}
+                        </small>
+                      )}
                     </li>
                   );
                 })}

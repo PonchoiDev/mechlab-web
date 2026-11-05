@@ -138,6 +138,8 @@ export interface CampaignReward {
   dlc: number | null;
   mechs: { id: string; name: string }[];
   system?: number;
+  // Desbloqueo de una promoción (Razer, Microsoft Store): llega con un mensaje, sin misión.
+  exclusive?: boolean;
 }
 
 export interface StarmapData {
