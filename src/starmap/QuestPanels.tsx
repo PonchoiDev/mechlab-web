@@ -1,7 +1,8 @@
 import { Fragment, useMemo, useState, type ReactNode } from 'react';
-import type { GameDate, Quest, QuestRequirement, StarmapData } from '../types/starmap';
+import type { GameDate, Quest, QuestRequirement, QuestReward, StarmapData } from '../types/starmap';
 import { getQuestAvailability, getQuestsForSystem, searchQuests } from '../utils/quests';
 import { formatGameDate } from '../utils/starmap';
+import { MechLink } from './MarketPanels';
 
 const MODE_NAMES = { campaign: 'Campaign', career: 'Career' } as const;
 
@@ -96,6 +97,52 @@ function Requirement({ requirement, showMode, onQuestName }: { requirement: Ques
   );
 }
 
+const numberFormat = new Intl.NumberFormat('en');
+
+// Lo que paga la HRQ: C-Bills, reputación, 'Mechs enlazados al MechLab, armas, equipo y texto final.
+function Reward({ reward, showMode }: { reward: QuestReward; showMode: boolean }) {
+  return (
+    <div className="starmap-quest-reward">
+      {(showMode || reward.cbills > 0 || reward.reputation > 0) && (
+        <p className="starmap-quest-reward-money">
+          {showMode && reward.mode && <b>{MODE_NAMES[reward.mode]}: </b>}
+          {[
+            reward.cbills > 0 && `${numberFormat.format(reward.cbills)} C-Bills`,
+            reward.reputation > 0 && `+${numberFormat.format(reward.reputation)} reputation`
+          ].filter(Boolean).join(' · ')}
+        </p>
+      )}
+      {reward.mechs.length > 0 && (
+        <ul className="starmap-market-mechs">
+          {reward.mechs.map((mech, index) => <li key={`${mech.id}-${index}`}><MechLink id={mech.id} name={mech.name} /></li>)}
+        </ul>
+      )}
+      {reward.weapons.length > 0 && (
+        <details>
+          <summary>Weapons ({reward.weapons.length})</summary>
+          <ul>
+            {reward.weapons.map(weapon => (
+              <li key={`${weapon.name}-${weapon.tier}`}>{weapon.name}{weapon.tier && <small> · {weapon.tier}</small>} <b>×{weapon.count}</b></li>
+            ))}
+          </ul>
+        </details>
+      )}
+      {reward.equipment.length > 0 && (
+        <details>
+          <summary>Equipment ({reward.equipment.length})</summary>
+          <ul>{reward.equipment.map(item => <li key={item.name}>{item.name} <b>×{item.count}</b></li>)}</ul>
+        </details>
+      )}
+      {reward.debrief && (
+        <details>
+          <summary>Debrief</summary>
+          <p className="starmap-quest-debrief">{reward.debrief}</p>
+        </details>
+      )}
+    </div>
+  );
+}
+
 export function QuestCard({ data, quest, date, onSystem, onQuest, onClose }: QuestCardProps) {
   const systemName = (id: number) => data.systems.find(system => system.id === id)?.name ?? '';
   const status = describeAvailability(quest, date);
@@ -139,6 +186,12 @@ export function QuestCard({ data, quest, date, onSystem, onQuest, onClose }: Que
           </div>
         )}
       </dl>
+      {quest.rewards.length > 0 && (
+        <section className="starmap-quest-rewards starmap-market" aria-label="Rewards">
+          <h3>Rewards</h3>
+          {quest.rewards.map(reward => <Reward key={reward.mode ?? 'all'} reward={reward} showMode={quest.rewards.length > 1} />)}
+        </section>
+      )}
       <ol className="starmap-quest-missions" aria-label="Missions">
         {quest.missions.map((mission, index) => (
           <li key={`${mission.title}-${index}`}>

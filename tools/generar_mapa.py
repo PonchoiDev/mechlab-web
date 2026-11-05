@@ -213,7 +213,39 @@ def requisito_de_cadena(modo, condicion, nombres):
     }
 
 
-def cadenas_de_misiones(acciones, sistemas_validos, arcos=()):
+def recompensas_por_cadena(recompensas_juego, mechs, items):
+    """Suma lo que pagan los objetivos de cada cadena. Si dos objetivos que pagan comparten título,
+    son desenlaces alternativos (Armed Robbery en carrera) y cuenta uno."""
+    por_cadena = {}
+    for recompensa in recompensas_juego:
+        por_cadena.setdefault(cadena_de_carpeta(recompensa["carpeta"]), []).append(recompensa)
+    resultado = {}
+    for (carpeta, modo), grupo in por_cadena.items():
+        vistos = set()
+        unicas = []
+        for recompensa in grupo:
+            if recompensa["titulo"].lower() in vistos:
+                continue
+            vistos.add(recompensa["titulo"].lower())
+            unicas.append(recompensa)
+        # En el orden de la cadena, para que el texto final sea el de la última parte.
+        unicas.sort(key=lambda recompensa: parte(recompensa["titulo"]))
+        textos = [recompensa["texto"] for recompensa in unicas if recompensa["texto"]]
+        resultado[(carpeta, modo)] = {
+            "mode": modo,
+            "cbills": sum(recompensa["cbills"] for recompensa in unicas),
+            "reputation": sum(recompensa["reputacion"] for recompensa in unicas),
+            "mechs": [mech for recompensa in unicas for mech in (mech_de_juego(id_juego, mechs) for id_juego in recompensa["mechs"]) if mech],
+            "weapons": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, True)
+                                     for recompensa in unicas for id_juego, cantidad in recompensa["armas"] if cantidad > 0),
+            "equipment": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, False)
+                                       for recompensa in unicas for id_juego, cantidad in recompensa["equipo"] if cantidad > 0),
+            "debrief": textos[-1] if textos else None,
+        }
+    return resultado
+
+
+def cadenas_de_misiones(acciones, sistemas_validos, arcos=(), recompensas=None):
     """Agrupa las acciones en cadenas. La misma cadena de facción existe en campaña y en carrera:
     se une en una que indica los dos modos, con los sistemas de carrera."""
     grupos = {}
@@ -247,6 +279,7 @@ def cadenas_de_misiones(acciones, sistemas_validos, arcos=()):
             "missionTypes": tipos_de_mision(oferta and oferta.get("tipos")),
             # Una entrada por modo: la misma cadena de facción puede pedir más reputación en carrera.
             "requirements": [requisito_de_cadena(modo, condiciones.get((carpeta, modo)), nombres)],
+            "rewards": [recompensas[(carpeta, modo)]] if recompensas and (carpeta, modo) in recompensas else [],
             "missions": [
                 {
                     "title": accion.get("titulo") or (nombre if parte(accion.get("titulo")) == 1 else f"{nombre} Pt. {parte(accion.get('titulo'))}"),
@@ -258,6 +291,7 @@ def cadenas_de_misiones(acciones, sistemas_validos, arcos=()):
         }
         previa = cadenas.get(nombre)
         if previa:
+            previa_recompensas = list(previa["rewards"])
             modos = sorted(set(previa["modes"]) | set(cadena["modes"]))
             requisitos = [requisito for requisito in previa["requirements"] + cadena["requirements"]
                           if requisito["mode"] not in {otro["mode"] for otro in previa["requirements"]} or requisito in previa["requirements"]]
@@ -266,6 +300,8 @@ def cadenas_de_misiones(acciones, sistemas_validos, arcos=()):
                 previa.update(cadena)
             previa["modes"] = modos
             previa["requirements"] = sorted(requisitos, key=lambda requisito: requisito["mode"] or "")
+            por_modo = {recompensa["mode"]: recompensa for recompensa in previa_recompensas + cadena["rewards"]}
+            previa["rewards"] = sorted(por_modo.values(), key=lambda recompensa: recompensa["mode"] or "")
         else:
             cadenas[nombre] = cadena
     return sorted(cadenas.values(), key=lambda cadena: cadena["name"])
@@ -298,19 +334,44 @@ def etapa_de_mercado(mercado):
     return "Campaign"
 
 
+# Variante de un loadout de mercado o de recompensa: los de recompensa llevan prefijos y sufijos en
+# cualquier orden (11_2_Reward_FS9-A, COR-PVT_CareerSalvage, RFL-DNA_Loadout_CareerSalvage).
+REGEX_PREFIJO_VARIANTE = re.compile(r"^.*_Reward_")
+REGEX_SUFIJO_VARIANTE = re.compile(r"_(Loadout|MDA|CareerSalvage|CampaignSalvage)")
+
+
+def mech_de_juego(id_juego, mechs):
+    variante = REGEX_SUFIJO_VARIANTE.sub("", REGEX_PREFIJO_VARIANTE.sub("", id_juego))
+    return {"id": variante, "name": mechs[variante]["name"]} if variante in mechs else None
+
+
+def objeto_de_juego(id_juego, cantidad, items, con_tier):
+    tier = REGEX_TIER.search(id_juego)
+    base = REGEX_TIER.sub("", id_juego)
+    nombre = items[base]["name"] if base in items else separar_palabras(base)
+    if con_tier:
+        return {"name": nombre, "tier": nombre_de_tier(tier.group(1)) if tier else None, "count": cantidad}
+    return {"name": nombre, "count": cantidad}
+
+
+def sumar_objetos(objetos):
+    """Une las repeticiones del mismo objeto (y tier) sumando su cantidad."""
+    sumados = {}
+    for objeto in objetos:
+        clave = (objeto["name"], objeto.get("tier"))
+        if clave in sumados:
+            sumados[clave]["count"] += objeto["count"]
+        else:
+            sumados[clave] = dict(objeto)
+    return list(sumados.values())
+
+
 def mercados_especiales(mercados_juego, mechs, items, sistemas_validos):
     def mech(id_juego):
-        variante = re.sub(r"_(Loadout|MDA)$", "", id_juego)
-        return {"id": variante, "name": mechs[variante]["name"]} if variante in mechs else None
+        return mech_de_juego(id_juego, mechs)
 
     def objeto(id_juego, cantidad, con_tier):
-        tier = REGEX_TIER.search(id_juego)
-        base = REGEX_TIER.sub("", id_juego)
-        nombre = items[base]["name"] if base in items else separar_palabras(base)
-        resultado = {"name": nombre, "count": cantidad}
-        if con_tier:
-            resultado = {"name": nombre, "tier": nombre_de_tier(tier.group(1)) if tier else None, "count": cantidad}
-        return resultado
+        return objeto_de_juego(id_juego, cantidad, items, con_tier)
 
     mercados = []
     for mercado in mercados_juego:
@@ -492,7 +553,8 @@ def main():
             for id_centro, centro in centros.items()
         },
         "systems": sistemas,
-        "quests": cadenas_de_misiones(misiones_juego, {sistema["id"] for sistema in sistemas}, leer("condiciones_misiones.json")),
+        "quests": cadenas_de_misiones(misiones_juego, {sistema["id"] for sistema in sistemas}, leer("condiciones_misiones.json"),
+                                      recompensas_por_cadena(leer("recompensas_misiones.json"), mechs, items)),
         "markets": mercados_especiales(mercados_juego, mechs, items, {sistema["id"] for sistema in sistemas}),
         "uniqueMechs": mechs_unicos(unicos_juego, mechs),
     }
@@ -503,6 +565,9 @@ def main():
     print(f"{len(sistemas)} sistemas, {len(facciones)} facciones, {len(eventos)} eventos, "
           f"{len(clusteres)} clústeres, {len(centros)} centros industriales, {len(datos['quests'])} misiones de alta recompensa, "
           f"{len(datos['markets'])} mercados especiales y {len(datos['uniqueMechs'])} 'Mechs únicos")
+    sin_variante = [mech for recompensa in leer("recompensas_misiones.json") for mech in recompensa["mechs"] if not mech_de_juego(mech, mechs)]
+    if sin_variante:
+        print(f"Aviso: 'Mechs de recompensa sin variante en mechs.json: {', '.join(sin_variante)}")
     sin_mech = [mech for mercado in mercados_juego for mech in mercado["mechs"] if re.sub(r"_Loadout$", "", mech) not in mechs]
     if sin_mech:
         print(f"Aviso: 'Mechs de mercado que no están en mechs.json: {', '.join(sin_mech)}")

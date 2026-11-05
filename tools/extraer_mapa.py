@@ -346,6 +346,44 @@ def extraer_mechs_unicos(pak):
     return unicos
 
 
+def recompensa_de_objetivo(info):
+    recompensa = info.get("ObjectiveReward") or {}
+    objetos = recompensa.get("ItemRewards") or {}
+
+    def lista(campo, clave):
+        return [[objeto["ItemData"][clave]["Id"]["PrimaryAssetName"], objeto["Count"]] for objeto in objetos.get(campo, [])]
+
+    return {
+        "cbills": recompensa.get("CBills") or 0,
+        "reputacion": recompensa.get("ReputationIncrease") or 0,
+        "mechs": [mech["Id"]["PrimaryAssetName"] for mech in objetos.get("MechLoadouts", [])],
+        "armas": lista("Weapons", "WeaponId"),
+        "equipo": lista("Equipment", "EquipmentId"),
+        "texto": info.get("RewardBriefing") or None,
+    }
+
+
+def extraer_recompensas_misiones(pak):
+    """Objetivos que pagan (bHasRewards) en las carpetas de las HRQ. Se recorren todos y no solo los
+    de las acciones con sistema, porque el pago final suele estar en un objetivo que activa el arco
+    (A New March, de Adam Steiner). Otros objetivos traen una recompensa copiada que el juego no
+    entrega, y los de título entre corchetes ([*] Campaign Complete) son marcadores internos."""
+    recompensas = []
+    for ruta in sorted(pak.archivos):
+        if not ruta.endswith(".uasset") or not REGEX_MISIONES.match(ruta):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        if "ObjectiveReward" not in asset.nombres:
+            continue
+        info = asset.propiedades(asset.principal()).get("DisplayInfo", {})
+        titulo = info.get("ScreenTitleText") or ""
+        if not info.get("bHasRewards") or titulo.startswith("["):
+            continue
+        recompensas.append({"carpeta": os.path.dirname(ruta)[len(CONTENIDO):], "objetivo": os.path.basename(ruta)[: -len(".uasset")],
+                            "titulo": titulo, **recompensa_de_objetivo(info)})
+    return recompensas
+
+
 def extraer_textos(pak):
     textos = {}
     for ruta in TABLAS_DE_TEXTO:
@@ -436,6 +474,7 @@ def main():
     guardar("textos.json", extraer_textos(pak))
     guardar("misiones.json", extraer_misiones(pak))
     guardar("condiciones_misiones.json", extraer_condiciones_misiones(pak))
+    guardar("recompensas_misiones.json", extraer_recompensas_misiones(pak))
     guardar("mercados.json", extraer_mercados(pak))
     guardar("mechs_unicos.json", extraer_mechs_unicos(pak))
     extraer_logos(pak, facciones)

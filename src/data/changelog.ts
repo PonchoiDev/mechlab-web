@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-quest-rewards',
+    date: '2026-11-05',
+    title: 'Quest rewards',
+    items: [
+      'Each high reward quest shows what it pays: C-Bills, reputation, \'Mechs, weapons by tier, equipment and the final debrief',
+      'Campaign and career pay differently, so each mode shows its own reward',
+      'Reward \'Mechs open in the MechLab with their stock build, and the Quests list finds quests by reward, like Gauss or ARC-AGC'
+    ]
+  },
+  {
     id: '2026-11-05-quest-requirements',
     date: '2026-11-05',
     title: 'Quest requirements',
