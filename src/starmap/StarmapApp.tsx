@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import starmapData from '../data/starmap.json';
-import type { GameDate, Quest, StarSystem, StarmapData, ZoneLevel } from '../types/starmap';
+import type { AvailabilityData, GameDate, Quest, StarSystem, StarmapData, ZoneLevel } from '../types/starmap';
 import {
   clampDate,
   countSystemsByOwner,
@@ -21,11 +21,15 @@ import {
   toMapQuery
 } from '../utils/starmap';
 import { getQuestRoute, parseQuestQuery } from '../utils/quests';
+import { getMarketRarity, isProduced, parseMechQuery } from '../utils/availability';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { MarketDrawer, SystemMarkets } from './MarketPanels';
+import { HeroDrawer, MechCard, MechDrawer } from './MechPanels';
+import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
 import { QuestCard, QuestDrawer, SystemQuests } from './QuestPanels';
 import { StarmapCanvas, type FocusRequest } from './StarmapCanvas';
+import type { TerritoryColors } from './renderer';
 
 const data = starmapData as unknown as StarmapData;
 const LEGEND_MIN_SYSTEMS = 5;
@@ -259,6 +263,38 @@ export function StarmapApp() {
   const quest = data.quests.find(candidate => candidate.id === questId) ?? null;
   const questRoute = useMemo(() => (quest ? getQuestRoute(quest) : null), [quest]);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  // La rareza de los 'Mechs va en su propio archivo: se descarga al abrir Find a 'Mech o Hero 'Mechs, o
+  // al entrar con ?mech= en la URL.
+  const [availability, setAvailability] = useState<AvailabilityData | null>(null);
+  const [mechId, setMechId] = useState<string | null>(null);
+  const loadingRef = useRef(false);
+  const loadAvailability = useCallback((onLoad?: (loaded: AvailabilityData) => void) => {
+    if (loadingRef.current) return;
+    loadingRef.current = true;
+    import('../data/availability.json').then(module => {
+      const loaded = module.default as unknown as AvailabilityData;
+      setAvailability(loaded);
+      onLoad?.(loaded);
+    }).catch(() => {
+      loadingRef.current = false;
+    });
+  }, []);
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).has('mech')) {
+      loadAvailability(loaded => setMechId(parseMechQuery(window.location.search, loaded)));
+    }
+  }, [loadAvailability]);
+  const mech = availability?.mechs.find(candidate => candidate.id === mechId) ?? null;
+  const mechProduced = mech ? isProduced(mech, date) : false;
+  // Con una variante elegida, cada facción se pinta con el color de su rareza. Solo depende de la
+  // fecha a través de si la variante ya existe, para no cortar la animación al saltar de evento.
+  const territoryColors = useMemo<TerritoryColors>(() => {
+    if (!mech || !availability) return null;
+    return faction => {
+      const rarity = mechProduced ? getMarketRarity(availability, mech, faction) : null;
+      return rarity ? RARITY_COLORS[rarity] : NOT_SOLD_COLOR;
+    };
+  }, [mech, availability, mechProduced]);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
@@ -276,10 +312,10 @@ export function StarmapApp() {
   // control deslizante se pare para no llenar el historial.
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      window.history.replaceState(null, '', toMapQuery({ date, systemId: selectedId, questId }, data));
+      window.history.replaceState(null, '', toMapQuery({ date, systemId: selectedId, questId, mechId }, data));
     }, URL_DELAY);
     return () => window.clearTimeout(timer);
-  }, [date, selectedId, questId]);
+  }, [date, selectedId, questId, mechId]);
 
   const shown = data.systems.find(system => system.id === (hoveredId ?? selectedId)) ?? null;
   // La ficha del sistema elegido sigue fijada (con su botón de cerrar) aunque el ratón pase por encima.
@@ -295,9 +331,18 @@ export function StarmapApp() {
   // Al elegir una HRQ se cierra la ficha del sistema para que se vea la de la misión.
   const pickQuest = (picked: Quest) => {
     setQuestId(picked.id);
+    setMechId(null);
     setSelectedId(null);
     setHoveredId(null);
     focusOn(picked.offer);
+  };
+
+  // Al elegir una variante se cierran la ficha del sistema y la de la HRQ para que se vea la suya.
+  const pickMech = (id: string) => {
+    setMechId(id);
+    setQuestId(null);
+    setSelectedId(null);
+    setHoveredId(null);
   };
 
   return (
@@ -309,6 +354,7 @@ export function StarmapApp() {
         hoveredId={hoveredId}
         selectedId={selectedId}
         questRoute={questRoute}
+        territoryColors={territoryColors}
         focus={focus}
         onHover={setHoveredId}
         onSelect={setSelectedId}
@@ -345,6 +391,20 @@ export function StarmapApp() {
             onClose={() => setQuestId(null)}
           />
         )}
+      {!shown && !quest && mech && availability && (
+        <MechCard
+          data={data}
+          availability={availability}
+          mech={mech}
+          date={date}
+          onQuest={pickQuest}
+          onSystem={systemId => {
+            setSelectedId(systemId);
+            focusOn(systemId);
+          }}
+          onClose={() => setMechId(null)}
+        />
+      )}
 
       <div className="starmap-drawers">
         <FactionLegend date={date} />
@@ -357,11 +417,13 @@ export function StarmapApp() {
             focusOn(systemId);
           }}
         />
+        <MechDrawer availability={availability} selectedId={mechId} onOpen={() => loadAvailability()} onPick={pickMech} />
+        <HeroDrawer data={data} availability={availability} selectedId={mechId} onOpen={() => loadAvailability()} onPick={pickMech} />
       </div>
       {isFeedbackOpen && (
         <FeedbackDialog
           // Se calcula con el estado, no con window.location: la URL se actualiza con retraso.
-          buildUrl={`${window.location.origin}${window.location.pathname}${toMapQuery({ date, systemId: selectedId, questId }, data)}`}
+          buildUrl={`${window.location.origin}${window.location.pathname}${toMapQuery({ date, systemId: selectedId, questId, mechId }, data)}`}
           attachLabel="Attach a link to this map view"
           onMessage={setNotice}
           onClose={() => setIsFeedbackOpen(false)}

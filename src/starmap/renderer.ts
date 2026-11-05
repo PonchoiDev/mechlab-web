@@ -35,7 +35,9 @@ const FLASH_MIN_PIXELS = 26;
 const FLASH_RING_START = 6;
 const FLASH_RING_GROWTH = 34;
 
-type Territory = { color: string; path: Path2D };
+type Territory = { faction: string; color: string; path: Path2D };
+// Color de cada facción en otra lectura del mapa (la rareza de un 'Mech); null usa el de la facción.
+export type TerritoryColors = ((faction: string) => string) | null;
 
 interface Transition {
   startedAt: number;
@@ -83,6 +85,7 @@ export class StarmapRenderer {
   private transition: Transition | null = null;
   private starfield: HTMLCanvasElement | null = null;
   private owners: (string | null)[] = [];
+  private territoryColors: TerritoryColors = null;
   private frame = 0;
   private width = 0;
   private height = 0;
@@ -123,6 +126,17 @@ export class StarmapRenderer {
     }));
   }
 
+  private colorOf(faction: string): string {
+    return this.territoryColors ? this.territoryColors(faction) : this.data.factions[faction].color;
+  }
+
+  setTerritoryColors(colors: TerritoryColors) {
+    this.territoryColors = colors;
+    this.territories = this.territories.map(territory => ({ ...territory, color: this.colorOf(territory.faction) }));
+    this.transition = null;
+    this.requestDraw();
+  }
+
   resize(width: number, height: number, ratio: number) {
     this.width = width;
     this.height = height;
@@ -145,7 +159,7 @@ export class StarmapRenderer {
         loop.forEach(([x, y], i) => (i === 0 ? path.moveTo(x, y) : path.lineTo(x, y)));
         path.closePath();
       }
-      return { color: this.data.factions[faction].color, path };
+      return { faction, color: this.colorOf(faction), path };
     });
     const changed = animate && previous.length
       ? this.data.systems.flatMap((system, i) => {

@@ -862,6 +862,60 @@ button, input, select { font: inherit; color: inherit; }
 }
 
 .starmap-tags .is-quest dt { background: linear-gradient(90deg, #f2b75e, rgba(242, 183, 94, 0.35)); }
+
+/* Find a 'Mech: la ficha de la variante, con las facciones agrupadas por rareza. */
+.starmap-mech-mark {
+  border-color: #8be3ff;
+  color: #8be3ff;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.9) 55%, rgba(139, 227, 255, 0.35));
+  box-shadow: 0 0 18px rgba(139, 227, 255, 0.45);
+}
+
+.starmap-mech .starmap-tags .is-quest dt { background: linear-gradient(90deg, #8be3ff, rgba(139, 227, 255, 0.35)); }
+
+.starmap-mech-since {
+  margin: 0 0 6px;
+  color: var(--map-muted);
+  font-size: 14px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.starmap-rarity {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.starmap-rarity li {
+  margin-top: 6px;
+  padding-left: 10px;
+  border-left: 4px solid var(--rarity);
+}
+
+.starmap-rarity b {
+  display: block;
+  color: var(--rarity);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.starmap-rarity span { color: var(--map-text); }
+
+.starmap-mech .starmap-quest-requirements { font-size: 15px; letter-spacing: normal; text-transform: none; }
+
+.starmap-mech-lab { padding: 12px 14px 14px; }
+
+.starmap-heroes-drawer .starmap-market-note {
+  margin: 0 12px 6px;
+  color: var(--map-muted);
+  font-size: 13px;
+}
 .starmap-quest-types { font-size: 18px !important; }
 
 .starmap-quest-requirements {
@@ -1055,15 +1109,19 @@ button, input, select { font: inherit; color: inherit; }
   .starmap-feedback, .starmap-actions .support-link { height: 32px; padding: 0 8px; font-size: 14px; }
   .starmap-actions .support-link { font-size: 0; }
   .starmap-actions .support-link-icon { font-size: 16px; }
-  .starmap-panel { top: 104px; left: 12px; width: calc(100vw - 24px); max-height: calc(100% - 360px); }
+  .starmap-panel { top: 104px; left: 12px; width: calc(100vw - 24px); max-height: calc(100% - 392px); }
   .starmap-panel h2 { font-size: 28px; }
   .starmap-emblem { width: 50px; height: 50px; font-size: 15px; }
   .starmap-date { right: 12px; bottom: 12px; width: calc(100vw - 24px); }
   .starmap-date-value { font-size: 32px; }
   /* Zoom y leyenda justo encima del panel de fecha, para no tapar la ficha del sistema. */
+  /* En el móvil se amplía con dos dedos: solo queda el botón de ver el mapa entero, y así los cinco
+     cajones caben en dos filas compactas. */
   .starmap-zoom { left: auto; right: 12px; bottom: 200px; flex-direction: row; }
-  .starmap-drawers { left: 12px; bottom: 200px; max-width: calc(100vw - 150px); flex-wrap: wrap; }
-  .starmap-legend { max-width: calc(100vw - 150px); }
-  .starmap-quests { width: calc(100vw - 150px); }
+  .starmap-zoom button:not(:last-child) { display: none; }
+  .starmap-drawers { left: 12px; bottom: 200px; max-width: calc(100vw - 74px); flex-wrap: wrap; gap: 6px; }
+  .starmap-legend { max-width: calc(100vw - 74px); }
+  .starmap-legend > button { min-width: 0; height: 34px; padding: 0 8px; font-size: 13px; letter-spacing: 0.04em; }
+  .starmap-quests { width: calc(100vw - 74px); }
   .starmap-legend ul { max-height: 36vh; }
 }

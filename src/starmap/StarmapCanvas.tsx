@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { GameDate, StarmapData } from '../types/starmap';
-import { StarmapRenderer, type View } from './renderer';
+import { StarmapRenderer, type TerritoryColors, type View } from './renderer';
 
 export interface FocusRequest {
   systemId: number;
@@ -16,6 +16,7 @@ interface StarmapCanvasProps {
   hoveredId: number | null;
   selectedId: number | null;
   questRoute: number[] | null;
+  territoryColors: TerritoryColors;
   focus: FocusRequest | null;
   onHover: (systemId: number | null) => void;
   onSelect: (systemId: number | null) => void;
@@ -35,7 +36,7 @@ const getBounds = (data: StarmapData) => {
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, focus, onHover, onSelect }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, territoryColors, focus, onHover, onSelect }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
@@ -153,6 +154,10 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     renderer.questRoute = questRoute;
     renderer.requestDraw();
   }, [hoveredId, selectedId, questRoute]);
+
+  useEffect(() => {
+    rendererRef.current?.setTerritoryColors(territoryColors);
+  }, [territoryColors]);
 
   useEffect(() => {
     if (!focus) return;
