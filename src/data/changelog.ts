@@ -16,6 +16,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Pick any variant and the map shows how rare it is in each faction\'s market on the chosen date, from very common to very rare',
       'The card lists who sells it, when it enters production and where you can always get it: quest rewards and special markets',
       'Hero \'Mechs lists the hero \'Mechs you can only get in one place, like the Atlas II on Romulus or the quest reward heroes',
+      'Only variants already in production on the map date are listed, and the map zooms to small places, like a quest route or the only system of the faction that sells it',
       'Links keep the chosen variant, so you can share where to find it'
     ]
   },

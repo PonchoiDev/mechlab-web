@@ -78,9 +78,11 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados. El CA3 se corrigió con los datos: en 3025 todas las facciones con sistemas venden el AS7-D, así que las que no lo venden se comprueban en 3052, con los Clanes.
 - **Datos:** 627 variantes con su unit card (las 12 de `mechs.json` sin ella son copias de campaña), 98 sin rareza en ninguna facción y 108 hero. 48 facciones del juego con alianza; todas las del mapa tienen tabla salvo Arc-Royal Defense Cordon. `availability.json` pesa 115 KB y 10 KB comprimido, en su propio fragmento del build.
-- **Tests:** los diez criterios (CA1 a CA10) están en `src/utils/availability.test.ts` y pasan.
+- **Tests:** los catorce criterios (CA1 a CA14) están en `src/utils/availability.test.ts` y pasan.
 - **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: el AS7-D en 3025 (Steiner en verde, Liao y la periferia en rojo) y en 3052 (los Clanes en gris), el ARC-AGC en 3030 (todavía no existe), la lista de hero con el Atlas II y la búsqueda «atlas».
 - **Decisiones durante el desarrollo:**
   - La cadena de alianzas siempre acaba en una facción con tabla (Elysian Fields, Oberon, Bandits y Outlaws), lo que apoya que el juego usa la tabla de la alianza.
   - Con una variante elegida, el color de cada facción solo cambia al cambiar de variante o al cruzar su fecha de introducción, para no cortar la animación al saltar entre eventos.
+  - Tras la primera revisión en el navegador se añadieron el filtro por fecha y el encuadre (RF6 a RF8, CA11 a CA14): sin ellos, una variante que solo vende Wolf's Dragoons (el ARC-2W, en Outreach) o un hero sin rareza (el ARC-T) no cambiaban nada visible en el mapa entero. El encuadre de varios sistemas deja libre la parte que tapa la ficha en escritorio, y el cajón se cierra al elegir.
+  - En el móvil, la ficha ocupa casi toda la pantalla y tapa lo encuadrado hasta cerrarla, igual que la de una HRQ.
   - En el móvil, cinco cajones no cabían en el hueco de antes y tapaban la ficha. Los botones son más compactos y desaparecen el + y el −, porque el mapa se amplía con dos dedos; queda el botón de ver el mapa entero.
