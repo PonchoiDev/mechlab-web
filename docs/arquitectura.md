@@ -9,8 +9,8 @@ MechLab es una web estática hecha con React y TypeScript. No tiene base de dato
 ```mermaid
 flowchart LR
   subgraph Datos["Datos (en desarrollo)"]
-    Juego["Archivos del juego<br/>editor de mods"] --> Scripts["Scripts Python<br/>tools/generar_*.py"]
-    Scripts --> JSON["mechs.json · items.json · traits.json"]
+    Juego["Archivos del juego<br/>editor de mods y .pak"] --> Scripts["Scripts Python<br/>tools/generar_*.py · extraer_mapa.py"]
+    Scripts --> JSON["mechs.json · items.json · traits.json · starmap.json"]
   end
   subgraph Web["Web (en el navegador)"]
     JSON --> Logica["Lógica pura<br/>src/utils"]
@@ -37,12 +37,15 @@ Los datos se exportan con el editor de mods oficial de *MechWarrior 5: Mercenari
 | `generar_items.py` | `items/` | `items.json`: armas por tier, equipo, munición, disipadores |
 | `generar_mechs.py` | `mda/`, `mdl/`, `hps/`, `loadout/`, `unitcard/`, `mech_string_table/` e `items.json` | `mechs.json`: 639 variantes con componentes, anclajes, build de fábrica, año y rol |
 | `generar_traits.py` | `traits/` | `traits.json`: las 50 mejoras de la cantina y sus efectos |
+| `generar_mapa.py` | `starmap/` (lo extrae `extraer_mapa.py` del `.pak` de la instalación) | `starmap.json`: 2172 sistemas con su dueño de 3015 a 3060, facciones, eventos, clústeres y centros industriales |
 
 Algunos datos no están donde parecería:
 
 - **El tamaño de cada anclaje** no está en el archivo del 'Mech (MDA). Hay que seguir su modelo (MDL) hasta la tabla de anclajes del chasis (HPS).
 - **El nombre de cada chasis** solo aparece como una clave de texto; el texto está en la tabla `Mech_StringTable`.
 - **La build de fábrica** está en otro archivo (`*_Loadout`) y sirve también para validar los datos.
+
+- **El mapa estelar** no se puede exportar con el editor de mods, así que `extraer_mapa.py` lee el `.pak` de la instalación con un lector propio de Unreal Engine 4 (`tools/ue4.py`). El color de cada facción no está en la facción: sale del estencil del mapa y de la colección de parámetros `Faction_Colours_MPC`.
 
 Los scripts avisan al terminar de todo lo que no cuadra (piezas que no caben, variantes sin ficha, anclajes cuyo tamaño se ha tenido que deducir), para revisarlo con cada parche.
 
@@ -62,6 +65,16 @@ flowchart TB
 - **`hooks/`** guarda el estado: la build en curso, las builds guardadas y las preferencias de vista.
 - **`components/`** solo pinta y llama a la lógica.
 - **`services/`** aísla lo que depende del exterior: la API de Sarna, el portapapeles y el canvas de la imagen.
+
+
+### Mapa estelar
+
+El mapa es otra página (`starmap/index.html`, servida en `/mercs/starmap/`) con su propio bundle, así que el MechLab no descarga sus datos. Sigue la misma separación:
+
+- **`utils/starmap.ts`:** el dueño de cada sistema en una fecha, los eventos, los centros industriales, la búsqueda, la rejilla de territorios y el contorno de los clústeres. Son funciones puras con sus tests (`starmap.test.ts`).
+- **`starmap/renderer.ts`:** pinta en un canvas. La rejilla que dice a qué sistema pertenece cada punto del mapa se calcula una vez, porque no depende de la fecha. Al mover la fecha solo se vuelve a colorear y se genera la textura de territorios, con el borde brillante como en el juego. El arrastre y el zoom solo redibujan esa textura.
+- **Novedades en la portada:** la portada (`site/index.html`) es HTML estático, así que el build escribe `changelog.json` en la raíz a partir de `src/data/changelog.ts`. La campana de la portada lo lee y guarda lo ya visto con la misma clave que la del MechLab.
+- **`starmap/StarmapApp.tsx`:** la ficha del sistema, el control de fecha, el buscador y la leyenda. La fecha y el sistema elegido van en la URL.
 
 ## Decisiones de diseño
 

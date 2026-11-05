@@ -4,15 +4,16 @@ const FEEDBACK_URL = `${import.meta.env.BASE_URL}api/feedback`;
 const CATEGORIES = ['Bug', 'Wrong game data', 'Idea', 'Other'];
 
 interface FeedbackDialogProps {
-  // Enlace de la build abierta, que se puede adjuntar para reproducir un fallo.
+  // Enlace de la build abierta (o de la vista del mapa), que se puede adjuntar para reproducir un fallo.
   buildUrl: string | null;
+  attachLabel?: string;
   onMessage: (message: string) => void;
   onClose: () => void;
 }
 
 type SendState = 'idle' | 'sending' | 'failed' | 'unavailable';
 
-export function FeedbackDialog({ buildUrl, onMessage, onClose }: FeedbackDialogProps) {
+export function FeedbackDialog({ buildUrl, attachLabel = 'Attach a link to the current build', onMessage, onClose }: FeedbackDialogProps) {
   const [category, setCategory] = useState(CATEGORIES[0]);
   const [message, setMessage] = useState('');
   const [contact, setContact] = useState('');
@@ -122,7 +123,7 @@ export function FeedbackDialog({ buildUrl, onMessage, onClose }: FeedbackDialogP
           {buildUrl && (
             <label className="feedback-attach">
               <input type="checkbox" checked={attachBuild} onChange={(event) => setAttachBuild(event.target.checked)} />
-              Attach a link to the current build
+              {attachLabel}
             </label>
           )}
 

@@ -1,10 +1,11 @@
 /// <reference types="vitest/config" />
-import { cpSync, rmSync } from 'node:fs'
+import { cpSync, rmSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig, type Connect, type Plugin } from 'vite'
 import { FEEDBACK_PATH, parseFeedback } from './worker/feedback.ts'
 import { fetchSarnaImage, getSarnaImageTarget, SARNA_IMAGE_PATH } from './worker/sarnaImage.ts'
+import { CHANGELOG } from './src/data/changelog.ts'
 
 // Cada juego vive en su propia ruta del dominio (mw-builder.com/mercs/). Lo que va en la raíz
 // del sitio (redirecciones y página de entrada) está en site/ y se copia junto al build.
@@ -19,6 +20,8 @@ const rootSite = (): Plugin => ({
   },
   closeBundle() {
     cpSync(resolve(__dirname, 'site'), SITE_DIR, { recursive: true })
+    // La portada es HTML estático: su campana de novedades lee este archivo.
+    writeFileSync(resolve(SITE_DIR, 'changelog.json'), JSON.stringify(CHANGELOG))
   }
 })
 
@@ -62,7 +65,14 @@ const workerApi = (): Plugin => {
 export default defineConfig({
   base: `/${GAME_PATH}/`,
   build: {
-    outDir: `dist/${GAME_PATH}`
+    outDir: `dist/${GAME_PATH}`,
+    // El mapa estelar es otra página con su propio bundle: no se descarga con el MechLab.
+    rolldownOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        starmap: resolve(__dirname, 'starmap/index.html')
+      }
+    }
   },
   plugins: [react(), rootSite(), workerApi()],
   test: {

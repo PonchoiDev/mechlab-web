@@ -7,6 +7,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno
 | | |
 |---|---|
 | **Web en producción** | **https://mw-builder.com/mercs/** |
+| Mapa estelar | https://mw-builder.com/mercs/starmap/ |
 | Presentación (slides) | [Ver en Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) |
 | Vídeo explicativo | [Ver en Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) |
 | Login | No tiene: la web se usa sin registro y las builds se guardan en el navegador |
@@ -36,7 +37,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (272 tests, cobertura con V8) |
+| Tests | Vitest 5 (291 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -79,6 +80,11 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Enlace que abre la build tal cual (`/mercs/?b=…`).
 - Imagen PNG de la build con el 'Mech, su equipo, sus mejoras y sus estadísticas, lista para copiar o descargar.
 
+**Mapa estelar**
+- Página propia con el mapa de la Esfera Interior, parecido al del juego: territorio de cada facción con su color, clústeres y centros industriales.
+- Fronteras en cualquier fecha de 3015 a 3060, con un control deslizante y saltos a los 19 eventos del juego que las mueven.
+- Ficha de cada sistema con su facción, su clúster y su historial de propietarios, buscador por nombre y enlace con la fecha y el sistema.
+
 **Otros**
 - Campana de novedades con los cambios que el usuario aún no ha visto.
 - Formulario de feedback que llega por correo sin mostrar la dirección del desarrollador.
@@ -114,19 +120,24 @@ En desarrollo, el servidor de Vite hace de proxy de las imágenes de Sarna, y el
 src/
   App.tsx               Componente principal: estado de la build y composición de la página
   components/           Componentes de la interfaz (tablero, selector, panel de mejoras, diálogos…)
+  starmap/              Página del mapa estelar: canvas, ficha del sistema, fecha y buscador
   hooks/                Estado de la build, builds guardadas, preferencias de vista e imagen de Sarna
   utils/                Lógica del configurador: cálculos, reglas de equipo, mejoras, código de las builds
   services/             API de Sarna, portapapeles e imagen PNG de la build (canvas)
   types/                Tipos de TypeScript
-  data/                 mechs.json, items.json y traits.json generados, y las novedades
+  data/                 mechs.json, items.json, traits.json y starmap.json generados, y las novedades
   test/                 Datos de prueba compartidos
 worker/                 Worker de Cloudflare: proxy de imágenes de Sarna y formulario de feedback
+starmap/index.html      Entrada de la página del mapa estelar (/mercs/starmap/)
 site/                   Portada de la raíz del dominio (mw-builder.com)
 docs/                   Análisis, arquitectura, diagramas UML y desarrollo con IA
 tools/
   generar_mechs.py      Genera src/data/mechs.json
   generar_items.py      Genera src/data/items.json
   generar_traits.py     Genera src/data/traits.json (mejoras de la cantina)
+  extraer_mapa.py       Extrae del .pak del juego los datos del mapa estelar
+  generar_mapa.py       Genera src/data/starmap.json
+  ue4.py                Lectura del .pak y de los assets de Unreal Engine 4
   datos-juego/          Archivos exportados del juego
 .github/                Integración continua, CodeQL y Dependabot
 .coderabbit.yaml        Configuración de la revisión de código con CodeRabbit
@@ -157,9 +168,27 @@ python3 tools/generar_traits.py
 
 `generar_mechs.py` lee también `items.json` para validar las builds de fábrica, así que se ejecuta después de `generar_items.py`. Los scripts descartan las variantes no jugables (campaña, tutorial, jefes y cinemáticas) y, al terminar, avisan de lo que no han podido cuadrar: piezas de las builds de fábrica que no caben, variantes sin ficha de unidad o anclajes cuyo tamaño se ha tenido que deducir.
 
+### Mapa estelar
+
+Los datos del mapa no se exportan con el editor de mods: `extraer_mapa.py` los lee directamente del archivo `.pak` de la instalación, que está sin cifrar ni comprimir, con un lector propio de Unreal Engine 4 (`ue4.py`). Solo lee el índice y los assets necesarios (unos 7 MB de los 106 GB), en menos de un segundo, y los guarda como JSON en `tools/datos-juego/starmap/`. Solo hace falta repetirlo cuando un parche cambie el mapa.
+
+```sh
+python3 tools/extraer_mapa.py "/ruta/a/MechWarrior 5 Mercenaries"
+python3 tools/generar_mapa.py
+```
+
+| Archivo | Asset del juego | Contenido |
+|---|---|---|
+| `sistemas.json` | `InnerSphereData/MW5_InnerSphereData` | 2174 sistemas con coordenadas, clúster y fecha de cada cambio de propietario |
+| `facciones.json` | `Factions/*` | Nombre y estencil del mapa de cada facción |
+| `colores.json` | `Faction_Colours_MPC` | Color de cada estencil, de los Clanes, de los clústeres y de los centros industriales |
+| `eventos.json` | `BorderChanges/*/Borders*` | Los 19 cambios de frontera, de 3025 a 3060 |
+| `centros_industriales.json` | `SafeZone_*_ClusterAsset` y su malla | Los 35 centros industriales con su capital, sus sistemas y las líneas que los unen |
+| `clusteres.json` y `textos.json` | Assets de clúster y `Faction_StringTable` | Nombres de los clústeres |
+
 ## Calidad y comprobación contra el juego
 
-- **272 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **291 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
