@@ -664,13 +664,166 @@ button, input, select { font: inherit; color: inherit; }
   outline: none;
 }
 
-.starmap-legend {
+/* Leyenda de facciones y lista de misiones, una junto a otra encima del zoom. */
+.starmap-drawers {
   position: absolute;
   left: 66px;
   bottom: 18px;
-  max-width: min(300px, calc(100vw - 460px));
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: calc(100vw - 480px);
+}
+
+.starmap-legend {
+  max-width: 300px;
   background: var(--map-panel);
   border: 1px solid var(--map-line);
+}
+
+.starmap-legend > button b {
+  margin-left: 6px;
+  color: #f2b75e;
+}
+
+.starmap-quests { width: 320px; }
+.starmap-quests:not(.is-open) { width: auto; }
+
+.starmap-quests-body input {
+  width: calc(100% - 24px);
+  height: 32px;
+  margin: 0 12px 6px;
+  padding: 0 10px;
+  border: 1px solid var(--map-line);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.starmap-quests-body input:focus { border-color: var(--map-text); outline: none; }
+
+.starmap-quests .starmap-quests-body ul { padding: 0 0 8px; }
+.starmap-quests li { display: block; padding: 0; }
+.starmap-quests li::before { content: none; }
+
+.starmap-quests li button {
+  display: grid;
+  width: 100%;
+  padding: 5px 12px;
+  border: 0;
+  border-left: 3px solid transparent;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.starmap-quests li button span {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.starmap-quests li button small {
+  color: var(--map-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.starmap-quests li button:hover,
+.starmap-quests li button:focus-visible { background: rgba(242, 183, 94, 0.12); outline: none; }
+.starmap-quests li button[aria-pressed='true'] { border-left-color: #f2b75e; background: rgba(242, 183, 94, 0.18); }
+.starmap-quests-empty { padding: 6px 12px; color: var(--map-muted); font-size: 15px; }
+
+/* Ficha de una HRQ: misma caja que la del sistema, con las misiones numeradas. */
+.starmap-quest-mark {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border: 4px solid #f2b75e;
+  border-radius: 50%;
+  color: #f2b75e;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.9) 55%, rgba(242, 183, 94, 0.35));
+  box-shadow: 0 0 18px rgba(242, 183, 94, 0.5);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.starmap-tags .is-quest dt { background: linear-gradient(90deg, #f2b75e, rgba(242, 183, 94, 0.35)); }
+.starmap-quest-types { font-size: 18px !important; }
+
+.starmap-system-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: rgba(242, 183, 94, 0.6);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.starmap-system-link:hover,
+.starmap-system-link:focus-visible { color: #f2b75e; outline: none; }
+
+.starmap-system-quests dd { display: grid; justify-items: start; gap: 2px; font-size: 18px; }
+
+.starmap-quest-missions {
+  margin: 12px 14px 0;
+  padding: 10px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--map-line);
+}
+
+.starmap-quest-missions li {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 10px;
+  padding: 5px 0;
+}
+
+.starmap-quest-step {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #140d02;
+  background: #f2b75e;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.starmap-quest-missions h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.starmap-quest-missions p {
+  margin: 2px 0 3px;
+  color: var(--map-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.starmap-quest-missions .starmap-system-link {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .starmap-legend > button {
@@ -754,6 +907,8 @@ button, input, select { font: inherit; color: inherit; }
   .starmap-date-value { font-size: 32px; }
   /* Zoom y leyenda justo encima del panel de fecha, para no tapar la ficha del sistema. */
   .starmap-zoom { left: auto; right: 12px; bottom: 200px; flex-direction: row; }
-  .starmap-legend { left: 12px; bottom: 200px; max-width: calc(100vw - 160px); }
+  .starmap-drawers { left: 12px; bottom: 200px; max-width: calc(100vw - 150px); flex-wrap: wrap; }
+  .starmap-legend { max-width: calc(100vw - 150px); }
+  .starmap-quests { width: calc(100vw - 150px); }
   .starmap-legend ul { max-height: 36vh; }
 }

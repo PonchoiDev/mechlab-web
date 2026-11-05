@@ -15,6 +15,8 @@ const CELL_SIZE = 2;
 const TERRITORY_RADIUS = 34;
 const LABEL_SCALE = 2.4;
 const CLUSTER_PADDING = 7;
+// Misiones de alta recompensa: icono de oferta y ruta de la elegida, en ámbar como en el juego.
+const QUEST_COLOR = '#f2b75e';
 // Grosores en píxeles de pantalla: el borde se ve igual de marcado con cualquier zoom.
 const BORDER_WIDTH = 2;
 const BORDER_HALO = 7;
@@ -69,6 +71,7 @@ export class StarmapRenderer {
   private readonly clusterOutlines: Point[][];
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
+  private readonly questOffers: Set<number>;
   private territories: Territory[] = [];
   private transition: Transition | null = null;
   private starfield: HTMLCanvasElement | null = null;
@@ -80,6 +83,8 @@ export class StarmapRenderer {
 
   view: View = { x: 0, y: 0, scale: 1 };
   hoveredId: number | null = null;
+  // Sistemas de la HRQ elegida, en orden: la oferta y después sus misiones.
+  questRoute: number[] | null = null;
   selectedId: number | null = null;
 
   constructor(canvas: HTMLCanvasElement, data: StarmapData) {
@@ -94,6 +99,7 @@ export class StarmapRenderer {
     }
     const hubs = getHubs(data);
     this.hubCapitals = new Set(hubs.map(hub => hub.capital.id));
+    this.questOffers = new Set(data.quests.map(quest => quest.offer));
     this.clusterOutlines = [...byCluster.values()].map(points => getClusterOutline(points, CLUSTER_PADDING));
     // Los centros industriales se dibujan como en el juego: líneas discontinuas entre sus estrellas.
     const byId = new Map(data.systems.map(system => [system.id, system]));
@@ -354,9 +360,11 @@ export class StarmapRenderer {
     }
 
     for (const system of visible) {
-      if (!this.hubCapitals.has(system.id)) continue;
-      this.drawHubIcon(...this.toScreen(system.x, system.y));
+      if (this.hubCapitals.has(system.id)) this.drawHubIcon(...this.toScreen(system.x, system.y));
+      if (this.questOffers.has(system.id)) this.drawQuestIcon(...this.toScreen(system.x, system.y));
     }
+
+    this.drawQuestRoute();
 
     if (scale >= LABEL_SCALE) this.drawLabels(visible);
 
@@ -382,6 +390,62 @@ export class StarmapRenderer {
       context.stroke();
       context.shadowBlur = 0;
     }
+  }
+
+  private drawQuestIcon(x: number, y: number) {
+    // Escudo pequeño con una exclamación, a la derecha de la estrella: aquí se ofrece una HRQ.
+    const context = this.context;
+    context.save();
+    context.translate(x + 11, y - 9);
+    context.fillStyle = QUEST_COLOR;
+    context.strokeStyle = '#140d02';
+    context.lineWidth = 1.2;
+    context.beginPath();
+    context.moveTo(-5, -6);
+    context.lineTo(5, -6);
+    context.lineTo(5, 1);
+    context.lineTo(0, 6);
+    context.lineTo(-5, 1);
+    context.closePath();
+    context.fill();
+    context.stroke();
+    context.fillStyle = '#140d02';
+    context.fillRect(-0.9, -4.2, 1.8, 5);
+    context.fillRect(-0.9, 2, 1.8, 1.6);
+    context.restore();
+  }
+
+  private drawQuestRoute() {
+    // Línea discontinua por los sistemas de la HRQ elegida, con cada parada numerada.
+    if (!this.questRoute?.length) return;
+    const context = this.context;
+    const points = this.questRoute.flatMap(id => {
+      const system = this.data.systems.find(candidate => candidate.id === id);
+      return system ? [this.toScreen(system.x, system.y)] : [];
+    });
+    context.save();
+    context.strokeStyle = QUEST_COLOR;
+    context.lineWidth = 2.5;
+    context.setLineDash([7, 5]);
+    context.shadowColor = QUEST_COLOR;
+    context.shadowBlur = 8;
+    context.beginPath();
+    points.forEach(([x, y], i) => (i === 0 ? context.moveTo(x, y) : context.lineTo(x, y)));
+    context.stroke();
+    context.setLineDash([]);
+    context.shadowBlur = 0;
+    context.font = '700 12px "Barlow Condensed", "Arial Narrow", sans-serif';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    points.forEach(([x, y], i) => {
+      context.fillStyle = QUEST_COLOR;
+      context.beginPath();
+      context.arc(x - 12, y + 12, 8, 0, Math.PI * 2);
+      context.fill();
+      context.fillStyle = '#140d02';
+      context.fillText(String(i + 1), x - 12, y + 12.5);
+    });
+    context.restore();
   }
 
   private drawHubIcon(x: number, y: number) {

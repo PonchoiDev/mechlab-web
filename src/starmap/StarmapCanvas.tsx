@@ -15,6 +15,7 @@ interface StarmapCanvasProps {
   animateDate: boolean;
   hoveredId: number | null;
   selectedId: number | null;
+  questRoute: number[] | null;
   focus: FocusRequest | null;
   onHover: (systemId: number | null) => void;
   onSelect: (systemId: number | null) => void;
@@ -34,7 +35,7 @@ const getBounds = (data: StarmapData) => {
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, focus, onHover, onSelect }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, focus, onHover, onSelect }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
@@ -149,8 +150,9 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     if (!renderer) return;
     renderer.hoveredId = hoveredId;
     renderer.selectedId = selectedId;
+    renderer.questRoute = questRoute;
     renderer.requestDraw();
-  }, [hoveredId, selectedId]);
+  }, [hoveredId, selectedId, questRoute]);
 
   useEffect(() => {
     if (!focus) return;

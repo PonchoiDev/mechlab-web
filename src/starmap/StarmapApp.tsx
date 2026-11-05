@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import starmapData from '../data/starmap.json';
-import type { GameDate, StarSystem, StarmapData } from '../types/starmap';
+import type { GameDate, Quest, StarSystem, StarmapData } from '../types/starmap';
 import {
   clampDate,
   countSystemsByOwner,
@@ -17,8 +17,10 @@ import {
   searchSystems,
   toMapQuery
 } from '../utils/starmap';
+import { getQuestRoute, parseQuestQuery } from '../utils/quests';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
+import { QuestCard, QuestDrawer, SystemQuests } from './QuestPanels';
 import { StarmapCanvas, type FocusRequest } from './StarmapCanvas';
 
 const data = starmapData as unknown as StarmapData;
@@ -39,7 +41,15 @@ function FactionEmblem({ factionId }: { factionId: string | null }) {
   );
 }
 
-function SystemPanel({ system, date, pinned, onClose }: { system: StarSystem; date: GameDate; pinned: boolean; onClose: () => void }) {
+interface SystemPanelProps {
+  system: StarSystem;
+  date: GameDate;
+  pinned: boolean;
+  onClose: () => void;
+  onQuest: (quest: Quest) => void;
+}
+
+function SystemPanel({ system, date, pinned, onClose, onQuest }: SystemPanelProps) {
   const owner = getOwnerAt(system, date);
   const currentIndex = system.owners.findLastIndex(([changedOn]) => changedOn <= date);
   const cluster = system.cluster ? data.clusters[system.cluster]?.name : null;
@@ -71,6 +81,7 @@ function SystemPanel({ system, date, pinned, onClose }: { system: StarSystem; da
           )}
         </dl>
       )}
+      <SystemQuests data={data} systemId={system.id} onPick={onQuest} />
       {system.owners.length > 0 && (
         <ol className="starmap-history" aria-label="Owners over time">
           {system.owners.map(([changedOn, faction], index) => (
@@ -216,6 +227,9 @@ export function StarmapApp() {
   const [date, setDate] = useState<GameDate>(initial.date);
   const [jump, setJump] = useState<{ changedCount: number } | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(initial.systemId);
+  const [questId, setQuestId] = useState<string | null>(() => parseQuestQuery(window.location.search, data));
+  const quest = data.quests.find(candidate => candidate.id === questId) ?? null;
+  const questRoute = useMemo(() => (quest ? getQuestRoute(quest) : null), [quest]);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
@@ -225,24 +239,37 @@ export function StarmapApp() {
     const timer = window.setTimeout(() => setNotice(null), NOTICE_DELAY);
     return () => window.clearTimeout(timer);
   }, [notice]);
-  const [focus, setFocus] = useState<FocusRequest | null>(initial.systemId === null ? null : { systemId: initial.systemId, sequence: 0 });
+  const [focus, setFocus] = useState<FocusRequest | null>(() => {
+    const target = initial.systemId ?? quest?.offer ?? null;
+    return target === null ? null : { systemId: target, sequence: 0 };
+  });
 
   // La URL guarda la fecha y el sistema elegido, para compartir la vista. Se espera a que el
   // control deslizante se pare para no llenar el historial.
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      window.history.replaceState(null, '', toMapQuery({ date, systemId: selectedId }, data));
+      window.history.replaceState(null, '', toMapQuery({ date, systemId: selectedId, questId }, data));
     }, URL_DELAY);
     return () => window.clearTimeout(timer);
-  }, [date, selectedId]);
+  }, [date, selectedId, questId]);
 
   const shown = data.systems.find(system => system.id === (hoveredId ?? selectedId)) ?? null;
   // La ficha del sistema elegido sigue fijada (con su botón de cerrar) aunque el ratón pase por encima.
   const isPinned = shown !== null && shown.id === selectedId;
 
+  const focusOn = (systemId: number) => setFocus(previous => ({ systemId, sequence: (previous?.sequence ?? 0) + 1 }));
+
   const pickSystem = (system: StarSystem) => {
     setSelectedId(system.id);
-    setFocus(previous => ({ systemId: system.id, sequence: (previous?.sequence ?? 0) + 1 }));
+    focusOn(system.id);
+  };
+
+  // Al elegir una HRQ se cierra la ficha del sistema para que se vea la de la misión.
+  const pickQuest = (picked: Quest) => {
+    setQuestId(picked.id);
+    setSelectedId(null);
+    setHoveredId(null);
+    focusOn(picked.offer);
   };
 
   return (
@@ -253,6 +280,7 @@ export function StarmapApp() {
         animateDate={jump !== null}
         hoveredId={hoveredId}
         selectedId={selectedId}
+        questRoute={questRoute}
         focus={focus}
         onHover={setHoveredId}
         onSelect={setSelectedId}
@@ -274,13 +302,28 @@ export function StarmapApp() {
         <SystemSearch onPick={pickSystem} />
       </header>
 
-      {shown && <SystemPanel system={shown} date={date} pinned={isPinned} onClose={() => setSelectedId(null)} />}
+      {shown
+        ? <SystemPanel system={shown} date={date} pinned={isPinned} onClose={() => setSelectedId(null)} onQuest={pickQuest} />
+        : quest && (
+          <QuestCard
+            data={data}
+            quest={quest}
+            onSystem={systemId => {
+              setSelectedId(systemId);
+              focusOn(systemId);
+            }}
+            onClose={() => setQuestId(null)}
+          />
+        )}
 
-      <FactionLegend date={date} />
+      <div className="starmap-drawers">
+        <FactionLegend date={date} />
+        <QuestDrawer data={data} selectedId={questId} onPick={pickQuest} />
+      </div>
       {isFeedbackOpen && (
         <FeedbackDialog
           // Se calcula con el estado, no con window.location: la URL se actualiza con retraso.
-          buildUrl={`${window.location.origin}${window.location.pathname}${toMapQuery({ date, systemId: selectedId }, data)}`}
+          buildUrl={`${window.location.origin}${window.location.pathname}${toMapQuery({ date, systemId: selectedId, questId }, data)}`}
           attachLabel="Attach a link to this map view"
           onMessage={setNotice}
           onClose={() => setIsFeedbackOpen(false)}

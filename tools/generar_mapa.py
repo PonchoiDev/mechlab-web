@@ -192,7 +192,8 @@ def cadenas_de_misiones(acciones, sistemas_validos):
             "name": nombre,
             "dlc": int(dlc.split("_")[1]) if dlc else None,
             "modes": [modo] if modo else [],
-            "employer": Counter(empleadores).most_common(1)[0][0] if empleadores else None,
+            # Algún empleador viene como identificador (FederatedCommonwealth (FS)): se separan las palabras.
+            "employer": REGEX_PALABRAS.sub(" ", Counter(empleadores).most_common(1)[0][0]) if empleadores else None,
             "offer": (oferta or misiones[0])["sistema"],
             "visibleEverywhere": bool(oferta and oferta.get("visible")),
             "missionTypes": tipos_de_mision(oferta and oferta.get("tipos")),
