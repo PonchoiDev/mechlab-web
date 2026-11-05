@@ -1,4 +1,5 @@
 import type { GameDate, StarSystem, StarmapData } from '../types/starmap';
+import { getQuestAvailability } from '../utils/quests';
 import { buildTerritoryIndex, getClusterOutline, getHubs, getOwnerAt, getTerritoryContours, type TerritoryIndex } from '../utils/starmap';
 
 export interface View {
@@ -75,7 +76,7 @@ export class StarmapRenderer {
   private readonly clusterOutlines: Point[][];
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
-  private readonly questOffers: Set<number>;
+  private readonly questOffers: Map<number, StarmapData['quests']>;
   private readonly markets: Map<number, boolean>;
   private date: GameDate = '';
   private territories: Territory[] = [];
@@ -105,7 +106,8 @@ export class StarmapRenderer {
     }
     const hubs = getHubs(data);
     this.hubCapitals = new Set(hubs.map(hub => hub.capital.id));
-    this.questOffers = new Set(data.quests.map(quest => quest.offer));
+    this.questOffers = new Map();
+    for (const quest of data.quests) this.questOffers.set(quest.offer, [...(this.questOffers.get(quest.offer) ?? []), quest]);
     // Por sistema, si alguno de sus mercados es normal (verde) o todos son negros (morado).
     this.markets = new Map();
     for (const market of data.markets) {
@@ -373,7 +375,9 @@ export class StarmapRenderer {
 
     for (const system of visible) {
       if (this.hubCapitals.has(system.id)) this.drawHubIcon(...this.toScreen(system.x, system.y));
-      if (this.questOffers.has(system.id)) this.drawQuestIcon(...this.toScreen(system.x, system.y));
+      const offers = this.questOffers.get(system.id);
+      // Atenuado si ninguna de las HRQ de ese sistema se ofrece en la fecha del mapa.
+      if (offers) this.drawQuestIcon(...this.toScreen(system.x, system.y), offers.some(quest => getQuestAvailability(quest, this.date).state === 'available'));
       if (this.markets.has(system.id)) this.drawMarketIcon(...this.toScreen(system.x, system.y), this.markets.get(system.id)!);
     }
     for (const unique of this.data.uniqueMechs) {
@@ -410,10 +414,11 @@ export class StarmapRenderer {
     }
   }
 
-  private drawQuestIcon(x: number, y: number) {
+  private drawQuestIcon(x: number, y: number, available: boolean) {
     // Escudo pequeño con una exclamación, a la derecha de la estrella: aquí se ofrece una HRQ.
     const context = this.context;
     context.save();
+    context.globalAlpha = available ? 1 : 0.35;
     context.translate(x + 11, y - 9);
     context.fillStyle = QUEST_COLOR;
     context.strokeStyle = '#140d02';

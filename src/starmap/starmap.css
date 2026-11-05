@@ -852,6 +852,27 @@ button, input, select { font: inherit; color: inherit; }
 .starmap-tags .is-quest dt { background: linear-gradient(90deg, #f2b75e, rgba(242, 183, 94, 0.35)); }
 .starmap-quest-types { font-size: 18px !important; }
 
+.starmap-quest-requirements {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 17px;
+}
+
+.starmap-quest-requirements b { color: var(--map-muted); }
+
+.starmap-quest-status {
+  margin: 4px 0 0;
+  color: #ff9f8a;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.starmap-quests li button.is-unavailable span { color: var(--map-muted); }
+.starmap-quests li button small.starmap-quest-status { margin: 0; font-size: 12px; }
+
 .starmap-system-link {
   padding: 0;
   border: 0;

@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-quest-requirements',
+    date: '2026-11-05',
+    title: 'Quest requirements',
+    items: [
+      'Each high reward quest shows when the game offers it: minimum reputation, the date it is offered from and, for some DLC 8 quests, until when',
+      'Quests that follow another one, or that rule out the opposite side, say so and link to it',
+      'At the map date, quests that are not offered yet or any more are dimmed, with the date on the card and in the list'
+    ]
+  },
+  {
     id: '2026-11-05-markets',
     date: '2026-11-05',
     title: 'Special markets and unique \'Mechs',
