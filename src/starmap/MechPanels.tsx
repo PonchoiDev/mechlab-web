@@ -6,6 +6,17 @@ import { MechLink } from './MarketPanels';
 import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
 
 
+// Sin rareza: cargando o, si falló la descarga, un aviso con un botón para reintentar.
+function AvailabilityStatus({ failed, onRetry }: { failed: boolean; onRetry: () => void }) {
+  if (!failed) return <li className="starmap-quests-empty">Loading…</li>;
+  return (
+    <li className="starmap-quests-empty">
+      Couldn&rsquo;t load the &rsquo;Mech data.
+      <button type="button" className="starmap-mech-date" onClick={onRetry}>Try again</button>
+    </li>
+  );
+}
+
 const systemName = (data: StarmapData, id: number) => data.systems.find(system => system.id === id)?.name ?? '';
 
 
@@ -19,6 +30,7 @@ const describeSources = (data: StarmapData, { quests, markets, uniques, rewards 
 
 interface MechDrawerProps {
   availability: AvailabilityData | null;
+  failed: boolean;
   date: GameDate;
   // Último día del mapa: después no se puede ir a una fecha.
   lastDate: GameDate;
@@ -29,11 +41,19 @@ interface MechDrawerProps {
 }
 
 // Buscador de variantes, junto a Quests y Special markets. La rareza se carga al abrirlo.
-export function MechDrawer({ availability, date, lastDate, onDate, selectedId, onOpen, onPick }: MechDrawerProps) {
+export function MechDrawer({ availability, failed, date, lastDate, onDate, selectedId, onOpen, onPick }: MechDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const results = useMemo(() => (availability ? searchMechs(availability, query, date) : []), [availability, query, date]);
   const later = useMemo(() => (availability ? getLaterVariants(availability, query, date) : { count: 0, next: null }), [availability, query, date]);
+  // Lo que cambia en la lista mientras el foco sigue en el buscador, para los lectores de pantalla.
+  const status = !availability
+    ? (failed ? 'Couldn\u2019t load the \u2019Mech data' : '')
+    : !query.trim() ? ''
+      : [
+        results.length === 1 ? '1 \u2019Mech found' : `${results.length} \u2019Mechs found`,
+        later.count > 0 && (later.count === 1 ? '1 more enters production later' : `${later.count} more enter production later`)
+      ].filter(Boolean).join('. ');
 
   return (
     <section className={`starmap-legend starmap-quests starmap-mechs-drawer${isOpen ? ' is-open' : ''}`} aria-label="Find a 'Mech">
@@ -47,6 +67,7 @@ export function MechDrawer({ availability, date, lastDate, onDate, selectedId, o
       >
         Find a &rsquo;Mech
       </button>
+      <p className="starmap-sr-only" role="status" aria-live="polite">{isOpen ? status : ''}</p>
       {isOpen && (
         <div className="starmap-quests-body">
           <input
@@ -57,7 +78,7 @@ export function MechDrawer({ availability, date, lastDate, onDate, selectedId, o
             onChange={event => setQuery(event.target.value)}
           />
           <ul>
-            {!availability && <li className="starmap-quests-empty">Loading…</li>}
+            {!availability && <AvailabilityStatus failed={failed} onRetry={onOpen} />}
             {availability && !query.trim() && <li className="starmap-quests-empty">Type a name to see where each faction sells it. Only &rsquo;Mechs in production on {formatGameDate(date)} are listed</li>}
             {results.map(mech => (
               <li key={mech.id}>
@@ -110,6 +131,7 @@ function LaterVariants({ count, next, hasResults, date, lastDate, onDate }: {
 interface HeroDrawerProps {
   data: StarmapData;
   availability: AvailabilityData | null;
+  failed: boolean;
   selectedId: string | null;
   onOpen: () => void;
   onPick: (mechId: string) => void;
@@ -117,7 +139,7 @@ interface HeroDrawerProps {
 
 // 'Mechs que solo se consiguen en un sitio: los hero que no salen a la venta y, aparte, las variantes
 // especiales que no vende ninguna facción (el Wolverine de Razer).
-export function HeroDrawer({ data, availability, selectedId, onOpen, onPick }: HeroDrawerProps) {
+export function HeroDrawer({ data, availability, failed, selectedId, onOpen, onPick }: HeroDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { heroes, special } = useMemo(() => (availability ? getOnePlaceMechs(data, availability) : { heroes: [], special: [] }), [data, availability]);
   const groups = [{ title: 'Hero \u2019Mechs', entries: heroes }, { title: 'Special variants', entries: special }];
@@ -138,7 +160,7 @@ export function HeroDrawer({ data, availability, selectedId, onOpen, onPick }: H
         <div className="starmap-quests-body">
           <p className="starmap-market-note">&rsquo;Mechs you can only get in one place. Other heroes come up for sale at random</p>
           <ul>
-            {!availability && <li className="starmap-quests-empty">Loading…</li>}
+            {!availability && <AvailabilityStatus failed={failed} onRetry={onOpen} />}
             {availability && groups.flatMap(({ title, entries }) => [
               <li key={title} className="starmap-quests-group">{title}</li>,
               ...entries.map(({ mech, sources }) => (
@@ -179,10 +201,13 @@ interface MechCardProps {
 
 // Ficha de la variante: si existe en la fecha, quién la vende y con qué rareza, y sus fuentes fijas.
 export function MechCard({ data, availability, mech, date, onSystem, onMission, onQuest, onClose }: MechCardProps) {
-  // Las facciones que no la venden ya salen en gris en el mapa: listarlas solo estorba.
-  const groups = getAvailabilityAt(data, availability, mech, date).flatMap(({ rarity, factions }) => (rarity ? [{ rarity, factions }] : []));
-  const sources = getFixedSources(data, mech.id);
   const produced = isProduced(mech, date);
+  // Las facciones que no la venden ya salen en gris en el mapa: listarlas solo estorba. Antes de que
+  // exista la variante, el mapa la pinta toda en gris y la ficha tampoco lista vendedores.
+  const groups = produced
+    ? getAvailabilityAt(data, availability, mech, date).flatMap(({ rarity, factions }) => (rarity ? [{ rarity, factions }] : []))
+    : [];
+  const sources = getFixedSources(data, mech.id);
   const hasSources = countSources(sources) > 0;
   const isSold = produced && groups.some(({ rarity }) => rarity !== 'unavailable');
 

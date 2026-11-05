@@ -1166,3 +1166,16 @@ button, input, select { font: inherit; color: inherit; }
   .starmap-quests { width: calc(100vw - 74px); }
   .starmap-legend ul { max-height: 36vh; }
 }
+
+/* Solo para lectores de pantalla: anuncia lo que cambia sin ocupar sitio. */
+.starmap-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
