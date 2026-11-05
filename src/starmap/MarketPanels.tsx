@@ -30,7 +30,8 @@ export function SystemMarkets({ data, systemId, date }: { data: StarmapData; sys
       ))}
       {markets.map(market => (
         <section key={market.id} className={`starmap-market${market.blackMarket ? ' is-black' : ''}`} aria-label={`${describeMarket(market)} market`}>
-          <h3>{market.blackMarket ? 'Black market' : 'Market'} <small>{market.blackMarket ? `DLC ${market.dlc}` : describeMarket(market)}</small></h3>
+          <h3>{market.blackMarket ? 'Special black market' : 'Special market'} <small>{market.blackMarket ? `DLC ${market.dlc}` : describeMarket(market)}</small></h3>
+          <p className="starmap-market-note">Fixed stock during the DLC {market.dlc} campaign</p>
           {market.mechs.length > 0 && (
             <ul className="starmap-market-mechs">
               {market.mechs.map(mech => <li key={mech.id}><MechLink id={mech.id} name={mech.name} /></li>)}
@@ -68,7 +69,8 @@ export function SystemMarkets({ data, systemId, date }: { data: StarmapData; sys
   );
 }
 
-// Buscador de mercados: dónde se vende un 'Mech o un arma, o qué hay en un sistema.
+// Lista de los mercados especiales y los 'Mechs únicos. El buscador filtra dónde se vende un 'Mech
+// o un arma, o qué hay en un sistema.
 export function MarketDrawer({ data, onPick }: { data: StarmapData; onPick: (systemId: number) => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -78,7 +80,7 @@ export function MarketDrawer({ data, onPick }: { data: StarmapData; onPick: (sys
   return (
     <section className={`starmap-legend starmap-quests starmap-markets-drawer${isOpen ? ' is-open' : ''}`} aria-label="Special markets">
       <button type="button" aria-expanded={isOpen} onClick={() => setIsOpen(open => !open)}>
-        Markets <b>{data.markets.length + data.uniqueMechs.length}</b>
+        Special markets <b>{data.markets.length + data.uniqueMechs.length}</b>
       </button>
       {isOpen && (
         <div className="starmap-quests-body">
@@ -95,14 +97,15 @@ export function MarketDrawer({ data, onPick }: { data: StarmapData; onPick: (sys
                 <button type="button" onClick={() => onPick(result.system)}>
                   <span>{systemName(result.system)}</span>
                   <small>
-                    {result.unique ? `Unique 'Mech · DLC ${result.unique.dlc}` : describeMarket(result.market!)}
+                    {result.unique
+                      ? `Unique 'Mech · DLC ${result.unique.dlc} · ${result.unique.name}`
+                      : `${describeMarket(result.market!)}${result.market!.blackMarket ? ' · Black market' : ''}`}
                     {result.matches.length > 0 && ` · ${result.matches.slice(0, 2).join(', ')}${result.matches.length > 2 ? '…' : ''}`}
                   </small>
                 </button>
               </li>
             ))}
-            {query && results.length === 0 && <li className="starmap-quests-empty">Nothing found</li>}
-            {!query && <li className="starmap-quests-empty">Search a &rsquo;Mech, like Atlas or KGC-0000</li>}
+            {results.length === 0 && <li className="starmap-quests-empty">Nothing found</li>}
           </ul>
         </div>
       )}

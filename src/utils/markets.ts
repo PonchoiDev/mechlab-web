@@ -17,9 +17,15 @@ export interface MarketResult {
 }
 
 // Dónde se vende un 'Mech (por nombre o variante), un arma o un equipo, o qué hay en un sistema.
+// Sin texto, todos: los 'Mechs únicos y después los mercados por DLC.
 export const searchMarkets = (data: StarmapData, query: string): MarketResult[] => {
   const needle = normalize(query);
-  if (!needle) return [];
+  if (!needle) {
+    return [
+      ...data.uniqueMechs.map(unique => ({ system: unique.system, unique, matches: [] })),
+      ...[...data.markets].sort((a, b) => a.dlc - b.dlc).map(market => ({ system: market.system, market, matches: [] }))
+    ];
+  }
   const systemName = new Map(data.systems.map(system => [system.id, normalize(system.name)]));
   const hits = (texts: string[]) => texts.filter(text => normalize(text).includes(needle));
 

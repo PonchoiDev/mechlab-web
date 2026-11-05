@@ -280,7 +280,12 @@ def mercados_especiales(mercados_juego, mechs, items, sistemas_validos):
             "pilots": {"count": pilotos["NumberOfPilots"], "minSkill": pilotos["MinimumSkill"], "maxSkill": pilotos["MaximumSkill"]}
             if pilotos.get("NumberOfPilots") else None,
         })
-    return sorted(mercados, key=lambda mercado: (mercado["dlc"], mercado["id"]))
+    # En el orden de la campaña: prólogo, actos o misiones por número y después el resto.
+    def orden(mercado):
+        numero = re.search(r"\d+", mercado["stage"])
+        return (mercado["dlc"], 0 if mercado["stage"] == "Prologue" else int(numero.group()) if numero else 100, mercado["id"])
+
+    return sorted(mercados, key=orden)
 
 
 def mechs_unicos(unicos_juego, mechs):

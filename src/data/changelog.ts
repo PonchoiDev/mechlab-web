@@ -13,9 +13,9 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-11-05',
     title: 'Special markets and unique \'Mechs',
     items: [
-      'The star map shows the 22 fixed markets of the DLC campaigns, with their \'Mechs, weapons by tier, equipment and pilots',
+      'The star map shows the 22 special markets of the DLC campaigns, with a fixed stock of \'Mechs, weapons by tier, equipment and pilots',
       'The Atlas II appears in Romulus from 10 May 3043, as in the game',
-      'The Markets list finds where to buy a \'Mech or a weapon',
+      'The Special markets list shows them all and finds where to buy a \'Mech or a weapon',
       'Every \'Mech opens in the MechLab with its stock build, and a mech link like /mercs/?mech=AS7-D-H opens any variant'
     ]
   },

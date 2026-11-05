@@ -771,6 +771,13 @@ button, input, select { font: inherit; color: inherit; }
   font-size: 14px;
 }
 
+.starmap-market .starmap-market-note {
+  margin: -2px 0 6px;
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
 .starmap-market p {
   margin: 4px 0 0;
   color: var(--map-muted);
