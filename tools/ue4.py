@@ -9,6 +9,7 @@ MAGIA_PAK = 0x5A6F12E1
 CABECERA_ENTRADA = 53
 FILTRO_SOLO_EDITOR = 0x80000000
 TAMANO_EXPORT = 104
+TAMANO_IMPORT = 28
 
 # Structs que se guardan en binario, sin etiquetas, y su formato.
 STRUCTS_BINARIOS = {
@@ -131,12 +132,23 @@ class Asset:
             cabecera.cadena()
         cabecera.varios("ii")
         total_exports, inicio_exports = cabecera.varios("ii")
+        total_imports, inicio_imports = cabecera.varios("ii")
 
         cabecera.posicion = inicio_nombres
         self.nombres = []
         for _ in range(total_nombres):
             self.nombres.append(cabecera.cadena())
             cabecera.leer("I")
+
+        # Imports: objetos de otros paquetes. Una propiedad ObjectProperty negativa (-n) apunta al n-ésimo.
+        self.imports = []
+        for numero in range(total_imports):
+            cabecera.posicion = inicio_imports + numero * TAMANO_IMPORT
+            cabecera.varios("ii")
+            cabecera.varios("ii")
+            exterior = cabecera.leer("i")
+            nombre = self.nombres[cabecera.leer("i")]
+            self.imports.append((nombre, exterior))
 
         self.exports = {}
         for numero in range(total_exports):
@@ -151,6 +163,14 @@ class Asset:
     @classmethod
     def desde_pak(cls, pak, ruta_sin_extension):
         return cls(pak.leer_archivo(ruta_sin_extension + ".uasset"), pak.leer_archivo(ruta_sin_extension + ".uexp"))
+
+    def ruta_import(self, indice):
+        """Ruta del paquete y nombre del objeto al que apunta una referencia negativa."""
+        nombre, exterior = self.imports[-indice - 1]
+        paquete = nombre
+        while exterior < 0:
+            paquete, exterior = self.imports[-exterior - 1]
+        return paquete, nombre
 
     def principal(self):
         """El objeto del asset cuando solo hay uno, aunque no se llame como el archivo."""

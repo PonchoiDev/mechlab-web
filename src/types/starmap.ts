@@ -31,6 +31,27 @@ export interface DateRange {
   end: GameDate;
 }
 
+// Misión de alta recompensa (HRQ): se ofrece en un sistema y sus misiones se juegan en otros.
+export interface QuestMission {
+  title: string;
+  summary: string | null;
+  system: number;
+}
+
+export interface Quest {
+  id: string;
+  name: string;
+  // DLC que la añade; null en las del juego base.
+  dlc: number | null;
+  // Modos en los que aparece; vacío en las de los DLC.
+  modes: ('campaign' | 'career')[];
+  employer: string | null;
+  offer: number;
+  visibleEverywhere: boolean;
+  missionTypes: string[];
+  missions: QuestMission[];
+}
+
 export interface StarmapData {
   range: DateRange;
   colors: { cluster: string; hub: string };
@@ -40,4 +61,5 @@ export interface StarmapData {
   // Capital de cada centro industrial y parejas de sistemas que unen sus líneas en el mapa.
   hubs: Record<string, { capital: number; links: [number, number][] }>;
   systems: StarSystem[];
+  quests: Quest[];
 }

@@ -29,6 +29,15 @@ TABLAS_DE_TEXTO = [
     CONTENIDO + "Campaign/Clusters/_common/Faction_StringTable",
     CONTENIDO + "Factions/RivalMercs/RivalMercNames_StringTable",
 ]
+# Carpetas de las misiones de alta recompensa (HRQ): de facción en campaña y en carrera, Heroes of
+# the Inner Sphere (DLC1), DLC2, el Hatchetman (DLC3) y DLC8. La historia principal y los clústeres
+# finales no son HRQ.
+REGEX_MISIONES = re.compile(
+    r"MW5Mercs/Content/(Campaign/CampaignArcs/Regions/\d+_\d+/|DLC1/CareerMode/Sidequests/|DLC2/Sidequests/"
+    r"|DLC3/HatchetmanQuestData/|DLC8/CampaignData/Quest_)"
+)
+# Acciones de viaje, de mercado o de zona: tienen sistema, pero no son misiones.
+REGEX_ACCION_IGNORADA = re.compile(r"(TravelTo|ReturnTo|Abandoned|CustomMarket|Zone$)")
 REGEX_EVENTO = re.compile(r"BorderChanges/([^/]+)/(Borders[^/]+)\.uasset$")
 REGEX_CENTRO = re.compile(r"Clusters/(SafeZone_\d+)/SafeZone_\d+_ClusterAsset\.uasset$")
 # Las fechas de Unreal (FDateTime) son ticks de 100 ns desde el 1 de enero del año 1.
@@ -138,6 +147,80 @@ def extraer_centros_industriales(pak):
     return dict(sorted(centros.items(), key=lambda par: int(par[0].split("_")[1])))
 
 
+def valores_de_config(propiedades):
+    """Los campos de un blueprint llevan un sufijo (StarSystemId_11_9016…) y pueden ir anidados."""
+    valores = {}
+
+    def recorrer(nodo):
+        if isinstance(nodo, dict):
+            for clave, valor in nodo.items():
+                valores.setdefault(clave.split("_")[0], valor)
+                recorrer(valor)
+
+    recorrer(propiedades.get("Config", {}))
+    return valores
+
+
+def extraer_misiones(pak):
+    """Acciones que ofrecen o colocan cada misión, con su sistema y los textos de su objetivo."""
+    objetivos = {}
+
+    def objetivo(paquete):
+        if paquete not in objetivos:
+            # Algunos objetivos no se incluyen en el juego (el de Pirate Raiders): la misión se queda sin textos.
+            if ruta_de_juego(paquete) + ".uasset" not in pak.archivos:
+                objetivos[paquete] = {}
+                return objetivos[paquete]
+            asset = Asset.desde_pak(pak, ruta_de_juego(paquete))
+            info = asset.propiedades(asset.principal()).get("DisplayInfo", {})
+            empleador = None
+            if isinstance(info.get("Employer"), int) and info["Employer"] < 0:
+                paquete_empleador, _ = asset.ruta_import(info["Employer"])
+                if ruta_de_juego(paquete_empleador) + ".uasset" in pak.archivos:
+                    faccion = Asset.desde_pak(pak, ruta_de_juego(paquete_empleador))
+                    # El empleador es una «persona» con su nombre visible (EmployerName).
+                    empleador = faccion.propiedades(faccion.principal()).get("EmployerName")
+            objetivos[paquete] = {
+                "titulo": info.get("ScreenTitleText"),
+                "resumen": info.get("ScreenSubText"),
+                "empleador": empleador,
+            }
+        return objetivos[paquete]
+
+    acciones = []
+    for ruta in sorted(pak.archivos):
+        if not ruta.endswith(".uasset") or not REGEX_MISIONES.match(ruta):
+            continue
+        nombre = os.path.basename(ruta)[: -len(".uasset")]
+        if REGEX_ACCION_IGNORADA.search(nombre):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        if not any(texto.startswith("StarSystemId") for texto in asset.nombres):
+            continue
+        for export in asset.exports:
+            if not export.startswith("Default__"):
+                continue
+            valores = valores_de_config(asset.propiedades(export))
+            if "StarSystemId" not in valores:
+                continue
+            textos = {}
+            if isinstance(valores.get("Objective"), int) and valores["Objective"] < 0:
+                textos = objetivo(asset.ruta_import(valores["Objective"])[0])
+            dlc = valores.get("AssociatedDLC")
+            acciones.append({
+                "carpeta": os.path.dirname(ruta)[len(CONTENIDO):],
+                "accion": nombre,
+                # Las ofertas se llaman Show… o, en carrera, Career_Show….
+                "oferta": bool(re.search(r"(^|_)Show", nombre)),
+                "sistema": valores["StarSystemId"],
+                "tipos": valores.get("MissionTypes"),
+                "visible": valores.get("bOfferVisibleEverywhere"),
+                "dlc": dlc["Id"]["PrimaryAssetName"] if isinstance(dlc, dict) else None,
+                **textos,
+            })
+    return acciones
+
+
 def extraer_textos(pak):
     textos = {}
     for ruta in TABLAS_DE_TEXTO:
@@ -226,6 +309,7 @@ def main():
     guardar("eventos.json", extraer_eventos(pak))
     guardar("centros_industriales.json", extraer_centros_industriales(pak))
     guardar("textos.json", extraer_textos(pak))
+    guardar("misiones.json", extraer_misiones(pak))
     extraer_logos(pak, facciones)
     if sin_asset:
         print(f"Aviso: facciones sin asset en el juego: {', '.join(sin_asset)}")

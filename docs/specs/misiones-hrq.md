@@ -32,7 +32,9 @@ Cada misión se define con acciones de la campaña (*arc actions*) cuyos valores
 **Decisiones sobre los datos:**
 
 - **Cadena:** la carpeta de la misión. Las acciones de las subcarpetas de cada misión (`ARC_Mission_1`, `Mission2`) pertenecen a la cadena de su carpeta.
-- **Nombre de la cadena:** el título de su oferta sin la parte (`Bow and Arrow Pt.1` pasa a `Bow and Arrow`). Si el juego no trae título, el de la primera misión con título o, en su defecto, el nombre de la carpeta.
+- **Nombre de la cadena:** el título que comparten la mayoría de sus misiones, sin la parte (`Bow and Arrow Pt.2` pasa a `Bow and Arrow`) y sin distinguir mayúsculas (`Those In Need` y `Those in Need`). Si cada misión tiene su propio título, como en la de Adam Steiner del DLC8, el nombre de la carpeta.
+- **Ofertas:** las acciones `Show…` y, en carrera, `Career_Show…`. Una cadena sin oferta (algunas de facción) se ofrece en el sistema de su primera misión.
+- **Cambridge:** es el único sistema oculto de la tabla, pero aparece en el mapa durante el DLC8 y allí se juegan cinco misiones de Adam Steiner, así que el mapa lo incluye.
 - **Orden de las misiones:** por la parte del título (`Pt. 2`) y después por el nombre de la acción (`_01`, `_02`). Las acciones de viaje (`TravelTo…`, `ReturnTo…`) no son misiones.
 - **Campaña y carrera:** la misma cadena aparece en las dos con el mismo nombre. Se une en una sola, que indica los dos modos. Si los sistemas no coinciden, se usan los de carrera, que es donde más se juegan.
 - **Fuera de alcance de los datos:** las misiones de la historia principal (`StoryCluster_*`), los clústeres finales (`EndgameClusters`) y las campañas de los DLC 4 a 9, que no son HRQ.

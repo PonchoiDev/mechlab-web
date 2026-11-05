@@ -1,0 +1,34 @@
+import type { Quest, StarmapData } from '../types/starmap';
+import { normalize } from './starmap';
+
+// Busca por el nombre de la misión, por quien la encarga y por los sistemas donde se ofrece o se
+// juega. Sin texto, todas, por nombre.
+export const searchQuests = (data: StarmapData, query: string): Quest[] => {
+  const byName = (a: Quest, b: Quest) => a.name.localeCompare(b.name);
+  const needle = normalize(query);
+  if (!needle) return [...data.quests].sort(byName);
+  const names = new Map(data.systems.map(system => [system.id, normalize(system.name)]));
+  const systemsOf = (quest: Quest) => [quest.offer, ...quest.missions.map(mission => mission.system)].map(id => names.get(id) ?? '');
+  const inName = data.quests.filter(quest => normalize(quest.name).includes(needle)).sort(byName);
+  const elsewhere = data.quests
+    .filter(quest => !normalize(quest.name).includes(needle))
+    .filter(quest => normalize(quest.employer ?? '').includes(needle) || systemsOf(quest).some(name => name.includes(needle)))
+    .sort(byName);
+  return [...inName, ...elsewhere];
+};
+
+export const getQuestsForSystem = (data: StarmapData, systemId: number): { offered: Quest[]; played: Quest[] } => ({
+  offered: data.quests.filter(quest => quest.offer === systemId),
+  played: data.quests.filter(quest => quest.missions.some(mission => mission.system === systemId))
+});
+
+// Sistemas por los que pasa la misión, en orden: la oferta y después cada misión, sin repetir el
+// mismo sistema dos veces seguidas.
+export const getQuestRoute = (quest: Quest): number[] =>
+  [quest.offer, ...quest.missions.map(mission => mission.system)]
+    .filter((system, index, route) => index === 0 || system !== route[index - 1]);
+
+export const parseQuestQuery = (search: string, data: StarmapData): string | null => {
+  const id = new URLSearchParams(search).get('quest');
+  return id && data.quests.some(quest => quest.id === id) ? id : null;
+};
