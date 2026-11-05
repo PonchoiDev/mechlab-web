@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-territory-gaps',
+    date: '2026-11-05',
+    title: 'Star map: no more empty gaps',
+    items: [
+      'Areas with no star systems surrounded by a faction no longer show up as empty space with a border, like the one inside the Draconis Combine near Shimonoseki'
+    ]
+  },
+  {
     id: '2026-11-05-zone-levels',
     date: '2026-11-05',
     title: 'Recommended reputation on the star map',
