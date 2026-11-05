@@ -27,7 +27,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 
 ## Requisitos funcionales
 
-- **RF1.** Un panel **Find a 'Mech**, junto a Quests y Special markets, busca variantes por nombre o por variante (`atlas`, `AS7-D`). Solo muestra las que ya existen en la fecha del mapa: buscar una que todavía no existe confunde.
+- **RF1.** Un panel **Find a 'Mech**, junto a Quests y Special markets, busca variantes por nombre o por variante (`atlas`, `AS7-D`). Solo muestra las que ya existen en la fecha del mapa: buscar una que todavía no existe confunde. Si lo buscado existe más adelante, la lista lo dice y ofrece un botón que lleva el mapa a la fecha en que entra en producción la primera; si esa fecha es posterior al final del mapa (3060), solo lo dice.
 - **RF2.** Al elegir una variante, el mapa colorea el territorio de cada facción según su rareza en la fecha elegida, de Very common a Very rare, con Unique y Unavailable aparte y el resto atenuado (no la vende). Al cerrar la ficha, el mapa vuelve a los colores de las facciones.
 - **RF3.** La ficha de la variante muestra su nombre, si ya existe en la fecha del mapa (`Not produced until 1 JAN 3045`), las facciones con sistemas en esa fecha que la venden, agrupadas por rareza con su número de sistemas (las que no la venden ya salen en gris en el mapa y no se listan), sus fuentes fijas (HRQ, mercados especiales y 'Mech único, con enlace a cada una) y un enlace al MechLab con su build de serie.
 - **RF4.** Un panel **Hero 'Mechs** lista los 'Mechs hero con fuente fija, con la HRQ, el mercado o el sistema de cada uno. Al elegir uno, se abre su ficha.
@@ -61,6 +61,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | CA12 | El ARC-AGC (hero, recompensa de Bow and Arrow) | se pide qué encuadrar | la ruta de Bow and Arrow, con su id para marcarla |
 | CA13 | El AS7-D-H, el ARC-2W en 3050, el AS7-D en 3025 y el ARC-T (hero sin rareza ni fuente fija) | se pide qué encuadrar | Romulus sin HRQ; Outreach, el único sistema de Wolf's Dragoons, que es quien lo vende; nada, porque lo venden facciones grandes; y nada |
 | CA14 | El AS7-D en 3025 | se agrupan las facciones | ComStar, con un sistema, trae ese sistema (Terra); Steiner, con cientos, no trae la lista |
+| CA15 | La búsqueda «as7-d-h» el 1 de enero de 3030 y la búsqueda «arctic wolf» | se pide la primera fecha de producción | la primera da el 11 de noviembre de 3041; la segunda, el 1 de enero de 3067, después del final del mapa; una búsqueda sin resultados, ninguna |
 | CA10 | `availability.json` | se carga | todas sus variantes están en `mechs.json` con el mismo nombre, y todas las facciones del mapa salvo Arc-Royal Defense Cordon tienen tabla |
 
 ## Fuera de alcance
