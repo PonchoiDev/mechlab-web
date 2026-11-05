@@ -39,7 +39,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (292 tests, V8 coverage) |
+| Tests | Vitest 5 (302 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -86,6 +86,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - Its own page with a map of the Inner Sphere that looks like the game's: each faction's territory in its color, clusters and industrial hubs.
 - Borders on any date from 3015 to 3060, with a slider and jumps to the 19 game events that move them.
 - A card for each system with its faction, cluster and owner history, a search by name and a link with the date and the system.
+- The game's 64 high reward quests (HRQ): where each one is offered, its route through its mission systems and a search by name, system or employer.
 
 **Other**
 - What's new bell with the changes the user has not seen yet.
@@ -189,11 +190,12 @@ python3 tools/generar_mapa.py
 | `eventos.json` | `BorderChanges/*/Borders*` | The 19 border changes, from 3025 to 3060 |
 | `centros_industriales.json` | `SafeZone_*_ClusterAsset` and its mesh | The 35 industrial hubs with their capital, systems and the lines joining them |
 | `clusteres.json` and `textos.json` | Cluster assets and `Faction_StringTable` | Cluster names |
+| `misiones.json` | HRQ `Show…`, `Place…` and `Generate…` actions and their objectives | Offer and mission systems, titles, summaries and employer |
 | `public/starmap/logos/` | `LogoLarge` texture of each faction | Faction logos as 128 px PNG, decoded from DXT5 |
 
 ## Quality and checks against the game
 
-- **292 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **302 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

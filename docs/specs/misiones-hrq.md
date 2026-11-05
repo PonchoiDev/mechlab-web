@@ -1,7 +1,7 @@
 # Especificación: misiones de alta recompensa en el mapa estelar
 
 - **Issue:** [#64](https://github.com/PonchoiDev/mechlab-web/issues/64)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/quests.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -78,3 +78,14 @@ Cada misión se define con acciones de la campaña (*arc actions*) cuyos valores
 
 1. **Datos y lógica (CA1 a CA10):** `src/utils/quests.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, a 1920 × 1080 y a 390 × 844: iconos de oferta, panel Quests, ruta numerada, ficha de la HRQ y HRQ en la ficha del sistema.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 371 acciones del juego agrupadas en 64 cadenas: 44 de facción (38 en campaña y carrera, 4 solo en carrera y 2 solo en campaña), 7 de Heroes of the Inner Sphere, 7 del DLC2, la del Hatchetman y 5 del DLC8.
+- **Tests:** los diez criterios (CA1 a CA10) están en `src/utils/quests.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: icono de oferta, panel Quests con búsqueda, ruta numerada de Bow and Arrow, ficha de la HRQ y HRQ en la ficha de Holt.
+- **Decisiones durante el desarrollo:**
+  - El lector de Unreal resuelve ahora la tabla de imports: la acción de una misión apunta a su objetivo, y el objetivo a quien la encarga, por referencia a otros paquetes.
+  - Quien encarga la misión es una «persona» con nombre visible (`EmployerName`); alguno viene como identificador (`FederatedCommonwealth (FS)`) y se separan las palabras.
+  - El objetivo de Pirate Raiders no está en el juego: su primera misión toma el nombre de la cadena.
