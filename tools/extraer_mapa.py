@@ -430,6 +430,26 @@ def sistemas_de_objetivos(pak):
     return {paquete: next(iter(valores)) for paquete, valores in sistemas.items() if len(valores) == 1}
 
 
+def sistema_de_arcos(pak, carpeta):
+    """Sistema de la condición StarSystemTrigger de los arcos de una carpeta, si es uno solo.
+
+    Algunas recompensas no las coloca ninguna acción: el arco las entrega al llegar a un sistema. El de
+    Razer (Razer_WolverineArc) se dispara al llegar a Valentina.
+    """
+    sistemas = set()
+    for ruta in pak.archivos:
+        if not ruta.endswith(".uasset") or os.path.dirname(ruta) != carpeta:
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        if "CampaignEventList" not in asset.nombres:
+            continue
+        for evento in asset.propiedades(asset.principal()).get("CampaignEventList", {}).get("CampaignEvents", []):
+            condicion = evento["TriggerConditions"].get("StarSystemTrigger") or {}
+            if condicion.get("bCheck") and not condicion.get("bInvertCondition"):
+                sistemas.add(condicion["StarSystemId"])
+    return next(iter(sistemas)) if len(sistemas) == 1 else None
+
+
 def extraer_recompensas_campana(pak):
     """Objetivos que dan 'Mechs fuera de las HRQ: misiones de las campañas de los DLC, el final de una
     campaña, la información del Bounty Hunter (DLC4) o desbloqueos de promociones (el Wolverine de
@@ -449,7 +469,7 @@ def extraer_recompensas_campana(pak):
         if not info.get("bHasRewards") or titulo.startswith("[") or not recompensa["mechs"]:
             continue
         objetivo = os.path.basename(ruta)[: -len(".uasset")]
-        sistema = sistemas.get("/Game/" + sin_extension(ruta)[len(CONTENIDO):])
+        sistema = sistemas.get("/Game/" + sin_extension(ruta)[len(CONTENIDO):]) or sistema_de_arcos(pak, os.path.dirname(ruta))
         recompensas.append({"carpeta": os.path.dirname(ruta)[len(CONTENIDO):], "objetivo": objetivo, "titulo": titulo,
                             "resumen": info.get("ScreenSubText") or None, "sistema": sistema, "mechs": recompensa["mechs"]})
     return recompensas

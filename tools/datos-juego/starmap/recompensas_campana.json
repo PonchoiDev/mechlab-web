@@ -1,5 +1,5 @@
 [
-{"carpeta": "Campaign/CampaignArcs/Razer_Exclusive", "objetivo": "RazerWolverineUnlocked_Transmission", "titulo": "Hidden Cache Found", "resumen": "Hidden Cache Found", "sistema": null, "mechs": ["WVR-7H_Loadout"]},
+{"carpeta": "Campaign/CampaignArcs/Razer_Exclusive", "objetivo": "RazerWolverineUnlocked_Transmission", "titulo": "Hidden Cache Found", "resumen": "Hidden Cache Found", "sistema": 1045, "mechs": ["WVR-7H_Loadout"]},
 {"carpeta": "Campaign/CampaignArcs/Regions/11_2/LyranIndependence", "objetivo": "11_2_Prompt2", "titulo": "Lyran Independence Pt. 2", "resumen": "Hold back the nationalists to aid the escape", "sistema": 1515, "mechs": ["11_2_Reward_FS9-A_Loadout"]},
 {"carpeta": "Campaign/CampaignArcs/Regions/11_2/LyranRebellion", "objetivo": "11_3_Prompt2", "titulo": "Lyran Rebellion Pt. 2", "resumen": "Assassinate the leader of the sovereignty movement", "sistema": 369, "mechs": ["GRF-1N_Loadout"]},
 {"carpeta": "Campaign/CampaignArcs/Regions/12_1/DragonInSheepsClothing", "objetivo": "12_2_Prompt3", "titulo": "A Dragon in Sheep's Clothing Pt. 3", "resumen": "Ambush the Steiner/Davion Meeting", "sistema": 751, "mechs": ["DRG-1N_CampaignSalvage"]},
@@ -60,7 +60,7 @@
 {"carpeta": "DLC6/CampaignData/Missions/D6M6", "objetivo": "D6M6_Prompt", "titulo": "Let the Games Begin", "resumen": "Duke it out in the opening phase of The FedCom Unification Tournament", "sistema": 279, "mechs": ["CTF-VE1_Loadout"]},
 {"carpeta": "DLC6/CampaignData/Missions/D6M7", "objetivo": "D6M7_Prompt", "titulo": "Showdown in Steiner Stadium", "resumen": "Confront The Outkasts' Assassin.", "sistema": 279, "mechs": ["COR-XT1_Loadout"]},
 {"carpeta": "DLC7/CampaignData/Missions/D7_Battle_A", "objetivo": "D7M2_Prompt", "titulo": "Battle at New Starburg", "resumen": "Advance to the city", "sistema": 1637, "mechs": ["D7M3_HBR-A_Reward_Loadout"]},
-{"carpeta": "DLC8/CampaignData/Quest_AdamSteiner", "objetivo": "DLC8_AdamSteiner_QuestComplete_Prompt", "titulo": "A New March", "resumen": null, "sistema": null, "mechs": ["BSW-HR_Loadout"]},
+{"carpeta": "DLC8/CampaignData/Quest_AdamSteiner", "objetivo": "DLC8_AdamSteiner_QuestComplete_Prompt", "titulo": "A New March", "resumen": null, "sistema": 3502, "mechs": ["BSW-HR_Loadout"]},
 {"carpeta": "DLC8/CampaignData/Quest_Guerrero/Mission6", "objetivo": "D8Q4M6_Prompt", "titulo": "Ideals of War Pt.6", "resumen": "Crush the remaining Republican forces", "sistema": 521, "mechs": ["HBK-AZ_Loadout", "SHD-IIC_Loadout"]},
 {"carpeta": "DLC8/CampaignData/Quest_LyranAlliance/Mission3", "objetivo": "D8Q3M3_Prompt", "titulo": "Thumb War Pt.3", "resumen": "Neutralize the remaining DCMS threats", "sistema": 93, "mechs": ["NTG-PRIME_Loadout"]},
 {"carpeta": "DLC8/CampaignData/Quest_Sunder/Mission3", "objetivo": "D8Q1M3_Prompt", "titulo": "Testing Ground Pt.3", "resumen": "Support the DCMS forces", "sistema": 1871, "mechs": ["SD1-O_Loadout"]},
