@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-find-a-mech',
+    date: '2026-11-05',
+    title: 'Find a \'Mech on the star map',
+    items: [
+      'Pick any variant and the map shows how rare it is in each faction\'s market on the chosen date, from very common to very rare',
+      'The card lists who sells it, when it enters production and where you can always get it: quest rewards and special markets',
+      'Hero \'Mechs lists the hero \'Mechs you can only get in one place, like the Atlas II on Romulus or the quest reward heroes',
+      'Links keep the chosen variant, so you can share where to find it'
+    ]
+  },
+  {
     id: '2026-11-05-territory-gaps',
     date: '2026-11-05',
     title: 'Star map: no more empty gaps',

@@ -39,7 +39,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (337 tests, V8 coverage) |
+| Tests | Vitest 5 (347 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -88,6 +88,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - A card for each system with its faction, cluster and owner history, the recommended reputation and difficulty of its cluster or industrial hub in campaign and career, a search by name and a link with the date and the system.
 - The game's 64 high reward quests (HRQ): where each one is offered, its route through its mission systems, its requirements (reputation, dates, previous or opposing quest), its reward (C-Bills, reputation, 'Mechs, weapons and equipment) and a search by name, system or employer.
 - The 22 fixed markets of the DLC campaigns and the Atlas II on Romulus, with a search for where to buy each 'Mech or weapon. Every 'Mech opens in the MechLab with its stock build (`/mercs/?mech=AS7-D-H`).
+- Find a 'Mech: the map is colored by how rare a variant is in each faction's market on the chosen date, with its fixed sources (HRQ, special markets) and a shareable link (`?mech=AS7-D`). Hero 'Mechs lists the hero 'Mechs you can only get in one place.
 
 **Other**
 - What's new bell with the changes the user has not seen yet.
@@ -195,11 +196,12 @@ python3 tools/generar_mapa.py
 | `recompensas_misiones.json` | HRQ objectives with `bHasRewards` | C-Bills, reputation, 'Mechs, weapons, equipment and debrief of each reward |
 | `mercados.json` and `mechs_unicos.json` | `CustomMarket` assets and actions with `HeroMechToPlace` | Markets with their inventory and unique 'Mechs with their date |
 | `zonas.json` | `*_ClusterAsset` of campaign, career and the DLC campaigns | Systems, name, recommended reputation and difficulty of each zone |
+| `alianzas.json` | `Allegiance` of the `Factions/*` assets | The faction each one answers to, for the rarity table of minor factions |
 | `public/starmap/logos/` | `LogoLarge` texture of each faction | Faction logos as 128 px PNG, decoded from DXT5 |
 
 ## Quality and checks against the game
 
-- **337 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **347 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

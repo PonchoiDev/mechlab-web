@@ -1,7 +1,7 @@
 # Especificación: Find a 'Mech y 'Mechs hero en el mapa estelar
 
 - **Issue:** [#76](https://github.com/PonchoiDev/mechlab-web/issues/76)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/availability.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -64,3 +64,14 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 
 1. **Datos y lógica (CA1 a CA10):** `src/utils/availability.test.ts`, con `starmap.json` y `availability.json` reales.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: buscar «atlas», elegir el AS7-D en 3025 y en 3050 (el mapa cambia de color), elegir el ARC-AGC antes y después de 3045, abrir Hero 'Mechs y elegir el Atlas II, y abrir un enlace con `?mech=`.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados. El CA3 se corrigió con los datos: en 3025 todas las facciones con sistemas venden el AS7-D, así que las que no lo venden se comprueban en 3052, con los Clanes.
+- **Datos:** 627 variantes con su unit card (las 12 de `mechs.json` sin ella son copias de campaña), 98 sin rareza en ninguna facción y 108 hero. 48 facciones del juego con alianza; todas las del mapa tienen tabla salvo Arc-Royal Defense Cordon. `availability.json` pesa 115 KB y 10 KB comprimido, en su propio fragmento del build.
+- **Tests:** los diez criterios (CA1 a CA10) están en `src/utils/availability.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: el AS7-D en 3025 (Steiner en verde, Liao y la periferia en rojo) y en 3052 (los Clanes en gris), el ARC-AGC en 3030 (todavía no existe), la lista de hero con el Atlas II y la búsqueda «atlas».
+- **Decisiones durante el desarrollo:**
+  - La cadena de alianzas siempre acaba en una facción con tabla (Elysian Fields, Oberon, Bandits y Outlaws), lo que apoya que el juego usa la tabla de la alianza.
+  - Con una variante elegida, el color de cada facción solo cambia al cambiar de variante o al cruzar su fecha de introducción, para no cortar la animación al saltar entre eventos.
+  - En el móvil, cinco cajones no cabían en el hueco de antes y tapaban la ficha. Los botones son más compactos y desaparecen el + y el −, porque el mapa se amplía con dos dedos; queda el botón de ver el mapa entero.

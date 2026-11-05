@@ -37,7 +37,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (337 tests, cobertura con V8) |
+| Tests | Vitest 5 (347 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -86,6 +86,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Ficha de cada sistema con su facción, su clúster y su historial de propietarios, la reputación recomendada y la dificultad de su clúster o su centro industrial en campaña y en carrera, buscador por nombre y enlace con la fecha y el sistema.
 - Las 64 misiones de alta recompensa (HRQ) del juego: dónde se ofrece cada una, su ruta por los sistemas de sus misiones, sus condiciones (reputación, fechas, misión previa o excluyente), su recompensa (C-Bills, reputación, 'Mechs, armas y equipo) y un buscador por nombre, sistema o quien la encarga.
 - Los 22 mercados fijos de las campañas de los DLC y el Atlas II de Romulus, con un buscador de dónde comprar cada 'Mech o arma. Cada 'Mech se abre en el MechLab con su build de serie (`/mercs/?mech=AS7-D-H`).
+- Find a 'Mech: el mapa se colorea según la rareza de una variante en el mercado de cada facción, en la fecha elegida, con sus fuentes fijas (HRQ, mercados especiales) y el enlace se comparte (`?mech=AS7-D`). Hero 'Mechs lista los 'Mechs hero que solo se consiguen en un sitio.
 
 **Otros**
 - Campana de novedades con los cambios que el usuario aún no ha visto.
@@ -191,11 +192,12 @@ python3 tools/generar_mapa.py
 | `recompensas_misiones.json` | Objetivos de las HRQ con `bHasRewards` | C-Bills, reputación, 'Mechs, armas, equipo y texto final de cada recompensa |
 | `mercados.json` y `mechs_unicos.json` | Assets `CustomMarket` y acciones con `HeroMechToPlace` | Mercados con su inventario y 'Mechs únicos con su fecha |
 | `zonas.json` | `*_ClusterAsset` de campaña, de carrera y de las campañas de los DLC | Sistemas, nombre, reputación recomendada y dificultad de cada zona |
+| `alianzas.json` | `Allegiance` de los assets de `Factions/*` | Facción a la que responde cada una, para la tabla de rareza de las facciones menores |
 | `public/starmap/logos/` | Texturas `LogoLarge` de cada facción | Logos de facción en PNG de 128 px, descomprimidos de DXT5 |
 
 ## Calidad y comprobación contra el juego
 
-- **337 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **347 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
