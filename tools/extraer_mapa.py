@@ -405,33 +405,38 @@ def extraer_recompensas_misiones(pak):
     return recompensas
 
 
-def sistemas_de_objetivos(pak, carpeta):
-    """Sistema de cada objetivo de una carpeta, según las acciones que lo colocan (PlaceMission).
+def sistemas_de_objetivos(pak):
+    """Sistema de cada objetivo según las acciones que lo colocan o lo ofrecen (Place…, Show…).
 
-    La configuración de la acción va en su export Default__, con el objetivo y el sistema.
+    La configuración de la acción va en su export Default__, con el objetivo y el sistema. La acción no
+    siempre está en la carpeta del objetivo: en las campañas de los DLC 5 a 7 va en la subcarpeta
+    ArcActions de la misión, así que se recorre todo el juego. Si las acciones de un objetivo no
+    coinciden en el sistema, no se da ninguno.
     """
     sistemas = {}
     for ruta in pak.archivos:
-        if not ruta.endswith(".uasset") or os.path.dirname(ruta) != carpeta:
+        if not ruta.endswith(".uasset") or "/Objects/" in ruta:
             continue
         asset = Asset.desde_pak(pak, sin_extension(ruta))
-        # Solo las acciones: el resto de la carpeta (niveles, escenarios) no trae sistema.
-        if not any(nombre.startswith("StarSystemId") for nombre in asset.nombres):
+        # Solo las acciones de arco (su clase hereda de una *_ArcAction) con sistema: el resto de assets
+        # (interfaz, niveles, escenarios) no lo trae.
+        if not any(nombre.endswith("ArcAction_C") for nombre in asset.nombres) or not any(nombre.startswith("StarSystemId") for nombre in asset.nombres):
             continue
         for export in asset.exports:
             valores = valores_de_config(asset.propiedades(export))
             objetivo, sistema = valores.get("Objective"), valores.get("StarSystemId")
             if isinstance(objetivo, int) and objetivo < 0 and sistema:
-                sistemas[asset.ruta_import(objetivo)[1]] = sistema
-    return sistemas
+                sistemas.setdefault(asset.ruta_import(objetivo)[0], set()).add(sistema)
+    return {paquete: next(iter(valores)) for paquete, valores in sistemas.items() if len(valores) == 1}
 
 
 def extraer_recompensas_campana(pak):
     """Objetivos que dan 'Mechs fuera de las HRQ: misiones de las campañas de los DLC, el final de una
     campaña, la información del Bounty Hunter (DLC4) o desbloqueos de promociones (el Wolverine de
-    Razer). Con el sistema de la misión si una acción de la misma carpeta la coloca.
+    Razer). Con el sistema de la misión si una acción la coloca.
     """
     recompensas = []
+    sistemas = sistemas_de_objetivos(pak)
     for ruta in sorted(pak.archivos):
         if not ruta.endswith(".uasset") or "/Objects/" in ruta:
             continue
@@ -444,7 +449,7 @@ def extraer_recompensas_campana(pak):
         if not info.get("bHasRewards") or titulo.startswith("[") or not recompensa["mechs"]:
             continue
         objetivo = os.path.basename(ruta)[: -len(".uasset")]
-        sistema = sistemas_de_objetivos(pak, os.path.dirname(ruta)).get(objetivo)
+        sistema = sistemas.get("/Game/" + sin_extension(ruta)[len(CONTENIDO):])
         recompensas.append({"carpeta": os.path.dirname(ruta)[len(CONTENIDO):], "objetivo": objetivo, "titulo": titulo,
                             "resumen": info.get("ScreenSubText") or None, "sistema": sistema, "mechs": recompensa["mechs"]})
     return recompensas
