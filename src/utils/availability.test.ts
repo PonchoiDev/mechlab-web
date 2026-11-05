@@ -5,6 +5,7 @@ import starmapJson from '../data/starmap.json';
 import type { AvailabilityData, StarmapData } from '../types/starmap';
 import {
   countSources,
+  describeRewardSource,
   getAvailabilityAt,
   getFactionTable,
   getFixedSources,
@@ -191,13 +192,19 @@ describe('rareza de cada variante por facción', () => {
     expect(data.rewards.find(reward => reward.title === 'Shielded Withdrawal')?.system).toBe(vega.id);
   });
 
-  it('CA22: el Wolverine de Razer y el PXH-KB son desbloqueos de promociones, sin sistema', () => {
-    for (const id of ['WVR-7H', 'PXH-KB']) {
-      const [reward] = getFixedSources(data, id).rewards;
-      expect(reward.exclusive).toBe(true);
-      expect(reward.system).toBeUndefined();
-    }
-    expect(getFixedSources(data, 'MAD-BH').rewards[0].exclusive).toBeUndefined();
+  it('CA22: el Wolverine de Razer y el PXH-KB son promociones, sin sistema', () => {
+    expect(getFixedSources(data, 'WVR-7H').rewards[0]).toEqual(expect.objectContaining({ kind: 'promotion', partner: 'Razer', system: undefined }));
+    expect(getFixedSources(data, 'PXH-KB').rewards[0]).toEqual(expect.objectContaining({ kind: 'promotion', partner: 'Microsoft', system: undefined }));
+    expect(getFixedSources(data, 'MAD-BH').rewards[0].kind).toBe('mission');
+  });
+
+  it('CA23: toda recompensa dice cómo se consigue, aunque no esté en el mapa', () => {
+    const describe = (mechId: string) => describeRewardSource(getFixedSources(data, mechId).rewards[0]);
+    expect(describe('WVR-7H')).toBe('Razer promotion: arrives as a message (Hidden Cache Found)');
+    expect(describe('FS9-A')).toBe('Reach Bounty Hunter intel level 3 (DLC 4)');
+    expect(describe('AS7-BH')).toBe('Reach the Rudiarius fame rank in the Solaris arenas (DLC 6)');
+    expect(describe('SNV-BR')).toBe('Complete the DLC 9 campaign (Promises Kept)');
+    expect(describe('PXH-KB')).toBe('Microsoft promotion, career mode only: arrives as a message (Heya Ryana, I\'m Back!)');
   });
 
   it('CA10: las variantes están en el MechLab y todas las facciones del mapa tienen tabla salvo el ARDC', () => {
