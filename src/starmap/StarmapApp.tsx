@@ -91,15 +91,19 @@ function SystemPanel({ system, date, pinned, onClose, onQuest }: SystemPanelProp
           {system.hub && (
             <div className="is-hub">
               <dt>Industrial hub</dt>
-              <dd>{isCapital ? 'Hub capital' : 'Repairs and refits'}</dd>
-              <ZoneLevels levels={getHubLevels(data, system.hub)} />
+              <dd>
+                {isCapital ? 'Hub capital' : 'Repairs and refits'}
+                <ZoneLevels levels={getHubLevels(data, system.hub)} />
+              </dd>
             </div>
           )}
           {cluster && (
             <div>
               <dt>Cluster</dt>
-              <dd>{cluster}</dd>
-              <ZoneLevels levels={getClusterLevels(data, system.cluster ?? '')} />
+              <dd>
+                {cluster}
+                <ZoneLevels levels={getClusterLevels(data, system.cluster ?? '')} />
+              </dd>
             </div>
           )}
         </dl>

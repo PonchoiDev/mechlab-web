@@ -496,6 +496,8 @@ button, input, select { font: inherit; color: inherit; }
   list-style: none;
   font-size: 14px;
   font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .starmap-zone-levels b { color: var(--map-muted); }
