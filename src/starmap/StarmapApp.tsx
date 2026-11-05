@@ -269,17 +269,21 @@ export function StarmapApp() {
   // La rareza de los 'Mechs va en su propio archivo: se descarga al abrir Find a 'Mech o Special 'Mech locations, o
   // al entrar con ?mech= en la URL.
   const [availability, setAvailability] = useState<AvailabilityData | null>(null);
+  const [availabilityFailed, setAvailabilityFailed] = useState(false);
   const [mechId, setMechId] = useState<string | null>(null);
+  // La variante de ?mech= se guarda al abrir la página: la URL se reescribe antes de que termine la
+  // carga. Se descarta si se elige otra cosa antes de que llegue la rareza.
+  const pendingMechRef = useRef(new URLSearchParams(window.location.search).get('mech') ? window.location.search : null);
   const loadingRef = useRef(false);
-  const loadAvailability = useCallback((onLoad?: (loaded: AvailabilityData) => void) => {
+  const loadAvailability = useCallback(() => {
     if (loadingRef.current) return;
     loadingRef.current = true;
+    setAvailabilityFailed(false);
     import('../data/availability.json').then(module => {
-      const loaded = module.default as unknown as AvailabilityData;
-      setAvailability(loaded);
-      onLoad?.(loaded);
+      setAvailability(module.default as unknown as AvailabilityData);
     }).catch(() => {
       loadingRef.current = false;
+      setAvailabilityFailed(true);
     });
   }, []);
   const [focus, setFocus] = useState<FocusRequest | null>(() => {
@@ -291,9 +295,9 @@ export function StarmapApp() {
     []
   );
   // Encuadra dónde se consigue la variante si es un sitio pequeño, y marca la ruta de su HRQ.
-  const focusMech = useCallback((id: string, loaded: AvailabilityData) => {
+  const focusMech = useCallback((id: string, loaded: AvailabilityData, onDate: GameDate) => {
     const picked = loaded.mechs.find(candidate => candidate.id === id);
-    const target = picked ? getMechFocus(data, loaded, picked, date) : null;
+    const target = picked ? getMechFocus(data, loaded, picked, onDate) : null;
     setMechQuestId(target?.questId ?? null);
     // Si lo que se encuadra es el sistema de una recompensa (una misión o el de Razer), se marca.
     const mission = target && !target.questId
@@ -301,16 +305,20 @@ export function StarmapApp() {
       : undefined;
     setMechMissionSystem(mission?.system ?? null);
     if (target && target.systemIds.length > 0) focusOn(...target.systemIds);
-  }, [date, focusOn]);
+  }, [focusOn]);
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).has('mech')) {
-      loadAvailability(loaded => {
-        const id = parseMechQuery(window.location.search, loaded);
-        setMechId(id);
-        if (id) focusMech(id, loaded);
-      });
-    }
-  }, [loadAvailability, focusMech]);
+    if (pendingMechRef.current) loadAvailability();
+  }, [loadAvailability]);
+  // Al llegar la rareza se aplica la variante de la URL, con la fecha que haya entonces en el mapa.
+  useEffect(() => {
+    const search = pendingMechRef.current;
+    if (!availability || !search) return;
+    pendingMechRef.current = null;
+    const id = parseMechQuery(search, availability);
+    if (!id) return;
+    setMechId(id);
+    focusMech(id, availability, date);
+  }, [availability, date, focusMech]);
   const mech = availability?.mechs.find(candidate => candidate.id === mechId) ?? null;
   const routeQuest = quest ?? (mechId ? data.quests.find(candidate => candidate.id === mechQuestId) : null) ?? null;
   const markedSystem = !quest && mechId ? mechMissionSystem : null;
@@ -358,6 +366,7 @@ export function StarmapApp() {
 
   // Al elegir una HRQ se cierra la ficha del sistema para que se vea la de la misión.
   const pickQuest = (picked: Quest) => {
+    pendingMechRef.current = null;
     setQuestId(picked.id);
     setMechId(null);
     setSelectedId(null);
@@ -373,11 +382,12 @@ export function StarmapApp() {
 
   // Al elegir una variante se cierran la ficha del sistema y la de la HRQ para que se vea la suya.
   const pickMech = (id: string) => {
+    pendingMechRef.current = null;
     setMechId(id);
     setQuestId(null);
     setSelectedId(null);
     setHoveredId(null);
-    if (availability) focusMech(id, availability);
+    if (availability) focusMech(id, availability, date);
   };
 
   return (
@@ -459,6 +469,7 @@ export function StarmapApp() {
         />
         <MechDrawer
           availability={availability}
+          failed={availabilityFailed}
           date={date}
           lastDate={data.range.end}
           onDate={next => changeDate(next, true)}
@@ -466,7 +477,7 @@ export function StarmapApp() {
           onOpen={() => loadAvailability()}
           onPick={pickMech}
         />
-        <HeroDrawer data={data} availability={availability} selectedId={mechId} onOpen={() => loadAvailability()} onPick={pickMech} />
+        <HeroDrawer data={data} availability={availability} failed={availabilityFailed} selectedId={mechId} onOpen={() => loadAvailability()} onPick={pickMech} />
       </div>
       {isFeedbackOpen && (
         <FeedbackDialog
