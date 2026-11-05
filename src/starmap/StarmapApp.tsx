@@ -26,11 +26,15 @@ const LEGEND_MIN_SYSTEMS = 5;
 const URL_DELAY = 250;
 const NOTICE_DELAY = 4000;
 
+const LOGO_PATH = `${import.meta.env.BASE_URL}starmap/logos/`;
+
+// Logo del juego dentro de un aro del color de la facción, como en la ficha del juego; sin logo,
+// las siglas.
 function FactionEmblem({ factionId }: { factionId: string | null }) {
   const faction = factionId ? data.factions[factionId] : null;
   return (
     <span className="starmap-emblem" style={{ '--faction': faction?.color ?? '#5d6470' } as CSSProperties} aria-hidden="true">
-      {faction?.short ?? ''}
+      {faction?.logo ? <img src={LOGO_PATH + faction.logo} alt="" /> : faction?.short ?? ''}
     </span>
   );
 }
@@ -193,7 +197,8 @@ function FactionLegend({ date }: { date: GameDate }) {
       {isOpen && (
         <ul>
           {factions.map(([faction, count]) => (
-            <li key={faction} style={{ '--faction': data.factions[faction].color } as CSSProperties}>
+            <li key={faction} className={data.factions[faction].logo ? 'has-logo' : undefined} style={{ '--faction': data.factions[faction].color } as CSSProperties}>
+              {data.factions[faction].logo && <img src={LOGO_PATH + data.factions[faction].logo} alt="" />}
               <span>{data.factions[faction].name}</span>
               <b>{count}</b>
             </li>

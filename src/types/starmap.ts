@@ -16,6 +16,8 @@ export interface Faction {
   name: string;
   short: string;
   color: string;
+  // Logo del juego en public/starmap/logos/; sin él, el emblema muestra las siglas.
+  logo?: string;
 }
 
 export interface StarEvent {
