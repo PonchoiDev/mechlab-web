@@ -18,6 +18,7 @@ Cada HRQ tiene un arco de campaña (`MWCampaignArc`) en su carpeta, con eventos 
 | `Date` mayor o igual en el evento que la ofrece | `ShowQuest`: 3023-12-20 | Fecha desde la que se ofrece |
 | `Date` mayor o igual en un evento `…OfferExpired` | `Pt.0_OfferExpired`: 3055-12-15 | Fecha en la que deja de ofrecerse |
 | `Objectives` completado en el evento que la ofrece, de otra HRQ | `OfferQuest`: `M3_Prompt2` completado | HRQ que hay que completar antes |
+| Lo mismo con `bInvertCondition` | `OfferQuest`: `6_1_Prompt` no completado | HRQ excluyente: si se completa una, la otra ya no se ofrece |
 
 `extraer_mapa.py` guarda las condiciones de cada arco en `tools/datos-juego/starmap/condiciones_misiones.json` y `generar_mapa.py` las añade a cada cadena de `starmap.json`.
 
@@ -26,13 +27,14 @@ Cada HRQ tiene un arco de campaña (`MWCampaignArc`) en su carpeta, con eventos 
 - **Arcos que cuentan:** los de la carpeta de la cadena. Los arcos de avisos y transmisiones (`…Warnings`, `…Transmission`) recuerdan plazos, y los de inicio de la campaña del DLC3 (`_StartConditions`, `…QuickStart`) son de la campaña, no de la HRQ; ninguno decide cuándo se ofrece, así que no se usan.
 - **Reputación:** el valor más alto de las condiciones de reputación de sus arcos.
 - **Requisito previo:** si el evento que la ofrece pide completar un objetivo de otra cadena, el nombre de esa cadena (Corporate Interests se ofrece tras Destabilization).
+- **Excluyentes:** si pide que un objetivo de otra cadena no esté completado, son HRQ de bandos opuestos y solo se puede hacer una (Defense Support - Davion e Invasion Support - Kurita).
 - **Desde:** la fecha más temprana de las condiciones de fecha de los eventos que no son de caducidad. **Hasta:** la de los eventos `…Expired`.
 - **Campaña y carrera:** si una cadena existe en los dos modos, cada modo conserva sus condiciones, que pueden ser distintas (The False Flag pide 10 en campaña y 12 en carrera).
 
 ## Requisitos funcionales
 
 - **RF1.** Cada HRQ lleva sus condiciones: por cada modo (o una sola en las de los DLC), el nivel de reputación mínimo, la fecha desde la que se ofrece y, si la tiene, la fecha hasta la que se ofrece.
-- **RF2.** La ficha de la HRQ muestra esas condiciones: `Reputation 8+`, `From 20 DEC 3023`, `Until 15 DEC 3055`, `After Destabilization` y, si los modos difieren, cada uno con el suyo.
+- **RF2.** La ficha de la HRQ muestra esas condiciones: `Reputation 8+`, `From 20 DEC 3023`, `Until 15 DEC 3055`, `After Destabilization`, `Not with Invasion Support - Kurita` y, si los modos difieren, cada uno con el suyo.
 - **RF3.** Con la fecha del mapa, la ficha y la lista dicen si la HRQ todavía no se ofrece (`Not offered until 20 DEC 3023`) o si ya no se ofrece (`No longer offered`), y el icono de oferta del mapa se atenúa.
 
 ## Requisitos no funcionales
@@ -51,6 +53,7 @@ Cada HRQ tiene un arco de campaña (`MWCampaignArc`) en su carpeta, con eventos 
 | CA5 | Pirate Hunt | se consulta su disponibilidad en 3015 | se ofrece, porque no tiene fecha |
 | CA6 | Todas las HRQ | se consultan sus condiciones | todas tienen alguna condición salvo The Powder Keg, que el juego ofrece siempre, y Pirate Raiders, cuyo primer objetivo no está en el juego; y todas piden reputación salvo esas dos, Adam Steiner y Guerrero (DLC8), que solo tienen fechas, y Corporate Interests |
 | CA7 | Corporate Interests | se consultan sus condiciones | en campaña y en carrera se ofrece después de Destabilization |
+| CA8 | Defense Support - Davion | se consultan sus condiciones | es excluyente con Invasion Support - Kurita, y viceversa, sin requisito previo |
 
 ## Fuera de alcance
 

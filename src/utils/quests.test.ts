@@ -92,14 +92,14 @@ describe('búsqueda, sistemas, ruta y URL', () => {
 // Criterios de aceptación de docs/specs/condiciones-hrq.md (issue #68).
 describe('condiciones de las HRQ', () => {
   it('CA1: Bow and Arrow pide reputación 8 y se ofrece desde el 20 de diciembre de 3023', () => {
-    expect(quest('Bow and Arrow').requirements).toEqual([{ mode: null, reputation: 8, from: '3023-12-20', until: null, after: null }]);
+    expect(quest('Bow and Arrow').requirements).toEqual([{ mode: null, reputation: 8, from: '3023-12-20', until: null, after: null, excludes: [] }]);
   });
 
   it('CA2: The False Flag pide 10 en campaña y 12 en carrera, sin fecha', () => {
     const requirements = quest('The False Flag').requirements;
     expect(requirements).toEqual(expect.arrayContaining([
-      { mode: 'campaign', reputation: 10, from: null, until: null, after: null },
-      { mode: 'career', reputation: 12, from: null, until: null, after: null }
+      { mode: 'campaign', reputation: 10, from: null, until: null, after: null, excludes: [] },
+      { mode: 'career', reputation: 12, from: null, until: null, after: null, excludes: [] }
     ]));
     expect(requirements).toHaveLength(2);
   });
@@ -128,6 +128,11 @@ describe('condiciones de las HRQ', () => {
     expect(data.quests.filter(candidate => !hasCondition(candidate)).map(candidate => candidate.name).sort()).toEqual(['Pirate Raiders', 'The Powder Keg']);
     const withoutReputation = data.quests.filter(candidate => !candidate.requirements.some(requirement => requirement.reputation !== null));
     expect(withoutReputation.map(candidate => candidate.name).sort()).toEqual(['Adam Steiner', 'Corporate Interests', 'Ideals of War', 'Pirate Raiders', 'The Powder Keg']);
+  });
+
+  it('CA8: Defense Support - Davion e Invasion Support - Kurita son excluyentes', () => {
+    expect(quest('Defense Support - Davion').requirements.every(requirement => requirement.excludes.includes('Invasion Support - Kurita') && requirement.after === null)).toBe(true);
+    expect(quest('Invasion Support - Kurita').requirements.every(requirement => requirement.excludes.includes('Defense Support - Davion'))).toBe(true);
   });
 
   it('CA7: Corporate Interests se ofrece después de Destabilization', () => {
