@@ -123,6 +123,7 @@ class Asset:
             versiones_propias = cabecera.leer("i")
             cabecera.posicion += 20 * versiones_propias
         tamano_cabecera = cabecera.leer("i")
+        self.tamano_cabecera = tamano_cabecera
         cabecera.cadena()
         flags = cabecera.leer("I")
         total_nombres, inicio_nombres = cabecera.varios("ii")
@@ -300,7 +301,8 @@ class LectorPropiedades:
         return None
 
 
-# Flags de FByteBulkData: tamaños de 64 bits y datos en el archivo .ubulk aparte.
+# Flags de FByteBulkData: datos al final del paquete, tamaños de 64 bits y datos en el .ubulk aparte.
+BULK_AL_FINAL = 0x1
 BULK_TAMANO_64 = 0x2000
 BULK_EN_UBULK = 0x100
 
@@ -329,6 +331,10 @@ def leer_textura(pak, ruta_sin_extension):
     inicio = lector.leer("q")
     if flags & BULK_EN_UBULK:
         datos = pak.leer_archivo(ruta_sin_extension + ".ubulk")[inicio:inicio + tamano]
+    elif flags & BULK_AL_FINAL:
+        # El desplazamiento cuenta desde el principio del .uasset: se pasa al .uexp.
+        inicio_uexp = inicio - asset.tamano_cabecera
+        datos = lector.datos[inicio_uexp:inicio_uexp + tamano]
     else:
         datos = lector.datos[lector.posicion:lector.posicion + tamano]
         lector.posicion += tamano
