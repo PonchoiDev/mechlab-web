@@ -42,7 +42,8 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
   - **Final de campaña** (`*CampaignComplete*`): completar la campaña de su DLC.
   - **Información del Bounty Hunter** (`BountyHunterLevelUpN`, DLC4): llegar a ese nivel de información.
   - **Rango de la arena** (`ArenaFameLevelUp*`, DLC6): llegar a ese rango de fama en las arenas de Solaris.
-  - **Promoción** (carpetas `*_Exclusive`): llega con un mensaje, sin misión ni sistema. `Razer_Exclusive` es la de Razer (el registro de eventos dice «Claimed Razer WVR-7H») y `MS_Exclusive` la de Microsoft (su arco comprueba `HasMSMechEntitlement`), solo en carrera.
+  - **Promoción** (carpetas `*_Exclusive`): llega con un mensaje, sin misión. `Razer_Exclusive` es la de Razer (el registro de eventos dice «Claimed Razer WVR-7H») y `MS_Exclusive` la de Microsoft (su arco comprueba `HasMSMechEntitlement`), solo en carrera.
+  - **Sistema de un arco:** si ninguna acción coloca la recompensa, el sistema puede estar en la condición `StarSystemTrigger` del arco de su carpeta. El de Razer se dispara al llegar a Valentina, así que el WVR-7H se consigue allí.
 - **RF5.** La URL guarda la variante elegida (`?mech=AS7-D`), para compartir la vista.
 - **RF6.** Si la variante se consigue en un sitio pequeño, el mapa lo encuadra al elegirla, porque el color de un solo sistema no se ve con el mapa entero:
   - un 'Mech hero con fuente fija, o una variante que no vende ninguna facción: su HRQ, con la ruta marcada como al elegir la HRQ, o el sistema del 'Mech único o del mercado especial;
@@ -51,6 +52,8 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 - **RF8.** Si ninguna facción vende la variante, la ficha lo dice; y si además no tiene fuente fija, dice que el juego no le da un sitio fijo.
 
 - **RF12.** El título de una misión con sistema se puede pulsar: el mapa encuadra su sistema y lo marca como la ruta de una HRQ, sin cerrar la ficha del 'Mech. Al elegir un 'Mech que se encuadra por una de esas misiones, el sistema se marca solo.
+
+- **RF13.** El buscador también encuentra las variantes por su otro nombre, como el MechLab: el Puma es el Adder en la Esfera Interior (`sarnaName` de `mechs.json`). La lista y la ficha muestran los dos.
 
 ## Requisitos no funcionales
 
@@ -82,8 +85,9 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | CA15 | Las búsquedas «as7-d-h», «arctic wolf» y «acw-prime» el 1 de enero de 3030 | se piden las variantes posteriores | la primera da una, desde el 11 de noviembre de 3041; la segunda, cinco, la siguiente el 1 de enero de 3059 (el ACW-1); la tercera, una, el 1 de enero de 3067, después del final del mapa; una búsqueda sin resultados, ninguna |
 | CA16 | La búsqueda «archer» el 1 de enero de 3015 | se busca y se piden las variantes posteriores | da cinco variantes y avisa de otras cinco posteriores, la siguiente el ARC-T el 20 de febrero de 3016 |
 | CA21 | La recompensa «Shielded Withdrawal» (DLC5, BLR-1G-S), cuya acción está en la subcarpeta `ArcActions` de su misión | se consulta | tiene el sistema de su misión, Vega |
-| CA22 | Las recompensas del WVR-7H y del PXH-KB | se consultan | son promociones, de Razer y de Microsoft, sin sistema; la de Head Hunting es una misión |
-| CA23 | Las recompensas sin sistema | se describen | el WVR-7H: «Razer promotion: arrives as a message (Hidden Cache Found)»; el FS9-A: «Reach Bounty Hunter intel level 3 (DLC 4)»; el AS7-BH: «Reach the Rudiarius fame rank in the Solaris arenas (DLC 6)»; el SNV-BR: «Complete the DLC 9 campaign (Promises Kept)»; el PXH-KB: «Microsoft promotion, career mode only: arrives as a message (Heya Ryana, I'm Back!)» |
+| CA22 | Las recompensas del WVR-7H y del PXH-KB | se consultan | son promociones, de Razer en Valentina (por la condición de su arco) y de Microsoft sin sistema; la de Head Hunting es una misión; el WVR-7H encuadra Valentina |
+| CA23 | Las recompensas sin sistema | se describen | el WVR-7H: «Razer promotion: arrives as a message (Hidden Cache Found) when you arrive», con el sistema detrás; el FS9-A: «Reach Bounty Hunter intel level 3 (DLC 4)»; el AS7-BH: «Reach the Rudiarius fame rank in the Solaris arenas (DLC 6)»; el SNV-BR: «Complete the DLC 9 campaign (Promises Kept)»; el PXH-KB: «Microsoft promotion, career mode only: arrives as a message (Heya Ryana, I'm Back!)» |
+| CA24 | La búsqueda «adder» | se busca | da las variantes del Puma, con su otro nombre, Adder |
 | CA10 | `availability.json` | se carga | todas sus variantes están en `mechs.json` con el mismo nombre, y todas las facciones del mapa salvo Arc-Royal Defense Cordon tienen tabla |
 
 ## Fuera de alcance
