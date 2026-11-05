@@ -107,9 +107,10 @@ describe('búsqueda, territorios y URL', () => {
   it('CA9: busca sin distinguir mayúsculas y pone primero los nombres que empiezan por el texto', () => {
     expect(searchSystems(data.systems, 'tuk')[0].name).toBe('Tukayyid');
     expect(searchSystems(data.systems, 'TUKAYYID')[0].name).toBe('Tukayyid');
-    const results = searchSystems(data.systems, 'new');
-    const firstContaining = results.findIndex(result => !result.name.toLowerCase().startsWith('new'));
-    expect(results.slice(firstContaining).every(result => !result.name.toLowerCase().startsWith('new'))).toBe(true);
+    const startsWithText = searchSystems(data.systems, 'new', 100).map(result => result.name.toLowerCase().startsWith('new'));
+    expect(startsWithText).toContain(true);
+    expect(startsWithText).toContain(false);
+    expect(startsWithText).toEqual([...startsWithText].sort((a, b) => Number(b) - Number(a)));
     expect(searchSystems(data.systems, '')).toEqual([]);
   });
 
@@ -122,7 +123,7 @@ describe('búsqueda, territorios y URL', () => {
 
   it('CA13: la fecha y el sistema se leen y se escriben en la URL', () => {
     expect(parseMapQuery('?date=3042-01-21&system=Tukayyid', data)).toEqual({ date: '3042-01-21', systemId: system('Tukayyid').id });
-    expect(parseMapQuery('?date=ayer&system=Nowhere', data)).toEqual({ date: '3015-01-01', systemId: null });
+    expect(parseMapQuery('?date=ayer&system=Not%20a%20system', data)).toEqual({ date: '3015-01-01', systemId: null });
     expect(parseMapQuery('?date=3099-01-01', data).date).toBe('3060-12-31');
     expect(toMapQuery({ date: '3042-01-21', systemId: system('Tukayyid').id }, data)).toBe('?date=3042-01-21&system=Tukayyid');
   });
