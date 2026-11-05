@@ -71,7 +71,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | CA4 | El Archer ARC-AGC (hero) | se consulta | existe desde el 1 de enero de 3045, es Unique en Marik, no existe el 1 de enero de 3030 y es recompensa de Bow and Arrow |
 | CA5 | El Atlas II AS7-D-H y el Thunderbolt TDR-5S | se consultan sus fuentes fijas | el primero está en Romulus desde el 10 de mayo de 3043; el segundo se vende en el mercado del DLC4 en Rasalhague |
 | CA6 | Los 'Mechs de un solo sitio | se listan | hay 14 hero, ordenados por nombre, todos con al menos una fuente y ninguno en venta; entre ellos el ARC-AGC (Bow and Arrow), el AS7-D-H (Romulus), el MAD-BH y el PXH-KB |
-| CA17 | Las variantes especiales | se listan | son 13, ninguna hero ni vendida por una facción; entre ellas el WVR-7H, recompensa de «Hidden Cache Found» sin sistema, y el TDR-5SE, del mercado especial del DLC2 |
+| CA17 | Las variantes especiales | se listan | son 13, ninguna hero ni vendida por una facción; entre ellas el WVR-7H, recompensa de «Hidden Cache Found» en Valentina, y el TDR-5SE, del mercado especial del DLC2 |
 | CA18 | El MAD-BH | se consultan sus fuentes y qué encuadrar | es la recompensa de «Head Hunting», del DLC4, en Robinson, y se encuadra Robinson |
 | CA19 | El WVR-Q y el ARC-T | se consultan | pueden salir a la venta como hero y no están en la lista |
 | CA20 | Las recompensas fuera de las HRQ | se cargan | ninguna es de una HRQ del mapa (no está «Bow and Arrow Pt.4»); «Gunzburg Pt.3» da el AS7-D y «Battle at New Starburg» el HBR-A |
