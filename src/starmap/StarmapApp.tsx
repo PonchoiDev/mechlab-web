@@ -245,9 +245,9 @@ export function StarmapApp() {
           <span aria-hidden="true">M</span>
           <span>MW Builder</span>
         </a>
-        <h1>Star map <small>MW5 Mercenaries</small></h1>
+        <h1>Star map</h1>
         <nav className="starmap-links" aria-label="MW Builder">
-          <a href="/mercs/">MechLab</a>
+          <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
         </nav>
         <SystemSearch onPick={pickSystem} />
       </header>

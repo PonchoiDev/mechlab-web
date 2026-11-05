@@ -114,17 +114,22 @@ button, input, select { font: inherit; color: inherit; }
   text-transform: uppercase;
 }
 
-.starmap-topbar h1 small {
-  margin-left: 8px;
-  color: var(--map-muted);
-  font-size: 15px;
-  font-weight: 600;
-}
-
+/* MW BUILDER | STAR MAP | MW5 MERCENARIES MECHLAB: cada bloque separado por un filete. */
 .starmap-links {
   display: flex;
   gap: 4px;
+  padding-left: 12px;
+  border-left: 1px solid var(--map-line);
 }
+
+.starmap-links small {
+  margin-right: 4px;
+  color: var(--map-muted);
+  font-size: 15px;
+}
+
+.starmap-links a:hover small,
+.starmap-links a:focus-visible small { color: #000; }
 
 .starmap-links a {
   padding: 6px 12px;
@@ -523,7 +528,7 @@ button, input, select { font: inherit; color: inherit; }
 
 @media (max-width: 760px) {
   .starmap-topbar { flex-wrap: wrap; gap: 8px 12px; padding: 8px 12px; }
-  .starmap-brand span:last-child, .starmap-topbar h1 small { display: none; }
+  .starmap-brand span:last-child, .starmap-links small { display: none; }
   .starmap-topbar h1 { padding-left: 12px; font-size: 20px; }
   .starmap-search { order: 3; width: 100%; }
   .starmap-panel { top: 104px; left: 12px; width: calc(100vw - 24px); max-height: calc(100% - 360px); }
