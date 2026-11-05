@@ -4,8 +4,9 @@ import os
 import re
 import struct
 import sys
+import zlib
 
-from ue4 import Asset, Pak
+from ue4 import Asset, Pak, leer_textura
 
 # Extrae del .pak de la instalación los datos del mapa estelar y los guarda como JSON en
 # tools/datos-juego/starmap/. Solo hace falta repetirlo cuando un parche cambie el mapa; después,
@@ -14,6 +15,9 @@ from ue4 import Asset, Pak
 #   python3 tools/extraer_mapa.py "/ruta/a/MechWarrior 5 Mercenaries"
 DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_DESTINO = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "starmap")
+# Los logos de facción se publican tal cual en la web, ya reducidos.
+RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "starmap", "logos")
+TAMANO_LOGO = 128
 PAK_DEL_JUEGO = os.path.join("MW5Mercs", "Content", "Paks", "MW5Mercs-WindowsNoEditor.pak")
 CONTENIDO = "MW5Mercs/Content/"
 
@@ -142,6 +146,57 @@ def extraer_textos(pak):
     return textos
 
 
+def reducir(ancho, alto, pixeles, lado):
+    """Reduce una imagen RGBA cuadrada promediando bloques; el color se pondera con el alfa para
+    que los bordes transparentes no oscurezcan el logo."""
+    paso = ancho // lado
+    salida = bytearray(lado * lado * 4)
+    for y in range(lado):
+        for x in range(lado):
+            r = g = b = a = 0
+            for dy in range(paso):
+                fila = ((y * paso + dy) * ancho + x * paso) * 4
+                for dx in range(paso):
+                    i = fila + dx * 4
+                    alfa = pixeles[i + 3]
+                    r += pixeles[i] * alfa
+                    g += pixeles[i + 1] * alfa
+                    b += pixeles[i + 2] * alfa
+                    a += alfa
+            destino = (y * lado + x) * 4
+            if a:
+                salida[destino:destino + 3] = bytes((r // a, g // a, b // a))
+            salida[destino + 3] = a // (paso * paso)
+    return salida
+
+
+def escribir_png(ruta, lado, pixeles):
+    filas = b"".join(b"\0" + bytes(pixeles[y * lado * 4:(y + 1) * lado * 4]) for y in range(lado))
+
+    def bloque(tipo, datos):
+        return struct.pack(">I", len(datos)) + tipo + datos + struct.pack(">I", zlib.crc32(tipo + datos))
+
+    with open(ruta, "wb") as archivo:
+        archivo.write(b"\x89PNG\r\n\x1a\n" + bloque(b"IHDR", struct.pack(">IIBBBBB", lado, lado, 8, 6, 0, 0, 0))
+                      + bloque(b"IDAT", zlib.compress(filas, 9)) + bloque(b"IEND", b""))
+
+
+def extraer_logos(pak, facciones):
+    """Logo grande de cada facción, en PNG de 128 px. Varias facciones comparten logo (la periferia
+    y los piratas), así que cada textura se escribe una vez con su propio nombre."""
+    os.makedirs(RUTA_LOGOS, exist_ok=True)
+    escritos = set()
+    for faccion in facciones.values():
+        textura = faccion.get("LogoLarge")
+        if not textura or textura in escritos:
+            continue
+        ancho, alto, pixeles = leer_textura(pak, ruta_de_juego(textura))
+        nombre = textura.rsplit(".", 1)[-1] + ".png"
+        escribir_png(os.path.join(RUTA_LOGOS, nombre), TAMANO_LOGO, reducir(ancho, alto, pixeles, TAMANO_LOGO))
+        escritos.add(textura)
+    print(f"logos: {len(escritos)} imágenes")
+
+
 def guardar(nombre, datos):
     # Una entrada por línea: los cambios de un parche se leen bien en el diff.
     ruta = os.path.join(RUTA_DESTINO, nombre)
@@ -162,7 +217,7 @@ def main():
     os.makedirs(RUTA_DESTINO, exist_ok=True)
 
     sistemas = extraer_sistemas(pak)
-    facciones, sin_asset = extraer_por_nombre(pak, "/Factions/", facciones_usadas(sistemas), ("Name", "StarMapStencilId", "Primary"))
+    facciones, sin_asset = extraer_por_nombre(pak, "/Factions/", facciones_usadas(sistemas), ("Name", "StarMapStencilId", "Primary", "LogoLarge"))
     clusteres, clusteres_sin_asset = extraer_por_nombre(pak, "/Clusters/", clusteres_usados(sistemas), ("Name", "Description"))
     guardar("sistemas.json", sistemas)
     guardar("facciones.json", facciones)
@@ -171,6 +226,7 @@ def main():
     guardar("eventos.json", extraer_eventos(pak))
     guardar("centros_industriales.json", extraer_centros_industriales(pak))
     guardar("textos.json", extraer_textos(pak))
+    extraer_logos(pak, facciones)
     if sin_asset:
         print(f"Aviso: facciones sin asset en el juego: {', '.join(sin_asset)}")
     if clusteres_sin_asset:

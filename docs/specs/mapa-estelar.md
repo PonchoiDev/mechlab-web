@@ -30,7 +30,7 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
 - **Propietario de un sistema en una fecha:** el último cambio de `FactionOwnershipChanges` con fecha igual o anterior. Las facciones `None` y `NoFaction` dejan el sistema sin dueño.
 - **Rango de fechas:** del 1 de enero de 3015, cuando empieza la partida, al 31 de diciembre de 3060, el año del último cambio de frontera del juego. Los cambios de la tabla fuera de ese rango no se usan.
 - **Color de cada facción:** el de su estencil en `Faction_Colours_MPC`. Los Clanes Wolf, Jade Falcon, Ghost Bear, Smoke Jaguar y Hell's Horses tienen color propio, y el resto de Clanes usa el de `ClanInvasion`. La Federated Commonwealth se pinta con el color de los Federated Suns, como en el juego (comprobado con una captura del mapa en enero de 3042).
-- **Sin arte del juego:** los logos de facción son arte de Piranha Games, así que la ficha muestra un emblema propio con el color y las siglas de la facción.
+- **Logos de facción:** la ficha y la leyenda muestran el logo de cada facción, extraído del juego (`LogoLarge` de su `MWFactionAsset`, texturas DXT5 o sin comprimir) y reducido a PNG de 128 px en `public/starmap/logos/`. Son arte de Piranha Games, como el resto de datos del juego que usa la web. La facción que no tiene asset (Arc-Royal Defense Cordon) muestra sus siglas.
 - **Centros industriales:** la tienda de cada centro rota, así que solo se indica su ubicación.
 
 ## Requisitos funcionales
@@ -76,7 +76,7 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
 - La rotación de la tienda de los centros industriales.
 - Las misiones, los contratos y la reputación de la partida.
 - Las rutas de viaje y su coste.
-- Los logos y las texturas del juego.
+- Las texturas del mapa del juego (nebulosas, mallas de frontera).
 
 ## Plan de pruebas
 

@@ -11,6 +11,8 @@ from collections import Counter
 DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_ORIGEN = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "starmap")
 RUTA_DESTINO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "starmap.json")
+# Los logos los escribe extraer_mapa.py; aquí solo se enlaza cada facción con el suyo.
+RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "starmap", "logos")
 
 # La partida empieza en 3015 y el último cambio de frontera del juego es de 3060. La tabla trae la
 # historia de cada sistema desde el siglo XXII hasta 3145, pero fuera de este rango el juego no la usa.
@@ -212,6 +214,9 @@ def main():
             "short": SIGLAS_SIN_ASSET.get(id_faccion) or SIGLAS_CORREGIDAS.get(id_faccion) or siglas[id_faccion].most_common(1)[0][0],
             "color": color_hex(colores[parametro_de_color(id_faccion, faccion)]),
         }
+        logo = (faccion or {}).get("LogoLarge")
+        if logo and os.path.exists(os.path.join(RUTA_LOGOS, logo.rsplit(".", 1)[-1] + ".png")):
+            facciones[id_faccion]["logo"] = logo.rsplit(".", 1)[-1] + ".png"
 
     clusteres = {}
     sin_nombre = []

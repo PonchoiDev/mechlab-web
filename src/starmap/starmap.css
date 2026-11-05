@@ -437,6 +437,13 @@ button, input, select { font: inherit; color: inherit; }
   letter-spacing: 0.02em;
 }
 
+.starmap-emblem img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6));
+}
+
 .starmap-panel h2 {
   margin: 0;
   font-size: 34px;
@@ -706,6 +713,14 @@ button, input, select { font: inherit; color: inherit; }
   border-radius: 50%;
   background: var(--faction);
   box-shadow: 0 0 8px var(--faction);
+}
+
+.starmap-legend li.has-logo::before { content: none; }
+
+.starmap-legend li img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 .starmap-legend li.is-cluster::before {

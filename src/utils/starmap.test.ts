@@ -96,6 +96,16 @@ describe('eventos y fechas', () => {
     expect(getCurrentEvent(data.events, '3020-01-01')).toBeNull();
   });
 
+  it('las facciones llevan el logo del juego, y cada logo existe', () => {
+    expect(data.factions.Davion.logo).toBe('Faction_Davion_1024PX_STD_UIX.png');
+    expect(data.factions.ClanWolf.logo).toBeDefined();
+    const logos = Object.values(data.factions).flatMap(faction => (faction.logo ? [faction.logo] : []));
+    const files = Object.keys(import.meta.glob('../../public/starmap/logos/*.png')).map(path => path.split('/').at(-1));
+    expect(logos.every(logo => files.includes(logo))).toBe(true);
+    // Arc-Royal no tiene asset en el juego: se queda con las siglas.
+    expect(data.factions.ArcRoyalDefenseCordon.logo).toBeUndefined();
+  });
+
   it('la ficha da la distancia a Terra en años luz, no las coordenadas', () => {
     expect(system('Terra')).toMatchObject({ x: 0, y: 0 });
     expect(getDistanceToTerra(system('Terra'))).toBe(0);

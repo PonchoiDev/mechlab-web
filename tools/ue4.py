@@ -123,6 +123,7 @@ class Asset:
             versiones_propias = cabecera.leer("i")
             cabecera.posicion += 20 * versiones_propias
         tamano_cabecera = cabecera.leer("i")
+        self.tamano_cabecera = tamano_cabecera
         cabecera.cadena()
         flags = cabecera.leer("I")
         total_nombres, inicio_nombres = cabecera.varios("ii")
@@ -298,3 +299,75 @@ class LectorPropiedades:
             # Referencia a una StringTable: se guarda la tabla y la clave para resolverla después.
             return {"tabla": self.nombre(), "clave": lector.cadena()}
         return None
+
+
+# Flags de FByteBulkData: datos al final del paquete, tamaños de 64 bits y datos en el .ubulk aparte.
+BULK_AL_FINAL = 0x1
+BULK_TAMANO_64 = 0x2000
+BULK_EN_UBULK = 0x100
+
+
+def leer_textura(pak, ruta_sin_extension):
+    """Mip más grande de una Texture2D cocinada en DXT5 o sin comprimir: (ancho, alto, píxeles RGBA)."""
+    asset = Asset.desde_pak(pak, ruta_sin_extension)
+    propiedades = asset.lector(asset.principal())
+    propiedades.propiedades()
+    lector = propiedades.lector
+    # Guid del objeto y las marcas de datos quitados de UTexture y UTexture2D.
+    lector.leer("i")
+    lector.posicion += 4
+    if lector.leer("i") != 1:
+        raise ValueError("Textura sin datos cocinados")
+    lector.varios("iiq")
+    lector.varios("iii")
+    formato = lector.cadena()
+    if formato not in ("PF_DXT5", "PF_B8G8R8A8"):
+        raise ValueError(f"Formato de textura no soportado: {formato}")
+    lector.varios("ii")
+    lector.leer("i")
+    flags = lector.leer("I")
+    lector.leer("q" if flags & BULK_TAMANO_64 else "i")
+    tamano = lector.leer("q" if flags & BULK_TAMANO_64 else "i")
+    inicio = lector.leer("q")
+    if flags & BULK_EN_UBULK:
+        datos = pak.leer_archivo(ruta_sin_extension + ".ubulk")[inicio:inicio + tamano]
+    elif flags & BULK_AL_FINAL:
+        # El desplazamiento cuenta desde el principio del .uasset: se pasa al .uexp.
+        inicio_uexp = inicio - asset.tamano_cabecera
+        datos = lector.datos[inicio_uexp:inicio_uexp + tamano]
+    else:
+        datos = lector.datos[lector.posicion:lector.posicion + tamano]
+        lector.posicion += tamano
+    ancho, alto = lector.varios("ii")
+    if formato == "PF_B8G8R8A8":
+        pixeles = bytearray(datos)
+        pixeles[0::4], pixeles[2::4] = datos[2::4], datos[0::4]
+        return ancho, alto, pixeles
+    return ancho, alto, descomprimir_dxt5(datos, ancho, alto)
+
+
+def descomprimir_dxt5(datos, ancho, alto):
+    """Bloques de 4x4 píxeles: 8 bytes de alfa interpolado y 8 de color en RGB565."""
+    pixeles = bytearray(ancho * alto * 4)
+    bloques_por_fila = ancho // 4
+
+    def rgb565(valor):
+        return ((valor >> 11) * 255 // 31, ((valor >> 5) & 63) * 255 // 63, (valor & 31) * 255 // 31)
+
+    for bloque_y in range(alto // 4):
+        for bloque_x in range(bloques_por_fila):
+            origen = (bloque_y * bloques_por_fila + bloque_x) * 16
+            a0, a1 = datos[origen], datos[origen + 1]
+            bits_alfa = int.from_bytes(datos[origen + 2:origen + 8], "little")
+            if a0 > a1:
+                alfas = [a0, a1] + [((7 - i) * a0 + i * a1) // 7 for i in range(1, 7)]
+            else:
+                alfas = [a0, a1] + [((5 - i) * a0 + i * a1) // 5 for i in range(1, 5)] + [0, 255]
+            c0, c1, bits_color = struct.unpack_from("<HHI", datos, origen + 8)
+            p0, p1 = rgb565(c0), rgb565(c1)
+            colores = [p0, p1, tuple((2 * a + b) // 3 for a, b in zip(p0, p1)), tuple((a + 2 * b) // 3 for a, b in zip(p0, p1))]
+            for i in range(16):
+                destino = ((bloque_y * 4 + i // 4) * ancho + bloque_x * 4 + i % 4) * 4
+                pixeles[destino:destino + 3] = bytes(colores[(bits_color >> (2 * i)) & 3])
+                pixeles[destino + 3] = alfas[(bits_alfa >> (3 * i)) & 7]
+    return pixeles

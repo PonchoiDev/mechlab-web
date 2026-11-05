@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-faction-logos',
+    date: '2026-11-05',
+    title: 'Faction logos on the star map',
+    items: [
+      'The system card shows the faction logo from the game inside its colored ring, as in the game',
+      'The faction legend lists each faction with its logo'
+    ]
+  },
+  {
     id: '2026-11-05-starmap',
     date: '2026-11-05',
     title: 'Star map',
