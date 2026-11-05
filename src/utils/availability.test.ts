@@ -4,13 +4,14 @@ import mechsJson from '../data/mechs.json';
 import starmapJson from '../data/starmap.json';
 import type { AvailabilityData, StarmapData } from '../types/starmap';
 import {
+  countSources,
   getAvailabilityAt,
   getFactionTable,
-  getLaterVariants,
   getFixedSources,
-  getHeroMechs,
+  getLaterVariants,
   getMarketRarity,
   getMechFocus,
+  getOnePlaceMechs,
   isProduced,
   parseMechQuery,
   searchMechs
@@ -78,16 +79,15 @@ describe('rareza de cada variante por facción', () => {
     expect(thunderbolt.markets.some(market => market.dlc === 4 && market.system === rasalhague.id)).toBe(true);
   });
 
-  it('CA6: hay 10 \'Mechs hero con fuente fija, ordenados por nombre', () => {
-    const heroes = getHeroMechs(data, availability);
-    expect(heroes).toHaveLength(10);
-    expect(heroes.every(hero => hero.mech.hero)).toBe(true);
-    expect(heroes.every(({ sources }) => sources.quests.length + sources.markets.length + sources.uniques.length > 0)).toBe(true);
+  it('CA6: hay 14 \'Mechs hero de un solo sitio, ordenados por nombre', () => {
+    const { heroes } = getOnePlaceMechs(data, availability);
+    expect(heroes).toHaveLength(14);
+    expect(heroes.every(hero => hero.mech.hero && !hero.mech.heroMarket)).toBe(true);
+    expect(heroes.every(({ sources }) => countSources(sources) > 0)).toBe(true);
     const names = heroes.map(hero => hero.mech.name);
     expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)));
     const ids = heroes.map(hero => hero.mech.id);
-    expect(ids).toContain('ARC-AGC');
-    expect(ids).toContain('AS7-D-H');
+    expect(ids).toEqual(expect.arrayContaining(['ARC-AGC', 'AS7-D-H', 'MAD-BH', 'PXH-KB']));
   });
 
   it('CA7: una variante sin rareza no la vende ninguna facción', () => {
@@ -152,6 +152,38 @@ describe('rareza de cada variante por facción', () => {
   it('CA16: aunque haya resultados, se avisa de las variantes que llegan después', () => {
     expect(searchMechs(availability, 'archer', '3015-01-01')).toHaveLength(5);
     expect(getLaterVariants(availability, 'archer', '3015-01-01')).toEqual({ count: 5, next: '3016-02-20' });
+  });
+
+  it('CA17: hay 13 variantes especiales de un solo sitio, como el Wolverine de Razer', () => {
+    const { special } = getOnePlaceMechs(data, availability);
+    expect(special).toHaveLength(13);
+    expect(special.every(({ mech }) => !mech.hero && Object.keys(mech.rarity).length === 0)).toBe(true);
+    const razer = special.find(({ mech }) => mech.id === 'WVR-7H');
+    expect(razer?.sources.rewards).toEqual([expect.objectContaining({ title: 'Hidden Cache Found' })]);
+    expect(razer?.sources.rewards[0].system).toBeUndefined();
+    expect(special.find(({ mech }) => mech.id === 'TDR-5SE')?.sources.markets[0].dlc).toBe(2);
+  });
+
+  it('CA18: el MAD-BH es la recompensa de Head Hunting en Robinson, y se encuadra Robinson', () => {
+    const robinson = data.systems.find(system => system.name === 'Robinson')!;
+    const [reward] = getFixedSources(data, 'MAD-BH').rewards;
+    expect(reward).toEqual(expect.objectContaining({ title: 'Head Hunting', dlc: 4, system: robinson.id }));
+    expect(getMechFocus(data, availability, mech('MAD-BH'), '3050-01-01')).toEqual({ systemIds: [robinson.id], questId: null });
+  });
+
+  it('CA19: los hero que pueden salir a la venta no están en la lista', () => {
+    expect(mech('WVR-Q').heroMarket).toBe(true);
+    expect(mech('ARC-T').heroMarket).toBe(true);
+    const { heroes, special } = getOnePlaceMechs(data, availability);
+    const ids = [...heroes, ...special].map(entry => entry.mech.id);
+    expect(ids).not.toContain('WVR-Q');
+    expect(ids).not.toContain('ARC-T');
+  });
+
+  it('CA20: las recompensas fuera de las HRQ no repiten las de las HRQ y encuentran su variante', () => {
+    expect(data.rewards.some(reward => reward.title === 'Bow and Arrow Pt.4')).toBe(false);
+    expect(data.rewards.find(reward => reward.title === 'Gunzburg Pt.3')?.mechs.map(entry => entry.id)).toEqual(['AS7-D']);
+    expect(data.rewards.find(reward => reward.title === 'Battle at New Starburg')?.mechs.map(entry => entry.id)).toEqual(['HBR-A']);
   });
 
   it('CA10: las variantes están en el MechLab y todas las facciones del mapa tienen tabla salvo el ARDC', () => {
