@@ -119,7 +119,8 @@ export interface TerritoryIndex {
   cellSize: number;
   cols: number;
   rows: number;
-  // Para cada celda, el índice del sistema más cercano dentro del radio, o -1 si no hay ninguno.
+  // Para cada celda, el índice del sistema más cercano dentro del radio (o, en un hueco cerrado, del
+  // sistema más cercano de su borde), o -1 si no hay ninguno.
   nearest: Int32Array;
 }
 
@@ -183,7 +184,53 @@ export const buildTerritoryIndex = (
     }
   });
 
+  fillEnclosedGaps(systems, { originX, originY, cellSize, cols, rows, nearest });
   return { originX, originY, cellSize, cols, rows, nearest };
+};
+
+// Hay zonas sin ningún sistema a menos del radio rodeadas de territorio (entre Shimonoseki, Worrell y
+// Unity, dentro de la Draconis Combine). Sin esto se verían como espacio vacío con su frontera. Cada
+// celda de un hueco cerrado pasa al sistema más cercano de su borde; el espacio exterior toca el
+// borde de la rejilla y se queda vacío.
+const fillEnclosedGaps = (systems: StarSystem[], { originX, originY, cellSize, cols, rows, nearest }: TerritoryIndex) => {
+  const seen = new Uint8Array(cols * rows);
+  for (let start = 0; start < nearest.length; start++) {
+    if (nearest[start] >= 0 || seen[start]) continue;
+    const cells: number[] = [];
+    const border = new Set<number>();
+    let isOpen = false;
+    const stack = [start];
+    seen[start] = 1;
+    while (stack.length > 0) {
+      const cell = stack.pop()!;
+      cells.push(cell);
+      const col = cell % cols;
+      const row = (cell - col) / cols;
+      if (col === 0 || row === 0 || col === cols - 1 || row === rows - 1) isOpen = true;
+      const neighbours = [col > 0 ? cell - 1 : -1, col < cols - 1 ? cell + 1 : -1, row > 0 ? cell - cols : -1, row < rows - 1 ? cell + cols : -1];
+      for (const next of neighbours) {
+        if (next < 0) continue;
+        if (nearest[next] >= 0) border.add(nearest[next]);
+        else if (!seen[next]) {
+          seen[next] = 1;
+          stack.push(next);
+        }
+      }
+    }
+    if (isOpen) continue;
+    for (const cell of cells) {
+      const x = originX + (cell % cols) * cellSize;
+      const y = originY + Math.floor(cell / cols) * cellSize;
+      let best = Infinity;
+      for (const index of border) {
+        const distance = Math.hypot(x - systems[index].x, y - systems[index].y);
+        if (distance < best) {
+          best = distance;
+          nearest[cell] = index;
+        }
+      }
+    }
+  }
 };
 
 export const getTerritoryOwner = (

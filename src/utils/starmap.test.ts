@@ -171,6 +171,18 @@ describe('búsqueda, territorios y URL', () => {
     expect(getTerritoryOwner(index, data.systems, 2000, 2000, '3015-01-01')).toBeNull();
   });
 
+  it('un hueco sin sistemas rodeado de territorio es de los sistemas de su borde', () => {
+    // Con el radio del mapa (renderer.ts).
+    const index = buildTerritoryIndex(data.systems, { radius: 34 });
+    // Entre Shimonoseki, Worrell y Unity no hay ningún sistema a menos de 34 años luz.
+    expect(getTerritoryOwner(index, data.systems, 257, 254, '3025-06-01')).toBe('Kurita');
+    // Junto a Campoleone, entre Marik, la Marian Hegemony y la periferia.
+    expect(getTerritoryOwner(index, data.systems, -349, -324, '3025-06-01')).not.toBeNull();
+    // Un sistema sin dueño sigue siendo un hueco.
+    const jp = system('JP-AA-632');
+    expect(getTerritoryOwner(index, data.systems, jp.x, jp.y, '3025-06-01')).toBeNull();
+  });
+
   it('el contorno de cada facción rodea sus sistemas y deja fuera los de otras', () => {
     const index = buildTerritoryIndex(data.systems);
     const contours = getTerritoryContours(index, data.systems, '3015-01-01');
