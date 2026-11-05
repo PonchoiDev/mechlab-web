@@ -141,3 +141,44 @@ describe('condiciones de las HRQ', () => {
     expect(requirements.every(requirement => requirement.after === 'Destabilization')).toBe(true);
   });
 });
+
+// Criterios de aceptación de docs/specs/recompensas-hrq.md (issue #70).
+describe('recompensas de las HRQ', () => {
+  const reward = (name: string, mode: 'campaign' | 'career' | null = null) => {
+    const found = quest(name).rewards.find(candidate => candidate.mode === mode);
+    if (!found) throw new Error(`${name} no tiene recompensa en el modo ${mode}`);
+    return found;
+  };
+
+  it('CA1: Bow and Arrow da C-Bills, reputación y el Archer ARC-AGC', () => {
+    expect(reward('Bow and Arrow')).toMatchObject({ cbills: 304825, reputation: 2500, mechs: [{ id: 'ARC-AGC', name: 'Archer' }] });
+  });
+
+  it('CA2: Pirate Hunt paga distinto en campaña y en carrera', () => {
+    const campaign = reward('Pirate Hunt', 'campaign');
+    expect(campaign).toMatchObject({ cbills: 3202500, reputation: 4500 });
+    expect(campaign.weapons.map(weapon => weapon.name)).toContain('Gauss Rifle');
+    const career = reward('Pirate Hunt', 'career');
+    expect(career).toMatchObject({ cbills: 705300, reputation: 220 });
+    expect(career.weapons).toContainEqual({ name: 'Large Laser', tier: 'Tier 3', count: 1 });
+  });
+
+  it('CA3: Tributes for the Imperator da el Warhammer una sola vez', () => {
+    expect(reward('Tributes for the Imperator')).toMatchObject({ cbills: 1104825, mechs: [{ id: 'WHM-6R', name: 'Warhammer' }] });
+  });
+
+  it('CA4: Those in Need suma las recompensas de sus partes', () => {
+    expect(reward('Those in Need').mechs.map(mech => mech.id)).toEqual(['HCT-3F', 'ASN-25']);
+  });
+
+  it('CA5: todos los Mechs de las recompensas tienen nombre', () => {
+    const mechs = data.quests.flatMap(candidate => candidate.rewards.flatMap(candidate => candidate.mechs));
+    expect(mechs.length).toBeGreaterThan(20);
+    expect(mechs.filter(mech => !mech.name)).toEqual([]);
+  });
+
+  it('CA6: el buscador encuentra por recompensa', () => {
+    expect(searchQuests(data, 'gauss').map(found => found.name)).toContain('Pirate Hunt');
+    expect(searchQuests(data, 'ARC-AGC').map(found => found.name)).toEqual(['Bow and Arrow']);
+  });
+});
