@@ -120,6 +120,14 @@ export const decodeBuild = (code: string, mechs: Mech[], catalog: Item[]): Share
 export const getStockBuild = (mech: Mech, mechs: Mech[], catalog: Item[]): SharedBuild | null =>
   mech.stockBuild ? decodeBuild(mech.stockBuild, mechs, catalog) : null;
 
+// El mapa estelar enlaza cada 'Mech de un mercado con ?mech=<id>: se abre con su build de serie.
+export const MECH_PARAM = 'mech';
+
+export const getStockBuildById = (id: string, mechs: Mech[], catalog: Item[]): SharedBuild | null => {
+  const mech = mechs.find(candidate => candidate.id === id);
+  return mech ? getStockBuild(mech, mechs, catalog) : null;
+};
+
 export const getBuildUrl = (code: string): string => {
   const url = new URL(import.meta.env.BASE_URL, window.location.origin);
   url.searchParams.set(BUILD_PARAM, code);
@@ -132,9 +140,11 @@ export const getBuildUrl = (code: string): string => {
 export const readBuildFromLocation = (mechs: Mech[], catalog: Item[]): { build: SharedBuild | null } | null => {
   const url = new URL(window.location.href);
   const code = url.searchParams.get(BUILD_PARAM);
-  if (code === null) return null;
+  const mechId = url.searchParams.get(MECH_PARAM);
+  if (code === null && mechId === null) return null;
 
   url.searchParams.delete(BUILD_PARAM);
+  url.searchParams.delete(MECH_PARAM);
   window.history.replaceState(window.history.state, '', url);
-  return { build: decodeBuild(code, mechs, catalog) };
+  return { build: code !== null ? decodeBuild(code, mechs, catalog) : getStockBuildById(mechId!, mechs, catalog) };
 };
