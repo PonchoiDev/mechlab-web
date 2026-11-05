@@ -14,6 +14,8 @@ npm run build    # tsc + build de producción
 python3 tools/generar_items.py    # src/data/items.json
 python3 tools/generar_mechs.py    # src/data/mechs.json (lee items.json: va después)
 python3 tools/generar_traits.py   # src/data/traits.json
+python3 tools/extraer_mapa.py "<carpeta del juego>"  # tools/datos-juego/starmap/, del .pak de la instalación
+python3 tools/generar_mapa.py     # src/data/starmap.json
 ```
 
 Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` sin errores.

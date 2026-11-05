@@ -1,7 +1,7 @@
 # Especificación: mapa estelar por fechas
 
 - **Issue:** [#61](https://github.com/PonchoiDev/mechlab-web/issues/61)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/starmap.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -82,3 +82,18 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
 
 1. **Datos y lógica (CA1 a CA13):** `src/utils/starmap.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, a 1920 × 1080 y a 390 × 844. Se compara con capturas del mapa del juego en 3015 y en 3042, y se comprueban el arrastre, el zoom, la ficha, el buscador y el control de fecha.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 2172 sistemas (sin la fila de marcador y el sistema oculto), 38 facciones con dueño entre 3015 y 3060, 19 eventos, 71 clústeres con nombre y 35 centros industriales con 205 sistemas. `starmap.json` pesa 300 KB (44 KB comprimido) y solo lo descarga la página del mapa.
+- **Tests:** los trece criterios (CA1 a CA13) están en `src/utils/starmap.test.ts` y pasan, junto a dos más: el paso de días a fechas del control deslizante y el recuento de la leyenda.
+- **Interfaz:** comprobada en el navegador a 1920 × 1080 y a 390 × 844, en desarrollo y con el build de producción.
+  - En 3015 se ven las cinco casas con sus colores del juego y la periferia en gris. En enero de 3042 la Federated Commonwealth ocupa Lyran y Davion en amarillo, con Rasalhague en turquesa, como en la captura del juego.
+  - Al buscar «tukay», el mapa se centra en Tukayyid, la ficha muestra sus cinco propietarios y la URL pasa a `?date=3052-05-10&system=Tukayyid`.
+- **Decisiones durante el desarrollo:**
+  - Los clústeres no son assets de facción con su nombre: el nombre visible sale de una referencia a `Faction_StringTable`. Un material del mapa se llama igual que la facción `Periphery`, así que el extractor se queda con el asset que tiene `FactionType`.
+  - Los clústeres de reparación de la campaña (`RepairSystem_*`) no se dibujan: los centros industriales salen de los clústeres `SafeZone_*`, que traen su capital.
+  - El halo del borde va en su propia textura y se atenúa al acercarse. Si no, al ampliar se convertía en una banda blanca, sobre todo con los colores pálidos de los Clanes.
+  - En el móvil, el zoom y la leyenda van encima del panel de fecha para no tapar la ficha.
+  - La portada pasa a «SELECT TOOL», con una carátula para el mapa hecha con una captura del propio mapa.

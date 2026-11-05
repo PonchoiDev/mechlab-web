@@ -7,6 +7,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 | | |
 |---|---|
 | **Live site** | **https://mw-builder.com/mercs/** |
+| Star map | https://mw-builder.com/mercs/starmap/ |
 | Slides | [View on Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) (in Spanish) |
 | Video walkthrough | [Watch on Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) (in Spanish) |
 | Login | None: the site works without an account and builds are saved in the browser |
@@ -38,7 +39,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (272 tests, V8 coverage) |
+| Tests | Vitest 5 (287 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -81,6 +82,11 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - A link that opens the build as it is (`/mercs/?b=…`).
 - A PNG image of the build with the 'Mech, its equipment, its upgrades and its stats, ready to copy or download.
 
+**Star map**
+- Its own page with a map of the Inner Sphere that looks like the game's: each faction's territory in its color, clusters and industrial hubs.
+- Borders on any date from 3015 to 3060, with a slider and jumps to the 19 game events that move them.
+- A card for each system with its faction, cluster and owner history, a search by name and a link with the date and the system.
+
 **Other**
 - What's new bell with the changes the user has not seen yet.
 - Feedback form delivered by email without exposing the developer's address.
@@ -116,19 +122,24 @@ In development, the Vite server proxies the Sarna images, and the feedback form 
 src/
   App.tsx               Main component: build state and page layout
   components/           UI components (board, picker, upgrades panel, dialogs…)
+  starmap/              Star map page: canvas, system card, date and search
   hooks/                Build state, saved builds, view preferences and Sarna image
   utils/                Configurator logic: calculations, fitting rules, upgrades, build codes
   services/             Sarna API, clipboard and PNG build image (canvas)
   types/                TypeScript types
-  data/                 Generated mechs.json, items.json and traits.json, plus the changelog
+  data/                 Generated mechs.json, items.json, traits.json and starmap.json, plus the changelog
   test/                 Shared test fixtures
 worker/                 Cloudflare Worker: Sarna image proxy and feedback form
+starmap/index.html      Entry of the star map page (/mercs/starmap/)
 site/                   Landing page at the domain root (mw-builder.com)
 docs/                   Analysis, architecture, UML diagrams and development with AI
 tools/
   generar_mechs.py      Generates src/data/mechs.json
   generar_items.py      Generates src/data/items.json
   generar_traits.py     Generates src/data/traits.json (cantina upgrades)
+  extraer_mapa.py       Extracts the star map data from the game's .pak
+  generar_mapa.py       Generates src/data/starmap.json
+  ue4.py                Reads the .pak and the Unreal Engine 4 assets
   datos-juego/          Files exported from the game
 .github/                Continuous integration, CodeQL and Dependabot
 .coderabbit.yaml        CodeRabbit code review settings
@@ -161,9 +172,27 @@ python3 tools/generar_traits.py
 
 `generar_mechs.py` also reads `items.json` to validate the stock loadouts, so it runs after `generar_items.py`. The scripts skip non-playable variants (campaign, tutorial, bosses and cinematics) and, when they finish, report what they could not reconcile: stock parts that do not fit, variants without a unit card, or hardpoints whose size had to be inferred.
 
+### Star map
+
+The map data is not exported with the mod editor: `extraer_mapa.py` reads it straight from the `.pak` file of the installation, which is neither encrypted nor compressed, with a small Unreal Engine 4 reader (`ue4.py`). It only reads the index and the assets it needs (about 7 MB out of 106 GB), in under a second, and saves them as JSON in `tools/datos-juego/starmap/`. It only has to run again when a patch changes the map.
+
+```sh
+python3 tools/extraer_mapa.py "/path/to/MechWarrior 5 Mercenaries"
+python3 tools/generar_mapa.py
+```
+
+| File | Game asset | Contents |
+|---|---|---|
+| `sistemas.json` | `InnerSphereData/MW5_InnerSphereData` | 2174 systems with coordinates, cluster and the date of each change of owner |
+| `facciones.json` | `Factions/*` | Name and map stencil of each faction |
+| `colores.json` | `Faction_Colours_MPC` | Color of each stencil, of the Clans, of clusters and of industrial hubs |
+| `eventos.json` | `BorderChanges/*/Borders*` | The 19 border changes, from 3025 to 3060 |
+| `centros_industriales.json` | `SafeZone_*_ClusterAsset` | The 35 industrial hubs with their capital and systems |
+| `clusteres.json` and `textos.json` | Cluster assets and `Faction_StringTable` | Cluster names |
+
 ## Quality and checks against the game
 
-- **272 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **287 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
