@@ -86,7 +86,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Ficha de cada sistema con su facción, su clúster y su historial de propietarios, la reputación recomendada y la dificultad de su clúster o su centro industrial en campaña y en carrera, buscador por nombre y enlace con la fecha y el sistema.
 - Las 64 misiones de alta recompensa (HRQ) del juego: dónde se ofrece cada una, su ruta por los sistemas de sus misiones, sus condiciones (reputación, fechas, misión previa o excluyente), su recompensa (C-Bills, reputación, 'Mechs, armas y equipo) y un buscador por nombre, sistema o quien la encarga.
 - Los 22 mercados fijos de las campañas de los DLC y el Atlas II de Romulus, con un buscador de dónde comprar cada 'Mech o arma. Cada 'Mech se abre en el MechLab con su build de serie (`/mercs/?mech=AS7-D-H`).
-- Find a 'Mech: el mapa se colorea según la rareza de una variante en el mercado de cada facción, en la fecha elegida, con sus fuentes fijas (HRQ, mercados especiales) y el enlace se comparte (`?mech=AS7-D`). Hero 'Mechs lista los 'Mechs hero y las variantes especiales que solo se consiguen en un sitio, como el Wolverine de Razer.
+- Find a 'Mech: el mapa se colorea según la rareza de una variante en el mercado de cada facción, en la fecha elegida, con sus fuentes fijas (HRQ, mercados especiales) y el enlace se comparte (`?mech=AS7-D`). Special 'Mech locations lista los 'Mechs hero y las variantes especiales que solo se consiguen en un sitio, como el Wolverine de Razer.
 
 **Otros**
 - Campana de novedades con los cambios que el usuario aún no ha visto.
