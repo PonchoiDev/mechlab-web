@@ -1,4 +1,6 @@
+import itertools
 import json
+import math
 import os
 import re
 from collections import Counter
@@ -58,6 +60,56 @@ NOMBRES_EVENTOS = {
 # los clústeres SafeZone) y los de la historia, que el juego deja con un nombre provisional.
 REGEX_CLUSTER_OCULTO = re.compile(r"^(RepairSystem_\d+|StoryCluster\d+)$")
 REGEX_PALABRAS = re.compile(r"(?<=[a-z])(?=[A-Z])")
+
+
+# Las mallas de los centros industriales usan unas 8 unidades por año luz y el eje X invertido. La
+# escala exacta varía un poco de una malla a otra, así que se busca la que mejor encaja.
+ESCALAS_MALLA = [valor / 20 for valor in range(120, 200)]
+# Una pareja de estrellas está unida si la malla pasa cerca de casi todo el tramo entre ellas (las
+# líneas son discontinuas, así que se mira a menos de un año luz de algún vértice).
+COBERTURA_LINEA = 0.75
+MUESTRAS_LINEA = 12
+
+
+def distancia_a_tramo(punto, inicio, fin):
+    (px, py), (ax, ay), (bx, by) = punto, inicio, fin
+    dx, dy = bx - ax, by - ay
+    longitud = dx * dx + dy * dy
+    t = max(0, min(1, ((px - ax) * dx + (py - ay) * dy) / longitud)) if longitud else 0
+    return math.hypot(px - ax - t * dx, py - ay - t * dy)
+
+
+def lineas_de_centro(centro, posiciones):
+    """Parejas de sistemas que une la malla de un centro industrial."""
+    malla = centro.get("malla")
+    ids = centro["sistemas"]
+    if not malla or len(ids) < 2:
+        return []
+    xs = [x for x, _ in malla]
+    ys = [y for _, y in malla]
+    centro_malla = ((min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2)
+    estrellas = [posiciones[id_sistema] for id_sistema in ids]
+    centro_x = (min(-x for x, _ in estrellas) + max(-x for x, _ in estrellas)) / 2
+    centro_y = (min(y for _, y in estrellas) + max(y for _, y in estrellas)) / 2
+
+    mejor = None
+    for escala in ESCALAS_MALLA:
+        # Se alinean los centros de las dos cajas y se mide lo lejos que queda la malla de los tramos.
+        puntos = [(centro_malla[0] + escala * (-x - centro_x), centro_malla[1] + escala * (y - centro_y)) for x, y in estrellas]
+        tramos = list(itertools.combinations(puntos, 2))
+        error = sum(min(distancia_a_tramo(vertice, a, b) for a, b in tramos) for vertice in malla) / len(malla)
+        if mejor is None or error < mejor[0]:
+            mejor = (error, escala, puntos)
+    _, escala, puntos = mejor
+
+    lineas = []
+    for (i, a), (j, b) in itertools.combinations(enumerate(puntos), 2):
+        muestras = [(a[0] + (b[0] - a[0]) * t / MUESTRAS_LINEA, a[1] + (b[1] - a[1]) * t / MUESTRAS_LINEA)
+                    for t in range(2, MUESTRAS_LINEA - 1)]
+        cerca = sum(1 for muestra in muestras if any(math.hypot(muestra[0] - x, muestra[1] - y) < escala for x, y in malla))
+        if cerca / len(muestras) > COBERTURA_LINEA:
+            lineas.append(sorted([ids[i], ids[j]]))
+    return sorted(lineas)
 
 
 def leer(nombre):
@@ -175,13 +227,17 @@ def main():
         if INICIO < evento["fecha"] <= FIN
     ]
 
+    posiciones = {int(fila["Name"]): (fila["PosX"], fila["PosY"]) for fila in sistemas_juego}
     datos = {
         "range": {"start": INICIO, "end": FIN},
         "colors": {"cluster": color_hex(colores["Warzone"]), "hub": color_hex(colores["Safezone"])},
         "factions": facciones,
         "events": eventos,
         "clusters": clusteres,
-        "hubs": {id_centro: {"capital": centro["capital"]} for id_centro, centro in centros.items()},
+        "hubs": {
+            id_centro: {"capital": centro["capital"], "links": lineas_de_centro(centro, posiciones)}
+            for id_centro, centro in centros.items()
+        },
         "systems": sistemas,
     }
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
@@ -192,6 +248,10 @@ def main():
           f"{len(clusteres)} clústeres y {len(centros)} centros industriales")
     if sin_nombre:
         print(f"Aviso: clústeres sin nombre visible: {', '.join(sin_nombre)}")
+    sin_lineas = [id_centro for id_centro, centro in datos["hubs"].items()
+                  if not centro["links"] and len(centros[id_centro]["sistemas"]) > 1]
+    if sin_lineas:
+        print(f"Aviso: centros industriales sin líneas: {', '.join(sin_lineas)}")
     capitales_sin_sistema = [id_centro for id_centro, centro in centros.items()
                              if not any(sistema["id"] == centro["capital"] for sistema in sistemas)]
     if capitales_sin_sistema:

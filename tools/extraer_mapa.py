@@ -2,6 +2,7 @@ import datetime
 import json
 import os
 import re
+import struct
 import sys
 
 from ue4 import Asset, Pak
@@ -28,6 +29,11 @@ REGEX_EVENTO = re.compile(r"BorderChanges/([^/]+)/(Borders[^/]+)\.uasset$")
 REGEX_CENTRO = re.compile(r"Clusters/(SafeZone_\d+)/SafeZone_\d+_ClusterAsset\.uasset$")
 # Las fechas de Unreal (FDateTime) son ticks de 100 ns desde el 1 de enero del año 1.
 TICKS_POR_MICROSEGUNDO = 10
+
+
+def ruta_de_juego(ruta):
+    # /Game/Campaign/X.X apunta a MW5Mercs/Content/Campaign/X dentro del .pak.
+    return CONTENIDO + ruta.split(".")[0][len("/Game/"):]
 
 
 def sin_extension(ruta):
@@ -97,6 +103,17 @@ def extraer_eventos(pak):
     return sorted(eventos, key=lambda evento: evento["fecha"])
 
 
+def vertices_de_malla(pak, ruta):
+    """Posiciones (x, y) de una StaticMesh plana. Se busca la cabecera del buffer de posiciones
+    (stride 12 y número de vértices, repetidos), que no siempre está alineada a 4 bytes."""
+    datos = pak.leer_archivo(ruta + ".uexp")
+    for inicio in range(len(datos) - 16):
+        stride, total, tamano, total_bis = struct.unpack_from("<4i", datos, inicio)
+        if stride == tamano == 12 and total == total_bis and 4 <= total < 100000:
+            return [[round(valor, 1) for valor in struct.unpack_from("<2f", datos, inicio + 16 + 12 * i)] for i in range(total)]
+    return None
+
+
 def extraer_centros_industriales(pak):
     centros = {}
     for ruta in pak.buscar(CENTROS_INDUSTRIALES):
@@ -107,7 +124,13 @@ def extraer_centros_industriales(pak):
         nombre = coincidencia.group(1)
         configuracion = asset.propiedades("ClusterToiDataFragment_C")["Config"]
         capital = next(valor for clave, valor in configuracion.items() if clave.startswith("ClusterCapitalStarSystemId"))
-        centros[nombre] = {"capital": capital, "sistemas": asset.propiedades(nombre + "_ClusterAsset")["SystemIds"]}
+        cluster = asset.propiedades(nombre + "_ClusterAsset")
+        centro = {"capital": capital, "sistemas": cluster["SystemIds"]}
+        # Las líneas que unen las estrellas del centro son una malla (ClusterConstellation) en
+        # coordenadas propias; generar_mapa.py la encaja sobre los sistemas para saber qué estrellas une.
+        if cluster.get("ClusterConstellation"):
+            centro["malla"] = vertices_de_malla(pak, ruta_de_juego(cluster["ClusterConstellation"]))
+        centros[nombre] = centro
     return dict(sorted(centros.items(), key=lambda par: int(par[0].split("_")[1])))
 
 

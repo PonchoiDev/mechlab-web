@@ -180,6 +180,102 @@ export const getTerritoryOwner = (
 
 type Point = [number, number];
 
+// Segmentos de marching squares para cada combinación de esquinas dentro del territorio. Las
+// esquinas van 0 abajo izquierda, 1 abajo derecha, 2 arriba derecha y 3 arriba izquierda; los lados,
+// 0 abajo, 1 derecha, 2 arriba y 3 izquierda.
+const SQUARE_SEGMENTS: [number, number][][] = [
+  [], [[3, 0]], [[0, 1]], [[3, 1]], [[1, 2]], [[3, 0], [1, 2]], [[0, 2]], [[3, 2]],
+  [[2, 3]], [[0, 2]], [[0, 1], [2, 3]], [[1, 2]], [[3, 1]], [[0, 1]], [[3, 0]], []
+];
+
+// Suaviza un contorno cerrado recortando cada esquina (Chaikin), para que no se vea la rejilla.
+const smoothLoop = (loop: Point[], iterations = 2): Point[] => {
+  let points = loop;
+  for (let step = 0; step < iterations; step++) {
+    points = points.flatMap((point, i): Point[] => {
+      const next = points[(i + 1) % points.length];
+      return [
+        [point[0] * 0.75 + next[0] * 0.25, point[1] * 0.75 + next[1] * 0.25],
+        [point[0] * 0.25 + next[0] * 0.75, point[1] * 0.25 + next[1] * 0.75]
+      ];
+    });
+  }
+  return points;
+};
+
+// Contornos del territorio de cada facción en una fecha, en años luz: lazos cerrados (los huecos
+// también son lazos, así que se rellenan con la regla par-impar). Al ser líneas y no una textura,
+// el borde se ve nítido con cualquier zoom.
+export const getTerritoryContours = (
+  index: TerritoryIndex,
+  systems: StarSystem[],
+  date: GameDate
+): Map<string, Point[][]> => {
+  const { cols, rows, nearest, originX, originY, cellSize } = index;
+  const owners = systems.map(system => getOwnerAt(system, date));
+  const ownerAt = (col: number, row: number) => {
+    if (col < 0 || row < 0 || col >= cols || row >= rows) return null;
+    const system = nearest[row * cols + col];
+    return system < 0 ? null : owners[system];
+  };
+  // Cada lado de la rejilla tiene un número: así dos cuadros vecinos comparten el mismo punto.
+  const stride = cols + 2;
+  const edgeKey = (col: number, row: number, side: number) => {
+    const [c, r, vertical] = side === 0 ? [col, row, 0] : side === 1 ? [col + 1, row, 1] : side === 2 ? [col, row + 1, 0] : [col, row, 1];
+    return (((r + 1) * stride + (c + 1)) << 1) | vertical;
+  };
+  const edgePoint = (key: number): Point => {
+    const vertical = key & 1;
+    const cell = key >> 1;
+    const col = (cell % stride) - 1;
+    const row = Math.floor(cell / stride) - 1;
+    return [originX + (col + (vertical ? 0 : 0.5)) * cellSize, originY + (row + (vertical ? 0.5 : 0)) * cellSize];
+  };
+
+  const links = new Map<string, Map<number, number[]>>();
+  for (let row = -1; row < rows; row++) {
+    for (let col = -1; col < cols; col++) {
+      const corners = [ownerAt(col, row), ownerAt(col + 1, row), ownerAt(col + 1, row + 1), ownerAt(col, row + 1)];
+      if (corners[0] === corners[1] && corners[1] === corners[2] && corners[2] === corners[3]) continue;
+      for (const faction of new Set(corners)) {
+        if (!faction) continue;
+        const mask = corners.reduce((bits, owner, i) => (owner === faction ? bits | (1 << i) : bits), 0);
+        let graph = links.get(faction);
+        if (!graph) links.set(faction, (graph = new Map()));
+        for (const [from, to] of SQUARE_SEGMENTS[mask]) {
+          const a = edgeKey(col, row, from);
+          const b = edgeKey(col, row, to);
+          graph.set(a, [...(graph.get(a) ?? []), b]);
+          graph.set(b, [...(graph.get(b) ?? []), a]);
+        }
+      }
+    }
+  }
+
+  const contours = new Map<string, Point[][]>();
+  for (const [faction, graph] of links) {
+    const visited = new Set<number>();
+    const loops: Point[][] = [];
+    for (const start of graph.keys()) {
+      if (visited.has(start)) continue;
+      const loop: Point[] = [];
+      let previous = -1;
+      let current = start;
+      while (!visited.has(current)) {
+        visited.add(current);
+        loop.push(edgePoint(current));
+        const next = graph.get(current)!.find(candidate => candidate !== previous && !visited.has(candidate));
+        if (next === undefined) break;
+        previous = current;
+        current = next;
+      }
+      if (loop.length >= 3) loops.push(smoothLoop(loop));
+    }
+    contours.set(faction, loops);
+  }
+  return contours;
+};
+
 const cross = (o: Point, a: Point, b: Point) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
 
 // Contorno de un clúster: envolvente convexa de sus sistemas con un margen redondeado, en sentido

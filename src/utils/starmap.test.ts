@@ -15,6 +15,7 @@ import {
   getNextEvent,
   getOwnerAt,
   getPreviousEvent,
+  getTerritoryContours,
   getTerritoryOwner,
   parseMapQuery,
   searchSystems,
@@ -137,6 +138,29 @@ describe('búsqueda, territorios y URL', () => {
     const index = buildTerritoryIndex(data.systems);
     expect(getTerritoryOwner(index, data.systems, tharkad.x + 1, tharkad.y + 1, '3015-01-01')).toBe('Steiner');
     expect(getTerritoryOwner(index, data.systems, 2000, 2000, '3015-01-01')).toBeNull();
+  });
+
+  it('el contorno de cada facción rodea sus sistemas y deja fuera los de otras', () => {
+    const index = buildTerritoryIndex(data.systems);
+    const contours = getTerritoryContours(index, data.systems, '3015-01-01');
+    // Regla par-impar: un punto está dentro si cruza un número impar de lados.
+    const inside = (loops: [number, number][][], [x, y]: [number, number]) => loops.reduce((count, loop) => count + loop.filter(([ax, ay], i) => {
+      const [bx, by] = loop[(i + 1) % loop.length];
+      return (ay > y) !== (by > y) && x < ax + ((y - ay) * (bx - ax)) / (by - ay);
+    }).length, 0) % 2 === 1;
+    const tharkad = system('Tharkad');
+    const luthien = system('Luthien');
+    expect(inside(contours.get('Steiner')!, [tharkad.x, tharkad.y])).toBe(true);
+    expect(inside(contours.get('Steiner')!, [luthien.x, luthien.y])).toBe(false);
+    expect(inside(contours.get('Kurita')!, [luthien.x, luthien.y])).toBe(true);
+  });
+
+  it('los centros industriales unen sus estrellas con las líneas de la malla del juego', () => {
+    const diboll = getHubs(data).find(hub => hub.capital.name === 'Diboll')!;
+    expect(data.hubs[diboll.id].links).toHaveLength(6);
+    expect(data.hubs[diboll.id].links).toContainEqual([diboll.capital.id, system('Broaddus').id]);
+    const members = new Set(diboll.systems.map(member => member.id));
+    expect(data.hubs[diboll.id].links.flat().every(id => members.has(id))).toBe(true);
   });
 
   it('CA13: la fecha y el sistema se leen y se escriben en la URL', () => {

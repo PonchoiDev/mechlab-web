@@ -35,6 +35,7 @@ export interface StarmapData {
   factions: Record<string, Faction>;
   events: StarEvent[];
   clusters: Record<string, { name: string }>;
-  hubs: Record<string, { capital: number }>;
+  // Capital de cada centro industrial y parejas de sistemas que unen sus líneas en el mapa.
+  hubs: Record<string, { capital: number; links: [number, number][] }>;
   systems: StarSystem[];
 }
