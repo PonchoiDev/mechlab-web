@@ -6,6 +6,7 @@ import type { AvailabilityData, StarmapData } from '../types/starmap';
 import {
   getAvailabilityAt,
   getFactionTable,
+  getFirstProduction,
   getFixedSources,
   getHeroMechs,
   getMarketRarity,
@@ -137,6 +138,13 @@ describe('rareza de cada variante por facción', () => {
     const terra = data.systems.find(system => system.name === 'Terra')!;
     expect(factions.find(entry => entry.id === 'ComStar')?.systemIds).toEqual([terra.id]);
     expect(factions.find(entry => entry.id === 'Steiner')?.systemIds).toBeUndefined();
+  });
+
+  it('CA15: si lo buscado todavía no existe, se sabe desde cuándo', () => {
+    expect(searchMechs(availability, 'as7-d-h', '3030-01-01')).toEqual([]);
+    expect(getFirstProduction(availability, 'as7-d-h')).toBe('3041-11-11');
+    expect(getFirstProduction(availability, 'arctic wolf')).toBe('3067-01-01');
+    expect(getFirstProduction(availability, 'no existe')).toBeNull();
   });
 
   it('CA10: las variantes están en el MechLab y todas las facciones del mapa tienen tabla salvo el ARDC', () => {
