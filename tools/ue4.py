@@ -22,10 +22,14 @@ class Lector:
         self.datos = datos
         self.posicion = posicion
 
-    def leer(self, formato):
+    def varios(self, formato):
         valores = struct.unpack_from("<" + formato, self.datos, self.posicion)
         self.posicion += struct.calcsize("<" + formato)
-        return valores[0] if len(valores) == 1 else list(valores)
+        return valores
+
+    def leer(self, formato):
+        """Un solo valor; para varios seguidos, varios()."""
+        return self.varios(formato)[0]
 
     def cadena(self):
         longitud = self.leer("i")
@@ -63,7 +67,7 @@ class Pak:
             indice.posicion += 16 + 20
         if not indice.leer("i"):
             raise ValueError("El .pak no trae el índice de directorios")
-        inicio_directorios, tamano_directorios = indice.leer("qq")
+        inicio_directorios, tamano_directorios = indice.varios("qq")
         indice.posicion += 20
         tamano_entradas = indice.leer("i")
         self.entradas = indice.datos[indice.posicion:indice.posicion + tamano_entradas]
@@ -114,18 +118,18 @@ class Asset:
         version_antigua = cabecera.leer("i")
         if version_antigua != -4:
             cabecera.leer("i")
-        cabecera.leer("ii")
+        cabecera.varios("ii")
         if version_antigua <= -2:
             versiones_propias = cabecera.leer("i")
             cabecera.posicion += 20 * versiones_propias
         tamano_cabecera = cabecera.leer("i")
         cabecera.cadena()
         flags = cabecera.leer("I")
-        total_nombres, inicio_nombres = cabecera.leer("ii")
+        total_nombres, inicio_nombres = cabecera.varios("ii")
         if not flags & FILTRO_SOLO_EDITOR:
             cabecera.cadena()
-        cabecera.leer("ii")
-        total_exports, inicio_exports = cabecera.leer("ii")
+        cabecera.varios("ii")
+        total_exports, inicio_exports = cabecera.varios("ii")
 
         cabecera.posicion = inicio_nombres
         self.nombres = []
@@ -137,8 +141,8 @@ class Asset:
         for numero in range(total_exports):
             cabecera.posicion = inicio_exports + numero * TAMANO_EXPORT + 16
             nombre = self.nombres[cabecera.leer("i")]
-            cabecera.leer("iI")
-            _tamano, inicio = cabecera.leer("qq")
+            cabecera.varios("iI")
+            _tamano, inicio = cabecera.varios("qq")
             # El .uexp continúa al .uasset: los desplazamientos cuentan desde el principio de los dos.
             self.exports[nombre] = inicio - tamano_cabecera
         self.datos = uexp
@@ -187,7 +191,7 @@ class LectorPropiedades:
         self.lector = lector
 
     def nombre(self):
-        indice, numero = self.lector.leer("ii")
+        indice, numero = self.lector.varios("ii")
         nombre = self.nombres[indice]
         return nombre if numero == 0 else f"{nombre}_{numero - 1}"
 
@@ -198,7 +202,7 @@ class LectorPropiedades:
             if clave == "None":
                 return resultado
             tipo = self.nombre()
-            tamano, indice = self.lector.leer("ii")
+            tamano, indice = self.lector.varios("ii")
             extra = {}
             if tipo == "StructProperty":
                 extra["struct"] = self.nombre()
@@ -250,7 +254,7 @@ class LectorPropiedades:
             if extra["interno"] == "StructProperty":
                 self.nombre()
                 self.nombre()
-                lector.leer("ii")
+                lector.varios("ii")
                 struct_interno = self.nombre()
                 lector.posicion += 16
                 if lector.leer("B"):
@@ -264,7 +268,9 @@ class LectorPropiedades:
 
     def struct(self, nombre):
         if nombre in STRUCTS_BINARIOS:
-            return self.lector.leer(STRUCTS_BINARIOS[nombre])
+            # Las fechas son un solo número; vectores y colores, una lista.
+            valores = self.lector.varios(STRUCTS_BINARIOS[nombre])
+            return valores[0] if len(valores) == 1 else list(valores)
         if nombre == "Guid":
             self.lector.posicion += 16
             return None
