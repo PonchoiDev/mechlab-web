@@ -123,7 +123,10 @@ describe('condiciones de las HRQ', () => {
     expect(getQuestAvailability(quest('Pirate Hunt'), '3015-01-01').state).toBe('available');
   });
 
-  it('CA6: todas las HRQ piden un nivel de reputación', () => {
-    expect(data.quests.filter(candidate => !candidate.requirements.some(requirement => requirement.reputation !== null)).map(candidate => candidate.name)).toEqual([]);
+  it('CA6: todas tienen alguna condición, y solo Adam Steiner y Guerrero no piden reputación', () => {
+    const hasCondition = (candidate: Quest) => candidate.requirements.some(requirement => requirement.reputation !== null || requirement.from !== null);
+    expect(data.quests.filter(candidate => !hasCondition(candidate)).map(candidate => candidate.name)).toEqual([]);
+    const withoutReputation = data.quests.filter(candidate => !candidate.requirements.some(requirement => requirement.reputation !== null));
+    expect(withoutReputation.map(candidate => candidate.name).sort()).toEqual(['Adam Steiner', 'Ideals of War']);
   });
 });

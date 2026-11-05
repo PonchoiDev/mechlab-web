@@ -22,7 +22,7 @@ Cada HRQ tiene un arco de campaña (`MWCampaignArc`) en su carpeta, con eventos 
 
 **Decisiones sobre los datos:**
 
-- **Arcos que cuentan:** los de la carpeta de la cadena. Los arcos de avisos y transmisiones (`…Warnings`, `…Transmission`) recuerdan plazos, pero no deciden cuándo se ofrece la HRQ, así que no se usan.
+- **Arcos que cuentan:** los de la carpeta de la cadena. Los arcos de avisos y transmisiones (`…Warnings`, `…Transmission`) recuerdan plazos, y los de inicio de la campaña del DLC3 (`_StartConditions`, `…QuickStart`) son de la campaña, no de la HRQ; ninguno decide cuándo se ofrece, así que no se usan.
 - **Reputación:** el valor más alto de las condiciones de reputación de sus arcos.
 - **Desde:** la fecha más temprana de las condiciones de fecha de los eventos que no son de caducidad. **Hasta:** la de los eventos `…Expired`.
 - **Campaña y carrera:** si una cadena existe en los dos modos, cada modo conserva sus condiciones, que pueden ser distintas (The False Flag pide 10 en campaña y 12 en carrera).
@@ -47,7 +47,7 @@ Cada HRQ tiene un arco de campaña (`MWCampaignArc`) en su carpeta, con eventos 
 | CA3 | Adam Steiner | se consulta su disponibilidad | se ofrece del 20 de junio al 15 de diciembre de 3055: no el 1 de enero de 3055, sí el 1 de julio y no el 1 de enero de 3056 |
 | CA4 | Tributes for the Imperator | se consulta su disponibilidad en 3019 y en 3021 | en 3019 no se ofrece y en 3021 sí, con reputación 5 |
 | CA5 | Pirate Hunt | se consulta su disponibilidad en 3015 | se ofrece, porque no tiene fecha |
-| CA6 | Todas las HRQ | se consultan sus condiciones | todas tienen al menos un nivel de reputación mínimo |
+| CA6 | Todas las HRQ | se consultan sus condiciones | todas tienen al menos una condición, y todas piden reputación salvo Adam Steiner y Guerrero (DLC8), que solo tienen fechas |
 
 ## Fuera de alcance
 
