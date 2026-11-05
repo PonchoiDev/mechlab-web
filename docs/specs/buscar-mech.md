@@ -29,7 +29,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 
 - **RF1.** Un panel **Find a 'Mech**, junto a Quests y Special markets, busca variantes por nombre o por variante (`atlas`, `AS7-D`). Solo muestra las que ya existen en la fecha del mapa: buscar una que todavía no existe confunde.
 - **RF2.** Al elegir una variante, el mapa colorea el territorio de cada facción según su rareza en la fecha elegida, de Very common a Very rare, con Unique y Unavailable aparte y el resto atenuado (no la vende). Al cerrar la ficha, el mapa vuelve a los colores de las facciones.
-- **RF3.** La ficha de la variante muestra su nombre, si ya existe en la fecha del mapa (`Not produced until 1 JAN 3045`), las facciones con sistemas en esa fecha agrupadas por rareza con su número de sistemas, sus fuentes fijas (HRQ, mercados especiales y 'Mech único, con enlace a cada una) y un enlace al MechLab con su build de serie.
+- **RF3.** La ficha de la variante muestra su nombre, si ya existe en la fecha del mapa (`Not produced until 1 JAN 3045`), las facciones con sistemas en esa fecha que la venden, agrupadas por rareza con su número de sistemas (las que no la venden ya salen en gris en el mapa y no se listan), sus fuentes fijas (HRQ, mercados especiales y 'Mech único, con enlace a cada una) y un enlace al MechLab con su build de serie.
 - **RF4.** Un panel **Hero 'Mechs** lista los 'Mechs hero con fuente fija, con la HRQ, el mercado o el sistema de cada uno. Al elegir uno, se abre su ficha.
 - **RF5.** La URL guarda la variante elegida (`?mech=AS7-D`), para compartir la vista.
 - **RF6.** Si la variante se consigue en un sitio pequeño, el mapa lo encuadra al elegirla, porque el color de un solo sistema no se ve con el mapa entero:
@@ -84,5 +84,6 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
   - La cadena de alianzas siempre acaba en una facción con tabla (Elysian Fields, Oberon, Bandits y Outlaws), lo que apoya que el juego usa la tabla de la alianza.
   - Con una variante elegida, el color de cada facción solo cambia al cambiar de variante o al cruzar su fecha de introducción, para no cortar la animación al saltar entre eventos.
   - Tras la primera revisión en el navegador se añadieron el filtro por fecha y el encuadre (RF6 a RF8, CA11 a CA14): sin ellos, una variante que solo vende Wolf's Dragoons (el ARC-2W, en Outreach) o un hero sin rareza (el ARC-T) no cambiaban nada visible en el mapa entero. El encuadre de varios sistemas deja libre la parte que tapa la ficha en escritorio, y el cajón se cierra al elegir.
+  - La ficha listaba también las facciones que no venden la variante (Not sold). Era casi siempre una lista larga que tapaba lo útil, y el mapa ya las pinta en gris, así que se quitó.
   - En el móvil, la ficha ocupa casi toda la pantalla y tapa lo encuadrado hasta cerrarla, igual que la de una HRQ.
   - En el móvil, cinco cajones no cabían en el hueco de antes y tapaban la ficha. Los botones son más compactos y desaparecen el + y el −, porque el mapa se amplía con dos dedos; queda el botón de ver el mapa entero.

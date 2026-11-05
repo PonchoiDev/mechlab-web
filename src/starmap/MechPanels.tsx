@@ -5,7 +5,6 @@ import { formatGameDate } from '../utils/starmap';
 import { MechLink } from './MarketPanels';
 import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
 
-const NOT_SOLD = 'Not sold';
 
 const systemName = (data: StarmapData, id: number) => data.systems.find(system => system.id === id)?.name ?? '';
 
@@ -143,11 +142,12 @@ interface MechCardProps {
 
 // Ficha de la variante: si existe en la fecha, quién la vende y con qué rareza, y sus fuentes fijas.
 export function MechCard({ data, availability, mech, date, onSystem, onQuest, onClose }: MechCardProps) {
-  const groups = getAvailabilityAt(data, availability, mech, date);
+  // Las facciones que no la venden ya salen en gris en el mapa: listarlas solo estorba.
+  const groups = getAvailabilityAt(data, availability, mech, date).flatMap(({ rarity, factions }) => (rarity ? [{ rarity, factions }] : []));
   const sources = getFixedSources(data, mech.id);
   const produced = isProduced(mech, date);
   const hasSources = sources.quests.length + sources.markets.length + sources.uniques.length > 0;
-  const isSold = produced && groups.some(({ rarity }) => rarity !== null && rarity !== 'unavailable');
+  const isSold = produced && groups.some(({ rarity }) => rarity !== 'unavailable');
 
   return (
     <section className="starmap-panel is-pinned starmap-quest starmap-mech" aria-label={`${mech.name} ${mech.id}`}>
@@ -173,14 +173,14 @@ export function MechCard({ data, availability, mech, date, onSystem, onQuest, on
             )}
             <ul className="starmap-rarity">
               {groups.map(({ rarity, factions }) => (
-                <li key={rarity ?? 'none'} style={{ '--rarity': rarity && produced ? RARITY_COLORS[rarity] : NOT_SOLD_COLOR } as CSSProperties}>
-                  <b>{rarity ? RARITY_NAMES[rarity] : NOT_SOLD}</b>
+                <li key={rarity} style={{ '--rarity': produced ? RARITY_COLORS[rarity] : NOT_SOLD_COLOR } as CSSProperties}>
+                  <b>{RARITY_NAMES[rarity]}</b>
                   <span>
                     {factions.map(({ id, systems, systemIds }, index) => (
                       <Fragment key={id}>
                         {index > 0 && ', '}
                         {data.factions[id].name} ({systems})
-                        {systemIds && rarity && rarity !== 'unavailable' && (
+                        {systemIds && rarity !== 'unavailable' && (
                           <>
                             {': '}
                             {systemIds.map((systemId, position) => (
