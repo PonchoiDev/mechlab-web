@@ -114,6 +114,110 @@ def lineas_de_centro(centro, posiciones):
     return sorted(lineas)
 
 
+# Misiones de alta recompensa (HRQ). La parte de una misión va al final del título (Pt. 2).
+REGEX_PARTE = re.compile(r"\s*Pt\.?\s*(\d+)\s*$", re.IGNORECASE)
+# Tipos de misión que el juego usa como relleno en la oferta y no dicen nada al jugador.
+TIPOS_SIN_INFORMACION = {"Unknown", "Campaign"}
+TIPOS_CORREGIDOS = {"Defence": "Defense"}
+
+
+def cadena_de_carpeta(carpeta):
+    """Cada HRQ es una carpeta; las subcarpetas de sus misiones pertenecen a la misma cadena.
+    Devuelve la carpeta de la cadena y el modo de juego (campaña, carrera o ninguno para los DLC)."""
+    partes = carpeta.split("/")
+    if carpeta.startswith("Campaign/CampaignArcs/Regions/"):
+        return "/".join(partes[:5]), "campaign"
+    if carpeta.startswith("DLC1/CareerMode/Sidequests/HeroesOfTheIS/"):
+        return "/".join(partes[:5]), None
+    if carpeta.startswith("DLC1/CareerMode/Sidequests/"):
+        return carpeta, "career"
+    if carpeta.startswith("DLC3/HatchetmanQuestData"):
+        return "DLC3/HatchetmanQuestData", None
+    return "/".join(partes[:3]), None
+
+
+def parte(titulo):
+    coincidencia = REGEX_PARTE.search(titulo or "")
+    return int(coincidencia.group(1)) if coincidencia else 1
+
+
+def sin_parte(titulo):
+    return REGEX_PARTE.sub("", titulo).strip() if titulo else None
+
+
+def identificador(nombre):
+    return re.sub(r"[^a-z0-9]+", "-", nombre.lower()).strip("-")
+
+
+def tipos_de_mision(texto):
+    tipos = [tipo.strip() for tipo in (texto or "").split(",")]
+    return [TIPOS_CORREGIDOS.get(tipo, tipo) for tipo in tipos if tipo and tipo not in TIPOS_SIN_INFORMACION]
+
+
+def nombre_de_cadena(grupo, carpeta):
+    """El título que lleva la mayoría de las misiones, sin la parte ni distinguir mayúsculas. Si cada
+    misión tiene su propio título (Adam Steiner, en el DLC8), el nombre de la carpeta."""
+    titulos = [sin_parte(accion["titulo"]) for accion in grupo if not accion["oferta"] and accion.get("titulo")]
+    if not titulos:
+        titulos = [sin_parte(accion["titulo"]) for accion in grupo if accion.get("titulo")]
+    clave, veces = Counter(titulo.lower() for titulo in titulos).most_common(1)[0] if titulos else (None, 0)
+    if clave and veces * 2 > len(titulos):
+        return Counter(titulo for titulo in titulos if titulo.lower() == clave).most_common(1)[0][0]
+    carpeta_final = re.sub(r"^(Quest\d*_|Career_)", "", carpeta.rsplit("/", 1)[-1])
+    return separar_palabras(carpeta_final)
+
+
+def cadenas_de_misiones(acciones, sistemas_validos):
+    """Agrupa las acciones en cadenas. La misma cadena de facción existe en campaña y en carrera:
+    se une en una que indica los dos modos, con los sistemas de carrera."""
+    grupos = {}
+    for accion in acciones:
+        if accion["sistema"] not in sistemas_validos:
+            continue
+        carpeta, modo = cadena_de_carpeta(accion["carpeta"])
+        grupos.setdefault((carpeta, modo), []).append(accion)
+
+    cadenas = {}
+    for (carpeta, modo), grupo in grupos.items():
+        nombre = nombre_de_cadena(grupo, carpeta)
+        ofertas = sorted((accion for accion in grupo if accion["oferta"]), key=lambda accion: (parte(accion.get("titulo")), accion["accion"]))
+        misiones = sorted((accion for accion in grupo if not accion["oferta"]), key=lambda accion: (parte(accion.get("titulo")), accion["accion"]))
+        if not misiones:
+            continue
+        oferta = ofertas[0] if ofertas else None
+        empleadores = [accion["empleador"] for accion in grupo if accion.get("empleador")]
+        dlc = next((accion["dlc"] for accion in ofertas if accion.get("dlc")), None)
+        cadena = {
+            "id": identificador(nombre),
+            "name": nombre,
+            "dlc": int(dlc.split("_")[1]) if dlc else None,
+            "modes": [modo] if modo else [],
+            # Algún empleador viene como identificador (FederatedCommonwealth (FS)): se separan las palabras.
+            "employer": REGEX_PALABRAS.sub(" ", Counter(empleadores).most_common(1)[0][0]) if empleadores else None,
+            "offer": (oferta or misiones[0])["sistema"],
+            "visibleEverywhere": bool(oferta and oferta.get("visible")),
+            "missionTypes": tipos_de_mision(oferta and oferta.get("tipos")),
+            "missions": [
+                {
+                    "title": accion.get("titulo") or (nombre if parte(accion.get("titulo")) == 1 else f"{nombre} Pt. {parte(accion.get('titulo'))}"),
+                    "summary": accion.get("resumen") or None,
+                    "system": accion["sistema"],
+                }
+                for accion in misiones
+            ],
+        }
+        previa = cadenas.get(nombre)
+        if previa:
+            modos = sorted(set(previa["modes"]) | set(cadena["modes"]))
+            # Ante dos versiones, la de carrera; si las dos son iguales, da lo mismo.
+            if "career" in cadena["modes"] and "career" not in previa["modes"]:
+                previa.update(cadena)
+            previa["modes"] = modos
+        else:
+            cadenas[nombre] = cadena
+    return sorted(cadenas.values(), key=lambda cadena: cadena["name"])
+
+
 def leer(nombre):
     with open(os.path.join(RUTA_ORIGEN, nombre), encoding="utf-8") as archivo:
         return json.load(archivo)
@@ -174,6 +278,7 @@ def main():
     eventos_juego = leer("eventos.json")
     centros = leer("centros_industriales.json")
     tablas = leer("textos.json")
+    misiones_juego = leer("misiones.json")
 
     centro_de_sistema = {}
     for id_centro, centro in centros.items():
@@ -183,8 +288,9 @@ def main():
     sistemas = []
     siglas = {}
     for fila in sistemas_juego:
-        # La fila 0 es un marcador (INVALID) y los sistemas ocultos no aparecen en el mapa del juego.
-        if fila["Name"] == "0" or fila["SystemStatus"] == "ESystemStatus::Hidden":
+        # La fila 0 es un marcador (INVALID). El único sistema oculto, Cambridge, sí aparece en el mapa
+        # durante el DLC8, donde se juegan varias de sus misiones.
+        if fila["Name"] == "0":
             continue
         id_sistema = int(fila["Name"])
         sistema = {
@@ -244,13 +350,14 @@ def main():
             for id_centro, centro in centros.items()
         },
         "systems": sistemas,
+        "quests": cadenas_de_misiones(misiones_juego, {sistema["id"] for sistema in sistemas}),
     }
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"))
         archivo.write("\n")
 
     print(f"{len(sistemas)} sistemas, {len(facciones)} facciones, {len(eventos)} eventos, "
-          f"{len(clusteres)} clústeres y {len(centros)} centros industriales")
+          f"{len(clusteres)} clústeres, {len(centros)} centros industriales y {len(datos['quests'])} misiones de alta recompensa")
     if sin_nombre:
         print(f"Aviso: clústeres sin nombre visible: {', '.join(sin_nombre)}")
     sin_lineas = [id_centro for id_centro, centro in datos["hubs"].items()

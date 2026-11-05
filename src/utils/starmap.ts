@@ -84,7 +84,7 @@ export const getHubs = (data: StarmapData): Hub[] => Object.entries(data.hubs).f
   return capital ? [{ id, capital, systems: data.systems.filter(system => system.hub === id) }] : [];
 });
 
-const normalize = (text: string) => text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+export const normalize = (text: string) => text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 
 // Primero los nombres que empiezan por el texto y después los que solo lo contienen.
 export const searchSystems = (systems: StarSystem[], query: string, limit = 8): StarSystem[] => {
@@ -311,6 +311,7 @@ export const getClusterOutline = (points: Point[], padding: number, segments = 1
 export interface MapQuery {
   date: GameDate;
   systemId: number | null;
+  questId?: string | null;
 }
 
 export const parseMapQuery = (search: string, data: StarmapData): MapQuery => {
@@ -324,9 +325,10 @@ export const parseMapQuery = (search: string, data: StarmapData): MapQuery => {
   };
 };
 
-export const toMapQuery = ({ date, systemId }: MapQuery, data: StarmapData): string => {
+export const toMapQuery = ({ date, systemId, questId }: MapQuery, data: StarmapData): string => {
   const params = new URLSearchParams({ date });
   const system = systemId === null ? undefined : data.systems.find(candidate => candidate.id === systemId);
   if (system) params.set('system', system.name);
+  if (questId && data.quests.some(quest => quest.id === questId)) params.set('quest', questId);
   return `?${params.toString()}`;
 };

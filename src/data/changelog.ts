@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-quests',
+    date: '2026-11-05',
+    title: 'High reward quests on the star map',
+    items: [
+      '64 high reward quests from the game files: faction quests, Heroes of the Inner Sphere and the DLC 2, 3 and 8 quests',
+      'Systems that offer a quest have a marker, and the Quests list finds them by name, system or employer',
+      'Pick a quest to see its route on the map and every mission with its system',
+      'The system card lists the quests offered or played there'
+    ]
+  },
+  {
     id: '2026-11-05-faction-logos',
     date: '2026-11-05',
     title: 'Faction logos on the star map',

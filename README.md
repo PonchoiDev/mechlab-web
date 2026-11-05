@@ -37,7 +37,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (292 tests, cobertura con V8) |
+| Tests | Vitest 5 (302 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -84,6 +84,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Página propia con el mapa de la Esfera Interior, parecido al del juego: territorio de cada facción con su color, clústeres y centros industriales.
 - Fronteras en cualquier fecha de 3015 a 3060, con un control deslizante y saltos a los 19 eventos del juego que las mueven.
 - Ficha de cada sistema con su facción, su clúster y su historial de propietarios, buscador por nombre y enlace con la fecha y el sistema.
+- Las 64 misiones de alta recompensa (HRQ) del juego: dónde se ofrece cada una, su ruta por los sistemas de sus misiones y un buscador por nombre, sistema o quien la encarga.
 
 **Otros**
 - Campana de novedades con los cambios que el usuario aún no ha visto.
@@ -185,11 +186,12 @@ python3 tools/generar_mapa.py
 | `eventos.json` | `BorderChanges/*/Borders*` | Los 19 cambios de frontera, de 3025 a 3060 |
 | `centros_industriales.json` | `SafeZone_*_ClusterAsset` y su malla | Los 35 centros industriales con su capital, sus sistemas y las líneas que los unen |
 | `clusteres.json` y `textos.json` | Assets de clúster y `Faction_StringTable` | Nombres de los clústeres |
+| `misiones.json` | Acciones `Show…`, `Place…` y `Generate…` de las HRQ y sus objetivos | Sistema de la oferta y de cada misión, títulos, resúmenes y quien la encarga |
 | `public/starmap/logos/` | Texturas `LogoLarge` de cada facción | Logos de facción en PNG de 128 px, descomprimidos de DXT5 |
 
 ## Calidad y comprobación contra el juego
 
-- **292 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **302 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
