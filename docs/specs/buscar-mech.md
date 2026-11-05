@@ -37,6 +37,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 - **RF4.** Un panel **Hero 'Mechs** lista los 'Mechs de un solo sitio: primero los hero y después las variantes especiales, con la HRQ, el mercado, la recompensa o el sistema de cada uno. Al elegir uno, se abre su ficha.
 - **RF9.** La ficha muestra las recompensas fuera de las HRQ como fuente fija: el título de la misión, su DLC y su sistema, si lo tiene, con enlace; y el mapa encuadra ese sistema como el de un 'Mech único.
 - **RF10.** La ficha de un hero que puede salir a la venta lo dice, también cuando ninguna facción lo vende (el ARC-T).
+- **RF11.** Las recompensas de las carpetas `*_Exclusive` (`Razer_Exclusive`, `MS_Exclusive`) son desbloqueos de promociones: el juego las entrega con un mensaje, sin misión ni sistema («Claimed Razer WVR-7H» en el registro de eventos). La ficha las llama *Promotional unlock*, y toda recompensa sin sistema dice que no está en ningún lugar del mapa.
 - **RF5.** La URL guarda la variante elegida (`?mech=AS7-D`), para compartir la vista.
 - **RF6.** Si la variante se consigue en un sitio pequeño, el mapa lo encuadra al elegirla, porque el color de un solo sistema no se ve con el mapa entero:
   - un 'Mech hero con fuente fija, o una variante que no vende ninguna facción: su HRQ, con la ruta marcada como al elegir la HRQ, o el sistema del 'Mech único o del mercado especial;
@@ -74,6 +75,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | CA15 | Las búsquedas «as7-d-h», «arctic wolf» y «acw-prime» el 1 de enero de 3030 | se piden las variantes posteriores | la primera da una, desde el 11 de noviembre de 3041; la segunda, cinco, la siguiente el 1 de enero de 3059 (el ACW-1); la tercera, una, el 1 de enero de 3067, después del final del mapa; una búsqueda sin resultados, ninguna |
 | CA16 | La búsqueda «archer» el 1 de enero de 3015 | se busca y se piden las variantes posteriores | da cinco variantes y avisa de otras cinco posteriores, la siguiente el ARC-T el 20 de febrero de 3016 |
 | CA21 | La recompensa «Shielded Withdrawal» (DLC5, BLR-1G-S), cuya acción está en la subcarpeta `ArcActions` de su misión | se consulta | tiene el sistema de su misión, Vega |
+| CA22 | Las recompensas del WVR-7H y del PXH-KB | se consultan | son desbloqueos de promociones, sin sistema; la de Head Hunting no lo es |
 | CA10 | `availability.json` | se carga | todas sus variantes están en `mechs.json` con el mismo nombre, y todas las facciones del mapa salvo Arc-Royal Defense Cordon tienen tabla |
 
 ## Fuera de alcance
