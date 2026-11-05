@@ -100,6 +100,26 @@ export interface UniqueMech {
   from: GameDate;
 }
 
+// Rareza de una variante en el mercado de una facción, de su unit card (FactionRarity).
+export type Rarity = 'veryCommon' | 'common' | 'uncommon' | 'rare' | 'veryRare' | 'unique' | 'unavailable';
+
+export interface MechAvailability {
+  id: string;
+  name: string;
+  hero?: boolean;
+  // Fecha de introducción: antes no existe.
+  from: GameDate;
+  // Por facción con tabla; si no está, esa facción no la vende.
+  rarity: Record<string, Rarity>;
+}
+
+// src/data/availability.json, que se carga aparte del mapa.
+export interface AvailabilityData {
+  // Facción del mapa y facción cuya tabla de rareza usa (la suya o la de su alianza).
+  factions: Record<string, string>;
+  mechs: MechAvailability[];
+}
+
 // Reputación recomendada y dificultad de una zona o un centro industrial en un modo (null: los dos).
 export interface ZoneLevel {
   mode: 'campaign' | 'career' | null;

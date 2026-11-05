@@ -5,6 +5,8 @@ import os
 import re
 from collections import Counter
 
+from generar_mechs import RUTA_UNIT_CARDS, cargar_archivos_por_nombre, cargar_unit_cards
+
 # Genera src/data/starmap.json a partir de lo que extrae extraer_mapa.py: los sistemas con su
 # propietario en cada fecha de la partida, las facciones con el color del mapa del juego, los eventos
 # que mueven las fronteras, los clústeres y los centros industriales.
@@ -17,6 +19,8 @@ RUTA_DESTINO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "starmap.jso
 RUTA_MECHS = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "mechs.json")
 RUTA_ITEMS = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "items.json")
 RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "starmap", "logos")
+# La rareza de cada variante por facción va aparte: solo la carga el panel Find a 'Mech al abrirse.
+RUTA_DISPONIBILIDAD = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "availability.json")
 
 # La partida empieza en 3015 y el último cambio de frontera del juego es de 3060. La tabla trae la
 # historia de cada sistema desde el siglo XXII hasta 3145, pero fuera de este rango el juego no la usa.
@@ -67,6 +71,11 @@ NOMBRES_EVENTOS = {
 REGEX_CLUSTER_OCULTO = re.compile(r"^(RepairSystem_\d+|StoryCluster\d+)$")
 REGEX_PALABRAS = re.compile(r"(?<=[a-z])(?=[A-Z])")
 ORDEN_MODOS = {"campaign": 0, "career": 1, None: 2}
+# Rareza de cada variante por facción en su unit card (FactionRarity), que decide qué vende el mercado.
+REGEX_RAREZA = re.compile(r'\(\(Id="MWFactionAsset:([A-Za-z]+)"\), ([A-Za-z]+)\)')
+REGEX_FECHA_UNIT_CARD = re.compile(r"IntroDate=(\d{3,4})\.(\d{2})\.(\d{2})")
+RAREZAS = {"VeryCommon": "veryCommon", "Common": "common", "Uncommon": "uncommon", "Rare": "rare",
+           "VeryRare": "veryRare", "Unique": "unique", "Unavailable": "unavailable"}
 
 
 # Las mallas de los centros industriales usan unas 8 unidades por año luz y el eje X invertido. La
@@ -442,6 +451,41 @@ def niveles_de_zona(zonas):
     return sorted(niveles, key=lambda nivel: (ORDEN_MODOS[nivel["mode"]], nivel["difficulty"] or 0))
 
 
+def tabla_de_faccion(faccion, alianzas, con_tabla):
+    """Facción cuya tabla de rareza usa el mercado: la suya o, si no tiene, la de su alianza.
+
+    Las facciones menores no tienen tabla propia: Canopus usa la de Periphery, y Elysian Fields la de
+    Oberon, que responde a Bandits y esta a Outlaws, la primera con tabla.
+    """
+    vistas = set()
+    while faccion and faccion not in vistas:
+        if faccion in con_tabla:
+            return faccion
+        vistas.add(faccion)
+        faccion = alianzas.get(faccion)
+    return None
+
+
+def disponibilidad_de_mechs(mechs, unit_cards, facciones, alianzas):
+    rarezas = {}
+    for mech in mechs.values():
+        ficha = unit_cards.get(f"{mech['id'].lower()}_loadout")
+        if ficha:
+            rarezas[mech["id"]] = (ficha, {faccion: RAREZAS[nivel] for faccion, nivel in REGEX_RAREZA.findall(ficha)})
+    con_tabla = {faccion for _, rareza in rarezas.values() for faccion in rareza}
+    tablas = {faccion: tabla for faccion in facciones if (tabla := tabla_de_faccion(faccion, alianzas, con_tabla))}
+    usadas = set(tablas.values())
+    variantes = []
+    for id_mech, (ficha, rareza) in sorted(rarezas.items(), key=lambda par: (mechs[par[0]]["name"], par[0])):
+        anio, mes, dia = REGEX_FECHA_UNIT_CARD.search(ficha).groups()
+        variante = {"id": id_mech, "name": mechs[id_mech]["name"], "from": f"{int(anio):04d}-{mes}-{dia}",
+                    "rarity": {faccion: nivel for faccion, nivel in sorted(rareza.items()) if faccion in usadas}}
+        if mechs[id_mech].get("hero"):
+            variante["hero"] = True
+        variantes.append(variante)
+    return {"factions": dict(sorted(tablas.items())), "mechs": variantes}
+
+
 def leer(nombre):
     with open(os.path.join(RUTA_ORIGEN, nombre), encoding="utf-8") as archivo:
         return json.load(archivo)
@@ -598,10 +642,19 @@ def main():
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"))
         archivo.write("\n")
+    unit_cards = cargar_unit_cards(cargar_archivos_por_nombre(RUTA_UNIT_CARDS))
+    disponibilidad = disponibilidad_de_mechs(mechs, unit_cards, facciones, leer("alianzas.json"))
+    with open(RUTA_DISPONIBILIDAD, "w", encoding="utf-8") as archivo:
+        json.dump(disponibilidad, archivo, ensure_ascii=False, separators=(",", ":"))
+        archivo.write("\n")
 
     print(f"{len(sistemas)} sistemas, {len(facciones)} facciones, {len(eventos)} eventos, "
           f"{len(clusteres)} clústeres, {len(centros)} centros industriales, {len(datos['quests'])} misiones de alta recompensa, "
           f"{len(datos['markets'])} mercados especiales y {len(datos['uniqueMechs'])} 'Mechs únicos")
+    print(f"{len(disponibilidad['mechs'])} variantes con su rareza por facción")
+    sin_tabla = sorted(set(facciones) - set(disponibilidad["factions"]))
+    if sin_tabla:
+        print(f"Aviso: facciones del mapa sin tabla de rareza: {', '.join(sin_tabla)}")
     sin_variante = [mech for recompensa in leer("recompensas_misiones.json") for mech in recompensa["mechs"] if not mech_de_juego(mech, mechs)]
     if sin_variante:
         print(f"Aviso: 'Mechs de recompensa sin variante en mechs.json: {', '.join(sin_variante)}")

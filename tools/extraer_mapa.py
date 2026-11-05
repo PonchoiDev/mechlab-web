@@ -96,6 +96,25 @@ def extraer_por_nombre(pak, carpeta, usados, campos):
     return assets, sorted(usados - set(assets))
 
 
+def extraer_alianzas(pak):
+    """Facción a la que responde cada una (Allegiance): Canopus a Periphery, St. Ives a Independent.
+
+    Las facciones menores no tienen tabla de rareza de 'Mechs propia y usan la de su alianza, que puede
+    ser una facción sin sistemas (Bandits, que a su vez responde a Outlaws).
+    """
+    alianzas = {}
+    for ruta in pak.buscar(CONTENIDO + "Factions/"):
+        if not ruta.endswith(".uasset"):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        nombre = os.path.basename(ruta)[: -len(".uasset")]
+        propiedades = asset.propiedades(nombre if nombre in asset.exports else asset.principal())
+        alianza = (propiedades.get("Allegiance") or {}).get("Id", {}).get("PrimaryAssetName")
+        if "FactionType" in propiedades and alianza and alianza != "None":
+            alianzas[nombre] = alianza
+    return dict(sorted(alianzas.items()))
+
+
 def extraer_colores(pak):
     parametros = Asset.desde_pak(pak, COLORES_MAPA).propiedades("Faction_Colours_MPC")["VectorParameters"]
     return {parametro["ParameterName"]: parametro["DefaultValue"] for parametro in parametros}
@@ -504,6 +523,7 @@ def main():
     guardar("mercados.json", extraer_mercados(pak))
     guardar("mechs_unicos.json", extraer_mechs_unicos(pak))
     guardar("zonas.json", extraer_zonas(pak))
+    guardar("alianzas.json", extraer_alianzas(pak))
     extraer_logos(pak, facciones)
     if sin_asset:
         print(f"Aviso: facciones sin asset en el juego: {', '.join(sin_asset)}")
