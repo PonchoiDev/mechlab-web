@@ -21,7 +21,7 @@ import {
   toMapQuery
 } from '../utils/starmap';
 import { getQuestRoute, parseQuestQuery } from '../utils/quests';
-import { getMarketRarity, getMechFocus, isProduced, parseMechQuery } from '../utils/availability';
+import { getFixedSources, getMarketRarity, getMechFocus, isProduced, parseMechQuery } from '../utils/availability';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { MarketDrawer, SystemMarkets } from './MarketPanels';
@@ -263,6 +263,8 @@ export function StarmapApp() {
   const quest = data.quests.find(candidate => candidate.id === questId) ?? null;
   // HRQ de la que la variante elegida es recompensa: su ruta se marca sin abrir su ficha.
   const [mechQuestId, setMechQuestId] = useState<string | null>(null);
+  // Sistema de la misión (fuera de las HRQ) donde se consigue la variante: se marca como una ruta.
+  const [mechMissionSystem, setMechMissionSystem] = useState<number | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   // La rareza de los 'Mechs va en su propio archivo: se descarga al abrir Find a 'Mech o Hero 'Mechs, o
   // al entrar con ?mech= en la URL.
@@ -293,6 +295,11 @@ export function StarmapApp() {
     const picked = loaded.mechs.find(candidate => candidate.id === id);
     const target = picked ? getMechFocus(data, loaded, picked, date) : null;
     setMechQuestId(target?.questId ?? null);
+    // Si lo que se encuadra es la misión de una recompensa, se marca su sistema.
+    const mission = target && !target.questId
+      ? getFixedSources(data, id).rewards.find(reward => reward.kind === 'mission' && reward.system !== undefined && target.systemIds.includes(reward.system))
+      : undefined;
+    setMechMissionSystem(mission?.system ?? null);
     if (target && target.systemIds.length > 0) focusOn(...target.systemIds);
   }, [date, focusOn]);
   useEffect(() => {
@@ -306,7 +313,11 @@ export function StarmapApp() {
   }, [loadAvailability, focusMech]);
   const mech = availability?.mechs.find(candidate => candidate.id === mechId) ?? null;
   const routeQuest = quest ?? (mechId ? data.quests.find(candidate => candidate.id === mechQuestId) : null) ?? null;
-  const questRoute = useMemo(() => (routeQuest ? getQuestRoute(routeQuest) : null), [routeQuest]);
+  const markedSystem = !quest && mechId ? mechMissionSystem : null;
+  const questRoute = useMemo(
+    () => (routeQuest ? getQuestRoute(routeQuest) : markedSystem !== null ? [markedSystem] : null),
+    [routeQuest, markedSystem]
+  );
   const mechProduced = mech ? isProduced(mech, date) : false;
   // Con una variante elegida, cada facción se pinta con el color de su rareza. Solo depende de la
   // fecha a través de si la variante ya existe, para no cortar la animación al saltar de evento.
@@ -424,6 +435,11 @@ export function StarmapApp() {
           onQuest={pickQuest}
           onSystem={systemId => {
             setSelectedId(systemId);
+            focusOn(systemId);
+          }}
+          onMission={systemId => {
+            setMechQuestId(null);
+            setMechMissionSystem(systemId);
             focusOn(systemId);
           }}
           onClose={() => setMechId(null)}

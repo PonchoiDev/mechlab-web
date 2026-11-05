@@ -171,12 +171,14 @@ interface MechCardProps {
   mech: MechAvailability;
   date: GameDate;
   onSystem: (systemId: number) => void;
+  // La misión de una recompensa: encuadra y marca su sistema sin cerrar la ficha.
+  onMission: (systemId: number) => void;
   onQuest: (quest: Quest) => void;
   onClose: () => void;
 }
 
 // Ficha de la variante: si existe en la fecha, quién la vende y con qué rareza, y sus fuentes fijas.
-export function MechCard({ data, availability, mech, date, onSystem, onQuest, onClose }: MechCardProps) {
+export function MechCard({ data, availability, mech, date, onSystem, onMission, onQuest, onClose }: MechCardProps) {
   // Las facciones que no la venden ya salen en gris en el mapa: listarlas solo estorba.
   const groups = getAvailabilityAt(data, availability, mech, date).flatMap(({ rarity, factions }) => (rarity ? [{ rarity, factions }] : []));
   const sources = getFixedSources(data, mech.id);
@@ -262,7 +264,9 @@ export function MechCard({ data, availability, mech, date, onSystem, onQuest, on
                   const { system } = reward;
                   return (
                     <li key={reward.id}>
-                      {describeRewardSource(reward)}
+                      {system !== undefined && reward.kind === 'mission'
+                        ? <>Mission reward: <button type="button" className="starmap-system-link" onClick={() => onMission(system)}>{reward.title}</button>{reward.dlc && ` (DLC ${reward.dlc})`}</>
+                        : describeRewardSource(reward)}
                       {system !== undefined && (
                         <> at <button type="button" className="starmap-system-link" onClick={() => onSystem(system)}>{systemName(data, system)}</button></>
                       )}
