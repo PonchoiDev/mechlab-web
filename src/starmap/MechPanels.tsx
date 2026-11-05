@@ -1,6 +1,6 @@
 import { Fragment, useMemo, useState, type CSSProperties } from 'react';
-import type { AvailabilityData, GameDate, MechAvailability, Quest, StarmapData } from '../types/starmap';
-import { getAvailabilityAt, getLaterVariants, getFixedSources, getHeroMechs, isProduced, RARITY_NAMES, searchMechs, type FixedSources } from '../utils/availability';
+import type { AvailabilityData, CampaignReward, GameDate, MechAvailability, Quest, StarmapData } from '../types/starmap';
+import { countSources, getAvailabilityAt, getFixedSources, getLaterVariants, getOnePlaceMechs, isProduced, RARITY_NAMES, searchMechs, type FixedSources } from '../utils/availability';
 import { formatGameDate } from '../utils/starmap';
 import { MechLink } from './MarketPanels';
 import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
@@ -8,11 +8,14 @@ import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
 
 const systemName = (data: StarmapData, id: number) => data.systems.find(system => system.id === id)?.name ?? '';
 
-// Una línea por fuente fija: la HRQ, el mercado especial o el sistema donde está colocado.
-const describeSources = (data: StarmapData, { quests, markets, uniques }: FixedSources): string[] => [
+const describeReward = (reward: CampaignReward) => `${reward.title}${reward.dlc ? ` (DLC ${reward.dlc})` : ''}`;
+
+// Una línea por fuente fija: la HRQ, el mercado especial, el sistema donde está colocado o la misión.
+const describeSources = (data: StarmapData, { quests, markets, uniques, rewards }: FixedSources): string[] => [
   ...quests.map(quest => `Quest reward: ${quest.name}`),
   ...markets.map(market => `Special market: ${systemName(data, market.system)}`),
-  ...uniques.map(unique => `${systemName(data, unique.system)} from ${formatGameDate(unique.from)}`)
+  ...uniques.map(unique => `${systemName(data, unique.system)} from ${formatGameDate(unique.from)}`),
+  ...rewards.map(reward => `Reward: ${describeReward(reward)}`)
 ];
 
 interface MechDrawerProps {
@@ -113,10 +116,12 @@ interface HeroDrawerProps {
   onPick: (mechId: string) => void;
 }
 
-// 'Mechs hero que solo se consiguen en un sitio: recompensa de una HRQ, mercado especial o colocados.
+// 'Mechs que solo se consiguen en un sitio: los hero que no salen a la venta y, aparte, las variantes
+// especiales que no vende ninguna facción (el Wolverine de Razer).
 export function HeroDrawer({ data, availability, selectedId, onOpen, onPick }: HeroDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const heroes = useMemo(() => (availability ? getHeroMechs(data, availability) : []), [data, availability]);
+  const { heroes, special } = useMemo(() => (availability ? getOnePlaceMechs(data, availability) : { heroes: [], special: [] }), [data, availability]);
+  const groups = [{ title: 'Hero \u2019Mechs', entries: heroes }, { title: 'Special variants', entries: special }];
 
   return (
     <section className={`starmap-legend starmap-quests starmap-heroes-drawer${isOpen ? ' is-open' : ''}`} aria-label="Hero 'Mechs">
@@ -128,29 +133,32 @@ export function HeroDrawer({ data, availability, selectedId, onOpen, onPick }: H
           setIsOpen(open => !open);
         }}
       >
-        Hero &rsquo;Mechs {availability && <b>{heroes.length}</b>}
+        Hero &rsquo;Mechs {availability && <b>{heroes.length + special.length}</b>}
       </button>
       {isOpen && (
         <div className="starmap-quests-body">
-          <p className="starmap-market-note">Hero &rsquo;Mechs you can only get in one place</p>
+          <p className="starmap-market-note">&rsquo;Mechs you can only get in one place. Other heroes come up for sale at random</p>
           <ul>
             {!availability && <li className="starmap-quests-empty">Loading…</li>}
-            {heroes.map(({ mech, sources }) => (
-              <li key={mech.id}>
-                <button
-                  type="button"
-                  aria-pressed={mech.id === selectedId}
-                  onClick={() => {
-                    // Se cierra para que no tape lo que el mapa encuadra.
-                    setIsOpen(false);
-                    onPick(mech.id);
-                  }}
-                >
-                  <span>{mech.name} <small>{mech.id}</small></span>
-                  <small>{describeSources(data, sources).join(' · ')}</small>
-                </button>
-              </li>
-            ))}
+            {availability && groups.flatMap(({ title, entries }) => [
+              <li key={title} className="starmap-quests-group">{title}</li>,
+              ...entries.map(({ mech, sources }) => (
+                <li key={mech.id}>
+                  <button
+                    type="button"
+                    aria-pressed={mech.id === selectedId}
+                    onClick={() => {
+                      // Se cierra para que no tape lo que el mapa encuadra.
+                      setIsOpen(false);
+                      onPick(mech.id);
+                    }}
+                  >
+                    <span>{mech.name} <small>{mech.id}</small></span>
+                    <small>{describeSources(data, sources).join(' · ')}</small>
+                  </button>
+                </li>
+              ))
+            ])}
           </ul>
         </div>
       )}
@@ -174,7 +182,7 @@ export function MechCard({ data, availability, mech, date, onSystem, onQuest, on
   const groups = getAvailabilityAt(data, availability, mech, date).flatMap(({ rarity, factions }) => (rarity ? [{ rarity, factions }] : []));
   const sources = getFixedSources(data, mech.id);
   const produced = isProduced(mech, date);
-  const hasSources = sources.quests.length + sources.markets.length + sources.uniques.length > 0;
+  const hasSources = countSources(sources) > 0;
   const isSold = produced && groups.some(({ rarity }) => rarity !== 'unavailable');
 
   return (
@@ -196,9 +204,13 @@ export function MechCard({ data, availability, mech, date, onSystem, onQuest, on
               : <p className="starmap-quest-status">Not produced until {formatGameDate(mech.from)}</p>}
             {produced && !isSold && (
               <p className="starmap-quest-status">
-                {hasSources ? 'No faction market sells it on this date' : 'No faction market sells it, and the game gives it no fixed place'}
+                {mech.heroMarket
+                  ? 'No faction market sells it, but it can come up for sale as a hero \u2019Mech'
+                  : !hasSources ? 'No faction market sells it, and the game gives it no fixed place'
+                    : Object.keys(mech.rarity).length === 0 ? 'No faction market sells it' : 'No faction market sells it on this date'}
               </p>
             )}
+            {isSold && mech.heroMarket && <p className="starmap-mech-since">It can also come up for sale as a hero &rsquo;Mech</p>}
             <ul className="starmap-rarity">
               {groups.map(({ rarity, factions }) => (
                 <li key={rarity} style={{ '--rarity': produced ? RARITY_COLORS[rarity] : NOT_SOLD_COLOR } as CSSProperties}>
@@ -247,6 +259,18 @@ export function MechCard({ data, availability, mech, date, onSystem, onQuest, on
                     <button type="button" className="starmap-system-link" onClick={() => onSystem(unique.system)}>{systemName(data, unique.system)}</button> from {formatGameDate(unique.from)}
                   </li>
                 ))}
+                {sources.rewards.map(reward => {
+                  const { system } = reward;
+                  return (
+                    <li key={reward.id}>
+                      Reward: {describeReward(reward)}
+                      {system !== undefined && (
+                        <> at <button type="button" className="starmap-system-link" onClick={() => onSystem(system)}>{systemName(data, system)}</button></>
+                      )}
+                      {reward.summary && reward.summary !== reward.title && <small className="starmap-mech-reward">{reward.summary}</small>}
+                    </li>
+                  );
+                })}
               </ul>
             </dd>
           </div>

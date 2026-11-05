@@ -933,6 +933,20 @@ button, input, select { font: inherit; color: inherit; }
 .starmap-quests li .starmap-mech-date:hover,
 .starmap-quests li .starmap-mech-date:focus-visible { color: #000; background: #8be3ff; }
 
+.starmap-legend li.starmap-quests-group {
+  display: block;
+  padding: 8px 12px 2px;
+  color: #8be3ff;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.starmap-mech-reward {
+  display: block;
+  color: var(--map-muted);
+  font-size: 13px;
+}
+
 .starmap-heroes-drawer .starmap-market-note {
   margin: 0 12px 6px;
   color: var(--map-muted);
