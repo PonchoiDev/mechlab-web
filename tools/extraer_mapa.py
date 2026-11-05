@@ -22,6 +22,8 @@ PAK_DEL_JUEGO = os.path.join("MW5Mercs", "Content", "Paks", "MW5Mercs-WindowsNoE
 CONTENIDO = "MW5Mercs/Content/"
 
 TABLA_SISTEMAS = CONTENIDO + "InnerSphereData/MW5_InnerSphereData"
+# 'Mechs hero que el juego puede poner a la venta: los que no están solo se consiguen de otra forma.
+HEROES_EN_VENTA = CONTENIDO + "Campaign/Progression/DataTables/HeroMechsForPurchase"
 COLORES_MAPA = CONTENIDO + "UI/FrontEnd/Starmap/Materials/Factions/Faction_Colours_MPC"
 EVENTOS = CONTENIDO + "Campaign/CampaignArcs/BorderChanges/"
 CENTROS_INDUSTRIALES = CONTENIDO + "DLC1/CareerMode/Clusters/"
@@ -403,6 +405,58 @@ def extraer_recompensas_misiones(pak):
     return recompensas
 
 
+def sistemas_de_objetivos(pak, carpeta):
+    """Sistema de cada objetivo de una carpeta, según las acciones que lo colocan (PlaceMission).
+
+    La configuración de la acción va en su export Default__, con el objetivo y el sistema.
+    """
+    sistemas = {}
+    for ruta in pak.archivos:
+        if not ruta.endswith(".uasset") or os.path.dirname(ruta) != carpeta:
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        # Solo las acciones: el resto de la carpeta (niveles, escenarios) no trae sistema.
+        if not any(nombre.startswith("StarSystemId") for nombre in asset.nombres):
+            continue
+        for export in asset.exports:
+            valores = valores_de_config(asset.propiedades(export))
+            objetivo, sistema = valores.get("Objective"), valores.get("StarSystemId")
+            if isinstance(objetivo, int) and objetivo < 0 and sistema:
+                sistemas[asset.ruta_import(objetivo)[1]] = sistema
+    return sistemas
+
+
+def extraer_recompensas_campana(pak):
+    """Objetivos que dan 'Mechs fuera de las HRQ: misiones de las campañas de los DLC, el final de una
+    campaña, la información del Bounty Hunter (DLC4) o desbloqueos de promociones (el Wolverine de
+    Razer). Con el sistema de la misión si una acción de la misma carpeta la coloca.
+    """
+    recompensas = []
+    for ruta in sorted(pak.archivos):
+        if not ruta.endswith(".uasset") or "/Objects/" in ruta:
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        if "ObjectiveReward" not in asset.nombres or "MechLoadouts" not in asset.nombres:
+            continue
+        info = asset.propiedades(asset.principal()).get("DisplayInfo", {})
+        titulo = info.get("ScreenTitleText") or ""
+        recompensa = recompensa_de_objetivo(info)
+        if not info.get("bHasRewards") or titulo.startswith("[") or not recompensa["mechs"]:
+            continue
+        objetivo = os.path.basename(ruta)[: -len(".uasset")]
+        sistema = sistemas_de_objetivos(pak, os.path.dirname(ruta)).get(objetivo)
+        recompensas.append({"carpeta": os.path.dirname(ruta)[len(CONTENIDO):], "objetivo": objetivo, "titulo": titulo,
+                            "resumen": info.get("ScreenSubText") or None, "sistema": sistema, "mechs": recompensa["mechs"]})
+    return recompensas
+
+
+def extraer_heroes_en_venta(pak):
+    asset = Asset.desde_pak(pak, HEROES_EN_VENTA)
+    # Cada fila apunta a la unit card del 'Mech (WVR-Q_UnitCard, WHM-DNC_UnitCard_Playable).
+    return sorted(re.sub(r"_UnitCard.*$", "", asset.ruta_import(next(iter(fila.values())))[1], flags=re.IGNORECASE)
+                  for fila in asset.filas(asset.principal()).values())
+
+
 def extraer_zonas(pak):
     """Sistemas, nombre, reputación recomendada y dificultad de cada zona (ClusterAsset) del juego.
 
@@ -524,6 +578,8 @@ def main():
     guardar("mechs_unicos.json", extraer_mechs_unicos(pak))
     guardar("zonas.json", extraer_zonas(pak))
     guardar("alianzas.json", extraer_alianzas(pak))
+    guardar("recompensas_campana.json", extraer_recompensas_campana(pak))
+    guardar("heroes_en_venta.json", extraer_heroes_en_venta(pak))
     extraer_logos(pak, facciones)
     if sin_asset:
         print(f"Aviso: facciones sin asset en el juego: {', '.join(sin_asset)}")

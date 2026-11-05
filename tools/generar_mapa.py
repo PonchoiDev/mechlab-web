@@ -346,12 +346,19 @@ def etapa_de_mercado(mercado):
 
 # Variante de un loadout de mercado o de recompensa: los de recompensa llevan prefijos y sufijos en
 # cualquier orden (11_2_Reward_FS9-A, COR-PVT_CareerSalvage, RFL-DNA_Loadout_CareerSalvage).
-REGEX_PREFIJO_VARIANTE = re.compile(r"^.*_Reward_")
-REGEX_SUFIJO_VARIANTE = re.compile(r"_(Loadout|MDA|CareerSalvage|CampaignSalvage)")
+# Los loadouts de recompensa llevan la variante con prefijos y sufijos en cualquier orden:
+# 11_2_Reward_FS9-A, RFL-DNA_Loadout_CareerSalvage, AS7-D_DLC4_Reward, D7M3_HBR-A_Reward_Loadout.
+REGEX_PREFIJO_VARIANTE = re.compile(r"^(.*_Reward_|D\d+M\d+_)")
+REGEX_SUFIJO_VARIANTE = re.compile(r"_(Loadout|MDA|CareerSalvage|CampaignSalvage|DLC\d+_?Reward|Reward$)")
 
 
 def mech_de_juego(id_juego, mechs):
-    variante = REGEX_SUFIJO_VARIANTE.sub("", REGEX_PREFIJO_VARIANTE.sub("", id_juego))
+    variante = id_juego
+    while (sin_sufijo := REGEX_SUFIJO_VARIANTE.sub("", variante)) != variante:
+        variante = sin_sufijo
+    variante = REGEX_PREFIJO_VARIANTE.sub("", variante)
+    # Algunos loadouts no respetan las mayúsculas de la variante (KTO-19b_Loadout).
+    variante = next((id_mech for id_mech in mechs if id_mech.lower() == variante.lower()), variante)
     return {"id": variante, "name": mechs[variante]["name"]} if variante in mechs else None
 
 
@@ -374,6 +381,25 @@ def sumar_objetos(objetos):
         else:
             sumados[clave] = dict(objeto)
     return list(sumados.values())
+
+
+def recompensas_fuera_de_hrq(recompensas_juego, misiones_juego, mechs, sistemas_validos):
+    """'Mechs que da una misión o un objetivo que no es una HRQ del mapa: las campañas de los DLC, la
+    información del Bounty Hunter o desbloqueos como el Wolverine de Razer. Las de las HRQ ya van en
+    su recompensa."""
+    cadenas = {cadena_de_carpeta(accion["carpeta"])[0] for accion in misiones_juego if accion["sistema"] in sistemas_validos}
+    resultado = []
+    for recompensa in recompensas_juego:
+        variantes = [mech for mech in (mech_de_juego(id_juego, mechs) for id_juego in recompensa["mechs"]) if mech]
+        if cadena_de_carpeta(recompensa["carpeta"])[0] in cadenas or not variantes:
+            continue
+        dlc = REGEX_DLC.match(recompensa["carpeta"])
+        entrada = {"id": recompensa["objetivo"], "title": recompensa["titulo"], "summary": recompensa["resumen"],
+                   "dlc": int(dlc.group(1)) if dlc else None, "mechs": variantes}
+        if recompensa["sistema"] in sistemas_validos:
+            entrada["system"] = recompensa["sistema"]
+        resultado.append(entrada)
+    return resultado
 
 
 def mercados_especiales(mercados_juego, mechs, items, sistemas_validos):
@@ -466,7 +492,7 @@ def tabla_de_faccion(faccion, alianzas, con_tabla):
     return None
 
 
-def disponibilidad_de_mechs(mechs, unit_cards, facciones, alianzas):
+def disponibilidad_de_mechs(mechs, unit_cards, facciones, alianzas, heroes_en_venta):
     rarezas = {}
     for mech in mechs.values():
         ficha = unit_cards.get(f"{mech['id'].lower()}_loadout")
@@ -482,6 +508,9 @@ def disponibilidad_de_mechs(mechs, unit_cards, facciones, alianzas):
                     "rarity": {faccion: nivel for faccion, nivel in sorted(rareza.items()) if faccion in usadas}}
         if mechs[id_mech].get("hero"):
             variante["hero"] = True
+        # Los hero de HeroMechsForPurchase pueden salir a la venta; el resto solo se consigue de otra forma.
+        if id_mech.lower() in heroes_en_venta:
+            variante["heroMarket"] = True
         variantes.append(variante)
     return {"factions": dict(sorted(tablas.items())), "mechs": variantes}
 
@@ -638,12 +667,13 @@ def main():
                                       recompensas_por_cadena(leer("recompensas_misiones.json"), mechs, items)),
         "markets": mercados_especiales(mercados_juego, mechs, items, {sistema["id"] for sistema in sistemas}),
         "uniqueMechs": mechs_unicos(unicos_juego, mechs),
+        "rewards": recompensas_fuera_de_hrq(leer("recompensas_campana.json"), misiones_juego, mechs, {sistema["id"] for sistema in sistemas}),
     }
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"))
         archivo.write("\n")
     unit_cards = cargar_unit_cards(cargar_archivos_por_nombre(RUTA_UNIT_CARDS))
-    disponibilidad = disponibilidad_de_mechs(mechs, unit_cards, facciones, leer("alianzas.json"))
+    disponibilidad = disponibilidad_de_mechs(mechs, unit_cards, facciones, leer("alianzas.json"), {heroe.lower() for heroe in leer("heroes_en_venta.json")})
     with open(RUTA_DISPONIBILIDAD, "w", encoding="utf-8") as archivo:
         json.dump(disponibilidad, archivo, ensure_ascii=False, separators=(",", ":"))
         archivo.write("\n")

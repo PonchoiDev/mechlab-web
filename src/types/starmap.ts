@@ -107,6 +107,8 @@ export interface MechAvailability {
   id: string;
   name: string;
   hero?: boolean;
+  // Hero que el juego puede poner a la venta (HeroMechsForPurchase): no tiene un sitio fijo.
+  heroMarket?: boolean;
   // Fecha de introducción: antes no existe.
   from: GameDate;
   // Por facción con tabla; si no está, esa facción no la vende.
@@ -127,6 +129,17 @@ export interface ZoneLevel {
   difficulty: number | null;
 }
 
+// 'Mechs que da una misión u objetivo que no es una HRQ: campañas de los DLC, el Bounty Hunter o
+// desbloqueos de promociones.
+export interface CampaignReward {
+  id: string;
+  title: string;
+  summary: string | null;
+  dlc: number | null;
+  mechs: { id: string; name: string }[];
+  system?: number;
+}
+
 export interface StarmapData {
   range: DateRange;
   colors: { cluster: string; hub: string };
@@ -139,4 +152,5 @@ export interface StarmapData {
   quests: Quest[];
   markets: Market[];
   uniqueMechs: UniqueMech[];
+  rewards: CampaignReward[];
 }

@@ -1,4 +1,4 @@
-import type { AvailabilityData, GameDate, Market, MechAvailability, Quest, Rarity, StarmapData, UniqueMech } from '../types/starmap';
+import type { AvailabilityData, CampaignReward, GameDate, Market, MechAvailability, Quest, Rarity, StarmapData, UniqueMech } from '../types/starmap';
 import { getQuestRoute } from './quests';
 import { countSystemsByOwner, getOwnerAt, normalize } from './starmap';
 
@@ -56,23 +56,32 @@ export interface FixedSources {
   quests: Quest[];
   markets: Market[];
   uniques: UniqueMech[];
+  rewards: CampaignReward[];
 }
 
-// Sitios donde se consigue siempre: recompensa de una HRQ, mercado especial o 'Mech único colocado.
+// Sitios donde se consigue siempre: recompensa de una HRQ, mercado especial, 'Mech único colocado o
+// recompensa de una misión que no es una HRQ.
 export const getFixedSources = (data: StarmapData, mechId: string): FixedSources => ({
   quests: data.quests.filter(quest => quest.rewards.some(reward => reward.mechs.some(entry => entry.id === mechId))),
   markets: data.markets.filter(market => market.mechs.some(entry => entry.id === mechId)),
-  uniques: data.uniqueMechs.filter(unique => unique.mech === mechId)
+  uniques: data.uniqueMechs.filter(unique => unique.mech === mechId),
+  rewards: data.rewards.filter(reward => reward.mechs.some(entry => entry.id === mechId))
 });
 
-const hasSources = ({ quests, markets, uniques }: FixedSources) => quests.length + markets.length + uniques.length > 0;
+export const countSources = ({ quests, markets, uniques, rewards }: FixedSources) => quests.length + markets.length + uniques.length + rewards.length;
 
-export const getHeroMechs = (data: StarmapData, availability: AvailabilityData): { mech: MechAvailability; sources: FixedSources }[] =>
-  availability.mechs
-    .filter(mech => mech.hero)
+type OnePlaceMech = { mech: MechAvailability; sources: FixedSources };
+
+// 'Mechs de un solo sitio: no salen a la venta como hero y tienen una fuente fija. Los hero, y aparte
+// las variantes especiales que no vende ninguna facción (el Wolverine de Razer).
+export const getOnePlaceMechs = (data: StarmapData, availability: AvailabilityData): { heroes: OnePlaceMech[]; special: OnePlaceMech[] } => {
+  const entries = availability.mechs
+    .filter(mech => !mech.heroMarket && (mech.hero || Object.keys(mech.rarity).length === 0))
     .map(mech => ({ mech, sources: getFixedSources(data, mech.id) }))
-    .filter(({ sources }) => hasSources(sources))
+    .filter(({ sources }) => countSources(sources) > 0)
     .sort((a, b) => a.mech.name.localeCompare(b.mech.name) || a.mech.id.localeCompare(b.mech.id));
+  return { heroes: entries.filter(({ mech }) => mech.hero), special: entries.filter(({ mech }) => !mech.hero) };
+};
 
 // Qué encuadrar al elegir una variante. Un hero con fuente fija, o una variante que no vende nadie, se
 // consigue en su HRQ (con la ruta marcada) o en su sistema; si la venden facciones pequeñas, sus
@@ -86,10 +95,11 @@ export const getMechFocus = (data: StarmapData, availability: AvailabilityData, 
     })
     : [];
   const sources = getFixedSources(data, mech.id);
-  if ((mech.hero || selling.length === 0) && hasSources(sources)) {
+  if ((mech.hero || selling.length === 0) && countSources(sources) > 0) {
     const [quest] = sources.quests;
     if (quest) return { systemIds: getQuestRoute(quest), questId: quest.id };
-    return { systemIds: [...new Set([...sources.uniques, ...sources.markets].map(source => source.system))], questId: null };
+    const systems = [...sources.uniques, ...sources.markets, ...sources.rewards].flatMap(source => (source.system === undefined ? [] : [source.system]));
+    return { systemIds: [...new Set(systems)], questId: null };
   }
   return { systemIds: selling.length <= FOCUS_SYSTEMS ? selling.map(system => system.id) : [], questId: null };
 };
