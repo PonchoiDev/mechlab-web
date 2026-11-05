@@ -45,7 +45,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 |---|---|---|---|
 | CA1 | El Atlas AS7-D | se consulta su rareza | existe desde el 1 de enero de 2755; es común en Steiner, poco común en Kurita y muy raro en Liao |
 | CA2 | Magistracy of Canopus, Elysian Fields, Lyran Alliance y Arc-Royal Defense Cordon | se consulta la tabla que usan | Periphery, Outlaws, la suya y ninguna; el AS7-D es muy raro en Canopus |
-| CA3 | El AS7-D el 1 de junio de 3025 | se agrupan las facciones del mapa por rareza | el primer grupo es Common, con Steiner y su número de sistemas; Liao y Canopus están en Very rare; las facciones sin entrada van al final, como no vendido |
+| CA3 | El AS7-D el 1 de junio de 3025 y el 1 de junio de 3052 | se agrupan las facciones del mapa por rareza | en 3025 el primer grupo es Common, con Steiner y su número de sistemas, y Liao y Canopus están en Very rare; en 3052 los Clanes, que no lo tienen en su tabla, van al final, como no vendido |
 | CA4 | El Archer ARC-AGC (hero) | se consulta | existe desde el 1 de enero de 3045, es Unique en Marik, no existe el 1 de enero de 3030 y es recompensa de Bow and Arrow |
 | CA5 | El Atlas II AS7-D-H y el Thunderbolt TDR-5S | se consultan sus fuentes fijas | el primero está en Romulus desde el 10 de mayo de 3043; el segundo se vende en el mercado del DLC4 en Rasalhague |
 | CA6 | Los 'Mechs hero | se listan los que tienen fuente fija | son 10, ordenados por nombre, todos hero y con al menos una fuente; entre ellos el ARC-AGC (Bow and Arrow) y el AS7-D-H (Romulus) |

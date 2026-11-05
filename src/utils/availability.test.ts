@@ -50,7 +50,10 @@ describe('rareza de cada variante por facción', () => {
     expect(steiner?.systems).toBeGreaterThan(0);
     expect(groupOf(groups, 'Liao')).toBe('veryRare');
     expect(groupOf(groups, 'MagistracyOfCanopus')).toBe('veryRare');
-    expect(groups.at(-1)?.rarity).toBeNull();
+    // En 3052 los Clanes tienen sistemas y su tabla no trae el AS7-D: van al final, como no vendido.
+    const invasion = getAvailabilityAt(data, availability, mech('AS7-D'), '3052-06-01');
+    expect(invasion.at(-1)?.rarity).toBeNull();
+    expect(groupOf(invasion, 'ClanWolf')).toBeNull();
   });
 
   it('CA4: el ARC-AGC es Unique en Marik, existe desde 3045 y es recompensa de Bow and Arrow', () => {
