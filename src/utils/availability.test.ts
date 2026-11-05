@@ -191,6 +191,15 @@ describe('rareza de cada variante por facción', () => {
     expect(data.rewards.find(reward => reward.title === 'Shielded Withdrawal')?.system).toBe(vega.id);
   });
 
+  it('CA22: el Wolverine de Razer y el PXH-KB son desbloqueos de promociones, sin sistema', () => {
+    for (const id of ['WVR-7H', 'PXH-KB']) {
+      const [reward] = getFixedSources(data, id).rewards;
+      expect(reward.exclusive).toBe(true);
+      expect(reward.system).toBeUndefined();
+    }
+    expect(getFixedSources(data, 'MAD-BH').rewards[0].exclusive).toBeUndefined();
+  });
+
   it('CA10: las variantes están en el MechLab y todas las facciones del mapa tienen tabla salvo el ARDC', () => {
     const names = new Map(mechsJson.map(entry => [entry.id, entry.name]));
     expect(availability.mechs.filter(entry => names.get(entry.id) !== entry.name)).toEqual([]);
