@@ -43,7 +43,7 @@ Las campañas de varios DLC abren mercados en sistemas concretos con un inventar
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
 | CA1 | El Atlas II | se consulta | es el AS7-D-H, del DLC 7, en Romulus desde el 10 de mayo de 3043; el 9 de mayo de 3043 no aparece y el 10 sí |
-| CA2 | Los mercados del juego | se cargan | son 21, ninguno sin sistema |
+| CA2 | Los mercados del juego | se cargan | son 22 (4 del DLC2, 4 del DLC4, 4 del DLC5, 5 del DLC7, 3 del DLC8 y 2 del DLC9), todos en un sistema del mapa |
 | CA3 | El mercado del DLC4 en Rasalhague | se consulta | es de la etapa `Mission 5` y vende 9 'Mechs, entre ellos el TDR-5S y el BLR-1G |
 | CA4 | El mercado negro del DLC7 en Alleghe | se consulta | es un mercado negro y vende el STK-3H |
 | CA5 | El mercado del DLC9 en Bangor | se consultan sus armas | incluye una Ultra Autocannon 10 con `Lost Tech tier` y cantidad 1 |

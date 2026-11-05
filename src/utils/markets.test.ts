@@ -25,8 +25,8 @@ describe('Mechs únicos', () => {
 });
 
 describe('mercados especiales', () => {
-  it('CA2: hay 21 mercados, todos en un sistema del mapa', () => {
-    expect(data.markets).toHaveLength(21);
+  it('CA2: hay 22 mercados, todos en un sistema del mapa', () => {
+    expect(data.markets).toHaveLength(22);
     expect(data.markets.every(candidate => data.systems.some(system => system.id === candidate.system))).toBe(true);
   });
 
