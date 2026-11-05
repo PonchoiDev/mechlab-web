@@ -14,6 +14,7 @@ import {
   getHubs,
   getNextEvent,
   getOwnerAt,
+  getOwnerChanges,
   getPreviousEvent,
   getTerritoryContours,
   getTerritoryOwner,
@@ -92,6 +93,16 @@ describe('eventos y fechas', () => {
     expect(daysToDate(dateToDays('3048-02-28') + 1)).toBe('3048-02-29');
     expect(getCurrentEvent(data.events, '3049-06-01')?.name).toMatch(/Clan Invasion/);
     expect(getCurrentEvent(data.events, '3020-01-01')).toBeNull();
+  });
+
+  it('al saltar de un evento a otro se sabe qué sistemas cambian de dueño', () => {
+    const changes = getOwnerChanges(data.systems, '3049-12-31', '3050-04-01');
+    expect(changes.length).toBeGreaterThan(0);
+    expect(changes.every(changed => getOwnerAt(changed, '3049-12-31') !== getOwnerAt(changed, '3050-04-01'))).toBe(true);
+    expect(changes.some(changed => getOwnerAt(changed, '3050-04-01')?.startsWith('Clan'))).toBe(true);
+    // Tukayyid cae ante Ghost Bear y vuelve a Rasalhague entre esas dos fechas: no cuenta como cambio.
+    expect(getOwnerChanges(data.systems, '3052-04-30', '3052-06-01').map(changed => changed.name)).not.toContain('Tukayyid');
+    expect(getOwnerChanges(data.systems, '3042-01-21', '3042-01-21')).toEqual([]);
   });
 
   it('la leyenda cuenta los sistemas de cada facción, de mayor a menor', () => {

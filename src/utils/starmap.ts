@@ -14,6 +14,10 @@ export const getOwnerAt = (system: StarSystem, date: GameDate): string | null =>
   return owner;
 };
 
+// Los sistemas que cambian de dueño entre dos fechas, para resaltarlos al saltar de un evento a otro.
+export const getOwnerChanges = (systems: StarSystem[], from: GameDate, to: GameDate): StarSystem[] =>
+  systems.filter(system => getOwnerAt(system, from) !== getOwnerAt(system, to));
+
 // Las facciones con sistemas en esa fecha, de mayor a menor, para la leyenda.
 export const countSystemsByOwner = (systems: StarSystem[], date: GameDate): [string, number][] => {
   const counts = new Map<string, number>();
