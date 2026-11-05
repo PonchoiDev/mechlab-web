@@ -1,7 +1,7 @@
 # Especificación: recompensas de las misiones de alta recompensa
 
 - **Issue:** [#70](https://github.com/PonchoiDev/mechlab-web/issues/70)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/quests.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -62,3 +62,13 @@ El objetivo de cada misión (`*_Prompt`, el mismo del que salen su título y su 
 
 1. **Datos y lógica (CA1 a CA6):** `src/utils/quests.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, la ficha de Bow and Arrow, de Pirate Hunt (dos modos) y de Those in Need, y el enlace del 'Mech al MechLab.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 113 objetivos que pagan, sumados en las 64 HRQ: todas tienen recompensa, 27 dan algún 'Mech y 38 pagan distinto en campaña y en carrera.
+- **Tests:** los seis criterios (CA1 a CA6) están en `src/utils/quests.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador con Bow and Arrow (Archer ARC-AGC), Pirate Hunt (dos modos), Those in Need (solo 'Mechs y armas, sin C-Bills) y Adam Steiner (40 millones y el Bushwacker BSW-HR); la búsqueda «gauss» da Blood Minerals, Errant Signal y Pirate Hunt.
+- **Decisiones durante el desarrollo:**
+  - Leer las recompensas desde las acciones con sistema dejaba fuera el pago final de varias HRQ (cinco se quedaban sin recompensa y Adam Steiner sin sus 30 millones): se recorren todos los objetivos de la carpeta.
+  - Si una HRQ no paga C-Bills ni reputación (Those in Need), la ficha no muestra esa línea.
