@@ -451,6 +451,7 @@
       }
 
       .whats-new-panel[hidden] { display: none; }
+      .whats-new-panel:focus-visible { outline: 2px solid var(--lime); outline-offset: -2px; }
 
       .whats-new-panel h2 {
         margin: 0;
@@ -552,7 +553,7 @@
                 <path d="M12 3a6 6 0 0 0-6 6v3.6L4.4 15.4A1 1 0 0 0 5.3 17h13.4a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6Zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
-            <section class="whats-new-panel" role="dialog" aria-label="What's new" hidden>
+            <section class="whats-new-panel" role="dialog" aria-label="What's new" tabindex="0" hidden>
               <h2>What's new</h2>
               <ol class="whats-new-list"></ol>
             </section>
@@ -700,9 +701,14 @@
             dot.remove();
           }
         };
-        const setOpen = open => {
+        // Al abrirse, el foco pasa al panel para poder desplazarlo con el teclado; al cerrarse con
+        // Escape vuelve a la campana.
+        const setOpen = (open, returnFocus = false) => {
+          const wasOpen = !panel.hidden;
           panel.hidden = !open;
           button.setAttribute('aria-expanded', String(open));
+          if (open) panel.focus();
+          else if (wasOpen && returnFocus) button.focus();
         };
         button.addEventListener('click', () => {
           const opening = panel.hidden;
@@ -713,7 +719,7 @@
           setOpen(opening);
         });
         document.addEventListener('pointerdown', event => { if (!root.contains(event.target)) setOpen(false); });
-        document.addEventListener('keydown', event => { if (event.key === 'Escape') setOpen(false); });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') setOpen(false, true); });
         renderDot();
         root.hidden = false;
       })();

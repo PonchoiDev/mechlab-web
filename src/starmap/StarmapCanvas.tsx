@@ -44,6 +44,9 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
   // Facción de la zona bajo el ratón cuando no hay una estrella cerca: la ficha es del sistema
   // elegido, y sin esta etiqueta parecería que describe la zona.
   const [territoryHint, setTerritoryHint] = useState<{ faction: string; x: number; y: number } | null>(null);
+  // Última posición del ratón sobre el mapa: al cambiar la fecha con el teclado, la etiqueta se
+  // vuelve a calcular ahí sin esperar a que se mueva.
+  const mouseRef = useRef<{ x: number; y: number } | null>(null);
   const boundsRef = useRef(getBounds(data));
 
   useEffect(() => {
@@ -132,7 +135,13 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
   }, [data]);
 
   useEffect(() => {
-    rendererRef.current?.setDate(date, animateDate && !prefersReducedMotion());
+    const renderer = rendererRef.current;
+    if (!renderer) return;
+    renderer.setDate(date, animateDate && !prefersReducedMotion());
+    const mouse = mouseRef.current;
+    if (!mouse) return;
+    const owner = renderer.systemAt(mouse.x, mouse.y) ? null : renderer.ownerAt(mouse.x, mouse.y);
+    setTerritoryHint(owner ? { faction: owner, ...mouse } : null);
   }, [date, data, animateDate]);
 
   useEffect(() => {
@@ -181,6 +190,7 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
       const previous = pointers.get(event.pointerId);
       if (!previous) {
         if (event.pointerType === 'mouse') {
+          mouseRef.current = point;
           const system = renderer.systemAt(point.x, point.y);
           const owner = system ? null : renderer.ownerAt(point.x, point.y);
           callbacksRef.current.onHover(system?.id ?? null);
@@ -227,6 +237,7 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     };
 
     const onLeave = () => {
+      mouseRef.current = null;
       callbacksRef.current.onHover(null);
       setTerritoryHint(null);
     };
