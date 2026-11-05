@@ -1,4 +1,4 @@
-import { useMemo, useState, type CSSProperties } from 'react';
+import { Fragment, useMemo, useState, type CSSProperties } from 'react';
 import type { AvailabilityData, GameDate, MechAvailability, Quest, StarmapData } from '../types/starmap';
 import { getAvailabilityAt, getFixedSources, getHeroMechs, isProduced, RARITY_NAMES, searchMechs, type FixedSources } from '../utils/availability';
 import { formatGameDate } from '../utils/starmap';
@@ -18,16 +18,17 @@ const describeSources = (data: StarmapData, { quests, markets, uniques }: FixedS
 
 interface MechDrawerProps {
   availability: AvailabilityData | null;
+  date: GameDate;
   selectedId: string | null;
   onOpen: () => void;
   onPick: (mechId: string) => void;
 }
 
 // Buscador de variantes, junto a Quests y Special markets. La rareza se carga al abrirlo.
-export function MechDrawer({ availability, selectedId, onOpen, onPick }: MechDrawerProps) {
+export function MechDrawer({ availability, date, selectedId, onOpen, onPick }: MechDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const results = useMemo(() => (availability ? searchMechs(availability, query) : []), [availability, query]);
+  const results = useMemo(() => (availability ? searchMechs(availability, query, date) : []), [availability, query, date]);
 
   return (
     <section className={`starmap-legend starmap-quests starmap-mechs-drawer${isOpen ? ' is-open' : ''}`} aria-label="Find a 'Mech">
@@ -52,16 +53,24 @@ export function MechDrawer({ availability, selectedId, onOpen, onPick }: MechDra
           />
           <ul>
             {!availability && <li className="starmap-quests-empty">Loading…</li>}
-            {availability && !query.trim() && <li className="starmap-quests-empty">Type a name to see where each faction sells it</li>}
+            {availability && !query.trim() && <li className="starmap-quests-empty">Type a name to see where each faction sells it. Only &rsquo;Mechs in production on {formatGameDate(date)} are listed</li>}
             {results.map(mech => (
               <li key={mech.id}>
-                <button type="button" aria-pressed={mech.id === selectedId} onClick={() => onPick(mech.id)}>
+                <button
+                  type="button"
+                  aria-pressed={mech.id === selectedId}
+                  onClick={() => {
+                    // Se cierra para que no tape lo que el mapa encuadra.
+                    setIsOpen(false);
+                    onPick(mech.id);
+                  }}
+                >
                   <span>{mech.name} <small>{mech.id}</small></span>
                   {mech.hero && <small>Hero</small>}
                 </button>
               </li>
             ))}
-            {availability && query.trim() && results.length === 0 && <li className="starmap-quests-empty">No &rsquo;Mechs found</li>}
+            {availability && query.trim() && results.length === 0 && <li className="starmap-quests-empty">No &rsquo;Mechs in production on {formatGameDate(date)}</li>}
           </ul>
         </div>
       )}
@@ -101,7 +110,15 @@ export function HeroDrawer({ data, availability, selectedId, onOpen, onPick }: H
             {!availability && <li className="starmap-quests-empty">Loading…</li>}
             {heroes.map(({ mech, sources }) => (
               <li key={mech.id}>
-                <button type="button" aria-pressed={mech.id === selectedId} onClick={() => onPick(mech.id)}>
+                <button
+                  type="button"
+                  aria-pressed={mech.id === selectedId}
+                  onClick={() => {
+                    // Se cierra para que no tape lo que el mapa encuadra.
+                    setIsOpen(false);
+                    onPick(mech.id);
+                  }}
+                >
                   <span>{mech.name} <small>{mech.id}</small></span>
                   <small>{describeSources(data, sources).join(' · ')}</small>
                 </button>
@@ -130,6 +147,7 @@ export function MechCard({ data, availability, mech, date, onSystem, onQuest, on
   const sources = getFixedSources(data, mech.id);
   const produced = isProduced(mech, date);
   const hasSources = sources.quests.length + sources.markets.length + sources.uniques.length > 0;
+  const isSold = produced && groups.some(({ rarity }) => rarity !== null && rarity !== 'unavailable');
 
   return (
     <section className="starmap-panel is-pinned starmap-quest starmap-mech" aria-label={`${mech.name} ${mech.id}`}>
@@ -148,12 +166,33 @@ export function MechCard({ data, availability, mech, date, onSystem, onQuest, on
             {produced
               ? <p className="starmap-mech-since">In production since {formatGameDate(mech.from)}</p>
               : <p className="starmap-quest-status">Not produced until {formatGameDate(mech.from)}</p>}
+            {produced && !isSold && (
+              <p className="starmap-quest-status">
+                {hasSources ? 'No faction market sells it on this date' : 'No faction market sells it, and the game gives it no fixed place'}
+              </p>
+            )}
             <ul className="starmap-rarity">
               {groups.map(({ rarity, factions }) => (
                 <li key={rarity ?? 'none'} style={{ '--rarity': rarity && produced ? RARITY_COLORS[rarity] : NOT_SOLD_COLOR } as CSSProperties}>
                   <b>{rarity ? RARITY_NAMES[rarity] : NOT_SOLD}</b>
                   <span>
-                    {factions.map(({ id, systems }) => `${data.factions[id].name} (${systems})`).join(', ')}
+                    {factions.map(({ id, systems, systemIds }, index) => (
+                      <Fragment key={id}>
+                        {index > 0 && ', '}
+                        {data.factions[id].name} ({systems})
+                        {systemIds && rarity && rarity !== 'unavailable' && (
+                          <>
+                            {': '}
+                            {systemIds.map((systemId, position) => (
+                              <Fragment key={systemId}>
+                                {position > 0 && ' '}
+                                <button type="button" className="starmap-system-link" onClick={() => onSystem(systemId)}>{systemName(data, systemId)}</button>
+                              </Fragment>
+                            ))}
+                          </>
+                        )}
+                      </Fragment>
+                    ))}
                   </span>
                 </li>
               ))}
