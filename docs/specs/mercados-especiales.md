@@ -1,7 +1,7 @@
 # Especificación: mercados especiales y 'Mechs únicos en el mapa estelar
 
 - **Issue:** [#66](https://github.com/PonchoiDev/mechlab-web/issues/66)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/markets.test.ts` y `src/utils/buildCode.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -62,3 +62,14 @@ Las campañas de varios DLC abren mercados en sistemas concretos con un inventar
 1. **Datos y lógica (CA1 a CA8):** `src/utils/markets.test.ts`, con `starmap.json` real.
 2. **MechLab (CA9):** `src/utils/buildCode.test.ts`.
 3. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: iconos, ficha con mercados, panel Markets, Atlas II antes y después de su fecha y enlace al MechLab.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 22 mercados (4 del DLC2, 4 del DLC4, 4 del DLC5, 5 mercados negros del DLC7, 3 del DLC8 y 2 del DLC9) y un 'Mech único, el Atlas II. Todos los 'Mechs de los mercados están en `mechs.json` y todas las armas y equipo en `items.json`.
+- **Tests:** CA1 a CA8 en `src/utils/markets.test.ts` y CA9 en `src/utils/buildCode.test.ts`. Pasan todos.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844. Rasalhague muestra el mercado del DLC4 y el mercado negro del DLC7; Romulus muestra el Atlas II el 10 de mayo de 3043 y no el día antes; la búsqueda «atlas» da el Atlas II y los cinco mercados con algún Atlas; `/mercs/?mech=AS7-D-H` abre el Atlas II con su build de serie y limpia la URL.
+- **Decisiones durante el desarrollo:**
+  - El recuento a mano de la especificación daba 21 mercados; son 22.
+  - Los mercados negros del DLC7 en Rasalhague y en los sistemas sin cartografiar solo ofrecen pilotos.
+  - El enlace al MechLab usa la ruta fija `/mercs/`, la misma de la cabecera del mapa.
