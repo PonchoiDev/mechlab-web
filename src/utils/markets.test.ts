@@ -48,6 +48,11 @@ describe('mercados especiales', () => {
     expect(market('Bangor', 9).weapons).toContainEqual({ name: 'Ultra Autocannon 10', tier: 'Lost Tech tier', count: 1 });
   });
 
+  it('solo lista lo que se vende: ninguna arma ni equipo con cantidad 0', () => {
+    const items = data.markets.flatMap(candidate => [...candidate.weapons, ...candidate.equipment]);
+    expect(items.filter(item => item.count <= 0)).toEqual([]);
+  });
+
   it('CA6: Rasalhague tiene el mercado del DLC4 y el mercado negro del DLC7', () => {
     expect(getMarketsForSystem(data, systemId('Rasalhague')).map(found => found.dlc).sort()).toEqual([4, 7]);
   });

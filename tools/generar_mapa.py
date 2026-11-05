@@ -275,8 +275,9 @@ def mercados_especiales(mercados_juego, mechs, items, sistemas_validos):
             "stage": etapa_de_mercado(mercado),
             "blackMarket": mercado["negro"],
             "mechs": [encontrado for encontrado in (mech(id_juego) for id_juego in mercado["mechs"]) if encontrado],
-            "weapons": [objeto(id_juego, cantidad, True) for id_juego, cantidad in mercado["armas"]],
-            "equipment": [objeto(id_juego, cantidad, False) for id_juego, cantidad in mercado["equipo"]],
+            # Algunas entradas vienen con cantidad 0 (SRM_Half_AmmoEquipment): no se venden.
+            "weapons": [objeto(id_juego, cantidad, True) for id_juego, cantidad in mercado["armas"] if cantidad > 0],
+            "equipment": [objeto(id_juego, cantidad, False) for id_juego, cantidad in mercado["equipo"] if cantidad > 0],
             "pilots": {"count": pilotos["NumberOfPilots"], "minSkill": pilotos["MinimumSkill"], "maxSkill": pilotos["MaximumSkill"]}
             if pilotos.get("NumberOfPilots") else None,
         })

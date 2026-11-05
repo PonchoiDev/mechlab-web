@@ -74,3 +74,4 @@ Las campañas de varios DLC abren mercados en sistemas concretos con un inventar
   - El recuento a mano de la especificación daba 21 mercados; son 22.
   - Los mercados negros del DLC7 en Rasalhague y en los sistemas sin cartografiar solo ofrecen pilotos.
   - El enlace al MechLab usa la ruta fija `/mercs/`, la misma de la cabecera del mapa.
+  - 15 de los 22 mercados traen la munición `SRM_Half_AmmoEquipment` con cantidad 0. No se vende, así que el generador descarta las entradas sin existencias.
