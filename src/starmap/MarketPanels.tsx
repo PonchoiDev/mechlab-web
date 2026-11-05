@@ -5,7 +5,7 @@ import { formatGameDate } from '../utils/starmap';
 
 const describeMarket = (market: Market) => `DLC ${market.dlc} · ${market.stage}`;
 
-function MechLink({ id, name }: { id: string; name: string }) {
+export function MechLink({ id, name }: { id: string; name: string }) {
   return (
     <a className="starmap-mech-link" href={getMechLabUrl(id)} target="_blank" rel="noreferrer" title="Open in the MechLab with its stock build">
       {name} <small>{id}</small>
