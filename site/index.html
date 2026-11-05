@@ -395,6 +395,86 @@
       .site-footer p + p { margin-top: 10px; }
       .site-footer p > a:not(.support-link) { color: var(--muted); }
 
+      /* Campana de novedades, la misma del MechLab: comparten las entradas y lo ya visto. */
+      .whats-new { position: relative; }
+
+      .whats-new-button {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        color: var(--muted);
+        background: var(--raised);
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        cursor: pointer;
+        transition: color 120ms ease, border-color 120ms ease;
+      }
+
+      .whats-new-button:hover,
+      .whats-new-button:focus-visible,
+      .whats-new-button[aria-expanded='true'] {
+        color: var(--lime);
+        border-color: var(--lime);
+        outline: none;
+      }
+
+      .whats-new-button.has-unread { color: var(--text); }
+
+      .whats-new-dot {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--lime);
+        box-shadow: 0 0 0 2px var(--raised), 0 0 8px rgba(195, 237, 98, 0.6);
+      }
+
+      .whats-new-panel {
+        position: absolute;
+        z-index: 12;
+        top: calc(100% + 6px);
+        right: 0;
+        width: min(380px, calc(100vw - 32px));
+        max-height: min(520px, 70vh);
+        overflow-y: auto;
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--lime);
+        background: var(--panel);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+        scrollbar-color: var(--line) transparent;
+        text-align: left;
+      }
+
+      .whats-new-panel[hidden] { display: none; }
+
+      .whats-new-panel h2 {
+        margin: 0;
+        padding: 12px 14px 8px;
+        border-bottom: 1px solid var(--line);
+        font: 600 12px var(--mono);
+        text-transform: uppercase;
+      }
+
+      .whats-new-list { margin: 0; padding: 0; list-style: none; }
+      .whats-new-entry { padding: 12px 14px; border-bottom: 1px solid rgba(52, 61, 52, 0.6); }
+      .whats-new-entry:last-child { border-bottom: 0; }
+      .whats-new-entry time { color: var(--muted); font: 500 10px var(--mono); }
+      .whats-new-entry h3 { margin: 3px 0 6px; color: var(--lime); font-size: 14px; }
+
+      .whats-new-entry ul {
+        display: grid;
+        gap: 4px;
+        margin: 0;
+        padding-left: 16px;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
       .topbar-side {
         display: flex;
         align-items: center;
@@ -466,6 +546,17 @@
         </div>
         <div class="topbar-side">
           <p class="topbar-note">LOADOUT TOOLS<br />FOR MECHWARRIOR GAMES</p>
+          <div class="whats-new" hidden>
+            <button type="button" class="whats-new-button" aria-haspopup="dialog" aria-expanded="false" aria-label="What's new" title="What's new">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+                <path d="M12 3a6 6 0 0 0-6 6v3.6L4.4 15.4A1 1 0 0 0 5.3 17h13.4a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6Zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <section class="whats-new-panel" role="dialog" aria-label="What's new" hidden>
+              <h2>What's new</h2>
+              <ol class="whats-new-list"></ol>
+            </section>
+          </div>
           <a class="support-link" href="https://ko-fi.com/ponchoidev" target="_blank" rel="noreferrer" title="Life in the Inner Sphere is rough. Consider supporting this merc!">
             <span class="support-link-icon" aria-hidden="true">☕</span> Support
           </a>
@@ -556,5 +647,76 @@
         </p>
       </footer>
     </div>
+    <script>
+      // Campana de novedades: las entradas salen de changelog.json, que genera el build a partir de
+      // src/data/changelog.ts, y lo ya visto se guarda con la misma clave que en el MechLab.
+      (async () => {
+        const STORAGE_KEY = 'mw-builder:mercs:last-seen-update';
+        const root = document.querySelector('.whats-new');
+        const button = root.querySelector('.whats-new-button');
+        const panel = root.querySelector('.whats-new-panel');
+        let entries;
+        try {
+          const response = await fetch('/changelog.json');
+          entries = await response.json();
+        } catch {
+          return;
+        }
+        if (!Array.isArray(entries) || entries.length === 0) return;
+
+        const read = () => { try { return localStorage.getItem(STORAGE_KEY); } catch { return null; } };
+        const latestId = entries[0].id;
+        const format = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+        const list = panel.querySelector('.whats-new-list');
+        for (const entry of entries) {
+          const item = document.createElement('li');
+          item.className = 'whats-new-entry';
+          const time = document.createElement('time');
+          time.dateTime = entry.date;
+          time.textContent = format.format(new Date(entry.date));
+          const title = document.createElement('h3');
+          title.textContent = entry.title;
+          const points = document.createElement('ul');
+          for (const text of entry.items) {
+            const point = document.createElement('li');
+            point.textContent = text;
+            points.append(point);
+          }
+          item.append(time, title, points);
+          list.append(item);
+        }
+
+        const renderDot = () => {
+          const unread = read() !== latestId;
+          button.classList.toggle('has-unread', unread);
+          button.setAttribute('aria-label', unread ? "What's new (new updates)" : "What's new");
+          let dot = button.querySelector('.whats-new-dot');
+          if (unread && !dot) {
+            dot = document.createElement('span');
+            dot.className = 'whats-new-dot';
+            dot.setAttribute('aria-hidden', 'true');
+            button.append(dot);
+          } else if (!unread && dot) {
+            dot.remove();
+          }
+        };
+        const setOpen = open => {
+          panel.hidden = !open;
+          button.setAttribute('aria-expanded', String(open));
+        };
+        button.addEventListener('click', () => {
+          const opening = panel.hidden;
+          if (opening) {
+            try { localStorage.setItem(STORAGE_KEY, latestId); } catch { /* sin almacenamiento */ }
+            renderDot();
+          }
+          setOpen(opening);
+        });
+        document.addEventListener('pointerdown', event => { if (!root.contains(event.target)) setOpen(false); });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') setOpen(false); });
+        renderDot();
+        root.hidden = false;
+      })();
+    </script>
   </body>
 </html>

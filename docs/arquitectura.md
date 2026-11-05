@@ -73,6 +73,7 @@ El mapa es otra página (`starmap/index.html`, servida en `/mercs/starmap/`) con
 
 - **`utils/starmap.ts`:** el dueño de cada sistema en una fecha, los eventos, los centros industriales, la búsqueda, la rejilla de territorios y el contorno de los clústeres. Son funciones puras con sus tests (`starmap.test.ts`).
 - **`starmap/renderer.ts`:** pinta en un canvas. La rejilla que dice a qué sistema pertenece cada punto del mapa se calcula una vez, porque no depende de la fecha. Al mover la fecha solo se vuelve a colorear y se genera la textura de territorios, con el borde brillante como en el juego. El arrastre y el zoom solo redibujan esa textura.
+- **Novedades en la portada:** la portada (`site/index.html`) es HTML estático, así que el build escribe `changelog.json` en la raíz a partir de `src/data/changelog.ts`. La campana de la portada lo lee y guarda lo ya visto con la misma clave que la del MechLab.
 - **`starmap/StarmapApp.tsx`:** la ficha del sistema, el control de fecha, el buscador y la leyenda. La fecha y el sistema elegido van en la URL.
 
 ## Decisiones de diseño

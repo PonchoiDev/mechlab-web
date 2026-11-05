@@ -17,7 +17,8 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Faction borders of the Inner Sphere on any date from 3015 to 3060, taken from the game files, with the events that move them',
       'Jumping to an event fades the borders into the new ones and flashes every system that changed hands',
       'Clusters and industrial hubs, drawn as in the game, and a card with the owner history of each system',
-      'Search a system by name and share the view: the date and the system go in the link'
+      'Search a system by name and share the view: the date and the system go in the link',
+      'The MW Builder home page now has the What\'s new bell too'
     ]
   },
   {
