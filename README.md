@@ -37,7 +37,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (287 tests, cobertura con V8) |
+| Tests | Vitest 5 (289 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -183,12 +183,12 @@ python3 tools/generar_mapa.py
 | `facciones.json` | `Factions/*` | Nombre y estencil del mapa de cada facción |
 | `colores.json` | `Faction_Colours_MPC` | Color de cada estencil, de los Clanes, de los clústeres y de los centros industriales |
 | `eventos.json` | `BorderChanges/*/Borders*` | Los 19 cambios de frontera, de 3025 a 3060 |
-| `centros_industriales.json` | `SafeZone_*_ClusterAsset` | Los 35 centros industriales con su capital y sus sistemas |
+| `centros_industriales.json` | `SafeZone_*_ClusterAsset` y su malla | Los 35 centros industriales con su capital, sus sistemas y las líneas que los unen |
 | `clusteres.json` y `textos.json` | Assets de clúster y `Faction_StringTable` | Nombres de los clústeres |
 
 ## Calidad y comprobación contra el juego
 
-- **287 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **289 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

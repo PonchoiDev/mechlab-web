@@ -20,7 +20,7 @@ Todo sale del archivo `MW5Mercs-WindowsNoEditor.pak` de la instalación. Está s
 | Facciones | `Factions/*` (`MWFactionAsset`) | Nombre y estencil del mapa (`StarMapStencilId`) |
 | Colores del mapa | `UI/FrontEnd/Starmap/Materials/Factions/Faction_Colours_MPC` | El color de cada estencil y de los Clanes, y los de los clústeres (`Warzone`) y los centros industriales (`Safezone`) |
 | Eventos | `Campaign/CampaignArcs/BorderChanges/*/Borders*` (`MWStarMapBorderAsset`) | 19 cambios de frontera, de 3025 a 3060, con su fecha (`StartDateOfBorderChange`) |
-| Centros industriales | `DLC1/CareerMode/Clusters/SafeZone_*/SafeZone_*_ClusterAsset` | 35 clústeres de reparación, con su sistema capital y la lista de sistemas |
+| Centros industriales | `DLC1/CareerMode/Clusters/SafeZone_*/SafeZone_*_ClusterAsset` y su malla `ClusterConstellation` | 35 clústeres de reparación, con su sistema capital, la lista de sistemas y la malla de las líneas que los unen |
 | Nombres de clúster | `Campaign/Clusters/_common/Faction_StringTable` | Nombres de los clústeres con nombre propio |
 
 Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así que la extracción solo se repite cuando un parche cambie el mapa. Después, el generador produce `src/data/starmap.json`, como con los mechs.
@@ -40,7 +40,7 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
 - **RF3.** Cada facción ocupa un territorio de su color alrededor de sus sistemas, con el borde brillante y el interior más oscuro, como en el juego. Los sistemas sin dueño no tienen territorio.
 - **RF4.** Un control de fecha, abajo a la derecha, muestra la fecha como en el juego (`21 JAN 3042`) y permite moverla con un control deslizante, ir al evento anterior o al siguiente y elegir un evento de la lista. El mapa se actualiza al momento.
 - **RF5.** Al pasar por encima o tocar un sistema, una ficha arriba a la izquierda muestra su nombre, el emblema y el nombre de su facción en esa fecha y, si lo tiene, su clúster o que es un centro industrial. Al hacer clic, la ficha se queda fija y añade el historial de propietarios dentro del rango.
-- **RF6.** Los clústeres se dibujan como polígonos translúcidos naranjas alrededor de sus sistemas, y los centros industriales en azul claro con un icono en su capital.
+- **RF6.** Los clústeres se dibujan como polígonos translúcidos naranjas alrededor de sus sistemas. Los centros industriales, como en el juego, son líneas discontinuas en azul claro que unen sus estrellas, con un icono en su capital.
 - **RF7.** El mapa se mueve arrastrando y se acerca con la rueda, con dos dedos o con botones. Al acercarse aparecen los nombres de los sistemas.
 - **RF8.** Un buscador encuentra un sistema por su nombre, sin distinguir mayúsculas ni acentos, y centra el mapa en él.
 - **RF9.** La fecha y el sistema elegido se guardan en la URL (`?date=3042-01-21&system=Tukayyid`) para compartir una vista concreta.
@@ -94,6 +94,8 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
 - **Decisiones durante el desarrollo:**
   - Los clústeres no son assets de facción con su nombre: el nombre visible sale de una referencia a `Faction_StringTable`. Un material del mapa se llama igual que la facción `Periphery`, así que el extractor se queda con el asset que tiene `FactionType`.
   - Los clústeres de reparación de la campaña (`RepairSystem_*`) no se dibujan: los centros industriales salen de los clústeres `SafeZone_*`, que traen su capital.
-  - El halo del borde va en su propia textura y se atenúa al acercarse. Si no, al ampliar se convertía en una banda blanca, sobre todo con los colores pálidos de los Clanes.
+  - Los territorios se dibujaban primero como una textura difuminada, pero al ampliar el borde se volvía una banda borrosa. Ahora son contornos vectoriales (marching squares sobre la rejilla, suavizados): el borde es una línea nítida con un halo de grosor fijo en pantalla, así que el cambio de facción se ve igual de marcado con cualquier zoom.
+  - Las líneas de cada centro industrial son una malla del juego en coordenadas propias, con unas 8 unidades por año luz y el eje X invertido. `generar_mapa.py` la encaja sobre los sistemas del centro, con un error medio de entre 0,1 y 0,5 años luz, y da por unidas dos estrellas cuando la malla recorre el tramo entre ellas. Salen 181 líneas en los 34 centros con más de un sistema.
+  - Al pasar el ratón por una zona sin estrella aparece una etiqueta con la facción, porque la ficha sigue mostrando el sistema elegido y parecía que describía la zona.
   - En el móvil, el zoom y la leyenda van encima del panel de fecha para no tapar la ficha.
   - La portada pasa a «SELECT TOOL», con una carátula para el mapa hecha con una captura del propio mapa.

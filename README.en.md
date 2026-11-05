@@ -39,7 +39,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (287 tests, V8 coverage) |
+| Tests | Vitest 5 (289 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -187,12 +187,12 @@ python3 tools/generar_mapa.py
 | `facciones.json` | `Factions/*` | Name and map stencil of each faction |
 | `colores.json` | `Faction_Colours_MPC` | Color of each stencil, of the Clans, of clusters and of industrial hubs |
 | `eventos.json` | `BorderChanges/*/Borders*` | The 19 border changes, from 3025 to 3060 |
-| `centros_industriales.json` | `SafeZone_*_ClusterAsset` | The 35 industrial hubs with their capital and systems |
+| `centros_industriales.json` | `SafeZone_*_ClusterAsset` and its mesh | The 35 industrial hubs with their capital, systems and the lines joining them |
 | `clusteres.json` and `textos.json` | Cluster assets and `Faction_StringTable` | Cluster names |
 
 ## Quality and checks against the game
 
-- **287 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **289 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
