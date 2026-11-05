@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import starmapData from '../data/starmap.json';
-import type { GameDate, Quest, StarSystem, StarmapData } from '../types/starmap';
+import type { GameDate, Quest, StarSystem, StarmapData, ZoneLevel } from '../types/starmap';
 import {
   clampDate,
   countSystemsByOwner,
   dateToDays,
   daysToDate,
+  describeZoneLevel,
   formatGameDate,
   getCurrentEvent,
+  getClusterLevels,
   getDistanceToTerra,
+  getHubLevels,
   getNextEvent,
   getOwnerAt,
   getOwnerChanges,
@@ -42,6 +45,23 @@ function FactionEmblem({ factionId }: { factionId: string | null }) {
   );
 }
 
+const MODE_NAMES = { campaign: 'Campaign', career: 'Career' } as const;
+
+// Reputación recomendada y dificultad, una línea por modo; el modo solo si hay más de uno.
+function ZoneLevels({ levels }: { levels: ZoneLevel[] }) {
+  if (levels.length === 0) return null;
+  return (
+    <ul className="starmap-zone-levels">
+      {levels.map(level => (
+        <li key={`${level.mode}-${level.reputation}-${level.difficulty}`}>
+          {level.mode && levels.length > 1 && <b>{MODE_NAMES[level.mode]}: </b>}
+          {describeZoneLevel(level)}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 interface SystemPanelProps {
   system: StarSystem;
   date: GameDate;
@@ -72,12 +92,14 @@ function SystemPanel({ system, date, pinned, onClose, onQuest }: SystemPanelProp
             <div className="is-hub">
               <dt>Industrial hub</dt>
               <dd>{isCapital ? 'Hub capital' : 'Repairs and refits'}</dd>
+              <ZoneLevels levels={getHubLevels(data, system.hub)} />
             </div>
           )}
           {cluster && (
             <div>
               <dt>Cluster</dt>
               <dd>{cluster}</dd>
+              <ZoneLevels levels={getClusterLevels(data, system.cluster ?? '')} />
             </div>
           )}
         </dl>

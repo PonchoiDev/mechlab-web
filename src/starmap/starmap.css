@@ -490,6 +490,16 @@ button, input, select { font: inherit; color: inherit; }
   text-transform: uppercase;
 }
 
+.starmap-zone-levels {
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.starmap-zone-levels b { color: var(--map-muted); }
+
 .starmap-tags .is-hub dt { background: linear-gradient(90deg, #8be3ff, rgba(139, 227, 255, 0.35)); }
 
 .starmap-tags dd {
