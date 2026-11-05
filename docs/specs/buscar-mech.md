@@ -79,7 +79,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados. El CA3 se corrigió con los datos: en 3025 todas las facciones con sistemas venden el AS7-D, así que las que no lo venden se comprueban en 3052, con los Clanes.
 - **Datos:** 627 variantes con su unit card (las 12 de `mechs.json` sin ella son copias de campaña), 98 sin rareza en ninguna facción y 108 hero. 48 facciones del juego con alianza; todas las del mapa tienen tabla salvo Arc-Royal Defense Cordon. `availability.json` pesa 115 KB y 10 KB comprimido, en su propio fragmento del build.
-- **Tests:** los catorce criterios (CA1 a CA14) están en `src/utils/availability.test.ts` y pasan.
+- **Tests:** los quince criterios (CA1 a CA15) están en `src/utils/availability.test.ts` y pasan.
 - **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: el AS7-D en 3025 (Steiner en verde, Liao y la periferia en rojo) y en 3052 (los Clanes en gris), el ARC-AGC en 3030 (todavía no existe), la lista de hero con el Atlas II y la búsqueda «atlas».
 - **Decisiones durante el desarrollo:**
   - La cadena de alianzas siempre acaba en una facción con tabla (Elysian Fields, Oberon, Bandits y Outlaws), lo que apoya que el juego usa la tabla de la alianza.
