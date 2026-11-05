@@ -66,6 +66,7 @@ NOMBRES_EVENTOS = {
 # los clústeres SafeZone) y los de la historia, que el juego deja con un nombre provisional.
 REGEX_CLUSTER_OCULTO = re.compile(r"^(RepairSystem_\d+|StoryCluster\d+)$")
 REGEX_PALABRAS = re.compile(r"(?<=[a-z])(?=[A-Z])")
+ORDEN_MODOS = {"campaign": 0, "career": 1, None: 2}
 
 
 # Las mallas de los centros industriales usan unas 8 unidades por año luz y el eje X invertido. La
@@ -415,6 +416,32 @@ def mechs_unicos(unicos_juego, mechs):
     return resultado
 
 
+def modo_de_zona(ruta):
+    # Las zonas de las campañas de los DLC (DLC2/CampaignData…) se juegan igual en los dos modos.
+    if ruta.startswith("Campaign/"):
+        return "campaign"
+    if ruta.startswith("DLC1/CareerMode/"):
+        return "career"
+    return None
+
+
+def zonas_con_sistemas(zonas, sistemas):
+    # El mapa toma las zonas del asset de facción de cada sistema y el nivel está en el ClusterAsset;
+    # sus nombres no siempre coinciden (FreeWorldInterior tiene los sistemas de Free Worlds Commerce
+    # Hub), así que se unen por sus sistemas. Las invasiones de los Clanes solo comparten una parte.
+    return [zona for zona in zonas if zona["sistemas"] and set(zona["sistemas"]) == set(sistemas)]
+
+
+def niveles_de_zona(zonas):
+    """Reputación recomendada y dificultad por modo, sin repetir los iguales del mismo modo."""
+    niveles = []
+    for zona in zonas:
+        nivel = {"mode": modo_de_zona(zona["ruta"]), "reputation": zona.get("reputacion") or None, "difficulty": zona.get("dificultad")}
+        if (nivel["reputation"] or nivel["difficulty"] is not None) and nivel not in niveles:
+            niveles.append(nivel)
+    return sorted(niveles, key=lambda nivel: (ORDEN_MODOS[nivel["mode"]], nivel["difficulty"] or 0))
+
+
 def leer(nombre):
     with open(os.path.join(RUTA_ORIGEN, nombre), encoding="utf-8") as archivo:
         return json.load(archivo)
@@ -527,13 +554,22 @@ def main():
         if logo and os.path.exists(os.path.join(RUTA_LOGOS, logo.rsplit(".", 1)[-1] + ".png")):
             facciones[id_faccion]["logo"] = logo.rsplit(".", 1)[-1] + ".png"
 
+    zonas = leer("zonas.json")
     clusteres = {}
     sin_nombre = []
     for id_cluster in sorted({sistema["cluster"] for sistema in sistemas if "cluster" in sistema}):
+        sistemas_cluster = [sistema["id"] for sistema in sistemas if sistema.get("cluster") == id_cluster]
+        suyas = zonas_con_sistemas(zonas, sistemas_cluster)
         nombre = resolver_texto(clusteres_juego[id_cluster]["Name"], tablas)
+        # Los assets de facción de Taurian Corridor y de Outworlds Border traen escrito el texto
+        # OutworldsBorder en vez de una clave de la tabla de textos; su zona de campaña sí la trae.
+        # Las zonas de un solo sistema se llaman como él y se dejan como están.
+        de_campana = [zona for zona in suyas if modo_de_zona(zona["ruta"]) == "campaign" and isinstance(zona.get("nombre"), dict)]
+        if not isinstance(clusteres_juego[id_cluster]["Name"], dict) and len(sistemas_cluster) > 1 and de_campana:
+            nombre = resolver_texto(de_campana[0]["nombre"], tablas) or nombre
         if not nombre:
             sin_nombre.append(id_cluster)
-        clusteres[id_cluster] = {"name": separar_palabras(nombre or id_cluster)}
+        clusteres[id_cluster] = {"name": separar_palabras(nombre or id_cluster), "levels": niveles_de_zona(suyas)}
 
     eventos = [
         {"id": evento["asset"], "date": evento["fecha"], "name": NOMBRES_EVENTOS[evento["asset"]]}
@@ -549,7 +585,8 @@ def main():
         "events": eventos,
         "clusters": clusteres,
         "hubs": {
-            id_centro: {"capital": centro["capital"], "links": lineas_de_centro(centro, posiciones)}
+            id_centro: {"capital": centro["capital"], "links": lineas_de_centro(centro, posiciones),
+                        "levels": niveles_de_zona(zonas_con_sistemas(zonas, centro["sistemas"]))}
             for id_centro, centro in centros.items()
         },
         "systems": sistemas,
@@ -571,10 +608,10 @@ def main():
     sin_mech = [mech for mercado in mercados_juego for mech in mercado["mechs"] if re.sub(r"_Loadout$", "", mech) not in mechs]
     if sin_mech:
         print(f"Aviso: 'Mechs de mercado que no están en mechs.json: {', '.join(sin_mech)}")
-    sin_nombre = sorted({REGEX_TIER.sub("", objeto) for mercado in mercados_juego for objeto, _ in mercado["armas"] + mercado["equipo"]
-                         if REGEX_TIER.sub("", objeto) not in items})
-    if sin_nombre:
-        print(f"Aviso: objetos de mercado que no están en items.json: {', '.join(sin_nombre)}")
+    objetos_sin_nombre = sorted({REGEX_TIER.sub("", objeto) for mercado in mercados_juego for objeto, _ in mercado["armas"] + mercado["equipo"]
+                                 if REGEX_TIER.sub("", objeto) not in items})
+    if objetos_sin_nombre:
+        print(f"Aviso: objetos de mercado que no están en items.json: {', '.join(objetos_sin_nombre)}")
     if sin_nombre:
         print(f"Aviso: clústeres sin nombre visible: {', '.join(sin_nombre)}")
     sin_lineas = [id_centro for id_centro, centro in datos["hubs"].items()

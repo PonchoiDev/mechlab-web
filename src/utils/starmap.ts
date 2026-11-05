@@ -1,4 +1,4 @@
-import type { DateRange, GameDate, StarEvent, StarSystem, StarmapData } from '../types/starmap';
+import type { DateRange, GameDate, StarEvent, StarSystem, StarmapData, ZoneLevel } from '../types/starmap';
 
 const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 const DATE_PATTERN = /^(\d{4})-(\d{2})-(\d{2})$/;
@@ -83,6 +83,21 @@ export const getHubs = (data: StarmapData): Hub[] => Object.entries(data.hubs).f
   const capital = data.systems.find(system => system.id === hub.capital);
   return capital ? [{ id, capital, systems: data.systems.filter(system => system.hub === id) }] : [];
 });
+
+// Si todos los modos piden lo mismo, un solo nivel sin modo.
+const mergeModes = (levels: ZoneLevel[]): ZoneLevel[] => {
+  const same = levels.every(level => level.reputation === levels[0].reputation && level.difficulty === levels[0].difficulty);
+  return levels.length > 1 && same ? [{ ...levels[0], mode: null }] : levels;
+};
+
+export const getClusterLevels = (data: StarmapData, id: string): ZoneLevel[] => mergeModes(data.clusters[id]?.levels ?? []);
+
+export const getHubLevels = (data: StarmapData, id: string): ZoneLevel[] => mergeModes(data.hubs[id]?.levels ?? []);
+
+export const describeZoneLevel = (level: ZoneLevel): string => [
+  level.reputation && `Recommended reputation ${level.reputation}`,
+  level.difficulty !== null && `Difficulty ${level.difficulty}`
+].filter(Boolean).join(' · ');
 
 export const normalize = (text: string) => text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 

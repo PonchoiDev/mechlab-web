@@ -7,11 +7,14 @@ import {
   countSystemsByOwner,
   dateToDays,
   daysToDate,
+  describeZoneLevel,
   formatGameDate,
   getCurrentEvent,
   getDistanceToTerra,
+  getClusterLevels,
   getClusterOutline,
   getFactionColor,
+  getHubLevels,
   getHubs,
   getNextEvent,
   getOwnerAt,
@@ -196,5 +199,70 @@ describe('búsqueda, territorios y URL', () => {
     expect(parseMapQuery('?date=ayer&system=Not%20a%20system', data)).toEqual({ date: '3015-01-01', systemId: null });
     expect(parseMapQuery('?date=3099-01-01', data).date).toBe('3060-12-31');
     expect(toMapQuery({ date: '3042-01-21', systemId: system('Tukayyid').id }, data)).toBe('?date=3042-01-21&system=Tukayyid');
+  });
+});
+
+// Criterios de aceptación de docs/specs/reputacion-zonas.md (issue #72).
+describe('reputación recomendada y dificultad de las zonas', () => {
+  it('CA1: Liao/Davion Border pide reputación 8 en campaña y 3-6 en carrera', () => {
+    expect(getClusterLevels(data, 'DavionBorder')).toEqual([
+      { mode: 'campaign', reputation: '8', difficulty: 45 },
+      { mode: 'career', reputation: '3-6', difficulty: 20 }
+    ]);
+  });
+
+  it('CA2: Rasalhague Outer Reaches tiene dos niveles distintos en carrera', () => {
+    expect(getClusterLevels(data, 'RasalagueReaches')).toEqual([
+      { mode: 'campaign', reputation: '13-15', difficulty: 100 },
+      { mode: 'career', reputation: '1-3', difficulty: 9 },
+      { mode: 'career', reputation: '7-10', difficulty: 60 }
+    ]);
+  });
+
+  it('CA3: una zona solo de carrera tiene un único nivel de carrera', () => {
+    expect(data.clusters.CareerCluster_3.name).toBe('Border Protectorate Region');
+    expect(getClusterLevels(data, 'CareerCluster_3')).toEqual([{ mode: 'career', reputation: '15', difficulty: 100 }]);
+  });
+
+  it('CA4: Barcelona tiene reputación sin dificultad y Sarna no tiene niveles', () => {
+    expect(getClusterLevels(data, 'Barcelona')).toEqual([{ mode: null, reputation: '8', difficulty: null }]);
+    expect(getClusterLevels(data, 'Sarna')).toEqual([]);
+  });
+
+  it('CA5: el centro industrial de Diboll solo pide reputación en carrera', () => {
+    expect(getHubLevels(data, 'SafeZone_1')).toEqual([
+      { mode: 'campaign', reputation: null, difficulty: 7 },
+      { mode: 'career', reputation: '1-2', difficulty: 7 }
+    ]);
+  });
+
+  it('CA6: todas las zonas de más de un sistema tienen reputación recomendada', () => {
+    const sinReputacion = Object.keys(data.clusters).filter(id =>
+      data.systems.filter(candidate => candidate.cluster === id).length > 1 &&
+      !getClusterLevels(data, id).some(level => level.reputation));
+    expect(sinReputacion).toEqual([]);
+  });
+
+  it('CA7: todos los centros industriales tienen dificultad', () => {
+    const sinDificultad = Object.keys(data.hubs).filter(id => !getHubLevels(data, id).some(level => level.difficulty !== null));
+    expect(sinDificultad).toEqual([]);
+  });
+
+  it('CA8: el nivel se describe con la reputación y la dificultad que tenga', () => {
+    expect(describeZoneLevel({ mode: 'campaign', reputation: '8', difficulty: 45 })).toBe('Recommended reputation 8 · Difficulty 45');
+    expect(describeZoneLevel({ mode: 'campaign', reputation: null, difficulty: 7 })).toBe('Difficulty 7');
+  });
+
+  it('CA9: Taurian Corridor y Outworlds Border tienen cada uno su nombre', () => {
+    expect(data.clusters.TaurianCorridor.name).toBe('Taurian Corridor');
+    expect(data.clusters.OutworldsBorder.name).toBe('Outworlds Alliance Border');
+  });
+
+  it('si los modos dan lo mismo, queda un solo nivel sin modo', () => {
+    const zona = { ...data, clusters: { Prueba: { name: 'Prueba', levels: [
+      { mode: 'campaign' as const, reputation: '5', difficulty: 15 },
+      { mode: 'career' as const, reputation: '5', difficulty: 15 }
+    ] } } };
+    expect(getClusterLevels(zona, 'Prueba')).toEqual([{ mode: null, reputation: '5', difficulty: 15 }]);
   });
 });

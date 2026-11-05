@@ -100,14 +100,21 @@ export interface UniqueMech {
   from: GameDate;
 }
 
+// Reputación recomendada y dificultad de una zona o un centro industrial en un modo (null: los dos).
+export interface ZoneLevel {
+  mode: 'campaign' | 'career' | null;
+  reputation: string | null;
+  difficulty: number | null;
+}
+
 export interface StarmapData {
   range: DateRange;
   colors: { cluster: string; hub: string };
   factions: Record<string, Faction>;
   events: StarEvent[];
-  clusters: Record<string, { name: string }>;
+  clusters: Record<string, { name: string; levels: ZoneLevel[] }>;
   // Capital de cada centro industrial y parejas de sistemas que unen sus líneas en el mapa.
-  hubs: Record<string, { capital: number; links: [number, number][] }>;
+  hubs: Record<string, { capital: number; links: [number, number][]; levels: ZoneLevel[] }>;
   systems: StarSystem[];
   quests: Quest[];
   markets: Market[];

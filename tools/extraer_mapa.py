@@ -384,6 +384,32 @@ def extraer_recompensas_misiones(pak):
     return recompensas
 
 
+def extraer_zonas(pak):
+    """Sistemas, nombre, reputación recomendada y dificultad de cada zona (ClusterAsset) del juego.
+
+    Hay uno por modo: los de campaña en Campaign/Clusters, los de carrera en DLC1/CareerMode y los de
+    las campañas de los DLC en sus carpetas. generar_mapa.py los une a las zonas del mapa por sus sistemas.
+    """
+    zonas = []
+    for ruta in sorted(pak.archivos):
+        if not ruta.endswith("ClusterAsset.uasset"):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        zona = {"ruta": ruta[len(CONTENIDO):], "sistemas": []}
+        for export in asset.exports:
+            if export.startswith("Default__"):
+                continue
+            propiedades = asset.propiedades(export)
+            if "SystemIds" in propiedades:
+                zona["sistemas"] = propiedades["SystemIds"]
+            if "Config" in propiedades:
+                valores = valores_de_config(propiedades)
+                zona.update({"nombre": valores.get("ClusterName"), "reputacion": valores.get("RecommendedReputation"),
+                             "dificultad": valores.get("DisplayDifficultyLevel")})
+        zonas.append(zona)
+    return zonas
+
+
 def extraer_textos(pak):
     textos = {}
     for ruta in TABLAS_DE_TEXTO:
@@ -477,6 +503,7 @@ def main():
     guardar("recompensas_misiones.json", extraer_recompensas_misiones(pak))
     guardar("mercados.json", extraer_mercados(pak))
     guardar("mechs_unicos.json", extraer_mechs_unicos(pak))
+    guardar("zonas.json", extraer_zonas(pak))
     extraer_logos(pak, facciones)
     if sin_asset:
         print(f"Aviso: facciones sin asset en el juego: {', '.join(sin_asset)}")
