@@ -9,6 +9,7 @@ import {
   daysToDate,
   formatGameDate,
   getCurrentEvent,
+  getDistanceToTerra,
   getClusterOutline,
   getFactionColor,
   getHubs,
@@ -93,6 +94,12 @@ describe('eventos y fechas', () => {
     expect(daysToDate(dateToDays('3048-02-28') + 1)).toBe('3048-02-29');
     expect(getCurrentEvent(data.events, '3049-06-01')?.name).toMatch(/Clan Invasion/);
     expect(getCurrentEvent(data.events, '3020-01-01')).toBeNull();
+  });
+
+  it('la ficha da la distancia a Terra en años luz, no las coordenadas', () => {
+    expect(system('Terra')).toMatchObject({ x: 0, y: 0 });
+    expect(getDistanceToTerra(system('Terra'))).toBe(0);
+    expect(getDistanceToTerra(system('Tharkad'))).toBe(264);
   });
 
   it('al saltar de un evento a otro se sabe qué sistemas cambian de dueño', () => {

@@ -8,6 +8,7 @@ import {
   daysToDate,
   formatGameDate,
   getCurrentEvent,
+  getDistanceToTerra,
   getNextEvent,
   getOwnerAt,
   getOwnerChanges,
@@ -66,7 +67,7 @@ function SystemPanel({ system, date, pinned, onClose }: { system: StarSystem; da
           )}
         </dl>
       )}
-      {pinned && (
+      {system.owners.length > 0 && (
         <ol className="starmap-history" aria-label="Owners over time">
           {system.owners.map(([changedOn, faction], index) => (
             <li key={changedOn} className={index === currentIndex ? 'is-current' : undefined}>
@@ -78,7 +79,7 @@ function SystemPanel({ system, date, pinned, onClose }: { system: StarSystem; da
           ))}
         </ol>
       )}
-      <p className="starmap-coordinates">{system.x}, {system.y} ly from Terra</p>
+      <p className="starmap-coordinates">{getDistanceToTerra(system) === 0 ? 'Center of the Inner Sphere' : `${getDistanceToTerra(system)} ly from Terra`}</p>
     </section>
   );
 }
@@ -231,7 +232,8 @@ export function StarmapApp() {
   }, [date, selectedId]);
 
   const shown = data.systems.find(system => system.id === (hoveredId ?? selectedId)) ?? null;
-  const isPinned = shown !== null && shown.id === selectedId && hoveredId === null;
+  // La ficha del sistema elegido sigue fijada (con su botón de cerrar) aunque el ratón pase por encima.
+  const isPinned = shown !== null && shown.id === selectedId;
 
   const pickSystem = (system: StarSystem) => {
     setSelectedId(system.id);

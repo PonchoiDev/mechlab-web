@@ -14,6 +14,9 @@ export const getOwnerAt = (system: StarSystem, date: GameDate): string | null =>
   return owner;
 };
 
+// Terra está en el origen de las coordenadas del juego, así que la distancia sale directamente.
+export const getDistanceToTerra = (system: StarSystem): number => Math.round(Math.hypot(system.x, system.y));
+
 // Los sistemas que cambian de dueño entre dos fechas, para resaltarlos al saltar de un evento a otro.
 export const getOwnerChanges = (systems: StarSystem[], from: GameDate, to: GameDate): StarSystem[] =>
   systems.filter(system => getOwnerAt(system, from) !== getOwnerAt(system, to));
