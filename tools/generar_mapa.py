@@ -171,7 +171,49 @@ def nombre_de_cadena(grupo, carpeta):
     return separar_palabras(carpeta_final)
 
 
-def cadenas_de_misiones(acciones, sistemas_validos):
+def condiciones_por_cadena(arcos):
+    """Condiciones de los arcos de cada cadena: la reputación más alta que piden, la fecha más
+    temprana desde la que se ofrece y la de caducidad, si la tiene."""
+    por_cadena = {}
+    for arco in arcos:
+        por_cadena.setdefault(cadena_de_carpeta(arco["carpeta"]), []).append(arco)
+    condiciones = {}
+    for clave, grupo in por_cadena.items():
+        valores = lambda campo: [arco[campo] for arco in grupo if arco[campo] is not None]
+        # Objetivos de otras cadenas que hay que completar antes, o que no hay que haber completado: se
+        # guarda la cadena a la que pertenecen.
+        def cadenas_de(campo):
+            return {cadena_de_carpeta(paquete[len("/Game/"):].rsplit("/", 1)[0])
+                    for arco in grupo for paquete in arco.get(campo, [])} - {clave}
+
+        previas = cadenas_de("requiere")
+        # Si pide completar una parte de la otra y no haber completado otra parte, es un requisito
+        # previo, no una HRQ excluyente (An Intriguing Offer, Order of the Five Pillars).
+        excluyentes = cadenas_de("excluye") - previas
+        condiciones[clave] = {
+            "reputation": max(valores("reputacion"), default=None),
+            "from": min(valores("desde"), default=None),
+            "until": min(valores("hasta"), default=None),
+            "previas": sorted(previas),
+            "excluyentes": sorted(excluyentes),
+        }
+    return condiciones
+
+
+def requisito_de_cadena(modo, condicion, nombres):
+    condicion = condicion or {"reputation": None, "from": None, "until": None, "previas": [], "excluyentes": []}
+    previas = [nombres[previa] for previa in condicion["previas"] if previa in nombres]
+    return {
+        "mode": modo,
+        "reputation": condicion["reputation"],
+        "from": condicion["from"],
+        "until": condicion["until"],
+        "after": previas[0] if previas else None,
+        "excludes": sorted({nombres[otra] for otra in condicion["excluyentes"] if otra in nombres}),
+    }
+
+
+def cadenas_de_misiones(acciones, sistemas_validos, arcos=()):
     """Agrupa las acciones en cadenas. La misma cadena de facción existe en campaña y en carrera:
     se une en una que indica los dos modos, con los sistemas de carrera."""
     grupos = {}
@@ -181,6 +223,8 @@ def cadenas_de_misiones(acciones, sistemas_validos):
         carpeta, modo = cadena_de_carpeta(accion["carpeta"])
         grupos.setdefault((carpeta, modo), []).append(accion)
 
+    condiciones = condiciones_por_cadena(arcos)
+    nombres = {clave: nombre_de_cadena(grupo, clave[0]) for clave, grupo in grupos.items()}
     cadenas = {}
     for (carpeta, modo), grupo in grupos.items():
         nombre = nombre_de_cadena(grupo, carpeta)
@@ -201,6 +245,8 @@ def cadenas_de_misiones(acciones, sistemas_validos):
             "offer": (oferta or misiones[0])["sistema"],
             "visibleEverywhere": bool(oferta and oferta.get("visible")),
             "missionTypes": tipos_de_mision(oferta and oferta.get("tipos")),
+            # Una entrada por modo: la misma cadena de facción puede pedir más reputación en carrera.
+            "requirements": [requisito_de_cadena(modo, condiciones.get((carpeta, modo)), nombres)],
             "missions": [
                 {
                     "title": accion.get("titulo") or (nombre if parte(accion.get("titulo")) == 1 else f"{nombre} Pt. {parte(accion.get('titulo'))}"),
@@ -213,10 +259,13 @@ def cadenas_de_misiones(acciones, sistemas_validos):
         previa = cadenas.get(nombre)
         if previa:
             modos = sorted(set(previa["modes"]) | set(cadena["modes"]))
+            requisitos = [requisito for requisito in previa["requirements"] + cadena["requirements"]
+                          if requisito["mode"] not in {otro["mode"] for otro in previa["requirements"]} or requisito in previa["requirements"]]
             # Ante dos versiones, la de carrera; si las dos son iguales, da lo mismo.
             if "career" in cadena["modes"] and "career" not in previa["modes"]:
                 previa.update(cadena)
             previa["modes"] = modos
+            previa["requirements"] = sorted(requisitos, key=lambda requisito: requisito["mode"] or "")
         else:
             cadenas[nombre] = cadena
     return sorted(cadenas.values(), key=lambda cadena: cadena["name"])
@@ -443,7 +492,7 @@ def main():
             for id_centro, centro in centros.items()
         },
         "systems": sistemas,
-        "quests": cadenas_de_misiones(misiones_juego, {sistema["id"] for sistema in sistemas}),
+        "quests": cadenas_de_misiones(misiones_juego, {sistema["id"] for sistema in sistemas}, leer("condiciones_misiones.json")),
         "markets": mercados_especiales(mercados_juego, mechs, items, {sistema["id"] for sistema in sistemas}),
         "uniqueMechs": mechs_unicos(unicos_juego, mechs),
     }
