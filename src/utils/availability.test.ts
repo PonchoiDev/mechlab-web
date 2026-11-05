@@ -161,7 +161,7 @@ describe('rareza de cada variante por facción', () => {
     expect(special.every(({ mech }) => !mech.hero && Object.keys(mech.rarity).length === 0)).toBe(true);
     const razer = special.find(({ mech }) => mech.id === 'WVR-7H');
     expect(razer?.sources.rewards).toEqual([expect.objectContaining({ title: 'Hidden Cache Found' })]);
-    expect(razer?.sources.rewards[0].system).toBeUndefined();
+    expect(razer?.sources.rewards[0].system).toBe(data.systems.find(system => system.name === 'Valentina')?.id);
     expect(special.find(({ mech }) => mech.id === 'TDR-5SE')?.sources.markets[0].dlc).toBe(2);
   });
 
