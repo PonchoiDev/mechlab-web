@@ -16,7 +16,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | Fecha de introducción | `IntroDate` de la unit card | Desde cuándo existe la variante |
 | Alianza de cada facción | `Allegiance` de los assets de facción (`Factions/*`) | A qué facción responde: Canopus a Periphery, St. Ives a Independent |
 | 'Mechs hero en venta | DataTable `Campaign/Progression/DataTables/HeroMechsForPurchase` | Los 95 'Mechs hero que el juego puede poner a la venta (WVR-Q, ARC-T…) |
-| Recompensas fuera de las HRQ | Objetivos con `bHasRewards` y `MechLoadouts` de todo el juego, y la acción `PlaceMission` que los coloca (en su export `Default__`) | Misiones de las campañas de los DLC, el final de una campaña, la información del Bounty Hunter (DLC4) o desbloqueos de promociones (el Wolverine de Razer, WVR-7H), con su sistema si lo tienen |
+| Recompensas fuera de las HRQ | Objetivos con `bHasRewards` y `MechLoadouts` de todo el juego, y la acción que los coloca (en su export `Default__`), en cualquier carpeta: en las campañas de los DLC 5 a 7 va en la subcarpeta `ArcActions` de la misión | Misiones de las campañas de los DLC, el final de una campaña, la información del Bounty Hunter (DLC4) o desbloqueos de promociones (el Wolverine de Razer, WVR-7H), con su sistema si lo tienen |
 
 `extraer_mapa.py` guarda las alianzas en `tools/datos-juego/starmap/alianzas.json`. `generar_mapa.py` lee las unit cards con las funciones de `generar_mechs.py` (la misma unit card que usa el MechLab para cada variante) y escribe `src/data/availability.json`, con la tabla que usa cada facción del mapa y la rareza y la fecha de cada variante.
 
@@ -73,6 +73,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | CA14 | El AS7-D en 3025 | se agrupan las facciones | ComStar, con un sistema, trae ese sistema (Terra); Steiner, con cientos, no trae la lista |
 | CA15 | Las búsquedas «as7-d-h», «arctic wolf» y «acw-prime» el 1 de enero de 3030 | se piden las variantes posteriores | la primera da una, desde el 11 de noviembre de 3041; la segunda, cinco, la siguiente el 1 de enero de 3059 (el ACW-1); la tercera, una, el 1 de enero de 3067, después del final del mapa; una búsqueda sin resultados, ninguna |
 | CA16 | La búsqueda «archer» el 1 de enero de 3015 | se busca y se piden las variantes posteriores | da cinco variantes y avisa de otras cinco posteriores, la siguiente el ARC-T el 20 de febrero de 3016 |
+| CA21 | La recompensa «Shielded Withdrawal» (DLC5, BLR-1G-S), cuya acción está en la subcarpeta `ArcActions` de su misión | se consulta | tiene el sistema de su misión, Vega |
 | CA10 | `availability.json` | se carga | todas sus variantes están en `mechs.json` con el mismo nombre, y todas las facciones del mapa salvo Arc-Royal Defense Cordon tienen tabla |
 
 ## Fuera de alcance
