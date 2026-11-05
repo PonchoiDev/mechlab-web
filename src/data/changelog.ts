@@ -9,6 +9,20 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-find-a-mech',
+    date: '2026-11-05',
+    title: 'Find a \'Mech on the star map',
+    items: [
+      'Pick any variant and the map shows how rare it is in each faction\'s market on the chosen date, from very common to very rare',
+      'The card lists who sells it, when it enters production and where you can always get it: quest rewards and special markets',
+      'Special \'Mech locations lists the hero \'Mechs and special variants you can only get in one place, like the Atlas II on Romulus, the Bounty Hunter\'s Marauder or the Razer Wolverine',
+      'Cards say how to get each \'Mech outside the quests: DLC campaign missions, finishing a campaign, Bounty Hunter intel, Solaris arena ranks or promotions like the Razer Wolverine, and when a hero can come up for sale',
+      'Only variants already in production on the map date are listed, with a button to jump to the date they enter production, and the map zooms to small places, like a quest route or the only system of the faction that sells it',
+      'Clan \'Mechs can also be found by their Inner Sphere name, like Adder for the Puma',
+      'Links keep the chosen variant, so you can share where to find it'
+    ]
+  },
+  {
     id: '2026-11-05-territory-gaps',
     date: '2026-11-05',
     title: 'Star map: no more empty gaps',

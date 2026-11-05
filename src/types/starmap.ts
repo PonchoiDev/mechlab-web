@@ -100,11 +100,52 @@ export interface UniqueMech {
   from: GameDate;
 }
 
+// Rareza de una variante en el mercado de una facción, de su unit card (FactionRarity).
+export type Rarity = 'veryCommon' | 'common' | 'uncommon' | 'rare' | 'veryRare' | 'unique' | 'unavailable';
+
+export interface MechAvailability {
+  id: string;
+  name: string;
+  // Nombre en la Esfera Interior de los 'Mechs de los Clanes (el Puma es el Adder).
+  otherName?: string;
+  hero?: boolean;
+  // Hero que el juego puede poner a la venta (HeroMechsForPurchase): no tiene un sitio fijo.
+  heroMarket?: boolean;
+  // Fecha de introducción: antes no existe.
+  from: GameDate;
+  // Por facción con tabla; si no está, esa facción no la vende.
+  rarity: Record<string, Rarity>;
+}
+
+// src/data/availability.json, que se carga aparte del mapa.
+export interface AvailabilityData {
+  // Facción del mapa y facción cuya tabla de rareza usa (la suya o la de su alianza).
+  factions: Record<string, string>;
+  mechs: MechAvailability[];
+}
+
 // Reputación recomendada y dificultad de una zona o un centro industrial en un modo (null: los dos).
 export interface ZoneLevel {
   mode: 'campaign' | 'career' | null;
   reputation: string | null;
   difficulty: number | null;
+}
+
+// 'Mechs que da una misión u objetivo que no es una HRQ: campañas de los DLC, el Bounty Hunter o
+// desbloqueos de promociones.
+export interface CampaignReward {
+  id: string;
+  title: string;
+  summary: string | null;
+  dlc: number | null;
+  mechs: { id: string; name: string }[];
+  system?: number;
+  // Cómo se consigue: una misión, completar la campaña del DLC, un nivel de información sobre el
+  // Bounty Hunter (DLC4), un rango de fama en las arenas (DLC6) o una promoción, que llega con un mensaje.
+  kind: 'mission' | 'campaignComplete' | 'intel' | 'arenaRank' | 'promotion';
+  level?: number;
+  partner?: string;
+  careerOnly?: boolean;
 }
 
 export interface StarmapData {
@@ -119,4 +160,5 @@ export interface StarmapData {
   quests: Quest[];
   markets: Market[];
   uniqueMechs: UniqueMech[];
+  rewards: CampaignReward[];
 }

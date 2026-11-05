@@ -5,6 +5,8 @@ import os
 import re
 from collections import Counter
 
+from generar_mechs import RUTA_UNIT_CARDS, cargar_archivos_por_nombre, cargar_unit_cards
+
 # Genera src/data/starmap.json a partir de lo que extrae extraer_mapa.py: los sistemas con su
 # propietario en cada fecha de la partida, las facciones con el color del mapa del juego, los eventos
 # que mueven las fronteras, los clústeres y los centros industriales.
@@ -17,6 +19,8 @@ RUTA_DESTINO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "starmap.jso
 RUTA_MECHS = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "mechs.json")
 RUTA_ITEMS = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "items.json")
 RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "starmap", "logos")
+# La rareza de cada variante por facción va aparte: solo la carga el panel Find a 'Mech al abrirse.
+RUTA_DISPONIBILIDAD = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "availability.json")
 
 # La partida empieza en 3015 y el último cambio de frontera del juego es de 3060. La tabla trae la
 # historia de cada sistema desde el siglo XXII hasta 3145, pero fuera de este rango el juego no la usa.
@@ -67,6 +71,11 @@ NOMBRES_EVENTOS = {
 REGEX_CLUSTER_OCULTO = re.compile(r"^(RepairSystem_\d+|StoryCluster\d+)$")
 REGEX_PALABRAS = re.compile(r"(?<=[a-z])(?=[A-Z])")
 ORDEN_MODOS = {"campaign": 0, "career": 1, None: 2}
+# Rareza de cada variante por facción en su unit card (FactionRarity), que decide qué vende el mercado.
+REGEX_RAREZA = re.compile(r'\(\(Id="MWFactionAsset:([A-Za-z]+)"\), ([A-Za-z]+)\)')
+REGEX_FECHA_UNIT_CARD = re.compile(r"IntroDate=(\d{3,4})\.(\d{2})\.(\d{2})")
+RAREZAS = {"VeryCommon": "veryCommon", "Common": "common", "Uncommon": "uncommon", "Rare": "rare",
+           "VeryRare": "veryRare", "Unique": "unique", "Unavailable": "unavailable"}
 
 
 # Las mallas de los centros industriales usan unas 8 unidades por año luz y el eje X invertido. La
@@ -337,12 +346,19 @@ def etapa_de_mercado(mercado):
 
 # Variante de un loadout de mercado o de recompensa: los de recompensa llevan prefijos y sufijos en
 # cualquier orden (11_2_Reward_FS9-A, COR-PVT_CareerSalvage, RFL-DNA_Loadout_CareerSalvage).
-REGEX_PREFIJO_VARIANTE = re.compile(r"^.*_Reward_")
-REGEX_SUFIJO_VARIANTE = re.compile(r"_(Loadout|MDA|CareerSalvage|CampaignSalvage)")
+# Los loadouts de recompensa llevan la variante con prefijos y sufijos en cualquier orden:
+# 11_2_Reward_FS9-A, RFL-DNA_Loadout_CareerSalvage, AS7-D_DLC4_Reward, D7M3_HBR-A_Reward_Loadout.
+REGEX_PREFIJO_VARIANTE = re.compile(r"^(.*_Reward_|D\d+M\d+_)")
+REGEX_SUFIJO_VARIANTE = re.compile(r"_(Loadout|MDA|CareerSalvage|CampaignSalvage|DLC\d+_?Reward|Reward$)")
 
 
 def mech_de_juego(id_juego, mechs):
-    variante = REGEX_SUFIJO_VARIANTE.sub("", REGEX_PREFIJO_VARIANTE.sub("", id_juego))
+    variante = id_juego
+    while (sin_sufijo := REGEX_SUFIJO_VARIANTE.sub("", variante)) != variante:
+        variante = sin_sufijo
+    variante = REGEX_PREFIJO_VARIANTE.sub("", variante)
+    # Algunos loadouts no respetan las mayúsculas de la variante (KTO-19b_Loadout).
+    variante = next((id_mech for id_mech in mechs if id_mech.lower() == variante.lower()), variante)
     return {"id": variante, "name": mechs[variante]["name"]} if variante in mechs else None
 
 
@@ -365,6 +381,51 @@ def sumar_objetos(objetos):
         else:
             sumados[clave] = dict(objeto)
     return list(sumados.values())
+
+
+# Promociones: llegan con un mensaje, sin misión ni sistema. El registro de eventos de la de Razer dice
+# «Claimed Razer WVR-7H», y el arco de la de Microsoft comprueba HasMSMechEntitlement.
+SOCIOS_DE_PROMOCION = {"Razer_Exclusive": "Razer", "MS_Exclusive": "Microsoft"}
+REGEX_NIVEL_DE_INFORMACION = re.compile(r"^BountyHunterLevelUp(\d+)$")
+
+
+def tipo_de_recompensa(recompensa):
+    """Cómo se consigue la recompensa, para que la ficha lo diga aunque no esté en el mapa."""
+    carpeta, objetivo = recompensa["carpeta"], recompensa["objetivo"]
+    socio = SOCIOS_DE_PROMOCION.get(carpeta.rsplit("/", 1)[-1])
+    if socio:
+        # La de Microsoft está en las misiones del modo carrera (DLC1/CareerMode).
+        return {"kind": "promotion", "partner": socio, **({"careerOnly": True} if "/CareerMode/" in carpeta else {})}
+    nivel = REGEX_NIVEL_DE_INFORMACION.match(objetivo)
+    if nivel:
+        # Niveles de información sobre el Bounty Hunter, el mercenario rival del DLC4.
+        return {"kind": "intel", "level": int(nivel.group(1))}
+    if objetivo.startswith("ArenaFameLevelUp"):
+        # Rangos de fama de las arenas de Solaris (DLC6): el título es el nombre del rango.
+        return {"kind": "arenaRank"}
+    if "CampaignComplete" in objetivo:
+        return {"kind": "campaignComplete"}
+    return {"kind": "mission"}
+
+
+def recompensas_fuera_de_hrq(recompensas_juego, misiones_juego, mechs, sistemas_validos):
+    """'Mechs que da una misión o un objetivo que no es una HRQ del mapa: las campañas de los DLC, la
+    información del Bounty Hunter o desbloqueos como el Wolverine de Razer. Las de las HRQ ya van en
+    su recompensa."""
+    cadenas = {cadena_de_carpeta(accion["carpeta"])[0] for accion in misiones_juego if accion["sistema"] in sistemas_validos}
+    resultado = []
+    for recompensa in recompensas_juego:
+        variantes = [mech for mech in (mech_de_juego(id_juego, mechs) for id_juego in recompensa["mechs"]) if mech]
+        if cadena_de_carpeta(recompensa["carpeta"])[0] in cadenas or not variantes:
+            continue
+        dlc = REGEX_DLC.match(recompensa["carpeta"])
+        entrada = {"id": recompensa["objetivo"], "title": recompensa["titulo"], "summary": recompensa["resumen"],
+                   "dlc": int(dlc.group(1)) if dlc else None, "mechs": variantes}
+        if recompensa["sistema"] in sistemas_validos:
+            entrada["system"] = recompensa["sistema"]
+        entrada.update(tipo_de_recompensa(recompensa))
+        resultado.append(entrada)
+    return resultado
 
 
 def mercados_especiales(mercados_juego, mechs, items, sistemas_validos):
@@ -440,6 +501,49 @@ def niveles_de_zona(zonas):
         if (nivel["reputation"] or nivel["difficulty"] is not None) and nivel not in niveles:
             niveles.append(nivel)
     return sorted(niveles, key=lambda nivel: (ORDEN_MODOS[nivel["mode"]], nivel["difficulty"] or 0))
+
+
+def tabla_de_faccion(faccion, alianzas, con_tabla):
+    """Facción cuya tabla de rareza usa el mercado: la suya o, si no tiene, la de su alianza.
+
+    Las facciones menores no tienen tabla propia: Canopus usa la de Periphery, y Elysian Fields la de
+    Oberon, que responde a Bandits y esta a Outlaws, la primera con tabla.
+    """
+    vistas = set()
+    while faccion and faccion not in vistas:
+        if faccion in con_tabla:
+            return faccion
+        vistas.add(faccion)
+        faccion = alianzas.get(faccion)
+    return None
+
+
+def disponibilidad_de_mechs(mechs, unit_cards, facciones, alianzas, heroes_en_venta):
+    rarezas = {}
+    for mech in mechs.values():
+        ficha = unit_cards.get(f"{mech['id'].lower()}_loadout")
+        if ficha:
+            rarezas[mech["id"]] = (ficha, {faccion: RAREZAS[nivel] for faccion, nivel in REGEX_RAREZA.findall(ficha)})
+    con_tabla = {faccion for _, rareza in rarezas.values() for faccion in rareza}
+    tablas = {faccion: tabla for faccion in facciones if (tabla := tabla_de_faccion(faccion, alianzas, con_tabla))}
+    usadas = set(tablas.values())
+    variantes = []
+    for id_mech, (ficha, rareza) in sorted(rarezas.items(), key=lambda par: (mechs[par[0]]["name"], par[0])):
+        anio, mes, dia = REGEX_FECHA_UNIT_CARD.search(ficha).groups()
+        variante = {"id": id_mech, "name": mechs[id_mech]["name"], "from": f"{int(anio):04d}-{mes}-{dia}",
+                    "rarity": {faccion: nivel for faccion, nivel in sorted(rareza.items()) if faccion in usadas}}
+        # Los 'Mechs de los Clanes tienen otro nombre en la Esfera Interior (el Puma es el Adder); el
+        # MechLab busca por los dos.
+        otro_nombre = mechs[id_mech].get("sarnaName")
+        if otro_nombre and otro_nombre != variante["name"]:
+            variante["otherName"] = otro_nombre
+        if mechs[id_mech].get("hero"):
+            variante["hero"] = True
+        # Los hero de HeroMechsForPurchase pueden salir a la venta; el resto solo se consigue de otra forma.
+        if id_mech.lower() in heroes_en_venta:
+            variante["heroMarket"] = True
+        variantes.append(variante)
+    return {"factions": dict(sorted(tablas.items())), "mechs": variantes}
 
 
 def leer(nombre):
@@ -594,14 +698,24 @@ def main():
                                       recompensas_por_cadena(leer("recompensas_misiones.json"), mechs, items)),
         "markets": mercados_especiales(mercados_juego, mechs, items, {sistema["id"] for sistema in sistemas}),
         "uniqueMechs": mechs_unicos(unicos_juego, mechs),
+        "rewards": recompensas_fuera_de_hrq(leer("recompensas_campana.json"), misiones_juego, mechs, {sistema["id"] for sistema in sistemas}),
     }
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"))
+        archivo.write("\n")
+    unit_cards = cargar_unit_cards(cargar_archivos_por_nombre(RUTA_UNIT_CARDS))
+    disponibilidad = disponibilidad_de_mechs(mechs, unit_cards, facciones, leer("alianzas.json"), {heroe.lower() for heroe in leer("heroes_en_venta.json")})
+    with open(RUTA_DISPONIBILIDAD, "w", encoding="utf-8") as archivo:
+        json.dump(disponibilidad, archivo, ensure_ascii=False, separators=(",", ":"))
         archivo.write("\n")
 
     print(f"{len(sistemas)} sistemas, {len(facciones)} facciones, {len(eventos)} eventos, "
           f"{len(clusteres)} clústeres, {len(centros)} centros industriales, {len(datos['quests'])} misiones de alta recompensa, "
           f"{len(datos['markets'])} mercados especiales y {len(datos['uniqueMechs'])} 'Mechs únicos")
+    print(f"{len(disponibilidad['mechs'])} variantes con su rareza por facción")
+    sin_tabla = sorted(set(facciones) - set(disponibilidad["factions"]))
+    if sin_tabla:
+        print(f"Aviso: facciones del mapa sin tabla de rareza: {', '.join(sin_tabla)}")
     sin_variante = [mech for recompensa in leer("recompensas_misiones.json") for mech in recompensa["mechs"] if not mech_de_juego(mech, mechs)]
     if sin_variante:
         print(f"Aviso: 'Mechs de recompensa sin variante en mechs.json: {', '.join(sin_variante)}")

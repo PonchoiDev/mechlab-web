@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { GameDate, StarmapData } from '../types/starmap';
-import { StarmapRenderer, type View } from './renderer';
+import { StarmapRenderer, type TerritoryColors, type View } from './renderer';
 
 export interface FocusRequest {
-  systemId: number;
+  // Un sistema se centra; varios se encuadran.
+  systemIds: number[];
   // Cambia en cada petición, para volver a centrar aunque sea el mismo sistema.
   sequence: number;
 }
@@ -16,6 +17,7 @@ interface StarmapCanvasProps {
   hoveredId: number | null;
   selectedId: number | null;
   questRoute: number[] | null;
+  territoryColors: TerritoryColors;
   focus: FocusRequest | null;
   onHover: (systemId: number | null) => void;
   onSelect: (systemId: number | null) => void;
@@ -23,6 +25,10 @@ interface StarmapCanvasProps {
 
 const MAX_SCALE = 14;
 const FOCUS_SCALE = 4;
+// Margen al encuadrar varios sistemas, en años luz, y ancho que tapa la ficha a la izquierda.
+const FIT_PADDING = 60;
+const PANEL_INSET = 420;
+const MOBILE_WIDTH = 760;
 const DRAG_THRESHOLD = 5;
 const WHEEL_SPEED = 0.0015;
 
@@ -35,7 +41,7 @@ const getBounds = (data: StarmapData) => {
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, focus, onHover, onSelect }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, territoryColors, focus, onHover, onSelect }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
@@ -155,11 +161,28 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
   }, [hoveredId, selectedId, questRoute]);
 
   useEffect(() => {
+    rendererRef.current?.setTerritoryColors(territoryColors);
+  }, [territoryColors]);
+
+  useEffect(() => {
     if (!focus) return;
-    const system = data.systems.find(candidate => candidate.id === focus.systemId);
+    const systems = data.systems.filter(candidate => focus.systemIds.includes(candidate.id));
     const renderer = rendererRef.current;
-    if (!system || !renderer) return;
-    animateTo({ x: system.x, y: system.y, scale: Math.max(renderer.view.scale, FOCUS_SCALE) });
+    const container = containerRef.current;
+    if (systems.length === 0 || !renderer || !container) return;
+    if (systems.length === 1) {
+      animateTo({ x: systems[0].x, y: systems[0].y, scale: Math.max(renderer.view.scale, FOCUS_SCALE) });
+      return;
+    }
+    // En escritorio la ficha tapa la izquierda: se encuadra en el resto y se desplaza el centro.
+    const { width, height } = container.getBoundingClientRect();
+    const inset = width > MOBILE_WIDTH ? PANEL_INSET : 0;
+    const xs = systems.map(system => system.x);
+    const ys = systems.map(system => system.y);
+    const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+    const fit = Math.min((width - inset) / (maxX - minX + FIT_PADDING), height / (maxY - minY + FIT_PADDING));
+    const scale = Math.min(FOCUS_SCALE, Math.max(fitScaleRef.current, fit));
+    animateTo({ x: (minX + maxX) / 2 - inset / 2 / scale, y: (minY + maxY) / 2, scale });
   }, [focus, data]);
 
   // Arrastre con un dedo o el ratón, y zoom con dos dedos o la rueda.
