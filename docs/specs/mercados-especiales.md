@@ -29,7 +29,8 @@ Las campañas de varios DLC abren mercados en sistemas concretos con un inventar
 - **RF1.** El mapa marca con un icono los sistemas con un mercado especial, y con otro los 'Mechs únicos a partir de su fecha.
 - **RF2.** La ficha del sistema muestra cada mercado: su DLC y su etapa, si es un mercado negro, los 'Mechs que vende, sus armas y equipo con la cantidad y los pilotos.
 - **RF3.** Cada 'Mech de un mercado o único se abre en el MechLab con su build de serie, con un enlace `/mercs/?mech=AS7-D-H`.
-- **RF4.** Un panel **Markets**, junto a Factions y Quests, busca dónde se vende un 'Mech, un arma o qué hay en un sistema. Al elegir un resultado, el mapa se centra en el sistema y abre su ficha.
+- **RF4.** Un panel **Special markets**, junto a Factions y Quests, lista al abrirse todos los mercados especiales y los 'Mechs únicos, por DLC, y su buscador filtra dónde se vende un 'Mech, un arma o qué hay en un sistema. Al elegir uno, el mapa se centra en el sistema y abre su ficha.
+- **RF7.** La interfaz los llama *special markets* y aclara que su inventario es fijo durante la campaña de su DLC, para no confundirlos con el mercado normal del sistema, que el juego genera al azar.
 - **RF5.** El MechLab acepta `?mech=<id>` en la URL y abre esa variante con su build de serie.
 
 ## Requisitos no funcionales
@@ -48,7 +49,7 @@ Las campañas de varios DLC abren mercados en sistemas concretos con un inventar
 | CA4 | El mercado negro del DLC7 en Alleghe | se consulta | es un mercado negro y vende el STK-3H |
 | CA5 | El mercado del DLC9 en Bangor | se consultan sus armas | incluye una Ultra Autocannon 10 con `Lost Tech tier` y cantidad 1 |
 | CA6 | Rasalhague | se consultan sus mercados | tiene dos: el del DLC4 y el mercado negro del DLC7 |
-| CA7 | La búsqueda «atlas» | se busca | da los mercados que venden algún Atlas y el Atlas II de Romulus |
+| CA7 | La búsqueda «atlas» y la búsqueda vacía | se busca | la primera da los mercados que venden algún Atlas y el Atlas II de Romulus; la vacía, todos, con el Atlas II primero y los mercados por DLC |
 | CA8 | El AS7-D-H | se pide su enlace al MechLab | es `/mercs/?mech=AS7-D-H` |
 | CA9 | `?mech=AS7-D-H` en el MechLab | se abre | carga el Atlas II con su build de serie; con un id que no existe, ninguna build |
 

@@ -60,7 +60,11 @@ describe('búsqueda y enlace al MechLab', () => {
     expect(systems).toEqual(expect.arrayContaining(['Predlitz', 'Radstadt', 'Bangor', 'Romulus']));
     expect(results.find(result => result.unique)?.unique?.mech).toBe('AS7-D-H');
     expect(searchMarkets(data, 'ultra autocannon').length).toBeGreaterThan(0);
-    expect(searchMarkets(data, '')).toEqual([]);
+    // Sin texto, todos: los Mechs únicos primero y después los mercados por DLC.
+    const all = searchMarkets(data, '');
+    expect(all).toHaveLength(data.markets.length + data.uniqueMechs.length);
+    expect(all[0].unique?.mech).toBe('AS7-D-H');
+    expect(all.slice(1).map(result => result.market!.dlc)).toEqual([...all.slice(1).map(result => result.market!.dlc)].sort((a, b) => a - b));
   });
 
   it('CA8: cada Mech se abre en el MechLab con su build de serie', () => {
