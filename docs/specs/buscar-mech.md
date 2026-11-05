@@ -15,6 +15,8 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | Rareza por facción | `FactionRarity` de la unit card de cada variante (`tools/datos-juego/unitcard/`) | Para cada facción, `VeryCommon`, `Common`, `Uncommon`, `Rare`, `VeryRare`, `Unique` o `Unavailable` |
 | Fecha de introducción | `IntroDate` de la unit card | Desde cuándo existe la variante |
 | Alianza de cada facción | `Allegiance` de los assets de facción (`Factions/*`) | A qué facción responde: Canopus a Periphery, St. Ives a Independent |
+| 'Mechs hero en venta | DataTable `Campaign/Progression/DataTables/HeroMechsForPurchase` | Los 95 'Mechs hero que el juego puede poner a la venta (WVR-Q, ARC-T…) |
+| Recompensas fuera de las HRQ | Objetivos con `bHasRewards` y `MechLoadouts` de todo el juego, y la acción `PlaceMission` que los coloca (en su export `Default__`) | Misiones de las campañas de los DLC, el final de una campaña, la información del Bounty Hunter (DLC4) o desbloqueos de promociones (el Wolverine de Razer, WVR-7H), con su sistema si lo tienen |
 
 `extraer_mapa.py` guarda las alianzas en `tools/datos-juego/starmap/alianzas.json`. `generar_mapa.py` lee las unit cards con las funciones de `generar_mechs.py` (la misma unit card que usa el MechLab para cada variante) y escribe `src/data/availability.json`, con la tabla que usa cada facción del mapa y la rareza y la fecha de cada variante.
 
@@ -23,14 +25,18 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 - **Archivo aparte:** la rareza de 627 variantes pesa unos 115 KB (10 KB comprimido). Va en su propio archivo, que el mapa solo carga al abrir el panel o si la URL trae una variante.
 - **Facciones sin tabla propia:** las unit cards solo traen rareza para las grandes facciones, los Clanes y unas pocas más (Periphery, Independent, Outlaws…). Las facciones menores usan la tabla de su alianza, subiendo por la cadena hasta una que la tenga: Magistracy of Canopus usa la de Periphery, y Elysian Fields la de Outlaws (Elysian Fields responde a Oberon, Oberon a Bandits y Bandits a Outlaws). Una facción con tabla propia usa la suya aunque tenga alianza (Lyran Alliance responde a Steiner, pero tiene tabla). Arc-Royal Defense Cordon no tiene asset en el juego y se queda sin tabla.
 - **Facciones sin entrada:** si la tabla de la facción no nombra la variante, esa facción no la vende.
-- **'Mechs hero con fuente fija:** los que son recompensa de una HRQ, los que el juego coloca en un sistema (`HeroMechToPlace`, el Atlas II en Romulus) y los que vende un mercado especial. Salen de los datos que el mapa ya tiene ([recompensas-hrq.md](recompensas-hrq.md) y [mercados-especiales.md](mercados-especiales.md)).
+- **Fuentes fijas:** la recompensa de una HRQ, un 'Mech que el juego coloca en un sistema (`HeroMechToPlace`, el Atlas II en Romulus), un mercado especial ([recompensas-hrq.md](recompensas-hrq.md) y [mercados-especiales.md](mercados-especiales.md)) o una recompensa fuera de las HRQ. `extraer_mapa.py` guarda estas últimas en `recompensas_campana.json` y la tabla de hero en venta en `heroes_en_venta.json`; `generar_mapa.py` pasa a `starmap.json` las recompensas que no son de una HRQ del mapa (esas ya van en su ficha) y marca en `availability.json` los hero en venta.
+- **'Mechs de un solo sitio:** los que no se pueden comprar como hero, tienen una fuente fija y, o son hero (14), o ninguna facción los vende (13 variantes especiales, como el WVR-7H o las de los mercados del DLC2). Los hero de `HeroMechsForPurchase` no tienen un sitio fijo: se compran cuando salen a la venta.
+- **Nombres de los loadouts de recompensa:** llevan la variante con prefijos y sufijos (`AS7-D_DLC4_Reward`, `D7M3_HBR-A_Reward_Loadout`) y a veces sin respetar las mayúsculas (`KTO-19b_Loadout`).
 
 ## Requisitos funcionales
 
 - **RF1.** Un panel **Find a 'Mech**, junto a Quests y Special markets, busca variantes por nombre o por variante (`atlas`, `AS7-D`). Solo muestra las que ya existen en la fecha del mapa: buscar una que todavía no existe confunde. Si hay variantes que coinciden pero entran en producción más adelante, la lista lo dice al final, con cuántas son, aunque haya otras en la lista (buscar «archer» en 3015 da cinco y avisa de otras cinco posteriores), y ofrece un botón que lleva el mapa a la fecha de la siguiente; si esa fecha es posterior al final del mapa (3060), solo lo dice.
 - **RF2.** Al elegir una variante, el mapa colorea el territorio de cada facción según su rareza en la fecha elegida, de Very common a Very rare, con Unique y Unavailable aparte y el resto atenuado (no la vende). Al cerrar la ficha, el mapa vuelve a los colores de las facciones.
 - **RF3.** La ficha de la variante muestra su nombre, si ya existe en la fecha del mapa (`Not produced until 1 JAN 3045`), las facciones con sistemas en esa fecha que la venden, agrupadas por rareza con su número de sistemas (las que no la venden ya salen en gris en el mapa y no se listan), sus fuentes fijas (HRQ, mercados especiales y 'Mech único, con enlace a cada una) y un enlace al MechLab con su build de serie.
-- **RF4.** Un panel **Hero 'Mechs** lista los 'Mechs hero con fuente fija, con la HRQ, el mercado o el sistema de cada uno. Al elegir uno, se abre su ficha.
+- **RF4.** Un panel **Hero 'Mechs** lista los 'Mechs de un solo sitio: primero los hero y después las variantes especiales, con la HRQ, el mercado, la recompensa o el sistema de cada uno. Al elegir uno, se abre su ficha.
+- **RF9.** La ficha muestra las recompensas fuera de las HRQ como fuente fija: el título de la misión, su DLC y su sistema, si lo tiene, con enlace; y el mapa encuadra ese sistema como el de un 'Mech único.
+- **RF10.** La ficha de un hero que puede salir a la venta lo dice, también cuando ninguna facción lo vende (el ARC-T).
 - **RF5.** La URL guarda la variante elegida (`?mech=AS7-D`), para compartir la vista.
 - **RF6.** Si la variante se consigue en un sitio pequeño, el mapa lo encuadra al elegirla, porque el color de un solo sistema no se ve con el mapa entero:
   - un 'Mech hero con fuente fija, o una variante que no vende ninguna facción: su HRQ, con la ruta marcada como al elegir la HRQ, o el sistema del 'Mech único o del mercado especial;
@@ -53,7 +59,11 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | CA3 | El AS7-D el 1 de junio de 3025 y el 1 de junio de 3052 | se agrupan las facciones del mapa por rareza | en 3025 el primer grupo es Common, con Steiner y su número de sistemas, y Liao y Canopus están en Very rare; en 3052 los Clanes, que no lo tienen en su tabla, van al final, como no vendido |
 | CA4 | El Archer ARC-AGC (hero) | se consulta | existe desde el 1 de enero de 3045, es Unique en Marik, no existe el 1 de enero de 3030 y es recompensa de Bow and Arrow |
 | CA5 | El Atlas II AS7-D-H y el Thunderbolt TDR-5S | se consultan sus fuentes fijas | el primero está en Romulus desde el 10 de mayo de 3043; el segundo se vende en el mercado del DLC4 en Rasalhague |
-| CA6 | Los 'Mechs hero | se listan los que tienen fuente fija | son 10, ordenados por nombre, todos hero y con al menos una fuente; entre ellos el ARC-AGC (Bow and Arrow) y el AS7-D-H (Romulus) |
+| CA6 | Los 'Mechs de un solo sitio | se listan | hay 14 hero, ordenados por nombre, todos con al menos una fuente y ninguno en venta; entre ellos el ARC-AGC (Bow and Arrow), el AS7-D-H (Romulus), el MAD-BH y el PXH-KB |
+| CA17 | Las variantes especiales | se listan | son 13, ninguna hero ni vendida por una facción; entre ellas el WVR-7H, recompensa de «Hidden Cache Found» sin sistema, y el TDR-5SE, del mercado especial del DLC2 |
+| CA18 | El MAD-BH | se consultan sus fuentes y qué encuadrar | es la recompensa de «Head Hunting», del DLC4, en Robinson, y se encuadra Robinson |
+| CA19 | El WVR-Q y el ARC-T | se consultan | pueden salir a la venta como hero y no están en la lista |
+| CA20 | Las recompensas fuera de las HRQ | se cargan | ninguna es de una HRQ del mapa (no está «Bow and Arrow Pt.4»); «Gunzburg Pt.3» da el AS7-D y «Battle at New Starburg» el HBR-A |
 | CA7 | Una variante hero sin rareza (BattleMaster BLR-1GHE) | se agrupan las facciones | todas van al grupo de no vendido |
 | CA8 | Las búsquedas «atlas», «as7-d» y vacía | se busca | la primera incluye el AS7-D y el AS7-D-H, la segunda da primero el AS7-D y la vacía no da nada |
 | CA9 | `?mech=AS7-D` | se lee y se escribe la URL | se lee el AS7-D; una variante que no existe se descarta; la URL del mapa con la variante lleva `mech=AS7-D` |
