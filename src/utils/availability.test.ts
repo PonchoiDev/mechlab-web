@@ -186,6 +186,11 @@ describe('rareza de cada variante por facción', () => {
     expect(data.rewards.find(reward => reward.title === 'Battle at New Starburg')?.mechs.map(entry => entry.id)).toEqual(['HBR-A']);
   });
 
+  it('CA21: una recompensa cuya acción está en otra carpeta también tiene sistema', () => {
+    const vega = data.systems.find(system => system.name === 'Vega')!;
+    expect(data.rewards.find(reward => reward.title === 'Shielded Withdrawal')?.system).toBe(vega.id);
+  });
+
   it('CA10: las variantes están en el MechLab y todas las facciones del mapa tienen tabla salvo el ARDC', () => {
     const names = new Map(mechsJson.map(entry => [entry.id, entry.name]));
     expect(availability.mechs.filter(entry => names.get(entry.id) !== entry.name)).toEqual([]);
