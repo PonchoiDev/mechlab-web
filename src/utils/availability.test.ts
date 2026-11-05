@@ -193,21 +193,29 @@ describe('rareza de cada variante por facción', () => {
   });
 
   it('CA22: el Wolverine de Razer y el PXH-KB son promociones, sin sistema', () => {
-    for (const [mechId, partner] of [['WVR-7H', 'Razer'], ['PXH-KB', 'Microsoft']]) {
-      const [reward] = getFixedSources(data, mechId).rewards;
-      expect(reward).toEqual(expect.objectContaining({ kind: 'promotion', partner }));
-      expect(reward.system).toBeUndefined();
-    }
+    const valentina = data.systems.find(system => system.name === 'Valentina')!;
+    const [razer] = getFixedSources(data, 'WVR-7H').rewards;
+    expect(razer).toEqual(expect.objectContaining({ kind: 'promotion', partner: 'Razer', system: valentina.id }));
+    expect(getMechFocus(data, availability, mech('WVR-7H'), '3030-01-01')).toEqual({ systemIds: [valentina.id], questId: null });
+    const [microsoft] = getFixedSources(data, 'PXH-KB').rewards;
+    expect(microsoft).toEqual(expect.objectContaining({ kind: 'promotion', partner: 'Microsoft' }));
+    expect(microsoft.system).toBeUndefined();
     expect(getFixedSources(data, 'MAD-BH').rewards[0].kind).toBe('mission');
   });
 
   it('CA23: toda recompensa dice cómo se consigue, aunque no esté en el mapa', () => {
     const describe = (mechId: string) => describeRewardSource(getFixedSources(data, mechId).rewards[0]);
-    expect(describe('WVR-7H')).toBe('Razer promotion: arrives as a message (Hidden Cache Found)');
+    expect(describe('WVR-7H')).toBe('Razer promotion: arrives as a message (Hidden Cache Found) when you arrive');
     expect(describe('FS9-A')).toBe('Reach Bounty Hunter intel level 3 (DLC 4)');
     expect(describe('AS7-BH')).toBe('Reach the Rudiarius fame rank in the Solaris arenas (DLC 6)');
     expect(describe('SNV-BR')).toBe('Complete the DLC 9 campaign (Promises Kept)');
     expect(describe('PXH-KB')).toBe('Microsoft promotion, career mode only: arrives as a message (Heya Ryana, I\'m Back!)');
+  });
+
+  it('CA24: la búsqueda encuentra por el otro nombre, como el MechLab', () => {
+    const adder = searchMechs(availability, 'adder');
+    expect(adder.map(found => found.id)).toContain('ADR-PRIME');
+    expect(adder.every(found => found.name === 'Puma' && found.otherName === 'Adder')).toBe(true);
   });
 
   it('CA10: las variantes están en el MechLab y todas las facciones del mapa tienen tabla salvo el ARDC', () => {
