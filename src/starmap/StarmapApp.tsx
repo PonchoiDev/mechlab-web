@@ -266,7 +266,7 @@ export function StarmapApp() {
   // Sistema de la recompensa (fuera de las HRQ) donde se consigue la variante: se marca como una ruta.
   const [mechMissionSystem, setMechMissionSystem] = useState<number | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
-  // La rareza de los 'Mechs va en su propio archivo: se descarga al abrir Find a 'Mech o Hero 'Mechs, o
+  // La rareza de los 'Mechs va en su propio archivo: se descarga al abrir Find a 'Mech o Special 'Mech locations, o
   // al entrar con ?mech= en la URL.
   const [availability, setAvailability] = useState<AvailabilityData | null>(null);
   const [mechId, setMechId] = useState<string | null>(null);

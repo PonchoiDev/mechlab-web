@@ -123,7 +123,7 @@ export function HeroDrawer({ data, availability, selectedId, onOpen, onPick }: H
   const groups = [{ title: 'Hero \u2019Mechs', entries: heroes }, { title: 'Special variants', entries: special }];
 
   return (
-    <section className={`starmap-legend starmap-quests starmap-heroes-drawer${isOpen ? ' is-open' : ''}`} aria-label="Hero 'Mechs">
+    <section className={`starmap-legend starmap-quests starmap-heroes-drawer${isOpen ? ' is-open' : ''}`} aria-label="Special 'Mech locations">
       <button
         type="button"
         aria-expanded={isOpen}
@@ -132,7 +132,7 @@ export function HeroDrawer({ data, availability, selectedId, onOpen, onPick }: H
           setIsOpen(open => !open);
         }}
       >
-        Hero &rsquo;Mechs {availability && <b>{heroes.length + special.length}</b>}
+        Special &rsquo;Mech locations {availability && <b>{heroes.length + special.length}</b>}
       </button>
       {isOpen && (
         <div className="starmap-quests-body">
