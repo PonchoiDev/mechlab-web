@@ -193,8 +193,11 @@ describe('rareza de cada variante por facción', () => {
   });
 
   it('CA22: el Wolverine de Razer y el PXH-KB son promociones, sin sistema', () => {
-    expect(getFixedSources(data, 'WVR-7H').rewards[0]).toEqual(expect.objectContaining({ kind: 'promotion', partner: 'Razer', system: undefined }));
-    expect(getFixedSources(data, 'PXH-KB').rewards[0]).toEqual(expect.objectContaining({ kind: 'promotion', partner: 'Microsoft', system: undefined }));
+    for (const [mechId, partner] of [['WVR-7H', 'Razer'], ['PXH-KB', 'Microsoft']]) {
+      const [reward] = getFixedSources(data, mechId).rewards;
+      expect(reward).toEqual(expect.objectContaining({ kind: 'promotion', partner }));
+      expect(reward.system).toBeUndefined();
+    }
     expect(getFixedSources(data, 'MAD-BH').rewards[0].kind).toBe('mission');
   });
 
