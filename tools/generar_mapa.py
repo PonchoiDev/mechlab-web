@@ -383,6 +383,31 @@ def sumar_objetos(objetos):
     return list(sumados.values())
 
 
+# Promociones: llegan con un mensaje, sin misión ni sistema. El registro de eventos de la de Razer dice
+# «Claimed Razer WVR-7H», y el arco de la de Microsoft comprueba HasMSMechEntitlement.
+SOCIOS_DE_PROMOCION = {"Razer_Exclusive": "Razer", "MS_Exclusive": "Microsoft"}
+REGEX_NIVEL_DE_INFORMACION = re.compile(r"^BountyHunterLevelUp(\d+)$")
+
+
+def tipo_de_recompensa(recompensa):
+    """Cómo se consigue la recompensa, para que la ficha lo diga aunque no esté en el mapa."""
+    carpeta, objetivo = recompensa["carpeta"], recompensa["objetivo"]
+    socio = SOCIOS_DE_PROMOCION.get(carpeta.rsplit("/", 1)[-1])
+    if socio:
+        # La de Microsoft está en las misiones del modo carrera (DLC1/CareerMode).
+        return {"kind": "promotion", "partner": socio, **({"careerOnly": True} if "/CareerMode/" in carpeta else {})}
+    nivel = REGEX_NIVEL_DE_INFORMACION.match(objetivo)
+    if nivel:
+        # Niveles de información sobre el Bounty Hunter, el mercenario rival del DLC4.
+        return {"kind": "intel", "level": int(nivel.group(1))}
+    if objetivo.startswith("ArenaFameLevelUp"):
+        # Rangos de fama de las arenas de Solaris (DLC6): el título es el nombre del rango.
+        return {"kind": "arenaRank"}
+    if "CampaignComplete" in objetivo:
+        return {"kind": "campaignComplete"}
+    return {"kind": "mission"}
+
+
 def recompensas_fuera_de_hrq(recompensas_juego, misiones_juego, mechs, sistemas_validos):
     """'Mechs que da una misión o un objetivo que no es una HRQ del mapa: las campañas de los DLC, la
     información del Bounty Hunter o desbloqueos como el Wolverine de Razer. Las de las HRQ ya van en
@@ -398,10 +423,7 @@ def recompensas_fuera_de_hrq(recompensas_juego, misiones_juego, mechs, sistemas_
                    "dlc": int(dlc.group(1)) if dlc else None, "mechs": variantes}
         if recompensa["sistema"] in sistemas_validos:
             entrada["system"] = recompensa["sistema"]
-        # Razer_Exclusive y MS_Exclusive son desbloqueos de promociones: llegan con un mensaje, sin
-        # misión ni sistema (el registro de eventos dice «Claimed Razer WVR-7H»).
-        if recompensa["carpeta"].endswith("_Exclusive"):
-            entrada["exclusive"] = True
+        entrada.update(tipo_de_recompensa(recompensa))
         resultado.append(entrada)
     return resultado
 

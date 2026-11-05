@@ -70,6 +70,23 @@ export const getFixedSources = (data: StarmapData, mechId: string): FixedSources
 
 export const countSources = ({ quests, markets, uniques, rewards }: FixedSources) => quests.length + markets.length + uniques.length + rewards.length;
 
+// Cómo se consigue una recompensa fuera de las HRQ, también si no está en el mapa ni es una misión.
+export const describeRewardSource = (reward: CampaignReward): string => {
+  const dlc = reward.dlc ? ` (DLC ${reward.dlc})` : '';
+  switch (reward.kind) {
+    case 'promotion':
+      return `${reward.partner} promotion${reward.careerOnly ? ', career mode only' : ''}: arrives as a message (${reward.title})`;
+    case 'intel':
+      return `Reach Bounty Hunter intel level ${reward.level}${dlc}`;
+    case 'arenaRank':
+      return `Reach the ${reward.title} fame rank in the Solaris arenas${dlc}`;
+    case 'campaignComplete':
+      return `Complete the DLC ${reward.dlc} campaign (${reward.title})`;
+    default:
+      return `Mission reward: ${reward.title}${dlc}`;
+  }
+};
+
 type OnePlaceMech = { mech: MechAvailability; sources: FixedSources };
 
 // 'Mechs de un solo sitio: no salen a la venta como hero y tienen una fuente fija. Los hero, y aparte
