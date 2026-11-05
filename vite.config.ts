@@ -62,7 +62,14 @@ const workerApi = (): Plugin => {
 export default defineConfig({
   base: `/${GAME_PATH}/`,
   build: {
-    outDir: `dist/${GAME_PATH}`
+    outDir: `dist/${GAME_PATH}`,
+    // El mapa estelar es otra página con su propio bundle: no se descarga con el MechLab.
+    rolldownOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        starmap: resolve(__dirname, 'starmap/index.html')
+      }
+    }
   },
   plugins: [react(), rootSite(), workerApi()],
   test: {

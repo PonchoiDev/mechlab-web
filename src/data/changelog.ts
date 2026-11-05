@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-05-starmap',
+    date: '2026-11-05',
+    title: 'Star map',
+    items: [
+      'New Star Map page at mw-builder.com/mercs/starmap/, with its own cover on the MW Builder home page',
+      'Faction borders of the Inner Sphere on any date from 3015 to 3060, taken from the game files, with the events that move them',
+      'Clusters and industrial hubs, and a card with the owner history of each system',
+      'Search a system by name and share the view: the date and the system go in the link'
+    ]
+  },
+  {
     id: '2026-10-31-compare',
     date: '2026-10-31',
     title: 'Compare \'Mechs',

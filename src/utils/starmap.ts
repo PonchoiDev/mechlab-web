@@ -14,7 +14,17 @@ export const getOwnerAt = (system: StarSystem, date: GameDate): string | null =>
   return owner;
 };
 
-export const getFactionColor = (data: StarmapData, factionId: string | null): string | null =>
+// Las facciones con sistemas en esa fecha, de mayor a menor, para la leyenda.
+export const countSystemsByOwner = (systems: StarSystem[], date: GameDate): [string, number][] => {
+  const counts = new Map<string, number>();
+  for (const system of systems) {
+    const owner = getOwnerAt(system, date);
+    if (owner) counts.set(owner, (counts.get(owner) ?? 0) + 1);
+  }
+  return [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+};
+
+export const getFactionColor =(data: StarmapData, factionId: string | null): string | null =>
   factionId ? data.factions[factionId]?.color ?? null : null;
 
 export const isValidDate = (date: string): boolean => {

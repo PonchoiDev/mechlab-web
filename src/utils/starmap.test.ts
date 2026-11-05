@@ -4,7 +4,11 @@ import type { StarmapData } from '../types/starmap';
 import {
   buildTerritoryIndex,
   clampDate,
+  countSystemsByOwner,
+  dateToDays,
+  daysToDate,
   formatGameDate,
+  getCurrentEvent,
   getClusterOutline,
   getFactionColor,
   getHubs,
@@ -18,7 +22,7 @@ import {
 } from './starmap';
 
 // Criterios de aceptación de docs/specs/mapa-estelar.md (issue #61).
-const data = starmapData as StarmapData;
+const data = starmapData as unknown as StarmapData;
 const system = (name: string) => {
   const found = data.systems.find(candidate => candidate.name === name);
   if (!found) throw new Error(`${name} no existe en starmap.json`);
@@ -79,6 +83,20 @@ describe('eventos y fechas', () => {
   it('CA12: la fecha se muestra como en el juego', () => {
     expect(formatGameDate('3042-01-21')).toBe('21 JAN 3042');
     expect(formatGameDate('3015-12-01')).toBe('1 DEC 3015');
+  });
+
+  it('el control deslizante pasa de días a fechas sin perder ninguna', () => {
+    expect(daysToDate(dateToDays('3042-01-21'))).toBe('3042-01-21');
+    expect(dateToDays('3015-01-02') - dateToDays('3015-01-01')).toBe(1);
+    expect(daysToDate(dateToDays('3048-02-28') + 1)).toBe('3048-02-29');
+    expect(getCurrentEvent(data.events, '3049-06-01')?.name).toMatch(/Clan Invasion/);
+    expect(getCurrentEvent(data.events, '3020-01-01')).toBeNull();
+  });
+
+  it('la leyenda cuenta los sistemas de cada facción, de mayor a menor', () => {
+    const counts = countSystemsByOwner(data.systems, '3015-01-01');
+    expect(counts.slice(0, 5).map(([faction]) => faction).sort()).toEqual(['Davion', 'Kurita', 'Liao', 'Marik', 'Steiner']);
+    expect(counts.map(([, count]) => count)).toEqual([...counts.map(([, count]) => count)].sort((a, b) => b - a));
   });
 });
 
