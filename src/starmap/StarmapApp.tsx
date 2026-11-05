@@ -272,7 +272,8 @@ export function StarmapApp() {
       <FactionLegend date={date} />
       {isFeedbackOpen && (
         <FeedbackDialog
-          buildUrl={window.location.href}
+          // Se calcula con el estado, no con window.location: la URL se actualiza con retraso.
+          buildUrl={`${window.location.origin}${window.location.pathname}${toMapQuery({ date, systemId: selectedId }, data)}`}
           attachLabel="Attach a link to this map view"
           onMessage={setNotice}
           onClose={() => setIsFeedbackOpen(false)}
