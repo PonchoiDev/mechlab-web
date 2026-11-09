@@ -451,6 +451,20 @@
       }
 
       .whats-new-panel[hidden] { display: none; }
+
+      /* En pantallas estrechas la campana no está pegada al borde: anclado a ella, el panel se salía por
+         la izquierda. Ocupa el ancho de la pantalla y sale debajo de la campana. */
+      @media (max-width: 600px) {
+        .whats-new-panel {
+          position: fixed;
+          top: auto;
+          right: 12px;
+          left: 12px;
+          width: auto;
+          max-height: 65vh;
+          margin-top: 6px;
+        }
+      }
       .whats-new-panel:focus-visible { outline: 2px solid var(--lime); outline-offset: -2px; }
 
       .whats-new-panel h2 {

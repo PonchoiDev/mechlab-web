@@ -1294,10 +1294,16 @@ button, input, select { font: inherit; color: inherit; }
   .starmap-legend { max-width: calc(100vw - 74px); }
   .starmap-legend > button { min-width: 0; height: 34px; padding: 0 8px; font-size: 13px; letter-spacing: 0.04em; }
   .starmap-quests.is-open { width: calc(100vw - 74px); }
+  /* Con un cajón abierto, su lista, los botones y el panel de fecha tapaban casi todo el mapa: el panel
+     de fecha se oculta mientras tanto y los cajones bajan a su sitio. */
+  .starmap:has(.starmap-drawers .is-open) .starmap-date { display: none; }
+  .starmap:has(.starmap-drawers .is-open) .starmap-drawers,
+  .starmap:has(.starmap-drawers .is-open) .starmap-zoom { bottom: 12px; }
   /* En el móvil el contenido va dentro del cajón, encima de su botón, como antes. */
   .starmap-quests-body,
   .starmap-legend > ul { position: static; width: auto; border: 0; }
-  .starmap-legend ul { max-height: 36vh; }
+  .starmap-legend ul { max-height: 30vh; }
+  .starmap-legend ul { scrollbar-width: thin; scrollbar-color: var(--map-line) transparent; }
 }
 
 /* Solo para lectores de pantalla: anuncia lo que cambia sin ocupar sitio. */

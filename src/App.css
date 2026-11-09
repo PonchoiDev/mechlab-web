@@ -2282,6 +2282,21 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   border-top: 3px solid var(--work-lime);
   background: var(--work-panel);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+  scrollbar-color: var(--work-line) transparent;
+}
+
+/* En pantallas estrechas la campana no está pegada al borde: anclado a ella, el panel se descuadraba.
+   Ocupa el ancho de la pantalla y sale debajo de la campana (top automático = su sitio en el flujo). */
+@media (max-width: 600px) {
+  .whats-new-panel {
+    position: fixed;
+    top: auto;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-height: 65vh;
+    margin-top: 6px;
+  }
 }
 
 .whats-new-header {
