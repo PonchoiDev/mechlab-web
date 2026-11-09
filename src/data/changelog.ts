@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-09-rival-mercs',
+    date: '2026-11-09',
+    title: 'Rival mercs on the star map',
+    items: [
+      'The new Rival mercs panel lists the DLC 4 mercenary companies and draws the zones each one holds on the chosen date, with its logo',
+      'Hover a zone to see who holds it and whether it only happens in career mode, and click it to open the company card with its zones, pilot skill and history',
+      'After 3050 most zones rotate between companies at random, marked with a question mark',
+      'The star map is much smoother: dragging, zooming and event animations no longer slow down'
+    ]
+  },
+  {
     id: '2026-11-09-conflict-zones-arenas',
     date: '2026-11-09',
     title: 'Conflict zones and arenas',

@@ -25,11 +25,13 @@ import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { MarketDrawer, SystemMarkets } from './MarketPanels';
 import { SystemArena, ZoneCard, ZoneLevels } from './ZonePanels';
+import { MercCard, MercDrawer } from './MercPanels';
+import { getCompanyZonesAt, getMercOwnerAt, getMercZonesAt } from '../utils/mercs';
 import { HeroDrawer, MechCard, MechDrawer } from './MechPanels';
 import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
 import { QuestCard, QuestDrawer, SystemQuests } from './QuestPanels';
 import { StarmapCanvas, type FocusRequest } from './StarmapCanvas';
-import type { TerritoryColors } from './renderer';
+import type { MercZoneLayer, TerritoryColors } from './renderer';
 
 const data = starmapData as unknown as StarmapData;
 const LEGEND_MIN_SYSTEMS = 5;
@@ -252,6 +254,22 @@ export function StarmapApp() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   // Zona de conflicto pulsada en el mapa: su ficha se ve si no hay otra encima.
   const [zoneId, setZoneId] = useState<string | null>(null);
+  // Mercenarios rivales: sus zonas se dibujan siempre; con una compañía elegida, solo las suyas.
+  const [companyId, setCompanyId] = useState<string | null>(null);
+  const mercZones = useMemo<MercZoneLayer>(() => {
+    return getMercZonesAt(data, date)
+      .filter(({ owner }) => !companyId || owner.company === companyId)
+      .map(({ zone, owner }) => {
+        const company = owner.company ? data.mercs.companies[owner.company] : null;
+        return {
+          zone,
+          logo: company?.logo ? LOGO_PATH + company.logo : null,
+          highlighted: owner.company !== null && owner.company === companyId,
+          title: company?.name ?? 'Random rotation',
+          note: owner.rotating ? 'Mercenary companies take turns here at random' : owner.careerOnly ? 'Career only' : null
+        };
+      });
+  }, [companyId, date]);
   // La rareza de los 'Mechs va en su propio archivo: se descarga al abrir Find a 'Mech o Special 'Mech locations, o
   // al entrar con ?mech= en la URL.
   const [availability, setAvailability] = useState<AvailabilityData | null>(null);
@@ -345,11 +363,12 @@ export function StarmapApp() {
   const isPinned = shown !== null && shown.id === selectedId;
 
 
-  // Elegir otra cosa cierra la zona, para que no reaparezca al cerrar la ficha nueva. Solo la capital,
-  // abierta desde la propia ficha de la zona, la conserva.
+  // Elegir otra cosa cierra la zona y la compañía, para que no reaparezcan al cerrar la ficha nueva.
+  // Solo los sistemas abiertos desde sus propias fichas las conservan.
   const pickSystem = (system: StarSystem) => {
     setSelectedId(system.id);
     setZoneId(null);
+    setCompanyId(null);
     focusOn(system.id);
   };
 
@@ -358,6 +377,7 @@ export function StarmapApp() {
     pendingMechRef.current = null;
     setQuestId(picked.id);
     setZoneId(null);
+    setCompanyId(null);
     setMechId(null);
     setSelectedId(null);
     setHoveredId(null);
@@ -370,9 +390,30 @@ export function StarmapApp() {
     setDate(target);
   };
 
+  // Al elegir una compañía se cierran las demás fichas y el mapa encuadra sus zonas.
+  const pickCompany = (id: string) => {
+    setCompanyId(id);
+    setZoneId(null);
+    setSelectedId(null);
+    setQuestId(null);
+    setMechId(null);
+    pendingMechRef.current = null;
+    const systems = getCompanyZonesAt(data, id, date).flatMap(zone => zone.systems);
+    if (systems.length > 0) focusOn(...systems);
+  };
+
+  // Al pulsar una zona de mercenarios se abre la ficha de quien la ocupa; si rota al azar, la etiqueta
+  // ya lo explica.
+  const pickMercZone = (zoneId: string) => {
+    const zone = data.mercs.zones.find(candidate => candidate.id === zoneId);
+    const owner = zone ? getMercOwnerAt(zone, date) : null;
+    if (owner?.company) pickCompany(owner.company);
+  };
+
   // Al pulsar dentro de una zona se cierran las demás fichas para que se vea la suya.
   const pickZone = (id: string) => {
     setZoneId(id);
+    setCompanyId(null);
     setSelectedId(null);
     setQuestId(null);
     setMechId(null);
@@ -384,6 +425,7 @@ export function StarmapApp() {
     pendingMechRef.current = null;
     setMechId(id);
     setZoneId(null);
+    setCompanyId(null);
     setQuestId(null);
     setSelectedId(null);
     setHoveredId(null);
@@ -405,8 +447,11 @@ export function StarmapApp() {
         onSelect={systemId => {
           setSelectedId(systemId);
           setZoneId(null);
+          setCompanyId(null);
         }}
         onZone={pickZone}
+        mercZones={mercZones}
+        onMercZone={pickMercZone}
       />
 
       <header className="starmap-topbar">
@@ -440,7 +485,19 @@ export function StarmapApp() {
             onClose={() => setQuestId(null)}
           />
         )}
-      {!shown && !quest && !mech && zoneId && (
+      {!shown && !quest && !mech && companyId && (
+        <MercCard
+          data={data}
+          companyId={companyId}
+          date={date}
+          onSystem={systemId => {
+            setSelectedId(systemId);
+            focusOn(systemId);
+          }}
+          onClose={() => setCompanyId(null)}
+        />
+      )}
+      {!shown && !quest && !mech && !companyId && zoneId && (
         <ZoneCard
           data={data}
           clusterId={zoneId}
@@ -479,6 +536,7 @@ export function StarmapApp() {
           onPick={systemId => {
             setSelectedId(systemId);
             setZoneId(null);
+            setCompanyId(null);
             setHoveredId(null);
             focusOn(systemId);
           }}
@@ -494,6 +552,7 @@ export function StarmapApp() {
           onPick={pickMech}
         />
         <HeroDrawer data={data} availability={availability} failed={availabilityFailed} selectedId={mechId} onOpen={() => loadAvailability()} onPick={pickMech} />
+        <MercDrawer data={data} date={date} selectedId={companyId} onPick={pickCompany} />
       </div>
       {isFeedbackOpen && (
         <FeedbackDialog

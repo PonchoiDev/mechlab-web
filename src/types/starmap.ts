@@ -146,6 +146,27 @@ export interface MultiMission {
   odds: number;
 }
 
+// Compañía de mercenarios rivales (DLC4).
+export interface MercCompany {
+  name: string;
+  description: string | null;
+  // Nivel de los pilotos: Regular, Veteran o Elite.
+  skill: string | null;
+  logo?: string;
+}
+
+// Zona de influencia de los mercenarios rivales: un círculo alrededor de sus sistemas cercanos, con
+// su dueño por fechas.
+export interface MercZone {
+  id: string;
+  systems: number[];
+  center: [number, number];
+  radius: number;
+  owners: { from: GameDate; company: string | null; careerOnly?: boolean }[];
+  // Al acabar el historial, el juego la reparte al azar: días con dueño y días vacía.
+  rotation?: { owned: number; empty: number };
+}
+
 // Arena del DLC6 en un sistema.
 export interface ArenaSystem {
   system: number;
@@ -199,4 +220,5 @@ export interface StarmapData {
   uniqueMechs: UniqueMech[];
   rewards: CampaignReward[];
   arenas: { systems: ArenaSystem[]; ranks: ArenaRank[] };
+  mercs: { companies: Record<string, MercCompany>; zones: MercZone[] };
 }

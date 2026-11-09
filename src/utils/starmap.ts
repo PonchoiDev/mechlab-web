@@ -165,6 +165,9 @@ export const buildTerritoryIndex = (
   const nearest = new Int32Array(cols * rows).fill(-1);
   const best = new Float32Array(cols * rows).fill(Infinity);
   const reach = Math.ceil(radius / cellSize);
+  // La deformación solo depende de la celda: se calcula una vez por celda y no por cada sistema que
+  // la alcanza, que era lo que más tardaba al cargar el mapa.
+  const wobbles = new Float64Array(wobble ? cols * rows : 0).fill(Number.NaN);
 
   systems.forEach((system, index) => {
     const col = Math.round((system.x - originX) / cellSize);
@@ -175,8 +178,11 @@ export const buildTerritoryIndex = (
         const y = originY + r * cellSize;
         let distance = Math.hypot(x - system.x, y - system.y);
         if (distance > radius) continue;
-        if (wobble) distance *= 1 + wobble * (valueNoise(x / 9, y / 9) - 0.5) * 2;
         const cell = r * cols + c;
+        if (wobble) {
+          if (Number.isNaN(wobbles[cell])) wobbles[cell] = 1 + wobble * (valueNoise(x / 9, y / 9) - 0.5) * 2;
+          distance *= wobbles[cell];
+        }
         if (distance < best[cell]) {
           best[cell] = distance;
           nearest[cell] = index;

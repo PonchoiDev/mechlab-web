@@ -24,6 +24,10 @@ CONTENIDO = "MW5Mercs/Content/"
 TABLA_SISTEMAS = CONTENIDO + "InnerSphereData/MW5_InnerSphereData"
 # 'Mechs hero que el juego puede poner a la venta: los que no están solo se consiguen de otra forma.
 HEROES_EN_VENTA = CONTENIDO + "Campaign/Progression/DataTables/HeroMechsForPurchase"
+# Mercenarios rivales (DLC4): sus zonas de influencia en el mapa, con un historial de dueño por fechas,
+# y las compañías.
+INFLUENCIAS_RIVALES = CONTENIDO + "DLC4/CampaignData/RivalMercs/StarMapRadialInfluences/"
+COMPANIAS_RIVALES = CONTENIDO + "DLC4/CampaignData/RivalMercs/Companies/"
 # Arenas del DLC6: los sistemas que las tienen y los rangos de fama, con lo que da cada uno.
 ARENAS = CONTENIDO + "DLC6/LevelGenerators/ArenaStarSystemTable"
 RANGOS_DE_ARENA = CONTENIDO + "DLC6/ArenaFameProgressionTable"
@@ -500,6 +504,60 @@ def campo_de_fila(fila, nombre):
     return next((valor for clave, valor in fila.items() if clave.split("_")[0] == nombre), None)
 
 
+def extraer_rivales(pak):
+    """Compañías de mercenarios rivales y sus zonas de influencia.
+
+    Cada compañía del juego (Companies/<X>) apunta a sus datos (<X>Data, con la descripción) y a su
+    asset de facción (Factions/RivalMercs/<X>, con el nombre y el logo). Los Wolf's Dragoons tienen
+    varias compañías por épocas con la misma facción: se unen por ella.
+    """
+    companias = {}
+    faccion_de_compania = {}
+    for ruta in sorted(pak.buscar(COMPANIAS_RIVALES)):
+        if not ruta.endswith(".uasset") or ruta.endswith("Data.uasset"):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        propiedades = asset.propiedades(asset.principal())
+        datos_id = (propiedades.get("RivalMercDataId") or {}).get("Id", {}).get("PrimaryAssetName")
+        if not datos_id:
+            continue
+        datos = Asset.desde_pak(pak, COMPANIAS_RIVALES + datos_id)
+        datos_propiedades = datos.propiedades(datos.principal())
+        ruta_faccion = datos.ruta_import(datos_propiedades["FactionAsset"])[0]
+        faccion = Asset.desde_pak(pak, ruta_de_juego(ruta_faccion))
+        faccion_propiedades = faccion.propiedades(faccion.principal())
+        id_faccion = ruta_faccion.rsplit("/", 1)[-1]
+        faccion_de_compania[asset.principal()] = id_faccion
+        nivel = propiedades.get("SkillLevel")
+        companias.setdefault(id_faccion, {
+            "nombre": faccion_propiedades.get("Name"),
+            "descripcion": datos_propiedades.get("Description"),
+            "habilidad": nivel.split("::")[-1] if nivel else None,
+            "LogoLarge": faccion_propiedades.get("LogoLarge"),
+        })
+    zonas = []
+    for ruta in sorted(pak.buscar(INFLUENCIAS_RIVALES)):
+        if not ruta.endswith(".uasset"):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        propiedades = asset.propiedades(asset.principal())
+        rotacion = propiedades.get("PostTimelineOwnershipInterval") if propiedades.get("bEnablePostTimelineOwnershipInterval") else None
+        zonas.append({
+            "id": asset.principal(),
+            "sistemas": [sistema["Id"] for sistema in propiedades["NearbyStarSystems"]],
+            "radio": propiedades.get("Radius"),
+            # Después del historial, el juego reparte la zona al azar: días con dueño y días vacía.
+            "rotacion": [rotacion["OwnershipDays"], rotacion["UnoccupiedDays"]] if rotacion else None,
+            "historial": [{
+                "fecha": fecha_de_ticks(tramo["Date"]) if tramo["Date"] else None,
+                "compania": faccion_de_compania.get(asset.ruta_import(tramo["RivalMerc"])[1]) if tramo["RivalMerc"] else None,
+                # En campaña este tramo no ocurre: solo cuenta en carrera.
+                "solo_carrera": bool(tramo.get("HideInCampaign")),
+            } for tramo in propiedades["OwnerTimeline"]],
+        })
+    return {"companias": companias, "zonas": zonas}
+
+
 def extraer_arenas(pak):
     for ruta in (ARENAS, RANGOS_DE_ARENA):
         if ruta + ".uasset" not in pak.archivos:
@@ -657,7 +715,9 @@ def main():
     guardar("recompensas_campana.json", extraer_recompensas_campana(pak))
     guardar("heroes_en_venta.json", extraer_heroes_en_venta(pak))
     guardar("arenas.json", extraer_arenas(pak))
-    extraer_logos(pak, facciones)
+    rivales = extraer_rivales(pak)
+    guardar("rivales.json", rivales)
+    extraer_logos(pak, {**facciones, **rivales["companias"]})
     if sin_asset:
         print(f"Aviso: facciones sin asset en el juego: {', '.join(sin_asset)}")
     if clusteres_sin_asset:

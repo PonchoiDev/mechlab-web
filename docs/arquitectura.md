@@ -72,6 +72,7 @@ flowchart TB
 El mapa es otra página (`starmap/index.html`, servida en `/mercs/starmap/`) con su propio bundle, así que el MechLab no descarga sus datos. Sigue la misma separación:
 
 - **`utils/starmap.ts`:** el dueño de cada sistema en una fecha, los eventos, los centros industriales, la reputación y la dificultad de cada zona, la búsqueda, la rejilla de territorios y el contorno de los clústeres. Son funciones puras con sus tests (`starmap.test.ts`).
+- **`utils/mercs.ts`:** el dueño de una zona de influencia de los mercenarios rivales en una fecha (con la rotación al azar al acabar el historial), las zonas de una compañía y la zona bajo un punto.
 - **`utils/clusters.ts`:** la zona de conflicto bajo un punto del mapa (con los mismos contornos que dibuja el renderer), la descripción del recargo de reparación y de los contratos de varias misiones, y la arena de un sistema.
 - **`utils/availability.ts`:** la tabla de rareza que usa cada facción (la suya o la de su alianza), la rareza de una variante en una fecha, sus fuentes fijas y la lista de 'Mechs hero. La rareza va en `availability.json`, que el mapa carga con un `import()` al abrir Find a 'Mech o Hero 'Mechs, así que no pesa en la carga inicial.
 - **`starmap/renderer.ts`:** pinta en un canvas. La rejilla que dice a qué sistema pertenece cada punto del mapa se calcula una vez, porque no depende de la fecha. Al mover la fecha solo se vuelve a colorear y se genera la textura de territorios, con el borde brillante como en el juego. El arrastre y el zoom solo redibujan esa textura.

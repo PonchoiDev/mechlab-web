@@ -1,6 +1,7 @@
-import type { GameDate, StarSystem, StarmapData } from '../types/starmap';
+import type { GameDate, MercZone, StarSystem, StarmapData } from '../types/starmap';
 import { getQuestAvailability } from '../utils/quests';
 import { findClusterAt, getClusterOutlines } from '../utils/clusters';
+import { findMercZoneAt } from '../utils/mercs';
 import { buildTerritoryIndex, getHubs, getOwnerAt, getTerritoryContours, type TerritoryIndex } from '../utils/starmap';
 
 export interface View {
@@ -24,6 +25,8 @@ const MARKET_COLOR = '#7fdc8a';
 const BLACK_MARKET_COLOR = '#b98cff';
 const UNIQUE_COLOR = '#ffd400';
 const ARENA_COLOR = '#ff6b5e';
+const MERC_COLOR = '#e8e2d0';
+const MERC_LOGO = 26;
 // Grosores en píxeles de pantalla: el borde se ve igual de marcado con cualquier zoom.
 const BORDER_WIDTH = 2;
 const BORDER_HALO = 7;
@@ -40,6 +43,24 @@ const FLASH_RING_GROWTH = 34;
 type Territory = { faction: string; color: string; path: Path2D };
 // Color de cada facción en otra lectura del mapa (la rareza de un 'Mech); null usa el de la facción.
 export type TerritoryColors = ((faction: string) => string) | null;
+// Zona de mercenarios que se dibuja: su círculo y el logo de quien la ocupa (sin logo, rota al azar).
+export type MercZoneLayer = { zone: MercZone; logo: string | null; highlighted: boolean; title: string; note: string | null }[];
+
+// Los territorios se pintan en una capa aparte (con margen por los lados) y en cada fotograma solo se
+// coloca: trazar todos sus contornos cuesta decenas de milisegundos y hacerlo en cada fotograma volvía
+// lento el arrastre, el zoom y la animación de los eventos. Con la vista quieta, la capa se repinta nítida.
+const LAYER_MARGIN = 0.25;
+const SHARPEN_DELAY = 150;
+
+const sameView = (a: View, b: View) => a.x === b.x && a.y === b.y && a.scale === b.scale;
+
+interface TerritoryLayer {
+  canvas: HTMLCanvasElement;
+  view: View;
+  territories: Territory[];
+  marginX: number;
+  marginY: number;
+}
 
 interface Transition {
   startedAt: number;
@@ -79,6 +100,8 @@ export class StarmapRenderer {
   private readonly index: TerritoryIndex;
   private readonly clusterOutlines: Map<string, Point[]>;
   private readonly arenas: Set<number>;
+  private mercZones: MercZoneLayer = [];
+  private readonly logos = new Map<string, HTMLImageElement>();
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
   private readonly questOffers: Map<number, StarmapData['quests']>;
@@ -86,6 +109,9 @@ export class StarmapRenderer {
   private date: GameDate = '';
   private territories: Territory[] = [];
   private transition: Transition | null = null;
+  private layer: TerritoryLayer | null = null;
+  private previousLayer: TerritoryLayer | null = null;
+  private sharpenTimer = 0;
   private starfield: HTMLCanvasElement | null = null;
   private owners: (string | null)[] = [];
   private territoryColors: TerritoryColors = null;
@@ -144,6 +170,8 @@ export class StarmapRenderer {
     this.ratio = ratio;
     this.canvas.width = Math.round(width * ratio);
     this.canvas.height = Math.round(height * ratio);
+    this.layer = null;
+    this.previousLayer = null;
     this.starfield = this.buildStarfield();
     this.requestDraw();
   }
@@ -152,6 +180,8 @@ export class StarmapRenderer {
     this.date = date;
     const previousOwners = this.owners;
     const previous = this.territories;
+    // La capa de los territorios de antes ya está pintada: la animación la reutiliza.
+    if (animate && this.layer?.territories === previous) this.previousLayer = this.layer;
     this.owners = this.data.systems.map(system => getOwnerAt(system, date));
     // Un trazado por facción, en años luz: al mover o ampliar el mapa solo cambia la transformación.
     this.territories = [...getTerritoryContours(this.index, this.data.systems, date)].map(([faction, loops]) => {
@@ -224,6 +254,7 @@ export class StarmapRenderer {
 
   destroy() {
     cancelAnimationFrame(this.frame);
+    window.clearTimeout(this.sharpenTimer);
   }
 
   private buildStarfield() {
@@ -254,15 +285,19 @@ export class StarmapRenderer {
     context.setTransform(this.ratio, 0, 0, this.ratio, 0, 0);
 
     const elapsed = this.transition ? performance.now() - this.transition.startedAt : Infinity;
+    const layer = this.currentLayer();
     if (this.transition && elapsed < FADE_MS) {
       const t = easeInOut(elapsed / FADE_MS);
-      this.drawTerritories(this.transition.previous, 1 - t);
-      this.drawTerritories(this.territories, t);
+      if (this.previousLayer?.territories !== this.transition.previous) this.previousLayer = this.paintLayer(this.transition.previous);
+      this.drawLayer(this.previousLayer, 1 - t);
+      this.drawLayer(layer, t);
     } else {
-      this.drawTerritories(this.territories, 1);
+      this.previousLayer = null;
+      this.drawLayer(layer, 1);
     }
     if (this.transition && elapsed < FLASH_MS) this.drawChanges(this.transition.changed, elapsed / FLASH_MS);
     this.drawClusters();
+    this.drawMercZones();
     this.drawSystems();
     if (this.transition) {
       if (elapsed < FLASH_MS) this.requestDraw();
@@ -310,12 +345,54 @@ export class StarmapRenderer {
     context.restore();
   }
 
-  private drawTerritories(territories: Territory[], opacity: number) {
+  // La capa de los territorios actuales: se pinta si cambian y, si la vista se ha movido, se repinta
+  // nítida cuando se queda quieta; mientras tanto se reutiliza desplazada o escalada.
+  private currentLayer(): TerritoryLayer {
+    if (!this.layer || this.layer.territories !== this.territories) {
+      window.clearTimeout(this.sharpenTimer);
+      this.layer = this.paintLayer(this.territories);
+    } else if (!sameView(this.layer.view, this.view)) {
+      window.clearTimeout(this.sharpenTimer);
+      this.sharpenTimer = window.setTimeout(() => {
+        this.layer = this.paintLayer(this.territories);
+        this.requestDraw();
+      }, SHARPEN_DELAY);
+    }
+    return this.layer;
+  }
+
+  private paintLayer(territories: Territory[]): TerritoryLayer {
+    const marginX = Math.round(this.width * LAYER_MARGIN);
+    const marginY = Math.round(this.height * LAYER_MARGIN);
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round((this.width + marginX * 2) * this.ratio);
+    canvas.height = Math.round((this.height + marginY * 2) * this.ratio);
+    const context = canvas.getContext('2d')!;
+    const { x, y, scale } = this.view;
+    context.setTransform(
+      this.ratio * scale, 0, 0, -this.ratio * scale,
+      this.ratio * (marginX + this.width / 2 - x * scale), this.ratio * (marginY + this.height / 2 + y * scale)
+    );
+    this.paintTerritories(context, territories, scale);
+    return { canvas, view: { ...this.view }, territories, marginX, marginY };
+  }
+
+  // Coloca la capa según cuánto se haya movido o ampliado la vista desde que se pintó.
+  private drawLayer(layer: TerritoryLayer, opacity: number) {
     const context = this.context;
-    const { scale } = this.view;
+    const { x, y, scale } = this.view;
+    const zoom = scale / layer.view.scale;
+    const left = this.width / 2 + (layer.view.x - x) * scale - (layer.marginX + this.width / 2) * zoom;
+    const top = this.height / 2 - (layer.view.y - y) * scale - (layer.marginY + this.height / 2) * zoom;
     context.save();
-    this.setWorldTransform();
+    context.setTransform(this.ratio, 0, 0, this.ratio, 0, 0);
     context.globalAlpha = opacity;
+    context.drawImage(layer.canvas, left, top, (layer.canvas.width / this.ratio) * zoom, (layer.canvas.height / this.ratio) * zoom);
+    context.restore();
+  }
+
+  private paintTerritories(context: CanvasRenderingContext2D, territories: Territory[], scale: number) {
+    context.save();
     context.lineJoin = 'round';
     for (const { color, path } of territories) {
       context.fillStyle = withAlpha(color, 0.2);
@@ -341,6 +418,75 @@ export class StarmapRenderer {
       context.stroke(path);
     }
     context.restore();
+  }
+
+  setMercZones(zones: MercZoneLayer) {
+    this.mercZones = zones;
+    this.requestDraw();
+  }
+
+  // El logo se carga una vez y, cuando llega, se vuelve a dibujar.
+  private logo(url: string): HTMLImageElement | null {
+    let image = this.logos.get(url);
+    if (!image) {
+      image = new Image();
+      image.onload = () => this.requestDraw();
+      image.src = url;
+      this.logos.set(url, image);
+    }
+    return image.complete && image.naturalWidth > 0 ? image : null;
+  }
+
+  private drawMercZones() {
+    // Círculo discontinuo alrededor de los sistemas de la zona, con el logo de la compañía en el centro.
+    const context = this.context;
+    const { scale } = this.view;
+    for (const { zone, logo, highlighted } of this.mercZones) {
+      const [x, y] = this.toScreen(zone.center[0], zone.center[1]);
+      const radius = zone.radius * scale;
+      if (x + radius < 0 || y + radius < 0 || x - radius > this.width || y - radius > this.height) continue;
+      context.save();
+      context.setLineDash([6, 5]);
+      context.lineWidth = highlighted ? 2.2 : 1.4;
+      context.strokeStyle = withAlpha(MERC_COLOR, highlighted ? 0.95 : 0.6);
+      context.fillStyle = withAlpha(MERC_COLOR, highlighted ? 0.1 : 0.05);
+      context.beginPath();
+      context.arc(x, y, radius, 0, Math.PI * 2);
+      context.fill();
+      context.stroke();
+      context.setLineDash([]);
+      const size = Math.min(MERC_LOGO, radius * 1.2);
+      const image = logo ? this.logo(logo) : null;
+      if (image) {
+        context.globalAlpha = highlighted ? 1 : 0.85;
+        context.drawImage(image, x - size / 2, y - size / 2, size, size);
+      } else if (!logo) {
+        // Sin dueño fijo: el juego la reparte al azar.
+        context.fillStyle = withAlpha(MERC_COLOR, 0.8);
+        context.font = `700 ${Math.round(size * 0.7)}px "Barlow Condensed", "Arial Narrow", sans-serif`;
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillText('?', x, y);
+      }
+      context.restore();
+    }
+  }
+
+  // El logo de una zona de mercenarios bajo el puntero: tapa la estrella del centro y es lo que se pulsa.
+  mercLogoAt(screenX: number, screenY: number): MercZoneLayer[number] | null {
+    const { scale } = this.view;
+    for (const entry of this.mercZones) {
+      const [x, y] = this.toScreen(entry.zone.center[0], entry.zone.center[1]);
+      const size = Math.min(MERC_LOGO, entry.zone.radius * scale * 1.2);
+      if (Math.hypot(screenX - x, screenY - y) <= size / 2 + 2) return entry;
+    }
+    return null;
+  }
+
+  // La zona de mercenarios dibujada bajo el puntero, si la hay.
+  mercZoneAt(screenX: number, screenY: number): MercZoneLayer[number] | null {
+    const zone = findMercZoneAt(this.mercZones.map(entry => entry.zone), ...this.toWorld(screenX, screenY));
+    return this.mercZones.find(entry => entry.zone === zone) ?? null;
   }
 
   private drawClusters() {

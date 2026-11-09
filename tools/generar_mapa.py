@@ -405,6 +405,45 @@ def tipo_de_recompensa(recompensa):
     return {"kind": "mission"}
 
 
+# El radio de las zonas de influencia del juego (Radius, de 0,85 a 2,8) no está en años luz y no
+# encaja de forma fija con la distancia a sus sistemas, así que el círculo se dibuja alrededor de sus
+# sistemas cercanos, con este margen.
+MARGEN_INFLUENCIA = 4
+# El primer tramo del historial no tiene fecha (Date 0): vale desde siempre.
+SIN_FECHA = "0001-01-01"
+
+
+def mercenarios(rivales, posiciones, tablas):
+    """Compañías de mercenarios rivales (DLC4) y sus zonas de influencia, con el dueño por fechas."""
+    compania = {}
+    for id_compania, datos in rivales["companias"].items():
+        logo = (datos.get("LogoLarge") or "").rsplit(".", 1)[-1] + ".png"
+        compania[id_compania] = {
+            "name": resolver_texto(datos["nombre"], tablas) or separar_palabras(id_compania),
+            "description": (datos.get("descripcion") or "").strip() or None,
+            "skill": datos.get("habilidad"),
+            **({"logo": logo} if os.path.exists(os.path.join(RUTA_LOGOS, logo)) else {}),
+        }
+    zonas = []
+    for zona in rivales["zonas"]:
+        puntos = [posiciones[id_sistema] for id_sistema in zona["sistemas"] if id_sistema in posiciones]
+        if not puntos:
+            continue
+        centro_x = sum(x for x, _ in puntos) / len(puntos)
+        centro_y = sum(y for _, y in puntos) / len(puntos)
+        radio = max(math.hypot(x - centro_x, y - centro_y) for x, y in puntos) + MARGEN_INFLUENCIA
+        zonas.append({
+            "id": zona["id"],
+            "systems": [id_sistema for id_sistema in zona["sistemas"] if id_sistema in posiciones],
+            "center": [round(centro_x, 1), round(centro_y, 1)],
+            "radius": round(radio, 1),
+            "owners": [{"from": tramo["fecha"] or SIN_FECHA, "company": tramo["compania"], **({"careerOnly": True} if tramo["solo_carrera"] else {})}
+                       for tramo in zona["historial"]],
+            **({"rotation": {"owned": zona["rotacion"][0], "empty": zona["rotacion"][1]}} if zona["rotacion"] else {}),
+        })
+    return {"companies": compania, "zones": zonas}
+
+
 def arenas(arenas_juego, mechs, items):
     """Sistemas con arena (DLC6) y rangos de fama, con lo que da cada rango."""
     return {
@@ -743,6 +782,7 @@ def main():
         "markets": mercados_especiales(mercados_juego, mechs, items, {sistema["id"] for sistema in sistemas}),
         "uniqueMechs": mechs_unicos(unicos_juego, mechs),
         "arenas": arenas(leer("arenas.json"), mechs, items),
+        "mercs": mercenarios(leer("rivales.json"), {sistema["id"]: (sistema["x"], sistema["y"]) for sistema in sistemas}, tablas),
         "rewards": recompensas_fuera_de_hrq(leer("recompensas_campana.json"), misiones_juego, mechs, {sistema["id"] for sistema in sistemas}),
     }
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:

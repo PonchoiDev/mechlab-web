@@ -556,6 +556,40 @@ button, input, select { font: inherit; color: inherit; }
   line-height: 1.4;
 }
 
+/* Mercenarios rivales (DLC4): lista con logos, ficha de la compañía y etiqueta del mapa. */
+.starmap-quests li .starmap-merc-item {
+  grid-template-columns: 28px 1fr;
+  column-gap: 8px;
+  align-items: center;
+}
+
+.starmap-merc-item .starmap-merc-logo { grid-row: span 2; }
+.starmap-merc-logo { width: 28px; height: 28px; object-fit: contain; }
+
+.starmap-merc-mark {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border: 3px solid #e8e2d0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 0 16px rgba(232, 226, 208, 0.35);
+}
+
+.starmap-merc-mark .starmap-merc-logo { width: 44px; height: 44px; }
+
+.starmap-merc .starmap-tags dd { font-size: 16px; letter-spacing: normal; text-transform: none; }
+
+.starmap-merc-zones { margin: 0; padding: 0; list-style: none; }
+.starmap-merc-zones li + li { margin-top: 6px; }
+.starmap-merc-zones small, .starmap-merc-none { display: block; margin: 0; color: var(--map-muted); font-size: 13px; }
+
+.starmap-hint-merc { display: grid; margin-top: 4px !important; padding-left: 6px; border-left: 2px dashed #e8e2d0; }
+.starmap-hint-merc b { font-size: 14px; }
+.starmap-hint-merc small { font-size: 12px; letter-spacing: normal; text-transform: none; }
+
 /* Arena del DLC6 en la ficha del sistema. */
 .starmap-arena {
   margin: 12px 14px 0;
@@ -767,7 +801,8 @@ button, input, select { font: inherit; color: inherit; }
   pointer-events: none;
 }
 
-.starmap-drawers > * { pointer-events: auto; }
+.starmap-drawers > * { flex-shrink: 0; pointer-events: auto; }
+.starmap-legend > button { white-space: nowrap; }
 
 .starmap-legend {
   max-width: 300px;
@@ -780,8 +815,25 @@ button, input, select { font: inherit; color: inherit; }
   color: #f2b75e;
 }
 
-.starmap-quests { width: 320px; }
-.starmap-quests:not(.is-open) { width: auto; }
+/* Con seis cajones en la fila, el contenido de uno abierto flota encima de su botón en vez de ensanchar
+   la fila; los dos últimos se alinean por la derecha para no tapar el panel de fecha. */
+.starmap-legend { position: relative; }
+
+.starmap-quests-body,
+.starmap-legend > ul {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: -1px;
+  width: 320px;
+  border: 1px solid var(--map-line);
+  background: var(--map-panel);
+}
+
+.starmap-quests-body { padding-top: 10px; }
+.starmap-legend > ul { width: 300px; padding-top: 10px; }
+
+.starmap-drawers > .starmap-quests:nth-last-child(-n + 2) .starmap-quests-body { left: auto; right: -1px; }
+.starmap-legend.is-open > button { background: rgba(242, 183, 94, 0.12); }
 
 .starmap-quests-body input {
   width: calc(100% - 24px);
@@ -1029,6 +1081,7 @@ button, input, select { font: inherit; color: inherit; }
   font-size: 13px;
 }
 
+.starmap-mercs-drawer .starmap-market-note,
 .starmap-heroes-drawer .starmap-market-note {
   margin: 0 12px 6px;
   color: var(--map-muted);
@@ -1240,7 +1293,10 @@ button, input, select { font: inherit; color: inherit; }
   .starmap-drawers { left: 12px; bottom: 200px; max-width: calc(100vw - 74px); flex-wrap: wrap; gap: 6px; }
   .starmap-legend { max-width: calc(100vw - 74px); }
   .starmap-legend > button { min-width: 0; height: 34px; padding: 0 8px; font-size: 13px; letter-spacing: 0.04em; }
-  .starmap-quests { width: calc(100vw - 74px); }
+  .starmap-quests.is-open { width: calc(100vw - 74px); }
+  /* En el móvil el contenido va dentro del cajón, encima de su botón, como antes. */
+  .starmap-quests-body,
+  .starmap-legend > ul { position: static; width: auto; border: 0; }
   .starmap-legend ul { max-height: 36vh; }
 }
 
