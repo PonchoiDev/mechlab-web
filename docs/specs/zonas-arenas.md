@@ -71,4 +71,5 @@ El mapa dibuja las zonas de conflicto ([mapa-estelar.md](mapa-estelar.md)) y la 
   - El CA3 y el CA6 se corrigieron con los datos: los centros industriales no traen recargo de reparación, y el recargo se muestra con el nombre del juego (*markup*) en vez de como multiplicador.
   - El CA4 decía que Solaris tiene encuentros con mercenarios; solo los tienen Northwind y Outreach.
   - Los campos de los contratos de varias misiones empiezan todos por `MMO_`, así que se leen por su nombre completo.
+  - La plantilla `ArenaFameLevelUpPromptTemplate` se tomaba como recompensa del rango Rudiarius (AS7-BH y CRD-CR) en Find a 'Mech. Es de relleno, así que el generador descarta las plantillas (CA25 de [buscar-mech.md](buscar-mech.md)).
   - Para leer la ficha de un vistazo, la reputación recomendada va en amarillo y el recargo de reparación, que es una penalización, en rojo.
