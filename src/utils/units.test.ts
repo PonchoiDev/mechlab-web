@@ -4,7 +4,7 @@ import unitsJson from '../data/units.json';
 import type { Item } from '../types/item';
 import type { UnitsData } from '../types/units';
 import { getWeaponStats } from './calculators';
-import { filterUnits, getUnitFirepower, getUnitWeapons, groupRarity, sortUnits } from './units';
+import { filterUnits, getUnitFirepower, getUnitWeapons, groupRarity, parseUnitsQuery, sortUnits, toUnitsQuery } from './units';
 
 // Criterios de aceptación de docs/specs/unidades-enemigas.md (issue #81).
 const data = unitsJson as unknown as UnitsData;
@@ -101,5 +101,17 @@ describe('unidades enemigas', () => {
   it('CA11: los VTOL y las torretas no tienen velocidad', () => {
     const withoutSpeed = data.units.filter(candidate => candidate.kind === 'vtol' || candidate.kind === 'turret');
     expect(withoutSpeed.every(candidate => candidate.speed === null)).toBe(true);
+  });
+});
+
+describe('vista de la lista en la URL', () => {
+  it('lee el tipo, la búsqueda y el orden, e ignora lo que no conoce', () => {
+    expect(parseUnitsQuery('?type=vtol&q=igor&sort=dps')).toEqual({ kind: 'vtol', query: 'igor', sort: 'dps' });
+    expect(parseUnitsQuery('?type=mech&sort=weight')).toEqual({ kind: 'all', query: '', sort: 'name' });
+  });
+
+  it('escribe solo lo que no es el valor por defecto', () => {
+    expect(toUnitsQuery({ kind: 'all', query: '', sort: 'name' })).toBe('');
+    expect(toUnitsQuery({ kind: 'turret', query: ' AC/5 ', sort: 'battleValue' })).toBe('?type=turret&q=AC%2F5&sort=battleValue');
   });
 });

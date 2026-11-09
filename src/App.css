@@ -814,7 +814,8 @@
   .topbar { align-items: stretch; flex-direction: column; gap: 15px; }
   .topbar-tools { align-items: stretch; flex-direction: column-reverse; gap: 9px; }
   .topbar-start { justify-content: space-between; gap: 12px; }
-  .topbar-links { padding-left: 12px; }
+  /* Los enlaces, uno debajo de otro, para que el título no se parta en tres líneas. */
+  .topbar-links { flex-direction: column; align-items: flex-start; justify-content: center; padding-left: 12px; }
   .topbar-links small { display: none; }
   .mech-picker { width: 100%; min-width: 0; }
   .readout-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }

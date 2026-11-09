@@ -102,3 +102,27 @@ export const groupRarity = (data: UnitsData, unit: Unit): { rarity: Rarity; fact
     return factions.length > 0 ? [{ rarity, factions }] : [];
   });
 };
+
+export interface UnitsView extends UnitFilter {
+  sort: UnitSort;
+}
+
+export const DEFAULT_UNITS_VIEW: UnitsView = { kind: 'all', query: '', sort: 'name' };
+
+// La vista va en la URL (?type=vtol&q=condor&sort=dps) para poder compartirla; lo que no se reconoce
+// se ignora.
+export const parseUnitsQuery = (search: string): UnitsView => {
+  const params = new URLSearchParams(search);
+  const kind = UNIT_KINDS.find(candidate => candidate.id === params.get('type'))?.id ?? 'all';
+  const sort = UNIT_SORTS.find(candidate => candidate.id === params.get('sort'))?.id ?? 'name';
+  return { kind, query: params.get('q') ?? '', sort };
+};
+
+export const toUnitsQuery = ({ kind, query, sort }: UnitsView): string => {
+  const params = new URLSearchParams();
+  if (kind !== 'all') params.set('type', kind);
+  if (query.trim()) params.set('q', query.trim());
+  if (sort !== 'name') params.set('sort', sort);
+  const text = params.toString();
+  return text ? `?${text}` : '';
+};
