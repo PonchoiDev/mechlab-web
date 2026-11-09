@@ -178,8 +178,8 @@ export interface CampaignReward {
   mechs: { id: string; name: string }[];
   system?: number;
   // Cómo se consigue: una misión, completar la campaña del DLC, un nivel de información sobre el
-  // Bounty Hunter (DLC4), un rango de fama en las arenas (DLC6) o una promoción, que llega con un mensaje.
-  kind: 'mission' | 'campaignComplete' | 'intel' | 'arenaRank' | 'promotion';
+  // Bounty Hunter (DLC4) o una promoción, que llega con un mensaje.
+  kind: 'mission' | 'campaignComplete' | 'intel' | 'promotion';
   level?: number;
   partner?: string;
   careerOnly?: boolean;

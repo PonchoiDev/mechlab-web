@@ -400,9 +400,6 @@ def tipo_de_recompensa(recompensa):
     if nivel:
         # Niveles de información sobre el Bounty Hunter, el mercenario rival del DLC4.
         return {"kind": "intel", "level": int(nivel.group(1))}
-    if objetivo.startswith("ArenaFameLevelUp"):
-        # Rangos de fama de las arenas de Solaris (DLC6): el título es el nombre del rango.
-        return {"kind": "arenaRank"}
     if "CampaignComplete" in objetivo:
         return {"kind": "campaignComplete"}
     return {"kind": "mission"}
@@ -435,6 +432,11 @@ def recompensas_fuera_de_hrq(recompensas_juego, misiones_juego, mechs, sistemas_
     cadenas = {cadena_de_carpeta(accion["carpeta"])[0] for accion in misiones_juego if accion["sistema"] in sistemas_validos}
     resultado = []
     for recompensa in recompensas_juego:
+        # Las plantillas no son recompensas: ArenaFameLevelUpPromptTemplate trae dos 'Mechs con el
+        # título «Rudiarius» y un texto de relleno, y el juego arma la recompensa de cada rango con
+        # ArenaFameProgressionTable.
+        if recompensa["objetivo"].endswith("Template"):
+            continue
         variantes = [mech for mech in (mech_de_juego(id_juego, mechs) for id_juego in recompensa["mechs"]) if mech]
         if cadena_de_carpeta(recompensa["carpeta"])[0] in cadenas or not variantes:
             continue
