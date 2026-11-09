@@ -15,6 +15,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       'A new Enemy units page lists the 115 tanks, hovercraft, VTOLs, turrets and battle armor squads you face in contracts',
       'Each card shows base hit points, speed, alpha damage and DPS, every weapon with its damage, DPS and range, and which factions field it',
+      'Cards show the chassis artwork from Sarna.net and link to its page',
       'Filter by type, search by name and sort by battle value, DPS, hit points, speed or intro year',
       'Open it from its new cover on the home page or from the MechLab and star map headers'
     ]

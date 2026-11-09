@@ -86,6 +86,7 @@ Es la tercera página (`units/index.html`, servida en `/mercs/units/`), también
 
 - **`utils/units.ts`:** las armas de una unidad con su daño, DPS y alcance (con `getWeaponStats`, la misma función que el MechLab, porque `units.json` guarda las armas en el formato de `items.json`), la potencia de fuego, los filtros, el orden, la rareza agrupada y la vista en la URL. Tiene sus tests (`units.test.ts`).
 - **Las armas, en el bytecode:** las torretas montan sus cañones como `ChildActorComponent` y les dan la clase en el script de construcción con `SetChildActorClass`, así que `extraer_unidades.py` busca esa llamada en el bytecode de `UserConstructionScript` para saber qué arma va en cada componente.
+- **Dibujos de Sarna:** el juego no los trae, así que `generar_unidades.py` tiene una tabla con el título de Sarna de cada chasis e `imagenes_sarna.py` busca una vez su página y su dibujo en la API de Sarna. Van en `units.json`: la página no consulta Sarna al cargar, solo descarga los dibujos de las fichas que se ven.
 - **`units/UnitsApp.tsx`:** los filtros, el orden y la ficha de cada unidad. Solo pinta y llama a la lógica.
 
 ## Decisiones de diseño

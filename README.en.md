@@ -40,7 +40,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (388 tests, V8 coverage) |
+| Tests | Vitest 5 (389 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -148,6 +148,7 @@ tools/
   extraer_mapa.py       Extracts the star map data from the game's .pak
   generar_mapa.py       Generates src/data/starmap.json
   extraer_unidades.py   Extracts the hit points, speed and weapons of enemy units from the game .pak
+  imagenes_sarna.py     Looks up the Sarna page and artwork of each enemy unit chassis
   generar_unidades.py   Generates src/data/units.json
   ue4.py                Reads the .pak and the Unreal Engine 4 assets
   datos-juego/          Files exported from the game
@@ -216,6 +217,7 @@ The unit cards of tanks, VTOLs, turrets and battle armor are in `unitcard/`, but
 
 ```sh
 python3 tools/extraer_unidades.py "/path/to/MechWarrior 5 Mercenaries"
+python3 tools/imagenes_sarna.py
 python3 tools/generar_unidades.py
 ```
 
@@ -224,10 +226,11 @@ python3 tools/generar_unidades.py
 | `unidades.json` | Blueprint of each unit (`UnitClass`) and its turrets | Base hit points, speed, weapons and squad size of battle armor |
 | `armas.json` | `WeaponDataAsset` of each weapon | Name, stats and quirks, including vehicle weapons missing from `items/` |
 | `facciones.json` | `Factions/*` and their StringTables | Names of the factions in the rarity lists, including mercenary companies and arena sponsors |
+| `sarna.json` | Sarna API (`imagenes_sarna.py`), not the game | Page and main artwork of each chassis, from the title table in `generar_unidades.py` |
 
 ## Quality and checks against the game
 
-- **388 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **389 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

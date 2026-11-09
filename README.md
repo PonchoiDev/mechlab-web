@@ -38,7 +38,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (388 tests, cobertura con V8) |
+| Tests | Vitest 5 (389 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -146,6 +146,7 @@ tools/
   extraer_mapa.py       Extrae del .pak del juego los datos del mapa estelar
   generar_mapa.py       Genera src/data/starmap.json
   extraer_unidades.py   Extrae del .pak del juego la vida, la velocidad y las armas de las unidades enemigas
+  imagenes_sarna.py     Busca en Sarna la página y el dibujo de cada chasis de las unidades enemigas
   generar_unidades.py   Genera src/data/units.json
   ue4.py                Lectura del .pak y de los assets de Unreal Engine 4
   datos-juego/          Archivos exportados del juego
@@ -212,6 +213,7 @@ Las unit cards de los tanques, VTOL, torretas y armaduras de combate están en `
 
 ```sh
 python3 tools/extraer_unidades.py "/ruta/a/MechWarrior 5 Mercenaries"
+python3 tools/imagenes_sarna.py
 python3 tools/generar_unidades.py
 ```
 
@@ -220,10 +222,11 @@ python3 tools/generar_unidades.py
 | `unidades.json` | Blueprint de cada unidad (`UnitClass`) y de sus torretas | Vida base, velocidad, armas y tamaño del grupo de las armaduras de combate |
 | `armas.json` | `WeaponDataAsset` de cada arma | Nombre, estadísticas y quirks, también de las armas de vehículo que no están en `items/` |
 | `facciones.json` | `Factions/*` y sus StringTables | Nombre de las facciones de la rareza, con las compañías de mercenarios y los patrocinadores de las arenas |
+| `sarna.json` | API de Sarna (`imagenes_sarna.py`), no el juego | Página y dibujo principal de cada chasis, a partir de la tabla de títulos de `generar_unidades.py` |
 
 ## Calidad y comprobación contra el juego
 
-- **388 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **389 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

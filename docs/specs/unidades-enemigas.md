@@ -93,7 +93,7 @@ La web solo cubre 'Mechs, pero en los contratos también hay tanques, aerodesliz
 
 ## Plan de pruebas
 
-1. **Datos y lógica (CA1 a CA11):** `src/utils/units.test.ts`, con `units.json` real.
+1. **Datos y lógica (CA1 a CA12):** `src/utils/units.test.ts`, con `units.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844:
    - la portada nueva en la página de inicio;
    - filtrar por tipo y buscar por nombre;
@@ -106,7 +106,7 @@ La web solo cubre 'Mechs, pero en los contratos también hay tanques, aerodesliz
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
 - **Dibujos:** 24 páginas de Sarna, 22 con dibujo: 78 unidades enlazan su página y 69 enseñan el dibujo.
 - **Datos:** 115 unidades (43 Tracked, 15 Hover, 8 Wheeled, 12 VTOL, 35 Turret y 2 Battle armor) con 80 armas, 16 de ellas propias de vehículos o de los Elementals. `units.json` pesa 160 KB (13 KB comprimido en el bundle de la página).
-- **Tests:** los once criterios (CA1 a CA11) están en `src/utils/units.test.ts` y pasan, con dos más de la vista en la URL.
+- **Tests:** los doce criterios (CA1 a CA12) están en `src/utils/units.test.ts` y pasan, con dos más de la vista en la URL.
 - **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: la portada nueva, los filtros por tipo y la búsqueda, el orden por DPS, la rareza desplegada, la campana de novedades y los enlaces nuevos de las cabeceras del MechLab y del mapa.
 - **Decisiones durante el desarrollo:**
   - Con tres carátulas, el hueco de los próximos juegos quedaba solo en otra fila: ahora es una franja a lo ancho debajo de ellas.
