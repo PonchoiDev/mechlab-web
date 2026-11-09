@@ -466,9 +466,9 @@ export function StarmapApp() {
           <a href="/mercs/units/">Enemy units</a>
         </nav>
         <div className="starmap-actions">
+          <WhatsNew />
           <button type="button" className="starmap-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>
           <SupportLink compact />
-          <WhatsNew />
         </div>
         <SystemSearch onPick={pickSystem} />
       </header>

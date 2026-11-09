@@ -151,9 +151,9 @@ export function UnitsApp() {
           <a href="/mercs/starmap/">Star map</a>
         </nav>
         <div className="units-actions">
+          <WhatsNew />
           <button type="button" className="units-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>
           <SupportLink compact />
-          <WhatsNew />
         </div>
       </header>
 
