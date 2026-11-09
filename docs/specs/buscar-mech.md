@@ -41,7 +41,7 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
   - **Misión:** el título de la misión, su DLC y su sistema.
   - **Final de campaña** (`*CampaignComplete*`): completar la campaña de su DLC.
   - **Información del Bounty Hunter** (`BountyHunterLevelUpN`, DLC4): llegar a ese nivel de información.
-  - **Rango de la arena** (`ArenaFameLevelUp*`, DLC6): llegar a ese rango de fama en las arenas de Solaris.
+  - **Plantillas:** los objetivos `*Template` no son recompensas reales. `ArenaFameLevelUpPromptTemplate` (DLC6) trae el AS7-BH y el CRD-CR con el título «Rudiarius», pero su texto es de relleno («EXTREMELY LONG placeholder text…») y el juego arma la recompensa de cada rango con la tabla `ArenaFameProgressionTable`, que no da 'Mechs. Se descartan.
   - **Promoción** (carpetas `*_Exclusive`): llega con un mensaje, sin misión. `Razer_Exclusive` es la de Razer (el registro de eventos dice «Claimed Razer WVR-7H») y `MS_Exclusive` la de Microsoft (su arco comprueba `HasMSMechEntitlement`), solo en carrera.
   - **Sistema de un arco:** si ninguna acción coloca la recompensa, el sistema puede estar en la condición `StarSystemTrigger` del arco de su carpeta. El de Razer se dispara al llegar a Valentina, así que el WVR-7H se consigue allí.
 - **RF5.** La URL guarda la variante elegida (`?mech=AS7-D`), para compartir la vista.
@@ -86,8 +86,9 @@ En el juego, el mercado de cada sistema vende 'Mechs según la facción dueña d
 | CA16 | La búsqueda «archer» el 1 de enero de 3015 | se busca y se piden las variantes posteriores | da cinco variantes y avisa de otras cinco posteriores, la siguiente el ARC-T el 20 de febrero de 3016 |
 | CA21 | La recompensa «Shielded Withdrawal» (DLC5, BLR-1G-S), cuya acción está en la subcarpeta `ArcActions` de su misión | se consulta | tiene el sistema de su misión, Vega |
 | CA22 | Las recompensas del WVR-7H y del PXH-KB | se consultan | son promociones, de Razer en Valentina (por la condición de su arco) y de Microsoft sin sistema; la de Head Hunting es una misión; el WVR-7H encuadra Valentina |
-| CA23 | Las recompensas sin sistema | se describen | el WVR-7H: «Razer promotion: arrives as a message (Hidden Cache Found) when you arrive», con el sistema detrás; el FS9-A: «Reach Bounty Hunter intel level 3 (DLC 4)»; el AS7-BH: «Reach the Rudiarius fame rank in the Solaris arenas (DLC 6)»; el SNV-BR: «Complete the DLC 9 campaign (Promises Kept)»; el PXH-KB: «Microsoft promotion, career mode only: arrives as a message (Heya Ryana, I'm Back!)» |
+| CA23 | Las recompensas sin sistema | se describen | el WVR-7H: «Razer promotion: arrives as a message (Hidden Cache Found) when you arrive», con el sistema detrás; el FS9-A: «Reach Bounty Hunter intel level 3 (DLC 4)»; el SNV-BR: «Complete the DLC 9 campaign (Promises Kept)»; el PXH-KB: «Microsoft promotion, career mode only: arrives as a message (Heya Ryana, I'm Back!)» |
 | CA24 | La búsqueda «adder» | se busca | da las variantes del Puma, con su otro nombre, Adder |
+| CA25 | El AS7-BH y el CRD-CR | se consultan sus fuentes fijas | no tienen ninguna recompensa: la plantilla de los rangos de la arena no cuenta; siguen pudiendo salir a la venta como hero |
 | CA10 | `availability.json` | se carga | todas sus variantes están en `mechs.json` con el mismo nombre, y todas las facciones del mapa salvo Arc-Royal Defense Cordon tienen tabla |
 
 ## Fuera de alcance

@@ -25,7 +25,7 @@ El mapa dibuja las zonas de conflicto ([mapa-estelar.md](mapa-estelar.md)) y la 
 - **Niveles distintos:** dos fichas del mismo modo con la misma reputación pero distinta reparación o distintos contratos ya no se funden en una línea (Davion Borderlands tiene dos en carrera que solo difieren en la probabilidad de los contratos). Los criterios de [reputacion-zonas.md](reputacion-zonas.md) siguen comparando solo el modo, la reputación y la dificultad.
 - **Descripción y capital:** son las de la zona de campaña; si no la hay, las de la primera que las traiga.
 - **Centros industriales:** también son `ClusterAsset`, pero no traen recargo: llevan `bRepairCluster`, que los marca como sitio de reparación, y su ficha ya lo dice («Repairs and refits»).
-- **Recompensas de los rangos:** con los nombres del MechLab, como las de las HRQ; las armas con su tier.
+- **Recompensas de los rangos:** con los nombres del MechLab, como las de las HRQ; las armas con su tier. Son solo las de `ArenaFameProgressionTable`: la plantilla `ArenaFameLevelUpPromptTemplate` trae dos 'Mechs con el título «Rudiarius», pero es de relleno (su texto dice «EXTREMELY LONG placeholder text…») y el juego no la usa como recompensa.
 
 ## Requisitos funcionales
 
