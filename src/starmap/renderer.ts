@@ -1,6 +1,7 @@
-import type { GameDate, StarSystem, StarmapData } from '../types/starmap';
+import type { GameDate, MercZone, StarSystem, StarmapData } from '../types/starmap';
 import { getQuestAvailability } from '../utils/quests';
 import { findClusterAt, getClusterOutlines } from '../utils/clusters';
+import { findMercZoneAt } from '../utils/mercs';
 import { buildTerritoryIndex, getHubs, getOwnerAt, getTerritoryContours, type TerritoryIndex } from '../utils/starmap';
 
 export interface View {
@@ -24,6 +25,8 @@ const MARKET_COLOR = '#7fdc8a';
 const BLACK_MARKET_COLOR = '#b98cff';
 const UNIQUE_COLOR = '#ffd400';
 const ARENA_COLOR = '#ff6b5e';
+const MERC_COLOR = '#e8e2d0';
+const MERC_LOGO = 26;
 // Grosores en píxeles de pantalla: el borde se ve igual de marcado con cualquier zoom.
 const BORDER_WIDTH = 2;
 const BORDER_HALO = 7;
@@ -40,6 +43,8 @@ const FLASH_RING_GROWTH = 34;
 type Territory = { faction: string; color: string; path: Path2D };
 // Color de cada facción en otra lectura del mapa (la rareza de un 'Mech); null usa el de la facción.
 export type TerritoryColors = ((faction: string) => string) | null;
+// Zona de mercenarios que se dibuja: su círculo y el logo de quien la ocupa (sin logo, rota al azar).
+export type MercZoneLayer = { zone: MercZone; logo: string | null; highlighted: boolean; title: string; note: string | null }[];
 
 interface Transition {
   startedAt: number;
@@ -79,6 +84,8 @@ export class StarmapRenderer {
   private readonly index: TerritoryIndex;
   private readonly clusterOutlines: Map<string, Point[]>;
   private readonly arenas: Set<number>;
+  private mercZones: MercZoneLayer = [];
+  private readonly logos = new Map<string, HTMLImageElement>();
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
   private readonly questOffers: Map<number, StarmapData['quests']>;
@@ -263,6 +270,7 @@ export class StarmapRenderer {
     }
     if (this.transition && elapsed < FLASH_MS) this.drawChanges(this.transition.changed, elapsed / FLASH_MS);
     this.drawClusters();
+    this.drawMercZones();
     this.drawSystems();
     if (this.transition) {
       if (elapsed < FLASH_MS) this.requestDraw();
@@ -341,6 +349,75 @@ export class StarmapRenderer {
       context.stroke(path);
     }
     context.restore();
+  }
+
+  setMercZones(zones: MercZoneLayer) {
+    this.mercZones = zones;
+    this.requestDraw();
+  }
+
+  // El logo se carga una vez y, cuando llega, se vuelve a dibujar.
+  private logo(url: string): HTMLImageElement | null {
+    let image = this.logos.get(url);
+    if (!image) {
+      image = new Image();
+      image.onload = () => this.requestDraw();
+      image.src = url;
+      this.logos.set(url, image);
+    }
+    return image.complete && image.naturalWidth > 0 ? image : null;
+  }
+
+  private drawMercZones() {
+    // Círculo discontinuo alrededor de los sistemas de la zona, con el logo de la compañía en el centro.
+    const context = this.context;
+    const { scale } = this.view;
+    for (const { zone, logo, highlighted } of this.mercZones) {
+      const [x, y] = this.toScreen(zone.center[0], zone.center[1]);
+      const radius = zone.radius * scale;
+      if (x + radius < 0 || y + radius < 0 || x - radius > this.width || y - radius > this.height) continue;
+      context.save();
+      context.setLineDash([6, 5]);
+      context.lineWidth = highlighted ? 2.2 : 1.4;
+      context.strokeStyle = withAlpha(MERC_COLOR, highlighted ? 0.95 : 0.6);
+      context.fillStyle = withAlpha(MERC_COLOR, highlighted ? 0.1 : 0.05);
+      context.beginPath();
+      context.arc(x, y, radius, 0, Math.PI * 2);
+      context.fill();
+      context.stroke();
+      context.setLineDash([]);
+      const size = Math.min(MERC_LOGO, radius * 1.2);
+      const image = logo ? this.logo(logo) : null;
+      if (image) {
+        context.globalAlpha = highlighted ? 1 : 0.85;
+        context.drawImage(image, x - size / 2, y - size / 2, size, size);
+      } else if (!logo) {
+        // Sin dueño fijo: el juego la reparte al azar.
+        context.fillStyle = withAlpha(MERC_COLOR, 0.8);
+        context.font = `700 ${Math.round(size * 0.7)}px "Barlow Condensed", "Arial Narrow", sans-serif`;
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillText('?', x, y);
+      }
+      context.restore();
+    }
+  }
+
+  // El logo de una zona de mercenarios bajo el puntero: tapa la estrella del centro y es lo que se pulsa.
+  mercLogoAt(screenX: number, screenY: number): MercZoneLayer[number] | null {
+    const { scale } = this.view;
+    for (const entry of this.mercZones) {
+      const [x, y] = this.toScreen(entry.zone.center[0], entry.zone.center[1]);
+      const size = Math.min(MERC_LOGO, entry.zone.radius * scale * 1.2);
+      if (Math.hypot(screenX - x, screenY - y) <= size / 2 + 2) return entry;
+    }
+    return null;
+  }
+
+  // La zona de mercenarios dibujada bajo el puntero, si la hay.
+  mercZoneAt(screenX: number, screenY: number): MercZoneLayer[number] | null {
+    const zone = findMercZoneAt(this.mercZones.map(entry => entry.zone), ...this.toWorld(screenX, screenY));
+    return this.mercZones.find(entry => entry.zone === zone) ?? null;
   }
 
   private drawClusters() {

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { GameDate, StarmapData } from '../types/starmap';
 import { getClusterLevels } from '../utils/starmap';
 import { ZoneLevelText } from './ZonePanels';
-import { StarmapRenderer, type TerritoryColors, type View } from './renderer';
+import { StarmapRenderer, type MercZoneLayer, type TerritoryColors, type View } from './renderer';
 
 export interface FocusRequest {
   // Un sistema se centra; varios se encuadran.
@@ -20,11 +20,14 @@ interface StarmapCanvasProps {
   selectedId: number | null;
   questRoute: number[] | null;
   territoryColors: TerritoryColors;
+  mercZones: MercZoneLayer;
   focus: FocusRequest | null;
   onHover: (systemId: number | null) => void;
   onSelect: (systemId: number | null) => void;
   // Clic dentro de una zona de conflicto, sin una estrella debajo.
   onZone: (clusterId: string) => void;
+  // Clic en una zona de mercenarios dibujada.
+  onMercZone: (zoneId: string) => void;
 }
 
 const MAX_SCALE = 14;
@@ -47,7 +50,9 @@ const getBounds = (data: StarmapData) => {
 const hintAt = (renderer: StarmapRenderer, point: { x: number; y: number }) => {
   const faction = renderer.ownerAt(point.x, point.y);
   const cluster = renderer.clusterAt(point.x, point.y);
-  return faction || cluster ? { faction, cluster, ...point } : null;
+  const zone = renderer.mercZoneAt(point.x, point.y);
+  const merc = zone ? { title: zone.title, note: zone.note } : null;
+  return faction || cluster || merc ? { faction, cluster, merc, ...point } : null;
 };
 
 // Nombre de la zona y lo que pide en cada modo; al pulsar se abre su ficha.
@@ -70,25 +75,31 @@ function ZoneHint({ data, clusterId }: { data: StarmapData; clusterId: string })
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, territoryColors, focus, onHover, onSelect, onZone }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
   const fitScaleRef = useRef(1);
   const animationRef = useRef(0);
-  const callbacksRef = useRef({ onHover, onSelect, onZone });
+  const callbacksRef = useRef({ onHover, onSelect, onZone, onMercZone });
   // Facción de la zona bajo el ratón cuando no hay una estrella cerca: la ficha es del sistema
   // elegido, y sin esta etiqueta parecería que describe la zona.
   // Facción y zona de conflicto bajo el ratón cuando no hay una estrella debajo.
-  const [territoryHint, setTerritoryHint] = useState<{ faction: string | null; cluster: string | null; x: number; y: number } | null>(null);
+  const [territoryHint, setTerritoryHint] = useState<{
+    faction: string | null;
+    cluster: string | null;
+    merc: { title: string; note: string | null } | null;
+    x: number;
+    y: number;
+  } | null>(null);
   // Última posición del ratón sobre el mapa: al cambiar la fecha con el teclado, la etiqueta se
   // vuelve a calcular ahí sin esperar a que se mueva.
   const mouseRef = useRef<{ x: number; y: number } | null>(null);
   const boundsRef = useRef(getBounds(data));
 
   useEffect(() => {
-    callbacksRef.current = { onHover, onSelect, onZone };
-  }, [onHover, onSelect, onZone]);
+    callbacksRef.current = { onHover, onSelect, onZone, onMercZone };
+  }, [onHover, onSelect, onZone, onMercZone]);
 
   const setView = (view: View) => {
     const renderer = rendererRef.current;
@@ -194,6 +205,10 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
   }, [territoryColors]);
 
   useEffect(() => {
+    rendererRef.current?.setMercZones(mercZones);
+  }, [mercZones]);
+
+  useEffect(() => {
     if (!focus) return;
     const systems = data.systems.filter(candidate => focus.systemIds.includes(candidate.id));
     const renderer = rendererRef.current;
@@ -245,7 +260,9 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
       if (!previous) {
         if (event.pointerType === 'mouse') {
           mouseRef.current = point;
-          const system = renderer.systemAt(point.x, point.y);
+          // Sobre el logo de una zona de mercenarios manda la zona, aunque haya una estrella debajo.
+          const logo = renderer.mercLogoAt(point.x, point.y);
+          const system = logo ? null : renderer.systemAt(point.x, point.y);
           callbacksRef.current.onHover(system?.id ?? null);
           setTerritoryHint(system ? null : hintAt(renderer, point));
         }
@@ -279,9 +296,14 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
       if (!renderer || !wasTap) return;
       const point = position(event);
       // Con el dedo se acepta un toque algo más lejos de la estrella.
-      const system = renderer.systemAt(point.x, point.y, event.pointerType === 'mouse' ? 14 : 24);
-      const cluster = system ? null : renderer.clusterAt(point.x, point.y);
-      if (cluster) callbacksRef.current.onZone(cluster);
+      // El logo de una zona de mercenarios manda; después la estrella, la zona de mercenarios dibujada
+      // y por último la zona de conflicto.
+      const logo = renderer.mercLogoAt(point.x, point.y);
+      const system = logo ? null : renderer.systemAt(point.x, point.y, event.pointerType === 'mouse' ? 14 : 24);
+      const merc = logo ?? (system ? null : renderer.mercZoneAt(point.x, point.y));
+      const cluster = system || merc ? null : renderer.clusterAt(point.x, point.y);
+      if (merc) callbacksRef.current.onMercZone(merc.zone.id);
+      else if (cluster) callbacksRef.current.onZone(cluster);
       else callbacksRef.current.onSelect(system?.id ?? null);
     };
 
@@ -332,7 +354,14 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
           style={{ left: territoryHint.x + 16, top: territoryHint.y + 14, '--faction': territoryHint.faction ? data.factions[territoryHint.faction].color : data.colors.cluster } as CSSProperties}
         >
           {territoryHint.faction && <p>{data.factions[territoryHint.faction].name}</p>}
-          {territoryHint.cluster && <ZoneHint data={data} clusterId={territoryHint.cluster} />}
+          {territoryHint.merc && (
+            <p className="starmap-hint-merc">
+              <b>{territoryHint.merc.title}</b>
+              {territoryHint.merc.note && <small>{territoryHint.merc.note}</small>}
+            </p>
+          )}
+          {/* Con una zona de mercenarios debajo, el clic abre la suya: la de conflicto se omite. */}
+          {territoryHint.cluster && !territoryHint.merc && <ZoneHint data={data} clusterId={territoryHint.cluster} />}
         </div>
       )}
       <div className="starmap-zoom" role="group" aria-label="Zoom">
