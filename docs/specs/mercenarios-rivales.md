@@ -29,7 +29,7 @@ Con el DLC4, las compañías de mercenarios rivales (Gray Death Legion, Kell Hou
 
 ## Requisitos funcionales
 
-- **RF1.** Un panel **Rival mercs**, junto a los demás, lista las compañías con su logo y cuántas zonas ocupan en la fecha del mapa. Mientras está abierto, el mapa dibuja las zonas ocupadas en esa fecha: un círculo discontinuo con el logo de su compañía en el centro.
+- **RF1.** Un panel **Rival mercs**, junto a los demás, lista las compañías con su logo y cuántas zonas ocupan en la fecha del mapa. El mapa dibuja siempre las zonas ocupadas en esa fecha: un círculo discontinuo con el logo de su compañía en el centro.
 - **RF2.** Al elegir una compañía se abre su ficha: logo, nombre, nivel de los pilotos, descripción y las zonas que ocupa en esa fecha, con sus sistemas enlazados y si el tramo es solo de carrera. El mapa encuadra sus zonas y solo dibuja las suyas.
 - **RF3.** Con las zonas dibujadas, al pasar el ratón por una se ve la compañía que la ocupa (o que rota al azar) y si el tramo es solo de carrera, y al pulsarla se abre su ficha. El logo tiene prioridad sobre la estrella que queda debajo, porque el centro de la zona suele caer sobre uno de sus sistemas.
 - **RF4.** Si en esa fecha la zona rota al azar, se dibuja con un signo de interrogación en vez de logo y la etiqueta lo explica.
@@ -70,4 +70,5 @@ Con el DLC4, las compañías de mercenarios rivales (Gray Death Legion, Kell Hou
 - **Decisiones durante el desarrollo:**
   - El centro de la zona suele caer sobre uno de sus sistemas y el logo tapaba la estrella: al pulsar el logo manda la zona.
   - Con seis cajones, abrir uno ensanchaba la fila y la partía en dos: el contenido de un cajón abierto flota ahora encima de su botón (en el móvil sigue dentro del cajón), y los dos últimos se alinean por la derecha para no tapar el panel de fecha.
-  - Al elegir una compañía, el panel se cierra para no tapar lo que el mapa encuadra; sus zonas se siguen dibujando.
+  - Al elegir una compañía, el panel se cierra para no tapar lo que el mapa encuadra.
+  - Al principio las zonas solo se dibujaban con el panel abierto; se dibujan siempre, porque así se ve de un vistazo dónde está cada compañía.
