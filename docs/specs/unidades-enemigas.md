@@ -15,6 +15,7 @@ La web solo cubre 'Mechs, pero en los contratos también hay tanques, aerodesliz
 | Ficha de la unidad | Unit cards exportadas (`tools/datos-juego/unitcard/`) | Nombre, tipo (`UnitType`), rol (`CombatRole`), tier, `BattleValue`, fecha de introducción, rareza por facción y el blueprint de la unidad (`UnitClass`) |
 | Vida, velocidad y armas | Blueprints del `.pak` (`extraer_unidades.py`) | `MaxHitPoints` del `SimpleLivingActorComponent`, `MoveStats.MaxSpeed` del componente de movimiento y las armas (`WeaponDataAsset`) de la unidad y de las torretas que lleva montadas |
 | Estadísticas de las armas | `items.json` o el arma del `.pak` | Las que se pueden montar en un 'Mech salen de `items.json`; las de vehículos (AC/5 del Scorpion, LRM 10 de los Carrier…) y las de los Elementals, de su propio `StatsData` |
+| Página y dibujo de Sarna | API de Sarna (`imagenes_sarna.py`) | La página de cada chasis y su dibujo principal, a partir de una tabla de títulos en `generar_unidades.py`, porque el juego no los trae |
 | Nombres de facción | Assets de facción del `.pak` | Con los de las compañías de mercenarios y los patrocinadores de las arenas, que salen de sus StringTables |
 
 `extraer_unidades.py` guarda lo que saca del `.pak` en `tools/datos-juego/unidades/` y `generar_unidades.py` lo une a las unit cards en `src/data/units.json`.
@@ -58,6 +59,7 @@ La web solo cubre 'Mechs, pero en los contratos también hay tanques, aerodesliz
 - **RF4.** La ficha dice con qué frecuencia la usa cada facción, agrupada por rareza y sin las que no la usan (`Unavailable`).
 - **RF5.** La vida lleva una nota: es la base y el juego la escala con la dificultad del contrato.
 - **RF6.** La campana de novedades está en la cabecera, como en el MechLab y el mapa.
+- **RF7.** La ficha enseña el dibujo del chasis de Sarna, con el aspecto de holograma de la portada, y enlaza su página. Las variantes comparten el dibujo de su chasis; las unidades sin página (las torretas, el Convoy y el Arrow IV Carrier) no llevan ni dibujo ni enlace, y las que tienen página sin dibujo (Igor y Riverjack) solo llevan el enlace.
 
 ## Requisitos no funcionales
 
@@ -81,6 +83,7 @@ La web solo cubre 'Mechs, pero en los contratos también hay tanques, aerodesliz
 | CA9 | La lista | se ordena por DPS | la primera es la de más DPS y las unidades sin dato de un campo (vida, velocidad) van al final al ordenar por él |
 | CA10 | El Demolisher Heavy Tank (Gauss) | se agrupa su rareza | salen tres grupos ordenados de más común a más rara: Common (2 facciones), Uncommon (23) y Very rare (3), con los nombres de las facciones sin repetir |
 | CA11 | Los VTOL y las torretas | se consultan | no tienen velocidad |
+| CA12 | Las unidades | se consulta su página de Sarna | todos los Scorpion enlazan `Scorpion_(Combat_Vehicle)` con su dibujo; el MRM30 Carrier enlaza el LRM Carrier; el Igor tiene página sin dibujo; ninguna torreta tiene página; todos los dibujos son de `cfw.sarna.net` |
 
 ## Fuera de alcance
 
@@ -101,6 +104,7 @@ La web solo cubre 'Mechs, pero en los contratos también hay tanques, aerodesliz
 ## Resultado
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Dibujos:** 24 páginas de Sarna, 22 con dibujo: 78 unidades enlazan su página y 69 enseñan el dibujo.
 - **Datos:** 115 unidades (43 Tracked, 15 Hover, 8 Wheeled, 12 VTOL, 35 Turret y 2 Battle armor) con 80 armas, 16 de ellas propias de vehículos o de los Elementals. `units.json` pesa 160 KB (13 KB comprimido en el bundle de la página).
 - **Tests:** los once criterios (CA1 a CA11) están en `src/utils/units.test.ts` y pasan, con dos más de la vista en la URL.
 - **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: la portada nueva, los filtros por tipo y la búsqueda, el orden por DPS, la rareza desplegada, la campana de novedades y los enlaces nuevos de las cabeceras del MechLab y del mapa.
