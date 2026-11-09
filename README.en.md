@@ -86,6 +86,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - Its own page with a map of the Inner Sphere that looks like the game's: each faction's territory in its color, clusters and industrial hubs.
 - Borders on any date from 3015 to 3060, with a slider and jumps to the 19 game events that move them.
 - A card for each system with its faction, cluster and owner history, the recommended reputation and difficulty of its cluster or industrial hub in campaign and career, a search by name and a link with the date and the system.
+- A card for each conflict zone when clicking inside it (description, capital, reputation, difficulty, repair markup and multi-mission contracts), and the DLC6 arenas with their fame ranks.
 - The game's 64 high reward quests (HRQ): where each one is offered, its route through its mission systems, its requirements (reputation, dates, previous or opposing quest), its reward (C-Bills, reputation, 'Mechs, weapons and equipment) and a search by name, system or employer.
 - The 22 fixed markets of the DLC campaigns and the Atlas II on Romulus, with a search for where to buy each 'Mech or weapon. Every 'Mech opens in the MechLab with its stock build (`/mercs/?mech=AS7-D-H`).
 - Find a 'Mech: the map is colored by how rare a variant is in each faction's market on the chosen date, with its fixed sources (HRQ, special markets) and a shareable link (`?mech=AS7-D`). Special 'Mech locations lists the hero 'Mechs and special variants you can only get in one place, like the Razer Wolverine.
