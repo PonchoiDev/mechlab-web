@@ -254,11 +254,9 @@ export function StarmapApp() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   // Zona de conflicto pulsada en el mapa: su ficha se ve si no hay otra encima.
   const [zoneId, setZoneId] = useState<string | null>(null);
-  // Mercenarios rivales: el panel abierto dibuja sus zonas; una compañía elegida, solo las suyas.
-  const [isMercsOpen, setIsMercsOpen] = useState(false);
+  // Mercenarios rivales: sus zonas se dibujan siempre; con una compañía elegida, solo las suyas.
   const [companyId, setCompanyId] = useState<string | null>(null);
   const mercZones = useMemo<MercZoneLayer>(() => {
-    if (!isMercsOpen && !companyId) return [];
     return getMercZonesAt(data, date)
       .filter(({ owner }) => !companyId || owner.company === companyId)
       .map(({ zone, owner }) => {
@@ -271,7 +269,7 @@ export function StarmapApp() {
           note: owner.rotating ? 'Mercenary companies take turns here at random' : owner.careerOnly ? 'Career only' : null
         };
       });
-  }, [isMercsOpen, companyId, date]);
+  }, [companyId, date]);
   // La rareza de los 'Mechs va en su propio archivo: se descarga al abrir Find a 'Mech o Special 'Mech locations, o
   // al entrar con ?mech= en la URL.
   const [availability, setAvailability] = useState<AvailabilityData | null>(null);
@@ -554,7 +552,7 @@ export function StarmapApp() {
           onPick={pickMech}
         />
         <HeroDrawer data={data} availability={availability} failed={availabilityFailed} selectedId={mechId} onOpen={() => loadAvailability()} onPick={pickMech} />
-        <MercDrawer data={data} date={date} selectedId={companyId} onToggle={setIsMercsOpen} onPick={pickCompany} />
+        <MercDrawer data={data} date={date} selectedId={companyId} onPick={pickCompany} />
       </div>
       {isFeedbackOpen && (
         <FeedbackDialog

@@ -17,13 +17,11 @@ interface MercDrawerProps {
   data: StarmapData;
   date: GameDate;
   selectedId: string | null;
-  // Abierto, el mapa dibuja las zonas de los mercenarios.
-  onToggle: (open: boolean) => void;
   onPick: (companyId: string) => void;
 }
 
 // Compañías de mercenarios rivales (DLC4), con cuántas zonas ocupan en la fecha del mapa.
-export function MercDrawer({ data, date, selectedId, onToggle, onPick }: MercDrawerProps) {
+export function MercDrawer({ data, date, selectedId, onPick }: MercDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const companies = useMemo(() => {
     const counts = new Map<string, number>();
@@ -40,10 +38,7 @@ export function MercDrawer({ data, date, selectedId, onToggle, onPick }: MercDra
       <button
         type="button"
         aria-expanded={isOpen}
-        onClick={() => {
-          onToggle(!isOpen);
-          setIsOpen(open => !open);
-        }}
+        onClick={() => setIsOpen(open => !open)}
       >
         Rival mercs <b>{companies.length}</b>
       </button>
@@ -58,9 +53,8 @@ export function MercDrawer({ data, date, selectedId, onToggle, onPick }: MercDra
                   className="starmap-merc-item"
                   aria-pressed={id === selectedId}
                   onClick={() => {
-                    // Se cierra para que no tape lo que el mapa encuadra; las zonas de la compañía siguen.
+                    // Se cierra para que no tape lo que el mapa encuadra.
                     setIsOpen(false);
-                    onToggle(false);
                     onPick(id);
                   }}
                 >
