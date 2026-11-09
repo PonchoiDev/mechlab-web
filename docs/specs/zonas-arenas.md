@@ -21,6 +21,7 @@ El mapa dibuja las zonas de conflicto ([mapa-estelar.md](mapa-estelar.md)) y la 
 **Decisiones sobre los datos:**
 
 - **Por modo:** la reparación y los contratos de varias misiones cambian entre campaña y carrera (Liao/Davion Border: reparaciones ×0,6 en campaña y ×0,35 en carrera), así que van en cada nivel de la zona, junto a la reputación y la dificultad. Si todos los modos coinciden, se muestra una sola línea, como hasta ahora.
+- **Niveles distintos:** dos fichas del mismo modo con la misma reputación pero distinta reparación o distintos contratos ya no se funden en una línea (Davion Borderlands tiene dos en carrera que solo difieren en la probabilidad de los contratos). Los criterios de [reputacion-zonas.md](reputacion-zonas.md) siguen comparando solo el modo, la reputación y la dificultad.
 - **Descripción y capital:** son las de la zona de campaña; si no la hay, las de la primera que las traiga.
 - **Centros industriales:** también son `ClusterAsset` y traen su reparación; la ficha del centro la muestra igual.
 - **Recompensas de los rangos:** con los nombres del MechLab, como las de las HRQ; las armas con su tier.
