@@ -517,12 +517,14 @@ def zonas_con_sistemas(zonas, sistemas):
 
 def reparacion_de_zona(zona):
     coste, tiempo = zona.get("reparacion") or (None, None)
-    return {"cost": round(coste, 2), "time": round(tiempo, 2)} if coste and tiempo else None
+    return {"cost": round(coste, 2), "time": round(tiempo, 2)} if coste is not None and tiempo is not None else None
 
 
 def varias_misiones_de_zona(zona):
     minimo, maximo, probabilidad = zona.get("varias_misiones") or (None, None, None)
-    return {"min": minimo, "max": maximo, "odds": round(probabilidad, 2)} if minimo and maximo and probabilidad else None
+    if None in (minimo, maximo, probabilidad):
+        return None
+    return {"min": minimo, "max": maximo, "odds": round(probabilidad, 2)}
 
 
 def niveles_de_zona(zonas):

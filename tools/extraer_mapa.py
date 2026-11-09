@@ -501,6 +501,9 @@ def campo_de_fila(fila, nombre):
 
 
 def extraer_arenas(pak):
+    for ruta in (ARENAS, RANGOS_DE_ARENA):
+        if ruta + ".uasset" not in pak.archivos:
+            raise ValueError(f"No está la tabla de arenas {ruta}: ¿ha cambiado el juego?")
     tabla = Asset.desde_pak(pak, ARENAS)
     sistemas = [{
         "sistema": int(id_sistema),
@@ -517,6 +520,9 @@ def extraer_arenas(pak):
         "puntos": campo_de_fila(fila, "PointsRequired"),
         **recompensa_de_objetivo({"ObjectiveReward": campo_de_fila(fila, "Rewards")}),
     } for fila in tabla.filas(tabla.principal()).values()]
+    incompletos = [rango for rango in rangos if rango["nivel"] is None or rango["puntos"] is None]
+    if incompletos:
+        raise ValueError(f"Rangos de arena sin nivel o sin puntos ({len(incompletos)}): ¿ha cambiado el formato de la tabla?")
     return {"sistemas": sorted(sistemas, key=lambda arena: arena["sistema"]), "rangos": sorted(rangos, key=lambda rango: rango["nivel"])}
 
 
