@@ -57,10 +57,11 @@ class Blueprints:
 
 
 def propiedades(asset, export):
-    # Algunos exports (funciones, gráficos de animación) no son objetos con propiedades.
+    # Algunos exports (funciones, curvas, gráficos de animación) no son objetos con propiedades: su
+    # lectura falla al interpretar datos que no lo son. Cualquier otro error se propaga.
     try:
         return asset.propiedades(export)
-    except Exception:
+    except (IndexError, KeyError, ValueError, struct.error, UnicodeDecodeError):
         return {}
 
 
@@ -183,6 +184,8 @@ def leer_arma(blueprints, paquete):
     datos = propiedades(asset, paquete.rsplit("/", 1)[1])
     estadisticas = datos.get("StatsData", {})
     arma = {"Name": datos.get("Name"), "Stats": (datos.get("Stats") or {}).get("KeyName")}
+    if not arma["Name"]:
+        raise ValueError(f"arma sin nombre: {paquete}")
     for campo in CAMPOS_DE_ARMA:
         valor = estadisticas.get(campo)
         if isinstance(valor, dict):

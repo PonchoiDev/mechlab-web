@@ -163,11 +163,15 @@ def main():
         if not nombre:
             avisos.append(f"{id_unidad}: sin nombre")
             continue
+        tipo = tipo_de_unidad(etiqueta.group(1), blueprint)
+        if tipo is None:
+            avisos.append(f"{id_unidad}: tipo de unidad desconocido ({etiqueta.group(1)})")
+            continue
         rol = REGEX_ROL.search(contenido)
         unidad = {
             "id": id_unidad.removesuffix("_UnitCard"),
             "name": nombre,
-            "kind": tipo_de_unidad(etiqueta.group(1), blueprint),
+            "kind": tipo,
             "role": ROLES_DE_UNIDAD.get(rol.group(1).lower(), separar_palabras(rol.group(1))) if rol else None,
             "tier": int(REGEX_TIER.search(contenido).group(1)),
             "battleValue": int(REGEX_VALOR.search(contenido).group(1)),

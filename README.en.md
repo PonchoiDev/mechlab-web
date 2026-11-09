@@ -134,7 +134,7 @@ src/
   utils/                Configurator logic: calculations, fitting rules, upgrades, build codes
   services/             Sarna API, clipboard and PNG build image (canvas)
   types/                TypeScript types
-  data/                 Generated mechs.json, items.json, traits.json and starmap.json, plus the changelog
+  data/                 Generated mechs.json, items.json, traits.json, starmap.json and units.json, plus the changelog
   test/                 Shared test fixtures
 worker/                 Cloudflare Worker: Sarna image proxy and feedback form
 starmap/index.html      Entry of the star map page (/mercs/starmap/)
