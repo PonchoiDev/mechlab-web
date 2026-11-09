@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-09-mobile-fixes',
+    date: '2026-11-09',
+    title: 'Better on mobile',
+    items: [
+      'The What\'s new panel now fits the screen on the home page and in the MechLab',
+      'On the star map, opening a panel hides the date controls so more of the map stays visible'
+    ]
+  },
+  {
     id: '2026-11-09-rival-mercs',
     date: '2026-11-09',
     title: 'Rival mercs on the star map',
