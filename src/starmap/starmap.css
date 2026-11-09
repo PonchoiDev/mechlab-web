@@ -532,6 +532,10 @@ button, input, select { font: inherit; color: inherit; }
   font-size: 13px;
 }
 
+/* La reputación recomendada resalta en amarillo y el recargo de reparación, una penalización, en rojo. */
+.starmap-level-reputation { color: #ffc24a; }
+.starmap-zone-levels small.starmap-level-penalty { color: #ff7a6b; }
+
 /* Ficha de una zona de conflicto: el color naranja de las zonas en el mapa. */
 .starmap-zone-mark {
   flex-shrink: 0;

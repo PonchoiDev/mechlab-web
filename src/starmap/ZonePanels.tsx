@@ -1,10 +1,21 @@
 import type { StarmapData, ZoneLevel } from '../types/starmap';
 import { describeMultiMission, describeRepair, getArena } from '../utils/clusters';
-import { describeZoneLevel, getClusterLevels } from '../utils/starmap';
+import { getClusterLevels } from '../utils/starmap';
 import { MechLink } from './MarketPanels';
 
 const MODE_NAMES = { campaign: 'Campaign', career: 'Career' } as const;
 const numberFormat = new Intl.NumberFormat('en');
+
+// Reputación recomendada (en amarillo, para encontrarla de un vistazo) y dificultad de un nivel.
+export function ZoneLevelText({ level }: { level: ZoneLevel }) {
+  return (
+    <>
+      {level.reputation && <span className="starmap-level-reputation">Recommended reputation {level.reputation}</span>}
+      {level.reputation && level.difficulty !== null && ' · '}
+      {level.difficulty !== null && `Difficulty ${level.difficulty}`}
+    </>
+  );
+}
 
 // Reputación recomendada y dificultad, una línea por modo (el modo solo si hay más de uno), con el
 // recargo de reparación y los contratos de varias misiones debajo.
@@ -16,8 +27,9 @@ export function ZoneLevels({ levels }: { levels: ZoneLevel[] }) {
         // Dos niveles del mismo modo pueden coincidir en reputación y dificultad: la posición los distingue.
         <li key={index}>
           {level.mode && levels.length > 1 && <b>{MODE_NAMES[level.mode]}: </b>}
-          {describeZoneLevel(level)}
-          {level.repair && <small>{describeRepair(level.repair)}</small>}
+          <ZoneLevelText level={level} />
+          {/* El recargo encarece y alarga las reparaciones: va en rojo, como penalización. */}
+          {level.repair && <small className="starmap-level-penalty">{describeRepair(level.repair)}</small>}
           {level.multiMission && <small>{describeMultiMission(level.multiMission)}</small>}
         </li>
       ))}

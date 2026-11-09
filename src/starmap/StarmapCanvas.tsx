@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { GameDate, StarmapData } from '../types/starmap';
-import { describeZoneLevel, getClusterLevels } from '../utils/starmap';
+import { getClusterLevels } from '../utils/starmap';
+import { ZoneLevelText } from './ZonePanels';
 import { StarmapRenderer, type TerritoryColors, type View } from './renderer';
 
 export interface FocusRequest {
@@ -58,7 +59,7 @@ function ZoneHint({ data, clusterId }: { data: StarmapData; clusterId: string })
       {levels.map(level => (
         <small key={`${level.mode}-${level.reputation}-${level.difficulty}`}>
           {level.mode && levels.length > 1 && `${level.mode === 'campaign' ? 'Campaign' : 'Career'}: `}
-          {describeZoneLevel(level)}
+          <ZoneLevelText level={level} />
         </small>
       ))}
       <small className="starmap-hint-action">Click for zone details</small>
