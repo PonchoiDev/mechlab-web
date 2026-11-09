@@ -37,7 +37,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (368 tests, cobertura con V8) |
+| Tests | Vitest 5 (375 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -85,6 +85,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Fronteras en cualquier fecha de 3015 a 3060, con un control deslizante y saltos a los 19 eventos del juego que las mueven.
 - Ficha de cada sistema con su facción, su clúster y su historial de propietarios, la reputación recomendada y la dificultad de su clúster o su centro industrial en campaña y en carrera, buscador por nombre y enlace con la fecha y el sistema.
 - Ficha de cada zona de conflicto al pulsar dentro de ella (descripción, capital, reputación, dificultad, recargo de reparación y contratos de varias misiones), y las arenas del DLC6 con sus rangos de fama.
+- Los mercenarios rivales del DLC4: las zonas que ocupa cada compañía en la fecha elegida, con su logo, y la ficha de cada una.
 - Las 64 misiones de alta recompensa (HRQ) del juego: dónde se ofrece cada una, su ruta por los sistemas de sus misiones, sus condiciones (reputación, fechas, misión previa o excluyente), su recompensa (C-Bills, reputación, 'Mechs, armas y equipo) y un buscador por nombre, sistema o quien la encarga.
 - Los 22 mercados fijos de las campañas de los DLC y el Atlas II de Romulus, con un buscador de dónde comprar cada 'Mech o arma. Cada 'Mech se abre en el MechLab con su build de serie (`/mercs/?mech=AS7-D-H`).
 - Find a 'Mech: el mapa se colorea según la rareza de una variante en el mercado de cada facción, en la fecha elegida, con sus fuentes fijas (HRQ, mercados especiales) y el enlace se comparte (`?mech=AS7-D`). Special 'Mech locations lista los 'Mechs hero y las variantes especiales que solo se consiguen en un sitio, como el Wolverine de Razer.
@@ -193,6 +194,7 @@ python3 tools/generar_mapa.py
 | `recompensas_misiones.json` | Objetivos de las HRQ con `bHasRewards` | C-Bills, reputación, 'Mechs, armas, equipo y texto final de cada recompensa |
 | `mercados.json` y `mechs_unicos.json` | Assets `CustomMarket` y acciones con `HeroMechToPlace` | Mercados con su inventario y 'Mechs únicos con su fecha |
 | `zonas.json` | `*_ClusterAsset` de campaña, de carrera y de las campañas de los DLC | Sistemas, nombre, descripción, capital, reputación recomendada, dificultad, recargo de reparación y contratos de varias misiones de cada zona |
+| `rivales.json` | `RivalMercs/StarMapRadialInfluences` y `RivalMercs/Companies` (DLC4) | Las 18 compañías de mercenarios rivales y sus 76 zonas de influencia con su dueño por fechas |
 | `arenas.json` | `ArenaStarSystemTable` y `ArenaFameProgressionTable` (DLC6) | Sistemas con arena y rangos de fama con sus recompensas |
 | `alianzas.json` | `Allegiance` de los assets de `Factions/*` | Facción a la que responde cada una, para la tabla de rareza de las facciones menores |
 | `recompensas_campana.json` | Objetivos con `bHasRewards` y `MechLoadouts` fuera de las HRQ, y la acción que los coloca | 'Mechs de las campañas de los DLC, el Bounty Hunter o promociones, con su sistema |
@@ -201,7 +203,7 @@ python3 tools/generar_mapa.py
 
 ## Calidad y comprobación contra el juego
 
-- **368 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **375 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

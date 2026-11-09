@@ -1,7 +1,7 @@
 # Especificación: mercenarios rivales en el mapa estelar
 
 - **Issue:** [#83](https://github.com/PonchoiDev/mechlab-web/issues/83)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/mercs.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -60,3 +60,14 @@ Con el DLC4, las compañías de mercenarios rivales (Gray Death Legion, Kell Hou
 
 1. **Datos y lógica (CA1 a CA7):** `src/utils/mercs.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: abrir Rival mercs en 3025 (zonas con logos), pasar el ratón y pulsar una zona, elegir la Gray Death Legion, y ver una zona con rotación aleatoria en 3055.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 18 compañías con su logo y 76 zonas con 1.493 tramos de historial (668 solo de carrera); 72 zonas rotan al azar al acabar el historial. Los datos suman unos 100 KB a `starmap.json` (15 KB comprimidos).
+- **Tests:** los siete criterios (CA1 a CA7) están en `src/utils/mercs.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: el panel en 3025 con las zonas y sus logos, la etiqueta y el clic en la zona de la Eridani Light Horse (con un tramo solo de carrera), la ficha de la Gray Death Legion y las zonas con rotación al azar en 3055.
+- **Decisiones durante el desarrollo:**
+  - El centro de la zona suele caer sobre uno de sus sistemas y el logo tapaba la estrella: al pulsar el logo manda la zona.
+  - Con seis cajones, abrir uno ensanchaba la fila y la partía en dos: el contenido de un cajón abierto flota ahora encima de su botón (en el móvil sigue dentro del cajón), y los dos últimos se alinean por la derecha para no tapar el panel de fecha.
+  - Al elegir una compañía, el panel se cierra para no tapar lo que el mapa encuadra; sus zonas se siguen dibujando.
