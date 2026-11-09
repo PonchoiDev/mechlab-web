@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import starmapData from '../data/starmap.json';
-import type { StarmapData } from '../types/starmap';
+import type { StarmapData, ZoneLevel } from '../types/starmap';
 import {
   buildTerritoryIndex,
   clampDate,
@@ -214,17 +214,19 @@ describe('búsqueda, territorios y URL', () => {
   });
 });
 
-// Criterios de aceptación de docs/specs/reputacion-zonas.md (issue #72).
+// Criterios de aceptación de docs/specs/reputacion-zonas.md (issue #72). Los niveles también traen
+// la reparación y los contratos (zonas-arenas.md): aquí solo se comparan modo, reputación y dificultad.
+const basic = (levels: ZoneLevel[]) => levels.map(({ mode, reputation, difficulty }) => ({ mode, reputation, difficulty }));
 describe('reputación recomendada y dificultad de las zonas', () => {
   it('CA1: Liao/Davion Border pide reputación 8 en campaña y 3-6 en carrera', () => {
-    expect(getClusterLevels(data, 'DavionBorder')).toEqual([
+    expect(basic(getClusterLevels(data, 'DavionBorder'))).toEqual([
       { mode: 'campaign', reputation: '8', difficulty: 45 },
       { mode: 'career', reputation: '3-6', difficulty: 20 }
     ]);
   });
 
   it('CA2: Rasalhague Outer Reaches tiene dos niveles distintos en carrera', () => {
-    expect(getClusterLevels(data, 'RasalagueReaches')).toEqual([
+    expect(basic(getClusterLevels(data, 'RasalagueReaches'))).toEqual([
       { mode: 'campaign', reputation: '13-15', difficulty: 100 },
       { mode: 'career', reputation: '1-3', difficulty: 9 },
       { mode: 'career', reputation: '7-10', difficulty: 60 }
@@ -233,16 +235,16 @@ describe('reputación recomendada y dificultad de las zonas', () => {
 
   it('CA3: una zona solo de carrera tiene un único nivel de carrera', () => {
     expect(data.clusters.CareerCluster_3.name).toBe('Border Protectorate Region');
-    expect(getClusterLevels(data, 'CareerCluster_3')).toEqual([{ mode: 'career', reputation: '15', difficulty: 100 }]);
+    expect(basic(getClusterLevels(data, 'CareerCluster_3'))).toEqual([{ mode: 'career', reputation: '15', difficulty: 100 }]);
   });
 
   it('CA4: Barcelona tiene reputación sin dificultad y Sarna no tiene niveles', () => {
-    expect(getClusterLevels(data, 'Barcelona')).toEqual([{ mode: null, reputation: '8', difficulty: null }]);
+    expect(basic(getClusterLevels(data, 'Barcelona'))).toEqual([{ mode: null, reputation: '8', difficulty: null }]);
     expect(getClusterLevels(data, 'Sarna')).toEqual([]);
   });
 
   it('CA5: el centro industrial de Diboll solo pide reputación en carrera', () => {
-    expect(getHubLevels(data, 'SafeZone_1')).toEqual([
+    expect(basic(getHubLevels(data, 'SafeZone_1'))).toEqual([
       { mode: 'campaign', reputation: null, difficulty: 7 },
       { mode: 'career', reputation: '1-2', difficulty: 7 }
     ]);

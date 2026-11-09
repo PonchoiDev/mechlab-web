@@ -24,6 +24,9 @@ CONTENIDO = "MW5Mercs/Content/"
 TABLA_SISTEMAS = CONTENIDO + "InnerSphereData/MW5_InnerSphereData"
 # 'Mechs hero que el juego puede poner a la venta: los que no están solo se consiguen de otra forma.
 HEROES_EN_VENTA = CONTENIDO + "Campaign/Progression/DataTables/HeroMechsForPurchase"
+# Arenas del DLC6: los sistemas que las tienen y los rangos de fama, con lo que da cada uno.
+ARENAS = CONTENIDO + "DLC6/LevelGenerators/ArenaStarSystemTable"
+RANGOS_DE_ARENA = CONTENIDO + "DLC6/ArenaFameProgressionTable"
 COLORES_MAPA = CONTENIDO + "UI/FrontEnd/Starmap/Materials/Factions/Faction_Colours_MPC"
 EVENTOS = CONTENIDO + "Campaign/CampaignArcs/BorderChanges/"
 CENTROS_INDUSTRIALES = CONTENIDO + "DLC1/CareerMode/Clusters/"
@@ -166,6 +169,11 @@ def extraer_centros_industriales(pak):
             centro["malla"] = vertices_de_malla(pak, ruta_de_juego(cluster["ClusterConstellation"]))
         centros[nombre] = centro
     return dict(sorted(centros.items(), key=lambda par: int(par[0].split("_")[1])))
+
+
+def campo_de_config(propiedades, nombre):
+    """Un campo de Config por su nombre sin el sufijo (MMO_MinNumberOfMissions_38_4FFE…)."""
+    return next((valor for clave, valor in propiedades.get("Config", {}).items() if clave.startswith(nombre + "_")), None)
 
 
 def valores_de_config(propiedades):
@@ -487,6 +495,37 @@ def extraer_heroes_en_venta(pak):
                   for fila in asset.filas(asset.principal()).values())
 
 
+def campo_de_fila(fila, nombre):
+    """Un campo de una fila de DataTable por su nombre sin el sufijo (HasBlackMarket_13_F5A3…)."""
+    return next((valor for clave, valor in fila.items() if clave.split("_")[0] == nombre), None)
+
+
+def extraer_arenas(pak):
+    for ruta in (ARENAS, RANGOS_DE_ARENA):
+        if ruta + ".uasset" not in pak.archivos:
+            raise ValueError(f"No está la tabla de arenas {ruta}: ¿ha cambiado el juego?")
+    tabla = Asset.desde_pak(pak, ARENAS)
+    sistemas = [{
+        "sistema": int(id_sistema),
+        "mercado_negro": bool(campo_de_fila(fila, "HasBlackMarket")),
+        "mercenarios": bool(campo_de_fila(fila, "HasMercEncounters")),
+        # Solaris y Hardcore tienen combates propios (MissionVariant.Arena.Special.*).
+        "especial": any(etiqueta.startswith("MissionVariant.Arena.Special") for etiqueta in campo_de_fila(fila, "ArenaMapTags") or []),
+    } for id_sistema, fila in tabla.filas(tabla.principal()).items()]
+    tabla = Asset.desde_pak(pak, RANGOS_DE_ARENA)
+    rangos = [{
+        "nivel": campo_de_fila(fila, "Level"),
+        "nombre": campo_de_fila(fila, "Name"),
+        "descripcion": campo_de_fila(fila, "Description"),
+        "puntos": campo_de_fila(fila, "PointsRequired"),
+        **recompensa_de_objetivo({"ObjectiveReward": campo_de_fila(fila, "Rewards")}),
+    } for fila in tabla.filas(tabla.principal()).values()]
+    incompletos = [rango for rango in rangos if rango["nivel"] is None or rango["puntos"] is None or not rango["nombre"]]
+    if incompletos:
+        raise ValueError(f"Rangos de arena sin nivel, puntos o nombre ({len(incompletos)}): ¿ha cambiado el formato de la tabla?")
+    return {"sistemas": sorted(sistemas, key=lambda arena: arena["sistema"]), "rangos": sorted(rangos, key=lambda rango: rango["nivel"])}
+
+
 def extraer_zonas(pak):
     """Sistemas, nombre, reputación recomendada y dificultad de cada zona (ClusterAsset) del juego.
 
@@ -508,7 +547,14 @@ def extraer_zonas(pak):
             if "Config" in propiedades:
                 valores = valores_de_config(propiedades)
                 zona.update({"nombre": valores.get("ClusterName"), "reputacion": valores.get("RecommendedReputation"),
-                             "dificultad": valores.get("DisplayDifficultyLevel")})
+                             "dificultad": valores.get("DisplayDifficultyLevel"), "descripcion": valores.get("ClusterDescription"),
+                             "capital": valores.get("ClusterCapitalStarSystemId"),
+                             # Multiplicadores del coste y el tiempo de reparación en la zona.
+                             "reparacion": [valores.get("RepairCBillMarkup"), valores.get("RepairTimeMarkup")],
+                             # Contratos de varias misiones: cuántas misiones y con qué probabilidad. Sus campos
+                             # empiezan todos por MMO_, así que se leen por el nombre completo.
+                             "varias_misiones": [campo_de_config(propiedades, nombre) for nombre in
+                                                 ("MMO_MinNumberOfMissions", "MMO_MaxNumberOfMissions", "MMO_PlacementOdds")]})
         zonas.append(zona)
     return zonas
 
@@ -610,6 +656,7 @@ def main():
     guardar("alianzas.json", extraer_alianzas(pak))
     guardar("recompensas_campana.json", extraer_recompensas_campana(pak))
     guardar("heroes_en_venta.json", extraer_heroes_en_venta(pak))
+    guardar("arenas.json", extraer_arenas(pak))
     extraer_logos(pak, facciones)
     if sin_asset:
         print(f"Aviso: facciones sin asset en el juego: {', '.join(sin_asset)}")

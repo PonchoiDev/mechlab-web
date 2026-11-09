@@ -79,8 +79,6 @@ export const describeRewardSource = (reward: CampaignReward): string => {
       return `${reward.partner} promotion${reward.careerOnly ? ', career mode only' : ''}: arrives as a message (${reward.title})${reward.system === undefined ? '' : ' when you arrive'}`;
     case 'intel':
       return `Reach Bounty Hunter intel level ${reward.level}${dlc}`;
-    case 'arenaRank':
-      return `Reach the ${reward.title} fame rank in the Solaris arenas${dlc}`;
     case 'campaignComplete':
       return `Complete the DLC ${reward.dlc} campaign (${reward.title})`;
     default:

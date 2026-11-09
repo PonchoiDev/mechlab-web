@@ -207,7 +207,6 @@ describe('rareza de cada variante por facción', () => {
     const describe = (mechId: string) => describeRewardSource(getFixedSources(data, mechId).rewards[0]);
     expect(describe('WVR-7H')).toBe('Razer promotion: arrives as a message (Hidden Cache Found) when you arrive');
     expect(describe('FS9-A')).toBe('Reach Bounty Hunter intel level 3 (DLC 4)');
-    expect(describe('AS7-BH')).toBe('Reach the Rudiarius fame rank in the Solaris arenas (DLC 6)');
     expect(describe('SNV-BR')).toBe('Complete the DLC 9 campaign (Promises Kept)');
     expect(describe('PXH-KB')).toBe('Microsoft promotion, career mode only: arrives as a message (Heya Ryana, I\'m Back!)');
   });
@@ -216,6 +215,14 @@ describe('rareza de cada variante por facción', () => {
     const adder = searchMechs(availability, 'adder');
     expect(adder.map(found => found.id)).toContain('ADR-PRIME');
     expect(adder.every(found => found.name === 'Puma' && found.otherName === 'Adder')).toBe(true);
+  });
+
+  it('CA25: la plantilla de los rangos de la arena no es una recompensa', () => {
+    expect(getFixedSources(data, 'AS7-BH').rewards).toEqual([]);
+    expect(getFixedSources(data, 'CRD-CR').rewards).toEqual([]);
+    expect(data.rewards.some(reward => reward.id.endsWith('Template'))).toBe(false);
+    expect(mech('AS7-BH').heroMarket).toBe(true);
+    expect(mech('CRD-CR').heroMarket).toBe(true);
   });
 
   it('CA10: las variantes están en el MechLab y todas las facciones del mapa tienen tabla salvo el ARDC', () => {

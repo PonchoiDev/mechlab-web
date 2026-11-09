@@ -400,12 +400,29 @@ def tipo_de_recompensa(recompensa):
     if nivel:
         # Niveles de información sobre el Bounty Hunter, el mercenario rival del DLC4.
         return {"kind": "intel", "level": int(nivel.group(1))}
-    if objetivo.startswith("ArenaFameLevelUp"):
-        # Rangos de fama de las arenas de Solaris (DLC6): el título es el nombre del rango.
-        return {"kind": "arenaRank"}
     if "CampaignComplete" in objetivo:
         return {"kind": "campaignComplete"}
     return {"kind": "mission"}
+
+
+def arenas(arenas_juego, mechs, items):
+    """Sistemas con arena (DLC6) y rangos de fama, con lo que da cada rango."""
+    return {
+        "systems": [{"system": arena["sistema"], "blackMarket": arena["mercado_negro"], "mercEncounters": arena["mercenarios"],
+                     "special": arena["especial"]} for arena in arenas_juego["sistemas"]],
+        "ranks": [{
+            "level": rango["nivel"],
+            "name": rango["nombre"],
+            "description": rango["descripcion"],
+            "points": rango["puntos"],
+            "reward": {
+                "cbills": rango["cbills"],
+                "mechs": [mech for mech in (mech_de_juego(id_juego, mechs) for id_juego in rango["mechs"]) if mech],
+                "weapons": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, True) for id_juego, cantidad in rango["armas"] if cantidad > 0),
+                "equipment": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, False) for id_juego, cantidad in rango["equipo"] if cantidad > 0),
+            },
+        } for rango in arenas_juego["rangos"]],
+    }
 
 
 def recompensas_fuera_de_hrq(recompensas_juego, misiones_juego, mechs, sistemas_validos):
@@ -415,6 +432,11 @@ def recompensas_fuera_de_hrq(recompensas_juego, misiones_juego, mechs, sistemas_
     cadenas = {cadena_de_carpeta(accion["carpeta"])[0] for accion in misiones_juego if accion["sistema"] in sistemas_validos}
     resultado = []
     for recompensa in recompensas_juego:
+        # Las plantillas no son recompensas: ArenaFameLevelUpPromptTemplate trae dos 'Mechs con el
+        # título «Rudiarius» y un texto de relleno, y el juego arma la recompensa de cada rango con
+        # ArenaFameProgressionTable.
+        if recompensa["objetivo"].endswith("Template"):
+            continue
         variantes = [mech for mech in (mech_de_juego(id_juego, mechs) for id_juego in recompensa["mechs"]) if mech]
         if cadena_de_carpeta(recompensa["carpeta"])[0] in cadenas or not variantes:
             continue
@@ -493,11 +515,25 @@ def zonas_con_sistemas(zonas, sistemas):
     return [zona for zona in zonas if zona["sistemas"] and set(zona["sistemas"]) == set(sistemas)]
 
 
+def reparacion_de_zona(zona):
+    coste, tiempo = zona.get("reparacion") or (None, None)
+    return {"cost": round(coste, 2), "time": round(tiempo, 2)} if coste is not None and tiempo is not None else None
+
+
+def varias_misiones_de_zona(zona):
+    minimo, maximo, probabilidad = zona.get("varias_misiones") or (None, None, None)
+    if None in (minimo, maximo, probabilidad):
+        return None
+    return {"min": minimo, "max": maximo, "odds": round(probabilidad, 2)}
+
+
 def niveles_de_zona(zonas):
-    """Reputación recomendada y dificultad por modo, sin repetir los iguales del mismo modo."""
+    """Reputación recomendada, dificultad, reparación y contratos de varias misiones por modo, sin
+    repetir los iguales del mismo modo."""
     niveles = []
     for zona in zonas:
-        nivel = {"mode": modo_de_zona(zona["ruta"]), "reputation": zona.get("reputacion") or None, "difficulty": zona.get("dificultad")}
+        nivel = {"mode": modo_de_zona(zona["ruta"]), "reputation": zona.get("reputacion") or None, "difficulty": zona.get("dificultad"),
+                 "repair": reparacion_de_zona(zona), "multiMission": varias_misiones_de_zona(zona)}
         if (nivel["reputation"] or nivel["difficulty"] is not None) and nivel not in niveles:
             niveles.append(nivel)
     return sorted(niveles, key=lambda nivel: (ORDEN_MODOS[nivel["mode"]], nivel["difficulty"] or 0))
@@ -674,6 +710,14 @@ def main():
         if not nombre:
             sin_nombre.append(id_cluster)
         clusteres[id_cluster] = {"name": separar_palabras(nombre or id_cluster), "levels": niveles_de_zona(suyas)}
+        # La descripción y la capital, de la zona de campaña si la hay.
+        con_descripcion = sorted((zona for zona in suyas if zona.get("descripcion")), key=lambda zona: ORDEN_MODOS[modo_de_zona(zona["ruta"])])
+        if con_descripcion:
+            descripcion = resolver_texto(con_descripcion[0]["descripcion"], tablas)
+            if descripcion and descripcion.strip():
+                clusteres[id_cluster]["description"] = descripcion.strip()
+            if con_descripcion[0].get("capital") in sistemas_cluster:
+                clusteres[id_cluster]["capital"] = con_descripcion[0]["capital"]
 
     eventos = [
         {"id": evento["asset"], "date": evento["fecha"], "name": NOMBRES_EVENTOS[evento["asset"]]}
@@ -698,6 +742,7 @@ def main():
                                       recompensas_por_cadena(leer("recompensas_misiones.json"), mechs, items)),
         "markets": mercados_especiales(mercados_juego, mechs, items, {sistema["id"] for sistema in sistemas}),
         "uniqueMechs": mechs_unicos(unicos_juego, mechs),
+        "arenas": arenas(leer("arenas.json"), mechs, items),
         "rewards": recompensas_fuera_de_hrq(leer("recompensas_campana.json"), misiones_juego, mechs, {sistema["id"] for sistema in sistemas}),
     }
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
