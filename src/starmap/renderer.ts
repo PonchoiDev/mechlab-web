@@ -1,6 +1,7 @@
 import type { GameDate, StarSystem, StarmapData } from '../types/starmap';
 import { getQuestAvailability } from '../utils/quests';
-import { buildTerritoryIndex, getClusterOutline, getHubs, getOwnerAt, getTerritoryContours, type TerritoryIndex } from '../utils/starmap';
+import { findClusterAt, getClusterOutlines } from '../utils/clusters';
+import { buildTerritoryIndex, getHubs, getOwnerAt, getTerritoryContours, type TerritoryIndex } from '../utils/starmap';
 
 export interface View {
   // Centro de la pantalla en años luz y píxeles por año luz.
@@ -22,6 +23,7 @@ const QUEST_COLOR = '#f2b75e';
 const MARKET_COLOR = '#7fdc8a';
 const BLACK_MARKET_COLOR = '#b98cff';
 const UNIQUE_COLOR = '#ffd400';
+const ARENA_COLOR = '#ff6b5e';
 // Grosores en píxeles de pantalla: el borde se ve igual de marcado con cualquier zoom.
 const BORDER_WIDTH = 2;
 const BORDER_HALO = 7;
@@ -75,7 +77,8 @@ export class StarmapRenderer {
   private readonly data: StarmapData;
   private readonly context: CanvasRenderingContext2D;
   private readonly index: TerritoryIndex;
-  private readonly clusterOutlines: Point[][];
+  private readonly clusterOutlines: Map<string, Point[]>;
+  private readonly arenas: Set<number>;
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
   private readonly questOffers: Map<number, StarmapData['quests']>;
@@ -103,10 +106,6 @@ export class StarmapRenderer {
     this.context = canvas.getContext('2d')!;
     this.index = buildTerritoryIndex(data.systems, { cellSize: CELL_SIZE, radius: TERRITORY_RADIUS, wobble: 0.18 });
 
-    const byCluster = new Map<string, Point[]>();
-    for (const system of data.systems) {
-      if (system.cluster) byCluster.set(system.cluster, [...(byCluster.get(system.cluster) ?? []), [system.x, system.y]]);
-    }
     const hubs = getHubs(data);
     this.hubCapitals = new Set(hubs.map(hub => hub.capital.id));
     this.questOffers = new Map();
@@ -116,7 +115,9 @@ export class StarmapRenderer {
     for (const market of data.markets) {
       this.markets.set(market.system, (this.markets.get(market.system) ?? false) || !market.blackMarket);
     }
-    this.clusterOutlines = [...byCluster.values()].map(points => getClusterOutline(points, CLUSTER_PADDING));
+    // Los mismos contornos sirven para dibujar las zonas y para saber cuál hay bajo el ratón.
+    this.clusterOutlines = getClusterOutlines(data, CLUSTER_PADDING);
+    this.arenas = new Set(data.arenas.systems.map(arena => arena.system));
     // Los centros industriales se dibujan como en el juego: líneas discontinuas entre sus estrellas.
     const byId = new Map(data.systems.map(system => [system.id, system]));
     this.hubLinks = Object.values(data.hubs).flatMap(hub => hub.links.flatMap(([a, b]): [Point, Point][] => {
@@ -191,6 +192,11 @@ export class StarmapRenderer {
     if (col < 0 || row < 0 || col >= cols || row >= rows) return null;
     const system = nearest[row * cols + col];
     return system < 0 ? null : this.owners[system];
+  }
+
+  // La zona de conflicto bajo el puntero, si la hay.
+  clusterAt(screenX: number, screenY: number): string | null {
+    return findClusterAt(this.clusterOutlines, ...this.toWorld(screenX, screenY));
   }
 
   // El sistema más cercano al puntero, si está a menos de unos píxeles.
@@ -340,7 +346,7 @@ export class StarmapRenderer {
   private drawClusters() {
     const context = this.context;
     context.lineJoin = 'round';
-    for (const outline of this.clusterOutlines) {
+    for (const outline of this.clusterOutlines.values()) {
       context.beginPath();
       outline.forEach(([x, y], i) => {
         const [sx, sy] = this.toScreen(x, y);
@@ -393,6 +399,7 @@ export class StarmapRenderer {
       // Atenuado si ninguna de las HRQ de ese sistema se ofrece en la fecha del mapa.
       if (offers) this.drawQuestIcon(...this.toScreen(system.x, system.y), offers.some(quest => getQuestAvailability(quest, this.date).state === 'available'));
       if (this.markets.has(system.id)) this.drawMarketIcon(...this.toScreen(system.x, system.y), this.markets.get(system.id)!);
+      if (this.arenas.has(system.id)) this.drawArenaIcon(...this.toScreen(system.x, system.y));
     }
     for (const unique of this.data.uniqueMechs) {
       if (unique.from > this.date) continue;
@@ -469,6 +476,30 @@ export class StarmapRenderer {
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     context.fillText('C', 0, 0.5);
+    context.restore();
+  }
+
+  private drawArenaIcon(x: number, y: number) {
+    // Rombo rojo con una A, abajo a la izquierda de la estrella: aquí hay una arena (DLC6).
+    const context = this.context;
+    context.save();
+    context.translate(x - 11, y + 9);
+    context.fillStyle = ARENA_COLOR;
+    context.strokeStyle = '#1a0605';
+    context.lineWidth = 1.2;
+    context.beginPath();
+    context.moveTo(0, -6);
+    context.lineTo(6, 0);
+    context.lineTo(0, 6);
+    context.lineTo(-6, 0);
+    context.closePath();
+    context.fill();
+    context.stroke();
+    context.fillStyle = '#1a0605';
+    context.font = '700 8px "Barlow Condensed", "Arial Narrow", sans-serif';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText('A', 0, 0.5);
     context.restore();
   }
 

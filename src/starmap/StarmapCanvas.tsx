@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { GameDate, StarmapData } from '../types/starmap';
+import { describeZoneLevel, getClusterLevels } from '../utils/starmap';
 import { StarmapRenderer, type TerritoryColors, type View } from './renderer';
 
 export interface FocusRequest {
@@ -21,6 +22,8 @@ interface StarmapCanvasProps {
   focus: FocusRequest | null;
   onHover: (systemId: number | null) => void;
   onSelect: (systemId: number | null) => void;
+  // Clic dentro de una zona de conflicto, sin una estrella debajo.
+  onZone: (clusterId: string) => void;
 }
 
 const MAX_SCALE = 14;
@@ -39,26 +42,51 @@ const getBounds = (data: StarmapData) => {
   return { minX: Math.min(...xs), maxX: Math.max(...xs), minY: Math.min(...ys), maxY: Math.max(...ys) };
 };
 
+// Lo que hay bajo el ratón sin una estrella: la facción y, si cae dentro, la zona de conflicto.
+const hintAt = (renderer: StarmapRenderer, point: { x: number; y: number }) => {
+  const faction = renderer.ownerAt(point.x, point.y);
+  const cluster = renderer.clusterAt(point.x, point.y);
+  return faction || cluster ? { faction, cluster, ...point } : null;
+};
+
+// Nombre de la zona y lo que pide en cada modo; al pulsar se abre su ficha.
+function ZoneHint({ data, clusterId }: { data: StarmapData; clusterId: string }) {
+  const levels = getClusterLevels(data, clusterId);
+  return (
+    <p className="starmap-hint-zone">
+      <b>{data.clusters[clusterId].name}</b>
+      {levels.map(level => (
+        <small key={`${level.mode}-${level.reputation}-${level.difficulty}`}>
+          {level.mode && levels.length > 1 && `${level.mode === 'campaign' ? 'Campaign' : 'Career'}: `}
+          {describeZoneLevel(level)}
+        </small>
+      ))}
+      <small className="starmap-hint-action">Click for zone details</small>
+    </p>
+  );
+}
+
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, territoryColors, focus, onHover, onSelect }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, territoryColors, focus, onHover, onSelect, onZone }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
   const fitScaleRef = useRef(1);
   const animationRef = useRef(0);
-  const callbacksRef = useRef({ onHover, onSelect });
+  const callbacksRef = useRef({ onHover, onSelect, onZone });
   // Facción de la zona bajo el ratón cuando no hay una estrella cerca: la ficha es del sistema
   // elegido, y sin esta etiqueta parecería que describe la zona.
-  const [territoryHint, setTerritoryHint] = useState<{ faction: string; x: number; y: number } | null>(null);
+  // Facción y zona de conflicto bajo el ratón cuando no hay una estrella debajo.
+  const [territoryHint, setTerritoryHint] = useState<{ faction: string | null; cluster: string | null; x: number; y: number } | null>(null);
   // Última posición del ratón sobre el mapa: al cambiar la fecha con el teclado, la etiqueta se
   // vuelve a calcular ahí sin esperar a que se mueva.
   const mouseRef = useRef<{ x: number; y: number } | null>(null);
   const boundsRef = useRef(getBounds(data));
 
   useEffect(() => {
-    callbacksRef.current = { onHover, onSelect };
-  }, [onHover, onSelect]);
+    callbacksRef.current = { onHover, onSelect, onZone };
+  }, [onHover, onSelect, onZone]);
 
   const setView = (view: View) => {
     const renderer = rendererRef.current;
@@ -147,8 +175,7 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     renderer.setDate(date, animateDate && !prefersReducedMotion());
     const mouse = mouseRef.current;
     if (!mouse) return;
-    const owner = renderer.systemAt(mouse.x, mouse.y) ? null : renderer.ownerAt(mouse.x, mouse.y);
-    setTerritoryHint(owner ? { faction: owner, ...mouse } : null);
+    setTerritoryHint(renderer.systemAt(mouse.x, mouse.y) ? null : hintAt(renderer, mouse));
   }, [date, data, animateDate]);
 
   useEffect(() => {
@@ -217,9 +244,8 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
         if (event.pointerType === 'mouse') {
           mouseRef.current = point;
           const system = renderer.systemAt(point.x, point.y);
-          const owner = system ? null : renderer.ownerAt(point.x, point.y);
           callbacksRef.current.onHover(system?.id ?? null);
-          setTerritoryHint(owner ? { faction: owner, ...point } : null);
+          setTerritoryHint(system ? null : hintAt(renderer, point));
         }
         return;
       }
@@ -252,7 +278,9 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
       const point = position(event);
       // Con el dedo se acepta un toque algo más lejos de la estrella.
       const system = renderer.systemAt(point.x, point.y, event.pointerType === 'mouse' ? 14 : 24);
-      callbacksRef.current.onSelect(system?.id ?? null);
+      const cluster = system ? null : renderer.clusterAt(point.x, point.y);
+      if (cluster) callbacksRef.current.onZone(cluster);
+      else callbacksRef.current.onSelect(system?.id ?? null);
     };
 
     const onWheel = (event: WheelEvent) => {
@@ -297,12 +325,13 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     <div className="starmap-canvas" ref={containerRef}>
       <canvas ref={canvasRef} role="img" aria-label="Star map of the Inner Sphere. Use the search box to find a system." />
       {territoryHint && (
-        <p
+        <div
           className="starmap-hint"
-          style={{ left: territoryHint.x + 16, top: territoryHint.y + 14, '--faction': data.factions[territoryHint.faction].color } as CSSProperties}
+          style={{ left: territoryHint.x + 16, top: territoryHint.y + 14, '--faction': territoryHint.faction ? data.factions[territoryHint.faction].color : data.colors.cluster } as CSSProperties}
         >
-          {data.factions[territoryHint.faction].name}
-        </p>
+          {territoryHint.faction && <p>{data.factions[territoryHint.faction].name}</p>}
+          {territoryHint.cluster && <ZoneHint data={data} clusterId={territoryHint.cluster} />}
+        </div>
       )}
       <div className="starmap-zoom" role="group" aria-label="Zoom">
         <button type="button" onClick={() => zoomFromCenter(1.4)} aria-label="Zoom in">+</button>

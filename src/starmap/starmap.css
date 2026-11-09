@@ -50,10 +50,32 @@ button, input, select { font: inherit; color: inherit; }
 
 .starmap-canvas canvas:active { cursor: grabbing; }
 
+.starmap-hint p { margin: 0; }
+
+.starmap-hint-zone {
+  display: grid;
+  margin-top: 4px !important;
+  padding-left: 6px;
+  border-left: 2px solid var(--zone, #e08a4f);
+}
+
+.starmap-hint-zone b { font-size: 14px; }
+
+.starmap-hint-zone small {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: normal;
+}
+
+.starmap-hint-zone .starmap-hint-action { color: var(--map-muted); }
+
 .starmap-hint {
   position: absolute;
   margin: 0;
   padding: 3px 9px 3px 8px;
+  max-width: 320px;
   border-left: 3px solid var(--faction);
   background: var(--map-panel);
   font-size: 15px;
@@ -501,6 +523,57 @@ button, input, select { font: inherit; color: inherit; }
 }
 
 .starmap-zone-levels b { color: var(--map-muted); }
+
+.starmap-zone-levels li + li { margin-top: 4px; }
+
+.starmap-zone-levels small {
+  display: block;
+  color: var(--map-muted);
+  font-size: 13px;
+}
+
+/* Ficha de una zona de conflicto: el color naranja de las zonas en el mapa. */
+.starmap-zone-mark {
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border: 3px solid #e08a4f;
+  border-radius: 12px;
+  background: rgba(224, 138, 79, 0.18);
+  box-shadow: 0 0 16px rgba(224, 138, 79, 0.45);
+}
+
+.starmap-zone .starmap-tags dd { font-size: 18px; }
+
+.starmap-zone-description {
+  margin: 12px 14px 14px;
+  color: var(--map-muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Arena del DLC6 en la ficha del sistema. */
+.starmap-arena {
+  margin: 12px 14px 0;
+  border-left-color: #ff6b5e;
+}
+
+.starmap-arena-ranks {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.starmap-arena-ranks li { margin-top: 6px; }
+
+.starmap-arena-ranks small { color: var(--map-muted); }
+
+.starmap-arena-ranks span {
+  display: block;
+  color: var(--map-muted);
+  font-size: 13px;
+  text-transform: none;
+}
 
 .starmap-tags .is-hub dt { background: linear-gradient(90deg, #8be3ff, rgba(139, 227, 255, 0.35)); }
 

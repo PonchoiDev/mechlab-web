@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import starmapData from '../data/starmap.json';
-import type { AvailabilityData, GameDate, Quest, StarSystem, StarmapData, ZoneLevel } from '../types/starmap';
+import type { AvailabilityData, GameDate, Quest, StarSystem, StarmapData } from '../types/starmap';
 import {
   clampDate,
   countSystemsByOwner,
   dateToDays,
   daysToDate,
-  describeZoneLevel,
   formatGameDate,
   getCurrentEvent,
   getClusterLevels,
@@ -25,6 +24,7 @@ import { getFixedSources, getMarketRarity, getMechFocus, isProduced, parseMechQu
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { MarketDrawer, SystemMarkets } from './MarketPanels';
+import { SystemArena, ZoneCard, ZoneLevels } from './ZonePanels';
 import { HeroDrawer, MechCard, MechDrawer } from './MechPanels';
 import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
 import { QuestCard, QuestDrawer, SystemQuests } from './QuestPanels';
@@ -46,23 +46,6 @@ function FactionEmblem({ factionId }: { factionId: string | null }) {
     <span className="starmap-emblem" style={{ '--faction': faction?.color ?? '#5d6470' } as CSSProperties} aria-hidden="true">
       {faction?.logo ? <img src={LOGO_PATH + faction.logo} alt="" /> : faction?.short ?? ''}
     </span>
-  );
-}
-
-const MODE_NAMES = { campaign: 'Campaign', career: 'Career' } as const;
-
-// Reputación recomendada y dificultad, una línea por modo; el modo solo si hay más de uno.
-function ZoneLevels({ levels }: { levels: ZoneLevel[] }) {
-  if (levels.length === 0) return null;
-  return (
-    <ul className="starmap-zone-levels">
-      {levels.map(level => (
-        <li key={`${level.mode}-${level.reputation}-${level.difficulty}`}>
-          {level.mode && levels.length > 1 && <b>{MODE_NAMES[level.mode]}: </b>}
-          {describeZoneLevel(level)}
-        </li>
-      ))}
-    </ul>
   );
 }
 
@@ -114,6 +97,7 @@ function SystemPanel({ system, date, pinned, onClose, onQuest }: SystemPanelProp
       )}
       <SystemQuests data={data} systemId={system.id} onPick={onQuest} />
       <SystemMarkets data={data} systemId={system.id} date={date} />
+      <SystemArena data={data} systemId={system.id} />
       {system.owners.length > 0 && (
         <ol className="starmap-history" aria-label="Owners over time">
           {system.owners.map(([changedOn, faction], index) => (
@@ -266,6 +250,8 @@ export function StarmapApp() {
   // Sistema de la recompensa (fuera de las HRQ) donde se consigue la variante: se marca como una ruta.
   const [mechMissionSystem, setMechMissionSystem] = useState<number | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  // Zona de conflicto pulsada en el mapa: su ficha se ve si no hay otra encima.
+  const [zoneId, setZoneId] = useState<string | null>(null);
   // La rareza de los 'Mechs va en su propio archivo: se descarga al abrir Find a 'Mech o Special 'Mech locations, o
   // al entrar con ?mech= en la URL.
   const [availability, setAvailability] = useState<AvailabilityData | null>(null);
@@ -380,6 +366,15 @@ export function StarmapApp() {
     setDate(target);
   };
 
+  // Al pulsar dentro de una zona se cierran las demás fichas para que se vea la suya.
+  const pickZone = (id: string) => {
+    setZoneId(id);
+    setSelectedId(null);
+    setQuestId(null);
+    setMechId(null);
+    pendingMechRef.current = null;
+  };
+
   // Al elegir una variante se cierran la ficha del sistema y la de la HRQ para que se vea la suya.
   const pickMech = (id: string) => {
     pendingMechRef.current = null;
@@ -402,7 +397,11 @@ export function StarmapApp() {
         territoryColors={territoryColors}
         focus={focus}
         onHover={setHoveredId}
-        onSelect={setSelectedId}
+        onSelect={systemId => {
+          setSelectedId(systemId);
+          if (systemId === null) setZoneId(null);
+        }}
+        onZone={pickZone}
       />
 
       <header className="starmap-topbar">
@@ -436,6 +435,17 @@ export function StarmapApp() {
             onClose={() => setQuestId(null)}
           />
         )}
+      {!shown && !quest && !mech && zoneId && (
+        <ZoneCard
+          data={data}
+          clusterId={zoneId}
+          onSystem={systemId => {
+            setSelectedId(systemId);
+            focusOn(systemId);
+          }}
+          onClose={() => setZoneId(null)}
+        />
+      )}
       {!shown && !quest && mech && availability && (
         <MechCard
           data={data}
