@@ -129,6 +129,43 @@ export interface ZoneLevel {
   mode: 'campaign' | 'career' | null;
   reputation: string | null;
   difficulty: number | null;
+  // Recargo sobre el coste y el tiempo de reparación (markup en el juego); los centros no lo tienen.
+  repair?: RepairMarkup | null;
+  // Contratos de varias misiones: cuántas misiones y con qué probabilidad.
+  multiMission?: MultiMission | null;
+}
+
+export interface RepairMarkup {
+  cost: number;
+  time: number;
+}
+
+export interface MultiMission {
+  min: number;
+  max: number;
+  odds: number;
+}
+
+// Arena del DLC6 en un sistema.
+export interface ArenaSystem {
+  system: number;
+  blackMarket: boolean;
+  mercEncounters: boolean;
+  // Solaris y Hardcore tienen combates propios.
+  special: boolean;
+}
+
+export interface ArenaRank {
+  level: number;
+  name: string;
+  description: string;
+  points: number;
+  reward: {
+    cbills: number;
+    mechs: { id: string; name: string }[];
+    weapons: { name: string; tier: string | null; count: number }[];
+    equipment: { name: string; count: number }[];
+  };
 }
 
 // 'Mechs que da una misión u objetivo que no es una HRQ: campañas de los DLC, el Bounty Hunter o
@@ -153,7 +190,7 @@ export interface StarmapData {
   colors: { cluster: string; hub: string };
   factions: Record<string, Faction>;
   events: StarEvent[];
-  clusters: Record<string, { name: string; levels: ZoneLevel[] }>;
+  clusters: Record<string, { name: string; levels: ZoneLevel[]; description?: string; capital?: number }>;
   // Capital de cada centro industrial y parejas de sistemas que unen sus líneas en el mapa.
   hubs: Record<string, { capital: number; links: [number, number][]; levels: ZoneLevel[] }>;
   systems: StarSystem[];
@@ -161,4 +198,5 @@ export interface StarmapData {
   markets: Market[];
   uniqueMechs: UniqueMech[];
   rewards: CampaignReward[];
+  arenas: { systems: ArenaSystem[]; ranks: ArenaRank[] };
 }

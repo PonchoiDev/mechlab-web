@@ -86,7 +86,8 @@ export const getHubs = (data: StarmapData): Hub[] => Object.entries(data.hubs).f
 
 // Si todos los modos piden lo mismo, un solo nivel sin modo.
 const mergeModes = (levels: ZoneLevel[]): ZoneLevel[] => {
-  const same = levels.every(level => level.reputation === levels[0].reputation && level.difficulty === levels[0].difficulty);
+  const withoutMode = (level: ZoneLevel) => JSON.stringify({ ...level, mode: null });
+  const same = levels.every(level => withoutMode(level) === withoutMode(levels[0]));
   return levels.length > 1 && same ? [{ ...levels[0], mode: null }] : levels;
 };
 
