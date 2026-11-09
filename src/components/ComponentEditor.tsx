@@ -91,7 +91,8 @@ function ItemOption({ item, onEquip }: { item: Item; onEquip: (item: Item) => vo
       </span>
       {stats && (
         <span className="item-option-stats">
-          <span>{formatNumber(stats.damage)} dmg</span>
+          {/* Daño por disparo y, entre paréntesis, el DPS nominal (daño × disparos por minuto / 60). */}
+          <span>{formatNumber(stats.damage)} dmg{stats.dps > 0 && <small> ({formatNumber(stats.dps)} dps)</small>}</span>
           <span>{formatNumber(stats.heat)} heat</span>
           <span>{stats.range !== null ? `${formatNumber(stats.range)} m` : '—'}</span>
         </span>

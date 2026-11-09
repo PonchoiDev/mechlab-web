@@ -1401,6 +1401,11 @@ button.hardpoint-chip:hover { background: #2c342c; }
   text-align: right;
 }
 
+.item-option-stats small {
+  color: var(--work-muted);
+  font-size: 10px;
+}
+
 .item-option-spec {
   flex-shrink: 0;
   color: var(--work-muted);

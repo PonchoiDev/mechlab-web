@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-09-weapon-dps',
+    date: '2026-11-09',
+    title: 'DPS in the weapon list',
+    items: [
+      'The MechLab weapon list shows each weapon\'s nominal DPS next to its damage, so fast firing weapons like the X Pulse lasers are easier to compare'
+    ]
+  },
+  {
     id: '2026-11-09-mobile-fixes',
     date: '2026-11-09',
     title: 'Better on mobile',
