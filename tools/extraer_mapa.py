@@ -520,9 +520,9 @@ def extraer_arenas(pak):
         "puntos": campo_de_fila(fila, "PointsRequired"),
         **recompensa_de_objetivo({"ObjectiveReward": campo_de_fila(fila, "Rewards")}),
     } for fila in tabla.filas(tabla.principal()).values()]
-    incompletos = [rango for rango in rangos if rango["nivel"] is None or rango["puntos"] is None]
+    incompletos = [rango for rango in rangos if rango["nivel"] is None or rango["puntos"] is None or not rango["nombre"]]
     if incompletos:
-        raise ValueError(f"Rangos de arena sin nivel o sin puntos ({len(incompletos)}): ¿ha cambiado el formato de la tabla?")
+        raise ValueError(f"Rangos de arena sin nivel, puntos o nombre ({len(incompletos)}): ¿ha cambiado el formato de la tabla?")
     return {"sistemas": sorted(sistemas, key=lambda arena: arena["sistema"]), "rangos": sorted(rangos, key=lambda rango: rango["nivel"])}
 
 
