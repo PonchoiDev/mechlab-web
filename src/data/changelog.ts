@@ -14,7 +14,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     title: 'Better on mobile',
     items: [
       'The What\'s new panel now fits the screen on the home page and in the MechLab',
-      'On the star map, opening a panel hides the date controls so more of the map stays visible'
+      'On the star map, opening a panel hides the date controls so more of the map stays visible',
+      'The star map has its own What\'s new bell too, shared with the home page and the MechLab'
     ]
   },
   {
