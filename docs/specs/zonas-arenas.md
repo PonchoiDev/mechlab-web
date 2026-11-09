@@ -2,7 +2,7 @@
 
 - **Issue:** [#80](https://github.com/PonchoiDev/mechlab-web/issues/80)
 - **Estado:** en desarrollo
-- **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/zones.test.ts`) y por último el código, en commits separados.
+- **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/clusters.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
 
@@ -45,7 +45,7 @@ El mapa dibuja las zonas de conflicto ([mapa-estelar.md](mapa-estelar.md)) y la 
 | CA1 | Liao/Davion Border | se consulta | tiene descripción, su capital es la del juego (id 650) y en campaña repara a ×0,6 de coste y ×1 de tiempo, y en carrera a ×0,35 y ×0,6; los contratos de varias misiones son de 2 a 3 misiones, con un 30 % de probabilidad |
 | CA2 | Un punto junto a una estrella de Liao/Davion Border y otro lejos de toda zona | se busca la zona bajo el punto | el primero es Liao/Davion Border y el segundo ninguna |
 | CA3 | El centro industrial de Diboll | se consultan sus niveles | traen el coste de reparación de cada modo |
-| CA4 | Las arenas | se cargan | son 9, en Northwind, Outreach, Solaris, Galatea, Westerhand, Numenor, Torrence, Hardcore y Herotitus; Solaris tiene mercado negro, encuentros con mercenarios y variante especial |
+| CA4 | Las arenas | se cargan | son 9, en Northwind, Outreach, Solaris, Galatea, Westerhand, Numenor, Torrence, Hardcore y Herotitus; Solaris tiene mercado negro y variante especial, sin encuentros con mercenarios; Outreach tiene encuentros con mercenarios |
 | CA5 | Los rangos de fama | se cargan | son 11, de «Nobody From Nowhere» (0 puntos) a «Champion»; Rudiarius pide 975 puntos y da 2.400.000 C-Bills, el Autocannon/20 rapid-fire y el Heavy Rifle Burst Fire de tier 4 y el Arena Supercharger MK IV |
 | CA6 | La descripción de un nivel con reparación | se describe | «Repairs ×0.6 cost · ×1 time» y, para los contratos, «Multi-mission contracts: 2 to 3 missions (30%)» |
 
@@ -56,5 +56,5 @@ El mapa dibuja las zonas de conflicto ([mapa-estelar.md](mapa-estelar.md)) y la 
 
 ## Plan de pruebas
 
-1. **Datos y lógica (CA1 a CA6):** `src/utils/zones.test.ts`, con `starmap.json` real.
+1. **Datos y lógica (CA1 a CA6):** `src/utils/clusters.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: pasar el ratón por Liao/Davion Border y pulsar dentro, la ficha de Diboll, el icono de arena y la ficha de Solaris con sus rangos.

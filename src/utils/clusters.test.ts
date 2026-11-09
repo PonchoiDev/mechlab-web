@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import starmapJson from '../data/starmap.json';
 import type { StarmapData } from '../types/starmap';
 import { getClusterLevels, getHubLevels } from './starmap';
-import { describeMultiMission, describeRepair, findClusterAt, getArena, getClusterOutlines } from './zones';
+import { describeMultiMission, describeRepair, findClusterAt, getArena, getClusterOutlines } from './clusters';
 
 // Criterios de aceptación de docs/specs/zonas-arenas.md (issue #80).
 const data = starmapJson as unknown as StarmapData;
@@ -42,11 +42,12 @@ describe('ficha de las zonas de conflicto', () => {
 });
 
 describe('arenas', () => {
-  it('CA4: hay 9 sistemas con arena, y Solaris tiene mercado negro, mercenarios y variante especial', () => {
+  it('CA4: hay 9 sistemas con arena; Solaris tiene mercado negro y variante especial, y Outreach encuentros con mercenarios', () => {
     expect(data.arenas.systems.map(arena => data.systems.find(candidate => candidate.id === arena.system)?.name).sort()).toEqual(
       ['Galatea', 'Hardcore', 'Herotitus', 'Northwind', 'Numenor', 'Outreach', 'Solaris', 'Torrence', 'Westerhand']
     );
-    expect(getArena(data, system('Solaris').id)).toEqual(expect.objectContaining({ blackMarket: true, mercEncounters: true, special: true }));
+    expect(getArena(data, system('Solaris').id)).toEqual(expect.objectContaining({ blackMarket: true, mercEncounters: false, special: true }));
+    expect(getArena(data, system('Outreach').id)).toEqual(expect.objectContaining({ blackMarket: false, mercEncounters: true, special: false }));
     expect(getArena(data, system('Tharkad').id)).toBeNull();
   });
 
