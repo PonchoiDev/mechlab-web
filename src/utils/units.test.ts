@@ -102,6 +102,17 @@ describe('unidades enemigas', () => {
     const withoutSpeed = data.units.filter(candidate => candidate.kind === 'vtol' || candidate.kind === 'turret');
     expect(withoutSpeed.every(candidate => candidate.speed === null)).toBe(true);
   });
+
+  it('CA12: cada chasis enlaza su página de Sarna con su dibujo', () => {
+    const scorpions = filterUnits(data.units, { kind: 'all', query: 'scorpion' });
+    expect(scorpions.every(candidate => candidate.sarna?.page === 'https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29')).toBe(true);
+    expect(scorpions.every(candidate => candidate.sarna?.image)).toBe(true);
+    expect(unit('MRM30 Carrier').sarna?.page).toBe('https://www.sarna.net/wiki/LRM_Carrier');
+    expect(data.units.find(candidate => candidate.name.startsWith('Igor'))?.sarna).toEqual(expect.objectContaining({ image: null }));
+    expect(data.units.filter(candidate => candidate.kind === 'turret').some(candidate => candidate.sarna)).toBe(false);
+    const images = data.units.flatMap(candidate => candidate.sarna?.image ? [candidate.sarna.image] : []);
+    expect(images.every(image => image.startsWith('https://cfw.sarna.net/wiki/images/'))).toBe(true);
+  });
 });
 
 describe('vista de la lista en la URL', () => {
