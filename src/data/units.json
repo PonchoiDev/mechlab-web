@@ -1,0 +1,7529 @@
+{
+ "factions": {
+  "BlackInferno": "Black Inferno",
+  "Blackhearts": "Blackhearts",
+  "BrionsLegion": "Brion's Legion",
+  "BullheadArmor": "Bullhead Armor",
+  "ClanDiamondShark": "Clan Diamond Shark",
+  "ClanGhostBear": "Clan Ghost Bear",
+  "ClanHellsHorses": "Clan Hell's Horses",
+  "ClanJadeFalcon": "Clan Jade Falcon",
+  "ClanNovaCat": "Clan Nova Cat",
+  "ClanNovaCatAbjured": "Clan Nova Cat",
+  "ClanSmokeJaguar": "Clan Smoke Jaguar",
+  "ClanSteelViper": "Clan Steel Viper",
+  "ClanWolf": "Clan Wolf",
+  "ClanWolfInExile": "Clan Wolf-in-Exile",
+  "ComStar": "ComStar",
+  "CraterCobras": "Crater Cobras",
+  "Davion": "House Davion",
+  "EarthwerksIncorporated": "Earthwerks Incorporated",
+  "EridaniLightHorse": "Eridani Light Horse",
+  "FederatedCommonwealth": "Federated Commonwealth",
+  "FilthyLucre": "The Filthy Lucre",
+  "FreeRasalhagueRepublic": "Free Rasalhague Republic",
+  "GrayDeathLegion": "The Gray Death Legion",
+  "GreggsLongstriders": "Gregg's Long Striders",
+  "HansensRoughRiders": "Hansen's Roughriders",
+  "HarlocksWarriors": "Harlock's Warriors",
+  "HighImpactBallistics": "High Impact Ballistics",
+  "Independent": "Independents",
+  "IroncladSystems": "Ironclad Systems",
+  "JumpJetFuel": "Jump Jet Fuel",
+  "KellHounds": "Kell Hounds",
+  "Kurita": "House Kurita",
+  "LedouxEnterprises": "Ledoux Enterprises",
+  "Liao": "House Liao",
+  "LindonsCompany": "Lindons Company",
+  "LyranAlliance": "Lyran Alliance",
+  "Marik": "House Marik",
+  "Mercenaries": "Mercenaries",
+  "MobileFire": "Mobile Fire",
+  "MuscleBound": "Musclebound Myomer",
+  "NorthwindHighlanders": "Northwind Highlanders",
+  "NovaTech": "NovaTech",
+  "Outlaws": "Outlaws",
+  "Periphery": "Periphery Realms",
+  "SolarisArms": "Solaris Arms",
+  "StarfallCorp": "Starfall Corp",
+  "Steiner": "House Steiner",
+  "TheBadDream": "The Bad Dream",
+  "Thumpers": "Thumpers",
+  "TripleF": "Triple-F Restaurants",
+  "VEST": "V.E.S.T.",
+  "VanguardIndustries": "Vanguard Industries",
+  "WacoRangers": "Waco Rangers",
+  "WolfsDragoons": "Wolf's Dragoons",
+  "WordOfBlake": "Word of Blake"
+ },
+ "weapons": {
+  "ArrowIV_Vehicle": {
+   "id": "ArrowIV_Vehicle",
+   "name": "Arrow IV",
+   "type": "weapon",
+   "weaponType": "artillery",
+   "size": "large",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 20.0,
+     "heatPerShot": 20.0,
+     "cooldown": 10.0,
+     "range": 4500.0,
+     "maxRange": 4500.0,
+     "rpm": 6.0,
+     "speed": 150.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "Autocannon10_Lvl0": {
+   "name": "Autocannon/10",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 12.0,
+   "tiers": {
+    "0": {
+     "damage": 10.0,
+     "heatPerShot": 3.9,
+     "cooldown": 3.6,
+     "range": 360.0,
+     "maxRange": 360.0,
+     "rpm": 16.7,
+     "speed": 480.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10",
+   "ammoPerVolley": 1,
+   "id": "Autocannon10_Lvl0",
+   "tier": "0"
+  },
+  "Autocannon10_Turret": {
+   "id": "Autocannon10_Turret",
+   "name": "Autocannon/10",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 10.0,
+     "heatPerShot": 2.25,
+     "cooldown": 3.0,
+     "range": 450.0,
+     "maxRange": 900.0,
+     "rpm": 20.0,
+     "speed": 600.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "Autocannon20": {
+   "name": "Autocannon/20",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "large",
+   "tonnage": 14.0,
+   "tiers": {
+    "1": {
+     "damage": 20.0,
+     "heatPerShot": 6.0,
+     "cooldown": 4.8,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 12.5,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20",
+   "ammoPerVolley": 1,
+   "id": "Autocannon20",
+   "tier": "1"
+  },
+  "Autocannon20_Demolisher": {
+   "id": "Autocannon20_Demolisher",
+   "name": "Autocannon/20",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "large",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 20.0,
+     "heatPerShot": 6.0,
+     "cooldown": 9.6,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 6.2,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "Autocannon2_Burst": {
+   "name": "Autocannon/2 Burst Fire",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 6.0,
+   "tiers": {
+    "1": {
+     "damage": 0.6,
+     "heatPerShot": 0.09,
+     "cooldown": 0.502,
+     "range": 720.0,
+     "maxRange": 720.0,
+     "rpm": 119.5,
+     "speed": 1200.0
+    }
+   },
+   "volleyProjectiles": 4,
+   "volleyHeatShots": 4,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2",
+   "ammoPerVolley": 1,
+   "id": "Autocannon2_Burst",
+   "tier": "1"
+  },
+  "Autocannon2_Lvl0": {
+   "name": "Autocannon/2",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 6.0,
+   "tiers": {
+    "0": {
+     "damage": 2.0,
+     "heatPerShot": 0.52,
+     "cooldown": 0.72,
+     "range": 576.0,
+     "maxRange": 576.0,
+     "rpm": 83.3,
+     "speed": 960.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2",
+   "ammoPerVolley": 1,
+   "id": "Autocannon2_Lvl0",
+   "tier": "0"
+  },
+  "Autocannon2_Turret": {
+   "id": "Autocannon2_Turret",
+   "name": "Autocannon/2",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 2.0,
+     "heatPerShot": 0.4,
+     "cooldown": 1.0,
+     "range": 620.0,
+     "maxRange": 1240.0,
+     "rpm": 60.0,
+     "speed": 1200.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "Autocannon2_VTOL": {
+   "id": "Autocannon2_VTOL",
+   "name": "Autocannon/2",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 2.0,
+     "heatPerShot": 0.4,
+     "cooldown": 1.0,
+     "range": 620.0,
+     "maxRange": 1240.0,
+     "rpm": 60.0,
+     "speed": 1200.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "Autocannon5": {
+   "name": "Autocannon/5",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 8.0,
+   "tiers": {
+    "1": {
+     "damage": 5.0,
+     "heatPerShot": 0.5,
+     "cooldown": 1.5,
+     "range": 620.0,
+     "maxRange": 620.0,
+     "rpm": 40.0,
+     "speed": 950.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5",
+   "ammoPerVolley": 1,
+   "id": "Autocannon5",
+   "tier": "1"
+  },
+  "Autocannon5_Burst": {
+   "name": "Autocannon/5 Burst Fire",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 8.0,
+   "tiers": {
+    "1": {
+     "damage": 2.0,
+     "heatPerShot": 0.16,
+     "cooldown": 1.24,
+     "range": 620.0,
+     "maxRange": 620.0,
+     "rpm": 48.4,
+     "speed": 1100.0
+    }
+   },
+   "volleyProjectiles": 3,
+   "volleyHeatShots": 3,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5",
+   "ammoPerVolley": 1,
+   "id": "Autocannon5_Burst",
+   "tier": "1"
+  },
+  "Autocannon5_Scorpion": {
+   "id": "Autocannon5_Scorpion",
+   "name": "Autocannon/5",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 5.0,
+     "heatPerShot": 0.75,
+     "cooldown": 2.0,
+     "range": 620.0,
+     "maxRange": 1240.0,
+     "rpm": 30.0,
+     "speed": 950.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "C-ATM3": {
+   "name": "Clan ATM 3",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.5,
+   "tiers": {
+    "1": {
+     "damage": 4.2,
+     "heatPerShot": 0.375,
+     "cooldown": 2.887,
+     "range": 337.5,
+     "maxRange": 1375.0,
+     "rpm": 20.8,
+     "speed": 350.0
+    }
+   },
+   "volleyProjectiles": 3,
+   "volleyHeatShots": 3,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Missile.ATM",
+   "ammoPerVolley": 3,
+   "id": "C-ATM3",
+   "tier": "1"
+  },
+  "C-ERLargeLaser": {
+   "name": "Clan ER Large Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "medium",
+   "tonnage": 4.0,
+   "tiers": {
+    "1": {
+     "damage": 15.6,
+     "heatPerShot": 7.875,
+     "cooldown": 4.037,
+     "range": 1012.5,
+     "maxRange": 1518.8,
+     "rpm": 14.9
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "id": "C-ERLargeLaser",
+   "tier": "1"
+  },
+  "C-ERMediumLaser": {
+   "name": "Clan Extended Range Medium Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "medium",
+   "tonnage": 1.0,
+   "tiers": {
+    "1": {
+     "damage": 9.1,
+     "heatPerShot": 4.125,
+     "cooldown": 3.825,
+     "range": 562.5,
+     "maxRange": 843.8,
+     "rpm": 15.7
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "id": "C-ERMediumLaser",
+   "tier": "1"
+  },
+  "C-ERMediumLaser_Elemental": {
+   "id": "C-ERMediumLaser_Elemental",
+   "name": "Clan Extended Range Medium Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "medium",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 7.0,
+     "heatPerShot": 5.5,
+     "cooldown": 4.5,
+     "range": 450.0,
+     "maxRange": 675.0,
+     "rpm": 13.3
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "Clan"
+  },
+  "C-ERPPC": {
+   "name": "Clan ER PPC",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "large",
+   "tonnage": 6.0,
+   "tiers": {
+    "1": {
+     "damage": 19.5,
+     "heatPerShot": 10.075,
+     "cooldown": 3.75,
+     "range": 1012.5,
+     "maxRange": 2025.0,
+     "rpm": 16.0,
+     "speed": 2057.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "id": "C-ERPPC",
+   "tier": "1"
+  },
+  "C-ERSmallLaser_Elemental": {
+   "id": "C-ERSmallLaser_Elemental",
+   "name": "Clan Extended Range Small Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "small",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 5.0,
+     "heatPerShot": 1.75,
+     "cooldown": 2.75,
+     "range": 300.0,
+     "maxRange": 450.0,
+     "rpm": 21.8
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "Clan"
+  },
+  "C-GaussRifle": {
+   "name": "Clan Gauss Rifle",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 12.0,
+   "tiers": {
+    "1": {
+     "damage": 21.0,
+     "heatPerShot": 0.775,
+     "cooldown": 4.5,
+     "range": 825.0,
+     "maxRange": 825.0,
+     "rpm": 13.3,
+     "speed": 2500.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.Gauss.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-GaussRifle",
+   "tier": "1"
+  },
+  "C-HeavyMachineGun": {
+   "name": "Clan Heavy Machine Gun",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 0.5,
+   "tiers": {
+    "1": {
+     "damage": 4.0,
+     "heatPerShot": 0.0,
+     "cooldown": 0.1,
+     "range": 192.0,
+     "maxRange": 384.0,
+     "rpm": 600.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-HeavyMachineGun",
+   "tier": "1"
+  },
+  "C-LBXAutocannon10": {
+   "name": "C-LB 10-X Autocannon",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 10.0,
+   "tiers": {
+    "1": {
+     "damage": 1.3,
+     "heatPerShot": 1.008,
+     "cooldown": 1.35,
+     "range": 675.0,
+     "maxRange": 675.0,
+     "rpm": 44.4,
+     "speed": 1125.0
+    }
+   },
+   "volleyProjectiles": 13,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-LBXAutocannon10",
+   "tier": "1"
+  },
+  "C-LBXAutocannon2": {
+   "name": "C-LB 2-X Autocannon",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 5.0,
+   "tiers": {
+    "1": {
+     "damage": 1.3,
+     "heatPerShot": 0.232,
+     "cooldown": 0.375,
+     "range": 1125.0,
+     "maxRange": 1125.0,
+     "rpm": 160.0,
+     "speed": 2125.0
+    }
+   },
+   "volleyProjectiles": 3,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-LBXAutocannon2",
+   "tier": "1"
+  },
+  "C-LBXAutocannon20": {
+   "name": "C-LB 20-X Autocannon",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "large",
+   "tonnage": 12.0,
+   "tiers": {
+    "1": {
+     "damage": 1.3,
+     "heatPerShot": 3.255,
+     "cooldown": 2.25,
+     "range": 450.0,
+     "maxRange": 450.0,
+     "rpm": 26.7,
+     "speed": 1000.0
+    }
+   },
+   "volleyProjectiles": 25,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-LBXAutocannon20",
+   "tier": "1"
+  },
+  "C-LBXAutocannon2_Slug_Burst": {
+   "name": "C-LB 2-X Autocannon Slug Burst",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 5.0,
+   "tiers": {
+    "1": {
+     "damage": 0.78,
+     "heatPerShot": 0.058,
+     "cooldown": 0.45,
+     "range": 1125.0,
+     "maxRange": 1125.0,
+     "rpm": 133.3,
+     "speed": 2250.0
+    }
+   },
+   "volleyProjectiles": 4,
+   "volleyHeatShots": 4,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-LBXAutocannon2_Slug_Burst",
+   "tier": "1"
+  },
+  "C-LBXAutocannon5": {
+   "name": "C-LB 5-X Autocannon",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 7.0,
+   "tiers": {
+    "1": {
+     "damage": 1.3,
+     "heatPerShot": 0.31,
+     "cooldown": 0.675,
+     "range": 900.0,
+     "maxRange": 900.0,
+     "rpm": 88.9,
+     "speed": 1750.0
+    }
+   },
+   "volleyProjectiles": 7,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-LBXAutocannon5",
+   "tier": "1"
+  },
+  "C-LRM10": {
+   "name": "Clan LRM 10",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 2.5,
+   "tiers": {
+    "1": {
+     "damage": 1.68,
+     "heatPerShot": 0.27,
+     "cooldown": 3.094,
+     "range": 1125.0,
+     "maxRange": 1125.0,
+     "rpm": 19.4,
+     "speed": 315.0
+    }
+   },
+   "volleyProjectiles": 10,
+   "volleyHeatShots": 10,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Missile.LRM.Clan",
+   "ammoPerVolley": 10,
+   "id": "C-LRM10",
+   "tier": "1"
+  },
+  "C-LRM5": {
+   "name": "Clan LRM 5",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.0,
+   "tiers": {
+    "1": {
+     "damage": 1.68,
+     "heatPerShot": 0.27,
+     "cooldown": 3.3,
+     "range": 1125.0,
+     "maxRange": 1125.0,
+     "rpm": 18.2,
+     "speed": 315.0
+    }
+   },
+   "volleyProjectiles": 5,
+   "volleyHeatShots": 5,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Missile.LRM.Clan",
+   "ammoPerVolley": 5,
+   "id": "C-LRM5",
+   "tier": "1"
+  },
+  "C-LRM5_Artemis": {
+   "name": "Clan LRM 5 + Artemis IV",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 2.0,
+   "tiers": {
+    "1": {
+     "damage": 1.68,
+     "heatPerShot": 0.27,
+     "cooldown": 3.3,
+     "range": 1125.0,
+     "maxRange": 1125.0,
+     "rpm": 18.2,
+     "speed": 315.0
+    }
+   },
+   "volleyProjectiles": 5,
+   "volleyHeatShots": 5,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Missile.LRM.Artemis.Clan",
+   "ammoPerVolley": 5,
+   "id": "C-LRM5_Artemis",
+   "tier": "1"
+  },
+  "C-MachineGun": {
+   "name": "Clan Machine Gun",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 0.25,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.0,
+     "cooldown": 0.1,
+     "range": 240.0,
+     "maxRange": 480.0,
+     "rpm": 600.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.MachineGun.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-MachineGun",
+   "tier": "1"
+  },
+  "C-MediumPulseLaser": {
+   "name": "Clan Medium Pulse Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "medium",
+   "tonnage": 2.0,
+   "tiers": {
+    "1": {
+     "damage": 10.4,
+     "heatPerShot": 2.25,
+     "cooldown": 2.55,
+     "range": 450.0,
+     "maxRange": 675.0,
+     "rpm": 23.5
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "Clan",
+   "id": "C-MediumPulseLaser",
+   "tier": "1"
+  },
+  "C-SRM2_Elemental": {
+   "id": "C-SRM2_Elemental",
+   "name": "Clan SRM 2",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.9,
+     "cooldown": 20.0,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 3.0,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 2,
+   "volleyHeatShots": 2,
+   "tier": "1",
+   "techBase": "Clan"
+  },
+  "C-SRM6": {
+   "name": "Clan SRM 6",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.5,
+   "tiers": {
+    "1": {
+     "damage": 3.36,
+     "heatPerShot": 0.45,
+     "cooldown": 2.55,
+     "range": 337.5,
+     "maxRange": 337.5,
+     "rpm": 23.5,
+     "speed": 500.0
+    }
+   },
+   "volleyProjectiles": 6,
+   "volleyHeatShots": 6,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Missile.SRM.Clan",
+   "ammoPerVolley": 6,
+   "id": "C-SRM6",
+   "tier": "1"
+  },
+  "C-StreakSRM2": {
+   "name": "Clan Streak SRM 2",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.0,
+   "tiers": {
+    "1": {
+     "damage": 3.36,
+     "heatPerShot": 0.675,
+     "cooldown": 1.8,
+     "range": 450.0,
+     "maxRange": 450.0,
+     "rpm": 33.3,
+     "speed": 500.0
+    }
+   },
+   "volleyProjectiles": 2,
+   "volleyHeatShots": 2,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Missile.SRM.Streak.Clan",
+   "ammoPerVolley": 2,
+   "id": "C-StreakSRM2",
+   "tier": "1"
+  },
+  "C-StreakSRM6": {
+   "name": "Clan Streak SRM 6",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "medium",
+   "tonnage": 3.0,
+   "tiers": {
+    "1": {
+     "damage": 3.36,
+     "heatPerShot": 0.675,
+     "cooldown": 1.98,
+     "range": 450.0,
+     "maxRange": 450.0,
+     "rpm": 30.3,
+     "speed": 560.0
+    }
+   },
+   "volleyProjectiles": 6,
+   "volleyHeatShots": 6,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Missile.SRM.Streak.Clan",
+   "ammoPerVolley": 6,
+   "id": "C-StreakSRM6",
+   "tier": "1"
+  },
+  "C-UltraAutocannon10_BurstFire": {
+   "name": "C-Ultra Autocannon 10 Burst Fire",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 10.0,
+   "tiers": {
+    "1": {
+     "damage": 1.98,
+     "heatPerShot": 0.291,
+     "cooldown": 1.8,
+     "range": 675.0,
+     "maxRange": 675.0,
+     "rpm": 33.3,
+     "speed": 1125.0
+    }
+   },
+   "volleyProjectiles": 8,
+   "volleyHeatShots": 8,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-UltraAutocannon10_BurstFire",
+   "tier": "1"
+  },
+  "C-UltraAutocannon2": {
+   "name": "C-Ultra Autocannon/2 Burst Fire",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 5.0,
+   "tiers": {
+    "1": {
+     "damage": 0.78,
+     "heatPerShot": 0.07,
+     "cooldown": 0.45,
+     "range": 1012.5,
+     "maxRange": 1012.5,
+     "rpm": 133.3,
+     "speed": 2125.0
+    }
+   },
+   "volleyProjectiles": 4,
+   "volleyHeatShots": 4,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-UltraAutocannon2",
+   "tier": "1"
+  },
+  "C-UltraAutocannon5": {
+   "name": "C-Ultra Autocannon/5 Burst",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 7.0,
+   "tiers": {
+    "1": {
+     "damage": 1.98,
+     "heatPerShot": 0.136,
+     "cooldown": 0.788,
+     "range": 787.5,
+     "maxRange": 787.5,
+     "rpm": 76.1,
+     "speed": 1750.0
+    }
+   },
+   "volleyProjectiles": 4,
+   "volleyHeatShots": 4,
+   "techBase": "Clan",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan",
+   "ammoPerVolley": 1,
+   "id": "C-UltraAutocannon5",
+   "tier": "1"
+  },
+  "ERMediumLaser": {
+   "name": "Extended Range Medium Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "medium",
+   "tonnage": 1.0,
+   "tiers": {
+    "1": {
+     "damage": 5.0,
+     "heatPerShot": 5.0,
+     "cooldown": 4.0,
+     "range": 360.0,
+     "maxRange": 540.0,
+     "rpm": 15.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "id": "ERMediumLaser",
+   "tier": "1"
+  },
+  "Flamer": {
+   "name": "Flamer",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "small",
+   "tonnage": 1.0,
+   "tiers": {
+    "1": {
+     "damage": 2.0,
+     "heatPerShot": 0.4,
+     "cooldown": 0.1,
+     "range": 90.0,
+     "maxRange": 90.0,
+     "rpm": 600.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "id": "Flamer",
+   "tier": "1"
+  },
+  "GaussRifle": {
+   "name": "Gauss Rifle",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "large",
+   "tonnage": 15.0,
+   "tiers": {
+    "1": {
+     "damage": 15.0,
+     "heatPerShot": 1.0,
+     "cooldown": 6.0,
+     "range": 660.0,
+     "maxRange": 660.0,
+     "rpm": 10.0,
+     "speed": 2000.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "LosTech",
+   "ammoType": "Ammo.Ballistic.Gauss.Standard",
+   "ammoPerVolley": 1,
+   "id": "GaussRifle",
+   "tier": "1"
+  },
+  "HeavyRifle_Burst": {
+   "name": "Heavy Rifle Burst Fire",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 8.0,
+   "tiers": {
+    "1": {
+     "damage": 7.0,
+     "heatPerShot": 3.0,
+     "cooldown": 10.0,
+     "range": 660.0,
+     "maxRange": 660.0,
+     "rpm": 6.0,
+     "speed": 1200.0
+    }
+   },
+   "volleyProjectiles": 3,
+   "volleyHeatShots": 3,
+   "techBase": "Retro",
+   "ammoType": "Ammo.Ballistic.Rifle.Heavy",
+   "ammoPerVolley": 1,
+   "id": "HeavyRifle_Burst",
+   "tier": "1"
+  },
+  "LBXAutocannon20": {
+   "name": "LB 20-X Autocannon",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "large",
+   "tonnage": 14.0,
+   "tiers": {
+    "1": {
+     "damage": 5.0,
+     "heatPerShot": 4.2,
+     "cooldown": 3.0,
+     "range": 360.0,
+     "maxRange": 360.0,
+     "rpm": 20.0,
+     "speed": 600.0
+    }
+   },
+   "volleyProjectiles": 5,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20",
+   "ammoPerVolley": 1,
+   "id": "LBXAutocannon20",
+   "tier": "1"
+  },
+  "LRM10": {
+   "name": "LRM 10",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "medium",
+   "tonnage": 5.0,
+   "tiers": {
+    "1": {
+     "damage": 1.2,
+     "heatPerShot": 0.36,
+     "cooldown": 4.0,
+     "range": 900.0,
+     "maxRange": 900.0,
+     "rpm": 15.0,
+     "speed": 200.0
+    }
+   },
+   "volleyProjectiles": 10,
+   "volleyHeatShots": 10,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.LRM",
+   "ammoPerVolley": 10,
+   "id": "LRM10",
+   "tier": "1"
+  },
+  "LRM10_Artemis_Stream": {
+   "name": "LRM 10 Stream + Artemis IV",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "medium",
+   "tonnage": 6.0,
+   "tiers": {
+    "1": {
+     "damage": 1.2,
+     "heatPerShot": 0.36,
+     "cooldown": 4.0,
+     "range": 900.0,
+     "maxRange": 900.0,
+     "rpm": 15.0,
+     "speed": 200.0
+    }
+   },
+   "volleyProjectiles": 10,
+   "volleyHeatShots": 10,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.LRM.Artemis",
+   "ammoPerVolley": 10,
+   "id": "LRM10_Artemis_Stream",
+   "tier": "1"
+  },
+  "LRM10_LRMCarrier": {
+   "id": "LRM10_LRMCarrier",
+   "name": "LRM 10",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "medium",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 1.2,
+     "heatPerShot": 0.36,
+     "cooldown": 12.0,
+     "range": 900.0,
+     "maxRange": 900.0,
+     "rpm": 5.0,
+     "speed": 200.0
+    }
+   },
+   "volleyProjectiles": 10,
+   "volleyHeatShots": 10,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "LRM10_Stream": {
+   "name": "LRM 10 Stream",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "medium",
+   "tonnage": 5.0,
+   "tiers": {
+    "1": {
+     "damage": 1.2,
+     "heatPerShot": 0.36,
+     "cooldown": 4.0,
+     "range": 900.0,
+     "maxRange": 900.0,
+     "rpm": 15.0,
+     "speed": 200.0
+    }
+   },
+   "volleyProjectiles": 10,
+   "volleyHeatShots": 10,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.LRM",
+   "ammoPerVolley": 10,
+   "id": "LRM10_Stream",
+   "tier": "1"
+  },
+  "LRM15_Artemis_Stream": {
+   "name": "LRM 15 Stream + Artemis IV",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "large",
+   "tonnage": 8.0,
+   "tiers": {
+    "1": {
+     "damage": 1.2,
+     "heatPerShot": 0.3,
+     "cooldown": 4.0,
+     "range": 900.0,
+     "maxRange": 900.0,
+     "rpm": 15.0,
+     "speed": 200.0
+    }
+   },
+   "volleyProjectiles": 15,
+   "volleyHeatShots": 15,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.LRM.Artemis",
+   "ammoPerVolley": 15,
+   "id": "LRM15_Artemis_Stream",
+   "tier": "1"
+  },
+  "LRM20": {
+   "name": "LRM 20",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "large",
+   "tonnage": 10.0,
+   "tiers": {
+    "1": {
+     "damage": 1.2,
+     "heatPerShot": 0.27,
+     "cooldown": 4.0,
+     "range": 900.0,
+     "maxRange": 900.0,
+     "rpm": 15.0,
+     "speed": 200.0
+    }
+   },
+   "volleyProjectiles": 20,
+   "volleyHeatShots": 20,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.LRM",
+   "ammoPerVolley": 20,
+   "id": "LRM20",
+   "tier": "1"
+  },
+  "LRM20_Stream": {
+   "name": "LRM 20 Stream",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "large",
+   "tonnage": 10.0,
+   "tiers": {
+    "1": {
+     "damage": 1.2,
+     "heatPerShot": 0.27,
+     "cooldown": 4.0,
+     "range": 900.0,
+     "maxRange": 900.0,
+     "rpm": 15.0,
+     "speed": 200.0
+    }
+   },
+   "volleyProjectiles": 20,
+   "volleyHeatShots": 20,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.LRM",
+   "ammoPerVolley": 20,
+   "id": "LRM20_Stream",
+   "tier": "1"
+  },
+  "LRM5": {
+   "name": "LRM 5",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 2.0,
+   "tiers": {
+    "1": {
+     "damage": 1.2,
+     "heatPerShot": 0.36,
+     "cooldown": 4.0,
+     "range": 900.0,
+     "maxRange": 900.0,
+     "rpm": 15.0,
+     "speed": 200.0
+    }
+   },
+   "volleyProjectiles": 5,
+   "volleyHeatShots": 5,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.LRM",
+   "ammoPerVolley": 5,
+   "id": "LRM5",
+   "tier": "1"
+  },
+  "LRM5_Stream_Lvl0": {
+   "name": "LRM 5 Stream",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 2.0,
+   "tiers": {
+    "0": {
+     "damage": 1.2,
+     "heatPerShot": 0.432,
+     "cooldown": 4.4,
+     "range": 720.0,
+     "maxRange": 720.0,
+     "rpm": 13.6,
+     "speed": 160.0
+    }
+   },
+   "volleyProjectiles": 5,
+   "volleyHeatShots": 5,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.LRM",
+   "ammoPerVolley": 5,
+   "id": "LRM5_Stream_Lvl0",
+   "tier": "0"
+  },
+  "LargeLaser": {
+   "name": "Large Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "large",
+   "tonnage": 5.0,
+   "tiers": {
+    "1": {
+     "damage": 10.0,
+     "heatPerShot": 7.5,
+     "cooldown": 5.25,
+     "range": 450.0,
+     "maxRange": 675.0,
+     "rpm": 11.4
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "id": "LargeLaser",
+   "tier": "1"
+  },
+  "LargeLaser_Turret": {
+   "id": "LargeLaser_Turret",
+   "name": "Large Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "large",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 6.0,
+     "heatPerShot": 6.0,
+     "cooldown": 6.0,
+     "range": 450.0,
+     "maxRange": 450.0,
+     "rpm": 10.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "LargePulseLaser": {
+   "name": "Large Pulse Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "large",
+   "tonnage": 7.0,
+   "tiers": {
+    "1": {
+     "damage": 12.0,
+     "heatPerShot": 6.5,
+     "cooldown": 4.5,
+     "range": 365.0,
+     "maxRange": 547.5,
+     "rpm": 13.3
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "LosTech",
+   "id": "LargePulseLaser",
+   "tier": "1"
+  },
+  "LightAutocannon2": {
+   "name": "Light Autocannon/2",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 4.0,
+   "tiers": {
+    "1": {
+     "damage": 2.0,
+     "heatPerShot": 0.5,
+     "cooldown": 0.68,
+     "range": 540.0,
+     "maxRange": 540.0,
+     "rpm": 88.2,
+     "speed": 950.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC2",
+   "ammoPerVolley": 1,
+   "id": "LightAutocannon2",
+   "tier": "1"
+  },
+  "LightGaussRifle": {
+   "name": "Light Gauss Rifle",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 12.0,
+   "tiers": {
+    "1": {
+     "damage": 8.0,
+     "heatPerShot": 1.0,
+     "cooldown": 3.0,
+     "range": 510.0,
+     "maxRange": 750.0,
+     "rpm": 20.0,
+     "speed": 2200.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.Gauss.Light",
+   "ammoPerVolley": 1,
+   "id": "LightGaussRifle",
+   "tier": "1"
+  },
+  "MRM10": {
+   "name": "MRM 10",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 3.0,
+   "tiers": {
+    "1": {
+     "damage": 1.2,
+     "heatPerShot": 0.35,
+     "cooldown": 3.9,
+     "range": 550.0,
+     "maxRange": 550.0,
+     "rpm": 15.4,
+     "speed": 500.0
+    }
+   },
+   "volleyProjectiles": 10,
+   "volleyHeatShots": 10,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.MRM",
+   "ammoPerVolley": 10,
+   "id": "MRM10",
+   "tier": "1"
+  },
+  "MRM30_Vehicle": {
+   "id": "MRM30_Vehicle",
+   "name": "MRM 30",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "large",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 1.0,
+     "heatPerShot": 0.26,
+     "cooldown": 4.3,
+     "range": 550.0,
+     "maxRange": 550.0,
+     "rpm": 14.0,
+     "speed": 500.0
+    }
+   },
+   "volleyProjectiles": 30,
+   "volleyHeatShots": 30,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "MachineGun": {
+   "name": "Machine Gun",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "small",
+   "tonnage": 0.5,
+   "tiers": {
+    "1": {
+     "damage": 1.5,
+     "heatPerShot": 0.0,
+     "cooldown": 0.1,
+     "range": 130.0,
+     "maxRange": 130.0,
+     "rpm": 600.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.MachineGun.Standard",
+   "ammoPerVolley": 1,
+   "id": "MachineGun",
+   "tier": "1"
+  },
+  "MediumLaser": {
+   "name": "Medium Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "medium",
+   "tonnage": 1.0,
+   "tiers": {
+    "1": {
+     "damage": 5.0,
+     "heatPerShot": 2.25,
+     "cooldown": 4.0,
+     "range": 270.0,
+     "maxRange": 405.0,
+     "rpm": 15.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "id": "MediumLaser",
+   "tier": "1"
+  },
+  "MediumPulseLaser": {
+   "name": "Medium Pulse Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "medium",
+   "tonnage": 2.0,
+   "tiers": {
+    "1": {
+     "damage": 6.0,
+     "heatPerShot": 2.6,
+     "cooldown": 3.25,
+     "range": 220.0,
+     "maxRange": 330.0,
+     "rpm": 18.5
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "LosTech",
+   "id": "MediumPulseLaser",
+   "tier": "1"
+  },
+  "PPC": {
+   "name": "PPC",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "large",
+   "tonnage": 7.0,
+   "tiers": {
+    "1": {
+     "damage": 10.0,
+     "heatPerShot": 8.0,
+     "cooldown": 5.0,
+     "range": 460.0,
+     "maxRange": 920.0,
+     "rpm": 12.0,
+     "speed": 1040.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "id": "PPC",
+   "tier": "1"
+  },
+  "PPC_Tank": {
+   "id": "PPC_Tank",
+   "name": "PPC",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "large",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 10.0,
+     "heatPerShot": 8.0,
+     "cooldown": 5.0,
+     "range": 460.0,
+     "maxRange": 920.0,
+     "rpm": 12.0,
+     "speed": 1040.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "SRM10_SRMCarrier": {
+   "id": "SRM10_SRMCarrier",
+   "name": "SRM 10",
+   "type": "weapon",
+   "weaponType": null,
+   "size": "small",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.6,
+     "cooldown": 7.0,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 8.6,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 10,
+   "volleyHeatShots": 10,
+   "tier": "1"
+  },
+  "SRM2": {
+   "name": "SRM 2",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.9,
+     "cooldown": 2.8,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 21.4,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 2,
+   "volleyHeatShots": 2,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM",
+   "ammoPerVolley": 2,
+   "id": "SRM2",
+   "tier": "1"
+  },
+  "SRM2_Inferno": {
+   "name": "SRM 2 Inferno",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.0,
+   "tiers": {
+    "1": {
+     "damage": 1.8,
+     "heatPerShot": 0.75,
+     "cooldown": 2.8,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 21.4,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 2,
+   "volleyHeatShots": 2,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM",
+   "ammoPerVolley": 2,
+   "id": "SRM2_Inferno",
+   "tier": "1"
+  },
+  "SRM2_Lvl0": {
+   "name": "SRM 2",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.0,
+   "tiers": {
+    "0": {
+     "damage": 2.4,
+     "heatPerShot": 1.08,
+     "cooldown": 3.08,
+     "range": 216.0,
+     "maxRange": 216.0,
+     "rpm": 19.5,
+     "speed": 320.0
+    }
+   },
+   "volleyProjectiles": 2,
+   "volleyHeatShots": 2,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM",
+   "ammoPerVolley": 2,
+   "id": "SRM2_Lvl0",
+   "tier": "0"
+  },
+  "SRM2_Stream": {
+   "name": "SRM 2 Stream",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.9,
+     "cooldown": 2.28,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 26.3,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 2,
+   "volleyHeatShots": 2,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM",
+   "ammoPerVolley": 2,
+   "id": "SRM2_Stream",
+   "tier": "1"
+  },
+  "SRM2_VTOL": {
+   "id": "SRM2_VTOL",
+   "name": "SRM 2",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.9,
+     "cooldown": 2.4,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 25.0,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 2,
+   "volleyHeatShots": 2,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "SRM4": {
+   "name": "SRM 4",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 2.0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.675,
+     "cooldown": 3.4,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 17.6,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 4,
+   "volleyHeatShots": 4,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM",
+   "ammoPerVolley": 4,
+   "id": "SRM4",
+   "tier": "1"
+  },
+  "SRM4_Artemis": {
+   "name": "SRM 4 + Artemis IV",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 3.0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.675,
+     "cooldown": 3.4,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 17.6,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 4,
+   "volleyHeatShots": 4,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM.Artemis",
+   "ammoPerVolley": 4,
+   "id": "SRM4_Artemis",
+   "tier": "1"
+  },
+  "SRM6": {
+   "name": "SRM 6",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "medium",
+   "tonnage": 3.0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.6,
+     "cooldown": 3.4,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 17.6,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 6,
+   "volleyHeatShots": 6,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM",
+   "ammoPerVolley": 6,
+   "id": "SRM6",
+   "tier": "1"
+  },
+  "SRM6_Artemis_Stream": {
+   "name": "SRM 6 Stream + Artemis IV",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "medium",
+   "tonnage": 4.0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.6,
+     "cooldown": 2.05,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 29.3,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 6,
+   "volleyHeatShots": 6,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM.Artemis",
+   "ammoPerVolley": 6,
+   "id": "SRM6_Artemis_Stream",
+   "tier": "1"
+  },
+  "SRM6_Lvl0": {
+   "name": "SRM 6",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "medium",
+   "tonnage": 3.0,
+   "tiers": {
+    "0": {
+     "damage": 2.4,
+     "heatPerShot": 0.72,
+     "cooldown": 3.74,
+     "range": 216.0,
+     "maxRange": 216.0,
+     "rpm": 16.0,
+     "speed": 320.0
+    }
+   },
+   "volleyProjectiles": 6,
+   "volleyHeatShots": 6,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM",
+   "ammoPerVolley": 6,
+   "id": "SRM6_Lvl0",
+   "tier": "0"
+  },
+  "SRM6_Turret": {
+   "id": "SRM6_Turret",
+   "name": "SRM 6",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "medium",
+   "tonnage": 0,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.6,
+     "cooldown": 3.4,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 17.6,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 6,
+   "volleyHeatShots": 6,
+   "tier": "1",
+   "techBase": "InnerSphere"
+  },
+  "SmallLaser": {
+   "name": "Small Laser",
+   "type": "weapon",
+   "weaponType": "energy",
+   "size": "small",
+   "tonnage": 0.5,
+   "tiers": {
+    "1": {
+     "damage": 3.0,
+     "heatPerShot": 0.75,
+     "cooldown": 2.25,
+     "range": 150.0,
+     "maxRange": 225.0,
+     "rpm": 26.7
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "id": "SmallLaser",
+   "tier": "1"
+  },
+  "StreakSRM2": {
+   "name": "Streak SRM 2",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.5,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.9,
+     "cooldown": 2.0,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 30.0,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 2,
+   "volleyHeatShots": 2,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM.Streak",
+   "ammoPerVolley": 2,
+   "id": "StreakSRM2",
+   "tier": "1"
+  },
+  "StreakSRM2_Stream": {
+   "name": "Streak SRM 2 Stream",
+   "type": "weapon",
+   "weaponType": "missile",
+   "size": "small",
+   "tonnage": 1.5,
+   "tiers": {
+    "1": {
+     "damage": 2.4,
+     "heatPerShot": 0.9,
+     "cooldown": 1.8,
+     "range": 270.0,
+     "maxRange": 270.0,
+     "rpm": 33.3,
+     "speed": 400.0
+    }
+   },
+   "volleyProjectiles": 2,
+   "volleyHeatShots": 2,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Missile.SRM.Streak",
+   "ammoPerVolley": 2,
+   "id": "StreakSRM2_Stream",
+   "tier": "1"
+  },
+  "UltraAutocannon10_Single": {
+   "name": "Ultra Autocannon 10",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "medium",
+   "tonnage": 13.0,
+   "tiers": {
+    "1": {
+     "damage": 10.0,
+     "heatPerShot": 3.0,
+     "cooldown": 4.0,
+     "range": 540.0,
+     "maxRange": 540.0,
+     "rpm": 15.0,
+     "speed": 800.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10",
+   "ammoPerVolley": 1,
+   "id": "UltraAutocannon10_Single",
+   "tier": "1"
+  },
+  "UltraAutocannon20_Single": {
+   "name": "Ultra Autocannon 20",
+   "type": "weapon",
+   "weaponType": "ballistic",
+   "size": "large",
+   "tonnage": 15.0,
+   "tiers": {
+    "1": {
+     "damage": 20.0,
+     "heatPerShot": 6.0,
+     "cooldown": 5.0,
+     "range": 360.0,
+     "maxRange": 360.0,
+     "rpm": 12.0,
+     "speed": 500.0
+    }
+   },
+   "volleyProjectiles": 1,
+   "volleyHeatShots": 1,
+   "techBase": "InnerSphere",
+   "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20",
+   "ammoPerVolley": 1,
+   "id": "UltraAutocannon20_Single",
+   "tier": "1"
+  }
+ },
+ "units": [
+  {
+   "id": "MissileCarrier_ArrowIV",
+   "name": "Arrow IV Carrier",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 5,
+   "battleValue": 800,
+   "introYear": 3058,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "ArrowIV_Vehicle",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   }
+  },
+  {
+   "id": "BattleArmorGroup",
+   "name": "Battle Armor",
+   "kind": "battleArmor",
+   "role": "Ambusher",
+   "tier": 3,
+   "battleValue": 500,
+   "introYear": 3052,
+   "hitPoints": null,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SmallLaser",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "ComStar": "uncommon",
+    "Davion": "rare",
+    "FederatedCommonwealth": "rare",
+    "FreeRasalhagueRepublic": "rare",
+    "KellHounds": "veryRare",
+    "Kurita": "rare",
+    "Liao": "rare",
+    "LyranAlliance": "rare",
+    "Marik": "rare",
+    "Mercenaries": "veryRare",
+    "Steiner": "rare",
+    "WordOfBlake": "uncommon"
+   },
+   "squad": 4,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Inner_Sphere_Standard_%28Battle_Armor%29",
+    "image": "https://cfw.sarna.net/wiki/images/8/81/IS_Standard_Battle_Armor_%28Laser%29_Shrapnel015.jpg"
+   }
+  },
+  {
+   "id": "Behemoth_Armor",
+   "name": "Behemoth (Armor)",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 3,
+   "battleValue": 850,
+   "introYear": 2952,
+   "hitPoints": 140.0,
+   "speed": 32.0,
+   "weapons": [
+    {
+     "id": "LRM5",
+     "count": 4
+    },
+    {
+     "id": "Autocannon10_Turret",
+     "count": 2
+    },
+    {
+     "id": "SRM6",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "ComStar": "uncommon",
+    "Davion": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "Steiner": "uncommon",
+    "WolfsDragoons": "common",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Behemoth_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e9/Behemoth_tank_RGilClan_v31.jpg/600px-7vrgzyakvklg3vikd0izwr5jhklk7co.jpg"
+   }
+  },
+  {
+   "id": "Behemoth",
+   "name": "Behemoth Heavy Tank",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 4,
+   "battleValue": 800,
+   "introYear": 2952,
+   "hitPoints": 92.0,
+   "speed": 32.0,
+   "weapons": [
+    {
+     "id": "LRM5",
+     "count": 4
+    },
+    {
+     "id": "MachineGun",
+     "count": 4
+    },
+    {
+     "id": "SRM2",
+     "count": 4
+    },
+    {
+     "id": "Autocannon10_Turret",
+     "count": 2
+    },
+    {
+     "id": "SRM6",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "rare",
+    "ComStar": "rare",
+    "Davion": "rare",
+    "FederatedCommonwealth": "rare",
+    "FreeRasalhagueRepublic": "rare",
+    "Kurita": "rare",
+    "Liao": "rare",
+    "LyranAlliance": "rare",
+    "Marik": "rare",
+    "Mercenaries": "rare",
+    "Steiner": "rare",
+    "WolfsDragoons": "rare",
+    "WordOfBlake": "rare"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Behemoth_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e9/Behemoth_tank_RGilClan_v31.jpg/600px-7vrgzyakvklg3vikd0izwr5jhklk7co.jpg"
+   }
+  },
+  {
+   "id": "Bulldog_AC2",
+   "name": "Bulldog (AC/2)",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 2,
+   "battleValue": 450,
+   "introYear": 2812,
+   "hitPoints": 48.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "Autocannon2_Burst",
+     "count": 2
+    },
+    {
+     "id": "SRM4",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WolfsDragoons": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Bulldog_Medium_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e8/Bulldog_RGilClan_v25.jpg/600px-jcni0yym94r9zsolj9hwbcx6m18nu4m.jpg"
+   }
+  },
+  {
+   "id": "Bulldog_LRM",
+   "name": "Bulldog (LRM)",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 2,
+   "battleValue": 550,
+   "introYear": 2793,
+   "hitPoints": 48.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "LRM20",
+     "count": 1
+    },
+    {
+     "id": "SRM4",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WolfsDragoons": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Bulldog_Medium_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e8/Bulldog_RGilClan_v25.jpg/600px-jcni0yym94r9zsolj9hwbcx6m18nu4m.jpg"
+   }
+  },
+  {
+   "id": "Bulldog",
+   "name": "Bulldog Medium Tank",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 2,
+   "battleValue": 450,
+   "introYear": 2673,
+   "hitPoints": 48.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "LargeLaser",
+     "count": 1
+    },
+    {
+     "id": "SRM4",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WolfsDragoons": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Bulldog_Medium_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e8/Bulldog_RGilClan_v25.jpg/600px-jcni0yym94r9zsolj9hwbcx6m18nu4m.jpg"
+   }
+  },
+  {
+   "id": "ClanElementalGroup",
+   "name": "Clan Elemental",
+   "kind": "battleArmor",
+   "role": "Ambusher",
+   "tier": 12,
+   "battleValue": 750,
+   "introYear": 2868,
+   "hitPoints": 20.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-SRM2_Elemental",
+     "count": 1
+    },
+    {
+     "id": "C-ERMediumLaser_Elemental",
+     "count": 1
+    },
+    {
+     "id": "C-ERSmallLaser_Elemental",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "common",
+    "ClanGhostBear": "common",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "common",
+    "ClanNovaCat": "common",
+    "ClanNovaCatAbjured": "common",
+    "ClanSmokeJaguar": "common",
+    "ClanSteelViper": "common",
+    "ClanWolf": "common",
+    "ClanWolfInExile": "common"
+   },
+   "squad": 5,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Elemental_%28Battle_Armor%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/9f/Elemental_%28III%29_RGilClan_v24.png"
+   }
+  },
+  {
+   "id": "Condor",
+   "name": "Condor",
+   "kind": "hover",
+   "role": "Striker",
+   "tier": 1,
+   "battleValue": 485,
+   "introYear": 2564,
+   "hitPoints": 30.0,
+   "speed": 126.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "Autocannon5_Burst",
+     "count": 1
+    },
+    {
+     "id": "MediumLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Condor_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/03/Condor_RGilClan_v26.jpg/600px-5e8qxm3a4q48kx1j02iztmwvklxpvaj.jpg"
+   }
+  },
+  {
+   "id": "Condor_Davion",
+   "name": "Condor (Davion)",
+   "kind": "hover",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 444,
+   "introYear": 2952,
+   "hitPoints": 34.0,
+   "speed": 126.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "Autocannon2_Burst",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "Davion": "uncommon",
+    "FederatedCommonwealth": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Condor_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/03/Condor_RGilClan_v26.jpg/600px-5e8qxm3a4q48kx1j02iztmwvklxpvaj.jpg"
+   }
+  },
+  {
+   "id": "Condor_Laser",
+   "name": "Condor (Laser)",
+   "kind": "hover",
+   "role": "Striker",
+   "tier": 1,
+   "battleValue": 750,
+   "introYear": 3061,
+   "hitPoints": 30.0,
+   "speed": 126.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "ERMediumLaser",
+     "count": 4
+    },
+    {
+     "id": "SRM2",
+     "count": 3
+    }
+   ],
+   "rarity": {
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "CraterCobras": "common",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "KellHounds": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WolfsDragoons": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Condor_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/03/Condor_RGilClan_v26.jpg/600px-5e8qxm3a4q48kx1j02iztmwvklxpvaj.jpg"
+   }
+  },
+  {
+   "id": "Condor_Liao",
+   "name": "Condor (Liao)",
+   "kind": "hover",
+   "role": "Striker",
+   "tier": 1,
+   "battleValue": 573,
+   "introYear": 2878,
+   "hitPoints": 36.0,
+   "speed": 126.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "MediumLaser",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "Liao": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Condor_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/03/Condor_RGilClan_v26.jpg/600px-5e8qxm3a4q48kx1j02iztmwvklxpvaj.jpg"
+   }
+  },
+  {
+   "id": "ConvoyVehicle",
+   "name": "Convoy",
+   "kind": "hover",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 230,
+   "introYear": 2793,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM10_SRMCarrier",
+     "count": 6
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "ComStar": "common",
+    "Davion": "common",
+    "FederatedCommonwealth": "common",
+    "FreeRasalhagueRepublic": "common",
+    "Independent": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common"
+   }
+  },
+  {
+   "id": "Demolisher",
+   "name": "Demolisher Heavy Tank",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 3,
+   "battleValue": 773,
+   "introYear": 2803,
+   "hitPoints": 80.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "Autocannon20_Demolisher",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d4/Demolisher_RGilClan_v25.jpg/600px-k8rk1w5lpzlsjxz7b8byf9k44m2ybn9.jpg"
+   }
+  },
+  {
+   "id": "Demolisher_Clan",
+   "name": "Demolisher Heavy Tank (C)",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 3,
+   "battleValue": 1172,
+   "introYear": 3058,
+   "hitPoints": 80.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-LBXAutocannon20",
+     "count": 2
+    },
+    {
+     "id": "C-MediumPulseLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d4/Demolisher_RGilClan_v25.jpg/600px-k8rk1w5lpzlsjxz7b8byf9k44m2ybn9.jpg"
+   }
+  },
+  {
+   "id": "Demolisher_Gauss",
+   "name": "Demolisher Heavy Tank (Gauss)",
+   "kind": "tracked",
+   "role": "Sniper",
+   "tier": 3,
+   "battleValue": 1146,
+   "introYear": 3053,
+   "hitPoints": 80.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "GaussRifle",
+     "count": 2
+    },
+    {
+     "id": "MediumLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "common",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "veryRare",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "veryRare",
+    "Periphery": "veryRare",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d4/Demolisher_RGilClan_v25.jpg/600px-k8rk1w5lpzlsjxz7b8byf9k44m2ybn9.jpg"
+   }
+  },
+  {
+   "id": "DemolisherII",
+   "name": "Demolisher II",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 3,
+   "battleValue": 1200,
+   "introYear": 3059,
+   "hitPoints": 120.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 2
+    },
+    {
+     "id": "LBXAutocannon20",
+     "count": 1
+    },
+    {
+     "id": "UltraAutocannon20_Single",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "ClanWolfInExile": "rare",
+    "Davion": "uncommon",
+    "LyranAlliance": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher_II",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/3/3f/Demolisher2.PNG/600px-kx9m5g3eopwbra752nd0rqyj83j73da.png"
+   }
+  },
+  {
+   "id": "Drillson",
+   "name": "Drillson",
+   "kind": "hover",
+   "role": "Striker",
+   "tier": 1,
+   "battleValue": 711,
+   "introYear": 3025,
+   "hitPoints": 20.0,
+   "speed": 144.0,
+   "weapons": [
+    {
+     "id": "LRM10_Stream",
+     "count": 1
+    },
+    {
+     "id": "MachineGun",
+     "count": 2
+    },
+    {
+     "id": "SRM2",
+     "count": 2
+    },
+    {
+     "id": "LargeLaser_Turret",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Drillson",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/02/Drillson_RGilClan_v32.jpg/600px-iersbpipen0xly5v7zin7vz69rq9uub.jpg"
+   }
+  },
+  {
+   "id": "Drillson_SRM",
+   "name": "Drillson (SRM)",
+   "kind": "hover",
+   "role": "Striker",
+   "tier": 1,
+   "battleValue": 694,
+   "introYear": 3028,
+   "hitPoints": 20.0,
+   "speed": 144.0,
+   "weapons": [
+    {
+     "id": "SRM2_Stream",
+     "count": 4
+    },
+    {
+     "id": "MachineGun",
+     "count": 2
+    },
+    {
+     "id": "SRM2",
+     "count": 2
+    },
+    {
+     "id": "LargeLaser_Turret",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Drillson",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/02/Drillson_RGilClan_v32.jpg/600px-iersbpipen0xly5v7zin7vz69rq9uub.jpg"
+   }
+  },
+  {
+   "id": "Drillson_Streak",
+   "name": "Drillson (Streak)",
+   "kind": "hover",
+   "role": "Striker",
+   "tier": 1,
+   "battleValue": 674,
+   "introYear": 3053,
+   "hitPoints": 20.0,
+   "speed": 144.0,
+   "weapons": [
+    {
+     "id": "StreakSRM2_Stream",
+     "count": 4
+    },
+    {
+     "id": "MachineGun",
+     "count": 2
+    },
+    {
+     "id": "LargeLaser_Turret",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Drillson",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/02/Drillson_RGilClan_v32.jpg/600px-iersbpipen0xly5v7zin7vz69rq9uub.jpg"
+   }
+  },
+  {
+   "id": "Harasser_ML_x2",
+   "name": "Harasser Laser Platform",
+   "kind": "hover",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 161,
+   "introYear": 2957,
+   "hitPoints": 10.0,
+   "speed": 162.0,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Harasser",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/6a/Harasser_RGilClan_v33.jpg/600px-jsra9wopybzl5a0astq2vjkx2bps3gv.jpg"
+   }
+  },
+  {
+   "id": "Harasser_Clan_ERML_x2",
+   "name": "Harasser Laser Platform (C)",
+   "kind": "hover",
+   "role": "Scout",
+   "tier": 10,
+   "battleValue": 250,
+   "introYear": 3053,
+   "hitPoints": 10.0,
+   "speed": 162.0,
+   "weapons": [
+    {
+     "id": "C-ERMediumLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "common",
+    "ClanGhostBear": "common",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "common",
+    "ClanNovaCat": "common",
+    "ClanNovaCatAbjured": "common",
+    "ClanSmokeJaguar": "common",
+    "ClanSteelViper": "common",
+    "ClanWolf": "common",
+    "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Harasser",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/6a/Harasser_RGilClan_v33.jpg/600px-jsra9wopybzl5a0astq2vjkx2bps3gv.jpg"
+   }
+  },
+  {
+   "id": "Harasser_LRM10",
+   "name": "Harasser Missile Platform (LRM)",
+   "kind": "hover",
+   "role": "Missile Boat",
+   "tier": 1,
+   "battleValue": 206,
+   "introYear": 2821,
+   "hitPoints": 10.0,
+   "speed": 162.0,
+   "weapons": [
+    {
+     "id": "LRM10_LRMCarrier",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Harasser",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/6a/Harasser_RGilClan_v33.jpg/600px-jsra9wopybzl5a0astq2vjkx2bps3gv.jpg"
+   }
+  },
+  {
+   "id": "Turret_ClanHeavySniper",
+   "name": "Heavy Sniper Turret",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 600,
+   "introYear": 3053,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-LBXAutocannon2_Slug_Burst",
+     "count": 2
+    },
+    {
+     "id": "C-GaussRifle",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "uncommon",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   }
+  },
+  {
+   "id": "HeavyTurret_LRM20",
+   "name": "Heavy Turret 2 x LRM10",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 250,
+   "introYear": 3030,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LRM10_LRMCarrier",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "HeavyTurret_SRM20",
+   "name": "Heavy Turret 2 x SRM10",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 250,
+   "introYear": 3030,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM10_SRMCarrier",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "HeavyTurret_AC5_2x2",
+   "name": "Heavy Turret 4 x AC/5",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 500,
+   "introYear": 3030,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "Autocannon5_Scorpion",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "HeavyTurret_LRM40",
+   "name": "Heavy Turret 4 x LRM10",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 500,
+   "introYear": 3030,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LRM10_LRMCarrier",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "HeavyTurret_SRM40",
+   "name": "Heavy Turret 4 x SRM10",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 500,
+   "introYear": 3030,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM10_SRMCarrier",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "HeavyTurret_LRM60",
+   "name": "Heavy Turret 6 x LRM10",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 750,
+   "introYear": 3030,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LRM10_LRMCarrier",
+     "count": 6
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "HeavyTurret_SRM60",
+   "name": "Heavy Turret 6 x SRM10",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 750,
+   "introYear": 3030,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM10_SRMCarrier",
+     "count": 6
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Hetzer_LBX",
+   "name": "Hetzer (LBX)",
+   "kind": "wheeled",
+   "role": "Ambusher",
+   "tier": 1,
+   "battleValue": 575,
+   "introYear": 3063,
+   "hitPoints": 30.0,
+   "speed": 65.8,
+   "weapons": [
+    {
+     "id": "LBXAutocannon20",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "Liao": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Hetzer",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/5/53/Hetzer_RGilClan_v29.jpg/600px-n4rderc50l7ig3thl7hv4u1vy7o5tl7.jpg"
+   }
+  },
+  {
+   "id": "Hetzer_Laser",
+   "name": "Hetzer (Laser)",
+   "kind": "wheeled",
+   "role": "Ambusher",
+   "tier": 1,
+   "battleValue": 390,
+   "introYear": 2889,
+   "hitPoints": 28.0,
+   "speed": 65.8,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "rare",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "common",
+    "KellHounds": "uncommon",
+    "Liao": "common",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "rare",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "common",
+    "Periphery": "veryCommon",
+    "Steiner": "rare",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Hetzer",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/5/53/Hetzer_RGilClan_v29.jpg/600px-n4rderc50l7ig3thl7hv4u1vy7o5tl7.jpg"
+   }
+  },
+  {
+   "id": "Hetzer_SRM",
+   "name": "Hetzer (SRM)",
+   "kind": "wheeled",
+   "role": "Ambusher",
+   "tier": 1,
+   "battleValue": 472,
+   "introYear": 2957,
+   "hitPoints": 25.0,
+   "speed": 65.8,
+   "weapons": [
+    {
+     "id": "SRM6",
+     "count": 5
+    }
+   ],
+   "rarity": {
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "rare",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "common",
+    "KellHounds": "uncommon",
+    "Kurita": "veryCommon",
+    "Liao": "common",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "rare",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "common",
+    "Periphery": "veryCommon",
+    "Steiner": "rare",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Hetzer",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/5/53/Hetzer_RGilClan_v29.jpg/600px-n4rderc50l7ig3thl7hv4u1vy7o5tl7.jpg"
+   }
+  },
+  {
+   "id": "Hetzer",
+   "name": "Hetzer Wheeled Assault Gun",
+   "kind": "wheeled",
+   "role": "Ambusher",
+   "tier": 1,
+   "battleValue": 430,
+   "introYear": 2887,
+   "hitPoints": 25.0,
+   "speed": 65.8,
+   "weapons": [
+    {
+     "id": "Autocannon20",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "rare",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "uncommon",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "uncommon",
+    "Marik": "rare",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "veryCommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WolfsDragoons": "common",
+    "WordOfBlake": "rare"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Hetzer",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/5/53/Hetzer_RGilClan_v29.jpg/600px-n4rderc50l7ig3thl7hv4u1vy7o5tl7.jpg"
+   }
+  },
+  {
+   "id": "VTOL_Igor_1x1_AC10",
+   "name": "Igor UAC-77",
+   "kind": "vtol",
+   "role": "Striker",
+   "tier": 1,
+   "battleValue": 400,
+   "introYear": 2700,
+   "hitPoints": 35.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "Autocannon10_Lvl0",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "BullheadArmor": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EarthwerksIncorporated": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "veryCommon",
+    "HarlocksWarriors": "uncommon",
+    "HighImpactBallistics": "uncommon",
+    "Independent": "uncommon",
+    "IroncladSystems": "uncommon",
+    "JumpJetFuel": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "LedouxEnterprises": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "MuscleBound": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "NovaTech": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "SolarisArms": "uncommon",
+    "StarfallCorp": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "veryCommon",
+    "Thumpers": "veryCommon",
+    "TripleF": "uncommon",
+    "VEST": "uncommon",
+    "VanguardIndustries": "uncommon",
+    "WacoRangers": "uncommon",
+    "WolfsDragoons": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
+   }
+  },
+  {
+   "id": "VTOL_Igor_2x2AC2",
+   "name": "Igor UAC-77",
+   "kind": "vtol",
+   "role": "Sniper",
+   "tier": 1,
+   "battleValue": 400,
+   "introYear": 2700,
+   "hitPoints": 35.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "Autocannon2_Lvl0",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "BullheadArmor": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EarthwerksIncorporated": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "unique",
+    "HarlocksWarriors": "uncommon",
+    "HighImpactBallistics": "uncommon",
+    "Independent": "uncommon",
+    "IroncladSystems": "uncommon",
+    "JumpJetFuel": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "LedouxEnterprises": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "MuscleBound": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "NovaTech": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "SolarisArms": "uncommon",
+    "StarfallCorp": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "unique",
+    "Thumpers": "unique",
+    "TripleF": "uncommon",
+    "VEST": "uncommon",
+    "VanguardIndustries": "uncommon",
+    "WacoRangers": "uncommon",
+    "WolfsDragoons": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
+   }
+  },
+  {
+   "id": "VTOL_Igor_1x1_Clan_LargeLaser",
+   "name": "Igor UAC-77 (C)",
+   "kind": "vtol",
+   "role": "Sniper",
+   "tier": 10,
+   "battleValue": 600,
+   "introYear": 3053,
+   "hitPoints": 35.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-ERLargeLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
+   }
+  },
+  {
+   "id": "VTOL_Igor_1x1_Clan_UAC10",
+   "name": "Igor UAC-77 (C)",
+   "kind": "vtol",
+   "role": "Striker",
+   "tier": 10,
+   "battleValue": 600,
+   "introYear": 3053,
+   "hitPoints": 35.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-UltraAutocannon10_BurstFire",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
+   }
+  },
+  {
+   "id": "VTOL_Igor_Clan_MissileBoat",
+   "name": "Igor UAC-77 (C)",
+   "kind": "vtol",
+   "role": "Missile Boat",
+   "tier": 10,
+   "battleValue": 600,
+   "introYear": 3053,
+   "hitPoints": 35.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-StreakSRM2",
+     "count": 2
+    },
+    {
+     "id": "C-LRM5",
+     "count": 2
+    },
+    {
+     "id": "C-SRM6",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
+   }
+  },
+  {
+   "id": "Tank_Jedgar",
+   "name": "J.Edgar JED-A",
+   "kind": "hover",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 272,
+   "introYear": 2722,
+   "hitPoints": 20.0,
+   "speed": 180.0,
+   "weapons": [
+    {
+     "id": "SRM2",
+     "count": 2
+    },
+    {
+     "id": "MediumLaser",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "rare",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "rare",
+    "Thumpers": "rare",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/J._Edgar",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/JEdgar_RGilClan_v32.jpg/600px-kkmaytn0htvnr99b7piytpq4458cc3i.jpg"
+   }
+  },
+  {
+   "id": "Tank_Jedgar_Clan",
+   "name": "J.Edgar JED-A (C)",
+   "kind": "hover",
+   "role": "Scout",
+   "tier": 10,
+   "battleValue": 300,
+   "introYear": 3053,
+   "hitPoints": 20.0,
+   "speed": 180.0,
+   "weapons": [
+    {
+     "id": "C-StreakSRM2",
+     "count": 2
+    },
+    {
+     "id": "C-ERMediumLaser",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "common",
+    "ClanGhostBear": "common",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "common",
+    "ClanNovaCat": "common",
+    "ClanNovaCatAbjured": "common",
+    "ClanSmokeJaguar": "common",
+    "ClanSteelViper": "common",
+    "ClanWolf": "common",
+    "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/J._Edgar",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/JEdgar_RGilClan_v32.jpg/600px-kkmaytn0htvnr99b7piytpq4458cc3i.jpg"
+   }
+  },
+  {
+   "id": "Tank_Jedgar_Flamer",
+   "name": "J.Edgar JED-F",
+   "kind": "hover",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 230,
+   "introYear": 2793,
+   "hitPoints": 20.0,
+   "speed": 180.0,
+   "weapons": [
+    {
+     "id": "Flamer",
+     "count": 2
+    },
+    {
+     "id": "MediumLaser",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "rare",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "rare",
+    "Thumpers": "rare",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/J._Edgar",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/JEdgar_RGilClan_v32.jpg/600px-kkmaytn0htvnr99b7piytpq4458cc3i.jpg"
+   }
+  },
+  {
+   "id": "Tank_Jedgar_MachineGun",
+   "name": "J.Edgar JED-MG",
+   "kind": "hover",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 241,
+   "introYear": 2794,
+   "hitPoints": 20.0,
+   "speed": 180.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 2
+    },
+    {
+     "id": "MediumLaser",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/J._Edgar",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/JEdgar_RGilClan_v32.jpg/600px-kkmaytn0htvnr99b7piytpq4458cc3i.jpg"
+   }
+  },
+  {
+   "id": "MissileCarrier_LRM20",
+   "name": "LRM20 Carrier",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 3,
+   "battleValue": 278,
+   "introYear": 2407,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LRM10_LRMCarrier",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
+   }
+  },
+  {
+   "id": "MissileCarrier_LRM40",
+   "name": "LRM40 Carrier",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 3,
+   "battleValue": 555,
+   "introYear": 2407,
+   "hitPoints": 15.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LRM10_LRMCarrier",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
+   }
+  },
+  {
+   "id": "MIssileCarrier_LRM60",
+   "name": "LRM60 Carrier",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 3,
+   "battleValue": 733,
+   "introYear": 2407,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LRM10_LRMCarrier",
+     "count": 6
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
+   }
+  },
+  {
+   "id": "MissileCarrier_MRM30",
+   "name": "MRM30 Carrier",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 3,
+   "battleValue": 278,
+   "introYear": 3063,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MRM30_Vehicle",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
+   }
+  },
+  {
+   "id": "MissileCarrier_MRM60",
+   "name": "MRM60 Carrier",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 3,
+   "battleValue": 555,
+   "introYear": 3063,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MRM30_Vehicle",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
+   }
+  },
+  {
+   "id": "MissileCarrier_MRM90",
+   "name": "MRM90 Carrier",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 3,
+   "battleValue": 733,
+   "introYear": 3063,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MRM30_Vehicle",
+     "count": 3
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
+   }
+  },
+  {
+   "id": "Manticore",
+   "name": "Manticore Heavy Tank",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 3,
+   "battleValue": 425,
+   "introYear": 2668,
+   "hitPoints": 33.0,
+   "speed": 64.8,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 1
+    },
+    {
+     "id": "SRM6_Turret",
+     "count": 1
+    },
+    {
+     "id": "PPC_Tank",
+     "count": 1
+    },
+    {
+     "id": "LRM10",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Manticore",
+    "image": "https://cfw.sarna.net/wiki/images/0/09/Manticore_RGilClan_v31.jpg"
+   }
+  },
+  {
+   "id": "Manticore_LPL",
+   "name": "Manticore Heavy Tank (3055)",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 3,
+   "battleValue": 717,
+   "introYear": 3055,
+   "hitPoints": 37.0,
+   "speed": 64.8,
+   "weapons": [
+    {
+     "id": "StreakSRM2",
+     "count": 1
+    },
+    {
+     "id": "SRM6_Artemis_Stream",
+     "count": 1
+    },
+    {
+     "id": "LargePulseLaser",
+     "count": 1
+    },
+    {
+     "id": "LRM10_Artemis_Stream",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "rare",
+    "Periphery": "rare",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Manticore",
+    "image": "https://cfw.sarna.net/wiki/images/0/09/Manticore_RGilClan_v31.jpg"
+   }
+  },
+  {
+   "id": "Ontos_3053",
+   "name": "Ontos (3053)",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 3,
+   "battleValue": 900,
+   "introYear": 3053,
+   "hitPoints": 60.0,
+   "speed": 32.0,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 4
+    },
+    {
+     "id": "MediumPulseLaser",
+     "count": 3
+    },
+    {
+     "id": "SRM6_Artemis_Stream",
+     "count": 1
+    },
+    {
+     "id": "LRM15_Artemis_Stream",
+     "count": 1
+    },
+    {
+     "id": "SRM4_Artemis",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Ontos",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fc/Ontos_RGilClan_v29.jpg/600px-ti6nhsl3myyr3n0re7cld4n9i4e2etw.jpg"
+   }
+  },
+  {
+   "id": "Ontos_LRM",
+   "name": "Ontos (LRM)",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 3,
+   "battleValue": 900,
+   "introYear": 2876,
+   "hitPoints": 60.0,
+   "speed": 32.0,
+   "weapons": [
+    {
+     "id": "LRM20_Stream",
+     "count": 2
+    },
+    {
+     "id": "LRM10",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "Davion": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "Liao": "common",
+    "LyranAlliance": "uncommon",
+    "Marik": "common",
+    "Steiner": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Ontos",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fc/Ontos_RGilClan_v29.jpg/600px-ti6nhsl3myyr3n0re7cld4n9i4e2etw.jpg"
+   }
+  },
+  {
+   "id": "Ontos_LightGauss",
+   "name": "Ontos (Light Gauss)",
+   "kind": "tracked",
+   "role": "Sniper",
+   "tier": 3,
+   "battleValue": 900,
+   "introYear": 3065,
+   "hitPoints": 60.0,
+   "speed": 32.0,
+   "weapons": [
+    {
+     "id": "LightGaussRifle",
+     "count": 3
+    },
+    {
+     "id": "MediumLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Ontos",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fc/Ontos_RGilClan_v29.jpg/600px-ti6nhsl3myyr3n0re7cld4n9i4e2etw.jpg"
+   }
+  },
+  {
+   "id": "Ontos",
+   "name": "Ontos Heavy Tank",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 3,
+   "battleValue": 750,
+   "introYear": 2832,
+   "hitPoints": 60.0,
+   "speed": 32.0,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 8
+    },
+    {
+     "id": "LRM5",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Ontos",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fc/Ontos_RGilClan_v29.jpg/600px-ti6nhsl3myyr3n0re7cld4n9i4e2etw.jpg"
+   }
+  },
+  {
+   "id": "Partisan",
+   "name": "Partisan Heavy Tank",
+   "kind": "tracked",
+   "role": "Sniper",
+   "tier": 2,
+   "battleValue": 506,
+   "introYear": 2791,
+   "hitPoints": 65.0,
+   "speed": 64.8,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 2
+    },
+    {
+     "id": "Autocannon5_Scorpion",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Partisan",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0f/Partisan_RGilClan_v33.jpg/600px-6mu5vxjfmci1kgtjs85cf4zjirit7j2.jpg"
+   }
+  },
+  {
+   "id": "Partisan_AC2_x5_MG_x2",
+   "name": "Partisan Heavy Tank (AC2)",
+   "kind": "tracked",
+   "role": "Sniper",
+   "tier": 2,
+   "battleValue": 435,
+   "introYear": 3002,
+   "hitPoints": 65.0,
+   "speed": 64.8,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 2
+    },
+    {
+     "id": "Autocannon2_Turret",
+     "count": 5
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "veryCommon",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "veryCommon",
+    "Thumpers": "veryCommon",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Partisan",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0f/Partisan_RGilClan_v33.jpg/600px-6mu5vxjfmci1kgtjs85cf4zjirit7j2.jpg"
+   }
+  },
+  {
+   "id": "Partisan_Clan",
+   "name": "Partisan Heavy Tank (C)",
+   "kind": "tracked",
+   "role": "Sniper",
+   "tier": 2,
+   "battleValue": 835,
+   "introYear": 3059,
+   "hitPoints": 65.0,
+   "speed": 64.8,
+   "weapons": [
+    {
+     "id": "C-LBXAutocannon10",
+     "count": 2
+    },
+    {
+     "id": "C-UltraAutocannon5",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Partisan",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0f/Partisan_RGilClan_v33.jpg/600px-6mu5vxjfmci1kgtjs85cf4zjirit7j2.jpg"
+   }
+  },
+  {
+   "id": "Patton_Ultra",
+   "name": "Patton (Ultra)",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 2,
+   "battleValue": 800,
+   "introYear": 3062,
+   "hitPoints": 80.0,
+   "speed": 64.8,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 3
+    },
+    {
+     "id": "UltraAutocannon10_Single",
+     "count": 1
+    },
+    {
+     "id": "MediumLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanWolfInExile": "uncommon",
+    "Davion": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Steiner": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Patton",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d8/Patton_RGilClan_v27.jpg/600px-flmompews2vx2ah9xfa2h9luimurhph.jpg"
+   }
+  },
+  {
+   "id": "Patton",
+   "name": "Patton Tank",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 2,
+   "battleValue": 481,
+   "introYear": 3027,
+   "hitPoints": 80.0,
+   "speed": 64.8,
+   "weapons": [
+    {
+     "id": "SmallLaser",
+     "count": 1
+    },
+    {
+     "id": "Flamer",
+     "count": 1
+    },
+    {
+     "id": "LRM5",
+     "count": 1
+    },
+    {
+     "id": "Autocannon10_Turret",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Patton",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d8/Patton_RGilClan_v27.jpg/600px-flmompews2vx2ah9xfa2h9luimurhph.jpg"
+   }
+  },
+  {
+   "id": "PoHeavyTank_LightGauss",
+   "name": "Po (Light Gauss)",
+   "kind": "tracked",
+   "role": "Sniper",
+   "tier": 3,
+   "battleValue": 550,
+   "introYear": 3059,
+   "hitPoints": 60.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 3
+    },
+    {
+     "id": "LightGaussRifle",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "Marik": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Po_Heavy_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/Po.jpg/600px-kx08ijkvtq2azi8afdmjobl0gc4g9pf.jpg"
+   }
+  },
+  {
+   "id": "PoHeavyTank",
+   "name": "Po Heavy Tank",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 3,
+   "battleValue": 550,
+   "introYear": 3031,
+   "hitPoints": 60.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 2
+    },
+    {
+     "id": "Autocannon10_Turret",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "CraterCobras": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FilthyLucre": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "KellHounds": "uncommon",
+    "Liao": "common",
+    "LindonsCompany": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "rare",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WolfsDragoons": "uncommon",
+    "WordOfBlake": "rare"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Po_Heavy_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/Po.jpg/600px-kx08ijkvtq2azi8afdmjobl0gc4g9pf.jpg"
+   }
+  },
+  {
+   "id": "Riverjack",
+   "name": "Riverjack",
+   "kind": "wheeled",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 75,
+   "introYear": 2850,
+   "hitPoints": 5.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Riverjack",
+    "image": null
+   }
+  },
+  {
+   "id": "Riverjack_ClanHMG",
+   "name": "Riverjack (C)",
+   "kind": "wheeled",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 75,
+   "introYear": 3060,
+   "hitPoints": 5.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "C-HeavyMachineGun",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "rare",
+    "ClanGhostBear": "rare",
+    "ClanHellsHorses": "veryCommon",
+    "ClanJadeFalcon": "rare",
+    "ClanNovaCat": "rare",
+    "ClanNovaCatAbjured": "rare",
+    "ClanSmokeJaguar": "common",
+    "ClanSteelViper": "rare",
+    "ClanWolf": "rare",
+    "ClanWolfInExile": "rare"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Riverjack",
+    "image": null
+   }
+  },
+  {
+   "id": "Riverjack_Inferno",
+   "name": "Riverjack INF",
+   "kind": "wheeled",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 75,
+   "introYear": 2850,
+   "hitPoints": 5.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "SRM2_Inferno",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Riverjack",
+    "image": null
+   }
+  },
+  {
+   "id": "Riverjack_SRM",
+   "name": "Riverjack SRM",
+   "kind": "wheeled",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 75,
+   "introYear": 2850,
+   "hitPoints": 5.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "SRM2_Stream",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Riverjack",
+    "image": null
+   }
+  },
+  {
+   "id": "MissileCarrier_SRM20",
+   "name": "SRM20 Carrier",
+   "kind": "tracked",
+   "role": "Striker",
+   "tier": 3,
+   "battleValue": 272,
+   "introYear": 2407,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM10_SRMCarrier",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/SRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0e/SRM_Carrier_RGilClan_v30.jpg/600px-hkpawaem20jm1t0futwrf55w7bt0m28.jpg"
+   }
+  },
+  {
+   "id": "MissileCarrier_SRM40",
+   "name": "SRM40 Carrier",
+   "kind": "tracked",
+   "role": "Striker",
+   "tier": 3,
+   "battleValue": 544,
+   "introYear": 2407,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM10_SRMCarrier",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/SRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0e/SRM_Carrier_RGilClan_v30.jpg/600px-hkpawaem20jm1t0futwrf55w7bt0m28.jpg"
+   }
+  },
+  {
+   "id": "MIssileCarrier_SRM60",
+   "name": "SRM60 Carrier",
+   "kind": "tracked",
+   "role": "Striker",
+   "tier": 3,
+   "battleValue": 716,
+   "introYear": 2407,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM10_SRMCarrier",
+     "count": 6
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/SRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0e/SRM_Carrier_RGilClan_v30.jpg/600px-hkpawaem20jm1t0futwrf55w7bt0m28.jpg"
+   }
+  },
+  {
+   "id": "Schrek",
+   "name": "Schrek PPC Carrier",
+   "kind": "tracked",
+   "role": "Sniper",
+   "tier": 3,
+   "battleValue": 702,
+   "introYear": 2813,
+   "hitPoints": 65.0,
+   "speed": 64.8,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 2
+    },
+    {
+     "id": "PPC",
+     "count": 3
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Schrek",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e4/Schrek_RGilClan_v32.jpg/600px-6kyhe430wm9jkcvzg9u4fychzqmlpr2.jpg"
+   }
+  },
+  {
+   "id": "Scorpion",
+   "name": "Scorpion Light Tank",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 1,
+   "battleValue": 153,
+   "introYear": 2807,
+   "hitPoints": 14.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "Autocannon5_Scorpion",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "Scorpion_Clan",
+   "name": "Scorpion Light Tank (C)",
+   "kind": "tracked",
+   "role": "Sniper",
+   "tier": 1,
+   "battleValue": 177,
+   "introYear": 3055,
+   "hitPoints": 14.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "C-LBXAutocannon5",
+     "count": 1
+    },
+    {
+     "id": "C-MachineGun",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "common",
+    "ClanGhostBear": "common",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "common",
+    "ClanNovaCat": "common",
+    "ClanNovaCatAbjured": "common",
+    "ClanSmokeJaguar": "common",
+    "ClanSteelViper": "common",
+    "ClanWolf": "common",
+    "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "Scorpion_LAC2",
+   "name": "Scorpion Light Tank (LAC)",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 1,
+   "battleValue": 144,
+   "introYear": 3072,
+   "hitPoints": 14.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "LightAutocannon2",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "uncommon",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "Scorpion_LRM",
+   "name": "Scorpion Light Tank (LRM)",
+   "kind": "tracked",
+   "role": "Missile Boat",
+   "tier": 1,
+   "battleValue": 212,
+   "introYear": 2813,
+   "hitPoints": 14.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "LRM5",
+     "count": 1
+    },
+    {
+     "id": "LRM10_Stream",
+     "count": 1
+    },
+    {
+     "id": "MachineGun",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "Scorpion_ML_x2_MG",
+   "name": "Scorpion Light Tank (ML)",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 1,
+   "battleValue": 160,
+   "introYear": 2875,
+   "hitPoints": 14.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 2
+    },
+    {
+     "id": "MachineGun",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "Scorpion_MRM",
+   "name": "Scorpion Light Tank (MRM)",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 1,
+   "battleValue": 234,
+   "introYear": 3060,
+   "hitPoints": 14.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "MRM10",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "uncommon",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "Scorpion_HeavyRifle",
+   "name": "Scorpion Light Tank (Rifle)",
+   "kind": "tracked",
+   "role": "Brawler",
+   "tier": 1,
+   "battleValue": 169,
+   "introYear": 2876,
+   "hitPoints": 14.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "HeavyRifle_Burst",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "Independent": "uncommon",
+    "Mercenaries": "veryRare",
+    "Outlaws": "veryCommon",
+    "Periphery": "veryCommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "Scorpion_SRM",
+   "name": "Scorpion Light Tank (SRM)",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 1,
+   "battleValue": 186,
+   "introYear": 2840,
+   "hitPoints": 14.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "SRM6_Turret",
+     "count": 2
+    },
+    {
+     "id": "MachineGun",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "Turret_AC2_1x1",
+   "name": "Turret  2 x AC/2",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 165,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "Autocannon2_Lvl0",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_AC2_1x0",
+   "name": "Turret 1 x AC/2",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 83,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "Autocannon2_Lvl0",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_ClanERPPC_1x0",
+   "name": "Turret 1 x C-ERPPC",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 500,
+   "introYear": 3051,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-ERPPC",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "uncommon",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_MediumLaser_1x0",
+   "name": "Turret 1 x ML",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 90,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_SmallLaser_1x0",
+   "name": "Turret 1 x SL",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 22,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SmallLaser",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_SRM2_1x0",
+   "name": "Turret 1 x SRM2",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 72,
+   "introYear": 2700,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM2_Lvl0",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_ClanATM3_1x1",
+   "name": "Turret 2 x ATM3",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 400,
+   "introYear": 3060,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-ATM3",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "uncommon",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_ClanLargeLaser_1x1",
+   "name": "Turret 2 x C-ERLL",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 550,
+   "introYear": 3051,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-ERLargeLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "uncommon",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_ClanLB2_1x1",
+   "name": "Turret 2 x C-LBX2",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 500,
+   "introYear": 3051,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-LBXAutocannon2",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "uncommon",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_ClanLRM5_1x1",
+   "name": "Turret 2 x C-LRM5",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 400,
+   "introYear": 3051,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-LRM5_Artemis",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "uncommon",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_ClanSRM6_1x1",
+   "name": "Turret 2 x C-SRM6",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 300,
+   "introYear": 3051,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-SRM6",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "uncommon",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_ClanStreak6_1x1",
+   "name": "Turret 2 x C-SSRM6",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 350,
+   "introYear": 3051,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-StreakSRM6",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "uncommon",
+    "ClanGhostBear": "uncommon",
+    "ClanHellsHorses": "uncommon",
+    "ClanJadeFalcon": "uncommon",
+    "ClanNovaCat": "uncommon",
+    "ClanNovaCatAbjured": "uncommon",
+    "ClanSmokeJaguar": "uncommon",
+    "ClanSteelViper": "uncommon",
+    "ClanWolf": "uncommon",
+    "ClanWolfInExile": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_LargeLaser_1x1",
+   "name": "Turret 2 x LL",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 369,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LargeLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_LargeLaser_1x1_Fortified",
+   "name": "Turret 2 x LL",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 246,
+   "introYear": 2700,
+   "hitPoints": 40.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LargeLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ComStar": "unavailable",
+    "Davion": "uncommon",
+    "FreeRasalhagueRepublic": "unavailable",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "Marik": "uncommon",
+    "Steiner": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_LRM5_1x1",
+   "name": "Turret 2 x LRM5",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 432,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LRM5_Stream_Lvl0",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common"
+   }
+  },
+  {
+   "id": "Turret_MediumLaser_1x1",
+   "name": "Turret 2 x ML",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 180,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_MRM10_1x1",
+   "name": "Turret 2 x MRM10",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 300,
+   "introYear": 3063,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MRM10",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_SmallLaser_1x1",
+   "name": "Turret 2 x SL",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 45,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SmallLaser",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_SRM2_1x1",
+   "name": "Turret 2 x SRM2",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 144,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM2_Lvl0",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "common",
+    "Thumpers": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_SRM6_1x1",
+   "name": "Turret 2 x SRM6",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 432,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SRM6_Lvl0",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_AC2_2x2",
+   "name": "Turret 4 x AC/2",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 330,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "Autocannon2_Lvl0",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_MediumLaser_2x2",
+   "name": "Turret 4 x ML",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 360,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_SmallLaser_2x2",
+   "name": "Turret 4 x SL",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 90,
+   "introYear": 2700,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "SmallLaser",
+     "count": 4
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_ArrowIV",
+   "name": "Turret Arrow IV",
+   "kind": "turret",
+   "role": null,
+   "tier": 5,
+   "battleValue": 500,
+   "introYear": 3040,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "ArrowIV_Vehicle",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "uncommon",
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "ComStar": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FederatedCommonwealth": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "Independent": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Outlaws": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WordOfBlake": "uncommon"
+   }
+  },
+  {
+   "id": "Turret_MRM30",
+   "name": "Turret MRM30",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 250,
+   "introYear": 3063,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MRM30_Vehicle",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_MRM60",
+   "name": "Turret MRM60",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 500,
+   "introYear": 3063,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MRM30_Vehicle",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Turret_MRM90",
+   "name": "Turret MRM90",
+   "kind": "turret",
+   "role": null,
+   "tier": 1,
+   "battleValue": 750,
+   "introYear": 3063,
+   "hitPoints": 30.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MRM30_Vehicle",
+     "count": 3
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "Independent": "common",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "NorthwindHighlanders": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common",
+    "WacoRangers": "common",
+    "WordOfBlake": "common"
+   }
+  },
+  {
+   "id": "Fancy_Warrior",
+   "name": "VTOL Tiger A1-X",
+   "kind": "vtol",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 148,
+   "introYear": 2957,
+   "hitPoints": 1.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 1
+    },
+    {
+     "id": "SRM2_VTOL",
+     "count": 2
+    },
+    {
+     "id": "Autocannon5",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "ComStar": "common",
+    "Davion": "common",
+    "FederatedCommonwealth": "common",
+    "FreeRasalhagueRepublic": "common",
+    "Independent": "common",
+    "Kurita": "common",
+    "Liao": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "Steiner": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
+   }
+  },
+  {
+   "id": "VTOL_Warrior_AC2",
+   "name": "VTOL Warrior H-7",
+   "kind": "vtol",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 200,
+   "introYear": 2957,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "Autocannon2_VTOL",
+     "count": 1
+    },
+    {
+     "id": "SRM2_VTOL",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "BullheadArmor": "uncommon",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EarthwerksIncorporated": "uncommon",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "HighImpactBallistics": "uncommon",
+    "Independent": "common",
+    "IroncladSystems": "uncommon",
+    "JumpJetFuel": "uncommon",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "LedouxEnterprises": "uncommon",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "MuscleBound": "uncommon",
+    "NorthwindHighlanders": "common",
+    "NovaTech": "uncommon",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "SolarisArms": "uncommon",
+    "StarfallCorp": "uncommon",
+    "Steiner": "common",
+    "TripleF": "uncommon",
+    "VEST": "uncommon",
+    "VanguardIndustries": "uncommon",
+    "WacoRangers": "common",
+    "WolfsDragoons": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
+   }
+  },
+  {
+   "id": "VTOL_Warrior_Clan_UAC2",
+   "name": "VTOL Warrior H-7 (C)",
+   "kind": "vtol",
+   "role": "Scout",
+   "tier": 10,
+   "battleValue": 400,
+   "introYear": 3053,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-UltraAutocannon2",
+     "count": 1
+    },
+    {
+     "id": "C-StreakSRM2",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "common",
+    "ClanGhostBear": "common",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "common",
+    "ClanNovaCat": "common",
+    "ClanNovaCatAbjured": "common",
+    "ClanSmokeJaguar": "common",
+    "ClanSteelViper": "common",
+    "ClanWolf": "common",
+    "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
+   }
+  },
+  {
+   "id": "VTOL_Warrior_AC5",
+   "name": "VTOL Warrior H-7A",
+   "kind": "vtol",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 200,
+   "introYear": 2957,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "Autocannon5_Burst",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "BullheadArmor": "uncommon",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EarthwerksIncorporated": "uncommon",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "HighImpactBallistics": "uncommon",
+    "Independent": "common",
+    "IroncladSystems": "uncommon",
+    "JumpJetFuel": "uncommon",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "LedouxEnterprises": "uncommon",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "MuscleBound": "uncommon",
+    "NorthwindHighlanders": "common",
+    "NovaTech": "uncommon",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "SolarisArms": "uncommon",
+    "StarfallCorp": "uncommon",
+    "Steiner": "common",
+    "TripleF": "uncommon",
+    "VEST": "uncommon",
+    "VanguardIndustries": "uncommon",
+    "WacoRangers": "common",
+    "WolfsDragoons": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
+   }
+  },
+  {
+   "id": "VTOL_Warrior",
+   "name": "VTOL Warrior H-7B",
+   "kind": "vtol",
+   "role": "Scout",
+   "tier": 1,
+   "battleValue": 148,
+   "introYear": 2957,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "MediumLaser",
+     "count": 1
+    },
+    {
+     "id": "SRM2_VTOL",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "BullheadArmor": "uncommon",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EarthwerksIncorporated": "uncommon",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "HighImpactBallistics": "uncommon",
+    "Independent": "common",
+    "IroncladSystems": "uncommon",
+    "JumpJetFuel": "uncommon",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "LedouxEnterprises": "uncommon",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "MuscleBound": "uncommon",
+    "NorthwindHighlanders": "common",
+    "NovaTech": "uncommon",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "SolarisArms": "uncommon",
+    "StarfallCorp": "uncommon",
+    "Steiner": "common",
+    "TripleF": "uncommon",
+    "VEST": "uncommon",
+    "VanguardIndustries": "uncommon",
+    "WacoRangers": "common",
+    "WolfsDragoons": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
+   }
+  },
+  {
+   "id": "VTOL_Warrior_LRM",
+   "name": "VTOL Warrior H-7C",
+   "kind": "vtol",
+   "role": "Sniper",
+   "tier": 1,
+   "battleValue": 300,
+   "introYear": 2957,
+   "hitPoints": 5.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "LRM10_Stream",
+     "count": 1
+    },
+    {
+     "id": "SRM2_VTOL",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "BlackInferno": "common",
+    "Blackhearts": "common",
+    "BrionsLegion": "common",
+    "BullheadArmor": "uncommon",
+    "ComStar": "common",
+    "CraterCobras": "common",
+    "Davion": "common",
+    "EarthwerksIncorporated": "uncommon",
+    "EridaniLightHorse": "common",
+    "FederatedCommonwealth": "common",
+    "FilthyLucre": "common",
+    "FreeRasalhagueRepublic": "common",
+    "GrayDeathLegion": "common",
+    "GreggsLongstriders": "common",
+    "HarlocksWarriors": "common",
+    "HighImpactBallistics": "uncommon",
+    "Independent": "common",
+    "IroncladSystems": "uncommon",
+    "JumpJetFuel": "uncommon",
+    "KellHounds": "common",
+    "Kurita": "common",
+    "LedouxEnterprises": "uncommon",
+    "Liao": "common",
+    "LindonsCompany": "common",
+    "LyranAlliance": "common",
+    "Marik": "common",
+    "Mercenaries": "common",
+    "MobileFire": "common",
+    "MuscleBound": "uncommon",
+    "NorthwindHighlanders": "common",
+    "NovaTech": "uncommon",
+    "Outlaws": "common",
+    "Periphery": "common",
+    "SolarisArms": "uncommon",
+    "StarfallCorp": "uncommon",
+    "Steiner": "common",
+    "TripleF": "uncommon",
+    "VEST": "uncommon",
+    "VanguardIndustries": "uncommon",
+    "WacoRangers": "common",
+    "WolfsDragoons": "common",
+    "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
+   }
+  },
+  {
+   "id": "VTOL_Warrior_Clan_LRM",
+   "name": "VTOL Warrior H-7C (C)",
+   "kind": "vtol",
+   "role": "Missile Boat",
+   "tier": 10,
+   "battleValue": 400,
+   "introYear": 3053,
+   "hitPoints": 10.0,
+   "speed": null,
+   "weapons": [
+    {
+     "id": "C-LRM10",
+     "count": 1
+    },
+    {
+     "id": "C-StreakSRM2",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "ClanDiamondShark": "common",
+    "ClanGhostBear": "common",
+    "ClanHellsHorses": "common",
+    "ClanJadeFalcon": "common",
+    "ClanNovaCat": "common",
+    "ClanNovaCatAbjured": "common",
+    "ClanSmokeJaguar": "common",
+    "ClanSteelViper": "common",
+    "ClanWolf": "common",
+    "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
+   }
+  },
+  {
+   "id": "VonLuckner",
+   "name": "Von Luckner VNL-K65N",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 3,
+   "battleValue": 900,
+   "introYear": 2612,
+   "hitPoints": 60.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "LRM10_Stream",
+     "count": 1
+    },
+    {
+     "id": "Flamer",
+     "count": 1
+    },
+    {
+     "id": "Autocannon20",
+     "count": 1
+    },
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "SRM4",
+     "count": 1
+    },
+    {
+     "id": "SRM6",
+     "count": 2
+    }
+   ],
+   "rarity": {
+    "Blackhearts": "uncommon",
+    "BrionsLegion": "uncommon",
+    "CraterCobras": "uncommon",
+    "Davion": "uncommon",
+    "EridaniLightHorse": "uncommon",
+    "FilthyLucre": "uncommon",
+    "FreeRasalhagueRepublic": "uncommon",
+    "GrayDeathLegion": "uncommon",
+    "GreggsLongstriders": "uncommon",
+    "HansensRoughRiders": "uncommon",
+    "HarlocksWarriors": "uncommon",
+    "KellHounds": "uncommon",
+    "Kurita": "uncommon",
+    "Liao": "uncommon",
+    "LindonsCompany": "uncommon",
+    "LyranAlliance": "uncommon",
+    "Marik": "uncommon",
+    "Mercenaries": "uncommon",
+    "MobileFire": "uncommon",
+    "NorthwindHighlanders": "uncommon",
+    "Periphery": "uncommon",
+    "Steiner": "uncommon",
+    "TheBadDream": "uncommon",
+    "Thumpers": "uncommon",
+    "WacoRangers": "uncommon",
+    "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Von_Luckner",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/44/Von_Luckner_RGilClan_v32.jpg/600px-nca56iteknz769safl7kxq0hmcmesjy.jpg"
+   }
+  },
+  {
+   "id": "VonLuckner_K70",
+   "name": "Von Luckner VNL-K70",
+   "kind": "tracked",
+   "role": "Juggernaut",
+   "tier": 3,
+   "battleValue": 900,
+   "introYear": 3008,
+   "hitPoints": 60.0,
+   "speed": 64.0,
+   "weapons": [
+    {
+     "id": "LRM10_Stream",
+     "count": 1
+    },
+    {
+     "id": "Flamer",
+     "count": 1
+    },
+    {
+     "id": "Autocannon10_Turret",
+     "count": 1
+    },
+    {
+     "id": "MachineGun",
+     "count": 1
+    },
+    {
+     "id": "SRM4",
+     "count": 1
+    },
+    {
+     "id": "PPC",
+     "count": 1
+    }
+   ],
+   "rarity": {
+    "FreeRasalhagueRepublic": "rare",
+    "Kurita": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Von_Luckner",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/44/Von_Luckner_RGilClan_v32.jpg/600px-nca56iteknz769safl7kxq0hmcmesjy.jpg"
+   }
+  }
+ ]
+}

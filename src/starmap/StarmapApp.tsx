@@ -463,11 +463,12 @@ export function StarmapApp() {
         <h1>Star map</h1>
         <nav className="starmap-links" aria-label="MW Builder">
           <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
+          <a href="/mercs/units/">Enemy units</a>
         </nav>
         <div className="starmap-actions">
+          <WhatsNew />
           <button type="button" className="starmap-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>
           <SupportLink compact />
-          <WhatsNew />
         </div>
         <SystemSearch onPick={pickSystem} />
       </header>

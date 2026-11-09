@@ -348,11 +348,33 @@
         color: var(--accent);
       }
 
-      /* Hueco para los próximos juegos */
+      /* La carátula de las unidades: dibujo de línea como el del MechLab, en el rojo de los blancos hostiles. */
+      .cover.is-units { --accent: #ff5a3c; }
+
+      .cover.is-units .cover-art img {
+        filter: invert(1) sepia(1) hue-rotate(-35deg) saturate(2.4) brightness(0.95);
+      }
+
+      a.cover.is-units:hover,
+      a.cover.is-units:focus-visible {
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(255, 90, 60, 0.2);
+      }
+
+      .cover.is-units .cover-status {
+        border-color: rgba(255, 90, 60, 0.55);
+        color: var(--accent);
+      }
+
+      /* Hueco para los próximos juegos: una franja a lo ancho, debajo de las carátulas. */
       .cover.is-placeholder {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        flex-wrap: wrap;
+        aspect-ratio: auto;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 10px 14px;
+        padding: 18px 16px;
         border: 1px dashed var(--line);
         background: rgba(25, 29, 25, 0.35);
         box-shadow: none;
@@ -368,7 +390,6 @@
 
       .cover.is-placeholder p {
         margin: 0;
-        max-width: 180px;
         font-size: 13px;
         line-height: 1.5;
       }
@@ -376,8 +397,8 @@
       .placeholder-mark {
         display: grid;
         place-items: center;
-        width: 42px;
-        height: 42px;
+        width: 32px;
+        height: 32px;
         border: 1px dashed var(--line);
         font: 500 20px var(--mono);
       }
@@ -540,7 +561,6 @@
         .topbar-note { display: none; }
         .intro { padding: 36px 0 28px; }
         .intro p { font-size: 15px; }
-        .cover.is-placeholder { aspect-ratio: auto; padding: 28px 16px; }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -590,7 +610,7 @@
         <section aria-labelledby="shelf-title">
           <div class="shelf-header">
             <h3 id="shelf-title">SELECT TOOL</h3>
-            <span>2 AVAILABLE</span>
+            <span>3 AVAILABLE</span>
           </div>
 
           <div class="shelf">
@@ -634,6 +654,29 @@
                 </p>
               </div>
               <div class="cover-action">Open Star Map <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="cover is-units" href="/mercs/units/">
+              <div class="cover-band">
+                <span><b>ENEMY UNITS</b> · MW5</span>
+                <span class="cover-status">NEW</span>
+              </div>
+              <div class="cover-art">
+                <img
+                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fd%2Fd4%2FDemolisher_RGilClan_v25.jpg"
+                  alt=""
+                  onerror="this.remove()"
+                />
+              </div>
+              <div class="cover-title">
+                <small>MECHWARRIOR 5</small>
+                <strong>Know your <span>Enemy</span></strong>
+                <p class="cover-meta">
+                  <span>115 units</span>
+                  <span>Tanks · VTOLs · Turrets</span>
+                </p>
+              </div>
+              <div class="cover-action">Open Enemy Units <span aria-hidden="true">→</span></div>
             </a>
 
             <div class="cover is-placeholder" aria-label="More games coming">

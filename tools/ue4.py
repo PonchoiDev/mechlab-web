@@ -151,13 +151,20 @@ class Asset:
             self.imports.append((nombre, exterior))
 
         self.exports = {}
+        self.tamanos = {}
+        # Clase, clase padre (en las clases de blueprint) y contenedor de cada export, como referencias:
+        # negativas a imports y positivas (n) al export n-1.
+        self.clases = {}
         for numero in range(total_exports):
-            cabecera.posicion = inicio_exports + numero * TAMANO_EXPORT + 16
+            cabecera.posicion = inicio_exports + numero * TAMANO_EXPORT
+            clase, padre, _plantilla, contenedor = cabecera.varios("iiii")
             nombre = self.nombres[cabecera.leer("i")]
+            self.clases[nombre] = (clase, padre, contenedor)
             cabecera.varios("iI")
-            _tamano, inicio = cabecera.varios("qq")
+            tamano, inicio = cabecera.varios("qq")
             # El .uexp continúa al .uasset: los desplazamientos cuentan desde el principio de los dos.
             self.exports[nombre] = inicio - tamano_cabecera
+            self.tamanos[nombre] = tamano
         self.datos = uexp
 
     @classmethod
@@ -171,6 +178,11 @@ class Asset:
         while exterior < 0:
             paquete, exterior = self.imports[-exterior - 1]
         return paquete, nombre
+
+    def bytes_de(self, export):
+        """Los datos crudos de un export, p. ej. el bytecode de una función de blueprint."""
+        inicio = self.exports[export]
+        return self.datos[inicio:inicio + self.tamanos[export]]
 
     def principal(self):
         """El objeto del asset cuando solo hay uno, aunque no se llame como el archivo."""

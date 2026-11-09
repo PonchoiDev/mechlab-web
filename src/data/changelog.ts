@@ -9,6 +9,19 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-09-enemy-units',
+    date: '2026-11-09',
+    title: 'Enemy units',
+    items: [
+      'A new Enemy units page lists the 115 tanks, hovercraft, VTOLs, turrets and battle armor squads you face in contracts',
+      'Each card shows base hit points, speed, alpha damage and DPS, every weapon with its damage, DPS and range, and which factions field it',
+      'Cards show the chassis artwork from Sarna.net and link to its page',
+      'Filter by type, search by name and sort by battle value, DPS, hit points, speed or intro year',
+      'Open it from its new cover on the home page or from the MechLab and star map headers',
+      'The What\'s new bell now sits before Feedback on every page, as on the home page and in the MechLab'
+    ]
+  },
+  {
     id: '2026-11-09-weapon-dps',
     date: '2026-11-09',
     title: 'DPS in the weapon list',
