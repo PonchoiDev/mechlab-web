@@ -23,6 +23,7 @@ import { getQuestRoute, parseQuestQuery } from '../utils/quests';
 import { getFixedSources, getMarketRarity, getMechFocus, isProduced, parseMechQuery } from '../utils/availability';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
+import { WhatsNew } from '../components/WhatsNew';
 import { MarketDrawer, SystemMarkets } from './MarketPanels';
 import { SystemArena, ZoneCard, ZoneLevels } from './ZonePanels';
 import { MercCard, MercDrawer } from './MercPanels';
@@ -466,6 +467,7 @@ export function StarmapApp() {
         <div className="starmap-actions">
           <button type="button" className="starmap-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>
           <SupportLink compact />
+          <WhatsNew />
         </div>
         <SystemSearch onPick={pickSystem} />
       </header>
