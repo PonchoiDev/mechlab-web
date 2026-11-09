@@ -345,8 +345,11 @@ export function StarmapApp() {
   const isPinned = shown !== null && shown.id === selectedId;
 
 
+  // Elegir otra cosa cierra la zona, para que no reaparezca al cerrar la ficha nueva. Solo la capital,
+  // abierta desde la propia ficha de la zona, la conserva.
   const pickSystem = (system: StarSystem) => {
     setSelectedId(system.id);
+    setZoneId(null);
     focusOn(system.id);
   };
 
@@ -354,6 +357,7 @@ export function StarmapApp() {
   const pickQuest = (picked: Quest) => {
     pendingMechRef.current = null;
     setQuestId(picked.id);
+    setZoneId(null);
     setMechId(null);
     setSelectedId(null);
     setHoveredId(null);
@@ -379,6 +383,7 @@ export function StarmapApp() {
   const pickMech = (id: string) => {
     pendingMechRef.current = null;
     setMechId(id);
+    setZoneId(null);
     setQuestId(null);
     setSelectedId(null);
     setHoveredId(null);
@@ -399,7 +404,7 @@ export function StarmapApp() {
         onHover={setHoveredId}
         onSelect={systemId => {
           setSelectedId(systemId);
-          if (systemId === null) setZoneId(null);
+          setZoneId(null);
         }}
         onZone={pickZone}
       />
@@ -473,6 +478,7 @@ export function StarmapApp() {
           data={data}
           onPick={systemId => {
             setSelectedId(systemId);
+            setZoneId(null);
             setHoveredId(null);
             focusOn(systemId);
           }}
