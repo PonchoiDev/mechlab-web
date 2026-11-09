@@ -31,8 +31,8 @@ Con el DLC4, las compañías de mercenarios rivales (Gray Death Legion, Kell Hou
 
 - **RF1.** Un panel **Rival mercs**, junto a los demás, lista las compañías con su logo y cuántas zonas ocupan en la fecha del mapa. Mientras está abierto, el mapa dibuja las zonas ocupadas en esa fecha: un círculo discontinuo con el logo de su compañía en el centro.
 - **RF2.** Al elegir una compañía se abre su ficha: logo, nombre, nivel de los pilotos, descripción y las zonas que ocupa en esa fecha, con sus sistemas enlazados y si el tramo es solo de carrera. El mapa encuadra sus zonas y solo dibuja las suyas.
-- **RF3.** Con las zonas dibujadas, al pasar el ratón por una se ve la compañía que la ocupa (o que rota al azar), y al pulsarla se abre su ficha.
-- **RF4.** Si en esa fecha la zona rota al azar, se dibuja sin logo y la ficha lo explica.
+- **RF3.** Con las zonas dibujadas, al pasar el ratón por una se ve la compañía que la ocupa (o que rota al azar) y si el tramo es solo de carrera, y al pulsarla se abre su ficha. El logo tiene prioridad sobre la estrella que queda debajo, porque el centro de la zona suele caer sobre uno de sus sistemas.
+- **RF4.** Si en esa fecha la zona rota al azar, se dibuja con un signo de interrogación en vez de logo y la etiqueta lo explica.
 
 ## Requisitos no funcionales
 
