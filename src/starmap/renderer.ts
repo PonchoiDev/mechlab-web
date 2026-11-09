@@ -46,6 +46,22 @@ export type TerritoryColors = ((faction: string) => string) | null;
 // Zona de mercenarios que se dibuja: su círculo y el logo de quien la ocupa (sin logo, rota al azar).
 export type MercZoneLayer = { zone: MercZone; logo: string | null; highlighted: boolean; title: string; note: string | null }[];
 
+// Los territorios se pintan en una capa aparte (con margen por los lados) y en cada fotograma solo se
+// coloca: trazar todos sus contornos cuesta decenas de milisegundos y hacerlo en cada fotograma volvía
+// lento el arrastre, el zoom y la animación de los eventos. Con la vista quieta, la capa se repinta nítida.
+const LAYER_MARGIN = 0.25;
+const SHARPEN_DELAY = 150;
+
+const sameView = (a: View, b: View) => a.x === b.x && a.y === b.y && a.scale === b.scale;
+
+interface TerritoryLayer {
+  canvas: HTMLCanvasElement;
+  view: View;
+  territories: Territory[];
+  marginX: number;
+  marginY: number;
+}
+
 interface Transition {
   startedAt: number;
   previous: Territory[];
@@ -93,6 +109,9 @@ export class StarmapRenderer {
   private date: GameDate = '';
   private territories: Territory[] = [];
   private transition: Transition | null = null;
+  private layer: TerritoryLayer | null = null;
+  private previousLayer: TerritoryLayer | null = null;
+  private sharpenTimer = 0;
   private starfield: HTMLCanvasElement | null = null;
   private owners: (string | null)[] = [];
   private territoryColors: TerritoryColors = null;
@@ -151,6 +170,8 @@ export class StarmapRenderer {
     this.ratio = ratio;
     this.canvas.width = Math.round(width * ratio);
     this.canvas.height = Math.round(height * ratio);
+    this.layer = null;
+    this.previousLayer = null;
     this.starfield = this.buildStarfield();
     this.requestDraw();
   }
@@ -159,6 +180,8 @@ export class StarmapRenderer {
     this.date = date;
     const previousOwners = this.owners;
     const previous = this.territories;
+    // La capa de los territorios de antes ya está pintada: la animación la reutiliza.
+    if (animate && this.layer?.territories === previous) this.previousLayer = this.layer;
     this.owners = this.data.systems.map(system => getOwnerAt(system, date));
     // Un trazado por facción, en años luz: al mover o ampliar el mapa solo cambia la transformación.
     this.territories = [...getTerritoryContours(this.index, this.data.systems, date)].map(([faction, loops]) => {
@@ -231,6 +254,7 @@ export class StarmapRenderer {
 
   destroy() {
     cancelAnimationFrame(this.frame);
+    window.clearTimeout(this.sharpenTimer);
   }
 
   private buildStarfield() {
@@ -261,12 +285,15 @@ export class StarmapRenderer {
     context.setTransform(this.ratio, 0, 0, this.ratio, 0, 0);
 
     const elapsed = this.transition ? performance.now() - this.transition.startedAt : Infinity;
+    const layer = this.currentLayer();
     if (this.transition && elapsed < FADE_MS) {
       const t = easeInOut(elapsed / FADE_MS);
-      this.drawTerritories(this.transition.previous, 1 - t);
-      this.drawTerritories(this.territories, t);
+      if (this.previousLayer?.territories !== this.transition.previous) this.previousLayer = this.paintLayer(this.transition.previous);
+      this.drawLayer(this.previousLayer, 1 - t);
+      this.drawLayer(layer, t);
     } else {
-      this.drawTerritories(this.territories, 1);
+      this.previousLayer = null;
+      this.drawLayer(layer, 1);
     }
     if (this.transition && elapsed < FLASH_MS) this.drawChanges(this.transition.changed, elapsed / FLASH_MS);
     this.drawClusters();
@@ -318,12 +345,54 @@ export class StarmapRenderer {
     context.restore();
   }
 
-  private drawTerritories(territories: Territory[], opacity: number) {
+  // La capa de los territorios actuales: se pinta si cambian y, si la vista se ha movido, se repinta
+  // nítida cuando se queda quieta; mientras tanto se reutiliza desplazada o escalada.
+  private currentLayer(): TerritoryLayer {
+    if (!this.layer || this.layer.territories !== this.territories) {
+      window.clearTimeout(this.sharpenTimer);
+      this.layer = this.paintLayer(this.territories);
+    } else if (!sameView(this.layer.view, this.view)) {
+      window.clearTimeout(this.sharpenTimer);
+      this.sharpenTimer = window.setTimeout(() => {
+        this.layer = this.paintLayer(this.territories);
+        this.requestDraw();
+      }, SHARPEN_DELAY);
+    }
+    return this.layer;
+  }
+
+  private paintLayer(territories: Territory[]): TerritoryLayer {
+    const marginX = Math.round(this.width * LAYER_MARGIN);
+    const marginY = Math.round(this.height * LAYER_MARGIN);
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round((this.width + marginX * 2) * this.ratio);
+    canvas.height = Math.round((this.height + marginY * 2) * this.ratio);
+    const context = canvas.getContext('2d')!;
+    const { x, y, scale } = this.view;
+    context.setTransform(
+      this.ratio * scale, 0, 0, -this.ratio * scale,
+      this.ratio * (marginX + this.width / 2 - x * scale), this.ratio * (marginY + this.height / 2 + y * scale)
+    );
+    this.paintTerritories(context, territories, scale);
+    return { canvas, view: { ...this.view }, territories, marginX, marginY };
+  }
+
+  // Coloca la capa según cuánto se haya movido o ampliado la vista desde que se pintó.
+  private drawLayer(layer: TerritoryLayer, opacity: number) {
     const context = this.context;
-    const { scale } = this.view;
+    const { x, y, scale } = this.view;
+    const zoom = scale / layer.view.scale;
+    const left = this.width / 2 + (layer.view.x - x) * scale - (layer.marginX + this.width / 2) * zoom;
+    const top = this.height / 2 - (layer.view.y - y) * scale - (layer.marginY + this.height / 2) * zoom;
     context.save();
-    this.setWorldTransform();
+    context.setTransform(this.ratio, 0, 0, this.ratio, 0, 0);
     context.globalAlpha = opacity;
+    context.drawImage(layer.canvas, left, top, (layer.canvas.width / this.ratio) * zoom, (layer.canvas.height / this.ratio) * zoom);
+    context.restore();
+  }
+
+  private paintTerritories(context: CanvasRenderingContext2D, territories: Territory[], scale: number) {
+    context.save();
     context.lineJoin = 'round';
     for (const { color, path } of territories) {
       context.fillStyle = withAlpha(color, 0.2);
