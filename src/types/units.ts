@@ -26,6 +26,8 @@ export interface Unit {
   squad?: number;
   weapons: UnitWeaponRef[];
   rarity: Record<string, Rarity>;
+  // Página de Sarna del chasis y su dibujo principal (algunas páginas no tienen dibujo).
+  sarna?: { page: string; image: string | null };
 }
 
 export interface UnitsData {

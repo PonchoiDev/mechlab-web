@@ -32,6 +32,30 @@ TIPOS = [("UnitType.Vehicle.Tracked", "tracked"), ("UnitType.Vehicle.Hover", "ho
 ROLES_DE_UNIDAD = {**ROLES, "airsupport": "Air Support"}
 # La velocidad de los blueprints está en cm/s.
 CM_S_A_KM_H = 0.036
+# Página de Sarna de cada chasis, por el final de su etiqueta (UnitType.Vehicle.Tracked.Tank.Scorpion).
+# El juego no la trae: son los títulos de Sarna, comprobados con su API. Igor y Riverjack son del
+# MW5 y su página no tiene dibujo; las torretas, el Convoy y el Arrow IV Carrier no tienen página.
+TITULOS_SARNA = {
+    "Behemoth": "Behemoth (Combat Vehicle)", "Bulldog": "Bulldog Medium Tank", "Condor": "Condor (Combat Vehicle)",
+    "Demolisher": "Demolisher", "DemolisherII": "Demolisher II", "Drillson": "Drillson", "Harasser": "Harasser",
+    "Hetzer": "Hetzer", "Igor": "Igor", "JEdgar": "J. Edgar", "Manticore": "Manticore", "Ontos": "Ontos",
+    "Partisan": "Partisan", "Patton": "Patton", "Po": "Po Heavy Tank", "Riverjack": "Riverjack", "Schrek": "Schrek",
+    "Scorpion": "Scorpion (Combat Vehicle)", "VonLuckner": "Von Luckner", "Warrior": "Warrior (Combat Vehicle)",
+}
+# Los Missile Carrier comparten etiqueta: la página depende de sus misiles. Sarna redirige el MRM
+# Carrier al LRM Carrier.
+CARRIERS_SARNA = {"LRM": "LRM Carrier", "MRM": "LRM Carrier", "SRM": "SRM Carrier"}
+# Las armaduras de combate solo dicen UnitType.Vehicle: van por su nombre.
+ARMADURAS_SARNA = {"Battle Armor": "Inner Sphere Standard (Battle Armor)", "Clan Elemental": "Elemental (Battle Armor)"}
+
+
+def titulo_sarna(etiqueta, nombre):
+    if nombre in ARMADURAS_SARNA:
+        return ARMADURAS_SARNA[nombre]
+    chasis = etiqueta.rsplit(".", 1)[1]
+    if chasis == "MissileCarrier":
+        return CARRIERS_SARNA.get(nombre[:3])
+    return TITULOS_SARNA.get(chasis)
 
 
 def tipo_de_unidad(etiqueta, unidad):
@@ -104,14 +128,19 @@ def arma_de_unidad(id_arma, arma, items):
     return item
 
 
-def leer_json(nombre):
-    with open(os.path.join(RUTA_UNIDADES, nombre), encoding="utf-8") as archivo:
+def leer_json(nombre, por_defecto=None):
+    ruta = os.path.join(RUTA_UNIDADES, nombre)
+    if por_defecto is not None and not os.path.exists(ruta):
+        return por_defecto
+    with open(ruta, encoding="utf-8") as archivo:
         return json.load(archivo)
 
 
 def main():
     ruta_destino = sys.argv[1] if len(sys.argv) > 1 else os.path.normpath(RUTA_DESTINO_POR_DEFECTO)
     blueprints, armas_juego, nombres_faccion = leer_json("unidades.json"), leer_json("armas.json"), leer_json("facciones.json")
+    # Página y dibujo de Sarna de cada título, de imagenes_sarna.py.
+    sarna = leer_json("sarna.json", {})
     with open(os.path.normpath(RUTA_ITEMS), encoding="utf-8") as archivo:
         items = json.load(archivo)
 
@@ -150,6 +179,11 @@ def main():
         }
         if blueprint.get("escuadra"):
             unidad["squad"] = blueprint["escuadra"]
+        titulo = titulo_sarna(etiqueta.group(1), nombre)
+        if titulo in sarna:
+            unidad["sarna"] = sarna[titulo]
+        elif titulo:
+            avisos.append(f"{id_unidad}: falta {titulo} en sarna.json (python3 tools/imagenes_sarna.py)")
         if not unidad["weapons"]:
             avisos.append(f"{id_unidad}: sin armas")
         unidades.append(unidad)

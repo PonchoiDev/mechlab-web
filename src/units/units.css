@@ -330,7 +330,45 @@ button, input, select { font: inherit; color: inherit; }
   background: var(--units-panel);
 }
 
-.unit-card-header { padding: 10px 14px 8px; }
+.unit-card-header {
+  position: relative;
+  overflow: hidden;
+  min-height: 96px;
+  padding: 10px 14px 8px;
+}
+
+/* El dibujo de Sarna a la derecha de la cabecera: línea negra sobre blanco que, invertida y en modo
+   pantalla, queda como un holograma rojo, como en la carátula de la portada. */
+.unit-card-art {
+  position: absolute;
+  inset: 0 0 0 38%;
+  pointer-events: none;
+}
+
+.unit-card-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 55%;
+  filter: invert(1) sepia(1) hue-rotate(-35deg) saturate(2.4) brightness(0.95);
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  mask-image: linear-gradient(90deg, transparent, #000 45%);
+}
+
+.unit-card-header > p,
+.unit-card-header > h2 { position: relative; }
+
+.unit-card-meta a {
+  color: var(--units-text);
+  text-decoration: none;
+}
+
+.unit-card-meta a:hover,
+.unit-card-meta a:focus-visible {
+  color: var(--units-accent);
+  outline: none;
+}
 
 .unit-card-kind,
 .unit-card-meta {

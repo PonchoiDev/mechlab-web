@@ -25,6 +25,17 @@ const data = unitsJson as unknown as UnitsData;
 
 const formatNumber = (value: number) => Number.isInteger(value) ? String(value) : value.toFixed(1);
 
+// El dibujo de línea de Sarna, invertido y teñido como en la portada. Si no carga, se quita.
+function UnitArt({ image }: { image: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return null;
+  return (
+    <div className="unit-card-art" aria-hidden="true">
+      <img src={image} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={() => setFailed(true)} />
+    </div>
+  );
+}
+
 function UnitCard({ unit }: { unit: Unit }) {
   const weapons = getUnitWeapons(data, unit);
   const firepower = getUnitFirepower(data, unit);
@@ -34,6 +45,7 @@ function UnitCard({ unit }: { unit: Unit }) {
   return (
     <article className="unit-card" data-kind={unit.kind}>
       <header className="unit-card-header">
+        {unit.sarna?.image && <UnitArt image={unit.sarna.image} />}
         <p className="unit-card-kind">
           <span>{UNIT_KIND_LABELS[unit.kind]}</span>
           {unit.role && <span>{unit.role}</span>}
@@ -43,6 +55,9 @@ function UnitCard({ unit }: { unit: Unit }) {
           <span>Tier {unit.tier}</span>
           <span>BV {unit.battleValue}</span>
           <span>Since {unit.introYear}</span>
+          {unit.sarna && (
+            <a href={unit.sarna.page} target="_blank" rel="noreferrer" title={`${unit.name} on Sarna.net`}>Sarna ↗</a>
+          )}
         </p>
       </header>
 

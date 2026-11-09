@@ -2066,7 +2066,11 @@
     "Steiner": "rare",
     "WordOfBlake": "uncommon"
    },
-   "squad": 4
+   "squad": 4,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Inner_Sphere_Standard_%28Battle_Armor%29",
+    "image": "https://cfw.sarna.net/wiki/images/8/81/IS_Standard_Battle_Armor_%28Laser%29_Shrapnel015.jpg"
+   }
   },
   {
    "id": "Behemoth_Armor",
@@ -2106,6 +2110,10 @@
     "Steiner": "uncommon",
     "WolfsDragoons": "common",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Behemoth_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e9/Behemoth_tank_RGilClan_v31.jpg/600px-7vrgzyakvklg3vikd0izwr5jhklk7co.jpg"
    }
   },
   {
@@ -2154,6 +2162,10 @@
     "Steiner": "rare",
     "WolfsDragoons": "rare",
     "WordOfBlake": "rare"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Behemoth_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e9/Behemoth_tank_RGilClan_v31.jpg/600px-7vrgzyakvklg3vikd0izwr5jhklk7co.jpg"
    }
   },
   {
@@ -2213,6 +2225,10 @@
     "WacoRangers": "common",
     "WolfsDragoons": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Bulldog_Medium_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e8/Bulldog_RGilClan_v25.jpg/600px-jcni0yym94r9zsolj9hwbcx6m18nu4m.jpg"
    }
   },
   {
@@ -2272,6 +2288,10 @@
     "WacoRangers": "common",
     "WolfsDragoons": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Bulldog_Medium_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e8/Bulldog_RGilClan_v25.jpg/600px-jcni0yym94r9zsolj9hwbcx6m18nu4m.jpg"
    }
   },
   {
@@ -2331,6 +2351,10 @@
     "WacoRangers": "common",
     "WolfsDragoons": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Bulldog_Medium_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e8/Bulldog_RGilClan_v25.jpg/600px-jcni0yym94r9zsolj9hwbcx6m18nu4m.jpg"
    }
   },
   {
@@ -2369,7 +2393,11 @@
     "ClanWolf": "common",
     "ClanWolfInExile": "common"
    },
-   "squad": 5
+   "squad": 5,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Elemental_%28Battle_Armor%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/9f/Elemental_%28III%29_RGilClan_v24.png"
+   }
   },
   {
    "id": "Condor",
@@ -2424,6 +2452,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Condor_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/03/Condor_RGilClan_v26.jpg/600px-5e8qxm3a4q48kx1j02iztmwvklxpvaj.jpg"
    }
   },
   {
@@ -2449,6 +2481,10 @@
    "rarity": {
     "Davion": "uncommon",
     "FederatedCommonwealth": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Condor_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/03/Condor_RGilClan_v26.jpg/600px-5e8qxm3a4q48kx1j02iztmwvklxpvaj.jpg"
    }
   },
   {
@@ -2497,6 +2533,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WolfsDragoons": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Condor_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/03/Condor_RGilClan_v26.jpg/600px-5e8qxm3a4q48kx1j02iztmwvklxpvaj.jpg"
    }
   },
   {
@@ -2521,6 +2561,10 @@
    ],
    "rarity": {
     "Liao": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Condor_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/03/Condor_RGilClan_v26.jpg/600px-5e8qxm3a4q48kx1j02iztmwvklxpvaj.jpg"
    }
   },
   {
@@ -2600,6 +2644,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d4/Demolisher_RGilClan_v25.jpg/600px-k8rk1w5lpzlsjxz7b8byf9k44m2ybn9.jpg"
    }
   },
   {
@@ -2633,6 +2681,10 @@
     "ClanSteelViper": "uncommon",
     "ClanWolf": "uncommon",
     "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d4/Demolisher_RGilClan_v25.jpg/600px-k8rk1w5lpzlsjxz7b8byf9k44m2ybn9.jpg"
    }
   },
   {
@@ -2684,6 +2736,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d4/Demolisher_RGilClan_v25.jpg/600px-k8rk1w5lpzlsjxz7b8byf9k44m2ybn9.jpg"
    }
   },
   {
@@ -2714,6 +2770,10 @@
     "ClanWolfInExile": "rare",
     "Davion": "uncommon",
     "LyranAlliance": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher_II",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/3/3f/Demolisher2.PNG/600px-kx9m5g3eopwbra752nd0rqyj83j73da.png"
    }
   },
   {
@@ -2773,6 +2833,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Drillson",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/02/Drillson_RGilClan_v32.jpg/600px-iersbpipen0xly5v7zin7vz69rq9uub.jpg"
    }
   },
   {
@@ -2832,6 +2896,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Drillson",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/02/Drillson_RGilClan_v32.jpg/600px-iersbpipen0xly5v7zin7vz69rq9uub.jpg"
    }
   },
   {
@@ -2887,6 +2955,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Drillson",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/02/Drillson_RGilClan_v32.jpg/600px-iersbpipen0xly5v7zin7vz69rq9uub.jpg"
    }
   },
   {
@@ -2937,6 +3009,10 @@
     "Thumpers": "uncommon",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Harasser",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/6a/Harasser_RGilClan_v33.jpg/600px-jsra9wopybzl5a0astq2vjkx2bps3gv.jpg"
    }
   },
   {
@@ -2966,6 +3042,10 @@
     "ClanSteelViper": "common",
     "ClanWolf": "common",
     "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Harasser",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/6a/Harasser_RGilClan_v33.jpg/600px-jsra9wopybzl5a0astq2vjkx2bps3gv.jpg"
    }
   },
   {
@@ -3016,6 +3096,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Harasser",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/6a/Harasser_RGilClan_v33.jpg/600px-jsra9wopybzl5a0astq2vjkx2bps3gv.jpg"
    }
   },
   {
@@ -3398,6 +3482,10 @@
    ],
    "rarity": {
     "Liao": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Hetzer",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/5/53/Hetzer_RGilClan_v29.jpg/600px-n4rderc50l7ig3thl7hv4u1vy7o5tl7.jpg"
    }
   },
   {
@@ -3444,6 +3532,10 @@
     "Thumpers": "uncommon",
     "WacoRangers": "uncommon",
     "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Hetzer",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/5/53/Hetzer_RGilClan_v29.jpg/600px-n4rderc50l7ig3thl7hv4u1vy7o5tl7.jpg"
    }
   },
   {
@@ -3491,6 +3583,10 @@
     "Thumpers": "uncommon",
     "WacoRangers": "uncommon",
     "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Hetzer",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/5/53/Hetzer_RGilClan_v29.jpg/600px-n4rderc50l7ig3thl7hv4u1vy7o5tl7.jpg"
    }
   },
   {
@@ -3541,6 +3637,10 @@
     "WacoRangers": "common",
     "WolfsDragoons": "common",
     "WordOfBlake": "rare"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Hetzer",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/5/53/Hetzer_RGilClan_v29.jpg/600px-n4rderc50l7ig3thl7hv4u1vy7o5tl7.jpg"
    }
   },
   {
@@ -3605,6 +3705,10 @@
     "WacoRangers": "uncommon",
     "WolfsDragoons": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
    }
   },
   {
@@ -3669,6 +3773,10 @@
     "WacoRangers": "uncommon",
     "WolfsDragoons": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
    }
   },
   {
@@ -3698,6 +3806,10 @@
     "ClanSteelViper": "uncommon",
     "ClanWolf": "uncommon",
     "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
    }
   },
   {
@@ -3727,6 +3839,10 @@
     "ClanSteelViper": "uncommon",
     "ClanWolf": "uncommon",
     "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
    }
   },
   {
@@ -3764,6 +3880,10 @@
     "ClanSteelViper": "uncommon",
     "ClanWolf": "uncommon",
     "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Igor",
+    "image": null
    }
   },
   {
@@ -3818,6 +3938,10 @@
     "Thumpers": "rare",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/J._Edgar",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/JEdgar_RGilClan_v32.jpg/600px-kkmaytn0htvnr99b7piytpq4458cc3i.jpg"
    }
   },
   {
@@ -3851,6 +3975,10 @@
     "ClanSteelViper": "common",
     "ClanWolf": "common",
     "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/J._Edgar",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/JEdgar_RGilClan_v32.jpg/600px-kkmaytn0htvnr99b7piytpq4458cc3i.jpg"
    }
   },
   {
@@ -3905,6 +4033,10 @@
     "Thumpers": "rare",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/J._Edgar",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/JEdgar_RGilClan_v32.jpg/600px-kkmaytn0htvnr99b7piytpq4458cc3i.jpg"
    }
   },
   {
@@ -3956,6 +4088,10 @@
     "Steiner": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/J._Edgar",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/JEdgar_RGilClan_v32.jpg/600px-kkmaytn0htvnr99b7piytpq4458cc3i.jpg"
    }
   },
   {
@@ -4003,6 +4139,10 @@
     "Steiner": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
    }
   },
   {
@@ -4050,6 +4190,10 @@
     "Steiner": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
    }
   },
   {
@@ -4100,6 +4244,10 @@
     "Thumpers": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
    }
   },
   {
@@ -4147,6 +4295,10 @@
     "Steiner": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
    }
   },
   {
@@ -4194,6 +4346,10 @@
     "Steiner": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
    }
   },
   {
@@ -4244,6 +4400,10 @@
     "Thumpers": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
    }
   },
   {
@@ -4306,6 +4466,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Manticore",
+    "image": "https://cfw.sarna.net/wiki/images/0/09/Manticore_RGilClan_v31.jpg"
    }
   },
   {
@@ -4368,6 +4532,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Manticore",
+    "image": "https://cfw.sarna.net/wiki/images/0/09/Manticore_RGilClan_v31.jpg"
    }
   },
   {
@@ -4430,6 +4598,10 @@
     "Thumpers": "uncommon",
     "WacoRangers": "uncommon",
     "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Ontos",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fc/Ontos_RGilClan_v29.jpg/600px-ti6nhsl3myyr3n0re7cld4n9i4e2etw.jpg"
    }
   },
   {
@@ -4459,6 +4631,10 @@
     "LyranAlliance": "uncommon",
     "Marik": "common",
     "Steiner": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Ontos",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fc/Ontos_RGilClan_v29.jpg/600px-ti6nhsl3myyr3n0re7cld4n9i4e2etw.jpg"
    }
   },
   {
@@ -4509,6 +4685,10 @@
     "Thumpers": "uncommon",
     "WacoRangers": "uncommon",
     "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Ontos",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fc/Ontos_RGilClan_v29.jpg/600px-ti6nhsl3myyr3n0re7cld4n9i4e2etw.jpg"
    }
   },
   {
@@ -4560,6 +4740,10 @@
     "Thumpers": "uncommon",
     "WacoRangers": "uncommon",
     "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Ontos",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fc/Ontos_RGilClan_v29.jpg/600px-ti6nhsl3myyr3n0re7cld4n9i4e2etw.jpg"
    }
   },
   {
@@ -4614,6 +4798,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Partisan",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0f/Partisan_RGilClan_v33.jpg/600px-6mu5vxjfmci1kgtjs85cf4zjirit7j2.jpg"
    }
   },
   {
@@ -4668,6 +4856,10 @@
     "Thumpers": "veryCommon",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Partisan",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0f/Partisan_RGilClan_v33.jpg/600px-6mu5vxjfmci1kgtjs85cf4zjirit7j2.jpg"
    }
   },
   {
@@ -4701,6 +4893,10 @@
     "ClanSteelViper": "uncommon",
     "ClanWolf": "uncommon",
     "ClanWolfInExile": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Partisan",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0f/Partisan_RGilClan_v33.jpg/600px-6mu5vxjfmci1kgtjs85cf4zjirit7j2.jpg"
    }
   },
   {
@@ -4733,6 +4929,10 @@
     "FederatedCommonwealth": "uncommon",
     "LyranAlliance": "uncommon",
     "Steiner": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Patton",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d8/Patton_RGilClan_v27.jpg/600px-flmompews2vx2ah9xfa2h9luimurhph.jpg"
    }
   },
   {
@@ -4792,6 +4992,10 @@
     "Steiner": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Patton",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d8/Patton_RGilClan_v27.jpg/600px-flmompews2vx2ah9xfa2h9luimurhph.jpg"
    }
   },
   {
@@ -4816,6 +5020,10 @@
    ],
    "rarity": {
     "Marik": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Po_Heavy_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/Po.jpg/600px-kx08ijkvtq2azi8afdmjobl0gc4g9pf.jpg"
    }
   },
   {
@@ -4860,6 +5068,10 @@
     "WacoRangers": "uncommon",
     "WolfsDragoons": "uncommon",
     "WordOfBlake": "rare"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Po_Heavy_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/66/Po.jpg/600px-kx08ijkvtq2azi8afdmjobl0gc4g9pf.jpg"
    }
   },
   {
@@ -4907,6 +5119,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Riverjack",
+    "image": null
    }
   },
   {
@@ -4936,6 +5152,10 @@
     "ClanSteelViper": "rare",
     "ClanWolf": "rare",
     "ClanWolfInExile": "rare"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Riverjack",
+    "image": null
    }
   },
   {
@@ -4983,6 +5203,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Riverjack",
+    "image": null
    }
   },
   {
@@ -5030,6 +5254,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Riverjack",
+    "image": null
    }
   },
   {
@@ -5077,6 +5305,10 @@
     "Steiner": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/SRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0e/SRM_Carrier_RGilClan_v30.jpg/600px-hkpawaem20jm1t0futwrf55w7bt0m28.jpg"
    }
   },
   {
@@ -5124,6 +5356,10 @@
     "Steiner": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/SRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0e/SRM_Carrier_RGilClan_v30.jpg/600px-hkpawaem20jm1t0futwrf55w7bt0m28.jpg"
    }
   },
   {
@@ -5174,6 +5410,10 @@
     "Thumpers": "common",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/SRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0e/SRM_Carrier_RGilClan_v30.jpg/600px-hkpawaem20jm1t0futwrf55w7bt0m28.jpg"
    }
   },
   {
@@ -5225,6 +5465,10 @@
     "Steiner": "uncommon",
     "WacoRangers": "uncommon",
     "WordOfBlake": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Schrek",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e4/Schrek_RGilClan_v32.jpg/600px-6kyhe430wm9jkcvzg9u4fychzqmlpr2.jpg"
    }
   },
   {
@@ -5279,6 +5523,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
    }
   },
   {
@@ -5312,6 +5560,10 @@
     "ClanSteelViper": "common",
     "ClanWolf": "common",
     "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
    }
   },
   {
@@ -5366,6 +5618,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
    }
   },
   {
@@ -5424,6 +5680,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
    }
   },
   {
@@ -5478,6 +5738,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
    }
   },
   {
@@ -5528,6 +5792,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
    }
   },
   {
@@ -5551,6 +5819,10 @@
     "Mercenaries": "veryRare",
     "Outlaws": "veryCommon",
     "Periphery": "veryCommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
    }
   },
   {
@@ -5605,6 +5877,10 @@
     "Thumpers": "common",
     "WacoRangers": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
    }
   },
   {
@@ -6783,6 +7059,10 @@
     "Outlaws": "common",
     "Periphery": "common",
     "Steiner": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
    }
   },
   {
@@ -6848,6 +7128,10 @@
     "WacoRangers": "common",
     "WolfsDragoons": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
    }
   },
   {
@@ -6881,6 +7165,10 @@
     "ClanSteelViper": "common",
     "ClanWolf": "common",
     "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
    }
   },
   {
@@ -6942,6 +7230,10 @@
     "WacoRangers": "common",
     "WolfsDragoons": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
    }
   },
   {
@@ -7007,6 +7299,10 @@
     "WacoRangers": "common",
     "WolfsDragoons": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
    }
   },
   {
@@ -7072,6 +7368,10 @@
     "WacoRangers": "common",
     "WolfsDragoons": "common",
     "WordOfBlake": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
    }
   },
   {
@@ -7105,6 +7405,10 @@
     "ClanSteelViper": "common",
     "ClanWolf": "common",
     "ClanWolfInExile": "common"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Warrior_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/9/99/Warrior_RGilClan_v28.jpg"
    }
   },
   {
@@ -7170,6 +7474,10 @@
     "Thumpers": "uncommon",
     "WacoRangers": "uncommon",
     "WolfsDragoons": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Von_Luckner",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/44/Von_Luckner_RGilClan_v32.jpg/600px-nca56iteknz769safl7kxq0hmcmesjy.jpg"
    }
   },
   {
@@ -7211,6 +7519,10 @@
    "rarity": {
     "FreeRasalhagueRepublic": "rare",
     "Kurita": "uncommon"
+   },
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Von_Luckner",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/44/Von_Luckner_RGilClan_v32.jpg/600px-nca56iteknz769safl7kxq0hmcmesjy.jpg"
    }
   }
  ]
