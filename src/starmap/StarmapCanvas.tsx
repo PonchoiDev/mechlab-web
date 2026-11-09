@@ -56,8 +56,9 @@ function ZoneHint({ data, clusterId }: { data: StarmapData; clusterId: string })
   return (
     <p className="starmap-hint-zone">
       <b>{data.clusters[clusterId].name}</b>
-      {levels.map(level => (
-        <small key={`${level.mode}-${level.reputation}-${level.difficulty}`}>
+      {levels.map((level, index) => (
+        // Dos niveles del mismo modo pueden coincidir en reputación y dificultad: la posición los distingue.
+        <small key={index}>
           {level.mode && levels.length > 1 && `${level.mode === 'campaign' ? 'Campaign' : 'Career'}: `}
           <ZoneLevelText level={level} />
         </small>
