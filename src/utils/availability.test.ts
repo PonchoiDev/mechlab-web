@@ -222,6 +222,7 @@ describe('rareza de cada variante por facción', () => {
     expect(getFixedSources(data, 'CRD-CR').rewards).toEqual([]);
     expect(data.rewards.some(reward => reward.id.endsWith('Template'))).toBe(false);
     expect(mech('AS7-BH').heroMarket).toBe(true);
+    expect(mech('CRD-CR').heroMarket).toBe(true);
   });
 
   it('CA10: las variantes están en el MechLab y todas las facciones del mapa tienen tabla salvo el ARDC', () => {
