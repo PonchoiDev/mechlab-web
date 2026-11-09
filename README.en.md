@@ -39,7 +39,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (361 tests, V8 coverage) |
+| Tests | Vitest 5 (367 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -195,7 +195,8 @@ python3 tools/generar_mapa.py
 | `misiones.json` | HRQ `Show…`, `Place…` and `Generate…` actions and their objectives | Offer and mission systems, titles, summaries and employer |
 | `recompensas_misiones.json` | HRQ objectives with `bHasRewards` | C-Bills, reputation, 'Mechs, weapons, equipment and debrief of each reward |
 | `mercados.json` and `mechs_unicos.json` | `CustomMarket` assets and actions with `HeroMechToPlace` | Markets with their inventory and unique 'Mechs with their date |
-| `zonas.json` | `*_ClusterAsset` of campaign, career and the DLC campaigns | Systems, name, recommended reputation and difficulty of each zone |
+| `zonas.json` | `*_ClusterAsset` of campaign, career and the DLC campaigns | Systems, name, description, capital, recommended reputation, difficulty, repair markup and multi-mission contracts of each zone |
+| `arenas.json` | `ArenaStarSystemTable` and `ArenaFameProgressionTable` (DLC6) | Systems with an arena and fame ranks with their rewards |
 | `alianzas.json` | `Allegiance` of the `Factions/*` assets | The faction each one answers to, for the rarity table of minor factions |
 | `recompensas_campana.json` | Objectives with `bHasRewards` and `MechLoadouts` outside the HRQ, and the action that places them | 'Mechs from the DLC campaigns, the Bounty Hunter or promotions, with their system |
 | `heroes_en_venta.json` | `HeroMechsForPurchase` | The 95 hero 'Mechs the game can put up for sale |
@@ -203,7 +204,7 @@ python3 tools/generar_mapa.py
 
 ## Quality and checks against the game
 
-- **361 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **367 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-09-conflict-zones-arenas',
+    date: '2026-11-09',
+    title: 'Conflict zones and arenas',
+    items: [
+      'Hovering a conflict zone shows its recommended reputation and difficulty, and clicking inside it opens its card with the description, capital, repair markup and multi-mission contracts',
+      'Systems with an arena have their own icon, and their card lists the arena features and the fame ranks with their rewards'
+    ]
+  },
+  {
     id: '2026-11-05-find-a-mech',
     date: '2026-11-05',
     title: 'Find a \'Mech on the star map',

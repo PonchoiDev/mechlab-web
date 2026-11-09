@@ -37,7 +37,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (361 tests, cobertura con V8) |
+| Tests | Vitest 5 (367 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -191,7 +191,8 @@ python3 tools/generar_mapa.py
 | `misiones.json` | Acciones `Show…`, `Place…` y `Generate…` de las HRQ y sus objetivos | Sistema de la oferta y de cada misión, títulos, resúmenes y quien la encarga |
 | `recompensas_misiones.json` | Objetivos de las HRQ con `bHasRewards` | C-Bills, reputación, 'Mechs, armas, equipo y texto final de cada recompensa |
 | `mercados.json` y `mechs_unicos.json` | Assets `CustomMarket` y acciones con `HeroMechToPlace` | Mercados con su inventario y 'Mechs únicos con su fecha |
-| `zonas.json` | `*_ClusterAsset` de campaña, de carrera y de las campañas de los DLC | Sistemas, nombre, reputación recomendada y dificultad de cada zona |
+| `zonas.json` | `*_ClusterAsset` de campaña, de carrera y de las campañas de los DLC | Sistemas, nombre, descripción, capital, reputación recomendada, dificultad, recargo de reparación y contratos de varias misiones de cada zona |
+| `arenas.json` | `ArenaStarSystemTable` y `ArenaFameProgressionTable` (DLC6) | Sistemas con arena y rangos de fama con sus recompensas |
 | `alianzas.json` | `Allegiance` de los assets de `Factions/*` | Facción a la que responde cada una, para la tabla de rareza de las facciones menores |
 | `recompensas_campana.json` | Objetivos con `bHasRewards` y `MechLoadouts` fuera de las HRQ, y la acción que los coloca | 'Mechs de las campañas de los DLC, el Bounty Hunter o promociones, con su sistema |
 | `heroes_en_venta.json` | `HeroMechsForPurchase` | Los 95 'Mechs hero que el juego puede poner a la venta |
@@ -199,7 +200,7 @@ python3 tools/generar_mapa.py
 
 ## Calidad y comprobación contra el juego
 
-- **361 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **367 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

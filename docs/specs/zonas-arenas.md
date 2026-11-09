@@ -1,7 +1,7 @@
 # Especificación: ficha de las zonas de conflicto y arenas en el mapa estelar
 
 - **Issue:** [#80](https://github.com/PonchoiDev/mechlab-web/issues/80)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/clusters.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -59,3 +59,15 @@ El mapa dibuja las zonas de conflicto ([mapa-estelar.md](mapa-estelar.md)) y la 
 
 1. **Datos y lógica (CA1 a CA6):** `src/utils/clusters.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: pasar el ratón por Liao/Davion Border y pulsar dentro, la ficha de un sistema de esa zona, el icono de arena y la ficha de Solaris con sus rangos.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 64 de las 71 zonas tienen descripción (las 7 sin ella son zonas de un solo sistema de los DLC). Las 9 arenas y los 11 rangos de fama, de «Nobody From Nowhere» (0 puntos) a «Champion».
+- **Tests:** los seis criterios (CA1 a CA6) están en `src/utils/clusters.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: la etiqueta de Liao/Davion Border al pasar el ratón, su ficha al pulsar dentro, la ficha de Avigait con el recargo y los contratos, y la de Solaris con su arena y los rangos.
+- **Decisiones durante el desarrollo:**
+  - La lógica va en `clusters.ts`, porque `zones.ts` ya son las zonas de un 'Mech en el MechLab.
+  - El CA3 y el CA6 se corrigieron con los datos: los centros industriales no traen recargo de reparación, y el recargo se muestra con el nombre del juego (*markup*) en vez de como multiplicador.
+  - El CA4 decía que Solaris tiene encuentros con mercenarios; solo los tienen Northwind y Outreach.
+  - Los campos de los contratos de varias misiones empiezan todos por `MMO_`, así que se leen por su nombre completo.
