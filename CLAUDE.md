@@ -16,6 +16,8 @@ python3 tools/generar_mechs.py    # src/data/mechs.json (lee items.json: va desp
 python3 tools/generar_traits.py   # src/data/traits.json
 python3 tools/extraer_mapa.py "<carpeta del juego>"  # tools/datos-juego/starmap/, del .pak de la instalación
 python3 tools/generar_mapa.py     # src/data/starmap.json
+python3 tools/extraer_unidades.py "<carpeta del juego>"  # tools/datos-juego/unidades/, del .pak
+python3 tools/generar_unidades.py # src/data/units.json (lee items.json)
 ```
 
 Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` sin errores.

@@ -8,6 +8,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno
 |---|---|
 | **Web en producción** | **https://mw-builder.com/mercs/** |
 | Mapa estelar | https://mw-builder.com/mercs/starmap/ |
+| Unidades enemigas | https://mw-builder.com/mercs/units/ |
 | Presentación (slides) | [Ver en Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) |
 | Vídeo explicativo | [Ver en Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) |
 | Login | No tiene: la web se usa sin registro y las builds se guardan en el navegador |
@@ -37,7 +38,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (375 tests, cobertura con V8) |
+| Tests | Vitest 5 (388 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -126,14 +127,16 @@ src/
   App.tsx               Componente principal: estado de la build y composición de la página
   components/           Componentes de la interfaz (tablero, selector, panel de mejoras, diálogos…)
   starmap/              Página del mapa estelar: canvas, ficha del sistema, fecha y buscador
+  units/                Página de las unidades enemigas: filtros y ficha de cada unidad
   hooks/                Estado de la build, builds guardadas, preferencias de vista e imagen de Sarna
   utils/                Lógica del configurador: cálculos, reglas de equipo, mejoras, código de las builds
   services/             API de Sarna, portapapeles e imagen PNG de la build (canvas)
   types/                Tipos de TypeScript
-  data/                 mechs.json, items.json, traits.json y starmap.json generados, y las novedades
+  data/                 mechs.json, items.json, traits.json, starmap.json y units.json generados, y las novedades
   test/                 Datos de prueba compartidos
 worker/                 Worker de Cloudflare: proxy de imágenes de Sarna y formulario de feedback
 starmap/index.html      Entrada de la página del mapa estelar (/mercs/starmap/)
+units/index.html        Entrada de la página de las unidades enemigas (/mercs/units/)
 site/                   Portada de la raíz del dominio (mw-builder.com)
 docs/                   Análisis, arquitectura, diagramas UML y desarrollo con IA
 tools/
@@ -142,6 +145,8 @@ tools/
   generar_traits.py     Genera src/data/traits.json (mejoras de la cantina)
   extraer_mapa.py       Extrae del .pak del juego los datos del mapa estelar
   generar_mapa.py       Genera src/data/starmap.json
+  extraer_unidades.py   Extrae del .pak del juego la vida, la velocidad y las armas de las unidades enemigas
+  generar_unidades.py   Genera src/data/units.json
   ue4.py                Lectura del .pak y de los assets de Unreal Engine 4
   datos-juego/          Archivos exportados del juego
 .github/                Integración continua, CodeQL y Dependabot
@@ -201,9 +206,24 @@ python3 tools/generar_mapa.py
 | `heroes_en_venta.json` | `HeroMechsForPurchase` | Los 95 'Mechs hero que el juego puede poner a la venta |
 | `public/starmap/logos/` | Texturas `LogoLarge` de cada facción | Logos de facción en PNG de 128 px, descomprimidos de DXT5 |
 
+### Unidades enemigas
+
+Las unit cards de los tanques, VTOL, torretas y armaduras de combate están en `unitcard/`, pero no traen su vida, su velocidad ni sus armas. `extraer_unidades.py` las saca de los blueprints del `.pak`, siguiendo la herencia, las torretas montadas y el bytecode del script de construcción que les pone los cañones, y las guarda en `tools/datos-juego/unidades/`. `generar_unidades.py` lo une a las unit cards en `src/data/units.json`.
+
+```sh
+python3 tools/extraer_unidades.py "/ruta/a/MechWarrior 5 Mercenaries"
+python3 tools/generar_unidades.py
+```
+
+| Archivo | Asset del juego | Contenido |
+|---|---|---|
+| `unidades.json` | Blueprint de cada unidad (`UnitClass`) y de sus torretas | Vida base, velocidad, armas y tamaño del grupo de las armaduras de combate |
+| `armas.json` | `WeaponDataAsset` de cada arma | Nombre, estadísticas y quirks, también de las armas de vehículo que no están en `items/` |
+| `facciones.json` | `Factions/*` y sus StringTables | Nombre de las facciones de la rareza, con las compañías de mercenarios y los patrocinadores de las arenas |
+
 ## Calidad y comprobación contra el juego
 
-- **375 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **388 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

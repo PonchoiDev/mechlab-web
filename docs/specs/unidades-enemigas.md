@@ -1,7 +1,7 @@
 # Especificación: unidades enemigas
 
 - **Issue:** [#81](https://github.com/PonchoiDev/mechlab-web/issues/81)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/units.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -97,3 +97,15 @@ La web solo cubre 'Mechs, pero en los contratos también hay tanques, aerodesliz
    - ordenar por DPS;
    - abrir la ficha de un Condor y la de los Elementals;
    - la campana de novedades.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 115 unidades (43 Tracked, 15 Hover, 8 Wheeled, 12 VTOL, 35 Turret y 2 Battle armor) con 80 armas, 16 de ellas propias de vehículos o de los Elementals. `units.json` pesa 160 KB (13 KB comprimido en el bundle de la página).
+- **Tests:** los once criterios (CA1 a CA11) están en `src/utils/units.test.ts` y pasan, con dos más de la vista en la URL.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: la portada nueva, los filtros por tipo y la búsqueda, el orden por DPS, la rareza desplegada, la campana de novedades y los enlaces nuevos de las cabeceras del MechLab y del mapa.
+- **Decisiones durante el desarrollo:**
+  - Con tres carátulas, el hueco de los próximos juegos quedaba solo en otra fila: ahora es una franja a lo ancho debajo de ellas.
+  - En el móvil, el segundo enlace partía en tres líneas el título del MechLab: los enlaces van uno debajo de otro.
+  - La vista (tipo, búsqueda y orden) va en la URL, para compartir una lista.
+- **Pendiente de comprobar en el juego:** el MechLab trata el daño de las ametralladoras y los lanzallamas (`DamageOverDuration`, con `RateOfFire`) como daño por disparo, lo que les da un DPS muy alto también aquí. Hace falta una captura del juego antes de cambiar el cálculo, que es el mismo en las dos páginas.

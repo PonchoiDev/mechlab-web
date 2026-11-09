@@ -9,8 +9,8 @@ MechLab es una web estática hecha con React y TypeScript. No tiene base de dato
 ```mermaid
 flowchart LR
   subgraph Datos["Datos (en desarrollo)"]
-    Juego["Archivos del juego<br/>editor de mods y .pak"] --> Scripts["Scripts Python<br/>tools/generar_*.py · extraer_mapa.py"]
-    Scripts --> JSON["mechs.json · items.json · traits.json · starmap.json"]
+    Juego["Archivos del juego<br/>editor de mods y .pak"] --> Scripts["Scripts Python<br/>tools/generar_*.py · extraer_*.py"]
+    Scripts --> JSON["mechs.json · items.json · traits.json · starmap.json · units.json"]
   end
   subgraph Web["Web (en el navegador)"]
     JSON --> Logica["Lógica pura<br/>src/utils"]
@@ -38,6 +38,7 @@ Los datos se exportan con el editor de mods oficial de *MechWarrior 5: Mercenari
 | `generar_mechs.py` | `mda/`, `mdl/`, `hps/`, `loadout/`, `unitcard/`, `mech_string_table/` e `items.json` | `mechs.json`: 639 variantes con componentes, anclajes, build de fábrica, año y rol |
 | `generar_traits.py` | `traits/` | `traits.json`: las 50 mejoras de la cantina y sus efectos |
 | `generar_mapa.py` | `starmap/` (lo extrae `extraer_mapa.py` del `.pak` de la instalación) | `starmap.json`: 2172 sistemas con su dueño de 3015 a 3060, facciones, eventos, clústeres y centros industriales con su reputación recomendada y su dificultad; `availability.json`: la rareza de cada variante por facción (de las unit cards, con las funciones de `generar_mechs.py`) |
+| `generar_unidades.py` | `unitcard/` y `unidades/` (lo extrae `extraer_unidades.py` del `.pak`) e `items.json` | `units.json`: 115 unidades enemigas (tanques, aerodeslizadores, VTOL, torretas y armaduras de combate) con su vida base, velocidad, armas en el formato de `items.json` y rareza por facción |
 
 Algunos datos no están donde parecería:
 
@@ -78,6 +79,14 @@ El mapa es otra página (`starmap/index.html`, servida en `/mercs/starmap/`) con
 - **`starmap/renderer.ts`:** pinta en un canvas. La rejilla que dice a qué sistema pertenece cada punto del mapa se calcula una vez, porque no depende de la fecha. Al mover la fecha solo se vuelve a colorear y se genera la textura de territorios, con el borde brillante como en el juego. El arrastre y el zoom solo redibujan esa textura.
 - **Novedades en la portada:** la portada (`site/index.html`) es HTML estático, así que el build escribe `changelog.json` en la raíz a partir de `src/data/changelog.ts`. La campana de la portada lo lee y guarda lo ya visto con la misma clave que la del MechLab.
 - **`starmap/StarmapApp.tsx`:** la ficha del sistema, el control de fecha, el buscador y la leyenda. La fecha y el sistema elegido van en la URL.
+
+### Unidades enemigas
+
+Es la tercera página (`units/index.html`, servida en `/mercs/units/`), también con su propio bundle:
+
+- **`utils/units.ts`:** las armas de una unidad con su daño, DPS y alcance (con `getWeaponStats`, la misma función que el MechLab, porque `units.json` guarda las armas en el formato de `items.json`), la potencia de fuego, los filtros, el orden, la rareza agrupada y la vista en la URL. Tiene sus tests (`units.test.ts`).
+- **Las armas, en el bytecode:** las torretas montan sus cañones como `ChildActorComponent` y les dan la clase en el script de construcción con `SetChildActorClass`, así que `extraer_unidades.py` busca esa llamada en el bytecode de `UserConstructionScript` para saber qué arma va en cada componente.
+- **`units/UnitsApp.tsx`:** los filtros, el orden y la ficha de cada unidad. Solo pinta y llama a la lógica.
 
 ## Decisiones de diseño
 

@@ -8,6 +8,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 |---|---|
 | **Live site** | **https://mw-builder.com/mercs/** |
 | Star map | https://mw-builder.com/mercs/starmap/ |
+| Enemy units | https://mw-builder.com/mercs/units/ |
 | Slides | [View on Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) (in Spanish) |
 | Video walkthrough | [Watch on Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) (in Spanish) |
 | Login | None: the site works without an account and builds are saved in the browser |
@@ -39,7 +40,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (375 tests, V8 coverage) |
+| Tests | Vitest 5 (388 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -128,6 +129,7 @@ src/
   App.tsx               Main component: build state and page layout
   components/           UI components (board, picker, upgrades panel, dialogs…)
   starmap/              Star map page: canvas, system card, date and search
+  units/                Enemy units page: filters and a card for each unit
   hooks/                Build state, saved builds, view preferences and Sarna image
   utils/                Configurator logic: calculations, fitting rules, upgrades, build codes
   services/             Sarna API, clipboard and PNG build image (canvas)
@@ -136,6 +138,7 @@ src/
   test/                 Shared test fixtures
 worker/                 Cloudflare Worker: Sarna image proxy and feedback form
 starmap/index.html      Entry of the star map page (/mercs/starmap/)
+units/index.html        Entry of the enemy units page (/mercs/units/)
 site/                   Landing page at the domain root (mw-builder.com)
 docs/                   Analysis, architecture, UML diagrams and development with AI
 tools/
@@ -144,6 +147,8 @@ tools/
   generar_traits.py     Generates src/data/traits.json (cantina upgrades)
   extraer_mapa.py       Extracts the star map data from the game's .pak
   generar_mapa.py       Generates src/data/starmap.json
+  extraer_unidades.py   Extracts the hit points, speed and weapons of enemy units from the game .pak
+  generar_unidades.py   Generates src/data/units.json
   ue4.py                Reads the .pak and the Unreal Engine 4 assets
   datos-juego/          Files exported from the game
 .github/                Continuous integration, CodeQL and Dependabot
@@ -205,9 +210,24 @@ python3 tools/generar_mapa.py
 | `heroes_en_venta.json` | `HeroMechsForPurchase` | The 95 hero 'Mechs the game can put up for sale |
 | `public/starmap/logos/` | `LogoLarge` texture of each faction | Faction logos as 128 px PNG, decoded from DXT5 |
 
+### Enemy units
+
+The unit cards of tanks, VTOLs, turrets and battle armor are in `unitcard/`, but they don't include hit points, speed or weapons. `extraer_unidades.py` reads them from the blueprints in the `.pak`, following inheritance, mounted turrets and the construction script bytecode that sets their guns, and saves them to `tools/datos-juego/unidades/`. `generar_unidades.py` joins them with the unit cards into `src/data/units.json`.
+
+```sh
+python3 tools/extraer_unidades.py "/path/to/MechWarrior 5 Mercenaries"
+python3 tools/generar_unidades.py
+```
+
+| File | Game asset | Contents |
+|---|---|---|
+| `unidades.json` | Blueprint of each unit (`UnitClass`) and its turrets | Base hit points, speed, weapons and squad size of battle armor |
+| `armas.json` | `WeaponDataAsset` of each weapon | Name, stats and quirks, including vehicle weapons missing from `items/` |
+| `facciones.json` | `Factions/*` and their StringTables | Names of the factions in the rarity lists, including mercenary companies and arena sponsors |
+
 ## Quality and checks against the game
 
-- **375 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **388 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
