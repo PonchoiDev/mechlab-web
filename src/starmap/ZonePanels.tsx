@@ -47,6 +47,7 @@ interface ZoneCardProps {
 // Ficha de una zona de conflicto, al pulsar dentro de ella: descripción, capital y lo que pide.
 export function ZoneCard({ data, clusterId, onSystem, onClose }: ZoneCardProps) {
   const zone = data.clusters[clusterId];
+  if (!zone) return null;
   const systems = data.systems.filter(system => system.cluster === clusterId).length;
   const capital = zone.capital === undefined ? null : data.systems.find(system => system.id === zone.capital) ?? null;
   return (

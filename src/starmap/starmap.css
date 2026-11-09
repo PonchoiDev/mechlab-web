@@ -56,7 +56,7 @@ button, input, select { font: inherit; color: inherit; }
   display: grid;
   margin-top: 4px !important;
   padding-left: 6px;
-  border-left: 2px solid var(--zone, #e08a4f);
+  border-left: 2px solid #e08a4f;
 }
 
 .starmap-hint-zone b { font-size: 14px; }
