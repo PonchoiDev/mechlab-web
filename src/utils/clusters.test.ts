@@ -29,14 +29,14 @@ describe('ficha de las zonas de conflicto', () => {
     expect(findClusterAt(outlines, 2000, 2000)).toBeNull();
   });
 
-  it('CA3: el centro industrial de Diboll trae la reparación de cada modo', () => {
+  it('CA3: el centro industrial de Diboll no trae recargo de reparación, y sí contratos de varias misiones', () => {
     const levels = getHubLevels(data, 'SafeZone_1');
     expect(levels.length).toBeGreaterThan(0);
-    expect(levels.every(level => level.repair && level.repair.cost > 0)).toBe(true);
+    expect(levels.every(level => !level.repair && level.multiMission)).toBe(true);
   });
 
   it('CA6: la reparación y los contratos se describen', () => {
-    expect(describeRepair({ cost: 0.6, time: 1 })).toBe('Repairs ×0.6 cost · ×1 time');
+    expect(describeRepair({ cost: 0.6, time: 1 })).toBe('Repair markup: 60% cost · 100% time');
     expect(describeMultiMission({ min: 2, max: 3, odds: 0.3 })).toBe('Multi-mission contracts: 2 to 3 missions (30%)');
   });
 });
