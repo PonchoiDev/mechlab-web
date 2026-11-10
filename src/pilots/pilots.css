@@ -151,6 +151,19 @@ body {
 .pilot-hero { border-top-color: var(--pilot-hero); }
 .pilot-hero .unit-card-kind span:first-child { color: var(--pilot-hero); }
 
+/* Retrato del juego a la izquierda de la cabecera, con el marco dorado de lo hero */
+.pilot-hero-header { display: flex; align-items: flex-start; gap: 14px; }
+.pilot-hero-header > div { min-width: 0; }
+
+.pilot-portrait {
+  flex: none;
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--pilot-hero);
+  background: radial-gradient(circle at 50% 35%, rgba(255, 212, 0, 0.12), rgba(255, 255, 255, 0.02) 70%);
+  object-fit: cover;
+}
+
 .pilot-callsign,
 .pilot-source {
   position: relative;
@@ -423,4 +436,5 @@ body {
   .pilot-tabs button { flex: none; padding: 0 10px; font-size: 16px; }
   .pilot-tab-extra { display: none; }
   .pilot-section h2 { font-size: 21px; }
+  .pilot-portrait { width: 64px; height: 64px; }
 }
