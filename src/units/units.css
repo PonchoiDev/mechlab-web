@@ -677,3 +677,8 @@ button, input, select { font: inherit; color: inherit; }
   .units-search input { flex: 1; width: auto; }
   .unit-card-stats dd { font-size: 20px; }
 }
+
+/* Con tres enlaces, «MW5 Mercenaries MechLab» no cabe en una línea en los móviles más estrechos. */
+@media (max-width: 400px) {
+  .units-links small { display: none; }
+}

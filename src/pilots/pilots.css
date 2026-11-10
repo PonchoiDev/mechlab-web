@@ -1,6 +1,6 @@
-/* Pilotos: los estilos de las unidades enemigas (units.css) con el azul de las academias. Los rasgos
-   hero llevan el dorado de los 'Mechs únicos del mapa; los efectos buenos van en verde y los malos en
-   rojo. */
+/* Pilotos: los estilos de las unidades enemigas (units.css) con el azul de las academias. Los pilotos
+   y los rasgos hero llevan el dorado de los 'Mechs únicos del mapa; los efectos buenos van en verde y
+   los malos en rojo. */
 :root {
   --units-accent: #2f8cff;
   --pilot-hero: #ffd400;
@@ -17,54 +17,7 @@ body {
 
 .units-intro a { color: var(--units-text); }
 
-/* Recuadro de los pilotos de élite */
-.pilot-elite {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 4px 16px;
-  max-width: 900px;
-  margin: 0 0 18px;
-  padding: 10px 14px;
-  border-left: 3px solid var(--pilot-hero);
-  background: rgba(255, 212, 0, 0.06);
-}
-
-.pilot-elite h2 {
-  grid-column: 1;
-  margin: 0;
-  color: var(--pilot-hero);
-  font-size: 18px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.units-intro .pilot-elite p {
-  grid-column: 1;
-  margin: 0;
-  font-size: 16px;
-}
-
-.pilot-elite button {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  height: 34px;
-  padding: 0 12px;
-  border: 1px solid var(--pilot-hero);
-  border-radius: 0;
-  background: none;
-  color: var(--pilot-hero);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.pilot-elite button:hover,
-.pilot-elite button:focus-visible { color: #000; background: var(--pilot-hero); outline: none; }
-
-/* Pestañas: rasgos y programas */
+/* Pestañas: pilotos hero, rasgos y programas */
 .pilot-tabs {
   display: flex;
   gap: 0;
@@ -107,10 +60,54 @@ body {
 .pilot-hero-toggle:hover, .pilot-hero-toggle:focus-visible { border-color: var(--pilot-hero); outline: none; }
 .pilot-hero-toggle[aria-pressed='true'] { border-color: var(--pilot-hero); color: #000; background: var(--pilot-hero); }
 
+/* Secciones: una categoría de rasgos, una familia de programas o un grupo de pilotos hero */
+.pilot-section { margin: 0 0 30px; }
+
+.pilot-section h2 {
+  margin: 0 0 4px;
+  color: var(--units-text);
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pilot-section h2 small,
+.pilot-subsection h3 small { margin-left: 4px; color: var(--units-muted); font-size: 15px; letter-spacing: 0.04em; }
+
+.pilot-section-header { max-width: 900px; margin-bottom: 12px; }
+
+.pilot-section-header p {
+  margin: 0;
+  color: var(--units-muted);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.pilot-section > h2 { padding-bottom: 6px; border-bottom: 1px solid var(--units-line); }
+.pilot-subsection { margin: 14px 0 0; }
+
+.pilot-subsection h3 {
+  margin: 0 0 8px;
+  color: var(--units-accent);
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Nombre de una ficha: el h2 de las unidades, pero en el nivel que le toca dentro de las secciones */
+.unit-card .unit-card-name {
+  position: relative;
+  margin: 2px 0 4px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
 /* Ficha de un rasgo */
 .pilot-trait.is-hero { border-top-color: var(--pilot-hero); }
 .pilots .unit-card-header { min-height: 0; }
-.pilot-trait.is-hero .unit-card-kind span:first-child { color: var(--pilot-hero); }
 
 .pilot-tags {
   display: flex;
@@ -151,7 +148,7 @@ body {
   border-top: 1px solid var(--units-line);
 }
 
-.pilot-groups h3 {
+.pilot-groups h5 {
   margin: 0 0 2px;
   font-size: 14px;
   font-weight: 700;
@@ -159,8 +156,8 @@ body {
   text-transform: uppercase;
 }
 
-.pilot-groups h3 small { color: var(--units-muted); font-size: 12px; letter-spacing: 0.02em; text-transform: none; }
-.pilot-groups .is-pilot h3 { color: var(--units-muted); }
+.pilot-groups h5 small { color: var(--units-muted); font-size: 12px; letter-spacing: 0.02em; text-transform: none; }
+.pilot-groups .is-pilot h5 { color: var(--units-muted); }
 
 .pilot-groups ul {
   display: grid;
@@ -175,36 +172,213 @@ body {
 .pilot-groups li.is-good b { color: var(--pilot-good); }
 .pilot-groups li.is-bad b { color: var(--pilot-bad); }
 
-/* Ficha de un programa */
-.pilot-program-stats dd { font-size: 19px; }
+/* Ficha de un piloto hero: borde dorado, como los rasgos hero */
+.pilot-hero { border-top-color: var(--pilot-hero); }
+.pilot-hero .unit-card-kind span:first-child { color: var(--pilot-hero); }
 
-.pilot-ratings {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
-  padding: 8px 14px;
+.pilot-callsign,
+.pilot-source {
+  position: relative;
+  margin: 0;
+  color: var(--units-muted);
+  font-size: 15px;
 }
 
-.pilot-stars { display: inline-flex; align-items: baseline; gap: 5px; }
-.pilot-stars small { color: var(--units-muted); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
-.pilot-stars b { color: var(--units-yellow); font-size: 14px; letter-spacing: 1px; }
-.pilot-stars i { color: rgba(255, 255, 255, 0.18); font-style: normal; }
+.pilot-source { margin-top: 4px; color: var(--units-text); font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.4; }
+.pilot-hero-stats { grid-template-columns: repeat(2, 1fr); }
 
-.pilot-academies {
+.pilot-skills {
   display: grid;
-  gap: 2px;
+  gap: 3px;
   margin: 0;
-  padding: 0 14px 12px;
+  padding: 10px 14px;
   list-style: none;
   font-size: 15px;
 }
 
-.pilot-academies a { color: var(--units-text); text-decoration-color: var(--units-accent); text-underline-offset: 3px; }
+.pilot-skills li { display: grid; grid-template-columns: 120px minmax(0, 1fr) 20px; align-items: center; gap: 10px; }
+.pilot-skills li > span:first-child { color: var(--units-muted); }
+.pilot-skills b { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Barra de 10 casillas: llenas hasta el nivel, con borde hasta el tope y apagadas por encima */
+.pilot-skill-bar { display: flex; gap: 3px; }
+
+.pilot-skill-bar i {
+  flex: 1;
+  height: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pilot-skill-bar i.is-cap { border-color: rgba(47, 140, 255, 0.6); }
+.pilot-skill-bar i.is-level { border-color: var(--units-accent); background: var(--units-accent); }
+
+.pilot-hero-traits { padding: 8px 14px 10px; border-top: 1px solid var(--units-line); }
+
+.pilot-hero-traits h4 {
+  margin: 0 0 4px;
+  color: var(--units-muted);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pilot-hero-traits details { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.pilot-hero-traits details:first-of-type { border-top: 0; }
+
+.pilot-hero-traits summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pilot-hero-traits summary:hover,
+.pilot-hero-traits summary:focus-visible { color: var(--units-accent); outline: none; }
+.pilot-hero-traits .pilot-description,
+.pilot-hero-traits .pilot-groups { padding-right: 0; padding-left: 0; }
+.pilot-hero-traits .pilot-groups { border-top: 0; padding-top: 2px; }
+
+.pilot-badge {
+  padding: 0 5px;
+  border: 1px solid var(--units-line);
+  color: var(--units-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pilot-badge.is-hero { border-color: var(--pilot-hero); color: var(--pilot-hero); cursor: help; }
+.pilot-badge.is-negative { border-color: var(--pilot-bad); color: var(--pilot-bad); }
+
+.pilot-bio p {
+  margin: 0;
+  padding: 0 14px 10px;
+  color: var(--units-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* Tabla de una familia de programas */
+.pilot-programs {
+  width: 100%;
+  table-layout: fixed;
+  border: 1px solid var(--units-line);
+  border-top: 3px solid var(--units-accent);
+  border-collapse: collapse;
+  background: var(--units-panel);
+  font-size: 17px;
+}
+
+.pilot-programs th,
+.pilot-programs td {
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.pilot-programs thead th {
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pilot-programs tbody th { font-weight: 700; white-space: normal; }
+/* Las mismas columnas en todas las familias, para comparar de una tabla a otra */
+.pilot-programs thead th { width: 8.5%; }
+.pilot-programs thead th:first-child { width: 27%; }
+.pilot-programs thead th:last-child { width: 13.5%; }
+.pilot-programs td.pilot-program-academies { white-space: normal; }
+.pilot-programs tbody tr:last-child > * { border-bottom: 0; }
+.pilot-programs tbody tr:nth-child(odd) { background: rgba(255, 255, 255, 0.035); }
+.pilot-programs td { font-variant-numeric: tabular-nums; }
+
+.pilot-program-traits {
+  display: block;
+  margin-top: 2px;
+  color: var(--units-muted);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.pilot-trait-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--units-text);
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--units-accent);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.pilot-trait-link:hover,
+.pilot-trait-link:focus-visible { color: var(--units-accent); outline: none; }
+
+.pilot-stars { color: var(--units-yellow); font-size: 14px; letter-spacing: 1px; }
+.pilot-stars i { color: rgba(255, 255, 255, 0.18); font-style: normal; }
+
+.pilot-program-academies summary { color: var(--units-text); cursor: pointer; }
+.pilot-program-academies summary:hover,
+.pilot-program-academies summary:focus-visible { color: var(--units-accent); outline: none; }
+.pilot-program-academies a { color: var(--units-text); text-decoration-color: var(--units-accent); text-underline-offset: 3px; }
+
+.pilot-academies {
+  display: grid;
+  gap: 2px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  white-space: normal;
+}
+
 .pilot-academies a:hover, .pilot-academies a:focus-visible { color: var(--units-accent); outline: none; }
 .pilot-academies small { color: var(--units-muted); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
 
+/* En pantallas estrechas cada programa es un bloque con sus datos en dos columnas */
+@media (max-width: 980px) {
+  .pilot-programs thead { display: none; }
+  .pilot-programs, .pilot-programs tbody { display: block; }
+
+  .pilot-programs tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-bottom: 1px solid var(--units-line);
+  }
+
+  .pilot-programs tbody tr:last-child { border-bottom: 0; }
+  .pilot-programs th, .pilot-programs td { border-bottom: 0; }
+  .pilot-programs tbody th { grid-column: 1 / -1; font-size: 19px; }
+  .pilot-programs td { padding-top: 2px; padding-bottom: 4px; }
+
+  .pilot-programs td::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--units-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pilot-programs td.pilot-program-academies { grid-column: 1 / -1; white-space: normal; }
+}
+
 @media (max-width: 760px) {
-  .pilot-elite { grid-template-columns: minmax(0, 1fr); }
-  .pilot-elite button { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 6px; }
-  .pilot-tabs button { padding: 0 10px; font-size: 16px; }
+  /* Las tres pestañas en una fila: «Training programs» se queda en «Programs» */
+  .pilot-tabs { overflow-x: auto; scrollbar-width: none; }
+  .pilot-tabs button { flex: none; padding: 0 10px; font-size: 16px; }
+  .pilot-tab-extra { display: none; }
+  .pilot-section h2 { font-size: 21px; }
 }
