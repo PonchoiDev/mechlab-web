@@ -39,7 +39,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (424 tests, cobertura con V8) |
+| Tests | Vitest 5 (434 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -193,6 +193,8 @@ python3 tools/extraer_mapa.py "/ruta/a/MechWarrior 5 Mercenaries"
 python3 tools/generar_mapa.py
 ```
 
+`generar_mapa.py` lee también los nombres de los pilotos hero que dan algunas misiones de campaña (`tools/datos-juego/pilotos/hero.json`, de `extraer_pilotos.py`).
+
 | Archivo | Asset del juego | Contenido |
 |---|---|---|
 | `sistemas.json` | `InnerSphereData/MW5_InnerSphereData` | 2174 sistemas con coordenadas, clúster y fecha de cada cambio de propietario |
@@ -207,6 +209,7 @@ python3 tools/generar_mapa.py
 | `zonas.json` | `*_ClusterAsset` de campaña, de carrera y de las campañas de los DLC | Sistemas, nombre, descripción, capital, reputación recomendada, dificultad, recargo de reparación y contratos de varias misiones de cada zona |
 | `rivales.json` | `RivalMercs/StarMapRadialInfluences` y `RivalMercs/Companies` (DLC4) | Las 18 compañías de mercenarios rivales y sus 76 zonas de influencia con su dueño por fechas |
 | `arenas.json` | `ArenaStarSystemTable` y `ArenaFameProgressionTable` (DLC6) | Sistemas con arena y rangos de fama con sus recompensas |
+| `campanas.json` y `nombres_campanas.json` | Scripts de los arcos de cada parte de las campañas de los DLC (`DLCn/CampaignData`), sus acciones `Place` y sus escenarios, y la cabecera de cada DLC | Las partes de cada campaña con su sistema y su fecha, y sus misiones en orden con sistema, textos y pago; el nombre de cada campaña |
 | `academias.json` y `programas.json` | `PilotTraining/AcademyDataAssets` y `TrainingAssets` (DLC7) | Las 93 academias de pilotos con su sistema, fundación y programas, y las cifras y los rasgos propios de cada programa |
 | `alianzas.json` | `Allegiance` de los assets de `Factions/*` | Facción a la que responde cada una, para la tabla de rareza de las facciones menores |
 | `recompensas_campana.json` | Objetivos con `bHasRewards` y `MechLoadouts` fuera de las HRQ, y la acción que los coloca | 'Mechs de las campañas de los DLC, el Bounty Hunter o promociones, con su sistema |
@@ -248,7 +251,7 @@ python3 tools/generar_pilotos.py
 
 ## Calidad y comprobación contra el juego
 
-- **424 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **434 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

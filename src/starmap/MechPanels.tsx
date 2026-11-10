@@ -154,7 +154,7 @@ export function HeroDrawer({ data, availability, failed, selectedId, onOpen, onP
           setIsOpen(open => !open);
         }}
       >
-        Special &rsquo;Mech locations {availability && <b>{heroes.length + special.length}</b>}
+        <span className="starmap-drawer-extra">Special </span>&rsquo;Mech locations {availability && <b>{heroes.length + special.length}</b>}
       </button>
       {isOpen && (
         <div className="starmap-quests-body">

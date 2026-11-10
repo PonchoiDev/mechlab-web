@@ -9,6 +9,18 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-10-dlc-campaigns',
+    date: '2026-11-10',
+    title: 'DLC campaigns on the star map',
+    items: [
+      'A new Campaigns panel lists the story campaigns of DLC 2, 4, 5, 6, 7 and 9, searchable by name, system, mission or reward',
+      'Pick one to see its route on the map, numbered in order, like the quest chains, and a magenta flag marks where each campaign starts',
+      'Each mission shows its system, employer, base pay and rewards: \'Mechs, hero pilots, weapons and equipment, plus what finishing the campaign gives',
+      'System cards list the campaigns that start or play there',
+      'Quest rewards now show the pilots that join your company too, like Valten Ryder for finishing the Adam Steiner chain'
+    ]
+  },
+  {
     id: '2026-11-10-hero-portraits',
     date: '2026-11-10',
     title: 'Hero pilot portraits',

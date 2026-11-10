@@ -57,6 +57,8 @@ export interface QuestReward {
   mechs: { id: string; name: string }[];
   weapons: { name: string; tier: string | null; count: number }[];
   equipment: { name: string; count: number }[];
+  // Pilotos que se unen a la compañía (Valten Ryder en la de Adam Steiner); hero si están en la página de pilotos.
+  pilots: { id: string; name: string; hero: boolean }[];
   // Texto de agradecimiento de la última misión que paga.
   debrief: string | null;
 }
@@ -75,6 +77,35 @@ export interface Quest {
   missions: QuestMission[];
   requirements: QuestRequirement[];
   rewards: QuestReward[];
+}
+
+// Misión de la campaña de un DLC, con el pago base de su contrato y lo que da al completarla.
+export interface CampaignMission {
+  title: string;
+  summary: string | null;
+  system: number;
+  employer: string | null;
+  cbills: number;
+  reputation: number;
+  mechs: { id: string; name: string }[];
+  // Pilotos que se unen a la compañía (Morgan Trensky en Leading the Charge); hero si están en la página de pilotos.
+  pilots: { id: string; name: string; hero: boolean }[];
+  weapons: { name: string; tier: string | null; count: number }[];
+  equipment: { name: string; count: number }[];
+}
+
+// Campaña de un DLC: una historia de misiones en orden dentro del modo carrera.
+export interface Campaign {
+  id: string;
+  dlc: number;
+  name: string;
+  // Sistema al que lleva la primera parte; puede no tener misión (Tharkad en el DLC9).
+  start: number;
+  // Desde cuándo se ofrece; null si desde el principio.
+  from: GameDate | null;
+  missions: CampaignMission[];
+  // Lo que da completar la campaña, si da algo más que sus misiones.
+  completion: { title: string; mechs: { id: string; name: string }[] } | null;
 }
 
 // Mercado con inventario fijo de la campaña de un DLC.
@@ -247,6 +278,7 @@ export interface StarmapData {
   markets: Market[];
   uniqueMechs: UniqueMech[];
   rewards: CampaignReward[];
+  campaigns: Campaign[];
   arenas: { systems: ArenaSystem[]; ranks: ArenaRank[] };
   mercs: { companies: Record<string, MercCompany>; zones: MercZone[] };
   academies: Academy[];

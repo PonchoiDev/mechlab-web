@@ -3,6 +3,7 @@ import type { GameDate, Quest, QuestRequirement, QuestReward, StarmapData } from
 import { getQuestAvailability, getQuestsForSystem, searchQuests } from '../utils/quests';
 import { formatGameDate } from '../utils/starmap';
 import { MechLink } from './MarketPanels';
+import { PilotReward } from './CampaignPanels';
 
 const MODE_NAMES = { campaign: 'Campaign', career: 'Career' } as const;
 
@@ -112,9 +113,10 @@ function Reward({ reward, showMode }: { reward: QuestReward; showMode: boolean }
           ].filter(Boolean).join(' · ')}
         </p>
       )}
-      {reward.mechs.length > 0 && (
+      {(reward.mechs.length > 0 || reward.pilots.length > 0) && (
         <ul className="starmap-market-mechs">
           {reward.mechs.map((mech, index) => <li key={`${mech.id}-${index}`}><MechLink id={mech.id} name={mech.name} /></li>)}
+          {reward.pilots.map(pilot => <li key={pilot.id}><PilotReward pilot={pilot} /></li>)}
         </ul>
       )}
       {reward.weapons.length > 0 && (

@@ -80,7 +80,7 @@ export function MarketDrawer({ data, onPick }: { data: StarmapData; onPick: (sys
   return (
     <section className={`starmap-legend starmap-quests starmap-markets-drawer${isOpen ? ' is-open' : ''}`} aria-label="Special markets">
       <button type="button" aria-expanded={isOpen} onClick={() => setIsOpen(open => !open)}>
-        Special markets <b>{data.markets.length + data.uniqueMechs.length}</b>
+        <span className="starmap-drawer-extra">Special </span>markets <b>{data.markets.length + data.uniqueMechs.length}</b>
       </button>
       {isOpen && (
         <div className="starmap-quests-body">

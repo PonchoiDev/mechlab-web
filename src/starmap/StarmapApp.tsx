@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import starmapData from '../data/starmap.json';
-import type { AvailabilityData, GameDate, Quest, StarSystem, StarmapData } from '../types/starmap';
+import type { AvailabilityData, Campaign, GameDate, Quest, StarSystem, StarmapData } from '../types/starmap';
 import {
   clampDate,
   countSystemsByOwner,
@@ -20,6 +20,7 @@ import {
   toMapQuery
 } from '../utils/starmap';
 import { getQuestRoute, parseQuestQuery } from '../utils/quests';
+import { getCampaignRoute, parseCampaignQuery } from '../utils/campaigns';
 import { getFixedSources, getMarketRarity, getMechFocus, isProduced, parseMechQuery } from '../utils/availability';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
@@ -33,8 +34,9 @@ import { getCompanyZonesAt, getMercOwnerAt, getMercZonesAt } from '../utils/merc
 import { HeroDrawer, MechCard, MechDrawer } from './MechPanels';
 import { NOT_SOLD_COLOR, RARITY_COLORS } from './rarityColors';
 import { QuestCard, QuestDrawer, SystemQuests } from './QuestPanels';
+import { CampaignCard, CampaignDrawer, SystemCampaigns } from './CampaignPanels';
 import { StarmapCanvas, type FocusRequest } from './StarmapCanvas';
-import type { MercZoneLayer, TerritoryColors } from './renderer';
+import { CAMPAIGN_COLOR, type MercZoneLayer, type TerritoryColors } from './renderer';
 
 const data = starmapData as unknown as StarmapData;
 const LEGEND_MIN_SYSTEMS = 5;
@@ -60,10 +62,11 @@ interface SystemPanelProps {
   pinned: boolean;
   onClose: () => void;
   onQuest: (quest: Quest) => void;
+  onCampaign: (campaign: Campaign) => void;
   onAcademy: (academyId: string) => void;
 }
 
-function SystemPanel({ system, date, pinned, onClose, onQuest, onAcademy }: SystemPanelProps) {
+function SystemPanel({ system, date, pinned, onClose, onQuest, onCampaign, onAcademy }: SystemPanelProps) {
   const owner = getOwnerAt(system, date);
   const currentIndex = system.owners.findLastIndex(([changedOn]) => changedOn <= date);
   const cluster = system.cluster ? data.clusters[system.cluster]?.name : null;
@@ -102,6 +105,7 @@ function SystemPanel({ system, date, pinned, onClose, onQuest, onAcademy }: Syst
         </dl>
       )}
       <SystemQuests data={data} systemId={system.id} onPick={onQuest} />
+      <SystemCampaigns data={data} systemId={system.id} onPick={onCampaign} />
       <SystemMarkets data={data} systemId={system.id} date={date} />
       <SystemArena data={data} systemId={system.id} />
       <SystemAcademies data={data} systemId={system.id} date={date} onPick={onAcademy} />
@@ -252,6 +256,9 @@ export function StarmapApp() {
   const [selectedId, setSelectedId] = useState<number | null>(initial.systemId);
   const [questId, setQuestId] = useState<string | null>(() => parseQuestQuery(window.location.search, data));
   const quest = data.quests.find(candidate => candidate.id === questId) ?? null;
+  // Campaña de un DLC elegida en su panel, en la ficha de un sistema o con ?campaign= en la URL.
+  const [campaignId, setCampaignId] = useState<string | null>(() => parseCampaignQuery(window.location.search, data));
+  const campaign = data.campaigns.find(candidate => candidate.id === campaignId) ?? null;
   // HRQ de la que la variante elegida es recompensa: su ruta se marca sin abrir su ficha.
   const [mechQuestId, setMechQuestId] = useState<string | null>(null);
   // Sistema de la recompensa (fuera de las HRQ) donde se consigue la variante: se marca como una ruta.
@@ -299,6 +306,7 @@ export function StarmapApp() {
     });
   }, []);
   const [focus, setFocus] = useState<FocusRequest | null>(() => {
+    if (initial.systemId === null && !quest && campaign) return { systemIds: getCampaignRoute(campaign), sequence: 0 };
     const target = initial.systemId ?? quest?.offer ?? academy?.system ?? null;
     return target === null ? null : { systemIds: [target], sequence: 0 };
   });
@@ -334,9 +342,11 @@ export function StarmapApp() {
   const mech = availability?.mechs.find(candidate => candidate.id === mechId) ?? null;
   const routeQuest = quest ?? (mechId ? data.quests.find(candidate => candidate.id === mechQuestId) : null) ?? null;
   const markedSystem = !quest && mechId ? mechMissionSystem : null;
+  // Una campaña elegida dibuja su ruta en su color; si no, la de la HRQ o el sistema de la recompensa.
+  const routeCampaign = !routeQuest && !mechId ? campaign : null;
   const questRoute = useMemo(
-    () => (routeQuest ? getQuestRoute(routeQuest) : markedSystem !== null ? [markedSystem] : null),
-    [routeQuest, markedSystem]
+    () => (routeCampaign ? getCampaignRoute(routeCampaign) : routeQuest ? getQuestRoute(routeQuest) : markedSystem !== null ? [markedSystem] : null),
+    [routeCampaign, routeQuest, markedSystem]
   );
   const mechProduced = mech ? isProduced(mech, date) : false;
   // Con una variante elegida, cada facción se pinta con el color de su rareza. Solo depende de la
@@ -361,10 +371,10 @@ export function StarmapApp() {
   // control deslizante se pare para no llenar el historial.
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      window.history.replaceState(null, '', toMapQuery({ date, systemId: selectedId, questId, mechId, academyId }, data));
+      window.history.replaceState(null, '', toMapQuery({ date, systemId: selectedId, questId, mechId, academyId, campaignId }, data));
     }, URL_DELAY);
     return () => window.clearTimeout(timer);
-  }, [date, selectedId, questId, mechId, academyId]);
+  }, [date, selectedId, questId, mechId, academyId, campaignId]);
 
   const shown = data.systems.find(system => system.id === (hoveredId ?? selectedId)) ?? null;
   // La ficha del sistema elegido sigue fijada (con su botón de cerrar) aunque el ratón pase por encima.
@@ -385,6 +395,7 @@ export function StarmapApp() {
   const pickQuest = (picked: Quest) => {
     pendingMechRef.current = null;
     setQuestId(picked.id);
+    setCampaignId(null);
     setZoneId(null);
     setCompanyId(null);
     setAcademyId(null);
@@ -392,6 +403,20 @@ export function StarmapApp() {
     setSelectedId(null);
     setHoveredId(null);
     focusOn(picked.offer);
+  };
+
+  // Al elegir una campaña se cierran las demás fichas y el mapa encuadra todo su recorrido.
+  const pickCampaign = (picked: Campaign) => {
+    pendingMechRef.current = null;
+    setCampaignId(picked.id);
+    setQuestId(null);
+    setZoneId(null);
+    setCompanyId(null);
+    setAcademyId(null);
+    setMechId(null);
+    setSelectedId(null);
+    setHoveredId(null);
+    focusOn(...getCampaignRoute(picked));
   };
 
   const changeDate = (next: GameDate, isJump: boolean) => {
@@ -403,6 +428,7 @@ export function StarmapApp() {
   // Al elegir una compañía se cierran las demás fichas y el mapa encuadra sus zonas.
   const pickCompany = (id: string) => {
     setCompanyId(id);
+    setCampaignId(null);
     setAcademyId(null);
     setZoneId(null);
     setSelectedId(null);
@@ -424,6 +450,7 @@ export function StarmapApp() {
   // Al pulsar dentro de una zona se cierran las demás fichas para que se vea la suya.
   const pickZone = (id: string) => {
     setZoneId(id);
+    setCampaignId(null);
     setCompanyId(null);
     setAcademyId(null);
     setSelectedId(null);
@@ -436,6 +463,7 @@ export function StarmapApp() {
   const pickAcademy = (id: string) => {
     const picked = data.academies.find(candidate => candidate.id === id);
     setAcademyId(id);
+    setCampaignId(null);
     setZoneId(null);
     setCompanyId(null);
     setQuestId(null);
@@ -450,6 +478,7 @@ export function StarmapApp() {
   const pickMech = (id: string) => {
     pendingMechRef.current = null;
     setMechId(id);
+    setCampaignId(null);
     setZoneId(null);
     setCompanyId(null);
     setAcademyId(null);
@@ -468,7 +497,8 @@ export function StarmapApp() {
         hoveredId={hoveredId}
         selectedId={selectedId}
         questRoute={questRoute}
-        markedId={academy && !quest && !mech && !companyId && !zoneId ? academy.system : null}
+        routeColor={routeCampaign ? CAMPAIGN_COLOR : undefined}
+        markedId={academy && !quest && !campaign && !mech && !companyId && !zoneId ? academy.system : null}
         territoryColors={territoryColors}
         focus={focus}
         onHover={setHoveredId}
@@ -503,7 +533,7 @@ export function StarmapApp() {
       </header>
 
       {shown
-        ? <SystemPanel system={shown} date={date} pinned={isPinned} onClose={() => setSelectedId(null)} onQuest={pickQuest} onAcademy={pickAcademy} />
+        ? <SystemPanel system={shown} date={date} pinned={isPinned} onClose={() => setSelectedId(null)} onQuest={pickQuest} onCampaign={pickCampaign} onAcademy={pickAcademy} />
         : quest && (
           <QuestCard
             data={data}
@@ -517,7 +547,19 @@ export function StarmapApp() {
             onClose={() => setQuestId(null)}
           />
         )}
-      {!shown && !quest && !mech && companyId && (
+      {!shown && !quest && campaign && (
+        <CampaignCard
+          data={data}
+          campaign={campaign}
+          date={date}
+          onSystem={systemId => {
+            setSelectedId(systemId);
+            focusOn(systemId);
+          }}
+          onClose={() => setCampaignId(null)}
+        />
+      )}
+      {!shown && !quest && !campaign && !mech && companyId && (
         <MercCard
           data={data}
           companyId={companyId}
@@ -529,7 +571,7 @@ export function StarmapApp() {
           onClose={() => setCompanyId(null)}
         />
       )}
-      {!shown && !quest && !mech && !companyId && zoneId && (
+      {!shown && !quest && !campaign && !mech && !companyId && zoneId && (
         <ZoneCard
           data={data}
           clusterId={zoneId}
@@ -540,7 +582,7 @@ export function StarmapApp() {
           onClose={() => setZoneId(null)}
         />
       )}
-      {!shown && !quest && !mech && !companyId && !zoneId && academy && (
+      {!shown && !quest && !campaign && !mech && !companyId && !zoneId && academy && (
         <AcademyCard
           data={data}
           academy={academy}
@@ -552,7 +594,7 @@ export function StarmapApp() {
           onClose={() => setAcademyId(null)}
         />
       )}
-      {!shown && !quest && mech && availability && (
+      {!shown && !quest && !campaign && mech && availability && (
         <MechCard
           data={data}
           availability={availability}
@@ -575,6 +617,7 @@ export function StarmapApp() {
       <div className="starmap-drawers">
         <FactionLegend date={date} />
         <QuestDrawer data={data} date={date} selectedId={questId} onPick={pickQuest} />
+        <CampaignDrawer data={data} date={date} selectedId={campaignId} onPick={pickCampaign} />
         <MarketDrawer
           data={data}
           onPick={systemId => {
@@ -603,7 +646,7 @@ export function StarmapApp() {
       {isFeedbackOpen && (
         <FeedbackDialog
           // Se calcula con el estado, no con window.location: la URL se actualiza con retraso.
-          buildUrl={`${window.location.origin}${window.location.pathname}${toMapQuery({ date, systemId: selectedId, questId, mechId, academyId }, data)}`}
+          buildUrl={`${window.location.origin}${window.location.pathname}${toMapQuery({ date, systemId: selectedId, questId, mechId, academyId, campaignId }, data)}`}
           attachLabel="Attach a link to this map view"
           onMessage={setNotice}
           onClose={() => setIsFeedbackOpen(false)}
