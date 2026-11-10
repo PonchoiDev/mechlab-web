@@ -162,7 +162,7 @@ function HeroCard({ pilot }: { pilot: HeroPilot }) {
       {pilot.bio.length > 0 && (
         <details className="unit-rarity pilot-bio">
           <summary>Biography</summary>
-          {pilot.bio.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+          {pilot.bio.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
         </details>
       )}
     </article>

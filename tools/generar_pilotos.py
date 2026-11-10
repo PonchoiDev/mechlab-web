@@ -372,7 +372,7 @@ def rasgos(rasgos_juego, facciones):
 
 def nivel(experiencia, niveles):
     """El nivel de una habilidad: el último umbral de la curva que alcanza su experiencia."""
-    return max(valor for umbral, valor in niveles if experiencia >= umbral)
+    return max((valor for umbral, valor in niveles if experiencia >= umbral), default=1)
 
 
 def pilotos_hero(pilotos_juego, niveles, ids_rasgos):
@@ -396,7 +396,10 @@ def pilotos_hero(pilotos_juego, niveles, ids_rasgos):
         recompensas = []
         for recompensa in piloto["recompensas"]:
             # No Pilot Left Behind y Pt. 2 son la misma misión en dos partes.
-            titulo = TITULOS_DE_RECOMPENSA.get(recompensa["ruta"]) or re.sub(r" Pt\. \d+$", "", recompensa["titulo"])
+            titulo = TITULOS_DE_RECOMPENSA.get(recompensa["ruta"]) or re.sub(r" Pt\. \d+$", "", recompensa["titulo"] or "")
+            if not titulo:
+                avisos.append(f"{piloto['id']}: recompensa sin título en {recompensa['ruta']}; hay que darle uno en TITULOS_DE_RECOMPENSA")
+                continue
             entrada = {"title": titulo, "story": recompensa["ruta"].startswith("Campaign/")}
             if entrada not in recompensas:
                 recompensas.append(entrada)
@@ -461,7 +464,6 @@ def programas(programas_juego, academias_juego, sistemas):
             "family": familia(id_programa),
             "name": programa["nombre"],
             "level": int(nivel.group(1)) if nivel else None,
-            "description": programa["descripcion"].strip(),
             "days": programa.get("DurationDays", 0),
             "fee": programa.get("EnrollmentFee", 0),
             "tuition": programa.get("QuarterlyTuition", 0),
@@ -489,8 +491,12 @@ def main():
     facciones = leer(os.path.join(RUTA_MAPA, "facciones.json"))
     sistemas = {int(fila["Name"]): fila["StarSystemName"] for fila in leer(os.path.join(RUTA_MAPA, "sistemas.json"))}
     lista, avisos = rasgos(leer(os.path.join(RUTA_PILOTOS, "rasgos.json")), facciones)
-    heroes, avisos_heroes = pilotos_hero(leer(os.path.join(RUTA_PILOTOS, "hero.json")), leer(os.path.join(RUTA_PILOTOS, "niveles.json")),
-                                         {rasgo["id"] for rasgo in lista})
+    niveles = leer(os.path.join(RUTA_PILOTOS, "niveles.json"))
+    # La curva empieza en el nivel 1 con 0 de experiencia: sin ese umbral, los pilotos sin
+    # experiencia saldrían con un nivel inventado.
+    if not niveles or niveles[0] != [0, 1]:
+        raise ValueError(f"La curva de niveles no empieza en [0, 1] ({niveles[:1]}): ¿ha cambiado el juego?")
+    heroes, avisos_heroes = pilotos_hero(leer(os.path.join(RUTA_PILOTOS, "hero.json")), niveles, {rasgo["id"] for rasgo in lista})
     avisos += avisos_heroes
     datos = {
         "heroes": heroes,

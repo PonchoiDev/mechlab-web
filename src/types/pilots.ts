@@ -81,7 +81,6 @@ export interface TrainingProgramEntry {
   name: string;
   // Nivel del programa (SemesterEnrollment1 a 4); null en los propios de una academia.
   level: number | null;
-  description: string;
   days: number;
   fee: number;
   tuition: number;
