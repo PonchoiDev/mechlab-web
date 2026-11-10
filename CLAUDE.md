@@ -19,6 +19,8 @@ python3 tools/generar_mapa.py     # src/data/starmap.json
 python3 tools/extraer_unidades.py "<carpeta del juego>"  # tools/datos-juego/unidades/, del .pak
 python3 tools/imagenes_sarna.py    # tools/datos-juego/unidades/sarna.json, de la API de Sarna
 python3 tools/generar_unidades.py # src/data/units.json (lee items.json y sarna.json)
+python3 tools/extraer_pilotos.py "<carpeta del juego>"  # tools/datos-juego/pilotos/, del .pak
+python3 tools/generar_pilotos.py  # src/data/pilots.json (lee las academias de tools/datos-juego/starmap/)
 ```
 
 Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` sin errores.

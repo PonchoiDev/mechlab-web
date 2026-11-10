@@ -1,7 +1,7 @@
 # Especificación: página de pilotos
 
 - **Issue:** [#79](https://github.com/PonchoiDev/mechlab-web/issues/79)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/pilots.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -98,3 +98,18 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
    - los rasgos por categoría, solo hero y la búsqueda;
    - los programas y el enlace de una academia al mapa;
    - la campana de novedades.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 184 rasgos (99 de 'Mech, 35 de armas, 24 de facciones, 21 de carrera y 5 de graduados; 53 hero) y 29 programas. `pilots.json` pesa unos 215 KB (unos 14 KB comprimido en el bundle de la página).
+- **Lector de UE4:** lee los structs de los mapas (los quirks por arma de los graduados y de Arena Specialist) y guarda el orden de los exports para seguir el árbol de componentes. El mapa estelar y las unidades extraídos de nuevo salen idénticos.
+- **Tests:** los diez criterios (CA1 a CA10) están en `src/utils/pilots.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844:
+  - la portada con cuatro carátulas en una fila;
+  - los rasgos por categoría, solo hero y la búsqueda;
+  - la pestaña de programas con sus academias enlazadas al mapa;
+  - las cabeceras del MechLab, el mapa y las unidades con el enlace nuevo.
+- **Decisiones durante el desarrollo:**
+  - Con cuatro carátulas, la portada pasa a columnas de 240 px como mínimo, para que quepan en una fila en escritorio.
+  - En el móvil, el tercer enlace bajaba los del mapa estelar a otra fila y la cabecera crecía por debajo de donde empiezan las fichas: los enlaces se compactan para caber en la primera.

@@ -9,6 +9,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno
 | **Web en producción** | **https://mw-builder.com/mercs/** |
 | Mapa estelar | https://mw-builder.com/mercs/starmap/ |
 | Unidades enemigas | https://mw-builder.com/mercs/units/ |
+| Pilotos | https://mw-builder.com/mercs/pilots/ |
 | Presentación (slides) | [Ver en Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) |
 | Vídeo explicativo | [Ver en Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) |
 | Login | No tiene: la web se usa sin registro y las builds se guardan en el navegador |
@@ -38,7 +39,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (389 tests, cobertura con V8) |
+| Tests | Vitest 5 (413 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -128,6 +129,7 @@ src/
   components/           Componentes de la interfaz (tablero, selector, panel de mejoras, diálogos…)
   starmap/              Página del mapa estelar: canvas, ficha del sistema, fecha y buscador
   units/                Página de las unidades enemigas: filtros y ficha de cada unidad
+  pilots/               Página de los pilotos: rasgos, pilotos de élite y programas de las academias
   hooks/                Estado de la build, builds guardadas, preferencias de vista e imagen de Sarna
   utils/                Lógica del configurador: cálculos, reglas de equipo, mejoras, código de las builds
   services/             API de Sarna, portapapeles e imagen PNG de la build (canvas)
@@ -137,6 +139,7 @@ src/
 worker/                 Worker de Cloudflare: proxy de imágenes de Sarna y formulario de feedback
 starmap/index.html      Entrada de la página del mapa estelar (/mercs/starmap/)
 units/index.html        Entrada de la página de las unidades enemigas (/mercs/units/)
+pilots/index.html       Entrada de la página de los pilotos (/mercs/pilots/)
 site/                   Portada de la raíz del dominio (mw-builder.com)
 docs/                   Análisis, arquitectura, diagramas UML y desarrollo con IA
 tools/
@@ -148,6 +151,8 @@ tools/
   extraer_unidades.py   Extrae del .pak del juego la vida, la velocidad y las armas de las unidades enemigas
   imagenes_sarna.py     Busca en Sarna la página y el dibujo de cada chasis de las unidades enemigas
   generar_unidades.py   Genera src/data/units.json
+  extraer_pilotos.py    Extrae del .pak del juego los rasgos de piloto con sus efectos
+  generar_pilotos.py    Genera src/data/pilots.json
   ue4.py                Lectura del .pak y de los assets de Unreal Engine 4
   datos-juego/          Archivos exportados del juego
 .github/                Integración continua, CodeQL y Dependabot
@@ -225,9 +230,22 @@ python3 tools/generar_unidades.py
 | `facciones.json` | `Factions/*` y sus StringTables | Nombre de las facciones de la rareza, con las compañías de mercenarios y los patrocinadores de las arenas |
 | `sarna.json` | API de Sarna (`imagenes_sarna.py`), no el juego | Página y dibujo principal de cada chasis, a partir de la tabla de títulos de `generar_unidades.py` |
 
+### Pilotos
+
+Los rasgos de piloto del DLC7 no se exportan con el editor de mods: `extraer_pilotos.py` los lee del `.pak` y sigue el árbol de componentes de cada uno (afinidad con un chasis, quirks de arma, blindaje, sensores, costes del piloto…). `generar_pilotos.py` rellena sus textos, convierte las cifras en efectos y les añade los programas de las academias de `tools/datos-juego/starmap/`.
+
+```sh
+python3 tools/extraer_pilotos.py "/ruta/a/MechWarrior 5 Mercenaries"
+python3 tools/generar_pilotos.py
+```
+
+| Archivo | Asset del juego | Contenido |
+|---|---|---|
+| `rasgos.json` | `DLC7/TOIs/PilotTraining/PilotTraits/**` | Los 184 rasgos con su nombre, sus descripciones, sus etiquetas (hero, contratables, academias, DLC) y las cifras de cada componente |
+
 ## Calidad y comprobación contra el juego
 
-- **389 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **413 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

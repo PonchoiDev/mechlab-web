@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-10-pilots',
+    date: '2026-11-10',
+    title: 'Pilots',
+    items: [
+      'A new Pilots page lists all 184 pilot traits from DLC 7 with their exact effects, grouped by where they apply, good ones in green and bad ones in red',
+      'Filter traits by type or hero only and search by name or effect, for example jam or atlas',
+      'Elite pilots have no fixed list: the page explains how they appear and shows the 53 hero traits they can bring',
+      'The Training programs tab compares every academy program and links each academy to its card on the star map'
+    ]
+  },
+  {
     id: '2026-11-10-mobile-map',
     date: '2026-11-10',
     title: 'More map on mobile',
