@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import pilotsJson from '../data/pilots.json';
 import type { PilotTrait, PilotsData } from '../types/pilots';
-import { filterTraits, formatProgramLength, groupPrograms, groupTraits, parsePilotsQuery, splitHeroPilots, toPilotsQuery } from './pilots';
+import {
+  filterTraits, formatProgramLength, getTraitEffectColumns, groupPrograms, groupTraits, parsePilotsQuery, splitHeroPilots, toPilotsQuery
+} from './pilots';
 
 // Criterios de aceptación de docs/specs/pagina-pilotos.md (issue #79).
 const data = pilotsJson as unknown as PilotsData;
@@ -105,6 +107,26 @@ describe('secciones de rasgos', () => {
   it('CA11: con un filtro solo salen las secciones con resultados', () => {
     const sections = groupTraits(filterTraits(data.traits, { ...ALL, query: 'atlas' }));
     expect(sections.map(section => [section.category, section.groups.map(entry => entry.label)])).toEqual([['mech', ["Assault 'Mechs"]]]);
+  });
+});
+
+describe('columnas de efectos', () => {
+  const columns = (name: string) => {
+    const { combat, pilot } = getTraitEffectColumns(trait(name));
+    return {
+      combat: combat.map(entry => [entry.scope, entry.note ?? null, entry.effects.length]),
+      pilot: pilot.map(effect => effect.label)
+    };
+  };
+
+  it('CA17: los efectos en combate, con dónde se aplican solo si no es obvio, y los del piloto aparte', () => {
+    expect(columns("Atlas 'Mech Affinity")).toEqual({ combat: [[null, null, 4]], pilot: [] });
+    expect(columns('AC/10 Expert')).toEqual({ combat: [['With AC/10', '(Also applies to LB 10-X AC and UAC/10)', 3]], pilot: [] });
+    expect(columns('House Davion Noble')).toEqual({
+      combat: [['On contracts for House Davion', null, 1], ['In House Davion space', null, 1]],
+      pilot: ['Hiring cost', 'Salary']
+    });
+    expect(columns('Hypochondriac')).toEqual({ combat: [], pilot: ['Hiring cost', 'Salary', 'Injury chance'] });
   });
 });
 
