@@ -13,10 +13,10 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-11-10',
     title: 'Pilots',
     items: [
-      'A new Pilots page lists all 184 pilot traits from DLC 7 with their exact effects, grouped by where they apply, good ones in green and bad ones in red',
+      'A new Pilots page lists the 18 hero pilots like hero \'Mechs: the 8 that hiring halls offer as Elite Pilot and the 10 that join as mission rewards, with their skills, salary, fixed traits and biography',
+      'All 184 pilot traits from DLC 7 with their exact effects, in sections by \'Mech weight class, weapon type, faction or career, good effects in green and bad ones in red',
       'Filter traits by type or hero only and search by name or effect, for example jam or atlas',
-      'Elite pilots have no fixed list: the page explains how they appear and shows the 53 hero traits they can bring',
-      'The Training programs tab compares every academy program and links each academy to its card on the star map'
+      'Training programs come in one table per kind, to compare levels side by side, with the traits each academy program always grants and links to every academy on the star map'
     ]
   },
   {

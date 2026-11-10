@@ -96,8 +96,10 @@ Es la cuarta página (`pilots/index.html`, servida en `/mercs/pilots/`), con su 
 
 - **Efectos en los datos:** `generar_pilotos.py` convierte cada propiedad de los componentes de un rasgo en un efecto con texto, valor y si es bueno, y los agrupa por dónde se aplican (con unos 'Mechs, con un arma, contra una facción, al piloto). La página no interpreta cifras del juego: solo las pinta.
 - **El árbol de componentes:** cada rasgo apunta a su componente principal (`UnitTrait`) y este a los suyos (`UnitTraits`). Se siguen esas referencias, porque algunos assets traen componentes sueltos que el rasgo no usa. Para ello `ue4.py` guarda el orden de los exports.
-- **`utils/pilots.ts`:** los filtros por categoría y hero, la búsqueda por nombre o efecto y la vista en la URL. Tiene sus tests (`pilots.test.ts`).
-- **`pilots/PilotsApp.tsx`:** las pestañas de rasgos y programas, el recuadro de los pilotos de élite y las fichas. Solo pinta y llama a la lógica.
+- **Orden en los datos:** `generar_pilotos.py` da a cada rasgo su subgrupo (clase de peso, clase de arma, tipo de facción…) y los deja ordenados; a cada programa, su familia y lo que lo distingue dentro de ella (nivel, curso o academia). La página solo los agrupa en ese orden.
+- **Pilotos hero:** sus habilidades llegan ya en niveles (la curva del juego convierte la experiencia), y sus rasgos son ids de la lista de rasgos, para enseñar los mismos efectos.
+- **`utils/pilots.ts`:** los filtros por categoría y hero, la búsqueda por nombre o efecto, las secciones de rasgos, las familias de programas, la duración en años y la vista en la URL. Tiene sus tests (`pilots.test.ts`).
+- **`pilots/PilotsApp.tsx`:** las pestañas de pilotos hero, rasgos y programas, las fichas y las tablas. Solo pinta y llama a la lógica.
 
 ## Decisiones de diseño
 

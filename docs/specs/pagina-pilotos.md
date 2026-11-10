@@ -1,7 +1,7 @@
 # Especificación: página de pilotos
 
 - **Issue:** [#79](https://github.com/PonchoiDev/mechlab-web/issues/79)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/pilots.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -157,3 +157,31 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
    - los rasgos por secciones, por categoría, solo hero y la búsqueda;
    - las tablas de los programas, el enlace de una academia al mapa y el de un rasgo a su ficha;
    - la campana de novedades.
+
+## Resultado
+
+- **Orden seguido:** en dos vueltas, cada una con la especificación, los tests de sus criterios (que fallaban) y después los datos, la lógica y la interfaz, en commits separados. La primera trajo los rasgos y los programas; la segunda, los pilotos hero, las secciones de rasgos y las tablas de programas.
+- **Datos:**
+  - 18 pilotos hero: 8 de las salas de contratación y 10 recompensas.
+  - 184 rasgos (99 de 'Mech, 35 de armas, 24 de facciones, 21 de carrera y 5 de graduados; 53 hero) en 18 subgrupos.
+  - 29 programas en 7 familias.
+  - `pilots.json` pesa unos 250 KB (unos 23 KB comprimido con el bundle de la página).
+- **Lector de UE4:**
+  - lee los structs de los mapas (los quirks por arma de los graduados y de Arena Specialist);
+  - guarda el orden de los exports para seguir el árbol de componentes;
+  - lee las claves de las curvas (`RichCurveKey`).
+
+  El mapa estelar y las unidades extraídos de nuevo salen idénticos, salvo los rasgos propios que ahora guarda `programas.json`.
+- **Tests:** los dieciséis criterios (CA1 a CA16) están en `src/utils/pilots.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900, a 390 × 844 y a 360 px:
+  - los pilotos hero con sus habilidades, un rasgo desplegado y la biografía;
+  - los rasgos por secciones;
+  - las tablas de programas, que en el móvil pasan a bloques;
+  - el enlace de un programa a su rasgo de graduado;
+  - las cabeceras con el enlace nuevo.
+- **Decisiones durante el desarrollo:**
+  - Con cuatro carátulas, la portada pasa a columnas de 240 px como mínimo, para que quepan en una fila en escritorio.
+  - En el móvil, los enlaces del mapa estelar se compactan para caber en la primera fila. A 360 px, las páginas de unidades y pilotos esconden «MW5 Mercenaries» del enlace al MechLab.
+  - La primera versión decía que no había pilotos hero fijos y que los rasgos hero eran exclusivos de los pilotos de élite. Los dos errores se corrigieron al encontrar los `MWPilotPersonaAsset` con `PilotPersona.Use.Hero` y comprobar que los rasgos hero también llevan las etiquetas de contratación y academia.
+  - La pestaña de pilotos hero va la primera porque es la página de los pilotos. En el móvil, «Training programs» se acorta a «Programs» para que las tres pestañas quepan en una fila.
+  - Los efectos de los rasgos de un piloto hero se despliegan en su ficha. Los rasgos de un programa enlazan a la pestaña de rasgos con la búsqueda hecha.

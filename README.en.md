@@ -41,7 +41,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (413 tests, V8 coverage) |
+| Tests | Vitest 5 (420 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -131,7 +131,7 @@ src/
   components/           UI components (board, picker, upgrades panel, dialogs…)
   starmap/              Star map page: canvas, system card, date and search
   units/                Enemy units page: filters and a card for each unit
-  pilots/               Pilots page: traits, elite pilots and academy training programs
+  pilots/               Pilots page: hero pilots, traits and academy training programs
   hooks/                Build state, saved builds, view preferences and Sarna image
   utils/                Configurator logic: calculations, fitting rules, upgrades, build codes
   services/             Sarna API, clipboard and PNG build image (canvas)
@@ -153,7 +153,7 @@ tools/
   extraer_unidades.py   Extracts the hit points, speed and weapons of enemy units from the game .pak
   imagenes_sarna.py     Looks up the Sarna page and artwork of each enemy unit chassis
   generar_unidades.py   Generates src/data/units.json
-  extraer_pilotos.py    Extracts pilot traits and their effects from the game .pak
+  extraer_pilotos.py    Extracts hero pilots and pilot traits with their effects from the game .pak
   generar_pilotos.py    Generates src/data/pilots.json
   ue4.py                Reads the .pak and the Unreal Engine 4 assets
   datos-juego/          Files exported from the game
@@ -211,7 +211,7 @@ python3 tools/generar_mapa.py
 | `zonas.json` | `*_ClusterAsset` of campaign, career and the DLC campaigns | Systems, name, description, capital, recommended reputation, difficulty, repair markup and multi-mission contracts of each zone |
 | `rivales.json` | `RivalMercs/StarMapRadialInfluences` and `RivalMercs/Companies` (DLC4) | The 18 rival mercenary companies and their 76 influence zones with their owner over time |
 | `arenas.json` | `ArenaStarSystemTable` and `ArenaFameProgressionTable` (DLC6) | Systems with an arena and fame ranks with their rewards |
-| `academias.json` and `programas.json` | `PilotTraining/AcademyDataAssets` and `TrainingAssets` (DLC7) | The 93 pilot academies with their system, founding date and programs, and the figures of each program |
+| `academias.json` and `programas.json` | `PilotTraining/AcademyDataAssets` and `TrainingAssets` (DLC7) | The 93 pilot academies with their system, founding date and programs, and the figures and own traits of each program |
 | `alianzas.json` | `Allegiance` of the `Factions/*` assets | The faction each one answers to, for the rarity table of minor factions |
 | `recompensas_campana.json` | Objectives with `bHasRewards` and `MechLoadouts` outside the HRQ, and the action that places them | 'Mechs from the DLC campaigns, the Bounty Hunter or promotions, with their system |
 | `heroes_en_venta.json` | `HeroMechsForPurchase` | The 95 hero 'Mechs the game can put up for sale |
@@ -236,7 +236,7 @@ python3 tools/generar_unidades.py
 
 ### Pilots
 
-DLC 7 pilot traits are not exported with the mod editor: `extraer_pilotos.py` reads them from the `.pak` and follows the component tree of each one ('Mech affinity, weapon quirks, armor, sensors, pilot costs…). `generar_pilotos.py` fills in their texts, turns the figures into effects and adds the academy training programs from `tools/datos-juego/starmap/`.
+DLC 7 pilot traits and hero pilots are not exported with the mod editor: `extraer_pilotos.py` reads them from the `.pak`. For each trait it follows the component tree ('Mech affinity, weapon quirks, armor, sensors, pilot costs…); for each hero pilot it takes the skills, the fixed traits and the missions that grant it. `generar_pilotos.py` fills in the texts, turns the figures into effects, sorts the traits into subgroups and adds the academy training programs from `tools/datos-juego/starmap/`, grouped by kind.
 
 ```sh
 python3 tools/extraer_pilotos.py "/path/to/MechWarrior 5 Mercenaries"
@@ -246,10 +246,12 @@ python3 tools/generar_pilotos.py
 | File | Game asset | Contents |
 |---|---|---|
 | `rasgos.json` | `DLC7/TOIs/PilotTraining/PilotTraits/**` | The 184 traits with their name, descriptions, tags (hero, hireable, academies, DLC) and the figures of each component |
+| `hero.json` | `MWPilotPersonaAsset` with `PilotPersona.Use.Hero`, its `MWPersonaAsset` and the `PilotRewards` that grant them | The hero pilots with their name, biography, skills, salary, fixed traits and the missions that grant them |
+| `niveles.json` | `Campaign/Pilots/_common/PilotSkillLevelCurve` | The XP each skill level needs |
 
 ## Quality and checks against the game
 
-- **413 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **420 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
