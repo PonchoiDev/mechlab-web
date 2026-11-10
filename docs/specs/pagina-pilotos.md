@@ -97,11 +97,13 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
   - el nivel y el tope de cada habilidad;
   - sus rasgos fijos, con sus efectos desplegables;
   - su biografía.
-- **RF3.** La pestaña **Traits** lista los rasgos por secciones (categoría y subgrupo, con cuántos hay en cada una). Cada rasgo tiene:
-  - su nombre y su descripción;
-  - cómo se consigue (Hero, Hired pilots, Learnable at academies, Negative, Unique);
-  - su DLC y desde cuándo existe;
-  - sus efectos agrupados por dónde se aplican, con los buenos distinguidos de los malos.
+- **RF3.** La pestaña **Traits** lista los rasgos por secciones (categoría y subgrupo, con cuántos hay en cada una), como los programas: una tabla por subgrupo y una fila por rasgo, con estas columnas:
+  - **Trait:** el nombre y solo las marcas que lo distinguen (Hero, Negative, Unique, su DLC y desde cuándo existe). La descripción del juego va en el tooltip del nombre, porque casi siempre repite los efectos.
+  - **In combat:** los efectos en la batalla. Dónde se aplican solo se escribe cuando no es obvio: no en «In combat» ni en «While piloting…» de las afinidades, sí con un arma, contra una facción o en sus contratos.
+  - **As a pilot:** contratación, sueldo, experiencia, heridas…
+  - **Found on:** dos marcas, Hired (sale en los pilotos que se contratan) y Academies (se aprende en una academia), encendidas o apagadas, para ver las excepciones de un vistazo.
+
+  Los efectos buenos se distinguen de los malos. En el móvil, cada fila pasa a ser un bloque, como en los programas.
 - **RF4.** Los rasgos se filtran por categoría y por solo hero, y se buscan por nombre, descripción o efecto («atlas», «jam»).
 - **RF5.** La pestaña **Training programs** agrupa los programas por familias. Cada familia tiene una descripción y una tabla con una fila por programa:
   - su etiqueta;
@@ -116,7 +118,7 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
 
 ## Requisitos no funcionales
 
-- **RNF1.** La lógica es pura y está en `src/utils/pilots.ts`, con sus tests: filtros, búsqueda, secciones de rasgos, familias de programas, duración y vista en la URL.
+- **RNF1.** La lógica es pura y está en `src/utils/pilots.ts`, con sus tests: filtros, búsqueda, secciones de rasgos, reparto de los efectos en columnas, familias de programas, duración y vista en la URL.
 - **RNF2.** Textos de la interfaz en inglés y sin guiones largos.
 - **RNF3.** La página tiene su propio bundle.
 
@@ -140,6 +142,7 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
 | CA14 | Los pilotos reservados | se consultan | Morgan Trensky es la recompensa de *Leading the Charge*, Sam Hagel la de *Smoke and Mirrors* y Valten Ryder la de *A New March* (DLC 8), con Bushwacker 'Mech Affinity, AC/10 Master y Survivor |
 | CA15 | Los programas | se agrupan por familias | Simpod training 5, Vocational training 2, Semester enrollment 4, Full year enrollment 4, Undergraduate program 5, Graduate program 4 y Academy graduate programs 5. El de NAIS se llama New Avalon Institute of Science, da siempre NAIS Graduate y favorece Standard Autocannon Specialist; Graduate Program de nivel 4 favorece SRM Specialist y MRM Expert |
 | CA16 | La duración de un programa | se escribe | 60 días son «60 days», 365 son «1 year» y 1.460 son «4 years» |
+| CA17 | Los efectos de un rasgo | se reparten en columnas | Atlas 'Mech Affinity: sus cuatro efectos en combate sin decir dónde y ninguno como piloto. AC/10 Expert: «With AC/10» con su nota. House Davion Noble: «On contracts for House Davion» e «In House Davion space» en combate y sus dos costes como piloto. Hypochondriac: nada en combate y sus tres efectos como piloto |
 
 ## Fuera de alcance
 
@@ -150,11 +153,11 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
 
 ## Plan de pruebas
 
-1. **Datos y lógica (CA1 a CA16):** `src/utils/pilots.test.ts`, con `pilots.json` real.
+1. **Datos y lógica (CA1 a CA17):** `src/utils/pilots.test.ts`, con `pilots.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844:
    - la portada con cuatro carátulas;
    - los pilotos hero con sus habilidades, sus rasgos desplegados y su biografía;
-   - los rasgos por secciones, por categoría, solo hero y la búsqueda;
+   - las tablas de rasgos por secciones, por categoría, solo hero y la búsqueda;
    - las tablas de los programas, el enlace de una academia al mapa y el de un rasgo a su ficha;
    - la campana de novedades.
 
