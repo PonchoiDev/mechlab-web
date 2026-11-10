@@ -1,7 +1,7 @@
 # Especificación: retratos de los pilotos hero
 
 - **Issue:** [#95](https://github.com/PonchoiDev/mechlab-web/issues/95)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/pilots.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -54,3 +54,14 @@ Las texturas son de 256 × 256 en DXT5, salvo la de Goblin, de 341 × 341 sin co
 1. **Datos y lógica (CA1 a CA3):** `src/utils/pilots.test.ts`, con `pilots.json` real y los PNG de `public/`.
 2. **Logos:** `extraer_mapa.py` vuelve a escribir los logos de facción idénticos con la nueva `reducir`.
 3. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844, las fichas con su retrato, también los genéricos.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos y la interfaz, en commits separados.
+- **Datos:** 17 archivos de retrato en `public/pilots/portraits/` para los 18 pilotos, porque las dos fichas de Shenzeng comparten textura (816 KB en total, de 33 a 53 KB cada uno). Goblin y los del DLC5 usan retratos genéricos, y Raptor y Shenzeng iconos de empleados.
+- **Logos:** `extraer_mapa.py` los vuelve a escribir idénticos con la nueva `reducir`.
+- **Tests:** los tres criterios (CA1 a CA3) están en `src/utils/pilots.test.ts` y pasan. Leen los PNG con `import.meta.glob` de Vite, porque los tests de `src/` no tienen los tipos de Node.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844, con los retratos propios y los genéricos.
+- **Decisiones durante el desarrollo:**
+  - El CA3 compara con la base de la web y no con `/mercs/`, porque Vitest no aplica el `base` de la configuración.
+  - El peso previsto (unos 20 KB) no se alcanzó sin pérdida: con los filtros de fila de PNG solo baja un 1 %. Se quedan en PNG sin pérdida y con carga diferida.

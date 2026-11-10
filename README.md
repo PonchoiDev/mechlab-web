@@ -39,7 +39,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (421 tests, cobertura con V8) |
+| Tests | Vitest 5 (424 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -242,12 +242,13 @@ python3 tools/generar_pilotos.py
 | Archivo | Asset del juego | Contenido |
 |---|---|---|
 | `rasgos.json` | `DLC7/TOIs/PilotTraining/PilotTraits/**` | Los 184 rasgos con su nombre, sus descripciones, sus etiquetas (hero, contratables, academias, DLC) y las cifras de cada componente |
-| `hero.json` | `MWPilotPersonaAsset` con `PilotPersona.Use.Hero`, su `MWPersonaAsset` y los `PilotRewards` que los dan | Los pilotos hero con su nombre, biografía, habilidades, sueldo, rasgos fijos y las misiones que los dan |
+| `hero.json` | `MWPilotPersonaAsset` con `PilotPersona.Use.Hero`, su `MWPersonaAsset` y los `PilotRewards` que los dan | Los pilotos hero con su nombre, biografía, habilidades, sueldo, rasgos fijos, retrato y las misiones que los dan |
+| `public/pilots/portraits/` | Textura del `MWPortraitAsset` de cada piloto hero | Retratos en PNG de 160 px, descomprimidos de DXT5 |
 | `niveles.json` | `Campaign/Pilots/_common/PilotSkillLevelCurve` | La experiencia que pide cada nivel de habilidad |
 
 ## Calidad y comprobación contra el juego
 
-- **421 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **424 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
