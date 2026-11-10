@@ -383,6 +383,7 @@ export interface MapQuery {
   questId?: string | null;
   mechId?: string | null;
   academyId?: string | null;
+  campaignId?: string | null;
 }
 
 export const parseMapQuery = (search: string, data: StarmapData): MapQuery => {
@@ -396,7 +397,7 @@ export const parseMapQuery = (search: string, data: StarmapData): MapQuery => {
   };
 };
 
-export const toMapQuery = ({ date, systemId, questId, mechId, academyId }: MapQuery, data: StarmapData): string => {
+export const toMapQuery = ({ date, systemId, questId, mechId, academyId, campaignId }: MapQuery, data: StarmapData): string => {
   const params = new URLSearchParams({ date });
   const system = systemId === null ? undefined : data.systems.find(candidate => candidate.id === systemId);
   if (system) params.set('system', system.name);
@@ -404,5 +405,6 @@ export const toMapQuery = ({ date, systemId, questId, mechId, academyId }: MapQu
   // La variante no se comprueba aquí: la rareza se carga aparte (parseMechQuery la valida).
   if (mechId) params.set('mech', mechId);
   if (academyId && data.academies.some(academy => academy.id === academyId)) params.set('academy', academyId);
+  if (campaignId && data.campaigns.some(campaign => campaign.id === campaignId)) params.set('campaign', campaignId);
   return `?${params.toString()}`;
 };

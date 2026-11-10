@@ -198,31 +198,36 @@ def valores_de_config(propiedades):
     return valores
 
 
+def leer_objetivo(pak, paquete, cache):
+    """Título, resumen y quién encarga la misión de un objetivo (/Game/…)."""
+    if paquete not in cache:
+        # Algunos objetivos no se incluyen en el juego (el de Pirate Raiders): la misión se queda sin textos.
+        if ruta_de_juego(paquete) + ".uasset" not in pak.archivos:
+            cache[paquete] = {}
+            return cache[paquete]
+        asset = Asset.desde_pak(pak, ruta_de_juego(paquete))
+        info = asset.propiedades(asset.principal()).get("DisplayInfo", {})
+        empleador = None
+        if isinstance(info.get("Employer"), int) and info["Employer"] < 0:
+            paquete_empleador, _ = asset.ruta_import(info["Employer"])
+            if ruta_de_juego(paquete_empleador) + ".uasset" in pak.archivos:
+                faccion = Asset.desde_pak(pak, ruta_de_juego(paquete_empleador))
+                # El empleador es una «persona» con su nombre visible (EmployerName).
+                empleador = faccion.propiedades(faccion.principal()).get("EmployerName")
+        cache[paquete] = {
+            "titulo": info.get("ScreenTitleText"),
+            "resumen": info.get("ScreenSubText"),
+            "empleador": empleador,
+        }
+    return cache[paquete]
+
+
 def extraer_misiones(pak):
     """Acciones que ofrecen o colocan cada misión, con su sistema y los textos de su objetivo."""
     objetivos = {}
 
     def objetivo(paquete):
-        if paquete not in objetivos:
-            # Algunos objetivos no se incluyen en el juego (el de Pirate Raiders): la misión se queda sin textos.
-            if ruta_de_juego(paquete) + ".uasset" not in pak.archivos:
-                objetivos[paquete] = {}
-                return objetivos[paquete]
-            asset = Asset.desde_pak(pak, ruta_de_juego(paquete))
-            info = asset.propiedades(asset.principal()).get("DisplayInfo", {})
-            empleador = None
-            if isinstance(info.get("Employer"), int) and info["Employer"] < 0:
-                paquete_empleador, _ = asset.ruta_import(info["Employer"])
-                if ruta_de_juego(paquete_empleador) + ".uasset" in pak.archivos:
-                    faccion = Asset.desde_pak(pak, ruta_de_juego(paquete_empleador))
-                    # El empleador es una «persona» con su nombre visible (EmployerName).
-                    empleador = faccion.propiedades(faccion.principal()).get("EmployerName")
-            objetivos[paquete] = {
-                "titulo": info.get("ScreenTitleText"),
-                "resumen": info.get("ScreenSubText"),
-                "empleador": empleador,
-            }
-        return objetivos[paquete]
+        return leer_objetivo(pak, paquete, objetivos)
 
     acciones = []
     for ruta in sorted(pak.archivos):
@@ -598,6 +603,120 @@ def extraer_arenas(pak):
     return {"sistemas": sorted(sistemas, key=lambda arena: arena["sistema"]), "rangos": sorted(rangos, key=lambda rango: rango["nivel"])}
 
 
+def sin_sufijos(nodo):
+    """Las propiedades de un blueprint sin el sufijo de sus nombres (ActName_35_5850… pasa a ActName)."""
+    if isinstance(nodo, dict):
+        return {clave.split("_")[0]: sin_sufijos(valor) for clave, valor in nodo.items()}
+    if isinstance(nodo, list):
+        return [sin_sufijos(valor) for valor in nodo]
+    return nodo
+
+
+def paquete_de(asset, referencia):
+    """Ruta /Game/… de una referencia, que puede ser un import (el DLC2) o una ruta de texto."""
+    if isinstance(referencia, int) and referencia < 0:
+        return asset.ruta_import(referencia)[0]
+    return referencia.split(".")[0] if isinstance(referencia, str) else None
+
+
+def extraer_campanas(pak):
+    """Partes de las campañas de los DLC 2, 4, 5, 6, 7 y 9, con sus misiones en orden.
+
+    Solo cuentan las partes que cuelgan del arco principal (DLCn_CoreCampaign) por SubCampaigns: el
+    prólogo del DLC4 (DLC4_Pt1_Prologue, Operation ASEIR) está en los archivos, pero ningún arco lo usa.
+
+    Cada parte (DLC7_Pt1_Rodigo, DLC2_Act1…) es un arco con un script (LinearCampaignArcScript o
+    DLC2_Prologue_Script) cuyas Act Variables traen el nombre de la parte, el sistema al que se viaja y
+    desde cuándo se ofrece, y cuya lista Missions trae cada misión con su acción Place (sistema y
+    objetivo) y su escenario (recompensa). Las cadenas del DLC8 (Quest_*) y la del DLC3 son HRQ y ya
+    están en misiones.json.
+    """
+    objetivos = {}
+    textos_de_cabecera = {}
+    partes = []
+    usadas = set()
+    for principal in sorted(ruta for ruta in pak.archivos if re.search(r"/DLC\d+/CampaignData/DLC\d+_CoreCampaign\.uasset$", ruta)):
+        pendientes = [sin_extension(principal)]
+        while pendientes:
+            paquete = pendientes.pop()
+            if paquete in usadas or paquete + ".uexp" not in pak.archivos:
+                continue
+            usadas.add(paquete)
+            arco = Asset.desde_pak(pak, paquete)
+            for export in arco.exports:
+                if export.endswith("Script_C") or export.startswith("Default__"):
+                    continue
+                for referencia in arco.propiedades(export).get("SubCampaigns", []):
+                    if isinstance(referencia, int) and referencia < 0:
+                        pendientes.append(ruta_de_juego(arco.ruta_import(referencia)[0]))
+    for ruta in sorted(pak.archivos):
+        dlc = re.match(CONTENIDO + r"DLC(\d+)/", ruta)
+        if not dlc or not ruta.endswith(".uasset") or not tiene_uexp(pak, ruta):
+            continue
+        nombre = os.path.basename(ruta)[: -len(".uasset")]
+        # El nombre de la campaña está en la cabecera del DLC (DLC7_Header, Lancers_Header).
+        # Las cabeceras de las zonas (BethonologZone…) también tienen HeaderText: solo valen las del DLC.
+        if re.fullmatch(r"(DLC\d+|Lancers)_Header", nombre):
+            asset = Asset.desde_pak(pak, sin_extension(ruta))
+            textos_de_cabecera[int(dlc.group(1))] = asset.propiedades(asset.principal()).get("HeaderText")
+            continue
+        # Las partes están en la raíz de CampaignData; las subcarpetas son de misiones y de las HRQ del DLC8.
+        if os.path.dirname(ruta) != CONTENIDO + f"DLC{dlc.group(1)}/CampaignData" or sin_extension(ruta) not in usadas:
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        script = next((export for export in asset.exports if export.endswith("Script_C")), None)
+        if script is None or "Act Variables" not in asset.nombres:
+            continue
+        datos = sin_sufijos(asset.propiedades(script))
+        variables = datos.get("Act Variables", {})
+        oferta = variables.get("StartingOfferTriggerConditions", {})
+        fecha = oferta.get("Date", {})
+        misiones = []
+        for mision in datos.get("Missions", []):
+            accion = paquete_de(asset, mision.get("PlaceArcAction"))
+            if not accion or ruta_de_juego(accion) + ".uasset" not in pak.archivos:
+                continue
+            colocar = Asset.desde_pak(pak, ruta_de_juego(accion))
+            valores = {}
+            for export in colocar.exports:
+                if export.startswith("Default__"):
+                    valores = valores_de_config(colocar.propiedades(export))
+            textos = {}
+            if isinstance(valores.get("Objective"), int) and valores["Objective"] < 0:
+                textos = leer_objetivo(pak, colocar.ruta_import(valores["Objective"])[0], objetivos)
+            recompensa = {}
+            escenario = paquete_de(asset, mision.get("MissionScenario"))
+            if escenario and ruta_de_juego(escenario) + ".uasset" in pak.archivos:
+                leido = Asset.desde_pak(pak, ruta_de_juego(escenario))
+                base = (leido.propiedades(leido.principal()).get("ScenarioSpecification", {})
+                        .get("ScenarioDetails", {}).get("BaseReward", {}))
+                objetos = base.get("ItemRewards") or {}
+                recompensa = {
+                    "cbills": base.get("CBills") or 0,
+                    "reputacion": base.get("ReputationIncrease") or 0,
+                    "pilotos": [piloto["Id"]["PrimaryAssetName"] for piloto in base.get("PilotRewards", [])],
+                    "armas": [[objeto["ItemData"]["WeaponId"]["Id"]["PrimaryAssetName"], objeto["Count"]] for objeto in objetos.get("Weapons", [])],
+                    "equipo": [[objeto["ItemData"]["EquipmentId"]["Id"]["PrimaryAssetName"], objeto["Count"]] for objeto in objetos.get("Equipment", [])],
+                }
+            misiones.append({
+                "nombre": mision.get("MissionName"),
+                "accion": accion.rsplit("/", 1)[-1],
+                "sistema": valores.get("StarSystemId"),
+                **textos,
+                "recompensa": recompensa,
+            })
+        partes.append({
+            "dlc": int(dlc.group(1)),
+            "arco": nombre,
+            "parte": variables.get("ActName"),
+            "viaje": variables.get("TravelStarSystemId"),
+            # Sin bCheck, la fecha de la plantilla no cuenta: la parte se abre al acabar la anterior.
+            "desde": fecha_de_ticks(fecha["Value"]) if fecha.get("bCheck") else None,
+            "misiones": misiones,
+        })
+    return textos_de_cabecera, partes
+
+
 def extraer_academias(pak):
     """Academias de pilotos del DLC7 y los programas de entrenamiento que ofrecen."""
     textos = Asset.desde_pak(pak, TEXTOS_PROGRAMAS).textos(TEXTOS_PROGRAMAS.rsplit("/", 1)[1])
@@ -786,6 +905,9 @@ def main():
     guardar("recompensas_campana.json", extraer_recompensas_campana(pak))
     guardar("heroes_en_venta.json", extraer_heroes_en_venta(pak))
     guardar("arenas.json", extraer_arenas(pak))
+    nombres_campanas, partes_campanas = extraer_campanas(pak)
+    guardar("campanas.json", partes_campanas)
+    guardar("nombres_campanas.json", {str(dlc): nombre for dlc, nombre in sorted(nombres_campanas.items())})
     academias, programas = extraer_academias(pak)
     guardar("academias.json", academias)
     guardar("programas.json", programas)
