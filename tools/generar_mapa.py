@@ -569,8 +569,14 @@ def campanas(partes_juego, nombres, recompensas, pilotos_hero, mechs, items, sis
         for recompensa in recompensas:
             if recompensa["dlc"] == dlc and recompensa["kind"] == "mission":
                 de_mision.setdefault(recompensa["title"].lower(), []).extend(recompensa["mechs"])
+        def numero_de_mision(mision):
+            coincidencia = REGEX_NUMERO_DE_MISION.search(mision["nombre"] or "")
+            if not coincidencia:
+                raise ValueError(f"DLC {dlc}: la misión {mision['nombre']!r} no lleva número: ¿ha cambiado el juego?")
+            return int(coincidencia.group(1))
+
         misiones = []
-        for mision in sorted(misiones_juego, key=lambda mision: int(REGEX_NUMERO_DE_MISION.search(mision["nombre"]).group(1))):
+        for mision in sorted(misiones_juego, key=numero_de_mision):
             if mision["sistema"] not in sistemas_validos:
                 continue
             titulo = re.sub(r"\bpt\.", "Pt.", mision.get("titulo") or "")
@@ -588,6 +594,8 @@ def campanas(partes_juego, nombres, recompensas, pilotos_hero, mechs, items, sis
                 "weapons": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, True) for id_juego, cantidad in pago.get("armas", [])),
                 "equipment": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, False) for id_juego, cantidad in pago.get("equipo", [])),
             })
+        if not misiones:
+            raise ValueError(f"DLC {dlc}: ninguna misión de la campaña está en un sistema del mapa: ¿ha cambiado el juego?")
         final = next((recompensa for recompensa in recompensas if recompensa["dlc"] == dlc and recompensa["kind"] == "campaignComplete"), None)
         resultado.append({
             "id": f"dlc{dlc}",
