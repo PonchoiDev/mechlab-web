@@ -206,6 +206,7 @@ python3 tools/generar_mapa.py
 | `zonas.json` | `*_ClusterAsset` of campaign, career and the DLC campaigns | Systems, name, description, capital, recommended reputation, difficulty, repair markup and multi-mission contracts of each zone |
 | `rivales.json` | `RivalMercs/StarMapRadialInfluences` and `RivalMercs/Companies` (DLC4) | The 18 rival mercenary companies and their 76 influence zones with their owner over time |
 | `arenas.json` | `ArenaStarSystemTable` and `ArenaFameProgressionTable` (DLC6) | Systems with an arena and fame ranks with their rewards |
+| `academias.json` and `programas.json` | `PilotTraining/AcademyDataAssets` and `TrainingAssets` (DLC7) | The 93 pilot academies with their system, founding date and programs, and the figures of each program |
 | `alianzas.json` | `Allegiance` of the `Factions/*` assets | The faction each one answers to, for the rarity table of minor factions |
 | `recompensas_campana.json` | Objectives with `bHasRewards` and `MechLoadouts` outside the HRQ, and the action that places them | 'Mechs from the DLC campaigns, the Bounty Hunter or promotions, with their system |
 | `heroes_en_venta.json` | `HeroMechsForPurchase` | The 95 hero 'Mechs the game can put up for sale |

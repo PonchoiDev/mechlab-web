@@ -1,7 +1,7 @@
 # Especificación: academias de pilotos en el mapa estelar
 
 - **Issue:** [#79](https://github.com/PonchoiDev/mechlab-web/issues/79)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/academies.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -34,7 +34,7 @@ Los pilotos hero del issue no son personajes fijos: el juego genera pilotos con 
 ## Requisitos funcionales
 
 - **RF1.** Un panel **Academies**, junto a los demás, lista las academias abiertas en la fecha del mapa con su sistema. Se puede buscar por academia o por sistema. Los 24 Virtual World Center se agrupan en una sola entrada con sus sistemas.
-- **RF2.** El mapa marca con un icono los sistemas que tienen una academia abierta en esa fecha. El icono se puede ocultar desde la leyenda, como los mercados especiales.
+- **RF2.** El mapa marca con un icono los sistemas que tienen una academia abierta en esa fecha: un birrete azul, el color del icono del juego, debajo de la estrella.
 - **RF3.** Al elegir una academia se abre su ficha:
   - nombre, sistema enlazado y descripción;
   - fecha de fundación y reputación que pide, si las tiene;
@@ -73,7 +73,17 @@ Los pilotos hero del issue no son personajes fijos: el juego genera pilotos con 
 1. **Datos y lógica (CA1 a CA10):** `src/utils/academies.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844:
    - el panel Academies en 3025;
-   - los iconos en el mapa y en la leyenda;
+   - los iconos en el mapa;
    - la ficha del New Avalon Institute of Science y la de la War College of Tamar en 3052;
    - la ficha de Sarna con sus academias;
    - el enlace `?academy=`.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 93 academias en 82 sistemas y 29 programas. Los datos suman unos 75 KB a `starmap.json`.
+- **Tests:** los diez criterios (CA1 a CA10) están en `src/utils/academies.test.ts` y pasan, con dos más de la agrupación de la lista y de `?academy=` en la URL.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: el panel en 3025 con los Virtual World Center agrupados, la búsqueda, los iconos del mapa, la ficha del New Avalon Institute of Science, la de la War College of Tamar en 3052 (destruida, en rojo, y sin icono), Sarna en 3030 con sus tres academias y `?academy=` al recargar.
+- **Decisiones durante el desarrollo:**
+  - La leyenda del mapa no tiene interruptores para ocultar los iconos, así que el de las academias no se puede ocultar; va debajo de la estrella, donde no tapa ningún otro.
+  - Elegir otra cosa (una HRQ, una variante, una compañía, una zona o una estrella) cierra la ficha de la academia, como las demás. Abrir su sistema desde la ficha la conserva, y al cerrar el sistema vuelve a verse.

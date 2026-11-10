@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-10-pilot-academies',
+    date: '2026-11-10',
+    title: 'Pilot academies on the star map',
+    items: [
+      'The new Academies panel lists the DLC 7 pilot academies open on the chosen date, and the map marks their systems with a blue cap',
+      'Each academy card shows its training programs with length, cost, the pilot skill they accept and their skill, trait and XP stars',
+      'Academies founded later or destroyed by the Clans open and close with the date, and the system card links its academies'
+    ]
+  },
+  {
     id: '2026-11-10-review-fixes',
     date: '2026-11-10',
     title: 'Small fixes',
