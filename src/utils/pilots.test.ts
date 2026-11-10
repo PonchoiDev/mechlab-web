@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import pilotsJson from '../data/pilots.json';
 import type { PilotTrait, PilotsData } from '../types/pilots';
 import {
-  filterTraits, formatProgramLength, getTraitEffectColumns, groupPrograms, groupTraits, parsePilotsQuery, splitHeroPilots, toPilotsQuery
+  filterTraits, formatProgramLength, getPortraitUrl, getTraitEffectColumns, groupPrograms, groupTraits, parsePilotsQuery, splitHeroPilots,
+  toPilotsQuery
 } from './pilots';
 
 // Criterios de aceptación de docs/specs/pagina-pilotos.md (issue #79).
@@ -162,6 +163,36 @@ describe('pilotos hero', () => {
     expect(valten).toEqual(expect.objectContaining({ dlc: 8, hiringHall: false }));
     expect(valten.rewards.map(reward => reward.title)).toEqual(['A New March']);
     expect(valten.traits.map(traitName)).toEqual(["Bushwacker 'Mech Affinity", 'AC/10 Master', 'Survivor']);
+  });
+});
+
+// Los retratos de public/pilots/portraits/, en base64 para leer la cabecera del PNG.
+const PORTRAITS = import.meta.glob('/public/pilots/portraits/*.png', { query: '?inline', import: 'default', eager: true }) as Record<string, string>;
+const pngSize = (dataUrl: string) => {
+  const bytes = atob(dataUrl.slice(dataUrl.indexOf(',') + 1, dataUrl.indexOf(',') + 33));
+  const word = (start: number) => [0, 1, 2, 3].reduce((total, index) => total * 256 + bytes.charCodeAt(start + index), 0);
+  return { png: bytes.slice(1, 4) === 'PNG', width: word(16), height: word(20) };
+};
+
+describe('retratos de los pilotos hero', () => {
+  it('CA1: los 18 tienen retrato, un PNG de 160 × 160 en public/pilots/portraits/', () => {
+    expect(data.heroes).toHaveLength(18);
+    for (const pilot of data.heroes) {
+      const file = PORTRAITS[`/public/pilots/portraits/${pilot.portrait}`];
+      expect(file, `${pilot.name}: ${pilot.portrait}`).toBeDefined();
+      expect(pngSize(file)).toEqual({ png: true, width: 160, height: 160 });
+    }
+  });
+
+  it('CA2: retratos propios y genéricos', () => {
+    expect(hero('Ash Delmore').portrait).toBe('Ash.png');
+    expect(hero('Goblin').portrait).toBe('Male_Rank4_1.png');
+    expect(hero('Capt. Shenzeng').portrait).toBe('liao_field1.png');
+  });
+
+  it('CA3: la URL de un retrato cuelga de la base de la web (/mercs/ en producción)', () => {
+    expect(getPortraitUrl('Ash.png')).toBe(`${import.meta.env.BASE_URL}pilots/portraits/Ash.png`);
+    expect(getPortraitUrl('Ash.png')).toMatch(/^\/(mercs\/)?pilots\/portraits\/Ash\.png$/);
   });
 });
 
