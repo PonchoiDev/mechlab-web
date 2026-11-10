@@ -1,4 +1,5 @@
 import type { GameDate, MercZone, StarSystem, StarmapData } from '../types/starmap';
+import { getCampaignAvailability } from '../utils/campaigns';
 import { getQuestAvailability } from '../utils/quests';
 import { findClusterAt, getClusterOutlines } from '../utils/clusters';
 import { findMercZoneAt } from '../utils/mercs';
@@ -20,7 +21,9 @@ const TERRITORY_RADIUS = 34;
 const LABEL_SCALE = 2.4;
 const CLUSTER_PADDING = 7;
 // Misiones de alta recompensa: icono de oferta y ruta de la elegida, en ámbar como en el juego.
-const QUEST_COLOR = '#f2b75e';
+export const QUEST_COLOR = '#f2b75e';
+// Magenta: no se confunde con el ámbar de las HRQ, el rojo de las arenas ni el morado del mercado negro.
+export const CAMPAIGN_COLOR = '#ff66cc';
 // Mercados especiales (verde, o morado si es mercado negro) y 'Mechs únicos (estrella dorada).
 const MARKET_COLOR = '#7fdc8a';
 const BLACK_MARKET_COLOR = '#b98cff';
@@ -108,6 +111,7 @@ export class StarmapRenderer {
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
   private readonly questOffers: Map<number, StarmapData['quests']>;
+  private readonly campaignStarts: Map<number, StarmapData['campaigns']>;
   private readonly markets: Map<number, boolean>;
   // Sistemas con una academia abierta en la fecha del mapa.
   private academies = new Set<number>();
@@ -129,6 +133,8 @@ export class StarmapRenderer {
   hoveredId: number | null = null;
   // Sistemas de la HRQ elegida, en orden: la oferta y después sus misiones.
   questRoute: number[] | null = null;
+  // Color de la ruta: ámbar para una HRQ, magenta para una campaña.
+  routeColor = QUEST_COLOR;
   // Sistema que se marca en azul con su nombre: el de la academia elegida.
   markedId: number | null = null;
   selectedId: number | null = null;
@@ -143,6 +149,8 @@ export class StarmapRenderer {
     this.hubCapitals = new Set(hubs.map(hub => hub.capital.id));
     this.questOffers = new Map();
     for (const quest of data.quests) this.questOffers.set(quest.offer, [...(this.questOffers.get(quest.offer) ?? []), quest]);
+    this.campaignStarts = new Map();
+    for (const campaign of data.campaigns) this.campaignStarts.set(campaign.start, [...(this.campaignStarts.get(campaign.start) ?? []), campaign]);
     // Por sistema, si alguno de sus mercados es normal (verde) o todos son negros (morado).
     this.markets = new Map();
     for (const market of data.markets) {
@@ -555,6 +563,9 @@ export class StarmapRenderer {
       if (this.markets.has(system.id)) this.drawMarketIcon(...this.toScreen(system.x, system.y), this.markets.get(system.id)!);
       if (this.arenas.has(system.id)) this.drawArenaIcon(...this.toScreen(system.x, system.y));
       if (this.academies.has(system.id)) this.drawAcademyIcon(...this.toScreen(system.x, system.y));
+      const campaigns = this.campaignStarts.get(system.id);
+      // Atenuada si ninguna de las campañas que empiezan aquí se ofrece aún en la fecha del mapa.
+      if (campaigns) this.drawCampaignIcon(...this.toScreen(system.x, system.y), campaigns.some(campaign => getCampaignAvailability(campaign, this.date).state === 'available'));
     }
     for (const unique of this.data.uniqueMechs) {
       if (unique.from > this.date) continue;
@@ -612,6 +623,28 @@ export class StarmapRenderer {
     context.fillStyle = '#140d02';
     context.fillRect(-0.9, -4.2, 1.8, 5);
     context.fillRect(-0.9, 2, 1.8, 1.6);
+    context.restore();
+  }
+
+  private drawCampaignIcon(x: number, y: number, available: boolean) {
+    // Banderín magenta a la izquierda de la estrella, entre la moneda del mercado y el rombo de la
+    // arena: aquí empieza la campaña de un DLC.
+    const context = this.context;
+    context.save();
+    context.globalAlpha = available ? 1 : 0.35;
+    context.translate(x - 20, y);
+    context.strokeStyle = '#1a0612';
+    context.lineWidth = 1.2;
+    context.fillStyle = CAMPAIGN_COLOR;
+    context.beginPath();
+    context.moveTo(-3, -6);
+    context.lineTo(6, -3.5);
+    context.lineTo(-3, -1);
+    context.closePath();
+    context.fill();
+    context.stroke();
+    context.fillRect(-4, -6.5, 1.8, 13);
+    context.strokeRect(-4, -6.5, 1.8, 13);
     context.restore();
   }
 
@@ -710,18 +743,19 @@ export class StarmapRenderer {
   }
 
   private drawQuestRoute() {
-    // Línea discontinua por los sistemas de la HRQ elegida, con cada parada numerada.
+    // Línea discontinua por los sistemas de la HRQ o la campaña elegida, con cada parada numerada.
     if (!this.questRoute?.length) return;
+    const color = this.routeColor;
     const context = this.context;
     const points = this.questRoute.flatMap(id => {
       const system = this.data.systems.find(candidate => candidate.id === id);
       return system ? [this.toScreen(system.x, system.y)] : [];
     });
     context.save();
-    context.strokeStyle = QUEST_COLOR;
+    context.strokeStyle = color;
     context.lineWidth = 2.5;
     context.setLineDash([7, 5]);
-    context.shadowColor = QUEST_COLOR;
+    context.shadowColor = color;
     context.shadowBlur = 8;
     context.beginPath();
     points.forEach(([x, y], i) => (i === 0 ? context.moveTo(x, y) : context.lineTo(x, y)));
@@ -732,7 +766,7 @@ export class StarmapRenderer {
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     points.forEach(([x, y], i) => {
-      context.fillStyle = QUEST_COLOR;
+      context.fillStyle = color;
       context.beginPath();
       context.arc(x - 12, y + 12, 8, 0, Math.PI * 2);
       context.fill();

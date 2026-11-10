@@ -1018,6 +1018,9 @@ button, input, select { font: inherit; color: inherit; }
   bottom: 18px;
   display: flex;
   align-items: flex-end;
+  /* Si los cajones no caben junto al panel de fecha, saltan a otra fila por encima en vez de meterse
+     debajo de él. */
+  flex-wrap: wrap-reverse;
   gap: 8px;
   max-width: calc(100vw - 480px);
   /* Con un cajón abierto, la caja ocupa mucho más que los propios cajones: el hueco entre ellos no
@@ -1026,6 +1029,11 @@ button, input, select { font: inherit; color: inherit; }
 }
 
 .starmap-drawers > * { flex-shrink: 0; pointer-events: auto; }
+
+/* Con ocho cajones, en pantallas medianas los botones se ciñen a su texto para caber en una fila. */
+@media (min-width: 761px) and (max-width: 1700px) {
+  .starmap-drawers .starmap-legend > button { min-width: 0; padding: 0 10px; }
+}
 .starmap-legend > button { white-space: nowrap; }
 
 .starmap-legend {
@@ -1390,7 +1398,7 @@ button, input, select { font: inherit; color: inherit; }
   border-top: 1px solid var(--map-line);
 }
 
-.starmap-quest-missions li {
+.starmap-quest-missions > li {
   display: grid;
   grid-template-columns: 26px 1fr;
   gap: 10px;
@@ -1547,6 +1555,9 @@ button, input, select { font: inherit; color: inherit; }
   .starmap-zoom { left: auto; right: 12px; bottom: 132px; flex-direction: row; }
   .starmap-zoom button:not(:last-child) { display: none; }
   .starmap-drawers { left: 12px; bottom: 132px; max-width: calc(100vw - 74px); flex-wrap: wrap; gap: 6px; }
+  /* Con ocho cajones, «Special markets» y «Special 'Mech locations» se quedan en «Markets» y «'Mech
+     locations» para que quepan en tres filas y dejen ver el mapa. */
+  .starmap-drawer-extra { display: none; }
   .starmap-legend { max-width: calc(100vw - 74px); }
   .starmap-legend > button { min-width: 0; height: 34px; padding: 0 8px; font-size: 13px; letter-spacing: 0.04em; }
   .starmap-quests.is-open { width: calc(100vw - 74px); }
@@ -1574,3 +1585,76 @@ button, input, select { font: inherit; color: inherit; }
   white-space: nowrap;
   border: 0;
 }
+
+/* Campañas de los DLC: los mismos paneles que las HRQ, en magenta (el color de su banderín y su ruta). */
+.starmap-campaigns > button b { color: #ff66cc; }
+.starmap-campaigns.is-open > button { background: rgba(255, 102, 204, 0.12); }
+.starmap-campaigns li button:hover,
+.starmap-campaigns li button:focus-visible { background: rgba(255, 102, 204, 0.12); }
+.starmap-campaigns li button[aria-pressed='true'] { border-left-color: #ff66cc; background: rgba(255, 102, 204, 0.18); }
+
+.starmap-campaign-mark {
+  border-color: #ff66cc;
+  color: #ff66cc;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.9) 55%, rgba(255, 102, 204, 0.35));
+  box-shadow: 0 0 18px rgba(255, 102, 204, 0.45);
+}
+
+.starmap-campaign .starmap-tags .is-quest dt,
+.starmap-system-campaigns .is-quest dt { background: linear-gradient(90deg, #ff66cc, rgba(255, 102, 204, 0.35)); }
+.starmap-campaign .starmap-quest-step { background: #ff66cc; }
+.starmap-campaign .starmap-system-link,
+.starmap-system-campaigns .starmap-system-link { text-decoration-color: rgba(255, 102, 204, 0.6); }
+.starmap-campaign .starmap-system-link:hover,
+.starmap-campaign .starmap-system-link:focus-visible,
+.starmap-system-campaigns .starmap-system-link:hover,
+.starmap-system-campaigns .starmap-system-link:focus-visible { color: #ff66cc; }
+
+.starmap-campaign-from { color: var(--map-muted); font-size: 16px; }
+
+.starmap-campaign-employer {
+  color: var(--map-muted);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.starmap-campaign-reward { margin-top: 2px; font-size: 15px; }
+.starmap-quest-missions .starmap-campaign-money { margin: 0; color: var(--map-text); font-family: inherit; font-size: 15px; }
+
+.starmap-campaign-prizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 12px;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.starmap-campaign-prizes small { color: var(--map-muted); font-size: 13px; }
+
+.starmap-campaign-pilot {
+  color: var(--map-text);
+  font-weight: 700;
+  text-decoration-color: #ffd400;
+  text-underline-offset: 3px;
+}
+
+.starmap-campaign-pilot:hover,
+.starmap-campaign-pilot:focus-visible { color: #ffd400; outline: none; }
+
+.starmap-campaign-reward details { margin-top: 2px; }
+
+.starmap-campaign-reward summary {
+  color: var(--map-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.starmap-campaign-reward details ul { margin: 2px 0 0; padding: 0 0 0 12px; list-style: none; font-size: 14px; }
+.starmap-campaign-reward details small,
+.starmap-campaign-reward details b { color: var(--map-muted); font-weight: 600; }
+.starmap-campaign-completion { margin-bottom: 14px; border-left-color: #ff66cc; }

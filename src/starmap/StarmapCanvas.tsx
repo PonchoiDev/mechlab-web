@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { GameDate, StarmapData } from '../types/starmap';
 import { getClusterLevels } from '../utils/starmap';
 import { ZoneLevelText } from './ZonePanels';
-import { StarmapRenderer, type MercZoneLayer, type TerritoryColors, type View } from './renderer';
+import { QUEST_COLOR, StarmapRenderer, type MercZoneLayer, type TerritoryColors, type View } from './renderer';
 
 export interface FocusRequest {
   // Un sistema se centra; varios se encuadran.
@@ -19,6 +19,8 @@ interface StarmapCanvasProps {
   hoveredId: number | null;
   selectedId: number | null;
   questRoute: number[] | null;
+  // Color de la ruta; sin él, el de las HRQ.
+  routeColor?: string;
   // Sistema de la academia elegida: se marca para encontrarlo al encuadrarlo.
   markedId: number | null;
   territoryColors: TerritoryColors;
@@ -91,7 +93,7 @@ const getVisibleBand = (container: HTMLElement): { top: number; bottom: number }
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, markedId, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, routeColor, markedId, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
@@ -218,9 +220,10 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     renderer.hoveredId = hoveredId;
     renderer.selectedId = selectedId;
     renderer.questRoute = questRoute;
+    renderer.routeColor = routeColor ?? QUEST_COLOR;
     renderer.markedId = markedId;
     renderer.requestDraw();
-  }, [hoveredId, selectedId, questRoute, markedId]);
+  }, [hoveredId, selectedId, questRoute, routeColor, markedId]);
 
   useEffect(() => {
     rendererRef.current?.setTerritoryColors(territoryColors);
