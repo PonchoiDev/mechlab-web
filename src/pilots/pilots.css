@@ -1,0 +1,426 @@
+/* Pilotos: los estilos de las unidades enemigas (units.css) con el azul de las academias. Los pilotos
+   y los rasgos hero llevan el dorado de los 'Mechs únicos del mapa; los efectos buenos van en verde y
+   los malos en rojo. */
+:root {
+  --units-accent: #2f8cff;
+  --pilot-hero: #ffd400;
+  --pilot-good: #7fdc8a;
+  --pilot-bad: #ff796c;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(47, 140, 255, 0.14), transparent 55%),
+    var(--units-bg);
+  background-attachment: fixed;
+}
+
+.units-intro a { color: var(--units-text); }
+
+/* Pestañas: pilotos hero, rasgos y programas */
+.pilot-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--units-line);
+}
+
+.pilot-tabs button {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--units-muted);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pilot-tabs small { margin-left: 4px; font-size: 14px; }
+.pilot-tabs button:hover, .pilot-tabs button:focus-visible { color: var(--units-text); outline: none; }
+.pilot-tabs button[aria-pressed='true'] { border-bottom-color: var(--units-accent); color: var(--units-text); }
+
+.pilot-hero-toggle {
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--units-line);
+  border-radius: 0;
+  background: var(--units-panel);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.pilot-hero-toggle:hover, .pilot-hero-toggle:focus-visible { border-color: var(--pilot-hero); outline: none; }
+.pilot-hero-toggle[aria-pressed='true'] { border-color: var(--pilot-hero); color: #000; background: var(--pilot-hero); }
+
+/* Secciones: una categoría de rasgos, una familia de programas o un grupo de pilotos hero */
+.pilot-section { margin: 0 0 30px; }
+
+.pilot-section h2 {
+  margin: 0 0 4px;
+  color: var(--units-text);
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pilot-section h2 small,
+.pilot-subsection h3 small { margin-left: 4px; color: var(--units-muted); font-size: 15px; letter-spacing: 0.04em; }
+
+.pilot-section-header { max-width: 900px; margin-bottom: 12px; }
+
+.pilot-section-header p {
+  margin: 0;
+  color: var(--units-muted);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.pilot-section > h2 { padding-bottom: 6px; border-bottom: 1px solid var(--units-line); }
+.pilot-subsection { margin: 14px 0 0; }
+
+.pilot-subsection h3 {
+  margin: 0 0 8px;
+  color: var(--units-accent);
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Nombre de una ficha: el h2 de las unidades, pero en el nivel que le toca dentro de las secciones */
+.unit-card .unit-card-name {
+  position: relative;
+  margin: 2px 0 4px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.pilots .unit-card-header { min-height: 0; }
+
+.pilot-description {
+  margin: 0;
+  padding: 0 14px 8px;
+  color: var(--units-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.pilot-groups {
+  display: grid;
+  gap: 8px;
+  padding: 8px 14px 12px;
+  border-top: 1px solid var(--units-line);
+}
+
+.pilot-groups h5 {
+  margin: 0 0 2px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pilot-groups h5 small { color: var(--units-muted); font-size: 12px; letter-spacing: 0.02em; text-transform: none; }
+.pilot-groups .is-pilot h5 { color: var(--units-muted); }
+
+.pilot-groups ul {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+}
+
+.pilot-groups li b { display: inline-block; min-width: 54px; font-variant-numeric: tabular-nums; }
+.pilot-groups li.is-good b { color: var(--pilot-good); }
+.pilot-groups li.is-bad b { color: var(--pilot-bad); }
+
+/* Ficha de un piloto hero: borde dorado, como los rasgos hero */
+.pilot-hero { border-top-color: var(--pilot-hero); }
+.pilot-hero .unit-card-kind span:first-child { color: var(--pilot-hero); }
+
+.pilot-callsign,
+.pilot-source {
+  position: relative;
+  margin: 0;
+  color: var(--units-muted);
+  font-size: 15px;
+}
+
+.pilot-source { margin-top: 4px; color: var(--units-text); font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.4; }
+.pilot-hero-stats { grid-template-columns: repeat(2, 1fr); }
+
+.pilot-skills {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+  padding: 10px 14px;
+  list-style: none;
+  font-size: 15px;
+}
+
+.pilot-skills li { display: grid; grid-template-columns: 120px minmax(0, 1fr) 20px; align-items: center; gap: 10px; }
+.pilot-skills li > span:first-child { color: var(--units-muted); }
+.pilot-skills b { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Barra de 10 casillas: llenas hasta el nivel, con borde hasta el tope y apagadas por encima */
+.pilot-skill-bar { display: flex; gap: 3px; }
+
+.pilot-skill-bar i {
+  flex: 1;
+  height: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pilot-skill-bar i.is-cap { border-color: rgba(47, 140, 255, 0.6); }
+.pilot-skill-bar i.is-level { border-color: var(--units-accent); background: var(--units-accent); }
+
+.pilot-hero-traits { padding: 8px 14px 10px; border-top: 1px solid var(--units-line); }
+
+.pilot-hero-traits h4 {
+  margin: 0 0 4px;
+  color: var(--units-muted);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pilot-hero-traits details { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.pilot-hero-traits details:first-of-type { border-top: 0; }
+
+.pilot-hero-traits summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pilot-hero-traits summary:hover,
+.pilot-hero-traits summary:focus-visible { color: var(--units-accent); outline: none; }
+.pilot-hero-traits .pilot-description,
+.pilot-hero-traits .pilot-groups { padding-right: 0; padding-left: 0; }
+.pilot-hero-traits .pilot-groups { border-top: 0; padding-top: 2px; }
+
+.pilot-badge {
+  padding: 0 5px;
+  border: 1px solid var(--units-line);
+  color: var(--units-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pilot-badge.is-hero { border-color: var(--pilot-hero); color: var(--pilot-hero); cursor: help; }
+.pilot-badge.is-negative { border-color: var(--pilot-bad); color: var(--pilot-bad); }
+
+.pilot-bio p {
+  margin: 0;
+  padding: 0 14px 10px;
+  color: var(--units-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* Tablas de rasgos y de programas: una por subgrupo o por familia */
+.pilot-table {
+  width: 100%;
+  table-layout: fixed;
+  border: 1px solid var(--units-line);
+  border-top: 3px solid var(--units-accent);
+  border-collapse: collapse;
+  background: var(--units-panel);
+  font-size: 17px;
+}
+
+.pilot-table th,
+.pilot-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+  vertical-align: top;
+}
+
+.pilot-table thead th {
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pilot-table tbody th { font-weight: 700; }
+.pilot-table tbody tr:last-child > * { border-bottom: 0; }
+.pilot-table tbody tr:nth-child(odd) { background: rgba(255, 255, 255, 0.035); }
+.pilot-table td { font-variant-numeric: tabular-nums; }
+
+/* Las mismas columnas en todas las familias, para comparar de una tabla a otra */
+.pilot-programs td { white-space: nowrap; }
+.pilot-programs thead th { width: 8.5%; }
+.pilot-programs thead th:first-child { width: 27%; }
+.pilot-programs thead th:last-child { width: 13.5%; }
+.pilot-programs td.pilot-program-academies { white-space: normal; }
+
+/* Rasgos: nombre, efectos, efectos como piloto y dónde salen */
+.pilot-traits thead th:nth-child(1) { width: 24%; }
+.pilot-traits thead th:nth-child(2) { width: 42%; }
+.pilot-traits thead th:nth-child(3) { width: 22%; }
+.pilot-traits thead th:nth-child(4) { width: 12%; }
+
+.pilot-trait-title { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; }
+.pilot-trait-name[title] { cursor: help; }
+.pilot-traits tr.is-hero .pilot-trait-name { color: var(--pilot-hero); }
+
+.pilot-trait-meta {
+  flex-basis: 100%;
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.pilot-traits td.is-empty { color: rgba(255, 255, 255, 0.25); }
+.pilot-effect-line + .pilot-effect-line { margin-top: 4px; }
+
+.pilot-effect-scope {
+  display: block;
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pilot-effect-scope small { font-size: 12px; letter-spacing: 0.02em; text-transform: none; }
+
+.pilot-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pilot-effects li { white-space: nowrap; }
+.pilot-effects li.is-good b { color: var(--pilot-good); }
+.pilot-effects li.is-bad b { color: var(--pilot-bad); }
+
+/* Dos marcas encendidas o apagadas: lo normal es tener las dos, así se ven las excepciones */
+.pilot-found { white-space: nowrap; }
+
+.pilot-found span {
+  display: block;
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: line-through;
+  text-transform: uppercase;
+  cursor: help;
+}
+
+.pilot-found span.is-on { color: var(--units-text); text-decoration: none; }
+
+.pilot-program-traits {
+  display: block;
+  margin-top: 2px;
+  color: var(--units-muted);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.pilot-trait-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--units-text);
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--units-accent);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.pilot-trait-link:hover,
+.pilot-trait-link:focus-visible { color: var(--units-accent); outline: none; }
+
+.pilot-stars { color: var(--units-yellow); font-size: 14px; letter-spacing: 1px; }
+.pilot-stars i { color: rgba(255, 255, 255, 0.18); font-style: normal; }
+
+.pilot-program-academies summary { color: var(--units-text); cursor: pointer; }
+.pilot-program-academies summary:hover,
+.pilot-program-academies summary:focus-visible { color: var(--units-accent); outline: none; }
+.pilot-program-academies a { color: var(--units-text); text-decoration-color: var(--units-accent); text-underline-offset: 3px; }
+
+.pilot-academies {
+  display: grid;
+  gap: 2px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  white-space: normal;
+}
+
+.pilot-academies a:hover, .pilot-academies a:focus-visible { color: var(--units-accent); outline: none; }
+.pilot-academies small { color: var(--units-muted); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* En pantallas estrechas cada fila es un bloque con sus datos en dos columnas */
+@media (max-width: 980px) {
+  .pilot-table thead { display: none; }
+  .pilot-table, .pilot-table tbody { display: block; }
+
+  .pilot-table tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-bottom: 1px solid var(--units-line);
+  }
+
+  .pilot-table tbody tr:last-child { border-bottom: 0; }
+  .pilot-table th, .pilot-table td { border-bottom: 0; }
+  .pilot-table tbody th { grid-column: 1 / -1; font-size: 19px; }
+  .pilot-table td { padding-top: 2px; padding-bottom: 4px; }
+
+  .pilot-table td::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--units-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pilot-programs td.pilot-program-academies { grid-column: 1 / -1; white-space: normal; }
+
+  /* Rasgos: los efectos ocupan todo el ancho y las columnas vacías no se enseñan */
+  .pilot-traits td { grid-column: 1 / -1; }
+  .pilot-traits td.is-empty { display: none; }
+  .pilot-found span { display: inline; margin-right: 12px; }
+}
+
+@media (max-width: 760px) {
+  /* Las tres pestañas en una fila: «Training programs» se queda en «Programs» */
+  .pilot-tabs { overflow-x: auto; scrollbar-width: none; }
+  .pilot-tabs button { flex: none; padding: 0 10px; font-size: 16px; }
+  .pilot-tab-extra { display: none; }
+  .pilot-section h2 { font-size: 21px; }
+}

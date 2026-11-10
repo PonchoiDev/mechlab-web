@@ -66,13 +66,14 @@ export default defineConfig({
   base: `/${GAME_PATH}/`,
   build: {
     outDir: `dist/${GAME_PATH}`,
-    // El mapa estelar y las unidades enemigas son otras páginas con su propio bundle: no se
+    // El mapa estelar, las unidades enemigas y los pilotos son otras páginas con su propio bundle: no se
     // descargan con el MechLab.
     rolldownOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         starmap: resolve(__dirname, 'starmap/index.html'),
-        units: resolve(__dirname, 'units/index.html')
+        units: resolve(__dirname, 'units/index.html'),
+        pilots: resolve(__dirname, 'pilots/index.html')
       }
     }
   },

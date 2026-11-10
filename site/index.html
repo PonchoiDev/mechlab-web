@@ -170,7 +170,8 @@
 
       .shelf {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+        /* Cuatro carátulas en una fila en escritorio; en pantallas más estrechas, las que quepan. */
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
         gap: 24px;
         perspective: 1200px;
       }
@@ -362,6 +363,23 @@
 
       .cover.is-units .cover-status {
         border-color: rgba(255, 90, 60, 0.55);
+        color: var(--accent);
+      }
+
+      /* La carátula de los pilotos: el dibujo del MechWarrior del TRO 2750, en el azul de las academias. */
+      .cover.is-pilots { --accent: #2f8cff; }
+
+      .cover.is-pilots .cover-art img {
+        filter: invert(1) sepia(1) hue-rotate(170deg) saturate(3) brightness(0.95);
+      }
+
+      a.cover.is-pilots:hover,
+      a.cover.is-pilots:focus-visible {
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(47, 140, 255, 0.22);
+      }
+
+      .cover.is-pilots .cover-status {
+        border-color: rgba(47, 140, 255, 0.6);
         color: var(--accent);
       }
 
@@ -610,7 +628,7 @@
         <section aria-labelledby="shelf-title">
           <div class="shelf-header">
             <h3 id="shelf-title">SELECT TOOL</h3>
-            <span>3 AVAILABLE</span>
+            <span>4 AVAILABLE</span>
           </div>
 
           <div class="shelf">
@@ -677,6 +695,29 @@
                 </p>
               </div>
               <div class="cover-action">Open Enemy Units <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="cover is-pilots" href="/mercs/pilots/">
+              <div class="cover-band">
+                <span><b>PILOTS</b> · MW5</span>
+                <span class="cover-status">NEW</span>
+              </div>
+              <div class="cover-art">
+                <img
+                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F2%2F25%2FMechWarrior%2527sCombatSuit_TRO2750.png"
+                  alt=""
+                  onerror="this.remove()"
+                />
+              </div>
+              <div class="cover-title">
+                <small>MECHWARRIOR 5</small>
+                <strong>Pilot traits <span>&amp; Academies</span></strong>
+                <p class="cover-meta">
+                  <span>184 traits</span>
+                  <span>Hero traits · Training</span>
+                </p>
+              </div>
+              <div class="cover-action">Open Pilots <span aria-hidden="true">→</span></div>
             </a>
 
             <div class="cover is-placeholder" aria-label="More games coming">
