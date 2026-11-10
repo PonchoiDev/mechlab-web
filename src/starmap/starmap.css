@@ -1499,6 +1499,10 @@ button, input, select { font: inherit; color: inherit; }
   .starmap-topbar { flex-wrap: wrap; gap: 8px 12px; padding: 8px 12px; }
   .starmap-brand span:last-child, .starmap-links small { display: none; }
   .starmap-topbar h1 { padding-left: 12px; font-size: 20px; }
+  /* Tres enlaces (MechLab, unidades y pilotos) caben en la primera fila si se compactan: si bajaran a
+     otra, la cabecera crecería por debajo de donde empiezan las fichas. */
+  .starmap-links { padding-left: 8px; gap: 0; }
+  .starmap-links a { padding: 4px 6px; font-size: 13px; letter-spacing: 0.04em; }
   /* Segunda fila: el buscador ocupa lo que dejan Feedback y Support, a su derecha. */
   /* El buscador cede sitio para que Feedback, Support y la campana quepan en su misma fila. */
   .starmap-search { order: 3; flex: 1 1 140px; width: auto; }
