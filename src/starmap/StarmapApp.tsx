@@ -602,7 +602,7 @@ export function StarmapApp() {
       {isFeedbackOpen && (
         <FeedbackDialog
           // Se calcula con el estado, no con window.location: la URL se actualiza con retraso.
-          buildUrl={`${window.location.origin}${window.location.pathname}${toMapQuery({ date, systemId: selectedId, questId, mechId }, data)}`}
+          buildUrl={`${window.location.origin}${window.location.pathname}${toMapQuery({ date, systemId: selectedId, questId, mechId, academyId }, data)}`}
           attachLabel="Attach a link to this map view"
           onMessage={setNotice}
           onClose={() => setIsFeedbackOpen(false)}

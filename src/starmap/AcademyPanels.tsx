@@ -70,8 +70,11 @@ export function AcademyCard({ data, academy, date, onSystem, onClose }: AcademyC
         <button type="button" className="starmap-close" onClick={onClose} aria-label="Close academy details">✕</button>
       </div>
       <ul className="starmap-academy-facts">
-        {academy.founded && academy.founded > data.range.start && (
-          <li className={notYet ? 'is-warning' : undefined}>{notYet ? 'Opens' : 'Open since'} {formatGameDate(academy.founded)}</li>
+        {/* Si se fundó antes de que empiece el mapa, está abierta en todas sus fechas: solo se dice cuándo. */}
+        {academy.founded && (
+          <li className={notYet ? 'is-warning' : undefined}>
+            {academy.founded <= data.range.start ? 'Founded' : notYet ? 'Opens' : 'Open since'} {formatGameDate(academy.founded)}
+          </li>
         )}
         {academy.standing !== null && <li>Requires faction standing {academy.standing}</li>}
         {closing && (

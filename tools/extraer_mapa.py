@@ -606,6 +606,8 @@ def extraer_academias(pak):
         return textos.get(valor["clave"]) if isinstance(valor, dict) else valor
 
     academias, programas = [], {}
+    # Los programas se guardan por nombre: si dos paquetes usaran el mismo, el segundo se perdería.
+    paquetes = {}
     for ruta in sorted(pak.buscar(ACADEMIAS)):
         if not ruta.endswith(".uasset") or "/_common/" in ruta or not tiene_uexp(pak, ruta):
             continue
@@ -615,6 +617,8 @@ def extraer_academias(pak):
             continue
         ids_programas = [asset.ruta_import(referencia) for referencia in datos.get("AvailableTrainingAssets", [])]
         for paquete, nombre in ids_programas:
+            if paquetes.setdefault(nombre, paquete) != paquete:
+                raise ValueError(f"El programa {nombre} está en dos paquetes ({paquetes[nombre]} y {paquete}): ¿ha cambiado el juego?")
             if nombre not in programas:
                 programa = Asset.desde_pak(pak, CONTENIDO + paquete[len("/Game/"):])
                 propiedades = programa.propiedades(nombre)
