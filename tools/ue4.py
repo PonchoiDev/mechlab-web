@@ -15,6 +15,8 @@ TAMANO_IMPORT = 28
 STRUCTS_BINARIOS = {
     "Vector": "3f", "Vector2D": "2f", "Rotator": "3f", "Quat": "4f", "LinearColor": "4f",
     "Color": "4B", "IntPoint": "2i", "DateTime": "q", "Timespan": "q",
+    # Clave de una curva: modos de interpolación, tangente y peso, y después tiempo, valor y tangentes.
+    "RichCurveKey": "3B6f",
 }
 
 

@@ -4,14 +4,13 @@ import re
 import sys
 from collections import Counter
 
-# Genera src/data/pilots.json para la página de pilotos: los rasgos de piloto
-# (tools/datos-juego/pilotos/rasgos.json, de extraer_pilotos.py) con sus efectos en texto, y los
-# programas de las academias con las academias que los ofrecen (tools/datos-juego/starmap/, de
-# extraer_mapa.py).
+# Genera src/data/pilots.json para la página de pilotos: los pilotos hero y los rasgos de piloto
+# (tools/datos-juego/pilotos/, de extraer_pilotos.py) con sus efectos en texto, y los programas de
+# las academias con las academias que los ofrecen (tools/datos-juego/starmap/, de extraer_mapa.py).
 #
 #   python3 tools/generar_pilotos.py
 DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
-RUTA_RASGOS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "pilotos", "rasgos.json")
+RUTA_PILOTOS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "pilotos")
 RUTA_MAPA = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "starmap")
 RUTA_DESTINO_POR_DEFECTO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "pilots.json")
 
@@ -104,6 +103,54 @@ TODAS_LAS_PARTES = set(PARTES)
 # Categorías de la página, por las etiquetas del rasgo o por sus componentes.
 COMPONENTES_DE_ARMA = {"WeaponQuirkSetTrait", "Weapon_TraitBP", "ComplexWeaponTrait", "TargetingComputerTrait_BP"}
 REGEX_HUECO = re.compile(r"\{(\w+)\}")
+# Orden de las categorías y de sus subgrupos en la página.
+CATEGORIAS = ["mech", "weapon", "faction", "career", "graduate"]
+SUBGRUPOS = {
+    "mech": ["Light 'Mechs", "Medium 'Mechs", "Heavy 'Mechs", "Assault 'Mechs"],
+    "weapon": ["Ballistic", "Energy", "Missile", "Artillery", "Several weapon types"],
+    "faction": ["Nobles", "Patriots", "Criminals", "Hatred", "Clan origins"],
+    "career": ["Combat", "Learning", "Money and health"],
+    "graduate": [None],
+}
+# Clase de arma de una etiqueta (Weapon.Ballistic.AutoCannon…); los misiles Artemis son misiles.
+CLASES_DE_ARMA = {"Ballistic": "Ballistic", "Energy": "Energy", "Missile": "Missile", "ArtemisMissile": "Missile",
+                  "Artillery": "Artillery"}
+SUBGRUPOS_DE_FACCION = {"FactionNobleWith_BP": "Nobles", "FactionPatriotWith_BP": "Patriots",
+                        "FactionCriminalWith_BP": "Criminals", "HatedFaction_BP": "Hatred"}
+
+# Habilidades de los pilotos, con el nombre del juego. Gunnery y Piloting son de antes del DLC de
+# habilidades por arma: los pilotos aún traen su tope, pero ya no cuentan.
+HABILIDADES = [("Ballistics", "Ballistics"), ("Energy", "Energy"), ("Missile", "Missile"),
+               ("Evasiveness", "Evasiveness"), ("Shielding", "Shielding"), ("HeatManagement", "Heat management")]
+# Recompensas cuyo título no dice de dónde salen.
+TITULOS_DE_RECOMPENSA = {
+    "DLC4/CampaignData/RivalMercs/BountyHunterIntel/BountyHunterObjectives/BountyHunterLevelUp8.uasset":
+        "The Bounty Hunter's intel, level 8",
+    # DLC1_GoblinArc lanza la transmisión con reputación 3 o más si la cuenta tiene el 'Mech de la
+    # Microsoft Store (HasMSMechEntitlement).
+    "DLC1/CareerMode/Sidequests/MS_Exclusive/GoblinUnlocked_Transmission.uasset":
+        "Goblin's transmission, at reputation level 3 (Microsoft Store 'Mech owners only)",
+}
+
+# Familias de programas: id, nombre, cómo se reconocen por el id del programa y qué los distingue.
+FAMILIAS = [
+    ("simpod", "Simpod training", r"(SimpodTraining|^IntermediateTraining)$",
+     "Two-month simulator courses, mostly at the Virtual World Centers. Cheap XP, almost no skills or traits."),
+    ("vocational", "Vocational training", r"VocationalTraining$",
+     "Short courses for green pilots."),
+    ("semester", "Semester enrollment", r"^SemesterEnrollment\d$",
+     "A semester at an academy. The level depends on the academy."),
+    ("fullYear", "Full year enrollment", r"^FullYearEnrollment\d$",
+     "A full year at an academy. The level depends on the academy."),
+    ("undergraduate", "Undergraduate program", r"^UndergraduateProgram\d$",
+     "Four years at an academy: the most skills and traits for pilots up to skill 49."),
+    ("graduate", "Graduate program", r"^GraduateProgram\d$",
+     "Two years for experienced pilots (skill 42 and up). The level depends on the academy."),
+    ("academy", "Academy graduate programs", r"^GraduateProgram_",
+     "Only at one academy each. Every graduate gets the academy's own trait."),
+]
+# Peso con el que un programa da siempre un rasgo (99999 frente a 0,1-5 del resto de su lista).
+PESO_GARANTIZADO = 99999
 
 
 def numero(valor):
@@ -216,6 +263,37 @@ def categoria(rasgo):
     return "career"
 
 
+def subgrupo(rasgo, categoria_rasgo, grupos):
+    """El subgrupo de un rasgo dentro de su categoría, por sus etiquetas o por sus componentes."""
+    atributos, componentes = rasgo["atributos"], rasgo["componentes"]
+    # PilotTrait.Type.MechAffinity.Light o PilotTrait.Type.WeaponExpert.Ballistic: el cuarto trozo.
+    tipos = [a.split(".")[3] for a in atributos if a.startswith("PilotTrait.Type.") and a.count(".") >= 3]
+    if categoria_rasgo == "mech":
+        # Sin etiqueta (Jenner Mastery, King Crab), el peso va en la del 'Mech: Mech.Light.Jenner.
+        peso = tipos[0] if tipos else next(t.split(".")[1] for c in componentes for t in c.get("MechTypes", []))
+        return f"{peso} 'Mechs"
+    if categoria_rasgo == "weapon":
+        if tipos:
+            return CLASES_DE_ARMA[tipos[0]]
+        # Sin etiqueta, la clase de las armas a las que afecta; si son de varias, va aparte.
+        etiquetas = [t for c in componentes for clave, valor in c.items() if clave.startswith("Supported") and isinstance(valor, list)
+                     for t in valor] + [etiqueta for c in componentes for etiqueta, _ in c.get("WeaponQuirks", [])]
+        clases = {CLASES_DE_ARMA.get(etiqueta.split(".")[1]) for etiqueta in etiquetas}
+        return clases.pop() if len(clases) == 1 and None not in clases else "Several weapon types"
+    if categoria_rasgo == "faction":
+        return next((SUBGRUPOS_DE_FACCION[c["clase"]] for c in componentes if c["clase"] in SUBGRUPOS_DE_FACCION), "Clan origins")
+    if categoria_rasgo == "career":
+        if any(grupo["scope"] != "Pilot" for grupo in grupos):
+            return "Combat"
+        return "Learning" if "PilotTrait.Type.Metagame" in atributos else "Money and health"
+    return None
+
+
+def afinidad_de_peso(rasgo):
+    """Si es la afinidad con toda una clase de peso (Mech.Assault) y no con un chasis."""
+    return any(len(t.split(".")) == 2 for c in rasgo["componentes"] for t in c.get("MechTypes", []))
+
+
 def rellenar(texto, valores):
     """Sustituye los huecos de un texto del juego; los que no se conocen quedan como None."""
     if texto is None:
@@ -263,12 +341,16 @@ def rasgos(rasgos_juego, facciones):
         descripcion = rellenar(rasgo["corta"], valores)
         atributos = rasgo["atributos"]
         dlc = next((int(a.removeprefix("DLC.DLC")) for a in atributos if a.startswith("DLC.DLC")), None)
+        categoria_rasgo = categoria(rasgo)
         lista.append({
             "id": rasgo["id"].removesuffix("_PilotTrait"),
             "name": nombre,
             "description": descripcion,
-            "category": categoria(rasgo),
-            # Hero: solo lo tienen los pilotos hero que el juego ofrece como Elite Pilot.
+            "category": categoria_rasgo,
+            "group": subgrupo(rasgo, categoria_rasgo, grupos),
+            # Hero: los rasgos raros. Todos los pilotos hero del DLC7 traen uno; los pilotos que se
+            # contratan y las academias solo los tiran cuando la partida lo permite (bAllowHeroTraits
+            # en ProgressionFunctionLib y AcademyFunctionLibrary).
             "hero": "PilotTrait.Hero" in atributos,
             # Generation: puede salir en los pilotos que se contratan; Training: se aprende en una academia.
             "hireable": "PilotTrait.Generation" in atributos,
@@ -278,10 +360,85 @@ def rasgos(rasgos_juego, facciones):
             "dlc": dlc,
             "available": rasgo["fecha"],
             "groups": grupos,
+            "_generico": afinidad_de_peso(rasgo),
         })
         if not grupos:
             avisos.append(f"{rasgo['id']}: sin efectos")
-    return sorted(lista, key=lambda rasgo: (rasgo["name"], rasgo["id"])), avisos
+    # Por categoría y subgrupo; dentro, la afinidad con toda la clase de peso antes que los chasis.
+    lista.sort(key=lambda rasgo: (CATEGORIAS.index(rasgo["category"]), SUBGRUPOS[rasgo["category"]].index(rasgo["group"]),
+                                  not rasgo.pop("_generico"), rasgo["name"], rasgo["id"]))
+    return lista, avisos
+
+
+def nivel(experiencia, niveles):
+    """El nivel de una habilidad: el último umbral de la curva que alcanza su experiencia."""
+    return max(valor for umbral, valor in niveles if experiencia >= umbral)
+
+
+def pilotos_hero(pilotos_juego, niveles, ids_rasgos):
+    """Los pilotos hero con nombre: dónde se consiguen, sus habilidades y sus rasgos fijos."""
+    avisos = []
+    # Shenzeng está dos veces: el de la campaña no trae rasgos y el de la carrera sí. Se queda el
+    # que los trae, que es el que tiene algo que enseñar.
+    con_rasgos = {piloto["nombre"] for piloto in pilotos_juego if piloto["rasgos"]}
+    lista = []
+    for piloto in pilotos_juego:
+        if not piloto["rasgos"] and piloto["nombre"] in con_rasgos:
+            continue
+        atributos = piloto["atributos"]
+        dlc = next((int(a.removeprefix("DLC.DLC")) for a in atributos if a.startswith("DLC.DLC")), None)
+        # Sin etiqueta, el DLC de su carpeta; salvo DLC1/CareerMode, que es el modo carrera gratuito
+        # que salió con el DLC1 (ahí está el Shenzeng de No Pilot Left Behind).
+        carpeta = re.match(r"DLC(\d+)/", piloto["ruta"])
+        if dlc is None and carpeta and not piloto["ruta"].startswith("DLC1/CareerMode/"):
+            dlc = int(carpeta.group(1))
+        rango = next((a.split(" - ", 1)[1] for a in atributos if a.startswith("PilotPersona.SkillLevel.") and " - " in a), None)
+        recompensas = []
+        for recompensa in piloto["recompensas"]:
+            # No Pilot Left Behind y Pt. 2 son la misma misión en dos partes.
+            titulo = TITULOS_DE_RECOMPENSA.get(recompensa["ruta"]) or re.sub(r" Pt\. \d+$", "", recompensa["titulo"])
+            entrada = {"title": titulo, "story": recompensa["ruta"].startswith("Campaign/")}
+            if entrada not in recompensas:
+                recompensas.append(entrada)
+        rasgos = [rasgo.removesuffix("_PilotTrait") for rasgo in piloto["rasgos"]]
+        avisos += [f"{piloto['id']}: rasgo {rasgo} desconocido" for rasgo in rasgos if rasgo not in ids_rasgos]
+        indicativo = piloto["indicativo"]
+        lista.append({
+            "id": re.sub(r"(_PilotPersona|Pilot)$", "", piloto["id"]),
+            "name": piloto["nombre"],
+            # El indicativo solo si añade algo (FREEMAN en Lt. Leon Freeman, no).
+            "callsign": indicativo if indicativo and indicativo.lower() not in piloto["nombre"].lower() else None,
+            "dlc": dlc,
+            "rank": rango,
+            # Sin PilotPersona.Use.Reserved, la sala de contratación puede ofrecerlo como Elite Pilot.
+            "hiringHall": "PilotPersona.Use.Reserved" not in atributos,
+            "rewards": recompensas,
+            "hiringCost": piloto["contratacion"],
+            "salary": piloto["sueldo"],
+            # Una habilidad no pasa de su tope (SkillCap), aunque la experiencia diera para más.
+            "skills": [{"name": nombre, "cap": piloto["habilidades"][clave]["tope"],
+                        "level": min(nivel(piloto["habilidades"][clave]["experiencia"], niveles), piloto["habilidades"][clave]["tope"])}
+                       for clave, nombre in HABILIDADES if clave in piloto["habilidades"]],
+            "traits": rasgos,
+            "bio": piloto["biografia"],
+        })
+        if not lista[-1]["hiringHall"] and not recompensas:
+            avisos.append(f"{piloto['id']}: reservado y sin recompensa que lo dé")
+    lista.sort(key=lambda piloto: (not piloto["hiringHall"], piloto["dlc"] or 0, piloto["name"]))
+    return lista, avisos
+
+
+def familia(id_programa):
+    return next(familia for familia, _, patron, _ in FAMILIAS if re.search(patron, id_programa))
+
+
+def etiqueta_de_programa(programa, id_familia):
+    """Lo que distingue a un programa dentro de su familia: el nivel, el curso o la academia."""
+    if programa["level"]:
+        return f"Level {programa['level']}"
+    if id_familia == "academy":
+        return programa["academies"][0]["name"] if len(programa["academies"]) == 1 else programa["name"]
+    return re.sub(r" (Simpod|Vocational)? ?Training$", "", programa["name"])
 
 
 def programas(programas_juego, academias_juego, sistemas):
@@ -298,8 +455,10 @@ def programas(programas_juego, academias_juego, sistemas):
     for id_programa, programa in programas_juego.items():
         # El nivel va en el id (SemesterEnrollment1 a 4); los de una academia concreta no lo tienen.
         nivel = re.search(r"(\d+)$", id_programa)
+        posibles = programa.get("rasgos", [])
         lista.append({
             "id": id_programa,
+            "family": familia(id_programa),
             "name": programa["nombre"],
             "level": int(nivel.group(1)) if nivel else None,
             "description": programa["descripcion"].strip(),
@@ -309,8 +468,15 @@ def programas(programas_juego, academias_juego, sistemas):
             "skill": [programa.get("MinSkill", 0), programa.get("MaxSkill", 0)],
             "stars": {"skill": programa.get("SkillCapStars", 0), "traits": programa.get("TraitStars", 0), "xp": programa.get("XpStars", 0)},
             "academies": sorted(ofrecen.get(id_programa, []), key=lambda academia: (academia["name"], academia["system"])),
+            "guaranteedTrait": next((rasgo.removesuffix("_PilotTrait") for rasgo, peso in posibles if peso >= PESO_GARANTIZADO), None),
+            # Los que el programa favorece con su propia lista; los de peso menor que 1 son casi imposibles.
+            "favouredTraits": [rasgo.removesuffix("_PilotTrait") for rasgo, peso in sorted(posibles, key=lambda posible: -posible[1])
+                               if 1 <= peso < PESO_GARANTIZADO],
         })
-    return sorted(lista, key=lambda programa: (programa["days"], programa["fee"], programa["id"]))
+    for programa in lista:
+        programa["label"] = etiqueta_de_programa(programa, programa["family"])
+    orden = [familia for familia, *_ in FAMILIAS]
+    return sorted(lista, key=lambda programa: (orden.index(programa["family"]), programa["level"] or 0, programa["fee"], programa["label"]))
 
 
 def leer(ruta):
@@ -322,15 +488,20 @@ def main():
     ruta_destino = sys.argv[1] if len(sys.argv) > 1 else os.path.normpath(RUTA_DESTINO_POR_DEFECTO)
     facciones = leer(os.path.join(RUTA_MAPA, "facciones.json"))
     sistemas = {int(fila["Name"]): fila["StarSystemName"] for fila in leer(os.path.join(RUTA_MAPA, "sistemas.json"))}
-    lista, avisos = rasgos(leer(RUTA_RASGOS), facciones)
+    lista, avisos = rasgos(leer(os.path.join(RUTA_PILOTOS, "rasgos.json")), facciones)
+    heroes, avisos_heroes = pilotos_hero(leer(os.path.join(RUTA_PILOTOS, "hero.json")), leer(os.path.join(RUTA_PILOTOS, "niveles.json")),
+                                         {rasgo["id"] for rasgo in lista})
+    avisos += avisos_heroes
     datos = {
+        "heroes": heroes,
         "traits": lista,
+        "programFamilies": [{"id": id_familia, "name": nombre, "description": descripcion} for id_familia, nombre, _, descripcion in FAMILIAS],
         "programs": programas(leer(os.path.join(RUTA_MAPA, "programas.json")), leer(os.path.join(RUTA_MAPA, "academias.json")), sistemas),
     }
     with open(ruta_destino, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, indent=1, ensure_ascii=False)
         archivo.write("\n")
-    print(f"{len(lista)} rasgos y {len(datos['programs'])} programas en {ruta_destino}")
+    print(f"{len(heroes)} pilotos hero, {len(lista)} rasgos y {len(datos['programs'])} programas en {ruta_destino}")
     print(", ".join(f"{clave}: {valor}" for clave, valor in sorted(Counter(rasgo["category"] for rasgo in lista).items())))
     for aviso in avisos:
         print(f"Aviso: {aviso}")

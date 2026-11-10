@@ -629,6 +629,12 @@ def extraer_academias(pak):
                     **{campo: valor for campo, valor in propiedades.get("TrainingData", {}).items()
                        if campo in ("DurationDays", "EnrollmentFee", "QuarterlyTuition", "MinSkill", "MaxSkill",
                                     "SkillCapStars", "TraitStars", "XpStars")},
+                    # Los programas de graduado de una academia concreta llevan su propia lista de rasgos
+                    # con su peso; el resto tira de los rasgos generales con TraitWeighting.
+                    "rasgos": [[programa.ruta_import(posible["PilotTrait"])[1], posible.get("Odds", 0)]
+                               for posible in propiedades.get("PossibleTraits", [])
+                               # Undergraduate Program 3 trae una entrada vacía (sin rasgo y con peso 0).
+                               if isinstance(posible.get("PilotTrait"), int) and posible["PilotTrait"] < 0],
                 }
         academias.append({
             "id": asset.principal(),
