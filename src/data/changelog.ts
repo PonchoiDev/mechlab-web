@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-10-hero-portraits',
+    date: '2026-11-10',
+    title: 'Hero pilot portraits',
+    items: [
+      'Every hero pilot on the Pilots page now shows their portrait from the game, as in the hiring hall and the barracks'
+    ]
+  },
+  {
     id: '2026-11-10-pilots',
     date: '2026-11-10',
     title: 'Pilots',
