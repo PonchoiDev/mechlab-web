@@ -115,14 +115,18 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     callbacksRef.current = { onHover, onSelect, onZone, onMercZone };
   }, [onHover, onSelect, onZone, onMercZone]);
 
-  const setView = (view: View) => {
+  // minScale: al encuadrar en la franja del móvil puede hacer falta alejarse más que con el zoom a mano.
+  const setView = (view: View, minScale = fitScaleRef.current * 0.7) => {
     const renderer = rendererRef.current;
     if (!renderer) return;
     const bounds = boundsRef.current;
-    const scale = Math.min(MAX_SCALE, Math.max(fitScaleRef.current * 0.7, view.scale));
+    const scale = Math.min(MAX_SCALE, Math.max(minScale, view.scale));
+    // El centro puede salir un cuarto de pantalla del mapa en vertical: en el móvil, lo elegido se
+    // encuadra por encima o por debajo del centro, y un sistema del borde lo necesita.
+    const marginY = (canvasRef.current?.clientHeight ?? 0) / 4 / scale;
     renderer.view = {
       x: Math.min(bounds.maxX, Math.max(bounds.minX, view.x)),
-      y: Math.min(bounds.maxY, Math.max(bounds.minY, view.y)),
+      y: Math.min(bounds.maxY + marginY, Math.max(bounds.minY - marginY, view.y)),
       scale
     };
     renderer.requestDraw();
@@ -146,8 +150,9 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     const renderer = rendererRef.current;
     if (!renderer) return;
     cancelAnimationFrame(animationRef.current);
+    const minScale = Math.min(fitScaleRef.current * 0.7, target.scale);
     if (prefersReducedMotion()) {
-      setView(target);
+      setView(target, minScale);
       return;
     }
     const start = { ...renderer.view };
@@ -159,7 +164,7 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
         x: start.x + (target.x - start.x) * ease,
         y: start.y + (target.y - start.y) * ease,
         scale: start.scale + (target.scale - start.scale) * ease
-      });
+      }, minScale);
       if (t < 1) animationRef.current = requestAnimationFrame(step);
     };
     animationRef.current = requestAnimationFrame(step);
@@ -245,7 +250,11 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     const ys = systems.map(system => system.y);
     const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
     const fit = Math.min((width - inset) / (maxX - minX + FIT_PADDING), (band.bottom - band.top) / (maxY - minY + FIT_PADDING));
-    const scale = Math.min(FOCUS_SCALE, Math.max(fitScaleRef.current, fit));
+    // En la franja del móvil el mapa entero se ve más pequeño que en la pantalla: el mínimo es el que
+    // lo deja caber en ella, para que nada de lo elegido quede debajo de la ficha.
+    const bounds = boundsRef.current;
+    const bandFit = Math.min(width / (bounds.maxX - bounds.minX + FIT_PADDING), (band.bottom - band.top) / (bounds.maxY - bounds.minY + FIT_PADDING));
+    const scale = Math.min(FOCUS_SCALE, Math.max(isMobile ? bandFit : fitScaleRef.current, fit));
     animateTo({ x: (minX + maxX) / 2 - inset / 2 / scale, y: (minY + maxY) / 2 + bandOffset / scale, scale });
   }, [focus, data]);
 
