@@ -87,4 +87,6 @@ Los pilotos hero del issue no son personajes fijos: el juego genera pilotos con 
 - **Decisiones durante el desarrollo:**
   - La leyenda del mapa no tiene interruptores para ocultar los iconos, así que el de las academias no se puede ocultar; va debajo de la estrella, donde no tapa ningún otro.
   - Al encuadrar la academia elegida, su sistema costaba de encontrar entre las demás estrellas: se marca con un aro azul, esquinas de mira y su nombre, a cualquier zoom.
+  - Las franquicias se veían como un título con una columna de enlaces, distinta del resto de filas. Ahora son una fila más («Franchise in 7 systems») que se despliega con sus sistemas como filas normales, y se despliegan solas al buscar.
+  - Todas las filas de los cajones llevaban un hueco invisible delante: el punto de color de la leyenda de facciones (`.starmap-legend li::before`) ganaba a la regla que lo quitaba. Se corrige para que las listas se alineen con su buscador.
   - Elegir otra cosa (una HRQ, una variante, una compañía, una zona o una estrella) cierra la ficha de la academia, como las demás. Abrir su sistema desde la ficha la conserva, y al cerrar el sistema vuelve a verse.

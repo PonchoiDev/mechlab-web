@@ -122,6 +122,14 @@ interface AcademyDrawerProps {
 export function AcademyDrawer({ data, date, selectedId, onPick }: AcademyDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
+  // Franquicias desplegadas. Al buscar se despliegan todas, para ver qué sistema coincide.
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const toggle = (name: string) => setExpanded(current => {
+    const next = new Set(current);
+    if (next.has(name)) next.delete(name);
+    else next.add(name);
+    return next;
+  });
   const groups = useMemo(() => groupAcademies(searchAcademies(data, query, date)), [data, query, date]);
   const total = useMemo(() => searchAcademies(data, '', date).length, [data, date]);
   const pick = (id: string) => {
@@ -157,14 +165,26 @@ export function AcademyDrawer({ data, date, selectedId, onPick }: AcademyDrawerP
               )
               : (
                 <li key={group.name} className="starmap-academy-group">
-                  <span>{group.name} <small>{group.academies.length} systems</small></span>
-                  <div>
-                    {group.academies.map(academy => (
-                      <button key={academy.id} type="button" className="starmap-system-link" aria-pressed={academy.id === selectedId} onClick={() => pick(academy.id)}>
-                        {systemName(data, academy.system)}
-                      </button>
-                    ))}
-                  </div>
+                  <button
+                    type="button"
+                    className="starmap-academy-group-toggle"
+                    aria-expanded={query.trim() !== '' || expanded.has(group.name)}
+                    onClick={() => toggle(group.name)}
+                  >
+                    <span>{group.name}</span>
+                    <small>Franchise in {group.academies.length} systems</small>
+                  </button>
+                  {(query.trim() !== '' || expanded.has(group.name)) && (
+                    <ul>
+                      {group.academies.map(academy => (
+                        <li key={academy.id}>
+                          <button type="button" aria-pressed={academy.id === selectedId} onClick={() => pick(academy.id)}>
+                            <span>{systemName(data, academy.system)}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             {groups.length === 0 && <li className="starmap-quests-empty">Nothing found</li>}
