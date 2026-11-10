@@ -36,9 +36,11 @@ export const parseStoredBuilds = (raw: string | null): SavedBuild[] => {
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
     return parsed.flatMap(value => {
+      // El id se lee después de validar la entrada: un null en la lista no puede tirar las demás.
       const entry = toEntry(value);
+      if (!entry) return [];
       const id = (value as { id?: unknown }).id;
-      return entry && typeof id === 'string' ? [{ id, ...entry }] : [];
+      return typeof id === 'string' ? [{ id, ...entry }] : [];
     });
   } catch {
     return [];

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { fetchSarnaImage, getSarnaImageTarget, SARNA_IMAGE_PATH } from './sarnaImage';
+import { fetchSarnaImage, getSarnaCacheKey, getSarnaImageTarget, SARNA_IMAGE_PATH } from './sarnaImage';
 
 const proxyUrl = (target: string) => new URL(`https://mw-builder.com${SARNA_IMAGE_PATH}?url=${encodeURIComponent(target)}`);
 
@@ -28,6 +28,17 @@ describe('getSarnaImageTarget', () => {
     expect(getSarnaImageTarget(new URL(`https://mw-builder.com${SARNA_IMAGE_PATH}`))).toBeNull();
     expect(getSarnaImageTarget(proxyUrl('no es una url'))).toBeNull();
     expect(getSarnaImageTarget(proxyUrl('javascript:alert(1)'))).toBeNull();
+  });
+});
+
+describe('getSarnaCacheKey', () => {
+  it('usa solo la imagen de destino, sin los parámetros añadidos', () => {
+    const image = 'https://cfw.sarna.net/wiki/images/a/ab/Atlas.png';
+    const plain = proxyUrl(image);
+    const padded = new URL(`${plain.href}&x=1&cache=bust`);
+
+    expect(getSarnaCacheKey(padded, getSarnaImageTarget(padded)!)).toBe(getSarnaCacheKey(plain, getSarnaImageTarget(plain)!));
+    expect(getSarnaCacheKey(plain, getSarnaImageTarget(plain)!)).toBe(plain.href);
   });
 });
 

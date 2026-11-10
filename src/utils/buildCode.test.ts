@@ -40,6 +40,14 @@ describe('enlace de la build', () => {
     expect(decoded?.loadout.leftArm).toEqual([]);
   });
 
+  it('ignora un tier que no es del arma, aunque exista en Object', () => {
+    const code = toJson([1, 'ARC-2R', [], [[], [], [], [], [['MediumLaser', 0, 'constructor']], [], [], []]]);
+    const [laser] = decodeBuild(code, allMechs, allItems)!.loadout.leftArm;
+
+    expect(laser.id).toBe('MediumLaser');
+    expect(laser.tier).not.toBe('constructor');
+  });
+
   it('limita la armadura al máximo de cada componente', () => {
     const code = toJson([1, 'ARC-2R', [9999, 9999], [[], [], [], [], [], [], [], []]]);
     const head = decodeBuild(code, allMechs, allItems)?.armor.head;

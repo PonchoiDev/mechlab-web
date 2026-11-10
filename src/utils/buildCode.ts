@@ -103,7 +103,8 @@ export const decodeBuild = (code: string, mechs: Mech[], catalog: Item[]): Share
         const hardpoint = index === null ? undefined : component.hardpoints[index];
         if (index === null || !hardpoint || !weaponFitsHardpoint(hardpoint, item)) continue;
         if (getHardpointOccupancy(component.hardpoints, zoneItems).occupiedIndices.has(index)) continue;
-        const tiered = typeof tier === 'string' && item.tiers?.[tier] ? { ...item, tier } : item;
+        // Solo un tier propio del arma: un enlace con "constructor" no puede colar lo heredado de Object.
+        const tiered = typeof tier === 'string' && item.tiers && Object.hasOwn(item.tiers, tier) ? { ...item, tier } : item;
         zoneItems.push(createEquippedItem(tiered, undefined, index));
         continue;
       }

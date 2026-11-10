@@ -21,11 +21,12 @@ export function UpgradesPanel({ mech, installed, onToggle, onClear, onClose }: U
     <section className="upgrades-panel" aria-label="Cantina upgrades">
       <header className="upgrades-header">
         <h2>CANTINA UPGRADES</h2>
-        <span className="upgrades-meter" aria-label={`${used} of ${capacity} upgrade slots used`}>
+        <span className="upgrades-meter">
           {Array.from({ length: capacity }, (_, index) => (
             <span key={index} className={index < used ? 'is-used' : ''} aria-hidden="true" />
           ))}
-          <small>{used}/{capacity} slots</small>
+          <small aria-hidden="true">{used}/{capacity} slots</small>
+          <span className="visually-hidden">{used} of {capacity} upgrade slots used</span>
         </span>
         <p className="upgrades-hint">Effects show in the stats above. Each upgrade installs once; levels I and II stack.</p>
         <button type="button" className="utility-button" onClick={onClear} disabled={installed.length === 0}>
@@ -52,8 +53,9 @@ export function UpgradesPanel({ mech, installed, onToggle, onClear, onClose }: U
                   onClick={() => onToggle(upgrade)}
                 >
                   <span className="upgrade-name">{upgrade.name}</span>
-                  <span className="upgrade-slots" aria-label={`${upgrade.slots} slots`}>
+                  <span className="upgrade-slots">
                     {Array.from({ length: upgrade.slots }, (_, index) => <span key={index} aria-hidden="true" />)}
+                    <span className="visually-hidden">{upgrade.slots} {upgrade.slots === 1 ? 'slot' : 'slots'}</span>
                   </span>
                   <span className="upgrade-effect">{upgrade.description}</span>
                 </button>

@@ -1,4 +1,5 @@
 import type { Item } from '../types/item';
+import { EMPTY_VALUE } from './format';
 import type { EquippedLoadout, Mech, Zone } from '../types/mech';
 import { decodeBuild, type SharedBuild } from './buildCode';
 import { formatArmorPoints, formatCoolingRate, formatTurnRate, getBuildSummary, type BuildSummary } from './calculators';
@@ -97,8 +98,8 @@ const STAT_GROUPS: { title: string; rows: RowDefinition[] }[] = [
 const buildRow = (definition: RowDefinition, a: ComparedSide, b: ComparedSide): ComparisonRow => {
   const valueA = definition.value(a);
   const valueB = definition.value(b);
-  const textA = valueA === null ? '—' : definition.format(valueA);
-  const textB = valueB === null ? '—' : definition.format(valueB);
+  const textA = valueA === null ? EMPTY_VALUE : definition.format(valueA);
+  const textB = valueB === null ? EMPTY_VALUE : definition.format(valueB);
   // Se compara lo que se ve: dos valores que se muestran iguales empatan aunque difieran en decimales.
   const winner = textA === textB ? null : pickWinner(valueA, valueB, definition.better);
   return {

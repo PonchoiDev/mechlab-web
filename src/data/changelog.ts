@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-10-review-fixes',
+    date: '2026-11-10',
+    title: 'Small fixes',
+    items: [
+      'A damaged entry in the builds saved in your browser no longer hides all the others',
+      'On touch screens, the long press menu cancels when your finger moves, even slowly',
+      'Screen readers now announce how many slots each cantina upgrade takes',
+      'Empty values in the MechLab tables show a short dash'
+    ]
+  },
+  {
     id: '2026-11-09-enemy-units',
     date: '2026-11-09',
     title: 'Enemy units',

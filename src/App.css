@@ -2541,7 +2541,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   gap: 4px;
 }
 
-.upgrades-meter > span {
+.upgrades-meter > span:not(.visually-hidden) {
   width: 12px;
   height: 12px;
   border: 1px solid var(--work-muted);
@@ -2631,7 +2631,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   align-self: center;
 }
 
-.upgrade-slots > span {
+.upgrade-slots > span:not(.visually-hidden) {
   width: 8px;
   height: 8px;
   border: 1px solid var(--work-muted);
@@ -2696,7 +2696,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   color: var(--work-cyan);
 }
 
-.analysis-tab[aria-selected='true'] {
+.analysis-tab[aria-pressed='true'] {
   color: var(--work-lime);
   background: rgba(25, 29, 25, 0.94);
   border-color: var(--work-line);
@@ -3189,4 +3189,18 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   .compare-loadout-zone {
     grid-template-columns: 84px minmax(0, 1fr);
   }
+}
+
+/* Texto solo para lectores de pantalla: no se ve, pero se anuncia (un aria-label en un span no
+   siempre llega). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }

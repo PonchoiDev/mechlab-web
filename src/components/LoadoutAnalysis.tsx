@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Mech } from '../types/mech';
 import { formatArmorPoints, formatCoolingRate, formatTurnRate, type BuildSummary } from '../utils/calculators';
 import { ZONE_LABELS } from '../utils/zones';
+import { EMPTY_VALUE } from '../utils/format';
 import { UpgradedValue } from './UpgradedValue';
 
 const formatDuration = (seconds: number): string => {
@@ -26,11 +27,11 @@ export function LoadoutAnalysis({ mech, summary, base }: LoadoutAnalysisProps) {
 
   return (
     <section className="loadout-analysis" aria-label="Loadout performance">
-      <div className="analysis-tabs" role="tablist" aria-label="Statistics">
-        <button type="button" role="tab" className="analysis-tab" aria-selected={tab === 'weapons'} onClick={() => setTab('weapons')}>
+      <div className="analysis-tabs" role="group" aria-label="Statistics">
+        <button type="button" className="analysis-tab" aria-pressed={tab === 'weapons'} onClick={() => setTab('weapons')}>
           Weapons
         </button>
-        <button type="button" role="tab" className="analysis-tab" aria-selected={tab === 'mech'} onClick={() => setTab('mech')}>
+        <button type="button" className="analysis-tab" aria-pressed={tab === 'mech'} onClick={() => setTab('mech')}>
           'Mech
         </button>
         {base && <span className="analysis-note">GREEN ▲ VALUES INCLUDE CANTINA UPGRADES</span>}
@@ -83,11 +84,11 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
                     <td>{ZONE_LABELS[zone]}</td>
                     <td>{cell(index, weapon => formatNumber(weapon.damage))}</td>
                     <td>{cell(index, weapon => formatNumber(weapon.heat))}</td>
-                    <td>{cell(index, weapon => weapon.rpm > 0 ? weapon.rpm.toFixed(1) : '—')}</td>
-                    <td>{cell(index, weapon => weapon.dps > 0 ? weapon.dps.toFixed(1) : '—')}</td>
-                    <td>{cell(index, weapon => weapon.range !== null ? `${weapon.range.toFixed(0)} m` : '—')}</td>
-                    <td>{cell(index, weapon => weapon.maxRange !== null ? `${weapon.maxRange.toFixed(0)} m` : '—')}</td>
-                    <td>{cell(index, weapon => weapon.speed !== null ? `${weapon.speed.toFixed(0)} m/s` : '—')}</td>
+                    <td>{cell(index, weapon => weapon.rpm > 0 ? weapon.rpm.toFixed(1) : EMPTY_VALUE)}</td>
+                    <td>{cell(index, weapon => weapon.dps > 0 ? weapon.dps.toFixed(1) : EMPTY_VALUE)}</td>
+                    <td>{cell(index, weapon => weapon.range !== null ? `${weapon.range.toFixed(0)} m` : EMPTY_VALUE)}</td>
+                    <td>{cell(index, weapon => weapon.maxRange !== null ? `${weapon.maxRange.toFixed(0)} m` : EMPTY_VALUE)}</td>
+                    <td>{cell(index, weapon => weapon.speed !== null ? `${weapon.speed.toFixed(0)} m/s` : EMPTY_VALUE)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -97,7 +98,7 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
                   <td>ranged weapons</td>
                   <td>{total(values => values.firepower.toFixed(1))}</td>
                   <td>{total(values => values.heatSpike.toFixed(1))}</td>
-                  <td>—</td>
+                  <td>{EMPTY_VALUE}</td>
                   <td>{total(values => values.dps.toFixed(1))}</td>
                   <td colSpan={3}>{total(values => formatNumber(values.heatPerSecond, 1))} <small>heat/s while firing</small></td>
                 </tr>
@@ -141,7 +142,7 @@ interface MechStat {
   unit?: string;
 }
 
-const optional = (value: number | null, format: (value: number) => string) => value === null ? '—' : format(value);
+const optional = (value: number | null, format: (value: number) => string) => value === null ? EMPTY_VALUE : format(value);
 
 // Resumen como el de la pantalla Mejoras del juego, agrupado con las mismas categorías que las mejoras.
 const MECH_STATS: { title: string; stats: MechStat[] }[] = [
@@ -158,7 +159,7 @@ const MECH_STATS: { title: string; stats: MechStat[] }[] = [
       { label: 'Volley damage', format: values => String(values.firepower) },
       { label: 'Melee damage', format: values => String(values.meleeDamage) },
       { label: 'Nominal DPS', format: values => values.dps.toFixed(1) },
-      { label: 'Max weapon range', format: values => values.maxWeaponRange > 0 ? String(Math.floor(values.maxWeaponRange)) : '—', unit: 'm' }
+      { label: 'Max weapon range', format: values => values.maxWeaponRange > 0 ? String(Math.floor(values.maxWeaponRange)) : EMPTY_VALUE, unit: 'm' }
     ]
   },
   {
@@ -211,7 +212,7 @@ function MechTab({ mech, summary, base }: { mech: Mech; summary: BuildSummary; b
                   <dt>{stat.label}</dt>
                   <dd>
                     <UpgradedValue value={stat.format(summary)} base={base && stat.format(base)} />
-                    {stat.unit && stat.format(summary) !== '—' && <small> {stat.unit}</small>}
+                    {stat.unit && stat.format(summary) !== EMPTY_VALUE && <small> {stat.unit}</small>}
                   </dd>
                 </div>
               ))}
