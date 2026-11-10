@@ -19,6 +19,8 @@ interface StarmapCanvasProps {
   hoveredId: number | null;
   selectedId: number | null;
   questRoute: number[] | null;
+  // Sistema de la academia elegida: se marca para encontrarlo al encuadrarlo.
+  markedId: number | null;
   territoryColors: TerritoryColors;
   mercZones: MercZoneLayer;
   focus: FocusRequest | null;
@@ -75,7 +77,7 @@ function ZoneHint({ data, clusterId }: { data: StarmapData; clusterId: string })
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, markedId, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
@@ -197,8 +199,9 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     renderer.hoveredId = hoveredId;
     renderer.selectedId = selectedId;
     renderer.questRoute = questRoute;
+    renderer.markedId = markedId;
     renderer.requestDraw();
-  }, [hoveredId, selectedId, questRoute]);
+  }, [hoveredId, selectedId, questRoute, markedId]);
 
   useEffect(() => {
     rendererRef.current?.setTerritoryColors(territoryColors);

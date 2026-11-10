@@ -464,6 +464,36 @@ def arenas(arenas_juego, mechs, items):
     }
 
 
+def academias(academias_juego, programas_juego, sistemas_validos):
+    """Academias de pilotos (DLC7) con sus programas, en el orden en que los ofrece el juego."""
+    lista = [{
+        # El id va en la URL (?academy=): sin el sufijo del asset.
+        "id": academia["id"].removesuffix("_AcademyAsset"),
+        "name": academia["nombre"],
+        "description": academia["descripcion"],
+        "system": academia["sistema"],
+        "founded": academia["fundacion"],
+        "clanDestroyed": academia["destruida_por_clanes"],
+        "standing": academia["reputacion"],
+        "programs": academia["programas"],
+    } for academia in academias_juego if academia["sistema"] in sistemas_validos]
+    fuera = sorted(academia["nombre"] for academia in academias_juego if academia["sistema"] not in sistemas_validos)
+    if fuera:
+        print(f"Aviso: academias en sistemas que no están en el mapa: {', '.join(fuera)}")
+    usados = {programa for academia in lista for programa in academia["programs"]}
+    # En el juego, los campos que faltan valen 0: un programa sin cuota trimestral no la cobra.
+    programas = {id_programa: {
+        "name": programa["nombre"],
+        "description": programa["descripcion"].strip(),
+        "days": programa.get("DurationDays", 0),
+        "fee": programa.get("EnrollmentFee", 0),
+        "tuition": programa.get("QuarterlyTuition", 0),
+        "skill": [programa.get("MinSkill", 0), programa.get("MaxSkill", 0)],
+        "stars": {"skill": programa.get("SkillCapStars", 0), "traits": programa.get("TraitStars", 0), "xp": programa.get("XpStars", 0)},
+    } for id_programa, programa in sorted(programas_juego.items()) if id_programa in usados}
+    return lista, programas
+
+
 def recompensas_fuera_de_hrq(recompensas_juego, misiones_juego, mechs, sistemas_validos):
     """'Mechs que da una misión o un objetivo que no es una HRQ del mapa: las campañas de los DLC, la
     información del Bounty Hunter o desbloqueos como el Wolverine de Razer. Las de las HRQ ya van en
@@ -782,6 +812,7 @@ def main():
         "markets": mercados_especiales(mercados_juego, mechs, items, {sistema["id"] for sistema in sistemas}),
         "uniqueMechs": mechs_unicos(unicos_juego, mechs),
         "arenas": arenas(leer("arenas.json"), mechs, items),
+        **dict(zip(("academies", "trainingPrograms"), academias(leer("academias.json"), leer("programas.json"), {sistema["id"] for sistema in sistemas}))),
         "mercs": mercenarios(leer("rivales.json"), {sistema["id"]: (sistema["x"], sistema["y"]) for sistema in sistemas}, tablas),
         "rewards": recompensas_fuera_de_hrq(leer("recompensas_campana.json"), misiones_juego, mechs, {sistema["id"] for sistema in sistemas}),
     }

@@ -31,6 +31,10 @@ COMPANIAS_RIVALES = CONTENIDO + "DLC4/CampaignData/RivalMercs/Companies/"
 # Arenas del DLC6: los sistemas que las tienen y los rangos de fama, con lo que da cada uno.
 ARENAS = CONTENIDO + "DLC6/LevelGenerators/ArenaStarSystemTable"
 RANGOS_DE_ARENA = CONTENIDO + "DLC6/ArenaFameProgressionTable"
+# Academias de pilotos (DLC7) y los programas que ofrecen.
+ACADEMIAS = CONTENIDO + "DLC7/TOIs/PilotTraining/AcademyDataAssets/"
+PROGRAMAS = CONTENIDO + "DLC7/TOIs/PilotTraining/TrainingAssets/"
+TEXTOS_PROGRAMAS = PROGRAMAS + "TrainingData/TrainingProgramStringTable"
 COLORES_MAPA = CONTENIDO + "UI/FrontEnd/Starmap/Materials/Factions/Faction_Colours_MPC"
 EVENTOS = CONTENIDO + "Campaign/CampaignArcs/BorderChanges/"
 CENTROS_INDUSTRIALES = CONTENIDO + "DLC1/CareerMode/Clusters/"
@@ -594,6 +598,56 @@ def extraer_arenas(pak):
     return {"sistemas": sorted(sistemas, key=lambda arena: arena["sistema"]), "rangos": sorted(rangos, key=lambda rango: rango["nivel"])}
 
 
+def extraer_academias(pak):
+    """Academias de pilotos del DLC7 y los programas de entrenamiento que ofrecen."""
+    textos = Asset.desde_pak(pak, TEXTOS_PROGRAMAS).textos(TEXTOS_PROGRAMAS.rsplit("/", 1)[1])
+
+    def texto(valor):
+        return textos.get(valor["clave"]) if isinstance(valor, dict) else valor
+
+    academias, programas = [], {}
+    # Los programas se guardan por nombre: si dos paquetes usaran el mismo, el segundo se perdería.
+    paquetes = {}
+    for ruta in sorted(pak.buscar(ACADEMIAS)):
+        if not ruta.endswith(".uasset") or "/_common/" in ruta or not tiene_uexp(pak, ruta):
+            continue
+        asset = Asset.desde_pak(pak, sin_extension(ruta))
+        datos = asset.propiedades(asset.principal()).get("AcademyData")
+        if not datos:
+            continue
+        ids_programas = [asset.ruta_import(referencia) for referencia in datos.get("AvailableTrainingAssets", [])]
+        for paquete, nombre in ids_programas:
+            if paquetes.setdefault(nombre, paquete) != paquete:
+                raise ValueError(f"El programa {nombre} está en dos paquetes ({paquetes[nombre]} y {paquete}): ¿ha cambiado el juego?")
+            if nombre not in programas:
+                programa = Asset.desde_pak(pak, CONTENIDO + paquete[len("/Game/"):])
+                propiedades = programa.propiedades(nombre)
+                programas[nombre] = {
+                    "nombre": texto(propiedades.get("Name")),
+                    "descripcion": texto(propiedades.get("TrainingDescription")),
+                    # Los campos que faltan valen 0 en el juego (sin cuota, sin mínimo de habilidad…).
+                    **{campo: valor for campo, valor in propiedades.get("TrainingData", {}).items()
+                       if campo in ("DurationDays", "EnrollmentFee", "QuarterlyTuition", "MinSkill", "MaxSkill",
+                                    "SkillCapStars", "TraitStars", "XpStars")},
+                }
+        academias.append({
+            "id": asset.principal(),
+            "nombre": datos.get("Name"),
+            "descripcion": datos.get("Description"),
+            "sistema": datos["SystemID"],
+            # Sin fecha, la academia existe desde siempre.
+            "fundacion": fecha_de_ticks(datos["FoundingDate"]) if datos.get("FoundingDate") else None,
+            # AcademyToiLogic la da por destruida cuando un Clan controla su sistema.
+            "destruida_por_clanes": bool(datos.get("bIsDestroyedByClans")),
+            "reputacion": datos.get("RequiredFactionStanding"),
+            "programas": [nombre for _, nombre in ids_programas],
+        })
+    sin_nombre = [nombre for nombre, programa in programas.items() if not programa["nombre"]]
+    if sin_nombre or not academias:
+        raise ValueError(f"Academias o programas sin datos ({', '.join(sin_nombre)}): ¿ha cambiado el juego?")
+    return academias, programas
+
+
 def extraer_zonas(pak):
     """Sistemas, nombre, reputación recomendada y dificultad de cada zona (ClusterAsset) del juego.
 
@@ -725,6 +779,9 @@ def main():
     guardar("recompensas_campana.json", extraer_recompensas_campana(pak))
     guardar("heroes_en_venta.json", extraer_heroes_en_venta(pak))
     guardar("arenas.json", extraer_arenas(pak))
+    academias, programas = extraer_academias(pak)
+    guardar("academias.json", academias)
+    guardar("programas.json", programas)
     rivales = extraer_rivales(pak)
     guardar("rivales.json", rivales)
     extraer_logos(pak, {**facciones, **rivales["companias"]})
