@@ -206,6 +206,34 @@ export interface CampaignReward {
   careerOnly?: boolean;
 }
 
+// Academia de pilotos del DLC7: abre en su fecha de fundación y, si la destruyen los Clanes, cierra
+// cuando un Clan controla su sistema.
+export interface Academy {
+  id: string;
+  name: string;
+  description: string;
+  system: number;
+  founded: GameDate | null;
+  clanDestroyed: boolean;
+  // Reputación con la facción que pide para entrar.
+  standing: number | null;
+  programs: string[];
+}
+
+export interface TrainingProgram {
+  name: string;
+  // Lleva {AcademyName}, que se sustituye por el nombre de la academia.
+  description: string;
+  days: number;
+  fee: number;
+  // C-Bills por trimestre, además de la matrícula; 0 si no tiene.
+  tuition: number;
+  // Habilidad del piloto que admite, mínima y máxima.
+  skill: [number, number];
+  // Estrellas de mejora de habilidad, de rasgos y de experiencia, como las enseña el juego.
+  stars: { skill: number; traits: number; xp: number };
+}
+
 export interface StarmapData {
   range: DateRange;
   colors: { cluster: string; hub: string };
@@ -221,4 +249,6 @@ export interface StarmapData {
   rewards: CampaignReward[];
   arenas: { systems: ArenaSystem[]; ranks: ArenaRank[] };
   mercs: { companies: Record<string, MercCompany>; zones: MercZone[] };
+  academies: Academy[];
+  trainingPrograms: Record<string, TrainingProgram>;
 }

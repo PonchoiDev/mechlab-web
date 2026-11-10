@@ -2,6 +2,7 @@ import type { GameDate, MercZone, StarSystem, StarmapData } from '../types/starm
 import { getQuestAvailability } from '../utils/quests';
 import { findClusterAt, getClusterOutlines } from '../utils/clusters';
 import { findMercZoneAt } from '../utils/mercs';
+import { getAcademiesAt } from '../utils/academies';
 import { buildTerritoryIndex, getHubs, getOwnerAt, getTerritoryContours, type TerritoryIndex } from '../utils/starmap';
 
 export interface View {
@@ -25,6 +26,8 @@ const MARKET_COLOR = '#7fdc8a';
 const BLACK_MARKET_COLOR = '#b98cff';
 const UNIQUE_COLOR = '#ffd400';
 const ARENA_COLOR = '#ff6b5e';
+// El azul del icono de academia del juego (StarMapIconColor 0, 0.5, 1).
+const ACADEMY_COLOR = '#2f8cff';
 const MERC_COLOR = '#e8e2d0';
 const MERC_LOGO = 26;
 // Grosores en píxeles de pantalla: el borde se ve igual de marcado con cualquier zoom.
@@ -106,6 +109,8 @@ export class StarmapRenderer {
   private readonly hubCapitals: Set<number>;
   private readonly questOffers: Map<number, StarmapData['quests']>;
   private readonly markets: Map<number, boolean>;
+  // Sistemas con una academia abierta en la fecha del mapa.
+  private academies = new Set<number>();
   private date: GameDate = '';
   private territories: Territory[] = [];
   private transition: Transition | null = null;
@@ -124,6 +129,8 @@ export class StarmapRenderer {
   hoveredId: number | null = null;
   // Sistemas de la HRQ elegida, en orden: la oferta y después sus misiones.
   questRoute: number[] | null = null;
+  // Sistema que se marca en azul con su nombre: el de la academia elegida.
+  markedId: number | null = null;
   selectedId: number | null = null;
 
   constructor(canvas: HTMLCanvasElement, data: StarmapData) {
@@ -178,6 +185,7 @@ export class StarmapRenderer {
 
   setDate(date: GameDate, animate = false) {
     this.date = date;
+    this.academies = new Set(getAcademiesAt(this.data, date).map(academy => academy.system));
     const previousOwners = this.owners;
     const previous = this.territories;
     // La capa de los territorios de antes ya está pintada: la animación la reutiliza.
@@ -546,6 +554,7 @@ export class StarmapRenderer {
       if (offers) this.drawQuestIcon(...this.toScreen(system.x, system.y), offers.some(quest => getQuestAvailability(quest, this.date).state === 'available'));
       if (this.markets.has(system.id)) this.drawMarketIcon(...this.toScreen(system.x, system.y), this.markets.get(system.id)!);
       if (this.arenas.has(system.id)) this.drawArenaIcon(...this.toScreen(system.x, system.y));
+      if (this.academies.has(system.id)) this.drawAcademyIcon(...this.toScreen(system.x, system.y));
     }
     for (const unique of this.data.uniqueMechs) {
       if (unique.from > this.date) continue;
@@ -556,6 +565,7 @@ export class StarmapRenderer {
     this.drawQuestRoute();
 
     if (scale >= LABEL_SCALE) this.drawLabels(visible);
+    this.drawMarked();
 
     for (const id of [this.hoveredId, this.selectedId]) {
       const system = id === null ? undefined : this.data.systems.find(candidate => candidate.id === id);
@@ -649,6 +659,33 @@ export class StarmapRenderer {
     context.restore();
   }
 
+  private drawAcademyIcon(x: number, y: number) {
+    // Birrete azul debajo de la estrella: aquí hay una academia de pilotos (DLC7). El rombo del
+    // centro industrial va encima de la estrella, así que no se tapan.
+    const context = this.context;
+    context.save();
+    context.translate(x, y + 14);
+    context.fillStyle = ACADEMY_COLOR;
+    context.strokeStyle = '#030a18';
+    context.lineWidth = 1.1;
+    context.beginPath();
+    context.moveTo(0, -5);
+    context.lineTo(7, -2);
+    context.lineTo(0, 1);
+    context.lineTo(-7, -2);
+    context.closePath();
+    context.fill();
+    context.stroke();
+    context.beginPath();
+    context.moveTo(-4, 0);
+    context.lineTo(-4, 3);
+    context.quadraticCurveTo(0, 5.5, 4, 3);
+    context.lineTo(4, 0);
+    context.fill();
+    context.stroke();
+    context.restore();
+  }
+
   private drawUniqueIcon(x: number, y: number) {
     // Estrella dorada abajo a la derecha: aquí hay un 'Mech único.
     const context = this.context;
@@ -702,6 +739,45 @@ export class StarmapRenderer {
       context.fillStyle = '#140d02';
       context.fillText(String(i + 1), x - 12, y + 12.5);
     });
+    context.restore();
+  }
+
+  private drawMarked() {
+    // Aro azul con esquinas de mira y el nombre del sistema, a cualquier zoom: al encuadrar la
+    // academia, el sistema se ve aunque haya muchas estrellas alrededor.
+    const system = this.markedId === null ? undefined : this.data.systems.find(candidate => candidate.id === this.markedId);
+    if (!system) return;
+    const [x, y] = this.toScreen(system.x, system.y);
+    const context = this.context;
+    context.save();
+    context.strokeStyle = ACADEMY_COLOR;
+    context.shadowColor = ACADEMY_COLOR;
+    context.shadowBlur = 14;
+    context.lineWidth = 2.5;
+    context.beginPath();
+    context.arc(x, y, 22, 0, Math.PI * 2);
+    context.stroke();
+    context.lineWidth = 3;
+    for (const [dx, dy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+      context.beginPath();
+      context.moveTo(x + dx * 34, y + dy * 24);
+      context.lineTo(x + dx * 34, y + dy * 34);
+      context.lineTo(x + dx * 24, y + dy * 34);
+      context.stroke();
+    }
+    context.shadowBlur = 0;
+    const text = system.name.toUpperCase();
+    context.font = '700 15px "Barlow Condensed", "Arial Narrow", sans-serif';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    const width = context.measureText(text).width + 14;
+    context.fillStyle = 'rgba(3, 10, 24, 0.9)';
+    context.fillRect(x - width / 2, y - 58, width, 20);
+    context.strokeStyle = ACADEMY_COLOR;
+    context.lineWidth = 1;
+    context.strokeRect(x - width / 2, y - 58, width, 20);
+    context.fillStyle = '#ffffff';
+    context.fillText(text, x, y - 47.5);
     context.restore();
   }
 
