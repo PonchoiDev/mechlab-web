@@ -105,32 +105,7 @@ body {
   text-transform: uppercase;
 }
 
-/* Ficha de un rasgo */
-.pilot-trait.is-hero { border-top-color: var(--pilot-hero); }
 .pilots .unit-card-header { min-height: 0; }
-
-.pilot-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin: 4px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.pilot-tags li {
-  padding: 1px 6px;
-  border: 1px solid var(--units-line);
-  color: var(--units-muted);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.pilot-tags li.is-hero { border-color: var(--pilot-hero); color: var(--pilot-hero); }
-.pilot-tags li.is-negative { border-color: var(--pilot-bad); color: var(--pilot-bad); }
-.pilot-tags li[title] { cursor: help; }
 
 .pilot-description {
   margin: 0;
@@ -264,8 +239,8 @@ body {
   line-height: 1.45;
 }
 
-/* Tabla de una familia de programas */
-.pilot-programs {
+/* Tablas de rasgos y de programas: una por subgrupo o por familia */
+.pilot-table {
   width: 100%;
   table-layout: fixed;
   border: 1px solid var(--units-line);
@@ -275,16 +250,15 @@ body {
   font-size: 17px;
 }
 
-.pilot-programs th,
-.pilot-programs td {
+.pilot-table th,
+.pilot-table td {
   padding: 7px 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   text-align: left;
   vertical-align: top;
-  white-space: nowrap;
 }
 
-.pilot-programs thead th {
+.pilot-table thead th {
   color: var(--units-muted);
   font-size: 13px;
   font-weight: 600;
@@ -292,15 +266,78 @@ body {
   text-transform: uppercase;
 }
 
-.pilot-programs tbody th { font-weight: 700; white-space: normal; }
+.pilot-table tbody th { font-weight: 700; }
+.pilot-table tbody tr:last-child > * { border-bottom: 0; }
+.pilot-table tbody tr:nth-child(odd) { background: rgba(255, 255, 255, 0.035); }
+.pilot-table td { font-variant-numeric: tabular-nums; }
+
 /* Las mismas columnas en todas las familias, para comparar de una tabla a otra */
+.pilot-programs td { white-space: nowrap; }
 .pilot-programs thead th { width: 8.5%; }
 .pilot-programs thead th:first-child { width: 27%; }
 .pilot-programs thead th:last-child { width: 13.5%; }
 .pilot-programs td.pilot-program-academies { white-space: normal; }
-.pilot-programs tbody tr:last-child > * { border-bottom: 0; }
-.pilot-programs tbody tr:nth-child(odd) { background: rgba(255, 255, 255, 0.035); }
-.pilot-programs td { font-variant-numeric: tabular-nums; }
+
+/* Rasgos: nombre, efectos, efectos como piloto y dónde salen */
+.pilot-traits thead th:nth-child(1) { width: 24%; }
+.pilot-traits thead th:nth-child(2) { width: 42%; }
+.pilot-traits thead th:nth-child(3) { width: 22%; }
+.pilot-traits thead th:nth-child(4) { width: 12%; }
+
+.pilot-trait-title { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; }
+.pilot-trait-name[title] { cursor: help; }
+.pilot-traits tr.is-hero .pilot-trait-name { color: var(--pilot-hero); }
+
+.pilot-trait-meta {
+  flex-basis: 100%;
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.pilot-traits td.is-empty { color: rgba(255, 255, 255, 0.25); }
+.pilot-effect-line + .pilot-effect-line { margin-top: 4px; }
+
+.pilot-effect-scope {
+  display: block;
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pilot-effect-scope small { font-size: 12px; letter-spacing: 0.02em; text-transform: none; }
+
+.pilot-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pilot-effects li { white-space: nowrap; }
+.pilot-effects li.is-good b { color: var(--pilot-good); }
+.pilot-effects li.is-bad b { color: var(--pilot-bad); }
+
+/* Dos marcas encendidas o apagadas: lo normal es tener las dos, así se ven las excepciones */
+.pilot-found { white-space: nowrap; }
+
+.pilot-found span {
+  display: block;
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: line-through;
+  text-transform: uppercase;
+  cursor: help;
+}
+
+.pilot-found span.is-on { color: var(--units-text); text-decoration: none; }
 
 .pilot-program-traits {
   display: block;
@@ -346,23 +383,23 @@ body {
 .pilot-academies a:hover, .pilot-academies a:focus-visible { color: var(--units-accent); outline: none; }
 .pilot-academies small { color: var(--units-muted); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
 
-/* En pantallas estrechas cada programa es un bloque con sus datos en dos columnas */
+/* En pantallas estrechas cada fila es un bloque con sus datos en dos columnas */
 @media (max-width: 980px) {
-  .pilot-programs thead { display: none; }
-  .pilot-programs, .pilot-programs tbody { display: block; }
+  .pilot-table thead { display: none; }
+  .pilot-table, .pilot-table tbody { display: block; }
 
-  .pilot-programs tr {
+  .pilot-table tr {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     border-bottom: 1px solid var(--units-line);
   }
 
-  .pilot-programs tbody tr:last-child { border-bottom: 0; }
-  .pilot-programs th, .pilot-programs td { border-bottom: 0; }
-  .pilot-programs tbody th { grid-column: 1 / -1; font-size: 19px; }
-  .pilot-programs td { padding-top: 2px; padding-bottom: 4px; }
+  .pilot-table tbody tr:last-child { border-bottom: 0; }
+  .pilot-table th, .pilot-table td { border-bottom: 0; }
+  .pilot-table tbody th { grid-column: 1 / -1; font-size: 19px; }
+  .pilot-table td { padding-top: 2px; padding-bottom: 4px; }
 
-  .pilot-programs td::before {
+  .pilot-table td::before {
     content: attr(data-label);
     display: block;
     color: var(--units-muted);
@@ -373,6 +410,11 @@ body {
   }
 
   .pilot-programs td.pilot-program-academies { grid-column: 1 / -1; white-space: normal; }
+
+  /* Rasgos: los efectos ocupan todo el ancho y las columnas vacías no se enseñan */
+  .pilot-traits td { grid-column: 1 / -1; }
+  .pilot-traits td.is-empty { display: none; }
+  .pilot-found span { display: inline; margin-right: 12px; }
 }
 
 @media (max-width: 760px) {

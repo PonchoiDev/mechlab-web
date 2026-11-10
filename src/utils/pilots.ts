@@ -1,4 +1,4 @@
-import type { HeroPilot, PilotTrait, ProgramFamily, TrainingProgramEntry, TraitCategory } from '../types/pilots';
+import type { HeroPilot, PilotTrait, ProgramFamily, TrainingProgramEntry, TraitCategory, TraitEffect, TraitEffectGroup } from '../types/pilots';
 
 export const TRAIT_CATEGORIES: { id: TraitCategory; label: string }[] = [
   { id: 'mech', label: "'Mech affinity" },
@@ -50,6 +50,29 @@ export const groupTraits = (traits: PilotTrait[]): TraitSection[] => TRAIT_CATEG
     else groups.push({ label: trait.group, traits: [trait] });
   }
   return [{ category: id, label, count: inCategory.length, groups }];
+});
+
+// Grupo de efectos en la columna de combate; scope null cuando dónde se aplica es obvio.
+export interface TraitEffectLine {
+  scope: string | null;
+  note?: string;
+  effects: TraitEffect[];
+}
+
+const PILOT_SCOPE = 'Pilot';
+// «In combat» no añade nada en la columna de combate, y «While piloting Atlas 'Mechs» repite el
+// nombre de la afinidad. Con un arma, contra una facción o en sus contratos sí hay que decirlo.
+const isObviousScope = (scope: string) => scope === 'In combat' || scope.startsWith('While piloting ');
+
+export const getTraitEffectColumns = (trait: { groups: TraitEffectGroup[] }) => ({
+  combat: trait.groups
+    .filter(group => group.scope !== PILOT_SCOPE)
+    .map((group): TraitEffectLine => ({
+      scope: isObviousScope(group.scope) ? null : group.scope,
+      ...(group.note ? { note: group.note } : {}),
+      effects: group.effects
+    })),
+  pilot: trait.groups.filter(group => group.scope === PILOT_SCOPE).flatMap(group => group.effects)
 });
 
 export const splitHeroPilots = (heroes: HeroPilot[]) => ({

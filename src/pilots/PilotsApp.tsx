@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import pilotsJson from '../data/pilots.json';
-import type { HeroPilot, PilotTrait, PilotsData, TrainingProgramEntry, TraitEffectGroup } from '../types/pilots';
+import type { HeroPilot, PilotTrait, PilotsData, TrainingProgramEntry, TraitEffect, TraitEffectGroup } from '../types/pilots';
 import {
-  TRAIT_CATEGORIES, filterTraits, formatProgramLength, getAcademyMapUrl, groupPrograms, groupTraits, parsePilotsQuery,
+  TRAIT_CATEGORIES, filterTraits, formatProgramLength, getAcademyMapUrl, getTraitEffectColumns, groupPrograms, groupTraits, parsePilotsQuery,
   splitHeroPilots, toPilotsQuery, type PilotsView
 } from '../utils/pilots';
 import { FeedbackDialog } from '../components/FeedbackDialog';
@@ -42,30 +42,67 @@ function EffectGroups({ groups }: { groups: TraitEffectGroup[] }) {
   );
 }
 
-function TraitCard({ trait }: { trait: PilotTrait }) {
-  const tags = [
-    trait.hero && { label: 'Hero', className: 'is-hero', title: HERO_TRAIT_TITLE },
-    trait.hireable && { label: 'Hired pilots', title: 'Can appear on pilots for hire' },
-    trait.trainable && { label: 'Academies', title: 'Can be learned at an academy' },
-    trait.negative && { label: 'Negative', className: 'is-negative' },
-    trait.unique && { label: 'Unique' },
-    trait.dlc !== null && { label: `DLC ${trait.dlc}` },
-    trait.available && { label: `From ${dateFormat.format(new Date(trait.available))}` }
-  ].filter((tag): tag is { label: string; className?: string; title?: string } => Boolean(tag));
-
+function EffectList({ effects }: { effects: TraitEffect[] }) {
   return (
-    <article className={`unit-card pilot-trait${trait.hero ? ' is-hero' : ''}`}>
-      <header className="unit-card-header">
-        <h4 className="unit-card-name">{trait.name}</h4>
-        {tags.length > 0 && (
-          <ul className="pilot-tags">
-            {tags.map(tag => <li key={tag.label} className={tag.className} title={tag.title}>{tag.label}</li>)}
-          </ul>
-        )}
-      </header>
-      {trait.description && <p className="pilot-description">{trait.description}</p>}
-      <EffectGroups groups={trait.groups} />
-    </article>
+    <ul className="pilot-effects">
+      {effects.map((effect, index) => (
+        <li key={`${effect.label}-${index}`} className={effect.good ? 'is-good' : 'is-bad'}>
+          <b>{effect.value}</b> {effect.label}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function TraitRow({ trait }: { trait: PilotTrait }) {
+  const { combat, pilot } = getTraitEffectColumns(trait);
+  const meta = [
+    trait.dlc !== null && `DLC ${trait.dlc}`,
+    trait.available && `from ${dateFormat.format(new Date(trait.available))}`
+  ].filter(Boolean).join(' · ');
+  return (
+    <tr className={trait.hero ? 'is-hero' : undefined}>
+      <th scope="row">
+        <div className="pilot-trait-title">
+          <span className="pilot-trait-name" title={trait.description ?? undefined}>{trait.name}</span>
+          {trait.hero && <span className="pilot-badge is-hero" title={HERO_TRAIT_TITLE}>Hero</span>}
+          {trait.negative && <span className="pilot-badge is-negative">Negative</span>}
+          {trait.unique && <span className="pilot-badge" title="Only one pilot can have it">Unique</span>}
+          {meta && <span className="pilot-trait-meta">{meta}</span>}
+        </div>
+      </th>
+      <td data-label="Effects" className={combat.length === 0 ? 'is-empty' : undefined}>
+        {combat.length > 0 ? combat.map((line, index) => (
+          <div key={line.scope ?? index} className="pilot-effect-line">
+            {line.scope && <span className="pilot-effect-scope">{line.scope}{line.note && <small> {line.note}</small>}</span>}
+            <EffectList effects={line.effects} />
+          </div>
+        )) : '-'}
+      </td>
+      <td data-label="As a pilot" className={pilot.length === 0 ? 'is-empty' : undefined}>
+        {pilot.length > 0 ? <EffectList effects={pilot} /> : '-'}
+      </td>
+      <td data-label="Found on" className="pilot-found">
+        <span className={trait.hireable ? 'is-on' : undefined} title={trait.hireable ? 'Can appear on pilots for hire' : 'Never on pilots for hire'}>Hired</span>
+        <span className={trait.trainable ? 'is-on' : undefined} title={trait.trainable ? 'Can be learned at an academy' : 'Not taught at academies'}>Academies</span>
+      </td>
+    </tr>
+  );
+}
+
+function TraitTable({ traits }: { traits: PilotTrait[] }) {
+  return (
+    <table className="pilot-table pilot-traits">
+      <thead>
+        <tr>
+          <th scope="col">Trait</th>
+          <th scope="col">Effects</th>
+          <th scope="col">As a pilot</th>
+          <th scope="col">Found on</th>
+        </tr>
+      </thead>
+      <tbody>{traits.map(trait => <TraitRow key={trait.id} trait={trait} />)}</tbody>
+    </table>
   );
 }
 
@@ -167,7 +204,7 @@ function TraitsView({ traits }: { traits: PilotTrait[] }) {
           {section.groups.map(group => (
             <div key={group.label ?? section.category} className="pilot-subsection">
               {group.label && <h3>{group.label} <small>{group.traits.length}</small></h3>}
-              <div className="units-grid">{group.traits.map(trait => <TraitCard key={trait.id} trait={trait} />)}</div>
+              <TraitTable traits={group.traits} />
             </div>
           ))}
         </section>
@@ -244,7 +281,7 @@ function ProgramsView({ onOpenTrait }: { onOpenTrait: OpenTrait }) {
             <h2 id={`programs-${family.id}`}>{family.name} <small>{programs.length}</small></h2>
             <p>{family.description}</p>
           </header>
-          <table className="pilot-programs">
+          <table className="pilot-table pilot-programs">
             <thead>
               <tr>
                 <th scope="col">{family.id === 'academy' ? 'Academy' : 'Program'}</th>
