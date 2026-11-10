@@ -401,6 +401,8 @@ def recompensa_de_objetivo(info):
         "mechs": [mech["Id"]["PrimaryAssetName"] for mech in objetos.get("MechLoadouts", [])],
         "armas": lista("Weapons", "WeaponId"),
         "equipo": lista("Equipment", "EquipmentId"),
+        # Pilotos hero que se unen a la compañía: Valten Ryder al completar la cadena de Adam Steiner.
+        "pilotos": [piloto["Id"]["PrimaryAssetName"] for piloto in recompensa.get("PilotRewards") or []],
         "texto": info.get("RewardBriefing") or None,
     }
 

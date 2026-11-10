@@ -57,6 +57,8 @@ export interface QuestReward {
   mechs: { id: string; name: string }[];
   weapons: { name: string; tier: string | null; count: number }[];
   equipment: { name: string; count: number }[];
+  // Pilotos que se unen a la compañía (Valten Ryder en la de Adam Steiner); hero si están en la página de pilotos.
+  pilots: { id: string; name: string; hero: boolean }[];
   // Texto de agradecimiento de la última misión que paga.
   debrief: string | null;
 }
@@ -86,8 +88,8 @@ export interface CampaignMission {
   cbills: number;
   reputation: number;
   mechs: { id: string; name: string }[];
-  // Pilotos hero que se unen a la compañía (Morgan Trensky en Leading the Charge).
-  pilots: { id: string; name: string }[];
+  // Pilotos que se unen a la compañía (Morgan Trensky en Leading the Charge); hero si están en la página de pilotos.
+  pilots: { id: string; name: string; hero: boolean }[];
   weapons: { name: string; tier: string | null; count: number }[];
   equipment: { name: string; count: number }[];
 }

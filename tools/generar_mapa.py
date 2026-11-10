@@ -225,7 +225,14 @@ def requisito_de_cadena(modo, condicion, nombres):
     }
 
 
-def recompensas_por_cadena(recompensas_juego, mechs, items):
+def piloto_hero(id_juego, nombres_de_pilotos):
+    """Un piloto que se une a la compañía, con el id de la página de pilotos (Ash_PilotPersona pasa a
+    Ash) y su nombre. No todos son hero: Fenstrom, de The Shadow Coup, no está en hero.json."""
+    return {"id": re.sub(r"(_PilotPersona|Pilot)$", "", id_juego), "name": nombres_de_pilotos.get(id_juego, separar_palabras(id_juego)),
+            "hero": id_juego in nombres_de_pilotos}
+
+
+def recompensas_por_cadena(recompensas_juego, mechs, items, nombres_de_pilotos):
     """Suma lo que pagan los objetivos de cada cadena. Si dos objetivos que pagan comparten título,
     son desenlaces alternativos (Armed Robbery en carrera) y cuenta uno."""
     por_cadena = {}
@@ -252,6 +259,7 @@ def recompensas_por_cadena(recompensas_juego, mechs, items):
                                      for recompensa in unicas for id_juego, cantidad in recompensa["armas"] if cantidad > 0),
             "equipment": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, False)
                                        for recompensa in unicas for id_juego, cantidad in recompensa["equipo"] if cantidad > 0),
+            "pilots": [piloto_hero(id_juego, nombres_de_pilotos) for recompensa in unicas for id_juego in recompensa.get("pilotos", [])],
             "debrief": textos[-1] if textos else None,
         }
     return resultado
@@ -545,7 +553,7 @@ def orden_de_parte(parte_juego):
     return float(numero.group(1)) if numero else 99
 
 
-def campanas(partes_juego, nombres, recompensas, pilotos_hero, mechs, items, sistemas_validos):
+def campanas(partes_juego, nombres, recompensas, nombres_de_pilotos, mechs, items, sistemas_validos):
     """Las campañas de los DLC: dónde y cuándo empiezan, y sus misiones en orden con lo que paga cada una.
 
     Los 'Mechs de cada misión salen de las recompensas fuera de las HRQ (el mismo título en el mismo
@@ -554,7 +562,6 @@ def campanas(partes_juego, nombres, recompensas, pilotos_hero, mechs, items, sis
     por_dlc = {}
     for parte_juego in partes_juego:
         por_dlc.setdefault(parte_juego["dlc"], []).append(parte_juego)
-    nombres_de_pilotos = {piloto["id"]: piloto["nombre"] for piloto in pilotos_hero}
     resultado = []
     for dlc, partes in sorted(por_dlc.items()):
         misiones_juego = [mision for parte_juego in partes for mision in parte_juego["misiones"]]
@@ -589,8 +596,7 @@ def campanas(partes_juego, nombres, recompensas, pilotos_hero, mechs, items, sis
                 "cbills": pago.get("cbills", 0),
                 "reputation": pago.get("reputacion", 0),
                 "mechs": de_mision.get(titulo.lower(), []),
-                "pilots": [{"id": re.sub(r"(_PilotPersona|Pilot)$", "", piloto), "name": nombres_de_pilotos.get(piloto, separar_palabras(piloto))}
-                           for piloto in pago.get("pilotos", [])],
+                "pilots": [piloto_hero(piloto, nombres_de_pilotos) for piloto in pago.get("pilotos", [])],
                 "weapons": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, True) for id_juego, cantidad in pago.get("armas", [])),
                 "equipment": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, False) for id_juego, cantidad in pago.get("equipo", [])),
             })
@@ -885,6 +891,8 @@ def main():
     ]
 
     posiciones = {int(fila["Name"]): (fila["PosX"], fila["PosY"]) for fila in sistemas_juego}
+    with open(RUTA_PILOTOS_HERO, encoding="utf-8") as archivo:
+        nombres_de_pilotos = {piloto["id"]: piloto["nombre"] for piloto in json.load(archivo)}
     datos = {
         "range": {"start": INICIO, "end": FIN},
         "colors": {"cluster": color_hex(colores["Warzone"]), "hub": color_hex(colores["Safezone"])},
@@ -898,7 +906,7 @@ def main():
         },
         "systems": sistemas,
         "quests": cadenas_de_misiones(misiones_juego, {sistema["id"] for sistema in sistemas}, leer("condiciones_misiones.json"),
-                                      recompensas_por_cadena(leer("recompensas_misiones.json"), mechs, items)),
+                                      recompensas_por_cadena(leer("recompensas_misiones.json"), mechs, items, nombres_de_pilotos)),
         "markets": mercados_especiales(mercados_juego, mechs, items, {sistema["id"] for sistema in sistemas}),
         "uniqueMechs": mechs_unicos(unicos_juego, mechs),
         "arenas": arenas(leer("arenas.json"), mechs, items),
@@ -906,9 +914,7 @@ def main():
         "mercs": mercenarios(leer("rivales.json"), {sistema["id"]: (sistema["x"], sistema["y"]) for sistema in sistemas}, tablas),
         "rewards": recompensas_fuera_de_hrq(leer("recompensas_campana.json"), misiones_juego, mechs, {sistema["id"] for sistema in sistemas}),
     }
-    with open(RUTA_PILOTOS_HERO, encoding="utf-8") as archivo:
-        pilotos_hero = json.load(archivo)
-    datos["campaigns"] = campanas(leer("campanas.json"), leer("nombres_campanas.json"), datos["rewards"], pilotos_hero, mechs, items,
+    datos["campaigns"] = campanas(leer("campanas.json"), leer("nombres_campanas.json"), datos["rewards"], nombres_de_pilotos, mechs, items,
                                   {sistema["id"] for sistema in sistemas})
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"))

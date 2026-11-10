@@ -1631,7 +1631,8 @@ button, input, select { font: inherit; color: inherit; }
   list-style: none;
 }
 
-.starmap-campaign-prizes small { color: var(--map-muted); font-size: 13px; }
+.starmap-campaign-prizes small,
+.starmap-quest-reward .starmap-market-mechs > li > small { color: var(--map-muted); font-size: 13px; }
 
 .starmap-campaign-pilot {
   color: var(--map-text);

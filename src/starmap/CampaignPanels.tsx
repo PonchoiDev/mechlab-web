@@ -76,6 +76,17 @@ export function CampaignDrawer({ data, date, selectedId, onPick }: CampaignDrawe
   );
 }
 
+// Piloto que da una misión o una HRQ; los hero, enlazados a la página de pilotos.
+export function PilotReward({ pilot }: { pilot: { name: string; hero: boolean } }) {
+  if (!pilot.hero) return <><b className="starmap-campaign-pilot">{pilot.name}</b><small> pilot</small></>;
+  return (
+    <>
+      <a className="starmap-campaign-pilot" href={PILOTS_URL} title="Hero pilot: open the Pilots page">{pilot.name}</a>
+      <small> hero pilot</small>
+    </>
+  );
+}
+
 // Lo que paga una misión: C-Bills y reputación, 'Mechs, pilotos hero, armas y equipo.
 function MissionReward({ mission }: { mission: CampaignMission }) {
   const money = [
@@ -89,12 +100,7 @@ function MissionReward({ mission }: { mission: CampaignMission }) {
       {(mission.mechs.length > 0 || mission.pilots.length > 0) && (
         <ul className="starmap-campaign-prizes">
           {mission.mechs.map((mech, index) => <li key={`${mech.id}-${index}`}><MechLink id={mech.id} name={mech.name} /></li>)}
-          {mission.pilots.map(pilot => (
-            <li key={pilot.id}>
-              <a className="starmap-campaign-pilot" href={PILOTS_URL} title="Hero pilot: open the Pilots page">{pilot.name}</a>
-              <small> hero pilot</small>
-            </li>
-          ))}
+          {mission.pilots.map(pilot => <li key={pilot.id}><PilotReward pilot={pilot} /></li>)}
         </ul>
       )}
       {hasItems && (
