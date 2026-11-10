@@ -14,7 +14,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     title: 'Pilots',
     items: [
       'A new Pilots page lists the 18 hero pilots like hero \'Mechs: the 8 that hiring halls offer as Elite Pilot and the 10 that join as mission rewards, with their skills, salary, fixed traits and biography',
-      'All 184 pilot traits from DLC 7 with their exact effects, in sections by \'Mech weight class, weapon type, faction or career, good effects in green and bad ones in red',
+      'All 184 pilot traits from DLC 7 with their exact effects, in compact tables by \'Mech weight class, weapon type, faction or career: effects, pilot costs and whether hired pilots or academies can have each one, good effects in green and bad ones in red',
       'Filter traits by type or hero only and search by name or effect, for example jam or atlas',
       'Training programs come in one table per kind, to compare levels side by side, with the traits each academy program always grants and links to every academy on the star map'
     ]

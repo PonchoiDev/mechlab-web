@@ -99,7 +99,7 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
   - su biografía.
 - **RF3.** La pestaña **Traits** lista los rasgos por secciones (categoría y subgrupo, con cuántos hay en cada una), como los programas: una tabla por subgrupo y una fila por rasgo, con estas columnas:
   - **Trait:** el nombre y solo las marcas que lo distinguen (Hero, Negative, Unique, su DLC y desde cuándo existe). La descripción del juego va en el tooltip del nombre, porque casi siempre repite los efectos.
-  - **In combat:** los efectos en la batalla. Dónde se aplican solo se escribe cuando no es obvio: no en «In combat» ni en «While piloting…» de las afinidades, sí con un arma, contra una facción o en sus contratos.
+  - **Effects:** los efectos en la batalla, en los contratos o en el espacio de una facción. Dónde se aplican solo se escribe cuando no es obvio: no en «In combat» ni en «While piloting…» de las afinidades, sí con un arma, contra una facción o en sus contratos.
   - **As a pilot:** contratación, sueldo, experiencia, heridas…
   - **Found on:** dos marcas, Hired (sale en los pilotos que se contratan) y Academies (se aprende en una academia), encendidas o apagadas, para ver las excepciones de un vistazo.
 
@@ -142,7 +142,7 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
 | CA14 | Los pilotos reservados | se consultan | Morgan Trensky es la recompensa de *Leading the Charge*, Sam Hagel la de *Smoke and Mirrors* y Valten Ryder la de *A New March* (DLC 8), con Bushwacker 'Mech Affinity, AC/10 Master y Survivor |
 | CA15 | Los programas | se agrupan por familias | Simpod training 5, Vocational training 2, Semester enrollment 4, Full year enrollment 4, Undergraduate program 5, Graduate program 4 y Academy graduate programs 5. El de NAIS se llama New Avalon Institute of Science, da siempre NAIS Graduate y favorece Standard Autocannon Specialist; Graduate Program de nivel 4 favorece SRM Specialist y MRM Expert |
 | CA16 | La duración de un programa | se escribe | 60 días son «60 days», 365 son «1 year» y 1.460 son «4 years» |
-| CA17 | Los efectos de un rasgo | se reparten en columnas | Atlas 'Mech Affinity: sus cuatro efectos en combate sin decir dónde y ninguno como piloto. AC/10 Expert: «With AC/10» con su nota. House Davion Noble: «On contracts for House Davion» e «In House Davion space» en combate y sus dos costes como piloto. Hypochondriac: nada en combate y sus tres efectos como piloto |
+| CA17 | Los efectos de un rasgo | se reparten en columnas | Atlas 'Mech Affinity: sus cuatro efectos sin decir dónde y ninguno como piloto. AC/10 Expert: «With AC/10» con su nota. House Davion Noble: «On contracts for House Davion» e «In House Davion space» en la columna de efectos y sus dos costes como piloto. Hypochondriac: ningún efecto fuera del piloto y sus tres efectos como piloto |
 
 ## Fuera de alcance
 
@@ -163,7 +163,7 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
 
 ## Resultado
 
-- **Orden seguido:** en dos vueltas, cada una con la especificación, los tests de sus criterios (que fallaban) y después los datos, la lógica y la interfaz, en commits separados. La primera trajo los rasgos y los programas; la segunda, los pilotos hero, las secciones de rasgos y las tablas de programas.
+- **Orden seguido:** en tres vueltas, cada una con la especificación, los tests de sus criterios (que fallaban) y después los datos, la lógica y la interfaz, en commits separados. La primera trajo los rasgos y los programas; la segunda, los pilotos hero, las secciones de rasgos y las tablas de programas; la tercera, las tablas de rasgos.
 - **Datos:**
   - 18 pilotos hero: 8 de las salas de contratación y 10 recompensas.
   - 184 rasgos (99 de 'Mech, 35 de armas, 24 de facciones, 21 de carrera y 5 de graduados; 53 hero) en 18 subgrupos.
@@ -175,11 +175,10 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
   - lee las claves de las curvas (`RichCurveKey`).
 
   El mapa estelar y las unidades extraídos de nuevo salen idénticos, salvo los rasgos propios que ahora guarda `programas.json`.
-- **Tests:** los dieciséis criterios (CA1 a CA16) están en `src/utils/pilots.test.ts` y pasan.
+- **Tests:** los diecisiete criterios (CA1 a CA17) están en `src/utils/pilots.test.ts` y pasan.
 - **Interfaz:** comprobada en el navegador a 1440 × 900, a 390 × 844 y a 360 px:
   - los pilotos hero con sus habilidades, un rasgo desplegado y la biografía;
-  - los rasgos por secciones;
-  - las tablas de programas, que en el móvil pasan a bloques;
+  - las tablas de rasgos por secciones y las de programas, que en el móvil pasan a bloques;
   - el enlace de un programa a su rasgo de graduado;
   - las cabeceras con el enlace nuevo.
 - **Decisiones durante el desarrollo:**
@@ -187,4 +186,5 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
   - En el móvil, los enlaces del mapa estelar se compactan para caber en la primera fila. A 360 px, las páginas de unidades y pilotos esconden «MW5 Mercenaries» del enlace al MechLab.
   - La primera versión decía que no había pilotos hero fijos y que los rasgos hero eran exclusivos de los pilotos de élite. Los dos errores se corrigieron al encontrar los `MWPilotPersonaAsset` con `PilotPersona.Use.Hero` y comprobar que los rasgos hero también llevan las etiquetas de contratación y academia.
   - La pestaña de pilotos hero va la primera porque es la página de los pilotos. En el móvil, «Training programs» se acorta a «Programs» para que las tres pestañas quepan en una fila.
+  - Los rasgos pasaron de fichas a tablas, como los programas: con 184 fichas la lista era larga y costaba comparar. Las marcas Hired y Academies, que llevan casi todos, se cambiaron por una columna con las dos encendidas o apagadas, y la descripción del juego, que casi siempre repite los efectos, pasó al tooltip del nombre.
   - Los efectos de los rasgos de un piloto hero se despliegan en su ficha. Los rasgos de un programa enlazan a la pestaña de rasgos con la búsqueda hecha.
