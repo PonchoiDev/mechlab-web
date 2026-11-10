@@ -535,6 +535,16 @@ def extraer_rivales(pak):
             "habilidad": nivel.split("::")[-1] if nivel else None,
             "LogoLarge": faccion_propiedades.get("LogoLarge"),
         })
+    def compania_de_tramo(asset, tramo):
+        # Un tramo sin compañía es una zona vacía. Si apunta a una compañía que no se ha extraído
+        # (un parche que añade una sin RivalMercDataId), se para: si no, la zona saldría vacía sin aviso.
+        if not tramo["RivalMerc"]:
+            return None
+        nombre = asset.ruta_import(tramo["RivalMerc"])[1]
+        if nombre not in faccion_de_compania:
+            raise ValueError(f"La zona {asset.principal()} apunta a la compañía {nombre}, que no se ha extraído")
+        return faccion_de_compania[nombre]
+
     zonas = []
     for ruta in sorted(pak.buscar(INFLUENCIAS_RIVALES)):
         if not ruta.endswith(".uasset"):
@@ -550,7 +560,7 @@ def extraer_rivales(pak):
             "rotacion": [rotacion["OwnershipDays"], rotacion["UnoccupiedDays"]] if rotacion else None,
             "historial": [{
                 "fecha": fecha_de_ticks(tramo["Date"]) if tramo["Date"] else None,
-                "compania": faccion_de_compania.get(asset.ruta_import(tramo["RivalMerc"])[1]) if tramo["RivalMerc"] else None,
+                "compania": compania_de_tramo(asset, tramo),
                 # En campaña este tramo no ocurre: solo cuenta en carrera.
                 "solo_carrera": bool(tramo.get("HideInCampaign")),
             } for tramo in propiedades["OwnerTimeline"]],
