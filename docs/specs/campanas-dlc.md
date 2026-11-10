@@ -1,7 +1,7 @@
 # Especificación: campañas de los DLC en el mapa estelar
 
 - **Issue:** [#96](https://github.com/PonchoiDev/mechlab-web/issues/96)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/campaigns.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -85,3 +85,18 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
    - la ruta numerada de una campaña y su ficha con las recompensas;
    - las campañas en la ficha de un sistema;
    - una campaña abierta desde la URL.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 6 campañas con 78 misiones en total. `extraer_mapa.py` saca el resto de archivos idénticos; solo añade `campanas.json` y `nombres_campanas.json`. La lectura de los objetivos pasa a `leer_objetivo`, compartida con las HRQ.
+- **Tests:** los nueve criterios (CA1 a CA9) están en `src/utils/campaigns.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1920 × 1080, 1440 × 900, 1280 × 800, 390 × 844 y 360 × 740:
+  - las banderas;
+  - el panel Campaigns con la búsqueda («morgan» da Shadow of Kerensky);
+  - la ruta numerada de Shadow of Kerensky y de Ashes & Ascension, con su ficha;
+  - las campañas en la ficha de Rodigo;
+  - una campaña abierta desde la URL.
+- **Decisiones durante el desarrollo:**
+  - **Cajones:** con el de Campaigns son ocho, y a 1440 px ya no cabían junto al panel de fecha. En pantallas medianas los botones se ciñen a su texto y, si aun así no caben, suben a una segunda fila por encima en vez de meterse debajo del panel. En el móvil, «Special markets» y «Special 'Mech locations» se acortan a «Markets» y «'Mech locations» para seguir en tres filas.
+  - **Mismas clases que las HRQ:** la ficha usa las de la ficha de una HRQ con el color de las campañas. La regla de las misiones numeradas se limita a sus hijos directos, porque también alcanzaba las listas de recompensas de dentro.

@@ -73,6 +73,7 @@ flowchart TB
 El mapa es otra página (`starmap/index.html`, servida en `/mercs/starmap/`) con su propio bundle, así que el MechLab no descarga sus datos. Sigue la misma separación:
 
 - **`utils/starmap.ts`:** el dueño de cada sistema en una fecha, los eventos, los centros industriales, la reputación y la dificultad de cada zona, la búsqueda, la rejilla de territorios y el contorno de los clústeres. Son funciones puras con sus tests (`starmap.test.ts`).
+- **`utils/campaigns.ts`:** las campañas de los DLC: la búsqueda, las que empiezan o pasan por un sistema, su ruta (el inicio y cada misión, sin repetir un sistema seguido), si ya se ofrecen en una fecha y la campaña de la URL. El renderer dibuja su ruta con el mismo código que la de las HRQ, en su propio color.
 - **`utils/academies.ts`:** las academias de pilotos abiertas en una fecha (con su fundación y su cierre cuando un Clan toma el sistema, que es permanente), las de un sistema, la búsqueda y la descripción de cada programa.
 - **`utils/mercs.ts`:** el dueño de una zona de influencia de los mercenarios rivales en una fecha (con la rotación al azar al acabar el historial), las zonas de una compañía y la zona bajo un punto.
 - **`utils/clusters.ts`:** la zona de conflicto bajo un punto del mapa (con los mismos contornos que dibuja el renderer), la descripción del recargo de reparación y de los contratos de varias misiones, y la arena de un sistema.

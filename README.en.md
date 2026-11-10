@@ -41,7 +41,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (424 tests, V8 coverage) |
+| Tests | Vitest 5 (433 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -197,6 +197,8 @@ python3 tools/extraer_mapa.py "/path/to/MechWarrior 5 Mercenaries"
 python3 tools/generar_mapa.py
 ```
 
+`generar_mapa.py` also reads the names of the hero pilots that some campaign missions grant (`tools/datos-juego/pilotos/hero.json`, from `extraer_pilotos.py`).
+
 | File | Game asset | Contents |
 |---|---|---|
 | `sistemas.json` | `InnerSphereData/MW5_InnerSphereData` | 2174 systems with coordinates, cluster and the date of each change of owner |
@@ -211,6 +213,7 @@ python3 tools/generar_mapa.py
 | `zonas.json` | `*_ClusterAsset` of campaign, career and the DLC campaigns | Systems, name, description, capital, recommended reputation, difficulty, repair markup and multi-mission contracts of each zone |
 | `rivales.json` | `RivalMercs/StarMapRadialInfluences` and `RivalMercs/Companies` (DLC4) | The 18 rival mercenary companies and their 76 influence zones with their owner over time |
 | `arenas.json` | `ArenaStarSystemTable` and `ArenaFameProgressionTable` (DLC6) | Systems with an arena and fame ranks with their rewards |
+| `campanas.json` and `nombres_campanas.json` | Arc scripts of each part of the DLC campaigns (`DLCn/CampaignData`), their `Place` actions and scenarios, and each DLC header | The parts of each campaign with their system and date, and their missions in order with system, texts and pay; the name of each campaign |
 | `academias.json` and `programas.json` | `PilotTraining/AcademyDataAssets` and `TrainingAssets` (DLC7) | The 93 pilot academies with their system, founding date and programs, and the figures and own traits of each program |
 | `alianzas.json` | `Allegiance` of the `Factions/*` assets | The faction each one answers to, for the rarity table of minor factions |
 | `recompensas_campana.json` | Objectives with `bHasRewards` and `MechLoadouts` outside the HRQ, and the action that places them | 'Mechs from the DLC campaigns, the Bounty Hunter or promotions, with their system |
@@ -252,7 +255,7 @@ python3 tools/generar_pilotos.py
 
 ## Quality and checks against the game
 
-- **424 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **433 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
