@@ -44,3 +44,9 @@ export const groupAcademies = (academies: Academy[]): { name: string; academies:
   for (const academy of academies) groups.set(academy.name, [...(groups.get(academy.name) ?? []), academy]);
   return [...groups].map(([name, list]) => ({ name, academies: list }));
 };
+
+// ?academy=<id> en la URL, como ?quest=: solo si la academia existe.
+export const parseAcademyQuery = (search: string, data: StarmapData): string | null => {
+  const id = new URLSearchParams(search).get('academy');
+  return id && data.academies.some(academy => academy.id === id) ? id : null;
+};

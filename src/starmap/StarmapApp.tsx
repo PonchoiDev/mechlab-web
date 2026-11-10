@@ -25,6 +25,8 @@ import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
 import { MarketDrawer, SystemMarkets } from './MarketPanels';
+import { AcademyCard, AcademyDrawer, SystemAcademies } from './AcademyPanels';
+import { parseAcademyQuery } from '../utils/academies';
 import { SystemArena, ZoneCard, ZoneLevels } from './ZonePanels';
 import { MercCard, MercDrawer } from './MercPanels';
 import { getCompanyZonesAt, getMercOwnerAt, getMercZonesAt } from '../utils/mercs';
@@ -58,9 +60,10 @@ interface SystemPanelProps {
   pinned: boolean;
   onClose: () => void;
   onQuest: (quest: Quest) => void;
+  onAcademy: (academyId: string) => void;
 }
 
-function SystemPanel({ system, date, pinned, onClose, onQuest }: SystemPanelProps) {
+function SystemPanel({ system, date, pinned, onClose, onQuest, onAcademy }: SystemPanelProps) {
   const owner = getOwnerAt(system, date);
   const currentIndex = system.owners.findLastIndex(([changedOn]) => changedOn <= date);
   const cluster = system.cluster ? data.clusters[system.cluster]?.name : null;
@@ -101,6 +104,7 @@ function SystemPanel({ system, date, pinned, onClose, onQuest }: SystemPanelProp
       <SystemQuests data={data} systemId={system.id} onPick={onQuest} />
       <SystemMarkets data={data} systemId={system.id} date={date} />
       <SystemArena data={data} systemId={system.id} />
+      <SystemAcademies data={data} systemId={system.id} date={date} onPick={onAcademy} />
       {system.owners.length > 0 && (
         <ol className="starmap-history" aria-label="Owners over time">
           {system.owners.map(([changedOn, faction], index) => (
@@ -257,6 +261,9 @@ export function StarmapApp() {
   const [zoneId, setZoneId] = useState<string | null>(null);
   // Mercenarios rivales: sus zonas se dibujan siempre; con una compañía elegida, solo las suyas.
   const [companyId, setCompanyId] = useState<string | null>(null);
+  // Academia de pilotos elegida en su panel, en la ficha de un sistema o con ?academy= en la URL.
+  const [academyId, setAcademyId] = useState<string | null>(() => parseAcademyQuery(window.location.search, data));
+  const academy = data.academies.find(candidate => candidate.id === academyId) ?? null;
   const mercZones = useMemo<MercZoneLayer>(() => {
     return getMercZonesAt(data, date)
       .filter(({ owner }) => !companyId || owner.company === companyId)
@@ -292,7 +299,7 @@ export function StarmapApp() {
     });
   }, []);
   const [focus, setFocus] = useState<FocusRequest | null>(() => {
-    const target = initial.systemId ?? quest?.offer ?? null;
+    const target = initial.systemId ?? quest?.offer ?? academy?.system ?? null;
     return target === null ? null : { systemIds: [target], sequence: 0 };
   });
   const focusOn = useCallback(
@@ -354,10 +361,10 @@ export function StarmapApp() {
   // control deslizante se pare para no llenar el historial.
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      window.history.replaceState(null, '', toMapQuery({ date, systemId: selectedId, questId, mechId }, data));
+      window.history.replaceState(null, '', toMapQuery({ date, systemId: selectedId, questId, mechId, academyId }, data));
     }, URL_DELAY);
     return () => window.clearTimeout(timer);
-  }, [date, selectedId, questId, mechId]);
+  }, [date, selectedId, questId, mechId, academyId]);
 
   const shown = data.systems.find(system => system.id === (hoveredId ?? selectedId)) ?? null;
   // La ficha del sistema elegido sigue fijada (con su botón de cerrar) aunque el ratón pase por encima.
@@ -370,6 +377,7 @@ export function StarmapApp() {
     setSelectedId(system.id);
     setZoneId(null);
     setCompanyId(null);
+    setAcademyId(null);
     focusOn(system.id);
   };
 
@@ -379,6 +387,7 @@ export function StarmapApp() {
     setQuestId(picked.id);
     setZoneId(null);
     setCompanyId(null);
+    setAcademyId(null);
     setMechId(null);
     setSelectedId(null);
     setHoveredId(null);
@@ -394,6 +403,7 @@ export function StarmapApp() {
   // Al elegir una compañía se cierran las demás fichas y el mapa encuadra sus zonas.
   const pickCompany = (id: string) => {
     setCompanyId(id);
+    setAcademyId(null);
     setZoneId(null);
     setSelectedId(null);
     setQuestId(null);
@@ -415,10 +425,25 @@ export function StarmapApp() {
   const pickZone = (id: string) => {
     setZoneId(id);
     setCompanyId(null);
+    setAcademyId(null);
     setSelectedId(null);
     setQuestId(null);
     setMechId(null);
     pendingMechRef.current = null;
+  };
+
+  // Al elegir una academia se cierran las demás fichas y el mapa encuadra su sistema.
+  const pickAcademy = (id: string) => {
+    const picked = data.academies.find(candidate => candidate.id === id);
+    setAcademyId(id);
+    setZoneId(null);
+    setCompanyId(null);
+    setQuestId(null);
+    setMechId(null);
+    setSelectedId(null);
+    setHoveredId(null);
+    pendingMechRef.current = null;
+    if (picked) focusOn(picked.system);
   };
 
   // Al elegir una variante se cierran la ficha del sistema y la de la HRQ para que se vea la suya.
@@ -427,6 +452,7 @@ export function StarmapApp() {
     setMechId(id);
     setZoneId(null);
     setCompanyId(null);
+    setAcademyId(null);
     setQuestId(null);
     setSelectedId(null);
     setHoveredId(null);
@@ -449,6 +475,7 @@ export function StarmapApp() {
           setSelectedId(systemId);
           setZoneId(null);
           setCompanyId(null);
+          setAcademyId(null);
         }}
         onZone={pickZone}
         mercZones={mercZones}
@@ -474,7 +501,7 @@ export function StarmapApp() {
       </header>
 
       {shown
-        ? <SystemPanel system={shown} date={date} pinned={isPinned} onClose={() => setSelectedId(null)} onQuest={pickQuest} />
+        ? <SystemPanel system={shown} date={date} pinned={isPinned} onClose={() => setSelectedId(null)} onQuest={pickQuest} onAcademy={pickAcademy} />
         : quest && (
           <QuestCard
             data={data}
@@ -511,6 +538,18 @@ export function StarmapApp() {
           onClose={() => setZoneId(null)}
         />
       )}
+      {!shown && !quest && !mech && !companyId && !zoneId && academy && (
+        <AcademyCard
+          data={data}
+          academy={academy}
+          date={date}
+          onSystem={systemId => {
+            setSelectedId(systemId);
+            focusOn(systemId);
+          }}
+          onClose={() => setAcademyId(null)}
+        />
+      )}
       {!shown && !quest && mech && availability && (
         <MechCard
           data={data}
@@ -540,6 +579,7 @@ export function StarmapApp() {
             setSelectedId(systemId);
             setZoneId(null);
             setCompanyId(null);
+            setAcademyId(null);
             setHoveredId(null);
             focusOn(systemId);
           }}
@@ -556,6 +596,7 @@ export function StarmapApp() {
         />
         <HeroDrawer data={data} availability={availability} failed={availabilityFailed} selectedId={mechId} onOpen={() => loadAvailability()} onPick={pickMech} />
         <MercDrawer data={data} date={date} selectedId={companyId} onPick={pickCompany} />
+        <AcademyDrawer data={data} date={date} selectedId={academyId} onPick={pickAcademy} />
       </div>
       {isFeedbackOpen && (
         <FeedbackDialog

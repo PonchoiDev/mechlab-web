@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import starmapData from '../data/starmap.json';
 import type { StarmapData } from '../types/starmap';
-import { describeProgram, getAcademiesAt, getAcademyClosing, getSystemAcademies, isAcademyOpen, searchAcademies } from './academies';
+import { describeProgram, getAcademiesAt, getAcademyClosing, getSystemAcademies, groupAcademies, isAcademyOpen, parseAcademyQuery, searchAcademies } from './academies';
+import { toMapQuery } from './starmap';
 
 // Criterios de aceptación de docs/specs/academias.md (issue #79).
 const data = starmapData as unknown as StarmapData;
@@ -80,5 +81,20 @@ describe('academias de pilotos', () => {
     const tukayyid = searchAcademies(data, 'tukayyid', '3060-06-01');
     expect(tukayyid.length).toBeGreaterThan(0);
     expect(tukayyid.every(candidate => candidate.system === systemId('Tukayyid'))).toBe(true);
+  });
+});
+
+describe('academias en la lista y en la URL', () => {
+  it('agrupa las franquicias con el mismo nombre', () => {
+    const groups = groupAcademies(getAcademiesAt(data, '3025-01-01'));
+    expect(groups.find(group => group.name === 'Virtual World Center')?.academies).toHaveLength(24);
+    expect(groups.find(group => group.name === 'The Nagelring')?.academies).toHaveLength(1);
+  });
+
+  it('guarda la academia elegida en la URL y la lee, si existe', () => {
+    const query = toMapQuery({ date: '3025-01-01', systemId: null, academyId: 'Tharkad_TheNargelring' }, data);
+    expect(query).toBe('?date=3025-01-01&academy=Tharkad_TheNargelring');
+    expect(parseAcademyQuery(query, data)).toBe('Tharkad_TheNargelring');
+    expect(parseAcademyQuery('?academy=NoExiste', data)).toBeNull();
   });
 });

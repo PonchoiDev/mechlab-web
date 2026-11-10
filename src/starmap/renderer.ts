@@ -2,6 +2,7 @@ import type { GameDate, MercZone, StarSystem, StarmapData } from '../types/starm
 import { getQuestAvailability } from '../utils/quests';
 import { findClusterAt, getClusterOutlines } from '../utils/clusters';
 import { findMercZoneAt } from '../utils/mercs';
+import { getAcademiesAt } from '../utils/academies';
 import { buildTerritoryIndex, getHubs, getOwnerAt, getTerritoryContours, type TerritoryIndex } from '../utils/starmap';
 
 export interface View {
@@ -25,6 +26,8 @@ const MARKET_COLOR = '#7fdc8a';
 const BLACK_MARKET_COLOR = '#b98cff';
 const UNIQUE_COLOR = '#ffd400';
 const ARENA_COLOR = '#ff6b5e';
+// El azul del icono de academia del juego (StarMapIconColor 0, 0.5, 1).
+const ACADEMY_COLOR = '#2f8cff';
 const MERC_COLOR = '#e8e2d0';
 const MERC_LOGO = 26;
 // Grosores en píxeles de pantalla: el borde se ve igual de marcado con cualquier zoom.
@@ -106,6 +109,8 @@ export class StarmapRenderer {
   private readonly hubCapitals: Set<number>;
   private readonly questOffers: Map<number, StarmapData['quests']>;
   private readonly markets: Map<number, boolean>;
+  // Sistemas con una academia abierta en la fecha del mapa.
+  private academies = new Set<number>();
   private date: GameDate = '';
   private territories: Territory[] = [];
   private transition: Transition | null = null;
@@ -178,6 +183,7 @@ export class StarmapRenderer {
 
   setDate(date: GameDate, animate = false) {
     this.date = date;
+    this.academies = new Set(getAcademiesAt(this.data, date).map(academy => academy.system));
     const previousOwners = this.owners;
     const previous = this.territories;
     // La capa de los territorios de antes ya está pintada: la animación la reutiliza.
@@ -546,6 +552,7 @@ export class StarmapRenderer {
       if (offers) this.drawQuestIcon(...this.toScreen(system.x, system.y), offers.some(quest => getQuestAvailability(quest, this.date).state === 'available'));
       if (this.markets.has(system.id)) this.drawMarketIcon(...this.toScreen(system.x, system.y), this.markets.get(system.id)!);
       if (this.arenas.has(system.id)) this.drawArenaIcon(...this.toScreen(system.x, system.y));
+      if (this.academies.has(system.id)) this.drawAcademyIcon(...this.toScreen(system.x, system.y));
     }
     for (const unique of this.data.uniqueMechs) {
       if (unique.from > this.date) continue;
@@ -646,6 +653,33 @@ export class StarmapRenderer {
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     context.fillText('A', 0, 0.5);
+    context.restore();
+  }
+
+  private drawAcademyIcon(x: number, y: number) {
+    // Birrete azul debajo de la estrella: aquí hay una academia de pilotos (DLC7). El rombo del
+    // centro industrial va encima de la estrella, así que no se tapan.
+    const context = this.context;
+    context.save();
+    context.translate(x, y + 14);
+    context.fillStyle = ACADEMY_COLOR;
+    context.strokeStyle = '#030a18';
+    context.lineWidth = 1.1;
+    context.beginPath();
+    context.moveTo(0, -5);
+    context.lineTo(7, -2);
+    context.lineTo(0, 1);
+    context.lineTo(-7, -2);
+    context.closePath();
+    context.fill();
+    context.stroke();
+    context.beginPath();
+    context.moveTo(-4, 0);
+    context.lineTo(-4, 3);
+    context.quadraticCurveTo(0, 5.5, 4, 3);
+    context.lineTo(4, 0);
+    context.fill();
+    context.stroke();
     context.restore();
   }
 

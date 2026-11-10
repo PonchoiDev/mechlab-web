@@ -268,6 +268,127 @@ button, input, select { font: inherit; color: inherit; }
 }
 
 /* En el móvil, ancho de la pantalla con margen, debajo de la cabecera. */
+/* Academias de pilotos (DLC7): el azul del icono del juego. */
+.starmap-academies-drawer .starmap-market-note {
+  margin: 0 12px 6px;
+  color: var(--map-muted);
+  font-size: 13px;
+}
+
+.starmap-quests li.starmap-academy-group {
+  display: grid;
+  gap: 2px;
+  padding: 6px 12px;
+}
+
+.starmap-academy-group > span { font-size: 16px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.starmap-academy-group > span small { margin-left: 6px; color: var(--map-muted); font-size: 13px; }
+.starmap-academy-group > div { display: flex; flex-wrap: wrap; gap: 2px 10px; font-size: 15px; }
+.starmap-academy-group .starmap-system-link[aria-pressed='true'] { color: #2f8cff; }
+
+.starmap-academy-mark {
+  position: relative;
+  flex-shrink: 0;
+  width: 62px;
+  height: 62px;
+  border: 3px solid #2f8cff;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 0 16px rgba(47, 140, 255, 0.45);
+}
+
+/* Birrete, como el icono del mapa. */
+.starmap-academy-mark::before,
+.starmap-academy-mark::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  background: #2f8cff;
+  transform: translateX(-50%);
+}
+
+.starmap-academy-mark::before {
+  top: 17px;
+  width: 30px;
+  height: 14px;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.starmap-academy-mark::after {
+  top: 28px;
+  width: 18px;
+  height: 10px;
+  border-radius: 0 0 9px 9px;
+}
+
+.starmap-academy-facts {
+  display: grid;
+  gap: 2px;
+  margin: 10px 14px 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.starmap-academy-facts li.is-warning { color: #ff796c; }
+.starmap-academy-facts:empty { display: none; }
+
+.starmap-academy-heading {
+  margin: 0 14px 6px;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.starmap-academy-programs {
+  display: grid;
+  gap: 8px;
+  margin: 0 14px 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.starmap-academy-program {
+  padding: 8px 10px;
+  border-left: 3px solid #2f8cff;
+  background: rgba(47, 140, 255, 0.07);
+}
+
+.starmap-academy-program h4 { margin: 0; font-size: 18px; letter-spacing: 0.03em; text-transform: uppercase; }
+
+.starmap-academy-program > p {
+  margin: 2px 0 6px;
+  color: var(--map-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.starmap-academy-program dl {
+  display: grid;
+  gap: 1px;
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.starmap-academy-program dl div { display: flex; gap: 8px; }
+.starmap-academy-program dt { min-width: 82px; color: var(--map-muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.starmap-academy-program dd { margin: 0; }
+.starmap-academy-program dd small { color: var(--map-muted); font-size: 14px; }
+
+.starmap-academy-ratings { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+
+.starmap-academy-stars { display: inline-flex; align-items: baseline; gap: 5px; }
+.starmap-academy-stars small { color: var(--map-muted); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.starmap-academy-stars b { color: #ffd400; font-size: 14px; letter-spacing: 1px; }
+.starmap-academy-stars i { color: rgba(255, 255, 255, 0.18); font-style: normal; }
+
+.starmap-market.starmap-academy-entry { border-left-color: #2f8cff; }
+.starmap-academy-entry ul { margin: 0; padding: 0; list-style: none; font-size: 17px; }
+
 @media (max-width: 600px) {
   .starmap .whats-new-panel {
     position: fixed;
