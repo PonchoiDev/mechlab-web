@@ -73,6 +73,20 @@ function ZoneHint({ data, clusterId }: { data: StarmapData; clusterId: string })
   );
 }
 
+// En el móvil, la ficha abierta tapa la parte de arriba del mapa y los cajones y la fecha la de abajo:
+// se encuadra en la franja que queda entre ellos, medida en el momento (la ficha cambia de alto).
+const getVisibleBand = (container: HTMLElement): { top: number; bottom: number } => {
+  const box = container.getBoundingClientRect();
+  const panel = document.querySelector('.starmap-panel')?.getBoundingClientRect();
+  const below = [...document.querySelectorAll('.starmap-drawers, .starmap-date')]
+    .map(element => element.getBoundingClientRect())
+    .filter(rect => rect.height > 0);
+  const top = panel ? Math.max(0, panel.bottom - box.top) : 0;
+  const bottom = below.length > 0 ? Math.min(...below.map(rect => rect.top - box.top)) : box.height;
+  // Si casi no queda hueco, se usa la pantalla entera: mejor tapado que fuera de la vista.
+  return bottom - top > 80 ? { top, bottom } : { top: 0, bottom: box.height };
+};
+
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
 export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
@@ -214,19 +228,25 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     const renderer = rendererRef.current;
     const container = containerRef.current;
     if (systems.length === 0 || !renderer || !container) return;
+    const { width, height } = container.getBoundingClientRect();
+    const isMobile = width <= MOBILE_WIDTH;
+    // En el móvil, el centro de la franja visible queda por debajo o por encima del de la pantalla. La Y
+    // del mapa crece hacia arriba y la de la pantalla hacia abajo: el desplazamiento se suma.
+    const band = isMobile ? getVisibleBand(container) : { top: 0, bottom: height };
+    const bandOffset = (band.top + band.bottom) / 2 - height / 2;
     if (systems.length === 1) {
-      animateTo({ x: systems[0].x, y: systems[0].y, scale: Math.max(renderer.view.scale, FOCUS_SCALE) });
+      const scale = Math.max(renderer.view.scale, FOCUS_SCALE);
+      animateTo({ x: systems[0].x, y: systems[0].y + bandOffset / scale, scale });
       return;
     }
     // En escritorio la ficha tapa la izquierda: se encuadra en el resto y se desplaza el centro.
-    const { width, height } = container.getBoundingClientRect();
-    const inset = width > MOBILE_WIDTH ? PANEL_INSET : 0;
+    const inset = isMobile ? 0 : PANEL_INSET;
     const xs = systems.map(system => system.x);
     const ys = systems.map(system => system.y);
     const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-    const fit = Math.min((width - inset) / (maxX - minX + FIT_PADDING), height / (maxY - minY + FIT_PADDING));
+    const fit = Math.min((width - inset) / (maxX - minX + FIT_PADDING), (band.bottom - band.top) / (maxY - minY + FIT_PADDING));
     const scale = Math.min(FOCUS_SCALE, Math.max(fitScaleRef.current, fit));
-    animateTo({ x: (minX + maxX) / 2 - inset / 2 / scale, y: (minY + maxY) / 2, scale });
+    animateTo({ x: (minX + maxX) / 2 - inset / 2 / scale, y: (minY + maxY) / 2 + bandOffset / scale, scale });
   }, [focus, data]);
 
   // Arrastre con un dedo o el ratón, y zoom con dos dedos o la rueda.
