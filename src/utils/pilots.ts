@@ -124,5 +124,8 @@ export const toPilotsQuery = ({ tab, category, heroOnly, query }: PilotsView): s
   return text ? `?${text}` : '';
 };
 
+// Retrato de un piloto hero, en public/pilots/portraits/ (de tools/extraer_pilotos.py).
+export const getPortraitUrl = (file: string) => `${import.meta.env.BASE_URL}pilots/portraits/${encodeURIComponent(file)}`;
+
 // Ficha de la academia en el mapa estelar.
 export const getAcademyMapUrl = (academyId: string) => `/mercs/starmap/?academy=${encodeURIComponent(academyId)}`;

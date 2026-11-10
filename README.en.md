@@ -41,7 +41,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (421 tests, V8 coverage) |
+| Tests | Vitest 5 (424 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -246,12 +246,13 @@ python3 tools/generar_pilotos.py
 | File | Game asset | Contents |
 |---|---|---|
 | `rasgos.json` | `DLC7/TOIs/PilotTraining/PilotTraits/**` | The 184 traits with their name, descriptions, tags (hero, hireable, academies, DLC) and the figures of each component |
-| `hero.json` | `MWPilotPersonaAsset` with `PilotPersona.Use.Hero`, its `MWPersonaAsset` and the `PilotRewards` that grant them | The hero pilots with their name, biography, skills, salary, fixed traits and the missions that grant them |
+| `hero.json` | `MWPilotPersonaAsset` with `PilotPersona.Use.Hero`, its `MWPersonaAsset` and the `PilotRewards` that grant them | The hero pilots with their name, biography, skills, salary, fixed traits, portrait and the missions that grant them |
+| `public/pilots/portraits/` | Texture of the `MWPortraitAsset` of each hero pilot | Portraits as 160 px PNG, decoded from DXT5 |
 | `niveles.json` | `Campaign/Pilots/_common/PilotSkillLevelCurve` | The XP each skill level needs |
 
 ## Quality and checks against the game
 
-- **421 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **424 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

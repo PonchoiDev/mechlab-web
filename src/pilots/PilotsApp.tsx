@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import pilotsJson from '../data/pilots.json';
 import type { HeroPilot, PilotTrait, PilotsData, TrainingProgramEntry, TraitEffect, TraitEffectGroup } from '../types/pilots';
 import {
-  TRAIT_CATEGORIES, filterTraits, formatProgramLength, getAcademyMapUrl, getTraitEffectColumns, groupPrograms, groupTraits, parsePilotsQuery,
+  TRAIT_CATEGORIES, filterTraits, formatProgramLength, getAcademyMapUrl, getPortraitUrl, getTraitEffectColumns, groupPrograms, groupTraits, parsePilotsQuery,
   splitHeroPilots, toPilotsQuery, type PilotsView
 } from '../utils/pilots';
 import { FeedbackDialog } from '../components/FeedbackDialog';
@@ -124,15 +124,19 @@ function HeroCard({ pilot }: { pilot: HeroPilot }) {
   const kind = [pilot.dlc !== null ? `DLC ${pilot.dlc}` : 'Base game', pilot.rank].filter(Boolean).join(' · ');
   return (
     <article className="unit-card pilot-hero">
-      <header className="unit-card-header">
-        <p className="unit-card-kind"><span>{pilot.hiringHall ? 'Elite pilot' : 'Reward'}</span> <span>{kind}</span></p>
-        <h3 className="unit-card-name">{pilot.name}</h3>
-        {pilot.callsign && <p className="pilot-callsign">Callsign {pilot.callsign}</p>}
-        {!pilot.hiringHall && (
-          <p className="pilot-source">
-            {pilot.rewards.map(reward => `${reward.title}${reward.story ? ' (story campaign)' : ''}`).join('; ')}
-          </p>
-        )}
+      <header className="unit-card-header pilot-hero-header">
+        <img className="pilot-portrait" src={getPortraitUrl(pilot.portrait)} alt={`Portrait of ${pilot.name}`}
+          width={80} height={80} loading="lazy" decoding="async" />
+        <div>
+          <p className="unit-card-kind"><span>{pilot.hiringHall ? 'Elite pilot' : 'Reward'}</span> <span>{kind}</span></p>
+          <h3 className="unit-card-name">{pilot.name}</h3>
+          {pilot.callsign && <p className="pilot-callsign">Callsign {pilot.callsign}</p>}
+          {!pilot.hiringHall && (
+            <p className="pilot-source">
+              {pilot.rewards.map(reward => `${reward.title}${reward.story ? ' (story campaign)' : ''}`).join('; ')}
+            </p>
+          )}
+        </div>
       </header>
       <dl className="unit-card-stats pilot-hero-stats">
         {pilot.hiringHall && pilot.hiringCost !== null && <div><dt>Hiring cost</dt><dd>{numberFormat.format(pilot.hiringCost)}</dd></div>}

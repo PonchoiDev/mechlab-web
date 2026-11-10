@@ -697,16 +697,17 @@ def extraer_textos(pak):
 
 def reducir(ancho, alto, pixeles, lado):
     """Reduce una imagen RGBA cuadrada promediando bloques; el color se pondera con el alfa para
-    que los bordes transparentes no oscurezcan el logo."""
-    paso = ancho // lado
+    que los bordes transparentes no oscurezcan la imagen. Si el tamaño no es múltiplo del de salida
+    (el retrato de Goblin mide 341 px), cada píxel de destino promedia los de origen que le tocan."""
+    tramos = [(i * ancho // lado, max((i + 1) * ancho // lado, i * ancho // lado + 1)) for i in range(lado)]
     salida = bytearray(lado * lado * 4)
-    for y in range(lado):
-        for x in range(lado):
+    for y, (y0, y1) in enumerate(tramos):
+        for x, (x0, x1) in enumerate(tramos):
             r = g = b = a = 0
-            for dy in range(paso):
-                fila = ((y * paso + dy) * ancho + x * paso) * 4
-                for dx in range(paso):
-                    i = fila + dx * 4
+            for fila_origen in range(y0, y1):
+                fila = fila_origen * ancho * 4
+                for columna in range(x0, x1):
+                    i = fila + columna * 4
                     alfa = pixeles[i + 3]
                     r += pixeles[i] * alfa
                     g += pixeles[i + 1] * alfa
@@ -715,7 +716,7 @@ def reducir(ancho, alto, pixeles, lado):
             destino = (y * lado + x) * 4
             if a:
                 salida[destino:destino + 3] = bytes((r // a, g // a, b // a))
-            salida[destino + 3] = a // (paso * paso)
+            salida[destino + 3] = a // ((y1 - y0) * (x1 - x0))
     return salida
 
 
