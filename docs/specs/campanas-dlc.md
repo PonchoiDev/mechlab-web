@@ -34,6 +34,7 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
 - **Pago:** el del escenario, que es el pago base del contrato.
 - **'Mechs:** los de `rewards` de una misión del mismo DLC con el mismo título. Los de completar la campaña (`campaignComplete`) van aparte. `rewards` no cambia: la ficha de cada 'Mech sigue diciendo dónde se consigue.
 - **Pilotos:** su nombre sale de `tools/datos-juego/pilotos/hero.json`, de `extraer_pilotos.py`.
+- **Pilotos de las HRQ:** la campaña del DLC8 son cadenas de HRQ, y la de Adam Steiner da a Valten Ryder al completarla (`PilotRewards` del objetivo A New March). La recompensa de cada HRQ lleva también sus pilotos hero, para que se vean como los de las campañas.
 
 ## Requisitos funcionales
 
@@ -48,6 +49,7 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
   Al final, lo que da completar la campaña.
 - **RF5.** La ficha de cada sistema indica las campañas que empiezan o pasan por él, y permite abrirlas.
 - **RF6.** La campaña elegida se guarda en la URL (`?campaign=dlc7`).
+- **RF7.** La ficha de una HRQ enseña los pilotos hero que da, enlazados a la página de pilotos.
 
 ## Requisitos no funcionales
 
@@ -68,6 +70,7 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
 | CA7 | Un sistema | se consultan sus campañas | en Galatea empieza Solaris Showdown; por Rodigo pasa Shadow of Kerensky |
 | CA8 | Shadow of Kerensky | se consulta su disponibilidad | el 1 de enero de 3049 aún no se ofrece (hasta el 15 de septiembre de 3049); en 3050 sí |
 | CA9 | La URL | se abre con `?campaign=dlc7` o se construye | elige Shadow of Kerensky; con un id que no existe, ninguna; y la vista con una campaña elegida lleva `campaign=dlc7` |
+| CA10 | La HRQ de Adam Steiner (DLC8) | se consulta su recompensa | da a Valten Ryder |
 
 ## Fuera de alcance
 
@@ -77,7 +80,7 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
 
 ## Plan de pruebas
 
-1. **Datos y lógica (CA1 a CA9):** `src/utils/campaigns.test.ts`, con `starmap.json` real.
+1. **Datos y lógica (CA1 a CA10):** `src/utils/campaigns.test.ts`, con `starmap.json` real.
 2. **Datos que ya existían:** `extraer_mapa.py` saca el resto de archivos idénticos.
 3. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844:
    - las banderas;
@@ -90,7 +93,7 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
 - **Datos:** 6 campañas con 78 misiones en total. `extraer_mapa.py` saca el resto de archivos idénticos; solo añade `campanas.json` y `nombres_campanas.json`. La lectura de los objetivos pasa a `leer_objetivo`, compartida con las HRQ.
-- **Tests:** los nueve criterios (CA1 a CA9) están en `src/utils/campaigns.test.ts` y pasan.
+- **Tests:** los diez criterios (CA1 a CA10) están en `src/utils/campaigns.test.ts` y pasan.
 - **Interfaz:** comprobada en el navegador a 1920 × 1080, 1440 × 900, 1280 × 800, 390 × 844 y 360 × 740:
   - las banderas;
   - el panel Campaigns con la búsqueda («morgan» da Shadow of Kerensky);
