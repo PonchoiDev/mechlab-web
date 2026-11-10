@@ -63,6 +63,8 @@ export interface HeroPilot {
   // Ids de PilotTrait.
   traits: string[];
   bio: string[];
+  // Archivo de public/pilots/portraits/; varios pilotos pueden compartir un retrato genérico.
+  portrait: string;
 }
 
 export type ProgramFamilyId = 'simpod' | 'vocational' | 'semester' | 'fullYear' | 'undergraduate' | 'graduate' | 'academy';

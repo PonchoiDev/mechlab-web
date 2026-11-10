@@ -2,8 +2,8 @@ import json
 import os
 import sys
 
-from extraer_mapa import CONTENIDO, PAK_DEL_JUEGO, fecha_de_ticks, sin_extension, tiene_uexp
-from ue4 import Asset, Pak
+from extraer_mapa import CONTENIDO, PAK_DEL_JUEGO, escribir_png, fecha_de_ticks, reducir, ruta_de_juego, sin_extension, tiene_uexp
+from ue4 import Asset, Pak, leer_textura
 
 # Extrae del .pak de la instalación los rasgos de piloto del DLC7 (afinidades de chasis, expertos en
 # armas, facciones, rasgos hero…) con sus textos y las cifras de cada componente, y los guarda en
@@ -13,6 +13,10 @@ from ue4 import Asset, Pak
 #   python3 tools/extraer_pilotos.py "/ruta/a/MechWarrior 5 Mercenaries"
 DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_DESTINO = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "pilotos")
+# Retratos de los pilotos hero, al doble de lo que ocupan en su ficha (80 px) para las pantallas de
+# alta densidad.
+RUTA_RETRATOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "pilots", "portraits")
+TAMANO_RETRATO = 160
 RASGOS = CONTENIDO + "DLC7/TOIs/PilotTraining/PilotTraits/"
 # Experiencia que hace falta para cada nivel de habilidad (del 1 al 10).
 CURVA_NIVELES = CONTENIDO + "Campaign/Pilots/_common/PilotSkillLevelCurve"
@@ -154,11 +158,19 @@ def leer_pilotos_hero(pak, textos):
         for ruta_persona in uassets.get(id_persona, []):
             candidata = Asset.desde_pak(pak, sin_extension(ruta_persona))
             persona = candidata.propiedades(candidata.principal()).get("PersonaData") or persona
+        # El retrato (MWPortraitAsset) puede llamarse igual que el persona (Ash y Ash): vale el que
+        # tiene la propiedad Portrait, que apunta a la textura.
+        id_retrato = (persona.get("PortraitAssetId") or {}).get("Id", {}).get("PrimaryAssetName")
+        textura = None
+        for ruta_retrato in uassets.get(id_retrato, []):
+            candidata = Asset.desde_pak(pak, sin_extension(ruta_retrato))
+            textura = candidata.propiedades(candidata.principal()).get("Portrait") or textura
         pilotos.append({
             "id": asset.principal(),
             "ruta": ruta[len(CONTENIDO):],
             "nombre": textos(persona.get("FullName")) or propiedades.get("Callsign"),
             "indicativo": textos(persona.get("Callsign")) or propiedades.get("Callsign"),
+            "textura_retrato": textura,
             "biografia": [texto for texto in (persona.get("Bio"), persona.get("Bio1"), persona.get("Bio2")) if texto],
             "atributos": propiedades.get("Attributes", []),
             "habilidades": {nombre: {"tope": valor.get("SkillCap", 0), "experiencia": valor.get("TotalExp", 0)}
@@ -191,6 +203,24 @@ def leer_pilotos_hero(pak, textos):
     return pilotos
 
 
+def escribir_retratos(pak, pilotos):
+    """Los retratos en PNG. Varios pilotos comparten retrato genérico (Goblin y los del DLC5), así
+    que cada textura se escribe una vez con su nombre y cada piloto guarda el del suyo."""
+    os.makedirs(RUTA_RETRATOS, exist_ok=True)
+    escritos = set()
+    for piloto in pilotos:
+        textura = piloto.pop("textura_retrato")
+        if not textura:
+            raise ValueError(f"{piloto['id']} no tiene retrato: ¿ha cambiado el juego?")
+        nombre = textura.rsplit(".", 1)[-1] + ".png"
+        piloto["retrato"] = nombre
+        if nombre not in escritos:
+            ancho, alto, pixeles = leer_textura(pak, ruta_de_juego(textura))
+            escribir_png(os.path.join(RUTA_RETRATOS, nombre), TAMANO_RETRATO, reducir(ancho, alto, pixeles, TAMANO_RETRATO))
+            escritos.add(nombre)
+    print(f"retratos: {len(escritos)} imágenes en {os.path.normpath(RUTA_RETRATOS)}")
+
+
 def main():
     if len(sys.argv) != 2:
         print("Uso: python3 tools/extraer_pilotos.py <carpeta del juego>")
@@ -207,6 +237,7 @@ def main():
     pilotos = leer_pilotos_hero(pak, textos)
     if not pilotos:
         raise ValueError("No hay pilotos hero: ¿ha cambiado el juego?")
+    escribir_retratos(pak, pilotos)
     curva = Asset.desde_pak(pak, CURVA_NIVELES).propiedades("PilotSkillLevelCurve")["FloatCurve"]["Keys"]
     # Cada clave es [modos…, experiencia, nivel, tangentes…]; entre claves la curva es lineal y el
     # juego redondea hacia abajo (FFloor en PilotSkillGrowth), así que basta con los umbrales.

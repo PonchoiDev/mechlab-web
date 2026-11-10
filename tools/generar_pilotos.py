@@ -424,6 +424,8 @@ def pilotos_hero(pilotos_juego, niveles, ids_rasgos):
                        for clave, nombre in HABILIDADES if clave in piloto["habilidades"]],
             "traits": rasgos,
             "bio": piloto["biografia"],
+            # Archivo de public/pilots/portraits/, de extraer_pilotos.py.
+            "portrait": piloto["retrato"],
         })
         if not lista[-1]["hiringHall"] and not recompensas:
             avisos.append(f"{piloto['id']}: reservado y sin recompensa que lo dé")
