@@ -152,6 +152,8 @@ class Asset:
 
         self.exports = {}
         self.tamanos = {}
+        # Nombres de los exports por orden: una referencia positiva n apunta al n-1 de esta lista.
+        self.orden = []
         # Clase, clase padre (en las clases de blueprint) y contenedor de cada export, como referencias:
         # negativas a imports y positivas (n) al export n-1.
         self.clases = {}
@@ -160,6 +162,7 @@ class Asset:
             clase, padre, _plantilla, contenedor = cabecera.varios("iiii")
             nombre = self.nombres[cabecera.leer("i")]
             self.clases[nombre] = (clase, padre, contenedor)
+            self.orden.append(nombre)
             cabecera.varios("iI")
             tamano, inicio = cabecera.varios("qq")
             # El .uexp continúa al .uasset: los desplazamientos cuentan desde el principio de los dos.
@@ -279,7 +282,8 @@ class LectorPropiedades:
         if tipo == "TextProperty":
             return self.texto()
         if tipo == "StructProperty":
-            return self.struct(extra["struct"])
+            # Las claves y los valores de un mapa no dicen qué struct son: van como propiedades etiquetadas.
+            return self.struct(extra["struct"]) if "struct" in extra else self.propiedades()
         if tipo in ("ArrayProperty", "SetProperty"):
             if tipo == "SetProperty":
                 lector.leer("i")
