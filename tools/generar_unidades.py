@@ -86,17 +86,22 @@ def estadisticas_de_arma(arma):
     dano = proyectil.get("CachedExplosionDamageDisplay") or proyectil.get("Damage") or rayo.get("DamageOverDuration", 0.0)
     calor = proyectil.get("HeatGenerated") or rayo.get("HeatGeneratedOverDuration", 0.0)
     quirks = arma.get("Quirks", {})
-    cooldown = round(arma.get("Cooldown", 0.0) * (1 + quirks.get("CooldownPercentage_Quirk", 0.0)), 3)
-    alcance = 1 + quirks.get("RangePercentage_Quirk", 0.0)
+
+    def quirk(*nombres):
+        # El primero que tenga el arma, en el mismo orden que calcular_tier de generar_items.py.
+        return next((quirks[nombre] for nombre in nombres if nombre in quirks), 0.0)
+
+    cooldown = round(arma.get("Cooldown", 0.0) * (1 + quirk("CooldownPercentage_Quirk", "Cooldown_Quirk")), 3)
+    alcance = 1 + quirk("RangePercentage_Quirk", "RangeAndSpeedPercentage_Quirk")
     estadisticas = {
-        "damage": round(dano * (1 + quirks.get("DamagePercentage_Quirk", 0.0)), 2),
+        "damage": round(dano * (1 + quirk("DamagePercentage_Quirk", "Damage_Quirk")), 2),
         "heatPerShot": round(calor * (1 + quirks.get("HeatGeneratedPercentage_Quirk", 0.0)), 3),
         "cooldown": cooldown,
         "range": round(rangos.get("OptimalRange", 0.0) / 100 * alcance, 1),
         "maxRange": round(rangos.get("MaxRange", rangos.get("OptimalRange", 0.0)) / 100 * alcance, 1),
         "rpm": round(60 / cooldown, 1) if cooldown > 0 else 0.0,
     }
-    velocidad = proyectil.get("Speed", 0.0) / 100 * (1 + quirks.get("SpeedPercentage_Quirk", 0.0))
+    velocidad = proyectil.get("Speed", 0.0) / 100 * (1 + quirk("SpeedPercentage_Quirk", "RangeAndSpeedPercentage_Quirk"))
     if velocidad > 0:
         estadisticas["speed"] = round(velocidad, 1)
     misiles = (arma.get("MissileStats") or {}).get("NumberOfMissiles", 0)
