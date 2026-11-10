@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import pilotsJson from '../data/pilots.json';
 import type { PilotTrait, PilotsData } from '../types/pilots';
-import { filterTraits, parsePilotsQuery, toPilotsQuery } from './pilots';
+import { filterTraits, formatProgramLength, groupPrograms, groupTraits, parsePilotsQuery, splitHeroPilots, toPilotsQuery } from './pilots';
 
 // Criterios de aceptación de docs/specs/pagina-pilotos.md (issue #79).
 const data = pilotsJson as unknown as PilotsData;
@@ -18,6 +18,12 @@ const group = (found: PilotTrait, scope: string) => {
 const effects = (found: PilotTrait, scope: string) =>
   group(found, scope).effects.map(effect => [effect.value, effect.label, effect.good]);
 const names = (traits: PilotTrait[]) => traits.map(candidate => candidate.name);
+const traitName = (id: string) => data.traits.find(candidate => candidate.id === id)?.name;
+const hero = (name: string) => {
+  const found = data.heroes.find(candidate => candidate.name === name);
+  if (!found) throw new Error(`${name} no está entre los pilotos hero`);
+  return found;
+};
 const ALL = { category: 'all', heroOnly: false, query: '' } as const;
 
 describe('rasgos de piloto', () => {
@@ -78,6 +84,65 @@ describe('rasgos de piloto', () => {
   });
 });
 
+describe('secciones de rasgos', () => {
+  it('CA11: cada categoría se divide en sus subgrupos, en orden', () => {
+    const sections = groupTraits(data.traits);
+    const summary = Object.fromEntries(sections.map(section => [
+      section.category, section.groups.map(entry => [entry.label, entry.traits.length])
+    ]));
+    expect(summary).toEqual({
+      mech: [["Light 'Mechs", 19], ["Medium 'Mechs", 25], ["Heavy 'Mechs", 26], ["Assault 'Mechs", 29]],
+      weapon: [['Ballistic', 11], ['Energy', 7], ['Missile', 10], ['Artillery', 2], ['Several weapon types', 5]],
+      faction: [['Nobles', 5], ['Patriots', 5], ['Criminals', 5], ['Hatred', 5], ['Clan origins', 4]],
+      career: [['Combat', 6], ['Learning', 3], ['Money and health', 12]],
+      graduate: [[null, 5]]
+    });
+    expect(sections.map(section => section.category)).toEqual(['mech', 'weapon', 'faction', 'career', 'graduate']);
+    expect(sections[0].count).toBe(99);
+    expect(sections[0].groups[3].traits[0].name).toBe("Assault 'Mech Affinity");
+  });
+
+  it('CA11: con un filtro solo salen las secciones con resultados', () => {
+    const sections = groupTraits(filterTraits(data.traits, { ...ALL, query: 'atlas' }));
+    expect(sections.map(section => [section.category, section.groups.map(entry => entry.label)])).toEqual([['mech', ["Assault 'Mechs"]]]);
+  });
+});
+
+describe('pilotos hero', () => {
+  it('CA12: los de la sala de contratación y las recompensas, con rasgos que existen', () => {
+    expect(data.heroes).toHaveLength(18);
+    const { hiringHall, rewards } = splitHeroPilots(data.heroes);
+    expect(hiringHall.map(pilot => pilot.name)).toEqual([
+      'Ash Delmore', 'Barrett Nolan', 'Jacob Cave', 'Lance Gabel', 'Lyana Moore', 'Nick Lynch', 'Rachel Laird', 'Sasha Lockwood'
+    ]);
+    expect(rewards).toHaveLength(10);
+    expect(rewards.every(pilot => pilot.rewards.length > 0)).toBe(true);
+    expect(data.heroes.flatMap(pilot => pilot.traits).every(id => traitName(id) !== undefined)).toBe(true);
+    const shenzeng = data.heroes.filter(pilot => pilot.name.includes('Shenzeng'));
+    expect(shenzeng).toHaveLength(1);
+    expect(shenzeng[0].traits.map(traitName)).toEqual(['House Liao Patriot', 'House Liao Noble']);
+  });
+
+  it('CA13: Ash Delmore', () => {
+    const ash = hero('Ash Delmore');
+    expect(ash).toEqual(expect.objectContaining({ dlc: 7, rank: 'Regular', hiringHall: true, hiringCost: 600000, salary: 24000 }));
+    expect(ash.skills.map(skill => [skill.name, skill.level, skill.cap])).toEqual([
+      ['Ballistics', 10, 10], ['Energy', 9, 10], ['Missile', 7, 10], ['Evasiveness', 9, 10], ['Shielding', 7, 10], ['Heat management', 8, 10]
+    ]);
+    expect(ash.traits.map(traitName)).toEqual(["Medium 'Mech Affinity", 'Laser Specialist', 'Eagle Eyes']);
+    expect(ash.bio.length).toBeGreaterThan(0);
+  });
+
+  it('CA14: los reservados llegan como recompensa', () => {
+    expect(hero('Morgan Trensky').rewards.map(reward => reward.title)).toEqual(['Leading the Charge']);
+    expect(hero('Sam Hagel').rewards.map(reward => reward.title)).toEqual(['Smoke and Mirrors']);
+    const valten = hero('Valten Ryder');
+    expect(valten).toEqual(expect.objectContaining({ dlc: 8, hiringHall: false }));
+    expect(valten.rewards.map(reward => reward.title)).toEqual(['A New March']);
+    expect(valten.traits.map(traitName)).toEqual(["Bushwacker 'Mech Affinity", 'AC/10 Master', 'Survivor']);
+  });
+});
+
 describe('programas de entrenamiento', () => {
   it('CA9: los programas y las academias que los ofrecen', () => {
     expect(data.programs).toHaveLength(29);
@@ -90,13 +155,39 @@ describe('programas de entrenamiento', () => {
   });
 });
 
+describe('familias de programas', () => {
+  it('CA15: cada familia con sus programas, y los rasgos de los de una academia', () => {
+    const families = groupPrograms(data.programs, data.programFamilies);
+    expect(families.map(entry => [entry.family.name, entry.programs.length])).toEqual([
+      ['Simpod training', 5], ['Vocational training', 2], ['Semester enrollment', 4], ['Full year enrollment', 4],
+      ['Undergraduate program', 5], ['Graduate program', 4], ['Academy graduate programs', 5]
+    ]);
+    expect(families[2].programs.map(program => program.label)).toEqual(['Level 1', 'Level 2', 'Level 3', 'Level 4']);
+    const nais = data.programs.find(program => program.id === 'GraduateProgram_NAIS');
+    expect(nais?.label).toBe('New Avalon Institute of Science');
+    expect(traitName(nais?.guaranteedTrait ?? '')).toBe('NAIS Graduate');
+    expect(nais?.favouredTraits.map(traitName)).toContain('Standard Autocannon Specialist');
+    const graduate4 = data.programs.find(program => program.id === 'GraduateProgram4');
+    expect(graduate4?.guaranteedTrait).toBeNull();
+    expect(graduate4?.favouredTraits.map(traitName)).toEqual(['SRM Specialist', 'MRM Expert']);
+  });
+
+  it('CA16: la duración en días o en años', () => {
+    expect(formatProgramLength(60)).toBe('60 days');
+    expect(formatProgramLength(125)).toBe('125 days');
+    expect(formatProgramLength(365)).toBe('1 year');
+    expect(formatProgramLength(1460)).toBe('4 years');
+  });
+});
+
 describe('vista en la URL', () => {
   it('CA10: guarda y lee la pestaña, la categoría, el filtro hero y la búsqueda', () => {
     const view = { tab: 'traits', category: 'weapon', heroOnly: true, query: 'laser' } as const;
     const query = toPilotsQuery(view);
-    expect(query).toBe('?category=weapon&hero=1&q=laser');
+    expect(query).toBe('?tab=traits&category=weapon&hero=1&q=laser');
     expect(parsePilotsQuery(query)).toEqual(view);
     expect(toPilotsQuery({ tab: 'programs', category: 'all', heroOnly: false, query: '' })).toBe('?tab=programs');
-    expect(parsePilotsQuery('?tab=nope&category=nope&hero=x')).toEqual({ tab: 'traits', category: 'all', heroOnly: false, query: '' });
+    expect(toPilotsQuery({ tab: 'heroes', category: 'all', heroOnly: false, query: '' })).toBe('');
+    expect(parsePilotsQuery('?tab=nope&category=nope&hero=x')).toEqual({ tab: 'heroes', category: 'all', heroOnly: false, query: '' });
   });
 });
