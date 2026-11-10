@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { EMPTY_VALUE } from '../utils/format';
 import type { Item } from '../types/item';
 import type { Mech } from '../types/mech';
 import { useSarnaAsset } from '../hooks/useSarnaAsset';
@@ -48,7 +49,7 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
                       <span className="compare-difference">{row.lowerIsBetter ? '▼' : '▲'} {row.difference}</span>
                     )}
                     {value}
-                    {row.unit && value !== '—' && <small> {row.unit}</small>}
+                    {row.unit && value !== EMPTY_VALUE && <small> {row.unit}</small>}
                   </dd>
                 </div>
               );

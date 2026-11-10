@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { EMPTY_VALUE } from '../utils/format';
 import type { Item } from '../types/item';
 import type { ComponentData, EquippedItem, Loadout, Zone } from '../types/mech';
 import { clampArmorValue, getWeaponStats, scaleArmorPoints } from '../utils/calculators';
@@ -94,7 +95,7 @@ function ItemOption({ item, onEquip }: { item: Item; onEquip: (item: Item) => vo
           {/* Daño por disparo y, entre paréntesis, el DPS nominal (daño × disparos por minuto / 60). */}
           <span>{formatNumber(stats.damage)} dmg{stats.dps > 0 && <small> ({formatNumber(stats.dps)} dps)</small>}</span>
           <span>{formatNumber(stats.heat)} heat</span>
-          <span>{stats.range !== null ? `${formatNumber(stats.range)} m` : '—'}</span>
+          <span>{stats.range !== null ? `${formatNumber(stats.range)} m` : EMPTY_VALUE}</span>
         </span>
       )}
     </button>
@@ -389,13 +390,12 @@ export function ComponentEditor({
 
       <section className="editor-section">
         <div className="editor-section-heading">
-          <div className="editor-tabs" role="tablist" aria-label="Equipment type">
+          <div className="editor-tabs" role="group" aria-label="Equipment type">
             {([['equipment', 'Equipment'], ['ammo', `Ammo (${ammoCount})`]] as const).map(([tab, tabLabel]) => (
               <button
                 key={tab}
                 type="button"
-                role="tab"
-                aria-selected={equipmentTab === tab}
+                aria-pressed={equipmentTab === tab}
                 className={equipmentTab === tab ? 'editor-tab is-active' : 'editor-tab'}
                 onClick={() => setEquipmentTab(tab)}
               >

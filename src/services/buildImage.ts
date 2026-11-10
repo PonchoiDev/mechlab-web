@@ -1,4 +1,5 @@
 import type { HardpointType } from '../types/item';
+import { EMPTY_VALUE } from '../utils/format';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import type { Upgrade } from '../types/upgrade';
 import { formatArmorPoints, formatCoolingRate, getArmorScale, scaleArmorPoints, truncateTo, type BuildSummary } from '../utils/calculators';
@@ -384,7 +385,7 @@ const getReadouts = ({ mech, summary }: BuildImageInput) => [
     value: summary.coolingRate === null ? 'N/A' : formatCoolingRate(summary.coolingRate),
     unit: summary.coolingRate === null ? undefined : 'heat/s'
   },
-  { label: 'MAX WEAPON RANGE', value: summary.maxWeaponRange > 0 ? `${Math.floor(summary.maxWeaponRange)} m` : '—' }
+  { label: 'MAX WEAPON RANGE', value: summary.maxWeaponRange > 0 ? `${Math.floor(summary.maxWeaponRange)} m` : EMPTY_VALUE }
 ];
 
 const drawHeader = (context: Context, mech: Mech) => {

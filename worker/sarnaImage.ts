@@ -22,6 +22,11 @@ export const getSarnaImageTarget = (requestUrl: URL): URL | null => {
   return isSarnaImage ? target : null;
 };
 
+// La caché se guarda por la imagen de Sarna y no por la petición: si no, cada parámetro añadido a mano
+// (?url=…&x=1, &x=2…) crearía otra entrada y obligaría a pedir la misma imagen a Sarna otra vez.
+export const getSarnaCacheKey = (requestUrl: URL, target: URL): string =>
+  `${requestUrl.origin}${SARNA_IMAGE_PATH}?url=${encodeURIComponent(target.href)}`;
+
 export const fetchSarnaImage = async (target: URL): Promise<Response> => {
   const upstream = await fetch(target, { headers: { 'User-Agent': 'MW Builder (https://mw-builder.com)' } });
   const contentType = upstream.headers.get('Content-Type') ?? '';

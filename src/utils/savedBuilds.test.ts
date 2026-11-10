@@ -21,7 +21,7 @@ describe('builds guardadas en el navegador', () => {
   it('ignora lo guardado que esté dañado o incompleto', () => {
     expect(parseStoredBuilds(null)).toEqual([]);
     expect(parseStoredBuilds('{no es json')).toEqual([]);
-    expect(parseStoredBuilds(JSON.stringify([saved('a', 'Archer LRM'), { id: 'b', name: 'Sin código' }, 'basura'])))
+    expect(parseStoredBuilds(JSON.stringify([saved('a', 'Archer LRM'), { id: 'b', name: 'Sin código' }, 'basura', null])))
       .toEqual([saved('a', 'Archer LRM')]);
   });
 

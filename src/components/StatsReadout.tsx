@@ -1,4 +1,5 @@
 import type { Mech } from '../types/mech';
+import { EMPTY_VALUE } from '../utils/format';
 import { formatArmorPoints, formatCoolingRate, truncateTo, type BuildSummary } from '../utils/calculators';
 import { UpgradedValue } from './UpgradedValue';
 
@@ -26,7 +27,7 @@ export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
   } = summary;
   const formatArmor = formatArmorPoints;
   const formatCooling = (rate: number | null) => rate === null ? 'N/A' : formatCoolingRate(rate);
-  const formatRange = (range: number) => range > 0 ? `${Math.floor(range)} m` : '—';
+  const formatRange = (range: number) => range > 0 ? `${Math.floor(range)} m` : EMPTY_VALUE;
 
   return (
     <section className="readout-strip" aria-label="Mech statistics">

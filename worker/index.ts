@@ -1,6 +1,6 @@
 import { EmailMessage } from 'cloudflare:email';
 import { buildFeedbackEmail, FEEDBACK_PATH, FROM_ADDRESS, parseFeedback } from './feedback';
-import { fetchSarnaImage, getSarnaImageTarget, SARNA_IMAGE_PATH } from './sarnaImage';
+import { fetchSarnaImage, getSarnaCacheKey, getSarnaImageTarget, SARNA_IMAGE_PATH } from './sarnaImage';
 
 interface Env {
   ASSETS: { fetch: (request: Request) => Promise<Response> };
@@ -29,11 +29,12 @@ export default {
 
     // Cada imagen se pide a Sarna una sola vez; después sale de la caché de Cloudflare.
     const cache = await caches.open(CACHE_NAME);
-    const cached = await cache.match(request);
+    const cacheKey = getSarnaCacheKey(url, target);
+    const cached = await cache.match(cacheKey);
     if (cached) return cached;
 
     const response = await fetchSarnaImage(target);
-    if (response.ok) ctx.waitUntil(cache.put(request, response.clone()));
+    if (response.ok) ctx.waitUntil(cache.put(cacheKey, response.clone()));
     return response;
   }
 };
