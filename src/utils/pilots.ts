@@ -14,7 +14,7 @@ export interface TraitFilter {
   query: string;
 }
 
-const normalize = (text: string) => text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const normalize = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
 // Se busca en el nombre, la descripción, dónde se aplica y qué cambia: «jam» encuentra Trigger
 // Discipline aunque su nombre no lo diga.
