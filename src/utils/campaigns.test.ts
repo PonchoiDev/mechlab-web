@@ -75,6 +75,14 @@ describe('campañas de los DLC', () => {
   });
 });
 
+describe('pilotos de las HRQ', () => {
+  it('CA10: la HRQ de Adam Steiner da a Valten Ryder', () => {
+    const steiner = data.quests.find(quest => quest.id === 'adam-steiner');
+    expect(steiner?.dlc).toBe(8);
+    expect(steiner?.rewards.flatMap(reward => reward.pilots.map(pilot => pilot.name))).toEqual(['Valten Ryder']);
+  });
+});
+
 describe('búsqueda y sistemas', () => {
   it('CA6: se busca por nombre, sistema, piloto o recompensa', () => {
     expect(names(searchCampaigns(data, 'kerensky'))).toEqual(['Shadow of Kerensky']);
