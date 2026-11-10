@@ -1365,6 +1365,11 @@ button, input, select { font: inherit; color: inherit; }
      queda una franja de mapa donde se encuadra lo elegido. En pantallas bajas (el móvil en horizontal)
      no baja de 140 px y va por encima de los cajones, para que se pueda leer aunque tape algo. */
   .starmap-panel { top: 104px; left: 12px; width: calc(100vw - 24px); max-height: max(min(calc(100% - 366px), 44vh), 140px); z-index: 2; background: rgba(4, 6, 12, 0.96); }
+  /* En pantallas bajas la ficha llega a la altura del botón de ver el mapa entero: se estrecha para
+     dejarle su columna a la derecha. */
+  @media (max-height: 500px) {
+    .starmap-panel { width: calc(100vw - 70px); }
+  }
   .starmap-panel h2 { font-size: 28px; }
   .starmap-emblem { width: 50px; height: 50px; font-size: 15px; }
   /* La línea temporal, compacta: la fecha y la época en una fila, y sin el hueco del aviso de cambios
