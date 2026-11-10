@@ -102,4 +102,5 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
   - una campaña abierta desde la URL.
 - **Decisiones durante el desarrollo:**
   - **Cajones:** con el de Campaigns son ocho, y a 1440 px ya no cabían junto al panel de fecha. En pantallas medianas los botones se ciñen a su texto y, si aun así no caben, suben a una segunda fila por encima en vez de meterse debajo del panel. En el móvil, «Special markets» y «Special 'Mech locations» se acortan a «Markets» y «'Mech locations» para seguir en tres filas.
+  - **Pilotos de las HRQ:** además de Valten Ryder, dan pilotos No Pilot Left Behind (Shenzeng, hero) y The Shadow Coup (Fenstrom, que no es hero). Cada piloto lleva si es hero: solo esos enlazan a la página de pilotos.
   - **Mismas clases que las HRQ:** la ficha usa las de la ficha de una HRQ con el color de las campañas. La regla de las misiones numeradas se limita a sus hijos directos, porque también alcanzaba las listas de recompensas de dentro.
