@@ -75,6 +75,20 @@ function ZoneHint({ data, clusterId }: { data: StarmapData; clusterId: string })
   );
 }
 
+// En el móvil, la ficha abierta tapa la parte de arriba del mapa y los cajones y la fecha la de abajo:
+// se encuadra en la franja que queda entre ellos, medida en el momento (la ficha cambia de alto).
+const getVisibleBand = (container: HTMLElement): { top: number; bottom: number } => {
+  const box = container.getBoundingClientRect();
+  const panel = document.querySelector('.starmap-panel')?.getBoundingClientRect();
+  const below = [...document.querySelectorAll('.starmap-drawers, .starmap-date')]
+    .map(element => element.getBoundingClientRect())
+    .filter(rect => rect.height > 0);
+  const top = panel ? Math.max(0, panel.bottom - box.top) : 0;
+  const bottom = below.length > 0 ? Math.min(...below.map(rect => rect.top - box.top)) : box.height;
+  // Si casi no queda hueco, se usa la pantalla entera: mejor tapado que fuera de la vista.
+  return bottom - top > 80 ? { top, bottom } : { top: 0, bottom: box.height };
+};
+
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
 export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, markedId, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
@@ -103,14 +117,18 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     callbacksRef.current = { onHover, onSelect, onZone, onMercZone };
   }, [onHover, onSelect, onZone, onMercZone]);
 
-  const setView = (view: View) => {
+  // minScale: al encuadrar en la franja del móvil puede hacer falta alejarse más que con el zoom a mano.
+  const setView = (view: View, minScale = fitScaleRef.current * 0.7) => {
     const renderer = rendererRef.current;
     if (!renderer) return;
     const bounds = boundsRef.current;
-    const scale = Math.min(MAX_SCALE, Math.max(fitScaleRef.current * 0.7, view.scale));
+    const scale = Math.min(MAX_SCALE, Math.max(minScale, view.scale));
+    // El centro puede salir un cuarto de pantalla del mapa en vertical: en el móvil, lo elegido se
+    // encuadra por encima o por debajo del centro, y un sistema del borde lo necesita.
+    const marginY = (canvasRef.current?.clientHeight ?? 0) / 4 / scale;
     renderer.view = {
       x: Math.min(bounds.maxX, Math.max(bounds.minX, view.x)),
-      y: Math.min(bounds.maxY, Math.max(bounds.minY, view.y)),
+      y: Math.min(bounds.maxY + marginY, Math.max(bounds.minY - marginY, view.y)),
       scale
     };
     renderer.requestDraw();
@@ -134,8 +152,9 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     const renderer = rendererRef.current;
     if (!renderer) return;
     cancelAnimationFrame(animationRef.current);
+    const minScale = Math.min(fitScaleRef.current * 0.7, target.scale);
     if (prefersReducedMotion()) {
-      setView(target);
+      setView(target, minScale);
       return;
     }
     const start = { ...renderer.view };
@@ -147,7 +166,7 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
         x: start.x + (target.x - start.x) * ease,
         y: start.y + (target.y - start.y) * ease,
         scale: start.scale + (target.scale - start.scale) * ease
-      });
+      }, minScale);
       if (t < 1) animationRef.current = requestAnimationFrame(step);
     };
     animationRef.current = requestAnimationFrame(step);
@@ -217,19 +236,29 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     const renderer = rendererRef.current;
     const container = containerRef.current;
     if (systems.length === 0 || !renderer || !container) return;
+    const { width, height } = container.getBoundingClientRect();
+    const isMobile = width <= MOBILE_WIDTH;
+    // En el móvil, el centro de la franja visible queda por debajo o por encima del de la pantalla. La Y
+    // del mapa crece hacia arriba y la de la pantalla hacia abajo: el desplazamiento se suma.
+    const band = isMobile ? getVisibleBand(container) : { top: 0, bottom: height };
+    const bandOffset = (band.top + band.bottom) / 2 - height / 2;
     if (systems.length === 1) {
-      animateTo({ x: systems[0].x, y: systems[0].y, scale: Math.max(renderer.view.scale, FOCUS_SCALE) });
+      const scale = Math.max(renderer.view.scale, FOCUS_SCALE);
+      animateTo({ x: systems[0].x, y: systems[0].y + bandOffset / scale, scale });
       return;
     }
     // En escritorio la ficha tapa la izquierda: se encuadra en el resto y se desplaza el centro.
-    const { width, height } = container.getBoundingClientRect();
-    const inset = width > MOBILE_WIDTH ? PANEL_INSET : 0;
+    const inset = isMobile ? 0 : PANEL_INSET;
     const xs = systems.map(system => system.x);
     const ys = systems.map(system => system.y);
     const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-    const fit = Math.min((width - inset) / (maxX - minX + FIT_PADDING), height / (maxY - minY + FIT_PADDING));
-    const scale = Math.min(FOCUS_SCALE, Math.max(fitScaleRef.current, fit));
-    animateTo({ x: (minX + maxX) / 2 - inset / 2 / scale, y: (minY + maxY) / 2, scale });
+    const fit = Math.min((width - inset) / (maxX - minX + FIT_PADDING), (band.bottom - band.top) / (maxY - minY + FIT_PADDING));
+    // En la franja del móvil el mapa entero se ve más pequeño que en la pantalla: el mínimo es el que
+    // lo deja caber en ella, para que nada de lo elegido quede debajo de la ficha.
+    const bounds = boundsRef.current;
+    const bandFit = Math.min(width / (bounds.maxX - bounds.minX + FIT_PADDING), (band.bottom - band.top) / (bounds.maxY - bounds.minY + FIT_PADDING));
+    const scale = Math.min(FOCUS_SCALE, Math.max(isMobile ? bandFit : fitScaleRef.current, fit));
+    animateTo({ x: (minX + maxX) / 2 - inset / 2 / scale, y: (minY + maxY) / 2 + bandOffset / scale, scale });
   }, [focus, data]);
 
   // Arrastre con un dedo o el ratón, y zoom con dos dedos o la rueda.

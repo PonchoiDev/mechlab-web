@@ -1508,17 +1508,41 @@ button, input, select { font: inherit; color: inherit; }
   .starmap-actions .support-link { font-size: 0; }
   .starmap-actions .support-link-icon { font-size: 16px; }
   .starmap .whats-new-button { width: 32px; height: 32px; }
-  .starmap-panel { top: 104px; left: 12px; width: calc(100vw - 24px); max-height: calc(100% - 392px); }
+  /* La ficha llega como mucho a algo menos de la mitad de la pantalla (se desplaza por dentro): debajo
+     queda una franja de mapa donde se encuadra lo elegido. En pantallas bajas (el móvil en horizontal)
+     no baja de 140 px y va por encima de los cajones, para que se pueda leer aunque tape algo. */
+  .starmap-panel { top: 104px; left: 12px; width: calc(100vw - 24px); max-height: max(min(calc(100% - 366px), 44vh), 140px); z-index: 2; background: rgba(4, 6, 12, 0.96); }
+  /* En pantallas bajas la ficha llega a la altura del botón de ver el mapa entero: se estrecha para
+     dejarle su columna a la derecha. */
+  @media (max-height: 500px) {
+    .starmap-panel { width: calc(100vw - 70px); }
+  }
   .starmap-panel h2 { font-size: 28px; }
   .starmap-emblem { width: 50px; height: 50px; font-size: 15px; }
-  .starmap-date { right: 12px; bottom: 12px; width: calc(100vw - 24px); }
-  .starmap-date-value { font-size: 32px; }
+  /* La línea temporal, compacta: la fecha y la época en una fila, y sin el hueco del aviso de cambios
+     cuando no lo hay. Pasa de unos 185 px de alto a unos 110. */
+  .starmap-date {
+    right: 12px;
+    bottom: 12px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: 10px;
+    width: calc(100vw - 24px);
+    padding: 6px 10px 8px;
+  }
+  .starmap-date > :not(.starmap-date-era):not(.starmap-date-value) { grid-column: 1 / -1; }
+  .starmap-date-era { overflow: hidden; font-size: 13px; text-align: left; text-overflow: ellipsis; white-space: nowrap; }
+  .starmap-date-value { margin: 0 0 4px; font-size: 26px; }
+  .starmap-date-changes { min-height: 0; margin: 0 0 4px; font-size: 13px; text-align: left; }
+  .starmap-date-changes:empty { display: none; }
+  .starmap-date-actions { margin-top: 2px; }
   /* Zoom y leyenda justo encima del panel de fecha, para no tapar la ficha del sistema. */
   /* En el móvil se amplía con dos dedos: solo queda el botón de ver el mapa entero, y así los cinco
      cajones caben en dos filas compactas. */
-  .starmap-zoom { left: auto; right: 12px; bottom: 200px; flex-direction: row; }
+  .starmap-zoom { left: auto; right: 12px; bottom: 132px; flex-direction: row; }
   .starmap-zoom button:not(:last-child) { display: none; }
-  .starmap-drawers { left: 12px; bottom: 200px; max-width: calc(100vw - 74px); flex-wrap: wrap; gap: 6px; }
+  .starmap-drawers { left: 12px; bottom: 132px; max-width: calc(100vw - 74px); flex-wrap: wrap; gap: 6px; }
   .starmap-legend { max-width: calc(100vw - 74px); }
   .starmap-legend > button { min-width: 0; height: 34px; padding: 0 8px; font-size: 13px; letter-spacing: 0.04em; }
   .starmap-quests.is-open { width: calc(100vw - 74px); }

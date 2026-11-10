@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-10-mobile-map',
+    date: '2026-11-10',
+    title: 'More map on mobile',
+    items: [
+      'On phones, the star map timeline is much shorter: the date and the era share one line',
+      'Cards take at most half the screen and scroll inside, and the map frames what you pick in the space left below them'
+    ]
+  },
+  {
     id: '2026-11-10-pilot-academies',
     date: '2026-11-10',
     title: 'Pilot academies on the star map',
