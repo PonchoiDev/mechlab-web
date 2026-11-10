@@ -406,7 +406,11 @@ button, input, select { font: inherit; color: inherit; }
 .starmap-academy-stars b { color: #ffd400; font-size: 14px; letter-spacing: 1px; }
 .starmap-academy-stars i { color: rgba(255, 255, 255, 0.18); font-style: normal; }
 
-.starmap-market.starmap-academy-entry { border-left-color: #2f8cff; }
+/* Con el mismo margen que la arena: va suelta en la ficha del sistema, fuera de la lista de mercados. */
+.starmap-market.starmap-academy-entry {
+  margin: 12px 14px 0;
+  border-left-color: #2f8cff;
+}
 .starmap-academy-entry ul { margin: 0; padding: 0; list-style: none; font-size: 17px; }
 
 @media (max-width: 600px) {
