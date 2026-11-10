@@ -129,6 +129,8 @@ export class StarmapRenderer {
   hoveredId: number | null = null;
   // Sistemas de la HRQ elegida, en orden: la oferta y después sus misiones.
   questRoute: number[] | null = null;
+  // Sistema que se marca en azul con su nombre: el de la academia elegida.
+  markedId: number | null = null;
   selectedId: number | null = null;
 
   constructor(canvas: HTMLCanvasElement, data: StarmapData) {
@@ -563,6 +565,7 @@ export class StarmapRenderer {
     this.drawQuestRoute();
 
     if (scale >= LABEL_SCALE) this.drawLabels(visible);
+    this.drawMarked();
 
     for (const id of [this.hoveredId, this.selectedId]) {
       const system = id === null ? undefined : this.data.systems.find(candidate => candidate.id === id);
@@ -736,6 +739,45 @@ export class StarmapRenderer {
       context.fillStyle = '#140d02';
       context.fillText(String(i + 1), x - 12, y + 12.5);
     });
+    context.restore();
+  }
+
+  private drawMarked() {
+    // Aro azul con esquinas de mira y el nombre del sistema, a cualquier zoom: al encuadrar la
+    // academia, el sistema se ve aunque haya muchas estrellas alrededor.
+    const system = this.markedId === null ? undefined : this.data.systems.find(candidate => candidate.id === this.markedId);
+    if (!system) return;
+    const [x, y] = this.toScreen(system.x, system.y);
+    const context = this.context;
+    context.save();
+    context.strokeStyle = ACADEMY_COLOR;
+    context.shadowColor = ACADEMY_COLOR;
+    context.shadowBlur = 14;
+    context.lineWidth = 2.5;
+    context.beginPath();
+    context.arc(x, y, 22, 0, Math.PI * 2);
+    context.stroke();
+    context.lineWidth = 3;
+    for (const [dx, dy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+      context.beginPath();
+      context.moveTo(x + dx * 34, y + dy * 24);
+      context.lineTo(x + dx * 34, y + dy * 34);
+      context.lineTo(x + dx * 24, y + dy * 34);
+      context.stroke();
+    }
+    context.shadowBlur = 0;
+    const text = system.name.toUpperCase();
+    context.font = '700 15px "Barlow Condensed", "Arial Narrow", sans-serif';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    const width = context.measureText(text).width + 14;
+    context.fillStyle = 'rgba(3, 10, 24, 0.9)';
+    context.fillRect(x - width / 2, y - 58, width, 20);
+    context.strokeStyle = ACADEMY_COLOR;
+    context.lineWidth = 1;
+    context.strokeRect(x - width / 2, y - 58, width, 20);
+    context.fillStyle = '#ffffff';
+    context.fillText(text, x, y - 47.5);
     context.restore();
   }
 

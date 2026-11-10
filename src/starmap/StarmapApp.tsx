@@ -468,6 +468,7 @@ export function StarmapApp() {
         hoveredId={hoveredId}
         selectedId={selectedId}
         questRoute={questRoute}
+        markedId={academy && !quest && !mech && !companyId && !zoneId ? academy.system : null}
         territoryColors={territoryColors}
         focus={focus}
         onHover={setHoveredId}

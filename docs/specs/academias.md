@@ -86,4 +86,5 @@ Los pilotos hero del issue no son personajes fijos: el juego genera pilotos con 
 - **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: el panel en 3025 con los Virtual World Center agrupados, la búsqueda, los iconos del mapa, la ficha del New Avalon Institute of Science, la de la War College of Tamar en 3052 (destruida, en rojo, y sin icono), Sarna en 3030 con sus tres academias y `?academy=` al recargar.
 - **Decisiones durante el desarrollo:**
   - La leyenda del mapa no tiene interruptores para ocultar los iconos, así que el de las academias no se puede ocultar; va debajo de la estrella, donde no tapa ningún otro.
+  - Al encuadrar la academia elegida, su sistema costaba de encontrar entre las demás estrellas: se marca con un aro azul, esquinas de mira y su nombre, a cualquier zoom.
   - Elegir otra cosa (una HRQ, una variante, una compañía, una zona o una estrella) cierra la ficha de la academia, como las demás. Abrir su sistema desde la ficha la conserva, y al cerrar el sistema vuelve a verse.
