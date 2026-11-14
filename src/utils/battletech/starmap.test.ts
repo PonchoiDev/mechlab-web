@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import starmapData from '../../data/battletech/starmap.json';
 import type { BtStarmapData } from '../../types/battletech';
 import { searchSystems } from '../starmap';
-import { NEUTRAL_COLOR, getLegend, groupTags, parseBtQuery, toBtQuery } from './starmap';
+import { NEUTRAL_COLOR, getFactionEmblems, getLegend, groupTags, parseBtQuery, toBtQuery } from './starmap';
 
 // Criterios de aceptación de docs/specs/battletech-mapa.md (issue #103).
 const data = starmapData as unknown as BtStarmapData;
@@ -66,5 +66,20 @@ describe('mapa estelar de BATTLETECH', () => {
     expect(Object.values(data.factions).every(faction => /^#[0-9a-f]{6}$/.test(faction.color))).toBe(true);
     expect(data.factions.Locals.color).toBe(NEUTRAL_COLOR);
     expect(data.factions.NoFaction.color).toBe(NEUTRAL_COLOR);
+  });
+
+  it('CA8: el logo de cada facción en el centro de su territorio, más grande cuanto más grande es', () => {
+    const emblems = getFactionEmblems(data);
+    const factions = emblems.map(emblem => emblem.faction);
+    expect(new Set(factions).size).toBe(factions.length);
+    expect(factions).toEqual(expect.arrayContaining(['Liao', 'TaurianConcordat', 'Marik', 'AuriganRestoration', 'Davion', 'MagistracyOfCanopus']));
+    for (const emblem of emblems) {
+      expect(emblem.logo).toBe(data.factions[emblem.faction].logo);
+      const nearest = data.systems.reduce((best, system) =>
+        Math.hypot(system.x - emblem.x, system.y - emblem.y) < Math.hypot(best.x - emblem.x, best.y - emblem.y) ? system : best);
+      expect(nearest.owners[0][1]).toBe(emblem.faction);
+    }
+    const size = (faction: string) => emblems.find(emblem => emblem.faction === faction)!.size;
+    expect(size('Liao')).toBeGreaterThan(size('MagistracyOfCanopus'));
   });
 });
