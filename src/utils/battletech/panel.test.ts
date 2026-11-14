@@ -4,6 +4,7 @@ import {
   DEFAULT_MECH_FILTERS,
   EMPTY_PANEL_FILTERS,
   filterBtMechs,
+  getAmmoForMountedWeapons,
   getEquippableBtItems,
   getReplacementWeapons,
   hasPanelFilters,
@@ -49,6 +50,11 @@ describe('panel de una ubicación como el de MW5', () => {
     const result = replaceItem(mech, loadout, 'leftArm', 0, getItem('Weapon_Laser_LargeLaser_0-STOCK')!);
     expect(result.loadout.leftArm).toEqual(['Weapon_Laser_LargeLaser_0-STOCK']);
     expect(result.message).toBe('M Laser replaced with L Laser');
+  });
+
+  it('la pestaña Ammo solo ofrece la munición de las armas montadas', () => {
+    const { mech, loadout } = stock('HBK-4G');
+    expect(getAmmoForMountedWeapons(mech, loadout, BT_ITEMS).map(item => item.id)).toEqual(['Ammo_AmmunitionBox_Generic_AC20']);
   });
 
   it('ordena las armas por tamaño como Largest y Smallest', () => {

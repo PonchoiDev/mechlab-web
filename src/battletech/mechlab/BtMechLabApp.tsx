@@ -15,6 +15,7 @@ import { copyText } from '../../services/clipboard';
 import { EMPTY_VALUE } from '../../utils/format';
 import { normalizeBuildName } from '../../utils/savedBuildsCore';
 import { decodeBtBuild, DEFAULT_MECH, encodeBtBuild, getBtBuildUrl, readBtBuildFromLocation } from '../../utils/battletech/buildCode';
+import { replaceItem } from '../../utils/battletech/actions';
 import { createStockBuild } from '../../utils/battletech/fitting';
 import { getBtBuildIssues } from '../../utils/battletech/issues';
 import { BT_MECHS, getItem, getMechDisplayName } from '../../utils/battletech/mechlabData';
@@ -287,6 +288,7 @@ export function BtMechLabApp() {
           selectedHardpoint={selectedHardpoint}
           onSelectHardpoint={setSelectedHardpoint}
           onMount={(zone, item) => showToast(actions.mount(zone, item))}
+          onReplace={(zone, index, item) => menuContext.run(current => replaceItem(mech, current, zone, index, item))}
           onRemove={actions.remove}
           onArmorChange={actions.changeArmor}
           onArmorStep={actions.stepArmorBy}

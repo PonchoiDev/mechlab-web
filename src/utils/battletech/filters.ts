@@ -1,6 +1,6 @@
 import type { Zone } from '../../types/mech';
 import type { BtHardpoint, BtItem, BtLoadout, BtMech, BtSource, BtWeightClass } from '../../types/battletech-mechlab';
-import { getHardpointCount, getLocationUsage, getMountProblem } from './fitting';
+import { getAllItems, getHardpointCount, getLocationUsage, getMountProblem } from './fitting';
 import { getItem, HARDPOINTS } from './mechlabData';
 
 // Filtros de los selectores de 'Mech y de objetos del MechLab de BATTLETECH.
@@ -202,7 +202,13 @@ export const sortBtWeapons = (items: BtItem[], order: BtWeaponSortOrder): BtItem
 export const getEquippableBtItems = (mech: BtMech, loadout: BtLoadout, zone: Zone, items: BtItem[]): BtItem[] =>
   items.filter(item => !getMountProblem(mech, loadout, zone, item));
 
-export const getReplacementWeapons = (mech: BtMech, loadout: BtLoadout, zone: Zone, index: number, items: BtItem[]): BtItem[] => {
+// Como la pestaña Ammo de MW5, solo la munición de las armas montadas (las fijas incluidas).
+export const getAmmoForMountedWeapons = (mech: BtMech, loadout: BtLoadout, items: BtItem[]): BtItem[] => {
+  const categories = new Set(getAllItems(mech, loadout).map(item => item.weapon?.ammoCategory).filter(Boolean));
+  return items.filter(item => item.ammo?.category && categories.has(item.ammo.category));
+};
+
+export const getReplacementWeapons =(mech: BtMech, loadout: BtLoadout, zone: Zone, index: number, items: BtItem[]): BtItem[] => {
   const current = loadout[zone][index];
   const type = getItem(current)?.hardpoint;
   const without = { ...loadout, [zone]: loadout[zone].filter((_, position) => position !== index) };
