@@ -25,6 +25,8 @@ export default defineConfig({
   },
   plugins: [react(), rootSite(), workerApi()],
   test: {
+    // Las copias de trabajo de .claude/worktrees/ tienen sus propios tests: no son los de este checkout.
+    exclude: ['**/node_modules/**', '**/dist/**', '.claude/**'],
     // Cobertura de la lógica y del Worker (npm run coverage); el CI publica el resumen.
     coverage: {
       provider: 'v8',
