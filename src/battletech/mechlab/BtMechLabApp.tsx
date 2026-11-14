@@ -52,6 +52,7 @@ export function BtMechLabApp() {
   const closeFeedback = useCallback(() => setIsFeedbackOpen(false), []);
   const closeSave = useCallback(() => setIsSaveOpen(false), []);
   const closeBuilds = useCallback(() => setIsBuildsOpen(false), []);
+  const closeCompare = useCallback(() => setIsCompareOpen(false), []);
 
   const buildCode = encodeBtBuild(build);
   const buildUrl = getBtBuildUrl(buildCode);
@@ -185,7 +186,7 @@ export function BtMechLabApp() {
             loadBuild(next, `Loaded ${savedId ? `“${label}”` : `the ${label} loadout`}`, savedId);
             setIsCompareOpen(false);
           }}
-          onClose={() => setIsCompareOpen(false)}
+          onClose={closeCompare}
         />
       )}
 

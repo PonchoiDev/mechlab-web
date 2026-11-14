@@ -88,6 +88,7 @@ export function BtMechPicker({ mechs, current, onSelect }: BtMechPickerProps) {
       event.preventDefault();
       select(filtered[activeOption]);
     } else if (event.key === 'Escape') {
+      event.preventDefault();
       close();
       event.currentTarget.blur();
     }

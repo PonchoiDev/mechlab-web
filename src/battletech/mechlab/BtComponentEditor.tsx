@@ -7,6 +7,11 @@ import { getFixedItems, getHardpointViews, getLocationUsage } from '../../utils/
 import { getItem, getItemWeaponType, HARDPOINT_LABELS } from '../../utils/battletech/mechlabData';
 import { BtArmorControl } from './BtArmorControl';
 import { BtItemPicker } from './BtItemPicker';
+import { useDismiss } from './useDismiss';
+
+// Lo que no cierra el panel al pulsarlo, como en el ComponentEditor de MW5: el panel, las tarjetas, el
+// selector de 'Mech y cualquier control.
+const KEEPS_EDITOR_OPEN = ['.component-editor', '.component-card', '.mech-picker', 'button', 'a', 'input', 'select', 'textarea', 'label'].join(', ');
 
 interface BtComponentEditorProps {
   build: BtBuild;
@@ -23,6 +28,7 @@ const formatTonnage = (value: number) => String(Number(value.toFixed(2)));
 // Panel de la ubicación elegida, con el marcado del ComponentEditor de MW5: anclajes, lo instalado
 // (que se quita con ✕, salvo el equipo fijo del chasis), el equipo que se puede añadir y el blindaje.
 export function BtComponentEditor({ build, zone, onMount, onRemove, onArmorChange, onArmorStep, onClose }: BtComponentEditorProps) {
+  useDismiss(onClose, KEEPS_EDITOR_OPEN);
   const { mech, loadout, armor } = build;
   const label = ZONE_LABELS[zone];
   const location = mech.locations[zone];
