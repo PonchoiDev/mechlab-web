@@ -8,9 +8,10 @@ import {
   DEFAULT_ITEM_FILTERS,
   DEFAULT_MECH_FILTERS,
   filterBtItems,
-  filterBtMechs
+  filterBtMechs,
+  getPreferredTab
 } from './filters';
-import { createStockBuild, getLocationUsage, getMountProblem, mountItem, removeItem } from './fitting';
+import { createStockBuild, getDefaultZone, getLocationUsage, getMountProblem, mountItem, removeItem } from './fitting';
 import { getBtBuildIssues } from './issues';
 import { BT_ITEMS, BT_MECHS, findMech, getItem } from './mechlabData';
 import { createBtExportFile, parseBtImportFile } from './savedBuilds';
@@ -279,5 +280,13 @@ describe('MechLab de BATTLETECH: filtros', () => {
     const damage = (id: string) => item(id).weapon!.damage * item(id).weapon!.shots;
     expect(damage(byDamage[0].id)).toBe(Math.max(...byDamage.map(candidate => damage(candidate.id))));
     expect(filter({ tab: 'energy', query: 'magna' }).every(candidate => /magna/i.test(`${candidate.name} ${candidate.manufacturer}`))).toBe(true);
+  });
+
+  it('abre la ubicación de más anclajes y la pestaña de un anclaje con sitio', () => {
+    const hunchback = stock('HBK-4G');
+    expect(getDefaultZone(hunchback.mech)).toBe('rightTorso');
+    expect(getPreferredTab(hunchback.mech, hunchback.loadout, 'rightTorso', 'energy')).toBe('ballistic');
+    expect(getPreferredTab(hunchback.mech, hunchback.loadout, 'centerTorso', 'energy')).toBe('energy');
+    expect(getPreferredTab(hunchback.mech, hunchback.loadout, 'rightTorso', 'ammo')).toBe('ammo');
   });
 });

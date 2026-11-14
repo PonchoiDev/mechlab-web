@@ -1,5 +1,7 @@
-import type { BtHardpoint, BtItem, BtMech, BtSource, BtWeightClass } from '../../types/battletech-mechlab';
-import { getHardpointCount } from './fitting';
+import type { Zone } from '../../types/mech';
+import type { BtHardpoint, BtItem, BtLoadout, BtMech, BtSource, BtWeightClass } from '../../types/battletech-mechlab';
+import { getHardpointCount, getLocationUsage } from './fitting';
+import { HARDPOINTS } from './mechlabData';
 
 // Filtros de los selectores de 'Mech y de objetos del MechLab de BATTLETECH.
 
@@ -98,10 +100,22 @@ export const DEFAULT_ITEM_FILTERS: BtItemFilters = {
   sort: 'name'
 };
 
-export const isInTab = (item: BtItem, tab: BtItemTab): boolean =>
-  item.kind === 'weapon' ? item.hardpoint === tab : item.kind === tab;
+// La pestaña de un objeto: las armas van por su anclaje y el resto por su tipo.
+export const getItemTab = (item: BtItem): BtItemTab => item.kind === 'weapon' ? item.hardpoint ?? 'energy' : item.kind;
 
-export const getWeaponDamage = (item: BtItem): number => item.weapon ? item.weapon.damage * item.weapon.shots : 0;
+export const isInTab = (item: BtItem, tab: BtItemTab): boolean => getItemTab(item) === tab;
+
+// Al elegir una ubicación, si la pestaña de armas abierta no tiene anclajes libres ahí, se pasa a la
+// primera que sí los tiene: en el torso derecho del Hunchback se abren las balísticas.
+export const getPreferredTab = (mech: BtMech, loadout: BtLoadout, zone: Zone, tab: BtItemTab): BtItemTab => {
+  if (!HARDPOINTS.includes(tab as BtHardpoint)) return tab;
+  const usage = getLocationUsage(mech, loadout, zone);
+  const hasRoom = (type: BtHardpoint) => usage.hardpoints[type].used < usage.hardpoints[type].capacity;
+  if (hasRoom(tab as BtHardpoint)) return tab;
+  return HARDPOINTS.find(hasRoom) ?? tab;
+};
+
+export const getWeaponDamage =(item: BtItem): number => item.weapon ? item.weapon.damage * item.weapon.shots : 0;
 
 const SORT_VALUE: Record<Exclude<BtItemSort, 'name'>, (item: BtItem) => number> = {
   tonnage: item => item.tonnage,

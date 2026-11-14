@@ -13,6 +13,7 @@ interface RowDefinition {
   unit?: string;
   value: (summary: BtSummary) => number | null;
   better: Better;
+  format?: (value: number) => string;
 }
 
 const formatNumber = (value: number) => String(Number(value.toFixed(2)));
@@ -58,7 +59,7 @@ const STAT_GROUPS: { title: string; rows: RowDefinition[] }[] = [
   {
     title: 'COST',
     rows: [
-      { key: 'cost', label: 'Value', unit: 'C-Bills', value: summary => summary.cost, better: 'lower' }
+      { key: 'cost', label: 'Value', unit: 'C-Bills', value: summary => summary.cost, better: 'lower', format: value => value.toLocaleString('en') }
     ]
   }
 ];
@@ -66,8 +67,9 @@ const STAT_GROUPS: { title: string; rows: RowDefinition[] }[] = [
 const buildRow = (definition: RowDefinition, a: BtSummary, b: BtSummary): ComparisonRow => {
   const valueA = definition.value(a);
   const valueB = definition.value(b);
-  const textA = valueA === null ? EMPTY_VALUE : formatNumber(valueA);
-  const textB = valueB === null ? EMPTY_VALUE : formatNumber(valueB);
+  const format = definition.format ?? formatNumber;
+  const textA = valueA === null ? EMPTY_VALUE : format(valueA);
+  const textB = valueB === null ? EMPTY_VALUE : format(valueB);
   const winner = textA === textB ? null : pickWinner(valueA, valueB, definition.better);
   return {
     key: definition.key,
@@ -80,7 +82,7 @@ const buildRow = (definition: RowDefinition, a: BtSummary, b: BtSummary): Compar
     winner,
     lowerIsBetter: definition.better === 'lower',
     difference: winner && valueA !== null && valueB !== null
-      ? `${definition.better === 'lower' ? '-' : '+'}${formatNumber(Math.abs(valueA - valueB))}`
+      ? `${definition.better === 'lower' ? '-' : '+'}${format(Math.abs(valueA - valueB))}`
       : null
   };
 };

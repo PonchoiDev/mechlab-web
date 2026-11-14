@@ -107,6 +107,11 @@ export const removeItem = (loadout: BtLoadout, zone: Zone, index: number): BtLoa
 export const removeItemsOfKind = (loadout: BtLoadout, kinds: BtItemKind[]): BtLoadout =>
   mapZones(zone => loadout[zone].filter(id => !kinds.includes(getItem(id)?.kind ?? 'upgrade')));
 
+// La ubicación que se abre al cargar un 'Mech: la de más anclajes, que es donde suele ir el arma
+// principal (el torso derecho del Hunchback).
+export const getDefaultZone = (mech: BtMech): Zone => ZONE_KEYS.reduce((best, zone) =>
+  mech.locations[zone].hardpoints.length > mech.locations[best].hardpoints.length ? zone : best, 'centerTorso' as Zone);
+
 // Primera ubicación donde cabe un componente, para montarlo sin elegir dónde (por ejemplo, la
 // munición o un disipador). Prefiere la ubicación indicada si cabe ahí.
 export const findMountZone = (mech: BtMech, loadout: BtLoadout, item: BtItem, preferred?: Zone | null): Zone | null => {
