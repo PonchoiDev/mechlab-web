@@ -11,6 +11,7 @@ import { UtilityToolbar } from '../../components/UtilityToolbar';
 import { WhatsNew } from '../../components/WhatsNew';
 import { useSavedBuilds } from '../../hooks/useSavedBuilds';
 import { copyText } from '../../services/clipboard';
+import { EMPTY_VALUE } from '../../utils/format';
 import { normalizeBuildName } from '../../utils/savedBuildsCore';
 import { decodeBtBuild, DEFAULT_MECH, encodeBtBuild, getBtBuildUrl, readBtBuildFromLocation } from '../../utils/battletech/buildCode';
 import { createStockBuild } from '../../utils/battletech/fitting';
@@ -30,7 +31,6 @@ import { useBtBuild } from './useBtBuild';
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
 const linked = readBtBuildFromLocation();
 const formatNumber = (value: number) => String(Number(value.toFixed(2)));
-const formatCost = (value: number) => value.toLocaleString('en');
 
 export function BtMechLabApp() {
   const actions = useBtBuild(linked?.build ?? createStockBuild(DEFAULT_MECH));
@@ -138,46 +138,48 @@ export function BtMechLabApp() {
         </div>
       </header>
 
-      <section className="readout-strip bt-readout" aria-label="'Mech statistics">
+      {/* Las diez cifras del StatsReadout de MW5, en su orden, con las equivalentes de BATTLETECH: andar y
+          correr en lugar de la velocidad, y el calor por turno en lugar de por segundo. */}
+      <section className="readout-strip" aria-label="Mech statistics">
         <div className="readout-cell">
           <span className="readout-label">TONNAGE</span>
-          <strong className={summary.freeTonnage < 0 ? 'readout-warning' : ''}>{formatNumber(summary.tonnage)} <small>/ {mech.tonnage} t</small></strong>
+          <strong className={summary.freeTonnage < 0 ? 'readout-warning' : ''}>{summary.tonnage.toFixed(2)} <small>/ {mech.tonnage} t</small></strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label">ARMOR</span>
-          <strong>{summary.armorPoints} <small>/ {summary.maxArmorPoints} · {formatNumber(summary.armorTonnage)} t</small></strong>
+          <span className="readout-label">ARMOR POINTS</span>
+          <strong>{summary.armorPoints} <small>/ {summary.maxArmorPoints}</small></strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label">ALPHA DAMAGE</span>
-          <strong>{formatNumber(summary.alphaDamage)}{summary.heatDamage > 0 && <small> +{summary.heatDamage} heat</small>}</strong>
+          <span className="readout-label">ARMOR MASS</span>
+          <strong>{summary.armorTonnage.toFixed(2)} <small>t</small></strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label">STABILITY DAMAGE</span>
-          <strong>{formatNumber(summary.instability)}</strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label" title="Heat of an alpha strike against the heat the 'Mech sinks each turn">ALPHA HEAT / SINKING</span>
-          <strong className={summary.heat.net > 0 ? 'readout-warning' : ''}>{formatNumber(summary.heat.alpha)} <small>/ {summary.heat.dissipation} per turn</small></strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label" title="Heat capacity, and the level where the 'Mech starts to overheat">MAX HEAT</span>
-          <strong>{summary.heat.maxHeat} <small>overheat at {summary.heat.overheat}</small></strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label">WALK / SPRINT</span>
-          <strong>{summary.walk ?? '-'} <small>/ {summary.sprint ?? '-'} m</small></strong>
+          <span className="readout-label" title="Walk and sprint distance per turn">WALK / SPRINT</span>
+          <strong>{summary.walk ?? EMPTY_VALUE} <small>/ {summary.sprint ?? EMPTY_VALUE} m</small></strong>
         </div>
         <div className="readout-cell">
           <span className="readout-label">JUMP JETS</span>
           <strong className={summary.jumpJets > summary.maxJumpJets ? 'readout-warning' : ''}>{summary.jumpJets} <small>/ {summary.maxJumpJets}</small></strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label">MAX RANGE</span>
-          <strong>{summary.maxRange > 0 ? <>{summary.maxRange} <small>m</small></> : '-'}</strong>
+          <span className="readout-label" title="Damage of an alpha strike with every weapon">ALPHA DAMAGE</span>
+          <strong>{formatNumber(summary.alphaDamage)}</strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label" title="Chassis, mounted equipment and armor">VALUE</span>
-          <strong>{formatCost(summary.cost)} <small>C-Bills</small></strong>
+          <span className="readout-label" title="Melee attack damage of the chassis, with its equipment bonuses not included">MELEE DAMAGE</span>
+          <strong>{mech.melee.damage}</strong>
+        </div>
+        <div className="readout-cell">
+          <span className="readout-label" title="Heat of an alpha strike">ALPHA HEAT</span>
+          <strong className={summary.heat.net > 0 ? 'readout-warning' : ''}>{formatNumber(summary.heat.alpha)}</strong>
+        </div>
+        <div className="readout-cell">
+          <span className="readout-label" title="Heat the 'Mech sinks each turn: 30 from the engine plus its heat sinks">HEAT SINKING</span>
+          <strong>{summary.heat.dissipation} <small>per turn</small></strong>
+        </div>
+        <div className="readout-cell">
+          <span className="readout-label">MAX WEAPON RANGE</span>
+          <strong>{summary.maxRange > 0 ? <>{summary.maxRange} <small>m</small></> : EMPTY_VALUE}</strong>
         </div>
       </section>
 

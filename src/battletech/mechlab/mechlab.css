@@ -56,8 +56,6 @@ body { background: var(--work-bg); }
 
 .mech-filter-stepper[data-weapon-type] b { color: var(--weapon-color); }
 
-/* Lectura */
-.bt-readout .readout-cell strong small { white-space: nowrap; }
 
 
 
