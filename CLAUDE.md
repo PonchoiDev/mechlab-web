@@ -24,6 +24,8 @@ python3 tools/extraer_pilotos.py "<carpeta del juego>"  # tools/datos-juego/pilo
 python3 tools/generar_pilotos.py  # src/data/pilots.json (lee las academias de tools/datos-juego/starmap/)
 python3 tools/extraer_mapa_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/starmap/ y sus logos
 python3 tools/generar_mapa_battletech.py  # src/data/battletech/starmap.json
+python3 tools/extraer_argo_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/argo/ y battletech/public/argo/
+python3 tools/generar_argo_battletech.py  # src/data/battletech/argo.json
 ```
 
 Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` sin errores.

@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-14-battletech-argo',
+    date: '2026-11-14',
+    title: 'The Argo for BATTLETECH',
+    items: [
+      'A new Argo page for BATTLETECH (2018) lists all 35 ship upgrades with their cost, monthly upkeep, effects in the game\'s own words, requirements and what each one unlocks',
+      'The upgrade tree lights up everything an upgrade requires and unlocks when you point at it',
+      'Plan your refit: tick upgrades and their requirements come along, with the total cost, the monthly upkeep and the combined effects on your ship. The plan goes in the link'
+    ]
+  },
+  {
     id: '2026-11-14-battletech-starmap',
     date: '2026-11-14',
     title: 'BATTLETECH star map',

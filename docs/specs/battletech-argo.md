@@ -1,7 +1,7 @@
 # Especificación: la Argo de BATTLETECH
 
 - **Issue:** pendiente
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/battletech/argo.test.ts`) y por último el código, en commits separados.
 
 ## Contexto

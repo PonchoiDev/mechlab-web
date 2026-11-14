@@ -42,7 +42,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (445 tests, V8 coverage) |
+| Tests | Vitest 5 (455 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -95,6 +95,11 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - The 22 fixed markets of the DLC campaigns and the Atlas II on Romulus, with a search for where to buy each 'Mech or weapon. Every 'Mech opens in the MechLab with its stock build (`/mercs/?mech=AS7-D-H`).
 - Find a 'Mech: the map is colored by how rare a variant is in each faction's market on the chosen date, with its fixed sources (HRQ, special markets) and a shareable link (`?mech=AS7-D`). Special 'Mech locations lists the hero 'Mechs and special variants you can only get in one place, like the Razer Wolverine.
 
+**BATTLETECH Argo**
+- Its own page (`/battletech/argo/`) with all 35 upgrades of the *Argo*, your company's ship in *BATTLETECH* (2018): cost, monthly upkeep, effects in the game's own words, requirements, what each one unlocks and what the crew member who pitches it says.
+- A tree by category and tier that lights up everything an upgrade requires and unlocks when you point at it.
+- Planner: tick upgrades, their requirements come along, and the total cost, monthly upkeep (¢80,000 base plus each upgrade) and combined effects add up. The plan goes in the link (`?own=mechBay3,trainingModule1`).
+
 **Other**
 - What's new bell with the changes the user has not seen yet.
 - Feedback form delivered by email without exposing the developer's address.
@@ -135,6 +140,7 @@ src/
   units/                Enemy units page: filters and a card for each unit
   pilots/               Pilots page: hero pilots, traits and academy training programs
   battletech/           BATTLETECH pages (star map), with their logic in utils/battletech/
+  battletech/argo/      BATTLETECH Argo page: upgrade tree, cards and plan
   hooks/                Build state, saved builds, view preferences and Sarna image
   utils/                Configurator logic: calculations, fitting rules, upgrades, build codes
   services/             Sarna API, clipboard and PNG build image (canvas)
@@ -146,6 +152,7 @@ starmap/index.html      Entry of the star map page (/mercs/starmap/)
 units/index.html        Entry of the enemy units page (/mercs/units/)
 pilots/index.html       Entry of the pilots page (/mercs/pilots/)
 battletech/             Entries of the BATTLETECH pages (/battletech/) and their images
+battletech/argo/        Entry of the Argo page (/battletech/argo/) and its images in public/argo/
 site/                   Landing page at the domain root (mw-builder.com)
 docs/                   Analysis, architecture, UML diagrams and development with AI
 tools/
@@ -159,6 +166,8 @@ tools/
   generar_unidades.py   Generates src/data/units.json
   extraer_pilotos.py    Extracts hero pilots and pilot traits with their effects from the game .pak
   generar_pilotos.py    Generates src/data/pilots.json
+  extraer_argo_battletech.py  Copies the Argo upgrades, their texts and images from BATTLETECH
+  generar_argo_battletech.py  Generates src/data/battletech/argo.json
   ue4.py                Reads the .pak and the Unreal Engine 4 assets
   battletech.py         Reads the BATTLETECH data (lenient JSON and tags)
   extraer_mapa_battletech.py   Extracts systems, factions, tags and logos from BATTLETECH
@@ -276,9 +285,27 @@ python3 tools/generar_mapa_battletech.py
 | `battletech/starmap/etiquetas.json` | `MDD/data/tagdata.sql` | Display name and description of the planet tags |
 | `battletech/public/starmap/logos/` | `emblems/factions/*.dds` | Faction logos as 128 px PNG, decoded from DXT5 |
 
+### BATTLETECH Argo
+
+*BATTLETECH* keeps its data as loose JSON files in `BattleTech_Data/StreamingAssets/`. `extraer_argo_battletech.py` copies what the Argo page needs to `tools/datos-juego/battletech/argo/` and saves the illustrations and portraits as PNG in `battletech/public/argo/`. `generar_argo_battletech.py` generates `src/data/battletech/argo.json`. The DLC add no ship upgrades.
+
+```sh
+python3 tools/extraer_argo_battletech.py "/path/to/BATTLETECH"
+python3 tools/generar_argo_battletech.py
+```
+
+| File | Source in the game | Contents |
+|---|---|---|
+| `shipUpgrades/` | `data/shipUpgrades/*.json` | The 35 upgrades with their category, cost, upkeep, requirements, stats, illustration and crew member |
+| `estadisticas.json` | `data/simGameStatDesc/` | The sentence the game uses to explain each stat an upgrade changes |
+| `categorias.json` | `data/enums/ShipUpgradeCategory.json` | The 9 categories with their display name |
+| `tripulacion.json` | `data/cast/castDef_*Default.json` | Name, rank and portrait of Farah, Yang, Darius and Sumire |
+| `constantes.json` | `data/simGameConstants/SimGameConstants.json` | Base upkeep, starting upgrades in campaign and career, career multipliers and starting values |
+| `battletech/public/argo/` | `sprites/Illustrations/*.dds` and `sprites/Portraits/*.png` | Upgrade illustrations (from DXT1 and DXT5, at 375 × 150) and 96 px portraits |
+
 ## Quality and checks against the game
 
-- **445 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **455 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

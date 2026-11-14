@@ -40,7 +40,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (445 tests, cobertura con V8) |
+| Tests | Vitest 5 (455 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -93,6 +93,11 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Los 22 mercados fijos de las campañas de los DLC y el Atlas II de Romulus, con un buscador de dónde comprar cada 'Mech o arma. Cada 'Mech se abre en el MechLab con su build de serie (`/mercs/?mech=AS7-D-H`).
 - Find a 'Mech: el mapa se colorea según la rareza de una variante en el mercado de cada facción, en la fecha elegida, con sus fuentes fijas (HRQ, mercados especiales) y el enlace se comparte (`?mech=AS7-D`). Special 'Mech locations lista los 'Mechs hero y las variantes especiales que solo se consiguen en un sitio, como el Wolverine de Razer.
 
+**Argo de BATTLETECH**
+- Página propia (`/battletech/argo/`) con las 35 mejoras de la *Argo*, la nave de la compañía en *BATTLETECH* (2018): precio, mantenimiento mensual, efectos con la frase del juego, requisitos, lo que abre cada una y lo que dice el tripulante que la presenta.
+- Árbol por categoría y nivel que resalta, al pasar por una mejora, todo lo que pide y todo lo que abre.
+- Planificador: se marcan las mejoras, se añaden solas sus requisitos y se suman el coste, el mantenimiento mensual (¢80.000 de base más cada mejora) y el efecto conjunto. El plan va en el enlace (`?own=mechBay3,trainingModule1`).
+
 **Otros**
 - Campana de novedades con los cambios que el usuario aún no ha visto.
 - Formulario de feedback que llega por correo sin mostrar la dirección del desarrollador.
@@ -133,6 +138,7 @@ src/
   units/                Página de las unidades enemigas: filtros y ficha de cada unidad
   pilots/               Página de los pilotos: pilotos hero, rasgos y programas de las academias
   battletech/           Páginas de BATTLETECH (mapa estelar), con su lógica en utils/battletech/
+  battletech/argo/      Página de la Argo de BATTLETECH: árbol de mejoras, fichas y plan
   hooks/                Estado de la build, builds guardadas, preferencias de vista e imagen de Sarna
   utils/                Lógica del configurador: cálculos, reglas de equipo, mejoras, código de las builds
   services/             API de Sarna, portapapeles e imagen PNG de la build (canvas)
@@ -144,6 +150,7 @@ starmap/index.html      Entrada de la página del mapa estelar (/mercs/starmap/)
 units/index.html        Entrada de la página de las unidades enemigas (/mercs/units/)
 pilots/index.html       Entrada de la página de los pilotos (/mercs/pilots/)
 battletech/             Entradas de las páginas de BATTLETECH (/battletech/) y sus imágenes
+battletech/argo/        Entrada de la página de la Argo (/battletech/argo/) y sus imágenes en public/argo/
 site/                   Portada de la raíz del dominio (mw-builder.com)
 docs/                   Análisis, arquitectura, diagramas UML y desarrollo con IA
 tools/
@@ -157,6 +164,8 @@ tools/
   generar_unidades.py   Genera src/data/units.json
   extraer_pilotos.py    Extrae del .pak del juego los pilotos hero y los rasgos de piloto con sus efectos
   generar_pilotos.py    Genera src/data/pilots.json
+  extraer_argo_battletech.py  Copia de BATTLETECH las mejoras de la Argo, sus textos e imágenes
+  generar_argo_battletech.py  Genera src/data/battletech/argo.json
   ue4.py                Lectura del .pak y de los assets de Unreal Engine 4
   battletech.py         Lectura de los datos de BATTLETECH (JSON tolerante y etiquetas)
   extraer_mapa_battletech.py   Extrae de BATTLETECH los sistemas, las facciones, las etiquetas y los logos
@@ -272,9 +281,27 @@ python3 tools/generar_mapa_battletech.py
 | `battletech/starmap/etiquetas.json` | `MDD/data/tagdata.sql` | Nombre visible y descripción de las etiquetas de planeta |
 | `battletech/public/starmap/logos/` | `emblems/factions/*.dds` | Logos de las facciones en PNG de 128 px, descomprimidos de DXT5 |
 
+### Argo de BATTLETECH
+
+*BATTLETECH* guarda sus datos en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/`. `extraer_argo_battletech.py` copia lo que necesita la página de la Argo a `tools/datos-juego/battletech/argo/` y guarda las ilustraciones y los retratos en PNG en `battletech/public/argo/`. `generar_argo_battletech.py` genera `src/data/battletech/argo.json`. Los DLC no traen mejoras de la nave.
+
+```sh
+python3 tools/extraer_argo_battletech.py "/ruta/a/BATTLETECH"
+python3 tools/generar_argo_battletech.py
+```
+
+| Archivo | Origen en el juego | Contenido |
+|---|---|---|
+| `shipUpgrades/` | `data/shipUpgrades/*.json` | Las 35 mejoras con su categoría, precio, mantenimiento, requisitos, estadísticas, ilustración y tripulante |
+| `estadisticas.json` | `data/simGameStatDesc/` | La frase con la que el juego explica cada estadística que cambia una mejora |
+| `categorias.json` | `data/enums/ShipUpgradeCategory.json` | Las 9 categorías con su nombre visible |
+| `tripulacion.json` | `data/cast/castDef_*Default.json` | Nombre, rango y retrato de Farah, Yang, Darius y Sumire |
+| `constantes.json` | `data/simGameConstants/SimGameConstants.json` | Mantenimiento base, mejoras iniciales de la campaña y de la carrera, multiplicadores de la carrera y valores iniciales |
+| `battletech/public/argo/` | `sprites/Illustrations/*.dds` y `sprites/Portraits/*.png` | Ilustraciones de las mejoras (de DXT1 y DXT5, a 375 × 150) y retratos de 96 px |
+
 ## Calidad y comprobación contra el juego
 
-- **445 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **455 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
