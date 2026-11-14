@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-14-battletech-covers',
+    date: '2026-11-14',
+    title: 'BATTLETECH on the home page',
+    items: [
+      'The BATTLETECH MechLab and the Argo have their own covers on the home page, next to the BATTLETECH star map, with art from the game'
+    ]
+  },
+  {
     id: '2026-11-14-battletech-mechlab',
     date: '2026-11-14',
     title: 'BATTLETECH MechLab',
