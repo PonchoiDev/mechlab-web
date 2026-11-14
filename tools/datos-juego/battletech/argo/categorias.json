@@ -1,0 +1,49 @@
+{
+  "enumerationValueList": [
+    {
+      "ID": 0,
+      "Name": "POWER_SYSTEM",
+      "FriendlyName": "Power System"
+    },
+    {
+      "ID": 1,
+      "Name": "STRUCTURE",
+      "FriendlyName": "Structure"
+    },
+    {
+      "ID": 2,
+      "Name": "DRIVE_SYSTEM",
+      "FriendlyName": "Drive System"
+    },
+    {
+      "ID": 3,
+      "Name": "HABITAT_POD",
+      "FriendlyName": "Habitat Pod"
+    },
+    {
+      "ID": 4,
+      "Name": "MED_BAY",
+      "FriendlyName": "Med Bay"
+    },
+    {
+      "ID": 5,
+      "Name": "RECREATION",
+      "FriendlyName": "Recreation"
+    },
+    {
+      "ID": 6,
+      "Name": "MECH_BAY",
+      "FriendlyName": "Mech Bay"
+    },
+    {
+      "ID": 7,
+      "Name": "REPAIR_REFIT",
+      "FriendlyName": "Repair Refit"
+    },
+    {
+      "ID": 8,
+      "Name": "TRAINING",
+      "FriendlyName": "Training"
+    }
+  ]
+}

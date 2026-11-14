@@ -1,0 +1,230 @@
+{
+  "BarracksPods": {
+    "Description": {
+      "Id": "SimGameStatDesc_BarracksPods",
+      "Name": "Barracks Pods (Rooms)",
+      "Details": "The number of rooms for housing MechWarriors",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": "",
+    "hidden": true
+  },
+  "BarracksPods_Display": {
+    "Description": {
+      "Id": "SimGameStatDesc_BarracksPods_Display",
+      "Name": "Barracks Pods (Rooms)",
+      "Details": "Display value for BarracksPods",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "The Barracks support up to {RES_VALUE.ToString} MechWarriors",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": ""
+  },
+  "DriveTravelMultiplier": {
+    "Description": {
+      "Id": "SimGameStatDesc_DriveTravelMultiplier",
+      "Name": "Drive Travel Mult",
+      "Details": "Affects non-jump travel times - not shown",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": "",
+    "hidden": true
+  },
+  "DriveTravelMultiplier_Display": {
+    "Description": {
+      "Id": "SimGameStatDesc_DriveTravelMultiplier_Display",
+      "Name": "Drive Travel Mult",
+      "Details": "Display value for DriveTravelMultiplier",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "Travel time to and from Jump Points reduced by {RES_VALUE.ToString}%",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": ""
+  },
+  "ExperiencePerDay": {
+    "Description": {
+      "Id": "SimGameStatDesc_ExperiencePerDay",
+      "Name": "Experience",
+      "Details": "Experience the MechWarrior may spent to train skills.",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "MechWarriors gain {RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_ExperienceUnspent], Experience]] each day",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": ""
+  },
+  "ExperiencePerDayCap": {
+    "Description": {
+      "Id": "SimGameStatDesc_ExperiencePerDayCap",
+      "Name": "Experience",
+      "Details": "Experience the MechWarrior may spent to train skills.",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "MechWarriors with less than {RES_VALUE.ToString} total [[DM.SimGameStatDescDefs[SimGameStatDesc_ExperienceUnspent], Experience]] can benefit from this training",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": ""
+  },
+  "IncapacitatedDeathChance": {
+    "Description": {
+      "Id": "SimGameStatDesc_IncapacitatedDeathChance",
+      "Name": "Death Chance - Incapacitation",
+      "Details": "Probability of death from incapacitating damage",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": "Chance of death from Incapacitating damage is {RES_VALUE.ToPercentString} less likely"
+  },
+  "LethalDeathChance": {
+    "Description": {
+      "Id": "SimGameStatDesc_LethalDeathChance",
+      "Name": "Death Chance - Lethal Wounds",
+      "Details": "Probability of death from lethal damage",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": "Chance of death from Lethal damage is {RES_VALUE.ToPercentString} less likely"
+  },
+  "MechBayPods": {
+    "Description": {
+      "Id": "SimGameStatDesc_MechBayPods",
+      "Name": "MeyBay Pods (Rows)",
+      "Details": "Number of rows in the MechBay",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": "",
+    "hidden": true
+  },
+  "MechBayPods_Display": {
+    "Description": {
+      "Id": "SimGameStatDesc_MechBayPods_Display",
+      "Name": "MeyBay Pods (Rows)",
+      "Details": "Display value for MechBayPods",
+      "Icon": null
+    },
+    "setResult": "",
+    "positiveResult": "",
+    "negativeResult": "",
+    "temporalSetResult": "",
+    "temporalPositiveResult": "",
+    "temporalNegativeResult": "",
+    "infinitiveSetResult": "The MechBay supports up to {RES_VALUE.ToString} BattleMechs ready for battle",
+    "infinitivePositiveResult": "",
+    "infinitiveNegativeResult": ""
+  },
+  "MechTechSkill": {
+    "Description": {
+      "Id": "SimGameStatDesc_MechTechSkill",
+      "Name": "Tech Points",
+      "Details": "Tech Points are generated each day and spent to repair or customize BattleMechs. Tech Points only apply to one 'Mech task at a time, so additional tasks are queued to be worked on next.",
+      "Icon": null
+    },
+    "setResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Points]] are set to {RES_VALUE.ToString}",
+    "positiveResult": "+{RES_VALUE.ToString} permanent change to [[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Points]]",
+    "negativeResult": "-{RES_VALUE.ToString} permanent change to [[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Points]]",
+    "temporalSetResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Points]] are set to {RES_VALUE.ToString} for {RES_DURATION.ToString} days",
+    "temporalPositiveResult": "The company gains a +{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Point]] boost for {RES_DURATION.ToString} days",
+    "temporalNegativeResult": "The company suffers a -{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Point]] penalty for {RES_DURATION.ToString} days",
+    "temporalPositiveResultEnd": "The +{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Point]] boost has expired",
+    "temporalNegativeResultEnd": "The -{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Point]] penalty has expired",
+    "infinitiveSetResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Points]] are set to {RES_VALUE.ToString}",
+    "infinitivePositiveResult": "+{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Points]]",
+    "infinitiveNegativeResult": "-{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MechTechSkill], Tech Points]]"
+  },
+  "MedTechSkill": {
+    "Description": {
+      "Id": "SimGameStatDesc_MedTechSkill",
+      "Name": "Medical Points",
+      "Details": "Medical Points are generated each day and spent to heal injured MechWarriors. Medical Points apply to all injured MechWarriors simultaneously.",
+      "Icon": null
+    },
+    "setResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Points]] are set to {RES_VALUE.ToString}",
+    "positiveResult": "+{RES_VALUE.ToString} permanent change to [[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Points]]",
+    "negativeResult": "-{RES_VALUE.ToString} permanent change to [[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Points]]",
+    "temporalSetResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Points]] are set to {RES_VALUE.ToString} for {RES_DURATION.ToString} days",
+    "temporalPositiveResult": "The company gains a +{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Point]] boost for {RES_DURATION.ToString} days",
+    "temporalNegativeResult": "The company suffers a -{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Point]] penalty for {RES_DURATION.ToString} days",
+    "temporalPositiveResultEnd": "The +{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Point]] boost has expired",
+    "temporalNegativeResultEnd": "The -{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Point]] penalty has expired",
+    "infinitiveSetResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Points]] are set to {RES_VALUE.ToString}",
+    "infinitivePositiveResult": "+{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Points]]",
+    "infinitiveNegativeResult": "-{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_MedTechSkill], Medical Points]]"
+  },
+  "Morale": {
+    "Description": {
+      "Id": "SimGameStatDesc_Morale",
+      "Name": "Morale",
+      "Details": "The overall Morale of your crew and MechWarriors, out of a maximum possible 50 points. Morale can be raised by more lavish spending on salaries and luxuries, as well as by constructing recreational upgrades in the DropShip. Be careful: if your Morale is too low, you may encounter negative events.\r \n \r \nHigher Morale also generates more <color=#F79B26>Resolve</color> per turn in combat, which you can use trigger certain special abilities.",
+      "Icon": null
+    },
+    "setResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_Morale], Morale]] set to {RES_VALUE.ToString}",
+    "positiveResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_Morale], Morale]] increased by {RES_VALUE.ToString}",
+    "negativeResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_Morale], Morale]] decreased by {RES_VALUE.ToString}",
+    "temporalSetResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_Morale], Morale]] set to {RES_VALUE.ToString} for {RES_DURATION.ToString} days",
+    "temporalPositiveResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_Morale], Morale]] increased by {RES_VALUE.ToString} for {RES_DURATION.ToString} days",
+    "temporalNegativeResult": "[[DM.SimGameStatDescDefs[SimGameStatDesc_Morale], Morale]] decreased by {RES_VALUE.ToString} for {RES_DURATION.ToString} days",
+    "infinitiveSetResult": "",
+    "infinitivePositiveResult": "+{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_Morale], Morale]]",
+    "infinitiveNegativeResult": "-{RES_VALUE.ToString} [[DM.SimGameStatDescDefs[SimGameStatDesc_Morale], Morale]]"
+  }
+}

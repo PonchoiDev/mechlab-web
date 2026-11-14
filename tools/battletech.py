@@ -51,3 +51,18 @@ def leer_etiquetas(juego):
                 continue
             etiquetas[nombre] = {"visible": visible == "1", "nombre": visible_nombre, "descripcion": descripcion}
     return etiquetas
+
+
+# SimGameConstants.json lleva además comentarios de bloque (/* ... */) entre sus claves.
+REGEX_COMENTARIO_BLOQUE = re.compile(r"/\*.*?\*/", re.S)
+
+
+def leer_constantes(juego):
+    """Las constantes de la campaña y la carrera (SimGameConstants.json), por sección."""
+    with open(os.path.join(juego, DATOS, "simGameConstants", "SimGameConstants.json"), encoding="utf-8-sig") as archivo:
+        texto = archivo.read()
+    texto = REGEX_COMENTARIO_BLOQUE.sub("", texto)
+    texto = REGEX_COMENTARIO.sub("", texto)
+    texto = REGEX_COMA_FINAL.sub(r"\1", texto)
+    texto = REGEX_COMA_QUE_FALTA.sub(r"\1,\2", texto)
+    return json.loads(texto)
