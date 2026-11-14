@@ -21,6 +21,7 @@ import {
 } from '../utils/starmap';
 import { getQuestRoute, parseQuestQuery } from '../utils/quests';
 import { getCampaignRoute, parseCampaignQuery } from '../utils/campaigns';
+import { getMapMarks } from '../utils/marks';
 import { getFixedSources, getMarketRarity, getMechFocus, isProduced, parseMechQuery } from '../utils/availability';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
@@ -348,6 +349,17 @@ export function StarmapApp() {
     () => (routeCampaign ? getCampaignRoute(routeCampaign) : routeQuest ? getQuestRoute(routeQuest) : markedSystem !== null ? [markedSystem] : null),
     [routeCampaign, routeQuest, markedSystem]
   );
+  // Cada selección marca su sistema en el color de su panel: el elegido, la academia (si su ficha es
+  // la que se ve), la oferta de la HRQ, el inicio de la campaña y dónde se consigue la variante.
+  const showsAcademy = academy && !quest && !campaign && !mech && !companyId && !zoneId;
+  const mechQuest = !quest && mechId ? data.quests.find(candidate => candidate.id === mechQuestId) ?? null : null;
+  const marks = useMemo(() => getMapMarks({
+    selectedId,
+    academySystem: showsAcademy ? academy.system : null,
+    questOffer: quest?.offer ?? null,
+    campaignStart: !quest && campaign ? campaign.start : null,
+    mechSystem: !quest && mechId ? markedSystem ?? mechQuest?.offer ?? null : null
+  }), [selectedId, showsAcademy, academy, quest, campaign, mechId, markedSystem, mechQuest]);
   const mechProduced = mech ? isProduced(mech, date) : false;
   // Con una variante elegida, cada facción se pinta con el color de su rareza. Solo depende de la
   // fecha a través de si la variante ya existe, para no cortar la animación al saltar de evento.
@@ -498,7 +510,7 @@ export function StarmapApp() {
         selectedId={selectedId}
         questRoute={questRoute}
         routeColor={routeCampaign ? CAMPAIGN_COLOR : undefined}
-        markedId={academy && !quest && !campaign && !mech && !companyId && !zoneId ? academy.system : null}
+        marks={marks}
         territoryColors={territoryColors}
         focus={focus}
         onHover={setHoveredId}

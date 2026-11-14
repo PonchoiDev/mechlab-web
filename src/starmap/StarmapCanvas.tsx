@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { GameDate, StarmapData } from '../types/starmap';
+import type { MapMark } from '../utils/marks';
 import { getClusterLevels } from '../utils/starmap';
 import { ZoneLevelText } from './ZonePanels';
 import { QUEST_COLOR, StarmapRenderer, type MercZoneLayer, type TerritoryColors, type View } from './renderer';
@@ -21,8 +22,8 @@ interface StarmapCanvasProps {
   questRoute: number[] | null;
   // Color de la ruta; sin él, el de las HRQ.
   routeColor?: string;
-  // Sistema de la academia elegida: se marca para encontrarlo al encuadrarlo.
-  markedId: number | null;
+  // Sistemas de lo elegido (el sistema, la academia, la HRQ…): se marcan para encontrarlos al encuadrarlos.
+  marks: MapMark[];
   territoryColors: TerritoryColors;
   mercZones: MercZoneLayer;
   focus: FocusRequest | null;
@@ -93,7 +94,7 @@ const getVisibleBand = (container: HTMLElement): { top: number; bottom: number }
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, routeColor, markedId, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, routeColor, marks, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
@@ -221,9 +222,9 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     renderer.selectedId = selectedId;
     renderer.questRoute = questRoute;
     renderer.routeColor = routeColor ?? QUEST_COLOR;
-    renderer.markedId = markedId;
+    renderer.marks = marks;
     renderer.requestDraw();
-  }, [hoveredId, selectedId, questRoute, routeColor, markedId]);
+  }, [hoveredId, selectedId, questRoute, routeColor, marks]);
 
   useEffect(() => {
     rendererRef.current?.setTerritoryColors(territoryColors);
@@ -232,6 +233,19 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
   useEffect(() => {
     rendererRef.current?.setMercZones(mercZones);
   }, [mercZones]);
+
+  // Al abrir un enlace, el primer encuadre se hace antes de que carguen las fuentes: con ellas la ficha
+  // crece y en el móvil puede tapar lo encuadrado. Se repite una vez cuando están listas.
+  const [fontsReady, setFontsReady] = useState(false);
+  useEffect(() => {
+    let active = true;
+    document.fonts?.ready.then(() => {
+      if (active) setFontsReady(true);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (!focus) return;
@@ -262,7 +276,7 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
     const bandFit = Math.min(width / (bounds.maxX - bounds.minX + FIT_PADDING), (band.bottom - band.top) / (bounds.maxY - bounds.minY + FIT_PADDING));
     const scale = Math.min(FOCUS_SCALE, Math.max(isMobile ? bandFit : fitScaleRef.current, fit));
     animateTo({ x: (minX + maxX) / 2 - inset / 2 / scale, y: (minY + maxY) / 2 + bandOffset / scale, scale });
-  }, [focus, data]);
+  }, [focus, data, fontsReady]);
 
   // Arrastre con un dedo o el ratón, y zoom con dos dedos o la rueda.
   useEffect(() => {
