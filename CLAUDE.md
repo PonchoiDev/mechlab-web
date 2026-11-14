@@ -1,11 +1,12 @@
 # MechLab MW5
 
-Configurador web de 'Mechs para *MechWarrior 5: Mercenaries* (no *MW5: Clans*), publicado en https://mw-builder.com/mercs/. React 19 + TypeScript 7 + Vite 8, desplegado en Cloudflare Workers. La arquitectura está en `docs/arquitectura.md` y los requisitos en `docs/analisis.md`.
+Configurador web de 'Mechs para *MechWarrior 5: Mercenaries* (no *MW5: Clans*), publicado en https://mw-builder.com/mercs/. También tiene herramientas para *BATTLETECH* (Harebrained Schemes, 2018) en https://mw-builder.com/battletech/: solo el juego base con sus DLC, sin mods. React 19 + TypeScript 7 + Vite 8, desplegado en Cloudflare Workers. La arquitectura está en `docs/arquitectura.md` y los requisitos en `docs/analisis.md`.
 
 ## Comandos
 
 ```sh
 npm run dev      # http://localhost:5173/mercs/
+npm run dev:battletech  # http://localhost:5174/battletech/
 npm test         # Vitest
 npm run coverage # Vitest con informe de cobertura
 npm run lint     # oxlint
@@ -21,6 +22,8 @@ python3 tools/imagenes_sarna.py    # tools/datos-juego/unidades/sarna.json, de l
 python3 tools/generar_unidades.py # src/data/units.json (lee items.json y sarna.json)
 python3 tools/extraer_pilotos.py "<carpeta del juego>"  # tools/datos-juego/pilotos/ (rasgos y pilotos hero), del .pak
 python3 tools/generar_pilotos.py  # src/data/pilots.json (lee las academias de tools/datos-juego/starmap/)
+python3 tools/extraer_mapa_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/starmap/ y sus logos
+python3 tools/generar_mapa_battletech.py  # src/data/battletech/starmap.json
 ```
 
 Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` sin errores.
