@@ -1,13 +1,13 @@
-import type { MouseEvent } from 'react';
+import type { CSSProperties, MouseEvent } from 'react';
 import type { Zone } from '../../types/mech';
-import type { BtArmorSide, BtBuild } from '../../types/battletech-mechlab';
+import type { BtArmorSide, BtBuild, BtItem } from '../../types/battletech-mechlab';
 import { SlotBar } from '../../components/SlotBar';
 import { useLongPress } from '../../hooks/useLongPress';
 import { getMenuPosition } from '../../utils/menuPosition';
 import { ZONES } from '../../utils/zones';
 import { getArmorLimit } from '../../utils/battletech/armor';
-import { getHardpointViews, getLocationUsage, groupZoneEquipment, type EquipmentGroup, type HardpointView } from '../../utils/battletech/fitting';
-import { getEquipmentCategory, getItemWeaponType, HARDPOINT_LABELS, HARDPOINTS, SOURCE_LABELS, WEIGHT_CLASS_LABELS } from '../../utils/battletech/mechlabData';
+import { getFixedItems, getHardpointViews, getLocationUsage, groupZoneEquipment, type EquipmentGroup, type HardpointView } from '../../utils/battletech/fitting';
+import { getEquipmentCategory, getItem, getItemWeaponType, HARDPOINT_LABELS, HARDPOINTS, SOURCE_LABELS, WEIGHT_CLASS_LABELS } from '../../utils/battletech/mechlabData';
 import { BtArmorControl } from './BtArmorControl';
 import { MechIcon } from './MechIcon';
 
@@ -21,6 +21,9 @@ interface BtBoardProps {
   onArmorStep: (zone: Zone, side: BtArmorSide, steps: number) => void;
   onHardpointMenu: (zone: Zone, hardpointIndex: number, x: number, y: number) => void;
   onEquipmentMenu: (zone: Zone, itemId: string, x: number, y: number) => void;
+  // Vista de MW5: ranuras como celdas (Show slot cells) y tablero compacto, sin la imagen.
+  expandedSlots: boolean;
+  compact: boolean;
 }
 
 // Clic derecho o pulsación larga: abre el menú de la pieza, como en las tarjetas de MW5.
@@ -82,7 +85,66 @@ function CardEquipment({ group, onSelect, onMenu }: { group: EquipmentGroup; onS
 // Tarjeta de una ubicación con el marcado del MechLab de MW5 (ComponentCard): anclajes con su arma,
 // equipo agrupado, barra de ranuras y blindaje. En BATTLETECH las armas también ocupan ranuras, y el
 // blindaje delantero y el trasero tienen cada uno su máximo.
-function LocationCard({ build, zone, label, position, isActive, selectedHardpoint, onSelectZone, onArmorChange, onArmorStep, onHardpointMenu, onEquipmentMenu }: Omit<BtBoardProps, 'activeZone'> & {
+// Show slot cells de MW5: cada ranura es una celda y cada pieza ocupa las suyas. En BATTLETECH las armas
+// también ocupan ranuras, así que salen aquí además de en su anclaje.
+function SlotCells({ mech, loadout, zone, capacity, onSelect, onMenu, onHardpointMenu }: {
+  mech: BtBuild['mech'];
+  loadout: BtBuild['loadout'];
+  zone: Zone;
+  capacity: number;
+  onSelect: () => void;
+  onMenu: (itemId: string, x: number, y: number) => void;
+  onHardpointMenu: (hardpointIndex: number, x: number, y: number) => void;
+}) {
+  const fixed = getFixedItems(mech, zone);
+  const hardpoints = getHardpointViews(mech, loadout, zone);
+  const mounted = loadout[zone].map(id => getItem(id)).filter((item): item is BtItem => item !== undefined);
+  const used = [...fixed, ...mounted].reduce((total, item) => total + item.slots, 0);
+  return (
+    <div className="slot-cells" aria-label={`Slots: ${used} of ${capacity}`}>
+      <span className="slot-cells-label">Slots <small>{used}/{capacity}</small></span>
+      {fixed.map((item, index) => (
+        <CellItem key={`fixed-${index}`} item={item} fixed onSelect={onSelect} onMenu={() => undefined} />
+      ))}
+      {loadout[zone].map((id, index) => {
+        const item = getItem(id);
+        if (!item) return null;
+        const hardpointIndex = hardpoints.findIndex(view => view.index === index);
+        return (
+          <CellItem
+            key={`${id}-${index}`}
+            item={item}
+            onSelect={onSelect}
+            onMenu={(x, y) => hardpointIndex >= 0 ? onHardpointMenu(hardpointIndex, x, y) : onMenu(id, x, y)}
+          />
+        );
+      })}
+      {Array.from({ length: Math.max(0, capacity - used) }, (_, index) => <span key={`empty-${index}`} className="slot-cell-empty" aria-hidden="true" />)}
+    </div>
+  );
+}
+
+function CellItem({ item, fixed = false, onSelect, onMenu }: { item: BtItem; fixed?: boolean; onSelect: () => void; onMenu: (x: number, y: number) => void }) {
+  const longPress = useLongPress(onMenu);
+  return (
+    <button
+      type="button"
+      className={fixed ? 'component-card-item slot-cell-item is-built-in' : 'component-card-item slot-cell-item'}
+      style={{ '--slots': Math.max(1, item.slots) } as CSSProperties}
+      data-category={item.kind === 'weapon' ? undefined : getEquipmentCategory(item)}
+      data-weapon-type={getItemWeaponType(item)}
+      title={fixed ? `${item.name}: built into this chassis, cannot be removed` : `${item.name}: right-click for options`}
+      onClick={(event) => { event.stopPropagation(); onSelect(); }}
+      onContextMenu={fixed ? (event) => event.preventDefault() : (event) => openMenu(event, onMenu)}
+      {...(fixed ? {} : longPress)}
+    >
+      {item.name}
+      {fixed && <small>built-in</small>}
+    </button>
+  );
+}
+
+function LocationCard({ build, zone, label, position, isActive, selectedHardpoint, onSelectZone, onArmorChange, onArmorStep, onHardpointMenu, onEquipmentMenu, expandedSlots }: Omit<BtBoardProps, 'activeZone'> & {
   zone: Zone;
   label: string;
   position: string;
@@ -125,22 +187,38 @@ function LocationCard({ build, zone, label, position, isActive, selectedHardpoin
         </div>
       )}
 
-      {equipment.length > 0 && (
-        <div className="component-card-equipment">
-          {equipment.map(group => (
-            <CardEquipment
-              key={`${group.fixed ? 'fixed' : 'item'}-${group.item.id}`}
-              group={group}
-              onSelect={() => select()}
-              onMenu={(x, y) => onEquipmentMenu(zone, group.item.id, x, y)}
-            />
-          ))}
+      {expandedSlots ? (
+        <div className="component-card-slots">
+          <SlotCells
+            mech={mech}
+            loadout={loadout}
+            zone={zone}
+            capacity={usage.slots.capacity}
+            onSelect={() => select()}
+            onMenu={(itemId, x, y) => onEquipmentMenu(zone, itemId, x, y)}
+            onHardpointMenu={(index, x, y) => onHardpointMenu(zone, index, x, y)}
+          />
         </div>
-      )}
+      ) : (
+        <>
+          {equipment.length > 0 && (
+            <div className="component-card-equipment">
+              {equipment.map(group => (
+                <CardEquipment
+                  key={`${group.fixed ? 'fixed' : 'item'}-${group.item.id}`}
+                  group={group}
+                  onSelect={() => select()}
+                  onMenu={(x, y) => onEquipmentMenu(zone, group.item.id, x, y)}
+                />
+              ))}
+            </div>
+          )}
 
-      <div className="component-card-footer">
-        <SlotBar used={usage.slots.used} capacity={usage.slots.capacity} label="Slots" />
-      </div>
+          <div className="component-card-footer">
+            <SlotBar used={usage.slots.used} capacity={usage.slots.capacity} label="Slots" />
+          </div>
+        </>
+      )}
 
       <div className={armorTotal < maxArmor ? 'component-card-armor is-low' : 'component-card-armor'}>
         <span className="component-card-armor-total" title={`Armor ${armorTotal} / ${maxArmor}`}>
@@ -178,25 +256,31 @@ function LocationCard({ build, zone, label, position, isActive, selectedHardpoin
 export function BtBoard(props: BtBoardProps) {
   const { mech } = props.build;
   return (
-    <section className="mech-board bt-board" aria-label={`${mech.name} ${mech.variant} components`}>
+    <section className={props.compact ? 'mech-board is-compact' : 'mech-board'} aria-label={`${mech.name} ${mech.variant} components`}>
       <div className="mech-board-reference bt-reference">
         <div className="mech-board-title">
           <h2>{mech.name}</h2>
           <span className="variant-tag">{mech.variant}</span>
         </div>
-        <p className="bt-reference-meta">
-          {mech.tonnage} t · {WEIGHT_CLASS_LABELS[mech.weightClass]}{mech.role ? ` · ${mech.role}` : ''}
-          {mech.source !== 'base' && <> · <span className="bt-source-tag">{SOURCE_LABELS[mech.source]}</span></>}
-        </p>
-        <div className="mech-board-image">
-          <MechIcon mech={mech} size={128} />
-          {mech.tags.length > 0 && (
-            <ul className="bt-tags" aria-label="Role tags">
-              {mech.tags.map(tag => <li key={tag}>{tag}</li>)}
-            </ul>
-          )}
-          <p className="bt-reference-description">{mech.description}</p>
-        </div>
+        {/* Donde MW5 pone motor, disipadores y estructura (MechSpecs), BATTLETECH pone tonelaje, clase,
+            rol y fuente: su motor y su estructura van dentro del chasis y no se cambian. */}
+        <span className="mech-specs">
+          <span className="mech-spec">{mech.tonnage} T</span>
+          <span className="mech-spec">{WEIGHT_CLASS_LABELS[mech.weightClass].toUpperCase()}</span>
+          {mech.role && <span className="mech-spec is-ap">{mech.role.toUpperCase()}</span>}
+          {mech.source !== 'base' && <span className="mech-spec is-xl">{SOURCE_LABELS[mech.source].toUpperCase()}</span>}
+        </span>
+        {!props.compact && (
+          <div className="mech-board-image">
+            <MechIcon mech={mech} size={128} />
+            {mech.tags.length > 0 && (
+              <ul className="bt-tags" aria-label="Role tags">
+                {mech.tags.map(tag => <li key={tag}>{tag}</li>)}
+              </ul>
+            )}
+            <p className="bt-reference-description">{mech.description}</p>
+          </div>
+        )}
       </div>
       {ZONES.map(({ zone, label, position }) => (
         <LocationCard key={zone} {...props} zone={zone} label={label} position={position} isActive={props.activeZone === zone} />

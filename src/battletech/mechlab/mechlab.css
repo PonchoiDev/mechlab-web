@@ -45,42 +45,17 @@ body { background: var(--work-bg); }
 /* Selector de 'Mech */
 .bt-mech-picker { min-width: 280px; }
 
-.bt-mech-options-panel { width: min(520px, calc(100vw - 32px)); }
 
-.bt-mech-option {
-  grid-template-columns: 40px minmax(0, 1fr) auto;
-}
+/* Las opciones son las de MW5 (mech-option) con el icono del chasis delante. */
+.bt-mech-option { grid-template-columns: 40px minmax(0, 1fr) auto; }
 
-.bt-mech-option .bt-mech-icon { grid-row: span 2; }
+.bt-mech-option .bt-mech-icon { grid-row: span 3; }
 
+.bt-mech-option .mech-option-hardpoints,
 .bt-mech-option small { grid-column: 2 / -1; }
 
-.bt-mech-option-name strong { margin-left: 4px; }
+.mech-filter-stepper[data-weapon-type] b { color: var(--weapon-color); }
 
-.mech-filter-stepper[data-weapon-type] b { color: var(--bt-color); }
-
-.bt-hardpoint-summary {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 3px;
-}
-
-.bt-hardpoint-tag {
-  padding: 1px 5px;
-  border: 1px solid color-mix(in srgb, var(--bt-color) 55%, transparent);
-  border-radius: 2px;
-  color: var(--bt-color);
-  font: 600 10px var(--work-mono);
-  white-space: nowrap;
-}
-
-.bt-hardpoint-tag.is-jump { --bt-color: var(--bt-jump); }
-.bt-hardpoint-tag.is-full { background: color-mix(in srgb, var(--bt-color) 16%, transparent); }
-.bt-hardpoint-tag.is-over { --bt-color: var(--work-red); background: rgba(255, 121, 108, 0.14); }
-
-/* Lectura */
-.bt-readout .readout-cell strong small { white-space: nowrap; }
 
 
 
@@ -94,36 +69,11 @@ body { background: var(--work-bg); }
 
 .hardpoint-chip.is-over { --weapon-color: var(--work-red); }
 
-.bt-reference {
-  align-items: center;
-  text-align: center;
-}
-
 .bt-reference .bt-mech-icon {
   width: min(180px, 70%);
   height: auto;
   margin: 8px 0;
   filter: drop-shadow(0 0 18px rgba(255, 212, 0, 0.12));
-}
-
-.bt-reference h2 span {
-  color: var(--bt-accent);
-  font-family: var(--work-mono);
-  font-size: 0.85em;
-}
-
-.bt-source-tag {
-  padding: 1px 6px;
-  border: 1px solid var(--work-line);
-  border-radius: 2px;
-  color: var(--work-muted);
-  font: 500 10px var(--work-mono);
-  text-transform: uppercase;
-}
-
-.bt-reference-meta {
-  color: var(--work-muted);
-  font: 500 11px var(--work-mono);
 }
 
 .bt-tags {
@@ -151,140 +101,14 @@ body { background: var(--work-bg); }
   text-align: left;
 }
 
-.bt-compare-source select {
-  min-height: 30px;
-  padding: 0 8px;
-  border: 1px solid var(--work-line);
-  border-radius: 2px;
-  color: var(--work-text);
-  background: var(--work-panel-raised);
-  font: 500 12px var(--work-mono);
-}
-
-.bt-item-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.bt-item-tabs .editor-tab[data-category] { border-bottom: 2px solid color-mix(in srgb, var(--bt-color) 60%, transparent); }
-
-.bt-item-filters {
-  display: grid;
-  gap: 6px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--work-line);
-}
-
-.bt-item-filters .editor-search { width: 100%; }
-
-.bt-item-list {
-  max-height: 460px;
-  margin: 0;
-  padding: 6px;
-  overflow-y: auto;
-  list-style: none;
-}
-
-.bt-item-option {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px;
-  padding: 8px 8px 8px 10px;
-  border-left: 3px solid var(--bt-color);
-  border-bottom: 1px solid rgba(52, 61, 52, 0.6);
-}
-
-.bt-item-option.is-blocked { opacity: 0.72; }
-
-.bt-item-option-main {
-  display: grid;
-  gap: 3px;
-  min-width: 0;
-}
-
-.bt-item-option-main strong { font-size: 13px; }
-
-.bt-item-option-meta,
-.bt-item-bonuses {
-  color: var(--work-muted);
-  font: 400 10px var(--work-mono);
-}
-
-.bt-item-bonuses { color: var(--bt-accent); }
-
-.bt-item-problem {
-  color: var(--work-amber);
-  font-size: 11px;
-}
-
-.bt-item-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 10px;
-  margin: 2px 0 0;
-}
-
-.bt-item-stats div { display: flex; gap: 4px; }
-
-.bt-item-stats dt {
-  color: var(--work-muted);
-  font: 400 10px var(--work-mono);
-}
-
-.bt-item-stats dd {
-  margin: 0;
-  color: var(--work-text);
-  font: 600 11px var(--work-mono);
-}
-
-.bt-item-option-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 4px;
-}
-
 /* Análisis */
-.bt-analysis {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: 14px;
-  margin-top: 14px;
-}
-
-.bt-analysis-block {
-  min-width: 0;
-  padding: 10px 12px;
-  border: 1px solid var(--work-line);
-  background: rgba(25, 29, 25, 0.88);
-}
-
-.bt-table-scroll { overflow-x: auto; }
-
-.bt-analysis .analysis-note { text-align: left; }
-
-.bt-weapon-table { width: 100%; }
-
-.bt-weapon-table tr[data-weapon-type] td:first-child { border-left: 3px solid var(--bt-color); }
-
-.bt-weapon-table td small {
-  display: block;
-  color: var(--work-muted);
-  font-size: 10px;
-}
-
-.bt-count {
-  margin-right: 4px;
-  color: var(--bt-accent);
-  font-family: var(--work-mono);
-}
+.bt-range-heading { margin-top: 18px; }
 
 .bt-range-profile {
   display: grid;
   gap: 4px;
-  margin: 0 0 8px;
-  padding: 0;
+  margin: 0;
+  padding: 12px 14px 16px;
   list-style: none;
 }
 
@@ -309,109 +133,16 @@ body { background: var(--work-bg); }
 
 .bt-range-value small { color: var(--work-amber); }
 
-.bt-ammo-list,
-.bt-bonus-list {
-  display: grid;
-  gap: 4px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.bt-ammo-list .ammunition-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 2px 8px;
-}
-
-.bt-ammo-list .ammunition-row small { grid-column: 1 / -1; }
-
-.bt-ammo-list .is-missing span { color: var(--work-red); }
-
-.bt-bonus-list li {
-  display: grid;
-  gap: 2px;
-  font-size: 12px;
-}
-
-.bt-bonus-list span { color: var(--work-muted); font-size: 11px; }
-
-/* Comparar */
-.bt-compare {
-  margin-bottom: 14px;
-  padding: 12px;
-  border: 1px solid var(--work-line);
-  background: rgba(25, 29, 25, 0.96);
-}
-
-.bt-compare-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.bt-compare-header h2 { margin: 0 0 4px; font-size: 15px; }
-
-.bt-compare-header p { color: var(--work-muted); font-size: 12px; }
-
-.bt-compare-source {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 10px;
-  margin: 10px 0;
-}
-
-.bt-compare-table {
-  width: 100%;
-  border-collapse: collapse;
-  font: 500 12px var(--work-mono);
-}
-
-.bt-compare-table thead th {
-  padding: 6px;
-  text-align: left;
-  vertical-align: bottom;
-}
-
-.bt-compare-table thead th:first-child { width: 34%; }
-
-.bt-compare-table thead .bt-mech-icon { display: block; margin-bottom: 4px; }
-
-.bt-compare-table thead span { color: var(--work-muted); font-size: 10px; }
-
-.bt-compare-table thead b { color: var(--work-text); font-size: 12px; }
-
-.bt-compare-group th {
-  padding: 10px 6px 4px;
-  color: var(--bt-accent);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-align: left;
-}
-
-.bt-compare-table tbody th[scope="row"] {
-  padding: 4px 6px;
-  color: var(--work-muted);
-  font-weight: 400;
-  text-align: left;
-}
-
-.bt-compare-table td {
-  padding: 4px 6px;
-  border-top: 1px solid rgba(52, 61, 52, 0.6);
-}
-
-.bt-compare-table td.is-winner { color: var(--bt-accent); }
-
-.bt-compare-table small { color: var(--work-muted); font-size: 10px; }
-
-@media (max-width: 900px) {
-  .bt-analysis { grid-template-columns: minmax(0, 1fr); }
-}
-
 @media (max-width: 600px) {
   .bt-mech-picker { min-width: 0; width: 100%; }
   .bt-range-profile li { grid-template-columns: 44px minmax(0, 1fr) 80px; }
+}
+
+.bt-item-option-bonus span { color: var(--bt-accent); }
+
+/* El icono del chasis ocupa el hueco de la imagen de Sarna en las tarjetas de la comparación. */
+.compare-card-image.bt-compare-icon {
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at center, rgba(255, 212, 0, 0.08), transparent 70%), rgba(16, 19, 16, 0.9);
 }
