@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import type { Zone } from '../../types/mech';
-import type { BtArmorSide, BtBuild, BtItem, BtItemKind, BtMech } from '../../types/battletech-mechlab';
+import type { BtArmorSide, BtBuild, BtItem, BtItemKind, BtLoadout, BtMech } from '../../types/battletech-mechlab';
 import { ZONE_LABELS } from '../../utils/zones';
 import { clearArmor, distributeArmor, setArmor, stepArmor } from '../../utils/battletech/armor';
 import { createStockBuild, describeMountProblem, mountItem, removeItem, removeItemsOfKind } from '../../utils/battletech/fitting';
@@ -20,6 +20,8 @@ export const useBtBuild = (initial: BtBuild) => {
     return `${item.name} added to the ${ZONE_LABELS[zone].toLowerCase()}`;
   };
 
+  const setLoadout = (loadout: BtLoadout) => setBuild(current => ({ ...current, loadout }));
+
   const remove = (zone: Zone, index: number) =>
     setBuild(current => ({ ...current, loadout: removeItem(current.loadout, zone, index) }));
 
@@ -35,5 +37,5 @@ export const useBtBuild = (initial: BtBuild) => {
   const clear = () => setBuild(current => ({ ...current, armor: clearArmor() }));
   const distribute = () => setBuild(current => ({ ...current, armor: distributeArmor(current.mech, current.loadout) }));
 
-  return { build, selectMech, loadBuild, loadStock, mount, remove, removeKinds, changeArmor, stepArmorBy, clear, distribute };
+  return { build, setLoadout, selectMech, loadBuild, loadStock, mount, remove, removeKinds, changeArmor, stepArmorBy, clear, distribute };
 };

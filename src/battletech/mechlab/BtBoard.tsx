@@ -1,9 +1,12 @@
+import type { MouseEvent } from 'react';
 import type { Zone } from '../../types/mech';
 import type { BtArmorSide, BtBuild } from '../../types/battletech-mechlab';
 import { SlotBar } from '../../components/SlotBar';
+import { useLongPress } from '../../hooks/useLongPress';
+import { getMenuPosition } from '../../utils/menuPosition';
 import { ZONES } from '../../utils/zones';
 import { getArmorLimit } from '../../utils/battletech/armor';
-import { getHardpointViews, getLocationUsage, groupZoneEquipment } from '../../utils/battletech/fitting';
+import { getHardpointViews, getLocationUsage, groupZoneEquipment, type EquipmentGroup, type HardpointView } from '../../utils/battletech/fitting';
 import { getEquipmentCategory, getItemWeaponType, HARDPOINT_LABELS, HARDPOINTS, SOURCE_LABELS, WEIGHT_CLASS_LABELS } from '../../utils/battletech/mechlabData';
 import { BtArmorControl } from './BtArmorControl';
 import { MechIcon } from './MechIcon';
@@ -16,12 +19,70 @@ interface BtBoardProps {
   onSelectZone: (zone: Zone, hardpointIndex: number | null) => void;
   onArmorChange: (zone: Zone, side: BtArmorSide, value: number) => void;
   onArmorStep: (zone: Zone, side: BtArmorSide, steps: number) => void;
+  onHardpointMenu: (zone: Zone, hardpointIndex: number, x: number, y: number) => void;
+  onEquipmentMenu: (zone: Zone, itemId: string, x: number, y: number) => void;
+}
+
+// Clic derecho o pulsación larga: abre el menú de la pieza, como en las tarjetas de MW5.
+const openMenu = (event: MouseEvent, onMenu: (x: number, y: number) => void) => {
+  event.preventDefault();
+  event.stopPropagation();
+  const { x, y } = getMenuPosition(event);
+  onMenu(x, y);
+};
+
+function CardHardpoint({ view, isSelected, onSelect, onMenu }: {
+  view: HardpointView;
+  isSelected: boolean;
+  onSelect: () => void;
+  onMenu: (x: number, y: number) => void;
+}) {
+  const longPress = useLongPress(onMenu);
+  return (
+    <button
+      type="button"
+      className={['hardpoint-chip', view.item ? 'is-occupied is-emphasized' : 'is-free', view.isOver ? 'is-over' : '', isSelected ? 'is-selected' : ''].filter(Boolean).join(' ')}
+      data-weapon-type={view.type}
+      aria-pressed={isSelected}
+      title={`${HARDPOINT_LABELS[view.type]} hardpoint: ${view.item ? view.item.name : 'free'}. Right-click for options`}
+      onClick={(event) => { event.stopPropagation(); onSelect(); }}
+      onContextMenu={(event) => openMenu(event, onMenu)}
+      {...longPress}
+    >
+      {!view.item && <span className="hardpoint-chip-label">{HARDPOINT_LABELS[view.type]}</span>}
+      <span className="hardpoint-chip-content">
+        <span className="hardpoint-chip-name">{view.item?.name ?? 'Free'}</span>
+        {view.item && <span className="hardpoint-chip-tier">{view.item.slots} sl</span>}
+      </span>
+    </button>
+  );
+}
+
+// El equipo fijo del chasis no tiene menú: no se puede mover ni quitar.
+function CardEquipment({ group, onSelect, onMenu }: { group: EquipmentGroup; onSelect: () => void; onMenu: (x: number, y: number) => void }) {
+  const longPress = useLongPress(onMenu);
+  return (
+    <button
+      type="button"
+      className={group.fixed ? 'component-card-item is-built-in' : 'component-card-item'}
+      data-category={getEquipmentCategory(group.item)}
+      data-weapon-type={group.item.kind === 'ammo' ? getItemWeaponType(group.item) : undefined}
+      title={group.fixed ? `${group.item.name}: built into this chassis, cannot be removed` : `${group.item.name}: right-click for options`}
+      onClick={(event) => { event.stopPropagation(); onSelect(); }}
+      onContextMenu={group.fixed ? (event) => event.preventDefault() : (event) => openMenu(event, onMenu)}
+      {...(group.fixed ? {} : longPress)}
+    >
+      {group.item.name}
+      {group.count > 1 && <small>×{group.count}</small>}
+      {group.fixed && <small>built-in</small>}
+    </button>
+  );
 }
 
 // Tarjeta de una ubicación con el marcado del MechLab de MW5 (ComponentCard): anclajes con su arma,
 // equipo agrupado, barra de ranuras y blindaje. En BATTLETECH las armas también ocupan ranuras, y el
 // blindaje delantero y el trasero tienen cada uno su máximo.
-function LocationCard({ build, zone, label, position, isActive, selectedHardpoint, onSelectZone, onArmorChange, onArmorStep }: Omit<BtBoardProps, 'activeZone'> & {
+function LocationCard({ build, zone, label, position, isActive, selectedHardpoint, onSelectZone, onArmorChange, onArmorStep, onHardpointMenu, onEquipmentMenu }: Omit<BtBoardProps, 'activeZone'> & {
   zone: Zone;
   label: string;
   position: string;
@@ -53,20 +114,13 @@ function LocationCard({ build, zone, label, position, isActive, selectedHardpoin
       {hardpoints.length > 0 && (
         <div className="component-card-hardpoints">
           {hardpoints.map((view, index) => (
-            <button
+            <CardHardpoint
               key={index}
-              type="button"
-              className={['hardpoint-chip', view.item ? 'is-occupied is-emphasized' : 'is-free', view.isOver ? 'is-over' : '', isActive && selectedHardpoint === index ? 'is-selected' : ''].filter(Boolean).join(' ')}
-              data-weapon-type={view.type}
-              title={`${HARDPOINT_LABELS[view.type]} hardpoint: ${view.item ? view.item.name : 'free'}`}
-              onClick={(event) => { event.stopPropagation(); select(index); }}
-            >
-              {!view.item && <span className="hardpoint-chip-label">{HARDPOINT_LABELS[view.type]}</span>}
-              <span className="hardpoint-chip-content">
-                <span className="hardpoint-chip-name">{view.item?.name ?? 'Free'}</span>
-                {view.item && <span className="hardpoint-chip-tier">{view.item.slots} sl</span>}
-              </span>
-            </button>
+              view={view}
+              isSelected={isActive && selectedHardpoint === index}
+              onSelect={() => select(index)}
+              onMenu={(x, y) => onHardpointMenu(zone, index, x, y)}
+            />
           ))}
         </div>
       )}
@@ -74,19 +128,12 @@ function LocationCard({ build, zone, label, position, isActive, selectedHardpoin
       {equipment.length > 0 && (
         <div className="component-card-equipment">
           {equipment.map(group => (
-            <button
+            <CardEquipment
               key={`${group.fixed ? 'fixed' : 'item'}-${group.item.id}`}
-              type="button"
-              className={group.fixed ? 'component-card-item is-built-in' : 'component-card-item'}
-              data-category={getEquipmentCategory(group.item)}
-              data-weapon-type={group.item.kind === 'ammo' ? getItemWeaponType(group.item) : undefined}
-              title={group.fixed ? `${group.item.name}: built into this chassis, cannot be removed` : group.item.name}
-              onClick={(event) => { event.stopPropagation(); select(); }}
-            >
-              {group.item.name}
-              {group.count > 1 && <small>×{group.count}</small>}
-              {group.fixed && <small>built-in</small>}
-            </button>
+              group={group}
+              onSelect={() => select()}
+              onMenu={(x, y) => onEquipmentMenu(zone, group.item.id, x, y)}
+            />
           ))}
         </div>
       )}

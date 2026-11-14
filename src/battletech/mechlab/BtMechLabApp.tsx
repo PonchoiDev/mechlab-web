@@ -24,6 +24,7 @@ import { BtComparePanel } from './BtComparePanel';
 import { BtComponentEditor } from './BtComponentEditor';
 import { BtMechPicker } from './BtMechPicker';
 import { BtMyBuildsDialog } from './BtMyBuildsDialog';
+import { getBtEquipmentMenu, getBtHardpointMenu, type BtMenuContext } from './btMenus';
 import { useBtBuild } from './useBtBuild';
 
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
@@ -81,6 +82,28 @@ export function BtMechLabApp() {
     actions.loadBuild(next);
     setActiveSavedId(savedId);
     showToast(message);
+  };
+  const menuContext: BtMenuContext = {
+    mech,
+    loadout: build.loadout,
+    run: (action) => {
+      const result = action(build.loadout);
+      actions.setLoadout(result.loadout);
+      showToast(result.message);
+      setMenu(null);
+    },
+    openEditor: (zone, hardpointIndex) => {
+      setMenu(null);
+      selectZone(zone, hardpointIndex);
+    }
+  };
+  const openHardpointMenu = (zone: Zone, hardpointIndex: number, x: number, y: number) => {
+    const definition = getBtHardpointMenu(menuContext, zone, hardpointIndex);
+    if (definition) setMenu({ ...definition, x, y });
+  };
+  const openEquipmentMenu = (zone: Zone, itemId: string, x: number, y: number) => {
+    const definition = getBtEquipmentMenu(menuContext, zone, itemId);
+    if (definition) setMenu({ ...definition, x, y });
   };
   const copyLink = async (url = buildUrl) => showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link');
 
@@ -212,6 +235,8 @@ export function BtMechLabApp() {
           activeZone={activeZone}
           selectedHardpoint={selectedHardpoint}
           onSelectZone={selectZone}
+          onHardpointMenu={openHardpointMenu}
+          onEquipmentMenu={openEquipmentMenu}
           onArmorChange={actions.changeArmor}
           onArmorStep={actions.stepArmorBy}
         />
