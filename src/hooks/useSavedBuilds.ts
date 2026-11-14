@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { mergeBuilds, parseStoredBuilds, type BuildEntry, type SavedBuild } from '../utils/savedBuilds';
+import { mergeBuilds, parseStoredBuilds, type BuildEntry, type SavedBuild } from '../utils/savedBuildsCore';
 
-const STORAGE_KEY = 'mw-builder:mercs:saved-builds';
+// Cada juego guarda sus builds en su propia clave: las de BATTLETECH no se mezclan con las de MW5.
+const MERCS_STORAGE_KEY = 'mw-builder:mercs:saved-builds';
 
-const readStorage = (): SavedBuild[] => {
+const readStorage = (storageKey: string): SavedBuild[] => {
   try {
-    return parseStoredBuilds(window.localStorage.getItem(STORAGE_KEY));
+    return parseStoredBuilds(window.localStorage.getItem(storageKey));
   } catch {
     return [];
   }
@@ -18,27 +19,27 @@ const createId = () =>
     : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
 
 // Builds guardadas en este navegador (localStorage), sincronizadas entre pestañas abiertas.
-export const useSavedBuilds = () => {
-  const [builds, setBuilds] = useState<SavedBuild[]>(readStorage);
+export const useSavedBuilds = (storageKey = MERCS_STORAGE_KEY) => {
+  const [builds, setBuilds] = useState<SavedBuild[]>(() => readStorage(storageKey));
   const [storageFailed, setStorageFailed] = useState(false);
 
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === STORAGE_KEY) setBuilds(parseStoredBuilds(event.newValue));
+      if (event.key === storageKey) setBuilds(parseStoredBuilds(event.newValue));
     };
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
-  }, []);
+  }, [storageKey]);
 
   const commit = useCallback((next: SavedBuild[]) => {
     setBuilds(next);
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      window.localStorage.setItem(storageKey, JSON.stringify(next));
       setStorageFailed(false);
     } catch {
       setStorageFailed(true);
     }
-  }, []);
+  }, [storageKey]);
 
   const saveBuild = (name: string, code: string): SavedBuild => {
     const build = { id: createId(), name, code, savedAt: new Date().toISOString() };
