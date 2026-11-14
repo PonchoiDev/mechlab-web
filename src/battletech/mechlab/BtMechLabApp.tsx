@@ -32,6 +32,9 @@ import { useBtBuild } from './useBtBuild';
 
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
 const linked = readBtBuildFromLocation();
+// Como en MW5, la portada puede enlazar a /battletech/#feedback para abrir directamente el formulario.
+const openFeedbackOnLoad = window.location.hash === '#feedback';
+if (openFeedbackOnLoad) window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
 // La vista (celdas, tablero compacto y lado del panel) se guarda aparte de la de MW5.
 const BT_VIEW_KEY = 'mw-builder:battletech:view';
 const formatNumber = (value: number) => String(Number(value.toFixed(2)));
@@ -55,7 +58,7 @@ export function BtMechLabApp() {
   }, []);
   const [toast, setToast] = useState<{ id: number; message: string } | null>(() =>
     linked && !linked.build ? { id: 0, message: 'This build link is not valid' } : null);
-  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(openFeedbackOnLoad);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isCompareOpen, setIsCompareOpen] = useState(false);

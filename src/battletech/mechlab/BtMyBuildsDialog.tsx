@@ -45,6 +45,7 @@ export function BtMyBuildsDialog({
   const { builds, storageFailed } = saved;
   const [editing, setEditing] = useState<{ id: string; name: string } | null>(null);
   const [confirming, setConfirming] = useState<{ id: string; action: 'delete' | 'load' } | null>(null);
+  const [duplicatedId, setDuplicatedId] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -54,6 +55,11 @@ export function BtMyBuildsDialog({
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
+
+  // La copia queda resaltada sobre la original y a la vista, como en el diálogo de MW5.
+  useEffect(() => {
+    if (duplicatedId) document.querySelector(`[data-build-id="${duplicatedId}"]`)?.scrollIntoView({ block: 'nearest' });
+  }, [duplicatedId]);
 
   const rows = useMemo(() => builds.map(build => {
     const decoded = decodeBtBuild(build.code);
@@ -117,7 +123,11 @@ export function BtMyBuildsDialog({
         <ul className="builds-list">
           {rows.length === 0 && <li className="builds-empty">No saved builds yet. Use Save build in the toolbar, or import an exported file.</li>}
           {rows.map(({ build, decoded, summary }) => (
-            <li key={build.id} className={build.id === activeId ? 'builds-item is-active' : 'builds-item'}>
+            <li
+              key={build.id}
+              className={['builds-item', build.id === activeId ? 'is-active' : '', build.id === duplicatedId ? 'is-new' : ''].filter(Boolean).join(' ')}
+              data-build-id={build.id}
+            >
               <div className="builds-item-info">
                 {editing?.id === build.id ? (
                   <input
@@ -188,7 +198,9 @@ export function BtMyBuildsDialog({
                     className="utility-button"
                     onClick={() => {
                       const copy = saved.duplicateBuild(build.id);
-                      if (copy) onMessage(`Duplicated as “${copy.name}”`);
+                      if (!copy) return;
+                      setDuplicatedId(copy.id);
+                      onMessage(`Duplicated as “${copy.name}”`);
                     }}
                   >
                     Duplicate
