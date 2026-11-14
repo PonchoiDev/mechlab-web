@@ -10,9 +10,12 @@ import { Toast } from '../../components/Toast';
 import { UtilityToolbar } from '../../components/UtilityToolbar';
 import { WhatsNew } from '../../components/WhatsNew';
 import { useSavedBuilds } from '../../hooks/useSavedBuilds';
+import { useViewPreferences } from '../../hooks/useViewPreferences';
 import { copyText } from '../../services/clipboard';
+import { EMPTY_VALUE } from '../../utils/format';
 import { normalizeBuildName } from '../../utils/savedBuildsCore';
 import { decodeBtBuild, DEFAULT_MECH, encodeBtBuild, getBtBuildUrl, readBtBuildFromLocation } from '../../utils/battletech/buildCode';
+import { replaceItem } from '../../utils/battletech/actions';
 import { createStockBuild } from '../../utils/battletech/fitting';
 import { getBtBuildIssues } from '../../utils/battletech/issues';
 import { BT_MECHS, getItem, getMechDisplayName } from '../../utils/battletech/mechlabData';
@@ -29,8 +32,12 @@ import { useBtBuild } from './useBtBuild';
 
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
 const linked = readBtBuildFromLocation();
+// Como en MW5, la portada puede enlazar a /battletech/#feedback para abrir directamente el formulario.
+const openFeedbackOnLoad = window.location.hash === '#feedback';
+if (openFeedbackOnLoad) window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
+// La vista (celdas, tablero compacto y lado del panel) se guarda aparte de la de MW5.
+const BT_VIEW_KEY = 'mw-builder:battletech:view';
 const formatNumber = (value: number) => String(Number(value.toFixed(2)));
-const formatCost = (value: number) => value.toLocaleString('en');
 
 export function BtMechLabApp() {
   const actions = useBtBuild(linked?.build ?? createStockBuild(DEFAULT_MECH));
@@ -51,7 +58,7 @@ export function BtMechLabApp() {
   }, []);
   const [toast, setToast] = useState<{ id: number; message: string } | null>(() =>
     linked && !linked.build ? { id: 0, message: 'This build link is not valid' } : null);
-  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(openFeedbackOnLoad);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
@@ -59,6 +66,7 @@ export function BtMechLabApp() {
   const closeMenu = useCallback(() => setMenu(null), []);
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
   const saved = useSavedBuilds(BT_SAVED_BUILDS_KEY);
+  const view = useViewPreferences(BT_VIEW_KEY);
 
   const showToast = useCallback((message: string) => setToast({ id: Date.now(), message }), []);
   const dismissToast = useCallback(() => setToast(null), []);
@@ -108,7 +116,7 @@ export function BtMechLabApp() {
   const copyLink = async (url = buildUrl) => showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link');
 
   return (
-    <div className={['mechlab-shell', 'bt-mechlab', activeZone ? 'has-editor is-editor-right' : ''].filter(Boolean).join(' ')}>
+    <div className={['mechlab-shell', 'bt-mechlab', activeZone ? `has-editor is-editor-${view.editorSide}` : ''].filter(Boolean).join(' ')}>
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">
@@ -119,7 +127,7 @@ export function BtMechLabApp() {
             </div>
           </a>
           <nav className="topbar-links" aria-label="BATTLETECH">
-            <a href="/battletech/starmap/">Star map</a>
+            <a href="/battletech/starmap/"><small>BATTLETECH</small> Star map</a>
             <a href="/battletech/argo/">Argo</a>
           </nav>
         </div>
@@ -138,46 +146,48 @@ export function BtMechLabApp() {
         </div>
       </header>
 
-      <section className="readout-strip bt-readout" aria-label="'Mech statistics">
+      {/* Las diez cifras del StatsReadout de MW5, en su orden, con las equivalentes de BATTLETECH: andar y
+          correr en lugar de la velocidad, y el calor por turno en lugar de por segundo. */}
+      <section className="readout-strip" aria-label="Mech statistics">
         <div className="readout-cell">
           <span className="readout-label">TONNAGE</span>
-          <strong className={summary.freeTonnage < 0 ? 'readout-warning' : ''}>{formatNumber(summary.tonnage)} <small>/ {mech.tonnage} t</small></strong>
+          <strong className={summary.freeTonnage < 0 ? 'readout-warning' : ''}>{summary.tonnage.toFixed(2)} <small>/ {mech.tonnage} t</small></strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label">ARMOR</span>
-          <strong>{summary.armorPoints} <small>/ {summary.maxArmorPoints} · {formatNumber(summary.armorTonnage)} t</small></strong>
+          <span className="readout-label">ARMOR POINTS</span>
+          <strong>{summary.armorPoints} <small>/ {summary.maxArmorPoints}</small></strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label">ALPHA DAMAGE</span>
-          <strong>{formatNumber(summary.alphaDamage)}{summary.heatDamage > 0 && <small> +{summary.heatDamage} heat</small>}</strong>
+          <span className="readout-label">ARMOR MASS</span>
+          <strong>{summary.armorTonnage.toFixed(2)} <small>t</small></strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label">STABILITY DAMAGE</span>
-          <strong>{formatNumber(summary.instability)}</strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label" title="Heat of an alpha strike against the heat the 'Mech sinks each turn">ALPHA HEAT / SINKING</span>
-          <strong className={summary.heat.net > 0 ? 'readout-warning' : ''}>{formatNumber(summary.heat.alpha)} <small>/ {summary.heat.dissipation} per turn</small></strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label" title="Heat capacity, and the level where the 'Mech starts to overheat">MAX HEAT</span>
-          <strong>{summary.heat.maxHeat} <small>overheat at {summary.heat.overheat}</small></strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label">WALK / SPRINT</span>
-          <strong>{summary.walk ?? '-'} <small>/ {summary.sprint ?? '-'} m</small></strong>
+          <span className="readout-label" title="Walk and sprint distance per turn">WALK / SPRINT</span>
+          <strong>{summary.walk ?? EMPTY_VALUE} <small>/ {summary.sprint ?? EMPTY_VALUE} m</small></strong>
         </div>
         <div className="readout-cell">
           <span className="readout-label">JUMP JETS</span>
           <strong className={summary.jumpJets > summary.maxJumpJets ? 'readout-warning' : ''}>{summary.jumpJets} <small>/ {summary.maxJumpJets}</small></strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label">MAX RANGE</span>
-          <strong>{summary.maxRange > 0 ? <>{summary.maxRange} <small>m</small></> : '-'}</strong>
+          <span className="readout-label" title="Damage of an alpha strike with every weapon">ALPHA DAMAGE</span>
+          <strong>{formatNumber(summary.alphaDamage)}</strong>
         </div>
         <div className="readout-cell">
-          <span className="readout-label" title="Chassis, mounted equipment and armor">VALUE</span>
-          <strong>{formatCost(summary.cost)} <small>C-Bills</small></strong>
+          <span className="readout-label" title="Melee attack damage of the chassis, with its equipment bonuses not included">MELEE DAMAGE</span>
+          <strong>{mech.melee.damage}</strong>
+        </div>
+        <div className="readout-cell">
+          <span className="readout-label" title="Heat of an alpha strike">ALPHA HEAT</span>
+          <strong className={summary.heat.net > 0 ? 'readout-warning' : ''}>{formatNumber(summary.heat.alpha)}</strong>
+        </div>
+        <div className="readout-cell">
+          <span className="readout-label" title="Heat the 'Mech sinks each turn: 30 from the engine plus its heat sinks">HEAT SINKING</span>
+          <strong>{summary.heat.dissipation} <small>per turn</small></strong>
+        </div>
+        <div className="readout-cell">
+          <span className="readout-label">MAX WEAPON RANGE</span>
+          <strong>{summary.maxRange > 0 ? <>{summary.maxRange} <small>m</small></> : EMPTY_VALUE}</strong>
         </div>
       </section>
 
@@ -230,7 +240,38 @@ export function BtMechLabApp() {
       )}
 
       <main className="workspace">
+        <div className="view-toggles" aria-label="View options">
+          <span className="utility-label">VIEW</span>
+          <button
+            type="button"
+            className="utility-button"
+            aria-pressed={view.expandedSlots}
+            title="Show every slot as a cell, like the in-game mechlab"
+            onClick={view.toggleExpandedSlots}
+          >
+            {view.expandedSlots ? 'Hide slot cells' : 'Show slot cells'}
+          </button>
+          <button
+            type="button"
+            className="utility-button"
+            aria-pressed={view.compactBoard}
+            title="Hide the 'Mech icon and lay the locations out in five columns"
+            onClick={view.toggleCompactBoard}
+          >
+            Compact board
+          </button>
+          <button
+            type="button"
+            className="utility-button"
+            title="Side of the screen where the location panel opens"
+            onClick={view.toggleEditorSide}
+          >
+            Panel {view.editorSide} ⇄
+          </button>
+        </div>
         <BtBoard
+          expandedSlots={view.expandedSlots}
+          compact={view.compactBoard}
           build={build}
           activeZone={activeZone}
           selectedHardpoint={selectedHardpoint}
@@ -250,14 +291,17 @@ export function BtMechLabApp() {
           selectedHardpoint={selectedHardpoint}
           onSelectHardpoint={setSelectedHardpoint}
           onMount={(zone, item) => showToast(actions.mount(zone, item))}
+          onReplace={(zone, index, item) => menuContext.run(current => replaceItem(mech, current, zone, index, item))}
           onRemove={actions.remove}
           onArmorChange={actions.changeArmor}
           onArmorStep={actions.stepArmorBy}
           onClose={closeEditor}
+          side={view.editorSide}
+          onToggleSide={view.toggleEditorSide}
         />
       )}
 
-      <BtAnalysis summary={summary} />
+      <BtAnalysis build={build} summary={summary} />
 
       <footer className="site-footer">
         <p className="support-note">

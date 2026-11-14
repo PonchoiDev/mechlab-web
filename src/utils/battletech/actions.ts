@@ -81,6 +81,15 @@ export const moveAllTo = (mech: BtMech, loadout: BtLoadout, zone: Zone, itemId: 
     : { loadout, message: `${item.name} does not fit there` };
 };
 
+// Cambia el arma de un anclaje por otra de su tipo, como al elegir un arma con un anclaje ocupado en MW5.
+export const replaceItem = (mech: BtMech, loadout: BtLoadout, zone: Zone, index: number, item: BtItem): ActionResult => {
+  const current = getItem(loadout[zone][index]);
+  const result = mountItem(mech, removeItem(loadout, zone, index), zone, item);
+  return result.ok
+    ? { loadout: result.loadout, message: `${current?.name ?? 'Weapon'} replaced with ${item.name}` }
+    : { loadout, message: describeMountProblem(result.problem, mech, zone, item) };
+};
+
 export const removeAllOf = (loadout: BtLoadout, zone: Zone, itemId: string): ActionResult => {
   const count = loadout[zone].filter(id => id === itemId).length;
   return {
