@@ -1,0 +1,1722 @@
+{
+ "planet_civ_innersphere": {
+  "descripcion": "An Inner Sphere level of technology; as advanced as anywhere outside of Terra",
+  "nombre": "Inner Sphere-Level Civilization",
+  "visible": true
+ },
+ "planet_civ_periphery": {
+  "descripcion": "A Periphery level of technology; less advanced and more provincial than the Inner Sphere",
+  "nombre": "Periphery-Level Civilization",
+  "visible": true
+ },
+ "planet_civ_primitive": {
+  "descripcion": "A primitive level of technology; no more advanced than 20th century Terra, or even earlier",
+  "nombre": "Primitive Civilization",
+  "visible": true
+ },
+ "planet_climate_arctic": {
+  "descripcion": "This world is colder than Earth, dominated by tundra and vast glaciers, with only narrow bands of cold, windswept highlands at the equator.",
+  "nombre": "Arctic World",
+  "visible": true
+ },
+ "planet_climate_arid": {
+  "descripcion": "This world is drier than Earth, with desert and scrubland giving way to tundra at the poles.",
+  "nombre": "Arid World",
+  "visible": true
+ },
+ "planet_climate_desert": {
+  "descripcion": "This world is dessicated, covered in sandy deserts and barren rock.",
+  "nombre": "Desert World",
+  "visible": true
+ },
+ "planet_climate_ice": {
+  "descripcion": "This world is covered in planet-wide glaciers.",
+  "nombre": "Ice World",
+  "visible": true
+ },
+ "planet_climate_lunar": {
+  "descripcion": "This world is a barren rock with only a trace atmosphere.",
+  "nombre": "Lunar World",
+  "visible": true
+ },
+ "planet_climate_mars": {
+  "descripcion": "This world is cold and dry, with thin carbon dioxide atmosphere choked with scouring dust storms.",
+  "nombre": "Martian World",
+  "visible": true
+ },
+ "planet_climate_moon": {
+  "descripcion": "This world is bleak regolith, with only a trace atmosphere and no water.",
+  "nombre": "Barren World",
+  "visible": true
+ },
+ "planet_climate_rocky": {
+  "descripcion": "This world is dominated by treacherous mountains, broken crags, and extensive tectonic activity.",
+  "nombre": "Rocky World",
+  "visible": true
+ },
+ "planet_climate_terran": {
+  "descripcion": "This world is near-Terran, with the broad array of biomes present on Earth.",
+  "nombre": "Terran World",
+  "visible": true
+ },
+ "planet_climate_tropical": {
+  "descripcion": "Hotter than Earth, this world features thick forests and vast deserts.",
+  "nombre": "Tropical World",
+  "visible": true
+ },
+ "planet_climate_water": {
+  "descripcion": "This world is covered in broad, endless oceans with only a small percentage of its surface above water.",
+  "nombre": "Water World",
+  "visible": true
+ },
+ "planet_event_pox": {
+  "descripcion": "One or more planets in this system have suffered from an outbreak of the Periphery Pox.",
+  "nombre": "Pox Outbreak",
+  "visible": true
+ },
+ "planet_faction_davion": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_directorate": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_independent": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_kurita": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_liao": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_magistracy": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_marik": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_nofaction": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_pirate": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_restoration": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_steiner": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_faction_taurian": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_feature_asteroids": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_feature_comet": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_feature_gasgiant": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_feature_moon01": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_feature_moon02": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_feature_moon03": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_feature_rings": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_industry_agriculture": {
+  "descripcion": "This is a farming world, supplying food to nearby systems.",
+  "nombre": "Agriculture",
+  "visible": true
+ },
+ "planet_industry_aquaculture": {
+  "descripcion": "This is a fishing and ocean-farming world, supplying food to nearby systems.",
+  "nombre": "Aquaculture",
+  "visible": true
+ },
+ "planet_industry_chemicals": {
+  "descripcion": "This world primarily trades in industrial chemicals and products that use them.",
+  "nombre": "Chemicals",
+  "visible": true
+ },
+ "planet_industry_electronics": {
+  "descripcion": "This world's economy is based around the construction and export of advanced electronics.",
+  "nombre": "Electronics",
+  "visible": true
+ },
+ "planet_industry_manufacturing": {
+  "descripcion": "This is an industrial world, turning raw materials into technology and consumer products.",
+  "nombre": "Manufacturing",
+  "visible": true
+ },
+ "planet_industry_mining": {
+  "descripcion": "This is a mining world, extracting raw materials from the planet's crust.",
+  "nombre": "Mining",
+  "visible": true
+ },
+ "planet_industry_poor": {
+  "descripcion": "This world is resource-poor, whether through insufficient technology, population, or availability.",
+  "nombre": "Poor",
+  "visible": true
+ },
+ "planet_industry_recreation": {
+  "descripcion": "This world supports a recreation industry and is a destination for visitors throughout the region.",
+  "nombre": "Recreation",
+  "visible": true
+ },
+ "planet_industry_research": {
+  "descripcion": "This world features scientific research institutions, investigating Star League relics and developing new technologies.",
+  "nombre": "Research",
+  "visible": true
+ },
+ "planet_industry_rich": {
+  "descripcion": "This world is resource-rich, and its people are well-off compared to the rest of the region.",
+  "nombre": "Rich",
+  "visible": true
+ },
+ "planet_name_addasar": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_adrar": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_aea": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_aea_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ahlat": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_alamagordo": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_alexandria": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_alloway": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_amu darya": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_andarmax": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_antias": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_aomen": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_appian": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_aquagea": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_argos": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_arn": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_artru": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_artru_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_artru_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_athna": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_atreusprime": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_balawat": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_barras": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_bellatrix": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_bellerophon": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_bergtatt": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_bonavista": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_borden": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_borka": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_bringdam": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_bringdam_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_brinton": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_brisbane": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_brixtana": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_brockway": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_bromhead": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_buenosaires": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_burton": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_calseraigne": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_camadeirre": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_carmichael": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_carthage": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_cassilda": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_cateshold": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_cavalor": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_chandan": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_chennai": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_claybrooke": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_cluffsstand": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_columbine": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_corodiz": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_coromodir": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_coromodir_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_coromodir_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_coromodir_moon": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_cursa": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_cygnus": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_dainmarmajoris": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_daol": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_decatur": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_desolateplains": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_detroit": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_dicon": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_diefenbaker": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_drozan": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_dunianshire": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_earlydawn": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_egress": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_electra": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_elgiza": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_enkra": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_enkra_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_espia": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_fagerholm": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_fjaldr": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_fjaldr_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_flannagansnebulea": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_flaum": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_flintoft": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_frazer": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_fronc": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_gangtok": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_gangtok_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_gardnaus": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_gaucin": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ghorepani": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_girondas": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_glentworth": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_granera": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_guldra": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_guldra_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_guldra_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_gunthar": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_hastur": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_heliat": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_heliat_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_hellespont": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_herotitus": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_hibuarius": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_horsham": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_hurik": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ichlangis": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ichlangis_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_illiushin": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_independence": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ingonish": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ishtar": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_itica": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_itrom": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_itrom_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_itrom_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_itsbur": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_jacomarle": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_jacson": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_jamestown": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_jansenshold": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_joppa": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_katinka": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_katinka_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_katinka_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_katla": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_kazu": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_kern": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_kimi": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_krakatau": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_kurvasa": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_laconis": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_landmark": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_larsha": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_leyda": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_lindsay": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_linhauiguan": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_liusmemory": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_lochmantle": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_lopez": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_lucknow": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_lurgatan": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_lyreton": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_macleodsland": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_madras": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_maia": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_maldive": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mandalas": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mangzhangdian": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mangzhangdian_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mantharaka": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mattisskogen": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mazdru": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mcevanssacrifice": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mechdur": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mechdur_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mendham": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_menke": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_merdal": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_merlin": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_merope": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_midale": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_midthun": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mitchel": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mithron": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_muridox": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_murris": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_mystras": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_naryn": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_newabilene": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_newganymede": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_newroland": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_newvallis": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_newvandenburg": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_niomede": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_nondiz": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_nukus": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ordino": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_paf": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_panzyr": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_panzyr_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_panzyr_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_payia": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_pell": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_peratallada": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_pernik": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_pilpala": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_pinard": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_piriapolis": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_pojos": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_portland": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_primus": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_principia": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_prix": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_pyrrhus": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_qalzi": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_qalzi_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_quimberton": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_regisroost": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_regisroost_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_regisroost_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_renfield": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_renown": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_repulse": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ridgebrook": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_robsart": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_rockwellawan": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_rollis": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_rosendal": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ryansfate": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ryansfate_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ryerson": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_sacromonte": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_sadurni": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_salardion": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_samantha": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_sax": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_segerica": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_shaun": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_shaunavon": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_shiba": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_sindalin": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_smithon": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_smithon_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_smithon_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_spencer": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_spitz": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_sunnywood": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_tarragona": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_taurus": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_thurrock": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_tincalunas": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_tiverton": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_turin": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_tyrlon": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_tyrlon_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_tyrlon_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_umgard": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_umgard_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_untran": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_urcruinne": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_valdives": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_vard": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_victoria": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_villanueva": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_viribium": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_ward": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_weitinger": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_weldry": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_weldry_contested": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_weldry_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_wrentham": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_wyethsglory": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_xantheiii": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_yuris": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_zangul": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_zangul_flipped": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_zanzibar": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_name_zathras": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_other_alienvegetation": {
+  "descripcion": "This world is dominated by alien vegetation, either because it is too difficult to remove, or because of insufficient resources to remove it.",
+  "nombre": "Alien Vegetation",
+  "visible": true
+ },
+ "planet_other_battlefield": {
+  "descripcion": "This world is the site of one of the many battles of the past five centuries, and wreckage and technology can still be found here.",
+  "nombre": "Battlefield",
+  "visible": true
+ },
+ "planet_other_blackmarket": {
+  "descripcion": "A thriving black market here deals in rare and illicit goods, weapons, and even BattleMechs.",
+  "nombre": "Black Market",
+  "visible": true
+ },
+ "planet_other_boreholes": {
+  "descripcion": "Deep boreholes into the planet's crust provide minerals and geothermal power for the inhabitants.",
+  "nombre": "Geothermal Boreholes",
+  "visible": true
+ },
+ "planet_other_capital": {
+  "descripcion": "This world is a capital of one of the interstellar states of the region.",
+  "nombre": "Regional Capital",
+  "visible": true
+ },
+ "planet_other_comstar": {
+  "descripcion": "ComStar maintains a presence on this world beyond the skeleton staff needed to operate the HPG arrays.",
+  "nombre": "ComStar Presence",
+  "visible": true
+ },
+ "planet_other_dragons": {
+  "descripcion": "The branth, a leathery flying dragon-like reptile, is native to this planet, and conservationists work to preserve the species and protect its habitat.",
+  "nombre": "Native Dragons",
+  "visible": true
+ },
+ "planet_other_empty": {
+  "descripcion": "This world has no permanent residents. Any inhabitants are transients living on orbital stations and at the jump points.",
+  "nombre": "Uninhabited",
+  "visible": true
+ },
+ "planet_other_factionhq_auriganrestoration": {
+  "descripcion": "This world is a major outpost for the Arano Restoration. Allied mercenaries can purchase supplies from the quartermaster here.",
+  "nombre": "Restoration Headquarters",
+  "visible": true
+ },
+ "planet_other_factionhq_davion": {
+  "descripcion": "This world is a major outpost for the Federated Suns. Allied mercenaries can purchase supplies from the quartermaster here.",
+  "nombre": "Davion Headquarters",
+  "visible": true
+ },
+ "planet_other_factionhq_kurita": {
+  "descripcion": "This world is a major outpost for the Draconis Combine. Allied mercenaries can purchase supplies from the quartermaster here.",
+  "nombre": "Kurita Headquarters",
+  "visible": true
+ },
+ "planet_other_factionhq_liao": {
+  "descripcion": "This world is a major outpost for the Capellan Confederation. Allied mercenaries can purchase supplies from the quartermaster here.",
+  "nombre": "Liao Headquarters",
+  "visible": true
+ },
+ "planet_other_factionhq_magistracyofcanopus": {
+  "descripcion": "This world is a major outpost for the Magistracy of Canopus. Allied mercenaries can purchase supplies from the quartermaster here.",
+  "nombre": "Magistracy Headquarters",
+  "visible": true
+ },
+ "planet_other_factionhq_marik": {
+  "descripcion": "This world is a major outpost for the Free Worlds League. Allied mercenaries can purchase supplies from the quartermaster here.",
+  "nombre": "Marik Headquarters",
+  "visible": true
+ },
+ "planet_other_factionhq_steiner": {
+  "descripcion": "This world is a major outpost for the Lyran Commonwealth. Allied mercenaries can purchase supplies from the quartermaster here.",
+  "nombre": "Steiner Headquarters",
+  "visible": true
+ },
+ "planet_other_factionhq_taurianconcordat": {
+  "descripcion": "This world is a major outpost for the Taurian Concordat. Allied mercenaries can purchase supplies from the quartermaster here.",
+  "nombre": "Taurian Headquarters",
+  "visible": true
+ },
+ "planet_other_floatingworld": {
+  "descripcion": "A dense cloud layer covers the surface of this world, and settlements exist only on high mountain peaks above the clouds.",
+  "nombre": "Dense Cloud Layer",
+  "visible": true
+ },
+ "planet_other_fungus": {
+  "descripcion": "A planet-wide fungus colony dominates this world, making it dangerous to humans.",
+  "nombre": "Dominant Fungus",
+  "visible": true
+ },
+ "planet_other_gasgiant": {
+  "descripcion": "This world is the moon of a gas giant.",
+  "nombre": "Gas Giant Moon",
+  "visible": true
+ },
+ "planet_other_hub": {
+  "descripcion": "Many travel routes come together at this world's jump points, making it a nexus for trade and information.",
+  "nombre": "Travel Hub",
+  "visible": true
+ },
+ "planet_other_megacity": {
+  "descripcion": "A massive city dominates some or all of this world's land mass, and most residents live within the city.",
+  "nombre": "MegaCity",
+  "visible": true
+ },
+ "planet_other_megaforest": {
+  "descripcion": "This world is covered in a massive forest across its entire climate spectrum.",
+  "nombre": "Planetwide Forest",
+  "visible": true
+ },
+ "planet_other_moon": {
+  "descripcion": "This planet features one or more orbiting natural satellites.",
+  "nombre": "Moons",
+  "visible": true
+ },
+ "planet_other_mudflats": {
+  "descripcion": "This world's surface is a soggy mess of waterlogged regolith, creating vast shallow seas and deep mud",
+  "nombre": "Planetwide Mudflats",
+  "visible": true
+ },
+ "planet_other_newcolony": {
+  "descripcion": "Whether recently colonized or re-colonized, the settlements on this world are new.",
+  "nombre": "Recently Colonized",
+  "visible": true
+ },
+ "planet_other_pirate": {
+  "descripcion": "Pirates are an ever-present threat in this system, using unregistered JumpShips and pirate jump points to prey on commerce.",
+  "nombre": "Pirate Presence",
+  "visible": true
+ },
+ "planet_other_plague": {
+  "descripcion": "One or more planets in this system are quarantined due to a particularly virulent biohazard, possibly an uncontrolled bioweapon.",
+  "nombre": "Plague Quarantine",
+  "visible": true
+ },
+ "planet_other_prison": {
+  "descripcion": "This planet is used as a prison for the dangerous and undesirable.",
+  "nombre": "Prison Planet",
+  "visible": true
+ },
+ "planet_other_ruins": {
+  "descripcion": "The surface of this world includes ruins of earlier settlements, whether lost in the Succession Wars, or from even earlier periods.",
+  "nombre": "Ruins",
+  "visible": true
+ },
+ "planet_other_starleague": {
+  "descripcion": "This world was once a Star League stronghold. Rare and expensive LosTech components can be found here.",
+  "nombre": "Former Star League Presence",
+  "visible": true
+ },
+ "planet_other_stonedcaribou": {
+  "descripcion": "The vegetation of this world releases hallucinogens into the atmosphere, leading to danger from intoxicated native fauna.",
+  "nombre": "Hallucinatory Vegetation",
+  "visible": true
+ },
+ "planet_other_storms": {
+  "descripcion": "This planet is scoured by constant planet-wide storms.",
+  "nombre": "Planetwide Storms",
+  "visible": true
+ },
+ "planet_other_taintedair": {
+  "descripcion": "The atmosphere of this planet is unbreathable, and inhabitants must wear filtration masks to survive.",
+  "nombre": "Tainted Atmosphere",
+  "visible": true
+ },
+ "planet_other_volcanic": {
+  "descripcion": "The crust of this world is tectonically unstable, and earthquakes and volcanic eruptions are frequent.",
+  "nombre": "Extensive Vulcanism",
+  "visible": true
+ },
+ "planet_pop_large": {
+  "descripcion": "This system has a total population in the billions.",
+  "nombre": "Large Population",
+  "visible": true
+ },
+ "planet_pop_medium": {
+  "descripcion": "This system has a total population in the hundreds of millions.",
+  "nombre": "Moderate Population",
+  "visible": true
+ },
+ "planet_pop_none": {
+  "descripcion": "This system has almost no permanent population, and may be entirely uninhabited.",
+  "nombre": "Token Population",
+  "visible": true
+ },
+ "planet_pop_small": {
+  "descripcion": "This system has a small population, numbering in the low millions.",
+  "nombre": "Small Population",
+  "visible": true
+ },
+ "planet_progress_1": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_progress_2": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_progress_2a": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_progress_3": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_ruins": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "planet_size_large": {
+  "descripcion": "This planet is larger than Earth and consequently has higher gravity.",
+  "nombre": "High Gravity Planet",
+  "visible": true
+ },
+ "planet_size_medium": {
+  "descripcion": "This planet is Earth-sized with comparable gravity.",
+  "nombre": "Medium Gravity Planet",
+  "visible": true
+ },
+ "planet_size_small": {
+  "descripcion": "This planet is smaller than Earth and has lower gravity.",
+  "nombre": "Low Gravity Planet",
+  "visible": true
+ }
+}
