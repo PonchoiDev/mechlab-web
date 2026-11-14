@@ -11,7 +11,7 @@ import {
   filterBtMechs,
   getPreferredTab
 } from './filters';
-import { createStockBuild, getDefaultZone, getLocationUsage, getMountProblem, mountItem, removeItem } from './fitting';
+import { createStockBuild, getHardpointViews, getLocationUsage, groupZoneEquipment, getMountProblem, mountItem, removeItem } from './fitting';
 import { getBtBuildIssues } from './issues';
 import { BT_ITEMS, BT_MECHS, findMech, getItem } from './mechlabData';
 import { createBtExportFile, parseBtImportFile } from './savedBuilds';
@@ -282,11 +282,20 @@ describe('MechLab de BATTLETECH: filtros', () => {
     expect(filter({ tab: 'energy', query: 'magna' }).every(candidate => /magna/i.test(`${candidate.name} ${candidate.manufacturer}`))).toBe(true);
   });
 
-  it('abre la ubicación de más anclajes y la pestaña de un anclaje con sitio', () => {
+  it('abre la pestaña de un anclaje con sitio en la ubicación elegida', () => {
     const hunchback = stock('HBK-4G');
-    expect(getDefaultZone(hunchback.mech)).toBe('rightTorso');
     expect(getPreferredTab(hunchback.mech, hunchback.loadout, 'rightTorso', 'energy')).toBe('ballistic');
     expect(getPreferredTab(hunchback.mech, hunchback.loadout, 'centerTorso', 'energy')).toBe('energy');
     expect(getPreferredTab(hunchback.mech, hunchback.loadout, 'rightTorso', 'ammo')).toBe('ammo');
+  });
+
+  it('reparte las armas por sus anclajes y agrupa el resto del equipo, como las tarjetas de MW5', () => {
+    const hunchback = stock('HBK-4G');
+    expect(getHardpointViews(hunchback.mech, hunchback.loadout, 'rightTorso').map(view => [view.type, view.item?.name ?? null]))
+      .toEqual([['ballistic', 'AC/20'], ['ballistic', null], ['ballistic', null]]);
+    expect(groupZoneEquipment(hunchback.mech, hunchback.loadout, 'leftLeg').map(group => [group.item.name, group.count, group.indices]))
+      .toEqual([['Heat Sink', 2, [0, 1]]]);
+    const marauder = stock('MAD-3R');
+    expect(groupZoneEquipment(marauder.mech, marauder.loadout, 'leftTorso')[0]).toMatchObject({ fixed: true, indices: [] });
   });
 });

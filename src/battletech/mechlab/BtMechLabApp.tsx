@@ -11,7 +11,7 @@ import { useSavedBuilds } from '../../hooks/useSavedBuilds';
 import { copyText } from '../../services/clipboard';
 import { normalizeBuildName } from '../../utils/savedBuildsCore';
 import { decodeBtBuild, DEFAULT_MECH, encodeBtBuild, getBtBuildUrl, readBtBuildFromLocation } from '../../utils/battletech/buildCode';
-import { createStockBuild, getDefaultZone } from '../../utils/battletech/fitting';
+import { createStockBuild } from '../../utils/battletech/fitting';
 import { getBtBuildIssues } from '../../utils/battletech/issues';
 import { BT_MECHS, getItem, getMechDisplayName } from '../../utils/battletech/mechlabData';
 import { BT_SAVED_BUILDS_KEY } from '../../utils/battletech/savedBuilds';
@@ -19,7 +19,7 @@ import { getBuildSummary } from '../../utils/battletech/stats';
 import { BtAnalysis } from './BtAnalysis';
 import { BtBoard } from './BtBoard';
 import { BtComparePanel } from './BtComparePanel';
-import { BtItemPicker } from './BtItemPicker';
+import { BtComponentEditor } from './BtComponentEditor';
 import { BtMechPicker } from './BtMechPicker';
 import { BtMyBuildsDialog } from './BtMyBuildsDialog';
 import { useBtBuild } from './useBtBuild';
@@ -35,7 +35,9 @@ export function BtMechLabApp() {
   const { mech } = build;
   const summary = useMemo(() => getBuildSummary(build), [build]);
   const issues = useMemo(() => getBtBuildIssues(build), [build]);
-  const [activeZone, setActiveZone] = useState<Zone>(() => getDefaultZone(build.mech));
+  // Ubicación con el panel abierto, como en el MechLab de MW5: se abre al pulsar una tarjeta.
+  const [activeZone, setActiveZone] = useState<Zone | null>(null);
+  const closeEditor = useCallback(() => setActiveZone(null), []);
   const [toast, setToast] = useState<{ id: number; message: string } | null>(() =>
     linked && !linked.build ? { id: 0, message: 'This build link is not valid' } : null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
@@ -70,7 +72,7 @@ export function BtMechLabApp() {
   const copyLink = async (url = buildUrl) => showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link');
 
   return (
-    <div className="mechlab-shell bt-mechlab">
+    <div className={['mechlab-shell', 'bt-mechlab', activeZone ? 'has-editor is-editor-right' : ''].filter(Boolean).join(' ')}>
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">
@@ -95,7 +97,6 @@ export function BtMechLabApp() {
             onSelect={(next) => {
               if (next.id !== mech.id) setActiveSavedId(null);
               actions.selectMech(next);
-              setActiveZone(getDefaultZone(next));
             }}
           />
         </div>
@@ -188,22 +189,28 @@ export function BtMechLabApp() {
         />
       )}
 
-      <main className="bt-workspace">
+      <main className="workspace">
         <BtBoard
           build={build}
           activeZone={activeZone}
           onSelectZone={setActiveZone}
-          onRemove={actions.remove}
           onArmorChange={actions.changeArmor}
           onArmorStep={actions.stepArmorBy}
         />
-        <BtItemPicker
+      </main>
+
+      {activeZone && (
+        <BtComponentEditor
+          key={activeZone}
           build={build}
           zone={activeZone}
-          onZoneChange={setActiveZone}
           onMount={(zone, item) => showToast(actions.mount(zone, item))}
+          onRemove={actions.remove}
+          onArmorChange={actions.changeArmor}
+          onArmorStep={actions.stepArmorBy}
+          onClose={closeEditor}
         />
-      </main>
+      )}
 
       <BtAnalysis summary={summary} />
 
