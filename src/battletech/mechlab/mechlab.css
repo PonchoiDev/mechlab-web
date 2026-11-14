@@ -69,36 +69,11 @@ body { background: var(--work-bg); }
 
 .hardpoint-chip.is-over { --weapon-color: var(--work-red); }
 
-.bt-reference {
-  align-items: center;
-  text-align: center;
-}
-
 .bt-reference .bt-mech-icon {
   width: min(180px, 70%);
   height: auto;
   margin: 8px 0;
   filter: drop-shadow(0 0 18px rgba(255, 212, 0, 0.12));
-}
-
-.bt-reference h2 span {
-  color: var(--bt-accent);
-  font-family: var(--work-mono);
-  font-size: 0.85em;
-}
-
-.bt-source-tag {
-  padding: 1px 6px;
-  border: 1px solid var(--work-line);
-  border-radius: 2px;
-  color: var(--work-muted);
-  font: 500 10px var(--work-mono);
-  text-transform: uppercase;
-}
-
-.bt-reference-meta {
-  color: var(--work-muted);
-  font: 500 11px var(--work-mono);
 }
 
 .bt-tags {

@@ -23,13 +23,15 @@ interface BtComponentEditorProps {
   onArmorChange: (zone: Zone, side: BtArmorSide, value: number) => void;
   onArmorStep: (zone: Zone, side: BtArmorSide, steps: number) => void;
   onClose: () => void;
+  side: 'left' | 'right';
+  onToggleSide: () => void;
 }
 
 const formatTonnage = (value: number) => String(Number(value.toFixed(2)));
 
 // Panel de la ubicación elegida, con el marcado del ComponentEditor de MW5: anclajes, lo instalado
 // (que se quita con ✕, salvo el equipo fijo del chasis), el equipo que se puede añadir y el blindaje.
-export function BtComponentEditor({ build, zone, selectedHardpoint, onSelectHardpoint, onMount, onRemove, onArmorChange, onArmorStep, onClose }: BtComponentEditorProps) {
+export function BtComponentEditor({ build, zone, selectedHardpoint, onSelectHardpoint, onMount, onRemove, onArmorChange, onArmorStep, onClose, side, onToggleSide }: BtComponentEditorProps) {
   useDismiss(onClose, KEEPS_EDITOR_OPEN);
   const { mech, loadout, armor } = build;
   const label = ZONE_LABELS[zone];
@@ -44,13 +46,22 @@ export function BtComponentEditor({ build, zone, selectedHardpoint, onSelectHard
   const rearMax = location.maxRearArmor;
 
   return (
-    <aside className="component-editor bt-component-editor" aria-label={`${label} editor`}>
+    <aside className={side === 'left' ? 'component-editor is-left' : 'component-editor'} aria-label={`${label} editor`}>
       <header className="editor-header">
         <div>
           <p className="eyebrow">COMPONENT</p>
           <h2>{label}</h2>
         </div>
         <span className="editor-header-actions">
+          <button
+            type="button"
+            className="editor-side"
+            aria-label={side === 'right' ? 'Move panel to the left' : 'Move panel to the right'}
+            title={side === 'right' ? 'Move panel to the left' : 'Move panel to the right'}
+            onClick={onToggleSide}
+          >
+            ⇄
+          </button>
           <button type="button" className="editor-close" aria-label="Close editor" onClick={onClose}>✕</button>
         </span>
       </header>

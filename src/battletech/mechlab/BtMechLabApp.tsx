@@ -10,6 +10,7 @@ import { Toast } from '../../components/Toast';
 import { UtilityToolbar } from '../../components/UtilityToolbar';
 import { WhatsNew } from '../../components/WhatsNew';
 import { useSavedBuilds } from '../../hooks/useSavedBuilds';
+import { useViewPreferences } from '../../hooks/useViewPreferences';
 import { copyText } from '../../services/clipboard';
 import { EMPTY_VALUE } from '../../utils/format';
 import { normalizeBuildName } from '../../utils/savedBuildsCore';
@@ -30,6 +31,8 @@ import { useBtBuild } from './useBtBuild';
 
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
 const linked = readBtBuildFromLocation();
+// La vista (celdas, tablero compacto y lado del panel) se guarda aparte de la de MW5.
+const BT_VIEW_KEY = 'mw-builder:battletech:view';
 const formatNumber = (value: number) => String(Number(value.toFixed(2)));
 
 export function BtMechLabApp() {
@@ -59,6 +62,7 @@ export function BtMechLabApp() {
   const closeMenu = useCallback(() => setMenu(null), []);
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
   const saved = useSavedBuilds(BT_SAVED_BUILDS_KEY);
+  const view = useViewPreferences(BT_VIEW_KEY);
 
   const showToast = useCallback((message: string) => setToast({ id: Date.now(), message }), []);
   const dismissToast = useCallback(() => setToast(null), []);
@@ -108,7 +112,7 @@ export function BtMechLabApp() {
   const copyLink = async (url = buildUrl) => showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link');
 
   return (
-    <div className={['mechlab-shell', 'bt-mechlab', activeZone ? 'has-editor is-editor-right' : ''].filter(Boolean).join(' ')}>
+    <div className={['mechlab-shell', 'bt-mechlab', activeZone ? `has-editor is-editor-${view.editorSide}` : ''].filter(Boolean).join(' ')}>
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">
@@ -232,7 +236,38 @@ export function BtMechLabApp() {
       )}
 
       <main className="workspace">
+        <div className="view-toggles" aria-label="View options">
+          <span className="utility-label">VIEW</span>
+          <button
+            type="button"
+            className="utility-button"
+            aria-pressed={view.expandedSlots}
+            title="Show every slot as a cell, like the in-game mechlab"
+            onClick={view.toggleExpandedSlots}
+          >
+            {view.expandedSlots ? 'Hide slot cells' : 'Show slot cells'}
+          </button>
+          <button
+            type="button"
+            className="utility-button"
+            aria-pressed={view.compactBoard}
+            title="Hide the 'Mech icon and lay the locations out in five columns"
+            onClick={view.toggleCompactBoard}
+          >
+            Compact board
+          </button>
+          <button
+            type="button"
+            className="utility-button"
+            title="Side of the screen where the location panel opens"
+            onClick={view.toggleEditorSide}
+          >
+            Panel {view.editorSide} ⇄
+          </button>
+        </div>
         <BtBoard
+          expandedSlots={view.expandedSlots}
+          compact={view.compactBoard}
           build={build}
           activeZone={activeZone}
           selectedHardpoint={selectedHardpoint}
@@ -256,6 +291,8 @@ export function BtMechLabApp() {
           onArmorChange={actions.changeArmor}
           onArmorStep={actions.stepArmorBy}
           onClose={closeEditor}
+          side={view.editorSide}
+          onToggleSide={view.toggleEditorSide}
         />
       )}
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-const STORAGE_KEY = 'mw-builder:mercs:view';
+// Cada MechLab guarda su vista en su propia clave (BATTLETECH usa mw-builder:battletech:view).
+const MERCS_STORAGE_KEY = 'mw-builder:mercs:view';
 
 export interface ViewPreferences {
   // Lado de la pantalla en el que se abre el panel de componente.
@@ -13,9 +14,9 @@ export interface ViewPreferences {
 
 const DEFAULTS: ViewPreferences = { editorSide: 'right', expandedSlots: false, compactBoard: false };
 
-const read = (): ViewPreferences => {
+const read = (storageKey: string): ViewPreferences => {
   try {
-    const stored = JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? '{}') as Partial<ViewPreferences>;
+    const stored = JSON.parse(window.localStorage.getItem(storageKey) ?? '{}') as Partial<ViewPreferences>;
     return {
       editorSide: stored.editorSide === 'left' ? 'left' : 'right',
       expandedSlots: stored.expandedSlots === true,
@@ -27,14 +28,14 @@ const read = (): ViewPreferences => {
 };
 
 // Preferencias de vista de cada visitante, guardadas en su navegador.
-export const useViewPreferences = () => {
-  const [preferences, setPreferences] = useState<ViewPreferences>(read);
+export const useViewPreferences = (storageKey = MERCS_STORAGE_KEY) => {
+  const [preferences, setPreferences] = useState<ViewPreferences>(() => read(storageKey));
 
   const update = (changes: Partial<ViewPreferences>) => {
     setPreferences(current => {
       const next = { ...current, ...changes };
       try {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+        window.localStorage.setItem(storageKey, JSON.stringify(next));
       } catch {
         // Sin almacenamiento, la preferencia dura hasta recargar la página.
       }
