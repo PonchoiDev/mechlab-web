@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'r
 import starmapData from '../../data/battletech/starmap.json';
 import type { BtStarmapData } from '../../types/battletech';
 import type { StarSystem } from '../../types/starmap';
-import { NEUTRAL_COLOR, getLegend, groupTags, parseBtQuery, toBtQuery } from '../../utils/battletech/starmap';
+import { NEUTRAL_COLOR, getFactionEmblems, getLegend, groupTags, parseBtQuery, toBtQuery } from '../../utils/battletech/starmap';
 import { getMapMarks } from '../../utils/marks';
 import { searchSystems } from '../../utils/starmap';
 import { FeedbackDialog } from '../../components/FeedbackDialog';
@@ -16,6 +16,9 @@ const DATE = data.range.start;
 const LOGO_PATH = `${import.meta.env.BASE_URL}starmap/logos/`;
 const URL_DELAY = 250;
 const NOTICE_DELAY = 4000;
+
+// Los logos van sobre el territorio de cada facción, como en el mapa del juego.
+const EMBLEMS = getFactionEmblems(data).map(({ logo, x, y, size }) => ({ url: LOGO_PATH + logo, x, y, size }));
 
 const factionName = (id: string) => data.factions[id]?.name ?? id;
 
@@ -209,6 +212,7 @@ export function BtStarmapApp() {
         onSelect={setSelectedId}
         onZone={() => undefined}
         mercZones={[]}
+        emblems={EMBLEMS}
         onMercZone={() => undefined}
       />
 

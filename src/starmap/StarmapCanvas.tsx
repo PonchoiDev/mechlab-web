@@ -3,7 +3,10 @@ import type { GameDate, StarmapData } from '../types/starmap';
 import type { MapMark } from '../utils/marks';
 import { getClusterLevels } from '../utils/starmap';
 import { ZoneLevelText } from './ZonePanels';
-import { QUEST_COLOR, StarmapRenderer, type MercZoneLayer, type TerritoryColors, type View } from './renderer';
+import { QUEST_COLOR, StarmapRenderer, type MercZoneLayer, type TerritoryColors, type TerritoryEmblem, type View } from './renderer';
+
+// Fuera del componente: un [] nuevo en cada render volvería a disparar el efecto.
+const NO_EMBLEMS: TerritoryEmblem[] = [];
 
 export interface FocusRequest {
   // Un sistema se centra; varios se encuadran.
@@ -26,6 +29,8 @@ interface StarmapCanvasProps {
   marks: MapMark[];
   territoryColors: TerritoryColors;
   mercZones: MercZoneLayer;
+  // Logos de las facciones sobre su territorio (el mapa de BATTLETECH); el de MW5 no los lleva.
+  emblems?: TerritoryEmblem[];
   focus: FocusRequest | null;
   onHover: (systemId: number | null) => void;
   onSelect: (systemId: number | null) => void;
@@ -94,7 +99,7 @@ const getVisibleBand = (container: HTMLElement): { top: number; bottom: number }
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, routeColor, marks, territoryColors, mercZones, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, routeColor, marks, territoryColors, mercZones, emblems, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
@@ -233,6 +238,10 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
   useEffect(() => {
     rendererRef.current?.setMercZones(mercZones);
   }, [mercZones]);
+
+  useEffect(() => {
+    rendererRef.current?.setEmblems(emblems ?? NO_EMBLEMS);
+  }, [emblems]);
 
   // Al abrir un enlace, el primer encuadre se hace antes de que carguen las fuentes: con ellas la ficha
   // crece y en el móvil puede tapar lo encuadrado. Se repite una vez cuando están listas.
