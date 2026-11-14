@@ -18,10 +18,14 @@ body { background: var(--work-bg); }
   --work-lime: var(--bt-accent);
 }
 
-[data-hardpoint="energy"], [data-category="energy"] { --bt-color: var(--bt-energy); }
-[data-hardpoint="ballistic"], [data-category="ballistic"] { --bt-color: var(--bt-ballistic); }
-[data-hardpoint="missile"], [data-category="missile"] { --bt-color: var(--bt-missile); }
-[data-hardpoint="support"], [data-category="support"] { --bt-color: var(--bt-support); }
+/* Los colores de anclaje son los del MechLab de MW5 (--weapon-color en App.css); BATTLETECH añade el
+   de Support, que MW5 no tiene. */
+[data-weapon-type="support"] { --weapon-color: var(--bt-support); }
+[data-weapon-type], [data-category="energy"], [data-category="ballistic"], [data-category="missile"], [data-category="support"] { --bt-color: var(--weapon-color); }
+[data-category="energy"] { --weapon-color: var(--bt-energy); }
+[data-category="ballistic"] { --weapon-color: var(--bt-ballistic); }
+[data-category="missile"] { --weapon-color: var(--bt-missile); }
+[data-category="support"] { --weapon-color: var(--bt-support); }
 [data-category="ammo"] { --bt-color: var(--bt-ammo); }
 [data-category="heatSink"] { --bt-color: var(--bt-heat); }
 [data-category="jumpJet"] { --bt-color: var(--bt-jump); }
@@ -53,7 +57,7 @@ body { background: var(--work-bg); }
 
 .bt-mech-option-name strong { margin-left: 4px; }
 
-.mech-filter-stepper[data-hardpoint] b { color: var(--bt-color); }
+.mech-filter-stepper[data-weapon-type] b { color: var(--bt-color); }
 
 .bt-hardpoint-summary {
   display: inline-flex;
@@ -63,7 +67,6 @@ body { background: var(--work-bg); }
 }
 
 .bt-hardpoint-tag {
-  --bt-color: var(--work-muted);
   padding: 1px 5px;
   border: 1px solid color-mix(in srgb, var(--bt-color) 55%, transparent);
   border-radius: 2px;
@@ -76,117 +79,20 @@ body { background: var(--work-bg); }
 .bt-hardpoint-tag.is-full { background: color-mix(in srgb, var(--bt-color) 16%, transparent); }
 .bt-hardpoint-tag.is-over { --bt-color: var(--work-red); background: rgba(255, 121, 108, 0.14); }
 
-/* Lectura y barra de herramientas */
+/* Lectura */
 .bt-readout .readout-cell strong small { white-space: nowrap; }
 
-.bt-toolbar {
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 10px 18px;
-}
 
-.bt-toolbar .utility-group { flex-wrap: wrap; gap: 6px; }
 
-/* Tablero y selector de objetos */
-.bt-workspace {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
-  gap: 14px;
-  align-items: start;
-  margin-top: 14px;
-}
-
-.bt-board { min-width: 0; }
-
-.bt-location { cursor: pointer; }
-
-.bt-structure {
-  color: var(--work-muted);
-  font: 500 10px var(--work-mono);
-}
-
-.bt-hardpoints {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.bt-items {
-  display: grid;
-  gap: 3px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.bt-item {
-  --bt-color: var(--work-muted);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  align-items: center;
-  gap: 6px;
-  min-height: 26px;
-  padding: 2px 4px 2px 8px;
-  border-left: 3px solid var(--bt-color);
-  background: rgba(255, 255, 255, 0.035);
-  font-size: 12px;
-}
-
-.bt-item-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.bt-item small {
-  color: var(--work-muted);
-  font: 400 10px var(--work-mono);
-  white-space: nowrap;
-}
-
-.bt-item.is-fixed {
-  grid-template-columns: minmax(0, 1fr) auto;
-  border-left-style: dashed;
+/* Tablero: las tarjetas son las del MechLab de MW5 (component-card); aquí solo la ficha del 'Mech y el
+   equipo fijo del chasis. */
+.component-card-item.is-built-in {
+  border-style: dashed;
   background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 6px, transparent 6px 12px);
+  cursor: default;
 }
 
-.bt-item-remove {
-  width: 22px;
-  height: 22px;
-  padding: 0;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  color: var(--work-muted);
-  background: none;
-  cursor: pointer;
-}
-
-.bt-item-remove:hover,
-.bt-item-remove:focus-visible {
-  border-color: var(--work-red);
-  color: var(--work-red);
-}
-
-.bt-item-empty {
-  color: var(--work-muted);
-  font-size: 11px;
-}
-
-.bt-armor {
-  display: grid;
-  gap: 4px;
-  padding-top: 6px;
-  border-top: 1px solid var(--work-line);
-}
-
-.bt-armor-control { gap: 4px; }
-
-.bt-armor-control .armor-control-label { min-width: 36px; }
-
-.bt-armor-max {
-  color: var(--work-muted);
-  font: 400 10px var(--work-mono);
-}
+.hardpoint-chip.is-over { --weapon-color: var(--work-red); }
 
 .bt-reference {
   align-items: center;
@@ -194,7 +100,7 @@ body { background: var(--work-bg); }
 }
 
 .bt-reference .bt-mech-icon {
-  width: min(160px, 60%);
+  width: min(180px, 70%);
   height: auto;
   margin: 8px 0;
   filter: drop-shadow(0 0 18px rgba(255, 212, 0, 0.12));
@@ -245,41 +151,6 @@ body { background: var(--work-bg); }
   text-align: left;
 }
 
-.bt-item-picker {
-  position: sticky;
-  top: 12px;
-  display: flex;
-  flex-direction: column;
-  max-height: calc(100svh - 24px);
-  border: 1px solid var(--work-line);
-  border-top: 2px solid var(--bt-accent);
-  background: rgba(25, 29, 25, 0.96);
-}
-
-.bt-item-picker-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 12px 6px;
-}
-
-.bt-item-picker-header h2 {
-  margin: 0;
-  font-size: 15px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.bt-zone-select {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--work-muted);
-  font: 600 10px var(--work-mono);
-}
-
-.bt-zone-select select,
 .bt-compare-source select {
   min-height: 30px;
   padding: 0 8px;
@@ -294,7 +165,6 @@ body { background: var(--work-bg); }
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  padding: 0 12px;
 }
 
 .bt-item-tabs .editor-tab[data-category] { border-bottom: 2px solid color-mix(in srgb, var(--bt-color) 60%, transparent); }
@@ -302,21 +172,14 @@ body { background: var(--work-bg); }
 .bt-item-filters {
   display: grid;
   gap: 6px;
-  padding: 8px 12px;
+  padding: 8px 0;
   border-bottom: 1px solid var(--work-line);
 }
 
 .bt-item-filters .editor-search { width: 100%; }
 
-.bt-item-count {
-  margin-left: auto;
-  color: var(--work-muted);
-  font: 500 10px var(--work-mono);
-}
-
 .bt-item-list {
-  flex: 1;
-  min-height: 160px;
+  max-height: 460px;
   margin: 0;
   padding: 6px;
   overflow-y: auto;
@@ -324,7 +187,6 @@ body { background: var(--work-bg); }
 }
 
 .bt-item-option {
-  --bt-color: var(--work-muted);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
@@ -404,7 +266,7 @@ body { background: var(--work-bg); }
 
 .bt-weapon-table { width: 100%; }
 
-.bt-weapon-table tr[data-hardpoint] td:first-child { border-left: 3px solid var(--bt-color); }
+.bt-weapon-table tr[data-weapon-type] td:first-child { border-left: 3px solid var(--bt-color); }
 
 .bt-weapon-table td small {
   display: block;
@@ -545,17 +407,11 @@ body { background: var(--work-bg); }
 
 .bt-compare-table small { color: var(--work-muted); font-size: 10px; }
 
-@media (max-width: 1180px) {
-  .bt-workspace { grid-template-columns: minmax(0, 1fr); }
-  .bt-item-picker { position: static; max-height: 640px; }
-}
-
 @media (max-width: 900px) {
   .bt-analysis { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 600px) {
   .bt-mech-picker { min-width: 0; width: 100%; }
-  .bt-item-picker-header { flex-wrap: wrap; }
   .bt-range-profile li { grid-template-columns: 44px minmax(0, 1fr) 80px; }
 }

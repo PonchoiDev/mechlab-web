@@ -140,6 +140,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
   - El selector de equipo abre la ubicación con más anclajes y, al cambiar de ubicación, la pestaña de un anclaje con sitio. «Fits here» deja solo lo que cabe, y lo que no cabe propone otra ubicación donde sí.
   - El equipo `BUILT-IN` no sale en el selector: solo viene fijo en su chasis.
   - Lo común de las builds guardadas pasa a `src/utils/savedBuildsCore.ts`, para que la página no cargue el catálogo de MW5.
+  - Tras la revisión, el tablero, el panel de cada ubicación y la barra de herramientas usan el marcado, los estilos y los componentes del MechLab de MW5 (`component-card`, `component-editor`, `UtilityToolbar`), con los colores de anclaje de MW5 y uno nuevo para Support. Al pulsar una ubicación se abre su panel, que se cierra con su ✕, con Escape o con un clic fuera, igual que la comparación. Lo montado se quita desde Installed, desde «Remove it» de un anclaje o con el menú del clic derecho, que tiene las acciones del de MW5 menos los niveles de arma (`src/utils/battletech/actions.ts`).
 - **Pendiente de comprobar en el juego:**
   - El efecto de `Heatsinks` en los 11 chasis que lo traen a 30 (ninguno es una variante disponible).
   - El coste: la fórmula (chasis, componentes y 625 C-Bills por punto de blindaje) da el `Cost` del mechdef en el HBK-4G, el AS7-D y el JR7-D, pero en otras variantes difiere en unos miles; hace falta una captura del valor de un 'Mech en el juego.

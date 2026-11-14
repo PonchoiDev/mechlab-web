@@ -2,16 +2,18 @@ import { useCallback, useMemo, useState } from 'react';
 import type { Zone } from '../../types/mech';
 import type { BtBuild, BtItem } from '../../types/battletech-mechlab';
 import { BuildStatus } from '../../components/BuildStatus';
+import { ContextMenu, type MenuEntry } from '../../components/ContextMenu';
 import { FeedbackDialog } from '../../components/FeedbackDialog';
 import { SaveBuildDialog } from '../../components/SaveBuildDialog';
 import { SupportLink } from '../../components/SupportLink';
 import { Toast } from '../../components/Toast';
+import { UtilityToolbar } from '../../components/UtilityToolbar';
 import { WhatsNew } from '../../components/WhatsNew';
 import { useSavedBuilds } from '../../hooks/useSavedBuilds';
 import { copyText } from '../../services/clipboard';
 import { normalizeBuildName } from '../../utils/savedBuildsCore';
 import { decodeBtBuild, DEFAULT_MECH, encodeBtBuild, getBtBuildUrl, readBtBuildFromLocation } from '../../utils/battletech/buildCode';
-import { createStockBuild, getDefaultZone } from '../../utils/battletech/fitting';
+import { createStockBuild } from '../../utils/battletech/fitting';
 import { getBtBuildIssues } from '../../utils/battletech/issues';
 import { BT_MECHS, getItem, getMechDisplayName } from '../../utils/battletech/mechlabData';
 import { BT_SAVED_BUILDS_KEY } from '../../utils/battletech/savedBuilds';
@@ -19,9 +21,10 @@ import { getBuildSummary } from '../../utils/battletech/stats';
 import { BtAnalysis } from './BtAnalysis';
 import { BtBoard } from './BtBoard';
 import { BtComparePanel } from './BtComparePanel';
-import { BtItemPicker } from './BtItemPicker';
+import { BtComponentEditor } from './BtComponentEditor';
 import { BtMechPicker } from './BtMechPicker';
 import { BtMyBuildsDialog } from './BtMyBuildsDialog';
+import { getBtEquipmentMenu, getBtHardpointMenu, type BtMenuContext } from './btMenus';
 import { useBtBuild } from './useBtBuild';
 
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
@@ -35,13 +38,25 @@ export function BtMechLabApp() {
   const { mech } = build;
   const summary = useMemo(() => getBuildSummary(build), [build]);
   const issues = useMemo(() => getBtBuildIssues(build), [build]);
-  const [activeZone, setActiveZone] = useState<Zone>(() => getDefaultZone(build.mech));
+  // Ubicación con el panel abierto, como en el MechLab de MW5: se abre al pulsar una tarjeta.
+  const [activeZone, setActiveZone] = useState<Zone | null>(null);
+  const [selectedHardpoint, setSelectedHardpoint] = useState<number | null>(null);
+  const selectZone = (zone: Zone, hardpointIndex: number | null = null) => {
+    setActiveZone(zone);
+    setSelectedHardpoint(hardpointIndex);
+  };
+  const closeEditor = useCallback(() => {
+    setActiveZone(null);
+    setSelectedHardpoint(null);
+  }, []);
   const [toast, setToast] = useState<{ id: number; message: string } | null>(() =>
     linked && !linked.build ? { id: 0, message: 'This build link is not valid' } : null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
+  const [menu, setMenu] = useState<{ title: string; x: number; y: number; entries: MenuEntry[] } | null>(null);
+  const closeMenu = useCallback(() => setMenu(null), []);
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
   const saved = useSavedBuilds(BT_SAVED_BUILDS_KEY);
 
@@ -50,6 +65,7 @@ export function BtMechLabApp() {
   const closeFeedback = useCallback(() => setIsFeedbackOpen(false), []);
   const closeSave = useCallback(() => setIsSaveOpen(false), []);
   const closeBuilds = useCallback(() => setIsBuildsOpen(false), []);
+  const closeCompare = useCallback(() => setIsCompareOpen(false), []);
 
   const buildCode = encodeBtBuild(build);
   const buildUrl = getBtBuildUrl(buildCode);
@@ -67,10 +83,32 @@ export function BtMechLabApp() {
     setActiveSavedId(savedId);
     showToast(message);
   };
+  const menuContext: BtMenuContext = {
+    mech,
+    loadout: build.loadout,
+    run: (action) => {
+      const result = action(build.loadout);
+      actions.setLoadout(result.loadout);
+      showToast(result.message);
+      setMenu(null);
+    },
+    openEditor: (zone, hardpointIndex) => {
+      setMenu(null);
+      selectZone(zone, hardpointIndex);
+    }
+  };
+  const openHardpointMenu = (zone: Zone, hardpointIndex: number, x: number, y: number) => {
+    const definition = getBtHardpointMenu(menuContext, zone, hardpointIndex);
+    if (definition) setMenu({ ...definition, x, y });
+  };
+  const openEquipmentMenu = (zone: Zone, itemId: string, x: number, y: number) => {
+    const definition = getBtEquipmentMenu(menuContext, zone, itemId);
+    if (definition) setMenu({ ...definition, x, y });
+  };
   const copyLink = async (url = buildUrl) => showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link');
 
   return (
-    <div className="mechlab-shell bt-mechlab">
+    <div className={['mechlab-shell', 'bt-mechlab', activeZone ? 'has-editor is-editor-right' : ''].filter(Boolean).join(' ')}>
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">
@@ -95,7 +133,6 @@ export function BtMechLabApp() {
             onSelect={(next) => {
               if (next.id !== mech.id) setActiveSavedId(null);
               actions.selectMech(next);
-              setActiveZone(getDefaultZone(next));
             }}
           />
         </div>
@@ -146,33 +183,37 @@ export function BtMechLabApp() {
 
       <BuildStatus
         issues={issues}
-        onSelectZone={(zone) => setActiveZone(zone)}
+        onSelectZone={(zone, hardpointIndex) => selectZone(zone, hardpointIndex)}
         readyMessage="No pending issues: every hardpoint is used, weapons have ammo, the heat is under control and no tonnage is left."
       />
 
-      <section className="utility-toolbar bt-toolbar" aria-label="Build tools">
-        <div className="utility-group">
-          <span className="utility-label">LOADOUT</span>
-          <button type="button" className="utility-button" disabled={buildCode === stockCode} onClick={() => { actions.loadStock(); showToast(`Loaded the stock ${mech.variant} loadout`); }}>Stock</button>
-          <button type="button" className="utility-button" disabled={!hasKind('weapon')} onClick={() => actions.removeKinds(['weapon'])}>Remove weapons</button>
-          <button type="button" className="utility-button" disabled={!hasKind('ammo')} onClick={() => actions.removeKinds(['ammo'])}>Remove ammo</button>
-          <button type="button" className="utility-button" disabled={!hasKind('heatSink') && !hasKind('jumpJet') && !hasKind('upgrade')} onClick={() => actions.removeKinds(['heatSink', 'jumpJet', 'upgrade'])}>Remove equipment</button>
-        </div>
-        <div className="utility-group">
-          <span className="utility-label">ARMOR</span>
-          <button type="button" className="utility-button" title="Spread the free tonnage over the 'Mech like the in-game button" onClick={actions.distribute}>Distribute</button>
-          <button type="button" className="utility-button" disabled={summary.armorPoints === 0} onClick={actions.clear}>Clear</button>
-        </div>
-        <div className="utility-group">
-          <span className="utility-label">BUILD</span>
-          <button type="button" className="utility-button" onClick={() => setIsSaveOpen(true)}>Save build</button>
-          <button type="button" className="utility-button" onClick={() => setIsBuildsOpen(true)}>
-            My builds{saved.builds.length > 0 && <span className="utility-count">{saved.builds.length}</span>}
-          </button>
-          <button type="button" className="utility-button" aria-pressed={isCompareOpen} onClick={() => setIsCompareOpen(open => !open)}>Compare</button>
-          <button type="button" className="utility-button utility-button-primary" onClick={() => copyLink()}>Copy link</button>
-        </div>
-      </section>
+      <UtilityToolbar
+        canClearArmor={summary.armorPoints > 0}
+        canMaximizeArmor={summary.armorPoints < summary.maxArmorPoints && summary.freeTonnage > 0}
+        hasWeapons={hasKind('weapon')}
+        hasAmmo={hasKind('ammo')}
+        hasEquipment={hasKind('heatSink') || hasKind('jumpJet') || hasKind('upgrade')}
+        onClearArmor={actions.clear}
+        onMaximizeArmor={actions.distribute}
+        onRemoveItems={(type) => actions.removeKinds(type === 'equipment' ? ['heatSink', 'jumpJet', 'upgrade'] : [type])}
+        canLoadStock={buildCode !== stockCode}
+        onLoadStock={() => {
+          actions.loadStock();
+          setSelectedHardpoint(null);
+          showToast(`Loaded the stock ${mech.variant} loadout`);
+        }}
+        isCompareOpen={isCompareOpen}
+        onToggleCompare={() => setIsCompareOpen(open => !open)}
+        savedBuildCount={saved.builds.length}
+        onSaveBuild={() => setIsSaveOpen(true)}
+        onOpenBuilds={() => setIsBuildsOpen(true)}
+        onShare={(anchor) => setMenu({
+          title: 'Share build',
+          x: anchor.left,
+          y: anchor.bottom + 4,
+          entries: [{ kind: 'action', label: 'Copy build link', onSelect: () => { setMenu(null); copyLink(); } }]
+        })}
+      />
 
       {isCompareOpen && (
         <BtComparePanel
@@ -184,26 +225,37 @@ export function BtMechLabApp() {
             loadBuild(next, `Loaded ${savedId ? `“${label}”` : `the ${label} loadout`}`, savedId);
             setIsCompareOpen(false);
           }}
-          onClose={() => setIsCompareOpen(false)}
+          onClose={closeCompare}
         />
       )}
 
-      <main className="bt-workspace">
+      <main className="workspace">
         <BtBoard
           build={build}
           activeZone={activeZone}
-          onSelectZone={setActiveZone}
-          onRemove={actions.remove}
+          selectedHardpoint={selectedHardpoint}
+          onSelectZone={selectZone}
+          onHardpointMenu={openHardpointMenu}
+          onEquipmentMenu={openEquipmentMenu}
           onArmorChange={actions.changeArmor}
           onArmorStep={actions.stepArmorBy}
         />
-        <BtItemPicker
+      </main>
+
+      {activeZone && (
+        <BtComponentEditor
+          key={activeZone}
           build={build}
           zone={activeZone}
-          onZoneChange={setActiveZone}
+          selectedHardpoint={selectedHardpoint}
+          onSelectHardpoint={setSelectedHardpoint}
           onMount={(zone, item) => showToast(actions.mount(zone, item))}
+          onRemove={actions.remove}
+          onArmorChange={actions.changeArmor}
+          onArmorStep={actions.stepArmorBy}
+          onClose={closeEditor}
         />
-      </main>
+      )}
 
       <BtAnalysis summary={summary} />
 
@@ -260,6 +312,7 @@ export function BtMechLabApp() {
           onClose={closeBuilds}
         />
       )}
+      {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={closeMenu} />}
       {toast && <Toast key={toast.id} message={toast.message} onDismiss={dismissToast} />}
     </div>
   );
