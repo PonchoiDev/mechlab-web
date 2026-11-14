@@ -79,16 +79,10 @@ body { background: var(--work-bg); }
 .bt-hardpoint-tag.is-full { background: color-mix(in srgb, var(--bt-color) 16%, transparent); }
 .bt-hardpoint-tag.is-over { --bt-color: var(--work-red); background: rgba(255, 121, 108, 0.14); }
 
-/* Lectura y barra de herramientas */
+/* Lectura */
 .bt-readout .readout-cell strong small { white-space: nowrap; }
 
-.bt-toolbar {
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 10px 18px;
-}
 
-.bt-toolbar .utility-group { flex-wrap: wrap; gap: 6px; }
 
 /* Tablero: las tarjetas son las del MechLab de MW5 (component-card); aquí solo la ficha del 'Mech y el
    equipo fijo del chasis. */

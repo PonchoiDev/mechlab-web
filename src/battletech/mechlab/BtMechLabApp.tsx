@@ -2,10 +2,12 @@ import { useCallback, useMemo, useState } from 'react';
 import type { Zone } from '../../types/mech';
 import type { BtBuild, BtItem } from '../../types/battletech-mechlab';
 import { BuildStatus } from '../../components/BuildStatus';
+import { ContextMenu, type MenuEntry } from '../../components/ContextMenu';
 import { FeedbackDialog } from '../../components/FeedbackDialog';
 import { SaveBuildDialog } from '../../components/SaveBuildDialog';
 import { SupportLink } from '../../components/SupportLink';
 import { Toast } from '../../components/Toast';
+import { UtilityToolbar } from '../../components/UtilityToolbar';
 import { WhatsNew } from '../../components/WhatsNew';
 import { useSavedBuilds } from '../../hooks/useSavedBuilds';
 import { copyText } from '../../services/clipboard';
@@ -52,6 +54,8 @@ export function BtMechLabApp() {
   const [isSaveOpen, setIsSaveOpen] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
+  const [menu, setMenu] = useState<{ title: string; x: number; y: number; entries: MenuEntry[] } | null>(null);
+  const closeMenu = useCallback(() => setMenu(null), []);
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
   const saved = useSavedBuilds(BT_SAVED_BUILDS_KEY);
 
@@ -160,29 +164,33 @@ export function BtMechLabApp() {
         readyMessage="No pending issues: every hardpoint is used, weapons have ammo, the heat is under control and no tonnage is left."
       />
 
-      <section className="utility-toolbar bt-toolbar" aria-label="Build tools">
-        <div className="utility-group">
-          <span className="utility-label">LOADOUT</span>
-          <button type="button" className="utility-button" disabled={buildCode === stockCode} onClick={() => { actions.loadStock(); showToast(`Loaded the stock ${mech.variant} loadout`); }}>Stock</button>
-          <button type="button" className="utility-button" disabled={!hasKind('weapon')} onClick={() => actions.removeKinds(['weapon'])}>Remove weapons</button>
-          <button type="button" className="utility-button" disabled={!hasKind('ammo')} onClick={() => actions.removeKinds(['ammo'])}>Remove ammo</button>
-          <button type="button" className="utility-button" disabled={!hasKind('heatSink') && !hasKind('jumpJet') && !hasKind('upgrade')} onClick={() => actions.removeKinds(['heatSink', 'jumpJet', 'upgrade'])}>Remove equipment</button>
-        </div>
-        <div className="utility-group">
-          <span className="utility-label">ARMOR</span>
-          <button type="button" className="utility-button" title="Spread the free tonnage over the 'Mech like the in-game button" onClick={actions.distribute}>Distribute</button>
-          <button type="button" className="utility-button" disabled={summary.armorPoints === 0} onClick={actions.clear}>Clear</button>
-        </div>
-        <div className="utility-group">
-          <span className="utility-label">BUILD</span>
-          <button type="button" className="utility-button" onClick={() => setIsSaveOpen(true)}>Save build</button>
-          <button type="button" className="utility-button" onClick={() => setIsBuildsOpen(true)}>
-            My builds{saved.builds.length > 0 && <span className="utility-count">{saved.builds.length}</span>}
-          </button>
-          <button type="button" className="utility-button" aria-pressed={isCompareOpen} onClick={() => setIsCompareOpen(open => !open)}>Compare</button>
-          <button type="button" className="utility-button utility-button-primary" onClick={() => copyLink()}>Copy link</button>
-        </div>
-      </section>
+      <UtilityToolbar
+        canClearArmor={summary.armorPoints > 0}
+        canMaximizeArmor={summary.armorPoints < summary.maxArmorPoints && summary.freeTonnage > 0}
+        hasWeapons={hasKind('weapon')}
+        hasAmmo={hasKind('ammo')}
+        hasEquipment={hasKind('heatSink') || hasKind('jumpJet') || hasKind('upgrade')}
+        onClearArmor={actions.clear}
+        onMaximizeArmor={actions.distribute}
+        onRemoveItems={(type) => actions.removeKinds(type === 'equipment' ? ['heatSink', 'jumpJet', 'upgrade'] : [type])}
+        canLoadStock={buildCode !== stockCode}
+        onLoadStock={() => {
+          actions.loadStock();
+          setSelectedHardpoint(null);
+          showToast(`Loaded the stock ${mech.variant} loadout`);
+        }}
+        isCompareOpen={isCompareOpen}
+        onToggleCompare={() => setIsCompareOpen(open => !open)}
+        savedBuildCount={saved.builds.length}
+        onSaveBuild={() => setIsSaveOpen(true)}
+        onOpenBuilds={() => setIsBuildsOpen(true)}
+        onShare={(anchor) => setMenu({
+          title: 'Share build',
+          x: anchor.left,
+          y: anchor.bottom + 4,
+          entries: [{ kind: 'action', label: 'Copy build link', onSelect: () => { setMenu(null); copyLink(); } }]
+        })}
+      />
 
       {isCompareOpen && (
         <BtComparePanel
@@ -279,6 +287,7 @@ export function BtMechLabApp() {
           onClose={closeBuilds}
         />
       )}
+      {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={closeMenu} />}
       {toast && <Toast key={toast.id} message={toast.message} onDismiss={dismissToast} />}
     </div>
   );
