@@ -98,7 +98,7 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después el build propio, los datos, la lógica y la interfaz, en commits separados.
 - **Datos:** 219 sistemas de carrera y 13 facciones (8 con sistemas y 5 que solo salen en los contratos). `starmap.json` pesa unos 390 KB (unos 43 KB comprimido).
-- **Tests:** los siete criterios (CA1 a CA7) están en `src/utils/battletech/starmap.test.ts` y pasan.
+- **Tests:** los ocho criterios (CA1 a CA8) están en `src/utils/battletech/starmap.test.ts` y pasan.
 - **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844, en desarrollo y con el build de producción:
   - el mapa con sus territorios;
   - el buscador y la marca;
@@ -113,3 +113,4 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
   - **Biomas:** el juego no tiene nombre visible para ellos; el script los escribe a partir de su id.
   - **Desarrollo:** el servidor de Vite de BATTLETECH resuelve `/src/` a la carpeta `src/` del repositorio, y cada página carga su script con esa ruta.
   - **Copias de trabajo de `.claude/worktrees/`:** quedan fuera de git, de los tests y del lint.
+  - **Logos en el territorio:** el lienzo compartido con MW5 admite logos sobre los territorios (`emblems`), con un 14 % de opacidad; el mapa de MW5 no los usa. Un sistema se une al grupo de su facción si está a 25 años luz o menos de otro: los de la Magistracy of Canopus, en la frontera, están a 20 o 23 unos de otros.

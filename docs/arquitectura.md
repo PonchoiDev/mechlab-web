@@ -107,7 +107,7 @@ Es la cuarta página (`pilots/index.html`, servida en `/mercs/pilots/`), con su 
 
 Las páginas de *BATTLETECH* viven en `/battletech/`, con su propio build (`vite.battletech.config.ts`): la raíz de Vite es `battletech/`, el código está en `src/battletech/` y `src/utils/battletech/`, y se construye en `dist/battletech/` después del build de MW5, que es el que vacía `dist/` y copia la portada. Los plugins comunes (la portada y la API de desarrollo) están en `vite.plugins.ts`, y el Worker trata `/battletech/api/*` igual que `/mercs/api/*`.
 
-- **Mapa estelar:** `generar_mapa_battletech.py` escribe `starmap.json` con la forma de `StarmapData`, el tipo del mapa de MW5 (una sola fecha, un dueño por sistema y el resto vacío), para reutilizar `StarmapCanvas` y su renderer: territorios, zoom, buscador y marcas. Lo propio de BATTLETECH (dificultad, etiquetas, tiendas, contratos y biomas) va en `details`.
+- **Mapa estelar:** `generar_mapa_battletech.py` escribe `starmap.json` con la forma de `StarmapData`, el tipo del mapa de MW5 (una sola fecha, un dueño por sistema y el resto vacío), para reutilizar `StarmapCanvas` y su renderer: territorios, zoom, buscador y marcas. Lo propio de BATTLETECH (dificultad, etiquetas, tiendas, contratos y biomas) va en `details`. Como en el juego, el logo de cada facción se pinta casi transparente sobre su territorio: `getFactionEmblems` calcula dónde y de qué tamaño, y el lienzo los recibe en `emblems`, que el mapa de MW5 no usa.
 - **`utils/battletech/starmap.ts`:** los grupos de etiquetas, la leyenda de facciones y el sistema de la URL, con sus tests.
 - **`battletech/starmap/BtStarmapApp.tsx`:** la cabecera, el buscador, la leyenda y la ficha del sistema. Usa los estilos del mapa de MW5 (`starmap.css`) y añade los suyos.
 
