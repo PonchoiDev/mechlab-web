@@ -18,10 +18,14 @@ body { background: var(--work-bg); }
   --work-lime: var(--bt-accent);
 }
 
-[data-hardpoint="energy"], [data-category="energy"] { --bt-color: var(--bt-energy); }
-[data-hardpoint="ballistic"], [data-category="ballistic"] { --bt-color: var(--bt-ballistic); }
-[data-hardpoint="missile"], [data-category="missile"] { --bt-color: var(--bt-missile); }
-[data-hardpoint="support"], [data-category="support"] { --bt-color: var(--bt-support); }
+/* Los colores de anclaje son los del MechLab de MW5 (--weapon-color en App.css); BATTLETECH añade el
+   de Support, que MW5 no tiene. */
+[data-weapon-type="support"] { --weapon-color: var(--bt-support); }
+[data-weapon-type], [data-category="energy"], [data-category="ballistic"], [data-category="missile"], [data-category="support"] { --bt-color: var(--weapon-color); }
+[data-category="energy"] { --weapon-color: var(--bt-energy); }
+[data-category="ballistic"] { --weapon-color: var(--bt-ballistic); }
+[data-category="missile"] { --weapon-color: var(--bt-missile); }
+[data-category="support"] { --weapon-color: var(--bt-support); }
 [data-category="ammo"] { --bt-color: var(--bt-ammo); }
 [data-category="heatSink"] { --bt-color: var(--bt-heat); }
 [data-category="jumpJet"] { --bt-color: var(--bt-jump); }
@@ -53,7 +57,7 @@ body { background: var(--work-bg); }
 
 .bt-mech-option-name strong { margin-left: 4px; }
 
-.mech-filter-stepper[data-hardpoint] b { color: var(--bt-color); }
+.mech-filter-stepper[data-weapon-type] b { color: var(--bt-color); }
 
 .bt-hardpoint-summary {
   display: inline-flex;
@@ -63,7 +67,6 @@ body { background: var(--work-bg); }
 }
 
 .bt-hardpoint-tag {
-  --bt-color: var(--work-muted);
   padding: 1px 5px;
   border: 1px solid color-mix(in srgb, var(--bt-color) 55%, transparent);
   border-radius: 2px;
@@ -120,7 +123,6 @@ body { background: var(--work-bg); }
 }
 
 .bt-item {
-  --bt-color: var(--work-muted);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: center;
@@ -324,7 +326,6 @@ body { background: var(--work-bg); }
 }
 
 .bt-item-option {
-  --bt-color: var(--work-muted);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
@@ -404,7 +405,7 @@ body { background: var(--work-bg); }
 
 .bt-weapon-table { width: 100%; }
 
-.bt-weapon-table tr[data-hardpoint] td:first-child { border-left: 3px solid var(--bt-color); }
+.bt-weapon-table tr[data-weapon-type] td:first-child { border-left: 3px solid var(--bt-color); }
 
 .bt-weapon-table td small {
   display: block;

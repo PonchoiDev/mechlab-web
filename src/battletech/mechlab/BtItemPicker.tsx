@@ -177,7 +177,7 @@ export function BtItemPicker({ build, zone, onZoneChange, onMount }: BtItemPicke
             ? findMountZone(build.mech, build.loadout, item)
             : null;
           return (
-            <li key={item.id} className={problem ? 'bt-item-option is-blocked' : 'bt-item-option'} data-category={item.kind === 'weapon' ? item.hardpoint : item.kind}>
+            <li key={item.id} className={problem ? 'bt-item-option is-blocked' : 'bt-item-option'} data-weapon-type={item.hardpoint ?? undefined} data-category={item.kind === "weapon" ? item.hardpoint : item.kind}>
               <div className="bt-item-option-main">
                 <strong>{item.name}</strong>
                 <span className="bt-item-option-meta">

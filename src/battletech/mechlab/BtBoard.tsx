@@ -87,7 +87,7 @@ function LocationCard({ build, zone, label, position, isActive, onSelectZone, on
               <span
                 key={type}
                 className={used > capacity ? 'bt-hardpoint-tag is-over' : used === capacity ? 'bt-hardpoint-tag is-full' : 'bt-hardpoint-tag'}
-                data-hardpoint={type}
+                data-weapon-type={type}
                 title={`${HARDPOINT_LABELS[type]}: ${used} of ${capacity} used`}
               >
                 {HARDPOINT_SHORT[type]} {used}/{capacity}
@@ -99,13 +99,13 @@ function LocationCard({ build, zone, label, position, isActive, onSelectZone, on
 
       <ul className="bt-items">
         {fixed.map((item, index) => (
-          <li key={`fixed-${index}`} className="bt-item is-fixed" data-category={getItemTab(item)} title={`${item.name}: built into this chassis. ${item.bonuses.join('. ')}`}>
+          <li key={`fixed-${index}`} className="bt-item is-fixed" data-weapon-type={item.hardpoint ?? undefined} data-category={getItemTab(item)} title={`${item.name}: built into this chassis. ${item.bonuses.join('. ')}`}>
             <span className="bt-item-name">{item.name}</span>
             <small>{item.slots} sl · {formatTonnage(item.tonnage)} t · built-in</small>
           </li>
         ))}
         {mounted.map((item, index) => (
-          <li key={`${item.id}-${index}`} className="bt-item" data-category={getItemTab(item)}>
+          <li key={`${item.id}-${index}`} className="bt-item" data-weapon-type={item.hardpoint ?? undefined} data-category={getItemTab(item)}>
             <span className="bt-item-name" title={item.manufacturer ? `${item.name} (${item.manufacturer})` : item.name}>{item.name}</span>
             <small>{item.slots} sl · {formatTonnage(item.tonnage)} t</small>
             <button

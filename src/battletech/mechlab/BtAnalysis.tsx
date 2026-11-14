@@ -29,7 +29,7 @@ export function BtAnalysis({ summary }: { summary: BtSummary }) {
               </thead>
               <tbody>
                 {summary.weapons.map(line => (
-                  <tr key={line.item.id} data-hardpoint={line.item.hardpoint}>
+                  <tr key={line.item.id} data-weapon-type={line.item.hardpoint}>
                     <td>
                       {line.count > 1 && <span className="bt-count">{line.count}×</span>}
                       {line.item.name}

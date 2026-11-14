@@ -40,7 +40,7 @@ export function HardpointSummary({ mech }: { mech: BtMech }) {
       {HARDPOINTS.map(type => {
         const count = getHardpointCount(mech, type);
         return count > 0 ? (
-          <span key={type} className="bt-hardpoint-tag" data-hardpoint={type} title={`${count} ${HARDPOINT_LABELS[type]}`}>
+          <span key={type} className="bt-hardpoint-tag" data-weapon-type={type} title={`${count} ${HARDPOINT_LABELS[type]}`}>
             {count}{HARDPOINT_SHORT[type]}
           </span>
         ) : null;
@@ -172,7 +172,7 @@ export function BtMechPicker({ mechs, current, onSelect }: BtMechPickerProps) {
               {HARDPOINTS.map(type => {
                 const value = filters.minHardpoints[type];
                 return (
-                  <span key={type} className={value > 0 ? 'mech-filter-stepper is-active' : 'mech-filter-stepper'} data-hardpoint={type}>
+                  <span key={type} className={value > 0 ? 'mech-filter-stepper is-active' : 'mech-filter-stepper'} data-weapon-type={type}>
                     <button type="button" aria-label={`Fewer ${HARDPOINT_LABELS[type]} hardpoints`} disabled={value === 0} onClick={() => changeMinimum(type, -1)}>−</button>
                     <span title={HARDPOINT_LABELS[type]}><b>{value}</b>{HARDPOINT_SHORT[type]}</span>
                     <button type="button" aria-label={`More ${HARDPOINT_LABELS[type]} hardpoints`} disabled={value === MAX_MINIMUM} onClick={() => changeMinimum(type, 1)}>+</button>
