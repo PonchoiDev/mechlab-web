@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-14-map-marks',
+    date: '2026-11-14',
+    title: 'Clearer selections on the star map',
+    items: [
+      'Whatever you pick is marked with a ring, sight brackets and the system name, in the color of its panel: yellow for a system, blue for an academy, amber for a quest, magenta for a campaign and cyan for where a \'Mech is found',
+      'Shared links on phones now frame the picked system below its card'
+    ]
+  },
+  {
     id: '2026-11-10-dlc-campaigns',
     date: '2026-11-10',
     title: 'DLC campaigns on the star map',

@@ -1,6 +1,6 @@
 # Especificación: marca de lo elegido en el mapa estelar
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/marks.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -43,3 +43,18 @@ Al elegir una academia, el mapa encuadra su sistema y lo marca con un aro azul, 
 
 1. **Lógica (CA1 a CA4):** `src/utils/marks.test.ts`.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: un sistema buscado, una academia, una HRQ, una campaña, una variante de Find a 'Mech y un sistema elegido con una HRQ abierta.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después el código, en commits separados.
+- **Tests:** los cuatro criterios (CA1 a CA4) están en `src/utils/marks.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844:
+  - New Avalon buscado (amarillo);
+  - la academia NAIS (azul);
+  - Bow and Arrow en Holt (ámbar);
+  - Shadow of Kerensky en Alleghe (magenta);
+  - el HBR-A en Rodigo al pulsar su misión (cian);
+  - Bow and Arrow con Ibstock elegido, con las dos marcas.
+- **Decisiones durante el desarrollo:**
+  - **Encuadre al abrir un enlace:** el mapa encuadra antes de que carguen las fuentes, y con ellas la ficha crece y en el móvil tapaba el sistema marcado. El encuadre se repite una vez cuando están listas.
+  - **El sistema bajo el ratón:** conserva su aro blanco, salvo si es el elegido, que ya lleva su marca.
