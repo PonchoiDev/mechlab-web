@@ -111,6 +111,22 @@ Las páginas de *BATTLETECH* viven en `/battletech/`, con su propio build (`vite
 - **`utils/battletech/starmap.ts`:** los grupos de etiquetas, la leyenda de facciones y el sistema de la URL, con sus tests.
 - **`battletech/starmap/BtStarmapApp.tsx`:** la cabecera, el buscador, la leyenda y la ficha del sistema. Usa los estilos del mapa de MW5 (`starmap.css`) y añade los suyos.
 
+### MechLab de BATTLETECH
+
+Es la página principal del build de BATTLETECH (`battletech/index.html`, servida en `/battletech/`), con su propio bundle: no carga los datos de MW5. Usa los estilos del MechLab de MW5 (`index.css` y `App.css`) y añade los suyos (`battletech/mechlab/mechlab.css`), con el amarillo de BATTLETECH como acento.
+
+- **Datos de los DLC:** el juego base trae JSON sueltos, pero Heavy Metal, Flashpoint y Urban Warfare los guardan en bundles de Unity 2018. `tools/unityfs.py` los lee en Python puro (la tabla de bloques en LZ4, los SerializedFile v17 y sus TextAsset), sin dependencias. `extraer_mechlab_battletech.py` guarda cada chasis, variante y componente con su fuente; `generar_mechlab_battletech.py` deja las 96 variantes que el jugador puede tener (`unit_release` y sin `BLACKLISTED`), con su build de serie, y el catálogo de objetos.
+- **Reglas propias:** las de BATTLETECH no se parecen a las de MW5 (todo ocupa ranuras, las armas usan anclajes por tipo, el blindaje va en pasos de 5 y no hay motor que cambiar), así que su lógica está aparte en `utils/battletech/`, con sus tipos en `types/battletech-mechlab.ts`:
+  - `fitting.ts`: ranuras, anclajes por ubicación, ubicaciones permitidas, retrorreactores (máximo y tramo de tonelaje) y equipo fijo;
+  - `armor.ts`: máximos delantero y trasero, pasos de 5 y el reparto del tonelaje libre con los porcentajes del juego;
+  - `stats.ts`: peso, calor, daño, daño por distancia, munición, movimiento y coste;
+  - `issues.ts`, `buildCode.ts`, `savedBuilds.ts`, `compare.ts` y `filters.ts`.
+
+  Tiene sus tests (`mechlab.test.ts`), que comprueban las builds de serie contra las cifras del juego.
+- **Lo que se comparte con MW5:** las ubicaciones (`utils/zones.ts`), los componentes genéricos (`BuildStatus`, `SaveBuildDialog`, `CheckboxDropdown`, `SlotBar`, `Toast`, `FeedbackDialog`, `WhatsNew` y `SupportLink`) y lo común de las builds guardadas, que pasa a `utils/savedBuildsCore.ts` para no cargar el catálogo de MW5. `useSavedBuilds` recibe la clave del navegador de cada juego (`mw-builder:battletech:saved-builds`), y el archivo exportado lleva `game: "battletech"`.
+- **`battletech/mechlab/BtMechLabApp.tsx`:** la cabecera, la lectura, el estado de la build, la barra de herramientas, el tablero (`BtBoard`), el selector de equipo (`BtItemPicker`), el análisis, la comparación y los diálogos. Solo pinta y llama a la lógica.
+- **Iconos:** los de cada chasis son PNG estáticos en `battletech/public/mechlab/icons/`; `mechs.json` solo guarda su nombre.
+
 ### Argo de BATTLETECH
 
 Es una página del build de BATTLETECH (`battletech/argo/index.html`, servida en `/battletech/argo/`), con su propio bundle. Usa los estilos de las unidades enemigas (`units.css`) y añade los suyos (`battletech/argo/argo.css`):

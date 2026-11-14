@@ -1,7 +1,7 @@
 # Especificación: MechLab de BATTLETECH
 
 - **Issue:** [#102](https://github.com/PonchoiDev/mechlab-web/issues/102)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/battletech/mechlab.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -126,3 +126,21 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
    - volver a la build de serie, copiar el enlace y abrirlo;
    - guardar una build, abrirla desde My builds y compararla;
    - la campana de novedades y el formulario de Feedback.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban), los datos, la lógica y la interfaz, en commits separados.
+- **Datos:** 96 variantes de 96 chasis (70 del juego base, 15 de Heavy Metal, 6 de Flashpoint y 5 de Urban Warfare) y 310 objetos: 210 armas (167 del juego base y 43 de Heavy Metal), 16 cajas de munición, 8 disipadores, 4 retrorreactores y 72 mejoras. 52 iconos de chasis. `mechs.json` pesa 220 KB y `items.json` 176 KB; el bundle de la página, 54 KB comprimido.
+- **Comprobación de las reglas:** las 96 builds de serie pesan exactamente el tonelaje de su chasis, y todas cumplen las reglas de ranuras, anclajes, ubicaciones y retrorreactores con el equipo fijo contado.
+- **Tests:** los 21 criterios están en `src/utils/battletech/mechlab.test.ts` y pasan, con uno más de la ubicación y la pestaña que se abren.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: el selector con los filtros, montar un AC/10 en el HBK-4G (con los avisos de sobrepeso y munición), el selector de equipo con sus filtros y «Fits here», el tablero con el equipo fijo del MAD-3R, repartir el blindaje, un enlace `?b=` y otro `?mech=PXH-1K`, guardar una build, My builds y la comparación.
+- **Decisiones durante el desarrollo:**
+  - Todos los chasis admiten de 2 a 8 retrorreactores, así que el filtro pide un mínimo en lugar de «admite alguno».
+  - En las armas, `Category` es su tipo (Energy, Ballistic…): la categoría de munición solo se lee de `Category` en las municiones.
+  - El selector de equipo abre la ubicación con más anclajes y, al cambiar de ubicación, la pestaña de un anclaje con sitio. «Fits here» deja solo lo que cabe, y lo que no cabe propone otra ubicación donde sí.
+  - El equipo `BUILT-IN` no sale en el selector: solo viene fijo en su chasis.
+  - Lo común de las builds guardadas pasa a `src/utils/savedBuildsCore.ts`, para que la página no cargue el catálogo de MW5.
+- **Pendiente de comprobar en el juego:**
+  - El efecto de `Heatsinks` en los 11 chasis que lo traen a 30 (ninguno es una variante disponible).
+  - El coste: la fórmula (chasis, componentes y 625 C-Bills por punto de blindaje) da el `Cost` del mechdef en el HBK-4G, el AS7-D y el JR7-D, pero en otras variantes difiere en unos miles; hace falta una captura del valor de un 'Mech en el juego.
+  - El umbral de sobrecalentamiento: la web parte de 60 (el 60 % de 100) y suma el `OverheatLevel` de los bancos de calor, sin escalarlo con su `MaxHeat`.
