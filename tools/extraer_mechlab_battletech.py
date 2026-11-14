@@ -4,6 +4,7 @@ import sys
 
 from battletech import ASSETS, DATOS, leer_carpeta, leer_etiquetas, leer_json, leer_json_texto
 from extraer_mapa import escribir_png, reducir
+from extraer_mapa_battletech import voltear
 from ue4 import descomprimir_dxt5
 from unityfs import textos_del_bundle
 
@@ -129,7 +130,8 @@ def extraer_iconos(juego, chasis):
         with open(ruta, "rb") as archivo:
             datos = archivo.read()
         alto, ancho = int.from_bytes(datos[12:16], "little"), int.from_bytes(datos[16:20], "little")
-        pixeles = descomprimir_dxt5(datos[CABECERA_DDS:], ancho, alto)
+        # Las DDS de Unity guardan las filas de abajo arriba: sin darles la vuelta, el 'Mech sale boca abajo.
+        pixeles = voltear(descomprimir_dxt5(datos[CABECERA_DDS:], ancho, alto), ancho, alto)
         escribir_png(os.path.join(RUTA_ICONOS, icono.removeprefix(PREFIJO_ICONO) + ".png"), TAMANO_ICONO,
                      reducir(ancho, alto, pixeles, TAMANO_ICONO))
         escritos.add(icono)
