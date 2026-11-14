@@ -43,7 +43,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (478 tests, V8 coverage) |
+| Tests | Vitest 5 (485 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -101,6 +101,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - Every weapon, ammo box, heat sink, jump jet and upgrade, with the manufacturer versions (+ to + + +), filters by category, version, source and rarity, search and sorting.
 - The in-game mechlab rules: everything takes slots, weapons need a free hardpoint of their type, each component goes only where the game allows it, jump jets have their limit and tonnage bracket, and built-in gear cannot be removed.
 - Armor in steps of 5 with front and rear limits, and a button that spreads the free tonnage like the in-game one.
+- The same board, location panel and toolbar as the MW5 MechLab, with the right-click menu (duplicate, fill hardpoints, add ammo, move and remove).
 - Alpha damage, stability damage, heat against sinking, damage by range, ammo per weapon type, walk and sprint, and value in C-Bills.
 - 'Mech picker with filters by weight class, source, role, minimum hardpoints and jump jets; share links (`?b=` and `?mech=HBK-4G`), builds saved in the browser and comparison.
 
@@ -338,7 +339,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Quality and checks against the game
 
-- **478 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **485 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

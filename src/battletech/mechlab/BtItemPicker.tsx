@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import type { Zone } from '../../types/mech';
 import type { BtBuild, BtItem } from '../../types/battletech-mechlab';
 import { CheckboxDropdown } from '../../components/CheckboxDropdown';
-import { ZONE_LABELS, ZONES } from '../../utils/zones';
+import { ZONE_LABELS } from '../../utils/zones';
 import {
   DEFAULT_ITEM_FILTERS,
   filterBtItems,
@@ -19,7 +19,6 @@ import { BT_ITEMS, SOURCE_LABELS, SOURCES } from '../../utils/battletech/mechlab
 interface BtItemPickerProps {
   build: BtBuild;
   zone: Zone;
-  onZoneChange: (zone: Zone) => void;
   onMount: (zone: Zone, item: BtItem) => void;
 }
 
@@ -60,9 +59,9 @@ function ItemStats({ item }: { item: BtItem }) {
   );
 }
 
-// Selector de objetos de la ubicación elegida: pestañas por categoría, filtros de versión, fuente y
+// Sección del panel de la ubicación para añadir equipo: pestañas por categoría, filtros de versión, fuente y
 // rareza, búsqueda y orden. Cada objeto dice si cabe y, si no, por qué.
-export function BtItemPicker({ build, zone, onZoneChange, onMount }: BtItemPickerProps) {
+export function BtItemPicker({ build, zone, onMount }: BtItemPickerProps) {
   const [filters, setFilters] = useState<BtItemFilters>(() =>
     ({ ...DEFAULT_ITEM_FILTERS, tab: getPreferredTab(build.mech, build.loadout, zone, DEFAULT_ITEM_FILTERS.tab) }));
   const [fitsOnly, setFitsOnly] = useState(false);
@@ -78,16 +77,10 @@ export function BtItemPicker({ build, zone, onZoneChange, onMount }: BtItemPicke
   const isWeaponTab = items.some(item => item.weapon) || ['energy', 'ballistic', 'missile', 'support'].includes(filters.tab);
 
   return (
-    <section className="bt-item-picker" aria-label="Equipment">
-      <header className="bt-item-picker-header">
-        <h2>Equipment</h2>
-        <label className="bt-zone-select">
-          <span>MOUNT IN</span>
-          <select value={zone} onChange={(event) => onZoneChange(event.target.value as Zone)}>
-            {ZONES.map(({ zone: option, label }) => <option key={option} value={option}>{label}</option>)}
-          </select>
-        </label>
-      </header>
+    <section className="editor-section bt-item-picker" aria-label="Add equipment">
+      <div className="editor-section-heading">
+        <h3>Add equipment <span className="editor-count">{items.length}</span></h3>
+      </div>
 
       <div className="editor-tabs bt-item-tabs" role="tablist" aria-label="Category">
         {ITEM_TABS.map(({ tab, label }) => (
@@ -165,7 +158,6 @@ export function BtItemPicker({ build, zone, onZoneChange, onMount }: BtItemPicke
           <select id="bt-item-sort" className="mech-filter-year" value={filters.sort} onChange={(event) => update({ sort: event.target.value as BtItemFilters['sort'] })}>
             {ITEM_SORTS.filter(sort => isWeaponTab || !sort.weaponsOnly).map(({ sort, label }) => <option key={sort} value={sort}>{label}</option>)}
           </select>
-          <span className="bt-item-count">{items.length} {items.length === 1 ? 'item' : 'items'}</span>
         </div>
       </div>
 
@@ -177,7 +169,7 @@ export function BtItemPicker({ build, zone, onZoneChange, onMount }: BtItemPicke
             ? findMountZone(build.mech, build.loadout, item)
             : null;
           return (
-            <li key={item.id} className={problem ? 'bt-item-option is-blocked' : 'bt-item-option'} data-category={item.kind === 'weapon' ? item.hardpoint : item.kind}>
+            <li key={item.id} className={problem ? 'bt-item-option is-blocked' : 'bt-item-option'} data-weapon-type={item.hardpoint ?? undefined} data-category={item.kind === "weapon" ? item.hardpoint : item.kind}>
               <div className="bt-item-option-main">
                 <strong>{item.name}</strong>
                 <span className="bt-item-option-meta">

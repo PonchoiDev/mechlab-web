@@ -107,10 +107,62 @@ export const removeItem = (loadout: BtLoadout, zone: Zone, index: number): BtLoa
 export const removeItemsOfKind = (loadout: BtLoadout, kinds: BtItemKind[]): BtLoadout =>
   mapZones(zone => loadout[zone].filter(id => !kinds.includes(getItem(id)?.kind ?? 'upgrade')));
 
-// La ubicación que se abre al cargar un 'Mech: la de más anclajes, que es donde suele ir el arma
-// principal (el torso derecho del Hunchback).
-export const getDefaultZone = (mech: BtMech): Zone => ZONE_KEYS.reduce((best, zone) =>
-  mech.locations[zone].hardpoints.length > mech.locations[best].hardpoints.length ? zone : best, 'centerTorso' as Zone);
+export interface HardpointView {
+  type: BtHardpoint;
+  // Arma montada en el anclaje y su posición en el loadout de la ubicación, o null si está libre.
+  item: BtItem | null;
+  index: number | null;
+  // Un arma que no tiene anclaje de su tipo (de un enlace antiguo): se enseña para poder quitarla.
+  isOver?: boolean;
+}
+
+// Los anclajes de una ubicación, cada uno con el arma que lo ocupa. El juego no numera los anclajes:
+// las armas de cada tipo ocupan los suyos por orden de montaje.
+export const getHardpointViews = (mech: BtMech, loadout: BtLoadout, zone: Zone): HardpointView[] => {
+  const weapons = loadout[zone]
+    .map((id, index) => ({ item: getItem(id), index }))
+    .filter((entry): entry is { item: BtItem; index: number } => entry.item?.kind === 'weapon');
+  const used = new Set<number>();
+  const views: HardpointView[] = mech.locations[zone].hardpoints.map(type => {
+    const weapon = weapons.find(entry => entry.item.hardpoint === type && !used.has(entry.index));
+    if (!weapon) return { type, item: null, index: null };
+    used.add(weapon.index);
+    return { type, item: weapon.item, index: weapon.index };
+  });
+  for (const weapon of weapons) {
+    if (!used.has(weapon.index)) views.push({ type: weapon.item.hardpoint!, item: weapon.item, index: weapon.index, isOver: true });
+  }
+  return views;
+};
+
+export interface EquipmentGroup {
+  item: BtItem;
+  count: number;
+  fixed: boolean;
+  // Posiciones en el loadout de la ubicación (vacío en el equipo fijo).
+  indices: number[];
+}
+
+// El equipo que no es un arma, agrupado por objeto como en las tarjetas de MW5 (Heat Sink ×2): primero
+// el fijo del chasis y después el montado, en el orden de montaje.
+export const groupZoneEquipment = (mech: BtMech, loadout: BtLoadout, zone: Zone): EquipmentGroup[] => {
+  const groups: EquipmentGroup[] = [];
+  for (const item of getFixedItems(mech, zone).filter(fixed => fixed.kind !== 'weapon')) {
+    const group = groups.find(entry => entry.fixed && entry.item.id === item.id);
+    if (group) group.count += 1;
+    else groups.push({ item, count: 1, fixed: true, indices: [] });
+  }
+  loadout[zone].forEach((id, index) => {
+    const item = getItem(id);
+    if (!item || item.kind === 'weapon') return;
+    const group = groups.find(entry => !entry.fixed && entry.item.id === id);
+    if (group) {
+      group.count += 1;
+      group.indices.push(index);
+    } else groups.push({ item, count: 1, fixed: false, indices: [index] });
+  });
+  return groups;
+};
 
 // Primera ubicación donde cabe un componente, para montarlo sin elegir dónde (por ejemplo, la
 // munición o un disipador). Prefiere la ubicación indicada si cabe ahí.

@@ -74,4 +74,19 @@ const TAG_ORDER = [
 const usedTags = new Set(BT_MECHS.flatMap(mech => mech.tags));
 export const MECH_TAGS = [...TAG_ORDER.filter(tag => usedTags.has(tag)), ...[...usedTags].filter(tag => !TAG_ORDER.includes(tag))];
 
-export const getMechDisplayName = (mech: BtMech) => `${mech.name} ${mech.variant}`;
+// La munición toma el color del anclaje de las armas que la usan, como en el MechLab de MW5.
+const ammoHardpoints = new Map<string, BtHardpoint>();
+for (const item of BT_ITEMS) {
+  const category = item.weapon?.ammoCategory;
+  if (category && item.hardpoint && !ammoHardpoints.has(category)) ammoHardpoints.set(category, item.hardpoint);
+}
+
+// El tipo de anclaje con el que se pinta un objeto: el suyo en las armas, el de sus armas en la munición.
+export const getItemWeaponType = (item: BtItem): BtHardpoint | undefined =>
+  item.hardpoint ?? (item.ammo?.category ? ammoHardpoints.get(item.ammo.category) : undefined);
+
+// Categoría del equipo con las clases del MechLab de MW5 (component-card-item[data-category]).
+export const getEquipmentCategory = (item: BtItem): 'ammo' | 'heat-sink' | 'jump-jet' | 'module' =>
+  item.kind === 'ammo' ? 'ammo' : item.kind === 'heatSink' ? 'heat-sink' : item.kind === 'jumpJet' ? 'jump-jet' : 'module';
+
+export const getMechDisplayName =(mech: BtMech) => `${mech.name} ${mech.variant}`;

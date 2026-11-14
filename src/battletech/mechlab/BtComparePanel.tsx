@@ -7,6 +7,11 @@ import { createStockBuild } from '../../utils/battletech/fitting';
 import { getMechDisplayName } from '../../utils/battletech/mechlabData';
 import { BtMechPicker } from './BtMechPicker';
 import { MechIcon } from './MechIcon';
+import { useDismiss } from './useDismiss';
+
+// La comparación se cierra con su ✕, con Escape o con un clic fuera; la barra de herramientas (que la
+// abre y la cierra) y los diálogos no cuentan como fuera.
+const KEEPS_COMPARE_OPEN = '.bt-compare, .utility-toolbar, .share-dialog-backdrop, .toast';
 
 interface BtComparePanelProps {
   mechs: BtMech[];
@@ -29,6 +34,7 @@ const defaultMech = (mechs: BtMech[], current: BtMech) => {
 
 // Compara la build del tablero con la de serie de otra variante o con una build guardada.
 export function BtComparePanel({ mechs, current, savedBuilds, onLoad, onClose }: BtComparePanelProps) {
+  useDismiss(onClose, KEEPS_COMPARE_OPEN);
   const [source, setSource] = useState<Source>('stock');
   const [stockMech, setStockMech] = useState(() => defaultMech(mechs, current.mech));
   const [savedId, setSavedId] = useState<string | null>(savedBuilds[0]?.id ?? null);
