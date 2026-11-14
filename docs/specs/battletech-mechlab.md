@@ -62,7 +62,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 ## Requisitos funcionales
 
 - **RF1.** Una página propia, `/battletech/`, con la cabecera de MW Builder: marca que lleva a `/`, título «MechLab», enlaces a `/battletech/starmap/` («Star map») y `/battletech/argo/` («Argo»), campana de novedades, Feedback y Support.
-- **RF2.** Selector de 'Mech con búsqueda por nombre o variante y filtros por clase de peso, fuente (Base, Heavy Metal, Flashpoint, Urban Warfare), mínimo de anclajes de cada tipo, retrorreactores y etiquetas de rol. Cada fila enseña el icono, el tonelaje, los anclajes y la fuente.
+- **RF2.** Selector de 'Mech con búsqueda por nombre o variante y filtros por clase de peso, fuente (Base, Heavy Metal, Flashpoint, Urban Warfare), mínimo de anclajes de cada tipo, mínimo de retrorreactores que admite el chasis y etiquetas de rol. Cada fila enseña el icono, el tonelaje, los anclajes y la fuente.
 - **RF3.** Tablero con las 8 ubicaciones: ranuras usadas, anclajes por tipo (usados y totales), el equipo montado y el fijo, y el blindaje delantero y trasero con botones de 5 puntos y su máximo.
 - **RF4.** Selector de objetos con pestañas por categoría (Energy, Ballistic, Missile, Support, Ammo, Heat sinks, Jump jets, Upgrades), filtros por versión (stock, +, + +, + + +), fuente y rareza, búsqueda y orden (nombre, peso, daño, calor, daño por tonelada, coste). Cada objeto dice si cabe en la ubicación elegida y, si no, por qué.
 - **RF5.** Lectura de la build: peso y tonelaje libre, blindaje, calor de la salva frente a disipación, daño de la salva, inestabilidad, andar y correr, retrorreactores, coste y estabilidad.
@@ -104,7 +104,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 | CA17 | Una build | se codifica y se decodifica | sale la misma build; un código roto da null; lo que ya no cabe se descarta; `?mech=HBK-4G` abre la build de serie |
 | CA18 | Las builds guardadas | se exportan / se importa un archivo de MW5 | el archivo lleva `game: "battletech"` / el de MW5 se rechaza |
 | CA19 | Dos builds | se comparan | la tabla dice qué lado gana en cada cifra, y en el calor gana el más bajo |
-| CA20 | El selector de 'Mechs | se filtra | por clase Assault salen 21; por fuente Heavy Metal, 15; con al menos 3 anclajes Ballistic, solo los que los tienen; con retrorreactores, solo los que admiten alguno; buscar «hbk» encuentra los Hunchback |
+| CA20 | El selector de 'Mechs | se filtra | por clase Assault salen 21; por fuente Heavy Metal, 15; con al menos 3 anclajes Ballistic, solo los que los tienen; con al menos 5 retrorreactores, los 38 que admiten 5 o más (todos los chasis admiten de 2 a 8); buscar «hbk» encuentra los Hunchback |
 | CA21 | El selector de objetos | se filtra | la pestaña Energy solo enseña armas Energy; la versión + + solo las de 2 «+»; la fuente Heavy Metal solo las suyas; el equipo `BUILT-IN` no sale; ordenar por daño pone primero el de más daño |
 
 ## Fuera de alcance

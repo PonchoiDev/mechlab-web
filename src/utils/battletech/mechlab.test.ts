@@ -257,8 +257,8 @@ describe('MechLab de BATTLETECH: filtros', () => {
     expect(ballistic.length).toBeGreaterThan(0);
     expect(ballistic.every(candidate => Object.values(candidate.locations)
       .reduce((total, location) => total + location.hardpoints.filter(type => type === 'ballistic').length, 0) >= 3)).toBe(true);
-    expect(filter({ jumpJets: true }).every(candidate => candidate.maxJumpJets > 0)).toBe(true);
-    expect(filter({ jumpJets: true }).length).toBeLessThan(96);
+    expect(filter({ minJumpJets: 5 }).every(candidate => candidate.maxJumpJets >= 5)).toBe(true);
+    expect(filter({ minJumpJets: 5 })).toHaveLength(38);
     expect(filter({ tags: ['Sniper'] }).every(candidate => candidate.tags.includes('Sniper'))).toBe(true);
     expect(filter({ query: 'hbk' }).map(candidate => candidate.name)).toEqual(expect.arrayContaining(['Hunchback']));
     expect(filter({ query: 'hbk' }).every(candidate => candidate.name === 'Hunchback')).toBe(true);
