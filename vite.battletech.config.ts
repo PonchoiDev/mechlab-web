@@ -23,7 +23,9 @@ export default defineConfig({
       }
     }
   },
-  // El código está fuera de battletech/ (en src/): el servidor de desarrollo tiene que poder leerlo.
+  // El código está fuera de battletech/ (en src/): el servidor de desarrollo tiene que poder leerlo, y
+  // reescribe el script de cada página a /src/…, que aquí es la carpeta src/ del repositorio.
+  resolve: { alias: [{ find: /^\/src\//, replacement: `${resolve(import.meta.dirname, 'src')}/` }] },
   server: { port: 5174, fs: { allow: [import.meta.dirname] } },
   plugins: [react(), workerApi(GAME_PATH)]
 })

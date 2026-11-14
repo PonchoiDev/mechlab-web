@@ -1,0 +1,48 @@
+/* Mapa estelar de BATTLETECH: los estilos del de MW5 (starmap.css) y lo propio de su ficha. */
+.bt-description {
+  margin: 10px 14px 0;
+  color: var(--map-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.bt-difficulty { font-size: 20px; font-weight: 700; }
+
+.bt-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.bt-tags span {
+  padding: 0 6px;
+  border: 1px solid var(--map-line);
+  font-size: 15px;
+}
+
+.bt-tags span[title] { cursor: help; }
+
+.bt-store { display: block; }
+.bt-store.is-black { color: #b98cff; }
+
+.bt-factions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bt-factions li { display: flex; align-items: center; gap: 6px; }
+
+.bt-factions li::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--faction);
+}
+
+/* Sin el panel de fecha, en el móvil los cajones y el zoom bajan a su sitio. */
+@media (max-width: 760px) {
+  .bt-starmap .starmap-drawers,
+  .bt-starmap .starmap-zoom { bottom: 12px; }
+}

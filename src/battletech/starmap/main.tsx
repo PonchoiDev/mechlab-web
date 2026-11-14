@@ -1,9 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+// El lienzo, la cabecera, la ficha y la leyenda son los del mapa de MW5; battletech.css añade lo propio.
+import '../../starmap/starmap.css'
+import './battletech.css'
+import { BtStarmapApp } from './BtStarmapApp.tsx'
 
-// Provisional: la página se monta en el commit que la desarrolla.
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <p>BATTLETECH starmap</p>
+    <BtStarmapApp />
   </StrictMode>,
 )

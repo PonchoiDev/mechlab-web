@@ -27,6 +27,8 @@ REGEX_RGBA = re.compile(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)")
 # Etiquetas que el jugador ve pero que no describen el planeta: el nombre, la facción (ya está el
 # dueño) y el progreso de la campaña.
 REGEX_ETIQUETA_INTERNA = re.compile(r"^planet_(name|faction|progress)_")
+# El mercado negro y la sede de una facción ya salen como tiendas en la ficha.
+REGEX_ETIQUETA_DE_TIENDA = re.compile(r"^planet_other_(blackmarket|factionhq_)")
 # Orden de los grupos en la ficha, por el prefijo de la etiqueta.
 ORDEN_ETIQUETAS = ["planet_climate_", "planet_size_", "planet_pop_", "planet_civ_", "planet_industry_",
                    "planet_other_", "planet_feature_"]
@@ -97,7 +99,8 @@ def main():
         sistemas.append({"id": indice, "name": ficha["nombre"], "x": round(ficha["x"], 2), "y": round(ficha["y"], 2),
                          "owners": [[FECHA, ficha["dueno"]]]})
         visibles = [id_etiqueta for id_etiqueta in ficha["etiquetas"]
-                    if etiquetas.get(id_etiqueta, {}).get("visible") and not REGEX_ETIQUETA_INTERNA.match(id_etiqueta)]
+                    if etiquetas.get(id_etiqueta, {}).get("visible") and not REGEX_ETIQUETA_INTERNA.match(id_etiqueta)
+                    and not REGEX_ETIQUETA_DE_TIENDA.match(id_etiqueta)]
         # Las marcas de los Flashpoint (planet_bellerophon_fp_whitelies) no tienen nombre: no se enseñan.
         avisos += [f"{ficha['nombre']}: etiqueta {e} sin nombre" for e in ficha["etiquetas"]
                    if e not in etiquetas and not REGEX_ETIQUETA_INTERNA.match(e) and "_fp_" not in e]
