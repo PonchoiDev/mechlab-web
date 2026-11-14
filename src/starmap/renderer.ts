@@ -1,5 +1,6 @@
 import type { GameDate, MercZone, StarSystem, StarmapData } from '../types/starmap';
 import { getCampaignAvailability } from '../utils/campaigns';
+import type { MapMark, MarkKind } from '../utils/marks';
 import { getQuestAvailability } from '../utils/quests';
 import { findClusterAt, getClusterOutlines } from '../utils/clusters';
 import { findMercZoneAt } from '../utils/mercs';
@@ -31,6 +32,17 @@ const UNIQUE_COLOR = '#ffd400';
 const ARENA_COLOR = '#ff6b5e';
 // El azul del icono de academia del juego (StarMapIconColor 0, 0.5, 1).
 const ACADEMY_COLOR = '#2f8cff';
+const SELECTED_COLOR = '#ffd400';
+// El cian de Find a 'Mech y de los 'Mechs especiales.
+const MECH_COLOR = '#8be3ff';
+// Color de la marca de cada selección: el de su panel y sus iconos.
+const MARK_COLORS: Record<MarkKind, string> = {
+  system: SELECTED_COLOR,
+  academy: ACADEMY_COLOR,
+  quest: QUEST_COLOR,
+  campaign: CAMPAIGN_COLOR,
+  mech: MECH_COLOR
+};
 const MERC_COLOR = '#e8e2d0';
 const MERC_LOGO = 26;
 // Grosores en píxeles de pantalla: el borde se ve igual de marcado con cualquier zoom.
@@ -135,8 +147,8 @@ export class StarmapRenderer {
   questRoute: number[] | null = null;
   // Color de la ruta: ámbar para una HRQ, magenta para una campaña.
   routeColor = QUEST_COLOR;
-  // Sistema que se marca en azul con su nombre: el de la academia elegida.
-  markedId: number | null = null;
+  // Sistemas que se marcan con un aro, esquinas de mira y su nombre, cada uno en el color de lo elegido.
+  marks: MapMark[] = [];
   selectedId: number | null = null;
 
   constructor(canvas: HTMLCanvasElement, data: StarmapData) {
@@ -576,27 +588,20 @@ export class StarmapRenderer {
     this.drawQuestRoute();
 
     if (scale >= LABEL_SCALE) this.drawLabels(visible);
-    this.drawMarked();
+    for (const mark of this.marks) this.drawMarked(mark);
 
-    for (const id of [this.hoveredId, this.selectedId]) {
-      const system = id === null ? undefined : this.data.systems.find(candidate => candidate.id === id);
-      if (!system) continue;
-      const [x, y] = this.toScreen(system.x, system.y);
-      const selected = id === this.selectedId;
+    // El sistema bajo el ratón lleva un aro blanco; el elegido ya lleva su marca.
+    const hovered = this.hoveredId === null || this.hoveredId === this.selectedId
+      ? undefined
+      : this.data.systems.find(candidate => candidate.id === this.hoveredId);
+    if (hovered) {
+      const [x, y] = this.toScreen(hovered.x, hovered.y);
       context.lineWidth = 2;
-      context.strokeStyle = selected ? '#ffd400' : 'rgba(255, 255, 255, 0.9)';
-      context.shadowColor = selected ? '#ffd400' : '#ffffff';
+      context.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+      context.shadowColor = '#ffffff';
       context.shadowBlur = 10;
       context.beginPath();
-      if (selected) {
-        context.moveTo(x, y - 11);
-        context.lineTo(x + 11, y);
-        context.lineTo(x, y + 11);
-        context.lineTo(x - 11, y);
-        context.closePath();
-      } else {
-        context.arc(x, y, 8, 0, Math.PI * 2);
-      }
+      context.arc(x, y, 8, 0, Math.PI * 2);
       context.stroke();
       context.shadowBlur = 0;
     }
@@ -776,16 +781,17 @@ export class StarmapRenderer {
     context.restore();
   }
 
-  private drawMarked() {
-    // Aro azul con esquinas de mira y el nombre del sistema, a cualquier zoom: al encuadrar la
-    // academia, el sistema se ve aunque haya muchas estrellas alrededor.
-    const system = this.markedId === null ? undefined : this.data.systems.find(candidate => candidate.id === this.markedId);
+  private drawMarked(mark: MapMark) {
+    // Aro con esquinas de mira y el nombre del sistema, a cualquier zoom y en el color de lo elegido:
+    // al encuadrarlo, el sistema se ve aunque haya muchas estrellas alrededor.
+    const system = this.data.systems.find(candidate => candidate.id === mark.system);
     if (!system) return;
+    const color = MARK_COLORS[mark.kind];
     const [x, y] = this.toScreen(system.x, system.y);
     const context = this.context;
     context.save();
-    context.strokeStyle = ACADEMY_COLOR;
-    context.shadowColor = ACADEMY_COLOR;
+    context.strokeStyle = color;
+    context.shadowColor = color;
     context.shadowBlur = 14;
     context.lineWidth = 2.5;
     context.beginPath();
@@ -807,7 +813,7 @@ export class StarmapRenderer {
     const width = context.measureText(text).width + 14;
     context.fillStyle = 'rgba(3, 10, 24, 0.9)';
     context.fillRect(x - width / 2, y - 58, width, 20);
-    context.strokeStyle = ACADEMY_COLOR;
+    context.strokeStyle = color;
     context.lineWidth = 1;
     context.strokeRect(x - width / 2, y - 58, width, 20);
     context.fillStyle = '#ffffff';
