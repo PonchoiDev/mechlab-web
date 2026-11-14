@@ -52,6 +52,10 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
   - los biomas de sus mapas.
 - **RF5.** Una leyenda lista las facciones con cuántos sistemas tiene cada una.
 - **RF6.** El sistema elegido va en la URL (`?system=Addasar`).
+- **RF7.** Como en el juego, el logo de cada facción se ve en su territorio, grande y con mucha transparencia, detrás de las estrellas:
+  - va en el centro de su grupo de sistemas más grande (las facciones con sistemas sueltos, como Locals, lo llevan en el mayor);
+  - su tamaño crece con ese grupo, en años luz, así que acompaña al zoom;
+  - los grupos de menos de 4 sistemas no llevan logo, porque taparía a los vecinos.
 
 ## Requisitos no funcionales
 
@@ -70,6 +74,7 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
 | CA5 | La búsqueda | se busca «addas» y «ur cruinne» | salen Addasar y Úr Cruinne (sin distinguir tildes) |
 | CA6 | La URL | se abre con `?system=Addasar` o con un sistema que no existe | elige Addasar; con uno que no existe, ninguno. La vista con Addasar elegido lleva `system=Addasar` |
 | CA7 | Los colores | se cargan las facciones | todas tienen color; Locals y NoFaction, el gris neutro |
+| CA8 | Los logos del territorio | se calculan | hay uno por facción con logo y algún grupo de 4 sistemas o más; el sistema más cercano a cada logo es de su facción; el de Liao es más grande que el de la Magistracy of Canopus |
 
 ## Fuera de alcance
 
@@ -80,7 +85,7 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
 
 ## Plan de pruebas
 
-1. **Datos y lógica (CA1 a CA7):** `src/utils/battletech/starmap.test.ts`, con `starmap.json` real.
+1. **Datos y lógica (CA1 a CA8):** `src/utils/battletech/starmap.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844:
    - el mapa con sus territorios;
    - el buscador y la marca;
