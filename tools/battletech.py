@@ -66,3 +66,15 @@ def leer_constantes(juego):
     texto = REGEX_COMA_FINAL.sub(r"\1", texto)
     texto = REGEX_COMA_QUE_FALTA.sub(r"\1,\2", texto)
     return json.loads(texto)
+
+
+def leer_json_texto(texto):
+    """Un JSON del juego ya leído, como el de un TextAsset de los bundles de los DLC, con las mismas
+    tolerancias que leer_json."""
+    if isinstance(texto, bytes):
+        texto = texto.decode("utf-8-sig")
+    texto = texto.lstrip("﻿")
+    texto = REGEX_COMENTARIO.sub("", texto)
+    texto = REGEX_COMA_FINAL.sub(r"\1", texto)
+    texto = REGEX_COMA_QUE_FALTA.sub(r"\1,\2", texto)
+    return json.loads(texto)

@@ -1,0 +1,122 @@
+{
+ "Davion": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "Kurita": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "Liao": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "MagistracyOfCanopus": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "Marik": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "Steiner": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "TaurianConcordat": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_assault": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_heavy": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_indirectFire": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_jumpOK": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_lance_assassin": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_lance_support": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_lance_tank": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_lance_vanguard": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_light": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_mech": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_medium": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_ready": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_role_brawler": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_role_flanker": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_role_scout": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_role_sniper": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ },
+ "unit_urbie": {
+  "descripcion": "",
+  "nombre": "",
+  "visible": false
+ }
+}
