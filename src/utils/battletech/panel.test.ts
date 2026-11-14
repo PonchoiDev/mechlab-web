@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { replaceItem } from './actions';
+import { groupBtLoadout } from './compare';
 import {
   DEFAULT_MECH_FILTERS,
   EMPTY_PANEL_FILTERS,
@@ -70,5 +71,15 @@ describe('panel de una ubicación como el de MW5', () => {
     expect(matchesPanelFilters(magna, { ...EMPTY_PANEL_FILTERS, query: 'magna', plus: [2] })).toBe(true);
     expect(matchesPanelFilters(magna, { ...EMPTY_PANEL_FILTERS, plus: [1] })).toBe(false);
     expect(matchesPanelFilters(magna, { ...EMPTY_PANEL_FILTERS, sources: ['heavymetal'] })).toBe(false);
+  });
+
+  it('agrupa el loadout por ubicación para la comparación, con el equipo fijo', () => {
+    const marauder = stock('MAD-3R');
+    const groups = groupBtLoadout(marauder.mech, marauder.loadout);
+    const leftTorso = groups.find(group => group.zone === 'leftTorso')!;
+    expect(leftTorso.items.find(line => line.fixed)?.name).toBe('Lance Command Mod');
+    const hunchback = stock('HBK-4G');
+    expect(groupBtLoadout(hunchback.mech, hunchback.loadout).find(group => group.zone === 'leftLeg')!.items)
+      .toEqual([{ name: 'Heat Sink', type: 'equipment', weaponType: undefined, count: 2, fixed: false }]);
   });
 });

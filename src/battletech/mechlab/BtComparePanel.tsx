@@ -1,17 +1,19 @@
 import { useMemo, useState } from 'react';
 import type { BtBuild, BtMech } from '../../types/battletech-mechlab';
+import type { ComparisonGroup } from '../../utils/compare';
+import { EMPTY_VALUE } from '../../utils/format';
 import type { SavedBuild } from '../../utils/savedBuildsCore';
 import { decodeBtBuild } from '../../utils/battletech/buildCode';
-import { compareBtBuilds } from '../../utils/battletech/compare';
+import { compareBtBuilds, groupBtLoadout } from '../../utils/battletech/compare';
 import { createStockBuild } from '../../utils/battletech/fitting';
-import { getMechDisplayName } from '../../utils/battletech/mechlabData';
-import { BtMechPicker } from './BtMechPicker';
+import { SOURCE_LABELS, WEIGHT_CLASS_LABELS } from '../../utils/battletech/mechlabData';
+import { BtMechPicker, HardpointSummary } from './BtMechPicker';
 import { MechIcon } from './MechIcon';
 import { useDismiss } from './useDismiss';
 
 // La comparación se cierra con su ✕, con Escape o con un clic fuera; la barra de herramientas (que la
 // abre y la cierra) y los diálogos no cuentan como fuera.
-const KEEPS_COMPARE_OPEN = '.bt-compare, .utility-toolbar, .share-dialog-backdrop, .toast';
+const KEEPS_COMPARE_OPEN = '.compare-panel, .utility-toolbar, .share-dialog-backdrop, .toast';
 
 interface BtComparePanelProps {
   mechs: BtMech[];
@@ -32,7 +34,86 @@ const defaultMech = (mechs: BtMech[], current: BtMech) => {
     ?? current;
 };
 
-// Compara la build del tablero con la de serie de otra variante o con una build guardada.
+// Las cifras de un lado, con el marcado del CardStats de MW5: el valor mejor, resaltado y con la diferencia.
+function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b' }) {
+  return (
+    <div className="compare-card-stats">
+      {groups.map(group => (
+        <section key={group.title} aria-label={group.title}>
+          <h4>{group.title}</h4>
+          <dl>
+            {group.rows.map(row => {
+              const value = side === 'a' ? row.a : row.b;
+              const state = row.winner === side ? 'is-better' : row.winner === null ? 'is-tie' : 'is-worse';
+              return (
+                <div key={row.key} className={`compare-stat ${state}`}>
+                  <dt>{row.label}</dt>
+                  <dd>
+                    {row.winner === side && row.difference && (
+                      <span className="compare-difference">{row.lowerIsBetter ? '▼' : '▲'} {row.difference}</span>
+                    )}
+                    {value}
+                    {row.unit && value !== EMPTY_VALUE && <small> {row.unit}</small>}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+// Tarjeta de un lado, como la CompareCard de MW5: el icono del chasis, su ficha, su loadout por
+// ubicación (con el equipo fijo) y sus cifras.
+function CompareCard({ build, caption, groups, side }: { build: BtBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b' }) {
+  const { mech, loadout } = build;
+  const loadoutGroups = groupBtLoadout(mech, loadout);
+  return (
+    <article className="compare-card">
+      <p className="eyebrow">{caption}</p>
+      <div className="compare-card-head">
+        <div className="compare-card-image bt-compare-icon"><MechIcon mech={mech} size={96} /></div>
+        <div className="compare-card-title">
+          <h3>{mech.name} <span>{mech.variant}</span></h3>
+          <span className="mech-specs">
+            <span className="mech-spec">{mech.tonnage} T</span>
+            <span className="mech-spec">{WEIGHT_CLASS_LABELS[mech.weightClass].toUpperCase()}</span>
+            {mech.source !== 'base' && <span className="mech-spec is-xl">{SOURCE_LABELS[mech.source].toUpperCase()}</span>}
+          </span>
+          <HardpointSummary mech={mech} />
+        </div>
+      </div>
+      {loadoutGroups.length > 0 ? (
+        <dl className="compare-loadout">
+          {loadoutGroups.map(group => (
+            <div key={group.zone} className="compare-loadout-zone">
+              <dt>{group.label}</dt>
+              <dd>
+                {group.items.map(line => (
+                  <span key={`${line.name}-${line.fixed}`} className={`compare-item is-${line.type}`} data-weapon-type={line.weaponType}>
+                    {line.name}
+                    {line.count > 1 && <small> ×{line.count}</small>}
+                    {line.fixed && <small> · built-in</small>}
+                  </span>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      ) : (
+        <p className="compare-empty">No equipment installed.</p>
+      )}
+      {/* Siempre presente, aunque vacío, como en MW5: las dos tarjetas ocupan las mismas filas. */}
+      <p className="compare-upgrades" />
+      <CardStats groups={groups} side={side} />
+    </article>
+  );
+}
+
+// Compara la build del tablero con la de serie de otra variante o con una build guardada, con el
+// marcado del ComparePanel de MW5.
 export function BtComparePanel({ mechs, current, savedBuilds, onLoad, onClose }: BtComparePanelProps) {
   useDismiss(onClose, KEEPS_COMPARE_OPEN);
   const [source, setSource] = useState<Source>('stock');
@@ -47,63 +128,49 @@ export function BtComparePanel({ mechs, current, savedBuilds, onLoad, onClose }:
   const groups = useMemo(() => other ? compareBtBuilds(current, other) : [], [current, other]);
 
   return (
-    <section className="compare-panel bt-compare" aria-label="Compare 'Mechs">
-      <header className="bt-compare-header">
-        <div>
+    <section className="compare-panel" aria-label="Compare 'Mechs">
+      <div className="compare-cards">
+        <header className="compare-title">
           <h2>COMPARE</h2>
-          <p>Your current build next to another one. The better value of each stat is highlighted.</p>
+          <p>Your current build next to another 'Mech. The better value of each stat is highlighted.</p>
+        </header>
+        <div className="compare-source">
+          <span className="utility-label">COMPARE WITH</span>
+          <div className="compare-source-tabs" role="group" aria-label="Compare with">
+            <button type="button" className="mech-filter-chip" aria-pressed={source === 'stock'} onClick={() => setSource('stock')}>Stock 'Mech</button>
+            <button type="button" className="mech-filter-chip" aria-pressed={source === 'saved'} onClick={() => setSource('saved')}>
+              My builds{savedBuilds.length > 0 && <span className="utility-count">{savedBuilds.length}</span>}
+            </button>
+          </div>
+          {source === 'stock' ? (
+            <BtMechPicker mechs={mechs} current={stockMech} onSelect={setStockMech} />
+          ) : savedBuilds.length > 0 ? (
+            <label className="compare-saved">
+              <select aria-label="Saved build" value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
+                {savedBuilds.map(build => <option key={build.id} value={build.id}>{build.name}</option>)}
+              </select>
+            </label>
+          ) : (
+            <p className="compare-empty">No saved builds yet. Use Save build in the toolbar to keep one and compare it here.</p>
+          )}
+          {other && (
+            <button type="button" className="utility-button utility-button-primary" onClick={() => onLoad(other, otherLabel, source === 'saved' ? savedId : null)}>
+              Load this build
+            </button>
+          )}
+          <button type="button" className="share-dialog-close compare-close" aria-label="Close comparison" onClick={onClose}>✕</button>
         </div>
-        <button type="button" className="share-dialog-close" aria-label="Close comparison" onClick={onClose}>✕</button>
-      </header>
-      <div className="compare-source bt-compare-source">
-        <span className="utility-label">COMPARE WITH</span>
-        <div className="compare-source-tabs" role="group" aria-label="Compare with">
-          <button type="button" className="mech-filter-chip" aria-pressed={source === 'stock'} onClick={() => setSource('stock')}>Stock 'Mech</button>
-          <button type="button" className="mech-filter-chip" aria-pressed={source === 'saved'} onClick={() => setSource('saved')}>
-            My builds{savedBuilds.length > 0 && <span className="utility-count">{savedBuilds.length}</span>}
-          </button>
-        </div>
-        {source === 'stock' ? (
-          <BtMechPicker mechs={mechs} current={stockMech} onSelect={setStockMech} />
-        ) : savedBuilds.length > 0 ? (
-          <select className="mech-filter-year" aria-label="Saved build" value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
-            {savedBuilds.map(build => <option key={build.id} value={build.id}>{build.name}</option>)}
-          </select>
-        ) : (
-          <p className="compare-empty">No saved builds yet. Use Save build in the toolbar to keep one and compare it here.</p>
-        )}
-        {other && (
-          <button type="button" className="utility-button utility-button-primary" onClick={() => onLoad(other, otherLabel, source === 'saved' ? savedId : null)}>
-            Load this build
-          </button>
-        )}
+        <CompareCard build={current} caption="CURRENT BUILD" groups={groups} side="a" />
+        {other
+          ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" />
+          : (
+            <article className="compare-card">
+              <p className="compare-empty">
+                {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
+              </p>
+            </article>
+          )}
       </div>
-
-      {other ? (
-        <table className="bt-compare-table">
-          <thead>
-            <tr>
-              <th scope="col"><span className="visually-hidden">Stat</span></th>
-              <th scope="col"><MechIcon mech={current.mech} size={40} /><span>Current<br /><b>{getMechDisplayName(current.mech)}</b></span></th>
-              <th scope="col"><MechIcon mech={other.mech} size={40} /><span>{source === 'saved' ? 'Saved' : 'Stock'}<br /><b>{source === 'saved' ? otherLabel : getMechDisplayName(other.mech)}</b></span></th>
-            </tr>
-          </thead>
-          {groups.map(group => (
-            <tbody key={group.title}>
-              <tr className="bt-compare-group"><th colSpan={3} scope="colgroup">{group.title}</th></tr>
-              {group.rows.map(row => (
-                <tr key={row.key}>
-                  <th scope="row">{row.label}{row.unit && <small> {row.unit}</small>}{row.lowerIsBetter && <small> (lower is better)</small>}</th>
-                  <td className={row.winner === 'a' ? 'is-winner' : ''}>{row.a}{row.winner === 'a' && row.difference && <small> {row.difference}</small>}</td>
-                  <td className={row.winner === 'b' ? 'is-winner' : ''}>{row.b}{row.winner === 'b' && row.difference && <small> {row.difference}</small>}</td>
-                </tr>
-              ))}
-            </tbody>
-          ))}
-        </table>
-      ) : (
-        <p className="compare-empty">{source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}</p>
-      )}
     </section>
   );
 }

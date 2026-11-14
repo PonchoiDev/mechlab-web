@@ -101,16 +101,6 @@ body { background: var(--work-bg); }
   text-align: left;
 }
 
-.bt-compare-source select {
-  min-height: 30px;
-  padding: 0 8px;
-  border: 1px solid var(--work-line);
-  border-radius: 2px;
-  color: var(--work-text);
-  background: var(--work-panel-raised);
-  font: 500 12px var(--work-mono);
-}
-
 /* Análisis */
 .bt-range-heading { margin-top: 18px; }
 
@@ -143,80 +133,16 @@ body { background: var(--work-bg); }
 
 .bt-range-value small { color: var(--work-amber); }
 
-/* Comparar */
-.bt-compare {
-  margin-bottom: 14px;
-  padding: 12px;
-  border: 1px solid var(--work-line);
-  background: rgba(25, 29, 25, 0.96);
-}
-
-.bt-compare-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.bt-compare-header h2 { margin: 0 0 4px; font-size: 15px; }
-
-.bt-compare-header p { color: var(--work-muted); font-size: 12px; }
-
-.bt-compare-source {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 10px;
-  margin: 10px 0;
-}
-
-.bt-compare-table {
-  width: 100%;
-  border-collapse: collapse;
-  font: 500 12px var(--work-mono);
-}
-
-.bt-compare-table thead th {
-  padding: 6px;
-  text-align: left;
-  vertical-align: bottom;
-}
-
-.bt-compare-table thead th:first-child { width: 34%; }
-
-.bt-compare-table thead .bt-mech-icon { display: block; margin-bottom: 4px; }
-
-.bt-compare-table thead span { color: var(--work-muted); font-size: 10px; }
-
-.bt-compare-table thead b { color: var(--work-text); font-size: 12px; }
-
-.bt-compare-group th {
-  padding: 10px 6px 4px;
-  color: var(--bt-accent);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-align: left;
-}
-
-.bt-compare-table tbody th[scope="row"] {
-  padding: 4px 6px;
-  color: var(--work-muted);
-  font-weight: 400;
-  text-align: left;
-}
-
-.bt-compare-table td {
-  padding: 4px 6px;
-  border-top: 1px solid rgba(52, 61, 52, 0.6);
-}
-
-.bt-compare-table td.is-winner { color: var(--bt-accent); }
-
-.bt-compare-table small { color: var(--work-muted); font-size: 10px; }
-
 @media (max-width: 600px) {
   .bt-mech-picker { min-width: 0; width: 100%; }
   .bt-range-profile li { grid-template-columns: 44px minmax(0, 1fr) 80px; }
 }
 
 .bt-item-option-bonus span { color: var(--bt-accent); }
+
+/* El icono del chasis ocupa el hueco de la imagen de Sarna en las tarjetas de la comparación. */
+.compare-card-image.bt-compare-icon {
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at center, rgba(255, 212, 0, 0.08), transparent 70%), rgba(16, 19, 16, 0.9);
+}
