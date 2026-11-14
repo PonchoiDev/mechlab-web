@@ -45,39 +45,16 @@ body { background: var(--work-bg); }
 /* Selector de 'Mech */
 .bt-mech-picker { min-width: 280px; }
 
-.bt-mech-options-panel { width: min(520px, calc(100vw - 32px)); }
 
-.bt-mech-option {
-  grid-template-columns: 40px minmax(0, 1fr) auto;
-}
+/* Las opciones son las de MW5 (mech-option) con el icono del chasis delante. */
+.bt-mech-option { grid-template-columns: 40px minmax(0, 1fr) auto; }
 
-.bt-mech-option .bt-mech-icon { grid-row: span 2; }
+.bt-mech-option .bt-mech-icon { grid-row: span 3; }
 
+.bt-mech-option .mech-option-hardpoints,
 .bt-mech-option small { grid-column: 2 / -1; }
 
-.bt-mech-option-name strong { margin-left: 4px; }
-
-.mech-filter-stepper[data-weapon-type] b { color: var(--bt-color); }
-
-.bt-hardpoint-summary {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 3px;
-}
-
-.bt-hardpoint-tag {
-  padding: 1px 5px;
-  border: 1px solid color-mix(in srgb, var(--bt-color) 55%, transparent);
-  border-radius: 2px;
-  color: var(--bt-color);
-  font: 600 10px var(--work-mono);
-  white-space: nowrap;
-}
-
-.bt-hardpoint-tag.is-jump { --bt-color: var(--bt-jump); }
-.bt-hardpoint-tag.is-full { background: color-mix(in srgb, var(--bt-color) 16%, transparent); }
-.bt-hardpoint-tag.is-over { --bt-color: var(--work-red); background: rgba(255, 121, 108, 0.14); }
+.mech-filter-stepper[data-weapon-type] b { color: var(--weapon-color); }
 
 /* Lectura */
 .bt-readout .readout-cell strong small { white-space: nowrap; }

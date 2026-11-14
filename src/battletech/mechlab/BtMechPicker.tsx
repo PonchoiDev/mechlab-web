@@ -9,7 +9,6 @@ import {
   type BtMechFilters
 } from '../../utils/battletech/filters';
 import {
-  getMechDisplayName,
   HARDPOINT_LABELS,
   HARDPOINT_SHORT,
   HARDPOINTS,
@@ -34,18 +33,21 @@ const toggle = <T,>(list: T[], value: T) => list.includes(value) ? list.filter(e
 
 const summarize = (labels: string[]) => labels.length === 0 ? 'All' : labels.length <= 2 ? labels.join(', ') : `${labels.length} selected`;
 
+// Resumen de anclajes con el marcado del de MW5 (mech-option-hardpoints): en BATTLETECH los anclajes no
+// tienen tamaño, todos los chasis admiten retrorreactores (se dice cuántos) y la fuente es el DLC.
 export function HardpointSummary({ mech }: { mech: BtMech }) {
   return (
-    <span className="bt-hardpoint-summary">
+    <span className="mech-option-hardpoints">
       {HARDPOINTS.map(type => {
         const count = getHardpointCount(mech, type);
         return count > 0 ? (
-          <span key={type} className="bt-hardpoint-tag" data-weapon-type={type} title={`${count} ${HARDPOINT_LABELS[type]}`}>
+          <span key={type} className="mech-hardpoint-tag" data-weapon-type={type} title={`${count} ${HARDPOINT_LABELS[type]} hardpoint${count > 1 ? 's' : ''}`}>
             {count}{HARDPOINT_SHORT[type]}
           </span>
         ) : null;
       })}
-      <span className="bt-hardpoint-tag is-jump" title={`Up to ${mech.maxJumpJets} jump jets`}>{mech.maxJumpJets}JJ</span>
+      <span className="mech-hardpoint-tag is-jump-jets" title={`Up to ${mech.maxJumpJets} jump jets`}>{mech.maxJumpJets}JJ</span>
+      {mech.source !== 'base' && <span className="mech-hardpoint-tag is-dlc" title={`Comes with ${SOURCE_LABELS[mech.source]}`}>{SOURCE_LABELS[mech.source]}</span>}
     </span>
   );
 }
@@ -62,6 +64,15 @@ export function BtMechPicker({ mechs, current, onSelect }: BtMechPickerProps) {
   const update = (changes: Partial<BtMechFilters>) => {
     setFilters(currentFilters => ({ ...currentFilters, ...changes }));
     setActiveOption(0);
+  };
+  // Como en MW5: sin filtros se abre con las variantes del chasis actual; con filtros, toda la lista.
+  const open = () => {
+    if (!isOpen) {
+      const query = activeFilters > 0 ? '' : current.name;
+      setFilters(currentFilters => ({ ...currentFilters, query }));
+      setActiveOption(Math.max(0, filterBtMechs(mechs, { ...filters, query }).findIndex(mech => mech.id === current.id)));
+    }
+    setIsOpen(true);
   };
   const close = () => {
     setIsOpen(false);
@@ -114,10 +125,10 @@ export function BtMechPicker({ mechs, current, onSelect }: BtMechPickerProps) {
         aria-controls={`${idPrefix}-options`}
         autoComplete="off"
         className="mech-picker-input"
-        placeholder="Name, variant or role"
-        value={isOpen ? filters.query : `${getMechDisplayName(current)} · ${current.tonnage} t`}
-        onFocus={() => setIsOpen(true)}
-        onClick={() => setIsOpen(true)}
+        placeholder="Name, variant, role or 3e 2m jj"
+        value={isOpen ? filters.query : `${current.name} / ${current.variant}`}
+        onFocus={open}
+        onClick={open}
         onChange={(event) => {
           update({ query: event.target.value });
           setIsOpen(true);
@@ -140,23 +151,12 @@ export function BtMechPicker({ mechs, current, onSelect }: BtMechPickerProps) {
                   type="button"
                   className="mech-filter-chip"
                   aria-pressed={filters.weightClasses.includes(weightClass)}
+                  title={WEIGHT_CLASS_LABELS[weightClass]}
                   onClick={() => update({ weightClasses: toggle(filters.weightClasses, weightClass) })}
                 >
-                  {WEIGHT_CLASS_LABELS[weightClass]}
+                  {WEIGHT_CLASS_LABELS[weightClass][0]}
                 </button>
               ))}
-            </div>
-            <div className="mech-filter-row">
-              <span className="mech-filter-label">SOURCE</span>
-              <CheckboxDropdown
-                label="Source"
-                title="Base game or the DLC that adds the 'Mech"
-                options={SOURCES.map(source => ({ value: source, label: SOURCE_LABELS[source] }))}
-                selected={filters.sources}
-                summary={summarize(filters.sources.map(source => SOURCE_LABELS[source]))}
-                onToggle={(source) => update({ sources: toggle(filters.sources, source) })}
-                onClear={() => update({ sources: [] })}
-              />
               <span className="mech-filter-label">ROLE</span>
               <CheckboxDropdown
                 label="Role"
@@ -186,6 +186,18 @@ export function BtMechPicker({ mechs, current, onSelect }: BtMechPickerProps) {
                 <button type="button" aria-label="More jump jets" disabled={filters.minJumpJets === MAX_JUMP_JETS} onClick={() => update({ minJumpJets: filters.minJumpJets + 1 })}>+</button>
               </span>
             </div>
+            <div className="mech-filter-row">
+              <span className="mech-filter-label">SOURCE</span>
+              <CheckboxDropdown
+                label="Source"
+                title="Base game or the DLC that adds the 'Mech"
+                options={SOURCES.map(source => ({ value: source, label: SOURCE_LABELS[source] }))}
+                selected={filters.sources}
+                summary={summarize(filters.sources.map(source => SOURCE_LABELS[source]))}
+                onToggle={(source) => update({ sources: toggle(filters.sources, source) })}
+                onClear={() => update({ sources: [] })}
+              />
+            </div>
             <div className="mech-filter-row mech-filter-summary">
               <span>{filtered.length} {filtered.length === 1 ? 'variant' : 'variants'}</span>
               {activeFilters > 0 && (
@@ -208,12 +220,11 @@ export function BtMechPicker({ mechs, current, onSelect }: BtMechPickerProps) {
                 onClick={() => select(mech)}
               >
                 <MechIcon mech={mech} size={40} />
-                <span className="bt-mech-option-name">
-                  {mech.name} <strong>{mech.variant}</strong>
-                </span>
+                <span>{mech.name}</span>
+                <strong>{mech.variant}</strong>
                 <HardpointSummary mech={mech} />
                 <small>
-                  {[`${mech.tonnage} t`, WEIGHT_CLASS_LABELS[mech.weightClass], mech.role, mech.source !== 'base' ? SOURCE_LABELS[mech.source] : null].filter(Boolean).join(' · ')}
+                  {[`${mech.tonnage} t`, WEIGHT_CLASS_LABELS[mech.weightClass], mech.role].filter(Boolean).join(' · ')}
                 </small>
               </div>
             )) : (
