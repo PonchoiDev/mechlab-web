@@ -14,9 +14,9 @@ ETIQUETAS = os.path.join(ASSETS, "MDD", "data", "tagdata.sql")
 
 REGEX_COMENTARIO = re.compile(r"(?m)^\s*//.*$")
 REGEX_COMA_FINAL = re.compile(r",(\s*[}\]])")
-# CombatGameConstants.json tiene una lista sin coma detrás antes de la siguiente clave: el juego la lee
-# igual, así que aquí también.
-REGEX_COMA_QUE_FALTA = re.compile(r"([\]}])(\s*\n\s*\")")
+# Al juego le da igual que falte una coma al final de una línea: CombatGameConstants.json la olvida tras
+# una lista y mechdef_javelin_JVN-10A (Urban Warfare) entre dos etiquetas.
+REGEX_COMA_QUE_FALTA = re.compile(r"([\]}\"])(\s*\n\s*\")")
 REGEX_INSERT = re.compile(r"VALUES \((.*)\);\s*$")
 
 
