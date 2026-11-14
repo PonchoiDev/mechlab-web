@@ -79,10 +79,11 @@ def numero(valor):
     return int(valor) if valor.is_integer() else valor
 
 
-def categoria_de_municion(objeto):
-    """Las armas y municiones del juego base usan ammoCategoryID, y las de Heavy Metal unas veces
-    AmmoCategory y otras Category; NotSet significa que no usa munición."""
-    for campo in ("ammoCategoryID", "AmmoCategory", "Category"):
+def categoria_de_municion(objeto, campos=("ammoCategoryID", "AmmoCategory")):
+    """Las armas y municiones usan ammoCategoryID, algunas de Heavy Metal AmmoCategory, y las municiones
+    del juego base Category. NotSet significa que no usa munición. En las armas, Category es su tipo
+    (Energy, Ballistic…), así que ahí no se mira."""
+    for campo in campos:
         valor = objeto.get(campo)
         if valor and valor != "NotSet":
             return valor
@@ -165,7 +166,8 @@ def generar_item(id_, componente, municiones):
         item["weapon"] = arma
     elif tipo == "ammo":
         municion = municiones.get(componente.get("AmmoID"), {})
-        item["ammo"] = {"category": categoria_de_municion(municion), "capacity": componente.get("Capacity", 0)}
+        item["ammo"] = {"category": categoria_de_municion(municion, ("ammoCategoryID", "AmmoCategory", "Category")),
+                        "capacity": componente.get("Capacity", 0)}
     elif tipo == "heatSink":
         lista = efectos(componente)
         multiplicador = 1

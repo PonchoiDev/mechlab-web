@@ -27,7 +27,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 | Constantes | `constants/CombatGameConstants.json` (bloque `Heat`), `constants/MechStatisticsConstants.json` | 10 disipadores internos de 3, calor máximo 100, sobrecalentamiento al 0,6; 0,0125 t por punto de blindaje (80 por tonelada), pasos de 5 puntos, 625 C-Bills por punto |
 | Iconos | `sprites/MechPortraits/uixTxrIcon_*.dds` | El icono de cada chasis (`Description.Icon`), en DXT5 de 128 px |
 
-`tools/extraer_mechlab_battletech.py` lee la instalación y guarda en `tools/datos-juego/battletech/mechlab/` los chasis, las variantes, los componentes, la munición, el movimiento, las constantes y las etiquetas, cada cosa con su fuente (`base`, `heavymetal`, `flashpoint` o `urbanwarfare`), y en `battletech/public/mechlab/icons/` los iconos en PNG de 96 px. `tools/generar_mechlab_battletech.py` genera `src/data/battletech/mechs.json`, `items.json` y `constants.json`.
+`tools/extraer_mechlab_battletech.py` lee la instalación y guarda en `tools/datos-juego/battletech/mechlab/` los chasis, las variantes, los componentes, la munición, el movimiento, las constantes y las etiquetas, cada cosa con su fuente (`base`, `heavymetal`, `flashpoint` o `urbanwarfare`), y en `battletech/public/mechlab/icons/` los iconos en PNG de 128 px. `tools/generar_mechlab_battletech.py` genera `src/data/battletech/mechs.json`, `items.json` y `constants.json`.
 
 **Decisiones sobre los datos:**
 

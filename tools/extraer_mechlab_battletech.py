@@ -23,7 +23,7 @@ DLC = {"heavymetal": "heavymetal", "flashpoint": "flashpoint", "urbanwarfare": "
 RETRATOS = os.path.join(ASSETS, "sprites", "MechPortraits")
 # Cabecera de un DDS: 4 bytes de firma y 124 de descripción; detrás van los bloques DXT5.
 CABECERA_DDS = 128
-TAMANO_ICONO = 96
+TAMANO_ICONO = 128
 PREFIJO_ICONO = "uixTxrIcon_"
 # Carpetas de componentes del juego base y el tipo con el que se guardan.
 CARPETAS_DE_COMPONENTES = {"weapon": "Weapon", "ammunitionBox": "AmmunitionBox", "heatsinks": "HeatSink",

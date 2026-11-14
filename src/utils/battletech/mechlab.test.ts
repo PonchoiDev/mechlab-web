@@ -189,6 +189,9 @@ describe('MechLab de BATTLETECH: cifras', () => {
   it('CA14: munición por tipo y avisos de munición', () => {
     const hunchback = stock('HBK-4G');
     expect(getBuildSummary(hunchback).ammo.find(line => line.category === 'AC20')).toMatchObject({ rounds: 10, attacks: 10, weapons: 1 });
+    // Los láseres no usan munición: su Category (Energy) no es una categoría de munición.
+    expect(getBuildSummary(hunchback).ammo.map(line => line.category)).toEqual(['AC20']);
+    expect(getBtBuildIssues(hunchback).filter(issue => issue.id.startsWith('missing-ammo'))).toEqual([]);
     const noAmmo = { ...hunchback, loadout: { ...hunchback.loadout, leftTorso: [] } };
     expect(getBtBuildIssues(noAmmo).map(issue => issue.id)).toContain('missing-ammo-AC20');
     const flamer = mount({ ...noAmmo, loadout: { ...noAmmo.loadout, head: [] } }, 'head', FLAMER);
