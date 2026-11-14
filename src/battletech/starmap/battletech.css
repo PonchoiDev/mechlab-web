@@ -24,6 +24,7 @@
 
 .bt-factions {
   display: flex;
+  font-size: 17px;
   flex-wrap: wrap;
   gap: 2px 12px;
   margin: 0;
