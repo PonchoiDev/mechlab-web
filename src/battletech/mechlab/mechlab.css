@@ -112,45 +112,13 @@ body { background: var(--work-bg); }
 }
 
 /* Análisis */
-.bt-analysis {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: 14px;
-  margin-top: 14px;
-}
-
-.bt-analysis-block {
-  min-width: 0;
-  padding: 10px 12px;
-  border: 1px solid var(--work-line);
-  background: rgba(25, 29, 25, 0.88);
-}
-
-.bt-table-scroll { overflow-x: auto; }
-
-.bt-analysis .analysis-note { text-align: left; }
-
-.bt-weapon-table { width: 100%; }
-
-.bt-weapon-table tr[data-weapon-type] td:first-child { border-left: 3px solid var(--bt-color); }
-
-.bt-weapon-table td small {
-  display: block;
-  color: var(--work-muted);
-  font-size: 10px;
-}
-
-.bt-count {
-  margin-right: 4px;
-  color: var(--bt-accent);
-  font-family: var(--work-mono);
-}
+.bt-range-heading { margin-top: 18px; }
 
 .bt-range-profile {
   display: grid;
   gap: 4px;
-  margin: 0 0 8px;
-  padding: 0;
+  margin: 0;
+  padding: 12px 14px 16px;
   list-style: none;
 }
 
@@ -174,33 +142,6 @@ body { background: var(--work-bg); }
 .bt-range-fill.is-below-min { background: var(--work-amber); opacity: 0.55; }
 
 .bt-range-value small { color: var(--work-amber); }
-
-.bt-ammo-list,
-.bt-bonus-list {
-  display: grid;
-  gap: 4px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.bt-ammo-list .ammunition-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 2px 8px;
-}
-
-.bt-ammo-list .ammunition-row small { grid-column: 1 / -1; }
-
-.bt-ammo-list .is-missing span { color: var(--work-red); }
-
-.bt-bonus-list li {
-  display: grid;
-  gap: 2px;
-  font-size: 12px;
-}
-
-.bt-bonus-list span { color: var(--work-muted); font-size: 11px; }
 
 /* Comparar */
 .bt-compare {
@@ -272,10 +213,6 @@ body { background: var(--work-bg); }
 .bt-compare-table td.is-winner { color: var(--bt-accent); }
 
 .bt-compare-table small { color: var(--work-muted); font-size: 10px; }
-
-@media (max-width: 900px) {
-  .bt-analysis { grid-template-columns: minmax(0, 1fr); }
-}
 
 @media (max-width: 600px) {
   .bt-mech-picker { min-width: 0; width: 100%; }

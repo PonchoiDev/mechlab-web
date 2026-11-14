@@ -1,55 +1,97 @@
+import { useState } from 'react';
+import type { BtBuild } from '../../types/battletech-mechlab';
+import { EMPTY_VALUE } from '../../utils/format';
+import { ZONE_KEYS, ZONE_LABELS } from '../../utils/zones';
+import { getZoneItems } from '../../utils/battletech/fitting';
 import type { BtSummary } from '../../utils/battletech/stats';
-import { ZONE_LABELS } from '../../utils/zones';
-import { HARDPOINT_LABELS } from '../../utils/battletech/mechlabData';
 
 const formatNumber = (value: number) => String(Number(value.toFixed(2)));
 
-// Análisis del equipo: armas, daño por distancia, munición y bonificaciones del equipo.
-export function BtAnalysis({ summary }: { summary: BtSummary }) {
+type Tab = 'weapons' | 'mech';
+
+// Análisis con las pestañas y el marcado del LoadoutAnalysis de MW5: Weapons (tabla de armas, munición
+// y, propio de BATTLETECH, el daño por distancia) y 'Mech (cifras agrupadas, con el equipo que da bonificaciones).
+export function BtAnalysis({ build, summary }: { build: BtBuild; summary: BtSummary }) {
+  const [tab, setTab] = useState<Tab>('weapons');
+  return (
+    <section className="loadout-analysis" aria-label="Loadout performance">
+      <div className="analysis-tabs" role="group" aria-label="Statistics">
+        <button type="button" className="analysis-tab" aria-pressed={tab === 'weapons'} onClick={() => setTab('weapons')}>Weapons</button>
+        <button type="button" className="analysis-tab" aria-pressed={tab === 'mech'} onClick={() => setTab('mech')}>'Mech</button>
+      </div>
+      {tab === 'weapons' ? <WeaponsTab build={build} summary={summary} /> : <MechTab build={build} summary={summary} />}
+    </section>
+  );
+}
+
+function WeaponsTab({ build, summary }: { build: BtBuild; summary: BtSummary }) {
+  const lines = new Map(summary.weapons.map(line => [line.item.id, line]));
+  // Una fila por arma montada, como en MW5, con las cifras de su línea del resumen.
+  const rows = ZONE_KEYS.flatMap(zone => getZoneItems(build.loadout, zone)
+    .filter(item => item.weapon)
+    .map(item => ({ item, zone, line: lines.get(item.id)! })));
   const peak = Math.max(1, ...summary.rangeProfile.map(entry => entry.damage + entry.belowMin));
 
   return (
-    <section className="loadout-analysis bt-analysis" aria-label="Loadout analysis">
-      <div className="bt-analysis-block bt-analysis-weapons">
-        <div className="analysis-heading"><h2>Weapons</h2></div>
-        {summary.weapons.length === 0 ? (
-          <p className="analysis-note">No weapons mounted.</p>
-        ) : (
-          <div className="bt-table-scroll">
-            <table className="weapon-table bt-weapon-table">
+    <div className="analysis-body">
+      <div className="analysis-table-wrap">
+        <header className="analysis-heading">
+          <div>
+            <p className="eyebrow">05 / COMBAT DATA</p>
+            <h2>Weapon performance</h2>
+          </div>
+          <span className="analysis-note">DAMAGE AND HEAT PER ATTACK</span>
+        </header>
+        {rows.length > 0 ? (
+          <div className="analysis-overflow">
+            <table className="weapon-table">
               <thead>
                 <tr>
-                  <th scope="col">Weapon</th>
-                  <th scope="col">Where</th>
-                  <th scope="col" title="Damage per attack, for all of them">Damage</th>
-                  <th scope="col" title="Heat per attack, for all of them">Heat</th>
-                  <th scope="col" title="Stability damage per attack, for all of them">Stab</th>
-                  <th scope="col">Range</th>
+                  <th>Weapon</th>
+                  <th>Section</th>
+                  <th>Damage</th>
+                  <th>Stability</th>
+                  <th>Heat</th>
+                  <th>Min range</th>
+                  <th>Max range</th>
                 </tr>
               </thead>
               <tbody>
-                {summary.weapons.map(line => (
-                  <tr key={line.item.id} data-weapon-type={line.item.hardpoint}>
-                    <td>
-                      {line.count > 1 && <span className="bt-count">{line.count}×</span>}
-                      {line.item.name}
-                      <small>{HARDPOINT_LABELS[line.item.hardpoint!]}</small>
-                    </td>
-                    <td>{line.zones.map(zone => ZONE_LABELS[zone]).join(', ')}</td>
-                    <td>{formatNumber(line.damage * line.count)}</td>
-                    <td>{formatNumber(line.heat * line.count)}</td>
-                    <td>{formatNumber(line.instability * line.count)}</td>
-                    <td>{line.item.weapon!.minRange > 0 ? `${line.item.weapon!.minRange}-` : ''}{line.item.weapon!.maxRange} m</td>
+                {rows.map(({ item, zone, line }, index) => (
+                  <tr key={`${item.id}-${zone}-${index}`}>
+                    <td>{item.name}</td>
+                    <td>{ZONE_LABELS[zone]}</td>
+                    <td>{formatNumber(line.damage)}</td>
+                    <td>{formatNumber(line.instability)}</td>
+                    <td>{formatNumber(line.heat)}</td>
+                    <td>{item.weapon!.minRange > 0 ? `${item.weapon!.minRange} m` : EMPTY_VALUE}</td>
+                    <td>{item.weapon!.maxRange} m</td>
                   </tr>
                 ))}
               </tbody>
+              <tfoot>
+                <tr>
+                  <td>Total</td>
+                  <td>alpha strike</td>
+                  <td>{formatNumber(summary.alphaDamage)}</td>
+                  <td>{formatNumber(summary.instability)}</td>
+                  <td>{formatNumber(summary.heat.alpha)}</td>
+                  <td colSpan={2}>{summary.heat.dissipation} <small>heat sinking per turn</small></td>
+                </tr>
+              </tfoot>
             </table>
           </div>
+        ) : (
+          <p className="analysis-empty">No weapons installed.</p>
         )}
-      </div>
 
-      <div className="bt-analysis-block">
-        <div className="analysis-heading"><h2>Damage by range</h2></div>
+        <header className="analysis-heading bt-range-heading">
+          <div>
+            <p className="eyebrow">RANGE</p>
+            <h2>Damage by range</h2>
+          </div>
+          <span className="analysis-note">AMBER: UNDER MINIMUM RANGE, WITH AN ACCURACY PENALTY</span>
+        </header>
         <ul className="bt-range-profile">
           {summary.rangeProfile.map(entry => (
             <li key={entry.distance}>
@@ -60,52 +102,130 @@ export function BtAnalysis({ summary }: { summary: BtSummary }) {
               </span>
               <span className="bt-range-value">
                 {formatNumber(entry.damage)}
-                {entry.belowMin > 0 && <small title="Weapons under their minimum range fire with an accuracy penalty"> +{formatNumber(entry.belowMin)} min</small>}
+                {entry.belowMin > 0 && <small> +{formatNumber(entry.belowMin)} min</small>}
               </span>
             </li>
           ))}
         </ul>
-        <p className="analysis-note">Damage of the weapons that reach each distance. Amber is damage from weapons under their minimum range, which fire with an accuracy penalty.</p>
       </div>
-
-      <div className="bt-analysis-block">
-        <div className="analysis-heading"><h2>Ammo</h2></div>
-        {summary.ammo.length === 0 ? (
-          <p className="analysis-note">No weapons use ammo.</p>
-        ) : (
-          <ul className="bt-ammo-list">
-            {summary.ammo.map(line => (
-              <li key={line.category} className={line.weapons > 0 && line.rounds === 0 ? 'ammunition-row is-missing' : 'ammunition-row'}>
-                <strong>{line.label}</strong>
-                <span>
-                  {line.weapons > 0
-                    ? `${line.attacks} ${line.attacks === 1 ? 'attack' : 'attacks'}`
-                    : 'No weapon uses it'}
-                </span>
+      {summary.ammo.length > 0 && (
+        <div className="ammunition-list">
+          <header className="analysis-heading">
+            <div>
+              <p className="eyebrow">STORES</p>
+              <h2>Installed ammunition</h2>
+            </div>
+          </header>
+          {summary.ammo.map(line => (
+            <div className="ammunition-row" key={line.category}>
+              <span>{line.label}<small>{line.boxes} {line.boxes === 1 ? 'box' : 'boxes'}</small></span>
+              <span className="ammunition-amount">
+                <strong>{line.rounds} rounds</strong>
                 <small>
-                  {line.rounds} rounds · {line.boxes} {line.boxes === 1 ? 'box' : 'boxes'}{line.perAttack > 0 ? ` · ${line.perAttack} per attack` : ''}
+                  {line.weapons === 0
+                    ? 'no weapon uses it'
+                    : line.rounds === 0
+                      ? 'no ammo'
+                      : `${line.attacks} ${line.attacks === 1 ? 'attack' : 'attacks'} · ${line.perAttack} per attack`}
                 </small>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
-      <div className="bt-analysis-block">
-        <div className="analysis-heading"><h2>Equipment bonuses</h2></div>
-        {summary.bonuses.length === 0 ? (
-          <p className="analysis-note">No equipment with bonuses.</p>
-        ) : (
-          <ul className="bt-bonus-list">
-            {summary.bonuses.map(line => (
-              <li key={line.item.id}>
-                <strong>{line.count > 1 ? `${line.count}× ` : ''}{line.item.name}{line.fixed ? ' (built-in)' : ''}</strong>
-                <span>{line.item.bonuses.join(' · ')}</span>
-              </li>
-            ))}
-          </ul>
+interface MechStat {
+  label: string;
+  value: string;
+  unit?: string;
+}
+
+function MechTab({ build, summary }: { build: BtBuild; summary: BtSummary }) {
+  const { mech } = build;
+  // Las cifras del 'Mech agrupadas como en la pestaña 'Mech de MW5, con las de BATTLETECH.
+  const groups: { title: string; stats: MechStat[] }[] = [
+    {
+      title: 'DEFENSE',
+      stats: [
+        { label: 'Armor', value: `${summary.armorPoints} / ${summary.maxArmorPoints}` },
+        { label: 'Structure', value: String(summary.structure) },
+        { label: 'Stability', value: String(summary.stability) }
+      ]
+    },
+    {
+      title: 'FIREPOWER',
+      stats: [
+        { label: 'Alpha damage', value: formatNumber(summary.alphaDamage) },
+        { label: 'Stability damage', value: formatNumber(summary.instability) },
+        { label: 'Heat damage', value: formatNumber(summary.heatDamage) },
+        { label: 'Melee damage', value: String(mech.melee.damage) },
+        { label: 'Death from above', value: String(mech.dfa.damage) },
+        { label: 'Max weapon range', value: summary.maxRange > 0 ? String(summary.maxRange) : EMPTY_VALUE, unit: 'm' }
+      ]
+    },
+    {
+      title: 'HEAT',
+      stats: [
+        { label: 'Heat sinking', value: String(summary.heat.dissipation), unit: 'per turn' },
+        { label: 'Alpha heat', value: formatNumber(summary.heat.alpha) },
+        { label: 'Max heat', value: String(summary.heat.maxHeat) },
+        { label: 'Overheat at', value: String(summary.heat.overheat) },
+        { label: 'Weapon heat', value: `× ${formatNumber(summary.heat.multiplier)}` }
+      ]
+    },
+    {
+      title: 'MOBILITY',
+      stats: [
+        { label: 'Walk', value: summary.walk === null ? EMPTY_VALUE : String(summary.walk), unit: 'm' },
+        { label: 'Sprint', value: summary.sprint === null ? EMPTY_VALUE : String(summary.sprint), unit: 'm' },
+        { label: 'Jump jets', value: `${summary.jumpJets} / ${summary.maxJumpJets}` }
+      ]
+    },
+    {
+      title: 'VALUE',
+      stats: [{ label: 'Chassis, equipment and armor', value: summary.cost.toLocaleString('en'), unit: 'C-Bills' }]
+    }
+  ];
+
+  return (
+    <div className="analysis-table-wrap">
+      <header className="analysis-heading">
+        <div>
+          <p className="eyebrow">05 / CHASSIS DATA</p>
+          <h2>{mech.name} {mech.variant}</h2>
+        </div>
+      </header>
+      <div className="mech-stats">
+        {groups.map(group => (
+          <section key={group.title} className="mech-stats-group">
+            <h3>{group.title}</h3>
+            <dl>
+              {group.stats.map(stat => (
+                <div key={stat.label} className="mech-stat">
+                  <dt>{stat.label}</dt>
+                  <dd>{stat.value}{stat.unit && stat.value !== EMPTY_VALUE && <small> {stat.unit}</small>}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ))}
+        {summary.bonuses.length > 0 && (
+          <section className="mech-stats-group">
+            <h3>EQUIPMENT</h3>
+            <dl>
+              {summary.bonuses.map(line => (
+                <div key={line.item.id} className="mech-stat">
+                  <dt>{line.count > 1 ? `${line.count}× ` : ''}{line.item.name}{line.fixed ? ' (built-in)' : ''}</dt>
+                  <dd>{line.item.bonuses.join(' · ')}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
         )}
       </div>
-    </section>
+    </div>
   );
 }

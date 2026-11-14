@@ -298,7 +298,7 @@ export function BtMechLabApp() {
         />
       )}
 
-      <BtAnalysis summary={summary} />
+      <BtAnalysis build={build} summary={summary} />
 
       <footer className="site-footer">
         <p className="support-note">
