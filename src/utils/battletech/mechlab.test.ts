@@ -298,4 +298,20 @@ describe('MechLab de BATTLETECH: filtros', () => {
     const marauder = stock('MAD-3R');
     expect(groupZoneEquipment(marauder.mech, marauder.loadout, 'leftTorso')[0]).toMatchObject({ fixed: true, indices: [] });
   });
+
+  it('se puede quitar cada arma y cada pieza de serie, y el equipo fijo no está en el loadout', () => {
+    for (const variant of ['HBK-4G', 'AS7-D', 'MAD-3R']) {
+      const build = stock(variant);
+      for (const zone of Object.keys(build.loadout) as (keyof BtLoadout)[]) {
+        build.loadout[zone].forEach((id, index) => {
+          const removed = removeItem(build.loadout, zone, index);
+          expect(removed[zone]).toHaveLength(build.loadout[zone].length - 1);
+          expect(getHardpointViews(build.mech, removed, zone).filter(view => view.item).length + groupZoneEquipment(build.mech, removed, zone)
+            .filter(group => !group.fixed).reduce((total, group) => total + group.count, 0)).toBe(removed[zone].length);
+          expect(id).toBeTruthy();
+        });
+      }
+      expect(build.mech.fixed.every(([zone, id]) => !build.loadout[zone].includes(id))).toBe(true);
+    }
+  });
 });

@@ -11,7 +11,9 @@ import { MechIcon } from './MechIcon';
 interface BtBoardProps {
   build: BtBuild;
   activeZone: Zone | null;
-  onSelectZone: (zone: Zone) => void;
+  selectedHardpoint: number | null;
+  // Con el índice de un anclaje, el panel se abre con él elegido (como al pulsar un anclaje en MW5).
+  onSelectZone: (zone: Zone, hardpointIndex: number | null) => void;
   onArmorChange: (zone: Zone, side: BtArmorSide, value: number) => void;
   onArmorStep: (zone: Zone, side: BtArmorSide, steps: number) => void;
 }
@@ -19,7 +21,7 @@ interface BtBoardProps {
 // Tarjeta de una ubicación con el marcado del MechLab de MW5 (ComponentCard): anclajes con su arma,
 // equipo agrupado, barra de ranuras y blindaje. En BATTLETECH las armas también ocupan ranuras, y el
 // blindaje delantero y el trasero tienen cada uno su máximo.
-function LocationCard({ build, zone, label, position, isActive, onSelectZone, onArmorChange, onArmorStep }: Omit<BtBoardProps, 'activeZone'> & {
+function LocationCard({ build, zone, label, position, isActive, selectedHardpoint, onSelectZone, onArmorChange, onArmorStep }: Omit<BtBoardProps, 'activeZone'> & {
   zone: Zone;
   label: string;
   position: string;
@@ -37,10 +39,10 @@ function LocationCard({ build, zone, label, position, isActive, onSelectZone, on
   const rearMax = location.maxRearArmor;
   const armorTotal = armor[zone].front + armor[zone].rear;
   const maxArmor = frontMax + (rearMax ?? 0);
-  const select = () => onSelectZone(zone);
+  const select = (hardpointIndex: number | null = null) => onSelectZone(zone, hardpointIndex);
 
   return (
-    <div className={['component-card', `board-${position}`, stateClass, isActive ? 'is-active' : ''].filter(Boolean).join(' ')} onClick={select}>
+    <div className={['component-card', `board-${position}`, stateClass, isActive ? 'is-active' : ''].filter(Boolean).join(' ')} onClick={() => select()}>
       <div className="component-card-header">
         <button type="button" className="component-card-title" aria-pressed={isActive} onClick={(event) => { event.stopPropagation(); select(); }}>
           {label}
@@ -54,10 +56,10 @@ function LocationCard({ build, zone, label, position, isActive, onSelectZone, on
             <button
               key={index}
               type="button"
-              className={['hardpoint-chip', view.item ? 'is-occupied is-emphasized' : 'is-free', view.isOver ? 'is-over' : ''].filter(Boolean).join(' ')}
+              className={['hardpoint-chip', view.item ? 'is-occupied is-emphasized' : 'is-free', view.isOver ? 'is-over' : '', isActive && selectedHardpoint === index ? 'is-selected' : ''].filter(Boolean).join(' ')}
               data-weapon-type={view.type}
               title={`${HARDPOINT_LABELS[view.type]} hardpoint: ${view.item ? view.item.name : 'free'}`}
-              onClick={(event) => { event.stopPropagation(); select(); }}
+              onClick={(event) => { event.stopPropagation(); select(index); }}
             >
               {!view.item && <span className="hardpoint-chip-label">{HARDPOINT_LABELS[view.type]}</span>}
               <span className="hardpoint-chip-content">

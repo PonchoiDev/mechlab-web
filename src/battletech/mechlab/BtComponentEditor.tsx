@@ -16,6 +16,8 @@ const KEEPS_EDITOR_OPEN = ['.component-editor', '.component-card', '.mech-picker
 interface BtComponentEditorProps {
   build: BtBuild;
   zone: Zone;
+  selectedHardpoint: number | null;
+  onSelectHardpoint: (index: number | null) => void;
   onMount: (zone: Zone, item: BtItem) => void;
   onRemove: (zone: Zone, index: number) => void;
   onArmorChange: (zone: Zone, side: BtArmorSide, value: number) => void;
@@ -27,7 +29,7 @@ const formatTonnage = (value: number) => String(Number(value.toFixed(2)));
 
 // Panel de la ubicación elegida, con el marcado del ComponentEditor de MW5: anclajes, lo instalado
 // (que se quita con ✕, salvo el equipo fijo del chasis), el equipo que se puede añadir y el blindaje.
-export function BtComponentEditor({ build, zone, onMount, onRemove, onArmorChange, onArmorStep, onClose }: BtComponentEditorProps) {
+export function BtComponentEditor({ build, zone, selectedHardpoint, onSelectHardpoint, onMount, onRemove, onArmorChange, onArmorStep, onClose }: BtComponentEditorProps) {
   useDismiss(onClose, KEEPS_EDITOR_OPEN);
   const { mech, loadout, armor } = build;
   const label = ZONE_LABELS[zone];
@@ -35,6 +37,7 @@ export function BtComponentEditor({ build, zone, onMount, onRemove, onArmorChang
   const usage = getLocationUsage(mech, loadout, zone);
   const hardpoints = getHardpointViews(mech, loadout, zone);
   const fixed = getFixedItems(mech, zone);
+  const selected = selectedHardpoint === null ? null : hardpoints[selectedHardpoint] ?? null;
   const installed = loadout[zone].map((id, index) => ({ item: getItem(id), index }))
     .filter((entry): entry is { item: BtItem; index: number } => entry.item !== undefined);
   const frontMax = getArmorLimit(mech, zone, 'front');
@@ -55,18 +58,38 @@ export function BtComponentEditor({ build, zone, onMount, onRemove, onArmorChang
       <section className="editor-section">
         <div className="editor-section-heading">
           <h3>Hardpoints</h3>
+          {selectedHardpoint !== null && (
+            <button type="button" className="editor-link" onClick={() => onSelectHardpoint(null)}>Show all</button>
+          )}
         </div>
         {hardpoints.length > 0 ? (
+          <>
           <div className="editor-hardpoints">
             {hardpoints.map((view, index) => (
-              <span key={index} className={view.item ? 'hardpoint-chip is-occupied' : 'hardpoint-chip is-free'} data-weapon-type={view.type}>
+              <button
+                key={index}
+                type="button"
+                className={['hardpoint-chip', view.item ? 'is-occupied' : 'is-free', selectedHardpoint === index ? 'is-selected' : ''].filter(Boolean).join(' ')}
+                data-weapon-type={view.type}
+                aria-pressed={selectedHardpoint === index}
+                onClick={() => onSelectHardpoint(selectedHardpoint === index ? null : index)}
+              >
                 <span className="hardpoint-chip-label">{HARDPOINT_LABELS[view.type]}</span>
                 <span className="hardpoint-chip-content">
                   <span className="hardpoint-chip-name">{view.item?.name ?? 'Free'}</span>
                 </span>
-              </span>
+              </button>
             ))}
           </div>
+          {selected?.item && selected.index !== null && (
+            <div className="editor-occupied">
+              <p className="editor-empty">{selected.item.name} is mounted in this hardpoint.</p>
+              <button type="button" className="editor-link" onClick={() => { onRemove(zone, selected.index!); onSelectHardpoint(null); }}>
+                Remove it
+              </button>
+            </div>
+          )}
+          </>
         ) : (
           <p className="editor-empty">This location has no weapon hardpoints.</p>
         )}

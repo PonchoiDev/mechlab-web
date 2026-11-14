@@ -37,7 +37,15 @@ export function BtMechLabApp() {
   const issues = useMemo(() => getBtBuildIssues(build), [build]);
   // Ubicación con el panel abierto, como en el MechLab de MW5: se abre al pulsar una tarjeta.
   const [activeZone, setActiveZone] = useState<Zone | null>(null);
-  const closeEditor = useCallback(() => setActiveZone(null), []);
+  const [selectedHardpoint, setSelectedHardpoint] = useState<number | null>(null);
+  const selectZone = (zone: Zone, hardpointIndex: number | null = null) => {
+    setActiveZone(zone);
+    setSelectedHardpoint(hardpointIndex);
+  };
+  const closeEditor = useCallback(() => {
+    setActiveZone(null);
+    setSelectedHardpoint(null);
+  }, []);
   const [toast, setToast] = useState<{ id: number; message: string } | null>(() =>
     linked && !linked.build ? { id: 0, message: 'This build link is not valid' } : null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
@@ -148,7 +156,7 @@ export function BtMechLabApp() {
 
       <BuildStatus
         issues={issues}
-        onSelectZone={(zone) => setActiveZone(zone)}
+        onSelectZone={(zone, hardpointIndex) => selectZone(zone, hardpointIndex)}
         readyMessage="No pending issues: every hardpoint is used, weapons have ammo, the heat is under control and no tonnage is left."
       />
 
@@ -194,7 +202,8 @@ export function BtMechLabApp() {
         <BtBoard
           build={build}
           activeZone={activeZone}
-          onSelectZone={setActiveZone}
+          selectedHardpoint={selectedHardpoint}
+          onSelectZone={selectZone}
           onArmorChange={actions.changeArmor}
           onArmorStep={actions.stepArmorBy}
         />
@@ -205,6 +214,8 @@ export function BtMechLabApp() {
           key={activeZone}
           build={build}
           zone={activeZone}
+          selectedHardpoint={selectedHardpoint}
+          onSelectHardpoint={setSelectedHardpoint}
           onMount={(zone, item) => showToast(actions.mount(zone, item))}
           onRemove={actions.remove}
           onArmorChange={actions.changeArmor}
