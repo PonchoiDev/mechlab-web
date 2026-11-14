@@ -17,9 +17,13 @@ const CACHE_NAME = 'sarna-images';
 
 // El Worker solo se ejecuta en las rutas de run_worker_first (wrangler.jsonc); el resto de la web
 // la sirven directamente los assets estáticos.
+// BATTLETECH (/battletech/) usa la misma API que MW5 Mercenaries: sus rutas se tratan como las de /mercs/.
+export const toApiPath = (pathname: string) => pathname.replace(/^\/battletech\/api\//, '/mercs/api/');
+
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    url.pathname = toApiPath(url.pathname);
     if (url.pathname === FEEDBACK_PATH) return handleFeedback(request, env);
     if (url.pathname !== SARNA_IMAGE_PATH) return env.ASSETS.fetch(request);
     if (request.method !== 'GET') return new Response('Method not allowed', { status: 405 });
