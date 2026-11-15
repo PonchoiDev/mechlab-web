@@ -1,6 +1,7 @@
 /* La Argo: los estilos de las unidades enemigas (units.css) con el turquesa de las pantallas de la
-   nave, que es también el único color del resaltado del árbol. */
-:root {
+   nave, que es también el único color del resaltado del árbol.
+   :root:root pesa más que el :root de units.css, que en el build se carga después. */
+:root:root {
   --units-accent: #35c9c1;
 }
 

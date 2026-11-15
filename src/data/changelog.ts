@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-15-pilots-color',
+    date: '2026-11-15',
+    title: 'Pilots in blue again',
+    items: [
+      'The Pilots page shows its own blue again, like its cover, instead of the red of the enemy units'
+    ]
+  },
+  {
     id: '2026-11-15-starmap-emblems',
     date: '2026-11-15',
     title: 'Faction emblems on the MW5 star map',
