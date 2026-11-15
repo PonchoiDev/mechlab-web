@@ -19,6 +19,8 @@ export interface ArgoUpgrade {
   requires: string[];
   starting: boolean;
   image: string;
+  // Icono de la pantalla Ship Upgrades, en battletech/public/argo/icons/.
+  icon: string;
   crew: string | null;
   pitch: string | null;
   effects: ArgoEffect[];
@@ -36,7 +38,18 @@ export interface ArgoStat {
 
 export interface ArgoCategory {
   id: string;
+  // El de ShipUpgradeCategory.json («Habitat Pod»), que va en la ficha de la mejora.
   name: string;
+  // El título de su caja en la pantalla Ship Upgrades («Habitat Pods»).
+  label: string;
+}
+
+// Una de las tres secciones de la pantalla Ship Upgrades, con sus categorías en orden.
+export interface ArgoSection {
+  id: string;
+  name: string;
+  icon: string;
+  categories: string[];
 }
 
 export interface ArgoLocation {
@@ -55,11 +68,14 @@ export interface ArgoData {
   monthLength: number;
   careerCostMultiplier: number;
   careerUpkeepMultiplier: number;
+  // Precio y mantenimiento con la opción de carrera «Reduced Argo Upgrade Costs».
+  reducedCostMultiplier: number;
   startingTechPoints: number;
   startingMedPoints: number;
   startingMorale: number;
   maxMorale: number;
   locations: ArgoLocation[];
+  sections: ArgoSection[];
   categories: ArgoCategory[];
   crew: ArgoCrew[];
   stats: ArgoStat[];
