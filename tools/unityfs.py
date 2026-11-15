@@ -7,6 +7,7 @@ import struct
 # comprime con LZ4 la tabla de bloques; aun así se admiten bloques comprimidos con LZ4 por si acaso.
 
 CLASE_TEXT_ASSET = 49
+CLASE_MESH = 43
 # Bits bajos de las banderas de bloque y de cabecera: tipo de compresión.
 SIN_COMPRESION = 0
 LZ4 = (2, 3)
@@ -205,3 +206,76 @@ def textos_del_bundle(ruta):
         for nombre_texto, contenido in text_assets(datos):
             textos[nombre_texto] = contenido
     return textos
+
+
+def buscar_objeto(datos, clase, nombre):
+    """Inicio del objeto de una clase con ese nombre (m_Name, su primer campo) en un SerializedFile."""
+    for inicio, _, clase_objeto in _objetos(datos):
+        if clase_objeto != clase:
+            continue
+        lector = _Lector(datos, inicio)
+        n = lector.leer("i")
+        if datos[lector.p: lector.p + n] == nombre.encode():
+            return inicio
+    raise ValueError(f"No hay ningún objeto de clase {clase} llamado {nombre}")
+
+
+# Bytes de cada formato de vértice de Unity 2018 (VertexFormat): Float, Float16, UNorm8, SNorm8,
+# UNorm16, SNorm16, UInt8, SInt8, UInt16, SInt16, UInt32 y SInt32.
+BYTES_FORMATO_VERTICE = [4, 2, 1, 1, 2, 2, 1, 1, 2, 2, 4, 4]
+
+
+def leer_malla_2d(datos, inicio):
+    """Vértices (x, y) y triángulos de un Mesh de Unity 2018 sin comprimir, como los que el importador
+    de SVG del juego hace con sus iconos vectoriales. Solo se lee lo que hace falta para dibujarlo."""
+    lector = _Lector(datos, inicio)
+    # Ojo: en «lector.p += lector.leer(...)» Python lee lector.p antes de que leer() lo avance, así que
+    # cada salto se calcula aparte.
+    def saltar_lista(tamano):
+        cuantos = lector.leer("i")
+        lector.p += cuantos * tamano
+
+    saltar_lista(1)
+    lector.alinear()
+    # m_SubMeshes: primer byte, índices, topología, vértice base, primer vértice, vértices y su caja.
+    submallas = [lector.leer("IIiIII6f") for _ in range(lector.leer("i"))]
+    # m_Shapes (formas de mezcla): vértices de 40 bytes, formas de 12 y canales con nombre.
+    saltar_lista(40)
+    saltar_lista(12)
+    for _ in range(lector.leer("i")):
+        saltar_lista(1)
+        lector.alinear()
+        lector.p += 12
+    saltar_lista(4)
+    # m_BindPose (matrices de 4 × 4), m_BoneNameHashes y m_RootBoneNameHash.
+    saltar_lista(64)
+    saltar_lista(4)
+    lector.p += 4
+    compresion = lector.leer("B")
+    lector.p += 3
+    lector.alinear()
+    if compresion:
+        raise ValueError(f"Mesh comprimido (m_MeshCompression {compresion}): no se admite")
+    formato_indices = lector.leer("i")
+    n = lector.leer("i")
+    indices = struct.unpack_from("<%d%s" % (n // (4 if formato_indices else 2), "I" if formato_indices else "H"), datos, lector.p)
+    lector.p += n
+    lector.alinear()
+    numero_vertices = lector.leer("I")
+    canales = [lector.leer("BBBB") for _ in range(lector.leer("i"))]
+    n = lector.leer("i")
+    vertices_crudos = datos[lector.p: lector.p + n]
+    # Canal 0: la posición, en float. Todos los canales van intercalados en el flujo 0.
+    flujo, desplazamiento, formato, dimension = canales[0]
+    if flujo or formato or dimension < 2 or any(canal[0] for canal in canales if canal[3]):
+        raise ValueError(f"Mesh con una disposición de vértices que no se admite: {canales}")
+    paso = sum(BYTES_FORMATO_VERTICE[canal[2]] * canal[3] for canal in canales if canal[3])
+    vertices = [struct.unpack_from("<2f", vertices_crudos, i * paso + desplazamiento) for i in range(numero_vertices)]
+    triangulos = []
+    for primer_byte, cuantos, topologia, base, *_ in submallas:
+        if topologia != 0:
+            raise ValueError(f"Submalla con topología {topologia}: solo se admiten triángulos")
+        primero = primer_byte // (4 if formato_indices else 2)
+        trozo = indices[primero: primero + cuantos]
+        triangulos += [tuple(base + indice for indice in trozo[i:i + 3]) for i in range(0, cuantos, 3)]
+    return vertices, triangulos

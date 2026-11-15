@@ -2,7 +2,10 @@ import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'r
 import starmapData from '../../data/battletech/starmap.json';
 import type { BtStarmapData } from '../../types/battletech';
 import type { StarSystem } from '../../types/starmap';
-import { NEUTRAL_COLOR, getFactionEmblems, getLegend, groupTags, parseBtQuery, toBtQuery } from '../../utils/battletech/starmap';
+import {
+  NEUTRAL_COLOR, NO_FILTERS, getActiveFactions, getFactionEmblems, getFilterOptions, getLegend, getMatchingSystems, getSkulls, groupTags,
+  hasFilters, parseBtFilters, parseBtQuery, skullLabel, toBtQuery, type BtFilters
+} from '../../utils/battletech/starmap';
 import { getMapMarks } from '../../utils/marks';
 import { searchSystems } from '../../utils/starmap';
 import { FeedbackDialog } from '../../components/FeedbackDialog';
@@ -14,6 +17,11 @@ const data = starmapData as unknown as BtStarmapData;
 // El mapa no cambia con la fecha: el lienzo compartido con MW5 la pide igualmente.
 const DATE = data.range.start;
 const LOGO_PATH = `${import.meta.env.BASE_URL}starmap/logos/`;
+const PLANET_PATH = `${import.meta.env.BASE_URL}starmap/planets/`;
+const SKULL_URL = `${import.meta.env.BASE_URL}starmap/skull.svg`;
+const FILTER_OPTIONS = getFilterOptions(data);
+// Sistemas del color de su dueño y territorios rayados, como en el mapa del juego.
+const LOOK = { ownerColors: true, hatched: true };
 const URL_DELAY = 250;
 const NOTICE_DELAY = 4000;
 
@@ -48,62 +56,142 @@ interface SystemPanelProps {
   onClose: () => void;
 }
 
+// CHALLENGE del juego: cinco calaveras, y cada punto de dificultad es media.
+function Skulls({ difficulty }: { difficulty: number }) {
+  return (
+    <span className="bt-skulls" role="img" aria-label={`Challenge ${skullLabel(difficulty)} (career difficulty ${difficulty})`}>
+      {getSkulls(difficulty).map((skull, index) => (
+        <span key={index} className={`bt-skull is-${skull}`} style={{ '--skull': `url(${SKULL_URL})` } as CSSProperties} />
+      ))}
+    </span>
+  );
+}
+
+// La ficha del juego: el planeta, el nombre y la dificultad arriba; el dueño y las facciones activas a la
+// izquierda, el resumen en el centro y los atributos a la derecha. Añade lo que el juego no enseña ahí:
+// tiendas, contratos y biomas.
 function SystemPanel({ system, pinned, onClose }: SystemPanelProps) {
   const owner = system.owners[0]?.[1] ?? null;
   const details = data.details[system.id];
+  const factions = getActiveFactions(data, details);
   return (
     <section className={`starmap-panel bt-system${pinned ? ' is-pinned' : ''}`} aria-label={`${system.name} system`}>
-      <div className="starmap-panel-head">
-        <FactionEmblem factionId={owner} />
-        <div>
-          <h2>{system.name}</h2>
-          <p>{owner ? factionName(owner) : 'Unclaimed'}</p>
+      <div className="bt-system-head">
+        {details.planet && <img className="bt-planet" src={PLANET_PATH + details.planet} alt="" width={56} height={56} />}
+        <h2>{system.name}</h2>
+        <div className="bt-challenge">
+          <small>Challenge</small>
+          <Skulls difficulty={details.difficulty} />
         </div>
         {pinned && <button type="button" className="starmap-close" onClick={onClose} aria-label="Close system details">✕</button>}
       </div>
-      {details.description && <p className="bt-description">{details.description}</p>}
-      <dl className="starmap-tags">
-        <div>
-          <dt>Difficulty</dt>
-          <dd><span className="bt-difficulty" aria-label={`Career difficulty ${details.difficulty}`}>{details.difficulty}</span> <small>career</small></dd>
+      <div className="bt-system-body">
+        <div className="bt-system-col">
+          <h3>System owner</h3>
+          <p className="bt-owner"><FactionEmblem factionId={owner} /> {owner ? factionName(owner) : 'Unclaimed'}</p>
+          {factions.length > 0 && (
+            <>
+              <h3>Active factions</h3>
+              <ul className="bt-active-factions">
+                {factions.map(faction => (
+                  <li
+                    key={faction.id}
+                    className={faction.active ? 'is-active' : undefined}
+                    title={`${faction.name}${faction.employer ? ' · offers contracts' : ''}${faction.target ? ' · contract target' : ''}`}
+                  >
+                    {faction.logo ? <img src={LOGO_PATH + faction.logo} alt={faction.name} /> : <span>{faction.name}</span>}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
-        {(details.blackMarket || details.factionStore) && (
-          <div className="is-quest">
-            <dt>Stores</dt>
-            <dd>
-              {details.factionStore && <span className="bt-store">{factionName(details.factionStore)} faction store</span>}
-              {details.blackMarket && <span className="bt-store is-black">Black market</span>}
-            </dd>
-          </div>
-        )}
-        {groupTags(details.tags).map(group => (
-          <div key={group.label}>
-            <dt>{group.label}</dt>
-            <dd className="bt-tags">
-              {group.tags.map(tag => <span key={tag.id} title={tag.description}>{tag.name}</span>)}
-            </dd>
-          </div>
-        ))}
-        {details.employers.length > 0 && (
-          <div>
-            <dt>Contracts from</dt>
-            <dd><FactionList ids={details.employers} /></dd>
-          </div>
-        )}
-        {details.targets.length > 0 && (
-          <div>
-            <dt>Fighting</dt>
-            <dd><FactionList ids={details.targets} /></dd>
-          </div>
-        )}
-        {details.biomes.length > 0 && (
-          <div>
-            <dt>Battlefields</dt>
-            <dd className="bt-tags">{details.biomes.map(biome => <span key={biome}>{biome}</span>)}</dd>
-          </div>
-        )}
-      </dl>
+        <div className="bt-system-col is-summary">
+          <h3>System summary</h3>
+          {details.description && <p className="bt-description">{details.description}</p>}
+          <dl className="starmap-tags">
+            {(details.blackMarket || details.factionStore) && (
+              <div className="is-quest">
+                <dt>Stores</dt>
+                <dd>
+                  {details.factionStore && <span className="bt-store">{factionName(details.factionStore)} faction store</span>}
+                  {details.blackMarket && <span className="bt-store is-black">Black market</span>}
+                </dd>
+              </div>
+            )}
+            {details.employers.length > 0 && (
+              <div>
+                <dt>Contracts from</dt>
+                <dd><FactionList ids={details.employers} /></dd>
+              </div>
+            )}
+            {details.targets.length > 0 && (
+              <div>
+                <dt>Fighting</dt>
+                <dd><FactionList ids={details.targets} /></dd>
+              </div>
+            )}
+            {details.biomes.length > 0 && (
+              <div>
+                <dt>Battlefields</dt>
+                <dd className="bt-tags">{details.biomes.map(biome => <span key={biome}>{biome}</span>)}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+        <div className="bt-system-col">
+          <h3>Attributes</h3>
+          <dl className="starmap-tags bt-attributes">
+            {groupTags(details.tags).map(group => (
+              <div key={group.label}>
+                <dt>{group.label}</dt>
+                <dd className="bt-tags">
+                  {group.tags.map(tag => <span key={tag.id} title={tag.description}>{tag.name}</span>)}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
     </section>
+  );
+}
+
+// Los filtros del mapa del juego: dificultad, bioma y tienda. Los sistemas que no cumplen se apagan.
+function MapFilters({ filters, onChange }: { filters: BtFilters; onChange: (filters: BtFilters) => void }) {
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+  return (
+    <div className="bt-filters" role="group" aria-label="Filters">
+      <label>
+        <span>Difficulty filter</span>
+        <select value={filters.difficulty ?? ''} onChange={event => onChange({ ...filters, difficulty: event.target.value ? Number(event.target.value) : null })}>
+          <option value="">No filter</option>
+          {FILTER_OPTIONS.difficulties.map(value => <option key={value} value={value}>{skullLabel(value)}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>Biome filter</span>
+        <select value={filters.biome ?? ''} onChange={event => onChange({ ...filters, biome: event.target.value || null })}>
+          <option value="">No filter</option>
+          {FILTER_OPTIONS.biomes.map(value => <option key={value} value={value}>{value}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>Store filter</span>
+        <select value={filters.store ?? ''} onChange={event => onChange({ ...filters, store: event.target.value || null })}>
+          <option value="">No filter</option>
+          {FILTER_OPTIONS.stores.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
+        </select>
+      </label>
+      {hasFilters(filters) && <button type="button" className="bt-filters-clear" onClick={() => onChange(NO_FILTERS)}>Clear</button>}
+      <button type="button" className="bt-filters-info" aria-expanded={isInfoOpen} aria-label="About the filters" onClick={() => setIsInfoOpen(open => !open)}>i</button>
+      {isInfoOpen && (
+        <p className="bt-filters-help">
+          Systems that don't match every filter fade out. Difficulty is the career one, in skulls; biome, the kinds of
+          battlefield its contracts use; store, a black market or a faction store.
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -189,6 +277,8 @@ function FactionLegend() {
 
 export function BtStarmapApp() {
   const [selectedId, setSelectedId] = useState<number | null>(() => parseBtQuery(window.location.search, data));
+  const [filters, setFilters] = useState<BtFilters>(() => parseBtFilters(window.location.search, data));
+  const matches = useMemo(() => getMatchingSystems(data, filters), [filters]);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [focus, setFocus] = useState<FocusRequest | null>(() => (selectedId === null ? null : { systemIds: [selectedId], sequence: 0 }));
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
@@ -197,9 +287,9 @@ export function BtStarmapApp() {
   const marks = useMemo(() => getMapMarks({ selectedId, academySystem: null, questOffer: null, campaignStart: null, mechSystem: null }), [selectedId]);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => window.history.replaceState(null, '', `${window.location.pathname}${toBtQuery(selectedId, data)}`), URL_DELAY);
+    const timer = window.setTimeout(() => window.history.replaceState(null, '', `${window.location.pathname}${toBtQuery(selectedId, data, filters)}`), URL_DELAY);
     return () => window.clearTimeout(timer);
-  }, [selectedId]);
+  }, [selectedId, filters]);
 
   useEffect(() => {
     if (!notice) return;
@@ -227,6 +317,8 @@ export function BtStarmapApp() {
         onZone={() => undefined}
         mercZones={[]}
         emblems={EMBLEMS}
+        look={LOOK}
+        matches={matches}
         onMercZone={() => undefined}
       />
 
@@ -257,13 +349,15 @@ export function BtStarmapApp() {
 
       {shown && <SystemPanel system={shown} pinned={isPinned} onClose={() => setSelectedId(null)} />}
 
+      <MapFilters filters={filters} onChange={setFilters} />
+
       <div className="starmap-drawers">
         <FactionLegend />
       </div>
 
       {isFeedbackOpen && (
         <FeedbackDialog
-          buildUrl={`${window.location.origin}${window.location.pathname}${toBtQuery(selectedId, data)}`}
+          buildUrl={`${window.location.origin}${window.location.pathname}${toBtQuery(selectedId, data, filters)}`}
           attachLabel="Attach a link to this map view"
           onMessage={setNotice}
           onClose={() => setIsFeedbackOpen(false)}

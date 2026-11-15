@@ -66,6 +66,21 @@ export type TerritoryColors = ((faction: string) => string) | null;
 export type TerritoryEmblem = { url: string; x: number; y: number; size: number };
 const EMBLEM_OPACITY = 0.14;
 
+// Aspecto del mapa. El de MW5 usa el de por defecto; el de BATTLETECH se acerca al de su juego.
+export interface MapLook {
+  // Cada sistema es un punto del color de su dueño, en vez de blanco.
+  ownerColors: boolean;
+  // Territorios con un rayado diagonal tenue y un borde fino, en vez del brillo ancho hacia dentro.
+  hatched: boolean;
+}
+export const DEFAULT_LOOK: MapLook = { ownerColors: false, hatched: false };
+// Separación del rayado y grosores del borde fino, en píxeles de pantalla.
+const HATCH_SPACING = 9;
+const THIN_BORDER_WIDTH = 1.4;
+const THIN_BORDER_HALO = 5;
+// Opacidad de los sistemas que no cumplen los filtros.
+const DIMMED_OPACITY = 0.16;
+
 // Zona de mercenarios que se dibuja: su círculo y el logo de quien la ocupa (sin logo, rota al azar).
 export type MercZoneLayer = { zone: MercZone; logo: string | null; highlighted: boolean; title: string; note: string | null }[];
 
@@ -125,6 +140,9 @@ export class StarmapRenderer {
   private readonly arenas: Set<number>;
   private mercZones: MercZoneLayer = [];
   private emblems: TerritoryEmblem[] = [];
+  private look: MapLook = DEFAULT_LOOK;
+  // Sistemas que cumplen los filtros; null si no hay filtros y no se atenúa ninguno.
+  private matches: ReadonlySet<number> | null = null;
   private readonly logos = new Map<string, HTMLImageElement>();
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
@@ -408,7 +426,13 @@ export class StarmapRenderer {
       this.ratio * scale, 0, 0, -this.ratio * scale,
       this.ratio * (marginX + this.width / 2 - x * scale), this.ratio * (marginY + this.height / 2 + y * scale)
     );
-    this.paintTerritories(context, territories, scale);
+    if (this.look.hatched) {
+      const halfWidth = (marginX + this.width / 2) / scale;
+      const halfHeight = (marginY + this.height / 2) / scale;
+      this.paintHatchedTerritories(context, territories, scale, [x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight]);
+    } else {
+      this.paintTerritories(context, territories, scale);
+    }
     return { canvas, view: { ...this.view }, territories, marginX, marginY };
   }
 
@@ -453,6 +477,60 @@ export class StarmapRenderer {
       context.stroke(path);
     }
     context.restore();
+  }
+
+  // Como el mapa de BATTLETECH: relleno muy tenue con rayas diagonales, un brillo estrecho hacia dentro
+  // y un borde fino. bounds son los años luz que cubre la capa: izquierda, abajo, derecha y arriba.
+  private paintHatchedTerritories(context: CanvasRenderingContext2D, territories: Territory[], scale: number, bounds: [number, number, number, number]) {
+    const [left, bottom, right, top] = bounds;
+    const spacing = HATCH_SPACING / scale;
+    // Rectas x - y = c: suben hacia la derecha en la pantalla.
+    const hatch = new Path2D();
+    for (let c = Math.floor((left - top) / spacing) * spacing; c <= right - bottom; c += spacing) {
+      hatch.moveTo(c + bottom, bottom);
+      hatch.lineTo(c + top, top);
+    }
+    context.save();
+    context.lineJoin = 'round';
+    for (const { color, path } of territories) {
+      context.fillStyle = withAlpha(color, 0.08);
+      context.fill(path, 'evenodd');
+      context.save();
+      context.clip(path, 'evenodd');
+      context.strokeStyle = withAlpha(color, 0.14);
+      context.lineWidth = 1 / scale;
+      context.stroke(hatch);
+      context.strokeStyle = withAlpha(color, 0.16);
+      context.lineWidth = (INNER_GLOW * 0.9) / scale;
+      context.stroke(path);
+      context.restore();
+    }
+    for (const { color, path } of territories) {
+      context.strokeStyle = withAlpha(color, 0.22);
+      context.lineWidth = THIN_BORDER_HALO / scale;
+      context.stroke(path);
+      context.strokeStyle = withAlpha(color, 0.85);
+      context.lineWidth = THIN_BORDER_WIDTH / scale;
+      context.stroke(path);
+    }
+    context.restore();
+  }
+
+  setLook(look: MapLook) {
+    this.look = look;
+    // El rayado está en la capa de los territorios: hay que volver a pintarla.
+    this.layer = null;
+    this.previousLayer = null;
+    this.requestDraw();
+  }
+
+  setMatches(matches: ReadonlySet<number> | null) {
+    this.matches = matches;
+    this.requestDraw();
+  }
+
+  private isDimmed(systemId: number) {
+    return this.matches !== null && !this.matches.has(systemId);
   }
 
   setEmblems(emblems: TerritoryEmblem[]) {
@@ -588,11 +666,14 @@ export class StarmapRenderer {
     for (const [i, system] of this.data.systems.entries()) {
       const [x, y] = this.toScreen(system.x, system.y);
       if (x < -10 || y < -10 || x > this.width + 10 || y > this.height + 10) continue;
-      context.fillStyle = this.owners[i] ? '#ffffff' : 'rgba(170, 180, 200, 0.55)';
+      const owner = this.owners[i];
+      context.globalAlpha = this.isDimmed(system.id) ? DIMMED_OPACITY : 1;
+      context.fillStyle = !owner ? 'rgba(170, 180, 200, 0.55)' : this.look.ownerColors ? lighten(this.colorOf(owner), 0.25) : '#ffffff';
       context.beginPath();
       context.arc(x, y, radius, 0, Math.PI * 2);
       context.fill();
     }
+    context.globalAlpha = 1;
 
     for (const system of visible) {
       if (this.hubCapitals.has(system.id)) this.drawHubIcon(...this.toScreen(system.x, system.y));
@@ -886,10 +967,12 @@ export class StarmapRenderer {
       const box: [number, number, number, number] = [x + 6, y - 7, x + 6 + width, y + 7];
       if (taken.some(([l, t, r, b]) => box[0] < r && box[2] > l && box[1] < b && box[3] > t)) continue;
       taken.push(box);
+      context.globalAlpha = this.isDimmed(system.id) ? DIMMED_OPACITY * 2 : 1;
       context.fillStyle = 'rgba(0, 0, 0, 0.75)';
       context.fillText(text, box[0] + 1, y + 1);
       context.fillStyle = 'rgba(235, 240, 250, 0.92)';
       context.fillText(text, box[0], y);
     }
+    context.globalAlpha = 1;
   }
 }

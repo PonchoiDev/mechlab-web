@@ -20,8 +20,10 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
 | Facciones | `data/factions/*.json` | Nombre, nombre corto, color del mapa (`factionMapColor`) e icono |
 | Logos | `emblems/factions/*.dds` | Logo de cada facción, en DXT5 de 256 px |
 | Etiquetas | `MDD/data/tagdata.sql` | Nombre visible y descripción de cada etiqueta (`planet_climate_arctic` es «Arctic World») |
+| Planetas | `sprites/Planets/*.dds` | Imagen del planeta de la ficha, una por clima (`planet_climate_terran.dds`), en DXT1 de 64 px |
+| Calavera | `uixSvgIcon_skullAtlas`, en `sharedassets0.assets` | La calavera de la dificultad (CHALLENGE): un Mesh de Unity (clase 43) que el importador de SVG del juego triangula |
 
-`tools/extraer_mapa_battletech.py` lee esos archivos y guarda en `tools/datos-juego/battletech/` los sistemas, las facciones y las etiquetas, y en `battletech/public/starmap/logos/` los logos en PNG. `tools/generar_mapa_battletech.py` genera `src/data/battletech/starmap.json`.
+`tools/extraer_mapa_battletech.py` lee esos archivos y guarda en `tools/datos-juego/battletech/` los sistemas, las facciones y las etiquetas, en `battletech/public/starmap/logos/` los logos en PNG, en `battletech/public/starmap/planets/` las imágenes de los planetas en PNG y en `battletech/public/starmap/skull.svg` la calavera, con los triángulos de su Mesh como un trazado SVG. `tools/generar_mapa_battletech.py` genera `src/data/battletech/starmap.json`.
 
 **Decisiones sobre los datos:**
 
@@ -56,10 +58,30 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
   - va en el centro de su grupo de sistemas más grande (las facciones con sistemas sueltos, como Locals, lo llevan en el mayor);
   - su tamaño crece con ese grupo, en años luz, así que acompaña al zoom;
   - los grupos de menos de 4 sistemas no llevan logo, porque taparía a los vecinos.
+- **RF8.** Filtros arriba a la derecha, como los del juego (Difficulty Filter, Biome Filter y Store Filter), con «No filter» por defecto y un botón de información que explica cada uno con el texto del juego:
+  - **dificultad:** los sistemas con esa dificultad de carrera, en calaveras;
+  - **bioma:** los sistemas con ese bioma entre los de sus mapas;
+  - **tienda:** los sistemas con mercado negro, con alguna tienda de facción o con la tienda de una facción concreta.
+
+  Los filtros se combinan, y los sistemas que no cumplen alguno se atenúan en el mapa (no desaparecen). Van en la URL (`?difficulty=7&biome=Urban&store=blackmarket`); un valor que no existe se ignora.
+- **RF9.** La dificultad se ve como en el juego: CHALLENGE con 5 calaveras y medias calaveras. Cada punto de la dificultad de carrera (de 1 a 10) es media calavera: Yuris, de dificultad 7, tiene 3,5. La calavera es la del juego.
+- **RF10.** En escritorio, la ficha del sistema va abajo en el centro, como la del juego:
+  - arriba, la imagen del planeta (la de su clima), el nombre y CHALLENGE a la derecha;
+  - a la izquierda, SYSTEM OWNER con el logo y el nombre del dueño, y ACTIVE FACTIONS: los logos de las facciones de los contratos, con las que dan o reciben contratos en el sistema resaltadas;
+  - en el centro, SYSTEM SUMMARY (la descripción) y lo que el juego no enseña ahí: tiendas, con quién se firman contratos y contra quién, y biomas;
+  - a la derecha, ATTRIBUTES: las etiquetas del planeta.
+
+  En el móvil, las partes se apilan.
+- **RF11.** El aspecto del mapa se acerca al del juego:
+  - cada sistema es un punto del color de su dueño;
+  - los territorios llevan un rayado diagonal tenue y un borde fino, sin el brillo ancho del mapa de MW5;
+  - con un filtro, los sistemas que no lo cumplen se ven apagados.
+
+  Son opciones del lienzo compartido que solo activa el mapa de BATTLETECH: el de MW5 se ve igual que antes.
 
 ## Requisitos no funcionales
 
-- **RNF1.** La lógica (búsqueda, grupos de etiquetas, facciones de la leyenda y URL) es pura y está en `src/utils/battletech/`, con sus tests.
+- **RNF1.** La lógica (búsqueda, grupos de etiquetas, facciones de la leyenda, filtros, calaveras y URL) es pura y está en `src/utils/battletech/`, con sus tests.
 - **RNF2.** Interfaz en inglés y sin guiones largos. Mismo aspecto que el mapa de MW5.
 - **RNF3.** El build de BATTLETECH (`vite.battletech.config.ts`, base `/battletech/`) no cambia las rutas de MW5. `npm run build` construye los dos.
 
@@ -75,6 +97,11 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
 | CA6 | La URL | se abre con `?system=Addasar` o con un sistema que no existe | elige Addasar; con uno que no existe, ninguno. La vista con Addasar elegido lleva `system=Addasar` |
 | CA7 | Los colores | se cargan las facciones | todas tienen color; Locals y NoFaction, el gris neutro |
 | CA8 | Los logos del territorio | se calculan | hay uno por facción con logo y algún grupo de 4 sistemas o más; el sistema más cercano a cada logo es de su facción; el de Liao es más grande que el de la Magistracy of Canopus |
+| CA9 | Las calaveras | se calcula la de Yuris (dificultad 7) y las de 1, 2 y 10 | Yuris tiene 3 calaveras enteras, una media y una vacía (3,5, como en el juego); 1 es media calavera, 2 una entera y 10 las cinco |
+| CA10 | Las opciones de los filtros | se calculan | dificultades del 1 al 9, de menos a más; los 12 biomas en orden alfabético; tiendas: mercado negro, cualquier tienda de facción y la de cada una de las 7 facciones con tienda |
+| CA11 | Los filtros | se combinan | sin filtros no se atenúa nada; con dificultad 7 cumplen los 37 sistemas de esa dificultad, Yuris entre ellos; con bioma Urban, 31; con mercado negro, 40; con la tienda de Liao, 2; con dificultad 7 y bioma Urban, solo los que cumplen los dos |
+| CA12 | La URL de los filtros | se abre con `?system=Yuris&difficulty=7&biome=Urban&store=blackmarket` o con valores que no existen | se leen los tres filtros y el sistema; los valores que no existen se ignoran. La vista lleva solo los filtros puestos, después del sistema |
+| CA13 | La ficha de Yuris | se consulta | su planeta es el del clima templado (`planet_climate_terran.png`); sus facciones activas son Federated Suns, ComStar, Capellan Confederation y Local pirate organization, resaltadas entre las 11 de los contratos, en el orden del juego |
 
 ## Fuera de alcance
 
@@ -85,14 +112,17 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
 
 ## Plan de pruebas
 
-1. **Datos y lógica (CA1 a CA8):** `src/utils/battletech/starmap.test.ts`, con `starmap.json` real.
+1. **Datos y lógica (CA1 a CA13):** `src/utils/battletech/starmap.test.ts`, con `starmap.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844:
    - el mapa con sus territorios;
    - el buscador y la marca;
    - la ficha de Addasar;
    - la leyenda;
    - un enlace con `?system=`;
-   - la portada con la sección nueva.
+   - la portada con la sección nueva;
+   - los filtros, solos y combinados, con el botón de información y la URL;
+   - la ficha de Yuris abajo en el centro, con sus 3,5 calaveras, frente a la captura del juego;
+   - el mapa de MW5 (`/mercs/starmap/`), que no cambia.
 
 ## Resultado
 
@@ -114,3 +144,5 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
   - **Desarrollo:** el servidor de Vite de BATTLETECH resuelve `/src/` a la carpeta `src/` del repositorio, y cada página carga su script con esa ruta.
   - **Copias de trabajo de `.claude/worktrees/`:** quedan fuera de git, de los tests y del lint.
   - **Logos en el territorio:** el lienzo compartido con MW5 admite logos sobre los territorios (`emblems`), con un 14 % de opacidad; el mapa de MW5 no los usa. Un sistema se une al grupo de su facción si está a 25 años luz o menos de otro: los de la Magistracy of Canopus, en la frontera, están a 20 o 23 unos de otros.
+  - **Como el mapa del juego:** comprobado frente a sus capturas a 1440 × 900 y a 390 × 844, con Yuris y los filtros de dificultad y de tienda. En el móvil, los filtros ocupan la franja de arriba y la ficha va debajo. El botón de información explica los filtros con un texto propio: el del juego no está en sus datos.
+

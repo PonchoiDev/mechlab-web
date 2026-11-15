@@ -2,9 +2,12 @@ import { describe, expect, it } from 'vitest';
 import starmapData from '../../data/battletech/starmap.json';
 import type { BtStarmapData } from '../../types/battletech';
 import { searchSystems } from '../starmap';
-import { NEUTRAL_COLOR, getFactionEmblems, getLegend, groupTags, parseBtQuery, toBtQuery } from './starmap';
+import {
+  ANY_FACTION_STORE, BLACK_MARKET, NEUTRAL_COLOR, NO_FILTERS, getActiveFactions, getFactionEmblems, getFilterOptions,
+  getLegend, getMatchingSystems, getSkulls, groupTags, parseBtFilters, parseBtQuery, toBtQuery
+} from './starmap';
 
-// Criterios de aceptación de docs/specs/battletech-mapa.md (issue #103).
+// Criterios de aceptación de docs/specs/battletech-mapa.md (issue #103 y el aspecto del juego).
 const data = starmapData as unknown as BtStarmapData;
 const system = (name: string) => {
   const found = data.systems.find(candidate => candidate.name === name);
@@ -81,5 +84,70 @@ describe('mapa estelar de BATTLETECH', () => {
     }
     const size = (faction: string) => emblems.find(emblem => emblem.faction === faction)!.size;
     expect(size('Liao')).toBeGreaterThan(size('MagistracyOfCanopus'));
+  });
+
+  it('CA9: la dificultad en calaveras, media por punto, como Yuris en el juego', () => {
+    expect(details('Yuris').difficulty).toBe(7);
+    expect(getSkulls(7)).toEqual(['full', 'full', 'full', 'half', 'empty']);
+    expect(getSkulls(1)).toEqual(['half', 'empty', 'empty', 'empty', 'empty']);
+    expect(getSkulls(2)).toEqual(['full', 'empty', 'empty', 'empty', 'empty']);
+    expect(getSkulls(10)).toEqual(['full', 'full', 'full', 'full', 'full']);
+  });
+
+  it('CA10: las opciones de los filtros salen de los datos', () => {
+    const options = getFilterOptions(data);
+    expect(options.difficulties).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    expect(options.biomes).toHaveLength(12);
+    expect(options.biomes).toEqual([...options.biomes].sort((a, b) => a.localeCompare(b)));
+    expect(options.biomes).toContain('Urban');
+    // Mercado negro, cualquier tienda de facción y después cada facción con tienda, por nombre.
+    expect(options.stores.map(store => store.value)).toEqual([
+      BLACK_MARKET, ANY_FACTION_STORE, 'Liao', 'Kurita', 'Davion', 'Marik', 'Steiner', 'MagistracyOfCanopus', 'TaurianConcordat'
+    ]);
+    expect(options.stores[0].label).toBe('Black market');
+    expect(options.stores.find(store => store.value === 'Liao')?.label).toBe('Capellan Confederation store');
+  });
+
+  it('CA11: los filtros se combinan y atenúan lo que no cumple', () => {
+    expect(getMatchingSystems(data, NO_FILTERS)).toBeNull();
+    const byDifficulty = getMatchingSystems(data, { ...NO_FILTERS, difficulty: 7 })!;
+    expect(byDifficulty.size).toBe(37);
+    expect(byDifficulty.has(system('Yuris').id)).toBe(true);
+    expect(getMatchingSystems(data, { ...NO_FILTERS, biome: 'Urban' })!.size).toBe(31);
+    expect(getMatchingSystems(data, { ...NO_FILTERS, store: BLACK_MARKET })!.size).toBe(40);
+    expect(getMatchingSystems(data, { ...NO_FILTERS, store: 'Liao' })!.size).toBe(2);
+    expect(getMatchingSystems(data, { ...NO_FILTERS, store: ANY_FACTION_STORE })!.size).toBe(12);
+    const both = getMatchingSystems(data, { ...NO_FILTERS, difficulty: 7, biome: 'Urban' })!;
+    expect(both.size).toBeGreaterThan(0);
+    for (const id of both) expect(data.details[id]).toMatchObject({ difficulty: 7, biomes: expect.arrayContaining(['Urban']) });
+    expect([...byDifficulty].filter(id => data.details[id].biomes.includes('Urban'))).toHaveLength(both.size);
+  });
+
+  it('CA12: los filtros van en la URL y los valores que no existen se ignoran', () => {
+    const search = '?system=Yuris&difficulty=7&biome=Urban&store=blackmarket';
+    const filters = parseBtFilters(search, data);
+    expect(filters).toEqual({ difficulty: 7, biome: 'Urban', store: BLACK_MARKET });
+    expect(parseBtQuery(search, data)).toBe(system('Yuris').id);
+    expect(toBtQuery(system('Yuris').id, data, filters)).toBe(search);
+    expect(parseBtFilters('?difficulty=11&biome=Moon&store=Clans', data)).toEqual(NO_FILTERS);
+    expect(parseBtFilters('?difficulty=abc', data)).toEqual(NO_FILTERS);
+    const spring = { ...NO_FILTERS, biome: 'Highlands (spring)' };
+    expect(parseBtFilters(toBtQuery(null, data, spring), data)).toEqual(spring);
+    expect(toBtQuery(null, data, NO_FILTERS)).toBe('');
+  });
+
+  it('CA13: la ficha de Yuris, con su planeta y sus facciones activas', () => {
+    expect(details('Yuris').planet).toBe('planet_climate_terran.png');
+    expect(data.systems.every(candidate => data.details[candidate.id].planet !== null)).toBe(true);
+    const factions = getActiveFactions(data, details('Yuris'));
+    expect(factions.map(faction => faction.id)).toEqual([
+      'Marik', 'Kurita', 'Davion', 'Liao', 'Steiner', 'TaurianConcordat',
+      'AuriganDirectorate', 'MagistracyOfCanopus', 'AuriganRestoration', 'ComStar', 'AuriganPirates'
+    ]);
+    expect(factions.filter(faction => faction.active).map(faction => faction.name)).toEqual([
+      'Federated Suns', 'Capellan Confederation', 'ComStar', 'Local pirate organization'
+    ]);
+    expect(factions.find(faction => faction.id === 'ComStar')).toMatchObject({ employer: true, target: false });
+    expect(factions.find(faction => faction.id === 'Liao')).toMatchObject({ employer: true, target: true });
   });
 });

@@ -6,10 +6,12 @@ import sys
 from battletech import ASSETS, leer_carpeta, leer_etiquetas
 from extraer_mapa import escribir_png, reducir
 from ue4 import descomprimir_dxt5
+from unityfs import CLASE_MESH, buscar_objeto, leer_malla_2d
 
 # Extrae de la instalación de BATTLETECH (juego base, sin mods) lo que necesita el mapa estelar: los
 # sistemas con todas sus fichas (una por modo y momento de la campaña), las facciones, los nombres de
-# las etiquetas de planeta y los logos de las facciones en PNG. Después, generar_mapa_battletech.py
+# las etiquetas de planeta, los logos de las facciones y las imágenes de los planetas en PNG, y la
+# calavera de la dificultad en SVG. Después, generar_mapa_battletech.py
 # trabaja con estos archivos sin tocar el juego.
 #
 #   python3 tools/extraer_mapa_battletech.py "/ruta/a/BATTLETECH"
@@ -18,6 +20,18 @@ RUTA_DESTINO = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "battletech", "sta
 RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "battletech", "public", "starmap", "logos")
 LOGOS = os.path.join(ASSETS, "emblems", "factions")
 TAMANO_LOGO = 128
+# La ficha del juego enseña un planeta según el clima del sistema: hay una imagen por etiqueta de clima
+# (planet_climate_terran.dds), de 64 px en DXT1, y la del sistema es la de su primera etiqueta de clima.
+PLANETAS = os.path.join(ASSETS, "sprites", "Planets")
+RUTA_PLANETAS = os.path.join(RUTA_LOGOS, "..", "planets")
+# La calavera de CHALLENGE no es una textura: el juego importa sus iconos vectoriales con SVG Importer,
+# que los guarda como un Mesh de Unity (clase 43) ya triangulado, en sharedassets0.assets. Se vuelve a
+# escribir como SVG con un solo trazado de triángulos: así no se ven las juntas entre ellos.
+ARCHIVO_CALAVERA = os.path.join("BattleTech_Data", "sharedassets0.assets")
+MALLA_CALAVERA = "uixSvgIcon_skullAtlas"
+RUTA_CALAVERA = os.path.join(RUTA_LOGOS, "..", "skull.svg")
+# Lado del SVG: los vértices van de -0,3 a 0,3 y se escalan a 0..100.
+LADO_SVG = 100
 # Las etiquetas de planeta empiezan así; el resto (de pilotos, mapas, eventos…) no hace falta.
 PREFIJO_PLANETA = "planet_"
 
@@ -56,6 +70,37 @@ def voltear(pixeles, ancho, alto):
     # Las DDS de Unity guardan las filas de abajo arriba.
     fila = ancho * 4
     return b"".join(pixeles[(alto - 1 - y) * fila:(alto - y) * fila] for y in range(alto))
+
+
+def extraer_planetas(juego):
+    # Las imágenes de los planetas no llevan transparencia: el juego las enseña en un recuadro negro.
+    from extraer_argo_battletech import escribir_png_rgb, leer_dds as leer_dds_rgb
+    os.makedirs(RUTA_PLANETAS, exist_ok=True)
+    nombres = sorted(nombre for nombre in os.listdir(os.path.join(juego, PLANETAS)) if nombre.endswith(".dds"))
+    for nombre in nombres:
+        ancho, alto, pixeles = leer_dds_rgb(os.path.join(juego, PLANETAS, nombre))
+        escribir_png_rgb(os.path.join(RUTA_PLANETAS, nombre[:-len(".dds")] + ".png"), ancho, alto, pixeles)
+    print(f"planetas: {len(nombres)} imágenes en {os.path.normpath(RUTA_PLANETAS)}")
+
+
+def extraer_calavera(juego):
+    with open(os.path.join(juego, ARCHIVO_CALAVERA), "rb") as archivo:
+        datos = archivo.read()
+    vertices, triangulos = leer_malla_2d(datos, buscar_objeto(datos, CLASE_MESH, MALLA_CALAVERA))
+    xs, ys = [x for x, _ in vertices], [y for _, y in vertices]
+    escala = LADO_SVG / max(max(xs) - min(xs), max(ys) - min(ys))
+    ancho, alto = (max(xs) - min(xs)) * escala, (max(ys) - min(ys)) * escala
+
+    # La Y de Unity crece hacia arriba y la del SVG hacia abajo.
+    def punto(indice):
+        x, y = vertices[indice]
+        return f"{(x - min(xs)) * escala:.2f} {(max(ys) - y) * escala:.2f}"
+
+    trazado = "".join(f"M{punto(a)}L{punto(b)}L{punto(c)}Z" for a, b, c in triangulos)
+    with open(RUTA_CALAVERA, "w", encoding="utf-8") as archivo:
+        archivo.write(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {ancho:.2f} {alto:.2f}">'
+                      f'<path fill="#fff" d="{trazado}"/></svg>\n')
+    print(f"calavera: {len(triangulos)} triángulos en {os.path.normpath(RUTA_CALAVERA)}")
 
 
 def guardar(nombre, datos):
@@ -102,6 +147,9 @@ def main():
         escribir_png(os.path.join(RUTA_LOGOS, f"{icono}.png"), TAMANO_LOGO,
                      reducir(ancho, alto, voltear(pixeles, ancho, alto), TAMANO_LOGO))
         escritos += 1
+
+    extraer_planetas(juego)
+    extraer_calavera(juego)
 
     guardar("sistemas.json", sorted(sistemas, key=lambda s: s["id"]))
     guardar("facciones.json", facciones)

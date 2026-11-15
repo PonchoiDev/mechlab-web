@@ -3,7 +3,7 @@ import type { GameDate, StarmapData } from '../types/starmap';
 import type { MapMark } from '../utils/marks';
 import { getClusterLevels } from '../utils/starmap';
 import { ZoneLevelText } from './ZonePanels';
-import { QUEST_COLOR, StarmapRenderer, type MercZoneLayer, type TerritoryColors, type TerritoryEmblem, type View } from './renderer';
+import { QUEST_COLOR, StarmapRenderer, type MapLook, type MercZoneLayer, type TerritoryColors, type TerritoryEmblem, type View } from './renderer';
 
 // Fuera del componente: un [] nuevo en cada render volvería a disparar el efecto.
 const NO_EMBLEMS: TerritoryEmblem[] = [];
@@ -31,6 +31,10 @@ interface StarmapCanvasProps {
   mercZones: MercZoneLayer;
   // Logos de las facciones sobre su territorio (el mapa de BATTLETECH); el de MW5 no los lleva.
   emblems?: TerritoryEmblem[];
+  // Aspecto del mapa de BATTLETECH (sistemas del color de su dueño, territorios rayados); sin él, el de MW5.
+  look?: MapLook;
+  // Sistemas que cumplen los filtros de la página: el resto se atenúa. Sin él no se atenúa ninguno.
+  matches?: ReadonlySet<number> | null;
   focus: FocusRequest | null;
   onHover: (systemId: number | null) => void;
   onSelect: (systemId: number | null) => void;
@@ -99,7 +103,7 @@ const getVisibleBand = (container: HTMLElement): { top: number; bottom: number }
 
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, routeColor, marks, territoryColors, mercZones, emblems, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
+export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, questRoute, routeColor, marks, territoryColors, mercZones, emblems, look, matches, focus, onHover, onSelect, onZone, onMercZone }: StarmapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<StarmapRenderer | null>(null);
@@ -242,6 +246,14 @@ export function StarmapCanvas({ data, date, animateDate, hoveredId, selectedId, 
   useEffect(() => {
     rendererRef.current?.setEmblems(emblems ?? NO_EMBLEMS);
   }, [emblems]);
+
+  useEffect(() => {
+    if (look) rendererRef.current?.setLook(look);
+  }, [look]);
+
+  useEffect(() => {
+    rendererRef.current?.setMatches(matches ?? null);
+  }, [matches]);
 
   // Al abrir un enlace, el primer encuadre se hace antes de que carguen las fuentes: con ellas la ficha
   // crece y en el móvil puede tapar lo encuadrado. Se repite una vez cuando están listas.
