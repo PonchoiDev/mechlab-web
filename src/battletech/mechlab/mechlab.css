@@ -178,7 +178,8 @@ body { background: var(--work-bg); }
 
 .hardpoint-chip-tier { white-space: nowrap; }
 
-.component-card-item .bt-item-bonus { font-size: 9px; }
+/* La bonificación de las piezas con versiones (+, ++, +++) va a la derecha, como en las armas de los anclajes. */
+.component-card-item .bt-item-bonus { margin-left: auto; padding-left: 8px; font-size: 10px; text-align: right; }
 
 .bt-stock-role {
   color: var(--work-muted);
@@ -200,3 +201,5 @@ body { background: var(--work-bg); }
   place-items: center;
   background: radial-gradient(ellipse at center, rgba(255, 212, 0, 0.08), transparent 70%), rgba(16, 19, 16, 0.9);
 }
+
+button.component-card-item:has(.bt-item-bonus) { display: flex; align-items: baseline; gap: 4px; }

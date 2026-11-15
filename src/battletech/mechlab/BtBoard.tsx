@@ -140,6 +140,7 @@ function CellItem({ item, fixed = false, onSelect, onMenu }: { item: BtItem; fix
       {...(fixed ? {} : longPress)}
     >
       {item.name}
+      {item.bonuses.length > 0 && !fixed && <small className="bt-item-bonus">{item.bonuses.join(' ')}</small>}
       {fixed && <small>built-in</small>}
     </button>
   );
