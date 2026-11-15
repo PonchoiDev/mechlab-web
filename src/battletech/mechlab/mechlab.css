@@ -191,3 +191,28 @@ body { background: var(--work-bg); }
 }
 
 button.component-card-item:has(.bt-item-bonus) { display: flex; align-items: baseline; gap: 4px; }
+
+/* Anclajes de cada ubicación con los iconos del juego, en el color de su tipo. */
+.bt-location-hardpoints { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 8px; }
+
+.bt-location-hardpoint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--weapon-color, var(--work-text));
+  font: 600 12px var(--work-mono);
+}
+
+.bt-location-hardpoint i {
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  mask: var(--icon) center / contain no-repeat;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+}
+
+.bt-location-hardpoint.is-none { color: var(--work-muted); opacity: 0.45; }
+
+/* Una pieza con bonificación ocupa todo el ancho: en media columna, el nombre y el texto se partían. */
+.component-card-equipment .component-card-item:has(.bt-item-bonus) { grid-column: 1 / -1; }
+.component-card-item.is-built-in small:last-child { white-space: nowrap; }

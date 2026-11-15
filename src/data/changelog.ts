@@ -17,6 +17,23 @@ export const CHANGELOG: ChangelogEntry[] = [
     ]
   },
   {
+    id: '2026-11-15-battletech-build-image',
+    date: '2026-11-15',
+    title: 'Build images for BATTLETECH',
+    items: [
+      'Share in the BATTLETECH MechLab can now generate a build image, like the MW5 one: every location with its weapons, equipment, bonuses and armor, the stats and the \'Mech\'s icon, ready to post with the link'
+    ]
+  },
+  {
+    id: '2026-11-15-battletech-location-hardpoints',
+    date: '2026-11-15',
+    title: 'Hardpoint icons on each BATTLETECH location',
+    items: [
+      'Each location of the BATTLETECH MechLab shows its hardpoints used out of the total for each type, with the game\'s own icons, like the refit screen',
+      'Built-in equipment, like the Rifleman\'s Rangefinder Suite, now says what it does'
+    ]
+  },
+  {
     id: '2026-11-15-battletech-gear-bonuses',
     date: '2026-11-15',
     title: 'Equipment bonuses on the BATTLETECH board',

@@ -5,14 +5,15 @@ import { BuildStatus } from '../../components/BuildStatus';
 import { ContextMenu, type MenuEntry } from '../../components/ContextMenu';
 import { FeedbackDialog } from '../../components/FeedbackDialog';
 import { SaveBuildDialog } from '../../components/SaveBuildDialog';
+import { ShareImageDialog } from '../../components/ShareImageDialog';
 import { SupportLink } from '../../components/SupportLink';
 import { Toast } from '../../components/Toast';
 import { UtilityToolbar } from '../../components/UtilityToolbar';
 import { WhatsNew } from '../../components/WhatsNew';
 import { useSavedBuilds } from '../../hooks/useSavedBuilds';
 import { useViewPreferences } from '../../hooks/useViewPreferences';
+import { renderBtBuildImage } from '../../services/battletech/buildImage';
 import { copyText } from '../../services/clipboard';
-import { EMPTY_VALUE } from '../../utils/format';
 import { normalizeBuildName } from '../../utils/savedBuildsCore';
 import { decodeBtBuild, DEFAULT_MECH, encodeBtBuild, getBtBuildUrl, readBtBuildFromLocation } from '../../utils/battletech/buildCode';
 import { replaceItem } from '../../utils/battletech/actions';
@@ -21,6 +22,7 @@ import { getBtBuildIssues } from '../../utils/battletech/issues';
 import { BT_MECHS, getItem, getMechDisplayName } from '../../utils/battletech/mechlabData';
 import { BT_SAVED_BUILDS_KEY } from '../../utils/battletech/savedBuilds';
 import { getBuildSummary } from '../../utils/battletech/stats';
+import { getBtReadouts } from '../../utils/battletech/readouts';
 import { BtAnalysis } from './BtAnalysis';
 import { HardpointUsage } from './HardpointUsage';
 import { BtBoard } from './BtBoard';
@@ -38,13 +40,13 @@ const openFeedbackOnLoad = window.location.hash === '#feedback';
 if (openFeedbackOnLoad) window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
 // La vista (celdas, tablero compacto y lado del panel) se guarda aparte de la de MW5.
 const BT_VIEW_KEY = 'mw-builder:battletech:view';
-const formatNumber = (value: number) => String(Number(value.toFixed(2)));
 
 export function BtMechLabApp() {
   const actions = useBtBuild(linked?.build ?? createStockBuild(DEFAULT_MECH));
   const { build } = actions;
   const { mech } = build;
   const summary = useMemo(() => getBuildSummary(build), [build]);
+  const readouts = useMemo(() => getBtReadouts(build), [build]);
   const issues = useMemo(() => getBtBuildIssues(build), [build]);
   // Ubicación con el panel abierto, como en el MechLab de MW5: se abre al pulsar una tarjeta.
   const [activeZone, setActiveZone] = useState<Zone | null>(null);
@@ -61,6 +63,7 @@ export function BtMechLabApp() {
     linked && !linked.build ? { id: 0, message: 'This build link is not valid' } : null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(openFeedbackOnLoad);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
+  const [isSharingImage, setIsSharingImage] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
   const [menu, setMenu] = useState<{ title: string; x: number; y: number; entries: MenuEntry[] } | null>(null);
@@ -115,6 +118,8 @@ export function BtMechLabApp() {
     if (definition) setMenu({ ...definition, x, y });
   };
   const copyLink = async (url = buildUrl) => showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link');
+  const renderShareImage = useCallback(() => renderBtBuildImage(build), [build]);
+  const closeShareImage = useCallback(() => setIsSharingImage(false), []);
 
   return (
     <div className={['mechlab-shell', 'bt-mechlab', activeZone ? `has-editor is-editor-${view.editorSide}` : ''].filter(Boolean).join(' ')}>
@@ -147,50 +152,15 @@ export function BtMechLabApp() {
         </div>
       </header>
 
-      {/* Las diez cifras del StatsReadout de MW5, en su orden, con las equivalentes de BATTLETECH: andar y
-          correr en lugar de la velocidad, y el calor por turno en lugar de por segundo. */}
+      {/* Las diez cifras del StatsReadout de MW5 (getBtReadouts), las mismas que lleva la imagen para compartir. */}
       <section className="readout-strip" aria-label="Mech statistics">
-        <div className="readout-cell">
-          <span className="readout-label">TONNAGE</span>
-          <strong className={summary.freeTonnage < 0 ? 'readout-warning' : ''}>{summary.tonnage.toFixed(2)} <small>/ {mech.tonnage} t</small></strong>
-          <HardpointUsage mech={mech} loadout={build.loadout} />
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label">ARMOR POINTS</span>
-          <strong>{summary.armorPoints} <small>/ {summary.maxArmorPoints}</small></strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label">ARMOR MASS</span>
-          <strong>{summary.armorTonnage.toFixed(2)} <small>t</small></strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label" title="Walk and sprint distance per turn">WALK / SPRINT</span>
-          <strong>{summary.walk ?? EMPTY_VALUE} <small>/ {summary.sprint ?? EMPTY_VALUE} m</small></strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label">JUMP JETS</span>
-          <strong className={summary.jumpJets > summary.maxJumpJets ? 'readout-warning' : ''}>{summary.jumpJets} <small>/ {summary.maxJumpJets}</small></strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label" title="Damage of an alpha strike with every weapon">ALPHA DAMAGE</span>
-          <strong>{formatNumber(summary.alphaDamage)}</strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label" title="Melee attack damage of the chassis, with its equipment bonuses not included">MELEE DAMAGE</span>
-          <strong>{mech.melee.damage}</strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label" title="Heat of an alpha strike">ALPHA HEAT</span>
-          <strong className={summary.heat.net > 0 ? 'readout-warning' : ''}>{formatNumber(summary.heat.alpha)}</strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label" title="Heat the 'Mech sinks each turn: 30 from the engine plus its heat sinks">HEAT SINKING</span>
-          <strong>{summary.heat.dissipation} <small>per turn</small></strong>
-        </div>
-        <div className="readout-cell">
-          <span className="readout-label">MAX WEAPON RANGE</span>
-          <strong>{summary.maxRange > 0 ? <>{summary.maxRange} <small>m</small></> : EMPTY_VALUE}</strong>
-        </div>
+        {readouts.map(readout => (
+          <div key={readout.label} className="readout-cell">
+            <span className="readout-label" title={readout.title}>{readout.label}</span>
+            <strong className={readout.warn ? 'readout-warning' : ''}>{readout.value}{readout.unit && <> <small>{readout.unit}</small></>}</strong>
+            {readout.label === 'TONNAGE' && <HardpointUsage mech={mech} loadout={build.loadout} />}
+          </div>
+        ))}
       </section>
 
       <BuildStatus
@@ -223,7 +193,10 @@ export function BtMechLabApp() {
           title: 'Share build',
           x: anchor.left,
           y: anchor.bottom + 4,
-          entries: [{ kind: 'action', label: 'Copy build link', onSelect: () => { setMenu(null); copyLink(); } }]
+          entries: [
+            { kind: 'action', label: 'Copy build link', onSelect: () => { setMenu(null); copyLink(); } },
+            { kind: 'action', label: 'Generate build image', onSelect: () => { setMenu(null); setIsSharingImage(true); } }
+          ]
         })}
       />
 
@@ -320,6 +293,17 @@ export function BtMechLabApp() {
         </p>
       </footer>
 
+      {isSharingImage && (
+        <ShareImageDialog
+          render={renderShareImage}
+          fileName={`${mech.variant.replace(/[^a-z0-9-]+/gi, '_')}-build.png`}
+          alt={`${getMechDisplayName(mech)} build`}
+          buildUrl={buildUrl}
+          onCopyLink={() => copyLink()}
+          onMessage={showToast}
+          onClose={closeShareImage}
+        />
+      )}
       {isFeedbackOpen && <FeedbackDialog buildUrl={buildUrl} onMessage={showToast} onClose={closeFeedback} />}
       {isSaveOpen && (
         <SaveBuildDialog
