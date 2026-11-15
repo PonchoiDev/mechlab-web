@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-15-battletech-map-like-the-game',
+    date: '2026-11-15',
+    title: 'The BATTLETECH star map, closer to the game',
+    items: [
+      'Filter systems by difficulty, biome and store, like in the game: the ones that don\'t match fade out, and the filters go in the link',
+      'The system panel sits at the bottom like the game\'s: planet, challenge in skulls, owner, active factions, summary and attributes, plus stores, contracts and battlefields',
+      'Systems take their owner\'s color and territories have the game\'s faint stripes and thin borders'
+    ]
+  },
+  {
     id: '2026-11-14-battletech-map-emblems',
     date: '2026-11-14',
     title: 'Faction emblems on the BATTLETECH star map',

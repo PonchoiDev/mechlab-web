@@ -144,3 +144,5 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
   - **Desarrollo:** el servidor de Vite de BATTLETECH resuelve `/src/` a la carpeta `src/` del repositorio, y cada página carga su script con esa ruta.
   - **Copias de trabajo de `.claude/worktrees/`:** quedan fuera de git, de los tests y del lint.
   - **Logos en el territorio:** el lienzo compartido con MW5 admite logos sobre los territorios (`emblems`), con un 14 % de opacidad; el mapa de MW5 no los usa. Un sistema se une al grupo de su facción si está a 25 años luz o menos de otro: los de la Magistracy of Canopus, en la frontera, están a 20 o 23 unos de otros.
+  - **Como el mapa del juego:** comprobado frente a sus capturas a 1440 × 900 y a 390 × 844, con Yuris y los filtros de dificultad y de tienda. En el móvil, los filtros ocupan la franja de arriba y la ficha va debajo. El botón de información explica los filtros con un texto propio: el del juego no está en sus datos.
+
