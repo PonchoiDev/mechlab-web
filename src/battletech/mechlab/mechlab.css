@@ -138,7 +138,61 @@ body { background: var(--work-bg); }
   .bt-range-profile li { grid-template-columns: 44px minmax(0, 1fr) 80px; }
 }
 
-.bt-item-option-bonus span { color: var(--bt-accent); }
+/* Lo que enseña la pantalla de reequipar del juego: resumen de anclajes bajo el tonelaje, estructura de
+   cada ubicación, máximo de cada lado del blindaje, fabricante y bonificación en naranja, y rol de serie. */
+.bt-hardpoint-usage { margin-top: -4px; }
+
+.bt-card-header-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bt-structure {
+  color: var(--work-muted);
+  font: 600 10px var(--work-mono);
+  white-space: nowrap;
+}
+
+.armor-control .bt-armor-max {
+  color: var(--work-muted);
+  font: 500 10px var(--work-mono);
+}
+
+.bt-item-maker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  color: var(--work-cyan);
+  font: 600 9px var(--work-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bt-item-bonus {
+  color: var(--work-amber);
+  font-family: var(--work-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.hardpoint-chip-tier { white-space: nowrap; }
+
+.component-card-item .bt-item-bonus { font-size: 9px; }
+
+.bt-stock-role {
+  color: var(--work-muted);
+  font: 600 10px var(--work-mono);
+  letter-spacing: 0.06em;
+}
+
+.bt-stock-role strong {
+  margin-left: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--work-line);
+  color: var(--work-text);
+  text-transform: uppercase;
+}
 
 /* El icono del chasis ocupa el hueco de la imagen de Sarna en las tarjetas de la comparación. */
 .compare-card-image.bt-compare-icon {
