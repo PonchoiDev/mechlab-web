@@ -104,38 +104,26 @@ body { background: var(--work-bg); }
 /* Análisis */
 .bt-range-heading { margin-top: 18px; }
 
-.bt-range-profile {
-  display: grid;
-  gap: 4px;
-  margin: 0;
-  padding: 12px 14px 16px;
-  list-style: none;
-}
-
-.bt-range-profile li {
-  display: grid;
-  grid-template-columns: 52px minmax(0, 1fr) 92px;
-  align-items: center;
-  gap: 8px;
-  font: 500 11px var(--work-mono);
-}
-
-.bt-range-distance { color: var(--work-muted); }
-
-.bt-range-bar {
-  display: flex;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.bt-range-fill { background: var(--bt-accent); }
-.bt-range-fill.is-below-min { background: var(--work-amber); opacity: 0.55; }
-
-.bt-range-value small { color: var(--work-amber); }
+/* Daño por alcance como un campo de tiro: anillos cada 90 m, más intensos cuanto más daño llega. */
+.bt-range-radar { display: block; width: min(100%, 720px); margin: 4px auto 0; padding: 0 14px 14px; box-sizing: border-box; }
+.bt-radar-band { fill: rgba(255, 255, 255, 0.025); stroke: rgba(255, 255, 255, 0.12); stroke-width: 1; }
+.bt-radar-fill { fill: var(--bt-accent); stroke: none; }
+.bt-radar-hatch { fill: var(--work-amber); }
+.bt-radar-spoke { stroke: rgba(255, 255, 255, 0.12); stroke-dasharray: 3 5; }
+.bt-radar-base { stroke: rgba(255, 255, 255, 0.3); }
+.bt-radar-value { fill: var(--work-text); font: 600 13px var(--work-mono); paint-order: stroke; stroke: rgba(0, 0, 0, 0.75); stroke-width: 3px; }
+.bt-radar-min { fill: var(--work-amber); font-size: 11px; }
+.bt-radar-distance { fill: var(--work-muted); font: 500 11px var(--work-mono); }
+.bt-radar-distance.is-in-reach { fill: var(--work-text); }
+.bt-radar-mech { fill: var(--work-text); }
 
 @media (max-width: 600px) {
   .bt-mech-picker { min-width: 0; width: 100%; }
-  .bt-range-profile li { grid-template-columns: 44px minmax(0, 1fr) 80px; }
+  /* El SVG se encoge con la pantalla: sus textos crecen para seguir leyéndose. */
+  .bt-range-radar { padding: 0 4px 10px; }
+  .bt-radar-value { font-size: 24px; stroke-width: 5px; }
+  .bt-radar-min { font-size: 20px; }
+  .bt-radar-distance { font-size: 15px; }
 }
 
 /* Lo que enseña la pantalla de reequipar del juego: resumen de anclajes bajo el tonelaje, estructura de
