@@ -13,6 +13,8 @@ export interface BtSystemDetails {
   description: string;
   // Dificultad en modo carrera.
   difficulty: number;
+  // Imagen del planeta en battletech/public/starmap/planets/: la de su clima, como en la ficha del juego.
+  planet: string | null;
   // Etiquetas que el juego enseña, en el orden de sus grupos (clima, tamaño, población…).
   tags: BtTag[];
   blackMarket: boolean;

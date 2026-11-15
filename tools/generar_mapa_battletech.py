@@ -15,6 +15,7 @@ from collections import Counter
 DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_ORIGEN = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "battletech", "starmap")
 RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "battletech", "public", "starmap", "logos")
+RUTA_PLANETAS = os.path.join(DIRECTORIO_SCRIPT, "..", "battletech", "public", "starmap", "planets")
 RUTA_DESTINO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "battletech", "starmap.json")
 
 # El mapa de BATTLETECH no cambia con la fecha: la usa solo el lienzo compartido con MW5.
@@ -58,6 +59,15 @@ def nombre_de_faccion(faccion, id_faccion):
     # alguno en minúscula («local pirate organization»).
     nombre = re.sub(r"^the\s+", "", faccion.get("nombre") or id_faccion)
     return nombre[:1].upper() + nombre[1:]
+
+
+def planeta(etiquetas_sistema):
+    # La ficha del juego enseña la imagen del clima del sistema (sprites/Planets/planet_climate_*.dds).
+    # Tres sistemas tienen dos climas: va el primero, que es el que viene antes en su ficha.
+    for id_etiqueta in etiquetas_sistema:
+        if id_etiqueta.startswith("planet_climate_") and os.path.exists(os.path.join(RUTA_PLANETAS, f"{id_etiqueta}.png")):
+            return f"{id_etiqueta}.png"
+    return None
 
 
 def orden_de_etiqueta(id_etiqueta):
@@ -108,6 +118,7 @@ def main():
         detalles[indice] = {
             "description": ficha["descripcion"].strip(),
             "difficulty": ficha["dificultad"].get(MODO, 0),
+            "planet": planeta(ficha["etiquetas"]),
             "tags": [{"id": e, "name": etiquetas[e]["nombre"], "description": etiquetas[e]["descripcion"]}
                      for e in sorted(visibles, key=orden_de_etiqueta)],
             # Tiene mercado negro si su ficha trae inventario para él (BlackMarketShopItems).
@@ -117,6 +128,8 @@ def main():
             "targets": ficha["objetivos"],
             "biomes": [BIOMAS.get(bioma, bioma) for bioma in ficha["biomas"]],
         }
+        if detalles[indice]["planet"] is None:
+            avisos.append(f"{ficha['nombre']}: sin imagen de planeta")
         avisos += [f"{ficha['nombre']}: bioma {b} sin nombre" for b in ficha["biomas"] if b not in BIOMAS]
 
     datos = {
