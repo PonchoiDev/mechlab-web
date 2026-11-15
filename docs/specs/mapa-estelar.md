@@ -44,6 +44,10 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
 - **RF7.** El mapa se mueve arrastrando y se acerca con la rueda, con dos dedos o con botones. Al acercarse aparecen los nombres de los sistemas.
 - **RF8.** Un buscador encuentra un sistema por su nombre, sin distinguir mayúsculas ni acentos, y centra el mapa en él.
 - **RF9.** La fecha y el sistema elegido se guardan en la URL (`?date=3042-01-21&system=Tukayyid`) para compartir una vista concreta.
+- **RF10.** Como en el mapa de BATTLETECH, el logo de cada facción se ve sobre su territorio, grande y con mucha transparencia, detrás de las estrellas:
+  - va en el centro de su grupo de sistemas más grande en la fecha del mapa, así que se mueve con los territorios;
+  - su tamaño crece con ese grupo, en años luz, hasta un máximo mayor que el de BATTLETECH, porque los Estados Sucesores son mucho más grandes que las facciones del Aurigan Reach;
+  - los grupos de menos de 4 sistemas no llevan logo, y las facciones sin logo tampoco.
 
 ## Requisitos no funcionales
 
@@ -70,6 +74,7 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
 | CA11 | Un clúster | se calcula su polígono | todos sus sistemas quedan dentro |
 | CA12 | La fecha 3042-01-21 | se muestra | se lee `21 JAN 3042` |
 | CA13 | La URL `?date=3042-01-21&system=Tukayyid` | se abre | el mapa empieza en esa fecha con Tukayyid elegido; con una fecha no válida empieza el 01-01-3015 |
+| CA14 | Los logos del territorio | se calculan el 01-01-3015 y el 01-01-3042 | en 3015 los llevan Davion, Steiner, Kurita, Liao y Marik, y en 3042 la Federated Commonwealth y ya no Davion ni Steiner; el sistema más cercano a cada logo es de su facción en esa fecha, y el de Davion en 3015 es más grande que el de cualquier facción de la Periferia |
 
 ## Fuera de alcance
 
