@@ -111,6 +111,15 @@ Las páginas de *BATTLETECH* viven en `/battletech/`, con su propio build (`vite
 - **`utils/battletech/starmap.ts`:** los grupos de etiquetas, la leyenda de facciones y el sistema de la URL, con sus tests.
 - **`battletech/starmap/BtStarmapApp.tsx`:** la cabecera, el buscador, la leyenda y la ficha del sistema. Usa los estilos del mapa de MW5 (`starmap.css`) y añade los suyos.
 
+### Argo de BATTLETECH
+
+Es una página del build de BATTLETECH (`battletech/argo/index.html`, servida en `/battletech/argo/`), con su propio bundle. Usa los estilos de las unidades enemigas (`units.css`) y añade los suyos (`battletech/argo/argo.css`):
+
+- **Datos sin interpretar en la página:** `extraer_argo_battletech.py` copia los JSON del juego tal cual y `generar_argo_battletech.py` deja cada mejora con su id corto (`mechBay2`), su nivel en el árbol, sus requisitos y sus efectos como estadística, valor y si la fija o la suma. Las frases con que el juego explica cada estadística van en `argo.json` como plantillas (`+{value} Tech Points`), así que la página dice lo mismo que el juego sin textos propios.
+- **`utils/battletech/argo.ts`:** el árbol (requisitos y lo que abre cada mejora, directos o no), el plan (marcar añade los requisitos, desmarcar quita lo que depende y las iniciales no se quitan), el coste de llegar a una mejora desde el plan, los totales (coste, mantenimiento base más el de cada mejora), el efecto conjunto (las mejoras que fijan una estadística se sustituyen y las que suman se suman) y el plan en la URL, con solo las mejoras que no son requisito de otra. Tiene sus tests (`argo.test.ts`).
+- **`battletech/argo/ArgoApp.tsx`:** la portada, la pantalla Ship Upgrades del juego (secciones de `groupBySection`, iconos SVG pintados con una máscara según el estado y la ficha en una ventana), el árbol con el resaltado de requisitos, las fichas por categoría y el plan, que en el móvil es una barra fija abajo. Solo pinta y llama a la lógica.
+- **Imágenes:** las ilustraciones de las mejoras y los retratos de la tripulación son PNG estáticos en `battletech/public/argo/`; `argo.json` solo guarda su nombre.
+
 ## Decisiones de diseño
 
 ### La build viaja en el enlace

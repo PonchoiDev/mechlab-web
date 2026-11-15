@@ -1,0 +1,630 @@
+/* La Argo: los estilos de las unidades enemigas (units.css) con el turquesa de las pantallas de la
+   nave, que es también el único color del resaltado del árbol. */
+:root {
+  --units-accent: #35c9c1;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(53, 201, 193, 0.13), transparent 55%),
+    var(--units-bg);
+  background-attachment: fixed;
+}
+
+.units-links a[aria-current='page'] { color: var(--units-accent); }
+
+/* Dos columnas: el contenido y el plan, que acompaña al bajar. */
+.argo-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
+  align-items: start;
+  width: min(1480px, 100%);
+}
+
+/* Portada */
+.argo-hero {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 0 18px;
+  margin-bottom: 18px;
+  border: 1px solid var(--units-line);
+  border-top: 3px solid var(--units-accent);
+  background: var(--units-panel);
+}
+
+.argo-hero > img {
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  object-fit: cover;
+}
+
+.argo-hero > div { padding: 12px 14px 12px 0; }
+
+.argo-hero p {
+  margin: 0 0 8px;
+  color: var(--units-muted);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.argo-hero p i { color: var(--units-text); }
+.argo-hero .argo-modes { margin: 0; font-size: 16px; }
+.argo-hero-stats { grid-column: 1 / -1; grid-template-columns: repeat(5, 1fr); border-bottom: 0; }
+
+/* Pestañas: árbol y lista */
+.argo-tabs {
+  display: flex;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--units-line);
+}
+
+.argo-tabs button {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--units-muted);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.argo-tabs small { margin-left: 4px; font-size: 14px; }
+.argo-tabs button:hover, .argo-tabs button:focus-visible { color: var(--units-text); outline: none; }
+.argo-tabs button[aria-pressed='true'] { border-bottom-color: var(--units-accent); color: var(--units-text); }
+
+.argo-hint {
+  margin: 0 0 10px;
+  color: var(--units-muted);
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+
+/* Árbol: una fila por categoría y una columna por nivel. En pantallas estrechas se desplaza dentro
+   de su caja, con la categoría fija a la izquierda. */
+.argo-tree-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--units-line);
+  background: var(--units-panel);
+  scrollbar-color: var(--units-line) transparent;
+}
+
+.argo-tree {
+  display: grid;
+  gap: 6px;
+  min-width: 860px;
+  padding: 8px;
+}
+
+.argo-tree-row { display: contents; }
+
+.argo-tree-tier,
+.argo-tree-category {
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.argo-tree-tier { padding: 0 2px 2px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+
+.argo-tree-corner,
+.argo-tree-category {
+  position: sticky;
+  left: -8px;
+  z-index: 1;
+  background: rgb(12, 15, 22);
+}
+
+.argo-tree-category {
+  display: flex;
+  align-items: center;
+  padding: 0 8px 0 2px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--units-text);
+  font-size: 15px;
+}
+
+.argo-tree-cell {
+  display: grid;
+  gap: 6px;
+  align-content: center;
+}
+
+.argo-node {
+  display: grid;
+  gap: 1px;
+  width: 100%;
+  min-height: 46px;
+  padding: 5px 8px;
+  border: 1px solid var(--units-line);
+  border-left-width: 4px;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.35);
+  text-align: left;
+  cursor: pointer;
+  transition: opacity 120ms, border-color 120ms, background-color 120ms;
+}
+
+.argo-node-name { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; line-height: 1.1; }
+.argo-node-cost { color: var(--units-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+
+.argo-node.is-starting { border-style: dashed; border-left-style: solid; border-left-color: var(--units-muted); cursor: default; }
+.argo-node.is-owned { border-color: var(--units-accent); background: rgba(53, 201, 193, 0.2); }
+.argo-node.is-owned .argo-node-cost { color: var(--units-text); }
+.argo-node.is-available { border-left-color: var(--units-text); }
+.argo-node.is-locked { color: var(--units-muted); }
+
+.argo-node:hover,
+.argo-node:focus-visible { outline: none; }
+.argo-node.is-focus { outline: 2px solid var(--units-accent); outline-offset: 1px; color: var(--units-text); }
+.argo-node.is-linked { border-color: var(--units-accent); box-shadow: inset 0 0 0 1px var(--units-accent); color: var(--units-text); }
+.argo-node.is-dim { opacity: 0.3; }
+
+/* «Required» o «Unlocks», en pequeño y sin color propio, sobre las mejoras resaltadas. */
+.argo-node { position: relative; }
+
+.argo-node-link {
+  position: absolute;
+  right: 6px;
+  bottom: 5px;
+  color: var(--units-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.argo-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 8px 0 16px;
+  padding: 0;
+  color: var(--units-muted);
+  font-size: 14px;
+  list-style: none;
+}
+
+.argo-legend li { display: flex; align-items: center; gap: 6px; }
+
+.argo-legend i {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--units-line);
+  border-left-width: 4px;
+}
+
+.argo-legend .is-starting { border-style: dashed; border-left-style: solid; border-left-color: var(--units-muted); }
+.argo-legend .is-owned { border-color: var(--units-accent); background: rgba(53, 201, 193, 0.2); }
+.argo-legend .is-available { border-left-color: var(--units-text); }
+.argo-legend .is-locked { opacity: 0.6; }
+
+.argo-focus { max-width: 520px; }
+
+/* Fichas */
+.argo-section { margin: 0 0 28px; }
+
+.argo-section h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.argo-section h2 small { margin-left: 4px; color: var(--units-muted); font-size: 15px; }
+
+.argo-card { scroll-margin-top: 80px; }
+.argo-card.is-starting { border-top-color: var(--units-muted); }
+.argo-card.is-owned { border-top-color: var(--units-accent); }
+.argo-card.is-available { border-top-color: var(--units-text); }
+.argo-card.is-locked { border-top-color: rgba(255, 255, 255, 0.3); }
+.argo-card.is-focused { outline: 2px solid var(--units-accent); outline-offset: 2px; }
+
+.argo-card-header { position: relative; }
+
+.argo-card-header img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 2;
+  object-fit: cover;
+  mask-image: linear-gradient(180deg, #000 55%, transparent);
+}
+
+.argo-card-header div {
+  position: relative;
+  margin-top: -34px;
+  padding: 0 14px 8px;
+}
+
+.argo-card-header h3 {
+  margin: 2px 0 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.argo-card-stats { grid-template-columns: repeat(3, 1fr); }
+.argo-card-stats dd { font-size: 20px; font-variant-numeric: tabular-nums; }
+.argo-card-path dd { color: var(--units-accent); }
+
+.argo-card-body { display: grid; gap: 10px; padding: 10px 14px 12px; }
+
+.argo-effects {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.argo-effects li { padding-left: 14px; text-indent: -14px; }
+.argo-effects li::before { content: '▸ '; color: var(--units-accent); }
+.argo-effects li[title] { cursor: help; }
+
+.argo-no-effects { margin: 0; color: var(--units-muted); font-size: 16px; }
+
+.argo-relation { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }
+
+.argo-relation h4 {
+  margin: 0;
+  min-width: 64px;
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.argo-links { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
+
+.argo-links button {
+  padding: 2px 8px;
+  border: 1px solid var(--units-line);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.argo-links button.is-owned { border-color: var(--units-accent); }
+.argo-links button:hover, .argo-links button:focus-visible { color: #000; background: var(--units-text); outline: none; }
+
+.argo-details {
+  margin: 0;
+  color: var(--units-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.argo-pitch summary { display: flex; align-items: center; gap: 8px; text-transform: none; letter-spacing: 0.02em; font-size: 15px; }
+.argo-pitch summary small { color: var(--units-muted); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.argo-pitch summary img { width: 28px; height: 28px; border: 1px solid var(--units-line); }
+
+.argo-pitch p {
+  margin: 0;
+  padding: 0 14px 12px;
+  color: var(--units-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.argo-card-footer { padding: 0 14px 12px; }
+
+.argo-toggle {
+  width: 100%;
+  height: 36px;
+  border: 1px solid var(--units-line);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.argo-toggle:hover, .argo-toggle:focus-visible { border-color: var(--units-accent); outline: none; }
+.argo-toggle[aria-pressed='true'] { border-color: var(--units-accent); color: #000; background: var(--units-accent); }
+
+.argo-included {
+  display: block;
+  padding: 7px 0;
+  color: var(--units-muted);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Plan */
+.argo-plan {
+  position: sticky;
+  top: 70px;
+  border: 1px solid var(--units-line);
+  border-top: 3px solid var(--units-accent);
+  background: var(--units-panel);
+}
+
+.argo-plan-bar { display: none; }
+.argo-plan-body { padding: 12px 14px 14px; }
+
+.argo-plan h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.argo-plan h3 {
+  margin: 14px 0 6px;
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.argo-plan-totals { display: grid; gap: 6px; margin: 0; }
+.argo-plan-totals div { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+
+.argo-plan-totals dt {
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.argo-plan-totals dt[title] { cursor: help; text-decoration: underline dotted rgba(255, 255, 255, 0.35); text-underline-offset: 3px; }
+.argo-plan-totals dd { margin: 0; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.argo-plan-totals small { color: var(--units-muted); font-size: 14px; font-weight: 600; }
+.argo-plan-split { margin: 4px 0 0; color: var(--units-muted); font-size: 14px; text-align: right; }
+.argo-plan .argo-effects { font-size: 16px; }
+.argo-plan-actions { display: flex; gap: 8px; margin-top: 14px; }
+.argo-plan-actions .utility-button { flex: 1; }
+
+/* Móvil: una columna y el plan como barra fija abajo, que se despliega. */
+@media (max-width: 960px) {
+  .argo-main { grid-template-columns: minmax(0, 1fr); padding-bottom: 72px; }
+
+  .argo-plan {
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    max-height: 75vh;
+    overflow-y: auto;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    background: rgba(4, 6, 12, 0.97);
+    box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  .argo-plan-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 0;
+    background: none;
+    color: var(--units-muted);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .argo-plan-bar b { color: var(--units-text); font-variant-numeric: tabular-nums; }
+  .argo-plan-bar::after { content: '▴'; color: var(--units-accent); }
+  .argo-plan.is-open .argo-plan-bar::after { content: '▾'; }
+  .argo-plan-body { display: none; padding-top: 0; }
+  .argo-plan.is-open .argo-plan-body { display: block; }
+  .argo-plan h2 { display: none; }
+}
+
+@media (max-width: 760px) {
+  .argo-hero { grid-template-columns: 1fr; }
+  .argo-hero > img { height: auto; aspect-ratio: 5 / 2; }
+  .argo-hero > div { padding: 10px 12px 12px; }
+  .argo-hero p { font-size: 16px; }
+  .argo-hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .argo-hero-stats div:nth-child(odd) { border-left: 0; }
+  .argo-hero-stats div:nth-child(n + 3) { border-top: 1px solid rgba(255, 255, 255, 0.1); }
+  .argo-hero-stats div:last-child { grid-column: 1 / -1; }
+  .argo-tabs button { padding: 0 10px; font-size: 16px; }
+  .argo-card-stats dd { font-size: 18px; }
+}
+
+/* La pantalla Ship Upgrades del juego. El naranja es el de sus iconos instalados; el turquesa sigue
+   siendo el resaltado de requisitos y de lo que se abre. */
+.argo { --argo-orange: #f7941d; }
+
+.argo-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background: currentColor;
+  /* Los iconos del juego son siluetas blancas: se pintan con el color del estado. */
+  mask: var(--icon) center / contain no-repeat;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  vertical-align: -0.15em;
+}
+
+.unit-card-kind .argo-icon { margin-right: 6px; font-size: 18px; color: var(--argo-orange); }
+
+.argo-ship {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  grid-template-areas:
+    'systems systems'
+    'blueprint combat'
+    'personnel personnel';
+  gap: 20px 24px;
+  margin-top: 8px;
+}
+
+.argo-blueprint {
+  grid-area: blueprint;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 288px);
+  height: auto;
+  opacity: 0.55;
+  filter: drop-shadow(0 0 18px rgba(53, 201, 193, 0.35));
+}
+
+.argo-ship-section.is-systems-support { grid-area: systems; }
+.argo-ship-section.is-combat-deployment { grid-area: combat; align-self: center; }
+.argo-ship-section.is-personnel-medical { grid-area: personnel; }
+
+.argo-ship-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  font: 600 22px var(--units-font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.argo-ship-section h2 .argo-icon { font-size: 32px; color: var(--units-text); }
+
+.argo-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--units-line);
+  border-left: 0;
+  border-right: 0;
+}
+
+.argo-box {
+  padding: 6px 10px 10px;
+  border: 1px solid var(--units-line);
+  background: rgba(10, 12, 18, 0.85);
+}
+
+.argo-box h3 {
+  margin: 0 0 6px;
+  color: var(--units-muted);
+  font: 500 14px var(--units-font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.argo-tiles { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.argo-tile {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: none;
+  font-size: 34px;
+  cursor: pointer;
+  transition: opacity 120ms ease, border-color 120ms ease;
+}
+
+.argo-tile.is-starting, .argo-tile.is-owned { color: var(--argo-orange); }
+.argo-tile.is-available { color: #b8bec8; }
+.argo-tile.is-locked { color: #4c525c; }
+
+/* Esquinas como las de la mejora elegida en el juego. */
+.argo-tile:hover, .argo-tile:focus-visible, .argo-tile.is-focus {
+  outline: none;
+  border-color: transparent;
+  background:
+    linear-gradient(var(--units-text), var(--units-text)) top left / 10px 2px no-repeat,
+    linear-gradient(var(--units-text), var(--units-text)) top left / 2px 10px no-repeat,
+    linear-gradient(var(--units-text), var(--units-text)) bottom right / 10px 2px no-repeat,
+    linear-gradient(var(--units-text), var(--units-text)) bottom right / 2px 10px no-repeat;
+}
+
+.argo-tile.is-required { border-color: var(--units-accent); }
+.argo-tile.is-unlocks { border: 1px dashed var(--units-accent); }
+.argo-tile.is-dim { opacity: 0.35; }
+
+.argo-ship-legend i { border: 0; }
+.argo-ship-legend .is-starting { background: var(--argo-orange); }
+.argo-ship-legend .is-available { background: #b8bec8; }
+.argo-ship-legend .is-locked { background: #4c525c; opacity: 1; }
+.argo-ship-legend .is-required { border: 1px solid var(--units-accent); }
+.argo-ship-legend .is-unlocks { border: 1px dashed var(--units-accent); }
+
+/* La ficha de una mejora, en una ventana como la del juego. */
+.argo-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.argo-dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(560px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+.argo-dialog .argo-card { margin: 0; }
+
+.argo-dialog-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  margin: 0;
+  padding: 4px 12px;
+  background: var(--units-accent);
+  color: #000;
+  font: 600 16px var(--units-font);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.argo-dialog-status.is-locked { background: #4c525c; color: var(--units-text); }
+.argo-dialog-status.is-available { background: #b8bec8; }
+
+.argo-dialog-close { align-self: flex-end; min-width: 120px; }
+
+@media (max-width: 760px) {
+  .argo-ship { grid-template-columns: 1fr; grid-template-areas: 'systems' 'combat' 'personnel'; }
+  .argo-blueprint { display: none; }
+  .argo-tile { width: 40px; height: 40px; font-size: 30px; }
+  .argo-dialog-backdrop { place-items: end stretch; padding: 0; }
+  .argo-dialog { width: 100%; max-height: 88vh; padding-bottom: 8px; background: var(--units-bg); }
+}

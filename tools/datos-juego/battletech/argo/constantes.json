@@ -1,0 +1,34 @@
+{
+  "Finances": {
+    "ArgoBaseMaintenanceCost": 80000,
+    "MonthLength": 30
+  },
+  "Story": {
+    "StartingArgoUpgrades": [
+      "argoUpgrade_drive0",
+      "argoUpgrade_mechBay1",
+      "argoUpgrade_medBay1",
+      "argoUpgrade_pod1",
+      "argoUpgrade_structure0"
+    ],
+    "StartingMechTechSkill": 4,
+    "StartingMedTechSkill": 6,
+    "StartingMorale": 28,
+    "MaxMorale": 50
+  },
+  "CareerMode": {
+    "StartingArgoUpgrades": [
+      "argoUpgrade_drive0",
+      "argoUpgrade_mechBay1",
+      "argoUpgrade_medBay1",
+      "argoUpgrade_pod1",
+      "argoUpgrade_structure0"
+    ],
+    "ArgoUpgradeCostMultiplier": 1,
+    "ArgoMaintenanceMultiplier": 1
+  },
+  "ReducedArgoUpgradeCosts": {
+    "ArgoUpgradeCostMultiplier": 0.5,
+    "ArgoMaintenanceMultiplier": 0.5
+  }
+}

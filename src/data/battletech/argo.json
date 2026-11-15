@@ -1,0 +1,1089 @@
+{
+  "baseUpkeep": 80000,
+  "monthLength": 30,
+  "careerCostMultiplier": 1,
+  "careerUpkeepMultiplier": 1,
+  "reducedCostMultiplier": 0.5,
+  "startingTechPoints": 4,
+  "startingMedPoints": 6,
+  "startingMorale": 28,
+  "maxMorale": 50,
+  "locations": [
+    {
+      "id": "ENGINEERING",
+      "name": "Engineering"
+    },
+    {
+      "id": "MECH_BAY",
+      "name": "Mech Bay"
+    },
+    {
+      "id": "SHIP",
+      "name": "Ship"
+    }
+  ],
+  "sections": [
+    {
+      "id": "SYSTEMS_SUPPORT",
+      "name": "Systems & Support",
+      "icon": "typeSystemSupport",
+      "categories": [
+        "POWER_SYSTEM",
+        "STRUCTURE",
+        "DRIVE_SYSTEM",
+        "HABITAT_POD"
+      ]
+    },
+    {
+      "id": "COMBAT_DEPLOYMENT",
+      "name": "Combat & Deployment",
+      "icon": "typeCombat",
+      "categories": [
+        "MECH_BAY",
+        "REPAIR_REFIT",
+        "TRAINING"
+      ]
+    },
+    {
+      "id": "PERSONNEL_MEDICAL",
+      "name": "Personnel & Medical",
+      "icon": "typePersonnel",
+      "categories": [
+        "MED_BAY",
+        "RECREATION"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "POWER_SYSTEM",
+      "name": "Power System",
+      "label": "Power System"
+    },
+    {
+      "id": "STRUCTURE",
+      "name": "Structure",
+      "label": "Structure"
+    },
+    {
+      "id": "DRIVE_SYSTEM",
+      "name": "Drive System",
+      "label": "Drive System"
+    },
+    {
+      "id": "HABITAT_POD",
+      "name": "Habitat Pod",
+      "label": "Habitat Pods"
+    },
+    {
+      "id": "MECH_BAY",
+      "name": "Mech Bay",
+      "label": "Mech Bays"
+    },
+    {
+      "id": "REPAIR_REFIT",
+      "name": "Repair Refit",
+      "label": "Repair & Refit"
+    },
+    {
+      "id": "TRAINING",
+      "name": "Training",
+      "label": "Training Modules"
+    },
+    {
+      "id": "MED_BAY",
+      "name": "Med Bay",
+      "label": "Med Bays"
+    },
+    {
+      "id": "RECREATION",
+      "name": "Recreation",
+      "label": "Recreation"
+    }
+  ],
+  "crew": [
+    {
+      "id": "Darius",
+      "name": "Darius Oliveira",
+      "rank": "Executive Officer"
+    },
+    {
+      "id": "Farah",
+      "name": "Dr. Farah Murad",
+      "rank": "Engineer"
+    },
+    {
+      "id": "Sumire",
+      "name": "Sumire Meyer",
+      "rank": "Navigator"
+    },
+    {
+      "id": "Yang",
+      "name": "Yang Virtanen",
+      "rank": "Chief Mech Tech"
+    }
+  ],
+  "stats": [
+    {
+      "id": "DriveTravelMultiplier_Display",
+      "name": "Drive Travel Mult",
+      "details": "Display value for DriveTravelMultiplier",
+      "set": "Travel time to and from Jump Points reduced by {value}%",
+      "positive": null,
+      "negative": null
+    },
+    {
+      "id": "BarracksPods_Display",
+      "name": "Barracks Pods (Rooms)",
+      "details": "Display value for BarracksPods",
+      "set": "The Barracks support up to {value} MechWarriors",
+      "positive": null,
+      "negative": null
+    },
+    {
+      "id": "MechBayPods_Display",
+      "name": "MeyBay Pods (Rows)",
+      "details": "Display value for MechBayPods",
+      "set": "The MechBay supports up to {value} BattleMechs ready for battle",
+      "positive": null,
+      "negative": null
+    },
+    {
+      "id": "MechTechSkill",
+      "name": "Tech Points",
+      "details": "Tech Points are generated each day and spent to repair or customize BattleMechs. Tech Points only apply to one 'Mech task at a time, so additional tasks are queued to be worked on next.",
+      "set": "Tech Points are set to {value}",
+      "positive": "+{value} Tech Points",
+      "negative": "-{value} Tech Points"
+    },
+    {
+      "id": "ExperiencePerDay",
+      "name": "Experience",
+      "details": "Experience the MechWarrior may spent to train skills.",
+      "set": "MechWarriors gain {value} Experience each day",
+      "positive": null,
+      "negative": null
+    },
+    {
+      "id": "ExperiencePerDayCap",
+      "name": "Experience",
+      "details": "Experience the MechWarrior may spent to train skills.",
+      "set": "MechWarriors with less than {value} total Experience can benefit from this training",
+      "positive": null,
+      "negative": null
+    },
+    {
+      "id": "MedTechSkill",
+      "name": "Medical Points",
+      "details": "Medical Points are generated each day and spent to heal injured MechWarriors. Medical Points apply to all injured MechWarriors simultaneously.",
+      "set": "Medical Points are set to {value}",
+      "positive": "+{value} Medical Points",
+      "negative": "-{value} Medical Points"
+    },
+    {
+      "id": "IncapacitatedDeathChance",
+      "name": "Death Chance - Incapacitation",
+      "details": "Probability of death from incapacitating damage",
+      "set": null,
+      "positive": null,
+      "negative": "Chance of death from Incapacitating damage is {percent} less likely"
+    },
+    {
+      "id": "LethalDeathChance",
+      "name": "Death Chance - Lethal Wounds",
+      "details": "Probability of death from lethal damage",
+      "set": null,
+      "positive": null,
+      "negative": "Chance of death from Lethal damage is {percent} less likely"
+    },
+    {
+      "id": "Morale",
+      "name": "Morale",
+      "details": "The overall Morale of your crew and MechWarriors, out of a maximum possible 50 points. Morale can be raised by more lavish spending on salaries and luxuries, as well as by constructing recreational upgrades in the DropShip. Be careful: if your Morale is too low, you may encounter negative events.\r \n \r \nHigher Morale also generates more <color=#F79B26>Resolve</color> per turn in combat, which you can use trigger certain special abilities.",
+      "set": null,
+      "positive": "+{value} Morale",
+      "negative": "-{value} Morale"
+    }
+  ],
+  "upgrades": [
+    {
+      "id": "power1",
+      "name": "Repaired Power Conduits",
+      "details": "The Argo's power system is a wreck, and getting a minimal level of power to the ship's systems without constant tripped breakers and brownouts is a minor miracle.",
+      "category": "POWER_SYSTEM",
+      "location": "ENGINEERING",
+      "tier": 0,
+      "cost": 90000,
+      "upkeep": 350,
+      "requires": [],
+      "starting": false,
+      "image": "EngineeringInnards",
+      "icon": "power0",
+      "crew": "Farah",
+      "pitch": "I'm terrified of the current state of the power system, Commander. Repairing it should be a top priority. We cannot bring most of the Argo's other systems online until the power is stable. Also… I'd avoid touching any exposed deck plating. Just in case.",
+      "effects": []
+    },
+    {
+      "id": "power2",
+      "name": "Improved Power Conduits",
+      "details": "Running power through patched-together conduits isn’t reliable or safe. Upgrading all the conduits throughout the Argo is a monumental task, but necessary for anything that places a significant load on the system.",
+      "category": "POWER_SYSTEM",
+      "location": "ENGINEERING",
+      "tier": 1,
+      "cost": 360000,
+      "upkeep": 1500,
+      "requires": [
+        "power1"
+      ],
+      "starting": false,
+      "image": "EngineeringInnards",
+      "icon": "power1",
+      "crew": "Farah",
+      "pitch": "Notably, upgrading the power system will allow us to provide power to all three habitation pods, which means more room and more Argo systems operational.",
+      "effects": []
+    },
+    {
+      "id": "power3",
+      "name": "High-Capacity Power Conduits",
+      "details": "The Argo was intended to operate at a much higher total power throughput than the jury-rigged conduits can manage. Replacing all of them with high-capacity cabling unlocks the ship’s full potential.",
+      "category": "POWER_SYSTEM",
+      "location": "ENGINEERING",
+      "tier": 2,
+      "cost": 720000,
+      "upkeep": 2700,
+      "requires": [
+        "power2"
+      ],
+      "starting": false,
+      "image": "EngineeringInnards",
+      "icon": "power2",
+      "crew": "Farah",
+      "pitch": "This is a remarkable ship. I continue to be astonished at how advanced portions of the Argo's infrastructure are. We're not even running the drive at half the power it can handle. More power means more thrust, Commander.",
+      "effects": []
+    },
+    {
+      "id": "structure0",
+      "name": "Structural Jury-Rigging",
+      "details": "The thrust from the main drive should have severed the spine of the ship when it pulled away from the crash site. Dr. Murad theorizes that the whole thing is being held together by the external hull plating.",
+      "category": "STRUCTURE",
+      "location": "SHIP",
+      "tier": 0,
+      "cost": 0,
+      "upkeep": 0,
+      "requires": [],
+      "starting": true,
+      "image": "ArgoStructure0",
+      "icon": "structure0",
+      "crew": "Farah",
+      "pitch": null,
+      "effects": []
+    },
+    {
+      "id": "structure1",
+      "name": "Structural Repair",
+      "details": "Crashing a ship into a moon causes all sorts of damage, both visible and hidden. Major support structures have been twisted and weakened, and need to be repaired before any ship system puts a serious load on them.",
+      "category": "STRUCTURE",
+      "location": "SHIP",
+      "tier": 1,
+      "cost": 90000,
+      "upkeep": 350,
+      "requires": [
+        "structure0"
+      ],
+      "starting": false,
+      "image": "ArgoStructure1",
+      "icon": "structure1",
+      "crew": "Farah",
+      "pitch": "It's unclear which is more terrifying, Commander: the Argo's power system or its internal structure. We can do very little to improve on the ship while it's still in danger of buckling under even the modest forces exerted by the grav deck and the drive.",
+      "effects": []
+    },
+    {
+      "id": "structure2",
+      "name": "Structural Reinforcement",
+      "details": "The internal supports for the Argo's spine are functional, but without significant rebuilding and reinforcement, the demands of three fully operational hab pods will eventually torque it apart into scrap.",
+      "category": "STRUCTURE",
+      "location": "SHIP",
+      "tier": 2,
+      "cost": 360000,
+      "upkeep": 1400,
+      "requires": [
+        "structure1"
+      ],
+      "starting": false,
+      "image": "ArgoStructure2",
+      "icon": "structure2",
+      "crew": "Farah",
+      "pitch": "Commander, we're still well under the specifications for the ship's main spine. If you want to put any more mass onto Gamma Pod, or increase the drive output, we'll need to spend more time bringing the secondary supports up to full strength.",
+      "effects": []
+    },
+    {
+      "id": "drive0",
+      "name": "Drive Jury Rigging",
+      "details": "The Argo's drive is barely functional, with just enough power to maintain 1 g of thrust and keep the lights on (mostly). Frankly, it's a minor miracle that Dr. Murad was able to get it working at all.",
+      "category": "DRIVE_SYSTEM",
+      "location": "ENGINEERING",
+      "tier": 0,
+      "cost": 0,
+      "upkeep": 0,
+      "requires": [],
+      "starting": true,
+      "image": "ArgoDrive0",
+      "icon": "drive0",
+      "crew": "Farah",
+      "pitch": null,
+      "effects": []
+    },
+    {
+      "id": "drive1",
+      "name": "Drive Repairs",
+      "details": "The Argo's drive was enough to get it off the surface of a low-gravity moon, but much of the supporting infrastructure was damaged in the escape, and running the drive at full power requires extensive repairs. Once the repairs are complete, the drive can generate 1.5 g of thrust.",
+      "category": "DRIVE_SYSTEM",
+      "location": "ENGINEERING",
+      "tier": 2,
+      "cost": 360000,
+      "upkeep": 1400,
+      "requires": [
+        "drive0",
+        "power2",
+        "structure1"
+      ],
+      "starting": false,
+      "image": "ArgoDrive1",
+      "icon": "drive1",
+      "crew": "Farah",
+      "pitch": "The Argo's drive is only operating at a fraction of its potential, Commander. With some time and materials, I believe I can boost the output of the secondary fusion reactors - to put it simply, I'll make the Argo go faster.",
+      "effects": [
+        {
+          "stat": "DriveTravelMultiplier_Display",
+          "value": 20,
+          "set": true
+        }
+      ]
+    },
+    {
+      "id": "drive2",
+      "name": "Drive Upgrades",
+      "details": "The Argo can, in a pinch, generate quite a bit more thrust than it first seemed. By repairing a number of drive subsystems meant to increase thrust efficiency, it’s possible to get the Argo up to an uncomfortable 2 g of sustained thrust.",
+      "category": "DRIVE_SYSTEM",
+      "location": "ENGINEERING",
+      "tier": 3,
+      "cost": 720000,
+      "upkeep": 2700,
+      "requires": [
+        "drive1",
+        "power3",
+        "structure2"
+      ],
+      "starting": false,
+      "image": "ArgoDrive2",
+      "icon": "drive2",
+      "crew": "Farah",
+      "pitch": "The Argo's drive is far more powerful than I suspected. We may not ever bring it completely back online, but for now I can increase our thrust. While 2 g is not comfortable and the crew will complain, we'll cut our travel times significantly.",
+      "effects": [
+        {
+          "stat": "DriveTravelMultiplier_Display",
+          "value": 30,
+          "set": true
+        }
+      ]
+    },
+    {
+      "id": "pod1",
+      "name": "Alpha Pod",
+      "details": "Each of the three pods is meant to be a mostly self-sufficient habitation space. Alpha Pod, as its interior labeling designates it, is the only one of the three to have retained its pressure seal, making its interior (mostly) habitable.",
+      "category": "HABITAT_POD",
+      "location": "SHIP",
+      "tier": 0,
+      "cost": 0,
+      "upkeep": 0,
+      "requires": [],
+      "starting": true,
+      "image": "ArgoPod",
+      "icon": "podAlpha",
+      "crew": "Farah",
+      "pitch": null,
+      "effects": [
+        {
+          "stat": "BarracksPods_Display",
+          "value": 8,
+          "set": true
+        }
+      ]
+    },
+    {
+      "id": "pod2",
+      "name": "Beta Pod",
+      "details": "Beta Pod, once repaired, includes what was clearly once a hydroponics facility near the spine of the Argo, and a low-g gymnasium just above that. Neither survived exposure to hard vacuum and stellar radiation, but they're tantalizing indications of the luxuries the Argo once included.",
+      "category": "HABITAT_POD",
+      "location": "SHIP",
+      "tier": 2,
+      "cost": 900000,
+      "upkeep": 3500,
+      "requires": [
+        "pod1",
+        "power1",
+        "structure1"
+      ],
+      "starting": false,
+      "image": "ArgoPod",
+      "icon": "podBeta",
+      "crew": "Darius",
+      "pitch": "The crew has seen the Beta Pod rec facilities on the ship's floor plans, Commander, and it's all they can talk about. More practically, we'd be able to bring the Beta Pod medical facilities back online.",
+      "effects": [
+        {
+          "stat": "BarracksPods_Display",
+          "value": 16,
+          "set": true
+        }
+      ]
+    },
+    {
+      "id": "pod3",
+      "name": "Gamma Pod",
+      "details": "Gamma Pod is very much a blank slate, as only its internal support structures survived intact. Rebuilding the habitation decks of the pod still leaves plenty of space for other facilities.",
+      "category": "HABITAT_POD",
+      "location": "SHIP",
+      "tier": 3,
+      "cost": 2250000,
+      "upkeep": 8500,
+      "requires": [
+        "pod2",
+        "power2",
+        "structure2"
+      ],
+      "starting": false,
+      "image": "ArgoPod",
+      "icon": "podGamma",
+      "crew": "Darius",
+      "pitch": "Commander, there are already a half dozen requests for new facilities for Gamma Pod, ranging from a swimming pool to a DropShip-sized bouncy castle. On a more practical note, we could also begin using the Gamma Pod medical facilities.",
+      "effects": [
+        {
+          "stat": "BarracksPods_Display",
+          "value": 24,
+          "set": true
+        }
+      ]
+    },
+    {
+      "id": "mechBay1",
+      "name": "Mech Bay 1",
+      "details": "The Argo's Mech Bay is vast, spacious, and meant to be entirely managed by complex automation. Currently, six of the 18 total 'Mech cubicles are powered and in working order, and almost none of the automation.",
+      "category": "MECH_BAY",
+      "location": "MECH_BAY",
+      "tier": 0,
+      "cost": 0,
+      "upkeep": 0,
+      "requires": [],
+      "starting": true,
+      "image": "MechBay",
+      "icon": "mechbay1",
+      "crew": "Farah",
+      "pitch": null,
+      "effects": [
+        {
+          "stat": "MechBayPods_Display",
+          "value": 6,
+          "set": true
+        },
+        {
+          "stat": "MechTechSkill",
+          "value": 2,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "mechBay2",
+      "name": "Mech Bay 2",
+      "details": "The repaired power conduits allow six more 'Mech cubicles to be powered up and made available. This also brings more of the Mech Bay's automated systems online, making Yang's job easier.",
+      "category": "MECH_BAY",
+      "location": "MECH_BAY",
+      "tier": 1,
+      "cost": 900000,
+      "upkeep": 25000,
+      "requires": [
+        "mechBay1",
+        "power1"
+      ],
+      "starting": false,
+      "image": "MechBay",
+      "icon": "mechbay2",
+      "crew": "Yang",
+      "pitch": "We've got a lot of extra space in here, Commander. It's just full of junk and pirate garbage, and half of the walls are missing. I could pull my engineers off 'Mech duties and we could probably get another six 'Mech cubicles online. Just say the word.",
+      "effects": [
+        {
+          "stat": "MechBayPods_Display",
+          "value": 12,
+          "set": true
+        },
+        {
+          "stat": "MechTechSkill",
+          "value": 3,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "mechBay3",
+      "name": "Mech Bay 3",
+      "details": "With the Argo's power systems fully online, and enough reinforcement to keep the active Bays from damaging the ship's spine, the final six 'Mech cubicles can be powered up and put to work.",
+      "category": "MECH_BAY",
+      "location": "MECH_BAY",
+      "tier": 2,
+      "cost": 2250000,
+      "upkeep": 50000,
+      "requires": [
+        "mechBay2",
+        "power2",
+        "structure1"
+      ],
+      "starting": false,
+      "image": "MechBay",
+      "icon": "mechbay3",
+      "crew": "Yang",
+      "pitch": "The power's back on to the rest of the Mech Bay, and we can start repairs on the last six cubicles. Even if you don't want to fill them with 'Mechs, believe me, I can put the extra space to good use. It's gonna take a shitload of work, though.",
+      "effects": [
+        {
+          "stat": "MechBayPods_Display",
+          "value": 18,
+          "set": true
+        },
+        {
+          "stat": "MechTechSkill",
+          "value": 4,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "mechBay_automation1",
+      "name": "Automation",
+      "details": "Many of the Argo's Mech Bay systems were only meant to be used with sophisticated Star League–era automation. Bringing that automation even partially back online is a substantial force multiplier to Yang's skills.",
+      "category": "REPAIR_REFIT",
+      "location": "MECH_BAY",
+      "tier": 1,
+      "cost": 450000,
+      "upkeep": 8500,
+      "requires": [
+        "power1"
+      ],
+      "starting": false,
+      "image": "YangWorking",
+      "icon": "automation",
+      "crew": "Yang",
+      "pitch": "This stuff can't do the work for me, but it comes awfully close. You want to speed things up around here, give me the resources to get these machines back online.",
+      "effects": [
+        {
+          "stat": "MechTechSkill",
+          "value": 2,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "mechBay_automation2",
+      "name": "Improved Automation",
+      "details": "Repairs to the Mech Bay have unearthed a much more extensive system of 'Mech maintenance automation than Yang previously suspected. Once it's back online, many common tasks will become trivial.",
+      "category": "REPAIR_REFIT",
+      "location": "MECH_BAY",
+      "tier": 2,
+      "cost": 130000,
+      "upkeep": 15000,
+      "requires": [
+        "mechBay_automation1",
+        "mechBay2",
+        "structure1"
+      ],
+      "starting": false,
+      "image": "YangWorking",
+      "icon": "automationUpgrade",
+      "crew": "Yang",
+      "pitch": "There's machines hidden in the walls, under the floor panels—I don't even know what half of it does. But I turned one on and it built a 'Mech leg before I was able to shut it off. We make these work, we'll be moving 'Mechs out of repair in record time.",
+      "effects": [
+        {
+          "stat": "MechTechSkill",
+          "value": 3,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "mechBay_machineShop",
+      "name": "Machine Shop",
+      "details": "Maintaining 'Mechs in the Succession War era is complicated by the relative rarity of precision-manufactured parts. The Argo's machine shop, once repaired and brought online, can help address this lack.",
+      "category": "REPAIR_REFIT",
+      "location": "MECH_BAY",
+      "tier": 3,
+      "cost": 450000,
+      "upkeep": 8500,
+      "requires": [
+        "mechBay3"
+      ],
+      "starting": false,
+      "image": "YangWorking",
+      "icon": "machineshop",
+      "crew": "Yang",
+      "pitch": "Okay, what we've got here is a fully outfitted machine shop, and a whole lot of data on 'Mech specifications. Get this back online, and we'll be machining our own parts, probably better than the ones coming out of the Taurian factories. Faster, too.",
+      "effects": [
+        {
+          "stat": "MechTechSkill",
+          "value": 2,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "mechBay_refitHarness",
+      "name": "Refit Harness",
+      "details": "'Mechs were not really meant to bear their own weight while being refitted with new equipment. The Argo's Mech Bay includes harnesses meant to hoist the 'Mech up for easier access while refitting.",
+      "category": "REPAIR_REFIT",
+      "location": "MECH_BAY",
+      "tier": 1,
+      "cost": 270000,
+      "upkeep": 7700,
+      "requires": [
+        "mechBay1",
+        "power1"
+      ],
+      "starting": false,
+      "image": "YangWorking",
+      "icon": "refitharness",
+      "crew": "Yang",
+      "pitch": "You always see cables and stuff hanging down from the ceiling and think, 'What the hell are those for?' Right? Lifting and turning entire 'Mechs. We get them back online, and we can lift a whole 'Mech. I mean, honestly? I just want to see that happen.",
+      "effects": [
+        {
+          "stat": "MechTechSkill",
+          "value": 2,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "mechBay_scaffolding",
+      "name": "Repair Scaffolding",
+      "details": "The Argo's 'Mech cubicles used to have a complex system of movable walkways and scaffolds for accessing any part of a damaged 'Mech. Those walkways, once brought online, make the job of repairing 'Mechs much simpler.",
+      "category": "REPAIR_REFIT",
+      "location": "MECH_BAY",
+      "tier": 1,
+      "cost": 270000,
+      "upkeep": 7700,
+      "requires": [
+        "mechBay1"
+      ],
+      "starting": false,
+      "image": "YangWorking",
+      "icon": "repairscaffold",
+      "crew": "Yang",
+      "pitch": "The platforms around here are meant to move automatically when they detect the size of the 'Mech we're working on, adjusting to be at just the right height. They're all off-line, and we've been working around that, but… let's get them fixed and speed this up.",
+      "effects": [
+        {
+          "stat": "MechTechSkill",
+          "value": 2,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "trainingModule1",
+      "name": "Training Module 1",
+      "details": "This set of networked Battle Pods allow MechWarriors to compete against one another in simulated 'Mech battles, generating experience for participating MechWarriors. Each MechWarrior with less than 10,000 total experience will gain 20 experience points per day.",
+      "category": "TRAINING",
+      "location": "SHIP",
+      "tier": 1,
+      "cost": 90000,
+      "upkeep": 400,
+      "requires": [
+        "power1"
+      ],
+      "starting": false,
+      "image": "TrainingModules",
+      "icon": "training1",
+      "crew": "Sumire",
+      "pitch": "Commander, have you seen these simulator pods? They're fantastic! I take back everything bad I've ever said about the Argo. We gotta get these things running ASAP.",
+      "effects": [
+        {
+          "stat": "ExperiencePerDay",
+          "value": 20,
+          "set": true
+        },
+        {
+          "stat": "ExperiencePerDayCap",
+          "value": 10000,
+          "set": true
+        }
+      ]
+    },
+    {
+      "id": "trainingModule2",
+      "name": "Training Module 2",
+      "details": "Adding more Battle Pods allows for full-lance training simulations, as well as raucous ship-wide tournaments. This increases the amount of experience gained by MechWarriors aboard the ship. Each MechWarrior with less than 20,000 total experience will gain 30 experience points per day.",
+      "category": "TRAINING",
+      "location": "SHIP",
+      "tier": 3,
+      "cost": 270000,
+      "upkeep": 1000,
+      "requires": [
+        "trainingModule1",
+        "pod2"
+      ],
+      "starting": false,
+      "image": "TrainingModules",
+      "icon": "training2",
+      "crew": "Sumire",
+      "pitch": "Farah just told me that the simulators in Beta Pod can network with the others. You know what that means? It means ship-wide tournaments. It means MechWarriors getting stomped in simulated battle by yours truly. We need these simulators, Commander.",
+      "effects": [
+        {
+          "stat": "ExperiencePerDay",
+          "value": 30,
+          "set": true
+        },
+        {
+          "stat": "ExperiencePerDayCap",
+          "value": 20000,
+          "set": true
+        }
+      ]
+    },
+    {
+      "id": "trainingModule3",
+      "name": "Training Module 3",
+      "details": "With a training space completely packed with Battle Pods, MechWarriors can engage in lance-versus-lance competition, and that inevitably means teams, logos, and pennants. Large-scale competition means even more experience for participating MechWarriors. Each MechWarrior with less than 30,000 total experience will gain 50 experience points per day.",
+      "category": "TRAINING",
+      "location": "SHIP",
+      "tier": 4,
+      "cost": 450000,
+      "upkeep": 1700,
+      "requires": [
+        "trainingModule2",
+        "pod3"
+      ],
+      "starting": false,
+      "image": "TrainingModules",
+      "icon": "training3",
+      "crew": "Sumire",
+      "pitch": "I've got a design for my simulator team's insignia ready to go, Commander. We're gonna get shirts made—and maybe even warm-up jackets.",
+      "effects": [
+        {
+          "stat": "ExperiencePerDay",
+          "value": 50,
+          "set": true
+        },
+        {
+          "stat": "ExperiencePerDayCap",
+          "value": 30000,
+          "set": true
+        }
+      ]
+    },
+    {
+      "id": "medBay1",
+      "name": "Med Bay 1",
+      "details": "This field hospital has a small number of beds, surgical equipment, and medical supplies. The cost includes the salary of a skilled MedTech to treat your injured MechWarriors.",
+      "category": "MED_BAY",
+      "location": "SHIP",
+      "tier": 0,
+      "cost": 0,
+      "upkeep": 0,
+      "requires": [],
+      "starting": true,
+      "image": "MedBay",
+      "icon": "medbay1",
+      "crew": "Farah",
+      "pitch": null,
+      "effects": [
+        {
+          "stat": "MedTechSkill",
+          "value": 1,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "medBay2",
+      "name": "Med Bay 2",
+      "details": "This expanded field hospital allows for two MedTechs to work side by side, meaning more capacity to treat patients. The cost includes the salary of an additional skilled MedTech to treat your injured MechWarriors.",
+      "category": "MED_BAY",
+      "location": "SHIP",
+      "tier": 3,
+      "cost": 900000,
+      "upkeep": 13500,
+      "requires": [
+        "medBay1",
+        "pod2"
+      ],
+      "starting": false,
+      "image": "MedBay",
+      "icon": "medbay2",
+      "crew": "Darius",
+      "pitch": "Commander, the existing Med Bay is able to keep up, but just barely. Nobody's dying for lack of treatment, but our medics are overworked. Beta Pod has an entire additional medical bay, unused and waiting to be renovated and powered back up.",
+      "effects": [
+        {
+          "stat": "MedTechSkill",
+          "value": 1,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "medBay3",
+      "name": "Med Bay 3",
+      "details": "The fully upgraded field hospital has enough bed space, diagnostic equipment, and surgeries to allow fully half the company to be treated at once. The cost includes the salary of an additional skilled MedTech to treat your injured MechWarriors.",
+      "category": "MED_BAY",
+      "location": "SHIP",
+      "tier": 4,
+      "cost": 2250000,
+      "upkeep": 18500,
+      "requires": [
+        "medBay2",
+        "pod3"
+      ],
+      "starting": false,
+      "image": "MedBay",
+      "icon": "medbay3",
+      "crew": "Darius",
+      "pitch": "We're taking enough injuries to keep our current medical staff fully tasked, Commander, and that makes me worry about our future capacity. These battles aren't getting any easier. We have the space for another Med Bay, and I'm sure we'd find it useful.",
+      "effects": [
+        {
+          "stat": "MedTechSkill",
+          "value": 2,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "medBay_hospital",
+      "name": "Hospital Bay",
+      "details": "The original Argo specifications had room and infrastructure for actual hospital facilities, rather than just simple Med Bays. With a full hospital's worth of equipment and connections to the ship's library and databases, the MedTechs are able to perform near-miracles of healing. All Med Bays will be converted into Hospital Bays.",
+      "category": "MED_BAY",
+      "location": "SHIP",
+      "tier": 5,
+      "cost": 2700000,
+      "upkeep": 6700,
+      "requires": [
+        "medBay3",
+        "power3"
+      ],
+      "starting": false,
+      "image": "MedBay",
+      "icon": "medbay4",
+      "crew": "Darius",
+      "pitch": "Commander, the medics are talking about all the advanced facilities, and we now have sufficient power to operate it all. We'd need to do a major overhaul of all our Med Bays, but we'd substantially increase our ability to treat severe injuries.",
+      "effects": [
+        {
+          "stat": "MedTechSkill",
+          "value": 2,
+          "set": false
+        },
+        {
+          "stat": "IncapacitatedDeathChance",
+          "value": -0.05,
+          "set": false
+        },
+        {
+          "stat": "LethalDeathChance",
+          "value": -0.05,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "rec_arcade",
+      "name": "Arcade",
+      "details": "That empty storage space in Gamma Pod, with some additional power conduits, could easily support a handful of 2-D and 3-D game systems. It's no replacement for the training units, but it's more fun.",
+      "category": "RECREATION",
+      "location": "SHIP",
+      "tier": 4,
+      "cost": 450000,
+      "upkeep": 1700,
+      "requires": [
+        "pod3"
+      ],
+      "starting": false,
+      "image": "Arcade",
+      "icon": "arcade",
+      "crew": "Sumire",
+      "pitch": "There's this game, Commander. No, hear me out, I'm serious! It's called DropShip Commander, and you pilot a Leopard in a bunch of battle scenarios. Now, I'm not saying this game will make me a better pilot. But I'm not saying it won't, either.",
+      "effects": [
+        {
+          "stat": "Morale",
+          "value": 2,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "rec_gym",
+      "name": "Gymnasium",
+      "details": "MechWarriors have to maintain their physical condition, and doing so in their own quarters is claustrophobic and distracting. Luckily, the Argo has a full gymnasium, needing only repair and power.",
+      "category": "RECREATION",
+      "location": "SHIP",
+      "tier": 3,
+      "cost": 225000,
+      "upkeep": 850,
+      "requires": [
+        "pod2"
+      ],
+      "starting": false,
+      "image": "Gym",
+      "icon": "gym",
+      "crew": "Darius",
+      "pitch": "I suspect a solid majority of the complaints I've received from the MechWarriors are simple idleness. With fitness facilities, I could solve that idleness for them, Commander. If you take my meaning.",
+      "effects": [
+        {
+          "stat": "Morale",
+          "value": 1,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "rec_hydroponics",
+      "name": "Hydroponic Garden",
+      "details": "Near the spine, the spin of the pods isn't sufficient to generate any real apparent gravity. This makes those areas bad for living in, but excellent for growing hydroponic crops. They freshen the air and add variety to mealtimes.",
+      "category": "RECREATION",
+      "location": "SHIP",
+      "tier": 3,
+      "cost": 450000,
+      "upkeep": 1700,
+      "requires": [
+        "pod2"
+      ],
+      "starting": false,
+      "image": "Hydroponics",
+      "icon": "hydroponics",
+      "crew": "Farah",
+      "pitch": "I've looked over Gamma Pod, Commander, and most of the original plumbing is intact. With a small amount of effort, we could repair the hydroponics and have fresh herbs and vegetables instead of reconstituted paste in the galley. Just a thought.",
+      "effects": [
+        {
+          "stat": "Morale",
+          "value": 1,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "rec_library1",
+      "name": "Library",
+      "details": "A library is more than just a database and a stack of e-readers. It requires a dedicated space for quiet study and learning, as far from the raucous lounge as possible.",
+      "category": "RECREATION",
+      "location": "SHIP",
+      "tier": 3,
+      "cost": 225000,
+      "upkeep": 850,
+      "requires": [
+        "pod2"
+      ],
+      "starting": false,
+      "image": "Library",
+      "icon": "library",
+      "crew": "Yang",
+      "pitch": "I swear to the gods, trying to read a technical readout in that lounge is impossible. Commander, I need to keep up with the latest tech to do my job, and I can't do it while the MechWarriors are playing beer pong over my head.",
+      "effects": [
+        {
+          "stat": "Morale",
+          "value": 1,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "rec_library2",
+      "name": "Improved Library",
+      "details": "Active subscriptions to a variety of e-book services, periodicals, and tri-vid channels make the library even more appealing to everyone.",
+      "category": "RECREATION",
+      "location": "SHIP",
+      "tier": 4,
+      "cost": 450000,
+      "upkeep": 1700,
+      "requires": [
+        "rec_library1"
+      ],
+      "starting": false,
+      "image": "Library",
+      "icon": "libraryUpgrade",
+      "crew": "Sumire",
+      "pitch": "A JumpShip pilot told me there's an off-the-books digital distribution service. They get tri-vid and books from DropShips and sell them under the table. It would be more interesting than the decade-old 'Mech magazines Yang keeps putting in the library, anyway.",
+      "effects": [
+        {
+          "stat": "Morale",
+          "value": 1,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "rec_lounge1",
+      "name": "Lounge",
+      "details": "A shared social space outside the barracks allows the MechWarriors to bond as a team.",
+      "category": "RECREATION",
+      "location": "SHIP",
+      "tier": 0,
+      "cost": 225000,
+      "upkeep": 850,
+      "requires": [],
+      "starting": false,
+      "image": "Lounge",
+      "icon": "lounge",
+      "crew": "Darius",
+      "pitch": "I've just had to chase another card game out of the mess hall so the staff could clean up, Commander. The crew needs somewhere to relax that isn't also where we're trying to serve meals.",
+      "effects": [
+        {
+          "stat": "Morale",
+          "value": 1,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "rec_lounge2",
+      "name": "Upgraded Lounge",
+      "details": "A few couches and a table don't make for much of a social space. Drinks, 2-D video screens, and a sound system, on the other hand…",
+      "category": "RECREATION",
+      "location": "SHIP",
+      "tier": 1,
+      "cost": 450000,
+      "upkeep": 1700,
+      "requires": [
+        "rec_lounge1",
+        "power1"
+      ],
+      "starting": false,
+      "image": "Lounge",
+      "icon": "loungeUpgrade",
+      "crew": "Yang",
+      "pitch": "The, uh, the engineers were wondering if they could schedule a regular tri-vid event. There's this show, about mercenaries during the civil war, and their 'Mechs are supposed to be historically accurate. I'd— uh, they'd like a space to watch stuff like that.",
+      "effects": [
+        {
+          "stat": "Morale",
+          "value": 1,
+          "set": false
+        }
+      ]
+    },
+    {
+      "id": "rec_pool",
+      "name": "Low-G Pool",
+      "details": "When you have a large space with nothing critical in it, where the gravity is too low for living quarters, the obvious choice is to fill it with chlorinated water.",
+      "category": "RECREATION",
+      "location": "SHIP",
+      "tier": 4,
+      "cost": 450000,
+      "upkeep": 1700,
+      "requires": [
+        "pod3"
+      ],
+      "starting": false,
+      "image": "LowGPool",
+      "icon": "pool",
+      "crew": "Sumire",
+      "pitch": "Commander. Come on. LOW-GRAVITY SWIMMING POOL. I don't know what there even is to discuss here.",
+      "effects": [
+        {
+          "stat": "Morale",
+          "value": 2,
+          "set": false
+        }
+      ]
+    }
+  ]
+}

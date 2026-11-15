@@ -82,3 +82,9 @@ def leer_etiquetas(juego):
                 continue
             etiquetas[nombre] = {"visible": visible == "1", "nombre": visible_nombre, "descripcion": descripcion}
     return etiquetas
+
+
+def leer_constantes(juego):
+    """Las constantes de la campaña y la carrera (SimGameConstants.json, que lleva además comentarios de
+    bloque), por sección."""
+    return leer_json(os.path.join(juego, DATOS, "simGameConstants", "SimGameConstants.json"))

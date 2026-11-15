@@ -1,0 +1,26 @@
+{
+  "castDef_DariusDefault": {
+    "firstName": "Darius",
+    "lastName": "Oliveira",
+    "rank": "Executive Officer",
+    "retrato": "sprites/Portraits/guiTxrPort_Darius_default_utr.png"
+  },
+  "castDef_FarahDefault": {
+    "firstName": "Dr. Farah",
+    "lastName": "Murad",
+    "rank": "Engineer",
+    "retrato": "sprites/Portraits/guiTxrPort_Farah_default_utr.png"
+  },
+  "castDef_SumireDefault": {
+    "firstName": "Sumire",
+    "lastName": "Meyer",
+    "rank": "Navigator",
+    "retrato": "sprites/Portraits/guiTxrPort_Sumire_default_utr.png"
+  },
+  "castDef_YangDefault": {
+    "firstName": "Yang",
+    "lastName": "Virtanen",
+    "rank": "Chief Mech Tech",
+    "retrato": "sprites/Portraits/guiTxrPort_Yang_default_utr.png"
+  }
+}
