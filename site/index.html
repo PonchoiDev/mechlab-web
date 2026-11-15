@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MW Builder · MechWarrior loadout tools</title>
-    <meta name="description" content="Fan-made loadout builders for MechWarrior games. Plan hardpoints, tiers, ammo and armor, then share your builds." />
+    <title>MW Builder · MechWarrior and BattleTech tools</title>
+    <meta name="description" content="Fan-made tools for MechWarrior 5: Mercenaries and BATTLETECH: MechLabs with the game&#39;s own rules, star maps, enemy units, pilots and the Argo. Share any build in one link." />
     <link rel="canonical" href="https://mw-builder.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="MW Builder" />
     <meta property="og:title" content="MW Builder" />
-    <meta property="og:description" content="Fan-made loadout builders for MechWarrior games." />
+    <meta property="og:description" content="Fan-made tools for MechWarrior 5: Mercenaries and BATTLETECH." />
     <meta property="og:url" content="https://mw-builder.com/" />
     <meta property="og:image" content="https://mw-builder.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -166,6 +166,45 @@
       .shelf-header span {
         color: var(--muted);
         font: 500 11px var(--mono);
+      }
+
+      /* Una fila por juego, cada una con sus herramientas; un juego nuevo añade su propia fila. */
+      .game-row + .game-row { margin-top: 40px; }
+
+      .game-row .shelf-header h3 {
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .shelf-header h3 small {
+        margin-left: 10px;
+        font-size: 10px;
+        opacity: 0.7;
+      }
+
+      main > .cover.is-placeholder { margin-top: 40px; }
+
+      .intro-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+        gap: 12px 24px;
+        max-width: 1000px;
+        margin: 24px 0 0;
+        padding: 0;
+        list-style: none;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .intro-features b {
+        display: block;
+        margin-bottom: 2px;
+        color: var(--lime);
+        font: 600 11px var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .shelf {
@@ -627,7 +666,7 @@
           </div>
         </div>
         <div class="topbar-side">
-          <p class="topbar-note">LOADOUT TOOLS<br />FOR MECHWARRIOR GAMES</p>
+          <p class="topbar-note">TOOLS FOR MECHWARRIOR<br />AND BATTLETECH GAMES</p>
           <div class="whats-new" hidden>
             <button type="button" class="whats-new-button" aria-haspopup="dialog" aria-expanded="false" aria-label="What's new" title="What's new">
               <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
@@ -647,17 +686,23 @@
 
       <main>
         <section class="intro">
-          <h2>Build your 'Mech, <em>share it in one link.</em></h2>
+          <h2>Tools for MechWarrior and BattleTech games, <em>built from the game files.</em></h2>
           <p>
-            Plan hardpoints, weapon tiers, ammo and armor with the game's own rules, check heat and damage at a glance,
-            and post the build as a link or an image.
+            A free, ad-free toolkit for each game: MechLabs that follow the game's own fitting rules, star maps,
+            enemy units, pilots and the Argo, all with the real stats taken straight from the game.
           </p>
+          <ul class="intro-features">
+            <li><b>MechLab</b> Every chassis, weapon and upgrade, with heat, damage and armor at a glance</li>
+            <li><b>Share</b> Any build fits in one link, or an image in MW5</li>
+            <li><b>Star maps</b> Factions, systems, stores and contracts, as the game shows them</li>
+            <li><b>Up to date</b> Regenerated with each game update and checked against in-game screenshots</li>
+          </ul>
         </section>
 
-        <section aria-labelledby="shelf-title">
+        <section class="game-row" aria-labelledby="game-mw5">
           <div class="shelf-header">
-            <h3 id="shelf-title">SELECT TOOL</h3>
-            <span>7 AVAILABLE</span>
+            <h3 id="game-mw5">MW5: MERCENARIES <small>PIRANHA GAMES</small></h3>
+            <span>4 TOOLS</span>
           </div>
 
           <div class="shelf">
@@ -748,7 +793,16 @@
               </div>
               <div class="cover-action">Open Pilots <span aria-hidden="true">→</span></div>
             </a>
+          </div>
+        </section>
 
+        <section class="game-row" aria-labelledby="game-battletech">
+          <div class="shelf-header">
+            <h3 id="game-battletech">HBS: BATTLETECH <small>HAREBRAINED SCHEMES</small></h3>
+            <span>3 TOOLS</span>
+          </div>
+
+          <div class="shelf">
             <a class="cover is-bt-mechlab" href="/battletech/">
               <div class="cover-band">
                 <span><b>MECHLAB</b> · BATTLETECH</span>
@@ -805,14 +859,14 @@
               </div>
               <div class="cover-action">Open Argo <span aria-hidden="true">→</span></div>
             </a>
-
-            <div class="cover is-placeholder" aria-label="More games coming">
-              <span class="placeholder-mark" aria-hidden="true">+</span>
-              <strong>More games</strong>
-              <p>New MechLabs will appear here as they are ready.</p>
-            </div>
           </div>
         </section>
+
+        <div class="cover is-placeholder" aria-label="More games coming">
+          <span class="placeholder-mark" aria-hidden="true">+</span>
+          <strong>More games</strong>
+          <p>Each new game gets its own row, starting with its MechLab.</p>
+        </div>
       </main>
 
       <footer class="site-footer">
