@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-15-battletech-range-radar',
+    date: '2026-11-15',
+    title: 'Damage by range as a firing range',
+    items: [
+      'The BATTLETECH MechLab shows damage by range as a radar: one ring every 90 m out to 720 m, brighter where more damage lands, with the damage under minimum range striped in amber'
+    ]
+  },
+  {
     id: '2026-11-15-battletech-build-image',
     date: '2026-11-15',
     title: 'Build images for BATTLETECH',
