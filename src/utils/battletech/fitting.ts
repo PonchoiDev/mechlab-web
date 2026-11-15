@@ -107,6 +107,20 @@ export const removeItem = (loadout: BtLoadout, zone: Zone, index: number): BtLoa
 export const removeItemsOfKind = (loadout: BtLoadout, kinds: BtItemKind[]): BtLoadout =>
   mapZones(zone => loadout[zone].filter(id => !kinds.includes(getItem(id)?.kind ?? 'upgrade')));
 
+// El resumen de la pantalla de reequipar del juego bajo el tonelaje («4/4 B 0/4 E 0/0 M 0/0 S 4/4 JJ»):
+// anclajes usados y totales de cada tipo en todo el 'Mech, y retrorreactores montados frente al máximo.
+export const getHardpointSummary = (mech: BtMech, loadout: BtLoadout): Record<BtHardpoint | 'jumpJets', Usage> => {
+  const summary = Object.fromEntries(HARDPOINTS.map(type => [type, { used: 0, capacity: 0 }])) as Record<BtHardpoint, Usage>;
+  for (const zone of ZONE_KEYS) {
+    const usage = getLocationUsage(mech, loadout, zone);
+    for (const type of HARDPOINTS) {
+      summary[type].used += usage.hardpoints[type].used;
+      summary[type].capacity += usage.hardpoints[type].capacity;
+    }
+  }
+  return { ...summary, jumpJets: { used: countJumpJets(mech, loadout), capacity: mech.maxJumpJets } };
+};
+
 export interface HardpointView {
   type: BtHardpoint;
   // Arma montada en el anclaje y su posición en el loadout de la ubicación, o null si está libre.

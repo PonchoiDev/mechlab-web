@@ -11,7 +11,6 @@ import {
   getEquippableBtItems,
   getRarityGroup,
   getReplacementWeapons,
-  getWeaponDamage,
   hasPanelFilters,
   matchesPanelFilters,
   RARITY_GROUPS,
@@ -70,12 +69,20 @@ const describeItem = (item: BtItem) => [
 ].filter(Boolean).join(' · ');
 
 // La tarjeta de objeto del panel de MW5 (ItemOption): nombre, tamaño y peso, y las cifras de las armas.
-// En BATTLETECH el tamaño son las ranuras, y no hay DPS: el daño es por ataque.
+// En BATTLETECH el tamaño son las ranuras, y no hay DPS. Como la lista del juego, lleva encima el
+// fabricante y la bonificación de la versión, y en las armas daño, inestabilidad y calor por disparo
+// (un UAC/2 son 2 disparos de 25: «25 ×2»).
 function ItemOption({ item, onEquip }: { item: BtItem; onEquip: (item: BtItem) => void }) {
   const weapon = item.weapon;
   return (
     <button type="button" className="item-option" data-weapon-type={getItemWeaponType(item)} title={describeItem(item)} onClick={() => onEquip(item)}>
       <span className="item-option-main">
+        {(item.manufacturer || item.bonuses.length > 0) && (
+          <span className="bt-item-maker">
+            {item.manufacturer && item.manufacturer !== 'Generic' && <span>{item.manufacturer}</span>}
+            {item.bonuses.length > 0 && <span className="bt-item-bonus">{item.bonuses.join(' ')}</span>}
+          </span>
+        )}
         <span className="item-option-name">{item.name}</span>
         <span className="item-option-spec">
           {slotsLabel(item)} <i /> {formatNumber(item.tonnage)} t
@@ -86,15 +93,12 @@ function ItemOption({ item, onEquip }: { item: BtItem; onEquip: (item: BtItem) =
       </span>
       {weapon ? (
         <span className="item-option-stats">
-          <span>{formatNumber(getWeaponDamage(item))} dmg{weapon.instability > 0 && <small> ({formatNumber(weapon.instability * weapon.shots)} stab)</small>}</span>
+          <span>{formatNumber(weapon.damage)}{weapon.shots > 1 && <small> ×{weapon.shots}</small>} dmg</span>
+          <span>{formatNumber(weapon.instability)} stab</span>
           <span>{formatNumber(weapon.heat)} heat</span>
           <span>{weapon.maxRange > 0 ? `${weapon.maxRange} m` : EMPTY_VALUE}</span>
         </span>
-      ) : item.bonuses.length > 0 && (
-        <span className="item-option-stats bt-item-option-bonus">
-          <span>{item.bonuses[0]}</span>
-        </span>
-      )}
+      ) : null}
     </button>
   );
 }
@@ -355,7 +359,10 @@ export function BtComponentEditor({
             ))}
             {installed.map(({ item, index }) => (
               <div key={`${item.id}-${index}`} className="installed-item" data-weapon-type={getItemWeaponType(item)} title={describeItem(item)}>
-                <span className="installed-item-name">{item.name} <small>{slotsLabel(item)} · {formatNumber(item.tonnage)} t</small></span>
+                <span className="installed-item-name">
+                  {item.name} <small>{slotsLabel(item)} · {formatNumber(item.tonnage)} t</small>
+                  {item.bonuses.length > 0 && <small className="bt-item-bonus"> {item.bonuses.join(' ')}</small>}
+                </span>
                 <button type="button" className="remove-item" aria-label={`Remove ${item.name}`} onClick={() => onRemove(zone, index)}>✕</button>
               </div>
             ))}
