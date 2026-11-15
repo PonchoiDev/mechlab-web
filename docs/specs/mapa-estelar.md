@@ -44,6 +44,10 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
 - **RF7.** El mapa se mueve arrastrando y se acerca con la rueda, con dos dedos o con botones. Al acercarse aparecen los nombres de los sistemas.
 - **RF8.** Un buscador encuentra un sistema por su nombre, sin distinguir mayúsculas ni acentos, y centra el mapa en él.
 - **RF9.** La fecha y el sistema elegido se guardan en la URL (`?date=3042-01-21&system=Tukayyid`) para compartir una vista concreta.
+- **RF10.** Como en el mapa de BATTLETECH, el logo de cada facción se ve sobre su territorio, grande y con mucha transparencia, detrás de las estrellas:
+  - va en el centro de su grupo de sistemas más grande en la fecha del mapa, así que se mueve con los territorios;
+  - su tamaño crece con ese grupo, en años luz, hasta un máximo mayor que el de BATTLETECH, porque los Estados Sucesores son mucho más grandes que las facciones del Aurigan Reach;
+  - los grupos de menos de 4 sistemas no llevan logo, y las facciones sin logo tampoco.
 
 ## Requisitos no funcionales
 
@@ -70,6 +74,7 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
 | CA11 | Un clúster | se calcula su polígono | todos sus sistemas quedan dentro |
 | CA12 | La fecha 3042-01-21 | se muestra | se lee `21 JAN 3042` |
 | CA13 | La URL `?date=3042-01-21&system=Tukayyid` | se abre | el mapa empieza en esa fecha con Tukayyid elegido; con una fecha no válida empieza el 01-01-3015 |
+| CA14 | Los logos del territorio | se calculan el 01-01-3015 y el 01-01-3042 | en 3015 los llevan Davion, Steiner, Kurita, Liao y Marik, y en 3042 la Federated Commonwealth y ya no Davion ni Steiner; el sistema más cercano a cada logo es de su facción en esa fecha, y el de Davion en 3015 es más grande que el de cualquier facción de la Periferia |
 
 ## Fuera de alcance
 
@@ -102,3 +107,11 @@ Los assets extraídos se guardan como JSON en `tools/datos-juego/starmap/`, así
   - Trazar los contornos de todas las facciones en cada fotograma costaba unos 85 ms y hacía lentos el arrastre, el zoom y la animación de los eventos. Los territorios se pintan en una capa aparte con margen, que cada fotograma solo coloca, y se repintan nítidos cuando la vista se queda quieta. La deformación de las fronteras se calcula una vez por celda, lo que reduce a la mitad la construcción de la rejilla al cargar.
   - En el móvil, el zoom y la leyenda van encima del panel de fecha para no tapar la ficha.
   - La portada pasa a «SELECT TOOL», con una carátula para el mapa hecha con una captura del propio mapa.
+
+### Logos de las facciones (RF10)
+
+- **Cálculo común:** `getFactionEmblems` de `src/utils/starmap.ts` sirve a los dos mapas, con el dueño de cada sistema en la fecha. El mapa de BATTLETECH se queda en 100 años luz de tamaño máximo y el de MW5 llega a 260.
+- **Posición:** el sistema más central del grupo, no el punto medio, que en un territorio con dos lóbulos (la Federated Commonwealth de 3042) caía en el de otra facción.
+- **Rendimiento:** calcularlos lleva unos 30 ms; se guardan por reparto de sistemas, así que el control de fecha solo los recalcula cuando algún sistema cambia de dueño.
+- **Comprobado** en el navegador el 01-01-3015 y el 01-01-3042.
+
