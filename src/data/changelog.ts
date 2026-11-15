@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-14-battletech-starmap',
+    date: '2026-11-14',
+    title: 'BATTLETECH star map',
+    items: [
+      'MW Builder now covers BATTLETECH too, starting with an interactive star map of the Aurigan Reach in career mode',
+      'Each of the 219 systems shows its owner, career difficulty, planet traits, black market and faction stores, who offers contracts there and its battlefields',
+      'Search any system and share it with a link'
+    ]
+  },
+  {
     id: '2026-11-14-map-marks',
     date: '2026-11-14',
     title: 'Clearer selections on the star map',

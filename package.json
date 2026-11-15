@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev:battletech": "vite -c vite.battletech.config.ts",
+    "build": "tsc -b && vite build && vite build -c vite.battletech.config.ts",
     "lint": "oxlint",
     "test": "vitest run",
     "coverage": "vitest run --coverage",

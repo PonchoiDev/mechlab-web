@@ -1,0 +1,284 @@
+{
+ "AuriganDirectorate": {
+  "color": "rgba(147,225,161,1.0)",
+  "corto": "the Directorate",
+  "icono": "uixTxrLogo_AuriganDirectorate",
+  "nombre": "the Aurigan Directorate"
+ },
+ "AuriganMercenaries": {
+  "color": null,
+  "corto": "Darius",
+  "icono": "uixTxrLogo_AuriganMercenaries",
+  "nombre": "Darius"
+ },
+ "AuriganPirates": {
+  "color": null,
+  "corto": "the pirates",
+  "icono": "uixTxrLogo_AuriganPirates",
+  "nombre": "the local pirate organization"
+ },
+ "AuriganRestoration": {
+  "color": "rgba(191,41,41,1.0)",
+  "corto": "the Restoration",
+  "icono": "uixTxrLogo_AuriganRestoration",
+  "nombre": "the Arano Restoration"
+ },
+ "BaumannGroup": {
+  "color": null,
+  "corto": "Baumann Group",
+  "icono": "uixTxrLogo_BaumannGroup",
+  "nombre": "Baumann Group"
+ },
+ "Betrayers": {
+  "color": null,
+  "corto": "the Betrayers",
+  "icono": "uixTxrLogo_Betrayers",
+  "nombre": "the Arano Betrayers"
+ },
+ "BlackCalderaDefense": {
+  "color": null,
+  "corto": "BCD",
+  "icono": "uixTxrLogo_BlackCalderaDefense",
+  "nombre": "Black Caldera Defense"
+ },
+ "BlackWidowCompany": {
+  "color": null,
+  "corto": "Black Widow Company",
+  "icono": "uixTxrLogo_BlackWidowCompany",
+  "nombre": "Black Widow Company"
+ },
+ "BountyHunterAssociates": {
+  "color": null,
+  "corto": "Bounty Hunter Associates",
+  "icono": "uixTxrLogo_BountyHunterAssociates",
+  "nombre": "Bounty Hunter Associates"
+ },
+ "ComStar": {
+  "color": null,
+  "corto": "ComStar",
+  "icono": "uixTxrLogo_ComStar",
+  "nombre": "ComStar"
+ },
+ "Davion": {
+  "color": "rgba(255,220,107,1.0)",
+  "corto": "Davion",
+  "icono": "uixTxrLogo_Davion",
+  "nombre": "the Federated Suns"
+ },
+ "DuchyOfAndurien": {
+  "color": null,
+  "corto": "Andurien",
+  "icono": "uixTxrLogo_DuchyOfAndurien",
+  "nombre": "the Duchy of Andurien"
+ },
+ "EdCorbu": {
+  "color": null,
+  "corto": "Ed Corbu",
+  "icono": "uixTxrLogo_EdCorbu",
+  "nombre": "Trustworthy Client"
+ },
+ "EmeraldDawn": {
+  "color": null,
+  "corto": "Emerald Dawn",
+  "icono": "uixTxrLogo_EmeraldDawn",
+  "nombre": "the Emerald Dawn"
+ },
+ "FlakJackals": {
+  "color": null,
+  "corto": "the Jackals",
+  "icono": "uixTxrLogo_FlakJackals",
+  "nombre": "the Flak Jackals"
+ },
+ "GrayDeathLegion": {
+  "color": null,
+  "corto": "Gray Death Legion",
+  "icono": "uixTxrLogo_GrayDeathLegion",
+  "nombre": "Gray Death Legion"
+ },
+ "HostileMercenaries": {
+  "color": null,
+  "corto": "Hostile Mercs",
+  "icono": "uixTxrLogo_HostileMercenaries",
+  "nombre": "Hostile Mercenaries"
+ },
+ "HouseKhulan": {
+  "color": null,
+  "corto": "Khulan",
+  "icono": "uixTxrLogo_HouseKhulan",
+  "nombre": "House Khulan"
+ },
+ "HouseNakano": {
+  "color": null,
+  "corto": "House Nakano",
+  "icono": "uixTxrLogo_HouseNakano",
+  "nombre": "House Nakano"
+ },
+ "KellHounds": {
+  "color": null,
+  "corto": "Kell Hounds",
+  "icono": "uixTxrLogo_KellHounds",
+  "nombre": "Kell Hounds"
+ },
+ "Kurita": {
+  "color": null,
+  "corto": "Kurita",
+  "icono": "uixTxrLogo_Kurita",
+  "nombre": "the Draconis Combine"
+ },
+ "Liao": {
+  "color": "rgba(208,255,144,1.0)",
+  "corto": "Liao",
+  "icono": "uixTxrLogo_Liao",
+  "nombre": "the Capellan Confederation"
+ },
+ "Locals": {
+  "color": null,
+  "corto": "the Locals",
+  "icono": "uixTxrLogo_Locals",
+  "nombre": "the Planetary Government"
+ },
+ "LocalsBrockwayRefugees": {
+  "color": null,
+  "corto": "the refugees",
+  "icono": "uixTxrLogo_LocalsBrockwayRefugees",
+  "nombre": "Brockway refugees"
+ },
+ "MagistracyCentrella": {
+  "color": null,
+  "corto": "the Magistracy",
+  "icono": "uixTxrLogo_MagistracyCentrella",
+  "nombre": "the Magistracy of Canopus"
+ },
+ "MagistracyOfCanopus": {
+  "color": "rgba(69,255,240,1.0)",
+  "corto": "the Magistracy",
+  "icono": "uixTxrLogo_MagistracyOfCanopus",
+  "nombre": "the Magistracy of Canopus"
+ },
+ "MajestyMetals": {
+  "color": null,
+  "corto": "Majesty",
+  "icono": "uixTxrLogo_MajestyMetals",
+  "nombre": "Majesty Metals & Manufacturing"
+ },
+ "Marik": {
+  "color": "rgba(200,146,255,1.0)",
+  "corto": "Marik",
+  "icono": "uixTxrLogo_Marik",
+  "nombre": "the Free Worlds League"
+ },
+ "MasonsMarauders": {
+  "color": null,
+  "corto": "Mason's Marauders",
+  "icono": "uixTxrLogo_MasonsMarauders",
+  "nombre": "Mason's Marauders"
+ },
+ "MercenaryReviewBoard": {
+  "color": null,
+  "corto": "the MRB",
+  "icono": "uixTxrLogo_MercenaryReviewBoard",
+  "nombre": "the Mercenary Review Board"
+ },
+ "Moderbjorn": {
+  "color": null,
+  "corto": "Moderbjörn",
+  "icono": "uixTxrLogo_Nautilus",
+  "nombre": "Moderbjorn"
+ },
+ "Nautilus": {
+  "color": null,
+  "corto": "Nautilus Base Defenses",
+  "icono": "uixTxrLogo_Nautilus",
+  "nombre": "Nautilus Base Defenses"
+ },
+ "NoFaction": {
+  "color": null,
+  "corto": "Abandoned",
+  "icono": "uixTxrLogo_NoFaction",
+  "nombre": "Abandoned"
+ },
+ "PaladinProtectionLLC": {
+  "color": null,
+  "corto": "Paladin Protection",
+  "icono": "uixTxrLogo_PaladinProtectionLLC",
+  "nombre": "Paladin Protection, LLC"
+ },
+ "ProfHorvat": {
+  "color": null,
+  "corto": "Horvat",
+  "icono": "uixTxrLogo_ProfHorvat",
+  "nombre": "Tournament of Champions"
+ },
+ "RazorbackMercs": {
+  "color": null,
+  "corto": "Razorbacks",
+  "icono": "uixTxrLogo_RazorbackMercs",
+  "nombre": "Razorback Company"
+ },
+ "RedHareRegiment": {
+  "color": null,
+  "corto": "Red Hare Irregulars",
+  "icono": "uixTxrLogo_RedHareRegiment",
+  "nombre": "Red Hare Irregulars"
+ },
+ "SecuritySolutionsInc": {
+  "color": null,
+  "corto": "Security Solutions",
+  "icono": "uixTxrLogo_SecuritySolutionsInc",
+  "nombre": "Security Solutions, Inc."
+ },
+ "SelfEmployed": {
+  "color": null,
+  "corto": "Darius",
+  "icono": "uixTxrLogo_SelfEmployed",
+  "nombre": "Darius"
+ },
+ "SelfEmployed_Farah": {
+  "color": null,
+  "corto": "Dr. Murad",
+  "icono": "uixTxrLogo_SelfEmployed_Farah",
+  "nombre": "Dr. Murad"
+ },
+ "SelfEmployed_Sumire": {
+  "color": null,
+  "corto": "Sumire",
+  "icono": "uixTxrLogo_SelfEmployed_Sumire",
+  "nombre": "Sumire"
+ },
+ "SelfEmployed_Yang": {
+  "color": null,
+  "corto": "Yang",
+  "icono": "uixTxrLogo_SelfEmployed_Yang",
+  "nombre": "Yang"
+ },
+ "SianTriumphant": {
+  "color": null,
+  "corto": "Sian Triumphant",
+  "icono": "uixTxrLogo_SianTriumphant",
+  "nombre": "Sian Triumphant"
+ },
+ "SteelBeast": {
+  "color": null,
+  "corto": "The Steel Beast",
+  "icono": "uixTxrLogo_SteelBeast",
+  "nombre": "The Steel Beast"
+ },
+ "Steiner": {
+  "color": null,
+  "corto": "Steiner",
+  "icono": "uixTxrLogo_Steiner",
+  "nombre": "the Lyran Commonwealth"
+ },
+ "TaurianConcordat": {
+  "color": "rgba(88,158,255,1.0)",
+  "corto": "the Taurians",
+  "icono": "uixTxrLogo_TaurianConcordat",
+  "nombre": "the Taurian Concordat"
+ },
+ "Unknown": {
+  "color": null,
+  "corto": "Unknown",
+  "icono": "uixTxrLogo_Unknown",
+  "nombre": "Unknown"
+ }
+}

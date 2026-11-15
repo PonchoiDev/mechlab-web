@@ -10,6 +10,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno
 | Mapa estelar | https://mw-builder.com/mercs/starmap/ |
 | Unidades enemigas | https://mw-builder.com/mercs/units/ |
 | Pilotos | https://mw-builder.com/mercs/pilots/ |
+| Mapa estelar de BATTLETECH | https://mw-builder.com/battletech/starmap/ |
 | Presentación (slides) | [Ver en Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) |
 | Vídeo explicativo | [Ver en Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) |
 | Login | No tiene: la web se usa sin registro y las builds se guardan en el navegador |
@@ -39,7 +40,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (438 tests, cobertura con V8) |
+| Tests | Vitest 5 (445 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -113,10 +114,11 @@ La web queda en http://localhost:5173/mercs/. Con `npm run dev -- --host 0.0.0.0
 | Script | Descripción |
 |---|---|
 | `npm run dev` | Servidor de desarrollo con recarga en caliente |
+| `npm run dev:battletech` | Servidor de desarrollo de las páginas de BATTLETECH (http://localhost:5174/battletech/) |
 | `npm test` | Tests unitarios con Vitest |
 | `npm run coverage` | Tests con informe de cobertura en `coverage/` |
 | `npm run lint` | Análisis estático con oxlint |
-| `npm run build` | Comprobación de tipos y build de producción en `dist/` |
+| `npm run build` | Comprobación de tipos y build de producción en `dist/`, de MW5 y de BATTLETECH |
 | `npm run preview` | Sirve el build de producción |
 
 En desarrollo, el servidor de Vite hace de proxy de las imágenes de Sarna, y el formulario de feedback escribe el mensaje en la terminal en vez de enviarlo.
@@ -130,6 +132,7 @@ src/
   starmap/              Página del mapa estelar: canvas, ficha del sistema, fecha y buscador
   units/                Página de las unidades enemigas: filtros y ficha de cada unidad
   pilots/               Página de los pilotos: pilotos hero, rasgos y programas de las academias
+  battletech/           Páginas de BATTLETECH (mapa estelar), con su lógica en utils/battletech/
   hooks/                Estado de la build, builds guardadas, preferencias de vista e imagen de Sarna
   utils/                Lógica del configurador: cálculos, reglas de equipo, mejoras, código de las builds
   services/             API de Sarna, portapapeles e imagen PNG de la build (canvas)
@@ -140,6 +143,7 @@ worker/                 Worker de Cloudflare: proxy de imágenes de Sarna y form
 starmap/index.html      Entrada de la página del mapa estelar (/mercs/starmap/)
 units/index.html        Entrada de la página de las unidades enemigas (/mercs/units/)
 pilots/index.html       Entrada de la página de los pilotos (/mercs/pilots/)
+battletech/             Entradas de las páginas de BATTLETECH (/battletech/) y sus imágenes
 site/                   Portada de la raíz del dominio (mw-builder.com)
 docs/                   Análisis, arquitectura, diagramas UML y desarrollo con IA
 tools/
@@ -154,6 +158,9 @@ tools/
   extraer_pilotos.py    Extrae del .pak del juego los pilotos hero y los rasgos de piloto con sus efectos
   generar_pilotos.py    Genera src/data/pilots.json
   ue4.py                Lectura del .pak y de los assets de Unreal Engine 4
+  battletech.py         Lectura de los datos de BATTLETECH (JSON tolerante y etiquetas)
+  extraer_mapa_battletech.py   Extrae de BATTLETECH los sistemas, las facciones, las etiquetas y los logos
+  generar_mapa_battletech.py   Genera src/data/battletech/starmap.json
   datos-juego/          Archivos exportados del juego
 .github/                Integración continua, CodeQL y Dependabot
 .coderabbit.yaml        Configuración de la revisión de código con CodeRabbit
@@ -249,9 +256,25 @@ python3 tools/generar_pilotos.py
 | `public/pilots/portraits/` | Textura del `MWPortraitAsset` de cada piloto hero | Retratos en PNG de 160 px, descomprimidos de DXT5 |
 | `niveles.json` | `Campaign/Pilots/_common/PilotSkillLevelCurve` | La experiencia que pide cada nivel de habilidad |
 
+### Mapa estelar de BATTLETECH
+
+*BATTLETECH* (Harebrained Schemes, 2018) guarda sus datos como JSON sueltos en `BattleTech_Data/StreamingAssets/` de la instalación. `tools/battletech.py` los lee aunque traigan comas finales, comentarios o alguna coma de menos, como los admite el juego, y saca los nombres de las etiquetas de `MDD/data/tagdata.sql`. Solo cuenta el juego base: la carpeta `Mods/` de una instalación con mods no se lee.
+
+```sh
+python3 tools/extraer_mapa_battletech.py "/ruta/a/BATTLETECH"
+python3 tools/generar_mapa_battletech.py
+```
+
+| Archivo | Del juego | Contenido |
+|---|---|---|
+| `battletech/starmap/sistemas.json` | `data/starsystem/` | Las 256 fichas de sistema (una por modo y momento de la campaña) con coordenadas, dueño, etiquetas, dificultad por modo, contratos, biomas y tiendas |
+| `battletech/starmap/facciones.json` | `data/factions/` | Nombre, color del mapa e icono de cada facción |
+| `battletech/starmap/etiquetas.json` | `MDD/data/tagdata.sql` | Nombre visible y descripción de las etiquetas de planeta |
+| `battletech/public/starmap/logos/` | `emblems/factions/*.dds` | Logos de las facciones en PNG de 128 px, descomprimidos de DXT5 |
+
 ## Calidad y comprobación contra el juego
 
-- **438 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **445 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

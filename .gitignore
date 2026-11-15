@@ -30,3 +30,6 @@ __pycache__/
 .wrangler/
 
 coverage
+
+# Copias de trabajo de los agentes de Claude Code
+.claude/worktrees/

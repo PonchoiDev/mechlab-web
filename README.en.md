@@ -10,6 +10,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 | Star map | https://mw-builder.com/mercs/starmap/ |
 | Enemy units | https://mw-builder.com/mercs/units/ |
 | Pilots | https://mw-builder.com/mercs/pilots/ |
+| BATTLETECH star map | https://mw-builder.com/battletech/starmap/ |
 | Slides | [View on Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) (in Spanish) |
 | Video walkthrough | [Watch on Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) (in Spanish) |
 | Login | None: the site works without an account and builds are saved in the browser |
@@ -41,7 +42,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (438 tests, V8 coverage) |
+| Tests | Vitest 5 (445 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -115,10 +116,11 @@ The site runs at http://localhost:5173/mercs/. With `npm run dev -- --host 0.0.0
 | Script | Description |
 |---|---|
 | `npm run dev` | Dev server with hot reload |
+| `npm run dev:battletech` | Dev server for the BATTLETECH pages (http://localhost:5174/battletech/) |
 | `npm test` | Unit tests with Vitest |
 | `npm run coverage` | Tests with a coverage report in `coverage/` |
 | `npm run lint` | Static analysis with oxlint |
-| `npm run build` | Type check and production build in `dist/` |
+| `npm run build` | Type check and production build in `dist/`, for MW5 and BATTLETECH |
 | `npm run preview` | Serves the production build |
 
 In development, the Vite server proxies the Sarna images, and the feedback form prints the message in the terminal instead of sending it.
@@ -132,6 +134,7 @@ src/
   starmap/              Star map page: canvas, system card, date and search
   units/                Enemy units page: filters and a card for each unit
   pilots/               Pilots page: hero pilots, traits and academy training programs
+  battletech/           BATTLETECH pages (star map), with their logic in utils/battletech/
   hooks/                Build state, saved builds, view preferences and Sarna image
   utils/                Configurator logic: calculations, fitting rules, upgrades, build codes
   services/             Sarna API, clipboard and PNG build image (canvas)
@@ -142,6 +145,7 @@ worker/                 Cloudflare Worker: Sarna image proxy and feedback form
 starmap/index.html      Entry of the star map page (/mercs/starmap/)
 units/index.html        Entry of the enemy units page (/mercs/units/)
 pilots/index.html       Entry of the pilots page (/mercs/pilots/)
+battletech/             Entries of the BATTLETECH pages (/battletech/) and their images
 site/                   Landing page at the domain root (mw-builder.com)
 docs/                   Analysis, architecture, UML diagrams and development with AI
 tools/
@@ -156,6 +160,9 @@ tools/
   extraer_pilotos.py    Extracts hero pilots and pilot traits with their effects from the game .pak
   generar_pilotos.py    Generates src/data/pilots.json
   ue4.py                Reads the .pak and the Unreal Engine 4 assets
+  battletech.py         Reads the BATTLETECH data (lenient JSON and tags)
+  extraer_mapa_battletech.py   Extracts systems, factions, tags and logos from BATTLETECH
+  generar_mapa_battletech.py   Generates src/data/battletech/starmap.json
   datos-juego/          Files exported from the game
 .github/                Continuous integration, CodeQL and Dependabot
 .coderabbit.yaml        CodeRabbit code review settings
@@ -253,9 +260,25 @@ python3 tools/generar_pilotos.py
 | `public/pilots/portraits/` | Texture of the `MWPortraitAsset` of each hero pilot | Portraits as 160 px PNG, decoded from DXT5 |
 | `niveles.json` | `Campaign/Pilots/_common/PilotSkillLevelCurve` | The XP each skill level needs |
 
+### BATTLETECH star map
+
+*BATTLETECH* (Harebrained Schemes, 2018) keeps its data as loose JSON files in `BattleTech_Data/StreamingAssets/` of the install. `tools/battletech.py` reads them even with trailing commas, comments or a missing comma, as the game accepts them, and takes the tag names from `MDD/data/tagdata.sql`. Only the base game counts: the `Mods/` folder of a modded install is never read.
+
+```sh
+python3 tools/extraer_mapa_battletech.py "/path/to/BATTLETECH"
+python3 tools/generar_mapa_battletech.py
+```
+
+| File | From the game | Contents |
+|---|---|---|
+| `battletech/starmap/sistemas.json` | `data/starsystem/` | The 256 system records (one per mode and campaign stage) with coordinates, owner, tags, difficulty per mode, contracts, biomes and stores |
+| `battletech/starmap/facciones.json` | `data/factions/` | Name, map color and icon of each faction |
+| `battletech/starmap/etiquetas.json` | `MDD/data/tagdata.sql` | Display name and description of the planet tags |
+| `battletech/public/starmap/logos/` | `emblems/factions/*.dds` | Faction logos as 128 px PNG, decoded from DXT5 |
+
 ## Quality and checks against the game
 
-- **438 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **445 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
