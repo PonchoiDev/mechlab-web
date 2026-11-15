@@ -15,7 +15,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       'A new Argo page for BATTLETECH (2018) lists all 35 ship upgrades with their cost, monthly upkeep, effects in the game\'s own words, requirements and what each one unlocks',
       'The upgrade tree lights up everything an upgrade requires and unlocks when you point at it',
-      'Plan your refit: tick upgrades and their requirements come along, with the total cost, the monthly upkeep and the combined effects on your ship. The plan goes in the link'
+      'Plan your refit: tick upgrades and their requirements come along, with the total cost, the monthly upkeep and the combined effects on your ship. The plan goes in the link',
+      'It opens on the in-game Ship Upgrades screen: the three sections around the ship\'s blueprint, with each upgrade\'s own icon, and a details window like the game\'s when you click one'
     ]
   },
   {

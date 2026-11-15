@@ -1,7 +1,7 @@
 # Especificación: la Argo de BATTLETECH
 
 - **Issue:** [#106](https://github.com/PonchoiDev/mechlab-web/issues/106)
-- **Estado:** en desarrollo (pantalla de Ship Upgrades del juego)
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/battletech/argo.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -110,3 +110,10 @@ Todo está en JSON sueltos dentro de `BattleTech_Data/StreamingAssets/` de la in
    - marcar y desmarcar en el árbol y en las fichas;
    - los totales del plan;
    - un enlace con `?own=`.
+
+### Pantalla Ship Upgrades
+
+- **Orden seguido:** la especificación de la pantalla y los criterios CA10 a CA14, sus tests (que fallaban), después los datos y la lógica y por último la interfaz, en commits separados.
+- **Comprobado** en el navegador a 1440 × 900 y a 390 × 844, frente a la captura del juego: las tres secciones con sus cajas en el mismo orden, el plano de la nave, los iconos con su estado y el resaltado, y la ficha, que se cierra con Close, Escape y pulsando fuera y en el móvil sale desde abajo.
+- **Diferencias con el juego:** aquí salen todas las mejoras, también las que aún no se pueden comprar (apagadas), y las cajas no reordenan las instaladas delante. La ficha añade precio, requisitos, lo que abre y el botón del plan.
+
