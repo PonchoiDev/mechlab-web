@@ -71,6 +71,12 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 - **RF8.** Volver a la build de serie, vaciar armas, munición o equipo, quitar el blindaje y repartirlo.
 - **RF9.** Enlace para compartir (`?b=`), apertura de una variante de serie (`?mech=`), builds guardadas en el navegador (guardar, abrir, duplicar, renombrar, borrar, exportar e importar) y comparación con otra variante de serie o una build guardada.
 - **RF10.** El icono de cada chasis en el selector y en el tablero.
+- **RF11.** Como la pantalla de reequipar del juego (referencia: capturas del RFL-3C en el Mech Bay y en Refit):
+  - bajo el tonelaje, el resumen de anclajes usados y totales por tipo (Ballistic, Energy, Missile, Support) y los retrorreactores montados frente al máximo;
+  - en cada ubicación, la estructura («S 70/70») junto al blindaje, y el máximo de cada lado del blindaje («100/140», «20/70»);
+  - en la lista de objetos, el fabricante y la bonificación de cada versión («+ 10 Stb.Dmg.»), y en las armas daño, inestabilidad y calor por disparo;
+  - en las piezas montadas, su bonificación («+ 10 Dmg. - 2 Tons»);
+  - el rol de combate de serie del chasis (`StockRole`).
 
 ## Requisitos no funcionales
 
@@ -106,8 +112,13 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 | CA19 | Dos builds | se comparan | la tabla dice qué lado gana en cada cifra, y en el calor gana el más bajo |
 | CA20 | El selector de 'Mechs | se filtra | por clase Assault salen 21; por fuente Heavy Metal, 15; con al menos 3 anclajes Ballistic, solo los que los tienen; con al menos 5 retrorreactores, los 38 que admiten 5 o más (todos los chasis admiten de 2 a 8); buscar «hbk» encuentra los Hunchback |
 | CA21 | El selector de objetos | se filtra | la pestaña Energy solo enseña armas Energy; la versión + + solo las de 2 «+»; la fuente Heavy Metal solo las suyas; el equipo `BUILT-IN` no sale; ordenar por daño pone primero el de más daño |
+| CA22 | El RFL-3C (referencia del juego) | se consulta | sus máximos de blindaje y su estructura son los del juego: cabeza 45 y S 16, torso central 200 y 100 detrás con S 100, torsos laterales 140 y 70 con S 70, brazos 100 con S 50, piernas 140 con S 70; su rol de serie es Sniper |
+| CA23 | El RFL-3C reequipado como en la captura del juego (4 UAC/2 + + en los brazos, 4 Jump Jet (H) en el torso central, 4 AC/2 Ammo en las piernas, el Rangefinder Suite fijo y el blindaje 45, 75/20, 100/20, 80 y 70) | se calcula | pesa 60 de 60 t y el resumen de anclajes es 4/4 Ballistic, 0/4 Energy, 0/0 Missile, 0/0 Support y 4/4 retrorreactores |
+| CA24 | Los nombres y las bonificaciones de los objetos | se consultan | coinciden con los del juego: «UAC/2 + +» de Imperator con «+ 10 Dmg.» y «- 2 Tons», «AC/2 +» de Mydron con «+ 10 Stb.Dmg.» (25 de daño, 15 de inestabilidad y 4 de calor), «AC/2 Ammo», «Jump Jet (H)» y «Rangefinder Suite» |
 
 ## Fuera de alcance
+
+- Las seis barras de valoración del juego (Firepower, Heat efficiency, Movement, Avg. range, Durability y Melee). `MechStatisticsConstants.json` trae sus límites (`MinStockFirepower` y `MaxStockFirepower`, `MinHeatEfficiency`, `MaxSprintFactor`, `MaxStockAvgRange`, `MaxArmorFactor`, `MaxStructureFactor`, `MaxStockMeleeDamage`…), pero no cómo se calcula cada valor que se compara con ellos: eso está en el código del juego. Con la captura del RFL-3C no cuadra ninguna fórmula sencilla (la potencia de fuego de sus 4 UAC/2 + + daría 7 de 10 marcas y el juego enseña casi 9), así que no se enseñan hasta tener la fórmula. Sí se enseña el rol de combate de serie.
 
 - Los mods y modpacks (#104).
 - La distancia de salto en metros: depende de reglas del código del juego que no están en los datos. Se enseña el número de retrorreactores.
@@ -118,7 +129,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 
 ## Plan de pruebas
 
-1. **Datos y lógica (CA1 a CA21):** `src/utils/battletech/mechlab.test.ts`, con los JSON reales.
+1. **Datos y lógica (CA1 a CA21):** `src/utils/battletech/mechlab.test.ts`, con los JSON reales. **CA22 a CA24:** `src/utils/battletech/gameReference.test.ts`, con las cifras de las capturas del juego.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844:
    - elegir un 'Mech con los filtros;
    - montar y quitar armas, munición y equipo, con los avisos de lo que no cabe;
