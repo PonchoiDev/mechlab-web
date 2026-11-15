@@ -16,6 +16,7 @@ import { useSarnaAsset } from './hooks/useSarnaAsset';
 import { useSavedBuilds } from './hooks/useSavedBuilds';
 import { useViewPreferences } from './hooks/useViewPreferences';
 import { copyText } from './services/clipboard';
+import { renderBuildImage } from './services/buildImage';
 import { BuildStatus } from './components/BuildStatus';
 import { ComparePanel } from './components/ComparePanel';
 import { ComponentEditor } from './components/ComponentEditor';
@@ -123,6 +124,7 @@ export default function App() {
     () => ({ mech, loadout, armor, summary, upgrades, imageUrl: sarna.asset?.imageUrl ?? null }),
     [mech, loadout, armor, summary, upgrades, sarna.asset]
   );
+  const renderShareImage = useCallback(() => renderBuildImage(shareImageInput), [shareImageInput]);
   const copyBuildLink = async (url = buildUrl) => {
     showToast(await copyText(url) ? 'Build link copied' : 'Could not copy the link. Copy it from the image dialog');
   };
@@ -335,7 +337,9 @@ export default function App() {
 
       {isSharingImage && (
         <ShareImageDialog
-          build={shareImageInput}
+          render={renderShareImage}
+          fileName={`${mech.variant.replace(/[^a-z0-9-]+/gi, '_')}-build.png`}
+          alt={`${mech.name} ${mech.variant} build`}
           isImageLoading={sarna.isLoading}
           buildUrl={buildUrl}
           onCopyLink={() => copyBuildLink()}

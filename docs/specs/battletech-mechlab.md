@@ -79,6 +79,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
   - sobre cada ubicación, sus anclajes usados y totales de cada tipo con los iconos del juego («2/2» y el icono balístico; «0» si no tiene de ese tipo);
   - el rol de combate de serie del chasis (`StockRole`).
 
+- **RF12.** Share ofrece, además del enlace, «Generate build image», como el MechLab de MW5: un PNG con la misma distribución que el tablero (cabecera, las diez cifras de la lectura, las ocho ubicaciones con sus anclajes, armas, equipo, bonificaciones y blindaje delantero y trasero, y en el centro la ficha del 'Mech con el icono del juego), que se descarga o se copia, con el enlace de la build al lado.
 ## Requisitos no funcionales
 
 - **RNF1.** La lógica es pura y está en `src/utils/battletech/`, con sus tests: reglas de montaje, peso y blindaje, calor, daño, munición, movimiento, coste, problemas, código de la build, builds guardadas, comparación y filtros.
@@ -117,6 +118,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 | CA23 | El RFL-3C reequipado como en la captura del juego (4 UAC/2 + + en los brazos, 4 Jump Jet (H) en el torso central, 4 AC/2 Ammo en las piernas, el Rangefinder Suite fijo y el blindaje 45, 75/20, 100/20, 80 y 70) | se calcula | pesa 60 de 60 t y el resumen de anclajes es 4/4 Ballistic, 0/4 Energy, 0/0 Missile, 0/0 Support y 4/4 retrorreactores |
 | CA24 | Los nombres y las bonificaciones de los objetos | se consultan | coinciden con los del juego: «UAC/2 + +» de Imperator con «+ 10 Dmg.» y «- 2 Tons», «AC/2 +» de Mydron con «+ 10 Stb.Dmg.» (25 de daño, 15 de inestabilidad y 4 de calor), «AC/2 Ammo», «Jump Jet (H)» y «Rangefinder Suite» |
 | CA25 | Las ubicaciones del RFL-3C reequipado | se cuentan sus anclajes | el brazo derecho tiene 2/2 balísticos y ningún otro; el torso derecho, 0/2 de energía; la cabeza, ninguno, como los iconos de la pantalla Refit |
+| CA26 | El HBK-4G de serie | se calculan las cifras de la imagen | son las diez de la lectura, en su orden: 50.00 / 50 t, 800 / 1045 puntos de blindaje, 10.00 t de blindaje, 120 / 200 m andando y corriendo, 0 / 4 retrorreactores, 170 de daño alfa, 80 cuerpo a cuerpo, 54 de calor alfa, 39 de disipación por turno y 270 m de alcance |
 
 ## Fuera de alcance
 
@@ -127,7 +129,6 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 - El efecto en combate de las mejoras que no cambian las cifras de la lectura (precisión, iniciativa, defensa): se enseñan como bonificaciones con su texto del juego.
 - El daño de las bobinas (COIL), que crece con el movimiento del turno: se enseña el daño base.
 - El efecto de `Heatsinks` en los chasis que lo traen, por confirmar con una captura del juego.
-- La imagen para compartir del MechLab de MW5.
 
 ## Plan de pruebas
 
@@ -156,7 +157,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
   - Tras la revisión, el tablero, el panel de cada ubicación y la barra de herramientas usan el marcado, los estilos y los componentes del MechLab de MW5 (`component-card`, `component-editor`, `UtilityToolbar`), con los colores de anclaje de MW5 y uno nuevo para Support. Al pulsar una ubicación se abre su panel, que se cierra con su ✕, con Escape o con un clic fuera, igual que la comparación. Lo montado se quita desde Installed, desde «Remove it» de un anclaje o con el menú del clic derecho, que tiene las acciones del de MW5 menos los niveles de arma (`src/utils/battletech/actions.ts`).
   - En un repaso de todas las piezas del MechLab de MW5, el de BATTLETECH toma también su cabecera, el selector de 'Mechs (con los atajos del buscador, como «3e 2m jj»), la lectura de diez cifras, los botones VIEW (celdas de ranuras, tablero compacto y lado del panel), la estructura del panel de cada ubicación (armas que caben, cambiar la de un anclaje, Largest y Smallest, pestañas Equipment y Ammo, tarjetas item-option con tooltip), las pestañas Weapons y 'Mech del análisis, las tarjetas de la comparación, el resaltado al duplicar en My builds y el enlace `#feedback`. La lógica nueva está en `filters.ts` y `compare.ts`, con sus tests en `panel.test.ts`.
   - Con las capturas del juego (RFL-3C en el Mech Bay y en Refit) se añadieron el resumen de anclajes y retrorreactores bajo el tonelaje, la estructura y el máximo de cada lado del blindaje en cada ubicación, el fabricante y la bonificación de cada objeto, las cifras por disparo de las armas, la bonificación de las piezas montadas y el rol de combate de serie. Los máximos de blindaje, la estructura, el peso del reequipo de la captura (60 de 60 t) y los nombres de los objetos coinciden con el juego (`gameReference.test.ts`, CA22 a CA24). Las barras de valoración no se enseñan: los datos solo traen sus límites, no su fórmula.
-  - Lo que sigue distinto, por las reglas o los datos de BATTLETECH: no hay imagen de Sarna (el icono del juego ocupa su sitio) ni imagen para compartir; no hay niveles de arma, sino versiones + a + + +, que son otro objeto y se eligen en el panel; no hay mejoras de la cantina, tecnología Clan, ECM, AMS, año ni 'Mechs hero; el tamaño de un arma son sus ranuras; el blindaje va en pasos de 5 con máximos separados delante y detrás; y el daño es por ataque, sin DPS ni enfriamiento por segundo.
+  - Lo que sigue distinto, por las reglas o los datos de BATTLETECH: no hay imagen de Sarna (el icono del juego ocupa su sitio, también en la imagen para compartir); no hay niveles de arma, sino versiones + a + + +, que son otro objeto y se eligen en el panel; no hay mejoras de la cantina, tecnología Clan, ECM, AMS, año ni 'Mechs hero; el tamaño de un arma son sus ranuras; el blindaje va en pasos de 5 con máximos separados delante y detrás; y el daño es por ataque, sin DPS ni enfriamiento por segundo.
 - **Pendiente de comprobar en el juego:**
   - El efecto de `Heatsinks` en los 11 chasis que lo traen a 30 (ninguno es una variante disponible).
   - El coste: la fórmula (chasis, componentes y 625 C-Bills por punto de blindaje) da el `Cost` del mechdef en el HBK-4G, el AS7-D y el JR7-D, pero en otras variantes difiere en unos miles; hace falta una captura del valor de un 'Mech en el juego.

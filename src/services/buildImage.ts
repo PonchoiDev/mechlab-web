@@ -1,4 +1,8 @@
 import type { HardpointType } from '../types/item';
+import {
+  CHIP_GAP, COLORS, MONO, SANS, chunk, drawGridBackground, drawSlotBars, drawText, getColumns, loadImage, measure, strokeBox, toPngBlob,
+  withAlpha, wrapText, type Context
+} from './canvasDrawing';
 import { EMPTY_VALUE } from '../utils/format';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import type { Upgrade } from '../types/upgrade';
@@ -26,23 +30,7 @@ const WIDTH = 1400;
 const PADDING = 32;
 const GAP = 12;
 const CARD_PADDING = 12;
-const CHIP_GAP = 5;
 const MIN_REFERENCE_HEIGHT = 380;
-
-const COLORS = {
-  background: '#101310',
-  panel: '#191d19',
-  raised: '#202620',
-  chip: '#262d26',
-  line: '#343d34',
-  text: '#e8eee5',
-  muted: '#929d90',
-  lime: '#c3ed62',
-  cyan: '#69d9ce',
-  amber: '#f2b75e',
-  red: '#ff796c',
-  meter: '#2a312a'
-};
 
 const WEAPON_COLORS: Record<HardpointType, string> = {
   energy: '#00d2ff',
@@ -66,8 +54,6 @@ const SPEC_COLORS: Record<SpecKind, string> = {
 
 const EQUIPMENT_COLORS = { 'heat-sink': COLORS.cyan, 'jump-jet': COLORS.amber, module: COLORS.lime };
 
-const SANS = "'Manrope', 'Segoe UI', sans-serif";
-const MONO = "'IBM Plex Mono', Consolas, monospace";
 
 const AMMO_WARNING_TEXT: Record<AmmoWarning['kind'], string> = {
   'missing-ammo': 'no ammo',
@@ -84,89 +70,22 @@ export interface BuildImageInput {
   imageUrl: string | null;
 }
 
-type Context = CanvasRenderingContext2D;
 
 const getWeightClassName = (tonnage: number) =>
   tonnage <= 35 ? 'LIGHT' : tonnage <= 55 ? 'MEDIUM' : tonnage <= 75 ? 'HEAVY' : 'ASSAULT';
 
-const withAlpha = (hex: string, alpha: number) => {
-  const value = Number.parseInt(hex.slice(1), 16);
-  return `rgba(${value >> 16}, ${(value >> 8) & 255}, ${value & 255}, ${alpha})`;
-};
 
-const loadImage = (src: string): Promise<HTMLImageElement | null> => new Promise(resolve => {
-  const image = new Image();
-  image.onload = () => resolve(image);
-  image.onerror = () => resolve(null);
-  image.src = src;
-});
 
 // Las imágenes de Sarna pasan por el proxy del Worker para que el canvas se pueda exportar.
 const getProxiedImageUrl = (imageUrl: string) =>
   `${import.meta.env.BASE_URL}api/sarna-image?url=${encodeURIComponent(imageUrl)}`;
 
-const fit = (context: Context, text: string, maxWidth: number) => {
-  if (context.measureText(text).width <= maxWidth) return text;
-  let end = text.length;
-  while (end > 0 && context.measureText(`${text.slice(0, end)}…`).width > maxWidth) end -= 1;
-  return `${text.slice(0, end)}…`;
-};
 
-// Escribe un texto y devuelve su ancho, para encadenar varios en la misma línea.
-const drawText = (
-  context: Context,
-  text: string,
-  x: number,
-  y: number,
-  font: string,
-  color: string,
-  options: { align?: CanvasTextAlign; maxWidth?: number } = {}
-): number => {
-  context.font = font;
-  context.fillStyle = color;
-  context.textAlign = options.align ?? 'left';
-  const shown = options.maxWidth ? fit(context, text, options.maxWidth) : text;
-  context.fillText(shown, x, y);
-  return context.measureText(shown).width;
-};
 
-const measure = (context: Context, text: string, font: string) => {
-  context.font = font;
-  return context.measureText(text).width;
-};
 
-// Parte el texto en líneas que quepan en el ancho; la última se recorta si no hay más líneas.
-const wrapText = (context: Context, text: string, font: string, maxWidth: number, maxLines: number): string[] => {
-  context.font = font;
-  const lines: string[] = [];
-  let current = '';
-  for (const word of text.split(' ')) {
-    const candidate = current ? `${current} ${word}` : word;
-    if (!current || context.measureText(candidate).width <= maxWidth) {
-      current = candidate;
-    } else {
-      lines.push(current);
-      current = word;
-    }
-  }
-  lines.push(current);
-  if (lines.length <= maxLines) return lines;
-  return [...lines.slice(0, maxLines - 1), fit(context, lines.slice(maxLines - 1).join(' '), maxWidth)];
-};
 
-const strokeBox = (context: Context, x: number, y: number, width: number, height: number, color: string, dashed = false) => {
-  context.strokeStyle = color;
-  context.lineWidth = 1;
-  context.setLineDash(dashed ? [4, 3] : []);
-  context.strokeRect(x + 0.5, y + 0.5, width - 1, height - 1);
-  context.setLineDash([]);
-};
 
-// Columnas de una rejilla auto-fill con un ancho mínimo por celda, como en el CSS del tablero.
-const getColumns = (width: number, minWidth: number) => Math.max(1, Math.floor((width + CHIP_GAP) / (minWidth + CHIP_GAP)));
 
-const chunk = <T>(values: T[], size: number): T[][] =>
-  Array.from({ length: Math.ceil(values.length / size) }, (_, index) => values.slice(index * size, index * size + size));
 
 // --- Tarjetas de componente ---------------------------------------------------------------------
 
@@ -238,25 +157,6 @@ const drawEquipmentChip = (context: Context, name: string, count: number, color:
   if (countText) drawText(context, countText, x + 12 + nameWidth + 6, y + 19, `600 11px ${MONO}`, COLORS.muted);
 };
 
-// Barras de slots del pie de la tarjeta: generales y, si las hay, las especiales.
-const drawSlotBars = (context: Context, bars: { label: string; used: number; capacity: number; color: string }[], x: number, y: number) => {
-  let barX = x;
-  for (const bar of bars) {
-    barX += drawText(context, bar.label, barX, y + 10, `500 10px ${MONO}`, COLORS.muted) + 6;
-    const cells = Math.max(bar.capacity, bar.used);
-    for (let cell = 0; cell < cells; cell += 1) {
-      const cellX = barX + cell * 10;
-      if (cell >= bar.capacity || cell < bar.used) {
-        context.fillStyle = cell >= bar.capacity ? COLORS.red : bar.color;
-        context.fillRect(cellX, y + 2, 8, 8);
-      } else {
-        strokeBox(context, cellX, y + 2, 8, 8, COLORS.muted);
-      }
-    }
-    barX += cells * 10 + 4;
-    barX += drawText(context, `${bar.used}/${bar.capacity}`, barX, y + 10, `500 10px ${MONO}`, COLORS.muted) + 16;
-  }
-};
 
 const layoutCard = (measuring: Context, input: BuildImageInput, zone: Zone, width: number, warnings: AmmoWarning[]): CardLayout => {
   const component = input.mech.components[zone];
@@ -562,11 +462,7 @@ export const renderBuildImage = async (input: BuildImageInput): Promise<Blob> =>
   if (!context) throw new Error('Canvas not available');
   context.scale(SCALE, SCALE);
 
-  context.fillStyle = COLORS.background;
-  context.fillRect(0, 0, WIDTH, height);
-  context.fillStyle = 'rgba(255, 255, 255, 0.018)';
-  for (let x = 0; x < WIDTH; x += 32) context.fillRect(x, 0, 1, height);
-  for (let y = 0; y < height; y += 32) context.fillRect(0, y, WIDTH, 1);
+  drawGridBackground(context, WIDTH, height);
 
   drawHeader(context, mech);
   drawReadouts(context, input, readoutY);
@@ -588,7 +484,5 @@ export const renderBuildImage = async (input: BuildImageInput): Promise<Blob> =>
     : 'Fan-made tool, not affiliated with Piranha Games';
   drawText(context, credits, WIDTH - PADDING, footerY + 27, `500 11px ${MONO}`, COLORS.muted, { align: 'right' });
 
-  return new Promise((resolve, reject) => {
-    canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Could not render the image')), 'image/png');
-  });
+  return toPngBlob(canvas);
 };
