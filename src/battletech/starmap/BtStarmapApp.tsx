@@ -119,10 +119,13 @@ function SystemSearch({ onPick }: { onPick: (system: StarSystem) => void }) {
     <div className="starmap-search" role="search">
       <input
         type="search"
+        role="combobox"
+        aria-autocomplete="list"
         placeholder="Search system"
         aria-label="Search system"
         aria-controls="starmap-search-results"
         aria-expanded={results.length > 0}
+        aria-activedescendant={results[active] ? `starmap-search-option-${results[active].id}` : undefined}
         value={query}
         onChange={event => {
           setQuery(event.target.value);
@@ -140,8 +143,19 @@ function SystemSearch({ onPick }: { onPick: (system: StarSystem) => void }) {
       {results.length > 0 && (
         <ul id="starmap-search-results" role="listbox" aria-label="Systems">
           {results.map((system, index) => (
-            <li key={system.id} role="option" aria-selected={index === active}>
-              <button type="button" onClick={() => pick(system)} onMouseEnter={() => setActive(index)}>{system.name}</button>
+            // Opciones sin botón dentro, como pide el patrón de combobox: el foco sigue en el campo y
+            // mousedown evita que lo pierda antes del clic.
+            <li
+              key={system.id}
+              id={`starmap-search-option-${system.id}`}
+              className="starmap-search-option"
+              role="option"
+              aria-selected={index === active}
+              onMouseDown={event => event.preventDefault()}
+              onClick={() => pick(system)}
+              onMouseEnter={() => setActive(index)}
+            >
+              {system.name}
             </li>
           ))}
         </ul>
@@ -229,6 +243,8 @@ export function BtStarmapApp() {
         </div>
         <SystemSearch
           onPick={system => {
+            // El ratón puede seguir sobre otro sistema: sin limpiarlo, la ficha enseñaría ese.
+            setHoveredId(null);
             setSelectedId(system.id);
             focusOn(system.id);
           }}

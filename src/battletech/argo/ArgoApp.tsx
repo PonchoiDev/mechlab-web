@@ -119,14 +119,12 @@ function TreeView({ owned, focus, onToggle, onFocus, onSelect }: {
   const chain = useMemo(() => highlighted
     ? { required: new Set(getAncestors(data, highlighted)), unlocked: new Set(getDescendants(data, highlighted)) }
     : null, [highlighted]);
+  // Lo que una mejora pide y lo que abre se resalta igual, en el color de la página; la diferencia
+  // solo la dice una etiqueta pequeña, para no llenar el árbol de colores.
+  const linkOf = (id: string) => chain?.required.has(id) ? 'Required' : chain?.unlocked.has(id) ? 'Unlocks' : null;
   const nodeClass = (id: string) => {
     const classes = ['argo-node', `is-${getStatus(data, owned, id)}`];
-    if (chain) {
-      if (id === highlighted) classes.push('is-focus');
-      else if (chain.required.has(id)) classes.push('is-required');
-      else if (chain.unlocked.has(id)) classes.push('is-unlocked');
-      else classes.push('is-dim');
-    }
+    if (chain) classes.push(id === highlighted ? 'is-focus' : linkOf(id) ? 'is-linked' : 'is-dim');
     return classes.join(' ');
   };
   const focused = focus ? getUpgrade(data, focus) : null;
@@ -134,7 +132,7 @@ function TreeView({ owned, focus, onToggle, onFocus, onSelect }: {
   return (
     <>
       <p className="argo-hint">
-        Point at an upgrade to light up what it <b className="argo-key is-required">requires</b> and what it <b className="argo-key is-unlocked">unlocks</b>.
+        Point at an upgrade to light up the upgrades it requires and the ones it unlocks; the rest fade out.
         Click to add it to your plan with its requirements, or to remove it and everything that depends on it.
       </p>
       <div className="argo-tree-scroll" onMouseLeave={() => setHover(null)}>
@@ -148,6 +146,7 @@ function TreeView({ owned, focus, onToggle, onFocus, onSelect }: {
                 <div key={tier} className="argo-tree-cell">
                   {cell.map(upgrade => {
                     const status = getStatus(data, owned, upgrade.id);
+                    const link = upgrade.id === highlighted ? null : linkOf(upgrade.id);
                     return (
                       <button
                         key={upgrade.id}
@@ -165,6 +164,7 @@ function TreeView({ owned, focus, onToggle, onFocus, onSelect }: {
                       >
                         <span className="argo-node-name">{upgrade.name}</span>
                         <span className="argo-node-cost">{upgrade.starting ? 'Included' : cbills(upgrade.cost)}</span>
+                        {link && <span className="argo-node-link">{link}</span>}
                       </button>
                     );
                   })}
