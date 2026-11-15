@@ -126,18 +126,23 @@ const useChain = (highlighted: string | null) => useMemo(() => highlighted
 // La pantalla Ship Upgrades del juego: tres secciones, cada una con sus cajas por categoría y un icono por
 // mejora. Naranja lo que viene con la nave o está en el plan (lo instalado, en el juego), gris lo que se
 // puede comprar y apagado lo que aún pide otras.
+// Al pasar por una mejora solo se marcan sus requisitos y lo que abre directamente: la cadena entera
+// (como en el árbol) encendía casi toda la nave con las primeras mejoras.
 function ShipView({ owned, onOpen }: { owned: ReadonlySet<string>; onOpen: Select }) {
   const [hover, setHover] = useState<string | null>(null);
-  const chain = useChain(hover);
+  const links = useMemo(() => hover
+    ? { required: new Set(getUpgrade(data, hover).requires), unlocked: new Set(getUnlocks(data, hover)) }
+    : null, [hover]);
   const tileClass = (id: string) => {
     const classes = ['argo-tile', `is-${getStatus(data, owned, id)}`];
-    if (chain) classes.push(id === hover ? 'is-focus' : chain.required.has(id) || chain.unlocked.has(id) ? 'is-linked' : 'is-dim');
+    if (links) classes.push(id === hover ? 'is-focus' : links.required.has(id) ? 'is-required' : links.unlocked.has(id) ? 'is-unlocks' : 'is-dim');
     return classes.join(' ');
   };
   return (
     <>
       <p className="argo-hint">
-        Point at an upgrade to light up what it requires and what it unlocks. Click it to see its details and add it to your plan.
+        Point at an upgrade to mark what it needs first (solid outline) and what it unlocks next (dashed outline).
+        Click it to see its details and add it to your plan.
       </p>
       <div className="argo-ship" onMouseLeave={() => setHover(null)}>
         <img className="argo-blueprint" src={`${import.meta.env.BASE_URL}argo/blueprint.png`} alt="" width={288} height={288} />
@@ -181,6 +186,8 @@ function ShipView({ owned, onOpen }: { owned: ReadonlySet<string>; onOpen: Selec
         <li><i className="is-starting" /> Comes with the ship or in your plan</li>
         <li><i className="is-available" /> Can be bought now</li>
         <li><i className="is-locked" /> Needs other upgrades first</li>
+        <li><i className="is-required" /> Needed first</li>
+        <li><i className="is-unlocks" /> Unlocked next</li>
       </ul>
     </>
   );
