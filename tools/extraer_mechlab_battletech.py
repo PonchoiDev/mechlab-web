@@ -4,6 +4,7 @@ import sys
 
 from battletech import ASSETS, DATOS, leer_carpeta, leer_etiquetas, leer_json, leer_json_texto
 from extraer_mapa import escribir_png, reducir
+from extraer_argo_battletech import CLASE_MALLA, RECURSOS, Lector, leer_malla, leer_recursos
 from extraer_mapa_battletech import voltear
 from ue4 import descomprimir_dxt5
 from unityfs import textos_del_bundle
@@ -146,6 +147,51 @@ def guardar(nombre, datos):
         archivo.write("\n")
 
 
+# Iconos de los tipos de anclaje que la pantalla de reequipar pone sobre cada ubicación («2/2» y el icono
+# balístico). Son mallas de la interfaz importadas de SVG, como los de la Argo.
+PREFIJO_ANCLAJE = "uixSvgIcon_weapon_"
+ANCLAJES = {"Ballistic": "ballistic", "Energy": "energy", "Missile": "missile", "Support": "support"}
+
+
+def escribir_svg_con_opacidad(ruta, posiciones, triangulos, alfas):
+    """Como escribir_svg, pero con un trazado por cada opacidad: estos iconos tienen una parte opaca y
+    otra a medias. Cada triángulo toma la de su primer vértice."""
+    puntos = [(x, -y) for x, y in posiciones]
+    xs = [x for x, _ in puntos]
+    ys = [y for _, y in puntos]
+    trazados = {}
+    for a, b, c in zip(triangulos[0::3], triangulos[1::3], triangulos[2::3]):
+        trazados.setdefault(alfas[a], []).append("M{:.3f} {:.3f}L{:.3f} {:.3f}L{:.3f} {:.3f}Z".format(*puntos[a], *puntos[b], *puntos[c]))
+    caja = f"{min(xs):.3f} {min(ys):.3f} {max(xs) - min(xs):.3f} {max(ys) - min(ys):.3f}"
+    cuerpo = "".join(f'<path fill="#fff" fill-opacity="{alfa / 255:.2f}" d="{"".join(partes)}"/>'
+                     for alfa, partes in sorted(trazados.items()))
+    with open(ruta, "w", encoding="utf-8") as archivo:
+        archivo.write(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{caja}">{cuerpo}</svg>\n')
+
+
+def extraer_iconos_de_anclaje(juego):
+    destino = os.path.join(RUTA_ICONOS, "hardpoints")
+    os.makedirs(destino, exist_ok=True)
+    datos, objetos = leer_recursos(os.path.join(juego, RECURSOS))
+    escritos = set()
+    for posicion, _, clase in objetos:
+        if clase != CLASE_MALLA or not Lector(datos, posicion).cadena().startswith(PREFIJO_ANCLAJE):
+            continue
+        nombre, posiciones, triangulos, colores = leer_malla(datos, posicion, por_vertice=True)
+        tipo = ANCLAJES.get(nombre.removeprefix(PREFIJO_ANCLAJE))
+        if tipo is None:
+            continue
+        # Son blancos, con una parte al 50 %: la página les da el color de su tipo de anclaje.
+        if {color[:3] for color in colores} != {b"\xff\xff\xff"}:
+            raise ValueError(f"El icono {nombre} no es blanco: ¿ha cambiado el juego?")
+        escribir_svg_con_opacidad(os.path.join(destino, f"{tipo}.svg"), posiciones, triangulos, [color[3] for color in colores])
+        escritos.add(tipo)
+    faltan = set(ANCLAJES.values()) - escritos
+    if faltan:
+        raise ValueError(f"Faltan iconos de anclaje en {RECURSOS}: {', '.join(sorted(faltan))}")
+    print(f"iconos de anclaje: {len(escritos)}")
+
+
 def main():
     if len(sys.argv) != 2:
         print('Uso: python3 tools/extraer_mechlab_battletech.py "<carpeta del juego>"')
@@ -167,6 +213,7 @@ def main():
     guardar("constantes.json", leer_constantes(juego))
     guardar("etiquetas.json", etiquetas)
     extraer_iconos(juego, chasis)
+    extraer_iconos_de_anclaje(juego)
     print(f"chasis: {len(chasis)} · mechs: {len(mechs)} · componentes: {len(componentes)} · movimiento: {len(movimiento)}")
 
 
