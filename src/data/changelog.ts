@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-15-home-feedback',
+    date: '2026-11-15',
+    title: 'Feedback from the home page',
+    items: [
+      'The home page has its own Feedback button, next to What\'s new, to send a bug, an idea or wrong game data without opening a tool first'
+    ]
+  },
+  {
     id: '2026-11-15-battletech-gear-bonuses',
     date: '2026-11-15',
     title: 'Equipment bonuses on the BATTLETECH board',

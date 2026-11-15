@@ -603,6 +603,121 @@
         gap: 16px;
       }
 
+      /* Feedback: el botón va en la cabecera, junto a la campana, como en los MechLabs. */
+      .feedback-button {
+        height: 34px;
+        padding: 0 12px;
+        color: var(--text);
+        background: var(--raised);
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        font: 600 10px var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: color 120ms ease, border-color 120ms ease;
+      }
+
+      .feedback-button:hover,
+      .feedback-button:focus-visible { color: var(--lime); border-color: var(--lime); outline: none; }
+
+      .feedback-dialog {
+        width: min(520px, calc(100vw - 32px));
+        padding: 0;
+        color: var(--text);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-top: 2px solid var(--lime);
+        border-radius: 2px;
+      }
+
+      .feedback-dialog::backdrop { background: rgba(0, 0, 0, 0.65); }
+
+      .feedback-form { display: grid; gap: 14px; padding: 18px 20px 20px; }
+
+      .feedback-header { display: flex; align-items: center; justify-content: space-between; }
+      .feedback-header h2 { margin: 0; font-size: 18px; font-weight: 700; }
+
+      .feedback-close {
+        width: 30px;
+        height: 30px;
+        color: var(--muted);
+        background: none;
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        cursor: pointer;
+      }
+
+      .feedback-topics { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; border: 0; }
+
+      .feedback-topics legend,
+      .feedback-field span {
+        margin-bottom: 6px;
+        padding: 0;
+        color: var(--muted);
+        font: 500 10px var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .feedback-topics label { position: relative; cursor: pointer; }
+      .feedback-topics input { position: absolute; opacity: 0; pointer-events: none; }
+
+      .feedback-topics span {
+        display: inline-block;
+        padding: 6px 10px;
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        font: 600 10px var(--mono);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .feedback-topics input:checked + span { color: #18200f; background: var(--lime); border-color: var(--lime); }
+      .feedback-topics input:focus-visible + span { outline: 1px solid var(--lime); outline-offset: 2px; }
+
+      .feedback-field { display: grid; }
+
+      .feedback-field textarea,
+      .feedback-field input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px 10px;
+        color: var(--text);
+        background: var(--background, #101310);
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        font: 400 14px var(--sans, inherit);
+        resize: vertical;
+      }
+
+      .feedback-field textarea:focus,
+      .feedback-field input:focus { border-color: var(--lime); outline: none; }
+
+      .feedback-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+      .feedback-status { min-height: 1em; margin: 0; color: var(--muted); font-size: 13px; }
+      .feedback-status.is-error { color: #ff796c; }
+      .feedback-status.is-sent { color: var(--lime); }
+
+      .feedback-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+      .feedback-actions button {
+        min-height: 32px;
+        padding: 0 14px;
+        color: var(--text);
+        background: var(--raised);
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        font: 600 10px var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .feedback-actions .feedback-send { color: #18200f; background: var(--lime); border-color: var(--lime); }
+      .feedback-actions .feedback-send:disabled { opacity: 0.6; cursor: default; }
+
       .support-note {
         display: flex;
         flex-wrap: wrap;
@@ -645,6 +760,10 @@
       @media (max-width: 600px) {
         .shell { padding: 16px 16px 24px; }
         .topbar-note { display: none; }
+        /* Con la campana, Feedback y Support no caben: Support se queda en la taza. */
+        .topbar-side { gap: 8px; }
+        .topbar-side .support-link { gap: 0; padding: 0 9px; font-size: 0; }
+        .topbar-side .support-link-icon { font-size: 17px; }
         .intro { padding: 36px 0 28px; }
         .intro p { font-size: 15px; }
       }
@@ -678,6 +797,7 @@
               <ol class="whats-new-list"></ol>
             </section>
           </div>
+          <button type="button" class="feedback-button" aria-haspopup="dialog">Feedback</button>
           <a class="support-link" href="https://ko-fi.com/ponchoidev" target="_blank" rel="noreferrer" title="Life in the Inner Sphere is rough. Consider supporting this merc!">
             <span class="support-link-icon" aria-hidden="true">☕</span> Support
           </a>
@@ -693,7 +813,7 @@
           </p>
           <ul class="intro-features">
             <li><b>MechLab</b> Every chassis, weapon and upgrade, with heat, damage and armor at a glance</li>
-            <li><b>Share</b> Any build fits in one link, or an image in MW5</li>
+            <li><b>Share</b> Any build fits in one link or an image, ready to post</li>
             <li><b>Star maps</b> Factions, systems, stores and contracts, as the game shows them</li>
             <li><b>Planners</b> Pilot traits, academies and Argo upgrades, planned before you spend a C-Bill</li>
           </ul>
@@ -886,7 +1006,100 @@
         </p>
       </footer>
     </div>
+    <dialog class="feedback-dialog" aria-labelledby="feedback-title">
+      <form class="feedback-form" method="dialog">
+        <header class="feedback-header">
+          <h2 id="feedback-title">Send feedback</h2>
+          <button type="button" class="feedback-close" aria-label="Close">✕</button>
+        </header>
+        <fieldset class="feedback-topics">
+          <legend>Topic</legend>
+          <label><input type="radio" name="category" value="Bug" checked /> <span>Bug</span></label>
+          <label><input type="radio" name="category" value="Wrong game data" /> <span>Wrong game data</span></label>
+          <label><input type="radio" name="category" value="Idea" /> <span>Idea</span></label>
+          <label><input type="radio" name="category" value="Other" /> <span>Other</span></label>
+        </fieldset>
+        <label class="feedback-field">
+          <span>Message</span>
+          <textarea name="message" rows="6" minlength="5" maxlength="4000" required placeholder="What happened, or what would you like to see?"></textarea>
+        </label>
+        <label class="feedback-field">
+          <span>Contact (optional)</span>
+          <input type="text" name="contact" maxlength="300" placeholder="Email or Reddit username, if you want an answer" />
+        </label>
+        <!-- Campo trampa: las personas no lo ven; los bots que lo rellenan no envían nada. -->
+        <input class="feedback-trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <p class="feedback-status" role="status"></p>
+        <footer class="feedback-actions">
+          <button type="button" class="feedback-cancel">Cancel</button>
+          <button type="submit" class="feedback-send">Send</button>
+        </footer>
+      </form>
+    </dialog>
+
     <script>
+      // Feedback desde la portada: el mismo formulario y la misma API que el de los MechLabs, en un
+      // <dialog> nativo, que ya cierra con Escape y guarda el foco.
+      (() => {
+        const dialog = document.querySelector('.feedback-dialog');
+        const form = dialog.querySelector('.feedback-form');
+        const status = dialog.querySelector('.feedback-status');
+        const send = dialog.querySelector('.feedback-send');
+        const open = () => {
+          status.textContent = '';
+          status.className = 'feedback-status';
+          dialog.showModal();
+          form.message.focus();
+        };
+        document.querySelector('.feedback-button').addEventListener('click', open);
+        // El enlace del pie abría el formulario del MechLab de MW5; aquí abre el de la portada.
+        for (const link of document.querySelectorAll('a[href="/mercs/#feedback"]')) {
+          link.addEventListener('click', event => { event.preventDefault(); open(); });
+        }
+        for (const button of dialog.querySelectorAll('.feedback-close, .feedback-cancel')) {
+          button.addEventListener('click', () => dialog.close());
+        }
+        dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+        form.addEventListener('submit', async event => {
+          event.preventDefault();
+          if (form.message.value.trim().length < 5) {
+            status.textContent = 'Write a few more words, please.';
+            status.className = 'feedback-status is-error';
+            return;
+          }
+          send.disabled = true;
+          send.textContent = 'Sending…';
+          try {
+            const response = await fetch('/mercs/api/feedback', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                category: form.category.value,
+                message: form.message.value,
+                contact: form.contact.value,
+                website: form.website.value,
+                buildUrl: ''
+              })
+            });
+            // 503: el envío de correo aún no está configurado en Cloudflare.
+            if (response.status === 503) throw new Error('unavailable');
+            if (!response.ok) throw new Error(String(response.status));
+            form.reset();
+            status.textContent = 'Thanks! Your message was sent.';
+            status.className = 'feedback-status is-sent';
+            window.setTimeout(() => dialog.close(), 1500);
+          } catch (error) {
+            status.textContent = error.message === 'unavailable'
+              ? 'Feedback is not available right now. Please try again later.'
+              : 'The message could not be sent. Please try again in a moment.';
+            status.className = 'feedback-status is-error';
+          } finally {
+            send.disabled = false;
+            send.textContent = 'Send';
+          }
+        });
+      })();
+
       // Campana de novedades: las entradas salen de changelog.json, que genera el build a partir de
       // src/data/changelog.ts, y lo ya visto se guarda con la misma clave que en el MechLab.
       (async () => {
