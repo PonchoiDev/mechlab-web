@@ -61,6 +61,33 @@ function CardHardpoint({ view, isSelected, onSelect, onMenu }: {
   );
 }
 
+// Sobre cada ubicación, como en la pantalla de reequipar del juego: anclajes usados y totales de cada tipo
+// con su icono («2/2» y el balístico); un tipo que la ubicación no tiene sale como «0», apagado.
+const HARDPOINT_ICON_PATH = `${import.meta.env.BASE_URL}mechlab/icons/hardpoints/`;
+// En el orden del juego: balístico primero.
+const HARDPOINT_ORDER = ['ballistic', 'energy', 'missile', 'support'] as const;
+
+function LocationHardpoints({ usage }: { usage: ReturnType<typeof getLocationUsage> }) {
+  return (
+    <div className="bt-location-hardpoints" aria-label="Hardpoints">
+      {HARDPOINT_ORDER.map(type => {
+        const { used, capacity } = usage.hardpoints[type];
+        return (
+          <span
+            key={type}
+            className={capacity > 0 ? 'bt-location-hardpoint' : 'bt-location-hardpoint is-none'}
+            data-weapon-type={type}
+            title={`${HARDPOINT_LABELS[type]}: ${capacity > 0 ? `${used} of ${capacity} used` : 'none'}`}
+          >
+            {capacity > 0 ? `${used}/${capacity}` : '0'}
+            <i style={{ '--icon': `url(${HARDPOINT_ICON_PATH}${type}.svg)` } as CSSProperties} aria-hidden="true" />
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
 // El equipo fijo del chasis no tiene menú: no se puede mover ni quitar.
 function CardEquipment({ group, onSelect, onMenu }: { group: EquipmentGroup; onSelect: () => void; onMenu: (x: number, y: number) => void }) {
   const longPress = useLongPress(onMenu);
@@ -70,14 +97,14 @@ function CardEquipment({ group, onSelect, onMenu }: { group: EquipmentGroup; onS
       className={group.fixed ? 'component-card-item is-built-in' : 'component-card-item'}
       data-category={getEquipmentCategory(group.item)}
       data-weapon-type={group.item.kind === 'ammo' ? getItemWeaponType(group.item) : undefined}
-      title={group.fixed ? `${group.item.name}: built into this chassis, cannot be removed` : `${group.item.name}: right-click for options`}
+      title={group.fixed ? `${group.item.name}${group.item.bonuses.length > 0 ? ` (${group.item.bonuses.join(', ')})` : ''}: built into this chassis, cannot be removed` : `${group.item.name}: right-click for options`}
       onClick={(event) => { event.stopPropagation(); onSelect(); }}
       onContextMenu={group.fixed ? (event) => event.preventDefault() : (event) => openMenu(event, onMenu)}
       {...(group.fixed ? {} : longPress)}
     >
       {group.item.name}
       {group.count > 1 && <small>×{group.count}</small>}
-      {group.item.bonuses.length > 0 && !group.fixed && <small className="bt-item-bonus">{group.item.bonuses.join(' ')}</small>}
+      {group.item.bonuses.length > 0 && <small className="bt-item-bonus">{group.item.bonuses.join(' ')}</small>}
       {group.fixed && <small>built-in</small>}
     </button>
   );
@@ -134,13 +161,13 @@ function CellItem({ item, fixed = false, onSelect, onMenu }: { item: BtItem; fix
       style={{ '--slots': Math.max(1, item.slots) } as CSSProperties}
       data-category={item.kind === 'weapon' ? undefined : getEquipmentCategory(item)}
       data-weapon-type={getItemWeaponType(item)}
-      title={fixed ? `${item.name}: built into this chassis, cannot be removed` : `${item.name}: right-click for options`}
+      title={fixed ? `${item.name}${item.bonuses.length > 0 ? ` (${item.bonuses.join(', ')})` : ''}: built into this chassis, cannot be removed` : `${item.name}: right-click for options`}
       onClick={(event) => { event.stopPropagation(); onSelect(); }}
       onContextMenu={fixed ? (event) => event.preventDefault() : (event) => openMenu(event, onMenu)}
       {...(fixed ? {} : longPress)}
     >
       {item.name}
-      {item.bonuses.length > 0 && !fixed && <small className="bt-item-bonus">{item.bonuses.join(' ')}</small>}
+      {item.bonuses.length > 0 && <small className="bt-item-bonus">{item.bonuses.join(' ')}</small>}
       {fixed && <small>built-in</small>}
     </button>
   );
@@ -178,6 +205,8 @@ function LocationCard({ build, zone, label, position, isActive, selectedHardpoin
           <span className="bt-structure" title="Internal structure">S {location.structure}/{location.structure}</span>
         </span>
       </div>
+
+      <LocationHardpoints usage={usage} />
 
       {hardpoints.length > 0 && (
         <div className="component-card-hardpoints">

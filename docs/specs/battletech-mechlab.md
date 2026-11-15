@@ -75,7 +75,8 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
   - bajo el tonelaje, el resumen de anclajes usados y totales por tipo (Ballistic, Energy, Missile, Support) y los retrorreactores montados frente al máximo;
   - en cada ubicación, la estructura («S 70/70») junto al blindaje, y el máximo de cada lado del blindaje («100/140», «20/70»);
   - en la lista de objetos, el fabricante y la bonificación de cada versión («+ 10 Stb.Dmg.»), y en las armas daño, inestabilidad y calor por disparo;
-  - en las piezas montadas, su bonificación («+ 10 Dmg. - 2 Tons»);
+  - en las piezas montadas, su bonificación («+ 10 Dmg. - 2 Tons»), también en las fijas del chasis, que dicen además que vienen integradas;
+  - sobre cada ubicación, sus anclajes usados y totales de cada tipo con los iconos del juego («2/2» y el icono balístico; «0» si no tiene de ese tipo);
   - el rol de combate de serie del chasis (`StockRole`).
 
 - **RF12.** Share ofrece, además del enlace, «Generate build image», como el MechLab de MW5: un PNG con la misma distribución que el tablero (cabecera, las diez cifras de la lectura, las ocho ubicaciones con sus anclajes, armas, equipo, bonificaciones y blindaje delantero y trasero, y en el centro la ficha del 'Mech con el icono del juego), que se descarga o se copia, con el enlace de la build al lado.
@@ -116,6 +117,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 | CA22 | El RFL-3C (referencia del juego) | se consulta | sus máximos de blindaje y su estructura son los del juego: cabeza 45 y S 16, torso central 200 y 100 detrás con S 100, torsos laterales 140 y 70 con S 70, brazos 100 con S 50, piernas 140 con S 70; su rol de serie es Sniper |
 | CA23 | El RFL-3C reequipado como en la captura del juego (4 UAC/2 + + en los brazos, 4 Jump Jet (H) en el torso central, 4 AC/2 Ammo en las piernas, el Rangefinder Suite fijo y el blindaje 45, 75/20, 100/20, 80 y 70) | se calcula | pesa 60 de 60 t y el resumen de anclajes es 4/4 Ballistic, 0/4 Energy, 0/0 Missile, 0/0 Support y 4/4 retrorreactores |
 | CA24 | Los nombres y las bonificaciones de los objetos | se consultan | coinciden con los del juego: «UAC/2 + +» de Imperator con «+ 10 Dmg.» y «- 2 Tons», «AC/2 +» de Mydron con «+ 10 Stb.Dmg.» (25 de daño, 15 de inestabilidad y 4 de calor), «AC/2 Ammo», «Jump Jet (H)» y «Rangefinder Suite» |
+| CA25 | Las ubicaciones del RFL-3C reequipado | se cuentan sus anclajes | el brazo derecho tiene 2/2 balísticos y ningún otro; el torso derecho, 0/2 de energía; la cabeza, ninguno, como los iconos de la pantalla Refit |
 | CA26 | El HBK-4G de serie | se calculan las cifras de la imagen | son las diez de la lectura, en su orden: 50.00 / 50 t, 800 / 1045 puntos de blindaje, 10.00 t de blindaje, 120 / 200 m andando y corriendo, 0 / 4 retrorreactores, 170 de daño alfa, 80 cuerpo a cuerpo, 54 de calor alfa, 39 de disipación por turno y 270 m de alcance |
 
 ## Fuera de alcance

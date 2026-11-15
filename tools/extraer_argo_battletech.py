@@ -232,9 +232,10 @@ def leer_recursos(ruta):
     return datos, objetos
 
 
-def leer_malla(datos, posicion):
+def leer_malla(datos, posicion, por_vertice=False):
     """Nombre, vértices y triángulos de una malla de Unity 2018.4 sin comprimir. Las de los iconos
-    traen posición (tres float) y color (cuatro bytes) por vértice, e índices de 16 bits."""
+    traen posición (tres float) y color (cuatro bytes) por vértice, e índices de 16 bits. Con
+    por_vertice, los colores van en una lista, uno por vértice, en vez de en un conjunto."""
     lector = Lector(datos, posicion)
     nombre = lector.cadena()
     lector.saltar_array(48)  # submallas
@@ -261,7 +262,8 @@ def leer_malla(datos, posicion):
     paso = len(datos_vertices) // vertices
     color = canales[3][1]
     posiciones = [struct.unpack_from("<ff", datos_vertices, i * paso) for i in range(vertices)]
-    colores = {datos_vertices[i * paso + color:i * paso + color + 4] for i in range(vertices)}
+    por_orden = [datos_vertices[i * paso + color:i * paso + color + 4] for i in range(vertices)]
+    colores = por_orden if por_vertice else set(por_orden)
     return nombre, posiciones, struct.unpack(f"<{len(indices) // 2}H", indices), colores
 
 
