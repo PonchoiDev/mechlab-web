@@ -10,6 +10,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 | Star map | https://mw-builder.com/mercs/starmap/ |
 | Enemy units | https://mw-builder.com/mercs/units/ |
 | Pilots | https://mw-builder.com/mercs/pilots/ |
+| BATTLETECH MechLab | https://mw-builder.com/battletech/ |
 | BATTLETECH star map | https://mw-builder.com/battletech/starmap/ |
 | Slides | [View on Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) (in Spanish) |
 | Video walkthrough | [Watch on Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) (in Spanish) |
@@ -42,7 +43,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (459 tests, V8 coverage) |
+| Tests | Vitest 5 (499 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -95,6 +96,15 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - The 22 fixed markets of the DLC campaigns and the Atlas II on Romulus, with a search for where to buy each 'Mech or weapon. Every 'Mech opens in the MechLab with its stock build (`/mercs/?mech=AS7-D-H`).
 - Find a 'Mech: the map is colored by how rare a variant is in each faction's market on the chosen date, with its fixed sources (HRQ, special markets) and a shareable link (`?mech=AS7-D`). Special 'Mech locations lists the hero 'Mechs and special variants you can only get in one place, like the Razer Wolverine.
 
+**BATTLETECH MechLab**
+- Its own page (`/battletech/`) with the 96 'Mechs you can own in *BATTLETECH* (2018), from the base game, Heavy Metal, Flashpoint and Urban Warfare, with their stock builds and in-game icons.
+- Every weapon, ammo box, heat sink, jump jet and upgrade, with the manufacturer versions (+ to + + +), filters by category, version, source and rarity, search and sorting.
+- The in-game mechlab rules: everything takes slots, weapons need a free hardpoint of their type, each component goes only where the game allows it, jump jets have their limit and tonnage bracket, and built-in gear cannot be removed.
+- Armor in steps of 5 with front and rear limits, and a button that spreads the free tonnage like the in-game one.
+- The same board, location panel and toolbar as the MW5 MechLab, with the right-click menu (duplicate, fill hardpoints, add ammo, move and remove).
+- Alpha damage, stability damage, heat against sinking, damage by range, ammo per weapon type, walk and sprint, and value in C-Bills.
+- 'Mech picker with filters by weight class, source, role, minimum hardpoints and jump jets; share links (`?b=` and `?mech=HBK-4G`), builds saved in the browser and comparison.
+
 **BATTLETECH Argo**
 - Its own page (`/battletech/argo/`) with all 35 upgrades of the *Argo*, your company's ship in *BATTLETECH* (2018): cost, monthly upkeep, effects in the game's own words, requirements, what each one unlocks and what the crew member who pitches it says.
 - A tree by category and tier that lights up everything an upgrade requires and unlocks when you point at it.
@@ -141,6 +151,7 @@ src/
   pilots/               Pilots page: hero pilots, traits and academy training programs
   battletech/           BATTLETECH pages (star map), with their logic in utils/battletech/
   battletech/argo/      BATTLETECH Argo page: upgrade tree, cards and plan
+  battletech/mechlab/   BATTLETECH MechLab: 'Mech picker, board, equipment picker and analysis
   hooks/                Build state, saved builds, view preferences and Sarna image
   utils/                Configurator logic: calculations, fitting rules, upgrades, build codes
   services/             Sarna API, clipboard and PNG build image (canvas)
@@ -153,6 +164,7 @@ units/index.html        Entry of the enemy units page (/mercs/units/)
 pilots/index.html       Entry of the pilots page (/mercs/pilots/)
 battletech/             Entries of the BATTLETECH pages (/battletech/) and their images
 battletech/argo/        Entry of the Argo page (/battletech/argo/) and its images in public/argo/
+battletech/index.html   Entry of the BATTLETECH MechLab (/battletech/), with the chassis icons in public/mechlab/
 site/                   Landing page at the domain root (mw-builder.com)
 docs/                   Analysis, architecture, UML diagrams and development with AI
 tools/
@@ -168,6 +180,9 @@ tools/
   generar_pilotos.py    Generates src/data/pilots.json
   extraer_argo_battletech.py  Copies the Argo upgrades, their texts and images from BATTLETECH
   generar_argo_battletech.py  Generates src/data/battletech/argo.json
+  extraer_mechlab_battletech.py  Extracts chassis, variants, components and icons from BATTLETECH and its DLC
+  generar_mechlab_battletech.py  Generates src/data/battletech/mechs.json, items.json and constants.json
+  unityfs.py            Reads the Unity bundles of the BATTLETECH DLC
   ue4.py                Reads the .pak and the Unreal Engine 4 assets
   battletech.py         Reads the BATTLETECH data (lenient JSON and tags)
   extraer_mapa_battletech.py   Extracts systems, factions, tags and logos from BATTLETECH
@@ -303,9 +318,28 @@ python3 tools/generar_argo_battletech.py
 | `constantes.json` | `data/simGameConstants/SimGameConstants.json` | Base upkeep, starting upgrades in campaign and career, career multipliers and starting values |
 | `battletech/public/argo/` | `sprites/Illustrations/*.dds` and `sprites/Portraits/*.png` | Upgrade illustrations (from DXT1 and DXT5, at 375 × 150) and 96 px portraits |
 
+### BATTLETECH MechLab
+
+The base game keeps its data as loose JSON files, and the DLC (Heavy Metal, Flashpoint and Urban Warfare) inside Unity 2018 bundles in `data/assetbundles/`. `tools/unityfs.py` reads those bundles in pure Python: only their block table is LZ4 compressed, and each JSON file is a TextAsset. `extraer_mechlab_battletech.py` saves what the MechLab needs to `tools/datos-juego/battletech/mechlab/`, with the source of each entry, and the icons to `battletech/public/mechlab/icons/`. `generar_mechlab_battletech.py` generates `src/data/battletech/mechs.json`, `items.json` and `constants.json`.
+
+```sh
+python3 tools/extraer_mechlab_battletech.py "/path/to/BATTLETECH"
+python3 tools/generar_mechlab_battletech.py
+```
+
+| File | Source in the game | Contents |
+|---|---|---|
+| `battletech/mechlab/chasis.json` | `data/chassis/` and the DLC bundles | The 122 chassis with their locations (hardpoints, slots, max armor and structure), fixed equipment, tonnage, jump jets, role and icon |
+| `battletech/mechlab/mechs.json` | `data/mech/` and the bundles | The 140 variants with their stock inventory and armor, cost and tags |
+| `battletech/mechlab/componentes.json` | `data/weapon/`, `ammunitionBox/`, `heatsinks/`, `jumpjets/`, `upgrades/` and the bundles | Weapons, ammo boxes, heat sinks, jump jets and upgrades with their effects |
+| `battletech/mechlab/municiones.json` | `data/ammunition/` and the bundles | The ammo category of each box |
+| `battletech/mechlab/movimiento.json` | `data/movement/` and the bundles | Walk and sprint distance of each chassis |
+| `battletech/mechlab/constantes.json` | `data/constants/` | Heat (`CombatGameConstants`) and armor and cost (`MechStatisticsConstants`) |
+| `battletech/public/mechlab/icons/` | `sprites/MechPortraits/uixTxrIcon_*.dds` | Chassis icons as 128 px PNG, decoded from DXT5 |
+
 ## Quality and checks against the game
 
-- **459 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **499 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

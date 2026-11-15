@@ -1,0 +1,315 @@
+{
+ "Ammunition_AC10": {
+  "ArmorDamageModifier": 1,
+  "Category": "AC10",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Large caliber rounds capable of dealing heavy damage, and designed to be used in an AC/10.",
+   "Icon": null,
+   "Id": "Ammunition_AC10",
+   "Name": "AC/10 Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_AC2": {
+  "ArmorDamageModifier": 1,
+  "Category": "AC2",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Small caliber ammunition designed for long range fire in an AC/2.",
+   "Icon": null,
+   "Id": "Ammunition_AC2",
+   "Name": "AC/2 Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_AC20": {
+  "ArmorDamageModifier": 1,
+  "Category": "AC20",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Massive rounds, designed for devastating impact, to be used in an AC/20.",
+   "Icon": null,
+   "Id": "Ammunition_AC20",
+   "Name": "AC/20 Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_AC5": {
+  "ArmorDamageModifier": 1,
+  "Category": "AC5",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Moderate caliber rounds, suitable for long range fire in an AC/5.",
+   "Icon": null,
+   "Id": "Ammunition_AC5",
+   "Name": "AC/5 Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_AMS": {
+  "ArmorDamageModifier": 1,
+  "Category": "AMS",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": null,
+   "Icon": null,
+   "Id": "Ammunition_AMS",
+   "Name": "AMS Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_Flamer": {
+  "ArmorDamageModifier": 1,
+  "Category": "Flamer",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Flamer Ammo. SHOULD NOT BE PURCHASABLE OR AVAILABLE!!! Flamers should have internal ammo only.",
+   "Icon": null,
+   "Id": "Ammunition_Flamer",
+   "Name": "Flamer Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_GAUSS": {
+  "ArmorDamageModifier": 1,
+  "Category": "GAUSS",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": null,
+   "Icon": null,
+   "Id": "Ammunition_GAUSS",
+   "Name": "Gauss Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_LB10X": {
+  "ArmorDamageModifier": 1,
+  "Category": "NotSet",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Large caliber cluster rounds capable of dealing heavy damage, and designed to be used in an LB 10-X.",
+   "Icon": null,
+   "Id": "Ammunition_LB10X",
+   "Name": "LB 10-X Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammoCategoryID": "LB10X",
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_LB20X": {
+  "ArmorDamageModifier": 1,
+  "Category": "NotSet",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Massive cluster rounds, designed for devastating impact, to be used in an LB 20-X.",
+   "Icon": null,
+   "Id": "Ammunition_LB20X",
+   "Name": "LB 20-X Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammoCategoryID": "LB20X",
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_LB2X": {
+  "ArmorDamageModifier": 1,
+  "Category": "NotSet",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Small caliber cluster ammunition designed for long range fire in an LB 2-X.",
+   "Icon": null,
+   "Id": "Ammunition_LB2X",
+   "Name": "LB 2-X Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammoCategoryID": "LB2X",
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_LB5X": {
+  "ArmorDamageModifier": 1,
+  "Category": "NotSet",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Moderate caliber cluster rounds, suitable for long range fire in an LB 5-X.",
+   "Icon": null,
+   "Id": "Ammunition_LB5X",
+   "Name": "LB 5-X Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammoCategoryID": "LB5X",
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_LRM": {
+  "ArmorDamageModifier": 1,
+  "Category": "LRM",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Long range missiles, capable of dealing moderate damage at long range. Each missile lacks punch, but in a group they can deal significant damage.",
+   "Icon": null,
+   "Id": "Ammunition_LRM",
+   "Name": "LRM Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_MG": {
+  "ArmorDamageModifier": 1,
+  "Category": "MG",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Large bore belted ammunition for 'Mech-mounted machine guns.",
+   "Icon": null,
+   "Id": "Ammunition_MG",
+   "Name": "MG Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_Narc": {
+  "ArmorDamageModifier": 1,
+  "Category": "NotSet",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Short range missiles that deploy a targeting beacon that increases damage from subsequent missile attacks.",
+   "Icon": null,
+   "Id": "Ammunition_Narc",
+   "Name": "Narc Beacon Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammoCategoryID": "Narc",
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_SRM": {
+  "ArmorDamageModifier": 1,
+  "Category": "SRM",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Short range missiles, capable of dealing heavy damage at close range via shaped charge warheads.",
+   "Icon": null,
+   "Id": "Ammunition_SRM",
+   "Name": "SRM Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_SRMInferno": {
+  "ArmorDamageModifier": 1,
+  "Category": "NotSet",
+  "CriticalDamageModifier": 1,
+  "Description": {
+   "Cost": 0,
+   "Details": "Inferno SRM Ammo. SHOULD NOT BE PURCHASABLE OR AVAILABLE!!! Inferno Racks should have internal ammo only.",
+   "Icon": null,
+   "Id": "Ammunition_SRMInferno",
+   "Name": "Inferno SRM Ammo",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 1,
+  "ISDamageModifier": 1,
+  "ammoCategoryID": "SRMInferno",
+  "ammunitionTypeID": "Normal"
+ },
+ "Ammunition_Template": {
+  "ArmorDamageModifier": 0,
+  "BaseDamage": 0,
+  "Category": "NotSet",
+  "CriticalDamageModifier": 0,
+  "Description": {
+   "Cost": 0,
+   "Details": "",
+   "Icon": "",
+   "Id": "AmmunitionTemplate",
+   "Name": "",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "HeatGenerated": 0,
+  "HeatGeneratedModifier": 0,
+  "ISDamageModifier": 0,
+  "ammunitionTypeID": "Normal"
+ }
+}

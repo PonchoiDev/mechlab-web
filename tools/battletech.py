@@ -88,3 +88,11 @@ def leer_constantes(juego):
     """Las constantes de la campaña y la carrera (SimGameConstants.json, que lleva además comentarios de
     bloque), por sección."""
     return leer_json(os.path.join(juego, DATOS, "simGameConstants", "SimGameConstants.json"))
+
+
+def leer_json_texto(texto):
+    """Un JSON del juego ya leído, como el de un TextAsset de los bundles de los DLC, con las mismas
+    tolerancias que leer_json."""
+    if isinstance(texto, bytes):
+        texto = texto.decode("utf-8-sig")
+    return json.loads(limpiar_json(texto.lstrip("\ufeff")))

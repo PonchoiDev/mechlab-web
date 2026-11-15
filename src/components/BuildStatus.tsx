@@ -4,16 +4,20 @@ import type { BuildIssue } from '../utils/issues';
 interface BuildStatusProps {
   issues: BuildIssue[];
   onSelectZone: (zone: Zone, hardpointIndex: number | null) => void;
+  // Lo que dice la barra sin problemas: cada MechLab tiene sus propias comprobaciones.
+  readyMessage?: string;
 }
 
-export function BuildStatus({ issues, onSelectZone }: BuildStatusProps) {
+const MERCS_READY_MESSAGE = 'No pending issues: every hardpoint is used, weapons have ammo and armor is maxed.';
+
+export function BuildStatus({ issues, onSelectZone, readyMessage = MERCS_READY_MESSAGE }: BuildStatusProps) {
   return (
     <section className={issues.length > 0 ? 'build-status' : 'build-status is-ready'} aria-label="Build status">
       <span className="build-status-label">
         {issues.length > 0 ? `PENDING · ${issues.length}` : 'BUILD READY'}
       </span>
       {issues.length === 0 ? (
-        <span className="build-status-ready">No pending issues: every hardpoint is used, weapons have ammo and armor is maxed.</span>
+        <span className="build-status-ready">{readyMessage}</span>
       ) : (
         <ul className="build-status-issues">
           {issues.map(issue => (

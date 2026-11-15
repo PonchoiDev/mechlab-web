@@ -1,0 +1,398 @@
+{
+ "movedef_APC_Wheeled": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_BULLDOG": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_CARRIER_LRM": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_CARRIER_SRM": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_DEMOLISHER": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_GALLANT": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_GALLEON": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_MANTICORE": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_MOBILEHQ": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_PACKRAT": {
+  "MaxSprintDistance": 350.0,
+  "MaxWalkDistance": 200.0
+ },
+ "movedef_ROTUNDA": {
+  "MaxSprintDistance": 400.0,
+  "MaxWalkDistance": 235.0
+ },
+ "movedef_SCHREK": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_SCORPION": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_SLDFDroneHeavy": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_SLDFDroneMedium": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_STRIKER": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_SWIFTWIND": {
+  "MaxSprintDistance": 400.0,
+  "MaxWalkDistance": 260.0
+ },
+ "movedef_WHEELEDAPC": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_annihilator_ANH-1A": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_archer_ARC-2R": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_archer_ARC-2S": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_assassin_ASN-101": {
+  "MaxSprintDistance": 315.0,
+  "MaxWalkDistance": 190.0
+ },
+ "movedef_assassin_ASN-21": {
+  "MaxSprintDistance": 315.0,
+  "MaxWalkDistance": 190.0
+ },
+ "movedef_atlas_AS7-D": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_awesome_AWS-8Q": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_banshee_BNC-3E": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_banshee_BNC-3S": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_battlemaster_BLR-1G": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_battlemaster_BLR-1GB": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_battlemaster_BLR-1S": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_blackjack_BJ-1": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_blackknight_BL-6-KNT": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_bullshark_BSK-M3": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_bullshark_BSK-MAZ": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_cataphract_CTF-0X": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_cataphract_CTF-1X": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_catapult_CPLT-C1": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_centurion_CN9-A": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_cicada_CDA-2A": {
+  "MaxSprintDistance": 350.0,
+  "MaxWalkDistance": 210.0
+ },
+ "movedef_cicada_CDA-3C": {
+  "MaxSprintDistance": 315.0,
+  "MaxWalkDistance": 190.0
+ },
+ "movedef_commando_COM-2D": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_crab_CRB-27": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_crab_CRB-27b": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_cyclops_CP-10-HQ": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_cyclops_CP-10-Q": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_cyclops_CP-10-Z": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_dragon_DRG-1N": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_enforcer_ENF-4R": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_firestarter_FS9-H": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_flea_FLE-15": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_flea_FLE-4": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_granddragon_DRG-1G": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_grasshopper_GHR-5H": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_griffin_GRF-1N": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_hatchetman_HCT-3F": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_highlander_HGN-733": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_hunchback_HBK-4G": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_jagermech_JM6-S": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_javelin_JVN-10A": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_javelin_JVN-10F": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_javelin_JVN-10N": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_jenner_JR7-D": {
+  "MaxSprintDistance": 315.0,
+  "MaxWalkDistance": 190.0
+ },
+ "movedef_kingcrab_KGC-0000": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_kintaro_KTO-18": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_locust_LCT-1V": {
+  "MaxSprintDistance": 350.0,
+  "MaxWalkDistance": 210.0
+ },
+ "movedef_marauder_MAD-2R": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_marauder_MAD-3D": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_marauder_MAD-3R": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_orion_ON1-K": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_panther_PNT-9R": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_phoenixhawk_PXH-1": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_phoenixhawk_PXH-1K": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_phoenixhawk_PXH-1b": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_quickdraw_QKD-4G": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_raven_RVN-1X": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_raven_RVN-3X": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_rifleman_RFL-3C": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_rifleman_RFL-3N": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_rifleman_RFL-4D": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_shadowhawk_SHD-2H": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_spider_SDR-5V": {
+  "MaxSprintDistance": 350.0,
+  "MaxWalkDistance": 210.0
+ },
+ "movedef_stalker_STK-3F": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_thunderbolt_TDR-5S": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_trebuchet_TBT-5N": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_trebuchet_TBT-7K": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_urbanmech_UM-R60": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_urbanmech_UM-R90": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_victor_VTR-9B": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_vindicator_VND-1AA": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_vindicator_VND-1R": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_vulcan_VL-2T": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_vulcan_VL-5T": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_warhammer_WHM-6D": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_warhammer_WHM-6R": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_warhammer_WHM-7A": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_wolverine_WVR-6R": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_zeus_ZEU-5T": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_zeus_ZEU-6S": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_zeus_ZEU-6T": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ }
+}

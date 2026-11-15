@@ -10,6 +10,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno
 | Mapa estelar | https://mw-builder.com/mercs/starmap/ |
 | Unidades enemigas | https://mw-builder.com/mercs/units/ |
 | Pilotos | https://mw-builder.com/mercs/pilots/ |
+| MechLab de BATTLETECH | https://mw-builder.com/battletech/ |
 | Mapa estelar de BATTLETECH | https://mw-builder.com/battletech/starmap/ |
 | Presentación (slides) | [Ver en Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) |
 | Vídeo explicativo | [Ver en Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) |
@@ -40,7 +41,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (459 tests, cobertura con V8) |
+| Tests | Vitest 5 (499 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -93,6 +94,15 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Los 22 mercados fijos de las campañas de los DLC y el Atlas II de Romulus, con un buscador de dónde comprar cada 'Mech o arma. Cada 'Mech se abre en el MechLab con su build de serie (`/mercs/?mech=AS7-D-H`).
 - Find a 'Mech: el mapa se colorea según la rareza de una variante en el mercado de cada facción, en la fecha elegida, con sus fuentes fijas (HRQ, mercados especiales) y el enlace se comparte (`?mech=AS7-D`). Special 'Mech locations lista los 'Mechs hero y las variantes especiales que solo se consiguen en un sitio, como el Wolverine de Razer.
 
+**MechLab de BATTLETECH**
+- Página propia (`/battletech/`) con los 96 'Mechs que se pueden tener en *BATTLETECH* (2018), del juego base y de Heavy Metal, Flashpoint y Urban Warfare, con su build de serie y su icono del juego.
+- Todas las armas, munición, disipadores, retrorreactores y mejoras, con sus versiones de fabricante (+ a + + +), filtros por categoría, versión, fuente y rareza, búsqueda y orden.
+- Las reglas del mechlab del juego: todo ocupa ranuras, las armas necesitan un anclaje libre de su tipo, cada componente va donde lo permite el juego, los retrorreactores tienen su máximo y su tramo de tonelaje, y el equipo fijo no se quita.
+- Blindaje en pasos de 5 con sus máximos delantero y trasero, y un botón que reparte el tonelaje libre como el del juego.
+- El mismo tablero, panel de ubicación y barra de herramientas que el MechLab de MW5, con el menú del clic derecho (duplicar, llenar anclajes, añadir munición, mover y quitar).
+- Daño de la salva, inestabilidad, calor frente a disipación, daño por distancia, munición por tipo de arma, andar y correr, y valor en C-Bills.
+- Selector con filtros por clase, fuente, rol, anclajes mínimos y retrorreactores; enlace para compartir (`?b=` y `?mech=HBK-4G`), builds guardadas en el navegador y comparación.
+
 **Argo de BATTLETECH**
 - Página propia (`/battletech/argo/`) con las 35 mejoras de la *Argo*, la nave de la compañía en *BATTLETECH* (2018): precio, mantenimiento mensual, efectos con la frase del juego, requisitos, lo que abre cada una y lo que dice el tripulante que la presenta.
 - Árbol por categoría y nivel que resalta, al pasar por una mejora, todo lo que pide y todo lo que abre.
@@ -139,6 +149,7 @@ src/
   pilots/               Página de los pilotos: pilotos hero, rasgos y programas de las academias
   battletech/           Páginas de BATTLETECH (mapa estelar), con su lógica en utils/battletech/
   battletech/argo/      Página de la Argo de BATTLETECH: árbol de mejoras, fichas y plan
+  battletech/mechlab/   MechLab de BATTLETECH: selector de 'Mech, tablero, selector de equipo y análisis
   hooks/                Estado de la build, builds guardadas, preferencias de vista e imagen de Sarna
   utils/                Lógica del configurador: cálculos, reglas de equipo, mejoras, código de las builds
   services/             API de Sarna, portapapeles e imagen PNG de la build (canvas)
@@ -151,6 +162,7 @@ units/index.html        Entrada de la página de las unidades enemigas (/mercs/u
 pilots/index.html       Entrada de la página de los pilotos (/mercs/pilots/)
 battletech/             Entradas de las páginas de BATTLETECH (/battletech/) y sus imágenes
 battletech/argo/        Entrada de la página de la Argo (/battletech/argo/) y sus imágenes en public/argo/
+battletech/index.html   Entrada del MechLab de BATTLETECH (/battletech/), con los iconos de los chasis en public/mechlab/
 site/                   Portada de la raíz del dominio (mw-builder.com)
 docs/                   Análisis, arquitectura, diagramas UML y desarrollo con IA
 tools/
@@ -166,6 +178,9 @@ tools/
   generar_pilotos.py    Genera src/data/pilots.json
   extraer_argo_battletech.py  Copia de BATTLETECH las mejoras de la Argo, sus textos e imágenes
   generar_argo_battletech.py  Genera src/data/battletech/argo.json
+  extraer_mechlab_battletech.py  Extrae de BATTLETECH y de sus DLC los chasis, las variantes, los componentes y los iconos
+  generar_mechlab_battletech.py  Genera src/data/battletech/mechs.json, items.json y constants.json
+  unityfs.py            Lectura de los bundles de Unity de los DLC de BATTLETECH
   ue4.py                Lectura del .pak y de los assets de Unreal Engine 4
   battletech.py         Lectura de los datos de BATTLETECH (JSON tolerante y etiquetas)
   extraer_mapa_battletech.py   Extrae de BATTLETECH los sistemas, las facciones, las etiquetas y los logos
@@ -299,9 +314,28 @@ python3 tools/generar_argo_battletech.py
 | `constantes.json` | `data/simGameConstants/SimGameConstants.json` | Mantenimiento base, mejoras iniciales de la campaña y de la carrera, multiplicadores de la carrera y valores iniciales |
 | `battletech/public/argo/` | `sprites/Illustrations/*.dds` y `sprites/Portraits/*.png` | Ilustraciones de las mejoras (de DXT1 y DXT5, a 375 × 150) y retratos de 96 px |
 
+### MechLab de BATTLETECH
+
+El juego base trae sus datos en JSON sueltos, y los DLC (Heavy Metal, Flashpoint y Urban Warfare) dentro de bundles de Unity 2018 en `data/assetbundles/`. `tools/unityfs.py` lee esos bundles en Python puro: solo su tabla de bloques va comprimida con LZ4, y cada JSON es un TextAsset. `extraer_mechlab_battletech.py` guarda en `tools/datos-juego/battletech/mechlab/` lo que necesita el MechLab, con la fuente de cada cosa, y los iconos en `battletech/public/mechlab/icons/`. `generar_mechlab_battletech.py` genera `src/data/battletech/mechs.json`, `items.json` y `constants.json`.
+
+```sh
+python3 tools/extraer_mechlab_battletech.py "/ruta/a/BATTLETECH"
+python3 tools/generar_mechlab_battletech.py
+```
+
+| Archivo | Origen en el juego | Contenido |
+|---|---|---|
+| `battletech/mechlab/chasis.json` | `data/chassis/` y los bundles de los DLC | Los 122 chasis con sus ubicaciones (anclajes, ranuras, blindaje máximo y estructura), equipo fijo, tonelaje, retrorreactores, rol e icono |
+| `battletech/mechlab/mechs.json` | `data/mech/` y los bundles | Las 140 variantes con su inventario y blindaje de serie, coste y etiquetas |
+| `battletech/mechlab/componentes.json` | `data/weapon/`, `ammunitionBox/`, `heatsinks/`, `jumpjets/`, `upgrades/` y los bundles | Armas, cajas de munición, disipadores, retrorreactores y mejoras con sus efectos |
+| `battletech/mechlab/municiones.json` | `data/ammunition/` y los bundles | La categoría de munición de cada caja |
+| `battletech/mechlab/movimiento.json` | `data/movement/` y los bundles | Distancia de andar y de correr de cada chasis |
+| `battletech/mechlab/constantes.json` | `data/constants/` | Calor (`CombatGameConstants`) y blindaje y coste (`MechStatisticsConstants`) |
+| `battletech/public/mechlab/icons/` | `sprites/MechPortraits/uixTxrIcon_*.dds` | Iconos de los chasis en PNG de 128 px, descomprimidos de DXT5 |
+
 ## Calidad y comprobación contra el juego
 
-- **459 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **499 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

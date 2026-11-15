@@ -9,9 +9,10 @@ interface UtilityToolbarProps {
   onRemoveItems: (type: 'weapon' | 'ammo' | 'equipment') => void;
   canLoadStock: boolean;
   onLoadStock: () => void;
-  upgradeSlots: { used: number; capacity: number };
-  isUpgradesOpen: boolean;
-  onToggleUpgrades: () => void;
+  // Las mejoras de la cantina son de MW5: sin onToggleUpgrades (BATTLETECH) no sale su grupo.
+  upgradeSlots?: { used: number; capacity: number };
+  isUpgradesOpen?: boolean;
+  onToggleUpgrades?: () => void;
   isCompareOpen: boolean;
   onToggleCompare: () => void;
   savedBuildCount: number;
@@ -84,7 +85,7 @@ export function UtilityToolbar({
           Remove equipment
         </button>
       </div>
-      <div className="utility-group">
+      {onToggleUpgrades && <div className="utility-group">
         <span className="utility-label">CANTINA</span>
         <button
           type="button"
@@ -93,9 +94,9 @@ export function UtilityToolbar({
           title="Cantina upgrades installed on this 'Mech"
           onClick={onToggleUpgrades}
         >
-          Upgrades{upgradeSlots.used > 0 && <span className="utility-count">{upgradeSlots.used}/{upgradeSlots.capacity}</span>}
+          Upgrades{upgradeSlots && upgradeSlots.used > 0 && <span className="utility-count">{upgradeSlots.used}/{upgradeSlots.capacity}</span>}
         </button>
-      </div>
+      </div>}
       <div className="utility-group">
         <span className="utility-label">BUILD</span>
         <button

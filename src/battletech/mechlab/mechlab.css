@@ -1,0 +1,202 @@
+/* MechLab de BATTLETECH: los estilos del MechLab de MW5 (App.css) con el amarillo de las pantallas
+   de BATTLETECH como acento, el tablero alrededor del icono del chasis y el selector de objetos al lado. */
+:root {
+  --bt-accent: #ffd400;
+  --bt-energy: #00d2ff;
+  --bt-ballistic: #ffb703;
+  --bt-missile: #4caf50;
+  --bt-support: #b9a4ff;
+  --bt-ammo: #c9b38a;
+  --bt-heat: #ff7a45;
+  --bt-jump: #69d9ce;
+  --bt-upgrade: #d8dfd4;
+}
+
+body { background: var(--work-bg); }
+
+.bt-mechlab {
+  --work-lime: var(--bt-accent);
+}
+
+/* Los colores de anclaje son los del MechLab de MW5 (--weapon-color en App.css); BATTLETECH añade el
+   de Support, que MW5 no tiene. */
+[data-weapon-type="support"] { --weapon-color: var(--bt-support); }
+[data-weapon-type], [data-category="energy"], [data-category="ballistic"], [data-category="missile"], [data-category="support"] { --bt-color: var(--weapon-color); }
+[data-category="energy"] { --weapon-color: var(--bt-energy); }
+[data-category="ballistic"] { --weapon-color: var(--bt-ballistic); }
+[data-category="missile"] { --weapon-color: var(--bt-missile); }
+[data-category="support"] { --weapon-color: var(--bt-support); }
+[data-category="ammo"] { --bt-color: var(--bt-ammo); }
+[data-category="heatSink"] { --bt-color: var(--bt-heat); }
+[data-category="jumpJet"] { --bt-color: var(--bt-jump); }
+[data-category="upgrade"] { --bt-color: var(--bt-upgrade); }
+
+.bt-mech-icon {
+  flex: none;
+  object-fit: contain;
+  image-rendering: auto;
+}
+
+.bt-mech-icon.is-empty {
+  display: inline-block;
+  border: 1px dashed var(--work-line);
+}
+
+/* Selector de 'Mech */
+.bt-mech-picker { min-width: 280px; }
+
+
+/* Las opciones son las de MW5 (mech-option) con el icono del chasis delante. */
+.bt-mech-option { grid-template-columns: 40px minmax(0, 1fr) auto; }
+
+.bt-mech-option .bt-mech-icon { grid-row: span 3; }
+
+.bt-mech-option .mech-option-hardpoints,
+.bt-mech-option small { grid-column: 2 / -1; }
+
+.mech-filter-stepper[data-weapon-type] b { color: var(--weapon-color); }
+
+
+
+
+/* Tablero: las tarjetas son las del MechLab de MW5 (component-card); aquí solo la ficha del 'Mech y el
+   equipo fijo del chasis. */
+.component-card-item.is-built-in {
+  border-style: dashed;
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 6px, transparent 6px 12px);
+  cursor: default;
+}
+
+.hardpoint-chip.is-over { --weapon-color: var(--work-red); }
+
+.bt-reference .bt-mech-icon {
+  width: min(180px, 70%);
+  height: auto;
+  margin: 8px 0;
+  filter: drop-shadow(0 0 18px rgba(255, 212, 0, 0.12));
+}
+
+.bt-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bt-tags li {
+  padding: 1px 6px;
+  border: 1px solid rgba(255, 212, 0, 0.35);
+  border-radius: 2px;
+  color: var(--bt-accent);
+  font: 500 10px var(--work-mono);
+}
+
+.bt-reference-description {
+  color: var(--work-muted);
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+/* Análisis */
+.bt-range-heading { margin-top: 18px; }
+
+.bt-range-profile {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 12px 14px 16px;
+  list-style: none;
+}
+
+.bt-range-profile li {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 92px;
+  align-items: center;
+  gap: 8px;
+  font: 500 11px var(--work-mono);
+}
+
+.bt-range-distance { color: var(--work-muted); }
+
+.bt-range-bar {
+  display: flex;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bt-range-fill { background: var(--bt-accent); }
+.bt-range-fill.is-below-min { background: var(--work-amber); opacity: 0.55; }
+
+.bt-range-value small { color: var(--work-amber); }
+
+@media (max-width: 600px) {
+  .bt-mech-picker { min-width: 0; width: 100%; }
+  .bt-range-profile li { grid-template-columns: 44px minmax(0, 1fr) 80px; }
+}
+
+/* Lo que enseña la pantalla de reequipar del juego: resumen de anclajes bajo el tonelaje, estructura de
+   cada ubicación, máximo de cada lado del blindaje, fabricante y bonificación en naranja, y rol de serie. */
+.bt-hardpoint-usage { margin-top: -4px; }
+
+.bt-card-header-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bt-structure {
+  color: var(--work-muted);
+  font: 600 10px var(--work-mono);
+  white-space: nowrap;
+}
+
+.armor-control .bt-armor-max {
+  color: var(--work-muted);
+  font: 500 10px var(--work-mono);
+}
+
+.bt-item-maker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  color: var(--work-cyan);
+  font: 600 9px var(--work-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bt-item-bonus {
+  color: var(--work-amber);
+  font-family: var(--work-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.hardpoint-chip-tier { white-space: nowrap; }
+
+.component-card-item .bt-item-bonus { font-size: 9px; }
+
+.bt-stock-role {
+  color: var(--work-muted);
+  font: 600 10px var(--work-mono);
+  letter-spacing: 0.06em;
+}
+
+.bt-stock-role strong {
+  margin-left: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--work-line);
+  color: var(--work-text);
+  text-transform: uppercase;
+}
+
+/* El icono del chasis ocupa el hueco de la imagen de Sarna en las tarjetas de la comparación. */
+.compare-card-image.bt-compare-icon {
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at center, rgba(255, 212, 0, 0.08), transparent 70%), rgba(16, 19, 16, 0.9);
+}
