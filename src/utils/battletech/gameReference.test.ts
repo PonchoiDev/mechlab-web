@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import type { BtBuild } from '../../types/battletech-mechlab';
-import { createStockBuild, getHardpointSummary } from './fitting';
+import { createStockBuild, getHardpointSummary, getLocationUsage } from './fitting';
 import { findMech, getItem } from './mechlabData';
 import { getBuildTonnage } from './stats';
 
 // Cifras de las capturas del juego (pantallas Mech Bay y Refit de un Rifleman RFL-3C reequipado), como
 // gameReference.test.ts del MechLab de MW5: si el MechLab y el juego no coinciden, manda el juego.
-// Criterios CA22 a CA24 de docs/specs/battletech-mechlab.md.
+// Criterios CA22 a CA25 de docs/specs/battletech-mechlab.md.
 const rifleman = findMech('RFL-3C')!;
 
 const UAC2 = 'Weapon_Autocannon_UAC2_2-Imperator';
@@ -79,4 +79,16 @@ describe('referencia del juego: Rifleman RFL-3C', () => {
     expect(getItem(HEAVY_JUMP_JET)?.name).toBe('Jump Jet (H)');
     expect(getItem('Gear_General_Rangefinder_Suite')?.name).toBe('Rangefinder Suite');
   });
+
+  it('CA25: los anclajes de cada ubicación, como los iconos de la pantalla Refit', () => {
+    const usage = (zone: 'rightArm' | 'rightTorso' | 'head') => Object.fromEntries(
+      (['ballistic', 'energy', 'missile', 'support'] as const).map(type => {
+        const { used, capacity } = getLocationUsage(refit.mech, refit.loadout, zone).hardpoints[type];
+        return [type, `${used}/${capacity}`];
+      }));
+    expect(usage('rightArm')).toEqual({ ballistic: '2/2', energy: '0/0', missile: '0/0', support: '0/0' });
+    expect(usage('rightTorso')).toEqual({ ballistic: '0/0', energy: '0/2', missile: '0/0', support: '0/0' });
+    expect(usage('head')).toEqual({ ballistic: '0/0', energy: '0/0', missile: '0/0', support: '0/0' });
+  });
 });
+
