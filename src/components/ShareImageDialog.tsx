@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
-import { renderBuildImage, type BuildImageInput } from '../services/buildImage';
 import { canCopyImages, copyImage } from '../services/clipboard';
 
+// Lo usan los dos MechLabs: cada uno dibuja su imagen (src/services/buildImage.ts para MW5 y
+// src/services/battletech/buildImage.ts para BATTLETECH) y el diálogo la enseña, la descarga o la copia.
 interface ShareImageDialogProps {
-  build: BuildImageInput;
+  render: () => Promise<Blob>;
+  // Nombre del archivo que se descarga y texto alternativo de la vista previa.
+  fileName: string;
+  alt: string;
   // Mientras Sarna no responde no se dibuja, para no generar primero una imagen sin el mech.
-  isImageLoading: boolean;
+  isImageLoading?: boolean;
   buildUrl: string;
   onCopyLink: () => void;
   onMessage: (message: string) => void;
@@ -17,14 +21,14 @@ type ImageState =
   | { status: 'ready'; blob: Blob; url: string }
   | { status: 'failed' };
 
-export function ShareImageDialog({ build, isImageLoading, buildUrl, onCopyLink, onMessage, onClose }: ShareImageDialogProps) {
+export function ShareImageDialog({ render, fileName, alt, isImageLoading = false, buildUrl, onCopyLink, onMessage, onClose }: ShareImageDialogProps) {
   const [image, setImage] = useState<ImageState>({ status: 'rendering' });
 
   useEffect(() => {
     if (isImageLoading) return;
     let objectUrl: string | null = null;
     let cancelled = false;
-    renderBuildImage(build)
+    render()
       .then(blob => {
         if (cancelled) return;
         objectUrl = URL.createObjectURL(blob);
@@ -36,7 +40,7 @@ export function ShareImageDialog({ build, isImageLoading, buildUrl, onCopyLink, 
       cancelled = true;
       if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
-  }, [build, isImageLoading]);
+  }, [render, isImageLoading]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -45,8 +49,6 @@ export function ShareImageDialog({ build, isImageLoading, buildUrl, onCopyLink, 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
-
-  const fileName = `${build.mech.variant.replace(/[^a-z0-9-]+/gi, '_')}-build.png`;
 
   const copyBuildImage = async () => {
     if (image.status !== 'ready') return;
@@ -62,7 +64,7 @@ export function ShareImageDialog({ build, isImageLoading, buildUrl, onCopyLink, 
         </header>
 
         <div className="share-dialog-preview">
-          {image.status === 'ready' && <img src={image.url} alt={`${build.mech.name} ${build.mech.variant} build`} />}
+          {image.status === 'ready' && <img src={image.url} alt={alt} />}
           {image.status === 'rendering' && <p>Rendering image…</p>}
           {image.status === 'failed' && <p>The image could not be generated.</p>}
         </div>
