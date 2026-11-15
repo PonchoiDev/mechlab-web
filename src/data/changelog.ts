@@ -11,9 +11,10 @@ export const CHANGELOG: ChangelogEntry[] = [
   {
     id: '2026-11-14-battletech-covers',
     date: '2026-11-14',
-    title: 'BATTLETECH on the home page',
+    title: 'A new home page',
     items: [
-      'The BATTLETECH MechLab and the Argo have their own covers on the home page, next to the BATTLETECH star map, with art from the game'
+      'The BATTLETECH MechLab and the Argo have their own covers on the home page, next to the BATTLETECH star map, with art from the game',
+      'The home page has one row per game, MW5: Mercenaries and BATTLETECH, each with its own tools, and a new introduction to what MW Builder offers'
     ]
   },
   {
