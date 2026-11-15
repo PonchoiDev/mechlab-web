@@ -78,6 +78,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
   - en las piezas montadas, su bonificación («+ 10 Dmg. - 2 Tons»);
   - el rol de combate de serie del chasis (`StockRole`).
 
+- **RF13.** El daño por alcance del análisis se ve como un radar, un campo de tiro en semicírculo: el 'Mech abajo en el centro y un anillo cada 90 m hasta 720 m. Cada anillo es más intenso cuanto más daño llega a esa distancia; el daño de las armas que están por debajo de su alcance mínimo va rayado en ámbar. Cada anillo dice su daño, y las distancias van en la base.
 ## Requisitos no funcionales
 
 - **RNF1.** La lógica es pura y está en `src/utils/battletech/`, con sus tests: reglas de montaje, peso y blindaje, calor, daño, munición, movimiento, coste, problemas, código de la build, builds guardadas, comparación y filtros.
@@ -115,6 +116,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 | CA22 | El RFL-3C (referencia del juego) | se consulta | sus máximos de blindaje y su estructura son los del juego: cabeza 45 y S 16, torso central 200 y 100 detrás con S 100, torsos laterales 140 y 70 con S 70, brazos 100 con S 50, piernas 140 con S 70; su rol de serie es Sniper |
 | CA23 | El RFL-3C reequipado como en la captura del juego (4 UAC/2 + + en los brazos, 4 Jump Jet (H) en el torso central, 4 AC/2 Ammo en las piernas, el Rangefinder Suite fijo y el blindaje 45, 75/20, 100/20, 80 y 70) | se calcula | pesa 60 de 60 t y el resumen de anclajes es 4/4 Ballistic, 0/4 Energy, 0/0 Missile, 0/0 Support y 4/4 retrorreactores |
 | CA24 | Los nombres y las bonificaciones de los objetos | se consultan | coinciden con los del juego: «UAC/2 + +» de Imperator con «+ 10 Dmg.» y «- 2 Tons», «AC/2 +» de Mydron con «+ 10 Stb.Dmg.» (25 de daño, 15 de inestabilidad y 4 de calor), «AC/2 Ammo», «Jump Jet (H)» y «Rangefinder Suite» |
+| CA27 | El radar del HBK-4G de serie | se calculan sus anillos | son 8, de 90 a 720 m, cada uno más ancho que el anterior; el de más daño (90 m, con 170) tiene la intensidad máxima, uno sin daño la tiene a 0, y cada anillo es un sector de 180° entre su radio interior y el exterior |
 
 ## Fuera de alcance
 
