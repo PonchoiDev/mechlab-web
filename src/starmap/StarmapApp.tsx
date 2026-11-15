@@ -17,7 +17,8 @@ import {
   getPreviousEvent,
   parseMapQuery,
   searchSystems,
-  toMapQuery
+  toMapQuery,
+  getFactionEmblems
 } from '../utils/starmap';
 import { getQuestRoute, parseQuestQuery } from '../utils/quests';
 import { getCampaignRoute, parseCampaignQuery } from '../utils/campaigns';
@@ -253,6 +254,11 @@ function FactionLegend({ date }: { date: GameDate }) {
 export function StarmapApp() {
   const initial = useMemo(() => parseMapQuery(window.location.search, data), []);
   const [date, setDate] = useState<GameDate>(initial.date);
+  // Los logos de las facciones sobre su territorio, como en el mapa de BATTLETECH: se mueven con la fecha.
+  const emblems = useMemo(
+    () => getFactionEmblems(data, date).map(({ logo, x, y, size }) => ({ url: LOGO_PATH + logo, x, y, size })),
+    [date]
+  );
   const [jump, setJump] = useState<{ changedCount: number } | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(initial.systemId);
   const [questId, setQuestId] = useState<string | null>(() => parseQuestQuery(window.location.search, data));
@@ -522,6 +528,7 @@ export function StarmapApp() {
         }}
         onZone={pickZone}
         mercZones={mercZones}
+        emblems={emblems}
         onMercZone={pickMercZone}
       />
 
