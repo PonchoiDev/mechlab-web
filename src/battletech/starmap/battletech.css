@@ -47,3 +47,18 @@
   .bt-starmap .starmap-drawers,
   .bt-starmap .starmap-zoom { bottom: 12px; }
 }
+
+/* Las opciones del buscador son el propio <li> (patrón de combobox), con el aspecto de los botones del de MW5. */
+.starmap-search .starmap-search-option {
+  padding: 7px 12px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.starmap-search .starmap-search-option[aria-selected='true'] {
+  color: #000;
+  background: var(--map-text);
+}
