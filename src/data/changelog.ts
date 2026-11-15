@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-15-starmap-emblems',
+    date: '2026-11-15',
+    title: 'Faction emblems on the MW5 star map',
+    items: [
+      'Like on the BATTLETECH map, each faction\'s emblem now shows faintly over its territory on the MW5 star map, and moves with the borders as you change the date'
+    ]
+  },
+  {
     id: '2026-11-15-battletech-map-like-the-game',
     date: '2026-11-15',
     title: 'The BATTLETECH star map, closer to the game',

@@ -14,6 +14,7 @@ import {
   getClusterLevels,
   getClusterOutline,
   getFactionColor,
+  getFactionEmblems,
   getHubLevels,
   getHubs,
   getNextEvent,
@@ -280,3 +281,33 @@ describe('reputación recomendada y dificultad de las zonas', () => {
     expect(getClusterLevels(zona, 'Prueba')).toEqual([{ mode: null, reputation: '5', difficulty: 15 }]);
   });
 });
+
+describe('logos de las facciones sobre su territorio', () => {
+  const nearestOwner = (x: number, y: number, date: string) => {
+    const nearest = data.systems.reduce((best, candidate) =>
+      Math.hypot(candidate.x - x, candidate.y - y) < Math.hypot(best.x - x, best.y - y) ? candidate : best);
+    return getOwnerAt(nearest, date);
+  };
+
+  it('CA14: un logo por facción en el centro de su territorio, que cambia con la fecha', () => {
+    const in3015 = getFactionEmblems(data, '3015-01-01');
+    const in3042 = getFactionEmblems(data, '3042-01-01');
+    const factions = (emblems: typeof in3015) => emblems.map(emblem => emblem.faction);
+    expect(factions(in3015)).toEqual(expect.arrayContaining(['Davion', 'Steiner', 'Kurita', 'Liao', 'Marik']));
+    expect(factions(in3042)).toContain('FederatedCommonwealth');
+    expect(factions(in3042)).not.toContain('Davion');
+    expect(factions(in3042)).not.toContain('Steiner');
+    for (const [date, emblems] of [['3015-01-01', in3015], ['3042-01-01', in3042]] as const) {
+      expect(new Set(factions(emblems)).size).toBe(emblems.length);
+      for (const emblem of emblems) {
+        expect(emblem.logo).toBe(data.factions[emblem.faction].logo);
+        expect(nearestOwner(emblem.x, emblem.y, date)).toBe(emblem.faction);
+      }
+    }
+    const davion = in3015.find(emblem => emblem.faction === 'Davion')!;
+    const periphery = in3015.filter(emblem => ['TaurianConcordat', 'MagistracyOfCanopus', 'OutworldsAlliance'].includes(emblem.faction));
+    expect(periphery.length).toBeGreaterThan(0);
+    for (const emblem of periphery) expect(davion.size).toBeGreaterThan(emblem.size);
+  });
+});
+

@@ -408,3 +408,80 @@ export const toMapQuery = ({ date, systemId, questId, mechId, academyId, campaig
   if (campaignId && data.campaigns.some(campaign => campaign.id === campaignId)) params.set('campaign', campaignId);
   return `?${params.toString()}`;
 };
+
+// Los juegos pintan el logo de cada facción sobre su territorio, grande y casi transparente (BATTLETECH lo
+// hace en su mapa, y aquí también el de MW5). Se calcula dónde y de qué tamaño, en años luz: los sistemas de
+// una facción a menos de EMBLEM_LINK de otro suyo forman un grupo, y el logo va en el sistema más central
+// del grupo más grande: el que está más cerca, en total, de todos los demás. El punto medio no sirve, porque
+// un territorio con dos lóbulos (la Federated Commonwealth, de Steiner a Davion) lo deja en el de otra
+// facción. Las facciones con sistemas sueltos (Locals o los Bandit Kingdoms) lo llevan en su grupo mayor.
+// Los sistemas de la Magistracy of Canopus de BATTLETECH, en la frontera, están a 20 o 23 años luz unos de otros.
+const EMBLEM_LINK = 25;
+// Un grupo más pequeño no da para un logo sin tapar a los vecinos.
+const EMBLEM_MIN_SYSTEMS = 4;
+// El lado del logo crece con la raíz del número de sistemas: ocupa más o menos su superficie.
+const EMBLEM_SIZE_PER_SYSTEM = 12;
+// Los Estados Sucesores de MW5 tienen cientos de sistemas: su logo llega a 260 años luz de lado.
+const EMBLEM_MAX_SIZE = 260;
+
+export interface FactionEmblem {
+  faction: string;
+  logo: string;
+  x: number;
+  y: number;
+  size: number;
+}
+
+// Calcularlos en el mapa de MW5 lleva unos 30 ms, y el control de fecha los pide en cada paso al
+// arrastrarlo. Como solo cambian cuando algún sistema cambia de dueño, se guardan por reparto de sistemas.
+const emblemCache = new WeakMap<StarmapData, Map<string, FactionEmblem[]>>();
+const EMBLEM_CACHE_SIZE = 40;
+
+export const getFactionEmblems = (data: StarmapData, date: GameDate, maxSize = EMBLEM_MAX_SIZE): FactionEmblem[] => {
+  const owners = data.systems.map(system => getOwnerAt(system, date));
+  const key = `${maxSize}|${owners.join(',')}`;
+  const cache = emblemCache.get(data) ?? new Map<string, FactionEmblem[]>();
+  emblemCache.set(data, cache);
+  const cached = cache.get(key);
+  if (cached) return cached;
+  const emblems = computeEmblems(data, owners, maxSize);
+  if (cache.size >= EMBLEM_CACHE_SIZE) cache.delete(cache.keys().next().value!);
+  cache.set(key, emblems);
+  return emblems;
+};
+
+const computeEmblems = (data: StarmapData, owners: (string | null)[], maxSize: number): FactionEmblem[] => {
+  const byFaction = new Map<string, StarSystem[]>();
+  data.systems.forEach((system, index) => {
+    const owner = owners[index];
+    if (owner && data.factions[owner]?.logo) byFaction.set(owner, [...(byFaction.get(owner) ?? []), system]);
+  });
+  return [...byFaction].flatMap(([faction, systems]) => {
+    let largest: StarSystem[] = [];
+    const seen = new Set<number>();
+    for (const start of systems) {
+      if (seen.has(start.id)) continue;
+      seen.add(start.id);
+      const group = [start];
+      for (let i = 0; i < group.length; i++) {
+        for (const other of systems) {
+          if (!seen.has(other.id) && Math.hypot(other.x - group[i].x, other.y - group[i].y) <= EMBLEM_LINK) {
+            seen.add(other.id);
+            group.push(other);
+          }
+        }
+      }
+      if (group.length > largest.length) largest = group;
+    }
+    if (largest.length < EMBLEM_MIN_SYSTEMS) return [];
+    const spreads = largest.map(system => largest.reduce((sum, other) => sum + Math.hypot(other.x - system.x, other.y - system.y), 0));
+    const center = largest[spreads.indexOf(Math.min(...spreads))];
+    return [{
+      faction,
+      logo: data.factions[faction].logo!,
+      x: center.x,
+      y: center.y,
+      size: Math.min(maxSize, Math.sqrt(largest.length) * EMBLEM_SIZE_PER_SYSTEM)
+    }];
+  });
+};
