@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import argoJson from '../../data/battletech/argo.json';
 import type { ArgoData } from '../../types/battletech-argo';
 import {
-  addToPlan, formatEffect, getAllPlan, getAncestors, getPathCost, getPlanEffects, getPlanTotals, getStartingPlan, getTreeLayout,
-  getUnlocks, getUpgrade, parseArgoQuery, removeFromPlan, toArgoQuery
+  addToPlan, formatEffect, getAllPlan, getAncestors, getPathCost, getPlanEffects, getPlanTotals, getStartingPlan, getStatus, getTreeLayout,
+  getUnlocks, getUpgrade, groupBySection, parseArgoQuery, removeFromPlan, toArgoQuery
 } from './argo';
 
 // Criterios de aceptación de docs/specs/battletech-argo.md.
@@ -97,8 +97,11 @@ describe('la Argo de BATTLETECH', () => {
     expect(toArgoQuery(data, view)).toBe('?own=mechBay2&view=list');
     expect(parseArgoQuery(data, '?own=noExiste,power1').owned).toEqual(addToPlan(data, getStartingPlan(data), 'power1'));
     const empty = parseArgoQuery(data, '');
-    expect(empty).toEqual({ view: 'tree', owned: getStartingPlan(data) });
+    expect(empty).toEqual({ view: 'ship', owned: getStartingPlan(data) });
     expect(toArgoQuery(data, empty)).toBe('');
+    const tree = parseArgoQuery(data, '?view=tree');
+    expect(tree.view).toBe('tree');
+    expect(toArgoQuery(data, tree)).toBe('?view=tree');
   });
 
   it('CA9: el árbol, por categoría y nivel', () => {
@@ -113,6 +116,45 @@ describe('la Argo de BATTLETECH', () => {
   it('CA10: la carrera cuesta lo mismo que la campaña', () => {
     expect(data.careerCostMultiplier).toBe(1);
     expect(data.careerUpkeepMultiplier).toBe(1);
+    expect(data.reducedCostMultiplier).toBe(0.5);
     expect(data.baseUpkeep).toBe(80000);
+  });
+
+  it('CA11: las tres secciones de la pantalla Ship Upgrades, con sus categorías en orden', () => {
+    const sections = groupBySection(data);
+    expect(sections.map(({ section, categories }) => [section.name, categories.map(({ category }) => category.label)])).toEqual([
+      ['Systems & Support', ['Power System', 'Structure', 'Drive System', 'Habitat Pods']],
+      ['Combat & Deployment', ['Mech Bays', 'Repair & Refit', 'Training Modules']],
+      ['Personnel & Medical', ['Med Bays', 'Recreation']]
+    ]);
+    const ids = sections.flatMap(({ categories }) => categories.flatMap(({ upgrades }) => upgrades.map(upgrade => upgrade.id)));
+    expect(ids).toHaveLength(35);
+    expect(new Set(ids).size).toBe(35);
+    const labels = sections.flatMap(({ categories }) => categories.map(({ category }) => category.id));
+    expect(new Set(labels).size).toBe(9);
+  });
+
+  it('CA12: cada caja, en el orden del juego', () => {
+    const box = (label: string) => groupBySection(data)
+      .flatMap(({ categories }) => categories)
+      .find(({ category }) => category.label === label)?.upgrades.map(upgrade => upgrade.name);
+    expect(box('Repair & Refit')).toEqual(['Automation', 'Improved Automation', 'Machine Shop', 'Refit Harness', 'Repair Scaffolding']);
+    expect(box('Med Bays')).toEqual(['Med Bay 1', 'Med Bay 2', 'Med Bay 3', 'Hospital Bay']);
+    expect(box('Habitat Pods')).toEqual(['Alpha Pod', 'Beta Pod', 'Gamma Pod']);
+  });
+
+  it('CA13: los iconos del juego, de cada mejora y de cada sección', () => {
+    expect(data.upgrades.every(upgrade => upgrade.icon.length > 0)).toBe(true);
+    expect(data.sections.every(section => section.icon.length > 0)).toBe(true);
+    expect(getUpgrade(data, 'structure1').icon).toBe('structure1');
+    expect(getUpgrade(data, 'medBay_hospital').icon).toBe('medbay4');
+  });
+
+  it('CA14: el estado de cada icono según el plan', () => {
+    const owned = addToPlan(data, getStartingPlan(data), 'power1');
+    expect(getStatus(data, owned, 'mechBay1')).toBe('starting');
+    expect(getStatus(data, owned, 'power1')).toBe('owned');
+    expect(getStatus(data, owned, 'mechBay2')).toBe('available');
+    expect(getStatus(data, owned, 'mechBay3')).toBe('locked');
   });
 });

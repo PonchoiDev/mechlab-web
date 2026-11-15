@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import argoJson from '../../data/battletech/argo.json';
 import type { ArgoData, ArgoUpgrade } from '../../types/battletech-argo';
 import {
-  addToPlan, formatEffect, getAllPlan, getAncestors, getCrewPortraitUrl, getDescendants, getImageUrl, getPathCost, getPlanEffects,
-  getPlanTotals, getStartingPlan, getStatus, getTreeLayout, getUnlocks, getUpgrade, groupByCategory, parseArgoQuery, removeFromPlan,
-  toArgoQuery, type ArgoView
+  addToPlan, formatEffect, getAllPlan, getAncestors, getCrewPortraitUrl, getDescendants, getIconUrl, getImageUrl, getPathCost,
+  getPlanEffects, getPlanTotals, getStartingPlan, getStatus, getTreeLayout, getUnlocks, getUpgrade, groupByCategory, groupBySection,
+  parseArgoQuery, removeFromPlan, toArgoQuery, type ArgoStatus, type ArgoView
 } from '../../utils/battletech/argo';
 import { FeedbackDialog } from '../../components/FeedbackDialog';
 import { SupportLink } from '../../components/SupportLink';
@@ -14,12 +14,19 @@ const data = argoJson as unknown as ArgoData;
 const numberFormat = new Intl.NumberFormat('en');
 const TREE = getTreeLayout(data);
 const GROUPS = groupByCategory(data);
+const SECTIONS = groupBySection(data);
 const CATEGORY_NAMES = new Map(data.categories.map(category => [category.id, category.name]));
 const CREW = new Map(data.crew.map(member => [member.id, member]));
 const FULL_TOTALS = getPlanTotals(data, getAllPlan(data));
 const STARTING = data.upgrades.filter(upgrade => upgrade.starting);
 // La nave al completo pasa por seis niveles: «Tier 1» es lo que no pide nada.
 const tierLabel = (tier: number) => `Tier ${tier + 1}`;
+const STATUS_LABEL: Record<ArgoStatus, string> = {
+  starting: 'Comes with the ship',
+  owned: 'In your plan',
+  available: 'Can be bought now',
+  locked: 'Needs other upgrades first'
+};
 const cbills = (value: number) => `¢${numberFormat.format(value)}`;
 
 type Select = (id: string) => void;
@@ -57,7 +64,10 @@ function UpgradeCard({ upgrade, owned, onToggle, onSelect, isFocused = false }: 
       <header className="argo-card-header">
         <img src={getImageUrl(upgrade.image)} alt="" width={375} height={150} loading="lazy" decoding="async" />
         <div>
-          <p className="unit-card-kind"><span>{CATEGORY_NAMES.get(upgrade.category)}</span> <span>{tierLabel(upgrade.tier)}</span></p>
+          <p className="unit-card-kind">
+            <span className="argo-icon" style={{ '--icon': `url(${getIconUrl(upgrade.icon)})` } as CSSProperties} aria-hidden="true" />
+            <span>{CATEGORY_NAMES.get(upgrade.category)}</span> <span>{tierLabel(upgrade.tier)}</span>
+          </p>
           <h3>{upgrade.name}</h3>
         </div>
       </header>
@@ -107,6 +117,102 @@ function UpgradeCard({ upgrade, owned, onToggle, onSelect, isFocused = false }: 
   );
 }
 
+// Requisitos (todo lo que hace falta antes) y lo que abre (todo lo que viene después) de la mejora
+// resaltada: se marcan igual, en el color de la página, y el resto se apaga.
+const useChain = (highlighted: string | null) => useMemo(() => highlighted
+  ? { required: new Set(getAncestors(data, highlighted)), unlocked: new Set(getDescendants(data, highlighted)) }
+  : null, [highlighted]);
+
+// La pantalla Ship Upgrades del juego: tres secciones, cada una con sus cajas por categoría y un icono por
+// mejora. Naranja lo que viene con la nave o está en el plan (lo instalado, en el juego), gris lo que se
+// puede comprar y apagado lo que aún pide otras.
+function ShipView({ owned, onOpen }: { owned: ReadonlySet<string>; onOpen: Select }) {
+  const [hover, setHover] = useState<string | null>(null);
+  const chain = useChain(hover);
+  const tileClass = (id: string) => {
+    const classes = ['argo-tile', `is-${getStatus(data, owned, id)}`];
+    if (chain) classes.push(id === hover ? 'is-focus' : chain.required.has(id) || chain.unlocked.has(id) ? 'is-linked' : 'is-dim');
+    return classes.join(' ');
+  };
+  return (
+    <>
+      <p className="argo-hint">
+        Point at an upgrade to light up what it requires and what it unlocks. Click it to see its details and add it to your plan.
+      </p>
+      <div className="argo-ship" onMouseLeave={() => setHover(null)}>
+        <img className="argo-blueprint" src={`${import.meta.env.BASE_URL}argo/blueprint.png`} alt="" width={288} height={288} />
+        {SECTIONS.map(({ section, categories }) => (
+          <section key={section.id} className={`argo-ship-section is-${section.id.toLowerCase().replace('_', '-')}`} aria-labelledby={`section-${section.id}`}>
+            <h2 id={`section-${section.id}`}>
+              <span className="argo-icon" style={{ '--icon': `url(${getIconUrl(section.icon)})` } as CSSProperties} aria-hidden="true" />
+              {section.name}
+            </h2>
+            <div className="argo-boxes">
+              {categories.map(({ category, upgrades }) => (
+                <div key={category.id} className="argo-box" role="group" aria-label={category.label}>
+                  <h3>{category.label}</h3>
+                  <div className="argo-tiles">
+                    {upgrades.map(upgrade => {
+                      const status = getStatus(data, owned, upgrade.id);
+                      return (
+                        <button
+                          key={upgrade.id}
+                          type="button"
+                          className={tileClass(upgrade.id)}
+                          title={`${upgrade.name} · ${STATUS_LABEL[status]}`}
+                          aria-label={`${upgrade.name}, ${STATUS_LABEL[status].toLowerCase()}`}
+                          onMouseEnter={() => setHover(upgrade.id)}
+                          onFocus={() => setHover(upgrade.id)}
+                          onBlur={() => setHover(null)}
+                          onClick={() => onOpen(upgrade.id)}
+                        >
+                          <span className="argo-icon" style={{ '--icon': `url(${getIconUrl(upgrade.icon)})` } as CSSProperties} />
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+      <ul className="argo-legend argo-ship-legend" aria-label="Legend">
+        <li><i className="is-starting" /> Comes with the ship or in your plan</li>
+        <li><i className="is-available" /> Can be bought now</li>
+        <li><i className="is-locked" /> Needs other upgrades first</li>
+      </ul>
+    </>
+  );
+}
+
+// La ficha de una mejora, como la ventana que abre el juego: se cierra con Close, con Escape o pulsando fuera.
+function UpgradeDialog({ id, owned, onToggle, onSelect, onClose }: {
+  id: string;
+  owned: ReadonlySet<string>;
+  onToggle: Select;
+  onSelect: Select;
+  onClose: () => void;
+}) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const upgrade = getUpgrade(data, id);
+  useEffect(() => {
+    closeRef.current?.focus();
+    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+  return (
+    <div className="argo-dialog-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}>
+      <section className="argo-dialog" role="dialog" aria-modal="true" aria-label={`${upgrade.name} details`}>
+        <p className={`argo-dialog-status is-${getStatus(data, owned, id)}`}>{STATUS_LABEL[getStatus(data, owned, id)]}</p>
+        <UpgradeCard upgrade={upgrade} owned={owned} onToggle={onToggle} onSelect={onSelect} />
+        <button ref={closeRef} type="button" className="utility-button argo-dialog-close" onClick={onClose}>Close</button>
+      </section>
+    </div>
+  );
+}
+
 function TreeView({ owned, focus, onToggle, onFocus, onSelect }: {
   owned: ReadonlySet<string>;
   focus: string | null;
@@ -116,9 +222,7 @@ function TreeView({ owned, focus, onToggle, onFocus, onSelect }: {
 }) {
   const [hover, setHover] = useState<string | null>(null);
   const highlighted = hover ?? focus;
-  const chain = useMemo(() => highlighted
-    ? { required: new Set(getAncestors(data, highlighted)), unlocked: new Set(getDescendants(data, highlighted)) }
-    : null, [highlighted]);
+  const chain = useChain(highlighted);
   // Lo que una mejora pide y lo que abre se resalta igual, en el color de la página; la diferencia
   // solo la dice una etiqueta pequeña, para no llenar el árbol de colores.
   const linkOf = (id: string) => chain?.required.has(id) ? 'Required' : chain?.unlocked.has(id) ? 'Unlocks' : null;
@@ -251,6 +355,7 @@ function PlanPanel({ owned, onReset, onAll }: { owned: ReadonlySet<string>; onRe
 export function ArgoApp() {
   const [view, setView] = useState<ArgoView>(() => parseArgoQuery(data, window.location.search));
   const [focus, setFocus] = useState<string | null>(null);
+  const [dialog, setDialog] = useState<string | null>(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
@@ -272,8 +377,11 @@ export function ArgoApp() {
   // Un requisito o una mejora que se abre: en la lista se va a su ficha; en el árbol pasa a ser la elegida.
   const select: Select = id => {
     setFocus(id);
+    if (view.view === 'ship') setDialog(id);
     if (view.view === 'list') document.getElementById(`upgrade-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
+
+  const closeDialog = useCallback(() => setDialog(null), []);
 
   return (
     <div className="units argo">
@@ -307,8 +415,8 @@ export function ArgoApp() {
                 monthly upkeep, and most need others first.
               </p>
               <p className="argo-modes">
-                Career and campaign use the same prices and upkeep. In career mode upgrades are open from day one; in the
-                campaign, once the story hands you the ship.
+                Career and campaign use the same prices and upkeep, except with the career option Reduced Argo Upgrade Costs,
+                which halves both. In career mode upgrades are open from day one; in the campaign, once the story hands you the ship.
               </p>
             </div>
             <dl className="unit-card-stats argo-hero-stats">
@@ -321,6 +429,9 @@ export function ArgoApp() {
           </section>
 
           <div className="argo-tabs" role="group" aria-label="View">
+            <button type="button" aria-pressed={view.view === 'ship'} onClick={() => setView(current => ({ ...current, view: 'ship' }))}>
+              Ship upgrades
+            </button>
             <button type="button" aria-pressed={view.view === 'tree'} onClick={() => setView(current => ({ ...current, view: 'tree' }))}>
               Upgrade tree
             </button>
@@ -329,14 +440,17 @@ export function ArgoApp() {
             </button>
           </div>
 
-          {view.view === 'tree'
-            ? <TreeView owned={view.owned} focus={focus} onToggle={toggle} onFocus={setFocus} onSelect={select} />
-            : <ListView owned={view.owned} focus={focus} onToggle={toggle} onSelect={select} />}
+          {view.view === 'ship' && <ShipView owned={view.owned} onOpen={setDialog} />}
+          {view.view === 'tree' && <TreeView owned={view.owned} focus={focus} onToggle={toggle} onFocus={setFocus} onSelect={select} />}
+          {view.view === 'list' && <ListView owned={view.owned} focus={focus} onToggle={toggle} onSelect={select} />}
         </div>
 
         <PlanPanel owned={view.owned} onReset={() => setOwned(getStartingPlan(data))} onAll={() => setOwned(getAllPlan(data))} />
       </main>
 
+      {dialog && view.view === 'ship' && (
+        <UpgradeDialog id={dialog} owned={view.owned} onToggle={toggle} onSelect={select} onClose={closeDialog} />
+      )}
       {isFeedbackOpen && (
         <FeedbackDialog
           buildUrl={`${window.location.origin}${window.location.pathname}${toArgoQuery(data, view)}`}

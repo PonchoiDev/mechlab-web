@@ -1,8 +1,10 @@
-import type { ArgoCategory, ArgoData, ArgoUpgrade } from '../../types/battletech-argo';
+import type { ArgoCategory, ArgoData, ArgoSection, ArgoUpgrade } from '../../types/battletech-argo';
 
 // Árbol de mejoras de la Argo, planificador de compras y estado de la URL.
 
-export type ArgoViewMode = 'tree' | 'list';
+// La pantalla Ship Upgrades del juego, el árbol por niveles o la lista de fichas.
+export type ArgoViewMode = 'ship' | 'tree' | 'list';
+const VIEW_MODES: ArgoViewMode[] = ['ship', 'tree', 'list'];
 
 export interface ArgoView {
   view: ArgoViewMode;
@@ -28,6 +30,11 @@ export interface ArgoPlanEffect {
   name: string;
   details: string;
   text: string;
+}
+
+export interface ArgoSectionGroup {
+  section: ArgoSection;
+  categories: { category: ArgoCategory; upgrades: ArgoUpgrade[] }[];
 }
 
 export interface ArgoTreeRow {
@@ -170,6 +177,16 @@ export const groupByCategory = (data: ArgoData) =>
     .map(category => ({ category, upgrades: data.upgrades.filter(upgrade => upgrade.category === category.id) }))
     .filter(group => group.upgrades.length > 0);
 
+// La pantalla Ship Upgrades: cada sección con sus cajas, y en cada caja sus mejoras en el orden de
+// los datos, que es el del juego.
+export const groupBySection = (data: ArgoData): ArgoSectionGroup[] => {
+  const byCategory = new Map(groupByCategory(data).map(group => [group.category.id, group]));
+  return data.sections.map(section => ({
+    section,
+    categories: section.categories.flatMap(id => byCategory.get(id) ?? [])
+  }));
+};
+
 // El árbol: una fila por categoría y una columna por nivel.
 export const getTreeLayout = (data: ArgoData): { tiers: number; rows: ArgoTreeRow[] } => {
   const tiers = Math.max(...data.upgrades.map(upgrade => upgrade.tier)) + 1;
@@ -189,7 +206,7 @@ export const parseArgoQuery = (data: ArgoData, search: string): ArgoView => {
   for (const id of (params.get('own') ?? '').split(',')) {
     if (hasUpgrade(data, id)) owned = addToPlan(data, owned, id);
   }
-  return { view: params.get('view') === 'list' ? 'list' : 'tree', owned };
+  return { view: VIEW_MODES.find(mode => mode === params.get('view')) ?? 'ship', owned };
 };
 
 export const toArgoQuery = (data: ArgoData, { view, owned }: ArgoView): string => {
@@ -197,7 +214,7 @@ export const toArgoQuery = (data: ArgoData, { view, owned }: ArgoView): string =
   const leaves = data.upgrades.filter(upgrade => owned.has(upgrade.id) && !upgrade.starting && !required.has(upgrade.id));
   const params = new URLSearchParams();
   if (leaves.length > 0) params.set('own', leaves.map(upgrade => upgrade.id).join(','));
-  if (view !== 'tree') params.set('view', view);
+  if (view !== 'ship') params.set('view', view);
   // Las comas se quedan legibles: los ids no las llevan.
   const text = params.toString().replaceAll('%2C', ',');
   return text ? `?${text}` : '';
@@ -206,4 +223,5 @@ export const toArgoQuery = (data: ArgoData, { view, owned }: ArgoView): string =
 // Ilustración de una mejora y retrato de un tripulante, en battletech/public/argo/
 // (de tools/extraer_argo_battletech.py).
 export const getImageUrl = (image: string) => `${import.meta.env.BASE_URL}argo/${encodeURIComponent(image)}.png`;
+export const getIconUrl = (icon: string) => `${import.meta.env.BASE_URL}argo/icons/${encodeURIComponent(icon)}.svg`;
 export const getCrewPortraitUrl = (crew: string) => `${import.meta.env.BASE_URL}argo/crew/${encodeURIComponent(crew)}.png`;
