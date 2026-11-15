@@ -1,10 +1,7 @@
 /* La Argo: los estilos de las unidades enemigas (units.css) con el turquesa de las pantallas de la
-   nave. En el árbol, lo que una mejora pide va en ámbar y lo que abre en verde. */
+   nave, que es también el único color del resaltado del árbol. */
 :root {
   --units-accent: #35c9c1;
-  --argo-required: #ffb547;
-  --argo-unlocked: #7fdc8a;
-  --argo-focus: #ffd400;
 }
 
 body {
@@ -88,9 +85,6 @@ body {
   line-height: 1.35;
 }
 
-.argo-key { font-weight: 700; }
-.argo-key.is-required { color: var(--argo-required); }
-.argo-key.is-unlocked { color: var(--argo-unlocked); }
 
 /* Árbol: una fila por categoría y una columna por nivel. En pantallas estrechas se desplaza dentro
    de su caja, con la categoría fija a la izquierda. */
@@ -170,10 +164,23 @@ body {
 
 .argo-node:hover,
 .argo-node:focus-visible { outline: none; }
-.argo-node.is-focus { outline: 2px solid var(--argo-focus); outline-offset: 1px; }
-.argo-node.is-required { border-color: var(--argo-required); box-shadow: inset 0 0 0 1px var(--argo-required); color: var(--units-text); }
-.argo-node.is-unlocked { border-color: var(--argo-unlocked); box-shadow: inset 0 0 0 1px var(--argo-unlocked); color: var(--units-text); }
-.argo-node.is-dim { opacity: 0.35; }
+.argo-node.is-focus { outline: 2px solid var(--units-accent); outline-offset: 1px; color: var(--units-text); }
+.argo-node.is-linked { border-color: var(--units-accent); box-shadow: inset 0 0 0 1px var(--units-accent); color: var(--units-text); }
+.argo-node.is-dim { opacity: 0.3; }
+
+/* «Required» o «Unlocks», en pequeño y sin color propio, sobre las mejoras resaltadas. */
+.argo-node { position: relative; }
+
+.argo-node-link {
+  position: absolute;
+  right: 6px;
+  bottom: 5px;
+  color: var(--units-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
 .argo-legend {
   display: flex;
@@ -219,7 +226,7 @@ body {
 .argo-card.is-owned { border-top-color: var(--units-accent); }
 .argo-card.is-available { border-top-color: var(--units-text); }
 .argo-card.is-locked { border-top-color: rgba(255, 255, 255, 0.3); }
-.argo-card.is-focused { outline: 2px solid var(--argo-focus); outline-offset: 2px; }
+.argo-card.is-focused { outline: 2px solid var(--units-accent); outline-offset: 2px; }
 
 .argo-card-header { position: relative; }
 
@@ -249,7 +256,7 @@ body {
 
 .argo-card-stats { grid-template-columns: repeat(3, 1fr); }
 .argo-card-stats dd { font-size: 20px; font-variant-numeric: tabular-nums; }
-.argo-card-path dd { color: var(--argo-required); }
+.argo-card-path dd { color: var(--units-accent); }
 
 .argo-card-body { display: grid; gap: 10px; padding: 10px 14px 12px; }
 

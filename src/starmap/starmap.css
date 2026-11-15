@@ -594,6 +594,8 @@ button, input, select { font: inherit; color: inherit; }
 
 .starmap-search {
   position: relative;
+  /* Por encima de la ficha del sistema (z-index 2): en el móvil los resultados caen sobre ella. */
+  z-index: 3;
   width: min(280px, 40vw);
 }
 

@@ -12,22 +12,53 @@ DATOS = os.path.join(ASSETS, "data")
 # Nombre visible y descripción de cada etiqueta, en la base de datos que el juego carga al arrancar.
 ETIQUETAS = os.path.join(ASSETS, "MDD", "data", "tagdata.sql")
 
-REGEX_COMENTARIO = re.compile(r"(?m)^\s*//.*$")
-REGEX_COMA_FINAL = re.compile(r",(\s*[}\]])")
-# Al juego le da igual que falte una coma al final de una línea: CombatGameConstants.json la olvida tras
-# una lista y mechdef_javelin_JVN-10A (Urban Warfare) entre dos etiquetas.
-REGEX_COMA_QUE_FALTA = re.compile(r"([\]}\"])(\s*\n\s*\")")
 REGEX_INSERT = re.compile(r"VALUES \((.*)\);\s*$")
+
+
+def limpiar_json(texto):
+    """Quita lo que el juego admite y json no: comentarios (// y /* */), comas finales y la coma que a
+    veces falta al final de una línea (CombatGameConstants.json la olvida tras una lista y
+    mechdef_javelin_JVN-10A, de Urban Warfare, entre dos etiquetas). Solo fuera de las cadenas: dentro,
+    las comas, las barras y los corchetes son parte del texto que después se publica."""
+    salida = []
+    ultimo = ""          # último carácter con significado (ni espacio ni comentario)
+    coma = -1            # posición en salida de la última coma escrita
+    salto = False        # si ha habido un salto de línea desde ese carácter
+    i, n = 0, len(texto)
+    while i < n:
+        caracter = texto[i]
+        if caracter == '"':
+            fin = i + 1
+            while fin < n and texto[fin] != '"':
+                fin += 2 if texto[fin] == "\\" else 1
+            if salto and ultimo in '"]}':
+                salida.append(",")
+            salida.append(texto[i:fin + 1])
+            ultimo, salto, i = '"', False, fin + 1
+        elif texto.startswith("//", i):
+            while i < n and texto[i] != "\n":
+                i += 1
+        elif texto.startswith("/*", i):
+            fin = texto.find("*/", i + 2)
+            i = n if fin < 0 else fin + 2
+        elif caracter.isspace():
+            salida.append(caracter)
+            salto = salto or caracter == "\n"
+            i += 1
+        else:
+            if caracter in "]}" and ultimo == ",":
+                salida[coma] = ""
+            if caracter == ",":
+                coma = len(salida)
+            salida.append(caracter)
+            ultimo, salto, i = caracter, False, i + 1
+    return "".join(salida)
 
 
 def leer_json(ruta):
     """Un JSON del juego, que admite comas finales, comentarios y alguna coma que falta."""
     with open(ruta, encoding="utf-8-sig") as archivo:
-        texto = archivo.read()
-    texto = REGEX_COMENTARIO.sub("", texto)
-    texto = REGEX_COMA_FINAL.sub(r"\1", texto)
-    texto = REGEX_COMA_QUE_FALTA.sub(r"\1,\2", texto)
-    return json.loads(texto)
+        return json.loads(limpiar_json(archivo.read()))
 
 
 def leer_carpeta(juego, carpeta):
@@ -53,19 +84,10 @@ def leer_etiquetas(juego):
     return etiquetas
 
 
-# SimGameConstants.json lleva además comentarios de bloque (/* ... */) entre sus claves.
-REGEX_COMENTARIO_BLOQUE = re.compile(r"/\*.*?\*/", re.S)
-
-
 def leer_constantes(juego):
-    """Las constantes de la campaña y la carrera (SimGameConstants.json), por sección."""
-    with open(os.path.join(juego, DATOS, "simGameConstants", "SimGameConstants.json"), encoding="utf-8-sig") as archivo:
-        texto = archivo.read()
-    texto = REGEX_COMENTARIO_BLOQUE.sub("", texto)
-    texto = REGEX_COMENTARIO.sub("", texto)
-    texto = REGEX_COMA_FINAL.sub(r"\1", texto)
-    texto = REGEX_COMA_QUE_FALTA.sub(r"\1,\2", texto)
-    return json.loads(texto)
+    """Las constantes de la campaña y la carrera (SimGameConstants.json, que lleva además comentarios de
+    bloque), por sección."""
+    return leer_json(os.path.join(juego, DATOS, "simGameConstants", "SimGameConstants.json"))
 
 
 def leer_json_texto(texto):
@@ -73,8 +95,4 @@ def leer_json_texto(texto):
     tolerancias que leer_json."""
     if isinstance(texto, bytes):
         texto = texto.decode("utf-8-sig")
-    texto = texto.lstrip("﻿")
-    texto = REGEX_COMENTARIO.sub("", texto)
-    texto = REGEX_COMA_FINAL.sub(r"\1", texto)
-    texto = REGEX_COMA_QUE_FALTA.sub(r"\1,\2", texto)
-    return json.loads(texto)
+    return json.loads(limpiar_json(texto.lstrip("\ufeff")))

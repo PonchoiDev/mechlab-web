@@ -35,6 +35,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Armor in steps of 5 with front and rear limits, and a Max armor button that spreads the free tonnage like the in-game one',
       'Same board, location panel and toolbar as the MW5 MechLab: click a location to fit it, and right-click (or long press) any weapon or item to duplicate it, fill free hardpoints, add ammo, move it or remove it',
       'The rest works like the MW5 MechLab too: the stats strip, the View options (slot cells, compact board, panel side), the Weapons and \'Mech analysis tabs, the side by side comparison cards and the search shortcuts of the \'Mech picker, like 3e 2m jj',
+      'Details from the in-game refit screen: hardpoints used per type and jump jets under the tonnage, structure and front and rear armor limits on every location, each item\'s manufacturer and bonus, damage, stability and heat per shot, and the stock combat role',
       'Alpha damage, stability damage, heat against sinking, damage by range, ammo per weapon type, walk and sprint, and value in C-Bills',
       'Pick \'Mechs by weight class, source, role, minimum hardpoints and jump jets; share builds with a link, save them in your browser and compare them'
     ]

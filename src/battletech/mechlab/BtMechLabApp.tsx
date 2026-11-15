@@ -22,6 +22,7 @@ import { BT_MECHS, getItem, getMechDisplayName } from '../../utils/battletech/me
 import { BT_SAVED_BUILDS_KEY } from '../../utils/battletech/savedBuilds';
 import { getBuildSummary } from '../../utils/battletech/stats';
 import { BtAnalysis } from './BtAnalysis';
+import { HardpointUsage } from './HardpointUsage';
 import { BtBoard } from './BtBoard';
 import { BtComparePanel } from './BtComparePanel';
 import { BtComponentEditor } from './BtComponentEditor';
@@ -152,6 +153,7 @@ export function BtMechLabApp() {
         <div className="readout-cell">
           <span className="readout-label">TONNAGE</span>
           <strong className={summary.freeTonnage < 0 ? 'readout-warning' : ''}>{summary.tonnage.toFixed(2)} <small>/ {mech.tonnage} t</small></strong>
+          <HardpointUsage mech={mech} loadout={build.loadout} />
         </div>
         <div className="readout-cell">
           <span className="readout-label">ARMOR POINTS</span>
