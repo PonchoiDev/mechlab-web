@@ -1,7 +1,9 @@
 /* Pilotos: los estilos de las unidades enemigas (units.css) con el azul de las academias. Los pilotos
    y los rasgos hero llevan el dorado de los 'Mechs únicos del mapa; los efectos buenos van en verde y
-   los malos en rojo. */
-:root {
+   los malos en rojo.
+   :root:root pesa más que el :root de units.css: en el build, units.css va en su propio archivo compartido
+   con las otras páginas y se carga después, y su rojo pisaba este azul. */
+:root:root {
   --units-accent: #2f8cff;
   --pilot-hero: #ffd400;
   --pilot-good: #7fdc8a;
