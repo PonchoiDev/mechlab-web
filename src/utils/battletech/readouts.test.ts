@@ -20,6 +20,7 @@ describe('cifras de la imagen del MechLab de BATTLETECH', () => {
       ['HEAT SINKING', '39', 'per turn'],
       ['MAX WEAPON RANGE', '270', 'm']
     ]);
-    expect(readouts.some(readout => readout.warn)).toBe(false);
+    // Su alfa calienta 54 y solo disipa 39 por turno: el calor alfa sale en rojo, como en la página.
+    expect(readouts.filter(readout => readout.warn).map(readout => readout.label)).toEqual(['ALPHA HEAT']);
   });
 });
