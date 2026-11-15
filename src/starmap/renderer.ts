@@ -61,6 +61,11 @@ const FLASH_RING_GROWTH = 34;
 type Territory = { faction: string; color: string; path: Path2D };
 // Color de cada facción en otra lectura del mapa (la rareza de un 'Mech); null usa el de la facción.
 export type TerritoryColors = ((faction: string) => string) | null;
+// Logo grande y casi transparente sobre un territorio, como lo pinta BATTLETECH; posición y tamaño en
+// años luz, para que acompañe al zoom.
+export type TerritoryEmblem = { url: string; x: number; y: number; size: number };
+const EMBLEM_OPACITY = 0.14;
+
 // Zona de mercenarios que se dibuja: su círculo y el logo de quien la ocupa (sin logo, rota al azar).
 export type MercZoneLayer = { zone: MercZone; logo: string | null; highlighted: boolean; title: string; note: string | null }[];
 
@@ -119,6 +124,7 @@ export class StarmapRenderer {
   private readonly clusterOutlines: Map<string, Point[]>;
   private readonly arenas: Set<number>;
   private mercZones: MercZoneLayer = [];
+  private emblems: TerritoryEmblem[] = [];
   private readonly logos = new Map<string, HTMLImageElement>();
   private readonly hubLinks: [Point, Point][];
   private readonly hubCapitals: Set<number>;
@@ -323,6 +329,7 @@ export class StarmapRenderer {
       this.previousLayer = null;
       this.drawLayer(layer, 1);
     }
+    this.drawEmblems();
     if (this.transition && elapsed < FLASH_MS) this.drawChanges(this.transition.changed, elapsed / FLASH_MS);
     this.drawClusters();
     this.drawMercZones();
@@ -444,6 +451,26 @@ export class StarmapRenderer {
       context.strokeStyle = lighten(color, 0.35);
       context.lineWidth = BORDER_WIDTH / scale;
       context.stroke(path);
+    }
+    context.restore();
+  }
+
+  setEmblems(emblems: TerritoryEmblem[]) {
+    this.emblems = emblems;
+    this.requestDraw();
+  }
+
+  // Encima del relleno de los territorios y debajo de las estrellas y sus nombres.
+  private drawEmblems() {
+    const context = this.context;
+    context.save();
+    context.globalAlpha = EMBLEM_OPACITY;
+    for (const { url, x, y, size } of this.emblems) {
+      const image = this.logo(url);
+      if (!image) continue;
+      const [left, top] = this.toScreen(x, y);
+      const side = size * this.view.scale;
+      context.drawImage(image, left - side / 2, top - side / 2, side, side);
     }
     context.restore();
   }

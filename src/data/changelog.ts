@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-14-battletech-map-emblems',
+    date: '2026-11-14',
+    title: 'Faction emblems on the BATTLETECH star map',
+    items: [
+      'Like in the game, each faction\'s emblem now shows faintly over its territory on the BATTLETECH star map, and grows with it as you zoom'
+    ]
+  },
+  {
     id: '2026-11-14-battletech-covers',
     date: '2026-11-14',
     title: 'A new home page',
