@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-15-battletech-gear-bonuses',
+    date: '2026-11-15',
+    title: 'Equipment bonuses on the BATTLETECH board',
+    items: [
+      'Heat sinks, heat banks, exchangers, targeting systems and other equipment show their bonus on the board, like the weapons, also with Show slot cells'
+    ]
+  },
+  {
     id: '2026-11-15-pilots-color',
     date: '2026-11-15',
     title: 'Pilots in blue again',
