@@ -55,7 +55,7 @@ function CardHardpoint({ view, isSelected, onSelect, onMenu }: {
       {!view.item && <span className="hardpoint-chip-label">{HARDPOINT_LABELS[view.type]}</span>}
       <span className="hardpoint-chip-content">
         <span className="hardpoint-chip-name">{view.item?.name ?? 'Free'}</span>
-        {view.item && <span className="hardpoint-chip-tier">{view.item.slots} sl</span>}
+        {view.item && <span className="hardpoint-chip-tier">{view.item.bonuses.length > 0 ? view.item.bonuses.join(' ') : `${view.item.slots} sl`}</span>}
       </span>
     </button>
   );
@@ -77,6 +77,7 @@ function CardEquipment({ group, onSelect, onMenu }: { group: EquipmentGroup; onS
     >
       {group.item.name}
       {group.count > 1 && <small>×{group.count}</small>}
+      {group.item.bonuses.length > 0 && !group.fixed && <small className="bt-item-bonus">{group.item.bonuses.join(' ')}</small>}
       {group.fixed && <small>built-in</small>}
     </button>
   );
@@ -170,7 +171,11 @@ function LocationCard({ build, zone, label, position, isActive, selectedHardpoin
         <button type="button" className="component-card-title" aria-pressed={isActive} onClick={(event) => { event.stopPropagation(); select(); }}>
           {label}
         </button>
-        {freeHardpoints > 0 && <span className="component-card-badge">{freeHardpoints} free</span>}
+        <span className="bt-card-header-end">
+          {freeHardpoints > 0 && <span className="component-card-badge">{freeHardpoints} free</span>}
+          {/* La estructura de la ubicación, como «S 70/70» en la pantalla de reequipar del juego. */}
+          <span className="bt-structure" title="Internal structure">S {location.structure}/{location.structure}</span>
+        </span>
       </div>
 
       {hardpoints.length > 0 && (
@@ -267,9 +272,13 @@ export function BtBoard(props: BtBoardProps) {
         <span className="mech-specs">
           <span className="mech-spec">{mech.tonnage} T</span>
           <span className="mech-spec">{WEIGHT_CLASS_LABELS[mech.weightClass].toUpperCase()}</span>
-          {mech.role && <span className="mech-spec is-ap">{mech.role.toUpperCase()}</span>}
           {mech.source !== 'base' && <span className="mech-spec is-xl">{SOURCE_LABELS[mech.source].toUpperCase()}</span>}
         </span>
+        {mech.role && (
+          <p className="bt-stock-role" title="Stock combat role of the chassis, from the game">
+            STOCK COMBAT ROLE <strong>{mech.role}</strong>
+          </p>
+        )}
         {!props.compact && (
           <div className="mech-board-image">
             <MechIcon mech={mech} size={128} />

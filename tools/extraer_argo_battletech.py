@@ -12,7 +12,8 @@ from ue4 import descomprimir_dxt5
 # Copia de la instalación de BATTLETECH (Harebrained Schemes, 2018) lo que hace falta para la página
 # de la Argo: las mejoras de la nave, los textos de las estadísticas que cambian, las categorías, la
 # tripulación que las presenta y las constantes de la economía de la nave. Lo guarda en
-# tools/datos-juego/battletech/argo/ y las ilustraciones y los retratos en battletech/public/argo/.
+# tools/datos-juego/battletech/argo/; las ilustraciones, los retratos y el plano de la nave en
+# battletech/public/argo/, y los iconos de la pantalla Ship Upgrades en battletech/public/argo/icons/.
 # Después, generar_argo_battletech.py trabaja con esos archivos sin tocar el juego.
 #
 #   python3 tools/extraer_argo_battletech.py "/ruta/a/BATTLETECH"
@@ -34,6 +35,19 @@ CONSTANTES = {
     "Story": ["StartingArgoUpgrades", "StartingMechTechSkill", "StartingMedTechSkill", "StartingMorale", "MaxMorale"],
     "CareerMode": ["StartingArgoUpgrades", "ArgoUpgradeCostMultiplier", "ArgoMaintenanceMultiplier"],
 }
+# La opción de carrera «Reduced Argo Upgrade Costs» y su valor activado, que cambia los dos
+# multiplicadores de CareerMode.
+DIFICULTAD = os.path.join("constants", "CareerDifficultySettings.json")
+OPCION_PRECIO_REDUCIDO = ("diff_argoUpgradeCost", "diff_AUCR_on")
+# Lo que no está en StreamingAssets va en los assets de Unity: los iconos de la pantalla Ship Upgrades
+# (Description.Icon de cada mejora y los de sus tres secciones) y el plano de la nave.
+RECURSOS = os.path.join("BattleTech_Data", "resources.assets")
+PREFIJO_ICONO = "uixSvgIcon_shipUpgrade_"
+PLANO = "uixTxrIndc_argoNavDiagram"
+CLASE_MALLA = 43
+CLASE_TEXTURA = 28
+CLASE_SCRIPT = 114
+FORMATO_DXT5 = 12
 
 
 def descomprimir_dxt1(datos, ancho, alto):
@@ -154,6 +168,171 @@ def leer_png_rgba(ruta):
     return ancho, alto, b"".join(bytes(fila[i:i + 3]) + b"\xff" for fila in filas for i in range(0, paso, 3))
 
 
+class Lector:
+    def __init__(self, datos, posicion=0, orden="<"):
+        self.datos, self.posicion, self.orden = datos, posicion, orden
+
+    def leer(self, formato):
+        valores = struct.unpack_from(self.orden + formato, self.datos, self.posicion)
+        self.posicion += struct.calcsize(self.orden + formato)
+        return valores if len(valores) > 1 else valores[0]
+
+    def alinear(self):
+        self.posicion = (self.posicion + 3) & ~3
+
+    def cadena_c(self):
+        fin = self.datos.index(b"\0", self.posicion)
+        texto = self.datos[self.posicion:fin].decode()
+        self.posicion = fin + 1
+        return texto
+
+    def bytes(self):
+        """Un array de Unity: su longitud y su contenido, alineado a 4."""
+        longitud = self.leer("i")
+        contenido = self.datos[self.posicion:self.posicion + longitud]
+        self.posicion += longitud
+        self.alinear()
+        return contenido
+
+    def cadena(self):
+        return self.bytes().decode("utf-8", "replace")
+
+    def saltar_array(self, tamano):
+        elementos = self.leer("i")
+        self.posicion += elementos * tamano
+
+
+def leer_recursos(ruta):
+    """Los objetos de un SerializedFile de Unity 2018.4 (versión 17) sin árbol de tipos, como
+    resources.assets: posición, tamaño y clase de cada uno."""
+    with open(ruta, "rb") as archivo:
+        datos = archivo.read()
+    lector = Lector(datos, 0, ">")
+    _, _, version, inicio = lector.leer("IIII")
+    if version != 17:
+        raise ValueError(f"{ruta}: SerializedFile versión {version}, se esperaba 17")
+    lector.orden = ">" if lector.leer("B") else "<"
+    lector.posicion += 3
+    lector.cadena_c()
+    lector.leer("i")
+    if lector.leer("?"):
+        raise ValueError(f"{ruta}: trae árbol de tipos, que este lector no sabe leer")
+    clases = []
+    for _ in range(lector.leer("i")):
+        clase = lector.leer("i")
+        lector.leer("?h")
+        # Los scripts llevan además el hash de su clase.
+        lector.posicion += 32 if clase == CLASE_SCRIPT or clase < 0 else 16
+        clases.append(clase)
+    objetos = []
+    for _ in range(lector.leer("i")):
+        lector.alinear()
+        _, posicion, tamano, tipo = lector.leer("qIIi")
+        objetos.append((inicio + posicion, tamano, clases[tipo]))
+    return datos, objetos
+
+
+def leer_malla(datos, posicion):
+    """Nombre, vértices y triángulos de una malla de Unity 2018.4 sin comprimir. Las de los iconos
+    traen posición (tres float) y color (cuatro bytes) por vértice, e índices de 16 bits."""
+    lector = Lector(datos, posicion)
+    nombre = lector.cadena()
+    lector.saltar_array(48)  # submallas
+    lector.saltar_array(40)  # formas de mezcla: vértices
+    lector.saltar_array(12)  # formas
+    for _ in range(lector.leer("i")):  # canales de las formas
+        lector.cadena()
+        lector.posicion += 12
+    lector.saltar_array(4)  # pesos
+    lector.saltar_array(64)  # bind poses
+    lector.saltar_array(4)  # huesos
+    lector.posicion += 4  # hueso raíz
+    compresion = lector.leer("B")
+    lector.leer("BBB")
+    lector.alinear()
+    formato_indices = lector.leer("i")
+    indices = lector.bytes()
+    vertices = lector.leer("I")
+    canales = [lector.leer("BBBB") for _ in range(lector.leer("i"))]
+    datos_vertices = lector.bytes()
+    # Canal 0: posición (float32 × 3); canal 3: color (unorm8 × 4), los dos en el flujo 0.
+    if compresion or formato_indices != 0 or canales[0] != (0, 0, 0, 3) or canales[3][2:] != (2, 4):
+        raise ValueError(f"La malla {nombre} no tiene el formato de los iconos SVG: ¿ha cambiado el juego?")
+    paso = len(datos_vertices) // vertices
+    color = canales[3][1]
+    posiciones = [struct.unpack_from("<ff", datos_vertices, i * paso) for i in range(vertices)]
+    colores = {datos_vertices[i * paso + color:i * paso + color + 4] for i in range(vertices)}
+    return nombre, posiciones, struct.unpack(f"<{len(indices) // 2}H", indices), colores
+
+
+def escribir_svg(ruta, posiciones, triangulos):
+    """Los triángulos de un icono en un solo trazado, que así no deja costuras entre ellos. Unity
+    tiene la y hacia arriba y SVG hacia abajo."""
+    puntos = [(x, -y) for x, y in posiciones]
+    xs = [x for x, _ in puntos]
+    ys = [y for _, y in puntos]
+    trazado = "".join("M{:.3f} {:.3f}L{:.3f} {:.3f}L{:.3f} {:.3f}Z".format(*puntos[a], *puntos[b], *puntos[c])
+                      for a, b, c in zip(triangulos[0::3], triangulos[1::3], triangulos[2::3]))
+    caja = f"{min(xs):.3f} {min(ys):.3f} {max(xs) - min(xs):.3f} {max(ys) - min(ys):.3f}"
+    with open(ruta, "w", encoding="utf-8") as archivo:
+        archivo.write(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{caja}"><path fill="#fff" d="{trazado}"/></svg>\n')
+
+
+def leer_textura_dxt5(datos, posicion, recursos_externos):
+    """Una textura DXT5 de Unity 2018.4 cuyos píxeles están en el .resS, en RGBA y del derecho."""
+    lector = Lector(datos, posicion)
+    nombre = lector.cadena()
+    lector.leer("i")
+    lector.leer("B")
+    lector.alinear()
+    ancho, alto, _, formato, _ = lector.leer("iiiii")
+    lector.leer("BB")
+    lector.alinear()
+    # Prioridad de streaming, número de imágenes y dimensión, ajustes de filtrado, formato de
+    # lightmap y espacio de color.
+    lector.posicion += 4 + 8 + 24 + 8
+    lector.bytes()
+    inicio, tamano = lector.leer("II")
+    if formato != FORMATO_DXT5:
+        raise ValueError(f"{nombre}: formato {formato}, se esperaba DXT5")
+    with open(recursos_externos, "rb") as archivo:
+        archivo.seek(inicio)
+        rgba = descomprimir_dxt5(archivo.read(tamano), ancho, alto)
+    # Unity guarda las texturas de abajo arriba.
+    filas = [rgba[y * ancho * 4:(y + 1) * ancho * 4] for y in range(alto)]
+    return ancho, alto, b"".join(reversed(filas))
+
+
+def extraer_recursos(juego, iconos_usados):
+    """Los iconos de las mejoras y de las secciones, en SVG, y el plano de la Argo, en PNG."""
+    ruta = os.path.join(juego, RECURSOS)
+    datos, objetos = leer_recursos(ruta)
+    destino_iconos = os.path.join(RUTA_IMAGENES, "icons")
+    shutil.rmtree(destino_iconos, ignore_errors=True)
+    os.makedirs(destino_iconos)
+    iconos, plano = set(), False
+    for posicion, _, clase in objetos:
+        if clase == CLASE_MALLA:
+            if not Lector(datos, posicion).cadena().startswith(PREFIJO_ICONO):
+                continue
+            nombre, posiciones, triangulos, colores = leer_malla(datos, posicion)
+            # Son blancos: la página les da el color del estado de cada mejora.
+            if colores != {b"\xff\xff\xff\xff"}:
+                raise ValueError(f"El icono {nombre} no es blanco: ¿ha cambiado el juego?")
+            escribir_svg(os.path.join(destino_iconos, nombre.removeprefix(PREFIJO_ICONO) + ".svg"), posiciones, triangulos)
+            iconos.add(nombre)
+        elif clase == CLASE_TEXTURA and Lector(datos, posicion).cadena() == PLANO:
+            ancho, alto, pixeles = leer_textura_dxt5(datos, posicion, ruta + ".resS")
+            if ancho != alto:
+                raise ValueError(f"El plano {PLANO} no es cuadrado")
+            escribir_png(os.path.join(RUTA_IMAGENES, "blueprint.png"), ancho, pixeles)
+            plano = True
+    faltan = set(iconos_usados) - iconos
+    if faltan or not plano:
+        raise ValueError(f"Faltan en {RECURSOS}: {', '.join(sorted(faltan)) or PLANO}")
+    return len(iconos)
+
+
 def guardar_json(nombre, contenido):
     with open(os.path.join(RUTA_DESTINO, nombre), "w", encoding="utf-8") as archivo:
         json.dump(contenido, archivo, ensure_ascii=False, indent=2)
@@ -193,7 +372,13 @@ def main():
     guardar_json("tripulacion.json", tripulacion)
 
     todas = leer_constantes(juego)
-    guardar_json("constantes.json", {seccion: {clave: todas[seccion][clave] for clave in claves} for seccion, claves in CONSTANTES.items()})
+    constantes = {seccion: {clave: todas[seccion][clave] for clave in claves} for seccion, claves in CONSTANTES.items()}
+    ajuste, valor = OPCION_PRECIO_REDUCIDO
+    opcion = next(opcion for dificultad in leer_json(os.path.join(juego, DATOS, DIFICULTAD))["difficultyList"] if dificultad["ID"] == ajuste
+                  for opcion in dificultad["Options"] if opcion["ID"] == valor)
+    constantes["ReducedArgoUpgradeCosts"] = {constante["ConstantName"]: float(constante["ConstantValue"])
+                                             for constante in opcion["DifficultyConstants"]}
+    guardar_json("constantes.json", constantes)
 
     os.makedirs(os.path.join(RUTA_IMAGENES, "crew"), exist_ok=True)
     ilustraciones = sorted({mejora["Illustration"] for mejora in mejoras.values() if mejora.get("Illustration")} | {PORTADA})
@@ -208,8 +393,10 @@ def main():
         escribir_png(os.path.join(RUTA_IMAGENES, "crew", persona["firstName"].split()[-1] + ".png"), TAMANO_RETRATO,
                      reducir(ancho, alto, pixeles, TAMANO_RETRATO))
 
-    print(f"{len(mejoras)} mejoras, {len(descripciones)} estadísticas, {len(tripulacion)} tripulantes y "
-          f"{len(ilustraciones)} ilustraciones en {RUTA_DESTINO}")
+    iconos = extraer_recursos(juego, {mejora["Description"]["Icon"] for mejora in mejoras.values()})
+
+    print(f"{len(mejoras)} mejoras, {len(descripciones)} estadísticas, {len(tripulacion)} tripulantes, "
+          f"{len(ilustraciones)} ilustraciones y {iconos} iconos en {RUTA_DESTINO}")
 
 
 if __name__ == "__main__":

@@ -29,6 +29,8 @@ export function BtArmorControl({ label, shortLabel, value, max, onChange, onStep
         onChange={(event) => onChange(Number.parseInt(event.target.value, 10) || 0)}
         onClick={stopPropagation}
       />
+      {/* El máximo de cada lado, como «100/140» en el juego: delante y detrás tienen el suyo. */}
+      <small className="bt-armor-max" aria-hidden="true">/{max}</small>
       <button type="button" className="armor-step" aria-label={`Increase ${label} by 5`} disabled={value >= max} onClick={(event) => { event.stopPropagation(); onStep(1); }}>+</button>
     </div>
   );

@@ -19,9 +19,10 @@ export const CHANGELOG: ChangelogEntry[] = [
   {
     id: '2026-11-14-battletech-covers',
     date: '2026-11-14',
-    title: 'BATTLETECH on the home page',
+    title: 'A new home page',
     items: [
-      'The BATTLETECH MechLab and the Argo have their own covers on the home page, next to the BATTLETECH star map, with art from the game'
+      'The BATTLETECH MechLab and the Argo have their own covers on the home page, next to the BATTLETECH star map, with art from the game',
+      'The home page has one row per game, MW5: Mercenaries and BATTLETECH, each with its own tools, and a new introduction to what MW Builder offers'
     ]
   },
   {
@@ -35,6 +36,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Armor in steps of 5 with front and rear limits, and a Max armor button that spreads the free tonnage like the in-game one',
       'Same board, location panel and toolbar as the MW5 MechLab: click a location to fit it, and right-click (or long press) any weapon or item to duplicate it, fill free hardpoints, add ammo, move it or remove it',
       'The rest works like the MW5 MechLab too: the stats strip, the View options (slot cells, compact board, panel side), the Weapons and \'Mech analysis tabs, the side by side comparison cards and the search shortcuts of the \'Mech picker, like 3e 2m jj',
+      'Details from the in-game refit screen: hardpoints used per type and jump jets under the tonnage, structure and front and rear armor limits on every location, each item\'s manufacturer and bonus, damage, stability and heat per shot, and the stock combat role',
       'Alpha damage, stability damage, heat against sinking, damage by range, ammo per weapon type, walk and sprint, and value in C-Bills',
       'Pick \'Mechs by weight class, source, role, minimum hardpoints and jump jets; share builds with a link, save them in your browser and compare them'
     ]
@@ -46,7 +48,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       'A new Argo page for BATTLETECH (2018) lists all 35 ship upgrades with their cost, monthly upkeep, effects in the game\'s own words, requirements and what each one unlocks',
       'The upgrade tree lights up everything an upgrade requires and unlocks when you point at it',
-      'Plan your refit: tick upgrades and their requirements come along, with the total cost, the monthly upkeep and the combined effects on your ship. The plan goes in the link'
+      'Plan your refit: tick upgrades and their requirements come along, with the total cost, the monthly upkeep and the combined effects on your ship. The plan goes in the link',
+      'It opens on the in-game Ship Upgrades screen: the three sections around the ship\'s blueprint, with each upgrade\'s own icon, and a details window like the game\'s when you click one'
     ]
   },
   {

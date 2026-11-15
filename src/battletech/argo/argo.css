@@ -1,10 +1,7 @@
 /* La Argo: los estilos de las unidades enemigas (units.css) con el turquesa de las pantallas de la
-   nave. En el árbol, lo que una mejora pide va en ámbar y lo que abre en verde. */
+   nave, que es también el único color del resaltado del árbol. */
 :root {
   --units-accent: #35c9c1;
-  --argo-required: #ffb547;
-  --argo-unlocked: #7fdc8a;
-  --argo-focus: #ffd400;
 }
 
 body {
@@ -88,9 +85,6 @@ body {
   line-height: 1.35;
 }
 
-.argo-key { font-weight: 700; }
-.argo-key.is-required { color: var(--argo-required); }
-.argo-key.is-unlocked { color: var(--argo-unlocked); }
 
 /* Árbol: una fila por categoría y una columna por nivel. En pantallas estrechas se desplaza dentro
    de su caja, con la categoría fija a la izquierda. */
@@ -170,10 +164,23 @@ body {
 
 .argo-node:hover,
 .argo-node:focus-visible { outline: none; }
-.argo-node.is-focus { outline: 2px solid var(--argo-focus); outline-offset: 1px; }
-.argo-node.is-required { border-color: var(--argo-required); box-shadow: inset 0 0 0 1px var(--argo-required); color: var(--units-text); }
-.argo-node.is-unlocked { border-color: var(--argo-unlocked); box-shadow: inset 0 0 0 1px var(--argo-unlocked); color: var(--units-text); }
-.argo-node.is-dim { opacity: 0.35; }
+.argo-node.is-focus { outline: 2px solid var(--units-accent); outline-offset: 1px; color: var(--units-text); }
+.argo-node.is-linked { border-color: var(--units-accent); box-shadow: inset 0 0 0 1px var(--units-accent); color: var(--units-text); }
+.argo-node.is-dim { opacity: 0.3; }
+
+/* «Required» o «Unlocks», en pequeño y sin color propio, sobre las mejoras resaltadas. */
+.argo-node { position: relative; }
+
+.argo-node-link {
+  position: absolute;
+  right: 6px;
+  bottom: 5px;
+  color: var(--units-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
 .argo-legend {
   display: flex;
@@ -219,7 +226,7 @@ body {
 .argo-card.is-owned { border-top-color: var(--units-accent); }
 .argo-card.is-available { border-top-color: var(--units-text); }
 .argo-card.is-locked { border-top-color: rgba(255, 255, 255, 0.3); }
-.argo-card.is-focused { outline: 2px solid var(--argo-focus); outline-offset: 2px; }
+.argo-card.is-focused { outline: 2px solid var(--units-accent); outline-offset: 2px; }
 
 .argo-card-header { position: relative; }
 
@@ -249,7 +256,7 @@ body {
 
 .argo-card-stats { grid-template-columns: repeat(3, 1fr); }
 .argo-card-stats dd { font-size: 20px; font-variant-numeric: tabular-nums; }
-.argo-card-path dd { color: var(--argo-required); }
+.argo-card-path dd { color: var(--units-accent); }
 
 .argo-card-body { display: grid; gap: 10px; padding: 10px 14px 12px; }
 
@@ -450,4 +457,171 @@ body {
   .argo-hero-stats div:last-child { grid-column: 1 / -1; }
   .argo-tabs button { padding: 0 10px; font-size: 16px; }
   .argo-card-stats dd { font-size: 18px; }
+}
+
+/* La pantalla Ship Upgrades del juego. El naranja es el de sus iconos instalados; el turquesa sigue
+   siendo el resaltado de requisitos y de lo que se abre. */
+.argo { --argo-orange: #f7941d; }
+
+.argo-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background: currentColor;
+  /* Los iconos del juego son siluetas blancas: se pintan con el color del estado. */
+  mask: var(--icon) center / contain no-repeat;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  vertical-align: -0.15em;
+}
+
+.unit-card-kind .argo-icon { margin-right: 6px; font-size: 18px; color: var(--argo-orange); }
+
+.argo-ship {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  grid-template-areas:
+    'systems systems'
+    'blueprint combat'
+    'personnel personnel';
+  gap: 20px 24px;
+  margin-top: 8px;
+}
+
+.argo-blueprint {
+  grid-area: blueprint;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 288px);
+  height: auto;
+  opacity: 0.55;
+  filter: drop-shadow(0 0 18px rgba(53, 201, 193, 0.35));
+}
+
+.argo-ship-section.is-systems-support { grid-area: systems; }
+.argo-ship-section.is-combat-deployment { grid-area: combat; align-self: center; }
+.argo-ship-section.is-personnel-medical { grid-area: personnel; }
+
+.argo-ship-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  font: 600 22px var(--units-font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.argo-ship-section h2 .argo-icon { font-size: 32px; color: var(--units-text); }
+
+.argo-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--units-line);
+  border-left: 0;
+  border-right: 0;
+}
+
+.argo-box {
+  padding: 6px 10px 10px;
+  border: 1px solid var(--units-line);
+  background: rgba(10, 12, 18, 0.85);
+}
+
+.argo-box h3 {
+  margin: 0 0 6px;
+  color: var(--units-muted);
+  font: 500 14px var(--units-font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.argo-tiles { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.argo-tile {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: none;
+  font-size: 34px;
+  cursor: pointer;
+  transition: opacity 120ms ease, border-color 120ms ease;
+}
+
+.argo-tile.is-starting, .argo-tile.is-owned { color: var(--argo-orange); }
+.argo-tile.is-available { color: #b8bec8; }
+.argo-tile.is-locked { color: #4c525c; }
+
+/* Esquinas como las de la mejora elegida en el juego. */
+.argo-tile:hover, .argo-tile:focus-visible, .argo-tile.is-focus {
+  outline: none;
+  border-color: transparent;
+  background:
+    linear-gradient(var(--units-text), var(--units-text)) top left / 10px 2px no-repeat,
+    linear-gradient(var(--units-text), var(--units-text)) top left / 2px 10px no-repeat,
+    linear-gradient(var(--units-text), var(--units-text)) bottom right / 10px 2px no-repeat,
+    linear-gradient(var(--units-text), var(--units-text)) bottom right / 2px 10px no-repeat;
+}
+
+.argo-tile.is-linked { border-color: var(--units-accent); box-shadow: inset 0 0 0 1px var(--units-accent); }
+.argo-tile.is-dim { opacity: 0.3; }
+
+.argo-ship-legend i { border: 0; }
+.argo-ship-legend .is-starting { background: var(--argo-orange); }
+.argo-ship-legend .is-available { background: #b8bec8; }
+.argo-ship-legend .is-locked { background: #4c525c; opacity: 1; }
+
+/* La ficha de una mejora, en una ventana como la del juego. */
+.argo-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.argo-dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(560px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+.argo-dialog .argo-card { margin: 0; }
+
+.argo-dialog-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  margin: 0;
+  padding: 4px 12px;
+  background: var(--units-accent);
+  color: #000;
+  font: 600 16px var(--units-font);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.argo-dialog-status.is-locked { background: #4c525c; color: var(--units-text); }
+.argo-dialog-status.is-available { background: #b8bec8; }
+
+.argo-dialog-close { align-self: flex-end; min-width: 120px; }
+
+@media (max-width: 760px) {
+  .argo-ship { grid-template-columns: 1fr; grid-template-areas: 'systems' 'combat' 'personnel'; }
+  .argo-blueprint { display: none; }
+  .argo-tile { width: 40px; height: 40px; font-size: 30px; }
+  .argo-dialog-backdrop { place-items: end stretch; padding: 0; }
+  .argo-dialog { width: 100%; max-height: 88vh; padding-bottom: 8px; background: var(--units-bg); }
 }
