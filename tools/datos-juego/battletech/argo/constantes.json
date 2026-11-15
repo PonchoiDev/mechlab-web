@@ -26,5 +26,9 @@
     ],
     "ArgoUpgradeCostMultiplier": 1,
     "ArgoMaintenanceMultiplier": 1
+  },
+  "ReducedArgoUpgradeCosts": {
+    "ArgoUpgradeCostMultiplier": 0.5,
+    "ArgoMaintenanceMultiplier": 0.5
   }
 }
