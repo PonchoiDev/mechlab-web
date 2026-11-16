@@ -30,16 +30,18 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 
 - **RF1.** Una página propia, `/mercs/campaigns/`, con el título **HRQ & Campaigns**, su portada en la página de inicio (en la fila de MW5, entre el MechLab y el mapa estelar) y un color propio que no repite el de las demás páginas.
 - **RF2.** Dos pestañas: **High reward quests** y **DLC campaigns**, con su número.
-- **RF3.** Las HRQ se agrupan por origen (juego base y cada DLC), con una explicación corta de cada grupo. Cada HRQ es una ficha plegable que enseña, plegada, su nombre, su origen, quien la encarga, dónde se ofrece y los 'Mechs que da; y desplegada:
+- **RF3.** Las HRQ se agrupan por origen (juego base y cada DLC), con una explicación corta de cada grupo. Cada grupo es una lista con una fila por HRQ y las mismas columnas en todas: el nombre (con sus modos y su número de misiones), dónde se ofrece y quien la encarga, y la recompensa (los 'Mechs que da o, si no da ninguno, el dinero). Al desplegar una fila, debajo de ella y a todo el ancho:
   - los modos (campaña, carrera) y los tipos de misión;
   - el sistema de la oferta, enlazado al mapa con la HRQ elegida;
   - las condiciones por modo: reputación, fechas, requisito previo y HRQ excluyentes;
-  - las misiones en orden, con su título, su resumen y su sistema enlazado al mapa;
+  - las misiones en orden, como una línea de pasos, con su título, su resumen y su sistema enlazado al mapa;
   - la recompensa por modo: C-Bills, reputación, 'Mechs enlazados al MechLab, pilotos hero, armas con su tier, equipo y el texto final.
-- **RF4.** Cada campaña es una ficha plegable con su nombre, su DLC, dónde y desde cuándo empieza, cuántas misiones tiene, cuánto pagan en total y sus 'Mechs; desplegada, las misiones en orden con quien las encarga, su sistema enlazado al mapa, su pago y sus recompensas, y lo que da completarla.
+- **RF4.** Cada campaña es una fila plegable de una lista como la de las HRQ, con su nombre, su DLC, dónde y desde cuándo empieza, cuántas misiones tiene, cuánto pagan en total y sus 'Mechs; desplegada, las misiones en orden con quien las encarga, su sistema enlazado al mapa, su pago y sus recompensas, y lo que da completarla.
 - **RF5.** Un buscador por nombre, sistema, quien la encarga, misión o recompensa (el mismo del mapa) y un filtro por origen.
 - **RF6.** La pestaña, la búsqueda, el filtro y la ficha abierta van en la URL (`?tab=campaigns&dlc=7`, `?quest=bow-and-arrow`, `?campaign=dlc7`).
 - **RF7.** El MechLab, el mapa, las unidades enemigas, los pilotos y el equipo enlazan la página nueva en su cabecera.
+- **RF8.** Cada DLC se nombra con su número y su nombre («DLC 8 · Chaos Reign») en los grupos, los filtros y las filas. Los nombres salen de las campañas del juego; el del DLC 1, que no tiene campaña, lo pone `generar_mapa.py`.
+- **RF9.** Los DLC cuya historia se cuenta con cadenas de HRQ en vez de con una campaña (Call to Arms y Chaos Reign) salen también en la pestaña de campañas, en su propia lista: cada uno con sus cadenas en el orden en que se ofrecen, y cada cadena abre su fila en la pestaña de HRQ.
 
 ## Requisitos no funcionales
 
@@ -59,6 +61,8 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 | CA6 | Shadow of Kerensky | se enlaza al mapa | `/mercs/starmap/?date=3049-09-15&campaign=dlc7`; su misión de Rodigo lleva `system=Rodigo` |
 | CA7 | Las recompensas | se resumen | Bow and Arrow da el ARC-AGC; Pirate Hunt, ningún 'Mech; Ashes & Ascension incluye el SNV-BR y el HBK-IIC-DW de completarla, sin repetir; todos los 'Mechs están en `mechs.json` y enlazan a `/mercs/?mech=<variante>` |
 | CA8 | The Dragon's Gambit | se suma su pago | 67.931.715 C-Bills y 18.485 de reputación en 15 misiones |
+| CA10 | Los nombres de los DLC | se escriben | el juego base es «Base game»; el DLC 1, «DLC 1 · Heroes of the Inner Sphere»; el DLC 8, «DLC 8 · Chaos Reign» |
+| CA11 | Las historias contadas con HRQ | se listan | son Call to Arms (DLC 3) con Those in Need, y Chaos Reign (DLC 8) con sus cinco cadenas por fecha: Adam Steiner, Testing Ground, Ideals of War, Thumb War y New Home, Old Enemies |
 | CA9 | La URL | se abre y se construye | sin parámetros, la pestaña de HRQ, todo y nada abierto. `?tab=campaigns&dlc=7&q=kerensky` se lee y se vuelve a escribir igual. `?quest=bow-and-arrow` abre la pestaña de HRQ con Bow and Arrow desplegada y `?campaign=dlc7`, la de campañas con Shadow of Kerensky. Un id, un DLC o una pestaña que no existen se ignoran |
 
 ## Fuera de alcance
@@ -68,7 +72,7 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA9):** `src/utils/questGuide.test.ts`, con `starmap.json` y `mechs.json` reales.
+1. **Lógica (CA1 a CA11):** `src/utils/questGuide.test.ts`, con `starmap.json` y `mechs.json` reales.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: las dos pestañas, una HRQ y una campaña desplegadas, los enlaces al mapa y al MechLab, la URL compartida y la portada.
 
 ## Resultado
