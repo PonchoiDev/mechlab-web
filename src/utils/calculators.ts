@@ -282,7 +282,9 @@ export interface AmmunitionGroup {
   seconds: number | null;
 }
 
-export const groupAmmunition = (loadout: Loadout): AmmunitionGroup[] => {
+// Con las mejoras de cooldown de la cantina, las armas disparan más a menudo y la munición dura menos:
+// los segundos de fuego usan la misma cadencia que la tabla de armas.
+export const groupAmmunition = (loadout: Loadout, modifiers = NO_UPGRADE_MODIFIERS): AmmunitionGroup[] => {
   const equipped = getEquippedItems(loadout);
   const groups = new Map<string, AmmunitionGroup>();
 
@@ -304,7 +306,7 @@ export const groupAmmunition = (loadout: Loadout): AmmunitionGroup[] => {
   for (const group of groups.values()) {
     const users = equipped.filter(item => item.type === 'weapon' && item.ammoType === group.ammoType);
     const ammoPerVolley = sumBy(users, item => item.ammoPerVolley ?? 1);
-    const ammoPerSecond = sumBy(users, item => (item.ammoPerVolley ?? 1) * getWeaponStats(item).rpm / 60);
+    const ammoPerSecond = sumBy(users, item => (item.ammoPerVolley ?? 1) * applyWeaponModifiers(item, getWeaponStats(item), modifiers).rpm / 60);
     group.volleys = ammoPerVolley > 0 ? Math.floor(group.capacity / ammoPerVolley) : null;
     group.seconds = ammoPerSecond > 0 ? Math.round(group.capacity / ammoPerSecond) : null;
   }
@@ -384,6 +386,6 @@ export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState,
     jumpJetCount: getEquippedItems(loadout).filter(isJumpJet).length,
     maxWeaponRange: weapons.reduce((max, weapon) => Math.max(max, weapon.maxRange ?? 0), 0),
     weapons,
-    ammunition: groupAmmunition(loadout)
+    ammunition: groupAmmunition(loadout, modifiers)
   };
 };
