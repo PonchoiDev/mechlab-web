@@ -6,15 +6,17 @@ import { createEmptyArmor, createEmptyLoadout } from './zones';
 
 // Cifras del mechlab del juego con el loadout por defecto de cada mech (capturas del 23 de octubre
 // de 2026). Si un cambio de datos o de cálculo las rompe, la web deja de coincidir con el juego.
+// La refrigeración del CRD-2R, el ASN-26 y los Banshee se volvió a tomar el 16 de noviembre con el juego
+// sin mods: las de octubre llevaban el mod QOL Upgrades 2, que dobla los disipadores del motor.
 // La potencia de fuego del juego incluye el cuerpo a cuerpo, que la web muestra aparte.
 const GAME_REFERENCE = [
   { id: 'WHM-6D', tons: 69.93, armor: 446, firepower: 56, cooling: 2, speed: 64.8, range: 920 },
-  { id: 'CRD-2R', tons: 65, armor: 384, firepower: 108.2, cooling: 2, speed: 64.8, range: 900 },
-  { id: 'ASN-26', tons: 40, armor: 208, firepower: 40.6, cooling: 2, speed: 113.4, range: 600 },
+  { id: 'CRD-2R', tons: 65, armor: 384, firepower: 108.2, cooling: 1, speed: 64.8, range: 900 },
+  { id: 'ASN-26', tons: 40, armor: 208, firepower: 40.6, cooling: 1, speed: 113.4, range: 600 },
   { id: 'HGN-732', tons: 89.98, armor: 555, firepower: 100.9, cooling: 1.2, speed: 48.6, range: 900 },
   { id: 'ARC-2R', tons: 70, armor: 416, firepower: 118, cooling: 1, speed: 64.8, range: 900 },
-  { id: 'BNC-SR', tons: 95, armor: 480, firepower: 102.6, cooling: 2.8, speed: 64.8, range: 1500 },
-  { id: 'BNC-LM', tons: 95, armor: 560, firepower: 109, cooling: 3.2, speed: 64.8, range: 920 },
+  { id: 'BNC-SR', tons: 95, armor: 480, firepower: 102.6, cooling: 1.8, speed: 64.8, range: 1500 },
+  { id: 'BNC-LM', tons: 95, armor: 560, firepower: 109, cooling: 2.2, speed: 64.8, range: 920 },
   { id: 'HBR-A', tons: 64.84, armor: 256, firepower: 106.6, cooling: 2.6, speed: 81, range: 1518 }
 ];
 

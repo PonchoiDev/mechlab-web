@@ -13,13 +13,13 @@ const stockSummary = (id: string) => {
 };
 
 describe('tiempos de calor', () => {
-  it('CA1: el DRG-1G-S llega al máximo en 31.4 s y se enfría en 19.4 s', () => {
+  it('CA1: el DRG-1G-S llega al máximo en 20.8 s y se enfría en 28.2 s', () => {
     const summary = stockSummary('DRG-1G-S');
     expect(summary.heatCapacity).toBe(62);
-    expect(summary.coolingRate).toBe(3.2);
-    expect(summary.timeToMaxHeat).toBeCloseTo(62 / (summary.heatPerSecond - 3.2), 5);
-    expect(Number((summary.timeToMaxHeat as number).toFixed(1))).toBe(31.4);
-    expect(Number(summary.timeToCoolDown!.toFixed(1))).toBe(19.4);
+    expect(summary.coolingRate).toBe(2.2);
+    expect(summary.timeToMaxHeat).toBeCloseTo(62 / (summary.heatPerSecond - 2.2), 5);
+    expect(Number((summary.timeToMaxHeat as number).toFixed(1))).toBe(20.8);
+    expect(Number(summary.timeToCoolDown!.toFixed(1))).toBe(28.2);
   });
 
   it('CA2: si la refrigeración iguala o supera al calor disparando, no llega nunca', () => {
