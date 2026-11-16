@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-16-mechlab-covers',
+    date: '2026-11-16',
+    title: 'New MechLab covers',
+    items: [
+      'The home page MechLab covers now show the techs who run the \'Mech bay: Fahad for MechWarrior 5 and Yang for BATTLETECH, with art from each game'
+    ]
+  },
+  {
     id: '2026-11-16-battletech-flashpoints',
     date: '2026-11-16',
     title: 'BATTLETECH flashpoints',
