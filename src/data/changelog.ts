@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-16-melee-tiers-ammo-time',
+    date: '2026-11-16',
+    title: 'Melee tiers and ammo time fixed',
+    items: [
+      'Melee weapons and the Gauss rifles show the right damage and cooldown at every tier, like the in-game mechlab: the Assault Katana now goes from 55 to 67.5 damage instead of jumping to 742.5',
+      'The time of fire in the Stores table now counts weapon cooldown upgrades from the Cantina'
+    ]
+  },
+  {
     id: '2026-11-15-home-feedback',
     date: '2026-11-15',
     title: 'Feedback from the home page',
