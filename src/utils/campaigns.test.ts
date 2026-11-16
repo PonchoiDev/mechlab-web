@@ -110,4 +110,14 @@ describe('búsqueda y sistemas', () => {
     expect(toMapQuery({ date: '3050-01-01', systemId: null, campaignId: 'dlc7' }, data)).toContain('campaign=dlc7');
     expect(toMapQuery({ date: '3050-01-01', systemId: null, campaignId: 'nope' }, data)).not.toContain('campaign');
   });
+
+  it('CA11: solo dos misiones esperan a una fecha', () => {
+    const pauses = data.campaigns.flatMap(found => found.missions
+      .filter(item => item.notBefore !== null)
+      .map(item => ({ campaign: found.name, mission: item.title, notBefore: item.notBefore })));
+    expect(pauses).toEqual([
+      { campaign: 'Legend of the Kestrel Lancers', mission: 'Tikonov Pt.1', notBefore: '3028-03-15' },
+      { campaign: 'Rise of Rasalhague', mission: 'Rasalhague', notBefore: '3033-09-01' }
+    ]);
+  });
 });
