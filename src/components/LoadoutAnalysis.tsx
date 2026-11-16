@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import type { Mech } from '../types/mech';
-import { formatArmorPoints, formatCoolingRate, formatTurnRate, getRangeProfile, type BuildSummary } from '../utils/calculators';
+import { formatArmorPoints, formatCoolingRate, formatTurnRate, getRangeProfile, getWeaponRangeState, type BuildSummary } from '../utils/calculators';
 import { RangeRadar } from './RangeRadar';
 import { getWeaponLabel } from '../utils/items';
 import { ZONE_LABELS } from '../utils/zones';
-import { EMPTY_VALUE } from '../utils/format';
+import { EMPTY_VALUE, joinWithCounts } from '../utils/format';
 import { UpgradedValue } from './UpgradedValue';
 
 const formatDuration = (seconds: number): string => {
@@ -48,6 +48,15 @@ export function LoadoutAnalysis({ mech, summary, base }: LoadoutAnalysisProps) {
 function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSummary }) {
   const { weapons, ammunition } = summary;
   const rangeProfile = getRangeProfile(weapons);
+  // Anillo del radar señalado: la tabla resalta las armas que llegan y apaga las demás.
+  const [rangeFocus, setRangeFocus] = useState<number | null>(null);
+  const rowRangeClass = (index: number) => rangeFocus === null ? undefined : `is-range-${getWeaponRangeState(weapons[index], rangeFocus)}`;
+  const describeWeapons = (distance: number) => {
+    const names = (state: string) => weapons.filter(weapon => getWeaponRangeState(weapon, distance) === state).map(weapon => weapon.item.name);
+    const [full, falloff] = [names('full'), names('falloff')];
+    const parts = [full.length > 0 ? joinWithCounts(full) : '', falloff.length > 0 ? `falling off: ${joinWithCounts(falloff)}` : ''].filter(Boolean);
+    return parts.length > 0 ? parts.join(' · ') : 'no weapon reaches it';
+  };
   // Mismo loadout con y sin mejoras: las armas van en el mismo orden.
   const cell = (index: number, format: (weapon: BuildSummary['weapons'][number]) => string) => (
     <UpgradedValue value={format(weapons[index])} base={base && format(base.weapons[index])} />
@@ -83,8 +92,11 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
               </thead>
               <tbody>
                 {weapons.map(({ item, zone }, index) => (
-                  <tr key={`${item.id}-${zone}-${index}`}>
-                    <td>{getWeaponLabel(item)}</td>
+                  <tr key={`${item.id}-${zone}-${index}`} className={rowRangeClass(index)}>
+                    <td>
+                      {getWeaponLabel(item)}
+                      {rangeFocus !== null && getWeaponRangeState(weapons[index], rangeFocus) === 'falloff' && <small className="range-tag">falloff</small>}
+                    </td>
                     <td>{ZONE_LABELS[zone]}</td>
                     <td>{cell(index, weapon => formatNumber(weapon.damage))}</td>
                     <td>{cell(index, weapon => weapon.damagePerTon !== null ? formatNumber(weapon.damagePerTon) : EMPTY_VALUE)}</td>
@@ -123,7 +135,7 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
               </div>
               <span className="analysis-note">FULL DAMAGE UP TO OPTIMAL RANGE, FALLING TO ZERO AT MAX RANGE</span>
             </header>
-            <RangeRadar profile={rangeProfile} />
+            <RangeRadar profile={rangeProfile} onActiveChange={setRangeFocus} describeWeapons={describeWeapons} />
           </>
         )}
       </div>

@@ -3209,16 +3209,48 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
    color de cada página (--radar-accent). */
 .range-heading { margin-top: 18px; }
 .range-radar { display: block; width: min(100%, 720px); margin: 4px auto 0; padding: 0 14px 14px; box-sizing: border-box; }
-.range-radar-band { fill: rgba(255, 255, 255, 0.025); stroke: rgba(255, 255, 255, 0.12); stroke-width: 1; }
+.range-radar-band { fill: rgba(255, 255, 255, 0.025); stroke: none; }
+.range-radar-edge { fill: none; stroke: rgba(255, 255, 255, 0.3); stroke-width: 1.2; }
+.range-radar-edge.is-filled { stroke: rgba(8, 12, 8, 0.55); stroke-width: 1.5; }
 .range-radar-fill { fill: var(--radar-accent, var(--work-lime)); stroke: none; }
 .range-radar-hatch { fill: var(--work-amber); }
-.range-radar-spoke { stroke: rgba(255, 255, 255, 0.12); stroke-dasharray: 3 5; }
+.range-radar-spoke { stroke: rgba(255, 255, 255, 0.28); stroke-dasharray: 3 5; }
 .range-radar-base { stroke: rgba(255, 255, 255, 0.3); }
 .range-radar-value { fill: var(--work-text); font: 600 13px var(--work-mono); paint-order: stroke; stroke: rgba(0, 0, 0, 0.75); stroke-width: 3px; }
 .range-radar-min { fill: var(--work-amber); font-size: 11px; }
 .range-radar-distance { fill: var(--work-muted); font: 500 11px var(--work-mono); }
 .range-radar-distance.is-in-reach { fill: var(--work-text); }
-.range-radar-mech { fill: var(--work-text); }
+.range-radar-mech { fill: var(--work-text); pointer-events: none; }
+.range-radar-value, .range-radar-distance, .range-radar-axis, .range-radar-spoke { pointer-events: none; }
+/* El texto pequeño lleva un contorno más fino que la cifra: con el mismo, se emborronaba. */
+.range-radar-unit { fill: rgba(232, 238, 229, 0.75); font-size: 10px; stroke-width: 2px; }
+.range-radar-span { fill: rgba(232, 238, 229, 0.85); font-weight: 500; font-size: 11px; stroke-width: 2px; }
+.range-radar-axis { fill: var(--work-muted); font: 600 10px var(--work-mono); letter-spacing: 0.08em; }
+.range-radar-ring { cursor: pointer; }
+.range-radar-ring.is-active .range-radar-edge { stroke: var(--work-text); stroke-width: 2.5; }
+/* Al señalar un anillo del radar, la tabla de armas resalta las que llegan y apaga las demás. */
+.weapon-table tr.is-range-full td:first-child { box-shadow: inset 3px 0 var(--radar-accent, var(--work-lime)); }
+.weapon-table tr.is-range-falloff td:first-child,
+.weapon-table tr.is-range-belowMin td:first-child { box-shadow: inset 3px 0 var(--work-amber); }
+.weapon-table tr.is-range-out { opacity: 0.35; }
+.range-tag {
+  margin-left: 8px;
+  padding: 1px 5px;
+  border: 1px solid var(--work-amber);
+  border-radius: 2px;
+  color: var(--work-amber);
+  font: 600 9px var(--work-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.range-radar-detail {
+  margin: 0;
+  padding: 0 14px 14px;
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+  text-align: center;
+}
 
 @media (max-width: 600px) {
   /* El SVG se encoge con la pantalla: sus textos crecen para seguir leyéndose. */
@@ -3226,4 +3258,6 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   .range-radar-value { font-size: 24px; stroke-width: 5px; }
   .range-radar-min { font-size: 20px; }
   .range-radar-distance { font-size: 15px; }
+  .range-radar-unit, .range-radar-span { font-size: 16px; }
+  .range-radar-axis { font-size: 14px; }
 }

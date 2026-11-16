@@ -354,6 +354,17 @@ const damageAt = (weapon: WeaponPerformance, distance: number): number => {
   return weapon.damage * (max - distance) / (max - full);
 };
 
+// Qué hace un arma a una distancia: todo su daño, el de la caída (entre su alcance óptimo y el máximo) o
+// nada. El cuerpo a cuerpo no cuenta. Lo usa el radar para resaltar las armas de cada anillo.
+export type WeaponRangeState = 'full' | 'falloff' | 'out';
+
+export const getWeaponRangeState = (weapon: WeaponPerformance, distance: number): WeaponRangeState => {
+  if (isMeleeWeapon(weapon.item)) return 'out';
+  const full = weapon.range ?? 0;
+  const max = weapon.maxRange ?? full;
+  return distance <= full ? 'full' : distance < max ? 'falloff' : 'out';
+};
+
 export const getRangeProfile = (weapons: WeaponPerformance[]): { distance: number; damage: number; belowMin: number }[] => {
   const ranged = weapons.filter(weapon => !isMeleeWeapon(weapon.item));
   const maxRange = Math.max(0, ...ranged.map(weapon => weapon.maxRange ?? weapon.range ?? 0));

@@ -18,6 +18,16 @@ export interface RadarBand extends RangeProfileEntry {
   path: string;
 }
 
+// Tramo de anillos seguidos con el mismo daño: de la distancia del primero a la del último.
+export interface RadarGroup {
+  from: number;
+  to: number;
+  damage: number;
+  belowMin: number;
+  inner: number;
+  outer: number;
+}
+
 const round = (value: number) => Number(value.toFixed(2));
 
 const sectorPath = (center: number, inner: number, outer: number) => {
@@ -41,5 +51,17 @@ export const getRangeRadar = (profile: RangeProfileEntry[], radius: number) => {
       path: sectorPath(radius, inner, outer)
     };
   });
-  return { radius, bands };
+  // Los anillos seguidos con el mismo daño se leen como un solo tramo, con una etiqueta: así no se repite
+  // la misma cifra en cada anillo.
+  const groups: RadarGroup[] = [];
+  for (const band of bands) {
+    const last = groups.at(-1);
+    if (last && last.damage === band.damage && last.belowMin === band.belowMin) {
+      last.to = band.distance;
+      last.outer = band.outer;
+    } else {
+      groups.push({ from: band.distance, to: band.distance, damage: band.damage, belowMin: band.belowMin, inner: band.inner, outer: band.outer });
+    }
+  }
+  return { radius, bands, groups };
 };

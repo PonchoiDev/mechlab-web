@@ -79,6 +79,21 @@ const multiplierFor = (items: BtItem[], stat: string, category?: BtHardpoint) =>
 
 const round = (value: number, decimals = 2) => Number(value.toFixed(decimals));
 
+// Qué hace un arma a una distancia, como el perfil de daño por alcance: todo su daño, el que hace por
+// debajo de su alcance mínimo (con penalización de precisión) o nada. Lo usa el radar para resaltar las
+// armas de cada anillo.
+export type BtWeaponRangeState = 'full' | 'belowMin' | 'out';
+
+// Cada anillo cubre de la distancia del anterior a la suya (el de 90 m, de 0 a 90): un arma llega si su
+// alcance máximo alcanza el borde exterior, y está por debajo de su mínimo si el borde interior queda más
+// cerca, porque en parte del anillo lo está. Un PPC (90 m de mínimo) está por debajo en el de 0 a 90 m.
+const ringStart = (distance: number) => Math.max(0, ...RANGE_DISTANCES.filter(other => other < distance));
+
+export const getBtWeaponRangeState = (item: BtItem, distance: number): BtWeaponRangeState => {
+  const { minRange, maxRange } = item.weapon!;
+  return distance > maxRange ? 'out' : ringStart(distance) < minRange ? 'belowMin' : 'full';
+};
+
 export const getBuildSummary = (build: BtBuild): BtSummary => {
   const { mech, loadout, armor } = build;
   const items = getAllItems(mech, loadout);
@@ -139,10 +154,9 @@ export const getBuildSummary = (build: BtBuild): BtSummary => {
     let damage = 0;
     let belowMin = 0;
     for (const line of weapons) {
-      const { minRange, maxRange } = line.item.weapon!;
-      if (distance > maxRange) continue;
-      if (distance < minRange) belowMin += line.damage * line.count;
-      else damage += line.damage * line.count;
+      const state = getBtWeaponRangeState(line.item, distance);
+      if (state === 'belowMin') belowMin += line.damage * line.count;
+      else if (state === 'full') damage += line.damage * line.count;
     }
     return { distance, damage: round(damage), belowMin: round(belowMin) };
   });
