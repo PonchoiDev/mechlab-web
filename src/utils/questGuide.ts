@@ -78,6 +78,17 @@ export const getQuestMechs = (quest: Quest): MechRef[] => uniqueMechs(quest.rewa
 export const getCampaignMechs = (campaign: Campaign): MechRef[] =>
   uniqueMechs([...campaign.missions.flatMap(mission => mission.mechs), ...(campaign.completion?.mechs ?? [])]);
 
+type PilotRef = { id: string; name: string; hero: boolean };
+
+const uniqueHeroes = (pilots: PilotRef[]): PilotRef[] =>
+  pilots.filter((pilot, index) => pilot.hero && pilots.findIndex(other => other.id === pilot.id) === index);
+
+// Pilotos hero que da la HRQ en cualquiera de sus modos, sin repetir (Valten Ryder en Adam Steiner).
+export const getQuestPilots = (quest: Quest): PilotRef[] => uniqueHeroes(quest.rewards.flatMap(reward => reward.pilots));
+
+// Pilotos hero que se unen en las misiones de la campaña, sin repetir.
+export const getCampaignPilots = (campaign: Campaign): PilotRef[] => uniqueHeroes(campaign.missions.flatMap(mission => mission.pilots));
+
 // Pago base de todas las misiones de la campaña.
 export const getCampaignTotals = (campaign: Campaign): { cbills: number; reputation: number } => ({
   cbills: campaign.missions.reduce((total, mission) => total + mission.cbills, 0),
