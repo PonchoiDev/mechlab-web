@@ -10,12 +10,14 @@ import {
   filterQuests,
   getCampaignMapUrl,
   getCampaignMechs,
+  getCampaignPilots,
   getCampaignSources,
   getCampaignTotals,
   getDlcLabel,
   getQuestMapUrl,
   getQuestBriefings,
   getQuestMechs,
+  getQuestPilots,
   getQuestStories,
   groupQuestsBySource,
   parseGuideQuery,
@@ -145,5 +147,11 @@ describe('página de HRQ y campañas', () => {
     expect(texts).not.toContain(bringHerHome.rewards[0].debrief);
     // El objetivo de Pirate Raiders no viene en el juego: tampoco tiene resumen.
     expect(data.quests.filter(item => !getQuestBriefings(briefings, item)[0]).map(item => item.name)).toEqual(['Pirate Raiders']);
+  });
+
+  it('CA13: los pilotos hero de las recompensas, sin repetir', () => {
+    expect(getQuestPilots(quest('Adam Steiner')).map(pilot => pilot.name)).toEqual(['Valten Ryder']);
+    expect(getCampaignPilots(data.campaigns.find(item => item.name === 'Shadow of Kerensky')!).map(pilot => pilot.name)).toEqual(['Morgan Trensky', 'Sam Hagel']);
+    expect(getQuestPilots(quest('Bow and Arrow'))).toEqual([]);
   });
 });
