@@ -363,8 +363,9 @@
       .cover-action span { transition: transform 220ms ease; }
       a.cover:hover .cover-action span { transform: translateX(4px); }
 
-      /* La carátula de las HRQ y campañas: la DropShip Leopard del TRO 3025, la nave de la compañía en MW5, en el
-         rosa de su página. El dibujo es apaisado: va arriba, para no quedar debajo del título. */
+      /* La carátula de las HRQ y campañas de MW5 y de los flashpoints de BATTLETECH, las dos páginas de cadenas de
+         misiones: la DropShip Leopard del TRO 3025, la nave de la compañía en MW5 y con la que empieza la campaña de
+         BATTLETECH, en el rosa de sus páginas. El dibujo es apaisado: va arriba, para no quedar debajo del título. */
       .cover.is-campaigns { --accent: #ff4fa3; }
 
       .cover.is-campaigns .cover-art { align-items: flex-start; }
@@ -1018,7 +1019,7 @@
         <section class="game-row" aria-labelledby="game-battletech">
           <div class="shelf-header">
             <h3 id="game-battletech">HBS: BATTLETECH <small>HAREBRAINED SCHEMES</small></h3>
-            <span>5 TOOLS</span>
+            <span>6 TOOLS</span>
           </div>
 
           <div class="shelf">
@@ -1039,6 +1040,29 @@
                 </p>
               </div>
               <div class="cover-action">Open MechLab <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="cover is-campaigns" href="/battletech/flashpoints/">
+              <div class="cover-band">
+                <span><b>FLASHPOINTS</b> · BATTLETECH</span>
+                <span class="cover-status">NEW</span>
+              </div>
+              <div class="cover-art">
+                <img
+                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F81%2FLeopard_TRO3025CE.png"
+                  alt=""
+                  onerror="this.remove()"
+                />
+              </div>
+              <div class="cover-title">
+                <small>BATTLETECH</small>
+                <strong>Flashpoints <span>&amp; Paths</span></strong>
+                <p class="cover-meta">
+                  <span>32 flashpoints</span>
+                  <span>3 DLC</span>
+                </p>
+              </div>
+              <div class="cover-action">Open Flashpoints <span aria-hidden="true">→</span></div>
             </a>
 
             <a class="cover is-starmap" href="/battletech/starmap/">

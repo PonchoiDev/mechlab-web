@@ -1,0 +1,40 @@
+/* Flashpoints de BATTLETECH: las listas de HRQ & Campaigns (campaigns.css), en su mismo rosa, con los
+   caminos de cada flashpoint y lo que paga cada uno. */
+.units-links a[aria-current='page'] { color: var(--units-accent); }
+
+.bt-fp-type {
+  margin-left: 6px;
+  color: var(--units-muted);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+/* Cada camino, separado del anterior, con sus contratos y su pago. */
+.bt-fp-path {
+  margin-top: 6px;
+  padding-top: 2px;
+  border-top: 1px dashed var(--units-line);
+}
+
+.bt-fp-pay { margin: 0 0 6px 38px; }
+
+.bt-fp-reputation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  margin: 4px 0 0;
+  padding: 0;
+  color: #9be37a;
+  font-weight: 700;
+  list-style: none;
+}
+
+.bt-fp-reputation li.is-negative { color: #ff7a6b; }
+.bt-fp-reputation span { color: var(--units-text); font-weight: 600; }
+
+/* Variante especial que no está en el MechLab: el mismo aspecto, sin enlace. */
+.guide-mech.is-static { cursor: default; opacity: 0.85; }
+
+@media (max-width: 760px) {
+  .bt-fp-pay { margin-left: 0; }
+}
