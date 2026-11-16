@@ -11,6 +11,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 | Enemy units | https://mw-builder.com/mercs/units/ |
 | Pilots | https://mw-builder.com/mercs/pilots/ |
 | Weapons and equipment | https://mw-builder.com/mercs/equipment/ |
+| HRQ and campaigns | https://mw-builder.com/mercs/campaigns/ |
 | BATTLETECH MechLab | https://mw-builder.com/battletech/ |
 | BATTLETECH star map | https://mw-builder.com/battletech/starmap/ |
 | BATTLETECH weapons and equipment | https://mw-builder.com/battletech/equipment/ |
@@ -103,6 +104,10 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - One tier for the whole list (from 0 to Lost Tech; Clan weapons keep their own), sorting by any column and filters by type, hardpoint size, Inner Sphere or Clan, DLC and a search by name or manufacturer.
 - An equipment tab with heat sinks, jump jets, MASC and Superchargers, ECM, active probes and targeting computers with their effects, and every ammo bin with the weapons that use it. The view goes in the link.
 
+**HRQ and campaigns**
+- Its own page (`/mercs/campaigns/`) with the 64 HRQ, grouped by base game and DLC, and the 6 DLC campaigns, with a search by name, system, employer, mission or reward.
+- Each one opens to show where and when it is offered (reputation, dates, previous or opposing quest), its missions in order and its reward in each mode. Systems open the star map with the route drawn, and 'Mechs open in the MechLab with their stock build. The view goes in the link (`?quest=bow-and-arrow`, `?campaign=dlc7`).
+
 **BATTLETECH MechLab**
 - Its own page (`/battletech/`) with the 96 'Mechs you can own in *BATTLETECH* (2018), from the base game, Heavy Metal, Flashpoint and Urban Warfare, with their stock builds and in-game icons.
 - Every weapon, ammo box, heat sink, jump jet and upgrade, with the manufacturer versions (+ to + + +), filters by category, version, source and rarity, search and sorting.
@@ -162,6 +167,7 @@ src/
   units/                Enemy units page: filters and a card for each unit
   pilots/               Pilots page: hero pilots, traits and academy training programs
   equipment/            Weapons and equipment page: weapon table by tier, equipment cards and ammo
+  campaigns/            HRQ and campaigns page: expandable cards with missions, requirements and rewards
   battletech/           BATTLETECH pages (star map), with their logic in utils/battletech/
   battletech/argo/      BATTLETECH Argo page: upgrade tree, cards and plan
   battletech/equipment/ BATTLETECH weapons and equipment page: weapon table, equipment cards and ammo
@@ -177,6 +183,7 @@ starmap/index.html      Entry of the star map page (/mercs/starmap/)
 units/index.html        Entry of the enemy units page (/mercs/units/)
 pilots/index.html       Entry of the pilots page (/mercs/pilots/)
 equipment/index.html    Entry of the weapons and equipment page (/mercs/equipment/)
+campaigns/index.html    Entry of the HRQ and campaigns page (/mercs/campaigns/)
 battletech/             Entries of the BATTLETECH pages (/battletech/) and their images
 battletech/argo/        Entry of the Argo page (/battletech/argo/) and its images in public/argo/
 battletech/equipment/   Entry of the weapons and equipment page (/battletech/equipment/)

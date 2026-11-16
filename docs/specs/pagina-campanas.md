@@ -1,6 +1,6 @@
 # Especificación: página de HRQ y campañas de MW5
 
-- **Estado:** en curso
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/questGuide.test.ts`) y por último la lógica y la interfaz, en commits separados.
 
 ## Contexto
@@ -70,3 +70,14 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 
 1. **Lógica (CA1 a CA9):** `src/utils/questGuide.test.ts`, con `starmap.json` y `mechs.json` reales.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: las dos pestañas, una HRQ y una campaña desplegadas, los enlaces al mapa y al MechLab, la URL compartida y la portada.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después la lógica y la interfaz, en commits separados.
+- **Datos:** ninguno nuevo. Las 64 HRQ y las 6 campañas salen de `starmap.json`; las 53 variantes de sus recompensas están en `mechs.json`.
+- **Tests:** los nueve criterios (CA1 a CA9) están en `src/utils/questGuide.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900, 1100 × 800, 800 × 300 y 390 × 844: las dos pestañas, Bow and Arrow, Defense Support - Davion (dos modos y HRQ excluyente) y Adam Steiner desplegadas, Shadow of Kerensky y Ashes & Ascension desplegadas, una ficha abierta desde la URL y la portada.
+- **Decisiones durante el desarrollo:**
+  - Una ficha desplegada ocupa toda la fila de la rejilla, para leer sus misiones de corrido, y al abrirse desde un enlace se lleva a la vista sin que la tape la cabecera fija.
+  - La carátula de la portada es la DropShip Leopard del TRO 3025 (Sarna), la nave de la compañía en MW5, en un rosa (#ff4fa3) que no usa ninguna otra página.
+  - Con seis páginas de MW5, los enlaces de la cabecera de `units.css` ya no parten palabras: en pantallas medianas bajan a otra línea enteros y, entre 761 y 1100 px, «MW5 Mercenaries» se queda fuera.

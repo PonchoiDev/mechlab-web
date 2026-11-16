@@ -111,6 +111,13 @@ Es la quinta página de MW5 (`equipment/index.html`, servida en `/mercs/equipmen
 - **`utils/arsenal.ts`:** las filas de la tabla de armas en un tier (con `getWeaponStats`, la misma función que el MechLab; las armas Clan enseñan su único tier), la munición por tonelada, los filtros, el orden por columnas (sin el dato, al final), las categorías y los efectos del equipo, las armas que usan cada munición y la vista en la URL. Tiene sus tests (`arsenal.test.ts`).
 - **`equipment/EquipmentApp.tsx`:** las pestañas de armas y equipo, la tabla de armas (que se desplaza dentro de su caja, con el nombre fijo), las fichas de equipo y la tabla de munición. Solo pinta y llama a la lógica.
 
+### HRQ y campañas
+
+Es la sexta página de MW5 (`campaigns/index.html`, servida en `/mercs/campaigns/`), con su propio bundle. No trae datos nuevos: lee las HRQ y las campañas de `starmap.json`, las mismas del mapa estelar, y usa los estilos de las unidades enemigas (`units.css`) con su color de acento (`campaigns/campaigns.css`):
+
+- **`utils/questGuide.ts`:** los grupos de HRQ por origen, la búsqueda (la misma del mapa, `searchQuests` y `searchCampaigns`) con el filtro por origen, los 'Mechs de cada recompensa sin repetir, el pago total de una campaña, la vista en la URL y los enlaces al mapa. Estos usan `toMapQuery` con la primera fecha en que se ofrece la HRQ o la campaña, para que el mapa no la enseñe como «todavía no se ofrece». Tiene sus tests (`questGuide.test.ts`).
+- **`campaigns/CampaignsApp.tsx`:** las pestañas, los filtros y las fichas plegables. Solo pinta y llama a la lógica.
+
 ### BATTLETECH
 
 Las páginas de *BATTLETECH* viven en `/battletech/`, con su propio build (`vite.battletech.config.ts`): la raíz de Vite es `battletech/`, el código está en `src/battletech/` y `src/utils/battletech/`, y se construye en `dist/battletech/` después del build de MW5, que es el que vacía `dist/` y copia la portada. Los plugins comunes (la portada y la API de desarrollo) están en `vite.plugins.ts`, y el Worker trata `/battletech/api/*` igual que `/mercs/api/*`.
