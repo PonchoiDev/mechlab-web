@@ -152,4 +152,11 @@ describe('página de armas y equipo', () => {
       .toEqual(DEFAULT_ARSENAL_VIEW);
     expect(parseArsenalQuery('?dlc=base').dlc).toBe(0);
   });
+
+  it('CA12: busca por el nombre corto del juego', () => {
+    const search = (query: string) => names(filterWeaponRows(tier1, { ...DEFAULT_WEAPON_FILTER, query }));
+    expect(search('tag')).toEqual(['Target Acquisition Gear', 'Clan Target Acquisition Gear']);
+    expect(search('ac/10-rf')).toEqual(['Autocannon/10 rapid-fire']);
+    expect(search('target')).toEqual(['Target Acquisition Gear', 'Clan Target Acquisition Gear']);
+  });
 });
