@@ -84,6 +84,10 @@ export const getCampaignTotals = (campaign: Campaign): { cbills: number; reputat
   reputation: campaign.missions.reduce((total, mission) => total + mission.reputation, 0)
 });
 
+// El briefing de cada misión de la HRQ, en su orden (quest-briefings.json); el primero es el de la oferta.
+export const getQuestBriefings = (briefings: Record<string, (string | null)[]>, quest: Quest): (string | null)[] =>
+  quest.missions.map((_, index) => briefings[quest.id]?.[index] ?? null);
+
 // El origen con su nombre: «Base game» o «DLC 8 · Chaos Reign».
 export const getDlcLabel = (data: StarmapData, source: number): string =>
   source === BASE_GAME ? 'Base game' : [`DLC ${source}`, data.dlcs[String(source)]].filter(Boolean).join(' · ');
