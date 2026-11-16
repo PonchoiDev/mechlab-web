@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import mechsJson from '../data/mechs.json';
+import pilotsJson from '../data/pilots.json';
 import briefingsJson from '../data/quest-briefings.json';
 import starmapData from '../data/starmap.json';
 import type { Campaign, Quest, StarmapData } from '../types/starmap';
@@ -153,5 +154,12 @@ describe('página de HRQ y campañas', () => {
     expect(getQuestPilots(quest('Adam Steiner')).map(pilot => pilot.name)).toEqual(['Valten Ryder']);
     expect(getCampaignPilots(data.campaigns.find(item => item.name === 'Shadow of Kerensky')!).map(pilot => pilot.name)).toEqual(['Morgan Trensky', 'Sam Hagel']);
     expect(getQuestPilots(quest('Bow and Arrow'))).toEqual([]);
+  });
+
+  it('CA14: cada piloto hero una vez y con su ficha en la página de pilotos', () => {
+    expect(getQuestPilots(quest('No Pilot Left Behind')).map(pilot => pilot.id)).toEqual(['DLC_Shenzeng']);
+    const heroIds = new Set((pilotsJson as unknown as { heroes: { id: string }[] }).heroes.map(hero => hero.id));
+    const rewarded = [...data.quests.flatMap(getQuestPilots), ...data.campaigns.flatMap(getCampaignPilots)];
+    expect(rewarded.filter(pilot => !heroIds.has(pilot.id))).toEqual([]);
   });
 });
