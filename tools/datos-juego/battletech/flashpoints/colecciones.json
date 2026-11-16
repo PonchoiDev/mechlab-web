@@ -1,0 +1,448 @@
+{
+ "itemCollection_loot_FP_allianceSteiner": {
+  "descripcion": "This cache contains a single Star League era item.",
+  "filas": [
+   [
+    "mechdef_hatchetman_HCT-3F",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_loot_FP_generic_SLDF",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "LosTech Item",
+  "titulo": "LosTech Item"
+ },
+ "itemCollection_loot_FP_generic_SLDF": {
+  "descripcion": "This cache contains several items, including at least one Star League era item.",
+  "filas": [
+   [
+    "itemCollection_Weapons_SLDF_rare",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_Upgrades_SLDF",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_MechParts_SLDF",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot_uncommon",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "LosTech Items",
+  "titulo": "LosTech Items"
+ },
+ "itemCollection_loot_FP_generic_SLDF_double": {
+  "descripcion": "This cache contains several items, including at least one Star League era item.",
+  "filas": [
+   [
+    "itemCollection_Weapons_SLDF_rare",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_Upgrades_SLDF",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_MechParts_SLDF",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot_uncommon",
+    "Reference",
+    0,
+    1
+   ],
+   [
+    "itemCollection_table_OneItem_SLDF",
+    "Reference",
+    1,
+    1
+   ]
+  ],
+  "nombre": "LosTech Items",
+  "titulo": "LosTech Items"
+ },
+ "itemCollection_loot_FP_generic_rare": {
+  "descripcion": "This cache contains several rare items.",
+  "filas": [
+   [
+    "itemCollection_Weapons_rare",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_Upgrades_rare",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_MechParts_rare",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare Items",
+  "titulo": "Rare Items"
+ },
+ "itemCollection_loot_FP_generic_rare_double": {
+  "descripcion": "This cache contains several rare items.",
+  "filas": [
+   [
+    "itemCollection_Weapons_rare",
+    "Reference",
+    2,
+    1
+   ],
+   [
+    "itemCollection_Upgrades_rare",
+    "Reference",
+    2,
+    1
+   ],
+   [
+    "itemCollection_MechParts_rare",
+    "Reference",
+    2,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare Items",
+  "titulo": "Rare Items"
+ },
+ "itemCollection_loot_FP_generic_uncommon_double": {
+  "descripcion": "This cache contains several uncommon items.",
+  "filas": [
+   [
+    "itemCollection_Weapons_uncommon",
+    "Reference",
+    2,
+    1
+   ],
+   [
+    "itemCollection_Upgrades_uncommon",
+    "Reference",
+    2,
+    1
+   ],
+   [
+    "itemCollection_MechParts_uncommon",
+    "Reference",
+    2,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot_common",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Uncommon Items",
+  "titulo": "Uncommon Items"
+ },
+ "itemCollection_loot_FP_gladiator": {
+  "descripcion": "This cache contains a single Star League era item.",
+  "filas": [
+   [
+    "mechdef_crab__fp_gladiator_BSC-27",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_HM5_bullShark": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_bullshark_BSK-MAZ",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_ItemDouble_rare": {
+  "descripcion": "This cache contains two rare items.",
+  "filas": [
+   [
+    "itemCollection_table_OneItem_rare",
+    "Reference",
+    2,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare Items",
+  "titulo": "Rare Items"
+ },
+ "itemCollection_loot_Item_rare": {
+  "descripcion": "This cache contains a single rare item.",
+  "filas": [
+   [
+    "itemCollection_table_OneItem_rare",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare Item",
+  "titulo": "Rare Item"
+ },
+ "itemCollection_loot_UW_tournament_a": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_urbanmech_UM-R60L",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Cash Prize: ¢1,000,000",
+  "titulo": "Cash Prize: ¢1,000,000"
+ },
+ "itemCollection_loot_UW_uw1_Raven": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_raven_RVN-1X",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_UW_yangBigScore_hotrod_A": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_vindicator_VND-1AA",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_UW_yangBigScore_hotrod_B": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_firestarter_FS9-H",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_UW_yangBigScore_hotrod_C": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_trebuchet_TBT-5N",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_UW_yangBigScore_hotrod_D": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_enforcer_ENF-4R",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_Upgrade_rare": {
+  "descripcion": "This cache contains a high-end improved 'Mech upgrade component.",
+  "filas": [
+   [
+    "itemCollection_Upgrades_rare",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech Upgrade",
+  "titulo": "Rare Upgrade"
+ },
+ "itemCollection_loot_Upgrade_uncommon": {
+  "descripcion": "This cache contains an improved version of a 'Mech upgrade component.",
+  "filas": [
+   [
+    "itemCollection_Upgrades_uncommon",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot_common",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Uncommon 'Mech Upgrade",
+  "titulo": "Uncommon Upgrade"
+ },
+ "itemCollection_loot_Weapon_rare": {
+  "descripcion": "This cache contains a high-end improved 'Mech weapon.",
+  "filas": [
+   [
+    "itemCollection_Weapons_rare",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare Weapon",
+  "titulo": "Rare Weapon"
+ },
+ "itemCollection_loot_Weapon_uncommon": {
+  "descripcion": "This cache contains an improved version of a 'Mech weapon.",
+  "filas": [
+   [
+    "itemCollection_Weapons_uncommon",
+    "Reference",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot_common",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Uncommon Weapon",
+  "titulo": "Uncommon Weapon"
+ }
+}

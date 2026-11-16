@@ -1,0 +1,1620 @@
+{
+ "fp_HM1_ofUnknownOrigin": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 1250,
+  "Description": {
+   "Details": "Ghost Stories",
+   "Icon": "uixTxrSpot_HeavyMetal.png",
+   "Id": "fp_HM1_ofUnknownOrigin",
+   "Name": "Of Unknown Origin"
+  },
+  "Difficulty": 4,
+  "FlashpointDescriberCastDefId": "castDef_KuritaRepDefault",
+  "FlashpointLength": "MEDIUM",
+  "FlashpointShortDescription": "Commander. I have an important task for you, a rescue operation at the utmost edge of the Rimward Frontier. Meet me at Tarragona and I'll fill you in on the details.",
+  "InProgressTimeout": 1250,
+  "InternalName": "HM1_ofUnknownOrigin",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_tarragona"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_HM1_ofUnknownOrigin",
+  "PotentialEmployers": [
+   "Kurita"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_Item_rare",
+  "Tags": {
+   "items": [
+    "HeavyMetal_Campaign",
+    "StartingFlashpoint"
+   ],
+   "tagSetSourceFile": "tags/FlashpointTags"
+  },
+  "TargetFaction": "Unknown",
+  "UnitDropTonnageHint": "Heavy",
+  "UseAvailableTimeoutOverride": true,
+  "UseInProgressTimeoutOverride": true,
+  "Weight": 10,
+  "fuente": "heavymetal"
+ },
+ "fp_HM3_huntingSeason": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 1250,
+  "Description": {
+   "Details": "One Contract template",
+   "Icon": "uixTxrSpot_HeavyMetal.png",
+   "Id": "fp_HM3_huntingSeason",
+   "Name": "Hunting Season"
+  },
+  "Difficulty": 5,
+  "FlashpointDescriberCastDefId": "castDef_FarahDefault",
+  "FlashpointLength": "LONG",
+  "FlashpointShortDescription": "This is exciting, Commander—our first real lead in the hunt for the <i>Dobrev</i>! If we find that derelict, we may find the answer to the single greatest mystery of our age!",
+  "InProgressTimeout": 1250,
+  "InternalName": "HM3_huntingSeason",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_independence"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_HM3_huntingSeason",
+  "PotentialEmployers": [
+   "SelfEmployed"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [
+   {
+    "ExclusionTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [],
+    "RequirementTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "Scope": "Company"
+   }
+  ],
+  "RewardCollectionID": "itemCollection_loot_ItemDouble_rare",
+  "Tags": {
+   "items": [
+    "HeavyMetal_Campaign",
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": "tags/FlashpointTags"
+  },
+  "TargetFaction": "BaumannGroup",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": true,
+  "UseInProgressTimeoutOverride": true,
+  "Weight": 10,
+  "fuente": "heavymetal"
+ },
+ "fp_HM5_hourglass": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 1250,
+  "Description": {
+   "Details": "",
+   "Icon": "uixTxrSpot_HeavyMetal.png",
+   "Id": "fp_HM5_hourglass",
+   "Name": "Hourglass"
+  },
+  "Difficulty": 7,
+  "FlashpointDescriberCastDefId": "castDef_SumireDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "Our intel was right, Commander. Surface scans show that the <i>Dobrev</i> is moored at a makeshift spaceport near Appian's southern pole. We can take it, but we'll need to move fast.",
+  "InProgressTimeout": 1250,
+  "InternalName": "HM5_hourglass",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_appian"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_HM5_hourglass",
+  "PotentialEmployers": [
+   "SelfEmployed"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [
+   {
+    "ExclusionTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [],
+    "RequirementTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "Scope": "Company"
+   }
+  ],
+  "RewardCollectionID": "itemCollection_loot_HM5_bullShark",
+  "Tags": {
+   "items": [
+    "HeavyMetal_Campaign",
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": "tags/FlashpointTags"
+  },
+  "TargetFaction": "BaumannGroup",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": true,
+  "UseInProgressTimeoutOverride": true,
+  "Weight": 10,
+  "fuente": "heavymetal"
+ },
+ "fp_HM7_showdown": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 1250,
+  "Description": {
+   "Details": "",
+   "Icon": "uixTxrSpot_HeavyMetal.png",
+   "Id": "fp_HM7_showdown",
+   "Name": "Standoff"
+  },
+  "Difficulty": 10,
+  "FlashpointDescriberCastDefId": "castDef_DariusDefault",
+  "FlashpointLength": "LONG",
+  "FlashpointShortDescription": "This is a point of no return, Commander. When you pull the trigger on this drop, you may well be committing us to a confrontation with the Black Widow. We’d better be ready.",
+  "InProgressTimeout": 1250,
+  "InternalName": "HM7_showdown",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_mantharaka"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_HM7_showdown",
+  "PotentialEmployers": [
+   "SelfEmployed"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [
+   {
+    "ExclusionTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [],
+    "RequirementTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "Scope": "Company"
+   }
+  ],
+  "RewardCollectionID": "itemCollection_loot_ItemDouble_rare",
+  "Tags": {
+   "items": [
+    "HeavyMetal_Campaign",
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": "tags/FlashpointTags"
+  },
+  "TargetFaction": "BlackWidowCompany",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": true,
+  "UseInProgressTimeoutOverride": true,
+  "Weight": 10,
+  "fuente": "heavymetal"
+ },
+ "fp_allianceDavion": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Alliance Flashpoint for Davion",
+   "Icon": "",
+   "Id": "fp_allianceDavion",
+   "Name": "Davion Alliance"
+  },
+  "Difficulty": 9,
+  "FlashpointDescriberCastDefId": "castDef_DariusDefault",
+  "FlashpointLength": "LONG",
+  "FlashpointShortDescription": "Our allies in the Federated Suns have a special request for us. They insist that they can only give us details in person.",
+  "InProgressTimeout": 0,
+  "InternalName": "allianceDavion",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_kern"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_allianceDavion",
+  "PotentialEmployers": [
+   "Davion"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [
+   {
+    "ExclusionTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [],
+    "RequirementTags": {
+     "items": [
+      "ALLIED_FACTION_Davion"
+     ],
+     "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "Scope": "Company"
+   }
+  ],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_SLDF_double",
+  "TargetFaction": "Liao",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 1000,
+  "fuente": "flashpoint"
+ },
+ "fp_allianceKurita": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Alliance Flashpoint for Kurita",
+   "Icon": "",
+   "Id": "fp_allianceKurita",
+   "Name": "Kurita Alliance"
+  },
+  "Difficulty": 9,
+  "FlashpointDescriberCastDefId": "castDef_DariusDefault",
+  "FlashpointLength": "LONG",
+  "FlashpointShortDescription": "Our allies in the Draconis Combine have a special request for us. They insist that they can only give us details in person.",
+  "InProgressTimeout": 0,
+  "InternalName": "allianceKurita",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_horsham"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_allianceKurita",
+  "PotentialEmployers": [
+   "Kurita"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [
+   {
+    "ExclusionTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [],
+    "RequirementTags": {
+     "items": [
+      "ALLIED_FACTION_Kurita"
+     ],
+     "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "Scope": "Company"
+   }
+  ],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_SLDF_double",
+  "TargetFaction": "Davion",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 1000,
+  "fuente": "flashpoint"
+ },
+ "fp_allianceLiao": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Alliance Flashpoint for Liao",
+   "Icon": "",
+   "Id": "fp_allianceLiao",
+   "Name": "Liao Alliance"
+  },
+  "Difficulty": 9,
+  "FlashpointDescriberCastDefId": "castDef_DariusDefault",
+  "FlashpointLength": "LONG",
+  "FlashpointShortDescription": "Our allies in the Capellan Confederation have a special request for us. They insist that they can only give us details in person.",
+  "InProgressTimeout": 0,
+  "InternalName": "allianceLiao",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_desolateplains"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_allianceLiao",
+  "PotentialEmployers": [
+   "Liao"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [
+   {
+    "ExclusionTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [],
+    "RequirementTags": {
+     "items": [
+      "ALLIED_FACTION_Liao"
+     ],
+     "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "Scope": "Company"
+   }
+  ],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_SLDF_double",
+  "TargetFaction": "Davion",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 1000,
+  "fuente": "flashpoint"
+ },
+ "fp_allianceMarik": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Alliance Flashpoint for Marik",
+   "Icon": "",
+   "Id": "fp_allianceMarik",
+   "Name": "Marik Alliance"
+  },
+  "Difficulty": 9,
+  "FlashpointDescriberCastDefId": "castDef_DariusDefault",
+  "FlashpointLength": "LONG",
+  "FlashpointShortDescription": "Our allies in the Free Worlds League have a special request for us. They insist that they can only give us details in person.",
+  "InProgressTimeout": 0,
+  "InternalName": "allianceMarik",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_sax"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_allianceMarik",
+  "PotentialEmployers": [
+   "Marik"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [
+   {
+    "ExclusionTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [],
+    "RequirementTags": {
+     "items": [
+      "ALLIED_FACTION_Marik"
+     ],
+     "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "Scope": "Company"
+   }
+  ],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_SLDF_double",
+  "TargetFaction": "Liao",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 1000,
+  "fuente": "flashpoint"
+ },
+ "fp_allianceSteiner": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Alliance Flashpoint for Steiner",
+   "Icon": "",
+   "Id": "fp_allianceSteiner",
+   "Name": "Steiner Alliance"
+  },
+  "Difficulty": 9,
+  "FlashpointDescriberCastDefId": "castDef_DariusDefault",
+  "FlashpointLength": "LONG",
+  "FlashpointShortDescription": "Our allies in the Lyran Commonwealth have a special request for us. They insist that they can only give us details in person.",
+  "InProgressTimeout": 0,
+  "InternalName": "allianceSteiner",
+  "LanceDropTonnageHint": "Heavy",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_claybrooke"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_allianceSteiner",
+  "PotentialEmployers": [
+   "Steiner"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [
+   {
+    "ExclusionTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [],
+    "RequirementTags": {
+     "items": [
+      "ALLIED_FACTION_Steiner"
+     ],
+     "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "Scope": "Company"
+   }
+  ],
+  "RewardCollectionID": "itemCollection_loot_FP_allianceSteiner",
+  "TargetFaction": "Marik",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 1000,
+  "fuente": "flashpoint"
+ },
+ "fp_defector": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Three way split",
+   "Icon": "",
+   "Id": "fp_defector",
+   "Name": "The Defector"
+  },
+  "Difficulty": 8,
+  "FlashpointDescriberCastDefId": "castDef_KuritaRepDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "An agent of the Combine government has gone rogue. He must be prevented from sharing what he knows, and I believe that a mercenary solution is in order. Kill the defector and you will be rewarded.",
+  "InProgressTimeout": 0,
+  "InternalName": "defector",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_itsbur"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_defector",
+  "PotentialEmployers": [
+   "Kurita"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_SLDF",
+  "TargetFaction": "Liao",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_doubleAgent": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Double Agent",
+   "Icon": "uixTxrSpot_flashpointContract2.png",
+   "Id": "fp_doubleAgent",
+   "Name": "Double Agent"
+  },
+  "Difficulty": 5,
+  "FlashpointDescriberCastDefId": "castDef_LiaoRepDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "The Capellan Confederation requires your assistance on a highly sensitive matter. Meet me at Flintoft, Commander. We'll discuss the details there.",
+  "InProgressTimeout": 0,
+  "InternalName": "doubleAgent",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_flintoft"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_doubleAgent",
+  "PotentialEmployers": [
+   "Liao"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_Item_rare",
+  "TargetFaction": "Davion",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ },
+ "fp_extraActivities": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Betrayed by their own organization",
+   "Icon": "",
+   "Id": "fp_extraActivities",
+   "Name": "Extracurricular Activities"
+  },
+  "Difficulty": 7,
+  "FlashpointDescriberCastDefId": "castDef_SteinerRepDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "I require your help on a personal matter, Commander. No other mercenary company will do. If you accept, further details will be provided upon your arrival at Brockway.",
+  "InProgressTimeout": 0,
+  "InternalName": "extraActivities",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_brockway"
+    ],
+    "tagSetSourceFile": ""
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_extraActivities",
+  "PotentialEmployers": [
+   "Steiner"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_rare_double",
+  "TargetFaction": "Davion",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_flattenedEarth": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Betrayed by their own organization",
+   "Icon": "",
+   "Id": "fp_flattenedEarth",
+   "Name": "Operation: Flattened Earth"
+  },
+  "Difficulty": 7,
+  "FlashpointDescriberCastDefId": "castDef_LiaoRepDefault",
+  "FlashpointLength": "MEDIUM",
+  "FlashpointShortDescription": "A seditionist group has taken root in the Capellan system of Cavalor. House Liao will handsomely reward any company that will root out and destroy these traitors to the Confederation.",
+  "InProgressTimeout": 0,
+  "InternalName": "flattenedEarth",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_cavalor"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_flattenedEarth",
+  "PotentialEmployers": [
+   "Liao"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_rare_double",
+  "TargetFaction": "RazorbackMercs",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_gladiator": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Betrayed by their own organization",
+   "Icon": "",
+   "Id": "fp_gladiator",
+   "Name": "The Steel Beast"
+  },
+  "Difficulty": 6,
+  "FlashpointDescriberCastDefId": "castDef_SteinerRepDefault",
+  "FlashpointLength": "MEDIUM",
+  "FlashpointShortDescription": "A Solaris gladiator has murdered my nephew, Arjun. With your help, I will see his killer brought to justice, Commander—make him suffer and I'll make you rich.",
+  "InProgressTimeout": 0,
+  "InternalName": "gladiator",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_herotitus"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_gladiator",
+  "PotentialEmployers": [
+   "Steiner"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_gladiator",
+  "TargetFaction": "SteelBeast",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_greed": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Betrayed by their own organization",
+   "Icon": "",
+   "Id": "fp_greed",
+   "Name": "Criminal Minds"
+  },
+  "Difficulty": 6,
+  "FlashpointDescriberCastDefId": "castDef_LiaoRepDefault",
+  "FlashpointLength": "MEDIUM",
+  "FlashpointShortDescription": "House Liao requires your assistance in the dismantling of a prominent crime syndicate. Working in concert with Capellan ground forces, you will capture the OpFor's personnel and seize their financial assets.",
+  "InProgressTimeout": 0,
+  "InternalName": "greed",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_yuris"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_greed",
+  "PotentialEmployers": [
+   "Liao"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_Weapon_uncommon",
+  "TargetFaction": "AuriganPirates",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_headhunting": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Betrayed by their own organization",
+   "Icon": "",
+   "Id": "fp_headhunting",
+   "Name": "Headhunting"
+  },
+  "Difficulty": 7,
+  "FlashpointDescriberCastDefId": "castDef_DavionRepDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "House Davion seeks your assistance in a sensitive matter related to the security of our national borders. Expect a short deployment with exceptional salvage opportunities.",
+  "InProgressTimeout": 0,
+  "InternalName": "headhunting",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_newvallis"
+    ],
+    "tagSetSourceFile": ""
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_headhunting",
+  "PotentialEmployers": [
+   "Davion"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_rare_double",
+  "TargetFaction": "FlakJackals",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_justinAllard": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Short Split Template",
+   "Icon": "",
+   "Id": "fp_justinAllard",
+   "Name": "Bourbon & BattleMechs"
+  },
+  "Difficulty": 6,
+  "FlashpointDescriberCastDefId": "castDef_FP_justinAllard_AllardDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "Commander. My name is Justin Allard. You don't know me, but I've heard a great deal about you. There is a small matter that I could use your assistance with, if you're so inclined. Meet me at your earliest convenience and we'll talk.",
+  "InProgressTimeout": 0,
+  "InternalName": "justinAllard",
+  "LanceDropTonnageHint": "Light",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_merlin"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_justinAllard",
+  "PotentialEmployers": [
+   "Davion"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_rare",
+  "TargetFaction": "MasonsMarauders",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_lastChance": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Short Split Template",
+   "Icon": "",
+   "Id": "fp_lastChance",
+   "Name": "A House Divided"
+  },
+  "Difficulty": 6,
+  "FlashpointDescriberCastDefId": "castDef_UW_lastChance_LadyNakanoDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "Commander, I need your help—my house's honor is at stake. Please, let's meet and discuss the details.",
+  "InProgressTimeout": 0,
+  "InternalName": "lastChance",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_mendham"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_lastChance",
+  "PotentialEmployers": [
+   "HouseNakano"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_Item_rare",
+  "TargetFaction": "AuriganPirates",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ },
+ "fp_longHunt": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Branch B has an additional choice, leading to b2 or c1.",
+   "Icon": "",
+   "Id": "fp_longHunt",
+   "Name": "The Long Hunt"
+  },
+  "Difficulty": 7,
+  "FlashpointDescriberCastDefId": "castDef_KuritaRepDefault",
+  "FlashpointLength": "MEDIUM",
+  "FlashpointShortDescription": "A Davion lieutenant has committed terrible atrocities in the Combine system of Shaul Khala. I need you to hunt him down, Commander. He cannot be permitted to live after what he's done.",
+  "InProgressTimeout": 0,
+  "InternalName": "longHunt",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_lindsay"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_longHunt",
+  "PotentialEmployers": [
+   "Kurita"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_rare_double",
+  "TargetFaction": "Davion",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_longRoad": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Template for Initial choice.",
+   "Icon": "",
+   "Id": "fp_longRoad",
+   "Name": "Joint Venture"
+  },
+  "Difficulty": 5,
+  "FlashpointDescriberCastDefId": "castDef_SteinerRepDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "House Steiner requires your assistance in leading a Davion-Steiner convoy across a broad swathe of hostile terrain. Payment will be remitted upon the safe delivery of the convoy's payload.",
+  "InProgressTimeout": 0,
+  "InternalName": "longRoad",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_adrar"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_longRoad",
+  "PotentialEmployers": [
+   "Steiner"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_uncommon_double",
+  "Tags": {
+   "items": [
+    "StartingFlashpoint"
+   ],
+   "tagSetSourceFile": "tags/FlashpointTags"
+  },
+  "TargetFaction": "Liao",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_morganKell": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Betrayed by their own organization",
+   "Icon": "uixTxrSpot_Flashpoint.png",
+   "Id": "fp_morganKell",
+   "Name": "The Baying of Hounds"
+  },
+  "Difficulty": 7,
+  "FlashpointDescriberCastDefId": "castDef_DariusDefault",
+  "FlashpointLength": "MEDIUM",
+  "FlashpointShortDescription": "You aren't gonna believe this, but Morgan Kell—<i>the</i> [[DM.BaseDescriptionDefs[LoreMorganKell],Morgan Kell]], of the [[DM.BaseDescriptionDefs[LoreKellHounds],Kell Hounds]]—wants us for a job. This isn't the sort of offer you say no to.",
+  "InProgressTimeout": 0,
+  "InternalName": "morganKell",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_viribium"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_morganKell",
+  "PotentialEmployers": [
+   "KellHounds"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_rare_double",
+  "TargetFaction": "HostileMercenaries",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_prize": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Short Split Template",
+   "Icon": "uixTxrSpot_flashpointContract2.png",
+   "Id": "fp_prize",
+   "Name": "One Man's Trash"
+  },
+  "Difficulty": 4,
+  "FlashpointDescriberCastDefId": "castDef_MysteryClient",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "Commander {COMMANDER.LastName}. You don't know me, but me and my associates have a job for you. A real <i>nice</i> one, with a big payout at the end. If you wanna talk about it, come meet me at Glentworth. I'll be waiting.",
+  "InProgressTimeout": 0,
+  "InternalName": "prize",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_glentworth"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_prize",
+  "PotentialEmployers": [
+   "Unknown"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_Upgrade_uncommon",
+  "TargetFaction": "HostileMercenaries",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ },
+ "fp_redHunt": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Betrayed by their own organization",
+   "Icon": "",
+   "Id": "fp_redHunt",
+   "Name": "Red Hunt"
+  },
+  "Difficulty": 7,
+  "FlashpointDescriberCastDefId": "castDef_KuritaRepDefault",
+  "FlashpointLength": "LONG",
+  "FlashpointShortDescription": "Commander! I'm glad I was able to reach you. I have an opportunity for your company that pays extremely well. The only drawback is that it's located as far from civilization as it's possible to get without a JumpShip accident.",
+  "InProgressTimeout": 0,
+  "InternalName": "redHunt",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_peratallada"
+    ],
+    "tagSetSourceFile": ""
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_redHunt",
+  "PotentialEmployers": [
+   "Kurita"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [
+   {
+    "ExclusionTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [
+     {
+      "obj": "Reputation.Kurita",
+      "op": "GreaterThan",
+      "val": 40,
+      "valueConstant": "40"
+     }
+    ],
+    "RequirementTags": {
+     "items": [],
+     "tagSetSourceFile": ""
+    },
+    "Scope": "Company"
+   }
+  ],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_SLDF_double",
+  "TargetFaction": "Unknown",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ },
+ "fp_scoundrel": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Betrayed by their own organization",
+   "Icon": "",
+   "Id": "fp_scoundrel",
+   "Name": "The Opportunist"
+  },
+  "Difficulty": 7,
+  "FlashpointDescriberCastDefId": "castDef_DavionRepDefault",
+  "FlashpointLength": "MEDIUM",
+  "FlashpointShortDescription": "House Davion requests your assistance in the transportation and custodial exchange of a high-profile prisoner. Payment will be remitted when the asset is in our hands.",
+  "InProgressTimeout": 0,
+  "InternalName": "scoundrel",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_nondiz"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_scoundrel",
+  "PotentialEmployers": [
+   "Davion"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_rare_double",
+  "TargetFaction": "AuriganPirates",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_sentinel": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Hearts and Minds",
+   "Icon": "uixTxrSpot_Flashpoint.png",
+   "Id": "fp_sentinel",
+   "Name": "Hearts and Minds"
+  },
+  "Difficulty": 4,
+  "FlashpointDescriberCastDefId": "castDef_DavionRepDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "A pro-Capellan insurgent group called the Emerald Dawn threatens to destabilize Shaunavon's political landscape. House Davion will reward you handsomely to neutralize this terrorist threat.",
+  "InProgressTimeout": 0,
+  "InternalName": "sentinel",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_shaunavon"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_sentinel",
+  "PotentialEmployers": [
+   "Davion"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_Weapon_uncommon",
+  "TargetFaction": "EmeraldDawn",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ },
+ "fp_shadowOrg": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Branch B has the extra encounter",
+   "Icon": "",
+   "Id": "fp_shadowOrg",
+   "Name": "White Lies"
+  },
+  "Difficulty": 6,
+  "FlashpointDescriberCastDefId": "castDef_MarikRepDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "I require your assistance with a personal matter, Commander. Meet me at the specified location, and come quick—my family needs your help.",
+  "InProgressTimeout": 0,
+  "InternalName": "shadowOrg",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_bellerophon_fp_whitelies"
+    ],
+    "tagSetSourceFile": "Tags/PlanetTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_shadowOrg",
+  "PotentialEmployers": [
+   "Marik"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_rare",
+  "TargetFaction": "HostileMercenaries",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_siegebreaker": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Late Split (3 way)",
+   "Icon": "uixTxrSpot_flashpointContract2.png",
+   "Id": "fp_siegebreaker",
+   "Name": "Siegebreaker"
+  },
+  "Difficulty": 5,
+  "FlashpointDescriberCastDefId": "castDef_LiaoRepDefault",
+  "FlashpointLength": "MEDIUM",
+  "FlashpointShortDescription": "House Steiner has placed a Capellan city under military blockade. With your assistance, I intend to break the Lyran siege.",
+  "InProgressTimeout": 0,
+  "InternalName": "siegebreaker",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_mitchel"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_siegebreaker",
+  "PotentialEmployers": [
+   "Liao"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_Upgrade_rare",
+  "TargetFaction": "Steiner",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ },
+ "fp_succession": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Succession",
+   "Icon": "uixTxrSpot_Flashpoint.png",
+   "Id": "fp_succession",
+   "Name": "Succession"
+  },
+  "Difficulty": 5,
+  "FlashpointDescriberCastDefId": "castDef_KuritaRepDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "An associate of mine on Primus is in desperate need of assistance. If you're open to a little subcontracting, I'll make it worth your while.",
+  "InProgressTimeout": 0,
+  "InternalName": "succession",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_primus"
+    ],
+    "tagSetSourceFile": "Tags/PlanetTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_succession",
+  "PotentialEmployers": [
+   "Kurita"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_Weapon_rare",
+  "TargetFaction": "RedHareRegiment",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ },
+ "fp_tournament": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "lorem ipsum",
+   "Icon": "uixTxrSpot_Flashpoint.png",
+   "Id": "fp_tournament",
+   "Name": "Tournament of Champions"
+  },
+  "Difficulty": 4,
+  "FlashpointDescriberCastDefId": "castDef_UW_urbieDerby_HorvatDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "Your deeds on the field of battle have earned you an invitation to my Tournament of Champions. Join us, and take your place in the arena against the Periphery's fiercest warriors!",
+  "InProgressTimeout": 0,
+  "InternalName": "tournament",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_cluffsstand"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_tournament",
+  "PotentialEmployers": [
+   "ProfHorvat"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_UW_tournament_a",
+  "TargetFaction": "Unknown",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ },
+ "fp_unwelcomeGuests": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 300,
+  "Description": {
+   "Details": "Betrayed by their own organization",
+   "Icon": "",
+   "Id": "fp_unwelcomeGuests",
+   "Name": "Unwelcome Guests"
+  },
+  "Difficulty": 8,
+  "FlashpointDescriberCastDefId": "castDef_MarikRepDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "House Marik requests your assistance in removing an unwelcome Steiner presence from its territory. Bring a light lance and your best pilots; in this deployment, speed will be of the essence.",
+  "InProgressTimeout": 0,
+  "InternalName": "unwelcomeGuests",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_pilpala"
+    ],
+    "tagSetSourceFile": "Tags/PlanetTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_unwelcomeGuests",
+  "PotentialEmployers": [
+   "Marik"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_FP_generic_SLDF",
+  "Tags": {
+   "items": [],
+   "tagSetSourceFile": "tags/FlashpointTags"
+  },
+  "TargetFaction": "Steiner",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": true,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "flashpoint"
+ },
+ "fp_uw1": {
+  "AllowRefitTime": false,
+  "AvailableTimeout": 300,
+  "Description": {
+   "Details": "Custom Linear FP",
+   "Icon": "uixTxrSpot_flashpointContract2.png",
+   "Id": "fp_uw1",
+   "Name": "Prototype"
+  },
+  "Difficulty": 3,
+  "FlashpointDescriberCastDefId": "castDef_MarikRepDefault",
+  "FlashpointLength": "LONG",
+  "FlashpointShortDescription": "I have a highly delicate contract that requires your immediate attention. The task at hand is sensitive to the point that it cannot be discussed over an open channel. Meet me in the Duchy of Andurien and I'll fill you in on the details.",
+  "InProgressTimeout": 0,
+  "InternalName": "uw1",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_fagerholm"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_uw1",
+  "PotentialEmployers": [
+   "Marik"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": false,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_UW_uw1_Raven",
+  "Tags": {
+   "items": [
+    "StartingFlashpoint"
+   ],
+   "tagSetSourceFile": "tags/FlashpointTags"
+  },
+  "TargetFaction": "Liao",
+  "UnitDropTonnageHint": "Light",
+  "UseAvailableTimeoutOverride": true,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ },
+ "fp_yangBigScore": {
+  "AllowRefitTime": true,
+  "AvailableTimeout": 0,
+  "Description": {
+   "Details": "Short Split Template",
+   "Icon": "uixTxrSpot_flashpointContract2.png",
+   "Id": "fp_yangBigScore",
+   "Name": "Yang Virtanen's Big Score"
+  },
+  "Difficulty": 5,
+  "FlashpointDescriberCastDefId": "castDef_YangDefault",
+  "FlashpointLength": "SHORT",
+  "FlashpointShortDescription": "Hey, Boss. I've got a line on a really juicy opportunity out on Electra, but I need to check it out in person to be sure. Think you could authorize taking a little detour?",
+  "InProgressTimeout": 0,
+  "InternalName": "yangBigScore",
+  "LanceDropTonnageHint": "None",
+  "LocationRequirements": {
+   "ExclusionTags": {
+    "items": [],
+    "tagSetSourceFile": ""
+   },
+   "RequirementComparisons": [],
+   "RequirementTags": {
+    "items": [
+     "planet_name_electra"
+    ],
+    "tagSetSourceFile": "Tags/PlanetNameTags"
+   },
+   "Scope": "StarSystem"
+  },
+  "MilestoneSetID": "ms_fp_yangBigScore",
+  "PotentialEmployers": [
+   "SelfEmployed_Yang"
+  ],
+  "PublishState": "PUBLISHED",
+  "Repeatable": true,
+  "Requirements": [],
+  "RewardCollectionID": "itemCollection_loot_UW_yangBigScore_hotrod_A",
+  "TargetFaction": "Unknown",
+  "UnitDropTonnageHint": "None",
+  "UseAvailableTimeoutOverride": false,
+  "UseInProgressTimeoutOverride": false,
+  "Weight": 10,
+  "fuente": "urbanwarfare"
+ }
+}
