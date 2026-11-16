@@ -35,20 +35,13 @@ describe('cifras del juego', () => {
   });
 });
 
-// Refrigeración del juego con el 'Mech vacío (Strip 'Mech), capturas del 29 de octubre de 2026, ya
-// con el parche. Con dobles, el motor manda: el JVN-11A y el BJ-3 (motor 180) dan 1,4 con bases
-// distintas, el CTF-3L y el KGC-A (base 2,0) no pasan de 2,0, el FS9-X1 (motor 245) se queda en 1,8,
-// el FLE-RCX (motor 120) se queda en su base, y el ADR-A y el TDR-5S (C2), de Clan, suben de 1,4
-// a 1,6 y de 1,0 a 2,0.
+// Refrigeración del juego con el 'Mech vacío (Strip 'Mech), capturas del 16 de noviembre de 2026 con el
+// juego sin mods. Los disipadores del motor enfrían como simples aunque el 'Mech sea de dobles: el juego
+// usa el BaseCoolingRate del MDA, con dos decimales. Las capturas del 29 de octubre daban más (el FS9-X1,
+// 1,8) porque el mod QOL Upgrades 2 dobla la refrigeración del motor.
 const EMPTY_MECH_COOLING = [
-  { id: 'JVN-11A', cooling: 1.4 },
-  { id: 'BJ-3', cooling: 1.4 },
-  { id: 'CTF-3L', cooling: 2 },
-  { id: 'KGC-A', cooling: 2 },
-  { id: 'FS9-X1', cooling: 1.8 },
-  { id: 'FLE-RCX', cooling: 1 },
-  { id: 'ADR-A', cooling: 1.6 },
-  { id: 'TDR-5S (C2)', cooling: 2 }
+  { id: 'MAL-1R', cooling: 1 },
+  { id: 'FS9-X1', cooling: 0.84 }
 ];
 
 describe('refrigeración del juego sin equipo', () => {
