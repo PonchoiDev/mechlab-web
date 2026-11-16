@@ -46,7 +46,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (569 tests, V8 coverage) |
+| Tests | Vitest 5 (572 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -105,7 +105,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - An equipment tab with heat sinks, jump jets, MASC and Superchargers, ECM, active probes and targeting computers with their effects, and every ammo bin with the weapons that use it. The view goes in the link.
 
 **HRQ and campaigns**
-- Its own page (`/mercs/campaigns/`) with the 64 HRQ, grouped by base game and DLC, and the 6 DLC campaigns, plus Call to Arms and Chaos Reign, which tell their story through quest chains, with a search by name, system, employer, mission or reward.
+- Its own page (`/mercs/campaigns/`) with the 64 HRQ, grouped by base game and DLC, and the 6 DLC campaigns (with their pauses), plus Call to Arms and Chaos Reign, which tell their story through quest chains, with a search by name, system, employer, mission or reward.
 - Each one opens to show where and when it is offered (reputation, dates, previous or opposing quest), its missions in order and its reward in each mode. Systems open the star map with the route drawn, and 'Mechs open in the MechLab with their stock build. The view goes in the link (`?quest=bow-and-arrow`, `?campaign=dlc7`).
 
 **BATTLETECH MechLab**
@@ -362,7 +362,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Quality and checks against the game
 
-- **569 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **572 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

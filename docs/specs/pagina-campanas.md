@@ -82,10 +82,13 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después la lógica y la interfaz, en commits separados.
 - **Datos:** las 64 HRQ y las 6 campañas salen de `starmap.json`, que añade el nombre de cada DLC (`generar_mapa.py`); las 53 variantes de sus recompensas están en `mechs.json`.
-- **Tests:** los once criterios (CA1 a CA11) están en `src/utils/questGuide.test.ts` y pasan.
+- **Tests:** los doce criterios (CA1 a CA12) están en `src/utils/questGuide.test.ts` y pasan.
 - **Interfaz:** comprobada en el navegador a 1440 × 900, 1100 × 800, 800 × 300 y 390 × 844: las dos pestañas, Bow and Arrow, Defense Support - Davion (dos modos y HRQ excluyente) y Adam Steiner desplegadas, Shadow of Kerensky y Ashes & Ascension desplegadas, una ficha abierta desde la URL y la portada.
 - **Decisiones durante el desarrollo:**
   - Las fichas en rejilla quedaban desordenadas, con cada dato a una altura distinta: pasan a una lista con las mismas columnas en todas las filas (nombre, dónde se ofrece y recompensa). Al desplegar una fila, las misiones salen en una línea de pasos y los requisitos y las recompensas al lado; abierta desde un enlace, se lleva a la vista sin que la tape la cabecera fija.
   - Chaos Reign (DLC 8) y Call to Arms (DLC 3) no tienen campaña: su historia son cadenas de HRQ. Salen también en la pestaña de campañas, en su propia lista, para que no falten entre los DLC con historia.
   - La carátula de la portada es la DropShip Leopard del TRO 3025 (Sarna), la nave de la compañía en MW5, en un rosa (#ff4fa3) que no usa ninguna otra página.
   - Con seis páginas de MW5, los enlaces de la cabecera de `units.css` ya no parten palabras: en pantallas medianas bajan a otra línea enteros y, entre 761 y 1100 px, «MW5 Mercenaries» se queda fuera.
+  - El texto que salía como «Debrief» era el de la recompensa final, que cuenta cómo acaba la historia. La página enseña primero el briefing con el que el juego ofrece la cadena (`ObjectiveBriefing` de su primer objetivo) y el de cada misión, desplegable; el de la recompensa pasa a «Final debrief». Los briefings van en `quest-briefings.json` (156 KB) para que el mapa no los cargue.
+  - Dos campañas tienen una pausa: una parte comprueba una fecha posterior al inicio y su primera misión espera a esa fecha. La lista de misiones lo marca, aquí y en el mapa.
+  - Los pilotos hero de las recompensas abren su ficha en la página de pilotos (`?pilot=ValtenRyder`), resaltada.

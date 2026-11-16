@@ -37,7 +37,7 @@ Los datos se exportan con el editor de mods oficial de *MechWarrior 5: Mercenari
 | `generar_items.py` | `items/` y los rasgos de los computadores de puntería de `traits/` | `items.json`: armas por tier con su fabricante, equipo con sus efectos, munición, disipadores y DLC |
 | `generar_mechs.py` | `mda/`, `mdl/`, `hps/`, `loadout/`, `unitcard/`, `mech_string_table/` e `items.json` | `mechs.json`: 639 variantes con componentes, anclajes, build de fábrica, año y rol |
 | `generar_traits.py` | `traits/` | `traits.json`: las 50 mejoras de la cantina y sus efectos |
-| `generar_mapa.py` | `starmap/` (lo extrae `extraer_mapa.py` del `.pak` de la instalación) | `starmap.json`: 2172 sistemas con su dueño de 3015 a 3060, facciones, eventos, clústeres y centros industriales con su reputación recomendada y su dificultad; `availability.json`: la rareza de cada variante por facción (de las unit cards, con las funciones de `generar_mechs.py`) |
+| `generar_mapa.py` | `starmap/` (lo extrae `extraer_mapa.py` del `.pak` de la instalación) | `starmap.json`: 2172 sistemas con su dueño de 3015 a 3060, facciones, eventos, clústeres y centros industriales con su reputación recomendada y su dificultad; `availability.json`: la rareza de cada variante por facción (de las unit cards, con las funciones de `generar_mechs.py`); `quest-briefings.json`: el briefing de cada misión de las HRQ, aparte para que el mapa no cargue los textos |
 | `generar_unidades.py` | `unitcard/` y `unidades/` (lo extrae `extraer_unidades.py` del `.pak`) e `items.json` | `units.json`: 115 unidades enemigas (tanques, aerodeslizadores, VTOL, torretas y armaduras de combate) con su vida base, velocidad, armas en el formato de `items.json` y rareza por facción |
 
 Algunos datos no están donde parecería:
