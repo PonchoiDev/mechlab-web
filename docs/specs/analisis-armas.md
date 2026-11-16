@@ -65,4 +65,5 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 - **Orden seguido:** esta especificación, los tests de los criterios (que fallaban) y después la lógica y la interfaz, en commits separados.
 - **Tests:** los siete criterios están en `src/utils/weaponAnalysis.test.ts` y pasan.
 - **Comprobado** en el navegador con el HGN-732 de serie: llega al máximo en 16.8 s y se enfría en 35 s; daño por tonelada de 5 (Medium Laser), 2.4 (LRM 20) y 1 (Gauss Rifle), 2.11 en total; daño potencial de 1170 en el Gauss y 1056 en el LRM.
+- **Radar de daño por alcance (RF6):** el de BATTLETECH pasa a ser común (`src/components/RangeRadar.tsx` y `src/utils/rangeRadar.ts`), con el color de cada página. Comprobado con el HGN-732: 63.4 hasta 200 m, 46.8 a 300 m y 24 desde 700 m, solo el LRM 20. El radar de BATTLETECH no cambia.
 
