@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-16-mw5-range-radar',
+    date: '2026-11-16',
+    title: 'Damage by range for MW5',
+    items: [
+      'The MW5 MechLab shows damage by range as a radar, like the BATTLETECH one: full damage up to each weapon\'s optimal range, falling to zero at its max range'
+    ]
+  },
+  {
     id: '2026-11-16-weapon-analysis',
     date: '2026-11-16',
     title: 'More numbers in the loadout analysis',

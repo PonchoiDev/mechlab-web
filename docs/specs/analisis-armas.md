@@ -1,7 +1,7 @@
 # Especificación: más cifras en el análisis de armas
 
 - **Issue:** [#122](https://github.com/PonchoiDev/mechlab-web/issues/122)
-- **Estado:** implementada
+- **Estado:** implementada; ampliada con el radar de daño por alcance (RF6)
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/weaponAnalysis.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -26,6 +26,10 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 - **RF3.** La tabla Stores enseña, en cada munición, el daño potencial: las salvas que da por el daño de una salva de las armas que la usan (con las mejoras de la cantina). Una munición que no usa ninguna arma no tiene daño potencial.
 - **RF4.** La tabla de armas añade la columna **Damage / ton**: el daño por salva del arma (con las mejoras de la cantina) dividido por su propio tonelaje, sin la munición. Así se comparan también las armas de energía, que no llevan munición. La fila del total da el de todas las armas a distancia juntas: su daño por salva entre su tonelaje.
 - **RF5.** Las cifras nuevas siguen el formato de las demás: con las mejoras de la cantina instaladas, el valor sin mejoras se ve al lado, como ya pasa con el resto de la tabla.
+- **RF6.** La pestaña Weapons enseña el daño por alcance como el MechLab de BATTLETECH: un radar de medio círculo, con el 'Mech abajo en el centro y un anillo por distancia, más intenso cuanto más daño llega. En MW5:
+  - cada arma a distancia hace todo su daño hasta su alcance óptimo (`range`) y, entre el óptimo y el máximo (`maxRange`), un daño que baja en línea recta hasta cero, que es la caída de daño del juego; más allá, nada. El cuerpo a cuerpo no cuenta;
+  - los anillos van cada 50, 100, 150, 200, 250, 300, 500, 750 o 1000 m, el primer paso con el que el alcance máximo del loadout cabe en 10 anillos o menos, y llegan hasta él;
+  - con las mejoras de la cantina, el daño y los alcances son los mejorados.
 
 ## Requisitos no funcionales
 
@@ -42,6 +46,8 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 | CA4 | El HGN-732 de serie | se calcula el daño potencial de su munición | la del Gauss (78 disparos, 15 de daño) da 1170; la del LRM, 44 salvas por el daño de una salva de su LRM 20 |
 | CA5 | Una munición que no usa ninguna arma | se calcula su daño potencial | no tiene (`null`) |
 | CA6 | El Medium Laser (5 de daño, 1 t), el Autocannon/20 (20, 14 t) y el LRM 20 (24, 10 t) | se calcula su daño por tonelada | 5, 1.43 y 2.4 |
+| CA8 | El HGN-732 de serie (alcance máximo 900 m) | se calcula su daño por alcance | 9 anillos, de 100 en 100 m hasta 900; a 100 m, 63.4 (todo su daño por salva); a 300 m, 46.78 (LRM 20 y Gauss Rifle enteros y los dos Medium Laser con la caída, 5 × 105 / 135 cada uno); a 900 m solo el LRM 20, 24 |
+| CA9 | Loadouts con alcances máximos de 405, 1500 y 5625 m | se eligen los anillos | cada 50 m (9 anillos), cada 150 m (10) y cada 750 m (8) |
 | CA7 | Una mejora de daño de la cantina | se calcula el daño por tonelada y el daño potencial | los dos usan el daño con la mejora |
 
 ## Fuera de alcance
@@ -51,7 +57,7 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA7):** `src/utils/weaponAnalysis.test.ts`, con los datos reales.
+1. **Lógica (CA1 a CA9):** `src/utils/weaponAnalysis.test.ts`, con los datos reales.
 2. **Interfaz:** en el navegador, la pestaña Weapons (tonelaje, Damage / ton y Stores) y la sección HEAT de la pestaña 'Mech, con y sin mejoras de la cantina.
 
 ## Resultado
@@ -59,4 +65,5 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 - **Orden seguido:** esta especificación, los tests de los criterios (que fallaban) y después la lógica y la interfaz, en commits separados.
 - **Tests:** los siete criterios están en `src/utils/weaponAnalysis.test.ts` y pasan.
 - **Comprobado** en el navegador con el HGN-732 de serie: llega al máximo en 16.8 s y se enfría en 35 s; daño por tonelada de 5 (Medium Laser), 2.4 (LRM 20) y 1 (Gauss Rifle), 2.11 en total; daño potencial de 1170 en el Gauss y 1056 en el LRM.
+- **Radar de daño por alcance (RF6):** el de BATTLETECH pasa a ser común (`src/components/RangeRadar.tsx` y `src/utils/rangeRadar.ts`), con el color de cada página. Comprobado con el HGN-732: 63.4 hasta 200 m, 46.8 a 300 m y 24 desde 700 m, solo el LRM 20. El radar de BATTLETECH no cambia.
 

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createStockBuild } from './fitting';
 import { findMech } from './mechlabData';
-import { getRangeRadar } from './rangeRadar';
+import { getRangeRadar } from '../rangeRadar';
 import { getBuildSummary } from './stats';
 
 // Criterio CA27 de docs/specs/battletech-mechlab.md: el daño por alcance como un campo de tiro.
