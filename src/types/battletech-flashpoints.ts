@@ -6,14 +6,14 @@ export type BtFlashpointSource = Exclude<BtSource, 'base'>;
 export interface BtFlashpointContract {
   id: string;
   name: string;
-  // Tipo del juego: SimpleBattle, CaptureBase, Assassinate…
-  type: string;
+  // Tipo del juego: SimpleBattle, CaptureBase, Assassinate…; null si el juego no lo da.
+  type: string | null;
   objective: string | null;
   description: string | null;
 }
 
 export interface BtFlashpointPath {
-  // «A», «B», «A, then B»; «Main» si no hay ninguna decisión.
+  // «A», «B», «A, then B» o «A or B, then B» si dos se juegan igual; «Main» si no hay ninguna decisión.
   label: string;
   // Los contratos propios del camino, después de los del tronco.
   contracts: BtFlashpointContract[];

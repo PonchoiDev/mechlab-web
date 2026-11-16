@@ -22,7 +22,7 @@ ELECCION_ABANDONAR = "fp_choice_cancel"
 ACCIONES_CONTRATO = {"Flashpoint_AddContract", "Flashpoint_StartContract"}
 # En las acciones de contrato: el id del contrato y el hito al que lleva si se gana.
 POSICION_CONTRATO, POSICION_SIGUIENTE = 2, 6
-REGEX_MARCADO = re.compile(r"\[\[[^\],]*,([^\]]*)\]\]")
+REGEX_MARCADO = re.compile(r"\[\[[^,]*,([^\]]*)\]\]")
 REGEX_ETIQUETA_HTML = re.compile(r"</?[a-z]+>")
 
 
@@ -122,7 +122,8 @@ def contrato(contratos, id_contrato):
     return {
         "id": id_contrato,
         "name": datos["contractName"],
-        "type": datos["contractType"],
+        # Algunos contratos de Urban Warfare no tienen tipo (INVALID_UNSET).
+        "type": None if datos["contractType"] == "INVALID_UNSET" else datos["contractType"],
         "objective": objetivos[0] if objetivos else None,
         "description": texto_limpio(datos.get("shortDescription")),
     }
@@ -144,6 +145,21 @@ def recompensa(coleccion, mechs_juego, chasis, ids_mechlab):
         id_mech = id_objeto.removeprefix("mechdef_")
         mechs.append({"id": id_mech, "name": f"{nombre} {datos_chasis['VariantName']}", "inMechLab": id_mech in ids_mechlab})
     return {"title": coleccion["titulo"], "description": coleccion["descripcion"], "mechs": mechs}
+
+
+def juntar_caminos(caminos):
+    """Dos caminos con los mismos contratos (nombre, tipo y objetivo) y el mismo pago se juegan igual,
+    aunque el juego use contratos distintos para cada uno (The Long Hunt, Yang Virtanen's Big Score): se
+    juntan en uno, «A or B, then B»."""
+    juntos = {}
+    for camino in caminos:
+        firma = json.dumps([[(c["name"], c["type"], c["objective"]) for c in camino["contracts"]],
+                            camino["funds"], camino["morale"], camino["reputation"]])
+        if firma in juntos:
+            juntos[firma]["label"] += f" or {camino['label']}"
+        else:
+            juntos[firma] = dict(camino)
+    return list(juntos.values())
 
 
 def recompensa_de(id_coleccion, elige, colecciones, mechs_juego, chasis, ids_mechlab):
@@ -213,20 +229,21 @@ def main():
             "difficulty": fp["Difficulty"],
             "length": DURACIONES[fp["FlashpointLength"]],
             "employer": nombre_de_faccion(facciones, empleador) if empleador else None,
-            "target": nombre_de_faccion(facciones, fp["TargetFaction"]) if fp.get("TargetFaction") else None,
+            # Sin enemigo conocido (Unknown en Yang Virtanen's Big Score), no se dice.
+            "target": nombre_de_faccion(facciones, fp["TargetFaction"]) if fp.get("TargetFaction") not in (None, "Unknown", "INVALID_UNSET") else None,
             "system": sistema,
             "requirements": requisitos,
             "repeatable": bool(fp.get("Repeatable")),
             "cancelable": abandonar,
             "contracts": [contrato(contratos, id_c) for id_c in caminos[0]["contratos"][:tronco]] if caminos else [],
-            "paths": [
+            "paths": juntar_caminos([
                 {
                     "label": nombre_de_camino(camino["elecciones"]),
                     "contracts": [contrato(contratos, id_c) for id_c in camino["contratos"][tronco:]],
                     **dict(zip(("funds", "morale", "reputation"), pago(conjunto["hitos"], camino["pago"], facciones))),
                 }
                 for camino in caminos
-            ],
+            ]),
             "reward": recompensa_de(fp.get("RewardCollectionID"), elige_recompensa, colecciones, mechs_juego, chasis, ids_mechlab),
         })
 

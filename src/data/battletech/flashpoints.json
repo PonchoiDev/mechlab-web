@@ -94,7 +94,7 @@
       {
        "id": "c_fp_greed_a1_defendBase",
        "name": "Criminal Minds III",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Defend the Warehouse",
        "description": "The Iron Sparrow has dispatched all of his remaining units to attack the vault's northmost entrance, Commander. Hold them off until the Liao Reserves arrive to relieve you."
       }
@@ -114,7 +114,7 @@
       {
        "id": "c_fp_greed_b1_defendBase",
        "name": "Criminal Minds III",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Defend the Iron Sparrow's Warehouse",
        "description": "I know what your man has done. Lady Marina may be fool enough to trust in mercenaries, but I've had agents watching you from the start—and now I find my suspicions confirmed. Prepare yourself to face the full wrath of the Liao Reserves, Commander—I will claim the contents of that vault you so covet, and then I will bury you in it."
       }
@@ -214,7 +214,7 @@
       {
        "id": "c_fp_allianceDavion_b2_fireMission",
        "name": "Davion Alliance IV",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Assault the Bunker and Designate a Target for the Fire Mission",
        "description": "The transmission data was enough for us to locate the fortified bunker that the regional Capellan command is hiding in. They think they're safe in there, but we've got a naval PPC on station ready to punch a hole in anything they've built down there. You'll need to move your 'Mechs into position so that we can make a precise attack; once we take this shot, our DropShip is going to have to break orbit and run, so there's only one chance to get this right. We have complete confidence in you, Commander; your judgment has been spot-on so far. Good luck."
       }
@@ -264,7 +264,7 @@
       {
        "id": "c_fp_extraActivities_a1_defendBase",
        "name": "Extracurricular Activities II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Defend the Munitions Factory",
        "description": "Lord Jesper and his lance are on their way to challenge you. Hold the factory and send him home in his ejection pod, defeated and ashamed! Leave his precious ancestral BattleMech a smoldering ruin!"
       }
@@ -291,7 +291,7 @@
       {
        "id": "c_fp_extraActivities_b2_defendBase",
        "name": "Extracurricular Activities III",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Defend the Munitions Factory",
        "description": "Now that your humanitarian responsibilities have been seen to, perhaps you'll be good enough to focus your attention on your real job? Lord Jesper and his lance are on their way to challenge you. Hold the factory and send him home in his ejection pod, defeated and ashamed! Leave his precious ancestral BattleMech a smoldering ruin!"
       }
@@ -408,7 +408,7 @@
    "contracts": [],
    "paths": [
     {
-     "label": "A",
+     "label": "A or B",
      "contracts": [
       {
        "id": "c_fp_longRoad_a1_captureEscort",
@@ -420,34 +420,7 @@
       {
        "id": "c_fp_longRoad_a2_defendBase",
        "name": "Joint Venture II",
-       "type": "INVALID_UNSET",
-       "objective": "Defend the Fortified Mech Bay",
-       "description": "House Liao's occupation force is moving on our Mech Bay in force, Commander. I know that you've had no time to refit or repair your BattleMechs, but I'm going to need your assistance all the same. In light of this, I've authorized the deployment of a Steiner asset—the very rare and precious BattleMech that you just delivered to this site—to assist you, with one of my own MechWarriors to pilot it."
-      }
-     ],
-     "funds": 1150000,
-     "morale": 0,
-     "reputation": [
-      {
-       "faction": "Lyran Commonwealth",
-       "value": 10
-      }
-     ]
-    },
-    {
-     "label": "B",
-     "contracts": [
-      {
-       "id": "c_fp_longRoad_b1_captureEscort",
-       "name": "Joint Venture",
-       "type": "CaptureEscort",
-       "objective": "Escort the Steiner Convoy to Its Destination",
-       "description": "We have little to no intel on what you're going to find out there, Commander. Keep your eyes open; it's absolutely vital that this convoy reach its destination."
-      },
-      {
-       "id": "c_fp_longRoad_b2_defendBase",
-       "name": "Joint Venture II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Defend the Fortified Mech Bay",
        "description": "House Liao's occupation force is moving on our Mech Bay in force, Commander. I know that you've had no time to refit or repair your BattleMechs, but I'm going to need your assistance all the same. In light of this, I've authorized the deployment of a Steiner asset—the very rare and precious BattleMech that you just delivered to this site—to assist you, with one of my own MechWarriors to pilot it."
       }
@@ -516,7 +489,7 @@
       {
        "id": "c_fp_allianceKurita_a2_fireMission",
        "name": "Kurita Alliance IV",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Secure the Facility and Designate the Fire Mission's Target",
        "description": "Frankly, Commander, I'm surprised you're not as frustrated and exhausted by this situation as I am; after all, you've had to be the boots on the ground, so to speak, of this entire farce. I've decided to forestall any possible future problems by literally bringing the big guns to bear on the situation. I have a military DropShip, the Fujin, waiting on station, and you're going to provide it with targeting information. Nephrite is in a fortified bunker, meeting right this moment with representatives from both Davion and Steiner. I'm tired of chasing them. Let's obliterate them instead."
       }
@@ -543,7 +516,7 @@
       {
        "id": "c_fp_allianceKurita_b2_fireMission",
        "name": "Kurita Alliance IV",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Secure the Facility and Designate the Fire Mission's Target",
        "description": "Frankly, Commander, I'm surprised you're not as frustrated and exhausted by this situation as I am; after all, you've had to be the boots on the ground, so to speak, of this entire farce. I've decided to forestall any possible future problems by literally bringing the big guns to bear on the situation. I have a military DropShip, the Fujin, waiting on station, and you're going to provide it with targeting information. Nephrite is in a fortified bunker, meeting right this moment with representatives from both Davion and Steiner. I'm tired of chasing them. Let's obliterate them instead."
       }
@@ -605,7 +578,7 @@
       {
        "id": "c_fp_allianceLiao_a1_defendBase",
        "name": "Liao Alliance III",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Defend Facility",
        "description": "My Maskirovka liaison wishes me to convey her thanks, Commander. We recognize that this is making your job more difficult, but the Confederation has significant plans, currently in progress, that your help in this matter will facilitate. That said, we've received word that several Davion lances are en route to the facility to retake it. I need you to hold that facility, Commander. Loading the materials aboard the transport vehicles will take time, and until it's complete, we cannot move our people."
       },
@@ -696,7 +669,7 @@
    ],
    "paths": [
     {
-     "label": "A",
+     "label": "A or B",
      "contracts": [
       {
        "id": "c_fp_allianceMarik_a1_rescue",
@@ -708,36 +681,9 @@
       {
        "id": "c_fp_allianceMarik_a2_fireMission",
        "name": "Marik Alliance IV",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Set Targeting Beacons for Data Transfer",
        "description": "We're approaching the joint research base, Commander. Once you're in the AO, you'll need to move up to the base and set beacons to triangulate around it so that our covert DropShip, the Airavata, can transmit the authentication code and download the research data. We have a limited window of opportunity before the Liao ships in orbit detect our presence and come to investigate, so you'll be operating under a relatively tight timeline. So far, we've managed to keep things quiet, so while I expect significant opposition, you should be able to handle it."
-      }
-     ],
-     "funds": 1000000,
-     "morale": 0,
-     "reputation": [
-      {
-       "faction": "Capellan Confederation",
-       "value": -20
-      }
-     ]
-    },
-    {
-     "label": "B",
-     "contracts": [
-      {
-       "id": "c_fp_allianceMarik_b1_rescue",
-       "name": "Marik Alliance III",
-       "type": "Rescue",
-       "objective": "Retrieve the Operative and Extract Safely",
-       "description": "Our operative, Jawad, is in deep cover at the naval logistics base on this tiny island, Commander. Once you arrive at the facility, he'll break cover and board your unit in the rumble seat. Then you just need to get him and the data he carries out of the facility. We'll have the Leopard on standby to pick you up. We're going in loud, Commander, which means the facility is going to know you're coming. Be prepared for heavy resistance."
-      },
-      {
-       "id": "c_fp_allianceMarik_b2_fireMission",
-       "name": "Marik Alliance IV",
-       "type": "INVALID_UNSET",
-       "objective": "Set Targeting Beacons for Data Transfer",
-       "description": "We're approaching the joint research base, Commander. Once you're in the AO, you'll need to move up to the base and set beacons to triangulate around it so that our covert DropShip, the Airavata, can transmit the authentication code and download the research data. We have a limited window of opportunity before the Liao ships in orbit detect our presence and come to investigate, so you'll be operating under a relatively tight timeline. Be aware that my people picked up a very large spike in comms chatter right after our previous mission, so they're expecting you."
       }
      ],
      "funds": 1000000,
@@ -896,7 +842,7 @@
      "name": "Steiner Alliance",
      "type": "Assassinate",
      "objective": "Destroy the Force Commander and Escape",
-     "description": "The [[DM.BaseDescriptionDefs[LoreMarikFWLM],FWLM]] Force Commander is currently traveling between installations on an inspection tour. He is heavily guarded, with two escorting lances of 'Mechs piloted by veterans who have served with him for years. However, this is still the best opportunity we'll have to strike at the League's command structure in Claybrooke."
+     "description": "The FWLM Force Commander is currently traveling between installations on an inspection tour. He is heavily guarded, with two escorting lances of 'Mechs piloted by veterans who have served with him for years. However, this is still the best opportunity we'll have to strike at the League's command structure in Claybrooke."
     },
     {
      "id": "c_fp_allianceSteiner_2_destroyBase",
@@ -913,7 +859,7 @@
       {
        "id": "c_fp_allianceSteiner_a1_fireMission",
        "name": "Steiner Alliance III",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Attack the Installation and Place Beacons for a Fire Mission",
        "description": "I approve of your choice of 'Mechs for this mission, Commander. This ought to be just the show of force that Margrave Joss was hoping for. Also, I have additional support to provide, thanks to Kommandant General Plath; you'll need to clear the antiair defenses before the support lance can land, though. Remember: Gungnir, our DropShip, can remain on station to fire at the planet only for a limited time. Move quickly, Commander."
       },
@@ -940,7 +886,7 @@
       {
        "id": "c_fp_allianceSteiner_b1_fireMission",
        "name": "Steiner Alliance III",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Attack the Installation and Place the Beacons for a Fire Mission",
        "description": "I still believe that this mission would be more effective if you had chosen to bring heavier 'Mechs, but the orbital strike should still be the show of force that Margrave Joss was hoping for. Also, I have additional support to provide, thanks to Kommandant General Plath; you'll need to clear the antiair defenses before the support lance can land, though. Remember: Gungnir, our DropShip, can remain on station to fire at the planet only for a limited time. Move quickly, Commander."
       },
@@ -979,7 +925,7 @@
    "id": "morganKell",
    "name": "The Baying of Hounds",
    "summary": "Betrayed by their own organization",
-   "description": "You aren't gonna believe this, but Morgan Kell—the [[DM.BaseDescriptionDefs[LoreMorganKell],Morgan Kell]], of the [[DM.BaseDescriptionDefs[LoreKellHounds],Kell Hounds]]—wants us for a job. This isn't the sort of offer you say no to.",
+   "description": "You aren't gonna believe this, but Morgan Kell—the Morgan Kell, of the Kell Hounds—wants us for a job. This isn't the sort of offer you say no to.",
    "source": "flashpoint",
    "difficulty": 7,
    "length": "medium",
@@ -1164,7 +1110,7 @@
    ],
    "paths": [
     {
-     "label": "A",
+     "label": "A or B, then B",
      "contracts": [
       {
        "id": "c_fp_longHunt_a1_simpleBattle",
@@ -1175,33 +1121,6 @@
       },
       {
        "id": "c_fp_longHunt_a2_captureBase",
-       "name": "The Long Hunt III",
-       "type": "CaptureBase",
-       "objective": "Capture the Sensor Array",
-       "description": "The Davion sensor array you'll need to capture is just ahead, Commander. Take it, and Ms. Meyer will have what she needs to neutralize Lees's threat to the Argo."
-      }
-     ],
-     "funds": 1000000,
-     "morale": 0,
-     "reputation": [
-      {
-       "faction": "Draconis Combine",
-       "value": 9
-      }
-     ]
-    },
-    {
-     "label": "B, then B",
-     "contracts": [
-      {
-       "id": "c_fp_longHunt_b1_simpleBattle",
-       "name": "The Long Hunt II",
-       "type": "SimpleBattle",
-       "objective": "Eliminate the Davion Hostiles",
-       "description": "My people on the ground have picked up a lance of Davion BattleMechs on their sensors, Commander. If you move on Lees without dealing with them, they'll be in position to outflank you."
-      },
-      {
-       "id": "c_fp_longHunt_b2_captureBase",
        "name": "The Long Hunt III",
        "type": "CaptureBase",
        "objective": "Capture the Sensor Array",
@@ -1280,7 +1199,7 @@
     {
      "id": "c_fp_scoundrel_2_defendBase",
      "name": "The Opportunist II",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Defend the Fortified Repair Bay",
      "description": "Our sensors indicate several large groups of incoming vehicles and BattleMechs, Commander. Whoever they are, I need you to hold them off and drive them away. Above all, they cannot be allowed to free Ms. Hadley from confinement. She belongs to us."
     }
@@ -1292,7 +1211,7 @@
       {
        "id": "c_fp_scoundrel_a1_target",
        "name": "The Opportunist III",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Take Over the Artillery Control Facility",
        "description": "I'm glad that you decided to listen to reason, Commander—you'd be surprised how many so-called mercenaries lack the savvy to jump on an opportunity like this when it presents itself. Now, the LosTech cache that I'm sending you after is close to our location, but there's a catch: it's sealed away in a defunct mineshaft. I've got a way in, though. Follow my instructions, and we'll all get rich."
       }
@@ -1443,7 +1362,7 @@
     {
      "id": "c_fp_unwelcomeGuests_1_fireMission",
      "name": "Unwelcome Guests",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Quickly Place the Artillery Beacons",
      "description": "House Steiner has constructed a military stronghold within our territorial boundaries. We have artillery in place to destroy it, but we need you to place targeting beacons in key locations before we can pull the trigger. While you work, a mercenary lance from Gwydion Company will keep any Steiner reinforcements off your backs."
     }
@@ -1611,7 +1530,7 @@
     {
      "id": "HM5_hourglass_2_defendBase",
      "name": "Hourglass II",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Protect the Evacuated Spaceport from the Black Widow Company",
      "description": "The Dobrev is gone, but its crew left an undefined amount of valuable contraband behind at the spaceport. Unfortunately, the Black Widow wants to melt every scrap of that contraband to slag. The Moderbjörn will draw the Black Widow's attention away from our AO, which should buy Yang and me enough time to ransack the spaceport. We'll be relying on your lance to protect us from anyone else who might come along."
     }
@@ -1659,7 +1578,7 @@
     {
      "id": "HM3_huntingSeason_1_3wayBattle",
      "name": "Hunting Season",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Destroy Baumann Group Cavalry Units",
      "description": "Like I said, the Baumann Group's distribution center is heavily defended, so we're gonna approach this as a two-stage operation. For this first stage, you're going to descend at the outermost edge of the OpFor's territory and engage their patrolling cavalry. Take out as many vehicles and 'Mechs as you can to clear the way for an assault on the distribution center."
     }
@@ -1689,7 +1608,7 @@
    "difficulty": 4,
    "length": "medium",
    "employer": "Draconis Combine",
-   "target": "Unknown",
+   "target": null,
    "system": "Tarragona",
    "requirements": {
     "ally": null,
@@ -1708,7 +1627,7 @@
     {
      "id": "HM1_ofUnknownOrigin_2_3wayBattle",
      "name": "Of Unknown Origin II",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Destroy Zeta Lance",
      "description": "Zeta Lance moved Captain Magorian out of Alamedo Province two days ago. They're holding him in a bunker somewhere under the ruins of New Vulci, a city that fell victim to a nuclear accident in 2977. Engage Zeta Lance and destroy their 'Mechs. When you're finished, I'll scour their combat computers for the bunker's coordinates."
     }
@@ -1783,7 +1702,7 @@
     {
      "id": "HM7_showdown_1_3wayBattle",
      "name": "Standoff",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Destroy Baumann Group Mercenaries",
      "description": "We've found the Dobrev, and this time, it's in no condition to run. Time is of the essence here, so we're going to deploy alongside the Moderbjörn's drones. Hit the Baumann Group fast, hit 'em hard, and wipe the AO clean. After we've taken the Dobrev, we'll discuss our next steps."
     }
@@ -1795,7 +1714,7 @@
       {
        "id": "HM7_showdown_2_3wayBattle",
        "name": "Standoff II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Defeat the Black Widow and the Bounty Hunter",
        "description": "This is it—the final confrontation between ourselves, the Black Widow, and the Bounty Hunter. Succeed in this, and the Moderbjörn will have all the time it needs to harvest the Dobrev's navigation logs. The secrets of the Star League lie within our grasp, Commander. I know we can do this, so let's get to it."
       }
@@ -1889,7 +1808,7 @@
       {
        "id": "lastChance_a1_3wayBattle",
        "name": "A House Divided II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Destroy Luthendorff's Forces",
        "description": "Luthendorff will not escape death again, Commander. Don't expect an easy fight. This time she'll be prepared for us. I'm picking up multiple heavy contacts on my sensors. More scrap for Luthendorff's funeral pyre."
       }
@@ -1904,7 +1823,7 @@
       {
        "id": "lastChance_b1_defendBase",
        "name": "A House Divided II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Defend Luthendorff",
        "description": "Lady Suiko is inbound, and she's not alone. Her old war buddies are moving in fast-two lances of 'em. Keep in mind, we've got one goal: stop her from killing Luthendorff."
       }
@@ -1959,7 +1878,7 @@
       {
        "id": "doubleAgent_a1_3wayBattle",
        "name": "Double Agent II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Destroy all Hostile Units",
        "description": "We've received your message, and Maskirovka agents are on their way to take possession of the facility. Be advised that our long-range sensors have detected Davion and Taurian military DropShips en route to an AO near your position. To better protect the facility, we suggest that you engage them there. We'll supply you with reinforcements of our own as soon as we can."
       }
@@ -1987,7 +1906,7 @@
       {
        "id": "doubleAgent_b1_3wayBattle",
        "name": "Double Agent II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Destroy all Hostile Units",
        "description": "We've received your message, and TMI agents are on their way to take possession of the facility. Be advised that our long-range sensors have detected Davion and Liao military DropShips en route to an AO near your position. To better protect the facility, we suggest that you engage them there. We'll supply you with reinforcements of our own as soon as we can."
       }
@@ -2015,7 +1934,7 @@
       {
        "id": "doubleAgent_c1_3wayBattle",
        "name": "Double Agent II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Destroy all Hostile Units",
        "description": "We've received your message, and MIM operatives are on their way to reclaim our wounded agent. Be advised that our long-range sensors have detected Taurian and Liao military DropShips en route to an AO near your position. To better protect our agent, we suggest that you engage them there, away from the facility. We'll supply you with reinforcements of our own as soon as we can."
       }
@@ -2093,7 +2012,7 @@
       {
        "id": "sentinel_b1_3wayBattle",
        "name": "Hearts and Minds II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Destroy All Hostile Units",
        "description": "We may not be able to take out Tiesa Norkus, but at least we can contain her. If she wants to hide behind human shields, fine—let her hide. We'll do as much damage to the Emerald Dawn as we can, and when Lady Cunningham's DropShip touches down, she can handle the hostage negotiations."
       }
@@ -2148,7 +2067,7 @@
       {
        "id": "prize_a1_defendBase",
        "name": "One Man's Trash II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Protect Ed Corbu's Time-Share Condominium",
        "description": "The last time I checked, Binton and Modge had a bunch of combat vehicles in the streets around my time-share. Maybe a light 'Mech or two, I can't say for sure. Get 'em off my back, and then we'll conclude our business with the antique staplers."
       }
@@ -2163,7 +2082,7 @@
       {
        "id": "prize_b1_3wayBattle",
        "name": "One Man's Trash II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Destroy Enemy Units",
        "description": "I've told Binton and Modge that you're gonna drop their \"treasure\" in a field about a hundred klicks southeast of Louth Abbey. That should put you far enough away to avoid collateral damage, so feel free to go after 'em with whatever BattleMechs you like. Just be aware that there's nothing stopping them from doin' the same to you."
       }
@@ -2201,7 +2120,7 @@
     {
      "id": "uw1_1_3wayBattle",
      "name": "Prototype",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Rendezvous with Bravo Lance and Clear the AO",
      "description": "For your first deployment, you will take the field alongside Ombra and the rest of Bravo Lance. Together, you will sweep the AO for hostiles, eliminating any Capellan units you find along the way. Bravo Lance has endured a great deal of punishment over the past few months and will need your help to come through this deployment in one piece."
     },
@@ -2330,7 +2249,7 @@
    "difficulty": 7,
    "length": "long",
    "employer": "Draconis Combine",
-   "target": "Unknown",
+   "target": null,
    "system": "Peratallada",
    "requirements": {
     "ally": null,
@@ -2347,14 +2266,14 @@
     {
      "id": "redHunt_1_DefendBase",
      "name": "Red Hunt I",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Defend the Draconis Combine Research Base",
      "description": "Commander, this installation is a vital part of Combine research efforts, and we need to ensure the enemy doesn't destroy it. We believe the opposing forces are a mercenary unit hired by our erstwhile allies in the Free Worlds League, and their intent is to disrupt the important work being done here. Your job will be to hold them off until they exhaust themselves, at which point we'll launch our own counterattack."
     },
     {
      "id": "redHunt_2_ThreeWayBattle",
      "name": "Red Hunt II",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Defend Grayson Carlyle's Forces",
      "description": "It looks like we're both on the Kurita shit list, Commander. This situation is bad and getting worse. My people are pinned down by fire from the DEST forces, and we can't use our Leopard to get into orbit. We've evacuated the Fire Lance, but the Command Lance is still stuck on-world—which concerns me personally, because I'm part of the Command Lance and one of the people who's stuck. I want to get to the bottom of this mess, but I'm going to need your help."
     }
@@ -2429,74 +2348,26 @@
     {
      "id": "siegebreaker_1_3wayBattle",
      "name": "Siegebreaker",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Destroy Steiner Units",
      "description": "For your first deployment, you will rendezvous with Azura \"Cheval\" Damestroir of the Mitchel Planetary Militia. She and her lance have been scout-hunting in northern Gauthier's wealthy Museum District, and it appears that they've caught a Lyran scout. Assist her lance in defeating it, then proceed to your next rendezvous point."
     },
     {
      "id": "siegebreaker_2_3wayBattle",
      "name": "Siegebreaker II",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Eliminate the Steiner Heavy Patrol",
      "description": "Your next objective is in Jessup Downs, on the far side of Gauthier. Your point of contact, a former militia member and paroled felon who operates under the callsign \"Jailbird,\" has been holding the Downs with no outside support for nearly a month. She has reported signs of a heavy Steiner patrol lance moving through the area. I need you to assist her in bringing down that patrol."
     }
    ],
    "paths": [
     {
-     "label": "A",
+     "label": "A or B or C",
      "contracts": [
       {
        "id": "siegebreaker_a1_attackDefend",
        "name": "Siegebreaker III",
-       "type": "INVALID_UNSET",
-       "objective": "Destroy the Ziegelhaus While Protecting Militia HQ",
-       "description": "Even with a portion of Dobrescu's sentries out chasing shadows in the Museum District, the Ziegelhaus will be heavily defended. You'll need to hit the structure hard, while at the same time protecting Militia HQ from an expected Steiner counterattack. Good hunting, Commander. Show Hauptmann-General Dobrescu that his excesses will not be tolerated."
-      }
-     ],
-     "funds": 750000,
-     "morale": 0,
-     "reputation": [
-      {
-       "faction": "Capellan Confederation",
-       "value": 7
-      },
-      {
-       "faction": "Lyran Commonwealth",
-       "value": -3
-      }
-     ]
-    },
-    {
-     "label": "B",
-     "contracts": [
-      {
-       "id": "siegebreaker_b1_attackDefend",
-       "name": "Siegebreaker III",
-       "type": "INVALID_UNSET",
-       "objective": "Destroy the Ziegelhaus While Protecting Militia HQ",
-       "description": "Even with a portion of Dobrescu's sentries out chasing shadows in the Museum District, the Ziegelhaus will be heavily defended. You'll need to hit the structure hard, while at the same time protecting Militia HQ from an expected Steiner counterattack. Good hunting, Commander. Show Hauptmann-General Dobrescu that his excesses will not be tolerated."
-      }
-     ],
-     "funds": 750000,
-     "morale": 0,
-     "reputation": [
-      {
-       "faction": "Capellan Confederation",
-       "value": 7
-      },
-      {
-       "faction": "Lyran Commonwealth",
-       "value": -3
-      }
-     ]
-    },
-    {
-     "label": "C",
-     "contracts": [
-      {
-       "id": "siegebreaker_c1_attackDefend",
-       "name": "Siegebreaker III",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Destroy the Ziegelhaus While Protecting Militia HQ",
        "description": "Even with a portion of Dobrescu's sentries out chasing shadows in the Museum District, the Ziegelhaus will be heavily defended. You'll need to hit the structure hard, while at the same time protecting Militia HQ from an expected Steiner counterattack. Good hunting, Commander. Show Hauptmann-General Dobrescu that his excesses will not be tolerated."
       }
@@ -2630,7 +2501,7 @@
    "difficulty": 4,
    "length": "short",
    "employer": "Tournament of Champions",
-   "target": "Unknown",
+   "target": null,
    "system": "Cluff's Stand",
    "requirements": {
     "ally": null,
@@ -2642,7 +2513,7 @@
     {
      "id": "tournament_1_3wayBattle",
      "name": "Tournament of Champions",
-     "type": "INVALID_UNSET",
+     "type": null,
      "objective": "Win the first round of the Tournament",
      "description": "Welcome to my Tournament, Commander. Here you will prove your mettle against the Periphery's fiercest champions. Today, your MechWarriors will demonstrate their worth using only the simplest of tools: the UM-R60 UrbanMech. Like a huntsman's spear, it is an instrument with a single purpose. Wield it skillfully, and ascend into triumph."
     }
@@ -2654,7 +2525,7 @@
       {
        "id": "tournament_a1_3wayBattle",
        "name": "Tournament of Champions II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Defeat Professor Horvat and Win the Tournament of Champions",
        "description": "Welcome to the final round of my Tournament, Commander. Today, your two finest pilots will face off against the cream of the Frontier MechWarrior community. This will be a battle like no other, a clash between veritable gods. I wish your fighters luck, Commander—and I promise you, they will need it."
       }
@@ -2678,7 +2549,7 @@
       {
        "id": "tournament_b1_3wayBattle",
        "name": "Tournament of Champions II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Eliminate Professor Mencius Horvat",
        "description": "Professor Mencius Horvat is waiting for you in the Tournament arena. He expects you to play by his rules—to let him lead a pair of your MechWarriors like lambs to the slaughter. Instead, you're going to show him the kind of firepower that your company can really bring down. Destroy him, and the MIIO will reward you accordingly."
       }
@@ -2715,7 +2586,7 @@
    "difficulty": 5,
    "length": "short",
    "employer": "Yang",
-   "target": "Unknown",
+   "target": null,
    "system": "Electra",
    "requirements": {
     "ally": null,
@@ -2734,29 +2605,14 @@
    ],
    "paths": [
     {
-     "label": "A",
+     "label": "A or B",
      "contracts": [
       {
        "id": "yangBigScore_a1_3wayBattle",
        "name": "Yang Virtanen's Big Score II",
-       "type": "INVALID_UNSET",
+       "type": null,
        "objective": "Destroy Graves's Security Team",
        "description": "Okay, Boss! We've got the hot rods, and we're on our way to the LZ. Did I mention that I still hate rumble seats? Boy, do I ever! You'd better get on the comms to guide us through this—we're moving at a solid clip, but I suspect we're being followed…"
-      }
-     ],
-     "funds": 0,
-     "morale": 0,
-     "reputation": []
-    },
-    {
-     "label": "B",
-     "contracts": [
-      {
-       "id": "yangBigScore_b1_3wayBattle",
-       "name": "Yang Virtanen's Big Score II",
-       "type": "INVALID_UNSET",
-       "objective": "Destroy Graves's Security Team",
-       "description": "Okay, Boss! We've got the monster trucks, and we're slugging our way to the LZ. Did I mention that I still hate rumble seats? Boy, do I ever! You'd better get on the comms to guide us through this; we're trudging along at a steady pace, but we're about to have company…"
       }
      ],
      "funds": 0,
