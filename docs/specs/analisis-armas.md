@@ -1,7 +1,7 @@
 # Especificación: más cifras en el análisis de armas
 
 - **Issue:** [#122](https://github.com/PonchoiDev/mechlab-web/issues/122)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/weaponAnalysis.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -53,3 +53,10 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 
 1. **Lógica (CA1 a CA7):** `src/utils/weaponAnalysis.test.ts`, con los datos reales.
 2. **Interfaz:** en el navegador, la pestaña Weapons (tonelaje, Damage / ton y Stores) y la sección HEAT de la pestaña 'Mech, con y sin mejoras de la cantina.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios (que fallaban) y después la lógica y la interfaz, en commits separados.
+- **Tests:** los siete criterios están en `src/utils/weaponAnalysis.test.ts` y pasan.
+- **Comprobado** en el navegador con el HGN-732 de serie: llega al máximo en 16.8 s y se enfría en 35 s; daño por tonelada de 5 (Medium Laser), 2.4 (LRM 20) y 1 (Gauss Rifle), 2.11 en total; daño potencial de 1170 en el Gauss y 1056 en el LRM.
+
