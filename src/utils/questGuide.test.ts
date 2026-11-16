@@ -143,6 +143,7 @@ describe('página de HRQ y campañas', () => {
     expect(texts).toHaveLength(4);
     expect(texts[0]).toMatch(/^Commander, your reputation precedes you/);
     expect(texts).not.toContain(bringHerHome.rewards[0].debrief);
-    expect(data.quests.filter(item => !getQuestBriefings(briefings, item)[0]).map(item => item.name)).toEqual([]);
+    // El objetivo de Pirate Raiders no viene en el juego: tampoco tiene resumen.
+    expect(data.quests.filter(item => !getQuestBriefings(briefings, item)[0]).map(item => item.name)).toEqual(['Pirate Raiders']);
   });
 });

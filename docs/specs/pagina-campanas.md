@@ -65,7 +65,7 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 | CA8 | The Dragon's Gambit | se suma su pago | 67.931.715 C-Bills y 18.485 de reputación en 15 misiones |
 | CA10 | Los nombres de los DLC | se escriben | el juego base es «Base game»; el DLC 1, «DLC 1 · Heroes of the Inner Sphere»; el DLC 8, «DLC 8 · Chaos Reign» |
 | CA11 | Las historias contadas con HRQ | se listan | son Call to Arms (DLC 3) con Those in Need, y Chaos Reign (DLC 8) con sus cinco cadenas por fecha: Adam Steiner, Testing Ground, Ideals of War, Thumb War y New Home, Old Enemies. El filtro de la pestaña de campañas incluye los DLC 3 y 8, y la búsqueda encuentra la historia por su nombre o el de sus cadenas («steiner» da Chaos Reign). `?campaign=dlc8` abre la pestaña de campañas con Chaos Reign desplegada |
-| CA12 | Bring Her Home | se leen sus briefings | son 4, uno por misión; el primero, el de la oferta, empieza «Commander, your reputation precedes you» y el texto final de la recompensa no está entre ellos. Todas las HRQ tienen briefing de oferta |
+| CA12 | Bring Her Home | se leen sus briefings | son 4, uno por misión; el primero, el de la oferta, empieza «Commander, your reputation precedes you» y el texto final de la recompensa no está entre ellos. Todas las HRQ tienen briefing de oferta menos Pirate Raiders, cuyo objetivo no viene en el juego (tampoco tiene resumen) |
 | CA9 | La URL | se abre y se construye | sin parámetros, la pestaña de HRQ, todo y nada abierto. `?tab=campaigns&dlc=7&q=kerensky` se lee y se vuelve a escribir igual. `?quest=bow-and-arrow` abre la pestaña de HRQ con Bow and Arrow desplegada y `?campaign=dlc7`, la de campañas con Shadow of Kerensky. Un id, un DLC o una pestaña que no existen se ignoran |
 
 ## Fuera de alcance
