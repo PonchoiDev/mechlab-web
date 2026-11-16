@@ -278,8 +278,8 @@ describe('groupAmmunition', () => {
     const halfBin = getItem('AC20_Standard_Half_AmmoEquipment').capacity ?? 0;
 
     expect(groupAmmunition(loadout)).toEqual([
-      { ammoType: 'Ammo.Ballistic.AutoCannon.Standard.AC20', label: 'AC/20', capacity: fullBin + halfBin, bins: 2, volleys: null, seconds: null },
-      { ammoType: 'Ammo.Missile.LRM', label: 'LRM', capacity: getItem('LRM_AmmoEquipment').capacity, bins: 1, volleys: null, seconds: null }
+      { ammoType: 'Ammo.Ballistic.AutoCannon.Standard.AC20', label: 'AC/20', capacity: fullBin + halfBin, bins: 2, volleys: null, seconds: null, potentialDamage: null },
+      { ammoType: 'Ammo.Missile.LRM', label: 'LRM', capacity: getItem('LRM_AmmoEquipment').capacity, bins: 1, volleys: null, seconds: null, potentialDamage: null }
     ]);
   });
 

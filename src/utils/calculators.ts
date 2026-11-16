@@ -79,6 +79,8 @@ export interface WeaponPerformance {
   maxRange: number | null;
   // Velocidad del proyectil en m/s; null en los láseres.
   speed: number | null;
+  // Daño por salva entre el tonelaje del arma, sin la munición: compara también las de energía.
+  damagePerTon: number | null;
 }
 
 export const calculateEquippedWeight = (loadout: Loadout): number =>
@@ -201,6 +203,7 @@ export const getWeaponStats = (item: Item): WeaponStats => {
     heat: getWeaponHeat(item),
     rpm,
     dps: damage * rpm / 60,
+    damagePerTon: item.tonnage > 0 ? damage / item.tonnage : null,
     range: stats?.range ?? null,
     maxRange: stats?.maxRange ?? stats?.range ?? null,
     speed: stats?.speed ?? null
@@ -222,6 +225,7 @@ const applyWeaponModifiers = (item: Item, stats: WeaponStats, modifiers: Upgrade
     heat: stats.heat * (1 + heatBonus) * (1 + modifiers.heatGeneration),
     rpm,
     dps: damage * rpm / 60,
+    damagePerTon: item.tonnage > 0 ? damage / item.tonnage : null,
     range: scaleRange(stats.range),
     maxRange: scaleRange(stats.maxRange),
     speed: scaleRange(stats.speed)
@@ -280,6 +284,9 @@ export interface AmmunitionGroup {
   // Salvas completas disparando a la vez todas las armas que la usan, y segundos de fuego continuo.
   volleys: number | null;
   seconds: number | null;
+  // Daño de todas las salvas: las salvas por el daño de una salva de las armas que la usan, con las
+  // mejoras de la cantina. null si no la usa ningún arma.
+  potentialDamage: number | null;
 }
 
 // Con las mejoras de cooldown de la cantina, las armas disparan más a menudo y la munición dura menos:
@@ -296,7 +303,8 @@ export const groupAmmunition = (loadout: Loadout, modifiers = NO_UPGRADE_MODIFIE
       capacity: 0,
       bins: 0,
       volleys: null,
-      seconds: null
+      seconds: null,
+      potentialDamage: null
     };
     group.capacity += item.capacity ?? 0;
     group.bins += 1;
@@ -306,12 +314,26 @@ export const groupAmmunition = (loadout: Loadout, modifiers = NO_UPGRADE_MODIFIE
   for (const group of groups.values()) {
     const users = equipped.filter(item => item.type === 'weapon' && item.ammoType === group.ammoType);
     const ammoPerVolley = sumBy(users, item => item.ammoPerVolley ?? 1);
-    const ammoPerSecond = sumBy(users, item => (item.ammoPerVolley ?? 1) * applyWeaponModifiers(item, getWeaponStats(item), modifiers).rpm / 60);
+    const stats = users.map(item => applyWeaponModifiers(item, getWeaponStats(item), modifiers));
+    const ammoPerSecond = sumBy(users.map((item, index) => (item.ammoPerVolley ?? 1) * stats[index].rpm / 60), value => value);
     group.volleys = ammoPerVolley > 0 ? Math.floor(group.capacity / ammoPerVolley) : null;
     group.seconds = ammoPerSecond > 0 ? Math.round(group.capacity / ammoPerSecond) : null;
+    group.potentialDamage = group.volleys === null ? null : group.volleys * sumBy(stats, weapon => weapon.damage);
   }
 
   return [...groups.values()];
+};
+
+// Disparando sin parar también se refrigera, así que la capacidad se llena con el calor neto. Si la
+// refrigeración iguala o supera al calor disparando, no se llena nunca. Enfriarse es desde el máximo y
+// sin disparar.
+export const getHeatTimes = ({ heatCapacity, heatPerSecond, coolingRate }: { heatCapacity: number | null; heatPerSecond: number; coolingRate: number | null }) => {
+  if (heatCapacity === null || coolingRate === null) return { timeToMaxHeat: null, timeToCoolDown: null };
+  const net = heatPerSecond - coolingRate;
+  return {
+    timeToMaxHeat: net > 0 ? heatCapacity / net : 'never' as const,
+    timeToCoolDown: coolingRate > 0 ? heatCapacity / coolingRate : null
+  };
 };
 
 export interface BuildSummary {
@@ -327,6 +349,11 @@ export interface BuildSummary {
   heatCapacity: number | null;
   // Multiplicador del calor que generan las armas (1 sin mejoras).
   heatGeneration: number;
+  // Segundos hasta llenar la capacidad disparando ('never' si no se llena) y para vaciarla sin disparar.
+  timeToMaxHeat: number | 'never' | null;
+  timeToCoolDown: number | null;
+  // Daño por salva de las armas a distancia entre su tonelaje.
+  damagePerTon: number | null;
   // Calor por segundo disparando sin parar y DPS de las armas a distancia.
   heatPerSecond: number;
   dps: number;
@@ -358,6 +385,10 @@ export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState,
   const heatCapacity = calculateHeatCapacity(mech, loadout);
   const rangedWeapons = weapons.filter(weapon => !isMeleeWeapon(weapon.item));
   const scale = (value: number | undefined, bonus: number) => value === undefined ? null : value * (1 + bonus);
+  const shownCooling = coolingRate === null ? null : roundTo(coolingRate * (1 + modifiers.cooling), 2);
+  const shownCapacity = heatCapacity === null ? null : heatCapacity * (1 + modifiers.heatCapacity);
+  const heatPerSecond = sumBy(rangedWeapons, weapon => weapon.heat * weapon.rpm / 60);
+  const rangedTonnage = sumBy(rangedWeapons, weapon => weapon.item.tonnage);
 
   return {
     equipmentWeight,
@@ -369,10 +400,12 @@ export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState,
     meleeDamage: calculateMeleeDamage(mech, loadout, modifiers),
     heatSpike: calculateHeatSpike(loadout, modifiers),
     // Faster Cooling sube la refrigeración total, y el juego la muestra con dos decimales (2,1 -> 2,21).
-    coolingRate: coolingRate === null ? null : roundTo(coolingRate * (1 + modifiers.cooling), 2),
-    heatCapacity: heatCapacity === null ? null : heatCapacity * (1 + modifiers.heatCapacity),
+    coolingRate: shownCooling,
+    heatCapacity: shownCapacity,
     heatGeneration: 1 + modifiers.heatGeneration,
-    heatPerSecond: sumBy(rangedWeapons, weapon => weapon.heat * weapon.rpm / 60),
+    heatPerSecond,
+    ...getHeatTimes({ heatCapacity: shownCapacity, heatPerSecond, coolingRate: shownCooling }),
+    damagePerTon: rangedTonnage > 0 ? sumBy(rangedWeapons, weapon => weapon.damage) / rangedTonnage : null,
     dps: sumBy(rangedWeapons, weapon => weapon.dps),
     structurePoints: sumBy(Object.values(mech.components), component => component.structure) * (1 + modifiers.structure),
     topSpeed: calculateTopSpeed(mech.baseSpeed, modifiers.topSpeed),

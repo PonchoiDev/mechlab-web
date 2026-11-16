@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-16-weapon-analysis',
+    date: '2026-11-16',
+    title: 'More numbers in the loadout analysis',
+    items: [
+      'Heat now shows the time to reach max heat while firing, counting your cooling, and the time to cool down from max',
+      'Each weapon shows its tonnage next to its name, like Autocannon/5 (8t), and a new Damage / ton column compares weapons by their own weight, energy weapons included',
+      'Stores shows the potential damage of each ammo type: every volley it has times the damage of the weapons that use it'
+    ]
+  },
+  {
     id: '2026-11-16-melee-tiers-ammo-time',
     date: '2026-11-16',
     title: 'Melee tiers and ammo time fixed',

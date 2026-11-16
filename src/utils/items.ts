@@ -43,6 +43,9 @@ export const getItemWeaponType = (item: Item): WeaponType | null => {
 
 export const getAmmoLabel = (ammo: Item): string => ammo.name.replace(/\s*(?:Half\s+)?Ammo$/i, '');
 
+// Nombre del arma con su tonelaje, como en la tabla de armas: «Autocannon/5 (8t)».
+export const getWeaponLabel = (item: Item): string => `${item.name} (${Number(item.tonnage.toFixed(2))}t)`;
+
 export const isAmmoCompatibleWithWeapon = (ammo: Item, weapon: Item): boolean =>
   ammo.type === 'ammo' &&
   weapon.type === 'weapon' &&

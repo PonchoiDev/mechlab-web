@@ -2,7 +2,7 @@ import type { MouseEvent } from 'react';
 import { useLongPress } from '../hooks/useLongPress';
 import { getMenuPosition } from '../utils/menuPosition';
 import { getHardpointName, type HardpointView } from '../utils/equipment';
-import { getItemWeaponType, getTierName } from '../utils/items';
+import { getItemWeaponType, getTierName, getWeaponLabel } from '../utils/items';
 
 interface HardpointChipProps {
   view: HardpointView;
@@ -17,7 +17,7 @@ const getHardpointTitle = (view: HardpointView): string => {
   const { hardpoint, weapon, builtInWeapon } = view;
   const weightClass = hardpoint.weightClass ? ` (${hardpoint.weightClass} class)` : '';
   const description = `${getHardpointName(hardpoint)} hardpoint${weightClass}`;
-  if (weapon) return `${description}: ${weapon.name}`;
+  if (weapon) return `${description}: ${getWeaponLabel(weapon)}`;
   if (builtInWeapon) return `${description}: free, uses the built-in ${builtInWeapon}`;
   return `${description}: free`;
 };
