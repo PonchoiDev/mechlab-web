@@ -17,6 +17,7 @@
 }
 
 .bt-fp-pay { margin: 0 0 6px 38px; }
+.bt-fp-path .bt-fp-reward { margin: 0 0 8px 38px; }
 
 .bt-fp-reputation {
   display: flex;
@@ -36,5 +37,5 @@
 .guide-mech.is-static { cursor: default; opacity: 0.85; }
 
 @media (max-width: 760px) {
-  .bt-fp-pay { margin-left: 0; }
+  .bt-fp-pay, .bt-fp-path .bt-fp-reward { margin-left: 0; }
 }

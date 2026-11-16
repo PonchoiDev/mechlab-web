@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import flashpointsJson from '../../data/battletech/flashpoints.json';
-import type { BtFlashpoint, BtFlashpointContract, BtFlashpointPath } from '../../types/battletech-flashpoints';
+import type { BtFlashpoint, BtFlashpointContract, BtFlashpointPath, BtFlashpointReward } from '../../types/battletech-flashpoints';
 import {
   FLASHPOINT_LENGTHS,
   FLASHPOINT_SOURCES,
   filterFlashpoints,
   getBtMechLabUrl,
+  getFlashpointMechs,
   getFlashpointMapUrl,
   groupFlashpoints,
   parseFlashpointsQuery,
@@ -28,7 +29,7 @@ function MapLink({ flashpoint }: { flashpoint: BtFlashpoint }) {
 }
 
 // Los 'Mechs que están en el MechLab se abren en él; las variantes especiales, solo con su nombre.
-function MechChips({ mechs }: { mechs: NonNullable<BtFlashpoint['reward']>['mechs'] }) {
+function MechChips({ mechs }: { mechs: BtFlashpointReward['mechs'] }) {
   if (mechs.length === 0) return null;
   return (
     <ul className="guide-mechs">
@@ -49,7 +50,7 @@ function PathPay({ path }: { path: BtFlashpointPath }) {
     path.funds > 0 && `${numberFormat.format(path.funds)} C-Bills`,
     path.morale !== 0 && `${signed(path.morale)} morale`
   ].filter(Boolean);
-  if (parts.length === 0 && path.reputation.length === 0) return <p className="guide-note">No pay beyond the reward.</p>;
+  if (parts.length === 0 && path.reputation.length === 0) return <div className="bt-fp-pay"><p className="guide-note">No pay beyond the reward.</p></div>;
   return (
     <div className="bt-fp-pay">
       {parts.length > 0 && <p className="guide-money">{parts.join(' · ')}</p>}
@@ -60,6 +61,16 @@ function PathPay({ path }: { path: BtFlashpointPath }) {
           ))}
         </ul>
       )}
+    </div>
+  );
+}
+
+function RewardBlock({ reward }: { reward: BtFlashpointReward }) {
+  return (
+    <div className="bt-fp-reward">
+      <p className="guide-plain">{reward.title}</p>
+      <p className="guide-note">{reward.choice ? "Pick one of these 'Mechs at the end." : reward.description}</p>
+      <MechChips mechs={reward.mechs} />
     </div>
   );
 }
@@ -88,6 +99,7 @@ function Row({ flashpoint, open, onToggle }: { flashpoint: BtFlashpoint; open: b
   const bestPay = Math.max(0, ...flashpoint.paths.map(path => path.funds));
   const single = flashpoint.paths.length === 1;
   const { ally, reputation } = flashpoint.requirements;
+  const mechs = getFlashpointMechs(flashpoint);
   return (
     <li id={id} className={`guide-row${open ? ' is-open' : ''}`}>
       <div className="guide-row-head">
@@ -109,9 +121,7 @@ function Row({ flashpoint, open, onToggle }: { flashpoint: BtFlashpoint; open: b
         </div>
         <div className="guide-row-cell" data-label="Reward">
           {bestPay > 0 && <p className="guide-money">{single ? '' : 'Up to '}{numberFormat.format(bestPay)} C-Bills</p>}
-          {flashpoint.reward && (flashpoint.reward.mechs.length > 0
-            ? <MechChips mechs={flashpoint.reward.mechs} />
-            : <small>{flashpoint.reward.title}</small>)}
+          {mechs.length > 0 ? <MechChips mechs={mechs} /> : flashpoint.reward && <small>{flashpoint.reward.title}</small>}
         </div>
       </div>
       {open && (
@@ -144,7 +154,7 @@ function Row({ flashpoint, open, onToggle }: { flashpoint: BtFlashpoint; open: b
                 )
                 : flashpoint.paths.map(path => (
                   <section key={path.label} className="bt-fp-path" aria-label={`Path ${path.label}`}>
-                    <h3>Path {path.label}</h3>
+                    <h3>Path {path.label}{path.name && <> · {path.name}</>}</h3>
                     {path.contracts.length > 0 && (
                       <ol className="guide-missions">
                         {path.contracts.map((contract, index) => (
@@ -153,6 +163,7 @@ function Row({ flashpoint, open, onToggle }: { flashpoint: BtFlashpoint; open: b
                       </ol>
                     )}
                     <PathPay path={path} />
+                    {path.reward && <RewardBlock reward={path.reward} />}
                   </section>
                 ))}
               <p className="guide-detail-footer"><a className="guide-map-link" href={getFlashpointMapUrl(flashpoint)}>Show {flashpoint.system} on the star map</a></p>
@@ -166,17 +177,21 @@ function Row({ flashpoint, open, onToggle }: { flashpoint: BtFlashpoint; open: b
               </ul>
               {flashpoint.target && <p className="guide-note">Against {flashpoint.target}.</p>}
               {flashpoint.paths.length > 1 && (
-                <p className="guide-note">A conversation decides the path. The game does not name the options in its data, so they go by letter.</p>
+                <p className="guide-note">
+                  A conversation decides the path.
+                  {flashpoint.paths.some(path => !path.name) && ' The game does not name the options in its data, so they go by letter.'}
+                </p>
               )}
               {flashpoint.cancelable && <p className="guide-note">It can be abandoned at that conversation, with no pay.</p>}
               {flashpoint.repeatable && <p className="guide-note">It can be played again.</p>}
               {flashpoint.reward && (
                 <>
                   <h3>Reward</h3>
-                  <p className="guide-plain">{flashpoint.reward.title}</p>
-                  <p className="guide-note">{flashpoint.reward.choice ? "Pick one of these 'Mechs at the end." : flashpoint.reward.description}</p>
-                  <MechChips mechs={flashpoint.reward.mechs} />
+                  <RewardBlock reward={flashpoint.reward} />
                 </>
+              )}
+              {!flashpoint.reward && flashpoint.paths.some(path => path.reward) && (
+                <p className="guide-note">Each path has its own reward.</p>
               )}
             </aside>
           </div>
