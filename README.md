@@ -13,6 +13,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno
 | Armas y equipo | https://mw-builder.com/mercs/equipment/ |
 | MechLab de BATTLETECH | https://mw-builder.com/battletech/ |
 | Mapa estelar de BATTLETECH | https://mw-builder.com/battletech/starmap/ |
+| Unidades enemigas de BATTLETECH | https://mw-builder.com/battletech/units/ |
 | Armas y equipo de BATTLETECH | https://mw-builder.com/battletech/equipment/ |
 | Presentación (slides) | [Ver en Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) |
 | Vídeo explicativo | [Ver en Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) |
@@ -43,7 +44,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (558 tests, cobertura con V8) |
+| Tests | Vitest 5 (568 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -115,6 +116,10 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Árbol por categoría y nivel que resalta, al pasar por una mejora, todo lo que pide y todo lo que abre.
 - Planificador: se marcan las mejoras, se añaden solas sus requisitos y se suman el coste, el mantenimiento mensual (¢80.000 de base más cada mejora) y el efecto conjunto. El plan va en el enlace (`?own=mechBay3,trainingModule1`).
 
+**Unidades enemigas de BATTLETECH**
+- Página propia (`/battletech/units/`) con los 37 vehículos y torretas de los contratos, del juego base, Heavy Metal y Urban Warfare: blindaje y estructura por ubicación, distancia de andar y correr, daño de un ataque con todas las armas, daño a la estabilidad y las armas y el equipo de cada uno, con el dibujo de su chasis de Sarna.
+- Filtros por tipo (cadenas, ruedas, torreta) y por nombre, y orden por daño, blindaje, tonelaje o velocidad. La vista va en el enlace.
+
 **Armas y equipo de BATTLETECH**
 - Página propia (`/battletech/equipment/`) con las 210 armas y cada versión de fabricante (+ a + + +) en una tabla: anclaje, toneladas, ranuras, daño (con sus disparos), inestabilidad, calor, daño por calor, precisión, crítico, alcances mínimo y máximo con sus tramos, munición por tonelada, daño por tonelada, rareza y fuente, con las bonificaciones del fabricante.
 - Orden por cualquier columna y filtros por anclaje, versión, fuente, rareza y búsqueda por nombre o fabricante.
@@ -163,6 +168,7 @@ src/
   battletech/           Páginas de BATTLETECH (mapa estelar), con su lógica en utils/battletech/
   battletech/argo/      Página de la Argo de BATTLETECH: árbol de mejoras, fichas y plan
   battletech/equipment/ Página de armas y equipo de BATTLETECH: tabla de armas, fichas de equipo y munición
+  battletech/units/     Página de unidades enemigas de BATTLETECH: filtros y ficha de cada vehículo o torreta
   battletech/mechlab/   MechLab de BATTLETECH: selector de 'Mech, tablero, selector de equipo y análisis
   hooks/                Estado de la build, builds guardadas, preferencias de vista e imagen de Sarna
   utils/                Lógica del configurador: cálculos, reglas de equipo, mejoras, código de las builds
@@ -178,6 +184,7 @@ equipment/index.html    Entrada de la página de armas y equipo (/mercs/equipmen
 battletech/             Entradas de las páginas de BATTLETECH (/battletech/) y sus imágenes
 battletech/argo/        Entrada de la página de la Argo (/battletech/argo/) y sus imágenes en public/argo/
 battletech/equipment/   Entrada de la página de armas y equipo (/battletech/equipment/)
+battletech/units/       Entrada de la página de unidades enemigas (/battletech/units/)
 battletech/index.html   Entrada del MechLab de BATTLETECH (/battletech/), con los iconos de los chasis en public/mechlab/
 site/                   Portada de la raíz del dominio (mw-builder.com)
 docs/                   Análisis, arquitectura, diagramas UML y desarrollo con IA
@@ -351,7 +358,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Calidad y comprobación contra el juego
 
-- **558 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **568 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

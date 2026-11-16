@@ -1,6 +1,6 @@
 # Especificación: unidades enemigas de BATTLETECH
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/battletech/units.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -79,3 +79,13 @@ La página de unidades enemigas de MW5 (`/mercs/units/`, `docs/specs/unidades-en
 1. **Datos y lógica (CA1 a CA10):** `src/utils/battletech/units.test.ts`, con `units.json` e `items.json` reales.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: la carátula nueva, filtrar por tipo, buscar, ordenar por daño y abrir las fichas del Manticore y de una torreta.
 3. **En el juego:** una captura de un vehículo fijado como blanco para comprobar la estructura (la del chasis, 12 por ubicación en el Manticore, y no los 30 que trae su definición).
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Corrección de un criterio:** la búsqueda «carrier» también encuentra el Schrek PPC Carrier y el Schrek SPPC Carrier: son cinco, no tres.
+- **Datos:** 37 unidades (13 Tracked, 12 Wheeled y 12 Turret), 17 con página y dibujo de Sarna. `units.json` pesa 35 KB.
+- **Tests:** los diez criterios están en `src/utils/battletech/units.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: el Manticore, el orden por daño (el SRM Carrier primero) y las torretas, que no repiten su única ubicación debajo del blindaje.
+- **Decisión durante el desarrollo:** con cinco enlaces, la cabecera del móvil partía «Star map» y «Enemy units» en dos líneas; ahora los enlaces pasan enteros a la línea siguiente, en todas las páginas que usan `units.css`.
+- **Pendiente de comprobar en el juego:** la estructura de los vehículos (el chasis da 12 por ubicación al Manticore y su definición 30). Hace falta una captura de un vehículo fijado como blanco.

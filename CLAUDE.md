@@ -28,6 +28,9 @@ python3 tools/extraer_argo_battletech.py "<carpeta de BATTLETECH>"  # tools/dato
 python3 tools/generar_argo_battletech.py  # src/data/battletech/argo.json
 python3 tools/extraer_mechlab_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/mechlab/ y battletech/public/mechlab/icons/ (base y DLC)
 python3 tools/generar_mechlab_battletech.py  # src/data/battletech/mechs.json, items.json y constants.json
+python3 tools/extraer_unidades_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/unidades/ (vehículos y torretas)
+python3 tools/imagenes_sarna_battletech.py   # tools/datos-juego/battletech/unidades/sarna.json, de la API de Sarna
+python3 tools/generar_unidades_battletech.py # src/data/battletech/units.json (lee items.json: va después)
 ```
 
 Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` sin errores.

@@ -152,6 +152,14 @@ Es una página del build de BATTLETECH (`battletech/equipment/index.html`, servi
 - **`utils/battletech/equipment.ts`:** las filas de la tabla de armas (el daño de un ataque, la inestabilidad por los disparos, la precisión con el signo del juego y la munición por tonelada), los filtros por anclaje, versión, fuente, rareza y búsqueda, el orden por columnas (sin el dato, al final), las categorías y los efectos del equipo (con dónde se monta), las mejoras por grupo, las armas que usan cada munición y la vista en la URL. Recibe el catálogo como parámetro y tiene sus tests (`equipment.test.ts`).
 - **`battletech/equipment/BtEquipmentApp.tsx`:** las pestañas de armas y equipo, la tabla de armas con las bonificaciones de cada fabricante, las fichas de equipo y la tabla de munición. Solo pinta y llama a la lógica.
 
+### Unidades enemigas de BATTLETECH
+
+Es una página del build de BATTLETECH (`battletech/units/index.html`, servida en `/battletech/units/`), con su propio bundle. Usa los estilos de las unidades enemigas de MW5 (`units.css`), con su mismo rojo, y añade el blindaje por ubicación (`battletech/units/units.css`):
+
+- **Datos:** `extraer_unidades_battletech.py` lee los vehículos, las torretas, sus chasis y su movimiento del juego base y de los bundles de los DLC; `generar_unidades_battletech.py` deja en `src/data/battletech/units.json` las unidades que no están vetadas, con el blindaje de la definición, la estructura del chasis, el movimiento y su inventario por id. Las estadísticas de las armas no se copian: están en el mismo `items.json` que el MechLab.
+- **`utils/battletech/units.ts`:** las armas de cada unidad (el daño de un ataque, con sus disparos), la potencia de fuego, el blindaje, los filtros, el orden (sin el dato, al final) y la vista en la URL. Recibe el catálogo como parámetro y tiene sus tests (`units.test.ts`).
+- **`battletech/units/BtUnitsApp.tsx`:** los filtros y la ficha de cada unidad. Solo pinta y llama a la lógica.
+
 ## Decisiones de diseño
 
 ### La build viaja en el enlace
