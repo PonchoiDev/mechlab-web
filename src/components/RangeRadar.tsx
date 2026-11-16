@@ -12,9 +12,22 @@ const RADAR_SPOKES = [30, 60, 90, 120, 150];
 // intenso cuanto más daño llega. Lo de las armas por debajo de su alcance mínimo (en BATTLETECH; en MW5 no
 // hay) va rayado en ámbar. Los anillos y su intensidad salen de getRangeRadar. Lo usan los dos MechLabs:
 // el color de los anillos es el de cada página (--radar-accent).
-export function RangeRadar({ profile }: { profile: RangeProfileEntry[] }) {
+interface RangeRadarProps {
+  profile: RangeProfileEntry[];
+  // Avisa del anillo señalado (su distancia, o null), para que la tabla resalte sus armas.
+  onActiveChange?: (distance: number | null) => void;
+  // Qué armas hacen daño a esa distancia, para la línea bajo el radar.
+  describeWeapons?: (distance: number) => string;
+}
+
+export function RangeRadar({ profile, onActiveChange, describeWeapons }: RangeRadarProps) {
   const { radius, bands, groups } = getRangeRadar(profile, RADAR_RADIUS);
-  const [active, setActive] = useState<number | null>(null);
+  const [active, setActiveState] = useState<number | null>(null);
+  const setActive = (next: number | null | ((current: number | null) => number | null)) => {
+    const value = typeof next === 'function' ? next(active) : next;
+    setActiveState(value);
+    onActiveChange?.(value);
+  };
   const center = radius;
   const reach = bands.filter(band => band.damage + band.belowMin > 0).at(-1)?.distance ?? 0;
   const describe = (band: RadarBand) =>
@@ -92,7 +105,9 @@ export function RangeRadar({ profile }: { profile: RangeProfileEntry[] }) {
         <path className="range-radar-mech" d={`M ${center} ${center - 12} L ${center + 8} ${center} L ${center - 8} ${center} Z`} />
       </svg>
       <p className="range-radar-detail" aria-live="polite">
-        {activeBand ? describe(activeBand) : 'Point at a ring, or tap it, to read its distance and damage'}
+        {activeBand
+          ? `${describe(activeBand)}${describeWeapons ? ` · ${describeWeapons(activeBand.distance)}` : ''}`
+          : 'Point at a ring, or tap it, to read its distance, its damage and the weapons that reach it'}
       </p>
     </div>
   );

@@ -79,6 +79,16 @@ const multiplierFor = (items: BtItem[], stat: string, category?: BtHardpoint) =>
 
 const round = (value: number, decimals = 2) => Number(value.toFixed(decimals));
 
+// Qué hace un arma a una distancia, como el perfil de daño por alcance: todo su daño, el que hace por
+// debajo de su alcance mínimo (con penalización de precisión) o nada. Lo usa el radar para resaltar las
+// armas de cada anillo.
+export type BtWeaponRangeState = 'full' | 'belowMin' | 'out';
+
+export const getBtWeaponRangeState = (item: BtItem, distance: number): BtWeaponRangeState => {
+  const { minRange, maxRange } = item.weapon!;
+  return distance > maxRange ? 'out' : distance < minRange ? 'belowMin' : 'full';
+};
+
 export const getBuildSummary = (build: BtBuild): BtSummary => {
   const { mech, loadout, armor } = build;
   const items = getAllItems(mech, loadout);

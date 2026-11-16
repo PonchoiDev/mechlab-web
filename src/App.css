@@ -3228,6 +3228,22 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .range-radar-axis { fill: var(--work-muted); font: 600 10px var(--work-mono); letter-spacing: 0.08em; }
 .range-radar-ring { cursor: pointer; }
 .range-radar-ring.is-active .range-radar-edge { stroke: var(--work-text); stroke-width: 2.5; }
+/* Al señalar un anillo del radar, la tabla de armas resalta las que llegan y apaga las demás. */
+.weapon-table tr.is-range-full td:first-child { box-shadow: inset 3px 0 var(--radar-accent, var(--work-lime)); }
+.weapon-table tr.is-range-falloff td:first-child,
+.weapon-table tr.is-range-belowMin td:first-child { box-shadow: inset 3px 0 var(--work-amber); }
+.weapon-table tr.is-range-out { opacity: 0.35; }
+.range-tag {
+  margin-left: 8px;
+  padding: 1px 5px;
+  border: 1px solid var(--work-amber);
+  border-radius: 2px;
+  color: var(--work-amber);
+  font: 600 9px var(--work-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .range-radar-detail {
   margin: 0;
   padding: 0 14px 14px;
