@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MW Builder · MechWarrior and BattleTech tools</title>
-    <meta name="description" content="Fan-made tools for MechWarrior 5: Mercenaries and BATTLETECH: MechLabs with the game&#39;s own rules, star maps, enemy units, pilots and the Argo. Share any build in one link." />
+    <meta name="description" content="Fan-made tools for MechWarrior 5: Mercenaries and BATTLETECH: MechLabs with the game&#39;s own rules, star maps, enemy units, pilots, quests and the Argo. Share any build in one link." />
     <link rel="canonical" href="https://mw-builder.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="MW Builder" />
@@ -362,6 +362,29 @@
 
       .cover-action span { transition: transform 220ms ease; }
       a.cover:hover .cover-action span { transform: translateX(4px); }
+
+      /* La carátula de las HRQ y campañas: la DropShip Leopard del TRO 3025, la nave de la compañía en MW5, en el
+         rosa de su página. El dibujo es apaisado: va arriba, para no quedar debajo del título. */
+      .cover.is-campaigns { --accent: #ff4fa3; }
+
+      .cover.is-campaigns .cover-art { align-items: flex-start; }
+
+      .cover.is-campaigns .cover-art img {
+        height: 46%;
+        margin-top: 8%;
+        filter: invert(1) sepia(1) hue-rotate(275deg) saturate(5) brightness(1.1);
+        opacity: 0.75;
+      }
+
+      a.cover.is-campaigns:hover,
+      a.cover.is-campaigns:focus-visible {
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(255, 79, 163, 0.22);
+      }
+
+      .cover.is-campaigns .cover-status {
+        border-color: rgba(255, 79, 163, 0.6);
+        color: var(--accent);
+      }
 
       /* La carátula del mapa es una captura del propio mapa, a color: sin el filtro de holograma. */
       .cover.is-starmap { --accent: #ffd400; }
@@ -838,7 +861,7 @@
           <h2>Tools for MechWarrior and BattleTech games, <em>all in one place.</em></h2>
           <p>
             A free, ad-free toolkit for each game: MechLabs that follow the game's own fitting rules, star maps,
-            enemy units, pilots and the Argo.
+            enemy units, pilots, quests and the Argo.
           </p>
           <ul class="intro-features">
             <li><b>MechLab</b> Every chassis, weapon and upgrade, with heat, damage and armor at a glance</li>
@@ -851,7 +874,7 @@
         <section class="game-row" aria-labelledby="game-mw5">
           <div class="shelf-header">
             <h3 id="game-mw5">MW5: MERCENARIES <small>PIRANHA GAMES</small></h3>
-            <span>5 TOOLS</span>
+            <span>6 TOOLS</span>
           </div>
 
           <div class="shelf">
@@ -876,6 +899,29 @@
                 </p>
               </div>
               <div class="cover-action">Open MechLab <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="cover is-campaigns" href="/mercs/campaigns/">
+              <div class="cover-band">
+                <span><b>HRQ &amp; CAMPAIGNS</b> · MW5</span>
+                <span class="cover-status">NEW</span>
+              </div>
+              <div class="cover-art">
+                <img
+                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F81%2FLeopard_TRO3025CE.png"
+                  alt=""
+                  onerror="this.remove()"
+                />
+              </div>
+              <div class="cover-title">
+                <small>MECHWARRIOR 5</small>
+                <strong>Quests <span>&amp; Campaigns</span></strong>
+                <p class="cover-meta">
+                  <span>64 quests</span>
+                  <span>6 DLC campaigns</span>
+                </p>
+              </div>
+              <div class="cover-action">Open HRQ &amp; Campaigns <span aria-hidden="true">→</span></div>
             </a>
 
             <a class="cover is-starmap" href="/mercs/starmap/">
