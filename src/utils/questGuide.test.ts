@@ -5,9 +5,11 @@ import type { Campaign, Quest, StarmapData } from '../types/starmap';
 import { getMechLabUrl } from './markets';
 import {
   filterCampaigns,
+  filterQuestStories,
   filterQuests,
   getCampaignMapUrl,
   getCampaignMechs,
+  getCampaignSources,
   getCampaignTotals,
   getDlcLabel,
   getQuestMapUrl,
@@ -124,5 +126,9 @@ describe('página de HRQ y campañas', () => {
       { dlc: 3, name: 'Call to Arms', quests: ['Those in Need'] },
       { dlc: 8, name: 'Chaos Reign', quests: ['Adam Steiner', 'Testing Ground', 'Ideals of War', 'Thumb War', 'New Home, Old Enemies'] }
     ]);
+    expect(getCampaignSources(data)).toEqual([2, 3, 4, 5, 6, 7, 8, 9]);
+    expect(filterQuestStories(data, 'steiner', 'all').map(story => story.name)).toEqual(['Chaos Reign']);
+    expect(filterQuestStories(data, 'chaos', 8).map(story => story.name)).toEqual(['Chaos Reign']);
+    expect(filterQuestStories(data, '', 7)).toEqual([]);
   });
 });

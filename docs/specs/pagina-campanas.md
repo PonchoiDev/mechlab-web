@@ -62,7 +62,7 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 | CA7 | Las recompensas | se resumen | Bow and Arrow da el ARC-AGC; Pirate Hunt, ningún 'Mech; Ashes & Ascension incluye el SNV-BR y el HBK-IIC-DW de completarla, sin repetir; todos los 'Mechs están en `mechs.json` y enlazan a `/mercs/?mech=<variante>` |
 | CA8 | The Dragon's Gambit | se suma su pago | 67.931.715 C-Bills y 18.485 de reputación en 15 misiones |
 | CA10 | Los nombres de los DLC | se escriben | el juego base es «Base game»; el DLC 1, «DLC 1 · Heroes of the Inner Sphere»; el DLC 8, «DLC 8 · Chaos Reign» |
-| CA11 | Las historias contadas con HRQ | se listan | son Call to Arms (DLC 3) con Those in Need, y Chaos Reign (DLC 8) con sus cinco cadenas por fecha: Adam Steiner, Testing Ground, Ideals of War, Thumb War y New Home, Old Enemies |
+| CA11 | Las historias contadas con HRQ | se listan | son Call to Arms (DLC 3) con Those in Need, y Chaos Reign (DLC 8) con sus cinco cadenas por fecha: Adam Steiner, Testing Ground, Ideals of War, Thumb War y New Home, Old Enemies. El filtro de la pestaña de campañas incluye los DLC 3 y 8, y la búsqueda encuentra la historia por su nombre o el de sus cadenas («steiner» da Chaos Reign) |
 | CA9 | La URL | se abre y se construye | sin parámetros, la pestaña de HRQ, todo y nada abierto. `?tab=campaigns&dlc=7&q=kerensky` se lee y se vuelve a escribir igual. `?quest=bow-and-arrow` abre la pestaña de HRQ con Bow and Arrow desplegada y `?campaign=dlc7`, la de campañas con Shadow of Kerensky. Un id, un DLC o una pestaña que no existen se ignoran |
 
 ## Fuera de alcance
