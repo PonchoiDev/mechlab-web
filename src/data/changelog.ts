@@ -15,6 +15,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       'A new BATTLETECH Flashpoints page lists all 32 flashpoints from Flashpoint, Heavy Metal and Urban Warfare, grouped by DLC, with where they are offered, who offers them and their reward',
       'Open any of them to read its briefing and requirements, its contracts in order and every path with what it pays: C-Bills, morale and reputation',
+      'Yang Virtanen\'s Big Score shows both lances: the light one (Vindicator, Firestarter, Trebuchet or Enforcer) and the heavy one (Catapult, Thunderbolt, Dragon or Kintaro)',
       'The system opens the star map and reward \'Mechs open in the MechLab; the DLC filter, the search and the open flashpoint go in the link'
     ]
   },
