@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Mech } from '../types/mech';
 import { formatArmorPoints, formatCoolingRate, formatTurnRate, type BuildSummary } from '../utils/calculators';
+import { getWeaponLabel } from '../utils/items';
 import { ZONE_LABELS } from '../utils/zones';
 import { EMPTY_VALUE } from '../utils/format';
 import { UpgradedValue } from './UpgradedValue';
@@ -69,6 +70,7 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
                   <th>Weapon</th>
                   <th>Section</th>
                   <th>Volley damage</th>
+                  <th title="Volley damage per ton of the weapon itself, without its ammo">Damage / ton</th>
                   <th>Heat</th>
                   <th>RPM</th>
                   <th>Nominal DPS</th>
@@ -80,9 +82,10 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
               <tbody>
                 {weapons.map(({ item, zone }, index) => (
                   <tr key={`${item.id}-${zone}-${index}`}>
-                    <td>{item.name}</td>
+                    <td>{getWeaponLabel(item)}</td>
                     <td>{ZONE_LABELS[zone]}</td>
                     <td>{cell(index, weapon => formatNumber(weapon.damage))}</td>
+                    <td>{cell(index, weapon => weapon.damagePerTon !== null ? formatNumber(weapon.damagePerTon) : EMPTY_VALUE)}</td>
                     <td>{cell(index, weapon => formatNumber(weapon.heat))}</td>
                     <td>{cell(index, weapon => weapon.rpm > 0 ? weapon.rpm.toFixed(1) : EMPTY_VALUE)}</td>
                     <td>{cell(index, weapon => weapon.dps > 0 ? weapon.dps.toFixed(1) : EMPTY_VALUE)}</td>
@@ -97,6 +100,7 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
                   <td>Total</td>
                   <td>ranged weapons</td>
                   <td>{total(values => values.firepower.toFixed(1))}</td>
+                  <td>{total(values => values.damagePerTon !== null ? formatNumber(values.damagePerTon) : EMPTY_VALUE)}</td>
                   <td>{total(values => values.heatSpike.toFixed(1))}</td>
                   <td>{EMPTY_VALUE}</td>
                   <td>{total(values => values.dps.toFixed(1))}</td>
@@ -117,7 +121,7 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
               <h2>Installed ammunition</h2>
             </div>
           </header>
-          {ammunition.map(({ ammoType, label, capacity, bins, volleys, seconds }) => (
+          {ammunition.map(({ ammoType, label, capacity, bins, volleys, seconds, potentialDamage }) => (
             <div className="ammunition-row" key={ammoType}>
               <span>{label}<small>{bins} {bins === 1 ? 'bin' : 'bins'}</small></span>
               <span className="ammunition-amount">
@@ -127,6 +131,11 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
                     ? 'no weapon uses it'
                     : `${volleys} ${volleys === 1 ? 'volley' : 'volleys'}${seconds !== null ? ` · ${formatDuration(seconds)} of fire` : ''}`}
                 </small>
+                {potentialDamage !== null && (
+                  <small className="ammunition-potential" title="Every volley times the volley damage of the weapons that use it">
+                    {formatNumber(potentialDamage, 0)} potential damage
+                  </small>
+                )}
               </span>
             </div>
           ))}
@@ -143,6 +152,8 @@ interface MechStat {
 }
 
 const optional = (value: number | null, format: (value: number) => string) => value === null ? EMPTY_VALUE : format(value);
+// Sin unidad: la refrigeración puede con todo el calor y el 'Mech no llega nunca al máximo.
+const NEVER = 'Never';
 
 // Resumen como el de la pantalla Mejoras del juego, agrupado con las mismas categorías que las mejoras.
 const MECH_STATS: { title: string; stats: MechStat[] }[] = [
@@ -169,6 +180,12 @@ const MECH_STATS: { title: string; stats: MechStat[] }[] = [
       { label: 'Heat capacity', format: values => optional(values.heatCapacity, value => formatNumber(value)) },
       { label: 'Heat spike', format: values => String(values.heatSpike) },
       { label: 'Heat while firing', format: values => formatNumber(values.heatPerSecond, 1), unit: 'heat/s' },
+      {
+        label: 'Time to max heat',
+        format: values => values.timeToMaxHeat === 'never' ? NEVER : optional(values.timeToMaxHeat, value => formatNumber(value, 1)),
+        unit: 's'
+      },
+      { label: 'Time to cool down', format: values => optional(values.timeToCoolDown, value => formatNumber(value, 1)), unit: 's' },
       { label: 'Heat generation', format: values => `× ${formatNumber(values.heatGeneration)}` }
     ]
   },
@@ -212,7 +229,7 @@ function MechTab({ mech, summary, base }: { mech: Mech; summary: BuildSummary; b
                   <dt>{stat.label}</dt>
                   <dd>
                     <UpgradedValue value={stat.format(summary)} base={base && stat.format(base)} />
-                    {stat.unit && stat.format(summary) !== EMPTY_VALUE && <small> {stat.unit}</small>}
+                    {stat.unit && ![EMPTY_VALUE, NEVER].includes(stat.format(summary)) && <small> {stat.unit}</small>}
                   </dd>
                 </div>
               ))}
