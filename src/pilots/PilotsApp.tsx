@@ -346,6 +346,7 @@ export function PilotsApp() {
           <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
           <a href="/mercs/starmap/">Star map</a>
           <a href="/mercs/units/">Enemy units</a>
+          <a href="/mercs/equipment/">Equipment</a>
         </nav>
         <div className="units-actions">
           <WhatsNew />

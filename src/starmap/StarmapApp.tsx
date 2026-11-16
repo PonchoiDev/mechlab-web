@@ -542,6 +542,7 @@ export function StarmapApp() {
           <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
           <a href="/mercs/units/">Enemy units</a>
           <a href="/mercs/pilots/">Pilots</a>
+          <a href="/mercs/equipment/">Equipment</a>
         </nav>
         <div className="starmap-actions">
           <WhatsNew />
