@@ -111,7 +111,7 @@ describe('página de HRQ y campañas', () => {
     expect(toGuideQuery({ tab: 'campaigns', query: '', source: 'all', open: 'dlc7' })).toBe('?campaign=dlc7');
 
     expect(parseGuideQuery('?tab=nope&dlc=5&quest=nope', data)).toEqual({ tab: 'quests', query: '', source: 'all', open: null });
-    expect(parseGuideQuery('?campaign=dlc3', data)).toEqual({ tab: 'quests', query: '', source: 'all', open: null });
+    expect(parseGuideQuery('?campaign=dlc1', data)).toEqual({ tab: 'quests', query: '', source: 'all', open: null });
     expect(parseGuideQuery('?dlc=0', data).source).toBe(0);
   });
 
