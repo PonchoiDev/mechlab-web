@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import mechsJson from '../data/mechs.json';
+import briefingsJson from '../data/quest-briefings.json';
 import starmapData from '../data/starmap.json';
 import type { Campaign, Quest, StarmapData } from '../types/starmap';
 import { getMechLabUrl } from './markets';
@@ -13,6 +14,7 @@ import {
   getCampaignTotals,
   getDlcLabel,
   getQuestMapUrl,
+  getQuestBriefings,
   getQuestMechs,
   getQuestStories,
   groupQuestsBySource,
@@ -132,5 +134,15 @@ describe('página de HRQ y campañas', () => {
     expect(filterQuestStories(data, '', 7)).toEqual([]);
     expect(parseGuideQuery('?campaign=dlc8', data)).toEqual({ tab: 'campaigns', query: '', source: 'all', open: 'dlc8' });
     expect(toGuideQuery({ tab: 'campaigns', query: '', source: 'all', open: 'dlc8' })).toBe('?campaign=dlc8');
+  });
+
+  it('CA12: el briefing de la oferta y el de cada misión', () => {
+    const briefings = briefingsJson as Record<string, (string | null)[]>;
+    const bringHerHome = quest('Bring Her Home');
+    const texts = getQuestBriefings(briefings, bringHerHome);
+    expect(texts).toHaveLength(4);
+    expect(texts[0]).toMatch(/^Commander, your reputation precedes you/);
+    expect(texts).not.toContain(bringHerHome.rewards[0].debrief);
+    expect(data.quests.filter(item => !getQuestBriefings(briefings, item)[0]).map(item => item.name)).toEqual([]);
   });
 });
