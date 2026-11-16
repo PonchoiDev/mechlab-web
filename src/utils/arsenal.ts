@@ -56,7 +56,6 @@ export interface WeaponRow {
   tierName: string;
   clan: boolean;
   manufacturer: string | null;
-  cost: number | null;
   damage: number;
   heat: number;
   cooldown: number | null;
@@ -95,7 +94,6 @@ export const getWeaponRows = (items: Item[], tier: string): WeaponRow[] => {
       tierName: getTierName(weapon) ?? `Tier ${rowTier}`,
       clan: isClanTech(item),
       manufacturer: tierStats.manufacturer ?? null,
-      cost: tierStats.cost ?? null,
       damage: stats.damage,
       heat: stats.heat,
       cooldown: tierStats.cooldown ?? null,
@@ -135,11 +133,11 @@ export const filterWeaponRows = (rows: WeaponRow[], { query, type, size, tech, d
 
 export type WeaponSortKey =
   | 'name' | 'hardpoint' | 'tonnage' | 'damage' | 'heat' | 'cooldown' | 'rpm' | 'dps' | 'damagePerTon'
-  | 'range' | 'maxRange' | 'speed' | 'ammoPerTon' | 'cost' | 'dlc';
+  | 'range' | 'maxRange' | 'speed' | 'ammoPerTon' | 'dlc';
 
 export const WEAPON_SORT_KEYS: WeaponSortKey[] = [
   'name', 'hardpoint', 'tonnage', 'damage', 'heat', 'cooldown', 'rpm', 'dps', 'damagePerTon',
-  'range', 'maxRange', 'speed', 'ammoPerTon', 'cost', 'dlc'
+  'range', 'maxRange', 'speed', 'ammoPerTon', 'dlc'
 ];
 
 export type SortDirection = 'asc' | 'desc';

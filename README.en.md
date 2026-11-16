@@ -44,7 +44,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (542 tests, V8 coverage) |
+| Tests | Vitest 5 (548 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -98,7 +98,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - Find a 'Mech: the map is colored by how rare a variant is in each faction's market on the chosen date, with its fixed sources (HRQ, special markets) and a shareable link (`?mech=AS7-D`). Special 'Mech locations lists the hero 'Mechs and special variants you can only get in one place, like the Razer Wolverine.
 
 **Weapons and equipment**
-- Its own page (`/mercs/equipment/`) with all 191 weapons in one table: hardpoint, tons, damage, heat, cooldown, RPM, DPS, damage per ton, range, projectile speed, ammo per ton, manufacturer, tech base, DLC and cost.
+- Its own page (`/mercs/equipment/`) with all 191 weapons in one table: hardpoint, tons, damage, heat, cooldown, RPM, DPS, damage per ton, range, projectile speed, ammo per ton, manufacturer, tech base and DLC.
 - One tier for the whole list (from 0 to Lost Tech; Clan weapons keep their own), sorting by any column and filters by type, hardpoint size, Inner Sphere or Clan, DLC and a search by name or manufacturer.
 - An equipment tab with heat sinks, jump jets, MASC and Superchargers, ECM, active probes and targeting computers with their effects, and every ammo bin with the weapons that use it. The view goes in the link.
 
@@ -215,7 +215,7 @@ The JSON files in `src/data/` are generated from the game files, exported with t
 | `mdl/` and `hps/` | Model and hardpoints of each chassis | Actual size of each hardpoint |
 | `loadout/` | Stock loadouts | Factory build of each variant |
 | `unitcard/` | Unit cards | Intro year and role |
-| `items/` | Weapons, equipment and ammo | Stats, manufacturer and cost per tier, ammo, heat sinks, DLC and equipment effects |
+| `items/` | Weapons, equipment and ammo | Stats and manufacturer per tier, ammo, heat sinks, DLC and equipment effects |
 | `traits/` | Upgrades | Cantina upgrades and their effects, and those of the targeting computers (read by `generar_items.py`) |
 | `mech_string_table/` | `Mech_StringTable` text table exported as CSV | Chassis names |
 
@@ -347,7 +347,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Quality and checks against the game
 
-- **542 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **548 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

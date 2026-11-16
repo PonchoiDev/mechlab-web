@@ -13,7 +13,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
-    "cost": 40000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
   },
@@ -31,7 +30,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
-    "cost": 20000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10"
   },
@@ -49,7 +47,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
-    "cost": 12000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
   },
@@ -67,7 +64,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
-    "cost": 6000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC10"
   },
@@ -85,7 +81,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10"
   },
@@ -103,7 +98,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10"
   },
@@ -121,7 +115,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
-    "cost": 20000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
   },
@@ -139,7 +132,6 @@
     "tiers": null,
     "capacity": 10,
     "techBase": "InnerSphere",
-    "cost": 10000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC20"
   },
@@ -157,7 +149,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20"
   },
@@ -175,7 +166,6 @@
     "tiers": null,
     "capacity": 10,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20"
   },
@@ -193,7 +183,6 @@
     "tiers": null,
     "capacity": 200,
     "techBase": "InnerSphere",
-    "cost": 2000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
   },
@@ -211,7 +200,6 @@
     "tiers": null,
     "capacity": 100,
     "techBase": "InnerSphere",
-    "cost": 1000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC2"
   },
@@ -229,7 +217,6 @@
     "tiers": null,
     "capacity": 90,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2"
   },
@@ -247,7 +234,6 @@
     "tiers": null,
     "capacity": 45,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2"
   },
@@ -265,7 +251,6 @@
     "tiers": null,
     "capacity": 80,
     "techBase": "InnerSphere",
-    "cost": 9000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
   },
@@ -283,7 +268,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
-    "cost": 4500,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Standard.AC5"
   },
@@ -301,7 +285,6 @@
     "tiers": null,
     "capacity": 80,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
   },
@@ -319,7 +302,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
-    "cost": 9000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5"
   },
@@ -337,7 +319,6 @@
     "tiers": null,
     "capacity": 2000,
     "techBase": "InnerSphere",
-    "cost": 4000,
     "explosionDamagePerRound": 0.024,
     "ammoType": "Ammo.Ballistic.AMS"
   },
@@ -355,7 +336,6 @@
     "tiers": null,
     "capacity": 1000,
     "techBase": "InnerSphere",
-    "cost": 2000,
     "explosionDamagePerRound": 0.024,
     "ammoType": "Ammo.Ballistic.AMS"
   },
@@ -374,7 +354,6 @@
         "range": 160.0,
         "maxRange": 160.0,
         "rpm": 0.0,
-        "cost": 100000,
         "manufacturer": "Mainfire"
       },
       "1": {
@@ -384,7 +363,6 @@
         "range": 200.0,
         "maxRange": 200.0,
         "rpm": 0.0,
-        "cost": 200000,
         "manufacturer": "SureFire 444"
       },
       "2": {
@@ -394,7 +372,6 @@
         "range": 210.0,
         "maxRange": 210.0,
         "rpm": 0.0,
-        "cost": 250000,
         "manufacturer": "LFN Lindblad Shotgun"
       },
       "3": {
@@ -404,7 +381,6 @@
         "range": 220.0,
         "maxRange": 220.0,
         "rpm": 0.0,
-        "cost": 330000,
         "manufacturer": "Yori Flyswatter"
       },
       "4": {
@@ -414,7 +390,6 @@
         "range": 230.0,
         "maxRange": 230.0,
         "rpm": 0.0,
-        "cost": 430000,
         "manufacturer": "Buzzsaw"
       },
       "5": {
@@ -424,7 +399,6 @@
         "range": 250.0,
         "maxRange": 250.0,
         "rpm": 0.0,
-        "cost": 700000,
         "manufacturer": "McArthur"
       }
     },
@@ -449,7 +423,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 34.3,
-        "cost": 35000,
         "manufacturer": "Streamlined Actuators"
       },
       "1": {
@@ -459,7 +432,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 34.3,
-        "cost": 70000,
         "manufacturer": "DeathRain Special"
       },
       "2": {
@@ -469,7 +441,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 34.3,
-        "cost": 87500,
         "manufacturer": "Knockout Knuckles"
       },
       "3": {
@@ -479,7 +450,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 34.3,
-        "cost": 115500,
         "manufacturer": "Swift Shot"
       },
       "4": {
@@ -489,7 +459,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 34.3,
-        "cost": 150500,
         "manufacturer": "Prizefighters"
       },
       "5": {
@@ -499,7 +468,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 34.3,
-        "cost": 245000,
         "manufacturer": "Solaris Arms"
       }
     },
@@ -524,7 +492,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 40.0,
-        "cost": 25000,
         "manufacturer": "Streamlined Actuators"
       },
       "1": {
@@ -534,7 +501,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 40.0,
-        "cost": 50000,
         "manufacturer": "DeathRain Special"
       },
       "2": {
@@ -544,7 +510,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 40.0,
-        "cost": 62500,
         "manufacturer": "Knockout Knuckles"
       },
       "3": {
@@ -554,7 +519,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 40.0,
-        "cost": 82500,
         "manufacturer": "Swift Shot"
       },
       "4": {
@@ -564,7 +528,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 40.0,
-        "cost": 107500,
         "manufacturer": "Prizefighters"
       },
       "5": {
@@ -574,7 +537,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 40.0,
-        "cost": 175000,
         "manufacturer": "Solaris Arms"
       }
     },
@@ -599,7 +561,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 60.0,
-        "cost": 10000,
         "manufacturer": "Streamlined Actuators"
       },
       "1": {
@@ -609,7 +570,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 60.0,
-        "cost": 20000,
         "manufacturer": "DeathRain Special"
       },
       "2": {
@@ -619,7 +579,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 60.0,
-        "cost": 25000,
         "manufacturer": "Knockout Knuckles"
       },
       "3": {
@@ -629,7 +588,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 60.0,
-        "cost": 33000,
         "manufacturer": "Swift Shot"
       },
       "4": {
@@ -639,7 +597,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 60.0,
-        "cost": 43000,
         "manufacturer": "Prizefighters"
       },
       "5": {
@@ -649,7 +606,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 60.0,
-        "cost": 70000,
         "manufacturer": "Solaris Arms"
       }
     },
@@ -674,7 +630,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 48.0,
-        "cost": 20000,
         "manufacturer": "Streamlined Actuators"
       },
       "1": {
@@ -684,7 +639,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 48.0,
-        "cost": 40000,
         "manufacturer": "DeathRain Special"
       },
       "2": {
@@ -694,7 +648,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 48.0,
-        "cost": 50000,
         "manufacturer": "Knockout Knuckles"
       },
       "3": {
@@ -704,7 +657,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 48.0,
-        "cost": 66000,
         "manufacturer": "Swift Shot"
       },
       "4": {
@@ -714,7 +666,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 48.0,
-        "cost": 86000,
         "manufacturer": "Prizefighters"
       },
       "5": {
@@ -724,7 +675,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 48.0,
-        "cost": 140000,
         "manufacturer": "Solaris Arms"
       }
     },
@@ -750,7 +700,6 @@
         "maxRange": 3600.0,
         "rpm": 6.8,
         "speed": 240.0,
-        "cost": 600000,
         "manufacturer": "Valiant Systems"
       },
       "1": {
@@ -761,7 +710,6 @@
         "maxRange": 4500.0,
         "rpm": 7.5,
         "speed": 300.0,
-        "cost": 1200000,
         "manufacturer": "Luthien Armor Works"
       },
       "2": {
@@ -772,7 +720,6 @@
         "maxRange": 4725.0,
         "rpm": 7.9,
         "speed": 315.0,
-        "cost": 1500000,
         "manufacturer": "Marian Arms Incorporated"
       },
       "3": {
@@ -783,7 +730,6 @@
         "maxRange": 4950.0,
         "rpm": 8.3,
         "speed": 330.0,
-        "cost": 1980000,
         "manufacturer": "Luxor Mobile Battery 1"
       },
       "4": {
@@ -794,7 +740,6 @@
         "maxRange": 5175.0,
         "rpm": 8.8,
         "speed": 345.0,
-        "cost": 2580000,
         "manufacturer": "Menke Armor and Armament"
       },
       "5": {
@@ -805,7 +750,6 @@
         "maxRange": 5625.0,
         "rpm": 10.0,
         "speed": 375.0,
-        "cost": 4200000,
         "manufacturer": "Shigunga"
       }
     },
@@ -831,7 +775,6 @@
     "capacity": 10,
     "techBase": "InnerSphere",
     "dlc": 8,
-    "cost": 20000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.ArrowIV"
   },
@@ -850,7 +793,6 @@
     "capacity": 5,
     "techBase": "InnerSphere",
     "dlc": 8,
-    "cost": 20000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.ArrowIV"
   },
@@ -870,7 +812,6 @@
         "maxRange": 360.0,
         "rpm": 16.7,
         "speed": 480.0,
-        "cost": 200000,
         "manufacturer": "ChemJet"
       },
       "1": {
@@ -881,7 +822,6 @@
         "maxRange": 450.0,
         "rpm": 20.0,
         "speed": 600.0,
-        "cost": 400000,
         "manufacturer": "Armstrong Buster"
       },
       "2": {
@@ -892,7 +832,6 @@
         "maxRange": 472.5,
         "rpm": 21.1,
         "speed": 630.0,
-        "cost": 500000,
         "manufacturer": "Luxor-D Series"
       },
       "3": {
@@ -903,7 +842,6 @@
         "maxRange": 495.0,
         "rpm": 22.2,
         "speed": 660.0,
-        "cost": 660000,
         "manufacturer": "SarLon MaxiCannon"
       },
       "4": {
@@ -914,7 +852,6 @@
         "maxRange": 517.5,
         "rpm": 23.5,
         "speed": 690.0,
-        "cost": 860000,
         "manufacturer": "Defiance Killer Type T"
       },
       "5": {
@@ -925,7 +862,6 @@
         "maxRange": 562.5,
         "rpm": 26.7,
         "speed": 750.0,
-        "cost": 1400000,
         "manufacturer": "Western Heavy"
       }
     },
@@ -951,7 +887,6 @@
         "maxRange": 360.0,
         "rpm": 66.7,
         "speed": 760.0,
-        "cost": 200000,
         "manufacturer": "Armstrong Buster"
       },
       "1": {
@@ -962,7 +897,6 @@
         "maxRange": 450.0,
         "rpm": 80.0,
         "speed": 950.0,
-        "cost": 400000,
         "manufacturer": "Armstrong Buster"
       },
       "2": {
@@ -973,7 +907,6 @@
         "maxRange": 472.5,
         "rpm": 84.3,
         "speed": 997.5,
-        "cost": 500000,
         "manufacturer": "Armstrong Buster"
       },
       "3": {
@@ -984,7 +917,6 @@
         "maxRange": 495.0,
         "rpm": 88.9,
         "speed": 1045.0,
-        "cost": 660000,
         "manufacturer": "Armstrong Buster"
       },
       "4": {
@@ -995,7 +927,6 @@
         "maxRange": 517.5,
         "rpm": 94.2,
         "speed": 1092.5,
-        "cost": 920000,
         "manufacturer": "Armstrong Buster"
       },
       "5": {
@@ -1006,7 +937,6 @@
         "maxRange": 562.5,
         "rpm": 106.8,
         "speed": 1187.5,
-        "cost": 920000,
         "manufacturer": "Armstrong Buster"
       }
     },
@@ -1033,7 +963,6 @@
         "maxRange": 360.0,
         "rpm": 20.8,
         "speed": 640.0,
-        "cost": 200000,
         "manufacturer": "Quickscell"
       },
       "1": {
@@ -1044,7 +973,6 @@
         "maxRange": 450.0,
         "rpm": 25.0,
         "speed": 800.0,
-        "cost": 400000,
         "manufacturer": "Federated"
       },
       "2": {
@@ -1055,7 +983,6 @@
         "maxRange": 472.5,
         "rpm": 26.3,
         "speed": 840.0,
-        "cost": 500000,
         "manufacturer": "Mydron Model-B"
       },
       "3": {
@@ -1066,7 +993,6 @@
         "maxRange": 495.0,
         "rpm": 27.8,
         "speed": 880.0,
-        "cost": 660000,
         "manufacturer": "Kali Yama"
       },
       "4": {
@@ -1077,7 +1003,6 @@
         "maxRange": 517.5,
         "rpm": 29.4,
         "speed": 920.0,
-        "cost": 860000,
         "manufacturer": "Imperator-B"
       },
       "5": {
@@ -1088,7 +1013,6 @@
         "maxRange": 562.5,
         "rpm": 33.3,
         "speed": 1000.0,
-        "cost": 1400000,
         "manufacturer": "Skobel"
       }
     },
@@ -1114,7 +1038,6 @@
         "maxRange": 576.0,
         "rpm": 83.3,
         "speed": 960.0,
-        "cost": 75000,
         "manufacturer": "Deleon"
       },
       "1": {
@@ -1125,7 +1048,6 @@
         "maxRange": 720.0,
         "rpm": 100.0,
         "speed": 1200.0,
-        "cost": 150000,
         "manufacturer": "Armstrong"
       },
       "2": {
@@ -1136,7 +1058,6 @@
         "maxRange": 756.0,
         "rpm": 105.3,
         "speed": 1260.0,
-        "cost": 187500,
         "manufacturer": "Oriente"
       },
       "3": {
@@ -1147,7 +1068,6 @@
         "maxRange": 792.0,
         "rpm": 111.1,
         "speed": 1320.0,
-        "cost": 247500,
         "manufacturer": "SarLon"
       },
       "4": {
@@ -1158,7 +1078,6 @@
         "maxRange": 828.0,
         "rpm": 117.6,
         "speed": 1380.0,
-        "cost": 375000,
         "manufacturer": "Defiance"
       },
       "5": {
@@ -1169,7 +1088,6 @@
         "maxRange": 900.0,
         "rpm": 133.3,
         "speed": 1500.0,
-        "cost": 525000,
         "manufacturer": "Stormvanger Assemblies"
       }
     },
@@ -1195,7 +1113,6 @@
         "maxRange": 216.0,
         "rpm": 10.4,
         "speed": 320.0,
-        "cost": 300000,
         "manufacturer": "ChemJet 185mm"
       },
       "1": {
@@ -1206,7 +1123,6 @@
         "maxRange": 270.0,
         "rpm": 12.5,
         "speed": 400.0,
-        "cost": 600000,
         "manufacturer": "Armstrong Requiem"
       },
       "2": {
@@ -1217,7 +1133,6 @@
         "maxRange": 283.5,
         "rpm": 13.2,
         "speed": 420.0,
-        "cost": 750000,
         "manufacturer": "Luxor Devastator"
       },
       "3": {
@@ -1228,7 +1143,6 @@
         "maxRange": 297.0,
         "rpm": 13.9,
         "speed": 440.0,
-        "cost": 990000,
         "manufacturer": "Pontiac 100"
       },
       "4": {
@@ -1239,7 +1153,6 @@
         "maxRange": 310.5,
         "rpm": 14.7,
         "speed": 460.0,
-        "cost": 1500000,
         "manufacturer": "Defiance Mech Hunter"
       },
       "5": {
@@ -1250,7 +1163,6 @@
         "maxRange": 337.5,
         "rpm": 16.7,
         "speed": 500.0,
-        "cost": 2100000,
         "manufacturer": "Deathgiver"
       }
     },
@@ -1276,7 +1188,6 @@
         "maxRange": 216.0,
         "rpm": 41.7,
         "speed": 560.0,
-        "cost": 420000,
         "manufacturer": "Armstrong Requiem"
       },
       "1": {
@@ -1287,7 +1198,6 @@
         "maxRange": 270.0,
         "rpm": 50.0,
         "speed": 700.0,
-        "cost": 600000,
         "manufacturer": "Armstrong Requiem"
       },
       "2": {
@@ -1298,7 +1208,6 @@
         "maxRange": 283.5,
         "rpm": 52.6,
         "speed": 735.0,
-        "cost": 810000,
         "manufacturer": "Armstrong Requiem"
       },
       "3": {
@@ -1309,7 +1218,6 @@
         "maxRange": 297.0,
         "rpm": 55.6,
         "speed": 770.0,
-        "cost": 1080000,
         "manufacturer": "Armstrong Requiem"
       },
       "4": {
@@ -1320,7 +1228,6 @@
         "maxRange": 310.5,
         "rpm": 58.8,
         "speed": 805.0,
-        "cost": 1380000,
         "manufacturer": "Armstrong Requiem"
       },
       "5": {
@@ -1331,7 +1238,6 @@
         "maxRange": 337.5,
         "rpm": 66.7,
         "speed": 875.0,
-        "cost": 2100000,
         "manufacturer": "Armstrong Requiem"
       }
     },
@@ -1358,7 +1264,6 @@
         "maxRange": 216.0,
         "rpm": 13.0,
         "speed": 480.0,
-        "cost": 300000,
         "manufacturer": "Quickscell"
       },
       "1": {
@@ -1369,7 +1274,6 @@
         "maxRange": 270.0,
         "rpm": 15.6,
         "speed": 600.0,
-        "cost": 600000,
         "manufacturer": "Zeus-36 Mark III"
       },
       "2": {
@@ -1380,7 +1284,6 @@
         "maxRange": 283.5,
         "rpm": 16.4,
         "speed": 630.0,
-        "cost": 750000,
         "manufacturer": "Mydron Model-A"
       },
       "3": {
@@ -1391,7 +1294,6 @@
         "maxRange": 297.0,
         "rpm": 17.4,
         "speed": 660.0,
-        "cost": 990000,
         "manufacturer": "Kali Yama Big Bore"
       },
       "4": {
@@ -1402,7 +1304,6 @@
         "maxRange": 310.5,
         "rpm": 18.4,
         "speed": 690.0,
-        "cost": 1290000,
         "manufacturer": "Imperator Zeta"
       },
       "5": {
@@ -1413,7 +1314,6 @@
         "maxRange": 337.5,
         "rpm": 20.8,
         "speed": 750.0,
-        "cost": 2100000,
         "manufacturer": "RNG Ranger"
       }
     },
@@ -1439,7 +1339,6 @@
         "maxRange": 576.0,
         "rpm": 333.3,
         "speed": 1120.0,
-        "cost": 105000,
         "manufacturer": "Armstrong"
       },
       "1": {
@@ -1450,7 +1349,6 @@
         "maxRange": 720.0,
         "rpm": 400.0,
         "speed": 1400.0,
-        "cost": 150000,
         "manufacturer": "Armstrong"
       },
       "2": {
@@ -1461,7 +1359,6 @@
         "maxRange": 756.0,
         "rpm": 422.5,
         "speed": 1470.0,
-        "cost": 195000,
         "manufacturer": "Armstrong"
       },
       "3": {
@@ -1472,7 +1369,6 @@
         "maxRange": 792.0,
         "rpm": 444.4,
         "speed": 1540.0,
-        "cost": 285000,
         "manufacturer": "Armstrong"
       },
       "4": {
@@ -1483,7 +1379,6 @@
         "maxRange": 828.0,
         "rpm": 468.8,
         "speed": 1610.0,
-        "cost": 375000,
         "manufacturer": "Armstrong"
       },
       "5": {
@@ -1494,7 +1389,6 @@
         "maxRange": 900.0,
         "rpm": 535.7,
         "speed": 1750.0,
-        "cost": 487500,
         "manufacturer": "Armstrong"
       }
     },
@@ -1521,7 +1415,6 @@
         "maxRange": 576.0,
         "rpm": 99.7,
         "speed": 960.0,
-        "cost": 75000,
         "manufacturer": "Quickscell"
       },
       "1": {
@@ -1532,7 +1425,6 @@
         "maxRange": 720.0,
         "rpm": 119.5,
         "speed": 1200.0,
-        "cost": 150000,
         "manufacturer": "ZeusBolt"
       },
       "2": {
@@ -1543,7 +1435,6 @@
         "maxRange": 756.0,
         "rpm": 125.8,
         "speed": 1260.0,
-        "cost": 187500,
         "manufacturer": "Mydron Model D"
       },
       "3": {
@@ -1554,7 +1445,6 @@
         "maxRange": 792.0,
         "rpm": 132.7,
         "speed": 1320.0,
-        "cost": 247500,
         "manufacturer": "Whirlwind-L"
       },
       "4": {
@@ -1565,7 +1455,6 @@
         "maxRange": 828.0,
         "rpm": 140.5,
         "speed": 1380.0,
-        "cost": 375000,
         "manufacturer": "Imperator Smoothy-2"
       },
       "5": {
@@ -1576,7 +1465,6 @@
         "maxRange": 900.0,
         "rpm": 159.2,
         "speed": 1500.0,
-        "cost": 525000,
         "manufacturer": "Skobel"
       }
     },
@@ -1602,7 +1490,6 @@
         "maxRange": 496.0,
         "rpm": 33.3,
         "speed": 760.0,
-        "cost": 125000,
         "manufacturer": "Deleon"
       },
       "1": {
@@ -1613,7 +1500,6 @@
         "maxRange": 620.0,
         "rpm": 40.0,
         "speed": 950.0,
-        "cost": 250000,
         "manufacturer": "Armstrong J11"
       },
       "2": {
@@ -1624,7 +1510,6 @@
         "maxRange": 651.0,
         "rpm": 42.1,
         "speed": 997.5,
-        "cost": 312500,
         "manufacturer": "Oriente"
       },
       "3": {
@@ -1635,7 +1520,6 @@
         "maxRange": 682.0,
         "rpm": 44.4,
         "speed": 1045.0,
-        "cost": 412500,
         "manufacturer": "Pontiac Light"
       },
       "4": {
@@ -1646,7 +1530,6 @@
         "maxRange": 713.0,
         "rpm": 47.1,
         "speed": 1092.5,
-        "cost": 625000,
         "manufacturer": "Defiance Type J"
       },
       "5": {
@@ -1657,7 +1540,6 @@
         "maxRange": 775.0,
         "rpm": 53.3,
         "speed": 1187.5,
-        "cost": 875000,
         "manufacturer": "Arcturan Arms Longarm"
       }
     },
@@ -1683,7 +1565,6 @@
         "maxRange": 496.0,
         "rpm": 133.3,
         "speed": 880.0,
-        "cost": 162500,
         "manufacturer": "Armstrong J11"
       },
       "1": {
@@ -1694,7 +1575,6 @@
         "maxRange": 620.0,
         "rpm": 160.0,
         "speed": 1100.0,
-        "cost": 250000,
         "manufacturer": "Armstrong J11"
       },
       "2": {
@@ -1705,7 +1585,6 @@
         "maxRange": 651.0,
         "rpm": 168.5,
         "speed": 1155.0,
-        "cost": 312500,
         "manufacturer": "Armstrong J11"
       },
       "3": {
@@ -1716,7 +1595,6 @@
         "maxRange": 682.0,
         "rpm": 181.8,
         "speed": 1232.0,
-        "cost": 400000,
         "manufacturer": "Armstrong J11"
       },
       "4": {
@@ -1727,7 +1605,6 @@
         "maxRange": 713.0,
         "rpm": 200.0,
         "speed": 1320.0,
-        "cost": 687500,
         "manufacturer": "Armstrong J11"
       },
       "5": {
@@ -1738,7 +1615,6 @@
         "maxRange": 775.0,
         "rpm": 222.2,
         "speed": 1408.0,
-        "cost": 875000,
         "manufacturer": "Armstrong J11"
       }
     },
@@ -1765,7 +1641,6 @@
         "maxRange": 496.0,
         "rpm": 40.3,
         "speed": 880.0,
-        "cost": 125000,
         "manufacturer": "Quickscell"
       },
       "1": {
@@ -1776,7 +1651,6 @@
         "maxRange": 620.0,
         "rpm": 48.4,
         "speed": 1100.0,
-        "cost": 250000,
         "manufacturer": "ZeusBolt"
       },
       "2": {
@@ -1787,7 +1661,6 @@
         "maxRange": 651.0,
         "rpm": 50.9,
         "speed": 1155.0,
-        "cost": 312500,
         "manufacturer": "Mydron Model C"
       },
       "3": {
@@ -1798,7 +1671,6 @@
         "maxRange": 682.0,
         "rpm": 53.8,
         "speed": 1210.0,
-        "cost": 412500,
         "manufacturer": "GM-Whirlwind"
       },
       "4": {
@@ -1809,7 +1681,6 @@
         "maxRange": 713.0,
         "rpm": 56.9,
         "speed": 1265.0,
-        "cost": 625000,
         "manufacturer": "Imperator-A"
       },
       "5": {
@@ -1820,7 +1691,6 @@
         "maxRange": 775.0,
         "rpm": 64.5,
         "speed": 1375.0,
-        "cost": 875000,
         "manufacturer": "Lonworth Type V"
       }
     },
@@ -1845,7 +1715,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 15.5,
-        "cost": 25000,
         "manufacturer": "Death's Embrace"
       },
       "1": {
@@ -1855,7 +1724,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 16.6,
-        "cost": 50000,
         "manufacturer": "Defiance Type 1"
       },
       "2": {
@@ -1865,7 +1733,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 17.1,
-        "cost": 62500,
         "manufacturer": "Gibson Federated"
       },
       "3": {
@@ -1875,7 +1742,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 17.8,
-        "cost": 82500,
         "manufacturer": "Coventry StarBlade"
       },
       "4": {
@@ -1885,7 +1751,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 18.5,
-        "cost": 107500,
         "manufacturer": "Hesperus Special"
       },
       "5": {
@@ -1895,7 +1760,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 20.0,
-        "cost": 175000,
         "manufacturer": "Defiance Type 5"
       }
     },
@@ -1919,7 +1783,6 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
-    "cost": 400000,
     "description": "A cutting edge sensor enhancement suite built for arena combat. It amplifies a ‘Mech’s detection capabilities. Extends base sensor range and allows for the detection of units outside line of sight within the probe’s enhanced sensor range. Reduces the HUD disruption caused by hostile ECMs. Compatible with Active Probe hardpoints.",
     "probe": {
       "range": 550,
@@ -1941,7 +1804,6 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
-    "cost": 200000,
     "description": "This prototype electronic warfare suite shields the 'Mech from hostile sensors and homing missiles, serving as an effective defensive tool in arena combat. In counter mode, it suppresses sensors and disables hostile ECMs within its range. Compatible with ECM hardpoints",
     "ecm": {
       "disruptRange": 50,
@@ -1968,7 +1830,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 14.8,
-        "cost": 35000,
         "manufacturer": "Death's Embrace"
       },
       "1": {
@@ -1978,7 +1839,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 15.8,
-        "cost": 70000,
         "manufacturer": "Defiance Type 1"
       },
       "2": {
@@ -1988,7 +1848,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 16.3,
-        "cost": 87500,
         "manufacturer": "Johnston Cleaver-II"
       },
       "3": {
@@ -1998,7 +1857,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 16.9,
-        "cost": 115500,
         "manufacturer": "Coventry StarBlade"
       },
       "4": {
@@ -2008,7 +1866,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 17.5,
-        "cost": 150500,
         "manufacturer": "Gibson-Kallon"
       },
       "5": {
@@ -2018,7 +1875,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 18.9,
-        "cost": 245000,
         "manufacturer": "Defiance Type 7"
       }
     },
@@ -2042,7 +1898,6 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
-    "cost": 400000,
     "description": "A top of the line sensor enhancement suite that augments a 'Mech’s detection capabilities. Extends base sensor range, and allows for the detection of units outside of line of sight within the probe's enhanced sensor range. Reduces the HUD distortion caused by hostile ECMs. Compatible with Active Probe hardpoints.",
     "probe": {
       "range": 450,
@@ -2065,7 +1920,6 @@
         "range": 360.0,
         "maxRange": 540.0,
         "rpm": 7.1,
-        "cost": 100000,
         "manufacturer": "Magna Mk.III"
       },
       "1": {
@@ -2075,7 +1929,6 @@
         "range": 450.0,
         "maxRange": 675.0,
         "rpm": 8.6,
-        "cost": 200000,
         "manufacturer": "Magna Mk.III"
       },
       "2": {
@@ -2085,7 +1938,6 @@
         "range": 495.0,
         "maxRange": 742.5,
         "rpm": 9.0,
-        "cost": 280000,
         "manufacturer": "Magna Mk.III"
       },
       "3": {
@@ -2095,7 +1947,6 @@
         "range": 517.5,
         "maxRange": 776.2,
         "rpm": 9.5,
-        "cost": 400000,
         "manufacturer": "Magna Mk.III"
       },
       "4": {
@@ -2105,7 +1956,6 @@
         "range": 540.0,
         "maxRange": 810.0,
         "rpm": 10.1,
-        "cost": 480000,
         "manufacturer": "Magna Mk.III"
       },
       "5": {
@@ -2115,7 +1965,6 @@
         "range": 562.5,
         "maxRange": 843.8,
         "rpm": 11.4,
-        "cost": 650000,
         "manufacturer": "Magna Mk.III"
       }
     },
@@ -2138,7 +1987,6 @@
     "tiers": null,
     "capacity": 2000,
     "techBase": "Clan",
-    "cost": 4000,
     "explosionDamagePerRound": 0.024,
     "ammoType": "Ammo.Ballistic.AMS.Clan"
   },
@@ -2156,7 +2004,6 @@
     "tiers": null,
     "capacity": 1000,
     "techBase": "Clan",
-    "cost": 2000,
     "explosionDamagePerRound": 0.024,
     "ammoType": "Ammo.Ballistic.AMS.Clan"
   },
@@ -2176,7 +2023,6 @@
         "maxRange": 1375.0,
         "rpm": 22.5,
         "speed": 350.0,
-        "cost": 4900000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2202,7 +2048,6 @@
         "maxRange": 1375.0,
         "rpm": 20.8,
         "speed": 350.0,
-        "cost": 840000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2228,7 +2073,6 @@
         "maxRange": 1375.0,
         "rpm": 21.6,
         "speed": 350.0,
-        "cost": 2800000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2254,7 +2098,6 @@
         "maxRange": 1375.0,
         "rpm": 22.4,
         "speed": 350.0,
-        "cost": 3850000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2279,7 +2122,6 @@
         "range": 300.0,
         "maxRange": 300.0,
         "rpm": 0.0,
-        "cost": 800000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2305,7 +2147,6 @@
         "maxRange": 5625.0,
         "rpm": 9.1,
         "speed": 375.0,
-        "cost": 4200000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2331,7 +2172,6 @@
     "capacity": 10,
     "techBase": "Clan",
     "dlc": 8,
-    "cost": 20000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.ArrowIV.Clan"
   },
@@ -2350,7 +2190,6 @@
     "capacity": 5,
     "techBase": "Clan",
     "dlc": 8,
-    "cost": 20000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.ArrowIV.Clan"
   },
@@ -2369,7 +2208,6 @@
         "range": 1012.5,
         "maxRange": 1518.8,
         "rpm": 14.9,
-        "cost": 2100000,
         "manufacturer": "Series 7Ja"
       }
     },
@@ -2392,7 +2230,6 @@
         "range": 562.5,
         "maxRange": 843.8,
         "rpm": 15.7,
-        "cost": 560000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2416,7 +2253,6 @@
         "maxRange": 2025.0,
         "rpm": 16.0,
         "speed": 2057.0,
-        "cost": 2450000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2439,7 +2275,6 @@
         "range": 375.0,
         "maxRange": 562.5,
         "rpm": 25.7,
-        "cost": 157500,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2462,7 +2297,6 @@
         "range": 112.5,
         "maxRange": 112.5,
         "rpm": 600.0,
-        "cost": 105000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2486,7 +2320,6 @@
         "maxRange": 825.0,
         "rpm": 13.3,
         "speed": 2500.0,
-        "cost": 7200000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2511,7 +2344,6 @@
         "range": 562.5,
         "maxRange": 843.8,
         "rpm": 13.4,
-        "cost": 1750000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2534,7 +2366,6 @@
         "range": 192.0,
         "maxRange": 384.0,
         "rpm": 600.0,
-        "cost": 105000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2559,7 +2390,6 @@
         "range": 337.5,
         "maxRange": 675.0,
         "rpm": 14.9,
-        "cost": 700000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2582,7 +2412,6 @@
         "range": 187.5,
         "maxRange": 281.2,
         "rpm": 22.1,
-        "cost": 140000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2606,7 +2435,6 @@
         "maxRange": 675.0,
         "rpm": 44.4,
         "speed": 1125.0,
-        "cost": 3150000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2632,7 +2460,6 @@
         "maxRange": 675.0,
         "rpm": 35.5,
         "speed": 1000.0,
-        "cost": 3150000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2658,7 +2485,6 @@
         "maxRange": 675.0,
         "rpm": 40.0,
         "speed": 1125.0,
-        "cost": 3150000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2684,7 +2510,6 @@
         "maxRange": 1125.0,
         "rpm": 160.0,
         "speed": 2125.0,
-        "cost": 1050000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2710,7 +2535,6 @@
         "maxRange": 450.0,
         "rpm": 26.7,
         "speed": 1000.0,
-        "cost": 4200000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2736,7 +2560,6 @@
         "maxRange": 450.0,
         "rpm": 20.8,
         "speed": 625.0,
-        "cost": 4200000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2762,7 +2585,6 @@
         "maxRange": 450.0,
         "rpm": 23.5,
         "speed": 1000.0,
-        "cost": 4200000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2788,7 +2610,6 @@
         "maxRange": 1125.0,
         "rpm": 100.0,
         "speed": 1875.0,
-        "cost": 1050000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2814,7 +2635,6 @@
         "maxRange": 1125.0,
         "rpm": 133.3,
         "speed": 2250.0,
-        "cost": 1050000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2840,7 +2660,6 @@
         "maxRange": 900.0,
         "rpm": 88.9,
         "speed": 1750.0,
-        "cost": 1750000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2866,7 +2685,6 @@
         "maxRange": 900.0,
         "rpm": 64.5,
         "speed": 1500.0,
-        "cost": 1750000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2892,7 +2710,6 @@
         "maxRange": 900.0,
         "rpm": 100.0,
         "speed": 1750.0,
-        "cost": 1750000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2918,7 +2735,6 @@
         "maxRange": 1125.0,
         "rpm": 19.4,
         "speed": 315.0,
-        "cost": 1400000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2944,7 +2760,6 @@
         "maxRange": 1125.0,
         "rpm": 19.4,
         "speed": 315.0,
-        "cost": 2800000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2970,7 +2785,6 @@
         "maxRange": 1125.0,
         "rpm": 20.8,
         "speed": 315.0,
-        "cost": 2450000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -2996,7 +2810,6 @@
         "maxRange": 1125.0,
         "rpm": 20.8,
         "speed": 315.0,
-        "cost": 3850000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3022,7 +2835,6 @@
         "maxRange": 1125.0,
         "rpm": 22.4,
         "speed": 315.0,
-        "cost": 3500000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3048,7 +2860,6 @@
         "maxRange": 1125.0,
         "rpm": 22.4,
         "speed": 315.0,
-        "cost": 4900000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3074,7 +2885,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 315.0,
-        "cost": 420000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3100,7 +2910,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 315.0,
-        "cost": 840000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3125,7 +2934,6 @@
         "range": 750.0,
         "maxRange": 1125.0,
         "rpm": 15.7,
-        "cost": 2450000,
         "manufacturer": "Kolibri Delta Series"
       }
     },
@@ -3148,7 +2956,6 @@
         "range": 576.0,
         "maxRange": 864.0,
         "rpm": 600.0,
-        "cost": 105000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3173,7 +2980,6 @@
         "range": 240.0,
         "maxRange": 480.0,
         "rpm": 600.0,
-        "cost": 70000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3198,7 +3004,6 @@
         "range": 450.0,
         "maxRange": 675.0,
         "rpm": 23.5,
-        "cost": 840000,
         "manufacturer": "Albion MMA Complex"
       }
     },
@@ -3222,7 +3027,6 @@
         "maxRange": 450.0,
         "rpm": 27.4,
         "speed": 1000.0,
-        "cost": 700000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3248,7 +3052,6 @@
         "maxRange": 337.5,
         "rpm": 28.6,
         "speed": 500.0,
-        "cost": 140000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3274,7 +3077,6 @@
         "maxRange": 337.5,
         "rpm": 28.6,
         "speed": 500.0,
-        "cost": 280000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3300,7 +3102,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 840000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3326,7 +3127,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 1120000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3352,7 +3152,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 1120000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3378,7 +3177,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 1470000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3403,7 +3201,6 @@
         "range": 275.0,
         "maxRange": 412.5,
         "rpm": 37.2,
-        "cost": 224000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3427,7 +3224,6 @@
         "maxRange": 450.0,
         "rpm": 33.3,
         "speed": 500.0,
-        "cost": 280000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3453,7 +3249,6 @@
         "maxRange": 450.0,
         "rpm": 30.3,
         "speed": 560.0,
-        "cost": 1120000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3479,7 +3274,6 @@
         "maxRange": 450.0,
         "rpm": 30.3,
         "speed": 560.0,
-        "cost": 1470000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },
@@ -3505,7 +3299,6 @@
         "maxRange": 675.0,
         "rpm": 33.3,
         "speed": 1125.0,
-        "cost": 3150000,
         "manufacturer": "Type DL"
       }
     },
@@ -3531,7 +3324,6 @@
         "maxRange": 675.0,
         "rpm": 26.7,
         "speed": 1000.0,
-        "cost": 3150000,
         "manufacturer": "Type 9"
       }
     },
@@ -3557,7 +3349,6 @@
         "maxRange": 1012.5,
         "rpm": 133.3,
         "speed": 2125.0,
-        "cost": 1050000,
         "manufacturer": "Type DL"
       }
     },
@@ -3583,7 +3374,6 @@
         "maxRange": 450.0,
         "rpm": 20.0,
         "speed": 1000.0,
-        "cost": 4200000,
         "manufacturer": "Type DL"
       }
     },
@@ -3609,7 +3399,6 @@
         "maxRange": 450.0,
         "rpm": 16.7,
         "speed": 625.0,
-        "cost": 4200000,
         "manufacturer": "Type 9"
       }
     },
@@ -3635,7 +3424,6 @@
         "maxRange": 1012.5,
         "rpm": 133.3,
         "speed": 1687.5,
-        "cost": 1050000,
         "manufacturer": "Type 9"
       }
     },
@@ -3661,7 +3449,6 @@
         "maxRange": 787.5,
         "rpm": 76.1,
         "speed": 1750.0,
-        "cost": 1750000,
         "manufacturer": "Type DL"
       }
     },
@@ -3687,7 +3474,6 @@
         "maxRange": 787.5,
         "rpm": 53.3,
         "speed": 1625.0,
-        "cost": 1750000,
         "manufacturer": "Type 9"
       }
     },
@@ -3711,7 +3497,6 @@
     ],
     "tiers": null,
     "techBase": "Clan",
-    "cost": 400000,
     "description": "A top of the line sensor enhancement suite that augments a 'Mech’s detection capabilities. Extends base sensor range, and allows for the detection of units outside of line of sight within the probe's enhanced sensor range. Reduces the HUD distortion caused by hostile ECMs.",
     "probe": {
       "range": 450,
@@ -3735,7 +3520,6 @@
     "heatCapacity": 2.0,
     "tiers": null,
     "techBase": "Clan",
-    "cost": 48000,
     "description": "A double heat sink. More powerful but bulkier than standard heat sinks."
   },
   "ClanECM": {
@@ -3751,7 +3535,6 @@
     ],
     "tiers": null,
     "techBase": "Clan",
-    "cost": 400000,
     "description": "An advanced suite of enhanced electronic countermeasures that, by default, shields friendly units within its disrupt range from hostile sensors and homing missiles. Hostiles within the disrupt range have their sensors further suppressed, and suffer accuracy penalties, against all units. Can be toggled into counter mode, which disables all hostile ECMs within its range. Compatible with ECM hardpoints.",
     "ecm": {
       "disruptRange": 220,
@@ -3777,7 +3560,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan"
   },
@@ -3795,7 +3577,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC10.Clan"
   },
@@ -3813,7 +3594,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan"
   },
@@ -3831,7 +3611,6 @@
     "tiers": null,
     "capacity": 10,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC20.Clan"
   },
@@ -3849,7 +3628,6 @@
     "tiers": null,
     "capacity": 180,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan"
   },
@@ -3867,7 +3645,6 @@
     "tiers": null,
     "capacity": 90,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC2.Clan"
   },
@@ -3885,7 +3662,6 @@
     "tiers": null,
     "capacity": 80,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan"
   },
@@ -3903,7 +3679,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Ultra.AC5.Clan"
   },
@@ -3921,7 +3696,6 @@
     "tiers": null,
     "capacity": 316,
     "techBase": "Clan",
-    "cost": 75000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.ATM"
   },
@@ -3939,7 +3713,6 @@
     "tiers": null,
     "capacity": 158,
     "techBase": "Clan",
-    "cost": 75000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.ATM"
   },
@@ -3957,7 +3730,6 @@
     "tiers": null,
     "capacity": 32,
     "techBase": "Clan",
-    "cost": 18000,
     "ammoType": "Ammo.Ballistic.Gauss.Clan"
   },
   "Clan_GaussRifle_Half_AmmoEquipment": {
@@ -3974,7 +3746,6 @@
     "tiers": null,
     "capacity": 16,
     "techBase": "Clan",
-    "cost": 18000,
     "ammoType": "Ammo.Ballistic.Gauss.Clan"
   },
   "Clan_HeavyMachineGun_AmmoEquipment": {
@@ -3991,7 +3762,6 @@
     "tiers": null,
     "capacity": 2500,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 0.04,
     "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan"
   },
@@ -4009,7 +3779,6 @@
     "tiers": null,
     "capacity": 1250,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 0.04,
     "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan"
   },
@@ -4027,7 +3796,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
   },
@@ -4045,7 +3813,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 10.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX10.Clan"
   },
@@ -4063,7 +3830,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
   },
@@ -4081,7 +3847,6 @@
     "tiers": null,
     "capacity": 10,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20.Clan"
   },
@@ -4099,7 +3864,6 @@
     "tiers": null,
     "capacity": 180,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
   },
@@ -4117,7 +3881,6 @@
     "tiers": null,
     "capacity": 90,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2.Clan"
   },
@@ -4135,7 +3898,6 @@
     "tiers": null,
     "capacity": 80,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
   },
@@ -4153,7 +3915,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5.Clan"
   },
@@ -4171,7 +3932,6 @@
     "tiers": null,
     "capacity": 440,
     "techBase": "Clan",
-    "cost": 60000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.LRM.Clan"
   },
@@ -4189,7 +3949,6 @@
     "tiers": null,
     "capacity": 440,
     "techBase": "Clan",
-    "cost": 120000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
   },
@@ -4207,7 +3966,6 @@
     "tiers": null,
     "capacity": 220,
     "techBase": "Clan",
-    "cost": 60000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.LRM.Clan"
   },
@@ -4225,7 +3983,6 @@
     "tiers": null,
     "capacity": 220,
     "techBase": "Clan",
-    "cost": 120000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.LRM.Artemis.Clan"
   },
@@ -4243,7 +4000,6 @@
     "tiers": null,
     "capacity": 7500,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 0.04,
     "ammoType": "Ammo.Ballistic.MachineGun.Light.Clan"
   },
@@ -4261,7 +4017,6 @@
     "tiers": null,
     "capacity": 3750,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 0.04,
     "ammoType": "Ammo.Ballistic.MachineGun.Light.Clan"
   },
@@ -4279,7 +4034,6 @@
     "tiers": null,
     "capacity": 5200,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 0.04,
     "ammoType": "Ammo.Ballistic.MachineGun.Clan"
   },
@@ -4297,7 +4051,6 @@
     "tiers": null,
     "capacity": 2600,
     "techBase": "Clan",
-    "cost": 18000,
     "explosionDamagePerRound": 0.04,
     "ammoType": "Ammo.Ballistic.MachineGun.Clan"
   },
@@ -4315,7 +4068,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "Clan",
-    "cost": 12000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Missile.NARC.Clan"
   },
@@ -4333,7 +4085,6 @@
     "tiers": null,
     "capacity": 10,
     "techBase": "Clan",
-    "cost": 6000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Missile.NARC.Clan"
   },
@@ -4351,7 +4102,6 @@
     "tiers": null,
     "capacity": 320,
     "techBase": "Clan",
-    "cost": 54000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.SRM.Clan"
   },
@@ -4369,7 +4119,6 @@
     "tiers": null,
     "capacity": 320,
     "techBase": "Clan",
-    "cost": 108000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
   },
@@ -4387,7 +4136,6 @@
     "tiers": null,
     "capacity": 160,
     "techBase": "Clan",
-    "cost": 108000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.SRM.Artemis.Clan"
   },
@@ -4405,7 +4153,6 @@
     "tiers": null,
     "capacity": 160,
     "techBase": "Clan",
-    "cost": 54000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.SRM.Clan"
   },
@@ -4423,7 +4170,6 @@
     "tiers": null,
     "capacity": 320,
     "techBase": "Clan",
-    "cost": 108000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Missile.SRM.Streak.Clan"
   },
@@ -4441,7 +4187,6 @@
     "tiers": null,
     "capacity": 160,
     "techBase": "Clan",
-    "cost": 108000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Missile.SRM.Streak.Clan"
   },
@@ -4460,7 +4205,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 26.7,
-        "cost": 20000,
         "manufacturer": "Tortuga Heart Ripper"
       },
       "1": {
@@ -4470,7 +4214,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 30.0,
-        "cost": 40000,
         "manufacturer": "Redjack Slasher"
       },
       "2": {
@@ -4480,7 +4223,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 32.0,
-        "cost": 50000,
         "manufacturer": "Tekko Kagi Test Type"
       },
       "3": {
@@ -4490,7 +4232,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 34.3,
-        "cost": 66000,
         "manufacturer": "Lawgiver Raptor Talon"
       },
       "4": {
@@ -4500,7 +4241,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 36.9,
-        "cost": 86000,
         "manufacturer": "BLC Lion's Claw"
       },
       "5": {
@@ -4510,7 +4250,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 43.6,
-        "cost": 140000,
         "manufacturer": "Teng Stables Special"
       }
     },
@@ -4535,7 +4274,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 18.2,
-        "cost": 30000,
         "manufacturer": "Glasgow Special"
       },
       "1": {
@@ -4544,8 +4282,7 @@
         "cooldown": 3.05,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 19.7,
-        "cost": 60000
+        "rpm": 19.7
       },
       "2": {
         "damage": 72.5,
@@ -4554,7 +4291,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 20.5,
-        "cost": 75000,
         "manufacturer": "Norse-Storm Gram"
       },
       "3": {
@@ -4564,7 +4300,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 21.4,
-        "cost": 99000,
         "manufacturer": "Dunnottar Industries"
       },
       "4": {
@@ -4574,7 +4309,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 22.4,
-        "cost": 129000,
         "manufacturer": "Black Star Executioner"
       },
       "5": {
@@ -4584,7 +4318,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 24.7,
-        "cost": 210000,
         "manufacturer": "Northwind Legacy Type 0"
       }
     },
@@ -4610,7 +4343,6 @@
     "heatCapacity": 2.0,
     "tiers": null,
     "techBase": "InnerSphere",
-    "cost": 12000,
     "description": "A double heat sink. More powerful but bulkier than standard heat sinks."
   },
   "ERLargeLaser": {
@@ -4628,7 +4360,6 @@
         "range": 540.0,
         "maxRange": 810.0,
         "rpm": 9.5,
-        "cost": 200000,
         "manufacturer": "Blazefire Sweetshot"
       },
       "1": {
@@ -4638,7 +4369,6 @@
         "range": 675.0,
         "maxRange": 1012.5,
         "rpm": 11.4,
-        "cost": 400000,
         "manufacturer": "Cyclops XII"
       },
       "2": {
@@ -4648,7 +4378,6 @@
         "range": 708.8,
         "maxRange": 1063.1,
         "rpm": 11.7,
-        "cost": 500000,
         "manufacturer": "Martell"
       },
       "3": {
@@ -4658,7 +4387,6 @@
         "range": 742.5,
         "maxRange": 1113.8,
         "rpm": 12.0,
-        "cost": 660000,
         "manufacturer": "Diverse Optics Sunbeam"
       },
       "4": {
@@ -4668,7 +4396,6 @@
         "range": 776.2,
         "maxRange": 1164.4,
         "rpm": 12.4,
-        "cost": 860000,
         "manufacturer": "RAMtech 1200X"
       },
       "5": {
@@ -4678,7 +4405,6 @@
         "range": 843.8,
         "maxRange": 1265.6,
         "rpm": 13.4,
-        "cost": 1400000,
         "manufacturer": "Newhart"
       }
     },
@@ -4701,7 +4427,6 @@
         "range": 540.0,
         "maxRange": 810.0,
         "rpm": 13.9,
-        "cost": 200000,
         "manufacturer": "Maxell"
       },
       "1": {
@@ -4711,7 +4436,6 @@
         "range": 675.0,
         "maxRange": 1012.5,
         "rpm": 16.7,
-        "cost": 400000,
         "manufacturer": "Victory Nickel Alloy"
       },
       "2": {
@@ -4721,7 +4445,6 @@
         "range": 708.8,
         "maxRange": 1063.1,
         "rpm": 17.1,
-        "cost": 500000,
         "manufacturer": "Firmir UltraLase"
       },
       "3": {
@@ -4731,7 +4454,6 @@
         "range": 742.5,
         "maxRange": 1113.8,
         "rpm": 17.5,
-        "cost": 660000,
         "manufacturer": "Defiance"
       },
       "4": {
@@ -4741,7 +4463,6 @@
         "range": 776.2,
         "maxRange": 1164.4,
         "rpm": 18.1,
-        "cost": 860000,
         "manufacturer": "Exo Star"
       },
       "5": {
@@ -4751,7 +4472,6 @@
         "range": 843.8,
         "maxRange": 1265.6,
         "rpm": 19.6,
-        "cost": 1400000,
         "manufacturer": "Blankenburg"
       }
     },
@@ -4775,7 +4495,6 @@
         "range": 288.0,
         "maxRange": 432.0,
         "rpm": 12.5,
-        "cost": 40000,
         "manufacturer": "Bright-Bloom"
       },
       "1": {
@@ -4785,7 +4504,6 @@
         "range": 360.0,
         "maxRange": 540.0,
         "rpm": 15.0,
-        "cost": 80000,
         "manufacturer": "Magna Mk VI"
       },
       "2": {
@@ -4795,7 +4513,6 @@
         "range": 378.0,
         "maxRange": 567.0,
         "rpm": 15.4,
-        "cost": 100000,
         "manufacturer": "Bright-Blossom"
       },
       "3": {
@@ -4805,7 +4522,6 @@
         "range": 396.0,
         "maxRange": 594.0,
         "rpm": 15.8,
-        "cost": 132000,
         "manufacturer": "Ceres Arms"
       },
       "4": {
@@ -4815,7 +4531,6 @@
         "range": 414.0,
         "maxRange": 621.0,
         "rpm": 16.3,
-        "cost": 172000,
         "manufacturer": "Defiance Model XII"
       },
       "5": {
@@ -4825,7 +4540,6 @@
         "range": 450.0,
         "maxRange": 675.0,
         "rpm": 17.6,
-        "cost": 280000,
         "manufacturer": "BlazeFire Longshot"
       }
     },
@@ -4849,7 +4563,6 @@
         "maxRange": 1200.0,
         "rpm": 10.0,
         "speed": 1316.5,
-        "cost": 300000,
         "manufacturer": "Johnston Highspeed"
       },
       "1": {
@@ -4860,7 +4573,6 @@
         "maxRange": 1500.0,
         "rpm": 12.0,
         "speed": 1645.6,
-        "cost": 600000,
         "manufacturer": "Fusigon Longtooth"
       },
       "2": {
@@ -4871,7 +4583,6 @@
         "maxRange": 1575.0,
         "rpm": 12.3,
         "speed": 1727.9,
-        "cost": 750000,
         "manufacturer": "Lord's Light 2"
       },
       "3": {
@@ -4882,7 +4593,6 @@
         "maxRange": 1650.0,
         "rpm": 12.6,
         "speed": 1810.2,
-        "cost": 990000,
         "manufacturer": "Magna Firestar"
       },
       "4": {
@@ -4893,7 +4603,6 @@
         "maxRange": 1725.0,
         "rpm": 13.0,
         "speed": 1892.4,
-        "cost": 1290000,
         "manufacturer": "Defiance 1001"
       },
       "5": {
@@ -4904,7 +4613,6 @@
         "maxRange": 1875.0,
         "rpm": 14.1,
         "speed": 2057.0,
-        "cost": 2100000,
         "manufacturer": "Kinslaugher H-Class"
       }
     },
@@ -4927,7 +4635,6 @@
         "range": 160.0,
         "maxRange": 240.0,
         "rpm": 22.2,
-        "cost": 11250,
         "manufacturer": "Aggressor"
       },
       "1": {
@@ -4937,7 +4644,6 @@
         "range": 200.0,
         "maxRange": 300.0,
         "rpm": 26.7,
-        "cost": 22500,
         "manufacturer": "BlazeFire Longshot"
       },
       "2": {
@@ -4947,7 +4653,6 @@
         "range": 210.0,
         "maxRange": 315.0,
         "rpm": 27.3,
-        "cost": 28125,
         "manufacturer": "Diverse Optics"
       },
       "3": {
@@ -4957,7 +4662,6 @@
         "range": 220.0,
         "maxRange": 330.0,
         "rpm": 28.1,
-        "cost": 37125,
         "manufacturer": "Martell"
       },
       "4": {
@@ -4967,7 +4671,6 @@
         "range": 230.0,
         "maxRange": 345.0,
         "rpm": 29.0,
-        "cost": 48375,
         "manufacturer": "Magna Mk IV"
       },
       "5": {
@@ -4977,7 +4680,6 @@
         "range": 250.0,
         "maxRange": 375.0,
         "rpm": 31.4,
-        "cost": 78750,
         "manufacturer": "Victory 12E"
       }
     },
@@ -4999,7 +4701,6 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
-    "cost": 200000,
     "description": "A prototype electronic warfare sensor enhancement suite that augments a 'Mech’s detection capabilities. Extends base sensor range, and allows for the detection of units outside of line of sight within the probe's enhanced sensor range. Reduces the HUD distortion caused by hostile ECMs. Compatible with Active Probe hardpoints.",
     "probe": {
       "range": 325,
@@ -5021,7 +4722,6 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
-    "cost": 200000,
     "description": "A prototype suite of electronic warfare countermeasures that, by default, shields friendly units within its disrupt range from hostile sensors and homing missiles. Hostiles within the disrupt range have their sensors further suppressed, and suffer accuracy penalties, against all units. Can be toggled into counter mode, which disables all hostile ECMs within its range. Compatible with ECM hardpoints.",
     "ecm": {
       "disruptRange": 160,
@@ -5048,7 +4748,6 @@
         "range": 72.0,
         "maxRange": 72.0,
         "rpm": 600.0,
-        "cost": 7500,
         "manufacturer": "Dragon's Breath"
       },
       "1": {
@@ -5058,7 +4757,6 @@
         "range": 90.0,
         "maxRange": 90.0,
         "rpm": 600.0,
-        "cost": 15000,
         "manufacturer": "Firestorm"
       },
       "2": {
@@ -5068,7 +4766,6 @@
         "range": 94.5,
         "maxRange": 94.5,
         "rpm": 600.0,
-        "cost": 18750,
         "manufacturer": "Purity L-Series"
       },
       "3": {
@@ -5078,7 +4775,6 @@
         "range": 99.0,
         "maxRange": 99.0,
         "rpm": 600.0,
-        "cost": 24750,
         "manufacturer": "Flame Tech"
       },
       "4": {
@@ -5088,7 +4784,6 @@
         "range": 103.5,
         "maxRange": 103.5,
         "rpm": 600.0,
-        "cost": 32250,
         "manufacturer": "Hot Shot"
       },
       "5": {
@@ -5098,7 +4793,6 @@
         "range": 112.5,
         "maxRange": 112.5,
         "rpm": 600.0,
-        "cost": 52500,
         "manufacturer": "Olympian"
       }
     },
@@ -5122,7 +4816,6 @@
         "maxRange": 528.0,
         "rpm": 8.3,
         "speed": 1600.0,
-        "cost": 300000,
         "manufacturer": "NAIS Mk.1"
       },
       "1": {
@@ -5133,7 +4826,6 @@
         "maxRange": 660.0,
         "rpm": 10.0,
         "speed": 2000.0,
-        "cost": 600000,
         "manufacturer": "Dragon's Fire"
       },
       "2": {
@@ -5144,7 +4836,6 @@
         "maxRange": 693.0,
         "rpm": 10.3,
         "speed": 2100.0,
-        "cost": 750000,
         "manufacturer": "Zeus Slingshot"
       },
       "3": {
@@ -5155,7 +4846,6 @@
         "maxRange": 726.0,
         "rpm": 10.5,
         "speed": 2200.0,
-        "cost": 990000,
         "manufacturer": "Poland Main Model A"
       },
       "4": {
@@ -5166,7 +4856,6 @@
         "maxRange": 759.0,
         "rpm": 10.9,
         "speed": 2300.0,
-        "cost": 1290000,
         "manufacturer": "M-7"
       },
       "5": {
@@ -5177,7 +4866,6 @@
         "maxRange": 825.0,
         "rpm": 11.8,
         "speed": 2500.0,
-        "cost": 2100000,
         "manufacturer": "Norse-Storm Model 7D"
       }
     },
@@ -5201,7 +4889,6 @@
     "tiers": null,
     "capacity": 26,
     "techBase": "InnerSphere",
-    "cost": 40000,
     "ammoType": "Ammo.Ballistic.Gauss.Standard"
   },
   "Gauss_Standard_Half_AmmoEquipment": {
@@ -5218,7 +4905,6 @@
     "tiers": null,
     "capacity": 13,
     "techBase": "InnerSphere",
-    "cost": 20000,
     "ammoType": "Ammo.Ballistic.Gauss.Standard"
   },
   "Greatsword_Assault": {
@@ -5236,7 +4922,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 12.5,
-        "cost": 30000,
         "manufacturer": "Solaris Arms"
       },
       "1": {
@@ -5246,7 +4931,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 15.0,
-        "cost": 60000,
         "manufacturer": "Solaris Arms"
       },
       "2": {
@@ -5256,7 +4940,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 15.8,
-        "cost": 81000,
         "manufacturer": "Solaris Arms"
       },
       "3": {
@@ -5266,7 +4949,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 16.7,
-        "cost": 108000,
         "manufacturer": "Solaris Arms"
       },
       "4": {
@@ -5276,7 +4958,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 17.6,
-        "cost": 150000,
         "manufacturer": "Solaris Arms"
       },
       "5": {
@@ -5286,7 +4967,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 18.8,
-        "cost": 186000,
         "manufacturer": "Solaris Arms"
       }
     },
@@ -5310,7 +4990,6 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
-    "cost": 400000,
     "description": "An advanced suite of enhanced electronic countermeasures that, by default, shields friendly units within its disrupt range from hostile sensors and homing missiles. Hostiles within the disrupt range have their sensors further suppressed, and suffer accuracy penalties, against all units. Can be toggled into counter mode, which disables all hostile ECMs within its range. Compatible with ECM hardpoints.",
     "ecm": {
       "disruptRange": 220,
@@ -5337,7 +5016,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 18.2,
-        "cost": 7500,
         "manufacturer": "Reinforced Arm Actuators"
       },
       "1": {
@@ -5347,7 +5025,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 19.7,
-        "cost": 15000,
         "manufacturer": "FerroSteel"
       },
       "2": {
@@ -5357,7 +5034,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.5,
-        "cost": 18750,
         "manufacturer": "Piledriver"
       },
       "3": {
@@ -5367,7 +5043,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 21.4,
-        "cost": 24750,
         "manufacturer": "Piledriver"
       },
       "4": {
@@ -5377,7 +5052,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 22.4,
-        "cost": 32250,
         "manufacturer": "Solaris Surprise"
       },
       "5": {
@@ -5387,7 +5061,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 24.7,
-        "cost": 52500,
         "manufacturer": "Endo Steel Bracers"
       }
     },
@@ -5412,7 +5085,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 17.8,
-        "cost": 7500,
         "manufacturer": "Reinforced Arm Actuators"
       },
       "1": {
@@ -5422,7 +5094,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 19.2,
-        "cost": 15000,
         "manufacturer": "FerroSteel"
       },
       "2": {
@@ -5432,7 +5103,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.0,
-        "cost": 18750,
         "manufacturer": "Piledriver"
       },
       "3": {
@@ -5442,7 +5112,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.9,
-        "cost": 24750,
         "manufacturer": "Piledriver"
       },
       "4": {
@@ -5452,7 +5121,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 21.8,
-        "cost": 32250,
         "manufacturer": "Solaris Surprise"
       },
       "5": {
@@ -5462,7 +5130,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 24.0,
-        "cost": 52500,
         "manufacturer": "Endo Steel Bracers"
       }
     },
@@ -5487,7 +5154,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 17.1,
-        "cost": 7500,
         "manufacturer": "Reinforced Arm Actuators"
       },
       "1": {
@@ -5497,7 +5163,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 18.5,
-        "cost": 15000,
         "manufacturer": "FerroSteel"
       },
       "2": {
@@ -5507,7 +5172,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 19.2,
-        "cost": 18750,
         "manufacturer": "Piledriver"
       },
       "3": {
@@ -5517,7 +5181,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.0,
-        "cost": 24750,
         "manufacturer": "Piledriver"
       },
       "4": {
@@ -5527,7 +5190,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.9,
-        "cost": 32250,
         "manufacturer": "Solaris Surprise"
       },
       "5": {
@@ -5537,7 +5199,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 22.9,
-        "cost": 52500,
         "manufacturer": "Endo Steel Bracers"
       }
     },
@@ -5562,7 +5223,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 17.1,
-        "cost": 7500,
         "manufacturer": "Reinforced Arm Actuators"
       },
       "1": {
@@ -5572,7 +5232,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 18.5,
-        "cost": 15000,
         "manufacturer": "FerroSteel"
       },
       "2": {
@@ -5582,7 +5241,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 19.2,
-        "cost": 18750,
         "manufacturer": "Piledriver"
       },
       "3": {
@@ -5592,7 +5250,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.0,
-        "cost": 24750,
         "manufacturer": "Piledriver"
       },
       "4": {
@@ -5602,7 +5259,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.9,
-        "cost": 32250,
         "manufacturer": "Solaris Surprise"
       },
       "5": {
@@ -5612,7 +5268,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 22.9,
-        "cost": 52500,
         "manufacturer": "Endo Steel Bracers"
       }
     },
@@ -5637,7 +5292,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 13.2,
-        "cost": 25000,
         "manufacturer": "Solaris Arms"
       },
       "1": {
@@ -5647,7 +5301,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 15.8,
-        "cost": 50000,
         "manufacturer": "Solaris Arms"
       },
       "2": {
@@ -5657,7 +5310,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 16.6,
-        "cost": 70000,
         "manufacturer": "Solaris Arms"
       },
       "3": {
@@ -5667,7 +5319,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 17.5,
-        "cost": 90000,
         "manufacturer": "Solaris Arms"
       },
       "4": {
@@ -5677,7 +5328,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 18.6,
-        "cost": 125000,
         "manufacturer": "Solaris Arms"
       },
       "5": {
@@ -5687,7 +5337,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 21.1,
-        "cost": 175000,
         "manufacturer": "Solaris Arms"
       }
     },
@@ -5712,7 +5361,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 17.1,
-        "cost": 15000,
         "manufacturer": "Redjack Reaper"
       },
       "1": {
@@ -5722,7 +5370,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 18.5,
-        "cost": 30000,
         "manufacturer": "T. Banzai XT.104"
       },
       "2": {
@@ -5732,7 +5379,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 19.2,
-        "cost": 37500,
         "manufacturer": "Johnston Cleaver-II"
       },
       "3": {
@@ -5741,8 +5387,7 @@
         "cooldown": 3.0,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 20.0,
-        "cost": 49500
+        "rpm": 20.0
       },
       "4": {
         "damage": 47.5,
@@ -5751,7 +5396,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 20.9,
-        "cost": 64500,
         "manufacturer": "Defiance Type 1"
       },
       "5": {
@@ -5761,7 +5405,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 22.9,
-        "cost": 105000,
         "manufacturer": "Defiance Type 3"
       }
     },
@@ -5787,7 +5430,6 @@
         "maxRange": 800.0,
         "rpm": 8.3,
         "speed": 1600.0,
-        "cost": 250000,
         "manufacturer": "Blackwell Arms Thunderfist"
       },
       "1": {
@@ -5798,7 +5440,6 @@
         "maxRange": 1000.0,
         "rpm": 10.0,
         "speed": 2000.0,
-        "cost": 500000,
         "manufacturer": "Defiance Industries"
       },
       "2": {
@@ -5809,7 +5450,6 @@
         "maxRange": 1050.0,
         "rpm": 10.3,
         "speed": 2100.0,
-        "cost": 625000,
         "manufacturer": "Defiance Hammerfist"
       },
       "3": {
@@ -5820,7 +5460,6 @@
         "maxRange": 1100.0,
         "rpm": 10.5,
         "speed": 2200.0,
-        "cost": 825000,
         "manufacturer": "StarCorps Industries"
       },
       "4": {
@@ -5831,7 +5470,6 @@
         "maxRange": 1150.0,
         "rpm": 10.9,
         "speed": 2300.0,
-        "cost": 1075000,
         "manufacturer": "GM/Blackwell"
       },
       "5": {
@@ -5842,7 +5480,6 @@
         "maxRange": 1250.0,
         "rpm": 11.8,
         "speed": 2500.0,
-        "cost": 1750000,
         "manufacturer": "Defiance Industries"
       }
     },
@@ -5866,7 +5503,6 @@
     "tiers": null,
     "capacity": 8,
     "techBase": "InnerSphere",
-    "cost": 20000,
     "ammoType": "Ammo.Ballistic.Gauss.Heavy"
   },
   "HeavyGauss_Half_AmmoEquipment": {
@@ -5883,7 +5519,6 @@
     "tiers": null,
     "capacity": 4,
     "techBase": "InnerSphere",
-    "cost": 20000,
     "ammoType": "Ammo.Ballistic.Gauss.Heavy"
   },
   "HeavyRifle": {
@@ -5902,7 +5537,6 @@
         "maxRange": 528.0,
         "rpm": 5.0,
         "speed": 960.0,
-        "cost": 45000,
         "manufacturer": "Circinus Federated"
       },
       "1": {
@@ -5913,7 +5547,6 @@
         "maxRange": 660.0,
         "rpm": 6.0,
         "speed": 1200.0,
-        "cost": 90000,
         "manufacturer": "Grimm-Paixhans"
       },
       "2": {
@@ -5924,7 +5557,6 @@
         "maxRange": 693.0,
         "rpm": 6.3,
         "speed": 1260.0,
-        "cost": 112500,
         "manufacturer": "M-Heg Type 500"
       },
       "3": {
@@ -5935,7 +5567,6 @@
         "maxRange": 726.0,
         "rpm": 6.7,
         "speed": 1320.0,
-        "cost": 148500,
         "manufacturer": "Tortuga Carronade"
       },
       "4": {
@@ -5946,7 +5577,6 @@
         "maxRange": 759.0,
         "rpm": 7.1,
         "speed": 1380.0,
-        "cost": 193500,
         "manufacturer": "TA-Type H20 APFSDS"
       },
       "5": {
@@ -5957,7 +5587,6 @@
         "maxRange": 825.0,
         "rpm": 8.0,
         "speed": 1500.0,
-        "cost": 315000,
         "manufacturer": "RWR-Apollo 47"
       }
     },
@@ -5983,7 +5612,6 @@
     "capacity": 12,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 3000,
     "explosionDamagePerRound": 18.0,
     "ammoType": "Ammo.Ballistic.Rifle.Heavy"
   },
@@ -6003,7 +5631,6 @@
         "maxRange": 528.0,
         "rpm": 5.0,
         "speed": 960.0,
-        "cost": 54000,
         "manufacturer": "Grimm-Paixhans"
       },
       "1": {
@@ -6014,7 +5641,6 @@
         "maxRange": 660.0,
         "rpm": 6.0,
         "speed": 1200.0,
-        "cost": 90000,
         "manufacturer": "Grimm-Paixhans"
       },
       "2": {
@@ -6025,7 +5651,6 @@
         "maxRange": 693.0,
         "rpm": 6.3,
         "speed": 1260.0,
-        "cost": 108000,
         "manufacturer": "Grimm-Paixhans"
       },
       "3": {
@@ -6036,7 +5661,6 @@
         "maxRange": 759.0,
         "rpm": 6.7,
         "speed": 1344.0,
-        "cost": 171000,
         "manufacturer": "Grimm-Paixhans"
       },
       "4": {
@@ -6047,7 +5671,6 @@
         "maxRange": 792.0,
         "rpm": 7.1,
         "speed": 1440.0,
-        "cost": 234000,
         "manufacturer": "Grimm-Paixhans"
       },
       "5": {
@@ -6058,7 +5681,6 @@
         "maxRange": 792.0,
         "rpm": 7.1,
         "speed": 1440.0,
-        "cost": 288000,
         "manufacturer": "Grimm-Paixhans"
       }
     },
@@ -6084,7 +5706,6 @@
     "capacity": 6,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 1500,
     "explosionDamagePerRound": 18.0,
     "ammoType": "Ammo.Ballistic.Rifle.Heavy"
   },
@@ -6102,7 +5723,6 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
-    "cost": 152000,
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 90 - 100 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -6128,7 +5748,6 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
-    "cost": 132000,
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 80 - 85 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -6154,7 +5773,6 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
-    "cost": 108000,
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 60 - 75 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -6180,7 +5798,6 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
-    "cost": 76000,
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 40 - 55 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -6206,7 +5823,6 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
-    "cost": 44000,
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 20 - 35 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -6233,7 +5849,6 @@
         "range": 22.5,
         "maxRange": 22.5,
         "rpm": 21.4,
-        "cost": 30000,
         "manufacturer": "Taurus Industries"
       },
       "1": {
@@ -6243,7 +5858,6 @@
         "range": 22.5,
         "maxRange": 22.5,
         "rpm": 23.5,
-        "cost": 60000,
         "manufacturer": "Victor Industries"
       },
       "2": {
@@ -6253,7 +5867,6 @@
         "range": 22.5,
         "maxRange": 22.5,
         "rpm": 24.7,
-        "cost": 75000,
         "manufacturer": "LAW Test Type"
       },
       "3": {
@@ -6263,7 +5876,6 @@
         "range": 22.5,
         "maxRange": 22.5,
         "rpm": 26.1,
-        "cost": 99000,
         "manufacturer": "Katanakaji"
       },
       "4": {
@@ -6273,7 +5885,6 @@
         "range": 22.5,
         "maxRange": 22.5,
         "rpm": 27.0,
-        "cost": 129000,
         "manufacturer": "Luthien Armor Works"
       },
       "5": {
@@ -6283,7 +5894,6 @@
         "range": 22.5,
         "maxRange": 22.5,
         "rpm": 31.2,
-        "cost": 210000,
         "manufacturer": "Masamune Masterworks"
       }
     },
@@ -6308,7 +5918,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 18.2,
-        "cost": 17500,
         "manufacturer": "Reinforced Actuators"
       },
       "1": {
@@ -6318,7 +5927,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 19.7,
-        "cost": 35000,
         "manufacturer": "FerroSteel Fist"
       },
       "2": {
@@ -6328,7 +5936,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.5,
-        "cost": 43750,
         "manufacturer": "Knuckledusters"
       },
       "3": {
@@ -6338,7 +5945,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 21.4,
-        "cost": 57750,
         "manufacturer": "Doom Fist"
       },
       "4": {
@@ -6348,7 +5954,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 22.4,
-        "cost": 75250,
         "manufacturer": "Solaris Special"
       },
       "5": {
@@ -6358,7 +5963,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 24.7,
-        "cost": 122500,
         "manufacturer": "Endo Steel Plat"
       }
     },
@@ -6383,7 +5987,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 17.8,
-        "cost": 12500,
         "manufacturer": "Reinforced Actuators"
       },
       "1": {
@@ -6393,7 +5996,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 19.2,
-        "cost": 25000,
         "manufacturer": "FerroSteel Fist"
       },
       "2": {
@@ -6403,7 +6005,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.0,
-        "cost": 31250,
         "manufacturer": "Knuckledusters"
       },
       "3": {
@@ -6413,7 +6014,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.9,
-        "cost": 41250,
         "manufacturer": "Doom Fist"
       },
       "4": {
@@ -6423,7 +6023,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 21.8,
-        "cost": 53750,
         "manufacturer": "Solaris Special"
       },
       "5": {
@@ -6433,7 +6032,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 24.0,
-        "cost": 87500,
         "manufacturer": "Endo Steel Plating"
       }
     },
@@ -6458,7 +6056,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 17.1,
-        "cost": 7500,
         "manufacturer": "Reinforced Actuators"
       },
       "1": {
@@ -6468,7 +6065,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 18.5,
-        "cost": 15000,
         "manufacturer": "FerroSteel Fist"
       },
       "2": {
@@ -6478,7 +6074,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 19.2,
-        "cost": 18750,
         "manufacturer": "Knuckledusters"
       },
       "3": {
@@ -6488,7 +6083,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.0,
-        "cost": 24750,
         "manufacturer": "Doom Fist"
       },
       "4": {
@@ -6498,7 +6092,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.9,
-        "cost": 32250,
         "manufacturer": "Solaris Special"
       },
       "5": {
@@ -6508,7 +6101,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 22.9,
-        "cost": 52500,
         "manufacturer": "Endo Steel Plating"
       }
     },
@@ -6533,7 +6125,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 17.1,
-        "cost": 10000,
         "manufacturer": "Reinforced Actuators"
       },
       "1": {
@@ -6543,7 +6134,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 18.5,
-        "cost": 20000,
         "manufacturer": "FerroSteel Fist"
       },
       "2": {
@@ -6553,7 +6143,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 19.2,
-        "cost": 25000,
         "manufacturer": "Knuckledusters"
       },
       "3": {
@@ -6563,7 +6152,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.0,
-        "cost": 33000,
         "manufacturer": "Doom Fist"
       },
       "4": {
@@ -6573,7 +6161,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 20.9,
-        "cost": 43000,
         "manufacturer": "Solaris Special"
       },
       "5": {
@@ -6583,7 +6170,6 @@
         "range": 17.5,
         "maxRange": 17.5,
         "rpm": 22.9,
-        "cost": 70000,
         "manufacturer": "Endo Steel Plating"
       }
     },
@@ -6607,7 +6193,6 @@
     "tiers": null,
     "capacity": 180,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC2"
   },
@@ -6625,7 +6210,6 @@
     "tiers": null,
     "capacity": 90,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC2"
   },
@@ -6643,7 +6227,6 @@
     "tiers": null,
     "capacity": 80,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC5"
   },
@@ -6661,7 +6244,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.Light.AC5"
   },
@@ -6679,7 +6261,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
-    "cost": 18000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20"
   },
@@ -6697,7 +6278,6 @@
     "tiers": null,
     "capacity": 10,
     "techBase": "InnerSphere",
-    "cost": 9000,
     "explosionDamagePerRound": 20.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX20"
   },
@@ -6715,7 +6295,6 @@
     "tiers": null,
     "capacity": 180,
     "techBase": "InnerSphere",
-    "cost": 3000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2"
   },
@@ -6733,7 +6312,6 @@
     "tiers": null,
     "capacity": 90,
     "techBase": "InnerSphere",
-    "cost": 1500,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX2"
   },
@@ -6751,7 +6329,6 @@
     "tiers": null,
     "capacity": 80,
     "techBase": "InnerSphere",
-    "cost": 3000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5"
   },
@@ -6769,7 +6346,6 @@
     "tiers": null,
     "capacity": 40,
     "techBase": "InnerSphere",
-    "cost": 1500,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Ballistic.AutoCannon.LBX.LBX5"
   },
@@ -6789,7 +6365,6 @@
         "maxRange": 432.0,
         "rpm": 22.2,
         "speed": 640.0,
-        "cost": 400000,
         "manufacturer": "NAIS Mk.1"
       },
       "1": {
@@ -6800,7 +6375,6 @@
         "maxRange": 540.0,
         "rpm": 26.7,
         "speed": 800.0,
-        "cost": 800000,
         "manufacturer": "Armstrong Cluster Gun"
       },
       "2": {
@@ -6811,7 +6385,6 @@
         "maxRange": 567.0,
         "rpm": 28.1,
         "speed": 840.0,
-        "cost": 1000000,
         "manufacturer": "Mydron Excel"
       },
       "3": {
@@ -6822,7 +6395,6 @@
         "maxRange": 594.0,
         "rpm": 29.6,
         "speed": 880.0,
-        "cost": 1320000,
         "manufacturer": "Kali Yama"
       },
       "4": {
@@ -6833,7 +6405,6 @@
         "maxRange": 621.0,
         "rpm": 31.4,
         "speed": 920.0,
-        "cost": 1720000,
         "manufacturer": "Imperator Code Red"
       },
       "5": {
@@ -6844,7 +6415,6 @@
         "maxRange": 675.0,
         "rpm": 35.5,
         "speed": 1000.0,
-        "cost": 2800000,
         "manufacturer": "Lubalin"
       }
     },
@@ -6870,7 +6440,6 @@
         "maxRange": 432.0,
         "rpm": 22.2,
         "speed": 640.0,
-        "cost": 400000,
         "manufacturer": "Armstrong Cluster Gun"
       },
       "1": {
@@ -6881,7 +6450,6 @@
         "maxRange": 540.0,
         "rpm": 26.7,
         "speed": 800.0,
-        "cost": 800000,
         "manufacturer": "Armstrong Cluster Gun"
       },
       "2": {
@@ -6892,7 +6460,6 @@
         "maxRange": 567.0,
         "rpm": 28.1,
         "speed": 840.0,
-        "cost": 1000000,
         "manufacturer": "Armstrong Cluster Gun"
       },
       "3": {
@@ -6903,7 +6470,6 @@
         "maxRange": 594.0,
         "rpm": 29.6,
         "speed": 880.0,
-        "cost": 1320000,
         "manufacturer": "Armstrong Cluster Gun"
       },
       "4": {
@@ -6914,7 +6480,6 @@
         "maxRange": 621.0,
         "rpm": 31.4,
         "speed": 920.0,
-        "cost": 1720000,
         "manufacturer": "Armstrong Cluster Gun"
       },
       "5": {
@@ -6925,7 +6490,6 @@
         "maxRange": 675.0,
         "rpm": 35.5,
         "speed": 1000.0,
-        "cost": 2800000,
         "manufacturer": "Armstrong Cluster Gun"
       }
     },
@@ -6952,7 +6516,6 @@
         "maxRange": 432.0,
         "rpm": 22.2,
         "speed": 640.0,
-        "cost": 400000,
         "manufacturer": "Armstrong Class B"
       },
       "1": {
@@ -6963,7 +6526,6 @@
         "maxRange": 540.0,
         "rpm": 26.7,
         "speed": 800.0,
-        "cost": 800000,
         "manufacturer": "Armstrong Class B"
       },
       "2": {
@@ -6974,7 +6536,6 @@
         "maxRange": 567.0,
         "rpm": 28.1,
         "speed": 840.0,
-        "cost": 1000000,
         "manufacturer": "Armstrong Class B"
       },
       "3": {
@@ -6985,7 +6546,6 @@
         "maxRange": 594.0,
         "rpm": 29.6,
         "speed": 880.0,
-        "cost": 1320000,
         "manufacturer": "Armstrong Class B"
       },
       "4": {
@@ -6996,7 +6556,6 @@
         "maxRange": 621.0,
         "rpm": 31.4,
         "speed": 920.0,
-        "cost": 1720000,
         "manufacturer": "Armstrong Class B"
       },
       "5": {
@@ -7007,7 +6566,6 @@
         "maxRange": 675.0,
         "rpm": 35.5,
         "speed": 1000.0,
-        "cost": 1720000,
         "manufacturer": "Armstrong Class B"
       }
     },
@@ -7034,7 +6592,6 @@
         "maxRange": 432.0,
         "rpm": 22.2,
         "speed": 640.0,
-        "cost": 400000,
         "manufacturer": "LB-X-P Type 10"
       },
       "1": {
@@ -7045,7 +6602,6 @@
         "maxRange": 540.0,
         "rpm": 26.7,
         "speed": 800.0,
-        "cost": 800000,
         "manufacturer": "Armstrong Class B"
       },
       "2": {
@@ -7056,7 +6612,6 @@
         "maxRange": 567.0,
         "rpm": 28.1,
         "speed": 840.0,
-        "cost": 1000000,
         "manufacturer": "Oriente Model 0"
       },
       "3": {
@@ -7067,7 +6622,6 @@
         "maxRange": 594.0,
         "rpm": 29.6,
         "speed": 880.0,
-        "cost": 1320000,
         "manufacturer": "SarLon"
       },
       "4": {
@@ -7078,7 +6632,6 @@
         "maxRange": 621.0,
         "rpm": 31.4,
         "speed": 920.0,
-        "cost": 1720000,
         "manufacturer": "Defiance Disintegrator"
       },
       "5": {
@@ -7089,7 +6642,6 @@
         "maxRange": 675.0,
         "rpm": 35.5,
         "speed": 1000.0,
-        "cost": 2800000,
         "manufacturer": "Blankenburg"
       }
     },
@@ -7115,7 +6667,6 @@
         "maxRange": 720.0,
         "rpm": 66.7,
         "speed": 640.0,
-        "cost": 75000,
         "manufacturer": "Mydron"
       },
       "1": {
@@ -7126,7 +6677,6 @@
         "maxRange": 900.0,
         "rpm": 80.0,
         "speed": 800.0,
-        "cost": 150000,
         "manufacturer": "Defiance Industries"
       },
       "2": {
@@ -7137,7 +6687,6 @@
         "maxRange": 945.0,
         "rpm": 84.3,
         "speed": 840.0,
-        "cost": 187500,
         "manufacturer": "Lubalin Ballistics"
       },
       "3": {
@@ -7148,7 +6697,6 @@
         "maxRange": 990.0,
         "rpm": 88.9,
         "speed": 880.0,
-        "cost": 247500,
         "manufacturer": "Armstrong"
       },
       "4": {
@@ -7159,7 +6707,6 @@
         "maxRange": 1035.0,
         "rpm": 94.2,
         "speed": 920.0,
-        "cost": 322500,
         "manufacturer": "Arc-Royal MechWorks"
       },
       "5": {
@@ -7170,7 +6717,6 @@
         "maxRange": 1125.0,
         "rpm": 106.8,
         "speed": 1000.0,
-        "cost": 525000,
         "manufacturer": "Imperator Code Red"
       }
     },
@@ -7196,7 +6742,6 @@
         "maxRange": 288.0,
         "rpm": 16.7,
         "speed": 480.0,
-        "cost": 300000,
         "manufacturer": "Omnitech Industries"
       },
       "1": {
@@ -7207,7 +6752,6 @@
         "maxRange": 360.0,
         "rpm": 20.0,
         "speed": 600.0,
-        "cost": 600000,
         "manufacturer": "Defiance Industries"
       },
       "2": {
@@ -7218,7 +6762,6 @@
         "maxRange": 378.0,
         "rpm": 21.1,
         "speed": 630.0,
-        "cost": 750000,
         "manufacturer": "Arc-Royal MechWorks"
       },
       "3": {
@@ -7229,7 +6772,6 @@
         "maxRange": 396.0,
         "rpm": 22.2,
         "speed": 660.0,
-        "cost": 990000,
         "manufacturer": "Shengli Arms"
       },
       "4": {
@@ -7240,7 +6782,6 @@
         "maxRange": 414.0,
         "rpm": 23.5,
         "speed": 690.0,
-        "cost": 1290000,
         "manufacturer": "Mydron Devastator"
       },
       "5": {
@@ -7251,7 +6792,6 @@
         "maxRange": 450.0,
         "rpm": 26.7,
         "speed": 750.0,
-        "cost": 2100000,
         "manufacturer": "TharHes Industries"
       }
     },
@@ -7277,7 +6817,6 @@
         "maxRange": 576.0,
         "rpm": 55.6,
         "speed": 560.0,
-        "cost": 125000,
         "manufacturer": "Quikscell Company"
       },
       "1": {
@@ -7288,7 +6827,6 @@
         "maxRange": 720.0,
         "rpm": 66.7,
         "speed": 700.0,
-        "cost": 250000,
         "manufacturer": "Defiance Industries"
       },
       "2": {
@@ -7299,7 +6837,6 @@
         "maxRange": 756.0,
         "rpm": 70.2,
         "speed": 735.0,
-        "cost": 312500,
         "manufacturer": "Johnston Industries"
       },
       "3": {
@@ -7310,7 +6847,6 @@
         "maxRange": 792.0,
         "rpm": 74.1,
         "speed": 770.0,
-        "cost": 412500,
         "manufacturer": "Arc-Royal MechWorks"
       },
       "4": {
@@ -7321,7 +6857,6 @@
         "maxRange": 828.0,
         "rpm": 78.4,
         "speed": 805.0,
-        "cost": 537500,
         "manufacturer": "Armstrong"
       },
       "5": {
@@ -7332,7 +6867,6 @@
         "maxRange": 900.0,
         "rpm": 88.9,
         "speed": 875.0,
-        "cost": 875000,
         "manufacturer": "Mydron Excel 5SG"
       }
     },
@@ -7358,7 +6892,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 100000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -7369,7 +6902,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 200000,
         "manufacturer": "Telos Delta Cluster"
       },
       "2": {
@@ -7380,7 +6912,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 250000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -7391,7 +6922,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 330000,
         "manufacturer": "Devastator Series-7"
       },
       "4": {
@@ -7402,7 +6932,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 500000,
         "manufacturer": "Longbow"
       },
       "5": {
@@ -7413,7 +6942,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 700000,
         "manufacturer": "Doombud"
       }
     },
@@ -7439,7 +6967,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 200000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -7450,7 +6977,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 400000,
         "manufacturer": "Telos Delta Cluster"
       },
       "2": {
@@ -7461,7 +6987,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 500000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -7472,7 +6997,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 660000,
         "manufacturer": "Devastator Series-7"
       },
       "4": {
@@ -7483,7 +7007,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 1000000,
         "manufacturer": "Longbow"
       },
       "5": {
@@ -7494,7 +7017,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1400000,
         "manufacturer": "Doombud"
       }
     },
@@ -7520,7 +7042,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 200000,
         "manufacturer": "Luxor 3R"
       },
       "1": {
@@ -7531,7 +7052,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 400000,
         "manufacturer": "Federated"
       },
       "2": {
@@ -7542,7 +7062,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 500000,
         "manufacturer": "Jackson B5c"
       },
       "3": {
@@ -7553,7 +7072,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 660000,
         "manufacturer": "Delta Dart"
       },
       "4": {
@@ -7564,7 +7082,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 1000000,
         "manufacturer": "FireFire"
       },
       "5": {
@@ -7575,7 +7092,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1400000,
         "manufacturer": "Deadeye-10"
       }
     },
@@ -7601,7 +7117,6 @@
         "maxRange": 600.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 100000,
         "manufacturer": "Federated"
       },
       "1": {
@@ -7612,7 +7127,6 @@
         "maxRange": 750.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 200000,
         "manufacturer": "Federated"
       },
       "2": {
@@ -7623,7 +7137,6 @@
         "maxRange": 787.5,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 250000,
         "manufacturer": "Federated"
       },
       "3": {
@@ -7634,7 +7147,6 @@
         "maxRange": 825.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 330000,
         "manufacturer": "Federated"
       },
       "4": {
@@ -7645,7 +7157,6 @@
         "maxRange": 862.5,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 430000,
         "manufacturer": "Federated"
       },
       "5": {
@@ -7656,7 +7167,6 @@
         "maxRange": 937.5,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 700000,
         "manufacturer": "Federated"
       }
     },
@@ -7683,7 +7193,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 100000,
         "manufacturer": "Luxor 3R"
       },
       "1": {
@@ -7694,7 +7203,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 200000,
         "manufacturer": "Federated"
       },
       "2": {
@@ -7705,7 +7213,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 250000,
         "manufacturer": "Jackson B5C"
       },
       "3": {
@@ -7716,7 +7223,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 330000,
         "manufacturer": "Delta Dart"
       },
       "4": {
@@ -7727,7 +7233,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 430000,
         "manufacturer": "FarFire"
       },
       "5": {
@@ -7738,7 +7243,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 700000,
         "manufacturer": "Deadeye-10"
       }
     },
@@ -7764,7 +7268,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 175000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -7775,7 +7278,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 350000,
         "manufacturer": "Telos Delta Cluster"
       },
       "2": {
@@ -7786,7 +7288,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 437500,
         "manufacturer": "Holly"
       },
       "3": {
@@ -7797,7 +7298,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 577500,
         "manufacturer": "Kali Yama Deathbloom"
       },
       "4": {
@@ -7808,7 +7308,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 752500,
         "manufacturer": "Longbow"
       },
       "5": {
@@ -7819,7 +7318,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1225000,
         "manufacturer": "Doombud"
       }
     },
@@ -7845,7 +7343,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 275000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -7856,7 +7353,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 550000,
         "manufacturer": "Telos Delta Cluster"
       },
       "2": {
@@ -7867,7 +7363,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 687500,
         "manufacturer": "Holly"
       },
       "3": {
@@ -7878,7 +7373,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 907500,
         "manufacturer": "Kali Yama Deathbloom"
       },
       "4": {
@@ -7889,7 +7383,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 1182500,
         "manufacturer": "Longbow"
       },
       "5": {
@@ -7900,7 +7393,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1925000,
         "manufacturer": "Doombud"
       }
     },
@@ -7926,7 +7418,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 275000,
         "manufacturer": "SturmFeur"
       },
       "1": {
@@ -7937,7 +7428,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 550000,
         "manufacturer": "Coventry Star Fire"
       },
       "2": {
@@ -7948,7 +7438,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 687500,
         "manufacturer": "Zeus"
       },
       "3": {
@@ -7959,7 +7448,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 907500,
         "manufacturer": "Delta Dart"
       },
       "4": {
@@ -7970,7 +7458,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 1182500,
         "manufacturer": "FarFire"
       },
       "5": {
@@ -7981,7 +7468,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1925000,
         "manufacturer": "Simpson"
       }
     },
@@ -8007,7 +7493,6 @@
         "maxRange": 600.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 175000,
         "manufacturer": "Coventry Star Fire"
       },
       "1": {
@@ -8018,7 +7503,6 @@
         "maxRange": 750.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 350000,
         "manufacturer": "Coventry Star Fire"
       },
       "2": {
@@ -8029,7 +7513,6 @@
         "maxRange": 787.5,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 437500,
         "manufacturer": "Coventry Star Fire"
       },
       "3": {
@@ -8040,7 +7523,6 @@
         "maxRange": 825.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 577500,
         "manufacturer": "Coventry Star Fire"
       },
       "4": {
@@ -8051,7 +7533,6 @@
         "maxRange": 862.5,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 752500,
         "manufacturer": "Coventry Star Fire"
       },
       "5": {
@@ -8062,7 +7543,6 @@
         "maxRange": 937.5,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1225000,
         "manufacturer": "Coventry Star Fire"
       }
     },
@@ -8089,7 +7569,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 175000,
         "manufacturer": "SturmFeur"
       },
       "1": {
@@ -8100,7 +7579,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 350000,
         "manufacturer": "Coventry Star Fire"
       },
       "2": {
@@ -8111,7 +7589,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 437500,
         "manufacturer": "Zeus"
       },
       "3": {
@@ -8122,7 +7599,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 577500,
         "manufacturer": "Delta Dart"
       },
       "4": {
@@ -8133,7 +7609,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 752500,
         "manufacturer": "FarFire"
       },
       "5": {
@@ -8144,7 +7619,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1225000,
         "manufacturer": "Simpson"
       }
     },
@@ -8170,7 +7644,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 250000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -8181,7 +7654,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 500000,
         "manufacturer": "Telos Delta Cluster"
       },
       "2": {
@@ -8192,7 +7664,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 625000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -8203,7 +7674,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 825000,
         "manufacturer": "Kali Yama Deathbloom"
       },
       "4": {
@@ -8214,7 +7684,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 1075000,
         "manufacturer": "Longbow"
       },
       "5": {
@@ -8225,7 +7694,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1750000,
         "manufacturer": "Doombud"
       }
     },
@@ -8251,7 +7719,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 350000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -8262,7 +7729,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 700000,
         "manufacturer": "Telos Delta Cluster"
       },
       "2": {
@@ -8273,7 +7739,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 210.0,
-        "cost": 875000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -8284,7 +7749,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 1155000,
         "manufacturer": "Kali Yama Deathbloom"
       },
       "4": {
@@ -8295,7 +7759,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 1505000,
         "manufacturer": "Longbow"
       },
       "5": {
@@ -8306,7 +7769,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 2450000,
         "manufacturer": "Doombud"
       }
     },
@@ -8332,7 +7794,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 350000,
         "manufacturer": "SturmFeur"
       },
       "1": {
@@ -8343,7 +7804,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 700000,
         "manufacturer": "Coventry Star Fire"
       },
       "2": {
@@ -8354,7 +7814,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 875000,
         "manufacturer": "Zeus"
       },
       "3": {
@@ -8365,7 +7824,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 1155000,
         "manufacturer": "Delta Dart"
       },
       "4": {
@@ -8376,7 +7834,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 1505000,
         "manufacturer": "FarFire Maxi-Rack"
       },
       "5": {
@@ -8387,7 +7844,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 2450000,
         "manufacturer": "Delphinius"
       }
     },
@@ -8413,7 +7869,6 @@
         "maxRange": 600.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 250000,
         "manufacturer": "Coventry Star Fire"
       },
       "1": {
@@ -8424,7 +7879,6 @@
         "maxRange": 750.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 500000,
         "manufacturer": "Coventry Star Fire"
       },
       "2": {
@@ -8435,7 +7889,6 @@
         "maxRange": 787.5,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 625000,
         "manufacturer": "Coventry Star Fire"
       },
       "3": {
@@ -8446,7 +7899,6 @@
         "maxRange": 825.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 825000,
         "manufacturer": "Coventry Star Fire"
       },
       "4": {
@@ -8457,7 +7909,6 @@
         "maxRange": 862.5,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 1075000,
         "manufacturer": "Coventry Star Fire"
       },
       "5": {
@@ -8468,7 +7919,6 @@
         "maxRange": 937.5,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1750000,
         "manufacturer": "Coventry Star Fire"
       }
     },
@@ -8495,7 +7945,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 250000,
         "manufacturer": "SturmFeur"
       },
       "1": {
@@ -8506,7 +7955,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 500000,
         "manufacturer": "Coventry Star Fire"
       },
       "2": {
@@ -8517,7 +7965,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 625000,
         "manufacturer": "Zeus"
       },
       "3": {
@@ -8528,7 +7975,6 @@
         "maxRange": 990.0,
         "rpm": 15.8,
         "speed": 230.0,
-        "cost": 825000,
         "manufacturer": "Delta Dart"
       },
       "4": {
@@ -8539,7 +7985,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 1075000,
         "manufacturer": "FarFire Maxi-Rack"
       },
       "5": {
@@ -8550,7 +7995,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 1750000,
         "manufacturer": "Delphinius"
       }
     },
@@ -8576,7 +8020,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 30000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -8587,7 +8030,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 60000,
         "manufacturer": "Telos Delta Cluster"
       },
       "2": {
@@ -8598,7 +8040,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 75000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -8609,7 +8050,6 @@
         "maxRange": 990.0,
         "rpm": 16.2,
         "speed": 220.0,
-        "cost": 99000,
         "manufacturer": "Conan/5"
       },
       "4": {
@@ -8620,7 +8060,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 129000,
         "manufacturer": "Longbow"
       },
       "5": {
@@ -8631,7 +8070,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 210000,
         "manufacturer": "Doombud"
       }
     },
@@ -8657,7 +8095,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 60000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -8668,7 +8105,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 120000,
         "manufacturer": "Telos Delta Cluster"
       },
       "2": {
@@ -8679,7 +8115,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 150000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -8690,7 +8125,6 @@
         "maxRange": 990.0,
         "rpm": 16.2,
         "speed": 220.0,
-        "cost": 198000,
         "manufacturer": "Conan/5"
       },
       "4": {
@@ -8701,7 +8135,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 258000,
         "manufacturer": "Longbow"
       },
       "5": {
@@ -8712,7 +8145,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 420000,
         "manufacturer": "Doombud"
       }
     },
@@ -8738,7 +8170,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 60000,
         "manufacturer": "Sian/Ceres Jaguar"
       },
       "1": {
@@ -8749,7 +8180,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 120000,
         "manufacturer": "Federated 5-Shot"
       },
       "2": {
@@ -8760,7 +8190,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 150000,
         "manufacturer": "Zeus-5"
       },
       "3": {
@@ -8771,7 +8200,6 @@
         "maxRange": 990.0,
         "rpm": 16.2,
         "speed": 220.0,
-        "cost": 198000,
         "manufacturer": "Delta Dart"
       },
       "4": {
@@ -8782,7 +8210,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 258000,
         "manufacturer": "FarFire"
       },
       "5": {
@@ -8793,7 +8220,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 420000,
         "manufacturer": "Delphinius"
       }
     },
@@ -8819,7 +8245,6 @@
         "maxRange": 600.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 30000,
         "manufacturer": "Telos Delta Cluster"
       },
       "1": {
@@ -8830,7 +8255,6 @@
         "maxRange": 750.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 60000,
         "manufacturer": "Telos Delta Cluster"
       },
       "2": {
@@ -8841,7 +8265,6 @@
         "maxRange": 787.5,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 75000,
         "manufacturer": "Telos Delta Cluster"
       },
       "3": {
@@ -8852,7 +8275,6 @@
         "maxRange": 825.0,
         "rpm": 16.2,
         "speed": 220.0,
-        "cost": 99000,
         "manufacturer": "Telos Delta Cluster"
       },
       "4": {
@@ -8863,7 +8285,6 @@
         "maxRange": 862.5,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 129000,
         "manufacturer": "Telos Delta Cluster"
       },
       "5": {
@@ -8874,7 +8295,6 @@
         "maxRange": 937.5,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 210000,
         "manufacturer": "Telos Delta Cluster"
       }
     },
@@ -8901,7 +8321,6 @@
         "maxRange": 720.0,
         "rpm": 13.6,
         "speed": 160.0,
-        "cost": 30000,
         "manufacturer": "Sian/Ceres Jaguar"
       },
       "1": {
@@ -8912,7 +8331,6 @@
         "maxRange": 900.0,
         "rpm": 15.0,
         "speed": 200.0,
-        "cost": 60000,
         "manufacturer": "Federated 5-shot"
       },
       "2": {
@@ -8923,7 +8341,6 @@
         "maxRange": 945.0,
         "rpm": 15.4,
         "speed": 212.0,
-        "cost": 75000,
         "manufacturer": "Zeus-5"
       },
       "3": {
@@ -8934,7 +8351,6 @@
         "maxRange": 990.0,
         "rpm": 16.2,
         "speed": 220.0,
-        "cost": 99000,
         "manufacturer": "Delta Dart"
       },
       "4": {
@@ -8945,7 +8361,6 @@
         "maxRange": 1035.0,
         "rpm": 16.7,
         "speed": 250.0,
-        "cost": 129000,
         "manufacturer": "FarFire"
       },
       "5": {
@@ -8956,7 +8371,6 @@
         "maxRange": 1125.0,
         "rpm": 18.2,
         "speed": 280.0,
-        "cost": 210000,
         "manufacturer": "Delphinius"
       }
     },
@@ -8980,7 +8394,6 @@
     "tiers": null,
     "capacity": 440,
     "techBase": "InnerSphere",
-    "cost": 60000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.LRM"
   },
@@ -8998,7 +8411,6 @@
     "tiers": null,
     "capacity": 440,
     "techBase": "InnerSphere",
-    "cost": 120000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.LRM.Artemis"
   },
@@ -9016,7 +8428,6 @@
     "tiers": null,
     "capacity": 220,
     "techBase": "InnerSphere",
-    "cost": 60000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.LRM.Artemis"
   },
@@ -9034,7 +8445,6 @@
     "tiers": null,
     "capacity": 220,
     "techBase": "InnerSphere",
-    "cost": 30000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.LRM"
   },
@@ -9053,7 +8463,6 @@
         "range": 22.0,
         "maxRange": 22.0,
         "rpm": 16.7,
-        "cost": 24000,
         "manufacturer": "Solaris Arms"
       },
       "1": {
@@ -9063,7 +8472,6 @@
         "range": 22.0,
         "maxRange": 22.0,
         "rpm": 20.0,
-        "cost": 40000,
         "manufacturer": "Solaris Arms"
       },
       "2": {
@@ -9073,7 +8481,6 @@
         "range": 22.0,
         "maxRange": 22.0,
         "rpm": 21.1,
-        "cost": 54000,
         "manufacturer": "Solaris Arms"
       },
       "3": {
@@ -9083,7 +8490,6 @@
         "range": 22.0,
         "maxRange": 22.0,
         "rpm": 22.2,
-        "cost": 72000,
         "manufacturer": "Solaris Arms"
       },
       "4": {
@@ -9093,7 +8499,6 @@
         "range": 22.0,
         "maxRange": 22.0,
         "rpm": 23.5,
-        "cost": 100000,
         "manufacturer": "Solaris Arms"
       },
       "5": {
@@ -9103,7 +8508,6 @@
         "range": 22.0,
         "maxRange": 22.0,
         "rpm": 26.7,
-        "cost": 130000,
         "manufacturer": "Solaris Arms"
       }
     },
@@ -9128,7 +8532,6 @@
     "capacity": 62,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 40000,
     "explosionDamagePerRound": 8.0,
     "ammoType": "Ammo.Energy.ChemLaser.Large"
   },
@@ -9147,7 +8550,6 @@
     "capacity": 31,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 20000,
     "explosionDamagePerRound": 8.0,
     "ammoType": "Ammo.Energy.ChemLaser.Large"
   },
@@ -9166,7 +8568,6 @@
         "range": 360.0,
         "maxRange": 540.0,
         "rpm": 12.8,
-        "cost": 50000,
         "manufacturer": "Grimm Chemfire"
       },
       "1": {
@@ -9176,7 +8577,6 @@
         "range": 450.0,
         "maxRange": 675.0,
         "rpm": 13.3,
-        "cost": 100000,
         "manufacturer": "Ozone Burner 5000"
       },
       "2": {
@@ -9186,7 +8586,6 @@
         "range": 472.5,
         "maxRange": 708.8,
         "rpm": 13.4,
-        "cost": 125000,
         "manufacturer": "Liquid Light"
       },
       "3": {
@@ -9196,7 +8595,6 @@
         "range": 495.0,
         "maxRange": 742.5,
         "rpm": 13.5,
-        "cost": 165000,
         "manufacturer": "COIL Type MC504"
       },
       "4": {
@@ -9206,7 +8604,6 @@
         "range": 517.5,
         "maxRange": 776.2,
         "rpm": 13.6,
-        "cost": 215000,
         "manufacturer": "Rim World's Reserve"
       },
       "5": {
@@ -9216,7 +8613,6 @@
         "range": 562.5,
         "maxRange": 843.8,
         "rpm": 13.8,
-        "cost": 350000,
         "manufacturer": "T.Alliance Type Sol-2300"
       }
     },
@@ -9242,7 +8638,6 @@
         "range": 360.0,
         "maxRange": 540.0,
         "rpm": 9.5,
-        "cost": 100000,
         "manufacturer": "Omnicron 8000"
       },
       "1": {
@@ -9252,7 +8647,6 @@
         "range": 450.0,
         "maxRange": 675.0,
         "rpm": 11.4,
-        "cost": 200000,
         "manufacturer": "Magna Mk.III"
       },
       "2": {
@@ -9262,7 +8656,6 @@
         "range": 472.5,
         "maxRange": 708.8,
         "rpm": 11.7,
-        "cost": 250000,
         "manufacturer": "ChisComp 43 Special"
       },
       "3": {
@@ -9272,7 +8665,6 @@
         "range": 495.0,
         "maxRange": 742.5,
         "rpm": 12.0,
-        "cost": 330000,
         "manufacturer": "Diverse Optics Type 30"
       },
       "4": {
@@ -9282,7 +8674,6 @@
         "range": 517.5,
         "maxRange": 776.2,
         "rpm": 12.4,
-        "cost": 430000,
         "manufacturer": "RAMtech 1200"
       },
       "5": {
@@ -9292,7 +8683,6 @@
         "range": 562.5,
         "maxRange": 843.8,
         "rpm": 13.4,
-        "cost": 700000,
         "manufacturer": "Krupp"
       }
     },
@@ -9315,7 +8705,6 @@
         "range": 360.0,
         "maxRange": 540.0,
         "rpm": 13.9,
-        "cost": 100000,
         "manufacturer": "Harmon"
       },
       "1": {
@@ -9325,7 +8714,6 @@
         "range": 450.0,
         "maxRange": 675.0,
         "rpm": 16.7,
-        "cost": 200000,
         "manufacturer": "Victory"
       },
       "2": {
@@ -9335,7 +8723,6 @@
         "range": 472.5,
         "maxRange": 708.8,
         "rpm": 17.1,
-        "cost": 250000,
         "manufacturer": "SunGlow"
       },
       "3": {
@@ -9345,7 +8732,6 @@
         "range": 495.0,
         "maxRange": 742.5,
         "rpm": 17.5,
-        "cost": 330000,
         "manufacturer": "Defiance B3L"
       },
       "4": {
@@ -9355,7 +8741,6 @@
         "range": 517.5,
         "maxRange": 776.2,
         "rpm": 18.1,
-        "cost": 430000,
         "manufacturer": "Exo Star"
       },
       "5": {
@@ -9365,7 +8750,6 @@
         "range": 562.5,
         "maxRange": 843.8,
         "rpm": 19.6,
-        "cost": 700000,
         "manufacturer": "McCorkel"
       }
     },
@@ -9389,7 +8773,6 @@
         "range": 292.0,
         "maxRange": 438.0,
         "rpm": 11.1,
-        "cost": 175000,
         "manufacturer": "Omnicron 950"
       },
       "1": {
@@ -9399,7 +8782,6 @@
         "range": 365.0,
         "maxRange": 547.5,
         "rpm": 13.3,
-        "cost": 350000,
         "manufacturer": "Magna 900P"
       },
       "2": {
@@ -9409,7 +8791,6 @@
         "range": 383.2,
         "maxRange": 574.9,
         "rpm": 13.7,
-        "cost": 437500,
         "manufacturer": "Sutel Precision Line"
       },
       "3": {
@@ -9419,7 +8800,6 @@
         "range": 401.5,
         "maxRange": 602.2,
         "rpm": 14.0,
-        "cost": 577500,
         "manufacturer": "Diverse Optics Type 30P"
       },
       "4": {
@@ -9429,7 +8809,6 @@
         "range": 419.7,
         "maxRange": 629.6,
         "rpm": 14.5,
-        "cost": 752500,
         "manufacturer": "Thunderbolt-12"
       },
       "5": {
@@ -9439,7 +8818,6 @@
         "range": 456.2,
         "maxRange": 684.4,
         "rpm": 15.7,
-        "cost": 1225000,
         "manufacturer": "Blankenburg Technologies"
       }
     },
@@ -9462,7 +8840,6 @@
         "range": 360.0,
         "maxRange": 540.0,
         "rpm": 218.2,
-        "cost": 225000,
         "manufacturer": "ExoStar"
       },
       "1": {
@@ -9472,7 +8849,6 @@
         "range": 450.0,
         "maxRange": 675.0,
         "rpm": 240.0,
-        "cost": 450000,
         "manufacturer": "Earthwerks Incorporated"
       },
       "2": {
@@ -9482,7 +8858,6 @@
         "range": 472.5,
         "maxRange": 708.8,
         "rpm": 253.2,
-        "cost": 562500,
         "manufacturer": "Maxell X-pulsion"
       },
       "3": {
@@ -9492,7 +8867,6 @@
         "range": 495.0,
         "maxRange": 742.5,
         "rpm": 266.7,
-        "cost": 742500,
         "manufacturer": "Arc-Royal MechWorks"
       },
       "4": {
@@ -9502,7 +8876,6 @@
         "range": 517.5,
         "maxRange": 776.2,
         "rpm": 283.0,
-        "cost": 967500,
         "manufacturer": "Wangker Aerospace"
       },
       "5": {
@@ -9512,7 +8885,6 @@
         "range": 562.5,
         "maxRange": 843.8,
         "rpm": 319.1,
-        "cost": 1575000,
         "manufacturer": "Diverse Optics Type 35PX"
       }
     },
@@ -9536,7 +8908,6 @@
         "maxRange": 432.0,
         "rpm": 80.2,
         "speed": 760.0,
-        "cost": 100000,
         "manufacturer": "Independence Weaponry"
       },
       "1": {
@@ -9547,7 +8918,6 @@
         "maxRange": 540.0,
         "rpm": 88.2,
         "speed": 950.0,
-        "cost": 200000,
         "manufacturer": "Mydron Model D"
       },
       "2": {
@@ -9558,7 +8928,6 @@
         "maxRange": 567.0,
         "rpm": 92.9,
         "speed": 997.5,
-        "cost": 250000,
         "manufacturer": "Mydron Snipehunter"
       },
       "3": {
@@ -9569,7 +8938,6 @@
         "maxRange": 594.0,
         "rpm": 98.0,
         "speed": 1045.0,
-        "cost": 330000,
         "manufacturer": "Defiance Industries"
       },
       "4": {
@@ -9580,7 +8948,6 @@
         "maxRange": 621.0,
         "rpm": 103.8,
         "speed": 1092.5,
-        "cost": 430000,
         "manufacturer": "Armstrong"
       },
       "5": {
@@ -9591,7 +8958,6 @@
         "maxRange": 675.0,
         "rpm": 117.6,
         "speed": 1187.5,
-        "cost": 700000,
         "manufacturer": "Imperator Napoleon"
       }
     },
@@ -9617,7 +8983,6 @@
         "maxRange": 288.0,
         "rpm": 32.1,
         "speed": 480.0,
-        "cost": 150000,
         "manufacturer": "Pontiac Ultralight"
       },
       "1": {
@@ -9628,7 +8993,6 @@
         "maxRange": 360.0,
         "rpm": 35.3,
         "speed": 600.0,
-        "cost": 300000,
         "manufacturer": "Mydron Snakekiller"
       },
       "2": {
@@ -9639,7 +9003,6 @@
         "maxRange": 378.0,
         "rpm": 37.2,
         "speed": 630.0,
-        "cost": 375000,
         "manufacturer": "Solaris Arms"
       },
       "3": {
@@ -9650,7 +9013,6 @@
         "maxRange": 396.0,
         "rpm": 39.2,
         "speed": 660.0,
-        "cost": 495000,
         "manufacturer": "SarLon MiniCannon"
       },
       "4": {
@@ -9661,7 +9023,6 @@
         "maxRange": 414.0,
         "rpm": 41.5,
         "speed": 690.0,
-        "cost": 645000,
         "manufacturer": "Luthien Armor Works"
       },
       "5": {
@@ -9672,7 +9033,6 @@
         "maxRange": 450.0,
         "rpm": 47.1,
         "speed": 750.0,
-        "cost": 1050000,
         "manufacturer": "New Avalon Institue of Science"
       }
     },
@@ -9698,7 +9058,6 @@
         "maxRange": 600.0,
         "rpm": 16.7,
         "speed": 1760.0,
-        "cost": 137500,
         "manufacturer": "Michaelson Heavy Industries"
       },
       "1": {
@@ -9709,7 +9068,6 @@
         "maxRange": 750.0,
         "rpm": 20.0,
         "speed": 2200.0,
-        "cost": 275000,
         "manufacturer": "Defiance Industries"
       },
       "2": {
@@ -9720,7 +9078,6 @@
         "maxRange": 787.5,
         "rpm": 20.5,
         "speed": 2310.0,
-        "cost": 343750,
         "manufacturer": "Skobel MechWorks"
       },
       "3": {
@@ -9731,7 +9088,6 @@
         "maxRange": 825.0,
         "rpm": 21.1,
         "speed": 2420.0,
-        "cost": 453750,
         "manufacturer": "Brooks Incorporated"
       },
       "4": {
@@ -9742,7 +9098,6 @@
         "maxRange": 862.5,
         "rpm": 21.7,
         "speed": 2530.0,
-        "cost": 591250,
         "manufacturer": "Arc-Royal MechWorks"
       },
       "5": {
@@ -9753,7 +9108,6 @@
         "maxRange": 937.5,
         "rpm": 23.5,
         "speed": 2750.0,
-        "cost": 962500,
         "manufacturer": "Imperator Type II"
       }
     },
@@ -9777,7 +9131,6 @@
     "tiers": null,
     "capacity": 32,
     "techBase": "InnerSphere",
-    "cost": 20000,
     "ammoType": "Ammo.Ballistic.Gauss.Light"
   },
   "LightGauss_Half_AmmoEquipment": {
@@ -9794,7 +9147,6 @@
     "tiers": null,
     "capacity": 16,
     "techBase": "InnerSphere",
-    "cost": 20000,
     "ammoType": "Ammo.Ballistic.Gauss.Light"
   },
   "LightRifle": {
@@ -9813,7 +9165,6 @@
         "maxRange": 288.0,
         "rpm": 7.1,
         "speed": 400.0,
-        "cost": 18875,
         "manufacturer": "Circinus Federated"
       },
       "1": {
@@ -9824,7 +9175,6 @@
         "maxRange": 360.0,
         "rpm": 8.6,
         "speed": 500.0,
-        "cost": 37750,
         "manufacturer": "Grimm-Handcannon"
       },
       "2": {
@@ -9835,7 +9185,6 @@
         "maxRange": 378.0,
         "rpm": 9.0,
         "speed": 525.0,
-        "cost": 47188,
         "manufacturer": "M-Heg Type 50"
       },
       "3": {
@@ -9846,7 +9195,6 @@
         "maxRange": 396.0,
         "rpm": 9.5,
         "speed": 550.0,
-        "cost": 62288,
         "manufacturer": "Tortuga Culverin"
       },
       "4": {
@@ -9857,7 +9205,6 @@
         "maxRange": 414.0,
         "rpm": 10.1,
         "speed": 575.0,
-        "cost": 81162,
         "manufacturer": "TA-Type L07 Kinetic"
       },
       "5": {
@@ -9868,7 +9215,6 @@
         "maxRange": 450.0,
         "rpm": 11.4,
         "speed": 625.0,
-        "cost": 132125,
         "manufacturer": "RWR-Timbuktu 85"
       }
     },
@@ -9894,7 +9240,6 @@
     "capacity": 34,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 800,
     "explosionDamagePerRound": 6.0,
     "ammoType": "Ammo.Ballistic.Rifle.Light"
   },
@@ -9914,7 +9259,6 @@
         "maxRange": 288.0,
         "rpm": 7.1,
         "speed": 400.0,
-        "cost": 20762,
         "manufacturer": "Grimm-Handcannon"
       },
       "1": {
@@ -9925,7 +9269,6 @@
         "maxRange": 360.0,
         "rpm": 8.6,
         "speed": 500.0,
-        "cost": 37750,
         "manufacturer": "Grimm-Handcannon"
       },
       "2": {
@@ -9936,7 +9279,6 @@
         "maxRange": 396.0,
         "rpm": 9.0,
         "speed": 535.0,
-        "cost": 47188,
         "manufacturer": "Grimm-Handcannon"
       },
       "3": {
@@ -9947,7 +9289,6 @@
         "maxRange": 414.0,
         "rpm": 9.5,
         "speed": 560.0,
-        "cost": 66062,
         "manufacturer": "Grimm-Handcannon"
       },
       "4": {
@@ -9958,7 +9299,6 @@
         "maxRange": 432.0,
         "rpm": 10.5,
         "speed": 590.0,
-        "cost": 94375,
         "manufacturer": "Grimm-Handcannon"
       },
       "5": {
@@ -9969,7 +9309,6 @@
         "maxRange": 468.0,
         "rpm": 11.4,
         "speed": 625.0,
-        "cost": 122688,
         "manufacturer": "Grimm-Handcannon"
       }
     },
@@ -9995,7 +9334,6 @@
     "capacity": 17,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 400,
     "explosionDamagePerRound": 6.0,
     "ammoType": "Ammo.Ballistic.Rifle.Light"
   },
@@ -10014,7 +9352,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 17.8,
-        "cost": 25000,
         "manufacturer": "Redjack Pillager"
       },
       "1": {
@@ -10024,7 +9361,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 19.2,
-        "cost": 50000,
         "manufacturer": "Hellspont R&D Nandao"
       },
       "2": {
@@ -10034,7 +9370,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 20.0,
-        "cost": 62500,
         "manufacturer": "Norse-Storm Skofnung"
       },
       "3": {
@@ -10044,7 +9379,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 20.9,
-        "cost": 82500,
         "manufacturer": "LAW Houtou-Tachi"
       },
       "4": {
@@ -10054,7 +9388,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 21.8,
-        "cost": 107500,
         "manufacturer": "Corean Excalibur"
       },
       "5": {
@@ -10064,7 +9397,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 24.0,
-        "cost": 175000,
         "manufacturer": "Valiant Systems Joyeuse"
       }
     },
@@ -10089,7 +9421,6 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
-    "cost": 8000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk I hardpoints.",
     "masc": {
       "accel": 4.0,
@@ -10115,7 +9446,6 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
-    "cost": 35000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk II hardpoints.",
     "masc": {
       "accel": 4.0,
@@ -10141,7 +9471,6 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
-    "cost": 70000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk III hardpoints.",
     "masc": {
       "accel": 3.85,
@@ -10167,7 +9496,6 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
-    "cost": 140000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk IV hardpoints.",
     "masc": {
       "accel": 3.85,
@@ -10193,7 +9521,6 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
-    "cost": 280000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk V hardpoints.",
     "masc": {
       "accel": 3.8,
@@ -10220,7 +9547,6 @@
         "maxRange": 440.0,
         "rpm": 14.0,
         "speed": 400.0,
-        "cost": 50000,
         "manufacturer": "BUU Quarrel-10"
       },
       "1": {
@@ -10231,7 +9557,6 @@
         "maxRange": 550.0,
         "rpm": 15.4,
         "speed": 500.0,
-        "cost": 100000,
         "manufacturer": "Vandenberg Mechanized Industries"
       },
       "2": {
@@ -10242,7 +9567,6 @@
         "maxRange": 577.5,
         "rpm": 15.6,
         "speed": 525.0,
-        "cost": 125000,
         "manufacturer": "Shannon SH-88"
       },
       "3": {
@@ -10253,7 +9577,6 @@
         "maxRange": 605.0,
         "rpm": 15.8,
         "speed": 550.0,
-        "cost": 165000,
         "manufacturer": "Shannon Ten-Pin"
       },
       "4": {
@@ -10264,7 +9587,6 @@
         "maxRange": 632.5,
         "rpm": 16.0,
         "speed": 575.0,
-        "cost": 215000,
         "manufacturer": "Shigunga"
       },
       "5": {
@@ -10275,7 +9597,6 @@
         "maxRange": 687.5,
         "rpm": 16.4,
         "speed": 625.0,
-        "cost": 350000,
         "manufacturer": "Luthien Armor works"
       }
     },
@@ -10301,7 +9622,6 @@
         "maxRange": 440.0,
         "rpm": 13.3,
         "speed": 400.0,
-        "cost": 125000,
         "manufacturer": "General Motors"
       },
       "1": {
@@ -10312,7 +9632,6 @@
         "maxRange": 550.0,
         "rpm": 14.6,
         "speed": 500.0,
-        "cost": 250000,
         "manufacturer": "Hellespont Industrials"
       },
       "2": {
@@ -10323,7 +9642,6 @@
         "maxRange": 577.5,
         "rpm": 15.4,
         "speed": 525.0,
-        "cost": 312500,
         "manufacturer": "Skobel MechWorks"
       },
       "3": {
@@ -10334,7 +9652,6 @@
         "maxRange": 605.0,
         "rpm": 16.3,
         "speed": 550.0,
-        "cost": 412500,
         "manufacturer": "Kurita Combine Munitions Corporation"
       },
       "4": {
@@ -10345,7 +9662,6 @@
         "maxRange": 632.5,
         "rpm": 17.2,
         "speed": 575.0,
-        "cost": 537500,
         "manufacturer": "Sian/Ceres Puma"
       },
       "5": {
@@ -10356,7 +9672,6 @@
         "maxRange": 687.5,
         "rpm": 19.5,
         "speed": 625.0,
-        "cost": 875000,
         "manufacturer": "Shigunga"
       }
     },
@@ -10382,7 +9697,6 @@
         "maxRange": 440.0,
         "rpm": 12.7,
         "speed": 400.0,
-        "cost": 275000,
         "manufacturer": "Independence Weaponry"
       },
       "1": {
@@ -10393,7 +9707,6 @@
         "maxRange": 550.0,
         "rpm": 14.0,
         "speed": 500.0,
-        "cost": 550000,
         "manufacturer": "Luthien Armor works"
       },
       "2": {
@@ -10404,7 +9717,6 @@
         "maxRange": 577.5,
         "rpm": 14.7,
         "speed": 525.0,
-        "cost": 687500,
         "manufacturer": "Hellespont Industrials"
       },
       "3": {
@@ -10415,7 +9727,6 @@
         "maxRange": 605.0,
         "rpm": 15.5,
         "speed": 550.0,
-        "cost": 907500,
         "manufacturer": "Skobel MechWorks"
       },
       "4": {
@@ -10426,7 +9737,6 @@
         "maxRange": 632.5,
         "rpm": 16.4,
         "speed": 575.0,
-        "cost": 1182500,
         "manufacturer": "Holly"
       },
       "5": {
@@ -10437,7 +9747,6 @@
         "maxRange": 687.5,
         "rpm": 18.6,
         "speed": 625.0,
-        "cost": 1925000,
         "manufacturer": "Shigunga"
       }
     },
@@ -10463,7 +9772,6 @@
         "maxRange": 440.0,
         "rpm": 12.1,
         "speed": 400.0,
-        "cost": 350000,
         "manufacturer": "Cosara Weaponries"
       },
       "1": {
@@ -10474,7 +9782,6 @@
         "maxRange": 550.0,
         "rpm": 13.3,
         "speed": 500.0,
-        "cost": 700000,
         "manufacturer": "Luthien Armor works"
       },
       "2": {
@@ -10485,7 +9792,6 @@
         "maxRange": 577.5,
         "rpm": 14.0,
         "speed": 525.0,
-        "cost": 875000,
         "manufacturer": "Independence Weaponry"
       },
       "3": {
@@ -10496,7 +9802,6 @@
         "maxRange": 605.0,
         "rpm": 14.8,
         "speed": 550.0,
-        "cost": 1155000,
         "manufacturer": "Shannon"
       },
       "4": {
@@ -10507,7 +9812,6 @@
         "maxRange": 632.5,
         "rpm": 15.7,
         "speed": 575.0,
-        "cost": 1505000,
         "manufacturer": "Holly"
       },
       "5": {
@@ -10518,7 +9822,6 @@
         "maxRange": 687.5,
         "rpm": 17.8,
         "speed": 625.0,
-        "cost": 2450000,
         "manufacturer": "Shigunga"
       }
     },
@@ -10542,7 +9845,6 @@
     "tiers": null,
     "capacity": 700,
     "techBase": "InnerSphere",
-    "cost": 20000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.MRM"
   },
@@ -10560,7 +9862,6 @@
     "tiers": null,
     "capacity": 350,
     "techBase": "InnerSphere",
-    "cost": 20000,
     "explosionDamagePerRound": 1.0,
     "ammoType": "Ammo.Missile.MRM"
   },
@@ -10579,7 +9880,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 16.0,
-        "cost": 20000,
         "manufacturer": "Cap. Mafia Peacemaker"
       },
       "1": {
@@ -10589,7 +9889,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 17.1,
-        "cost": 40000,
         "manufacturer": "Redjack Maul"
       },
       "2": {
@@ -10599,7 +9898,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 17.8,
-        "cost": 50000,
         "manufacturer": "Hadrian Sceptre"
       },
       "3": {
@@ -10609,7 +9907,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 18.5,
-        "cost": 66000,
         "manufacturer": "Achernar Beater"
       },
       "4": {
@@ -10619,7 +9916,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 19.2,
-        "cost": 86000,
         "manufacturer": "Bark Knight Corp. Enforcer"
       },
       "5": {
@@ -10629,7 +9925,6 @@
         "range": 20.0,
         "maxRange": 20.0,
         "rpm": 20.9,
-        "cost": 140000,
         "manufacturer": "Norse-Storm Mjolnir"
       }
     },
@@ -10654,7 +9949,6 @@
         "range": 104.0,
         "maxRange": 104.0,
         "rpm": 600.0,
-        "cost": 5000,
         "manufacturer": "M100"
       },
       "1": {
@@ -10664,7 +9958,6 @@
         "range": 130.0,
         "maxRange": 130.0,
         "rpm": 600.0,
-        "cost": 10000,
         "manufacturer": "Deprus RF"
       },
       "2": {
@@ -10674,7 +9967,6 @@
         "range": 143.0,
         "maxRange": 143.0,
         "rpm": 600.0,
-        "cost": 12500,
         "manufacturer": "Lindblad"
       },
       "3": {
@@ -10684,7 +9976,6 @@
         "range": 162.5,
         "maxRange": 162.5,
         "rpm": 600.0,
-        "cost": 16500,
         "manufacturer": "Voelkers"
       },
       "4": {
@@ -10694,7 +9985,6 @@
         "range": 182.0,
         "maxRange": 182.0,
         "rpm": 600.0,
-        "cost": 21500,
         "manufacturer": "Sperry Browning"
       },
       "5": {
@@ -10704,7 +9994,6 @@
         "range": 208.0,
         "maxRange": 208.0,
         "rpm": 600.0,
-        "cost": 35000,
         "manufacturer": "Tri-Axe"
       }
     },
@@ -10728,7 +10017,6 @@
     "tiers": null,
     "capacity": 5200,
     "techBase": "InnerSphere",
-    "cost": 2000,
     "explosionDamagePerRound": 0.04,
     "ammoType": "Ammo.Ballistic.MachineGun.Standard"
   },
@@ -10746,7 +10034,6 @@
     "tiers": null,
     "capacity": 2600,
     "techBase": "InnerSphere",
-    "cost": 1000,
     "explosionDamagePerRound": 0.04,
     "ammoType": "Ammo.Ballistic.MachineGun.Standard"
   },
@@ -10765,7 +10052,6 @@
     "capacity": 115,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 40000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Energy.ChemLaser.Medium"
   },
@@ -10784,7 +10070,6 @@
     "capacity": 57,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 20000,
     "explosionDamagePerRound": 5.0,
     "ammoType": "Ammo.Energy.ChemLaser.Medium"
   },
@@ -10803,7 +10088,6 @@
         "range": 216.0,
         "maxRange": 324.0,
         "rpm": 15.4,
-        "cost": 20000,
         "manufacturer": "Grimm Flashfire"
       },
       "1": {
@@ -10813,7 +10097,6 @@
         "range": 270.0,
         "maxRange": 405.0,
         "rpm": 18.5,
-        "cost": 40000,
         "manufacturer": "Ozone Burner 500"
       },
       "2": {
@@ -10823,7 +10106,6 @@
         "range": 283.5,
         "maxRange": 425.2,
         "rpm": 18.9,
-        "cost": 50000,
         "manufacturer": "Liquid Light"
       },
       "3": {
@@ -10833,7 +10115,6 @@
         "range": 297.0,
         "maxRange": 445.5,
         "rpm": 19.4,
-        "cost": 66000,
         "manufacturer": "COIL Type OC402"
       },
       "4": {
@@ -10843,7 +10124,6 @@
         "range": 310.5,
         "maxRange": 465.7,
         "rpm": 20.1,
-        "cost": 86000,
         "manufacturer": "Rim World's Reserve"
       },
       "5": {
@@ -10853,7 +10133,6 @@
         "range": 337.5,
         "maxRange": 506.2,
         "rpm": 21.7,
-        "cost": 140000,
         "manufacturer": "T.Alliance Type Mars-2130"
       }
     },
@@ -10879,7 +10158,6 @@
         "range": 216.0,
         "maxRange": 324.0,
         "rpm": 12.5,
-        "cost": 40000,
         "manufacturer": "Omnicron 4000"
       },
       "1": {
@@ -10889,7 +10167,6 @@
         "range": 270.0,
         "maxRange": 405.0,
         "rpm": 15.0,
-        "cost": 80000,
         "manufacturer": "Magna Mk.II"
       },
       "2": {
@@ -10899,7 +10176,6 @@
         "range": 283.5,
         "maxRange": 425.2,
         "rpm": 15.4,
-        "cost": 100000,
         "manufacturer": "Martell"
       },
       "3": {
@@ -10909,7 +10185,6 @@
         "range": 297.0,
         "maxRange": 445.5,
         "rpm": 15.8,
-        "cost": 132000,
         "manufacturer": "Diverse Optics Type 20"
       },
       "4": {
@@ -10919,7 +10194,6 @@
         "range": 310.5,
         "maxRange": 465.7,
         "rpm": 16.3,
-        "cost": 172000,
         "manufacturer": "Intek"
       },
       "5": {
@@ -10929,7 +10203,6 @@
         "range": 337.5,
         "maxRange": 506.2,
         "rpm": 17.6,
-        "cost": 280000,
         "manufacturer": "Krupp"
       }
     },
@@ -10952,7 +10225,6 @@
         "range": 216.0,
         "maxRange": 324.0,
         "rpm": 19.2,
-        "cost": 40000,
         "manufacturer": "Harmon"
       },
       "1": {
@@ -10962,7 +10234,6 @@
         "range": 270.0,
         "maxRange": 405.0,
         "rpm": 23.1,
-        "cost": 80000,
         "manufacturer": "Victory 23R"
       },
       "2": {
@@ -10972,7 +10243,6 @@
         "range": 283.5,
         "maxRange": 425.2,
         "rpm": 23.7,
-        "cost": 100000,
         "manufacturer": "Angra 3L"
       },
       "3": {
@@ -10982,7 +10252,6 @@
         "range": 297.0,
         "maxRange": 445.5,
         "rpm": 24.3,
-        "cost": 132000,
         "manufacturer": "Defiance P3M"
       },
       "4": {
@@ -10992,7 +10261,6 @@
         "range": 310.5,
         "maxRange": 465.7,
         "rpm": 25.1,
-        "cost": 172000,
         "manufacturer": "Ceres Arms"
       },
       "5": {
@@ -11002,7 +10270,6 @@
         "range": 337.5,
         "maxRange": 506.2,
         "rpm": 27.1,
-        "cost": 280000,
         "manufacturer": "Tronell"
       }
     },
@@ -11026,7 +10293,6 @@
         "range": 176.0,
         "maxRange": 264.0,
         "rpm": 15.4,
-        "cost": 60000,
         "manufacturer": "Omnicron XP100"
       },
       "1": {
@@ -11036,7 +10302,6 @@
         "range": 220.0,
         "maxRange": 330.0,
         "rpm": 18.5,
-        "cost": 120000,
         "manufacturer": "Magna 400P"
       },
       "2": {
@@ -11046,7 +10311,6 @@
         "range": 231.0,
         "maxRange": 346.5,
         "rpm": 18.9,
-        "cost": 150000,
         "manufacturer": "Sutel Precision Line"
       },
       "3": {
@@ -11056,7 +10320,6 @@
         "range": 242.0,
         "maxRange": 363.0,
         "rpm": 19.4,
-        "cost": 198000,
         "manufacturer": "Diverse Optics Type 20P"
       },
       "4": {
@@ -11066,7 +10329,6 @@
         "range": 253.0,
         "maxRange": 379.5,
         "rpm": 20.1,
-        "cost": 258000,
         "manufacturer": "Ceres Arms W"
       },
       "5": {
@@ -11076,7 +10338,6 @@
         "range": 275.0,
         "maxRange": 412.5,
         "rpm": 21.7,
-        "cost": 420000,
         "manufacturer": "Blankenburg Technologies"
       }
     },
@@ -11100,7 +10361,6 @@
         "maxRange": 360.0,
         "rpm": 6.2,
         "speed": 720.0,
-        "cost": 37750,
         "manufacturer": "Circinus Federated"
       },
       "1": {
@@ -11111,7 +10371,6 @@
         "maxRange": 450.0,
         "rpm": 7.5,
         "speed": 900.0,
-        "cost": 75500,
         "manufacturer": "Grimm-Punisher"
       },
       "2": {
@@ -11122,7 +10381,6 @@
         "maxRange": 472.5,
         "rpm": 7.9,
         "speed": 945.0,
-        "cost": 94375,
         "manufacturer": "M-Heg Type 100"
       },
       "3": {
@@ -11133,7 +10391,6 @@
         "maxRange": 495.0,
         "rpm": 8.3,
         "speed": 990.0,
-        "cost": 124575,
         "manufacturer": "Tortuga Carronade"
       },
       "4": {
@@ -11144,7 +10401,6 @@
         "maxRange": 517.5,
         "rpm": 8.8,
         "speed": 1035.0,
-        "cost": 162325,
         "manufacturer": "TA-Type M15 Sabot"
       },
       "5": {
@@ -11155,7 +10411,6 @@
         "maxRange": 562.5,
         "rpm": 10.0,
         "speed": 1125.0,
-        "cost": 264250,
         "manufacturer": "RWR-Finmark 65"
       }
     },
@@ -11181,7 +10436,6 @@
     "capacity": 22,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 1000,
     "explosionDamagePerRound": 12.0,
     "ammoType": "Ammo.Ballistic.Rifle.Medium"
   },
@@ -11201,7 +10455,6 @@
         "maxRange": 360.0,
         "rpm": 6.2,
         "speed": 720.0,
-        "cost": 45300,
         "manufacturer": "Grimm-Punisher"
       },
       "1": {
@@ -11212,7 +10465,6 @@
         "maxRange": 450.0,
         "rpm": 7.5,
         "speed": 900.0,
-        "cost": 75500,
         "manufacturer": "Grimm-Punisher"
       },
       "2": {
@@ -11223,7 +10475,6 @@
         "maxRange": 472.5,
         "rpm": 7.9,
         "speed": 945.0,
-        "cost": 94375,
         "manufacturer": "Grimm-Punisher"
       },
       "3": {
@@ -11234,7 +10485,6 @@
         "maxRange": 495.0,
         "rpm": 8.3,
         "speed": 990.0,
-        "cost": 124575,
         "manufacturer": "Grimm-Punisher"
       },
       "4": {
@@ -11245,7 +10495,6 @@
         "maxRange": 517.5,
         "rpm": 8.8,
         "speed": 1035.0,
-        "cost": 162325,
         "manufacturer": "Grimm-Punisher"
       },
       "5": {
@@ -11256,7 +10505,6 @@
         "maxRange": 562.5,
         "rpm": 10.0,
         "speed": 1125.0,
-        "cost": 264250,
         "manufacturer": "Grimm-Punisher"
       }
     },
@@ -11282,7 +10530,6 @@
     "capacity": 11,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 500,
     "explosionDamagePerRound": 12.0,
     "ammoType": "Ammo.Ballistic.Rifle.Medium"
   },
@@ -11301,7 +10548,6 @@
         "range": 216.0,
         "maxRange": 324.0,
         "rpm": 218.2,
-        "cost": 110000,
         "manufacturer": "Defiance X5M"
       },
       "1": {
@@ -11311,7 +10557,6 @@
         "range": 270.0,
         "maxRange": 405.0,
         "rpm": 240.0,
-        "cost": 220000,
         "manufacturer": "Bergan Industries"
       },
       "2": {
@@ -11321,7 +10566,6 @@
         "range": 283.5,
         "maxRange": 425.2,
         "rpm": 253.2,
-        "cost": 275000,
         "manufacturer": "ExoStar"
       },
       "3": {
@@ -11331,7 +10575,6 @@
         "range": 297.0,
         "maxRange": 445.5,
         "rpm": 266.7,
-        "cost": 363000,
         "manufacturer": "Martell-X"
       },
       "4": {
@@ -11341,7 +10584,6 @@
         "range": 310.5,
         "maxRange": 465.7,
         "rpm": 283.0,
-        "cost": 473000,
         "manufacturer": "Bowie Industries"
       },
       "5": {
@@ -11351,7 +10593,6 @@
         "range": 337.5,
         "maxRange": 506.2,
         "rpm": 319.1,
-        "cost": 770000,
         "manufacturer": "Ceres Arms Model X"
       }
     },
@@ -11373,7 +10614,6 @@
     "tiers": null,
     "capacity": 20,
     "techBase": "InnerSphere",
-    "cost": 12000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Missile.NARC"
   },
@@ -11391,7 +10631,6 @@
     "tiers": null,
     "capacity": 10,
     "techBase": "InnerSphere",
-    "cost": 6000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Missile.NARC"
   },
@@ -11411,7 +10650,6 @@
         "maxRange": 216.0,
         "rpm": 15.6,
         "speed": 640.0,
-        "cost": 100000,
         "manufacturer": "I.W.W. Mk.XP1"
       },
       "1": {
@@ -11422,7 +10660,6 @@
         "maxRange": 270.0,
         "rpm": 17.1,
         "speed": 800.0,
-        "cost": 200000,
         "manufacturer": "NARC"
       },
       "2": {
@@ -11433,7 +10670,6 @@
         "maxRange": 283.5,
         "rpm": 17.6,
         "speed": 840.0,
-        "cost": 250000,
         "manufacturer": "Octagon Missile Magnet"
       },
       "3": {
@@ -11444,7 +10680,6 @@
         "maxRange": 297.0,
         "rpm": 18.5,
         "speed": 880.0,
-        "cost": 330000,
         "manufacturer": "Doering Electronics Glowworm"
       },
       "4": {
@@ -11455,7 +10690,6 @@
         "maxRange": 310.5,
         "rpm": 20.2,
         "speed": 920.0,
-        "cost": 430000,
         "manufacturer": "Apple Churchill"
       },
       "5": {
@@ -11466,7 +10700,6 @@
         "maxRange": 337.5,
         "rpm": 27.4,
         "speed": 1000.0,
-        "cost": 700000,
         "manufacturer": "TH-TATTLETALE Production Type"
       }
     },
@@ -11492,7 +10725,6 @@
         "maxRange": 736.0,
         "rpm": 10.0,
         "speed": 832.0,
-        "cost": 200000,
         "manufacturer": "Parti-Kill Heavy Cannon"
       },
       "1": {
@@ -11503,7 +10735,6 @@
         "maxRange": 920.0,
         "rpm": 12.0,
         "speed": 1040.0,
-        "cost": 400000,
         "manufacturer": "Kreuss"
       },
       "2": {
@@ -11514,7 +10745,6 @@
         "maxRange": 966.0,
         "rpm": 12.3,
         "speed": 1092.0,
-        "cost": 500000,
         "manufacturer": "Lord's Light"
       },
       "3": {
@@ -11525,7 +10755,6 @@
         "maxRange": 1012.0,
         "rpm": 12.6,
         "speed": 1144.0,
-        "cost": 660000,
         "manufacturer": "Magna Hellstar"
       },
       "4": {
@@ -11536,7 +10765,6 @@
         "maxRange": 1058.0,
         "rpm": 13.0,
         "speed": 1196.0,
-        "cost": 860000,
         "manufacturer": "Donal"
       },
       "5": {
@@ -11547,7 +10775,6 @@
         "maxRange": 1150.0,
         "rpm": 14.1,
         "speed": 1300.0,
-        "cost": 1400000,
         "manufacturer": "Tiegart"
       }
     },
@@ -11571,7 +10798,6 @@
         "maxRange": 600.0,
         "rpm": 20.0,
         "speed": 832.0,
-        "cost": 240000,
         "manufacturer": "Solaris Arms"
       },
       "1": {
@@ -11582,7 +10808,6 @@
         "maxRange": 600.0,
         "rpm": 24.0,
         "speed": 1040.0,
-        "cost": 400000,
         "manufacturer": "Solaris Arms"
       },
       "2": {
@@ -11593,7 +10818,6 @@
         "maxRange": 600.0,
         "rpm": 24.6,
         "speed": 1092.0,
-        "cost": 500000,
         "manufacturer": "Solaris Arms"
       },
       "3": {
@@ -11604,7 +10828,6 @@
         "maxRange": 600.0,
         "rpm": 25.3,
         "speed": 1164.8,
-        "cost": 656000,
         "manufacturer": "Solaris Arms"
       },
       "4": {
@@ -11615,7 +10838,6 @@
         "maxRange": 600.0,
         "rpm": 26.4,
         "speed": 1196.0,
-        "cost": 800000,
         "manufacturer": "Solaris Arms"
       },
       "5": {
@@ -11626,7 +10848,6 @@
         "maxRange": 600.0,
         "rpm": 28.9,
         "speed": 1196.0,
-        "cost": 1000000,
         "manufacturer": "Solaris Arms"
       }
     },
@@ -11651,7 +10872,6 @@
         "maxRange": 216.0,
         "rpm": 19.5,
         "speed": 320.0,
-        "cost": 10000,
         "manufacturer": "Marklin Mini Missile"
       },
       "1": {
@@ -11662,7 +10882,6 @@
         "maxRange": 270.0,
         "rpm": 21.4,
         "speed": 400.0,
-        "cost": 20000,
         "manufacturer": "Arrowlite"
       },
       "2": {
@@ -11673,7 +10892,6 @@
         "maxRange": 283.5,
         "rpm": 22.6,
         "speed": 420.0,
-        "cost": 25000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -11684,7 +10902,6 @@
         "maxRange": 297.0,
         "rpm": 23.8,
         "speed": 440.0,
-        "cost": 33000,
         "manufacturer": "Hovertec"
       },
       "4": {
@@ -11695,7 +10912,6 @@
         "maxRange": 310.5,
         "rpm": 25.2,
         "speed": 460.0,
-        "cost": 43000,
         "manufacturer": "Thunderstroke"
       },
       "5": {
@@ -11706,7 +10922,6 @@
         "maxRange": 337.5,
         "rpm": 28.6,
         "speed": 500.0,
-        "cost": 70000,
         "manufacturer": "Bical"
       }
     },
@@ -11732,7 +10947,6 @@
         "maxRange": 216.0,
         "rpm": 19.5,
         "speed": 320.0,
-        "cost": 20000,
         "manufacturer": "Marklin Mini Missile"
       },
       "1": {
@@ -11743,7 +10957,6 @@
         "maxRange": 270.0,
         "rpm": 21.4,
         "speed": 400.0,
-        "cost": 40000,
         "manufacturer": "Arrowlite"
       },
       "2": {
@@ -11754,7 +10967,6 @@
         "maxRange": 283.5,
         "rpm": 22.6,
         "speed": 420.0,
-        "cost": 50000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -11765,7 +10977,6 @@
         "maxRange": 297.0,
         "rpm": 23.8,
         "speed": 440.0,
-        "cost": 66000,
         "manufacturer": "Hovertec"
       },
       "4": {
@@ -11776,7 +10987,6 @@
         "maxRange": 310.5,
         "rpm": 25.2,
         "speed": 460.0,
-        "cost": 86000,
         "manufacturer": "Thunderstroke"
       },
       "5": {
@@ -11787,7 +10997,6 @@
         "maxRange": 337.5,
         "rpm": 28.6,
         "speed": 500.0,
-        "cost": 140000,
         "manufacturer": "Bical"
       }
     },
@@ -11813,7 +11022,6 @@
         "maxRange": 216.0,
         "rpm": 25.6,
         "speed": 320.0,
-        "cost": 20000,
         "manufacturer": "Guided Technologies"
       },
       "1": {
@@ -11824,7 +11032,6 @@
         "maxRange": 270.0,
         "rpm": 28.2,
         "speed": 400.0,
-        "cost": 40000,
         "manufacturer": "Coventry"
       },
       "2": {
@@ -11835,7 +11042,6 @@
         "maxRange": 283.5,
         "rpm": 29.7,
         "speed": 420.0,
-        "cost": 50000,
         "manufacturer": "TharHes 2 Pack"
       },
       "3": {
@@ -11846,7 +11052,6 @@
         "maxRange": 297.0,
         "rpm": 31.3,
         "speed": 440.0,
-        "cost": 66000,
         "manufacturer": "Irian Weapon Works Class 2"
       },
       "4": {
@@ -11857,7 +11062,6 @@
         "maxRange": 310.5,
         "rpm": 33.1,
         "speed": 460.0,
-        "cost": 86000,
         "manufacturer": "Harvester 2K"
       },
       "5": {
@@ -11868,7 +11072,6 @@
         "maxRange": 337.5,
         "rpm": 37.6,
         "speed": 500.0,
-        "cost": 140000,
         "manufacturer": "ExoStar"
       }
     },
@@ -11894,7 +11097,6 @@
         "maxRange": 216.0,
         "rpm": 19.5,
         "speed": 320.0,
-        "cost": 10000,
         "manufacturer": "Hellespont Industrials"
       },
       "1": {
@@ -11905,7 +11107,6 @@
         "maxRange": 270.0,
         "rpm": 21.4,
         "speed": 400.0,
-        "cost": 20000,
         "manufacturer": "Hellespont Industrials"
       },
       "2": {
@@ -11916,7 +11117,6 @@
         "maxRange": 283.5,
         "rpm": 22.6,
         "speed": 420.0,
-        "cost": 25000,
         "manufacturer": "Hellespont Industrials"
       },
       "3": {
@@ -11927,7 +11127,6 @@
         "maxRange": 297.0,
         "rpm": 23.8,
         "speed": 440.0,
-        "cost": 33000,
         "manufacturer": "Hellespont Industrials"
       },
       "4": {
@@ -11938,7 +11137,6 @@
         "maxRange": 310.5,
         "rpm": 25.2,
         "speed": 460.0,
-        "cost": 43000,
         "manufacturer": "Hellespont Industrials"
       },
       "5": {
@@ -11949,7 +11147,6 @@
         "maxRange": 337.5,
         "rpm": 28.6,
         "speed": 500.0,
-        "cost": 70000,
         "manufacturer": "Hellespont Industrials"
       }
     },
@@ -11976,7 +11173,6 @@
         "maxRange": 216.0,
         "rpm": 23.9,
         "speed": 320.0,
-        "cost": 10000,
         "manufacturer": "Guided Technologies"
       },
       "1": {
@@ -11987,7 +11183,6 @@
         "maxRange": 270.0,
         "rpm": 26.3,
         "speed": 400.0,
-        "cost": 20000,
         "manufacturer": "Coventry"
       },
       "2": {
@@ -11998,7 +11193,6 @@
         "maxRange": 283.5,
         "rpm": 26.9,
         "speed": 420.0,
-        "cost": 25000,
         "manufacturer": "TharHes 2 Pack"
       },
       "3": {
@@ -12009,7 +11203,6 @@
         "maxRange": 297.0,
         "rpm": 29.2,
         "speed": 440.0,
-        "cost": 33000,
         "manufacturer": "Irian Weapon Works Class 2"
       },
       "4": {
@@ -12020,7 +11213,6 @@
         "maxRange": 310.5,
         "rpm": 31.0,
         "speed": 460.0,
-        "cost": 43000,
         "manufacturer": "Harvester 2K"
       },
       "5": {
@@ -12031,7 +11223,6 @@
         "maxRange": 337.5,
         "rpm": 35.1,
         "speed": 500.0,
-        "cost": 70000,
         "manufacturer": "ExoStar"
       }
     },
@@ -12057,7 +11248,6 @@
         "maxRange": 216.0,
         "rpm": 16.0,
         "speed": 320.0,
-        "cost": 60000,
         "manufacturer": "Telos Four-Shot"
       },
       "1": {
@@ -12068,7 +11258,6 @@
         "maxRange": 270.0,
         "rpm": 17.6,
         "speed": 400.0,
-        "cost": 120000,
         "manufacturer": "Shannon Force"
       },
       "2": {
@@ -12079,7 +11268,6 @@
         "maxRange": 283.5,
         "rpm": 18.6,
         "speed": 420.0,
-        "cost": 150000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -12090,7 +11278,6 @@
         "maxRange": 297.0,
         "rpm": 19.6,
         "speed": 440.0,
-        "cost": 198000,
         "manufacturer": "Hovertec"
       },
       "4": {
@@ -12101,7 +11288,6 @@
         "maxRange": 310.5,
         "rpm": 20.8,
         "speed": 460.0,
-        "cost": 258000,
         "manufacturer": "Thunderstroke"
       },
       "5": {
@@ -12112,7 +11298,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 420000,
         "manufacturer": "Totshlagen"
       }
     },
@@ -12138,7 +11323,6 @@
         "maxRange": 216.0,
         "rpm": 16.0,
         "speed": 320.0,
-        "cost": 160000,
         "manufacturer": "Telos Four-Shot"
       },
       "1": {
@@ -12149,7 +11333,6 @@
         "maxRange": 270.0,
         "rpm": 17.6,
         "speed": 400.0,
-        "cost": 320000,
         "manufacturer": "Shannon Force"
       },
       "2": {
@@ -12160,7 +11343,6 @@
         "maxRange": 283.5,
         "rpm": 18.6,
         "speed": 420.0,
-        "cost": 400000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -12171,7 +11353,6 @@
         "maxRange": 297.0,
         "rpm": 19.6,
         "speed": 440.0,
-        "cost": 528000,
         "manufacturer": "Hovertec"
       },
       "4": {
@@ -12182,7 +11363,6 @@
         "maxRange": 310.5,
         "rpm": 20.8,
         "speed": 460.0,
-        "cost": 688000,
         "manufacturer": "Thunderstroke"
       },
       "5": {
@@ -12193,7 +11373,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 1120000,
         "manufacturer": "Totshlagen"
       }
     },
@@ -12219,7 +11398,6 @@
         "maxRange": 216.0,
         "rpm": 25.6,
         "speed": 320.0,
-        "cost": 160000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -12230,7 +11408,6 @@
         "maxRange": 270.0,
         "rpm": 28.2,
         "speed": 400.0,
-        "cost": 320000,
         "manufacturer": "Coventry 4-Tube"
       },
       "2": {
@@ -12241,7 +11418,6 @@
         "maxRange": 283.5,
         "rpm": 29.7,
         "speed": 420.0,
-        "cost": 400000,
         "manufacturer": "TharHes 4 Pack"
       },
       "3": {
@@ -12252,7 +11428,6 @@
         "maxRange": 297.0,
         "rpm": 31.3,
         "speed": 440.0,
-        "cost": 528000,
         "manufacturer": "Irian Weapon Works Class 4"
       },
       "4": {
@@ -12263,7 +11438,6 @@
         "maxRange": 310.5,
         "rpm": 33.1,
         "speed": 460.0,
-        "cost": 688000,
         "manufacturer": "Harvester"
       },
       "5": {
@@ -12274,7 +11448,6 @@
         "maxRange": 337.5,
         "rpm": 37.6,
         "speed": 500.0,
-        "cost": 1120000,
         "manufacturer": "Archer"
       }
     },
@@ -12300,7 +11473,6 @@
         "maxRange": 216.0,
         "rpm": 16.0,
         "speed": 320.0,
-        "cost": 60000,
         "manufacturer": "TharHes Industries"
       },
       "1": {
@@ -12311,7 +11483,6 @@
         "maxRange": 270.0,
         "rpm": 17.6,
         "speed": 400.0,
-        "cost": 120000,
         "manufacturer": "TharHes Industries"
       },
       "2": {
@@ -12322,7 +11493,6 @@
         "maxRange": 283.5,
         "rpm": 18.6,
         "speed": 420.0,
-        "cost": 150000,
         "manufacturer": "TharHes Industries"
       },
       "3": {
@@ -12333,7 +11503,6 @@
         "maxRange": 297.0,
         "rpm": 19.6,
         "speed": 440.0,
-        "cost": 198000,
         "manufacturer": "TharHes Industries"
       },
       "4": {
@@ -12344,7 +11513,6 @@
         "maxRange": 310.5,
         "rpm": 20.8,
         "speed": 460.0,
-        "cost": 258000,
         "manufacturer": "TharHes Industries"
       },
       "5": {
@@ -12355,7 +11523,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 420000,
         "manufacturer": "TharHes Industries"
       }
     },
@@ -12382,7 +11549,6 @@
         "maxRange": 216.0,
         "rpm": 26.6,
         "speed": 320.0,
-        "cost": 60000,
         "manufacturer": "Valiant"
       },
       "1": {
@@ -12393,7 +11559,6 @@
         "maxRange": 270.0,
         "rpm": 29.3,
         "speed": 400.0,
-        "cost": 120000,
         "manufacturer": "Coventry 4-Tube"
       },
       "2": {
@@ -12404,7 +11569,6 @@
         "maxRange": 283.5,
         "rpm": 30.8,
         "speed": 420.0,
-        "cost": 150000,
         "manufacturer": "TharHes 4 Pack"
       },
       "3": {
@@ -12415,7 +11579,6 @@
         "maxRange": 297.0,
         "rpm": 32.5,
         "speed": 440.0,
-        "cost": 198000,
         "manufacturer": "Irian Weapon Works Class 4"
       },
       "4": {
@@ -12426,7 +11589,6 @@
         "maxRange": 310.5,
         "rpm": 34.4,
         "speed": 460.0,
-        "cost": 258000,
         "manufacturer": "Harvester"
       },
       "5": {
@@ -12437,7 +11599,6 @@
         "maxRange": 337.5,
         "rpm": 39.0,
         "speed": 500.0,
-        "cost": 390000,
         "manufacturer": "Archer"
       }
     },
@@ -12463,7 +11624,6 @@
         "maxRange": 216.0,
         "rpm": 16.0,
         "speed": 320.0,
-        "cost": 80000,
         "manufacturer": "Telos-6"
       },
       "1": {
@@ -12474,7 +11634,6 @@
         "maxRange": 270.0,
         "rpm": 17.6,
         "speed": 400.0,
-        "cost": 160000,
         "manufacturer": "Arrowlite"
       },
       "2": {
@@ -12485,7 +11644,6 @@
         "maxRange": 283.5,
         "rpm": 18.6,
         "speed": 420.0,
-        "cost": 200000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -12496,7 +11654,6 @@
         "maxRange": 297.0,
         "rpm": 19.6,
         "speed": 440.0,
-        "cost": 264000,
         "manufacturer": "Hovertec-6"
       },
       "4": {
@@ -12507,7 +11664,6 @@
         "maxRange": 310.5,
         "rpm": 20.8,
         "speed": 460.0,
-        "cost": 344000,
         "manufacturer": "Thunderstroke"
       },
       "5": {
@@ -12518,7 +11674,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 560000,
         "manufacturer": "Bical"
       }
     },
@@ -12544,7 +11699,6 @@
         "maxRange": 216.0,
         "rpm": 16.0,
         "speed": 320.0,
-        "cost": 180000,
         "manufacturer": "Telos-6"
       },
       "1": {
@@ -12555,7 +11709,6 @@
         "maxRange": 270.0,
         "rpm": 17.6,
         "speed": 400.0,
-        "cost": 360000,
         "manufacturer": "Arrowlite"
       },
       "2": {
@@ -12566,7 +11719,6 @@
         "maxRange": 283.5,
         "rpm": 18.6,
         "speed": 420.0,
-        "cost": 450000,
         "manufacturer": "Holly"
       },
       "3": {
@@ -12577,7 +11729,6 @@
         "maxRange": 297.0,
         "rpm": 19.6,
         "speed": 440.0,
-        "cost": 594000,
         "manufacturer": "Hovertec-6"
       },
       "4": {
@@ -12588,7 +11739,6 @@
         "maxRange": 310.5,
         "rpm": 20.8,
         "speed": 460.0,
-        "cost": 774000,
         "manufacturer": "Thunderstroke"
       },
       "5": {
@@ -12599,7 +11749,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 1260000,
         "manufacturer": "Bical"
       }
     },
@@ -12625,7 +11774,6 @@
         "maxRange": 216.0,
         "rpm": 26.6,
         "speed": 320.0,
-        "cost": 180000,
         "manufacturer": "Valiant Pilum"
       },
       "1": {
@@ -12636,7 +11784,6 @@
         "maxRange": 270.0,
         "rpm": 29.3,
         "speed": 400.0,
-        "cost": 360000,
         "manufacturer": "Coventry 90 m"
       },
       "2": {
@@ -12647,7 +11794,6 @@
         "maxRange": 283.5,
         "rpm": 30.8,
         "speed": 420.0,
-        "cost": 450000,
         "manufacturer": "TharHes Maxi"
       },
       "3": {
@@ -12658,7 +11804,6 @@
         "maxRange": 297.0,
         "rpm": 32.5,
         "speed": 440.0,
-        "cost": 594000,
         "manufacturer": "Irian Weapon Works Class 6"
       },
       "4": {
@@ -12669,7 +11814,6 @@
         "maxRange": 310.5,
         "rpm": 34.4,
         "speed": 460.0,
-        "cost": 774000,
         "manufacturer": "Harvester 20k"
       },
       "5": {
@@ -12680,7 +11824,6 @@
         "maxRange": 337.5,
         "rpm": 39.0,
         "speed": 500.0,
-        "cost": 1260000,
         "manufacturer": "ExoStar"
       }
     },
@@ -12706,7 +11849,6 @@
         "maxRange": 216.0,
         "rpm": 16.0,
         "speed": 320.0,
-        "cost": 80000,
         "manufacturer": "Andurien AeroTech"
       },
       "1": {
@@ -12717,7 +11859,6 @@
         "maxRange": 270.0,
         "rpm": 17.6,
         "speed": 400.0,
-        "cost": 160000,
         "manufacturer": "Andurien AeroTech"
       },
       "2": {
@@ -12728,7 +11869,6 @@
         "maxRange": 283.5,
         "rpm": 18.6,
         "speed": 420.0,
-        "cost": 200000,
         "manufacturer": "Andurien AeroTech"
       },
       "3": {
@@ -12739,7 +11879,6 @@
         "maxRange": 297.0,
         "rpm": 19.6,
         "speed": 440.0,
-        "cost": 264000,
         "manufacturer": "Andurien AeroTech"
       },
       "4": {
@@ -12750,7 +11889,6 @@
         "maxRange": 310.5,
         "rpm": 20.8,
         "speed": 460.0,
-        "cost": 344000,
         "manufacturer": "Andurien AeroTech"
       },
       "5": {
@@ -12761,7 +11899,6 @@
         "maxRange": 337.5,
         "rpm": 23.5,
         "speed": 500.0,
-        "cost": 560000,
         "manufacturer": "Andurien AeroTech"
       }
     },
@@ -12788,7 +11925,6 @@
         "maxRange": 216.0,
         "rpm": 26.6,
         "speed": 320.0,
-        "cost": 80000,
         "manufacturer": "Valiant Pilum"
       },
       "1": {
@@ -12799,7 +11935,6 @@
         "maxRange": 270.0,
         "rpm": 29.3,
         "speed": 400.0,
-        "cost": 160000,
         "manufacturer": "Coventry 90 m"
       },
       "2": {
@@ -12810,7 +11945,6 @@
         "maxRange": 283.5,
         "rpm": 30.8,
         "speed": 420.0,
-        "cost": 200000,
         "manufacturer": "TharHes Maxi"
       },
       "3": {
@@ -12821,7 +11955,6 @@
         "maxRange": 297.0,
         "rpm": 32.5,
         "speed": 440.0,
-        "cost": 264000,
         "manufacturer": "Irian Weapon Works Class 6"
       },
       "4": {
@@ -12832,7 +11965,6 @@
         "maxRange": 310.5,
         "rpm": 34.4,
         "speed": 460.0,
-        "cost": 344000,
         "manufacturer": "Harvester 20k"
       },
       "5": {
@@ -12843,7 +11975,6 @@
         "maxRange": 337.5,
         "rpm": 39.0,
         "speed": 500.0,
-        "cost": 560000,
         "manufacturer": "ExoStar"
       }
     },
@@ -12867,7 +11998,6 @@
     "tiers": null,
     "capacity": 320,
     "techBase": "InnerSphere",
-    "cost": 54000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.SRM"
   },
@@ -12885,7 +12015,6 @@
     "tiers": null,
     "capacity": 320,
     "techBase": "InnerSphere",
-    "cost": 108000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.SRM.Artemis"
   },
@@ -12903,7 +12032,6 @@
     "tiers": null,
     "capacity": 160,
     "techBase": "InnerSphere",
-    "cost": 54000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.SRM.Artemis"
   },
@@ -12921,7 +12049,6 @@
     "tiers": null,
     "capacity": 160,
     "techBase": "InnerSphere",
-    "cost": 27000,
     "explosionDamagePerRound": 2.15,
     "ammoType": "Ammo.Missile.SRM"
   },
@@ -12939,7 +12066,6 @@
     "tiers": null,
     "capacity": 320,
     "techBase": "InnerSphere",
-    "cost": 108000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Missile.SRM.Streak"
   },
@@ -12957,7 +12083,6 @@
     "tiers": null,
     "capacity": 160,
     "techBase": "InnerSphere",
-    "cost": 54000,
     "explosionDamagePerRound": 2.0,
     "ammoType": "Ammo.Missile.SRM.Streak"
   },
@@ -12976,7 +12101,6 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
-    "cost": 17500,
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk II hardpoints on 30-45 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -13002,7 +12126,6 @@
     "heatCapacity": 1.0,
     "tiers": null,
     "techBase": "InnerSphere",
-    "cost": 4000,
     "description": "A standard heat sink. Both dissipates heat from the 'Mech and allows a greater build up of heat before shutdown occurs."
   },
   "SmallChemLaser_AmmoEquipment": {
@@ -13020,7 +12143,6 @@
     "capacity": 180,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 40000,
     "explosionDamagePerRound": 3.0,
     "ammoType": "Ammo.Energy.ChemLaser.Small"
   },
@@ -13039,7 +12161,6 @@
     "capacity": 90,
     "techBase": "InnerSphere",
     "dlc": 1,
-    "cost": 20000,
     "explosionDamagePerRound": 3.0,
     "ammoType": "Ammo.Energy.ChemLaser.Small"
   },
@@ -13058,7 +12179,6 @@
         "range": 120.0,
         "maxRange": 180.0,
         "rpm": 27.8,
-        "cost": 11250,
         "manufacturer": "Grimm Flashbang"
       },
       "1": {
@@ -13068,7 +12188,6 @@
         "range": 150.0,
         "maxRange": 225.0,
         "rpm": 33.3,
-        "cost": 22500,
         "manufacturer": "Ozone Burner 101"
       },
       "2": {
@@ -13078,7 +12197,6 @@
         "range": 157.5,
         "maxRange": 236.2,
         "rpm": 34.2,
-        "cost": 28125,
         "manufacturer": "Liquid Light"
       },
       "3": {
@@ -13088,7 +12206,6 @@
         "range": 165.0,
         "maxRange": 247.5,
         "rpm": 35.1,
-        "cost": 37125,
         "manufacturer": "COIL Type TC1020"
       },
       "4": {
@@ -13098,7 +12215,6 @@
         "range": 172.5,
         "maxRange": 258.8,
         "rpm": 36.2,
-        "cost": 48375,
         "manufacturer": "Rim World's Reserve"
       },
       "5": {
@@ -13108,7 +12224,6 @@
         "range": 187.5,
         "maxRange": 281.2,
         "rpm": 39.2,
-        "cost": 78750,
         "manufacturer": "T.Alliance Type Luna-2130"
       }
     },
@@ -13134,7 +12249,6 @@
         "range": 120.0,
         "maxRange": 180.0,
         "rpm": 22.2,
-        "cost": 11250,
         "manufacturer": "Omnicron 1000"
       },
       "1": {
@@ -13144,7 +12258,6 @@
         "range": 150.0,
         "maxRange": 225.0,
         "rpm": 26.7,
-        "cost": 22500,
         "manufacturer": "Magna Mk.I"
       },
       "2": {
@@ -13154,7 +12267,6 @@
         "range": 157.5,
         "maxRange": 236.2,
         "rpm": 27.3,
-        "cost": 28125,
         "manufacturer": "ChisComp 32"
       },
       "3": {
@@ -13164,7 +12276,6 @@
         "range": 165.0,
         "maxRange": 247.5,
         "rpm": 28.1,
-        "cost": 37125,
         "manufacturer": "Diverse Optics Type 10"
       },
       "4": {
@@ -13174,7 +12285,6 @@
         "range": 172.5,
         "maxRange": 258.8,
         "rpm": 29.0,
-        "cost": 48375,
         "manufacturer": "Exo Star"
       },
       "5": {
@@ -13184,7 +12294,6 @@
         "range": 187.5,
         "maxRange": 281.2,
         "rpm": 31.4,
-        "cost": 78750,
         "manufacturer": "Dinatech Mk.III"
       }
     },
@@ -13207,7 +12316,6 @@
         "range": 120.0,
         "maxRange": 180.0,
         "rpm": 33.3,
-        "cost": 11250,
         "manufacturer": "Harmon"
       },
       "1": {
@@ -13217,7 +12325,6 @@
         "range": 150.0,
         "maxRange": 225.0,
         "rpm": 40.0,
-        "cost": 22500,
         "manufacturer": "Victory"
       },
       "2": {
@@ -13227,7 +12334,6 @@
         "range": 157.5,
         "maxRange": 236.2,
         "rpm": 41.0,
-        "cost": 28125,
         "manufacturer": "Hessen 1X"
       },
       "3": {
@@ -13237,7 +12343,6 @@
         "range": 165.0,
         "maxRange": 247.5,
         "rpm": 42.1,
-        "cost": 37125,
         "manufacturer": "Defiance B4M"
       },
       "4": {
@@ -13247,7 +12352,6 @@
         "range": 172.5,
         "maxRange": 258.8,
         "rpm": 43.5,
-        "cost": 48375,
         "manufacturer": "Exo Star"
       },
       "5": {
@@ -13257,7 +12361,6 @@
         "range": 187.5,
         "maxRange": 281.2,
         "rpm": 47.1,
-        "cost": 78750,
         "manufacturer": "McCorkel"
       }
     },
@@ -13281,7 +12384,6 @@
         "range": 88.0,
         "maxRange": 132.0,
         "rpm": 26.3,
-        "cost": 16000,
         "manufacturer": "Omnicron 950"
       },
       "1": {
@@ -13291,7 +12393,6 @@
         "range": 110.0,
         "maxRange": 165.0,
         "rpm": 31.6,
-        "cost": 32000,
         "manufacturer": "Magna 200P"
       },
       "2": {
@@ -13301,7 +12402,6 @@
         "range": 115.5,
         "maxRange": 173.2,
         "rpm": 32.4,
-        "cost": 40000,
         "manufacturer": "Sutel Precision Line"
       },
       "3": {
@@ -13311,7 +12411,6 @@
         "range": 121.0,
         "maxRange": 181.5,
         "rpm": 33.2,
-        "cost": 52800,
         "manufacturer": "Diverse Optics Type 10P"
       },
       "4": {
@@ -13321,7 +12420,6 @@
         "range": 126.5,
         "maxRange": 189.7,
         "rpm": 34.3,
-        "cost": 68800,
         "manufacturer": "Ceres Arms W"
       },
       "5": {
@@ -13331,7 +12429,6 @@
         "range": 137.5,
         "maxRange": 206.2,
         "rpm": 37.2,
-        "cost": 112000,
         "manufacturer": "Blankenburg Technologies"
       }
     },
@@ -13354,7 +12451,6 @@
         "range": 128.0,
         "maxRange": 192.0,
         "rpm": 218.2,
-        "cost": 31000,
         "manufacturer": "Bowie Industries"
       },
       "1": {
@@ -13364,7 +12460,6 @@
         "range": 160.0,
         "maxRange": 240.0,
         "rpm": 240.0,
-        "cost": 62000,
         "manufacturer": "General Motors"
       },
       "2": {
@@ -13374,7 +12469,6 @@
         "range": 168.0,
         "maxRange": 252.0,
         "rpm": 253.2,
-        "cost": 77500,
         "manufacturer": "Arc-Royal MechWorks"
       },
       "3": {
@@ -13384,7 +12478,6 @@
         "range": 176.0,
         "maxRange": 264.0,
         "rpm": 266.7,
-        "cost": 102300,
         "manufacturer": "Bergan Industries"
       },
       "4": {
@@ -13394,7 +12487,6 @@
         "range": 184.0,
         "maxRange": 276.0,
         "rpm": 283.0,
-        "cost": 133300,
         "manufacturer": "Defiance Industries"
       },
       "5": {
@@ -13404,7 +12496,6 @@
         "range": 200.0,
         "maxRange": 300.0,
         "rpm": 319.1,
-        "cost": 217000,
         "manufacturer": "Martell-X"
       }
     },
@@ -13428,7 +12519,6 @@
         "maxRange": 216.0,
         "rpm": 27.3,
         "speed": 320.0,
-        "cost": 15000,
         "manufacturer": "Valiant Javelin"
       },
       "1": {
@@ -13439,7 +12529,6 @@
         "maxRange": 270.0,
         "rpm": 30.0,
         "speed": 400.0,
-        "cost": 30000,
         "manufacturer": "Coventry T4H"
       },
       "2": {
@@ -13450,7 +12539,6 @@
         "maxRange": 283.5,
         "rpm": 31.6,
         "speed": 420.0,
-        "cost": 37500,
         "manufacturer": "Zone-Tone"
       },
       "3": {
@@ -13461,7 +12549,6 @@
         "maxRange": 297.0,
         "rpm": 33.3,
         "speed": 440.0,
-        "cost": 49500,
         "manufacturer": "Holly"
       },
       "4": {
@@ -13472,7 +12559,6 @@
         "maxRange": 310.5,
         "rpm": 35.3,
         "speed": 460.0,
-        "cost": 64500,
         "manufacturer": "Hovertec"
       },
       "5": {
@@ -13483,7 +12569,6 @@
         "maxRange": 337.5,
         "rpm": 40.0,
         "speed": 500.0,
-        "cost": 105000,
         "manufacturer": "Defiance"
       }
     },
@@ -13509,7 +12594,6 @@
         "maxRange": 216.0,
         "rpm": 30.3,
         "speed": 320.0,
-        "cost": 15000,
         "manufacturer": "Valiant Javelin"
       },
       "1": {
@@ -13520,7 +12604,6 @@
         "maxRange": 270.0,
         "rpm": 33.3,
         "speed": 400.0,
-        "cost": 30000,
         "manufacturer": "Coventry T4H"
       },
       "2": {
@@ -13531,7 +12614,6 @@
         "maxRange": 283.5,
         "rpm": 35.1,
         "speed": 420.0,
-        "cost": 37500,
         "manufacturer": "Generation"
       },
       "3": {
@@ -13542,7 +12624,6 @@
         "maxRange": 297.0,
         "rpm": 37.0,
         "speed": 440.0,
-        "cost": 49500,
         "manufacturer": "Irian Weapon Works Class S2"
       },
       "4": {
@@ -13553,7 +12634,6 @@
         "maxRange": 310.5,
         "rpm": 39.2,
         "speed": 460.0,
-        "cost": 64500,
         "manufacturer": "Federated SuperStreak"
       },
       "5": {
@@ -13564,7 +12644,6 @@
         "maxRange": 337.5,
         "rpm": 44.4,
         "speed": 500.0,
-        "cost": 105000,
         "manufacturer": "Pinard Reaper"
       }
     },
@@ -13590,7 +12669,6 @@
         "maxRange": 216.0,
         "rpm": 27.3,
         "speed": 400.0,
-        "cost": 75000,
         "manufacturer": "Quikscell Company"
       },
       "1": {
@@ -13601,7 +12679,6 @@
         "maxRange": 270.0,
         "rpm": 30.0,
         "speed": 500.0,
-        "cost": 150000,
         "manufacturer": "Guided Technologies 2nd Gen"
       },
       "2": {
@@ -13612,7 +12689,6 @@
         "maxRange": 283.5,
         "rpm": 31.6,
         "speed": 525.0,
-        "cost": 187500,
         "manufacturer": "Harpoon-4S"
       },
       "3": {
@@ -13623,7 +12699,6 @@
         "maxRange": 297.0,
         "rpm": 33.3,
         "speed": 550.0,
-        "cost": 247500,
         "manufacturer": "Defiance Industries"
       },
       "4": {
@@ -13634,7 +12709,6 @@
         "maxRange": 310.5,
         "rpm": 35.3,
         "speed": 575.0,
-        "cost": 322500,
         "manufacturer": "Telos TargetLok-4"
       },
       "5": {
@@ -13645,7 +12719,6 @@
         "maxRange": 337.5,
         "rpm": 40.0,
         "speed": 625.0,
-        "cost": 525000,
         "manufacturer": "Defiance Track-Shot II"
       }
     },
@@ -13671,7 +12744,6 @@
         "maxRange": 216.0,
         "rpm": 27.3,
         "speed": 320.0,
-        "cost": 90000,
         "manufacturer": "Hovertec"
       },
       "1": {
@@ -13682,7 +12754,6 @@
         "maxRange": 270.0,
         "rpm": 30.0,
         "speed": 400.0,
-        "cost": 180000,
         "manufacturer": "Defiance Industries"
       },
       "2": {
@@ -13693,7 +12764,6 @@
         "maxRange": 283.5,
         "rpm": 31.6,
         "speed": 420.0,
-        "cost": 225000,
         "manufacturer": "Guided Technologies 2nd Gen"
       },
       "3": {
@@ -13704,7 +12774,6 @@
         "maxRange": 297.0,
         "rpm": 33.3,
         "speed": 440.0,
-        "cost": 297000,
         "manufacturer": "Harpoon-6"
       },
       "4": {
@@ -13715,7 +12784,6 @@
         "maxRange": 310.5,
         "rpm": 35.3,
         "speed": 460.0,
-        "cost": 387000,
         "manufacturer": "Holly Mk II"
       },
       "5": {
@@ -13726,7 +12794,6 @@
         "maxRange": 337.5,
         "rpm": 40.0,
         "speed": 500.0,
-        "cost": 630000,
         "manufacturer": "Defiance Sting-3"
       }
     },
@@ -13751,7 +12818,6 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
-    "cost": 4000,
     "description": "A makeshift device created for arena combat able to override engine output levels to achieve short bursts of high speed. Sustained overuse threatens structural damage in the center torso. Compatible with Motive Upgrade Mk I hardpoints on 20-25 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -13776,7 +12842,6 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
-    "cost": 35000,
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk III hardpoints on 50-65 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -13801,7 +12866,6 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
-    "cost": 70000,
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk IV hardpoints on 70-85 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -13826,7 +12890,6 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
-    "cost": 140000,
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk V hardpoints on 90-100 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -13851,7 +12914,6 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
-    "cost": 4000,
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk I hardpoints on 20-25 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -13876,7 +12938,6 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
-    "cost": 17500,
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk II hardpoints on 30-45 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -13901,7 +12962,6 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
-    "cost": 35000,
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk III hardpoints on 50-65 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -13926,7 +12986,6 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
-    "cost": 70000,
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk IV hardpoints on 70-85 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -13951,7 +13010,6 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
-    "cost": 140000,
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk V hardpoints on 90-100 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -13976,7 +13034,6 @@
         "range": 360.0,
         "maxRange": 360.0,
         "rpm": 0.0,
-        "cost": 50000,
         "manufacturer": "NAIS mk.1"
       },
       "1": {
@@ -13986,7 +13043,6 @@
         "range": 450.0,
         "maxRange": 450.0,
         "rpm": 0.0,
-        "cost": 100000,
         "manufacturer": "Garret Mole"
       },
       "2": {
@@ -13996,7 +13052,6 @@
         "range": 472.5,
         "maxRange": 472.5,
         "rpm": 0.0,
-        "cost": 125000,
         "manufacturer": "CherrySeed Bullseye"
       },
       "3": {
@@ -14006,7 +13061,6 @@
         "range": 495.0,
         "maxRange": 495.0,
         "rpm": 0.0,
-        "cost": 165000,
         "manufacturer": "Apple Churchill 442x"
       },
       "4": {
@@ -14016,7 +13070,6 @@
         "range": 517.5,
         "maxRange": 517.5,
         "rpm": 0.0,
-        "cost": 215000,
         "manufacturer": "D2J"
       },
       "5": {
@@ -14026,7 +13079,6 @@
         "range": 562.5,
         "maxRange": 562.5,
         "rpm": 0.0,
-        "cost": 350000,
         "manufacturer": "Bundesweyth"
       }
     },
@@ -14048,7 +13100,6 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
-    "cost": 20000,
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.1,
@@ -14070,7 +13121,6 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
-    "cost": 40000,
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.12,
@@ -14092,7 +13142,6 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
-    "cost": 60000,
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.14,
@@ -14114,7 +13163,6 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
-    "cost": 80000,
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.16,
@@ -14136,7 +13184,6 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
-    "cost": 100000,
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.18,
@@ -14158,7 +13205,6 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
-    "cost": 120000,
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.2,
@@ -14180,7 +13226,6 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
-    "cost": 140000,
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.22,
@@ -14203,7 +13248,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 32.0,
-        "cost": 20000,
         "manufacturer": "Taurus Bullhorn"
       },
       "1": {
@@ -14213,7 +13257,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 36.9,
-        "cost": 40000,
         "manufacturer": "Johnston Cleaver-IV"
       },
       "2": {
@@ -14223,7 +13266,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 40.0,
-        "cost": 50000,
         "manufacturer": "Gibson Federated"
       },
       "3": {
@@ -14233,7 +13275,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 43.6,
-        "cost": 66000,
         "manufacturer": "Coventry StarBlade"
       },
       "4": {
@@ -14243,7 +13284,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 48.0,
-        "cost": 86000,
         "manufacturer": "Hesperus Special"
       },
       "5": {
@@ -14253,7 +13293,6 @@
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 60.0,
-        "cost": 140000,
         "manufacturer": "Defiance Type X"
       }
     },
@@ -14279,7 +13318,6 @@
         "maxRange": 432.0,
         "rpm": 13.6,
         "speed": 640.0,
-        "cost": 225000,
         "manufacturer": "Mydron Excel"
       },
       "1": {
@@ -14290,7 +13328,6 @@
         "maxRange": 540.0,
         "rpm": 15.0,
         "speed": 800.0,
-        "cost": 450000,
         "manufacturer": "Defiance Industries"
       },
       "2": {
@@ -14301,7 +13338,6 @@
         "maxRange": 567.0,
         "rpm": 15.8,
         "speed": 840.0,
-        "cost": 562500,
         "manufacturer": "Achernar BattleMechs"
       },
       "3": {
@@ -14312,7 +13348,6 @@
         "maxRange": 594.0,
         "rpm": 16.7,
         "speed": 880.0,
-        "cost": 742500,
         "manufacturer": "Silver Wyrm, Ltd."
       },
       "4": {
@@ -14323,7 +13358,6 @@
         "maxRange": 621.0,
         "rpm": 17.6,
         "speed": 920.0,
-        "cost": 967500,
         "manufacturer": "Cosara Weaponries"
       },
       "5": {
@@ -14334,7 +13368,6 @@
         "maxRange": 675.0,
         "rpm": 20.0,
         "speed": 1000.0,
-        "cost": 1575000,
         "manufacturer": "Imperator Automatic"
       }
     },
@@ -14360,7 +13393,6 @@
         "maxRange": 288.0,
         "rpm": 10.9,
         "speed": 400.0,
-        "cost": 300000,
         "manufacturer": "Quickscell"
       },
       "1": {
@@ -14371,7 +13403,6 @@
         "maxRange": 360.0,
         "rpm": 12.0,
         "speed": 500.0,
-        "cost": 600000,
         "manufacturer": "Defiance Industries"
       },
       "2": {
@@ -14382,7 +13413,6 @@
         "maxRange": 378.0,
         "rpm": 12.6,
         "speed": 525.0,
-        "cost": 750000,
         "manufacturer": "Mydron Type 20"
       },
       "3": {
@@ -14393,7 +13423,6 @@
         "maxRange": 396.0,
         "rpm": 13.3,
         "speed": 550.0,
-        "cost": 990000,
         "manufacturer": "Ceres Metals Industries"
       },
       "4": {
@@ -14404,7 +13433,6 @@
         "maxRange": 414.0,
         "rpm": 14.1,
         "speed": 575.0,
-        "cost": 1290000,
         "manufacturer": "Ceres Huang Di"
       },
       "5": {
@@ -14415,7 +13443,6 @@
         "maxRange": 450.0,
         "rpm": 16.0,
         "speed": 625.0,
-        "cost": 2100000,
         "manufacturer": "Defiance Thunder"
       }
     },
@@ -14441,7 +13468,6 @@
         "maxRange": 648.0,
         "rpm": 60.6,
         "speed": 1080.0,
-        "cost": 75000,
         "manufacturer": "Yeffters Weapons Factory"
       },
       "1": {
@@ -14452,7 +13478,6 @@
         "maxRange": 810.0,
         "rpm": 66.7,
         "speed": 1350.0,
-        "cost": 150000,
         "manufacturer": "Defiance Industries"
       },
       "2": {
@@ -14463,7 +13488,6 @@
         "maxRange": 850.5,
         "rpm": 70.2,
         "speed": 1417.5,
-        "cost": 187500,
         "manufacturer": "Kallon Industries"
       },
       "3": {
@@ -14474,7 +13498,6 @@
         "maxRange": 891.0,
         "rpm": 74.1,
         "speed": 1485.0,
-        "cost": 247500,
         "manufacturer": "Independence Weaponry"
       },
       "4": {
@@ -14485,7 +13508,6 @@
         "maxRange": 931.5,
         "rpm": 78.4,
         "speed": 1552.5,
-        "cost": 322500,
         "manufacturer": "Brooks Incorporated"
       },
       "5": {
@@ -14496,7 +13518,6 @@
         "maxRange": 1012.5,
         "rpm": 88.9,
         "speed": 1687.5,
-        "cost": 525000,
         "manufacturer": "Mydron Model D-rf"
       }
     },
@@ -14522,7 +13543,6 @@
         "maxRange": 480.0,
         "rpm": 47.6,
         "speed": 960.0,
-        "cost": 200000,
         "manufacturer": "Deleon 5UB"
       },
       "1": {
@@ -14533,7 +13553,6 @@
         "maxRange": 600.0,
         "rpm": 57.1,
         "speed": 1200.0,
-        "cost": 400000,
         "manufacturer": "Armstrong Spitfire"
       },
       "2": {
@@ -14544,7 +13563,6 @@
         "maxRange": 630.0,
         "rpm": 60.2,
         "speed": 1260.0,
-        "cost": 500000,
         "manufacturer": "Mydron Model C-Ultra"
       },
       "3": {
@@ -14555,7 +13573,6 @@
         "maxRange": 660.0,
         "rpm": 63.5,
         "speed": 1320.0,
-        "cost": 660000,
         "manufacturer": "Nova-5"
       },
       "4": {
@@ -14566,7 +13583,6 @@
         "maxRange": 690.0,
         "rpm": 67.3,
         "speed": 1380.0,
-        "cost": 860000,
         "manufacturer": "Imperator Ultra"
       },
       "5": {
@@ -14577,7 +13593,6 @@
         "maxRange": 750.0,
         "rpm": 76.1,
         "speed": 1500.0,
-        "cost": 1400000,
         "manufacturer": "KWI"
       }
     },
@@ -14603,7 +13618,6 @@
         "maxRange": 480.0,
         "rpm": 36.4,
         "speed": 960.0,
-        "cost": 200000,
         "manufacturer": "Armstrong Spitfire"
       },
       "1": {
@@ -14614,7 +13628,6 @@
         "maxRange": 600.0,
         "rpm": 40.0,
         "speed": 1200.0,
-        "cost": 400000,
         "manufacturer": "Armstrong Spitfire"
       },
       "2": {
@@ -14625,7 +13638,6 @@
         "maxRange": 630.0,
         "rpm": 42.1,
         "speed": 1260.0,
-        "cost": 500000,
         "manufacturer": "Armstrong Spitfire"
       },
       "3": {
@@ -14636,7 +13648,6 @@
         "maxRange": 660.0,
         "rpm": 44.4,
         "speed": 1320.0,
-        "cost": 660000,
         "manufacturer": "Armstrong Spitfire"
       },
       "4": {
@@ -14647,7 +13658,6 @@
         "maxRange": 690.0,
         "rpm": 47.1,
         "speed": 1380.0,
-        "cost": 860000,
         "manufacturer": "Armstrong Spitfire"
       },
       "5": {
@@ -14658,7 +13668,6 @@
         "maxRange": 750.0,
         "rpm": 53.3,
         "speed": 1500.0,
-        "cost": 1400000,
         "manufacturer": "Armstrong Spitfire"
       }
     },
@@ -14683,7 +13692,6 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
-    "cost": 8000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk I hardpoints.",
     "masc": {
       "accel": 4.0,
@@ -14708,7 +13716,6 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
-    "cost": 35000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk II hardpoints.",
     "masc": {
       "accel": 4.0,
@@ -14733,7 +13740,6 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
-    "cost": 70000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk III hardpoints.",
     "masc": {
       "accel": 3.85,
@@ -14758,7 +13764,6 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
-    "cost": 140000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk IV hardpoints.",
     "masc": {
       "accel": 3.85,
@@ -14783,7 +13788,6 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
-    "cost": 280000,
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk V hardpoints.",
     "masc": {
       "accel": 3.8,
@@ -14809,7 +13813,6 @@
         "range": 562.5,
         "maxRange": 562.5,
         "rpm": 0.0,
-        "cost": 350000,
         "manufacturer": "Strana Mechty MechWorks"
       }
     },

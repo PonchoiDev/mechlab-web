@@ -32,11 +32,9 @@ import { WhatsNew } from '../components/WhatsNew';
 
 const items = Object.values(itemsJson as unknown as Record<string, Item>);
 const DLC_OPTIONS = getDlcOptions(items);
-const integerFormat = new Intl.NumberFormat('en');
 
 // Hasta dos decimales, sin ceros de más (2.25, 1.3, 15).
 const formatNumber = (value: number | null, decimals = 2) => value === null ? '' : String(Number(value.toFixed(decimals)));
-const formatCost = (value: number | null | undefined) => value === null || value === undefined ? '' : integerFormat.format(value);
 
 interface Column {
   key: WeaponSortKey;
@@ -58,8 +56,7 @@ const COLUMNS: Column[] = [
   { key: 'maxRange', label: 'Max', title: 'Maximum range in meters', value: row => formatNumber(row.maxRange, 0) },
   { key: 'speed', label: 'Speed', title: 'Projectile speed in m/s (lasers hit instantly)', value: row => formatNumber(row.speed, 0) },
   { key: 'ammoPerTon', label: 'Ammo/t', title: 'Rounds in one ton of ammo, and the volleys they give', value: row => row.ammoPerTon === null ? '' : `${row.ammoPerTon}` },
-  { key: 'dlc', label: 'DLC', value: row => getContentSourceLabel(row.dlc) },
-  { key: 'cost', label: 'Cost', title: 'Price in C-Bills at this tier', value: row => formatCost(row.cost) }
+  { key: 'dlc', label: 'DLC', value: row => getContentSourceLabel(row.dlc) }
 ];
 
 function SortButton({ view, sortKey, label, title, onSort }: {
@@ -132,7 +129,6 @@ function EquipmentCard({ item }: { item: Item }) {
       <dl className="unit-card-stats arsenal-card-stats">
         <div><dt>Tons</dt><dd>{formatNumber(item.tonnage)}</dd></div>
         <div><dt>Slots</dt><dd>{item.slots ?? 1}</dd></div>
-        <div><dt>C-Bills</dt><dd>{formatCost(item.cost)}</dd></div>
       </dl>
       {effects.length > 0 && (
         <dl className="arsenal-effects">
@@ -160,7 +156,6 @@ function AmmoTable({ ammo }: { ammo: Item[] }) {
             <th scope="col">Rounds</th>
             <th scope="col" title="Damage per round left when the ammo explodes">Explosion</th>
             <th scope="col">DLC</th>
-            <th scope="col">Cost</th>
             <th scope="col">Used by</th>
           </tr>
         </thead>
@@ -174,7 +169,6 @@ function AmmoTable({ ammo }: { ammo: Item[] }) {
               <td>{item.capacity ?? ''}</td>
               <td>{formatNumber(item.explosionDamagePerRound ?? null)}</td>
               <td>{getContentSourceLabel(getItemDlc(item))}</td>
-              <td>{formatCost(item.cost)}</td>
               <td className="arsenal-users">{users.join(', ')}</td>
             </tr>
           ))}

@@ -18,8 +18,7 @@ export interface ItemTierStats {
   rpm?: number;
   // Velocidad del proyectil en m/s; los láseres no tienen.
   speed?: number;
-  // Precio en C-Bills y fabricante de este tier (la página de equipo los enseña).
-  cost?: number;
+  // Fabricante de este tier (la página de equipo lo enseña).
   manufacturer?: string;
 }
 
@@ -86,8 +85,6 @@ export interface Item {
   ammoPerVolley?: number;
   tiers?: Record<string, ItemTierStats> | null;
   tier?: string;
-  // Precio de catálogo del equipo y la munición; el de las armas va en cada tier.
-  cost?: number;
   dlc?: number;
   description?: string;
   explosionDamagePerRound?: number;

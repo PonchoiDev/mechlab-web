@@ -42,9 +42,8 @@ REGEX_COOLDOWN = re.compile(r'(?<![a-zA-Z])Cooldown=([0-9.]+)')
 REGEX_RANGE = re.compile(r'(?<![A-Za-z])(?:OptimalRange|MaxRange)=([0-9.]+)')
 # Alcance máximo: el juego muestra este como "Max range" (PPC 920 frente a 460 de óptimo).
 REGEX_MAX_RANGE = re.compile(r'(?<![A-Za-z])MaxRange=([0-9.]+)')
-# Página de equipo: fabricante y precio de cada tier, DLC y efectos de cada pieza.
+# Página de equipo: fabricante de cada tier, DLC y efectos de cada pieza. Los precios no se enseñan.
 REGEX_FABRICANTE = re.compile(r'Manufacturer="([^"]+)"')
-REGEX_PRECIO = re.compile(r'CBillBaseValueBigInt=\(Value=([0-9]+)\)')
 # Algunos objetos (la munición de los rifles) vienen en varios DLC: MultipleAssociatedDLC.
 REGEX_DLC = re.compile(r'AssociatedDLC.*?DLC\.DLC(\d+)')
 REGEX_DESCRIPCION = re.compile(r'Description=NSLOCTEXT\([^,]+,\s*"[^"]+",\s*"((?:[^"\\]|\\.)*)"\)')
@@ -183,12 +182,8 @@ def obtener_estadisticas_base(contenido):
 
 def calcular_tier(contenido, base):
     quirks = {quirk: float(valor) for quirk, valor in REGEX_QUIRK.findall(contenido)}
-    # Cada tier tiene su fabricante, y su precio es el de catálogo con CBillValuePercentage_Quirk
-    # (-0.5 en tier 0, +2.5 en el 5), que multiplica como los otros …Percentage_Quirk.
-    # El exportador escapa los apóstrofos («Dragon\\'s Fire»).
+    # Cada tier tiene su fabricante. El exportador escapa los apóstrofos («Dragon\\'s Fire»).
     fabricante = (buscar_texto(REGEX_FABRICANTE, contenido) or '').replace("\\'", "'")
-    precio_base = buscar_numero(REGEX_PRECIO, contenido)
-    precio = round(precio_base * (1.0 + quirks.get("CBillValuePercentage_Quirk", 0.0))) if precio_base is not None else None
 
     if quirks:
         # Los …Percentage_Quirk multiplican; Damage_Quirk y Cooldown_Quirk suman su valor tal cual, en
@@ -226,8 +221,6 @@ def calcular_tier(contenido, base):
     }
     if velocidad > 0:
         estadisticas["speed"] = velocidad
-    if precio is not None:
-        estadisticas["cost"] = precio
     if fabricante:
         estadisticas["manufacturer"] = fabricante
     return estadisticas
@@ -381,10 +374,6 @@ def construir_item(id_base, tiers):
     if dlc:
         # Con varios DLC (la munición de los rifles: DLC1 y DLC6) vale el primero, el que trajo el objeto.
         item["dlc"] = int(dlc.group(1))
-    if tipo_general != "weapon":
-        precio = buscar_numero(REGEX_PRECIO, contenido)
-        if precio is not None:
-            item["cost"] = int(precio)
     if tipo_general == "equipment":
         descripcion = buscar_texto(REGEX_DESCRIPCION, contenido)
         if descripcion:

@@ -42,7 +42,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (542 tests, cobertura con V8) |
+| Tests | Vitest 5 (548 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -96,7 +96,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Find a 'Mech: el mapa se colorea según la rareza de una variante en el mercado de cada facción, en la fecha elegida, con sus fuentes fijas (HRQ, mercados especiales) y el enlace se comparte (`?mech=AS7-D`). Special 'Mech locations lista los 'Mechs hero y las variantes especiales que solo se consiguen en un sitio, como el Wolverine de Razer.
 
 **Armas y equipo**
-- Página propia (`/mercs/equipment/`) con las 191 armas en una tabla: anclaje, toneladas, daño, calor, cooldown, RPM, DPS, daño por tonelada, alcance, velocidad del proyectil, munición por tonelada, fabricante, tecnología, DLC y precio.
+- Página propia (`/mercs/equipment/`) con las 191 armas en una tabla: anclaje, toneladas, daño, calor, cooldown, RPM, DPS, daño por tonelada, alcance, velocidad del proyectil, munición por tonelada, fabricante, tecnología y DLC.
 - Un tier para toda la lista (del 0 a Lost Tech; las armas Clan tienen el suyo), orden por cualquier columna y filtros por tipo, tamaño del anclaje, Esfera Interior o Clan, DLC y búsqueda por nombre o fabricante.
 - Pestaña de equipo con disipadores, retrorreactores, MASC y Supercharger, ECM, sondas y computadores de puntería con sus efectos, y la munición con las armas que la usan. La vista va en el enlace.
 
@@ -211,7 +211,7 @@ Los JSON de `src/data/` se generan a partir de los archivos del juego, exportado
 | `mdl/` y `hps/` | Modelo y anclajes de cada chasis | Tamaño real de cada anclaje |
 | `loadout/` | Builds de fábrica | Build de serie de cada variante |
 | `unitcard/` | Fichas de unidad | Año de aparición y rol |
-| `items/` | Armas, equipo y munición | Estadísticas, fabricante y precio por tier, munición, disipadores, DLC y efectos del equipo |
+| `items/` | Armas, equipo y munición | Estadísticas y fabricante por tier, munición, disipadores, DLC y efectos del equipo |
 | `traits/` | Mejoras | Mejoras de la cantina y sus efectos, y los de los computadores de puntería (que lee `generar_items.py`) |
 | `mech_string_table/` | Tabla de textos `Mech_StringTable` exportada a CSV | Nombres de los chasis |
 
@@ -343,7 +343,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Calidad y comprobación contra el juego
 
-- **542 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **548 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

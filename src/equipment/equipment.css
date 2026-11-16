@@ -173,7 +173,7 @@ body {
   text-transform: uppercase;
 }
 
-.arsenal-card-stats { grid-template-columns: repeat(3, 1fr); }
+.arsenal-card-stats { grid-template-columns: repeat(2, 1fr); }
 
 .arsenal-effects {
   display: grid;

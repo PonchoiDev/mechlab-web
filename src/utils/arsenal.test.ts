@@ -43,16 +43,16 @@ describe('página de armas y equipo', () => {
   it('CA2: el Medium Laser en tier 1 y en Lost Tech', () => {
     expect(row(tier1, 'Medium Laser')).toEqual(expect.objectContaining({
       tier: '1', damage: 5, heat: 2.25, cooldown: 4, rpm: 15, dps: 1.25, damagePerTon: 5, range: 270, maxRange: 405,
-      speed: null, manufacturer: 'Magna Mk.II', cost: 80000, ammoPerTon: null, volleysPerTon: null, dlc: 0
+      speed: null, manufacturer: 'Magna Mk.II', ammoPerTon: null, volleysPerTon: null, dlc: 0
     }));
     expect(row(getWeaponRows(items, '5'), 'Medium Laser')).toEqual(expect.objectContaining({
-      tier: '5', damage: 6.5, manufacturer: 'Krupp', cost: 280000
+      tier: '5', damage: 6.5, manufacturer: 'Krupp'
     }));
   });
 
   it('CA3: el Autocannon/10 en tier 1', () => {
     expect(row(tier1, 'Autocannon/10')).toEqual(expect.objectContaining({
-      damage: 10, speed: 600, ammoPerTon: 40, volleysPerTon: 40, cost: 400000
+      damage: 10, speed: 600, ammoPerTon: 40, volleysPerTon: 40
     }));
     const autocannon = row(tier1, 'Autocannon/10').item;
     expect([autocannon.tonnage, autocannon.weaponType, autocannon.size]).toEqual([12, 'ballistic', 'medium']);
@@ -64,7 +64,7 @@ describe('página de armas y equipo', () => {
 
   it('CA5: las armas Clan enseñan siempre su único tier', () => {
     expect(row(getWeaponRows(items, '3'), 'Clan Extended Range Medium Laser')).toEqual(expect.objectContaining({
-      tier: '1', tierName: 'Clan tier', damage: 9.1, manufacturer: 'Strana Mechty MechWorks', cost: 560000
+      tier: '1', tierName: 'Clan tier', damage: 9.1, manufacturer: 'Strana Mechty MechWorks'
     }));
   });
 
@@ -133,8 +133,8 @@ describe('página de armas y equipo', () => {
 
   it('CA10: la munición del AC/10 y las armas que la usan', () => {
     const ammo = getAmmoRows(items).find(candidate => candidate.item.id === 'AC10_Standard_AmmoEquipment')!;
-    expect([ammo.item.tonnage, ammo.item.slots, ammo.item.capacity, ammo.item.explosionDamagePerRound, ammo.item.cost])
-      .toEqual([1, 1, 40, 10, 12000]);
+    expect([ammo.item.tonnage, ammo.item.slots, ammo.item.capacity, ammo.item.explosionDamagePerRound])
+      .toEqual([1, 1, 40, 10]);
     expect(ammo.users).toEqual(['Autocannon/10', 'Autocannon/10 Burst Fire', 'Autocannon/10 rapid-fire']);
   });
 
