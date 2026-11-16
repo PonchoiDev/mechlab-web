@@ -130,5 +130,7 @@ describe('página de HRQ y campañas', () => {
     expect(filterQuestStories(data, 'steiner', 'all').map(story => story.name)).toEqual(['Chaos Reign']);
     expect(filterQuestStories(data, 'chaos', 8).map(story => story.name)).toEqual(['Chaos Reign']);
     expect(filterQuestStories(data, '', 7)).toEqual([]);
+    expect(parseGuideQuery('?campaign=dlc8', data)).toEqual({ tab: 'campaigns', query: '', source: 'all', open: 'dlc8' });
+    expect(toGuideQuery({ tab: 'campaigns', query: '', source: 'all', open: 'dlc8' })).toBe('?campaign=dlc8');
   });
 });
