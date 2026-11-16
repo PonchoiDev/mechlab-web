@@ -4,9 +4,9 @@ import type { BtFlashpoint, BtFlashpointSource } from '../../types/battletech-fl
 // enlaces y vista en la URL.
 
 export const FLASHPOINT_SOURCES: { id: BtFlashpointSource; label: string; note: string }[] = [
-  { id: 'flashpoint', label: 'Flashpoint', note: 'The DLC that brought flashpoints: short stories for the Great Houses and the mercenary units of the Inner Sphere, and the alliances with each House.' },
-  { id: 'heavymetal', label: 'Heavy Metal', note: "Darius and the hunt for the Star League: flashpoints with Farah, the Baumann Group and a rare 'Mech at the end." },
-  { id: 'urbanwarfare', label: 'Urban Warfare', note: 'City fights in Liao and Kurita space, a tournament and the scramble for a prototype.' }
+  { id: 'flashpoint', label: 'Flashpoint', note: 'The DLC that brought flashpoints: jobs for the Great Houses and the Kell Hounds, and an alliance flashpoint for each House that needs you allied with it.' },
+  { id: 'heavymetal', label: 'Heavy Metal', note: "Four flashpoints, three of them for Darius against the Baumann Group; Hourglass ends with a rare Bull Shark." },
+  { id: 'urbanwarfare', label: 'Urban Warfare', note: "Ten flashpoints, most of them short: a tournament on Cluff's Stand, Yang's big score and the Raven prototype." }
 ];
 
 export const FLASHPOINT_LENGTHS: Record<BtFlashpoint['length'], string> = { short: 'Short', medium: 'Medium', long: 'Long' };
