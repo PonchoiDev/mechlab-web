@@ -1419,6 +1419,27 @@ button, input, select { font: inherit; color: inherit; }
   font-weight: 700;
 }
 
+/* Pausa de la campaña: la misión siguiente espera a una fecha aunque la anterior esté hecha. */
+.starmap-quest-missions > li.starmap-campaign-pause {
+  align-items: center;
+  margin: 2px 0;
+  padding: 4px 0;
+  border-top: 1px dashed var(--map-line);
+  border-bottom: 1px dashed var(--map-line);
+}
+
+.starmap-campaign-pause > span { justify-self: center; color: var(--map-muted); font-size: 13px; }
+
+.starmap-quest-missions .starmap-campaign-pause p {
+  margin: 0;
+  color: #f2b75e;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .starmap-quest-missions h3 {
   margin: 0;
   font-size: 17px;

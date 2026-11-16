@@ -37,7 +37,7 @@ Los datos se exportan con el editor de mods oficial de *MechWarrior 5: Mercenari
 | `generar_items.py` | `items/` y los rasgos de los computadores de puntería de `traits/` | `items.json`: armas por tier con su fabricante, equipo con sus efectos, munición, disipadores y DLC |
 | `generar_mechs.py` | `mda/`, `mdl/`, `hps/`, `loadout/`, `unitcard/`, `mech_string_table/` e `items.json` | `mechs.json`: 639 variantes con componentes, anclajes, build de fábrica, año y rol |
 | `generar_traits.py` | `traits/` | `traits.json`: las 50 mejoras de la cantina y sus efectos |
-| `generar_mapa.py` | `starmap/` (lo extrae `extraer_mapa.py` del `.pak` de la instalación) | `starmap.json`: 2172 sistemas con su dueño de 3015 a 3060, facciones, eventos, clústeres y centros industriales con su reputación recomendada y su dificultad; `availability.json`: la rareza de cada variante por facción (de las unit cards, con las funciones de `generar_mechs.py`) |
+| `generar_mapa.py` | `starmap/` (lo extrae `extraer_mapa.py` del `.pak` de la instalación) | `starmap.json`: 2172 sistemas con su dueño de 3015 a 3060, facciones, eventos, clústeres y centros industriales con su reputación recomendada y su dificultad; `availability.json`: la rareza de cada variante por facción (de las unit cards, con las funciones de `generar_mechs.py`); `quest-briefings.json`: el briefing de cada misión de las HRQ, aparte para que el mapa no cargue los textos |
 | `generar_unidades.py` | `unitcard/` y `unidades/` (lo extrae `extraer_unidades.py` del `.pak`) e `items.json` | `units.json`: 115 unidades enemigas (tanques, aerodeslizadores, VTOL, torretas y armaduras de combate) con su vida base, velocidad, armas en el formato de `items.json` y rareza por facción |
 
 Algunos datos no están donde parecería:
@@ -110,6 +110,13 @@ Es la quinta página de MW5 (`equipment/index.html`, servida en `/mercs/equipmen
 - **Datos nuevos en `items.json`:** `generar_items.py` añade el fabricante de cada tier, el DLC de cada objeto y los efectos del equipo: retrorreactores, ECM, sondas, MASC y Supercharger, y los computadores de puntería, que guardan sus efectos en un rasgo de `traits/` (`EquipmentTrait`). Solo añade campos: lo que ya usaba el MechLab no cambia.
 - **`utils/arsenal.ts`:** las filas de la tabla de armas en un tier (con `getWeaponStats`, la misma función que el MechLab; las armas Clan enseñan su único tier), la munición por tonelada, los filtros, el orden por columnas (sin el dato, al final), las categorías y los efectos del equipo, las armas que usan cada munición y la vista en la URL. Tiene sus tests (`arsenal.test.ts`).
 - **`equipment/EquipmentApp.tsx`:** las pestañas de armas y equipo, la tabla de armas (que se desplaza dentro de su caja, con el nombre fijo), las fichas de equipo y la tabla de munición. Solo pinta y llama a la lógica.
+
+### HRQ y campañas
+
+Es la sexta página de MW5 (`campaigns/index.html`, servida en `/mercs/campaigns/`), con su propio bundle. Lee las HRQ, las campañas y los nombres de los DLC de `starmap.json`, las mismas del mapa estelar, y usa los estilos de las unidades enemigas (`units.css`) con su color de acento (`campaigns/campaigns.css`):
+
+- **`utils/questGuide.ts`:** los grupos de HRQ por origen, la búsqueda (la misma del mapa, `searchQuests` y `searchCampaigns`) con el filtro por origen, los 'Mechs de cada recompensa sin repetir, el pago total de una campaña, la vista en la URL y los enlaces al mapa. Estos usan `toMapQuery` con la primera fecha en que se ofrece la HRQ o la campaña, para que el mapa no la enseñe como «todavía no se ofrece». Tiene sus tests (`questGuide.test.ts`).
+- **`campaigns/CampaignsApp.tsx`:** las pestañas, los filtros y las listas con una fila plegable por HRQ, campaña o historia contada con HRQ. Solo pinta y llama a la lógica.
 
 ### BATTLETECH
 

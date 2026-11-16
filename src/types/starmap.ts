@@ -92,6 +92,8 @@ export interface CampaignMission {
   pilots: { id: string; name: string; hero: boolean }[];
   weapons: { name: string; tier: string | null; count: number }[];
   equipment: { name: string; count: number }[];
+  // Fecha a la que espera aunque la misión anterior esté hecha (su parte comprueba la fecha); null si no espera.
+  notBefore: GameDate | null;
 }
 
 // Campaña de un DLC: una historia de misiones en orden dentro del modo carrera.
@@ -279,6 +281,8 @@ export interface StarmapData {
   uniqueMechs: UniqueMech[];
   rewards: CampaignReward[];
   campaigns: Campaign[];
+  // Nombre de cada DLC por su número («8»: Chaos Reign).
+  dlcs: Record<string, string>;
   arenas: { systems: ArenaSystem[]; ranks: ArenaRank[] };
   mercs: { companies: Record<string, MercCompany>; zones: MercZone[] };
   academies: Academy[];

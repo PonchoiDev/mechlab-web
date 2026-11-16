@@ -124,6 +124,15 @@ export const toPilotsQuery = ({ tab, category, heroOnly, query }: PilotsView): s
   return text ? `?${text}` : '';
 };
 
+// Enlace a la ficha de un piloto hero: lo usan las recompensas del mapa y de la página de HRQ y campañas.
+export const getPilotUrl = (pilotId: string) => `/mercs/pilots/?pilot=${encodeURIComponent(pilotId)}`;
+
+// El piloto hero al que señala el enlace; null si no es hero o no existe.
+export const parsePilotTarget = (search: string, heroes: HeroPilot[]): string | null => {
+  const id = new URLSearchParams(search).get('pilot');
+  return id && heroes.some(hero => hero.id === id) ? id : null;
+};
+
 // Retrato de un piloto hero, en public/pilots/portraits/ (de tools/extraer_pilotos.py).
 export const getPortraitUrl = (file: string) => `${import.meta.env.BASE_URL}pilots/portraits/${encodeURIComponent(file)}`;
 

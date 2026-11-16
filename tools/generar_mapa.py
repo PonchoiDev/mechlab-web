@@ -23,6 +23,8 @@ RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "starmap", "logos")
 # Nombres de los pilotos hero que dan algunas misiones de campaña (de extraer_pilotos.py).
 RUTA_PILOTOS_HERO = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "pilotos", "hero.json")
 RUTA_DISPONIBILIDAD = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "availability.json")
+# El briefing de cada misión de las HRQ, por id de la HRQ: solo lo carga la página de HRQ y campañas.
+RUTA_BRIEFINGS = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "quest-briefings.json")
 
 # La partida empieza en 3015 y el último cambio de frontera del juego es de 3060. La tabla trae la
 # historia de cada sistema desde el siglo XXII hasta 3145, pero fuera de este rango el juego no la usa.
@@ -44,6 +46,9 @@ NOMBRES_SIN_ASSET = {"ArcRoyalDefenseCordon": "Arc-Royal Defense Cordon"}
 SIGLAS_SIN_ASSET = {"ArcRoyalDefenseCordon": "ARDC"}
 # Siglas que la tabla no trae bien: Outreach pasa a los Dragoons con las siglas de la FedCom.
 SIGLAS_CORREGIDAS = {"WolfsDragoons": "WD"}
+# Nombre de los DLC que no tienen campaña y por eso no salen en las de extraer_mapa.py: el del DLC1 es el
+# de su página de Steam.
+NOMBRES_DLC_SIN_CAMPANA = {"1": "Heroes of the Inner Sphere"}
 
 # Nombres de los eventos, a partir de la carpeta y el asset de cada cambio de frontera.
 NOMBRES_EVENTOS = {
@@ -228,8 +233,18 @@ def requisito_de_cadena(modo, condicion, nombres):
 def piloto_hero(id_juego, nombres_de_pilotos):
     """Un piloto que se une a la compañía, con el id de la página de pilotos (Ash_PilotPersona pasa a
     Ash) y su nombre. No todos son hero: Fenstrom, de The Shadow Coup, no está en hero.json."""
-    return {"id": re.sub(r"(_PilotPersona|Pilot)$", "", id_juego), "name": nombres_de_pilotos.get(id_juego, separar_palabras(id_juego)),
-            "hero": id_juego in nombres_de_pilotos}
+    piloto = nombres_de_pilotos.get(id_juego)
+    return {"id": re.sub(r"(_PilotPersona|Pilot)$", "", piloto["pagina"] if piloto else id_juego),
+            "name": piloto["nombre"] if piloto else separar_palabras(id_juego), "hero": piloto is not None}
+
+
+def pilotos_de_pagina(pilotos_juego):
+    """Nombre de cada piloto hero y el id de su ficha en la página de pilotos. Shenzeng está dos veces:
+    el de la campaña, sin rasgos, y el de la carrera, con ellos. generar_pilotos.py solo deja el que
+    los trae, así que los dos llevan a esa ficha."""
+    con_rasgos = {piloto["nombre"]: piloto["id"] for piloto in pilotos_juego if piloto.get("rasgos")}
+    return {piloto["id"]: {"nombre": piloto["nombre"], "pagina": con_rasgos.get(piloto["nombre"], piloto["id"])}
+            for piloto in pilotos_juego}
 
 
 def recompensas_por_cadena(recompensas_juego, mechs, items, nombres_de_pilotos):
@@ -305,8 +320,11 @@ def cadenas_de_misiones(acciones, sistemas_validos, arcos=(), recompensas=None):
                     "title": accion.get("titulo") or (nombre if parte(accion.get("titulo")) == 1 else f"{nombre} Pt. {parte(accion.get('titulo'))}"),
                     "summary": accion.get("resumen") or None,
                     "system": accion["sistema"],
+                    # Sale de starmap.json en main(), a quest-briefings.json: el mapa no carga los textos. Si la
+                    # primera misión no trae briefing, vale el de la oferta, que la presenta.
+                    "briefing": accion.get("briefing") or (oferta.get("briefing") if oferta and indice == 0 else None),
                 }
-                for accion in misiones
+                for indice, accion in enumerate(misiones)
             ],
         }
         previa = cadenas.get(nombre)
@@ -582,8 +600,18 @@ def campanas(partes_juego, nombres, recompensas, nombres_de_pilotos, mechs, item
                 raise ValueError(f"DLC {dlc}: la misión {mision['nombre']!r} no lleva número: ¿ha cambiado el juego?")
             return int(coincidencia.group(1))
 
+        # Una parte que comprueba una fecha posterior al inicio no se abre antes aunque la anterior esté hecha:
+        # su primera misión espera a esa fecha (Tikonov en el DLC2, Rasalhague en el DLC4). Las fechas
+        # anteriores al inicio (Arcturus y Trolloc Prime del DLC5, en 3025) no frenan nada.
+        inicio_fecha = min(fechas) if fechas else None
+        parte_de = {id(mision): parte_juego for parte_juego in partes for mision in parte_juego["misiones"]}
+        partes_vistas = set()
         misiones = []
         for mision in sorted(misiones_juego, key=numero_de_mision):
+            parte_juego = parte_de[id(mision)]
+            espera = (parte_juego["desde"] if id(parte_juego) not in partes_vistas and parte_juego["desde"]
+                      and inicio_fecha and parte_juego["desde"] > inicio_fecha else None)
+            partes_vistas.add(id(parte_juego))
             if mision["sistema"] not in sistemas_validos:
                 continue
             titulo = re.sub(r"\bpt\.", "Pt.", mision.get("titulo") or "")
@@ -599,6 +627,7 @@ def campanas(partes_juego, nombres, recompensas, nombres_de_pilotos, mechs, item
                 "pilots": [piloto_hero(piloto, nombres_de_pilotos) for piloto in pago.get("pilotos", [])],
                 "weapons": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, True) for id_juego, cantidad in pago.get("armas", [])),
                 "equipment": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, False) for id_juego, cantidad in pago.get("equipo", [])),
+                "notBefore": espera,
             })
         if not misiones:
             raise ValueError(f"DLC {dlc}: ninguna misión de la campaña está en un sistema del mapa: ¿ha cambiado el juego?")
@@ -892,7 +921,7 @@ def main():
 
     posiciones = {int(fila["Name"]): (fila["PosX"], fila["PosY"]) for fila in sistemas_juego}
     with open(RUTA_PILOTOS_HERO, encoding="utf-8") as archivo:
-        nombres_de_pilotos = {piloto["id"]: piloto["nombre"] for piloto in json.load(archivo)}
+        nombres_de_pilotos = pilotos_de_pagina(json.load(archivo))
     datos = {
         "range": {"start": INICIO, "end": FIN},
         "colors": {"cluster": color_hex(colores["Warzone"]), "hub": color_hex(colores["Safezone"])},
@@ -916,8 +945,15 @@ def main():
     }
     datos["campaigns"] = campanas(leer("campanas.json"), leer("nombres_campanas.json"), datos["rewards"], nombres_de_pilotos, mechs, items,
                                   {sistema["id"] for sistema in sistemas})
+    # El nombre de cada DLC, para nombrarlo junto a su número («DLC 8 · Chaos Reign»).
+    nombres_dlc = {**NOMBRES_DLC_SIN_CAMPANA, **leer("nombres_campanas.json")}
+    datos["dlcs"] = {dlc: como_titulo(nombre) for dlc, nombre in sorted(nombres_dlc.items(), key=lambda par: int(par[0]))}
+    briefings = {cadena["id"]: [mision.pop("briefing") for mision in cadena["missions"]] for cadena in datos["quests"]}
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"))
+        archivo.write("\n")
+    with open(RUTA_BRIEFINGS, "w", encoding="utf-8") as archivo:
+        json.dump(briefings, archivo, ensure_ascii=False, indent=1)
         archivo.write("\n")
     unit_cards = cargar_unit_cards(cargar_archivos_por_nombre(RUTA_UNIT_CARDS))
     disponibilidad = disponibilidad_de_mechs(mechs, unit_cards, facciones, leer("alianzas.json"), {heroe.lower() for heroe in leer("heroes_en_venta.json")})

@@ -170,6 +170,7 @@ export default function App() {
           </a>
           <nav className="topbar-links" aria-label="MW Builder">
             <a href="/mercs/starmap/"><small>MW5 Mercenaries</small> Star map</a>
+            <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
             <a href="/mercs/units/">Enemy units</a>
             <a href="/mercs/pilots/">Pilots</a>
             <a href="/mercs/equipment/">Equipment</a>

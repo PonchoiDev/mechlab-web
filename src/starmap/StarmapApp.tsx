@@ -540,6 +540,7 @@ export function StarmapApp() {
         <h1>Star map</h1>
         <nav className="starmap-links" aria-label="MW Builder">
           <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
+          <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
           <a href="/mercs/units/">Enemy units</a>
           <a href="/mercs/pilots/">Pilots</a>
           <a href="/mercs/equipment/">Equipment</a>

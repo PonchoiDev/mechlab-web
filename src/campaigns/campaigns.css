@@ -1,0 +1,347 @@
+/* HRQ y campañas: los estilos de las unidades enemigas (units.css) con un rosa propio, distinto del rojo
+   de las unidades, el azul de los pilotos, el violeta del equipo, el amarillo del mapa y el verde del MechLab.
+   :root:root pesa más que el :root de units.css, que en el build se carga después (como en pilots.css). */
+:root:root {
+  --units-accent: #ff4fa3;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 79, 163, 0.13), transparent 55%),
+    var(--units-bg);
+  background-attachment: fixed;
+}
+
+.units-intro a,
+.guide-section > p a { color: var(--units-text); }
+
+/* Pestañas: HRQ y campañas, como las de la página de equipo */
+.guide-tabs {
+  display: flex;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--units-line);
+}
+
+.guide-tabs button {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--units-muted);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.guide-tabs small { margin-left: 4px; font-size: 14px; }
+.guide-tabs button:hover, .guide-tabs button:focus-visible { color: var(--units-text); outline: none; }
+.guide-tabs button[aria-pressed='true'] { border-bottom-color: var(--units-accent); color: var(--units-text); }
+
+/* Grupos por origen */
+.guide-section { margin: 0 0 30px; }
+
+.guide-section > h2 {
+  margin: 0 0 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--units-line);
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.guide-section > h2 small { margin-left: 4px; color: var(--units-muted); font-size: 15px; }
+
+.guide-section > p {
+  max-width: 900px;
+  margin: 6px 0 12px;
+  color: var(--units-muted);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+/* Lista: una fila por HRQ o campaña, con las mismas columnas en todas para leerla de arriba abajo:
+   nombre, dónde se ofrece y recompensa. El detalle se despliega debajo de su fila, a todo el ancho. */
+.guide-list-header,
+.guide-row-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.guide-list-header {
+  padding: 0 14px 6px 50px;
+  color: var(--units-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.guide-list {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--units-line);
+  border-top: 3px solid var(--units-accent);
+  background: var(--units-panel);
+  list-style: none;
+}
+
+.guide-row { scroll-margin-top: 72px; border-top: 1px solid var(--units-line); }
+.guide-row:first-child { border-top: 0; }
+.guide-row:nth-child(even) > .guide-row-head { background: rgba(255, 255, 255, 0.025); }
+.guide-row-head { padding: 10px 14px; }
+.guide-row-head:hover { background: rgba(255, 79, 163, 0.06); }
+.guide-row.is-open > .guide-row-head { background: rgba(255, 79, 163, 0.1); }
+
+.guide-row-name button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--units-text);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.guide-row-name button:hover,
+.guide-row-name button:focus-visible { color: var(--units-accent); outline: none; }
+
+.guide-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  margin: 3px 0 0 36px;
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.guide-row-cell { display: flex; flex-direction: column; gap: 2px; padding-top: 2px; font-size: 16px; }
+.guide-row-cell > small { color: var(--units-muted); font-size: 15px; }
+.guide-row-cell .guide-mechs { margin: 0; }
+.guide-row-empty { margin: 0; color: var(--units-muted); }
+
+.guide-chevron {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--units-line);
+  color: var(--units-accent);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.guide-map-link {
+  color: var(--units-text);
+  font-weight: 600;
+  text-decoration: underline dotted rgba(255, 255, 255, 0.45);
+  text-underline-offset: 3px;
+}
+
+.guide-map-link::before { content: '◎ '; color: var(--units-yellow); font-size: 0.85em; }
+
+.guide-map-link:hover,
+.guide-map-link:focus-visible { color: var(--units-yellow); outline: none; }
+
+.guide-mechs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-mech,
+.guide-pilot {
+  display: inline-block;
+  padding: 3px 8px;
+  border: 1px solid rgba(195, 237, 98, 0.55);
+  color: #c3ed62;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.guide-mech small,
+.guide-pilot small { color: var(--units-muted); font-size: 13px; }
+
+.guide-pilot { border-color: rgba(47, 140, 255, 0.6); color: #7db4ff; }
+
+a.guide-mech:hover, a.guide-mech:focus-visible,
+a.guide-pilot:hover, a.guide-pilot:focus-visible { color: #000; background: #c3ed62; outline: none; }
+a.guide-pilot:hover, a.guide-pilot:focus-visible { background: #7db4ff; }
+a.guide-mech:hover small, a.guide-mech:focus-visible small,
+a.guide-pilot:hover small, a.guide-pilot:focus-visible small { color: rgba(0, 0, 0, 0.7); }
+
+/* Detalle desplegado: las misiones en una línea de pasos y, al lado, requisitos y recompensas */
+.guide-row-body {
+  padding: 4px 14px 16px 50px;
+  border-top: 1px solid var(--units-line);
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.guide-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 8px 32px;
+}
+
+.guide-row-body h3 {
+  margin: 14px 0 8px;
+  color: var(--units-accent);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.guide-plain { margin: 0; }
+
+.guide-note { margin: 10px 0 0; color: var(--units-muted); }
+
+.guide-requirements { margin: 0; padding: 0; list-style: none; }
+.guide-requirements b { color: var(--units-muted); }
+
+.guide-inline-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--units-accent);
+  font: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.guide-missions { margin: 0; padding: 0; list-style: none; }
+
+/* Cada paso, con una línea que lo une al siguiente */
+.guide-missions > li {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  padding-bottom: 14px;
+}
+
+.guide-missions > li:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 26px;
+  bottom: 0;
+  left: 12px;
+  width: 2px;
+  background: rgba(255, 79, 163, 0.35);
+}
+
+.guide-step {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: #000;
+  background: var(--units-accent);
+  font-weight: 700;
+}
+
+/* Pausa: la misión siguiente espera a una fecha aunque la anterior esté hecha. */
+.guide-missions > li.guide-pause { align-items: center; }
+.guide-pause .guide-step { color: var(--units-yellow); background: none; border: 1px dashed var(--units-yellow); font-size: 12px; }
+.guide-missions .guide-pause p { margin: 0; color: var(--units-yellow); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.guide-missions h4 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin: 2px 0 2px;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.guide-missions h4 .guide-map-link { font-size: 15px; letter-spacing: 0.02em; text-transform: none; }
+.guide-missions p { margin: 0 0 4px; color: var(--units-muted); }
+.guide-missions .guide-mission-meta { color: var(--units-text); font-size: 15px; }
+.guide-missions .guide-money { margin-top: 4px; color: var(--units-yellow); }
+
+.guide-money { margin-top: 4px; color: var(--units-yellow); }
+
+.guide-money { margin: 0; color: var(--units-yellow); font-weight: 600; letter-spacing: 0.02em; }
+.guide-money b { color: var(--units-muted); }
+
+.guide-reward + .guide-reward { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+
+.guide-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  margin: 6px 0 0;
+  padding: 0;
+  color: var(--units-muted);
+  list-style: none;
+}
+
+.guide-items li { color: var(--units-text); }
+.guide-items small { color: var(--units-muted); font-size: 14px; }
+.guide-items b { color: var(--units-muted); }
+
+.guide-debrief { margin-top: 8px; }
+
+/* El texto con el que el juego ofrece la cadena, como lo cuenta quien la encarga. */
+.guide-briefing {
+  max-width: 760px;
+  margin: 0 0 4px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--units-accent);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--units-text);
+  white-space: pre-line;
+}
+
+.guide-mission-briefing { margin: 2px 0 4px; }
+.guide-mission-briefing summary { font-size: 14px; }
+.guide-debrief summary { color: var(--units-muted); cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; }
+.guide-debrief p { max-width: 760px; margin: 6px 0 0; color: var(--units-muted); white-space: pre-line; }
+
+.guide-detail-footer { margin: 2px 0 0; }
+
+@media (max-width: 760px) {
+  /* La cabecera fija pasa a dos líneas. */
+  .guide-row { scroll-margin-top: 170px; }
+  /* Las columnas pasan una debajo de otra, cada una con su título. */
+  .guide-list-header { display: none; }
+  .guide-row-head { grid-template-columns: 1fr; gap: 8px; }
+  .guide-row-cell { padding-left: 36px; }
+  .guide-row-cell::before {
+    content: attr(data-label);
+    color: var(--units-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .guide-row-body { padding-left: 14px; }
+  .guide-detail { grid-template-columns: 1fr; }
+  .guide-tabs button { padding: 0 10px; font-size: 16px; }
+  .guide-section > h2 { font-size: 21px; }
+}

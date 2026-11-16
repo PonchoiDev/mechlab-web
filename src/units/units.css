@@ -74,10 +74,13 @@ button, input, select { font: inherit; color: inherit; }
   letter-spacing: 0.04em;
   line-height: 1;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
+/* Con seis páginas de MW5, en pantallas medianas los enlaces que no caben bajan a otra línea enteros. */
 .units-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
   padding-left: 12px;
   border-left: 1px solid var(--units-line);
@@ -85,6 +88,7 @@ button, input, select { font: inherit; color: inherit; }
 
 .units-links a {
   padding: 6px 12px;
+  white-space: nowrap;
   color: var(--units-text);
   font-size: 15px;
   font-weight: 600;
@@ -652,11 +656,16 @@ button, input, select { font: inherit; color: inherit; }
 .utility-button:disabled { opacity: 0.4; cursor: default; }
 
 /* Móvil: la cabecera en dos filas y los filtros a todo el ancho. */
+/* En pantallas medianas, «MW5 Mercenaries» se queda fuera para que la cabecera quepa. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .units-links small { display: none; }
+}
+
 @media (max-width: 760px) {
   .units-topbar { flex-wrap: wrap; gap: 8px 12px; padding: 8px 12px; }
   .units-brand span:last-child { display: none; }
   .units-topbar h1 { padding-left: 12px; font-size: 20px; }
-  /* Con cinco enlaces no caben en una línea: pasan enteros a la siguiente en vez de partirse cada uno. */
+  /* Con cinco o seis enlaces no caben en una línea: pasan enteros a la siguiente en vez de partirse cada uno. */
   .units-links { order: 3; flex-wrap: wrap; width: 100%; padding-left: 0; border-left: 0; }
   .units-links a { padding: 4px 8px; font-size: 14px; white-space: nowrap; }
   .units-links small { font-size: 14px; }

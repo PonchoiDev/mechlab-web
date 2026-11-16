@@ -1,11 +1,11 @@
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import type { Campaign, CampaignMission, GameDate, StarmapData } from '../types/starmap';
 import { getCampaignAvailability, getCampaignsForSystem, searchCampaigns } from '../utils/campaigns';
+import { getPilotUrl } from '../utils/pilots';
 import { formatGameDate } from '../utils/starmap';
 import { MechLink } from './MarketPanels';
 
 const numberFormat = new Intl.NumberFormat('en');
-const PILOTS_URL = `${import.meta.env.BASE_URL}pilots/`;
 
 const describeAvailability = (campaign: Campaign, date: GameDate): string | null => {
   const availability = getCampaignAvailability(campaign, date);
@@ -77,11 +77,11 @@ export function CampaignDrawer({ data, date, selectedId, onPick }: CampaignDrawe
 }
 
 // Piloto que da una misión o una HRQ; los hero, enlazados a la página de pilotos.
-export function PilotReward({ pilot }: { pilot: { name: string; hero: boolean } }) {
+export function PilotReward({ pilot }: { pilot: { id: string; name: string; hero: boolean } }) {
   if (!pilot.hero) return <><b className="starmap-campaign-pilot">{pilot.name}</b><small> pilot</small></>;
   return (
     <>
-      <a className="starmap-campaign-pilot" href={PILOTS_URL} title="Hero pilot: open the Pilots page">{pilot.name}</a>
+      <a className="starmap-campaign-pilot" href={getPilotUrl(pilot.id)} title="Hero pilot: open the Pilots page">{pilot.name}</a>
       <small> hero pilot</small>
     </>
   );
@@ -151,7 +151,15 @@ export function CampaignCard({ data, campaign, date, onSystem, onClose }: Campai
       </dl>
       <ol className="starmap-quest-missions" aria-label="Missions">
         {campaign.missions.map((mission, index) => (
-          <li key={`${mission.title}-${index}`}>
+          <Fragment key={`${mission.title}-${index}`}>
+          {/* La misión espera a su fecha aunque la anterior esté hecha: una pausa en la campaña. */}
+          {mission.notBefore && (
+            <li className="starmap-campaign-pause">
+              <span aria-hidden="true">⏸</span>
+              <p>Not before {formatGameDate(mission.notBefore)}</p>
+            </li>
+          )}
+          <li>
             <span className="starmap-quest-step" aria-hidden="true">{index + 1}</span>
             <div>
               <h3>{mission.title}</h3>
@@ -161,6 +169,7 @@ export function CampaignCard({ data, campaign, date, onSystem, onClose }: Campai
               <MissionReward mission={mission} />
             </div>
           </li>
+          </Fragment>
         ))}
       </ol>
       {campaign.completion && (

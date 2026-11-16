@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import pilotsJson from '../data/pilots.json';
 import type { PilotTrait, PilotsData } from '../types/pilots';
 import {
-  filterTraits, formatProgramLength, getPortraitUrl, getTraitEffectColumns, groupPrograms, groupTraits, parsePilotsQuery, splitHeroPilots,
+  filterTraits, formatProgramLength, getPilotUrl, getPortraitUrl, parsePilotTarget, getTraitEffectColumns, groupPrograms, groupTraits, parsePilotsQuery, splitHeroPilots,
   toPilotsQuery
 } from './pilots';
 
@@ -242,5 +242,14 @@ describe('vista en la URL', () => {
     expect(toPilotsQuery({ tab: 'programs', category: 'all', heroOnly: false, query: '' })).toBe('?tab=programs');
     expect(toPilotsQuery({ tab: 'heroes', category: 'all', heroOnly: false, query: '' })).toBe('');
     expect(parsePilotsQuery('?tab=nope&category=nope&hero=x')).toEqual({ tab: 'heroes', category: 'all', heroOnly: false, query: '' });
+  });
+});
+
+describe('enlace a un piloto', () => {
+  it('CA18: el enlace a un piloto hero lo señala', () => {
+    expect(getPilotUrl('ValtenRyder')).toBe('/mercs/pilots/?pilot=ValtenRyder');
+    expect(parsePilotTarget('?pilot=ValtenRyder', data.heroes)).toBe('ValtenRyder');
+    expect(parsePilotTarget('?pilot=Fenstrom', data.heroes)).toBeNull();
+    expect(parsePilotTarget('?tab=traits', data.heroes)).toBeNull();
   });
 });

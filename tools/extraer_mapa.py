@@ -199,7 +199,7 @@ def valores_de_config(propiedades):
 
 
 def leer_objetivo(pak, paquete, cache):
-    """Título, resumen y quién encarga la misión de un objetivo (/Game/…)."""
+    """Título, resumen, briefing y quién encarga la misión de un objetivo (/Game/…)."""
     if paquete not in cache:
         # Algunos objetivos no se incluyen en el juego (el de Pirate Raiders): la misión se queda sin textos.
         if ruta_de_juego(paquete) + ".uasset" not in pak.archivos:
@@ -217,6 +217,8 @@ def leer_objetivo(pak, paquete, cache):
         cache[paquete] = {
             "titulo": info.get("ScreenTitleText"),
             "resumen": info.get("ScreenSubText"),
+            # El texto con el que el juego presenta la misión; el de la primera de una HRQ es el de la oferta.
+            "briefing": info.get("ObjectiveBriefing") or None,
             "empleador": empleador,
         }
     return cache[paquete]

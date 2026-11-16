@@ -11,6 +11,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno
 | Unidades enemigas | https://mw-builder.com/mercs/units/ |
 | Pilotos | https://mw-builder.com/mercs/pilots/ |
 | Armas y equipo | https://mw-builder.com/mercs/equipment/ |
+| HRQ y campañas | https://mw-builder.com/mercs/campaigns/ |
 | MechLab de BATTLETECH | https://mw-builder.com/battletech/ |
 | Mapa estelar de BATTLETECH | https://mw-builder.com/battletech/starmap/ |
 | Unidades enemigas de BATTLETECH | https://mw-builder.com/battletech/units/ |
@@ -44,7 +45,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (568 tests, cobertura con V8) |
+| Tests | Vitest 5 (584 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -101,6 +102,10 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Página propia (`/mercs/equipment/`) con las 191 armas en una tabla: anclaje, toneladas, daño, calor, cooldown, RPM, DPS, daño por tonelada, alcance, velocidad del proyectil, munición por tonelada, fabricante, tecnología y DLC.
 - Un tier para toda la lista (del 0 a Lost Tech; las armas Clan tienen el suyo), orden por cualquier columna y filtros por tipo, tamaño del anclaje, Esfera Interior o Clan, DLC y búsqueda por nombre o fabricante.
 - Pestaña de equipo con disipadores, retrorreactores, MASC y Supercharger, ECM, sondas y computadores de puntería con sus efectos, y la munición con las armas que la usan. La vista va en el enlace.
+
+**HRQ y campañas**
+- Página propia (`/mercs/campaigns/`) con las 64 HRQ, agrupadas por juego base y DLC, y las 6 campañas de los DLC (con sus pausas), más Call to Arms y Chaos Reign, que cuentan su historia con cadenas de HRQ, con un buscador por nombre, sistema, quien la encarga, misión o recompensa.
+- Cada una se despliega con dónde y cuándo se ofrece (reputación, fechas, misión previa o excluyente), sus misiones en orden y su recompensa en cada modo. Los sistemas abren el mapa estelar con la ruta dibujada y los 'Mechs, el MechLab con su build de serie. La vista va en el enlace (`?quest=bow-and-arrow`, `?campaign=dlc7`).
 
 **MechLab de BATTLETECH**
 - Página propia (`/battletech/`) con los 96 'Mechs que se pueden tener en *BATTLETECH* (2018), del juego base y de Heavy Metal, Flashpoint y Urban Warfare, con su build de serie y su icono del juego.
@@ -165,6 +170,7 @@ src/
   units/                Página de las unidades enemigas: filtros y ficha de cada unidad
   pilots/               Página de los pilotos: pilotos hero, rasgos y programas de las academias
   equipment/            Página de armas y equipo: tabla de armas por tier, fichas de equipo y munición
+  campaigns/            Página de HRQ y campañas: listas plegables con misiones, condiciones y recompensas
   battletech/           Páginas de BATTLETECH (mapa estelar), con su lógica en utils/battletech/
   battletech/argo/      Página de la Argo de BATTLETECH: árbol de mejoras, fichas y plan
   battletech/equipment/ Página de armas y equipo de BATTLETECH: tabla de armas, fichas de equipo y munición
@@ -181,6 +187,7 @@ starmap/index.html      Entrada de la página del mapa estelar (/mercs/starmap/)
 units/index.html        Entrada de la página de las unidades enemigas (/mercs/units/)
 pilots/index.html       Entrada de la página de los pilotos (/mercs/pilots/)
 equipment/index.html    Entrada de la página de armas y equipo (/mercs/equipment/)
+campaigns/index.html    Entrada de la página de HRQ y campañas (/mercs/campaigns/)
 battletech/             Entradas de las páginas de BATTLETECH (/battletech/) y sus imágenes
 battletech/argo/        Entrada de la página de la Argo (/battletech/argo/) y sus imágenes en public/argo/
 battletech/equipment/   Entrada de la página de armas y equipo (/battletech/equipment/)
@@ -358,7 +365,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Calidad y comprobación contra el juego
 
-- **568 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **584 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
