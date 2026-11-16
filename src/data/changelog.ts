@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-16-no-heavy-gauss',
+    date: '2026-11-16',
+    title: 'Heavy Gauss Rifle removed',
+    items: [
+      'The Heavy Gauss Rifle is gone from the MechLab and the Equipment page. Its files are in the game, but it is introduced on 1 Jan 3061, after the game ends, so no store sells it and no \'Mech carries it. Thanks to the player who reported it'
+    ]
+  },
+  {
     id: '2026-11-16-cooling-without-mods',
     date: '2026-11-16',
     title: 'Cooling as in the unmodded game',

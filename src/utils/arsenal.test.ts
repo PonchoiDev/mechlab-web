@@ -33,10 +33,10 @@ const names = (rows: WeaponRow[]) => rows.map(candidate => candidate.item.name);
 const tier1 = getWeaponRows(items, '1');
 
 describe('página de armas y equipo', () => {
-  it('CA1: hay 191 armas de seis tipos; 60 son Clan', () => {
-    expect(tier1).toHaveLength(191);
+  it('CA1: hay 190 armas de seis tipos; 60 son Clan', () => {
+    expect(tier1).toHaveLength(190);
     const count = (type: string) => filterWeaponRows(tier1, { ...DEFAULT_WEAPON_FILTER, type: type as never }).length;
-    expect(['energy', 'ballistic', 'missile', 'artillery', 'melee', 'ams'].map(count)).toEqual([37, 60, 66, 2, 24, 2]);
+    expect(['energy', 'ballistic', 'missile', 'artillery', 'melee', 'ams'].map(count)).toEqual([37, 59, 66, 2, 24, 2]);
     expect(tier1.filter(candidate => candidate.clan)).toHaveLength(60);
   });
 
@@ -72,12 +72,12 @@ describe('página de armas y equipo', () => {
     const filter = (change: Partial<typeof DEFAULT_WEAPON_FILTER>, rows = tier1) =>
       filterWeaponRows(rows, { ...DEFAULT_WEAPON_FILTER, ...change });
     expect(filter({ type: 'energy' })).toHaveLength(37);
-    expect(filter({ size: 'large' })).toHaveLength(56);
+    expect(filter({ size: 'large' })).toHaveLength(55);
     expect(filter({ tech: 'clan' })).toHaveLength(60);
-    expect(filter({ tech: 'innerSphere' })).toHaveLength(131);
+    expect(filter({ tech: 'innerSphere' })).toHaveLength(130);
     expect(filter({ dlc: 3 })).toHaveLength(17);
-    expect(filter({ dlc: 0 })).toHaveLength(136);
-    expect(names(filter({ query: 'gauss' })).sort()).toEqual(['Clan Gauss Rifle', 'Gauss Rifle', 'Heavy Gauss Rifle', 'Light Gauss Rifle']);
+    expect(filter({ dlc: 0 })).toHaveLength(135);
+    expect(names(filter({ query: 'gauss' })).sort()).toEqual(['Clan Gauss Rifle', 'Gauss Rifle', 'Light Gauss Rifle']);
     expect(names(filter({ query: 'krupp' }, getWeaponRows(items, '5'))).sort()).toEqual(['Large Laser', 'Medium Laser']);
   });
 
@@ -103,10 +103,15 @@ describe('página de armas y equipo', () => {
     }
   });
 
+  it('CA13: lo que se introduce después del final del juego no está en el catálogo', () => {
+    // El Heavy Gauss Rifle y su munición son de 3061; el juego acaba el 31 de diciembre de 3060.
+    expect(items.filter(candidate => /HeavyGauss/.test(candidate.id))).toEqual([]);
+  });
+
   it('CA8: el equipo por categorías', () => {
     const groups = groupEquipment(items, { category: 'all', query: '', tech: 'all', dlc: 'all' });
     expect(groups.map(group => [group.id, group.items.length])).toEqual([
-      ['heatSinks', 3], ['jumpJets', 5], ['motive', 20], ['electronics', 8], ['targetingComputers', 7], ['ammo', 108]
+      ['heatSinks', 3], ['jumpJets', 5], ['motive', 20], ['electronics', 8], ['targetingComputers', 7], ['ammo', 106]
     ]);
     const electronics = groups.find(group => group.id === 'electronics')!.items;
     expect(electronics.filter(candidate => candidate.ecm)).toHaveLength(4);

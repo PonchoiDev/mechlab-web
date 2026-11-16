@@ -49,6 +49,10 @@ REGEX_MAX_RANGE = re.compile(r'(?<![A-Za-z])MaxRange=([0-9.]+)')
 REGEX_FABRICANTE = re.compile(r'Manufacturer="([^"]+)"')
 # Algunos objetos (la munición de los rifles) vienen en varios DLC: MultipleAssociatedDLC.
 REGEX_DLC = re.compile(r'AssociatedDLC.*?DLC\.DLC(\d+)')
+REGEX_FECHA_INTRODUCCION = re.compile(r'IntroDate=(\d{4})\.(\d{2})\.(\d{2})')
+# El último día de la partida (el mapa estelar llega hasta aquí). Lo que se introduce después no llega a
+# las tiendas ni lo lleva ningún 'Mech: el Heavy Gauss Rifle y su munición son del 1 de enero de 3061.
+FIN_DEL_JUEGO = "3060-12-31"
 REGEX_DESCRIPCION = re.compile(r'Description=NSLOCTEXT\([^,]+,\s*"[^"]+",\s*"((?:[^"\\]|\\.)*)"\)')
 REGEX_MASC = re.compile(r'MASCStats=\(([^\n]*)\)')
 REGEX_DANO_EXPLOSION = re.compile(r'(?<![A-Za-z])ExplosionDamagePerRound=([0-9.]+)')
@@ -157,6 +161,9 @@ def agrupar_archivos_por_item(errores, copias):
             continue
         # Un "equipo" sin tonelaje es un archivo de configuración (p. ej. NarcBeaconData), no un objeto.
         if tipo_general == "equipment" and not REGEX_TONS.search(contenido):
+            continue
+        fecha = REGEX_FECHA_INTRODUCCION.search(contenido)
+        if fecha and "-".join(fecha.groups()) > FIN_DEL_JUEGO:
             continue
 
         coincidencia_tier = REGEX_TIER.search(nombre_archivo)

@@ -96,7 +96,7 @@ describe('isAmmoCompatibleWithWeapon', () => {
     expect(isAmmoCompatibleWithWeapon(getItem('LRM_Artemis_AmmoEquipment'), getItem('LRM10_Artemis'))).toBe(true);
     expect(isAmmoCompatibleWithWeapon(getItem('AMS_AmmoEquipment'), getItem('AntiMissileSystem'))).toBe(true);
     expect(isAmmoCompatibleWithWeapon(getItem('LRM_AmmoEquipment'), getItem('LRM20_Hotloaded'))).toBe(true);
-    expect(isAmmoCompatibleWithWeapon(getItem('HeavyGauss_AmmoEquipment'), getItem('HeavyGaussRifle'))).toBe(true);
+    expect(isAmmoCompatibleWithWeapon(getItem('LightGauss_AmmoEquipment'), getItem('LightGaussRifle'))).toBe(true);
   });
 
   it('los MRM y los Light AC tienen su propia munición', () => {
