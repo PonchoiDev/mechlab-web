@@ -50,7 +50,7 @@ const COLUMNS: Column[] = [
   { key: 'accuracy', label: 'Acc', title: 'Accuracy bonus, as the game shows it', value: row => row.accuracy ? signed(row.accuracy) : '' },
   { key: 'crit', label: 'Crit', title: 'Critical chance multiplier', value: row => row.crit !== 1 ? `×${row.crit}` : '' },
   { key: 'minRange', label: 'Min', title: 'Minimum range in meters', value: row => row.minRange ? String(row.minRange) : '' },
-  { key: 'maxRange', label: 'Max', title: 'Maximum range in meters, after the short, medium and long range brackets of the game data', value: row => String(row.maxRange) },
+  { key: 'maxRange', label: 'Max', title: 'Maximum range in meters; point at a value for the short, medium and long range brackets', value: row => String(row.maxRange) },
   { key: 'ammoPerTon', label: 'Ammo/t', title: 'Rounds in one ton of ammo, and the attacks they give', value: row => row.ammoPerTon === null ? '' : String(row.ammoPerTon) },
   { key: 'damagePerTon', label: 'Dmg/t', title: 'Damage of one attack per ton of the weapon itself (ammo not counted)', value: row => formatNumber(row.damagePerTon) },
   { key: 'rarity', label: 'Rarity', title: 'Common, uncommon and rare items show up in stores; special ones are rewards and lostech', value: row => RARITY_LABELS[getRarityGroup(row.item.rarity)] },
@@ -81,7 +81,6 @@ function WeaponTable({ rows, view, onSort }: { rows: BtWeaponRow[]; view: BtEqui
                 <SortButton view={view} sortKey={column.key} label={column.label} title={column.title} onSort={onSort} />
               </th>
             ))}
-            <th scope="col" title="Short, medium and long range brackets from the game data (RangeSplit)">Ranges</th>
             <th scope="col">Source</th>
           </tr>
         </thead>
@@ -97,14 +96,19 @@ function WeaponTable({ rows, view, onSort }: { rows: BtWeaponRow[]; view: BtEqui
                 </span>
               </th>
               {COLUMNS.map(column => (
-                <td key={column.key} className={`is-${column.key}`}>
+                <td
+                  key={column.key}
+                  className={`is-${column.key}`}
+                  // Los tramos de alcance corto, medio y largo del juego van en la ayuda del alcance máximo:
+                  // como columna aparte, la tabla no cabía.
+                  title={column.key === 'maxRange' ? `Short, medium and long range brackets: ${row.rangeSplit.join(' · ')} m` : undefined}
+                >
                   {column.value(row)}
                   {column.key === 'ammoPerTon' && row.attacksPerTon !== null && row.attacksPerTon !== row.ammoPerTon && (
                     <small> ({row.attacksPerTon} attacks)</small>
                   )}
                 </td>
               ))}
-              <td>{row.rangeSplit.join(' · ')}</td>
               <td>{SOURCE_LABELS[row.item.source]}</td>
             </tr>
           ))}
