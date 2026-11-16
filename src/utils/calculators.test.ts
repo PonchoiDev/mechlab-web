@@ -147,13 +147,10 @@ describe('calculateCoolingRate', () => {
     expect(calculateCoolingRate(makeLoadout(), 1.8)).toBe(1.8);
   });
 
-  it('con dobles refrigera al menos 0,2 por disipador interno entero del motor', () => {
-    expect(calculateCoolingRate(makeLoadout(), 0.72, 'double', 180)).toBe(1.4);
-    expect(calculateCoolingRate(makeLoadout(), 0.84, 'double', 245)).toBe(1.8);
-    expect(calculateCoolingRate(makeLoadout(), 1, 'double', 400)).toBe(2);
-    expect(calculateCoolingRate(makeLoadout(), 2, 'double', 200)).toBe(2);
-    expect(calculateCoolingRate(makeLoadout(), 0.72, 'single', 180)).toBe(0.7);
-    expect(calculateCoolingRate(makeLoadout(), 1.4, 'clanDouble', 210)).toBe(1.6);
+  it('la base es la del juego aunque el mech sea de dobles, con dos decimales', () => {
+    // El juego no dobla los disipadores del motor: el FS9-X1 (base 0,84, motor 245) refrigera 0,84.
+    expect(calculateCoolingRate(makeLoadout(), 0.84)).toBe(0.84);
+    expect(calculateCoolingRate(makeLoadout(), 0.72)).toBe(0.72);
   });
 });
 
@@ -310,7 +307,7 @@ describe('getBuildSummary', () => {
       // Los dos Battle Fist del Atlas pegan 30 cada uno.
       meleeDamage: 60,
       heatSpike: calculateHeatSpike(loadout),
-      coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType, mech.engine?.rating),
+      coolingRate: calculateCoolingRate(loadout, mech.BaseCoolingRate),
       topSpeed: calculateTopSpeed(mech.baseSpeed),
       jumpJetCount: 1,
       maxWeaponRange: 900
