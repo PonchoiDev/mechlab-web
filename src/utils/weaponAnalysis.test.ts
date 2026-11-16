@@ -1,0 +1,82 @@
+import { describe, expect, it } from 'vitest';
+import { getStockBuild } from './buildCode';
+import { getBuildSummary, getHeatTimes, getWeaponStats } from './calculators';
+import { getWeaponLabel } from './items';
+import { getUpgrades } from './upgrades';
+import { allItems, allMechs, getItem, getMech, makeLoadout } from '../test/fixtures';
+
+// Criterios de aceptación de docs/specs/analisis-armas.md (issue #122).
+const stockSummary = (id: string) => {
+  const mech = getMech(id);
+  const stock = getStockBuild(mech, allMechs, allItems)!;
+  return getBuildSummary(mech, stock.loadout, stock.armor);
+};
+
+describe('tiempos de calor', () => {
+  it('CA1: el DRG-1G-S llega al máximo en 31.4 s y se enfría en 19.4 s', () => {
+    const summary = stockSummary('DRG-1G-S');
+    expect(summary.heatCapacity).toBe(62);
+    expect(summary.coolingRate).toBe(3.2);
+    expect(summary.timeToMaxHeat).toBeCloseTo(62 / (summary.heatPerSecond - 3.2), 5);
+    expect(Number((summary.timeToMaxHeat as number).toFixed(1))).toBe(31.4);
+    expect(Number(summary.timeToCoolDown!.toFixed(1))).toBe(19.4);
+  });
+
+  it('CA2: si la refrigeración iguala o supera al calor disparando, no llega nunca', () => {
+    expect(getHeatTimes({ heatCapacity: 50, heatPerSecond: 2, coolingRate: 2 }).timeToMaxHeat).toBe('never');
+    expect(getHeatTimes({ heatCapacity: 50, heatPerSecond: 1, coolingRate: 2 }).timeToMaxHeat).toBe('never');
+    expect(getHeatTimes({ heatCapacity: null, heatPerSecond: 3, coolingRate: 2 })).toEqual({ timeToMaxHeat: null, timeToCoolDown: null });
+    expect(getHeatTimes({ heatCapacity: 50, heatPerSecond: 3, coolingRate: null })).toEqual({ timeToMaxHeat: null, timeToCoolDown: null });
+  });
+});
+
+describe('tonelaje junto al nombre', () => {
+  it('CA3: «Autocannon/5 (8t)»', () => {
+    expect(getWeaponLabel(getItem('Autocannon5'))).toBe('Autocannon/5 (8t)');
+    expect(getWeaponLabel(getItem('MediumLaser'))).toBe('Medium Laser (1t)');
+  });
+});
+
+describe('daño potencial de la munición', () => {
+  it('CA4: la munición del HGN-732 de serie', () => {
+    const summary = stockSummary('HGN-732');
+    const gauss = summary.ammunition.find(group => group.label === 'Gauss')!;
+    expect(gauss.potentialDamage).toBe(78 * 15);
+    const lrm = summary.ammunition.find(group => group.label === 'LRM')!;
+    const lrmVolley = summary.weapons.filter(weapon => weapon.item.ammoType === lrm.ammoType).reduce((sum, weapon) => sum + weapon.damage, 0);
+    expect(lrm.potentialDamage).toBeCloseTo(lrm.volleys! * lrmVolley, 5);
+  });
+
+  it('CA5: una munición que no usa ninguna arma no tiene daño potencial', () => {
+    const summary = getBuildSummary(getMech('DRG-1G-S'), makeLoadout({ leftTorso: [getItem('AC20_Standard_AmmoEquipment')] }), stockArmor());
+    expect(summary.ammunition[0].potentialDamage).toBeNull();
+  });
+});
+
+describe('daño por tonelada', () => {
+  it('CA6: con el tonelaje del arma, sin la munición', () => {
+    const perTon = (id: string) => {
+      const item = getItem(id);
+      return Number((getWeaponStats(item).damage / item.tonnage).toFixed(2));
+    };
+    expect([perTon('MediumLaser'), perTon('Autocannon20'), perTon('LRM20')]).toEqual([5, 1.43, 2.4]);
+    const summary = getBuildSummary(getMech('DRG-1G-S'), makeLoadout({ rightArm: [getItem('MediumLaser'), getItem('Autocannon20')] }), stockArmor());
+    expect(summary.weapons.map(weapon => Number(weapon.damagePerTon!.toFixed(2)))).toEqual([5, 1.43]);
+    // El total: el daño por salva de todas las armas a distancia entre su tonelaje.
+    expect(summary.damagePerTon).toBeCloseTo(25 / 15, 5);
+  });
+
+  it('CA7: el daño por tonelada y el daño potencial usan el daño con las mejoras de la cantina', () => {
+    const loadout = makeLoadout({ rightArm: [getItem('Autocannon20')], leftLeg: [getItem('AC20_Standard_AmmoEquipment')] });
+    const base = getBuildSummary(getMech('DRG-1G-S'), loadout, stockArmor());
+    const upgraded = getBuildSummary(getMech('DRG-1G-S'), loadout, stockArmor(), getUpgrades(['IncreasedBallisticDamage_Trait1']));
+    expect(upgraded.weapons[0].damage).toBeGreaterThan(base.weapons[0].damage);
+    expect(upgraded.weapons[0].damagePerTon).toBeCloseTo(upgraded.weapons[0].damage / 14, 5);
+    expect(upgraded.ammunition[0].potentialDamage).toBeCloseTo(upgraded.ammunition[0].volleys! * upgraded.weapons[0].damage, 5);
+  });
+});
+
+function stockArmor() {
+  const mech = getMech('DRG-1G-S');
+  return getStockBuild(mech, allMechs, allItems)!.armor;
+}
