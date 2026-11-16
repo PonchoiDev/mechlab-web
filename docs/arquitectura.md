@@ -136,6 +136,14 @@ Es una página del build de BATTLETECH (`battletech/argo/index.html`, servida en
 - **`battletech/argo/ArgoApp.tsx`:** la portada, la pantalla Ship Upgrades del juego (secciones de `groupBySection`, iconos SVG pintados con una máscara según el estado y la ficha en una ventana), el árbol con el resaltado de requisitos, las fichas por categoría y el plan, que en el móvil es una barra fija abajo. Solo pinta y llama a la lógica.
 - **Imágenes:** las ilustraciones de las mejoras y los retratos de la tripulación son PNG estáticos en `battletech/public/argo/`; `argo.json` solo guarda su nombre.
 
+### Armas y equipo de BATTLETECH
+
+Es una página del build de BATTLETECH (`battletech/equipment/index.html`, servida en `/battletech/equipment/`), con su propio bundle. Lee el mismo `items.json` que el MechLab de BATTLETECH, sin cambios, y usa los estilos de las unidades enemigas (`units.css`) con su color de acento (`battletech/equipment/equipment.css`), como la Argo:
+
+- **Sin los 'Mechs:** las etiquetas de fuente, anclaje y rareza pasan de `mechlabData.ts` y `filters.ts` a `utils/battletech/catalog.ts`, que no importa datos; los dos módulos las reexportan, así que el MechLab no cambia. La página importa `catalog.ts` y no carga `mechs.json`.
+- **`utils/battletech/equipment.ts`:** las filas de la tabla de armas (el daño de un ataque, la inestabilidad por los disparos, la precisión con el signo del juego y la munición por tonelada), los filtros por anclaje, versión, fuente, rareza y búsqueda, el orden por columnas (sin el dato, al final), las categorías y los efectos del equipo (con dónde se monta), las mejoras por grupo, las armas que usan cada munición y la vista en la URL. Recibe el catálogo como parámetro y tiene sus tests (`equipment.test.ts`).
+- **`battletech/equipment/BtEquipmentApp.tsx`:** las pestañas de armas y equipo, la tabla de armas con las bonificaciones de cada fabricante, las fichas de equipo y la tabla de munición. Solo pinta y llama a la lógica.
+
 ## Decisiones de diseño
 
 ### La build viaja en el enlace

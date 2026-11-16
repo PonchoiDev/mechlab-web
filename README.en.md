@@ -12,6 +12,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 | Pilots | https://mw-builder.com/mercs/pilots/ |
 | BATTLETECH MechLab | https://mw-builder.com/battletech/ |
 | BATTLETECH star map | https://mw-builder.com/battletech/starmap/ |
+| BATTLETECH weapons and equipment | https://mw-builder.com/battletech/equipment/ |
 | Slides | [View on Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) (in Spanish) |
 | Video walkthrough | [Watch on Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) (in Spanish) |
 | Login | None: the site works without an account and builds are saved in the browser |
@@ -43,7 +44,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (531 tests, V8 coverage) |
+| Tests | Vitest 5 (541 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -110,6 +111,11 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - A tree by category and tier that lights up everything an upgrade requires and unlocks when you point at it.
 - Planner: tick upgrades, their requirements come along, and the total cost, monthly upkeep (¢80,000 base plus each upgrade) and combined effects add up. The plan goes in the link (`?own=mechBay3,trainingModule1`).
 
+**BATTLETECH weapons and equipment**
+- Its own page (`/battletech/equipment/`) with all 210 weapons and every manufacturer version (+ to + + +) in one table: hardpoint, tons, slots, damage (with its shots), stability damage, heat, heat damage, accuracy, crit, min and max range with the range brackets, ammo per ton, damage per ton, rarity, source and cost, with the manufacturer bonuses.
+- Sorting by any column and filters by hardpoint, version, source, rarity and a search by name or manufacturer.
+- An equipment tab with heat sinks, jump jets, upgrades by group (with where they mount) and every ammo box with the weapons that use it. The view goes in the link.
+
 **Other**
 - What's new bell with the changes the user has not seen yet.
 - Feedback form delivered by email without exposing the developer's address.
@@ -151,6 +157,7 @@ src/
   pilots/               Pilots page: hero pilots, traits and academy training programs
   battletech/           BATTLETECH pages (star map), with their logic in utils/battletech/
   battletech/argo/      BATTLETECH Argo page: upgrade tree, cards and plan
+  battletech/equipment/ BATTLETECH weapons and equipment page: weapon table, equipment cards and ammo
   battletech/mechlab/   BATTLETECH MechLab: 'Mech picker, board, equipment picker and analysis
   hooks/                Build state, saved builds, view preferences and Sarna image
   utils/                Configurator logic: calculations, fitting rules, upgrades, build codes
@@ -164,6 +171,7 @@ units/index.html        Entry of the enemy units page (/mercs/units/)
 pilots/index.html       Entry of the pilots page (/mercs/pilots/)
 battletech/             Entries of the BATTLETECH pages (/battletech/) and their images
 battletech/argo/        Entry of the Argo page (/battletech/argo/) and its images in public/argo/
+battletech/equipment/   Entry of the weapons and equipment page (/battletech/equipment/)
 battletech/index.html   Entry of the BATTLETECH MechLab (/battletech/), with the chassis icons in public/mechlab/
 site/                   Landing page at the domain root (mw-builder.com)
 docs/                   Analysis, architecture, UML diagrams and development with AI
@@ -339,7 +347,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Quality and checks against the game
 
-- **531 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **541 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
