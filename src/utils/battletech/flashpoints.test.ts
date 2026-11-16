@@ -77,4 +77,13 @@ describe('flashpoints de BATTLETECH', () => {
     expect(parseFlashpointsQuery('?fp=morganKell', flashpoints).open).toBe('morganKell');
     expect(parseFlashpointsQuery('?fp=nope&dlc=nope', flashpoints)).toEqual(DEFAULT_FLASHPOINTS_VIEW);
   });
+
+  it('CA8: Yang Virtanen\'s Big Score, con la lanza ligera o la pesada y su Mech a elegir', () => {
+    const yang = flashpoint("Yang Virtanen's Big Score");
+    expect(yang.paths.map(path => ({ label: path.label, name: path.name, mechs: path.reward?.mechs.map(mech => mech.name), choice: path.reward?.choice }))).toEqual([
+      { label: 'A', name: 'Light lance', mechs: ['Vindicator VND-1AA', 'Firestarter FS9-H', 'Trebuchet TBT-5N', 'Enforcer ENF-4R'], choice: true },
+      { label: 'B', name: 'Heavy lance', mechs: ['Catapult CPLT-C4', 'Thunderbolt TDR-5SE', 'Dragon DRG-1N', 'Kintaro KTO-18'], choice: true }
+    ]);
+  });
 });
+

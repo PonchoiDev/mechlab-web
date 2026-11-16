@@ -26,6 +26,7 @@ Los flashpoints están en los bundles de Unity de los tres DLC (`data/assetbundl
 
 - **Caminos:** el generador recorre el grafo de hitos desde el inicio y saca cada camino hasta un final. Los contratos que comparten todos los caminos son los del tronco; después, cada camino lleva los suyos y su pago. El que abandona el flashpoint (`fp_choice_cancel`) no paga nada y no se cuenta como camino: la página dice que se puede abandonar.
 - **Nombre de cada camino:** las opciones de la conversación no están en los datos, así que se llaman por su letra («Path A», «Path B»), y si hay dos decisiones seguidas, por las dos («Path A, then B»).
+- **Recompensa por camino:** en Yang Virtanen's Big Score la decisión es qué lanza robar, y cada camino da a elegir un 'Mech de su serie: la lanza ligera (camino A, `hotrod`: Vindicator, Firestarter, Trebuchet o Enforcer) o la pesada (camino B, `monster`: Catapult CPLT-C4, Thunderbolt TDR-5SE, Dragon DRG-1N o Kintaro KTO-18). Los datos no unen cada serie con su camino; lo dicen los briefings de sus contratos («We've got the hot rods», «We've got the monster trucks») y se ha comprobado en el juego. El generador lo lleva en una tabla con su nombre.
 - **Dificultad:** la del flashpoint, de 1 a 10, como la del juego (que la pinta en calaveras: la mitad).
 - **'Mechs de la recompensa:** los de la colección. Las variantes especiales que no se pueden comprar (el Bull Shark BSK-MAZ, el Big Steel Claw BSC-20) no están en el MechLab: salen con su nombre y sin enlace.
 
@@ -61,6 +62,7 @@ Los flashpoints están en los bundles de Unity de los tres DLC (`data/assetbundl
 | CA4 | Los requisitos | se consultan | Davion Alliance pide estar aliado con Davion; Red Hunt, más de 40 de reputación con Kurita; The Baying of Hounds, nada. Yang Virtanen's Big Score se repite |
 | CA5 | La lista | se filtra por Heavy Metal / se busca «kell», «viribium» y «raven» | salen los 4 de Heavy Metal / The Baying of Hounds, The Baying of Hounds y Prototype, sin distinguir mayúsculas |
 | CA6 | The Baying of Hounds | se enlaza al mapa | `/battletech/starmap/?system=Viribium` |
+| CA8 | Yang Virtanen's Big Score | se consultan sus caminos | son dos: A, Light lance, con el Vindicator VND-1AA, el Firestarter FS9-H, el Trebuchet TBT-5N y el Enforcer ENF-4R a elegir; y B, Heavy lance, con el Catapult CPLT-C4, el Thunderbolt TDR-5SE, el Dragon DRG-1N y el Kintaro KTO-18 |
 | CA7 | La URL | se abre y se construye | sin parámetros, todo y nada desplegado. `?dlc=heavymetal&q=hour` se lee y se vuelve a escribir igual. `?fp=morganKell` despliega The Baying of Hounds. Un flashpoint o un DLC que no existen se ignoran |
 
 ## Fuera de alcance
@@ -71,7 +73,7 @@ Los flashpoints están en los bundles de Unity de los tres DLC (`data/assetbundl
 
 ## Plan de pruebas
 
-1. **Datos y lógica (CA1 a CA7):** `src/utils/battletech/flashpoints.test.ts`, con `flashpoints.json` real.
+1. **Datos y lógica (CA1 a CA8):** `src/utils/battletech/flashpoints.test.ts`, con `flashpoints.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: la carátula nueva, los grupos, el filtro y la búsqueda, The Baying of Hounds desplegado con sus dos caminos y un flashpoint con una decisión doble, y un enlace al mapa.
 
 ## Resultado
