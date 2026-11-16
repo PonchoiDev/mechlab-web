@@ -23,6 +23,7 @@ import {
   type GuideView
 } from '../utils/questGuide';
 import { getMechLabUrl } from '../utils/markets';
+import { getPilotUrl } from '../utils/pilots';
 import { formatGameDate } from '../utils/starmap';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
@@ -32,7 +33,6 @@ const data = starmapJson as unknown as StarmapData;
 const briefings = briefingsJson as Record<string, (string | null)[]>;
 const QUEST_SOURCES = getQuestSources(data);
 const CAMPAIGN_SOURCES = getCampaignSources(data);
-const PILOTS_URL = '/mercs/pilots/';
 const MODE_NAMES = { campaign: 'Campaign', career: 'Career' } as const;
 const numberFormat = new Intl.NumberFormat('en');
 const systemNames = new Map(data.systems.map(system => [system.id, system.name]));
@@ -63,9 +63,9 @@ function MechLink({ id, name }: { id: string; name: string }) {
   );
 }
 
-function PilotLink({ pilot }: { pilot: { name: string; hero: boolean } }) {
+function PilotLink({ pilot }: { pilot: { id: string; name: string; hero: boolean } }) {
   if (!pilot.hero) return <span className="guide-pilot">{pilot.name} <small>pilot</small></span>;
-  return <a className="guide-pilot" href={PILOTS_URL} title="Hero pilot: open the Pilots page">{pilot.name} <small>hero pilot</small></a>;
+  return <a className="guide-pilot" href={getPilotUrl(pilot.id)} title="Hero pilot: open the Pilots page">{pilot.name} <small>hero pilot</small></a>;
 }
 
 function MapLink({ href, children }: { href: string; children: ReactNode }) {

@@ -440,3 +440,13 @@ body {
   .pilot-section h2 { font-size: 21px; }
   .pilot-portrait { width: 64px; height: 64px; }
 }
+
+/* La ficha a la que lleva un enlace (?pilot=ValtenRyder): resaltada para encontrarla al llegar. */
+.pilot-hero.is-target {
+  outline: 2px solid var(--units-accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 28px rgba(47, 140, 255, 0.35);
+}
+
+.pilot-hero { scroll-margin-top: 90px; }
+

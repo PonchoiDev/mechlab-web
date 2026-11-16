@@ -3,7 +3,7 @@ import pilotsJson from '../data/pilots.json';
 import type { HeroPilot, PilotTrait, PilotsData, TrainingProgramEntry, TraitEffect, TraitEffectGroup } from '../types/pilots';
 import {
   TRAIT_CATEGORIES, filterTraits, formatProgramLength, getAcademyMapUrl, getPortraitUrl, getTraitEffectColumns, groupPrograms, groupTraits, parsePilotsQuery,
-  splitHeroPilots, toPilotsQuery, type PilotsView
+  parsePilotTarget, splitHeroPilots, toPilotsQuery, type PilotsView
 } from '../utils/pilots';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
@@ -120,10 +120,10 @@ function SkillBar({ name, level, cap }: { name: string; level: number; cap: numb
   );
 }
 
-function HeroCard({ pilot }: { pilot: HeroPilot }) {
+function HeroCard({ pilot, isTarget }: { pilot: HeroPilot; isTarget: boolean }) {
   const kind = [pilot.dlc !== null ? `DLC ${pilot.dlc}` : 'Base game', pilot.rank].filter(Boolean).join(' · ');
   return (
-    <article className="unit-card pilot-hero">
+    <article id={`pilot-${pilot.id}`} className={`unit-card pilot-hero${isTarget ? ' is-target' : ''}`}>
       <header className="unit-card-header pilot-hero-header">
         <img className="pilot-portrait" src={getPortraitUrl(pilot.portrait)} alt={`Portrait of ${pilot.name}`}
           width={80} height={80} loading="lazy" decoding="async" />
@@ -173,7 +173,7 @@ function HeroCard({ pilot }: { pilot: HeroPilot }) {
   );
 }
 
-function HeroesView() {
+function HeroesView({ target }: { target: string | null }) {
   return (
     <>
       <section className="pilot-section" aria-labelledby="heroes-hiring">
@@ -184,14 +184,14 @@ function HeroesView() {
             like a hero 'Mech.
           </p>
         </header>
-        <div className="units-grid">{HERO_SECTIONS.hiringHall.map(pilot => <HeroCard key={pilot.id} pilot={pilot} />)}</div>
+        <div className="units-grid">{HERO_SECTIONS.hiringHall.map(pilot => <HeroCard key={pilot.id} pilot={pilot} isTarget={pilot.id === target} />)}</div>
       </section>
       <section className="pilot-section" aria-labelledby="heroes-rewards">
         <header className="pilot-section-header">
           <h2 id="heroes-rewards">Rewards <small>{HERO_SECTIONS.rewards.length}</small></h2>
           <p>They join the company when a mission or an objective is completed. Hiring halls never offer them.</p>
         </header>
-        <div className="units-grid">{HERO_SECTIONS.rewards.map(pilot => <HeroCard key={pilot.id} pilot={pilot} />)}</div>
+        <div className="units-grid">{HERO_SECTIONS.rewards.map(pilot => <HeroCard key={pilot.id} pilot={pilot} isTarget={pilot.id === target} />)}</div>
       </section>
     </>
   );
@@ -308,7 +308,12 @@ function ProgramsView({ onOpenTrait }: { onOpenTrait: OpenTrait }) {
 }
 
 export function PilotsApp() {
-  const [view, setView] = useState<PilotsView>(() => parsePilotsQuery(window.location.search));
+  // Un enlace a un piloto hero (?pilot=ValtenRyder) abre su pestaña y lleva su ficha a la vista, resaltada.
+  const [target] = useState(() => parsePilotTarget(window.location.search, data.heroes));
+  const [view, setView] = useState<PilotsView>(() => ({ ...parsePilotsQuery(window.location.search), ...(target ? { tab: 'heroes' as const } : {}) }));
+  useEffect(() => {
+    if (target) document.getElementById(`pilot-${target}`)?.scrollIntoView({ block: 'center' });
+  }, [target]);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
@@ -376,7 +381,7 @@ export function PilotsApp() {
           </button>
         </div>
 
-        {view.tab === 'heroes' && <HeroesView />}
+        {view.tab === 'heroes' && <HeroesView target={target} />}
         {view.tab === 'traits' && (
           <>
             <section className="units-controls" aria-label="Filters">

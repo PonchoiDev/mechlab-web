@@ -1,11 +1,11 @@
 import { Fragment, useMemo, useState } from 'react';
 import type { Campaign, CampaignMission, GameDate, StarmapData } from '../types/starmap';
 import { getCampaignAvailability, getCampaignsForSystem, searchCampaigns } from '../utils/campaigns';
+import { getPilotUrl } from '../utils/pilots';
 import { formatGameDate } from '../utils/starmap';
 import { MechLink } from './MarketPanels';
 
 const numberFormat = new Intl.NumberFormat('en');
-const PILOTS_URL = `${import.meta.env.BASE_URL}pilots/`;
 
 const describeAvailability = (campaign: Campaign, date: GameDate): string | null => {
   const availability = getCampaignAvailability(campaign, date);
@@ -77,11 +77,11 @@ export function CampaignDrawer({ data, date, selectedId, onPick }: CampaignDrawe
 }
 
 // Piloto que da una misión o una HRQ; los hero, enlazados a la página de pilotos.
-export function PilotReward({ pilot }: { pilot: { name: string; hero: boolean } }) {
+export function PilotReward({ pilot }: { pilot: { id: string; name: string; hero: boolean } }) {
   if (!pilot.hero) return <><b className="starmap-campaign-pilot">{pilot.name}</b><small> pilot</small></>;
   return (
     <>
-      <a className="starmap-campaign-pilot" href={PILOTS_URL} title="Hero pilot: open the Pilots page">{pilot.name}</a>
+      <a className="starmap-campaign-pilot" href={getPilotUrl(pilot.id)} title="Hero pilot: open the Pilots page">{pilot.name}</a>
       <small> hero pilot</small>
     </>
   );
