@@ -64,7 +64,7 @@ La página de unidades enemigas de MW5 (`/mercs/units/`, `docs/specs/unidades-en
 | CA4 | El Heavy Shredder Turret | se calculan sus armas | hace 216 de daño y 40 de calor (los 4 Flamer); es Turret, heavy, con 300 de blindaje en una ubicación y sin movimiento ni tonelaje |
 | CA5 | El Swift Wind | se consulta | no tiene armas, no combate y hace 0 de daño |
 | CA6 | El Packrat Support Vehicle | se consulta su equipo | lleva el ECM (`Gear_Sensor_Prototype_ECM`); es de Urban Warfare |
-| CA7 | La lista | se filtra por Turret / se busca «carrier» | salen las 12 torretas / los 3 Carrier (LRM, SRM e Inferno), sin distinguir mayúsculas |
+| CA7 | La lista | se filtra por Turret / se busca «carrier» | salen las 12 torretas / los 5 Carrier (LRM, SRM, Inferno y los dos Schrek), sin distinguir mayúsculas |
 | CA8 | La lista | se ordena por daño / por velocidad | la primera es el SRM Carrier (480) / el Rotunda Recon Vehicle y el Swift Wind (400 m corriendo, por nombre al empatar), y las torretas van al final |
 | CA9 | Las unidades | se consulta su página de Sarna | el Scorpion y el Scorpion Mk II enlazan `Scorpion_(Combat_Vehicle)`; el Inferno Carrier, el SRM Carrier; el Alsvin y las torretas no tienen; todos los dibujos son de `cfw.sarna.net` |
 | CA10 | Una vista con tipo, búsqueda y orden | se pasa a la URL y se vuelve a leer | sale la misma vista; la vista por defecto deja la URL limpia |

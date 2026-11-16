@@ -82,7 +82,7 @@ describe('unidades enemigas de BATTLETECH', () => {
   it('CA7: filtro por tipo y búsqueda sin distinguir mayúsculas', () => {
     expect(filterBtUnits(units, { kind: 'turret', query: '' })).toHaveLength(12);
     expect(filterBtUnits(units, { kind: 'all', query: 'CARRIER' }).map(candidate => candidate.name).sort())
-      .toEqual(['Inferno Carrier', 'LRM Carrier', 'SRM Carrier']);
+      .toEqual(['Inferno Carrier', 'LRM Carrier', 'SRM Carrier', 'Schrek PPC Carrier', 'Schrek SPPC Carrier']);
   });
 
   it('CA8: orden por daño y por velocidad, con las torretas al final', () => {
