@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-16-cooling-without-mods',
+    date: '2026-11-16',
+    title: 'Cooling as in the unmodded game',
+    items: [
+      'Base cooling is now the game\'s own value for every \'Mech: in the unmodded game, engine heat sinks cool as singles even on double heat sink \'Mechs. A stripped MAL-1R cools 1 and a stripped FS9-X1 0.84',
+      'The earlier, higher numbers came from screenshots of a game running a mod that doubles engine heat sinks. Thanks to the player who spotted it',
+      'Cooling shows two decimals, like the game'
+    ]
+  },
+  {
     id: '2026-11-16-mechlab-covers',
     date: '2026-11-16',
     title: 'New MechLab covers',
