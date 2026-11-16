@@ -49,7 +49,10 @@ body {
 /* Tabla de armas y de munición: se desplaza dentro de su caja, con el nombre fijo a la izquierda */
 .arsenal-table-wrap {
   max-width: 100%;
-  overflow-x: auto;
+  /* Con scroll horizontal, la cabecera fija solo se pega a su caja: la caja hace también el scroll vertical,
+     con el alto de la ventana menos la barra de arriba y el margen de abajo, y así los títulos de las columnas no se pierden. */
+  max-height: calc(100dvh - var(--arsenal-topbar, 57px) - 64px);
+  overflow: auto;
   border: 1px solid var(--units-line);
   border-top: 3px solid var(--units-accent);
   background: var(--units-panel);
@@ -198,6 +201,9 @@ body {
 }
 
 @media (max-width: 760px) {
+  /* La barra de arriba pasa a dos líneas. */
+  .arsenal-table-wrap { --arsenal-topbar: 82px; }
+
   .arsenal-tabs button { padding: 0 12px; font-size: 16px; }
   /* Los filtros en dos columnas, con la búsqueda a todo el ancho */
   .units-search.arsenal-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
