@@ -32,6 +32,7 @@ El MechLab enseña las cifras de cada arma cuando se monta, pero no hay un sitio
 - La precisión y la letalidad de los computadores de puntería son de la resolución automática de misiones (`UnitCardTrait`): no se guardan.
 - Las armas Clan tienen un solo tier, que el juego llama tier Clan.
 - **Precios:** la página no los enseña, por decisión del proyecto, y `items.json` no los guarda.
+- **Lo que no llega a la partida:** el equipo con fecha de introducción (`IntroDate`) posterior al final del juego (31 de diciembre de 3060) no se puede conseguir y no entra en el catálogo: el Heavy Gauss Rifle (3061) y sus dos municiones, que además no lleva ningún 'Mech de serie.
 - Dos armas cuerpo a cuerpo no traen fabricante en un tier (Claymore en el 1 y Hatchet en el 3): se queda sin él.
 
 ## Requisitos funcionales
@@ -73,18 +74,19 @@ El MechLab enseña las cifras de cada arma cuando se monta, pero no hay un sitio
 
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
-| CA1 | El catálogo | se cargan las armas | son 191: 37 de energía, 60 balísticas, 66 de misiles, 2 de artillería, 24 cuerpo a cuerpo y 2 AMS; 60 son Clan |
+| CA1 | El catálogo | se cargan las armas | son 190: 37 de energía, 59 balísticas, 66 de misiles, 2 de artillería, 24 cuerpo a cuerpo y 2 AMS; 60 son Clan |
 | CA2 | El Medium Laser | se ve en tier 1 / Lost Tech | tier 1: 5 de daño, 2,25 de calor, 4 s de cooldown, 15 disparos por minuto, 1,25 de DPS, 5 de daño por tonelada, 270 y 405 m, Magna Mk.II. Lost Tech: 6,5 de daño, Krupp |
 | CA3 | El Autocannon/10 | se ve en tier 1 | 12 t, anclaje balístico mediano, 10 de daño, 600 m/s, 40 cargas y 40 salvas por tonelada |
 | CA4 | El LRM 10 | se ve en tier 1 | 12 de daño por salva (10 misiles de 1,2), 440 cargas y 44 salvas por tonelada |
 | CA5 | El Clan ER Medium Laser | se pide en tier 3 | enseña su único tier (Clan): 9,1 de daño, Strana Mechty MechWorks |
 | CA6 | Las armas | se filtran por energía / tamaño grande / Clan / DLC 3 / búsqueda «gauss» / búsqueda «krupp» en Lost Tech | salen 37 / 56 / 60 / 17 / las 4 Gauss / Large Laser y Medium Laser |
 | CA7 | Las armas en tier 1 | se ordenan por DPS / daño por tonelada / nombre / munición por tonelada | la primera es Clan Heavy Machine Gun (40 de DPS) / Light Knuckles (30) / AMS, Arrow IV y Assault Arena Fist. Al pulsar otra vez DPS, la última es Clan Heavy Machine Gun. Las armas sin munición van al final en los dos sentidos |
-| CA8 | El equipo | se agrupa por categorías | 3 heat sinks, 5 jump jets, 20 motive upgrades, 8 electronics (4 ECM y 4 sondas), 7 targeting computers y 108 municiones |
+| CA8 | El equipo | se agrupa por categorías | 3 heat sinks, 5 jump jets, 20 motive upgrades, 8 electronics (4 ECM y 4 sondas), 7 targeting computers y 106 municiones |
 | CA9 | Los efectos | se piden | Single Heat Sink: +0,1 de refrigeración y +1 de capacidad. Jump Jets Class III: 12,5 m/s, 2,75 s, 8 s y 'Mechs de 60 a 75 t. MASC MK II: +50 % de velocidad, ×4 de aceleración, +45 % de giro y daña las piernas. Guardian ECM: 220 y 400 m. Beagle Active Probe: 450 m y +25 % de sensores. Targeting Computer Mk7: +22 % de sensores, +35 % de velocidad del proyectil y +10 % de alcance de los láseres |
 | CA10 | La munición del AC/10 | se consulta | 1 t, 1 ranura, 40 cargas, 10 de daño por carga al explotar, la usan Autocannon/10, Autocannon/10 rapid-fire y Autocannon/10 Burst Fire |
 | CA11 | La vista | se guarda en la URL y se lee | conserva la pestaña (Weapons si no hay ninguna), la búsqueda, el tipo, el tamaño, la tecnología, el DLC, el tier (1 si no hay), el orden y su sentido, y la categoría del equipo; ignora lo que no conoce |
 | CA12 | Las armas | se busca «tag» / «ac/10-rf» en la pestaña de armas y en el selector del MechLab | sale el Target Acquisition Gear y su versión Clan, por su nombre corto TAG / el Autocannon/10 rapid-fire. «Target» sigue encontrando el TAG por su nombre |
+| CA13 | El catálogo | se busca el Heavy Gauss Rifle y su munición | no están: su fecha de introducción (3061) es posterior al final del juego |
 
 ## Fuera de alcance
 
