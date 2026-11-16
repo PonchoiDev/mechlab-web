@@ -665,8 +665,9 @@ button, input, select { font: inherit; color: inherit; }
   .units-topbar { flex-wrap: wrap; gap: 8px 12px; padding: 8px 12px; }
   .units-brand span:last-child { display: none; }
   .units-topbar h1 { padding-left: 12px; font-size: 20px; }
-  .units-links { order: 3; width: 100%; padding-left: 0; border-left: 0; }
-  .units-links a { padding: 4px 8px; font-size: 14px; }
+  /* Con cinco o seis enlaces no caben en una línea: pasan enteros a la siguiente en vez de partirse cada uno. */
+  .units-links { order: 3; flex-wrap: wrap; width: 100%; padding-left: 0; border-left: 0; }
+  .units-links a { padding: 4px 8px; font-size: 14px; white-space: nowrap; }
   .units-links small { font-size: 14px; }
   .units-feedback, .units-actions .support-link { height: 32px; padding: 0 8px; font-size: 14px; }
   .units-actions .support-link { font-size: 0; }

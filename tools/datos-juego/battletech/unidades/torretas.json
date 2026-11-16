@@ -1,0 +1,751 @@
+{
+ "turretdef_Heavy_LRM": {
+  "AssignedArmor": 300,
+  "ChassisID": "turretchassisdef_Heavy_lrm",
+  "CurrentArmor": 300,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Heavy_LRM",
+   "Name": "Heavy LRM Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_heavy"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_LRM_LRM15_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM15_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 4
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 5
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Heavy_Laser": {
+  "AssignedArmor": 300,
+  "ChassisID": "turretchassisdef_Heavy_laser",
+  "CurrentArmor": 300,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Heavy_Laser",
+   "Name": "Heavy Laser Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_heavy"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_LargeLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 4
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_LargeLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 5
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 6
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 7
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Heavy_Shredder": {
+  "AssignedArmor": 300,
+  "ChassisID": "turretchassisdef_Heavy_shredder",
+  "CurrentArmor": 300,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Heavy_Shredder",
+   "Name": "Heavy Shredder Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_heavy"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC20_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_Flamer_Flamer_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Weapon_Flamer_Flamer_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 4
+   },
+   {
+    "ComponentDefID": "Weapon_Flamer_Flamer_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 5
+   },
+   {
+    "ComponentDefID": "Weapon_Flamer_Flamer_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 6
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC20",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Heavy_Sniper": {
+  "AssignedArmor": 300,
+  "ChassisID": "turretchassisdef_Heavy_sniper",
+  "CurrentArmor": 300,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Heavy_Sniper",
+   "Name": "Heavy Sniper Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_heavy"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 4
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 5
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 6
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 7
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC2",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Light_LRM": {
+  "AssignedArmor": 120,
+  "ChassisID": "turretchassisdef_Light_lrm",
+  "CurrentArmor": 120,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Light_LRM",
+   "Name": "Light LRM Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_light"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Light_Laser": {
+  "AssignedArmor": 120,
+  "ChassisID": "turretchassisdef_Light_laser",
+  "CurrentArmor": 120,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Light_Laser",
+   "Name": "Light Laser Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_light"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Light_Shredder": {
+  "AssignedArmor": 120,
+  "ChassisID": "turretchassisdef_Light_shredder",
+  "CurrentArmor": 120,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Light_Shredder",
+   "Name": "Light Shredder Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_light"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_Flamer_Flamer_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_Flamer_Flamer_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Light_Sniper": {
+  "AssignedArmor": 120,
+  "ChassisID": "turretchassisdef_Light_sniper",
+  "CurrentArmor": 120,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Light_Sniper",
+   "Name": "Light Sniper Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_light"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 4
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 5
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC2",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Standard_LRM": {
+  "AssignedArmor": 200,
+  "ChassisID": "turretchassisdef_Standard_LRM",
+  "CurrentArmor": 200,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Standard_LRM",
+   "Name": "Standard LRM Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_medium"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_LRM_LRM15_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM15_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Standard_Laser": {
+  "AssignedArmor": 200,
+  "ChassisID": "turretchassisdef_Standard_laser",
+  "CurrentArmor": 200,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Standard_Laser",
+   "Name": "Light Standard Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_medium"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_LargeLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 4
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Standard_Shredder": {
+  "AssignedArmor": 200,
+  "ChassisID": "turretchassisdef_Standard_shredder",
+  "CurrentArmor": 200,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Standard_Shredder",
+   "Name": "Standard Shredder Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_medium"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC20_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_Flamer_Flamer_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Weapon_Flamer_Flamer_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 4
+   },
+   {
+    "ComponentDefID": "Weapon_Flamer_Flamer_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 5
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC20",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ },
+ "turretdef_Standard_Sniper": {
+  "AssignedArmor": 200,
+  "ChassisID": "turretchassisdef_Standard_sniper",
+  "CurrentArmor": 200,
+  "CurrentInternalStructure": 1,
+  "DamageLevel": "Functional",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "turretdef_Standard_Sniper",
+   "Name": "Standard Sniper Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "TurretTags": {
+   "items": [
+    "unit_turret",
+    "unit_medium"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0
+   },
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1
+   }
+  ]
+ }
+}

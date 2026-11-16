@@ -1,0 +1,2937 @@
+{
+ "vehicledef_AMMOTRANSPORT": {
+  "ChassisID": "vehiclechassisdef_MOBILEHQ",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_AMMOTRANSPORT",
+   "Name": "Ammunition Transport",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 95,
+    "CurrentArmor": 95,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 95,
+    "CurrentArmor": 95,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   }
+  ]
+ },
+ "vehicledef_APC_Alsvin": {
+  "ChassisID": "vehiclechassisdef_APC_Alsvin",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_APC_Alsvin",
+   "Name": "Alsvin",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_medium",
+    "unit_wheels",
+    "unit_noncombatant",
+    "unit_vehicle_apc",
+    "unit_release"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_TAG_Standard_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_APC_Arvakr": {
+  "ChassisID": "vehiclechassisdef_APC_Arvakr",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_APC_Arvakr",
+   "Name": "Arvakr",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 250,
+    "CurrentArmor": 250,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 225,
+    "CurrentArmor": 225,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 225,
+    "CurrentArmor": 225,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 200,
+    "CurrentArmor": 200,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 250,
+    "CurrentArmor": 250,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_heavy",
+    "unit_wheels",
+    "unit_noncombatant",
+    "unit_vehicle_apc",
+    "unit_release"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_TAG_Standard_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_APC_Sleipnir": {
+  "ChassisID": "vehiclechassisdef_APC_Sleipnir",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_APC_Sleipnir",
+   "Name": "Sleipnir",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 25,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_medium",
+    "unit_wheels",
+    "unit_noncombatant",
+    "unit_vehicle_apc",
+    "unit_release"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_APC_Vargr": {
+  "ChassisID": "vehiclechassisdef_APC_Vargr",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_APC_Vargr",
+   "Name": "Vargr",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 250,
+    "CurrentArmor": 250,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 225,
+    "CurrentArmor": 225,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 225,
+    "CurrentArmor": 225,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 200,
+    "CurrentArmor": 200,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 250,
+    "CurrentArmor": 250,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_heavy",
+    "unit_wheels",
+    "unit_noncombatant",
+    "unit_vehicle_apc",
+    "unit_release"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_APC_Wheeled": {
+  "ChassisID": "vehiclechassisdef_APC_Wheeled",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_APC_Wheeled",
+   "Name": "Wheeled APC",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 5,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 5,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 5,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 5,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 30,
+    "CurrentArmor": 30,
+    "CurrentInternalStructure": 5,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_wheels",
+    "unit_noncombatant",
+    "unit_vehicle_apc",
+    "unit_release"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_BULLDOG": {
+  "ChassisID": "vehiclechassisdef_BULLDOG",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_BULLDOG",
+   "Name": "Bulldog",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_heavy",
+    "unit_tracks"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_LargeLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM4_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM4_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_CARRIER_Inferno": {
+  "ChassisID": "vehiclechassisdef_CARRIER_Inferno",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_CARRIER_Inferno",
+   "Name": "Inferno Carrier",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_heavy",
+    "unit_tracks",
+    "unit_release",
+    "unit_vehicle_carrier"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Inferno_Inferno2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_Inferno_Inferno2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_Inferno_Inferno2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_Inferno_Inferno2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_Inferno_Inferno2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 4,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_Inferno_Inferno2_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 5,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_CARRIER_LRM": {
+  "ChassisID": "vehiclechassisdef_CARRIER_LRM",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_CARRIER_LRM",
+   "Name": "LRM Carrier",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_heavy",
+    "unit_tracks",
+    "unit_release",
+    "unit_vehicle_carrier"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_LRM_LRM20_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM20_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM20_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_CARRIER_SRM": {
+  "ChassisID": "vehiclechassisdef_CARRIER_SRM",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_CARRIER_SRM",
+   "Name": "SRM Carrier",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_heavy",
+    "unit_tracks",
+    "unit_release",
+    "unit_vehicle_carrier"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 4,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 5,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 6,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 7,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 8,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 9,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_DEMOLISHER": {
+  "ChassisID": "vehiclechassisdef_DEMOLISHER",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_DEMOLISHER",
+   "Name": "Demolisher",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 200,
+    "CurrentArmor": 200,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 150,
+    "CurrentArmor": 150,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 150,
+    "CurrentArmor": 150,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 200,
+    "CurrentArmor": 200,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_assault",
+    "unit_tracks"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC20_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC20_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC20",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC20",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC20",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_DEMOLISHER_LBX": {
+  "ChassisID": "vehiclechassisdef_DEMOLISHER_LBX",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_DEMOLISHER_LBX",
+   "Name": "Demolisher LB-X",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 200,
+    "CurrentArmor": 200,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 150,
+    "CurrentArmor": 150,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 150,
+    "CurrentArmor": 150,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 200,
+    "CurrentArmor": 200,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_assault",
+    "unit_tracks"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Autocannon_LB10X_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_LB10X_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LB10X",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LB10X",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LB10X",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LB10X",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_GALLANT": {
+  "ChassisID": "vehiclechassisdef_GALLANT",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_GALLANT",
+   "Name": "Gallant Urban Assault Vehicle",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 35,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "MinAppearanceDate": "3026-01-01T00:00:00Z",
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_heavy",
+    "unit_wheels",
+    "unit_release"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "urbanwarfare",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC10_2-Mydron",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM2_2-Irian",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_2-Delta",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC10",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC10",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Gear_General_Robinson_TG120_Drive_Train",
+    "ComponentDefType": "Upgrade",
+    "HardpointSlot": -1,
+    "MountedLocation": "Rear"
+   }
+  ]
+ },
+ "vehicledef_GALLEON": {
+  "ChassisID": "vehiclechassisdef_GALLEON",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_GALLEON",
+   "Name": "Galleon",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 55,
+    "CurrentArmor": 55,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 55,
+    "CurrentArmor": 55,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 70,
+    "CurrentArmor": 70,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_tracks"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_SmallLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Right"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_SmallLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Left"
+   }
+  ]
+ },
+ "vehicledef_GALLEON_TAG": {
+  "ChassisID": "vehiclechassisdef_GALLEON_TAG",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_GALLEON_TAG",
+   "Name": "Galleon TAG",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 55,
+    "CurrentArmor": 55,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 55,
+    "CurrentArmor": 55,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 70,
+    "CurrentArmor": 70,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_tracks"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_TAG_Standard_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_SmallLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Right"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_SmallLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Left"
+   },
+   {
+    "ComponentDefID": "Gear_General_Robinson_TG120_Drive_Train",
+    "ComponentDefType": "Upgrade",
+    "HardpointSlot": -1,
+    "MountedLocation": "Rear"
+   }
+  ]
+ },
+ "vehicledef_HM_SLDFDroneHeavy": {
+  "ChassisID": "vehiclechassisdef_SLDFDroneHeavy",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_HM_SLDFDroneHeavy",
+   "Name": "SLDF Heavy Drone",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 220,
+    "CurrentArmor": 220,
+    "CurrentInternalStructure": 80,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 200,
+    "CurrentArmor": 200,
+    "CurrentInternalStructure": 80,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 200,
+    "CurrentArmor": 200,
+    "CurrentInternalStructure": 80,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 180,
+    "CurrentArmor": 180,
+    "CurrentInternalStructure": 80,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 220,
+    "CurrentArmor": 220,
+    "CurrentInternalStructure": 80,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_LargeLaserPulse_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Gear_General_Lance_Command_Module",
+    "ComponentDefType": "Upgrade",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM15_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_HM_SLDFDroneMedium": {
+  "ChassisID": "vehiclechassisdef_SLDFDroneMedium",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_HM_SLDFDroneMedium",
+   "Name": "SLDF Medium Drone",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 75,
+    "CurrentArmor": 75,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 75,
+    "CurrentArmor": 75,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 75,
+    "CurrentArmor": 75,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaserPulse_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaserPulse_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM4_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 3,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_MANTICORE": {
+  "ChassisID": "vehiclechassisdef_MANTICORE",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_MANTICORE",
+   "Name": "Manticore",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 210,
+    "CurrentArmor": 210,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 165,
+    "CurrentArmor": 165,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 165,
+    "CurrentArmor": 165,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 130,
+    "CurrentArmor": 130,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 210,
+    "CurrentArmor": 210,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_heavy",
+    "unit_tracks",
+    "unit_release"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_MOBILEHQ": {
+  "ChassisID": "vehiclechassisdef_MOBILEHQ",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_MOBILEHQ",
+   "Name": "Mobile HQ",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 95,
+    "CurrentArmor": 95,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 95,
+    "CurrentArmor": 95,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_wheels",
+    "unit_vehicle_mobileHQ",
+    "unit_noncombatant"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Gear_Cockpit_Tacticon_B2000_Battle_Computer",
+    "ComponentDefType": "Upgrade",
+    "HardpointSlot": -1,
+    "MountedLocation": "Turret"
+   }
+  ]
+ },
+ "vehicledef_MOBILEHQ_ARMORED": {
+  "ChassisID": "vehiclechassisdef_MOBILEHQ",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_MOBILEHQ_ARMORED",
+   "Name": "Armored Mobile HQ",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 125,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 95,
+    "CurrentArmor": 125,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 95,
+    "CurrentArmor": 125,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 125,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 125,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_wheels",
+    "unit_vehicle_mobileHQ",
+    "unit_noncombatant",
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   }
+  ]
+ },
+ "vehicledef_PACKRAT": {
+  "ChassisID": "vehiclechassisdef_PACKRAT",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_PACKRAT",
+   "Name": "Packrat Support Vehicle",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "RequiredToSpawnCompanyTags": {
+   "items": [
+    "flashpoint_uw1_complete"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_wheels",
+    "unit_release",
+    "unit_role_ecmcarrier",
+    "unit_electronicWarfare"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "urbanwarfare",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_LargeLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Gear_Sensor_Prototype_ECM",
+    "ComponentDefType": "Upgrade",
+    "HardpointSlot": -1,
+    "MountedLocation": "Turret"
+   }
+  ]
+ },
+ "vehicledef_ROTUNDA": {
+  "ChassisID": "vehiclechassisdef_ROTUNDA",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_ROTUNDA",
+   "Name": "Rotunda Recon Vehicle",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 70,
+    "CurrentArmor": 70,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 60,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 70,
+    "CurrentArmor": 70,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "RequiredToSpawnCompanyTags": {
+   "items": [
+    "flashpoint_uw1_complete"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_wheels",
+    "unit_release",
+    "unit_role_activeprobe",
+    "unit_electronicWarfare"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "urbanwarfare",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Gear_Sensor_Prototype_ActiveProbe",
+    "ComponentDefType": "Upgrade",
+    "HardpointSlot": -1,
+    "MountedLocation": "Turret"
+   }
+  ]
+ },
+ "vehicledef_SCHREK": {
+  "ChassisID": "vehiclechassisdef_SCHREK",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_SCHREK",
+   "Name": "Schrek PPC Carrier",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 140,
+    "CurrentArmor": 140,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_assault",
+    "unit_tracks"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Turret"
+   }
+  ]
+ },
+ "vehicledef_SCHREK_SPPC": {
+  "ChassisID": "vehiclechassisdef_SCHREK_SPPC",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_SCHREK_SPPC",
+   "Name": "Schrek SPPC Carrier",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 125,
+    "CurrentArmor": 125,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 110,
+    "CurrentArmor": 110,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 110,
+    "CurrentArmor": 110,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 105,
+    "CurrentArmor": 105,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 150,
+    "CurrentArmor": 150,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_assault",
+    "unit_tracks"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_PPC_PPCSnub_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_PPC_PPCSnub_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_PPC_PPCSnub_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Turret"
+   }
+  ]
+ },
+ "vehicledef_SCORPION": {
+  "ChassisID": "vehiclechassisdef_SCORPION",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_SCORPION",
+   "Name": "Scorpion",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 55,
+    "CurrentArmor": 55,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 55,
+    "CurrentArmor": 55,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_tracks"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC5_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_MachineGun_MachineGun_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_MG",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC5",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_SCORPION_MKII": {
+  "ChassisID": "vehiclechassisdef_SCORPION_MKII",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_SCORPION_MKII",
+   "Name": "Scorpion Mk II",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 55,
+    "CurrentArmor": 55,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 55,
+    "CurrentArmor": 55,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 50,
+    "CurrentArmor": 50,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 80,
+    "CurrentArmor": 80,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_tracks"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Autocannon_UAC5_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC5",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC5",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_SLDFDroneHeavy": {
+  "ChassisID": "vehiclechassisdef_SLDFDroneHeavy",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_SLDFDroneHeavy",
+   "Name": "SLDF Heavy Drone",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 135,
+    "CurrentArmor": 135,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 135,
+    "CurrentArmor": 135,
+    "CurrentInternalStructure": 40,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_PPC_PPC_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_SLDFDroneMedium": {
+  "ChassisID": "vehiclechassisdef_SLDFDroneMedium",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_SLDFDroneMedium",
+   "Name": "SLDF Medium Drone",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 75,
+    "CurrentArmor": 75,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 75,
+    "CurrentArmor": 75,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 75,
+    "CurrentArmor": 75,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Laser_MediumLaser_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_Autocannon_AC5_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 2,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_AC5",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_STRIKER": {
+  "ChassisID": "vehiclechassisdef_STRIKER",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_STRIKER",
+   "Name": "Striker",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_medium",
+    "unit_wheels",
+    "unit_release"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_SRM_SRM6_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_SRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_STRIKER_Narc": {
+  "ChassisID": "vehiclechassisdef_STRIKER_Narc",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_STRIKER_Narc",
+   "Name": "Striker Narc",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 90,
+    "CurrentArmor": 90,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 10,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_medium",
+    "unit_wheels",
+    "unit_release"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "heavymetal",
+  "inventory": [
+   {
+    "ComponentDefID": "Weapon_Narc_Standard_2-Kali_Yama",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Weapon_LRM_LRM10_0-STOCK",
+    "ComponentDefType": "Weapon",
+    "HardpointSlot": 1,
+    "MountedLocation": "Turret"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_Narc",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   },
+   {
+    "ComponentDefID": "Ammo_AmmunitionBox_Generic_LRM",
+    "ComponentDefType": "AmmunitionBox",
+    "HardpointSlot": -1,
+    "MountedLocation": "Front"
+   }
+  ]
+ },
+ "vehicledef_SWIFTWIND": {
+  "ChassisID": "vehiclechassisdef_SWIFTWIND",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_SWIFTWIND",
+   "Name": "Swift Wind",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 30,
+    "CurrentArmor": 30,
+    "CurrentInternalStructure": 5,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 30,
+    "CurrentArmor": 30,
+    "CurrentInternalStructure": 5,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 30,
+    "CurrentArmor": 30,
+    "CurrentInternalStructure": 5,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 30,
+    "CurrentArmor": 30,
+    "CurrentInternalStructure": 5,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_wheels",
+    "unit_weaponless",
+    "unit_noncombatant"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": []
+ },
+ "vehicledef_SWIFTWIND_ARMORED": {
+  "ChassisID": "vehiclechassisdef_SWIFTWIND_ARMORED",
+  "Description": {
+   "Cost": 564,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_SWIFTWIND_ARMORED",
+   "Name": "Armored Swift Wind",
+   "Purchasable": false,
+   "Rarity": 0,
+   "UIName": "Armored Swiftwind"
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 70,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 70,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 60,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 15,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "unit_vehicle",
+    "unit_light",
+    "unit_wheels",
+    "unit_weaponless",
+    "unit_noncombatant",
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": []
+ },
+ "vehicledef_TARGETVEHICLE1": {
+  "ChassisID": "vehiclechassisdef_TARGETVEHICLE1",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_TARGETVEHICLE1",
+   "Name": "Target Dummy",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 10,
+    "CurrentArmor": 10,
+    "CurrentInternalStructure": 1,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 10,
+    "CurrentArmor": 10,
+    "CurrentInternalStructure": 1,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 10,
+    "CurrentArmor": 10,
+    "CurrentInternalStructure": 1,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 10,
+    "CurrentArmor": 10,
+    "CurrentInternalStructure": 1,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 10,
+    "CurrentArmor": 10,
+    "CurrentInternalStructure": 1,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": []
+ },
+ "vehicledef_TARGETVEHICLE2": {
+  "ChassisID": "vehiclechassisdef_TARGETVEHICLE2",
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "",
+   "Id": "vehicledef_TARGETVEHICLE2",
+   "Name": "Target Dummy",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "Locations": [
+   {
+    "AssignedArmor": 120,
+    "CurrentArmor": 120,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Front"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Left"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Right"
+   },
+   {
+    "AssignedArmor": 10,
+    "CurrentArmor": 10,
+    "CurrentInternalStructure": 1,
+    "DamageLevel": "Functional",
+    "Location": "Rear"
+   },
+   {
+    "AssignedArmor": 100,
+    "CurrentArmor": 100,
+    "CurrentInternalStructure": 30,
+    "DamageLevel": "Functional",
+    "Location": "Turret"
+   }
+  ],
+  "VehicleTags": {
+   "items": [
+    "BLACKLISTED"
+   ],
+   "tagSetSourceFile": ""
+  },
+  "Version": 1,
+  "fuente": "base",
+  "inventory": [
+   {
+    "ComponentDefID": "TargetDummyMod",
+    "ComponentDefType": "Upgrade",
+    "HardpointSlot": 0,
+    "MountedLocation": "Turret"
+   }
+  ]
+ }
+}

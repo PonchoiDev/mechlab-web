@@ -1,0 +1,19 @@
+{
+"Bulldog Medium Tank": {"page": "https://www.sarna.net/wiki/Bulldog_Medium_Tank", "image": "https://cfw.sarna.net/wiki/images/thumb/e/e8/Bulldog_RGilClan_v25.jpg/600px-jcni0yym94r9zsolj9hwbcx6m18nu4m.jpg"},
+"Demolisher": {"page": "https://www.sarna.net/wiki/Demolisher", "image": "https://cfw.sarna.net/wiki/images/thumb/d/d4/Demolisher_RGilClan_v25.jpg/600px-k8rk1w5lpzlsjxz7b8byf9k44m2ybn9.jpg"},
+"Gallant (Combat Vehicle)": {"page": "https://www.sarna.net/wiki/Gallant_%28Combat_Vehicle%29", "image": "https://cfw.sarna.net/wiki/images/thumb/4/40/Gallant_uav.jpg/600px-dz9pwmv3f20ueicozibykhale5fji8c.jpg"},
+"Galleon": {"page": "https://www.sarna.net/wiki/Galleon", "image": "https://cfw.sarna.net/wiki/images/thumb/6/63/Galleon_RGilClan_v27.jpg/600px-3e3f11fwhxdwsf06x3galc8x0a2zs0x.jpg"},
+"LRM Carrier": {"page": "https://www.sarna.net/wiki/LRM_Carrier", "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"},
+"Manticore": {"page": "https://www.sarna.net/wiki/Manticore", "image": "https://cfw.sarna.net/wiki/images/0/09/Manticore_RGilClan_v31.jpg"},
+"Mobile HQ": {"page": "https://www.sarna.net/wiki/Mobile_HQ", "image": "https://cfw.sarna.net/wiki/images/thumb/b/bb/Browning_Mobile_HQ_RGilClan_v29.jpg/600px-lr13lnudhd4hiqmmnbaq4c9czoiyxmi.jpg"},
+"Packrat": {"page": "https://www.sarna.net/wiki/Packrat", "image": "https://cfw.sarna.net/wiki/images/thumb/5/5f/Packrat_TRO3025CE.jpg/600px-42qk32i0vnt060io3ef5mgm5o10y1ep.jpg"},
+"Rotunda": {"page": "https://www.sarna.net/wiki/Rotunda", "image": "https://cfw.sarna.net/wiki/images/thumb/1/10/Rotunda.jpg/600px-es9q3honn7hjiiagyihfv37ezuz6wst.jpg"},
+"SRM Carrier": {"page": "https://www.sarna.net/wiki/SRM_Carrier", "image": "https://cfw.sarna.net/wiki/images/thumb/0/0e/SRM_Carrier_RGilClan_v30.jpg/600px-hkpawaem20jm1t0futwrf55w7bt0m28.jpg"},
+"Schrek": {"page": "https://www.sarna.net/wiki/Schrek", "image": "https://cfw.sarna.net/wiki/images/thumb/e/e4/Schrek_RGilClan_v32.jpg/600px-6kyhe430wm9jkcvzg9u4fychzqmlpr2.jpg"},
+"Scorpion (Combat Vehicle)": {"page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29", "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"},
+"Sleipnir (Combat Vehicle)": {"page": "https://www.sarna.net/wiki/Sleipnir_%28Combat_Vehicle%29", "image": "https://cfw.sarna.net/wiki/images/c/cb/Sleipnir_APC_Tank.png"},
+"Striker (Combat Vehicle)": {"page": "https://www.sarna.net/wiki/Striker_%28Combat_Vehicle%29", "image": "https://cfw.sarna.net/wiki/images/b/b7/Striker_RGilClan_v33.jpg"},
+"Swift Wind": {"page": "https://www.sarna.net/wiki/Swift_Wind", "image": "https://cfw.sarna.net/wiki/images/thumb/c/c6/Swift_Wind_TRO3025CE.jpg/600px-ohwdwefqh1pirgo40wnpkvjzjfpnxod.jpg"},
+"Vargr": {"page": "https://www.sarna.net/wiki/Vargr", "image": "https://cfw.sarna.net/wiki/images/c/cf/Vargr_APC_Tank.png"},
+"Wheeled APC": {"page": "https://www.sarna.net/wiki/Wheeled_APC", "image": "https://cfw.sarna.net/wiki/images/thumb/3/39/Tr3026-wheeled-apc.jpg/600px-5hgepj3fq2besir33wxuvpknicx0z2o.jpg"}
+}

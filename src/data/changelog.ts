@@ -24,6 +24,16 @@ export const CHANGELOG: ChangelogEntry[] = [
     ]
   },
   {
+    id: '2026-11-16-battletech-enemy-units',
+    date: '2026-11-16',
+    title: 'BATTLETECH enemy units',
+    items: [
+      'A new BATTLETECH Enemy units page lists the 37 tanks, wheeled vehicles and turrets you face in contracts, from the base game, Heavy Metal and Urban Warfare',
+      'Each card shows armor and structure by location, walk and sprint distance, the damage of one attack with every weapon, stability damage and the weapons and equipment it carries',
+      'Filter by type or name and sort by damage, armor, tonnage or speed; the view goes in the link, ready to share'
+    ]
+  },
+  {
     id: '2026-11-16-battletech-equipment',
     date: '2026-11-16',
     title: 'BATTLETECH weapons and equipment',

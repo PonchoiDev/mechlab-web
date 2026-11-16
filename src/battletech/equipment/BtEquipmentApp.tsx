@@ -250,6 +250,7 @@ export function BtEquipmentApp() {
         <nav className="units-links" aria-label="BATTLETECH">
           <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
           <a href="/battletech/starmap/">Star map</a>
+          <a href="/battletech/units/">Enemy units</a>
           <a href="/battletech/argo/">Argo</a>
           <a href="/battletech/equipment/" aria-current="page">Equipment</a>
         </nav>
