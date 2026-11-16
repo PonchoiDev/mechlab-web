@@ -61,6 +61,8 @@ export interface TargetingComputerStats {
 export interface Item {
   id: string;
   name: string;
+  // Nombre corto del juego, si no es el mismo: «TAG» (Target Acquisition Gear), «AC/10».
+  shortName?: string;
   type: 'weapon' | 'equipment' | 'ammo';
   equipmentType?: 'jumpJet';
   specialSlotTypes?: string[];

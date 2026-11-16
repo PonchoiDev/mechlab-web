@@ -11,6 +11,9 @@ RUTA_RASGOS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "traits")
 
 REGEX_CLASE = re.compile(r'Begin Object Class=/Script/MechWarrior\.([^\s]+)')
 REGEX_NOMBRE = re.compile(r'(?:ShortName|Name)=NSLOCTEXT\([^,]+,\s*"[^"]+",\s*"([^"]+)"\)')
+# El nombre corto que enseña el juego en el HUD («TAG», «AC/10»): los buscadores lo usan, porque mucha
+# gente busca así el arma y su nombre completo no lo contiene (Target Acquisition Gear).
+REGEX_NOMBRE_CORTO = re.compile(r'^\s*ShortName=NSLOCTEXT\([^,]+,\s*"[^"]+",\s*"([^"]+)"\)', re.MULTILINE)
 REGEX_TONS = re.compile(r'(?:Tons|Tonnage)=([0-9.]+)')
 REGEX_SLOTS = re.compile(r'Slots=([0-9]+)')
 REGEX_TAG = re.compile(r'(?:WeaponType|EquipmentType|AmmoType)=\(TagName="([^"]+)"\)')
@@ -329,6 +332,9 @@ def construir_item(id_base, tiers):
         "size": determinar_tamano(buscar_texto(REGEX_WEAPON_SIZE, contenido), tipo_ranura, tipo_general),
         "tonnage": buscar_numero(REGEX_TONS, contenido, 0.0)
     }
+    nombre_corto = buscar_texto(REGEX_NOMBRE_CORTO, contenido, "").strip()
+    if nombre_corto and nombre_corto.lower() != nombre.lower():
+        item["shortName"] = nombre_corto
     slots = determinar_slots(tipo_general, int(slots_archivo) if slots_archivo else None)
     if slots is not None:
         item["slots"] = slots
