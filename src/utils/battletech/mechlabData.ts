@@ -7,7 +7,6 @@ import type {
   BtItem,
   BtItemKind,
   BtMech,
-  BtSource,
   BtWeightClass
 } from '../../types/battletech-mechlab';
 
@@ -19,6 +18,10 @@ const itemsById = new Map(BT_ITEMS.map(item => [item.id, item]));
 const mechsById = new Map(BT_MECHS.map(mech => [mech.id.toLowerCase(), mech]));
 const mechsByVariant = new Map(BT_MECHS.map(mech => [mech.variant.toLowerCase(), mech]));
 
+// Las etiquetas de fuente y anclaje están en catalog.ts, que no carga los 'Mechs (la página de equipo
+// las usa sin el resto del MechLab).
+export { HARDPOINT_LABELS, HARDPOINT_SHORT, HARDPOINTS, SOURCE_LABELS, SOURCES } from './catalog';
+
 export const getItem = (id: string): BtItem | undefined => itemsById.get(id);
 
 // Los enlaces usan el id del mechdef sin «mechdef_» (hunchback_HBK-4G), pero también se acepta el
@@ -27,26 +30,6 @@ export const findMech = (idOrVariant: string): BtMech | undefined => {
   const key = idOrVariant.trim().toLowerCase().replace(/^mechdef_/, '');
   return mechsById.get(key) ?? mechsByVariant.get(key);
 };
-
-export const SOURCE_LABELS: Record<BtSource, string> = {
-  base: 'Base',
-  heavymetal: 'Heavy Metal',
-  flashpoint: 'Flashpoint',
-  urbanwarfare: 'Urban Warfare'
-};
-
-export const SOURCES = Object.keys(SOURCE_LABELS) as BtSource[];
-
-export const HARDPOINT_LABELS: Record<BtHardpoint, string> = {
-  energy: 'Energy',
-  ballistic: 'Ballistic',
-  missile: 'Missile',
-  support: 'Support'
-};
-
-export const HARDPOINT_SHORT: Record<BtHardpoint, string> = { energy: 'E', ballistic: 'B', missile: 'M', support: 'S' };
-
-export const HARDPOINTS = Object.keys(HARDPOINT_LABELS) as BtHardpoint[];
 
 export const WEIGHT_CLASS_LABELS: Record<BtWeightClass, string> = {
   light: 'Light',

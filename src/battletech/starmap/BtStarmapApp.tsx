@@ -331,6 +331,7 @@ export function BtStarmapApp() {
         <nav className="starmap-links" aria-label="MW Builder">
           <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
           <a href="/battletech/argo/">Argo</a>
+          <a href="/battletech/equipment/">Equipment</a>
         </nav>
         <div className="starmap-actions">
           <WhatsNew />
