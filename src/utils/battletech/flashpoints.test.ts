@@ -47,9 +47,10 @@ describe('flashpoints de BATTLETECH', () => {
     expect(hounds.reward?.title).toBe('Rare Items');
   });
 
-  it('CA3: los Mechs especiales de las recompensas, sin enlace al MechLab', () => {
+  it('CA3: los Mechs de las recompensas, con enlace solo si están en el MechLab', () => {
     expect(flashpoint('Hourglass').reward?.mechs).toEqual([{ id: 'bullshark_BSK-MAZ', name: 'Bull Shark BSK-MAZ', inMechLab: false }]);
-    expect(flashpoint('Prototype').reward?.mechs).toEqual([{ id: 'raven_RVN-1X', name: 'Raven RVN-1X', inMechLab: false }]);
+    expect(flashpoint('The Steel Beast').reward?.mechs).toEqual([{ id: 'crab__fp_gladiator_BSC-27', name: 'Big Steel Claw BSC-20', inMechLab: false }]);
+    expect(flashpoint('Prototype').reward?.mechs).toEqual([{ id: 'raven_RVN-1X', name: 'Raven RVN-1X', inMechLab: true }]);
   });
 
   it('CA4: requisitos y flashpoints que se repiten', () => {

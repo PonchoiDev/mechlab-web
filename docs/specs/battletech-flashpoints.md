@@ -27,7 +27,7 @@ Los flashpoints están en los bundles de Unity de los tres DLC (`data/assetbundl
 - **Caminos:** el generador recorre el grafo de hitos desde el inicio y saca cada camino hasta un final. Los contratos que comparten todos los caminos son los del tronco; después, cada camino lleva los suyos y su pago. El que abandona el flashpoint (`fp_choice_cancel`) no paga nada y no se cuenta como camino: la página dice que se puede abandonar.
 - **Nombre de cada camino:** las opciones de la conversación no están en los datos, así que se llaman por su letra («Path A», «Path B»), y si hay dos decisiones seguidas, por las dos («Path A, then B»).
 - **Dificultad:** la del flashpoint, de 1 a 10, como la del juego (que la pinta en calaveras: la mitad).
-- **'Mechs de la recompensa:** los de la colección. Las variantes especiales que no se pueden comprar (el Bull Shark BSK-MAZ, el Raven RVN-1X) no están en el MechLab: salen con su nombre y sin enlace.
+- **'Mechs de la recompensa:** los de la colección. Las variantes especiales que no se pueden comprar (el Bull Shark BSK-MAZ, el Big Steel Claw BSC-20) no están en el MechLab: salen con su nombre y sin enlace.
 
 ## Requisitos funcionales
 
@@ -57,7 +57,7 @@ Los flashpoints están en los bundles de Unity de los tres DLC (`data/assetbundl
 |---|---|---|---|
 | CA1 | Los flashpoints | se cargan | son 32: 18 del DLC Flashpoint, 4 de Heavy Metal y 10 de Urban Warfare. Todos tienen sistema en el mapa de BATTLETECH, al menos un contrato y todos sus contratos tienen nombre |
 | CA2 | The Baying of Hounds | se consulta | es del DLC Flashpoint, se ofrece en Viribium, lo encargan los Kell Hounds, dificultad 7 y duración media. Su tronco son The Baying of Hounds y The Baying of Hounds II; los caminos A y B llevan un contrato cada uno (The Baying of Hounds III: SimpleBattle y CaptureBase) y pagan 1.000.000 C-Bills y 9 de reputación con el Mercenary Review Board. Se puede abandonar, y su recompensa es Rare Items |
-| CA3 | Hourglass y Prototype | se consultan sus recompensas | Hourglass (Heavy Metal) da el Bull Shark BSK-MAZ y Prototype (Urban Warfare) el Raven RVN-1X; ninguno está en el MechLab, así que no llevan enlace |
+| CA3 | Hourglass, The Steel Beast y Prototype | se consultan sus recompensas | Hourglass (Heavy Metal) da el Bull Shark BSK-MAZ y The Steel Beast el Big Steel Claw BSC-20, que no están en el MechLab y no llevan enlace; Prototype (Urban Warfare) da el Raven RVN-1X, que sí está y se enlaza |
 | CA4 | Los requisitos | se consultan | Davion Alliance pide estar aliado con Davion; Red Hunt, más de 40 de reputación con Kurita; The Baying of Hounds, nada. Yang Virtanen's Big Score se repite |
 | CA5 | La lista | se filtra por Heavy Metal / se busca «kell», «viribium» y «raven» | salen los 4 de Heavy Metal / The Baying of Hounds, The Baying of Hounds y Prototype, sin distinguir mayúsculas |
 | CA6 | The Baying of Hounds | se enlaza al mapa | `/battletech/starmap/?system=Viribium` |
