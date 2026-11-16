@@ -306,6 +306,20 @@ a.guide-pilot:hover small, a.guide-pilot:focus-visible small { color: rgba(0, 0,
 .guide-items b { color: var(--units-muted); }
 
 .guide-debrief { margin-top: 8px; }
+
+/* El texto con el que el juego ofrece la cadena, como lo cuenta quien la encarga. */
+.guide-briefing {
+  max-width: 760px;
+  margin: 0 0 4px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--units-accent);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--units-text);
+  white-space: pre-line;
+}
+
+.guide-mission-briefing { margin: 2px 0 4px; }
+.guide-mission-briefing summary { font-size: 14px; }
 .guide-debrief summary { color: var(--units-muted); cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; }
 .guide-debrief p { max-width: 760px; margin: 6px 0 0; color: var(--units-muted); white-space: pre-line; }
 

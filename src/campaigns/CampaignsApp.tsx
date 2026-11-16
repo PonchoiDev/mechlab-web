@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react';
+import briefingsJson from '../data/quest-briefings.json';
 import starmapJson from '../data/starmap.json';
 import type { Campaign, CampaignMission, Quest, QuestRequirement, QuestReward, StarmapData } from '../types/starmap';
 import {
@@ -10,6 +11,7 @@ import {
   getCampaignSources,
   getCampaignTotals,
   getDlcLabel,
+  getQuestBriefings,
   getQuestMapUrl,
   getQuestMechs,
   getQuestSources,
@@ -27,6 +29,7 @@ import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
 
 const data = starmapJson as unknown as StarmapData;
+const briefings = briefingsJson as Record<string, (string | null)[]>;
 const QUEST_SOURCES = getQuestSources(data);
 const CAMPAIGN_SOURCES = getCampaignSources(data);
 const PILOTS_URL = '/mercs/pilots/';
@@ -112,7 +115,7 @@ function Reward({ reward, showMode }: { reward: QuestReward; showMode: boolean }
       <Items weapons={reward.weapons} equipment={reward.equipment} />
       {reward.debrief && (
         <details className="guide-debrief">
-          <summary>Debrief</summary>
+          <summary title="What the employer says when the chain is done: it tells how the story ends">Final debrief</summary>
           <p>{reward.debrief}</p>
         </details>
       )}
@@ -155,6 +158,7 @@ function QuestRow({ quest, open, onToggle, onQuest }: { quest: Quest; open: bool
   const sameForAllModes = quest.requirements.every(requirement =>
     JSON.stringify({ ...requirement, mode: null }) === JSON.stringify({ ...quest.requirements[0], mode: null }));
   const requirements = sameForAllModes ? quest.requirements.slice(0, 1) : quest.requirements;
+  const texts = getQuestBriefings(briefings, quest);
   return (
     <Row
       id={`quest-${quest.id}`}
@@ -175,6 +179,12 @@ function QuestRow({ quest, open, onToggle, onQuest }: { quest: Quest; open: bool
     >
       <div className="guide-detail">
         <div className="guide-detail-main">
+          {texts[0] && (
+            <>
+              <h3>Briefing</h3>
+              <p className="guide-briefing">{texts[0]}</p>
+            </>
+          )}
           <h3>Missions</h3>
           <ol className="guide-missions">
             {quest.missions.map((mission, index) => (
@@ -183,6 +193,13 @@ function QuestRow({ quest, open, onToggle, onQuest }: { quest: Quest; open: bool
                 <div>
                   <h4>{mission.title} <MapLink href={getQuestMapUrl(data, quest, mission.system)}>{systemName(mission.system)}</MapLink></h4>
                   {mission.summary && <p>{mission.summary}</p>}
+                  {/* El de la primera es el de la oferta, que ya sale arriba. */}
+                  {index > 0 && texts[index] && (
+                    <details className="guide-debrief guide-mission-briefing">
+                      <summary>Briefing</summary>
+                      <p>{texts[index]}</p>
+                    </details>
+                  )}
                 </div>
               </li>
             ))}
