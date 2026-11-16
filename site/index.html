@@ -422,13 +422,16 @@
         color: var(--accent);
       }
 
-      /* La carátula de las armas y el equipo: el láser grande de Sarna, en el violeta de su página. */
-      .cover.is-equipment { --accent: #a77bff; }
+      /* Las carátulas de las armas y el equipo, en el violeta de sus páginas: el láser grande de Sarna en MW5 y
+         el PPC en BATTLETECH. El dibujo es apaisado: va arriba, para no quedar debajo del título. */
+      .cover.is-equipment,
+      .cover.is-bt-equipment { --accent: #a77bff; }
 
-      /* El dibujo es apaisado: va arriba, para no quedar debajo del título. */
-      .cover.is-equipment .cover-art { align-items: flex-start; }
+      .cover.is-equipment .cover-art,
+      .cover.is-bt-equipment .cover-art { align-items: flex-start; }
 
-      .cover.is-equipment .cover-art img {
+      .cover.is-equipment .cover-art img,
+      .cover.is-bt-equipment .cover-art img {
         height: 58%;
         margin-top: 6%;
         filter: invert(1) sepia(1) hue-rotate(215deg) saturate(5) brightness(1.1);
@@ -436,11 +439,14 @@
       }
 
       a.cover.is-equipment:hover,
-      a.cover.is-equipment:focus-visible {
+      a.cover.is-equipment:focus-visible,
+      a.cover.is-bt-equipment:hover,
+      a.cover.is-bt-equipment:focus-visible {
         box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(167, 123, 255, 0.22);
       }
 
-      .cover.is-equipment .cover-status {
+      .cover.is-equipment .cover-status,
+      .cover.is-bt-equipment .cover-status {
         border-color: rgba(167, 123, 255, 0.6);
         color: var(--accent);
       }
@@ -965,7 +971,7 @@
         <section class="game-row" aria-labelledby="game-battletech">
           <div class="shelf-header">
             <h3 id="game-battletech">HBS: BATTLETECH <small>HAREBRAINED SCHEMES</small></h3>
-            <span>3 TOOLS</span>
+            <span>4 TOOLS</span>
           </div>
 
           <div class="shelf">
@@ -1024,6 +1030,29 @@
                 </p>
               </div>
               <div class="cover-action">Open Argo <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="cover is-bt-equipment" href="/battletech/equipment/">
+              <div class="cover-band">
+                <span><b>EQUIPMENT</b> · BATTLETECH</span>
+                <span class="cover-status">NEW</span>
+              </div>
+              <div class="cover-art">
+                <img
+                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Ff%2Ffe%2FInverted_PPC.jpg"
+                  alt=""
+                  onerror="this.remove()"
+                />
+              </div>
+              <div class="cover-title">
+                <small>BATTLETECH</small>
+                <strong>Weapons <span>&amp; Equipment</span></strong>
+                <p class="cover-meta">
+                  <span>210 weapons</span>
+                  <span>+ to + + + versions</span>
+                </p>
+              </div>
+              <div class="cover-action">Open Equipment <span aria-hidden="true">→</span></div>
             </a>
           </div>
         </section>

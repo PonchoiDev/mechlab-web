@@ -1,0 +1,237 @@
+/* Armas y equipo de BATTLETECH: los estilos de las unidades enemigas de MW5 (units.css), como la Argo,
+   con el violeta de la página de equipo de MW5: las dos páginas de equipo se reconocen por el color.
+   :root:root pesa más que el :root de units.css, que en el build se carga después. */
+:root:root {
+  --units-accent: #a77bff;
+  /* Los colores de anclaje del MechLab (App.css y battletech/mechlab/mechlab.css). */
+  --arsenal-energy: #00d2ff;
+  --arsenal-ballistic: #ffb703;
+  --arsenal-missile: #4caf50;
+  --arsenal-support: #b9a4ff;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(167, 123, 255, 0.14), transparent 55%),
+    var(--units-bg);
+  background-attachment: fixed;
+}
+
+.units-links a[aria-current='page'] { color: var(--units-accent); }
+
+/* Pestañas: armas y equipo */
+.arsenal-tabs {
+  display: flex;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--units-line);
+}
+
+.arsenal-tabs button {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--units-muted);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.arsenal-tabs small { margin-left: 4px; font-size: 14px; }
+.arsenal-tabs button:hover, .arsenal-tabs button:focus-visible { color: var(--units-text); outline: none; }
+.arsenal-tabs button[aria-pressed='true'] { border-bottom-color: var(--units-accent); color: var(--units-text); }
+
+.units-search.arsenal-filters { flex-wrap: wrap; }
+
+/* Tabla de armas y de munición: se desplaza dentro de su caja, con el nombre fijo a la izquierda */
+.arsenal-table-wrap {
+  max-width: 100%;
+  /* Con scroll horizontal, la cabecera fija solo se pega a su caja: la caja hace también el scroll vertical,
+     con el alto de la ventana menos la barra de arriba y el margen de abajo, y así los títulos de las columnas no se pierden. */
+  max-height: calc(100dvh - var(--arsenal-topbar, 57px) - 64px);
+  overflow: auto;
+  border: 1px solid var(--units-line);
+  border-top: 3px solid var(--units-accent);
+  background: var(--units-panel);
+  scrollbar-color: var(--units-line) transparent;
+}
+
+.arsenal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.arsenal-table th,
+.arsenal-table td {
+  /* Más justo que en MW5: BATTLETECH tiene más columnas (ranuras, inestabilidad, precisión, crítico…). */
+  padding: 5px 7px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.arsenal-table thead th {
+  position: sticky;
+  top: 0;
+  color: var(--units-muted);
+  background: #0b0e15;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.arsenal-table thead button {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.arsenal-table thead button[title] { text-decoration: underline dotted rgba(255, 255, 255, 0.3); text-underline-offset: 3px; }
+.arsenal-table thead button span { min-width: 9px; font-size: 9px; }
+.arsenal-table thead button:hover, .arsenal-table thead button:focus-visible { color: var(--units-text); outline: none; }
+.arsenal-table thead button.is-active { color: var(--units-accent); }
+
+.arsenal-table th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: left;
+  background: #0b0e15;
+}
+
+.arsenal-table thead th:first-child { z-index: 2; }
+.arsenal-table tbody tr:nth-child(odd) > * { background-color: rgba(255, 255, 255, 0.035); }
+.arsenal-table tbody tr:nth-child(odd) > th:first-child { background-color: #121520; }
+.arsenal-table tbody tr:hover > * { background-color: rgba(167, 123, 255, 0.1); }
+.arsenal-table tbody tr:hover > th:first-child { background-color: #22170f; }
+
+.arsenal-weapons tbody th { border-left: 3px solid var(--arsenal-type, transparent); }
+.arsenal-weapons tr[data-type='energy'] { --arsenal-type: var(--arsenal-energy); }
+.arsenal-weapons tr[data-type='ballistic'] { --arsenal-type: var(--arsenal-ballistic); }
+.arsenal-weapons tr[data-type='missile'] { --arsenal-type: var(--arsenal-missile); }
+.arsenal-weapons tr[data-type='support'] { --arsenal-type: var(--arsenal-support); }
+
+.arsenal-weapon-name { display: block; font-size: 17px; font-weight: 700; }
+
+.arsenal-weapon-meta {
+  display: flex;
+  gap: 8px;
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.arsenal-badge { color: var(--units-accent); text-transform: uppercase; }
+
+/* Bonificaciones del fabricante, como las escribe el juego */
+.arsenal-bonus-list { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0 14px 10px; list-style: none; }
+
+.arsenal-bonus-list li {
+  padding: 1px 6px;
+  border: 1px solid rgba(167, 123, 255, 0.45);
+  color: var(--units-accent);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.arsenal-subsection > h3 small { margin-left: 4px; color: var(--units-muted); font-size: 14px; }
+
+.arsenal-subsection > h3 {
+  margin: 14px 0 8px;
+  color: var(--units-accent);
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.arsenal-table td small { color: var(--units-muted); font-size: 13px; }
+.arsenal-table td.is-hardpoint { color: var(--arsenal-type, var(--units-text)); text-align: left; }
+.arsenal-table td.is-dps { font-weight: 700; }
+.arsenal-ammo td:nth-child(2), .arsenal-ammo td.arsenal-users { text-align: left; }
+.arsenal-ammo td.arsenal-users { color: var(--units-muted); font-size: 15px; white-space: normal; min-width: 260px; }
+
+/* Equipo: una sección por categoría con sus fichas */
+.arsenal-section { margin: 0 0 30px; }
+
+.arsenal-section h2 {
+  margin: 0 0 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--units-line);
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.arsenal-section h2 small { margin-left: 4px; color: var(--units-muted); font-size: 15px; }
+
+.arsenal-section > p {
+  max-width: 900px;
+  margin: 6px 0 12px;
+  color: var(--units-muted);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.arsenal .unit-card-header { min-height: 0; }
+
+.unit-card .arsenal-card-name {
+  margin: 2px 0 2px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.arsenal-card-stats { grid-template-columns: repeat(2, 1fr); }
+
+.arsenal-effects {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 8px 14px;
+  font-size: 16px;
+}
+
+.arsenal-effects div { display: flex; justify-content: space-between; gap: 12px; }
+.arsenal-effects dt { color: var(--units-muted); }
+.arsenal-effects dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+
+.arsenal-description {
+  margin: 0;
+  padding: 0 14px 12px;
+  color: var(--units-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+@media (max-width: 760px) {
+  /* La barra de arriba pasa a dos líneas. */
+  .arsenal-table-wrap { --arsenal-topbar: 82px; }
+
+  .arsenal-tabs button { padding: 0 12px; font-size: 16px; }
+  /* Los filtros en dos columnas, con la búsqueda a todo el ancho */
+  .units-search.arsenal-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .units-search.arsenal-filters input { grid-column: 1 / -1; width: auto; }
+  .arsenal-filters label { justify-content: space-between; font-size: 13px; }
+  .arsenal-filters select { flex: 1; min-width: 0; padding: 0 6px; }
+  .arsenal-table { font-size: 15px; }
+  .arsenal-weapon-name { max-width: 150px; white-space: normal; font-size: 15px; }
+  .arsenal-weapon-meta { flex-wrap: wrap; gap: 0 6px; max-width: 150px; white-space: normal; }
+  .arsenal-section h2 { font-size: 21px; }
+}

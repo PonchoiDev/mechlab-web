@@ -1,6 +1,7 @@
 import type { Zone } from '../../types/mech';
 import type { BtHardpoint, BtItem, BtLoadout, BtMech, BtSource, BtWeightClass } from '../../types/battletech-mechlab';
 import { getAllItems, getHardpointCount, getLocationUsage, getMountProblem } from './fitting';
+import { getRarityGroup, type BtRarityGroup } from './catalog';
 import { getItem, HARDPOINTS } from './mechlabData';
 
 // Filtros de los selectores de 'Mech y de objetos del MechLab de BATTLETECH.
@@ -82,19 +83,8 @@ export const ITEM_TABS: { tab: BtItemTab; label: string }[] = [
   { tab: 'upgrade', label: 'Upgrades' }
 ];
 
-// Rareza del juego (Description.Rarity): de 0 a 5 en las tiendas, y 99 o 100 en lo que solo sale como
-// recompensa o tecnología perdida.
-export type BtRarityGroup = 'common' | 'uncommon' | 'rare' | 'special';
-
-export const RARITY_GROUPS: { group: BtRarityGroup; label: string; title: string }[] = [
-  { group: 'common', label: 'Common', title: 'Rarity 0 and 1 in the game data' },
-  { group: 'uncommon', label: 'Uncommon', title: 'Rarity 2 and 3 in the game data' },
-  { group: 'rare', label: 'Rare', title: 'Rarity 4 and 5 in the game data' },
-  { group: 'special', label: 'Special', title: 'Rarity 99 or 100: rewards and lostech that random shops do not sell' }
-];
-
-export const getRarityGroup = (rarity: number): BtRarityGroup =>
-  rarity >= 99 ? 'special' : rarity >= 4 ? 'rare' : rarity >= 2 ? 'uncommon' : 'common';
+// La rareza está en catalog.ts, sin datos, para la página de equipo.
+export { getRarityGroup, RARITY_GROUPS, type BtRarityGroup } from './catalog';
 
 export type BtItemSort = 'name' | 'tonnage' | 'damage' | 'heat' | 'damagePerTon' | 'cost';
 
