@@ -45,7 +45,7 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
-| CA1 | El DRG-1G-S de serie (capacidad 62, 5.18 de calor por segundo disparando y 3.2 de refrigeración) | se calculan sus tiempos de calor | llega al máximo en 31.4 s (62 / 1.98) y se enfría desde el máximo en 19.4 s (62 / 3.2) |
+| CA1 | El DRG-1G-S de serie (capacidad 62, 5.18 de calor por segundo disparando y 2.2 de refrigeración) | se calculan sus tiempos de calor | llega al máximo en 20.8 s (62 / 2.98) y se enfría desde el máximo en 28.2 s (62 / 2.2). Con 3.2 de refrigeración, la que daba el MechLab al doblar los disipadores del motor como el mod QOL Upgrades 2, eran 31.4 s y 19.4 s |
 | CA2 | Una build cuya refrigeración iguala o supera al calor disparando | se calcula el tiempo hasta el calor máximo | no llega nunca: el tiempo es `null` y la página dice «Never» |
 | CA3 | El Autocannon/5 (8 t) | se escribe su nombre en la tabla | «Autocannon/5 (8t)» |
 | CA4 | El HGN-732 de serie | se calcula el daño potencial de su munición | la del Gauss (78 disparos, 15 de daño) da 1170; la del LRM, 44 salvas por el daño de una salva de su LRM 20 |
