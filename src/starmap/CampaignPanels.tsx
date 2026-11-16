@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import type { Campaign, CampaignMission, GameDate, StarmapData } from '../types/starmap';
 import { getCampaignAvailability, getCampaignsForSystem, searchCampaigns } from '../utils/campaigns';
 import { formatGameDate } from '../utils/starmap';
@@ -151,7 +151,15 @@ export function CampaignCard({ data, campaign, date, onSystem, onClose }: Campai
       </dl>
       <ol className="starmap-quest-missions" aria-label="Missions">
         {campaign.missions.map((mission, index) => (
-          <li key={`${mission.title}-${index}`}>
+          <Fragment key={`${mission.title}-${index}`}>
+          {/* La misión espera a su fecha aunque la anterior esté hecha: una pausa en la campaña. */}
+          {mission.notBefore && (
+            <li className="starmap-campaign-pause">
+              <span aria-hidden="true">⏸</span>
+              <p>Not before {formatGameDate(mission.notBefore)}</p>
+            </li>
+          )}
+          <li>
             <span className="starmap-quest-step" aria-hidden="true">{index + 1}</span>
             <div>
               <h3>{mission.title}</h3>
@@ -161,6 +169,7 @@ export function CampaignCard({ data, campaign, date, onSystem, onClose }: Campai
               <MissionReward mission={mission} />
             </div>
           </li>
+          </Fragment>
         ))}
       </ol>
       {campaign.completion && (

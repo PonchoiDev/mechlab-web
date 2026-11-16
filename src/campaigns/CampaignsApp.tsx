@@ -218,6 +218,14 @@ function QuestRow({ quest, open, onToggle, onQuest }: { quest: Quest; open: bool
 function CampaignMissionItem({ campaign, mission, index }: { campaign: Campaign; mission: CampaignMission; index: number }) {
   const paid = money(mission.cbills, mission.reputation);
   return (
+    <>
+    {/* La misión espera a su fecha aunque la anterior esté hecha: una pausa en la campaña. */}
+    {mission.notBefore && (
+      <li className="guide-pause">
+        <span className="guide-step" aria-hidden="true">⏸</span>
+        <p>Not before {formatGameDate(mission.notBefore)}</p>
+      </li>
+    )}
     <li>
       <span className="guide-step" aria-hidden="true">{index + 1}</span>
       <div>
@@ -234,12 +242,14 @@ function CampaignMissionItem({ campaign, mission, index }: { campaign: Campaign;
         <Items weapons={mission.weapons} equipment={mission.equipment} />
       </div>
     </li>
+    </>
   );
 }
 
 function CampaignRow({ campaign, open, onToggle }: { campaign: Campaign; open: boolean; onToggle: () => void }) {
   const mechs = getCampaignMechs(campaign);
   const totals = getCampaignTotals(campaign);
+  const pauses = campaign.missions.filter(mission => mission.notBefore).length;
   return (
     <Row
       id={`campaign-${campaign.id}`}
@@ -249,6 +259,7 @@ function CampaignRow({ campaign, open, onToggle }: { campaign: Campaign; open: b
       meta={<>
         <span>DLC {campaign.dlc}</span>
         <span>{campaign.missions.length} missions</span>
+        {pauses > 0 && <span title="Missions that wait for a date even when the previous one is done">{pauses} {pauses === 1 ? 'pause' : 'pauses'}</span>}
       </>}
       columns={<>
         <div className="guide-row-cell" data-label="Starts at">
@@ -273,7 +284,7 @@ function CampaignRow({ campaign, open, onToggle }: { campaign: Campaign; open: b
         </div>
         <aside className="guide-detail-side">
           <p className="guide-note">
-            Each mission opens when the previous one is done. Pay is the base contract reward, before negotiation and salvage.
+            Each mission opens when the previous one is done, except after a pause, which waits for its date. Pay is the base contract reward, before negotiation and salvage.
           </p>
           {campaign.completion && (
             <>

@@ -263,6 +263,11 @@ a.guide-pilot:hover small, a.guide-pilot:focus-visible small { color: rgba(0, 0,
   font-weight: 700;
 }
 
+/* Pausa: la misión siguiente espera a una fecha aunque la anterior esté hecha. */
+.guide-missions > li.guide-pause { align-items: center; }
+.guide-pause .guide-step { color: var(--units-yellow); background: none; border: 1px dashed var(--units-yellow); font-size: 12px; }
+.guide-missions .guide-pause p { margin: 0; color: var(--units-yellow); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+
 .guide-missions h4 {
   display: flex;
   flex-wrap: wrap;
