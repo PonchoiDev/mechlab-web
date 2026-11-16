@@ -585,8 +585,18 @@ def campanas(partes_juego, nombres, recompensas, nombres_de_pilotos, mechs, item
                 raise ValueError(f"DLC {dlc}: la misión {mision['nombre']!r} no lleva número: ¿ha cambiado el juego?")
             return int(coincidencia.group(1))
 
+        # Una parte que comprueba una fecha posterior al inicio no se abre antes aunque la anterior esté hecha:
+        # su primera misión espera a esa fecha (Tikonov en el DLC2, Rasalhague en el DLC4). Las fechas
+        # anteriores al inicio (Arcturus y Trolloc Prime del DLC5, en 3025) no frenan nada.
+        inicio_fecha = min(fechas) if fechas else None
+        parte_de = {id(mision): parte_juego for parte_juego in partes for mision in parte_juego["misiones"]}
+        partes_vistas = set()
         misiones = []
         for mision in sorted(misiones_juego, key=numero_de_mision):
+            parte_juego = parte_de[id(mision)]
+            espera = (parte_juego["desde"] if id(parte_juego) not in partes_vistas and parte_juego["desde"]
+                      and inicio_fecha and parte_juego["desde"] > inicio_fecha else None)
+            partes_vistas.add(id(parte_juego))
             if mision["sistema"] not in sistemas_validos:
                 continue
             titulo = re.sub(r"\bpt\.", "Pt.", mision.get("titulo") or "")
@@ -602,6 +612,7 @@ def campanas(partes_juego, nombres, recompensas, nombres_de_pilotos, mechs, item
                 "pilots": [piloto_hero(piloto, nombres_de_pilotos) for piloto in pago.get("pilotos", [])],
                 "weapons": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, True) for id_juego, cantidad in pago.get("armas", [])),
                 "equipment": sumar_objetos(objeto_de_juego(id_juego, cantidad, items, False) for id_juego, cantidad in pago.get("equipo", [])),
+                "notBefore": espera,
             })
         if not misiones:
             raise ValueError(f"DLC {dlc}: ninguna misión de la campaña está en un sistema del mapa: ¿ha cambiado el juego?")
