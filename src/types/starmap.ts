@@ -279,6 +279,8 @@ export interface StarmapData {
   uniqueMechs: UniqueMech[];
   rewards: CampaignReward[];
   campaigns: Campaign[];
+  // Nombre de cada DLC por su número («8»: Chaos Reign).
+  dlcs: Record<string, string>;
   arenas: { systems: ArenaSystem[]; ranks: ArenaRank[] };
   mercs: { companies: Record<string, MercCompany>; zones: MercZone[] };
   academies: Academy[];

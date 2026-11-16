@@ -27,8 +27,15 @@ export const getQuestSource = (quest: Quest): number => quest.dlc ?? BASE_GAME;
 export const getQuestSources = (data: StarmapData): number[] =>
   [...new Set(data.quests.map(getQuestSource))].sort((a, b) => a - b);
 
-export const getCampaignSources = (data: StarmapData): number[] =>
-  [...new Set(data.campaigns.map(campaign => campaign.dlc))].sort((a, b) => a - b);
+// Call to Arms y Chaos Reign cuentan su historia con cadenas de HRQ en vez de con una campaña. Las del DLC1
+// son cacerías de 'Mechs hero sueltas, no una historia, y las del DLC2 acompañan a su campaña.
+const QUEST_STORY_DLCS = [3, 8];
+
+// La pestaña de campañas tiene las campañas y las historias contadas con cadenas de HRQ.
+export const getCampaignSources = (data: StarmapData): number[] => [...new Set([
+  ...data.campaigns.map(campaign => campaign.dlc),
+  ...QUEST_STORY_DLCS.filter(dlc => data.quests.some(quest => quest.dlc === dlc))
+])].sort((a, b) => a - b);
 
 // Grupos por origen, del juego base al último DLC, con las HRQ en el orden en que llegan.
 export const groupQuestsBySource = (quests: Quest[]): { source: number; quests: Quest[] }[] => {
@@ -76,6 +83,34 @@ export const getCampaignTotals = (campaign: Campaign): { cbills: number; reputat
   cbills: campaign.missions.reduce((total, mission) => total + mission.cbills, 0),
   reputation: campaign.missions.reduce((total, mission) => total + mission.reputation, 0)
 });
+
+// El origen con su nombre: «Base game» o «DLC 8 · Chaos Reign».
+export const getDlcLabel = (data: StarmapData, source: number): string =>
+  source === BASE_GAME ? 'Base game' : [`DLC ${source}`, data.dlcs[String(source)]].filter(Boolean).join(' · ');
+
+export interface QuestStory {
+  dlc: number;
+  name: string;
+  // En el orden en que se ofrecen.
+  quests: Quest[];
+}
+
+export const getQuestStories = (data: StarmapData): QuestStory[] => QUEST_STORY_DLCS.map(dlc => ({
+  dlc,
+  name: data.dlcs[String(dlc)] ?? `DLC ${dlc}`,
+  quests: data.quests.filter(quest => quest.dlc === dlc)
+    .map(quest => ({ quest, date: getQuestDate(data, quest) }))
+    .sort((a, b) => a.date.localeCompare(b.date) || a.quest.name.localeCompare(b.quest.name))
+    .map(({ quest }) => quest)
+})).filter(story => story.quests.length > 0);
+
+// Una historia sale si es de ese origen y su nombre o alguna de sus cadenas coinciden con la búsqueda.
+export const filterQuestStories = (data: StarmapData, query: string, source: SourceFilter): QuestStory[] => {
+  const matching = new Set(searchQuests(data, query).map(quest => quest.id));
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+  return getQuestStories(data).filter(story => (source === 'all' || story.dlc === source) &&
+    (words.every(word => story.name.toLowerCase().includes(word)) || story.quests.some(quest => matching.has(quest.id))));
+};
 
 // La vista va en la URL (?tab=campaigns&dlc=7&q=kerensky, ?quest=bow-and-arrow, ?campaign=dlc7). Una ficha
 // abierta elige su pestaña. Lo que no existe se ignora: un origen sin nada en la pestaña, también.
