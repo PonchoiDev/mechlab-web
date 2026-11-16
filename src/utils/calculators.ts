@@ -153,35 +153,13 @@ export const maximizeArmor = (
   });
 };
 
-// El motor lleva un disipador interno entero por cada 25 de rating, hasta 10. Con dobles, de la
-// Esfera Interior o de Clan, enfrían 0,2 cada uno, como el disipador doble suelto, y el valor del
-// MDA solo hace de mínimo: el JVN-11A (base 1,4) y el BJ-3 (base 0,72), con motor 180, refrigeran
-// 1,4; el FS9-X1 (motor 245) 1,8; el ADR-A (Clan, base 1,4, motor 210) 1,6, y el CTF-3L (base 2,0,
-// motor 280) no pasa de 2,0.
-const ENGINE_RATING_PER_HEAT_SINK = 25;
-const MAX_ENGINE_HEAT_SINKS = 10;
-const DOUBLE_HEAT_SINK_COOLING = 0.2;
-
-const getBaseCoolingRate = (baseCoolingRate: number, heatSinkType?: Mech['heatSinkType'], engineRating?: number) =>
-  (heatSinkType === 'double' || heatSinkType === 'clanDouble') && engineRating !== undefined
-    ? Math.max(
-      baseCoolingRate,
-      Math.min(Math.floor(engineRating / ENGINE_RATING_PER_HEAT_SINK), MAX_ENGINE_HEAT_SINKS) * DOUBLE_HEAT_SINK_COOLING
-    )
-    : baseCoolingRate;
-
-export const calculateCoolingRate = (
-  loadout: Loadout,
-  baseCoolingRate?: number,
-  heatSinkType?: Mech['heatSinkType'],
-  engineRating?: number
-): number | null => baseCoolingRate === undefined
-  ? null
-  : roundTo(
-    getBaseCoolingRate(baseCoolingRate, heatSinkType, engineRating) +
-    sumBy(getEquippedItems(loadout), item => item.cooling ?? 0),
-    1
-  );
+// La refrigeración base es el BaseCoolingRate del MDA, también en los 'Mechs con dobles: el juego no
+// dobla los disipadores del motor (un MAL-1R vacío refrigera 1 y un FS9-X1 0,84). Los mods que lo
+// corrigen, como QOL Upgrades 2, dan más. El juego la enseña con dos decimales.
+export const calculateCoolingRate = (loadout: Loadout, baseCoolingRate?: number): number | null =>
+  baseCoolingRate === undefined
+    ? null
+    : roundTo(baseCoolingRate + sumBy(getEquippedItems(loadout), item => item.cooling ?? 0), 2);
 
 export const calculateTopSpeed = (baseSpeed: number, speedBonus = 0): number =>
   roundTo(baseSpeed * GAME_SPEED_DISPLAY_FACTOR * (1 + speedBonus), 1);
@@ -421,7 +399,7 @@ export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState,
   const equipmentWeight = calculateEquippedWeight(loadout);
   const armorWeight = calculateArmorWeight(armor, getArmorPointsPerTon(mech));
   const weapons = getWeaponPerformance(loadout, modifiers);
-  const coolingRate = calculateCoolingRate(loadout, mech.BaseCoolingRate, mech.heatSinkType, mech.engine?.rating);
+  const coolingRate = calculateCoolingRate(loadout, mech.BaseCoolingRate);
   const heatCapacity = calculateHeatCapacity(mech, loadout);
   const rangedWeapons = weapons.filter(weapon => !isMeleeWeapon(weapon.item));
   const scale = (value: number | undefined, bonus: number) => value === undefined ? null : value * (1 + bonus);
