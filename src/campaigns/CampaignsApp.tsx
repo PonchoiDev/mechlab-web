@@ -8,12 +8,14 @@ import {
   filterQuests,
   getCampaignMapUrl,
   getCampaignMechs,
+  getCampaignPilots,
   getCampaignSources,
   getCampaignTotals,
   getDlcLabel,
   getQuestBriefings,
   getQuestMapUrl,
   getQuestMechs,
+  getQuestPilots,
   getQuestSources,
   groupQuestsBySource,
   parseGuideQuery,
@@ -145,9 +147,20 @@ function Row({ id, name, meta, open, onToggle, columns, children }: {
 }
 
 // Lo que se ve de la recompensa sin desplegar: los 'Mechs, o si no da ninguno, el dinero del modo que más paga.
+function RewardChips({ mechs, pilots }: { mechs: { id: string; name: string }[]; pilots: { id: string; name: string; hero: boolean }[] }) {
+  if (mechs.length === 0 && pilots.length === 0) return null;
+  return (
+    <ul className="guide-mechs">
+      {mechs.map(mech => <li key={mech.id}><MechLink {...mech} /></li>)}
+      {pilots.map(pilot => <li key={pilot.id}><PilotLink pilot={pilot} /></li>)}
+    </ul>
+  );
+}
+
 function QuestRewardSummary({ quest }: { quest: Quest }) {
   const mechs = getQuestMechs(quest);
-  if (mechs.length > 0) return <ul className="guide-mechs">{mechs.map(mech => <li key={mech.id}><MechLink {...mech} /></li>)}</ul>;
+  const pilots = getQuestPilots(quest);
+  if (mechs.length > 0 || pilots.length > 0) return <RewardChips mechs={mechs} pilots={pilots} />;
   const best = [...quest.rewards].sort((a, b) => b.cbills - a.cbills)[0];
   const paid = best ? money(best.cbills, best.reputation) : '';
   return paid ? <p className="guide-money">{paid}</p> : <p className="guide-row-empty">-</p>;
@@ -285,7 +298,7 @@ function CampaignRow({ campaign, open, onToggle }: { campaign: Campaign; open: b
         </div>
         <div className="guide-row-cell" data-label="Reward">
           <p className="guide-money" title="Base contract pay of every mission, before negotiation and salvage">{money(totals.cbills, totals.reputation)}</p>
-          {mechs.length > 0 && <ul className="guide-mechs">{mechs.map(mech => <li key={mech.id}><MechLink {...mech} /></li>)}</ul>}
+          <RewardChips mechs={mechs} pilots={getCampaignPilots(campaign)} />
         </div>
       </>}
     >
@@ -340,7 +353,7 @@ function StoryRow({ story, open, onToggle, onQuest }: { story: QuestStory; open:
           {firstDate && <small>From {formatGameDate(firstDate)}</small>}
         </div>
         <div className="guide-row-cell" data-label="Reward">
-          {mechs.length > 0 && <ul className="guide-mechs">{mechs.map(mech => <li key={mech.id}><MechLink {...mech} /></li>)}</ul>}
+          <RewardChips mechs={mechs} pilots={story.quests.flatMap(getQuestPilots)} />
         </div>
       </>}
     >
