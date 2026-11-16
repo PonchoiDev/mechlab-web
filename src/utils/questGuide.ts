@@ -119,7 +119,9 @@ export const parseGuideQuery = (search: string, data: StarmapData): GuideView =>
   const questId = params.get('quest');
   const campaignId = params.get('campaign');
   const openQuest = questId && data.quests.some(quest => quest.id === questId) ? questId : null;
-  const openCampaign = !openQuest && campaignId && data.campaigns.some(campaign => campaign.id === campaignId) ? campaignId : null;
+  // Las historias contadas con HRQ se abren como una campaña más, con el id de su DLC (dlc8).
+  const isCampaign = (id: string) => data.campaigns.some(campaign => campaign.id === id) || getQuestStories(data).some(story => `dlc${story.dlc}` === id);
+  const openCampaign = !openQuest && campaignId && isCampaign(campaignId) ? campaignId : null;
   const tab: GuideTab = openQuest ? 'quests' : openCampaign ? 'campaigns' : params.get('tab') === 'campaigns' ? 'campaigns' : 'quests';
   const sources = tab === 'quests' ? getQuestSources(data) : getCampaignSources(data);
   const dlc = params.get('dlc');
