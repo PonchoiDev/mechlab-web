@@ -9,8 +9,10 @@ import {
   getCampaignMapUrl,
   getCampaignMechs,
   getCampaignTotals,
+  getDlcLabel,
   getQuestMapUrl,
   getQuestMechs,
+  getQuestStories,
   groupQuestsBySource,
   parseGuideQuery,
   toGuideQuery
@@ -109,5 +111,18 @@ describe('página de HRQ y campañas', () => {
     expect(parseGuideQuery('?tab=nope&dlc=5&quest=nope', data)).toEqual({ tab: 'quests', query: '', source: 'all', open: null });
     expect(parseGuideQuery('?campaign=dlc3', data)).toEqual({ tab: 'quests', query: '', source: 'all', open: null });
     expect(parseGuideQuery('?dlc=0', data).source).toBe(0);
+  });
+
+  it('CA10: cada DLC con su número y su nombre', () => {
+    expect(getDlcLabel(data, 0)).toBe('Base game');
+    expect(getDlcLabel(data, 1)).toBe('DLC 1 · Heroes of the Inner Sphere');
+    expect(getDlcLabel(data, 8)).toBe('DLC 8 · Chaos Reign');
+  });
+
+  it('CA11: las historias contadas con cadenas de HRQ', () => {
+    expect(getQuestStories(data).map(story => ({ dlc: story.dlc, name: story.name, quests: story.quests.map(item => item.name) }))).toEqual([
+      { dlc: 3, name: 'Call to Arms', quests: ['Those in Need'] },
+      { dlc: 8, name: 'Chaos Reign', quests: ['Adam Steiner', 'Testing Ground', 'Ideals of War', 'Thumb War', 'New Home, Old Enemies'] }
+    ]);
   });
 });
