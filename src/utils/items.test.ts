@@ -256,6 +256,10 @@ describe('filterItems', () => {
     expect(filterItems(items, { techBase: 'Clan', weaponType: 'missile' }).map(item => item.id)).toEqual(['C-LRM20']);
   });
 
+  it('busca también por el nombre corto del juego, como en la página de equipo (CA12 de pagina-equipo.md)', () => {
+    expect(filterItems([...items, getItem('TAG')], { search: 'TAG' }).map(item => item.id)).toEqual(['TAG']);
+  });
+
   it('sin filtros devuelve todo', () => {
     expect(filterItems(items, {})).toHaveLength(4);
   });

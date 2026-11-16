@@ -1,6 +1,6 @@
 import type { Item, ItemSize, WeaponType } from '../types/item';
 import { getWeaponStats } from './calculators';
-import { getTierName, isClanTech, isJumpJet } from './items';
+import { getTierName, isClanTech, isJumpJet, matchesItemName } from './items';
 import { BASE_GAME } from './mechs';
 
 // Página de armas y equipo de MW5 (docs/specs/pagina-equipo.md): filas de la tabla de armas en un
@@ -120,7 +120,7 @@ export interface WeaponFilter {
 
 export const DEFAULT_WEAPON_FILTER: WeaponFilter = { query: '', type: 'all', size: 'all', tech: 'all', dlc: 'all' };
 
-// La búsqueda mira el nombre y el fabricante del tier que se ve.
+// La búsqueda mira el nombre, el nombre corto del juego y el fabricante del tier que se ve.
 export const filterWeaponRows = (rows: WeaponRow[], { query, type, size, tech, dlc }: WeaponFilter): WeaponRow[] => {
   const text = query.trim().toLowerCase();
   return rows.filter(row =>
@@ -128,7 +128,7 @@ export const filterWeaponRows = (rows: WeaponRow[], { query, type, size, tech, d
     (size === 'all' || row.item.size === size) &&
     matchesTech(row.item, tech) &&
     matchesDlc(row.item, dlc) &&
-    (!text || row.item.name.toLowerCase().includes(text) || (row.manufacturer ?? '').toLowerCase().includes(text)));
+    (!text || matchesItemName(row.item, text) || (row.manufacturer ?? '').toLowerCase().includes(text)));
 };
 
 export type WeaponSortKey =
@@ -219,7 +219,7 @@ export const filterEquipment = (items: Item[], { category, query, tech, dlc }: E
         (category === 'all' || itemCategory === category) &&
         matchesTech(item, tech) &&
         matchesDlc(item, dlc) &&
-        (!text || item.name.toLowerCase().includes(text));
+        matchesItemName(item, text);
     })
     .sort((a, b) => a.name.localeCompare(b.name, 'en', { numeric: true }));
 };

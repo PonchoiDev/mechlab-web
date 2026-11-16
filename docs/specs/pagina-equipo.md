@@ -49,7 +49,7 @@ El MechLab enseña las cifras de cada arma cuando se monta, pero no hay un sitio
 
   Las armas no ocupan ranuras en Mercenaries (solo necesitan un anclaje de su tipo y tamaño), así que no hay columna de ranuras: la introducción lo dice.
 - **RF4.** Un selector de tier para toda la lista (Tier 0 a 4 y Lost Tech). Las armas Clan, con un solo tier, enseñan siempre el suyo.
-- **RF5.** Las armas se buscan por nombre o fabricante y se filtran por tipo (energía, balística, misiles, artillería, cuerpo a cuerpo y AMS), tamaño del anclaje, tecnología (Inner Sphere o Clan) y DLC (juego base o un DLC).
+- **RF5.** Las armas se buscan por nombre, por su nombre corto del juego («TAG», «AC/10») o por fabricante, y se filtran por tipo (energía, balística, misiles, artillería, cuerpo a cuerpo y AMS), tamaño del anclaje, tecnología (Inner Sphere o Clan) y DLC (juego base o un DLC).
 - **RF6.** Cada columna con cifras ordena la tabla al pulsar su cabecera; otra pulsación invierte el orden. Las cifras empiezan de mayor a menor y el nombre de la A a la Z. Las armas sin el dato van al final.
 - **RF7.** La pestaña de equipo tiene fichas por categoría, con el tonelaje, las ranuras, la tecnología, el DLC y los efectos:
   - **Heat sinks:** refrigeración y capacidad de calor;
@@ -84,6 +84,7 @@ El MechLab enseña las cifras de cada arma cuando se monta, pero no hay un sitio
 | CA9 | Los efectos | se piden | Single Heat Sink: +0,1 de refrigeración y +1 de capacidad. Jump Jets Class III: 12,5 m/s, 2,75 s, 8 s y 'Mechs de 60 a 75 t. MASC MK II: +50 % de velocidad, ×4 de aceleración, +45 % de giro y daña las piernas. Guardian ECM: 220 y 400 m. Beagle Active Probe: 450 m y +25 % de sensores. Targeting Computer Mk7: +22 % de sensores, +35 % de velocidad del proyectil y +10 % de alcance de los láseres |
 | CA10 | La munición del AC/10 | se consulta | 1 t, 1 ranura, 40 cargas, 10 de daño por carga al explotar, la usan Autocannon/10, Autocannon/10 rapid-fire y Autocannon/10 Burst Fire |
 | CA11 | La vista | se guarda en la URL y se lee | conserva la pestaña (Weapons si no hay ninguna), la búsqueda, el tipo, el tamaño, la tecnología, el DLC, el tier (1 si no hay), el orden y su sentido, y la categoría del equipo; ignora lo que no conoce |
+| CA12 | Las armas | se busca «tag» / «ac/10-rf» en la pestaña de armas y en el selector del MechLab | sale el Target Acquisition Gear y su versión Clan, por su nombre corto TAG / el Autocannon/10 rapid-fire. «Target» sigue encontrando el TAG por su nombre |
 
 ## Fuera de alcance
 
@@ -95,3 +96,7 @@ El MechLab enseña las cifras de cada arma cuando se monta, pero no hay un sitio
 
 1. **Datos y lógica (CA1 a CA11):** `src/utils/arsenal.test.ts`, con `items.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: la tabla de armas con filtros y orden, el selector de tier y las fichas de equipo; la portada con la carátula nueva.
+
+## Resultado
+
+- **Búsqueda por nombre corto:** buscar «TAG» no encontraba el Target Acquisition Gear. `generar_items.py` guarda ahora el `ShortName` del juego de las 146 armas que lo tienen distinto del nombre, y el buscador de esta página y el del MechLab miran los dos (CA12).

@@ -92,10 +92,15 @@ export interface ItemFilters {
   weaponType?: WeaponType | null;
 }
 
+// El nombre o el nombre corto del juego: mucha gente busca «TAG» o «AC/10», que no están en el completo.
+export const matchesItemName = (item: Item, query: string): boolean => {
+  const text = query.trim().toLowerCase();
+  return !text || item.name.toLowerCase().includes(text) || (item.shortName ?? '').toLowerCase().includes(text);
+};
+
 export const filterItems = (items: Item[], { search = '', techBase = null, weaponType = null }: ItemFilters): Item[] => {
-  const query = search.trim().toLowerCase();
   return items.filter(item =>
-    (!query || item.name.toLowerCase().includes(query)) &&
+    matchesItemName(item, search) &&
     (!techBase || item.techBase === techBase) &&
     (!weaponType || getItemWeaponType(item) === weaponType)
   );
