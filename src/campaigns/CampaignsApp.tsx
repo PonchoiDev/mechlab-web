@@ -3,19 +3,21 @@ import starmapJson from '../data/starmap.json';
 import type { Campaign, CampaignMission, Quest, QuestRequirement, QuestReward, StarmapData } from '../types/starmap';
 import {
   filterCampaigns,
+  filterQuestStories,
   filterQuests,
   getCampaignMapUrl,
   getCampaignMechs,
   getCampaignSources,
   getCampaignTotals,
+  getDlcLabel,
   getQuestMapUrl,
   getQuestMechs,
-  getQuestSource,
   getQuestSources,
   groupQuestsBySource,
   parseGuideQuery,
   toGuideQuery,
   type GuideTab,
+  type QuestStory,
   type GuideView
 } from '../utils/questGuide';
 import { getMechLabUrl } from '../utils/markets';
@@ -33,7 +35,7 @@ const numberFormat = new Intl.NumberFormat('en');
 const systemNames = new Map(data.systems.map(system => [system.id, system.name]));
 const systemName = (id: number) => systemNames.get(id) ?? '';
 
-const sourceLabel = (source: number) => source === 0 ? 'Base game' : `DLC ${source}`;
+const sourceLabel = (source: number) => getDlcLabel(data, source);
 
 // Qué trae cada origen, para la cabecera de su grupo. Lo que dicen sale de starmap.json: las HRQ de
 // Heroes of the Inner Sphere dan un 'Mech hero cada una, y las del DLC8 tienen fechas.
@@ -118,94 +120,98 @@ function Reward({ reward, showMode }: { reward: QuestReward; showMode: boolean }
   );
 }
 
-// Cabecera de una ficha: el nombre despliega la ficha; los enlaces van fuera del botón.
-function CardHeader({ id, kind, name, open, onToggle, children }: {
-  id: string; kind: ReactNode; name: string; open: boolean; onToggle: () => void; children: ReactNode;
+// Una fila de la lista: el nombre despliega el detalle; los enlaces van fuera del botón, en sus columnas.
+function Row({ id, name, meta, open, onToggle, columns, children }: {
+  id: string; name: string; meta: ReactNode; open: boolean; onToggle: () => void; columns: ReactNode; children: ReactNode;
 }) {
   return (
-    <header className="guide-card-header">
-      <p className="unit-card-kind">{kind}</p>
-      <h2>
-        <button type="button" aria-expanded={open} aria-controls={`${id}-body`} onClick={onToggle}>
-          <span>{name}</span>
-          <span className="guide-chevron" aria-hidden="true">{open ? '−' : '+'}</span>
-        </button>
-      </h2>
-      {children}
-    </header>
+    <li id={id} className={`guide-row${open ? ' is-open' : ''}`}>
+      <div className="guide-row-head">
+        <div className="guide-row-name">
+          <button type="button" aria-expanded={open} aria-controls={`${id}-body`} onClick={onToggle}>
+            <span className="guide-chevron" aria-hidden="true">{open ? '−' : '+'}</span>
+            <span>{name}</span>
+          </button>
+          <p className="guide-row-meta">{meta}</p>
+        </div>
+        {columns}
+      </div>
+      {open && <div id={`${id}-body`} className="guide-row-body">{children}</div>}
+    </li>
   );
 }
 
-function QuestCard({ quest, open, onToggle, onQuest }: { quest: Quest; open: boolean; onToggle: () => void; onQuest: (name: string) => void }) {
+// Lo que se ve de la recompensa sin desplegar: los 'Mechs, o si no da ninguno, el dinero del modo que más paga.
+function QuestRewardSummary({ quest }: { quest: Quest }) {
   const mechs = getQuestMechs(quest);
+  if (mechs.length > 0) return <ul className="guide-mechs">{mechs.map(mech => <li key={mech.id}><MechLink {...mech} /></li>)}</ul>;
+  const best = [...quest.rewards].sort((a, b) => b.cbills - a.cbills)[0];
+  const paid = best ? money(best.cbills, best.reputation) : '';
+  return paid ? <p className="guide-money">{paid}</p> : <p className="guide-row-empty">-</p>;
+}
+
+function QuestRow({ quest, open, onToggle, onQuest }: { quest: Quest; open: boolean; onToggle: () => void; onQuest: (name: string) => void }) {
   // Si los modos piden lo mismo, una sola línea sin el modo.
   const sameForAllModes = quest.requirements.every(requirement =>
     JSON.stringify({ ...requirement, mode: null }) === JSON.stringify({ ...quest.requirements[0], mode: null }));
   const requirements = sameForAllModes ? quest.requirements.slice(0, 1) : quest.requirements;
-  const id = `quest-${quest.id}`;
   return (
-    <article id={id} className={`unit-card guide-card${open ? ' is-open' : ''}`}>
-      <CardHeader
-        id={id}
-        name={quest.name}
-        open={open}
-        onToggle={onToggle}
-        kind={<>
-          <span>{sourceLabel(getQuestSource(quest))}</span>
-          {quest.modes.length > 0 && <span>{quest.modes.map(mode => MODE_NAMES[mode]).join(' & ')}</span>}
-          <span>{quest.missions.length} {quest.missions.length === 1 ? 'mission' : 'missions'}</span>
-        </>}
-      >
-        <p className="guide-card-meta">
-          Offered at <MapLink href={getQuestMapUrl(data, quest)}>{systemName(quest.offer)}</MapLink>
-          {quest.employer && <> · <span>{quest.employer}</span></>}
-        </p>
-        {mechs.length > 0 && <ul className="guide-mechs">{mechs.map(mech => <li key={mech.id}><MechLink {...mech} /></li>)}</ul>}
-      </CardHeader>
-      {open && (
-        <div id={`${id}-body`} className="guide-card-body">
-          <dl className="guide-facts">
-            <div>
-              <dt>Requirements</dt>
-              <dd>
-                <ul className="guide-requirements">
-                  {requirements.map(requirement => (
-                    <Requirement key={requirement.mode ?? 'all'} requirement={requirement} showMode={!sameForAllModes} onQuest={onQuest} />
-                  ))}
-                </ul>
-                {quest.visibleEverywhere && <p className="guide-note">The offer shows up from anywhere on the star map.</p>}
-              </dd>
-            </div>
-            {quest.missionTypes.length > 0 && (
-              <div>
-                <dt>Mission types</dt>
-                <dd>{quest.missionTypes.join(' · ')}</dd>
-              </div>
-            )}
-          </dl>
+    <Row
+      id={`quest-${quest.id}`}
+      name={quest.name}
+      open={open}
+      onToggle={onToggle}
+      meta={<>
+        {quest.modes.length > 0 && <span>{quest.modes.map(mode => MODE_NAMES[mode]).join(' & ')}</span>}
+        <span>{quest.missions.length} {quest.missions.length === 1 ? 'mission' : 'missions'}</span>
+      </>}
+      columns={<>
+        <div className="guide-row-cell" data-label="Offered at">
+          <MapLink href={getQuestMapUrl(data, quest)}>{systemName(quest.offer)}</MapLink>
+          {quest.employer && <small>{quest.employer}</small>}
+        </div>
+        <div className="guide-row-cell" data-label="Reward"><QuestRewardSummary quest={quest} /></div>
+      </>}
+    >
+      <div className="guide-detail">
+        <div className="guide-detail-main">
           <h3>Missions</h3>
           <ol className="guide-missions">
             {quest.missions.map((mission, index) => (
               <li key={`${mission.title}-${index}`}>
                 <span className="guide-step" aria-hidden="true">{index + 1}</span>
                 <div>
-                  <h4>{mission.title}</h4>
+                  <h4>{mission.title} <MapLink href={getQuestMapUrl(data, quest, mission.system)}>{systemName(mission.system)}</MapLink></h4>
                   {mission.summary && <p>{mission.summary}</p>}
-                  <MapLink href={getQuestMapUrl(data, quest, mission.system)}>{systemName(mission.system)}</MapLink>
                 </div>
               </li>
             ))}
           </ol>
+          <p className="guide-detail-footer"><MapLink href={getQuestMapUrl(data, quest)}>Show the route on the star map</MapLink></p>
+        </div>
+        <aside className="guide-detail-side">
+          <h3>Requirements</h3>
+          <ul className="guide-requirements">
+            {requirements.map(requirement => (
+              <Requirement key={requirement.mode ?? 'all'} requirement={requirement} showMode={!sameForAllModes} onQuest={onQuest} />
+            ))}
+          </ul>
+          {quest.visibleEverywhere && <p className="guide-note">The offer shows up from anywhere on the star map.</p>}
+          {quest.missionTypes.length > 0 && (
+            <>
+              <h3>Mission types</h3>
+              <p className="guide-plain">{quest.missionTypes.join(' · ')}</p>
+            </>
+          )}
           {quest.rewards.length > 0 && (
             <>
               <h3>Rewards</h3>
               {quest.rewards.map(reward => <Reward key={reward.mode ?? 'all'} reward={reward} showMode={quest.rewards.length > 1} />)}
             </>
           )}
-          <p className="guide-card-footer"><MapLink href={getQuestMapUrl(data, quest)}>Show the route on the star map</MapLink></p>
-        </div>
-      )}
-    </article>
+        </aside>
+      </div>
+    </Row>
   );
 }
 
@@ -215,12 +221,9 @@ function CampaignMissionItem({ campaign, mission, index }: { campaign: Campaign;
     <li>
       <span className="guide-step" aria-hidden="true">{index + 1}</span>
       <div>
-        <h4>{mission.title}</h4>
+        <h4>{mission.title} <MapLink href={getCampaignMapUrl(data, campaign, mission.system)}>{systemName(mission.system)}</MapLink></h4>
+        {mission.employer && <p className="guide-mission-meta">{mission.employer}</p>}
         {mission.summary && <p>{mission.summary}</p>}
-        <p className="guide-mission-meta">
-          <MapLink href={getCampaignMapUrl(data, campaign, mission.system)}>{systemName(mission.system)}</MapLink>
-          {mission.employer && <> · {mission.employer}</>}
-        </p>
         {paid && <p className="guide-money">{paid}</p>}
         {(mission.mechs.length > 0 || mission.pilots.length > 0) && (
           <ul className="guide-mechs">
@@ -234,41 +237,44 @@ function CampaignMissionItem({ campaign, mission, index }: { campaign: Campaign;
   );
 }
 
-function CampaignCard({ campaign, open, onToggle }: { campaign: Campaign; open: boolean; onToggle: () => void }) {
+function CampaignRow({ campaign, open, onToggle }: { campaign: Campaign; open: boolean; onToggle: () => void }) {
   const mechs = getCampaignMechs(campaign);
   const totals = getCampaignTotals(campaign);
-  const id = `campaign-${campaign.id}`;
   return (
-    <article id={id} className={`unit-card guide-card${open ? ' is-open' : ''}`}>
-      <CardHeader
-        id={id}
-        name={campaign.name}
-        open={open}
-        onToggle={onToggle}
-        kind={<>
-          <span>DLC {campaign.dlc}</span>
-          <span>Career</span>
-          <span>{campaign.missions.length} missions</span>
-        </>}
-      >
-        <p className="guide-card-meta">
-          Starts at <MapLink href={getCampaignMapUrl(data, campaign)}>{systemName(campaign.start)}</MapLink>
-          {campaign.from && <> · from {formatGameDate(campaign.from)}</>}
-        </p>
-        <p className="guide-card-meta">Base pay {money(totals.cbills, totals.reputation)}</p>
-        {mechs.length > 0 && <ul className="guide-mechs">{mechs.map(mech => <li key={mech.id}><MechLink {...mech} /></li>)}</ul>}
-      </CardHeader>
-      {open && (
-        <div id={`${id}-body`} className="guide-card-body">
-          <p className="guide-note">
-            Each mission opens when the previous one is done. Pay is the base contract reward, before negotiation and salvage.
-          </p>
+    <Row
+      id={`campaign-${campaign.id}`}
+      name={campaign.name}
+      open={open}
+      onToggle={onToggle}
+      meta={<>
+        <span>DLC {campaign.dlc}</span>
+        <span>{campaign.missions.length} missions</span>
+      </>}
+      columns={<>
+        <div className="guide-row-cell" data-label="Starts at">
+          <MapLink href={getCampaignMapUrl(data, campaign)}>{systemName(campaign.start)}</MapLink>
+          {campaign.from && <small>From {formatGameDate(campaign.from)}</small>}
+        </div>
+        <div className="guide-row-cell" data-label="Reward">
+          <p className="guide-money" title="Base contract pay of every mission, before negotiation and salvage">{money(totals.cbills, totals.reputation)}</p>
+          {mechs.length > 0 && <ul className="guide-mechs">{mechs.map(mech => <li key={mech.id}><MechLink {...mech} /></li>)}</ul>}
+        </div>
+      </>}
+    >
+      <div className="guide-detail">
+        <div className="guide-detail-main">
           <h3>Missions</h3>
           <ol className="guide-missions">
             {campaign.missions.map((mission, index) => (
               <CampaignMissionItem key={`${mission.title}-${index}`} campaign={campaign} mission={mission} index={index} />
             ))}
           </ol>
+          <p className="guide-detail-footer"><MapLink href={getCampaignMapUrl(data, campaign)}>Show the route on the star map</MapLink></p>
+        </div>
+        <aside className="guide-detail-side">
+          <p className="guide-note">
+            Each mission opens when the previous one is done. Pay is the base contract reward, before negotiation and salvage.
+          </p>
           {campaign.completion && (
             <>
               <h3>Campaign complete</h3>
@@ -278,10 +284,80 @@ function CampaignCard({ campaign, open, onToggle }: { campaign: Campaign; open: 
               </div>
             </>
           )}
-          <p className="guide-card-footer"><MapLink href={getCampaignMapUrl(data, campaign)}>Show the route on the star map</MapLink></p>
+        </aside>
+      </div>
+    </Row>
+  );
+}
+
+// Call to Arms y Chaos Reign: una fila como las de las campañas, con sus cadenas de HRQ en orden. Cada
+// cadena abre su fila en la pestaña de HRQ.
+function StoryRow({ story, open, onToggle, onQuest }: { story: QuestStory; open: boolean; onToggle: () => void; onQuest: (name: string) => void }) {
+  const first = story.quests[0];
+  const mechs = story.quests.flatMap(getQuestMechs).filter((mech, index, all) => all.findIndex(other => other.id === mech.id) === index);
+  const firstDate = first.requirements.map(requirement => requirement.from).filter(Boolean).sort()[0];
+  return (
+    <Row
+      id={`campaign-dlc${story.dlc}`}
+      name={story.name}
+      open={open}
+      onToggle={onToggle}
+      meta={<>
+        <span>DLC {story.dlc}</span>
+        <span>{story.quests.length} {story.quests.length === 1 ? 'quest chain' : 'quest chains'}</span>
+      </>}
+      columns={<>
+        <div className="guide-row-cell" data-label="Starts at">
+          <MapLink href={getQuestMapUrl(data, first)}>{systemName(first.offer)}</MapLink>
+          {firstDate && <small>From {formatGameDate(firstDate)}</small>}
         </div>
-      )}
-    </article>
+        <div className="guide-row-cell" data-label="Reward">
+          {mechs.length > 0 && <ul className="guide-mechs">{mechs.map(mech => <li key={mech.id}><MechLink {...mech} /></li>)}</ul>}
+        </div>
+      </>}
+    >
+      <div className="guide-detail">
+        <div className="guide-detail-main">
+          <h3>Quest chains</h3>
+          <ol className="guide-missions">
+            {story.quests.map((quest, index) => {
+              const from = quest.requirements.map(requirement => requirement.from).filter(Boolean).sort()[0];
+              return (
+                <li key={quest.id}>
+                  <span className="guide-step" aria-hidden="true">{index + 1}</span>
+                  <div>
+                    <h4>
+                      <button type="button" className="guide-inline-link" onClick={() => onQuest(quest.name)}>{quest.name}</button>
+                      <MapLink href={getQuestMapUrl(data, quest)}>{systemName(quest.offer)}</MapLink>
+                    </h4>
+                    <p>
+                      {[from && `From ${formatGameDate(from)}`, `${quest.missions.length} ${quest.missions.length === 1 ? 'mission' : 'missions'}`, quest.employer].filter(Boolean).join(' · ')}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+        <aside className="guide-detail-side">
+          <p className="guide-note">
+            This DLC tells its story through high reward quests instead of a campaign: each chain is offered on its own
+            date. Open one to see its missions, requirements and rewards.
+          </p>
+        </aside>
+      </div>
+    </Row>
+  );
+}
+
+// Títulos de las columnas, encima de cada lista. En el móvil, cada celda lleva el suyo (data-label).
+function ListHeader({ place }: { place: string }) {
+  return (
+    <div className="guide-list-header" aria-hidden="true">
+      <span>Name</span>
+      <span>{place}</span>
+      <span>Reward</span>
+    </div>
   );
 }
 
@@ -293,6 +369,7 @@ export function CampaignsApp() {
   const quests = useMemo(() => filterQuests(data, view.query, view.tab === 'quests' ? view.source : 'all'), [view.query, view.source, view.tab]);
   const groups = useMemo(() => groupQuestsBySource(quests), [quests]);
   const campaigns = useMemo(() => filterCampaigns(data, view.query, view.tab === 'campaigns' ? view.source : 'all'), [view.query, view.source, view.tab]);
+  const stories = useMemo(() => filterQuestStories(data, view.query, view.tab === 'campaigns' ? view.source : 'all'), [view.query, view.source, view.tab]);
 
   useEffect(() => {
     window.history.replaceState(null, '', `${window.location.pathname}${toGuideQuery(view)}`);
@@ -324,8 +401,8 @@ export function CampaignsApp() {
   const sources = view.tab === 'quests' ? QUEST_SOURCES : CAMPAIGN_SOURCES;
   const countFor = (source: number) => view.tab === 'quests'
     ? filterQuests(data, view.query, source).length
-    : filterCampaigns(data, view.query, source).length;
-  const total = view.tab === 'quests' ? quests.length : campaigns.length;
+    : filterCampaigns(data, view.query, source).length + filterQuestStories(data, view.query, source).length;
+  const total = view.tab === 'quests' ? quests.length : campaigns.length + stories.length;
 
   return (
     <div className="units guide">
@@ -365,17 +442,17 @@ export function CampaignsApp() {
             High reward quests <small>{data.quests.length}</small>
           </button>
           <button type="button" aria-pressed={view.tab === 'campaigns'} onClick={() => pickTab('campaigns')}>
-            DLC campaigns <small>{data.campaigns.length}</small>
+            DLC campaigns <small>{data.campaigns.length + filterQuestStories(data, '', 'all').length}</small>
           </button>
         </div>
 
         <section className="units-controls" aria-label="Filters">
           <div className="units-kinds" role="group" aria-label="Source">
             <button type="button" aria-pressed={view.source === 'all'} onClick={() => update({ source: 'all' })}>
-              All <small>{view.tab === 'quests' ? filterQuests(data, view.query, 'all').length : filterCampaigns(data, view.query, 'all').length}</small>
+              All <small>{view.tab === 'quests' ? filterQuests(data, view.query, 'all').length : filterCampaigns(data, view.query, 'all').length + filterQuestStories(data, view.query, 'all').length}</small>
             </button>
             {sources.map(source => (
-              <button key={source} type="button" aria-pressed={view.source === source} onClick={() => update({ source })}>
+              <button key={source} type="button" aria-pressed={view.source === source} title={sourceLabel(source)} onClick={() => update({ source })}>
                 {source === 0 ? 'Base' : `DLC ${source}`} <small>{countFor(source)}</small>
               </button>
             ))}
@@ -397,11 +474,12 @@ export function CampaignsApp() {
           <section key={group.source} className="guide-section" aria-label={sourceLabel(group.source)}>
             <h2>{sourceLabel(group.source)} <small>{group.quests.length}</small></h2>
             {SOURCE_NOTES[group.source] && <p>{SOURCE_NOTES[group.source]}</p>}
-            <div className="units-grid guide-grid">
+            <ListHeader place="Offered at" />
+            <ul className="guide-list">
               {group.quests.map(quest => (
-                <QuestCard key={quest.id} quest={quest} open={view.open === quest.id} onToggle={() => toggle(quest.id)} onQuest={openQuest} />
+                <QuestRow key={quest.id} quest={quest} open={view.open === quest.id} onToggle={() => toggle(quest.id)} onQuest={openQuest} />
               ))}
-            </div>
+            </ul>
           </section>
         ))}
 
@@ -409,13 +487,33 @@ export function CampaignsApp() {
           <section className="guide-section" aria-label="DLC campaigns">
             <p>
               Each campaign starts in one system on a date of the career calendar, and its missions are played in order.
-              The DLC 3 (Those in Need) and DLC 8 stories are quest chains: they are in the other tab.
+              Call to Arms (DLC 3) and Chaos Reign (DLC 8) tell theirs through high reward quests instead: they are below.
             </p>
-            <div className="units-grid guide-grid">
+            <ListHeader place="Starts at" />
+            <ul className="guide-list">
               {campaigns.map(campaign => (
-                <CampaignCard key={campaign.id} campaign={campaign} open={view.open === campaign.id} onToggle={() => toggle(campaign.id)} />
+                <CampaignRow key={campaign.id} campaign={campaign} open={view.open === campaign.id} onToggle={() => toggle(campaign.id)} />
               ))}
-            </div>
+            </ul>
+          </section>
+        )}
+
+        {view.tab === 'campaigns' && stories.length > 0 && (
+          <section className="guide-section" aria-label="Stories told through quests">
+            <h2>Told through quests <small>{stories.length}</small></h2>
+            <p>These DLCs tell their story through chains of high reward quests instead of a campaign.</p>
+            <ListHeader place="Starts at" />
+            <ul className="guide-list">
+              {stories.map(story => (
+                <StoryRow
+                  key={story.dlc}
+                  story={story}
+                  open={view.open === `dlc${story.dlc}`}
+                  onToggle={() => toggle(`dlc${story.dlc}`)}
+                  onQuest={openQuest}
+                />
+              ))}
+            </ul>
           </section>
         )}
       </main>

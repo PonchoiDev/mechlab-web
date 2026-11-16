@@ -62,34 +62,77 @@ body {
   line-height: 1.35;
 }
 
-/* Fichas: una ficha desplegada ocupa toda la fila, para que sus misiones se lean de corrido. Al llevarla a la
-   vista, la cabecera fija no la tapa. */
-.guide-card { scroll-margin-top: 72px; }
-.guide-card.is-open { grid-column: 1 / -1; }
+/* Lista: una fila por HRQ o campaña, con las mismas columnas en todas para leerla de arriba abajo:
+   nombre, dónde se ofrece y recompensa. El detalle se despliega debajo de su fila, a todo el ancho. */
+.guide-list-header,
+.guide-row-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 16px;
+  align-items: start;
+}
 
-.guide-card-header { padding: 10px 14px 12px; }
+.guide-list-header {
+  padding: 0 14px 6px 50px;
+  color: var(--units-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
-.guide-card h2 { margin: 2px 0 4px; }
+.guide-list {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--units-line);
+  border-top: 3px solid var(--units-accent);
+  background: var(--units-panel);
+  list-style: none;
+}
 
-.guide-card h2 button {
+.guide-row { scroll-margin-top: 72px; border-top: 1px solid var(--units-line); }
+.guide-row:first-child { border-top: 0; }
+.guide-row:nth-child(even) > .guide-row-head { background: rgba(255, 255, 255, 0.025); }
+.guide-row-head { padding: 10px 14px; }
+.guide-row-head:hover { background: rgba(255, 79, 163, 0.06); }
+.guide-row.is-open > .guide-row-head { background: rgba(255, 79, 163, 0.1); }
+
+.guide-row-name button {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
   gap: 10px;
-  width: 100%;
   padding: 0;
   border: 0;
   background: none;
-  font: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
+  color: var(--units-text);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
   text-align: left;
-  text-transform: inherit;
+  text-transform: uppercase;
   cursor: pointer;
 }
 
-.guide-card h2 button:hover,
-.guide-card h2 button:focus-visible { color: var(--units-accent); outline: none; }
+.guide-row-name button:hover,
+.guide-row-name button:focus-visible { color: var(--units-accent); outline: none; }
+
+.guide-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  margin: 3px 0 0 36px;
+  color: var(--units-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.guide-row-cell { display: flex; flex-direction: column; gap: 2px; padding-top: 2px; font-size: 16px; }
+.guide-row-cell > small { color: var(--units-muted); font-size: 15px; }
+.guide-row-cell .guide-mechs { margin: 0; }
+.guide-row-empty { margin: 0; color: var(--units-muted); }
 
 .guide-chevron {
   flex: none;
@@ -101,13 +144,6 @@ body {
   color: var(--units-accent);
   font-size: 20px;
   line-height: 1;
-}
-
-.guide-card-meta {
-  margin: 0;
-  color: var(--units-muted);
-  font-size: 16px;
-  line-height: 1.35;
 }
 
 .guide-map-link {
@@ -155,40 +191,31 @@ a.guide-pilot:hover, a.guide-pilot:focus-visible { background: #7db4ff; }
 a.guide-mech:hover small, a.guide-mech:focus-visible small,
 a.guide-pilot:hover small, a.guide-pilot:focus-visible small { color: rgba(0, 0, 0, 0.7); }
 
-/* Cuerpo de la ficha desplegada */
-.guide-card-body {
-  padding: 4px 14px 14px;
+/* Detalle desplegado: las misiones en una línea de pasos y, al lado, requisitos y recompensas */
+.guide-row-body {
+  padding: 4px 14px 16px 50px;
   border-top: 1px solid var(--units-line);
   font-size: 16px;
   line-height: 1.35;
 }
 
-.guide-card-body h3 {
-  margin: 16px 0 8px;
+.guide-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 8px 32px;
+}
+
+.guide-row-body h3 {
+  margin: 14px 0 8px;
   color: var(--units-accent);
-  font-size: 17px;
+  font-size: 15px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+.guide-plain { margin: 0; }
 
 .guide-note { margin: 10px 0 0; color: var(--units-muted); }
-
-.guide-facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 10px 24px;
-  margin: 12px 0 0;
-}
-
-.guide-facts dt {
-  color: var(--units-muted);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.guide-facts dd { margin: 2px 0 0; }
 
 .guide-requirements { margin: 0; padding: 0; list-style: none; }
 .guide-requirements b { color: var(--units-muted); }
@@ -204,21 +231,24 @@ a.guide-pilot:hover small, a.guide-pilot:focus-visible small { color: rgba(0, 0,
   cursor: pointer;
 }
 
-.guide-missions {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.guide-missions { margin: 0; padding: 0; list-style: none; }
+
+/* Cada paso, con una línea que lo une al siguiente */
+.guide-missions > li {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  padding-bottom: 14px;
 }
 
-.guide-missions > li {
-  display: flex;
-  gap: 10px;
-  padding: 8px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.03);
+.guide-missions > li:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 26px;
+  bottom: 0;
+  left: 12px;
+  width: 2px;
+  background: rgba(255, 79, 163, 0.35);
 }
 
 .guide-step {
@@ -227,15 +257,29 @@ a.guide-pilot:hover small, a.guide-pilot:focus-visible small { color: rgba(0, 0,
   place-items: center;
   width: 26px;
   height: 26px;
+  border-radius: 50%;
   color: #000;
   background: var(--units-accent);
   font-weight: 700;
 }
 
-.guide-missions h4 { margin: 0 0 2px; font-size: 18px; letter-spacing: 0.02em; text-transform: uppercase; }
+.guide-missions h4 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin: 2px 0 2px;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.guide-missions h4 .guide-map-link { font-size: 15px; letter-spacing: 0.02em; text-transform: none; }
 .guide-missions p { margin: 0 0 4px; color: var(--units-muted); }
-.guide-missions .guide-mission-meta { color: var(--units-text); }
+.guide-missions .guide-mission-meta { color: var(--units-text); font-size: 15px; }
 .guide-missions .guide-money { margin-top: 4px; color: var(--units-yellow); }
+
+.guide-money { margin-top: 4px; color: var(--units-yellow); }
 
 .guide-money { margin: 0; color: var(--units-yellow); font-weight: 600; letter-spacing: 0.02em; }
 .guide-money b { color: var(--units-muted); }
@@ -260,11 +304,25 @@ a.guide-pilot:hover small, a.guide-pilot:focus-visible small { color: rgba(0, 0,
 .guide-debrief summary { color: var(--units-muted); cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; }
 .guide-debrief p { max-width: 760px; margin: 6px 0 0; color: var(--units-muted); white-space: pre-line; }
 
-.guide-card-footer { margin: 16px 0 0; }
+.guide-detail-footer { margin: 2px 0 0; }
 
 @media (max-width: 760px) {
   /* La cabecera fija pasa a dos líneas. */
-  .guide-card { scroll-margin-top: 170px; }
+  .guide-row { scroll-margin-top: 170px; }
+  /* Las columnas pasan una debajo de otra, cada una con su título. */
+  .guide-list-header { display: none; }
+  .guide-row-head { grid-template-columns: 1fr; gap: 8px; }
+  .guide-row-cell { padding-left: 36px; }
+  .guide-row-cell::before {
+    content: attr(data-label);
+    color: var(--units-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .guide-row-body { padding-left: 14px; }
+  .guide-detail { grid-template-columns: 1fr; }
   .guide-tabs button { padding: 0 10px; font-size: 16px; }
   .guide-section > h2 { font-size: 21px; }
 }
