@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-16-clearer-range-radar',
+    date: '2026-11-16',
+    title: 'A clearer damage by range radar',
+    items: [
+      'The damage by range radar of both MechLabs labels each stretch once, like 57.2 dmg · 300 to 500 m, instead of repeating the same number on every ring',
+      'Point at a ring, or tap it, to read its distance and damage below the radar'
+    ]
+  },
+  {
     id: '2026-11-16-mw5-range-radar',
     date: '2026-11-16',
     title: 'Damage by range for MW5',
