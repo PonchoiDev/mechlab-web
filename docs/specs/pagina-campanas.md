@@ -36,7 +36,7 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
   - las condiciones por modo: reputación, fechas, requisito previo y HRQ excluyentes;
   - las misiones en orden, como una línea de pasos, con su título, su resumen y su sistema enlazado al mapa;
   - la recompensa por modo: C-Bills, reputación, 'Mechs enlazados al MechLab, pilotos hero, armas con su tier, equipo y el texto final.
-- **RF4.** Cada campaña es una fila plegable de una lista como la de las HRQ, con su nombre, su DLC, dónde y desde cuándo empieza, cuántas misiones tiene, cuánto pagan en total y sus 'Mechs; desplegada, las misiones en orden con quien las encarga, su sistema enlazado al mapa, su pago y sus recompensas, y lo que da completarla.
+- **RF4.** Cada campaña es una fila plegable de una lista como la de las HRQ, con su nombre, su DLC, dónde y desde cuándo empieza, cuántas misiones tiene, cuánto pagan en total y sus 'Mechs; desplegada, las misiones en orden con quien las encarga, su sistema enlazado al mapa, su pago y sus recompensas, y lo que da completarla. Si una misión espera a una fecha aunque la anterior esté hecha, la línea de pasos marca la pausa antes de ella («Not before 1 Sep 3033»), y el resumen de la fila dice cuántas pausas tiene.
 - **RF5.** Un buscador por nombre, sistema, quien la encarga, misión o recompensa (el mismo del mapa) y un filtro por origen.
 - **RF6.** La pestaña, la búsqueda, el filtro y la ficha abierta van en la URL (`?tab=campaigns&dlc=7`, `?quest=bow-and-arrow`, `?campaign=dlc7`).
 - **RF7.** El MechLab, el mapa, las unidades enemigas, los pilotos y el equipo enlazan la página nueva en su cabecera.

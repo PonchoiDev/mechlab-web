@@ -28,7 +28,7 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
 - **Campañas:** las de los DLC 2, 4, 5, 6, 7 y 9. La del DLC3 (Hatchetman) y las del DLC8 (Quest_*) son cadenas de misiones que el mapa ya enseña como HRQ.
 - **Partes que cuentan:** solo las que cuelgan del arco principal por `SubCampaigns`. El prólogo del DLC4 (`DLC4_Pt1_Prologue`, «[*] Operation ASEIR») está en los archivos, pero ningún arco lo usa: la campaña del DLC4 empieza en Kirchbach.
 - **Orden de las misiones:** el número del nombre de cada misión en su parte (`D7M7`, `D5_M0`). Las partes no sirven para ordenar: la del DLC7 `Pt1.2` (Last Frontier) es una rama de la `Pt.3`, y en el DLC5 la primera misión es la `D5M14` de Dieron, que la parte llama `D5_M0`.
-- **Inicio:** el sistema de la primera parte (la de nombre más bajo: `Prologue`, `Pt.0`) y su fecha si la comprueba (`bCheck`). Si no la comprueba, la del arco principal: el DLC9 empieza en Tharkad, sin misión allí, el 1 de abril de 3058. Las fechas de las demás partes no cuentan: se abren al acabar la anterior.
+- **Inicio:** el sistema de la primera parte (la de nombre más bajo: `Prologue`, `Pt.0`) y su fecha si la comprueba (`bCheck`). Si no la comprueba, la del arco principal: el DLC9 empieza en Tharkad, sin misión allí, el 1 de abril de 3058. Las demás partes se abren al acabar la anterior, salvo las que comprueban una fecha posterior al inicio: su primera misión espera a esa fecha aunque la anterior ya esté hecha. Son dos pausas: Tikonov (Act 1 del DLC2) no antes del 15 de marzo de 3028, dos años después del prólogo, y Rasalhague (Pt.3 del DLC4) no antes del 1 de septiembre de 3033. Las fechas anteriores al inicio, como las de Arcturus y Trolloc Prime en el DLC5 (3025, con la campaña empezando en 3038), no frenan nada.
 - **Nombre:** el de la cabecera. Las que están en mayúsculas se escriben como título («Legend of the Kestrel Lancers»).
 - **Títulos de las misiones:** «pt.2» se escribe «Pt.2», como en el resto.
 - **Pago:** el del escenario, que es el pago base del contrato.
@@ -44,7 +44,8 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
 - **RF4.** La ficha de la campaña muestra su nombre, su DLC, dónde y desde cuándo empieza y la lista de misiones. Cada misión tiene:
   - su título, su resumen y quién la encarga;
   - su sistema, que centra el mapa en él;
-  - su pago (C-Bills y reputación) y sus recompensas: 'Mechs enlazados al MechLab, pilotos hero enlazados a la página de pilotos, armas y equipo.
+  - su pago (C-Bills y reputación) y sus recompensas: 'Mechs enlazados al MechLab, pilotos hero enlazados a la página de pilotos, armas y equipo;
+  - si espera a una fecha, la pausa antes de ella («Not before 1 Sep 3033»).
 
   Al final, lo que da completar la campaña.
 - **RF5.** La ficha de cada sistema indica las campañas que empiezan o pasan por él, y permite abrirlas.
@@ -71,6 +72,7 @@ Las misiones de alta recompensa (`docs/specs/misiones-hrq.md`) ya resuelven algo
 | CA8 | Shadow of Kerensky | se consulta su disponibilidad | el 1 de enero de 3049 aún no se ofrece (hasta el 15 de septiembre de 3049); en 3050 sí |
 | CA9 | La URL | se abre con `?campaign=dlc7` o se construye | elige Shadow of Kerensky; con un id que no existe, ninguna; y la vista con una campaña elegida lleva `campaign=dlc7` |
 | CA10 | La HRQ de Adam Steiner (DLC8) | se consulta su recompensa | da a Valten Ryder |
+| CA11 | Las campañas | se consultan sus pausas | solo hay dos misiones que esperan a una fecha: Tikonov Pt.1 (Legend of the Kestrel Lancers) al 15 de marzo de 3028 y Rasalhague (Rise of Rasalhague) al 1 de septiembre de 3033; The Dragon's Gambit no tiene ninguna |
 
 ## Fuera de alcance
 
