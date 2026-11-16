@@ -18,6 +18,44 @@ export interface ItemTierStats {
   rpm?: number;
   // Velocidad del proyectil en m/s; los láseres no tienen.
   speed?: number;
+  // Fabricante de este tier (la página de equipo lo enseña).
+  manufacturer?: string;
+}
+
+// Efectos del equipo, en metros y en los multiplicadores del juego (generar_items.py).
+export interface JumpJetStats {
+  thrust: number;
+  burnTime: number;
+  regenTime: number;
+  mechTonnage: [number, number] | null;
+}
+
+export interface EcmStats {
+  disruptRange: number;
+  counterRange: number;
+  shielding: number;
+  suppression: number;
+  lrmSpread: number;
+  streakTracking: number;
+  aiAccuracy: number;
+}
+
+export interface ProbeStats {
+  range: number;
+  sensorRange: number;
+  distortionReduction: number;
+}
+
+export interface MascStats {
+  accel: number;
+  turn: number;
+  damagedParts: string[];
+}
+
+export interface TargetingComputerStats {
+  sensorRange: number;
+  projectileSpeed: number;
+  laserRange: number;
 }
 
 export interface Item {
@@ -47,4 +85,12 @@ export interface Item {
   ammoPerVolley?: number;
   tiers?: Record<string, ItemTierStats> | null;
   tier?: string;
+  dlc?: number;
+  description?: string;
+  explosionDamagePerRound?: number;
+  jumpJet?: JumpJetStats;
+  ecm?: EcmStats;
+  probe?: ProbeStats;
+  masc?: MascStats;
+  targetingComputer?: TargetingComputerStats;
 }

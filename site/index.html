@@ -422,6 +422,29 @@
         color: var(--accent);
       }
 
+      /* La carátula de las armas y el equipo: el láser grande de Sarna, en el violeta de su página. */
+      .cover.is-equipment { --accent: #a77bff; }
+
+      /* El dibujo es apaisado: va arriba, para no quedar debajo del título. */
+      .cover.is-equipment .cover-art { align-items: flex-start; }
+
+      .cover.is-equipment .cover-art img {
+        height: 58%;
+        margin-top: 6%;
+        filter: invert(1) sepia(1) hue-rotate(215deg) saturate(5) brightness(1.1);
+        opacity: 0.75;
+      }
+
+      a.cover.is-equipment:hover,
+      a.cover.is-equipment:focus-visible {
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(167, 123, 255, 0.22);
+      }
+
+      .cover.is-equipment .cover-status {
+        border-color: rgba(167, 123, 255, 0.6);
+        color: var(--accent);
+      }
+
       /* Las carátulas del MechLab y la Argo de BATTLETECH son ilustraciones del propio juego, a color, como la
          captura del mapa: el MechLab, en el verde del de MW5; la Argo, en el turquesa de su página. */
       .cover.is-bt-mechlab { --accent: var(--lime); --glow: rgba(195, 237, 98, 0.18); --status: rgba(195, 237, 98, 0.5); }
@@ -822,7 +845,7 @@
         <section class="game-row" aria-labelledby="game-mw5">
           <div class="shelf-header">
             <h3 id="game-mw5">MW5: MERCENARIES <small>PIRANHA GAMES</small></h3>
-            <span>4 TOOLS</span>
+            <span>5 TOOLS</span>
           </div>
 
           <div class="shelf">
@@ -912,6 +935,29 @@
                 </p>
               </div>
               <div class="cover-action">Open Pilots <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="cover is-equipment" href="/mercs/equipment/">
+              <div class="cover-band">
+                <span><b>EQUIPMENT</b> · MW5</span>
+                <span class="cover-status">NEW</span>
+              </div>
+              <div class="cover-art">
+                <img
+                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F8a%2FWeapn-largelaser.png"
+                  alt=""
+                  onerror="this.remove()"
+                />
+              </div>
+              <div class="cover-title">
+                <small>MECHWARRIOR 5</small>
+                <strong>Weapons <span>&amp; Equipment</span></strong>
+                <p class="cover-meta">
+                  <span>191 weapons</span>
+                  <span>Every tier · Ammo</span>
+                </p>
+              </div>
+              <div class="cover-action">Open Equipment <span aria-hidden="true">→</span></div>
             </a>
           </div>
         </section>

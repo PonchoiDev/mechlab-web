@@ -6,6 +6,8 @@ import sys
 DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_ORIGEN = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "items")
 RUTA_DESTINO_POR_DEFECTO = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "items.json")
+# Los computadores de puntería guardan sus efectos en un rasgo de 'Mech (EquipmentTrait), no en el objeto.
+RUTA_RASGOS = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "traits")
 
 REGEX_CLASE = re.compile(r'Begin Object Class=/Script/MechWarrior\.([^\s]+)')
 REGEX_NOMBRE = re.compile(r'(?:ShortName|Name)=NSLOCTEXT\([^,]+,\s*"[^"]+",\s*"([^"]+)"\)')
@@ -40,6 +42,14 @@ REGEX_COOLDOWN = re.compile(r'(?<![a-zA-Z])Cooldown=([0-9.]+)')
 REGEX_RANGE = re.compile(r'(?<![A-Za-z])(?:OptimalRange|MaxRange)=([0-9.]+)')
 # Alcance máximo: el juego muestra este como "Max range" (PPC 920 frente a 460 de óptimo).
 REGEX_MAX_RANGE = re.compile(r'(?<![A-Za-z])MaxRange=([0-9.]+)')
+# Página de equipo: fabricante de cada tier, DLC y efectos de cada pieza. Los precios no se enseñan.
+REGEX_FABRICANTE = re.compile(r'Manufacturer="([^"]+)"')
+# Algunos objetos (la munición de los rifles) vienen en varios DLC: MultipleAssociatedDLC.
+REGEX_DLC = re.compile(r'AssociatedDLC.*?DLC\.DLC(\d+)')
+REGEX_DESCRIPCION = re.compile(r'Description=NSLOCTEXT\([^,]+,\s*"[^"]+",\s*"((?:[^"\\]|\\.)*)"\)')
+REGEX_MASC = re.compile(r'MASCStats=\(([^\n]*)\)')
+REGEX_DANO_EXPLOSION = re.compile(r'(?<![A-Za-z])ExplosionDamagePerRound=([0-9.]+)')
+REGEX_RASGO_EQUIPO = re.compile(r"EquipmentTrait=[^']*'\"[^\"]*\.([A-Za-z0-9_]+)\"'")
 REGEX_QUIRK = re.compile(r"/Game/Quirks/([A-Za-z0-9_]+)\.[^\"]+\"',Value=([+-]?[0-9.]+)")
 
 
@@ -172,6 +182,8 @@ def obtener_estadisticas_base(contenido):
 
 def calcular_tier(contenido, base):
     quirks = {quirk: float(valor) for quirk, valor in REGEX_QUIRK.findall(contenido)}
+    # Cada tier tiene su fabricante. El exportador escapa los apóstrofos («Dragon\\'s Fire»).
+    fabricante = (buscar_texto(REGEX_FABRICANTE, contenido) or '').replace("\\'", "'")
 
     if quirks:
         # Los …Percentage_Quirk multiplican; Damage_Quirk y Cooldown_Quirk suman su valor tal cual, en
@@ -209,6 +221,8 @@ def calcular_tier(contenido, base):
     }
     if velocidad > 0:
         estadisticas["speed"] = velocidad
+    if fabricante:
+        estadisticas["manufacturer"] = fabricante
     return estadisticas
 
 
@@ -228,6 +242,76 @@ def obtener_municion_por_salva(contenido):
     disparos = int(buscar_texto(REGEX_DISPAROS, contenido, 0)) or 1
     por_disparo = misiles or 1
     return por_disparo * disparos if REGEX_CONSUME_POR_DISPARO.search(contenido) else por_disparo
+
+
+def leer_rasgo_computador(contenido):
+    # Efectos del computador de puntería, en su rasgo: alcance de sensores, velocidad del proyectil de
+    # balísticas y PPC y alcance de los láseres. La precisión y la letalidad (UnitCardTrait) son de la
+    # resolución automática de misiones y no se guardan.
+    rasgo_id = buscar_texto(REGEX_RASGO_EQUIPO, contenido)
+    if not rasgo_id:
+        return None
+    try:
+        rasgo = leer_archivo(os.path.join(RUTA_RASGOS, f"{rasgo_id}.copy"))
+    except OSError:
+        return None
+    velocidad = re.search(r"ProjectileSpeedIncreaseQuirkInfo=\(.*?Value=([0-9.]+)", rasgo)
+    alcance_laser = re.search(r"LaserRangeIncraseQuirkInfo=\(.*?Value=([0-9.]+)", rasgo)
+    return {
+        "sensorRange": buscar_numero(re.compile(r'MechSensorRangeIncrease=([0-9.]+)'), rasgo, 0.0),
+        "projectileSpeed": float(velocidad.group(1)) if velocidad else 0.0,
+        "laserRange": float(alcance_laser.group(1)) if alcance_laser else 0.0
+    }
+
+
+def leer_efectos_equipo(contenido):
+    """Lo que hace cada pieza de equipo, en las unidades de la interfaz (metros, no centímetros)."""
+    efectos = {}
+
+    def numero(clave):
+        return buscar_numero(re.compile(rf'(?<![A-Za-z]){clave}=([-0-9.]+)'), contenido)
+
+    if "InitialVelocityZ=" in contenido:
+        # Los cinco retrorreactores tienen el mismo empuje y combustible; cambia la clase de 'Mech que
+        # los monta, que solo dice la descripción («Designed for 'Mechs weighing 60 - 75 tons»).
+        tonelaje = re.search(r'weighing (\d+) - (\d+) tons', contenido)
+        efectos["jumpJet"] = {
+            "thrust": round(numero("InitialVelocityZ") / 100.0, 1),
+            "burnTime": numero("BurnTime"),
+            "regenTime": numero("RegenTime"),
+            "mechTonnage": [int(tonelaje.group(1)), int(tonelaje.group(2))] if tonelaje else None
+        }
+    if "DisruptModeRange=" in contenido:
+        efectos["ecm"] = {
+            "disruptRange": round(numero("DisruptModeRange") / 100.0),
+            "counterRange": round(numero("CounterModeRange") / 100.0),
+            "shielding": numero("ShieldingSensorModifier"),
+            "suppression": numero("SuppressionSensorModifier"),
+            "lrmSpread": numero("LRMSpreadModifier"),
+            "streakTracking": numero("StreakTrackingModifer"),
+            "aiAccuracy": numero("AIAccuracyModifier")
+        }
+    elif "SensorRangeModifier=" in contenido:
+        efectos["probe"] = {
+            "range": round(numero("Range") / 100.0),
+            "sensorRange": numero("SensorRangeModifier"),
+            "distortionReduction": numero("DistortionReductionMultiplier")
+        }
+    masc = buscar_texto(REGEX_MASC, contenido)
+    if masc:
+        # BoostAccel multiplica la aceleración y BoostTurn suma al giro (los Supercharger de arena lo
+        # restan); DamageParts son las piezas que se dañan al pasarse del indicador.
+        campos = dict(re.findall(r'(\w+)=([-0-9.]+)', masc))
+        partes = re.search(r'DamageParts=\(([^)]*)\)', masc)
+        efectos["masc"] = {
+            "accel": float(campos.get("BoostAccel", 0)),
+            "turn": float(campos.get("BoostTurn", 0)),
+            "damagedParts": partes.group(1).split(",") if partes else []
+        }
+    computador = leer_rasgo_computador(contenido)
+    if computador:
+        efectos["targetingComputer"] = computador
+    return efectos
 
 
 def construir_item(id_base, tiers):
@@ -285,6 +369,20 @@ def construir_item(id_base, tiers):
     tech_base = buscar_texto(REGEX_TECH_BASE, contenido)
     if tech_base:
         item["techBase"] = tech_base
+
+    dlc = REGEX_DLC.search(contenido)
+    if dlc:
+        # Con varios DLC (la munición de los rifles: DLC1 y DLC6) vale el primero, el que trajo el objeto.
+        item["dlc"] = int(dlc.group(1))
+    if tipo_general == "equipment":
+        descripcion = buscar_texto(REGEX_DESCRIPCION, contenido)
+        if descripcion:
+            item["description"] = re.sub(r'\s+', ' ', descripcion.replace("\\'", "'")).strip()
+        item.update(leer_efectos_equipo(contenido))
+    if tipo_general == "ammo":
+        dano_explosion = buscar_numero(REGEX_DANO_EXPLOSION, contenido)
+        if dano_explosion is not None:
+            item["explosionDamagePerRound"] = dano_explosion
 
     tipo_municion = buscar_texto(REGEX_TIPO_MUNICION, contenido)
     if tipo_municion and tipo_general in ("weapon", "ammo"):
