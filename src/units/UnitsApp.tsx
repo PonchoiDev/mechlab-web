@@ -150,6 +150,7 @@ export function UnitsApp() {
           <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
           <a href="/mercs/starmap/">Star map</a>
           <a href="/mercs/pilots/">Pilots</a>
+          <a href="/mercs/equipment/">Equipment</a>
         </nav>
         <div className="units-actions">
           <WhatsNew />

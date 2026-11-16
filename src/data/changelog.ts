@@ -20,6 +20,17 @@ export const CHANGELOG: ChangelogEntry[] = [
     ]
   },
   {
+    id: '2026-11-16-mw5-equipment',
+    date: '2026-11-16',
+    title: 'Weapons and equipment database',
+    items: [
+      'A new Equipment page lists all 191 weapons in one table: hardpoint, tons, damage, heat, cooldown, RPM, DPS, damage per ton, range, projectile speed, ammo per ton, manufacturer and DLC',
+      'Pick a tier for the whole list, from Tier 0 to Lost Tech, and sort by any column; filter by weapon type, hardpoint size, Inner Sphere or Clan and DLC',
+      'The Equipment tab shows heat sinks, jump jets, MASC and Superchargers, ECM, active probes and targeting computers with their effects, and every ammo bin with the weapons that use it',
+      'The filters, the tier and the sort go in the link, ready to share'
+    ]
+  },
+  {
     id: '2026-11-16-clearer-range-radar',
     date: '2026-11-16',
     title: 'A clearer damage by range radar',

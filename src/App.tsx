@@ -172,6 +172,7 @@ export default function App() {
             <a href="/mercs/starmap/"><small>MW5 Mercenaries</small> Star map</a>
             <a href="/mercs/units/">Enemy units</a>
             <a href="/mercs/pilots/">Pilots</a>
+            <a href="/mercs/equipment/">Equipment</a>
           </nav>
         </div>
         <div className="topbar-tools">

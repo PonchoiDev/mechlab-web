@@ -10,6 +10,7 @@ Configurador web de 'Mechs para *MechWarrior 5: Mercenaries*. Permite elegir uno
 | Mapa estelar | https://mw-builder.com/mercs/starmap/ |
 | Unidades enemigas | https://mw-builder.com/mercs/units/ |
 | Pilotos | https://mw-builder.com/mercs/pilots/ |
+| Armas y equipo | https://mw-builder.com/mercs/equipment/ |
 | MechLab de BATTLETECH | https://mw-builder.com/battletech/ |
 | Mapa estelar de BATTLETECH | https://mw-builder.com/battletech/starmap/ |
 | Armas y equipo de BATTLETECH | https://mw-builder.com/battletech/equipment/ |
@@ -42,7 +43,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (547 tests, cobertura con V8) |
+| Tests | Vitest 5 (558 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -94,6 +95,11 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Las 64 misiones de alta recompensa (HRQ) del juego: dónde se ofrece cada una, su ruta por los sistemas de sus misiones, sus condiciones (reputación, fechas, misión previa o excluyente), su recompensa (C-Bills, reputación, 'Mechs, armas y equipo) y un buscador por nombre, sistema o quien la encarga.
 - Los 22 mercados fijos de las campañas de los DLC y el Atlas II de Romulus, con un buscador de dónde comprar cada 'Mech o arma. Cada 'Mech se abre en el MechLab con su build de serie (`/mercs/?mech=AS7-D-H`).
 - Find a 'Mech: el mapa se colorea según la rareza de una variante en el mercado de cada facción, en la fecha elegida, con sus fuentes fijas (HRQ, mercados especiales) y el enlace se comparte (`?mech=AS7-D`). Special 'Mech locations lista los 'Mechs hero y las variantes especiales que solo se consiguen en un sitio, como el Wolverine de Razer.
+
+**Armas y equipo**
+- Página propia (`/mercs/equipment/`) con las 191 armas en una tabla: anclaje, toneladas, daño, calor, cooldown, RPM, DPS, daño por tonelada, alcance, velocidad del proyectil, munición por tonelada, fabricante, tecnología y DLC.
+- Un tier para toda la lista (del 0 a Lost Tech; las armas Clan tienen el suyo), orden por cualquier columna y filtros por tipo, tamaño del anclaje, Esfera Interior o Clan, DLC y búsqueda por nombre o fabricante.
+- Pestaña de equipo con disipadores, retrorreactores, MASC y Supercharger, ECM, sondas y computadores de puntería con sus efectos, y la munición con las armas que la usan. La vista va en el enlace.
 
 **MechLab de BATTLETECH**
 - Página propia (`/battletech/`) con los 96 'Mechs que se pueden tener en *BATTLETECH* (2018), del juego base y de Heavy Metal, Flashpoint y Urban Warfare, con su build de serie y su icono del juego.
@@ -153,6 +159,7 @@ src/
   starmap/              Página del mapa estelar: canvas, ficha del sistema, fecha y buscador
   units/                Página de las unidades enemigas: filtros y ficha de cada unidad
   pilots/               Página de los pilotos: pilotos hero, rasgos y programas de las academias
+  equipment/            Página de armas y equipo: tabla de armas por tier, fichas de equipo y munición
   battletech/           Páginas de BATTLETECH (mapa estelar), con su lógica en utils/battletech/
   battletech/argo/      Página de la Argo de BATTLETECH: árbol de mejoras, fichas y plan
   battletech/equipment/ Página de armas y equipo de BATTLETECH: tabla de armas, fichas de equipo y munición
@@ -167,6 +174,7 @@ worker/                 Worker de Cloudflare: proxy de imágenes de Sarna y form
 starmap/index.html      Entrada de la página del mapa estelar (/mercs/starmap/)
 units/index.html        Entrada de la página de las unidades enemigas (/mercs/units/)
 pilots/index.html       Entrada de la página de los pilotos (/mercs/pilots/)
+equipment/index.html    Entrada de la página de armas y equipo (/mercs/equipment/)
 battletech/             Entradas de las páginas de BATTLETECH (/battletech/) y sus imágenes
 battletech/argo/        Entrada de la página de la Argo (/battletech/argo/) y sus imágenes en public/argo/
 battletech/equipment/   Entrada de la página de armas y equipo (/battletech/equipment/)
@@ -211,8 +219,8 @@ Los JSON de `src/data/` se generan a partir de los archivos del juego, exportado
 | `mdl/` y `hps/` | Modelo y anclajes de cada chasis | Tamaño real de cada anclaje |
 | `loadout/` | Builds de fábrica | Build de serie de cada variante |
 | `unitcard/` | Fichas de unidad | Año de aparición y rol |
-| `items/` | Armas, equipo y munición | Estadísticas por tier, munición, disipadores |
-| `traits/` | Mejoras | Mejoras de la cantina y sus efectos |
+| `items/` | Armas, equipo y munición | Estadísticas y fabricante por tier, munición, disipadores, DLC y efectos del equipo |
+| `traits/` | Mejoras | Mejoras de la cantina y sus efectos, y los de los computadores de puntería (que lee `generar_items.py`) |
 | `mech_string_table/` | Tabla de textos `Mech_StringTable` exportada a CSV | Nombres de los chasis |
 
 ```sh
@@ -343,7 +351,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Calidad y comprobación contra el juego
 
-- **547 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **558 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
