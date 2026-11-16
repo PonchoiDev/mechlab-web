@@ -115,6 +115,7 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
   Los programas con rasgos propios dicen cuál dan siempre y cuáles favorecen, con un enlace a cada rasgo.
 - **RF6.** La pestaña, la categoría, el filtro hero y la búsqueda van en la URL.
 - **RF7.** El MechLab, el mapa y las unidades enemigas enlazan la página nueva.
+- **RF8.** Un enlace a un piloto hero (`?pilot=ValtenRyder`) abre la pestaña de pilotos hero, lleva su ficha a la vista y la resalta. Es el que usan las recompensas del mapa y de la página de HRQ y campañas.
 
 ## Requisitos no funcionales
 
@@ -143,6 +144,7 @@ Las academias ya están en el mapa estelar (`docs/specs/academias.md`). Esta pá
 | CA15 | Los programas | se agrupan por familias | Simpod training 5, Vocational training 2, Semester enrollment 4, Full year enrollment 4, Undergraduate program 5, Graduate program 4 y Academy graduate programs 5. El de NAIS se llama New Avalon Institute of Science, da siempre NAIS Graduate y favorece Standard Autocannon Specialist; Graduate Program de nivel 4 favorece SRM Specialist y MRM Expert |
 | CA16 | La duración de un programa | se escribe | 60 días son «60 days», 365 son «1 year» y 1.460 son «4 years» |
 | CA17 | Los efectos de un rasgo | se reparten en columnas | Atlas 'Mech Affinity: sus cuatro efectos sin decir dónde y ninguno como piloto. AC/10 Expert: «With AC/10» con su nota. House Davion Noble: «On contracts for House Davion» e «In House Davion space» en la columna de efectos y sus dos costes como piloto. Hypochondriac: ningún efecto fuera del piloto y sus tres efectos como piloto |
+| CA18 | El enlace a Valten Ryder | se construye y se lee | es `/mercs/pilots/?pilot=ValtenRyder` y señala a Valten Ryder; un piloto que no es hero o que no existe no señala a nadie |
 
 ## Fuera de alcance
 
