@@ -42,7 +42,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (541 tests, cobertura con V8) |
+| Tests | Vitest 5 (547 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -110,7 +110,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Planificador: se marcan las mejoras, se añaden solas sus requisitos y se suman el coste, el mantenimiento mensual (¢80.000 de base más cada mejora) y el efecto conjunto. El plan va en el enlace (`?own=mechBay3,trainingModule1`).
 
 **Armas y equipo de BATTLETECH**
-- Página propia (`/battletech/equipment/`) con las 210 armas y cada versión de fabricante (+ a + + +) en una tabla: anclaje, toneladas, ranuras, daño (con sus disparos), inestabilidad, calor, daño por calor, precisión, crítico, alcances mínimo y máximo con sus tramos, munición por tonelada, daño por tonelada, rareza, fuente y precio, con las bonificaciones del fabricante.
+- Página propia (`/battletech/equipment/`) con las 210 armas y cada versión de fabricante (+ a + + +) en una tabla: anclaje, toneladas, ranuras, daño (con sus disparos), inestabilidad, calor, daño por calor, precisión, crítico, alcances mínimo y máximo con sus tramos, munición por tonelada, daño por tonelada, rareza y fuente, con las bonificaciones del fabricante.
 - Orden por cualquier columna y filtros por anclaje, versión, fuente, rareza y búsqueda por nombre o fabricante.
 - Pestaña de equipo con disipadores, retrorreactores, mejoras por grupo (con dónde se montan) y munición con las armas que la usan. La vista va en el enlace.
 
@@ -343,7 +343,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Calidad y comprobación contra el juego
 
-- **541 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **547 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.

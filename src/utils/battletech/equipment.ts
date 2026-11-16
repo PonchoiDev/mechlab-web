@@ -102,11 +102,11 @@ export const filterBtWeaponRows = (rows: BtWeaponRow[], filter: BtWeaponFilter):
 
 export type BtWeaponSortKey =
   | 'name' | 'hardpoint' | 'tonnage' | 'slots' | 'damage' | 'instability' | 'heat' | 'heatDamage' | 'accuracy' | 'crit'
-  | 'minRange' | 'maxRange' | 'ammoPerTon' | 'damagePerTon' | 'rarity' | 'cost';
+  | 'minRange' | 'maxRange' | 'ammoPerTon' | 'damagePerTon' | 'rarity';
 
 export const BT_WEAPON_SORT_KEYS: BtWeaponSortKey[] = [
   'name', 'hardpoint', 'tonnage', 'slots', 'damage', 'instability', 'heat', 'heatDamage', 'accuracy', 'crit',
-  'minRange', 'maxRange', 'ammoPerTon', 'damagePerTon', 'rarity', 'cost'
+  'minRange', 'maxRange', 'ammoPerTon', 'damagePerTon', 'rarity'
 ];
 
 export interface BtWeaponSort {
@@ -128,7 +128,6 @@ const sortValue = (row: BtWeaponRow, key: Exclude<BtWeaponSortKey, 'name'>): num
     case 'tonnage': return row.item.tonnage;
     case 'slots': return row.item.slots;
     case 'rarity': return row.item.rarity;
-    case 'cost': return row.item.cost;
     default: return row[key];
   }
 };

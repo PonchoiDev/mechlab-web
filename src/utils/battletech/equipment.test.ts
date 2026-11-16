@@ -50,7 +50,7 @@ describe('página de armas y equipo de BATTLETECH', () => {
       damage: 60, shots: 1, instability: 20, heat: 12, maxRange: 450, rangeSplit: [300, 300, 450],
       ammoPerTon: 8, attacksPerTon: 8, damagePerTon: 5
     }));
-    expect([ac10.item.hardpoint, ac10.item.tonnage, ac10.item.slots, ac10.item.cost]).toEqual(['ballistic', 12, 3, 140000]);
+    expect([ac10.item.hardpoint, ac10.item.tonnage, ac10.item.slots]).toEqual(['ballistic', 12, 3]);
     expect(rows.filter(row => row.item.baseName === 'AC/10')).toHaveLength(11);
   });
 
@@ -63,7 +63,7 @@ describe('página de armas y equipo de BATTLETECH', () => {
 
   it('CA4: las versiones de fabricante del M Laser', () => {
     const magna = weapon('M Laser +', 'Magna');
-    expect([magna.damage, magna.item.bonuses, magna.item.cost]).toEqual([30, ['+ 5 Dmg.'], 70000]);
+    expect([magna.damage, magna.item.bonuses]).toEqual([30, ['+ 5 Dmg.']]);
     // Los láseres ya traen +1 de precisión; la bonificación de Intek (+3) se suma.
     expect(weapon('M Laser', 'Hellion').accuracy).toBe(1);
     expect(weapon('M Laser + +', 'Intek').accuracy).toBe(4);
@@ -126,7 +126,7 @@ describe('página de armas y equipo de BATTLETECH', () => {
 
   it('CA9: la munición del LRM y las armas que la usan', () => {
     const ammo = getBtAmmoRows(items).find(row => row.item.name === 'LRM Ammo')!;
-    expect([ammo.item.tonnage, ammo.item.slots, ammo.item.ammo?.capacity, ammo.item.cost]).toEqual([1, 1, 120, 20000]);
+    expect([ammo.item.tonnage, ammo.item.slots, ammo.item.ammo?.capacity]).toEqual([1, 1, 120]);
     expect(ammo.weapons).toHaveLength(36);
     expect(ammo.users).toEqual(['LRM10', 'LRM15', 'LRM20', 'LRM5']);
   });

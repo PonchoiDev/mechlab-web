@@ -13,7 +13,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-11-16',
     title: 'BATTLETECH weapons and equipment',
     items: [
-      'A new BATTLETECH Equipment page lists all 210 weapons, one row per manufacturer version: hardpoint, tons, slots, damage, stability, heat, accuracy, crit, ranges, ammo per ton, damage per ton, rarity, source, cost and the manufacturer bonus',
+      'A new BATTLETECH Equipment page lists all 210 weapons, one row per manufacturer version: hardpoint, tons, slots, damage, stability, heat, accuracy, crit, ranges, ammo per ton, damage per ton, rarity, source and the manufacturer bonus',
       'Sort by any column and filter by hardpoint, version (stock to + + +), source, rarity or a search by name or manufacturer',
       'The Equipment tab shows heat sinks, jump jets, upgrades by group with where they mount, and every ammo box with the weapons that use it',
       'The filters and the sort go in the link, ready to share'

@@ -27,7 +27,6 @@ const items = itemsJson as unknown as BtItem[];
 const WEAPON_ROWS = getBtWeaponRows(items);
 // Solo las fuentes que traen objetos (Flashpoint no trae ninguno).
 const ITEM_SOURCES = SOURCES.filter(source => items.some(item => item.source === source));
-const integerFormat = new Intl.NumberFormat('en');
 const RARITY_LABELS = Object.fromEntries(RARITY_GROUPS.map(group => [group.group, group.label])) as Record<BtRarityGroup, string>;
 
 const formatNumber = (value: number | null) => value === null ? '' : String(Number(value.toFixed(2)));
@@ -55,7 +54,6 @@ const COLUMNS: Column[] = [
   { key: 'ammoPerTon', label: 'Ammo/t', title: 'Rounds in one ton of ammo, and the attacks they give', value: row => row.ammoPerTon === null ? '' : String(row.ammoPerTon) },
   { key: 'damagePerTon', label: 'Dmg/t', title: 'Damage of one attack per ton of the weapon itself (ammo not counted)', value: row => formatNumber(row.damagePerTon) },
   { key: 'rarity', label: 'Rarity', title: 'Common, uncommon and rare items show up in stores; special ones are rewards and lostech', value: row => RARITY_LABELS[getRarityGroup(row.item.rarity)] },
-  { key: 'cost', label: 'Cost', title: 'Price in C-Bills', value: row => integerFormat.format(row.item.cost) }
 ];
 
 function SortButton({ view, sortKey, label, title, onSort }: {
@@ -131,7 +129,6 @@ function EquipmentCard({ item }: { item: BtItem }) {
       <dl className="unit-card-stats arsenal-card-stats">
         <div><dt>Tons</dt><dd>{formatNumber(item.tonnage)}</dd></div>
         <div><dt>Slots</dt><dd>{item.slots}</dd></div>
-        <div><dt>C-Bills</dt><dd>{item.builtIn ? '' : integerFormat.format(item.cost)}</dd></div>
       </dl>
       <dl className="arsenal-effects">
         {effects.map(effect => (
@@ -159,7 +156,6 @@ function AmmoTable({ ammo }: { ammo: BtItem[] }) {
             <th scope="col">Slots</th>
             <th scope="col">Rounds</th>
             <th scope="col">Source</th>
-            <th scope="col">Cost</th>
             <th scope="col">Used by</th>
           </tr>
         </thead>
@@ -171,7 +167,6 @@ function AmmoTable({ ammo }: { ammo: BtItem[] }) {
               <td>{item.slots}</td>
               <td>{item.ammo?.capacity ?? ''}</td>
               <td>{SOURCE_LABELS[item.source]}</td>
-              <td>{integerFormat.format(item.cost)}</td>
               <td className="arsenal-users">{users.join(', ')}</td>
             </tr>
           ))}
