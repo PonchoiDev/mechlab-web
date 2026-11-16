@@ -1,6 +1,6 @@
 # Especificación: flashpoints de BATTLETECH
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/battletech/flashpoints.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -73,3 +73,18 @@ Los flashpoints están en los bundles de Unity de los tres DLC (`data/assetbundl
 
 1. **Datos y lógica (CA1 a CA7):** `src/utils/battletech/flashpoints.test.ts`, con `flashpoints.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: la carátula nueva, los grupos, el filtro y la búsqueda, The Baying of Hounds desplegado con sus dos caminos y un flashpoint con una decisión doble, y un enlace al mapa.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después los datos, la lógica y la interfaz, en commits separados.
+- **Corrección de un criterio:** el Raven RVN-1X de Prototype sí está en el MechLab; las variantes que no están son el Bull Shark BSK-MAZ y el Big Steel Claw BSC-20.
+- **Datos:** 32 flashpoints con 65 caminos. `flashpoints.json` pesa 110 KB.
+- **Tests:** los siete criterios están en `src/utils/battletech/flashpoints.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: la lista, The Baying of Hounds, The Long Hunt (dos decisiones seguidas), Prototype (siete caminos) y Yang Virtanen's Big Score.
+- **Decisiones durante el desarrollo:**
+  - Las bifurcaciones tienen, además de las opciones marcadas, un resultado sin condición: lo que pasa si no se elige ninguna (en Flattened Earth, seguir en vez de abandonar). Cuenta como camino y no añade letra.
+  - Dos caminos se descartan porque no se pueden jugar: el B de Hourglass lleva a un contrato que no está en ningún archivo del juego (`HM5_hourglass_b1_3wayBattle`) y el B de Bourbon & BattleMechs a uno sin rellenar. El juego marca la opción A de Hourglass al empezar.
+  - Los caminos con los mismos contratos y el mismo pago se juntan en uno («A or B, then B» en The Long Hunt).
+  - Los contratos de Heavy Metal y Urban Warfare no empiezan por `c_`: el extractor los reconoce por su contenido.
+- **Pendiente de comprobar en el juego:** Yang Virtanen's Big Score deja elegir la recompensa al final (`fp_reward_a` a `d`). La página da los cuatro 'Mechs de la serie que declara el flashpoint (`hotrod`: Vindicator, Firestarter, Trebuchet y Enforcer); el DLC trae otra serie (`monster`: Catapult, Thunderbolt, Dragon y Kintaro) que ningún dato enlaza con un camino.
+

@@ -14,6 +14,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 | HRQ and campaigns | https://mw-builder.com/mercs/campaigns/ |
 | BATTLETECH MechLab | https://mw-builder.com/battletech/ |
 | BATTLETECH star map | https://mw-builder.com/battletech/starmap/ |
+| BATTLETECH flashpoints | https://mw-builder.com/battletech/flashpoints/ |
 | BATTLETECH enemy units | https://mw-builder.com/battletech/units/ |
 | BATTLETECH weapons and equipment | https://mw-builder.com/battletech/equipment/ |
 | Slides | [View on Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) (in Spanish) |
@@ -47,7 +48,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (586 tests, V8 coverage) |
+| Tests | Vitest 5 (593 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -123,6 +124,10 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - A tree by category and tier that lights up everything an upgrade requires and unlocks when you point at it.
 - Planner: tick upgrades, their requirements come along, and the total cost, monthly upkeep (¢80,000 base plus each upgrade) and combined effects add up. The plan goes in the link (`?own=mechBay3,trainingModule1`).
 
+**BATTLETECH flashpoints**
+- Its own page (`/battletech/flashpoints/`) with the 32 flashpoints of Flashpoint, Heavy Metal and Urban Warfare, like HRQ & Campaigns for MW5: where each one is offered, who offers it, its difficulty and length, its contracts in order, every path with what it pays (C-Bills, morale and reputation) and the final reward with its 'Mechs.
+- DLC filter and a search by name, system, employer, contract or 'Mech. The system opens the star map and the view goes in the link.
+
 **BATTLETECH enemy units**
 - Its own page (`/battletech/units/`) with the 37 vehicles and turrets of contracts, from the base game, Heavy Metal and Urban Warfare: armor and structure by location, walk and sprint distance, the damage of one attack with every weapon, stability damage and the weapons and equipment each one carries, with its chassis drawing from Sarna.
 - Filters by type (tracked, wheeled, turret) and name, and sort by damage, armor, tonnage or speed. The view goes in the link.
@@ -176,6 +181,7 @@ src/
   battletech/           BATTLETECH pages (star map), with their logic in utils/battletech/
   battletech/argo/      BATTLETECH Argo page: upgrade tree, cards and plan
   battletech/equipment/ BATTLETECH weapons and equipment page: weapon table, equipment cards and ammo
+  battletech/flashpoints/ BATTLETECH flashpoints page: expandable lists with contracts, paths and rewards
   battletech/units/     BATTLETECH enemy units page: filters and a card for each vehicle or turret
   battletech/mechlab/   BATTLETECH MechLab: 'Mech picker, board, equipment picker and analysis
   hooks/                Build state, saved builds, view preferences and Sarna image
@@ -193,6 +199,7 @@ campaigns/index.html    Entry of the HRQ and campaigns page (/mercs/campaigns/)
 battletech/             Entries of the BATTLETECH pages (/battletech/) and their images
 battletech/argo/        Entry of the Argo page (/battletech/argo/) and its images in public/argo/
 battletech/equipment/   Entry of the weapons and equipment page (/battletech/equipment/)
+battletech/flashpoints/ Entry of the flashpoints page (/battletech/flashpoints/)
 battletech/units/       Entry of the enemy units page (/battletech/units/)
 battletech/index.html   Entry of the BATTLETECH MechLab (/battletech/), with the chassis icons in public/mechlab/
 site/                   Landing page at the domain root (mw-builder.com)
@@ -369,7 +376,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Quality and checks against the game
 
-- **586 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **593 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

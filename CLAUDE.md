@@ -31,6 +31,8 @@ python3 tools/generar_mechlab_battletech.py  # src/data/battletech/mechs.json, i
 python3 tools/extraer_unidades_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/unidades/ (vehículos y torretas)
 python3 tools/imagenes_sarna_battletech.py   # tools/datos-juego/battletech/unidades/sarna.json, de la API de Sarna
 python3 tools/generar_unidades_battletech.py # src/data/battletech/units.json (lee items.json: va después)
+python3 tools/extraer_flashpoints_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/flashpoints/
+python3 tools/generar_flashpoints_battletech.py # src/data/battletech/flashpoints.json (lee el mapa y el MechLab de BATTLETECH: va después)
 ```
 
 Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` sin errores.

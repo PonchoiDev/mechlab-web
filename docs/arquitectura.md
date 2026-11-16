@@ -159,6 +159,14 @@ Es una página del build de BATTLETECH (`battletech/equipment/index.html`, servi
 - **`utils/battletech/equipment.ts`:** las filas de la tabla de armas (el daño de un ataque, la inestabilidad por los disparos, la precisión con el signo del juego y la munición por tonelada), los filtros por anclaje, versión, fuente, rareza y búsqueda, el orden por columnas (sin el dato, al final), las categorías y los efectos del equipo (con dónde se monta), las mejoras por grupo, las armas que usan cada munición y la vista en la URL. Recibe el catálogo como parámetro y tiene sus tests (`equipment.test.ts`).
 - **`battletech/equipment/BtEquipmentApp.tsx`:** las pestañas de armas y equipo, la tabla de armas con las bonificaciones de cada fabricante, las fichas de equipo y la tabla de munición. Solo pinta y llama a la lógica.
 
+### Flashpoints de BATTLETECH
+
+Es una página del build de BATTLETECH (`battletech/flashpoints/index.html`, servida en `/battletech/flashpoints/`), con su propio bundle. Usa los estilos de las unidades enemigas (`units.css`) y los de HRQ & Campaigns de MW5 (`campaigns.css`), con sus listas plegables y su rosa, y añade los caminos (`battletech/flashpoints/flashpoints.css`):
+
+- **Datos:** `extraer_flashpoints_battletech.py` saca de los bundles de los tres DLC los flashpoints, su grafo de hitos (recortado a lo que lleva de uno a otro), sus contratos y las colecciones de recompensa. `generar_flashpoints_battletech.py` recorre el grafo desde el inicio, saca cada camino hasta un final (con la opción por defecto de cada bifurcación y sin los que abandonan), separa el tronco común, junta los caminos que se juegan igual y deja en `src/data/battletech/flashpoints.json` cada flashpoint con su sistema (por la etiqueta del planeta), sus requisitos, sus caminos con su pago y su recompensa.
+- **`utils/battletech/flashpoints.ts`:** los grupos por DLC, la búsqueda, los enlaces al mapa y al MechLab y la vista en la URL. Tiene sus tests (`flashpoints.test.ts`).
+- **`battletech/flashpoints/BtFlashpointsApp.tsx`:** los filtros y las filas plegables. Solo pinta y llama a la lógica.
+
 ### Unidades enemigas de BATTLETECH
 
 Es una página del build de BATTLETECH (`battletech/units/index.html`, servida en `/battletech/units/`), con su propio bundle. Usa los estilos de las unidades enemigas de MW5 (`units.css`), con su mismo rojo, y añade el blindaje por ubicación (`battletech/units/units.css`):
