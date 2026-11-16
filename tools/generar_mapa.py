@@ -233,8 +233,18 @@ def requisito_de_cadena(modo, condicion, nombres):
 def piloto_hero(id_juego, nombres_de_pilotos):
     """Un piloto que se une a la compañía, con el id de la página de pilotos (Ash_PilotPersona pasa a
     Ash) y su nombre. No todos son hero: Fenstrom, de The Shadow Coup, no está en hero.json."""
-    return {"id": re.sub(r"(_PilotPersona|Pilot)$", "", id_juego), "name": nombres_de_pilotos.get(id_juego, separar_palabras(id_juego)),
-            "hero": id_juego in nombres_de_pilotos}
+    piloto = nombres_de_pilotos.get(id_juego)
+    return {"id": re.sub(r"(_PilotPersona|Pilot)$", "", piloto["pagina"] if piloto else id_juego),
+            "name": piloto["nombre"] if piloto else separar_palabras(id_juego), "hero": piloto is not None}
+
+
+def pilotos_de_pagina(pilotos_juego):
+    """Nombre de cada piloto hero y el id de su ficha en la página de pilotos. Shenzeng está dos veces:
+    el de la campaña, sin rasgos, y el de la carrera, con ellos. generar_pilotos.py solo deja el que
+    los trae, así que los dos llevan a esa ficha."""
+    con_rasgos = {piloto["nombre"]: piloto["id"] for piloto in pilotos_juego if piloto.get("rasgos")}
+    return {piloto["id"]: {"nombre": piloto["nombre"], "pagina": con_rasgos.get(piloto["nombre"], piloto["id"])}
+            for piloto in pilotos_juego}
 
 
 def recompensas_por_cadena(recompensas_juego, mechs, items, nombres_de_pilotos):
@@ -911,7 +921,7 @@ def main():
 
     posiciones = {int(fila["Name"]): (fila["PosX"], fila["PosY"]) for fila in sistemas_juego}
     with open(RUTA_PILOTOS_HERO, encoding="utf-8") as archivo:
-        nombres_de_pilotos = {piloto["id"]: piloto["nombre"] for piloto in json.load(archivo)}
+        nombres_de_pilotos = pilotos_de_pagina(json.load(archivo))
     datos = {
         "range": {"start": INICIO, "end": FIN},
         "colors": {"cluster": color_hex(colores["Warzone"]), "hub": color_hex(colores["Safezone"])},
