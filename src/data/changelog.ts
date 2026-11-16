@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-16-weapon-short-names',
+    date: '2026-11-16',
+    title: 'Search weapons by their short name',
+    items: [
+      'The MechLab weapon picker and the Equipment page also find weapons by the short name the game shows in the HUD: TAG finds the Target Acquisition Gear, and AC/10, SSRM2 or C-ER M Laser work too'
+    ]
+  },
+  {
     id: '2026-11-16-mw5-quests-campaigns',
     date: '2026-11-16',
     title: 'High reward quests and DLC campaigns',
