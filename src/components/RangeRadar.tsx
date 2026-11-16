@@ -44,6 +44,8 @@ export function RangeRadar({ profile }: { profile: RangeProfileEntry[] }) {
             <path d={band.path} className="range-radar-band" />
             {band.intensity > 0 && <path d={band.path} className="range-radar-fill" style={{ fillOpacity: 0.1 + 0.75 * band.intensity }} />}
             {band.belowMinIntensity > 0 && <path d={band.path} fill="url(#range-radar-hatch)" style={{ opacity: 0.35 + 0.65 * band.belowMinIntensity }} />}
+            {/* El borde va encima del relleno, que si no lo tapaba: oscuro en los anillos con daño. */}
+            <path d={band.path} className={band.intensity + band.belowMinIntensity > 0 ? 'range-radar-edge is-filled' : 'range-radar-edge'} />
             <title>{describe(band)}</title>
           </g>
         ))}

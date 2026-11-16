@@ -3209,10 +3209,12 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
    color de cada página (--radar-accent). */
 .range-heading { margin-top: 18px; }
 .range-radar { display: block; width: min(100%, 720px); margin: 4px auto 0; padding: 0 14px 14px; box-sizing: border-box; }
-.range-radar-band { fill: rgba(255, 255, 255, 0.025); stroke: rgba(255, 255, 255, 0.12); stroke-width: 1; }
+.range-radar-band { fill: rgba(255, 255, 255, 0.025); stroke: none; }
+.range-radar-edge { fill: none; stroke: rgba(255, 255, 255, 0.3); stroke-width: 1.2; }
+.range-radar-edge.is-filled { stroke: rgba(8, 12, 8, 0.55); stroke-width: 1.5; }
 .range-radar-fill { fill: var(--radar-accent, var(--work-lime)); stroke: none; }
 .range-radar-hatch { fill: var(--work-amber); }
-.range-radar-spoke { stroke: rgba(255, 255, 255, 0.12); stroke-dasharray: 3 5; }
+.range-radar-spoke { stroke: rgba(255, 255, 255, 0.28); stroke-dasharray: 3 5; }
 .range-radar-base { stroke: rgba(255, 255, 255, 0.3); }
 .range-radar-value { fill: var(--work-text); font: 600 13px var(--work-mono); paint-order: stroke; stroke: rgba(0, 0, 0, 0.75); stroke-width: 3px; }
 .range-radar-min { fill: var(--work-amber); font-size: 11px; }
@@ -3225,7 +3227,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .range-radar-span { fill: rgba(232, 238, 229, 0.85); font-weight: 500; font-size: 11px; stroke-width: 2px; }
 .range-radar-axis { fill: var(--work-muted); font: 600 10px var(--work-mono); letter-spacing: 0.08em; }
 .range-radar-ring { cursor: pointer; }
-.range-radar-ring.is-active .range-radar-band { stroke: var(--work-text); stroke-width: 2; }
+.range-radar-ring.is-active .range-radar-edge { stroke: var(--work-text); stroke-width: 2.5; }
 .range-radar-detail {
   margin: 0;
   padding: 0 14px 14px;
