@@ -1,0 +1,1898 @@
+{
+ "units": [
+  {
+   "id": "vehicledef_APC_Alsvin",
+   "name": "Alsvin",
+   "source": "heavymetal",
+   "weightClass": "medium",
+   "noncombatant": true,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_TAG_Standard_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "wheeled",
+   "tonnage": 50,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 120,
+     "structure": 25
+    },
+    {
+     "location": "left",
+     "armor": 100,
+     "structure": 25
+    },
+    {
+     "location": "right",
+     "armor": 100,
+     "structure": 25
+    },
+    {
+     "location": "rear",
+     "armor": 100,
+     "structure": 25
+    },
+    {
+     "location": "turret",
+     "armor": 120,
+     "structure": 25
+    }
+   ],
+   "walk": 165.0,
+   "sprint": 275.0
+  },
+  {
+   "id": "vehicledef_APC_Arvakr",
+   "name": "Arvakr",
+   "source": "heavymetal",
+   "weightClass": "heavy",
+   "noncombatant": true,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_TAG_Standard_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "wheeled",
+   "tonnage": 50,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 250,
+     "structure": 35
+    },
+    {
+     "location": "left",
+     "armor": 225,
+     "structure": 35
+    },
+    {
+     "location": "right",
+     "armor": 225,
+     "structure": 35
+    },
+    {
+     "location": "rear",
+     "armor": 200,
+     "structure": 35
+    },
+    {
+     "location": "turret",
+     "armor": 250,
+     "structure": 35
+    }
+   ],
+   "walk": 165.0,
+   "sprint": 275.0
+  },
+  {
+   "id": "vehicledef_APC_Sleipnir",
+   "name": "Sleipnir",
+   "source": "base",
+   "weightClass": "medium",
+   "noncombatant": true,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "wheeled",
+   "tonnage": 50,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 120,
+     "structure": 25
+    },
+    {
+     "location": "left",
+     "armor": 100,
+     "structure": 25
+    },
+    {
+     "location": "right",
+     "armor": 100,
+     "structure": 25
+    },
+    {
+     "location": "rear",
+     "armor": 100,
+     "structure": 25
+    },
+    {
+     "location": "turret",
+     "armor": 120,
+     "structure": 25
+    }
+   ],
+   "walk": 165.0,
+   "sprint": 275.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Sleipnir_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/c/cb/Sleipnir_APC_Tank.png"
+   }
+  },
+  {
+   "id": "vehicledef_APC_Vargr",
+   "name": "Vargr",
+   "source": "base",
+   "weightClass": "heavy",
+   "noncombatant": true,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "wheeled",
+   "tonnage": 50,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 250,
+     "structure": 35
+    },
+    {
+     "location": "left",
+     "armor": 225,
+     "structure": 35
+    },
+    {
+     "location": "right",
+     "armor": 225,
+     "structure": 35
+    },
+    {
+     "location": "rear",
+     "armor": 200,
+     "structure": 35
+    },
+    {
+     "location": "turret",
+     "armor": 250,
+     "structure": 35
+    }
+   ],
+   "walk": 165.0,
+   "sprint": 275.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Vargr",
+    "image": "https://cfw.sarna.net/wiki/images/c/cf/Vargr_APC_Tank.png"
+   }
+  },
+  {
+   "id": "vehicledef_APC_Wheeled",
+   "name": "Wheeled APC",
+   "source": "base",
+   "weightClass": "light",
+   "noncombatant": true,
+   "weapons": [
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "wheeled",
+   "tonnage": 10,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 60,
+     "structure": 5
+    },
+    {
+     "location": "left",
+     "armor": 50,
+     "structure": 5
+    },
+    {
+     "location": "right",
+     "armor": 50,
+     "structure": 5
+    },
+    {
+     "location": "rear",
+     "armor": 50,
+     "structure": 5
+    },
+    {
+     "location": "turret",
+     "armor": 30,
+     "structure": 5
+    }
+   ],
+   "walk": 165.0,
+   "sprint": 275.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Wheeled_APC",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/3/39/Tr3026-wheeled-apc.jpg/600px-5hgepj3fq2besir33wxuvpknicx0z2o.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_BULLDOG",
+   "name": "Bulldog",
+   "source": "base",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_LargeLaser_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_SRM_SRM4_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_SRM",
+     "count": 2
+    }
+   ],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 60,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 120,
+     "structure": 30
+    },
+    {
+     "location": "left",
+     "armor": 100,
+     "structure": 30
+    },
+    {
+     "location": "right",
+     "armor": 100,
+     "structure": 30
+    },
+    {
+     "location": "rear",
+     "armor": 100,
+     "structure": 30
+    },
+    {
+     "location": "turret",
+     "armor": 100,
+     "structure": 30
+    }
+   ],
+   "walk": 120.0,
+   "sprint": 200.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Bulldog_Medium_Tank",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e8/Bulldog_RGilClan_v25.jpg/600px-jcni0yym94r9zsolj9hwbcx6m18nu4m.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_CARRIER_Inferno",
+   "name": "Inferno Carrier",
+   "source": "heavymetal",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Inferno_Inferno2_0-STOCK",
+     "count": 6
+    }
+   ],
+   "ammo": [],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 60,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 90,
+     "structure": 30
+    },
+    {
+     "location": "left",
+     "armor": 90,
+     "structure": 30
+    },
+    {
+     "location": "right",
+     "armor": 90,
+     "structure": 30
+    },
+    {
+     "location": "rear",
+     "armor": 90,
+     "structure": 30
+    }
+   ],
+   "walk": 95.0,
+   "sprint": 165.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/SRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0e/SRM_Carrier_RGilClan_v30.jpg/600px-hkpawaem20jm1t0futwrf55w7bt0m28.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_CARRIER_LRM",
+   "name": "LRM Carrier",
+   "source": "base",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_LRM_LRM20_0-STOCK",
+     "count": 3
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_LRM",
+     "count": 4
+    }
+   ],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 60,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 60,
+     "structure": 30
+    },
+    {
+     "location": "left",
+     "armor": 60,
+     "structure": 30
+    },
+    {
+     "location": "right",
+     "armor": 60,
+     "structure": 30
+    },
+    {
+     "location": "rear",
+     "armor": 60,
+     "structure": 30
+    }
+   ],
+   "walk": 95.0,
+   "sprint": 165.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/LRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/f/fb/LRM_Carrier_RGilClan_v30.jpg/600px-bom9de8gyotu558b8z0xz0c0zmrt9on.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_CARRIER_SRM",
+   "name": "SRM Carrier",
+   "source": "base",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_SRM_SRM6_0-STOCK",
+     "count": 10
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_SRM",
+     "count": 4
+    }
+   ],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 60,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 60,
+     "structure": 30
+    },
+    {
+     "location": "left",
+     "armor": 60,
+     "structure": 30
+    },
+    {
+     "location": "right",
+     "armor": 60,
+     "structure": 30
+    },
+    {
+     "location": "rear",
+     "armor": 60,
+     "structure": 30
+    }
+   ],
+   "walk": 95.0,
+   "sprint": 165.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/SRM_Carrier",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/0/0e/SRM_Carrier_RGilClan_v30.jpg/600px-hkpawaem20jm1t0futwrf55w7bt0m28.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_DEMOLISHER",
+   "name": "Demolisher",
+   "source": "base",
+   "weightClass": "assault",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Autocannon_AC20_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_AC20",
+     "count": 3
+    }
+   ],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 80,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 200,
+     "structure": 40
+    },
+    {
+     "location": "left",
+     "armor": 150,
+     "structure": 40
+    },
+    {
+     "location": "right",
+     "armor": 150,
+     "structure": 40
+    },
+    {
+     "location": "rear",
+     "armor": 100,
+     "structure": 40
+    },
+    {
+     "location": "turret",
+     "armor": 200,
+     "structure": 40
+    }
+   ],
+   "walk": 95.0,
+   "sprint": 165.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d4/Demolisher_RGilClan_v25.jpg/600px-k8rk1w5lpzlsjxz7b8byf9k44m2ybn9.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_DEMOLISHER_LBX",
+   "name": "Demolisher LB-X",
+   "source": "heavymetal",
+   "weightClass": "assault",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Autocannon_LB10X_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_LB10X",
+     "count": 4
+    }
+   ],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 80,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 200,
+     "structure": 40
+    },
+    {
+     "location": "left",
+     "armor": 150,
+     "structure": 40
+    },
+    {
+     "location": "right",
+     "armor": 150,
+     "structure": 40
+    },
+    {
+     "location": "rear",
+     "armor": 100,
+     "structure": 40
+    },
+    {
+     "location": "turret",
+     "armor": 200,
+     "structure": 40
+    }
+   ],
+   "walk": 95.0,
+   "sprint": 165.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Demolisher",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/d/d4/Demolisher_RGilClan_v25.jpg/600px-k8rk1w5lpzlsjxz7b8byf9k44m2ybn9.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_GALLANT",
+   "name": "Gallant Urban Assault Vehicle",
+   "source": "urbanwarfare",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Autocannon_AC10_2-Mydron",
+     "count": 1
+    },
+    {
+     "id": "Weapon_LRM_LRM10_2-Delta",
+     "count": 1
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 4
+    },
+    {
+     "id": "Weapon_SRM_SRM2_2-Irian",
+     "count": 1
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_AC10",
+     "count": 2
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_LRM",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_SRM",
+     "count": 1
+    }
+   ],
+   "equipment": [
+    {
+     "id": "Gear_General_Robinson_TG120_Drive_Train",
+     "count": 1
+    }
+   ],
+   "kind": "wheeled",
+   "tonnage": 70,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 100,
+     "structure": 35
+    },
+    {
+     "location": "left",
+     "armor": 90,
+     "structure": 35
+    },
+    {
+     "location": "right",
+     "armor": 90,
+     "structure": 35
+    },
+    {
+     "location": "rear",
+     "armor": 100,
+     "structure": 35
+    },
+    {
+     "location": "turret",
+     "armor": 100,
+     "structure": 35
+    }
+   ],
+   "walk": 120.0,
+   "sprint": 200.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Gallant_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/40/Gallant_uav.jpg/600px-dz9pwmv3f20ueicozibykhale5fji8c.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_GALLEON",
+   "name": "Galleon",
+   "source": "base",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_Laser_SmallLaser_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 30,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 55,
+     "structure": 15
+    },
+    {
+     "location": "left",
+     "armor": 50,
+     "structure": 15
+    },
+    {
+     "location": "right",
+     "armor": 50,
+     "structure": 15
+    },
+    {
+     "location": "rear",
+     "armor": 55,
+     "structure": 15
+    },
+    {
+     "location": "turret",
+     "armor": 70,
+     "structure": 15
+    }
+   ],
+   "walk": 165.0,
+   "sprint": 275.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Galleon",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/63/Galleon_RGilClan_v27.jpg/600px-3e3f11fwhxdwsf06x3galc8x0a2zs0x.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_GALLEON_TAG",
+   "name": "Galleon TAG",
+   "source": "heavymetal",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_SmallLaser_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_TAG_Standard_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [],
+   "equipment": [
+    {
+     "id": "Gear_General_Robinson_TG120_Drive_Train",
+     "count": 1
+    }
+   ],
+   "kind": "tracked",
+   "tonnage": 30,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 55,
+     "structure": 15
+    },
+    {
+     "location": "left",
+     "armor": 50,
+     "structure": 15
+    },
+    {
+     "location": "right",
+     "armor": 50,
+     "structure": 15
+    },
+    {
+     "location": "rear",
+     "armor": 55,
+     "structure": 15
+    },
+    {
+     "location": "turret",
+     "armor": 70,
+     "structure": 15
+    }
+   ],
+   "walk": 165.0,
+   "sprint": 275.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Galleon",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/6/63/Galleon_RGilClan_v27.jpg/600px-3e3f11fwhxdwsf06x3galc8x0a2zs0x.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_MANTICORE",
+   "name": "Manticore",
+   "source": "base",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_LRM_LRM10_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_PPC_PPC_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_SRM_SRM6_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_LRM",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_SRM",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 60,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 210,
+     "structure": 12
+    },
+    {
+     "location": "left",
+     "armor": 165,
+     "structure": 12
+    },
+    {
+     "location": "right",
+     "armor": 165,
+     "structure": 12
+    },
+    {
+     "location": "rear",
+     "armor": 130,
+     "structure": 12
+    },
+    {
+     "location": "turret",
+     "armor": 210,
+     "structure": 12
+    }
+   ],
+   "walk": 120.0,
+   "sprint": 200.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Manticore",
+    "image": "https://cfw.sarna.net/wiki/images/0/09/Manticore_RGilClan_v31.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_MOBILEHQ",
+   "name": "Mobile HQ",
+   "source": "base",
+   "weightClass": "light",
+   "noncombatant": true,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [],
+   "equipment": [
+    {
+     "id": "Gear_Cockpit_Tacticon_B2000_Battle_Computer",
+     "count": 1
+    }
+   ],
+   "kind": "wheeled",
+   "tonnage": 25,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 80,
+     "structure": 15
+    },
+    {
+     "location": "left",
+     "armor": 95,
+     "structure": 15
+    },
+    {
+     "location": "right",
+     "armor": 95,
+     "structure": 15
+    },
+    {
+     "location": "rear",
+     "armor": 80,
+     "structure": 15
+    },
+    {
+     "location": "turret",
+     "armor": 50,
+     "structure": 15
+    }
+   ],
+   "walk": 165.0,
+   "sprint": 275.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Mobile_HQ",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/b/bb/Browning_Mobile_HQ_RGilClan_v29.jpg/600px-lr13lnudhd4hiqmmnbaq4c9czoiyxmi.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_PACKRAT",
+   "name": "Packrat Support Vehicle",
+   "source": "urbanwarfare",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_LargeLaser_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [],
+   "equipment": [
+    {
+     "id": "Gear_Sensor_Prototype_ECM",
+     "count": 1
+    }
+   ],
+   "kind": "wheeled",
+   "tonnage": 25,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 80,
+     "structure": 15
+    },
+    {
+     "location": "left",
+     "armor": 80,
+     "structure": 15
+    },
+    {
+     "location": "right",
+     "armor": 80,
+     "structure": 15
+    },
+    {
+     "location": "rear",
+     "armor": 60,
+     "structure": 15
+    },
+    {
+     "location": "turret",
+     "armor": 60,
+     "structure": 15
+    }
+   ],
+   "walk": 200.0,
+   "sprint": 350.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Packrat",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/5/5f/Packrat_TRO3025CE.jpg/600px-42qk32i0vnt060io3ef5mgm5o10y1ep.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_ROTUNDA",
+   "name": "Rotunda Recon Vehicle",
+   "source": "urbanwarfare",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [],
+   "equipment": [
+    {
+     "id": "Gear_Sensor_Prototype_ActiveProbe",
+     "count": 1
+    }
+   ],
+   "kind": "wheeled",
+   "tonnage": 20,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 70,
+     "structure": 10
+    },
+    {
+     "location": "left",
+     "armor": 60,
+     "structure": 10
+    },
+    {
+     "location": "right",
+     "armor": 60,
+     "structure": 10
+    },
+    {
+     "location": "rear",
+     "armor": 60,
+     "structure": 10
+    },
+    {
+     "location": "turret",
+     "armor": 70,
+     "structure": 10
+    }
+   ],
+   "walk": 235.0,
+   "sprint": 400.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Rotunda",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/1/10/Rotunda.jpg/600px-es9q3honn7hjiiagyihfv37ezuz6wst.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_SCHREK",
+   "name": "Schrek PPC Carrier",
+   "source": "base",
+   "weightClass": "assault",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_PPC_PPC_0-STOCK",
+     "count": 3
+    }
+   ],
+   "ammo": [],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 80,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 120,
+     "structure": 40
+    },
+    {
+     "location": "left",
+     "armor": 100,
+     "structure": 40
+    },
+    {
+     "location": "right",
+     "armor": 100,
+     "structure": 40
+    },
+    {
+     "location": "rear",
+     "armor": 100,
+     "structure": 40
+    },
+    {
+     "location": "turret",
+     "armor": 140,
+     "structure": 40
+    }
+   ],
+   "walk": 95.0,
+   "sprint": 165.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Schrek",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e4/Schrek_RGilClan_v32.jpg/600px-6kyhe430wm9jkcvzg9u4fychzqmlpr2.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_SCHREK_SPPC",
+   "name": "Schrek SPPC Carrier",
+   "source": "heavymetal",
+   "weightClass": "assault",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_PPC_PPCSnub_0-STOCK",
+     "count": 3
+    }
+   ],
+   "ammo": [],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 80,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 125,
+     "structure": 40
+    },
+    {
+     "location": "left",
+     "armor": 110,
+     "structure": 40
+    },
+    {
+     "location": "right",
+     "armor": 110,
+     "structure": 40
+    },
+    {
+     "location": "rear",
+     "armor": 105,
+     "structure": 40
+    },
+    {
+     "location": "turret",
+     "armor": 150,
+     "structure": 40
+    }
+   ],
+   "walk": 95.0,
+   "sprint": 165.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Schrek",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/e/e4/Schrek_RGilClan_v32.jpg/600px-6kyhe430wm9jkcvzg9u4fychzqmlpr2.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_SCORPION",
+   "name": "Scorpion",
+   "source": "base",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Autocannon_AC5_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_AC5",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 25,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 80,
+     "structure": 15
+    },
+    {
+     "location": "left",
+     "armor": 55,
+     "structure": 15
+    },
+    {
+     "location": "right",
+     "armor": 55,
+     "structure": 15
+    },
+    {
+     "location": "rear",
+     "armor": 50,
+     "structure": 15
+    },
+    {
+     "location": "turret",
+     "armor": 80,
+     "structure": 15
+    }
+   ],
+   "walk": 120.0,
+   "sprint": 200.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_SCORPION_MKII",
+   "name": "Scorpion Mk II",
+   "source": "heavymetal",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Autocannon_UAC5_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_AC5",
+     "count": 2
+    }
+   ],
+   "equipment": [],
+   "kind": "tracked",
+   "tonnage": 25,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 80,
+     "structure": 15
+    },
+    {
+     "location": "left",
+     "armor": 55,
+     "structure": 15
+    },
+    {
+     "location": "right",
+     "armor": 55,
+     "structure": 15
+    },
+    {
+     "location": "rear",
+     "armor": 50,
+     "structure": 15
+    },
+    {
+     "location": "turret",
+     "armor": 80,
+     "structure": 15
+    }
+   ],
+   "walk": 120.0,
+   "sprint": 200.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Scorpion_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/4/41/Scorpion_Light_Tank_RGilClan_v33.jpg/600px-ogl0ltroafzdpaavevxm3uwjglhv2p3.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_STRIKER",
+   "name": "Striker",
+   "source": "base",
+   "weightClass": "medium",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_LRM_LRM10_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_SRM_SRM6_0-STOCK",
+     "count": 1
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_LRM",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_SRM",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "wheeled",
+   "tonnage": 35,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 120,
+     "structure": 4
+    },
+    {
+     "location": "left",
+     "armor": 100,
+     "structure": 4
+    },
+    {
+     "location": "right",
+     "armor": 100,
+     "structure": 4
+    },
+    {
+     "location": "rear",
+     "armor": 90,
+     "structure": 4
+    },
+    {
+     "location": "turret",
+     "armor": 120,
+     "structure": 4
+    }
+   ],
+   "walk": 140.0,
+   "sprint": 240.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Striker_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/b/b7/Striker_RGilClan_v33.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_STRIKER_Narc",
+   "name": "Striker Narc",
+   "source": "heavymetal",
+   "weightClass": "medium",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_LRM_LRM10_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_Narc_Standard_2-Kali_Yama",
+     "count": 1
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_LRM",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_Narc",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "wheeled",
+   "tonnage": 35,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 120,
+     "structure": 4
+    },
+    {
+     "location": "left",
+     "armor": 100,
+     "structure": 4
+    },
+    {
+     "location": "right",
+     "armor": 100,
+     "structure": 4
+    },
+    {
+     "location": "rear",
+     "armor": 90,
+     "structure": 4
+    },
+    {
+     "location": "turret",
+     "armor": 120,
+     "structure": 4
+    }
+   ],
+   "walk": 140.0,
+   "sprint": 240.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Striker_%28Combat_Vehicle%29",
+    "image": "https://cfw.sarna.net/wiki/images/b/b7/Striker_RGilClan_v33.jpg"
+   }
+  },
+  {
+   "id": "vehicledef_SWIFTWIND",
+   "name": "Swift Wind",
+   "source": "base",
+   "weightClass": "light",
+   "noncombatant": true,
+   "weapons": [],
+   "ammo": [],
+   "equipment": [],
+   "kind": "wheeled",
+   "tonnage": 35,
+   "locations": [
+    {
+     "location": "front",
+     "armor": 30,
+     "structure": 2
+    },
+    {
+     "location": "left",
+     "armor": 30,
+     "structure": 2
+    },
+    {
+     "location": "right",
+     "armor": 30,
+     "structure": 2
+    },
+    {
+     "location": "rear",
+     "armor": 30,
+     "structure": 2
+    }
+   ],
+   "walk": 260.0,
+   "sprint": 400.0,
+   "sarna": {
+    "page": "https://www.sarna.net/wiki/Swift_Wind",
+    "image": "https://cfw.sarna.net/wiki/images/thumb/c/c6/Swift_Wind_TRO3025CE.jpg/600px-ohwdwefqh1pirgo40wnpkvjzjfpnxod.jpg"
+   }
+  },
+  {
+   "id": "turretdef_Heavy_LRM",
+   "name": "Heavy LRM Turret",
+   "source": "base",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_LRM_LRM10_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_LRM_LRM15_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_LRM",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 300,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Heavy_Laser",
+   "name": "Heavy Laser Turret",
+   "source": "base",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_LargeLaser_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 4
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 300,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Heavy_Shredder",
+   "name": "Heavy Shredder Turret",
+   "source": "base",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Autocannon_AC20_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_Flamer_Flamer_0-STOCK",
+     "count": 4
+    },
+    {
+     "id": "Weapon_SRM_SRM6_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_AC20",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_SRM",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 300,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Heavy_Sniper",
+   "name": "Heavy Sniper Turret",
+   "source": "base",
+   "weightClass": "heavy",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Autocannon_AC2_0-STOCK",
+     "count": 4
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_PPC_PPC_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_AC2",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 300,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Light_LRM",
+   "name": "Light LRM Turret",
+   "source": "base",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_LRM_LRM10_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_LRM",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 120,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Light_Laser",
+   "name": "Light Laser Turret",
+   "source": "base",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 120,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Light_Shredder",
+   "name": "Light Shredder Turret",
+   "source": "base",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Flamer_Flamer_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_SRM_SRM6_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_SRM",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 120,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Light_Sniper",
+   "name": "Light Sniper Turret",
+   "source": "base",
+   "weightClass": "light",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Autocannon_AC2_0-STOCK",
+     "count": 4
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_AC2",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 120,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Standard_LRM",
+   "name": "Standard LRM Turret",
+   "source": "base",
+   "weightClass": "medium",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_LRM_LRM15_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_LRM",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 200,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Standard_Laser",
+   "name": "Light Standard Turret",
+   "source": "base",
+   "weightClass": "medium",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Laser_LargeLaser_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_Laser_MediumLaser_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 200,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Standard_Shredder",
+   "name": "Standard Shredder Turret",
+   "source": "base",
+   "weightClass": "medium",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_Autocannon_AC20_0-STOCK",
+     "count": 1
+    },
+    {
+     "id": "Weapon_Flamer_Flamer_0-STOCK",
+     "count": 3
+    },
+    {
+     "id": "Weapon_SRM_SRM2_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_AC20",
+     "count": 1
+    },
+    {
+     "id": "Ammo_AmmunitionBox_Generic_SRM",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 200,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  },
+  {
+   "id": "turretdef_Standard_Sniper",
+   "name": "Standard Sniper Turret",
+   "source": "base",
+   "weightClass": "medium",
+   "noncombatant": false,
+   "weapons": [
+    {
+     "id": "Weapon_MachineGun_MachineGun_0-STOCK",
+     "count": 2
+    },
+    {
+     "id": "Weapon_PPC_PPC_0-STOCK",
+     "count": 2
+    }
+   ],
+   "ammo": [
+    {
+     "id": "Ammo_AmmunitionBox_Generic_MG",
+     "count": 1
+    }
+   ],
+   "equipment": [],
+   "kind": "turret",
+   "tonnage": null,
+   "locations": [
+    {
+     "location": "body",
+     "armor": 200,
+     "structure": 10
+    }
+   ],
+   "walk": null,
+   "sprint": null
+  }
+ ]
+}

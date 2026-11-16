@@ -1,0 +1,1762 @@
+{
+ "turretchassisdef_Heavy": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Heavy",
+   "Name": "Heavy Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 500,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "ASSAULT"
+ },
+ "turretchassisdef_Heavy_laser": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Heavy_laser",
+   "Name": "Heavy Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 500,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "ASSAULT"
+ },
+ "turretchassisdef_Heavy_lrm": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Heavy_lrm",
+   "Name": "Heavy Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 500,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "ASSAULT"
+ },
+ "turretchassisdef_Heavy_shredder": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Heavy_shredder",
+   "Name": "Heavy Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 500,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "ASSAULT"
+ },
+ "turretchassisdef_Heavy_sniper": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Heavy_sniper",
+   "Name": "Heavy Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 500,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "ASSAULT"
+ },
+ "turretchassisdef_Light": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Light",
+   "Name": "Light Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 300,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 75,
+  "fuente": "base",
+  "weightClass": "LIGHT"
+ },
+ "turretchassisdef_Light_laser": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Light_laser",
+   "Name": "Light Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 300,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 75,
+  "fuente": "base",
+  "weightClass": "LIGHT"
+ },
+ "turretchassisdef_Light_lrm": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Light_lrm",
+   "Name": "Light Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 300,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 75,
+  "fuente": "base",
+  "weightClass": "LIGHT"
+ },
+ "turretchassisdef_Light_shredder": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Light_shredder",
+   "Name": "Light Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 300,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 75,
+  "fuente": "base",
+  "weightClass": "LIGHT"
+ },
+ "turretchassisdef_Light_sniper": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Light_sniper",
+   "Name": "Light Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 300,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 75,
+  "fuente": "base",
+  "weightClass": "LIGHT"
+ },
+ "turretchassisdef_Standard": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Standard",
+   "Name": "Standard Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 400,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "ASSAULT"
+ },
+ "turretchassisdef_Standard_LRM": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Standard_LRM",
+   "Name": "Standard Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 400,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "MEDIUM"
+ },
+ "turretchassisdef_Standard_laser": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Standard_laser",
+   "Name": "Standard Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 400,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "MEDIUM"
+ },
+ "turretchassisdef_Standard_shredder": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Standard_shredder",
+   "Name": "Standard Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 400,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "MEDIUM"
+ },
+ "turretchassisdef_Standard_sniper": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_Standard_sniper",
+   "Name": "Standard Turret Chassis",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 20,
+  "MaxArmor": 400,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 100,
+  "fuente": "base",
+  "weightClass": "MEDIUM"
+ },
+ "turretchassisdef_testturret": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_testturret",
+   "Name": "Test Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 90,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   }
+  ],
+  "InventorySlots": 1,
+  "MaxArmor": 84,
+  "MaxInternalStructure": 12,
+  "MovementCapDefID": "",
+  "Tonnage": 40,
+  "fuente": "base",
+  "weightClass": "ASSAULT"
+ },
+ "turretchassisdef_testturret_360": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_testturret_360",
+   "Name": "Test Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Energy"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "Missile"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   },
+   {
+    "Omni": false,
+    "WeaponMount": "AntiPersonnel"
+   }
+  ],
+  "InventorySlots": 10,
+  "MaxArmor": 300,
+  "MaxInternalStructure": 10,
+  "MovementCapDefID": "",
+  "Tonnage": 40,
+  "fuente": "base",
+  "weightClass": "LIGHT"
+ },
+ "turretchassisdef_testturret_360_spotter": {
+  "BattleValue": 100,
+  "Description": {
+   "Cost": 993,
+   "Details": "",
+   "Icon": "TURRET",
+   "Id": "turretchassisdef_testturret_360_spotter",
+   "Name": "Test Turret",
+   "Purchasable": false,
+   "Rarity": 0
+  },
+  "FiringArcDegrees": 360,
+  "Hardpoints": [
+   {
+    "Omni": false,
+    "WeaponMount": "Ballistic"
+   }
+  ],
+  "InventorySlots": 1,
+  "MaxArmor": 32,
+  "MaxInternalStructure": 8,
+  "MovementCapDefID": "",
+  "Tonnage": 40,
+  "fuente": "base",
+  "weightClass": "LIGHT"
+ }
+}

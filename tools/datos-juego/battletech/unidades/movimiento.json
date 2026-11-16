@@ -1,0 +1,66 @@
+{
+ "movedef_APC_Wheeled": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_BULLDOG": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_CARRIER_LRM": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_DEMOLISHER": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_GALLANT": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_GALLEON": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_MANTICORE": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_MOBILEHQ": {
+  "MaxSprintDistance": 275.0,
+  "MaxWalkDistance": 165.0
+ },
+ "movedef_PACKRAT": {
+  "MaxSprintDistance": 350.0,
+  "MaxWalkDistance": 200.0
+ },
+ "movedef_ROTUNDA": {
+  "MaxSprintDistance": 400.0,
+  "MaxWalkDistance": 235.0
+ },
+ "movedef_SCHREK": {
+  "MaxSprintDistance": 165.0,
+  "MaxWalkDistance": 95.0
+ },
+ "movedef_SCORPION": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_SLDFDroneHeavy": {
+  "MaxSprintDistance": 200.0,
+  "MaxWalkDistance": 120.0
+ },
+ "movedef_SLDFDroneMedium": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_STRIKER": {
+  "MaxSprintDistance": 240.0,
+  "MaxWalkDistance": 140.0
+ },
+ "movedef_SWIFTWIND": {
+  "MaxSprintDistance": 400.0,
+  "MaxWalkDistance": 260.0
+ }
+}

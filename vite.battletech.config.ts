@@ -20,7 +20,8 @@ export default defineConfig({
         main: resolve(import.meta.dirname, GAME_PATH, 'index.html'),
         starmap: resolve(import.meta.dirname, GAME_PATH, 'starmap/index.html'),
         argo: resolve(import.meta.dirname, GAME_PATH, 'argo/index.html'),
-        equipment: resolve(import.meta.dirname, GAME_PATH, 'equipment/index.html')
+        equipment: resolve(import.meta.dirname, GAME_PATH, 'equipment/index.html'),
+        units: resolve(import.meta.dirname, GAME_PATH, 'units/index.html')
       }
     }
   },
