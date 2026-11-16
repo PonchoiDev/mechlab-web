@@ -1,0 +1,1399 @@
+{
+ "AttackDefend_CoveringFire": {
+  "contractName": "Covering Fire",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "My read on the situation is that by 'personnel' they mean 'covert operatives'. You don't hire 'Mechs to cover the retreat of clerical staff.",
+  "objetivos": [
+   "Defend {TEAM_EMP.FactionDef.Demonym} Base and Destroy {TEAM_TAR.FactionDef.Demonym} Base"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "Commander, our covert forces are poised to seize a {TEAM_TAR.FactionDef.Demonym} prison facility where a large number of {TEAM_EMP.FactionDef.Demonym} personnel are being held prisoner. However, the facility is protected by a nearby military base, and as soon as we seize the prison, they'll move against it, and reduce those buildings to rubble before they let us extract those people. We'll be moving our own 'Mechs and Leopards in as quickly as we can but before we can land them and extract the personnel, we need you to pacify that military base."
+ },
+ "AttackDefend_Evacuation": {
+  "contractName": "Emergency Evacuation",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "I'm guessing these 'civilians' are some kind of covert operatives, for this much metal to be put on the field to extract them.",
+  "objetivos": [
+   "Defend {TEAM_EMP.FactionDef.Demonym} Base and Destroy {TEAM_TAR.FactionDef.Demonym} Base"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "Commander, this is an extremely time-sensitive mission and we're on a strict deadline, so I hope you can assist us. Our covert forces are poised to seize a {TEAM_TAR.FactionDef.Demonym} facility where a large number of {TEAM_EMP.FactionDef.Demonym} civilians are being held prisoner. However, the facility is protected by a nearby military base, and as soon as we seize the prison, they'll move against it, and reduce those buildings to rubble before they let us extract those people. We'll be moving our own 'Mechs and Leopards in as quickly as we can but before we can land them and extract the civilians, we need you to pacify that military base."
+ },
+ "AttackDefend_HighTide": {
+  "contractName": "High Tide",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "A 'major' force sounds like a whole lot of metal on the field. Expect a long slog, Commander, and maybe pack lasers instead of autocannons.",
+  "objetivos": [
+   "Defend {TEAM_EMP.FactionDef.Demonym} Base and Destroy {TEAM_TAR.FactionDef.Demonym} Base"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "Commander, we need your assistance in fending off an attack on one of our facilities. This base is a critical logistical center for us, primarily for food and medicine; if we lose it, our forces in the region will be hamstrung. A major {TEAM_TAR.FactionDef.Demonym} strike force has deployed to the region, and we've just gotten word that they've seized an auxiliary base near the logistics facility, and are using it as a staging point for a further assault. We need you to level that auxiliary base and cut off their offensive."
+ },
+ "AttackDefend_Pirate_Breakout": {
+  "contractName": "Breakout",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Given the framing, I think it's best we <i>never</i> investigate who these 'dear friends' are, or why they're locked up.",
+  "objetivos": [
+   "Defend {TEAM_EMP.FactionDef.Demonym} Base and Destroy {TEAM_TAR.FactionDef.Demonym} Base"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "Some of our favorite people are currently being held in a {TEAM_TAR.FactionDef.Demonym} prison facility. We'd like to break them out and evacuate them, but the prison's protected by a nearby military base. We're very competent at prison breaks, but less experienced at defending bases from lances of military 'Mechs. That's where you come in! We'll seize control of the prison, and then you land and shoot anyone who tries to keep us from evacuating our dear friends. In fact, it would probably be best if you simply destroyed their base entirely. Wouldn't do to have them tracking us!"
+ },
+ "AttackDefend_PowerUp": {
+  "contractName": "Power Up",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "We'll be outnumbered and outmatched, Commander, but that's hardly a new experience for us.",
+  "objetivos": [
+   "Defend {TEAM_EMP.FactionDef.Demonym} Base and Destroy {TEAM_TAR.FactionDef.Demonym} Base"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "We've been able to infiltrate personnel into a contested region to take control of an abandoned base. We've brought the base's primary power and communications systems online, but in doing so, we've made an unfortunate discovery: a {TEAM_TAR.FactionDef.Demonym} force has done the same thing with a nearby facility. They're somewhat ahead of us in the process, and have their base's turrets online; they're also landing troops and 'Mechs to hold their new acquisition. Only one of us can control this area when we're finished; we'd like you to ensure that it's us."
+ },
+ "AttackDefend_ProxyWar": {
+  "contractName": "Proxy War",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Commander, this mission is... insane. And I don't say that lightly. We're going to take a serious beating on this one.",
+  "objetivos": [
+   "Defend {TEAM_EMP.FactionDef.Demonym} Base and Destroy {TEAM_TAR.FactionDef.Demonym} Base"
+  ],
+  "salvagePotential": 32,
+  "shortDescription": "Commander, we have a developing situation and need an unorthodox solution, which we're hoping your team can provide. Six hours ago, a heavily-armed {TEAM_TAR.FactionDef.Demonym} strike force landed near one of our research facilities and took control of it. That facility is stuffed with critical intelligence and research data, all of which is being accessed and transmitted off-planet right now. We simply don't have enough local firepower to dislodge them. We've got a plan, though. We're going to bait a third party into helping us destroy the base and its intel. You're the bait."
+ },
+ "AttackDefend_Reconquest": {
+  "contractName": "Reconquest",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "We've got to intercept 'Mechs, destroy a base, save a base... and there are base defense systems? Sounds like a mess.",
+  "objetivos": [
+   "Destroy the Captured Base"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "Commander, we've just received a distress signal from one of our facilities on the planet. A team of {TEAM_TAR.FactionDef.Demonym} terrorists have seized control of the primary base, executed the base commander, and subverted the base's defense systems. Satellite imagery tells us they're preparing for an assault on the secondary base. We need a rapid response force to eliminate their assault team, and level the seized base. Our own forces are inbound but won't get there in time to save the secondary base."
+ },
+ "AttackDefend_Retaliation": {
+  "contractName": "Retaliation",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "We've got to intercept 'Mechs, assault a base, save a base; we've got our work cut out for us on this one, Commander.",
+  "objetivos": [
+   "Destroy the Captured Base"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "Commander, one of our facilities has gone dark, and we're not sure why. The base is one of two {TEAM_EMP.FactionDef.Demonym} facilities in the region. We have satellite imagery showing unknown 'Mechs moving in the area, and it seems as though they're preparing for an assault on the secondary base. We need you to put 'Mechs in the field, defend the secondary base, and drive them out of the primary base. Our own forces are inbound but won't get there in time to save the secondary base."
+ },
+ "AttackDefend_Template": {
+  "contractName": "Attack And Defend",
+  "contractType": "INVALID_UNSET",
+  "longDescription": null,
+  "objetivos": [
+   "Attack and Defend"
+  ],
+  "salvagePotential": -1,
+  "shortDescription": null
+ },
+ "FireMission_DataLiberation": {
+  "contractName": "Data Liberation",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "This sounds like a messy scenario, Commander. That satellite is only going to be overhead for a short time.",
+  "objetivos": [
+   "Set Targeting Beacons for Data Transfer"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "We have an operative in place in a {TEAM_TAR.FactionDef.Demonym} research facility, and for the past year they've been gathering sensitive research data for us. They've notified us that they're ready for us to extract the data, and we need a deniable force to arrange that extraction. The research facility is not connected to any data networks, and all the secure laboratories are far enough underground that wireless data signals are blocked. To get the information out, we're going to need to position a satellite receiver directly above the site. Your task will be to place positioning beacons to allow the satellite to lock on to the research data signal and download it."
+ },
+ "FireMission_DataLiberation_Hard": {
+  "contractName": "Can't Stop The Signal",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "This sounds like a messy scenario, Commander. That satellite is only going to be overhead for a short time, and this place is going to be very heavily guarded.",
+  "objetivos": [
+   "Set Targeting Beacons for Data Transfer"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "We have an operative in place in a covert {TEAM_TAR.FactionDef.Demonym} research facility, and for the past year they've been gathering sensitive research data for us. They've notified us that they're ready for us to extract the data, and we need a deniable force to arrange that extraction. The research facility is not connected to any data networks, and all the secure laboratories are far enough underground that wireless data signals are blocked. To get the information out, we're going to need to position a satellite receiver directly above the site. Your task will be to place positioning beacons to allow the satellite to lock on to the research data signal and download it."
+ },
+ "FireMission_FireForEffect": {
+  "contractName": "Fire for Effect",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Commander, there is nothing glamorous about sighting targets for big guns, but the fireworks can be exciting. Just make sure your clear of the blast radius before those shells land.",
+  "objetivos": [
+   "Attack the Installation and paint the area for a Fire Mission"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "There is a {TEAM_TAR.FactionDef.Demonym} base in this region. We have the equipment to level it, however our recon capability has been diminshed. We would you to take a team and attack the installation. Place beacons for our Artillery to target, and exfiltrate while our guns destroy the base."
+ },
+ "FireMission_Fireworks": {
+  "contractName": "Fireworks",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "The time-frame on this is tight, since we need the artillery strike to hit while the {TEAM_EMP.FactionDef.Demonym} representative has everyone looking in the right direction. And Commander, I wouldn't take any bets on that military base actually being abandoned.",
+  "objetivos": [
+   "Mark the military base for destruction from orbit"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "We are engaged in delicate negotiations with a private manufacturer from {TEAM_TAR.FactionDef.Demonym} space, but we have reached an impasse. Our representative has requested a demonstration. \"Something dramatic,\" she said. So we turn to you. Your team will provide on-site assistance to target an abandoned {TEAM_TAR.FactionDef.Demonym} military base near the trade conference. We'll have a WarShip standing by to light it up… dramatically."
+ },
+ "FireMission_Template": {
+  "contractName": "Fire Mission",
+  "contractType": "INVALID_UNSET",
+  "longDescription": null,
+  "objetivos": [
+   "Attack the Installation and paint the area for a Fire Mission"
+  ],
+  "salvagePotential": -1,
+  "shortDescription": null
+ },
+ "FireMission_Untouchable": {
+  "contractName": "Untouchable",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Bringing a military ship this far out towards the Periphery is a hell of a risk. This operative must know something big.",
+  "objetivos": [
+   "Attack the Installation and paint the area for a Fire Mission"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "Commander, one of our senior operatives has defected to {TEAM_TAR.FactionDef.Name}. They know far too much about our operations to be allowed to share their knowledge with their new friends. It seems the {TEAM_TAR.FactionDef.Demonym} handlers have realized how valuable the knowledge our operative possesses is, because they're being held in an extremely secure facility, deep underground. Such extreme defensive measures probably makes them feel as though they're untouchable. We have a military DropShip with a naval PPC on station to demonstrate to them just how touchable they are. We need you to help us precisely target the PPC."
+ },
+ "HM1_ofUnknownOrigin_1_captureBase": {
+  "contractName": "Of Unknown Origin",
+  "contractType": "CaptureBase",
+  "longDescription": "I still can't believe that we don't even know who we're fighting against. It is what it is, I guess.",
+  "objetivos": [
+   "Capture the Unidentified Syndicate Base"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "According to ISF intelligence, Captain Gaku Magorian is being held prisoner in one of a dozen safe houses within the boundaries of Alamedo Province. Obviously, we can't rely on trial and error to find him, so we're going to have to narrow down the list. Our unidentified syndicate is known to maintain a forward base in this AO. Capture it so that Dr. Murad can scour the OpFor's mainframe for confirmation of Captain Magorian's whereabouts."
+ },
+ "HM1_ofUnknownOrigin_2_3wayBattle": {
+  "contractName": "Of Unknown Origin II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Let's hope this is the last hoop we need to jump through before finding this guy.",
+  "objetivos": [
+   "Destroy Zeta Lance"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "Zeta Lance moved Captain Magorian out of Alamedo Province two days ago. They're holding him in a bunker somewhere under the ruins of New Vulci, a city that fell victim to a nuclear accident in 2977. Engage Zeta Lance and destroy their 'Mechs. When you're finished, I'll scour their combat computers for the bunker's coordinates."
+ },
+ "HM1_ofUnknownOrigin_a1_destroyBase": {
+  "contractName": "Of Unknown Origin III",
+  "contractType": "DestroyBase",
+  "longDescription": "Get ready, {COMMANDER.FirstName}. Our 'Mechs are about to soak up a <i>lot</i> of incoming fire.",
+  "objetivos": [
+   "Destroy the Baumann Group armory and all defending units"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "I'm dropping you at the Baumann Group's armory, Commander. Hit it hard enough, and the prison's garrison should come running, clearing the way for the Moderbjörn to rescue Captain Magorian with its drones."
+ },
+ "HM1_ofUnknownOrigin_b1_rescue": {
+  "contractName": "Of Unknown Origin III",
+  "contractType": "Rescue",
+  "longDescription": "If the Moderbjörn holds up its end, we should be golden. Our lance will be in trouble if it doesn't.",
+  "objetivos": [
+   "Retrieve Captain Gaku Magorian and Extract Safely"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "Captain Magorian is being held in a subterranean bunker attached to a complex just ahead of us. We're going to sneak a scout lance in, rescue the captain, and bug out. If all goes according to plan, the Moderbjörn's combat drones will distract the bunker's garrison and keep it out of our hair for the duration of the operation."
+ },
+ "HM3_huntingSeason_1_3wayBattle": {
+  "contractName": "Hunting Season",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "The Baumann Group's made a lot of money off of the <i>Dobrev</i>. We're gonna find out where they took it—and get a piece of the profits for ourselves while we're at it.",
+  "objetivos": [
+   "Destroy Baumann Group Cavalry Units"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "Like I said, the Baumann Group's distribution center is heavily defended, so we're gonna approach this as a two-stage operation. For this first stage, you're going to descend at the outermost edge of the OpFor's territory and engage their patrolling cavalry. Take out as many vehicles and 'Mechs as you can to clear the way for an assault on the distribution center."
+ },
+ "HM5_hourglass_1_captureBase": {
+  "contractName": "Hourglass",
+  "contractType": "CaptureBase",
+  "longDescription": "We're almost there, {COMMANDER.FirstName}. Just one more push and the derelict is ours.",
+  "objetivos": [
+   "Capture the Baumann Group Security Complex"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "As per our earlier discussion, I'm going to drop you right on top of a Baumann Group security outpost some 20 klicks from the <i>Dobrev</i>'s spaceport. You're going to have to capture the site and clear out its defenses. When the job's done, the Moderbjörn will use the complex's computers to drop the spaceport's defenses and remotely engage the <i>Dobrev</i>'s docking clamps. I'd expect the OpFor's defenses to run heavy on this one, so I'd advise building your lance accordingly."
+ },
+ "HM5_hourglass_2_defendBase": {
+  "contractName": "Hourglass II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Obviously, this deployment is gonna be a little fraught. It's on us to handle it anyway.",
+  "objetivos": [
+   "Protect the Evacuated Spaceport from the Black Widow Company"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "The <i>Dobrev</i> is gone, but its crew left an undefined amount of valuable contraband behind at the spaceport. Unfortunately, the Black Widow wants to melt every scrap of that contraband to slag. The Moderbjörn will draw the Black Widow's attention away from our AO, which should buy Yang and me enough time to ransack the spaceport. We'll be relying on your lance to protect us from anyone else who might come along."
+ },
+ "HM7_showdown_1_3wayBattle": {
+  "contractName": "Standoff",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Move fast, {COMMANDER.FirstName}! The Black Widow and the Bounty Hunter are on their way.",
+  "objetivos": [
+   "Destroy Baumann Group Mercenaries"
+  ],
+  "salvagePotential": 32,
+  "shortDescription": "We've found the <i>Dobrev</i>, and this time, it's in no condition to run. Time is of the essence here, so we're going to deploy alongside the Moderbjörn's drones. Hit the Baumann Group fast, hit 'em hard, and wipe the AO clean. After we've taken the <i>Dobrev</i>, we'll discuss our next steps."
+ },
+ "HM7_showdown_2_3wayBattle": {
+  "contractName": "Standoff II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "We're up against legends. Again. But the hell with it, {COMMANDER.FirstName}. Let's go make a legend of our own.",
+  "objetivos": [
+   "Defeat the Black Widow and the Bounty Hunter"
+  ],
+  "salvagePotential": 32,
+  "shortDescription": "This is it—the final confrontation between ourselves, the Black Widow, and the Bounty Hunter. Succeed in this, and the Moderbjörn will have all the time it needs to harvest the <i>Dobrev</i>'s navigation logs. The secrets of the Star League lie within our grasp, Commander. I know we can do this, so let's get to it."
+ },
+ "c_fp_allianceDavion_1_captureBase": {
+  "contractName": "Davion Alliance",
+  "contractType": "CaptureBase",
+  "longDescription": "It's not for nothing that Liao is known for being unpredictable and cunning. Let's keep our eyes open for any surprises, Commander.",
+  "objetivos": [
+   "Capture the Observation Post"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "As I mentioned, Commander {COMMANDER.LastName}, before we can begin operations on the planet, we need to neutralize an observation post. Conveniently, we can then use the facility's resources to stage further assaults. Our information suggests the base is quite well defended, which is unsurprising, given the planet's location on multiple potentially hostile borders. Once the base is taken, we won't have to worry about errant calls for reinforcements, but to be safe, it would be best for you to hunt down all enemy forces to prevent them from retreating and spreading word of the attack."
+ },
+ "c_fp_allianceDavion_2_simpleBattle": {
+  "contractName": "Davion Alliance II",
+  "contractType": "SimpleBattle",
+  "longDescription": "We'll be outnumbered two to one, Commander. I don't particularly like those odds, but we're committed now, so let's buckle down and get the job done.",
+  "objetivos": [
+   "Destroy the Capellan Patrols"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "With our beachhead secured, it is time to start moving against the Capellans here on Kern. There are multiple potential targets in the area, but before we discuss them, we need to clear the field. Our technicians have extracted the force deployment data from the base computers, and we know that there are two heavy lances of 'Mechs on patrol right now, somewhere on the other side of the river. You'll get in by Leopard and sweep the woods; eliminate any Capellan units you uncover."
+ },
+ "c_fp_allianceDavion_a1_destroyBase": {
+  "contractName": "Davion Alliance III",
+  "contractType": "DestroyBase",
+  "longDescription": "This base sounds like a tough nut to crack, Commander. Expect two full lances on the field, plus the turrets. We'd better bring our heaviest 'Mechs.",
+  "objetivos": [
+   "Destroy Logistical Facility and Extract Safely"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "This logistical base is a key component of the Capellans' hold on this area of Kern. Any significant force in the region needs this base to remain operational and supplied in the field. The main facility is located in deep woods, well concealed and well defended. Expect heavy resistance before reaching it, and expect turret defenses at the base itself. A secondary base nearby houses technicians and staff; destroying it is not required, but if you manage to, it will ensure the main facility remains permanently closed and unrepairable."
+ },
+ "c_fp_allianceDavion_a2_assassinate": {
+  "contractName": "Davion Alliance IV",
+  "contractType": "Assassinate",
+  "longDescription": "Yang's been filling me in about Song, Commander. He says they're supposed to be the best shot in the entire CCAF. We're going to be lucky to get out of this one without serious losses.",
+  "objetivos": [
+   "Destroy Lieutenant Colonel Song and Escape"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "Those aren't just reinforcements, Commander. That's our target: the CCAF commander, Lieutenant Colonel Song. As a reminder, they're a deadly MechWarrior as well as a skilled strategist. Their arrival on the field presents an opportunity—if we act swiftly, we can achieve our goals here on Kern in a single strike, making this world an easy pickup when we mount the full-scale attack. This is it, Commander. Don't screw this up."
+ },
+ "c_fp_allianceDavion_b1_rescue": {
+  "contractName": "Davion Alliance III",
+  "contractType": "Rescue",
+  "longDescription": "They may be incidental but they're going to be shooting <i>our</i> 'Mechs in the ass, Commander. We're going to need to stay on the move.",
+  "objetivos": [
+   "Retrieve the Transmission Data and Extract Safely"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "The location of the bunker is extremely well concealed, presumably to prevent exactly the kind of orbital strike we're planning to make. For us to locate it, you'll need to download transmission data from a logistics base in the region. That should give us a rough location. The logistics base is likely to be well defended, but if we're going to keep from alerting the Capellans to our plan, you'll need to insert with a lighter lance than you may be used to. Remember that all we need is the data; any enemy forces present are incidental."
+ },
+ "c_fp_allianceDavion_b2_fireMission": {
+  "contractName": "Davion Alliance IV",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "I'm glad they have confidence in us, but frankly I'd prefer some reinforcements on the field. Keep an eye out for Song; they should be a priority target.",
+  "objetivos": [
+   "Assault the Bunker and Designate a Target for the Fire Mission"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "The transmission data was enough for us to locate the fortified bunker that the regional Capellan command is hiding in. They think they're safe in there, but we've got a naval PPC on station ready to punch a hole in anything they've built down there. You'll need to move your 'Mechs into position so that we can make a precise attack; once we take this shot, our DropShip is going to have to break orbit and run, so there's only one chance to get this right. We have complete confidence in you, Commander; your judgment has been spot-on so far. Good luck."
+ },
+ "c_fp_allianceKurita_1_ambushConvoy": {
+  "contractName": "Kurita Alliance",
+  "contractType": "AmbushConvoy",
+  "longDescription": "I refuse to believe it's going to be that easy, Commander. Keep your eyes peeled; this seems too simple.",
+  "objetivos": [
+   "Destroy the Convoy and Extract to Safety",
+   "Destroy the Convoy Guards."
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "The ISF believes that Nephrite has already made planetfall and is tracking a FedSuns convoy moving out from the landing site. It's probable that the target is in the convoy; if we strike now, we should be able to end this little insurrection before it even begins. Engage the vehicles and destroy them all. Then, our people will sort through the remains and see if we hit our target. If we're lucky, we'll be done with this in time for dinner."
+ },
+ "c_fp_allianceKurita_2_assassinate": {
+  "contractName": "Kurita Alliance II",
+  "contractType": "Assassinate",
+  "longDescription": "I'm not sure I necessarily follow the ISF's logic here, Commander, but we're being paid to shoot the people they tell us to shoot.",
+  "objetivos": [
+   "Destroy the Rasalhague Terrorist and Escape"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "We have a new report from the ISF, Commander. They've located a heavily armed lance of 'Mechs in the badlands of this cold and unpleasant planet. They're way outside the usual FedSuns patrol routes, which leads my staff to suspect this is our target, moving with a significant escort to whatever their meeting place is. If they go to ground, it's going to be extremely challenging to dig them back out, so let's avoid that eventuality by intercepting this lance immediately and turning them all into smoking craters."
+ },
+ "c_fp_allianceKurita_a1_captureBase": {
+  "contractName": "Kurita Alliance III",
+  "contractType": "CaptureBase",
+  "longDescription": "Capturing this base is going to be tough, Commander. We'll be outnumbered and possibly outgunned. I hope it's worth it.",
+  "objetivos": [
+   "Capture the Davion Facility."
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "I still believe this approach is a mistake, Commander, but I'll continue to defer to your judgment. For both our sakes, let's hope you're right and that capturing this base will be a better long-term plan than simply obliterating it. The ISF reports that the facility is defended by both Davion 'Mechs and turrets, which strongly suggests there's something there worth protecting. You'll need to eliminate any hostile forces before my people can move in and sweep the base for our target."
+ },
+ "c_fp_allianceKurita_a2_fireMission": {
+  "contractName": "Kurita Alliance IV",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Well, this is certainly one way to solve the problem. Luckily, we're not paid to weigh in on whether it's a <i>smart</i> way to solve it.",
+  "objetivos": [
+   "Secure the Facility and Designate the Fire Mission's Target"
+  ],
+  "salvagePotential": 32,
+  "shortDescription": "Frankly, Commander, I'm surprised you're not as frustrated and exhausted by this situation as I am; after all, you've had to be the boots on the ground, so to speak, of this entire farce. I've decided to forestall any possible future problems by literally bringing the big guns to bear on the situation. I have a military DropShip, the <i>Fujin</i>, waiting on station, and you're going to provide it with targeting information. Nephrite is in a fortified bunker, meeting right this moment with representatives from both Davion and Steiner. I'm tired of chasing them. Let's obliterate them instead."
+ },
+ "c_fp_allianceKurita_b1_destroyBase": {
+  "contractName": "Kurita Alliance III",
+  "contractType": "DestroyBase",
+  "longDescription": "This whole mission makes my skin crawl, Commander. We're attacking a civilian facility on the say-so of the Kurita spy network. Just… just keep your eyes open, okay?",
+  "objetivos": [
+   "Destroy the Enemy Facility and Extract Safely"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "I'm pleased we could agree that the direct approach is likely to be the most effective. The facility that the ISF believes Nephrite is hiding in is in a god-awful frozen wasteland. It shouldn't be too heavily defended, but there will probably be turrets. Remember that we need that facility <i>flattened</i>. Once the place is nothing but rubble, my people will search the ruins for our Rasalhague friend and confirm the kill. And then we can all go home, and honestly, I cannot wait. This place is wretched."
+ },
+ "c_fp_allianceKurita_b2_fireMission": {
+  "contractName": "Kurita Alliance IV",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Well, this is certainly one way to solve the problem. Luckily, we're not paid to weigh in on whether it's a <i>smart</i> way to solve it.",
+  "objetivos": [
+   "Secure the Facility and Designate the Fire Mission's Target"
+  ],
+  "salvagePotential": 32,
+  "shortDescription": "Frankly, Commander, I'm surprised you're not as frustrated and exhausted by this situation as I am; after all, you've had to be the boots on the ground, so to speak, of this entire farce. I've decided to forestall any possible future problems by literally bringing the big guns to bear on the situation. I have a military DropShip, the <i>Fujin</i>, waiting on station, and you're going to provide it with targeting information. Nephrite is in a fortified bunker, meeting right this moment with representatives from both Davion and Steiner. I'm tired of chasing them. Let's obliterate them instead."
+ },
+ "c_fp_allianceLiao_1_simpleBattle": {
+  "contractName": "Liao Alliance",
+  "contractType": "SimpleBattle",
+  "longDescription": "This seems straightforward, Commander, though getting into a shooting fight with the FedSuns doesn't sound like my idea of a good time.",
+  "objetivos": [
+   "Destroy the Davion Lances"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "The situation planetside is deteriorating rapidly. Two Federated Suns lances are closing rapidly on our team's location, and without immediate intervention the operation will fail. I need you to intercept those 'Mechs and disable them before moving on to the facility where our covert team is hiding. You may handle this situation as you see fit; I have every confidence in you and your people, Commander."
+ },
+ "c_fp_allianceLiao_2_captureBase": {
+  "contractName": "Liao Alliance II",
+  "contractType": "CaptureBase",
+  "longDescription": "I wouldn't count on the defenses being particularly weak, Commander. Like the lady said, this is a border world, so everything's going to be bristling with guns and 'Mechs.",
+  "objetivos": [
+   "Capture the Davion Facility"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "I wish I could offer you more time to rearm and reequip, Commander, but I'm not sure how much longer the Maskirovka team can hold out. It's only a matter of time before someone looks into the hangar where my people are hiding and the shooting starts. We need to take that facility before the Davion forces realize they have unwelcome guests. Thankfully they don't seem to have gone on higher alert, so the base should be relatively undefended, at least as far as any facility on the Federated Suns border can be undefended."
+ },
+ "c_fp_allianceLiao_a1_defendBase": {
+  "contractName": "Liao Alliance III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "I know this was your call, Commander, but frankly I'd prefer to just torch their \"materials\" and leave. This is vile.",
+  "objetivos": [
+   "Defend Facility"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "My Maskirovka liaison wishes me to convey her thanks, Commander. We recognize that this is making your job more difficult, but the Confederation has significant plans, currently in progress, that your help in this matter will facilitate. That said, we've received word that several Davion lances are en route to the facility to retake it. I need you to hold that facility, Commander. Loading the <i>materials</i> aboard the transport vehicles will take time, and until it's complete, we cannot move our people."
+ },
+ "c_fp_allianceLiao_a2_captureEscort": {
+  "contractName": "Liao Alliance IV",
+  "contractType": "CaptureEscort",
+  "longDescription": "Davion's got to know what's on those vehicles by now. If it were me, I'd be trying to torch them at this point, too.",
+  "objetivos": [
+   "Capture the Convoy Rally Point, Escort the Convoy to Safety, and Extract"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "Our convoy is making good progress, Commander, but there's a small problem. My people are reporting the way forward is thick with Federated Suns forces, and the moment they spot the convoy, they'll converge on it, and that will be the end of our operation. I need you to deploy a lance to clear the way to the extraction zone, and keep it clear while our Leopard comes in for the pickup. The LZ is likely to be extremely hot, Commander, and the enemy will be targeting the vehicles. You need to keep them alive and get them onto that DropShip."
+ },
+ "c_fp_allianceLiao_b1_simpleBattle": {
+  "contractName": "Liao Alliance III",
+  "contractType": "SimpleBattle",
+  "longDescription": "The FedSuns are going to assume we're still back at the base getting things loaded up and ready to go, Commander. Let's give them a surprise.",
+  "objetivos": [
+   "Destroy the Davion Lances"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "Before the Maskirovka team can transport the scientists to the extraction point, we need to deal with the Davion forces that are closing on our position. We've located two lances of 'Mechs that are inbound, and I need you to intercept them before they get here. Once they're dealt with, we can start moving the team, and the scientists, to the extraction point. And Commander… I apologize for my curt tone earlier. I didn't brief you fully, and that was unprofessional of me."
+ },
+ "c_fp_allianceLiao_b2_captureEscort": {
+  "contractName": "Liao Alliance IV",
+  "contractType": "CaptureEscort",
+  "longDescription": "Davion has no way of knowing we abandoned the stasis tubes. If it were me, I'd be doing everything I could to torch the convoy, too.",
+  "objetivos": [
+   "Capture the Convoy Rally Point, Escort the Convoy to Safety, and Extract"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "Our convoy is making good progress, Commander, but there's a small problem. My people are reporting the way forward is thick with Federated Suns forces, and the moment they spot the convoy, they'll converge on it, and that will be the end of our operation. I need you to deploy a lance to clear the way to the extraction zone, and keep it clear while our Leopard comes in for the pickup. The LZ is likely to be extremely hot, Commander, and the enemy will be targeting the vehicles. You need to keep them alive and get them onto that DropShip."
+ },
+ "c_fp_allianceMarik_1_destroyBase": {
+  "contractName": "Marik Alliance",
+  "contractType": "DestroyBase",
+  "longDescription": "We're assaulting a fortified base with an underweight lance, Commander. Sort of feels like old times, doesn't it?",
+  "objetivos": [
+   "Destroy the Liao Facility and Extract Safely"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "The communications facility has not been alerted to our presence, as we'd hoped, Commander. That means we will be able to land your team unnoticed and disable the facility. The defenses will be light; it has one lance as a garrison and one lance as a patrol element, plus fixed gun emplacements. However, I'd still recommend caution, given the limited force strength we were able to drop and still remain covert. As mentioned, the covert approach means we have limited intel about the base itself, so you'll be operating somewhat blind at first."
+ },
+ "c_fp_allianceMarik_2_ambushConvoy": {
+  "contractName": "Marik Alliance II",
+  "contractType": "AmbushConvoy",
+  "longDescription": "The only real danger I see here, Commander, is if they manage to slip someone past us who can call for help. The vehicles will do what vehicles always do in fights with 'Mechs: they'll die.",
+  "objetivos": [
+   "Destroy the Convoy and Extract Safely",
+   "Destroy the Convoy Guards."
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "The vehicles seem to be a standard supply convoy, with an escorting lance. It was simple bad luck that they happened to be scheduled to arrive just after we neutralized the base. We need to eliminate them before they arrive here and see League salvage and intel teams all over their facility. I wouldn't expect more than a single lance as an escort, but it's possible the vehicles themselves may pose a significant threat, given the restrictions a covert operation places on your drop tonnage."
+ },
+ "c_fp_allianceMarik_a1_rescue": {
+  "contractName": "Marik Alliance III",
+  "contractType": "Rescue",
+  "longDescription": "Should be a simple pickup job, Commander, but remember that we're going in light, which means the pickup 'Mech is going to be more vulnerable than usual.",
+  "objetivos": [
+   "Retrieve the Operative and Extract Safely"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "Our operative, Jawad, is in deep cover at the naval logistics base on this tiny island, Commander. Once you arrive at the facility, he'll break cover and board your unit in the rumble seat. Then you just need to get him and the data he carries out of the facility. We'll have the Leopard on standby to pick you up. Because you're going in quiet, the facility shouldn't be alerted to our insertion, and the opposition should be light."
+ },
+ "c_fp_allianceMarik_a2_fireMission": {
+  "contractName": "Marik Alliance IV",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "All this covert action has my nerves wound tight. I'm glad we're finally getting to flex our muscles a bit.",
+  "objetivos": [
+   "Set Targeting Beacons for Data Transfer"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "We're approaching the joint research base, Commander. Once you're in the AO, you'll need to move up to the base and set beacons to triangulate around it so that our covert DropShip, the <i>Airavata</i>, can transmit the authentication code and download the research data. We have a limited window of opportunity before the Liao ships in orbit detect our presence and come to investigate, so you'll be operating under a relatively tight timeline. So far, we've managed to keep things quiet, so while I expect significant opposition, you should be able to handle it."
+ },
+ "c_fp_allianceMarik_b1_rescue": {
+  "contractName": "Marik Alliance III",
+  "contractType": "Rescue",
+  "longDescription": "I doubt they'll have been able to get more than a single backup lance over to this remote island in the time they'll have before we show up, guns blazing.",
+  "objetivos": [
+   "Retrieve the Operative and Extract Safely"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "Our operative, Jawad, is in deep cover at the naval logistics base on this tiny island, Commander. Once you arrive at the facility, he'll break cover and board your unit in the rumble seat. Then you just need to get him and the data he carries out of the facility. We'll have the Leopard on standby to pick you up. We're going in loud, Commander, which means the facility is going to know you're coming. Be prepared for heavy resistance."
+ },
+ "c_fp_allianceMarik_b2_fireMission": {
+  "contractName": "Marik Alliance IV",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "If they're expecting us, Commander, there's no telling how many units are going to be down there. This is going to get messy.",
+  "objetivos": [
+   "Set Targeting Beacons for Data Transfer"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "We're approaching the joint research base, Commander. Once you're in the AO, you'll need to move up to the base and set beacons to triangulate around it so that our covert DropShip, the <i>Airavata</i>, can transmit the authentication code and download the research data. We have a limited window of opportunity before the Liao ships in orbit detect our presence and come to investigate, so you'll be operating under a relatively tight timeline. Be aware that my people picked up a very large spike in comms chatter right after our previous mission, so they're expecting you."
+ },
+ "c_fp_allianceSteiner_1_assassinate": {
+  "contractName": "Steiner Alliance",
+  "contractType": "Assassinate",
+  "longDescription": "They want us to take on a 20-year veteran of the Succession Wars with an underweight lance. This is going to hurt, Commander.",
+  "objetivos": [
+   "Destroy the Force Commander and Escape"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "The [[DM.BaseDescriptionDefs[LoreMarikFWLM],FWLM]] Force Commander is currently traveling between installations on an inspection tour. He is heavily guarded, with two escorting lances of 'Mechs piloted by veterans who have served with him for years. However, this is still the best opportunity we'll have to strike at the League's command structure in Claybrooke."
+ },
+ "c_fp_allianceSteiner_2_destroyBase": {
+  "contractName": "Steiner Alliance II",
+  "contractType": "DestroyBase",
+  "longDescription": "This is bizarre, Commander. We just finished a covert drop to avoid drawing attention, and now we're going to blow up a <i>military base</i>?",
+  "objetivos": [
+   "Destroy the Enemy Structures and Extract Safely"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "I've received word from Margrave General Neil; our success was well received within Cavanaugh Theater Command. Margrave Neil has passed on the results of their stragetic planning session, and we've been asked to strike one of the local military installations. The goal is to completely neutralize the facility, to send a message to local forces that they are vulnerable."
+ },
+ "c_fp_allianceSteiner_a1_fireMission": {
+  "contractName": "Steiner Alliance III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Move quickly… with assault-class 'Mechs. Commander, this is absurd. I hope they're paying well.",
+  "objetivos": [
+   "Attack the Installation and Place Beacons for a Fire Mission"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "I approve of your choice of 'Mechs for this mission, Commander. This ought to be just the show of force that Margrave Joss was hoping for. Also, I have additional support to provide, thanks to Kommandant General Plath; you'll need to clear the antiair defenses before the support lance can land, though. Remember: <i>Gungnir</i>, our DropShip, can remain on station to fire at the planet only for a limited time. Move quickly, Commander."
+ },
+ "c_fp_allianceSteiner_a2_ambushConvoy": {
+  "contractName": "Steiner Alliance IV",
+  "contractType": "AmbushConvoy",
+  "longDescription": "I really don't like going in with this little information, Commander. This seems very rushed and poorly prepared.",
+  "objetivos": [
+   "Destroy the Convoy and Extract Safely",
+   "Destroy the Convoy Guards"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "Our strike on the military facility has presented an opportunity, Commander. The military ruler of Claybrooke, Lieutenant Colonel Chestine, is fleeing the capital for an undisclosed secure location, presumably to avoid being targeted by another strike. If we move quickly, we should be able to catch her while she's still in transit, and eliminate her. This mission was requested personally by Duchess Iris Steiner, the Margrave of Cavanaugh Theater, so it is absolutely critical that we succeed."
+ },
+ "c_fp_allianceSteiner_b1_fireMission": {
+  "contractName": "Steiner Alliance III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "I don't know what kind of show of force they were expecting aside from \"Boom, your base is gone,\" Commander.",
+  "objetivos": [
+   "Attack the Installation and Place the Beacons for a Fire Mission"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "I still believe that this mission would be more effective if you had chosen to bring heavier 'Mechs, but the orbital strike should still be the show of force that Margrave Joss was hoping for. Also, I have additional support to provide, thanks to Kommandant General Plath; you'll need to clear the antiair defenses before the support lance can land, though. Remember: <i>Gungnir</i>, our DropShip, can remain on station to fire at the planet only for a limited time. Move quickly, Commander."
+ },
+ "c_fp_allianceSteiner_b2_captureEscort": {
+  "contractName": "Steiner Alliance IV",
+  "contractType": "CaptureEscort",
+  "longDescription": "I really don't like going in with this little information, Commander. This seems very rushed and poorly prepared.",
+  "objetivos": [
+   "Capture the Convoy Rally Point, Escort the Convoy to Safety, and Extract"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "Our strike on the military facility has presented an opportunity, Commander. The military ruler of Claybrooke, Lieutenant Colonel Chestine, is fleeing the capital for an undisclosed secure location, presumably to avoid being targeted by another strike. If we move quickly, we should be able to intercept her convoy and take her captive. This mission was requested personally by Duchess Iris Steiner, the Margrave of Cavanaugh Theater, so it is absolutely critical that we succeed."
+ },
+ "c_fp_extraActivities_1_captureBase": {
+  "contractName": "Extracurricular Activities",
+  "contractType": "CaptureBase",
+  "longDescription": "You heard the man, {COMMANDER.FirstName}. This deployment is just setup for a larger fight to come, so try not to get too beat up out there.",
+  "objetivos": [
+   "Capture the Munitions Factory"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "You'll find the Davion munitions factory at the coordinates I've outlined, Commander {COMMANDER.LastName}. Take it from them, that it may serve as the bait for the trap that I'm paying you to set."
+ },
+ "c_fp_extraActivities_a1_defendBase": {
+  "contractName": "Extracurricular Activities II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "You heard the man. Hold the base and take out all comers.",
+  "objetivos": [
+   "Defend the Munitions Factory"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "Lord Jesper and his lance are on their way to challenge you. Hold the factory and send him home in his ejection pod, defeated and ashamed! Leave his precious ancestral BattleMech a smoldering ruin!"
+ },
+ "c_fp_extraActivities_b1_captureEscort": {
+  "contractName": "Extracurricular Activities II",
+  "contractType": "CaptureEscort",
+  "longDescription": "Let's knock this out quickly, {COMMANDER.FirstName}. I don't want to try Graf Stieglitz-Bradford's patience any more than we have to.",
+  "objetivos": [
+   "Escort the Refugees to Safety and Escape"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "We'd be dead without your assistance, Commander. Full stop. There are at least a dozen different bandit gangs operating on the outskirts of our territory, and any one of 'em would jump at the chance to gun us down. So… thanks for doing what's decent. From all of us."
+ },
+ "c_fp_extraActivities_b2_defendBase": {
+  "contractName": "Extracurricular Activities III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "You heard the man. Hold the base and take out all comers.",
+  "objetivos": [
+   "Defend the Munitions Factory"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "Now that your humanitarian responsibilities have been seen to, perhaps you'll be good enough to focus your attention on your <i>real</i> job? Lord Jesper and his lance are on their way to challenge you. Hold the factory and send him home in his ejection pod, defeated and ashamed! Leave his precious ancestral BattleMech a smoldering ruin!"
+ },
+ "c_fp_flattenedEarth_1_assassinate": {
+  "contractName": "Operation: Flattened Earth",
+  "contractType": "Assassinate",
+  "longDescription": "Let's do this thing quickly, {COMMANDER.FirstName}. I don't want us spending any more time on these jokers than we have to.",
+  "objetivos": [
+   "Destroy the Razorback Company Cyclops and Escape"
+  ],
+  "salvagePotential": 8,
+  "shortDescription": "Before you can rid us of the Volkovites, you're going to have to deal with Razorback Company, the hired guns they imported from the Frontier. Our surveillance drones have identified the company's command-and-control 'Mech, a CP-10-Z Cyclops. Eliminate it to cripple Razorback Company and clear a path to your real target."
+ },
+ "c_fp_flattenedEarth_a1_simpleBattle": {
+  "contractName": "Operation: Flattened Earth II",
+  "contractType": "SimpleBattle",
+  "longDescription": "Tough luck for Razorback Company, but they knew what they were getting themselves into when they took sides against House Liao.",
+  "objetivos": [
+   "Destroy Razorback Company's BattleMechs"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "My contacts in the Maskirovka tell me that you rejected Commander Elliathy's offer. A wise decision, Commander. Bring down the remainder of Razorback Company, and nothing will stand between you and the seditionist camp."
+ },
+ "c_fp_flattenedEarth_a2_destroyBase": {
+  "contractName": "Operation: Flattened Earth III",
+  "contractType": "DestroyBase",
+  "longDescription": "The sooner we can finish this, the better. Let's just… get it done.",
+  "objetivos": [
+   "Destroy the Volkovite Sanctuary and Escape"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "The remaining Volkovites have holed up in a sanctuary you'll find in this valley. Destroy it, and eliminate whatever resistance they can bring to bear. The eyes of the Chancellor are on you, Commander. Don't disappoint him."
+ },
+ "c_fp_flattenedEarth_b1_simpleBattle": {
+  "contractName": "Operation: Flattened Earth II",
+  "contractType": "SimpleBattle",
+  "longDescription": "No good deed goes unpunished, {COMMANDER.FirstName}. Not ever.",
+  "objetivos": [
+   "Eliminate the Liao Units"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "Good on you for being on the right side of this conflict, {COMMANDER.Callsign}… I know it couldn't have been an easy decision. And speaking of difficult matters, you're about to have a fight on your hands. House Liao has sent a detachment of 'Mechs to finish your job for you, and unfortunately, Razorback Company is no position to deal with 'em."
+ },
+ "c_fp_flattenedEarth_b2_captureEscort": {
+  "contractName": "Operation: Flattened Earth III",
+  "contractType": "CaptureEscort",
+  "longDescription": "This is turning into one hell of a long haul, but the sooner we get these people out of Capellan space, the sooner we can collect our pay.",
+  "objetivos": [
+   "Escort the Volkovite Convoy to Safety and Escape"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "The last of the Volkovites have packed themselves onto a series of transport vehicles, and they're ready to roll. We've lined up a DropShip to take them to Joppa, but you're gonna have to get 'em there. We're nearly through this situation, Commander… just a little bit further to go."
+ },
+ "c_fp_gladiator_1_simpleBattle": {
+  "contractName": "The Steel Beast",
+  "contractType": "SimpleBattle",
+  "longDescription": "I've got nothing to add, {COMMANDER.FirstName}. Let's go beat up some violent drunks.",
+  "objetivos": [
+   "Destroy the Steel Beast's Retinue"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "If we are to draw the Steel Beast into a fight, we must first provoke him. The wholesale slaughter of his revolting followers seems like a reasonable first step. I'll point you in the right direction, you'll bring the firepower, and we'll scour this world of Bogdan Tubbs's fan club. Then we'll move on to a more high-profile target."
+ },
+ "c_fp_gladiator_2_captureBase": {
+  "contractName": "The Steel Beast II",
+  "contractType": "CaptureBase",
+  "longDescription": "You heard the man. Let's get this job done.",
+  "objetivos": [
+   "Capture the Holo-Distribution Facility"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Ironwood Productions' Holo-distribution facility is just ahead of you, Commander. Take it, and we will use it to ensure that the Steel Beast hears your challenge."
+ },
+ "c_fp_gladiator_a1_simpleBattle": {
+  "contractName": "The Steel Beast III",
+  "contractType": "SimpleBattle",
+  "longDescription": "Keep your eyes open down there, {COMMANDER.FirstName}. We're going in with a single MechWarrior, and I don't trust this joker to stick to his end of the deal.",
+  "objetivos": [
+   "Eliminate the Steel Beast"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "This is it, Commander. Your one-on-one contest with the Steel Beast. Give him the justice he so richly deserves!"
+ },
+ "c_fp_gladiator_b1_simpleBattle": {
+  "contractName": "The Steel Beast III",
+  "contractType": "SimpleBattle",
+  "longDescription": "I'm willing to bet that Bogdan Tubbs is bringing friends to this drop, same as we are. Just a feeling I get. So, yeah… keep your eyes open.",
+  "objetivos": [
+   "Eliminate the Steel Beast"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "This is it, Commander. Your lance versus the Steel Beast, and whatever reinforcements he dares to call. Give him the justice he so richly deserves!"
+ },
+ "c_fp_greed_1_assassinate": {
+  "contractName": "Criminal Minds",
+  "contractType": "Assassinate",
+  "longDescription": "Seems straightforward enough, {COMMANDER.FirstName}. Get in there and make it happen.",
+  "objetivos": [
+   "Eliminate the Iron Sparrow's Courier"
+  ],
+  "salvagePotential": 8,
+  "shortDescription": "Commander, find and eliminate the Iron Sparrow's courier and his bodyguard. I want Shivraj dead and whatever intelligence he's carrying in my hands."
+ },
+ "c_fp_greed_2_captureBase": {
+  "contractName": "Criminal Minds II",
+  "contractType": "CaptureBase",
+  "longDescription": "According to Subcommander Tianyu, the warehouse should be full of mining equipment… generators, churn drills, that sort of thing. Nothing we'd be interested in, but worth a lot to the right people.",
+  "objetivos": [
+   "Capture the Iron Sparrow's Warehouse"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "The intel you got from the Iron Sparrow's courier points here, to the warehouse you'll find just ahead. Take it for House Liao until the Liao Reserves arrive to relieve you."
+ },
+ "c_fp_greed_a1_defendBase": {
+  "contractName": "Criminal Minds III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Unpleasant as Subcommander Tianyu may be, he's getting his vault, SLDF Griffin and all. Our reputation with House Liao is worth more than a single 'Mech.",
+  "objetivos": [
+   "Defend the Warehouse"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "The Iron Sparrow has dispatched all of his remaining units to attack the vault's northmost entrance, Commander. Hold them off until the Liao Reserves arrive to relieve you."
+ },
+ "c_fp_greed_b1_defendBase": {
+  "contractName": "Criminal Minds III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Subcommander Tianyu isn't going to let us keep what's in this vault without a fight, and it'll take time for Yang's crew to gather up all the pieces of that SLDF 'Mech. Now that we're committed to doing this, let's do it right.",
+  "objetivos": [
+   "Defend the Iron Sparrow's Warehouse"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "I know what your man has done. Lady Marina may be fool enough to trust in mercenaries, but I've had agents watching you from the start—and now I find my suspicions <i>confirmed</i>. Prepare yourself to face the full wrath of the Liao Reserves, <i>Commander</i>—I will claim the contents of that vault you so covet, and then I will <i>bury you</i> in it."
+ },
+ "c_fp_headhunting_1_battle": {
+  "contractName": "Headhunting",
+  "contractType": "SimpleBattle",
+  "longDescription": "Let's make some noise, {COMMANDER.Callsign}. Do as much damage as you can. When the Zhao siblings scatter, we'll choose our target and finish this.",
+  "objetivos": [
+   "Eliminate the Flak Jackal Lance"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "Descend on the Flak Jackals and punch a hole in their lines. Make them pay for the Federation citizens they've killed, Commander—it is imperative that this pirate filth learn the cost of crossing the Federated Suns."
+ },
+ "c_fp_headhunting_a1_assassinate": {
+  "contractName": "Headhunting II",
+  "contractType": "Assassinate",
+  "longDescription": "Remember, Orchid is a brawler—she likes to get in close, and her 'Mech is equipped to facilitate that. I'd suggest that you engage her from range if possible.",
+  "objetivos": [
+   "Defeat Orchid Zhao and Escape"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "Hunt down and eliminate Orchid \"Thresher\" Zhao, one of the two leaders of the Flak Jackals. Be advised that her personal BattleMech is equipped with LosTech weaponry and equipment."
+ },
+ "c_fp_headhunting_b1_assassinate": {
+  "contractName": "Headhunting II",
+  "contractType": "Assassinate",
+  "longDescription": "Remember, Dominik is a sniper—he likes to sit back and punch holes in things at range, and his 'Mech is equipped to facilitate that. I'd suggest closing into knife-fight range if possible.",
+  "objetivos": [
+   "Defeat Dominik \"Whistler\" Zhao and Escape"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "Hunt down and eliminate Dominik \"Whistler\" Zhao, one of the two leaders of the Flak Jackals. Be advised that his personal BattleMech is equipped with LosTech weaponry and equipment."
+ },
+ "c_fp_justinAllard_1_destroyBase": {
+  "contractName": "Bourbon & BattleMechs",
+  "contractType": "DestroyBase",
+  "longDescription": "Well, this should be fun.",
+  "objetivos": [
+   "Destroy the Stratford Narwhal"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "The Stratford Narwhal is one of Garrilac's favorite watering holes. It's also a cesspool of vice, corruption, and terrible music. Taking it out may prove more difficult than you'd think; the bar was built in the husk of an old military complex, and its MechWarrior patrons will probably attack you on sight."
+ },
+ "c_fp_justinAllard_a1_battle": {
+  "contractName": "Bourbon & BattleMechs II",
+  "contractType": "SimpleBattle",
+  "longDescription": "Garrilac may seem like kind of a joke, but you shouldn't underestimate Mason's Marauders. I've heard stories about their effectiveness on the field.",
+  "objetivos": [
+   "Defeat Mason's Marauders"
+  ],
+  "salvagePotential": 8,
+  "shortDescription": "Garrilac's lance is on the ground and waiting for you. Destroy them."
+ },
+ "c_fp_longHunt_1_destroyBase": {
+  "contractName": "The Long Hunt",
+  "contractType": "DestroyBase",
+  "longDescription": "You heard what Lees did on Shaul Khala. The galaxy will be a better place without a man like him in it.",
+  "objetivos": [
+   "Destroy Colonel Lees's Stronghold"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "My agents have traced Colonel Basil Lees to a stronghold in the basin ahead. I want you to raze it to the ground, and destroy anything that attempts to protect it. Show this Davion animal what the Draconis Combine does to those who would slaughter its people."
+ },
+ "c_fp_longHunt_a1_simpleBattle": {
+  "contractName": "The Long Hunt II",
+  "contractType": "SimpleBattle",
+  "longDescription": "This is our best shot at finding a way out of here, Commander. Let's get it done.",
+  "objetivos": [
+   "Eliminate the Davion Hostiles"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "The sensor array that you'll need to capture to escape this system is further ahead, but there are Davion 'Mechs between you and the facility. Kill them before they kill you."
+ },
+ "c_fp_longHunt_a2_captureBase": {
+  "contractName": "The Long Hunt III",
+  "contractType": "CaptureBase",
+  "longDescription": "This has been a hell of a slog, but we're almost through it. Keep moving, Commander. Get our people home.",
+  "objetivos": [
+   "Capture the Sensor Array"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "The Davion sensor array you'll need to capture is just ahead, Commander. Take it, and Ms. Meyer will have what she needs to neutralize Lees's threat to the <i>Argo</i>."
+ },
+ "c_fp_longHunt_b1_simpleBattle": {
+  "contractName": "The Long Hunt II",
+  "contractType": "SimpleBattle",
+  "longDescription": "This is a bit of a Catch-22 situation, Commander… we can't afford to leave these jokers standing, but I'll bet you anything that Lees sent them here to soften us up before our attack on the base.",
+  "objetivos": [
+   "Eliminate the Davion Hostiles"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "My people on the ground have picked up a lance of Davion BattleMechs on their sensors, Commander. If you move on Lees without dealing with them, they'll be in position to outflank you."
+ },
+ "c_fp_longHunt_b2_captureBase": {
+  "contractName": "The Long Hunt III",
+  "contractType": "CaptureBase",
+  "longDescription": "This has been a hell of a slog, but we're almost through it. Keep moving, Commander. Get our people home.",
+  "objetivos": [
+   "Capture the Sensor Array"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "The Davion sensor array you'll need to capture is just ahead, Commander. Take it, and Ms. Meyer will have what she needs to neutralize Lees's threat to the <i>Argo</i>."
+ },
+ "c_fp_longHunt_c1_rescue": {
+  "contractName": "The Long Hunt IV",
+  "contractType": "Rescue",
+  "longDescription": "We've got Lees backed into a corner. Time to finish the job.",
+  "objetivos": [
+   "Apprehend Colonel Basil Lees"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Colonel Lees's stronghold is just ahead of you, Commander. For all his arrogant bluster, it would seem that the Butcher of Shaul Khala is a coward at heart. I've seen no sign that he intends to meet you on the field of battle. So be it; if he won't leave his fortress voluntarily, then I will have your BattleMechs remove him by force."
+ },
+ "c_fp_longRoad_a1_captureEscort": {
+  "contractName": "Joint Venture",
+  "contractType": "CaptureEscort",
+  "longDescription": "House Steiner isn't even supposed to have a presence in this system, so be careful. When the Capellans pick you up on their sensors, I imagine that all hell is gonna break loose.",
+  "objetivos": [
+   "Escort the Steiner Convoy to Its Destination"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "We have eyes on Sentry Team Alpha, Commander—they're patrolling the AO, just as I said they would be. Expect moderate-to-heavy resistance on the path to your objective. As a reminder, it is absolutely vital that this convoy reach its destination. Do not disappoint me."
+ },
+ "c_fp_longRoad_a2_defendBase": {
+  "contractName": "Joint Venture II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "This new Steiner-Davion BattleMech looks pretty damned impressive for its class. Let's hope it's enough to get us through this.",
+  "objetivos": [
+   "Defend the Fortified Mech Bay"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "House Liao's occupation force is moving on our Mech Bay in force, Commander. I know that you've had no time to refit or repair your BattleMechs, but I'm going to need your assistance all the same. In light of this, I've authorized the deployment of a Steiner asset—the very rare and precious BattleMech that you just delivered to this site—to assist you, with one of my own MechWarriors to pilot it."
+ },
+ "c_fp_longRoad_b1_captureEscort": {
+  "contractName": "Joint Venture",
+  "contractType": "CaptureEscort",
+  "longDescription": "Like the man said, we're going into this one blind, {COMMANDER.FirstName}. House Steiner isn't even supposed to have a presence in this system, so whatever we're about to walk into, we're doing it alone.",
+  "objetivos": [
+   "Escort the Steiner Convoy to Its Destination"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "We have little to no intel on what you're going to find out there, Commander. Keep your eyes open; it's absolutely vital that this convoy reach its destination."
+ },
+ "c_fp_longRoad_b2_defendBase": {
+  "contractName": "Joint Venture II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "This new Steiner-Davion BattleMech looks pretty damned impressive for its class. Let's hope it's enough to get us through this.",
+  "objetivos": [
+   "Defend the Fortified Mech Bay"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "House Liao's occupation force is moving on our Mech Bay in force, Commander. I know that you've had no time to refit or repair your BattleMechs, but I'm going to need your assistance all the same. In light of this, I've authorized the deployment of a Steiner asset—the very rare and precious BattleMech that you just delivered to this site—to assist you, with one of my own MechWarriors to pilot it."
+ },
+ "c_fp_morganKell_1_assassinate": {
+  "contractName": "The Baying of Hounds",
+  "contractType": "Assassinate",
+  "longDescription": "Remember, Viribium is an airless planet. Watch your heat levels out there.",
+  "objetivos": [
+   "Destroy the Beasts of Balawat's Modified Stalker"
+  ],
+  "salvagePotential": 8,
+  "shortDescription": "The Beasts of Balawat have units scattered all across this basin. More importantly, they've got a monster LRM boat that needs to go down before we can even try to move the convoy to a landing site. It's an assault 'Mech, Stalker-class, heavily modified for indirect fire. Destroy it and proceed to the rendezvous site."
+ },
+ "c_fp_morganKell_2_captureEscort": {
+  "contractName": "The Baying of Hounds II",
+  "contractType": "CaptureEscort",
+  "longDescription": "In theory, we've already done the heavy lifting on this one, but keep your eyes open. We still don't know why the Beasts of Balawat are chasing Kell's people.",
+  "objetivos": [
+   "Rendezvous with Tempest's Convoy and Escort It to the Evac Point"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "With the LRM Stalker down, you should be clear to rendezvous with Tempest's convoy. Escort the vehicles to the pickup point, and get them there in one piece. All other considerations are secondary."
+ },
+ "c_fp_morganKell_a1_simpleBattle": {
+  "contractName": "The Baying of Hounds III",
+  "contractType": "SimpleBattle",
+  "longDescription": "If Kell is saying that this will be tough, I'm inclined to believe him. Get your war face on, Commander. This is gonna be a hell of a drop.",
+  "objetivos": [
+   "Destroy the Beasts of Balawat"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "This will be a difficult fight, Commander. The Beasts of Balawat are former Kell Hounds; they've received some of the best training and equipment you'll find anywhere. But more than that, they've got something to prove."
+ },
+ "c_fp_morganKell_b1_captureBase": {
+  "contractName": "The Baying of Hounds III",
+  "contractType": "CaptureBase",
+  "longDescription": "This is going to be risky, but it seems like the only way to be certain that Kell's people make it home safe.",
+  "objetivos": [
+   "Capture the Beasts of Balawat's Armory"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "The Beasts of Balawat's armory is just ahead of you, Commander. Strike swiftly, take the facility, and hold it until Megan and Tempest can be extracted. The Kell Hounds and I will handle Rhee and her people. Let's do this."
+ },
+ "c_fp_scoundrel_1_captureEscort": {
+  "contractName": "The Opportunist",
+  "contractType": "CaptureEscort",
+  "longDescription": "This shouldn't be anything out of the ordinary, Commander. Let's get it done.",
+  "objetivos": [
+   "Escort the Prison Transport to the Repair Bay"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Ms. Hadley's prison transport is waiting for you on the planet's surface, Commander. You will meet with it at a designated rendezvous point, then escort it to a distant repair bay. The personnel there stand ready to hold Ms. Hadley and patch up the prison transport APCs. When they're finished, you'll be free to press on to the extraction point."
+ },
+ "c_fp_scoundrel_2_defendBase": {
+  "contractName": "The Opportunist II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Well, this just got interesting. Saddle up, {COMMANDER.FirstName}, we've got a prison to defend.",
+  "objetivos": [
+   "Defend the Fortified Repair Bay"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Our sensors indicate several large groups of incoming vehicles and BattleMechs, Commander. Whoever they are, I need you to hold them off and drive them away. Above all, they cannot be allowed to free Ms. Hadley from confinement. She belongs to us."
+ },
+ "c_fp_scoundrel_a1_target": {
+  "contractName": "The Opportunist III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "I don't trust Hadley—or Sweeney, or whatever her name really is—for a second, but she should be secure enough in the repair bay's makeshift brig. My advice? Let's go in expecting a double cross, and let's monitor Hadley's cell. At the first sign of trouble, we double back and get her to Lady Cunningham.",
+  "objetivos": [
+   "Take Over the Artillery Control Facility"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "I'm glad that you decided to listen to reason, Commander—you'd be surprised how many so-called mercenaries lack the savvy to jump on an opportunity like this when it presents itself. Now, the LosTech cache that I'm sending you after is close to our location, but there's a catch: it's sealed away in a defunct mineshaft. I've got a way in, though. Follow my instructions, and we'll all get rich."
+ },
+ "c_fp_scoundrel_b1_captureEscort": {
+  "contractName": "The Opportunist III",
+  "contractType": "CaptureEscort",
+  "longDescription": "The sooner we get these people to the rendezvous point, the sooner we can go home. Let's get a move on, {COMMANDER.FirstName}.",
+  "objetivos": [
+   "Escort the Prison Transport to Lady Cunningham's DropShip"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "I've received the coordinates for the rendezvous point from Lady Cunningham, Commander… we should be ready to roll when you are. I haven't managed to get Lady Cunningham herself on the horn—some kind of atmospheric interference is scrambling our long-range comms. But it should be pretty straightforward, all things said."
+ },
+ "c_fp_shadowOrg_1_captureBase": {
+  "contractName": "White Lies",
+  "contractType": "CaptureBase",
+  "longDescription": "This assignment is clearly important to Force Commander Singh. Let's do this job right, {COMMANDER.FirstName}.",
+  "objetivos": [
+   "Capture the Outpost"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Before we can eliminate the person responsible for attacking my family, we must identify him. His mercenary cat's-paws, Arslan's Janissaries, have a base of operations at our first drop site. You will seize the base from them. My forensics team will then scour their computers to put a name to their employer."
+ },
+ "c_fp_shadowOrg_a1_assassinate": {
+  "contractName": "White Lies II",
+  "contractType": "Assassinate",
+  "longDescription": "Nice, clean, and simple. Just the kind of job I like, and just what we'd have missed if we'd taken our shadowy friend up on his offer. You made the right call, {COMMANDER.FirstName}—now let's finish this thing.",
+  "objetivos": [
+   "Destroy the Target and Escape"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "According to the information my team pulled from the base you captured, our target—my enemy—is one Murdoch Dhawan, a small-time political extremist from Kilarney. He's here, in this basin. Destroy him and you will be well rewarded."
+ },
+ "c_fp_shadowOrg_b1_simpleBattle": {
+  "contractName": "White Lies II",
+  "contractType": "SimpleBattle",
+  "longDescription": "Looks like Force Commander Singh's forensics team bought the false intel we planted. Let's hope it leads to the payoff we were promised.",
+  "objetivos": [
+   "Destroy the Enemy Units"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "According to the information recovered by my forensics team, our target—the person responsible for my family's suffering—is Lord Parzival Gurung, the head of a minor noble house from Atreus. Lord Gurung is well connected and well defended. If we're going to capture him, first we must strike against his bodyguard."
+ },
+ "c_fp_shadowOrg_b2_captureBase": {
+  "contractName": "White Lies III",
+  "contractType": "CaptureBase",
+  "longDescription": "Singh still believes that Gurung was behind the attacks on his family. That's bad news for Gurung, but it's good for us. Let's do this thing and get paid.",
+  "objetivos": [
+   "Capture the Armory"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "With Lord Gurung's bodyguard in ruins, we are clear to advance on the armory he's taking refuge in. When the building is ours, I will deal with the man personally. He will pay for what his hirelings have done to my family."
+ },
+ "c_fp_theDefector_1_ambushConvoy": {
+  "contractName": "The Defector",
+  "contractType": "AmbushConvoy",
+  "longDescription": "This seems relatively straightforward, {COMMANDER.FirstName}. Let's get in there and get it done.",
+  "objetivos": [
+   "Ambush and Destroy Yoshito Okada's Convoy",
+   "Destroy the Liao Convoy Guards"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Your lance will be dropping directly in the path of Yoshito Okada's convoy. Smash it flat—there can be no survivors. When the defector's death has been confirmed, you will receive your reward."
+ },
+ "c_fp_theDefector_a1_ambushConvoy": {
+  "contractName": "The Defector II",
+  "contractType": "AmbushConvoy",
+  "longDescription": "\"His honor,\" my ass. Let's just get this done, {COMMANDER.FirstName}.",
+  "objetivos": [
+   "Eliminate the Defector's Convoy and Extract Safely",
+   "Destroy the Liao Convoy Guards"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "You've chosen to complete your contract, to satisfy your obligation to House Kurita. Good. On my honor, you will receive your pay when Okada is dead—and not a moment before."
+ },
+ "c_fp_theDefector_b1_captureBase": {
+  "contractName": "The Defector II",
+  "contractType": "CaptureBase",
+  "longDescription": "He sounded awfully sure of himself. Let's wipe the smile off of that smug son of a bitch's face.",
+  "objetivos": [
+   "Capture Chu-i Hironaka's Forward Base"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "You dare take up arms against the Galedon Regulars?! Your hubris will destroy you, mercenary dog—and I will personally put your broken corpse into the ground!"
+ },
+ "c_fp_unwelcomeGuests_1_fireMission": {
+  "contractName": "Unwelcome Guests",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "As we discussed, this will be a joint operation. As long as Gwydion Company doesn't drop the ball, I'm confident that we can handle our end of the job.",
+  "objetivos": [
+   "Quickly Place the Artillery Beacons"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "House Steiner has constructed a military stronghold within our territorial boundaries. We have artillery in place to destroy it, but we need you to place targeting beacons in key locations before we can pull the trigger. While you work, a mercenary lance from Gwydion Company will keep any Steiner reinforcements off your backs."
+ },
+ "c_fp_unwelcomeGuests_a1_battle": {
+  "contractName": "Unwelcome Guests II",
+  "contractType": "SimpleBattle",
+  "longDescription": "You know the drill, Commander. Get in there, take down the kill team, and rescue Gwydion Company. I'll call out targets for you as I see 'em.",
+  "objetivos": [
+   "Destroy the Steiner Kill Team"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "Carronade sends her thanks for the assist, Commander—we're doing Gwydion Company a solid that a lot of other mercenary commands wouldn't. Our friends have taken shelter in a subterranean bunker, and a Steiner kill team has them penned in. Carronade needs us to engage and destroy the Lyrans so that she and her people can escape."
+ },
+ "c_fp_unwelcomeGuests_b1_destroyBase": {
+  "contractName": "Unwelcome Guests II",
+  "contractType": "DestroyBase",
+  "longDescription": "This should be a milk run, {COMMANDER.FirstName}… Graf Stieglitz-Bradford doesn't actually care about taking down this facility; he just wants us out of the way while his kill team takes down Gwydion Company.",
+  "objetivos": [
+   "Destroy the Marik Structures and Escape"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "I'm so pleased that you've chosen to work with us, Commander. You destroyed one of our facilities at the behest of House Marik; it seems only fair that you do the same for us. Turnabout is fair play, after all. The facility will be minimally guarded, and your pay will be extremely generous."
+ },
+ "doubleAgent_1_captureBase": {
+  "contractName": "Double Agent",
+  "contractType": "CaptureBase",
+  "longDescription": "This is the contract that Lady Marina wanted us to take, Commander. It seems fairly straightforward.",
+  "objetivos": [
+   "Capture Davion Forward Base"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "The Federated Suns have constructed a forward base in the no-man's-land between their territory and ours on Flintoft's northern continent. We need you to eliminate their garrison and capture that base. We will remit payment when you've completed the job and secured the base."
+ },
+ "doubleAgent_a1_3wayBattle": {
+  "contractName": "Double Agent II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Get ready, {COMMANDER.FirstName}. This is shaping up to be an interesting day.",
+  "objetivos": [
+   "Destroy all Hostile Units"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "We've received your message, and Maskirovka agents are on their way to take possession of the facility. Be advised that our long-range sensors have detected Davion and Taurian military DropShips en route to an AO near your position. To better protect the facility, we suggest that you engage them there. We'll supply you with reinforcements of our own as soon as we can."
+ },
+ "doubleAgent_b1_3wayBattle": {
+  "contractName": "Double Agent II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Get ready, {COMMANDER.FirstName}. This is shaping up to be an interesting day.",
+  "objetivos": [
+   "Destroy all Hostile Units"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "We've received your message, and TMI agents are on their way to take possession of the facility. Be advised that our long-range sensors have detected Davion and Liao military DropShips en route to an AO near your position. To better protect the facility, we suggest that you engage them there. We'll supply you with reinforcements of our own as soon as we can."
+ },
+ "doubleAgent_c1_3wayBattle": {
+  "contractName": "Double Agent II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Get ready, {COMMANDER.FirstName}. This is shaping up to be an interesting day.",
+  "objetivos": [
+   "Destroy all Hostile Units"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "We've received your message, and MIM operatives are on their way to reclaim our wounded agent. Be advised that our long-range sensors have detected Taurian and Liao military DropShips en route to an AO near your position. To better protect our agent, we suggest that you engage them there, away from the facility. We'll supply you with reinforcements of our own as soon as we can."
+ },
+ "lastChance_1_ambushConvoy": {
+  "contractName": "A House Divided",
+  "contractType": "AmbushConvoy",
+  "longDescription": "You heard Lady Suiko. Let's put Luthendorff down, {COMMANDER.FirstName}.",
+  "objetivos": [
+   "Ambush and Eliminate Luthendorff",
+   "Destroy Luthendorff's Guards."
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "My daughter will arrive shortly at a private compound, and Luthendorff is on the way to greet her. Intercept and eliminate this criminal. But be on guard—she has bodyguards with her, although I expect you to easily outmaneuver and outsmart them."
+ },
+ "lastChance_a1_3wayBattle": {
+  "contractName": "A House Divided II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Let's see what Lady Suiko's lance of geriatric MechWarriors can do.",
+  "objetivos": [
+   "Destroy Luthendorff's Forces"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Luthendorff will not escape death again, Commander. Don't expect an easy fight. This time she'll be prepared for us. I'm picking up multiple heavy contacts on my sensors. More scrap for Luthendorff's funeral pyre."
+ },
+ "lastChance_b1_defendBase": {
+  "contractName": "A House Divided II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Well, let's see if we can hold off Lady Suiko's geriatric MechWarriors.",
+  "objetivos": [
+   "Defend Luthendorff"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Lady Suiko is inbound, and she's not alone. Her old war buddies are moving in fast-two lances of 'em. Keep in mind, we've got one goal: stop her from killing Luthendorff."
+ },
+ "prize_1_rescue": {
+  "contractName": "One Man's Trash",
+  "contractType": "Rescue",
+  "longDescription": "Well. This should be exciting.",
+  "objetivos": [
+   "Loot the Star League Stapler Factory"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "I've given your pilot a map of Men Lojowen, complete with the rough location of the Star League installation. I want you to get in there, brush aside any resistance, and loot whatever your BattleMechs can carry. You'll get your pay when my associates have the goods."
+ },
+ "prize_a1_defendBase": {
+  "contractName": "One Man's Trash II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Corbu's time-share is in a civilian housing development, not a military base. We're gonna have to hustle if we want to protect it.",
+  "objetivos": [
+   "Protect Ed Corbu's Time-Share Condominium"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "The last time I checked, Binton and Modge had a bunch of combat vehicles in the streets around my time-share. Maybe a light 'Mech or two, I can't say for sure. Get 'em off my back, and then we'll conclude our business with the antique staplers."
+ },
+ "prize_b1_3wayBattle": {
+  "contractName": "One Man's Trash II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Binton and Modge were fighting against each other on Men Lojowen. They may be allies of convenience for now, but I'll bet that'll change when they've got the \"treasure\" in their sights.",
+  "objetivos": [
+   "Destroy Enemy Units"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "I've told Binton and Modge that you're gonna drop their \"treasure\" in a field about a hundred klicks southeast of Louth Abbey. That should put you far enough away to avoid collateral damage, so feel free to go after 'em with whatever BattleMechs you like. Just be aware that there's nothing stopping them from doin' the same to you."
+ },
+ "redHunt_1_DefendBase": {
+  "contractName": "Red Hunt I",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "This seems simple enough, which makes me nervous. I don't like when we're asked to defend \"research\" without knowing what the research is.",
+  "objetivos": [
+   "Defend the Draconis Combine Research Base"
+  ],
+  "salvagePotential": 20,
+  "shortDescription": "Commander, this installation is a vital part of Combine research efforts, and we need to ensure the enemy doesn't destroy it. We believe the opposing forces are a mercenary unit hired by our erstwhile allies in the Free Worlds League, and their intent is to disrupt the important work being done here. Your job will be to hold them off until they exhaust themselves, at which point we'll launch our own counterattack."
+ },
+ "redHunt_2_ThreeWayBattle": {
+  "contractName": "Red Hunt II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "The only way we get off this planet and find out what kind of double cross the Kuritans are pulling here is to rescue Carlyle and his people.",
+  "objetivos": [
+   "Defend Grayson Carlyle's Forces"
+  ],
+  "salvagePotential": 24,
+  "shortDescription": "It looks like we're both on the Kurita shit list, Commander. This situation is bad and getting worse. My people are pinned down by fire from the DEST forces, and we can't use our Leopard to get into orbit. We've evacuated the Fire Lance, but the Command Lance is still stuck on-world—which concerns me personally, because I'm part of the Command Lance and one of the people who's stuck. I want to get to the bottom of this mess, but I'm going to need your help."
+ },
+ "redHunt_3a_DestroyBase": {
+  "contractName": "Red Hunt III",
+  "contractType": "DestroyBase",
+  "longDescription": "As long as Carlyle's people can handle their part of this operation, we shouldn't have any trouble destroying the base.",
+  "objetivos": [
+   "Destroy the Kurita Military Base"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "Commander, we're prepared to start our assault on the ComStar facility. Before we make our move, we need you to take out that military base, so that DEST can't coordinate a response. Once that base is rubble, give us the all clear. Then we'll commence our attack, break in there, and broadcast the signal to Tor."
+ },
+ "redHunt_3b_CaptureBase": {
+  "contractName": "Red Hunt III",
+  "contractType": "CaptureBase",
+  "longDescription": "As long as Carlyle's people can handle their part of this operation, we shouldn't have any trouble taking the base.",
+  "objetivos": [
+   "Capture the Outpost"
+  ],
+  "salvagePotential": 28,
+  "shortDescription": "Commander, we're starting our assault. As soon as we take out the Combine military base, the Kuritans will lose their ability to coordinate a response. That's your cue to move in and capture the ComStar facility, shut down the jamming gear DEST set up there, and get our signal broadcasting. We've got a pretty big window before Tor leaves again, so the only hurry is that our DEST friends aren't going to sit on their hands after we start shooting at them."
+ },
+ "sentinel_1_assassinate": {
+  "contractName": "Hearts and Minds",
+  "contractType": "Assassinate",
+  "longDescription": "This all sounds pretty straightforward, {COMMANDER.FirstName}. Keep your eyes open, all the same.",
+  "objetivos": [
+   "Eliminate Matis \"Bishop\" Crenshaw"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Matis \"Bishop\" Crenshaw and his retinue are en route to a meeting with Sian Triumphant, a satellite organization of the Emerald Dawn. Intercept Crenshaw's BattleMech, destroy it, and contact my DropShip to confirm the kill."
+ },
+ "sentinel_a1_destroyBase": {
+  "contractName": "Hearts and Minds II",
+  "contractType": "DestroyBase",
+  "longDescription": "Sometimes you're left with nothing but bad options. This is one of those times, but we're professionals, and it's on us to handle it.",
+  "objetivos": [
+   "Destroy the Emerald Dawn's Stronghold"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Tiesa \"Navaja\" Norkus has holed up in the Emerald Dawn's most heavily fortified stronghold, and she's using a number of civilian hostages as human shields. Unfortunately, there isn't much that we can do for those people; Lady Cunningham has made it very clear that eliminating the Emerald Dawn's leadership is imperative, and it'll be impossible for us to take out Norkus without incurring collateral damage."
+ },
+ "sentinel_b1_3wayBattle": {
+  "contractName": "Hearts and Minds II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Even if we can't cut the head off the Emerald Dawn, we should be able to inflict a lot of damage.",
+  "objetivos": [
+   "Destroy All Hostile Units"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "We may not be able to take out Tiesa Norkus, but at least we can contain her. If she wants to hide behind human shields, fine—let her hide. We'll do as much damage to the Emerald Dawn as we can, and when Lady Cunningham's DropShip touches down, she can handle the hostage negotiations."
+ },
+ "siegebreaker_1_3wayBattle": {
+  "contractName": "Siegebreaker",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "We're talking about House Steiner here. Considering the context, \"scout\" may not mean what we think it means.",
+  "objetivos": [
+   "Destroy Steiner Units"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "For your first deployment, you will rendezvous with Azura \"Cheval\" Damestroir of the Mitchel Planetary Militia. She and her lance have been scout-hunting in northern Gauthier's wealthy Museum District, and it appears that they've caught a Lyran scout. Assist her lance in defeating it, then proceed to your next rendezvous point."
+ },
+ "siegebreaker_2_3wayBattle": {
+  "contractName": "Siegebreaker II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "\"Former militia member and paroled felon.\" I think I'm getting why Cheval doesn't trust her.",
+  "objetivos": [
+   "Eliminate the Steiner Heavy Patrol"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Your next objective is in Jessup Downs, on the far side of Gauthier. Your point of contact, a former militia member and paroled felon who operates under the callsign \"Jailbird,\" has been holding the Downs with no outside support for nearly a month. She has reported signs of a heavy Steiner patrol lance moving through the area. I need you to assist her in bringing down that patrol."
+ },
+ "siegebreaker_a1_attackDefend": {
+  "contractName": "Siegebreaker III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "I'm glad we're gonna have Cheval and her lance on our side for this, but we should keep our eyes open for Jailbird. She didn't sound like she was planning on sitting this one out quietly.",
+  "objetivos": [
+   "Destroy the Ziegelhaus While Protecting Militia HQ"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Even with a portion of Dobrescu's sentries out chasing shadows in the Museum District, the Ziegelhaus will be heavily defended. You'll need to hit the structure hard, while at the same time protecting Militia HQ from an expected Steiner counterattack. Good hunting, Commander. Show Hauptmann-General Dobrescu that his excesses will not be tolerated."
+ },
+ "siegebreaker_b1_attackDefend": {
+  "contractName": "Siegebreaker III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "I'm glad that we're gonna have Jailbird and her lance on our side for this, but we should keep our eyes open for Cheval. She didn't sound like she was planning on sitting this one out quietly.",
+  "objetivos": [
+   "Destroy the Ziegelhaus While Protecting Militia HQ"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Even with a portion of Dobrescu's sentries out chasing shadows in the Museum District, the Ziegelhaus will be heavily defended. You'll need to hit the structure hard, while at the same time protecting Militia HQ from an expected Steiner counterattack. Good hunting, Commander. Show Hauptmann-General Dobrescu that his excesses will not be tolerated."
+ },
+ "siegebreaker_c1_attackDefend": {
+  "contractName": "Siegebreaker III",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "We're going it alone on this one, so we shouldn't have any infighting to worry about. That's a good thing, because we're gonna be outnumbered enough as it is.",
+  "objetivos": [
+   "Destroy the Ziegelhaus While Protecting Militia HQ"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Even with a portion of Dobrescu's sentries out chasing shadows in the Museum District, the Ziegelhaus will be heavily defended. You'll need to hit the structure hard, while at the same time protecting Militia HQ from an expected Steiner counterattack. Good hunting, Commander. Show Hauptmann-General Dobrescu that his excesses will not be tolerated."
+ },
+ "succession_1_assassinate": {
+  "contractName": "Succession",
+  "contractType": "Assassinate",
+  "longDescription": "When Lady Helen gives Yamaguchi what he wants, we get paid. Let's get to it, Commander.",
+  "objetivos": [
+   "Eliminate Commander Yuetu and Escape"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Commander Yuetu and her Red Hare Irregulars have proven an intolerable threat to my interests and to the future of House Khulan. I need you to hunt her down and destroy her BattleMech, an \"Orion,\" I believe it's called. Smash it to pieces and bring me proof of Yuetu's death, and I will lend Shugo Yamaguchi my support."
+ },
+ "succession_a1_assassinate": {
+  "contractName": "Succession II",
+  "contractType": "Assassinate",
+  "longDescription": "We promised Shugo Yamaguchi we'd do this. May as well get it over with.",
+  "objetivos": [
+   "Assassinate Lady Yvonne \"Yuetu\" Khulan"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "The vile mercenary Yuetu is on her last legs. Cut them out from under her! Safeguard my beloved son, and prevent our enemies from destroying House Khulan. If you do, I will see to Reynauld's needs, and he in turn will see to yours."
+ },
+ "succession_b1_destroyBase": {
+  "contractName": "Succession II",
+  "contractType": "DestroyBase",
+  "longDescription": "We're taking a gamble on this one, {COMMANDER.FirstName}. But given our options, it's one that I can live with.",
+  "objetivos": [
+   "Destroy Lord Angus Khulan's Stronghold"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "You'll find my brother waiting for you at the Red Roost. It looks like a commercial office park, but don't be fooled. The structure is reinforced to withstand military payloads. Engage my brother's security team and raze the Red Roost. Let his stronghold serve as his tomb!"
+ },
+ "tournament_1_3wayBattle": {
+  "contractName": "Tournament of Champions",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "An Urbie is basically a walking dustbin with a mounted AC/10. That autocannon packs a hell of a punch, but it's got only 8 shots. Keep an eye on those ammo counters, {COMMANDER.FirstName}.",
+  "objetivos": [
+   "Win the first round of the Tournament"
+  ],
+  "salvagePotential": 16,
+  "shortDescription": "Welcome to my Tournament, Commander. Here you will prove your mettle against the Periphery's fiercest champions. Today, your MechWarriors will demonstrate their worth using only the simplest of tools: the UM-R60 UrbanMech. Like a huntsman's spear, it is an instrument with a single purpose. Wield it skillfully, and ascend into triumph."
+ },
+ "tournament_a1_3wayBattle": {
+  "contractName": "Tournament of Champions II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Horvat's going to stack the odds against us, just like Agent Jones said. If we're going to do this, our MechWarriors will have to be ready.",
+  "objetivos": [
+   "Defeat Professor Horvat and Win the Tournament of Champions"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Welcome to the final round of my Tournament, Commander. Today, your two finest pilots will face off against the cream of the Frontier MechWarrior community. This will be a battle like no other, a clash between veritable <i>gods</i>. I wish your fighters luck, Commander—and I promise you, they will need it."
+ },
+ "tournament_b1_3wayBattle": {
+  "contractName": "Tournament of Champions II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "She got through that entire briefing without saying, \"The hunter will become the hunted.\" I'm pleasantly surprised.",
+  "objetivos": [
+   "Eliminate Professor Mencius Horvat"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Professor Mencius Horvat is waiting for you in the Tournament arena. He expects you to play by his rules—to let him lead a pair of your MechWarriors like lambs to the slaughter. Instead, you're going to show him the kind of firepower that your company can really bring down. Destroy him, and the MIIO will reward you accordingly."
+ },
+ "uw1_1_3wayBattle": {
+  "contractName": "Prototype",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "You heard the man. Let's go make ourselves useful.",
+  "objetivos": [
+   "Rendezvous with Bravo Lance and Clear the AO"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "For your first deployment, you will take the field alongside Ombra and the rest of Bravo Lance. Together, you will sweep the AO for hostiles, eliminating any Capellan units you find along the way. Bravo Lance has endured a great deal of punishment over the past few months and will need your help to come through this deployment in one piece."
+ },
+ "uw1_2_ambushConvoy": {
+  "contractName": "Prototype II",
+  "contractType": "AmbushConvoy",
+  "longDescription": "Let's make this strike quickly, {COMMANDER.FirstName}. Bravo Lance will be holding off the Capellans while we work, and I don't want to leave them out there any longer than I have to.",
+  "objetivos": [
+   "Destroy the Black Caldera Convoy",
+   "Destroy the Convoy Guards."
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "According to Ombra, a Black Caldera convoy has been scheduled to pass through the badlands north of New Jakobstad. Engage the convoy and destroy it. Bravo Lance will then interface with the command vehicle's black box to obtain the location of the Raven prototype, as well as the R&D facility Black Caldera has been using to reverse engineer it."
+ },
+ "uw1_3_captureBase": {
+  "contractName": "Prototype III",
+  "contractType": "CaptureBase",
+  "longDescription": "Ombra died for this, {COMMANDER.FirstName}. It's on us to make sure that her sacrifice counts for something.",
+  "objetivos": [
+   "Recover the Prototype Raven"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "According to the intel we found, Black Caldera Defense is storing their stolen Raven prototype at an old armory in southern New Jakobstad. We need to capture the base and recover the prototype. Conqueror, Viscacha, and Peregrine will be standing by to carry out the second half of the operation when we're done."
+ },
+ "uw1_4_destroyBase": {
+  "contractName": "Prototype IV",
+  "contractType": "DestroyBase",
+  "longDescription": "Handle this and we're done here, {COMMANDER.FirstName}.",
+  "objetivos": [
+   "Destroy the Black Caldera R&D Facility"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "According to the intel we found, Black Caldera's hardened R&D facility is protected by a phalanx of LRM batteries. Using the Raven's unique capabilities, you will protect Bravo Lance from these weapons while leading them to destroy the facility."
+ },
+ "yangBigScore_1_captureBase": {
+  "contractName": "Yang Virtanen's Big Score",
+  "contractType": "CaptureBase",
+  "longDescription": "Let's hope this heist works out the way Yang said that it would.",
+  "objetivos": [
+   "Capture the Hangar and Eliminate Wallo's Security Detail"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Wallo's got a mercenary company on retainer to protect his private aerospace hangar, the imaginatively named \"Security Solutions, Inc.\" I looked 'em up, and they're the real deal—they've got combat vehicles, BattleMechs, the works. But we'll have the element of surprise on our side, given that Wallo's never heard of us. That's something, right?"
+ },
+ "yangBigScore_a1_3wayBattle": {
+  "contractName": "Yang Virtanen's Big Score II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Let's protect that merchandise, {COMMANDER.FirstName}. It's what we're doing this for, after all.",
+  "objetivos": [
+   "Destroy Graves's Security Team"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Okay, Boss! We've got the hot rods, and we're on our way to the LZ. Did I mention that I still hate rumble seats? Boy, do I ever! You'd better get on the comms to guide us through this—we're moving at a solid clip, but I suspect we're being followed…"
+ },
+ "yangBigScore_b1_3wayBattle": {
+  "contractName": "Yang Virtanen's Big Score II",
+  "contractType": "INVALID_UNSET",
+  "longDescription": "Let's protect that merchandise, {COMMANDER.FirstName}. It's what we're doing this for, after all.",
+  "objetivos": [
+   "Destroy Graves's Security Team"
+  ],
+  "salvagePotential": 12,
+  "shortDescription": "Okay, Boss! We've got the monster trucks, and we're slugging our way to the LZ. Did I mention that I still hate rumble seats? Boy, do I ever! You'd better get on the comms to guide us through this; we're trudging along at a steady pace, but we're about to have company…"
+ }
+}

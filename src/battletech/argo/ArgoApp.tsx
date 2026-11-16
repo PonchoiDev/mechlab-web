@@ -401,6 +401,7 @@ export function ArgoApp() {
         <nav className="units-links" aria-label="BATTLETECH">
           <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
           <a href="/battletech/starmap/">Star map</a>
+          <a href="/battletech/flashpoints/">Flashpoints</a>
           <a href="/battletech/units/">Enemy units</a>
           <a href="/battletech/argo/" aria-current="page">Argo</a>
           <a href="/battletech/equipment/">Equipment</a>
