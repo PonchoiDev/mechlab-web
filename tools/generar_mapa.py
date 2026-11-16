@@ -23,6 +23,8 @@ RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "starmap", "logos")
 # Nombres de los pilotos hero que dan algunas misiones de campaña (de extraer_pilotos.py).
 RUTA_PILOTOS_HERO = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "pilotos", "hero.json")
 RUTA_DISPONIBILIDAD = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "availability.json")
+# El briefing de cada misión de las HRQ, por id de la HRQ: solo lo carga la página de HRQ y campañas.
+RUTA_BRIEFINGS = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "quest-briefings.json")
 
 # La partida empieza en 3015 y el último cambio de frontera del juego es de 3060. La tabla trae la
 # historia de cada sistema desde el siglo XXII hasta 3145, pero fuera de este rango el juego no la usa.
@@ -308,8 +310,11 @@ def cadenas_de_misiones(acciones, sistemas_validos, arcos=(), recompensas=None):
                     "title": accion.get("titulo") or (nombre if parte(accion.get("titulo")) == 1 else f"{nombre} Pt. {parte(accion.get('titulo'))}"),
                     "summary": accion.get("resumen") or None,
                     "system": accion["sistema"],
+                    # Sale de starmap.json en main(), a quest-briefings.json: el mapa no carga los textos. Si la
+                    # primera misión no trae briefing, vale el de la oferta, que la presenta.
+                    "briefing": accion.get("briefing") or (oferta.get("briefing") if oferta and indice == 0 else None),
                 }
-                for accion in misiones
+                for indice, accion in enumerate(misiones)
             ],
         }
         previa = cadenas.get(nombre)
@@ -933,8 +938,12 @@ def main():
     # El nombre de cada DLC, para nombrarlo junto a su número («DLC 8 · Chaos Reign»).
     nombres_dlc = {**NOMBRES_DLC_SIN_CAMPANA, **leer("nombres_campanas.json")}
     datos["dlcs"] = {dlc: como_titulo(nombre) for dlc, nombre in sorted(nombres_dlc.items(), key=lambda par: int(par[0]))}
+    briefings = {cadena["id"]: [mision.pop("briefing") for mision in cadena["missions"]] for cadena in datos["quests"]}
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"))
+        archivo.write("\n")
+    with open(RUTA_BRIEFINGS, "w", encoding="utf-8") as archivo:
+        json.dump(briefings, archivo, ensure_ascii=False, indent=1)
         archivo.write("\n")
     unit_cards = cargar_unit_cards(cargar_archivos_por_nombre(RUTA_UNIT_CARDS))
     disponibilidad = disponibilidad_de_mechs(mechs, unit_cards, facciones, leer("alianzas.json"), {heroe.lower() for heroe in leer("heroes_en_venta.json")})
