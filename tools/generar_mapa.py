@@ -44,6 +44,9 @@ NOMBRES_SIN_ASSET = {"ArcRoyalDefenseCordon": "Arc-Royal Defense Cordon"}
 SIGLAS_SIN_ASSET = {"ArcRoyalDefenseCordon": "ARDC"}
 # Siglas que la tabla no trae bien: Outreach pasa a los Dragoons con las siglas de la FedCom.
 SIGLAS_CORREGIDAS = {"WolfsDragoons": "WD"}
+# Nombre de los DLC que no tienen campaña y por eso no salen en las de extraer_mapa.py: el del DLC1 es el
+# de su página de Steam.
+NOMBRES_DLC_SIN_CAMPANA = {"1": "Heroes of the Inner Sphere"}
 
 # Nombres de los eventos, a partir de la carpeta y el asset de cada cambio de frontera.
 NOMBRES_EVENTOS = {
@@ -916,6 +919,9 @@ def main():
     }
     datos["campaigns"] = campanas(leer("campanas.json"), leer("nombres_campanas.json"), datos["rewards"], nombres_de_pilotos, mechs, items,
                                   {sistema["id"] for sistema in sistemas})
+    # El nombre de cada DLC, para nombrarlo junto a su número («DLC 8 · Chaos Reign»).
+    nombres_dlc = {**NOMBRES_DLC_SIN_CAMPANA, **leer("nombres_campanas.json")}
+    datos["dlcs"] = {dlc: como_titulo(nombre) for dlc, nombre in sorted(nombres_dlc.items(), key=lambda par: int(par[0]))}
     with open(RUTA_DESTINO, "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"))
         archivo.write("\n")
