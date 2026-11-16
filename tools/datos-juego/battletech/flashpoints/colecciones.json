@@ -198,6 +198,56 @@
   "nombre": "Rare 'Mech",
   "titulo": "Rare 'Mech"
  },
+ "itemCollection_loot_FP_headhunting_dhs": {
+  "descripcion": "This cache contains a single Star League era item.",
+  "filas": [
+   [
+    "Gear_HeatSink_Generic_Double",
+    "HeatSink",
+    4,
+    1
+   ],
+   [
+    "Weapon_Laser_MediumLaserPulse_0-STOCK",
+    "Weapon",
+    3,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot_uncommon",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "LosTech Item",
+  "titulo": "LosTech Item"
+ },
+ "itemCollection_loot_FP_headhunting_gauss": {
+  "descripcion": "This cache contains a single Star League era item.",
+  "filas": [
+   [
+    "itemCollection_table_Items_gaussandammo",
+    "Reference",
+    0,
+    1
+   ],
+   [
+    "itemCollection_table_Items_gaussandammo",
+    "Reference",
+    0,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot_uncommon",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "LosTech Item",
+  "titulo": "LosTech Item"
+ },
  "itemCollection_loot_HM5_bullShark": {
   "descripcion": "This cache contains a single rare 'Mech.",
   "filas": [
@@ -273,6 +323,25 @@
   ],
   "nombre": "Cash Prize: ¢1,000,000",
   "titulo": "Cash Prize: ¢1,000,000"
+ },
+ "itemCollection_loot_UW_tournament_b": {
+  "descripcion": "This cache contains 'Mech parts.",
+  "filas": [
+   [
+    "mechdef_urbanmech_UM-R60L",
+    "MechPart",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "'Mech Parts",
+  "titulo": "'Mech Parts"
  },
  "itemCollection_loot_UW_uw1_Raven": {
   "descripcion": "This cache contains a single rare 'Mech.",
@@ -355,6 +424,82 @@
   "filas": [
    [
     "mechdef_enforcer_ENF-4R",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_UW_yangBigScore_monster_A": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_catapult_CPLT-C4",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_UW_yangBigScore_monster_B": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_thunderbolt_TDR-5SE",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_UW_yangBigScore_monster_C": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_dragon_DRG-1N",
+    "Mech",
+    1,
+    1
+   ],
+   [
+    "itemCollection_table_AdditionalLoot",
+    "Reference",
+    0,
+    1
+   ]
+  ],
+  "nombre": "Rare 'Mech",
+  "titulo": "Rare 'Mech"
+ },
+ "itemCollection_loot_UW_yangBigScore_monster_D": {
+  "descripcion": "This cache contains a single rare 'Mech.",
+  "filas": [
+   [
+    "mechdef_kintaro_KTO-18",
     "Mech",
     1,
     1

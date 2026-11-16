@@ -90,11 +90,12 @@ def main():
             with open(ruta, encoding="utf-8-sig") as archivo:
                 colecciones[id_coleccion] = leer_coleccion(archivo.read())
     usadas = {flashpoint.get("RewardCollectionID") for flashpoint in flashpoints.values()}
-    # Yang Virtanen's Big Score deja elegir la recompensa al final: su colección es la A de una serie
-    # (itemCollection_loot_UW_yangBigScore_hotrod_A a _D). Se guardan también sus hermanas.
-    series = {id_[:-2] for id_ in usadas if id_ and id_.endswith("_A")}
+    # Además de la recompensa que declara cada flashpoint, las colecciones que llevan su nombre: Yang
+    # Virtanen's Big Score da una serie por camino (itemCollection_loot_UW_yangBigScore_hotrod_A a _D y
+    # monster_A a _D), y el flashpoint solo declara la primera.
+    nombres = [flashpoint.get("InternalName") for flashpoint in flashpoints.values() if flashpoint.get("InternalName")]
     colecciones = {id_: coleccion for id_, coleccion in colecciones.items()
-                   if id_ in usadas or (id_[:-2] in series and id_[-2] == "_")}
+                   if id_ in usadas or any(f"_{nombre}_" in id_ for nombre in nombres)}
 
     for nombre, datos in (("flashpoints", flashpoints), ("hitos", hitos), ("contratos", contratos), ("colecciones", colecciones)):
         with open(os.path.join(RUTA_DESTINO, f"{nombre}.json"), "w", encoding="utf-8") as archivo:

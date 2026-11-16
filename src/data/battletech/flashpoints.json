@@ -36,6 +36,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [],
      "funds": 900000,
      "morale": 0,
@@ -44,7 +45,8 @@
        "faction": "Capellan Confederation",
        "value": 8
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -90,6 +92,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_greed_a1_defendBase",
@@ -106,10 +109,12 @@
        "faction": "Capellan Confederation",
        "value": 8
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_greed_b1_defendBase",
@@ -130,7 +135,8 @@
        "faction": "Local pirate organization",
        "value": 20
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -176,6 +182,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_allianceDavion_a1_destroyBase",
@@ -199,10 +206,12 @@
        "faction": "Capellan Confederation",
        "value": -20
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_allianceDavion_b1_rescue",
@@ -221,7 +230,8 @@
      ],
      "funds": 0,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": null
     }
    ],
    "reward": {
@@ -260,6 +270,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_extraActivities_a1_defendBase",
@@ -276,10 +287,12 @@
        "faction": "Lyran Commonwealth",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_extraActivities_b1_captureEscort",
@@ -303,7 +316,8 @@
        "faction": "Lyran Commonwealth",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -342,6 +356,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_headhunting_a1_assassinate",
@@ -358,10 +373,12 @@
        "faction": "Federated Suns",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_headhunting_b1_assassinate",
@@ -378,7 +395,8 @@
        "faction": "Federated Suns",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -409,6 +427,7 @@
    "paths": [
     {
      "label": "A or B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_longRoad_a1_captureEscort",
@@ -432,7 +451,8 @@
        "faction": "Lyran Commonwealth",
        "value": 10
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -478,6 +498,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_allianceKurita_a1_captureBase",
@@ -501,10 +522,12 @@
        "faction": "Federated Suns",
        "value": -20
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_allianceKurita_b1_destroyBase",
@@ -528,7 +551,8 @@
        "faction": "Federated Suns",
        "value": -20
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -574,6 +598,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_allianceLiao_a1_defendBase",
@@ -597,10 +622,12 @@
        "faction": "Federated Suns",
        "value": -20
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_allianceLiao_b1_simpleBattle",
@@ -624,7 +651,8 @@
        "faction": "Federated Suns",
        "value": -20
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -670,6 +698,7 @@
    "paths": [
     {
      "label": "A or B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_allianceMarik_a1_rescue",
@@ -693,7 +722,8 @@
        "faction": "Capellan Confederation",
        "value": -20
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -732,6 +762,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_flattenedEarth_a1_simpleBattle",
@@ -755,10 +786,12 @@
        "faction": "Capellan Confederation",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_flattenedEarth_b1_simpleBattle",
@@ -782,10 +815,12 @@
        "faction": "Capellan Confederation",
        "value": -12
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B, then C",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_flattenedEarth_b1_simpleBattle",
@@ -809,7 +844,8 @@
        "faction": "Capellan Confederation",
        "value": -6
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -855,6 +891,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_allianceSteiner_a1_fireMission",
@@ -878,10 +915,12 @@
        "faction": "Free Worlds League",
        "value": -20
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_allianceSteiner_b1_fireMission",
@@ -905,7 +944,8 @@
        "faction": "Free Worlds League",
        "value": -20
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -957,6 +997,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_morganKell_a1_simpleBattle",
@@ -973,10 +1014,12 @@
        "faction": "Mercenary Review Board",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_morganKell_b1_captureBase",
@@ -993,7 +1036,8 @@
        "faction": "Mercenary Review Board",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1032,6 +1076,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_theDefector_a1_ambushConvoy",
@@ -1048,10 +1093,12 @@
        "faction": "Draconis Combine",
        "value": 10
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_theDefector_b1_captureBase",
@@ -1072,7 +1119,8 @@
        "faction": "Mercenary Review Board",
        "value": 12
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1111,6 +1159,7 @@
    "paths": [
     {
      "label": "A or B, then B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_longHunt_a1_simpleBattle",
@@ -1134,10 +1183,12 @@
        "faction": "Draconis Combine",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B, then C",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_longHunt_b1_simpleBattle",
@@ -1161,7 +1212,8 @@
        "faction": "Draconis Combine",
        "value": 12
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1207,6 +1259,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_scoundrel_a1_target",
@@ -1223,10 +1276,12 @@
        "faction": "Federated Suns",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_scoundrel_b1_captureEscort",
@@ -1243,7 +1298,8 @@
        "faction": "Federated Suns",
        "value": 9
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1289,6 +1345,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_gladiator_a1_simpleBattle",
@@ -1305,10 +1362,12 @@
        "faction": "Lyran Commonwealth",
        "value": 8
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_gladiator_b1_simpleBattle",
@@ -1325,7 +1384,8 @@
        "faction": "Lyran Commonwealth",
        "value": 8
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1370,6 +1430,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_unwelcomeGuests_a1_battle",
@@ -1386,10 +1447,12 @@
        "faction": "Free Worlds League",
        "value": 5
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_unwelcomeGuests_b1_destroyBase",
@@ -1410,7 +1473,8 @@
        "faction": "Lyran Commonwealth",
        "value": 5
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1449,6 +1513,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_shadowOrg_a1_assassinate",
@@ -1465,10 +1530,12 @@
        "faction": "Free Worlds League",
        "value": 12
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "c_fp_shadowOrg_b1_simpleBattle",
@@ -1492,7 +1559,8 @@
        "faction": "Free Worlds League",
        "value": 8
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1538,10 +1606,12 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [],
      "funds": 0,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": null
     }
    ],
    "reward": {
@@ -1586,10 +1656,12 @@
    "paths": [
     {
      "label": "Main",
+     "name": null,
      "contracts": [],
      "funds": 0,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": null
     }
    ],
    "reward": {
@@ -1635,6 +1707,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "HM1_ofUnknownOrigin_a1_destroyBase",
@@ -1651,10 +1724,12 @@
        "faction": "Draconis Combine",
        "value": 7
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "HM1_ofUnknownOrigin_b1_rescue",
@@ -1671,7 +1746,8 @@
        "faction": "Draconis Combine",
        "value": 7
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1710,6 +1786,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "HM7_showdown_2_3wayBattle",
@@ -1758,14 +1835,17 @@
        "faction": "Local pirate organization",
        "value": 15
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [],
      "funds": 2000000,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": null
     }
    ],
    "reward": {
@@ -1804,6 +1884,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "lastChance_a1_3wayBattle",
@@ -1815,10 +1896,12 @@
      ],
      "funds": 900000,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "lastChance_b1_defendBase",
@@ -1835,7 +1918,8 @@
        "faction": "Local pirate organization",
        "value": 4
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1874,6 +1958,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "doubleAgent_a1_3wayBattle",
@@ -1898,10 +1983,12 @@
        "faction": "Taurian Concordat",
        "value": -3
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "doubleAgent_b1_3wayBattle",
@@ -1926,10 +2013,12 @@
        "faction": "Taurian Concordat",
        "value": 7
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "C",
+     "name": null,
      "contracts": [
       {
        "id": "doubleAgent_c1_3wayBattle",
@@ -1954,7 +2043,8 @@
        "faction": "Taurian Concordat",
        "value": -3
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -1993,6 +2083,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "sentinel_a1_destroyBase",
@@ -2004,10 +2095,12 @@
      ],
      "funds": 500000,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "sentinel_b1_3wayBattle",
@@ -2024,7 +2117,8 @@
        "faction": "Federated Suns",
        "value": -12
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -2063,6 +2157,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "prize_a1_defendBase",
@@ -2074,10 +2169,12 @@
      ],
      "funds": 500000,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "prize_b1_3wayBattle",
@@ -2089,7 +2186,8 @@
      ],
      "funds": 500000,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": null
     }
    ],
    "reward": {
@@ -2149,6 +2247,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [],
      "funds": 725000,
      "morale": 0,
@@ -2157,10 +2256,12 @@
        "faction": "Federated Suns",
        "value": 40
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [],
      "funds": 725000,
      "morale": 0,
@@ -2169,10 +2270,12 @@
        "faction": "Draconis Combine",
        "value": 40
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "C",
+     "name": null,
      "contracts": [],
      "funds": 725000,
      "morale": 0,
@@ -2181,10 +2284,12 @@
        "faction": "Capellan Confederation",
        "value": 40
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "D",
+     "name": null,
      "contracts": [],
      "funds": 725000,
      "morale": 0,
@@ -2193,10 +2298,12 @@
        "faction": "Free Worlds League",
        "value": 40
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "E",
+     "name": null,
      "contracts": [],
      "funds": 725000,
      "morale": 0,
@@ -2205,10 +2312,12 @@
        "faction": "Lyran Commonwealth",
        "value": 40
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "F",
+     "name": null,
      "contracts": [],
      "funds": 725000,
      "morale": 0,
@@ -2217,14 +2326,17 @@
        "faction": "Local pirate organization",
        "value": 40
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "G",
+     "name": null,
      "contracts": [],
      "funds": 500000,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": null
     }
    ],
    "reward": {
@@ -2281,6 +2393,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "redHunt_3a_DestroyBase",
@@ -2297,10 +2410,12 @@
        "faction": "Draconis Combine",
        "value": 12
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "redHunt_3b_CaptureBase",
@@ -2317,7 +2432,8 @@
        "faction": "Draconis Combine",
        "value": 12
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -2363,6 +2479,7 @@
    "paths": [
     {
      "label": "A or B or C",
+     "name": null,
      "contracts": [
       {
        "id": "siegebreaker_a1_attackDefend",
@@ -2383,7 +2500,8 @@
        "faction": "Lyran Commonwealth",
        "value": -3
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -2422,6 +2540,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "succession_a1_assassinate",
@@ -2442,10 +2561,12 @@
        "faction": "Capellan Confederation",
        "value": 3
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "succession_b1_destroyBase",
@@ -2466,10 +2587,12 @@
        "faction": "Capellan Confederation",
        "value": 3
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "C",
+     "name": null,
      "contracts": [],
      "funds": 750000,
      "morale": 0,
@@ -2482,7 +2605,8 @@
        "faction": "Capellan Confederation",
        "value": -3
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -2521,6 +2645,7 @@
    "paths": [
     {
      "label": "A",
+     "name": null,
      "contracts": [
       {
        "id": "tournament_a1_3wayBattle",
@@ -2541,10 +2666,12 @@
        "faction": "Federated Suns",
        "value": -3
       }
-     ]
+     ],
+     "reward": null
     },
     {
      "label": "B",
+     "name": null,
      "contracts": [
       {
        "id": "tournament_b1_3wayBattle",
@@ -2561,7 +2688,8 @@
        "faction": "Federated Suns",
        "value": 6
       }
-     ]
+     ],
+     "reward": null
     }
    ],
    "reward": {
@@ -2605,7 +2733,8 @@
    ],
    "paths": [
     {
-     "label": "A or B",
+     "label": "A",
+     "name": "Light lance",
      "contracts": [
       {
        "id": "yangBigScore_a1_3wayBattle",
@@ -2617,36 +2746,80 @@
      ],
      "funds": 0,
      "morale": 0,
-     "reputation": []
+     "reputation": [],
+     "reward": {
+      "title": "Rare 'Mech",
+      "description": "This cache contains a single rare 'Mech.",
+      "mechs": [
+       {
+        "id": "vindicator_VND-1AA",
+        "name": "Vindicator VND-1AA",
+        "inMechLab": true
+       },
+       {
+        "id": "firestarter_FS9-H",
+        "name": "Firestarter FS9-H",
+        "inMechLab": true
+       },
+       {
+        "id": "trebuchet_TBT-5N",
+        "name": "Trebuchet TBT-5N",
+        "inMechLab": true
+       },
+       {
+        "id": "enforcer_ENF-4R",
+        "name": "Enforcer ENF-4R",
+        "inMechLab": true
+       }
+      ],
+      "choice": true
+     }
+    },
+    {
+     "label": "B",
+     "name": "Heavy lance",
+     "contracts": [
+      {
+       "id": "yangBigScore_b1_3wayBattle",
+       "name": "Yang Virtanen's Big Score II",
+       "type": null,
+       "objective": "Destroy Graves's Security Team",
+       "description": "Okay, Boss! We've got the monster trucks, and we're slugging our way to the LZ. Did I mention that I still hate rumble seats? Boy, do I ever! You'd better get on the comms to guide us through this; we're trudging along at a steady pace, but we're about to have company…"
+      }
+     ],
+     "funds": 0,
+     "morale": 0,
+     "reputation": [],
+     "reward": {
+      "title": "Rare 'Mech",
+      "description": "This cache contains a single rare 'Mech.",
+      "mechs": [
+       {
+        "id": "catapult_CPLT-C4",
+        "name": "Catapult CPLT-C4",
+        "inMechLab": true
+       },
+       {
+        "id": "thunderbolt_TDR-5SE",
+        "name": "Thunderbolt TDR-5SE",
+        "inMechLab": true
+       },
+       {
+        "id": "dragon_DRG-1N",
+        "name": "Dragon DRG-1N",
+        "inMechLab": true
+       },
+       {
+        "id": "kintaro_KTO-18",
+        "name": "Kintaro KTO-18",
+        "inMechLab": true
+       }
+      ],
+      "choice": true
+     }
     }
    ],
-   "reward": {
-    "title": "Rare 'Mech",
-    "description": "This cache contains a single rare 'Mech.",
-    "mechs": [
-     {
-      "id": "vindicator_VND-1AA",
-      "name": "Vindicator VND-1AA",
-      "inMechLab": true
-     },
-     {
-      "id": "firestarter_FS9-H",
-      "name": "Firestarter FS9-H",
-      "inMechLab": true
-     },
-     {
-      "id": "trebuchet_TBT-5N",
-      "name": "Trebuchet TBT-5N",
-      "inMechLab": true
-     },
-     {
-      "id": "enforcer_ENF-4R",
-      "name": "Enforcer ENF-4R",
-      "inMechLab": true
-     }
-    ],
-    "choice": true
-   }
+   "reward": null
   }
  ]
 }

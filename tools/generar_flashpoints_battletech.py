@@ -148,13 +148,13 @@ def recompensa(coleccion, mechs_juego, chasis, ids_mechlab):
 
 
 def juntar_caminos(caminos):
-    """Dos caminos con los mismos contratos (nombre, tipo y objetivo) y el mismo pago se juegan igual,
+    """Dos caminos con los mismos contratos (nombre, tipo y objetivo), el mismo pago y la misma recompensa se juegan igual,
     aunque el juego use contratos distintos para cada uno (The Long Hunt, Yang Virtanen's Big Score): se
     juntan en uno, «A or B, then B»."""
     juntos = {}
     for camino in caminos:
         firma = json.dumps([[(c["name"], c["type"], c["objective"]) for c in camino["contracts"]],
-                            camino["funds"], camino["morale"], camino["reputation"]])
+                            camino["funds"], camino["morale"], camino["reputation"], camino["name"], camino["reward"]])
         if firma in juntos:
             juntos[firma]["label"] += f" or {camino['label']}"
         else:
@@ -162,15 +162,25 @@ def juntar_caminos(caminos):
     return list(juntos.values())
 
 
-def recompensa_de(id_coleccion, elige, colecciones, mechs_juego, chasis, ids_mechlab):
-    """La recompensa final. Si se elige al final, son las colecciones de la serie (_A a _D), una por
-    opción, con sus 'Mechs juntos."""
-    base = recompensa(colecciones.get(id_coleccion), mechs_juego, chasis, ids_mechlab)
-    if not base or not elige or not id_coleccion.endswith("_A"):
-        return base and {**base, "choice": False}
-    hermanas = [recompensa(colecciones[id_], mechs_juego, chasis, ids_mechlab)
-                for id_ in sorted(colecciones) if id_[:-2] == id_coleccion[:-2] and id_[-2] == "_"]
-    return {**base, "choice": True, "mechs": [mech for hermana in hermanas for mech in hermana["mechs"]]}
+# Recompensa propia de cada camino, cuando la decisión del flashpoint es qué recompensa llevarse. En Yang
+# Virtanen's Big Score se elige qué lanza robar y, al final, un 'Mech de su serie (fp_reward_a a d). Los datos
+# no unen cada serie con su camino: lo dicen los briefings de sus contratos («We've got the hot rods», «We've
+# got the monster trucks»), y se ha comprobado en el juego.
+RECOMPENSAS_POR_CAMINO = {
+    "yangBigScore": {
+        "A": ("Light lance", "itemCollection_loot_UW_yangBigScore_hotrod"),
+        "B": ("Heavy lance", "itemCollection_loot_UW_yangBigScore_monster"),
+    },
+}
+
+
+def serie(prefijo, colecciones, mechs_juego, chasis, ids_mechlab):
+    """Una recompensa a elegir: las colecciones _A a _D de la serie, una por opción, con sus 'Mechs juntos."""
+    opciones = [recompensa(colecciones[id_], mechs_juego, chasis, ids_mechlab)
+                for id_ in sorted(colecciones) if id_[:-2] == prefijo and id_[-2] == "_"]
+    if not opciones:
+        raise ValueError(f"No hay colecciones {prefijo}_A…: ¿ha cambiado el juego?")
+    return {**opciones[0], "choice": True, "mechs": [mech for opcion in opciones for mech in opcion["mechs"]]}
 
 
 def main():
@@ -199,8 +209,6 @@ def main():
             faltan = ", ".join(id_c for id_c in camino["contratos"] if id_c not in contratos)
             print(f"Aviso: {id_juego}, camino {nombre_de_camino(camino['elecciones'])}: no se cuenta, sus contratos no están en el juego ({faltan})")
             caminos.remove(camino)
-        elige_recompensa = any(REGEX_ELECCION.match(e) and REGEX_ELECCION.match(e).group(1) == "reward"
-                               for camino in caminos for e in camino["elecciones"])
         # Los caminos que solo se distinguen por la recompensa elegida son el mismo; en orden de letra.
         unicos = {}
         for camino in caminos:
@@ -220,6 +228,7 @@ def main():
                     requisitos["reputation"].append({"faction": nombre_de_faccion(facciones, comparacion["obj"].split(".", 1)[1]),
                                                      "min": int(float(comparacion["val"]))})
         empleador = (fp.get("PotentialEmployers") or [None])[0]
+        propias = RECOMPENSAS_POR_CAMINO.get(fp["InternalName"], {})
         resultado.append({
             "id": fp["InternalName"],
             "name": fp["Description"]["Name"],
@@ -239,12 +248,17 @@ def main():
             "paths": juntar_caminos([
                 {
                     "label": nombre_de_camino(camino["elecciones"]),
+                    "name": propias.get(nombre_de_camino(camino["elecciones"]), (None,))[0],
                     "contracts": [contrato(contratos, id_c) for id_c in camino["contratos"][tronco:]],
                     **dict(zip(("funds", "morale", "reputation"), pago(conjunto["hitos"], camino["pago"], facciones))),
+                    "reward": (serie(propias[nombre_de_camino(camino["elecciones"])][1], colecciones, mechs_juego, chasis, ids_mechlab)
+                               if nombre_de_camino(camino["elecciones"]) in propias else None),
                 }
                 for camino in caminos
             ]),
-            "reward": recompensa_de(fp.get("RewardCollectionID"), elige_recompensa, colecciones, mechs_juego, chasis, ids_mechlab),
+            # Si cada camino da la suya, el flashpoint no tiene una común.
+            "reward": None if propias else {**recompensa(colecciones.get(fp.get("RewardCollectionID")), mechs_juego, chasis, ids_mechlab), "choice": False}
+            if colecciones.get(fp.get("RewardCollectionID")) else None,
         })
 
     with open(os.path.join(RUTA_DESTINO, "flashpoints.json"), "w", encoding="utf-8") as archivo:
