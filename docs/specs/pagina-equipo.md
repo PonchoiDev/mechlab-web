@@ -96,4 +96,7 @@ El MechLab enseña las cifras de cada arma cuando se monta, pero no hay un sitio
 
 1. **Datos y lógica (CA1 a CA11):** `src/utils/arsenal.test.ts`, con `items.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: la tabla de armas con filtros y orden, el selector de tier y las fichas de equipo; la portada con la carátula nueva.
+
+## Resultado
+
 - **Búsqueda por nombre corto:** buscar «TAG» no encontraba el Target Acquisition Gear. `generar_items.py` guarda ahora el `ShortName` del juego de las 146 armas que lo tienen distinto del nombre, y el buscador de esta página y el del MechLab miran los dos (CA12).
