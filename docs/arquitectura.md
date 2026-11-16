@@ -113,10 +113,10 @@ Es la quinta página de MW5 (`equipment/index.html`, servida en `/mercs/equipmen
 
 ### HRQ y campañas
 
-Es la sexta página de MW5 (`campaigns/index.html`, servida en `/mercs/campaigns/`), con su propio bundle. No trae datos nuevos: lee las HRQ y las campañas de `starmap.json`, las mismas del mapa estelar, y usa los estilos de las unidades enemigas (`units.css`) con su color de acento (`campaigns/campaigns.css`):
+Es la sexta página de MW5 (`campaigns/index.html`, servida en `/mercs/campaigns/`), con su propio bundle. Lee las HRQ, las campañas y los nombres de los DLC de `starmap.json`, las mismas del mapa estelar, y usa los estilos de las unidades enemigas (`units.css`) con su color de acento (`campaigns/campaigns.css`):
 
 - **`utils/questGuide.ts`:** los grupos de HRQ por origen, la búsqueda (la misma del mapa, `searchQuests` y `searchCampaigns`) con el filtro por origen, los 'Mechs de cada recompensa sin repetir, el pago total de una campaña, la vista en la URL y los enlaces al mapa. Estos usan `toMapQuery` con la primera fecha en que se ofrece la HRQ o la campaña, para que el mapa no la enseñe como «todavía no se ofrece». Tiene sus tests (`questGuide.test.ts`).
-- **`campaigns/CampaignsApp.tsx`:** las pestañas, los filtros y las fichas plegables. Solo pinta y llama a la lógica.
+- **`campaigns/CampaignsApp.tsx`:** las pestañas, los filtros y las listas con una fila plegable por HRQ, campaña o historia contada con HRQ. Solo pinta y llama a la lógica.
 
 ### BATTLETECH
 

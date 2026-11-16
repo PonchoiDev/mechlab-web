@@ -14,6 +14,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     title: 'High reward quests and DLC campaigns',
     items: [
       'A new HRQ & Campaigns page lists all 64 high reward quests and the 6 DLC campaigns, grouped by base game and DLC, with a search by name, system, employer, mission or reward',
+      'Call to Arms and Chaos Reign, whose stories are told through quest chains, are in the campaigns tab too, with their chains in order',
       'Open any of them to see where and when it is offered (reputation, dates, previous or opposing quest), its missions in order and what it pays in each mode: C-Bills, reputation, weapons, equipment, hero pilots and \'Mechs',
       'Every system opens the star map with the route drawn, and every \'Mech opens in the MechLab with its stock build',
       'The tab, the filters and the open quest or campaign go in the link, ready to share'
