@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { getStockBuild } from './buildCode';
-import { getBuildSummary, truncateTo } from './calculators';
-import { allItems, allMechs, getMech } from '../test/fixtures';
+import { getBuildSummary, getWeaponStats, truncateTo } from './calculators';
+import { allItems, allMechs, getItem, getMech } from '../test/fixtures';
 import { createEmptyArmor, createEmptyLoadout } from './zones';
 
 // Cifras del mechlab del juego con el loadout por defecto de cada mech (capturas del 23 de octubre
@@ -59,3 +59,32 @@ describe('refrigeración del juego sin equipo', () => {
     expect(summary.coolingRate).toBe(cooling);
   });
 });
+
+// Fichas de armas por tier en el mechlab del juego (capturas del 16 de noviembre de 2026). Damage_Quirk
+// y Cooldown_Quirk suman (el Gauss Rifle de tier 2 hace 15.05, no 15.75); los …Percentage_Quirk
+// multiplican, como la Gran espada de asalto (Greatsword), que ya coincidía.
+const WEAPON_TIERS: { id: string; tier: string; damage: number; cooldown?: number }[] = [
+  { id: 'GaussRifle', tier: '2', damage: 15.05, cooldown: 5.85 },
+  { id: 'Katana_Assault', tier: '1', damage: 55, cooldown: 2.55 },
+  { id: 'Katana_Assault', tier: '3', damage: 60, cooldown: 2.3 },
+  // De la lista del inventario, que no enseña el enfriamiento.
+  { id: 'Katana_Assault', tier: '4', damage: 62.5 },
+  { id: 'Katana_Assault', tier: '5', damage: 67.5, cooldown: 1.925 },
+  { id: 'Claymore_Assault', tier: '1', damage: 70, cooldown: 3.05 },
+  { id: 'Claymore_Assault', tier: '3', damage: 75, cooldown: 2.8 },
+  { id: 'Greatsword_Assault', tier: '1', damage: 85, cooldown: 4 },
+  { id: 'Greatsword_Assault', tier: '2', damage: 90.95, cooldown: 3.8 },
+  { id: 'Greatsword_Assault', tier: '4', damage: 103.7, cooldown: 3.4 },
+  { id: 'Knuckles_Assault', tier: '1', damage: 30, cooldown: 3.05 },
+  { id: 'ArenaFist_Assault', tier: '1', damage: 50, cooldown: 1.75 }
+];
+
+describe('armas por tier del juego', () => {
+  it.each(WEAPON_TIERS)('$id en tier $tier', ({ id, tier, damage, cooldown }) => {
+    const stats = getWeaponStats(getItem(id, { tier }));
+    expect(stats.damage).toBeCloseTo(damage, 2);
+    // La cadencia del juego sale del enfriamiento; los datos la guardan con un decimal.
+    if (cooldown !== undefined) expect(stats.rpm).toBeCloseTo(60 / cooldown, 1);
+  });
+});
+

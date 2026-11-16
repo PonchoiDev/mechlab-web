@@ -13,7 +13,7 @@ import {
 } from './calculators';
 import { canInstallUpgrade, getUpgradeModifiers, getUpgrades, sanitizeUpgrades } from './upgrades';
 import { mapZones } from './zones';
-import { allItems, allMechs, getMech } from '../test/fixtures';
+import { allItems, allMechs, getItem, getMech, makeLoadout } from '../test/fixtures';
 
 const dragon = getMech('DRG-1G-S');
 const stock = getStockBuild(dragon, allMechs, allItems)!;
@@ -179,3 +179,19 @@ describe('mejoras en el enlace de la build', () => {
     expect(getStockBuild(dragon, allMechs, allItems)?.upgrades).toEqual([]);
   });
 });
+
+describe('munición con mejoras de cooldown', () => {
+  it('los segundos de fuego usan la cadencia con las mejoras, como la tabla de armas', () => {
+    const ammo = getItem('AC20_Standard_AmmoEquipment');
+    const loadout = makeLoadout({ rightArm: [getItem('Autocannon20')], leftLeg: [ammo] });
+    const base = getBuildSummary(dragon, loadout, capturedArmor);
+    const upgraded = getBuildSummary(dragon, loadout, capturedArmor, getUpgrades(['ReducedBallisticCooldown_Trait2']));
+    const [weapon] = upgraded.weapons;
+
+    // Quick Ammo Feed II: menos cooldown, más disparos por minuto y la munición dura menos.
+    expect(weapon.rpm).toBeGreaterThan(base.weapons[0].rpm);
+    expect(upgraded.ammunition[0].seconds).toBe(Math.round((ammo.capacity ?? 0) / (weapon.rpm / 60)));
+    expect(upgraded.ammunition[0].seconds).toBeLessThan(base.ammunition[0].seconds!);
+  });
+});
+

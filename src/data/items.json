@@ -391,7 +391,7 @@
     "tonnage": 7.0,
     "tiers": {
       "0": {
-        "damage": -200.0,
+        "damage": 45.0,
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
@@ -407,7 +407,7 @@
         "rpm": 34.3
       },
       "2": {
-        "damage": 175.0,
+        "damage": 52.5,
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
@@ -415,7 +415,7 @@
         "rpm": 34.3
       },
       "3": {
-        "damage": 300.0,
+        "damage": 55.0,
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
@@ -423,7 +423,7 @@
         "rpm": 34.3
       },
       "4": {
-        "damage": 425.0,
+        "damage": 57.5,
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
@@ -431,7 +431,7 @@
         "rpm": 34.3
       },
       "5": {
-        "damage": 675.0,
+        "damage": 62.5,
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 17.5,
@@ -453,7 +453,7 @@
     "tonnage": 5.0,
     "tiers": {
       "0": {
-        "damage": -140.0,
+        "damage": 30.0,
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
@@ -469,7 +469,7 @@
         "rpm": 40.0
       },
       "2": {
-        "damage": 122.5,
+        "damage": 37.5,
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
@@ -477,7 +477,7 @@
         "rpm": 40.0
       },
       "3": {
-        "damage": 210.0,
+        "damage": 40.0,
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
@@ -485,7 +485,7 @@
         "rpm": 40.0
       },
       "4": {
-        "damage": 297.5,
+        "damage": 42.5,
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
@@ -493,7 +493,7 @@
         "rpm": 40.0
       },
       "5": {
-        "damage": 472.5,
+        "damage": 47.5,
         "heatPerShot": 0.0,
         "cooldown": 1.5,
         "range": 17.5,
@@ -515,7 +515,7 @@
     "tonnage": 2.0,
     "tiers": {
       "0": {
-        "damage": -52.0,
+        "damage": 8.0,
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
@@ -531,7 +531,7 @@
         "rpm": 60.0
       },
       "2": {
-        "damage": 45.5,
+        "damage": 15.5,
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
@@ -539,7 +539,7 @@
         "rpm": 60.0
       },
       "3": {
-        "damage": 78.0,
+        "damage": 18.0,
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
@@ -547,7 +547,7 @@
         "rpm": 60.0
       },
       "4": {
-        "damage": 110.5,
+        "damage": 20.5,
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
@@ -555,7 +555,7 @@
         "rpm": 60.0
       },
       "5": {
-        "damage": 175.5,
+        "damage": 25.5,
         "heatPerShot": 0.0,
         "cooldown": 1.0,
         "range": 17.5,
@@ -577,7 +577,7 @@
     "tonnage": 4.0,
     "tiers": {
       "0": {
-        "damage": -100.0,
+        "damage": 20.0,
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
@@ -593,7 +593,7 @@
         "rpm": 48.0
       },
       "2": {
-        "damage": 87.5,
+        "damage": 27.5,
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
@@ -601,7 +601,7 @@
         "rpm": 48.0
       },
       "3": {
-        "damage": 150.0,
+        "damage": 30.0,
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
@@ -609,7 +609,7 @@
         "rpm": 48.0
       },
       "4": {
-        "damage": 212.5,
+        "damage": 32.5,
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
@@ -617,7 +617,7 @@
         "rpm": 48.0
       },
       "5": {
-        "damage": 337.5,
+        "damage": 37.5,
         "heatPerShot": 0.0,
         "cooldown": 1.25,
         "range": 17.5,
@@ -1568,12 +1568,12 @@
     "tonnage": 5.0,
     "tiers": {
       "0": {
-        "damage": -540.0,
+        "damage": 50.0,
         "heatPerShot": 0.0,
-        "cooldown": 4.531,
+        "cooldown": 3.875,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 13.2
+        "rpm": 15.5
       },
       "1": {
         "damage": 60.0,
@@ -1584,36 +1584,36 @@
         "rpm": 16.6
       },
       "2": {
-        "damage": 210.0,
+        "damage": 62.5,
         "heatPerShot": 0.0,
-        "cooldown": 3.172,
+        "cooldown": 3.5,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 18.9
+        "rpm": 17.1
       },
       "3": {
-        "damage": 360.0,
+        "damage": 65.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.719,
+        "cooldown": 3.375,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 22.1
+        "rpm": 17.8
       },
       "4": {
-        "damage": 510.0,
+        "damage": 67.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.266,
+        "cooldown": 3.25,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 26.5
+        "rpm": 18.5
       },
       "5": {
-        "damage": 810.0,
+        "damage": 72.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.359,
+        "cooldown": 3.0,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 44.2
+        "rpm": 20.0
       }
     },
     "volleyProjectiles": 1,
@@ -1658,12 +1658,12 @@
     "tonnage": 7.0,
     "tiers": {
       "0": {
-        "damage": -720.0,
+        "damage": 70.0,
         "heatPerShot": 0.0,
-        "cooldown": 4.75,
+        "cooldown": 4.05,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 12.6
+        "rpm": 14.8
       },
       "1": {
         "damage": 80.0,
@@ -1674,36 +1674,36 @@
         "rpm": 15.8
       },
       "2": {
-        "damage": 280.0,
+        "damage": 82.5,
         "heatPerShot": 0.0,
-        "cooldown": 3.325,
+        "cooldown": 3.675,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 18.0
+        "rpm": 16.3
       },
       "3": {
-        "damage": 480.0,
+        "damage": 85.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.85,
+        "cooldown": 3.55,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 21.1
+        "rpm": 16.9
       },
       "4": {
-        "damage": 680.0,
+        "damage": 87.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.375,
+        "cooldown": 3.425,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 25.3
+        "rpm": 17.5
       },
       "5": {
-        "damage": 1080.0,
+        "damage": 92.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.425,
+        "cooldown": 3.175,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 42.1
+        "rpm": 18.9
       }
     },
     "volleyProjectiles": 1,
@@ -3893,12 +3893,12 @@
     "tonnage": 4.0,
     "tiers": {
       "0": {
-        "damage": -270.0,
+        "damage": 20.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.5,
+        "cooldown": 2.25,
         "range": 18.8,
         "maxRange": 18.8,
-        "rpm": 24.0
+        "rpm": 26.7
       },
       "1": {
         "damage": 30.0,
@@ -3909,36 +3909,36 @@
         "rpm": 30.0
       },
       "2": {
-        "damage": 105.0,
+        "damage": 32.5,
+        "heatPerShot": 0.0,
+        "cooldown": 1.875,
+        "range": 18.8,
+        "maxRange": 18.8,
+        "rpm": 32.0
+      },
+      "3": {
+        "damage": 35.0,
         "heatPerShot": 0.0,
         "cooldown": 1.75,
         "range": 18.8,
         "maxRange": 18.8,
         "rpm": 34.3
       },
-      "3": {
-        "damage": 180.0,
-        "heatPerShot": 0.0,
-        "cooldown": 1.5,
-        "range": 18.8,
-        "maxRange": 18.8,
-        "rpm": 40.0
-      },
       "4": {
-        "damage": 255.0,
+        "damage": 37.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.25,
+        "cooldown": 1.625,
         "range": 18.8,
         "maxRange": 18.8,
-        "rpm": 48.0
+        "rpm": 36.9
       },
       "5": {
-        "damage": 405.0,
+        "damage": 42.5,
         "heatPerShot": 0.0,
-        "cooldown": 0.75,
+        "cooldown": 1.375,
         "range": 18.8,
         "maxRange": 18.8,
-        "rpm": 80.0
+        "rpm": 43.6
       }
     },
     "volleyProjectiles": 1,
@@ -3955,12 +3955,12 @@
     "tonnage": 6.0,
     "tiers": {
       "0": {
-        "damage": -630.0,
+        "damage": 60.0,
         "heatPerShot": 0.0,
-        "cooldown": 3.812,
+        "cooldown": 3.3,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 15.7
+        "rpm": 18.2
       },
       "1": {
         "damage": 70.0,
@@ -3971,36 +3971,36 @@
         "rpm": 19.7
       },
       "2": {
-        "damage": 245.0,
+        "damage": 72.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.669,
+        "cooldown": 2.925,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 22.5
+        "rpm": 20.5
       },
       "3": {
-        "damage": 420.0,
+        "damage": 75.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.287,
+        "cooldown": 2.8,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 26.2
+        "rpm": 21.4
       },
       "4": {
-        "damage": 595.0,
+        "damage": 77.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.906,
+        "cooldown": 2.675,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 31.5
+        "rpm": 22.4
       },
       "5": {
-        "damage": 945.0,
+        "damage": 82.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.144,
+        "cooldown": 2.425,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 52.4
+        "rpm": 24.7
       }
     },
     "volleyProjectiles": 1,
@@ -4452,7 +4452,7 @@
         "speed": 2000.0
       },
       "2": {
-        "damage": 15.75,
+        "damage": 15.05,
         "heatPerShot": 0.95,
         "cooldown": 5.85,
         "range": 693.0,
@@ -4611,12 +4611,12 @@
     "tonnage": 2.0,
     "tiers": {
       "0": {
-        "damage": -100.0,
+        "damage": 20.0,
         "heatPerShot": 0.0,
-        "cooldown": 3.812,
+        "cooldown": 3.3,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 15.7
+        "rpm": 18.2
       },
       "1": {
         "damage": 25.0,
@@ -4627,36 +4627,36 @@
         "rpm": 19.7
       },
       "2": {
-        "damage": 87.5,
+        "damage": 27.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.669,
+        "cooldown": 2.925,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 22.5
+        "rpm": 20.5
       },
       "3": {
-        "damage": 150.0,
+        "damage": 30.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.287,
+        "cooldown": 2.8,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 26.2
+        "rpm": 21.4
       },
       "4": {
-        "damage": 212.5,
+        "damage": 32.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.906,
+        "cooldown": 2.675,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 31.5
+        "rpm": 22.4
       },
       "5": {
-        "damage": 337.5,
+        "damage": 37.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.144,
+        "cooldown": 2.425,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 52.4
+        "rpm": 24.7
       }
     },
     "volleyProjectiles": 1,
@@ -4673,12 +4673,12 @@
     "tonnage": 1.5,
     "tiers": {
       "0": {
-        "damage": -80.0,
+        "damage": 15.0,
         "heatPerShot": 0.0,
-        "cooldown": 3.906,
+        "cooldown": 3.375,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 15.4
+        "rpm": 17.8
       },
       "1": {
         "damage": 20.0,
@@ -4689,36 +4689,36 @@
         "rpm": 19.2
       },
       "2": {
-        "damage": 70.0,
+        "damage": 22.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.734,
+        "cooldown": 3.0,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 21.9
+        "rpm": 20.0
       },
       "3": {
-        "damage": 120.0,
+        "damage": 25.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.344,
+        "cooldown": 2.875,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 25.6
+        "rpm": 20.9
       },
       "4": {
-        "damage": 170.0,
+        "damage": 27.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.953,
+        "cooldown": 2.75,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 30.7
+        "rpm": 21.8
       },
       "5": {
-        "damage": 270.0,
+        "damage": 32.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.172,
+        "cooldown": 2.5,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 51.2
+        "rpm": 24.0
       }
     },
     "volleyProjectiles": 1,
@@ -4735,12 +4735,12 @@
     "tonnage": 0.5,
     "tiers": {
       "0": {
-        "damage": -40.0,
+        "damage": 5.0,
         "heatPerShot": 0.0,
-        "cooldown": 4.062,
+        "cooldown": 3.5,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 14.8
+        "rpm": 17.1
       },
       "1": {
         "damage": 10.0,
@@ -4751,36 +4751,36 @@
         "rpm": 18.5
       },
       "2": {
-        "damage": 35.0,
+        "damage": 12.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.844,
+        "cooldown": 3.125,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 21.1
+        "rpm": 19.2
       },
       "3": {
-        "damage": 60.0,
+        "damage": 15.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.438,
+        "cooldown": 3.0,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 24.6
+        "rpm": 20.0
       },
       "4": {
-        "damage": 85.0,
+        "damage": 17.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.031,
+        "cooldown": 2.875,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 29.5
+        "rpm": 20.9
       },
       "5": {
-        "damage": 135.0,
+        "damage": 22.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.219,
+        "cooldown": 2.625,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 49.2
+        "rpm": 22.9
       }
     },
     "volleyProjectiles": 1,
@@ -4797,12 +4797,12 @@
     "tonnage": 1.0,
     "tiers": {
       "0": {
-        "damage": -60.0,
+        "damage": 10.0,
         "heatPerShot": 0.0,
-        "cooldown": 4.062,
+        "cooldown": 3.5,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 14.8
+        "rpm": 17.1
       },
       "1": {
         "damage": 15.0,
@@ -4813,36 +4813,36 @@
         "rpm": 18.5
       },
       "2": {
-        "damage": 52.5,
+        "damage": 17.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.844,
+        "cooldown": 3.125,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 21.1
+        "rpm": 19.2
       },
       "3": {
-        "damage": 90.0,
+        "damage": 20.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.438,
+        "cooldown": 3.0,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 24.6
+        "rpm": 20.0
       },
       "4": {
-        "damage": 127.5,
+        "damage": 22.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.031,
+        "cooldown": 2.875,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 29.5
+        "rpm": 20.9
       },
       "5": {
-        "damage": 202.5,
+        "damage": 27.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.219,
+        "cooldown": 2.625,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 49.2
+        "rpm": 22.9
       }
     },
     "volleyProjectiles": 1,
@@ -4921,12 +4921,12 @@
     "tonnage": 3.0,
     "tiers": {
       "0": {
-        "damage": -360.0,
+        "damage": 30.0,
         "heatPerShot": 0.0,
-        "cooldown": 4.062,
+        "cooldown": 3.5,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 14.8
+        "rpm": 17.1
       },
       "1": {
         "damage": 40.0,
@@ -4937,36 +4937,36 @@
         "rpm": 18.5
       },
       "2": {
-        "damage": 140.0,
+        "damage": 42.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.844,
+        "cooldown": 3.125,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 21.1
+        "rpm": 19.2
       },
       "3": {
-        "damage": 240.0,
+        "damage": 45.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.438,
+        "cooldown": 3.0,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 24.6
+        "rpm": 20.0
       },
       "4": {
-        "damage": 340.0,
+        "damage": 47.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.031,
+        "cooldown": 2.875,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 29.5
+        "rpm": 20.9
       },
       "5": {
-        "damage": 540.0,
+        "damage": 52.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.219,
+        "cooldown": 2.625,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 49.2
+        "rpm": 22.9
       }
     },
     "volleyProjectiles": 1,
@@ -5001,7 +5001,7 @@
         "speed": 2000.0
       },
       "2": {
-        "damage": 26.25,
+        "damage": 25.05,
         "heatPerShot": 1.9,
         "cooldown": 5.85,
         "range": 409.5,
@@ -5329,12 +5329,12 @@
     "tonnage": 6.0,
     "tiers": {
       "0": {
-        "damage": -495.0,
+        "damage": 45.0,
         "heatPerShot": 0.0,
-        "cooldown": 3.188,
+        "cooldown": 2.8,
         "range": 22.5,
         "maxRange": 22.5,
-        "rpm": 18.8
+        "rpm": 21.4
       },
       "1": {
         "damage": 55.0,
@@ -5345,36 +5345,36 @@
         "rpm": 23.5
       },
       "2": {
-        "damage": 192.5,
+        "damage": 57.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.231,
+        "cooldown": 2.425,
         "range": 22.5,
         "maxRange": 22.5,
-        "rpm": 26.9
+        "rpm": 24.7
       },
       "3": {
-        "damage": 330.0,
+        "damage": 60.0,
         "heatPerShot": 0.0,
-        "cooldown": 1.912,
+        "cooldown": 2.3,
         "range": 22.5,
         "maxRange": 22.5,
-        "rpm": 31.4
+        "rpm": 26.1
       },
       "4": {
-        "damage": 467.5,
+        "damage": 62.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.721,
+        "cooldown": 2.225,
         "range": 22.5,
         "maxRange": 22.5,
-        "rpm": 34.9
+        "rpm": 27.0
       },
       "5": {
-        "damage": 742.5,
+        "damage": 67.5,
         "heatPerShot": 0.0,
-        "cooldown": 0.956,
+        "cooldown": 1.925,
         "range": 22.5,
         "maxRange": 22.5,
-        "rpm": 62.8
+        "rpm": 31.2
       }
     },
     "volleyProjectiles": 1,
@@ -5391,12 +5391,12 @@
     "tonnage": 2.0,
     "tiers": {
       "0": {
-        "damage": -120.0,
+        "damage": 25.0,
         "heatPerShot": 0.0,
-        "cooldown": 3.812,
+        "cooldown": 3.3,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 15.7
+        "rpm": 18.2
       },
       "1": {
         "damage": 30.0,
@@ -5407,36 +5407,36 @@
         "rpm": 19.7
       },
       "2": {
-        "damage": 105.0,
+        "damage": 32.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.669,
+        "cooldown": 2.925,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 22.5
+        "rpm": 20.5
       },
       "3": {
-        "damage": 180.0,
+        "damage": 35.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.287,
+        "cooldown": 2.8,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 26.2
+        "rpm": 21.4
       },
       "4": {
-        "damage": 255.0,
+        "damage": 37.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.906,
+        "cooldown": 2.675,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 31.5
+        "rpm": 22.4
       },
       "5": {
-        "damage": 405.0,
+        "damage": 42.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.144,
+        "cooldown": 2.425,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 52.4
+        "rpm": 24.7
       }
     },
     "volleyProjectiles": 1,
@@ -5453,12 +5453,12 @@
     "tonnage": 1.5,
     "tiers": {
       "0": {
-        "damage": -100.0,
+        "damage": 20.0,
         "heatPerShot": 0.0,
-        "cooldown": 3.906,
+        "cooldown": 3.375,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 15.4
+        "rpm": 17.8
       },
       "1": {
         "damage": 25.0,
@@ -5469,36 +5469,36 @@
         "rpm": 19.2
       },
       "2": {
-        "damage": 87.5,
+        "damage": 27.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.734,
+        "cooldown": 3.0,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 21.9
+        "rpm": 20.0
       },
       "3": {
-        "damage": 150.0,
+        "damage": 30.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.344,
+        "cooldown": 2.875,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 25.6
+        "rpm": 20.9
       },
       "4": {
-        "damage": 212.5,
+        "damage": 32.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.953,
+        "cooldown": 2.75,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 30.7
+        "rpm": 21.8
       },
       "5": {
-        "damage": 337.5,
+        "damage": 37.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.172,
+        "cooldown": 2.5,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 51.2
+        "rpm": 24.0
       }
     },
     "volleyProjectiles": 1,
@@ -5515,12 +5515,12 @@
     "tonnage": 0.5,
     "tiers": {
       "0": {
-        "damage": -60.0,
+        "damage": 10.0,
         "heatPerShot": 0.0,
-        "cooldown": 4.062,
+        "cooldown": 3.5,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 14.8
+        "rpm": 17.1
       },
       "1": {
         "damage": 15.0,
@@ -5531,36 +5531,36 @@
         "rpm": 18.5
       },
       "2": {
-        "damage": 52.5,
+        "damage": 17.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.844,
+        "cooldown": 3.125,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 21.1
+        "rpm": 19.2
       },
       "3": {
-        "damage": 90.0,
+        "damage": 20.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.438,
+        "cooldown": 3.0,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 24.6
+        "rpm": 20.0
       },
       "4": {
-        "damage": 127.5,
+        "damage": 22.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.031,
+        "cooldown": 2.875,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 29.5
+        "rpm": 20.9
       },
       "5": {
-        "damage": 202.5,
+        "damage": 27.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.219,
+        "cooldown": 2.625,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 49.2
+        "rpm": 22.9
       }
     },
     "volleyProjectiles": 1,
@@ -5577,12 +5577,12 @@
     "tonnage": 1.0,
     "tiers": {
       "0": {
-        "damage": -80.0,
+        "damage": 15.0,
         "heatPerShot": 0.0,
-        "cooldown": 4.062,
+        "cooldown": 3.5,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 14.8
+        "rpm": 17.1
       },
       "1": {
         "damage": 20.0,
@@ -5593,36 +5593,36 @@
         "rpm": 18.5
       },
       "2": {
-        "damage": 70.0,
+        "damage": 22.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.844,
+        "cooldown": 3.125,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 21.1
+        "rpm": 19.2
       },
       "3": {
-        "damage": 120.0,
+        "damage": 25.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.438,
+        "cooldown": 3.0,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 24.6
+        "rpm": 20.0
       },
       "4": {
-        "damage": 170.0,
+        "damage": 27.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.031,
+        "cooldown": 2.875,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 29.5
+        "rpm": 20.9
       },
       "5": {
-        "damage": 270.0,
+        "damage": 32.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.219,
+        "cooldown": 2.625,
         "range": 17.5,
         "maxRange": 17.5,
-        "rpm": 49.2
+        "rpm": 22.9
       }
     },
     "volleyProjectiles": 1,
@@ -7822,10 +7822,10 @@
       "0": {
         "damage": 8.0,
         "heatPerShot": 3.0,
-        "cooldown": 5.4,
+        "cooldown": 4.7,
         "range": 360.0,
         "maxRange": 540.0,
-        "rpm": 11.1
+        "rpm": 12.8
       },
       "1": {
         "damage": 8.0,
@@ -7838,34 +7838,34 @@
       "2": {
         "damage": 8.4,
         "heatPerShot": 2.375,
-        "cooldown": 4.388,
+        "cooldown": 4.475,
         "range": 472.5,
         "maxRange": 708.8,
-        "rpm": 13.7
+        "rpm": 13.4
       },
       "3": {
         "damage": 8.8,
         "heatPerShot": 2.25,
-        "cooldown": 4.275,
+        "cooldown": 4.45,
         "range": 495.0,
         "maxRange": 742.5,
-        "rpm": 14.0
+        "rpm": 13.5
       },
       "4": {
         "damage": 9.6,
         "heatPerShot": 2.125,
-        "cooldown": 4.14,
+        "cooldown": 4.42,
         "range": 517.5,
         "maxRange": 776.2,
-        "rpm": 14.5
+        "rpm": 13.6
       },
       "5": {
         "damage": 10.4,
         "heatPerShot": 1.875,
-        "cooldown": 3.825,
+        "cooldown": 4.35,
         "range": 562.5,
         "maxRange": 843.8,
-        "rpm": 15.7
+        "rpm": 13.8
       }
     },
     "volleyProjectiles": 1,
@@ -8283,7 +8283,7 @@
         "speed": 2200.0
       },
       "2": {
-        "damage": 8.4,
+        "damage": 8.05,
         "heatPerShot": 0.95,
         "cooldown": 2.925,
         "range": 535.5,
@@ -8536,12 +8536,12 @@
     "tonnage": 5.0,
     "tiers": {
       "0": {
-        "damage": -450.0,
+        "damage": 40.0,
         "heatPerShot": 0.0,
-        "cooldown": 3.906,
+        "cooldown": 3.375,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 15.4
+        "rpm": 17.8
       },
       "1": {
         "damage": 50.0,
@@ -8552,36 +8552,36 @@
         "rpm": 19.2
       },
       "2": {
-        "damage": 175.0,
+        "damage": 52.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.734,
+        "cooldown": 3.0,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 21.9
+        "rpm": 20.0
       },
       "3": {
-        "damage": 300.0,
+        "damage": 55.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.344,
+        "cooldown": 2.875,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 25.6
+        "rpm": 20.9
       },
       "4": {
-        "damage": 425.0,
+        "damage": 57.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.953,
+        "cooldown": 2.75,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 30.7
+        "rpm": 21.8
       },
       "5": {
-        "damage": 675.0,
+        "damage": 62.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.172,
+        "cooldown": 2.5,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 51.2
+        "rpm": 24.0
       }
     },
     "volleyProjectiles": 1,
@@ -8693,37 +8693,37 @@
       "2": {
         "damage": 1.27,
         "heatPerShot": 0.332,
-        "cooldown": 3.705,
+        "cooldown": 3.85,
         "range": 577.5,
         "maxRange": 577.5,
-        "rpm": 16.2,
+        "rpm": 15.6,
         "speed": 525.0
       },
       "3": {
         "damage": 1.32,
         "heatPerShot": 0.315,
-        "cooldown": 3.51,
+        "cooldown": 3.8,
         "range": 605.0,
         "maxRange": 605.0,
-        "rpm": 17.1,
+        "rpm": 15.8,
         "speed": 550.0
       },
       "4": {
         "damage": 1.5,
         "heatPerShot": 0.297,
-        "cooldown": 3.315,
+        "cooldown": 3.75,
         "range": 632.5,
         "maxRange": 632.5,
-        "rpm": 18.1,
+        "rpm": 16.0,
         "speed": 575.0
       },
       "5": {
         "damage": 1.68,
         "heatPerShot": 0.262,
-        "cooldown": 2.925,
+        "cooldown": 3.65,
         "range": 687.5,
         "maxRange": 687.5,
-        "rpm": 20.5,
+        "rpm": 16.4,
         "speed": 625.0
       }
     },
@@ -8981,12 +8981,12 @@
     "tonnage": 4.0,
     "tiers": {
       "0": {
-        "damage": -450.0,
+        "damage": 40.0,
         "heatPerShot": 0.0,
-        "cooldown": 4.375,
+        "cooldown": 3.75,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 13.7
+        "rpm": 16.0
       },
       "1": {
         "damage": 50.0,
@@ -8997,36 +8997,36 @@
         "rpm": 17.1
       },
       "2": {
-        "damage": 175.0,
+        "damage": 52.5,
         "heatPerShot": 0.0,
-        "cooldown": 3.062,
+        "cooldown": 3.375,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 19.6
+        "rpm": 17.8
       },
       "3": {
-        "damage": 300.0,
+        "damage": 55.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.625,
+        "cooldown": 3.25,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 22.9
+        "rpm": 18.5
       },
       "4": {
-        "damage": 425.0,
+        "damage": 57.5,
         "heatPerShot": 0.0,
-        "cooldown": 2.188,
+        "cooldown": 3.125,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 27.4
+        "rpm": 19.2
       },
       "5": {
-        "damage": 675.0,
+        "damage": 62.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.312,
+        "cooldown": 2.875,
         "range": 20.0,
         "maxRange": 20.0,
-        "rpm": 45.7
+        "rpm": 20.9
       }
     },
     "volleyProjectiles": 1,
@@ -10178,10 +10178,10 @@
       "2": {
         "damage": 2.54,
         "heatPerShot": 0.855,
-        "cooldown": 2.166,
+        "cooldown": 2.23,
         "range": 283.5,
         "maxRange": 283.5,
-        "rpm": 27.7,
+        "rpm": 26.9,
         "speed": 420.0
       },
       "3": {
@@ -11954,12 +11954,12 @@
     "tonnage": 4.0,
     "tiers": {
       "0": {
-        "damage": -360.0,
+        "damage": 30.0,
         "heatPerShot": 0.0,
-        "cooldown": 2.031,
+        "cooldown": 1.875,
         "range": 18.8,
         "maxRange": 18.8,
-        "rpm": 29.5
+        "rpm": 32.0
       },
       "1": {
         "damage": 40.0,
@@ -11970,36 +11970,36 @@
         "rpm": 36.9
       },
       "2": {
-        "damage": 140.0,
+        "damage": 42.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.422,
+        "cooldown": 1.5,
         "range": 18.8,
         "maxRange": 18.8,
-        "rpm": 42.2
+        "rpm": 40.0
       },
       "3": {
-        "damage": 240.0,
+        "damage": 45.0,
         "heatPerShot": 0.0,
-        "cooldown": 1.219,
+        "cooldown": 1.375,
         "range": 18.8,
         "maxRange": 18.8,
-        "rpm": 49.2
+        "rpm": 43.6
       },
       "4": {
-        "damage": 340.0,
+        "damage": 47.5,
         "heatPerShot": 0.0,
-        "cooldown": 1.016,
+        "cooldown": 1.25,
         "range": 18.8,
         "maxRange": 18.8,
-        "rpm": 59.1
+        "rpm": 48.0
       },
       "5": {
-        "damage": 540.0,
+        "damage": 52.5,
         "heatPerShot": 0.0,
-        "cooldown": 0.609,
+        "cooldown": 1.0,
         "range": 18.8,
         "maxRange": 18.8,
-        "rpm": 98.5
+        "rpm": 60.0
       }
     },
     "volleyProjectiles": 1,

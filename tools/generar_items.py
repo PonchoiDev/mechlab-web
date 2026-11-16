@@ -174,13 +174,17 @@ def calcular_tier(contenido, base):
     quirks = {quirk: float(valor) for quirk, valor in REGEX_QUIRK.findall(contenido)}
 
     if quirks:
-        q_dmg = quirks.get("DamagePercentage_Quirk", quirks.get("Damage_Quirk", 0.0))
+        # Los …Percentage_Quirk multiplican; Damage_Quirk y Cooldown_Quirk suman su valor tal cual, en
+        # daño y en segundos. Lo dice el mechlab del juego: la Katana de asalto pasa de 55 a 67.5 de daño
+        # y de 2.55 a 1.925 s con +12.5 y -0.625 en tier 5, y el Gauss Rifle de tier 2 hace 15.05 con
+        # +0.05, aunque ese valor parezca un porcentaje (src/utils/gameReference.test.ts).
+        q_dmg = quirks.get("DamagePercentage_Quirk", 0.0)
         q_heat = quirks.get("HeatGeneratedPercentage_Quirk", 0.0)
-        q_cd = quirks.get("CooldownPercentage_Quirk", quirks.get("Cooldown_Quirk", 0.0))
+        q_cd = quirks.get("CooldownPercentage_Quirk", 0.0)
         q_rng = quirks.get("RangePercentage_Quirk", quirks.get("RangeAndSpeedPercentage_Quirk", 0.0))
-        dano = round(base["damage"] * (1.0 + q_dmg), 2)
+        dano = round((base["damage"] + quirks.get("Damage_Quirk", 0.0)) * (1.0 + q_dmg), 2)
         calor = round(base["heatPerShot"] * (1.0 + q_heat), 3)
-        enfriamiento = round(base["cooldown"] * (1.0 + q_cd), 3)
+        enfriamiento = round((base["cooldown"] + quirks.get("Cooldown_Quirk", 0.0)) * (1.0 + q_cd), 3)
         rango = round(base["range"] * (1.0 + q_rng), 1)
         rango_maximo = round(base["maxRange"] * (1.0 + q_rng), 1)
         q_vel = quirks.get("SpeedPercentage_Quirk", quirks.get("RangeAndSpeedPercentage_Quirk", 0.0))
