@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { getStockBuild } from './buildCode';
-import { getBuildSummary, getHeatTimes, getWeaponStats } from './calculators';
+import { getBuildSummary, getHeatTimes, getRangeProfile, getRangeStep, getWeaponStats } from './calculators';
 import { getWeaponLabel } from './items';
 import { getUpgrades } from './upgrades';
 import { allItems, allMechs, getItem, getMech, makeLoadout } from '../test/fixtures';
@@ -73,6 +73,24 @@ describe('daño por tonelada', () => {
     expect(upgraded.weapons[0].damage).toBeGreaterThan(base.weapons[0].damage);
     expect(upgraded.weapons[0].damagePerTon).toBeCloseTo(upgraded.weapons[0].damage / 14, 5);
     expect(upgraded.ammunition[0].potentialDamage).toBeCloseTo(upgraded.ammunition[0].volleys! * upgraded.weapons[0].damage, 5);
+  });
+});
+
+describe('daño por alcance', () => {
+  it('CA8: el HGN-732 de serie, con la caída de daño entre el alcance óptimo y el máximo', () => {
+    const profile = getRangeProfile(stockSummary('HGN-732').weapons);
+    expect(profile.map(entry => entry.distance)).toEqual([100, 200, 300, 400, 500, 600, 700, 800, 900]);
+    const at = (distance: number) => profile.find(entry => entry.distance === distance)!.damage;
+    expect(at(100)).toBeCloseTo(63.4, 2);
+    expect(at(300)).toBeCloseTo(24 + 15 + 2 * 5 * 105 / 135, 2);
+    expect(at(900)).toBeCloseTo(24, 2);
+    expect(profile.every(entry => entry.belowMin === 0)).toBe(true);
+  });
+
+  it('CA9: los anillos se espacian para que el alcance máximo quepa en 10 o menos', () => {
+    expect(getRangeStep(405)).toBe(50);
+    expect(getRangeStep(1500)).toBe(150);
+    expect(getRangeStep(5625)).toBe(750);
   });
 });
 
