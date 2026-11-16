@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import type { BtBuild } from '../../types/battletech-mechlab';
-import { EMPTY_VALUE } from '../../utils/format';
+import { EMPTY_VALUE, joinWithCounts } from '../../utils/format';
 import { ZONE_KEYS, ZONE_LABELS } from '../../utils/zones';
 import { getZoneItems } from '../../utils/battletech/fitting';
-import type { BtSummary } from '../../utils/battletech/stats';
+import { getBtWeaponRangeState, type BtSummary } from '../../utils/battletech/stats';
 import { RangeRadar } from '../../components/RangeRadar';
 
 const formatNumber = (value: number) => String(Number(value.toFixed(2)));
@@ -31,6 +31,14 @@ function WeaponsTab({ build, summary }: { build: BtBuild; summary: BtSummary }) 
   const rows = ZONE_KEYS.flatMap(zone => getZoneItems(build.loadout, zone)
     .filter(item => item.weapon)
     .map(item => ({ item, zone, line: lines.get(item.id)! })));
+  // Anillo del radar señalado: la tabla resalta las armas que llegan y apaga las demás.
+  const [rangeFocus, setRangeFocus] = useState<number | null>(null);
+  const describeWeapons = (distance: number) => {
+    const names = (state: string) => rows.filter(({ item }) => getBtWeaponRangeState(item, distance) === state).map(({ item }) => item.name);
+    const [full, belowMin] = [names('full'), names('belowMin')];
+    const parts = [full.length > 0 ? joinWithCounts(full) : '', belowMin.length > 0 ? `under minimum range: ${joinWithCounts(belowMin)}` : ''].filter(Boolean);
+    return parts.length > 0 ? parts.join(' · ') : 'no weapon reaches it';
+  };
 
   return (
     <div className="analysis-body">
@@ -58,8 +66,11 @@ function WeaponsTab({ build, summary }: { build: BtBuild; summary: BtSummary }) 
               </thead>
               <tbody>
                 {rows.map(({ item, zone, line }, index) => (
-                  <tr key={`${item.id}-${zone}-${index}`}>
-                    <td>{item.name}</td>
+                  <tr key={`${item.id}-${zone}-${index}`} className={rangeFocus === null ? undefined : `is-range-${getBtWeaponRangeState(item, rangeFocus)}`}>
+                    <td>
+                      {item.name}
+                      {rangeFocus !== null && getBtWeaponRangeState(item, rangeFocus) === 'belowMin' && <small className="range-tag is-below-min">under min</small>}
+                    </td>
                     <td>{ZONE_LABELS[zone]}</td>
                     <td>{formatNumber(line.damage)}</td>
                     <td>{formatNumber(line.instability)}</td>
@@ -92,7 +103,7 @@ function WeaponsTab({ build, summary }: { build: BtBuild; summary: BtSummary }) 
           </div>
           <span className="analysis-note">AMBER STRIPES: UNDER MINIMUM RANGE, WITH AN ACCURACY PENALTY</span>
         </header>
-        <RangeRadar profile={summary.rangeProfile} />
+        <RangeRadar profile={summary.rangeProfile} onActiveChange={setRangeFocus} describeWeapons={describeWeapons} />
       </div>
       {summary.ammo.length > 0 && (
         <div className="ammunition-list">

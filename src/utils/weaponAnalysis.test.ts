@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { getStockBuild } from './buildCode';
-import { getBuildSummary, getHeatTimes, getRangeProfile, getRangeStep, getWeaponStats } from './calculators';
+import { getBuildSummary, getHeatTimes, getRangeProfile, getRangeStep, getWeaponRangeState, getWeaponStats } from './calculators';
 import { getWeaponLabel } from './items';
 import { getUpgrades } from './upgrades';
 import { allItems, allMechs, getItem, getMech, makeLoadout } from '../test/fixtures';
@@ -91,6 +91,19 @@ describe('daño por alcance', () => {
     expect(getRangeStep(405)).toBe(50);
     expect(getRangeStep(1500)).toBe(150);
     expect(getRangeStep(5625)).toBe(750);
+  });
+});
+
+describe('armas de cada anillo del radar', () => {
+  it('CA11: el HGN-732 a 400 m', () => {
+    const states = stockSummary('HGN-732').weapons.map(weapon => [weapon.item.id, getWeaponRangeState(weapon, 400)]);
+    expect(states).toEqual(expect.arrayContaining([
+      ['LRM20', 'full'],
+      ['GaussRifle', 'full'],
+      ['MediumLaser', 'falloff'],
+      ['SRM6', 'out']
+    ]));
+    expect(states.filter(([id]) => id === 'MediumLaser').every(([, state]) => state === 'falloff')).toBe(true);
   });
 });
 

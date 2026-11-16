@@ -30,6 +30,11 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
   - cada arma a distancia hace todo su daño hasta su alcance óptimo (`range`) y, entre el óptimo y el máximo (`maxRange`), un daño que baja en línea recta hasta cero, que es la caída de daño del juego; más allá, nada. El cuerpo a cuerpo no cuenta;
   - los anillos van cada 50, 100, 150, 200, 250, 300, 500, 750 o 1000 m, el primer paso con el que el alcance máximo del loadout cabe en 10 anillos o menos, y llegan hasta él;
   - con las mejoras de la cantina, el daño y los alcances son los mejorados.
+- **RF7.** El radar se lee sin adivinar (común a MW5 y BATTLETECH):
+  - cada número dice qué es: el daño lleva «dmg» y las distancias «m», con «DISTANCE» en la base;
+  - los anillos seguidos con el mismo daño se juntan en un tramo con una sola etiqueta, que dice el daño y de qué distancia a qué distancia llega («57.2 dmg · 300 to 500 m»);
+  - al pasar el ratón o tocar un anillo, se resalta y se lee su distancia y su daño debajo del radar.
+- **RF8.** Al señalar un anillo del radar, la tabla de armas resalta las que hacen daño a esa distancia y apaga las que no llegan; las que llegan con la caída de daño (entre su alcance óptimo y el máximo) llevan además una marca, y la línea bajo el radar dice qué armas son. En BATTLETECH, igual, con la marca en las que están por debajo de su alcance mínimo.
 
 ## Requisitos no funcionales
 
@@ -48,6 +53,8 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 | CA6 | El Medium Laser (5 de daño, 1 t), el Autocannon/20 (20, 14 t) y el LRM 20 (24, 10 t) | se calcula su daño por tonelada | 5, 1.43 y 2.4 |
 | CA8 | El HGN-732 de serie (alcance máximo 900 m) | se calcula su daño por alcance | 9 anillos, de 100 en 100 m hasta 900; a 100 m, 63.4 (todo su daño por salva); a 300 m, 46.78 (LRM 20 y Gauss Rifle enteros y los dos Medium Laser con la caída, 5 × 105 / 135 cada uno); a 900 m solo el LRM 20, 24 |
 | CA9 | Loadouts con alcances máximos de 405, 1500 y 5625 m | se eligen los anillos | cada 50 m (9 anillos), cada 150 m (10) y cada 750 m (8) |
+| CA10 | Un perfil de daño de 63.4, 63.4, 46.8, 39.4, 39, 39, 24, 24 y 24 cada 100 m | se agrupan sus anillos | 5 tramos: 63.4 de 100 a 200 m, 46.8 a 300 m, 39.4 a 400 m, 39 de 500 a 600 m y 24 de 700 a 900 m, cada uno con el radio interior de su primer anillo y el exterior del último |
+| CA11 | El HGN-732 de serie | se señala el anillo de 400 m | el LRM 20 y el Gauss Rifle hacen todo su daño; los dos Medium Laser, con la caída (270 m de óptimo y 405 de máximo); el SRM 6 (270 m) no llega |
 | CA7 | Una mejora de daño de la cantina | se calcula el daño por tonelada y el daño potencial | los dos usan el daño con la mejora |
 
 ## Fuera de alcance
@@ -57,7 +64,7 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA9):** `src/utils/weaponAnalysis.test.ts`, con los datos reales.
+1. **Lógica (CA1 a CA11):** `src/utils/weaponAnalysis.test.ts`, con los datos reales.
 2. **Interfaz:** en el navegador, la pestaña Weapons (tonelaje, Damage / ton y Stores) y la sección HEAT de la pestaña 'Mech, con y sin mejoras de la cantina.
 
 ## Resultado
@@ -66,4 +73,5 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 - **Tests:** los siete criterios están en `src/utils/weaponAnalysis.test.ts` y pasan.
 - **Comprobado** en el navegador con el HGN-732 de serie: llega al máximo en 16.8 s y se enfría en 35 s; daño por tonelada de 5 (Medium Laser), 2.4 (LRM 20) y 1 (Gauss Rifle), 2.11 en total; daño potencial de 1170 en el Gauss y 1056 en el LRM.
 - **Radar de daño por alcance (RF6):** el de BATTLETECH pasa a ser común (`src/components/RangeRadar.tsx` y `src/utils/rangeRadar.ts`), con el color de cada página. Comprobado con el HGN-732: 63.4 hasta 200 m, 46.8 a 300 m y 24 desde 700 m, solo el LRM 20. El radar de BATTLETECH no cambia.
-
+- **Radar más legible (RF7):** comprobado en el navegador con el HGN-732 (de 9 cifras a 5 tramos) y el CPLT-C1 de BATTLETECH, con el detalle al pasar el ratón.
+- **Armas de cada anillo (RF8):** comprobado con el HGN-732 a 400 m (LRM 20 y Gauss Rifle enteros, Medium Laser con «falloff», SRM 6 apagado) y el CPLT-C1 de BATTLETECH a 90 m (M Laser ×4 y LRM15 ×2 por debajo del mínimo).
