@@ -16,6 +16,12 @@ export const groupFlashpoints = (flashpoints: BtFlashpoint[]): { source: BtFlash
     .map(source => ({ source: source.id, flashpoints: flashpoints.filter(flashpoint => flashpoint.source === source.id) }))
     .filter(group => group.flashpoints.length > 0);
 
+// Los 'Mechs que puede dar: los de la recompensa del flashpoint o los de cada camino, sin repetir.
+export const getFlashpointMechs = (flashpoint: BtFlashpoint) => {
+  const mechs = [...(flashpoint.reward?.mechs ?? []), ...flashpoint.paths.flatMap(path => path.reward?.mechs ?? [])];
+  return mechs.filter((mech, index) => mechs.findIndex(other => other.id === mech.id) === index);
+};
+
 const normalize = (text: string) => text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 // Lo que se busca: nombre, sistema, quien lo encarga, contratos y 'Mechs de la recompensa.
@@ -24,7 +30,7 @@ const searchText = (flashpoint: BtFlashpoint) => normalize([
   flashpoint.system,
   flashpoint.employer ?? '',
   ...[...flashpoint.contracts, ...flashpoint.paths.flatMap(path => path.contracts)].map(contract => contract.name),
-  ...(flashpoint.reward?.mechs.map(mech => mech.name) ?? [])
+  ...getFlashpointMechs(flashpoint).map(mech => mech.name)
 ].join(' '));
 
 export type FlashpointSourceFilter = BtFlashpointSource | 'all';

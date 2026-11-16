@@ -12,14 +12,26 @@ export interface BtFlashpointContract {
   description: string | null;
 }
 
+// choice: se elige uno de sus 'Mechs al final.
+export interface BtFlashpointReward {
+  title: string;
+  description: string;
+  choice: boolean;
+  mechs: { id: string; name: string; inMechLab: boolean }[];
+}
+
 export interface BtFlashpointPath {
   // «A», «B», «A, then B» o «A or B, then B» si dos se juegan igual; «Main» si no hay ninguna decisión.
   label: string;
+  // Nombre de la decisión cuando se conoce («Light lance» en Yang Virtanen's Big Score).
+  name: string | null;
   // Los contratos propios del camino, después de los del tronco.
   contracts: BtFlashpointContract[];
   funds: number;
   morale: number;
   reputation: { faction: string; value: number }[];
+  // La recompensa del camino, si cada uno da la suya; si no, la del flashpoint.
+  reward: BtFlashpointReward | null;
 }
 
 export interface BtFlashpoint {
@@ -40,6 +52,5 @@ export interface BtFlashpoint {
   // El tronco: los contratos que hacen todos los caminos al principio.
   contracts: BtFlashpointContract[];
   paths: BtFlashpointPath[];
-  // choice: se elige uno de sus 'Mechs al final.
-  reward: { title: string; description: string; choice: boolean; mechs: { id: string; name: string; inMechLab: boolean }[] } | null;
+  reward: BtFlashpointReward | null;
 }
