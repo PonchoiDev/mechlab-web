@@ -16,6 +16,7 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 | HRQ: nombre, DLC, modos, quien la encarga, sistema de la oferta, tipos de misión y misiones en orden con su sistema | `quests` |
 | Condiciones de cada HRQ por modo: reputación, fechas, requisito previo y HRQ excluyentes | `quests[].requirements` |
 | Recompensa de cada HRQ por modo: C-Bills, reputación, 'Mechs, pilotos, armas, equipo y texto final | `quests[].rewards` |
+| Briefing de cada misión de una HRQ: el texto con el que el juego la presenta (`ObjectiveBriefing` de su objetivo); el de la primera es el de la oferta | `quest-briefings.json`, aparte de `starmap.json` para que el mapa no cargue los textos |
 | Campañas de los DLC 2, 4, 5, 6, 7 y 9: inicio, fecha, misiones en orden con su pago y sus recompensas, y lo que da completarla | `campaigns` |
 | Nombres de los sistemas | `systems` |
 
@@ -34,8 +35,9 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
   - los modos (campaña, carrera) y los tipos de misión;
   - el sistema de la oferta, enlazado al mapa con la HRQ elegida;
   - las condiciones por modo: reputación, fechas, requisito previo y HRQ excluyentes;
-  - las misiones en orden, como una línea de pasos, con su título, su resumen y su sistema enlazado al mapa;
-  - la recompensa por modo: C-Bills, reputación, 'Mechs enlazados al MechLab, pilotos hero, armas con su tier, equipo y el texto final.
+  - el briefing de la oferta, el texto con el que el juego presenta la cadena (el de su primera misión);
+  - las misiones en orden, como una línea de pasos, con su título, su resumen, su sistema enlazado al mapa y su briefing desplegable (desde la segunda);
+  - la recompensa por modo: C-Bills, reputación, 'Mechs enlazados al MechLab, pilotos hero, armas con su tier, equipo y el texto final, plegado y con el nombre «Final debrief» porque cuenta cómo acaba la historia.
 - **RF4.** Cada campaña es una fila plegable de una lista como la de las HRQ, con su nombre, su DLC, dónde y desde cuándo empieza, cuántas misiones tiene, cuánto pagan en total y sus 'Mechs; desplegada, las misiones en orden con quien las encarga, su sistema enlazado al mapa, su pago y sus recompensas, y lo que da completarla. Si una misión espera a una fecha aunque la anterior esté hecha, la línea de pasos marca la pausa antes de ella («Not before 1 Sep 3033»), y el resumen de la fila dice cuántas pausas tiene.
 - **RF5.** Un buscador por nombre, sistema, quien la encarga, misión o recompensa (el mismo del mapa) y un filtro por origen.
 - **RF6.** La pestaña, la búsqueda, el filtro y la ficha abierta van en la URL (`?tab=campaigns&dlc=7`, `?quest=bow-and-arrow`, `?campaign=dlc7`).
@@ -63,6 +65,7 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 | CA8 | The Dragon's Gambit | se suma su pago | 67.931.715 C-Bills y 18.485 de reputación en 15 misiones |
 | CA10 | Los nombres de los DLC | se escriben | el juego base es «Base game»; el DLC 1, «DLC 1 · Heroes of the Inner Sphere»; el DLC 8, «DLC 8 · Chaos Reign» |
 | CA11 | Las historias contadas con HRQ | se listan | son Call to Arms (DLC 3) con Those in Need, y Chaos Reign (DLC 8) con sus cinco cadenas por fecha: Adam Steiner, Testing Ground, Ideals of War, Thumb War y New Home, Old Enemies. El filtro de la pestaña de campañas incluye los DLC 3 y 8, y la búsqueda encuentra la historia por su nombre o el de sus cadenas («steiner» da Chaos Reign). `?campaign=dlc8` abre la pestaña de campañas con Chaos Reign desplegada |
+| CA12 | Bring Her Home | se leen sus briefings | son 4, uno por misión; el primero, el de la oferta, empieza «Commander, your reputation precedes you» y el texto final de la recompensa no está entre ellos. Todas las HRQ tienen briefing de oferta |
 | CA9 | La URL | se abre y se construye | sin parámetros, la pestaña de HRQ, todo y nada abierto. `?tab=campaigns&dlc=7&q=kerensky` se lee y se vuelve a escribir igual. `?quest=bow-and-arrow` abre la pestaña de HRQ con Bow and Arrow desplegada y `?campaign=dlc7`, la de campañas con Shadow of Kerensky. Un id, un DLC o una pestaña que no existen se ignoran |
 
 ## Fuera de alcance
@@ -72,7 +75,7 @@ No hace falta extraer nada nuevo: `starmap.json` ya trae, de `extraer_mapa.py` y
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA11):** `src/utils/questGuide.test.ts`, con `starmap.json` y `mechs.json` reales.
+1. **Lógica (CA1 a CA12):** `src/utils/questGuide.test.ts`, con `starmap.json` y `mechs.json` reales.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: las dos pestañas, una HRQ y una campaña desplegadas, los enlaces al mapa y al MechLab, la URL compartida y la portada.
 
 ## Resultado
