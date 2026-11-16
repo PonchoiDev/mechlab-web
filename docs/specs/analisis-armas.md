@@ -34,6 +34,7 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
   - cada número dice qué es: el daño lleva «dmg» y las distancias «m», con «DISTANCE» en la base;
   - los anillos seguidos con el mismo daño se juntan en un tramo con una sola etiqueta, que dice el daño y de qué distancia a qué distancia llega («57.2 dmg · 300 to 500 m»);
   - al pasar el ratón o tocar un anillo, se resalta y se lee su distancia y su daño debajo del radar.
+- **RF8.** Al señalar un anillo del radar, la tabla de armas resalta las que hacen daño a esa distancia y apaga las que no llegan; las que llegan con la caída de daño (entre su alcance óptimo y el máximo) llevan además una marca, y la línea bajo el radar dice qué armas son. En BATTLETECH, igual, con la marca en las que están por debajo de su alcance mínimo.
 
 ## Requisitos no funcionales
 
@@ -53,6 +54,7 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 | CA8 | El HGN-732 de serie (alcance máximo 900 m) | se calcula su daño por alcance | 9 anillos, de 100 en 100 m hasta 900; a 100 m, 63.4 (todo su daño por salva); a 300 m, 46.78 (LRM 20 y Gauss Rifle enteros y los dos Medium Laser con la caída, 5 × 105 / 135 cada uno); a 900 m solo el LRM 20, 24 |
 | CA9 | Loadouts con alcances máximos de 405, 1500 y 5625 m | se eligen los anillos | cada 50 m (9 anillos), cada 150 m (10) y cada 750 m (8) |
 | CA10 | Un perfil de daño de 63.4, 63.4, 46.8, 39.4, 39, 39, 24, 24 y 24 cada 100 m | se agrupan sus anillos | 5 tramos: 63.4 de 100 a 200 m, 46.8 a 300 m, 39.4 a 400 m, 39 de 500 a 600 m y 24 de 700 a 900 m, cada uno con el radio interior de su primer anillo y el exterior del último |
+| CA11 | El HGN-732 de serie | se señala el anillo de 400 m | el LRM 20 y el Gauss Rifle hacen todo su daño; los dos Medium Laser, con la caída (270 m de óptimo y 405 de máximo); el SRM 6 (270 m) no llega |
 | CA7 | Una mejora de daño de la cantina | se calcula el daño por tonelada y el daño potencial | los dos usan el daño con la mejora |
 
 ## Fuera de alcance
@@ -62,7 +64,7 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA10):** `src/utils/weaponAnalysis.test.ts`, con los datos reales.
+1. **Lógica (CA1 a CA11):** `src/utils/weaponAnalysis.test.ts`, con los datos reales.
 2. **Interfaz:** en el navegador, la pestaña Weapons (tonelaje, Damage / ton y Stores) y la sección HEAT de la pestaña 'Mech, con y sin mejoras de la cantina.
 
 ## Resultado

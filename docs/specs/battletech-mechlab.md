@@ -81,6 +81,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 
 - **RF12.** Share ofrece, además del enlace, «Generate build image», como el MechLab de MW5: un PNG con la misma distribución que el tablero (cabecera, las diez cifras de la lectura, las ocho ubicaciones con sus anclajes, armas, equipo, bonificaciones y blindaje delantero y trasero, y en el centro la ficha del 'Mech con el icono del juego), que se descarga o se copia, con el enlace de la build al lado.
 - **RF13.** El daño por alcance del análisis se ve como un radar, un campo de tiro en semicírculo: el 'Mech abajo en el centro y un anillo cada 90 m hasta 720 m. Cada anillo es más intenso cuanto más daño llega a esa distancia; el daño de las armas que están por debajo de su alcance mínimo va rayado en ámbar. Cada anillo dice su daño, y las distancias van en la base.
+- **RF14.** Al señalar un anillo del radar de daño por alcance, la tabla de armas resalta las que hacen daño a esa distancia y apaga las que no llegan; las que están por debajo de su alcance mínimo llevan una marca, y la línea bajo el radar dice qué armas son.
 ## Requisitos no funcionales
 
 - **RNF1.** La lógica es pura y está en `src/utils/battletech/`, con sus tests: reglas de montaje, peso y blindaje, calor, daño, munición, movimiento, coste, problemas, código de la build, builds guardadas, comparación y filtros.
@@ -121,6 +122,7 @@ El juego base trae JSON sueltos en `BattleTech_Data/StreamingAssets/data/`. Los 
 | CA25 | Las ubicaciones del RFL-3C reequipado | se cuentan sus anclajes | el brazo derecho tiene 2/2 balísticos y ningún otro; el torso derecho, 0/2 de energía; la cabeza, ninguno, como los iconos de la pantalla Refit |
 | CA26 | El HBK-4G de serie | se calculan las cifras de la imagen | son las diez de la lectura, en su orden: 50.00 / 50 t, 800 / 1045 puntos de blindaje, 10.00 t de blindaje, 120 / 200 m andando y corriendo, 0 / 4 retrorreactores, 170 de daño alfa, 80 cuerpo a cuerpo, 54 de calor alfa, 39 de disipación por turno y 270 m de alcance |
 | CA27 | El radar del HBK-4G de serie | se calculan sus anillos | son 8, de 90 a 720 m, cada uno más ancho que el anterior; el de más daño (90 m, con 170) tiene la intensidad máxima, uno sin daño la tiene a 0, y cada anillo es un sector de 180° entre su radio interior y el exterior |
+| CA28 | El CPLT-C1 de serie | se señalan los anillos de 90 y 360 m | a 90 m, los M Laser hacen todo su daño y los LRM15 están por debajo de su alcance mínimo (180 m); a 360 m, los LRM15 hacen todo su daño y los M Laser (270 m) no llegan |
 
 ## Fuera de alcance
 
