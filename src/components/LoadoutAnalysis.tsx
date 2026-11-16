@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Mech } from '../types/mech';
-import { formatArmorPoints, formatCoolingRate, formatTurnRate, type BuildSummary } from '../utils/calculators';
+import { formatArmorPoints, formatCoolingRate, formatTurnRate, getRangeProfile, type BuildSummary } from '../utils/calculators';
+import { RangeRadar } from './RangeRadar';
 import { getWeaponLabel } from '../utils/items';
 import { ZONE_LABELS } from '../utils/zones';
 import { EMPTY_VALUE } from '../utils/format';
@@ -46,6 +47,7 @@ export function LoadoutAnalysis({ mech, summary, base }: LoadoutAnalysisProps) {
 
 function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSummary }) {
   const { weapons, ammunition } = summary;
+  const rangeProfile = getRangeProfile(weapons);
   // Mismo loadout con y sin mejoras: las armas van en el mismo orden.
   const cell = (index: number, format: (weapon: BuildSummary['weapons'][number]) => string) => (
     <UpgradedValue value={format(weapons[index])} base={base && format(base.weapons[index])} />
@@ -111,6 +113,18 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
           </div>
         ) : (
           <p className="analysis-empty">No weapons installed.</p>
+        )}
+        {rangeProfile.length > 0 && (
+          <>
+            <header className="analysis-heading range-heading">
+              <div>
+                <p className="eyebrow">RANGE</p>
+                <h2>Damage by range</h2>
+              </div>
+              <span className="analysis-note">FULL DAMAGE UP TO OPTIMAL RANGE, FALLING TO ZERO AT MAX RANGE</span>
+            </header>
+            <RangeRadar profile={rangeProfile} />
+          </>
         )}
       </div>
       {ammunition.length > 0 && (

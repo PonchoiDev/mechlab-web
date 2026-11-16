@@ -336,6 +336,35 @@ export const getHeatTimes = ({ heatCapacity, heatPerSecond, coolingRate }: { hea
   };
 };
 
+// Daño por alcance para el radar del análisis. En MW5, un arma hace todo su daño hasta su alcance óptimo
+// y, entre el óptimo y el máximo, un daño que baja en línea recta hasta cero (la caída de daño del juego).
+// El cuerpo a cuerpo no cuenta. No hay alcance mínimo, así que belowMin es siempre 0 (en BATTLETECH no).
+const RANGE_STEPS = [50, 100, 150, 200, 250, 300, 500, 750, 1000];
+const MAX_RANGE_RINGS = 10;
+
+// El primer paso con el que el alcance máximo cabe en 10 anillos o menos.
+export const getRangeStep = (maxRange: number): number =>
+  RANGE_STEPS.find(step => Math.ceil(maxRange / step) <= MAX_RANGE_RINGS) ?? RANGE_STEPS[RANGE_STEPS.length - 1];
+
+const damageAt = (weapon: WeaponPerformance, distance: number): number => {
+  const full = weapon.range ?? 0;
+  const max = weapon.maxRange ?? full;
+  if (distance <= full) return weapon.damage;
+  if (distance >= max) return 0;
+  return weapon.damage * (max - distance) / (max - full);
+};
+
+export const getRangeProfile = (weapons: WeaponPerformance[]): { distance: number; damage: number; belowMin: number }[] => {
+  const ranged = weapons.filter(weapon => !isMeleeWeapon(weapon.item));
+  const maxRange = Math.max(0, ...ranged.map(weapon => weapon.maxRange ?? weapon.range ?? 0));
+  if (maxRange === 0) return [];
+  const step = getRangeStep(maxRange);
+  return Array.from({ length: Math.ceil(maxRange / step) }, (_, index) => {
+    const distance = (index + 1) * step;
+    return { distance, damage: sumBy(ranged, weapon => damageAt(weapon, distance)), belowMin: 0 };
+  });
+};
+
 export interface BuildSummary {
   equipmentWeight: number;
   armorWeight: number;
