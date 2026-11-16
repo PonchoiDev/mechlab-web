@@ -3,12 +3,13 @@
    :root:root pesa más que el :root de units.css, que en el build se carga después (como en pilots.css). */
 :root:root {
   --units-accent: #a77bff;
-  --arsenal-energy: #6fb6ff;
-  --arsenal-ballistic: #ffc34d;
-  --arsenal-missile: #ff7a5c;
-  --arsenal-artillery: #ff9ad5;
-  --arsenal-melee: #c3ed62;
-  --arsenal-ams: #a3acbb;
+  /* Los colores de anclaje del MechLab (App.css, [data-weapon-type]). */
+  --arsenal-energy: #00d2ff;
+  --arsenal-ballistic: #ffb703;
+  --arsenal-missile: #4caf50;
+  --arsenal-artillery: #ff7a45;
+  --arsenal-melee: #9c27b0;
+  --arsenal-ams: #e91e63;
 }
 
 body {
