@@ -60,8 +60,8 @@ describe('arenas', () => {
     expect(rudiarius.points).toBe(975);
     expect(rudiarius.reward.cbills).toBe(2400000);
     expect(rudiarius.reward.weapons).toEqual([
-      { name: 'Autocannon/20 rapid-fire', tier: 'Tier 4', count: 1 },
-      { name: 'Heavy Rifle Burst Fire', tier: 'Tier 4', count: 1 }
+      expect.objectContaining({ name: 'AC/20 RF', tier: 'Tier 4', count: 1 }),
+      expect.objectContaining({ name: 'Heavy Rifle BF', tier: 'Tier 4', count: 1 })
     ]);
     expect(rudiarius.reward.equipment).toEqual([{ name: 'Arena Supercharger MK IV', count: 1 }]);
   });

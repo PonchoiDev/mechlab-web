@@ -65,6 +65,12 @@ export const getAvailableYear = (mech: Mech): number => Math.max(
 export const hasEcm = (mech: Mech): boolean =>
   Object.values(mech.components).some(component => (component.specialSlots?.ECM_SlotType ?? 0) > 0);
 
+// La sonda activa viene de serie en muchos chasis (sobre todo Clan); otros tienen una ranura especial
+// para montarla (el JVN-11B y el ZEU-SA3). Las dos cuentan, como las ranuras de ECM.
+export const hasActiveProbe = (mech: Mech): boolean =>
+  mech.activeProbe === true ||
+  Object.values(mech.components).some(component => (component.specialSlots?.BAP_SlotType ?? 0) > 0);
+
 // Fuente de contenido de una variante: 0 para el juego base y 1 a 9 para su DLC.
 export const BASE_GAME = 0;
 export const CONTENT_SOURCES = [BASE_GAME, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -104,6 +110,7 @@ export interface MechFilters {
   techBase: 'InnerSphere' | 'Clan' | null;
   jumpJets: boolean;
   ecm: boolean;
+  activeProbe: boolean;
   hero: boolean;
   // Fuentes de contenido marcadas (juego base y DLC); vacío, todas.
   dlcs: number[];
@@ -114,13 +121,14 @@ export interface MechFilters {
   minHardpoints: Partial<Record<HardpointFilterType, number>>;
 }
 
-type QueryFilters = Pick<MechFilters, 'jumpJets' | 'ecm' | 'hero' | 'dlcs' | 'minHardpoints'>;
+type QueryFilters = Pick<MechFilters, 'jumpJets' | 'ecm' | 'activeProbe' | 'hero' | 'dlcs' | 'minHardpoints'>;
 
 export const EMPTY_MECH_FILTERS: MechFilters = {
   weightClasses: [],
   techBase: null,
   jumpJets: false,
   ecm: false,
+  activeProbe: false,
   hero: false,
   dlcs: [],
   roles: [],
@@ -133,6 +141,7 @@ export const countActiveFilters = (filters: MechFilters): number =>
   (filters.techBase ? 1 : 0) +
   (filters.jumpJets ? 1 : 0) +
   (filters.ecm ? 1 : 0) +
+  (filters.activeProbe ? 1 : 0) +
   (filters.hero ? 1 : 0) +
   (filters.dlcs.length > 0 ? 1 : 0) +
   (filters.roles.length > 0 ? 1 : 0) +
@@ -144,6 +153,7 @@ export const matchesMechFilters = (mech: Mech, filters: MechFilters): boolean =>
   (!filters.techBase || (mech.techBase ?? 'InnerSphere') === filters.techBase) &&
   (!filters.jumpJets || hasJumpJets(mech)) &&
   (!filters.ecm || hasEcm(mech)) &&
+  (!filters.activeProbe || hasActiveProbe(mech)) &&
   (!filters.hero || mech.hero === true) &&
   (filters.dlcs.length === 0 || filters.dlcs.includes(getContentSource(mech))) &&
   (filters.roles.length === 0 || (mech.role !== undefined && filters.roles.includes(mech.role))) &&
@@ -155,10 +165,10 @@ const QUERY_DLC_TOKEN = /^dlc([1-9])$/i;
 const TOKEN_TYPES: Record<string, HardpointFilterType> = { e: 'energy', b: 'ballistic', m: 'missile', o: 'omni', art: 'artillery', ams: 'ams' };
 
 // Separa del texto de búsqueda los atajos de filtro: "3e 2m jj ecm" pide al menos 3 de energía,
-// 2 de misiles, jump jets y ECM; "hero", las variantes hero; "dlc7" o "base", esa fuente de contenido.
+// 2 de misiles, jump jets y ECM; "bap", sonda activa; "hero", las variantes hero; "dlc7" o "base", esa fuente de contenido.
 // El resto del texto se busca en el nombre, la variante y el ID.
 export const parseMechQuery = (query: string): { text: string; filters: QueryFilters } => {
-  const filters: QueryFilters = { jumpJets: false, ecm: false, hero: false, dlcs: [], minHardpoints: {} };
+  const filters: QueryFilters = { jumpJets: false, ecm: false, activeProbe: false, hero: false, dlcs: [], minHardpoints: {} };
   const words: string[] = [];
   for (const word of query.trim().split(/\s+/).filter(Boolean)) {
     const hardpoint = QUERY_HARDPOINT_TOKEN.exec(word);
@@ -168,6 +178,8 @@ export const parseMechQuery = (query: string): { text: string; filters: QueryFil
       filters.jumpJets = true;
     } else if (word.toLowerCase() === 'ecm') {
       filters.ecm = true;
+    } else if (word.toLowerCase() === 'bap') {
+      filters.activeProbe = true;
     } else if (word.toLowerCase() === 'hero') {
       filters.hero = true;
     } else if (word.toLowerCase() === 'base') {
@@ -186,6 +198,7 @@ export const mergeMechFilters = (filters: MechFilters, extra: QueryFilters): Mec
   ...filters,
   jumpJets: filters.jumpJets || extra.jumpJets,
   ecm: filters.ecm || extra.ecm,
+  activeProbe: filters.activeProbe || extra.activeProbe,
   hero: filters.hero || extra.hero,
   // Las fuentes se suman: el panel con DLC 1 y el buscador con dlc7 muestran las dos.
   dlcs: [...new Set([...filters.dlcs, ...extra.dlcs])],

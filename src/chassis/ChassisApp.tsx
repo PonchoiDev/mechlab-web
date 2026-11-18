@@ -50,8 +50,8 @@ const WEIGHT_CLASSES: { id: WeightClassName; label: string }[] = [
   { id: 'assault', label: 'Assault' }
 ];
 
-// Los contadores del selector de 'Mechs; artillería y AMS se piden también en el buscador (1art, 1ams).
-const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 'omni'];
+// Los contadores del selector de 'Mechs; el AMS tiene su botón y también se escribe en el buscador (1ams).
+const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 'omni', 'artillery'];
 const MAX_MINIMUM = 9;
 
 const formatNumber = (value: number | null, decimals = 2) => value === null ? '' : String(Number(value.toFixed(decimals)));
@@ -112,9 +112,10 @@ export function ChassisApp() {
   const sortBy = (key: ChassisSortKey) => setView(current => ({ ...current, sort: toggleChassisSort(current.sort, key) }));
   const isFiltered = toChassisQuery({ ...view, sort: DEFAULT_CHASSIS_VIEW.sort }) !== '';
   const { filters } = view;
-  const toggles: { id: 'jumpJets' | 'ecm' | 'hero'; label: string; title: string }[] = [
+  const toggles: { id: 'jumpJets' | 'ecm' | 'activeProbe' | 'hero'; label: string; title: string }[] = [
     { id: 'jumpJets', label: 'Jump jets', title: "Only 'Mechs that can mount jump jets" },
-    { id: 'ecm', label: 'ECM', title: "Only 'Mechs with an ECM slot" }
+    { id: 'ecm', label: 'ECM', title: "Only 'Mechs with an ECM slot" },
+    { id: 'activeProbe', label: 'Active probe', title: "Only 'Mechs with an active probe, built in or in a probe slot" }
   ];
 
   return (

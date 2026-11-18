@@ -26,7 +26,7 @@ El MechLab elige un 'Mech con el selector, que filtra bien pero enseña pocas ci
   - **Year** (cuándo se puede conseguir, como el filtro Available by del selector) y **DLC**.
 - **RF3.** Los filtros del selector de 'Mechs, con la misma lógica:
   - el buscador, por nombre, variante o ID, con sus atajos («3e 2m jj ecm hero dlc7»);
-  - clase de peso, tecnología (IS o Clan), rol, Jump jets, ECM, AMS, Hero, anclajes mínimos (los omni cuentan como comodín), Available by y DLC.
+  - clase de peso, tecnología (IS o Clan), rol, Jump jets, ECM, AMS, Active probe, Hero, anclajes mínimos con artillería incluida (los omni cuentan como comodín), Available by y DLC. La sonda y la artillería llegaron después (`docs/specs/filtros-sonda-artilleria.md`).
 - **RF4.** Filtros nuevos con las cifras del chasis: tonelaje mínimo y máximo, y velocidad mínima.
 - **RF5.** Cada columna con cifras ordena la tabla al pulsar su cabecera, y otra pulsación invierte el orden, como en la página de armas: las cifras empiezan de mayor a menor y el nombre de la A a la Z (por chasis y, dentro, por variante). Las variantes sin el dato van al final.
 - **RF6.** Pulsar una variante abre el MechLab con su build de serie (`/mercs/?mech=AS7-D`, el mismo enlace que usa el mapa estelar).

@@ -83,7 +83,7 @@ function ItemOption({ item, onEquip }: { item: Item; onEquip: (item: Item) => vo
   return (
     <button type="button" className="item-option" onClick={() => onEquip(item)}>
       <span className="item-option-main">
-        <span className="item-option-name">{item.name}</span>
+        <span className="item-option-name" title={item.fullName}>{item.name}</span>
         <span className="item-option-spec">
           {item.type === 'weapon'
             ? <>{getSizeName(item.size)} <i /> {item.tonnage} t</>

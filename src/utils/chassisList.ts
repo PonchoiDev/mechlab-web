@@ -170,6 +170,7 @@ export const parseChassisQuery = (search: string): ChassisView => {
       techBase: tech === 'is' ? 'InnerSphere' : tech === 'clan' ? 'Clan' : null,
       jumpJets: params.get('jj') === '1',
       ecm: params.get('ecm') === '1',
+      activeProbe: params.get('bap') === '1',
       hero: params.get('hero') === '1',
       dlcs: [...new Set(dlcs)].sort((a, b) => a - b),
       roles: list(params.get('role')),
@@ -195,6 +196,7 @@ export const toChassisQuery = (view: ChassisView): string => {
   set('role', filters.roles.join(','));
   set('jj', filters.jumpJets && 1);
   set('ecm', filters.ecm && 1);
+  set('bap', filters.activeProbe && 1);
   set('hero', filters.hero && 1);
   set('min', HARDPOINT_FILTER_TYPES
     .filter(type => (filters.minHardpoints[type] ?? 0) > 0)

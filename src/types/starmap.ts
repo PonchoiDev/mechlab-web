@@ -55,7 +55,8 @@ export interface QuestReward {
   cbills: number;
   reputation: number;
   mechs: { id: string; name: string }[];
-  weapons: { name: string; tier: string | null; count: number }[];
+  // El nombre abreviado del arma y, si es distinto, el completo, para buscarla por los dos.
+  weapons: { name: string; fullName?: string; tier: string | null; count: number }[];
   equipment: { name: string; count: number }[];
   // Pilotos que se unen a la compañía (Valten Ryder en la de Adam Steiner); hero si están en la página de pilotos.
   pilots: { id: string; name: string; hero: boolean }[];
@@ -90,7 +91,7 @@ export interface CampaignMission {
   mechs: { id: string; name: string }[];
   // Pilotos que se unen a la compañía (Morgan Trensky en Leading the Charge); hero si están en la página de pilotos.
   pilots: { id: string; name: string; hero: boolean }[];
-  weapons: { name: string; tier: string | null; count: number }[];
+  weapons: { name: string; fullName?: string; tier: string | null; count: number }[];
   equipment: { name: string; count: number }[];
   // Fecha a la que espera aunque la misión anterior esté hecha (su parte comprueba la fecha); null si no espera.
   notBefore: GameDate | null;
@@ -119,7 +120,7 @@ export interface Market {
   stage: string;
   blackMarket: boolean;
   mechs: { id: string; name: string }[];
-  weapons: { name: string; tier: string | null; count: number }[];
+  weapons: { name: string; fullName?: string; tier: string | null; count: number }[];
   equipment: { name: string; count: number }[];
   pilots: { count: number; minSkill: number | null; maxSkill: number | null } | null;
 }
@@ -217,7 +218,7 @@ export interface ArenaRank {
   reward: {
     cbills: number;
     mechs: { id: string; name: string }[];
-    weapons: { name: string; tier: string | null; count: number }[];
+    weapons: { name: string; fullName?: string; tier: string | null; count: number }[];
     equipment: { name: string; count: number }[];
   };
 }

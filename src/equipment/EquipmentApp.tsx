@@ -92,7 +92,7 @@ function WeaponTable({ rows, view, onSort }: { rows: WeaponRow[]; view: ArsenalV
           {rows.map(row => (
             <tr key={row.item.id} data-type={row.item.weaponType ?? undefined}>
               <th scope="row">
-                <span className="arsenal-weapon-name">{row.item.name}</span>
+                <span className="arsenal-weapon-name" title={row.item.fullName}>{row.item.name}</span>
                 <span className="arsenal-weapon-meta">
                   {row.clan && <span className="arsenal-badge" title="Clan weapons have a single tier">Clan</span>}
                   {row.manufacturer && <span>{row.manufacturer}</span>}

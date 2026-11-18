@@ -61,7 +61,10 @@ export interface TargetingComputerStats {
 export interface Item {
   id: string;
   name: string;
-  // Nombre corto del juego, si no es el mismo: «TAG» (Target Acquisition Gear), «AC/10».
+  // Las armas se llaman con su nombre abreviado del juego («C-ER L Laser», «AC/10 RF») y guardan aquí el
+  // completo («Clan ER Large Laser»), para buscarlas por los dos.
+  fullName?: string;
+  // Nombre corto del juego de la munición y el equipo, si no es el mismo.
   shortName?: string;
   type: 'weapon' | 'equipment' | 'ammo';
   equipmentType?: 'jumpJet';

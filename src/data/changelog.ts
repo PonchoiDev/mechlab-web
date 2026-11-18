@@ -19,8 +19,16 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Slot cells are shown by default. If you hid them, the MechLab remembers it',
       'Empty hardpoints and components no longer say free: the notices bar already lists them',
       'The bar above the toolbar is now called Notices: free hardpoints or armor below max are things to know, not tasks you must finish',
-      'The same changes in the MechLabs of MW5 and BATTLETECH',
-      'Thanks to the player who sent this feedback'
+      'The same changes in the MechLabs of MW5 and BATTLETECH'
+    ]
+  },
+  {
+    id: '2026-11-18-weapon-names',
+    date: '2026-11-18',
+    title: 'Short weapon names, like in the game',
+    items: [
+      'Weapons use their short in-game names everywhere: C-ER L Laser, AC/10 RF, AC/10 BF, UAC/10, L Laser SB, LB 10-X AC SOLID. Before, some had the short name and others the long one',
+      'Search a weapon by its short or full name, without typing slashes or dashes: ac10 rf, uac10 or autocannon 10 all work. Hover a weapon name to see its full name'
     ]
   },
   {
@@ -31,6 +39,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       'A new page lists every MW5 variant with its stats: tons, hardpoints, engine, speed, armor, structure, jump jets, turn and torso twist, upgrade slots, and the base heat capacity and cooling of the empty chassis',
       'Filter like in the \'Mech picker (class, tech, role, jump jets, ECM, AMS, hero, minimum hardpoints, year and DLC), plus tonnage and minimum speed, and sort by any column',
       'Click a variant to open its stock build in the MechLab. The filters and the sort go in the link, ready to share',
+      'The \'Mech picker and the chassis list filter by active probe (built in or in a probe slot) and by artillery hardpoints, for the Arrow IV',
       'BATTLETECH has its own list too, with the stats of each empty chassis: free tonnage, armor, walk and sprint, jump jets, stability, melee, DFA and its fixed equipment'
     ]
   },
@@ -53,7 +62,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-11-16',
     title: 'Heavy Gauss Rifle removed',
     items: [
-      'The Heavy Gauss Rifle is gone from the MechLab and the Equipment page. Its files are in the game, but it is introduced on 1 Jan 3061, after the game ends, so no store sells it and no \'Mech carries it. Thanks to the player who reported it'
+      'The Heavy Gauss Rifle is gone from the MechLab and the Equipment page. Its files are in the game, but it is introduced on 1 Jan 3061, after the game ends, so no store sells it and no \'Mech carries it'
     ]
   },
   {
@@ -62,7 +71,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     title: 'Cooling as in the unmodded game',
     items: [
       'Base cooling is now the game\'s own value for every \'Mech: in the unmodded game, engine heat sinks cool as singles even on double heat sink \'Mechs. A stripped MAL-1R cools 1 and a stripped FS9-X1 0.84',
-      'The earlier, higher numbers came from screenshots of a game running a mod that doubles engine heat sinks. Thanks to the player who spotted it',
+      'The earlier, higher numbers came from screenshots of a game running a mod that doubles engine heat sinks',
       'Cooling shows two decimals, like the game'
     ]
   },

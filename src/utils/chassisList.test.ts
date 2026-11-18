@@ -111,4 +111,12 @@ describe('lista de chasis de MW5', () => {
   it('CA7: el enlace al MechLab con la build de serie', () => {
     expect(getChassisLink(row('AS7-D').mech)).toBe('/mercs/?mech=AS7-D');
   });
+
+  it('CA5 de filtros-sonda-artilleria: la sonda y la artillería en la URL de la lista', () => {
+    const parsed = parseChassisQuery('?bap=1&min=1art');
+    expect(parsed.filters).toMatchObject({ activeProbe: true, minHardpoints: { artillery: 1 } });
+    expect(toChassisQuery(parsed)).toBe('?bap=1&min=1art');
+    expect(filtered({}, { activeProbe: true })).toHaveLength(204);
+    expect(filtered({}, { minHardpoints: { artillery: 1 } })).toHaveLength(7);
+  });
 });

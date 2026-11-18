@@ -47,7 +47,7 @@ El mapa dibuja las zonas de conflicto ([mapa-estelar.md](mapa-estelar.md)) y la 
 | CA2 | Un punto junto a una estrella de Liao/Davion Border y otro lejos de toda zona | se busca la zona bajo el punto | el primero es Liao/Davion Border y el segundo ninguna |
 | CA3 | El centro industrial de Diboll | se consultan sus niveles | no traen recargo de reparación, y sí contratos de varias misiones |
 | CA4 | Las arenas | se cargan | son 9, en Northwind, Outreach, Solaris, Galatea, Westerhand, Numenor, Torrence, Hardcore y Herotitus; Solaris tiene mercado negro y variante especial, sin encuentros con mercenarios; Outreach tiene encuentros con mercenarios |
-| CA5 | Los rangos de fama | se cargan | son 11, de «Nobody From Nowhere» (0 puntos) a «Champion»; Rudiarius pide 975 puntos y da 2.400.000 C-Bills, el Autocannon/20 rapid-fire y el Heavy Rifle Burst Fire de tier 4 y el Arena Supercharger MK IV |
+| CA5 | Los rangos de fama | se cargan | son 11, de «Nobody From Nowhere» (0 puntos) a «Champion»; Rudiarius pide 975 puntos y da 2.400.000 C-Bills, el AC/20 RF y el Heavy Rifle BF de tier 4 y el Arena Supercharger MK IV |
 | CA6 | La descripción de un nivel con reparación | se describe | «Repair markup: 60% cost · 100% time» y, para los contratos, «Multi-mission contracts: 2 to 3 missions (30%)» |
 
 ## Fuera de alcance

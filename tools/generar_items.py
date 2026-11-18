@@ -324,10 +324,34 @@ def leer_efectos_equipo(contenido):
     return efectos
 
 
+# Los nombres completos del juego solo pierden los espacios dobles («Clan SRM 4  + Artemis IV»).
+REGLAS_NOMBRE = [
+    (re.compile(r"\s{2,}"), " "),
+]
+
+# Las armas se enseñan con su nombre abreviado, como en el mechlab del juego («C-ER L Laser», «UAC/10»).
+# Los datos escriben de varias formas lo mismo, y se unifica como lo enseña el juego: los modos de disparo
+# separados por un espacio («AC/10-RF» y «C-UAC/10 BF» pasan a «AC/10 RF» y «C-UAC/10 BF»; igual SB, ST y
+# HL), la munición sólida de los LB-X es SOLID («LB 10-X AC-SLD» y «C-LB 5-X AC SLD» pasan a «… AC SOLID»)
+# y los Streak llevan espacio («SSRM2» pasa a «SSRM 2», como «C-SSRM 2»).
+REGLAS_NOMBRE_CORTO = [
+    (re.compile(r"\s{2,}"), " "),
+    (re.compile(r"-(BF|RF|SB|ST|HL)\b"), r" \1"),
+    (re.compile(r"\bAC[- ]SLD\b"), "AC SOLID"),
+    (re.compile(r"\bSSRM(\d)"), r"SSRM \1"),
+]
+
+
+def normalizar(texto, reglas):
+    for patron, reemplazo in reglas:
+        texto = patron.sub(reemplazo, texto)
+    return texto.strip()
+
+
 def construir_item(id_base, tiers):
     contenido = tiers["1"] if "1" in tiers else tiers[sorted(tiers)[0]]
     tipo_general = determinar_tipo_general(buscar_texto(REGEX_CLASE, contenido))
-    nombre = buscar_texto(REGEX_NOMBRE, contenido, id_base).strip()
+    nombre = normalizar(buscar_texto(REGEX_NOMBRE, contenido, id_base), REGLAS_NOMBRE)
     tipo_ranura = buscar_texto(REGEX_SLOT_TYPE, contenido, "")
     slots_archivo = buscar_texto(REGEX_SLOTS, contenido)
 
@@ -339,9 +363,15 @@ def construir_item(id_base, tiers):
         "size": determinar_tamano(buscar_texto(REGEX_WEAPON_SIZE, contenido), tipo_ranura, tipo_general),
         "tonnage": buscar_numero(REGEX_TONS, contenido, 0.0)
     }
-    nombre_corto = buscar_texto(REGEX_NOMBRE_CORTO, contenido, "").strip()
+    nombre_corto = normalizar(buscar_texto(REGEX_NOMBRE_CORTO, contenido, ""), REGLAS_NOMBRE_CORTO)
     if nombre_corto and nombre_corto.lower() != nombre.lower():
-        item["shortName"] = nombre_corto
+        # Las armas se enseñan con el abreviado y guardan el completo para buscarlas por los dos; el resto
+        # (munición y equipo) se enseña con el completo y guarda el corto.
+        if tipo_general == "weapon":
+            item["name"] = nombre_corto
+            item["fullName"] = nombre
+        else:
+            item["shortName"] = nombre_corto
     slots = determinar_slots(tipo_general, int(slots_archivo) if slots_archivo else None)
     if slots is not None:
         item["slots"] = slots

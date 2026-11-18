@@ -43,9 +43,9 @@ const WEIGHT_CLASSES: { value: WeightClassName; label: string }[] = [
   { value: 'assault', label: 'A' }
 ];
 
-// Los anclajes que se pueden pedir con un mínimo desde el panel; artillería y AMS se pueden
-// pedir escribiéndolos en el buscador (1art, 1ams).
-const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 'omni'];
+// Los anclajes que se pueden pedir con un mínimo desde el panel; el AMS tiene su botón en Equipment y
+// también se puede escribir en el buscador (1ams).
+const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 'omni', 'artillery'];
 const MAX_MINIMUM = 9;
 
 
@@ -265,6 +265,15 @@ export function MechPicker({ mechs, selectedIndex, onSelect, prominent = false }
                 }))}
               >
                 AMS
+              </button>
+              <button
+                type="button"
+                className="mech-filter-chip"
+                aria-pressed={filters.activeProbe}
+                title="Only 'Mechs with an active probe, built in or in a probe slot"
+                onClick={() => updateFilters(current => ({ activeProbe: !current.activeProbe }))}
+              >
+                Active probe
               </button>
             </div>
 
