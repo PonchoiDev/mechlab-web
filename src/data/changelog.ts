@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-18-weapon-names',
+    date: '2026-11-18',
+    title: 'Consistent weapon names',
+    items: [
+      'Weapon and equipment names are written the same way everywhere: ER Medium Laser instead of Extended Range Medium Laser, Clan Ultra Autocannon/10 instead of C-Ultra Autocannon 10, Rapid-Fire, Burst Fire and Solid Slug always spelled the same. Thanks to the player who pointed it out'
+    ]
+  },
+  {
     id: '2026-11-18-chassis-list',
     date: '2026-11-18',
     title: 'Chassis list',
