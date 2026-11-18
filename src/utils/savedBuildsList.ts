@@ -26,6 +26,12 @@ export interface BuildListRow {
   hardpoints: Partial<Record<string, number>> | null;
   // Armas montadas por tipo, para comparar los mínimos con lo que lleva y no con lo que admite.
   weapons: Partial<Record<string, number>> | null;
+  // Solo en MW5; en BATTLETECH no hay 'Mechs Clan.
+  techBase: 'InnerSphere' | 'Clan' | null;
+  // El rol de la unit card en MW5; las etiquetas de rol del juego en BATTLETECH.
+  roles: string[];
+  // Lo que lleva montado o lo que es la variante: jumpJets, ecm, ams, hero.
+  features: string[];
 }
 
 export type BuildSort = 'newest' | 'oldest' | 'name' | 'chassis' | 'tonnage' | 'firepower';
@@ -79,6 +85,11 @@ export interface BuildListFilter {
   minHardpoints?: Partial<Record<string, number>>;
   // Con qué se comparan los mínimos: los anclajes del 'Mech (los omni son comodín) o las armas montadas.
   minimumsOf?: BuildMinimumsOf;
+  techBase?: 'InnerSphere' | 'Clan' | null;
+  // Vale cualquiera de los roles marcados, como en el selector de 'Mechs.
+  roles?: string[];
+  // Tiene que cumplirlos todos.
+  features?: string[];
 }
 
 export type BuildMinimumsOf = 'hardpoints' | 'weapons';
@@ -88,11 +99,14 @@ const meetsWeaponMinimums = (weapons: Partial<Record<string, number>>, minimums:
   Object.entries(minimums).every(([type, minimum]) => (weapons[type] ?? 0) >= (minimum ?? 0));
 
 // Cada palabra tiene que estar en el nombre, el chasis o la variante: «atlas brawl».
-export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, minHardpoints = {}, minimumsOf = 'hardpoints' }: BuildListFilter): BuildListRow[] => {
+export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, minHardpoints = {}, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [] }: BuildListFilter): BuildListRow[] => {
   const words = normalize(query).split(/\s+/).filter(Boolean);
   const hasMinimums = Object.values(minHardpoints).some(value => (value ?? 0) > 0);
   return rows.filter(row => {
     if (weightClasses.length > 0 && (row.weightClass === null || !weightClasses.includes(row.weightClass))) return false;
+    if (techBase && row.techBase !== techBase) return false;
+    if (roles.length > 0 && !roles.some(role => row.roles.includes(role))) return false;
+    if (!features.every(feature => row.features.includes(feature))) return false;
     if (hasMinimums) {
       const counts = minimumsOf === 'weapons' ? row.weapons : row.hardpoints;
       if (counts === null) return false;
