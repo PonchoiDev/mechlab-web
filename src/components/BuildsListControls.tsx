@@ -13,7 +13,13 @@ interface BuildsListControlsProps {
   weightClasses: BuildWeightClass[];
   onWeightClassesChange: (weightClasses: BuildWeightClass[]) => void;
   counts: Record<BuildWeightClass, number>;
+  // Tipos de anclaje de cada juego, con la abreviatura del selector de 'Mechs (E, B, M, Omni o S).
+  hardpointTypes: { id: string; short: string; label: string }[];
+  minHardpoints: Partial<Record<string, number>>;
+  onMinHardpointsChange: (minHardpoints: Partial<Record<string, number>>) => void;
 }
+
+const MAX_MINIMUM = 9;
 
 // Buscador, orden y filtro por clase de la ventana My builds, común a los dos MechLabs.
 export function BuildsListControls({
@@ -23,8 +29,14 @@ export function BuildsListControls({
   onSortChange,
   weightClasses,
   onWeightClassesChange,
-  counts
+  counts,
+  hardpointTypes,
+  minHardpoints,
+  onMinHardpointsChange
 }: BuildsListControlsProps) {
+  const changeMinimum = (type: string, step: number) =>
+    onMinHardpointsChange({ ...minHardpoints, [type]: Math.min(MAX_MINIMUM, Math.max(0, (minHardpoints[type] ?? 0) + step)) });
+
   const toggle = (id: BuildWeightClass) =>
     onWeightClassesChange(weightClasses.includes(id) ? weightClasses.filter(other => other !== id) : [...weightClasses, id]);
 
@@ -59,6 +71,19 @@ export function BuildsListControls({
             {option.label} <span className="utility-count">{counts[option.id]}</span>
           </button>
         ))}
+      </div>
+      <div className="builds-hardpoints" role="group" aria-label="Minimum hardpoints">
+        <span className="builds-filter-label" title="Hardpoints of the build's 'Mech, not the weapons it carries">Min hardpoints</span>
+        {hardpointTypes.map(type => {
+          const value = minHardpoints[type.id] ?? 0;
+          return (
+            <span key={type.id} className={value > 0 ? 'mech-filter-stepper is-active' : 'mech-filter-stepper'} data-weapon-type={type.id}>
+              <button type="button" aria-label={`Fewer ${type.label} hardpoints`} disabled={value === 0} onClick={() => changeMinimum(type.id, -1)}>−</button>
+              <span title={type.label}><b>{value}</b>{type.short}</span>
+              <button type="button" aria-label={`More ${type.label} hardpoints`} disabled={value === MAX_MINIMUM} onClick={() => changeMinimum(type.id, 1)}>+</button>
+            </span>
+          );
+        })}
       </div>
     </div>
   );

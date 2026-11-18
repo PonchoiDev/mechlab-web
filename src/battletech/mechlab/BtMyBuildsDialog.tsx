@@ -4,6 +4,8 @@ import type { useSavedBuilds } from '../../hooks/useSavedBuilds';
 import { normalizeBuildName, type SavedBuild } from '../../utils/savedBuildsCore';
 import { decodeBtBuild } from '../../utils/battletech/buildCode';
 import { getMechDisplayName } from '../../utils/battletech/mechlabData';
+import { HARDPOINT_LABELS, HARDPOINT_SHORT, HARDPOINTS } from '../../utils/battletech/catalog';
+import { getHardpointCount } from '../../utils/battletech/fitting';
 import { createBtExportFile, parseBtImportFile } from '../../utils/battletech/savedBuilds';
 import { getBuildSummary } from '../../utils/battletech/stats';
 import { countBuildsByWeightClass, filterBuildRows, sortBuildRows, type BuildListRow, type BuildWeightClass } from '../../utils/savedBuildsList';
@@ -34,6 +36,9 @@ const downloadFile = (content: string, fileName: string) => {
 };
 
 // Las builds guardadas de BATTLETECH, con las mismas acciones que el diálogo de MW5.
+// Los mismos contadores que el selector de 'Mechs de BATTLETECH.
+const HARDPOINT_TYPES = HARDPOINTS.map(id => ({ id, short: HARDPOINT_SHORT[id], label: HARDPOINT_LABELS[id].toLowerCase() }));
+
 export function BtMyBuildsDialog({
   saved,
   currentCode,
@@ -51,6 +56,7 @@ export function BtMyBuildsDialog({
   const [duplicatedId, setDuplicatedId] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [weightClasses, setWeightClasses] = useState<BuildWeightClass[]>([]);
+  const [minHardpoints, setMinHardpoints] = useState<Partial<Record<string, number>>>({});
   const [sort, setSort] = useBuildSort(BT_BUILD_SORT_KEY);
   const fileInput = useRef<HTMLInputElement | null>(null);
 
@@ -79,7 +85,8 @@ export function BtMyBuildsDialog({
       variant: decoded?.mech.variant ?? null,
       weightClass: decoded?.mech.weightClass ?? null,
       tonnage: summary?.tonnage ?? null,
-      firepower: summary?.alphaDamage ?? null
+      firepower: summary?.alphaDamage ?? null,
+      hardpoints: decoded ? Object.fromEntries(HARDPOINTS.map(type => [type, getHardpointCount(decoded.mech, type)])) : null
     };
     return { build, decoded, summary, listRow };
   }), [builds]);
@@ -87,15 +94,16 @@ export function BtMyBuildsDialog({
   // Como en MW5: la copia recién duplicada se ve aunque el filtro la escondería.
   const shownRows = useMemo(() => {
     const listRows = rows.map(row => row.listRow);
-    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses }).map(row => row.id));
+    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses, minHardpoints }).map(row => row.id));
     if (duplicatedId) shownIds.add(duplicatedId);
     const byId = new Map(rows.map(row => [row.build.id, row]));
     return sortBuildRows(listRows.filter(row => shownIds.has(row.id)), sort).map(row => byId.get(row.id)!);
-  }, [rows, query, weightClasses, sort, duplicatedId]);
+  }, [rows, query, weightClasses, minHardpoints, sort, duplicatedId]);
   const counts = useMemo(() => countBuildsByWeightClass(rows.map(row => row.listRow)), [rows]);
   const clearFilters = () => {
     setQuery('');
     setWeightClasses([]);
+    setMinHardpoints({});
   };
 
   const load = (build: SavedBuild, decoded: BtBuild) => {
@@ -161,6 +169,9 @@ export function BtMyBuildsDialog({
             weightClasses={weightClasses}
             onWeightClassesChange={setWeightClasses}
             counts={counts}
+            hardpointTypes={HARDPOINT_TYPES}
+            minHardpoints={minHardpoints}
+            onMinHardpointsChange={setMinHardpoints}
           />
         )}
 

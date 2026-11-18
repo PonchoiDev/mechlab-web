@@ -2099,6 +2099,22 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 .builds-classes .mech-filter-chip:disabled { opacity: 0.4; cursor: default; }
+
+.builds-hardpoints {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.builds-filter-label {
+  margin-right: 2px;
+  color: var(--work-muted);
+  font: 500 10px var(--work-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: help;
+}
 .builds-classes .mech-filter-chip[aria-pressed='true'] .utility-count { color: #18200f; }
 
 .builds-empty button {
