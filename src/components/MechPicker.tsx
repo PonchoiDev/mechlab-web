@@ -2,6 +2,7 @@ import { useId, useMemo, useState, type KeyboardEvent } from 'react';
 import type { Mech } from '../types/mech';
 import { readOwnedDlcs, useRememberOwnedDlcs } from '../hooks/useOwnedDlcs';
 import { CheckboxDropdown } from './CheckboxDropdown';
+import { FilterStepper } from './FilterStepper';
 import { MechSpecs } from './MechSpecs';
 import {
   BASE_GAME,
@@ -127,12 +128,6 @@ export function MechPicker({ mechs, selectedIndex, onSelect, prominent = false }
       : [...current.weightClasses, value]
   }));
 
-  const changeMinimum = (type: HardpointFilterType, step: number) => updateFilters(current => ({
-    minHardpoints: {
-      ...current.minHardpoints,
-      [type]: Math.min(MAX_MINIMUM, Math.max(0, (current.minHardpoints[type] ?? 0) + step))
-    }
-  }));
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'ArrowDown') {
@@ -187,14 +182,16 @@ export function MechPicker({ mechs, selectedIndex, onSelect, prominent = false }
         onKeyDown={handleKeyDown}
       />
       {isOpen && (
-        <div className="mech-options-panel">
-          {/* Los botones no se llevan el foco del buscador, para seguir navegando con el teclado. */}
-          <div
-            className="mech-filters"
-            onMouseDown={(event) => {
-              if (event.target instanceof Element && event.target.closest('button')) event.preventDefault();
-            }}
-          >
+        // Pulsar en el panel no se lleva el foco del buscador, para seguir con el teclado y que el panel no se
+        // cierre al pulsar en un hueco o una etiqueta (no reciben el foco); salvo lo que se escribe o se elige: el
+        // año y los números de los contadores. Una etiqueta pasa el foco a su campo al soltar el clic.
+        <div
+          className="mech-options-panel"
+          onMouseDown={(event) => {
+            if (event.target instanceof Element && !event.target.closest('input, select, textarea')) event.preventDefault();
+          }}
+        >
+          <div className="mech-filters">
             <div className="mech-filter-row">
               <span className="mech-filter-label">CLASS</span>
               {WEIGHT_CLASSES.map(({ value, label }) => (
@@ -280,13 +277,16 @@ export function MechPicker({ mechs, selectedIndex, onSelect, prominent = false }
             <div className="mech-filter-row">
               <span className="mech-filter-label" title="Omni hardpoints count as energy, ballistic or missile">MIN HARDPOINTS</span>
               {MINIMUM_TYPES.map(type => {
-                const value = filters.minHardpoints[type] ?? 0;
                 return (
-                  <span key={type} className={value > 0 ? 'mech-filter-stepper is-active' : 'mech-filter-stepper'} data-weapon-type={type}>
-                    <button type="button" aria-label={`Fewer ${type} hardpoints`} disabled={value === 0} onClick={() => changeMinimum(type, -1)}>−</button>
-                    <span><b>{value}</b>{HARDPOINT_ABBREVIATIONS[type].trim()}</span>
-                    <button type="button" aria-label={`More ${type} hardpoints`} disabled={value === MAX_MINIMUM} onClick={() => changeMinimum(type, 1)}>+</button>
-                  </span>
+                  <FilterStepper
+                    key={type}
+                    type={type}
+                    label={`${type} hardpoints`}
+                    short={HARDPOINT_ABBREVIATIONS[type].trim()}
+                    value={filters.minHardpoints[type] ?? 0}
+                    max={MAX_MINIMUM}
+                    onChange={value => updateFilters(current => ({ minHardpoints: { ...current.minHardpoints, [type]: value } }))}
+                  />
                 );
               })}
             </div>

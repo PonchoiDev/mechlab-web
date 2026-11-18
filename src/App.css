@@ -2200,8 +2200,9 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .builds-minimums-of button:hover { color: var(--work-text); }
 .builds-minimums-of button[aria-pressed='true'] { color: #18200f; background: var(--work-lime); }
 
-/* El número de cada contador se puede escribir: una casilla con el aspecto del número del selector. */
-.builds-hardpoints .mech-filter-stepper > label {
+/* El número de cada contador (selectores de 'Mech y My builds) se puede escribir: una casilla con el aspecto
+   de un número. */
+.mech-filter-stepper > label {
   display: inline-flex;
   align-items: baseline;
   gap: 2px;
@@ -2210,7 +2211,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font-weight: 500;
 }
 
-.builds-hardpoints .mech-filter-stepper input {
+.mech-filter-stepper input {
   width: 1.6ch;
   padding: 0;
   color: var(--work-text);
@@ -2221,7 +2222,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   text-align: center;
 }
 
-.builds-hardpoints .mech-filter-stepper input:focus-visible { border-bottom-color: var(--weapon-color); outline: none; }
+.mech-filter-stepper input:focus-visible { border-bottom-color: var(--weapon-color); outline: none; }
 
 .builds-hardpoints {
   display: flex;

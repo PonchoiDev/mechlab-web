@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { ColumnSort } from '../utils/tableSort';
+import { FilterStepper } from './FilterStepper';
 
 // La tabla de las listas de chasis de MW5 y de BATTLETECH: cada columna ordena al pulsar su cabecera, y el
 // nombre de cada variante es un enlace a su build de serie en el MechLab.
@@ -74,15 +75,8 @@ export function ChassisTable<R, K extends string>({ rows, columns, sort, onSort,
   );
 }
 
-// Un contador de mínimo (anclajes o retrorreactores), como los del selector de 'Mechs.
-export function MinimumStepper({ type, label, short, value, max, onChange }: {
-  type: string; label: string; short: string; value: number; max: number; onChange: (value: number) => void;
-}) {
-  return (
-    <span className={value > 0 ? 'chassis-stepper is-active' : 'chassis-stepper'} data-type={type}>
-      <button type="button" aria-label={`Fewer ${label}`} disabled={value === 0} onClick={() => onChange(value - 1)}>−</button>
-      <span><b>{value}</b>{short}</span>
-      <button type="button" aria-label={`More ${label}`} disabled={value === max} onClick={() => onChange(value + 1)}>+</button>
-    </span>
-  );
+// Un contador de mínimo (anclajes o retrorreactores), como los del selector de 'Mechs, con el aspecto de las
+// listas de chasis.
+export function MinimumStepper(props: { type: string; label: string; short: string; value: number; max: number; onChange: (value: number) => void }) {
+  return <FilterStepper className="chassis-stepper" {...props} />;
 }

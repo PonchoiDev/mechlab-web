@@ -53,8 +53,29 @@ body {
 
 .chassis-stepper button:hover:not(:disabled) { color: var(--units-text); }
 .chassis-stepper button:disabled { opacity: 0.35; cursor: default; }
-.chassis-stepper > span { min-width: 44px; text-align: center; letter-spacing: 0.04em; }
-.chassis-stepper b { margin-right: 2px; color: var(--units-text); font-size: 16px; }
+.chassis-stepper > label {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  min-width: 44px;
+  letter-spacing: 0.04em;
+}
+
+/* El número se puede escribir, como en los selectores de 'Mech. */
+.chassis-stepper input {
+  width: 2ch;
+  padding: 0;
+  color: var(--units-text);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dotted var(--units-line);
+  font: inherit;
+  font-size: 16px;
+  text-align: center;
+}
+
+.chassis-stepper input:focus-visible { border-bottom-color: var(--chassis-type, var(--units-text)); outline: none; }
 
 [data-type='energy'] { --chassis-type: var(--arsenal-energy); }
 [data-type='ballistic'] { --chassis-type: var(--arsenal-ballistic); }

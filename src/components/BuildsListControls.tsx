@@ -1,4 +1,5 @@
 import { CheckboxDropdown } from './CheckboxDropdown';
+import { FilterStepper } from './FilterStepper';
 import { describeSelection } from '../utils/mechs';
 import {
   BUILD_SORTS,
@@ -65,14 +66,6 @@ export function BuildsListControls({
   onFeaturesChange
 }: BuildsListControlsProps) {
   const noun = minimumsOf === 'weapons' ? 'weapons' : 'hardpoints';
-  const setMinimum = (type: string, value: number) =>
-    onMinHardpointsChange({ ...minHardpoints, [type]: Math.min(MAX_MINIMUM, Math.max(0, value)) });
-  const changeMinimum = (type: string, step: number) => setMinimum(type, (minHardpoints[type] ?? 0) + step);
-  // El número se escribe a mano: vale la última cifra tecleada (de 0 a 9), y sin ninguna, 0.
-  const typeMinimum = (type: string, text: string) => {
-    const digits = text.replace(/\D/g, '');
-    setMinimum(type, digits === '' ? 0 : Number(digits.slice(-1)));
-  };
 
   const toggle = (id: BuildWeightClass) =>
     onWeightClassesChange(weightClasses.includes(id) ? weightClasses.filter(other => other !== id) : [...weightClasses, id]);
@@ -169,26 +162,17 @@ export function BuildsListControls({
             </button>
           ))}
         </span>
-        {hardpointTypes.map(type => {
-          const value = minHardpoints[type.id] ?? 0;
-          return (
-            <span key={type.id} className={value > 0 ? 'mech-filter-stepper is-active' : 'mech-filter-stepper'} data-weapon-type={type.id}>
-              <button type="button" aria-label={`Fewer ${type.label} ${noun}`} disabled={value === 0} onClick={() => changeMinimum(type.id, -1)}>−</button>
-              <label title={`Minimum ${type.label} ${noun}`}>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  aria-label={`Minimum ${type.label} ${noun}`}
-                  value={value}
-                  onFocus={event => event.currentTarget.select()}
-                  onChange={event => typeMinimum(type.id, event.target.value)}
-                />
-                {type.short}
-              </label>
-              <button type="button" aria-label={`More ${type.label} ${noun}`} disabled={value === MAX_MINIMUM} onClick={() => changeMinimum(type.id, 1)}>+</button>
-            </span>
-          );
-        })}
+        {hardpointTypes.map(type => (
+          <FilterStepper
+            key={type.id}
+            type={type.id}
+            label={`${type.label} ${noun}`}
+            short={type.short}
+            value={minHardpoints[type.id] ?? 0}
+            max={MAX_MINIMUM}
+            onChange={value => onMinHardpointsChange({ ...minHardpoints, [type.id]: value })}
+          />
+        ))}
       </div>
     </div>
   );
