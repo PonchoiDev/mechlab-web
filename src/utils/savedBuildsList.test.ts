@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { meetsHardpointMinimums } from './hardpointMinimums';
 import {
   countBuildsByWeightClass,
+  countWeaponTypes,
   filterBuildRows,
   parseBuildSort,
   sortBuildRows,
@@ -85,5 +86,15 @@ describe('buscar, ordenar y filtrar las builds guardadas', () => {
     expect(meetsHardpointMinimums(omni, { omni: 1 })).toBe(true);
     expect(meetsHardpointMinimums(omni, { energy: 3, ballistic: 1 })).toBe(false);
     expect(meetsHardpointMinimums(omni, { omni: 3 })).toBe(false);
+  });
+
+  it('CA11: las armas montadas por tipo, en el orden del juego', () => {
+    const order = ['energy', 'ballistic', 'missile', 'support'];
+    expect(countWeaponTypes(['missile', 'energy', undefined, 'ballistic', 'energy'], order)).toEqual([
+      { type: 'energy', count: 2 },
+      { type: 'ballistic', count: 1 },
+      { type: 'missile', count: 1 }
+    ]);
+    expect(countWeaponTypes([], order)).toEqual([]);
   });
 });

@@ -21,6 +21,7 @@ La ventana **My builds** de los dos MechLabs (MW5 y BATTLETECH) enseña las buil
 - **RF3b.** Un filtro de anclajes mínimos como el del selector de 'Mechs, con un contador por tipo: en MW5, Energy, Ballistic, Missile y Omni, y los omni cuentan como comodín de energía, balística y misiles (un 'Mech con 1E y 2 omni cumple «al menos 3E»; cada omni cuenta una vez); en BATTLETECH, Energy, Ballistic, Missile y Support. Mira los anclajes del 'Mech de la build, no las armas que lleva. Las builds que ya no se pueden abrir no salen con un mínimo puesto. El número de cada contador también se escribe a mano.
 - **RF4.** El recuento dice cuántas se ven de cuántas hay («7 of 42 saved») cuando el buscador o el filtro esconden alguna, y si no queda ninguna, la lista lo dice y ofrece quitar los filtros.
 - **RF4b.** La ventana tiene una altura fija: al filtrar cambia la lista, que se desplaza dentro, y los controles no se mueven bajo el ratón.
+- **RF4c.** Cada build dice, junto a sus cifras, cuántas armas lleva montadas de cada tipo («2E 1B 1M»), con el color de su tipo de anclaje: en MW5, energía, balística, misiles, artillería, AMS y cuerpo a cuerpo; en BATTLETECH, energía, balística, misiles y apoyo. Los tipos sin armas no salen.
 - **RF5.** El orden elegido se recuerda en el navegador, por separado en cada juego; el buscador y el filtro empiezan vacíos cada vez que se abre la ventana.
 - **RF6.** Todo lo demás de la ventana sigue igual: cargar, duplicar (la copia se ve aunque el filtro la escondería, para que se pueda renombrar), renombrar, copiar el enlace, borrar, importar y exportar todas.
 - **RF7.** Igual en el MechLab de MW5 y en el de BATTLETECH.
@@ -53,6 +54,7 @@ Con estas builds (la última, de un 'Mech que ya no existe). Los anclajes de sus
 | CA7 | Las builds | se cuentan por clase | 1 light, 0 medium, 1 heavy y 2 assault |
 | CA9 | Las builds, con los anclajes de sus 'Mechs: Brawler y Sniper 4E 1B 1M, LRM boat 4E 2M y Scout 1E 2B | se pide al menos 2B / al menos 3E y 1B / al menos 1M | Scout / Brawler y Sniper / Brawler, LRM boat y Sniper; Old one no sale con ningún mínimo |
 | CA10 | Un 'Mech con 1E y 2 omni | se comparan sus anclajes con los mínimos | cumple 3E, 2M y 1 omni; no cumple 3E y 1B (los dos omni ya completan la energía) ni 3 omni |
+| CA11 | Las armas de una build: dos de energía, una balística, una de misiles y una de un tipo que el juego no clasifica | se cuentan por tipo | 2E, 1B y 1M, en el orden de los tipos del juego y sin el arma sin tipo ni los tipos sin armas |
 | CA8 | El orden guardado | se lee | un orden que existe se usa; uno que no existe o nada guardado, Newest |
 
 ## Fuera de alcance
@@ -62,7 +64,7 @@ Con estas builds (la última, de un 'Mech que ya no existe). Los anclajes de sus
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA10):** `src/utils/savedBuildsList.test.ts`, con builds de prueba.
+1. **Lógica (CA1 a CA11):** `src/utils/savedBuildsList.test.ts`, con builds de prueba.
 2. **Interfaz:** en el navegador, en los dos MechLabs, a 1440 × 900 y a 390 × 844, con varias builds guardadas: buscar, ordenar, filtrar, el recuento, la lista vacía, duplicar con un filtro puesto y que el orden se recuerde al volver a abrir.
 
 ## Resultado
