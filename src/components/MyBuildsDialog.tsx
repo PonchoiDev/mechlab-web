@@ -5,7 +5,10 @@ import type { useSavedBuilds } from '../hooks/useSavedBuilds';
 import { decodeBuild, type SharedBuild } from '../utils/buildCode';
 import { getBuildSummary } from '../utils/calculators';
 import { getUpgrades } from '../utils/upgrades';
-import { getMechDisplayName } from '../utils/mechs';
+import { getMechDisplayName, getMechWeightClass } from '../utils/mechs';
+import { countBuildsByWeightClass, filterBuildRows, sortBuildRows, type BuildListRow, type BuildWeightClass } from '../utils/savedBuildsList';
+import { MERCS_BUILD_SORT_KEY, useBuildSort } from '../hooks/useBuildSort';
+import { BuildsListControls } from './BuildsListControls';
 import { createExportFile, normalizeBuildName, parseImportFile, type SavedBuild } from '../utils/savedBuilds';
 
 interface MyBuildsDialogProps {
@@ -53,6 +56,9 @@ export function MyBuildsDialog({
   const [editing, setEditing] = useState<{ id: string; name: string } | null>(null);
   const [confirming, setConfirming] = useState<{ id: string; action: 'delete' | 'load' } | null>(null);
   const [duplicatedId, setDuplicatedId] = useState<string | null>(null);
+  const [query, setQuery] = useState('');
+  const [weightClasses, setWeightClasses] = useState<BuildWeightClass[]>([]);
+  const [sort, setSort] = useBuildSort(MERCS_BUILD_SORT_KEY);
   const fileInput = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -71,8 +77,32 @@ export function MyBuildsDialog({
   const rows = useMemo(() => builds.map(build => {
     const shared = decodeBuild(build.code, mechs, catalog);
     const summary = shared ? getBuildSummary(shared.mech, shared.loadout, shared.armor, getUpgrades(shared.upgrades)) : null;
-    return { build, shared, summary };
+    const listRow: BuildListRow = {
+      id: build.id,
+      name: build.name,
+      savedAt: build.savedAt,
+      chassis: shared ? getMechDisplayName(shared.mech) : null,
+      variant: shared?.mech.variant ?? null,
+      weightClass: shared ? getMechWeightClass(shared.mech) : null,
+      tonnage: summary?.totalWeight ?? null,
+      firepower: summary?.firepower ?? null
+    };
+    return { build, shared, summary, listRow };
   }), [builds, mechs, catalog]);
+
+  // La copia recién duplicada se ve aunque el filtro la escondería, para poder renombrarla.
+  const shownRows = useMemo(() => {
+    const listRows = rows.map(row => row.listRow);
+    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses }).map(row => row.id));
+    if (duplicatedId) shownIds.add(duplicatedId);
+    const byId = new Map(rows.map(row => [row.build.id, row]));
+    return sortBuildRows(listRows.filter(row => shownIds.has(row.id)), sort).map(row => byId.get(row.id)!);
+  }, [rows, query, weightClasses, sort, duplicatedId]);
+  const counts = useMemo(() => countBuildsByWeightClass(rows.map(row => row.listRow)), [rows]);
+  const clearFilters = () => {
+    setQuery('');
+    setWeightClasses([]);
+  };
 
   const load = (build: SavedBuild, shared: SharedBuild) => {
     setConfirming(null);
@@ -139,7 +169,7 @@ export function MyBuildsDialog({
         </header>
 
         <div className="builds-list-header">
-          <span>{builds.length} SAVED</span>
+          <span>{shownRows.length === builds.length ? builds.length : `${shownRows.length} of ${builds.length}`} SAVED</span>
           <span className="builds-list-actions">
             <button type="button" className="utility-button" onClick={() => fileInput.current?.click()}>Import</button>
             <button type="button" className="utility-button" disabled={builds.length === 0} onClick={exportBuilds}>Export all</button>
@@ -147,11 +177,30 @@ export function MyBuildsDialog({
           </span>
         </div>
 
+        {builds.length > 0 && (
+          <BuildsListControls
+            query={query}
+            onQueryChange={setQuery}
+            sort={sort}
+            onSortChange={setSort}
+            weightClasses={weightClasses}
+            onWeightClassesChange={setWeightClasses}
+            counts={counts}
+          />
+        )}
+
         <ul className="builds-list">
           {rows.length === 0 && (
             <li className="builds-empty">No saved builds yet. Use Save build in the toolbar, or import an exported file.</li>
           )}
-          {rows.map(({ build, shared, summary }) => {
+          {rows.length > 0 && shownRows.length === 0 && (
+            <li className="builds-empty">
+              No saved builds match these filters.
+              <br />
+              <button type="button" className="utility-button" onClick={clearFilters}>Clear filters</button>
+            </li>
+          )}
+          {shownRows.map(({ build, shared, summary }) => {
             const isConfirming = confirming?.id === build.id;
             return (
               <li

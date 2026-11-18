@@ -2056,6 +2056,55 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   gap: 6px;
 }
 
+/* Buscador, orden y filtro por clase de las builds guardadas */
+.builds-controls {
+  display: grid;
+  gap: 8px;
+}
+
+.builds-controls-row {
+  display: flex;
+  gap: 8px;
+}
+
+.builds-search,
+.builds-sort select {
+  min-height: 34px;
+  padding: 0 10px;
+  color: var(--work-text);
+  background: var(--work-bg);
+  border: 1px solid var(--work-line);
+  border-radius: 3px;
+  font: 500 13px var(--work-mono);
+}
+
+.builds-search { flex: 1; min-width: 0; }
+.builds-search:focus-visible,
+.builds-sort select:focus-visible { border-color: var(--work-cyan); outline: none; }
+
+.builds-sort {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--work-muted);
+  font: 500 10px var(--work-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.builds-classes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.builds-classes .mech-filter-chip:disabled { opacity: 0.4; cursor: default; }
+.builds-classes .mech-filter-chip[aria-pressed='true'] .utility-count { color: #18200f; }
+
+.builds-empty button {
+  margin-top: 8px;
+}
+
 .builds-list {
   display: grid;
   gap: 6px;

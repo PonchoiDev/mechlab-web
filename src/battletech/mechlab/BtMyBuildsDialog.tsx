@@ -6,6 +6,9 @@ import { decodeBtBuild } from '../../utils/battletech/buildCode';
 import { getMechDisplayName } from '../../utils/battletech/mechlabData';
 import { createBtExportFile, parseBtImportFile } from '../../utils/battletech/savedBuilds';
 import { getBuildSummary } from '../../utils/battletech/stats';
+import { countBuildsByWeightClass, filterBuildRows, sortBuildRows, type BuildListRow, type BuildWeightClass } from '../../utils/savedBuildsList';
+import { BT_BUILD_SORT_KEY, useBuildSort } from '../../hooks/useBuildSort';
+import { BuildsListControls } from '../../components/BuildsListControls';
 
 interface BtMyBuildsDialogProps {
   saved: ReturnType<typeof useSavedBuilds>;
@@ -46,6 +49,9 @@ export function BtMyBuildsDialog({
   const [editing, setEditing] = useState<{ id: string; name: string } | null>(null);
   const [confirming, setConfirming] = useState<{ id: string; action: 'delete' | 'load' } | null>(null);
   const [duplicatedId, setDuplicatedId] = useState<string | null>(null);
+  const [query, setQuery] = useState('');
+  const [weightClasses, setWeightClasses] = useState<BuildWeightClass[]>([]);
+  const [sort, setSort] = useBuildSort(BT_BUILD_SORT_KEY);
   const fileInput = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -63,8 +69,34 @@ export function BtMyBuildsDialog({
 
   const rows = useMemo(() => builds.map(build => {
     const decoded = decodeBtBuild(build.code);
-    return { build, decoded, summary: decoded ? getBuildSummary(decoded) : null };
+    const summary = decoded ? getBuildSummary(decoded) : null;
+    // La potencia de fuego de BATTLETECH es el daño de un ataque con todas las armas.
+    const listRow: BuildListRow = {
+      id: build.id,
+      name: build.name,
+      savedAt: build.savedAt,
+      chassis: decoded?.mech.name ?? null,
+      variant: decoded?.mech.variant ?? null,
+      weightClass: decoded?.mech.weightClass ?? null,
+      tonnage: summary?.tonnage ?? null,
+      firepower: summary?.alphaDamage ?? null
+    };
+    return { build, decoded, summary, listRow };
   }), [builds]);
+
+  // Como en MW5: la copia recién duplicada se ve aunque el filtro la escondería.
+  const shownRows = useMemo(() => {
+    const listRows = rows.map(row => row.listRow);
+    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses }).map(row => row.id));
+    if (duplicatedId) shownIds.add(duplicatedId);
+    const byId = new Map(rows.map(row => [row.build.id, row]));
+    return sortBuildRows(listRows.filter(row => shownIds.has(row.id)), sort).map(row => byId.get(row.id)!);
+  }, [rows, query, weightClasses, sort, duplicatedId]);
+  const counts = useMemo(() => countBuildsByWeightClass(rows.map(row => row.listRow)), [rows]);
+  const clearFilters = () => {
+    setQuery('');
+    setWeightClasses([]);
+  };
 
   const load = (build: SavedBuild, decoded: BtBuild) => {
     setConfirming(null);
@@ -102,7 +134,7 @@ export function BtMyBuildsDialog({
         </header>
 
         <div className="builds-list-header">
-          <span>{builds.length} SAVED</span>
+          <span>{shownRows.length === builds.length ? builds.length : `${shownRows.length} of ${builds.length}`} SAVED</span>
           <span className="builds-list-actions">
             <button type="button" className="utility-button" onClick={() => fileInput.current?.click()}>Import</button>
             <button
@@ -120,9 +152,28 @@ export function BtMyBuildsDialog({
           </span>
         </div>
 
+        {builds.length > 0 && (
+          <BuildsListControls
+            query={query}
+            onQueryChange={setQuery}
+            sort={sort}
+            onSortChange={setSort}
+            weightClasses={weightClasses}
+            onWeightClassesChange={setWeightClasses}
+            counts={counts}
+          />
+        )}
+
         <ul className="builds-list">
           {rows.length === 0 && <li className="builds-empty">No saved builds yet. Use Save build in the toolbar, or import an exported file.</li>}
-          {rows.map(({ build, decoded, summary }) => (
+          {rows.length > 0 && shownRows.length === 0 && (
+            <li className="builds-empty">
+              No saved builds match these filters.
+              <br />
+              <button type="button" className="utility-button" onClick={clearFilters}>Clear filters</button>
+            </li>
+          )}
+          {shownRows.map(({ build, decoded, summary }) => (
             <li
               key={build.id}
               className={['builds-item', build.id === activeId ? 'is-active' : '', build.id === duplicatedId ? 'is-new' : ''].filter(Boolean).join(' ')}
