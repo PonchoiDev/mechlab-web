@@ -13,6 +13,7 @@ import {
   type BtChassisView
 } from './chassisList';
 import { toggleColumnSort } from '../tableSort';
+import { parseBtMechQuery } from './filters';
 
 // Criterios de aceptación de docs/specs/battletech-lista-chasis.md, con los datos reales de BATTLETECH.
 const rows = getBtChassisRows(BT_MECHS);
@@ -103,5 +104,11 @@ describe('lista de chasis de BATTLETECH', () => {
 
   it('CA7: el enlace al MechLab con la build de serie', () => {
     expect(getBtChassisLink(row('HBK-4G').mech)).toBe('/battletech/?mech=HBK-4G');
+  });
+
+  it('los mínimos de dos cifras se leen de la URL y del buscador', () => {
+    expect(parseBtChassisQuery('?min=10e').filters.minHardpoints.energy).toBe(10);
+    expect(parseBtMechQuery('atlas 10e')).toEqual({ text: 'atlas', minHardpoints: { energy: 10 }, minJumpJets: 0 });
+    expect(filtered({}, { query: '8e' }).length).toBeGreaterThan(0);
   });
 });

@@ -119,4 +119,11 @@ describe('lista de chasis de MW5', () => {
     expect(filtered({}, { activeProbe: true })).toHaveLength(204);
     expect(filtered({}, { minHardpoints: { artillery: 1 } })).toHaveLength(7);
   });
+
+  it('los mínimos de dos cifras van en la URL: hay \'Mechs con más de 10 anclajes de un tipo', () => {
+    const parsed = parseChassisQuery('?min=15e,16b');
+    expect(parsed.filters.minHardpoints).toMatchObject({ energy: 15, ballistic: 16 });
+    expect(toChassisQuery(parsed)).toBe('?min=15e,16b');
+    expect(filtered({}, { minHardpoints: { ballistic: 16 } }).map(row => row.mech.variant)).toContain('ADR-S');
+  });
 });
