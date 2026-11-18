@@ -469,9 +469,10 @@
   gap: 6px;
 }
 
+/* Los grupos se separan con espacio, sin raya: una raya vertical no coincidiría con las columnas de la
+   tabla de cifras de debajo y parecería desalineada. */
 .utility-group + .utility-group {
   padding-left: 12px;
-  border-left: 1px solid var(--work-line);
 }
 
 .utility-label {
