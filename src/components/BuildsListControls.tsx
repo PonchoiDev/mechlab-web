@@ -1,3 +1,5 @@
+import { CheckboxDropdown } from './CheckboxDropdown';
+import { describeSelection } from '../utils/mechs';
 import {
   BUILD_SORTS,
   BUILD_WEIGHT_CLASSES,
@@ -20,7 +22,18 @@ interface BuildsListControlsProps {
   onMinHardpointsChange: (minHardpoints: Partial<Record<string, number>>) => void;
   minimumsOf: BuildMinimumsOf;
   onMinimumsOfChange: (minimumsOf: BuildMinimumsOf) => void;
+  // Los filtros del selector de 'Mechs de cada juego: Tech solo en MW5.
+  techBase?: { value: 'InnerSphere' | 'Clan' | null; onChange: (techBase: 'InnerSphere' | 'Clan' | null) => void };
+  roleOptions: string[];
+  roles: string[];
+  onRolesChange: (roles: string[]) => void;
+  featureOptions: { id: string; label: string; title: string }[];
+  features: string[];
+  onFeaturesChange: (features: string[]) => void;
 }
+
+const toggleValue = (values: string[], value: string) =>
+  values.includes(value) ? values.filter(other => other !== value) : [...values, value];
 
 const MINIMUMS_OF: { id: BuildMinimumsOf; label: string; title: string }[] = [
   { id: 'hardpoints', label: 'Hardpoints', title: "Hardpoints of the build's 'Mech: what it can mount" },
@@ -42,7 +55,14 @@ export function BuildsListControls({
   minHardpoints,
   onMinHardpointsChange,
   minimumsOf,
-  onMinimumsOfChange
+  onMinimumsOfChange,
+  techBase,
+  roleOptions,
+  roles,
+  onRolesChange,
+  featureOptions,
+  features,
+  onFeaturesChange
 }: BuildsListControlsProps) {
   const noun = minimumsOf === 'weapons' ? 'weapons' : 'hardpoints';
   const setMinimum = (type: string, value: number) =>
@@ -75,7 +95,7 @@ export function BuildsListControls({
           </select>
         </label>
       </div>
-      <div className="builds-classes" role="group" aria-label="Weight class">
+      <div className="builds-classes" role="group" aria-label="Class, tech and role">
         {BUILD_WEIGHT_CLASSES.map(option => (
           <button
             key={option.id}
@@ -86,6 +106,51 @@ export function BuildsListControls({
             onClick={() => toggle(option.id)}
           >
             {option.label} <span className="utility-count">{counts[option.id]}</span>
+          </button>
+        ))}
+        {techBase && (
+          <>
+            <span className="builds-filter-label">Tech</span>
+            {(['InnerSphere', 'Clan'] as const).map(value => (
+              <button
+                key={value}
+                type="button"
+                className="mech-filter-chip"
+                aria-pressed={techBase.value === value}
+                onClick={() => techBase.onChange(techBase.value === value ? null : value)}
+              >
+                {value === 'InnerSphere' ? 'IS' : 'Clan'}
+              </button>
+            ))}
+          </>
+        )}
+        {roleOptions.length > 0 && (
+          <>
+            <span className="builds-filter-label">Role</span>
+            <CheckboxDropdown
+              label="Role"
+              title="Role of the build's 'Mech"
+              options={roleOptions.map(role => ({ value: role, label: role }))}
+              selected={roles}
+              summary={describeSelection(roles)}
+              onToggle={role => onRolesChange(toggleValue(roles, role))}
+              onClear={() => onRolesChange([])}
+            />
+          </>
+        )}
+      </div>
+      <div className="builds-classes" role="group" aria-label="Equipment">
+        <span className="builds-filter-label">Equipment</span>
+        {featureOptions.map(option => (
+          <button
+            key={option.id}
+            type="button"
+            className="mech-filter-chip"
+            aria-pressed={features.includes(option.id)}
+            title={option.title}
+            onClick={() => onFeaturesChange(toggleValue(features, option.id))}
+          >
+            {option.label}
           </button>
         ))}
       </div>

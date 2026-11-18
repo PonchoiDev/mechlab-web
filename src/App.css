@@ -2097,8 +2097,11 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .builds-classes {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 6px;
 }
+
+.builds-classes .builds-filter-label:not(:first-child) { margin-left: 8px; }
 
 .builds-classes .mech-filter-chip:disabled { opacity: 0.4; cursor: default; }
 
