@@ -70,7 +70,8 @@ Con estas builds (la última, de un 'Mech que ya no existe). Los anclajes de sus
 ## Resultado
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después la lógica y la interfaz, en commits separados.
-- **Tests:** los diez criterios están en `src/utils/savedBuildsList.test.ts` y pasan.
+- **Tests:** los once criterios están en `src/utils/savedBuildsList.test.ts` y pasan.
 - **Interfaz:** comprobada en el navegador con ocho builds en MW5 (una que ya no se puede abrir) y cuatro en BATTLETECH, a 1440 × 900 y a 390 × 844: el orden por fecha, la búsqueda «atlas» ordenada por tonelaje («2 of 8 saved»), un filtro sin resultados con Clear filters, el filtro Assault en BATTLETECH («1 of 4 saved») y el orden guardado en el navegador.
 - **Decisión durante el desarrollo:** el botón de cada clase de peso se desactiva si no hay ninguna build de esa clase, para no dar a elegir un filtro vacío.
 - **Anclajes mínimos (RF3b):** se añadieron después, con los contadores del selector de 'Mechs. La regla de los omni pasó a `utils/hardpointMinimums.ts`, que usan el selector y la lista. Comprobado en el navegador: en MW5, con 1 balístico quedan 5 de 8 builds; en BATTLETECH, los cuatro 'Mechs de prueba tienen al menos un anclaje de apoyo.
+- **Armas por tipo (RF4c) y ventana fija (RF4b):** comprobados en el navegador. En MW5, el HBK-4G de serie sale con 3E 1B y el HGN-732 con 2E 1B 2M; en BATTLETECH, el HBK-4G con 2E 1B 1S. Al filtrar, la ventana mantiene su altura (760 px) y los contadores no se mueven; escribir un 3 en la casilla de energía filtra igual que los botones.
