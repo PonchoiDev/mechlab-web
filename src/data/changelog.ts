@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-18-picker-fixes',
+    date: '2026-11-18',
+    title: '\'Mech picker fixes',
+    items: [
+      'Clicking an empty spot or a label inside the \'Mech picker panel no longer closes it',
+      'Type the number of each minimum hardpoints and jump jets counter, in the \'Mech pickers of both MechLabs and in the chassis lists, as in My builds'
+    ]
+  },
+  {
     id: '2026-11-18-mechlab-layout',
     date: '2026-11-18',
     title: 'Easier to read MechLab',
