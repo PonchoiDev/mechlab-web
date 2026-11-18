@@ -110,7 +110,7 @@ function ChassisTable({ rows, view, onSort }: { rows: ChassisRow[]; view: Chassi
               <SortButton view={view} sortKey="name" label="'Mech" onSort={onSort} />
             </th>
             {COLUMNS.map(column => (
-              <th key={column.key} scope="col" aria-sort={ariaSort(column.key)}>
+              <th key={column.key} scope="col" aria-sort={ariaSort(column.key)} className={`is-${column.key}`}>
                 <SortButton view={view} sortKey={column.key} label={column.label} title={column.title} onSort={onSort} />
               </th>
             ))}

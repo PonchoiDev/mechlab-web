@@ -108,7 +108,18 @@ body {
 
 .chassis-hardpoints { display: inline-flex; gap: 7px; }
 .chassis-hardpoints > span { color: var(--chassis-type); font-weight: 700; }
+.chassis-table th.is-hardpoints,
 .chassis-table td.is-hardpoints { text-align: left; }
+
+/* La flecha del orden no ocupa sitio: sale sobre el margen de la celda, y el título queda alineado con sus cifras. */
+.chassis-table thead button { position: relative; }
+.chassis-table thead button span { position: absolute; left: 100%; margin-left: 1px; }
+.chassis-table thead th:first-child button span,
+.chassis-table thead th.is-hardpoints button span { position: static; }
+
+/* Con menos margen entre columnas, las dieciséis caben en la caja de 1270 px sin desplazarse. */
+.chassis-table th,
+.chassis-table td { padding: 5px 7px; }
 .chassis-table td.is-engine small { color: #ffd23f; font-size: 13px; font-weight: 700; }
 
 @media (max-width: 760px) {
