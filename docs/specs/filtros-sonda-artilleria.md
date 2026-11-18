@@ -1,6 +1,6 @@
 # Especificación: filtros de sonda activa y artillería en el selector de 'Mechs
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/mechs.test.ts` y `src/utils/chassisList.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -28,3 +28,9 @@ El selector de 'Mechs de MW5 filtra por Jump jets, ECM y AMS, pero no por sonda 
 | CA3 | El buscador | se escribe «bap» | pide la sonda activa y no busca «bap» como texto |
 | CA4 | Los filtros | se marca Active probe | cuenta como un filtro activo |
 | CA5 | La lista de chasis | se lee `?bap=1&min=1art` y se vuelve a escribir | se conserva igual y deja 204 / 7 variantes |
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después la lógica y la interfaz, en commits separados.
+- **Tests:** los cinco criterios están en `src/utils/mechs.test.ts` y `src/utils/chassisList.test.ts` y pasan. Un test anterior de los atajos del buscador compara el objeto entero de filtros y recibe el campo nuevo.
+- **Interfaz:** comprobada en el navegador: Active probe y el contador ART en el selector, y en la lista de chasis `?bap=1&min=1art` deja el NGA-PRIME, el KFX-V y el MDD-V.
