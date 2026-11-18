@@ -83,9 +83,10 @@ El MechLab enseña las cifras de cada arma cuando se monta, pero no hay un sitio
 | CA7 | Las armas en tier 1 | se ordenan por DPS / daño por tonelada / nombre / munición por tonelada | la primera es Clan Heavy Machine Gun (40 de DPS) / Light Knuckles (30) / AMS, Arrow IV y Assault Arena Fist. Al pulsar otra vez DPS, la última es Clan Heavy Machine Gun. Las armas sin munición van al final en los dos sentidos |
 | CA8 | El equipo | se agrupa por categorías | 3 heat sinks, 5 jump jets, 20 motive upgrades, 8 electronics (4 ECM y 4 sondas), 7 targeting computers y 106 municiones |
 | CA9 | Los efectos | se piden | Single Heat Sink: +0,1 de refrigeración y +1 de capacidad. Jump Jets Class III: 12,5 m/s, 2,75 s, 8 s y 'Mechs de 60 a 75 t. MASC MK II: +50 % de velocidad, ×4 de aceleración, +45 % de giro y daña las piernas. Guardian ECM: 220 y 400 m. Beagle Active Probe: 450 m y +25 % de sensores. Targeting Computer Mk7: +22 % de sensores, +35 % de velocidad del proyectil y +10 % de alcance de los láseres |
-| CA10 | La munición del AC/10 | se consulta | 1 t, 1 ranura, 40 cargas, 10 de daño por carga al explotar, la usan Autocannon/10, Autocannon/10 Rapid-Fire y Autocannon/10 Burst Fire |
+| CA10 | La munición del AC/10 | se consulta | 1 t, 1 ranura, 40 cargas, 10 de daño por carga al explotar, la usan AC/10, AC/10 BF y AC/10 RF |
 | CA11 | La vista | se guarda en la URL y se lee | conserva la pestaña (Weapons si no hay ninguna), la búsqueda, el tipo, el tamaño, la tecnología, el DLC, el tier (1 si no hay), el orden y su sentido, y la categoría del equipo; ignora lo que no conoce |
 | CA12 | Las armas | se busca «tag» / «ac/10-rf» en la pestaña de armas y en el selector del MechLab | sale el Target Acquisition Gear y su versión Clan, por su nombre corto TAG / el Autocannon/10 Rapid-Fire. «Target» sigue encontrando el TAG por su nombre |
+| CA14 | Las armas | se enseñan y se buscan | con su nombre abreviado del juego (C-ER L Laser, AC/10 RF, UAC/10, L Laser SB, LB 10-X AC SOLID); el buscador las encuentra por ese o por el completo, sin mayúsculas, espacios, barras ni guiones («ac10 rf», «uac10», «autocannon 10») |
 | CA13 | El catálogo | se busca el Heavy Gauss Rifle y su munición | no están: su fecha de introducción (3061) es posterior al final del juego |
 
 ## Fuera de alcance
@@ -102,3 +103,4 @@ El MechLab enseña las cifras de cada arma cuando se monta, pero no hay un sitio
 ## Resultado
 
 - **Búsqueda por nombre corto:** buscar «TAG» no encontraba el Target Acquisition Gear. `generar_items.py` guarda ahora el `ShortName` del juego de las 146 armas que lo tienen distinto del nombre, y el buscador de esta página y el del MechLab miran los dos (CA12).
+- **Nombres abreviados (CA14):** a petición de los jugadores, las armas se enseñan con el nombre abreviado del juego, como su mechlab, y `items.json` guarda el completo en `fullName`. Los datos escriben de varias formas lo mismo (`AC/10-RF` y `C-UAC/10 BF`, `AC-SLD` y `AC SLD`, `SSRM2` y `C-SSRM 2`): `generar_items.py` los unifica con un espacio antes del modo de disparo, SOLID para la munición sólida de los LB-X y espacio en los Streak. Los tests están en `src/utils/items.test.ts`.
