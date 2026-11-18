@@ -111,11 +111,6 @@ body {
 .chassis-table td.is-hardpoints { text-align: left; }
 .chassis-table td.is-engine small { color: #ffd23f; font-size: 13px; font-weight: 700; }
 
-/* Las cifras de la build de serie, con un fondo propio para separarlas de las del chasis */
-.chassis-table th.is-stock,
-.chassis-table td.is-stock { background-image: linear-gradient(rgba(255, 159, 28, 0.06), rgba(255, 159, 28, 0.06)); }
-.chassis-table thead th.is-stock { color: #e9c79a; }
-
 @media (max-width: 760px) {
   .chassis-minimums { font-size: 12px; }
   .chassis .arsenal-weapon-name, .chassis .arsenal-weapon-meta { max-width: 170px; }

@@ -1,7 +1,5 @@
-import type { Item } from '../types/item';
 import type { Mech } from '../types/mech';
-import { getStockBuild } from './buildCode';
-import { calculateTopSpeed, getBuildSummary } from './calculators';
+import { calculateTopSpeed } from './calculators';
 import {
   BASE_GAME,
   EMPTY_MECH_FILTERS,
@@ -20,8 +18,8 @@ import {
   type WeightClassName
 } from './mechs';
 
-// Lista de chasis de MW5 (docs/specs/lista-chasis.md): una fila por variante con las cifras del chasis y
-// las de su build de serie. Los filtros son los del selector de 'Mechs del MechLab (utils/mechs.ts).
+// Lista de chasis de MW5 (docs/specs/lista-chasis.md): una fila por variante con las cifras de su chasis.
+// Los filtros son los del selector de 'Mechs del MechLab (utils/mechs.ts).
 
 export interface ChassisRow {
   mech: Mech;
@@ -40,9 +38,7 @@ export interface ChassisRow {
   turnSpeed: number | null;
   torsoYaw: number | null;
   upgradeSlots: number | null;
-  // De la build de serie, calculados como en el MechLab; null si la variante no la tiene.
-  alpha: number | null;
-  dps: number | null;
+  // Del chasis vacío, sin disipadores montados: lo que trae de base.
   heatCapacity: number | null;
   cooling: number | null;
   year: number;
@@ -52,11 +48,9 @@ export interface ChassisRow {
 const sum = (values: number[]) => values.reduce((total, value) => total + value, 0);
 const round2 = (value: number) => Math.round(value * 100) / 100;
 
-export const getChassisRows = (mechs: Mech[], items: Item[]): ChassisRow[] => mechs.map(mech => {
+export const getChassisRows = (mechs: Mech[]): ChassisRow[] => mechs.map(mech => {
   const components = Object.values(mech.components);
   const hardpoints = getHardpointCounts(mech);
-  const stock = getStockBuild(mech, mechs, items);
-  const summary = stock ? getBuildSummary(stock.mech, stock.loadout, stock.armor) : null;
   return {
     mech,
     chassis: getMechDisplayName(mech),
@@ -73,11 +67,9 @@ export const getChassisRows = (mechs: Mech[], items: Item[]): ChassisRow[] => me
     turnSpeed: mech.turnSpeed ?? null,
     torsoYaw: mech.torsoTwist?.yaw ?? null,
     upgradeSlots: mech.upgradeSlots ?? null,
-    alpha: summary?.firepower ?? null,
-    dps: summary ? summary.dps : null,
-    // El juego guarda la capacidad con decimales de coma flotante (48.400002): se redondea como la enseña.
-    heatCapacity: summary?.heatCapacity === null || summary?.heatCapacity === undefined ? null : round2(summary.heatCapacity),
-    cooling: summary?.coolingRate ?? null,
+    // El juego guarda las cifras con decimales de coma flotante (36.400002): se redondean como las enseña.
+    heatCapacity: mech.baseHeatCapacity === undefined ? null : round2(mech.baseHeatCapacity),
+    cooling: mech.BaseCoolingRate === undefined ? null : round2(mech.BaseCoolingRate),
     year: getAvailableYear(mech),
     dlc: getContentSource(mech)
   };
@@ -87,11 +79,11 @@ export const countChassis = (rows: ChassisRow[]): number => new Set(rows.map(row
 
 export type ChassisSortKey =
   | 'name' | 'tonnage' | 'hardpoints' | 'engine' | 'speed' | 'armor' | 'structure' | 'jumpJets'
-  | 'turnSpeed' | 'torsoYaw' | 'upgradeSlots' | 'alpha' | 'dps' | 'heatCapacity' | 'cooling' | 'year' | 'dlc';
+  | 'turnSpeed' | 'torsoYaw' | 'upgradeSlots' | 'heatCapacity' | 'cooling' | 'year' | 'dlc';
 
 export const CHASSIS_SORT_KEYS: ChassisSortKey[] = [
   'name', 'tonnage', 'hardpoints', 'engine', 'speed', 'armor', 'structure', 'jumpJets',
-  'turnSpeed', 'torsoYaw', 'upgradeSlots', 'alpha', 'dps', 'heatCapacity', 'cooling', 'year', 'dlc'
+  'turnSpeed', 'torsoYaw', 'upgradeSlots', 'heatCapacity', 'cooling', 'year', 'dlc'
 ];
 
 export type SortDirection = 'asc' | 'desc';

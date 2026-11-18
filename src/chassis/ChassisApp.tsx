@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import itemsJson from '../data/items.json';
 import mechsJson from '../data/mechs.json';
-import type { Item } from '../types/item';
 import type { Mech } from '../types/mech';
 import {
   DEFAULT_CHASSIS_VIEW,
@@ -35,8 +33,7 @@ import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
 
 const mechs = mechsJson as unknown as Mech[];
-const items = Object.values(itemsJson as unknown as Record<string, Item>);
-const ROWS = getChassisRows(mechs, items);
+const ROWS = getChassisRows(mechs);
 const CHASSIS_TOTAL = countChassis(ROWS);
 const ROLES = getMechRoles(mechs);
 const LAST_YEAR = Math.max(...mechs.map(getAvailableYear));
@@ -62,8 +59,6 @@ interface Column {
   key: ChassisSortKey;
   label: string;
   title?: string;
-  // Las columnas de la build de serie llevan su propio fondo, para separarlas de las del chasis.
-  stock?: boolean;
   value: (row: ChassisRow) => ReactNode;
 }
 
@@ -86,10 +81,8 @@ const COLUMNS: Column[] = [
   { key: 'turnSpeed', label: 'Turn', title: 'Turn speed in °/s', value: row => formatNumber(row.turnSpeed, 1) },
   { key: 'torsoYaw', label: 'Twist', title: 'Torso twist speed in °/s', value: row => formatNumber(row.torsoYaw, 1) },
   { key: 'upgradeSlots', label: 'Upgr.', title: 'Slots for cantina upgrades', value: row => row.upgradeSlots ?? '' },
-  { key: 'alpha', label: 'Alpha', title: 'Stock build: damage of one volley with every weapon', stock: true, value: row => formatNumber(row.alpha, 1) },
-  { key: 'dps', label: 'DPS', title: 'Stock build: damage per second', stock: true, value: row => formatNumber(row.dps, 1) },
-  { key: 'heatCapacity', label: 'Heat cap.', title: 'Stock build: heat capacity', stock: true, value: row => formatNumber(row.heatCapacity, 1) },
-  { key: 'cooling', label: 'Cooling', title: 'Stock build: cooling per second', stock: true, value: row => formatNumber(row.cooling) },
+  { key: 'heatCapacity', label: 'Heat cap.', title: 'Base heat capacity of the empty chassis, before any heat sinks', value: row => formatNumber(row.heatCapacity, 1) },
+  { key: 'cooling', label: 'Cooling', title: 'Base cooling per second of the empty chassis, before any heat sinks', value: row => formatNumber(row.cooling) },
   { key: 'year', label: 'Year', title: 'Year it becomes available in the campaign', value: row => row.year },
   { key: 'dlc', label: 'DLC', value: row => getContentSourceLabel(row.dlc) }
 ];
@@ -117,7 +110,7 @@ function ChassisTable({ rows, view, onSort }: { rows: ChassisRow[]; view: Chassi
               <SortButton view={view} sortKey="name" label="'Mech" onSort={onSort} />
             </th>
             {COLUMNS.map(column => (
-              <th key={column.key} scope="col" aria-sort={ariaSort(column.key)} className={column.stock ? 'is-stock' : undefined}>
+              <th key={column.key} scope="col" aria-sort={ariaSort(column.key)}>
                 <SortButton view={view} sortKey={column.key} label={column.label} title={column.title} onSort={onSort} />
               </th>
             ))}
@@ -143,7 +136,7 @@ function ChassisTable({ rows, view, onSort }: { rows: ChassisRow[]; view: Chassi
                 </span>
               </th>
               {COLUMNS.map(column => (
-                <td key={column.key} className={[`is-${column.key}`, column.stock ? 'is-stock' : ''].filter(Boolean).join(' ')}>
+                <td key={column.key} className={`is-${column.key}`}>
                   {column.value(row)}
                 </td>
               ))}
@@ -220,8 +213,9 @@ export function ChassisApp() {
       <main className="units-main">
         <section className="units-intro">
           <p>
-            Every 'Mech variant you can get in the game, with the stats of its chassis and of its stock build. Sort by any
-            column, filter like in the MechLab's 'Mech picker, and click a variant to open its stock build in the MechLab.
+            Every 'Mech variant you can get in the game, with the stats of its chassis. Heat capacity and cooling are the
+            empty chassis' own, before any heat sinks. Sort by any column, filter like in the MechLab's 'Mech picker, and
+            click a variant to open its stock build in the MechLab.
           </p>
         </section>
 
