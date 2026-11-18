@@ -111,6 +111,15 @@ Es la quinta página de MW5 (`equipment/index.html`, servida en `/mercs/equipmen
 - **`utils/arsenal.ts`:** las filas de la tabla de armas en un tier (con `getWeaponStats`, la misma función que el MechLab; las armas Clan enseñan su único tier), la munición por tonelada, los filtros, el orden por columnas (sin el dato, al final), las categorías y los efectos del equipo, las armas que usan cada munición y la vista en la URL. Tiene sus tests (`arsenal.test.ts`).
 - **`equipment/EquipmentApp.tsx`:** las pestañas de armas y equipo, la tabla de armas (que se desplaza dentro de su caja, con el nombre fijo), las fichas de equipo y la tabla de munición. Solo pinta y llama a la lógica.
 
+### Lista de chasis
+
+Es la séptima página de MW5 (`chassis/index.html`, servida en `/mercs/chassis/`), con su propio bundle. Lee el mismo `mechs.json` que el MechLab, sin datos nuevos ni el catálogo de equipo, y usa los estilos de las unidades enemigas (`units.css`) y la tabla de la página de armas (`equipment/equipment.css`) con su color de acento (`chassis/chassis.css`):
+
+- **`utils/chassisList.ts`:** las filas de cada variante (las cifras del chasis, con la capacidad de calor y la refrigeración del chasis vacío), los filtros (los del selector de 'Mechs de `utils/mechs.ts`, sin copiarlos, más el tonelaje y la velocidad), el enlace al MechLab (`/mercs/?mech=AS7-D`) y la vista en la URL. Tiene sus tests (`chassisList.test.ts`).
+- **`utils/tableSort.ts`:** el orden por columnas de las dos listas de chasis (sin el dato, al final; a igualdad, por nombre).
+- **`components/ChassisTable.tsx`:** la tabla de las dos listas, que se desplaza dentro de su caja con el nombre fijo, y los contadores de mínimos.
+- **`chassis/ChassisApp.tsx`:** los filtros de MW5 y las columnas de su tabla. Solo pinta y llama a la lógica.
+
 ### HRQ y campañas
 
 Es la sexta página de MW5 (`campaigns/index.html`, servida en `/mercs/campaigns/`), con su propio bundle. Lee las HRQ, las campañas y los nombres de los DLC de `starmap.json`, las mismas del mapa estelar, y usa los estilos de las unidades enemigas (`units.css`) con su color de acento (`campaigns/campaigns.css`):
@@ -158,6 +167,13 @@ Es una página del build de BATTLETECH (`battletech/equipment/index.html`, servi
 - **Sin los 'Mechs:** las etiquetas de fuente, anclaje y rareza pasan de `mechlabData.ts` y `filters.ts` a `utils/battletech/catalog.ts`, que no importa datos; los dos módulos las reexportan, así que el MechLab no cambia. La página importa `catalog.ts` y no carga `mechs.json`.
 - **`utils/battletech/equipment.ts`:** las filas de la tabla de armas (el daño de un ataque, la inestabilidad por los disparos, la precisión con el signo del juego y la munición por tonelada), los filtros por anclaje, versión, fuente, rareza y búsqueda, el orden por columnas (sin el dato, al final), las categorías y los efectos del equipo (con dónde se monta), las mejoras por grupo, las armas que usan cada munición y la vista en la URL. Recibe el catálogo como parámetro y tiene sus tests (`equipment.test.ts`).
 - **`battletech/equipment/BtEquipmentApp.tsx`:** las pestañas de armas y equipo, la tabla de armas con las bonificaciones de cada fabricante, las fichas de equipo y la tabla de munición. Solo pinta y llama a la lógica.
+
+### Lista de chasis de BATTLETECH
+
+Es una página del build de BATTLETECH (`battletech/chassis/index.html`, servida en `/battletech/chassis/`), con su propio bundle y los estilos de la lista de MW5:
+
+- **`utils/battletech/chassisList.ts`:** las filas de cada variante con las cifras de su chasis vacío (sin equipo ni armadura, con su equipo fijo), calculadas con `getBuildSummary` como en el MechLab, el equipo fijo con las etiquetas de My builds, los filtros del selector (`filterBtMechs`) más el tonelaje y la distancia de correr, el orden (con `utils/tableSort.ts`), el enlace al MechLab (`/battletech/?mech=HBK-4G`) y la vista en la URL. Tiene sus tests (`chassisList.test.ts`).
+- **`battletech/chassis/BtChassisApp.tsx`:** los filtros y las columnas, con la tabla común (`components/ChassisTable.tsx`). Solo pinta y llama a la lógica.
 
 ### Flashpoints de BATTLETECH
 
