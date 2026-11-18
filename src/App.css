@@ -1993,6 +1993,8 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .builds-dialog {
   width: min(760px, 100%);
+  /* Altura fija: al filtrar cambia la lista, no la ventana, y los controles no se mueven bajo el ratón. */
+  height: min(760px, calc(100svh - 32px));
 }
 
 .builds-save {
@@ -2099,6 +2101,31 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 .builds-classes .mech-filter-chip:disabled { opacity: 0.4; cursor: default; }
+
+.builds-list { flex: 1; align-content: start; }
+
+/* El número de cada contador se puede escribir: una casilla con el aspecto del número del selector. */
+.builds-hardpoints .mech-filter-stepper > label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: 0 5px;
+  color: var(--weapon-color);
+  font-weight: 500;
+}
+
+.builds-hardpoints .mech-filter-stepper input {
+  width: 1.6ch;
+  padding: 0;
+  color: var(--work-text);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dotted var(--work-line);
+  font: 600 11px var(--work-mono);
+  text-align: center;
+}
+
+.builds-hardpoints .mech-filter-stepper input:focus-visible { border-bottom-color: var(--weapon-color); outline: none; }
 
 .builds-hardpoints {
   display: flex;
