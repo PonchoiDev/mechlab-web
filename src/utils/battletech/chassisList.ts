@@ -113,7 +113,7 @@ export const filterBtChassisRows = (rows: BtChassisRow[], view: BtChassisView): 
 export const getBtChassisLink = (mech: BtMech): string => `/battletech/?mech=${encodeURIComponent(mech.variant)}`;
 
 const HARDPOINT_TOKENS: Record<BtHardpoint, string> = { energy: 'e', ballistic: 'b', missile: 'm', support: 's' };
-const HARDPOINT_TOKEN = /^(\d)([ebms])$/;
+const HARDPOINT_TOKEN = /^(\d{1,2})([ebms])$/;
 
 const list = (value: string | null) => (value ?? '').split(',').map(part => part.trim()).filter(Boolean);
 const integerIn = (value: string | null, min: number, max: number): number | null => {

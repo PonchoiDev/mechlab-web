@@ -138,7 +138,7 @@ export const getChassisLink = (mech: Mech): string => `/mercs/?mech=${encodeURIC
 
 const WEIGHT_CLASSES: WeightClassName[] = ['light', 'medium', 'heavy', 'assault'];
 const HARDPOINT_TOKENS: Record<HardpointFilterType, string> = { energy: 'e', ballistic: 'b', missile: 'm', omni: 'o', artillery: 'art', ams: 'ams' };
-const HARDPOINT_TOKEN = /^(\d)(e|b|m|o|art|ams)$/;
+const HARDPOINT_TOKEN = /^(\d{1,2})(e|b|m|o|art|ams)$/;
 
 const list = (value: string | null) => (value ?? '').split(',').map(part => part.trim()).filter(Boolean);
 const integerIn = (value: string | null, min: number, max: number): number | null => {

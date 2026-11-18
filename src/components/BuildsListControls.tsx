@@ -41,7 +41,8 @@ const MINIMUMS_OF: { id: BuildMinimumsOf; label: string; title: string }[] = [
   { id: 'weapons', label: 'Weapons', title: 'Weapons the build carries' }
 ];
 
-const MAX_MINIMUM = 9;
+// Común a los dos juegos: en MW5 hay 'Mechs con más de diez anclajes de un tipo (el ADR-S tiene 16 balísticos).
+const MAX_MINIMUM = 20;
 
 // Buscador, orden y filtro por clase de la ventana My builds, común a los dos MechLabs.
 export function BuildsListControls({

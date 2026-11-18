@@ -64,7 +64,7 @@ body {
 
 /* El número se puede escribir, como en los selectores de 'Mech. */
 .chassis-stepper input {
-  width: 2ch;
+  width: 2.4ch;
   padding: 0;
   color: var(--units-text);
   background: transparent;

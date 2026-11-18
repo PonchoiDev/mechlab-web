@@ -47,7 +47,8 @@ const WEIGHT_CLASSES: { value: WeightClassName; label: string }[] = [
 // Los anclajes que se pueden pedir con un mínimo desde el panel; el AMS tiene su botón en Equipment y
 // también se puede escribir en el buscador (1ams).
 const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 'omni', 'artillery'];
-const MAX_MINIMUM = 9;
+// Hay 'Mechs con más de diez anclajes de un tipo (el ADR-S tiene 16 balísticos y el SR-6, 15 de energía).
+const MAX_MINIMUM = 20;
 
 
 // Marca o desmarca un valor de un filtro de varias opciones.

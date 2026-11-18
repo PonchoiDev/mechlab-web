@@ -2212,7 +2212,8 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 .mech-filter-stepper input {
-  width: 1.6ch;
+  /* Dos cifras: hay 'Mechs con más de diez anclajes de un tipo. */
+  width: 2.2ch;
   padding: 0;
   color: var(--work-text);
   background: transparent;

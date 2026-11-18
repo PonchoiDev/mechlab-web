@@ -52,7 +52,8 @@ const WEIGHT_CLASSES: { id: WeightClassName; label: string }[] = [
 
 // Los contadores del selector de 'Mechs; el AMS tiene su botón y también se escribe en el buscador (1ams).
 const MINIMUM_TYPES: HardpointFilterType[] = ['energy', 'ballistic', 'missile', 'omni', 'artillery'];
-const MAX_MINIMUM = 9;
+// Hay 'Mechs con más de diez anclajes de un tipo (el ADR-S tiene 16 balísticos y el SR-6, 15 de energía).
+const MAX_MINIMUM = 20;
 
 const formatNumber = (value: number | null, decimals = 2) => value === null ? '' : String(Number(value.toFixed(decimals)));
 

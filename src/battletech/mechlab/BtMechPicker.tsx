@@ -29,7 +29,8 @@ interface BtMechPickerProps {
   prominent?: boolean;
 }
 
-const MAX_MINIMUM = 6;
+// El que más anclajes tiene de un tipo lleva 8 de energía.
+const MAX_MINIMUM = 9;
 const MAX_JUMP_JETS = 8;
 
 const toggle = <T,>(list: T[], value: T) => list.includes(value) ? list.filter(entry => entry !== value) : [...list, value];
