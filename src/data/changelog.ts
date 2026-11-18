@@ -16,6 +16,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       'My builds has a search by build name, chassis or variant',
       'Sort the list by newest, oldest, name, chassis, tonnage or firepower; your choice is remembered',
       'Filter by weight class, with how many builds you have in each one, and by minimum hardpoints, like the \'Mech picker (omni hardpoints count as energy, ballistic or missile)',
+      'Filter by tech (IS or Clan), role, equipment the build carries (jump jets, ECM, AMS) and hero variants in MW5, and by role and jump jets in BATTLETECH',
       'A Hardpoints / Weapons switch chooses whether the minimums check what the \'Mech can mount or the weapons the build carries',
       'Each build shows how many weapons of each type it carries, like 2E 1B 1M, and tags for its tech and special equipment: XL, DHS, Endo, Ferro, jump jets, ECM, active probe, MASC, Supercharger and targeting computer in MW5; jump jets and upgrades in BATTLETECH',
       'In both MechLabs, MW5 and BATTLETECH'

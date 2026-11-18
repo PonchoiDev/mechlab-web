@@ -46,7 +46,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (603 tests, cobertura con V8) |
+| Tests | Vitest 5 (604 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -85,7 +85,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - **Comparar:** la build actual junto a otro 'Mech, con la imagen y el loadout de cada uno. Se compara con la build de serie de cualquier 'Mech o con una build guardada, y cada tarjeta lleva sus cifras (potencia de fuego, defensa, calor y movilidad) alineadas con las de la otra, con el valor mejor resaltado en verde.
 
 **Guardar y compartir**
-- Builds guardadas en el navegador: guardar, actualizar, cargar, duplicar, renombrar, borrar, y exportar o importar en JSON. La lista se busca por nombre, chasis o variante, se ordena por fecha, nombre, chasis, tonelaje o potencia de fuego y se filtra por clase de peso y por mínimos de anclajes del 'Mech o de armas montadas, como el selector de 'Mechs, también en BATTLETECH. Cada build dice cuántas armas lleva de cada tipo y su tecnología y equipo especial (XL, DHS, Endo, Ferro, jump jets, ECM, sonda, MASC, Supercharger u ordenador de puntería; en BATTLETECH, jump jets y mejoras).
+- Builds guardadas en el navegador: guardar, actualizar, cargar, duplicar, renombrar, borrar, y exportar o importar en JSON. La lista se busca por nombre, chasis o variante, se ordena por fecha, nombre, chasis, tonelaje o potencia de fuego y se filtra por clase de peso, tecnología, rol, equipo montado (jump jets, ECM, AMS), variantes hero y mínimos de anclajes del 'Mech o de armas montadas, como el selector de 'Mechs, también en BATTLETECH. Cada build dice cuántas armas lleva de cada tipo y su tecnología y equipo especial (XL, DHS, Endo, Ferro, jump jets, ECM, sonda, MASC, Supercharger u ordenador de puntería; en BATTLETECH, jump jets y mejoras).
 - Enlace que abre la build tal cual (`/mercs/?b=…`).
 - Imagen PNG de la build con el 'Mech, su equipo, sus mejoras y sus estadísticas, lista para copiar o descargar.
 
@@ -372,7 +372,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Calidad y comprobación contra el juego
 
-- **603 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **604 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
