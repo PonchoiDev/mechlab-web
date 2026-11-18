@@ -22,13 +22,17 @@ La ventana **My builds** de los dos MechLabs (MW5 y BATTLETECH) enseña las buil
 - **RF4.** El recuento dice cuántas se ven de cuántas hay («7 of 42 saved») cuando el buscador o el filtro esconden alguna, y si no queda ninguna, la lista lo dice y ofrece quitar los filtros.
 - **RF4b.** La ventana tiene una altura fija: al filtrar cambia la lista, que se desplaza dentro, y los controles no se mueven bajo el ratón.
 - **RF4c.** Cada build dice, junto a sus cifras, cuántas armas lleva montadas de cada tipo («2E 1B 1M»), con el color de su tipo de anclaje: en MW5, energía, balística, misiles, artillería, AMS y cuerpo a cuerpo; en BATTLETECH, energía, balística, misiles y apoyo. Los tipos sin armas no salen.
+- **RF4d.** Un interruptor junto a los anclajes mínimos elige qué se compara: **Hardpoints** (por defecto), los anclajes del 'Mech como en RF3b, o **Weapons**, las armas montadas de cada tipo (las de RF4c). Con Weapons no hay comodín: un 'Mech con 1E y 2 omni que lleva 3 láseres y 2 lanzamisiles tiene 3E y 2M, y no cumple «al menos 1B». En MW5 el contador Omni no sale con Weapons, porque ningún arma es omni.
+- **RF4e.** Cada build lleva etiquetas con su tecnología y su equipo especial:
+  - en MW5, las del chasis como en el selector de 'Mechs (XL o C-XL, DHS, ENDO y FERRO, con C- en los Clan) y el equipo montado: los jump jets con su número («JJ 3»), ECM, la sonda activa (AP, una sola vez aunque el chasis ya la traiga), MASC, Supercharger (SC) y el ordenador de puntería (TC). El AMS no lleva etiqueta porque ya sale entre las armas («1AMS»);
+  - en BATTLETECH, los jump jets con su número y cada mejora montada por su nombre del juego («Gyro +», «TTS + +», «X-1 ECM Equipment»), con «×2» si se repite.
 - **RF5.** El orden elegido se recuerda en el navegador, por separado en cada juego; el buscador y el filtro empiezan vacíos cada vez que se abre la ventana.
 - **RF6.** Todo lo demás de la ventana sigue igual: cargar, duplicar (la copia se ve aunque el filtro la escondería, para que se pueda renombrar), renombrar, copiar el enlace, borrar, importar y exportar todas.
 - **RF7.** Igual en el MechLab de MW5 y en el de BATTLETECH.
 
 ## Requisitos no funcionales
 
-- **RNF1.** La lógica es pura, común a los dos juegos y está en `src/utils/savedBuildsList.ts`, con sus tests: recibe cada build ya resumida (nombre, fecha, chasis, variante, clase, tonelaje y potencia de fuego) y no carga los datos de ningún juego.
+- **RNF1.** La lógica es pura, común a los dos juegos y está en `src/utils/savedBuildsList.ts`, con sus tests: recibe cada build ya resumida (nombre, fecha, chasis, variante, clase, tonelaje, potencia de fuego, anclajes y armas por tipo) y no carga los datos de ningún juego. Las etiquetas dependen de cada juego: `src/utils/buildTags.ts` y `src/utils/battletech/buildTags.ts`.
 - **RNF2.** Textos de la interfaz en inglés y sin guiones largos.
 
 ## Criterios de aceptación
@@ -55,6 +59,9 @@ Con estas builds (la última, de un 'Mech que ya no existe). Los anclajes de sus
 | CA9 | Las builds, con los anclajes de sus 'Mechs: Brawler y Sniper 4E 1B 1M, LRM boat 4E 2M y Scout 1E 2B | se pide al menos 2B / al menos 3E y 1B / al menos 1M | Scout / Brawler y Sniper / Brawler, LRM boat y Sniper; Old one no sale con ningún mínimo |
 | CA10 | Un 'Mech con 1E y 2 omni | se comparan sus anclajes con los mínimos | cumple 3E, 2M y 1 omni; no cumple 3E y 1B (los dos omni ya completan la energía) ni 3 omni |
 | CA11 | Las armas de una build: dos de energía, una balística, una de misiles y una de un tipo que el juego no clasifica | se cuentan por tipo | 2E, 1B y 1M, en el orden de los tipos del juego y sin el arma sin tipo ni los tipos sin armas |
+| CA12 | Un 'Mech con 1E, 2 omni y 2M que lleva tres armas de energía y dos de misiles | se pide al menos 1B / al menos 3E y 2M, con Hardpoints y con Weapons | con Hardpoints cumple los dos (los omni son comodín); con Weapons no cumple 1B y sí 3E y 2M. Old one no sale con ningún mínimo |
+| CA13 | Los 'Mechs de serie de MW5 | se sacan sus etiquetas | HGN-732: FERRO y JJ 3; AS7-K: XL (sin etiqueta de AMS); RVN-3L: XL, FERRO, ECM y AP; ADR-A: C-XL, DHS, C-ENDO y C-FERRO; NTG-C lleva TC, CTF-3L MASC y BNC-3P SC |
+| CA14 | Los 'Mechs de serie de BATTLETECH | se sacan sus etiquetas | ASN-21: JJ 7 e Intercept System; FLE-15: Targeting Baffle ×2; CP-10-HQ: Battle Computer y Adv. Command Mod; HBK-4G: ninguna |
 | CA8 | El orden guardado | se lee | un orden que existe se usa; uno que no existe o nada guardado, Newest |
 
 ## Fuera de alcance
@@ -64,7 +71,7 @@ Con estas builds (la última, de un 'Mech que ya no existe). Los anclajes de sus
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA11):** `src/utils/savedBuildsList.test.ts`, con builds de prueba.
+1. **Lógica (CA1 a CA14):** `src/utils/savedBuildsList.test.ts`, con builds de prueba, y `src/utils/buildTags.test.ts` y `src/utils/battletech/buildTags.test.ts`, con los 'Mechs de serie de cada juego.
 2. **Interfaz:** en el navegador, en los dos MechLabs, a 1440 × 900 y a 390 × 844, con varias builds guardadas: buscar, ordenar, filtrar, el recuento, la lista vacía, duplicar con un filtro puesto y que el orden se recuerde al volver a abrir.
 
 ## Resultado

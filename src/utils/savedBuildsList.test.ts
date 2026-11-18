@@ -10,10 +10,11 @@ import {
 } from './savedBuildsList';
 
 // Criterios de aceptación de docs/specs/buscar-builds-guardadas.md.
-const row = (name: string, day: number, mech: Pick<BuildListRow, 'chassis' | 'variant' | 'weightClass' | 'tonnage' | 'firepower' | 'hardpoints'>): BuildListRow => ({
+const row = (name: string, day: number, mech: Pick<BuildListRow, 'chassis' | 'variant' | 'weightClass' | 'tonnage' | 'firepower' | 'hardpoints'> & Partial<Pick<BuildListRow, 'weapons'>>): BuildListRow => ({
   id: name,
   name,
   savedAt: `2026-11-0${day}T10:00:00.000Z`,
+  weapons: null,
   ...mech
 });
 const rows: BuildListRow[] = [
@@ -96,5 +97,20 @@ describe('buscar, ordenar y filtrar las builds guardadas', () => {
       { type: 'missile', count: 1 }
     ]);
     expect(countWeaponTypes([], order)).toEqual([]);
+  });
+
+  it('CA12: los mínimos se comparan con los anclajes o con las armas montadas', () => {
+    const puma = row('Puma', 6, {
+      chassis: 'Puma', variant: 'ADR-A', weightClass: 'light', tonnage: 35, firepower: 40,
+      hardpoints: { energy: 1, omni: 2, missile: 2 }, weapons: { energy: 3, missile: 2 }
+    });
+    const list = [puma, rows[4]];
+    const matches = (minHardpoints: Record<string, number>, minimumsOf: 'hardpoints' | 'weapons') =>
+      names(filterBuildRows(list, { query: '', weightClasses: [], minHardpoints, minimumsOf }));
+    expect(matches({ ballistic: 1 }, 'hardpoints')).toEqual(['Puma']);
+    expect(matches({ energy: 3, missile: 2 }, 'hardpoints')).toEqual(['Puma']);
+    expect(matches({ ballistic: 1 }, 'weapons')).toEqual([]);
+    expect(matches({ energy: 3, missile: 2 }, 'weapons')).toEqual(['Puma']);
+    expect(matches({ energy: 4 }, 'weapons')).toEqual([]);
   });
 });
