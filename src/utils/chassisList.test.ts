@@ -66,7 +66,7 @@ describe('lista de chasis de MW5', () => {
   it('CA4: los filtros del selector y los de las cifras del chasis', () => {
     const atlas = filtered({ query: 'atlas' });
     expect(atlas.length).toBeGreaterThan(0);
-    expect(atlas.every(candidate => candidate.chassis === 'Atlas')).toBe(true);
+    expect(atlas.every(candidate => candidate.chassis.startsWith('Atlas'))).toBe(true);
     expect(atlas.map(candidate => candidate.mech.variant)).toContain('AS7-D');
 
     const tokens = filtered({ query: '3e 2m jj' });

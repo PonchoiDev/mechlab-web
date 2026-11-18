@@ -1,0 +1,240 @@
+import type { Item } from '../types/item';
+import type { Mech } from '../types/mech';
+import { getStockBuild } from './buildCode';
+import { calculateTopSpeed, getBuildSummary } from './calculators';
+import {
+  BASE_GAME,
+  EMPTY_MECH_FILTERS,
+  HARDPOINT_FILTER_TYPES,
+  getAvailableYear,
+  getContentSource,
+  getHardpointCounts,
+  getMechDisplayName,
+  getMechWeightClass,
+  matchesMechFilters,
+  matchesMechQuery,
+  mergeMechFilters,
+  parseMechQuery,
+  type HardpointFilterType,
+  type MechFilters,
+  type WeightClassName
+} from './mechs';
+
+// Lista de chasis de MW5 (docs/specs/lista-chasis.md): una fila por variante con las cifras del chasis y
+// las de su build de serie. Los filtros son los del selector de 'Mechs del MechLab (utils/mechs.ts).
+
+export interface ChassisRow {
+  mech: Mech;
+  chassis: string;
+  weightClass: WeightClassName;
+  tonnage: number;
+  hardpoints: Record<HardpointFilterType, number>;
+  hardpointTotal: number;
+  engineRating: number | null;
+  xl: boolean;
+  // km/h, como los enseña el mechlab del juego.
+  speed: number;
+  armor: number;
+  structure: number;
+  jumpJets: number;
+  turnSpeed: number | null;
+  torsoYaw: number | null;
+  upgradeSlots: number | null;
+  // De la build de serie, calculados como en el MechLab; null si la variante no la tiene.
+  alpha: number | null;
+  dps: number | null;
+  heatCapacity: number | null;
+  cooling: number | null;
+  year: number;
+  dlc: number;
+}
+
+const sum = (values: number[]) => values.reduce((total, value) => total + value, 0);
+const round2 = (value: number) => Math.round(value * 100) / 100;
+
+export const getChassisRows = (mechs: Mech[], items: Item[]): ChassisRow[] => mechs.map(mech => {
+  const components = Object.values(mech.components);
+  const hardpoints = getHardpointCounts(mech);
+  const stock = getStockBuild(mech, mechs, items);
+  const summary = stock ? getBuildSummary(stock.mech, stock.loadout, stock.armor) : null;
+  return {
+    mech,
+    chassis: getMechDisplayName(mech),
+    weightClass: getMechWeightClass(mech),
+    tonnage: mech.tonnageMax,
+    hardpoints,
+    hardpointTotal: sum(Object.values(hardpoints)),
+    engineRating: mech.engine?.rating ?? null,
+    xl: mech.engine?.xl ?? false,
+    speed: calculateTopSpeed(mech.baseSpeed),
+    armor: sum(components.map(component => component.maxArmor)),
+    structure: sum(components.map(component => component.structure)),
+    jumpJets: sum(components.map(component => component.jumpJetSlots)),
+    turnSpeed: mech.turnSpeed ?? null,
+    torsoYaw: mech.torsoTwist?.yaw ?? null,
+    upgradeSlots: mech.upgradeSlots ?? null,
+    alpha: summary?.firepower ?? null,
+    dps: summary ? summary.dps : null,
+    // El juego guarda la capacidad con decimales de coma flotante (48.400002): se redondea como la enseña.
+    heatCapacity: summary?.heatCapacity === null || summary?.heatCapacity === undefined ? null : round2(summary.heatCapacity),
+    cooling: summary?.coolingRate ?? null,
+    year: getAvailableYear(mech),
+    dlc: getContentSource(mech)
+  };
+});
+
+export const countChassis = (rows: ChassisRow[]): number => new Set(rows.map(row => row.mech.name)).size;
+
+export type ChassisSortKey =
+  | 'name' | 'tonnage' | 'hardpoints' | 'engine' | 'speed' | 'armor' | 'structure' | 'jumpJets'
+  | 'turnSpeed' | 'torsoYaw' | 'upgradeSlots' | 'alpha' | 'dps' | 'heatCapacity' | 'cooling' | 'year' | 'dlc';
+
+export const CHASSIS_SORT_KEYS: ChassisSortKey[] = [
+  'name', 'tonnage', 'hardpoints', 'engine', 'speed', 'armor', 'structure', 'jumpJets',
+  'turnSpeed', 'torsoYaw', 'upgradeSlots', 'alpha', 'dps', 'heatCapacity', 'cooling', 'year', 'dlc'
+];
+
+export type SortDirection = 'asc' | 'desc';
+
+export interface ChassisSort {
+  key: ChassisSortKey;
+  dir: SortDirection;
+}
+
+// Como en la página de armas: el nombre empieza de la A a la Z y las cifras, de mayor a menor.
+const defaultDirection = (key: ChassisSortKey): SortDirection => key === 'name' ? 'asc' : 'desc';
+
+export const toggleChassisSort = (current: ChassisSort, key: ChassisSortKey): ChassisSort =>
+  current.key === key
+    ? { key, dir: current.dir === 'asc' ? 'desc' : 'asc' }
+    : { key, dir: defaultDirection(key) };
+
+const sortValue = (row: ChassisRow, key: Exclude<ChassisSortKey, 'name'>): number | null => {
+  switch (key) {
+    case 'hardpoints': return row.hardpointTotal;
+    case 'engine': return row.engineRating;
+    default: return row[key];
+  }
+};
+
+const byName = (a: ChassisRow, b: ChassisRow) =>
+  a.chassis.localeCompare(b.chassis) || a.mech.variant.localeCompare(b.mech.variant);
+
+// Sin el dato, al final en los dos sentidos; a igualdad, por chasis y variante.
+export const sortChassisRows = (rows: ChassisRow[], { key, dir }: ChassisSort): ChassisRow[] => {
+  const sign = dir === 'asc' ? 1 : -1;
+  if (key === 'name') return [...rows].sort((a, b) => byName(a, b) * sign);
+  return [...rows].sort((a, b) => {
+    const [first, second] = [sortValue(a, key), sortValue(b, key)];
+    if (first === null || second === null) return first === second ? byName(a, b) : first === null ? 1 : -1;
+    return (first - second) * sign || byName(a, b);
+  });
+};
+
+export interface ChassisView {
+  query: string;
+  filters: MechFilters;
+  minTons: number | null;
+  maxTons: number | null;
+  minSpeed: number | null;
+  sort: ChassisSort;
+}
+
+export const DEFAULT_CHASSIS_VIEW: ChassisView = {
+  query: '',
+  filters: EMPTY_MECH_FILTERS,
+  minTons: null,
+  maxTons: null,
+  minSpeed: null,
+  sort: { key: 'name', dir: 'asc' }
+};
+
+// El buscador lleva los mismos atajos que el del selector («3e 2m jj ecm hero dlc7»).
+export const filterChassisRows = (rows: ChassisRow[], view: ChassisView): ChassisRow[] => {
+  const { text, filters: queryFilters } = parseMechQuery(view.query);
+  const filters = mergeMechFilters(view.filters, queryFilters);
+  return rows.filter(row =>
+    matchesMechQuery(row.mech, text) &&
+    matchesMechFilters(row.mech, filters) &&
+    (view.minTons === null || row.tonnage >= view.minTons) &&
+    (view.maxTons === null || row.tonnage <= view.maxTons) &&
+    (view.minSpeed === null || row.speed >= view.minSpeed));
+};
+
+export const getChassisLink = (mech: Mech): string => `/mercs/?mech=${encodeURIComponent(mech.id)}`;
+
+const WEIGHT_CLASSES: WeightClassName[] = ['light', 'medium', 'heavy', 'assault'];
+const HARDPOINT_TOKENS: Record<HardpointFilterType, string> = { energy: 'e', ballistic: 'b', missile: 'm', omni: 'o', artillery: 'art', ams: 'ams' };
+const HARDPOINT_TOKEN = /^(\d)(e|b|m|o|art|ams)$/;
+
+const list = (value: string | null) => (value ?? '').split(',').map(part => part.trim()).filter(Boolean);
+const integerIn = (value: string | null, min: number, max: number): number | null => {
+  if (value === null || !/^\d+$/.test(value)) return null;
+  const number = Number(value);
+  return number >= min && number <= max ? number : null;
+};
+
+// La vista va en la URL para poder compartirla (?class=assault&min=3e,2m&tmin=20&sort=speed); lo que no se
+// reconoce se ignora. Los anclajes mínimos usan los atajos del buscador; el juego base es dlc=base.
+export const parseChassisQuery = (search: string): ChassisView => {
+  const params = new URLSearchParams(search);
+  const minHardpoints: MechFilters['minHardpoints'] = {};
+  for (const token of list(params.get('min'))) {
+    const match = HARDPOINT_TOKEN.exec(token.toLowerCase());
+    const type = match && HARDPOINT_FILTER_TYPES.find(candidate => HARDPOINT_TOKENS[candidate] === match[2]);
+    if (match && type && Number(match[1]) > 0) minHardpoints[type] = Number(match[1]);
+  }
+  const dlcs = list(params.get('dlc'))
+    .map(part => part === 'base' ? BASE_GAME : integerIn(part, 1, 9))
+    .filter((dlc): dlc is number => dlc !== null);
+  const tech = params.get('tech');
+  const key = CHASSIS_SORT_KEYS.find(candidate => candidate === params.get('sort')) ?? DEFAULT_CHASSIS_VIEW.sort.key;
+  const dir = params.get('dir');
+  return {
+    query: params.get('q') ?? '',
+    filters: {
+      weightClasses: WEIGHT_CLASSES.filter(weightClass => list(params.get('class')).includes(weightClass)),
+      techBase: tech === 'is' ? 'InnerSphere' : tech === 'clan' ? 'Clan' : null,
+      jumpJets: params.get('jj') === '1',
+      ecm: params.get('ecm') === '1',
+      hero: params.get('hero') === '1',
+      dlcs: [...new Set(dlcs)].sort((a, b) => a - b),
+      roles: list(params.get('role')),
+      maxYear: integerIn(params.get('year'), 3000, 3100),
+      minHardpoints
+    },
+    minTons: integerIn(params.get('tmin'), 1, 200),
+    maxTons: integerIn(params.get('tmax'), 1, 200),
+    minSpeed: integerIn(params.get('speed'), 1, 500),
+    sort: { key, dir: dir === 'asc' || dir === 'desc' ? dir : defaultDirection(key) }
+  };
+};
+
+export const toChassisQuery = (view: ChassisView): string => {
+  const { filters } = view;
+  const params = new URLSearchParams();
+  const set = (name: string, value: string | number | null | false) => {
+    if (value !== null && value !== false && value !== '') params.set(name, String(value));
+  };
+  set('q', view.query.trim());
+  set('class', filters.weightClasses.join(','));
+  set('tech', filters.techBase === 'InnerSphere' ? 'is' : filters.techBase === 'Clan' ? 'clan' : null);
+  set('role', filters.roles.join(','));
+  set('jj', filters.jumpJets && 1);
+  set('ecm', filters.ecm && 1);
+  set('hero', filters.hero && 1);
+  set('min', HARDPOINT_FILTER_TYPES
+    .filter(type => (filters.minHardpoints[type] ?? 0) > 0)
+    .map(type => `${filters.minHardpoints[type]}${HARDPOINT_TOKENS[type]}`)
+    .join(','));
+  set('year', filters.maxYear);
+  set('dlc', filters.dlcs.map(dlc => dlc === BASE_GAME ? 'base' : String(dlc)).join(','));
+  set('tmin', view.minTons);
+  set('tmax', view.maxTons);
+  set('speed', view.minSpeed);
+  if (view.sort.key !== DEFAULT_CHASSIS_VIEW.sort.key) params.set('sort', view.sort.key);
+  if (view.sort.dir !== defaultDirection(view.sort.key)) params.set('dir', view.sort.dir);
+  // URLSearchParams escribe las comas como %2C; en la dirección se leen mejor tal cual.
+  const text = params.toString().replace(/%2C/g, ',');
+  return text ? `?${text}` : '';
+};
