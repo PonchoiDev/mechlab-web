@@ -172,6 +172,26 @@
 
 .mech-picker-input::placeholder { color: var(--work-muted); }
 
+/* El selector principal, en su fila debajo de la cabecera: más ancho, con letra más grande, y el panel
+   de resultados se abre hacia la derecha desde su borde izquierdo. */
+.mech-select-bar { padding: 14px 0; }
+
+.mech-picker.is-prominent { width: min(600px, 100%); }
+.mech-picker.is-prominent > span { font-size: 12px; }
+
+.mech-picker.is-prominent .mech-picker-input {
+  min-height: 48px;
+  padding: 0 14px;
+  border-color: rgba(195, 237, 98, 0.45);
+  font-size: 16px;
+}
+
+.mech-picker.is-prominent .mech-options-panel {
+  right: auto;
+  left: 0;
+  width: min(600px, calc(100vw - 32px));
+}
+
 .mech-options-panel {
   position: absolute;
   z-index: 10;
@@ -382,22 +402,26 @@
   font-size: 12px;
 }
 
+/* Los avisos, los menús y las cifras son una sola caja, en ese orden: solo los avisos llevan borde arriba. */
 .readout-strip {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin: 14px 0;
+  margin: 0 0 14px;
   border: 1px solid var(--work-line);
+  border-top: 0;
   background: rgba(25, 29, 25, 0.88);
 }
 
+/* Cada cifra en una línea, el nombre a la izquierda y el valor a la derecha, para que la tabla ocupe poco
+   encima del tablero; lo que no cabe (los anclajes de BATTLETECH bajo el tonelaje) pasa debajo. */
 .readout-cell {
   display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 10px;
   min-width: 0;
-  min-height: 70px;
-  padding: 11px 14px;
+  padding: 6px 12px;
 }
 
 .readout-cell:not(:nth-child(5n + 1)) {
@@ -433,7 +457,7 @@
 .utility-toolbar {
   justify-content: space-between;
   gap: 12px;
-  margin: -14px 0 14px;
+  margin: 0;
   padding: 9px 12px;
   border: 1px solid var(--work-line);
   border-top: 0;
@@ -445,9 +469,10 @@
   gap: 6px;
 }
 
+/* Los grupos se separan con espacio, sin raya: una raya vertical no coincidiría con las columnas de la
+   tabla de cifras de debajo y parecería desalineada. */
 .utility-group + .utility-group {
   padding-left: 12px;
-  border-left: 1px solid var(--work-line);
 }
 
 .utility-label {
@@ -505,6 +530,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
   gap: 14px;
 }
+
 
 .analysis-table-wrap,
 .ammunition-list {
@@ -812,14 +838,17 @@
 @media (max-width: 760px) {
   .mechlab-shell { padding: 14px 12px 24px; }
   .topbar { align-items: stretch; flex-direction: column; gap: 15px; }
-  .topbar-tools { align-items: stretch; flex-direction: column-reverse; gap: 9px; }
+  /* Sin el selector, que va en su propia fila, los botones caben en una línea. */
+  .topbar-tools { align-items: center; justify-content: flex-end; gap: 9px; }
   .topbar-start { justify-content: space-between; gap: 12px; }
   /* Los enlaces, uno debajo de otro, para que el título no se parta en tres líneas. */
   .topbar-links { flex-direction: column; align-items: flex-start; justify-content: center; padding-left: 12px; }
   .topbar-links small { display: none; }
   .mech-picker { width: 100%; min-width: 0; }
   .readout-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .readout-cell { padding: 10px; }
+  /* En dos columnas estrechas no siempre cabe en una línea: el valor va debajo del nombre en todas. */
+  .readout-cell { flex-direction: column; flex-wrap: nowrap; align-items: flex-start; justify-content: flex-start; padding: 6px 10px; }
+  .readout-cell .bt-hardpoint-usage { flex-basis: auto; }
   .readout-cell:nth-child(odd) { border-left: 0; }
   .readout-cell:nth-child(even) { border-left: 1px solid var(--work-line); }
   .readout-cell:nth-child(n + 3) { border-top: 1px solid var(--work-line); }
@@ -843,8 +872,8 @@
 .utility-button,
 .analysis-note,
 .source-link { font-size: 11px; }
-.readout-cell strong { font-size: 17px; }
-.readout-cell strong small { font-size: 11px; }
+.readout-cell strong { font-size: 14px; }
+.readout-cell strong small { font-size: 10px; }
 .analysis-heading h2 { font-size: 16px; }
 .weapon-table { font-size: 12px; }
 .weapon-table th { font-size: 11px; }
@@ -856,7 +885,7 @@
 .sort-button { font-size: 11px; }
 
 @media (max-width: 760px) {
-  .readout-cell strong { font-size: 15px; }
+  .readout-cell strong { font-size: 13px; }
 }
 
 /* Taller: tablero del mech, tarjetas de componente y panel de edición */
@@ -1541,7 +1570,6 @@ button.hardpoint-chip:hover { background: #2c342c; }
   gap: 8px 12px;
   padding: 10px 14px;
   border: 1px solid var(--work-line);
-  border-top: 0;
   background: rgba(25, 29, 25, 0.94);
 }
 

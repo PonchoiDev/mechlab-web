@@ -24,6 +24,8 @@ interface BtMechPickerProps {
   mechs: BtMech[];
   current: BtMech;
   onSelect: (mech: BtMech) => void;
+  // El selector principal, más grande y en su propia fila, como en MW5.
+  prominent?: boolean;
 }
 
 const MAX_MINIMUM = 6;
@@ -54,7 +56,7 @@ export function HardpointSummary({ mech }: { mech: BtMech }) {
 
 // Selector de 'Mech: buscador con los filtros del MechLab de MW5 (clase, fuente, anclajes mínimos,
 // retrorreactores y rol) y la lista de variantes con su icono.
-export function BtMechPicker({ mechs, current, onSelect }: BtMechPickerProps) {
+export function BtMechPicker({ mechs, current, onSelect, prominent = false }: BtMechPickerProps) {
   const idPrefix = useId();
   const [isOpen, setIsOpen] = useState(false);
   const [filters, setFilters] = useState<BtMechFilters>(DEFAULT_MECH_FILTERS);
@@ -107,7 +109,7 @@ export function BtMechPicker({ mechs, current, onSelect }: BtMechPickerProps) {
 
   return (
     <div
-      className="mech-picker bt-mech-picker"
+      className={prominent ? 'mech-picker bt-mech-picker is-prominent' : 'mech-picker bt-mech-picker'}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) close();
       }}

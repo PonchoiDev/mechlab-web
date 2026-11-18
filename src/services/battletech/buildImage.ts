@@ -78,7 +78,7 @@ const drawHardpointChip = (context: Context, view: HardpointView, x: number, y: 
   if (!view.item) {
     strokeBox(context, x, y, width, height, color, true);
     drawText(context, HARDPOINT_LABELS[view.type].toUpperCase(), x + 9, y + 15, `600 10px ${MONO}`, color, { maxWidth: width - 18 });
-    drawText(context, 'Free', x + 9, y + 32, `italic 500 12px ${SANS}`, COLORS.muted, { maxWidth: width - 18 });
+    // Como en el tablero, un anclaje vacío solo dice su tipo.
     return;
   }
   const gradient = context.createLinearGradient(x, 0, x + width * 0.7, 0);
@@ -180,14 +180,7 @@ const layoutCard = (measuring: Context, build: BtBuild, zone: Zone, width: numbe
     drawText(context, ZONE_LABELS[zone].toUpperCase(), left, top + 14, `700 14px ${SANS}`, COLORS.text);
     // La estructura de la ubicación, como «S 70/70» en la pantalla de reequipar del juego.
     const structure = `S ${location.structure}/${location.structure}`;
-    const structureWidth = drawText(context, structure, right, top + 13, `500 10px ${MONO}`, COLORS.muted, { align: 'right' });
-    if (freeHardpoints > 0) {
-      const badge = `${freeHardpoints} FREE`;
-      const badgeWidth = measure(context, badge, `500 10px ${MONO}`) + 12;
-      const badgeRight = right - structureWidth - 10;
-      strokeBox(context, badgeRight - badgeWidth, top, badgeWidth, HEADER_HEIGHT, withAlpha(COLORS.amber, 0.45));
-      drawText(context, badge, badgeRight - 6, top + 13, `500 10px ${MONO}`, COLORS.amber, { align: 'right' });
-    }
+    drawText(context, structure, right, top + 13, `500 10px ${MONO}`, COLORS.muted, { align: 'right' });
     top += HEADER_HEIGHT + SECTION_GAP;
     drawLocationUsage(context, usage, left, top);
     top += USAGE_HEIGHT + SECTION_GAP;

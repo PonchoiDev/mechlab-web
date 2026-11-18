@@ -54,7 +54,8 @@ function CardHardpoint({ view, isSelected, onSelect, onMenu }: {
     >
       {!view.item && <span className="hardpoint-chip-label">{HARDPOINT_LABELS[view.type]}</span>}
       <span className="hardpoint-chip-content">
-        <span className="hardpoint-chip-name">{view.item?.name ?? 'Free'}</span>
+        {/* Como en MW5, un anclaje vacío solo dice su tipo: que está libre ya lo dicen los avisos. */}
+        {view.item && <span className="hardpoint-chip-name">{view.item.name}</span>}
         {view.item && <span className="hardpoint-chip-tier">{view.item.bonuses.length > 0 ? view.item.bonuses.join(' ') : `${view.item.slots} sl`}</span>}
       </span>
     </button>
@@ -200,7 +201,6 @@ function LocationCard({ build, zone, label, position, isActive, selectedHardpoin
           {label}
         </button>
         <span className="bt-card-header-end">
-          {freeHardpoints > 0 && <span className="component-card-badge">{freeHardpoints} free</span>}
           {/* La estructura de la ubicación, como «S 70/70» en la pantalla de reequipar del juego. */}
           <span className="bt-structure" title="Internal structure">S {location.structure}/{location.structure}</span>
         </span>

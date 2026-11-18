@@ -183,11 +183,13 @@ export default function App() {
             Feedback
           </button>
           <SupportLink compact />
-          <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={selectMech} />
         </div>
       </header>
 
-      <StatsReadout mech={mech} summary={summary} base={baseSummary} />
+      {/* El selector de 'Mech, en su propia fila: en la cabecera quedaba pequeño y escondido entre los enlaces y los botones. */}
+      <section className="mech-select-bar" aria-label="'Mech">
+        <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={selectMech} prominent />
+      </section>
 
       <BuildStatus issues={issues} onSelectZone={selectZone} />
 
@@ -216,6 +218,10 @@ export default function App() {
         onOpenBuilds={() => setIsBuildsOpen(true)}
         onShare={openShareMenu}
       />
+
+      {/* Las cifras de la build, debajo de los avisos y los menús y en la misma caja: el selector de 'Mech queda
+          junto a los menús y las cifras siguen a la vista encima del tablero. */}
+      <StatsReadout mech={mech} summary={summary} base={baseSummary} />
 
       {isUpgradesOpen && (
         <UpgradesPanel

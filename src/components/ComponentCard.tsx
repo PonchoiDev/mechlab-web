@@ -149,9 +149,6 @@ export function ComponentCard({
         >
           {label}
         </button>
-        {status.freeHardpoints > 0 && (
-          <span className="component-card-badge">{status.freeHardpoints} free</span>
-        )}
       </div>
 
       {hardpoints.length > 0 && (

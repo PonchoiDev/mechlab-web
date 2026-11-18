@@ -1,29 +1,16 @@
 import { useState } from 'react';
+import { DEFAULT_VIEW_PREFERENCES, parseViewPreferences, type ViewPreferences } from '../utils/viewPreferences';
+
+export type { ViewPreferences };
 
 // Cada MechLab guarda su vista en su propia clave (BATTLETECH usa mw-builder:battletech:view).
 const MERCS_STORAGE_KEY = 'mw-builder:mercs:view';
 
-export interface ViewPreferences {
-  // Lado de la pantalla en el que se abre el panel de componente.
-  editorSide: 'left' | 'right';
-  // Ranuras de las tarjetas como celdas, como la vista Detalles del mechlab del juego.
-  expandedSlots: boolean;
-  // Oculta la imagen de Sarna y pone el tablero en cinco columnas centradas.
-  compactBoard: boolean;
-}
-
-const DEFAULTS: ViewPreferences = { editorSide: 'right', expandedSlots: false, compactBoard: false };
-
 const read = (storageKey: string): ViewPreferences => {
   try {
-    const stored = JSON.parse(window.localStorage.getItem(storageKey) ?? '{}') as Partial<ViewPreferences>;
-    return {
-      editorSide: stored.editorSide === 'left' ? 'left' : 'right',
-      expandedSlots: stored.expandedSlots === true,
-      compactBoard: stored.compactBoard === true
-    };
+    return parseViewPreferences(window.localStorage.getItem(storageKey));
   } catch {
-    return DEFAULTS;
+    return DEFAULT_VIEW_PREFERENCES;
   }
 };
 

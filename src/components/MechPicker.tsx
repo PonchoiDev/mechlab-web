@@ -32,6 +32,8 @@ interface MechPickerProps {
   mechs: Mech[];
   selectedIndex: number;
   onSelect: (index: number) => void;
+  // El selector principal del MechLab, más grande y en su propia fila; el de Compare es el normal.
+  prominent?: boolean;
 }
 
 const WEIGHT_CLASSES: { value: WeightClassName; label: string }[] = [
@@ -74,7 +76,7 @@ export function HardpointSummary({ mech }: { mech: Mech }) {
   );
 }
 
-export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) {
+export function MechPicker({ mechs, selectedIndex, onSelect, prominent = false }: MechPickerProps) {
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(0);
@@ -152,7 +154,7 @@ export function MechPicker({ mechs, selectedIndex, onSelect }: MechPickerProps) 
 
   return (
     <div
-      className="mech-picker"
+      className={prominent ? 'mech-picker is-prominent' : 'mech-picker'}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) close();
       }}

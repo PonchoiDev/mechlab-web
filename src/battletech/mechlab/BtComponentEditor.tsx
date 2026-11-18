@@ -255,7 +255,7 @@ export function BtComponentEditor({
               >
                 <span className="hardpoint-chip-label">{HARDPOINT_LABELS[view.type]}</span>
                 <span className="hardpoint-chip-content">
-                  <span className="hardpoint-chip-name">{view.item?.name ?? 'Free'}</span>
+                  {view.item && <span className="hardpoint-chip-name">{view.item.name}</span>}
                   {view.item && <span className="hardpoint-chip-tier">{view.item.slots} sl</span>}
                 </span>
               </button>

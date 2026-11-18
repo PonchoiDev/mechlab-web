@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Mech } from '../types/mech';
 import { formatArmorPoints, formatCoolingRate, formatTurnRate, getRangeProfile, getWeaponRangeState, type BuildSummary } from '../utils/calculators';
 import { RangeRadar } from './RangeRadar';
+import { getMechDisplayName } from '../utils/mechs';
 import { getWeaponLabel } from '../utils/items';
 import { ZONE_LABELS } from '../utils/zones';
 import { EMPTY_VALUE, joinWithCounts } from '../utils/format';
@@ -242,7 +243,7 @@ function MechTab({ mech, summary, base }: { mech: Mech; summary: BuildSummary; b
       <header className="analysis-heading">
         <div>
           <p className="eyebrow">05 / CHASSIS DATA</p>
-          <h2>{mech.name} {mech.variant}</h2>
+          <h2>{getMechDisplayName(mech)} {mech.variant}</h2>
         </div>
       </header>
       <div className="mech-stats">
