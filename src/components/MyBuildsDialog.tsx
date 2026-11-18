@@ -6,7 +6,9 @@ import { decodeBuild, type SharedBuild } from '../utils/buildCode';
 import { getBuildSummary } from '../utils/calculators';
 import { getUpgrades } from '../utils/upgrades';
 import { getHardpointCounts, getMechDisplayName, getMechWeightClass, HARDPOINT_ABBREVIATIONS } from '../utils/mechs';
-import { countBuildsByWeightClass, countWeaponTypes, filterBuildRows, sortBuildRows, type BuildListRow, type BuildWeightClass } from '../utils/savedBuildsList';
+import { countBuildsByWeightClass, countWeaponTypes, filterBuildRows, sortBuildRows, type BuildListRow, type BuildMinimumsOf, type BuildWeightClass } from '../utils/savedBuildsList';
+import { getBuildTags } from '../utils/buildTags';
+import { BuildTagList } from './BuildTagList';
 import { MERCS_BUILD_SORT_KEY, useBuildSort } from '../hooks/useBuildSort';
 import { BuildsListControls } from './BuildsListControls';
 import { WeaponTypeCounts } from './WeaponTypeCounts';
@@ -73,6 +75,7 @@ export function MyBuildsDialog({
   const [query, setQuery] = useState('');
   const [weightClasses, setWeightClasses] = useState<BuildWeightClass[]>([]);
   const [minHardpoints, setMinHardpoints] = useState<Partial<Record<string, number>>>({});
+  const [minimumsOf, setMinimumsOf] = useState<BuildMinimumsOf>('hardpoints');
   const [sort, setSort] = useBuildSort(MERCS_BUILD_SORT_KEY);
   const fileInput = useRef<HTMLInputElement | null>(null);
 
@@ -101,22 +104,26 @@ export function MyBuildsDialog({
       weightClass: shared ? getMechWeightClass(shared.mech) : null,
       tonnage: summary?.totalWeight ?? null,
       firepower: summary?.firepower ?? null,
-      hardpoints: shared ? getHardpointCounts(shared.mech) : null
+      hardpoints: shared ? getHardpointCounts(shared.mech) : null,
+      weapons: null
     };
-    const weaponCounts = shared
-      ? countWeaponTypes(Object.values(shared.loadout).flat().filter(item => item.type === 'weapon').map(getItemWeaponType), WEAPON_TYPE_ORDER)
-      : [];
-    return { build, shared, summary, listRow, weaponCounts };
+    const items = shared ? Object.values(shared.loadout).flat() : [];
+    const weaponCounts = countWeaponTypes(items.filter(item => item.type === 'weapon').map(getItemWeaponType), WEAPON_TYPE_ORDER);
+    if (shared) listRow.weapons = Object.fromEntries(weaponCounts.map(({ type, count }) => [type, count]));
+    const tags = shared ? getBuildTags(shared.mech, items) : [];
+    return { build, shared, summary, listRow, weaponCounts, tags };
   }), [builds, mechs, catalog]);
 
   // La copia recién duplicada se ve aunque el filtro la escondería, para poder renombrarla.
   const shownRows = useMemo(() => {
     const listRows = rows.map(row => row.listRow);
-    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses, minHardpoints }).map(row => row.id));
+    // Ningún arma es omni: con Weapons ese mínimo no cuenta (y su contador no sale).
+    const minimums = minimumsOf === 'weapons' ? { ...minHardpoints, omni: 0 } : minHardpoints;
+    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses, minHardpoints: minimums, minimumsOf }).map(row => row.id));
     if (duplicatedId) shownIds.add(duplicatedId);
     const byId = new Map(rows.map(row => [row.build.id, row]));
     return sortBuildRows(listRows.filter(row => shownIds.has(row.id)), sort).map(row => byId.get(row.id)!);
-  }, [rows, query, weightClasses, minHardpoints, sort, duplicatedId]);
+  }, [rows, query, weightClasses, minHardpoints, minimumsOf, sort, duplicatedId]);
   const counts = useMemo(() => countBuildsByWeightClass(rows.map(row => row.listRow)), [rows]);
   const clearFilters = () => {
     setQuery('');
@@ -206,9 +213,11 @@ export function MyBuildsDialog({
             weightClasses={weightClasses}
             onWeightClassesChange={setWeightClasses}
             counts={counts}
-            hardpointTypes={HARDPOINT_TYPES}
+            hardpointTypes={minimumsOf === 'weapons' ? HARDPOINT_TYPES.filter(type => type.id !== 'omni') : HARDPOINT_TYPES}
             minHardpoints={minHardpoints}
             onMinHardpointsChange={setMinHardpoints}
+            minimumsOf={minimumsOf}
+            onMinimumsOfChange={setMinimumsOf}
           />
         )}
 
@@ -223,7 +232,7 @@ export function MyBuildsDialog({
               <button type="button" className="utility-button" onClick={clearFilters}>Clear filters</button>
             </li>
           )}
-          {shownRows.map(({ build, shared, summary, weaponCounts }) => {
+          {shownRows.map(({ build, shared, summary, weaponCounts, tags }) => {
             const isConfirming = confirming?.id === build.id;
             return (
               <li
@@ -258,7 +267,12 @@ export function MyBuildsDialog({
                       ? `${getMechDisplayName(shared.mech)} ${shared.mech.variant} · ${summary.totalWeight.toFixed(1)} / ${shared.mech.tonnageMax} t · ${summary.firepower} volley`
                       : 'This build can no longer be opened'}
                   </span>
-                  {shared && <WeaponTypeCounts counts={weaponCounts} short={WEAPON_TYPE_SHORT} labels={WEAPON_TYPE_LABELS} />}
+                  {shared && (
+                    <span className="builds-item-loadout">
+                      <WeaponTypeCounts counts={weaponCounts} short={WEAPON_TYPE_SHORT} labels={WEAPON_TYPE_LABELS} />
+                      <BuildTagList tags={tags} />
+                    </span>
+                  )}
                   <span className="builds-item-date">Saved {formatDate(build.savedAt)}</span>
                 </div>
 

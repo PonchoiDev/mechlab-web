@@ -5,10 +5,12 @@ import { normalizeBuildName, type SavedBuild } from '../../utils/savedBuildsCore
 import { decodeBtBuild } from '../../utils/battletech/buildCode';
 import { getItem, getMechDisplayName } from '../../utils/battletech/mechlabData';
 import { HARDPOINT_LABELS, HARDPOINT_SHORT, HARDPOINTS } from '../../utils/battletech/catalog';
-import { getHardpointCount } from '../../utils/battletech/fitting';
+import { getAllItems, getHardpointCount } from '../../utils/battletech/fitting';
 import { createBtExportFile, parseBtImportFile } from '../../utils/battletech/savedBuilds';
 import { getBuildSummary } from '../../utils/battletech/stats';
-import { countBuildsByWeightClass, countWeaponTypes, filterBuildRows, sortBuildRows, type BuildListRow, type BuildWeightClass } from '../../utils/savedBuildsList';
+import { countBuildsByWeightClass, countWeaponTypes, filterBuildRows, sortBuildRows, type BuildListRow, type BuildMinimumsOf, type BuildWeightClass } from '../../utils/savedBuildsList';
+import { getBtBuildTags } from '../../utils/battletech/buildTags';
+import { BuildTagList } from '../../components/BuildTagList';
 import { BT_BUILD_SORT_KEY, useBuildSort } from '../../hooks/useBuildSort';
 import { BuildsListControls } from '../../components/BuildsListControls';
 import { WeaponTypeCounts } from '../../components/WeaponTypeCounts';
@@ -59,6 +61,7 @@ export function BtMyBuildsDialog({
   const [query, setQuery] = useState('');
   const [weightClasses, setWeightClasses] = useState<BuildWeightClass[]>([]);
   const [minHardpoints, setMinHardpoints] = useState<Partial<Record<string, number>>>({});
+  const [minimumsOf, setMinimumsOf] = useState<BuildMinimumsOf>('hardpoints');
   const [sort, setSort] = useBuildSort(BT_BUILD_SORT_KEY);
   const fileInput = useRef<HTMLInputElement | null>(null);
 
@@ -88,23 +91,26 @@ export function BtMyBuildsDialog({
       weightClass: decoded?.mech.weightClass ?? null,
       tonnage: summary?.tonnage ?? null,
       firepower: summary?.alphaDamage ?? null,
-      hardpoints: decoded ? Object.fromEntries(HARDPOINTS.map(type => [type, getHardpointCount(decoded.mech, type)])) : null
+      hardpoints: decoded ? Object.fromEntries(HARDPOINTS.map(type => [type, getHardpointCount(decoded.mech, type)])) : null,
+      weapons: null
     };
     // Solo las armas: la munición también tiene tipo de anclaje en BATTLETECH.
     const weaponCounts = decoded
       ? countWeaponTypes(Object.values(decoded.loadout).flat().map(getItem).filter(item => item?.kind === 'weapon').map(item => item?.hardpoint), HARDPOINTS)
       : [];
-    return { build, decoded, summary, listRow, weaponCounts };
+    if (decoded) listRow.weapons = Object.fromEntries(weaponCounts.map(({ type, count }) => [type, count]));
+    const tags = decoded ? getBtBuildTags(getAllItems(decoded.mech, decoded.loadout)) : [];
+    return { build, decoded, summary, listRow, weaponCounts, tags };
   }), [builds]);
 
   // Como en MW5: la copia recién duplicada se ve aunque el filtro la escondería.
   const shownRows = useMemo(() => {
     const listRows = rows.map(row => row.listRow);
-    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses, minHardpoints }).map(row => row.id));
+    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses, minHardpoints, minimumsOf }).map(row => row.id));
     if (duplicatedId) shownIds.add(duplicatedId);
     const byId = new Map(rows.map(row => [row.build.id, row]));
     return sortBuildRows(listRows.filter(row => shownIds.has(row.id)), sort).map(row => byId.get(row.id)!);
-  }, [rows, query, weightClasses, minHardpoints, sort, duplicatedId]);
+  }, [rows, query, weightClasses, minHardpoints, minimumsOf, sort, duplicatedId]);
   const counts = useMemo(() => countBuildsByWeightClass(rows.map(row => row.listRow)), [rows]);
   const clearFilters = () => {
     setQuery('');
@@ -177,6 +183,8 @@ export function BtMyBuildsDialog({
             counts={counts}
             hardpointTypes={HARDPOINT_TYPES}
             minHardpoints={minHardpoints}
+            minimumsOf={minimumsOf}
+            onMinimumsOfChange={setMinimumsOf}
             onMinHardpointsChange={setMinHardpoints}
           />
         )}
@@ -190,7 +198,7 @@ export function BtMyBuildsDialog({
               <button type="button" className="utility-button" onClick={clearFilters}>Clear filters</button>
             </li>
           )}
-          {shownRows.map(({ build, decoded, summary, weaponCounts }) => (
+          {shownRows.map(({ build, decoded, summary, weaponCounts, tags }) => (
             <li
               key={build.id}
               className={['builds-item', build.id === activeId ? 'is-active' : '', build.id === duplicatedId ? 'is-new' : ''].filter(Boolean).join(' ')}
@@ -223,7 +231,12 @@ export function BtMyBuildsDialog({
                     ? `${getMechDisplayName(decoded.mech)} · ${summary.tonnage} / ${decoded.mech.tonnage} t · ${summary.alphaDamage} alpha`
                     : 'This build can no longer be opened'}
                 </span>
-                {decoded && <WeaponTypeCounts counts={weaponCounts} short={HARDPOINT_SHORT} labels={WEAPON_TYPE_LABELS} />}
+                {decoded && (
+                  <span className="builds-item-loadout">
+                    <WeaponTypeCounts counts={weaponCounts} short={HARDPOINT_SHORT} labels={WEAPON_TYPE_LABELS} />
+                    <BuildTagList tags={tags} />
+                  </span>
+                )}
                 <span className="builds-item-date">Saved {dateFormat.format(new Date(build.savedAt))}</span>
               </div>
 

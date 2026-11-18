@@ -2115,6 +2115,60 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .builds-item-weapons > span { color: var(--weapon-color); }
 .builds-item-weapons.is-empty { color: var(--work-muted); font-weight: 500; }
 
+/* Las armas por tipo y las etiquetas de tecnología comparten una línea, y bajan si no caben. */
+.builds-item-loadout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+
+.builds-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.builds-tag {
+  padding: 0 4px;
+  color: var(--work-text);
+  font: 600 10px/15px var(--work-mono);
+  border: 1px solid var(--work-line);
+  border-radius: 3px;
+}
+
+/* Los colores de la cabecera del mechlab del juego, como en .mech-spec. */
+.builds-tag.is-xl { color: #ffd23f; }
+.builds-tag.is-dhs { color: #5fa8ff; }
+.builds-tag.is-endo { color: #b48cff; }
+.builds-tag.is-ferro { color: #ff5a4f; }
+.builds-tag.is-ap,
+.builds-tag.is-ecm { color: var(--work-cyan); }
+
+/* Interruptor de los mínimos: anclajes del 'Mech o armas montadas. */
+.builds-minimums-of {
+  display: inline-flex;
+  margin-right: 4px;
+  border: 1px solid var(--work-line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.builds-minimums-of button {
+  padding: 3px 8px;
+  color: var(--work-muted);
+  font: 600 10px var(--work-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.builds-minimums-of button + button { border-left: 1px solid var(--work-line); }
+.builds-minimums-of button:hover { color: var(--work-text); }
+.builds-minimums-of button[aria-pressed='true'] { color: #18200f; background: var(--work-lime); }
+
 /* El número de cada contador se puede escribir: una casilla con el aspecto del número del selector. */
 .builds-hardpoints .mech-filter-stepper > label {
   display: inline-flex;
@@ -2151,7 +2205,6 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font: 500 10px var(--work-mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  cursor: help;
 }
 .builds-classes .mech-filter-chip[aria-pressed='true'] .utility-count { color: #18200f; }
 
