@@ -191,8 +191,6 @@ export default function App() {
         <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={selectMech} prominent />
       </section>
 
-      <StatsReadout mech={mech} summary={summary} base={baseSummary} />
-
       <BuildStatus issues={issues} onSelectZone={selectZone} />
 
       <UtilityToolbar
@@ -300,7 +298,12 @@ export default function App() {
           )}
         />
 
-        <LoadoutAnalysis mech={mech} summary={summary} base={baseSummary} />
+        <LoadoutAnalysis
+          mech={mech}
+          summary={summary}
+          base={baseSummary}
+          readout={<StatsReadout mech={mech} summary={summary} base={baseSummary} vertical />}
+        />
       </main>
 
       {activeZone && (

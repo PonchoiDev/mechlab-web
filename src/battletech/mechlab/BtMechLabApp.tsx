@@ -145,26 +145,20 @@ export function BtMechLabApp() {
           <WhatsNew />
           <button type="button" className="feedback-button" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>
           <SupportLink compact />
-          <BtMechPicker
-            mechs={BT_MECHS}
-            current={mech}
-            onSelect={(next) => {
-              if (next.id !== mech.id) setActiveSavedId(null);
-              actions.selectMech(next);
-            }}
-          />
         </div>
       </header>
 
-      {/* Las diez cifras del StatsReadout de MW5 (getBtReadouts), las mismas que lleva la imagen para compartir. */}
-      <section className="readout-strip" aria-label="Mech statistics">
-        {readouts.map(readout => (
-          <div key={readout.label} className="readout-cell">
-            <span className="readout-label" title={readout.title}>{readout.label}</span>
-            <strong className={readout.warn ? 'readout-warning' : ''}>{readout.value}{readout.unit && <> <small>{readout.unit}</small></>}</strong>
-            {readout.label === 'TONNAGE' && <HardpointUsage mech={mech} loadout={build.loadout} />}
-          </div>
-        ))}
+      {/* El selector de 'Mech, en su propia fila, como en MW5. */}
+      <section className="mech-select-bar" aria-label="'Mech">
+        <BtMechPicker
+          mechs={BT_MECHS}
+          current={mech}
+          prominent
+          onSelect={(next) => {
+            if (next.id !== mech.id) setActiveSavedId(null);
+            actions.selectMech(next);
+          }}
+        />
       </section>
 
       <BuildStatus
@@ -280,7 +274,22 @@ export function BtMechLabApp() {
         />
       )}
 
-      <BtAnalysis build={build} summary={summary} />
+      <BtAnalysis
+        build={build}
+        summary={summary}
+        readout={
+          // Las diez cifras del StatsReadout de MW5 (getBtReadouts), las mismas que lleva la imagen para compartir.
+          <section className="readout-strip is-vertical" aria-label="Mech statistics">
+            {readouts.map(readout => (
+              <div key={readout.label} className="readout-cell">
+                <span className="readout-label" title={readout.title}>{readout.label}</span>
+                <strong className={readout.warn ? 'readout-warning' : ''}>{readout.value}{readout.unit && <> <small>{readout.unit}</small></>}</strong>
+                {readout.label === 'TONNAGE' && <HardpointUsage mech={mech} loadout={build.loadout} />}
+              </div>
+            ))}
+          </section>
+        }
+      />
 
       <footer className="site-footer">
         <p className="support-note">
