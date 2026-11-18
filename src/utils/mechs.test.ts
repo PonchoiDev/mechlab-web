@@ -6,6 +6,7 @@ import {
   getHardpointGroups,
   getMechSpecs,
   getMechDisplayName,
+  hasActiveProbe,
   hasEcm,
   hasJumpJets,
   countActiveFilters,
@@ -230,5 +231,35 @@ describe('filtros por DLC y por hero', () => {
     expect(EMPTY_MECH_FILTERS.hero).toBe(false);
     expect(EMPTY_MECH_FILTERS.dlcs).toEqual([]);
     expect(countActiveFilters(EMPTY_MECH_FILTERS)).toBe(0);
+  });
+});
+
+// Criterios de aceptación de docs/specs/filtros-sonda-artilleria.md.
+describe('filtros de sonda activa y artillería', () => {
+  const variants = (filters: Partial<MechFilters>) =>
+    allMechs.filter(mech => matchesMechFilters(mech, { ...EMPTY_MECH_FILTERS, ...filters })).map(mech => mech.variant);
+
+  it('CA1: Active probe deja los que la traen de serie y los que tienen ranura para ella', () => {
+    const probes = variants({ activeProbe: true });
+    expect(probes).toHaveLength(204);
+    expect(probes).toEqual(expect.arrayContaining(['JVN-11B', 'ZEU-SA3', 'ACH-C']));
+    expect(hasActiveProbe(getMech('JVN-11B'))).toBe(true);
+    expect(hasActiveProbe(getMech('AS7-D'))).toBe(false);
+  });
+
+  it('CA2: al menos un anclaje de artillería', () => {
+    expect(variants({ minHardpoints: { artillery: 1 } }).sort())
+      .toEqual(['BSK-AIV', 'CPLT-C3', 'KFX-V', 'LGB-8V', 'MDD-V', 'NGA-PRIME', 'UM-AIV']);
+  });
+
+  it('CA3: el buscador entiende bap', () => {
+    const parsed = parseMechQuery('atlas bap');
+    expect(parsed.text).toBe('atlas');
+    expect(parsed.filters.activeProbe).toBe(true);
+    expect(mergeMechFilters(EMPTY_MECH_FILTERS, parsed.filters).activeProbe).toBe(true);
+  });
+
+  it('CA4: Active probe cuenta como un filtro activo', () => {
+    expect(countActiveFilters({ ...EMPTY_MECH_FILTERS, activeProbe: true })).toBe(1);
   });
 });
