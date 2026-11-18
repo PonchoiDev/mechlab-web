@@ -9,6 +9,7 @@ import {
   getItemSupportedSlotTypes,
   getItemWeaponType,
   isAmmoCompatibleWithWeapon,
+  matchesItemName,
   isJumpJet
 } from './items';
 import { getHardpointOccupancy, getSlotTypeLabel } from './equipment';
@@ -265,27 +266,46 @@ describe('filterItems', () => {
   });
 });
 
-// El juego nombra las armas de varias formas para lo mismo; generar_items.py lo unifica.
-describe('nombres coherentes de las armas y el equipo', () => {
+// Las armas se muestran con su nombre abreviado del juego (C-ER L Laser, AC/10 BF, UAC/10) y se buscan
+// por ese o por el completo; generar_items.py escribe igual los modos de disparo.
+describe('nombres abreviados de las armas', () => {
+  const weapons = allItems.filter(item => item.type === 'weapon');
   const names = allItems.map(item => item.name);
-  const shortNames = allItems.flatMap(item => item.shortName ?? []);
 
-  it('ER en vez de Extended Range, como el ER Large Laser y el ER PPC', () => {
-    expect(names.filter(name => name.includes('Extended Range'))).toEqual([]);
-    expect(getItem('ERMediumLaser').name).toBe('ER Medium Laser');
+  it('las armas usan el nombre abreviado y guardan el completo', () => {
+    expect(getItem('C-ERLargeLaser')).toMatchObject({ name: 'C-ER L Laser', fullName: 'Clan ER Large Laser' });
+    expect(getItem('ERMediumLaser')).toMatchObject({ name: 'ER M Laser', fullName: 'Extended Range Medium Laser' });
+    expect(getItem('UltraAutocannon10_Single').name).toBe('UAC/10');
+    expect(getItem('MediumLaser').name).toBe('M Laser');
+    expect(getItem('PPC').name).toBe('PPC');
+    expect(getItem('PPC').fullName).toBeUndefined();
   });
 
-  it('Clan delante de todo lo Clan, también en las balísticas, la munición y el MASC', () => {
-    expect(names.filter(name => name.startsWith('C-'))).toEqual([]);
-    expect(getItem('C-UltraAutocannon5_Single').name).toBe('Clan Ultra Autocannon/5');
+  it('los modos de disparo van con un espacio: BF, RF, SB, y la munición sólida de los LB-X es SOLID', () => {
+    expect(getItem('Autocannon10_Auto').name).toBe('AC/10 RF');
+    expect(getItem('LargeLaser_ShortBurst').name).toBe('L Laser SB');
+    expect(getItem('C-UltraAutocannon10_BurstFire').name).toBe('C-UAC/10 BF');
+    expect(getItem('LBXAutocannon10_Slug_BurstFire').name).toBe('LB 10-X AC SOLID BF');
+    expect(weapons.filter(item => /-(BF|RF|SB|ST|HL)\b|SLD/.test(item.name)).map(item => item.name)).toEqual([]);
   });
 
-  it('los Ultra AC con barra, y Rapid-Fire, Burst Fire y Solid Slug escritos siempre igual', () => {
-    expect(names.filter(name => /Ultra Autocannon \d/.test(name))).toEqual([]);
-    expect(names.filter(name => /rapid-fire|Autocannon\/\d+ Burst$|Slug Burst$|Solid Burst|Autocannon Slug/.test(name))).toEqual([]);
+  it('lo Clan lleva C- delante, también la munición y el MASC', () => {
+    expect(weapons.filter(item => item.techBase === 'Clan' && !item.name.startsWith('C-')).map(item => item.name)).toEqual([]);
+    expect(getItem('c-MASC_MKI').name).toBe('C-MASC MK I');
   });
 
-  it('sin espacios dobles ni en los nombres ni en los nombres cortos', () => {
-    expect([...names, ...shortNames].filter(name => /\s{2,}/.test(name) || name !== name.trim())).toEqual([]);
+  it('sin espacios dobles', () => {
+    expect([...names, ...allItems.flatMap(item => item.fullName ?? [])].filter(name => /\s{2,}/.test(name) || name !== name.trim())).toEqual([]);
+  });
+
+  it('se buscan por el nombre abreviado o el completo, con o sin barra', () => {
+    const rapid = getItem('Autocannon10_Auto');
+    for (const query of ['AC/10 RF', 'ac10 rf', 'ac10rf', 'Autocannon/10 rapid', 'autocannon10']) {
+      expect(matchesItemName(rapid, query)).toBe(true);
+    }
+    expect(matchesItemName(getItem('UltraAutocannon10_Single'), 'uac10')).toBe(true);
+    expect(matchesItemName(getItem('UltraAutocannon10_Single'), 'ultra autocannon 10')).toBe(true);
+    expect(matchesItemName(getItem('C-ERLargeLaser'), 'clan er large')).toBe(true);
+    expect(matchesItemName(rapid, 'gauss')).toBe(false);
   });
 });
