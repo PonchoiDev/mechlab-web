@@ -63,7 +63,7 @@ describe('tiers', () => {
     expect(result.loadout.leftArm[0].tier).toBe('3');
     expect(result.loadout.rightArm[0].tier).toBe('3');
     expect(result.loadout.centerTorso[0].tier).toBe('1');
-    expect(result.message).toBe('2× Medium Laser → Tier 3');
+    expect(result.message).toBe('2× M Laser → Tier 3');
   });
 });
 
@@ -82,7 +82,7 @@ describe('duplicar armas', () => {
     const result = fillWeaponInZones(archer, build({ leftArm: [laser] }), 'leftArm', laser.instanceId, ['centerTorso']);
 
     expect(weaponsIn(result.loadout, 'centerTorso')).toEqual(['MediumLaser', 'MediumLaser']);
-    expect(result.message).toBe('Added 2× Medium Laser: Center torso ×2');
+    expect(result.message).toBe('Added 2× M Laser: Center torso ×2');
   });
 
   it('rellena todos los anclajes libres compatibles del mech', () => {
@@ -109,12 +109,12 @@ describe('duplicar armas', () => {
 
     const preview = getReplaceAllPreview(archer, loadout, laser);
     expect(preview.added).toBe(2);
-    expect(describeReplaced(preview.replaced)).toBe('1× Small Laser');
+    expect(describeReplaced(preview.replaced)).toBe('1× S Laser');
 
     const result = replaceAllCompatible(archer, loadout, 'leftArm', laser.instanceId);
     expect(weaponsIn(result.loadout, 'centerTorso')).toEqual(['MediumLaser', 'MediumLaser']);
     expect(result.loadout.rightArm).toEqual([sameLaser]);
-    expect(result.message).toBe('Placed 2× Medium Laser, replacing 1 weapon');
+    expect(result.message).toBe('Placed 2× M Laser, replacing 1 weapon');
   });
 });
 
@@ -197,7 +197,7 @@ describe('sustituir el arma de un anclaje', () => {
     const result = replaceWeapon(archer, build({ leftArm: [laser] }), 'leftArm', 0, getItem('MediumPulseLaser'));
 
     expect(weaponsIn(result.loadout, 'leftArm')).toEqual(['MediumPulseLaser', null]);
-    expect(result.message).toBe('Replaced Medium Laser with Medium Pulse Laser');
+    expect(result.message).toBe('Replaced M Laser with MP Laser');
   });
 
   it('no sustituye por un arma que no cabe en el anclaje', () => {

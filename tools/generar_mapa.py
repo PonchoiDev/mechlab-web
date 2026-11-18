@@ -394,9 +394,14 @@ def objeto_de_juego(id_juego, cantidad, items, con_tier):
     tier = REGEX_TIER.search(id_juego)
     base = REGEX_TIER.sub("", id_juego)
     nombre = items[base]["name"] if base in items else separar_palabras(base)
+    objeto = {"name": nombre}
     if con_tier:
-        return {"name": nombre, "tier": nombre_de_tier(tier.group(1)) if tier else None, "count": cantidad}
-    return {"name": nombre, "count": cantidad}
+        objeto["tier"] = nombre_de_tier(tier.group(1)) if tier else None
+    objeto["count"] = cantidad
+    # Las armas se enseñan con su nombre abreviado («UAC/10»); el completo es para buscarlas.
+    if base in items and items[base].get("fullName"):
+        objeto["fullName"] = items[base]["fullName"]
+    return objeto
 
 
 def sumar_objetos(objetos):

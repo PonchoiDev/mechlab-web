@@ -81,12 +81,12 @@
    "techBase": "InnerSphere"
   },
   "Autocannon10_Lvl0": {
-   "name": "Autocannon/10",
+   "name": "AC/10",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 12.0,
-   "shortName": "AC/10",
+   "fullName": "Autocannon/10",
    "tiers": {
     "0": {
      "damage": 10.0,
@@ -109,7 +109,7 @@
   },
   "Autocannon10_Turret": {
    "id": "Autocannon10_Turret",
-   "name": "Autocannon/10",
+   "name": "AC/10",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
@@ -131,12 +131,12 @@
    "techBase": "InnerSphere"
   },
   "Autocannon20": {
-   "name": "Autocannon/20",
+   "name": "AC/20",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 14.0,
-   "shortName": "AC/20",
+   "fullName": "Autocannon/20",
    "tiers": {
     "1": {
      "damage": 20.0,
@@ -159,7 +159,7 @@
   },
   "Autocannon20_Demolisher": {
    "id": "Autocannon20_Demolisher",
-   "name": "Autocannon/20",
+   "name": "AC/20",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
@@ -181,12 +181,12 @@
    "techBase": "InnerSphere"
   },
   "Autocannon2_Burst": {
-   "name": "Autocannon/2 Burst Fire",
+   "name": "AC/2 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 6.0,
-   "shortName": "AC/2-BF",
+   "fullName": "Autocannon/2 Burst Fire",
    "tiers": {
     "1": {
      "damage": 0.6,
@@ -208,12 +208,12 @@
    "tier": "1"
   },
   "Autocannon2_Lvl0": {
-   "name": "Autocannon/2",
+   "name": "AC/2",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 6.0,
-   "shortName": "AC/2",
+   "fullName": "Autocannon/2",
    "tiers": {
     "0": {
      "damage": 2.0,
@@ -236,7 +236,7 @@
   },
   "Autocannon2_Turret": {
    "id": "Autocannon2_Turret",
-   "name": "Autocannon/2",
+   "name": "AC/2",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
@@ -259,7 +259,7 @@
   },
   "Autocannon2_VTOL": {
    "id": "Autocannon2_VTOL",
-   "name": "Autocannon/2",
+   "name": "AC/2",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
@@ -281,12 +281,12 @@
    "techBase": "InnerSphere"
   },
   "Autocannon5": {
-   "name": "Autocannon/5",
+   "name": "AC/5",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 8.0,
-   "shortName": "AC/5",
+   "fullName": "Autocannon/5",
    "tiers": {
     "1": {
      "damage": 5.0,
@@ -308,12 +308,12 @@
    "tier": "1"
   },
   "Autocannon5_Burst": {
-   "name": "Autocannon/5 Burst Fire",
+   "name": "AC/5 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 8.0,
-   "shortName": "AC/5-BF",
+   "fullName": "Autocannon/5 Burst Fire",
    "tiers": {
     "1": {
      "damage": 2.0,
@@ -336,7 +336,7 @@
   },
   "Autocannon5_Scorpion": {
    "id": "Autocannon5_Scorpion",
-   "name": "Autocannon/5",
+   "name": "AC/5",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
@@ -358,12 +358,12 @@
    "techBase": "InnerSphere"
   },
   "C-ATM3": {
-   "name": "Clan ATM 3",
+   "name": "C-ATM 3",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.5,
-   "shortName": "C-ATM 3",
+   "fullName": "Clan ATM 3",
    "tiers": {
     "1": {
      "damage": 4.2,
@@ -385,12 +385,12 @@
    "tier": "1"
   },
   "C-ERLargeLaser": {
-   "name": "Clan ER Large Laser",
+   "name": "C-ER L Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 4.0,
-   "shortName": "C-ER L Laser",
+   "fullName": "Clan ER Large Laser",
    "tiers": {
     "1": {
      "damage": 15.6,
@@ -409,12 +409,12 @@
    "tier": "1"
   },
   "C-ERMediumLaser": {
-   "name": "Clan ER Medium Laser",
+   "name": "C-ER M Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 1.0,
-   "shortName": "C-ER M Laser",
+   "fullName": "Clan Extended Range Medium Laser",
    "tiers": {
     "1": {
      "damage": 9.1,
@@ -434,7 +434,7 @@
   },
   "C-ERMediumLaser_Elemental": {
    "id": "C-ERMediumLaser_Elemental",
-   "name": "Clan ER Medium Laser",
+   "name": "C-ER M Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
@@ -455,12 +455,12 @@
    "techBase": "Clan"
   },
   "C-ERPPC": {
-   "name": "Clan ER PPC",
+   "name": "C-ER PPC",
    "type": "weapon",
    "weaponType": "energy",
    "size": "large",
    "tonnage": 6.0,
-   "shortName": "C-ER PPC",
+   "fullName": "Clan ER PPC",
    "tiers": {
     "1": {
      "damage": 19.5,
@@ -481,7 +481,7 @@
   },
   "C-ERSmallLaser_Elemental": {
    "id": "C-ERSmallLaser_Elemental",
-   "name": "Clan ER Small Laser",
+   "name": "C-ER S Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "small",
@@ -502,12 +502,12 @@
    "techBase": "Clan"
   },
   "C-GaussRifle": {
-   "name": "Clan Gauss Rifle",
+   "name": "C-Gauss",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 12.0,
-   "shortName": "C-Gauss",
+   "fullName": "Clan Gauss Rifle",
    "tiers": {
     "1": {
      "damage": 21.0,
@@ -529,12 +529,12 @@
    "tier": "1"
   },
   "C-HeavyMachineGun": {
-   "name": "Clan Heavy Machine Gun",
+   "name": "C-Heavy Machine Gun",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 0.5,
-   "shortName": "C-Heavy Machine Gun",
+   "fullName": "Clan Heavy Machine Gun",
    "tiers": {
     "1": {
      "damage": 4.0,
@@ -555,12 +555,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon10": {
-   "name": "Clan LB 10-X Autocannon",
+   "name": "C-LB 10-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 10.0,
-   "shortName": "C-LB 10-X AC",
+   "fullName": "C-LB 10-X Autocannon",
    "tiers": {
     "1": {
      "damage": 1.3,
@@ -582,12 +582,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon2": {
-   "name": "Clan LB 2-X Autocannon",
+   "name": "C-LB 2-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 5.0,
-   "shortName": "C-LB 2-X AC",
+   "fullName": "C-LB 2-X Autocannon",
    "tiers": {
     "1": {
      "damage": 1.3,
@@ -609,12 +609,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon20": {
-   "name": "Clan LB 20-X Autocannon",
+   "name": "C-LB 20-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 12.0,
-   "shortName": "C-LB 20-X AC",
+   "fullName": "C-LB 20-X Autocannon",
    "tiers": {
     "1": {
      "damage": 1.3,
@@ -636,12 +636,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon2_Slug_Burst": {
-   "name": "Clan LB 2-X Autocannon Solid Slug Burst Fire",
+   "name": "C-LB 2-X AC SOLID BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 5.0,
-   "shortName": "C-LB 2-X AC-SLD BF",
+   "fullName": "C-LB 2-X Autocannon Slug Burst",
    "tiers": {
     "1": {
      "damage": 0.78,
@@ -663,12 +663,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon5": {
-   "name": "Clan LB 5-X Autocannon",
+   "name": "C-LB 5-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 7.0,
-   "shortName": "C-LB 5-X AC",
+   "fullName": "C-LB 5-X Autocannon",
    "tiers": {
     "1": {
      "damage": 1.3,
@@ -690,12 +690,12 @@
    "tier": "1"
   },
   "C-LRM10": {
-   "name": "Clan LRM 10",
+   "name": "C-LRM 10",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 2.5,
-   "shortName": "C-LRM 10",
+   "fullName": "Clan LRM 10",
    "tiers": {
     "1": {
      "damage": 1.68,
@@ -717,12 +717,12 @@
    "tier": "1"
   },
   "C-LRM5": {
-   "name": "Clan LRM 5",
+   "name": "C-LRM 5",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.0,
-   "shortName": "C-LRM 5",
+   "fullName": "Clan LRM 5",
    "tiers": {
     "1": {
      "damage": 1.68,
@@ -744,12 +744,12 @@
    "tier": "1"
   },
   "C-LRM5_Artemis": {
-   "name": "Clan LRM 5 + Artemis IV",
+   "name": "C-LRM 5 + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 2.0,
-   "shortName": "C-LRM 5 + Art IV",
+   "fullName": "Clan LRM 5 + Artemis IV",
    "tiers": {
     "1": {
      "damage": 1.68,
@@ -771,12 +771,12 @@
    "tier": "1"
   },
   "C-MachineGun": {
-   "name": "Clan Machine Gun",
+   "name": "C-Machine Gun",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 0.25,
-   "shortName": "C-Machine Gun",
+   "fullName": "Clan Machine Gun",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -797,12 +797,12 @@
    "tier": "1"
   },
   "C-MediumPulseLaser": {
-   "name": "Clan Medium Pulse Laser",
+   "name": "C-MP Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 2.0,
-   "shortName": "C-MP Laser",
+   "fullName": "Clan Medium Pulse Laser",
    "tiers": {
     "1": {
      "damage": 10.4,
@@ -822,7 +822,7 @@
   },
   "C-SRM2_Elemental": {
    "id": "C-SRM2_Elemental",
-   "name": "Clan SRM 2",
+   "name": "C-SRM 2",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
@@ -844,12 +844,12 @@
    "techBase": "Clan"
   },
   "C-SRM6": {
-   "name": "Clan SRM 6",
+   "name": "C-SRM 6",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.5,
-   "shortName": "C-SRM 6",
+   "fullName": "Clan SRM 6",
    "tiers": {
     "1": {
      "damage": 3.36,
@@ -871,12 +871,12 @@
    "tier": "1"
   },
   "C-StreakSRM2": {
-   "name": "Clan Streak SRM 2",
+   "name": "C-SSRM 2",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.0,
-   "shortName": "C-SSRM 2",
+   "fullName": "Clan Streak SRM 2",
    "tiers": {
     "1": {
      "damage": 3.36,
@@ -898,12 +898,12 @@
    "tier": "1"
   },
   "C-StreakSRM6": {
-   "name": "Clan Streak SRM 6",
+   "name": "C-SSRM 6",
    "type": "weapon",
    "weaponType": "missile",
    "size": "medium",
    "tonnage": 3.0,
-   "shortName": "C-SSRM 6",
+   "fullName": "Clan Streak SRM 6",
    "tiers": {
     "1": {
      "damage": 3.36,
@@ -925,12 +925,12 @@
    "tier": "1"
   },
   "C-UltraAutocannon10_BurstFire": {
-   "name": "Clan Ultra Autocannon/10 Burst Fire",
+   "name": "C-UAC/10 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 10.0,
-   "shortName": "C-UAC/10-BF",
+   "fullName": "C-Ultra Autocannon 10 Burst Fire",
    "tiers": {
     "1": {
      "damage": 1.98,
@@ -952,12 +952,12 @@
    "tier": "1"
   },
   "C-UltraAutocannon2": {
-   "name": "Clan Ultra Autocannon/2 Burst Fire",
+   "name": "C-UAC/2 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 5.0,
-   "shortName": "C-UAC/2-BF",
+   "fullName": "C-Ultra Autocannon/2 Burst Fire",
    "tiers": {
     "1": {
      "damage": 0.78,
@@ -979,12 +979,12 @@
    "tier": "1"
   },
   "C-UltraAutocannon5": {
-   "name": "Clan Ultra Autocannon/5 Burst Fire",
+   "name": "C-UAC/5 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 7.0,
-   "shortName": "C-UAC/5-BF",
+   "fullName": "C-Ultra Autocannon/5 Burst",
    "tiers": {
     "1": {
      "damage": 1.98,
@@ -1006,12 +1006,12 @@
    "tier": "1"
   },
   "ERMediumLaser": {
-   "name": "ER Medium Laser",
+   "name": "ER M Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 1.0,
-   "shortName": "ER M Laser",
+   "fullName": "Extended Range Medium Laser",
    "tiers": {
     "1": {
      "damage": 5.0,
@@ -1053,12 +1053,12 @@
    "tier": "1"
   },
   "GaussRifle": {
-   "name": "Gauss Rifle",
+   "name": "Gauss",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 15.0,
-   "shortName": "Gauss",
+   "fullName": "Gauss Rifle",
    "tiers": {
     "1": {
      "damage": 15.0,
@@ -1080,12 +1080,12 @@
    "tier": "1"
   },
   "HeavyRifle_Burst": {
-   "name": "Heavy Rifle Burst Fire",
+   "name": "Heavy Rifle BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 8.0,
-   "shortName": "Heavy Rifle-BF",
+   "fullName": "Heavy Rifle Burst Fire",
    "tiers": {
     "1": {
      "damage": 7.0,
@@ -1108,12 +1108,12 @@
    "tier": "1"
   },
   "LBXAutocannon20": {
-   "name": "LB 20-X Autocannon",
+   "name": "LB 20-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 14.0,
-   "shortName": "LB 20-X AC",
+   "fullName": "LB 20-X Autocannon",
    "tiers": {
     "1": {
      "damage": 5.0,
@@ -1161,12 +1161,12 @@
    "tier": "1"
   },
   "LRM10_Artemis_Stream": {
-   "name": "LRM 10 Stream + Artemis IV",
+   "name": "LRM 10 ST + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "medium",
    "tonnage": 6.0,
-   "shortName": "LRM 10-ST + Art IV",
+   "fullName": "LRM 10 Stream + Artemis IV",
    "tiers": {
     "1": {
      "damage": 1.2,
@@ -1211,12 +1211,12 @@
    "techBase": "InnerSphere"
   },
   "LRM10_Stream": {
-   "name": "LRM 10 Stream",
+   "name": "LRM 10 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "medium",
    "tonnage": 5.0,
-   "shortName": "LRM 10-ST",
+   "fullName": "LRM 10 Stream",
    "tiers": {
     "1": {
      "damage": 1.2,
@@ -1238,12 +1238,12 @@
    "tier": "1"
   },
   "LRM15_Artemis_Stream": {
-   "name": "LRM 15 Stream + Artemis IV",
+   "name": "LRM 15 ST + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "large",
    "tonnage": 8.0,
-   "shortName": "LRM 15-ST + Art IV",
+   "fullName": "LRM 15 Stream + Artemis IV",
    "tiers": {
     "1": {
      "damage": 1.2,
@@ -1291,12 +1291,12 @@
    "tier": "1"
   },
   "LRM20_Stream": {
-   "name": "LRM 20 Stream",
+   "name": "LRM 20 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "large",
    "tonnage": 10.0,
-   "shortName": "LRM 20-ST",
+   "fullName": "LRM 20 Stream",
    "tiers": {
     "1": {
      "damage": 1.2,
@@ -1344,12 +1344,12 @@
    "tier": "1"
   },
   "LRM5_Stream_Lvl0": {
-   "name": "LRM 5 Stream",
+   "name": "LRM 5 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 2.0,
-   "shortName": "LRM 5-ST",
+   "fullName": "LRM 5 Stream",
    "tiers": {
     "0": {
      "damage": 1.2,
@@ -1371,12 +1371,12 @@
    "tier": "0"
   },
   "LargeLaser": {
-   "name": "Large Laser",
+   "name": "L Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "large",
    "tonnage": 5.0,
-   "shortName": "L Laser",
+   "fullName": "Large Laser",
    "tiers": {
     "1": {
      "damage": 10.0,
@@ -1396,7 +1396,7 @@
   },
   "LargeLaser_Turret": {
    "id": "LargeLaser_Turret",
-   "name": "Large Laser",
+   "name": "L Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "large",
@@ -1417,12 +1417,12 @@
    "techBase": "InnerSphere"
   },
   "LargePulseLaser": {
-   "name": "Large Pulse Laser",
+   "name": "LP Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "large",
    "tonnage": 7.0,
-   "shortName": "LP Laser",
+   "fullName": "Large Pulse Laser",
    "tiers": {
     "1": {
      "damage": 12.0,
@@ -1441,12 +1441,12 @@
    "tier": "1"
   },
   "LightAutocannon2": {
-   "name": "Light Autocannon/2",
+   "name": "LAC/2",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 4.0,
-   "shortName": "LAC/2",
+   "fullName": "Light Autocannon/2",
    "tiers": {
     "1": {
      "damage": 2.0,
@@ -1468,12 +1468,12 @@
    "tier": "1"
   },
   "LightGaussRifle": {
-   "name": "Light Gauss Rifle",
+   "name": "Light Gauss",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 12.0,
-   "shortName": "Light Gauss",
+   "fullName": "Light Gauss Rifle",
    "tiers": {
     "1": {
      "damage": 8.0,
@@ -1569,12 +1569,12 @@
    "tier": "1"
   },
   "MediumLaser": {
-   "name": "Medium Laser",
+   "name": "M Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 1.0,
-   "shortName": "M Laser",
+   "fullName": "Medium Laser",
    "tiers": {
     "1": {
      "damage": 5.0,
@@ -1593,12 +1593,12 @@
    "tier": "1"
   },
   "MediumPulseLaser": {
-   "name": "Medium Pulse Laser",
+   "name": "MP Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 2.0,
-   "shortName": "MP Laser",
+   "fullName": "Medium Pulse Laser",
    "tiers": {
     "1": {
      "damage": 6.0,
@@ -1712,12 +1712,12 @@
    "tier": "1"
   },
   "SRM2_Inferno": {
-   "name": "SRM 2 Inferno",
+   "name": "SRM 2 INF",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.0,
-   "shortName": "SRM 2 INF",
+   "fullName": "SRM 2 Inferno",
    "tiers": {
     "1": {
      "damage": 1.8,
@@ -1766,12 +1766,12 @@
    "tier": "0"
   },
   "SRM2_Stream": {
-   "name": "SRM 2 Stream",
+   "name": "SRM 2 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.0,
-   "shortName": "SRM 2-ST",
+   "fullName": "SRM 2 Stream",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -1842,12 +1842,12 @@
    "tier": "1"
   },
   "SRM4_Artemis": {
-   "name": "SRM 4 + Artemis IV",
+   "name": "SRM 4 + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 3.0,
-   "shortName": "SRM 4 + Art IV",
+   "fullName": "SRM 4 + Artemis IV",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -1895,12 +1895,12 @@
    "tier": "1"
   },
   "SRM6_Artemis_Stream": {
-   "name": "SRM 6 Stream + Artemis IV",
+   "name": "SRM 6 ST + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "medium",
    "tonnage": 4.0,
-   "shortName": "SRM 6-ST + Art IV",
+   "fullName": "SRM 6 Stream + Artemis IV",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -1971,12 +1971,12 @@
    "techBase": "InnerSphere"
   },
   "SmallLaser": {
-   "name": "Small Laser",
+   "name": "S Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "small",
    "tonnage": 0.5,
-   "shortName": "S Laser",
+   "fullName": "Small Laser",
    "tiers": {
     "1": {
      "damage": 3.0,
@@ -1995,12 +1995,12 @@
    "tier": "1"
   },
   "StreakSRM2": {
-   "name": "Streak SRM 2",
+   "name": "SSRM 2",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.5,
-   "shortName": "SSRM 2",
+   "fullName": "Streak SRM 2",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -2022,12 +2022,12 @@
    "tier": "1"
   },
   "StreakSRM2_Stream": {
-   "name": "Streak SRM 2 Stream",
+   "name": "SSRM 2 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.5,
-   "shortName": "SSRM 2-ST",
+   "fullName": "Streak SRM 2 Stream",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -2049,12 +2049,12 @@
    "tier": "1"
   },
   "UltraAutocannon10_Single": {
-   "name": "Ultra Autocannon/10",
+   "name": "UAC/10",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 13.0,
-   "shortName": "UAC/10",
+   "fullName": "Ultra Autocannon 10",
    "tiers": {
     "1": {
      "damage": 10.0,
@@ -2076,12 +2076,12 @@
    "tier": "1"
   },
   "UltraAutocannon20_Single": {
-   "name": "Ultra Autocannon/20",
+   "name": "UAC/20",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 15.0,
-   "shortName": "UAC/20",
+   "fullName": "Ultra Autocannon 20",
    "tiers": {
     "1": {
      "damage": 20.0,

@@ -31,17 +31,17 @@ describe('unidades enemigas', () => {
     expect(unit('Condor')).toEqual(expect.objectContaining({
       kind: 'hover', role: 'Striker', tier: 1, battleValue: 485, introYear: 2564, hitPoints: 30, speed: 126
     }));
-    expect(weaponList('Condor')).toEqual([[1, 'Machine Gun'], [1, 'Autocannon/5 Burst Fire'], [2, 'Medium Laser']]);
+    expect(weaponList('Condor')).toEqual([[1, 'Machine Gun'], [1, 'AC/5 BF'], [2, 'M Laser']]);
   });
 
   it('CA3: el Condor (Davion) lleva solo los AC/2 de su torreta', () => {
-    expect(weaponList('Condor (Davion)')).toEqual([[1, 'Machine Gun'], [2, 'Autocannon/2 Burst Fire']]);
+    expect(weaponList('Condor (Davion)')).toEqual([[1, 'Machine Gun'], [2, 'AC/2 BF']]);
   });
 
   it('CA4: las armas de vehículo tienen sus propias estadísticas', () => {
     const turret = unit('Heavy Turret 4 x AC/5');
     const [autocannon] = getUnitWeapons(data, turret);
-    expect(autocannon).toEqual(expect.objectContaining({ name: 'Autocannon/5', count: 4, damage: 5, range: 620 }));
+    expect(autocannon).toEqual(expect.objectContaining({ name: 'AC/5', count: 4, damage: 5, range: 620 }));
     expect(autocannon.dps).toBeCloseTo(2.5);
     const firepower = getUnitFirepower(data, turret);
     expect(firepower.damage).toBeCloseTo(20);
@@ -50,7 +50,7 @@ describe('unidades enemigas', () => {
 
   it('CA5: el AC/20 del Demolisher aplica su quirk de cooldown', () => {
     const [autocannon] = getUnitWeapons(data, unit('Demolisher Heavy Tank'));
-    expect(autocannon).toEqual(expect.objectContaining({ name: 'Autocannon/20', count: 2, damage: 20 }));
+    expect(autocannon).toEqual(expect.objectContaining({ name: 'AC/20', count: 2, damage: 20 }));
     expect(autocannon.dps).toBeCloseTo(20 / 9.6, 1);
   });
 
@@ -65,10 +65,10 @@ describe('unidades enemigas', () => {
   it('CA7: las armaduras de combate van en grupos, con la vida y las armas de cada traje', () => {
     expect(unit('Clan Elemental')).toEqual(expect.objectContaining({ kind: 'battleArmor', squad: 5, hitPoints: 20 }));
     expect(weaponList('Clan Elemental')).toEqual([
-      [1, 'Clan SRM 2'], [1, 'Clan ER Medium Laser'], [1, 'Clan ER Small Laser']
+      [1, 'C-SRM 2'], [1, 'C-ER M Laser'], [1, 'C-ER S Laser']
     ]);
     expect(unit('Battle Armor')).toEqual(expect.objectContaining({ kind: 'battleArmor', squad: 4, hitPoints: null }));
-    expect(weaponList('Battle Armor')).toEqual([[1, 'Small Laser']]);
+    expect(weaponList('Battle Armor')).toEqual([[1, 'S Laser']]);
   });
 
   it('CA8: la lista se filtra por tipo y se busca por nombre', () => {

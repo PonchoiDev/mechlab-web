@@ -41,20 +41,20 @@ describe('página de armas y equipo', () => {
   });
 
   it('CA2: el Medium Laser en tier 1 y en Lost Tech', () => {
-    expect(row(tier1, 'Medium Laser')).toEqual(expect.objectContaining({
+    expect(row(tier1, 'M Laser')).toEqual(expect.objectContaining({
       tier: '1', damage: 5, heat: 2.25, cooldown: 4, rpm: 15, dps: 1.25, damagePerTon: 5, range: 270, maxRange: 405,
       speed: null, manufacturer: 'Magna Mk.II', ammoPerTon: null, volleysPerTon: null, dlc: 0
     }));
-    expect(row(getWeaponRows(items, '5'), 'Medium Laser')).toEqual(expect.objectContaining({
+    expect(row(getWeaponRows(items, '5'), 'M Laser')).toEqual(expect.objectContaining({
       tier: '5', damage: 6.5, manufacturer: 'Krupp'
     }));
   });
 
   it('CA3: el Autocannon/10 en tier 1', () => {
-    expect(row(tier1, 'Autocannon/10')).toEqual(expect.objectContaining({
+    expect(row(tier1, 'AC/10')).toEqual(expect.objectContaining({
       damage: 10, speed: 600, ammoPerTon: 40, volleysPerTon: 40
     }));
-    const autocannon = row(tier1, 'Autocannon/10').item;
+    const autocannon = row(tier1, 'AC/10').item;
     expect([autocannon.tonnage, autocannon.weaponType, autocannon.size]).toEqual([12, 'ballistic', 'medium']);
   });
 
@@ -63,7 +63,7 @@ describe('página de armas y equipo', () => {
   });
 
   it('CA5: las armas Clan enseñan siempre su único tier', () => {
-    expect(row(getWeaponRows(items, '3'), 'Clan ER Medium Laser')).toEqual(expect.objectContaining({
+    expect(row(getWeaponRows(items, '3'), 'C-ER M Laser')).toEqual(expect.objectContaining({
       tier: '1', tierName: 'Clan tier', damage: 9.1, manufacturer: 'Strana Mechty MechWorks'
     }));
   });
@@ -77,22 +77,22 @@ describe('página de armas y equipo', () => {
     expect(filter({ tech: 'innerSphere' })).toHaveLength(130);
     expect(filter({ dlc: 3 })).toHaveLength(17);
     expect(filter({ dlc: 0 })).toHaveLength(135);
-    expect(names(filter({ query: 'gauss' })).sort()).toEqual(['Clan Gauss Rifle', 'Gauss Rifle', 'Light Gauss Rifle']);
-    expect(names(filter({ query: 'krupp' }, getWeaponRows(items, '5'))).sort()).toEqual(['Large Laser', 'Medium Laser']);
+    expect(names(filter({ query: 'gauss' })).sort()).toEqual(['C-Gauss', 'Gauss', 'Light Gauss']);
+    expect(names(filter({ query: 'krupp' }, getWeaponRows(items, '5'))).sort()).toEqual(['L Laser', 'M Laser']);
   });
 
   it('CA7: orden por columnas, con las armas sin el dato al final', () => {
     expect(sortWeaponRows(tier1, { key: 'dps', dir: 'desc' })[0]).toEqual(expect.objectContaining({ dps: 40 }));
-    expect(sortWeaponRows(tier1, { key: 'dps', dir: 'desc' })[0].item.name).toBe('Clan Heavy Machine Gun');
+    expect(sortWeaponRows(tier1, { key: 'dps', dir: 'desc' })[0].item.name).toBe('C-Heavy Machine Gun');
     expect(sortWeaponRows(tier1, { key: 'damagePerTon', dir: 'desc' })[0]).toEqual(expect.objectContaining({ damagePerTon: 30 }));
     expect(sortWeaponRows(tier1, { key: 'damagePerTon', dir: 'desc' })[0].item.name).toBe('Light Knuckles');
-    expect(names(sortWeaponRows(tier1, { key: 'name', dir: 'asc' })).slice(0, 3)).toEqual(['AMS', 'Arrow IV', 'Assault Arena Fist']);
+    expect(names(sortWeaponRows(tier1, { key: 'name', dir: 'asc' })).slice(0, 3)).toEqual(['AC/10', 'AC/10 BF', 'AC/10 RF']);
 
     const dps = toggleWeaponSort({ key: 'name', dir: 'asc' }, 'dps');
     expect(dps).toEqual({ key: 'dps', dir: 'desc' });
     const reversed = toggleWeaponSort(dps, 'dps');
     expect(reversed).toEqual({ key: 'dps', dir: 'asc' });
-    expect(sortWeaponRows(tier1, reversed).at(-1)?.item.name).toBe('Clan Heavy Machine Gun');
+    expect(sortWeaponRows(tier1, reversed).at(-1)?.item.name).toBe('C-Heavy Machine Gun');
     expect(toggleWeaponSort(reversed, 'name')).toEqual({ key: 'name', dir: 'asc' });
 
     for (const dir of ['asc', 'desc'] as const) {
@@ -118,7 +118,7 @@ describe('página de armas y equipo', () => {
     expect(electronics.filter(candidate => candidate.probe)).toHaveLength(4);
     expect(filterEquipment(items, { category: 'jumpJets', query: '', tech: 'all', dlc: 'all' })).toHaveLength(5);
     expect(filterEquipment(items, { category: 'all', query: 'masc', tech: 'clan', dlc: 'all' }).map(candidate => candidate.name))
-      .toEqual(['Clan MASC MK I', 'Clan MASC MK II', 'Clan MASC MK III', 'Clan MASC MK IV', 'Clan MASC MK V']);
+      .toEqual(['C-MASC MK I', 'C-MASC MK II', 'C-MASC MK III', 'C-MASC MK IV', 'C-MASC MK V']);
   });
 
   it('CA9: los efectos de cada pieza de equipo', () => {
@@ -140,7 +140,7 @@ describe('página de armas y equipo', () => {
     const ammo = getAmmoRows(items).find(candidate => candidate.item.id === 'AC10_Standard_AmmoEquipment')!;
     expect([ammo.item.tonnage, ammo.item.slots, ammo.item.capacity, ammo.item.explosionDamagePerRound])
       .toEqual([1, 1, 40, 10]);
-    expect(ammo.users).toEqual(['Autocannon/10', 'Autocannon/10 Burst Fire', 'Autocannon/10 Rapid-Fire']);
+    expect(ammo.users).toEqual(['AC/10', 'AC/10 BF', 'AC/10 RF']);
   });
 
   it('CA11: la vista en la URL', () => {
@@ -160,8 +160,8 @@ describe('página de armas y equipo', () => {
 
   it('CA12: busca por el nombre corto del juego', () => {
     const search = (query: string) => names(filterWeaponRows(tier1, { ...DEFAULT_WEAPON_FILTER, query }));
-    expect(search('tag')).toEqual(['Target Acquisition Gear', 'Clan Target Acquisition Gear']);
-    expect(search('ac/10-rf')).toEqual(['Autocannon/10 Rapid-Fire']);
-    expect(search('target')).toEqual(['Target Acquisition Gear', 'Clan Target Acquisition Gear']);
+    expect(search('tag')).toEqual(['TAG', 'C-TAG']);
+    expect(search('ac/10-rf')).toEqual(['AC/10 RF']);
+    expect(search('target')).toEqual(['TAG', 'C-TAG']);
   });
 });

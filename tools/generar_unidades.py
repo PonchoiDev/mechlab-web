@@ -124,11 +124,12 @@ def arma_de_unidad(id_arma, arma, items):
         item["tiers"] = {tier: items[base]["tiers"][tier]}
         return {**item, "id": id_arma, "tier": tier}
     estadisticas, proyectiles, calor = estadisticas_de_arma(arma)
-    # Con los mismos nombres que las armas de 'Mech (generar_items.py), y de ahí el tipo y la tecnología
-    # del arma con el mismo nombre (el AC/5 del Scorpion es un AC/5).
+    # El tipo y la tecnología, del arma de 'Mech con el mismo nombre completo (el AC/5 del Scorpion es un
+    # AC/5), y su nombre abreviado, como en el MechLab (generar_items.py).
     nombre = normalizar(arma["Name"], REGLAS_NOMBRE)
-    pariente = next((item for item in items.values() if item["type"] == "weapon" and item["name"] == nombre), {})
-    item = {"id": id_arma, "name": nombre, "type": "weapon", "weaponType": pariente.get("weaponType"),
+    pariente = next((item for item in items.values()
+                     if item["type"] == "weapon" and nombre in (item["name"], item.get("fullName"))), {})
+    item = {"id": id_arma, "name": pariente.get("name", nombre), "type": "weapon", "weaponType": pariente.get("weaponType"),
             "size": pariente.get("size", "small"), "tonnage": 0, "tiers": {"1": estadisticas},
             "volleyProjectiles": proyectiles, "volleyHeatShots": calor, "tier": "1"}
     if pariente.get("techBase"):

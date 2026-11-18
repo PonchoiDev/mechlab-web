@@ -84,7 +84,7 @@ describe('tarjetas y builds guardadas', () => {
     const groups = groupLoadout(stock.loadout);
     const rightTorso = groups.find(group => group.zone === 'rightTorso')!;
     expect(rightTorso.items).toEqual(expect.arrayContaining([
-      expect.objectContaining({ name: 'Autocannon/20', type: 'weapon', count: 1 }),
+      expect.objectContaining({ name: 'AC/20', type: 'weapon', count: 1 }),
       expect.objectContaining({ name: 'AC/20 Ammo', type: 'ammo', count: 2 })
     ]));
     // Las armas van primero, como en el tablero.

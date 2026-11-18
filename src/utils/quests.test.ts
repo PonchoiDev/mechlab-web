@@ -157,10 +157,10 @@ describe('recompensas de las HRQ', () => {
   it('CA2: Pirate Hunt paga distinto en campaña y en carrera', () => {
     const campaign = reward('Pirate Hunt', 'campaign');
     expect(campaign).toMatchObject({ cbills: 3202500, reputation: 4500 });
-    expect(campaign.weapons.map(weapon => weapon.name)).toContain('Gauss Rifle');
+    expect(campaign.weapons.map(weapon => weapon.name)).toContain('Gauss');
     const career = reward('Pirate Hunt', 'career');
     expect(career).toMatchObject({ cbills: 705300, reputation: 220 });
-    expect(career.weapons).toContainEqual({ name: 'Large Laser', tier: 'Tier 3', count: 1 });
+    expect(career.weapons).toContainEqual(expect.objectContaining({ name: 'L Laser', tier: 'Tier 3', count: 1 }));
   });
 
   it('CA3: Tributes for the Imperator da el Warhammer una sola vez', () => {

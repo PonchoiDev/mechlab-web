@@ -11,7 +11,7 @@ export const searchQuests = (data: StarmapData, query: string): Quest[] => {
   const systemsOf = (quest: Quest) => [quest.offer, ...quest.missions.map(mission => mission.system)].map(id => names.get(id) ?? '');
   const rewardsOf = (quest: Quest) => quest.rewards.flatMap(reward => [
     ...reward.mechs.map(mech => `${mech.name} ${mech.id}`),
-    ...reward.weapons.map(weapon => weapon.name),
+    ...reward.weapons.map(weapon => `${weapon.name} ${weapon.fullName ?? ''}`),
     ...reward.equipment.map(item => item.name)
   ]).map(normalize);
   const inName = data.quests.filter(quest => normalize(quest.name).includes(needle)).sort(byName);
