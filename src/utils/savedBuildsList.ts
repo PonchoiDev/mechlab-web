@@ -94,3 +94,10 @@ export const countBuildsByWeightClass = (rows: BuildListRow[]): Record<BuildWeig
   for (const row of rows) if (row.weightClass) counts[row.weightClass] += 1;
   return counts;
 };
+
+// Armas montadas de cada tipo, en el orden de los tipos de cada juego y sin los que no tienen ninguna.
+// Lo que el juego no clasifica (undefined) no se cuenta.
+export const countWeaponTypes = (types: (string | null | undefined)[], order: string[]): { type: string; count: number }[] =>
+  order
+    .map(type => ({ type, count: types.filter(candidate => candidate === type).length }))
+    .filter(entry => entry.count > 0);
