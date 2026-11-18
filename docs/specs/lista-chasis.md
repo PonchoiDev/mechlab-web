@@ -7,7 +7,7 @@
 
 El MechLab elige un 'Mech con el selector, que filtra bien pero enseña pocas cifras de cada variante: no se pueden comparar todos los 'Mechs por velocidad, armadura o potencia de fuego, ni ordenarlos. La página de armas y equipo (`docs/specs/pagina-equipo.md`) ya hace eso con las armas: una tabla con filtros y columnas que ordenan. Esta página hace lo mismo con los 'Mechs de *MechWarrior 5: Mercenaries*.
 
-`mechs.json` ya trae todo lo necesario: las cifras del chasis y la build de serie de cada variante. La página no necesita datos nuevos.
+`mechs.json` ya trae todo lo necesario: las cifras de cada chasis. La página no necesita datos nuevos.
 
 ## Requisitos funcionales
 
@@ -22,7 +22,7 @@ El MechLab elige un 'Mech con el selector, que filtra bien pero enseña pocas ci
   - **JJ:** los jump jets que admite el chasis;
   - **Turn** y **Twist:** el giro de pie y el del torso en °/s;
   - **Upgr.:** las ranuras para las mejoras de la cantina;
-  - **de la build de serie:** la potencia de fuego de una salva (**Alpha**), el **DPS**, la capacidad de calor y la refrigeración, como las calcula el MechLab;
+  - **Heat cap.** y **Cooling:** la capacidad de calor y la refrigeración del chasis vacío, sin disipadores montados: lo que trae de base. Las cifras de una build concreta dependen de su equipo, y se ven en el MechLab;
   - **Year** (cuándo se puede conseguir, como el filtro Available by del selector) y **DLC**.
 - **RF3.** Los filtros del selector de 'Mechs, con la misma lógica:
   - el buscador, por nombre, variante o ID, con sus atajos («3e 2m jj ecm hero dlc7»);
@@ -36,7 +36,7 @@ El MechLab elige un 'Mech con el selector, que filtra bien pero enseña pocas ci
 
 ## Requisitos no funcionales
 
-- **RNF1.** La lógica es pura y está en `src/utils/chassisList.ts`, con sus tests: filas, filtros, orden, enlaces y vista en la URL. Los filtros del selector se reutilizan de `src/utils/mechs.ts`, no se copian.
+- **RNF1.** La lógica es pura y está en `src/utils/chassisList.ts`, con sus tests: filas, filtros, orden, enlaces y vista en la URL. Los filtros del selector se reutilizan de `src/utils/mechs.ts`, no se copian. Solo lee `mechs.json`: no necesita el catálogo de equipo.
 - **RNF2.** La página tiene su propio bundle y funciona a 390 × 844 sin desbordar la página: la tabla se desplaza dentro de su caja y la primera columna se queda fija.
 - **RNF3.** Textos de la interfaz en inglés y sin guiones largos.
 
@@ -45,10 +45,10 @@ El MechLab elige un 'Mech con el selector, que filtra bien pero enseña pocas ci
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
 | CA1 | Los 'Mechs | se cargan las filas | son 639 variantes de 109 chasis; 198 son Clan y 109 son hero |
-| CA2 | El AS7-D | se consulta su fila | Atlas, assault, 100 t, 4E 1B 2M, motor 300 sin XL, 48,6 km/h, 626 de armadura, 313 de estructura, 0 jump jets, giro 60,73 y torso 76,5 °/s, 6 ranuras de mejoras; de serie, 78,4 de alpha, 22,2 de DPS, 49 de capacidad de calor y 1,9 de refrigeración; del año 3015 y del juego base |
-| CA3 | El LCT-1V y el ADR-A | se consultan sus filas | LCT-1V: 129,6 km/h, 8 ranuras de mejoras y 8 de alpha. ADR-A: Puma (Adder), 1E 2M y 2 omni, motor 210 XL, del DLC 7 y del año 3050 |
+| CA2 | El AS7-D | se consulta su fila | Atlas, assault, 100 t, 4E 1B 2M, motor 300 sin XL, 48,6 km/h, 626 de armadura, 313 de estructura, 0 jump jets, giro 60,73 y torso 76,5 °/s, 6 ranuras de mejoras; vacío, 40 de capacidad de calor y 1 de refrigeración; del año 3015 y del juego base |
+| CA3 | El LCT-1V y el ADR-A | se consultan sus filas | LCT-1V: 129,6 km/h, 8 ranuras de mejoras, 36,4 de capacidad de calor y 0,64 de refrigeración. ADR-A: Puma (Adder), 1E 2M y 2 omni, motor 210 XL, del DLC 7 y del año 3050 |
 | CA4 | Las filas | se busca «atlas» / «3e 2m jj» / se filtra por Clan / Hero / de 20 a 35 t / al menos 120 km/h | todas son Atlas o Atlas II (la hero AS7-D-H), el AS7-D entre ellas / todas tienen al menos 3E y 2M (con los omni) y admiten jump jets / 198 / 109 / 99 / 51 |
-| CA5 | Las filas | se ordenan por Speed / Alpha / nombre / Speed dos veces | la primera va a 162 km/h / es el BANE-3 (215) / la primera es de un chasis que va antes por orden alfabético que el de la segunda / la primera es la más lenta |
+| CA5 | Las filas | se ordenan por Speed / Heat cap. / nombre / Speed dos veces | la primera va a 162 km/h / la primera tiene la mayor capacidad de calor de base / la primera es de un chasis que va antes por orden alfabético que el de la segunda / la primera es la más lenta |
 | CA6 | La URL | se lee y se vuelve a escribir | `?q=atlas&class=assault&tech=clan&role=Juggernaut&jj=1&ecm=1&hero=1&min=3e,2m,1ams&year=3050&dlc=base,7&tmin=20&tmax=35&speed=120&sort=speed&dir=asc` se conserva igual; sin parámetros, la vista por defecto y una URL vacía; lo que no se conoce se ignora |
 | CA7 | El AS7-D | se enlaza al MechLab | `/mercs/?mech=AS7-D` |
 
@@ -60,7 +60,7 @@ El MechLab elige un 'Mech con el selector, que filtra bien pero enseña pocas ci
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA7):** `src/utils/chassisList.test.ts`, con `mechs.json` e `items.json` reales.
+1. **Lógica (CA1 a CA7):** `src/utils/chassisList.test.ts`, con `mechs.json` real.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: la tabla, los filtros, el orden, la URL, el enlace al MechLab con la build de serie y la carátula de la página de inicio.
 
 ## Resultado
@@ -73,3 +73,4 @@ El MechLab elige un 'Mech con el selector, que filtra bien pero enseña pocas ci
   - Rol y DLC se eligen de uno en uno en la página, con un desplegable; la URL y el buscador («dlc7 base») admiten varios, como el selector.
   - El dibujo de la carátula es la miniatura de 600 px de Sarna: el original pesa 4,3 MB.
   - En pantallas estrechas las siglas de tecnología van juntas y se parten como texto, para que las filas no se alarguen.
+- **Sin cifras de la build de serie:** la primera versión enseñaba el alpha, el DPS, la capacidad de calor y la refrigeración de la build de serie, con un fondo naranja. Se quitaron: la capacidad y la refrigeración son ahora las del chasis vacío (su base), y la página ya no carga `items.json` ni reconstruye las builds de serie.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { allItems, allMechs } from '../test/fixtures';
+import { allMechs } from '../test/fixtures';
 import { EMPTY_MECH_FILTERS, getHardpointCounts, hasJumpJets } from './mechs';
 import { meetsHardpointMinimums } from './hardpointMinimums';
 import {
@@ -15,8 +15,8 @@ import {
   type ChassisView
 } from './chassisList';
 
-// Criterios de aceptación de docs/specs/lista-chasis.md, con mechs.json e items.json reales.
-const rows = getChassisRows(allMechs, allItems);
+// Criterios de aceptación de docs/specs/lista-chasis.md, con mechs.json real.
+const rows = getChassisRows(allMechs);
 const row = (variant: string) => rows.find(candidate => candidate.mech.variant === variant)!;
 const view = (change: Partial<ChassisView> = {}, filters: Partial<ChassisView['filters']> = {}): ChassisView =>
   ({ ...DEFAULT_CHASSIS_VIEW, ...change, filters: { ...EMPTY_MECH_FILTERS, ...filters } });
@@ -31,7 +31,7 @@ describe('lista de chasis de MW5', () => {
     expect(rows.filter(candidate => candidate.mech.hero)).toHaveLength(109);
   });
 
-  it('CA2: las cifras del AS7-D, del chasis y de su build de serie', () => {
+  it('CA2: las cifras del AS7-D, con el calor del chasis vacío', () => {
     const atlas = row('AS7-D');
     expect(atlas).toMatchObject({
       chassis: 'Atlas',
@@ -46,18 +46,18 @@ describe('lista de chasis de MW5', () => {
       turnSpeed: 60.73,
       torsoYaw: 76.5,
       upgradeSlots: 6,
-      alpha: 78.4,
-      heatCapacity: 49,
-      cooling: 1.9,
+      heatCapacity: 40,
+      cooling: 1,
       year: 3015,
       dlc: 0
     });
     expect(atlas.hardpoints).toMatchObject({ energy: 4, ballistic: 1, missile: 2, omni: 0 });
-    expect(atlas.dps).toBeCloseTo(22.2, 2);
+    expect(atlas).not.toHaveProperty('alpha');
+    expect(atlas).not.toHaveProperty('dps');
   });
 
   it('CA3: el LCT-1V y el ADR-A', () => {
-    expect(row('LCT-1V')).toMatchObject({ speed: 129.6, upgradeSlots: 8, alpha: 8 });
+    expect(row('LCT-1V')).toMatchObject({ speed: 129.6, upgradeSlots: 8, heatCapacity: 36.4, cooling: 0.64 });
     const puma = row('ADR-A');
     expect(puma).toMatchObject({ chassis: 'Puma (Adder)', engineRating: 210, xl: true, dlc: 7, year: 3050 });
     expect(puma.hardpoints).toMatchObject({ energy: 1, missile: 2, omni: 2 });
@@ -82,7 +82,8 @@ describe('lista de chasis de MW5', () => {
 
   it('CA5: el orden por columnas', () => {
     expect(sortChassisRows(rows, { key: 'speed', dir: 'desc' })[0].speed).toBe(162);
-    expect(sortChassisRows(rows, { key: 'alpha', dir: 'desc' })[0].mech.variant).toBe('BANE-3');
+    expect(sortChassisRows(rows, { key: 'heatCapacity', dir: 'desc' })[0].heatCapacity)
+      .toBe(Math.max(...rows.map(candidate => candidate.heatCapacity ?? 0)));
     const byName = sortChassisRows(rows, { key: 'name', dir: 'asc' });
     expect(byName[0].chassis.localeCompare(byName[byName.length - 1].chassis)).toBeLessThan(0);
 
