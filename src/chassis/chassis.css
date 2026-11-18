@@ -62,6 +62,9 @@ body {
 [data-type='omni'] { --chassis-type: var(--chassis-omni); }
 [data-type='artillery'] { --chassis-type: var(--arsenal-artillery); }
 [data-type='ams'] { --chassis-type: var(--arsenal-ams); }
+/* El apoyo de BATTLETECH, con el color de su página de armas. */
+[data-type='support'] { --chassis-type: #b9a4ff; }
+[data-type='jumpJets'] { --chassis-type: var(--units-text); }
 
 .chassis-count {
   display: flex;
@@ -100,6 +103,8 @@ body {
 .chassis-variant { color: var(--units-muted); font-weight: 600; }
 
 .chassis-spec { font-weight: 700; white-space: nowrap; }
+/* El equipo fijo de los chasis de BATTLETECH. */
+.chassis-fixed { color: #e9c79a; white-space: nowrap; }
 .chassis-spec.is-xl { color: #ffd23f; }
 .chassis-spec.is-dhs { color: #5fa8ff; }
 .chassis-spec.is-endo { color: #b48cff; }

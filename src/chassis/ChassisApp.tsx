@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import mechsJson from '../data/mechs.json';
 import type { Mech } from '../types/mech';
 import {
@@ -31,6 +31,7 @@ import {
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
+import { ChassisTable, MinimumStepper, type ChassisColumn } from '../components/ChassisTable';
 
 const mechs = mechsJson as unknown as Mech[];
 const ROWS = getChassisRows(mechs);
@@ -55,13 +56,6 @@ const MAX_MINIMUM = 9;
 
 const formatNumber = (value: number | null, decimals = 2) => value === null ? '' : String(Number(value.toFixed(decimals)));
 
-interface Column {
-  key: ChassisSortKey;
-  label: string;
-  title?: string;
-  value: (row: ChassisRow) => ReactNode;
-}
-
 const Hardpoints = ({ row }: { row: ChassisRow }) => (
   <span className="chassis-hardpoints">
     {HARDPOINT_FILTER_TYPES.filter(type => row.hardpoints[type] > 0).map(type => (
@@ -70,7 +64,7 @@ const Hardpoints = ({ row }: { row: ChassisRow }) => (
   </span>
 );
 
-const COLUMNS: Column[] = [
+const COLUMNS: ChassisColumn<ChassisRow, ChassisSortKey>[] = [
   { key: 'tonnage', label: 'Tons', value: row => row.tonnage },
   { key: 'hardpoints', label: 'Hardpoints', title: 'Hardpoints by type; sorts by their total', value: row => <Hardpoints row={row} /> },
   { key: 'engine', label: 'Engine', title: 'Engine rating; XL engines are marked', value: row => row.engineRating === null ? '' : <>{row.engineRating}{row.xl && <small> XL</small>}</> },
@@ -86,67 +80,6 @@ const COLUMNS: Column[] = [
   { key: 'year', label: 'Year', title: 'Year it becomes available in the campaign', value: row => row.year },
   { key: 'dlc', label: 'DLC', value: row => getContentSourceLabel(row.dlc) }
 ];
-
-function SortButton({ view, sortKey, label, title, onSort }: {
-  view: ChassisView; sortKey: ChassisSortKey; label: string; title?: string; onSort: (key: ChassisSortKey) => void;
-}) {
-  const active = view.sort.key === sortKey;
-  return (
-    <button type="button" className={active ? 'is-active' : undefined} title={title} onClick={() => onSort(sortKey)}>
-      {label}
-      <span aria-hidden="true">{active ? (view.sort.dir === 'asc' ? '▲' : '▼') : ''}</span>
-    </button>
-  );
-}
-
-function ChassisTable({ rows, view, onSort }: { rows: ChassisRow[]; view: ChassisView; onSort: (key: ChassisSortKey) => void }) {
-  const ariaSort = (key: ChassisSortKey) => view.sort.key === key ? (view.sort.dir === 'asc' ? 'ascending' : 'descending') : undefined;
-  return (
-    <div className="arsenal-table-wrap">
-      <table className="arsenal-table chassis-table">
-        <thead>
-          <tr>
-            <th scope="col" aria-sort={ariaSort('name')}>
-              <SortButton view={view} sortKey="name" label="'Mech" onSort={onSort} />
-            </th>
-            {COLUMNS.map(column => (
-              <th key={column.key} scope="col" aria-sort={ariaSort(column.key)} className={`is-${column.key}`}>
-                <SortButton view={view} sortKey={column.key} label={column.label} title={column.title} onSort={onSort} />
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(row => (
-            <tr key={row.mech.id} data-class={row.weightClass}>
-              <th scope="row">
-                <a className="chassis-link" href={getChassisLink(row.mech)} title="Open its stock build in the MechLab">
-                  <span className="arsenal-weapon-name">{row.chassis} <span className="chassis-variant">{row.mech.variant}</span></span>
-                </a>
-                <span className="arsenal-weapon-meta">
-                  {row.mech.hero && <span className="arsenal-badge">Hero</span>}
-                  {row.mech.techBase === 'Clan' && <span className="arsenal-badge">Clan</span>}
-                  {row.mech.role && <span>{row.mech.role}</span>}
-                  {/* Las siglas van juntas, para que en pantallas estrechas se partan como texto y no una por línea. */}
-                  <span className="chassis-specs">
-                    {getMechSpecs(row.mech).filter(spec => spec.kind !== 'engine').map(spec => (
-                      <span key={spec.kind} className={`chassis-spec is-${spec.kind}`}>{spec.label} </span>
-                    ))}
-                  </span>
-                </span>
-              </th>
-              {COLUMNS.map(column => (
-                <td key={column.key} className={`is-${column.key}`}>
-                  {column.value(row)}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
 
 const toggleValue = <T,>(values: T[], value: T): T[] =>
   values.includes(value) ? values.filter(current => current !== value) : [...values, value];
@@ -177,9 +110,6 @@ export function ChassisApp() {
   const updateFilters = (change: (filters: MechFilters) => Partial<MechFilters>) =>
     setView(current => ({ ...current, filters: { ...current.filters, ...change(current.filters) } }));
   const sortBy = (key: ChassisSortKey) => setView(current => ({ ...current, sort: toggleChassisSort(current.sort, key) }));
-  const changeMinimum = (type: HardpointFilterType, step: number) => updateFilters(filters => ({
-    minHardpoints: { ...filters.minHardpoints, [type]: Math.min(MAX_MINIMUM, Math.max(0, (filters.minHardpoints[type] ?? 0) + step)) }
-  }));
   const isFiltered = toChassisQuery({ ...view, sort: DEFAULT_CHASSIS_VIEW.sort }) !== '';
   const { filters } = view;
   const toggles: { id: 'jumpJets' | 'ecm' | 'hero'; label: string; title: string }[] = [
@@ -305,16 +235,17 @@ export function ChassisApp() {
 
           <div className="chassis-minimums" role="group" aria-label="Minimum hardpoints">
             <span title="Omni hardpoints count as energy, ballistic or missile">Min hardpoints</span>
-            {MINIMUM_TYPES.map(type => {
-              const value = filters.minHardpoints[type] ?? 0;
-              return (
-                <span key={type} className={value > 0 ? 'chassis-stepper is-active' : 'chassis-stepper'} data-type={type}>
-                  <button type="button" aria-label={`Fewer ${type} hardpoints`} disabled={value === 0} onClick={() => changeMinimum(type, -1)}>−</button>
-                  <span><b>{value}</b>{HARDPOINT_ABBREVIATIONS[type].trim()}</span>
-                  <button type="button" aria-label={`More ${type} hardpoints`} disabled={value === MAX_MINIMUM} onClick={() => changeMinimum(type, 1)}>+</button>
-                </span>
-              );
-            })}
+            {MINIMUM_TYPES.map(type => (
+              <MinimumStepper
+                key={type}
+                type={type}
+                label={`${type} hardpoints`}
+                short={HARDPOINT_ABBREVIATIONS[type].trim()}
+                value={filters.minHardpoints[type] ?? 0}
+                max={MAX_MINIMUM}
+                onChange={value => updateFilters(current => ({ minHardpoints: { ...current.minHardpoints, [type]: value } }))}
+              />
+            ))}
           </div>
         </section>
 
@@ -328,7 +259,33 @@ export function ChassisApp() {
         </p>
 
         {rows.length > 0
-          ? <ChassisTable rows={rows} view={view} onSort={sortBy} />
+          ? (
+            <ChassisTable
+              rows={rows}
+              columns={COLUMNS}
+              sort={view.sort}
+              onSort={sortBy}
+              rowKey={row => row.mech.id}
+              link={row => getChassisLink(row.mech)}
+              name={row => ({
+                chassis: row.chassis,
+                variant: row.mech.variant,
+                meta: (
+                  <>
+                    {row.mech.hero && <span className="arsenal-badge">Hero</span>}
+                    {row.mech.techBase === 'Clan' && <span className="arsenal-badge">Clan</span>}
+                    {row.mech.role && <span>{row.mech.role}</span>}
+                    {/* Las siglas van juntas, para que en pantallas estrechas se partan como texto y no una por línea. */}
+                    <span className="chassis-specs">
+                      {getMechSpecs(row.mech).filter(spec => spec.kind !== 'engine').map(spec => (
+                        <span key={spec.kind} className={`chassis-spec is-${spec.kind}`}>{spec.label} </span>
+                      ))}
+                    </span>
+                  </>
+                )
+              })}
+            />
+          )
           : <p className="units-empty">No 'Mechs match these filters.</p>}
       </main>
 
