@@ -1,8 +1,8 @@
-import { useState, type ReactNode } from 'react';
-import { AnalysisSummary } from './AnalysisSummary';
+import { useState } from 'react';
 import type { Mech } from '../types/mech';
 import { formatArmorPoints, formatCoolingRate, formatTurnRate, getRangeProfile, getWeaponRangeState, type BuildSummary } from '../utils/calculators';
 import { RangeRadar } from './RangeRadar';
+import { getMechDisplayName } from '../utils/mechs';
 import { getWeaponLabel } from '../utils/items';
 import { ZONE_LABELS } from '../utils/zones';
 import { EMPTY_VALUE, joinWithCounts } from '../utils/format';
@@ -23,11 +23,9 @@ interface LoadoutAnalysisProps {
   summary: BuildSummary;
   // Resumen sin las mejoras de la cantina, si hay alguna instalada.
   base?: BuildSummary;
-  // Las cifras principales de la build, en la columna lateral, a la vista en las dos pestañas.
-  readout: ReactNode;
 }
 
-export function LoadoutAnalysis({ mech, summary, base, readout }: LoadoutAnalysisProps) {
+export function LoadoutAnalysis({ mech, summary, base }: LoadoutAnalysisProps) {
   const [tab, setTab] = useState<Tab>('weapons');
 
   return (
@@ -41,23 +39,15 @@ export function LoadoutAnalysis({ mech, summary, base, readout }: LoadoutAnalysi
         </button>
         {base && <span className="analysis-note">GREEN ▲ VALUES INCLUDE CANTINA UPGRADES</span>}
       </div>
-      <div className="analysis-layout">
-        <div className="analysis-main">
-          {tab === 'weapons'
-            ? <WeaponsTab summary={summary} base={base} />
-            : <MechTab mech={mech} summary={summary} base={base} />}
-        </div>
-        <aside className="analysis-aside" aria-label="Build summary">
-          <AnalysisSummary>{readout}</AnalysisSummary>
-          <AmmunitionList ammunition={summary.ammunition} />
-        </aside>
-      </div>
+      {tab === 'weapons'
+        ? <WeaponsTab summary={summary} base={base} />
+        : <MechTab mech={mech} summary={summary} base={base} />}
     </section>
   );
 }
 
 function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSummary }) {
-  const { weapons } = summary;
+  const { weapons, ammunition } = summary;
   const rangeProfile = getRangeProfile(weapons);
   // Anillo del radar señalado: la tabla resalta las armas que llegan y apaga las demás.
   const [rangeFocus, setRangeFocus] = useState<number | null>(null);
@@ -150,39 +140,34 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
           </>
         )}
       </div>
-    </div>
-  );
-}
-
-// La munición montada, en la columna lateral del análisis, debajo de las cifras de la build.
-function AmmunitionList({ ammunition }: { ammunition: BuildSummary['ammunition'] }) {
-  if (ammunition.length === 0) return null;
-  return (
-    <div className="ammunition-list">
-      <header className="analysis-heading">
-        <div>
-          <p className="eyebrow">STORES</p>
-          <h2>Installed ammunition</h2>
+      {ammunition.length > 0 && (
+        <div className="ammunition-list">
+          <header className="analysis-heading">
+            <div>
+              <p className="eyebrow">STORES</p>
+              <h2>Installed ammunition</h2>
+            </div>
+          </header>
+          {ammunition.map(({ ammoType, label, capacity, bins, volleys, seconds, potentialDamage }) => (
+            <div className="ammunition-row" key={ammoType}>
+              <span>{label}<small>{bins} {bins === 1 ? 'bin' : 'bins'}</small></span>
+              <span className="ammunition-amount">
+                <strong>{capacity} rounds</strong>
+                <small>
+                  {volleys === null
+                    ? 'no weapon uses it'
+                    : `${volleys} ${volleys === 1 ? 'volley' : 'volleys'}${seconds !== null ? ` · ${formatDuration(seconds)} of fire` : ''}`}
+                </small>
+                {potentialDamage !== null && (
+                  <small className="ammunition-potential" title="Every volley times the volley damage of the weapons that use it">
+                    {formatNumber(potentialDamage, 0)} potential damage
+                  </small>
+                )}
+              </span>
+            </div>
+          ))}
         </div>
-      </header>
-      {ammunition.map(({ ammoType, label, capacity, bins, volleys, seconds, potentialDamage }) => (
-        <div className="ammunition-row" key={ammoType}>
-          <span>{label}<small>{bins} {bins === 1 ? 'bin' : 'bins'}</small></span>
-          <span className="ammunition-amount">
-            <strong>{capacity} rounds</strong>
-            <small>
-              {volleys === null
-                ? 'no weapon uses it'
-                : `${volleys} ${volleys === 1 ? 'volley' : 'volleys'}${seconds !== null ? ` · ${formatDuration(seconds)} of fire` : ''}`}
-            </small>
-            {potentialDamage !== null && (
-              <small className="ammunition-potential" title="Every volley times the volley damage of the weapons that use it">
-                {formatNumber(potentialDamage, 0)} potential damage
-              </small>
-            )}
-          </span>
-        </div>
-      ))}
+      )}
     </div>
   );
 }
@@ -258,7 +243,7 @@ function MechTab({ mech, summary, base }: { mech: Mech; summary: BuildSummary; b
       <header className="analysis-heading">
         <div>
           <p className="eyebrow">05 / CHASSIS DATA</p>
-          <h2>{mech.name} {mech.variant}</h2>
+          <h2>{getMechDisplayName(mech)} {mech.variant}</h2>
         </div>
       </header>
       <div className="mech-stats">

@@ -8,11 +8,9 @@ interface StatsReadoutProps {
   summary: BuildSummary;
   // Resumen sin las mejoras de la cantina, si hay alguna instalada.
   base?: BuildSummary;
-  // En columna, en el lateral del análisis.
-  vertical?: boolean;
 }
 
-export function StatsReadout({ mech, summary, base, vertical = false }: StatsReadoutProps) {
+export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
   const {
     totalWeight,
     armorPoints,
@@ -32,7 +30,7 @@ export function StatsReadout({ mech, summary, base, vertical = false }: StatsRea
   const formatRange = (range: number) => range > 0 ? `${Math.floor(range)} m` : EMPTY_VALUE;
 
   return (
-    <section className={vertical ? 'readout-strip is-vertical' : 'readout-strip'} aria-label="Mech statistics">
+    <section className="readout-strip" aria-label="Mech statistics">
       <div className="readout-cell">
         <span className="readout-label">TONNAGE</span>
         <strong className={totalWeight > mech.tonnageMax ? 'readout-warning' : ''}>

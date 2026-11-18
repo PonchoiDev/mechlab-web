@@ -219,6 +219,10 @@ export default function App() {
         onShare={openShareMenu}
       />
 
+      {/* Las cifras de la build, debajo de los avisos y los menús y en la misma caja: el selector de 'Mech queda
+          junto a los menús y las cifras siguen a la vista encima del tablero. */}
+      <StatsReadout mech={mech} summary={summary} base={baseSummary} />
+
       {isUpgradesOpen && (
         <UpgradesPanel
           mech={mech}
@@ -298,12 +302,7 @@ export default function App() {
           )}
         />
 
-        <LoadoutAnalysis
-          mech={mech}
-          summary={summary}
-          base={baseSummary}
-          readout={<StatsReadout mech={mech} summary={summary} base={baseSummary} vertical />}
-        />
+        <LoadoutAnalysis mech={mech} summary={summary} base={baseSummary} />
       </main>
 
       {activeZone && (

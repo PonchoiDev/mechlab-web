@@ -387,7 +387,14 @@ def mech_de_juego(id_juego, mechs):
     variante = REGEX_PREFIJO_VARIANTE.sub("", variante)
     # Algunos loadouts no respetan las mayúsculas de la variante (KTO-19b_Loadout).
     variante = next((id_mech for id_mech in mechs if id_mech.lower() == variante.lower()), variante)
-    return {"id": variante, "name": mechs[variante]["name"]} if variante in mechs else None
+    return {"id": variante, "name": nombre_para_mostrar(mechs[variante])} if variante in mechs else None
+
+
+def nombre_para_mostrar(mech):
+    """El nombre como lo enseña el MechLab (getMechDisplayName): los 'Mechs de los Clanes llevan también
+    el de la Esfera Interior, «Hankyu (Arctic Cheetah)», y así se buscan por los dos."""
+    otro_nombre = mech.get("sarnaName")
+    return f"{mech['name']} ({otro_nombre})" if otro_nombre and otro_nombre.lower() != mech["name"].lower() else mech["name"]
 
 
 def objeto_de_juego(id_juego, cantidad, items, con_tier):

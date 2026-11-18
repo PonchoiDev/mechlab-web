@@ -198,6 +198,18 @@ export function BtMechLabApp() {
         })}
       />
 
+      {/* Las diez cifras del StatsReadout de MW5 (getBtReadouts), las mismas que lleva la imagen para compartir,
+          debajo de los avisos y los menús, como en MW5. */}
+      <section className="readout-strip" aria-label="Mech statistics">
+        {readouts.map(readout => (
+          <div key={readout.label} className="readout-cell">
+            <span className="readout-label" title={readout.title}>{readout.label}</span>
+            <strong className={readout.warn ? 'readout-warning' : ''}>{readout.value}{readout.unit && <> <small>{readout.unit}</small></>}</strong>
+            {readout.label === 'TONNAGE' && <HardpointUsage mech={mech} loadout={build.loadout} />}
+          </div>
+        ))}
+      </section>
+
       {isCompareOpen && (
         <BtComparePanel
           key={mech.id}
@@ -274,22 +286,7 @@ export function BtMechLabApp() {
         />
       )}
 
-      <BtAnalysis
-        build={build}
-        summary={summary}
-        readout={
-          // Las diez cifras del StatsReadout de MW5 (getBtReadouts), las mismas que lleva la imagen para compartir.
-          <section className="readout-strip is-vertical" aria-label="Mech statistics">
-            {readouts.map(readout => (
-              <div key={readout.label} className="readout-cell">
-                <span className="readout-label" title={readout.title}>{readout.label}</span>
-                <strong className={readout.warn ? 'readout-warning' : ''}>{readout.value}{readout.unit && <> <small>{readout.unit}</small></>}</strong>
-                {readout.label === 'TONNAGE' && <HardpointUsage mech={mech} loadout={build.loadout} />}
-              </div>
-            ))}
-          </section>
-        }
-      />
+      <BtAnalysis build={build} summary={summary} />
 
       <footer className="site-footer">
         <p className="support-note">

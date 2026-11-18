@@ -402,11 +402,13 @@
   font-size: 12px;
 }
 
+/* Los avisos, los menús y las cifras son una sola caja, en ese orden: solo los avisos llevan borde arriba. */
 .readout-strip {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin: 14px 0;
+  margin: 0 0 14px;
   border: 1px solid var(--work-line);
+  border-top: 0;
   background: rgba(25, 29, 25, 0.88);
 }
 
@@ -453,7 +455,7 @@
 .utility-toolbar {
   justify-content: space-between;
   gap: 12px;
-  margin: -14px 0 14px;
+  margin: 0;
   padding: 9px 12px;
   border: 1px solid var(--work-line);
   border-top: 0;
@@ -522,54 +524,10 @@
 
 .analysis-body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
   gap: 14px;
 }
 
-/* El análisis con una columna lateral fija en las dos pestañas: las cifras de la build y la munición. */
-.analysis-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
-  align-items: start;
-  gap: 14px;
-}
-
-.analysis-main { min-width: 0; }
-
-.analysis-aside {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
-}
-
-.analysis-summary {
-  border: 1px solid var(--work-line);
-  background: rgba(25, 29, 25, 0.94);
-}
-
-/* Las diez cifras en columna: el nombre a la izquierda y la cifra a la derecha. */
-.readout-strip.is-vertical {
-  grid-template-columns: minmax(0, 1fr);
-  margin: 0;
-  border: 0;
-  background: none;
-}
-
-.readout-strip.is-vertical > .readout-cell {
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px 12px;
-  min-height: 0;
-  padding: 9px 14px;
-  border-top: 0;
-  border-left: 0;
-}
-
-.readout-strip.is-vertical > .readout-cell + .readout-cell { border-top: 1px solid var(--work-line); }
-.readout-strip.is-vertical > .readout-cell strong { font-size: 15px; }
 
 .analysis-table-wrap,
 .ammunition-list {
@@ -890,8 +848,7 @@
   .readout-cell:nth-child(even) { border-left: 1px solid var(--work-line); }
   .readout-cell:nth-child(n + 3) { border-top: 1px solid var(--work-line); }
   .readout-cell strong { font-size: 13px; }
-  .analysis-body,
-  .analysis-layout { grid-template-columns: minmax(0, 1fr); }
+  .analysis-body { grid-template-columns: minmax(0, 1fr); }
   .analysis-heading { align-items: flex-start; }
   .utility-toolbar { align-items: stretch; flex-direction: column; }
   .utility-group + .utility-group {
@@ -1608,7 +1565,6 @@ button.hardpoint-chip:hover { background: #2c342c; }
   gap: 8px 12px;
   padding: 10px 14px;
   border: 1px solid var(--work-line);
-  border-top: 0;
   background: rgba(25, 29, 25, 0.94);
 }
 

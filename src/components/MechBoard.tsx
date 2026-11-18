@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import { getAmmoWarnings } from '../utils/equipment';
 import { ZONES } from '../utils/zones';
+import { getMechDisplayName } from '../utils/mechs';
 import { ComponentCard } from './ComponentCard';
 import { MechSpecs } from './MechSpecs';
 
@@ -43,7 +44,8 @@ export function MechBoard({
     <section className={compact ? 'mech-board is-compact' : 'mech-board'} aria-label={`${mech.name} ${mech.variant} components`}>
       <div className="mech-board-reference">
         <div className="mech-board-title">
-          <h2>{mech.name}</h2>
+          {/* Con los dos nombres de los 'Mechs Clan, como en el selector: «Hankyu (Arctic Cheetah)». */}
+          <h2>{getMechDisplayName(mech)}</h2>
           <span className="variant-tag">{mech.variant}</span>
         </div>
         <MechSpecs mech={mech} />

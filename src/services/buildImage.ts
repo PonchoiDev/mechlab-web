@@ -382,7 +382,7 @@ const drawReference = (context: Context, mech: Mech, image: HTMLImageElement | n
 
   const tagWidth = measure(context, mech.variant, `500 11px ${MONO}`) + 16;
   const tagX = x + width - 12 - tagWidth;
-  drawText(context, mech.name, x + 12, y + 30, `600 18px ${SANS}`, COLORS.text, { maxWidth: width - tagWidth - 36 });
+  drawText(context, getMechDisplayName(mech), x + 12, y + 30, `600 18px ${SANS}`, COLORS.text, { maxWidth: width - tagWidth - 36 });
   context.fillStyle = withAlpha(COLORS.cyan, 0.1);
   context.fillRect(tagX, y + 12, tagWidth, 24);
   strokeBox(context, tagX, y + 12, tagWidth, 24, withAlpha(COLORS.cyan, 0.45));

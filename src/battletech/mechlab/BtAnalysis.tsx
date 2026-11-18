@@ -1,5 +1,4 @@
-import { useState, type ReactNode } from 'react';
-import { AnalysisSummary } from '../../components/AnalysisSummary';
+import { useState } from 'react';
 import type { BtBuild } from '../../types/battletech-mechlab';
 import { EMPTY_VALUE, joinWithCounts } from '../../utils/format';
 import { ZONE_KEYS, ZONE_LABELS } from '../../utils/zones';
@@ -13,8 +12,7 @@ type Tab = 'weapons' | 'mech';
 
 // Análisis con las pestañas y el marcado del LoadoutAnalysis de MW5: Weapons (tabla de armas, munición
 // y, propio de BATTLETECH, el daño por distancia) y 'Mech (cifras agrupadas, con el equipo que da bonificaciones).
-// Las cifras principales (readout) van en la columna lateral, a la vista en las dos pestañas, como en MW5.
-export function BtAnalysis({ build, summary, readout }: { build: BtBuild; summary: BtSummary; readout: ReactNode }) {
+export function BtAnalysis({ build, summary }: { build: BtBuild; summary: BtSummary }) {
   const [tab, setTab] = useState<Tab>('weapons');
   return (
     <section className="loadout-analysis" aria-label="Loadout performance">
@@ -22,15 +20,7 @@ export function BtAnalysis({ build, summary, readout }: { build: BtBuild; summar
         <button type="button" className="analysis-tab" aria-pressed={tab === 'weapons'} onClick={() => setTab('weapons')}>Weapons</button>
         <button type="button" className="analysis-tab" aria-pressed={tab === 'mech'} onClick={() => setTab('mech')}>'Mech</button>
       </div>
-      <div className="analysis-layout">
-        <div className="analysis-main">
-          {tab === 'weapons' ? <WeaponsTab build={build} summary={summary} /> : <MechTab build={build} summary={summary} />}
-        </div>
-        <aside className="analysis-aside" aria-label="Build summary">
-          <AnalysisSummary>{readout}</AnalysisSummary>
-          <AmmunitionList summary={summary} />
-        </aside>
-      </div>
+      {tab === 'weapons' ? <WeaponsTab build={build} summary={summary} /> : <MechTab build={build} summary={summary} />}
     </section>
   );
 }
@@ -115,36 +105,31 @@ function WeaponsTab({ build, summary }: { build: BtBuild; summary: BtSummary }) 
         </header>
         <RangeRadar profile={summary.rangeProfile} onActiveChange={setRangeFocus} describeWeapons={describeWeapons} />
       </div>
-    </div>
-  );
-}
-
-// La munición montada, en la columna lateral del análisis, debajo de las cifras de la build.
-function AmmunitionList({ summary }: { summary: BtSummary }) {
-  if (summary.ammo.length === 0) return null;
-  return (
-    <div className="ammunition-list">
-      <header className="analysis-heading">
-        <div>
-          <p className="eyebrow">STORES</p>
-          <h2>Installed ammunition</h2>
+      {summary.ammo.length > 0 && (
+        <div className="ammunition-list">
+          <header className="analysis-heading">
+            <div>
+              <p className="eyebrow">STORES</p>
+              <h2>Installed ammunition</h2>
+            </div>
+          </header>
+          {summary.ammo.map(line => (
+            <div className="ammunition-row" key={line.category}>
+              <span>{line.label}<small>{line.boxes} {line.boxes === 1 ? 'box' : 'boxes'}</small></span>
+              <span className="ammunition-amount">
+                <strong>{line.rounds} rounds</strong>
+                <small>
+                  {line.weapons === 0
+                    ? 'no weapon uses it'
+                    : line.rounds === 0
+                      ? 'no ammo'
+                      : `${line.attacks} ${line.attacks === 1 ? 'attack' : 'attacks'} · ${line.perAttack} per attack`}
+                </small>
+              </span>
+            </div>
+          ))}
         </div>
-      </header>
-      {summary.ammo.map(line => (
-        <div className="ammunition-row" key={line.category}>
-          <span>{line.label}<small>{line.boxes} {line.boxes === 1 ? 'box' : 'boxes'}</small></span>
-          <span className="ammunition-amount">
-            <strong>{line.rounds} rounds</strong>
-            <small>
-              {line.weapons === 0
-                ? 'no weapon uses it'
-                : line.rounds === 0
-                  ? 'no ammo'
-                  : `${line.attacks} ${line.attacks === 1 ? 'attack' : 'attacks'} · ${line.perAttack} per attack`}
-            </small>
-          </span>
-        </div>
-      ))}
+      )}
     </div>
   );
 }
