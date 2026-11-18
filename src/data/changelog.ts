@@ -9,6 +9,18 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-18-mechlab-layout',
+    date: '2026-11-18',
+    title: 'Easier to read MechLab',
+    items: [
+      'The chassis picker has its own row under the header, bigger and easier to find',
+      'Slot cells are shown by default. If you hid them, the MechLab remembers it',
+      'Empty hardpoints and components no longer say free: the notices bar already lists them',
+      'The bar above the toolbar is now called Notices: free hardpoints or armor below max are things to know, not tasks you must finish',
+      'Thanks to the player who sent this feedback'
+    ]
+  },
+  {
     id: '2026-11-18-chassis-list',
     date: '2026-11-18',
     title: 'Chassis list',
