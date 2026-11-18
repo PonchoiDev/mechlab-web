@@ -18,6 +18,7 @@ La ventana **My builds** de los dos MechLabs (MW5 y BATTLETECH) enseña las buil
 
   A igualdad, por nombre. Las builds que ya no se pueden abrir van al final en los órdenes por chasis, tonelaje y potencia de fuego.
 - **RF3.** Un filtro por clase de peso (Light, Medium, Heavy y Assault), con las builds de cada clase al lado. Se pueden marcar varias; sin ninguna marcada, todas. Las builds que ya no se pueden abrir solo salen sin filtro de clase.
+- **RF3b.** Un filtro de anclajes mínimos como el del selector de 'Mechs, con un contador por tipo: en MW5, Energy, Ballistic, Missile y Omni, y los omni cuentan como comodín de energía, balística y misiles (un 'Mech con 1E y 2 omni cumple «al menos 3E»; cada omni cuenta una vez); en BATTLETECH, Energy, Ballistic, Missile y Support. Mira los anclajes del 'Mech de la build, no las armas que lleva. Las builds que ya no se pueden abrir no salen con un mínimo puesto.
 - **RF4.** El recuento dice cuántas se ven de cuántas hay («7 of 42 saved») cuando el buscador o el filtro esconden alguna, y si no queda ninguna, la lista lo dice y ofrece quitar los filtros.
 - **RF5.** El orden elegido se recuerda en el navegador, por separado en cada juego; el buscador y el filtro empiezan vacíos cada vez que se abre la ventana.
 - **RF6.** Todo lo demás de la ventana sigue igual: cargar, duplicar (la copia se ve aunque el filtro la escondería, para que se pueda renombrar), renombrar, copiar el enlace, borrar, importar y exportar todas.
@@ -30,7 +31,7 @@ La ventana **My builds** de los dos MechLabs (MW5 y BATTLETECH) enseña las buil
 
 ## Criterios de aceptación
 
-Con estas builds (la última, de un 'Mech que ya no existe):
+Con estas builds (la última, de un 'Mech que ya no existe). Los anclajes de sus 'Mechs están en CA9:
 
 | Nombre | Guardada | Chasis | Variante | Clase | Tonelaje | Potencia |
 |---|---|---|---|---|---|---|
@@ -49,6 +50,8 @@ Con estas builds (la última, de un 'Mech que ya no existe):
 | CA5 | Las builds | se busca «atlas» / «ATLÁS brawl» / «cplt» / «nada» | Brawler y Sniper / Brawler / LRM boat / ninguna |
 | CA6 | Las builds | se filtra por assault / por light y heavy | Brawler y Sniper / LRM boat y Scout; con el filtro, Old one no sale |
 | CA7 | Las builds | se cuentan por clase | 1 light, 0 medium, 1 heavy y 2 assault |
+| CA9 | Las builds, con los anclajes de sus 'Mechs: Brawler y Sniper 4E 1B 1M, LRM boat 4E 2M y Scout 1E 2B | se pide al menos 2B / al menos 3E y 1B / al menos 1M | Scout / Brawler y Sniper / Brawler, LRM boat y Sniper; Old one no sale con ningún mínimo |
+| CA10 | Un 'Mech con 1E y 2 omni | se comparan sus anclajes con los mínimos | cumple 3E, 2M y 1 omni; no cumple 3E y 1B (los dos omni ya completan la energía) ni 3 omni |
 | CA8 | El orden guardado | se lee | un orden que existe se usa; uno que no existe o nada guardado, Newest |
 
 ## Fuera de alcance
@@ -58,7 +61,7 @@ Con estas builds (la última, de un 'Mech que ya no existe):
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA8):** `src/utils/savedBuildsList.test.ts`, con builds de prueba.
+1. **Lógica (CA1 a CA10):** `src/utils/savedBuildsList.test.ts`, con builds de prueba.
 2. **Interfaz:** en el navegador, en los dos MechLabs, a 1440 × 900 y a 390 × 844, con varias builds guardadas: buscar, ordenar, filtrar, el recuento, la lista vacía, duplicar con un filtro puesto y que el orden se recuerde al volver a abrir.
 
 ## Resultado
