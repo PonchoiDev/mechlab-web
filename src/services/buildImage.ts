@@ -141,7 +141,8 @@ const drawHardpointChip = (context: Context, view: HardpointView, x: number, y: 
 
   strokeBox(context, x, y, width, height, color, true);
   drawText(context, getHardpointName(view.hardpoint).toUpperCase(), x + 9, y + 15, `600 10px ${MONO}`, color, { maxWidth: width - 18 });
-  drawText(context, view.builtInWeapon ?? 'Free', x + 9, y + 32, `italic 500 12px ${SANS}`, COLORS.muted, { maxWidth: width - 18 });
+  // Como en el tablero, un anclaje vacío solo dice su tipo y tamaño.
+  if (view.builtInWeapon) drawText(context, view.builtInWeapon, x + 9, y + 32, `italic 500 12px ${SANS}`, COLORS.muted, { maxWidth: width - 18 });
 };
 
 const drawEquipmentChip = (context: Context, name: string, count: number, color: string, x: number, y: number, width: number) => {
@@ -204,12 +205,6 @@ const layoutCard = (measuring: Context, input: BuildImageInput, zone: Zone, widt
     let top = y + 2 + CARD_PADDING;
 
     drawText(context, ZONE_LABELS[zone].toUpperCase(), left, top + 14, `700 14px ${SANS}`, COLORS.text);
-    if (status.freeHardpoints > 0) {
-      const badge = `${status.freeHardpoints} FREE`;
-      const badgeWidth = measure(context, badge, `500 10px ${MONO}`) + 12;
-      strokeBox(context, x + width - CARD_PADDING - badgeWidth, top, badgeWidth, HEADER_HEIGHT, withAlpha(COLORS.amber, 0.45));
-      drawText(context, badge, x + width - CARD_PADDING - 6, top + 13, `500 10px ${MONO}`, COLORS.amber, { align: 'right' });
-    }
     top += HEADER_HEIGHT + SECTION_GAP;
 
     hardpointRows.forEach((row, rowIndex) => {

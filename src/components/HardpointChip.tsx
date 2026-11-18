@@ -38,7 +38,8 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
     <>
       {!(weapon && emphasizeWeapon) && <span className="hardpoint-chip-label">{getHardpointName(hardpoint)}</span>}
       <span className="hardpoint-chip-content">
-        <span className="hardpoint-chip-name">{weapon?.name ?? builtInWeapon ?? 'Free'}</span>
+        {/* Un anclaje vacío solo dice su tipo y tamaño: que está libre ya lo dicen los avisos y su aspecto. */}
+        {(weapon || builtInWeapon) && <span className="hardpoint-chip-name">{weapon?.name ?? builtInWeapon}</span>}
         {tierName && <span className="hardpoint-chip-tier">{tierName}</span>}
       </span>
     </>

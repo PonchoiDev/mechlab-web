@@ -170,7 +170,7 @@ export function BtMechLabApp() {
       <BuildStatus
         issues={issues}
         onSelectZone={(zone, hardpointIndex) => selectZone(zone, hardpointIndex)}
-        readyMessage="No pending issues: every hardpoint is used, weapons have ammo, the heat is under control and no tonnage is left."
+        readyMessage="Nothing to note: every hardpoint is used, weapons have ammo, the heat is under control and no tonnage is left."
       />
 
       <UtilityToolbar

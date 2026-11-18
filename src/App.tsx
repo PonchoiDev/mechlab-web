@@ -183,9 +183,13 @@ export default function App() {
             Feedback
           </button>
           <SupportLink compact />
-          <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={selectMech} />
         </div>
       </header>
+
+      {/* El selector de 'Mech, en su propia fila: en la cabecera quedaba pequeño y escondido entre los enlaces y los botones. */}
+      <section className="mech-select-bar" aria-label="'Mech">
+        <MechPicker mechs={mechs} selectedIndex={build.selectedIndex} onSelect={selectMech} prominent />
+      </section>
 
       <StatsReadout mech={mech} summary={summary} base={baseSummary} />
 

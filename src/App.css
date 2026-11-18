@@ -172,6 +172,26 @@
 
 .mech-picker-input::placeholder { color: var(--work-muted); }
 
+/* El selector principal, en su fila debajo de la cabecera: más ancho, con letra más grande, y el panel
+   de resultados se abre hacia la derecha desde su borde izquierdo. */
+.mech-select-bar { padding-top: 14px; }
+
+.mech-picker.is-prominent { width: min(600px, 100%); }
+.mech-picker.is-prominent > span { font-size: 12px; }
+
+.mech-picker.is-prominent .mech-picker-input {
+  min-height: 48px;
+  padding: 0 14px;
+  border-color: rgba(195, 237, 98, 0.45);
+  font-size: 16px;
+}
+
+.mech-picker.is-prominent .mech-options-panel {
+  right: auto;
+  left: 0;
+  width: min(600px, calc(100vw - 32px));
+}
+
 .mech-options-panel {
   position: absolute;
   z-index: 10;
@@ -812,7 +832,8 @@
 @media (max-width: 760px) {
   .mechlab-shell { padding: 14px 12px 24px; }
   .topbar { align-items: stretch; flex-direction: column; gap: 15px; }
-  .topbar-tools { align-items: stretch; flex-direction: column-reverse; gap: 9px; }
+  /* Sin el selector, que va en su propia fila, los botones caben en una línea. */
+  .topbar-tools { align-items: center; justify-content: flex-end; gap: 9px; }
   .topbar-start { justify-content: space-between; gap: 12px; }
   /* Los enlaces, uno debajo de otro, para que el título no se parta en tres líneas. */
   .topbar-links { flex-direction: column; align-items: flex-start; justify-content: center; padding-left: 12px; }

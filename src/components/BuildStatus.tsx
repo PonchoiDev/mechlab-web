@@ -8,13 +8,14 @@ interface BuildStatusProps {
   readyMessage?: string;
 }
 
-const MERCS_READY_MESSAGE = 'No pending issues: every hardpoint is used, weapons have ammo and armor is maxed.';
+const MERCS_READY_MESSAGE = 'Nothing to note: every hardpoint is used, weapons have ammo and armor is maxed.';
 
 export function BuildStatus({ issues, onSelectZone, readyMessage = MERCS_READY_MESSAGE }: BuildStatusProps) {
   return (
     <section className={issues.length > 0 ? 'build-status' : 'build-status is-ready'} aria-label="Build status">
       <span className="build-status-label">
-        {issues.length > 0 ? `PENDING · ${issues.length}` : 'BUILD READY'}
+        {/* Avisos, no tareas: una build puede dejar anclajes libres o armadura sin llenar a propósito. */}
+        {issues.length > 0 ? `NOTICES · ${issues.length}` : 'BUILD READY'}
       </span>
       {issues.length === 0 ? (
         <span className="build-status-ready">{readyMessage}</span>
