@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-18-find-saved-builds',
+    date: '2026-11-18',
+    title: 'Find your saved builds',
+    items: [
+      'My builds has a search by build name, chassis or variant',
+      'Sort the list by newest, oldest, name, chassis, tonnage or firepower; your choice is remembered',
+      'Filter by weight class, with how many builds you have in each one',
+      'In both MechLabs, MW5 and BATTLETECH'
+    ]
+  },
+  {
     id: '2026-11-16-no-heavy-gauss',
     date: '2026-11-16',
     title: 'Heavy Gauss Rifle removed',

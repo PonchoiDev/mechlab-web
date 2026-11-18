@@ -48,7 +48,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (589 tests, V8 coverage) |
+| Tests | Vitest 5 (597 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -87,7 +87,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - **Compare:** the current build next to another 'Mech, each with its image and loadout. Compare with the stock loadout of any 'Mech or with a saved build; each card lists its stats (firepower, defense, heat and mobility) in line with the other one, with the better value highlighted in green.
 
 **Save and share**
-- Builds saved in the browser: save, update, load, duplicate, rename, delete, and export or import as JSON.
+- Builds saved in the browser: save, update, load, duplicate, rename, delete, and export or import as JSON. The list can be searched by name, chassis or variant, sorted by date, name, chassis, tonnage or firepower and filtered by weight class, in BATTLETECH too.
 - A link that opens the build as it is (`/mercs/?b=…`).
 - A PNG image of the build with the 'Mech, its equipment, its upgrades and its stats, ready to copy or download.
 
@@ -376,7 +376,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Quality and checks against the game
 
-- **589 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **597 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

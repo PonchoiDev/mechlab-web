@@ -1,6 +1,6 @@
 # Especificación: buscar, ordenar y filtrar las builds guardadas
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/savedBuildsList.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -60,3 +60,11 @@ Con estas builds (la última, de un 'Mech que ya no existe):
 
 1. **Lógica (CA1 a CA8):** `src/utils/savedBuildsList.test.ts`, con builds de prueba.
 2. **Interfaz:** en el navegador, en los dos MechLabs, a 1440 × 900 y a 390 × 844, con varias builds guardadas: buscar, ordenar, filtrar, el recuento, la lista vacía, duplicar con un filtro puesto y que el orden se recuerde al volver a abrir.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después la lógica y la interfaz, en commits separados.
+- **Tests:** los ocho criterios están en `src/utils/savedBuildsList.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador con ocho builds en MW5 (una que ya no se puede abrir) y cuatro en BATTLETECH, a 1440 × 900 y a 390 × 844: el orden por fecha, la búsqueda «atlas» ordenada por tonelaje («2 of 8 saved»), un filtro sin resultados con Clear filters, el filtro Assault en BATTLETECH («1 of 4 saved») y el orden guardado en el navegador.
+- **Decisión durante el desarrollo:** el botón de cada clase de peso se desactiva si no hay ninguna build de esa clase, para no dar a elegir un filtro vacío.
+
