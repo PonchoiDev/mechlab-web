@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-18-picker-fixes',
+    date: '2026-11-18',
+    title: '\'Mech picker fixes',
+    items: [
+      'Clicking an empty spot or a label inside the \'Mech picker panel no longer closes it',
+      'Type the number of each minimum hardpoints and jump jets counter, in the \'Mech pickers of both MechLabs and in the chassis lists, as in My builds',
+      'Counters go past 9: some \'Mechs have more than ten hardpoints of one type, like the ADR-S with 16 ballistic. Two-digit shortcuts like 15e work in the search too'
+    ]
+  },
+  {
     id: '2026-11-18-mechlab-layout',
     date: '2026-11-18',
     title: 'Easier to read MechLab',

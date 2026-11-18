@@ -36,7 +36,7 @@ export const countActiveMechFilters = (filters: BtMechFilters): number =>
   (filters.weightClasses.length > 0 ? 1 : 0) + (filters.sources.length > 0 ? 1 : 0) + (filters.minJumpJets > 0 ? 1 : 0)
   + (filters.tags.length > 0 ? 1 : 0) + Object.values(filters.minHardpoints).filter(value => value > 0).length;
 
-const QUERY_HARDPOINT_TOKEN = /^(\d)([ebms])$/i;
+const QUERY_HARDPOINT_TOKEN = /^(\d{1,2})([ebms])$/i;
 const QUERY_JUMP_TOKEN = /^(\d)?jj$/i;
 const TOKEN_HARDPOINTS: Record<string, BtHardpoint> = { e: 'energy', b: 'ballistic', m: 'missile', s: 'support' };
 

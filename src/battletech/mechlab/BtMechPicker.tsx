@@ -1,5 +1,6 @@
 import { useId, useMemo, useState, type KeyboardEvent } from 'react';
-import type { BtHardpoint, BtMech } from '../../types/battletech-mechlab';
+import type { BtMech } from '../../types/battletech-mechlab';
+import { FilterStepper } from '../../components/FilterStepper';
 import { CheckboxDropdown } from '../../components/CheckboxDropdown';
 import { getHardpointCount } from '../../utils/battletech/fitting';
 import {
@@ -28,7 +29,8 @@ interface BtMechPickerProps {
   prominent?: boolean;
 }
 
-const MAX_MINIMUM = 6;
+// El que más anclajes tiene de un tipo lleva 8 de energía.
+const MAX_MINIMUM = 9;
 const MAX_JUMP_JETS = 8;
 
 const toggle = <T,>(list: T[], value: T) => list.includes(value) ? list.filter(entry => entry !== value) : [...list, value];
@@ -85,9 +87,6 @@ export function BtMechPicker({ mechs, current, onSelect, prominent = false }: Bt
     close();
     (document.activeElement as HTMLElement | null)?.blur();
   };
-  const changeMinimum = (type: BtHardpoint, delta: number) => update({
-    minHardpoints: { ...filters.minHardpoints, [type]: Math.min(MAX_MINIMUM, Math.max(0, filters.minHardpoints[type] + delta)) }
-  });
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'ArrowDown') {
@@ -138,13 +137,14 @@ export function BtMechPicker({ mechs, current, onSelect, prominent = false }: Bt
         onKeyDown={handleKeyDown}
       />
       {isOpen && (
-        <div className="mech-options-panel bt-mech-options-panel">
-          <div
-            className="mech-filters"
-            onMouseDown={(event) => {
-              if (event.target instanceof Element && event.target.closest('button')) event.preventDefault();
-            }}
-          >
+        // Como en MW5: pulsar en el panel no se lleva el foco del buscador ni lo cierra, salvo en lo que se escribe.
+        <div
+          className="mech-options-panel bt-mech-options-panel"
+          onMouseDown={(event) => {
+            if (event.target instanceof Element && !event.target.closest('input, select, textarea')) event.preventDefault();
+          }}
+        >
+          <div className="mech-filters">
             <div className="mech-filter-row">
               <span className="mech-filter-label">CLASS</span>
               {WEIGHT_CLASSES.map(weightClass => (
@@ -172,21 +172,24 @@ export function BtMechPicker({ mechs, current, onSelect, prominent = false }: Bt
             </div>
             <div className="mech-filter-row">
               <span className="mech-filter-label">MIN HARDPOINTS</span>
-              {HARDPOINTS.map(type => {
-                const value = filters.minHardpoints[type];
-                return (
-                  <span key={type} className={value > 0 ? 'mech-filter-stepper is-active' : 'mech-filter-stepper'} data-weapon-type={type}>
-                    <button type="button" aria-label={`Fewer ${HARDPOINT_LABELS[type]} hardpoints`} disabled={value === 0} onClick={() => changeMinimum(type, -1)}>−</button>
-                    <span title={HARDPOINT_LABELS[type]}><b>{value}</b>{HARDPOINT_SHORT[type]}</span>
-                    <button type="button" aria-label={`More ${HARDPOINT_LABELS[type]} hardpoints`} disabled={value === MAX_MINIMUM} onClick={() => changeMinimum(type, 1)}>+</button>
-                  </span>
-                );
-              })}
-              <span className={filters.minJumpJets > 0 ? 'mech-filter-stepper is-active' : 'mech-filter-stepper'} title="Jump jets the chassis can mount">
-                <button type="button" aria-label="Fewer jump jets" disabled={filters.minJumpJets === 0} onClick={() => update({ minJumpJets: filters.minJumpJets - 1 })}>−</button>
-                <span><b>{filters.minJumpJets}</b>JJ</span>
-                <button type="button" aria-label="More jump jets" disabled={filters.minJumpJets === MAX_JUMP_JETS} onClick={() => update({ minJumpJets: filters.minJumpJets + 1 })}>+</button>
-              </span>
+              {HARDPOINTS.map(type => (
+                <FilterStepper
+                  key={type}
+                  type={type}
+                  label={`${HARDPOINT_LABELS[type]} hardpoints`}
+                  short={HARDPOINT_SHORT[type]}
+                  value={filters.minHardpoints[type]}
+                  max={MAX_MINIMUM}
+                  onChange={value => update({ minHardpoints: { ...filters.minHardpoints, [type]: value } })}
+                />
+              ))}
+              <FilterStepper
+                label="jump jets"
+                short="JJ"
+                value={filters.minJumpJets}
+                max={MAX_JUMP_JETS}
+                onChange={value => update({ minJumpJets: value })}
+              />
             </div>
             <div className="mech-filter-row">
               <span className="mech-filter-label">SOURCE</span>
