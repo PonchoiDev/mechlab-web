@@ -103,7 +103,7 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - Find a 'Mech: the map is colored by how rare a variant is in each faction's market on the chosen date, with its fixed sources (HRQ, special markets) and a shareable link (`?mech=AS7-D`). Special 'Mech locations lists the hero 'Mechs and special variants you can only get in one place, like the Razer Wolverine.
 
 **Chassis list**
-- Its own page (`/mercs/chassis/`) with all 639 variants in one table: tons, hardpoints, engine, speed, armor, structure, jump jets, turn and torso twist speed, upgrade slots and, from its stock build, alpha, DPS, heat capacity and cooling, with the year and the DLC.
+- Its own page (`/mercs/chassis/`) with all 639 variants in one table: tons, hardpoints, engine, speed, armor, structure, jump jets, turn and torso twist speed, upgrade slots, and the heat capacity and cooling of the empty chassis, with the year and the DLC.
 - The 'Mech picker filters (with its search shortcuts, like "3e 2m jj"), minimum and maximum tonnage, minimum speed and sorting by any column. Every variant opens its stock build in the MechLab, and the view goes in the link.
 
 **Weapons and equipment**

@@ -113,9 +113,9 @@ Es la quinta página de MW5 (`equipment/index.html`, servida en `/mercs/equipmen
 
 ### Lista de chasis
 
-Es la séptima página de MW5 (`chassis/index.html`, servida en `/mercs/chassis/`), con su propio bundle. Lee los mismos `mechs.json` e `items.json` que el MechLab, sin datos nuevos, y usa los estilos de las unidades enemigas (`units.css`) y la tabla de la página de armas (`equipment/equipment.css`) con su color de acento (`chassis/chassis.css`):
+Es la séptima página de MW5 (`chassis/index.html`, servida en `/mercs/chassis/`), con su propio bundle. Lee el mismo `mechs.json` que el MechLab, sin datos nuevos ni el catálogo de equipo, y usa los estilos de las unidades enemigas (`units.css`) y la tabla de la página de armas (`equipment/equipment.css`) con su color de acento (`chassis/chassis.css`):
 
-- **`utils/chassisList.ts`:** las filas de cada variante (las cifras del chasis y las de su build de serie, con `getBuildSummary`, la misma función que el MechLab), los filtros (los del selector de 'Mechs de `utils/mechs.ts`, sin copiarlos, más el tonelaje y la velocidad), el orden por columnas (sin el dato, al final), el enlace al MechLab (`/mercs/?mech=AS7-D`) y la vista en la URL. Tiene sus tests (`chassisList.test.ts`).
+- **`utils/chassisList.ts`:** las filas de cada variante (las cifras del chasis, con la capacidad de calor y la refrigeración del chasis vacío), los filtros (los del selector de 'Mechs de `utils/mechs.ts`, sin copiarlos, más el tonelaje y la velocidad), el orden por columnas (sin el dato, al final), el enlace al MechLab (`/mercs/?mech=AS7-D`) y la vista en la URL. Tiene sus tests (`chassisList.test.ts`).
 - **`chassis/ChassisApp.tsx`:** los filtros y la tabla, que se desplaza dentro de su caja con el nombre fijo. Solo pinta y llama a la lógica.
 
 ### HRQ y campañas

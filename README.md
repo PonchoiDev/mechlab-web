@@ -101,7 +101,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Find a 'Mech: el mapa se colorea según la rareza de una variante en el mercado de cada facción, en la fecha elegida, con sus fuentes fijas (HRQ, mercados especiales) y el enlace se comparte (`?mech=AS7-D`). Special 'Mech locations lista los 'Mechs hero y las variantes especiales que solo se consiguen en un sitio, como el Wolverine de Razer.
 
 **Lista de chasis**
-- Página propia (`/mercs/chassis/`) con las 639 variantes en una tabla: toneladas, anclajes, motor, velocidad, armadura, estructura, jump jets, giro de pie y de torso, ranuras de mejoras y, de su build de serie, alpha, DPS, capacidad de calor y refrigeración, con el año y el DLC.
+- Página propia (`/mercs/chassis/`) con las 639 variantes en una tabla: toneladas, anclajes, motor, velocidad, armadura, estructura, jump jets, giro de pie y de torso, ranuras de mejoras, y la capacidad de calor y la refrigeración del chasis vacío, con el año y el DLC.
 - Los filtros del selector de 'Mechs (con los atajos del buscador, como «3e 2m jj»), tonelaje mínimo y máximo, velocidad mínima y orden por cualquier columna. Cada variante abre su build de serie en el MechLab, y la vista va en el enlace.
 
 **Armas y equipo**
