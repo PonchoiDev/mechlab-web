@@ -1,6 +1,6 @@
 # Especificación: lista de chasis de BATTLETECH
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/battletech/chassisList.test.ts`) y por último la lógica y la interfaz, en commits separados.
 
 ## Contexto
@@ -66,3 +66,12 @@ La disipación (30) y el calor máximo (100) del chasis vacío son iguales en to
 
 1. **Lógica (CA1 a CA7):** `src/utils/battletech/chassisList.test.ts`, con los datos reales de BATTLETECH.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: la tabla, los filtros, el orden, la URL, el enlace al MechLab y la carátula.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después la lógica, la página y los enlaces, en commits separados.
+- **Tests:** los siete criterios están en `src/utils/battletech/chassisList.test.ts` y pasan.
+- **Interfaz:** comprobada en el navegador a 1366 × 800 y a 390 × 844: la tabla con las 96 variantes y 51 chasis, que cabe sin desplazarse a lo ancho; al menos 1E y 2 retrorreactores ordenado por Sprint (95 variantes, los de 350 m primero), la URL (`?min=1e&jj=2&sort=sprint`), un clic en una variante que abre el MechLab de BATTLETECH y la carátula de la página de inicio con el Hunchback de Sarna.
+- **Decisiones durante el desarrollo:**
+  - El orden por columnas de la lista de MW5 pasó a `utils/tableSort.ts`, y su tabla a `components/ChassisTable.tsx`, para las dos listas.
+  - Rol y fuente se eligen de uno en uno en la página; la URL admite varios.

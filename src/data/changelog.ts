@@ -15,7 +15,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       'A new page lists every MW5 variant with its stats: tons, hardpoints, engine, speed, armor, structure, jump jets, turn and torso twist, upgrade slots, and the base heat capacity and cooling of the empty chassis',
       'Filter like in the \'Mech picker (class, tech, role, jump jets, ECM, AMS, hero, minimum hardpoints, year and DLC), plus tonnage and minimum speed, and sort by any column',
-      'Click a variant to open its stock build in the MechLab. The filters and the sort go in the link, ready to share'
+      'Click a variant to open its stock build in the MechLab. The filters and the sort go in the link, ready to share',
+      'BATTLETECH has its own list too, with the stats of each empty chassis: free tonnage, armor, walk and sprint, jump jets, stability, melee, DFA and its fixed equipment'
     ]
   },
   {

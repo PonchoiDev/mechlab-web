@@ -17,6 +17,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 | BATTLETECH star map | https://mw-builder.com/battletech/starmap/ |
 | BATTLETECH flashpoints | https://mw-builder.com/battletech/flashpoints/ |
 | BATTLETECH enemy units | https://mw-builder.com/battletech/units/ |
+| BATTLETECH chassis list | https://mw-builder.com/battletech/chassis/ |
 | BATTLETECH weapons and equipment | https://mw-builder.com/battletech/equipment/ |
 | Slides | [View on Google Slides](https://docs.google.com/presentation/d/12EF1CgE-6KTWpWKrRVYCNxMUtrFIe35g/edit?usp=drive_link) (in Spanish) |
 | Video walkthrough | [Watch on Google Drive](https://drive.google.com/file/d/1FbnRwwYDHOZMuEQ71Wt3I6yfammuBIkp/view?usp=drive_link) (in Spanish) |
@@ -49,7 +50,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (611 tests, V8 coverage) |
+| Tests | Vitest 5 (618 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -137,6 +138,10 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - Its own page (`/battletech/units/`) with the 37 vehicles and turrets of contracts, from the base game, Heavy Metal and Urban Warfare: armor and structure by location, walk and sprint distance, the damage of one attack with every weapon, stability damage and the weapons and equipment each one carries, with its chassis drawing from Sarna.
 - Filters by type (tracked, wheeled, turret) and name, and sort by damage, armor, tonnage or speed. The view goes in the link.
 
+**BATTLETECH chassis list**
+- Its own page (`/battletech/chassis/`) with all 96 variants and the stats of their empty chassis: tons, hardpoints, free tonnage, armor, structure, walk and sprint distance, jump jets, stability, melee, DFA and source, with their fixed equipment.
+- The BATTLETECH 'Mech picker filters, minimum and maximum tonnage, minimum sprint distance and sorting by any column. Every variant opens its stock build in the MechLab, and the view goes in the link.
+
 **BATTLETECH weapons and equipment**
 - Its own page (`/battletech/equipment/`) with all 210 weapons and every manufacturer version (+ to + + +) in one table: hardpoint, tons, slots, damage (with its shots), stability damage, heat, heat damage, accuracy, crit, min and max range with the range brackets, ammo per ton, damage per ton, rarity and source, with the manufacturer bonuses.
 - Sorting by any column and filters by hardpoint, version, source, rarity and a search by name or manufacturer.
@@ -186,6 +191,7 @@ src/
   campaigns/            HRQ and campaigns page: expandable lists with missions, requirements and rewards
   battletech/           BATTLETECH pages (star map), with their logic in utils/battletech/
   battletech/argo/      BATTLETECH Argo page: upgrade tree, cards and plan
+  battletech/chassis/   BATTLETECH chassis list page: variant table with filters and sorting
   battletech/equipment/ BATTLETECH weapons and equipment page: weapon table, equipment cards and ammo
   battletech/flashpoints/ BATTLETECH flashpoints page: expandable lists with contracts, paths and rewards
   battletech/units/     BATTLETECH enemy units page: filters and a card for each vehicle or turret
@@ -205,6 +211,7 @@ equipment/index.html    Entry of the weapons and equipment page (/mercs/equipmen
 campaigns/index.html    Entry of the HRQ and campaigns page (/mercs/campaigns/)
 battletech/             Entries of the BATTLETECH pages (/battletech/) and their images
 battletech/argo/        Entry of the Argo page (/battletech/argo/) and its images in public/argo/
+battletech/chassis/     Entry of the chassis list page (/battletech/chassis/)
 battletech/equipment/   Entry of the weapons and equipment page (/battletech/equipment/)
 battletech/flashpoints/ Entry of the flashpoints page (/battletech/flashpoints/)
 battletech/units/       Entry of the enemy units page (/battletech/units/)
@@ -383,7 +390,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Quality and checks against the game
 
-- **611 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **618 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.
