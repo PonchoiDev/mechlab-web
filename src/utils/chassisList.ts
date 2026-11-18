@@ -1,5 +1,6 @@
 import type { Mech } from '../types/mech';
 import { calculateTopSpeed } from './calculators';
+import { defaultSortDirection, sortByColumn, toggleColumnSort, type ColumnSort } from './tableSort';
 import {
   BASE_GAME,
   EMPTY_MECH_FILTERS,
@@ -86,20 +87,9 @@ export const CHASSIS_SORT_KEYS: ChassisSortKey[] = [
   'turnSpeed', 'torsoYaw', 'upgradeSlots', 'heatCapacity', 'cooling', 'year', 'dlc'
 ];
 
-export type SortDirection = 'asc' | 'desc';
+export type ChassisSort = ColumnSort<ChassisSortKey>;
 
-export interface ChassisSort {
-  key: ChassisSortKey;
-  dir: SortDirection;
-}
-
-// Como en la página de armas: el nombre empieza de la A a la Z y las cifras, de mayor a menor.
-const defaultDirection = (key: ChassisSortKey): SortDirection => key === 'name' ? 'asc' : 'desc';
-
-export const toggleChassisSort = (current: ChassisSort, key: ChassisSortKey): ChassisSort =>
-  current.key === key
-    ? { key, dir: current.dir === 'asc' ? 'desc' : 'asc' }
-    : { key, dir: defaultDirection(key) };
+export const toggleChassisSort = (current: ChassisSort, key: ChassisSortKey): ChassisSort => toggleColumnSort(current, key);
 
 const sortValue = (row: ChassisRow, key: Exclude<ChassisSortKey, 'name'>): number | null => {
   switch (key) {
@@ -112,16 +102,7 @@ const sortValue = (row: ChassisRow, key: Exclude<ChassisSortKey, 'name'>): numbe
 const byName = (a: ChassisRow, b: ChassisRow) =>
   a.chassis.localeCompare(b.chassis) || a.mech.variant.localeCompare(b.mech.variant);
 
-// Sin el dato, al final en los dos sentidos; a igualdad, por chasis y variante.
-export const sortChassisRows = (rows: ChassisRow[], { key, dir }: ChassisSort): ChassisRow[] => {
-  const sign = dir === 'asc' ? 1 : -1;
-  if (key === 'name') return [...rows].sort((a, b) => byName(a, b) * sign);
-  return [...rows].sort((a, b) => {
-    const [first, second] = [sortValue(a, key), sortValue(b, key)];
-    if (first === null || second === null) return first === second ? byName(a, b) : first === null ? 1 : -1;
-    return (first - second) * sign || byName(a, b);
-  });
-};
+export const sortChassisRows = (rows: ChassisRow[], sort: ChassisSort): ChassisRow[] => sortByColumn(rows, sort, sortValue, byName);
 
 export interface ChassisView {
   query: string;
@@ -198,7 +179,7 @@ export const parseChassisQuery = (search: string): ChassisView => {
     minTons: integerIn(params.get('tmin'), 1, 200),
     maxTons: integerIn(params.get('tmax'), 1, 200),
     minSpeed: integerIn(params.get('speed'), 1, 500),
-    sort: { key, dir: dir === 'asc' || dir === 'desc' ? dir : defaultDirection(key) }
+    sort: { key, dir: dir === 'asc' || dir === 'desc' ? dir : defaultSortDirection(key) }
   };
 };
 
@@ -225,7 +206,7 @@ export const toChassisQuery = (view: ChassisView): string => {
   set('tmax', view.maxTons);
   set('speed', view.minSpeed);
   if (view.sort.key !== DEFAULT_CHASSIS_VIEW.sort.key) params.set('sort', view.sort.key);
-  if (view.sort.dir !== defaultDirection(view.sort.key)) params.set('dir', view.sort.dir);
+  if (view.sort.dir !== defaultSortDirection(view.sort.key)) params.set('dir', view.sort.dir);
   // URLSearchParams escribe las comas como %2C; en la dirección se leen mejor tal cual.
   const text = params.toString().replace(/%2C/g, ',');
   return text ? `?${text}` : '';
