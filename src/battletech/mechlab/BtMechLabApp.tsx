@@ -134,6 +134,7 @@ export function BtMechLabApp() {
           </a>
           <nav className="topbar-links" aria-label="BATTLETECH">
             <a href="/battletech/starmap/"><small>BATTLETECH</small> Star map</a>
+            <a href="/battletech/chassis/">Chassis</a>
             <a href="/battletech/flashpoints/">Flashpoints</a>
             <a href="/battletech/units/">Enemy units</a>
             <a href="/battletech/argo/">Argo</a>

@@ -1,7 +1,7 @@
 import type { BtHardpoint, BtMech, BtSource, BtWeightClass } from '../../types/battletech-mechlab';
 import type { BuildTag } from '../savedBuildsList';
 import { mapZones } from '../zones';
-import { defaultSortDirection, sortByColumn, toggleColumnSort, type ColumnSort } from '../tableSort';
+import { defaultSortDirection, sortByColumn, type ColumnSort } from '../tableSort';
 import { getBtBuildTags } from './buildTags';
 import { SOURCES } from './catalog';
 import { DEFAULT_MECH_FILTERS, filterBtMechs, type BtMechFilters } from './filters';
