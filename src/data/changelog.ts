@@ -14,7 +14,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     title: 'Easier to read MechLab',
     items: [
       'The chassis picker has its own row under the header, bigger and easier to find, right above the notices and the build menus',
-      'The key stats of the build sit right below the notices and the build menus, in the same box, above the board',
+      'The key stats of the build sit right below the notices and the build menus, in the same box, above the board, in a more compact table',
       'Clan \'Mechs show both names everywhere in the MechLab, like Hankyu (Arctic Cheetah), and HRQ, market and campaign rewards on the star map can be searched by either',
       'Slot cells are shown by default. If you hid them, the MechLab remembers it',
       'Empty hardpoints and components no longer say free: the notices bar already lists them',

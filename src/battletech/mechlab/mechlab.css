@@ -112,7 +112,8 @@ body { background: var(--work-bg); }
 
 /* Lo que enseña la pantalla de reequipar del juego: resumen de anclajes bajo el tonelaje, estructura de
    cada ubicación, máximo de cada lado del blindaje, fabricante y bonificación en naranja, y rol de serie. */
-.bt-hardpoint-usage { margin-top: -4px; }
+/* En la tabla de cifras, en su propia línea bajo el tonelaje. */
+.bt-hardpoint-usage { flex-basis: 100%; }
 
 .bt-card-header-end {
   display: inline-flex;
