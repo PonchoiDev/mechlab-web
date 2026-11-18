@@ -111,8 +111,8 @@ describe('filtros del selector de chasis', () => {
   });
 
   it('entiende los atajos del buscador', () => {
-    expect(parseMechQuery('archer 3e 2M jj ECM')).toEqual({ text: 'archer', filters: { jumpJets: true, ecm: true, hero: false, dlcs: [], minHardpoints: { energy: 3, missile: 2 } } });
-    expect(parseMechQuery('1art')).toEqual({ text: '', filters: { jumpJets: false, ecm: false, hero: false, dlcs: [], minHardpoints: { artillery: 1 } } });
+    expect(parseMechQuery('archer 3e 2M jj ECM')).toEqual({ text: 'archer', filters: { jumpJets: true, ecm: true, activeProbe: false, hero: false, dlcs: [], minHardpoints: { energy: 3, missile: 2 } } });
+    expect(parseMechQuery('1art')).toEqual({ text: '', filters: { jumpJets: false, ecm: false, activeProbe: false, hero: false, dlcs: [], minHardpoints: { artillery: 1 } } });
   });
 });
 
