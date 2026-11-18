@@ -3,9 +3,17 @@ import type { BtBuild } from '../../types/battletech-mechlab';
 import type { useSavedBuilds } from '../../hooks/useSavedBuilds';
 import { normalizeBuildName, type SavedBuild } from '../../utils/savedBuildsCore';
 import { decodeBtBuild } from '../../utils/battletech/buildCode';
-import { getMechDisplayName } from '../../utils/battletech/mechlabData';
+import { getItem, getMechDisplayName, MECH_TAGS } from '../../utils/battletech/mechlabData';
+import { HARDPOINT_LABELS, HARDPOINT_SHORT, HARDPOINTS } from '../../utils/battletech/catalog';
+import { getAllItems, getHardpointCount } from '../../utils/battletech/fitting';
 import { createBtExportFile, parseBtImportFile } from '../../utils/battletech/savedBuilds';
 import { getBuildSummary } from '../../utils/battletech/stats';
+import { countBuildsByWeightClass, countWeaponTypes, filterBuildRows, sortBuildRows, type BuildListRow, type BuildMinimumsOf, type BuildWeightClass } from '../../utils/savedBuildsList';
+import { getBtBuildTags } from '../../utils/battletech/buildTags';
+import { BuildTagList } from '../../components/BuildTagList';
+import { BT_BUILD_SORT_KEY, useBuildSort } from '../../hooks/useBuildSort';
+import { BuildsListControls } from '../../components/BuildsListControls';
+import { WeaponTypeCounts } from '../../components/WeaponTypeCounts';
 
 interface BtMyBuildsDialogProps {
   saved: ReturnType<typeof useSavedBuilds>;
@@ -31,6 +39,13 @@ const downloadFile = (content: string, fileName: string) => {
 };
 
 // Las builds guardadas de BATTLETECH, con las mismas acciones que el diálogo de MW5.
+// Los mismos contadores que el selector de 'Mechs de BATTLETECH.
+const WEAPON_TYPE_LABELS = Object.fromEntries(HARDPOINTS.map(id => [id, HARDPOINT_LABELS[id].toLowerCase()]));
+const HARDPOINT_TYPES = HARDPOINTS.map(id => ({ id, short: HARDPOINT_SHORT[id], label: HARDPOINT_LABELS[id].toLowerCase() }));
+
+// BATTLETECH no tiene ECM, AMS ni variantes hero en el selector de 'Mechs: solo los jump jets montados.
+const FEATURE_OPTIONS = [{ id: 'jumpJets', label: 'Jump jets', title: 'Builds that carry jump jets' }];
+
 export function BtMyBuildsDialog({
   saved,
   currentCode,
@@ -46,6 +61,13 @@ export function BtMyBuildsDialog({
   const [editing, setEditing] = useState<{ id: string; name: string } | null>(null);
   const [confirming, setConfirming] = useState<{ id: string; action: 'delete' | 'load' } | null>(null);
   const [duplicatedId, setDuplicatedId] = useState<string | null>(null);
+  const [query, setQuery] = useState('');
+  const [weightClasses, setWeightClasses] = useState<BuildWeightClass[]>([]);
+  const [minHardpoints, setMinHardpoints] = useState<Partial<Record<string, number>>>({});
+  const [minimumsOf, setMinimumsOf] = useState<BuildMinimumsOf>('hardpoints');
+  const [roles, setRoles] = useState<string[]>([]);
+  const [features, setFeatures] = useState<string[]>([]);
+  const [sort, setSort] = useBuildSort(BT_BUILD_SORT_KEY);
   const fileInput = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -63,8 +85,55 @@ export function BtMyBuildsDialog({
 
   const rows = useMemo(() => builds.map(build => {
     const decoded = decodeBtBuild(build.code);
-    return { build, decoded, summary: decoded ? getBuildSummary(decoded) : null };
+    const summary = decoded ? getBuildSummary(decoded) : null;
+    // La potencia de fuego de BATTLETECH es el daño de un ataque con todas las armas.
+    const listRow: BuildListRow = {
+      id: build.id,
+      name: build.name,
+      savedAt: build.savedAt,
+      chassis: decoded?.mech.name ?? null,
+      variant: decoded?.mech.variant ?? null,
+      weightClass: decoded?.mech.weightClass ?? null,
+      tonnage: summary?.tonnage ?? null,
+      firepower: summary?.alphaDamage ?? null,
+      hardpoints: decoded ? Object.fromEntries(HARDPOINTS.map(type => [type, getHardpointCount(decoded.mech, type)])) : null,
+      weapons: null,
+      techBase: null,
+      roles: decoded?.mech.tags ?? [],
+      features: []
+    };
+    // Solo las armas: la munición también tiene tipo de anclaje en BATTLETECH.
+    const weaponCounts = decoded
+      ? countWeaponTypes(Object.values(decoded.loadout).flat().map(getItem).filter(item => item?.kind === 'weapon').map(item => item?.hardpoint), HARDPOINTS)
+      : [];
+    if (decoded) listRow.weapons = Object.fromEntries(weaponCounts.map(({ type, count }) => [type, count]));
+    const allItems = decoded ? getAllItems(decoded.mech, decoded.loadout) : [];
+    if (allItems.some(item => item.kind === 'jumpJet')) listRow.features = ['jumpJets'];
+    const tags = getBtBuildTags(allItems);
+    return { build, decoded, summary, listRow, weaponCounts, tags };
   }), [builds]);
+
+  // Como en MW5: la copia recién duplicada se ve aunque el filtro la escondería.
+  const shownRows = useMemo(() => {
+    const listRows = rows.map(row => row.listRow);
+    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses, minHardpoints, minimumsOf, roles, features }).map(row => row.id));
+    if (duplicatedId) shownIds.add(duplicatedId);
+    const byId = new Map(rows.map(row => [row.build.id, row]));
+    return sortBuildRows(listRows.filter(row => shownIds.has(row.id)), sort).map(row => byId.get(row.id)!);
+  }, [rows, query, weightClasses, minHardpoints, minimumsOf, roles, features, sort, duplicatedId]);
+  // Solo las etiquetas de las builds guardadas, en el orden del selector de 'Mechs.
+  const roleOptions = useMemo(() => {
+    const used = new Set(rows.flatMap(row => row.listRow.roles));
+    return MECH_TAGS.filter(tag => used.has(tag));
+  }, [rows]);
+  const counts = useMemo(() => countBuildsByWeightClass(rows.map(row => row.listRow)), [rows]);
+  const clearFilters = () => {
+    setQuery('');
+    setWeightClasses([]);
+    setMinHardpoints({});
+    setRoles([]);
+    setFeatures([]);
+  };
 
   const load = (build: SavedBuild, decoded: BtBuild) => {
     setConfirming(null);
@@ -102,7 +171,7 @@ export function BtMyBuildsDialog({
         </header>
 
         <div className="builds-list-header">
-          <span>{builds.length} SAVED</span>
+          <span>{shownRows.length === builds.length ? builds.length : `${shownRows.length} of ${builds.length}`} SAVED</span>
           <span className="builds-list-actions">
             <button type="button" className="utility-button" onClick={() => fileInput.current?.click()}>Import</button>
             <button
@@ -120,9 +189,39 @@ export function BtMyBuildsDialog({
           </span>
         </div>
 
+        {builds.length > 0 && (
+          <BuildsListControls
+            query={query}
+            onQueryChange={setQuery}
+            sort={sort}
+            onSortChange={setSort}
+            weightClasses={weightClasses}
+            onWeightClassesChange={setWeightClasses}
+            counts={counts}
+            hardpointTypes={HARDPOINT_TYPES}
+            minHardpoints={minHardpoints}
+            minimumsOf={minimumsOf}
+            onMinimumsOfChange={setMinimumsOf}
+            roleOptions={roleOptions}
+            roles={roles}
+            onRolesChange={setRoles}
+            featureOptions={FEATURE_OPTIONS}
+            features={features}
+            onFeaturesChange={setFeatures}
+            onMinHardpointsChange={setMinHardpoints}
+          />
+        )}
+
         <ul className="builds-list">
           {rows.length === 0 && <li className="builds-empty">No saved builds yet. Use Save build in the toolbar, or import an exported file.</li>}
-          {rows.map(({ build, decoded, summary }) => (
+          {rows.length > 0 && shownRows.length === 0 && (
+            <li className="builds-empty">
+              No saved builds match these filters.
+              <br />
+              <button type="button" className="utility-button" onClick={clearFilters}>Clear filters</button>
+            </li>
+          )}
+          {shownRows.map(({ build, decoded, summary, weaponCounts, tags }) => (
             <li
               key={build.id}
               className={['builds-item', build.id === activeId ? 'is-active' : '', build.id === duplicatedId ? 'is-new' : ''].filter(Boolean).join(' ')}
@@ -155,6 +254,12 @@ export function BtMyBuildsDialog({
                     ? `${getMechDisplayName(decoded.mech)} · ${summary.tonnage} / ${decoded.mech.tonnage} t · ${summary.alphaDamage} alpha`
                     : 'This build can no longer be opened'}
                 </span>
+                {decoded && (
+                  <span className="builds-item-loadout">
+                    <WeaponTypeCounts counts={weaponCounts} short={HARDPOINT_SHORT} labels={WEAPON_TYPE_LABELS} />
+                    <BuildTagList tags={tags} />
+                  </span>
+                )}
                 <span className="builds-item-date">Saved {dateFormat.format(new Date(build.savedAt))}</span>
               </div>
 

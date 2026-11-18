@@ -5,7 +5,14 @@ import type { useSavedBuilds } from '../hooks/useSavedBuilds';
 import { decodeBuild, type SharedBuild } from '../utils/buildCode';
 import { getBuildSummary } from '../utils/calculators';
 import { getUpgrades } from '../utils/upgrades';
-import { getMechDisplayName } from '../utils/mechs';
+import { getHardpointCounts, getMechDisplayName, getMechWeightClass, HARDPOINT_ABBREVIATIONS } from '../utils/mechs';
+import { countBuildsByWeightClass, countWeaponTypes, filterBuildRows, sortBuildRows, type BuildListRow, type BuildMinimumsOf, type BuildWeightClass } from '../utils/savedBuildsList';
+import { getBuildTags } from '../utils/buildTags';
+import { BuildTagList } from './BuildTagList';
+import { MERCS_BUILD_SORT_KEY, useBuildSort } from '../hooks/useBuildSort';
+import { BuildsListControls } from './BuildsListControls';
+import { WeaponTypeCounts } from './WeaponTypeCounts';
+import { getItemWeaponType } from '../utils/items';
 import { createExportFile, normalizeBuildName, parseImportFile, type SavedBuild } from '../utils/savedBuilds';
 
 interface MyBuildsDialogProps {
@@ -36,6 +43,26 @@ const downloadFile = (content: string, fileName: string) => {
   URL.revokeObjectURL(url);
 };
 
+// Los mismos contadores que el selector de 'Mechs: los omni cuentan como comodín.
+const HARDPOINT_TYPES = (['energy', 'ballistic', 'missile', 'omni'] as const).map(id => ({
+  id,
+  short: HARDPOINT_ABBREVIATIONS[id].trim(),
+  label: id === 'omni' ? 'omni' : id
+}));
+
+// Armas montadas de cada tipo, en el orden de los anclajes del juego.
+// Los botones de Equipment del selector de 'Mechs, más Hero. Aquí miran lo que lleva montado cada build.
+const FEATURE_OPTIONS = [
+  { id: 'jumpJets', label: 'Jump jets', title: 'Builds that carry jump jets' },
+  { id: 'ecm', label: 'ECM', title: 'Builds that carry an ECM' },
+  { id: 'ams', label: 'AMS', title: 'Builds that carry an AMS' },
+  { id: 'hero', label: 'Hero', title: 'Hero variants' }
+];
+
+const WEAPON_TYPE_ORDER = ['energy', 'ballistic', 'missile', 'artillery', 'ams', 'melee'];
+const WEAPON_TYPE_SHORT: Record<string, string> = { energy: 'E', ballistic: 'B', missile: 'M', artillery: 'ART', ams: 'AMS', melee: 'MEL' };
+const WEAPON_TYPE_LABELS: Record<string, string> = { energy: 'energy', ballistic: 'ballistic', missile: 'missile', artillery: 'artillery', ams: 'AMS', melee: 'melee' };
+
 export function MyBuildsDialog({
   saved,
   mechs,
@@ -53,6 +80,14 @@ export function MyBuildsDialog({
   const [editing, setEditing] = useState<{ id: string; name: string } | null>(null);
   const [confirming, setConfirming] = useState<{ id: string; action: 'delete' | 'load' } | null>(null);
   const [duplicatedId, setDuplicatedId] = useState<string | null>(null);
+  const [query, setQuery] = useState('');
+  const [weightClasses, setWeightClasses] = useState<BuildWeightClass[]>([]);
+  const [minHardpoints, setMinHardpoints] = useState<Partial<Record<string, number>>>({});
+  const [minimumsOf, setMinimumsOf] = useState<BuildMinimumsOf>('hardpoints');
+  const [techBase, setTechBase] = useState<'InnerSphere' | 'Clan' | null>(null);
+  const [roles, setRoles] = useState<string[]>([]);
+  const [features, setFeatures] = useState<string[]>([]);
+  const [sort, setSort] = useBuildSort(MERCS_BUILD_SORT_KEY);
   const fileInput = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -71,8 +106,57 @@ export function MyBuildsDialog({
   const rows = useMemo(() => builds.map(build => {
     const shared = decodeBuild(build.code, mechs, catalog);
     const summary = shared ? getBuildSummary(shared.mech, shared.loadout, shared.armor, getUpgrades(shared.upgrades)) : null;
-    return { build, shared, summary };
+    const listRow: BuildListRow = {
+      id: build.id,
+      name: build.name,
+      savedAt: build.savedAt,
+      chassis: shared ? getMechDisplayName(shared.mech) : null,
+      variant: shared?.mech.variant ?? null,
+      weightClass: shared ? getMechWeightClass(shared.mech) : null,
+      tonnage: summary?.totalWeight ?? null,
+      firepower: summary?.firepower ?? null,
+      hardpoints: shared ? getHardpointCounts(shared.mech) : null,
+      weapons: null,
+      techBase: shared ? (shared.mech.techBase === 'Clan' ? 'Clan' : 'InnerSphere') : null,
+      roles: shared?.mech.role ? [shared.mech.role] : [],
+      features: []
+    };
+    const items = shared ? Object.values(shared.loadout).flat() : [];
+    const weaponCounts = countWeaponTypes(items.filter(item => item.type === 'weapon').map(getItemWeaponType), WEAPON_TYPE_ORDER);
+    if (shared) {
+      listRow.weapons = Object.fromEntries(weaponCounts.map(({ type, count }) => [type, count]));
+      listRow.features = [
+        items.some(item => item.equipmentType === 'jumpJet') && 'jumpJets',
+        items.some(item => item.ecm) && 'ecm',
+        (listRow.weapons.ams ?? 0) > 0 && 'ams',
+        shared.mech.hero && 'hero'
+      ].filter((feature): feature is string => typeof feature === 'string');
+    }
+    const tags = shared ? getBuildTags(shared.mech, items) : [];
+    return { build, shared, summary, listRow, weaponCounts, tags };
   }), [builds, mechs, catalog]);
+
+  // La copia recién duplicada se ve aunque el filtro la escondería, para poder renombrarla.
+  const shownRows = useMemo(() => {
+    const listRows = rows.map(row => row.listRow);
+    // Ningún arma es omni: con Weapons ese mínimo no cuenta (y su contador no sale).
+    const minimums = minimumsOf === 'weapons' ? { ...minHardpoints, omni: 0 } : minHardpoints;
+    const shownIds = new Set(filterBuildRows(listRows, { query, weightClasses, minHardpoints: minimums, minimumsOf, techBase, roles, features }).map(row => row.id));
+    if (duplicatedId) shownIds.add(duplicatedId);
+    const byId = new Map(rows.map(row => [row.build.id, row]));
+    return sortBuildRows(listRows.filter(row => shownIds.has(row.id)), sort).map(row => byId.get(row.id)!);
+  }, [rows, query, weightClasses, minHardpoints, minimumsOf, techBase, roles, features, sort, duplicatedId]);
+  // Solo los roles de las builds guardadas, para no ofrecer filtros vacíos.
+  const roleOptions = useMemo(() => [...new Set(rows.flatMap(row => row.listRow.roles))].sort(), [rows]);
+  const counts = useMemo(() => countBuildsByWeightClass(rows.map(row => row.listRow)), [rows]);
+  const clearFilters = () => {
+    setQuery('');
+    setWeightClasses([]);
+    setMinHardpoints({});
+    setTechBase(null);
+    setRoles([]);
+    setFeatures([]);
+  };
 
   const load = (build: SavedBuild, shared: SharedBuild) => {
     setConfirming(null);
@@ -139,7 +223,7 @@ export function MyBuildsDialog({
         </header>
 
         <div className="builds-list-header">
-          <span>{builds.length} SAVED</span>
+          <span>{shownRows.length === builds.length ? builds.length : `${shownRows.length} of ${builds.length}`} SAVED</span>
           <span className="builds-list-actions">
             <button type="button" className="utility-button" onClick={() => fileInput.current?.click()}>Import</button>
             <button type="button" className="utility-button" disabled={builds.length === 0} onClick={exportBuilds}>Export all</button>
@@ -147,11 +231,42 @@ export function MyBuildsDialog({
           </span>
         </div>
 
+        {builds.length > 0 && (
+          <BuildsListControls
+            query={query}
+            onQueryChange={setQuery}
+            sort={sort}
+            onSortChange={setSort}
+            weightClasses={weightClasses}
+            onWeightClassesChange={setWeightClasses}
+            counts={counts}
+            hardpointTypes={minimumsOf === 'weapons' ? HARDPOINT_TYPES.filter(type => type.id !== 'omni') : HARDPOINT_TYPES}
+            minHardpoints={minHardpoints}
+            onMinHardpointsChange={setMinHardpoints}
+            minimumsOf={minimumsOf}
+            onMinimumsOfChange={setMinimumsOf}
+            techBase={{ value: techBase, onChange: setTechBase }}
+            roleOptions={roleOptions}
+            roles={roles}
+            onRolesChange={setRoles}
+            featureOptions={FEATURE_OPTIONS}
+            features={features}
+            onFeaturesChange={setFeatures}
+          />
+        )}
+
         <ul className="builds-list">
           {rows.length === 0 && (
             <li className="builds-empty">No saved builds yet. Use Save build in the toolbar, or import an exported file.</li>
           )}
-          {rows.map(({ build, shared, summary }) => {
+          {rows.length > 0 && shownRows.length === 0 && (
+            <li className="builds-empty">
+              No saved builds match these filters.
+              <br />
+              <button type="button" className="utility-button" onClick={clearFilters}>Clear filters</button>
+            </li>
+          )}
+          {shownRows.map(({ build, shared, summary, weaponCounts, tags }) => {
             const isConfirming = confirming?.id === build.id;
             return (
               <li
@@ -186,6 +301,12 @@ export function MyBuildsDialog({
                       ? `${getMechDisplayName(shared.mech)} ${shared.mech.variant} · ${summary.totalWeight.toFixed(1)} / ${shared.mech.tonnageMax} t · ${summary.firepower} volley`
                       : 'This build can no longer be opened'}
                   </span>
+                  {shared && (
+                    <span className="builds-item-loadout">
+                      <WeaponTypeCounts counts={weaponCounts} short={WEAPON_TYPE_SHORT} labels={WEAPON_TYPE_LABELS} />
+                      <BuildTagList tags={tags} />
+                    </span>
+                  )}
                   <span className="builds-item-date">Saved {formatDate(build.savedAt)}</span>
                 </div>
 
