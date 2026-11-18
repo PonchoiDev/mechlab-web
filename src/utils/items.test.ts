@@ -264,3 +264,28 @@ describe('filterItems', () => {
     expect(filterItems(items, {})).toHaveLength(4);
   });
 });
+
+// El juego nombra las armas de varias formas para lo mismo; generar_items.py lo unifica.
+describe('nombres coherentes de las armas y el equipo', () => {
+  const names = allItems.map(item => item.name);
+  const shortNames = allItems.flatMap(item => item.shortName ?? []);
+
+  it('ER en vez de Extended Range, como el ER Large Laser y el ER PPC', () => {
+    expect(names.filter(name => name.includes('Extended Range'))).toEqual([]);
+    expect(getItem('ERMediumLaser').name).toBe('ER Medium Laser');
+  });
+
+  it('Clan delante de todo lo Clan, también en las balísticas, la munición y el MASC', () => {
+    expect(names.filter(name => name.startsWith('C-'))).toEqual([]);
+    expect(getItem('C-UltraAutocannon5').name).toBe('Clan Ultra Autocannon/5');
+  });
+
+  it('los Ultra AC con barra, y Rapid-Fire, Burst Fire y Solid Slug escritos siempre igual', () => {
+    expect(names.filter(name => /Ultra Autocannon \d/.test(name))).toEqual([]);
+    expect(names.filter(name => /rapid-fire| Burst$|Slug Burst$|Solid Burst|Autocannon Slug/.test(name))).toEqual([]);
+  });
+
+  it('sin espacios dobles ni en los nombres ni en los nombres cortos', () => {
+    expect([...names, ...shortNames].filter(name => /\s{2,}/.test(name) || name !== name.trim())).toEqual([]);
+  });
+});
