@@ -81,11 +81,12 @@
    "techBase": "InnerSphere"
   },
   "Autocannon10_Lvl0": {
-   "name": "Autocannon/10",
+   "name": "AC/10",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 12.0,
+   "fullName": "Autocannon/10",
    "tiers": {
     "0": {
      "damage": 10.0,
@@ -94,7 +95,8 @@
      "range": 360.0,
      "maxRange": 360.0,
      "rpm": 16.7,
-     "speed": 480.0
+     "speed": 480.0,
+     "manufacturer": "ChemJet"
     }
    },
    "volleyProjectiles": 1,
@@ -107,7 +109,7 @@
   },
   "Autocannon10_Turret": {
    "id": "Autocannon10_Turret",
-   "name": "Autocannon/10",
+   "name": "AC/10",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
@@ -129,11 +131,12 @@
    "techBase": "InnerSphere"
   },
   "Autocannon20": {
-   "name": "Autocannon/20",
+   "name": "AC/20",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 14.0,
+   "fullName": "Autocannon/20",
    "tiers": {
     "1": {
      "damage": 20.0,
@@ -142,7 +145,8 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 12.5,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Armstrong Requiem"
     }
    },
    "volleyProjectiles": 1,
@@ -155,7 +159,7 @@
   },
   "Autocannon20_Demolisher": {
    "id": "Autocannon20_Demolisher",
-   "name": "Autocannon/20",
+   "name": "AC/20",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
@@ -177,11 +181,12 @@
    "techBase": "InnerSphere"
   },
   "Autocannon2_Burst": {
-   "name": "Autocannon/2 Burst Fire",
+   "name": "AC/2 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 6.0,
+   "fullName": "Autocannon/2 Burst Fire",
    "tiers": {
     "1": {
      "damage": 0.6,
@@ -190,7 +195,8 @@
      "range": 720.0,
      "maxRange": 720.0,
      "rpm": 119.5,
-     "speed": 1200.0
+     "speed": 1200.0,
+     "manufacturer": "ZeusBolt"
     }
    },
    "volleyProjectiles": 4,
@@ -202,11 +208,12 @@
    "tier": "1"
   },
   "Autocannon2_Lvl0": {
-   "name": "Autocannon/2",
+   "name": "AC/2",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 6.0,
+   "fullName": "Autocannon/2",
    "tiers": {
     "0": {
      "damage": 2.0,
@@ -215,7 +222,8 @@
      "range": 576.0,
      "maxRange": 576.0,
      "rpm": 83.3,
-     "speed": 960.0
+     "speed": 960.0,
+     "manufacturer": "Deleon"
     }
    },
    "volleyProjectiles": 1,
@@ -228,7 +236,7 @@
   },
   "Autocannon2_Turret": {
    "id": "Autocannon2_Turret",
-   "name": "Autocannon/2",
+   "name": "AC/2",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
@@ -251,7 +259,7 @@
   },
   "Autocannon2_VTOL": {
    "id": "Autocannon2_VTOL",
-   "name": "Autocannon/2",
+   "name": "AC/2",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
@@ -273,11 +281,12 @@
    "techBase": "InnerSphere"
   },
   "Autocannon5": {
-   "name": "Autocannon/5",
+   "name": "AC/5",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 8.0,
+   "fullName": "Autocannon/5",
    "tiers": {
     "1": {
      "damage": 5.0,
@@ -286,7 +295,8 @@
      "range": 620.0,
      "maxRange": 620.0,
      "rpm": 40.0,
-     "speed": 950.0
+     "speed": 950.0,
+     "manufacturer": "Armstrong J11"
     }
    },
    "volleyProjectiles": 1,
@@ -298,11 +308,12 @@
    "tier": "1"
   },
   "Autocannon5_Burst": {
-   "name": "Autocannon/5 Burst Fire",
+   "name": "AC/5 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 8.0,
+   "fullName": "Autocannon/5 Burst Fire",
    "tiers": {
     "1": {
      "damage": 2.0,
@@ -311,7 +322,8 @@
      "range": 620.0,
      "maxRange": 620.0,
      "rpm": 48.4,
-     "speed": 1100.0
+     "speed": 1100.0,
+     "manufacturer": "ZeusBolt"
     }
    },
    "volleyProjectiles": 3,
@@ -324,7 +336,7 @@
   },
   "Autocannon5_Scorpion": {
    "id": "Autocannon5_Scorpion",
-   "name": "Autocannon/5",
+   "name": "AC/5",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
@@ -346,11 +358,12 @@
    "techBase": "InnerSphere"
   },
   "C-ATM3": {
-   "name": "Clan ATM 3",
+   "name": "C-ATM 3",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.5,
+   "fullName": "Clan ATM 3",
    "tiers": {
     "1": {
      "damage": 4.2,
@@ -359,7 +372,8 @@
      "range": 337.5,
      "maxRange": 1375.0,
      "rpm": 20.8,
-     "speed": 350.0
+     "speed": 350.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 3,
@@ -371,11 +385,12 @@
    "tier": "1"
   },
   "C-ERLargeLaser": {
-   "name": "Clan ER Large Laser",
+   "name": "C-ER L Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 4.0,
+   "fullName": "Clan ER Large Laser",
    "tiers": {
     "1": {
      "damage": 15.6,
@@ -383,7 +398,8 @@
      "cooldown": 4.037,
      "range": 1012.5,
      "maxRange": 1518.8,
-     "rpm": 14.9
+     "rpm": 14.9,
+     "manufacturer": "Series 7Ja"
     }
    },
    "volleyProjectiles": 1,
@@ -393,11 +409,12 @@
    "tier": "1"
   },
   "C-ERMediumLaser": {
-   "name": "Clan Extended Range Medium Laser",
+   "name": "C-ER M Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 1.0,
+   "fullName": "Clan Extended Range Medium Laser",
    "tiers": {
     "1": {
      "damage": 9.1,
@@ -405,7 +422,8 @@
      "cooldown": 3.825,
      "range": 562.5,
      "maxRange": 843.8,
-     "rpm": 15.7
+     "rpm": 15.7,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 1,
@@ -416,7 +434,7 @@
   },
   "C-ERMediumLaser_Elemental": {
    "id": "C-ERMediumLaser_Elemental",
-   "name": "Clan Extended Range Medium Laser",
+   "name": "C-ER M Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
@@ -437,11 +455,12 @@
    "techBase": "Clan"
   },
   "C-ERPPC": {
-   "name": "Clan ER PPC",
+   "name": "C-ER PPC",
    "type": "weapon",
    "weaponType": "energy",
    "size": "large",
    "tonnage": 6.0,
+   "fullName": "Clan ER PPC",
    "tiers": {
     "1": {
      "damage": 19.5,
@@ -450,7 +469,8 @@
      "range": 1012.5,
      "maxRange": 2025.0,
      "rpm": 16.0,
-     "speed": 2057.0
+     "speed": 2057.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 1,
@@ -461,7 +481,7 @@
   },
   "C-ERSmallLaser_Elemental": {
    "id": "C-ERSmallLaser_Elemental",
-   "name": "Clan Extended Range Small Laser",
+   "name": "C-ER S Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "small",
@@ -482,11 +502,12 @@
    "techBase": "Clan"
   },
   "C-GaussRifle": {
-   "name": "Clan Gauss Rifle",
+   "name": "C-Gauss",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 12.0,
+   "fullName": "Clan Gauss Rifle",
    "tiers": {
     "1": {
      "damage": 21.0,
@@ -495,7 +516,8 @@
      "range": 825.0,
      "maxRange": 825.0,
      "rpm": 13.3,
-     "speed": 2500.0
+     "speed": 2500.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 1,
@@ -507,11 +529,12 @@
    "tier": "1"
   },
   "C-HeavyMachineGun": {
-   "name": "Clan Heavy Machine Gun",
+   "name": "C-Heavy Machine Gun",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 0.5,
+   "fullName": "Clan Heavy Machine Gun",
    "tiers": {
     "1": {
      "damage": 4.0,
@@ -519,7 +542,8 @@
      "cooldown": 0.1,
      "range": 192.0,
      "maxRange": 384.0,
-     "rpm": 600.0
+     "rpm": 600.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 1,
@@ -531,11 +555,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon10": {
-   "name": "C-LB 10-X Autocannon",
+   "name": "C-LB 10-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 10.0,
+   "fullName": "C-LB 10-X Autocannon",
    "tiers": {
     "1": {
      "damage": 1.3,
@@ -544,7 +569,8 @@
      "range": 675.0,
      "maxRange": 675.0,
      "rpm": 44.4,
-     "speed": 1125.0
+     "speed": 1125.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 13,
@@ -556,11 +582,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon2": {
-   "name": "C-LB 2-X Autocannon",
+   "name": "C-LB 2-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 5.0,
+   "fullName": "C-LB 2-X Autocannon",
    "tiers": {
     "1": {
      "damage": 1.3,
@@ -569,7 +596,8 @@
      "range": 1125.0,
      "maxRange": 1125.0,
      "rpm": 160.0,
-     "speed": 2125.0
+     "speed": 2125.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 3,
@@ -581,11 +609,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon20": {
-   "name": "C-LB 20-X Autocannon",
+   "name": "C-LB 20-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 12.0,
+   "fullName": "C-LB 20-X Autocannon",
    "tiers": {
     "1": {
      "damage": 1.3,
@@ -594,7 +623,8 @@
      "range": 450.0,
      "maxRange": 450.0,
      "rpm": 26.7,
-     "speed": 1000.0
+     "speed": 1000.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 25,
@@ -606,11 +636,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon2_Slug_Burst": {
-   "name": "C-LB 2-X Autocannon Slug Burst",
+   "name": "C-LB 2-X AC SOLID BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 5.0,
+   "fullName": "C-LB 2-X Autocannon Slug Burst",
    "tiers": {
     "1": {
      "damage": 0.78,
@@ -619,7 +650,8 @@
      "range": 1125.0,
      "maxRange": 1125.0,
      "rpm": 133.3,
-     "speed": 2250.0
+     "speed": 2250.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 4,
@@ -631,11 +663,12 @@
    "tier": "1"
   },
   "C-LBXAutocannon5": {
-   "name": "C-LB 5-X Autocannon",
+   "name": "C-LB 5-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 7.0,
+   "fullName": "C-LB 5-X Autocannon",
    "tiers": {
     "1": {
      "damage": 1.3,
@@ -644,7 +677,8 @@
      "range": 900.0,
      "maxRange": 900.0,
      "rpm": 88.9,
-     "speed": 1750.0
+     "speed": 1750.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 7,
@@ -656,11 +690,12 @@
    "tier": "1"
   },
   "C-LRM10": {
-   "name": "Clan LRM 10",
+   "name": "C-LRM 10",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 2.5,
+   "fullName": "Clan LRM 10",
    "tiers": {
     "1": {
      "damage": 1.68,
@@ -669,7 +704,8 @@
      "range": 1125.0,
      "maxRange": 1125.0,
      "rpm": 19.4,
-     "speed": 315.0
+     "speed": 315.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 10,
@@ -681,11 +717,12 @@
    "tier": "1"
   },
   "C-LRM5": {
-   "name": "Clan LRM 5",
+   "name": "C-LRM 5",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.0,
+   "fullName": "Clan LRM 5",
    "tiers": {
     "1": {
      "damage": 1.68,
@@ -694,7 +731,8 @@
      "range": 1125.0,
      "maxRange": 1125.0,
      "rpm": 18.2,
-     "speed": 315.0
+     "speed": 315.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 5,
@@ -706,11 +744,12 @@
    "tier": "1"
   },
   "C-LRM5_Artemis": {
-   "name": "Clan LRM 5 + Artemis IV",
+   "name": "C-LRM 5 + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 2.0,
+   "fullName": "Clan LRM 5 + Artemis IV",
    "tiers": {
     "1": {
      "damage": 1.68,
@@ -719,7 +758,8 @@
      "range": 1125.0,
      "maxRange": 1125.0,
      "rpm": 18.2,
-     "speed": 315.0
+     "speed": 315.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 5,
@@ -731,11 +771,12 @@
    "tier": "1"
   },
   "C-MachineGun": {
-   "name": "Clan Machine Gun",
+   "name": "C-Machine Gun",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 0.25,
+   "fullName": "Clan Machine Gun",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -743,7 +784,8 @@
      "cooldown": 0.1,
      "range": 240.0,
      "maxRange": 480.0,
-     "rpm": 600.0
+     "rpm": 600.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 1,
@@ -755,11 +797,12 @@
    "tier": "1"
   },
   "C-MediumPulseLaser": {
-   "name": "Clan Medium Pulse Laser",
+   "name": "C-MP Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 2.0,
+   "fullName": "Clan Medium Pulse Laser",
    "tiers": {
     "1": {
      "damage": 10.4,
@@ -767,7 +810,8 @@
      "cooldown": 2.55,
      "range": 450.0,
      "maxRange": 675.0,
-     "rpm": 23.5
+     "rpm": 23.5,
+     "manufacturer": "Albion MMA Complex"
     }
    },
    "volleyProjectiles": 1,
@@ -778,7 +822,7 @@
   },
   "C-SRM2_Elemental": {
    "id": "C-SRM2_Elemental",
-   "name": "Clan SRM 2",
+   "name": "C-SRM 2",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
@@ -800,11 +844,12 @@
    "techBase": "Clan"
   },
   "C-SRM6": {
-   "name": "Clan SRM 6",
+   "name": "C-SRM 6",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.5,
+   "fullName": "Clan SRM 6",
    "tiers": {
     "1": {
      "damage": 3.36,
@@ -813,7 +858,8 @@
      "range": 337.5,
      "maxRange": 337.5,
      "rpm": 23.5,
-     "speed": 500.0
+     "speed": 500.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 6,
@@ -825,11 +871,12 @@
    "tier": "1"
   },
   "C-StreakSRM2": {
-   "name": "Clan Streak SRM 2",
+   "name": "C-SSRM 2",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.0,
+   "fullName": "Clan Streak SRM 2",
    "tiers": {
     "1": {
      "damage": 3.36,
@@ -838,7 +885,8 @@
      "range": 450.0,
      "maxRange": 450.0,
      "rpm": 33.3,
-     "speed": 500.0
+     "speed": 500.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 2,
@@ -850,11 +898,12 @@
    "tier": "1"
   },
   "C-StreakSRM6": {
-   "name": "Clan Streak SRM 6",
+   "name": "C-SSRM 6",
    "type": "weapon",
    "weaponType": "missile",
    "size": "medium",
    "tonnage": 3.0,
+   "fullName": "Clan Streak SRM 6",
    "tiers": {
     "1": {
      "damage": 3.36,
@@ -863,7 +912,8 @@
      "range": 450.0,
      "maxRange": 450.0,
      "rpm": 30.3,
-     "speed": 560.0
+     "speed": 560.0,
+     "manufacturer": "Strana Mechty MechWorks"
     }
    },
    "volleyProjectiles": 6,
@@ -875,11 +925,12 @@
    "tier": "1"
   },
   "C-UltraAutocannon10_BurstFire": {
-   "name": "C-Ultra Autocannon 10 Burst Fire",
+   "name": "C-UAC/10 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 10.0,
+   "fullName": "C-Ultra Autocannon 10 Burst Fire",
    "tiers": {
     "1": {
      "damage": 1.98,
@@ -888,7 +939,8 @@
      "range": 675.0,
      "maxRange": 675.0,
      "rpm": 33.3,
-     "speed": 1125.0
+     "speed": 1125.0,
+     "manufacturer": "Type DL"
     }
    },
    "volleyProjectiles": 8,
@@ -900,11 +952,12 @@
    "tier": "1"
   },
   "C-UltraAutocannon2": {
-   "name": "C-Ultra Autocannon/2 Burst Fire",
+   "name": "C-UAC/2 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 5.0,
+   "fullName": "C-Ultra Autocannon/2 Burst Fire",
    "tiers": {
     "1": {
      "damage": 0.78,
@@ -913,7 +966,8 @@
      "range": 1012.5,
      "maxRange": 1012.5,
      "rpm": 133.3,
-     "speed": 2125.0
+     "speed": 2125.0,
+     "manufacturer": "Type DL"
     }
    },
    "volleyProjectiles": 4,
@@ -925,11 +979,12 @@
    "tier": "1"
   },
   "C-UltraAutocannon5": {
-   "name": "C-Ultra Autocannon/5 Burst",
+   "name": "C-UAC/5 BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 7.0,
+   "fullName": "C-Ultra Autocannon/5 Burst",
    "tiers": {
     "1": {
      "damage": 1.98,
@@ -938,7 +993,8 @@
      "range": 787.5,
      "maxRange": 787.5,
      "rpm": 76.1,
-     "speed": 1750.0
+     "speed": 1750.0,
+     "manufacturer": "Type DL"
     }
    },
    "volleyProjectiles": 4,
@@ -950,11 +1006,12 @@
    "tier": "1"
   },
   "ERMediumLaser": {
-   "name": "Extended Range Medium Laser",
+   "name": "ER M Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 1.0,
+   "fullName": "Extended Range Medium Laser",
    "tiers": {
     "1": {
      "damage": 5.0,
@@ -962,7 +1019,8 @@
      "cooldown": 4.0,
      "range": 360.0,
      "maxRange": 540.0,
-     "rpm": 15.0
+     "rpm": 15.0,
+     "manufacturer": "Magna Mk VI"
     }
    },
    "volleyProjectiles": 1,
@@ -984,7 +1042,8 @@
      "cooldown": 0.1,
      "range": 90.0,
      "maxRange": 90.0,
-     "rpm": 600.0
+     "rpm": 600.0,
+     "manufacturer": "Firestorm"
     }
    },
    "volleyProjectiles": 1,
@@ -994,11 +1053,12 @@
    "tier": "1"
   },
   "GaussRifle": {
-   "name": "Gauss Rifle",
+   "name": "Gauss",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 15.0,
+   "fullName": "Gauss Rifle",
    "tiers": {
     "1": {
      "damage": 15.0,
@@ -1007,7 +1067,8 @@
      "range": 660.0,
      "maxRange": 660.0,
      "rpm": 10.0,
-     "speed": 2000.0
+     "speed": 2000.0,
+     "manufacturer": "Dragon's Fire"
     }
    },
    "volleyProjectiles": 1,
@@ -1019,11 +1080,12 @@
    "tier": "1"
   },
   "HeavyRifle_Burst": {
-   "name": "Heavy Rifle Burst Fire",
+   "name": "Heavy Rifle BF",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 8.0,
+   "fullName": "Heavy Rifle Burst Fire",
    "tiers": {
     "1": {
      "damage": 7.0,
@@ -1032,23 +1094,26 @@
      "range": 660.0,
      "maxRange": 660.0,
      "rpm": 6.0,
-     "speed": 1200.0
+     "speed": 1200.0,
+     "manufacturer": "Grimm-Paixhans"
     }
    },
    "volleyProjectiles": 3,
    "volleyHeatShots": 3,
    "techBase": "Retro",
+   "dlc": 6,
    "ammoType": "Ammo.Ballistic.Rifle.Heavy",
    "ammoPerVolley": 1,
    "id": "HeavyRifle_Burst",
    "tier": "1"
   },
   "LBXAutocannon20": {
-   "name": "LB 20-X Autocannon",
+   "name": "LB 20-X AC",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 14.0,
+   "fullName": "LB 20-X Autocannon",
    "tiers": {
     "1": {
      "damage": 5.0,
@@ -1057,7 +1122,8 @@
      "range": 360.0,
      "maxRange": 360.0,
      "rpm": 20.0,
-     "speed": 600.0
+     "speed": 600.0,
+     "manufacturer": "Defiance Industries"
     }
    },
    "volleyProjectiles": 5,
@@ -1082,7 +1148,8 @@
      "range": 900.0,
      "maxRange": 900.0,
      "rpm": 15.0,
-     "speed": 200.0
+     "speed": 200.0,
+     "manufacturer": "Telos Delta Cluster"
     }
    },
    "volleyProjectiles": 10,
@@ -1094,11 +1161,12 @@
    "tier": "1"
   },
   "LRM10_Artemis_Stream": {
-   "name": "LRM 10 Stream + Artemis IV",
+   "name": "LRM 10 ST + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "medium",
    "tonnage": 6.0,
+   "fullName": "LRM 10 Stream + Artemis IV",
    "tiers": {
     "1": {
      "damage": 1.2,
@@ -1107,7 +1175,8 @@
      "range": 900.0,
      "maxRange": 900.0,
      "rpm": 15.0,
-     "speed": 200.0
+     "speed": 200.0,
+     "manufacturer": "Federated"
     }
    },
    "volleyProjectiles": 10,
@@ -1142,11 +1211,12 @@
    "techBase": "InnerSphere"
   },
   "LRM10_Stream": {
-   "name": "LRM 10 Stream",
+   "name": "LRM 10 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "medium",
    "tonnage": 5.0,
+   "fullName": "LRM 10 Stream",
    "tiers": {
     "1": {
      "damage": 1.2,
@@ -1155,7 +1225,8 @@
      "range": 900.0,
      "maxRange": 900.0,
      "rpm": 15.0,
-     "speed": 200.0
+     "speed": 200.0,
+     "manufacturer": "Federated"
     }
    },
    "volleyProjectiles": 10,
@@ -1167,11 +1238,12 @@
    "tier": "1"
   },
   "LRM15_Artemis_Stream": {
-   "name": "LRM 15 Stream + Artemis IV",
+   "name": "LRM 15 ST + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "large",
    "tonnage": 8.0,
+   "fullName": "LRM 15 Stream + Artemis IV",
    "tiers": {
     "1": {
      "damage": 1.2,
@@ -1180,7 +1252,8 @@
      "range": 900.0,
      "maxRange": 900.0,
      "rpm": 15.0,
-     "speed": 200.0
+     "speed": 200.0,
+     "manufacturer": "Coventry Star Fire"
     }
    },
    "volleyProjectiles": 15,
@@ -1205,7 +1278,8 @@
      "range": 900.0,
      "maxRange": 900.0,
      "rpm": 15.0,
-     "speed": 200.0
+     "speed": 200.0,
+     "manufacturer": "Telos Delta Cluster"
     }
    },
    "volleyProjectiles": 20,
@@ -1217,11 +1291,12 @@
    "tier": "1"
   },
   "LRM20_Stream": {
-   "name": "LRM 20 Stream",
+   "name": "LRM 20 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "large",
    "tonnage": 10.0,
+   "fullName": "LRM 20 Stream",
    "tiers": {
     "1": {
      "damage": 1.2,
@@ -1230,7 +1305,8 @@
      "range": 900.0,
      "maxRange": 900.0,
      "rpm": 15.0,
-     "speed": 200.0
+     "speed": 200.0,
+     "manufacturer": "Coventry Star Fire"
     }
    },
    "volleyProjectiles": 20,
@@ -1255,7 +1331,8 @@
      "range": 900.0,
      "maxRange": 900.0,
      "rpm": 15.0,
-     "speed": 200.0
+     "speed": 200.0,
+     "manufacturer": "Telos Delta Cluster"
     }
    },
    "volleyProjectiles": 5,
@@ -1267,11 +1344,12 @@
    "tier": "1"
   },
   "LRM5_Stream_Lvl0": {
-   "name": "LRM 5 Stream",
+   "name": "LRM 5 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 2.0,
+   "fullName": "LRM 5 Stream",
    "tiers": {
     "0": {
      "damage": 1.2,
@@ -1280,7 +1358,8 @@
      "range": 720.0,
      "maxRange": 720.0,
      "rpm": 13.6,
-     "speed": 160.0
+     "speed": 160.0,
+     "manufacturer": "Sian/Ceres Jaguar"
     }
    },
    "volleyProjectiles": 5,
@@ -1292,11 +1371,12 @@
    "tier": "0"
   },
   "LargeLaser": {
-   "name": "Large Laser",
+   "name": "L Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "large",
    "tonnage": 5.0,
+   "fullName": "Large Laser",
    "tiers": {
     "1": {
      "damage": 10.0,
@@ -1304,7 +1384,8 @@
      "cooldown": 5.25,
      "range": 450.0,
      "maxRange": 675.0,
-     "rpm": 11.4
+     "rpm": 11.4,
+     "manufacturer": "Magna Mk.III"
     }
    },
    "volleyProjectiles": 1,
@@ -1315,7 +1396,7 @@
   },
   "LargeLaser_Turret": {
    "id": "LargeLaser_Turret",
-   "name": "Large Laser",
+   "name": "L Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "large",
@@ -1336,11 +1417,12 @@
    "techBase": "InnerSphere"
   },
   "LargePulseLaser": {
-   "name": "Large Pulse Laser",
+   "name": "LP Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "large",
    "tonnage": 7.0,
+   "fullName": "Large Pulse Laser",
    "tiers": {
     "1": {
      "damage": 12.0,
@@ -1348,7 +1430,8 @@
      "cooldown": 4.5,
      "range": 365.0,
      "maxRange": 547.5,
-     "rpm": 13.3
+     "rpm": 13.3,
+     "manufacturer": "Magna 900P"
     }
    },
    "volleyProjectiles": 1,
@@ -1358,11 +1441,12 @@
    "tier": "1"
   },
   "LightAutocannon2": {
-   "name": "Light Autocannon/2",
+   "name": "LAC/2",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "small",
    "tonnage": 4.0,
+   "fullName": "Light Autocannon/2",
    "tiers": {
     "1": {
      "damage": 2.0,
@@ -1371,7 +1455,8 @@
      "range": 540.0,
      "maxRange": 540.0,
      "rpm": 88.2,
-     "speed": 950.0
+     "speed": 950.0,
+     "manufacturer": "Mydron Model D"
     }
    },
    "volleyProjectiles": 1,
@@ -1383,11 +1468,12 @@
    "tier": "1"
   },
   "LightGaussRifle": {
-   "name": "Light Gauss Rifle",
+   "name": "Light Gauss",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 12.0,
+   "fullName": "Light Gauss Rifle",
    "tiers": {
     "1": {
      "damage": 8.0,
@@ -1396,7 +1482,8 @@
      "range": 510.0,
      "maxRange": 750.0,
      "rpm": 20.0,
-     "speed": 2200.0
+     "speed": 2200.0,
+     "manufacturer": "Defiance Industries"
     }
    },
    "volleyProjectiles": 1,
@@ -1421,7 +1508,8 @@
      "range": 550.0,
      "maxRange": 550.0,
      "rpm": 15.4,
-     "speed": 500.0
+     "speed": 500.0,
+     "manufacturer": "Vandenberg Mechanized Industries"
     }
    },
    "volleyProjectiles": 10,
@@ -1468,7 +1556,8 @@
      "cooldown": 0.1,
      "range": 130.0,
      "maxRange": 130.0,
-     "rpm": 600.0
+     "rpm": 600.0,
+     "manufacturer": "Deprus RF"
     }
    },
    "volleyProjectiles": 1,
@@ -1480,11 +1569,12 @@
    "tier": "1"
   },
   "MediumLaser": {
-   "name": "Medium Laser",
+   "name": "M Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 1.0,
+   "fullName": "Medium Laser",
    "tiers": {
     "1": {
      "damage": 5.0,
@@ -1492,7 +1582,8 @@
      "cooldown": 4.0,
      "range": 270.0,
      "maxRange": 405.0,
-     "rpm": 15.0
+     "rpm": 15.0,
+     "manufacturer": "Magna Mk.II"
     }
    },
    "volleyProjectiles": 1,
@@ -1502,11 +1593,12 @@
    "tier": "1"
   },
   "MediumPulseLaser": {
-   "name": "Medium Pulse Laser",
+   "name": "MP Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "medium",
    "tonnage": 2.0,
+   "fullName": "Medium Pulse Laser",
    "tiers": {
     "1": {
      "damage": 6.0,
@@ -1514,7 +1606,8 @@
      "cooldown": 3.25,
      "range": 220.0,
      "maxRange": 330.0,
-     "rpm": 18.5
+     "rpm": 18.5,
+     "manufacturer": "Magna 400P"
     }
    },
    "volleyProjectiles": 1,
@@ -1537,7 +1630,8 @@
      "range": 460.0,
      "maxRange": 920.0,
      "rpm": 12.0,
-     "speed": 1040.0
+     "speed": 1040.0,
+     "manufacturer": "Kreuss"
     }
    },
    "volleyProjectiles": 1,
@@ -1605,7 +1699,8 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 21.4,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Arrowlite"
     }
    },
    "volleyProjectiles": 2,
@@ -1617,11 +1712,12 @@
    "tier": "1"
   },
   "SRM2_Inferno": {
-   "name": "SRM 2 Inferno",
+   "name": "SRM 2 INF",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.0,
+   "fullName": "SRM 2 Inferno",
    "tiers": {
     "1": {
      "damage": 1.8,
@@ -1630,12 +1726,14 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 21.4,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Hellespont Industrials"
     }
    },
    "volleyProjectiles": 2,
    "volleyHeatShots": 2,
    "techBase": "InnerSphere",
+   "dlc": 7,
    "ammoType": "Ammo.Missile.SRM",
    "ammoPerVolley": 2,
    "id": "SRM2_Inferno",
@@ -1655,7 +1753,8 @@
      "range": 216.0,
      "maxRange": 216.0,
      "rpm": 19.5,
-     "speed": 320.0
+     "speed": 320.0,
+     "manufacturer": "Marklin Mini Missile"
     }
    },
    "volleyProjectiles": 2,
@@ -1667,11 +1766,12 @@
    "tier": "0"
   },
   "SRM2_Stream": {
-   "name": "SRM 2 Stream",
+   "name": "SRM 2 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.0,
+   "fullName": "SRM 2 Stream",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -1680,7 +1780,8 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 26.3,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Coventry"
     }
    },
    "volleyProjectiles": 2,
@@ -1728,7 +1829,8 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 17.6,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Shannon Force"
     }
    },
    "volleyProjectiles": 4,
@@ -1740,11 +1842,12 @@
    "tier": "1"
   },
   "SRM4_Artemis": {
-   "name": "SRM 4 + Artemis IV",
+   "name": "SRM 4 + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 3.0,
+   "fullName": "SRM 4 + Artemis IV",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -1753,7 +1856,8 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 17.6,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Shannon Force"
     }
    },
    "volleyProjectiles": 4,
@@ -1778,7 +1882,8 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 17.6,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Arrowlite"
     }
    },
    "volleyProjectiles": 6,
@@ -1790,11 +1895,12 @@
    "tier": "1"
   },
   "SRM6_Artemis_Stream": {
-   "name": "SRM 6 Stream + Artemis IV",
+   "name": "SRM 6 ST + Art IV",
    "type": "weapon",
    "weaponType": "missile",
    "size": "medium",
    "tonnage": 4.0,
+   "fullName": "SRM 6 Stream + Artemis IV",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -1803,7 +1909,8 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 29.3,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Coventry 90 m"
     }
    },
    "volleyProjectiles": 6,
@@ -1828,7 +1935,8 @@
      "range": 216.0,
      "maxRange": 216.0,
      "rpm": 16.0,
-     "speed": 320.0
+     "speed": 320.0,
+     "manufacturer": "Telos-6"
     }
    },
    "volleyProjectiles": 6,
@@ -1863,11 +1971,12 @@
    "techBase": "InnerSphere"
   },
   "SmallLaser": {
-   "name": "Small Laser",
+   "name": "S Laser",
    "type": "weapon",
    "weaponType": "energy",
    "size": "small",
    "tonnage": 0.5,
+   "fullName": "Small Laser",
    "tiers": {
     "1": {
      "damage": 3.0,
@@ -1875,7 +1984,8 @@
      "cooldown": 2.25,
      "range": 150.0,
      "maxRange": 225.0,
-     "rpm": 26.7
+     "rpm": 26.7,
+     "manufacturer": "Magna Mk.I"
     }
    },
    "volleyProjectiles": 1,
@@ -1885,11 +1995,12 @@
    "tier": "1"
   },
   "StreakSRM2": {
-   "name": "Streak SRM 2",
+   "name": "SSRM 2",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.5,
+   "fullName": "Streak SRM 2",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -1898,7 +2009,8 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 30.0,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Coventry T4H"
     }
    },
    "volleyProjectiles": 2,
@@ -1910,11 +2022,12 @@
    "tier": "1"
   },
   "StreakSRM2_Stream": {
-   "name": "Streak SRM 2 Stream",
+   "name": "SSRM 2 ST",
    "type": "weapon",
    "weaponType": "missile",
    "size": "small",
    "tonnage": 1.5,
+   "fullName": "Streak SRM 2 Stream",
    "tiers": {
     "1": {
      "damage": 2.4,
@@ -1923,7 +2036,8 @@
      "range": 270.0,
      "maxRange": 270.0,
      "rpm": 33.3,
-     "speed": 400.0
+     "speed": 400.0,
+     "manufacturer": "Coventry T4H"
     }
    },
    "volleyProjectiles": 2,
@@ -1935,11 +2049,12 @@
    "tier": "1"
   },
   "UltraAutocannon10_Single": {
-   "name": "Ultra Autocannon 10",
+   "name": "UAC/10",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "medium",
    "tonnage": 13.0,
+   "fullName": "Ultra Autocannon 10",
    "tiers": {
     "1": {
      "damage": 10.0,
@@ -1948,7 +2063,8 @@
      "range": 540.0,
      "maxRange": 540.0,
      "rpm": 15.0,
-     "speed": 800.0
+     "speed": 800.0,
+     "manufacturer": "Defiance Industries"
     }
    },
    "volleyProjectiles": 1,
@@ -1960,11 +2076,12 @@
    "tier": "1"
   },
   "UltraAutocannon20_Single": {
-   "name": "Ultra Autocannon 20",
+   "name": "UAC/20",
    "type": "weapon",
    "weaponType": "ballistic",
    "size": "large",
    "tonnage": 15.0,
+   "fullName": "Ultra Autocannon 20",
    "tiers": {
     "1": {
      "damage": 20.0,
@@ -1973,7 +2090,8 @@
      "range": 360.0,
      "maxRange": 360.0,
      "rpm": 12.0,
-     "speed": 500.0
+     "speed": 500.0,
+     "manufacturer": "Defiance Industries"
     }
    },
    "volleyProjectiles": 1,

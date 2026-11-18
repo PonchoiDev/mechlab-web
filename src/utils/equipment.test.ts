@@ -235,7 +235,7 @@ describe('createEquippedItem', () => {
     const second = createEquippedItem(laser);
 
     expect(first.instanceId).not.toBe(second.instanceId);
-    expect(first).toMatchObject({ id: 'MediumLaser', name: 'Medium Laser' });
+    expect(first).toMatchObject({ id: 'MediumLaser', name: 'M Laser' });
   });
 
   it('guarda la ranura solo cuando se indica', () => {

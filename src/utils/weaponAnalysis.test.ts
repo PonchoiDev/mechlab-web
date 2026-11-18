@@ -32,8 +32,8 @@ describe('tiempos de calor', () => {
 
 describe('tonelaje junto al nombre', () => {
   it('CA3: «Autocannon/5 (8t)»', () => {
-    expect(getWeaponLabel(getItem('Autocannon5'))).toBe('Autocannon/5 (8t)');
-    expect(getWeaponLabel(getItem('MediumLaser'))).toBe('Medium Laser (1t)');
+    expect(getWeaponLabel(getItem('Autocannon5'))).toBe('AC/5 (8t)');
+    expect(getWeaponLabel(getItem('MediumLaser'))).toBe('M Laser (1t)');
   });
 });
 

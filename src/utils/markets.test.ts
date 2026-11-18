@@ -45,7 +45,7 @@ describe('mercados especiales', () => {
   });
 
   it('CA5: las armas llevan su tier como en el MechLab', () => {
-    expect(market('Bangor', 9).weapons).toContainEqual({ name: 'Ultra Autocannon 10', tier: 'Lost Tech tier', count: 1 });
+    expect(market('Bangor', 9).weapons).toContainEqual({ name: 'UAC/10', fullName: 'Ultra Autocannon 10', tier: 'Lost Tech tier', count: 1 });
   });
 
   it('solo lista lo que se vende: ninguna arma ni equipo con cantidad 0', () => {

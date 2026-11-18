@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-18-weapon-names',
+    date: '2026-11-18',
+    title: 'Short weapon names, like in the game',
+    items: [
+      'Weapons use their short in-game names everywhere: C-ER L Laser, AC/10 RF, AC/10 BF, UAC/10, L Laser SB, LB 10-X AC SOLID. Before, some had the short name and others the long one',
+      'Search a weapon by its short or full name, without typing slashes or dashes: ac10 rf, uac10 or autocannon 10 all work. Hover a weapon name to see its full name',
+      'Thanks to the player who pointed it out'
+    ]
+  },
+  {
     id: '2026-11-18-chassis-list',
     date: '2026-11-18',
     title: 'Chassis list',

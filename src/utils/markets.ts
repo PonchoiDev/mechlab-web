@@ -33,7 +33,8 @@ export const searchMarkets = (data: StarmapData, query: string): MarketResult[] 
     const inSystem = systemName.get(market.system)?.includes(needle);
     const matches = [
       ...hits(market.mechs.map(mech => `${mech.name} ${mech.id}`)),
-      ...hits(market.weapons.map(weapon => weapon.name)),
+      // Por el nombre abreviado o el completo, y se enseña el abreviado.
+      ...market.weapons.filter(weapon => normalize(`${weapon.name} ${weapon.fullName ?? ''}`).includes(needle)).map(weapon => weapon.name),
       ...hits(market.equipment.map(item => item.name))
     ];
     return inSystem || matches.length ? [{ system: market.system, market, matches: [...new Set(matches)] }] : [];

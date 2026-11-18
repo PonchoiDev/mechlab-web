@@ -92,10 +92,14 @@ export interface ItemFilters {
   weaponType?: WeaponType | null;
 }
 
-// El nombre o el nombre corto del juego: mucha gente busca «TAG» o «AC/10», que no están en el completo.
+// Sin mayúsculas, espacios, barras ni guiones: «ac10rf» y «ac/10 rf» encuentran el AC/10 RF, y escribir la barra
+// es incómodo.
+const compact = (text: string) => text.toLowerCase().replace(/[\s/-]+/g, '');
+
+// Por el nombre abreviado o por el completo: unos buscan «AC/10 RF» y otros «Autocannon/10 rapid-fire».
 export const matchesItemName = (item: Item, query: string): boolean => {
-  const text = query.trim().toLowerCase();
-  return !text || item.name.toLowerCase().includes(text) || (item.shortName ?? '').toLowerCase().includes(text);
+  const text = compact(query);
+  return !text || [item.name, item.fullName ?? '', item.shortName ?? ''].some(name => compact(name).includes(text));
 };
 
 export const filterItems = (items: Item[], { search = '', techBase = null, weaponType = null }: ItemFilters): Item[] => {
