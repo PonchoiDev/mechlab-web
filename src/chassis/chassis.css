@@ -1,0 +1,124 @@
+/* Lista de chasis: la tabla de la página de armas (equipment.css) con un naranja propio, distinto del violeta
+   del equipo, el rojo de las unidades, el azul de los pilotos y el amarillo del mapa.
+   :root:root:root pesa más que el :root:root de equipment.css. */
+:root:root:root {
+  --units-accent: #ff9f1c;
+  --chassis-omni: #d8dfd4;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 159, 28, 0.13), transparent 55%),
+    var(--units-bg);
+  background-attachment: fixed;
+}
+
+.chassis-controls .units-kinds { flex-wrap: wrap; }
+
+.chassis .arsenal-filters label select + select { margin-left: 4px; }
+
+/* Anclajes mínimos, como los contadores del selector de 'Mechs */
+.chassis-minimums {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--units-muted);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chassis-minimums > span:first-child { cursor: help; }
+
+.chassis-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--units-line);
+  color: var(--chassis-type, var(--units-text));
+}
+
+.chassis-stepper.is-active { border-color: var(--chassis-type, var(--units-text)); }
+
+.chassis-stepper button {
+  width: 28px;
+  height: 30px;
+  border: 0;
+  background: none;
+  color: var(--units-muted);
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.chassis-stepper button:hover:not(:disabled) { color: var(--units-text); }
+.chassis-stepper button:disabled { opacity: 0.35; cursor: default; }
+.chassis-stepper > span { min-width: 44px; text-align: center; letter-spacing: 0.04em; }
+.chassis-stepper b { margin-right: 2px; color: var(--units-text); font-size: 16px; }
+
+[data-type='energy'] { --chassis-type: var(--arsenal-energy); }
+[data-type='ballistic'] { --chassis-type: var(--arsenal-ballistic); }
+[data-type='missile'] { --chassis-type: var(--arsenal-missile); }
+[data-type='omni'] { --chassis-type: var(--chassis-omni); }
+[data-type='artillery'] { --chassis-type: var(--arsenal-artillery); }
+[data-type='ams'] { --chassis-type: var(--arsenal-ams); }
+
+.chassis-count {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 10px;
+  color: var(--units-muted);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.chassis-count button {
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--units-line);
+  background: none;
+  color: var(--units-text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chassis-count button:hover, .chassis-count button:focus-visible { border-color: var(--units-accent); outline: none; }
+
+/* Tabla */
+.chassis-table tbody tr:hover > * { background-color: rgba(255, 159, 28, 0.09); }
+.chassis-table tbody tr:hover > th:first-child { background-color: #1d1710; }
+
+.chassis-link { color: inherit; text-decoration: none; }
+.chassis-link:hover .arsenal-weapon-name,
+.chassis-link:focus-visible .arsenal-weapon-name { color: var(--units-accent); text-decoration: underline; text-underline-offset: 3px; }
+.chassis-link:focus-visible { outline: none; }
+.chassis-variant { color: var(--units-muted); font-weight: 600; }
+
+.chassis-spec { font-weight: 700; white-space: nowrap; }
+.chassis-spec.is-xl { color: #ffd23f; }
+.chassis-spec.is-dhs { color: #5fa8ff; }
+.chassis-spec.is-endo { color: #b48cff; }
+.chassis-spec.is-ferro { color: #ff5a4f; }
+.chassis-spec.is-ap { color: #00d2ff; }
+
+.chassis-hardpoints { display: inline-flex; gap: 7px; }
+.chassis-hardpoints > span { color: var(--chassis-type); font-weight: 700; }
+.chassis-table td.is-hardpoints { text-align: left; }
+.chassis-table td.is-engine small { color: #ffd23f; font-size: 13px; font-weight: 700; }
+
+/* Las cifras de la build de serie, con un fondo propio para separarlas de las del chasis */
+.chassis-table th.is-stock,
+.chassis-table td.is-stock { background-image: linear-gradient(rgba(255, 159, 28, 0.06), rgba(255, 159, 28, 0.06)); }
+.chassis-table thead th.is-stock { color: #e9c79a; }
+
+@media (max-width: 760px) {
+  .chassis-minimums { font-size: 12px; }
+  .chassis .arsenal-weapon-name, .chassis .arsenal-weapon-meta { max-width: 170px; }
+  .chassis-table .arsenal-weapon-meta { gap: 0 5px; font-size: 12px; }
+  .chassis-variant { display: block; }
+}
