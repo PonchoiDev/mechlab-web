@@ -83,9 +83,9 @@ El MechLab enseña las cifras de cada arma cuando se monta, pero no hay un sitio
 | CA7 | Las armas en tier 1 | se ordenan por DPS / daño por tonelada / nombre / munición por tonelada | la primera es Clan Heavy Machine Gun (40 de DPS) / Light Knuckles (30) / AMS, Arrow IV y Assault Arena Fist. Al pulsar otra vez DPS, la última es Clan Heavy Machine Gun. Las armas sin munición van al final en los dos sentidos |
 | CA8 | El equipo | se agrupa por categorías | 3 heat sinks, 5 jump jets, 20 motive upgrades, 8 electronics (4 ECM y 4 sondas), 7 targeting computers y 106 municiones |
 | CA9 | Los efectos | se piden | Single Heat Sink: +0,1 de refrigeración y +1 de capacidad. Jump Jets Class III: 12,5 m/s, 2,75 s, 8 s y 'Mechs de 60 a 75 t. MASC MK II: +50 % de velocidad, ×4 de aceleración, +45 % de giro y daña las piernas. Guardian ECM: 220 y 400 m. Beagle Active Probe: 450 m y +25 % de sensores. Targeting Computer Mk7: +22 % de sensores, +35 % de velocidad del proyectil y +10 % de alcance de los láseres |
-| CA10 | La munición del AC/10 | se consulta | 1 t, 1 ranura, 40 cargas, 10 de daño por carga al explotar, la usan Autocannon/10, Autocannon/10 rapid-fire y Autocannon/10 Burst Fire |
+| CA10 | La munición del AC/10 | se consulta | 1 t, 1 ranura, 40 cargas, 10 de daño por carga al explotar, la usan Autocannon/10, Autocannon/10 Rapid-Fire y Autocannon/10 Burst Fire |
 | CA11 | La vista | se guarda en la URL y se lee | conserva la pestaña (Weapons si no hay ninguna), la búsqueda, el tipo, el tamaño, la tecnología, el DLC, el tier (1 si no hay), el orden y su sentido, y la categoría del equipo; ignora lo que no conoce |
-| CA12 | Las armas | se busca «tag» / «ac/10-rf» en la pestaña de armas y en el selector del MechLab | sale el Target Acquisition Gear y su versión Clan, por su nombre corto TAG / el Autocannon/10 rapid-fire. «Target» sigue encontrando el TAG por su nombre |
+| CA12 | Las armas | se busca «tag» / «ac/10-rf» en la pestaña de armas y en el selector del MechLab | sale el Target Acquisition Gear y su versión Clan, por su nombre corto TAG / el Autocannon/10 Rapid-Fire. «Target» sigue encontrando el TAG por su nombre |
 | CA13 | El catálogo | se busca el Heavy Gauss Rifle y su munición | no están: su fecha de introducción (3061) es posterior al final del juego |
 
 ## Fuera de alcance

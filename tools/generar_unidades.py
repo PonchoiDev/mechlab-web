@@ -4,6 +4,7 @@ import re
 import sys
 from collections import Counter
 
+from generar_items import REGLAS_NOMBRE, normalizar
 from generar_mapa import RAREZAS, REGEX_RAREZA
 from generar_mechs import REGEX_ROL, ROLES, leer_archivo, separar_palabras
 
@@ -123,9 +124,11 @@ def arma_de_unidad(id_arma, arma, items):
         item["tiers"] = {tier: items[base]["tiers"][tier]}
         return {**item, "id": id_arma, "tier": tier}
     estadisticas, proyectiles, calor = estadisticas_de_arma(arma)
-    # El tipo y la tecnología, del arma de 'Mech con el mismo nombre (el AC/5 del Scorpion es un AC/5).
-    pariente = next((item for item in items.values() if item["type"] == "weapon" and item["name"] == arma["Name"]), {})
-    item = {"id": id_arma, "name": arma["Name"], "type": "weapon", "weaponType": pariente.get("weaponType"),
+    # Con los mismos nombres que las armas de 'Mech (generar_items.py), y de ahí el tipo y la tecnología
+    # del arma con el mismo nombre (el AC/5 del Scorpion es un AC/5).
+    nombre = normalizar(arma["Name"], REGLAS_NOMBRE)
+    pariente = next((item for item in items.values() if item["type"] == "weapon" and item["name"] == nombre), {})
+    item = {"id": id_arma, "name": nombre, "type": "weapon", "weaponType": pariente.get("weaponType"),
             "size": pariente.get("size", "small"), "tonnage": 0, "tiers": {"1": estadisticas},
             "volleyProjectiles": proyectiles, "volleyHeatShots": calor, "tier": "1"}
     if pariente.get("techBase"):

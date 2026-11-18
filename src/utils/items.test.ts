@@ -277,12 +277,12 @@ describe('nombres coherentes de las armas y el equipo', () => {
 
   it('Clan delante de todo lo Clan, también en las balísticas, la munición y el MASC', () => {
     expect(names.filter(name => name.startsWith('C-'))).toEqual([]);
-    expect(getItem('C-UltraAutocannon5').name).toBe('Clan Ultra Autocannon/5');
+    expect(getItem('C-UltraAutocannon5_Single').name).toBe('Clan Ultra Autocannon/5');
   });
 
   it('los Ultra AC con barra, y Rapid-Fire, Burst Fire y Solid Slug escritos siempre igual', () => {
     expect(names.filter(name => /Ultra Autocannon \d/.test(name))).toEqual([]);
-    expect(names.filter(name => /rapid-fire| Burst$|Slug Burst$|Solid Burst|Autocannon Slug/.test(name))).toEqual([]);
+    expect(names.filter(name => /rapid-fire|Autocannon\/\d+ Burst$|Slug Burst$|Solid Burst|Autocannon Slug/.test(name))).toEqual([]);
   });
 
   it('sin espacios dobles ni en los nombres ni en los nombres cortos', () => {

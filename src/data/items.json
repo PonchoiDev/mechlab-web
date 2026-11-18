@@ -874,7 +874,7 @@
   },
   "Autocannon10_Auto": {
     "id": "Autocannon10_Auto",
-    "name": "Autocannon/10 rapid-fire",
+    "name": "Autocannon/10 Rapid-Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -1179,7 +1179,7 @@
   },
   "Autocannon20_Auto": {
     "id": "Autocannon20_Auto",
-    "name": "Autocannon/20 rapid-fire",
+    "name": "Autocannon/20 Rapid-Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "large",
@@ -1332,7 +1332,7 @@
   },
   "Autocannon2_Auto": {
     "id": "Autocannon2_Auto",
-    "name": "Autocannon/2 rapid-fire",
+    "name": "Autocannon/2 Rapid-Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "small",
@@ -1561,7 +1561,7 @@
   },
   "Autocannon5_Auto": {
     "id": "Autocannon5_Auto",
-    "name": "Autocannon/5 rapid-fire",
+    "name": "Autocannon/5 Rapid-Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -2178,7 +2178,7 @@
   },
   "C-ArrowIV_AmmoEquipment": {
     "id": "C-ArrowIV_AmmoEquipment",
-    "name": "C-Arrow IV Ammo",
+    "name": "Clan Arrow IV Ammo",
     "type": "ammo",
     "weaponType": "artillery",
     "size": "small",
@@ -2196,7 +2196,7 @@
   },
   "C-ArrowIV_Half_AmmoEquipment": {
     "id": "C-ArrowIV_Half_AmmoEquipment",
-    "name": "C-Arrow IV Half Ammo",
+    "name": "Clan Arrow IV Half Ammo",
     "type": "ammo",
     "weaponType": "artillery",
     "size": "small",
@@ -2237,7 +2237,7 @@
   },
   "C-ERMediumLaser": {
     "id": "C-ERMediumLaser",
-    "name": "Clan Extended Range Medium Laser",
+    "name": "Clan ER Medium Laser",
     "type": "weapon",
     "weaponType": "energy",
     "size": "medium",
@@ -2284,7 +2284,7 @@
   },
   "C-ERSmallLaser": {
     "id": "C-ERSmallLaser",
-    "name": "Clan Extended Range Small Laser",
+    "name": "Clan ER Small Laser",
     "type": "weapon",
     "weaponType": "energy",
     "size": "small",
@@ -2450,7 +2450,7 @@
   },
   "C-LBXAutocannon10": {
     "id": "C-LBXAutocannon10",
-    "name": "C-LB 10-X Autocannon",
+    "name": "Clan LB 10-X Autocannon",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -2476,7 +2476,7 @@
   },
   "C-LBXAutocannon10_Slug": {
     "id": "C-LBXAutocannon10_Slug",
-    "name": "C-LB 10-X Autocannon Slug",
+    "name": "Clan LB 10-X Autocannon Solid Slug",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -2502,7 +2502,7 @@
   },
   "C-LBXAutocannon10_Slug_BurstFire": {
     "id": "C-LBXAutocannon10_Slug_BurstFire",
-    "name": "C-LB 10-X Autocannon Slug Burst",
+    "name": "Clan LB 10-X Autocannon Solid Slug Burst Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -2528,7 +2528,7 @@
   },
   "C-LBXAutocannon2": {
     "id": "C-LBXAutocannon2",
-    "name": "C-LB 2-X Autocannon",
+    "name": "Clan LB 2-X Autocannon",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "small",
@@ -2554,7 +2554,7 @@
   },
   "C-LBXAutocannon20": {
     "id": "C-LBXAutocannon20",
-    "name": "C-LB 20-X Autocannon",
+    "name": "Clan LB 20-X Autocannon",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "large",
@@ -2580,12 +2580,12 @@
   },
   "C-LBXAutocannon20_SLD": {
     "id": "C-LBXAutocannon20_SLD",
-    "name": "C-LB 20-X Autocannon Solid Slug",
+    "name": "Clan LB 20-X Autocannon Solid Slug",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "large",
     "tonnage": 12.0,
-    "shortName": "C-LB 20-X AC SLD",
+    "shortName": "C-LB 20-X AC-SLD",
     "tiers": {
       "1": {
         "damage": 26.0,
@@ -2606,12 +2606,12 @@
   },
   "C-LBXAutocannon20_SLD_Burst": {
     "id": "C-LBXAutocannon20_SLD_Burst",
-    "name": "C-LB 20-X Autocannon Solid Burst",
+    "name": "Clan LB 20-X Autocannon Solid Slug Burst Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "large",
     "tonnage": 12.0,
-    "shortName": "C-LB 20-X AC SLD BF",
+    "shortName": "C-LB 20-X AC-SLD BF",
     "tiers": {
       "1": {
         "damage": 2.6,
@@ -2632,7 +2632,7 @@
   },
   "C-LBXAutocannon2_Slug": {
     "id": "C-LBXAutocannon2_Slug",
-    "name": "C-LB 2-X Autocannon Slug",
+    "name": "Clan LB 2-X Autocannon Solid Slug",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "small",
@@ -2658,7 +2658,7 @@
   },
   "C-LBXAutocannon2_Slug_Burst": {
     "id": "C-LBXAutocannon2_Slug_Burst",
-    "name": "C-LB 2-X Autocannon Slug Burst",
+    "name": "Clan LB 2-X Autocannon Solid Slug Burst Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "small",
@@ -2684,7 +2684,7 @@
   },
   "C-LBXAutocannon5": {
     "id": "C-LBXAutocannon5",
-    "name": "C-LB 5-X Autocannon",
+    "name": "Clan LB 5-X Autocannon",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -2710,12 +2710,12 @@
   },
   "C-LBXAutocannon5_Solid": {
     "id": "C-LBXAutocannon5_Solid",
-    "name": "C-LB 5-X Autocannon Solid Slug",
+    "name": "Clan LB 5-X Autocannon Solid Slug",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
     "tonnage": 7.0,
-    "shortName": "C-LB 5-X AC SLD",
+    "shortName": "C-LB 5-X AC-SLD",
     "tiers": {
       "1": {
         "damage": 6.5,
@@ -2736,12 +2736,12 @@
   },
   "C-LBXAutocannon5_Solid_Burst": {
     "id": "C-LBXAutocannon5_Solid_Burst",
-    "name": "C-LB 5-X Autocannon Solid Burst",
+    "name": "Clan LB 5-X Autocannon Solid Slug Burst Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
     "tonnage": 7.0,
-    "shortName": "C-LB 5-X AC SLD BF",
+    "shortName": "C-LB 5-X AC-SLD BF",
     "tiers": {
       "1": {
         "damage": 2.6,
@@ -2897,7 +2897,7 @@
     "weaponType": "missile",
     "size": "large",
     "tonnage": 6.0,
-    "shortName": "C-LRM 20  + Art IV",
+    "shortName": "C-LRM 20 + Art IV",
     "tiers": {
       "1": {
         "damage": 1.68,
@@ -3170,12 +3170,12 @@
   },
   "C-SRM4_Artemis": {
     "id": "C-SRM4_Artemis",
-    "name": "Clan SRM 4  + Artemis IV",
+    "name": "Clan SRM 4 + Artemis IV",
     "type": "weapon",
     "weaponType": "missile",
     "size": "small",
     "tonnage": 2.0,
-    "shortName": "C-SRM 4  + Art IV",
+    "shortName": "C-SRM 4 + Art IV",
     "tiers": {
       "1": {
         "damage": 3.36,
@@ -3349,12 +3349,12 @@
   },
   "C-UltraAutocannon10_BurstFire": {
     "id": "C-UltraAutocannon10_BurstFire",
-    "name": "C-Ultra Autocannon 10 Burst Fire",
+    "name": "Clan Ultra Autocannon/10 Burst Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
     "tonnage": 10.0,
-    "shortName": "C-UAC/10 BF",
+    "shortName": "C-UAC/10-BF",
     "tiers": {
       "1": {
         "damage": 1.98,
@@ -3375,7 +3375,7 @@
   },
   "C-UltraAutocannon10_Single": {
     "id": "C-UltraAutocannon10_Single",
-    "name": "C-Ultra Autocannon 10",
+    "name": "Clan Ultra Autocannon/10",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -3401,12 +3401,12 @@
   },
   "C-UltraAutocannon2": {
     "id": "C-UltraAutocannon2",
-    "name": "C-Ultra Autocannon/2 Burst Fire",
+    "name": "Clan Ultra Autocannon/2 Burst Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "small",
     "tonnage": 5.0,
-    "shortName": "C-UAC/2 BF",
+    "shortName": "C-UAC/2-BF",
     "tiers": {
       "1": {
         "damage": 0.78,
@@ -3427,12 +3427,12 @@
   },
   "C-UltraAutocannon20": {
     "id": "C-UltraAutocannon20",
-    "name": "C-Ultra Autocannon/20 Burst",
+    "name": "Clan Ultra Autocannon/20 Burst Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "large",
     "tonnage": 12.0,
-    "shortName": "C-UAC/20 BF",
+    "shortName": "C-UAC/20-BF",
     "tiers": {
       "1": {
         "damage": 1.98,
@@ -3453,7 +3453,7 @@
   },
   "C-UltraAutocannon20_Single": {
     "id": "C-UltraAutocannon20_Single",
-    "name": "C-Ultra Autocannon/20",
+    "name": "Clan Ultra Autocannon/20",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "large",
@@ -3479,7 +3479,7 @@
   },
   "C-UltraAutocannon2_Single": {
     "id": "C-UltraAutocannon2_Single",
-    "name": "C-Ultra Autocannon/2",
+    "name": "Clan Ultra Autocannon/2",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "small",
@@ -3505,12 +3505,12 @@
   },
   "C-UltraAutocannon5": {
     "id": "C-UltraAutocannon5",
-    "name": "C-Ultra Autocannon/5 Burst",
+    "name": "Clan Ultra Autocannon/5 Burst Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
     "tonnage": 7.0,
-    "shortName": "C-UAC/5 BF",
+    "shortName": "C-UAC/5-BF",
     "tiers": {
       "1": {
         "damage": 1.98,
@@ -3531,7 +3531,7 @@
   },
   "C-UltraAutocannon5_Single": {
     "id": "C-UltraAutocannon5_Single",
-    "name": "C-Ultra Autocannon/5",
+    "name": "Clan Ultra Autocannon/5",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -4556,7 +4556,7 @@
   },
   "ERMediumLaser": {
     "id": "ERMediumLaser",
-    "name": "Extended Range Medium Laser",
+    "name": "ER Medium Laser",
     "type": "weapon",
     "weaponType": "energy",
     "size": "medium",
@@ -4697,7 +4697,7 @@
   },
   "ERSmallLaser": {
     "id": "ERSmallLaser",
-    "name": "Extended Range Small Laser",
+    "name": "ER Small Laser",
     "type": "weapon",
     "weaponType": "energy",
     "size": "small",
@@ -6475,7 +6475,7 @@
   },
   "LBXAutocannon10_Slug_BurstFire": {
     "id": "LBXAutocannon10_Slug_BurstFire",
-    "name": "LB 10-X Autocannon Slug Burst",
+    "name": "LB 10-X Autocannon Solid Slug Burst Fire",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -12537,7 +12537,7 @@
     "weaponType": "missile",
     "size": "small",
     "tonnage": 1.5,
-    "shortName": "SSRM2",
+    "shortName": "SSRM 2",
     "tiers": {
       "0": {
         "damage": 2.4,
@@ -12613,7 +12613,7 @@
     "weaponType": "missile",
     "size": "small",
     "tonnage": 1.5,
-    "shortName": "SSRM2-ST",
+    "shortName": "SSRM 2-ST",
     "tiers": {
       "0": {
         "damage": 2.4,
@@ -12689,7 +12689,7 @@
     "weaponType": "missile",
     "size": "small",
     "tonnage": 3.0,
-    "shortName": "SSRM4",
+    "shortName": "SSRM 4",
     "tiers": {
       "0": {
         "damage": 2.4,
@@ -12765,7 +12765,7 @@
     "weaponType": "missile",
     "size": "medium",
     "tonnage": 4.5,
-    "shortName": "SSRM6",
+    "shortName": "SSRM 6",
     "tiers": {
       "0": {
         "damage": 2.4,
@@ -13336,7 +13336,7 @@
   },
   "UltraAutocannon10_Single": {
     "id": "UltraAutocannon10_Single",
-    "name": "Ultra Autocannon 10",
+    "name": "Ultra Autocannon/10",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "medium",
@@ -13412,7 +13412,7 @@
   },
   "UltraAutocannon20_Single": {
     "id": "UltraAutocannon20_Single",
-    "name": "Ultra Autocannon 20",
+    "name": "Ultra Autocannon/20",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "large",
@@ -13488,7 +13488,7 @@
   },
   "UltraAutocannon2_Single": {
     "id": "UltraAutocannon2_Single",
-    "name": "Ultra Autocannon 2",
+    "name": "Ultra Autocannon/2",
     "type": "weapon",
     "weaponType": "ballistic",
     "size": "small",
@@ -13717,7 +13717,7 @@
   },
   "c-MASC_MKI": {
     "id": "c-MASC_MKI",
-    "name": "C-MASC MK I",
+    "name": "Clan MASC MK I",
     "type": "equipment",
     "weaponType": null,
     "size": "small",
@@ -13741,7 +13741,7 @@
   },
   "c-MASC_MKII": {
     "id": "c-MASC_MKII",
-    "name": "C-MASC MK II",
+    "name": "Clan MASC MK II",
     "type": "equipment",
     "weaponType": null,
     "size": "small",
@@ -13765,7 +13765,7 @@
   },
   "c-MASC_MKIII": {
     "id": "c-MASC_MKIII",
-    "name": "C-MASC MK III",
+    "name": "Clan MASC MK III",
     "type": "equipment",
     "weaponType": null,
     "size": "small",
@@ -13789,7 +13789,7 @@
   },
   "c-MASC_MKIV": {
     "id": "c-MASC_MKIV",
-    "name": "C-MASC MK IV",
+    "name": "Clan MASC MK IV",
     "type": "equipment",
     "weaponType": null,
     "size": "small",
@@ -13813,7 +13813,7 @@
   },
   "c-MASC_MKV": {
     "id": "c-MASC_MKV",
-    "name": "C-MASC MK V",
+    "name": "Clan MASC MK V",
     "type": "equipment",
     "weaponType": null,
     "size": "small",

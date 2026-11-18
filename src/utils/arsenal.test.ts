@@ -63,7 +63,7 @@ describe('página de armas y equipo', () => {
   });
 
   it('CA5: las armas Clan enseñan siempre su único tier', () => {
-    expect(row(getWeaponRows(items, '3'), 'Clan Extended Range Medium Laser')).toEqual(expect.objectContaining({
+    expect(row(getWeaponRows(items, '3'), 'Clan ER Medium Laser')).toEqual(expect.objectContaining({
       tier: '1', tierName: 'Clan tier', damage: 9.1, manufacturer: 'Strana Mechty MechWorks'
     }));
   });
@@ -118,7 +118,7 @@ describe('página de armas y equipo', () => {
     expect(electronics.filter(candidate => candidate.probe)).toHaveLength(4);
     expect(filterEquipment(items, { category: 'jumpJets', query: '', tech: 'all', dlc: 'all' })).toHaveLength(5);
     expect(filterEquipment(items, { category: 'all', query: 'masc', tech: 'clan', dlc: 'all' }).map(candidate => candidate.name))
-      .toEqual(['C-MASC MK I', 'C-MASC MK II', 'C-MASC MK III', 'C-MASC MK IV', 'C-MASC MK V']);
+      .toEqual(['Clan MASC MK I', 'Clan MASC MK II', 'Clan MASC MK III', 'Clan MASC MK IV', 'Clan MASC MK V']);
   });
 
   it('CA9: los efectos de cada pieza de equipo', () => {
@@ -140,7 +140,7 @@ describe('página de armas y equipo', () => {
     const ammo = getAmmoRows(items).find(candidate => candidate.item.id === 'AC10_Standard_AmmoEquipment')!;
     expect([ammo.item.tonnage, ammo.item.slots, ammo.item.capacity, ammo.item.explosionDamagePerRound])
       .toEqual([1, 1, 40, 10]);
-    expect(ammo.users).toEqual(['Autocannon/10', 'Autocannon/10 Burst Fire', 'Autocannon/10 rapid-fire']);
+    expect(ammo.users).toEqual(['Autocannon/10', 'Autocannon/10 Burst Fire', 'Autocannon/10 Rapid-Fire']);
   });
 
   it('CA11: la vista en la URL', () => {
@@ -161,7 +161,7 @@ describe('página de armas y equipo', () => {
   it('CA12: busca por el nombre corto del juego', () => {
     const search = (query: string) => names(filterWeaponRows(tier1, { ...DEFAULT_WEAPON_FILTER, query }));
     expect(search('tag')).toEqual(['Target Acquisition Gear', 'Clan Target Acquisition Gear']);
-    expect(search('ac/10-rf')).toEqual(['Autocannon/10 rapid-fire']);
+    expect(search('ac/10-rf')).toEqual(['Autocannon/10 Rapid-Fire']);
     expect(search('target')).toEqual(['Target Acquisition Gear', 'Clan Target Acquisition Gear']);
   });
 });

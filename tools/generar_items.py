@@ -324,10 +324,42 @@ def leer_efectos_equipo(contenido):
     return efectos
 
 
+# El juego nombra lo mismo de varias formas: «Extended Range Medium Laser» junto a «ER Large Laser»,
+# «C-Ultra Autocannon/2» junto a «Clan Gauss Rifle», «Ultra Autocannon 10» junto a «Ultra Autocannon/5»,
+# «rapid-fire» junto a «Burst Fire», cuatro nombres para la munición sólida de los LB-X y espacios dobles.
+# Se unifican con la forma que más usa el propio juego; los IDs no cambian.
+REGLAS_NOMBRE = [
+    (re.compile(r"\s{2,}"), " "),
+    (re.compile(r"^C-"), "Clan "),
+    (re.compile(r"\bExtended Range\b"), "ER"),
+    (re.compile(r"\bUltra Autocannon (\d+)"), r"Ultra Autocannon/\1"),
+    (re.compile(r"\brapid-fire\b"), "Rapid-Fire"),
+    (re.compile(r"\bAutocannon (?:Slug Burst|Solid Burst)$"), "Autocannon Solid Slug Burst Fire"),
+    (re.compile(r"\bAutocannon Slug$"), "Autocannon Solid Slug"),
+    # «Short Burst» de los láseres es otro modo y se queda como está.
+    (re.compile(r"(Autocannon/\d+) Burst$"), r"\1 Burst Fire"),
+]
+
+# Los nombres cortos (los que el buscador entiende, como «AC/10-RF») solo pierden los espacios dobles y
+# escriben igual el modo de disparo: «C-UAC/10 BF» como «UAC/5-BF», «AC SLD» como «AC-SLD» y «SSRM2» como «SSRM 2».
+REGLAS_NOMBRE_CORTO = [
+    (re.compile(r"\s{2,}"), " "),
+    (re.compile(r"(/\d+) BF$"), r"\1-BF"),
+    (re.compile(r"\bAC SLD\b"), "AC-SLD"),
+    (re.compile(r"\bSSRM(\d)"), r"SSRM \1"),
+]
+
+
+def normalizar(texto, reglas):
+    for patron, reemplazo in reglas:
+        texto = patron.sub(reemplazo, texto)
+    return texto.strip()
+
+
 def construir_item(id_base, tiers):
     contenido = tiers["1"] if "1" in tiers else tiers[sorted(tiers)[0]]
     tipo_general = determinar_tipo_general(buscar_texto(REGEX_CLASE, contenido))
-    nombre = buscar_texto(REGEX_NOMBRE, contenido, id_base).strip()
+    nombre = normalizar(buscar_texto(REGEX_NOMBRE, contenido, id_base), REGLAS_NOMBRE)
     tipo_ranura = buscar_texto(REGEX_SLOT_TYPE, contenido, "")
     slots_archivo = buscar_texto(REGEX_SLOTS, contenido)
 
@@ -339,7 +371,7 @@ def construir_item(id_base, tiers):
         "size": determinar_tamano(buscar_texto(REGEX_WEAPON_SIZE, contenido), tipo_ranura, tipo_general),
         "tonnage": buscar_numero(REGEX_TONS, contenido, 0.0)
     }
-    nombre_corto = buscar_texto(REGEX_NOMBRE_CORTO, contenido, "").strip()
+    nombre_corto = normalizar(buscar_texto(REGEX_NOMBRE_CORTO, contenido, ""), REGLAS_NOMBRE_CORTO)
     if nombre_corto and nombre_corto.lower() != nombre.lower():
         item["shortName"] = nombre_corto
     slots = determinar_slots(tipo_general, int(slots_archivo) if slots_archivo else None)

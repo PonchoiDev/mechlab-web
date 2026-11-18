@@ -65,7 +65,7 @@ describe('unidades enemigas', () => {
   it('CA7: las armaduras de combate van en grupos, con la vida y las armas de cada traje', () => {
     expect(unit('Clan Elemental')).toEqual(expect.objectContaining({ kind: 'battleArmor', squad: 5, hitPoints: 20 }));
     expect(weaponList('Clan Elemental')).toEqual([
-      [1, 'Clan SRM 2'], [1, 'Clan Extended Range Medium Laser'], [1, 'Clan Extended Range Small Laser']
+      [1, 'Clan SRM 2'], [1, 'Clan ER Medium Laser'], [1, 'Clan ER Small Laser']
     ]);
     expect(unit('Battle Armor')).toEqual(expect.objectContaining({ kind: 'battleArmor', squad: 4, hitPoints: null }));
     expect(weaponList('Battle Armor')).toEqual([[1, 'Small Laser']]);
