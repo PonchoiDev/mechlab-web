@@ -14,7 +14,7 @@ describe('etiquetas de una build de MW5', () => {
     expect(tagsOf('HGN-732')).toEqual(['FERRO', 'JJ 3']);
     expect(tagsOf('AS7-K')).toEqual(['XL']);
     expect(tagsOf('RVN-3L')).toEqual(['XL', 'FERRO', 'ECM', 'AP']);
-    expect(tagsOf('ADR-A')).toEqual(['C-XL', 'DHS', 'C-ENDO', 'C-FERRO']);
+    expect(tagsOf('ADR-A')).toEqual(['C-XL', 'DHS', 'C-ENDO', 'C-FERRO', 'AP']);
     expect(tagsOf('NTG-C')).toContain('TC');
     expect(tagsOf('CTF-3L')).toContain('MASC');
     expect(tagsOf('BNC-3P')).toContain('SC');

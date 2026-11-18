@@ -60,7 +60,7 @@ Con estas builds (la última, de un 'Mech que ya no existe). Los anclajes de sus
 | CA10 | Un 'Mech con 1E y 2 omni | se comparan sus anclajes con los mínimos | cumple 3E, 2M y 1 omni; no cumple 3E y 1B (los dos omni ya completan la energía) ni 3 omni |
 | CA11 | Las armas de una build: dos de energía, una balística, una de misiles y una de un tipo que el juego no clasifica | se cuentan por tipo | 2E, 1B y 1M, en el orden de los tipos del juego y sin el arma sin tipo ni los tipos sin armas |
 | CA12 | Un 'Mech con 1E, 2 omni y 2M que lleva tres armas de energía y dos de misiles | se pide al menos 1B / al menos 3E y 2M, con Hardpoints y con Weapons | con Hardpoints cumple los dos (los omni son comodín); con Weapons no cumple 1B y sí 3E y 2M. Old one no sale con ningún mínimo |
-| CA13 | Los 'Mechs de serie de MW5 | se sacan sus etiquetas | HGN-732: FERRO y JJ 3; AS7-K: XL (sin etiqueta de AMS); RVN-3L: XL, FERRO, ECM y AP; ADR-A: C-XL, DHS, C-ENDO y C-FERRO; NTG-C lleva TC, CTF-3L MASC y BNC-3P SC |
+| CA13 | Los 'Mechs de serie de MW5 | se sacan sus etiquetas | HGN-732: FERRO y JJ 3; AS7-K: XL (sin etiqueta de AMS); RVN-3L: XL, FERRO, ECM y AP; ADR-A: C-XL, DHS, C-ENDO, C-FERRO y AP (su sonda viene de serie); NTG-C lleva TC, CTF-3L MASC y BNC-3P SC |
 | CA14 | Los 'Mechs de serie de BATTLETECH | se sacan sus etiquetas | ASN-21: JJ 7 e Intercept System; FLE-15: Targeting Baffle ×2; CP-10-HQ: Battle Computer y Adv. Command Mod; HBK-4G: ninguna |
 | CA8 | El orden guardado | se lee | un orden que existe se usa; uno que no existe o nada guardado, Newest |
 

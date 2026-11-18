@@ -24,6 +24,8 @@ export interface BuildListRow {
   firepower: number | null;
   // Anclajes del 'Mech por tipo, con los tipos de cada juego (omni en MW5, support en BATTLETECH).
   hardpoints: Partial<Record<string, number>> | null;
+  // Armas montadas por tipo, para comparar los mínimos con lo que lleva y no con lo que admite.
+  weapons: Partial<Record<string, number>> | null;
 }
 
 export type BuildSort = 'newest' | 'oldest' | 'name' | 'chassis' | 'tonnage' | 'firepower';
@@ -75,15 +77,28 @@ export interface BuildListFilter {
   weightClasses: BuildWeightClass[];
   // Anclajes mínimos del 'Mech de la build, como en el selector de 'Mechs.
   minHardpoints?: Partial<Record<string, number>>;
+  // Con qué se comparan los mínimos: los anclajes del 'Mech (los omni son comodín) o las armas montadas.
+  minimumsOf?: BuildMinimumsOf;
 }
 
+export type BuildMinimumsOf = 'hardpoints' | 'weapons';
+
+// Las armas no tienen comodín: cada tipo se cuenta tal cual.
+const meetsWeaponMinimums = (weapons: Partial<Record<string, number>>, minimums: Partial<Record<string, number>>) =>
+  Object.entries(minimums).every(([type, minimum]) => (weapons[type] ?? 0) >= (minimum ?? 0));
+
 // Cada palabra tiene que estar en el nombre, el chasis o la variante: «atlas brawl».
-export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, minHardpoints = {} }: BuildListFilter): BuildListRow[] => {
+export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, minHardpoints = {}, minimumsOf = 'hardpoints' }: BuildListFilter): BuildListRow[] => {
   const words = normalize(query).split(/\s+/).filter(Boolean);
   const hasMinimums = Object.values(minHardpoints).some(value => (value ?? 0) > 0);
   return rows.filter(row => {
     if (weightClasses.length > 0 && (row.weightClass === null || !weightClasses.includes(row.weightClass))) return false;
-    if (hasMinimums && (row.hardpoints === null || !meetsHardpointMinimums(row.hardpoints, minHardpoints))) return false;
+    if (hasMinimums) {
+      const counts = minimumsOf === 'weapons' ? row.weapons : row.hardpoints;
+      if (counts === null) return false;
+      const meets = minimumsOf === 'weapons' ? meetsWeaponMinimums : meetsHardpointMinimums;
+      if (!meets(counts, minHardpoints)) return false;
+    }
     const text = normalize([row.name, row.chassis ?? '', row.variant ?? ''].join(' '));
     return words.every(word => text.includes(word));
   });
@@ -97,6 +112,13 @@ export const countBuildsByWeightClass = (rows: BuildListRow[]): Record<BuildWeig
 
 // Armas montadas de cada tipo, en el orden de los tipos de cada juego y sin los que no tienen ninguna.
 // Lo que el juego no clasifica (undefined) no se cuenta.
+export interface BuildTag {
+  // Para el color: el de las especificaciones del chasis (xl, dhs, endo, ferro, ap) o el del equipo.
+  kind: string;
+  label: string;
+  title: string;
+}
+
 export const countWeaponTypes = (types: (string | null | undefined)[], order: string[]): { type: string; count: number }[] =>
   order
     .map(type => ({ type, count: types.filter(candidate => candidate === type).length }))
