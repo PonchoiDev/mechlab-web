@@ -15,7 +15,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       'My builds has a search by build name, chassis or variant',
       'Sort the list by newest, oldest, name, chassis, tonnage or firepower; your choice is remembered',
-      'Filter by weight class, with how many builds you have in each one',
+      'Filter by weight class, with how many builds you have in each one, and by minimum hardpoints, like the \'Mech picker (omni hardpoints count as energy, ballistic or missile)',
       'In both MechLabs, MW5 and BATTLETECH'
     ]
   },
