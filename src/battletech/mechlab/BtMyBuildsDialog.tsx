@@ -3,14 +3,15 @@ import type { BtBuild } from '../../types/battletech-mechlab';
 import type { useSavedBuilds } from '../../hooks/useSavedBuilds';
 import { normalizeBuildName, type SavedBuild } from '../../utils/savedBuildsCore';
 import { decodeBtBuild } from '../../utils/battletech/buildCode';
-import { getMechDisplayName } from '../../utils/battletech/mechlabData';
+import { getItem, getMechDisplayName } from '../../utils/battletech/mechlabData';
 import { HARDPOINT_LABELS, HARDPOINT_SHORT, HARDPOINTS } from '../../utils/battletech/catalog';
 import { getHardpointCount } from '../../utils/battletech/fitting';
 import { createBtExportFile, parseBtImportFile } from '../../utils/battletech/savedBuilds';
 import { getBuildSummary } from '../../utils/battletech/stats';
-import { countBuildsByWeightClass, filterBuildRows, sortBuildRows, type BuildListRow, type BuildWeightClass } from '../../utils/savedBuildsList';
+import { countBuildsByWeightClass, countWeaponTypes, filterBuildRows, sortBuildRows, type BuildListRow, type BuildWeightClass } from '../../utils/savedBuildsList';
 import { BT_BUILD_SORT_KEY, useBuildSort } from '../../hooks/useBuildSort';
 import { BuildsListControls } from '../../components/BuildsListControls';
+import { WeaponTypeCounts } from '../../components/WeaponTypeCounts';
 
 interface BtMyBuildsDialogProps {
   saved: ReturnType<typeof useSavedBuilds>;
@@ -37,6 +38,7 @@ const downloadFile = (content: string, fileName: string) => {
 
 // Las builds guardadas de BATTLETECH, con las mismas acciones que el diálogo de MW5.
 // Los mismos contadores que el selector de 'Mechs de BATTLETECH.
+const WEAPON_TYPE_LABELS = Object.fromEntries(HARDPOINTS.map(id => [id, HARDPOINT_LABELS[id].toLowerCase()]));
 const HARDPOINT_TYPES = HARDPOINTS.map(id => ({ id, short: HARDPOINT_SHORT[id], label: HARDPOINT_LABELS[id].toLowerCase() }));
 
 export function BtMyBuildsDialog({
@@ -88,7 +90,11 @@ export function BtMyBuildsDialog({
       firepower: summary?.alphaDamage ?? null,
       hardpoints: decoded ? Object.fromEntries(HARDPOINTS.map(type => [type, getHardpointCount(decoded.mech, type)])) : null
     };
-    return { build, decoded, summary, listRow };
+    // Solo las armas: la munición también tiene tipo de anclaje en BATTLETECH.
+    const weaponCounts = decoded
+      ? countWeaponTypes(Object.values(decoded.loadout).flat().map(getItem).filter(item => item?.kind === 'weapon').map(item => item?.hardpoint), HARDPOINTS)
+      : [];
+    return { build, decoded, summary, listRow, weaponCounts };
   }), [builds]);
 
   // Como en MW5: la copia recién duplicada se ve aunque el filtro la escondería.
@@ -184,7 +190,7 @@ export function BtMyBuildsDialog({
               <button type="button" className="utility-button" onClick={clearFilters}>Clear filters</button>
             </li>
           )}
-          {shownRows.map(({ build, decoded, summary }) => (
+          {shownRows.map(({ build, decoded, summary, weaponCounts }) => (
             <li
               key={build.id}
               className={['builds-item', build.id === activeId ? 'is-active' : '', build.id === duplicatedId ? 'is-new' : ''].filter(Boolean).join(' ')}
@@ -217,6 +223,7 @@ export function BtMyBuildsDialog({
                     ? `${getMechDisplayName(decoded.mech)} · ${summary.tonnage} / ${decoded.mech.tonnage} t · ${summary.alphaDamage} alpha`
                     : 'This build can no longer be opened'}
                 </span>
+                {decoded && <WeaponTypeCounts counts={weaponCounts} short={HARDPOINT_SHORT} labels={WEAPON_TYPE_LABELS} />}
                 <span className="builds-item-date">Saved {dateFormat.format(new Date(build.savedAt))}</span>
               </div>
 

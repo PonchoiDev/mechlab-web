@@ -2104,6 +2104,17 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .builds-list { flex: 1; align-content: start; }
 
+/* Armas montadas de cada tipo en cada build guardada, con el color de su anclaje. */
+.builds-item-weapons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font: 600 11px var(--work-mono);
+}
+
+.builds-item-weapons > span { color: var(--weapon-color); }
+.builds-item-weapons.is-empty { color: var(--work-muted); font-weight: 500; }
+
 /* El número de cada contador se puede escribir: una casilla con el aspecto del número del selector. */
 .builds-hardpoints .mech-filter-stepper > label {
   display: inline-flex;

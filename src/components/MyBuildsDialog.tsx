@@ -6,9 +6,11 @@ import { decodeBuild, type SharedBuild } from '../utils/buildCode';
 import { getBuildSummary } from '../utils/calculators';
 import { getUpgrades } from '../utils/upgrades';
 import { getHardpointCounts, getMechDisplayName, getMechWeightClass, HARDPOINT_ABBREVIATIONS } from '../utils/mechs';
-import { countBuildsByWeightClass, filterBuildRows, sortBuildRows, type BuildListRow, type BuildWeightClass } from '../utils/savedBuildsList';
+import { countBuildsByWeightClass, countWeaponTypes, filterBuildRows, sortBuildRows, type BuildListRow, type BuildWeightClass } from '../utils/savedBuildsList';
 import { MERCS_BUILD_SORT_KEY, useBuildSort } from '../hooks/useBuildSort';
 import { BuildsListControls } from './BuildsListControls';
+import { WeaponTypeCounts } from './WeaponTypeCounts';
+import { getItemWeaponType } from '../utils/items';
 import { createExportFile, normalizeBuildName, parseImportFile, type SavedBuild } from '../utils/savedBuilds';
 
 interface MyBuildsDialogProps {
@@ -45,6 +47,11 @@ const HARDPOINT_TYPES = (['energy', 'ballistic', 'missile', 'omni'] as const).ma
   short: HARDPOINT_ABBREVIATIONS[id].trim(),
   label: id === 'omni' ? 'omni' : id
 }));
+
+// Armas montadas de cada tipo, en el orden de los anclajes del juego.
+const WEAPON_TYPE_ORDER = ['energy', 'ballistic', 'missile', 'artillery', 'ams', 'melee'];
+const WEAPON_TYPE_SHORT: Record<string, string> = { energy: 'E', ballistic: 'B', missile: 'M', artillery: 'ART', ams: 'AMS', melee: 'MEL' };
+const WEAPON_TYPE_LABELS: Record<string, string> = { energy: 'energy', ballistic: 'ballistic', missile: 'missile', artillery: 'artillery', ams: 'AMS', melee: 'melee' };
 
 export function MyBuildsDialog({
   saved,
@@ -96,7 +103,10 @@ export function MyBuildsDialog({
       firepower: summary?.firepower ?? null,
       hardpoints: shared ? getHardpointCounts(shared.mech) : null
     };
-    return { build, shared, summary, listRow };
+    const weaponCounts = shared
+      ? countWeaponTypes(Object.values(shared.loadout).flat().filter(item => item.type === 'weapon').map(getItemWeaponType), WEAPON_TYPE_ORDER)
+      : [];
+    return { build, shared, summary, listRow, weaponCounts };
   }), [builds, mechs, catalog]);
 
   // La copia recién duplicada se ve aunque el filtro la escondería, para poder renombrarla.
@@ -213,7 +223,7 @@ export function MyBuildsDialog({
               <button type="button" className="utility-button" onClick={clearFilters}>Clear filters</button>
             </li>
           )}
-          {shownRows.map(({ build, shared, summary }) => {
+          {shownRows.map(({ build, shared, summary, weaponCounts }) => {
             const isConfirming = confirming?.id === build.id;
             return (
               <li
@@ -248,6 +258,7 @@ export function MyBuildsDialog({
                       ? `${getMechDisplayName(shared.mech)} ${shared.mech.variant} · ${summary.totalWeight.toFixed(1)} / ${shared.mech.tonnageMax} t · ${summary.firepower} volley`
                       : 'This build can no longer be opened'}
                   </span>
+                  {shared && <WeaponTypeCounts counts={weaponCounts} short={WEAPON_TYPE_SHORT} labels={WEAPON_TYPE_LABELS} />}
                   <span className="builds-item-date">Saved {formatDate(build.savedAt)}</span>
                 </div>
 
