@@ -245,6 +245,7 @@ export function EquipmentApp() {
         <h1>Equipment</h1>
         <nav className="units-links" aria-label="MW Builder">
           <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
+          <a href="/mercs/chassis/">Chassis</a>
           <a href="/mercs/starmap/">Star map</a>
           <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
           <a href="/mercs/units/">Enemy units</a>

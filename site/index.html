@@ -430,6 +430,23 @@
         color: var(--accent);
       }
 
+      /* La carátula de la lista de chasis: el Marauder de Sarna, en el naranja de su página. */
+      .cover.is-chassis { --accent: #ff9f1c; }
+
+      .cover.is-chassis .cover-art img {
+        filter: invert(1) sepia(1) hue-rotate(-10deg) saturate(3) brightness(0.95);
+      }
+
+      a.cover.is-chassis:hover,
+      a.cover.is-chassis:focus-visible {
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(255, 159, 28, 0.22);
+      }
+
+      .cover.is-chassis .cover-status {
+        border-color: rgba(255, 159, 28, 0.6);
+        color: var(--accent);
+      }
+
       /* La carátula de los pilotos: el dibujo del MechWarrior del TRO 2750, en el azul de las academias. */
       .cover.is-pilots { --accent: #2f8cff; }
 
@@ -893,7 +910,7 @@
         <section class="game-row" aria-labelledby="game-mw5">
           <div class="shelf-header">
             <h3 id="game-mw5">MW5: MERCENARIES <small>PIRANHA GAMES</small></h3>
-            <span>6 TOOLS</span>
+            <span>7 TOOLS</span>
           </div>
 
           <div class="shelf">
@@ -914,6 +931,29 @@
                 </p>
               </div>
               <div class="cover-action">Open MechLab <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="cover is-chassis" href="/mercs/chassis/">
+              <div class="cover-band">
+                <span><b>CHASSIS</b> · MW5</span>
+                <span class="cover-status">NEW</span>
+              </div>
+              <div class="cover-art">
+                <img
+                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fthumb%2F2%2F27%2FMarauder_RGilClan_v06.png%2F600px-qengbqjfsx517vx2vegubv0elu840vg.png"
+                  alt=""
+                  onerror="this.remove()"
+                />
+              </div>
+              <div class="cover-title">
+                <small>MECHWARRIOR 5</small>
+                <strong>Chassis <span>List</span></strong>
+                <p class="cover-meta">
+                  <span>639 variants</span>
+                  <span>Stats · Stock builds</span>
+                </p>
+              </div>
+              <div class="cover-action">Open Chassis <span aria-hidden="true">→</span></div>
             </a>
 
             <a class="cover is-campaigns" href="/mercs/campaigns/">

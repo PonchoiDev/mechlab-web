@@ -455,6 +455,7 @@ export function CampaignsApp() {
         <h1>HRQ &amp; Campaigns</h1>
         <nav className="units-links" aria-label="MW Builder">
           <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
+          <a href="/mercs/chassis/">Chassis</a>
           <a href="/mercs/starmap/">Star map</a>
           <a href="/mercs/units/">Enemy units</a>
           <a href="/mercs/pilots/">Pilots</a>
