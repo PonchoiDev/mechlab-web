@@ -1,6 +1,6 @@
 # Especificación: lista de chasis de MW5
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/chassisList.test.ts`) y por último la lógica y la interfaz, en commits separados.
 
 ## Contexto
@@ -62,3 +62,14 @@ El MechLab elige un 'Mech con el selector, que filtra bien pero enseña pocas ci
 
 1. **Lógica (CA1 a CA7):** `src/utils/chassisList.test.ts`, con `mechs.json` e `items.json` reales.
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: la tabla, los filtros, el orden, la URL, el enlace al MechLab con la build de serie y la carátula de la página de inicio.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después la lógica, la página y los enlaces, en commits separados.
+- **Tests:** los siete criterios están en `src/utils/chassisList.test.ts` y pasan.
+- **Corrección de un criterio:** «atlas» encuentra también el Atlas II (la hero AS7-D-H), como el selector de 'Mechs.
+- **Interfaz:** comprobada en el navegador a 1440 × 900 y a 390 × 844: la tabla con las 639 variantes y 109 chasis, Jump jets con al menos 2E ordenado por Speed (212 variantes, los Jenner IIC primero a 145,8 km/h), la vista en la URL (`?jj=1&min=2e&sort=speed`), la búsqueda «atlas» (8 variantes de 2 chasis), un clic en una variante que abre su build de serie en el MechLab y la carátula de la página de inicio.
+- **Decisiones durante el desarrollo:**
+  - Rol y DLC se eligen de uno en uno en la página, con un desplegable; la URL y el buscador («dlc7 base») admiten varios, como el selector.
+  - El dibujo de la carátula es la miniatura de 600 px de Sarna: el original pesa 4,3 MB.
+  - En pantallas estrechas las siglas de tecnología van juntas y se parten como texto, para que las filas no se alarguen.

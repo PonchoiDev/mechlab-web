@@ -10,6 +10,7 @@ A web 'Mech configurator for *MechWarrior 5: Mercenaries*. Pick any of the 639 p
 | Star map | https://mw-builder.com/mercs/starmap/ |
 | Enemy units | https://mw-builder.com/mercs/units/ |
 | Pilots | https://mw-builder.com/mercs/pilots/ |
+| Chassis list | https://mw-builder.com/mercs/chassis/ |
 | Weapons and equipment | https://mw-builder.com/mercs/equipment/ |
 | HRQ and campaigns | https://mw-builder.com/mercs/campaigns/ |
 | BATTLETECH MechLab | https://mw-builder.com/battletech/ |
@@ -48,7 +49,7 @@ The design documents are in Spanish, the author's language.
 |---|---|
 | UI | React 19, TypeScript 7, hand-written CSS (no styling framework) |
 | Build and dev server | Vite 8 |
-| Tests | Vitest 5 (604 tests, V8 coverage) |
+| Tests | Vitest 5 (611 tests, V8 coverage) |
 | Static analysis | oxlint |
 | Hosting | Cloudflare Workers (static assets plus a Worker for the API) |
 | Feedback form email | Cloudflare Email Routing |
@@ -100,6 +101,10 @@ There is no database or custom backend: saved builds live in the browser's `loca
 - The game's 64 high reward quests (HRQ): where each one is offered, its route through its mission systems, its requirements (reputation, dates, previous or opposing quest), its reward (C-Bills, reputation, 'Mechs, weapons and equipment) and a search by name, system or employer.
 - The 22 fixed markets of the DLC campaigns and the Atlas II on Romulus, with a search for where to buy each 'Mech or weapon. Every 'Mech opens in the MechLab with its stock build (`/mercs/?mech=AS7-D-H`).
 - Find a 'Mech: the map is colored by how rare a variant is in each faction's market on the chosen date, with its fixed sources (HRQ, special markets) and a shareable link (`?mech=AS7-D`). Special 'Mech locations lists the hero 'Mechs and special variants you can only get in one place, like the Razer Wolverine.
+
+**Chassis list**
+- Its own page (`/mercs/chassis/`) with all 639 variants in one table: tons, hardpoints, engine, speed, armor, structure, jump jets, turn and torso twist speed, upgrade slots and, from its stock build, alpha, DPS, heat capacity and cooling, with the year and the DLC.
+- The 'Mech picker filters (with its search shortcuts, like "3e 2m jj"), minimum and maximum tonnage, minimum speed and sorting by any column. Every variant opens its stock build in the MechLab, and the view goes in the link.
 
 **Weapons and equipment**
 - Its own page (`/mercs/equipment/`) with all 190 weapons in one table: hardpoint, tons, damage, heat, cooldown, RPM, DPS, damage per ton, range, projectile speed, ammo per ton, manufacturer, tech base and DLC.
@@ -176,6 +181,7 @@ src/
   starmap/              Star map page: canvas, system card, date and search
   units/                Enemy units page: filters and a card for each unit
   pilots/               Pilots page: hero pilots, traits and academy training programs
+  chassis/              Chassis list page: variant table with filters and sorting
   equipment/            Weapons and equipment page: weapon table by tier, equipment cards and ammo
   campaigns/            HRQ and campaigns page: expandable lists with missions, requirements and rewards
   battletech/           BATTLETECH pages (star map), with their logic in utils/battletech/
@@ -194,6 +200,7 @@ worker/                 Cloudflare Worker: Sarna image proxy and feedback form
 starmap/index.html      Entry of the star map page (/mercs/starmap/)
 units/index.html        Entry of the enemy units page (/mercs/units/)
 pilots/index.html       Entry of the pilots page (/mercs/pilots/)
+chassis/index.html      Entry of the chassis list page (/mercs/chassis/)
 equipment/index.html    Entry of the weapons and equipment page (/mercs/equipment/)
 campaigns/index.html    Entry of the HRQ and campaigns page (/mercs/campaigns/)
 battletech/             Entries of the BATTLETECH pages (/battletech/) and their images
@@ -376,7 +383,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Quality and checks against the game
 
-- **604 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
+- **611 tests** with Vitest on the logic: calculations, fitting rules, build codes, saved builds, upgrades and the Worker (including the security restrictions of the image proxy).
 - **Coverage:** 95% of the lines in the logic (`src/utils`) are covered by tests. `npm run coverage` builds the report, and CI publishes the summary on every run. The UI (React components) has no tests yet.
 - `gameReference.test.ts` and `upgrades.test.ts` reproduce screenshots of the in-game mechlab (for example the Grand Dragon DRG-1G-S or the Battlemaster BLR-1P) and check that the site gives the same numbers: damage, armor, cooling, turn rate, heat capacity and upgrade effects.
 - `stockBuilds.test.ts` checks that the stock loadouts of all 639 variants load without losing any part.

@@ -111,6 +111,13 @@ Es la quinta página de MW5 (`equipment/index.html`, servida en `/mercs/equipmen
 - **`utils/arsenal.ts`:** las filas de la tabla de armas en un tier (con `getWeaponStats`, la misma función que el MechLab; las armas Clan enseñan su único tier), la munición por tonelada, los filtros, el orden por columnas (sin el dato, al final), las categorías y los efectos del equipo, las armas que usan cada munición y la vista en la URL. Tiene sus tests (`arsenal.test.ts`).
 - **`equipment/EquipmentApp.tsx`:** las pestañas de armas y equipo, la tabla de armas (que se desplaza dentro de su caja, con el nombre fijo), las fichas de equipo y la tabla de munición. Solo pinta y llama a la lógica.
 
+### Lista de chasis
+
+Es la séptima página de MW5 (`chassis/index.html`, servida en `/mercs/chassis/`), con su propio bundle. Lee los mismos `mechs.json` e `items.json` que el MechLab, sin datos nuevos, y usa los estilos de las unidades enemigas (`units.css`) y la tabla de la página de armas (`equipment/equipment.css`) con su color de acento (`chassis/chassis.css`):
+
+- **`utils/chassisList.ts`:** las filas de cada variante (las cifras del chasis y las de su build de serie, con `getBuildSummary`, la misma función que el MechLab), los filtros (los del selector de 'Mechs de `utils/mechs.ts`, sin copiarlos, más el tonelaje y la velocidad), el orden por columnas (sin el dato, al final), el enlace al MechLab (`/mercs/?mech=AS7-D`) y la vista en la URL. Tiene sus tests (`chassisList.test.ts`).
+- **`chassis/ChassisApp.tsx`:** los filtros y la tabla, que se desplaza dentro de su caja con el nombre fijo. Solo pinta y llama a la lógica.
+
 ### HRQ y campañas
 
 Es la sexta página de MW5 (`campaigns/index.html`, servida en `/mercs/campaigns/`), con su propio bundle. Lee las HRQ, las campañas y los nombres de los DLC de `starmap.json`, las mismas del mapa estelar, y usa los estilos de las unidades enemigas (`units.css`) con su color de acento (`campaigns/campaigns.css`):
