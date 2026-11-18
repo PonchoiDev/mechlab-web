@@ -19,6 +19,11 @@ La ventana **My builds** de los dos MechLabs (MW5 y BATTLETECH) enseña las buil
   A igualdad, por nombre. Las builds que ya no se pueden abrir van al final en los órdenes por chasis, tonelaje y potencia de fuego.
 - **RF3.** Un filtro por clase de peso (Light, Medium, Heavy y Assault), con las builds de cada clase al lado. Se pueden marcar varias; sin ninguna marcada, todas. Las builds que ya no se pueden abrir solo salen sin filtro de clase.
 - **RF3b.** Un filtro de anclajes mínimos como el del selector de 'Mechs, con un contador por tipo: en MW5, Energy, Ballistic, Missile y Omni, y los omni cuentan como comodín de energía, balística y misiles (un 'Mech con 1E y 2 omni cumple «al menos 3E»; cada omni cuenta una vez); en BATTLETECH, Energy, Ballistic, Missile y Support. Mira los anclajes del 'Mech de la build, no las armas que lleva. Las builds que ya no se pueden abrir no salen con un mínimo puesto. El número de cada contador también se escribe a mano.
+- **RF3c.** Los mismos filtros que el selector de 'Mechs de cada juego, más uno de hero:
+  - en MW5, **Tech** (IS o Clan, uno o ninguno), **Role** (el rol de combate de la unit card; se pueden marcar varios y vale cualquiera) y **Equipment**: Jump jets, ECM y AMS, que piden que la build los **lleve montados** (no que el chasis los admita, como en el selector: en la lista importa lo que tiene cada build), y **Hero**, las variantes hero;
+  - en BATTLETECH, **Role** (las etiquetas de rol del juego) y **Jump jets** montados.
+
+  Si se marcan varios botones de Equipment, la build tiene que cumplirlos todos. Las builds que ya no se pueden abrir no salen con ninguno de estos filtros.
 - **RF4.** El recuento dice cuántas se ven de cuántas hay («7 of 42 saved») cuando el buscador o el filtro esconden alguna, y si no queda ninguna, la lista lo dice y ofrece quitar los filtros.
 - **RF4b.** La ventana tiene una altura fija: al filtrar cambia la lista, que se desplaza dentro, y los controles no se mueven bajo el ratón.
 - **RF4c.** Cada build dice, junto a sus cifras, cuántas armas lleva montadas de cada tipo («2E 1B 1M»), con el color de su tipo de anclaje: en MW5, energía, balística, misiles, artillería, AMS y cuerpo a cuerpo; en BATTLETECH, energía, balística, misiles y apoyo. Los tipos sin armas no salen.
@@ -62,6 +67,7 @@ Con estas builds (la última, de un 'Mech que ya no existe). Los anclajes de sus
 | CA12 | Un 'Mech con 1E, 2 omni y 2M que lleva tres armas de energía y dos de misiles | se pide al menos 1B / al menos 3E y 2M, con Hardpoints y con Weapons | con Hardpoints cumple los dos (los omni son comodín); con Weapons no cumple 1B y sí 3E y 2M. Old one no sale con ningún mínimo |
 | CA13 | Los 'Mechs de serie de MW5 | se sacan sus etiquetas | HGN-732: FERRO y JJ 3; AS7-K: XL (sin etiqueta de AMS); RVN-3L: XL, FERRO, ECM y AP; ADR-A: C-XL, DHS, C-ENDO, C-FERRO y AP (su sonda viene de serie); NTG-C lleva TC, CTF-3L MASC y BNC-3P SC |
 | CA14 | Los 'Mechs de serie de BATTLETECH | se sacan sus etiquetas | ASN-21: JJ 7 e Intercept System; FLE-15: Targeting Baffle ×2; CP-10-HQ: Battle Computer y Adv. Command Mod; HBK-4G: ninguna |
+| CA15 | Las builds: Brawler (IS, Juggernaut, lleva AMS), Sniper (IS, Sniper, hero), LRM boat (Clan, Missile Boat, lleva jump jets y ECM) y Scout (IS, Scout, lleva jump jets) | se filtra por Clan / por IS / por los roles Sniper y Scout / por Jump jets / por Jump jets y ECM / por AMS / por Hero | LRM boat / Brawler, Scout y Sniper / Scout y Sniper / LRM boat y Scout / LRM boat / Brawler / Sniper; Old one no sale con ninguno |
 | CA8 | El orden guardado | se lee | un orden que existe se usa; uno que no existe o nada guardado, Newest |
 
 ## Fuera de alcance
@@ -71,13 +77,13 @@ Con estas builds (la última, de un 'Mech que ya no existe). Los anclajes de sus
 
 ## Plan de pruebas
 
-1. **Lógica (CA1 a CA14):** `src/utils/savedBuildsList.test.ts`, con builds de prueba, y `src/utils/buildTags.test.ts` y `src/utils/battletech/buildTags.test.ts`, con los 'Mechs de serie de cada juego.
+1. **Lógica (CA1 a CA15):** `src/utils/savedBuildsList.test.ts`, con builds de prueba, y `src/utils/buildTags.test.ts` y `src/utils/battletech/buildTags.test.ts`, con los 'Mechs de serie de cada juego.
 2. **Interfaz:** en el navegador, en los dos MechLabs, a 1440 × 900 y a 390 × 844, con varias builds guardadas: buscar, ordenar, filtrar, el recuento, la lista vacía, duplicar con un filtro puesto y que el orden se recuerde al volver a abrir.
 
 ## Resultado
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después la lógica y la interfaz, en commits separados.
-- **Tests:** los catorce criterios pasan: CA1 a CA12 en `src/utils/savedBuildsList.test.ts`, CA13 en `src/utils/buildTags.test.ts` y CA14 en `src/utils/battletech/buildTags.test.ts`.
+- **Tests:** los quince criterios pasan: CA1 a CA12 y CA15 en `src/utils/savedBuildsList.test.ts`, CA13 en `src/utils/buildTags.test.ts` y CA14 en `src/utils/battletech/buildTags.test.ts`.
 - **Interfaz:** comprobada en el navegador con ocho builds en MW5 (una que ya no se puede abrir) y cuatro en BATTLETECH, a 1440 × 900 y a 390 × 844: el orden por fecha, la búsqueda «atlas» ordenada por tonelaje («2 of 8 saved»), un filtro sin resultados con Clear filters, el filtro Assault en BATTLETECH («1 of 4 saved») y el orden guardado en el navegador.
 - **Decisión durante el desarrollo:** el botón de cada clase de peso se desactiva si no hay ninguna build de esa clase, para no dar a elegir un filtro vacío.
 - **Anclajes mínimos (RF3b):** se añadieron después, con los contadores del selector de 'Mechs. La regla de los omni pasó a `utils/hardpointMinimums.ts`, que usan el selector y la lista. Comprobado en el navegador: en MW5, con 1 balístico quedan 5 de 8 builds; en BATTLETECH, los cuatro 'Mechs de prueba tienen al menos un anclaje de apoyo.

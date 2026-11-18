@@ -6,22 +6,26 @@ import {
   filterBuildRows,
   parseBuildSort,
   sortBuildRows,
+  type BuildListFilter,
   type BuildListRow
 } from './savedBuildsList';
 
 // Criterios de aceptación de docs/specs/buscar-builds-guardadas.md.
-const row = (name: string, day: number, mech: Pick<BuildListRow, 'chassis' | 'variant' | 'weightClass' | 'tonnage' | 'firepower' | 'hardpoints'> & Partial<Pick<BuildListRow, 'weapons'>>): BuildListRow => ({
+const row = (name: string, day: number, mech: Pick<BuildListRow, 'chassis' | 'variant' | 'weightClass' | 'tonnage' | 'firepower' | 'hardpoints'> & Partial<Pick<BuildListRow, 'weapons' | 'techBase' | 'roles' | 'features'>>): BuildListRow => ({
   id: name,
   name,
   savedAt: `2026-11-0${day}T10:00:00.000Z`,
   weapons: null,
+  techBase: null,
+  roles: [],
+  features: [],
   ...mech
 });
 const rows: BuildListRow[] = [
-  row('Brawler', 3, { chassis: 'Atlas', variant: 'AS7-D', weightClass: 'assault', tonnage: 100, firepower: 80, hardpoints: { energy: 4, ballistic: 1, missile: 1 } }),
-  row('LRM boat', 5, { chassis: 'Catapult', variant: 'CPLT-C1', weightClass: 'heavy', tonnage: 65, firepower: 60, hardpoints: { energy: 4, missile: 2 } }),
-  row('Sniper', 1, { chassis: 'Atlas', variant: 'AS7-K', weightClass: 'assault', tonnage: 99.5, firepower: 70, hardpoints: { energy: 4, ballistic: 1, missile: 1 } }),
-  row('Scout', 4, { chassis: 'Locust', variant: 'LCT-1V', weightClass: 'light', tonnage: 20, firepower: 15, hardpoints: { energy: 1, ballistic: 2 } }),
+  row('Brawler', 3, { chassis: 'Atlas', variant: 'AS7-D', weightClass: 'assault', tonnage: 100, firepower: 80, hardpoints: { energy: 4, ballistic: 1, missile: 1 }, techBase: 'InnerSphere', roles: ['Juggernaut'], features: ['ams'] }),
+  row('LRM boat', 5, { chassis: 'Catapult', variant: 'CPLT-C1', weightClass: 'heavy', tonnage: 65, firepower: 60, hardpoints: { energy: 4, missile: 2 }, techBase: 'Clan', roles: ['Missile Boat'], features: ['jumpJets', 'ecm'] }),
+  row('Sniper', 1, { chassis: 'Atlas', variant: 'AS7-K', weightClass: 'assault', tonnage: 99.5, firepower: 70, hardpoints: { energy: 4, ballistic: 1, missile: 1 }, techBase: 'InnerSphere', roles: ['Sniper'], features: ['hero'] }),
+  row('Scout', 4, { chassis: 'Locust', variant: 'LCT-1V', weightClass: 'light', tonnage: 20, firepower: 15, hardpoints: { energy: 1, ballistic: 2 }, techBase: 'InnerSphere', roles: ['Scout'], features: ['jumpJets'] }),
   // De un 'Mech que ya no existe: no se puede abrir.
   row('Old one', 2, { chassis: null, variant: null, weightClass: null, tonnage: null, firepower: null, hardpoints: null })
 ];
@@ -112,5 +116,17 @@ describe('buscar, ordenar y filtrar las builds guardadas', () => {
     expect(matches({ ballistic: 1 }, 'weapons')).toEqual([]);
     expect(matches({ energy: 3, missile: 2 }, 'weapons')).toEqual(['Puma']);
     expect(matches({ energy: 4 }, 'weapons')).toEqual([]);
+  });
+
+  it('CA15: filtra por tecnología, rol, equipo montado y hero', () => {
+    const matches = (extra: Pick<BuildListFilter, 'techBase' | 'roles' | 'features'>) =>
+      names(sortBuildRows(filterBuildRows(rows, { query: '', weightClasses: [], ...extra }), 'name'));
+    expect(matches({ techBase: 'Clan' })).toEqual(['LRM boat']);
+    expect(matches({ techBase: 'InnerSphere' })).toEqual(['Brawler', 'Scout', 'Sniper']);
+    expect(matches({ roles: ['Sniper', 'Scout'] })).toEqual(['Scout', 'Sniper']);
+    expect(matches({ features: ['jumpJets'] })).toEqual(['LRM boat', 'Scout']);
+    expect(matches({ features: ['jumpJets', 'ecm'] })).toEqual(['LRM boat']);
+    expect(matches({ features: ['ams'] })).toEqual(['Brawler']);
+    expect(matches({ features: ['hero'] })).toEqual(['Sniper']);
   });
 });
