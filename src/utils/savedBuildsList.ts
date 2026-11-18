@@ -1,3 +1,5 @@
+import { meetsHardpointMinimums } from './hardpointMinimums';
+
 // Buscar, ordenar y filtrar las builds guardadas (docs/specs/buscar-builds-guardadas.md). Es común a los dos
 // MechLabs: cada uno resume sus builds en BuildListRow con sus propios datos, y esto no carga ninguno.
 
@@ -20,6 +22,8 @@ export interface BuildListRow {
   weightClass: BuildWeightClass | null;
   tonnage: number | null;
   firepower: number | null;
+  // Anclajes del 'Mech por tipo, con los tipos de cada juego (omni en MW5, support en BATTLETECH).
+  hardpoints: Partial<Record<string, number>> | null;
 }
 
 export type BuildSort = 'newest' | 'oldest' | 'name' | 'chassis' | 'tonnage' | 'firepower';
@@ -69,13 +73,17 @@ export interface BuildListFilter {
   query: string;
   // Vacío: todas las clases.
   weightClasses: BuildWeightClass[];
+  // Anclajes mínimos del 'Mech de la build, como en el selector de 'Mechs.
+  minHardpoints?: Partial<Record<string, number>>;
 }
 
 // Cada palabra tiene que estar en el nombre, el chasis o la variante: «atlas brawl».
-export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses }: BuildListFilter): BuildListRow[] => {
+export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, minHardpoints = {} }: BuildListFilter): BuildListRow[] => {
   const words = normalize(query).split(/\s+/).filter(Boolean);
+  const hasMinimums = Object.values(minHardpoints).some(value => (value ?? 0) > 0);
   return rows.filter(row => {
     if (weightClasses.length > 0 && (row.weightClass === null || !weightClasses.includes(row.weightClass))) return false;
+    if (hasMinimums && (row.hardpoints === null || !meetsHardpointMinimums(row.hardpoints, minHardpoints))) return false;
     const text = normalize([row.name, row.chassis ?? '', row.variant ?? ''].join(' '));
     return words.every(word => text.includes(word));
   });

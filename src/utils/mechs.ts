@@ -1,3 +1,4 @@
+import { meetsHardpointMinimums } from './hardpointMinimums';
 import type { Mech } from '../types/mech';
 import { getSarnaTitle } from '../services/sarna';
 
@@ -137,24 +138,6 @@ export const countActiveFilters = (filters: MechFilters): number =>
   (filters.roles.length > 0 ? 1 : 0) +
   (filters.maxYear !== null ? 1 : 0) +
   Object.values(filters.minHardpoints).filter(count => (count ?? 0) > 0).length;
-
-const OMNI_COMPATIBLE: HardpointFilterType[] = ['energy', 'ballistic', 'missile'];
-
-// Los anclajes omni sirven de comodín para energía, balística y misiles: un mech con 1E y 2O cumple
-// "al menos 3E". Cada omni solo cuenta una vez, aunque se pidan varios tipos.
-const meetsHardpointMinimums = (counts: Record<HardpointFilterType, number>, minimums: MechFilters['minHardpoints']): boolean => {
-  let spareOmni = counts.omni - (minimums.omni ?? 0);
-  if (spareOmni < 0) return false;
-  for (const type of HARDPOINT_FILTER_TYPES) {
-    if (type === 'omni') continue;
-    const missing = (minimums[type] ?? 0) - counts[type];
-    if (missing <= 0) continue;
-    if (!OMNI_COMPATIBLE.includes(type)) return false;
-    spareOmni -= missing;
-    if (spareOmni < 0) return false;
-  }
-  return true;
-};
 
 export const matchesMechFilters = (mech: Mech, filters: MechFilters): boolean =>
   (filters.weightClasses.length === 0 || filters.weightClasses.includes(getMechWeightClass(mech))) &&
