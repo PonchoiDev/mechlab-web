@@ -54,6 +54,7 @@ El inventario sustituye al panel de componente: hacía lo mismo para un solo com
 - **RF19.** Qué cabe en el destino:
   - en un componente, un arma si tiene un anclaje libre que la admite; el equipo, si hay sitio; la munición, si hay sitio y alguna arma montada la usa;
   - en un anclaje, solo las armas que lo admiten, esté libre u ocupado (como reemplazo). El equipo y la munición no van en anclajes: se equipan apuntando al componente.
+- **RF20.** Cada tarjeta del tablero muestra, bajo su título, sus anclajes por tipo con el icono del juego y cuántos están ocupados («1/2» y el icono de energía), como el MechLab de BATTLETECH, para ver de un vistazo qué cabe en cada componente. Solo salen los tipos que tiene el componente, en el orden de las pestañas del inventario (energía, balístico, misiles, artillería, AMS, cuerpo a cuerpo y omni); un componente sin anclajes no muestra nada.
 - **RF15.** El inventario también ordena por calor y por disparos por minuto (RPM), y cada arma muestra sus RPM junto al daño, el calor y el alcance, como las columnas del inventario del juego.
 
 ## Requisitos no funcionales
@@ -90,4 +91,5 @@ Con el Archer ARC-2R: brazos con un anclaje de energía M y uno cuerpo a cuerpo 
 | CA21 | El ARC-2R con un Medium Laser en el brazo izquierdo y el brazo izquierdo como destino | se filtra con la casilla | están el Knuckles de clase pesada (anclaje cuerpo a cuerpo libre) y el Double Heat Sink; no están el Small Laser (el de energía está ocupado) ni el LRM 20 |
 | CA22 | El mismo 'Mech con el anclaje de energía del brazo izquierdo como destino | se filtra con la casilla | está el Small Laser (como reemplazo); no están el LRM 20, el Knuckles ni el Double Heat Sink |
 | CA23 | Un arma recién equipada en un anclaje | se busca el siguiente destino | en el torso central vacío, tras el anclaje 0 va el 1; con los dos ocupados, ninguno; en el brazo, tras el de energía va el cuerpo a cuerpo libre |
+| CA24 | El ARC-2R con un Medium Laser en el brazo izquierdo | se resumen los anclajes de cada componente | el brazo izquierdo tiene energía 1/1 y cuerpo a cuerpo 0/1; el torso central, energía 0/2; las piernas, nada |
 | CA20 | Un AC/10 en el ARC-2R y el clic derecho | se equipa en el lugar adecuado | la build no cambia y avisa `No room for AC/10 in this 'Mech` |
