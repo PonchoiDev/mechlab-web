@@ -41,7 +41,8 @@ function WeaponsTab({ build, summary }: { build: BtBuild; summary: BtSummary }) 
   };
 
   return (
-    <div className="analysis-body">
+    // Sin munición no hay columna de la derecha: la tabla de armas ocupa todo el ancho, como en MW5.
+    <div className={summary.ammo.length > 0 ? 'analysis-body' : 'analysis-body is-single'}>
       <div className="analysis-table-wrap">
         <header className="analysis-heading">
           <div>
