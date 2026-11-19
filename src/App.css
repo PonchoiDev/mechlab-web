@@ -1055,14 +1055,16 @@
   overflow-wrap: anywhere;
 }
 
-button.component-card-item {
+button.component-card-item,
+[role='button'].component-card-item {
   color: var(--work-text);
   font-family: var(--work-sans);
   text-align: left;
   cursor: pointer;
 }
 
-button.component-card-item:hover { border-color: var(--item-color); }
+button.component-card-item:hover,
+[role='button'].component-card-item:hover { border-color: var(--item-color); }
 
 .component-card-item[data-category="ammo"] { --item-color: var(--weapon-color); }
 .component-card-item[data-category="heat-sink"] { --item-color: var(--work-cyan); }
@@ -1220,8 +1222,10 @@ button.component-card-item:hover { border-color: var(--item-color); }
   font-style: italic;
 }
 
-button.hardpoint-chip { cursor: pointer; }
-button.hardpoint-chip:hover { background: #2c342c; }
+button.hardpoint-chip,
+[role='button'].hardpoint-chip { cursor: pointer; }
+button.hardpoint-chip:hover,
+[role='button'].hardpoint-chip:hover { background: #2c342c; }
 
 .hardpoint-chip.is-selected {
   outline: 2px solid var(--work-lime);
@@ -3557,9 +3561,9 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas:
-    'name name'
-    'spec stats';
-  align-items: center;
+    'name spec'
+    'stats stats';
+  align-items: baseline;
   gap: 3px 10px;
   padding: 7px 9px;
   cursor: grab;
@@ -3578,6 +3582,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .inventory-item-name {
   grid-area: name;
+  min-width: 0;
   font: 500 13px var(--work-sans);
 }
 
@@ -3585,6 +3590,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   grid-area: spec;
   color: var(--work-muted);
   font-size: 11px;
+  white-space: nowrap;
 }
 
 .inventory-item-spec i {
@@ -3596,14 +3602,43 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   background: var(--work-muted);
 }
 
+/* Daño, calor, RPM y alcance en columnas fijas, para compararlos de un vistazo como en el juego. */
 .inventory-item-stats {
   grid-area: stats;
   display: grid;
-  grid-template-columns: repeat(3, minmax(46px, auto));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   color: var(--work-cyan);
   font-size: 11px;
-  text-align: right;
+  white-space: nowrap;
+}
+
+.inventory-target {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--work-line);
+  background: rgba(195, 237, 98, 0.04);
+}
+
+.inventory-target-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.inventory-target-heading h3 {
+  margin: 3px 0 0;
+  color: var(--work-lime);
+  font: 600 15px var(--work-sans);
+}
+
+.inventory-target-heading h3 span { color: var(--weapon-color); }
+
+.inventory-installed {
+  max-height: 180px;
+  overflow-y: auto;
+  scrollbar-color: var(--work-line) transparent;
 }
 
 .inventory-item-tier {

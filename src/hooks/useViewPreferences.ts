@@ -35,6 +35,7 @@ export const useViewPreferences = (storageKey = MERCS_STORAGE_KEY) => {
     toggleEditorSide: () => update({ editorSide: preferences.editorSide === 'left' ? 'right' : 'left' }),
     toggleExpandedSlots: () => update({ expandedSlots: !preferences.expandedSlots }),
     toggleCompactBoard: () => update({ compactBoard: !preferences.compactBoard }),
-    toggleInventory: () => update({ inventoryOpen: !preferences.inventoryOpen })
+    toggleInventory: () => update({ inventoryOpen: !preferences.inventoryOpen }),
+    openInventory: () => { if (!preferences.inventoryOpen) update({ inventoryOpen: true }); }
   };
 };

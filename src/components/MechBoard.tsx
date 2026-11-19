@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
+import type { ArmorState, EquippedItem, EquippedLoadout, Mech, Zone } from '../types/mech';
 import { getAmmoWarnings } from '../utils/equipment';
 import type { DropTargets } from '../utils/inventory';
 import { ZONES } from '../utils/zones';
@@ -25,6 +25,9 @@ interface MechBoardProps {
   // Destinos del objeto del inventario que se está colocando, si hay uno.
   dropTargets?: DropTargets | null;
   onPlace?: (zone: Zone, hardpointIndex: number | null) => void;
+  onDragItem?: (zone: Zone, item: EquippedItem) => void;
+  onDragEnd?: () => void;
+  onRemoveItem?: (zone: Zone, item: EquippedItem) => void;
 }
 
 export function MechBoard({
@@ -42,7 +45,10 @@ export function MechBoard({
   compact,
   armorScale,
   dropTargets,
-  onPlace
+  onPlace,
+  onDragItem,
+  onDragEnd,
+  onRemoveItem
 }: MechBoardProps) {
   const ammoWarnings = getAmmoWarnings(loadout);
 
@@ -76,6 +82,9 @@ export function MechBoard({
           expandedSlots={expandedSlots}
           armorScale={armorScale}
           placement={dropTargets && onPlace ? { target: dropTargets[zone], onPlace: (index) => onPlace(zone, index) } : undefined}
+          onDragItem={onDragItem && ((item) => onDragItem(zone, item))}
+          onDragEnd={onDragEnd}
+          onRemoveItem={onRemoveItem && ((item) => onRemoveItem(zone, item))}
         />
       ))}
     </section>

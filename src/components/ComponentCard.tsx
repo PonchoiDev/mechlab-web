@@ -37,6 +37,10 @@ interface ComponentCardProps {
   // Mientras se coloca un objeto del inventario: dónde admite soltarlo este componente. Pulsar la tarjeta o
   // un anclaje coloca el objeto en vez de abrir el panel.
   placement?: { target: DropTarget; onPlace: (hardpointIndex: number | null) => void };
+  // Arrastrar lo montado (a otro sitio, o fuera del tablero para desequiparlo) y quitarlo con el clic central.
+  onDragItem?: (item: EquippedItem) => void;
+  onDragEnd?: () => void;
+  onRemoveItem?: (item: EquippedItem) => void;
 }
 
 interface EquipmentChipProps {
@@ -46,19 +50,46 @@ interface EquipmentChipProps {
   onMenu: (x: number, y: number) => void;
   // En la vista expandida, número de celdas que ocupa.
   slots?: number;
+  onDrag?: () => void;
+  onDragEnd?: () => void;
+  onRemove?: () => void;
 }
 
-function EquipmentChip({ item, count, category, onMenu, slots }: EquipmentChipProps) {
+// Un div y no un botón: Firefox no deja arrastrar botones.
+function EquipmentChip({ item, count, category, onMenu, slots, onDrag, onDragEnd, onRemove }: EquipmentChipProps) {
   const longPress = useLongPress(onMenu);
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
+      draggable={!!onDrag}
+      onDragStart={(event) => {
+        event.stopPropagation();
+        event.dataTransfer.setData('text/plain', item.name);
+        event.dataTransfer.effectAllowed = 'move';
+        onDrag?.();
+      }}
+      onDragEnd={onDragEnd}
+      onKeyDown={(event) => {
+        if (event.key !== 'Enter' && event.key !== ' ' && event.key !== 'ContextMenu') return;
+        event.preventDefault();
+        event.stopPropagation();
+        const rect = event.currentTarget.getBoundingClientRect();
+        onMenu(rect.left, rect.bottom + 4);
+      }}
+      onMouseDown={(event) => { if (event.button === 1) event.preventDefault(); }}
+      onAuxClick={(event) => {
+        if (event.button !== 1 || !onRemove) return;
+        event.preventDefault();
+        event.stopPropagation();
+        onRemove();
+      }}
       className={slots ? 'component-card-item slot-cell-item' : 'component-card-item'}
       style={slots ? { '--slots': slots } as CSSProperties : undefined}
       data-category={category}
       data-weapon-type={item.type === 'ammo' ? item.weaponType ?? undefined : undefined}
-      title={`${item.name}: right-click for options`}
+      title={`${item.name}: right-click for options, drag it elsewhere or off the board, middle-click to remove${count > 1 ? ' one' : ''}`}
       onContextMenu={(event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -69,7 +100,7 @@ function EquipmentChip({ item, count, category, onMenu, slots }: EquipmentChipPr
     >
       {item.name}
       {count > 1 && <small>×{count}</small>}
-    </button>
+    </div>
   );
 }
 
@@ -81,10 +112,11 @@ interface SlotCellsProps {
   capacity: number;
   slotsOf: (item: EquippedItem) => number;
   onMenu: (itemName: string, x: number, y: number) => void;
+  handlersFor: (item: EquippedItem) => Pick<EquipmentChipProps, 'onDrag' | 'onDragEnd' | 'onRemove'>;
 }
 
 // Ranuras de un tipo como celdas: las piezas ocupan sus celdas y los huecos libres quedan a la vista.
-function SlotCells({ label, items, capacity, slotsOf, onMenu }: SlotCellsProps) {
+function SlotCells({ label, items, capacity, slotsOf, onMenu, handlersFor }: SlotCellsProps) {
   const used = items.reduce((total, item) => total + slotsOf(item), 0);
   if (capacity === 0 && items.length === 0) return null;
 
@@ -99,6 +131,7 @@ function SlotCells({ label, items, capacity, slotsOf, onMenu }: SlotCellsProps) 
           category={getEquipmentCategory(item)}
           slots={Math.max(1, slotsOf(item))}
           onMenu={(x, y) => onMenu(item.name, x, y)}
+          {...handlersFor(item)}
         />
       ))}
       {Array.from({ length: Math.max(0, capacity - used) }, (_, index) => (
@@ -129,7 +162,10 @@ export function ComponentCard({
   onEquipmentMenu,
   expandedSlots = false,
   armorScale = 1,
-  placement
+  placement,
+  onDragItem,
+  onDragEnd,
+  onRemoveItem
 }: ComponentCardProps) {
   const status = getComponentStatus(componentData, equippedItems);
   const hardpoints = getHardpointViews(componentData.hardpoints, equippedItems);
@@ -143,15 +179,22 @@ export function ComponentCard({
     : placement.target.component || placement.target.hardpoints.length > 0 ? 'is-drop-target' : 'is-drop-off';
   const select = (hardpointIndex: number | null) => placement ? placement.onPlace(hardpointIndex) : onSelect(hardpointIndex);
 
+  const handlersFor = (item: EquippedItem) => ({
+    onDrag: onDragItem && (() => onDragItem(item)),
+    onDragEnd,
+    onRemove: onRemoveItem && (() => onRemoveItem(item))
+  });
+
   const handleDragOver = (event: DragEvent) => {
-    if (!placement?.target.component) return;
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'copy';
+    if (placement?.target.component) event.preventDefault();
   };
 
+  // Al mover algo ya equipado, toda la página admite soltar (fuera del tablero se desequipa): aquí llega
+  // también lo que se suelta en una tarjeta que no lo admite, y no se desequipa, sino que avisa del motivo.
   const handleDrop = (event: DragEvent) => {
-    if (!placement?.target.component) return;
+    if (!placement) return;
     event.preventDefault();
+    event.stopPropagation();
     placement.onPlace(null);
   };
 
@@ -187,6 +230,9 @@ export function ComponentCard({
                 accepts: placement.target.hardpoints.includes(view.index),
                 onDrop: () => placement.onPlace(view.index)
               }}
+              onDragWeapon={view.weapon && onDragItem ? () => onDragItem(view.weapon as EquippedItem) : undefined}
+              onDragEnd={onDragEnd}
+              onRemoveWeapon={view.weapon && onRemoveItem ? () => onRemoveItem(view.weapon as EquippedItem) : undefined}
             />
           ))}
         </div>
@@ -200,6 +246,7 @@ export function ComponentCard({
             capacity={status.maxSlots}
             slotsOf={item => item.slots ?? 0}
             onMenu={onEquipmentMenu}
+            handlersFor={handlersFor}
           />
           {status.specialSlots.map(slot => (
             <SlotCells
@@ -209,6 +256,7 @@ export function ComponentCard({
               capacity={slot.capacity}
               slotsOf={() => 1}
               onMenu={onEquipmentMenu}
+              handlersFor={handlersFor}
             />
           ))}
         </div>
@@ -223,6 +271,7 @@ export function ComponentCard({
               count={count}
               category={getEquipmentCategory(item)}
               onMenu={(x, y) => onEquipmentMenu(item.name, x, y)}
+              {...handlersFor(item)}
             />
           ))}
         </div>

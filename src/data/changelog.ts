@@ -13,13 +13,13 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-11-19',
     title: 'Inventory',
     items: [
-      'New Inventory panel, like the one in the game: every weapon, piece of equipment and ammo in one list, with tabs by type, search, tech base and size filters and sorting by name, size, tons, damage or range',
-      'Fits this \'Mech keeps only what can go somewhere in the current \'Mech. Untick it to browse the whole arsenal',
-      'Drag an item onto a hardpoint or a component to equip it. The board highlights where it fits and dims the rest',
-      'On touch screens, or without dragging, click an item and then click a hardpoint or component. It stays selected to place several in a row',
-      'Pick the tier of a weapon in its row before placing it',
-      'Dropping a weapon on a used hardpoint replaces it, and the notice has an Undo button',
-      'The inventory opens on the side opposite the component panel, so both can stay open'
+      'The component panel is now an Inventory, like the one in the game: every weapon, piece of equipment and ammo in one list, with tabs by type, search, tech base and size filters and sorting by name, size, tons, damage, heat, RPM or range',
+      'Click a component or a hardpoint to equip into it: the inventory shows only what fits there and what is already installed, with its tier and a button to remove it. Clicking a used hardpoint replaces its weapon',
+      'Drag an item onto a hardpoint or a component to equip it. The board highlights where it fits and dims the rest. On touch screens, click an item and then click where it goes',
+      'Right-click an item to equip it where it fits best, in the smallest free hardpoint that takes it or in an engine heat sink slot first',
+      'Drag weapons and equipment already on the board to move them, or drop them off the board to remove them. Middle-click removes them too',
+      'Replacing or removing an item shows a notice with an Undo button',
+      'Pick the tier of a weapon in its row before placing it'
     ]
   },
   {

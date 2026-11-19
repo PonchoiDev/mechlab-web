@@ -10,7 +10,7 @@ import {
   weaponFitsHardpoint
 } from './equipment';
 import { filterItems, getItemWeaponType, isAmmoCompatibleWithWeapon, SIZE_RANK } from './items';
-import { mapZones, ZONE_LABELS } from './zones';
+import { mapZones, ZONE_KEYS, ZONE_LABELS } from './zones';
 
 // Inventario del MechLab: todo el arsenal a la vez, como el inventario del mechlab del juego, para
 // colocar cada objeto en cualquier parte del 'Mech. Las reglas de dónde cabe cada cosa son las de
@@ -49,7 +49,18 @@ export interface DropTarget {
 
 export type DropTargets = Record<Zone, DropTarget>;
 
-export const getDropTargets = (mech: Mech, loadout: EquippedLoadout, item: Item): DropTargets => mapZones(zone => {
+// Un objeto ya equipado que se arrastra: su sitio cuenta como libre mientras se mueve.
+export interface EquippedOrigin {
+  zone: Zone;
+  instanceId: string;
+}
+
+const withoutOrigin = (loadout: EquippedLoadout, origin?: EquippedOrigin): EquippedLoadout => origin
+  ? { ...loadout, [origin.zone]: loadout[origin.zone].filter(item => item.instanceId !== origin.instanceId) }
+  : loadout;
+
+export const getDropTargets = (mech: Mech, current: EquippedLoadout, item: Item, origin?: EquippedOrigin): DropTargets => mapZones(zone => {
+  const loadout = withoutOrigin(current, origin);
   const component = mech.components[zone];
   if (item.type === 'weapon') {
     return {
@@ -60,14 +71,40 @@ export const getDropTargets = (mech: Mech, loadout: EquippedLoadout, item: Item)
   return { component: getAvailableSlotType(item, component, loadout[zone]) !== null, hardpoints: [] };
 });
 
+// Componente o anclaje elegido en el tablero: el inventario equipa ahí.
+export interface InventoryTarget {
+  zone: Zone;
+  hardpointIndex: number | null;
+}
+
+const usesEquippedWeapon = (loadout: EquippedLoadout, ammo: Item) =>
+  Object.values(loadout).flat().some(equipped => isAmmoCompatibleWithWeapon(ammo, equipped));
+
+// En un componente, un arma necesita un anclaje libre; en un anclaje, basta con que lo admita (lo reemplaza).
+// El equipo y la munición van a las ranuras del componente, se apunte al componente o a uno de sus anclajes.
+export const fitsTarget = (mech: Mech, loadout: EquippedLoadout, item: Item, target: InventoryTarget): boolean => {
+  const drop = getDropTargets(mech, loadout, item)[target.zone];
+  if (item.type === 'weapon') {
+    return target.hardpointIndex === null ? drop.component : drop.hardpoints.includes(target.hardpointIndex);
+  }
+  return drop.component && (item.type !== 'ammo' || usesEquippedWeapon(loadout, item));
+};
+
+// Tras equipar en un anclaje, el siguiente anclaje libre del componente, para rellenarlos seguidos.
+export const getNextFreeHardpoint = (mech: Mech, loadout: EquippedLoadout, zone: Zone, after: number): number | null => {
+  const hardpoints = mech.components[zone].hardpoints;
+  const { occupiedIndices } = getHardpointOccupancy(hardpoints, loadout[zone]);
+  const free = hardpoints.map((_, index) => index).filter(index => !occupiedIndices.has(index) && index !== after);
+  return free.find(index => index > after) ?? free[0] ?? null;
+};
+
 // Un arma cabe si algún anclaje la admite, aunque esté ocupado: se puede reemplazar. La munición, además,
-// solo si alguna arma montada la usa, como en el panel de componente.
+// solo si alguna arma montada la usa.
 export const fitsMech = (mech: Mech, loadout: EquippedLoadout, item: Item): boolean => {
   const targets = Object.values(getDropTargets(mech, loadout, item));
   if (item.type === 'weapon') return targets.some(target => target.hardpoints.length > 0);
   if (!targets.some(target => target.component)) return false;
-  if (item.type !== 'ammo') return true;
-  return Object.values(loadout).flat().some(equipped => isAmmoCompatibleWithWeapon(item, equipped));
+  return item.type !== 'ammo' || usesEquippedWeapon(loadout, item);
 };
 
 // ─── Filtros y orden ─────────────────────────────────────────────────────────
@@ -77,17 +114,20 @@ export interface InventoryFilters {
   search: string;
   techBase: string | null;
   size: ItemSize | null;
-  // Solo lo que se puede colocar en el 'Mech actual (la casilla «Fits this 'Mech»).
+  // Solo lo que se puede colocar en el 'Mech actual (la casilla «Fits this 'Mech»), o en el destino si lo hay.
   fitsOnly: boolean;
+  target?: InventoryTarget | null;
 }
 
 export const filterInventory = (catalog: Item[], filters: InventoryFilters, mech: Mech, loadout: EquippedLoadout): Item[] =>
   filterItems(catalog, { search: filters.search, techBase: filters.techBase })
     .filter(item => filters.category === 'all' || getInventoryCategory(item) === filters.category)
     .filter(item => !filters.size || item.size === filters.size)
-    .filter(item => !filters.fitsOnly || fitsMech(mech, loadout, item));
+    .filter(item => !filters.fitsOnly || (filters.target
+      ? fitsTarget(mech, loadout, item, filters.target)
+      : fitsMech(mech, loadout, item)));
 
-export type InventorySortKey = 'name' | 'size' | 'tonnage' | 'damage' | 'range';
+export type InventorySortKey = 'name' | 'size' | 'tonnage' | 'damage' | 'heat' | 'rpm' | 'range';
 export type SortDirection = 'asc' | 'desc';
 
 const getSortValue = (item: Item, key: Exclude<InventorySortKey, 'name'>): number | null => {
@@ -95,7 +135,7 @@ const getSortValue = (item: Item, key: Exclude<InventorySortKey, 'name'>): numbe
   if (key === 'tonnage') return item.tonnage;
   if (item.type !== 'weapon') return null;
   const stats = getWeaponStats(item);
-  return key === 'damage' ? stats.damage : stats.range;
+  return key === 'range' ? stats.range : stats[key];
 };
 
 // Lo que no tiene el dato (el daño del equipo) va al final en los dos sentidos; a igualdad, por nombre.
@@ -153,4 +193,48 @@ export const placeItem = (
     message: `Added ${item.name} to ${label}`,
     replaced: false
   };
+};
+
+export const unequipItem = (loadout: EquippedLoadout, zone: Zone, instanceId: string): PlaceResult => {
+  const item = loadout[zone].find(equipped => equipped.instanceId === instanceId);
+  if (!item) return unchanged(loadout, 'Item not found');
+  return {
+    loadout: withoutOrigin(loadout, { zone, instanceId }),
+    message: `Removed ${item.name} from ${ZONE_LABELS[zone]}`,
+    replaced: false
+  };
+};
+
+// Mueve un objeto equipado: se quita de su sitio y se coloca como si viniera del inventario, con su tier.
+export const moveEquippedItem = (
+  mech: Mech,
+  loadout: EquippedLoadout,
+  origin: EquippedOrigin,
+  zone: Zone,
+  hardpointIndex: number | null
+): PlaceResult => {
+  const item = loadout[origin.zone].find(equipped => equipped.instanceId === origin.instanceId);
+  if (!item) return unchanged(loadout, 'Item not found');
+  const stripped = withoutOrigin(loadout, origin);
+  const result = placeItem(mech, stripped, zone, item, hardpointIndex);
+  return result.loadout === stripped ? unchanged(loadout, result.message) : result;
+};
+
+const isSpecialSlot = (slotType: string | null) => slotType !== null && slotType !== 'General_SlotType';
+
+// Equipar sin elegir destino (clic derecho en el inventario). Un arma va al anclaje libre más pequeño que la
+// admite de todo el 'Mech, para no gastar los grandes; el equipo, primero a una ranura especial que lo admite
+// (los disipadores, a las del motor) y si no a la primera ranura general libre. A igualdad, en el orden del tablero.
+export const autoPlaceItem = (mech: Mech, loadout: EquippedLoadout, item: Item): PlaceResult => {
+  const zones = ZONE_KEYS.filter(zone => getDropTargets(mech, loadout, item)[zone].component);
+  const best = item.type === 'weapon'
+    ? zones
+      .map(zone => {
+        const index = findHardpointForWeapon(mech.components[zone].hardpoints, loadout[zone], item) as number;
+        return { zone, size: SIZE_RANK[mech.components[zone].hardpoints[index].size] };
+      })
+      .sort((first, second) => first.size - second.size)[0]?.zone
+    : zones.find(zone => isSpecialSlot(getAvailableSlotType(item, mech.components[zone], loadout[zone]))) ?? zones[0];
+
+  return best ? placeItem(mech, loadout, best, item, null) : unchanged(loadout, `No room for ${item.name} in this 'Mech`);
 };

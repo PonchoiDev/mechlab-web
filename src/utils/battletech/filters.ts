@@ -158,7 +158,7 @@ export const filterBtItems = (items: BtItem[], filters: BtItemFilters): BtItem[]
   return filtered.sort((a, b) => (ascending ? value(a) - value(b) : value(b) - value(a)) || byName(a, b));
 };
 
-// Filtros del panel de una ubicación, que sigue al ComponentEditor de MW5: búsqueda y, como propios de
+// Filtros del panel de una ubicación, que sigue al antiguo panel de componente de MW5: búsqueda y, como propios de
 // BATTLETECH, versión (+, + +, + + +), fuente y rareza.
 export interface BtPanelFilters {
   query: string;
