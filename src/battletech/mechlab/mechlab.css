@@ -201,3 +201,32 @@ button.component-card-item:has(.bt-item-bonus) { display: flex; align-items: bas
 /* Una pieza con bonificación ocupa todo el ancho: en media columna, el nombre y el texto se partían. */
 .component-card-equipment .component-card-item:has(.bt-item-bonus) { grid-column: 1 / -1; }
 .component-card-item.is-built-in small:last-child { white-space: nowrap; }
+
+/* Inventario: el de MW5 (App.css) con las columnas de BATTLETECH. El daño lleva los disparos (50 ×2), así
+   que su columna es más ancha; la inestabilidad va en cian y el calor en ámbar, como en MW5. */
+.bt-inventory { --inventory-columns: minmax(0, 1fr) 34px 38px 60px 40px 40px 46px; }
+
+.bt-inventory .inventory-item > :nth-child(5),
+.bt-inventory .inventory-table-head button:nth-child(5) { color: var(--work-cyan); }
+.bt-inventory .inventory-item > :nth-child(6),
+.bt-inventory .inventory-table-head button:nth-child(6) { color: var(--work-amber); }
+.bt-inventory .inventory-item small { color: var(--work-muted); font-size: 10px; font-weight: 500; }
+.bt-inventory .inventory-item-name .bt-item-bonus { display: block; margin-top: 2px; }
+
+.inventory-tab[data-category='support'] { --tab-color: var(--bt-support); }
+.bt-inventory .inventory-tab[data-category='equipment'] { --tab-color: var(--bt-upgrade); }
+.bt-inventory .inventory-tab[data-category='ammo'] { --tab-color: var(--bt-ammo); }
+
+/* Los iconos de anclaje son SVG de un color: se pintan en blanco con máscara, como en las tarjetas. */
+.inventory-tab-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background: var(--work-text);
+  mask: var(--icon) center / contain no-repeat;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+}
+
+@media (max-width: 760px) {
+  .bt-inventory { --inventory-columns: minmax(0, 1fr) 34px 52px 34px 34px 42px; }
+}

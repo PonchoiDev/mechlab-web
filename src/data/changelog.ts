@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-19-battletech-inventory',
+    date: '2026-11-19',
+    title: 'Inventory in the BATTLETECH MechLab',
+    items: [
+      'The BATTLETECH MechLab gets the Inventory of the MW5 one, in place of the location panel: every weapon, piece of equipment and ammo in a table with slots, tons, damage, stability damage, heat and range, with tabs by hardpoint type',
+      'Click a location or a hardpoint to equip into it, with what is already installed. Clicking a used hardpoint replaces its weapon',
+      'Drag items onto the board, drag mounted ones to move them or off the board to remove them, middle-click to remove, and right-click an item to equip it where it fits. Replacing or removing shows Undo'
+    ]
+  },
+  {
     id: '2026-11-19-weapons-table-width',
     date: '2026-11-19',
     title: 'Weapon table fix',
