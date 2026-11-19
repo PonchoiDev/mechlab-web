@@ -25,7 +25,7 @@ const build = (parts: Partial<EquippedLoadout>): EquippedLoadout => ({ ...create
 const weapon = (id: string, hardpointIndex: number, tier?: string) =>
   createEquippedItem(getItem(id, tier ? { tier } : {}), undefined, hardpointIndex);
 const filters = (changes: Partial<InventoryFilters> = {}): InventoryFilters =>
-  ({ category: 'all', search: '', techBase: null, size: null, fitsOnly: true, ...changes });
+  ({ category: 'all', search: '', size: null, fitsOnly: true, ...changes });
 const ids = (items: { id: string }[]) => items.map(item => item.id);
 
 describe('categorías del inventario', () => {
@@ -64,13 +64,10 @@ describe('filtros del inventario', () => {
       .toHaveLength(allItems.filter(item => item.type === 'ammo').length);
   });
 
-  it('CA4: buscador, tecnología y tamaño', () => {
+  it('CA4: buscador y tamaño', () => {
     const all = filters({ fitsOnly: false });
 
     expect(ids(filterInventory(allItems, { ...all, search: 'ac10' }, archer, empty))).toContain('Autocannon10');
-    const clan = filterInventory(allItems, { ...all, techBase: 'Clan' }, archer, empty);
-    expect(clan.length).toBeGreaterThan(0);
-    expect(clan.every(item => item.techBase === 'Clan')).toBe(true);
     const large = filterInventory(allItems, { ...all, size: 'large' }, archer, empty);
     expect(large.length).toBeGreaterThan(0);
     expect(large.every(item => item.size === 'large')).toBe(true);
