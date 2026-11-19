@@ -1,6 +1,8 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, DragEvent } from 'react';
 import type { ComponentData, EquippedItem } from '../types/mech';
 import { clampArmorValue, scaleArmorPoints } from '../utils/calculators';
+import { getHardpointUsage, type DropTarget } from '../utils/inventory';
+import { getWeaponTypeName } from '../utils/items';
 import {
   getComponentStatus,
   getEquipmentCategory,
@@ -33,6 +35,13 @@ interface ComponentCardProps {
   expandedSlots?: boolean;
   // Refined Armor: los puntos se muestran multiplicados.
   armorScale?: number;
+  // Mientras se coloca un objeto del inventario: dónde admite soltarlo este componente. Pulsar la tarjeta o
+  // un anclaje coloca el objeto en vez de abrir el panel.
+  placement?: { target: DropTarget; onPlace: (hardpointIndex: number | null) => void };
+  // Arrastrar lo montado (a otro sitio, o fuera del tablero para desequiparlo) y quitarlo con el clic central.
+  onDragItem?: (item: EquippedItem) => void;
+  onDragEnd?: () => void;
+  onRemoveItem?: (item: EquippedItem) => void;
 }
 
 interface EquipmentChipProps {
@@ -42,19 +51,46 @@ interface EquipmentChipProps {
   onMenu: (x: number, y: number) => void;
   // En la vista expandida, número de celdas que ocupa.
   slots?: number;
+  onDrag?: () => void;
+  onDragEnd?: () => void;
+  onRemove?: () => void;
 }
 
-function EquipmentChip({ item, count, category, onMenu, slots }: EquipmentChipProps) {
+// Un div y no un botón: Firefox no deja arrastrar botones.
+function EquipmentChip({ item, count, category, onMenu, slots, onDrag, onDragEnd, onRemove }: EquipmentChipProps) {
   const longPress = useLongPress(onMenu);
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
+      draggable={!!onDrag}
+      onDragStart={(event) => {
+        event.stopPropagation();
+        event.dataTransfer.setData('text/plain', item.name);
+        event.dataTransfer.effectAllowed = 'move';
+        onDrag?.();
+      }}
+      onDragEnd={onDragEnd}
+      onKeyDown={(event) => {
+        if (event.key !== 'Enter' && event.key !== ' ' && event.key !== 'ContextMenu') return;
+        event.preventDefault();
+        event.stopPropagation();
+        const rect = event.currentTarget.getBoundingClientRect();
+        onMenu(rect.left, rect.bottom + 4);
+      }}
+      onMouseDown={(event) => { if (event.button === 1) event.preventDefault(); }}
+      onAuxClick={(event) => {
+        if (event.button !== 1 || !onRemove) return;
+        event.preventDefault();
+        event.stopPropagation();
+        onRemove();
+      }}
       className={slots ? 'component-card-item slot-cell-item' : 'component-card-item'}
       style={slots ? { '--slots': slots } as CSSProperties : undefined}
       data-category={category}
       data-weapon-type={item.type === 'ammo' ? item.weaponType ?? undefined : undefined}
-      title={`${item.name}: right-click for options`}
+      title={`${item.name}: right-click for options, drag it elsewhere or off the board, middle-click to remove${count > 1 ? ' one' : ''}`}
       onContextMenu={(event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -65,11 +101,36 @@ function EquipmentChip({ item, count, category, onMenu, slots }: EquipmentChipPr
     >
       {item.name}
       {count > 1 && <small>×{count}</small>}
-    </button>
+    </div>
   );
 }
 
 const GENERAL_SLOT_TYPE = 'General_SlotType';
+
+// Iconos de tipo de arma del juego (tools/extraer_iconos_inventario.py), los de las pestañas del inventario.
+const HARDPOINT_ICON_PATH = `${import.meta.env.BASE_URL}mechlab/inventory/`;
+
+// Junto al título, como en el MechLab de BATTLETECH: los anclajes de cada tipo con su icono y los ocupados
+// («1/2»), para ver de un vistazo qué cabe en cada componente.
+function HardpointSummary({ componentData, equippedItems }: { componentData: ComponentData; equippedItems: EquippedItem[] }) {
+  const usage = getHardpointUsage(componentData, equippedItems);
+  if (usage.length === 0) return null;
+  return (
+    <span className="component-card-hardpoint-summary" aria-label="Hardpoints">
+      {usage.map(({ type, used, capacity }) => (
+        <span
+          key={type}
+          className={used === capacity ? 'hardpoint-summary is-full' : 'hardpoint-summary'}
+          data-weapon-type={type}
+          title={`${getWeaponTypeName(type)}: ${used} of ${capacity} hardpoints used`}
+        >
+          <i style={{ '--icon': `url(${HARDPOINT_ICON_PATH}${type}.png)` } as CSSProperties} aria-hidden="true" />
+          {used}/{capacity}
+        </span>
+      ))}
+    </span>
+  );
+}
 
 interface SlotCellsProps {
   label: string;
@@ -77,10 +138,11 @@ interface SlotCellsProps {
   capacity: number;
   slotsOf: (item: EquippedItem) => number;
   onMenu: (itemName: string, x: number, y: number) => void;
+  handlersFor: (item: EquippedItem) => Pick<EquipmentChipProps, 'onDrag' | 'onDragEnd' | 'onRemove'>;
 }
 
 // Ranuras de un tipo como celdas: las piezas ocupan sus celdas y los huecos libres quedan a la vista.
-function SlotCells({ label, items, capacity, slotsOf, onMenu }: SlotCellsProps) {
+function SlotCells({ label, items, capacity, slotsOf, onMenu, handlersFor }: SlotCellsProps) {
   const used = items.reduce((total, item) => total + slotsOf(item), 0);
   if (capacity === 0 && items.length === 0) return null;
 
@@ -95,6 +157,7 @@ function SlotCells({ label, items, capacity, slotsOf, onMenu }: SlotCellsProps) 
           category={getEquipmentCategory(item)}
           slots={Math.max(1, slotsOf(item))}
           onMenu={(x, y) => onMenu(item.name, x, y)}
+          {...handlersFor(item)}
         />
       ))}
       {Array.from({ length: Math.max(0, capacity - used) }, (_, index) => (
@@ -124,7 +187,11 @@ export function ComponentCard({
   onHardpointMenu,
   onEquipmentMenu,
   expandedSlots = false,
-  armorScale = 1
+  armorScale = 1,
+  placement,
+  onDragItem,
+  onDragEnd,
+  onRemoveItem
 }: ComponentCardProps) {
   const status = getComponentStatus(componentData, equippedItems);
   const hardpoints = getHardpointViews(componentData.hardpoints, equippedItems);
@@ -134,21 +201,46 @@ export function ComponentCard({
   const shownArmor = scaleArmorPoints(armorFront, armorScale) + scaleArmorPoints(armorRear, armorScale);
   const shownMaxArmor = scaleArmorPoints(componentData.maxArmor, armorScale);
   const stateClass = status.isOverSlots ? 'is-over' : status.hasFreeSpace ? 'has-free-space' : 'is-full';
+  const dropClass = !placement ? ''
+    : placement.target.component || placement.target.hardpoints.length > 0 ? 'is-drop-target' : 'is-drop-off';
+  const select = (hardpointIndex: number | null) => placement ? placement.onPlace(hardpointIndex) : onSelect(hardpointIndex);
+
+  const handlersFor = (item: EquippedItem) => ({
+    onDrag: onDragItem && (() => onDragItem(item)),
+    onDragEnd,
+    onRemove: onRemoveItem && (() => onRemoveItem(item))
+  });
+
+  const handleDragOver = (event: DragEvent) => {
+    if (placement?.target.component) event.preventDefault();
+  };
+
+  // Al mover algo ya equipado, toda la página admite soltar (fuera del tablero se desequipa): aquí llega
+  // también lo que se suelta en una tarjeta que no lo admite, y no se desequipa, sino que avisa del motivo.
+  const handleDrop = (event: DragEvent) => {
+    if (!placement) return;
+    event.preventDefault();
+    event.stopPropagation();
+    placement.onPlace(null);
+  };
 
   return (
     <div
-      className={['component-card', `board-${position}`, stateClass, isActive ? 'is-active' : ''].filter(Boolean).join(' ')}
-      onClick={() => onSelect(null)}
+      className={['component-card', `board-${position}`, stateClass, isActive ? 'is-active' : '', dropClass].filter(Boolean).join(' ')}
+      onClick={() => select(null)}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
     >
       <div className="component-card-header">
         <button
           type="button"
           className="component-card-title"
           aria-pressed={isActive}
-          onClick={(event) => { event.stopPropagation(); onSelect(null); }}
+          onClick={(event) => { event.stopPropagation(); select(null); }}
         >
           {label}
         </button>
+        <HardpointSummary componentData={componentData} equippedItems={equippedItems} />
       </div>
 
       {hardpoints.length > 0 && (
@@ -159,8 +251,15 @@ export function ComponentCard({
               view={view}
               isSelected={isActive && selectedHardpoint === view.index}
               emphasizeWeapon
-              onClick={() => onSelect(view.index)}
+              onClick={() => select(view.index)}
               onContextMenu={(x, y) => onHardpointMenu(view.index, x, y)}
+              drop={placement && {
+                accepts: placement.target.hardpoints.includes(view.index),
+                onDrop: () => placement.onPlace(view.index)
+              }}
+              onDragWeapon={view.weapon && onDragItem ? () => onDragItem(view.weapon as EquippedItem) : undefined}
+              onDragEnd={onDragEnd}
+              onRemoveWeapon={view.weapon && onRemoveItem ? () => onRemoveItem(view.weapon as EquippedItem) : undefined}
             />
           ))}
         </div>
@@ -174,6 +273,7 @@ export function ComponentCard({
             capacity={status.maxSlots}
             slotsOf={item => item.slots ?? 0}
             onMenu={onEquipmentMenu}
+            handlersFor={handlersFor}
           />
           {status.specialSlots.map(slot => (
             <SlotCells
@@ -183,6 +283,7 @@ export function ComponentCard({
               capacity={slot.capacity}
               slotsOf={() => 1}
               onMenu={onEquipmentMenu}
+              handlersFor={handlersFor}
             />
           ))}
         </div>
@@ -197,6 +298,7 @@ export function ComponentCard({
               count={count}
               category={getEquipmentCategory(item)}
               onMenu={(x, y) => onEquipmentMenu(item.name, x, y)}
+              {...handlersFor(item)}
             />
           ))}
         </div>

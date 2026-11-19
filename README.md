@@ -48,7 +48,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (637 tests, cobertura con V8) |
+| Tests | Vitest 5 (663 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -227,6 +227,7 @@ tools/
   generar_unidades.py   Genera src/data/units.json
   extraer_pilotos.py    Extrae del .pak del juego los pilotos hero y los rasgos de piloto con sus efectos
   generar_pilotos.py    Genera src/data/pilots.json
+  extraer_iconos_inventario.py  Extrae del .pak del juego los iconos de las pestañas del inventario del mechlab
   extraer_argo_battletech.py  Copia de BATTLETECH las mejoras de la Argo, sus textos e imágenes
   generar_argo_battletech.py  Genera src/data/battletech/argo.json
   extraer_mechlab_battletech.py  Extrae de BATTLETECH y de sus DLC los chasis, las variantes, los componentes y los iconos
@@ -315,6 +316,14 @@ python3 tools/generar_unidades.py
 | `facciones.json` | `Factions/*` y sus StringTables | Nombre de las facciones de la rareza, con las compañías de mercenarios y los patrocinadores de las arenas |
 | `sarna.json` | API de Sarna (`imagenes_sarna.py`), no el juego | Página y dibujo principal de cada chasis, a partir de la tabla de títulos de `generar_unidades.py` |
 
+### Iconos del inventario
+
+Las pestañas del inventario del MechLab llevan los iconos de las del inventario del mechlab del juego. `extraer_iconos_inventario.py` los lee del `.pak` (`UI/FrontEnd/Mechlab/Textures/icon_*_UIX`, `Filter_Melee_Icon` y el filtro de artillería del DLC8) y los escribe en `public/mechlab/inventory/`, en PNG de 48 px.
+
+```sh
+python3 tools/extraer_iconos_inventario.py "/ruta/a/MechWarrior 5 Mercenaries"
+```
+
 ### Pilotos
 
 Los rasgos de piloto del DLC7 y los pilotos hero no se exportan con el editor de mods: `extraer_pilotos.py` los lee del `.pak`. De cada rasgo sigue el árbol de componentes (afinidad con un chasis, quirks de arma, blindaje, sensores, costes del piloto…); de cada piloto hero saca sus habilidades, sus rasgos fijos y las misiones que lo dan. `generar_pilotos.py` rellena los textos, convierte las cifras en efectos, ordena los rasgos por subgrupos y les añade los programas de las academias de `tools/datos-juego/starmap/`, agrupados por familias.
@@ -386,7 +395,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Calidad y comprobación contra el juego
 
-- **637 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **663 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
