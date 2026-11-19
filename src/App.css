@@ -531,6 +531,8 @@
   gap: 14px;
 }
 
+.analysis-body.is-single { grid-template-columns: minmax(0, 1fr); }
+
 
 .analysis-table-wrap,
 .ammunition-list {

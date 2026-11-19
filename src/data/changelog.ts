@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-19-weapons-table-width',
+    date: '2026-11-19',
+    title: 'Weapon table fix',
+    items: [
+      'Without ammunition, the weapon performance table takes the full width in both MechLabs, instead of leaving an empty column on the right'
+    ]
+  },
+  {
     id: '2026-11-19-inventory',
     date: '2026-11-19',
     title: 'Inventory',

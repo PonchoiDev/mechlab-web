@@ -65,7 +65,8 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
   const total = (format: (values: BuildSummary) => string) => <UpgradedValue value={format(summary)} base={base && format(base)} />;
 
   return (
-    <div className="analysis-body">
+    // Sin munición no hay columna de la derecha: la tabla de armas ocupa todo el ancho.
+    <div className={ammunition.length > 0 ? 'analysis-body' : 'analysis-body is-single'}>
       <div className="analysis-table-wrap">
         <header className="analysis-heading">
           <div>
