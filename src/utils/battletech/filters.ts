@@ -1,15 +1,15 @@
 import type { Zone } from '../../types/mech';
 import type { BtHardpoint, BtItem, BtLoadout, BtMech, BtSource, BtWeightClass } from '../../types/battletech-mechlab';
-import { getAllItems, getHardpointCount, getLocationUsage, getMountProblem } from './fitting';
+import { getHardpointCount, getLocationUsage } from './fitting';
 import { getRarityGroup, type BtRarityGroup } from './catalog';
-import { getItem, HARDPOINTS } from './mechlabData';
+import { HARDPOINTS } from './mechlabData';
 
 // Filtros de los selectores de 'Mech y de objetos del MechLab de BATTLETECH.
 
 const normalize = (text: string) => text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 // Cada palabra de la búsqueda tiene que estar en el texto: «hbk 4g» encuentra el Hunchback HBK-4G.
-const matchesQuery = (text: string, query: string) => {
+export const matchesQuery = (text: string, query: string) => {
   const haystack = normalize(text).replace(/-/g, '');
   return normalize(query).split(/\s+/).filter(Boolean).every(word => haystack.includes(word.replace(/-/g, '')));
 };
@@ -140,7 +140,7 @@ const SORT_VALUE: Record<Exclude<BtItemSort, 'name'>, (item: BtItem) => number> 
   cost: item => item.cost
 };
 
-const byName = (a: BtItem, b: BtItem) => a.baseName.localeCompare(b.baseName) || a.plus - b.plus || a.name.localeCompare(b.name);
+export const byName = (a: BtItem, b: BtItem) => a.baseName.localeCompare(b.baseName) || a.plus - b.plus || a.name.localeCompare(b.name);
 
 // El equipo de serie (BUILT-IN) no sale: no se puede montar, solo viene fijo en algunos chasis. Se
 // ordena de mayor a menor salvo por nombre, peso (lo ligero antes), calor (lo frío antes) y coste.
@@ -156,51 +156,4 @@ export const filterBtItems = (items: BtItem[], filters: BtItemFilters): BtItem[]
   const value = SORT_VALUE[filters.sort];
   const ascending = filters.sort === 'tonnage' || filters.sort === 'heat' || filters.sort === 'cost';
   return filtered.sort((a, b) => (ascending ? value(a) - value(b) : value(b) - value(a)) || byName(a, b));
-};
-
-// Filtros del panel de una ubicación, que sigue al antiguo panel de componente de MW5: búsqueda y, como propios de
-// BATTLETECH, versión (+, + +, + + +), fuente y rareza.
-export interface BtPanelFilters {
-  query: string;
-  plus: number[];
-  sources: BtSource[];
-  rarities: BtRarityGroup[];
-}
-
-export const EMPTY_PANEL_FILTERS: BtPanelFilters = { query: '', plus: [], sources: [], rarities: [] };
-
-export const hasPanelFilters = (filters: BtPanelFilters) =>
-  filters.query.trim() !== '' || filters.plus.length > 0 || filters.sources.length > 0 || filters.rarities.length > 0;
-
-export const matchesPanelFilters = (item: BtItem, filters: BtPanelFilters): boolean =>
-  (filters.plus.length === 0 || filters.plus.includes(item.plus))
-  && (filters.sources.length === 0 || filters.sources.includes(item.source))
-  && (filters.rarities.length === 0 || filters.rarities.includes(getRarityGroup(item.rarity)))
-  && matchesQuery(`${item.name} ${item.manufacturer}`, filters.query);
-
-export type BtWeaponSortOrder = 'large-first' | 'small-first';
-
-// Como Largest y Smallest del panel de MW5, donde el tamaño es el del anclaje: aquí son las ranuras y, a
-// igualdad, el peso; después, el nombre con su versión.
-export const sortBtWeapons = (items: BtItem[], order: BtWeaponSortOrder): BtItem[] => {
-  const direction = order === 'large-first' ? -1 : 1;
-  return [...items].sort((a, b) => direction * (a.slots - b.slots) || direction * (a.tonnage - b.tonnage) || byName(a, b));
-};
-
-// Lo que cabe ahora en una ubicación, como getEquippableItems de MW5. Con un anclaje ocupado elegido,
-// las armas de su tipo que caben si se quita la que tiene (para cambiarla).
-export const getEquippableBtItems = (mech: BtMech, loadout: BtLoadout, zone: Zone, items: BtItem[]): BtItem[] =>
-  items.filter(item => !getMountProblem(mech, loadout, zone, item));
-
-// Como la pestaña Ammo de MW5, solo la munición de las armas montadas (las fijas incluidas).
-export const getAmmoForMountedWeapons = (mech: BtMech, loadout: BtLoadout, items: BtItem[]): BtItem[] => {
-  const categories = new Set(getAllItems(mech, loadout).map(item => item.weapon?.ammoCategory).filter(Boolean));
-  return items.filter(item => item.ammo?.category && categories.has(item.ammo.category));
-};
-
-export const getReplacementWeapons =(mech: BtMech, loadout: BtLoadout, zone: Zone, index: number, items: BtItem[]): BtItem[] => {
-  const current = loadout[zone][index];
-  const type = getItem(current)?.hardpoint;
-  const without = { ...loadout, [zone]: loadout[zone].filter((_, position) => position !== index) };
-  return items.filter(item => item.kind === 'weapon' && item.hardpoint === type && item.id !== current && !getMountProblem(mech, without, zone, item));
 };
