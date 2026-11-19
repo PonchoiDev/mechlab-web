@@ -65,6 +65,7 @@ flowchart TB
 - **`utils/`** es el núcleo: funciones puras que reciben datos y devuelven datos, sin React ni efectos. Por ejemplo, `getBuildSummary(mech, loadout, armor, upgrades)` calcula todas las estadísticas. Es lo que cubren los tests.
 - **`hooks/`** guarda el estado: la build en curso, las builds guardadas y las preferencias de vista.
 - **`components/`** solo pinta y llama a la lógica.
+- **`utils/inventory.ts`:** el inventario del MechLab (`InventoryPanel`): las categorías, los filtros (con «cabe en este 'Mech»), el orden, los anclajes y componentes donde se puede soltar cada objeto y la colocación, que reemplaza el arma de un anclaje ocupado. Usa las reglas de `equipment.ts` y `buildActions.ts`, sin copiarlas, y tiene sus tests (`inventory.test.ts`).
 - **`services/`** aísla lo que depende del exterior: la API de Sarna, el portapapeles y el canvas de la imagen. Las ayudas de dibujo son comunes (`canvasDrawing.ts`); cada MechLab dibuja la suya (`buildImage.ts` para MW5 y `battletech/buildImage.ts` para BATTLETECH) y `ShareImageDialog` recibe la función que la dibuja.
 
 
