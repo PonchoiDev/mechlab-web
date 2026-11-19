@@ -1,12 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import {
+  autoPlaceItem,
   countByCategory,
   filterInventory,
   getDropTargets,
   getInventoryCategory,
   INVENTORY_CATEGORIES,
+  moveEquippedItem,
   placeItem,
   sortInventory,
+  unequipItem,
   type InventoryFilters
 } from './inventory';
 import { createEquippedItem, getHardpointViews } from './equipment';
@@ -18,7 +21,8 @@ import type { EquippedLoadout } from '../types/mech';
 const archer = getMech('ARC-2R');
 const empty = createEmptyLoadout();
 const build = (parts: Partial<EquippedLoadout>): EquippedLoadout => ({ ...createEmptyLoadout(), ...parts });
-const weapon = (id: string, hardpointIndex: number) => createEquippedItem(getItem(id), undefined, hardpointIndex);
+const weapon = (id: string, hardpointIndex: number, tier?: string) =>
+  createEquippedItem(getItem(id, tier ? { tier } : {}), undefined, hardpointIndex);
 const filters = (changes: Partial<InventoryFilters> = {}): InventoryFilters =>
   ({ category: 'all', search: '', techBase: null, size: null, fitsOnly: true, ...changes });
 const ids = (items: { id: string }[]) => items.map(item => item.id);
@@ -164,5 +168,80 @@ describe('colocar desde el inventario', () => {
 
     expect(result.loadout.centerTorso[0].hardpointIndex).toBe(0);
     expect(result.message).toBe('Added M Laser to Center torso');
+  });
+});
+
+describe('orden por calor y RPM', () => {
+  it('CA14: hacia abajo, primero el arma de más calor o de más RPM, con el equipo al final', () => {
+    const items = [getItem('MediumLaser'), getItem('DoubleHeatSink'), getItem('LRM20'), getItem('Autocannon10')];
+    const weapons = items.filter(item => item.type === 'weapon');
+    const top = (stat: 'heat' | 'rpm') =>
+      [...weapons].sort((a, b) => getWeaponStats(b)[stat] - getWeaponStats(a)[stat])[0].id;
+
+    expect(sortInventory(items, 'heat', 'desc')[0].id).toBe(top('heat'));
+    expect(sortInventory(items, 'rpm', 'desc')[0].id).toBe(top('rpm'));
+    expect(sortInventory(items, 'heat', 'desc').at(-1)?.id).toBe('DoubleHeatSink');
+    expect(sortInventory(items, 'rpm', 'asc').at(-1)?.id).toBe('DoubleHeatSink');
+  });
+});
+
+describe('objetos equipados', () => {
+  it('CA15: desequipar quita el objeto y lo avisa', () => {
+    const laser = weapon('MediumLaser', 0);
+    const result = unequipItem(build({ leftArm: [laser] }), 'leftArm', laser.instanceId);
+
+    expect(result.loadout.leftArm).toEqual([]);
+    expect(result.message).toBe('Removed M Laser from Left arm');
+  });
+
+  it('CA16: un arma arrastrada cuenta su propio anclaje como libre y se mueve con su tier', () => {
+    const laser = weapon('MediumLaser', 0, '3');
+    const loadout = build({ leftArm: [laser] });
+    const origin = { zone: 'leftArm' as const, instanceId: laser.instanceId };
+
+    expect(getDropTargets(archer, loadout, laser, origin).leftArm).toEqual({ component: true, hardpoints: [0] });
+    const result = moveEquippedItem(archer, loadout, origin, 'rightArm', 0);
+    expect(result.loadout.leftArm).toEqual([]);
+    expect(result.loadout.rightArm.map(item => [item.id, item.tier, item.hardpointIndex])).toEqual([['MediumLaser', '3', 0]]);
+    expect(result.replaced).toBe(false);
+  });
+
+  it('CA17: moverla a un anclaje ocupado reemplaza su arma', () => {
+    const laser = weapon('MediumLaser', 0);
+    const loadout = build({ leftArm: [laser], rightArm: [weapon('SmallLaser', 0)] });
+    const result = moveEquippedItem(archer, loadout, { zone: 'leftArm', instanceId: laser.instanceId }, 'rightArm', 0);
+
+    expect(result.loadout.leftArm).toEqual([]);
+    expect(ids(result.loadout.rightArm)).toEqual(['MediumLaser']);
+    expect(result.replaced).toBe(true);
+    expect(result.message).toBe('Replaced S Laser with M Laser in Right arm');
+  });
+
+  it('CA18: moverla a donde no cabe no cambia nada', () => {
+    const laser = weapon('MediumLaser', 0);
+    const loadout = build({ leftArm: [laser] });
+    const result = moveEquippedItem(archer, loadout, { zone: 'leftArm', instanceId: laser.instanceId }, 'leftLeg', null);
+
+    expect(result.loadout).toBe(loadout);
+    expect(result.message).toBe('No free hardpoint in Left leg fits M Laser');
+  });
+});
+
+describe('equipar con el clic derecho', () => {
+  it('CA19: cada objeto va a su lugar adecuado', () => {
+    expect(autoPlaceItem(archer, empty, getItem('MediumLaser')).message).toBe('Added M Laser to Center torso');
+    expect(autoPlaceItem(archer, empty, getItem('LRM20')).message).toBe('Added LRM 20 to Left torso');
+
+    const first = autoPlaceItem(archer, empty, getItem('DoubleHeatSink'));
+    expect(first.loadout.centerTorso.map(item => item.equippedSlotType)).toEqual(['EngineHeatsink_SlotType']);
+    const second = autoPlaceItem(archer, first.loadout, getItem('DoubleHeatSink'));
+    expect(second.loadout.leftTorso.map(item => item.equippedSlotType)).toEqual(['General_SlotType']);
+  });
+
+  it('CA20: si no cabe en ningún sitio, no cambia nada y lo avisa', () => {
+    const result = autoPlaceItem(archer, empty, getItem('Autocannon10'));
+
+    expect(result.loadout).toBe(empty);
+    expect(result.message).toBe("No room for AC/10 in this 'Mech");
   });
 });
