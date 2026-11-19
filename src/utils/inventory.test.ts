@@ -255,12 +255,13 @@ describe('inventario apuntando a un componente o a un anclaje', () => {
     expect(shown).not.toContain('LRM20');
   });
 
-  it('CA22: con un anclaje ocupado como destino, las armas que lo admiten como reemplazo', () => {
+  it('CA22: con un anclaje ocupado como destino, solo las armas que lo admiten, como reemplazo', () => {
     const shown = ids(filterInventory(allItems, filters({ target: { zone: 'leftArm', hardpointIndex: 0 } }), archer, withLaser));
 
-    expect(shown).toEqual(expect.arrayContaining(['SmallLaser', 'DoubleHeatSink']));
+    expect(shown).toContain('SmallLaser');
     expect(shown).not.toContain('LRM20');
     expect(shown).not.toContain('Knuckles_Heavy');
+    expect(shown).not.toContain('DoubleHeatSink');
   });
 
   it('CA23: tras equipar en un anclaje, el destino pasa al siguiente libre', () => {
