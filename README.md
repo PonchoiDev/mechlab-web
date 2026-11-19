@@ -48,7 +48,7 @@ El proyecto nació como trabajo de fin de máster y se publicó en Reddit (r/Mec
 |---|---|
 | Interfaz | React 19, TypeScript 7, CSS propio (sin framework de estilos) |
 | Build y desarrollo | Vite 8 |
-| Tests | Vitest 5 (663 tests, cobertura con V8) |
+| Tests | Vitest 5 (671 tests, cobertura con V8) |
 | Análisis estático | oxlint |
 | Despliegue | Cloudflare Workers (assets estáticos y un Worker para la API) |
 | Correo del formulario de feedback | Cloudflare Email Routing |
@@ -119,7 +119,7 @@ No usa base de datos ni backend propio: las builds guardadas viven en el `localS
 - Todas las armas, munición, disipadores, retrorreactores y mejoras, con sus versiones de fabricante (+ a + + +), filtros por categoría, versión, fuente y rareza, búsqueda y orden.
 - Las reglas del mechlab del juego: todo ocupa ranuras, las armas necesitan un anclaje libre de su tipo, cada componente va donde lo permite el juego, los retrorreactores tienen su máximo y su tramo de tonelaje, y el equipo fijo no se quita.
 - Blindaje en pasos de 5 con sus máximos delantero y trasero, y un botón que reparte el tonelaje libre como el del juego.
-- El mismo tablero, panel de ubicación y barra de herramientas que el MechLab de MW5, con el menú del clic derecho (duplicar, llenar anclajes, añadir munición, mover y quitar).
+- El mismo tablero, inventario y barra de herramientas que el MechLab de MW5: arrastrar y soltar, equipar en la ubicación elegida y el menú del clic derecho (duplicar, llenar anclajes, añadir munición, mover y quitar).
 - Daño de la salva, inestabilidad, calor frente a disipación, daño por distancia, munición por tipo de arma, andar y correr, y valor en C-Bills.
 - Selector con filtros por clase, fuente, rol, anclajes mínimos y retrorreactores; enlace para compartir (`?b=` y `?mech=HBK-4G`), builds guardadas en el navegador y comparación.
 
@@ -395,7 +395,7 @@ python3 tools/generar_mechlab_battletech.py
 
 ## Calidad y comprobación contra el juego
 
-- **663 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
+- **671 tests** con Vitest sobre la lógica: cálculos, reglas de equipo, código de las builds, builds guardadas, mejoras y el Worker (incluidas las restricciones de seguridad del proxy de imágenes).
 - **Cobertura:** el 95 % de las líneas de la lógica (`src/utils`) está cubierto por tests. `npm run coverage` genera el informe, y el CI publica el resumen en cada ejecución. La interfaz (componentes de React) todavía no tiene tests.
 - `gameReference.test.ts` y `upgrades.test.ts` reproducen capturas del mechlab del juego (por ejemplo, el Grand Dragon DRG-1G-S o el Battlemaster BLR-1P) y comprueban que la web da las mismas cifras: daño, armadura, refrigeración, giro, capacidad de calor y efecto de las mejoras.
 - `stockBuilds.test.ts` comprueba que las builds de fábrica de las 639 variantes se cargan sin perder ninguna pieza.
