@@ -26,13 +26,24 @@ El inventario complementa al panel de componente, que no cambia.
   - un arma, si algún anclaje del 'Mech la admite, esté libre u ocupado;
   - el equipo, si algún componente tiene sitio;
   - la munición, si algún componente tiene sitio y algún arma montada la usa, como en el panel de componente.
-- **RF4.** Orden por nombre, tamaño, toneladas, daño o alcance; pulsar el mismo orden otra vez lo invierte. Lo que no tiene ese dato (el daño del equipo) va al final.
+- **RF4.** Orden por nombre, tamaño, toneladas, daño, calor, RPM o alcance; pulsar el mismo orden otra vez lo invierte. Lo que no tiene ese dato (el daño del equipo) va al final.
 - **RF5.** Cada fila muestra el nombre, el tamaño y las toneladas; las armas, además, su daño, calor y alcance, y el equipo y la munición sus ranuras.
 - **RF6.** Al arrastrar un objeto, el tablero resalta los anclajes que lo admiten (los ocupados, como reemplazo) y los componentes donde se puede soltar, y atenúa el resto. Soltarlo lo coloca.
 - **RF7.** Pulsar una fila la selecciona: el tablero se resalta como al arrastrar, y pulsar un anclaje o un componente coloca el objeto. La selección sigue después de colocar, para poner varios seguidos, y se quita pulsando la fila otra vez, con Escape o cerrando el inventario. Mientras hay un objeto seleccionado, pulsar un componente coloca en vez de abrir su panel.
 - **RF8.** La fila seleccionada de un arma con tiers muestra el selector de tier y sus cifras con ese tier; el arma se coloca con él.
 - **RF9.** Soltar un arma sobre un anclaje la monta en él; si estaba ocupado, reemplaza la que había. Un reemplazo avisa con `Replaced <arma> with <arma> in <componente>` y un botón **Undo** que devuelve la build a como estaba.
 - **RF10.** Soltar sobre un destino que no admite el objeto no cambia la build y avisa del motivo.
+- **RF11.** Las armas montadas en sus anclajes y el equipo y la munición de las tarjetas también se pueden arrastrar, con el inventario abierto o cerrado. Al arrastrar uno, el tablero resalta dónde puede ir contando con que su sitio queda libre:
+  - soltarlo en otro anclaje o componente que lo admite lo mueve allí, con su tier;
+  - soltarlo sobre un anclaje ocupado reemplaza el arma de ese anclaje, como desde el inventario;
+  - soltarlo fuera de las tarjetas del tablero (en el inventario, en el fondo…) lo desequipa;
+  - soltarlo en una tarjeta que no lo admite no cambia nada y avisa del motivo.
+- **RF12.** El clic central (la rueda del ratón) sobre un arma montada o sobre un objeto de una tarjeta lo desequipa. En una pieza agrupada (`Heat Sink ×3`) quita una.
+- **RF13.** Desequipar arrastrando o con el clic central avisa con `Removed <objeto> from <componente>` y el botón **Undo**, como el reemplazo.
+- **RF14.** El clic derecho en una fila del inventario equipa el objeto en el lugar adecuado, sin elegir destino, y avisa de dónde lo ha puesto:
+  - un arma, en el anclaje libre más pequeño que la admite de todo el 'Mech (como al equipar en un componente), recorriendo los componentes en el orden del tablero: cabeza, torso central, torsos laterales, brazos y piernas;
+  - el equipo y la munición, primero en una ranura especial que los admite (los disipadores, en las del motor; los jump jets, en las suyas) y si no en la primera ranura general libre, en el mismo orden.
+- **RF15.** El inventario también ordena por calor y por disparos por minuto (RPM), y cada arma muestra sus RPM junto al daño, el calor y el alcance, como las columnas del inventario del juego.
 
 ## Requisitos no funcionales
 
@@ -59,3 +70,10 @@ Con el Archer ARC-2R: brazos con un anclaje de energía M y uno cuerpo a cuerpo 
 | CA11 | Un AC/10 soltado en el brazo derecho, o un Double Heat Sink en la cabeza | se coloca | la build no cambia y el aviso dice el motivo |
 | CA12 | Un Double Heat Sink soltado en el torso izquierdo | se coloca | queda en una ranura general y avisa `Added Double Heat Sink to Left torso` |
 | CA13 | Las preferencias guardadas sin el inventario | se leen | el inventario está cerrado; guardado abierto, se lee abierto |
+| CA14 | El orden por calor y por RPM | se ordena hacia abajo | el primero es el arma de más calor, o de más RPM; el equipo va al final |
+| CA15 | Un Medium Laser montado en el brazo izquierdo | se desequipa | el brazo queda vacío y avisa `Removed M Laser from Left arm` |
+| CA16 | Un Medium Laser de tier 3 montado en el brazo izquierdo | se calculan sus destinos y se arrastra al brazo derecho | su propio anclaje es destino; queda en el brazo derecho con tier 3 y el izquierdo vacío |
+| CA17 | Un Medium Laser del brazo izquierdo arrastrado al anclaje ocupado del brazo derecho | se suelta | reemplaza el arma del brazo derecho, marcado como reemplazo, y el izquierdo queda vacío |
+| CA18 | Un Medium Laser arrastrado a una pierna | se suelta | la build no cambia y el aviso dice el motivo |
+| CA19 | El ARC-2R vacío y el clic derecho | se equipa en el lugar adecuado | el Medium Laser va al torso central; el LRM 20 al torso izquierdo; el Double Heat Sink a la ranura de disipador del motor del torso central, y el segundo a una ranura general del torso izquierdo |
+| CA20 | Un AC/10 en el ARC-2R y el clic derecho | se equipa en el lugar adecuado | la build no cambia y avisa `No room for AC/10 in this 'Mech` |
