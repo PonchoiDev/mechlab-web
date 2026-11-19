@@ -4,6 +4,7 @@ import {
   countByCategory,
   filterInventory,
   getDropTargets,
+  getNextFreeHardpoint,
   getInventoryCategory,
   INVENTORY_CATEGORIES,
   moveEquippedItem,
@@ -243,5 +244,34 @@ describe('equipar con el clic derecho', () => {
 
     expect(result.loadout).toBe(empty);
     expect(result.message).toBe("No room for AC/10 in this 'Mech");
+  });
+});
+
+describe('inventario apuntando a un componente o a un anclaje', () => {
+  const withLaser = build({ leftArm: [weapon('MediumLaser', 0)] });
+
+  it('CA21: con el brazo izquierdo como destino, solo lo que cabe en él', () => {
+    const shown = ids(filterInventory(allItems, filters({ target: { zone: 'leftArm', hardpointIndex: null } }), archer, withLaser));
+
+    expect(shown).toEqual(expect.arrayContaining(['Knuckles_Heavy', 'DoubleHeatSink']));
+    expect(shown).not.toContain('SmallLaser');
+    expect(shown).not.toContain('LRM20');
+  });
+
+  it('CA22: con un anclaje ocupado como destino, las armas que lo admiten como reemplazo', () => {
+    const shown = ids(filterInventory(allItems, filters({ target: { zone: 'leftArm', hardpointIndex: 0 } }), archer, withLaser));
+
+    expect(shown).toEqual(expect.arrayContaining(['SmallLaser', 'DoubleHeatSink']));
+    expect(shown).not.toContain('LRM20');
+    expect(shown).not.toContain('Knuckles_Heavy');
+  });
+
+  it('CA23: tras equipar en un anclaje, el destino pasa al siguiente libre', () => {
+    const one = build({ centerTorso: [weapon('MediumLaser', 0)] });
+    const both = build({ centerTorso: [weapon('MediumLaser', 0), weapon('MediumLaser', 1)] });
+
+    expect(getNextFreeHardpoint(archer, one, 'centerTorso', 0)).toBe(1);
+    expect(getNextFreeHardpoint(archer, both, 'centerTorso', 1)).toBeNull();
+    expect(getNextFreeHardpoint(archer, withLaser, 'leftArm', 0)).toBe(1);
   });
 });
