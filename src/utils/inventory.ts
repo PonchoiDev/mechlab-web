@@ -1,5 +1,5 @@
-import type { Item, ItemSize, WeaponType } from '../types/item';
-import type { EquippedItem, EquippedLoadout, Mech, Zone } from '../types/mech';
+import type { HardpointType, Item, ItemSize, WeaponType } from '../types/item';
+import type { ComponentData, EquippedItem, EquippedLoadout, Mech, Zone } from '../types/mech';
 import { replaceWeapon, type ActionResult } from './buildActions';
 import { getWeaponStats } from './calculators';
 import {
@@ -7,6 +7,7 @@ import {
   findHardpointForWeapon,
   getAvailableSlotType,
   getHardpointOccupancy,
+  getHardpointViews,
   weaponFitsHardpoint
 } from './equipment';
 import { filterItems, getItemWeaponType, isAmmoCompatibleWithWeapon, SIZE_RANK } from './items';
@@ -235,4 +236,25 @@ export const autoPlaceItem = (mech: Mech, loadout: EquippedLoadout, item: Item):
     : zones.find(zone => isSpecialSlot(getAvailableSlotType(item, mech.components[zone], loadout[zone]))) ?? zones[0];
 
   return best ? placeItem(mech, loadout, best, item, null) : unchanged(loadout, `No room for ${item.name} in this 'Mech`);
+};
+
+export interface HardpointUsage {
+  type: HardpointType;
+  used: number;
+  capacity: number;
+}
+
+// En el orden de las pestañas del inventario; los omni, que admiten varios tipos, al final.
+const HARDPOINT_ORDER: HardpointType[] = ['energy', 'ballistic', 'missile', 'artillery', 'ams', 'melee', 'omni'];
+
+// Anclajes de un componente por tipo, con los ocupados, para el resumen de cada tarjeta del tablero. Un anclaje
+// con un arma de serie (el puño) cuenta como libre: se puede montar otra.
+export const getHardpointUsage = (component: ComponentData, equippedItems: Item[]): HardpointUsage[] => {
+  const views = getHardpointViews(component.hardpoints, equippedItems);
+  return HARDPOINT_ORDER
+    .map(type => {
+      const ofType = views.filter(view => view.hardpoint.type === type);
+      return { type, used: ofType.filter(view => view.weapon).length, capacity: ofType.length };
+    })
+    .filter(usage => usage.capacity > 0);
 };

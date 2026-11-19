@@ -1,7 +1,8 @@
 import type { CSSProperties, DragEvent } from 'react';
 import type { ComponentData, EquippedItem } from '../types/mech';
 import { clampArmorValue, scaleArmorPoints } from '../utils/calculators';
-import type { DropTarget } from '../utils/inventory';
+import { getHardpointUsage, type DropTarget } from '../utils/inventory';
+import { getWeaponTypeName } from '../utils/items';
 import {
   getComponentStatus,
   getEquipmentCategory,
@@ -105,6 +106,31 @@ function EquipmentChip({ item, count, category, onMenu, slots, onDrag, onDragEnd
 }
 
 const GENERAL_SLOT_TYPE = 'General_SlotType';
+
+// Iconos de tipo de arma del juego (tools/extraer_iconos_inventario.py), los de las pestañas del inventario.
+const HARDPOINT_ICON_PATH = `${import.meta.env.BASE_URL}mechlab/inventory/`;
+
+// Junto al título, como en el MechLab de BATTLETECH: los anclajes de cada tipo con su icono y los ocupados
+// («1/2»), para ver de un vistazo qué cabe en cada componente.
+function HardpointSummary({ componentData, equippedItems }: { componentData: ComponentData; equippedItems: EquippedItem[] }) {
+  const usage = getHardpointUsage(componentData, equippedItems);
+  if (usage.length === 0) return null;
+  return (
+    <span className="component-card-hardpoint-summary" aria-label="Hardpoints">
+      {usage.map(({ type, used, capacity }) => (
+        <span
+          key={type}
+          className={used === capacity ? 'hardpoint-summary is-full' : 'hardpoint-summary'}
+          data-weapon-type={type}
+          title={`${getWeaponTypeName(type)}: ${used} of ${capacity} hardpoints used`}
+        >
+          <i style={{ '--icon': `url(${HARDPOINT_ICON_PATH}${type}.png)` } as CSSProperties} aria-hidden="true" />
+          {used}/{capacity}
+        </span>
+      ))}
+    </span>
+  );
+}
 
 interface SlotCellsProps {
   label: string;
@@ -214,6 +240,7 @@ export function ComponentCard({
         >
           {label}
         </button>
+        <HardpointSummary componentData={componentData} equippedItems={equippedItems} />
       </div>
 
       {hardpoints.length > 0 && (

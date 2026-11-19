@@ -13,7 +13,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-11-19',
     title: 'Inventory',
     items: [
-      'The component panel is now an Inventory, like the one in the game: every weapon, piece of equipment and ammo in a table with size, tons, damage, heat, RPM and range. Click a column to sort by it. Tabs by type use the icons of the game, with search and a size filter',
+      'The component panel is now an Inventory, like the one in the game: every weapon, piece of equipment and ammo in a table with size, tons, damage, heat, RPM and range, each column in its own color. Click a column to sort by it. Tabs by type use the icons of the game, with search and a size filter',
+      'Each component on the board shows its hardpoints by type with the icon of the game and how many are used, like 1/2, as in the BATTLETECH MechLab',
       'Click a component or a hardpoint to equip into it: the inventory shows only what fits there and what is already installed, with its tier and a button to remove it. Clicking a used hardpoint replaces its weapon',
       'Drag an item onto a hardpoint or a component to equip it. The board highlights where it fits and dims the rest. On touch screens, click an item and then click where it goes',
       'Right-click an item to equip it where it fits best, in the smallest free hardpoint that takes it or in an engine heat sink slot first',

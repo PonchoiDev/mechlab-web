@@ -5,7 +5,8 @@ from extraer_mapa import CONTENIDO, PAK_DEL_JUEGO, escribir_png, reducir
 from ue4 import Pak, leer_textura
 
 # Extrae del .pak de la instalación los iconos de las pestañas del inventario del mechlab del juego, para
-# las pestañas del inventario del MechLab. Son blancos sobre transparente: la web los colorea con CSS.
+# las pestañas del inventario del MechLab y los anclajes de cada tarjeta. Son blancos sobre transparente: la
+# web los colorea con CSS.
 
 DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_ICONOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "mechlab", "inventory")
@@ -21,6 +22,8 @@ ICONOS = {
     "ams": "UI/FrontEnd/Mechlab/Textures/icon_AMS_UIX",
     "melee": "UI/FrontEnd/Mechlab/Textures/Filter_Melee_Icon",
     "equipment": "UI/FrontEnd/Mechlab/Textures/icon_Equipment_UIX",
+    # Los anclajes omni (DLC7) no tienen pestaña, pero sí icono de tipo de arma.
+    "omni": "DLC7/UI/_common/Textures/Icons/kelpie_UIX_WeaponType_Omni",
 }
 
 

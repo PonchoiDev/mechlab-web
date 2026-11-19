@@ -124,10 +124,12 @@ function InventoryRow({ item, isPicked, hint, onActivate, onContextMenu, onTierC
         <span>{formatNumber(item.tonnage)}</span>
         {stats ? (
           <>
-            <span>{formatNumber(stats.damage)}</span>
-            <span>{formatNumber(stats.heat)}</span>
-            <span>{formatNumber(stats.rpm)}</span>
-            <span>{stats.range !== null ? formatNumber(stats.range) : EMPTY_VALUE}</span>
+            {/* Con los decimales fijos del juego (un decimal; el alcance, en metros enteros), para que las
+                cifras de cada columna queden alineadas. */}
+            <span>{stats.damage.toFixed(1)}</span>
+            <span>{stats.heat.toFixed(1)}</span>
+            <span>{stats.rpm.toFixed(1)}</span>
+            <span>{stats.range !== null ? Math.round(stats.range) : EMPTY_VALUE}</span>
           </>
         ) : (
           // El equipo y la munición no tienen cifras de arma: sus ranuras ocupan esas columnas.
@@ -368,65 +370,68 @@ export function InventoryPanel({
         })}
       </div>
 
-      <div className="inventory-table-head" role="group" aria-label="Sort items">
-        {COLUMNS.map(([key, label, description]) => (
-          <button
-            key={key}
-            type="button"
-            className={sortKey === key ? 'is-active' : undefined}
-            aria-pressed={sortKey === key}
-            title={sortKey === key ? `${description}: click again to reverse the order` : `Sort by ${description.toLowerCase()}`}
-            onClick={() => sortBy(key)}
-          >
-            {label}{sortKey === key && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
-          </button>
-        ))}
-      </div>
-
-      {shown.length > 0 ? (
-        <ul className="inventory-list">
-          {shown.map(item => {
-            const placed = withTier(item);
-            const isPicked = !target && pickedItem?.id === item.id;
-            return (
-              <InventoryRow
-                key={item.id}
-                item={placed}
-                isPicked={isPicked}
-                hint={hint}
-                onActivate={() => target ? onEquip(placed) : onPick(isPicked ? null : placed)}
-                onContextMenu={() => onQuickEquip(placed)}
-                onTierChange={(tier) => {
-                  setTiers(current => ({ ...current, [item.id]: tier }));
-                  onPick({ ...item, tier });
-                }}
-                onDragStart={(event) => {
-                  // Firefox no empieza a arrastrar sin datos; el objeto viaja en el estado de la página.
-                  event.dataTransfer.setData('text/plain', item.name);
-                  event.dataTransfer.effectAllowed = 'copyMove';
-                  onDragStart(placed);
-                }}
-                onDragEnd={onDragEnd}
-              />
-            );
-          })}
-        </ul>
-      ) : (
-        <div className="inventory-empty">
-          <p className="editor-empty">
-            {filters.fitsOnly
-              ? target
-                ? `Nothing that fits ${ZONE_LABELS[target.zone]} matches these filters.${target.hardpointIndex === null ? ' To swap a weapon, click its hardpoint.' : ''}`
-                : 'Nothing that fits this \'Mech matches these filters.'
-              : 'No items match these filters.'}
-          </p>
-          {hasFilters && (
-            <button type="button" className="editor-link" onClick={() => setFilters({ ...DEFAULT_FILTERS, fitsOnly: false })}>
-              Clear filters
+      {/* La cabecera va dentro de la zona con scroll, fija arriba: así mide lo mismo que las filas. */}
+      <div className="inventory-scroll">
+        <div className="inventory-table-head" role="group" aria-label="Sort items">
+          {COLUMNS.map(([key, label, description]) => (
+            <button
+              key={key}
+              type="button"
+              className={sortKey === key ? 'is-active' : undefined}
+              aria-pressed={sortKey === key}
+              title={sortKey === key ? `${description}: click again to reverse the order` : `Sort by ${description.toLowerCase()}`}
+              onClick={() => sortBy(key)}
+            >
+              {label}{sortKey === key && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
             </button>
-          )}
+          ))}
         </div>
-      )}
+
+        {shown.length > 0 ? (
+          <ul className="inventory-list">
+            {shown.map(item => {
+              const placed = withTier(item);
+              const isPicked = !target && pickedItem?.id === item.id;
+              return (
+                <InventoryRow
+                  key={item.id}
+                  item={placed}
+                  isPicked={isPicked}
+                  hint={hint}
+                  onActivate={() => target ? onEquip(placed) : onPick(isPicked ? null : placed)}
+                  onContextMenu={() => onQuickEquip(placed)}
+                  onTierChange={(tier) => {
+                    setTiers(current => ({ ...current, [item.id]: tier }));
+                    onPick({ ...item, tier });
+                  }}
+                  onDragStart={(event) => {
+                    // Firefox no empieza a arrastrar sin datos; el objeto viaja en el estado de la página.
+                    event.dataTransfer.setData('text/plain', item.name);
+                    event.dataTransfer.effectAllowed = 'copyMove';
+                    onDragStart(placed);
+                  }}
+                  onDragEnd={onDragEnd}
+                />
+              );
+            })}
+          </ul>
+        ) : (
+          <div className="inventory-empty">
+            <p className="editor-empty">
+              {filters.fitsOnly
+                ? target
+                  ? `Nothing that fits ${ZONE_LABELS[target.zone]} matches these filters.${target.hardpointIndex === null ? ' To swap a weapon, click its hardpoint.' : ''}`
+                  : 'Nothing that fits this \'Mech matches these filters.'
+                : 'No items match these filters.'}
+            </p>
+            {hasFilters && (
+              <button type="button" className="editor-link" onClick={() => setFilters({ ...DEFAULT_FILTERS, fitsOnly: false })}>
+                Clear filters
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </aside>
   );
 }

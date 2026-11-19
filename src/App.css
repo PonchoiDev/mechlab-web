@@ -3469,7 +3469,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   display: flex;
   flex-direction: column;
   /* Columnas de la tabla: nombre, tamaño, toneladas, daño, calor, RPM y alcance. */
-  --inventory-columns: minmax(0, 1fr) 34px 40px 44px 40px 44px 50px;
+  --inventory-columns: minmax(0, 1fr) 30px 40px 46px 40px 50px 46px;
   width: 520px;
   border-right: 1px solid var(--work-line);
   background: var(--work-panel);
@@ -3559,12 +3559,37 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   display: grid;
   grid-template-columns: var(--inventory-columns);
   align-items: center;
-  gap: 6px;
+  gap: 10px;
 }
 
+/* Cada cifra con su color, también en la cabecera, para seguir una columna sin perderse entre tantos números:
+   el tamaño y las toneladas apagados, el daño en blanco, el calor en ámbar, las RPM en cian y el alcance en lima. */
+.inventory-item > :nth-child(2),
+.inventory-item > :nth-child(3) { color: var(--work-muted); }
+.inventory-item > :nth-child(4) { color: var(--work-text); font-weight: 700; }
+.inventory-item > :nth-child(5),
+.inventory-table-head button:nth-child(5) { color: var(--work-amber); }
+.inventory-item > :nth-child(6),
+.inventory-table-head button:nth-child(6) { color: var(--work-cyan); }
+.inventory-item > :nth-child(7),
+.inventory-table-head button:nth-child(7) { color: var(--work-lime); }
+.inventory-item > .inventory-item-note { color: var(--work-muted); }
+
+.inventory-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-color: var(--work-line) transparent;
+}
+
+/* Mismo relleno que las filas (lista, borde de color y celda), para que cada título quede sobre su columna. */
 .inventory-table-head {
-  padding: 6px 25px 6px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 6px 26px 6px 28px;
   border-bottom: 1px solid var(--work-line);
+  background: var(--work-panel);
 }
 
 .inventory-table-head button {
@@ -3580,8 +3605,8 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 .inventory-table-head button:first-child { text-align: left; }
-.inventory-table-head button:hover,
-.inventory-table-head button.is-active { color: var(--work-lime); }
+.inventory-table-head button:hover { color: var(--work-text); }
+.inventory-table-head button.is-active { text-decoration: underline; text-underline-offset: 3px; }
 
 .inventory-row-controls {
   display: flex;
@@ -3606,14 +3631,11 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .inventory-list {
   display: grid;
-  flex: 1;
   align-content: start;
   gap: 4px;
   margin: 0;
   padding: 10px 16px 16px;
-  overflow-y: auto;
   list-style: none;
-  scrollbar-color: var(--work-line) transparent;
 }
 
 .inventory-row {
@@ -3754,15 +3776,42 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   .mechlab-shell.has-inventory { padding-bottom: calc(46svh + 24px); }
   /* En una hoja tan baja, los filtros se desplazan con la lista para que se vean los objetos. */
   .inventory-panel { overflow-y: auto; scrollbar-color: var(--work-line) transparent; }
-  .inventory-list { flex: none; overflow: visible; padding: 8px 12px 12px; }
+  .inventory-scroll { flex: none; overflow: visible; }
+  .inventory-list { padding: 8px 12px 12px; }
   .inventory-controls { padding: 10px 12px; }
   .inventory-hint { display: none; }
   /* Sin el tamaño, que ya filtran los botones, la tabla cabe en el ancho del móvil. */
-  .inventory-panel { --inventory-columns: minmax(0, 1fr) 34px 38px 34px 38px 44px; }
+  .inventory-panel { --inventory-columns: minmax(0, 1fr) 30px 40px 34px 44px 40px; }
   .inventory-table-head button:nth-child(2),
   .inventory-item > :nth-child(2) { display: none; }
   .inventory-tabs { padding: 8px 12px 0; gap: 2px; }
   .inventory-tab small { display: none; }
-  .inventory-table-head { padding: 6px 21px 6px 24px; }
+  .inventory-table-head { padding: 6px 22px 6px 24px; }
   .inventory-panel .editor-side { display: none; }
 }
+
+/* Anclajes de cada tarjeta por tipo, con el icono del juego, junto al título. */
+.component-card-hardpoint-summary {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 10px;
+}
+
+.hardpoint-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--weapon-color);
+  font: 600 12px var(--work-mono);
+}
+
+.hardpoint-summary i {
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  mask: var(--icon) center / contain no-repeat;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+}
+
+.hardpoint-summary.is-full { opacity: 0.55; }
