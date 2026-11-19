@@ -5,14 +5,6 @@ import type { Upgrade } from '../types/upgrade';
 import type { ActionResult } from '../utils/buildActions';
 import { getStockBuild, type SharedBuild } from '../utils/buildCode';
 import { calculateEquippedWeight, createDefaultArmor, getArmorPointsPerTon, maximizeArmor } from '../utils/calculators';
-import {
-  canEquipItem,
-  createEquippedItem,
-  findHardpointForWeapon,
-  getAvailableSlotType,
-  getHardpointOccupancy,
-  weaponFitsHardpoint
-} from '../utils/equipment';
 import { canInstallUpgrade, getUpgrades } from '../utils/upgrades';
 import { createEmptyArmor, createEmptyLoadout } from '../utils/zones';
 
@@ -46,32 +38,6 @@ export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: Share
   const loadStockBuild = () => applyBuild(selectedIndex, { ...getStartingBuild(mech, mechs, catalog), upgrades: upgradeIds });
 
   const loadBuild = (build: SharedBuild) => applyBuild(Math.max(0, mechs.indexOf(build.mech)), build);
-
-  const equipItem = (item: Item, targetHardpoint?: number) => {
-    if (!activeZone) return;
-
-    const zone = activeZone;
-    const componentData = mech.components[zone];
-    setLoadout(prev => {
-      const zoneItems = prev[zone];
-
-      if (item.type === 'weapon') {
-        const hardpointIndex = targetHardpoint ?? findHardpointForWeapon(componentData.hardpoints, zoneItems, item);
-        if (hardpointIndex === null) return prev;
-        const hardpoint = componentData.hardpoints[hardpointIndex];
-        const { occupiedIndices } = getHardpointOccupancy(componentData.hardpoints, zoneItems);
-        if (!hardpoint || occupiedIndices.has(hardpointIndex) || !weaponFitsHardpoint(hardpoint, item)) return prev;
-
-        return { ...prev, [zone]: [...zoneItems, createEquippedItem(item, undefined, hardpointIndex)] };
-      }
-
-      if (!canEquipItem(item, componentData, zoneItems)) return prev;
-      const slotType = getAvailableSlotType(item, componentData, zoneItems);
-      if (!slotType) return prev;
-
-      return { ...prev, [zone]: [...zoneItems, createEquippedItem(item, slotType)] };
-    });
-  };
 
   const removeItem = (zone: Zone, instanceId: string) => {
     setLoadout(prev => ({ ...prev, [zone]: prev[zone].filter(item => item.instanceId !== instanceId) }));
@@ -135,7 +101,6 @@ export const useMechBuild = (mechs: Mech[], catalog: Item[], initialBuild: Share
     clearUpgrades,
     activeZone,
     setActiveZone,
-    equipItem,
     removeItem,
     removeItemsOfType,
     changeTier,

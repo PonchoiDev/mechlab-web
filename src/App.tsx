@@ -1,16 +1,25 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import './App.css';
 import mechsData from './data/mechs.json';
 import itemsData from './data/items.json';
-import type { EquippedLoadout, Mech, Zone } from './types/mech';
+import type { EquippedItem, EquippedLoadout, Mech, Zone } from './types/mech';
 import type { Item } from './types/item';
-import { replaceWeapon, type ActionResult } from './utils/buildActions';
+import type { ActionResult } from './utils/buildActions';
 import { encodeBuild, getBuildUrl, getStockBuild, readBuildFromLocation } from './utils/buildCode';
 import { normalizeBuildName } from './utils/savedBuilds';
 import { getArmorScale, getBuildSummary } from './utils/calculators';
 import { getUpgrades, getUsedUpgradeSlots } from './utils/upgrades';
 import { getBuildIssues } from './utils/issues';
-import { ZONE_LABELS } from './utils/zones';
+import {
+  autoPlaceItem,
+  getDropTargets,
+  getNextFreeHardpoint,
+  moveEquippedItem,
+  placeItem,
+  unequipItem,
+  type EquippedOrigin,
+  type PlaceResult
+} from './utils/inventory';
 import { useMechBuild } from './hooks/useMechBuild';
 import { useSarnaAsset } from './hooks/useSarnaAsset';
 import { useSavedBuilds } from './hooks/useSavedBuilds';
@@ -19,9 +28,9 @@ import { copyText } from './services/clipboard';
 import { renderBuildImage } from './services/buildImage';
 import { BuildStatus } from './components/BuildStatus';
 import { ComparePanel } from './components/ComparePanel';
-import { ComponentEditor } from './components/ComponentEditor';
 import { ContextMenu } from './components/ContextMenu';
 import { FeedbackDialog } from './components/FeedbackDialog';
+import { InventoryPanel } from './components/InventoryPanel';
 import { getEquipmentMenu, getHardpointMenu, type MenuDefinition } from './components/menus';
 import { LoadoutAnalysis } from './components/LoadoutAnalysis';
 import { MechBoard } from './components/MechBoard';
@@ -38,6 +47,8 @@ import { UtilityToolbar } from './components/UtilityToolbar';
 import { WhatsNew } from './components/WhatsNew';
 
 const mechs = mechsData as unknown as Mech[];
+// Pulsar aquí no quita el componente elegido: el inventario, el tablero y cualquier control.
+const KEEPS_TARGET = ['.inventory-panel', '.component-card', '.mech-picker', '.context-menu', 'button', 'a', 'input', 'select', 'textarea', 'label', '[role="button"]'].join(', ');
 const items = Object.values(itemsData) as Item[];
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
 const linkedBuild = readBuildFromLocation(mechs, items);
@@ -62,18 +73,26 @@ export default function App() {
   const [isCompareOpen, setIsCompareOpen] = useState(false);
   const issues = useMemo(() => getBuildIssues(mech, loadout, armor), [mech, loadout, armor]);
   const equippedItems = Object.values(loadout).flat();
+  // Componente (y anclaje) elegido en el tablero: el inventario apunta a él y equipa ahí.
   const [selectedHardpoint, setSelectedHardpoint] = useState<number | null>(null);
+  const target = useMemo(
+    () => activeZone ? { zone: activeZone, hardpointIndex: selectedHardpoint } : null,
+    [activeZone, selectedHardpoint]
+  );
   const selectZone = (zone: Zone, hardpointIndex: number | null) => {
     setActiveZone(zone);
     setSelectedHardpoint(hardpointIndex);
+    setPickedItem(null);
+    view.openInventory();
   };
-  const closeEditor = useCallback(() => {
+  const clearTarget = useCallback(() => {
     setActiveZone(null);
     setSelectedHardpoint(null);
   }, [setActiveZone, setSelectedHardpoint]);
 
   const [menu, setMenu] = useState<(MenuDefinition & { x: number; y: number }) | null>(null);
-  const [toast, setToast] = useState<{ id: number; message: string } | null>(() =>
+  // undo: la build de antes y la de después de reemplazar o desequipar desde el inventario o el tablero.
+  const [toast, setToast] = useState<{ id: number; message: string; undo?: { before: EquippedLoadout; after: EquippedLoadout } } | null>(() =>
     linkedBuild && !linkedBuild.build ? { id: 0, message: 'This build link is not valid' } : null);
   const [isSharingImage, setIsSharingImage] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
@@ -137,6 +156,110 @@ export default function App() {
       { kind: 'action', label: 'Generate build image', onSelect: () => { setMenu(null); setIsSharingImage(true); } }
     ]
   });
+  // Objeto que se está colocando: el que se arrastra (del inventario o ya equipado, con su sitio) o, si no, el
+  // elegido en el inventario para colocarlo pulsando el tablero.
+  const [pickedItem, setPickedItem] = useState<Item | null>(null);
+  const [dragged, setDragged] = useState<{ item: Item; origin?: EquippedOrigin } | null>(null);
+  const isInventoryOpen = view.inventoryOpen;
+  const hasTarget = activeZone !== null;
+  const held = useMemo(
+    () => dragged ?? (isInventoryOpen && pickedItem && !hasTarget ? { item: pickedItem } : null),
+    [dragged, isInventoryOpen, pickedItem, hasTarget]
+  );
+  const dropTargets = useMemo(() => held ? getDropTargets(mech, loadout, held.item, held.origin) : null, [mech, loadout, held]);
+  const endDrag = useCallback(() => setDragged(null), [setDragged]);
+
+  // Aplica una colocación: si no cambia nada avisa del motivo, y el reemplazo y el desequipar se pueden deshacer
+  // (lo añadido se ve en el tablero, pero lo quitado desaparece).
+  const applyPlacement = (result: PlaceResult, { undoable = result.replaced, announce = false } = {}) => {
+    if (result.loadout === loadout) {
+      showToast(result.message);
+      return false;
+    }
+    build.runAction(() => result);
+    if (undoable) setToast({ id: Date.now(), message: result.message, undo: { before: loadout, after: result.loadout } });
+    else if (announce) showToast(result.message);
+    return true;
+  };
+  const placeHeldItem = (zone: Zone, hardpointIndex: number | null) => {
+    if (!held) return;
+    setDragged(null);
+    applyPlacement(held.origin
+      ? moveEquippedItem(mech, loadout, held.origin, zone, hardpointIndex)
+      : placeItem(mech, loadout, zone, held.item, hardpointIndex));
+  };
+  const removeEquipped = (zone: Zone, item: EquippedItem) =>
+    applyPlacement(unequipItem(loadout, zone, item.instanceId), { undoable: true });
+  // Equipar en el componente o anclaje elegido; tras llenar un anclaje libre, se pasa al siguiente.
+  const equipInTarget = (item: Item) => {
+    if (!target) return;
+    const result = placeItem(mech, loadout, target.zone, item, target.hardpointIndex);
+    const wasFree = target.hardpointIndex !== null && !result.replaced;
+    if (applyPlacement(result) && wasFree && item.type === 'weapon') {
+      setSelectedHardpoint(getNextFreeHardpoint(mech, result.loadout, target.zone, target.hardpointIndex as number));
+    }
+  };
+  // Clic derecho en el inventario: en el destino, o donde mejor encaje, avisando de dónde.
+  const quickEquip = (item: Item) => {
+    if (target) equipInTarget(item);
+    else applyPlacement(autoPlaceItem(mech, loadout, item), { announce: true });
+  };
+  // Deshace solo si la build no ha cambiado desde entonces, para no perder lo hecho después.
+  const undoPlacement = (undo: { before: EquippedLoadout; after: EquippedLoadout }) => {
+    if (loadout !== undo.after) {
+      showToast('The build changed since, nothing to undo');
+      return;
+    }
+    build.runAction(() => ({ loadout: undo.before, message: '' }));
+    showToast('Undone');
+  };
+  const toggleInventory = () => {
+    if (view.inventoryOpen) {
+      setPickedItem(null);
+      clearTarget();
+    }
+    view.toggleInventory();
+  };
+
+  // Lo equipado que se arrastra se desequipa al soltarlo fuera de las tarjetas: mientras dura el arrastre,
+  // toda la página admite soltar. Las tarjetas y los anclajes recogen antes lo que se suelta sobre ellos.
+  const draggedOrigin = dragged?.origin;
+  useEffect(() => {
+    if (!draggedOrigin) return;
+    const allow = (event: DragEvent) => event.preventDefault();
+    const remove = (event: DragEvent) => {
+      event.preventDefault();
+      setDragged(null);
+      const item = loadout[draggedOrigin.zone].find(equipped => equipped.instanceId === draggedOrigin.instanceId);
+      if (item) removeEquipped(draggedOrigin.zone, item);
+    };
+    window.addEventListener('dragover', allow);
+    window.addEventListener('drop', remove);
+    return () => {
+      window.removeEventListener('dragover', allow);
+      window.removeEventListener('drop', remove);
+    };
+  });
+
+  // Escape suelta primero el objeto elegido y después el destino. Pulsar en una zona vacía quita el destino.
+  useEffect(() => {
+    if (!target) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && !pickedItem) clearTarget();
+    };
+    const handleClick = (event: MouseEvent) => {
+      const element = event.target;
+      if (!(element instanceof Element) || !element.isConnected || element.closest(KEEPS_TARGET)) return;
+      clearTarget();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('click', handleClick);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('click', handleClick);
+    };
+  }, [target, pickedItem, clearTarget]);
+
   const menuContext = {
     mech,
     loadout,
@@ -158,7 +281,10 @@ export default function App() {
   };
 
   return (
-    <div className={['mechlab-shell', activeZone ? `has-editor is-editor-${view.editorSide}` : ''].filter(Boolean).join(' ')}>
+    <div className={[
+      'mechlab-shell',
+      view.inventoryOpen ? `has-inventory is-inventory-${view.editorSide}` : ''
+    ].filter(Boolean).join(' ')}>
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">
@@ -253,6 +379,15 @@ export default function App() {
 
       <main className="workspace">
         <div className="view-toggles" aria-label="View options">
+          <button
+            type="button"
+            className="utility-button inventory-toggle"
+            aria-pressed={view.inventoryOpen}
+            title="Every weapon, piece of equipment and ammo, to drag onto the board"
+            onClick={toggleInventory}
+          >
+            Inventory
+          </button>
           <span className="utility-label">VIEW</span>
           <button
             type="button"
@@ -275,10 +410,10 @@ export default function App() {
           <button
             type="button"
             className="utility-button"
-            title="Side of the screen where the component panel opens"
+            title="Side of the screen where the inventory opens"
             onClick={view.toggleEditorSide}
           >
-            Panel {view.editorSide} ⇄
+            Inventory {view.editorSide} ⇄
           </button>
         </div>
         <MechBoard
@@ -294,6 +429,11 @@ export default function App() {
           onArmorChange={build.changeArmor}
           onHardpointMenu={openHardpointMenu}
           onEquipmentMenu={openEquipmentMenu}
+          dropTargets={dropTargets}
+          onPlace={placeHeldItem}
+          onDragItem={(zone, item) => setDragged({ item, origin: { zone, instanceId: item.instanceId } })}
+          onDragEnd={endDrag}
+          onRemoveItem={removeEquipped}
           reference={(
             <>
               <MechImage mech={mech} asset={sarna.asset} isLoading={sarna.isLoading} onImageError={sarna.markImageBroken} />
@@ -305,27 +445,25 @@ export default function App() {
         <LoadoutAnalysis mech={mech} summary={summary} base={baseSummary} />
       </main>
 
-      {activeZone && (
-        <ComponentEditor
-          side={view.editorSide}
-          onToggleSide={view.toggleEditorSide}
-          key={activeZone}
-          zone={activeZone}
-          label={ZONE_LABELS[activeZone]}
-          componentData={mech.components[activeZone]}
+
+      {view.inventoryOpen && (
+        <InventoryPanel
           catalog={items}
+          mech={mech}
           loadout={loadout}
-          armorFront={armor[activeZone].front}
-          armorRear={armor[activeZone].rear}
-          armorScale={armorScale}
-          selectedHardpoint={selectedHardpoint}
-          onSelectHardpoint={setSelectedHardpoint}
-          onEquip={build.equipItem}
-          onReplace={(item, hardpointIndex) => menuContext.run(current => replaceWeapon(mech, current, activeZone, hardpointIndex, item))}
-          onRemoveItem={(instanceId) => build.removeItem(activeZone, instanceId)}
-          onTierChange={(instanceId, tier) => build.changeTier(activeZone, instanceId, tier)}
-          onArmorChange={(type, value) => build.changeArmor(activeZone, type, value)}
-          onClose={closeEditor}
+          side={view.editorSide}
+          target={target}
+          onClearTarget={clearTarget}
+          pickedItem={pickedItem}
+          onPick={setPickedItem}
+          onEquip={equipInTarget}
+          onQuickEquip={quickEquip}
+          onDragStart={(item) => setDragged({ item })}
+          onDragEnd={endDrag}
+          onTierChange={(instanceId, tier) => activeZone && build.changeTier(activeZone, instanceId, tier)}
+          onRemoveInstalled={(instanceId) => activeZone && build.removeItem(activeZone, instanceId)}
+          onToggleSide={view.toggleEditorSide}
+          onClose={toggleInventory}
         />
       )}
 
@@ -394,7 +532,14 @@ export default function App() {
         />
       )}
       {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={closeMenu} />}
-      {toast && <Toast key={toast.id} message={toast.message} onDismiss={dismissToast} />}
+      {toast && (
+        <Toast
+          key={toast.id}
+          message={toast.message}
+          onDismiss={dismissToast}
+          action={toast.undo && { label: 'Undo', onSelect: () => toast.undo && undoPlacement(toast.undo) }}
+        />
+      )}
     </div>
   );
 }
