@@ -4,6 +4,7 @@ import {
   countByCategory,
   filterInventory,
   getDropTargets,
+  getHardpointUsage,
   getNextFreeHardpoint,
   getInventoryCategory,
   INVENTORY_CATEGORIES,
@@ -271,5 +272,18 @@ describe('inventario apuntando a un componente o a un anclaje', () => {
     expect(getNextFreeHardpoint(archer, one, 'centerTorso', 0)).toBe(1);
     expect(getNextFreeHardpoint(archer, both, 'centerTorso', 1)).toBeNull();
     expect(getNextFreeHardpoint(archer, withLaser, 'leftArm', 0)).toBe(1);
+  });
+});
+
+describe('anclajes de cada tarjeta', () => {
+  it('CA24: por tipo, con los ocupados, solo los que tiene el componente', () => {
+    const loadout = build({ leftArm: [weapon('MediumLaser', 0)] });
+
+    expect(getHardpointUsage(archer.components.leftArm, loadout.leftArm)).toEqual([
+      { type: 'energy', used: 1, capacity: 1 },
+      { type: 'melee', used: 0, capacity: 1 }
+    ]);
+    expect(getHardpointUsage(archer.components.centerTorso, loadout.centerTorso)).toEqual([{ type: 'energy', used: 0, capacity: 2 }]);
+    expect(getHardpointUsage(archer.components.leftLeg, loadout.leftLeg)).toEqual([]);
   });
 });
