@@ -227,6 +227,7 @@ tools/
   generar_unidades.py   Genera src/data/units.json
   extraer_pilotos.py    Extrae del .pak del juego los pilotos hero y los rasgos de piloto con sus efectos
   generar_pilotos.py    Genera src/data/pilots.json
+  extraer_iconos_inventario.py  Extrae del .pak del juego los iconos de las pestañas del inventario del mechlab
   extraer_argo_battletech.py  Copia de BATTLETECH las mejoras de la Argo, sus textos e imágenes
   generar_argo_battletech.py  Genera src/data/battletech/argo.json
   extraer_mechlab_battletech.py  Extrae de BATTLETECH y de sus DLC los chasis, las variantes, los componentes y los iconos
@@ -314,6 +315,14 @@ python3 tools/generar_unidades.py
 | `armas.json` | `WeaponDataAsset` de cada arma | Nombre, estadísticas y quirks, también de las armas de vehículo que no están en `items/` |
 | `facciones.json` | `Factions/*` y sus StringTables | Nombre de las facciones de la rareza, con las compañías de mercenarios y los patrocinadores de las arenas |
 | `sarna.json` | API de Sarna (`imagenes_sarna.py`), no el juego | Página y dibujo principal de cada chasis, a partir de la tabla de títulos de `generar_unidades.py` |
+
+### Iconos del inventario
+
+Las pestañas del inventario del MechLab llevan los iconos de las del inventario del mechlab del juego. `extraer_iconos_inventario.py` los lee del `.pak` (`UI/FrontEnd/Mechlab/Textures/icon_*_UIX`, `Filter_Melee_Icon` y el filtro de artillería del DLC8) y los escribe en `public/mechlab/inventory/`, en PNG de 48 px.
+
+```sh
+python3 tools/extraer_iconos_inventario.py "/ruta/a/MechWarrior 5 Mercenaries"
+```
 
 ### Pilotos
 
