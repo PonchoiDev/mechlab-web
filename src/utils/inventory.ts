@@ -81,12 +81,11 @@ const usesEquippedWeapon = (loadout: EquippedLoadout, ammo: Item) =>
   Object.values(loadout).flat().some(equipped => isAmmoCompatibleWithWeapon(ammo, equipped));
 
 // En un componente, un arma necesita un anclaje libre; en un anclaje, basta con que lo admita (lo reemplaza).
-// El equipo y la munición van a las ranuras del componente, se apunte al componente o a uno de sus anclajes.
+// En un anclaje solo van armas: el equipo y la munición se equipan apuntando al componente.
 export const fitsTarget = (mech: Mech, loadout: EquippedLoadout, item: Item, target: InventoryTarget): boolean => {
   const drop = getDropTargets(mech, loadout, item)[target.zone];
-  if (item.type === 'weapon') {
-    return target.hardpointIndex === null ? drop.component : drop.hardpoints.includes(target.hardpointIndex);
-  }
+  if (target.hardpointIndex !== null) return item.type === 'weapon' && drop.hardpoints.includes(target.hardpointIndex);
+  if (item.type === 'weapon') return drop.component;
   return drop.component && (item.type !== 'ammo' || usesEquippedWeapon(loadout, item));
 };
 

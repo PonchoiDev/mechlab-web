@@ -229,12 +229,13 @@ export function InventoryPanel({
   // Tier elegido para cada arma, que se mantiene al cambiar de fila.
   const [tiers, setTiers] = useState<Record<string, string>>({});
 
-  // Al elegir un destino, la casilla se marca para ver solo lo que cabe en él.
+  // Al elegir un destino, la casilla se marca para ver solo lo que cabe en él, y la pestaña vuelve a All: la del
+  // destino anterior (la munición de otro componente) podría dejar la lista vacía.
   const targetKey = target ? `${target.zone}:${target.hardpointIndex}` : null;
   const [lastTargetKey, setLastTargetKey] = useState(targetKey);
   if (targetKey !== lastTargetKey) {
     setLastTargetKey(targetKey);
-    if (targetKey) setFilters(current => ({ ...current, fitsOnly: true }));
+    if (targetKey) setFilters(current => ({ ...current, category: 'all', fitsOnly: true }));
   }
 
   // Los números de las pestañas cuentan con el resto de filtros aplicados.
