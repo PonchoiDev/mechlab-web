@@ -13,7 +13,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-11-19',
     title: 'Inventory',
     items: [
-      'The component panel is now an Inventory, like the one in the game: every weapon, piece of equipment and ammo in one list, with tabs by type, search, tech base and size filters and sorting by name, size, tons, damage, heat, RPM or range',
+      'The component panel is now an Inventory, like the one in the game: every weapon, piece of equipment and ammo in a table with size, tons, damage, heat, RPM and range. Click a column to sort by it. Tabs by type use the icons of the game, with search and a size filter',
       'Click a component or a hardpoint to equip into it: the inventory shows only what fits there and what is already installed, with its tier and a button to remove it. Clicking a used hardpoint replaces its weapon',
       'Drag an item onto a hardpoint or a component to equip it. The board highlights where it fits and dims the rest. On touch screens, click an item and then click where it goes',
       'Right-click an item to equip it where it fits best, in the smallest free hardpoint that takes it or in an engine heat sink slot first',

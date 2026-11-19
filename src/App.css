@@ -3468,7 +3468,9 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   z-index: 20;
   display: flex;
   flex-direction: column;
-  width: 380px;
+  /* Columnas de la tabla: nombre, tamaño, toneladas, daño, calor, RPM y alcance. */
+  --inventory-columns: minmax(0, 1fr) 34px 40px 44px 40px 44px 50px;
+  width: 520px;
   border-right: 1px solid var(--work-line);
   background: var(--work-panel);
   color: var(--work-text);
@@ -3503,14 +3505,83 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .inventory-hint strong { color: var(--work-lime); }
 
+/* Pestañas con los iconos del juego, en el color de su tipo, justo encima de la tabla. */
 .inventory-tabs {
   display: flex;
-  flex-wrap: wrap;
   gap: 4px;
+  padding: 10px 16px 0;
 }
 
-.inventory-tabs small { color: var(--work-muted); font-size: 10px; }
-.inventory-tabs .filter-chip:disabled { opacity: 0.4; cursor: default; }
+.inventory-tab {
+  --tab-color: var(--work-muted);
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  height: 38px;
+  padding: 0 4px;
+  border: 1px solid transparent;
+  border-bottom: 2px solid var(--tab-color);
+  border-radius: 2px 2px 0 0;
+  background: color-mix(in srgb, var(--tab-color) 18%, transparent);
+  color: var(--work-text);
+  font: 600 11px var(--work-mono);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.inventory-tab[data-category='energy'] { --tab-color: #00d2ff; }
+.inventory-tab[data-category='ballistic'] { --tab-color: #ffb703; }
+.inventory-tab[data-category='missile'] { --tab-color: #4caf50; }
+.inventory-tab[data-category='artillery'] { --tab-color: #ff7a45; }
+.inventory-tab[data-category='ams'] { --tab-color: #e91e63; }
+.inventory-tab[data-category='melee'] { --tab-color: #9c27b0; }
+.inventory-tab[data-category='equipment'] { --tab-color: var(--work-cyan); }
+.inventory-tab[data-category='ammo'] { --tab-color: var(--work-amber); }
+.inventory-tab[data-category='all'] { --tab-color: var(--work-lime); }
+
+.inventory-tab img { display: block; width: 22px; height: 22px; }
+.inventory-tab small { color: var(--work-muted); font-size: 10px; font-weight: 500; }
+.inventory-tab:hover:not(:disabled) { background: color-mix(in srgb, var(--tab-color) 32%, transparent); }
+
+.inventory-tab.is-active {
+  border-color: var(--tab-color);
+  background: color-mix(in srgb, var(--tab-color) 45%, transparent);
+}
+
+.inventory-tab.is-active small { color: var(--work-text); }
+.inventory-tab:disabled { opacity: 0.3; cursor: default; }
+
+.inventory-table-head,
+.inventory-item {
+  display: grid;
+  grid-template-columns: var(--inventory-columns);
+  align-items: center;
+  gap: 6px;
+}
+
+.inventory-table-head {
+  padding: 6px 25px 6px 28px;
+  border-bottom: 1px solid var(--work-line);
+}
+
+.inventory-table-head button {
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: var(--work-muted);
+  font: 600 10px var(--work-mono);
+  text-align: right;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.inventory-table-head button:first-child { text-align: left; }
+.inventory-table-head button:hover,
+.inventory-table-head button.is-active { color: var(--work-lime); }
 
 .inventory-row-controls {
   display: flex;
@@ -3531,7 +3602,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .inventory-fits input { accent-color: var(--work-lime); }
 
-.inventory-sort { flex-wrap: wrap; }
+
 
 .inventory-list {
   display: grid;
@@ -3558,14 +3629,11 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 .inventory-item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas:
-    'name spec'
-    'stats stats';
-  align-items: baseline;
-  gap: 3px 10px;
-  padding: 7px 9px;
+  padding: 8px 9px;
+  color: var(--work-text);
+  font: 500 13px var(--work-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
   cursor: grab;
   user-select: none;
 }
@@ -3581,37 +3649,21 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 .inventory-item-name {
-  grid-area: name;
   min-width: 0;
-  font: 500 13px var(--work-sans);
+  font: 600 14px var(--work-sans);
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
 }
 
-.inventory-item-spec {
-  grid-area: spec;
+.inventory-item-note {
+  grid-column: span 4;
   color: var(--work-muted);
   font-size: 11px;
-  white-space: nowrap;
 }
 
-.inventory-item-spec i {
-  display: inline-block;
-  width: 3px;
-  height: 3px;
-  margin: 0 4px 2px;
-  border-radius: 50%;
-  background: var(--work-muted);
-}
-
-/* Daño, calor, RPM y alcance en columnas fijas, para compararlos de un vistazo como en el juego. */
-.inventory-item-stats {
-  grid-area: stats;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  color: var(--work-cyan);
-  font-size: 11px;
-  white-space: nowrap;
-}
+.inventory-table-head button:nth-child(2),
+.inventory-item > :nth-child(2) { text-align: center; }
 
 .inventory-target {
   padding: 12px 16px;
@@ -3681,14 +3733,8 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 @media (min-width: 761px) {
-  .mechlab-shell.has-inventory.is-inventory-left { padding-left: 404px; }
-  .mechlab-shell.has-inventory.is-inventory-right { padding-right: 404px; }
-}
-
-/* Con los dos paneles fijos en pantallas anchas, el de componente también ocupa su columna. */
-@media (min-width: 1400px) {
-  .mechlab-shell.has-inventory.has-editor.is-editor-right { padding-right: 468px; }
-  .mechlab-shell.has-inventory.has-editor.is-editor-left { padding-left: 468px; }
+  .mechlab-shell.has-inventory.is-inventory-left { padding-left: 544px; }
+  .mechlab-shell.has-inventory.is-inventory-right { padding-right: 544px; }
 }
 
 /* En el móvil, una hoja inferior baja que deja ver el tablero para pulsar el destino. */
@@ -3711,5 +3757,12 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   .inventory-list { flex: none; overflow: visible; padding: 8px 12px 12px; }
   .inventory-controls { padding: 10px 12px; }
   .inventory-hint { display: none; }
+  /* Sin el tamaño, que ya filtran los botones, la tabla cabe en el ancho del móvil. */
+  .inventory-panel { --inventory-columns: minmax(0, 1fr) 34px 38px 34px 38px 44px; }
+  .inventory-table-head button:nth-child(2),
+  .inventory-item > :nth-child(2) { display: none; }
+  .inventory-tabs { padding: 8px 12px 0; gap: 2px; }
+  .inventory-tab small { display: none; }
+  .inventory-table-head { padding: 6px 21px 6px 24px; }
   .inventory-panel .editor-side { display: none; }
 }

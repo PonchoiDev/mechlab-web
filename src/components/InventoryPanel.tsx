@@ -16,7 +16,7 @@ import {
   type InventoryTarget,
   type SortDirection
 } from '../utils/inventory';
-import { getItemWeaponType, getSizeName, getSlotsLabel, getTechBaseName, getWeaponTypeName } from '../utils/items';
+import { getItemWeaponType, getSizeName, getSlotsLabel, getWeaponTypeName } from '../utils/items';
 import { ZONE_LABELS } from '../utils/zones';
 import { TierSelector } from './TierSelector';
 
@@ -56,21 +56,29 @@ const CATEGORY_LABELS: Record<InventoryCategory, string> = {
 };
 
 // Las columnas del inventario del juego: nombre, tamaño, toneladas, daño, RPM y alcance, más el calor.
-const SORT_OPTIONS: [InventorySortKey, string][] = [
-  ['name', 'Name'],
-  ['size', 'Size'],
-  ['tonnage', 'Tons'],
-  ['damage', 'Damage'],
-  ['heat', 'Heat'],
-  ['rpm', 'RPM'],
-  ['range', 'Range']
+const COLUMNS: [InventorySortKey, string, string][] = [
+  ['name', 'Name', 'Name'],
+  ['size', 'Size', 'Size'],
+  ['tonnage', 'Tons', 'Tonnage'],
+  ['damage', 'Dmg', 'Damage'],
+  ['heat', 'Heat', 'Heat'],
+  ['rpm', 'RPM', 'Rounds per minute'],
+  ['range', 'Range', 'Range (m)']
 ];
+
+// Iconos de las pestañas del inventario del juego (tools/extraer_iconos_inventario.py). All y Ammo no tienen.
+const CATEGORY_ICONS: Partial<Record<InventoryCategory, string>> = {
+  energy: 'energy', ballistic: 'ballistic', missile: 'missile', artillery: 'artillery', ams: 'ams', melee: 'melee', equipment: 'equipment'
+};
+const ICON_BASE = `${import.meta.env.BASE_URL}mechlab/inventory/`;
+
+const SIZE_LETTERS: Record<ItemSize, string> = { small: 'S', medium: 'M', large: 'L' };
 
 const SIZES: ItemSize[] = ['small', 'medium', 'large'];
 
 const formatNumber = (value: number) => Number.isInteger(value) ? String(value) : value.toFixed(1);
 
-const DEFAULT_FILTERS: InventoryFilters = { category: 'all', search: '', techBase: null, size: null, fitsOnly: true };
+const DEFAULT_FILTERS: InventoryFilters = { category: 'all', search: '', size: null, fitsOnly: true };
 
 interface InventoryRowProps {
   item: Item;
@@ -112,17 +120,18 @@ function InventoryRow({ item, isPicked, hint, onActivate, onContextMenu, onTierC
         onDragEnd={onDragEnd}
       >
         <span className="inventory-item-name">{item.name}</span>
-        <span className="inventory-item-spec">
-          {getSizeName(item.size)} <i /> {formatNumber(item.tonnage)} t
-          {item.type !== 'weapon' && <><i /> {getSlotsLabel(item)}</>}
-        </span>
-        {stats && (
-          <span className="inventory-item-stats">
-            <span>{formatNumber(stats.damage)} dmg</span>
-            <span>{formatNumber(stats.heat)} heat</span>
-            <span>{formatNumber(stats.rpm)} rpm</span>
-            <span>{stats.range !== null ? `${formatNumber(stats.range)} m` : EMPTY_VALUE}</span>
-          </span>
+        <span title={getSizeName(item.size)}>{SIZE_LETTERS[item.size]}</span>
+        <span>{formatNumber(item.tonnage)}</span>
+        {stats ? (
+          <>
+            <span>{formatNumber(stats.damage)}</span>
+            <span>{formatNumber(stats.heat)}</span>
+            <span>{formatNumber(stats.rpm)}</span>
+            <span>{stats.range !== null ? formatNumber(stats.range) : EMPTY_VALUE}</span>
+          </>
+        ) : (
+          // El equipo y la munición no tienen cifras de arma: sus ranuras ocupan esas columnas.
+          <span className="inventory-item-note">{getSlotsLabel(item)}</span>
         )}
       </div>
       {/* El tier se elige en la fila seleccionada: una fila por arma, no una por tier como en el juego. */}
@@ -228,10 +237,6 @@ export function InventoryPanel({
     if (targetKey) setFilters(current => ({ ...current, fitsOnly: true }));
   }
 
-  const techBaseOptions = useMemo(
-    () => [...new Set(catalog.map(item => item.techBase).filter((value): value is string => !!value))].sort(),
-    [catalog]
-  );
   // Los números de las pestañas cuentan con el resto de filtros aplicados.
   const matching = useMemo(
     () => filterInventory(catalog, { ...filters, category: 'all', target }, mech, loadout),
@@ -243,7 +248,7 @@ export function InventoryPanel({
     sortKey,
     sortDirection
   );
-  const hasFilters = filters.search.trim() !== '' || filters.techBase !== null || filters.size !== null || filters.fitsOnly;
+  const hasFilters = filters.search.trim() !== '' || filters.size !== null || filters.fitsOnly;
   const fitsLabel = target ? `Fits ${ZONE_LABELS[target.zone]}` : 'Fits this \'Mech';
 
   const withTier = (item: Item): Item => tiers[item.id] ? { ...item, tier: tiers[item.id] } : item;
@@ -311,21 +316,6 @@ export function InventoryPanel({
               ? <>Placing <strong>{pickedItem.name}</strong>: click a highlighted hardpoint or component. Esc to stop.</>
               : 'Click a component to equip into it, drag an item onto the board, or right-click an item to equip it where it fits best.'}
         </p>
-        <div className="inventory-tabs" role="group" aria-label="Item type">
-          {INVENTORY_CATEGORIES.map(category => (
-            <button
-              key={category}
-              type="button"
-              className={filters.category === category ? 'filter-chip is-active' : 'filter-chip'}
-              aria-pressed={filters.category === category}
-              data-weapon-type={['all', 'equipment', 'ammo'].includes(category) ? undefined : category}
-              disabled={counts[category] === 0 && filters.category !== category}
-              onClick={() => update({ category })}
-            >
-              {CATEGORY_LABELS[category]} <small>{counts[category]}</small>
-            </button>
-          ))}
-        </div>
         <input
           type="search"
           className="editor-search"
@@ -334,19 +324,6 @@ export function InventoryPanel({
           value={filters.search}
           onChange={(event) => update({ search: event.target.value })}
         />
-        <div className="filter-chips" role="group" aria-label="Filter by tech base">
-          {[null, ...techBaseOptions].map(option => (
-            <button
-              key={option ?? 'all'}
-              type="button"
-              className={filters.techBase === option ? 'filter-chip is-active' : 'filter-chip'}
-              aria-pressed={filters.techBase === option}
-              onClick={() => update({ techBase: option })}
-            >
-              {option ? getTechBaseName(option) : 'All tech'}
-            </button>
-          ))}
-        </div>
         <div className="inventory-row-controls">
           <div className="filter-chips" role="group" aria-label="Filter by size">
             {[null, ...SIZES].map(option => (
@@ -366,20 +343,43 @@ export function InventoryPanel({
             {fitsLabel}
           </label>
         </div>
-        <div className="sort-controls inventory-sort" role="group" aria-label="Sort items">
-          {SORT_OPTIONS.map(([key, label]) => (
+      </div>
+
+      <div className="inventory-tabs" role="group" aria-label="Item type">
+        {INVENTORY_CATEGORIES.map(category => {
+          const icon = CATEGORY_ICONS[category];
+          return (
             <button
-              key={key}
+              key={category}
               type="button"
-              className={sortKey === key ? 'sort-button is-active' : 'sort-button'}
-              aria-pressed={sortKey === key}
-              title={sortKey === key ? 'Click again to reverse the order' : `Sort by ${label.toLowerCase()}`}
-              onClick={() => sortBy(key)}
+              className={filters.category === category ? 'inventory-tab is-active' : 'inventory-tab'}
+              aria-pressed={filters.category === category}
+              aria-label={`${CATEGORY_LABELS[category]} (${counts[category]})`}
+              title={`${CATEGORY_LABELS[category]}: ${counts[category]}`}
+              data-category={category}
+              disabled={counts[category] === 0 && filters.category !== category}
+              onClick={() => update({ category })}
             >
-              {label}{sortKey === key && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
+              {icon ? <img src={`${ICON_BASE}${icon}.png`} alt="" width={22} height={22} /> : CATEGORY_LABELS[category]}
+              <small>{counts[category]}</small>
             </button>
-          ))}
-        </div>
+          );
+        })}
+      </div>
+
+      <div className="inventory-table-head" role="group" aria-label="Sort items">
+        {COLUMNS.map(([key, label, description]) => (
+          <button
+            key={key}
+            type="button"
+            className={sortKey === key ? 'is-active' : undefined}
+            aria-pressed={sortKey === key}
+            title={sortKey === key ? `${description}: click again to reverse the order` : `Sort by ${description.toLowerCase()}`}
+            onClick={() => sortBy(key)}
+          >
+            {label}{sortKey === key && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
+          </button>
+        ))}
       </div>
 
       {shown.length > 0 ? (

@@ -112,7 +112,6 @@ export const fitsMech = (mech: Mech, loadout: EquippedLoadout, item: Item): bool
 export interface InventoryFilters {
   category: InventoryCategory;
   search: string;
-  techBase: string | null;
   size: ItemSize | null;
   // Solo lo que se puede colocar en el 'Mech actual (la casilla «Fits this 'Mech»), o en el destino si lo hay.
   fitsOnly: boolean;
@@ -120,7 +119,7 @@ export interface InventoryFilters {
 }
 
 export const filterInventory = (catalog: Item[], filters: InventoryFilters, mech: Mech, loadout: EquippedLoadout): Item[] =>
-  filterItems(catalog, { search: filters.search, techBase: filters.techBase })
+  filterItems(catalog, { search: filters.search })
     .filter(item => filters.category === 'all' || getInventoryCategory(item) === filters.category)
     .filter(item => !filters.size || item.size === filters.size)
     .filter(item => !filters.fitsOnly || (filters.target
