@@ -46,14 +46,14 @@ El inventario sustituye al panel de componente: hacía lo mismo para un solo com
   - el equipo y la munición, primero en una ranura especial que los admite (los disipadores, en las del motor; los jump jets, en las suyas) y si no en la primera ranura general libre, en el mismo orden.
 - **RF16.** Pulsar un componente o un anclaje del tablero, un aviso de la barra de avisos o «Choose weapon…» del menú del clic derecho abre el inventario apuntando a ese destino:
   - la cabecera dice el destino (`Left arm` o `Left arm · Energy · Medium`) con un botón para quitarlo;
-  - la casilla pasa a **Fits Left arm** y se marca;
+  - la casilla pasa a **Fits Left arm** y se marca, y la pestaña vuelve a All: la que se usó para el destino anterior (la munición de otro componente) puede dejar la lista vacía;
   - pulsar una fila, o hacer clic derecho en ella, la equipa en el destino. En un anclaje ocupado, reemplaza su arma, con Undo;
   - tras equipar un arma en un anclaje, el destino pasa al siguiente anclaje libre del componente, para rellenarlos seguidos.
 - **RF17.** Con un destino, el inventario muestra lo instalado en su componente, con el selector de tier de cada arma y un botón para quitar cada objeto.
 - **RF18.** El destino se quita con su botón, con Escape o pulsando en una zona vacía de la página. Sin destino, la casilla vuelve a ser Fits this 'Mech.
 - **RF19.** Qué cabe en el destino:
   - en un componente, un arma si tiene un anclaje libre que la admite; el equipo, si hay sitio; la munición, si hay sitio y alguna arma montada la usa;
-  - en un anclaje, las armas que lo admiten, esté libre u ocupado (como reemplazo), y el equipo y la munición que caben en su componente.
+  - en un anclaje, solo las armas que lo admiten, esté libre u ocupado (como reemplazo). El equipo y la munición no van en anclajes: se equipan apuntando al componente.
 - **RF15.** El inventario también ordena por calor y por disparos por minuto (RPM), y cada arma muestra sus RPM junto al daño, el calor y el alcance, como las columnas del inventario del juego.
 
 ## Requisitos no funcionales
@@ -88,6 +88,6 @@ Con el Archer ARC-2R: brazos con un anclaje de energía M y uno cuerpo a cuerpo 
 | CA18 | Un Medium Laser arrastrado a una pierna | se suelta | la build no cambia y el aviso dice el motivo |
 | CA19 | El ARC-2R vacío y el clic derecho | se equipa en el lugar adecuado | el Medium Laser va al torso central; el LRM 20 al torso izquierdo; el Double Heat Sink a la ranura de disipador del motor del torso central, y el segundo a una ranura general del torso izquierdo |
 | CA21 | El ARC-2R con un Medium Laser en el brazo izquierdo y el brazo izquierdo como destino | se filtra con la casilla | están el Knuckles de clase pesada (anclaje cuerpo a cuerpo libre) y el Double Heat Sink; no están el Small Laser (el de energía está ocupado) ni el LRM 20 |
-| CA22 | El mismo 'Mech con el anclaje de energía del brazo izquierdo como destino | se filtra con la casilla | están el Small Laser (como reemplazo) y el Double Heat Sink; no están el LRM 20 ni el Knuckles |
+| CA22 | El mismo 'Mech con el anclaje de energía del brazo izquierdo como destino | se filtra con la casilla | está el Small Laser (como reemplazo); no están el LRM 20, el Knuckles ni el Double Heat Sink |
 | CA23 | Un arma recién equipada en un anclaje | se busca el siguiente destino | en el torso central vacío, tras el anclaje 0 va el 1; con los dos ocupados, ninguno; en el brazo, tras el de energía va el cuerpo a cuerpo libre |
 | CA20 | Un AC/10 en el ARC-2R y el clic derecho | se equipa en el lugar adecuado | la build no cambia y avisa `No room for AC/10 in this 'Mech` |
