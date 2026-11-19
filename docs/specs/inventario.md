@@ -22,13 +22,13 @@ El inventario sustituye al panel de componente: hacía lo mismo para un solo com
 ## Requisitos funcionales
 
 - **RF1.** Un botón **Inventory** en la fila de opciones de vista abre y cierra el inventario. El MechLab recuerda si estaba abierto.
-- **RF2.** El inventario lista todas las armas, el equipo y la munición del juego, con pestañas por categoría: All, Energy, Ballistic, Missile, Artillery, AMS, Melee, Equipment y Ammo, cada una con su número de objetos.
-- **RF3.** Filtros: buscador (por nombre corto o completo, como el panel de componente), tecnología (Inner Sphere, Clan, LosTech…), tamaño (Small, Medium, Large) y una casilla **Fits this 'Mech**, marcada por defecto, que deja solo lo que se puede colocar en el 'Mech actual:
+- **RF2.** El inventario lista todas las armas, el equipo y la munición del juego, con pestañas por categoría: All, Energy, Ballistic, Missile, Artillery, AMS, Melee, Equipment y Ammo, cada una con su número de objetos. Las pestañas de armas y equipo llevan el icono de la pestaña del inventario del juego (`tools/extraer_iconos_inventario.py` los saca del .pak) en el color de su tipo; All y Ammo, que no tienen icono en el juego, van con texto. Están justo encima de la lista, debajo del buscador y los filtros.
+- **RF3.** Filtros: buscador (por nombre corto o completo, como el panel de componente; el prefijo «C-» ya distingue las armas Clan, así que no hay filtro de tecnología), tamaño (Small, Medium, Large) y una casilla **Fits this 'Mech**, marcada por defecto, que deja solo lo que se puede colocar en el 'Mech actual:
   - un arma, si algún anclaje del 'Mech la admite, esté libre u ocupado;
   - el equipo, si algún componente tiene sitio;
   - la munición, si algún componente tiene sitio y algún arma montada la usa, como en el panel de componente.
 - **RF4.** Orden por nombre, tamaño, toneladas, daño, calor, RPM o alcance; pulsar el mismo orden otra vez lo invierte. Lo que no tiene ese dato (el daño del equipo) va al final.
-- **RF5.** Cada fila muestra el nombre, el tamaño y las toneladas; las armas, además, su daño, calor y alcance, y el equipo y la munición sus ranuras.
+- **RF5.** La lista es una tabla, como la del inventario del juego: una fila por objeto con nombre, tamaño (S, M, L), toneladas, daño, calor, RPM y alcance en columnas alineadas, y una cabecera cuyas columnas ordenan la lista. El equipo y la munición dicen sus ranuras junto al nombre y no tienen cifras de arma. El panel mide 520 px de ancho para que quepan.
 - **RF6.** Al arrastrar un objeto, el tablero resalta los anclajes que lo admiten (los ocupados, como reemplazo) y los componentes donde se puede soltar, y atenúa el resto. Soltarlo lo coloca.
 - **RF7.** Sin un componente elegido, pulsar una fila la selecciona: el tablero se resalta como al arrastrar, y pulsar un anclaje o un componente coloca el objeto. La selección sigue después de colocar, para poner varios seguidos, y se quita pulsando la fila otra vez, con Escape o cerrando el inventario. Mientras hay un objeto seleccionado, pulsar un componente coloca en vez de abrir su panel.
 - **RF8.** La fila seleccionada de un arma con tiers muestra el selector de tier y sus cifras con ese tier; el arma se coloca con él.
@@ -71,7 +71,7 @@ Con el Archer ARC-2R: brazos con un anclaje de energía M y uno cuerpo a cuerpo 
 | CA1 | El catálogo | se cuenta por categoría | All tiene todos los objetos; Energy, Ballistic, Missile, Artillery, AMS y Melee suman las armas, y Equipment y Ammo el resto |
 | CA2 | El ARC-2R vacío y Fits this 'Mech | se filtra | están el Medium Laser, el LRM 20, el Double Heat Sink y el Knuckles de clase pesada; no están el AC/10, los jump jets ni el Knuckles de clase ligera; la munición de LRM no está |
 | CA3 | El ARC-2R con un LRM 20 montado | se filtra la munición | está la de LRM; sin la casilla están todas |
-| CA4 | Búsqueda «ac10», tecnología Clan y tamaño Large | se filtra sin la casilla | «ac10» encuentra el AC/10; todo lo de Clan es Clan y todo lo Large es grande |
+| CA4 | Búsqueda «ac10» y tamaño Large | se filtra sin la casilla | «ac10» encuentra el AC/10 y todo lo Large es grande |
 | CA5 | El orden por daño | se ordena hacia abajo y hacia arriba | el primero de las armas es el de más daño, o el de menos al invertir; el equipo va al final en los dos casos |
 | CA6 | Un Medium Laser y el ARC-2R con el brazo izquierdo ocupado por otro | se calculan los destinos | los anclajes de energía de los brazos y del torso central son destinos (el ocupado, como reemplazo); el brazo izquierdo no admite soltar en el componente y el derecho sí; los torsos laterales y las piernas no son destino |
 | CA7 | Un Double Heat Sink (3 ranuras) | se calculan los destinos | son destino los torsos laterales y los brazos, y el torso central por su ranura de disipador del motor; la cabeza (1 ranura) y las piernas (2) no; ningún anclaje lo es |
