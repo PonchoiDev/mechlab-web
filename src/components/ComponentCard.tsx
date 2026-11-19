@@ -1,6 +1,7 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, DragEvent } from 'react';
 import type { ComponentData, EquippedItem } from '../types/mech';
 import { clampArmorValue, scaleArmorPoints } from '../utils/calculators';
+import type { DropTarget } from '../utils/inventory';
 import {
   getComponentStatus,
   getEquipmentCategory,
@@ -33,6 +34,9 @@ interface ComponentCardProps {
   expandedSlots?: boolean;
   // Refined Armor: los puntos se muestran multiplicados.
   armorScale?: number;
+  // Mientras se coloca un objeto del inventario: dónde admite soltarlo este componente. Pulsar la tarjeta o
+  // un anclaje coloca el objeto en vez de abrir el panel.
+  placement?: { target: DropTarget; onPlace: (hardpointIndex: number | null) => void };
 }
 
 interface EquipmentChipProps {
@@ -124,7 +128,8 @@ export function ComponentCard({
   onHardpointMenu,
   onEquipmentMenu,
   expandedSlots = false,
-  armorScale = 1
+  armorScale = 1,
+  placement
 }: ComponentCardProps) {
   const status = getComponentStatus(componentData, equippedItems);
   const hardpoints = getHardpointViews(componentData.hardpoints, equippedItems);
@@ -134,18 +139,35 @@ export function ComponentCard({
   const shownArmor = scaleArmorPoints(armorFront, armorScale) + scaleArmorPoints(armorRear, armorScale);
   const shownMaxArmor = scaleArmorPoints(componentData.maxArmor, armorScale);
   const stateClass = status.isOverSlots ? 'is-over' : status.hasFreeSpace ? 'has-free-space' : 'is-full';
+  const dropClass = !placement ? ''
+    : placement.target.component || placement.target.hardpoints.length > 0 ? 'is-drop-target' : 'is-drop-off';
+  const select = (hardpointIndex: number | null) => placement ? placement.onPlace(hardpointIndex) : onSelect(hardpointIndex);
+
+  const handleDragOver = (event: DragEvent) => {
+    if (!placement?.target.component) return;
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
+  };
+
+  const handleDrop = (event: DragEvent) => {
+    if (!placement?.target.component) return;
+    event.preventDefault();
+    placement.onPlace(null);
+  };
 
   return (
     <div
-      className={['component-card', `board-${position}`, stateClass, isActive ? 'is-active' : ''].filter(Boolean).join(' ')}
-      onClick={() => onSelect(null)}
+      className={['component-card', `board-${position}`, stateClass, isActive ? 'is-active' : '', dropClass].filter(Boolean).join(' ')}
+      onClick={() => select(null)}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
     >
       <div className="component-card-header">
         <button
           type="button"
           className="component-card-title"
           aria-pressed={isActive}
-          onClick={(event) => { event.stopPropagation(); onSelect(null); }}
+          onClick={(event) => { event.stopPropagation(); select(null); }}
         >
           {label}
         </button>
@@ -159,8 +181,12 @@ export function ComponentCard({
               view={view}
               isSelected={isActive && selectedHardpoint === view.index}
               emphasizeWeapon
-              onClick={() => onSelect(view.index)}
+              onClick={() => select(view.index)}
               onContextMenu={(x, y) => onHardpointMenu(view.index, x, y)}
+              drop={placement && {
+                accepts: placement.target.hardpoints.includes(view.index),
+                onDrop: () => placement.onPlace(view.index)
+              }}
             />
           ))}
         </div>

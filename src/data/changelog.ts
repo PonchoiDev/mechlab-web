@@ -9,6 +9,20 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-19-inventory',
+    date: '2026-11-19',
+    title: 'Inventory',
+    items: [
+      'New Inventory panel, like the one in the game: every weapon, piece of equipment and ammo in one list, with tabs by type, search, tech base and size filters and sorting by name, size, tons, damage or range',
+      'Fits this \'Mech keeps only what can go somewhere in the current \'Mech. Untick it to browse the whole arsenal',
+      'Drag an item onto a hardpoint or a component to equip it. The board highlights where it fits and dims the rest',
+      'On touch screens, or without dragging, click an item and then click a hardpoint or component. It stays selected to place several in a row',
+      'Pick the tier of a weapon in its row before placing it',
+      'Dropping a weapon on a used hardpoint replaces it, and the notice has an Undo button',
+      'The inventory opens on the side opposite the component panel, so both can stay open'
+    ]
+  },
+  {
     id: '2026-11-18-picker-fixes',
     date: '2026-11-18',
     title: '\'Mech picker fixes',

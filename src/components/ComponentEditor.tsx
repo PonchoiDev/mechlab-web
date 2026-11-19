@@ -32,6 +32,7 @@ const KEEPS_EDITOR_OPEN = [
   '.component-editor',
   '.component-card',
   '.mech-picker',
+  '.inventory-panel',
   'button',
   'a',
   'input',

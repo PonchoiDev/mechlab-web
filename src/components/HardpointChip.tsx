@@ -1,4 +1,4 @@
-import type { MouseEvent } from 'react';
+import type { DragEvent, MouseEvent } from 'react';
 import { useLongPress } from '../hooks/useLongPress';
 import { getMenuPosition } from '../utils/menuPosition';
 import { getHardpointName, type HardpointView } from '../utils/equipment';
@@ -11,6 +11,9 @@ interface HardpointChipProps {
   emphasizeWeapon?: boolean;
   onClick?: () => void;
   onContextMenu?: (x: number, y: number) => void;
+  // Mientras se coloca un objeto del inventario: si este anclaje lo admite (ocupado, como reemplazo) y qué
+  // hacer al soltarlo encima.
+  drop?: { accepts: boolean; onDrop: () => void };
 }
 
 const getHardpointTitle = (view: HardpointView): string => {
@@ -22,7 +25,7 @@ const getHardpointTitle = (view: HardpointView): string => {
   return `${description}: free`;
 };
 
-export function HardpointChip({ view, isSelected = false, emphasizeWeapon = false, onClick, onContextMenu }: HardpointChipProps) {
+export function HardpointChip({ view, isSelected = false, emphasizeWeapon = false, onClick, onContextMenu, drop }: HardpointChipProps) {
   const longPress = useLongPress((x, y) => onContextMenu?.(x, y));
   const { hardpoint, weapon, builtInWeapon } = view;
   const tierName = weapon ? getTierName(weapon) : null;
@@ -32,7 +35,8 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
     'hardpoint-chip',
     weapon ? 'is-occupied' : builtInWeapon ? 'is-built-in' : 'is-free',
     weapon && emphasizeWeapon ? 'is-emphasized' : '',
-    isSelected ? 'is-selected' : ''
+    isSelected ? 'is-selected' : '',
+    drop ? (drop.accepts ? (weapon ? 'is-drop-target is-drop-replace' : 'is-drop-target') : 'is-drop-off') : ''
   ].filter(Boolean).join(' ');
   const content = (
     <>
@@ -62,6 +66,20 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
     onContextMenu(x, y);
   };
 
+  // Un anclaje que no admite el objeto no recoge el arrastre: lo recoge su tarjeta, que lo pone en otro libre.
+  const handleDragOver = (event: DragEvent) => {
+    if (!drop?.accepts) return;
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
+  };
+
+  const handleDrop = (event: DragEvent) => {
+    if (!drop?.accepts) return;
+    event.preventDefault();
+    event.stopPropagation();
+    drop.onDrop();
+  };
+
   return (
     <button
       type="button"
@@ -71,6 +89,8 @@ export function HardpointChip({ view, isSelected = false, emphasizeWeapon = fals
       title={getHardpointTitle(view)}
       onClick={handleClick}
       onContextMenu={handleContextMenu}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
       {...(onContextMenu ? longPress : {})}
     >
       {content}

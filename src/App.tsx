@@ -10,6 +10,7 @@ import { normalizeBuildName } from './utils/savedBuilds';
 import { getArmorScale, getBuildSummary } from './utils/calculators';
 import { getUpgrades, getUsedUpgradeSlots } from './utils/upgrades';
 import { getBuildIssues } from './utils/issues';
+import { getDropTargets, placeItem } from './utils/inventory';
 import { ZONE_LABELS } from './utils/zones';
 import { useMechBuild } from './hooks/useMechBuild';
 import { useSarnaAsset } from './hooks/useSarnaAsset';
@@ -22,6 +23,7 @@ import { ComparePanel } from './components/ComparePanel';
 import { ComponentEditor } from './components/ComponentEditor';
 import { ContextMenu } from './components/ContextMenu';
 import { FeedbackDialog } from './components/FeedbackDialog';
+import { InventoryPanel } from './components/InventoryPanel';
 import { getEquipmentMenu, getHardpointMenu, type MenuDefinition } from './components/menus';
 import { LoadoutAnalysis } from './components/LoadoutAnalysis';
 import { MechBoard } from './components/MechBoard';
@@ -73,7 +75,8 @@ export default function App() {
   }, [setActiveZone, setSelectedHardpoint]);
 
   const [menu, setMenu] = useState<(MenuDefinition & { x: number; y: number }) | null>(null);
-  const [toast, setToast] = useState<{ id: number; message: string } | null>(() =>
+  // undo: la build de antes y la de después de reemplazar un arma desde el inventario.
+  const [toast, setToast] = useState<{ id: number; message: string; undo?: { before: EquippedLoadout; after: EquippedLoadout } } | null>(() =>
     linkedBuild && !linkedBuild.build ? { id: 0, message: 'This build link is not valid' } : null);
   const [isSharingImage, setIsSharingImage] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
@@ -137,6 +140,38 @@ export default function App() {
       { kind: 'action', label: 'Generate build image', onSelect: () => { setMenu(null); setIsSharingImage(true); } }
     ]
   });
+  // Objeto del inventario que se está colocando: el que se arrastra o, si no, el elegido para colocarlo pulsando.
+  const [pickedItem, setPickedItem] = useState<Item | null>(null);
+  const [draggedItem, setDraggedItem] = useState<Item | null>(null);
+  const heldItem = view.inventoryOpen ? draggedItem ?? pickedItem : null;
+  const dropTargets = useMemo(() => heldItem ? getDropTargets(mech, loadout, heldItem) : null, [mech, loadout, heldItem]);
+  const endDrag = useCallback(() => setDraggedItem(null), [setDraggedItem]);
+  const placeHeldItem = (zone: Zone, hardpointIndex: number | null) => {
+    if (!heldItem) return;
+    const result = placeItem(mech, loadout, zone, heldItem, hardpointIndex);
+    setDraggedItem(null);
+    if (result.loadout === loadout) {
+      showToast(result.message);
+      return;
+    }
+    build.runAction(() => result);
+    // Solo el reemplazo avisa: añadir se ve en el tablero, pero lo reemplazado desaparece.
+    if (result.replaced) setToast({ id: Date.now(), message: result.message, undo: { before: loadout, after: result.loadout } });
+  };
+  // Deshace el reemplazo solo si la build no ha cambiado desde entonces, para no perder lo hecho después.
+  const undoPlacement = (undo: { before: EquippedLoadout; after: EquippedLoadout }) => {
+    if (loadout !== undo.after) {
+      showToast('The build changed since, nothing to undo');
+      return;
+    }
+    build.runAction(() => ({ loadout: undo.before, message: '' }));
+    showToast('Undone');
+  };
+  const toggleInventory = () => {
+    if (view.inventoryOpen) setPickedItem(null);
+    view.toggleInventory();
+  };
+
   const menuContext = {
     mech,
     loadout,
@@ -158,7 +193,12 @@ export default function App() {
   };
 
   return (
-    <div className={['mechlab-shell', activeZone ? `has-editor is-editor-${view.editorSide}` : ''].filter(Boolean).join(' ')}>
+    <div className={[
+      'mechlab-shell',
+      activeZone ? `has-editor is-editor-${view.editorSide}` : '',
+      // El inventario va en el lado contrario al panel de componente, para poder tener los dos abiertos.
+      view.inventoryOpen ? `has-inventory is-inventory-${view.editorSide === 'right' ? 'left' : 'right'}` : ''
+    ].filter(Boolean).join(' ')}>
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">
@@ -253,6 +293,15 @@ export default function App() {
 
       <main className="workspace">
         <div className="view-toggles" aria-label="View options">
+          <button
+            type="button"
+            className="utility-button inventory-toggle"
+            aria-pressed={view.inventoryOpen}
+            title="Every weapon, piece of equipment and ammo, to drag onto the board"
+            onClick={toggleInventory}
+          >
+            Inventory
+          </button>
           <span className="utility-label">VIEW</span>
           <button
             type="button"
@@ -294,6 +343,8 @@ export default function App() {
           onArmorChange={build.changeArmor}
           onHardpointMenu={openHardpointMenu}
           onEquipmentMenu={openEquipmentMenu}
+          dropTargets={dropTargets}
+          onPlace={placeHeldItem}
           reference={(
             <>
               <MechImage mech={mech} asset={sarna.asset} isLoading={sarna.isLoading} onImageError={sarna.markImageBroken} />
@@ -326,6 +377,21 @@ export default function App() {
           onTierChange={(instanceId, tier) => build.changeTier(activeZone, instanceId, tier)}
           onArmorChange={(type, value) => build.changeArmor(activeZone, type, value)}
           onClose={closeEditor}
+        />
+      )}
+
+      {view.inventoryOpen && (
+        <InventoryPanel
+          catalog={items}
+          mech={mech}
+          loadout={loadout}
+          side={view.editorSide === 'right' ? 'left' : 'right'}
+          pickedItem={pickedItem}
+          onPick={setPickedItem}
+          onDragStart={setDraggedItem}
+          onDragEnd={endDrag}
+          onToggleSide={view.toggleEditorSide}
+          onClose={toggleInventory}
         />
       )}
 
@@ -394,7 +460,14 @@ export default function App() {
         />
       )}
       {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={closeMenu} />}
-      {toast && <Toast key={toast.id} message={toast.message} onDismiss={dismissToast} />}
+      {toast && (
+        <Toast
+          key={toast.id}
+          message={toast.message}
+          onDismiss={dismissToast}
+          action={toast.undo && { label: 'Undo', onSelect: () => toast.undo && undoPlacement(toast.undo) }}
+        />
+      )}
     </div>
   );
 }

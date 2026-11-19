@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import { getAmmoWarnings } from '../utils/equipment';
+import type { DropTargets } from '../utils/inventory';
 import { ZONES } from '../utils/zones';
 import { getMechDisplayName } from '../utils/mechs';
 import { ComponentCard } from './ComponentCard';
@@ -21,6 +22,9 @@ interface MechBoardProps {
   compact: boolean;
   // Refined Armor: los puntos se muestran multiplicados.
   armorScale?: number;
+  // Destinos del objeto del inventario que se está colocando, si hay uno.
+  dropTargets?: DropTargets | null;
+  onPlace?: (zone: Zone, hardpointIndex: number | null) => void;
 }
 
 export function MechBoard({
@@ -36,12 +40,14 @@ export function MechBoard({
   onEquipmentMenu,
   expandedSlots,
   compact,
-  armorScale
+  armorScale,
+  dropTargets,
+  onPlace
 }: MechBoardProps) {
   const ammoWarnings = getAmmoWarnings(loadout);
 
   return (
-    <section className={compact ? 'mech-board is-compact' : 'mech-board'} aria-label={`${mech.name} ${mech.variant} components`}>
+    <section className={['mech-board', compact ? 'is-compact' : '', dropTargets ? 'is-placing' : ''].filter(Boolean).join(' ')} aria-label={`${mech.name} ${mech.variant} components`}>
       <div className="mech-board-reference">
         <div className="mech-board-title">
           {/* Con los dos nombres de los 'Mechs Clan, como en el selector: «Hankyu (Arctic Cheetah)». */}
@@ -69,6 +75,7 @@ export function MechBoard({
           onEquipmentMenu={(itemName, x, y) => onEquipmentMenu(zone, itemName, x, y)}
           expandedSlots={expandedSlots}
           armorScale={armorScale}
+          placement={dropTargets && onPlace ? { target: dropTargets[zone], onPlace: (index) => onPlace(zone, index) } : undefined}
         />
       ))}
     </section>

@@ -3450,3 +3450,231 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   .range-radar-unit, .range-radar-span { font-size: 16px; }
   .range-radar-axis { font-size: 14px; }
 }
+
+/* Inventario: todo el arsenal en una columna fija, en el lado contrario al panel de componente. */
+
+.view-toggles .inventory-toggle { margin-right: auto; }
+
+.inventory-panel {
+  --weapon-color: var(--work-muted);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  border-right: 1px solid var(--work-line);
+  background: var(--work-panel);
+  color: var(--work-text);
+  font-family: var(--work-sans);
+}
+
+.inventory-panel:not(.is-left) {
+  right: 0;
+  left: auto;
+  border-right: 0;
+  border-left: 1px solid var(--work-line);
+}
+
+.inventory-panel button,
+.inventory-panel input { font-family: var(--work-mono); }
+
+.inventory-controls {
+  display: grid;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--work-line);
+}
+
+.inventory-controls .editor-search { margin-bottom: 0; }
+
+.inventory-hint {
+  margin: 0;
+  color: var(--work-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.inventory-hint strong { color: var(--work-lime); }
+
+.inventory-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.inventory-tabs small { color: var(--work-muted); font-size: 10px; }
+.inventory-tabs .filter-chip:disabled { opacity: 0.4; cursor: default; }
+
+.inventory-row-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.inventory-fits {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--work-text);
+  font: 500 11px var(--work-mono);
+  cursor: pointer;
+}
+
+.inventory-fits input { accent-color: var(--work-lime); }
+
+.inventory-sort { flex-wrap: wrap; }
+
+.inventory-list {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  gap: 4px;
+  margin: 0;
+  padding: 10px 16px 16px;
+  overflow-y: auto;
+  list-style: none;
+  scrollbar-color: var(--work-line) transparent;
+}
+
+.inventory-row {
+  border: 1px solid var(--work-line);
+  border-left: 3px solid var(--weapon-color);
+  border-radius: 0 2px 2px 0;
+  background: var(--work-panel-raised);
+}
+
+.inventory-row.is-picked {
+  border-color: var(--work-lime);
+  box-shadow: 0 0 0 1px var(--work-lime);
+}
+
+.inventory-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'name name'
+    'spec stats';
+  align-items: center;
+  gap: 3px 10px;
+  padding: 7px 9px;
+  cursor: grab;
+  user-select: none;
+}
+
+.inventory-item:hover { background: #262d26; }
+.inventory-item:active { cursor: grabbing; }
+
+.inventory-item:focus-visible,
+.inventory-panel button:focus-visible,
+.inventory-fits input:focus-visible {
+  outline: 2px solid var(--work-lime);
+  outline-offset: 2px;
+}
+
+.inventory-item-name {
+  grid-area: name;
+  font: 500 13px var(--work-sans);
+}
+
+.inventory-item-spec {
+  grid-area: spec;
+  color: var(--work-muted);
+  font-size: 11px;
+}
+
+.inventory-item-spec i {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  margin: 0 4px 2px;
+  border-radius: 50%;
+  background: var(--work-muted);
+}
+
+.inventory-item-stats {
+  grid-area: stats;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(46px, auto));
+  gap: 8px;
+  color: var(--work-cyan);
+  font-size: 11px;
+  text-align: right;
+}
+
+.inventory-item-tier {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 9px 7px;
+}
+
+.inventory-empty { padding: 12px 16px; }
+
+/* Destinos al colocar un objeto del inventario: se resalta dónde cabe y se atenúa el resto. */
+
+.mech-board.is-placing .component-card.is-drop-off { opacity: 0.45; }
+
+.mech-board.is-placing .component-card.is-drop-target {
+  border-color: var(--work-lime);
+  box-shadow: 0 0 0 1px rgba(195, 237, 98, 0.5);
+}
+
+.hardpoint-chip.is-drop-off { opacity: 0.4; }
+
+.hardpoint-chip.is-drop-target {
+  outline: 2px dashed var(--work-lime);
+  outline-offset: 1px;
+}
+
+.hardpoint-chip.is-drop-replace { outline-color: var(--work-amber); }
+
+.toast-action {
+  flex-shrink: 0;
+  min-height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--work-lime);
+  border-radius: 2px;
+  background: rgba(195, 237, 98, 0.1);
+  color: var(--work-lime);
+  font: 600 11px var(--work-mono);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@media (min-width: 761px) {
+  .mechlab-shell.has-inventory.is-inventory-left { padding-left: 404px; }
+  .mechlab-shell.has-inventory.is-inventory-right { padding-right: 404px; }
+}
+
+/* Con los dos paneles fijos en pantallas anchas, el de componente también ocupa su columna. */
+@media (min-width: 1400px) {
+  .mechlab-shell.has-inventory.has-editor.is-editor-right { padding-right: 468px; }
+  .mechlab-shell.has-inventory.has-editor.is-editor-left { padding-left: 468px; }
+}
+
+/* En el móvil, una hoja inferior baja que deja ver el tablero para pulsar el destino. */
+@media (max-width: 760px) {
+  .inventory-panel,
+  .inventory-panel:not(.is-left) {
+    top: auto;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    height: 46svh;
+    border: 0;
+    border-top: 1px solid var(--work-line);
+    box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  .mechlab-shell.has-inventory { padding-bottom: calc(46svh + 24px); }
+  /* En una hoja tan baja, los filtros se desplazan con la lista para que se vean los objetos. */
+  .inventory-panel { overflow-y: auto; scrollbar-color: var(--work-line) transparent; }
+  .inventory-list { flex: none; overflow: visible; padding: 8px 12px 12px; }
+  .inventory-controls { padding: 10px 12px; }
+  .inventory-hint { display: none; }
+  .inventory-panel .editor-side { display: none; }
+}
