@@ -70,42 +70,48 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
 
 const ignore = () => {};
 
-// Tarjeta de un lado, como la CompareCard de MW5: el icono del chasis, su ficha, su tablero y sus cifras.
+// Un lado de la comparación en tres partes, como la CompareCard de MW5: la cabecera (icono y ficha) y las cifras
+// lado a lado con las del otro 'Mech, y el tablero compacto a todo el ancho debajo de las cabeceras.
 function CompareCard({ build, caption, groups, side, expandedSlots }: { build: BtBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b'; expandedSlots: boolean }) {
   const { mech } = build;
   return (
-    <article className="compare-card">
-      <p className="eyebrow">{caption}</p>
-      <div className="compare-card-head">
-        <div className="compare-card-image bt-compare-icon"><MechIcon mech={mech} size={96} /></div>
-        <div className="compare-card-title">
-          <h3>{mech.name} <span>{mech.variant}</span></h3>
-          <span className="mech-specs">
-            <span className="mech-spec">{mech.tonnage} T</span>
-            <span className="mech-spec">{WEIGHT_CLASS_LABELS[mech.weightClass].toUpperCase()}</span>
-            {mech.source !== 'base' && <span className="mech-spec is-xl">{SOURCE_LABELS[mech.source].toUpperCase()}</span>}
-          </span>
-          <HardpointSummary mech={mech} />
+    <article className="compare-card" data-side={side} aria-label={caption}>
+      <div className="compare-part compare-part-head">
+        <p className="eyebrow">{caption}</p>
+        <div className="compare-card-head">
+          <div className="compare-card-image bt-compare-icon"><MechIcon mech={mech} size={96} /></div>
+          <div className="compare-card-title">
+            <h3>{mech.name} <span>{mech.variant}</span></h3>
+            <span className="mech-specs">
+              <span className="mech-spec">{mech.tonnage} T</span>
+              <span className="mech-spec">{WEIGHT_CLASS_LABELS[mech.weightClass].toUpperCase()}</span>
+              {mech.source !== 'base' && <span className="mech-spec is-xl">{SOURCE_LABELS[mech.source].toUpperCase()}</span>}
+            </span>
+            <HardpointSummary mech={mech} />
+          </div>
         </div>
       </div>
-      {/* El tablero compacto del MechLab, como en MW5: solo se mira (inert). */}
-      <div className="compare-board" inert>
-        <BtBoard
-          build={build}
-          activeZone={null}
-          selectedHardpoint={null}
-          onSelectZone={ignore}
-          onArmorChange={ignore}
-          onArmorStep={ignore}
-          onHardpointMenu={ignore}
-          onEquipmentMenu={ignore}
-          expandedSlots={expandedSlots}
-          compact
-        />
+      <div className="compare-part compare-part-board">
+        <p className="eyebrow">{caption} · {mech.name} {mech.variant}</p>
+        {/* Solo se mira (inert), como en MW5. */}
+        <div className="compare-board" inert>
+          <BtBoard
+            build={build}
+            activeZone={null}
+            selectedHardpoint={null}
+            onSelectZone={ignore}
+            onArmorChange={ignore}
+            onArmorStep={ignore}
+            onHardpointMenu={ignore}
+            onEquipmentMenu={ignore}
+            expandedSlots={expandedSlots}
+            compact
+          />
+        </div>
       </div>
-      {/* Siempre presente, aunque vacío, como en MW5: las dos tarjetas ocupan las mismas filas. */}
-      <p className="compare-upgrades" />
-      <CardStats groups={groups} side={side} />
+      <div className="compare-part compare-part-stats">
+        <CardStats groups={groups} side={side} />
+      </div>
     </article>
   );
 }
@@ -162,10 +168,12 @@ export function BtComparePanel({ mechs, current, savedBuilds, expandedSlots, onL
         {other
           ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" expandedSlots={expandedSlots} />
           : (
-            <article className="compare-card">
-              <p className="compare-empty">
-                {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
-              </p>
+            <article className="compare-card" data-side="b">
+              <div className="compare-part compare-part-head">
+                <p className="compare-empty">
+                  {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
+                </p>
+              </div>
             </article>
           )}
       </div>

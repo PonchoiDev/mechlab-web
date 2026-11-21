@@ -66,49 +66,56 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
 
 const ignore = () => {};
 
-// Tarjeta de un lado: el 'Mech con su imagen, su ficha, su tablero y sus cifras.
+// Un lado de la comparación en tres partes, que la rejilla del panel coloca por separado: la cabecera (imagen,
+// ficha y mejoras) y las cifras van lado a lado con las del otro 'Mech, y el tablero, a todo el ancho debajo de
+// las cabeceras, como el tablero compacto del MechLab, para que se lea igual que él.
 function CompareCard({ build, caption, groups, side, expandedSlots }: { build: SharedBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b'; expandedSlots: boolean }) {
   const { mech, loadout, upgrades } = build;
   const sarna = useSarnaAsset(mech);
   const upgradeNames = getUpgrades(upgrades).map(upgrade => upgrade.name);
 
   return (
-    <article className="compare-card">
-      <p className="eyebrow">{caption}</p>
-      <div className="compare-card-head">
-        <div className="compare-card-image">
-          {sarna.asset?.imageUrl
-            ? <img src={sarna.asset.imageUrl} alt={`${mech.name} ${mech.variant}`} onError={sarna.markImageBroken} />
-            : <span>{sarna.isLoading ? 'Loading…' : mech.variant}</span>}
+    <article className="compare-card" data-side={side} aria-label={caption}>
+      <div className="compare-part compare-part-head">
+        <p className="eyebrow">{caption}</p>
+        <div className="compare-card-head">
+          <div className="compare-card-image">
+            {sarna.asset?.imageUrl
+              ? <img src={sarna.asset.imageUrl} alt={`${mech.name} ${mech.variant}`} onError={sarna.markImageBroken} />
+              : <span>{sarna.isLoading ? 'Loading…' : mech.variant}</span>}
+          </div>
+          <div className="compare-card-title">
+            <h3>{getMechDisplayName(mech)} <span>{mech.variant}</span></h3>
+            <MechSpecs mech={mech} />
+            <HardpointSummary mech={mech} />
+          </div>
         </div>
-        <div className="compare-card-title">
-          <h3>{getMechDisplayName(mech)} <span>{mech.variant}</span></h3>
-          <MechSpecs mech={mech} />
-          <HardpointSummary mech={mech} />
+        {upgradeNames.length > 0 && <p className="compare-upgrades"><b>Upgrades:</b> {upgradeNames.join(', ')}</p>}
+      </div>
+      <div className="compare-part compare-part-board">
+        <p className="eyebrow">{caption} · {getMechDisplayName(mech)} {mech.variant}</p>
+        {/* Solo se mira: inert le quita los clics, el foco, los menús y el arrastre. */}
+        <div className="compare-board" inert>
+          <MechBoard
+            mech={mech}
+            loadout={loadout}
+            armor={build.armor}
+            activeZone={null}
+            selectedHardpoint={null}
+            reference={null}
+            onSelectZone={ignore}
+            onArmorChange={ignore}
+            onHardpointMenu={ignore}
+            onEquipmentMenu={ignore}
+            expandedSlots={expandedSlots}
+            compact
+            armorScale={getArmorScale(getUpgrades(upgrades))}
+          />
         </div>
       </div>
-      {/* El tablero compacto del MechLab, para leer cada build como en el tablero: anclajes, ranuras y
-          armadura por componente. Solo se mira: inert le quita los clics, el foco, los menús y el arrastre. */}
-      <div className="compare-board" inert>
-        <MechBoard
-          mech={mech}
-          loadout={loadout}
-          armor={build.armor}
-          activeZone={null}
-          selectedHardpoint={null}
-          reference={null}
-          onSelectZone={ignore}
-          onArmorChange={ignore}
-          onHardpointMenu={ignore}
-          onEquipmentMenu={ignore}
-          expandedSlots={expandedSlots}
-          compact
-          armorScale={getArmorScale(getUpgrades(upgrades))}
-        />
+      <div className="compare-part compare-part-stats">
+        <CardStats groups={groups} side={side} />
       </div>
-      {/* Siempre presente, aunque esté vacío: cada tarjeta ocupa las mismas filas de la rejilla. */}
-      <p className="compare-upgrades">{upgradeNames.length > 0 && <><b>Upgrades:</b> {upgradeNames.join(', ')}</>}</p>
-      <CardStats groups={groups} side={side} />
     </article>
   );
 }
@@ -176,10 +183,12 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, expandedSlo
         {other
           ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" expandedSlots={expandedSlots} />
           : (
-            <article className="compare-card">
-              <p className="compare-empty">
-                {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
-              </p>
+            <article className="compare-card" data-side="b">
+              <div className="compare-part compare-part-head">
+                <p className="compare-empty">
+                  {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
+                </p>
+              </div>
             </article>
           )}
       </div>

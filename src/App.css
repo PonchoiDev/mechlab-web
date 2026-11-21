@@ -3094,8 +3094,17 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .compare-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    'title source'
+    'head-a head-b'
+    'board-a board-a'
+    'board-b board-b'
+    'stats-a stats-b';
   column-gap: 14px;
 }
+
+.compare-title { grid-area: title; }
+.compare-source { grid-area: source; }
 
 .compare-title,
 .compare-source {
@@ -3160,21 +3169,29 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font: 500 13px var(--work-mono);
 }
 
-.compare-card {
+/* Cada lado se reparte en tres partes que la rejilla coloca por su zona: cabeceras y cifras lado a lado, y
+   los tableros a todo el ancho, uno debajo de otro, con el mismo tamaño que el tablero compacto del MechLab. */
+.compare-card { display: contents; }
+
+.compare-part {
   display: grid;
-  grid-row: span 5;
-  grid-template-rows: subgrid;
   align-content: start;
-  row-gap: 10px;
+  gap: 10px;
+  margin-bottom: 14px;
   padding: 12px;
   border: 1px solid var(--work-line);
   border-radius: 4px;
   background: var(--work-panel);
 }
 
-.compare-card > .eyebrow {
-  margin: 0;
-}
+.compare-part > .eyebrow { margin: 0; }
+
+.compare-card[data-side='a'] > .compare-part-head { grid-area: head-a; }
+.compare-card[data-side='b'] > .compare-part-head { grid-area: head-b; }
+.compare-card[data-side='a'] > .compare-part-board { grid-area: board-a; }
+.compare-card[data-side='b'] > .compare-part-board { grid-area: board-b; }
+.compare-card[data-side='a'] > .compare-part-stats { grid-area: stats-a; }
+.compare-card[data-side='b'] > .compare-part-stats { grid-area: stats-b; }
 
 .compare-card-head {
   display: grid;
@@ -3232,34 +3249,11 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font-size: 11px;
 }
 
-/* El tablero compacto del MechLab dentro de cada tarjeta. En media pantalla no caben las cinco columnas del
-   compacto: tres, como el tablero normal sin la imagen del centro (cabeza y torso central en medio, torsos y
-   brazos a los lados y piernas abajo). Sin su cabecera (la tarjeta ya tiene la imagen y la ficha) ni los
-   controles de armadura, que aquí no se tocan. */
-.compare-board .mech-board {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-areas:
-    'left-torso head right-torso'
-    'left-arm center-torso right-arm'
-    'left-leg center-torso right-leg';
-  grid-template-rows: auto auto 1fr;
-  gap: 8px;
-  max-width: none;
-}
-
-.compare-board .mech-board > .component-card { align-self: start; }
-
-/* Las columnas son más estrechas que en el tablero: si el arma y su tier no caben en una línea, el tier
-   baja a la siguiente en vez de partir el nombre del arma. */
-.compare-board .hardpoint-chip-content { flex-wrap: wrap; }
-
+/* El tablero, el compacto del MechLab tal cual, sin su cabecera (la parte de arriba ya tiene la imagen y la
+   ficha) ni los controles de armadura, que aquí no se tocan. */
 .compare-board .mech-board-reference,
 .compare-board .component-card-armor-controls {
   display: none;
-}
-
-.compare-card > .compare-empty:only-child {
-  grid-row: span 5;
 }
 
 .compare-empty,
@@ -3274,13 +3268,11 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font-weight: 600;
 }
 
-/* Cifras dentro de cada tarjeta: las dos listas tienen las mismas filas y comparten la rejilla,
-   así que cada cifra queda a la altura de la del otro 'Mech. */
+/* Cifras de cada lado: las dos listas tienen las mismas filas y van en la misma fila de la rejilla, así que
+   cada cifra queda a la altura de la del otro 'Mech. */
 .compare-card-stats {
   display: grid;
   gap: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--work-line);
 }
 
 .compare-card-stats h4 {
@@ -3346,28 +3338,15 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font-weight: 400;
 }
 
-/* En el móvil, las tarjetas una debajo de otra; las cifras siguen en espejo. */
+/* En el móvil, un lado detrás de otro, cada uno con su cabecera, su tablero y sus cifras. */
 @media (max-width: 600px) {
   .compare-cards {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'title' 'source' 'head-a' 'board-a' 'stats-a' 'head-b' 'board-b' 'stats-b';
   }
 
   .compare-title {
     min-height: 0;
-  }
-}
-
-/* En el móvil no caben cinco columnas: de dos en dos, como el tablero. */
-@media (max-width: 600px) {
-  .compare-board .mech-board {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-areas:
-      'head head'
-      'left-torso right-torso'
-      'left-arm right-arm'
-      'center-torso center-torso'
-      'left-leg right-leg';
-    grid-template-rows: none;
   }
 }
 
