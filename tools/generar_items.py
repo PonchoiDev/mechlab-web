@@ -206,7 +206,9 @@ def calcular_tier(contenido, base):
         q_rng = quirks.get("RangePercentage_Quirk", quirks.get("RangeAndSpeedPercentage_Quirk", 0.0))
         dano = round((base["damage"] + quirks.get("Damage_Quirk", 0.0)) * (1.0 + q_dmg), 2)
         calor = round(base["heatPerShot"] * (1.0 + q_heat), 3)
-        enfriamiento = round((base["cooldown"] + quirks.get("Cooldown_Quirk", 0.0)) * (1.0 + q_cd), 3)
+        # Con cuatro decimales: a tres, 0.15 × 0.75 = 0.1125 queda en 0.112 y la cadencia del AC/2 RF de
+        # Lost Tech sale 535.7 en vez de los 533.333 del juego (src/utils/gameReference.test.ts).
+        enfriamiento = round((base["cooldown"] + quirks.get("Cooldown_Quirk", 0.0)) * (1.0 + q_cd), 4)
         rango = round(base["range"] * (1.0 + q_rng), 1)
         rango_maximo = round(base["maxRange"] * (1.0 + q_rng), 1)
         q_vel = quirks.get("SpeedPercentage_Quirk", quirks.get("RangeAndSpeedPercentage_Quirk", 0.0))
@@ -216,7 +218,7 @@ def calcular_tier(contenido, base):
         propias = obtener_estadisticas_base(contenido)
         dano = round(propias["damage"], 2) if REGEX_DAMAGE.search(contenido) else base["damage"]
         calor = round(propias["heatPerShot"], 3) if REGEX_HEAT.search(contenido) else base["heatPerShot"]
-        enfriamiento = round(propias["cooldown"], 3) if REGEX_COOLDOWN.search(contenido) else base["cooldown"]
+        enfriamiento = round(propias["cooldown"], 4) if REGEX_COOLDOWN.search(contenido) else base["cooldown"]
         rango = propias["range"] if REGEX_RANGE.search(contenido) else base["range"]
         rango_maximo = propias["maxRange"] if REGEX_RANGE.search(contenido) else base["maxRange"]
         velocidad = propias["speed"] if REGEX_VELOCIDAD.search(contenido) else base["speed"]

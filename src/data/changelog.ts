@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-21-ac2-rf-rate-of-fire',
+    date: '2026-11-21',
+    title: 'AC/2 RF rate of fire fix',
+    items: [
+      'The AC/2 RF rate of fire now matches the game in every tier: 533.3 RPM in Lost Tech instead of 535.7, and 470.6 in tier 4 instead of 468.8. Its DPS changes with it'
+    ]
+  },
+  {
     id: '2026-11-21-compare-board',
     date: '2026-11-21',
     title: 'Compare shows the board',
