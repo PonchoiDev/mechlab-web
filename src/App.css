@@ -3184,7 +3184,8 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .compare-part .eyebrow { margin: 0; }
 
-/* Rótulo de cada tablero: de quién es, con la ficha y los anclajes del 'Mech en la misma línea. */
+/* Rótulo de cada tablero: de quién es, con la ficha del 'Mech en la misma línea. Los anclajes no se repiten:
+   se ven en cada componente del tablero. */
 .compare-board-caption {
   display: flex;
   flex-wrap: wrap;
@@ -3196,21 +3197,6 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .compare-card[data-side='b'] > .compare-part-board { grid-area: board-b; }
 .compare-card[data-side='a'] > .compare-part-stats { grid-area: stats-a; }
 .compare-card[data-side='b'] > .compare-part-stats { grid-area: stats-b; }
-
-/* Anclajes más grandes que en el selector: aquí son lo primero que se compara. */
-.compare-board-caption .mech-option-hardpoints {
-  gap: 6px;
-}
-
-.compare-board-caption .mech-hardpoint-tag {
-  padding: 2px 8px;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.compare-board-caption .mech-hardpoint-tag small {
-  font-size: 11px;
-}
 
 /* El tablero, el compacto del MechLab tal cual, sin su cabecera (el rótulo ya tiene el nombre y la ficha) ni
    los controles de armadura, que aquí no se tocan. */

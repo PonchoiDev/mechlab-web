@@ -8,7 +8,7 @@ import { decodeBtBuild } from '../../utils/battletech/buildCode';
 import { compareBtBuilds } from '../../utils/battletech/compare';
 import { createStockBuild } from '../../utils/battletech/fitting';
 import { SOURCE_LABELS, WEIGHT_CLASS_LABELS } from '../../utils/battletech/mechlabData';
-import { BtMechPicker, HardpointSummary } from './BtMechPicker';
+import { BtMechPicker } from './BtMechPicker';
 import { BtBoard } from './BtBoard';
 import { useDismiss } from './useDismiss';
 
@@ -70,8 +70,8 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
 
 const ignore = () => {};
 
-// Un lado de la comparación en dos partes, como la CompareCard de MW5: el tablero compacto a todo el ancho, con
-// el nombre, la ficha y los anclajes del 'Mech en su rótulo, y las cifras lado a lado con las del otro 'Mech.
+// Un lado de la comparación en dos partes, como la CompareCard de MW5: el tablero compacto reducido para caber en
+// su mitad, con el nombre y la ficha del 'Mech en su rótulo, y debajo las cifras.
 function CompareCard({ build, caption, groups, side, expandedSlots }: { build: BtBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b'; expandedSlots: boolean }) {
   const { mech } = build;
   const title = <p className="eyebrow">{caption} · {mech.name} {mech.variant}</p>;
@@ -85,7 +85,6 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: B
             <span className="mech-spec">{WEIGHT_CLASS_LABELS[mech.weightClass].toUpperCase()}</span>
             {mech.source !== 'base' && <span className="mech-spec is-xl">{SOURCE_LABELS[mech.source].toUpperCase()}</span>}
           </span>
-          <HardpointSummary mech={mech} />
         </div>
         <ScaledBoard>
           <BtBoard

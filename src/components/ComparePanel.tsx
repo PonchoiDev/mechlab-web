@@ -15,7 +15,7 @@ import { getMechDisplayName } from '../utils/mechs';
 import type { SavedBuild } from '../utils/savedBuilds';
 import { getUpgrades } from '../utils/upgrades';
 import { getArmorScale } from '../utils/calculators';
-import { HardpointSummary, MechPicker } from './MechPicker';
+import { MechPicker } from './MechPicker';
 import { MechBoard } from './MechBoard';
 import { MechSpecs } from './MechSpecs';
 
@@ -66,9 +66,9 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
 
 const ignore = () => {};
 
-// Un lado de la comparación en dos partes, que la rejilla del panel coloca por separado: el tablero, a todo el
-// ancho y con el tamaño del tablero compacto del MechLab, con el nombre, la ficha y los anclajes del 'Mech en su
-// rótulo; y las cifras, lado a lado con las del otro 'Mech.
+// Un lado de la comparación en dos partes, que la rejilla del panel coloca por separado: el tablero compacto del
+// MechLab, reducido para caber en su mitad (ScaledBoard), con el nombre y la ficha del 'Mech en su rótulo; y
+// debajo las cifras. Las dos partes van lado a lado con las del otro 'Mech.
 function CompareCard({ build, caption, groups, side, expandedSlots }: { build: SharedBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b'; expandedSlots: boolean }) {
   const { mech, loadout, upgrades } = build;
   const upgradeNames = getUpgrades(upgrades).map(upgrade => upgrade.name);
@@ -80,7 +80,6 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: S
         <div className="compare-board-caption">
           {title}
           <MechSpecs mech={mech} />
-          <HardpointSummary mech={mech} />
           {upgradeNames.length > 0 && <p className="compare-upgrades"><b>Upgrades:</b> {upgradeNames.join(', ')}</p>}
         </div>
         <ScaledBoard>

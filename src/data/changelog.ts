@@ -13,8 +13,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: '2026-11-21',
     title: 'Compare shows the board',
     items: [
-      'Compare shows each build as the compact MechLab board, at full width and one above the other, with the hardpoints, slots and armor of every component, instead of a list of items',
-      'Each board is labeled with its build, engine specs and hardpoints, and the two sets of stats stay side by side. Slots follow Show slot cells, as on the board. Both in the MW5 and the BATTLETECH MechLab'
+      'Compare shows the two builds side by side as compact MechLab boards, scaled to fit, with the hardpoints, slots and armor of every component, instead of a list of items',
+      'Each board is labeled with its build and engine specs, with the stats below. Slots follow Show slot cells, as on the board. Both in the MW5 and the BATTLETECH MechLab'
     ]
   },
   {
