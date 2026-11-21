@@ -99,8 +99,10 @@ const meetsWeaponMinimums = (weapons: Partial<Record<string, number>>, minimums:
   Object.entries(minimums).every(([type, minimum]) => (weapons[type] ?? 0) >= (minimum ?? 0));
 
 // Cada palabra tiene que estar en el nombre, el chasis o la variante: «atlas brawl».
-export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, minHardpoints = {}, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [] }: BuildListFilter): BuildListRow[] => {
+export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, minHardpoints: requested = {}, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [] }: BuildListFilter): BuildListRow[] => {
   const words = normalize(query).split(/\s+/).filter(Boolean);
+  // Ningún arma es omni: con Weapons ese mínimo no cuenta.
+  const minHardpoints = minimumsOf === 'weapons' ? { ...requested, omni: 0 } : requested;
   const hasMinimums = Object.values(minHardpoints).some(value => (value ?? 0) > 0);
   return rows.filter(row => {
     if (weightClasses.length > 0 && (row.weightClass === null || !weightClasses.includes(row.weightClass))) return false;
@@ -117,6 +119,15 @@ export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, mi
     return words.every(word => text.includes(word));
   });
 };
+
+// Como en el selector de 'Mechs: cada clase y cada botón de equipo cuentan uno, los roles juntos uno y cada
+// mínimo mayor que cero uno. El buscador no es un filtro: se ve escrito.
+export const countBuildListFilters = ({ weightClasses, minHardpoints = {}, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [] }: BuildListFilter): number =>
+  weightClasses.length
+  + (techBase ? 1 : 0)
+  + (roles.length > 0 ? 1 : 0)
+  + features.length
+  + Object.entries(minHardpoints).filter(([type, value]) => (value ?? 0) > 0 && !(minimumsOf === 'weapons' && type === 'omni')).length;
 
 export const countBuildsByWeightClass = (rows: BuildListRow[]): Record<BuildWeightClass, number> => {
   const counts: Record<BuildWeightClass, number> = { light: 0, medium: 0, heavy: 0, assault: 0 };
@@ -137,3 +148,25 @@ export const countWeaponTypes = (types: (string | null | undefined)[], order: st
   order
     .map(type => ({ type, count: types.filter(candidate => candidate === type).length }))
     .filter(entry => entry.count > 0);
+
+// Lo que cambia de un juego a otro en las listas de builds (la ventana My builds y el comparador).
+export interface BuildListConfig {
+  // Tipos de anclaje de los mínimos, con la abreviatura del selector de 'Mechs.
+  hardpointTypes: { id: string; short: string; label: string }[];
+  featureOptions: { id: string; label: string; title: string }[];
+  // Solo MW5 tiene 'Mechs Clan.
+  hasTechBase: boolean;
+  weaponShort: Record<string, string>;
+  weaponLabels: Record<string, string>;
+  // Los roles que se ofrecen, de entre los de las builds guardadas, en el orden de cada juego.
+  orderRoles: (roles: string[]) => string[];
+}
+
+// Las builds que cumplen el filtro, en el orden elegido. Las de alwaysShow se ven aunque el filtro las esconda.
+export const showBuildEntries = <T extends { listRow: BuildListRow }>(entries: T[], filter: BuildListFilter, sort: BuildSort, alwaysShow: string | null = null): T[] => {
+  const listRows = entries.map(entry => entry.listRow);
+  const shownIds = new Set(filterBuildRows(listRows, filter).map(row => row.id));
+  if (alwaysShow) shownIds.add(alwaysShow);
+  const byId = new Map(entries.map(entry => [entry.listRow.id, entry]));
+  return sortBuildRows(listRows.filter(row => shownIds.has(row.id)), sort).map(row => byId.get(row.id)!);
+};

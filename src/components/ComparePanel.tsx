@@ -14,6 +14,10 @@ import {
 } from '../utils/compare';
 import { getMechDisplayName } from '../utils/mechs';
 import type { SavedBuild } from '../utils/savedBuilds';
+import { MERCS_BUILD_LIST, summarizeSavedBuild } from '../utils/savedBuildRows';
+import { MERCS_BUILD_SORT_KEY } from '../hooks/useBuildSort';
+import { useBuildListFilters } from '../hooks/useBuildListFilters';
+import { SavedBuildPicker } from './SavedBuildPicker';
 import { getUpgrades } from '../utils/upgrades';
 import { HardpointSummary, MechPicker } from './MechPicker';
 import { MechSpecs } from './MechSpecs';
@@ -25,6 +29,8 @@ interface ComparePanelProps {
   catalog: Item[];
   current: SharedBuild;
   savedBuilds: SavedBuild[];
+  // Build guardada con la que abrir, desde el botón Compare de la ventana My builds.
+  initialSavedId?: string | null;
   onLoad: (build: SharedBuild, label: string, savedId: string | null) => void;
   onClose: () => void;
 }
@@ -115,10 +121,12 @@ function CompareCard({ build, caption, groups, side }: { build: SharedBuild; cap
 }
 
 // Compara la build del tablero con la build de serie de otro 'Mech o con una build guardada.
-export function ComparePanel({ mechs, catalog, current, savedBuilds, onLoad, onClose }: ComparePanelProps) {
-  const [source, setSource] = useState<Source>('stock');
+export function ComparePanel({ mechs, catalog, current, savedBuilds, initialSavedId = null, onLoad, onClose }: ComparePanelProps) {
+  const [source, setSource] = useState<Source>(initialSavedId ? 'saved' : 'stock');
   const [stockIndex, setStockIndex] = useState(() => getDefaultComparison(mechs, current.mech));
-  const [savedId, setSavedId] = useState<string | null>(savedBuilds[0]?.id ?? null);
+  const [savedId, setSavedId] = useState<string | null>(initialSavedId ?? savedBuilds[0]?.id ?? null);
+  const savedFilters = useBuildListFilters(MERCS_BUILD_SORT_KEY);
+  const savedEntries = useMemo(() => savedBuilds.map(build => summarizeSavedBuild(build, mechs, catalog)), [savedBuilds, mechs, catalog]);
 
   const savedBuild = savedBuilds.find(build => build.id === savedId) ?? null;
   const other = useMemo(() => {
@@ -154,11 +162,13 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, onLoad, onC
           {source === 'stock' ? (
             <MechPicker mechs={mechs} selectedIndex={stockIndex} onSelect={setStockIndex} />
           ) : savedBuilds.length > 0 ? (
-            <label className="compare-saved">
-              <select aria-label="Saved build" value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
-                {savedBuilds.map(build => <option key={build.id} value={build.id}>{build.name}</option>)}
-              </select>
-            </label>
+            <SavedBuildPicker
+              entries={savedEntries}
+              selectedId={savedId}
+              onSelect={setSavedId}
+              config={MERCS_BUILD_LIST}
+              filters={savedFilters}
+            />
           ) : (
             <p className="compare-empty">No saved builds yet. Use Save build in the toolbar to keep one and compare it here.</p>
           )}

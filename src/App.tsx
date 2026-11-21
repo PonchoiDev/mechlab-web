@@ -71,6 +71,9 @@ export default function App() {
   const armorScale = getArmorScale(upgrades);
   const [isUpgradesOpen, setIsUpgradesOpen] = useState(false);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
+  // Build guardada que pide el botón Compare de My builds. El contador abre el comparador de nuevo con ella
+  // aunque ya estuviera abierto.
+  const [compareRequest, setCompareRequest] = useState<{ savedId: string; count: number } | null>(null);
   const issues = useMemo(() => getBuildIssues(mech, loadout, armor), [mech, loadout, armor]);
   const equippedItems = Object.values(loadout).flat();
   // Componente (y anclaje) elegido en el tablero: el inventario apunta a él y equipa ahí.
@@ -338,7 +341,10 @@ export default function App() {
         isUpgradesOpen={isUpgradesOpen}
         onToggleUpgrades={() => setIsUpgradesOpen(open => !open)}
         isCompareOpen={isCompareOpen}
-        onToggleCompare={() => setIsCompareOpen(open => !open)}
+        onToggleCompare={() => {
+          setCompareRequest(null);
+          setIsCompareOpen(open => !open);
+        }}
         savedBuildCount={saved.builds.length}
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
@@ -361,7 +367,8 @@ export default function App() {
 
       {isCompareOpen && (
         <ComparePanel
-          key={mech.id}
+          key={`${mech.id}-${compareRequest?.count ?? 0}`}
+          initialSavedId={compareRequest?.savedId ?? null}
           mechs={mechs}
           catalog={items}
           current={currentBuild}
@@ -525,6 +532,11 @@ export default function App() {
             setSelectedHardpoint(null);
             setIsBuildsOpen(false);
             showToast(`Loaded “${name}”`);
+          }}
+          onCompare={(savedId) => {
+            setCompareRequest(current => ({ savedId, count: (current?.count ?? 0) + 1 }));
+            setIsBuildsOpen(false);
+            setIsCompareOpen(true);
           }}
           onCopyLink={(code) => copyBuildLink(getBuildUrl(code))}
           onMessage={showToast}

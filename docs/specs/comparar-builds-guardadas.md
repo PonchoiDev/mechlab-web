@@ -1,6 +1,6 @@
 # Especificación: elegir una build guardada en el comparador
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/savedBuildsList.test.ts`, `src/utils/savedBuildRows.test.ts` y `src/utils/battletech/savedBuildRows.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -52,3 +52,20 @@ La ventana **My builds** ya tiene buscador, orden y filtros ([buscar-builds-guar
    - el teclado;
    - una build que ya no se puede abrir;
    - el botón Compare de la ventana My builds, con el comparador cerrado y abierto.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban: los resúmenes no existían y el recuento de filtros tampoco) y después el código, en commits separados.
+- **Tests:** los seis criterios pasan: CA1 y CA2 en `src/utils/savedBuildsList.test.ts`, CA3 y CA4 en `src/utils/savedBuildRows.test.ts` y CA5 y CA6 en `src/utils/battletech/savedBuildRows.test.ts`.
+- **Interfaz:** comprobada en el navegador con 13 builds en MW5 (una que ya no se puede abrir) y 10 en BATTLETECH, a 1440 × 900 y a 390 × 844:
+  - «atlas» deja el AS7-D y el AS7-K, y con Assault el recuento dice «2 of 13 builds · 1 filter»;
+  - con la flecha abajo y Enter se elige el AS7-D, y su tarjeta sale en la comparación;
+  - al volver a abrir el selector, el filtro sigue puesto;
+  - Escape cierra el selector y deja abierto el comparador;
+  - la build que ya no se puede abrir sale atenuada y no se puede elegir;
+  - Compare en My builds cierra la ventana y abre el comparador en la pestaña My builds con esa build;
+  - en BATTLETECH, las clases sin builds salen desactivadas, como en la ventana.
+
+  En el móvil, el panel mide lo mismo que el campo y la página no se desplaza en horizontal.
+- **Decisión durante el desarrollo:** el recuento y Clear filters van en la fila del orden, a su izquierda, porque sin el buscador esa fila quedaba casi vacía.
+
