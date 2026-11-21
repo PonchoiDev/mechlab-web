@@ -5,6 +5,10 @@ import type { ComparisonGroup } from '../../utils/compare';
 import { EMPTY_VALUE } from '../../utils/format';
 import type { SavedBuild } from '../../utils/savedBuildsCore';
 import { decodeBtBuild } from '../../utils/battletech/buildCode';
+import { BT_BUILD_LIST, summarizeBtSavedBuild } from '../../utils/battletech/savedBuildRows';
+import { BT_BUILD_SORT_KEY } from '../../hooks/useBuildSort';
+import { useBuildListFilters } from '../../hooks/useBuildListFilters';
+import { SavedBuildPicker } from '../../components/SavedBuildPicker';
 import { compareBtBuilds } from '../../utils/battletech/compare';
 import { createStockBuild } from '../../utils/battletech/fitting';
 import { SOURCE_LABELS, WEIGHT_CLASS_LABELS } from '../../utils/battletech/mechlabData';
@@ -22,6 +26,8 @@ interface BtComparePanelProps {
   savedBuilds: SavedBuild[];
   // La vista de ranuras del tablero (Show slot cells), para que las tarjetas se lean igual que él.
   expandedSlots: boolean;
+  // Build guardada con la que abrir, desde el botón Compare de la ventana My builds.
+  initialSavedId?: string | null;
   onLoad: (build: BtBuild, label: string, savedId: string | null) => void;
   onClose: () => void;
 }
@@ -111,11 +117,13 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: B
 
 // Compara la build del tablero con la de serie de otra variante o con una build guardada, con el
 // marcado del ComparePanel de MW5.
-export function BtComparePanel({ mechs, current, savedBuilds, expandedSlots, onLoad, onClose }: BtComparePanelProps) {
+export function BtComparePanel({ mechs, current, savedBuilds, expandedSlots, initialSavedId = null, onLoad, onClose }: BtComparePanelProps) {
   useDismiss(onClose, KEEPS_COMPARE_OPEN);
-  const [source, setSource] = useState<Source>('stock');
+  const [source, setSource] = useState<Source>(initialSavedId ? 'saved' : 'stock');
   const [stockMech, setStockMech] = useState(() => defaultMech(mechs, current.mech));
-  const [savedId, setSavedId] = useState<string | null>(savedBuilds[0]?.id ?? null);
+  const [savedId, setSavedId] = useState<string | null>(initialSavedId ?? savedBuilds[0]?.id ?? null);
+  const savedFilters = useBuildListFilters(BT_BUILD_SORT_KEY);
+  const savedEntries = useMemo(() => savedBuilds.map(build => summarizeBtSavedBuild(build)), [savedBuilds]);
   const savedBuild = savedBuilds.find(build => build.id === savedId) ?? null;
   const other = useMemo(() => {
     if (source === 'saved') return savedBuild ? decodeBtBuild(savedBuild.code) : null;
@@ -142,11 +150,13 @@ export function BtComparePanel({ mechs, current, savedBuilds, expandedSlots, onL
           {source === 'stock' ? (
             <BtMechPicker mechs={mechs} current={stockMech} onSelect={setStockMech} />
           ) : savedBuilds.length > 0 ? (
-            <label className="compare-saved">
-              <select aria-label="Saved build" value={savedId ?? ''} onChange={event => setSavedId(event.target.value)}>
-                {savedBuilds.map(build => <option key={build.id} value={build.id}>{build.name}</option>)}
-              </select>
-            </label>
+            <SavedBuildPicker
+              entries={savedEntries}
+              selectedId={savedId}
+              onSelect={setSavedId}
+              config={BT_BUILD_LIST}
+              filters={savedFilters}
+            />
           ) : (
             <p className="compare-empty">No saved builds yet. Use Save build in the toolbar to keep one and compare it here.</p>
           )}

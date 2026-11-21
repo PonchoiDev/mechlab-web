@@ -3152,19 +3152,53 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   align-self: center;
 }
 
-.compare-saved {
-  display: grid;
-  min-width: 245px;
+/* Selector de builds guardadas del comparador: el del selector de chasis, con los filtros de la ventana
+   My builds encima de la lista. Más ancho que el de chasis, porque esos filtros ocupan más. */
+.build-picker-panel { width: min(600px, calc(100vw - 32px)); }
+
+.build-picker-panel .builds-controls {
+  padding: 10px 10px 4px;
+  border-bottom: 1px solid var(--work-line);
 }
 
-.compare-saved select {
-  min-height: 39px;
-  padding: 0 10px;
+.build-picker-panel .builds-controls-row {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.build-picker-panel .mech-filter-clear { margin-left: 10px; }
+
+/* En el móvil el selector ocupa todo el ancho: su panel, el mismo que el campo. */
+@media (max-width: 760px) {
+  .build-picker-panel { left: 0; right: auto; width: 100%; }
+}
+
+.build-option {
+  display: grid;
+  gap: 3px;
+  padding: 7px 10px;
   color: var(--work-text);
-  background: var(--work-panel-raised);
-  border: 1px solid var(--work-line);
-  border-radius: 3px;
-  font: 500 13px var(--work-mono);
+  border-bottom: 1px solid rgba(52, 61, 52, 0.6);
+  cursor: pointer;
+}
+
+.build-option strong { font: 600 13px var(--work-sans); }
+
+.build-option small {
+  color: var(--work-muted);
+  font: 400 11px var(--work-mono);
+}
+
+.build-option:hover,
+.build-option.is-active {
+  background: rgba(105, 217, 206, 0.12);
+}
+
+.build-option[aria-selected='true'] strong { color: var(--work-lime); }
+
+.build-option[aria-disabled='true'] {
+  cursor: default;
+  opacity: 0.5;
 }
 
 /* Cada lado se reparte en dos partes que la rejilla coloca por su zona: los tableros lado a lado, reducidos

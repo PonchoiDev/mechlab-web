@@ -18,6 +18,16 @@ export const CHANGELOG: ChangelogEntry[] = [
     ]
   },
   {
+    id: '2026-11-21-compare-saved-builds',
+    date: '2026-11-21',
+    title: 'Find saved builds to compare',
+    items: [
+      'In Compare, My builds now has the search, sort and filters of the My builds window: class, tech, role, equipment and minimum hardpoints or weapons, with the weapons and tags of each build',
+      'Each build in My builds has a Compare button that opens the comparison with that build',
+      'Both in the MW5 and the BATTLETECH MechLab'
+    ]
+  },
+  {
     id: '2026-11-19-battletech-inventory',
     date: '2026-11-19',
     title: 'Inventory in the BATTLETECH MechLab',
