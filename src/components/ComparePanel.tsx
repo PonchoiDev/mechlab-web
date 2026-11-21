@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { EMPTY_VALUE } from '../utils/format';
 import type { Item } from '../types/item';
 import type { Mech } from '../types/mech';
-import { useSarnaAsset } from '../hooks/useSarnaAsset';
 import { getStockBuild, type SharedBuild } from '../utils/buildCode';
 import {
   compareBuilds,
@@ -66,34 +65,23 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
 
 const ignore = () => {};
 
-// Un lado de la comparación en tres partes, que la rejilla del panel coloca por separado: la cabecera (imagen,
-// ficha y mejoras) y las cifras van lado a lado con las del otro 'Mech, y el tablero, a todo el ancho debajo de
-// las cabeceras, como el tablero compacto del MechLab, para que se lea igual que él.
+// Un lado de la comparación en dos partes, que la rejilla del panel coloca por separado: el tablero, a todo el
+// ancho y con el tamaño del tablero compacto del MechLab, con el nombre, la ficha y los anclajes del 'Mech en su
+// rótulo; y las cifras, lado a lado con las del otro 'Mech.
 function CompareCard({ build, caption, groups, side, expandedSlots }: { build: SharedBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b'; expandedSlots: boolean }) {
   const { mech, loadout, upgrades } = build;
-  const sarna = useSarnaAsset(mech);
   const upgradeNames = getUpgrades(upgrades).map(upgrade => upgrade.name);
+  const title = <p className="eyebrow">{caption} · {getMechDisplayName(mech)} {mech.variant}</p>;
 
   return (
     <article className="compare-card" data-side={side} aria-label={caption}>
-      <div className="compare-part compare-part-head">
-        <p className="eyebrow">{caption}</p>
-        <div className="compare-card-head">
-          <div className="compare-card-image">
-            {sarna.asset?.imageUrl
-              ? <img src={sarna.asset.imageUrl} alt={`${mech.name} ${mech.variant}`} onError={sarna.markImageBroken} />
-              : <span>{sarna.isLoading ? 'Loading…' : mech.variant}</span>}
-          </div>
-          <div className="compare-card-title">
-            <h3>{getMechDisplayName(mech)} <span>{mech.variant}</span></h3>
-            <MechSpecs mech={mech} />
-            <HardpointSummary mech={mech} />
-          </div>
-        </div>
-        {upgradeNames.length > 0 && <p className="compare-upgrades"><b>Upgrades:</b> {upgradeNames.join(', ')}</p>}
-      </div>
       <div className="compare-part compare-part-board">
-        <p className="eyebrow">{caption} · {getMechDisplayName(mech)} {mech.variant}</p>
+        <div className="compare-board-caption">
+          {title}
+          <MechSpecs mech={mech} />
+          <HardpointSummary mech={mech} />
+          {upgradeNames.length > 0 && <p className="compare-upgrades"><b>Upgrades:</b> {upgradeNames.join(', ')}</p>}
+        </div>
         {/* Solo se mira: inert le quita los clics, el foco, los menús y el arrastre. */}
         <div className="compare-board" inert>
           <MechBoard
@@ -114,6 +102,7 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: S
         </div>
       </div>
       <div className="compare-part compare-part-stats">
+        {title}
         <CardStats groups={groups} side={side} />
       </div>
     </article>
@@ -184,7 +173,7 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, expandedSlo
           ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" expandedSlots={expandedSlots} />
           : (
             <article className="compare-card" data-side="b">
-              <div className="compare-part compare-part-head">
+              <div className="compare-part compare-part-board">
                 <p className="compare-empty">
                   {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
                 </p>

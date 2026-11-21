@@ -3096,7 +3096,6 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-areas:
     'title source'
-    'head-a head-b'
     'board-a board-a'
     'board-b board-b'
     'stats-a stats-b';
@@ -3169,8 +3168,8 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font: 500 13px var(--work-mono);
 }
 
-/* Cada lado se reparte en tres partes que la rejilla coloca por su zona: cabeceras y cifras lado a lado, y
-   los tableros a todo el ancho, uno debajo de otro, con el mismo tamaño que el tablero compacto del MechLab. */
+/* Cada lado se reparte en dos partes que la rejilla coloca por su zona: los tableros a todo el ancho, uno
+   debajo de otro, con el mismo tamaño que el tablero compacto del MechLab, y las cifras lado a lado. */
 .compare-card { display: contents; }
 
 .compare-part {
@@ -3184,73 +3183,38 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   background: var(--work-panel);
 }
 
-.compare-part > .eyebrow { margin: 0; }
+.compare-part .eyebrow { margin: 0; }
 
-.compare-card[data-side='a'] > .compare-part-head { grid-area: head-a; }
-.compare-card[data-side='b'] > .compare-part-head { grid-area: head-b; }
+/* Rótulo de cada tablero: de quién es, con la ficha y los anclajes del 'Mech en la misma línea. */
+.compare-board-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+}
+
 .compare-card[data-side='a'] > .compare-part-board { grid-area: board-a; }
 .compare-card[data-side='b'] > .compare-part-board { grid-area: board-b; }
 .compare-card[data-side='a'] > .compare-part-stats { grid-area: stats-a; }
 .compare-card[data-side='b'] > .compare-part-stats { grid-area: stats-b; }
 
-.compare-card-head {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
-  gap: 12px;
-  align-items: center;
-}
-
-.compare-card-image {
-  display: grid;
-  place-items: center;
-  height: 112px;
-  overflow: hidden;
-  border-radius: 3px;
-  background: #f4f4f0;
-  color: #4a4f4a;
-  font: 500 11px var(--work-mono);
-}
-
-.compare-card-image img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.compare-card-title {
-  display: grid;
-  gap: 6px;
-  min-width: 0;
-}
-
-.compare-card-title h3 {
-  margin: 0;
-  color: var(--work-text);
-  font: 600 18px var(--work-sans);
-}
-
-.compare-card-title h3 span {
-  color: var(--work-cyan);
-  font: 600 13px var(--work-mono);
-}
-
 /* Anclajes más grandes que en el selector: aquí son lo primero que se compara. */
-.compare-card-title .mech-option-hardpoints {
+.compare-board-caption .mech-option-hardpoints {
   gap: 6px;
 }
 
-.compare-card-title .mech-hardpoint-tag {
+.compare-board-caption .mech-hardpoint-tag {
   padding: 2px 8px;
   font-size: 14px;
   line-height: 20px;
 }
 
-.compare-card-title .mech-hardpoint-tag small {
+.compare-board-caption .mech-hardpoint-tag small {
   font-size: 11px;
 }
 
-/* El tablero, el compacto del MechLab tal cual, sin su cabecera (la parte de arriba ya tiene la imagen y la
-   ficha) ni los controles de armadura, que aquí no se tocan. */
+/* El tablero, el compacto del MechLab tal cual, sin su cabecera (el rótulo ya tiene el nombre y la ficha) ni
+   los controles de armadura, que aquí no se tocan. */
 .compare-board .mech-board-reference,
 .compare-board .component-card-armor-controls {
   display: none;
@@ -3338,11 +3302,11 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font-weight: 400;
 }
 
-/* En el móvil, un lado detrás de otro, cada uno con su cabecera, su tablero y sus cifras. */
+/* En el móvil, un lado detrás de otro, cada uno con su tablero y sus cifras. */
 @media (max-width: 600px) {
   .compare-cards {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'title' 'source' 'head-a' 'board-a' 'stats-a' 'head-b' 'board-b' 'stats-b';
+    grid-template-areas: 'title' 'source' 'board-a' 'stats-a' 'board-b' 'stats-b';
   }
 
   .compare-title {

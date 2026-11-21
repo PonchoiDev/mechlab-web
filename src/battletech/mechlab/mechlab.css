@@ -168,13 +168,6 @@ body { background: var(--work-bg); }
   text-transform: uppercase;
 }
 
-/* El icono del chasis ocupa el hueco de la imagen de Sarna en las tarjetas de la comparación. */
-.compare-card-image.bt-compare-icon {
-  display: grid;
-  place-items: center;
-  background: radial-gradient(ellipse at center, rgba(255, 212, 0, 0.08), transparent 70%), rgba(16, 19, 16, 0.9);
-}
-
 button.component-card-item:has(.bt-item-bonus) { display: flex; align-items: baseline; gap: 4px; }
 
 /* Anclajes de cada ubicación con los iconos del juego, en el color de su tipo. */

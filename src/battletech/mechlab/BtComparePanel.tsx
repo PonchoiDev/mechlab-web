@@ -9,7 +9,6 @@ import { createStockBuild } from '../../utils/battletech/fitting';
 import { SOURCE_LABELS, WEIGHT_CLASS_LABELS } from '../../utils/battletech/mechlabData';
 import { BtMechPicker, HardpointSummary } from './BtMechPicker';
 import { BtBoard } from './BtBoard';
-import { MechIcon } from './MechIcon';
 import { useDismiss } from './useDismiss';
 
 // La comparación se cierra con su ✕, con Escape o con un clic fuera; la barra de herramientas (que la
@@ -70,29 +69,23 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
 
 const ignore = () => {};
 
-// Un lado de la comparación en tres partes, como la CompareCard de MW5: la cabecera (icono y ficha) y las cifras
-// lado a lado con las del otro 'Mech, y el tablero compacto a todo el ancho debajo de las cabeceras.
+// Un lado de la comparación en dos partes, como la CompareCard de MW5: el tablero compacto a todo el ancho, con
+// el nombre, la ficha y los anclajes del 'Mech en su rótulo, y las cifras lado a lado con las del otro 'Mech.
 function CompareCard({ build, caption, groups, side, expandedSlots }: { build: BtBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b'; expandedSlots: boolean }) {
   const { mech } = build;
+  const title = <p className="eyebrow">{caption} · {mech.name} {mech.variant}</p>;
   return (
     <article className="compare-card" data-side={side} aria-label={caption}>
-      <div className="compare-part compare-part-head">
-        <p className="eyebrow">{caption}</p>
-        <div className="compare-card-head">
-          <div className="compare-card-image bt-compare-icon"><MechIcon mech={mech} size={96} /></div>
-          <div className="compare-card-title">
-            <h3>{mech.name} <span>{mech.variant}</span></h3>
-            <span className="mech-specs">
-              <span className="mech-spec">{mech.tonnage} T</span>
-              <span className="mech-spec">{WEIGHT_CLASS_LABELS[mech.weightClass].toUpperCase()}</span>
-              {mech.source !== 'base' && <span className="mech-spec is-xl">{SOURCE_LABELS[mech.source].toUpperCase()}</span>}
-            </span>
-            <HardpointSummary mech={mech} />
-          </div>
-        </div>
-      </div>
       <div className="compare-part compare-part-board">
-        <p className="eyebrow">{caption} · {mech.name} {mech.variant}</p>
+        <div className="compare-board-caption">
+          {title}
+          <span className="mech-specs">
+            <span className="mech-spec">{mech.tonnage} T</span>
+            <span className="mech-spec">{WEIGHT_CLASS_LABELS[mech.weightClass].toUpperCase()}</span>
+            {mech.source !== 'base' && <span className="mech-spec is-xl">{SOURCE_LABELS[mech.source].toUpperCase()}</span>}
+          </span>
+          <HardpointSummary mech={mech} />
+        </div>
         {/* Solo se mira (inert), como en MW5. */}
         <div className="compare-board" inert>
           <BtBoard
@@ -110,6 +103,7 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: B
         </div>
       </div>
       <div className="compare-part compare-part-stats">
+        {title}
         <CardStats groups={groups} side={side} />
       </div>
     </article>
@@ -169,7 +163,7 @@ export function BtComparePanel({ mechs, current, savedBuilds, expandedSlots, onL
           ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" expandedSlots={expandedSlots} />
           : (
             <article className="compare-card" data-side="b">
-              <div className="compare-part compare-part-head">
+              <div className="compare-part compare-part-board">
                 <p className="compare-empty">
                   {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
                 </p>
