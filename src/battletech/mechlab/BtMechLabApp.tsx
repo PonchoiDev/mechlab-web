@@ -338,6 +338,7 @@ export function BtMechLabApp() {
           mechs={BT_MECHS}
           current={build}
           savedBuilds={saved.builds}
+          expandedSlots={view.expandedSlots}
           onLoad={(next, label, savedId) => {
             loadBuild(next, `Loaded ${savedId ? `“${label}”` : `the ${label} loadout`}`, savedId);
             setIsCompareOpen(false);

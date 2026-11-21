@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { ScaledBoard } from '../../components/ScaledBoard';
 import type { BtBuild, BtMech } from '../../types/battletech-mechlab';
 import type { ComparisonGroup } from '../../utils/compare';
 import { EMPTY_VALUE } from '../../utils/format';
@@ -8,11 +9,11 @@ import { BT_BUILD_LIST, summarizeBtSavedBuild } from '../../utils/battletech/sav
 import { BT_BUILD_SORT_KEY } from '../../hooks/useBuildSort';
 import { useBuildListFilters } from '../../hooks/useBuildListFilters';
 import { SavedBuildPicker } from '../../components/SavedBuildPicker';
-import { compareBtBuilds, groupBtLoadout } from '../../utils/battletech/compare';
+import { compareBtBuilds } from '../../utils/battletech/compare';
 import { createStockBuild } from '../../utils/battletech/fitting';
 import { SOURCE_LABELS, WEIGHT_CLASS_LABELS } from '../../utils/battletech/mechlabData';
-import { BtMechPicker, HardpointSummary } from './BtMechPicker';
-import { MechIcon } from './MechIcon';
+import { BtMechPicker } from './BtMechPicker';
+import { BtBoard } from './BtBoard';
 import { useDismiss } from './useDismiss';
 
 // La comparación se cierra con su ✕, con Escape o con un clic fuera; la barra de herramientas (que la
@@ -23,6 +24,8 @@ interface BtComparePanelProps {
   mechs: BtMech[];
   current: BtBuild;
   savedBuilds: SavedBuild[];
+  // La vista de ranuras del tablero (Show slot cells), para que las tarjetas se lean igual que él.
+  expandedSlots: boolean;
   // Build guardada con la que abrir, desde el botón Compare de la ventana My builds.
   initialSavedId?: string | null;
   onLoad: (build: BtBuild, label: string, savedId: string | null) => void;
@@ -71,56 +74,50 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
   );
 }
 
-// Tarjeta de un lado, como la CompareCard de MW5: el icono del chasis, su ficha, su loadout por
-// ubicación (con el equipo fijo) y sus cifras.
-function CompareCard({ build, caption, groups, side }: { build: BtBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b' }) {
-  const { mech, loadout } = build;
-  const loadoutGroups = groupBtLoadout(mech, loadout);
+const ignore = () => {};
+
+// Un lado de la comparación en dos partes, como la CompareCard de MW5: el tablero compacto reducido para caber en
+// su mitad, con el nombre y la ficha del 'Mech en su rótulo, y debajo las cifras.
+function CompareCard({ build, caption, groups, side, expandedSlots }: { build: BtBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b'; expandedSlots: boolean }) {
+  const { mech } = build;
+  const title = <p className="eyebrow">{caption} · {mech.name} {mech.variant}</p>;
   return (
-    <article className="compare-card">
-      <p className="eyebrow">{caption}</p>
-      <div className="compare-card-head">
-        <div className="compare-card-image bt-compare-icon"><MechIcon mech={mech} size={96} /></div>
-        <div className="compare-card-title">
-          <h3>{mech.name} <span>{mech.variant}</span></h3>
+    <article className="compare-card" data-side={side} aria-label={caption}>
+      <div className="compare-part compare-part-board">
+        <div className="compare-board-caption">
+          {title}
           <span className="mech-specs">
             <span className="mech-spec">{mech.tonnage} T</span>
             <span className="mech-spec">{WEIGHT_CLASS_LABELS[mech.weightClass].toUpperCase()}</span>
             {mech.source !== 'base' && <span className="mech-spec is-xl">{SOURCE_LABELS[mech.source].toUpperCase()}</span>}
           </span>
-          <HardpointSummary mech={mech} />
         </div>
+        <ScaledBoard>
+          <BtBoard
+            build={build}
+            activeZone={null}
+            selectedHardpoint={null}
+            onSelectZone={ignore}
+            onArmorChange={ignore}
+            onArmorStep={ignore}
+            onHardpointMenu={ignore}
+            onEquipmentMenu={ignore}
+            expandedSlots={expandedSlots}
+            compact
+          />
+        </ScaledBoard>
       </div>
-      {loadoutGroups.length > 0 ? (
-        <dl className="compare-loadout">
-          {loadoutGroups.map(group => (
-            <div key={group.zone} className="compare-loadout-zone">
-              <dt>{group.label}</dt>
-              <dd>
-                {group.items.map(line => (
-                  <span key={`${line.name}-${line.fixed}`} className={`compare-item is-${line.type}`} data-weapon-type={line.weaponType}>
-                    {line.name}
-                    {line.count > 1 && <small> ×{line.count}</small>}
-                    {line.fixed && <small> · built-in</small>}
-                  </span>
-                ))}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      ) : (
-        <p className="compare-empty">No equipment installed.</p>
-      )}
-      {/* Siempre presente, aunque vacío, como en MW5: las dos tarjetas ocupan las mismas filas. */}
-      <p className="compare-upgrades" />
-      <CardStats groups={groups} side={side} />
+      <div className="compare-part compare-part-stats">
+        {title}
+        <CardStats groups={groups} side={side} />
+      </div>
     </article>
   );
 }
 
 // Compara la build del tablero con la de serie de otra variante o con una build guardada, con el
 // marcado del ComparePanel de MW5.
-export function BtComparePanel({ mechs, current, savedBuilds, initialSavedId = null, onLoad, onClose }: BtComparePanelProps) {
+export function BtComparePanel({ mechs, current, savedBuilds, expandedSlots, initialSavedId = null, onLoad, onClose }: BtComparePanelProps) {
   useDismiss(onClose, KEEPS_COMPARE_OPEN);
   const [source, setSource] = useState<Source>(initialSavedId ? 'saved' : 'stock');
   const [stockMech, setStockMech] = useState(() => defaultMech(mechs, current.mech));
@@ -170,14 +167,16 @@ export function BtComparePanel({ mechs, current, savedBuilds, initialSavedId = n
           )}
           <button type="button" className="share-dialog-close compare-close" aria-label="Close comparison" onClick={onClose}>✕</button>
         </div>
-        <CompareCard build={current} caption="CURRENT BUILD" groups={groups} side="a" />
+        <CompareCard build={current} caption="CURRENT BUILD" groups={groups} side="a" expandedSlots={expandedSlots} />
         {other
-          ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" />
+          ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" expandedSlots={expandedSlots} />
           : (
-            <article className="compare-card">
-              <p className="compare-empty">
-                {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
-              </p>
+            <article className="compare-card" data-side="b">
+              <div className="compare-part compare-part-board">
+                <p className="compare-empty">
+                  {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
+                </p>
+              </div>
             </article>
           )}
       </div>

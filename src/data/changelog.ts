@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-21-compare-board',
+    date: '2026-11-21',
+    title: 'Compare shows the board',
+    items: [
+      'Compare shows the two builds side by side as compact MechLab boards, scaled to fit, with the hardpoints, slots and armor of every component, instead of a list of items',
+      'Each board is labeled with its build and engine specs, with the stats below. Slots follow Show slot cells, as on the board. Both in the MW5 and the BATTLETECH MechLab'
+    ]
+  },
+  {
     id: '2026-11-21-compare-saved-builds',
     date: '2026-11-21',
     title: 'Find saved builds to compare',

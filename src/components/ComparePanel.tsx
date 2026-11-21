@@ -1,13 +1,12 @@
 import { useMemo, useState } from 'react';
+import { ScaledBoard } from './ScaledBoard';
 import { EMPTY_VALUE } from '../utils/format';
 import type { Item } from '../types/item';
 import type { Mech } from '../types/mech';
-import { useSarnaAsset } from '../hooks/useSarnaAsset';
 import { getStockBuild, type SharedBuild } from '../utils/buildCode';
 import {
   compareBuilds,
   getDefaultComparison,
-  groupLoadout,
   resolveSavedBuild,
   toComparedSide,
   type ComparisonGroup
@@ -19,7 +18,9 @@ import { MERCS_BUILD_SORT_KEY } from '../hooks/useBuildSort';
 import { useBuildListFilters } from '../hooks/useBuildListFilters';
 import { SavedBuildPicker } from './SavedBuildPicker';
 import { getUpgrades } from '../utils/upgrades';
-import { HardpointSummary, MechPicker } from './MechPicker';
+import { getArmorScale } from '../utils/calculators';
+import { MechPicker } from './MechPicker';
+import { MechBoard } from './MechBoard';
 import { MechSpecs } from './MechSpecs';
 
 type Source = 'stock' | 'saved';
@@ -29,6 +30,8 @@ interface ComparePanelProps {
   catalog: Item[];
   current: SharedBuild;
   savedBuilds: SavedBuild[];
+  // La vista de ranuras del tablero (Show slot cells), para que las tarjetas se lean igual que él.
+  expandedSlots: boolean;
   // Build guardada con la que abrir, desde el botón Compare de la ventana My builds.
   initialSavedId?: string | null;
   onLoad: (build: SharedBuild, label: string, savedId: string | null) => void;
@@ -67,61 +70,52 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
   );
 }
 
-// Tarjeta de un lado: el 'Mech con su imagen, su ficha, su loadout por componente y sus cifras.
-function CompareCard({ build, caption, groups, side }: { build: SharedBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b' }) {
+const ignore = () => {};
+
+// Un lado de la comparación en dos partes, que la rejilla del panel coloca por separado: el tablero compacto del
+// MechLab, reducido para caber en su mitad (ScaledBoard), con el nombre y la ficha del 'Mech en su rótulo; y
+// debajo las cifras. Las dos partes van lado a lado con las del otro 'Mech.
+function CompareCard({ build, caption, groups, side, expandedSlots }: { build: SharedBuild; caption: string; groups: ComparisonGroup[]; side: 'a' | 'b'; expandedSlots: boolean }) {
   const { mech, loadout, upgrades } = build;
-  const sarna = useSarnaAsset(mech);
-  const loadoutGroups = groupLoadout(loadout);
   const upgradeNames = getUpgrades(upgrades).map(upgrade => upgrade.name);
+  const title = <p className="eyebrow">{caption} · {getMechDisplayName(mech)} {mech.variant}</p>;
 
   return (
-    <article className="compare-card">
-      <p className="eyebrow">{caption}</p>
-      <div className="compare-card-head">
-        <div className="compare-card-image">
-          {sarna.asset?.imageUrl
-            ? <img src={sarna.asset.imageUrl} alt={`${mech.name} ${mech.variant}`} onError={sarna.markImageBroken} />
-            : <span>{sarna.isLoading ? 'Loading…' : mech.variant}</span>}
-        </div>
-        <div className="compare-card-title">
-          <h3>{getMechDisplayName(mech)} <span>{mech.variant}</span></h3>
+    <article className="compare-card" data-side={side} aria-label={caption}>
+      <div className="compare-part compare-part-board">
+        <div className="compare-board-caption">
+          {title}
           <MechSpecs mech={mech} />
-          <HardpointSummary mech={mech} />
+          {upgradeNames.length > 0 && <p className="compare-upgrades"><b>Upgrades:</b> {upgradeNames.join(', ')}</p>}
         </div>
+        <ScaledBoard>
+          <MechBoard
+            mech={mech}
+            loadout={loadout}
+            armor={build.armor}
+            activeZone={null}
+            selectedHardpoint={null}
+            reference={null}
+            onSelectZone={ignore}
+            onArmorChange={ignore}
+            onHardpointMenu={ignore}
+            onEquipmentMenu={ignore}
+            expandedSlots={expandedSlots}
+            compact
+            armorScale={getArmorScale(getUpgrades(upgrades))}
+          />
+        </ScaledBoard>
       </div>
-      {loadoutGroups.length > 0 ? (
-        <dl className="compare-loadout">
-          {loadoutGroups.map(group => (
-            <div key={group.zone} className="compare-loadout-zone">
-              <dt>{group.label}</dt>
-              <dd>
-                {group.items.map(line => (
-                  <span
-                    key={`${line.name}-${line.tier}`}
-                    className={`compare-item is-${line.type}`}
-                    data-weapon-type={line.type === 'weapon' ? line.weaponType ?? undefined : undefined}
-                  >
-                    {line.name}
-                    {line.count > 1 && <small> ×{line.count}</small>}
-                    {line.tier && <small> · {line.tier}</small>}
-                  </span>
-                ))}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      ) : (
-        <p className="compare-empty">No equipment installed.</p>
-      )}
-      {/* Siempre presente, aunque esté vacío: cada tarjeta ocupa las mismas filas de la rejilla. */}
-      <p className="compare-upgrades">{upgradeNames.length > 0 && <><b>Upgrades:</b> {upgradeNames.join(', ')}</>}</p>
-      <CardStats groups={groups} side={side} />
+      <div className="compare-part compare-part-stats">
+        {title}
+        <CardStats groups={groups} side={side} />
+      </div>
     </article>
   );
 }
 
 // Compara la build del tablero con la build de serie de otro 'Mech o con una build guardada.
-export function ComparePanel({ mechs, catalog, current, savedBuilds, initialSavedId = null, onLoad, onClose }: ComparePanelProps) {
+export function ComparePanel({ mechs, catalog, current, savedBuilds, expandedSlots, initialSavedId = null, onLoad, onClose }: ComparePanelProps) {
   const [source, setSource] = useState<Source>(initialSavedId ? 'saved' : 'stock');
   const [stockIndex, setStockIndex] = useState(() => getDefaultComparison(mechs, current.mech));
   const [savedId, setSavedId] = useState<string | null>(initialSavedId ?? savedBuilds[0]?.id ?? null);
@@ -183,14 +177,16 @@ export function ComparePanel({ mechs, catalog, current, savedBuilds, initialSave
           )}
           <button type="button" className="share-dialog-close compare-close" aria-label="Close comparison" onClick={onClose}>✕</button>
         </div>
-        <CompareCard build={current} caption="CURRENT BUILD" groups={groups} side="a" />
+        <CompareCard build={current} caption="CURRENT BUILD" groups={groups} side="a" expandedSlots={expandedSlots} />
         {other
-          ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" />
+          ? <CompareCard build={other} caption={source === 'saved' ? 'SAVED BUILD' : 'STOCK LOADOUT'} groups={groups} side="b" expandedSlots={expandedSlots} />
           : (
-            <article className="compare-card">
-              <p className="compare-empty">
-                {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
-              </p>
+            <article className="compare-card" data-side="b">
+              <div className="compare-part compare-part-board">
+                <p className="compare-empty">
+                  {source === 'saved' && savedBuild ? 'This saved build can no longer be loaded.' : 'Pick a build to compare with.'}
+                </p>
+              </div>
             </article>
           )}
       </div>

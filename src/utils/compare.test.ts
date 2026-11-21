@@ -4,7 +4,6 @@ import { getBuildSummary } from './calculators';
 import {
   compareBuilds,
   getDefaultComparison,
-  groupLoadout,
   pickWinner,
   resolveSavedBuild,
   toComparedSide,
@@ -79,18 +78,6 @@ describe('con quién comparar al abrir el panel', () => {
 describe('tarjetas y builds guardadas', () => {
   const atlas = getMech('AS7-D');
   const stock = getStockBuild(atlas, allMechs, allItems)!;
-
-  it('CA8: agrupa el loadout por componente, con las repeticiones juntas y sin componentes vacíos', () => {
-    const groups = groupLoadout(stock.loadout);
-    const rightTorso = groups.find(group => group.zone === 'rightTorso')!;
-    expect(rightTorso.items).toEqual(expect.arrayContaining([
-      expect.objectContaining({ name: 'AC/20', type: 'weapon', count: 1 }),
-      expect.objectContaining({ name: 'AC/20 Ammo', type: 'ammo', count: 2 })
-    ]));
-    // Las armas van primero, como en el tablero.
-    expect(rightTorso.items[0].type).toBe('weapon');
-    expect(groups.every(group => group.items.length > 0)).toBe(true);
-  });
 
   it('CA9: una build guardada se compara con sus mejoras', () => {
     const code = encodeBuild(atlas, stock.loadout, stock.armor, allItems, ['IncreasedArmor_Trait2']);
