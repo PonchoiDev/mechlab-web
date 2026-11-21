@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { meetsHardpointMinimums } from './hardpointMinimums';
 import {
+  countBuildListFilters,
   countBuildsByWeightClass,
   countWeaponTypes,
   filterBuildRows,
@@ -128,5 +129,28 @@ describe('buscar, ordenar y filtrar las builds guardadas', () => {
     expect(matches({ features: ['jumpJets', 'ecm'] })).toEqual(['LRM boat']);
     expect(matches({ features: ['ams'] })).toEqual(['Brawler']);
     expect(matches({ features: ['hero'] })).toEqual(['Sniper']);
+  });
+});
+
+// Criterios de aceptación de docs/specs/comparar-builds-guardadas.md.
+describe('filtros del selector de builds del comparador', () => {
+  it('CA1: cuenta los filtros puestos, sin el buscador', () => {
+    expect(countBuildListFilters({ query: '', weightClasses: [] })).toBe(0);
+    expect(countBuildListFilters({
+      query: 'atlas',
+      weightClasses: ['assault', 'heavy'],
+      techBase: 'Clan',
+      roles: ['Sniper', 'Scout'],
+      features: ['jumpJets', 'ecm'],
+      minHardpoints: { energy: 2, ballistic: 0, missile: 1 }
+    })).toBe(8);
+  });
+
+  it('CA2: con Weapons, el mínimo de omni no cuenta', () => {
+    const puma = row('Puma', 6, {
+      chassis: 'Puma', variant: 'ADR-A', weightClass: 'light', tonnage: 35, firepower: 40,
+      hardpoints: { energy: 1, omni: 2, missile: 2 }, weapons: { energy: 3, missile: 2 }
+    });
+    expect(names(filterBuildRows([puma], { query: '', weightClasses: [], minHardpoints: { omni: 1 }, minimumsOf: 'weapons' }))).toEqual(['Puma']);
   });
 });
