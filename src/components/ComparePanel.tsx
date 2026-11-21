@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { ScaledBoard } from './ScaledBoard';
 import { EMPTY_VALUE } from '../utils/format';
 import type { Item } from '../types/item';
 import type { Mech } from '../types/mech';
@@ -82,8 +83,7 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: S
           <HardpointSummary mech={mech} />
           {upgradeNames.length > 0 && <p className="compare-upgrades"><b>Upgrades:</b> {upgradeNames.join(', ')}</p>}
         </div>
-        {/* Solo se mira: inert le quita los clics, el foco, los menús y el arrastre. */}
-        <div className="compare-board" inert>
+        <ScaledBoard>
           <MechBoard
             mech={mech}
             loadout={loadout}
@@ -99,7 +99,7 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: S
             compact
             armorScale={getArmorScale(getUpgrades(upgrades))}
           />
-        </div>
+        </ScaledBoard>
       </div>
       <div className="compare-part compare-part-stats">
         {title}

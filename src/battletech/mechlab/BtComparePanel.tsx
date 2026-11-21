@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { ScaledBoard } from '../../components/ScaledBoard';
 import type { BtBuild, BtMech } from '../../types/battletech-mechlab';
 import type { ComparisonGroup } from '../../utils/compare';
 import { EMPTY_VALUE } from '../../utils/format';
@@ -86,8 +87,7 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: B
           </span>
           <HardpointSummary mech={mech} />
         </div>
-        {/* Solo se mira (inert), como en MW5. */}
-        <div className="compare-board" inert>
+        <ScaledBoard>
           <BtBoard
             build={build}
             activeZone={null}
@@ -100,7 +100,7 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: B
             expandedSlots={expandedSlots}
             compact
           />
-        </div>
+        </ScaledBoard>
       </div>
       <div className="compare-part compare-part-stats">
         {title}
