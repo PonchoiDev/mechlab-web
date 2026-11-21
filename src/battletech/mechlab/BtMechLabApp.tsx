@@ -89,6 +89,9 @@ export function BtMechLabApp() {
   const [isSharingImage, setIsSharingImage] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
+  // Build guardada que pide el botón Compare de My builds. El contador abre el comparador de nuevo con ella
+  // aunque ya estuviera abierto.
+  const [compareRequest, setCompareRequest] = useState<{ savedId: string; count: number } | null>(null);
   const [menu, setMenu] = useState<{ title: string; x: number; y: number; entries: MenuEntry[] } | null>(null);
   const closeMenu = useCallback(() => setMenu(null), []);
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
@@ -298,7 +301,10 @@ export function BtMechLabApp() {
           showToast(`Loaded the stock ${mech.variant} loadout`);
         }}
         isCompareOpen={isCompareOpen}
-        onToggleCompare={() => setIsCompareOpen(open => !open)}
+        onToggleCompare={() => {
+          setCompareRequest(null);
+          setIsCompareOpen(open => !open);
+        }}
         savedBuildCount={saved.builds.length}
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
@@ -327,7 +333,8 @@ export function BtMechLabApp() {
 
       {isCompareOpen && (
         <BtComparePanel
-          key={mech.id}
+          key={`${mech.id}-${compareRequest?.count ?? 0}`}
+          initialSavedId={compareRequest?.savedId ?? null}
           mechs={BT_MECHS}
           current={build}
           savedBuilds={saved.builds}
@@ -478,6 +485,11 @@ export function BtMechLabApp() {
             actions.loadBuild(next);
             setIsBuildsOpen(false);
             showToast(`Loaded “${name}”`);
+          }}
+          onCompare={(savedId) => {
+            setCompareRequest(current => ({ savedId, count: (current?.count ?? 0) + 1 }));
+            setIsBuildsOpen(false);
+            setIsCompareOpen(true);
           }}
           onCopyLink={(code) => copyLink(getBtBuildUrl(code))}
           onMessage={showToast}

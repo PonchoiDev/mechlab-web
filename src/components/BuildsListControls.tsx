@@ -1,36 +1,28 @@
+import { useMemo, type ReactNode } from 'react';
 import { CheckboxDropdown } from './CheckboxDropdown';
 import { FilterStepper } from './FilterStepper';
+import type { BuildListFiltersState } from '../hooks/useBuildListFilters';
 import { describeSelection } from '../utils/mechs';
 import {
   BUILD_SORTS,
   BUILD_WEIGHT_CLASSES,
+  countBuildsByWeightClass,
+  type BuildListConfig,
+  type BuildListRow,
   type BuildMinimumsOf,
   type BuildSort,
   type BuildWeightClass
 } from '../utils/savedBuildsList';
 
 interface BuildsListControlsProps {
-  query: string;
-  onQueryChange: (query: string) => void;
-  sort: BuildSort;
-  onSortChange: (sort: BuildSort) => void;
-  weightClasses: BuildWeightClass[];
-  onWeightClassesChange: (weightClasses: BuildWeightClass[]) => void;
-  counts: Record<BuildWeightClass, number>;
-  // Tipos de anclaje de cada juego, con la abreviatura del selector de 'Mechs (E, B, M, Omni o S).
-  hardpointTypes: { id: string; short: string; label: string }[];
-  minHardpoints: Partial<Record<string, number>>;
-  onMinHardpointsChange: (minHardpoints: Partial<Record<string, number>>) => void;
-  minimumsOf: BuildMinimumsOf;
-  onMinimumsOfChange: (minimumsOf: BuildMinimumsOf) => void;
-  // Los filtros del selector de 'Mechs de cada juego: Tech solo en MW5.
-  techBase?: { value: 'InnerSphere' | 'Clan' | null; onChange: (techBase: 'InnerSphere' | 'Clan' | null) => void };
-  roleOptions: string[];
-  roles: string[];
-  onRolesChange: (roles: string[]) => void;
-  featureOptions: { id: string; label: string; title: string }[];
-  features: string[];
-  onFeaturesChange: (features: string[]) => void;
+  state: BuildListFiltersState;
+  config: BuildListConfig;
+  // Todas las builds guardadas, para contar las de cada clase y ofrecer solo sus roles.
+  rows: BuildListRow[];
+  // En el selector del comparador, su propio campo ya es el buscador.
+  showSearch?: boolean;
+  // Lo que va a la izquierda del orden cuando no hay buscador: el recuento del selector.
+  leading?: ReactNode;
 }
 
 const toggleValue = (values: string[], value: string) =>
@@ -44,47 +36,39 @@ const MINIMUMS_OF: { id: BuildMinimumsOf; label: string; title: string }[] = [
 // Común a los dos juegos: en MW5 hay 'Mechs con más de diez anclajes de un tipo (el ADR-S tiene 16 balísticos).
 const MAX_MINIMUM = 20;
 
-// Buscador, orden y filtro por clase de la ventana My builds, común a los dos MechLabs.
-export function BuildsListControls({
-  query,
-  onQueryChange,
-  sort,
-  onSortChange,
-  weightClasses,
-  onWeightClassesChange,
-  counts,
-  hardpointTypes,
-  minHardpoints,
-  onMinHardpointsChange,
-  minimumsOf,
-  onMinimumsOfChange,
-  techBase,
-  roleOptions,
-  roles,
-  onRolesChange,
-  featureOptions,
-  features,
-  onFeaturesChange
-}: BuildsListControlsProps) {
+// Buscador, orden y filtros de las listas de builds guardadas (la ventana My builds y el comparador),
+// comunes a los dos MechLabs.
+export function BuildsListControls({ state, config, rows, showSearch = true, leading }: BuildsListControlsProps) {
+  const { filter, sort, setSort, setQuery, setWeightClasses, setMinHardpoints, setMinimumsOf, setTechBase, setRoles, setFeatures } = state;
+  const { query, weightClasses, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [] } = filter;
+  const minHardpoints = filter.minHardpoints ?? {};
+  const counts = useMemo(() => countBuildsByWeightClass(rows), [rows]);
+  // Solo los roles de las builds guardadas, para no ofrecer filtros vacíos.
+  const roleOptions = useMemo(() => config.orderRoles([...new Set(rows.flatMap(row => row.roles))]), [config, rows]);
+  // Ningún arma es omni: con Weapons ese contador no sale.
+  const hardpointTypes = minimumsOf === 'weapons' ? config.hardpointTypes.filter(type => type.id !== 'omni') : config.hardpointTypes;
   const noun = minimumsOf === 'weapons' ? 'weapons' : 'hardpoints';
 
   const toggle = (id: BuildWeightClass) =>
-    onWeightClassesChange(weightClasses.includes(id) ? weightClasses.filter(other => other !== id) : [...weightClasses, id]);
+    setWeightClasses(weightClasses.includes(id) ? weightClasses.filter(other => other !== id) : [...weightClasses, id]);
 
   return (
     <div className="builds-controls">
       <div className="builds-controls-row">
-        <input
-          className="builds-search"
-          type="search"
-          placeholder="Name, chassis or variant"
-          aria-label="Search saved builds"
-          value={query}
-          onChange={event => onQueryChange(event.target.value)}
-        />
+        {leading}
+        {showSearch && (
+          <input
+            className="builds-search"
+            type="search"
+            placeholder="Name, chassis or variant"
+            aria-label="Search saved builds"
+            value={query}
+            onChange={event => setQuery(event.target.value)}
+          />
+        )}
         <label className="builds-sort">
           <span>Sort</span>
-          <select value={sort} onChange={event => onSortChange(event.target.value as BuildSort)}>
+          <select value={sort} onChange={event => setSort(event.target.value as BuildSort)}>
             {BUILD_SORTS.map(option => <option key={option.id} value={option.id}>{option.label}</option>)}
           </select>
         </label>
@@ -102,7 +86,7 @@ export function BuildsListControls({
             {option.label} <span className="utility-count">{counts[option.id]}</span>
           </button>
         ))}
-        {techBase && (
+        {config.hasTechBase && (
           <>
             <span className="builds-filter-label">Tech</span>
             {(['InnerSphere', 'Clan'] as const).map(value => (
@@ -110,8 +94,8 @@ export function BuildsListControls({
                 key={value}
                 type="button"
                 className="mech-filter-chip"
-                aria-pressed={techBase.value === value}
-                onClick={() => techBase.onChange(techBase.value === value ? null : value)}
+                aria-pressed={techBase === value}
+                onClick={() => setTechBase(techBase === value ? null : value)}
               >
                 {value === 'InnerSphere' ? 'IS' : 'Clan'}
               </button>
@@ -127,22 +111,22 @@ export function BuildsListControls({
               options={roleOptions.map(role => ({ value: role, label: role }))}
               selected={roles}
               summary={describeSelection(roles)}
-              onToggle={role => onRolesChange(toggleValue(roles, role))}
-              onClear={() => onRolesChange([])}
+              onToggle={role => setRoles(toggleValue(roles, role))}
+              onClear={() => setRoles([])}
             />
           </>
         )}
       </div>
       <div className="builds-classes" role="group" aria-label="Equipment">
         <span className="builds-filter-label">Equipment</span>
-        {featureOptions.map(option => (
+        {config.featureOptions.map(option => (
           <button
             key={option.id}
             type="button"
             className="mech-filter-chip"
             aria-pressed={features.includes(option.id)}
             title={option.title}
-            onClick={() => onFeaturesChange(toggleValue(features, option.id))}
+            onClick={() => setFeatures(toggleValue(features, option.id))}
           >
             {option.label}
           </button>
@@ -157,7 +141,7 @@ export function BuildsListControls({
               type="button"
               aria-pressed={minimumsOf === option.id}
               title={option.title}
-              onClick={() => onMinimumsOfChange(option.id)}
+              onClick={() => setMinimumsOf(option.id)}
             >
               {option.label}
             </button>
@@ -171,7 +155,7 @@ export function BuildsListControls({
             short={type.short}
             value={minHardpoints[type.id] ?? 0}
             max={MAX_MINIMUM}
-            onChange={value => onMinHardpointsChange({ ...minHardpoints, [type.id]: value })}
+            onChange={value => setMinHardpoints({ ...minHardpoints, [type.id]: value })}
           />
         ))}
       </div>
