@@ -83,3 +83,22 @@ describe('armas por tier del juego', () => {
   });
 });
 
+// Ficha del AC/2 RF (Autocannon2_Auto) en el inventario del juego, capturas del 21 de noviembre de 2026. El daño
+// y el calor son de la ráfaga (dos disparos de 1.35 y 0.15 en Lost Tech) y la cadencia sale solo del enfriamiento,
+// sin la pausa entre los disparos de la ráfaga: 60 / 0.1125 = 533.333. Con el enfriamiento redondeado a tres
+// decimales (0.112) la web daba 535.7.
+const AC2_RF_CARDS = [
+  { tier: '4', damage: 2.44, rpm: 470.588, heat: 0.34, maxRange: 828, speed: 1610 },
+  { tier: '5', damage: 2.7, rpm: 533.333, heat: 0.3, maxRange: 900, speed: 1750 }
+];
+
+describe('ficha del AC/2 RF del juego', () => {
+  it.each(AC2_RF_CARDS)('tier $tier', ({ tier, damage, rpm, heat, maxRange, speed }) => {
+    const stats = getWeaponStats(getItem('Autocannon2_Auto', { tier }));
+    expect(stats.damage).toBeCloseTo(damage, 2);
+    expect(stats.rpm).toBeCloseTo(rpm, 1);
+    expect(stats.heat).toBeCloseTo(heat, 2);
+    expect(stats.maxRange).toBe(maxRange);
+    expect(stats.speed).toBe(speed);
+  });
+});
