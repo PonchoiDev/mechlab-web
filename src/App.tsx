@@ -366,6 +366,7 @@ export default function App() {
           catalog={items}
           current={currentBuild}
           savedBuilds={saved.builds}
+          expandedSlots={view.expandedSlots}
           onLoad={(shared, label, savedId) => {
             build.loadBuild(shared);
             setActiveSavedId(savedId);

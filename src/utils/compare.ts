@@ -1,12 +1,10 @@
 import type { Item } from '../types/item';
 import { EMPTY_VALUE } from './format';
-import type { EquippedLoadout, Mech, Zone } from '../types/mech';
+import type { Mech } from '../types/mech';
 import { decodeBuild, type SharedBuild } from './buildCode';
 import { formatArmorPoints, formatCoolingRate, formatTurnRate, getBuildSummary, type BuildSummary } from './calculators';
-import { getTierName } from './items';
 import type { SavedBuild } from './savedBuilds';
 import { getUpgrades } from './upgrades';
-import { ZONE_KEYS, ZONE_LABELS } from './zones';
 
 export interface ComparedSide {
   mech: Mech;
@@ -138,36 +136,3 @@ export const toComparedSide = (build: SharedBuild): ComparedSide => ({
 // Una build guardada se reconstruye como un enlace compartido; si su código ya no vale, no se compara.
 export const resolveSavedBuild = (saved: SavedBuild, mechs: Mech[], catalog: Item[]): SharedBuild | null =>
   decodeBuild(saved.code, mechs, catalog);
-
-export interface LoadoutLine {
-  name: string;
-  type: Item['type'];
-  weaponType: Item['weaponType'];
-  tier: string | null;
-  count: number;
-}
-
-export interface LoadoutGroup {
-  zone: Zone;
-  label: string;
-  items: LoadoutLine[];
-}
-
-const TYPE_ORDER: Record<Item['type'], number> = { weapon: 0, equipment: 1, ammo: 2 };
-
-// Loadout por componente para la tarjeta: armas, equipo y munición, con las repeticiones juntas
-// (AC/20 Ammo ×2) y sin los componentes vacíos.
-export const groupLoadout = (loadout: EquippedLoadout): LoadoutGroup[] => ZONE_KEYS
-  .map(zone => {
-    const lines = new Map<string, LoadoutLine>();
-    for (const item of loadout[zone]) {
-      const tier = getTierName(item);
-      const key = `${item.id}:${tier ?? ''}`;
-      const line = lines.get(key) ?? { name: item.name, type: item.type, weaponType: item.weaponType, tier, count: 0 };
-      line.count += 1;
-      lines.set(key, line);
-    }
-    const items = [...lines.values()].sort((a, b) => TYPE_ORDER[a.type] - TYPE_ORDER[b.type]);
-    return { zone, label: ZONE_LABELS[zone], items };
-  })
-  .filter(group => group.items.length > 0);

@@ -1,10 +1,6 @@
-import type { Zone } from '../../types/mech';
-import type { BtBuild, BtHardpoint, BtItem, BtLoadout, BtMech } from '../../types/battletech-mechlab';
+import type { BtBuild } from '../../types/battletech-mechlab';
 import type { ComparisonGroup, ComparisonRow, Winner } from '../compare';
 import { EMPTY_VALUE } from '../format';
-import { ZONE_KEYS, ZONE_LABELS } from '../zones';
-import { getFixedItems, getZoneItems } from './fitting';
-import { getItemWeaponType } from './mechlabData';
 import { getBuildSummary, type BtSummary } from './stats';
 
 // Comparación de dos builds de BATTLETECH con las mismas filas que la de MW5 (src/utils/compare.ts),
@@ -90,40 +86,6 @@ const buildRow = (definition: RowDefinition, a: BtSummary, b: BtSummary): Compar
       : null
   };
 };
-
-export interface BtLoadoutLine {
-  name: string;
-  type: 'weapon' | 'ammo' | 'equipment';
-  weaponType: BtHardpoint | undefined;
-  count: number;
-  fixed: boolean;
-}
-
-export interface BtLoadoutGroup {
-  zone: Zone;
-  label: string;
-  items: BtLoadoutLine[];
-}
-
-const TYPE_ORDER: Record<BtLoadoutLine['type'], number> = { weapon: 0, equipment: 1, ammo: 2 };
-
-// Loadout por ubicación para las tarjetas de la comparación, como groupLoadout de MW5: armas, equipo y
-// munición, con las repeticiones juntas (Heat Sink ×2), el equipo fijo incluido y sin las ubicaciones vacías.
-export const groupBtLoadout = (mech: BtMech, loadout: BtLoadout): BtLoadoutGroup[] => ZONE_KEYS
-  .map(zone => {
-    const lines = new Map<string, BtLoadoutLine>();
-    const add = (item: BtItem, fixed: boolean) => {
-      const key = `${item.id}:${fixed}`;
-      const type = item.kind === 'weapon' ? 'weapon' : item.kind === 'ammo' ? 'ammo' : 'equipment';
-      const line = lines.get(key) ?? { name: item.name, type, weaponType: getItemWeaponType(item), count: 0, fixed };
-      line.count += 1;
-      lines.set(key, line);
-    };
-    getFixedItems(mech, zone).forEach(item => add(item, true));
-    getZoneItems(loadout, zone).forEach(item => add(item, false));
-    return { zone, label: ZONE_LABELS[zone], items: [...lines.values()].sort((a, b) => TYPE_ORDER[a.type] - TYPE_ORDER[b.type]) };
-  })
-  .filter(group => group.items.length > 0);
 
 export const compareBtBuilds =(a: BtBuild, b: BtBuild): ComparisonGroup[] => {
   const summaryA = getBuildSummary(a);

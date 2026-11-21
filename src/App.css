@@ -3232,54 +3232,30 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   font-size: 11px;
 }
 
-.compare-loadout {
-  display: grid;
-  gap: 6px;
-  margin: 0;
-}
-
-.compare-loadout-zone {
-  display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
+/* El tablero compacto del MechLab dentro de cada tarjeta. En media pantalla no caben las cinco columnas del
+   compacto: tres, como el tablero normal sin la imagen del centro (cabeza y torso central en medio, torsos y
+   brazos a los lados y piernas abajo). Sin su cabecera (la tarjeta ya tiene la imagen y la ficha) ni los
+   controles de armadura, que aquí no se tocan. */
+.compare-board .mech-board {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    'left-torso head right-torso'
+    'left-arm center-torso right-arm'
+    'left-leg center-torso right-leg';
+  grid-template-rows: auto auto 1fr;
   gap: 8px;
-  align-items: baseline;
+  max-width: none;
 }
 
-.compare-loadout dt {
-  color: var(--work-muted);
-  font: 500 11px var(--work-mono);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+.compare-board .mech-board > .component-card { align-self: start; }
 
-.compare-loadout dd {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin: 0;
-}
+/* Las columnas son más estrechas que en el tablero: si el arma y su tier no caben en una línea, el tier
+   baja a la siguiente en vez de partir el nombre del arma. */
+.compare-board .hardpoint-chip-content { flex-wrap: wrap; }
 
-.compare-item {
-  padding: 2px 7px;
-  border: 1px solid var(--work-line);
-  border-left: 3px solid var(--weapon-color, var(--work-line));
-  border-radius: 2px;
-  background: var(--work-panel-raised);
-  color: var(--work-text);
-  font: 500 12px var(--work-sans);
-}
-
-.compare-item small {
-  color: var(--work-muted);
-}
-
-.compare-item.is-ammo {
-  border-left-color: var(--work-amber);
-  color: var(--work-muted);
-}
-
-.compare-item.is-equipment {
-  border-left-color: var(--work-cyan);
+.compare-board .mech-board-reference,
+.compare-board .component-card-armor-controls {
+  display: none;
 }
 
 .compare-card > .compare-empty:only-child {
@@ -3379,10 +3355,19 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   .compare-title {
     min-height: 0;
   }
+}
 
-
-  .compare-loadout-zone {
-    grid-template-columns: 84px minmax(0, 1fr);
+/* En el móvil no caben cinco columnas: de dos en dos, como el tablero. */
+@media (max-width: 600px) {
+  .compare-board .mech-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      'head head'
+      'left-torso right-torso'
+      'left-arm right-arm'
+      'center-torso center-torso'
+      'left-leg right-leg';
+    grid-template-rows: none;
   }
 }
 

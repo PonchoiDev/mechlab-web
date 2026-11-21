@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-21-compare-board',
+    date: '2026-11-21',
+    title: 'Compare shows the board',
+    items: [
+      'Each side of Compare shows its build as a compact MechLab board, with the hardpoints, slots and armor of every component, instead of a list of items',
+      'Slots follow Show slot cells, as on the board. Both in the MW5 and the BATTLETECH MechLab'
+    ]
+  },
+  {
     id: '2026-11-19-battletech-inventory',
     date: '2026-11-19',
     title: 'Inventory in the BATTLETECH MechLab',
