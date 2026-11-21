@@ -23,7 +23,7 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 - **RF4.** Las cifras se agrupan, en este orden, en potencia de fuego (daño por salva, cuerpo a cuerpo, DPS, alcance máximo), defensa (armadura y estructura), calor (refrigeración, capacidad, pico de calor, calor disparando) y movilidad (velocidad, giro, giro del torso horizontal y vertical, jump jets). La fijación de blanco no se compara: sin mejoras de la cantina es igual en todos los chasis. Los anclajes no se repiten en las cifras: se ven en la tarjeta, junto a la imagen.
 - **RF5.** En cada fila se marca el valor mejor y la diferencia. Lo mejor es lo más alto, salvo el pico de calor y el calor disparando, donde gana lo más bajo. Si los dos valores son iguales o falta alguno, no gana ninguno.
 - **RF6.** Un botón **Load this 'Mech** carga en el tablero la build de la derecha y cierra el panel.
-- **RF7.** Cada lado muestra su 'Mech como una tarjeta: imagen de Sarna, nombre, ficha, anclajes y su loadout por componente (armas con su tier, equipo y munición, con las repeticiones agrupadas: `AC/20 Ammo ×2`).
+- **RF7.** Cada lado muestra su 'Mech como una tarjeta: imagen de Sarna, nombre, ficha, anclajes y su tablero, el del MechLab en su versión compacta y solo para mirar: cada componente con sus anclajes y sus armas, sus ranuras y su armadura, en tres columnas (cabeza y torso central en medio, torsos y brazos a los lados y piernas abajo; en el móvil, de dos en dos). Las ranuras se ven como en el tablero, en celdas o en barras según **Show slot cells**. Igual en el MechLab de BATTLETECH, con su tablero.
 - **RF8.** La derecha se elige entre dos orígenes: **Stock 'Mech** (el selector de chasis) y **My builds** (las builds guardadas). Sin builds guardadas, se explica cómo guardar una.
 - **RF9.** Cada tarjeta muestra sus cifras bajo el loadout, en las mismas filas y a la misma altura que las de la otra tarjeta. El valor mejor de cada fila va resaltado en verde con la diferencia (`▲ +26.8`), los empates se atenúan y, en las filas en las que gana el valor más bajo, la diferencia va con ▼ y en negativo (`▼ -16.5`). Los controles para elegir con qué comparar van encima de la tarjeta de la derecha.
 
@@ -45,7 +45,6 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 | CA5 | Un 'Mech comparado consigo mismo | se compara | ninguna fila tiene ganador |
 | CA6 | El AS7-D | se propone con quién compararlo | se propone otra variante de Atlas |
 | CA7 | Un 'Mech que es la única variante de su chasis | se propone con quién compararlo | se propone el primer 'Mech de la lista que no sea él |
-| CA8 | La build de serie del AS7-D | se agrupa su loadout por componente | el torso derecho lleva el Autocannon/20 y `AC/20 Ammo ×2`, y no aparecen componentes vacíos |
 | CA9 | Una build guardada del AS7-D con Refined Armor II | se elige como origen de la derecha | se reconstruye con sus mejoras y su armadura supera la de la build de serie |
 | CA10 | Una build guardada cuyo código ya no es válido | se elige como origen | no hay build que comparar y no se rompe nada |
 | CA11 | El pico de calor y la armadura | se comparan | en la fila del pico de calor gana el valor más bajo, con la diferencia en negativo, y en la de la armadura, el más alto |
@@ -58,18 +57,20 @@ Con la build sin tocar, la comparación es de chasis contra chasis. Con una buil
 ## Plan de pruebas
 
 1. **Lógica (CA1 a CA7):** `compareBuilds` y `getDefaultComparison` en `src/utils/compare.test.ts`, con las builds de serie reales.
-2. **Interfaz:** comprobación en el navegador del panel, el selector, el marcado de ganadores y el botón de cargar.
+2. **Interfaz:** comprobación en el navegador del panel, el selector, el marcado de ganadores, el botón de cargar y el tablero de cada tarjeta, en los dos MechLabs.
 
 ## Revisión del diseño
 
 La primera versión era una tabla de tres columnas a todo el ancho: las cifras quedaban lejos unas de otras y no se veía qué llevaba cada 'Mech. Se rehízo con una tarjeta por 'Mech con su loadout, la comparación en espejo con barras y la opción de comparar con builds guardadas (RF7 a RF9, CA8 a CA11).
+
+**Tablero en las tarjetas.** El loadout era una lista de etiquetas por componente (`AC/20 Ammo ×2`). Costaba ver dónde iba cada cosa y no se veían las ranuras libres ni la armadura. Se cambió por el tablero compacto del MechLab, solo para mirar, y se quitó la agrupación del loadout (`groupLoadout` y `groupBtLoadout`) con su criterio, el antiguo CA8. Las cinco columnas del tablero compacto no caben en media pantalla: las armas se partían letra a letra. Por eso van tres columnas, como el tablero normal sin la imagen del centro, y si un arma y su tier no caben en una línea, el tier baja a la siguiente.
 
 La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cada línea tenía cuatro números de dos cifras distintas, las barras de valores iguales se veían llenas y, en el calor, la barra del ganador era la más corta. Se probó una sola tabla con una columna por 'Mech, pero con los dos valores tan separados seguía costando leerla. Al final cada tarjeta lleva sus propias cifras, alineadas fila a fila con las de la otra, como dos fichas del juego puestas lado a lado (RF9 y CA11 actuales). En la misma revisión se quitaron de las cifras los anclajes y los datos del chasis, que ya están en la tarjeta, se ordenaron los grupos empezando por la potencia de fuego y se añadió el giro vertical del torso. La fijación de blanco se probó, pero se quitó porque sin mejoras es igual en todos los chasis (RF4 y CA2 actuales).
 
 ## Resultado
 
 - **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y la implementación, en commits separados. La revisión del diseño siguió el mismo orden: especificación y tests ampliados, después el código.
-- **Tests:** los once criterios (CA1 a CA11) están en `src/utils/compare.test.ts` y pasan, junto a uno más sobre la diferencia que se muestra.
+- **Tests:** los criterios CA1 a CA7 y CA9 a CA11 están en `src/utils/compare.test.ts` y pasan, junto a uno más sobre la diferencia que se muestra. CA8, la agrupación del loadout, se quitó con la lista (ver «Revisión del diseño»).
 - **Interfaz:** comprobada en el navegador a 1920 × 1080 y a 390 × 844.
   - Con el KGC-000 en el tablero, la tarjeta de la derecha propone el KGC-0000 con su build de serie; frente al AS7-D, el Atlas gana en energía, armadura, daño y refrigeración, y el King Crab en balísticos y en calor disparando.
   - Una build guardada del AS7-D con Refined Armor II sale con sus mejoras (638,4 de armadura) y **Load this build** la abre en el tablero, vinculada para poder actualizarla.
@@ -81,3 +82,5 @@ La comparación en espejo tampoco funcionó: con los grupos en dos columnas, cad
   - En el calor, la diferencia lleva signo negativo (`▼ -16.5`), porque gana el valor más bajo.
   - Los anclajes de la tarjeta van más grandes que en el selector (14 px), porque ya no se repiten en las cifras.
   - En el móvil, las tarjetas van una debajo de otra, cada una con sus cifras y el valor mejor resaltado.
+  - El tablero de cada tarjeta es el del MechLab dentro de un contenedor `inert`: no recibe clics, foco, menús ni arrastres, y no hace falta una versión aparte de solo lectura. Se esconden su cabecera, porque la tarjeta ya tiene la imagen y la ficha, y los controles de armadura; la armadura se sigue leyendo en cada componente.
+  - Comprobado en el navegador a 1440 × 900 y a 390 × 844, en MW5 (ACH-C frente al ACH-E) y en BATTLETECH (HBK-4G frente al HBK-4P): los dieciséis componentes, ningún botón del tablero recibe el foco, las cifras siguen alineadas entre las dos tarjetas y la página no se desplaza en horizontal.
