@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { ArmorState, EquippedItem, EquippedLoadout, Mech, Zone } from '../types/mech';
 import { getAmmoWarnings } from '../utils/equipment';
+import type { Upgrade } from '../types/upgrade';
 import type { DropTargets } from '../utils/inventory';
 import { ZONES } from '../utils/zones';
 import { getMechDisplayName } from '../utils/mechs';
@@ -22,6 +23,8 @@ interface MechBoardProps {
   compact: boolean;
   // Refined Armor: los puntos se muestran multiplicados.
   armorScale?: number;
+  // Mejoras de la cantina instaladas, para las ranuras de la línea de especificaciones.
+  upgrades?: Upgrade[];
   // Destinos del objeto del inventario que se está colocando, si hay uno.
   dropTargets?: DropTargets | null;
   onPlace?: (zone: Zone, hardpointIndex: number | null) => void;
@@ -44,6 +47,7 @@ export function MechBoard({
   expandedSlots,
   compact,
   armorScale,
+  upgrades = [],
   dropTargets,
   onPlace,
   onDragItem,
@@ -60,7 +64,7 @@ export function MechBoard({
           <h2>{getMechDisplayName(mech)}</h2>
           <span className="variant-tag">{mech.variant}</span>
         </div>
-        <MechSpecs mech={mech} items={Object.values(loadout).flat()} />
+        <MechSpecs mech={mech} build={{ items: Object.values(loadout).flat(), upgrades }} />
         {!compact && <div className="mech-board-image">{reference}</div>}
       </div>
       {ZONES.map(({ zone, label, position }) => (

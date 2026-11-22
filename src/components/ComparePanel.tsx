@@ -85,7 +85,7 @@ function CompareCard({ build, caption, groups, side, expandedSlots }: { build: S
       <div className="compare-part compare-part-board">
         <div className="compare-board-caption">
           {title}
-          <MechSpecs mech={mech} items={Object.values(loadout).flat()} />
+          <MechSpecs mech={mech} build={{ items: Object.values(loadout).flat(), upgrades: getUpgrades(upgrades) }} />
           {upgradeNames.length > 0 && <p className="compare-upgrades"><b>Upgrades:</b> {upgradeNames.join(', ')}</p>}
         </div>
         <ScaledBoard>

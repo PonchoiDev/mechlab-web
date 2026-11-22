@@ -21,6 +21,7 @@ import {
   type MechFilters
 } from './mechs';
 import { allMechs, getMech } from '../test/fixtures';
+import { getUpgrades } from './upgrades';
 
 describe('getMechDisplayName', () => {
   it('añade el nombre de Sarna cuando es distinto del chasis', () => {
@@ -264,6 +265,19 @@ describe('filtros de sonda activa y artillería', () => {
 
   it('CA4: Active probe cuenta como un filtro activo', () => {
     expect(countActiveFilters({ ...EMPTY_MECH_FILTERS, activeProbe: true })).toBe(1);
+  });
+});
+
+// CA4 y CA5 de docs/specs/linea-especificaciones.md; CA1 a CA3 están en gameReference.test.ts.
+describe('línea de especificaciones con la build', () => {
+  it('CA4: sin build, solo las del chasis', () => {
+    expect(getMechSpecs(getMech('EXE-PRIME')).map(spec => spec.label)).toEqual(['380', 'C-XL', 'DHS', 'C-ENDO', 'C-FERRO']);
+  });
+
+  it('CA5: las ranuras de mejoras usadas de las del \'Mech', () => {
+    const upgrades = getUpgrades(['IncreasedArmor_Trait1', 'IncreasedBallisticDamage_Trait1']);
+    const slots = getMechSpecs(getMech('EXE-PRIME'), { items: [], upgrades }).find(spec => spec.kind === 'slots');
+    expect(slots?.label).toBe('2/6');
   });
 });
 

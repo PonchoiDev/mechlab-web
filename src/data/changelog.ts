@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-22-spec-line',
+    date: '2026-11-22',
+    title: 'Spec line like the game',
+    items: [
+      "The line under the 'Mech name now shows the special equipment of the build, as the game's mechlab does: ECM, AP, MOTIVE (a MASC or a Supercharger) and JJ, with the upgrade slots in use at the end (0/6)",
+      'On the board, in Compare and in the share image'
+    ]
+  },
+  {
     id: '2026-11-22-active-probe-fix',
     date: '2026-11-22',
     title: 'Active probe fix',
