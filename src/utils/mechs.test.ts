@@ -7,6 +7,7 @@ import {
   getMechSpecs,
   getMechDisplayName,
   hasActiveProbe,
+  hasMotiveUpgrade,
   hasEcm,
   hasJumpJets,
   countActiveFilters,
@@ -111,8 +112,8 @@ describe('filtros del selector de chasis', () => {
   });
 
   it('entiende los atajos del buscador', () => {
-    expect(parseMechQuery('archer 3e 2M jj ECM')).toEqual({ text: 'archer', filters: { jumpJets: true, ecm: true, activeProbe: false, hero: false, dlcs: [], minHardpoints: { energy: 3, missile: 2 } } });
-    expect(parseMechQuery('1art')).toEqual({ text: '', filters: { jumpJets: false, ecm: false, activeProbe: false, hero: false, dlcs: [], minHardpoints: { artillery: 1 } } });
+    expect(parseMechQuery('archer 3e 2M jj ECM')).toEqual({ text: 'archer', filters: { jumpJets: true, ecm: true, activeProbe: false, motive: false, hero: false, dlcs: [], minHardpoints: { energy: 3, missile: 2 } } });
+    expect(parseMechQuery('1art')).toEqual({ text: '', filters: { jumpJets: false, ecm: false, activeProbe: false, motive: false, hero: false, dlcs: [], minHardpoints: { artillery: 1 } } });
   });
 });
 
@@ -263,5 +264,30 @@ describe('filtros de sonda activa y artillería', () => {
 
   it('CA4: Active probe cuenta como un filtro activo', () => {
     expect(countActiveFilters({ ...EMPTY_MECH_FILTERS, activeProbe: true })).toBe(1);
+  });
+});
+
+// Criterios de aceptación de docs/specs/filtro-motive.md.
+describe('filtro Motive', () => {
+  const variants = (filters: Partial<MechFilters>) =>
+    allMechs.filter(mech => matchesMechFilters(mech, { ...EMPTY_MECH_FILTERS, ...filters })).map(mech => mech.variant);
+
+  it('CA1: Motive deja los que tienen ranura de Motive Upgrade', () => {
+    const motive = variants({ motive: true });
+    expect(motive).toHaveLength(33);
+    expect(motive).toEqual(expect.arrayContaining(['CTF-3L', 'BNC-3P', 'FLE-17']));
+    expect(hasMotiveUpgrade(getMech('CTF-3L'))).toBe(true);
+    expect(hasMotiveUpgrade(getMech('HBK-4G'))).toBe(false);
+  });
+
+  it('CA2: el buscador entiende masc', () => {
+    const parsed = parseMechQuery('cataphract masc');
+    expect(parsed.text).toBe('cataphract');
+    expect(parsed.filters.motive).toBe(true);
+    expect(mergeMechFilters(EMPTY_MECH_FILTERS, parsed.filters).motive).toBe(true);
+  });
+
+  it('CA3: Motive cuenta como un filtro activo', () => {
+    expect(countActiveFilters({ ...EMPTY_MECH_FILTERS, motive: true })).toBe(1);
   });
 });

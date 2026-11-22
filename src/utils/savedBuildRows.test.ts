@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { encodeBuild, getStockBuildById } from './buildCode';
-import { summarizeSavedBuild } from './savedBuildRows';
+import { MERCS_BUILD_LIST, summarizeSavedBuild } from './savedBuildRows';
 import { allItems, allMechs } from '../test/fixtures';
 
 // CA3 y CA4 de docs/specs/comparar-builds-guardadas.md.
@@ -24,5 +24,28 @@ describe('resumen de una build guardada de MW5', () => {
     expect(entry.shared).toBeNull();
     expect(entry.listRow).toMatchObject({ chassis: null, variant: null, tonnage: null, firepower: null, hardpoints: null, weapons: null });
     expect(entry.meta).toBe('This build can no longer be opened');
+  });
+});
+
+// CA5 y CA6 de docs/specs/filtro-motive.md.
+describe('equipo de las builds de MW5 para los filtros de My builds', () => {
+  const featuresOf = (id: string) => {
+    const stock = getStockBuildById(id, allMechs, allItems)!;
+    const code = encodeBuild(stock.mech, stock.loadout, stock.armor, allItems, stock.upgrades);
+    return summarizeSavedBuild(saved(code), allMechs, allItems).listRow.features;
+  };
+
+  it('CA5: Motive si lleva MASC o Supercharger; Active probe si lleva una sonda montada', () => {
+    expect(featuresOf('CTF-3L')).toContain('motive');
+    expect(featuresOf('BNC-3P')).toContain('motive');
+    expect(featuresOf('RVN-3L')).toContain('probe');
+    expect(featuresOf('ACH-C')).toContain('probe');
+    expect(featuresOf('ADR-A')).not.toContain('probe');
+    expect(featuresOf('HBK-4G')).not.toContain('probe');
+    expect(featuresOf('HBK-4G')).not.toContain('motive');
+  });
+
+  it('CA6: los botones de equipo de My builds', () => {
+    expect(MERCS_BUILD_LIST.featureOptions.map(option => option.label)).toEqual(['Jump jets', 'ECM', 'AMS', 'Active probe', 'Motive', 'Hero']);
   });
 });
