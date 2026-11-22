@@ -104,23 +104,28 @@ describe('ficha del AC/2 RF del juego', () => {
   });
 });
 
-// Línea de especificaciones del mechlab del juego con la build de serie. AP sale si la build lleva una sonda
-// montada, sin importar la ranura: el HBR-A la lleva (una Clan Active Probe en una ranura normal) y sale con AP
-// (captura del 23 de octubre de 2026); el ZEU-SA3 lleva la Black Market Probe en su ranura de sonda y sale
-// «320 XL DHS ENDO ECM AP»; el EXE-PRIME no lleva sonda y sale «380 C-XL DHS C-ENDO C-FERRO MOTIVE JJ» sin AP,
-// aunque sus datos de importación (MechImportData) traen bBeagleActiveProbe=True (capturas del 22 de noviembre
-// de 2026, sin mods). La web no enseña ECM, MOTIVE ni JJ en esta línea. El filtro Active probe mira la ranura.
+// Línea de especificaciones del mechlab del juego con la build de serie. Tras el chasis, el equipo especial
+// montado (ECM, AP por una sonda, MOTIVE por un MASC o un Supercharger y JJ por los jump jets) y las ranuras de
+// mejoras usadas de las que tiene. AP sale por la sonda montada, sin importar la ranura: el HBR-A la lleva (una
+// Clan Active Probe en una ranura normal) y sale con AP (captura del 23 de octubre de 2026, que se tomó solo
+// hasta AP); el ZEU-SA3 lleva la Black Market Probe en su ranura y sale «320 XL DHS ENDO ECM AP 0/10»; el
+// EXE-PRIME no lleva sonda y sale «380 C-XL DHS C-ENDO C-FERRO MOTIVE JJ 0/6» sin AP, aunque sus datos de
+// importación (MechImportData) traen bBeagleActiveProbe=True (capturas del 22 de noviembre de 2026, sin mods).
+// Ninguna captura junta ECM o AP con MOTIVE o JJ: ese orden es el supuesto. El filtro Active probe mira la ranura.
 const SPEC_LINES = [
-  { id: 'HBR-A', specs: ['325', 'C-XL', 'DHS', 'C-ENDO', 'C-FERRO', 'AP'], probeSlot: false },
-  { id: 'EXE-PRIME', specs: ['380', 'C-XL', 'DHS', 'C-ENDO', 'C-FERRO'], probeSlot: false },
-  { id: 'ZEU-SA3', specs: ['320', 'XL', 'DHS', 'ENDO', 'AP'], probeSlot: true }
+  { id: 'HBR-A', specs: ['325', 'C-XL', 'DHS', 'C-ENDO', 'C-FERRO', 'AP'], probeSlot: false, withSlots: false },
+  { id: 'EXE-PRIME', specs: ['380', 'C-XL', 'DHS', 'C-ENDO', 'C-FERRO', 'MOTIVE', 'JJ', '0/6'], probeSlot: false, withSlots: true },
+  { id: 'ZEU-SA3', specs: ['320', 'XL', 'DHS', 'ENDO', 'ECM', 'AP', '0/10'], probeSlot: true, withSlots: true }
 ];
 
 describe('línea de especificaciones del juego', () => {
-  it.each(SPEC_LINES)('$id', ({ id, specs, probeSlot }) => {
+  it.each(SPEC_LINES)('$id', ({ id, specs, probeSlot, withSlots }) => {
     const mech = getMech(id);
     const stock = getStockBuild(mech, allMechs, allItems)!;
-    expect(getMechSpecs(mech, Object.values(stock.loadout).flat()).map(spec => spec.label)).toEqual(specs);
+    const line = getMechSpecs(mech, { items: Object.values(stock.loadout).flat(), upgrades: [] })
+      .filter(spec => withSlots || spec.kind !== 'slots')
+      .map(spec => spec.label);
+    expect(line).toEqual(specs);
     expect(hasActiveProbe(mech)).toBe(probeSlot);
   });
 });
