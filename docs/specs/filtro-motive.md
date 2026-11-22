@@ -1,6 +1,6 @@
 # Especificación: filtro Motive y filtros de equipo en My builds
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/mechs.test.ts`, `src/utils/chassisList.test.ts` y `src/utils/savedBuildRows.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -47,3 +47,13 @@ Un jugador ha pedido poder buscar los 'Mechs que admiten un **Motive Upgrade** (
 
 1. **Lógica (CA1 a CA6):** `src/utils/mechs.test.ts`, `src/utils/chassisList.test.ts` y `src/utils/savedBuildRows.test.ts`, con los 'Mechs de serie reales.
 2. **Interfaz:** en el navegador, el botón Motive en el selector y en la lista de chasis (con su URL), y los botones Active probe y Motive en My builds y en el selector de builds del comparador.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban) y después la lógica y la interfaz, en commits separados.
+- **Tests:** los seis criterios pasan: CA1 a CA3 en `src/utils/mechs.test.ts`, CA4 en `src/utils/chassisList.test.ts` y CA5 y CA6 en `src/utils/savedBuildRows.test.ts`. Un test anterior de los atajos del buscador compara el objeto entero de filtros y recibe el campo nuevo.
+- **Interfaz:** comprobada en el navegador:
+  - en el selector, Motive deja 33 variantes y cuenta como un filtro;
+  - la lista de chasis con `?masc=1` enseña 33 filas con el botón marcado;
+  - My builds tiene Jump jets, ECM, AMS, Active probe, Motive y Hero. Con trece builds de serie guardadas, Active probe deja el NTG-C, el ADR-A y el RVN-3L, y Motive, el BNC-3P y el CTF-3L.
+

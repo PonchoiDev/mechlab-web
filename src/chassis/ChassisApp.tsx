@@ -113,10 +113,11 @@ export function ChassisApp() {
   const sortBy = (key: ChassisSortKey) => setView(current => ({ ...current, sort: toggleChassisSort(current.sort, key) }));
   const isFiltered = toChassisQuery({ ...view, sort: DEFAULT_CHASSIS_VIEW.sort }) !== '';
   const { filters } = view;
-  const toggles: { id: 'jumpJets' | 'ecm' | 'activeProbe' | 'hero'; label: string; title: string }[] = [
+  const toggles: { id: 'jumpJets' | 'ecm' | 'activeProbe' | 'motive' | 'hero'; label: string; title: string }[] = [
     { id: 'jumpJets', label: 'Jump jets', title: "Only 'Mechs that can mount jump jets" },
     { id: 'ecm', label: 'ECM', title: "Only 'Mechs with an ECM slot" },
-    { id: 'activeProbe', label: 'Active probe', title: "Only 'Mechs with an active probe, built in or in a probe slot" }
+    { id: 'activeProbe', label: 'Active probe', title: "Only 'Mechs with an active probe, built in or in a probe slot" },
+    { id: 'motive', label: 'Motive', title: "Only 'Mechs with a Motive Upgrade slot, for a MASC or a Supercharger" }
   ];
 
   return (
