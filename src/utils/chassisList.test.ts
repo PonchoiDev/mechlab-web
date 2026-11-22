@@ -120,6 +120,13 @@ describe('lista de chasis de MW5', () => {
     expect(filtered({}, { minHardpoints: { artillery: 1 } })).toHaveLength(7);
   });
 
+  it('CA4 de filtro-motive: Motive en la URL de la lista', () => {
+    const parsed = parseChassisQuery('?masc=1');
+    expect(parsed.filters).toMatchObject({ motive: true });
+    expect(toChassisQuery(parsed)).toBe('?masc=1');
+    expect(filtered({}, { motive: true })).toHaveLength(33);
+  });
+
   it('los mínimos de dos cifras van en la URL: hay \'Mechs con más de 10 anclajes de un tipo', () => {
     const parsed = parseChassisQuery('?min=15e,16b');
     expect(parsed.filters.minHardpoints).toMatchObject({ energy: 15, ballistic: 16 });
