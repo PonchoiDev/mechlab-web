@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { ScaledBoard } from './ScaledBoard';
-import { EMPTY_VALUE } from '../utils/format';
+import { COOLING_KEEPS_UP, EMPTY_VALUE } from '../utils/format';
 import type { Item } from '../types/item';
 import type { Mech } from '../types/mech';
 import { getStockBuild, type SharedBuild } from '../utils/buildCode';
@@ -58,7 +58,7 @@ function CardStats({ groups, side }: { groups: ComparisonGroup[]; side: 'a' | 'b
                       <span className="compare-difference">{row.lowerIsBetter ? '▼' : '▲'} {row.difference}</span>
                     )}
                     {value}
-                    {row.unit && value !== EMPTY_VALUE && <small> {row.unit}</small>}
+                    {row.unit && value !== EMPTY_VALUE && value !== COOLING_KEEPS_UP && <small> {row.unit}</small>}
                   </dd>
                 </div>
               );
