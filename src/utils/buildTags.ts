@@ -21,8 +21,8 @@ export const getBuildTags = (mech: Mech, items: Item[]): BuildTag[] => {
   const jumpJets = items.filter(item => item.equipmentType === 'jumpJet').length;
   if (jumpJets > 0) tags.push({ kind: 'jj', label: `JJ ${jumpJets}`, title: `${jumpJets} jump ${jumpJets === 1 ? 'jet' : 'jets'}` });
   if (items.some(item => item.ecm)) tags.push({ kind: 'ecm', label: 'ECM', title: 'ECM' });
-  // Algunos chasis traen la sonda de serie; la etiqueta sale una vez aunque además se monte una.
-  if (mech.activeProbe || items.some(item => item.probe)) tags.push({ kind: 'ap', label: 'AP', title: 'Active probe' });
+  // Cualquier sonda montada, también la Clan Active Probe en una ranura normal.
+  if (items.some(item => item.probe)) tags.push({ kind: 'ap', label: 'AP', title: 'Active probe' });
   // El MASC y el Supercharger comparten los datos de velocidad del juego; solo los distingue el nombre.
   const speedBoosters = items.filter(item => item.masc);
   if (speedBoosters.some(item => !item.name.includes('Supercharger'))) tags.push({ kind: 'masc', label: 'MASC', title: 'MASC' });

@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-22-active-probe-fix',
+    date: '2026-11-22',
+    title: 'Active probe fix',
+    items: [
+      "The Active probe filter of the 'Mech selector and the Chassis page now shows only the 16 'Mechs with a probe slot. It used to include about 190 'Mechs, most of them Clan, that the game does not treat as having a probe. The Clan Active Probe fits a normal slot on any 'Mech, so it does not count",
+      'AP next to the engine now means the build carries an active probe, as in the game, on the board, in Compare and in the share image'
+    ]
+  },
+  {
     id: '2026-11-22-motive-filter',
     date: '2026-11-22',
     title: 'Motive filter',

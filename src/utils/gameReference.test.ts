@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { getStockBuild } from './buildCode';
 import { getBuildSummary, getWeaponStats, truncateTo } from './calculators';
+import { getMechSpecs, hasActiveProbe } from './mechs';
 import { allItems, allMechs, getItem, getMech } from '../test/fixtures';
 import { createEmptyArmor, createEmptyLoadout } from './zones';
 
@@ -100,5 +101,26 @@ describe('ficha del AC/2 RF del juego', () => {
     expect(stats.heat).toBeCloseTo(heat, 2);
     expect(stats.maxRange).toBe(maxRange);
     expect(stats.speed).toBe(speed);
+  });
+});
+
+// Línea de especificaciones del mechlab del juego con la build de serie. AP sale si la build lleva una sonda
+// montada, sin importar la ranura: el HBR-A la lleva (una Clan Active Probe en una ranura normal) y sale con AP
+// (captura del 23 de octubre de 2026); el ZEU-SA3 lleva la Black Market Probe en su ranura de sonda y sale
+// «320 XL DHS ENDO ECM AP»; el EXE-PRIME no lleva sonda y sale «380 C-XL DHS C-ENDO C-FERRO MOTIVE JJ» sin AP,
+// aunque sus datos de importación (MechImportData) traen bBeagleActiveProbe=True (capturas del 22 de noviembre
+// de 2026, sin mods). La web no enseña ECM, MOTIVE ni JJ en esta línea. El filtro Active probe mira la ranura.
+const SPEC_LINES = [
+  { id: 'HBR-A', specs: ['325', 'C-XL', 'DHS', 'C-ENDO', 'C-FERRO', 'AP'], probeSlot: false },
+  { id: 'EXE-PRIME', specs: ['380', 'C-XL', 'DHS', 'C-ENDO', 'C-FERRO'], probeSlot: false },
+  { id: 'ZEU-SA3', specs: ['320', 'XL', 'DHS', 'ENDO', 'AP'], probeSlot: true }
+];
+
+describe('línea de especificaciones del juego', () => {
+  it.each(SPEC_LINES)('$id', ({ id, specs, probeSlot }) => {
+    const mech = getMech(id);
+    const stock = getStockBuild(mech, allMechs, allItems)!;
+    expect(getMechSpecs(mech, Object.values(stock.loadout).flat()).map(spec => spec.label)).toEqual(specs);
+    expect(hasActiveProbe(mech)).toBe(probeSlot);
   });
 });

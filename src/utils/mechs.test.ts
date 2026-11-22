@@ -120,7 +120,8 @@ describe('filtros del selector de chasis', () => {
 describe('especificaciones del chasis', () => {
   it('se muestran como en la cabecera del mechlab del juego', () => {
     const label = (id: string) => getMechSpecs(getMech(id)).map(spec => spec.label).join(' ');
-    expect(label('HBR-A')).toBe('325 C-XL DHS C-ENDO C-FERRO AP');
+    // Sin equipo, solo las del chasis: AP depende de la sonda montada (gameReference.test.ts).
+    expect(label('HBR-A')).toBe('325 C-XL DHS C-ENDO C-FERRO');
     expect(label('BNC-LM')).toBe('380 XL DHS ENDO');
     expect(label('CRD-2R')).toBe('260 STD DHS ENDO');
     expect(label('HGN-732')).toBe('270 STD FERRO');
@@ -240,10 +241,11 @@ describe('filtros de sonda activa y artillería', () => {
   const variants = (filters: Partial<MechFilters>) =>
     allMechs.filter(mech => matchesMechFilters(mech, { ...EMPTY_MECH_FILTERS, ...filters })).map(mech => mech.variant);
 
-  it('CA1: Active probe deja los que la traen de serie y los que tienen ranura para ella', () => {
+  it('CA1: Active probe deja los que tienen ranura de sonda', () => {
     const probes = variants({ activeProbe: true });
-    expect(probes).toHaveLength(204);
-    expect(probes).toEqual(expect.arrayContaining(['JVN-11B', 'ZEU-SA3', 'ACH-C']));
+    expect(probes).toHaveLength(16);
+    expect(probes).toEqual(expect.arrayContaining(['ARC-AGC', 'JVN-11B', 'ZEU-SA3']));
+    expect(probes).not.toContain('EXE-PRIME');
     expect(hasActiveProbe(getMech('JVN-11B'))).toBe(true);
     expect(hasActiveProbe(getMech('AS7-D'))).toBe(false);
   });

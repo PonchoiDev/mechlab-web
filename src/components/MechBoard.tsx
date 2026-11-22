@@ -60,7 +60,7 @@ export function MechBoard({
           <h2>{getMechDisplayName(mech)}</h2>
           <span className="variant-tag">{mech.variant}</span>
         </div>
-        <MechSpecs mech={mech} />
+        <MechSpecs mech={mech} items={Object.values(loadout).flat()} />
         {!compact && <div className="mech-board-image">{reference}</div>}
       </div>
       {ZONES.map(({ zone, label, position }) => (

@@ -65,10 +65,10 @@ export const getAvailableYear = (mech: Mech): number => Math.max(
 export const hasEcm = (mech: Mech): boolean =>
   Object.values(mech.components).some(component => (component.specialSlots?.ECM_SlotType ?? 0) > 0);
 
-// La sonda activa viene de serie en muchos chasis (sobre todo Clan); otros tienen una ranura especial
-// para montarla (el JVN-11B y el ZEU-SA3). Las dos cuentan, como las ranuras de ECM.
+// La sonda de la Inner Sphere solo cabe en una ranura especial, como el ECM, y el mechlab del juego marca
+// AP los chasis que la tienen. La Clan Active Probe cabe también en una ranura normal: no limita qué 'Mechs
+// pueden llevarla y no cuenta aquí.
 export const hasActiveProbe = (mech: Mech): boolean =>
-  mech.activeProbe === true ||
   Object.values(mech.components).some(component => (component.specialSlots?.BAP_SlotType ?? 0) > 0);
 
 // El MASC y el Supercharger van en la ranura de Motive Upgrade de su tamaño (MK I a MK V); sin ella, el
@@ -243,8 +243,10 @@ export const getHardpointGroups = (mech: Mech): { type: HardpointFilterType; siz
 
 export type SpecKind = 'engine' | 'xl' | 'dhs' | 'endo' | 'ferro' | 'ap';
 
-// Especificaciones del chasis como las muestra el mechlab del juego: 325 C-XL DHS C-ENDO C-FERRO AP.
-export const getMechSpecs = (mech: Mech): { kind: SpecKind; label: string }[] => {
+// Especificaciones como las muestra el mechlab del juego: 325 C-XL DHS C-ENDO C-FERRO AP. Las del chasis, más AP
+// si la build lleva una sonda montada: el juego la marca por el equipo, no por el chasis (el HBR-A sale con AP
+// por su Clan Active Probe sin tener ranura de sonda, y el EXE-PRIME, sin sonda, no). Sin equipo, solo el chasis.
+export const getMechSpecs = (mech: Mech, items: { probe?: unknown }[] = []): { kind: SpecKind; label: string }[] => {
   const clan = mech.techBase === 'Clan' ? 'C-' : '';
   const specs: { kind: SpecKind; label: string }[] = [];
   if (mech.engine) {
@@ -254,6 +256,6 @@ export const getMechSpecs = (mech: Mech): { kind: SpecKind; label: string }[] =>
   if (mech.heatSinkType === 'double' || mech.heatSinkType === 'clanDouble') specs.push({ kind: 'dhs', label: 'DHS' });
   if (mech.structureType === 'endoSteel') specs.push({ kind: 'endo', label: `${clan}ENDO` });
   if (mech.armorType === 'ferroFibrous') specs.push({ kind: 'ferro', label: `${clan}FERRO` });
-  if (mech.activeProbe) specs.push({ kind: 'ap', label: 'AP' });
+  if (items.some(item => item.probe)) specs.push({ kind: 'ap', label: 'AP' });
   return specs;
 };

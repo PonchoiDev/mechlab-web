@@ -1,4 +1,4 @@
-import type { HardpointType } from '../types/item';
+import type { HardpointType, Item } from '../types/item';
 import {
   CHIP_GAP, COLORS, MONO, SANS, chunk, drawGridBackground, drawSlotBars, drawText, getColumns, loadImage, measure, strokeBox, toPngBlob,
   withAlpha, wrapText, type Context
@@ -370,7 +370,7 @@ const layoutUpgrades = (context: Context, input: BuildImageInput) => {
 };
 
 // Panel central con el nombre y el dibujo del mech, entre los torsos y los brazos.
-const drawReference = (context: Context, mech: Mech, image: HTMLImageElement | null, x: number, y: number, width: number, height: number) => {
+const drawReference = (context: Context, mech: Mech, items: Item[], image: HTMLImageElement | null, x: number, y: number, width: number, height: number) => {
   const glow = context.createRadialGradient(x + width / 2, y + height / 2, 0, x + width / 2, y + height / 2, width * 0.6);
   glow.addColorStop(0, 'rgba(105, 217, 206, 0.08)');
   glow.addColorStop(1, 'rgba(16, 19, 16, 0.8)');
@@ -390,7 +390,7 @@ const drawReference = (context: Context, mech: Mech, image: HTMLImageElement | n
 
   // Motor, disipadores, estructura y armadura bajo el nombre, como en el tablero de la web.
   let specX = x + 12;
-  for (const spec of getMechSpecs(mech)) {
+  for (const spec of getMechSpecs(mech, items)) {
     specX += drawText(context, spec.label, specX, y + 56, `600 13px ${MONO}`, SPEC_COLORS[spec.kind]) + 8;
   }
 
@@ -468,7 +468,7 @@ export const renderBuildImage = async (input: BuildImageInput): Promise<Blob> =>
     row.forEach(({ column, layout }) => layout.draw(context, columnX[column], rowY, rowHeights[rowIndex]));
     rowY += rowHeights[rowIndex] + GAP;
   });
-  drawReference(context, mech, image, columnX[1], boardY + rowHeights[0] + GAP, columnWidths[1], rowHeights[1] + GAP + rowHeights[2]);
+  drawReference(context, mech, Object.values(loadout).flat(), image, columnX[1], boardY + rowHeights[0] + GAP, columnWidths[1], rowHeights[1] + GAP + rowHeights[2]);
 
   // Pie con la web y los créditos.
   context.fillStyle = COLORS.line;

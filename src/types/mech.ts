@@ -49,7 +49,6 @@ export interface Mech {
   heatSinkType?: 'single' | 'double' | 'clanDouble';
   structureType?: 'standard' | 'endoSteel';
   engine?: { rating: number; xl: boolean };
-  activeProbe?: boolean;
   hero?: boolean;
   // DLC en el que llega la variante (1 a 9); sin el campo, es del juego base.
   dlc?: number;
