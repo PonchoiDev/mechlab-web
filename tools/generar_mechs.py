@@ -508,9 +508,10 @@ def parsear_mech(contenido, variante, tamanos_anclajes=None, textos=None):
         "rating": obtener_potencia_motor(contenido, velocidad_raw, tonelaje),
         "xl": "bXLEngine=True" in contenido or ranuras_laterales > 0,
     }
-    # Sonda activa de serie: el mechlab del juego la marca como AP junto al motor.
-    if "bBeagleActiveProbe=True" in contenido:
-        mech["activeProbe"] = True
+    # bBeagleActiveProbe no se lee: está en MechImportData, los datos de importación del chasis, que el juego
+    # no usa (traen también un motor y un blindaje que no son los suyos). El juego marca AP por la ranura de
+    # sonda: el EXE-PRIME tiene la marca y no sale con AP, y el ZEU-SA3 no la tiene y sí
+    # (src/utils/gameReference.test.ts).
     if "bIsHeroMech=True" in contenido:
         mech["hero"] = True
     dlc = buscar_texto(REGEX_DLC, contenido)

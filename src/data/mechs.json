@@ -145,7 +145,6 @@
       "rating": 240,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -313,7 +312,6 @@
       "rating": 240,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -471,7 +469,6 @@
       "rating": 240,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -636,7 +633,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -793,7 +789,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -945,7 +940,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -1091,7 +1085,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -1249,7 +1242,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -1396,7 +1388,6 @@
       "rating": 210,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -1543,7 +1534,6 @@
       "rating": 210,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -1690,7 +1680,6 @@
       "rating": 210,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -1827,7 +1816,6 @@
       "rating": 210,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -2030,7 +2018,6 @@
       "rating": 210,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -4048,7 +4035,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 64.74,
     "torsoTwist": {
@@ -4386,7 +4372,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 1,
     "turnSpeed": 64.74,
@@ -8031,7 +8016,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -8180,7 +8164,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -8333,7 +8316,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -8490,7 +8472,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -8650,7 +8631,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -8815,7 +8795,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -8980,7 +8959,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 9,
     "turnSpeed": 45.0,
@@ -9120,7 +9098,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -9307,7 +9284,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -9460,7 +9436,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 9,
     "turnSpeed": 35.0,
@@ -10647,7 +10622,6 @@
       "rating": 300,
       "xl": false
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 75.06,
     "torsoTwist": {
@@ -10809,7 +10783,6 @@
       "rating": 300,
       "xl": false
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 60.73,
     "torsoTwist": {
@@ -12713,7 +12686,6 @@
       "rating": 340,
       "xl": false
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 64.74,
     "torsoTwist": {
@@ -26453,7 +26425,6 @@
       "rating": 280,
       "xl": false
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 68.18,
     "torsoTwist": {
@@ -26599,7 +26570,6 @@
       "rating": 280,
       "xl": false
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 68.18,
     "torsoTwist": {
@@ -29711,7 +29681,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -29880,7 +29849,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -30041,7 +30009,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -30201,7 +30168,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -30370,7 +30336,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -30518,7 +30483,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -30676,7 +30640,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "torsoTwist": {
       "yaw": 99.0,
@@ -30817,7 +30780,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "torsoTwist": {
       "yaw": 99.0,
@@ -30954,7 +30916,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "torsoTwist": {
       "yaw": 99.0,
@@ -31095,7 +31056,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 8,
     "torsoTwist": {
@@ -31233,7 +31193,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "torsoTwist": {
       "yaw": 99.0,
@@ -32110,7 +32069,6 @@
       "rating": 380,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 55.0,
     "torsoTwist": {
@@ -32265,7 +32223,6 @@
       "rating": 285,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 55.0,
     "torsoTwist": {
@@ -32419,7 +32376,6 @@
       "rating": 285,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 55.0,
     "torsoTwist": {
@@ -32582,7 +32538,6 @@
       "rating": 285,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 55.0,
     "torsoTwist": {
@@ -32738,7 +32693,6 @@
       "rating": 285,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 55.0,
     "torsoTwist": {
@@ -32920,7 +32874,6 @@
       "rating": 380,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 55.0,
     "torsoTwist": {
@@ -33073,7 +33026,6 @@
       "rating": 380,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 55.0,
     "torsoTwist": {
@@ -33222,7 +33174,6 @@
       "rating": 380,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 55.0,
     "torsoTwist": {
@@ -33367,7 +33318,6 @@
       "rating": 380,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 55.0,
     "torsoTwist": {
@@ -34090,7 +34040,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -34229,7 +34178,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -34374,7 +34322,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -34513,7 +34460,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -34664,7 +34610,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -34807,7 +34752,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -36085,7 +36029,6 @@
       "rating": 210,
       "xl": false
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 103.71,
     "torsoTwist": {
@@ -36396,7 +36339,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -36547,7 +36489,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -36694,7 +36635,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -36854,7 +36794,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -36992,7 +36931,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -37146,7 +37084,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -40763,7 +40700,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -40918,7 +40854,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -41069,7 +41004,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -41223,7 +41157,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 9,
     "turnSpeed": 45.0,
@@ -41371,7 +41304,6 @@
       "rating": 200,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -41835,7 +41767,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "torsoTwist": {
       "yaw": 99.0,
@@ -41982,7 +41913,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "torsoTwist": {
       "yaw": 99.0,
@@ -42137,7 +42067,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "torsoTwist": {
       "yaw": 99.0,
@@ -42303,7 +42232,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "torsoTwist": {
       "yaw": 99.0,
@@ -42454,7 +42382,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "torsoTwist": {
       "yaw": 99.0,
@@ -44531,7 +44458,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -44690,7 +44616,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -44854,7 +44779,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -45030,7 +44954,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -45194,7 +45117,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -46336,7 +46258,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -46479,7 +46400,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -46623,7 +46543,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -46761,7 +46680,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -46909,7 +46827,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -47067,7 +46984,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -47221,7 +47137,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -47375,7 +47290,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -47529,7 +47443,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -47692,7 +47605,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 8,
     "turnSpeed": 100.0,
@@ -48798,7 +48710,6 @@
       "rating": 315,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -48944,7 +48855,6 @@
       "rating": 315,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -49093,7 +49003,6 @@
       "rating": 315,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -49250,7 +49159,6 @@
       "rating": 315,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 8,
     "turnSpeed": 110.0,
@@ -49397,7 +49305,6 @@
       "rating": 315,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -50855,7 +50762,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -51016,7 +50922,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -51192,7 +51097,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -51344,7 +51248,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -51493,7 +51396,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -51652,7 +51554,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 8,
     "turnSpeed": 45.0,
@@ -51806,7 +51707,6 @@
       "rating": 180,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -51946,7 +51846,6 @@
       "rating": 180,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -52085,7 +51984,6 @@
       "rating": 180,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -52225,7 +52123,6 @@
       "rating": 180,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -52378,7 +52275,6 @@
       "rating": 180,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -52536,7 +52432,6 @@
       "rating": 180,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -52662,7 +52557,6 @@
       "rating": 180,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -60385,7 +60279,6 @@
       "rating": 310,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 9,
     "turnSpeed": 45.0,
@@ -60538,7 +60431,6 @@
       "rating": 340,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -60698,7 +60590,6 @@
       "rating": 340,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -60863,7 +60754,6 @@
       "rating": 340,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -61963,7 +61853,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -62123,7 +62012,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -62257,7 +62145,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -62409,7 +62296,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -62563,7 +62449,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -62715,7 +62600,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -62867,7 +62751,6 @@
       "rating": 175,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -63010,7 +62893,6 @@
       "rating": 175,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -63152,7 +63034,6 @@
       "rating": 175,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -63289,7 +63170,6 @@
       "rating": 175,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -63433,7 +63313,6 @@
       "rating": 175,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -63610,7 +63489,6 @@
       "rating": 175,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 110.0,
     "torsoTwist": {
@@ -63906,7 +63784,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -64042,7 +63919,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -64208,7 +64084,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -64344,7 +64219,6 @@
       "rating": 280,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 9,
     "turnSpeed": 45.0,
@@ -64493,7 +64367,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -64645,7 +64518,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -64789,7 +64661,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -64928,7 +64799,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -65679,7 +65549,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -65829,7 +65698,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -65977,7 +65845,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -66131,7 +65998,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 8,
     "turnSpeed": 45.0,
@@ -66279,7 +66145,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -66426,7 +66291,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -66573,7 +66437,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -66712,7 +66575,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -66840,7 +66702,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -67018,7 +66879,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -67195,7 +67055,6 @@
       "rating": 250,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 65.0,
     "torsoTwist": {
@@ -70895,7 +70754,6 @@
       "rating": 300,
       "xl": false
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 114.59,
     "torsoTwist": {
@@ -72877,7 +72735,6 @@
       "rating": 175,
       "xl": false
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 122.04,
     "torsoTwist": {
@@ -73145,7 +73002,6 @@
       "rating": 210,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 122.04,
     "torsoTwist": {
@@ -73722,7 +73578,6 @@
       "rating": 330,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -73864,7 +73719,6 @@
       "rating": 330,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -74010,7 +73864,6 @@
       "rating": 330,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -74155,7 +74008,6 @@
       "rating": 330,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -74307,7 +74159,6 @@
       "rating": 330,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -74524,7 +74375,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 8,
     "turnSpeed": 45.0,
@@ -74683,7 +74533,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -74826,7 +74675,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -74988,7 +74836,6 @@
       "rating": 360,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -75844,7 +75691,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -75986,7 +75832,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -76128,7 +75973,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -76270,7 +76114,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -76423,7 +76266,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -77797,7 +77639,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -77957,7 +77798,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -78112,7 +77952,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -78267,7 +78106,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 8,
     "turnSpeed": 80.0,
@@ -78432,7 +78270,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 8,
     "turnSpeed": 80.0,
     "torsoTwist": {
@@ -78588,7 +78425,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -78736,7 +78572,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -78901,7 +78736,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -79058,7 +78892,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -79206,7 +79039,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -79350,7 +79182,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -79492,7 +79323,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 9,
     "turnSpeed": 70.0,
@@ -79635,7 +79465,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -79776,7 +79605,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 9,
     "turnSpeed": 70.0,
@@ -79919,7 +79747,6 @@
       "rating": 350,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 70.0,
     "torsoTwist": {
@@ -80063,7 +79890,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -80219,7 +80045,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -80383,7 +80208,6 @@
       "rating": 270,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 9,
     "turnSpeed": 45.0,
@@ -80538,7 +80362,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -80716,7 +80539,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -80895,7 +80717,6 @@
       "rating": 300,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -81063,7 +80884,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -81241,7 +81061,6 @@
       "rating": 400,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 35.0,
     "torsoTwist": {
@@ -82282,7 +82101,6 @@
       "rating": 375,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 60.16,
     "torsoTwist": {
@@ -82429,7 +82247,6 @@
       "rating": 375,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 60.16,
     "torsoTwist": {
@@ -82576,7 +82393,6 @@
       "rating": 375,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 60.16,
     "torsoTwist": {
@@ -82731,7 +82547,6 @@
       "rating": 375,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 60.16,
     "torsoTwist": {
@@ -82894,7 +82709,6 @@
       "rating": 375,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 60.16,
     "torsoTwist": {
@@ -83931,7 +83745,6 @@
       "rating": 325,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 1,
     "turnSpeed": 85.94,
@@ -86070,7 +85883,6 @@
       "rating": 240,
       "xl": false
     },
-    "activeProbe": true,
     "dlc": 1,
     "turnSpeed": 150.69,
     "torsoTwist": {
@@ -87877,7 +87689,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -88027,7 +87838,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -88198,7 +88008,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -88352,7 +88161,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -88505,7 +88313,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -88674,7 +88481,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 100.0,
     "torsoTwist": {
@@ -90453,7 +90259,6 @@
       "rating": 340,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -90613,7 +90418,6 @@
       "rating": 340,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -90760,7 +90564,6 @@
       "rating": 340,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -90906,7 +90709,6 @@
       "rating": 340,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 7,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -92320,7 +92122,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -92481,7 +92282,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
@@ -92639,7 +92439,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "hero": true,
     "dlc": 9,
     "turnSpeed": 45.0,
@@ -92801,7 +92600,6 @@
       "rating": 320,
       "xl": true
     },
-    "activeProbe": true,
     "dlc": 9,
     "turnSpeed": 45.0,
     "torsoTwist": {
