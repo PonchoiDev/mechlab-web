@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-22-motive-filter',
+    date: '2026-11-22',
+    title: 'Motive filter',
+    items: [
+      "The 'Mech selector and the Chassis page can show only the 33 'Mechs with a Motive Upgrade slot, for a MASC or a Supercharger. Type masc in the search for the same filter",
+      'My builds, and the saved builds in Compare, can filter by Active probe and Motive: builds that carry an active probe, and builds that carry a MASC or a Supercharger'
+    ]
+  },
+  {
     id: '2026-11-22-compare-heat-times',
     date: '2026-11-22',
     title: 'Heat times in Compare',

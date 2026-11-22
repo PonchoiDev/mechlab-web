@@ -273,6 +273,15 @@ export function MechPicker({ mechs, selectedIndex, onSelect, prominent = false }
               >
                 Active probe
               </button>
+              <button
+                type="button"
+                className="mech-filter-chip"
+                aria-pressed={filters.motive}
+                title="Only 'Mechs with a Motive Upgrade slot, for a MASC or a Supercharger"
+                onClick={() => updateFilters(current => ({ motive: !current.motive }))}
+              >
+                Motive
+              </button>
             </div>
 
             <div className="mech-filter-row">
