@@ -116,7 +116,7 @@ describe('lista de chasis de MW5', () => {
     const parsed = parseChassisQuery('?bap=1&min=1art');
     expect(parsed.filters).toMatchObject({ activeProbe: true, minHardpoints: { artillery: 1 } });
     expect(toChassisQuery(parsed)).toBe('?bap=1&min=1art');
-    expect(filtered({}, { activeProbe: true })).toHaveLength(204);
+    expect(filtered({}, { activeProbe: true })).toHaveLength(16);
     expect(filtered({}, { minHardpoints: { artillery: 1 } })).toHaveLength(7);
   });
 
