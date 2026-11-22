@@ -5,7 +5,7 @@ import { RangeRadar } from './RangeRadar';
 import { getMechDisplayName } from '../utils/mechs';
 import { getWeaponLabel } from '../utils/items';
 import { ZONE_LABELS } from '../utils/zones';
-import { EMPTY_VALUE, joinWithCounts } from '../utils/format';
+import { COOLING_KEEPS_UP, EMPTY_VALUE, joinWithCounts } from '../utils/format';
 import { UpgradedValue } from './UpgradedValue';
 
 const formatDuration = (seconds: number): string => {
@@ -180,8 +180,6 @@ interface MechStat {
 }
 
 const optional = (value: number | null, format: (value: number) => string) => value === null ? EMPTY_VALUE : format(value);
-// Sin unidad: la refrigeración puede con todo el calor y el 'Mech no llega nunca al máximo.
-const NEVER = 'Never';
 
 // Resumen como el de la pantalla Mejoras del juego, agrupado con las mismas categorías que las mejoras.
 const MECH_STATS: { title: string; stats: MechStat[] }[] = [
@@ -210,7 +208,7 @@ const MECH_STATS: { title: string; stats: MechStat[] }[] = [
       { label: 'Heat while firing', format: values => formatNumber(values.heatPerSecond, 1), unit: 'heat/s' },
       {
         label: 'Time to max heat',
-        format: values => values.timeToMaxHeat === 'never' ? NEVER : optional(values.timeToMaxHeat, value => formatNumber(value, 1)),
+        format: values => values.timeToMaxHeat === 'never' ? COOLING_KEEPS_UP : optional(values.timeToMaxHeat, value => formatNumber(value, 1)),
         unit: 's'
       },
       { label: 'Time to cool down', format: values => optional(values.timeToCoolDown, value => formatNumber(value, 1)), unit: 's' },
@@ -257,7 +255,7 @@ function MechTab({ mech, summary, base }: { mech: Mech; summary: BuildSummary; b
                   <dt>{stat.label}</dt>
                   <dd>
                     <UpgradedValue value={stat.format(summary)} base={base && stat.format(base)} />
-                    {stat.unit && ![EMPTY_VALUE, NEVER].includes(stat.format(summary)) && <small> {stat.unit}</small>}
+                    {stat.unit && ![EMPTY_VALUE, COOLING_KEEPS_UP].includes(stat.format(summary)) && <small> {stat.unit}</small>}
                   </dd>
                 </div>
               ))}
