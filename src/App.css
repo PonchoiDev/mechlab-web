@@ -2564,7 +2564,11 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .mech-spec.is-dhs { color: #5fa8ff; }
 .mech-spec.is-endo { color: #b48cff; }
 .mech-spec.is-ferro { color: #ff5a4f; }
+.mech-spec.is-ecm { color: #b9a4ff; }
 .mech-spec.is-ap { color: var(--work-cyan); }
+.mech-spec.is-motive { color: #7ee08a; }
+.mech-spec.is-jj { color: var(--work-amber); }
+.mech-spec.is-slots { color: var(--work-text); }
 
 .mech-hardpoint-tag small {
   margin-left: 2px;

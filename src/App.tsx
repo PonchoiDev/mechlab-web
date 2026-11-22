@@ -428,6 +428,7 @@ export default function App() {
           expandedSlots={view.expandedSlots}
           compact={view.compactBoard}
           armorScale={armorScale}
+          upgrades={upgrades}
           mech={mech}
           loadout={loadout}
           armor={armor}

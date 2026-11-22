@@ -228,12 +228,19 @@ export const getHardpointGroups = (mech: Mech): { type: HardpointFilterType; siz
     HARDPOINT_FILTER_TYPES.indexOf(a.type) - HARDPOINT_FILTER_TYPES.indexOf(b.type) || SIZE_ORDER[a.size] - SIZE_ORDER[b.size]);
 };
 
-export type SpecKind = 'engine' | 'xl' | 'dhs' | 'endo' | 'ferro' | 'ap';
+export type SpecKind = 'engine' | 'xl' | 'dhs' | 'endo' | 'ferro' | 'ecm' | 'ap' | 'motive' | 'jj' | 'slots';
 
-// Especificaciones como las muestra el mechlab del juego: 325 C-XL DHS C-ENDO C-FERRO AP. Las del chasis, más AP
-// si la build lleva una sonda montada: el juego la marca por el equipo, no por el chasis (el HBR-A sale con AP
-// por su Clan Active Probe sin tener ranura de sonda, y el EXE-PRIME, sin sonda, no). Sin equipo, solo el chasis.
-export const getMechSpecs = (mech: Mech, items: { probe?: unknown }[] = []): { kind: SpecKind; label: string }[] => {
+// Lo que hace falta de la build para su línea: el equipo montado y las mejoras de la cantina.
+export interface SpecBuild {
+  items: { ecm?: unknown; probe?: unknown; masc?: unknown; equipmentType?: string }[];
+  upgrades: { slots: number }[];
+}
+
+// Especificaciones como las muestra el mechlab del juego: 380 C-XL DHS C-ENDO C-FERRO MOTIVE JJ 0/6. Primero las
+// del chasis; con build, el equipo especial montado y las ranuras de mejoras usadas de las que tiene. El juego
+// marca el equipo, no lo que admite el chasis: el HBR-A sale con AP por su Clan Active Probe sin tener ranura de
+// sonda, y el EXE-PRIME, sin sonda, no (src/utils/gameReference.test.ts).
+export const getMechSpecs = (mech: Mech, build?: SpecBuild): { kind: SpecKind; label: string }[] => {
   const clan = mech.techBase === 'Clan' ? 'C-' : '';
   const specs: { kind: SpecKind; label: string }[] = [];
   if (mech.engine) {
@@ -243,6 +250,14 @@ export const getMechSpecs = (mech: Mech, items: { probe?: unknown }[] = []): { k
   if (mech.heatSinkType === 'double' || mech.heatSinkType === 'clanDouble') specs.push({ kind: 'dhs', label: 'DHS' });
   if (mech.structureType === 'endoSteel') specs.push({ kind: 'endo', label: `${clan}ENDO` });
   if (mech.armorType === 'ferroFibrous') specs.push({ kind: 'ferro', label: `${clan}FERRO` });
+  if (!build) return specs;
+  const { items, upgrades } = build;
+  if (items.some(item => item.ecm)) specs.push({ kind: 'ecm', label: 'ECM' });
   if (items.some(item => item.probe)) specs.push({ kind: 'ap', label: 'AP' });
+  if (items.some(item => item.masc)) specs.push({ kind: 'motive', label: 'MOTIVE' });
+  if (items.some(item => item.equipmentType === 'jumpJet')) specs.push({ kind: 'jj', label: 'JJ' });
+  if (mech.upgradeSlots) {
+    specs.push({ kind: 'slots', label: `${upgrades.reduce((total, upgrade) => total + upgrade.slots, 0)}/${mech.upgradeSlots}` });
+  }
   return specs;
 };

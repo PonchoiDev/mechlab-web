@@ -1,6 +1,6 @@
 # Especificación: línea de especificaciones como la del juego
 
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/gameReference.test.ts` y `src/utils/mechs.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
@@ -42,3 +42,10 @@ Bajo el nombre del 'Mech, el MechLab enseña una línea con el motor, los disipa
 
 1. **Lógica (CA1 a CA5):** `src/utils/gameReference.test.ts` con las capturas del juego y `src/utils/mechs.test.ts`.
 2. **Interfaz:** en el navegador, la línea del tablero con el EXE-PRIME y el ZEU-SA3, que cambie al montar o quitar equipo y al instalar mejoras, y la de la comparación.
+
+## Resultado
+
+- **Orden seguido:** esta especificación, los tests de los criterios de aceptación (que fallaban, salvo CA4, que ya se cumplía) y después el código, en commits separados.
+- **Tests:** CA1 a CA3 en `src/utils/gameReference.test.ts` y CA4 y CA5 en `src/utils/mechs.test.ts`.
+- **Interfaz:** comprobada en el navegador. El EXE-PRIME sale `380 C-XL DHS C-ENDO C-FERRO MOTIVE JJ 0/6`, con los colores del juego, y pasa a `2/6` al instalar una mejora de dos ranuras. El ZEU-SA3 sale `320 XL DHS ENDO ECM AP 0/10` y el HBR-A, `325 C-XL DHS C-ENDO C-FERRO AP 0/6`.
+
