@@ -10,14 +10,14 @@ Un jugador ha pedido poder buscar los 'Mechs que admiten un **Motive Upgrade** (
 ## Datos del juego
 
 - **Motive Upgrade:** el MASC y el Supercharger van en una ranura especial de su tamaño, de la MK I a la MK V (`MASC_MKI_SlotType` a `MASC_MKV_SlotType`). La tienen 33 variantes: 8 de MK I, 9 de MK II, 4 de MK III, 10 de MK IV y 2 de MK V. Entre ellas, el CTF-3L, que lleva un MASC de serie, y el BNC-3P, que lleva un Supercharger.
-- **Sonda activa en una build:** la que trae el chasis de serie o una montada, como la etiqueta AP de My builds.
+- **Sonda activa en una build:** cualquiera de las cuatro sondas montada, también la Clan Active Probe en una ranura normal, como la etiqueta AP de My builds. La marca `bBeagleActiveProbe` de los datos de importación no cuenta: el juego no la usa ([filtros-sonda-artilleria.md](filtros-sonda-artilleria.md)).
 
 ## Requisitos funcionales
 
 - **RF1.** Un botón **Motive** en la fila Equipment del selector de 'Mechs, junto a Jump jets, ECM, AMS y Active probe, que deja los 'Mechs con ranura de Motive Upgrade de cualquier tamaño. El buscador lo entiende con «masc». Cuenta como un filtro activo más.
 - **RF2.** La lista de chasis tiene el mismo botón, con los de Equipment, y lo guarda en la URL (`masc=1`).
 - **RF3.** My builds tiene dos botones más en Equipment, con la regla de los demás (lo que **lleva montado** la build, no lo que admite el chasis):
-  - **Active probe:** la build lleva sonda activa, la de serie del chasis o una montada;
+  - **Active probe:** la build lleva una sonda activa montada;
   - **Motive:** la build lleva montado un MASC o un Supercharger.
 - **RF4.** El selector de builds guardadas del comparador tiene los mismos botones, porque comparte los filtros con My builds.
 - **RF5.** En BATTLETECH no cambia nada: no tiene MASC ni Supercharger, y su selector de 'Mechs no filtra por sonda.
@@ -35,7 +35,7 @@ Un jugador ha pedido poder buscar los 'Mechs que admiten un **Motive Upgrade** (
 | CA2 | El buscador | se escribe «masc» | pide Motive y no busca «masc» como texto |
 | CA3 | Los filtros | se marca Motive | cuenta como un filtro activo |
 | CA4 | La lista de chasis | se lee `?masc=1` y se vuelve a escribir | se conserva igual y deja 33 variantes |
-| CA5 | Las builds de serie guardadas del CTF-3L, el BNC-3P, el RVN-3L, el ADR-A y el HBK-4G | se resume su equipo | el CTF-3L (MASC) y el BNC-3P (Supercharger) llevan Motive; el RVN-3L (sonda montada) y el ADR-A (sonda de serie) llevan Active probe; el HBK-4G, ninguno de los dos |
+| CA5 | Las builds de serie guardadas del CTF-3L, el BNC-3P, el RVN-3L, el ACH-C, el ADR-A y el HBK-4G | se resume su equipo | el CTF-3L (MASC) y el BNC-3P (Supercharger) llevan Motive; el RVN-3L (Beagle en su ranura) y el ACH-C (Clan Active Probe en una ranura normal) llevan Active probe; el ADR-A, sin sonda montada, no; el HBK-4G, ninguno de los dos |
 | CA6 | Los botones de equipo de My builds en MW5 | se listan | son Jump jets, ECM, AMS, Active probe, Motive y Hero, en ese orden |
 
 ## Fuera de alcance
@@ -55,5 +55,5 @@ Un jugador ha pedido poder buscar los 'Mechs que admiten un **Motive Upgrade** (
 - **Interfaz:** comprobada en el navegador:
   - en el selector, Motive deja 33 variantes y cuenta como un filtro;
   - la lista de chasis con `?masc=1` enseña 33 filas con el botón marcado;
-  - My builds tiene Jump jets, ECM, AMS, Active probe, Motive y Hero. Con trece builds de serie guardadas, Active probe deja el NTG-C, el ADR-A y el RVN-3L, y Motive, el BNC-3P y el CTF-3L.
+  - My builds tiene Jump jets, ECM, AMS, Active probe, Motive y Hero. Con trece builds de serie guardadas, Active probe dejaba el NTG-C, el ADR-A y el RVN-3L, y Motive, el BNC-3P y el CTF-3L. Después, al corregir la sonda activa ([filtros-sonda-artilleria.md](filtros-sonda-artilleria.md)), Active probe pasó a contar solo la sonda montada y el ADR-A dejó de salir.
 

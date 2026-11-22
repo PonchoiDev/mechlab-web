@@ -35,11 +35,12 @@ describe('equipo de las builds de MW5 para los filtros de My builds', () => {
     return summarizeSavedBuild(saved(code), allMechs, allItems).listRow.features;
   };
 
-  it('CA5: Motive si lleva MASC o Supercharger; Active probe si lleva sonda, de serie o montada', () => {
+  it('CA5: Motive si lleva MASC o Supercharger; Active probe si lleva una sonda montada', () => {
     expect(featuresOf('CTF-3L')).toContain('motive');
     expect(featuresOf('BNC-3P')).toContain('motive');
     expect(featuresOf('RVN-3L')).toContain('probe');
-    expect(featuresOf('ADR-A')).toContain('probe');
+    expect(featuresOf('ACH-C')).toContain('probe');
+    expect(featuresOf('ADR-A')).not.toContain('probe');
     expect(featuresOf('HBK-4G')).not.toContain('probe');
     expect(featuresOf('HBK-4G')).not.toContain('motive');
   });

@@ -25,7 +25,7 @@ export const MERCS_BUILD_LIST: BuildListConfig = {
     { id: 'jumpJets', label: 'Jump jets', title: 'Builds that carry jump jets' },
     { id: 'ecm', label: 'ECM', title: 'Builds that carry an ECM' },
     { id: 'ams', label: 'AMS', title: 'Builds that carry an AMS' },
-    { id: 'probe', label: 'Active probe', title: 'Builds with an active probe, built in or mounted' },
+    { id: 'probe', label: 'Active probe', title: 'Builds that carry an active probe' },
     { id: 'motive', label: 'Motive', title: 'Builds that carry a MASC or a Supercharger' },
     { id: 'hero', label: 'Hero', title: 'Hero variants' }
   ],
@@ -59,8 +59,8 @@ export const summarizeSavedBuild = (build: SavedBuild, mechs: Mech[], catalog: I
     items.some(item => item.equipmentType === 'jumpJet') && 'jumpJets',
     items.some(item => item.ecm) && 'ecm',
     (weapons.ams ?? 0) > 0 && 'ams',
-    // Como la etiqueta AP: la sonda de serie del chasis también cuenta.
-    (shared.mech.activeProbe || items.some(item => item.probe)) && 'probe',
+    // Como la etiqueta AP: cualquier sonda montada, también la Clan Active Probe en una ranura normal.
+    items.some(item => item.probe) && 'probe',
     items.some(item => item.masc) && 'motive',
     shared.mech.hero && 'hero'
   ].filter((feature): feature is string => typeof feature === 'string') : [];
