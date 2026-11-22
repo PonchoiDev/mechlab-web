@@ -53,6 +53,18 @@ describe('comparar dos chasis', () => {
     expect(compareBuilds(side, side).flatMap(group => group.rows).filter(row => row.winner !== null)).toEqual([]);
   });
 
+  it('CA12: compara los tiempos de calor; en el de enfriarse gana el más bajo', () => {
+    expect(rows.timeToMaxHeat).toMatchObject({ a: '10.4', b: '12.7', winner: 'b', difference: '+2.3', unit: 's' });
+    expect(rows.timeToCoolDown).toMatchObject({ a: '25.8', b: '30', winner: 'a', difference: '-4.2', unit: 's' });
+  });
+
+  it('CA13: si la refrigeración puede con el calor, lo dice y gana sin diferencia', () => {
+    const locust = stockSide('LCT-1V');
+    const row = rowsByKey(locust, stockSide('AS7-D')).timeToMaxHeat;
+    expect(row).toMatchObject({ a: 'Cooling keeps up', b: '10.4', winner: 'a', difference: null });
+    expect(rowsByKey(locust, locust).timeToMaxHeat).toMatchObject({ a: 'Cooling keeps up', winner: null });
+  });
+
   it('marca la diferencia en la fila que tiene ganador', () => {
     expect(rows.armor.difference).toBe('+35');
     expect(rows.turnSpeed.difference).toBe('+14.3');

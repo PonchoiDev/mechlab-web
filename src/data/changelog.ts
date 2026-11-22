@@ -14,7 +14,16 @@ export const CHANGELOG: ChangelogEntry[] = [
     title: 'Motive filter',
     items: [
       "The 'Mech selector and the Chassis page can show only the 33 'Mechs with a Motive Upgrade slot, for a MASC or a Supercharger. Type masc in the search for the same filter",
-      'My builds, and the saved builds in Compare, can filter by Active probe and Motive: builds with an active probe, built in or mounted, and builds that carry a MASC or a Supercharger'
+      'My builds, and the saved builds in Compare, can filter by Active probe and Motive: builds that carry an active probe, and builds that carry a MASC or a Supercharger'
+    ]
+  },
+  {
+    id: '2026-11-22-compare-heat-times',
+    date: '2026-11-22',
+    title: 'Heat times in Compare',
+    items: [
+      'Compare adds Time to max heat and Time to cool down to the heat stats of both builds, with the better one highlighted',
+      'When cooling can handle the heat while firing, the time to max heat says Cooling keeps up instead of Never, also in the MechLab analysis'
     ]
   },
   {
