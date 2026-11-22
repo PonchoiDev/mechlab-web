@@ -1,5 +1,5 @@
 import type { Item } from '../types/item';
-import { EMPTY_VALUE } from './format';
+import { COOLING_KEEPS_UP, EMPTY_VALUE } from './format';
 import type { Mech } from '../types/mech';
 import { decodeBuild, type SharedBuild } from './buildCode';
 import { formatArmorPoints, formatCoolingRate, formatTurnRate, getBuildSummary, type BuildSummary } from './calculators';
@@ -78,7 +78,18 @@ const STAT_GROUPS: { title: string; rows: RowDefinition[] }[] = [
       { key: 'cooling', label: 'Cooling rate', unit: 'heat/s', value: side => side.summary.coolingRate, format: formatCoolingRate, better: 'higher' },
       { key: 'heatCapacity', label: 'Heat capacity', value: side => side.summary.heatCapacity, format: value => formatNumber(value), better: 'higher' },
       { key: 'heatSpike', label: 'Heat spike', value: side => side.summary.heatSpike, format: value => formatNumber(value), better: 'lower' },
-      { key: 'heatPerSecond', label: 'Heat while firing', unit: 'heat/s', value: side => side.summary.heatPerSecond, format: value => formatNumber(value, 1), better: 'lower' }
+      { key: 'heatPerSecond', label: 'Heat while firing', unit: 'heat/s', value: side => side.summary.heatPerSecond, format: value => formatNumber(value, 1), better: 'lower' },
+      // Si la refrigeración puede con el calor, el 'Mech no llega nunca al máximo: vale como infinito, que gana a
+      // cualquier tiempo y empata consigo mismo.
+      {
+        key: 'timeToMaxHeat',
+        label: 'Time to max heat',
+        unit: 's',
+        value: side => side.summary.timeToMaxHeat === 'never' ? Infinity : side.summary.timeToMaxHeat,
+        format: value => Number.isFinite(value) ? formatNumber(value, 1) : COOLING_KEEPS_UP,
+        better: 'higher'
+      },
+      { key: 'timeToCoolDown', label: 'Time to cool down', unit: 's', value: side => side.summary.timeToCoolDown, format: value => formatNumber(value, 1), better: 'lower' }
     ]
   },
   {
@@ -111,7 +122,8 @@ const buildRow = (definition: RowDefinition, a: ComparedSide, b: ComparedSide): 
     winner,
     lowerIsBetter: definition.better === 'lower',
     // Con el signo del ganador: +35 si gana el más alto, -1.8 si gana el más bajo.
-    difference: winner && valueA !== null && valueB !== null
+    // Sin diferencia si un lado no tiene número (Cooling keeps up).
+    difference: winner && valueA !== null && valueB !== null && Number.isFinite(valueA) && Number.isFinite(valueB)
       ? `${definition.better === 'lower' ? '-' : '+'}${definition.format(Math.abs(valueA - valueB))}`
       : null
   };
