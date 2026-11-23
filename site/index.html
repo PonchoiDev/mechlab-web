@@ -53,7 +53,72 @@
         font-family: var(--sans);
       }
 
-      .shell { width: min(1200px, 100%); margin: 0 auto; padding: 22px 28px 32px; }
+      .shell { position: relative; z-index: 1; width: min(1200px, 100%); margin: 0 auto; padding: 22px 28px 32px; }
+
+      /* Estandartes de las facciones colgados de lo alto de la página, por detrás de todo y muy tenues: ambientan
+         sin competir con el banner ni con las carátulas. Se funden hacia abajo y no reciben el ratón. */
+      body { position: relative; }
+
+      .faction-banners {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        gap: 22px;
+        height: 620px;
+        overflow: hidden;
+        opacity: 0.16;
+        pointer-events: none;
+        -webkit-mask-image: linear-gradient(180deg, #000 25%, transparent 95%);
+        mask-image: linear-gradient(180deg, #000 25%, transparent 95%);
+      }
+
+      /* El estandarte es del color de la facción y el paño, una capa más pequeña con la misma forma: lo que queda a
+         la vista alrededor hace de borde. El logo va arriba y el nombre debajo: el banner de la portada tapa la parte
+         de abajo, y así el emblema de cada facción se ve siempre. Todo se escala con --s para que quepan las 16
+         facciones en cualquier pantalla. */
+      .faction-banners { --s: 1; gap: calc(22px * var(--s)); }
+
+      .faction-banner {
+        position: relative;
+        display: flex;
+        flex: none;
+        flex-direction: column;
+        align-items: center;
+        width: calc(96px * var(--s));
+        height: calc(var(--height) * var(--s));
+        padding: calc(14px * var(--s)) calc(8px * var(--s)) 0;
+        background: var(--faction);
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 34px * var(--s)), 50% 100%, 0 calc(100% - 34px * var(--s)));
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .faction-banner::before {
+        content: '';
+        position: absolute;
+        inset: 0 calc(3px * var(--s) + 1px) calc(4px * var(--s) + 1px);
+        z-index: -1;
+        background:
+          linear-gradient(90deg, transparent 47%, rgba(255, 255, 255, 0.05) 50%, transparent 53%),
+          linear-gradient(180deg, color-mix(in srgb, var(--faction) 55%, #000) 0%, #070907 85%);
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 32px * var(--s)), 50% 100%, 0 calc(100% - 32px * var(--s)));
+      }
+
+      .faction-banner small { color: var(--faction); font: 500 calc(9px * var(--s)) var(--mono); letter-spacing: 0.14em; }
+      .faction-banner strong { margin-top: calc(4px * var(--s)); color: var(--faction); font-size: calc(14px * var(--s)); font-weight: 700; line-height: 1.05; }
+      .faction-banner img { order: -1; width: calc(72px * var(--s)); height: calc(72px * var(--s)); margin-bottom: calc(10px * var(--s)); object-fit: contain; }
+
+      @media (max-width: 1900px) { .faction-banners { --s: 0.85; } }
+      @media (max-width: 1600px) { .faction-banners { --s: 0.72; } }
+      @media (max-width: 1300px) { .faction-banners { --s: 0.62; } }
+      @media (max-width: 1100px) { .faction-banners { --s: 0.52; } }
+      @media (max-width: 900px) { .faction-banners { --s: 0.4; } }
+      @media (max-width: 640px) { .faction-banners { --s: 0.22; } }
+      @media (max-width: 420px) { .faction-banners { --s: 0.2; } }
 
       /* Cabecera */
 
@@ -955,6 +1020,26 @@
     </style>
   </head>
   <body>
+    <!-- Estandartes de facciones del Inner Sphere, de fondo y muy tenues: los logos son los del propio juego
+         (los del mapa estelar). -->
+    <div class="faction-banners" aria-hidden="true">
+      <div class="faction-banner" style="--faction: #c62828; --height: 280px"><strong>Kell Hounds</strong><img src="/mercs/starmap/logos/kellhounds_factions_large.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #2f8ad8; --height: 270px"><small>Clan</small><strong>Diamond Shark</strong><img src="/mercs/starmap/logos/ghost_1024px_factionlogo_DiamondShark.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #e8892f; --height: 320px"><small>Clan</small><strong>Wolf</strong><img src="/mercs/starmap/logos/ghost_1024px_factionlogo_Wolf.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #4fd14f; --height: 310px"><small>Clan</small><strong>Jade Falcon</strong><img src="/mercs/starmap/logos/ghost_1024px_factionlogo_JadeFalcon.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #d8dde3; --height: 300px"><strong>ComStar</strong><img src="/mercs/starmap/logos/Comstar_Faction_Logo_UIX.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #2f9e44; --height: 330px"><small>House</small><strong>Liao</strong><img src="/mercs/starmap/logos/Faction_Liao_1024PX_STD_UIX.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #3b6fd8; --height: 360px"><small>House</small><strong>Steiner</strong><img src="/mercs/starmap/logos/Faction_Steiner_1024PX_STD_UIX.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #e8a33d; --height: 390px"><small>House</small><strong>Davion</strong><img src="/mercs/starmap/logos/Faction_Davion_1024PX_STD_UIX.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #9b59d0; --height: 360px"><small>House</small><strong>Marik</strong><img src="/mercs/starmap/logos/Faction_Marik_1024PX_STD_UIX.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #d6332f; --height: 330px"><small>House</small><strong>Kurita</strong><img src="/mercs/starmap/logos/Faction_Kurita_1024PX_STD_UIX.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #3c64d8; --height: 280px"><small>Clan</small><strong>Ghost Bear</strong><img src="/mercs/starmap/logos/ghost_1024px_factionlogo_GhostBear.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #8a8f96; --height: 290px"><small>Clan</small><strong>Smoke Jaguar</strong><img src="/mercs/starmap/logos/ghost_1024px_factionlogo_SmokeJaguar.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #c9a227; --height: 290px"><small>Clan</small><strong>Nova Cat</strong><img src="/mercs/starmap/logos/ghost_1024px_factionlogo_NovaCats.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #d6332f; --height: 300px"><strong>Wolf's Dragoons</strong><img src="/mercs/starmap/logos/wolfsdragoons_factions_large.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #b0b6bd; --height: 310px"><strong>Gray Death Legion</strong><img src="/mercs/starmap/logos/graydeathlegion_factions_large.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+      <div class="faction-banner" style="--faction: #e0a030; --height: 290px"><strong>Eridani Light Horse</strong><img src="/mercs/starmap/logos/eridanilighthorse_factions_large.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+    </div>
     <div class="shell">
       <header class="topbar">
         <a class="brand" href="/" aria-label="MW Builder, home">
