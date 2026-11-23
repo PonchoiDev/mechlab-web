@@ -9,6 +9,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-23-mechlab-background',
+    date: '2026-11-23',
+    title: 'MechLab background',
+    items: ['The MechLabs use the same dark background as the other pages, without the grid']
+  },
+  {
     id: '2026-11-23-section-colors',
     date: '2026-11-23',
     title: 'Colored page links',

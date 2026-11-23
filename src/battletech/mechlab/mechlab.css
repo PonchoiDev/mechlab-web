@@ -12,7 +12,7 @@
   --bt-upgrade: #d8dfd4;
 }
 
-body { background: var(--work-bg); }
+/* El fondo es el de App.css, el mismo del MechLab de MW5 y de las demás páginas. */
 
 .bt-mechlab {
   --work-lime: var(--bt-accent);
