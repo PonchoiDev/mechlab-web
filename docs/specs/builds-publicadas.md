@@ -80,6 +80,7 @@ Cada build publicada: `id`, `game`, `mechId`, `code`, `name`, `description`, `au
 | CA13 | Una build | se denuncia | el aviso lleva el nombre de la build, su juego, las denuncias que lleva, si ya se ha ocultado, el enlace a la build y el comando para borrarla; si el aviso falla, la denuncia responde 200 igual |
 | CA14 | Las builds denunciadas guardadas en el navegador | se leen dañadas | se ignoran sin fallar |
 | CA15 | Una denuncia con motivo y mensaje | se valida | un motivo desconocido o ausente pasa a Other; el mensaje se limpia y se corta a 500; el aviso lleva los dos |
+| CA16 | Builds publicadas, unas propias y otras no | se buscan las ya publicadas desde este navegador | salen los códigos de las propias, no los de las demás aunque coincidan |
 
 ## Puesta en marcha
 
