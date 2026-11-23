@@ -1,3 +1,4 @@
+@import '../sectionColors.css';
 /* Unidades enemigas: el aspecto del mapa estelar (texto condensado en mayúsculas, paneles negros con
    filetes blancos), con el rojo de los blancos hostiles como color de acento. */
 :root {

@@ -9,6 +9,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-23-section-colors',
+    date: '2026-11-23',
+    title: 'Colored page links',
+    items: ['The links to the other pages in every header use the color of their section, the same as on the home page, so they are easier to tell apart']
+  },
+  {
     id: '2026-11-23-faction-banners',
     date: '2026-11-23',
     title: 'Faction banners',
