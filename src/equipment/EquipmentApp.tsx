@@ -29,6 +29,8 @@ import { getContentSourceLabel } from '../utils/mechs';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
+import { BrandMark } from '../components/BrandMark';
+import { SiteNav } from '../components/SiteNav';
 
 const items = Object.values(itemsJson as unknown as Record<string, Item>);
 const DLC_OPTIONS = getDlcOptions(items);
@@ -239,19 +241,11 @@ export function EquipmentApp() {
     <div className="units arsenal">
       <header className="units-topbar">
         <a className="units-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Equipment</h1>
-        <nav className="units-links" aria-label="MW Builder">
-          <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
-          <a href="/mercs/builds/">Builds</a>
-          <a href="/mercs/chassis/">Chassis</a>
-          <a href="/mercs/starmap/">Star map</a>
-          <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
-          <a href="/mercs/units/">Enemy units</a>
-          <a href="/mercs/pilots/">Pilots</a>
-        </nav>
+        <SiteNav game="mercs" current="equipment" className="units-links" />
         <div className="units-actions">
           <WhatsNew />
           <button type="button" className="units-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>

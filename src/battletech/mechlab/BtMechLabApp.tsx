@@ -42,6 +42,8 @@ import { BtMechPicker } from './BtMechPicker';
 import { BtMyBuildsDialog } from './BtMyBuildsDialog';
 import { getBtEquipmentMenu, getBtHardpointMenu, type BtMenuContext } from './btMenus';
 import { useBtBuild } from './useBtBuild';
+import { BrandMark } from '../../components/BrandMark';
+import { SiteNav } from '../../components/SiteNav';
 
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
 const linked = readBtBuildFromLocation();
@@ -251,21 +253,13 @@ export function BtMechLabApp() {
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">
-            <span className="brand-mark" aria-hidden="true">M</span>
+            <BrandMark />
             <div>
               <p className="eyebrow">FIELD CONFIGURATION SYSTEM</p>
               <h1>MechLab <span>BATTLETECH</span></h1>
             </div>
           </a>
-          <nav className="topbar-links" aria-label="BATTLETECH">
-            <a href="/battletech/starmap/"><small>BATTLETECH</small> Star map</a>
-            <a href="/battletech/chassis/">Chassis</a>
-            <a href="/battletech/builds/">Builds</a>
-            <a href="/battletech/flashpoints/">Flashpoints</a>
-            <a href="/battletech/units/">Enemy units</a>
-            <a href="/battletech/argo/">Argo</a>
-            <a href="/battletech/equipment/">Equipment</a>
-          </nav>
+          <SiteNav game="battletech" current="mechlab" className="topbar-links" />
         </div>
         <div className="topbar-tools">
           <WhatsNew />

@@ -21,16 +21,6 @@ export function BtBuildsApp() {
   return (
     <PublishedBuildsPage
       game="battletech"
-      navLabel="BATTLETECH"
-      nav={<>
-        <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
-        <a href="/battletech/chassis/">Chassis</a>
-        <a href="/battletech/flashpoints/">Flashpoints</a>
-        <a href="/battletech/starmap/">Star map</a>
-        <a href="/battletech/units/">Enemy units</a>
-        <a href="/battletech/argo/">Argo</a>
-        <a href="/battletech/equipment/">Equipment</a>
-      </>}
       intro={<p>
         Builds published by other players, rebuilt with the current game data. Filter them like My builds, vote the ones
         you like and open any of them in the MechLab. To publish yours, use My builds below or Publish in the MechLab toolbar.
