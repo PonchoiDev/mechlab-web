@@ -12,7 +12,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     id: '2026-11-23-my-builds-in-builds',
     date: '2026-11-23',
     title: 'My builds in Builds',
-    items: ['The Builds page has a My builds button: publish your saved builds from there without opening the MechLab. The ones you already published are marked']
+    items: ['The Builds page has a My builds button: publish your saved builds from there without opening the MechLab, with the same search and filters. The ones you already published are marked']
   },
   {
     id: '2026-11-23-build-reports',

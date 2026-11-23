@@ -255,7 +255,7 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
 
         {state.status === 'ready' && (
           <div className="builds-list-header published-header">
-            <span>{total > 0 ? `${shown.length === total ? total : `${shown.length} of ${total}`} PUBLISHED` : ''}</span>
+            <span>{shown.length === total ? total : `${shown.length} of ${total}`} PUBLISHED</span>
             <button
               type="button"
               className="utility-button utility-button-primary"
@@ -267,7 +267,8 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
             </button>
           </div>
         )}
-        {state.status === 'ready' && total > 0 && (
+        {/* El buscador, los filtros y el orden salen aunque aún no haya builds, para que se vea qué ofrece la página. */}
+        {state.status === 'ready' && (
           <BuildsListControls
             state={filters}
             config={config}
@@ -424,6 +425,7 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
         <SavedBuildsPublishDialog
           entries={savedEntries}
           config={config}
+          sortKey={sortKey}
           publishedCodes={publishedCodes}
           buildUrl={buildUrl}
           mechlabUrl={mechlabUrl}
