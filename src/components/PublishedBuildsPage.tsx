@@ -424,6 +424,7 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
         <SavedBuildsPublishDialog
           entries={savedEntries}
           config={config}
+          sortKey={sortKey}
           publishedCodes={publishedCodes}
           buildUrl={buildUrl}
           mechlabUrl={mechlabUrl}
