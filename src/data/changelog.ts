@@ -11,11 +11,17 @@ export const CHANGELOG: ChangelogEntry[] = [
   {
     id: '2026-11-23-build-reports',
     date: '2026-11-23',
-    title: 'Reported builds stay hidden',
+    title: 'Better build reports',
     items: [
       'Report a build like you send feedback: pick a reason and, if you want, explain what is wrong. The report reaches the site owner',
       'A build you report stays hidden for you after reloading the page'
     ]
+  },
+  {
+    id: '2026-11-23-publish-from-my-builds',
+    date: '2026-11-23',
+    title: 'Publish from My builds',
+    items: ['Every saved build in My builds has a Publish button, so you can publish several without opening them one by one']
   },
   {
     id: '2026-11-23-community-builds',
