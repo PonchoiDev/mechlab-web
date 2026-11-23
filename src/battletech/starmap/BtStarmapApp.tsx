@@ -13,6 +13,7 @@ import { SupportLink } from '../../components/SupportLink';
 import { WhatsNew } from '../../components/WhatsNew';
 import { StarmapCanvas, type FocusRequest } from '../../starmap/StarmapCanvas';
 import { BrandMark } from '../../components/BrandMark';
+import { SiteNav } from '../../components/SiteNav';
 
 const data = starmapData as unknown as BtStarmapData;
 // El mapa no cambia con la fecha: el lienzo compartido con MW5 la pide igualmente.
@@ -329,15 +330,7 @@ export function BtStarmapApp() {
           <span>MW Builder</span>
         </a>
         <h1>Star map</h1>
-        <nav className="starmap-links" aria-label="MW Builder">
-          <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
-          <a href="/battletech/builds/">Builds</a>
-          <a href="/battletech/chassis/">Chassis</a>
-          <a href="/battletech/flashpoints/">Flashpoints</a>
-          <a href="/battletech/units/">Enemy units</a>
-          <a href="/battletech/argo/">Argo</a>
-          <a href="/battletech/equipment/">Equipment</a>
-        </nav>
+        <SiteNav game="battletech" current="starmap" className="starmap-links" />
         <div className="starmap-actions">
           <WhatsNew />
           <button type="button" className="starmap-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>

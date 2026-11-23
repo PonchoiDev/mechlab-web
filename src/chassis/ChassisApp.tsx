@@ -34,6 +34,7 @@ import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
 import { ChassisTable, MinimumStepper, type ChassisColumn } from '../components/ChassisTable';
 import { BrandMark } from '../components/BrandMark';
+import { SiteNav } from '../components/SiteNav';
 
 const mechs = mechsJson as unknown as Mech[];
 const ROWS = getChassisRows(mechs);
@@ -130,15 +131,7 @@ export function ChassisApp() {
           <span>MW Builder</span>
         </a>
         <h1>Chassis</h1>
-        <nav className="units-links" aria-label="MW Builder">
-          <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
-          <a href="/mercs/builds/">Builds</a>
-          <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
-          <a href="/mercs/starmap/">Star map</a>
-          <a href="/mercs/units/">Enemy units</a>
-          <a href="/mercs/pilots/">Pilots</a>
-          <a href="/mercs/equipment/">Equipment</a>
-        </nav>
+        <SiteNav game="mercs" current="chassis" className="units-links" />
         <div className="units-actions">
           <WhatsNew />
           <button type="button" className="units-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>

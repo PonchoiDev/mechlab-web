@@ -31,6 +31,7 @@ import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
 import { BrandMark } from '../components/BrandMark';
+import { SiteNav } from '../components/SiteNav';
 
 const data = starmapJson as unknown as StarmapData;
 const briefings = briefingsJson as Record<string, (string | null)[]>;
@@ -454,15 +455,7 @@ export function CampaignsApp() {
           <span>MW Builder</span>
         </a>
         <h1>HRQ &amp; Campaigns</h1>
-        <nav className="units-links" aria-label="MW Builder">
-          <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
-          <a href="/mercs/builds/">Builds</a>
-          <a href="/mercs/chassis/">Chassis</a>
-          <a href="/mercs/starmap/">Star map</a>
-          <a href="/mercs/units/">Enemy units</a>
-          <a href="/mercs/pilots/">Pilots</a>
-          <a href="/mercs/equipment/">Equipment</a>
-        </nav>
+        <SiteNav game="mercs" current="campaigns" className="units-links" />
         <div className="units-actions">
           <WhatsNew />
           <button type="button" className="units-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>

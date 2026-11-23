@@ -128,6 +128,7 @@ button, input, select { font: inherit; color: inherit; }
 
 .starmap-topbar h1 {
   margin: 0;
+  white-space: nowrap;
   padding-left: 18px;
   border-left: 1px solid var(--map-line);
   /* El amarillo del mapa estelar, el de su fila en la portada y el de su enlace en las cabeceras. */
@@ -158,6 +159,7 @@ button, input, select { font: inherit; color: inherit; }
 
 .starmap-links a {
   padding: 6px 12px;
+  white-space: nowrap;
   color: var(--map-text);
   font-size: 15px;
   font-weight: 600;
@@ -1527,6 +1529,20 @@ button, input, select { font: inherit; color: inherit; }
   margin-left: auto;
   color: var(--map-muted);
   font-weight: 600;
+}
+
+/* La cabecera va encima del mapa y no puede crecer hacia abajo sin tapar los filtros: con todas las páginas en
+   los enlaces, en pantallas medianas se compactan para seguir en una sola fila. */
+@media (min-width: 761px) and (max-width: 1700px) {
+  .starmap-links small { display: none; }
+  .starmap-links { padding-left: 8px; gap: 0; }
+  .starmap-links a { padding: 6px 7px; font-size: 13px; letter-spacing: 0.03em; }
+  .starmap-topbar h1 { padding-left: 12px; font-size: 20px; }
+}
+
+@media (min-width: 761px) and (max-width: 1300px) {
+  .starmap-brand span:last-child { display: none; }
+  .starmap-links a { padding: 6px 5px; font-size: 12px; }
 }
 
 @media (max-width: 760px) {

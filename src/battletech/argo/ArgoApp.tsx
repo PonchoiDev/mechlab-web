@@ -10,6 +10,7 @@ import { FeedbackDialog } from '../../components/FeedbackDialog';
 import { SupportLink } from '../../components/SupportLink';
 import { WhatsNew } from '../../components/WhatsNew';
 import { BrandMark } from '../../components/BrandMark';
+import { SiteNav } from '../../components/SiteNav';
 
 const data = argoJson as unknown as ArgoData;
 const numberFormat = new Intl.NumberFormat('en');
@@ -399,16 +400,7 @@ export function ArgoApp() {
           <span>MW Builder</span>
         </a>
         <h1>Argo</h1>
-        <nav className="units-links" aria-label="BATTLETECH">
-          <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
-          <a href="/battletech/builds/">Builds</a>
-          <a href="/battletech/chassis/">Chassis</a>
-          <a href="/battletech/starmap/">Star map</a>
-          <a href="/battletech/flashpoints/">Flashpoints</a>
-          <a href="/battletech/units/">Enemy units</a>
-          <a href="/battletech/argo/" aria-current="page">Argo</a>
-          <a href="/battletech/equipment/">Equipment</a>
-        </nav>
+        <SiteNav game="battletech" current="argo" className="units-links" />
         <div className="units-actions">
           <WhatsNew />
           <button type="button" className="units-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>

@@ -38,6 +38,7 @@ import { Toast } from './Toast';
 import { WeaponTypeCounts } from './WeaponTypeCounts';
 import { WhatsNew } from './WhatsNew';
 import { BrandMark } from './BrandMark';
+import { SiteNav } from './SiteNav';
 
 // Una build publicada resumida con los datos del juego, como las de My builds.
 export interface PublishedBuildSummary {
@@ -50,8 +51,6 @@ export interface PublishedBuildSummary {
 
 interface PublishedBuildsPageProps {
   game: BuildGame;
-  navLabel: string;
-  nav: ReactNode;
   intro: ReactNode;
   config: BuildListConfig;
   sortKey: string;
@@ -70,7 +69,7 @@ type Confirming = { id: string; action: 'delete' };
 
 // La página de builds publicadas de un juego (/mercs/builds/ y /battletech/builds/): las de todos los
 // jugadores, con los filtros y el orden de My builds, votos, denuncias y las propias editables.
-export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKey, summarize, mechName, buildUrl, savedBuildsKey, mechlabUrl }: PublishedBuildsPageProps) {
+export function PublishedBuildsPage({ game, intro, config, sortKey, summarize, mechName, buildUrl, savedBuildsKey, mechlabUrl }: PublishedBuildsPageProps) {
   const params = useMemo(() => new URLSearchParams(window.location.search), []);
   const [mechFilter, setMechFilter] = useState(params.get('mech'));
   const highlighted = params.get('build');
@@ -231,7 +230,7 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
           <span>MW Builder</span>
         </a>
         <h1>Builds</h1>
-        <nav className="units-links" aria-label={navLabel}>{nav}</nav>
+        <SiteNav game={game} current="builds" className="units-links" />
         <div className="units-actions">
           <WhatsNew />
           <button type="button" className="units-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>

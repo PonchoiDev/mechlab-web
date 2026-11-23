@@ -28,16 +28,6 @@ export function BuildsApp() {
   return (
     <PublishedBuildsPage
       game="mercs"
-      navLabel="MW Builder"
-      nav={<>
-        <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
-        <a href="/mercs/chassis/">Chassis</a>
-        <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
-        <a href="/mercs/starmap/">Star map</a>
-        <a href="/mercs/units/">Enemy units</a>
-        <a href="/mercs/pilots/">Pilots</a>
-        <a href="/mercs/equipment/">Equipment</a>
-      </>}
       intro={<p>
         Builds published by other players, rebuilt with the current game data. Filter them like My builds, vote the ones
         you like and open any of them in the MechLab. To publish yours, use My builds below or Publish in the MechLab toolbar.

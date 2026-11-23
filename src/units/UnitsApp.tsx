@@ -21,6 +21,7 @@ import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
 import { RARITY_COLORS } from '../starmap/rarityColors';
 import { BrandMark } from '../components/BrandMark';
+import { SiteNav } from '../components/SiteNav';
 
 const data = unitsJson as unknown as UnitsData;
 
@@ -147,15 +148,7 @@ export function UnitsApp() {
           <span>MW Builder</span>
         </a>
         <h1>Enemy units</h1>
-        <nav className="units-links" aria-label="MW Builder">
-          <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
-          <a href="/mercs/builds/">Builds</a>
-          <a href="/mercs/chassis/">Chassis</a>
-          <a href="/mercs/starmap/">Star map</a>
-          <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
-          <a href="/mercs/pilots/">Pilots</a>
-          <a href="/mercs/equipment/">Equipment</a>
-        </nav>
+        <SiteNav game="mercs" current="units" className="units-links" />
         <div className="units-actions">
           <WhatsNew />
           <button type="button" className="units-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>

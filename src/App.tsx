@@ -47,6 +47,7 @@ import { UpgradesPanel } from './components/UpgradesPanel';
 import { UtilityToolbar } from './components/UtilityToolbar';
 import { WhatsNew } from './components/WhatsNew';
 import { BrandMark } from './components/BrandMark';
+import { SiteNav } from './components/SiteNav';
 
 const mechs = mechsData as unknown as Mech[];
 // Pulsar aquí no quita el componente elegido: el inventario, el tablero y cualquier control.
@@ -305,15 +306,7 @@ export default function App() {
               <h1>MechLab <span>MW5: MERCENARIES</span></h1>
             </div>
           </a>
-          <nav className="topbar-links" aria-label="MW Builder">
-            <a href="/mercs/starmap/"><small>MW5 Mercenaries</small> Star map</a>
-            <a href="/mercs/chassis/">Chassis</a>
-            <a href="/mercs/builds/">Builds</a>
-            <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
-            <a href="/mercs/units/">Enemy units</a>
-            <a href="/mercs/pilots/">Pilots</a>
-            <a href="/mercs/equipment/">Equipment</a>
-          </nav>
+          <SiteNav game="mercs" current="mechlab" className="topbar-links" />
         </div>
         <div className="topbar-tools">
           <WhatsNew />

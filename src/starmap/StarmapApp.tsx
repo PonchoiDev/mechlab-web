@@ -40,6 +40,7 @@ import { CampaignCard, CampaignDrawer, SystemCampaigns } from './CampaignPanels'
 import { StarmapCanvas, type FocusRequest } from './StarmapCanvas';
 import { CAMPAIGN_COLOR, type MercZoneLayer, type TerritoryColors } from './renderer';
 import { BrandMark } from '../components/BrandMark';
+import { SiteNav } from '../components/SiteNav';
 
 const data = starmapData as unknown as StarmapData;
 const LEGEND_MIN_SYSTEMS = 5;
@@ -539,15 +540,7 @@ export function StarmapApp() {
           <span>MW Builder</span>
         </a>
         <h1>Star map</h1>
-        <nav className="starmap-links" aria-label="MW Builder">
-          <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
-          <a href="/mercs/builds/">Builds</a>
-          <a href="/mercs/chassis/">Chassis</a>
-          <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
-          <a href="/mercs/units/">Enemy units</a>
-          <a href="/mercs/pilots/">Pilots</a>
-          <a href="/mercs/equipment/">Equipment</a>
-        </nav>
+        <SiteNav game="mercs" current="starmap" className="starmap-links" />
         <div className="starmap-actions">
           <WhatsNew />
           <button type="button" className="starmap-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>
