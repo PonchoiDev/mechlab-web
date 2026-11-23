@@ -9,6 +9,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-23-home-redesign',
+    date: '2026-11-23',
+    title: 'New home page',
+    items: ['General redesign of the home page']
+  },
+  {
     id: '2026-11-22-spec-line',
     date: '2026-11-22',
     title: 'Spec line like the game',
