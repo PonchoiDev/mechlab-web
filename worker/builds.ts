@@ -74,7 +74,13 @@ export interface BuildReport {
   build: PublishedBuild;
   reports: number;
   hidden: boolean;
+  reason: ReportReason;
+  message: string;
 }
+
+export const REPORT_REASONS = ['Spam', 'Offensive', 'Broken or misleading', 'Other'] as const;
+export type ReportReason = typeof REPORT_REASONS[number];
+const MAX_REPORT_MESSAGE_LENGTH = 500;
 
 export interface BuildsOptions {
   // Secreto con el que se hashean las IP: así no se guardan tal cual.
@@ -133,6 +139,14 @@ const isGame = (value: unknown): value is BuildGame => (BUILD_GAMES as readonly 
 
 const asRecord = (body: unknown): Record<string, unknown> | null =>
   typeof body === 'object' && body !== null && !Array.isArray(body) ? body as Record<string, unknown> : null;
+
+// El motivo de una denuncia y su mensaje opcional. La denuncia no se rechaza por ellos: un motivo desconocido
+// pasa a Other.
+export const parseReportInput = (body: unknown): { reason: ReportReason; message: string } => {
+  const record = asRecord(body) ?? {};
+  const reason = (REPORT_REASONS as readonly unknown[]).includes(record.reason) ? record.reason as ReportReason : 'Other';
+  return { reason, message: cleanText(record.message, MAX_REPORT_MESSAGE_LENGTH) };
+};
 
 // Valida una publicación. null si no vale o si se rellenó el campo trampa (website), que solo ven los bots.
 export const parsePublishInput = (body: unknown): (BuildTexts & { game: BuildGame; code: string; mechId: string }) | null => {
@@ -221,12 +235,13 @@ export const handleBuilds = async (request: Request, path: string, store: BuildS
 
   if (action === 'report') {
     if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
+    const input = parseReportInput(await request.json().catch(() => null));
     const reports = await store.addReport(id, ipHash);
     if (reports === null) return json({ error: 'Already reported' }, 409);
     const hidden = reports >= REPORTS_TO_HIDE;
     if (hidden) await store.hide(id);
     try {
-      await options.onReport?.({ build: toPublic(stored), reports, hidden });
+      await options.onReport?.({ build: toPublic(stored), reports, hidden, ...input });
     } catch {
       // El aviso es un extra: la denuncia ya está guardada.
     }
@@ -259,12 +274,14 @@ export const handleBuilds = async (request: Request, path: string, store: BuildS
 
 // El correo con el que se avisa de una denuncia: qué build es, cuántas denuncias lleva, dónde verla y cómo
 // borrarla con la clave de administración. Los textos ya vienen limpios de saltos de línea (cleanLine).
-export const buildReportEmail = ({ build, reports, hidden }: BuildReport, to: string, date = new Date()): string => {
+export const buildReportEmail = ({ build, reports, hidden, reason, message }: BuildReport, to: string, date = new Date()): string => {
   const body = [
     `Build: ${build.name}`,
     `Game: ${build.game}`,
     `Author: ${build.author || '(none)'}`,
     `Reports: ${reports} of ${REPORTS_TO_HIDE}${hidden ? ', now hidden' : ''}`,
+    `Reason: ${reason}`,
+    message ? `Message:\n${message}` : 'No message.',
     '',
     `See it: ${SITE_URL}/${build.game}/builds/?build=${build.id}`,
     '',

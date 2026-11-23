@@ -12,7 +12,10 @@ export const CHANGELOG: ChangelogEntry[] = [
     id: '2026-11-23-build-reports',
     date: '2026-11-23',
     title: 'Reported builds stay hidden',
-    items: ['A build you report stays hidden for you after reloading the page, and the report reaches the site owner']
+    items: [
+      'Report a build like you send feedback: pick a reason and, if you want, explain what is wrong. The report reaches the site owner',
+      'A build you report stays hidden for you after reloading the page'
+    ]
   },
   {
     id: '2026-11-23-community-builds',

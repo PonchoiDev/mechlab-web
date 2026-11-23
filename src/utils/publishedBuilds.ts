@@ -1,10 +1,12 @@
-import type { BuildGame, PublishedBuild } from '../../worker/builds';
+import { REPORT_REASONS, type BuildGame, type PublishedBuild, type ReportReason } from '../../worker/builds';
 import type { SavedBuild } from './savedBuildsCore';
 
 // Builds publicadas, del lado del navegador: las llamadas a la API del Worker (worker/builds.ts) y lo que se
 // guarda en el navegador. Sin cuentas: la clave de edición de cada build publicada se queda aquí, y también
 // las builds votadas, para enseñar el voto pulsado.
-export type { BuildGame, PublishedBuild };
+export { REPORT_REASONS };
+export type { BuildGame, PublishedBuild, ReportReason };
+export const REPORT_MESSAGE_MAX = 500;
 
 const ownedKey = (game: BuildGame) => `mw-builder:${game}:published-builds`;
 const votedKey = (game: BuildGame) => `mw-builder:${game}:voted-builds`;
@@ -140,5 +142,5 @@ export const deletePublishedBuild = (game: BuildGame, id: string, editKey: strin
 export const voteBuild = (game: BuildGame, id: string, vote: boolean) =>
   call<{ votes: number }>(apiUrl(game, `/${id}/vote`), { method: vote ? 'POST' : 'DELETE' });
 
-export const reportBuild = (game: BuildGame, id: string) =>
-  call<{ ok: true }>(apiUrl(game, `/${id}/report`), { method: 'POST' });
+export const reportBuild = (game: BuildGame, id: string, reason: ReportReason, message: string) =>
+  call<{ ok: true }>(apiUrl(game, `/${id}/report`), { method: 'POST', body: JSON.stringify({ reason, message }) });

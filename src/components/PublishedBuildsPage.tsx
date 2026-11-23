@@ -20,13 +20,15 @@ import {
   voteBuild,
   type BuildGame,
   type BuildTextsInput,
-  type PublishedBuild
+  type PublishedBuild,
+  type ReportReason
 } from '../utils/publishedBuilds';
 import type { SavedBuild } from '../utils/savedBuildsCore';
 import { showBuildEntries, type BuildListConfig, type BuildListRow, type BuildTag } from '../utils/savedBuildsList';
 import { BuildTagList } from './BuildTagList';
 import { BuildsListControls } from './BuildsListControls';
 import { FeedbackDialog } from './FeedbackDialog';
+import { ReportBuildDialog } from './ReportBuildDialog';
 import { SupportLink } from './SupportLink';
 import { Toast } from './Toast';
 import { WeaponTypeCounts } from './WeaponTypeCounts';
@@ -56,7 +58,7 @@ interface PublishedBuildsPageProps {
 
 const dateFormat = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric' });
 
-type Confirming = { id: string; action: 'delete' | 'report' };
+type Confirming = { id: string; action: 'delete' };
 
 // La página de builds publicadas de un juego (/mercs/builds/ y /battletech/builds/): las de todos los
 // jugadores, con los filtros y el orden de My builds, votos, denuncias y las propias editables.
@@ -73,6 +75,8 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
   const [byVotes, setByVotes] = useState(false);
   const [editing, setEditing] = useState<({ id: string } & BuildTextsInput) | null>(null);
   const [confirming, setConfirming] = useState<Confirming | null>(null);
+  const [reporting, setReporting] = useState<{ build: PublishedBuild; sending: boolean } | null>(null);
+  const closeReport = useCallback(() => setReporting(null), []);
   const [busy, setBusy] = useState<string | null>(null);
   const [toast, setToast] = useState<{ id: number; message: string } | null>(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
@@ -138,13 +142,15 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
     if (result.ok) replaceBuild(build.id, current => ({ ...current, votes: result.data.votes }));
   };
 
-  const report = async (build: PublishedBuild) => {
-    setConfirming(null);
-    const result = await reportBuild(game, build.id);
+  const report = async (build: PublishedBuild, reason: ReportReason, message: string) => {
+    setReporting({ build, sending: true });
+    const result = await reportBuild(game, build.id, reason, message);
     if (!result.ok && result.status !== 409) {
+      setReporting({ build, sending: false });
       showToast(result.message);
       return;
     }
+    setReporting(null);
     const next = new Set(reported).add(build.id);
     setReported(next);
     saveReportedIds(game, [...next]);
@@ -331,15 +337,15 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
                 {isConfirming ? (
                   <div className="builds-item-actions">
                     <span className="builds-confirm">
-                      {confirming.action === 'delete' ? 'Delete this build for everyone?' : 'Report this build as spam or offensive?'}
+                      Delete this build for everyone?
                     </span>
                     <button type="button" className="utility-button" onClick={() => setConfirming(null)}>Cancel</button>
                     <button
                       type="button"
                       className="utility-button is-danger"
-                      onClick={() => confirming.action === 'delete' ? remove(published) : report(published)}
+                      onClick={() => remove(published)}
                     >
-                      {confirming.action === 'delete' ? 'Delete' : 'Report'}
+                      Delete
                     </button>
                   </div>
                 ) : !isEditing && (
@@ -360,7 +366,7 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
                         <button type="button" className="utility-button" onClick={() => setConfirming({ id: published.id, action: 'delete' })}>Delete</button>
                       </>
                     ) : (
-                      <button type="button" className="utility-button" onClick={() => setConfirming({ id: published.id, action: 'report' })}>Report</button>
+                      <button type="button" className="utility-button" aria-haspopup="dialog" onClick={() => setReporting({ build: published, sending: false })}>Report</button>
                     )}
                   </div>
                 )}
@@ -371,6 +377,14 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
       </main>
 
       {toast && <Toast key={toast.id} message={toast.message} onDismiss={() => setToast(null)} />}
+      {reporting && (
+        <ReportBuildDialog
+          buildName={reporting.build.name}
+          sending={reporting.sending}
+          onReport={(reason, message) => report(reporting.build, reason, message)}
+          onClose={closeReport}
+        />
+      )}
       {isFeedbackOpen && <FeedbackDialog buildUrl={null} onMessage={showToast} onClose={() => setIsFeedbackOpen(false)} />}
     </div>
   );
