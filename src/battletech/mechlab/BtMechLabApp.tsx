@@ -87,7 +87,8 @@ export function BtMechLabApp() {
     linked && !linked.build ? { id: 0, message: 'This build link is not valid' } : null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(openFeedbackOnLoad);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
-  const [isPublishOpen, setIsPublishOpen] = useState(false);
+  // La build que se publica: la abierta (desde la barra) o una guardada (desde My builds).
+  const [publishTarget, setPublishTarget] = useState<{ code: string; name: string } | null>(null);
   const [isSharingImage, setIsSharingImage] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
@@ -103,8 +104,11 @@ export function BtMechLabApp() {
   const dismissToast = useCallback(() => setToast(null), []);
   const closeFeedback = useCallback(() => setIsFeedbackOpen(false), []);
   const closeSave = useCallback(() => setIsSaveOpen(false), []);
-  const closePublish = useCallback(() => setIsPublishOpen(false), []);
-  const closeBuilds = useCallback(() => setIsBuildsOpen(false), []);
+  const closePublish = useCallback(() => setPublishTarget(null), []);
+  // Con la ventana de publicar encima, Escape la cierra a ella y My builds sigue abierta debajo.
+  const closeBuilds = useCallback(() => {
+    if (!publishTarget) setIsBuildsOpen(false);
+  }, [publishTarget]);
   const closeCompare = useCallback(() => setIsCompareOpen(false), []);
 
   const buildCode = encodeBtBuild(build);
@@ -313,7 +317,7 @@ export function BtMechLabApp() {
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
         canPublish={Object.values(build.loadout).some(ids => ids.length > 0)}
-        onPublish={() => setIsPublishOpen(true)}
+        onPublish={() => setPublishTarget({ code: buildCode, name: editableBuild?.name ?? defaultName })}
         onShare={(anchor) => setMenu({
           title: 'Share build',
           x: anchor.left,
@@ -461,15 +465,6 @@ export function BtMechLabApp() {
         />
       )}
       {isFeedbackOpen && <FeedbackDialog buildUrl={buildUrl} onMessage={showToast} onClose={closeFeedback} />}
-      {isPublishOpen && (
-        <PublishBuildDialog
-          game="battletech"
-          code={buildCode}
-          defaultName={editableBuild?.name ?? defaultName}
-          onCopyLink={(url) => copyLink(url)}
-          onClose={closePublish}
-        />
-      )}
       {isSaveOpen && (
         <SaveBuildDialog
           defaultName={defaultName}
@@ -508,8 +503,19 @@ export function BtMechLabApp() {
             setIsCompareOpen(true);
           }}
           onCopyLink={(code) => copyLink(getBtBuildUrl(code))}
+          onPublish={(entry) => setPublishTarget({ code: entry.code, name: entry.name })}
           onMessage={showToast}
           onClose={closeBuilds}
+        />
+      )}
+      {publishTarget && (
+        <PublishBuildDialog
+          key={publishTarget.code}
+          game="battletech"
+          code={publishTarget.code}
+          defaultName={publishTarget.name}
+          onCopyLink={(url) => copyLink(url)}
+          onClose={closePublish}
         />
       )}
       {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={closeMenu} />}
