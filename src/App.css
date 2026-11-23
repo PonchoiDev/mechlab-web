@@ -16,15 +16,21 @@
   --work-sans: 'Manrope', 'Segoe UI', sans-serif;
 }
 
+/* El fondo de las demás páginas, a toda la ventana: casi negro con un resplandor arriba del color del apartado,
+   aquí el verde del MechLab. Antes era un gris verdoso con rejilla solo en la zona de trabajo. */
+body {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(195, 237, 98, 0.1), transparent 55%),
+    #05070c;
+  background-attachment: fixed;
+}
+
 .mechlab-shell {
   width: min(1720px, 100%);
   min-height: 100svh;
   margin: 0 auto;
   padding: 22px 28px 32px;
   color: var(--work-text);
-  background-color: var(--work-bg);
-  background-image: linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-  background-size: 32px 32px;
   font-family: var(--work-sans);
   box-sizing: border-box;
 }

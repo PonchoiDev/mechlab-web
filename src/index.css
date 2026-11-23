@@ -1,7 +1,8 @@
 :root {
   font-family: 'Manrope', 'Segoe UI', sans-serif;
   color: #e8eee5;
-  background: #101310;
+  /* El casi negro de las demás páginas (units.css, starmap.css): el MechLab comparte su aspecto. */
+  background: #05070c;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
