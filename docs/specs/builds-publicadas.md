@@ -18,7 +18,7 @@ Cambia un principio del análisis: la web deja de ser «sin servidor de datos».
 - **Validación en el Worker:** el código de build debe tener la forma de los dos juegos (`[1, mechId, armadura, zonas]` en base64url). El Worker no decodifica la build entera: necesitaría los datos de los juegos (`mechs.json` pesa 2,5 MB) y no caben en él. La página descarta las builds que no se pueden abrir.
 - **Sin cuentas:** al publicar, el Worker devuelve una clave de edición aleatoria que el navegador guarda. Con ella se edita el nombre, la descripción y el autor, o se borra la build. El Worker solo guarda su hash.
 - **Votos:** uno por build y por IP. La IP no se guarda tal cual: se guarda el hash de la IP con un secreto (`BUILDS_SALT`).
-- **Denuncias:** una por build y por IP. Con tres, la build se oculta sola.
+- **Denuncias:** una por build y por IP. Con tres, la build se oculta sola. Cada denuncia avisa por correo al dueño de la web, con el mismo envío que el feedback (Email Routing y el secreto `FEEDBACK_TO`): si el correo no está configurado o falla, la denuncia cuenta igual.
 - **Administración:** el dueño de la web borra cualquier build con la clave de administración (`BUILDS_ADMIN_KEY`, secreto del Worker) en la cabecera `Authorization: Bearer`.
 - **Límite de publicaciones:** cien por hora y por IP. Es alto a propósito: frena un script que publique sin parar, no a un jugador que publica varias builds.
 - **Escala:** la página carga las builds visibles del juego (hasta 1000, las más recientes) y filtra y ordena en el navegador, como My builds. Si algún día hay más, se pagina en el servidor.
@@ -48,7 +48,7 @@ Cada build publicada: `id`, `game`, `mechId`, `code`, `name`, `description`, `au
 - **RF3. Filtros y orden.** Los de My builds (clase, anclajes o armas mínimos, tecnología, rol, equipo y buscador), y el orden por más recientes, más votadas, nombre, chasis, tonelaje o potencia de fuego. `?mech=<id>` deja solo las builds de esa variante: así enlaza la lista de chasis.
 - **RF4. Abrir.** Cada build se abre en el MechLab con su enlace de siempre (`?b=`), y se puede copiar el enlace.
 - **RF5. Votar.** Un botón con los votos de la build: pulsado vota, pulsado otra vez retira el voto. El navegador recuerda qué builds votó.
-- **RF6. Denunciar.** Un botón Report, con confirmación. La build denunciada desaparece de la lista de quien la denunció.
+- **RF6. Denunciar.** Un botón Report, con confirmación. La build denunciada desaparece de la lista de quien la denunció, también al recargar: el navegador recuerda las builds que denunció, como las que votó.
 - **RF7. Las propias.** Las builds publicadas desde este navegador llevan la marca **Yours** y botones para editar su nombre, descripción y autor, y para borrarlas.
 - **RF8. Lista de chasis.** Cada variante de la lista de chasis de los dos juegos enlaza a sus builds publicadas.
 - **RF9. Sin servicio.** Si la API no responde o devuelve `503`, la página lo dice y el botón Publish avisa de que la publicación no está disponible.
@@ -76,6 +76,8 @@ Cada build publicada: `id`, `game`, `mechId`, `code`, `name`, `description`, `au
 | CA10 | Las claves de edición y los votos guardados en el navegador | se leen dañados | se ignoran sin fallar |
 | CA11 | Builds publicadas | se ordenan por votos | van de más a menos votos y, con los mismos, de la más reciente a la más antigua |
 | CA12 | La portada | se leen sus herramientas | cada juego tiene ocho, con Builds después del MechLab |
+| CA13 | Una build | se denuncia | el aviso lleva el nombre de la build, su juego, las denuncias que lleva, si ya se ha ocultado, el enlace a la build y el comando para borrarla; si el aviso falla, la denuncia responde 200 igual |
+| CA14 | Las builds denunciadas guardadas en el navegador | se leen dañadas | se ignoran sin fallar |
 
 ## Puesta en marcha
 
@@ -97,4 +99,5 @@ Hasta entonces, la API responde 503 y la web lo dice.
 1. **Worker (CA1 a CA9):** `worker/builds.test.ts`, con el almacén en memoria.
 2. **Navegador (CA10 y CA11):** `src/utils/publishedBuilds.test.ts`.
 3. **Portada (CA12):** `src/data/portal.test.ts`.
+4. **Aviso y denuncias guardadas (CA13 y CA14):** `worker/builds.test.ts` y `src/utils/publishedBuilds.test.ts`.
 4. **Interfaz:** en el navegador, con el servidor de desarrollo (que usa el almacén en memoria): publicar desde los dos MechLabs, la página de builds con filtros, votar, retirar el voto, denunciar, editar y borrar una propia, y el enlace desde la lista de chasis.
