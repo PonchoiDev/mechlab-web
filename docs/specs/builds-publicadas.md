@@ -1,6 +1,6 @@
 # Especificación: builds publicadas
 
-- **Estado:** implementada; falta crear la base de datos en Cloudflare (ver «Puesta en marcha»)
+- **Estado:** implementada
 - **Issue:** #164
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`worker/builds.test.ts`, `src/utils/publishedBuilds.test.ts` y `src/data/portal.test.ts`) y por último el código, en commits separados.
 
@@ -79,7 +79,7 @@ Cada build publicada: `id`, `game`, `mechId`, `code`, `name`, `description`, `au
 
 ## Puesta en marcha
 
-1. Crear la base de datos: `npx wrangler d1 create mechlab-builds`, y añadir a `wrangler.jsonc` el enlace `d1_databases` con `binding: "BUILDS_DB"` y el `database_id` que devuelve (también en `previews`).
+1. Crear la base de datos: `npx wrangler d1 create mechlab-builds`, y añadir a `wrangler.jsonc` el enlace `d1_databases` con `binding: "BUILDS_DB"` y el `database_id` que devuelve. No va en `previews`: las vistas previas de los pull request escribirían en la base de datos de la web publicada, así que en ellas la API responde 503.
 2. Crear las tablas: `npx wrangler d1 migrations apply mechlab-builds --remote`.
 3. Crear los secretos: `npx wrangler secret put BUILDS_SALT` y `npx wrangler secret put BUILDS_ADMIN_KEY`, con dos valores aleatorios largos.
 
