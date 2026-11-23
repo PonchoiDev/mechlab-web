@@ -23,6 +23,8 @@ interface BuildsListControlsProps {
   showSearch?: boolean;
   // Lo que va a la izquierda del orden cuando no hay buscador: el recuento del selector.
   leading?: ReactNode;
+  // Las builds publicadas se pueden ordenar también por votos, que no tienen las guardadas.
+  byVotes?: { active: boolean; onChange: (active: boolean) => void };
 }
 
 const toggleValue = (values: string[], value: string) =>
@@ -38,7 +40,7 @@ const MAX_MINIMUM = 20;
 
 // Buscador, orden y filtros de las listas de builds guardadas (la ventana My builds y el comparador),
 // comunes a los dos MechLabs.
-export function BuildsListControls({ state, config, rows, showSearch = true, leading }: BuildsListControlsProps) {
+export function BuildsListControls({ state, config, rows, showSearch = true, leading, byVotes }: BuildsListControlsProps) {
   const { filter, sort, setSort, setQuery, setWeightClasses, setMinHardpoints, setMinimumsOf, setTechBase, setRoles, setFeatures } = state;
   const { query, weightClasses, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [] } = filter;
   const minHardpoints = filter.minHardpoints ?? {};
@@ -68,7 +70,15 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
         )}
         <label className="builds-sort">
           <span>Sort</span>
-          <select value={sort} onChange={event => setSort(event.target.value as BuildSort)}>
+          <select
+            value={byVotes?.active ? 'votes' : sort}
+            onChange={event => {
+              const value = event.target.value;
+              byVotes?.onChange(value === 'votes');
+              if (value !== 'votes') setSort(value as BuildSort);
+            }}
+          >
+            {byVotes && <option value="votes">Most voted</option>}
             {BUILD_SORTS.map(option => <option key={option.id} value={option.id}>{option.label}</option>)}
           </select>
         </label>

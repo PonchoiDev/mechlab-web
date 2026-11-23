@@ -1,0 +1,112 @@
+/* Página de builds publicadas: la cabecera de las demás páginas (units.css) y las filas, los filtros y los
+   botones de My builds (App.css). Aquí, lo propio: los votos, la descripción y la marca de las propias. */
+
+.published-builds {
+  --units-accent: #c3ed62;
+}
+
+.published-main {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.published-list { overflow: visible; }
+
+.published-list .builds-item { align-items: flex-start; flex-wrap: nowrap; }
+
+@media (max-width: 720px) {
+  .published-list .builds-item { flex-wrap: wrap; }
+}
+
+/* El voto va a la izquierda, como en los foros: la flecha y el recuento. */
+.published-vote {
+  display: grid;
+  flex: none;
+  justify-items: center;
+  gap: 1px;
+  width: 44px;
+  padding: 6px 0;
+  color: var(--work-muted);
+  background: var(--work-panel);
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  font: 600 10px var(--work-mono);
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.published-vote strong { color: var(--work-text); font-size: 14px; }
+
+.published-vote:hover,
+.published-vote:focus-visible { color: var(--work-lime); border-color: var(--work-lime); outline: none; }
+
+.published-vote.is-voted { color: #18200f; background: var(--work-lime); border-color: var(--work-lime); }
+.published-vote.is-voted strong { color: #18200f; }
+.published-vote:disabled { opacity: 0.6; cursor: default; }
+
+.published-own {
+  margin-left: 8px;
+  padding: 1px 6px;
+  border: 1px solid var(--work-cyan);
+  border-radius: 2px;
+  color: var(--work-cyan);
+  font: 600 9px var(--work-mono);
+  letter-spacing: 0.06em;
+  vertical-align: 2px;
+}
+
+.published-description {
+  margin: 4px 0 2px;
+  color: var(--work-text);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.published-edit { display: grid; gap: 6px; }
+
+.published-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 0;
+  color: var(--work-muted);
+  font-size: 13px;
+}
+
+.published-filter strong { color: var(--work-text); }
+
+.builds-item-actions a.utility-button { display: inline-flex; align-items: center; text-decoration: none; }
+.utility-button.is-disabled { opacity: 0.45; cursor: default; }
+
+/* units.css redefine .utility-button para sus ventanas, más grande; aquí van como en My builds. */
+.published-builds .utility-button {
+  height: auto;
+  min-height: 30px;
+  padding: 0 9px;
+  color: var(--work-text);
+  background: var(--work-panel-raised);
+  border: 1px solid var(--work-line);
+  border-radius: 2px;
+  font: 500 9px var(--work-mono);
+  letter-spacing: normal;
+}
+
+.published-builds .utility-button:hover:not(:disabled),
+.published-builds .utility-button:focus-visible {
+  color: var(--work-cyan);
+  background: var(--work-panel-raised);
+  border-color: var(--work-cyan);
+}
+
+.published-builds .utility-button-primary,
+.published-builds .utility-button-primary:hover:not(:disabled) {
+  color: #18200f;
+  background: var(--work-lime);
+  border-color: var(--work-lime);
+}
+
+.published-builds .utility-button.is-danger { color: #ff796c; border-color: #ff796c; }

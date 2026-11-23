@@ -1,7 +1,9 @@
 import { cpSync, rmSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import type { Connect, Plugin } from 'vite'
+import { BUILDS_PATH, handleBuilds } from './worker/builds.ts'
 import { FEEDBACK_PATH, parseFeedback } from './worker/feedback.ts'
+import { createMemoryBuildStore } from './worker/memoryBuildStore.ts'
 import { fetchSarnaImage, getSarnaImageTarget, SARNA_IMAGE_PATH } from './worker/sarnaImage.ts'
 import { CHANGELOG } from './src/data/changelog.ts'
 
@@ -49,15 +51,40 @@ export const workerApi = (game = 'mercs'): Plugin => {
     })
   }
 
+  // Sin D1 en local, las builds publicadas van a un almacén en memoria, que se pierde al reiniciar el servidor.
+  const buildStore = createMemoryBuildStore()
+  const handlePublishedBuilds: Connect.NextHandleFunction = (req, res) => {
+    const chunks: Buffer[] = []
+    req.on('data', chunk => chunks.push(chunk))
+    req.on('end', async () => {
+      const url = new URL(req.originalUrl ?? '', 'http://localhost')
+      const body = chunks.length > 0 ? Buffer.concat(chunks) : undefined
+      const request = new Request(url, {
+        method: req.method,
+        headers: {
+          'Content-Type': req.headers['content-type'] ?? 'application/json',
+          Authorization: req.headers.authorization ?? '',
+          'CF-Connecting-IP': req.socket.remoteAddress ?? 'local'
+        },
+        body: req.method === 'GET' || req.method === 'HEAD' ? undefined : body
+      })
+      const path = url.pathname.replace(/^\/battletech\/api\//, '/mercs/api/')
+      const response = await handleBuilds(request, path, buildStore, { salt: 'local', adminKey: 'local-admin' })
+      res.statusCode = response.status
+      response.headers.forEach((value, key) => res.setHeader(key, value))
+      res.end(Buffer.from(await response.arrayBuffer()))
+    })
+  }
+
+  const mountApi = (middlewares: Connect.Server) => {
+    middlewares.use(forGame(SARNA_IMAGE_PATH), handle)
+    middlewares.use(forGame(FEEDBACK_PATH), handleFeedback)
+    middlewares.use(forGame(BUILDS_PATH), handlePublishedBuilds)
+  }
+
   return {
     name: 'worker-api',
-    configureServer: server => {
-      server.middlewares.use(forGame(SARNA_IMAGE_PATH), handle)
-      server.middlewares.use(forGame(FEEDBACK_PATH), handleFeedback)
-    },
-    configurePreviewServer: server => {
-      server.middlewares.use(forGame(SARNA_IMAGE_PATH), handle)
-      server.middlewares.use(forGame(FEEDBACK_PATH), handleFeedback)
-    }
+    configureServer: server => mountApi(server.middlewares),
+    configurePreviewServer: server => mountApi(server.middlewares)
   }
 }

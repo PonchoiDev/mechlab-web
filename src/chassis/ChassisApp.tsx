@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { getBuildsPageUrl } from '../utils/publishedBuilds';
 import mechsJson from '../data/mechs.json';
 import type { Mech } from '../types/mech';
 import {
@@ -130,6 +131,7 @@ export function ChassisApp() {
         <h1>Chassis</h1>
         <nav className="units-links" aria-label="MW Builder">
           <a href="/mercs/"><small>MW5 Mercenaries</small> MechLab</a>
+          <a href="/mercs/builds/">Builds</a>
           <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
           <a href="/mercs/starmap/">Star map</a>
           <a href="/mercs/units/">Enemy units</a>
@@ -270,6 +272,7 @@ export function ChassisApp() {
               onSort={sortBy}
               rowKey={row => row.mech.id}
               link={row => getChassisLink(row.mech)}
+              buildsLink={row => getBuildsPageUrl('mercs', { mech: row.mech.id })}
               name={row => ({
                 chassis: row.chassis,
                 variant: row.mech.variant,

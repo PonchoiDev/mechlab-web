@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { getBuildsPageUrl } from '../../utils/publishedBuilds';
 import type { BtHardpoint, BtSource, BtWeightClass } from '../../types/battletech-mechlab';
 import {
   DEFAULT_BT_CHASSIS_VIEW,
@@ -105,6 +106,7 @@ export function BtChassisApp() {
         <h1>Chassis</h1>
         <nav className="units-links" aria-label="BATTLETECH">
           <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
+          <a href="/battletech/builds/">Builds</a>
           <a href="/battletech/flashpoints/">Flashpoints</a>
           <a href="/battletech/starmap/">Star map</a>
           <a href="/battletech/units/">Enemy units</a>
@@ -222,6 +224,7 @@ export function BtChassisApp() {
               onSort={sortBy}
               rowKey={row => row.mech.id}
               link={row => getBtChassisLink(row.mech)}
+              buildsLink={row => getBuildsPageUrl('battletech', { mech: row.mech.id })}
               name={row => ({
                 chassis: row.chassis,
                 variant: row.mech.variant,

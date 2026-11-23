@@ -18,6 +18,9 @@ interface UtilityToolbarProps {
   savedBuildCount: number;
   onSaveBuild: () => void;
   onOpenBuilds: () => void;
+  // Publicar en la página de builds del juego; sin equipo montado no hay nada que publicar.
+  canPublish: boolean;
+  onPublish: () => void;
   onShare: (anchor: DOMRect) => void;
 }
 
@@ -40,6 +43,8 @@ export function UtilityToolbar({
   savedBuildCount,
   onSaveBuild,
   onOpenBuilds,
+  canPublish,
+  onPublish,
   onShare
 }: UtilityToolbarProps) {
   return (
@@ -113,6 +118,16 @@ export function UtilityToolbar({
         </button>
         <button type="button" className="utility-button" aria-haspopup="dialog" onClick={onOpenBuilds}>
           My builds{savedBuildCount > 0 && <span className="utility-count">{savedBuildCount}</span>}
+        </button>
+        <button
+          type="button"
+          className="utility-button"
+          aria-haspopup="dialog"
+          disabled={!canPublish}
+          title={canPublish ? 'Publish this build in the community builds' : 'Mount some equipment to publish the build'}
+          onClick={onPublish}
+        >
+          Publish
         </button>
         <button
           type="button"

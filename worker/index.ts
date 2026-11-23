@@ -1,4 +1,6 @@
 import { EmailMessage } from 'cloudflare:email';
+import { BUILDS_PATH, handleBuilds } from './builds';
+import { createD1BuildStore, type D1Database } from './buildStore';
 import { buildFeedbackEmail, FEEDBACK_PATH, FROM_ADDRESS, parseFeedback } from './feedback';
 import { fetchSarnaImage, getSarnaCacheKey, getSarnaImageTarget, SARNA_IMAGE_PATH } from './sarnaImage';
 
@@ -7,6 +9,10 @@ interface Env {
   // Configurados en Cloudflare: el envío de correo (Email Routing) y la dirección de destino (secreto).
   FEEDBACK_EMAIL?: { send: (message: EmailMessage) => Promise<void> };
   FEEDBACK_TO?: string;
+  // Builds publicadas: la base de datos D1 y dos secretos, para hashear las IP y para borrar como administrador.
+  BUILDS_DB?: D1Database;
+  BUILDS_SALT?: string;
+  BUILDS_ADMIN_KEY?: string;
 }
 
 interface ExecutionContext {
@@ -25,6 +31,10 @@ export default {
     const url = new URL(request.url);
     url.pathname = toApiPath(url.pathname);
     if (url.pathname === FEEDBACK_PATH) return handleFeedback(request, env);
+    if (url.pathname === BUILDS_PATH || url.pathname.startsWith(`${BUILDS_PATH}/`)) {
+      const store = env.BUILDS_DB ? createD1BuildStore(env.BUILDS_DB) : null;
+      return handleBuilds(request, url.pathname, store, { salt: env.BUILDS_SALT ?? '', adminKey: env.BUILDS_ADMIN_KEY });
+    }
     if (url.pathname !== SARNA_IMAGE_PATH) return env.ASSETS.fetch(request);
     if (request.method !== 'GET') return new Response('Method not allowed', { status: 405 });
 

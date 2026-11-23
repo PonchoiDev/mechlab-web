@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-23-community-builds',
+    date: '2026-11-23',
+    title: 'Community builds',
+    items: [
+      'Publish your build from the MechLab with Publish in the toolbar, with a description and your name if you want',
+      "The new Builds page of each game lists the builds published by other players, with the same filters as My builds. Vote the ones you like, open them in the MechLab or report the ones that should not be there",
+      "No account needed: this browser keeps the key to edit or delete the builds you published",
+      "The Chassis page links every variant to its published builds"
+    ]
+  },
+  {
     id: '2026-11-23-home-redesign',
     date: '2026-11-23',
     title: 'New home page',

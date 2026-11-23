@@ -4,7 +4,7 @@ Los diagramas UML (casos de uso, clases del dominio y secuencias) están en [uml
 
 ## Visión general
 
-MechLab es una web estática hecha con React y TypeScript. No tiene base de datos ni backend propio: los datos del juego van incluidos en el build como JSON, las builds del usuario se guardan en su navegador o viajan dentro de un enlace, y un pequeño Worker de Cloudflare atiende las dos únicas rutas que necesitan servidor.
+MechLab es una web estática hecha con React y TypeScript. Los datos del juego van incluidos en el build como JSON, las builds del usuario se guardan en su navegador o viajan dentro de un enlace, y un pequeño Worker de Cloudflare atiende las rutas que necesitan servidor: las imágenes de Sarna, el feedback y las builds publicadas, que son lo único que se guarda en una base de datos (D1).
 
 ```mermaid
 flowchart LR
@@ -24,8 +24,10 @@ flowchart LR
   end
   UI -- "imagen del 'Mech" --> Worker
   UI -- "feedback" --> Worker
+  UI -- "builds publicadas" --> Worker
   Worker --> Sarna["Sarna.net"]
   Worker --> Correo["Email Routing"]
+  Worker <--> D1["D1<br/>builds publicadas"]
 ```
 
 ## Flujo de datos del juego
@@ -211,8 +213,9 @@ Cloudflare sirve los archivos estáticos directamente; el Worker solo se ejecuta
 
 - **`/mercs/api/sarna-image`:** proxy de las imágenes de Sarna. Sarna no envía cabeceras CORS, así que el navegador no deja dibujar sus imágenes en un canvas para exportarlo. El proxy solo acepta imágenes de la wiki de Sarna, limita su tamaño y las guarda en la caché de Cloudflare.
 - **`/mercs/api/feedback`:** recibe el formulario de feedback y lo envía por correo con Email Routing. La dirección de destino es un secreto del Worker.
+- **`/mercs/api/builds`:** publica, lista, edita y borra las builds publicadas, con sus votos y denuncias (`worker/builds.ts`). Se guardan en D1 (`worker/buildStore.ts`, tablas en `migrations/`) sobre una interfaz de almacén que en los tests y en desarrollo es uno en memoria (`worker/memoryBuildStore.ts`). Ver [builds-publicadas.md](specs/builds-publicadas.md).
 
-En desarrollo, el servidor de Vite atiende esas mismas rutas con el mismo código (`vite.config.ts`).
+En desarrollo, el servidor de Vite atiende esas mismas rutas con el mismo código (`vite.plugins.ts`).
 
 ### Estadísticas comprobadas contra el juego
 

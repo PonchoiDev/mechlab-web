@@ -5,6 +5,7 @@ import { BuildStatus } from '../../components/BuildStatus';
 import { ContextMenu, type MenuEntry } from '../../components/ContextMenu';
 import { FeedbackDialog } from '../../components/FeedbackDialog';
 import { SaveBuildDialog } from '../../components/SaveBuildDialog';
+import { PublishBuildDialog } from '../../components/PublishBuildDialog';
 import { ShareImageDialog } from '../../components/ShareImageDialog';
 import { SupportLink } from '../../components/SupportLink';
 import { Toast } from '../../components/Toast';
@@ -86,6 +87,7 @@ export function BtMechLabApp() {
     linked && !linked.build ? { id: 0, message: 'This build link is not valid' } : null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(openFeedbackOnLoad);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
+  const [isPublishOpen, setIsPublishOpen] = useState(false);
   const [isSharingImage, setIsSharingImage] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
@@ -101,6 +103,7 @@ export function BtMechLabApp() {
   const dismissToast = useCallback(() => setToast(null), []);
   const closeFeedback = useCallback(() => setIsFeedbackOpen(false), []);
   const closeSave = useCallback(() => setIsSaveOpen(false), []);
+  const closePublish = useCallback(() => setIsPublishOpen(false), []);
   const closeBuilds = useCallback(() => setIsBuildsOpen(false), []);
   const closeCompare = useCallback(() => setIsCompareOpen(false), []);
 
@@ -253,6 +256,7 @@ export function BtMechLabApp() {
           <nav className="topbar-links" aria-label="BATTLETECH">
             <a href="/battletech/starmap/"><small>BATTLETECH</small> Star map</a>
             <a href="/battletech/chassis/">Chassis</a>
+            <a href="/battletech/builds/">Builds</a>
             <a href="/battletech/flashpoints/">Flashpoints</a>
             <a href="/battletech/units/">Enemy units</a>
             <a href="/battletech/argo/">Argo</a>
@@ -308,6 +312,8 @@ export function BtMechLabApp() {
         savedBuildCount={saved.builds.length}
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
+        canPublish={Object.values(build.loadout).some(ids => ids.length > 0)}
+        onPublish={() => setIsPublishOpen(true)}
         onShare={(anchor) => setMenu({
           title: 'Share build',
           x: anchor.left,
@@ -455,6 +461,15 @@ export function BtMechLabApp() {
         />
       )}
       {isFeedbackOpen && <FeedbackDialog buildUrl={buildUrl} onMessage={showToast} onClose={closeFeedback} />}
+      {isPublishOpen && (
+        <PublishBuildDialog
+          game="battletech"
+          code={buildCode}
+          defaultName={editableBuild?.name ?? defaultName}
+          onCopyLink={(url) => copyLink(url)}
+          onClose={closePublish}
+        />
+      )}
       {isSaveOpen && (
         <SaveBuildDialog
           defaultName={defaultName}
