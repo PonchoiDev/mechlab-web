@@ -18,7 +18,8 @@ const BUILD_CODE_VERSION = 1;
 const MECH_ID_PATTERN = /^[A-Za-z0-9_.-]+$/;
 const BASE64URL_PATTERN = /^[A-Za-z0-9_-]+$/;
 
-export const PUBLISH_LIMIT = 5;
+// Alto a propósito: frena un script que publique sin parar, no a un jugador que publica varias builds.
+export const PUBLISH_LIMIT = 100;
 const PUBLISH_WINDOW_MS = 60 * 60 * 1000;
 export const REPORTS_TO_HIDE = 3;
 // La página filtra y ordena en el navegador, como My builds: carga las más recientes hasta este tope.

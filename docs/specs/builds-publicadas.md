@@ -20,7 +20,7 @@ Cambia un principio del análisis: la web deja de ser «sin servidor de datos».
 - **Votos:** uno por build y por IP. La IP no se guarda tal cual: se guarda el hash de la IP con un secreto (`BUILDS_SALT`).
 - **Denuncias:** una por build y por IP. Con tres, la build se oculta sola.
 - **Administración:** el dueño de la web borra cualquier build con la clave de administración (`BUILDS_ADMIN_KEY`, secreto del Worker) en la cabecera `Authorization: Bearer`.
-- **Límite de publicaciones:** cinco por hora y por IP.
+- **Límite de publicaciones:** cien por hora y por IP. Es alto a propósito: frena un script que publique sin parar, no a un jugador que publica varias builds.
 - **Escala:** la página carga las builds visibles del juego (hasta 1000, las más recientes) y filtra y ordena en el navegador, como My builds. Si algún día hay más, se pagina en el servidor.
 
 ## API
@@ -67,7 +67,7 @@ Cada build publicada: `id`, `game`, `mechId`, `code`, `name`, `description`, `au
 | CA1 | Un código de build de MW5 o de BATTLETECH | se valida | vale si es base64url, decodifica a `[1, mechId, armadura, zonas]` y el mechId es un id; no vale con otra versión, otro formato o más de 4000 caracteres |
 | CA2 | Una publicación | se valida | el nombre se normaliza y se corta a 80, la descripción a 500 y el autor a 40; sin nombre o con el campo trampa relleno no vale; el juego tiene que ser `mercs` o `battletech` |
 | CA3 | Una build válida | se publica | responde 201 con la build y una clave de edición, y sale en la lista de su juego y no en la del otro |
-| CA4 | Seis publicaciones desde la misma IP en una hora | se envía la sexta | responde 429 |
+| CA4 | Ciento una publicaciones desde la misma IP en una hora | se envía la que hace ciento una | responde 429 |
 | CA5 | Una build publicada | se edita o se borra con otra clave | responde 403; con su clave, 200 |
 | CA6 | Una build publicada | se borra con la clave de administración | responde 200 y desaparece de la lista |
 | CA7 | Una build | se vota dos veces desde la misma IP | la segunda responde 409; los votos son 1; al retirar el voto, 0 |

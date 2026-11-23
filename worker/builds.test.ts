@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BUILDS_PATH, handleBuilds, parseBuildCode, parsePublishInput, type BuildsOptions, type PublishedBuild } from './builds';
+import { BUILDS_PATH, handleBuilds, parseBuildCode, parsePublishInput, PUBLISH_LIMIT, type BuildsOptions, type PublishedBuild } from './builds';
 import { createMemoryBuildStore } from './memoryBuildStore';
 
 const toBase64Url = (text: string) =>
@@ -83,9 +83,10 @@ describe('publicación', () => {
     expect((await call(store, request('GET', `${BUILDS_PATH}?game=clans`))).status).toBe(400);
   });
 
-  it('limita a cinco publicaciones por hora y por IP', async () => {
+  it('limita a cien publicaciones por hora y por IP', async () => {
+    expect(PUBLISH_LIMIT).toBe(100);
     const store = createMemoryBuildStore();
-    for (let i = 0; i < 5; i += 1) expect((await publish(store)).response.status).toBe(201);
+    for (let i = 0; i < PUBLISH_LIMIT; i += 1) expect((await publish(store)).response.status).toBe(201);
     expect((await publish(store)).response.status).toBe(429);
     expect((await publish(store, {}, '198.51.100.7')).response.status).toBe(201);
   });
