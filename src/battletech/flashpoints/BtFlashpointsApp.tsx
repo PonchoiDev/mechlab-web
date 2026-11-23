@@ -16,6 +16,8 @@ import {
 import { FeedbackDialog } from '../../components/FeedbackDialog';
 import { SupportLink } from '../../components/SupportLink';
 import { WhatsNew } from '../../components/WhatsNew';
+import { BrandMark } from '../../components/BrandMark';
+import { SiteNav } from '../../components/SiteNav';
 
 const flashpoints = (flashpointsJson as unknown as { flashpoints: BtFlashpoint[] }).flashpoints;
 const numberFormat = new Intl.NumberFormat('en');
@@ -251,20 +253,11 @@ export function BtFlashpointsApp() {
     <div className="units guide">
       <header className="units-topbar">
         <a className="units-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Flashpoints</h1>
-        <nav className="units-links" aria-label="BATTLETECH">
-          <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
-          <a href="/battletech/builds/">Builds</a>
-          <a href="/battletech/chassis/">Chassis</a>
-          <a href="/battletech/starmap/">Star map</a>
-          <a href="/battletech/flashpoints/" aria-current="page">Flashpoints</a>
-          <a href="/battletech/units/">Enemy units</a>
-          <a href="/battletech/argo/">Argo</a>
-          <a href="/battletech/equipment/">Equipment</a>
-        </nav>
+        <SiteNav game="battletech" current="flashpoints" className="units-links" />
         <div className="units-actions">
           <WhatsNew />
           <button type="button" className="units-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>

@@ -15,6 +15,16 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: ['The MechLabs use the same dark background as the other pages, without the grid']
   },
   {
+    id: '2026-11-23-brand-everywhere',
+    date: '2026-11-23',
+    title: 'New logo on every page',
+    items: [
+      'Every page has the new hexagon logo of the home page, and it also does a half turn when you hover it. The browser tab icon uses it too',
+      'The links in the header are the same on every page, in the same order, with the current page underlined in its place',
+      'The Builds and Star map titles use the color of their section'
+    ]
+  },
+  {
     id: '2026-11-23-section-colors',
     date: '2026-11-23',
     title: 'Colored page links',

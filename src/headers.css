@@ -1,4 +1,6 @@
-/* El color de cada apartado de la web en los enlaces de las cabeceras: el mismo de su fila en la portada
+/* Lo común de las cabeceras de todas las páginas: la insignia de MW Builder y el color de cada apartado.
+
+   El color de cada apartado de la web en los enlaces de las cabeceras: el mismo de su fila en la portada
    (site/index.html). Se elige por el destino del enlace, así que vale para las cabeceras de todas las páginas
    (units-links, topbar-links de los MechLabs y starmap-links de los mapas) y para las páginas nuevas sin tocarlas.
    El prefijo con el nombre del juego (<small>) sigue en gris. */
@@ -21,3 +23,23 @@
 
 /* MechLabs: el borde y el texto en su color, como el resto de botones del MechLab. */
 .topbar-links a[href]:is(:hover, :focus-visible) { color: var(--section); border-color: var(--section); }
+
+/* La insignia de MW Builder (BrandMark), la de la portada. Da media vuelta al pasar el ratón por la marca. */
+.brand-hex {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  color: #c3ed62;
+  transition: transform 500ms ease;
+}
+
+.brand-lockup .brand-hex { width: 44px; height: 44px; }
+
+:is(.units-brand, .starmap-brand, .brand-lockup):is(:hover, :focus-visible) .brand-hex { transform: rotate(180deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-hex { transition: none; }
+}
+
+/* La página actual sale en su sitio, subrayada en su color, en lugar de desaparecer de la cabecera. */
+:is(.units-links, .topbar-links, .starmap-links) a[href][aria-current='page'] { box-shadow: inset 0 -2px 0 var(--section); }
