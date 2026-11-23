@@ -9,6 +9,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-23-faction-banners',
+    date: '2026-11-23',
+    title: 'Faction banners',
+    items: ['The home page has the banners of the Great Houses, ComStar, several Clans and famous mercenary units in the background']
+  },
+  {
     id: '2026-11-23-my-builds-in-builds',
     date: '2026-11-23',
     title: 'My builds in Builds',
