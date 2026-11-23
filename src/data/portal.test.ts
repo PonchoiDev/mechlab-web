@@ -108,6 +108,19 @@ describe('portada', () => {
     ]);
   });
 
+  it('elige los estandartes entre todas las facciones con logo del juego', () => {
+    const match = portal.match(/<script type="application\/json" id="factions">([\s\S]*?)<\/script>/);
+    if (!match) throw new Error('No está la lista de facciones de los estandartes');
+    const factions = JSON.parse(match[1]) as { kind: string; name: string; color: string; logo: string }[];
+    // Los logos del mapa estelar, los mismos que sirve la web en /mercs/starmap/logos/.
+    const logos = Object.keys(import.meta.glob('../../public/starmap/logos/*.png')).map(path => path.split('/').pop());
+    expect(factions).toHaveLength(45);
+    expect(new Set(factions.map(faction => faction.logo)).size).toBe(45);
+    expect(factions.filter(faction => !logos.includes(faction.logo))).toEqual([]);
+    expect(factions.filter(faction => !faction.name || !/^#[0-9a-f]{6}$/.test(faction.color))).toEqual([]);
+    expect(logos.filter(logo => !factions.some(faction => faction.logo === logo))).toEqual([]);
+  });
+
   it('no usa rayas en los textos', () => {
     // Los textos que se ven: lo que hay entre etiquetas desde <body> hasta los scripts, que van al final. Los
     // estilos quedan en <head>, y los «--» de sus variables y de los comentarios no cuentan.

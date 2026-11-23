@@ -109,7 +109,7 @@
       }
 
       .faction-banner small { color: var(--faction); font: 500 calc(9px * var(--s)) var(--mono); letter-spacing: 0.14em; }
-      .faction-banner strong { margin-top: calc(4px * var(--s)); color: var(--faction); font-size: calc(14px * var(--s)); font-weight: 700; line-height: 1.05; }
+      .faction-banner strong { margin-top: calc(4px * var(--s)); color: var(--faction); font-size: calc(14px * var(--s)); font-weight: 700; line-height: 1.05; overflow-wrap: anywhere; }
       .faction-banner img { order: -1; width: calc(72px * var(--s)); height: calc(72px * var(--s)); margin-bottom: calc(10px * var(--s)); object-fit: contain; }
 
       @media (max-width: 1900px) { .faction-banners { --s: 0.85; } }
@@ -1040,6 +1040,54 @@
       <div class="faction-banner" style="--faction: #b0b6bd; --height: 310px"><strong>Gray Death Legion</strong><img src="/mercs/starmap/logos/graydeathlegion_factions_large.png" alt="" loading="lazy" onerror="this.remove()" /></div>
       <div class="faction-banner" style="--faction: #e0a030; --height: 290px"><strong>Eridani Light Horse</strong><img src="/mercs/starmap/logos/eridanilighthorse_factions_large.png" alt="" loading="lazy" onerror="this.remove()" /></div>
     </div>
+    <!-- Las cuarenta y cinco facciones con logo del juego: al cargar, el script elige dieciséis al azar. -->
+    <script type="application/json" id="factions">
+      [{"kind": "House", "name": "Liao", "color": "#2f9e44", "logo": "Faction_Liao_1024PX_STD_UIX.png"},
+      {"kind": "House", "name": "Steiner", "color": "#3b6fd8", "logo": "Faction_Steiner_1024PX_STD_UIX.png"},
+      {"kind": "House", "name": "Davion", "color": "#e8a33d", "logo": "Faction_Davion_1024PX_STD_UIX.png"},
+      {"kind": "House", "name": "Marik", "color": "#9b59d0", "logo": "Faction_Marik_1024PX_STD_UIX.png"},
+      {"kind": "House", "name": "Kurita", "color": "#d6332f", "logo": "Faction_Kurita_1024PX_STD_UIX.png"},
+      {"kind": "", "name": "Lyran Alliance", "color": "#3b6fd8", "logo": "1024px_Factionlogo_LyranAlliance.png"},
+      {"kind": "", "name": "Federated Commonwealth", "color": "#e8a33d", "logo": "Faction_Federated_Commonwealth_Logo_1024px_UIX.png"},
+      {"kind": "", "name": "Free Rasalhague Republic", "color": "#2fb3b3", "logo": "Faction_Rasalhague_1024PX_STD_UIX.png"},
+      {"kind": "", "name": "ComStar", "color": "#d8dde3", "logo": "Comstar_Faction_Logo_UIX.png"},
+      {"kind": "", "name": "Word of Blake", "color": "#d8c48a", "logo": "1024px_Factionlogo_WordOfBlake.png"},
+      {"kind": "", "name": "Magistracy of Canopus", "color": "#9ccc3a", "logo": "Faction_1024PX_Magistracy_Canopus_STD_UIX.png"},
+      {"kind": "", "name": "Taurian Concordat", "color": "#d6332f", "logo": "Taurianconcordat_icon_512x.png"},
+      {"kind": "", "name": "St. Ives Compact", "color": "#3aa0e0", "logo": "Faction_1024PX_St_Ives_Compact_STD_UIX.png"},
+      {"kind": "", "name": "Duchy of Andurien", "color": "#2f9e44", "logo": "Faction_1024PX_Duchy_Of_Andurien_STD_UIX.png"},
+      {"kind": "", "name": "St. Oberon Confederation", "color": "#9bc02a", "logo": "Faction_1024PX_St_Oberon_Confederation_STD_UIX.png"},
+      {"kind": "", "name": "Periphery Realms", "color": "#2f8ad8", "logo": "Faction_1024PX_Periphery_Realms_STD_UIX.png"},
+      {"kind": "", "name": "Periphery", "color": "#8a5cd6", "logo": "Faction_Periphery_1024PX_STD_UIX.png"},
+      {"kind": "", "name": "Independent", "color": "#c58a4a", "logo": "Faction_Independent_1024PX_STD_UIX.png"},
+      {"kind": "", "name": "Bandits", "color": "#d6332f", "logo": "Faction_Bandits_1024PX_STD_UIX.png"},
+      {"kind": "Clan", "name": "Ghost Bear", "color": "#3c64d8", "logo": "ghost_1024px_factionlogo_GhostBear.png"},
+      {"kind": "Clan", "name": "Jade Falcon", "color": "#4fd14f", "logo": "ghost_1024px_factionlogo_JadeFalcon.png"},
+      {"kind": "Clan", "name": "Smoke Jaguar", "color": "#8a8f96", "logo": "ghost_1024px_factionlogo_SmokeJaguar.png"},
+      {"kind": "Clan", "name": "Wolf", "color": "#e8892f", "logo": "ghost_1024px_factionlogo_Wolf.png"},
+      {"kind": "Clan", "name": "Nova Cat", "color": "#c9a227", "logo": "ghost_1024px_factionlogo_NovaCats.png"},
+      {"kind": "Clan", "name": "Diamond Shark", "color": "#2f8ad8", "logo": "ghost_1024px_factionlogo_DiamondShark.png"},
+      {"kind": "Clan", "name": "Steel Viper", "color": "#2f9e8f", "logo": "ghost_1024px_factionlogo_SteelViper.png"},
+      {"kind": "Clan", "name": "Hell's Horses", "color": "#c0392b", "logo": "Faction_Hells_Horses.png"},
+      {"kind": "", "name": "Wolf's Dragoons", "color": "#d6332f", "logo": "wolfsdragoons_factions_large.png"},
+      {"kind": "", "name": "Kell Hounds", "color": "#c62828", "logo": "kellhounds_factions_large.png"},
+      {"kind": "", "name": "Gray Death Legion", "color": "#b0b6bd", "logo": "graydeathlegion_factions_large.png"},
+      {"kind": "", "name": "Eridani Light Horse", "color": "#e0a030", "logo": "eridanilighthorse_factions_large.png"},
+      {"kind": "", "name": "Northwind Highlanders", "color": "#c62828", "logo": "northwindhighlanders_factions_large.png"},
+      {"kind": "", "name": "McCarron's Armored Cavalry", "color": "#2f9e44", "logo": "mccarronsac_factions_large.png"},
+      {"kind": "", "name": "Waco Rangers", "color": "#d6332f", "logo": "wacorangers_factions_large.png"},
+      {"kind": "", "name": "Black Hearts", "color": "#d6332f", "logo": "blackhearts_factions_large.png"},
+      {"kind": "", "name": "Brion's Legion", "color": "#d8dde3", "logo": "brionslegion_factions_large.png"},
+      {"kind": "", "name": "Hansen's Roughriders", "color": "#3a8fd8", "logo": "hansensroughriders_factions_large.png"},
+      {"kind": "", "name": "Lindon's Company", "color": "#2f8ad8", "logo": "lindonscompany_factions_large.png"},
+      {"kind": "", "name": "Gregg's Long Striders", "color": "#e0a030", "logo": "greggslongstriders_factions_large.png"},
+      {"kind": "", "name": "Harlock's Warriors", "color": "#e6c34a", "logo": "harlockswarriors_factions_large.png"},
+      {"kind": "", "name": "Mobile Fire", "color": "#f08a24", "logo": "mobilefire_factions_large.png"},
+      {"kind": "", "name": "Thumpers", "color": "#2f8ad8", "logo": "thumpers_factions_large.png"},
+      {"kind": "", "name": "Bad Dream", "color": "#3a8fd8", "logo": "baddream_factions_large.png"},
+      {"kind": "", "name": "Cobras", "color": "#e6b422", "logo": "cobras_factions_large.png"},
+      {"kind": "", "name": "Filthy Lucre", "color": "#d8a43a", "logo": "filthylucre_factions_large.png"}]
+    </script>
     <div class="shell">
       <header class="topbar">
         <a class="brand" href="/" aria-label="MW Builder, home">
@@ -1364,6 +1412,45 @@
     </dialog>
 
     <script>
+      // Estandartes de fondo: dieciséis facciones al azar entre las cuarenta y cinco con logo del juego, en orden
+      // aleatorio y con alturas variadas. Sin JavaScript se ven las del HTML.
+      (() => {
+        const SHOWN = 16;
+        const HEIGHTS = [270, 280, 290, 300, 310, 320, 330, 360, 390];
+        const container = document.querySelector('.faction-banners');
+        let factions;
+        try {
+          factions = JSON.parse(document.getElementById('factions').textContent);
+        } catch {
+          return;
+        }
+        // Fisher-Yates: cada recarga, otras dieciséis.
+        for (let i = factions.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [factions[i], factions[j]] = [factions[j], factions[i]];
+        }
+        container.replaceChildren(...factions.slice(0, SHOWN).map(({ kind, name, color, logo }) => {
+          const banner = document.createElement('div');
+          banner.className = 'faction-banner';
+          banner.style.setProperty('--faction', color);
+          banner.style.setProperty('--height', `${HEIGHTS[Math.floor(Math.random() * HEIGHTS.length)]}px`);
+          if (kind) {
+            const small = document.createElement('small');
+            small.textContent = kind;
+            banner.append(small);
+          }
+          const strong = document.createElement('strong');
+          strong.textContent = name;
+          const image = document.createElement('img');
+          image.src = `/mercs/starmap/logos/${logo}`;
+          image.alt = '';
+          image.loading = 'lazy';
+          image.addEventListener('error', () => image.remove());
+          banner.append(strong, image);
+          return banner;
+        }));
+      })();
+
       // Carátulas de juego: un solo juego abierto a la vez. Al cargar se abre el del ancla (#mw5,
       // #battletech) o el último que se abrió; la primera vez, ninguno, para que la portada sea elegir juego.
       (() => {
