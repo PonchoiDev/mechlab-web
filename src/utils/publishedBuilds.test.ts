@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseOwnedKeys, parseVotedIds, sortByVotes, toSavedBuild, type PublishedBuild } from './publishedBuilds';
+import { parseOwnedKeys, parseReportedIds, parseVotedIds, sortByVotes, toSavedBuild, type PublishedBuild } from './publishedBuilds';
 
 const build = (id: string, votes: number, createdAt: string): PublishedBuild => ({
   id,
@@ -29,6 +29,13 @@ describe('builds publicadas en el navegador', () => {
     expect(parseVotedIds('{')).toEqual([]);
     expect(parseVotedIds(JSON.stringify({ a1: true }))).toEqual([]);
     expect(parseVotedIds(null)).toEqual([]);
+  });
+
+  it('lee las builds denunciadas e ignora lo dañado', () => {
+    expect(parseReportedIds(JSON.stringify(['a1', 'b2']))).toEqual(['a1', 'b2']);
+    expect(parseReportedIds(JSON.stringify(['a1', 7]))).toEqual(['a1']);
+    expect(parseReportedIds('not json')).toEqual([]);
+    expect(parseReportedIds(null)).toEqual([]);
   });
 
   it('ordena por votos y, con los mismos, de la más reciente a la más antigua', () => {

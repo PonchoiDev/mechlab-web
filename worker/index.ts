@@ -1,5 +1,5 @@
 import { EmailMessage } from 'cloudflare:email';
-import { BUILDS_PATH, handleBuilds } from './builds';
+import { BUILDS_PATH, buildReportEmail, handleBuilds, type BuildReport } from './builds';
 import { createD1BuildStore, type D1Database } from './buildStore';
 import { buildFeedbackEmail, FEEDBACK_PATH, FROM_ADDRESS, parseFeedback } from './feedback';
 import { fetchSarnaImage, getSarnaCacheKey, getSarnaImageTarget, SARNA_IMAGE_PATH } from './sarnaImage';
@@ -33,7 +33,11 @@ export default {
     if (url.pathname === FEEDBACK_PATH) return handleFeedback(request, env);
     if (url.pathname === BUILDS_PATH || url.pathname.startsWith(`${BUILDS_PATH}/`)) {
       const store = env.BUILDS_DB ? createD1BuildStore(env.BUILDS_DB) : null;
-      return handleBuilds(request, url.pathname, store, { salt: env.BUILDS_SALT ?? '', adminKey: env.BUILDS_ADMIN_KEY });
+      return handleBuilds(request, url.pathname, store, {
+        salt: env.BUILDS_SALT ?? '',
+        adminKey: env.BUILDS_ADMIN_KEY,
+        onReport: report => sendReportEmail(report, env)
+      });
     }
     if (url.pathname !== SARNA_IMAGE_PATH) return env.ASSETS.fetch(request);
     if (request.method !== 'GET') return new Response('Method not allowed', { status: 405 });
@@ -71,4 +75,11 @@ const handleFeedback = async (request: Request, env: Env): Promise<Response> => 
     return json({ error: 'Could not send the message' }, 502);
   }
   return json({ ok: true });
+};
+
+// Avisa de cada denuncia de una build publicada con el mismo envío que el feedback. Sin correo configurado,
+// la denuncia cuenta igual y no se avisa.
+const sendReportEmail = async (report: BuildReport, env: Env) => {
+  if (!env.FEEDBACK_EMAIL || !env.FEEDBACK_TO) return;
+  await env.FEEDBACK_EMAIL.send(new EmailMessage(FROM_ADDRESS, env.FEEDBACK_TO, buildReportEmail(report, env.FEEDBACK_TO)));
 };

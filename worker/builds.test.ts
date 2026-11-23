@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BUILDS_PATH, handleBuilds, parseBuildCode, parsePublishInput, PUBLISH_LIMIT, type BuildsOptions, type PublishedBuild } from './builds';
+import { BUILDS_PATH, buildReportEmail, handleBuilds, parseBuildCode, parsePublishInput, parseReportInput, PUBLISH_LIMIT, type BuildReport, type BuildsOptions, type PublishedBuild } from './builds';
 import { createMemoryBuildStore } from './memoryBuildStore';
 
 const toBase64Url = (text: string) =>
@@ -147,6 +147,62 @@ describe('votos y denuncias', () => {
     expect(await list(store)).toHaveLength(1);
     expect((await call(store, request('POST', path, { ip: '192.0.2.3' }))).status).toBe(200);
     expect(await list(store)).toEqual([]);
+  });
+});
+
+describe('aviso de denuncias', () => {
+  it('avisa de cada denuncia con las que lleva y si ya se ha ocultado', async () => {
+    const store = createMemoryBuildStore();
+    const { data } = await publish(store);
+    const reports: BuildReport[] = [];
+    const options: BuildsOptions = { ...OPTIONS, onReport: async report => { reports.push(report); } };
+    const path = `${BUILDS_PATH}/${data.build.id}/report`;
+    for (const ip of ['192.0.2.1', '192.0.2.2', '192.0.2.3']) {
+      const req = request('POST', path, { ip });
+      expect((await handleBuilds(req, new URL(req.url).pathname, store, options)).status).toBe(200);
+    }
+    expect(reports.map(report => [report.build.name, report.reports, report.hidden])).toEqual([
+      ['Brawler', 1, false],
+      ['Brawler', 2, false],
+      ['Brawler', 3, true]
+    ]);
+  });
+
+  it('el motivo y el mensaje se validan y llegan al aviso', async () => {
+    expect(parseReportInput({ reason: 'Spam', message: '  Same build\r\nposted 20 times\u0000 ' })).toEqual({ reason: 'Spam', message: 'Same build\nposted 20 times' });
+    expect(parseReportInput({ reason: 'Hacked', message: 'x'.repeat(600) })).toEqual({ reason: 'Other', message: 'x'.repeat(500) });
+    expect(parseReportInput(null)).toEqual({ reason: 'Other', message: '' });
+
+    const store = createMemoryBuildStore();
+    const { data } = await publish(store);
+    const reports: BuildReport[] = [];
+    const req = request('POST', `${BUILDS_PATH}/${data.build.id}/report`, { body: { reason: 'Offensive', message: 'Insulting name' } });
+    await handleBuilds(req, new URL(req.url).pathname, store, { ...OPTIONS, onReport: async report => { reports.push(report); } });
+    expect(reports.map(report => [report.reason, report.message])).toEqual([['Offensive', 'Insulting name']]);
+  });
+
+  it('la denuncia cuenta aunque el aviso falle', async () => {
+    const store = createMemoryBuildStore();
+    const { data } = await publish(store);
+    const req = request('POST', `${BUILDS_PATH}/${data.build.id}/report`);
+    const options: BuildsOptions = { ...OPTIONS, onReport: async () => { throw new Error('mail down'); } };
+    expect((await handleBuilds(req, new URL(req.url).pathname, store, options)).status).toBe(200);
+  });
+
+  it('el correo lleva la build, sus denuncias, su enlace y cómo borrarla', async () => {
+    const store = createMemoryBuildStore();
+    const { data } = await publish(store, { game: 'battletech', code: codeFor('atlas_AS7-D'), name: 'Spam build' });
+    const email = buildReportEmail({ build: data.build, reports: 3, hidden: true, reason: 'Spam', message: 'Posted again\nand again' }, 'owner@example.com', new Date('2026-11-23T12:00:00Z'));
+    expect(email).toContain('To: <owner@example.com>');
+    expect(email).toContain('Subject: [MW Builder] Build reported: Spam build');
+    expect(email).toContain('Game: battletech');
+    expect(email).toContain('Reports: 3 of 3, now hidden');
+    expect(email).toContain('Reason: Spam');
+    expect(email).toContain('Message:\r\nPosted again\r\nand again');
+    expect(email).toContain(`https://mw-builder.com/battletech/builds/?build=${data.build.id}`);
+    expect(email).toContain(`curl -X DELETE -H "Authorization: Bearer <BUILDS_ADMIN_KEY>" https://mw-builder.com/battletech/api/builds/${data.build.id}`);
+    // Todas las líneas acaban en CRLF, como pide el formato de los correos.
+    expect(email).not.toMatch(/[^\r]\n/);
   });
 });
 

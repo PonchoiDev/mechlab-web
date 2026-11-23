@@ -1,13 +1,16 @@
-import type { BuildGame, PublishedBuild } from '../../worker/builds';
+import { REPORT_REASONS, type BuildGame, type PublishedBuild, type ReportReason } from '../../worker/builds';
 import type { SavedBuild } from './savedBuildsCore';
 
 // Builds publicadas, del lado del navegador: las llamadas a la API del Worker (worker/builds.ts) y lo que se
 // guarda en el navegador. Sin cuentas: la clave de edición de cada build publicada se queda aquí, y también
 // las builds votadas, para enseñar el voto pulsado.
-export type { BuildGame, PublishedBuild };
+export { REPORT_REASONS };
+export type { BuildGame, PublishedBuild, ReportReason };
+export const REPORT_MESSAGE_MAX = 500;
 
 const ownedKey = (game: BuildGame) => `mw-builder:${game}:published-builds`;
 const votedKey = (game: BuildGame) => `mw-builder:${game}:voted-builds`;
+const reportedKey = (game: BuildGame) => `mw-builder:${game}:reported-builds`;
 const AUTHOR_KEY = 'mw-builder:build-author';
 
 export const BUILD_NAME_MAX = 80;
@@ -25,7 +28,8 @@ export const parseOwnedKeys = (raw: string | null): Record<string, string> => {
   }
 };
 
-export const parseVotedIds = (raw: string | null): string[] => {
+// Una lista de ids guardada: las builds votadas o las denunciadas.
+const parseIdList = (raw: string | null): string[] => {
   try {
     const parsed: unknown = JSON.parse(raw ?? '');
     return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string') : [];
@@ -60,9 +64,18 @@ export const forgetOwnedKey = (game: BuildGame, id: string) => {
   write(ownedKey(game), JSON.stringify(rest));
 };
 
+export const parseVotedIds = parseIdList;
+
+// Las denunciadas siguen ocultas para quien las denunció al recargar la página.
+export const parseReportedIds = parseIdList;
+
 export const readVotedIds = (game: BuildGame) => parseVotedIds(read(votedKey(game)));
 
 export const saveVotedIds = (game: BuildGame, ids: string[]) => write(votedKey(game), JSON.stringify(ids));
+
+export const readReportedIds = (game: BuildGame) => parseReportedIds(read(reportedKey(game)));
+
+export const saveReportedIds = (game: BuildGame, ids: string[]) => write(reportedKey(game), JSON.stringify(ids));
 
 export const readAuthor = () => read(AUTHOR_KEY) ?? '';
 
@@ -129,5 +142,5 @@ export const deletePublishedBuild = (game: BuildGame, id: string, editKey: strin
 export const voteBuild = (game: BuildGame, id: string, vote: boolean) =>
   call<{ votes: number }>(apiUrl(game, `/${id}/vote`), { method: vote ? 'POST' : 'DELETE' });
 
-export const reportBuild = (game: BuildGame, id: string) =>
-  call<{ ok: true }>(apiUrl(game, `/${id}/report`), { method: 'POST' });
+export const reportBuild = (game: BuildGame, id: string, reason: ReportReason, message: string) =>
+  call<{ ok: true }>(apiUrl(game, `/${id}/report`), { method: 'POST', body: JSON.stringify({ reason, message }) });
