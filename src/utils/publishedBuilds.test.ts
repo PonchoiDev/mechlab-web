@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseOwnedKeys, parseReportedIds, parseVotedIds, sortByVotes, toSavedBuild, type PublishedBuild } from './publishedBuilds';
+import { getOwnPublishedCodes, parseOwnedKeys, parseReportedIds, parseVotedIds, sortByVotes, toSavedBuild, type PublishedBuild } from './publishedBuilds';
 
 const build = (id: string, votes: number, createdAt: string): PublishedBuild => ({
   id,
@@ -47,6 +47,16 @@ describe('builds publicadas en el navegador', () => {
     ];
     expect(sortByVotes(builds).map(entry => entry.id)).toEqual(['top', 'new', 'old', 'none']);
     expect(builds.map(entry => entry.id)).toEqual(['old', 'top', 'new', 'none']);
+  });
+
+  it('sabe qué códigos se publicaron desde este navegador', () => {
+    const builds = [
+      { ...build('mine', 0, '2026-11-20T10:00:00.000Z'), code: 'code-a' },
+      { ...build('theirs', 0, '2026-11-21T10:00:00.000Z'), code: 'code-b' },
+      { ...build('copy', 0, '2026-11-22T10:00:00.000Z'), code: 'code-a' }
+    ];
+    expect([...getOwnPublishedCodes(builds, { mine: 'key' })]).toEqual(['code-a']);
+    expect([...getOwnPublishedCodes(builds, {})]).toEqual([]);
   });
 
   it('se resume como una build guardada, con su fecha de publicación', () => {

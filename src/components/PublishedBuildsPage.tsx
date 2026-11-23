@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useBuildListFilters } from '../hooks/useBuildListFilters';
+import { useSavedBuilds } from '../hooks/useSavedBuilds';
 import { copyText } from '../services/clipboard';
 import {
   BUILD_AUTHOR_MAX,
@@ -8,6 +9,7 @@ import {
   deletePublishedBuild,
   fetchPublishedBuilds,
   forgetOwnedKey,
+  getOwnPublishedCodes,
   readOwnedKeys,
   readReportedIds,
   readVotedIds,
@@ -28,6 +30,8 @@ import { showBuildEntries, type BuildListConfig, type BuildListRow, type BuildTa
 import { BuildTagList } from './BuildTagList';
 import { BuildsListControls } from './BuildsListControls';
 import { FeedbackDialog } from './FeedbackDialog';
+import { PublishBuildDialog } from './PublishBuildDialog';
+import { SavedBuildsPublishDialog } from './SavedBuildsPublishDialog';
 import { ReportBuildDialog } from './ReportBuildDialog';
 import { SupportLink } from './SupportLink';
 import { Toast } from './Toast';
@@ -54,6 +58,9 @@ interface PublishedBuildsPageProps {
   // El nombre de la variante de un mechId, para el filtro ?mech= que pone la lista de chasis.
   mechName: (mechId: string) => string | null;
   buildUrl: (code: string) => string;
+  // Las builds guardadas en el navegador (My builds) de este juego; sin clave, las de MW5.
+  savedBuildsKey?: string;
+  mechlabUrl: string;
 }
 
 const dateFormat = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -62,7 +69,7 @@ type Confirming = { id: string; action: 'delete' };
 
 // La página de builds publicadas de un juego (/mercs/builds/ y /battletech/builds/): las de todos los
 // jugadores, con los filtros y el orden de My builds, votos, denuncias y las propias editables.
-export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKey, summarize, mechName, buildUrl }: PublishedBuildsPageProps) {
+export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKey, summarize, mechName, buildUrl, savedBuildsKey, mechlabUrl }: PublishedBuildsPageProps) {
   const params = useMemo(() => new URLSearchParams(window.location.search), []);
   const [mechFilter, setMechFilter] = useState(params.get('mech'));
   const highlighted = params.get('build');
@@ -80,6 +87,14 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
   const [busy, setBusy] = useState<string | null>(null);
   const [toast, setToast] = useState<{ id: number; message: string } | null>(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const saved = useSavedBuilds(savedBuildsKey);
+  const [isSavedOpen, setIsSavedOpen] = useState(false);
+  const [publishTarget, setPublishTarget] = useState<{ code: string; name: string } | null>(null);
+  const closePublish = useCallback(() => setPublishTarget(null), []);
+  // Con la ventana de publicar encima, Escape la cierra a ella y My builds sigue abierta debajo.
+  const closeSaved = useCallback(() => {
+    if (!publishTarget) setIsSavedOpen(false);
+  }, [publishTarget]);
   const filters = useBuildListFilters(sortKey);
   const showToast = useCallback((message: string) => setToast({ id: Date.now(), message }), []);
 
@@ -193,6 +208,17 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
     showToast(await copyText(buildUrl(code)) ? 'Build link copied' : 'Could not copy the link');
   };
 
+  const savedEntries = useMemo(
+    () => isSavedOpen ? saved.builds.map(build => ({ build, summary: summarize(build) })) : [],
+    [isSavedOpen, saved.builds, summarize]
+  );
+  const publishedCodes = useMemo(() => getOwnPublishedCodes(state.builds, owned), [state.builds, owned]);
+  // La build recién publicada entra en la lista y queda como propia, sin recargar la página.
+  const addPublished = useCallback((build: PublishedBuild) => {
+    setOwned(readOwnedKeys(game));
+    setState(current => ({ ...current, builds: [build, ...current.builds.filter(other => other.id !== build.id)] }));
+  }, [game]);
+
   const filteredMech = mechFilter ? mechName(mechFilter) ?? mechFilter : null;
   const total = entries.length;
 
@@ -227,9 +253,18 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
           </p>
         )}
 
-        {state.status === 'ready' && total > 0 && (
-          <div className="builds-list-header">
-            <span>{shown.length === total ? total : `${shown.length} of ${total}`} PUBLISHED</span>
+        {state.status === 'ready' && (
+          <div className="builds-list-header published-header">
+            <span>{total > 0 ? `${shown.length === total ? total : `${shown.length} of ${total}`} PUBLISHED` : ''}</span>
+            <button
+              type="button"
+              className="utility-button utility-button-primary"
+              aria-haspopup="dialog"
+              title="Publish the builds saved in this browser"
+              onClick={() => setIsSavedOpen(true)}
+            >
+              My builds{saved.builds.length > 0 && <span className="utility-count">{saved.builds.length}</span>}
+            </button>
           </div>
         )}
         {state.status === 'ready' && total > 0 && (
@@ -246,7 +281,7 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
           {state.status === 'error' && <li className="builds-empty">{state.message}</li>}
           {state.status === 'ready' && total === 0 && (
             <li className="builds-empty">
-              {filteredMech ? 'No builds of this variant yet.' : 'No builds published yet.'} Publish yours from the MechLab with Publish in the toolbar.
+              {filteredMech ? 'No builds of this variant yet.' : 'No builds published yet.'} Publish yours with My builds above or with Publish in the MechLab toolbar.
             </li>
           )}
           {state.status === 'ready' && total > 0 && shown.length === 0 && (
@@ -383,6 +418,28 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
           sending={reporting.sending}
           onReport={(reason, message) => report(reporting.build, reason, message)}
           onClose={closeReport}
+        />
+      )}
+      {isSavedOpen && (
+        <SavedBuildsPublishDialog
+          entries={savedEntries}
+          config={config}
+          publishedCodes={publishedCodes}
+          buildUrl={buildUrl}
+          mechlabUrl={mechlabUrl}
+          onPublish={(build) => setPublishTarget({ code: build.code, name: build.name })}
+          onClose={closeSaved}
+        />
+      )}
+      {publishTarget && (
+        <PublishBuildDialog
+          key={publishTarget.code}
+          game={game}
+          code={publishTarget.code}
+          defaultName={publishTarget.name}
+          onCopyLink={async (url) => showToast(await copyText(url) ? 'Link copied' : 'Could not copy the link')}
+          onPublished={addPublished}
+          onClose={closePublish}
         />
       )}
       {isFeedbackOpen && <FeedbackDialog buildUrl={null} onMessage={showToast} onClose={() => setIsFeedbackOpen(false)} />}

@@ -45,6 +45,7 @@ Cada build publicada: `id`, `game`, `mechId`, `code`, `name`, `description`, `au
 
 - **RF1. Publicar.** En los dos MechLabs, un botón **Publish** en el grupo BUILD de la barra, junto a Save build y My builds. Abre una ventana con el nombre (el de la build guardada abierta o el del 'Mech), una descripción opcional (hasta 500 caracteres) y un nombre de autor opcional (hasta 40), que se recuerda para la siguiente vez. Al publicar, enseña el enlace a la build en la página de builds. Sin equipo montado no se puede publicar. Cada build de My builds tiene también su botón **Publish**, que abre la misma ventana con esa build y su nombre sin cargarla en el MechLab; My builds sigue abierta debajo, para publicar varias seguidas.
 - **RF2. Página de builds.** `/mercs/builds/` y `/battletech/builds/`, con el título **Builds** y un enlace en la cabecera de las demás páginas de su juego y su fila en la portada. Cada build enseña su nombre, el 'Mech, sus cifras, sus armas, sus etiquetas, el autor, la fecha, la descripción y los votos, como My builds.
+- **RF2b. My builds en la página.** Un botón **My builds** en la página Builds abre las builds guardadas en este navegador para ese juego, para publicarlas sin entrar en el MechLab. Cada una tiene **Publish**, que abre la misma ventana de publicar, y **Open**, que la abre en el MechLab; las que ya se publicaron desde este navegador (mismo código que una build propia publicada) llevan la marca **Published**. Al publicar, la build aparece en la lista sin recargar.
 - **RF3. Filtros y orden.** Los de My builds (clase, anclajes o armas mínimos, tecnología, rol, equipo y buscador), y el orden por más recientes, más votadas, nombre, chasis, tonelaje o potencia de fuego. `?mech=<id>` deja solo las builds de esa variante: así enlaza la lista de chasis.
 - **RF4. Abrir.** Cada build se abre en el MechLab con su enlace de siempre (`?b=`), y se puede copiar el enlace.
 - **RF5. Votar.** Un botón con los votos de la build: pulsado vota, pulsado otra vez retira el voto. El navegador recuerda qué builds votó.
@@ -79,6 +80,7 @@ Cada build publicada: `id`, `game`, `mechId`, `code`, `name`, `description`, `au
 | CA13 | Una build | se denuncia | el aviso lleva el nombre de la build, su juego, las denuncias que lleva, si ya se ha ocultado, el enlace a la build y el comando para borrarla; si el aviso falla, la denuncia responde 200 igual |
 | CA14 | Las builds denunciadas guardadas en el navegador | se leen dañadas | se ignoran sin fallar |
 | CA15 | Una denuncia con motivo y mensaje | se valida | un motivo desconocido o ausente pasa a Other; el mensaje se limpia y se corta a 500; el aviso lleva los dos |
+| CA16 | Builds publicadas, unas propias y otras no | se buscan las ya publicadas desde este navegador | salen los códigos de las propias, no los de las demás aunque coincidan |
 
 ## Puesta en marcha
 
@@ -101,4 +103,4 @@ Hasta entonces, la API responde 503 y la web lo dice.
 2. **Navegador (CA10 y CA11):** `src/utils/publishedBuilds.test.ts`.
 3. **Portada (CA12):** `src/data/portal.test.ts`.
 4. **Aviso, denuncias guardadas y motivo (CA13 a CA15):** `worker/builds.test.ts` y `src/utils/publishedBuilds.test.ts`.
-5. **Interfaz:** en el navegador, con el servidor de desarrollo (que usa el almacén en memoria): publicar desde los dos MechLabs y desde My builds, la página de builds con filtros, votar, retirar el voto, denunciar, editar y borrar una propia, y el enlace desde la lista de chasis.
+5. **Interfaz:** en el navegador, con el servidor de desarrollo (que usa el almacén en memoria): publicar desde los dos MechLabs, desde My builds y desde la página de builds, la página de builds con filtros, votar, retirar el voto, denunciar, editar y borrar una propia, y el enlace desde la lista de chasis.
