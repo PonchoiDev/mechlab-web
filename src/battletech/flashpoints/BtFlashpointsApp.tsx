@@ -16,6 +16,7 @@ import {
 import { FeedbackDialog } from '../../components/FeedbackDialog';
 import { SupportLink } from '../../components/SupportLink';
 import { WhatsNew } from '../../components/WhatsNew';
+import { BrandMark } from '../../components/BrandMark';
 
 const flashpoints = (flashpointsJson as unknown as { flashpoints: BtFlashpoint[] }).flashpoints;
 const numberFormat = new Intl.NumberFormat('en');
@@ -251,7 +252,7 @@ export function BtFlashpointsApp() {
     <div className="units guide">
       <header className="units-topbar">
         <a className="units-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Flashpoints</h1>

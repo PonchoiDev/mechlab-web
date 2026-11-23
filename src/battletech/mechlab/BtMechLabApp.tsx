@@ -42,6 +42,7 @@ import { BtMechPicker } from './BtMechPicker';
 import { BtMyBuildsDialog } from './BtMyBuildsDialog';
 import { getBtEquipmentMenu, getBtHardpointMenu, type BtMenuContext } from './btMenus';
 import { useBtBuild } from './useBtBuild';
+import { BrandMark } from '../../components/BrandMark';
 
 // Se lee una sola vez al cargar la página: la dirección queda limpia después.
 const linked = readBtBuildFromLocation();
@@ -251,7 +252,7 @@ export function BtMechLabApp() {
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">
-            <span className="brand-mark" aria-hidden="true">M</span>
+            <BrandMark />
             <div>
               <p className="eyebrow">FIELD CONFIGURATION SYSTEM</p>
               <h1>MechLab <span>BATTLETECH</span></h1>

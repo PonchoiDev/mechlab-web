@@ -12,6 +12,7 @@ import { FeedbackDialog } from '../../components/FeedbackDialog';
 import { SupportLink } from '../../components/SupportLink';
 import { WhatsNew } from '../../components/WhatsNew';
 import { StarmapCanvas, type FocusRequest } from '../../starmap/StarmapCanvas';
+import { BrandMark } from '../../components/BrandMark';
 
 const data = starmapData as unknown as BtStarmapData;
 // El mapa no cambia con la fecha: el lienzo compartido con MW5 la pide igualmente.
@@ -324,7 +325,7 @@ export function BtStarmapApp() {
 
       <header className="starmap-topbar">
         <a className="starmap-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Star map</h1>

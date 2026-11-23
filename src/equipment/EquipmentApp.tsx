@@ -29,6 +29,7 @@ import { getContentSourceLabel } from '../utils/mechs';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
+import { BrandMark } from '../components/BrandMark';
 
 const items = Object.values(itemsJson as unknown as Record<string, Item>);
 const DLC_OPTIONS = getDlcOptions(items);
@@ -239,7 +240,7 @@ export function EquipmentApp() {
     <div className="units arsenal">
       <header className="units-topbar">
         <a className="units-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Equipment</h1>

@@ -37,6 +37,7 @@ import { SupportLink } from './SupportLink';
 import { Toast } from './Toast';
 import { WeaponTypeCounts } from './WeaponTypeCounts';
 import { WhatsNew } from './WhatsNew';
+import { BrandMark } from './BrandMark';
 
 // Una build publicada resumida con los datos del juego, como las de My builds.
 export interface PublishedBuildSummary {
@@ -226,7 +227,7 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
     <div className="units published-builds">
       <header className="units-topbar">
         <a className="units-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Builds</h1>

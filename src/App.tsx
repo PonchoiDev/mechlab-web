@@ -46,6 +46,7 @@ import { Toast } from './components/Toast';
 import { UpgradesPanel } from './components/UpgradesPanel';
 import { UtilityToolbar } from './components/UtilityToolbar';
 import { WhatsNew } from './components/WhatsNew';
+import { BrandMark } from './components/BrandMark';
 
 const mechs = mechsData as unknown as Mech[];
 // Pulsar aquí no quita el componente elegido: el inventario, el tablero y cualquier control.
@@ -298,7 +299,7 @@ export default function App() {
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">
-            <span className="brand-mark" aria-hidden="true">M</span>
+            <BrandMark />
             <div>
               <p className="eyebrow">FIELD CONFIGURATION SYSTEM</p>
               <h1>MechLab <span>MW5: MERCENARIES</span></h1>

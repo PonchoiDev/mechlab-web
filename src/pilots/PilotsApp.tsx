@@ -8,6 +8,7 @@ import {
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
+import { BrandMark } from '../components/BrandMark';
 
 const data = pilotsJson as unknown as PilotsData;
 const numberFormat = new Intl.NumberFormat('en');
@@ -343,7 +344,7 @@ export function PilotsApp() {
     <div className="units pilots">
       <header className="units-topbar">
         <a className="units-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Pilots</h1>

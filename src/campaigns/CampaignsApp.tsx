@@ -30,6 +30,7 @@ import { formatGameDate } from '../utils/starmap';
 import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
+import { BrandMark } from '../components/BrandMark';
 
 const data = starmapJson as unknown as StarmapData;
 const briefings = briefingsJson as Record<string, (string | null)[]>;
@@ -449,7 +450,7 @@ export function CampaignsApp() {
     <div className="units guide">
       <header className="units-topbar">
         <a className="units-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>HRQ &amp; Campaigns</h1>

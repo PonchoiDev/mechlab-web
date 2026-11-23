@@ -39,6 +39,7 @@ import { QuestCard, QuestDrawer, SystemQuests } from './QuestPanels';
 import { CampaignCard, CampaignDrawer, SystemCampaigns } from './CampaignPanels';
 import { StarmapCanvas, type FocusRequest } from './StarmapCanvas';
 import { CAMPAIGN_COLOR, type MercZoneLayer, type TerritoryColors } from './renderer';
+import { BrandMark } from '../components/BrandMark';
 
 const data = starmapData as unknown as StarmapData;
 const LEGEND_MIN_SYSTEMS = 5;
@@ -534,7 +535,7 @@ export function StarmapApp() {
 
       <header className="starmap-topbar">
         <a className="starmap-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Star map</h1>

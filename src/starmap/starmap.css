@@ -1,4 +1,4 @@
-@import '../sectionColors.css';
+@import '../headers.css';
 /* Mapa estelar: interfaz parecida a la del juego, con texto condensado en mayúsculas, paneles negros
    translúcidos con filetes blancos y la fecha en amarillo. */
 :root {
@@ -130,6 +130,8 @@ button, input, select { font: inherit; color: inherit; }
   margin: 0;
   padding-left: 18px;
   border-left: 1px solid var(--map-line);
+  /* El amarillo del mapa estelar, el de su fila en la portada y el de su enlace en las cabeceras. */
+  color: #ffd400;
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.04em;

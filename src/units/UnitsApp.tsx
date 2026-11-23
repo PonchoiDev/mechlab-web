@@ -20,6 +20,7 @@ import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
 import { RARITY_COLORS } from '../starmap/rarityColors';
+import { BrandMark } from '../components/BrandMark';
 
 const data = unitsJson as unknown as UnitsData;
 
@@ -142,7 +143,7 @@ export function UnitsApp() {
     <div className="units">
       <header className="units-topbar">
         <a className="units-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Enemy units</h1>

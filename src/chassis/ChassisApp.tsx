@@ -33,6 +33,7 @@ import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SupportLink } from '../components/SupportLink';
 import { WhatsNew } from '../components/WhatsNew';
 import { ChassisTable, MinimumStepper, type ChassisColumn } from '../components/ChassisTable';
+import { BrandMark } from '../components/BrandMark';
 
 const mechs = mechsJson as unknown as Mech[];
 const ROWS = getChassisRows(mechs);
@@ -125,7 +126,7 @@ export function ChassisApp() {
     <div className="units arsenal chassis">
       <header className="units-topbar">
         <a className="units-brand" href="/">
-          <span aria-hidden="true">M</span>
+          <BrandMark />
           <span>MW Builder</span>
         </a>
         <h1>Chassis</h1>
