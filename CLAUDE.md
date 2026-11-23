@@ -34,6 +34,8 @@ python3 tools/imagenes_sarna_battletech.py   # tools/datos-juego/battletech/unid
 python3 tools/generar_unidades_battletech.py # src/data/battletech/units.json (lee items.json: va después)
 python3 tools/extraer_flashpoints_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/flashpoints/
 python3 tools/generar_flashpoints_battletech.py # src/data/battletech/flashpoints.json (lee el mapa y el MechLab de BATTLETECH: va después)
+python3 tools/extraer_logos.py "<carpeta de MW5>" "<carpeta de BATTLETECH>"  # site/mw5-logo.png y site/battletech-logo.png, para la portada
+python3 tools/imagenes_portada.py  # site/banner/, los dibujos de Sarna del banner de la portada, en líneas sobre transparente
 ```
 
 Antes de dar algo por terminado: `npm run lint`, `npm test` y `npm run build` sin errores.

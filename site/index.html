@@ -30,8 +30,9 @@
         --text: #e8eee5;
         --muted: #929d90;
         --lime: #c3ed62;
-        --cyan: #69d9ce;
         --amber: #f2b75e;
+        --mw5: #f0482a;
+        --battletech: #f6a21c;
         --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
         --sans: 'Manrope', 'Segoe UI', sans-serif;
         color-scheme: dark;
@@ -42,8 +43,6 @@
       body {
         margin: 0;
         min-height: 100svh;
-        display: flex;
-        flex-direction: column;
         color: var(--text);
         background-color: var(--bg);
         background-image:
@@ -54,14 +53,7 @@
         font-family: var(--sans);
       }
 
-      .shell {
-        width: min(1200px, 100%);
-        margin: 0 auto;
-        padding: 22px 28px 32px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
+      .shell { width: min(1200px, 100%); margin: 0 auto; padding: 22px 28px 32px; }
 
       /* Cabecera */
 
@@ -74,521 +66,17 @@
         border-bottom: 1px solid var(--line);
       }
 
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 13px;
-      }
-
-      .brand-mark {
-        display: grid;
-        place-items: center;
-        width: 42px;
-        height: 42px;
-        color: #18200f;
-        background: var(--lime);
-        font: 600 22px var(--mono);
-      }
-
-      .eyebrow {
-        margin: 0;
-        color: var(--muted);
-        font: 500 10px var(--mono);
-        letter-spacing: 0.08em;
-      }
-
-      .brand h1 {
-        margin: 3px 0 0;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 1;
-      }
-
-      .brand h1 span {
-        color: var(--lime);
-        font: 600 17px var(--mono);
-      }
-
-      .topbar-note {
-        color: var(--muted);
-        font: 500 10px var(--mono);
-        letter-spacing: 0.06em;
-        text-align: right;
-      }
-
-      /* Presentación */
-
-      .intro {
-        padding: 40px 0 32px;
-      }
-
-      .intro h2 {
-        margin: 0;
-        max-width: 720px;
-        font-size: clamp(30px, 5vw, 48px);
-        font-weight: 800;
-        line-height: 1.08;
-        letter-spacing: -0.01em;
-      }
-
-      .intro h2 em {
-        color: var(--lime);
-        font-style: normal;
-      }
-
-      .intro p {
-        margin: 16px 0 0;
-        max-width: 560px;
-        color: var(--muted);
-        font-size: 16px;
-        line-height: 1.6;
-      }
-
-      /* Estantería de carátulas */
-
-      .shelf-header {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .shelf-header h3 {
-        margin: 0;
-        color: var(--muted);
-        font: 500 11px var(--mono);
-        letter-spacing: 0.08em;
-      }
-
-      .shelf-header span {
-        color: var(--muted);
-        font: 500 11px var(--mono);
-      }
-
-      /* Una fila por juego, cada una con sus herramientas; un juego nuevo añade su propia fila. */
-      .game-row + .game-row { margin-top: 40px; }
-
-      .game-row .shelf-header h3 {
-        color: var(--text);
-        font-size: 13px;
-        font-weight: 600;
-      }
-
-      .shelf-header h3 small {
-        margin-left: 10px;
-        font-size: 10px;
-        opacity: 0.7;
-      }
-
-      main > .cover.is-placeholder { margin-top: 40px; }
-
-      .intro-features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-        gap: 12px 24px;
-        max-width: 1000px;
-        margin: 24px 0 0;
-        padding: 0;
-        list-style: none;
-        color: var(--muted);
-        font-size: 14px;
-        line-height: 1.5;
-      }
-
-      .intro-features b {
-        display: block;
-        margin-bottom: 2px;
-        color: var(--lime);
-        font: 600 11px var(--mono);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .shelf {
-        display: grid;
-        /* Cuatro carátulas en una fila en escritorio; en pantallas más estrechas, las que quepan. */
-        grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
-        gap: 24px;
-        perspective: 1200px;
-      }
-
-      .cover {
-        --accent: var(--lime);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        aspect-ratio: 3 / 4;
-        overflow: hidden;
-        border: 1px solid var(--line);
-        border-top: 3px solid var(--accent);
-        border-radius: 3px;
-        background:
-          radial-gradient(ellipse at 50% 45%, rgba(105, 217, 206, 0.16), transparent 65%),
-          linear-gradient(180deg, #1c231c 0%, #121612 100%);
-        color: inherit;
-        text-decoration: none;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-        transform-style: preserve-3d;
-        transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
-      }
-
-      a.cover:hover,
-      a.cover:focus-visible {
-        border-color: var(--accent);
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(195, 237, 98, 0.18);
-        transform: translateY(-6px) rotateX(3deg);
-        outline: none;
-      }
-
-      .cover-band {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px 16px;
-        border-bottom: 1px solid rgba(52, 61, 52, 0.8);
-        background: rgba(16, 19, 16, 0.72);
-        font: 600 11px var(--mono);
-        letter-spacing: 0.08em;
-      }
-
-      .cover-band b { color: var(--accent); font-weight: 600; }
-
-      .cover-status {
-        padding: 2px 7px;
-        border: 1px solid rgba(195, 237, 98, 0.45);
-        border-radius: 2px;
-        color: var(--lime);
-        font-size: 9px;
-      }
-
-      /* El dibujo de Sarna es de línea negra sobre blanco: invertido y en modo pantalla queda como un holograma. */
-      .cover-art {
-        position: absolute;
-        inset: 44px 0 0;
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-      }
-
-      .cover-art img {
-        width: 100%;
-        height: 82%;
-        object-fit: contain;
-        filter: invert(1) sepia(1) hue-rotate(40deg) saturate(1.6) brightness(0.95);
-        mix-blend-mode: screen;
-        opacity: 0.6;
-        mask-image: radial-gradient(ellipse 48% 50% at 50% 46%, #000 55%, transparent 100%);
-        transition: opacity 220ms ease, transform 400ms ease;
-      }
-
-      a.cover:hover .cover-art img,
-      a.cover:focus-visible .cover-art img {
-        opacity: 0.75;
-        transform: scale(1.03);
-      }
-
-      .cover-title {
-        position: relative;
-        z-index: 2;
-        margin-top: auto;
-        padding: 80px 18px 18px;
-        background: linear-gradient(180deg, transparent, rgba(16, 19, 16, 0.92) 45%);
-      }
-
-      .cover-title small {
-        display: block;
-        color: var(--muted);
-        font: 600 11px var(--mono);
-        letter-spacing: 0.16em;
-      }
-
-      .cover-title strong {
-        display: block;
-        margin-top: 4px;
-        font-size: 30px;
-        font-weight: 800;
-        line-height: 0.95;
-        letter-spacing: -0.01em;
-        text-transform: uppercase;
-      }
-
-      .cover-title strong span {
-        display: block;
-        color: var(--accent);
-      }
-
-      .cover-meta {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 6px 10px;
-        margin: 12px 0 0;
-        color: var(--muted);
-        font: 500 10px var(--mono);
-        text-transform: uppercase;
-      }
-
-      .cover-dlc {
-        padding: 3px 8px;
-        border-radius: 2px;
-        color: #18200f;
-        background: var(--lime);
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        box-shadow: 0 0 14px rgba(195, 237, 98, 0.35);
-      }
-
-      .cover-action {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px 18px;
-        border-top: 1px solid var(--line);
-        background: rgba(16, 19, 16, 0.92);
-        color: var(--accent);
-        font: 600 12px var(--mono);
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-      }
-
-      .cover-action span { transition: transform 220ms ease; }
-      a.cover:hover .cover-action span { transform: translateX(4px); }
-
-      /* La carátula de las HRQ y campañas de MW5 y de los flashpoints de BATTLETECH, las dos páginas de cadenas de
-         misiones: la DropShip Leopard del TRO 3025, la nave de la compañía en MW5 y con la que empieza la campaña de
-         BATTLETECH, en el rosa de sus páginas. El dibujo es apaisado: va arriba, para no quedar debajo del título. */
-      .cover.is-campaigns { --accent: #ff4fa3; }
-
-      .cover.is-campaigns .cover-art { align-items: flex-start; }
-
-      .cover.is-campaigns .cover-art img {
-        height: 46%;
-        margin-top: 8%;
-        filter: invert(1) sepia(1) hue-rotate(275deg) saturate(5) brightness(1.1);
-        opacity: 0.75;
-      }
-
-      a.cover.is-campaigns:hover,
-      a.cover.is-campaigns:focus-visible {
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(255, 79, 163, 0.22);
-      }
-
-      .cover.is-campaigns .cover-status {
-        border-color: rgba(255, 79, 163, 0.6);
-        color: var(--accent);
-      }
-
-      /* La carátula del mapa es una captura del propio mapa, a color: sin el filtro de holograma. */
-      .cover.is-starmap { --accent: #ffd400; }
-
-      .cover.is-starmap .cover-art img {
-        height: 100%;
-        object-fit: cover;
-        filter: none;
-        mix-blend-mode: normal;
-        opacity: 0.8;
-        mask-image: radial-gradient(ellipse 70% 62% at 50% 46%, #000 50%, transparent 100%);
-      }
-
-      a.cover.is-starmap:hover,
-      a.cover.is-starmap:focus-visible {
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(255, 212, 0, 0.18);
-      }
-
-      a.cover.is-starmap:hover .cover-art img,
-      a.cover.is-starmap:focus-visible .cover-art img { opacity: 0.95; }
-
-      .cover.is-starmap .cover-status {
-        border-color: rgba(255, 212, 0, 0.5);
-        color: var(--accent);
-      }
-
-      /* La carátula de las unidades (MW5 y BATTLETECH): dibujo de línea como el del MechLab, en el rojo de los
-         blancos hostiles. */
-      .cover.is-units { --accent: #ff5a3c; }
-
-      .cover.is-units .cover-art img {
-        filter: invert(1) sepia(1) hue-rotate(-35deg) saturate(2.4) brightness(0.95);
-      }
-
-      a.cover.is-units:hover,
-      a.cover.is-units:focus-visible {
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(255, 90, 60, 0.2);
-      }
-
-      .cover.is-units .cover-status {
-        border-color: rgba(255, 90, 60, 0.55);
-        color: var(--accent);
-      }
-
-      /* Las carátulas de las listas de chasis: el Marauder (MW5) y el Hunchback (BATTLETECH) de Sarna, en el naranja de su página. */
-      .cover.is-chassis { --accent: #ff9f1c; }
-
-      .cover.is-chassis .cover-art img {
-        filter: invert(1) sepia(1) hue-rotate(-10deg) saturate(3) brightness(0.95);
-      }
-
-      a.cover.is-chassis:hover,
-      a.cover.is-chassis:focus-visible {
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(255, 159, 28, 0.22);
-      }
-
-      .cover.is-chassis .cover-status {
-        border-color: rgba(255, 159, 28, 0.6);
-        color: var(--accent);
-      }
-
-      /* La carátula de los pilotos: el dibujo del MechWarrior del TRO 2750, en el azul de las academias. */
-      .cover.is-pilots { --accent: #2f8cff; }
-
-      .cover.is-pilots .cover-art img {
-        filter: invert(1) sepia(1) hue-rotate(170deg) saturate(3) brightness(0.95);
-      }
-
-      a.cover.is-pilots:hover,
-      a.cover.is-pilots:focus-visible {
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(47, 140, 255, 0.22);
-      }
-
-      .cover.is-pilots .cover-status {
-        border-color: rgba(47, 140, 255, 0.6);
-        color: var(--accent);
-      }
-
-      /* Las carátulas de las armas y el equipo, en el violeta de sus páginas: el láser grande de Sarna en MW5 y
-         el PPC en BATTLETECH. El dibujo es apaisado: va arriba, para no quedar debajo del título. */
-      .cover.is-equipment,
-      .cover.is-bt-equipment { --accent: #a77bff; }
-
-      .cover.is-equipment .cover-art,
-      .cover.is-bt-equipment .cover-art { align-items: flex-start; }
-
-      .cover.is-equipment .cover-art img,
-      .cover.is-bt-equipment .cover-art img {
-        height: 58%;
-        margin-top: 6%;
-        filter: invert(1) sepia(1) hue-rotate(215deg) saturate(5) brightness(1.1);
-        opacity: 0.75;
-      }
-
-      a.cover.is-equipment:hover,
-      a.cover.is-equipment:focus-visible,
-      a.cover.is-bt-equipment:hover,
-      a.cover.is-bt-equipment:focus-visible {
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px rgba(167, 123, 255, 0.22);
-      }
-
-      .cover.is-equipment .cover-status,
-      .cover.is-bt-equipment .cover-status {
-        border-color: rgba(167, 123, 255, 0.6);
-        color: var(--accent);
-      }
-
-      /* Las carátulas del MechLab y la Argo de BATTLETECH son ilustraciones del propio juego, a color, como la
-         captura del mapa: el MechLab, en el verde del de MW5; la Argo, en el turquesa de su página. */
-      .cover.is-bt-mechlab { --accent: var(--lime); --glow: rgba(195, 237, 98, 0.18); --status: rgba(195, 237, 98, 0.5); }
-      .cover.is-argo { --accent: #35c9c1; --glow: rgba(53, 201, 193, 0.2); --status: rgba(53, 201, 193, 0.55); }
-
-      :is(.cover.is-bt-mechlab, .cover.is-argo) .cover-art img {
-        height: 100%;
-        object-fit: cover;
-        filter: none;
-        mix-blend-mode: normal;
-        opacity: 0.7;
-        mask-image: radial-gradient(ellipse 70% 62% at 50% 46%, #000 50%, transparent 100%);
-      }
-
-      :is(a.cover.is-bt-mechlab, a.cover.is-argo):is(:hover, :focus-visible) {
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px var(--glow);
-      }
-
-      :is(a.cover.is-bt-mechlab, a.cover.is-argo):is(:hover, :focus-visible) .cover-art img { opacity: 0.9; }
-
-      /* Yang trabajando en el taller (uixTxrSpot_YangWorking), recortado en vertical: la ilustración es oscura y
-         se aclara un poco. */
-      .cover.is-bt-mechlab .cover-art img { filter: brightness(1.25) contrast(1.05); opacity: 0.85; }
-      a.cover.is-bt-mechlab:is(:hover, :focus-visible) .cover-art img { opacity: 1; }
-
-      :is(.cover.is-bt-mechlab, .cover.is-argo) .cover-status {
-        border-color: var(--status);
-        color: var(--accent);
-      }
-
-      /* La carátula del MechLab de MW5: Fahad, el jefe de mantenimiento de la compañía, con su retrato del juego
-         (pilotPortrait_128px_0014_fahad), que tiene el fondo transparente. Va arriba y se funde con el título. */
-      .cover.is-mercs-mechlab .cover-art { align-items: flex-start; }
-
-      .cover.is-mercs-mechlab .cover-art img {
-        height: 80%;
-        object-fit: contain;
-        object-position: top;
-        filter: none;
-        mix-blend-mode: normal;
-        opacity: 0.9;
-        mask-image: linear-gradient(180deg, #000 62%, transparent 96%);
-      }
-
-      a.cover.is-mercs-mechlab:is(:hover, :focus-visible) .cover-art img { opacity: 1; }
-
-      /* Hueco para los próximos juegos: una franja a lo ancho, debajo de las carátulas. */
-      .cover.is-placeholder {
-        grid-column: 1 / -1;
-        flex-direction: row;
-        flex-wrap: wrap;
-        aspect-ratio: auto;
-        align-items: center;
-        justify-content: center;
-        gap: 10px 14px;
-        padding: 18px 16px;
-        border: 1px dashed var(--line);
-        background: rgba(25, 29, 25, 0.35);
-        box-shadow: none;
-        color: var(--muted);
-        text-align: center;
-      }
-
-      .cover.is-placeholder strong {
-        font: 600 12px var(--mono);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .cover.is-placeholder p {
-        margin: 0;
-        font-size: 13px;
-        line-height: 1.5;
-      }
-
-      .placeholder-mark {
-        display: grid;
-        place-items: center;
-        width: 32px;
-        height: 32px;
-        border: 1px dashed var(--line);
-        font: 500 20px var(--mono);
-      }
-
-      .site-footer {
-        margin-top: 48px;
-        padding: 14px 0 4px;
-        border-top: 1px solid var(--line);
-        color: var(--muted);
-        font-size: 11px;
-        line-height: 1.6;
-      }
-
-      .site-footer p { margin: 0; }
-      .site-footer p + p { margin-top: 10px; }
-      .site-footer p > a:not(.support-link) { color: var(--muted); }
+      .brand { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
+      .brand-mark { width: 44px; height: 44px; flex: none; color: var(--lime); transition: transform 500ms ease; }
+      /* Media vuelta: el hexágono queda igual y, al revés, la M es una W y la W una M, así que sigue diciendo MW. */
+      .brand:hover .brand-mark,
+      .brand:focus-visible .brand-mark { transform: rotate(180deg); }
+      .brand:focus-visible { outline: none; }
+      .brand h1 { margin: 0; font-size: 22px; font-weight: 800; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; }
+      .brand h1 span { color: var(--lime); }
+      .brand-sub { margin: 4px 0 0; color: var(--muted); font: 500 10px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
+
+      .topbar-side { display: flex; align-items: center; gap: 16px; }
 
       /* Campana de novedades, la misma del MechLab: comparten las entradas y lo ya visto. */
       .whats-new { position: relative; }
@@ -617,6 +105,21 @@
       }
 
       .whats-new-button.has-unread { color: var(--text); }
+
+      /* Al pasar el ratón la campana se balancea como si sonara: desde el asa, con golpes cada vez más cortos. */
+      .whats-new-button svg { transform-origin: 50% 12%; }
+      .whats-new-button:hover svg,
+      .whats-new-button:focus-visible svg { animation: bell-ring 900ms ease-in-out; }
+
+      @keyframes bell-ring {
+        0%, 100% { transform: rotate(0); }
+        12% { transform: rotate(18deg); }
+        26% { transform: rotate(-15deg); }
+        40% { transform: rotate(11deg); }
+        54% { transform: rotate(-8deg); }
+        68% { transform: rotate(5deg); }
+        82% { transform: rotate(-2deg); }
+      }
 
       .whats-new-dot {
         position: absolute;
@@ -660,6 +163,7 @@
           margin-top: 6px;
         }
       }
+
       .whats-new-panel:focus-visible { outline: 2px solid var(--lime); outline-offset: -2px; }
 
       .whats-new-panel h2 {
@@ -683,12 +187,6 @@
         padding-left: 16px;
         font-size: 12px;
         line-height: 1.45;
-      }
-
-      .topbar-side {
-        display: flex;
-        align-items: center;
-        gap: 16px;
       }
 
       /* Feedback: el botón va en la cabecera, junto a la campana, como en los MechLabs. */
@@ -806,15 +304,6 @@
       .feedback-actions .feedback-send { color: #18200f; background: var(--lime); border-color: var(--lime); }
       .feedback-actions .feedback-send:disabled { opacity: 0.6; cursor: default; }
 
-      .support-note {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 8px 14px;
-        color: var(--text);
-        font-size: 13px;
-      }
-
       .support-link {
         display: inline-flex;
         flex-shrink: 0;
@@ -833,10 +322,8 @@
         transition: color 120ms ease, background-color 120ms ease;
       }
 
-      .support-link-icon {
-        font-size: 17px;
-        line-height: 1;
-      }
+      .topbar-side .support-link { min-height: 34px; }
+      .support-link-icon { font-size: 17px; line-height: 1; }
 
       .support-link:hover,
       .support-link:focus-visible {
@@ -845,35 +332,643 @@
         outline: none;
       }
 
-      @media (max-width: 600px) {
+      /* Banner: el titular a la izquierda, una escena en holograma verde en el centro y, a la derecha, la última
+         novedad y la versión de los datos de cada juego. */
+
+      .banner {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        align-items: center;
+        gap: 32px;
+        min-height: 250px;
+        margin: 24px 0 32px;
+        padding: 28px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--lime);
+        border-radius: 3px;
+        background:
+          radial-gradient(ellipse 40% 80% at 50% 100%, rgba(195, 237, 98, 0.14), transparent 70%),
+          linear-gradient(180deg, #151a15 0%, #0e110e 100%);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      }
+
+      .banner h2 {
+        position: relative;
+        z-index: 1;
+        max-width: 330px;
+        margin: 0;
+        font-size: clamp(24px, 2.6vw, 32px);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+
+      .banner-art { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+      .banner-floor {
+        position: absolute;
+        left: -20%;
+        right: -20%;
+        bottom: -10px;
+        height: 55%;
+        background:
+          linear-gradient(rgba(195, 237, 98, 0.4) 1px, transparent 1px) 0 0 / 100% 22px,
+          linear-gradient(90deg, rgba(195, 237, 98, 0.4) 1px, transparent 1px) 0 0 / 44px 100%;
+        transform: perspective(300px) rotateX(58deg);
+        transform-origin: 50% 100%;
+        -webkit-mask-image: radial-gradient(ellipse 40% 100% at 50% 100%, #000 25%, transparent 80%);
+        mask-image: radial-gradient(ellipse 40% 100% at 50% 100%, #000 25%, transparent 80%);
+      }
+
+      /* Los dibujos de Sarna, pasados a líneas sobre transparente por tools/imagenes_portada.py, se usan de
+         máscara y se pintan del verde de la web: así el color es exacto y el fondo blanco del dibujo no aparece
+         como una caja. La segunda máscara (--fade) difumina los bordes. */
+      .banner-mech,
+      .banner-dropship {
+        --fade: radial-gradient(closest-side, #000 55%, transparent 100%);
+        position: absolute;
+        bottom: 3%;
+        translate: -50% 0;
+        background: var(--lime);
+        -webkit-mask: var(--img) center / contain no-repeat, var(--fade);
+        -webkit-mask-composite: source-in;
+        mask: var(--img) center / contain no-repeat, var(--fade);
+        mask-composite: intersect;
+        filter: drop-shadow(0 0 5px rgba(195, 237, 98, 0.45));
+      }
+
+      /* Detrás, la DropShip Union posada de la que acaban de bajar: grande, lejos, tenue y algo desenfocada,
+         para que sus líneas no se mezclen con las de los 'Mechs. */
+      .banner-dropship {
+        --fade: radial-gradient(closest-side, #000 60%, transparent 100%);
+        left: 50.5%;
+        bottom: 26%;
+        height: 96%;
+        opacity: 0.18;
+        filter: blur(0.6px);
+      }
+
+      /* Delante, el Warhammer, más grande y brillante, con el Black Knight y el Kodiak a los lados. Su óvalo
+         llega justo a los bordes de la imagen: deja enteros el lanzamisiles y los pies sin cortar en seco
+         los lados del dibujo. */
+      .banner-mech { height: 76%; opacity: 0.5; }
+      .banner-mech.is-left { left: 35%; }
+      .banner-mech.is-lead {
+        --fade: radial-gradient(ellipse 53% 56% at 50% 50%, #000 78%, transparent 100%);
+        left: 50.5%;
+        height: 94%;
+        opacity: 0.9;
+      }
+      .banner-mech.is-right { left: 66%; scale: -1 1; }
+
+      /* El lado del titular, más oscuro para que se lea. */
+      .banner::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: linear-gradient(90deg, rgba(14, 17, 14, 0.95) 0%, rgba(14, 17, 14, 0.7) 28%, transparent 40%, transparent 74%, rgba(14, 17, 14, 0.6) 100%);
+        pointer-events: none;
+      }
+
+      .blink {
+        width: 7px;
+        height: 7px;
+        flex: none;
+        border-radius: 50%;
+        background: var(--lime);
+        box-shadow: 0 0 8px var(--lime);
+        animation: blink 1.6s steps(2, jump-none) infinite;
+      }
+
+      @keyframes blink { 50% { opacity: 0.25; } }
+
+      /* Esquinas de visor en lugar de un marco completo. */
+      .readout {
+        --corner: rgba(195, 237, 98, 0.7);
+        position: relative;
+        z-index: 1;
+        padding: 16px 18px;
+        background:
+          linear-gradient(var(--corner), var(--corner)) top left / 14px 1px,
+          linear-gradient(var(--corner), var(--corner)) top left / 1px 14px,
+          linear-gradient(var(--corner), var(--corner)) top right / 14px 1px,
+          linear-gradient(var(--corner), var(--corner)) top right / 1px 14px,
+          linear-gradient(var(--corner), var(--corner)) bottom left / 14px 1px,
+          linear-gradient(var(--corner), var(--corner)) bottom left / 1px 14px,
+          linear-gradient(var(--corner), var(--corner)) bottom right / 14px 1px,
+          linear-gradient(var(--corner), var(--corner)) bottom right / 1px 14px,
+          rgba(14, 17, 14, 0.75);
+        background-repeat: no-repeat;
+        backdrop-filter: blur(2px);
+      }
+
+      .readout-update {
+        display: grid;
+        gap: 2px;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px dashed var(--line);
+      }
+
+      .readout-update[hidden] { display: none; }
+
+      .readout-label,
+      .readout-data dt {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font: 500 10px var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .readout-label { margin-bottom: 4px; color: var(--lime); }
+      .readout-update time { font: 600 18px var(--mono); }
+
+      .readout-more {
+        justify-self: start;
+        margin-top: 6px;
+        padding: 0;
+        color: var(--lime);
+        background: none;
+        border: 0;
+        font: 600 10px var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .readout-more:hover,
+      .readout-more:focus-visible { text-decoration: underline; outline: none; }
+
+      .readout-data { margin: 0; }
+      .readout-data dt { margin-bottom: 6px; }
+
+      .readout-data dd {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        margin: 4px 0 0;
+        color: var(--muted);
+        font: 500 11px var(--mono);
+      }
+
+      .readout-data dd b { margin-right: auto; color: var(--text); font-weight: 600; }
+      .readout-data dd span + span::before { content: '·'; margin: 0 6px; }
+
+      .section-label {
+        margin: 0 0 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        font: 500 11px var(--mono);
+        letter-spacing: 0.08em;
+      }
+
+      /* Carátulas de juego: en la primera fila y, debajo, a todo el ancho, la lista de herramientas del juego
+         abierto. En móvil cada lista va justo debajo de su carátula (order). */
+
+      .games {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .game-cover {
+        --accent: var(--lime);
+        position: relative;
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 300px;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--accent);
+        border-radius: 3px;
+        background: linear-gradient(180deg, #1c231c 0%, #121612 100%);
+        color: inherit;
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+        transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, opacity 220ms ease;
+      }
+
+      .game-cover.is-mw5 { --accent: var(--mw5); --mech-filter: invert(1) sepia(1) hue-rotate(-30deg) saturate(5) brightness(1); }
+      .game-cover.is-battletech { --accent: var(--battletech); --mech-filter: invert(1) sepia(1) hue-rotate(-12deg) saturate(4) brightness(1.05); }
+
+      .game-cover:hover,
+      .game-cover:focus-visible {
+        border-color: var(--accent);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--accent), 0 0 32px color-mix(in srgb, var(--accent) 22%, transparent);
+        transform: translateY(-4px);
+        outline: none;
+      }
+
+      .game-cover[aria-expanded='true'] {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent), 0 0 40px color-mix(in srgb, var(--accent) 25%, transparent);
+        transform: none;
+      }
+
+      /* Con un juego abierto, el otro se apaga un poco para que se vea cuál manda en la lista de abajo. */
+      .games.has-open .game-cover[aria-expanded='false'] { opacity: 0.6; }
+      .games.has-open .game-cover[aria-expanded='false']:hover { opacity: 1; }
+
+      /* Muesca que une la carátula abierta con su lista. */
+      .game-cover[aria-expanded='true']::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        z-index: 3;
+        width: 18px;
+        height: 9px;
+        background: var(--accent);
+        clip-path: polygon(0 100%, 50% 0, 100% 100%);
+        transform: translateX(-50%);
+      }
+
+      .game-art { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+      .game-art .bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.45;
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+        mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+        transition: opacity 300ms ease, transform 600ms ease;
+      }
+
+      /* El 'Mech de Sarna, en holograma del color del juego, sobre su mapa estelar. La caja de la imagen es la
+         imagen misma (ancho automático), para que la máscara funda sus cuatro bordes y no se vea el rectángulo
+         del dibujo; va pegado al borde para no molestar al texto. */
+      .game-art .mech {
+        position: absolute;
+        right: -3%;
+        top: 50%;
+        width: auto;
+        max-width: 60%;
+        height: 82%;
+        translate: 0 -50%;
+        filter: var(--mech-filter);
+        mix-blend-mode: screen;
+        opacity: 0.85;
+        -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+        mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+        transition: transform 600ms ease, opacity 300ms ease;
+      }
+
+      .game-cover:hover .game-art .bg { opacity: 0.6; transform: scale(1.03); }
+      .game-cover:hover .game-art .mech { transform: scale(1.04); opacity: 1; }
+
+      /* Oscurece el lado del título y el pie sobre toda la carátula: un degradado por bloque dejaba una franja. */
+      .game-art::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(16, 19, 16, 0.9) 0%, rgba(16, 19, 16, 0.55) 45%, transparent 75%),
+          linear-gradient(180deg, transparent 40%, rgba(16, 19, 16, 0.6) 100%);
+      }
+
+      /* MW5 va en espejo de BATTLETECH: el 'Mech a la izquierda, mirando hacia dentro, y el texto pegado a la
+         derecha. El oscurecido y el fundido del mapa también se invierten, para que el texto se siga leyendo. */
+      .game-cover.is-mw5 .game-art .mech { right: auto; left: -3%; transform: scaleX(-1); }
+      .game-cover.is-mw5:hover .game-art .mech { transform: scaleX(-1.04) scaleY(1.04); }
+
+      .game-cover.is-mw5 .game-art .bg {
+        -webkit-mask-image: linear-gradient(270deg, transparent 0%, #000 45%);
+        mask-image: linear-gradient(270deg, transparent 0%, #000 45%);
+      }
+
+      .game-cover.is-mw5 .game-art::after {
+        background:
+          linear-gradient(270deg, rgba(16, 19, 16, 0.9) 0%, rgba(16, 19, 16, 0.55) 45%, transparent 75%),
+          linear-gradient(180deg, transparent 40%, rgba(16, 19, 16, 0.6) 100%);
+      }
+
+      .game-cover.is-mw5 .game-title { text-align: right; }
+      .game-cover.is-mw5 .cover-logo img { margin-left: auto; }
+      .game-cover.is-mw5 .game-meta { justify-content: flex-end; }
+
+      .game-band {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 18px;
+        border-bottom: 1px solid rgba(52, 61, 52, 0.8);
+        background: rgba(16, 19, 16, 0.72);
+        font: 600 11px var(--mono);
+        letter-spacing: 0.08em;
+      }
+
+      .game-band b { color: var(--accent); font-weight: 600; }
+
+      .game-title {
+        position: relative;
+        z-index: 2;
+        display: block;
+        margin-top: auto;
+        padding: 60px 22px 18px;
+      }
+
+      .game-title small { display: block; color: var(--muted); font: 600 11px var(--mono); letter-spacing: 0.16em; }
+
+      /* El logo oficial de cada juego, sacado de sus archivos por tools/extraer_logos.py. */
+      .cover-logo { display: block; margin-top: 10px; }
+      .cover-logo img { display: block; width: min(100%, 380px); height: auto; filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6)); }
+
+      /* El logo de BATTLETECH del juego es todo blanco; la A va en naranja, como en la portada del juego. Encima
+         va una capa naranja con la forma del logo, recortada a la A: sigue su lado derecho, porque la barra de
+         la T arranca (x 344 de 1600) antes de donde acaba la base de la A (x 361) y un rectángulo la manchaba.
+         La capa mide lo que su contenedor: el ancho va en el contenedor y la imagen lo llena. */
+      .logo-battletech { position: relative; display: block; width: min(100%, 330px); }
+      .cover-logo .logo-battletech img { width: 100%; }
+
+      .logo-battletech::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--battletech);
+        -webkit-mask: url(/battletech-logo.png) 0 0 / 100% 100% no-repeat;
+        mask: url(/battletech-logo.png) 0 0 / 100% 100% no-repeat;
+        clip-path: polygon(12.1% 0, 17.8% 0, 22.9% 59.5%, 22.9% 100%, 12.1% 100%);
+      }
+
+      .game-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 0;
+        margin: 12px 0 0;
+        color: var(--muted);
+        font: 500 10px var(--mono);
+        text-transform: uppercase;
+      }
+
+      .game-action {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 22px;
+        border-top: 1px solid var(--line);
+        background: rgba(16, 19, 16, 0.92);
+        color: var(--accent);
+        font: 600 12px var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .game-action .chev { display: block; transition: transform 220ms ease; }
+      .game-cover[aria-expanded='true'] .game-action .chev { transform: rotate(180deg); }
+      .game-cover[aria-expanded='true'] .label-closed,
+      .game-cover[aria-expanded='false'] .label-open { display: none; }
+
+      /* Lista de herramientas de un juego */
+
+      .tool-list {
+        --accent: var(--lime);
+        order: 2;
+        grid-column: 1 / -1;
+        margin: -8px 0 0;
+        padding: 0;
+        list-style: none;
+        border: 1px solid var(--accent);
+        border-radius: 3px;
+        background: rgba(25, 29, 25, 0.85);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      }
+
+      .tool-list[data-game='mw5'] { --accent: var(--mw5); }
+      .tool-list[data-game='battletech'] { --accent: var(--battletech); }
+      .tool-list[hidden] { display: none; }
+      .tool-list li + li { border-top: 1px solid var(--line); }
+      .tool-list li { animation: row-in 280ms ease both; animation-delay: calc(var(--i) * 35ms); }
+
+      @keyframes row-in {
+        from { opacity: 0; transform: translateY(-6px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      .tool {
+        --tool: var(--lime);
+        --art-filter: invert(1) sepia(1) hue-rotate(40deg) saturate(1.6) brightness(0.95);
+        position: relative;
+        display: grid;
+        grid-template-columns: 132px minmax(0, 1.3fr) minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 22px;
+        min-height: 84px;
+        padding: 0 22px 0 0;
+        color: inherit;
+        text-decoration: none;
+        transition: background-color 160ms ease;
+      }
+
+      .tool::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 3px;
+        background: var(--tool);
+        opacity: 0.55;
+        transition: opacity 160ms ease, width 160ms ease;
+      }
+
+      .tool:hover,
+      .tool:focus-visible { background: var(--raised); outline: none; }
+      .tool:hover::before,
+      .tool:focus-visible::before { opacity: 1; width: 5px; }
+
+      .tool-thumb {
+        position: relative;
+        align-self: stretch;
+        overflow: hidden;
+        background: radial-gradient(ellipse at 50% 50%, rgba(105, 217, 206, 0.1), transparent 70%), #141914;
+        border-right: 1px solid var(--line);
+      }
+
+      /* Los dibujos de Sarna son de línea negra sobre blanco: invertidos y en modo pantalla quedan como un
+         holograma del color de la herramienta. */
+      .tool-thumb img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 6px 10px;
+        filter: var(--art-filter);
+        mix-blend-mode: screen;
+        opacity: 0.75;
+        transition: opacity 160ms ease, transform 300ms ease;
+      }
+
+      /* Las capturas e ilustraciones del juego van a color y recortadas. */
+      .tool.is-photo .tool-thumb img { object-fit: cover; padding: 0; filter: none; mix-blend-mode: normal; opacity: 0.8; }
+      .tool.is-portrait .tool-thumb img { object-position: 50% 15%; filter: brightness(1.25); }
+      .tool:hover .tool-thumb img { opacity: 1; transform: scale(1.06); }
+
+      .tool-name small {
+        display: block;
+        color: var(--tool);
+        font: 600 10px var(--mono);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .tool-name strong {
+        display: block;
+        margin-top: 3px;
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+      }
+
+      .tool-name strong span { color: var(--tool); }
+
+      .tool-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px 0;
+        margin: 0;
+        color: var(--muted);
+        font: 500 10px var(--mono);
+        text-transform: uppercase;
+      }
+
+      /* Un punto centrado entre dato y dato, siempre el mismo. */
+      :is(.tool-meta, .game-meta) span + span::before { content: '·'; margin: 0 8px; opacity: 0.8; }
+
+      .tool-open {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: var(--tool);
+        font: 600 11px var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .tool-open .arrow { transition: transform 160ms ease; }
+      .tool:hover .tool-open .arrow { transform: translateX(4px); }
+
+      /* La herramienta principal de cada juego, el MechLab, algo más alta. */
+      .tool.is-primary { min-height: 104px; }
+      .tool.is-primary .tool-name strong { font-size: 23px; }
+      .tool.is-primary::before { opacity: 1; }
+
+      /* El color de cada herramienta, el de su página, y su holograma. */
+      .tool.is-chassis { --tool: #ff9f1c; --art-filter: invert(1) sepia(1) hue-rotate(-10deg) saturate(3) brightness(0.95); }
+      .tool.is-campaigns { --tool: #ff4fa3; --art-filter: invert(1) sepia(1) hue-rotate(275deg) saturate(5) brightness(1.1); }
+      .tool.is-starmap { --tool: #ffd400; }
+      .tool.is-units { --tool: #ff5a3c; --art-filter: invert(1) sepia(1) hue-rotate(-35deg) saturate(2.4) brightness(0.95); }
+      .tool.is-pilots { --tool: #2f8cff; --art-filter: invert(1) sepia(1) hue-rotate(170deg) saturate(3) brightness(0.95); }
+      .tool.is-equipment { --tool: #a77bff; --art-filter: invert(1) sepia(1) hue-rotate(215deg) saturate(5) brightness(1.1); }
+      .tool.is-argo { --tool: #35c9c1; }
+
+      .site-footer {
+        margin-top: 48px;
+        padding: 14px 0 4px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.6;
+      }
+
+      .site-footer p { margin: 0; }
+      .site-footer p + p { margin-top: 10px; }
+      .site-footer p > a:not(.support-link) { color: var(--muted); }
+
+      .support-note {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 14px;
+        color: var(--text);
+        font-size: 13px;
+      }
+
+      /* Tableta: el banner pasa a una columna y los datos de cada herramienta bajan debajo de su nombre. */
+      @media (max-width: 860px) {
+        .banner { grid-template-columns: minmax(0, 1fr); align-items: start; gap: 22px; padding: 22px 18px; }
+        .banner-mech.is-lead { left: 72%; height: 80%; opacity: 0.4; }
+        .banner-dropship,
+        .banner-mech.is-left,
+        .banner-mech.is-right { display: none; }
+        .banner::after { background: linear-gradient(180deg, rgba(14, 17, 14, 0.5), rgba(14, 17, 14, 0.85)); }
+        .tool { grid-template-columns: 104px minmax(0, 1fr) auto; gap: 16px; }
+        .tool-name { padding-top: 12px; }
+        .tool-meta { grid-column: 2; grid-row: 2; padding-bottom: 12px; }
+        .tool-open { grid-column: 3; grid-row: 1 / 3; }
+        .tool-thumb { grid-row: 1 / 3; }
+      }
+
+      /* Móvil: carátulas apiladas, cada lista justo debajo de la suya. */
+      @media (max-width: 640px) {
         .shell { padding: 16px 16px 24px; }
-        .topbar-note { display: none; }
         /* Con la campana, Feedback y Support no caben: Support se queda en la taza. */
-        .topbar-side { gap: 8px; }
-        .topbar-side .support-link { gap: 0; padding: 0 9px; font-size: 0; }
+        .topbar-side { gap: 6px; }
+        .topbar-side .support-link { gap: 0; padding: 0 8px; font-size: 0; }
         .topbar-side .support-link-icon { font-size: 17px; }
-        .intro { padding: 36px 0 28px; }
-        .intro p { font-size: 15px; }
+        .topbar { gap: 8px; }
+        .feedback-button { padding: 0 8px; }
+        .brand { gap: 8px; }
+        .brand-mark { width: 34px; height: 34px; }
+        .brand h1 { font-size: 17px; white-space: nowrap; }
+        .brand-sub { display: none; }
+        .games { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+        .game-cover[data-game='mw5'] { order: 1; }
+        .tool-list[data-game='mw5'] { order: 2; }
+        .game-cover[data-game='battletech'] { order: 3; }
+        .tool-list[data-game='battletech'] { order: 4; }
+        .game-cover { min-height: 230px; }
+        .games.has-open .game-cover[aria-expanded='false'] { opacity: 1; }
+        .game-title { padding: 40px 18px 16px; }
+        .game-art .mech { height: 70%; opacity: 0.6; }
+        .tool { grid-template-columns: 76px minmax(0, 1fr) auto; gap: 12px; padding-right: 14px; }
+        .tool-name strong,
+        .tool.is-primary .tool-name strong { font-size: 16px; }
+        .tool-open .word { display: none; }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .cover, .cover-art img, .cover-action span { transition: none; }
-        a.cover:hover, a.cover:focus-visible { transform: none; }
+        *, *::before, *::after { animation: none !important; transition: none !important; }
       }
     </style>
   </head>
   <body>
     <div class="shell">
       <header class="topbar">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">M</span>
+        <a class="brand" href="/" aria-label="MW Builder, home">
+          <!-- Insignia hexagonal: un guiño a los mapas de hexágonos de BattleTech. -->
+          <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+            <path d="M22 2 39.3 12v20L22 42 4.7 32V12Z" fill="none" stroke="currentColor" stroke-width="2.4" />
+            <path d="M22 8.5 33.7 15.25v13.5L22 35.5 10.3 28.75v-13.5Z" fill="currentColor" opacity=".14" />
+            <text x="22" y="27" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="13" fill="currentColor">MW</text>
+          </svg>
           <div>
-            <p class="eyebrow">FIELD CONFIGURATION SYSTEM</p>
-            <h1>MW Builder <span>MECHLAB</span></h1>
+            <h1>MW <span>Builder</span></h1>
+            <p class="brand-sub">MechWarrior · BattleTech</p>
           </div>
-        </div>
+        </a>
         <div class="topbar-side">
-          <p class="topbar-note">TOOLS FOR MECHWARRIOR<br />AND BATTLETECH GAMES</p>
           <div class="whats-new" hidden>
             <button type="button" class="whats-new-button" aria-haspopup="dialog" aria-expanded="false" aria-label="What's new" title="What's new">
               <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
@@ -893,344 +988,224 @@
       </header>
 
       <main>
-        <section class="intro">
-          <h2>Tools for MechWarrior and BattleTech games, <em>all in one place.</em></h2>
-          <p>
-            A free, ad-free toolkit for each game: MechLabs that follow the game's own fitting rules, star maps,
-            enemy units, pilots, quests and the Argo.
-          </p>
-          <ul class="intro-features">
-            <li><b>MechLab</b> Every chassis, weapon and upgrade, with heat, damage and armor at a glance</li>
-            <li><b>Share</b> Any build fits in one link or an image, ready to post</li>
-            <li><b>Star maps</b> Factions, systems, stores and contracts, as the game shows them</li>
-            <li><b>Planners</b> Pilot traits, academies and Argo upgrades, planned before you spend a C-Bill</li>
+        <section class="banner" aria-labelledby="banner-title">
+          <!-- Dibujos de Sarna pasados a líneas sobre transparente por tools/imagenes_portada.py. -->
+          <div class="banner-art" aria-hidden="true">
+            <div class="banner-floor"></div>
+            <span class="banner-dropship" style="--img: url(/banner/union.png); aspect-ratio: 600 / 511"></span>
+            <span class="banner-mech is-left" style="--img: url(/banner/black-knight.png); aspect-ratio: 335 / 398"></span>
+            <span class="banner-mech is-lead" style="--img: url(/banner/warhammer.png); aspect-ratio: 600 / 622"></span>
+            <span class="banner-mech is-right" style="--img: url(/banner/kodiak.png); aspect-ratio: 343 / 356"></span>
+          </div>
+
+          <h2 id="banner-title">Fan-made tools for MechWarrior and BattleTech games</h2>
+
+          <aside class="readout" aria-label="Updates">
+            <!-- La fecha sale de /changelog.json, la misma lista que la campana de novedades. -->
+            <div class="readout-update" hidden>
+              <span class="readout-label"><span class="blink" aria-hidden="true"></span>Latest update</span>
+              <time class="readout-date"></time>
+              <button type="button" class="readout-more">See what's new <span aria-hidden="true">→</span></button>
+            </div>
+            <dl class="readout-data">
+              <dt>Game data</dt>
+              <dd><b>MW5: Mercenaries</b><span>DLC 9</span><span>Oct 2026 patch</span></dd>
+              <dd><b>BATTLETECH</b><span>1.9.1</span><span>3 DLC</span></dd>
+            </dl>
+          </aside>
+        </section>
+
+        <p class="section-label">CHOOSE YOUR GAME</p>
+
+        <div class="games">
+          <button type="button" class="game-cover is-mw5" data-game="mw5" aria-expanded="true" aria-controls="tools-mw5">
+            <span class="game-art" aria-hidden="true">
+              <img class="bg" src="/starmap-cover.jpg" alt="" onerror="this.remove()" />
+              <img
+                class="mech"
+                src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fthumb%2F2%2F27%2FMarauder_RGilClan_v06.png%2F600px-qengbqjfsx517vx2vegubv0elu840vg.png"
+                alt=""
+                onerror="this.remove()"
+              />
+            </span>
+            <span class="game-band">
+              <b>MW5: MERCENARIES</b>
+              <span>7 TOOLS</span>
+            </span>
+            <span class="game-title">
+              <small>PIRANHA GAMES</small>
+              <strong class="cover-logo"><img src="/mw5-logo.png" alt="MechWarrior 5: Mercenaries" width="1200" height="160" /></strong>
+              <span class="game-meta"><span>639 variants</span><span>6 DLC campaigns</span><span>DLC 9 ready</span></span>
+            </span>
+            <span class="game-action">
+              <span><span class="label-closed">Show tools</span><span class="label-open">Hide tools</span></span>
+              <svg class="chev" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" /></svg>
+            </span>
+          </button>
+
+          <button type="button" class="game-cover is-battletech" data-game="battletech" aria-expanded="true" aria-controls="tools-battletech">
+            <span class="game-art" aria-hidden="true">
+              <img class="bg" src="/battletech-starmap-cover.jpg" alt="" onerror="this.remove()" />
+              <img
+                class="mech"
+                src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F2%2F2b%2FHunchback_RGilClan_v21.png"
+                alt=""
+                onerror="this.remove()"
+              />
+            </span>
+            <span class="game-band">
+              <b>HBS: BATTLETECH</b>
+              <span>7 TOOLS</span>
+            </span>
+            <span class="game-title">
+              <small>HAREBRAINED SCHEMES</small>
+              <strong class="cover-logo"><span class="logo-battletech"><img src="/battletech-logo.png" alt="BATTLETECH" width="1600" height="252" /></span></strong>
+              <span class="game-meta"><span>96 variants</span><span>32 flashpoints</span><span>3 DLC</span></span>
+            </span>
+            <span class="game-action">
+              <span><span class="label-closed">Show tools</span><span class="label-open">Hide tools</span></span>
+              <svg class="chev" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" /></svg>
+            </span>
+          </button>
+
+          <!-- Sin JavaScript se ven las dos listas: el script las pliega al cargar. -->
+          <ul class="tool-list" id="tools-mw5" data-game="mw5" aria-label="MW5: Mercenaries tools">
+            <li style="--i: 0">
+              <a class="tool is-primary" href="/mercs/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fa%2Fa0%2FJI-100_Transportable_Field_Repair_Unit.jpg" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>MechLab</small><strong>Mercenaries <span>MechLab</span></strong></span>
+                <p class="tool-meta"><span>639 variants</span><span>Save &amp; share builds</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 1">
+              <a class="tool is-chassis" href="/mercs/chassis/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fthumb%2F2%2F27%2FMarauder_RGilClan_v06.png%2F600px-qengbqjfsx517vx2vegubv0elu840vg.png" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Chassis</small><strong>Chassis <span>List</span></strong></span>
+                <p class="tool-meta"><span>Stats</span><span>Filters</span><span>Builds</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 2">
+              <a class="tool is-campaigns" href="/mercs/campaigns/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F81%2FLeopard_TRO3025CE.png" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>HRQ &amp; Campaigns</small><strong>Quests <span>&amp; Campaigns</span></strong></span>
+                <p class="tool-meta"><span>64 quests</span><span>6 DLC campaigns</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 3">
+              <a class="tool is-starmap is-photo" href="/mercs/starmap/">
+                <span class="tool-thumb"><img src="/starmap-cover.jpg" alt="" onerror="this.remove()" /></span>
+                <span class="tool-name"><small>Star Map</small><strong>Inner Sphere <span>Star Map</span></strong></span>
+                <p class="tool-meta"><span>3015 to 3060</span><span>Borders by date</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 4">
+              <a class="tool is-units" href="/mercs/units/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fd%2Fd4%2FDemolisher_RGilClan_v25.jpg" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Enemy Units</small><strong>Know your <span>Enemy</span></strong></span>
+                <p class="tool-meta"><span>115 units</span><span>Tanks</span><span>VTOLs</span><span>Turrets</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 5">
+              <a class="tool is-pilots" href="/mercs/pilots/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F9%2F91%2FStandard_Neurohelmet.jpg" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Pilots</small><strong>Pilot traits <span>&amp; Academies</span></strong></span>
+                <p class="tool-meta"><span>184 traits</span><span>18 hero pilots</span><span>93 academies</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 6">
+              <a class="tool is-equipment" href="/mercs/equipment/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F8a%2FWeapn-largelaser.png" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Equipment</small><strong>Weapons <span>&amp; Equipment</span></strong></span>
+                <p class="tool-meta"><span>190 weapons</span><span>149 equipment</span><span>Stats</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
           </ul>
-        </section>
 
-        <section class="game-row" aria-labelledby="game-mw5">
-          <div class="shelf-header">
-            <h3 id="game-mw5">MW5: MERCENARIES <small>PIRANHA GAMES</small></h3>
-            <span>7 TOOLS</span>
-          </div>
-
-          <div class="shelf">
-            <a class="cover is-mercs-mechlab" href="/mercs/">
-              <div class="cover-band">
-                <span><b>MECHLAB</b> · MW5</span>
-                <span class="cover-status">AVAILABLE</span>
-              </div>
-              <div class="cover-art">
-                <img src="/mercs-mechlab-cover.webp" alt="" onerror="this.remove()" />
-              </div>
-              <div class="cover-title">
-                <small>MECHWARRIOR 5</small>
-                <strong>Mercenaries <span>MechLab</span></strong>
-                <p class="cover-meta">
-                  <span>639 variants</span>
-                  <span class="cover-dlc">DLC 9 READY</span>
-                </p>
-              </div>
-              <div class="cover-action">Open MechLab <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-chassis" href="/mercs/chassis/">
-              <div class="cover-band">
-                <span><b>CHASSIS</b> · MW5</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img
-                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fthumb%2F2%2F27%2FMarauder_RGilClan_v06.png%2F600px-qengbqjfsx517vx2vegubv0elu840vg.png"
-                  alt=""
-                  onerror="this.remove()"
-                />
-              </div>
-              <div class="cover-title">
-                <small>MECHWARRIOR 5</small>
-                <strong>Chassis <span>List</span></strong>
-                <p class="cover-meta">
-                  <span>639 variants</span>
-                  <span>Stats · Stock builds</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Chassis <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-campaigns" href="/mercs/campaigns/">
-              <div class="cover-band">
-                <span><b>HRQ &amp; CAMPAIGNS</b> · MW5</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img
-                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F81%2FLeopard_TRO3025CE.png"
-                  alt=""
-                  onerror="this.remove()"
-                />
-              </div>
-              <div class="cover-title">
-                <small>MECHWARRIOR 5</small>
-                <strong>Quests <span>&amp; Campaigns</span></strong>
-                <p class="cover-meta">
-                  <span>64 quests</span>
-                  <span>6 DLC campaigns</span>
-                </p>
-              </div>
-              <div class="cover-action">Open HRQ &amp; Campaigns <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-starmap" href="/mercs/starmap/">
-              <div class="cover-band">
-                <span><b>STAR MAP</b> · MW5</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img src="/starmap-cover.jpg" alt="" onerror="this.remove()" />
-              </div>
-              <div class="cover-title">
-                <small>MECHWARRIOR 5</small>
-                <strong>Inner Sphere <span>Star Map</span></strong>
-                <p class="cover-meta">
-                  <span>3015 to 3060</span>
-                  <span>Borders by date</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Star Map <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-units" href="/mercs/units/">
-              <div class="cover-band">
-                <span><b>ENEMY UNITS</b> · MW5</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img
-                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fd%2Fd4%2FDemolisher_RGilClan_v25.jpg"
-                  alt=""
-                  onerror="this.remove()"
-                />
-              </div>
-              <div class="cover-title">
-                <small>MECHWARRIOR 5</small>
-                <strong>Know your <span>Enemy</span></strong>
-                <p class="cover-meta">
-                  <span>115 units</span>
-                  <span>Tanks · VTOLs · Turrets</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Enemy Units <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-pilots" href="/mercs/pilots/">
-              <div class="cover-band">
-                <span><b>PILOTS</b> · MW5</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img
-                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F2%2F25%2FMechWarrior%2527sCombatSuit_TRO2750.png"
-                  alt=""
-                  onerror="this.remove()"
-                />
-              </div>
-              <div class="cover-title">
-                <small>MECHWARRIOR 5</small>
-                <strong>Pilot traits <span>&amp; Academies</span></strong>
-                <p class="cover-meta">
-                  <span>184 traits</span>
-                  <span>Hero traits · Training</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Pilots <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-equipment" href="/mercs/equipment/">
-              <div class="cover-band">
-                <span><b>EQUIPMENT</b> · MW5</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img
-                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F8a%2FWeapn-largelaser.png"
-                  alt=""
-                  onerror="this.remove()"
-                />
-              </div>
-              <div class="cover-title">
-                <small>MECHWARRIOR 5</small>
-                <strong>Weapons <span>&amp; Equipment</span></strong>
-                <p class="cover-meta">
-                  <span>190 weapons</span>
-                  <span>Every tier · Ammo</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Equipment <span aria-hidden="true">→</span></div>
-            </a>
-          </div>
-        </section>
-
-        <section class="game-row" aria-labelledby="game-battletech">
-          <div class="shelf-header">
-            <h3 id="game-battletech">HBS: BATTLETECH <small>HAREBRAINED SCHEMES</small></h3>
-            <span>7 TOOLS</span>
-          </div>
-
-          <div class="shelf">
-            <a class="cover is-bt-mechlab" href="/battletech/">
-              <div class="cover-band">
-                <span><b>MECHLAB</b> · BATTLETECH</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img src="/battletech-mechlab-cover.jpg" alt="" onerror="this.remove()" />
-              </div>
-              <div class="cover-title">
-                <small>BATTLETECH</small>
-                <strong>Aurigan Reach <span>MechLab</span></strong>
-                <p class="cover-meta">
-                  <span>96 variants</span>
-                  <span>3 DLC</span>
-                </p>
-              </div>
-              <div class="cover-action">Open MechLab <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-chassis" href="/battletech/chassis/">
-              <div class="cover-band">
-                <span><b>CHASSIS</b> · BATTLETECH</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img
-                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F2%2F2b%2FHunchback_RGilClan_v21.png"
-                  alt=""
-                  onerror="this.remove()"
-                />
-              </div>
-              <div class="cover-title">
-                <small>BATTLETECH</small>
-                <strong>Chassis <span>List</span></strong>
-                <p class="cover-meta">
-                  <span>96 variants</span>
-                  <span>Stats · Stock builds</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Chassis <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-campaigns" href="/battletech/flashpoints/">
-              <div class="cover-band">
-                <span><b>FLASHPOINTS</b> · BATTLETECH</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img
-                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F81%2FLeopard_TRO3025CE.png"
-                  alt=""
-                  onerror="this.remove()"
-                />
-              </div>
-              <div class="cover-title">
-                <small>BATTLETECH</small>
-                <strong>Flashpoints <span>&amp; Paths</span></strong>
-                <p class="cover-meta">
-                  <span>32 flashpoints</span>
-                  <span>3 DLC</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Flashpoints <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-starmap" href="/battletech/starmap/">
-              <div class="cover-band">
-                <span><b>STAR MAP</b> · BATTLETECH</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img src="/battletech-starmap-cover.jpg" alt="" onerror="this.remove()" />
-              </div>
-              <div class="cover-title">
-                <small>BATTLETECH</small>
-                <strong>Aurigan Reach <span>Star Map</span></strong>
-                <p class="cover-meta">
-                  <span>219 systems</span>
-                  <span>Career mode</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Star Map <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-units" href="/battletech/units/">
-              <div class="cover-band">
-                <span><b>ENEMY UNITS</b> · BATTLETECH</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img
-                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F0%2F09%2FManticore_RGilClan_v31.jpg"
-                  alt=""
-                  onerror="this.remove()"
-                />
-              </div>
-              <div class="cover-title">
-                <small>BATTLETECH</small>
-                <strong>Know your <span>Enemy</span></strong>
-                <p class="cover-meta">
-                  <span>37 units</span>
-                  <span>Tanks · Turrets</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Enemy Units <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-argo" href="/battletech/argo/">
-              <div class="cover-band">
-                <span><b>ARGO</b> · BATTLETECH</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img src="/battletech-argo-cover.jpg" alt="" onerror="this.remove()" />
-              </div>
-              <div class="cover-title">
-                <small>BATTLETECH</small>
-                <strong>Ship <span>Upgrades</span></strong>
-                <p class="cover-meta">
-                  <span>35 upgrades</span>
-                  <span>Refit planner</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Argo <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="cover is-bt-equipment" href="/battletech/equipment/">
-              <div class="cover-band">
-                <span><b>EQUIPMENT</b> · BATTLETECH</span>
-                <span class="cover-status">NEW</span>
-              </div>
-              <div class="cover-art">
-                <img
-                  src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Ff%2Ffe%2FInverted_PPC.jpg"
-                  alt=""
-                  onerror="this.remove()"
-                />
-              </div>
-              <div class="cover-title">
-                <small>BATTLETECH</small>
-                <strong>Weapons <span>&amp; Equipment</span></strong>
-                <p class="cover-meta">
-                  <span>210 weapons</span>
-                  <span>+ to + + + versions</span>
-                </p>
-              </div>
-              <div class="cover-action">Open Equipment <span aria-hidden="true">→</span></div>
-            </a>
-          </div>
-        </section>
-
-        <div class="cover is-placeholder" aria-label="More games coming">
-          <span class="placeholder-mark" aria-hidden="true">+</span>
-          <strong>More games</strong>
-          <p>Each new game gets its own row, starting with its MechLab.</p>
+          <ul class="tool-list" id="tools-battletech" data-game="battletech" aria-label="BATTLETECH tools">
+            <li style="--i: 0">
+              <a class="tool is-primary is-photo is-portrait" href="/battletech/">
+                <span class="tool-thumb"><img src="/battletech-mechlab-cover.jpg" alt="" onerror="this.remove()" /></span>
+                <span class="tool-name"><small>MechLab</small><strong>Aurigan Reach <span>MechLab</span></strong></span>
+                <p class="tool-meta"><span>96 variants</span><span>Save &amp; share builds</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 1">
+              <a class="tool is-chassis" href="/battletech/chassis/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F2%2F2b%2FHunchback_RGilClan_v21.png" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Chassis</small><strong>Chassis <span>List</span></strong></span>
+                <p class="tool-meta"><span>Stats</span><span>Filters</span><span>Builds</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 2">
+              <a class="tool is-campaigns" href="/battletech/flashpoints/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F81%2FLeopard_TRO3025CE.png" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Flashpoints</small><strong>Flashpoints <span>&amp; Paths</span></strong></span>
+                <p class="tool-meta"><span>32 flashpoints</span><span>3 DLC</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 3">
+              <a class="tool is-starmap is-photo" href="/battletech/starmap/">
+                <span class="tool-thumb"><img src="/battletech-starmap-cover.jpg" alt="" onerror="this.remove()" /></span>
+                <span class="tool-name"><small>Star Map</small><strong>Aurigan Reach <span>Star Map</span></strong></span>
+                <p class="tool-meta"><span>219 systems</span><span>Career mode</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 4">
+              <a class="tool is-units" href="/battletech/units/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F0%2F09%2FManticore_RGilClan_v31.jpg" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Enemy Units</small><strong>Know your <span>Enemy</span></strong></span>
+                <p class="tool-meta"><span>37 units</span><span>Tanks</span><span>Turrets</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 5">
+              <a class="tool is-argo is-photo" href="/battletech/argo/">
+                <span class="tool-thumb"><img src="/battletech-argo-cover.jpg" alt="" onerror="this.remove()" /></span>
+                <span class="tool-name"><small>Argo</small><strong>Ship <span>Upgrades</span></strong></span>
+                <p class="tool-meta"><span>35 upgrades</span><span>Refit planner</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 6">
+              <a class="tool is-equipment" href="/battletech/equipment/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Ff%2Ffe%2FInverted_PPC.jpg" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Equipment</small><strong>Weapons <span>&amp; Equipment</span></strong></span>
+                <p class="tool-meta"><span>210 weapons</span><span>100 equipment</span><span>Stats</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+          </ul>
         </div>
       </main>
 
@@ -1283,6 +1258,50 @@
     </dialog>
 
     <script>
+      // Carátulas de juego: un solo juego abierto a la vez. Al cargar se abre el del ancla (#mw5,
+      // #battletech) o el último que se abrió; la primera vez, ninguno, para que la portada sea elegir juego.
+      (() => {
+        const STORAGE_KEY = 'mw-builder:portal:open-game';
+        const games = document.querySelector('.games');
+        const covers = [...games.querySelectorAll('.game-cover')];
+        const listOf = cover => document.getElementById(cover.getAttribute('aria-controls'));
+
+        const show = game => {
+          for (const cover of covers) {
+            const open = cover.dataset.game === game;
+            cover.setAttribute('aria-expanded', String(open));
+            listOf(cover).hidden = !open;
+          }
+          games.classList.toggle('has-open', Boolean(game));
+        };
+
+        // Al pulsar, el juego abierto queda en la dirección, para poder enlazarlo, y se recuerda.
+        const choose = game => {
+          show(game);
+          try {
+            if (game) localStorage.setItem(STORAGE_KEY, game);
+            else localStorage.removeItem(STORAGE_KEY);
+          } catch { /* sin almacenamiento */ }
+          history.replaceState(null, '', game ? `#${game}` : location.pathname + location.search);
+          const list = game && document.getElementById(`tools-${game}`);
+          if (list && list.getBoundingClientRect().bottom > innerHeight) {
+            list.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        };
+
+        for (const cover of covers) {
+          cover.addEventListener('click', () => {
+            choose(cover.getAttribute('aria-expanded') === 'true' ? null : cover.dataset.game);
+          });
+        }
+
+        const isGame = game => covers.some(cover => cover.dataset.game === game);
+        let saved = null;
+        try { saved = localStorage.getItem(STORAGE_KEY); } catch { /* sin almacenamiento */ }
+        const fromHash = location.hash.slice(1);
+        show(isGame(fromHash) ? fromHash : isGame(saved) ? saved : null);
+      })();
+
       // Feedback desde la portada: el mismo formulario y la misma API que el de los MechLabs, en un
       // <dialog> nativo, que ya cierra con Escape y guarda el foco.
       (() => {
@@ -1346,7 +1365,8 @@
       })();
 
       // Campana de novedades: las entradas salen de changelog.json, que genera el build a partir de
-      // src/data/changelog.ts, y lo ya visto se guarda con la misma clave que en el MechLab.
+      // src/data/changelog.ts, y lo ya visto se guarda con la misma clave que en el MechLab. El panel del
+      // banner muestra la fecha de la última y su botón abre la campana.
       (async () => {
         const STORAGE_KEY = 'mw-builder:mercs:last-seen-update';
         const root = document.querySelector('.whats-new');
@@ -1397,6 +1417,10 @@
             dot.remove();
           }
         };
+        const markSeen = () => {
+          try { localStorage.setItem(STORAGE_KEY, latestId); } catch { /* sin almacenamiento */ }
+          renderDot();
+        };
         // Al abrirse, el foco pasa al panel para poder desplazarlo con el teclado; al cerrarse con
         // Escape vuelve a la campana.
         const setOpen = (open, returnFocus = false) => {
@@ -1408,16 +1432,24 @@
         };
         button.addEventListener('click', () => {
           const opening = panel.hidden;
-          if (opening) {
-            try { localStorage.setItem(STORAGE_KEY, latestId); } catch { /* sin almacenamiento */ }
-            renderDot();
-          }
+          if (opening) markSeen();
           setOpen(opening);
         });
         document.addEventListener('pointerdown', event => { if (!root.contains(event.target)) setOpen(false); });
         document.addEventListener('keydown', event => { if (event.key === 'Escape') setOpen(false, true); });
         renderDot();
         root.hidden = false;
+
+        const update = document.querySelector('.readout-update');
+        const date = update.querySelector('.readout-date');
+        date.dateTime = entries[0].date;
+        date.textContent = format.format(new Date(entries[0].date));
+        update.querySelector('.readout-more').addEventListener('click', () => {
+          markSeen();
+          setOpen(true);
+          button.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        });
+        update.hidden = false;
       })();
     </script>
   </body>
