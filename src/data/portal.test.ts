@@ -19,7 +19,8 @@ import btUnits from './battletech/units.json';
 // La portada es HTML estático (site/index.html): sus cifras se escriben a mano. Estos tests las comparan con
 // los datos que usa la página de cada herramienta, para que no se queden atrás cuando se regeneran.
 
-const decode = (text: string) => text.replace(/&amp;/g, '&').replace(/&#39;/g, "'").trim();
+// &amp; va la última: decodificada antes, un «&amp;#39;» acabaría como «'» en lugar de «&#39;».
+const decode = (text: string) => text.replace(/&#39;/g, "'").replace(/&amp;/g, '&').trim();
 
 const toolList = (game: string): string => {
   const match = portal.match(new RegExp(`<ul class="tool-list"[^>]*data-game="${game}"[^>]*>([\\s\\S]*?)</ul>`));
@@ -106,11 +107,10 @@ describe('portada', () => {
   });
 
   it('no usa rayas en los textos', () => {
-    const text = portal
-      .replace(/<style[\s\S]*?<\/style>/g, '')
-      .replace(/<script[\s\S]*?<\/script>/g, '')
-      .replace(/<!--[\s\S]*?-->/g, '')
-      .replace(/<[^>]+>/g, ' ');
-    expect(text.match(/—|--/g)).toBeNull();
+    // Los textos que se ven: lo que hay entre etiquetas desde <body> hasta los scripts, que van al final. Los
+    // estilos quedan en <head>, y los «--» de sus variables y de los comentarios no cuentan.
+    const body = portal.slice(portal.indexOf('<body>'), portal.indexOf('<script>'));
+    const texts = [...body.matchAll(/>([^<]+)</g)].map(match => match[1]);
+    expect(texts.filter(text => /—|--/.test(text))).toEqual([]);
   });
 });
