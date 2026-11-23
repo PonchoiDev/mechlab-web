@@ -18,7 +18,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     id: '2026-11-23-faction-banners',
     date: '2026-11-23',
     title: 'Faction banners',
-    items: ['The home page has the banners of the Great Houses, ComStar, several Clans and famous mercenary units in the background']
+    items: ['The home page has faction banners in the background: 16 of the 45 factions of the game, a different selection every time you load it']
   },
   {
     id: '2026-11-23-my-builds-in-builds',
