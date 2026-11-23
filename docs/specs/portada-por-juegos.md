@@ -33,6 +33,7 @@ El rediseño agrupa las herramientas por juego: una carátula por juego que, al 
 
 - **RF7. Pie.** El de siempre: la nota de apoyo con el enlace a Ko-fi, el enlace de feedback y el aviso legal.
 - **RF8. Sin etiquetas NEW** en las herramientas, y sin la franja «More games».
+- **RF9. Estandartes de fondo.** De lo alto de la página cuelgan, por detrás de todo y muy tenues, los estandartes de las cinco Casas, ComStar, seis clanes (Ghost Bear, Jade Falcon, Smoke Jaguar, Wolf, Nova Cat y Diamond Shark) y cuatro compañías mercenarias (Wolf's Dragoons, Kell Hounds, Gray Death Legion y Eridani Light Horse), con su color y el logo de facción del juego (los del mapa estelar). Las Casas van en el centro. Se encogen por tramos de ancho para que quepan las dieciséis en cualquier pantalla, y llevan el logo arriba, por encima del banner, para que se vea siempre.
 
 ## Requisitos no funcionales
 
