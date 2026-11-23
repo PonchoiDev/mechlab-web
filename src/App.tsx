@@ -101,7 +101,8 @@ export default function App() {
   const [isSharingImage, setIsSharingImage] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
-  const [isPublishOpen, setIsPublishOpen] = useState(false);
+  // La build que se publica: la abierta (desde la barra) o una guardada (desde My builds).
+  const [publishTarget, setPublishTarget] = useState<{ code: string; name: string } | null>(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(openFeedbackOnLoad);
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
   const saved = useSavedBuilds();
@@ -110,9 +111,12 @@ export default function App() {
   const dismissToast = useCallback(() => setToast(null), []);
   const showToast = useCallback((message: string) => setToast({ id: Date.now(), message }), []);
   const closeShareImage = useCallback(() => setIsSharingImage(false), []);
-  const closeBuilds = useCallback(() => setIsBuildsOpen(false), [setIsBuildsOpen]);
+  // Con la ventana de publicar encima, Escape la cierra a ella y My builds sigue abierta debajo.
+  const closeBuilds = useCallback(() => {
+    if (!publishTarget) setIsBuildsOpen(false);
+  }, [publishTarget, setIsBuildsOpen]);
   const closeSave = useCallback(() => setIsSaveOpen(false), [setIsSaveOpen]);
-  const closePublish = useCallback(() => setIsPublishOpen(false), [setIsPublishOpen]);
+  const closePublish = useCallback(() => setPublishTarget(null), [setPublishTarget]);
   const closeFeedback = useCallback(() => setIsFeedbackOpen(false), [setIsFeedbackOpen]);
   const buildCode = encodeBuild(mech, loadout, armor, items, upgradeIds);
   const loadoutCode = encodeBuild(mech, loadout, armor, items);
@@ -353,7 +357,7 @@ export default function App() {
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
         canPublish={equippedItems.length > 0}
-        onPublish={() => setIsPublishOpen(true)}
+        onPublish={() => setPublishTarget({ code: buildCode, name: activeBuild?.name ?? defaultBuildName })}
         onShare={openShareMenu}
       />
 
@@ -516,15 +520,6 @@ export default function App() {
           onClose={closeFeedback}
         />
       )}
-      {isPublishOpen && (
-        <PublishBuildDialog
-          game="mercs"
-          code={buildCode}
-          defaultName={activeBuild?.name ?? defaultBuildName}
-          onCopyLink={(url) => copyBuildLink(url)}
-          onClose={closePublish}
-        />
-      )}
       {isSaveOpen && (
         <SaveBuildDialog
           defaultName={defaultBuildName}
@@ -556,8 +551,19 @@ export default function App() {
             setIsCompareOpen(true);
           }}
           onCopyLink={(code) => copyBuildLink(getBuildUrl(code))}
+          onPublish={(entry) => setPublishTarget({ code: entry.code, name: entry.name })}
           onMessage={showToast}
           onClose={closeBuilds}
+        />
+      )}
+      {publishTarget && (
+        <PublishBuildDialog
+          key={publishTarget.code}
+          game="mercs"
+          code={publishTarget.code}
+          defaultName={publishTarget.name}
+          onCopyLink={(url) => copyBuildLink(url)}
+          onClose={closePublish}
         />
       )}
       {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={closeMenu} />}

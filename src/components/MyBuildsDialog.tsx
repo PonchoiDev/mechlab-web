@@ -25,6 +25,8 @@ interface MyBuildsDialogProps {
   // Cierra la ventana y abre el comparador con esa build.
   onCompare: (id: string) => void;
   onCopyLink: (code: string) => void;
+  // Abre la ventana de publicar con esa build, sin cargarla en el MechLab.
+  onPublish: (build: SavedBuild) => void;
   onMessage: (message: string) => void;
   onClose: () => void;
 }
@@ -53,6 +55,7 @@ export function MyBuildsDialog({
   onLoad,
   onCompare,
   onCopyLink,
+  onPublish,
   onMessage,
   onClose
 }: MyBuildsDialogProps) {
@@ -245,6 +248,7 @@ export function MyBuildsDialog({
                     </button>
                     <button type="button" className="utility-button" onClick={() => setEditing({ id: build.id, name: build.name })}>Rename</button>
                     <button type="button" className="utility-button" disabled={!shared} onClick={() => onCopyLink(build.code)}>Copy link</button>
+                    <button type="button" className="utility-button" disabled={!shared} title="Publish this build in the community builds" onClick={() => onPublish(build)}>Publish</button>
                     <button type="button" className="utility-button" onClick={() => setConfirming({ id: build.id, action: 'delete' })}>Delete</button>
                   </div>
                 )}

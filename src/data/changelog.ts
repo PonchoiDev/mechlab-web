@@ -9,6 +9,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-23-publish-from-my-builds',
+    date: '2026-11-23',
+    title: 'Publish from My builds',
+    items: ['Every saved build in My builds has a Publish button, so you can publish several without opening them one by one']
+  },
+  {
     id: '2026-11-23-community-builds',
     date: '2026-11-23',
     title: 'Community builds',
