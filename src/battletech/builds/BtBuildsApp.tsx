@@ -1,6 +1,7 @@
 import { PublishedBuildsPage, type PublishedBuildSummary } from '../../components/PublishedBuildsPage';
 import { BT_BUILD_SORT_KEY } from '../../hooks/useBuildSort';
 import { getBtBuildUrl } from '../../utils/battletech/buildCode';
+import { BT_SAVED_BUILDS_KEY } from '../../utils/battletech/savedBuilds';
 import { findMech, getMechDisplayName } from '../../utils/battletech/mechlabData';
 import { BT_BUILD_LIST, summarizeBtSavedBuild } from '../../utils/battletech/savedBuildRows';
 import type { SavedBuild } from '../../utils/savedBuildsCore';
@@ -39,6 +40,8 @@ export function BtBuildsApp() {
       summarize={summarize}
       mechName={mechName}
       buildUrl={getBtBuildUrl}
+      savedBuildsKey={BT_SAVED_BUILDS_KEY}
+      mechlabUrl="/battletech/"
     />
   );
 }

@@ -47,6 +47,7 @@ export function BuildsApp() {
       summarize={summarize}
       mechName={mechName}
       buildUrl={getBuildUrl}
+      mechlabUrl="/mercs/"
     />
   );
 }

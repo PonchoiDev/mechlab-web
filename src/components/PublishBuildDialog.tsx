@@ -17,11 +17,13 @@ interface PublishBuildDialogProps {
   code: string;
   defaultName: string;
   onCopyLink: (url: string) => void;
+  // La página de builds la añade a su lista sin recargar.
+  onPublished?: (build: PublishedBuild) => void;
   onClose: () => void;
 }
 
 // Publica la build abierta en la página de builds del juego. Es común a los dos MechLabs: solo cambia el juego.
-export function PublishBuildDialog({ game, code, defaultName, onCopyLink, onClose }: PublishBuildDialogProps) {
+export function PublishBuildDialog({ game, code, defaultName, onCopyLink, onPublished, onClose }: PublishBuildDialogProps) {
   const [name, setName] = useState(defaultName);
   const [description, setDescription] = useState('');
   const [author, setAuthor] = useState(readAuthor);
@@ -46,6 +48,7 @@ export function PublishBuildDialog({ game, code, defaultName, onCopyLink, onClos
     saveOwnedKey(game, result.data.build.id, result.data.editKey);
     saveAuthor(author);
     setPublished(result.data.build);
+    onPublished?.(result.data.build);
     setStatus({ sending: false, error: null });
   };
 

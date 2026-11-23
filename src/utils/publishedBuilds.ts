@@ -85,6 +85,11 @@ export const saveAuthor = (author: string) => write(AUTHOR_KEY, author.trim());
 export const sortByVotes = <T extends Pick<PublishedBuild, 'votes' | 'createdAt'>>(builds: T[]): T[] =>
   [...builds].sort((a, b) => b.votes - a.votes || b.createdAt.localeCompare(a.createdAt));
 
+// Los códigos de las builds publicadas desde este navegador (las que tienen clave de edición aquí): sirven para
+// marcar como ya publicadas las builds guardadas con el mismo código.
+export const getOwnPublishedCodes = (builds: PublishedBuild[], ownedKeys: Record<string, string>): Set<string> =>
+  new Set(builds.filter(build => Object.hasOwn(ownedKeys, build.id)).map(build => build.code));
+
 // Una build publicada se resume como una guardada, para usar las filas y los filtros de My builds.
 export const toSavedBuild = (build: PublishedBuild): SavedBuild => ({
   id: build.id,

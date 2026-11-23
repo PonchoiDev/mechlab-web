@@ -9,6 +9,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-23-my-builds-in-builds',
+    date: '2026-11-23',
+    title: 'My builds in Builds',
+    items: ['The Builds page has a My builds button: publish your saved builds from there without opening the MechLab. The ones you already published are marked']
+  },
+  {
     id: '2026-11-23-build-reports',
     date: '2026-11-23',
     title: 'Better build reports',

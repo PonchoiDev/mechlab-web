@@ -110,3 +110,14 @@
 }
 
 .published-builds .utility-button.is-danger { color: #ff796c; border-color: #ff796c; }
+
+/* El recuento de publicadas a la izquierda y My builds a la derecha. */
+.published-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* units.css estrecha sus ventanas; My builds necesita el ancho de la del MechLab para sus filas. */
+.published-builds .share-dialog.builds-dialog { width: min(720px, calc(100vw - 32px)); }
