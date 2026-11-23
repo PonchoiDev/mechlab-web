@@ -33,7 +33,7 @@ El rediseño agrupa las herramientas por juego: una carátula por juego que, al 
 
 - **RF7. Pie.** El de siempre: la nota de apoyo con el enlace a Ko-fi, el enlace de feedback y el aviso legal.
 - **RF8. Sin etiquetas NEW** en las herramientas, y sin la franja «More games».
-- **RF9. Estandartes de fondo.** De lo alto de la página cuelgan, por detrás de todo y muy tenues, los estandartes de las cinco Casas, ComStar, seis clanes (Ghost Bear, Jade Falcon, Smoke Jaguar, Wolf, Nova Cat y Diamond Shark) y cuatro compañías mercenarias (Wolf's Dragoons, Kell Hounds, Gray Death Legion y Eridani Light Horse), con su color y el logo de facción del juego (los del mapa estelar). Las Casas van en el centro. Se encogen por tramos de ancho para que quepan las dieciséis en cualquier pantalla, y llevan el logo arriba, por encima del banner, para que se vea siempre.
+- **RF9. Estandartes de fondo.** De lo alto de la página cuelgan, por detrás de todo y muy tenues, dieciséis estandartes de facciones, con su color y el logo de facción del juego (los del mapa estelar). Cada vez que se carga la página se eligen dieciséis al azar entre las cuarenta y cinco facciones con logo (Casas, estados de la Periferia, ComStar, Word of Blake, clanes y compañías mercenarias), en orden aleatorio; sin JavaScript se ven las cinco Casas, ComStar, seis clanes y cuatro mercenarios. Se encogen por tramos de ancho para que quepan las dieciséis en cualquier pantalla, y llevan el logo arriba, por encima del banner, para que se vea siempre.
 
 ## Requisitos no funcionales
 
@@ -53,6 +53,7 @@ El rediseño agrupa las herramientas por juego: una carátula por juego que, al 
 | CA4 | Las cifras de cada fila | se comparan con los datos | coinciden: 639 y 96 variantes, 64 misiones HRQ y 6 campañas, 3015 a 3060, 219 sistemas, 32 flashpoints, 115 y 37 unidades, 184 rasgos, 18 pilotos hero y 93 academias, 35 mejoras de la Argo, 190 y 210 armas, 149 y 100 equipos |
 | CA5 | Las cifras de cada fila | se leen | van cada una en su elemento, para que el punto centrado las separe siempre igual |
 | CA6 | La portada | se busca «—» o «--» en sus textos | no hay ninguno |
+| CA7 | La lista de facciones de los estandartes | se lee | son cuarenta y cinco, sin repetir logo, cada una con nombre, color y un logo que existe en `public/starmap/logos/` |
 
 ## Fuera de alcance
 
