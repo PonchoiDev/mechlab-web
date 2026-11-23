@@ -33,7 +33,7 @@ export function BtBuildsApp() {
       </>}
       intro={<p>
         Builds published by other players, rebuilt with the current game data. Filter them like My builds, vote the ones
-        you like and open any of them in the MechLab. To publish yours, use Publish in the MechLab toolbar.
+        you like and open any of them in the MechLab. To publish yours, use My builds below or Publish in the MechLab toolbar.
       </p>}
       config={BT_BUILD_LIST}
       sortKey={BT_BUILD_SORT_KEY}

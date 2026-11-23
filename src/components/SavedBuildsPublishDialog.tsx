@@ -49,7 +49,7 @@ export function SavedBuildsPublishDialog({ entries, config, sortKey, publishedCo
           <span>{shown.length === entries.length ? entries.length : `${shown.length} of ${entries.length}`} SAVED</span>
         </div>
 
-        {entries.length > 0 && <BuildsListControls state={filters} config={config} rows={listRows} />}
+        <BuildsListControls state={filters} config={config} rows={listRows} />
 
         <ul className="builds-list">
           {entries.length === 0 && (
