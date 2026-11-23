@@ -2,7 +2,10 @@
 // builds de cada juego. Se guarda el código de la build, el mismo de los enlaces, y no la build decodificada:
 // el navegador la reconstruye con los datos del juego del momento. Sin cuentas: quien publica recibe una
 // clave de edición, y aquí solo se guarda su hash.
+import { FROM_ADDRESS } from './feedback.ts';
+
 export const BUILDS_PATH = '/mercs/api/builds';
+const SITE_URL = 'https://mw-builder.com';
 
 export const BUILD_GAMES = ['mercs', 'battletech'] as const;
 export type BuildGame = typeof BUILD_GAMES[number];
@@ -66,12 +69,21 @@ export interface BuildStore {
   hide: (id: string) => Promise<void>;
 }
 
+// Una denuncia, para avisar al dueño de la web: la build, las denuncias que lleva y si ya se ha ocultado.
+export interface BuildReport {
+  build: PublishedBuild;
+  reports: number;
+  hidden: boolean;
+}
+
 export interface BuildsOptions {
   // Secreto con el que se hashean las IP: así no se guardan tal cual.
   salt: string;
   // Clave de administración para borrar cualquier build.
   adminKey?: string;
   now?: () => Date;
+  // Aviso de cada denuncia (por correo en producción). Si falla, la denuncia cuenta igual.
+  onReport?: (report: BuildReport) => Promise<void>;
 }
 
 const fromBase64Url = (code: string) => {
@@ -211,7 +223,13 @@ export const handleBuilds = async (request: Request, path: string, store: BuildS
     if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
     const reports = await store.addReport(id, ipHash);
     if (reports === null) return json({ error: 'Already reported' }, 409);
-    if (reports >= REPORTS_TO_HIDE) await store.hide(id);
+    const hidden = reports >= REPORTS_TO_HIDE;
+    if (hidden) await store.hide(id);
+    try {
+      await options.onReport?.({ build: toPublic(stored), reports, hidden });
+    } catch {
+      // El aviso es un extra: la denuncia ya está guardada.
+    }
     return json({ ok: true });
   }
 
@@ -237,4 +255,35 @@ export const handleBuilds = async (request: Request, path: string, store: BuildS
   }
 
   return json({ error: 'Method not allowed' }, 405);
+};
+
+// El correo con el que se avisa de una denuncia: qué build es, cuántas denuncias lleva, dónde verla y cómo
+// borrarla con la clave de administración. Los textos ya vienen limpios de saltos de línea (cleanLine).
+export const buildReportEmail = ({ build, reports, hidden }: BuildReport, to: string, date = new Date()): string => {
+  const body = [
+    `Build: ${build.name}`,
+    `Game: ${build.game}`,
+    `Author: ${build.author || '(none)'}`,
+    `Reports: ${reports} of ${REPORTS_TO_HIDE}${hidden ? ', now hidden' : ''}`,
+    '',
+    `See it: ${SITE_URL}/${build.game}/builds/?build=${build.id}`,
+    '',
+    'Delete it:',
+    `curl -X DELETE -H "Authorization: Bearer <BUILDS_ADMIN_KEY>" ${SITE_URL}/${build.game}/api/builds/${build.id}`,
+    '',
+    build.description ? `Description:\n${build.description}` : 'No description.'
+  ].join('\n');
+
+  return [
+    `From: MW Builder <${FROM_ADDRESS}>`,
+    `To: <${to}>`,
+    `Subject: [MW Builder] Build reported: ${build.name}`,
+    `Date: ${date.toUTCString()}`,
+    `Message-ID: <${crypto.randomUUID()}@mw-builder.com>`,
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: 8bit',
+    '',
+    body.replace(/\r?\n/g, '\r\n')
+  ].join('\r\n');
 };

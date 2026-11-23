@@ -9,6 +9,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-23-build-reports',
+    date: '2026-11-23',
+    title: 'Reported builds stay hidden',
+    items: ['A build you report stays hidden for you after reloading the page, and the report reaches the site owner']
+  },
+  {
     id: '2026-11-23-community-builds',
     date: '2026-11-23',
     title: 'Community builds',

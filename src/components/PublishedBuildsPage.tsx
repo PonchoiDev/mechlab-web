@@ -9,8 +9,10 @@ import {
   fetchPublishedBuilds,
   forgetOwnedKey,
   readOwnedKeys,
+  readReportedIds,
   readVotedIds,
   reportBuild,
+  saveReportedIds,
   saveVotedIds,
   sortByVotes,
   toSavedBuild,
@@ -67,7 +69,7 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
   );
   const [owned, setOwned] = useState(() => readOwnedKeys(game));
   const [voted, setVoted] = useState(() => new Set(readVotedIds(game)));
-  const [reported, setReported] = useState<Set<string>>(new Set());
+  const [reported, setReported] = useState(() => new Set(readReportedIds(game)));
   const [byVotes, setByVotes] = useState(false);
   const [editing, setEditing] = useState<({ id: string } & BuildTextsInput) | null>(null);
   const [confirming, setConfirming] = useState<Confirming | null>(null);
@@ -143,7 +145,9 @@ export function PublishedBuildsPage({ game, navLabel, nav, intro, config, sortKe
       showToast(result.message);
       return;
     }
-    setReported(current => new Set(current).add(build.id));
+    const next = new Set(reported).add(build.id);
+    setReported(next);
+    saveReportedIds(game, [...next]);
     showToast('Thanks. The build is hidden for you and will be reviewed.');
   };
 
