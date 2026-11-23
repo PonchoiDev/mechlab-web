@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BUILDS_PATH, buildReportEmail, handleBuilds, parseBuildCode, parsePublishInput, PUBLISH_LIMIT, type BuildReport, type BuildsOptions, type PublishedBuild } from './builds';
+import { BUILDS_PATH, buildReportEmail, handleBuilds, parseBuildCode, parsePublishInput, parseReportInput, PUBLISH_LIMIT, type BuildReport, type BuildsOptions, type PublishedBuild } from './builds';
 import { createMemoryBuildStore } from './memoryBuildStore';
 
 const toBase64Url = (text: string) =>
@@ -168,6 +168,19 @@ describe('aviso de denuncias', () => {
     ]);
   });
 
+  it('el motivo y el mensaje se validan y llegan al aviso', async () => {
+    expect(parseReportInput({ reason: 'Spam', message: '  Same build\r\nposted 20 times\u0000 ' })).toEqual({ reason: 'Spam', message: 'Same build\nposted 20 times' });
+    expect(parseReportInput({ reason: 'Hacked', message: 'x'.repeat(600) })).toEqual({ reason: 'Other', message: 'x'.repeat(500) });
+    expect(parseReportInput(null)).toEqual({ reason: 'Other', message: '' });
+
+    const store = createMemoryBuildStore();
+    const { data } = await publish(store);
+    const reports: BuildReport[] = [];
+    const req = request('POST', `${BUILDS_PATH}/${data.build.id}/report`, { body: { reason: 'Offensive', message: 'Insulting name' } });
+    await handleBuilds(req, new URL(req.url).pathname, store, { ...OPTIONS, onReport: async report => { reports.push(report); } });
+    expect(reports.map(report => [report.reason, report.message])).toEqual([['Offensive', 'Insulting name']]);
+  });
+
   it('la denuncia cuenta aunque el aviso falle', async () => {
     const store = createMemoryBuildStore();
     const { data } = await publish(store);
@@ -179,11 +192,13 @@ describe('aviso de denuncias', () => {
   it('el correo lleva la build, sus denuncias, su enlace y cómo borrarla', async () => {
     const store = createMemoryBuildStore();
     const { data } = await publish(store, { game: 'battletech', code: codeFor('atlas_AS7-D'), name: 'Spam build' });
-    const email = buildReportEmail({ build: data.build, reports: 3, hidden: true }, 'owner@example.com', new Date('2026-11-23T12:00:00Z'));
+    const email = buildReportEmail({ build: data.build, reports: 3, hidden: true, reason: 'Spam', message: 'Posted again\nand again' }, 'owner@example.com', new Date('2026-11-23T12:00:00Z'));
     expect(email).toContain('To: <owner@example.com>');
     expect(email).toContain('Subject: [MW Builder] Build reported: Spam build');
     expect(email).toContain('Game: battletech');
     expect(email).toContain('Reports: 3 of 3, now hidden');
+    expect(email).toContain('Reason: Spam');
+    expect(email).toContain('Message:\r\nPosted again\r\nand again');
     expect(email).toContain(`https://mw-builder.com/battletech/builds/?build=${data.build.id}`);
     expect(email).toContain(`curl -X DELETE -H "Authorization: Bearer <BUILDS_ADMIN_KEY>" https://mw-builder.com/battletech/api/builds/${data.build.id}`);
     // Todas las líneas acaban en CRLF, como pide el formato de los correos.
