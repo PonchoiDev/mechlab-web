@@ -23,6 +23,7 @@ El rediseño agrupa las herramientas por juego: una carátula por juego que, al 
   | Herramienta | MW5: Mercenaries | BATTLETECH |
   |---|---|---|
   | MechLab | variantes · Save & share builds | variantes · Save & share builds |
+  | Builds (añadida con [builds-publicadas.md](builds-publicadas.md)) | Community builds · Filters · Votes | Community builds · Filters · Votes |
   | Chassis | Stats · Filters · Builds | Stats · Filters · Builds |
   | HRQ y campañas / Flashpoints | misiones HRQ · campañas DLC | flashpoints · 3 DLC |
   | Star Map | 3015 to 3060 · Borders by date | sistemas · Career mode |

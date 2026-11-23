@@ -154,3 +154,16 @@ body {
   .chassis-table .arsenal-weapon-meta { gap: 0 5px; font-size: 12px; }
   .chassis-variant { display: block; }
 }
+
+/* Enlace a las builds publicadas con la variante, debajo de su rol y su equipo. */
+.chassis-builds-link {
+  display: inline-block;
+  margin-top: 3px;
+  color: var(--units-accent);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.chassis-builds-link:hover,
+.chassis-builds-link:focus-visible { text-decoration: underline; }

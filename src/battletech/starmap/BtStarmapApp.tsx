@@ -330,6 +330,7 @@ export function BtStarmapApp() {
         <h1>Star map</h1>
         <nav className="starmap-links" aria-label="MW Builder">
           <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
+          <a href="/battletech/builds/">Builds</a>
           <a href="/battletech/chassis/">Chassis</a>
           <a href="/battletech/flashpoints/">Flashpoints</a>
           <a href="/battletech/units/">Enemy units</a>

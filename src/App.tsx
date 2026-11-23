@@ -38,6 +38,7 @@ import { MechImage, SarnaSourceLink } from './components/MechReference';
 import { MechPicker } from './components/MechPicker';
 import { MyBuildsDialog } from './components/MyBuildsDialog';
 import { SaveBuildDialog } from './components/SaveBuildDialog';
+import { PublishBuildDialog } from './components/PublishBuildDialog';
 import { ShareImageDialog } from './components/ShareImageDialog';
 import { StatsReadout } from './components/StatsReadout';
 import { SupportLink } from './components/SupportLink';
@@ -100,6 +101,7 @@ export default function App() {
   const [isSharingImage, setIsSharingImage] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
+  const [isPublishOpen, setIsPublishOpen] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(openFeedbackOnLoad);
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
   const saved = useSavedBuilds();
@@ -110,6 +112,7 @@ export default function App() {
   const closeShareImage = useCallback(() => setIsSharingImage(false), []);
   const closeBuilds = useCallback(() => setIsBuildsOpen(false), [setIsBuildsOpen]);
   const closeSave = useCallback(() => setIsSaveOpen(false), [setIsSaveOpen]);
+  const closePublish = useCallback(() => setIsPublishOpen(false), [setIsPublishOpen]);
   const closeFeedback = useCallback(() => setIsFeedbackOpen(false), [setIsFeedbackOpen]);
   const buildCode = encodeBuild(mech, loadout, armor, items, upgradeIds);
   const loadoutCode = encodeBuild(mech, loadout, armor, items);
@@ -300,6 +303,7 @@ export default function App() {
           <nav className="topbar-links" aria-label="MW Builder">
             <a href="/mercs/starmap/"><small>MW5 Mercenaries</small> Star map</a>
             <a href="/mercs/chassis/">Chassis</a>
+            <a href="/mercs/builds/">Builds</a>
             <a href="/mercs/campaigns/">HRQ &amp; Campaigns</a>
             <a href="/mercs/units/">Enemy units</a>
             <a href="/mercs/pilots/">Pilots</a>
@@ -348,6 +352,8 @@ export default function App() {
         savedBuildCount={saved.builds.length}
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
+        canPublish={equippedItems.length > 0}
+        onPublish={() => setIsPublishOpen(true)}
         onShare={openShareMenu}
       />
 
@@ -508,6 +514,15 @@ export default function App() {
           buildUrl={equippedItems.length > 0 ? buildUrl : null}
           onMessage={showToast}
           onClose={closeFeedback}
+        />
+      )}
+      {isPublishOpen && (
+        <PublishBuildDialog
+          game="mercs"
+          code={buildCode}
+          defaultName={activeBuild?.name ?? defaultBuildName}
+          onCopyLink={(url) => copyBuildLink(url)}
+          onClose={closePublish}
         />
       )}
       {isSaveOpen && (

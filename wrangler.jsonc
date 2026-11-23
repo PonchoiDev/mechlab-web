@@ -17,6 +17,13 @@
   // Envío de los mensajes de feedback por Cloudflare Email Routing. La dirección de destino es el
   // secreto FEEDBACK_TO, configurado en el panel de Cloudflare.
   "send_email": [{ "name": "FEEDBACK_EMAIL" }],
+  // Builds publicadas (docs/specs/builds-publicadas.md), con los secretos BUILDS_SALT y BUILDS_ADMIN_KEY. Las
+  // tablas están en migrations/ y se crean con «npx wrangler d1 migrations apply mechlab-builds --remote».
+  // No se declara en previews: las vistas previas escribirían en la base de datos de la web publicada; en
+  // ellas la API de builds responde 503.
+  "d1_databases": [
+    { "binding": "BUILDS_DB", "database_name": "mechlab-builds", "database_id": "8e236837-d28f-42dd-93e3-32cafbe77073" }
+  ],
   // Necesario para las vistas previas de cada pull request (npx wrangler preview). Las vistas
   // previas no heredan los enlaces de producción, así que el de correo se declara también aquí.
   "previews": {

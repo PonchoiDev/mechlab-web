@@ -21,6 +21,8 @@ interface ChassisTableProps<R, K extends string> {
   link: (row: R) => string;
   // El chasis y la variante, y debajo lo que se sabe de ella (rol, tecnología, equipo fijo).
   name: (row: R) => { chassis: string; variant: string; meta: ReactNode };
+  // Las builds que han publicado los jugadores con esa variante.
+  buildsLink?: (row: R) => string;
 }
 
 function SortButton<K extends string>({ sort, sortKey, label, title, onSort }: {
@@ -35,7 +37,7 @@ function SortButton<K extends string>({ sort, sortKey, label, title, onSort }: {
   );
 }
 
-export function ChassisTable<R, K extends string>({ rows, columns, sort, onSort, rowKey, link, name }: ChassisTableProps<R, K>) {
+export function ChassisTable<R, K extends string>({ rows, columns, sort, onSort, rowKey, link, name, buildsLink }: ChassisTableProps<R, K>) {
   const ariaSort = (key: K) => sort.key === key ? (sort.dir === 'asc' ? 'ascending' : 'descending') : undefined;
   return (
     <div className="arsenal-table-wrap">
@@ -62,6 +64,11 @@ export function ChassisTable<R, K extends string>({ rows, columns, sort, onSort,
                     <span className="arsenal-weapon-name">{chassis} <span className="chassis-variant">{variant}</span></span>
                   </a>
                   <span className="arsenal-weapon-meta">{meta}</span>
+                  {buildsLink && (
+                    <a className="chassis-builds-link" href={buildsLink(row)} title="Builds published by players with this variant">
+                      Community builds →
+                    </a>
+                  )}
                 </th>
                 {columns.map(column => (
                   <td key={column.key} className={`is-${column.key}`}>{column.value(row)}</td>

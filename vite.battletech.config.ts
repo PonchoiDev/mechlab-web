@@ -23,7 +23,8 @@ export default defineConfig({
         equipment: resolve(import.meta.dirname, GAME_PATH, 'equipment/index.html'),
         chassis: resolve(import.meta.dirname, GAME_PATH, 'chassis/index.html'),
         units: resolve(import.meta.dirname, GAME_PATH, 'units/index.html'),
-        flashpoints: resolve(import.meta.dirname, GAME_PATH, 'flashpoints/index.html')
+        flashpoints: resolve(import.meta.dirname, GAME_PATH, 'flashpoints/index.html'),
+        builds: resolve(import.meta.dirname, GAME_PATH, 'builds/index.html')
       }
     }
   },

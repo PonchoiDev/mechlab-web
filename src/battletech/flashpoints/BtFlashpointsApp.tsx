@@ -257,6 +257,7 @@ export function BtFlashpointsApp() {
         <h1>Flashpoints</h1>
         <nav className="units-links" aria-label="BATTLETECH">
           <a href="/battletech/"><small>BATTLETECH</small> MechLab</a>
+          <a href="/battletech/builds/">Builds</a>
           <a href="/battletech/chassis/">Chassis</a>
           <a href="/battletech/starmap/">Star map</a>
           <a href="/battletech/flashpoints/" aria-current="page">Flashpoints</a>

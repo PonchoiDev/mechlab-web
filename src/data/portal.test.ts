@@ -63,12 +63,12 @@ describe('portada', () => {
     expect(portal).toContain('id="tools-battletech"');
   });
 
-  it('enlaza a las siete herramientas de cada juego, con el MechLab primero', () => {
+  it('enlaza a las ocho herramientas de cada juego, con el MechLab primero y las builds publicadas después', () => {
     expect(toolRows('mw5').map(([href]) => href)).toEqual([
-      '/mercs/', '/mercs/chassis/', '/mercs/campaigns/', '/mercs/starmap/', '/mercs/units/', '/mercs/pilots/', '/mercs/equipment/'
+      '/mercs/', '/mercs/builds/', '/mercs/chassis/', '/mercs/campaigns/', '/mercs/starmap/', '/mercs/units/', '/mercs/pilots/', '/mercs/equipment/'
     ]);
     expect(toolRows('battletech').map(([href]) => href)).toEqual([
-      '/battletech/', '/battletech/chassis/', '/battletech/flashpoints/', '/battletech/starmap/', '/battletech/units/',
+      '/battletech/', '/battletech/builds/', '/battletech/chassis/', '/battletech/flashpoints/', '/battletech/starmap/', '/battletech/units/',
       '/battletech/argo/', '/battletech/equipment/'
     ]);
   });
@@ -81,6 +81,7 @@ describe('portada', () => {
   it('da las cifras de los datos de MW5, cada una en su elemento', () => {
     expect(Object.fromEntries(toolRows('mw5'))).toEqual({
       '/mercs/': [`${mechs.length} variants`, 'Save & share builds'],
+      '/mercs/builds/': ['Community builds', 'Filters', 'Votes'],
       '/mercs/chassis/': ['Stats', 'Filters', 'Builds'],
       '/mercs/campaigns/': [`${starmap.quests.length} quests`, `${starmap.campaigns.length} DLC campaigns`],
       '/mercs/starmap/': [`${year(starmap.range.start)} to ${year(starmap.range.end)}`, 'Borders by date'],
@@ -94,6 +95,7 @@ describe('portada', () => {
   it('da las cifras de los datos de BATTLETECH, cada una en su elemento', () => {
     expect(Object.fromEntries(toolRows('battletech'))).toEqual({
       '/battletech/': [`${btMechs.length} variants`, 'Save & share builds'],
+      '/battletech/builds/': ['Community builds', 'Filters', 'Votes'],
       '/battletech/chassis/': ['Stats', 'Filters', 'Builds'],
       '/battletech/flashpoints/': [`${btFlashpoints.flashpoints.length} flashpoints`, '3 DLC'],
       '/battletech/starmap/': [`${btStarmap.systems.length} systems`, 'Career mode'],

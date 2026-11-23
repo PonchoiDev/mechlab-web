@@ -34,6 +34,7 @@ Jugadores de *MechWarrior 5: Mercenaries*, sobre todo los que se mueven en la co
 | Estadísticas detalladas por arma y del chasis | Hecho |
 | Guardar builds en el navegador, exportarlas e importarlas | Hecho |
 | Compartir una build con un enlace y como imagen | Hecho |
+| Publicar builds y ver las de otros jugadores, con votos | Hecho ([#164](https://github.com/PonchoiDev/mechlab-web/issues/164)) |
 | Recibir errores e ideas de los usuarios | Hecho (formulario de feedback) |
 | Filtro por DLC | Pendiente ([#43](https://github.com/PonchoiDev/mechlab-web/issues/43)): los datos ya están en las fichas de unidad |
 | Aceleración y mejoras de saltos con números | Pendiente ([#48](https://github.com/PonchoiDev/mechlab-web/issues/48)): faltan datos o calibración |
@@ -44,7 +45,7 @@ El backlog completo, incluidas las tareas técnicas (tests de interfaz, cabecera
 
 ## Requisitos no funcionales
 
-- **Sin registro ni servidor de datos:** la web se usa sin cuenta. Las builds se guardan en el navegador o viajan en el enlace.
+- **Sin registro:** la web se usa sin cuenta. Las builds se guardan en el navegador o viajan en el enlace. Las publicadas son la única excepción a «sin servidor de datos»: se guardan en una base de datos D1, y quien publica guarda en su navegador una clave para editarlas o borrarlas ([builds-publicadas.md](specs/builds-publicadas.md)).
 - **Fidelidad al juego:** las cifras tienen que coincidir con las del mechlab del juego. Cada vez que una no cuadra, se comprueba con una captura y se convierte en un test.
 - **Datos reproducibles:** los datos salen de los archivos del juego con scripts, para poder actualizarlos con cada parche sin teclear nada a mano.
 - **Compatibilidad hacia atrás:** un enlace o una build guardada tiene que seguir abriéndose después de cambiar el formato o los datos.
