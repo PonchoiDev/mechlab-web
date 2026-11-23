@@ -43,7 +43,7 @@ Cada build publicada: `id`, `game`, `mechId`, `code`, `name`, `description`, `au
 
 ## Requisitos funcionales
 
-- **RF1. Publicar.** En los dos MechLabs, un botón **Publish** en el grupo BUILD de la barra, junto a Save build y My builds. Abre una ventana con el nombre (el de la build guardada abierta o el del 'Mech), una descripción opcional (hasta 500 caracteres) y un nombre de autor opcional (hasta 40), que se recuerda para la siguiente vez. Al publicar, enseña el enlace a la build en la página de builds. Sin equipo montado no se puede publicar.
+- **RF1. Publicar.** En los dos MechLabs, un botón **Publish** en el grupo BUILD de la barra, junto a Save build y My builds. Abre una ventana con el nombre (el de la build guardada abierta o el del 'Mech), una descripción opcional (hasta 500 caracteres) y un nombre de autor opcional (hasta 40), que se recuerda para la siguiente vez. Al publicar, enseña el enlace a la build en la página de builds. Sin equipo montado no se puede publicar. Cada build de My builds tiene también su botón **Publish**, que abre la misma ventana con esa build y su nombre sin cargarla en el MechLab; My builds sigue abierta debajo, para publicar varias seguidas.
 - **RF2. Página de builds.** `/mercs/builds/` y `/battletech/builds/`, con el título **Builds** y un enlace en la cabecera de las demás páginas de su juego y su fila en la portada. Cada build enseña su nombre, el 'Mech, sus cifras, sus armas, sus etiquetas, el autor, la fecha, la descripción y los votos, como My builds.
 - **RF3. Filtros y orden.** Los de My builds (clase, anclajes o armas mínimos, tecnología, rol, equipo y buscador), y el orden por más recientes, más votadas, nombre, chasis, tonelaje o potencia de fuego. `?mech=<id>` deja solo las builds de esa variante: así enlaza la lista de chasis.
 - **RF4. Abrir.** Cada build se abre en el MechLab con su enlace de siempre (`?b=`), y se puede copiar el enlace.
@@ -97,4 +97,4 @@ Hasta entonces, la API responde 503 y la web lo dice.
 1. **Worker (CA1 a CA9):** `worker/builds.test.ts`, con el almacén en memoria.
 2. **Navegador (CA10 y CA11):** `src/utils/publishedBuilds.test.ts`.
 3. **Portada (CA12):** `src/data/portal.test.ts`.
-4. **Interfaz:** en el navegador, con el servidor de desarrollo (que usa el almacén en memoria): publicar desde los dos MechLabs, la página de builds con filtros, votar, retirar el voto, denunciar, editar y borrar una propia, y el enlace desde la lista de chasis.
+4. **Interfaz:** en el navegador, con el servidor de desarrollo (que usa el almacén en memoria): publicar desde los dos MechLabs y desde My builds, la página de builds con filtros, votar, retirar el voto, denunciar, editar y borrar una propia, y el enlace desde la lista de chasis.
