@@ -1,0 +1,23 @@
+/* El color de cada apartado de la web en los enlaces de las cabeceras: el mismo de su fila en la portada
+   (site/index.html). Se elige por el destino del enlace, así que vale para las cabeceras de todas las páginas
+   (units-links, topbar-links de los MechLabs y starmap-links de los mapas) y para las páginas nuevas sin tocarlas.
+   El prefijo con el nombre del juego (<small>) sigue en gris. */
+:is(.units-links, .topbar-links, .starmap-links) a { --section: currentColor; }
+:is(.units-links, .topbar-links, .starmap-links) a:is([href='/mercs/'], [href='/battletech/']) { --section: #c3ed62; }
+:is(.units-links, .topbar-links, .starmap-links) a[href$='/builds/'] { --section: #69d9ce; }
+:is(.units-links, .topbar-links, .starmap-links) a[href$='/chassis/'] { --section: #ff9f1c; }
+:is(.units-links, .topbar-links, .starmap-links) a:is([href$='/campaigns/'], [href$='/flashpoints/']) { --section: #ff4fa3; }
+:is(.units-links, .topbar-links, .starmap-links) a[href$='/starmap/'] { --section: #ffd400; }
+:is(.units-links, .topbar-links, .starmap-links) a[href$='/units/'] { --section: #ff5a3c; }
+:is(.units-links, .topbar-links, .starmap-links) a[href$='/pilots/'] { --section: #2f8cff; }
+:is(.units-links, .topbar-links, .starmap-links) a[href$='/equipment/'] { --section: #a77bff; }
+:is(.units-links, .topbar-links, .starmap-links) a[href$='/argo/'] { --section: #35c9c1; }
+
+/* a[href] da a estas reglas más peso que las de cada cabecera, que van después de este @import. */
+:is(.units-links, .topbar-links, .starmap-links) a[href] { color: var(--section); }
+
+/* Páginas de consulta y mapas: al pasar el ratón, el enlace se rellena con su color. */
+:is(.units-links, .starmap-links) a[href]:is(:hover, :focus-visible) { color: #000; background: var(--section); }
+
+/* MechLabs: el borde y el texto en su color, como el resto de botones del MechLab. */
+.topbar-links a[href]:is(:hover, :focus-visible) { color: var(--section); border-color: var(--section); }
