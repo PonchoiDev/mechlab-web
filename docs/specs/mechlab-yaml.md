@@ -1,7 +1,7 @@
 # Especificación: MechLab con las reglas de YAML
 
 - **Issue:** [#175](https://github.com/PonchoiDev/mechlab-web/issues/175)
-- **Estado:** en especificación
+- **Estado:** en desarrollo (datos y lógica hechos; falta la página)
 - **Depende de:** el extractor de los datos de los mods ([#176](https://github.com/PonchoiDev/mechlab-web/pull/176))
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/yaml/gameReference.test.ts` y `src/utils/yaml/mechlab.test.ts`) y por último el código, en commits separados.
 
@@ -42,7 +42,8 @@ Un asset con la misma ruta que otro del juego, o que otro de un mod con menor or
 
 **Decisiones sobre los datos:**
 
-- **Variantes disponibles:** las mismas que en el MechLab de MW5 (sin las de campaña, tutorial, jefes ni cinemáticas), más las que añade YAML.
+- **Variantes disponibles:** las 639 del MechLab de MW5 (sin las de campaña, tutorial, jefes ni cinemáticas), con el MDA de YAML y, si YAML no trae otro, el loadout del juego. Las 183 variantes nuevas de YAML quedan para más adelante: entre ellas hay jefes, rellenos técnicos (`YAML_RUNONCE_DUMMY`, `PARTIAL_SALVAGE`) y versiones de lore que hay que filtrar una a una.
+- **Build de serie:** las piezas del juego base de los loadouts se convierten como en el juego (el motor `XL285` pasa a núcleo `std285` y motor XL; las armas con nivel, `MediumLaser_Lvl2`, son el arma con su nivel). Los contrapesos con los que YAML compensa el peso al convertir (`YAML_VANILLA_COUNTERWEIGHT`, −1000 t) y los rellenos de los loadouts no se guardan: los rellenos los coloca la web.
 - **Ids:** los mismos ids de variante que en el MechLab de MW5.
 - **Ajustes de la partida:** se usan los valores por defecto de YAML. Los ajustes de `gui_config.ini` que cambian el mechlab (multiplicador de ranuras críticas, anclajes omni, armas de una ranura, niveles de permiso del mechlab) quedan fuera.
 
@@ -119,6 +120,8 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 - Los quirks de piloto (afinidades).
 
 ## Pendiente de comprobar en el juego
+
+- Las builds de serie que no pesan su tonelaje: con estas reglas, 343 de 639 lo dan exacto; 77 se desvían 0,01 o 0,02 t (¿redondeo de la Ferro?) y el resto de 0,5 a 11 t (manos de combate pesadas como el BL-6-KNT, Champion, piezas especiales).
 
 - El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
 - La refrigeración de los disipadores fuera del motor (el juego no la sube al montar uno doble en un torso).
