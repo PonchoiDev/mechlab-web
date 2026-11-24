@@ -130,6 +130,14 @@ Es la sexta página de MW5 (`campaigns/index.html`, servida en `/mercs/campaigns
 - **`utils/questGuide.ts`:** los grupos de HRQ por origen, la búsqueda (la misma del mapa, `searchQuests` y `searchCampaigns`) con el filtro por origen, los 'Mechs de cada recompensa sin repetir, el pago total de una campaña, la vista en la URL y los enlaces al mapa. Estos usan `toMapQuery` con la primera fecha en que se ofrece la HRQ o la campaña, para que el mapa no la enseñe como «todavía no se ofrece». Tiene sus tests (`questGuide.test.ts`).
 - **`campaigns/CampaignsApp.tsx`:** las pestañas, los filtros y las listas con una fila plegable por HRQ, campaña o historia contada con HRQ. Solo pinta y llama a la lógica.
 
+### MechLab de YAML
+
+Es una página más del build de MW5 (`yaml/index.html`, servida en `/mercs/yaml/`), con su propio bundle: no carga los datos del MechLab de MW5. Usa los estilos de las unidades enemigas (`units.css`) y añade los suyos (`src/yaml/yaml.css`).
+
+- **Datos de los mods:** `extraer_yaml.py` lee los `.pak` del Workshop con `tools/ue4.py` y guarda el volcado en `tools/datos-juego/yaml/`, que no se sube al repositorio porque es trabajo de los autores de los mods. Del `.pak` del juego saca los tipos de ranura y los loadouts que YAML no sustituye. YAML no guarda en datos el tamaño de las armas del juego: lo cambia al arrancar desde un blueprint, así que `tools/kismet.py` desensambla su bytecode y el extractor guarda esas reglas en `reglas.json`. `generar_yaml.py` aplica las sustituciones entre mods, las reglas y la conversión de las piezas del juego, y genera `src/data/yaml/`.
+- **Reglas propias** en `utils/yaml/`, con sus tipos en `types/yaml-mechlab.ts`: `stats.ts` (peso, velocidad, calor, armadura, estructura y ranuras), `build.ts` (montar y quitar, piezas internas), `board.ts` (lo que pinta el tablero y el selector) y `buildCode.ts` (enlaces, con prefijo propio para no abrir códigos de MW5). `gameReference.test.ts` lleva las cifras de las capturas del mechlab del juego con el mod.
+- **`yaml/YamlApp.tsx`:** la cabecera común, la lectura, los quirks, los problemas de la build, el tablero con las ranuras de cada ubicación (piezas internas en desplegables, armas, equipo y rellenos fijos y dinámicos) y el selector de objetos. Solo pinta y llama a la lógica.
+
 ### BATTLETECH
 
 Las páginas de *BATTLETECH* viven en `/battletech/`, con su propio build (`vite.battletech.config.ts`): la raíz de Vite es `battletech/`, el código está en `src/battletech/` y `src/utils/battletech/`, y se construye en `dist/battletech/` después del build de MW5, que es el que vacía `dist/` y copia la portada. Los plugins comunes (la portada y la API de desarrollo) están en `vite.plugins.ts`, y el Worker trata `/battletech/api/*` igual que `/mercs/api/*`.

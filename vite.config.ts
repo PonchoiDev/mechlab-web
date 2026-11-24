@@ -12,7 +12,7 @@ export default defineConfig({
   base: `/${GAME_PATH}/`,
   build: {
     outDir: `dist/${GAME_PATH}`,
-    // El mapa estelar, las unidades enemigas, los pilotos, el equipo, los chasis, las HRQ y campañas y las builds publicadas son otras páginas con su propio bundle: no se
+    // El mapa estelar, las unidades enemigas, los pilotos, el equipo, los chasis, las HRQ y campañas, las builds publicadas y el MechLab de YAML son otras páginas con su propio bundle: no se
     // descargan con el MechLab.
     rolldownOptions: {
       input: {
@@ -23,7 +23,8 @@ export default defineConfig({
         equipment: resolve(__dirname, 'equipment/index.html'),
         chassis: resolve(__dirname, 'chassis/index.html'),
         campaigns: resolve(__dirname, 'campaigns/index.html'),
-        builds: resolve(__dirname, 'builds/index.html')
+        builds: resolve(__dirname, 'builds/index.html'),
+        yaml: resolve(__dirname, 'yaml/index.html')
       }
     }
   },

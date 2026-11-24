@@ -1,7 +1,7 @@
 # Especificación: MechLab con las reglas de YAML
 
 - **Issue:** [#175](https://github.com/PonchoiDev/mechlab-web/issues/175)
-- **Estado:** en desarrollo (datos y lógica hechos; falta la página)
+- **Estado:** en beta: datos, lógica y página `/mercs/yaml/` (RF1 a RF7, y RF8 sin las builds guardadas)
 - **Depende de:** el extractor de los datos de los mods ([#176](https://github.com/PonchoiDev/mechlab-web/pull/176))
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/yaml/gameReference.test.ts` y `src/utils/yaml/mechlab.test.ts`) y por último el código, en commits separados.
 

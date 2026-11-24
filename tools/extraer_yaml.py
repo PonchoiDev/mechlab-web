@@ -54,6 +54,8 @@ CATEGORIAS = {
     "MWMechTraitDataAsset": "equipo",
     "MWTechBaseRequirementDataAsset": "tecnologia",
     "DataTable": "tablas",
+    # Los nombres de las armas de YAW Clan y de parte del equipo están en tablas de textos.
+    "StringTable": "textos",
 }
 SUFIJO_ARMA = "WeaponDataAsset"
 # Tablas que no son del mechlab: noticias, historial de versiones, iconos y filtros de la interfaz,
@@ -122,6 +124,8 @@ def extraer_pak(ruta_pak, solo=None):
         asset = Asset.desde_pak(pak, ruta[: -len(".uasset")])
         if clase == "DataTable":
             valor = {"filas": asset.filas(export)}
+        elif clase == "StringTable":
+            valor = {"textos": asset.textos(export)}
         else:
             valor = {"clase": clase, "propiedades": limpiar(destino, asset.propiedades(export, rutas=True))}
         resultado.setdefault(destino, {})[ruta_montada(ruta)] = valor

@@ -126,9 +126,21 @@ def ranura_de_arma(nombre, etiqueta, ranura, reglas):
     return ranura
 
 
+# Textos de las tablas de los mods (YAWC_TextWeapons...), por ruta de la tabla: los nombres de las armas
+# de YAW Clan y de parte del equipo no están en el asset, sino en una de ellas.
+TEXTOS = {}
+
+
+def cargar_textos():
+    for ruta, valor in cargar_categoria("textos").items():
+        TEXTOS[ruta] = valor["textos"]
+
+
 def texto(valor):
+    """Un texto del asset: tal cual o, si es una referencia a una tabla de textos, el de la tabla."""
     if isinstance(valor, dict):
-        return valor.get("clave")
+        tabla = (valor.get("tabla") or "").split(".")[0]
+        return TEXTOS.get(tabla, {}).get(valor.get("clave")) or valor.get("clave")
     return valor
 
 
@@ -140,7 +152,10 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         nuevo = {"name": objeto["name"], "kind": objeto["type"], "tons": objeto.get("tonnage") or 0}
         if objeto["type"] == "weapon":
             ruta = os.path.join(RUTA_ITEMS_JUEGO, id_objeto + ".copy")
-            exportado = open(ruta, encoding="utf-8").read() if os.path.exists(ruta) else ""
+            exportado = ""
+            if os.path.exists(ruta):
+                with open(ruta, encoding="utf-8") as archivo:
+                    exportado = archivo.read()
             ranura = (REGEX_PROPIEDAD["slotType"].search(exportado) or [None, None])[1]
             etiqueta = (REGEX_PROPIEDAD["weaponType"].search(exportado) or [None, None])[1]
             ranura = ranura_de_arma(id_objeto, etiqueta, ranura, reglas)
@@ -171,6 +186,9 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
     # Equipo de YAML con sus propiedades (Resources/*Equipment_Properties.json).
     propiedades = cargar_recursos("Equipment_Properties.json")
     for nombre, valor in por_nombre(cargar_categoria("equipo")).items():
+        # Los rasgos de 'Mech (rol de la IA, computadores de puntería de la cantina) no se montan en ranuras.
+        if valor["clase"] == "MWMechTraitDataAsset":
+            continue
         datos = valor["propiedades"]
         extra = propiedades.get(nombre, {})
         objeto = {
@@ -332,6 +350,7 @@ def quirks_de(variante, modelo, asignaciones):
 
 
 def main():
+    cargar_textos()
     reglas = leer(os.path.join(RUTA_YAML, "yet-another-mechlab", "reglas.json"))
     tamanos = tamanos_de_ranuras(reglas)
     objetos = construir_objetos(leer(os.path.join(RUTA_DATOS, "items.json")), reglas, tamanos)
