@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { YamlBuild } from '../../types/yaml-mechlab';
-import { createStockBuild, mountWeapon, removeWeapon, setInternal, setWeaponTier } from './build';
+import { createStockBuild, mountItem, mountWeapon, removeWeapon, setInternal, setWeaponTier, stripBuild } from './build';
 import { decodeYamlBuild, encodeYamlBuild } from './buildCode';
 import {
   getWeaponBonuses, getWeaponPerformance, getWeaponTiers, getWeaponTierStats, getYamlDamageAt, getYamlRangeProfile,
@@ -8,6 +8,7 @@ import {
 } from './combat';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlInventoryItems } from './inventory';
+import { getBuildTonnage, getHeat } from './stats';
 
 // Estadísticas del MechLab de YAML (docs/specs/estadisticas-yaml.md). La build de referencia es la de la
 // captura del mechlab del juego: el NSR-9J de serie con sus seis armas en nivel 3 y el Royal DHS Kit.
@@ -33,7 +34,7 @@ describe('estadísticas del MechLab de YAML', () => {
       'Weapon heat/s': '4.02', 'Cooling heat/s': '3', 'Turn rate °/s': '53.9',
       'Alpha heat': '13.99', 'Heat capacity': '58', 'Torso twist °/s': '67.5',
       'Jump height (m)': '0', 'Speed (km/h)': '48.6', 'Torso yaw °': '95',
-      'Weapon range (m)': '2395', 'Sensor range (m)': '950', 'Arm yaw °': '30',
+      'Weapon range (m)': '2,395', 'Sensor range (m)': '950', 'Arm yaw °': '30',
       'AMS intercept/s': '0', 'AMS range (m)': '0', 'Ammo': '182'
     });
   });
@@ -138,8 +139,8 @@ describe('estadísticas del MechLab de YAML', () => {
       'Weapon heat/s': '3.27', 'Cooling heat/s': '2.2', 'Turn rate °/s': '85.9',
       'Alpha heat': '15.12', 'Heat capacity': '52', 'Torso twist °/s': '108',
       'Jump height (m)': '66', 'Speed (km/h)': '64.8', 'Torso yaw °': '120',
-      'Weapon range (m)': '1485', 'Sensor range (m)': '800', 'Arm yaw °': '30',
-      'AMS intercept/s': '4.03', 'AMS range (m)': '220', 'Ammo': '5640'
+      'Weapon range (m)': '1,485', 'Sensor range (m)': '800', 'Arm yaw °': '30',
+      'AMS intercept/s': '4.03', 'AMS range (m)': '220', 'Ammo': '5,640'
     });
   });
 
@@ -197,5 +198,38 @@ describe('estadísticas del MechLab de YAML', () => {
     // Los mejorados de YAEC (850 cm/s y 5 s): 850 × 5 + ½ × 840 × 5² = 14.750 cm.
     const improved = { ...ghrStock, items: ghrStock.items.map((mounted, index) => jumpJet(index) ? { ...mounted, item: 'ImprovedJumpJet_Class3_Equipment' } : mounted) };
     expect(jump(improved)).toBe('147');
+  });
+
+  it('CA14: la velocidad aplica el topSpeedMulti de los quirks (Clan, +6,7 %)', () => {
+    const adder = findYamlMech('ADR-A')!;
+    expect(getYamlStatsPanel(adder, createStockBuild(adder)).flat().find(cell => cell.key === 'speed')!.value).toBe('103.71');
+  });
+
+  it('CA15: el peso se iguala al máximo si falta menos de un punto de armadura, como el JVN-11A del juego (30/30)', () => {
+    const javelin = findYamlMech('JVN-11A')!;
+    expect(getBuildTonnage(javelin, createStockBuild(javelin))).toBe(30);
+  });
+
+  it('CA16: el daño mostrado suma la explosión (Heavy Gauss, 25 + 5,5)', () => {
+    expect(getWeaponTierStats('HeavyGaussRifle', 1)!.damage).toBe(30.5);
+  });
+
+  it('CA17: el equipo con relativeWeight pesa una parte del tonelaje, a cuartos de tonelada', () => {
+    const withShoulder: YamlBuild = { ...stock, items: [...stock.items, { zone: 'rightArm', slotType: 'Shoulder_SlotType', item: 'SHOULDER_ARMORED' }] };
+    // 0,01 × 95 = 0,95, redondeado a 1.
+    expect(getBuildTonnage(nightstar, withShoulder) - getBuildTonnage(nightstar, stock)).toBeCloseTo(1);
+  });
+
+  it('CA18: el computador de puntería multiplica la base de sensores antes de los bonus de los quirks', () => {
+    const withComputer = mountItem(nightstar, stripBuild(stock), 'leftTorso', 'TargetingComputer_Mk3').build!;
+    // (800 × 1,14) + 50 + 100.
+    expect(panelValues(withComputer)['Sensor range (m)']).toBe('1,062');
+  });
+
+  it('CA19: coolingMulti de una ubicación multiplica la refrigeración de sus disipadores', () => {
+    const lines = mountItem(nightstar, stripBuild(stock), 'rightTorso', 'COOLING_LINES').build!;
+    const before = getHeat(nightstar, lines).cooling;
+    const withHeatSink = mountItem(nightstar, lines, 'rightTorso', 'DoubleHeatSink').build!;
+    expect(getHeat(nightstar, withHeatSink).cooling - before).toBeCloseTo(0.2 * 1.4);
   });
 });
