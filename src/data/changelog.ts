@@ -9,15 +9,6 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
-    id: '2026-11-24-yaml-mechlab',
-    date: '2026-11-24',
-    title: 'YAML MechLab (beta)',
-    items: [
-      "A MechLab with the rules of the Yet Another Mechlab mod at mw-builder.com/mercs/yaml/: weapons take critical slots, the engine is a core plus a type, and Endo and Ferro take filler slots anywhere in the 'Mech",
-      "Weights, speed and heat sinks are checked against the game's mechlab with the mod installed. Some stock builds still do not weigh exactly their tonnage"
-    ]
-  },
-  {
     id: '2026-11-23-mechlab-background',
     date: '2026-11-23',
     title: 'MechLab background',
