@@ -16,6 +16,10 @@ export function getYamlItem(id: string | undefined): YamlItem | undefined {
   return id ? ITEMS[id] : undefined;
 }
 
+export function yamlItemIds(): string[] {
+  return Object.keys(ITEMS);
+}
+
 export function getYamlQuirk(id: string): YamlQuirk | undefined {
   return QUIRKS[id];
 }
