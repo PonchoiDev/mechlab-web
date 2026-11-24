@@ -1,7 +1,7 @@
 # Especificación: estadísticas del MechLab de YAML
 
 - **Issue:** [#175](https://github.com/PonchoiDev/mechlab-web/issues/175)
-- **Estado:** en desarrollo
+- **Estado:** implementada
 - **Depende de:** el MechLab de YAML ([mechlab-yaml.md](mechlab-yaml.md))
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/yaml/combat.test.ts`) y por último el código, en commits separados.
 

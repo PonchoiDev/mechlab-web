@@ -236,6 +236,19 @@ export function getYamlRangeProfile(weapons: YamlWeaponPerformance[]): RangeProf
   });
 }
 
+// Las cajas de munición montadas por tipo: cuántas y cuántos disparos suman, como en el análisis de MW5.
+export function getYamlAmmunition(build: YamlBuild): { ammoType: string; label: string; bins: number; capacity: number }[] {
+  const byType = new Map<string, { label: string; bins: number; capacity: number }>();
+  for (const mounted of build.items) {
+    const item = getYamlItem(mounted.item);
+    if (item?.kind !== 'ammo') continue;
+    const key = item.ammoType ?? mounted.item;
+    const entry = byType.get(key) ?? { label: item.name, bins: 0, capacity: 0 };
+    byType.set(key, { ...entry, bins: entry.bins + 1, capacity: entry.capacity + (item.capacity ?? 0) });
+  }
+  return [...byType.entries()].map(([ammoType, entry]) => ({ ammoType, ...entry }));
+}
+
 export interface YamlMechStats {
   armor: number;
   structure: number;

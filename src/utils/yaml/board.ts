@@ -1,5 +1,6 @@
 import type { Zone } from '../../types/mech';
 import type { YamlBuild, YamlHardpointType, YamlMech } from '../../types/yaml-mechlab';
+import { getDefaultTier } from './combat';
 import { getYamlItem } from './data';
 import {
   GENERAL_SLOT, getBuildTonnage, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots
@@ -67,7 +68,7 @@ export function distributeDynamicFillers(mech: YamlMech, build: YamlBuild): Reco
 }
 
 export type ZoneRow =
-  | { kind: 'weapon'; label: string; slots: number; hardpoint: string; item: string }
+  | { kind: 'weapon'; label: string; slots: number; hardpoint: string; item: string; tier: number }
   | { kind: 'item'; label: string; slots: number; index: number; slotType: string }
   | { kind: 'fixedFiller' | 'dynamicFiller'; label: string; slots: number; slotType: string }
   | { kind: 'free'; slots: number };
@@ -86,7 +87,10 @@ export function getZoneRows(mech: YamlMech, build: YamlBuild, zone: Zone, filler
   const pieces: ZoneRow[] = [];
   for (const weapon of build.weapons.filter(mounted => mounted.zone === zone && !getYamlItem(mounted.item)?.actuator)) {
     const item = getYamlItem(weapon.item);
-    pieces.push({ kind: 'weapon', label: item?.name ?? weapon.item, slots: item?.slots ?? 1, hardpoint: weapon.hardpoint, item: weapon.item });
+    pieces.push({
+      kind: 'weapon', label: item?.name ?? weapon.item, slots: item?.slots ?? 1, hardpoint: weapon.hardpoint, item: weapon.item,
+      tier: weapon.tier ?? getDefaultTier(weapon.item)
+    });
   }
   const special: ZoneRow[] = [];
   build.items.forEach((mounted, index) => {

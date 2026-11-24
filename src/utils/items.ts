@@ -68,7 +68,7 @@ export const getSizeName = (size: ItemSize): string => SIZE_NAMES[size];
 
 export const getWeaponTypeName = (weaponType: HardpointType): string => WEAPON_TYPE_NAMES[weaponType];
 
-export const isClanTech = (item: Item): boolean => item.techBase === 'Clan';
+export const isClanTech = (item: Pick<Item, 'techBase'>): boolean => item.techBase === 'Clan';
 
 export const getTierName = (item: Item): string | null => {
   if (item.type !== 'weapon' || !item.tiers) return null;

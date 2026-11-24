@@ -6,6 +6,7 @@ import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
 import { ZONES } from '../utils/zones';
 import { getActuatorWeapons, getHardpointUsage, getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, INTERNAL_SLOTS, type FillerGroup, type ZoneRow } from '../utils/yaml/board';
 import { GENERAL_SLOT } from '../utils/yaml/stats';
+import { getWeaponTiers } from '../utils/yaml/combat';
 import { getItemColor, getSlotColor, getYamlItem, getYamlQuirk } from '../utils/yaml/data';
 import { ModLogo } from './YamlInventoryPanel';
 import type { YamlInventoryTarget } from '../utils/yaml/inventory';
@@ -86,6 +87,18 @@ function rowItemId(row: ZoneRow, build: YamlBuild): string | undefined {
   return undefined;
 }
 
+// El nivel del arma con las rayitas del mechlab del juego («▬▬▬▭»): de 1 a 4 llenas; el 5 (Lost Tech) todas
+// en dorado y el 0, ninguna.
+function TierPips({ id, tier }: { id: string; tier: number }) {
+  if (getWeaponTiers(id).length < 2) return null;
+  const label = tier === 5 ? 'Lost Tech tier' : `Tier ${tier}`;
+  return (
+    <span className={tier === 5 ? 'yaml-tier-pips is-legendary' : 'yaml-tier-pips'} role="img" aria-label={label} title={label}>
+      {[1, 2, 3, 4].map(pip => <span key={pip} className={pip <= tier ? 'is-filled' : undefined} />)}
+    </span>
+  );
+}
+
 function RowItem({ row, build, inCells = false, isSelected = false, onSelect, onRemove }: {
   row: ZoneRow;
   build: YamlBuild;
@@ -118,6 +131,7 @@ function RowItem({ row, build, inCells = false, isSelected = false, onSelect, on
       ) : (
         <>
           {row.label}
+          {row.kind === 'weapon' && <TierPips id={row.item} tier={row.tier} />}
           <small>{row.slots > 1 ? slotsLabel(row.slots) : ''}</small>
         </>
       )}
