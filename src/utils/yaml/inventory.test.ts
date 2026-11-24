@@ -3,7 +3,7 @@ import { createStockBuild, stripBuild } from './build';
 import { findYamlMech } from './data';
 import {
   autoPlaceYamlItem, chooseYamlInternal, countYamlByCategory, filterYamlInventory, getYamlDropZones, getYamlInternalChoices,
-  getYamlInventoryItems, placeYamlItem, sortYamlInventory
+  getYamlInventoryItems, isAmmoForMountedWeapon, placeYamlItem, sortYamlInventory
 } from './inventory';
 
 // El inventario del MechLab de YAML con el NSR-9J: lo mismo que el de MW5 con las reglas de YAML.
@@ -55,5 +55,15 @@ describe('inventario del MechLab de YAML', () => {
     expect(new Set(names).size).toBe(names.length);
     const ratings = getYamlInternalChoices(nightstar, stock, 'Engine').map(choice => Number(choice.id.replace('std', '')));
     expect(ratings).toEqual([...ratings].sort((a, b) => a - b));
+  });
+
+  it('con «Fits», solo la munición de las armas montadas, como en MW5', () => {
+    const fits = filterYamlInventory(catalog, { ...all, category: 'ammo', fitsOnly: true }, nightstar, stock, null);
+    expect(fits.length).toBeGreaterThan(0);
+    expect(fits.every(({ id }) => isAmmoForMountedWeapon(stock, id))).toBe(true);
+    expect(fits.some(({ id }) => id === 'Gauss_Standard_AmmoEquipment')).toBe(true);
+    expect(fits.some(({ id }) => id === 'LRM_AmmoEquipment')).toBe(false);
+    expect(filterYamlInventory(catalog, { ...all, category: 'ammo', fitsOnly: true }, nightstar, empty, null)).toEqual([]);
+    expect(getYamlDropZones(nightstar, empty, 'Gauss_Standard_AmmoEquipment')).toEqual([]);
   });
 });

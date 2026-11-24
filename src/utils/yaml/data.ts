@@ -50,8 +50,10 @@ export function getItemColor(id: string, slotType = 'General_SlotType'): string 
   return slotType === 'General_SlotType' ? YAML_COLORS.general : getSlotColor(slotType) ?? YAML_COLORS.general;
 }
 
-// El logo del mod de cada pieza («YA ML», «YA EC»...), como en el mechlab del juego; las del juego base no llevan.
+// El logo del mod de cada pieza («YA ML», «YA EC»...), como en el mechlab del juego. No lo llevan las del juego
+// base ni las piezas estándar fijas de YAML (Armor Standard, Standard Engine...), que el juego enseña sin él.
 export function getModLogo(id: string | undefined): string | undefined {
-  const mod = id ? ITEMS[id]?.mod : undefined;
+  const item = id ? ITEMS[id] : undefined;
+  const mod = item && !item.fixed ? item.mod : undefined;
   return mod ? `${import.meta.env.BASE_URL}mechlab/yaml/mods/${mod}.png` : undefined;
 }

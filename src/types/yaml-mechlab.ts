@@ -70,6 +70,9 @@ export interface YamlItem {
   // Armas: el tipo de anclaje y el tipo de ranura que fija su tamaño.
   hardpoint?: YamlHardpointType;
   slotType?: string;
+  // Armas: la munición que usan; munición: su tipo. Una caja sirve a las armas que usan su tipo.
+  ammoTypes?: string[];
+  ammoType?: string;
   // Munición y equipo: los tipos de ranura donde se monta.
   slotTypes?: string[];
   category?: string;

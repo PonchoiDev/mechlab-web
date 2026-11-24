@@ -22,5 +22,9 @@ describe('colores del MechLab de YAML', () => {
     expect(getModLogo('ENDO')).toMatch(/mods\/yet-another-mechlab\.png$/);
     expect(getModLogo('ROYAL_DHS_KIT')).toMatch(/yet-another-equipment-collection\.png$/);
     expect(getModLogo('GaussRifle')).toBeUndefined();
+    // Las piezas estándar fijas, como en el juego, tampoco: Armor Standard, Standard Engine...
+    expect(getModLogo('ARMOR_STANDARD_FIXED')).toBeUndefined();
+    expect(getModLogo('ENGINE_FIXED')).toBeUndefined();
+    expect(getModLogo('ENGINE_XL')).toBeDefined();
   });
 });

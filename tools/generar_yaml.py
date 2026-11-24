@@ -213,8 +213,19 @@ def texto(valor):
     return valor
 
 
+def municiones_del_arma(propia, etiqueta, propiedades_de_armas):
+    """La munición que usa un arma: la suya y la que le añade YAW por su etiqueta (el MML usa la de LRM y
+    la de SRM, con «ammoTypes» en Weapon_Properties.json)."""
+    tipos = [propia] if propia else []
+    for clave, valores in propiedades_de_armas.items():
+        if etiqueta and (etiqueta == clave or etiqueta.startswith(clave + ".")):
+            tipos.extend(tipo for tipo in valores.get("ammoTypes", []) if tipo not in tipos)
+    return tipos
+
+
 def construir_objetos(catalogo_juego, reglas, tamanos):
     objetos = {}
+    propiedades_de_armas = cargar_recursos("Weapon_Properties.json")
     # Armas y equipo del juego base: sus cifras están en el catálogo de MW5; el tipo de ranura de las
     # armas, en sus exportaciones.
     for id_objeto, objeto in catalogo_juego.items():
@@ -228,7 +239,8 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             ranura = (REGEX_PROPIEDAD["slotType"].search(exportado) or [None, None])[1]
             etiqueta = (REGEX_PROPIEDAD["weaponType"].search(exportado) or [None, None])[1]
             ranura = ranura_de_arma(id_objeto, etiqueta, ranura, reglas)
-            nuevo.update({"hardpoint": objeto.get("weaponType"), "slotType": ranura, "slots": tamanos.get(ranura, 1)})
+            nuevo.update({"hardpoint": objeto.get("weaponType"), "slotType": ranura, "slots": tamanos.get(ranura, 1),
+                          "ammoTypes": municiones_del_arma(objeto.get("ammoType"), etiqueta, propiedades_de_armas)})
         else:
             nuevo.update({"slots": objeto.get("slots") or 1, "slotTypes": objeto.get("specialSlotTypes") or [RANURA_GENERAL]})
             for campo in ("cooling", "heatCapacity", "capacity", "ammoType"):
@@ -246,11 +258,13 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon",
             "tons": datos.get("Tonnage") or 0, "hardpoint": tipo_de_anclaje(etiqueta),
             "slotType": ranura, "slots": tamanos.get(ranura, 1),
+            "ammoTypes": municiones_del_arma((datos.get("StatsData") or {}).get("AmmoType"), etiqueta, propiedades_de_armas),
         }
 
     for nombre, valor in por_nombre(cargar_categoria("municion")).items():
         datos = valor["propiedades"]
         objetos[nombre] = {"mod": valor["mod"], "name": texto(datos.get("Name")) or nombre, "kind": "ammo", "tons": datos.get("Tons") or 0,
+                           "ammoType": datos.get("AmmoType"),
                            "slots": datos.get("Slots") or 1, "slotTypes": [RANURA_GENERAL]}
 
     # Equipo de YAML con sus propiedades (Resources/*Equipment_Properties.json).

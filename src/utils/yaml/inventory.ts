@@ -65,8 +65,18 @@ export function placeYamlItem(mech: YamlMech, build: YamlBuild, id: string, zone
   return item.kind === 'weapon' ? mountWeapon(mech, build, zone, id, hardpoint ?? undefined) : mountItem(mech, build, zone, id);
 }
 
-// Las ubicaciones donde cabe un objeto, para resaltarlas al arrastrarlo o al elegirlo para colocarlo.
+// Una caja de munición sirve si alguna arma montada usa su tipo, como en el inventario de MW5.
+export function isAmmoForMountedWeapon(build: YamlBuild, id: string): boolean {
+  const ammoType = getYamlItem(id)?.ammoType;
+  return !!ammoType && build.weapons.some(weapon => getYamlItem(weapon.item)?.ammoTypes?.includes(ammoType));
+}
+
+const isUseful = (build: YamlBuild, id: string) => getYamlItem(id)?.kind !== 'ammo' || isAmmoForMountedWeapon(build, id);
+
+// Las ubicaciones donde cabe un objeto, para resaltarlas al arrastrarlo o al elegirlo para colocarlo. La
+// munición sin arma que la use no se resalta en ninguna, como en MW5.
 export function getYamlDropZones(mech: YamlMech, build: YamlBuild, id: string): Zone[] {
+  if (!isUseful(build, id)) return [];
   return ZONES.filter(zone => placeYamlItem(mech, build, id, zone).build);
 }
 
@@ -91,6 +101,7 @@ export function filterYamlInventory(
     if (filters.category !== 'all' && getYamlInventoryCategory(item) !== filters.category) return false;
     if (text && !item.name.toLowerCase().includes(text)) return false;
     if (!filters.fitsOnly) return true;
+    if (!isUseful(build, id)) return false;
     if (target) return !!placeYamlItem(mech, build, id, target.zone, target.hardpoint).build;
     return getYamlDropZones(mech, build, id).length > 0;
   });
