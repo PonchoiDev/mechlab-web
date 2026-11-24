@@ -9,7 +9,7 @@
 
 La lectura del MechLab de YAML enseña ahora diez cifras copiadas de la del MechLab de MW5 (peso, armadura, velocidad, motor, ranuras libres, refrigeración...). El mechlab del juego con YAML enseña otras: un panel de 21 cifras con daño, calor, alcance, movimiento, sensores, AMS y munición. Tampoco hay análisis de armas ni radar de daño por alcance, que sí tiene el MechLab de MW5.
 
-Con YAML instalado, esas cifras las calcula el propio mod (blueprint `MechAlphaStats` de YAML y `YAWFunctionsYAML`, que aplica las reglas de Yet Another Weapon), no el juego. Las fórmulas de esta especificación salen de desensamblar ese bytecode con `tools/kismet.py`, y las cifras de referencia, de una captura del juego.
+Con YAML instalado, esas cifras las calcula el propio mod (blueprint `MechAlphaStats` de YAML y `YAWFunctionsYAML`, que aplica las reglas de Yet Another Weapon), no el juego. Las fórmulas de esta especificación salen de desensamblar ese bytecode con `tools/kismet.py`, y las cifras de referencia, de capturas del juego. Cuando el mod llama a una función nativa del juego (la altura de salto), la fórmula sale de desensamblar el ejecutable: ninguna fórmula se ajusta solo a las capturas.
 
 ## Datos
 
@@ -30,6 +30,7 @@ Las armas de los mods dejan de salir una vez por nivel en el inventario (`CEERPP
 
 - **Munición:** la capacidad de cada caja (`Capacity`) también en la de los mods, o la de `ammoCapacity` de `Equipment_Properties.json` si YAML la cambia (la caja de AMS pasa de 2.000 a 5.000 disparos).
 - **Equipo:** sus bonificaciones de `Equipment_Properties.json` que cambian las cifras: las de armas (`weapons`: `scope` y `groups`), las de movimiento (`turnSpeedMulti`, `torsoTwistRateMulti`, `torsoTwistAngleMulti`, `armTwistAngleMulti` y sus versiones de guiñada) y las de sensores (`sensorRangeBonus`, `sensorRangeMulti`), más el `SensorRangeModifier` de las sondas y el porcentaje de sensores de los computadores de puntería.
+- **Retrorreactores:** de su asset (`MWJumpJetDataAsset`, del juego y de YAEC), la velocidad inicial vertical (`InitialVelocityZ`, cm/s), el tiempo de encendido (`BurnTime`, s) y la curva de aceleración vertical (`AccelZCurve`, una `CurveFloat` lineal de cm/s² por número de retrorreactores montados: de 0 a 2.100 con 10 en las del juego).
 - **Variantes:** de su MDA, el giro (`MoveStats.TurnSpeed`), el giro del torso (`TorsoTwistRate.Yaw`), el ángulo del torso (`TorsoTwistBounds.High.Yaw`, o 360 si `bIsYawUnbound`) y el de los brazos (`ArmTwistBounds.High.Yaw`).
 
 Los ajustes de Yet Another Weapon son los de por defecto de su `gui_config.ini`: alcance máximo × 2 (`GlobalMaxRangeMultiplier`), duración de los láseres de pulsos × 0,7 (`TracePulseLaserDurationMultiplier`) y el resto de multiplicadores × 1.
@@ -56,7 +57,7 @@ Todas comprobadas con la captura del NSR-9J de serie con sus armas en nivel 3 y 
 - **Cuerpo a cuerpo (✔):** daño × `damageMulti` y enfriamiento × `cooldownMulti`; daño por segundo = daño / (`Melee.Duration` + enfriamiento). Cuentan las armas montadas en anclajes de cuerpo a cuerpo, también las nudilleras de la mano, pero no los ataques de los actuadores (la «Mano de asalto»). Con el quirk Melee Specialization (+10 % de daño y −10 % de enfriamiento), la gran espada de asalto de nivel 1 hace 93,5 de daño y 17,48 por segundo.
 - **Armadura y estructura de las armas (✔):** las armas cuerpo a cuerpo suman armadura y estructura a su ubicación, sin peso (`armorComponentFront` y `structureComponent` de `Weapon_Properties.json`, por etiqueta): la gran espada de asalto +40 y +32, los puños de asalto +10 y +8. El equipo con esas propiedades también las suma.
 - **Movimiento:** cada cifra del MDA × su multiplicador (suma de los del equipo y los quirks), redondeada a un decimal.
-- **Altura de salto (✔):** 34 + 8 m por retrorreactor, y 0 sin ninguno: GHR-5J (70 t) con dos de clase III, 50 m; con cuatro, 66 m; JVN-11A (30 t) con seis de clase V, 82 m. El juego la estima en código nativo (`EstimateMaxJumpJetHeight`) y la fórmula sale de esas tres capturas: todas las clases de retrorreactor tienen el mismo empuje y tiempo de encendido, y cada una va con su tramo de tonelaje, así que el tonelaje no cambia la cifra. YAML la multiplica por `jumpJetFuelBurnTimeMulti` y `jumpJetZAccelMulti` del equipo y los quirks.
+- **Altura de salto (✔):** la estima el juego en C++ (`EstimateMaxJumpJetHeight`, desensamblada del ejecutable de MW5: su envoltorio se encuentra por la tabla de registro de funciones nativas de Unreal). Es el tiro vertical h = v₀·t + ½·a·t², en cm y truncado a entero, con v₀ = `InitialVelocityZ`, t = `BurnTime` y a = `AccelZCurve` evaluada en el número de retrorreactores montados, × (1 + bonificaciones de los rasgos del 'Mech); sin retrorreactores, 0. YAML la multiplica por `jumpJetFuelBurnTimeMulti` y `jumpJetZAccelMulti` del equipo y los quirks, la redondea, y el panel la pasa a metros con una división entera. Con los del juego (1.250 cm/s, 2,75 s y 210 cm/s² por retrorreactor): GHR-5J (70 t) con dos de clase III, 5.025,6 cm, 50 m; con cuatro, 66 m; JVN-11A (30 t) con seis de clase V, 82 m, como en las capturas. Los retrorreactores mejorados de YAEC (850 cm/s y 5 s) llegan mucho más alto: cuatro, 147 m.
 - **Sensores (✔):** (800 m + `sensorRangeBonus`) × `sensorRangeMulti` × (1 + (`SensorRangeModifier` − 1) de cada sonda + porcentaje de los computadores de puntería). NSR-9J: 800 + 50 (Command 'Mech) + 100 (SLDF) = 950 m.
 
 ## El panel del juego
@@ -117,7 +118,7 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 | CA10 | El GHR-5J de serie con sus armas en nivel 3 (Streak SRM 2, ER Large Laser, AMS y dos Medium Laser), motor estándar y cuatro retrorreactores de clase III | se calcula el panel | Armor 416, Structure 223, Melee dmg avg 0, Alpha damage 27,28, Damage/s 7,03, Melee dmg/s avg 0, Weapon heat/s 3,27, Cooling heat/s 2,2, Turn rate 85,9, Alpha heat 15,12, Heat capacity 52, Torso twist 108, Speed 64,8, Torso yaw 120, Weapon range 1.485, Sensor range 800, Arm yaw 30, AMS intercept/s 4,03, AMS range 220, Ammo 5.640 |
 | CA11 | El CP-10-P de serie con una gran espada de asalto de nivel 1 en el brazo izquierdo en lugar de la claymore, con y sin nudilleras de asalto de nivel 2 en la mano derecha | se calcula el panel | con nudilleras: Armor 376, Structure 325, Melee dmg avg 64,62 y Melee dmg/s avg 12,82; sin ellas: 366, 317, 93,5 y 17,48. En los dos: Alpha damage 36,6, Damage/s 10,16, Weapon heat/s 3,14, Alpha heat 11,55, Cooling 1, Heat capacity 40, Turn rate 71,6, Torso twist 90, Torso yaw 80, Arm yaw 20, Weapon range 900, Sensor range 900, Ammo 880 |
 | CA12 | El JVN-11A de serie con sus siete Medium Laser en nivel 3, Ferro, el Double Heat Sink Kit y seis retrorreactores de clase V | se calcula el panel | Armor 179, Structure 111, Alpha damage 38,5, Damage/s 8,19, Weapon heat/s 3,02, Cooling 2, Turn rate 126,8, Alpha heat 14,17, Heat capacity 50, Torso twist 150,7, Speed 97,2, Torso yaw 110, Weapon range 594, Sensor range 800, Arm yaw 35, Ammo 0 |
-| CA13 | El GHR-5J de CA10 con un solo retrorreactor en cada pierna | se calcula el panel | Jump height 50; con los cuatro, 66; el JVN-11A de CA12 con seis, 82 |
+| CA13 | El GHR-5J de CA10 con un solo retrorreactor en cada pierna | se calcula el panel | Jump height 50; con los cuatro, 66; sin ninguno, 0; con cuatro retrorreactores mejorados de YAEC de clase III, 147 (la fórmula del juego con sus datos) |
 
 ## Fuera de alcance
 
@@ -125,6 +126,7 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 - Los quirks de piloto y las habilidades del piloto.
 - La caída del daño de cada arma con la distancia más allá de la línea recta del radar (curvas `MWO_RangeData`, `DamageScaleAtMaxRange`).
 - Los efectos de los computadores de puntería sobre las armas (velocidad del proyectil y alcance de los láseres), que el juego aplica como rasgos.
+- Las bonificaciones de los rasgos del 'Mech (`MWMechTraitDataAsset`) a la altura de salto: el generador no incluye los rasgos, que no se montan en ranuras.
 
 ## Pendiente de comprobar en el juego
 

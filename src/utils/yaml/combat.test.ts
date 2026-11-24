@@ -183,7 +183,7 @@ describe('estadísticas del MechLab de YAML', () => {
     });
   });
 
-  it('CA13: la altura de salto, 34 m más 8 por retrorreactor', () => {
+  it('CA13: la altura de salto, con la fórmula del juego y los datos de cada retrorreactor', () => {
     const grasshopper = findYamlMech('GHR-5J')!;
     const ghrStock = createStockBuild(grasshopper);
     const jumpJet = (index: number) => getYamlItem(ghrStock.items[index].item)?.slotTypes?.some(slotType => /jumpjet/i.test(slotType));
@@ -194,5 +194,8 @@ describe('estadísticas del MechLab de YAML', () => {
     expect(jump(twoJets)).toBe('50');
     expect(jump(ghrStock)).toBe('66');
     expect(jump({ ...ghrStock, items: ghrStock.items.filter((_, index) => !jumpJet(index)) })).toBe('0');
+    // Los mejorados de YAEC (850 cm/s y 5 s): 850 × 5 + ½ × 840 × 5² = 14.750 cm.
+    const improved = { ...ghrStock, items: ghrStock.items.map((mounted, index) => jumpJet(index) ? { ...mounted, item: 'ImprovedJumpJet_Class3_Equipment' } : mounted) };
+    expect(jump(improved)).toBe('147');
   });
 });
