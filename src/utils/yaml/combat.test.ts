@@ -121,4 +121,23 @@ describe('estadísticas del MechLab de YAML', () => {
     expect(sum('dps')).toBeCloseTo(16.47, 2);
     expect(sum('heat')).toBeCloseTo(13.99, 2);
   });
+
+  it('CA10: el GHR-5J con misiles, AMS, motor estándar y retrorreactores da las cifras del juego', () => {
+    const grasshopper = findYamlMech('GHR-5J')!;
+    const ghrStock = createStockBuild(grasshopper);
+    const ghr = ghrStock.weapons
+      .filter(mounted => !getYamlItem(mounted.item)?.actuator)
+      .reduce((current, mounted) => setWeaponTier(current, mounted.hardpoint, 3), ghrStock);
+    const values = Object.fromEntries(getYamlStatsPanel(grasshopper, ghr).flat().map(cell => [cell.label, cell.value]));
+    expect(values).toEqual({
+      'Armor': '416', 'Structure': '223', 'Melee dmg avg': '0',
+      'Alpha damage': '27.28', 'Damage/s': '7.03', 'Melee dmg/s avg': '0',
+      'Weapon heat/s': '3.27', 'Cooling heat/s': '2.2', 'Turn rate °/s': '85.9',
+      'Alpha heat': '15.12', 'Heat capacity': '52', 'Torso twist °/s': '108',
+      // Con retrorreactores, sin cifra hasta calibrarla (el juego marca 66).
+      'Jump height (m)': '-', 'Speed (km/h)': '64.8', 'Torso yaw °': '120',
+      'Weapon range (m)': '1485', 'Sensor range (m)': '800', 'Arm yaw °': '30',
+      'AMS intercept/s': '4.03', 'AMS range (m)': '220', 'Ammo': '5640'
+    });
+  });
 });

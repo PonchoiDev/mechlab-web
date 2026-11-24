@@ -23,12 +23,12 @@ Con YAML instalado, esas cifras las calcula el propio mod (blueprint `MechAlphaS
 | Daño y calor por disparo | `Damage` y `HeatGenerated` del proyectil, o `DamageOverDuration` y `HeatGeneratedOverDuration` del rayo, con los quirks del nivel. El daño se multiplica por los misiles o los perdigones y por los disparos de la ráfaga, y el calor por los misiles y los disparos, como en el MechLab de MW5 |
 | Enfriamiento, duración del rayo y alcances | `Cooldown`, `Trace.Duration`, `OptimalRange` y `MaxRange`, con los quirks del nivel |
 | Tiempo de la salva | Proyectiles: `NumberOfTimesToFire × DelayBetweenFiring`; misiles: `NumberOfMissiles × MissileInterval` |
-| AMS | `MissileDestructionRate` y `MaxRange` |
+| AMS | `MissileDestructionRate` de cada nivel (el nivel 3 lo trae en su asset: 4,025 frente a 3,5) y `MaxRange` |
 | Cuerpo a cuerpo | `Melee.Damage`, `Melee.Duration` y `Cooldown` |
 
 Las armas de los mods dejan de salir una vez por nivel en el inventario (`CEERPPC79`, `CEERPPC79_Lvl2`...): como las del juego, son un objeto con sus niveles. Además:
 
-- **Munición:** la capacidad de cada caja (`Capacity`) también en la de los mods.
+- **Munición:** la capacidad de cada caja (`Capacity`) también en la de los mods, o la de `ammoCapacity` de `Equipment_Properties.json` si YAML la cambia (la caja de AMS pasa de 2.000 a 5.000 disparos).
 - **Equipo:** sus bonificaciones de `Equipment_Properties.json` que cambian las cifras: las de armas (`weapons`: `scope` y `groups`), las de movimiento (`turnSpeedMulti`, `torsoTwistRateMulti`, `torsoTwistAngleMulti`, `armTwistAngleMulti` y sus versiones de guiñada) y las de sensores (`sensorRangeBonus`, `sensorRangeMulti`), más el `SensorRangeModifier` de las sondas y el porcentaje de sensores de los computadores de puntería.
 - **Variantes:** de su MDA, el giro (`MoveStats.TurnSpeed`), el giro del torso (`TorsoTwistRate.Yaw`), el ángulo del torso (`TorsoTwistBounds.High.Yaw`, o 360 si `bIsYawUnbound`) y el de los brazos (`ArmTwistBounds.High.Yaw`).
 
@@ -38,6 +38,7 @@ Los ajustes de Yet Another Weapon son los de por defecto de su `gui_config.ini`:
 
 Todas comprobadas con la captura del NSR-9J de serie con sus armas en nivel 3 y el Royal DHS Kit (criterio CA1).
 
+- **Motor estándar (✔):** los loadouts de YAML dejan vacía la ranura del tipo de motor de los 'Mechs con motor estándar. La pieza `ENGINE_FIXED` (como las demás `_FIXED` de motor) trae −5 % de calor de las armas, pero el juego no la monta en esos 'Mechs: el GHR-5J da 15,12 de calor alfa, sin ese −5 %.
 - **Bonificaciones (✔):** las dan los quirks de la variante y el equipo montado. Cada grupo (`groups`) se aplica a las armas cuya etiqueta o tecnología empieza por una de sus `tags`, o cuyo nombre sin nivel está en ellas, salvo las de `excludeTags`. Los quirks valen para todo el 'Mech salvo que su grupo diga `mechParts`. El equipo vale para todo el 'Mech salvo con `scope: "component"`, que solo vale para las armas de su ubicación. **Los multiplicadores se suman, no se multiplican** (`AddMulti` de YAML: `a + b − 1`, como mínimo 0,001): Improved Targeting (enfriamiento × 0,9) y SLDF (× 0,9) dan × 0,8; SLDF (calor × 0,9) y el Royal DHS Kit (× 0,92), × 0,82.
 - **Enfriamiento:** el del nivel × `cooldownMulti`, como mínimo 0,01 s.
 - **Daño y calor por disparo:** los del nivel × `damageMulti` y × `heatMulti`.
@@ -75,7 +76,7 @@ Las 21 cifras de `MechLabStatsPanelWidget`, con sus títulos y en su orden (7 fi
 - **Weapon range (✔):** el mayor alcance máximo, **truncado** al metro (el juego lo redondea a centímetros y lo divide como entero: 2.395,8 → 2.395).
 - **Melee dmg avg, Melee dmg/s avg:** la media de las armas de cuerpo a cuerpo; 0 sin ninguna.
 - **AMS intercept/s:** la suma de misiles destruidos por segundo de los AMS (`MissileDestructionRate` × `missilesDestroyedMulti`); **AMS range**, el mayor alcance.
-- **Ammo:** la suma de la capacidad de las cajas, sin multiplicadores.
+- **Ammo (✔):** la suma de la capacidad de las cajas, sin multiplicadores.
 - **Armor, Structure, Cooling, Heat capacity, Speed:** las de las reglas del MechLab.
 - Cada cifra lleva la barra del juego, llena en proporción al tope que usa el juego (Armor 626, Alpha damage 150, Damage/s 45...).
 
@@ -110,6 +111,7 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 | CA7 | Un arma en nivel 3 | se monta, se codifica la build y se decodifica | sigue en nivel 3, y el panel cambia con el nivel |
 | CA8 | La build de referencia | se calcula el daño por alcance | a 500 m llega el daño de las seis armas salvo el Small Laser, con el Medium Pulse Laser ya bajando; a 2.400 m no llega ninguna; el radar tiene diez anillos de 250 m |
 | CA9 | La tabla de análisis | se suman sus filas | dan el daño alfa, el daño por segundo y el calor del panel |
+| CA10 | El GHR-5J de serie con sus armas en nivel 3 (Streak SRM 2, ER Large Laser, AMS y dos Medium Laser), motor estándar y cuatro retrorreactores de clase III | se calcula el panel | Armor 416, Structure 223, Melee dmg avg 0, Alpha damage 27,28, Damage/s 7,03, Melee dmg/s avg 0, Weapon heat/s 3,27, Cooling heat/s 2,2, Turn rate 85,9, Alpha heat 15,12, Heat capacity 52, Torso twist 108, Speed 64,8, Torso yaw 120, Weapon range 1.485, Sensor range 800, Arm yaw 30, AMS intercept/s 4,03, AMS range 220, Ammo 5.640 |
 
 ## Fuera de alcance
 
@@ -120,8 +122,8 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 
 ## Pendiente de comprobar en el juego
 
-- **Jump height:** la calcula el juego (`EstimateMaxJumpJetHeight`) con el empuje de los retrorreactores y el peso del 'Mech. Sin retrorreactores es 0; con ellos, la web no enseña cifra hasta tener una captura con la que calibrarla.
-- Las cifras con armas de misiles, AMS y cuerpo a cuerpo montadas.
+- **Jump height:** la calcula el juego (`EstimateMaxJumpJetHeight`) con el empuje de los retrorreactores y el peso del 'Mech. Sin retrorreactores es 0; con ellos, la web no enseña cifra hasta calibrarla. El GHR-5J (70 t) con cuatro de clase III da 66 m; con un solo dato no se separa el efecto del número de retrorreactores, de su clase y del tonelaje.
+- Las cifras con armas de cuerpo a cuerpo montadas.
 
 ## Plan de pruebas
 
