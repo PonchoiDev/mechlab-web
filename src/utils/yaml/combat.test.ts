@@ -137,8 +137,7 @@ describe('estadísticas del MechLab de YAML', () => {
       'Alpha damage': '27.28', 'Damage/s': '7.03', 'Melee dmg/s avg': '0',
       'Weapon heat/s': '3.27', 'Cooling heat/s': '2.2', 'Turn rate °/s': '85.9',
       'Alpha heat': '15.12', 'Heat capacity': '52', 'Torso twist °/s': '108',
-      // Con retrorreactores, sin cifra hasta calibrarla (el juego marca 66).
-      'Jump height (m)': '-', 'Speed (km/h)': '64.8', 'Torso yaw °': '120',
+      'Jump height (m)': '66', 'Speed (km/h)': '64.8', 'Torso yaw °': '120',
       'Weapon range (m)': '1485', 'Sensor range (m)': '800', 'Arm yaw °': '30',
       'AMS intercept/s': '4.03', 'AMS range (m)': '220', 'Ammo': '5640'
     });
@@ -178,10 +177,22 @@ describe('estadísticas del MechLab de YAML', () => {
       // 7 × 2,0249999 en float32: 14,1749999, por debajo del empate.
       'Weapon heat/s': '3.02', 'Cooling heat/s': '2', 'Turn rate °/s': '126.8',
       'Alpha heat': '14.17', 'Heat capacity': '50', 'Torso twist °/s': '150.7',
-      // Con retrorreactores, sin cifra hasta calibrarla (el juego marca 82).
-      'Jump height (m)': '-', 'Speed (km/h)': '97.2', 'Torso yaw °': '110',
+      'Jump height (m)': '82', 'Speed (km/h)': '97.2', 'Torso yaw °': '110',
       'Weapon range (m)': '594', 'Sensor range (m)': '800', 'Arm yaw °': '35',
       'AMS intercept/s': '0', 'AMS range (m)': '0', 'Ammo': '0'
     });
+  });
+
+  it('CA13: la altura de salto, 34 m más 8 por retrorreactor', () => {
+    const grasshopper = findYamlMech('GHR-5J')!;
+    const ghrStock = createStockBuild(grasshopper);
+    const jumpJet = (index: number) => getYamlItem(ghrStock.items[index].item)?.slotTypes?.some(slotType => /jumpjet/i.test(slotType));
+    // Uno menos en cada pierna.
+    const removed = new Set(['leftLeg', 'rightLeg'].map(zone => ghrStock.items.findIndex((mounted, index) => mounted.zone === zone && jumpJet(index))));
+    const twoJets = { ...ghrStock, items: ghrStock.items.filter((_, index) => !removed.has(index)) };
+    const jump = (build: YamlBuild) => getYamlStatsPanel(grasshopper, build).flat().find(cell => cell.key === 'jumpHeight')!.value;
+    expect(jump(twoJets)).toBe('50');
+    expect(jump(ghrStock)).toBe('66');
+    expect(jump({ ...ghrStock, items: ghrStock.items.filter((_, index) => !jumpJet(index)) })).toBe('0');
   });
 });
