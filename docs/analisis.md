@@ -39,7 +39,7 @@ Jugadores de *MechWarrior 5: Mercenaries*, sobre todo los que se mueven en la co
 | Filtro por DLC | Pendiente ([#43](https://github.com/PonchoiDev/mechlab-web/issues/43)): los datos ya están en las fichas de unidad |
 | Aceleración y mejoras de saltos con números | Pendiente ([#48](https://github.com/PonchoiDev/mechlab-web/issues/48)): faltan datos o calibración |
 | Rasgos de piloto | Pendiente ([#49](https://github.com/PonchoiDev/mechlab-web/issues/49)): los archivos ya están exportados |
-| Compatibilidad con el mod YAML | En curso ([#175](https://github.com/PonchoiDev/mechlab-web/issues/175)): datos extraídos de los mods, falta la especificación |
+| Compatibilidad con el mod YAML | En beta ([#175](https://github.com/PonchoiDev/mechlab-web/issues/175)): página `/mercs/yaml/` con las reglas comprobadas en el juego; faltan builds guardadas, análisis de armas y las variantes propias de YAML |
 
 El backlog completo, incluidas las tareas técnicas (tests de interfaz, cabeceras de seguridad, límite del formulario, comprobaciones en el juego), está en las [issues de GitHub](https://github.com/PonchoiDev/mechlab-web/issues).
 
