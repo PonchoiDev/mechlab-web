@@ -132,6 +132,7 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 | CA17 | El NSR-9J de serie con un hombro blindado (`relativeWeight` 0,01) | se calcula su peso | pesa 1 t más (0,95 a cuartos de tonelada) |
 | CA18 | El NSR-9J vaciado con un computador de puntería Mk3 | se calcula el panel | Sensor range 1,062 |
 | CA19 | El NSR-9J vaciado con `COOLING_LINES` (`coolingMulti` 1,4 en su ubicación) en el torso derecho | se monta un disipador doble en ese torso | la refrigeración sube 0,28 |
+| CA20 | El NSR-9J vaciado, sin núcleo, con el Royal DHS Kit | se monta un disipador doble en el torso izquierdo | Cooling 0,4 (0,2 del disipador + 0,2 del kit), Heat capacity 32 y 32 t, como en el juego |
 
 ## Fuera de alcance
 
@@ -143,7 +144,6 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 
 ## Pendiente de comprobar en el juego
 
-- **Un disipador doble en un torso con el Royal DHS Kit:** según `MechCalculateCoolingCapacity` suma 0,2 de refrigeración (2,2 → 2,4), y una captura del MechLab de YAML marcaba 2,2. Hace falta repetirla.
 - **Builds de serie:** con estas reglas, 434 de 639 pesan su tonelaje (eran 343). Las que se desvían más de 0,1 t son sobre todo omnimechs Clan: es la conversión de serie de los loadouts, que YAML hace al cargar y está por leer.
 
 - **Ranuras de los brazos con armas cuerpo a cuerpo:** el MDA del CP-10-P da 3 ranuras generales al brazo izquierdo, y el mechlab de YAML enseña la gran espada (6 ranuras, aunque su tipo de ranura dice 7) y 3 libres; las nudilleras ocupan 1 (su tipo dice 2). La regla con la que YAML añade esas ranuras está por encontrar; mientras, la web no deja montar la gran espada en ese brazo.

@@ -232,4 +232,13 @@ describe('estadísticas del MechLab de YAML', () => {
     const withHeatSink = mountItem(nightstar, lines, 'rightTorso', 'DoubleHeatSink').build!;
     expect(getHeat(nightstar, withHeatSink).cooling - before).toBeCloseTo(0.2 * 1.4);
   });
+
+  it('CA20: un disipador doble montado suma su refrigeración, como en el juego (NSR-9J vaciado y sin núcleo)', () => {
+    const empty = setInternal(setInternal(stripBuild(stock), 'Engine', null), 'enginecooling', 'ROYAL_DHS_KIT');
+    const withHeatSink = mountItem(nightstar, empty, 'leftTorso', 'DoubleHeatSink').build!;
+    const values = panelValues(withHeatSink);
+    // 0,2 del disipador + 0,2 propios del Royal DHS Kit; 30 + 2 de capacidad.
+    expect([values['Cooling heat/s'], values['Heat capacity']]).toEqual(['0.4', '32']);
+    expect(getBuildTonnage(nightstar, withHeatSink)).toBe(32);
+  });
 });
