@@ -173,7 +173,7 @@ function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoi
   };
   const cooldown = Math.max(MIN_COOLDOWN, stats.cooldown * bonuses.cooldown);
   if (combat.family === 'ams') {
-    return { ...base, damage: 0, heat: 0, cooldown, duration: 0, dps: 0, heatPerSecond: 0, amsRate: (combat.amsRate ?? 0) * bonuses.missilesDestroyed };
+    return { ...base, damage: 0, heat: 0, cooldown, duration: 0, dps: 0, heatPerSecond: 0, amsRate: (stats.amsRate ?? 0) * bonuses.missilesDestroyed };
   }
   if (combat.family === 'melee') {
     const damage = stats.damage * bonuses.damage;

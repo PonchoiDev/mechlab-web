@@ -50,7 +50,9 @@ INTERNAS_DE_SERIE = {
 ARMADURAS = {"StandardArmor": "ARMOR_STANDARD_FIXED", "FerroFibrousArmor": "FERRO", "StealthArmor": "ARMOR_STEALTH"}
 ESTRUCTURAS = {"StandardStructure": "STRUCTURE_STANDARD_FIXED", "EndoSteelStructure": "ENDO"}
 KITS_DE_REFRIGERACION = {"single": "SHS_KIT_FIXED", "double": "Cooling_diss100", "clanDouble": "CLAN_DHS_KIT_FIXED"}
-TIPO_DE_MOTOR = {False: "ENGINE_FIXED", True: "ENGINE_XL"}
+# Con motor estándar, los loadouts de YAML dejan vacía la ranura del tipo de motor: ENGINE_FIXED resta un 5 %
+# al calor de las armas y el mechlab del juego no lo aplica al GHR-5J de serie.
+TIPO_DE_MOTOR = {False: None, True: "ENGINE_XL"}
 # Piezas de los loadouts que no son equipo del jugador: el contrapeso con el que YAML compensa el peso
 # de los 'Mechs del juego al convertirlos (−1000 t) y los rellenos, que el mechlab recoloca solo.
 PIEZAS_TECNICAS = re.compile(r"COUNTERWEIGHT|UAVCOMPONENT|_filler$|^DYNAMIC_FILLER|^XLfiller$", re.IGNORECASE)
@@ -288,7 +290,9 @@ def cifras_de_nivel(familia, propiedades):
 
     if familia == "ams":
         alcances = propiedades.get("Ranges") or {}
-        cifras = {"damage": 0, "heat": 0, "cooldown": propiedades.get("Cooldown") or 0}
+        # Cada nivel trae su cadencia de intercepción en el asset (el nivel 3, 4,025 misiles/s frente a 3,5).
+        cifras = {"damage": 0, "heat": 0, "cooldown": propiedades.get("Cooldown") or 0,
+                  "amsRate": propiedades.get("MissileDestructionRate") or 0}
     elif familia == "melee":
         golpe = datos.get("Melee") or {}
         alcances = datos.get("Ranges") or {}
@@ -338,8 +342,6 @@ def combate_del_arma(nombre, niveles):
         else (proyectil.get("NumberOfTimesToFire") or 0) * (proyectil.get("DelayBetweenFiring") or 0)
     if salva:
         combate["volleyTime"] = round(salva, 4)
-    if familia == "ams":
-        combate["amsRate"] = round(propiedades.get("MissileDestructionRate") or 0, 4)
     return combate
 
 
@@ -394,6 +396,9 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             for campo in ("cooling", "heatCapacity", "capacity", "ammoType"):
                 if objeto.get(campo) is not None:
                     nuevo[campo] = objeto[campo]
+            # YAML cambia la capacidad de algunas cajas (la de AMS, de 2.000 a 5.000 disparos).
+            if "ammoCapacity" in propiedades.get(id_objeto, {}):
+                nuevo["capacity"] = propiedades[id_objeto]["ammoCapacity"]
             nuevo.update(bonificaciones_del_equipo(propiedades.get(id_objeto, {})))
             # Sondas y computadores de puntería del juego: DLCMechSensorRange suma lo que la sonda pasa de 1
             # (SensorRangeModifier) y el porcentaje del rasgo del computador.
@@ -444,7 +449,8 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
     for nombre, valor in por_nombre(cargar_categoria("municion")).items():
         datos = valor["propiedades"]
         objetos[nombre] = {"mod": valor["mod"], "name": texto(datos.get("Name")) or nombre, "kind": "ammo", "tons": datos.get("Tons") or 0,
-                           "ammoType": datos.get("AmmoType"), "capacity": datos.get("Capacity") or 0,
+                           "ammoType": datos.get("AmmoType"),
+                           "capacity": propiedades.get(nombre, {}).get("ammoCapacity", datos.get("Capacity") or 0),
                            "slots": datos.get("Slots") or 1, "slotTypes": [RANURA_GENERAL]}
 
     # Equipo de YAML con sus propiedades (Resources/*Equipment_Properties.json).

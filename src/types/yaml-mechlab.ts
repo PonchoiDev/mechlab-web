@@ -76,6 +76,8 @@ export interface YamlWeaponTier {
   duration?: number;
   optimalRange: number;
   maxRange: number;
+  // AMS: misiles destruidos por segundo.
+  amsRate?: number;
 }
 
 export type YamlWeaponFamily = 'trace' | 'projectile' | 'missile' | 'ams' | 'melee';
@@ -92,8 +94,6 @@ export interface YamlCombat {
   tiers: Record<string, YamlWeaponTier>;
   // Lo que dura la salva (ráfagas y misiles), que se suma al ciclo de disparo.
   volleyTime?: number;
-  // AMS: misiles destruidos por segundo.
-  amsRate?: number;
 }
 
 // Un grupo de bonificaciones de armas de un quirk o del equipo (Equipment_Properties.json).
