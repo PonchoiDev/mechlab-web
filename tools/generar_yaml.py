@@ -246,7 +246,11 @@ GAUSS_MEJORADOS = (
 BONIFICACIONES_DE_EQUIPO = (
     "turnSpeedMulti", "torsoTwistRateMulti", "torsoTwistRateYawMulti", "torsoTwistAngleMulti", "torsoTwistAngleYawMulti",
     "armTwistAngleMulti", "armTwistAngleYawMulti", "sensorRangeBonus", "sensorRangeMulti",
+    "armorComponentFront", "armorComponentRear", "structureComponent",
 )
+# Armadura y estructura que da un arma a su ubicación, de Weapon_Properties.json por su etiqueta: la gran espada
+# de asalto, +40 y +32; los puños, +10 y +8 (comprobado con el CP-10-P en el mechlab del juego).
+REFUERZOS_DE_ARMA = ("armorComponentFront", "armorComponentRear", "structureComponent")
 QUIRK_DE_NIVEL = re.compile(r"\.(\w+)_Quirk_C$")
 
 
@@ -317,8 +321,18 @@ def cifras_de_nivel(familia, propiedades):
     optimo = alcances.get("OptimalRange") or 0.0
     cifras["optimalRange"] = optimo / 100 * (1 + q_rango)
     cifras["maxRange"] = (alcances.get("MaxRange") or optimo) / 100 * (1 + q_rango)
-    # Los assets guardan floats de 32 bits (2.5999999046 es 2.6).
-    return {campo: round(valor, 4) for campo, valor in cifras.items()}
+    # Los assets guardan floats de 32 bits (2.5999999046 es 2.6). La cadencia del AMS va entera: la del nivel 3
+    # es 4,025000095 y el juego enseña 4.03; redondeada a 4,025 sería un empate y saldría 4.02.
+    return {campo: valor if campo == "amsRate" else round(valor, 4) for campo, valor in cifras.items()}
+
+
+def refuerzos_del_arma(etiqueta, propiedades_de_armas):
+    """Lo que suma el arma a la armadura y la estructura de su ubicación: el de su etiqueta más concreta."""
+    padres = sorted((clave for clave in propiedades_de_armas if etiqueta and de_la_etiqueta(etiqueta, (clave,))), key=len)
+    refuerzos = {}
+    for clave in padres:
+        refuerzos.update({campo: valor for campo, valor in propiedades_de_armas[clave].items() if campo in REFUERZOS_DE_ARMA})
+    return refuerzos
 
 
 def combate_del_arma(nombre, niveles):
@@ -391,6 +405,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             combate = niveles and combate_del_arma(id_objeto, niveles)
             if combate:
                 nuevo["combat"] = combate
+                nuevo.update(refuerzos_del_arma(combate["weaponType"], propiedades_de_armas))
         else:
             nuevo.update({"slots": objeto.get("slots") or 1, "slotTypes": objeto.get("specialSlotTypes") or [RANURA_GENERAL]})
             for campo in ("cooling", "heatCapacity", "capacity", "ammoType"):
@@ -425,6 +440,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         combate = combate_del_arma(nombre, armas_por_nivel.get(nombre) or {"1": valor})
         if combate:
             objetos[nombre]["combat"] = combate
+            objetos[nombre].update(refuerzos_del_arma(combate["weaponType"], propiedades_de_armas))
 
     # Armas de Yet Another Weapon y su versión Clan.
     for nombre, valor in por_nombre(cargar_categoria("armas")).items():
@@ -445,6 +461,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         combate = combate_del_arma(nombre, armas_por_nivel.get(nombre) or {"1": valor})
         if combate:
             objetos[nombre]["combat"] = combate
+            objetos[nombre].update(refuerzos_del_arma(combate["weaponType"], propiedades_de_armas))
 
     for nombre, valor in por_nombre(cargar_categoria("municion")).items():
         datos = valor["propiedades"]

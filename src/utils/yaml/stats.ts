@@ -98,16 +98,28 @@ function quirkBonus(mech: YamlMech, property: 'armorBonus' | 'structureBonus'): 
   }, 0);
 }
 
-// Los puntos de armadura de los quirks no pesan ni cuentan para el máximo («24+7/30»).
+// Lo que suman a su ubicación las armas montadas (sin los ataques de los actuadores) y el equipo: la gran
+// espada de asalto, +40 de armadura y +32 de estructura en su brazo.
+function mountedBonus(build: YamlBuild, ...fields: ('armorComponentFront' | 'armorComponentRear' | 'structureComponent')[]): number {
+  // Las piezas internas fijas (ENGINE_FIXED...) son la ranura vacía: no se montan.
+  const items = [
+    ...build.weapons.map(weapon => getYamlItem(weapon.item)).filter(item => !item?.actuator),
+    ...build.items.map(mounted => getYamlItem(mounted.item)),
+    ...Object.values(build.internal).map(id => getYamlItem(id)).filter(item => !item?.fixed)
+  ];
+  return items.reduce((sum, item) => sum + fields.reduce((total, field) => total + (item?.[field] ?? 0), 0), 0);
+}
+
+// Los puntos de armadura de los quirks y del equipo no pesan ni cuentan para el máximo («24+7/30»).
 export function getArmorPoints(mech: YamlMech, build: YamlBuild): { installed: number; bonus: number } {
   const installed = Object.values(build.armor).reduce((sum, side) => sum + side.front + side.rear, 0);
-  return { installed, bonus: quirkBonus(mech, 'armorBonus') };
+  return { installed, bonus: quirkBonus(mech, 'armorBonus') + mountedBonus(build, 'armorComponentFront', 'armorComponentRear') };
 }
 
 export function getStructurePoints(mech: YamlMech, build: YamlBuild): { base: number; total: number } {
   const base = Object.values(mech.zones).reduce((sum, zone) => sum + zone.structure, 0);
   const multiplier = internal(build, 'Structureslot')?.structureMulti ?? 1;
-  const bonus = quirkBonus(mech, 'structureBonus');
+  const bonus = quirkBonus(mech, 'structureBonus') + mountedBonus(build, 'structureComponent');
   return { base: base + bonus, total: base * multiplier + bonus };
 }
 

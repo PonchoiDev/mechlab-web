@@ -345,8 +345,16 @@ export interface YamlStatCell {
   ratio: number;
 }
 
-// Hasta dos decimales, sin ceros de más: 62.1, 16.47, 950.
-export const formatYamlStat = (value: number) => String(Number(value.toFixed(2)));
+// Hasta dos decimales, sin ceros de más: 62.1, 16.47, 950. Como el texto de Unreal, los empates van al par
+// (64,625 es 64.62 en el panel del CP-10-P), pero no lo que pasa un poco del empate (la cadencia del AMS de
+// nivel 3, 4,025000095, es 4.03). El margen solo absorbe los errores de coma flotante de las cuentas.
+export const formatYamlStat = (value: number) => {
+  const scaled = value * 100;
+  const floor = Math.floor(scaled);
+  const isTie = Math.abs(scaled - floor - 0.5) < 1e-9;
+  const rounded = isTie ? (floor % 2 === 0 ? floor : floor + 1) : Math.round(scaled);
+  return String(Number((rounded / 100).toFixed(2)));
+};
 
 export function getYamlStatsPanel(mech: YamlMech, build: YamlBuild): YamlStatCell[][] {
   const stats = getYamlMechStats(mech, build);

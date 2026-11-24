@@ -166,6 +166,10 @@ export interface YamlItem {
   sensorRangeBonus?: number;
   sensorRangeMulti?: number;
   sensorRangePercent?: number;
+  // Armadura y estructura que suma a su ubicación (las armas cuerpo a cuerpo, por ejemplo); no pesan.
+  armorComponentFront?: number;
+  armorComponentRear?: number;
+  structureComponent?: number;
 }
 
 export interface YamlQuirk {
