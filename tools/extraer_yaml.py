@@ -23,12 +23,13 @@ DIRECTORIO_SCRIPT = os.path.dirname(os.path.abspath(__file__))
 RUTA_DESTINO = os.path.join(DIRECTORIO_SCRIPT, "datos-juego", "yaml")
 
 # Mods que forman el conjunto de YAML en el Workshop: id de Steam y carpeta de destino.
+# YetAnotherClanMech (2815252243) no está: declara la versión 1.1.0 del juego y con la actual cierra el
+# juego al empezar una carrera, así que sus 'Mechs no se pueden comprobar en el mechlab del juego.
 MODS = {
     "2549720490": "yet-another-mechlab",
     "2512405187": "yet-another-weapon",
     "2512385719": "yet-another-weapon-clan",
     "2734262706": "yet-another-equipment-collection",
-    "2815252243": "yet-another-clan-mech",
 }
 
 # Categoría de destino según la clase del asset. YAML monta el motor, la estructura, la armadura, el
