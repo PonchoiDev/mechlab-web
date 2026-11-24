@@ -49,11 +49,14 @@ function acceptsWeapon(hardpointType: YamlHardpointType, weaponType: YamlHardpoi
   return hardpointType === weaponType || (hardpointType === 'omni' && !!weaponType && OMNI_TYPES.includes(weaponType));
 }
 
-export function mountWeapon(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: string): MountResult {
+// Con un anclaje elegido, el arma va en él (sustituyendo la que tenga); si no, en el primero libre de su tipo.
+export function mountWeapon(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: string, hardpointId?: string): MountResult {
   const item = getYamlItem(itemId);
   if (!item || item.kind !== 'weapon') return { error: 'Not a weapon' };
+  if (hardpointId) build = removeWeapon(build, hardpointId);
   const used = new Set(build.weapons.map(weapon => weapon.hardpoint));
-  const hardpoint = mech.zones[zone].hardpoints.find(point => !used.has(point.id) && acceptsWeapon(point.type, item.hardpoint));
+  const hardpoint = mech.zones[zone].hardpoints.find(point => !used.has(point.id) && acceptsWeapon(point.type, item.hardpoint)
+    && (!hardpointId || point.id === hardpointId));
   if (!hardpoint) return { error: `No free ${item.hardpoint} hardpoint` };
   const free = getFreeGeneralSlots(mech, build, zone);
   if (free < item.slots) return { error: `Needs ${item.slots} slots; only ${free} free` };
@@ -81,4 +84,18 @@ export function mountItem(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: 
     if (used < capacity) return { build: { ...build, items: [...build.items, { zone, slotType, item: itemId }] } };
   }
   return { error: `No free slot for ${item.name}` };
+}
+
+export type RemovableKind = 'weapon' | 'ammo' | 'equipment';
+
+// Los botones Remove weapons, Remove ammo y Remove equipment de la barra de herramientas.
+export function removeKind(build: YamlBuild, kind: RemovableKind): YamlBuild {
+  if (kind === 'weapon') return { ...build, weapons: [] };
+  return { ...build, items: build.items.filter(mounted => (getYamlItem(mounted.item)?.kind === 'ammo') !== (kind === 'ammo')) };
+}
+
+export function clearArmor(build: YamlBuild): YamlBuild {
+  const armor = { ...build.armor };
+  for (const zone of Object.keys(armor) as Zone[]) armor[zone] = { front: 0, rear: 0 };
+  return { ...build, armor };
 }
