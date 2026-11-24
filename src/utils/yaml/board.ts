@@ -84,7 +84,7 @@ export function getZoneRows(mech: YamlMech, build: YamlBuild, zone: Zone, filler
     if (fixed) rows.push({ kind: 'fixedFiller', label: getYamlItem(id)!.name, slots: fixed, slotType });
   }
   const pieces: ZoneRow[] = [];
-  for (const weapon of build.weapons.filter(mounted => mounted.zone === zone)) {
+  for (const weapon of build.weapons.filter(mounted => mounted.zone === zone && !getYamlItem(mounted.item)?.actuator)) {
     const item = getYamlItem(weapon.item);
     pieces.push({ kind: 'weapon', label: item?.name ?? weapon.item, slots: item?.slots ?? 1, hardpoint: weapon.hardpoint, item: weapon.item });
   }
@@ -167,4 +167,9 @@ export function getBuildIssues(mech: YamlMech, build: YamlBuild): BuildIssue[] {
   }
   if (!build.internal.Engine) issues.push({ severity: 'warning', message: 'No engine core installed' });
   return issues;
+}
+
+// Las armas de cuerpo a cuerpo de los actuadores (la «Mano de asalto»), que el juego enseña bajo la mano.
+export function getActuatorWeapons(build: YamlBuild, zone: Zone) {
+  return build.weapons.filter(weapon => weapon.zone === zone && getYamlItem(weapon.item)?.actuator);
 }

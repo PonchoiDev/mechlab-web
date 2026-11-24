@@ -72,8 +72,17 @@
   text-transform: uppercase;
 }
 
-/* Las piezas de las ranuras propias (los disipadores del motor) con el alto de su tamaño, como en el juego. */
-.yaml-internals .component-card-item[style*="--slots"] { min-height: calc(var(--slots) * 22px); align-items: start; }
+/* Ranuras plegadas, como en el juego: el tamaño de la pieza en pequeño encima de su nombre. */
+.yaml-collapsed-size {
+  display: block;
+  color: var(--work-muted);
+  font: 500 9px var(--work-mono);
+  font-style: normal;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.yaml-melee { color: var(--work-text); }
 
 /* Rellenos: los del motor XL rayados en ámbar, los dinámicos del Endo y el Ferro en azul. */
 .component-card-item.yaml-filler {

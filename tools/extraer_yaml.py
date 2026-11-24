@@ -64,7 +64,7 @@ TABLAS_IGNORADAS = ("NewsFeed", "VersionLog", "Icons", "Filters", "/LevelGenerat
 # YAML no guarda en datos el tamaño en ranuras de las armas del juego: al arrancar, dos funciones de
 # este blueprint cambian el tamaño de los tipos de ranura del juego base (el AC/10 pasa de 4 a 7, como
 # en el juego de mesa) y asignan a las armas de los DLC tipos de ranura propios. Se leen de su bytecode.
-# Del juego base hacen falta los tipos de ranura, que YAML usa en sus anclajes y en sus 'Mechs (115 de
+# Del juego base hacen falta las armas de cuerpo a cuerpo, los tipos de ranura, que YAML usa en sus anclajes y en sus 'Mechs (115 de
 # 130 no están en los mods) y cuyo tamaño cambia al arrancar, y los loadouts de serie: YAML sustituye
 # 718 y el resto los convierte al cargar. Las armas y el equipo del juego ya están en
 # tools/datos-juego/items/.
@@ -284,7 +284,10 @@ def extraer_mod(carpeta_mod, destino):
 
 
 def extraer_juego(carpeta_juego, destino):
-    datos = extraer_pak(os.path.join(carpeta_juego, PAK_DEL_JUEGO), solo={"ranuras", "loadouts"})
+    datos = extraer_pak(os.path.join(carpeta_juego, PAK_DEL_JUEGO), solo={"ranuras", "loadouts", "armas"})
+    # De las armas del juego solo hacen falta las de cuerpo a cuerpo (manos, hachas...): el catálogo del
+    # MechLab de MW5 no las trae porque allí el cuerpo a cuerpo se calcula aparte.
+    datos["armas"] = {ruta: valor for ruta, valor in datos.get("armas", {}).items() if valor["clase"] == "MWMeleeWeaponDataAsset"}
     os.makedirs(destino, exist_ok=True)
     for categoria, assets in datos.items():
         escribir(os.path.join(destino, categoria + ".json"), assets)

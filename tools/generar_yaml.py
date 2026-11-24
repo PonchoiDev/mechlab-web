@@ -54,9 +54,8 @@ TIPO_DE_MOTOR = {False: "ENGINE_FIXED", True: "ENGINE_XL"}
 # Piezas de los loadouts que no son equipo del jugador: el contrapeso con el que YAML compensa el peso
 # de los 'Mechs del juego al convertirlos (−1000 t) y los rellenos, que el mechlab recoloca solo.
 PIEZAS_TECNICAS = re.compile(r"COUNTERWEIGHT|UAVCOMPONENT|_filler$|^DYNAMIC_FILLER|^XLfiller$", re.IGNORECASE)
-# Los ataques cuerpo a cuerpo de las manos y los antebrazos van en sus actuadores, no son armas del
-# inventario.
-CUERPO_A_CUERPO = re.compile(r"_MeleeWeaponDataAsset$")
+# Los ataques de las manos y los antebrazos (MechHandAssault_MeleeWeaponDataAsset...) van en sus actuadores.
+ACTUADOR_DE_CUERPO_A_CUERPO = re.compile(r"^Mech(Hand|LowerArm)")
 NIVEL_DE_ARMA = re.compile(r"_Lvl(\d+)$", re.IGNORECASE)
 # Motores del juego en los loadouts: YAML los separa en núcleo y tipo.
 MOTOR_DEL_JUEGO = re.compile(r"^(XL|STD|Std|Light|LFE|XXL)(\d+)$")
@@ -248,6 +247,22 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
                     nuevo[campo] = objeto[campo]
         objetos[id_objeto] = nuevo
 
+    # Armas de cuerpo a cuerpo del juego (manos, antebrazos, hachas...): el catálogo de MW5 no las trae. Las
+    # de los actuadores (la «Mano de asalto») van en la mano o el antebrazo y no ocupan ranuras generales.
+    for nombre, valor in por_nombre(leer(os.path.join(RUTA_YAML, "juego", "armas.json"))).items():
+        if NIVEL_DE_ARMA.search(nombre):
+            continue
+        datos = valor["propiedades"]
+        ranura = (datos.get("WeaponSlotTypeAssetId") or {}).get("Id", {}).get("PrimaryAssetName")
+        estadisticas = datos.get("StatsData") or {}
+        actuador = bool(ACTUADOR_DE_CUERPO_A_CUERPO.search(nombre))
+        objetos[nombre] = {
+            "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon", "hardpoint": "melee",
+            "tons": datos.get("Tonnage") or 0, "slotType": ranura, "slots": 0 if actuador else tamanos.get(ranura, 1),
+            "meleeDamage": (estadisticas.get("Melee") or {}).get("Damage", 0), "cooldown": estadisticas.get("Cooldown"),
+            **({"actuator": True} if actuador else {}),
+        }
+
     # Armas de Yet Another Weapon y su versión Clan.
     for nombre, valor in por_nombre(cargar_categoria("armas")).items():
         datos = valor["propiedades"]
@@ -406,7 +421,7 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech):
     armas = []
     for arma in loadout.get("InstalledWeapons", []):
         pieza = arma["WeaponData"]["WeaponId"]["Id"]["PrimaryAssetName"]
-        if not pieza or pieza == "None" or CUERPO_A_CUERPO.search(pieza):
+        if not pieza or pieza == "None":
             continue
         # Las armas con nivel (MediumLaser_Lvl2) son la misma arma: el catálogo guarda los niveles dentro.
         nivel = NIVEL_DE_ARMA.search(pieza)

@@ -73,6 +73,11 @@ export interface YamlItem {
   // Armas: la munición que usan; munición: su tipo. Una caja sirve a las armas que usan su tipo.
   ammoTypes?: string[];
   ammoType?: string;
+  // Cuerpo a cuerpo: el daño y el enfriamiento del golpe; las de los actuadores (la mano o el antebrazo) no
+  // ocupan ranuras generales.
+  meleeDamage?: number;
+  cooldown?: number;
+  actuator?: boolean;
   // Munición y equipo: los tipos de ranura donde se monta.
   slotTypes?: string[];
   category?: string;

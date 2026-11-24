@@ -13,8 +13,8 @@ export interface YamlInventoryEntry {
   item: YamlItem;
 }
 
-export type YamlInventoryCategory = 'all' | 'energy' | 'ballistic' | 'missile' | 'ams' | 'equipment' | 'ammo';
-export const YAML_INVENTORY_CATEGORIES: YamlInventoryCategory[] = ['all', 'energy', 'ballistic', 'missile', 'ams', 'equipment', 'ammo'];
+export type YamlInventoryCategory = 'all' | 'energy' | 'ballistic' | 'missile' | 'ams' | 'melee' | 'equipment' | 'ammo';
+export const YAML_INVENTORY_CATEGORIES: YamlInventoryCategory[] = ['all', 'energy', 'ballistic', 'missile', 'ams', 'melee', 'equipment', 'ammo'];
 
 // Destino elegido en el tablero: una ubicación, uno de sus anclajes (para cambiar el arma) o una de sus
 // ranuras internas (para cambiar el motor, el giroscopio, la armadura...).
@@ -47,14 +47,14 @@ export function getYamlInventoryItems(): YamlInventoryEntry[] {
   return yamlItemIds()
     .map(id => ({ id, item: getYamlItem(id)! }))
     .filter(({ id, item }) => !HIDDEN_IDS.test(id) && !HIDDEN_CATEGORIES.test(item.category ?? '')
-      && !(item.kind === 'weapon' && item.hardpoint === 'melee') && !(item.kind === 'equipment' && isInternal(item)));
+      && !item.actuator && !(item.kind === 'equipment' && isInternal(item)));
 }
 
 export function getYamlInventoryCategory(item: YamlItem): YamlInventoryCategory {
   if (item.kind === 'ammo') return 'ammo';
   if (item.kind === 'equipment') return 'equipment';
   const type: YamlHardpointType | undefined = item.hardpoint;
-  if (type === 'energy' || type === 'ballistic' || type === 'ams') return type;
+  if (type === 'energy' || type === 'ballistic' || type === 'ams' || type === 'melee') return type;
   return 'missile';
 }
 

@@ -4,7 +4,7 @@ import { SlotBar } from '../components/SlotBar';
 import type { Zone } from '../types/mech';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
 import { ZONES } from '../utils/zones';
-import { getHardpointUsage, getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, INTERNAL_SLOTS, type FillerGroup, type ZoneRow } from '../utils/yaml/board';
+import { getActuatorWeapons, getHardpointUsage, getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, INTERNAL_SLOTS, type FillerGroup, type ZoneRow } from '../utils/yaml/board';
 import { GENERAL_SLOT } from '../utils/yaml/stats';
 import { getItemColor, getSlotColor, getYamlItem, getYamlQuirk } from '../utils/yaml/data';
 import { ModLogo } from './YamlInventoryPanel';
@@ -126,6 +126,15 @@ function RowItem({ row, build, inCells = false, isSelected = false, onSelect, on
   );
 }
 
+// YAML pliega por defecto las ranuras que no son generales («Collapse special slots»): cada pieza interna va en
+// una línea con su tamaño encima en pequeño. El del motor XL son los rellenos que fija en los torsos
+// («6 SLOTS · XL ENGINE»).
+function internalSize(build: YamlBuild, slotType: string): number {
+  const item = getYamlItem(build.internal[slotType]);
+  const fixed = Object.entries(item?.fillerSlots ?? {}).filter(([key]) => key !== 'dynamic').reduce((sum, [, value]) => sum + (value ?? 0), 0);
+  return fixed;
+}
+
 // Los actuadores con el nombre del mechlab del juego: Shoulder, Upper arm, Lower arm, Hand; Hip, Upper
 // leg, Lower leg, Foot.
 function actuatorLabel(actuator: string, zone: Zone): string {
@@ -169,10 +178,22 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
     onRemove: rowRemover(row, onRemoveWeapon, onRemoveItem)
   });
 
+  // Los actuadores y, debajo de la mano, su ataque de cuerpo a cuerpo («Assault Hand»), como en el juego.
   const actuators = data.actuators.length > 0 && (
     <div className="yaml-internals yaml-actuators" aria-label="Actuators">
       {data.actuators.map(actuator => (
         <span key={actuator} className="component-card-item is-built-in yaml-actuator">{actuatorLabel(actuator, zone)}</span>
+      ))}
+      {getActuatorWeapons(build, zone).map(weapon => (
+        <span
+          key={weapon.hardpoint}
+          className="component-card-item yaml-actuator yaml-melee"
+          data-weapon-type="melee"
+          style={{ '--item-color': getItemColor(weapon.item) } as CSSProperties}
+          title={`${getYamlItem(weapon.item)?.name}: melee attack of this actuator`}
+        >
+          {getYamlItem(weapon.item)?.name ?? weapon.item}
+        </span>
       ))}
     </div>
   );
@@ -211,7 +232,10 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
           onClick={(event) => { event.stopPropagation(); if (!placing) onSelect({ zone, hardpoint: null, internal: slotType }); }}
         >
           <small>{INTERNAL_SLOT_LABELS[slotType]}</small>
-          <span className="yaml-internal-name">{getInternalLabel(build, slotType)}</span>
+          <span className="yaml-internal-name">
+            {internalSize(build, slotType) > 1 && <em className="yaml-collapsed-size">{slotsLabel(internalSize(build, slotType))}</em>}
+            {getInternalLabel(build, slotType)}
+          </span>
           <ModLogo id={build.internal[slotType]} />
         </button>
       ))}
@@ -221,13 +245,13 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
           type="button"
           className="component-card-item yaml-internal"
           data-category="equipment"
-          style={{ '--item-color': getItemColor(build.items[row.index].item, row.slotType), '--slots': row.slots } as CSSProperties}
+          style={{ '--item-color': getItemColor(build.items[row.index].item, row.slotType) } as CSSProperties}
           title={`${row.label}: middle-click to remove`}
           onClick={(event) => { event.stopPropagation(); select(); }}
           {...removeOnMiddleClick(() => onRemoveItem(row.index))}
         >
           <small>{SPECIAL_SLOT_LABELS[row.slotType] ?? 'Special'}</small>
-          <span className="yaml-internal-name">{row.label}</span>
+          <span className="yaml-internal-name">{row.slots > 1 && <em className="yaml-collapsed-size">{slotsLabel(row.slots)}</em>}{row.label}</span>
           <ModLogo id={build.items[row.index].item} />
         </button>
       ))}

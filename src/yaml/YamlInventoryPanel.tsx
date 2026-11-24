@@ -35,9 +35,9 @@ interface YamlInventoryPanelProps {
 
 const ICON_BASE = `${import.meta.env.BASE_URL}mechlab/inventory/`;
 const CATEGORY_LABELS: Record<YamlInventoryCategory, string> = {
-  all: 'All', energy: 'Energy', ballistic: 'Ballistic', missile: 'Missile', ams: 'AMS', equipment: 'Equipment', ammo: 'Ammo'
+  all: 'All', energy: 'Energy', ballistic: 'Ballistic', missile: 'Missile', ams: 'AMS', melee: 'Melee', equipment: 'Equipment', ammo: 'Ammo'
 };
-const HAS_ICON: YamlInventoryCategory[] = ['energy', 'ballistic', 'missile', 'ams', 'equipment'];
+const HAS_ICON: YamlInventoryCategory[] = ['energy', 'ballistic', 'missile', 'ams', 'melee', 'equipment'];
 const COLUMNS: [YamlSortKey, string, string][] = [['name', 'Name', 'Name'], ['slots', 'Slots', 'Critical slots'], ['tons', 'Tons', 'Tonnage']];
 // El logo del mod de la pieza, como en el mechlab del juego.
 export function ModLogo({ id }: { id: string | undefined }) {
