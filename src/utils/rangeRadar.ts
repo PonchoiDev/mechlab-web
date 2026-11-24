@@ -28,6 +28,14 @@ export interface RadarGroup {
   outer: number;
 }
 
+const RANGE_STEPS = [50, 100, 150, 200, 250, 300, 500, 750, 1000];
+const MAX_RANGE_RINGS = 10;
+
+// El paso de los anillos: el primero con el que el alcance máximo cabe en 10 anillos o menos. Lo usan los
+// MechLabs de MW5 y de YAML.
+export const getRangeStep = (maxRange: number): number =>
+  RANGE_STEPS.find(step => Math.ceil(maxRange / step) <= MAX_RANGE_RINGS) ?? RANGE_STEPS[RANGE_STEPS.length - 1];
+
 const round = (value: number) => Number(value.toFixed(2));
 
 const sectorPath = (center: number, inner: number, outer: number) => {

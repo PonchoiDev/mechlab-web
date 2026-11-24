@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState, type CSSProperties, type DragEvent, type KeyboardEvent, type MouseEvent } from 'react';
+import { TierSelector } from '../components/TierSelector';
 import type { YamlBuild, YamlItem, YamlMech } from '../types/yaml-mechlab';
 import { ZONE_LABELS } from '../utils/zones';
 import { getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, type FillerGroup } from '../utils/yaml/board';
+import { getDefaultTier, getWeaponTiers } from '../utils/yaml/combat';
 import { getItemColor, getModLogo, getSlotColor, getYamlItem } from '../utils/yaml/data';
 import {
   countYamlByCategory, filterYamlInventory, getYamlInternalChoices, getYamlInventoryCategory, getYamlInventoryItems,
@@ -29,6 +31,10 @@ interface YamlInventoryPanelProps {
   onDragEnd: () => void;
   onRemoveWeapon: (hardpoint: string) => void;
   onRemoveItem: (index: number) => void;
+  // El nivel elegido para cada arma del inventario y el de las armas montadas.
+  inventoryTiers: Record<string, number>;
+  onInventoryTierChange: (id: string, tier: number) => void;
+  onWeaponTierChange: (hardpoint: string, tier: number) => void;
   onToggleSide: () => void;
   onClose: () => void;
 }
@@ -45,15 +51,25 @@ export function ModLogo({ id }: { id: string | undefined }) {
   return logo ? <img className="yaml-mod-logo" src={logo} alt="" width={22} height={22} /> : null;
 }
 
+// El selector de nivel del MechLab de MW5, solo en las armas con más de un nivel.
+function WeaponTierSelector({ id, tier, onChange }: { id: string; tier: number; onChange: (tier: number) => void }) {
+  const tiers = getWeaponTiers(id);
+  if (tiers.length < 2) return null;
+  const item = { name: getYamlItem(id)?.name ?? id, tier: String(tier), tiers: Object.fromEntries(tiers.map(value => [value, true])) };
+  return <TierSelector item={item} onChange={(value) => onChange(Number(value))} />;
+}
+
 const DEFAULT_FILTERS: YamlInventoryFilters = { category: 'all', search: '', fitsOnly: true };
 const formatTons = (tons: number) => String(Number(tons.toFixed(2)));
 const weaponType = (item: YamlItem) => item.kind === 'weapon' ? item.hardpoint : undefined;
 
-function InventoryRow({ id, item, isPicked, hint, onActivate, onContextMenu, onDragStart, onDragEnd }: {
+function InventoryRow({ id, item, isPicked, hint, tier, onTierChange, onActivate, onContextMenu, onDragStart, onDragEnd }: {
   id: string;
   item: YamlItem;
   isPicked: boolean;
   hint: string;
+  tier: number;
+  onTierChange: (tier: number) => void;
   onActivate: () => void;
   onContextMenu: () => void;
   onDragStart: (event: DragEvent) => void;
@@ -85,12 +101,18 @@ function InventoryRow({ id, item, isPicked, hint, onActivate, onContextMenu, onD
         <span>{item.slots}</span>
         <span>{formatTons(item.tons)}</span>
       </div>
+      {/* El nivel se elige en la fila seleccionada: una fila por arma, no una por nivel como en el juego. */}
+      {isPicked && item.kind === 'weapon' && (
+        <div className="inventory-item-tier">
+          <WeaponTierSelector id={id} tier={tier} onChange={onTierChange} />
+        </div>
+      )}
     </li>
   );
 }
 
 // La ubicación elegida y lo que lleva, para quitarlo, como en el inventario de MW5.
-function TargetSection({ mech, build, target, fillers, onClear, onRemoveWeapon, onRemoveItem }: {
+function TargetSection({ mech, build, target, fillers, onClear, onRemoveWeapon, onRemoveItem, onTierChange }: {
   mech: YamlMech;
   build: YamlBuild;
   target: YamlInventoryTarget;
@@ -98,6 +120,7 @@ function TargetSection({ mech, build, target, fillers, onClear, onRemoveWeapon, 
   onClear: () => void;
   onRemoveWeapon: (hardpoint: string) => void;
   onRemoveItem: (index: number) => void;
+  onTierChange: (hardpoint: string, tier: number) => void;
 }) {
   const rows = getZoneRows(mech, build, target.zone, fillers).filter(row => row.kind !== 'free');
   const hardpointWeapon = target.hardpoint ? build.weapons.find(weapon => weapon.hardpoint === target.hardpoint) : undefined;
@@ -121,6 +144,7 @@ function TargetSection({ mech, build, target, fillers, onClear, onRemoveWeapon, 
           {rows.map((row, index) => (
             <div key={index} className={row.kind === 'fixedFiller' || row.kind === 'dynamicFiller' ? 'installed-item is-built-in' : 'installed-item'}>
               <span className="installed-item-name">{row.kind === 'dynamicFiller' ? 'Dynamic filler' : 'label' in row ? row.label : ''} <small>{row.slots} {row.slots === 1 ? 'slot' : 'slots'}</small></span>
+              {row.kind === 'weapon' && <WeaponTierSelector id={row.item} tier={row.tier} onChange={(tier) => onTierChange(row.hardpoint, tier)} />}
               {row.kind === 'weapon' && <button type="button" className="remove-item" aria-label={`Remove ${row.label}`} onClick={() => onRemoveWeapon(row.hardpoint)}>✕</button>}
               {row.kind === 'item' && <button type="button" className="remove-item" aria-label={`Remove ${row.label}`} onClick={() => onRemoveItem(row.index)}>✕</button>}
               {(row.kind === 'fixedFiller' || row.kind === 'dynamicFiller') && <span className="built-in-tag">FILLER</span>}
@@ -232,7 +256,7 @@ export function YamlInventoryPanel(props: YamlInventoryPanelProps) {
 
       {target && (
         <TargetSection mech={mech} build={build} target={target} fillers={props.fillers} onClear={props.onClearTarget}
-          onRemoveWeapon={props.onRemoveWeapon} onRemoveItem={props.onRemoveItem} />
+          onRemoveWeapon={props.onRemoveWeapon} onRemoveItem={props.onRemoveItem} onTierChange={props.onWeaponTierChange} />
       )}
 
       {target?.internal ? (
@@ -297,6 +321,8 @@ export function YamlInventoryPanel(props: YamlInventoryPanelProps) {
                       item={item}
                       isPicked={isPicked}
                       hint={hint}
+                      tier={props.inventoryTiers[id] ?? getDefaultTier(id)}
+                      onTierChange={(tier) => props.onInventoryTierChange(id, tier)}
                       onActivate={() => target ? onEquip(id) : onPick(isPicked ? null : id)}
                       onContextMenu={() => onQuickEquip(id)}
                       onDragStart={(event) => {

@@ -12,15 +12,17 @@ import { copyText } from '../services/clipboard';
 import type { Zone } from '../types/mech';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
 import { distributeDynamicFillerGroups, removeItemAt, setArmor, setMaxArmor } from '../utils/yaml/board';
-import { clearArmor, createStockBuild, removeKind, removeWeapon, type MountResult } from '../utils/yaml/build';
+import { clearArmor, createStockBuild, removeKind, removeWeapon, setWeaponTier, type MountResult } from '../utils/yaml/build';
 import { decodeYamlBuild, encodeYamlBuild } from '../utils/yaml/buildCode';
 import { findYamlMech, getYamlItem, YAML_COLORS, yamlMechs } from '../utils/yaml/data';
 import { autoPlaceYamlItem, chooseYamlInternal, getYamlDropZones, placeYamlItem, type YamlInventoryTarget } from '../utils/yaml/inventory';
-import { getYamlBuildIssues, getYamlReadouts } from '../utils/yaml/readouts';
+import { getYamlBuildIssues } from '../utils/yaml/readouts';
 import { ZONE_LABELS } from '../utils/zones';
+import { YamlAnalysis } from './YamlAnalysis';
 import { YamlBoard } from './YamlBoard';
 import { YamlInventoryPanel } from './YamlInventoryPanel';
 import { YamlMechPicker } from './YamlMechPicker';
+import { YamlStatsPanel } from './YamlStatsPanel';
 
 const DEFAULT_MECH = 'NSR-9J';
 // Los colores de anclaje y el relleno de las piezas del mechlab de YAML, para yaml.css.
@@ -53,6 +55,8 @@ export function YamlMechLabApp() {
   const [toast, setToast] = useState<{ id: number; message: string } | null>(null);
   const [menu, setMenu] = useState<{ title: string; x: number; y: number; entries: MenuEntry[] } | null>(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  // El nivel elegido en el inventario para cada arma, con el que se monta, como en MW5.
+  const [inventoryTiers, setInventoryTiers] = useState<Record<string, number>>({});
   const view = useViewPreferences(YAML_VIEW_KEY);
 
   const setBuild = (next: YamlBuild) => setState({ mech, build: next });
@@ -60,7 +64,6 @@ export function YamlMechLabApp() {
   const buildCode = encodeYamlBuild(mech.id, build);
   const stockCode = useMemo(() => encodeYamlBuild(mech.id, createStockBuild(mech)), [mech]);
   const buildUrl = `${window.location.origin}${window.location.pathname}?b=${buildCode}`;
-  const readouts = useMemo(() => getYamlReadouts(mech, build), [mech, build]);
   const issues = useMemo(() => getYamlBuildIssues(mech, build), [mech, build]);
   const fillers = useMemo(() => distributeDynamicFillerGroups(mech, build), [mech, build]);
   const held = dragged ?? pickedItem;
@@ -106,17 +109,17 @@ export function YamlMechLabApp() {
     if (!held) return;
     setDragged(null);
     setPickedItem(null);
-    apply(placeYamlItem(mech, build, held, zone, hardpoint));
+    apply(placeYamlItem(mech, build, held, zone, hardpoint, inventoryTiers[held]));
   };
   const equipInTarget = (id: string) => {
-    if (target) apply(placeYamlItem(mech, build, id, target.zone, target.hardpoint));
+    if (target) apply(placeYamlItem(mech, build, id, target.zone, target.hardpoint, inventoryTiers[id]));
   };
   const quickEquip = (id: string) => {
     if (target) {
       equipInTarget(id);
       return;
     }
-    const result = autoPlaceYamlItem(mech, build, id);
+    const result = autoPlaceYamlItem(mech, build, id, inventoryTiers[id]);
     apply(result, result.zone && `${getYamlItem(id)?.name} equipped in ${ZONE_LABELS[result.zone]}`);
   };
   const toggleInventory = () => {
@@ -197,14 +200,7 @@ export function YamlMechLabApp() {
         })}
       />
 
-      <section className="readout-strip" aria-label="Mech statistics">
-        {readouts.map(readout => (
-          <div key={readout.label} className="readout-cell">
-            <span className="readout-label" title={readout.title}>{readout.label}</span>
-            <strong className={readout.warn ? 'readout-warning' : ''}>{readout.value}{readout.unit && <> <small>{readout.unit}</small></>}</strong>
-          </div>
-        ))}
-      </section>
+      <YamlStatsPanel mech={mech} build={build} />
 
       <main className="workspace">
         <div className="view-toggles" aria-label="View options">
@@ -237,6 +233,8 @@ export function YamlMechLabApp() {
           onRemoveWeapon={(hardpoint) => setBuild(removeWeapon(build, hardpoint))}
           onRemoveItem={(index) => setBuild(removeItemAt(build, index))}
         />
+
+        <YamlAnalysis mech={mech} build={build} />
       </main>
 
       {view.inventoryOpen && (
@@ -256,6 +254,9 @@ export function YamlMechLabApp() {
           onDragEnd={() => setDragged(null)}
           onRemoveWeapon={(hardpoint) => setBuild(removeWeapon(build, hardpoint))}
           onRemoveItem={(index) => setBuild(removeItemAt(build, index))}
+          inventoryTiers={inventoryTiers}
+          onInventoryTierChange={(id, tier) => setInventoryTiers(current => ({ ...current, [id]: tier }))}
+          onWeaponTierChange={(hardpoint, tier) => setBuild(setWeaponTier(build, hardpoint, tier))}
           onToggleSide={view.toggleEditorSide}
           onClose={toggleInventory}
         />

@@ -2,6 +2,7 @@ import glob
 import json
 import os
 import re
+import struct
 import sys
 
 from generar_mechs import ARCHIVOS_NO_JUGABLES, obtener_parte_cuerpo, obtener_tipo_arma, obtener_variante
@@ -50,7 +51,9 @@ INTERNAS_DE_SERIE = {
 ARMADURAS = {"StandardArmor": "ARMOR_STANDARD_FIXED", "FerroFibrousArmor": "FERRO", "StealthArmor": "ARMOR_STEALTH"}
 ESTRUCTURAS = {"StandardStructure": "STRUCTURE_STANDARD_FIXED", "EndoSteelStructure": "ENDO"}
 KITS_DE_REFRIGERACION = {"single": "SHS_KIT_FIXED", "double": "Cooling_diss100", "clanDouble": "CLAN_DHS_KIT_FIXED"}
-TIPO_DE_MOTOR = {False: "ENGINE_FIXED", True: "ENGINE_XL"}
+# Con motor estándar, los loadouts de YAML dejan vacía la ranura del tipo de motor: ENGINE_FIXED resta un 5 %
+# al calor de las armas y el mechlab del juego no lo aplica al GHR-5J de serie.
+TIPO_DE_MOTOR = {False: None, True: "ENGINE_XL"}
 # Piezas de los loadouts que no son equipo del jugador: el contrapeso con el que YAML compensa el peso
 # de los 'Mechs del juego al convertirlos (−1000 t) y los rellenos, que el mechlab recoloca solo.
 PIEZAS_TECNICAS = re.compile(r"COUNTERWEIGHT|UAVCOMPONENT|_filler$|^DYNAMIC_FILLER|^XLfiller$", re.IGNORECASE)
@@ -222,35 +225,348 @@ def municiones_del_arma(propia, etiqueta, propiedades_de_armas):
     return tipos
 
 
+# Estadísticas de combate (docs/specs/estadisticas-yaml.md). Con YAML, las cifras del mechlab las
+# calcula el mod (MechAlphaStats y YAWFunctionsYAML) a partir de los datos de cada asset de arma, con los
+# quirks de su nivel ya aplicados; la web aplica después las bonificaciones de los quirks y del equipo.
+FAMILIAS_DE_ARMA = {
+    "MWTraceWeaponDataAsset": "trace", "MWProjectileWeaponDataAsset": "projectile",
+    "MWMissileWeaponDataAsset": "missile", "MWAMSWeaponDataAsset": "ams", "MWMeleeWeaponDataAsset": "melee",
+}
+# Rayos cuyo alcance máximo es el óptimo (YAWTrace): el resto llega al doble.
+RAYOS_SIN_ALCANCE_MAXIMO = (
+    "Weapon.Energy.Flamer", "Weapon.Energy.TAG", "Weapon.Energy.TSEMP", "Weapon.Energy.Laser.Pulse.Large.Variable",
+    "Weapon.Energy.Laser.Pulse.Medium.Variable", "Weapon.Energy.Laser.Pulse.Small.Variable",
+)
+# Gauss que YAWBallistic trata aparte: su alcance óptimo ya es el triple y llega hasta ahí.
+GAUSS_MEJORADOS = (
+    "Weapon.Ballistic.GaussRifle.Gauss.Improved", "Weapon.Ballistic.GaussRifle.HeavyGauss.Improved",
+    "Weapon.Ballistic.GaussRifle.HeavyGauss.Railgun", "Weapon.Ballistic.GaussRifle.Railgun",
+    *(f"Weapon.Ballistic.GaussRifle.Gauss.Hyper.Clan.{calibre}.Improved" for calibre in range(5, 85, 5)),
+)
+# Bonificaciones del equipo que cambian las cifras del panel del juego.
+BONIFICACIONES_DE_EQUIPO = (
+    "turnSpeedMulti", "torsoTwistRateMulti", "torsoTwistRateYawMulti", "torsoTwistAngleMulti", "torsoTwistAngleYawMulti",
+    "armTwistAngleMulti", "armTwistAngleYawMulti", "sensorRangeBonus", "sensorRangeMulti", "sensorRangeBonusLance",
+    "sensorRangeMultiLance",
+    "armorComponentFront", "armorComponentRear", "structureComponent", "jumpJetFuelBurnTimeMulti", "jumpJetZAccelMulti",
+)
+QUIRK_DE_NIVEL = re.compile(r"\.(\w+)_Quirk_C$")
+
+
+def de_la_etiqueta(etiqueta, padres):
+    """Las etiquetas del juego son jerárquicas: Weapon.Energy.Flamer.X es de Weapon.Energy.Flamer."""
+    return any(etiqueta == padre or etiqueta.startswith(padre + ".") for padre in padres)
+
+
+def regla_de_alcance(familia, nombre, etiqueta):
+    """Cómo sale el alcance máximo del óptimo (YAWTrace y YAWBallistic), o "max" si es el del asset."""
+    if familia == "trace":
+        return "optimal" if de_la_etiqueta(etiqueta, RAYOS_SIN_ALCANCE_MAXIMO) else "double"
+    if familia == "projectile":
+        # YAWBallistic mira el nombre del asset, sin distinguir mayúsculas.
+        if "ppc" in nombre.lower():
+            return "double"
+        if "mrm" in nombre.lower():
+            return "optimal"
+        if de_la_etiqueta(etiqueta, ("Weapon.Ballistic.GaussRifle",)):
+            return "gaussImproved" if de_la_etiqueta(etiqueta, GAUSS_MEJORADOS) else "gauss"
+        return "double"
+    return "max"
+
+
+def f32(valor):
+    """El juego calcula en float32: cada operación se redondea a 32 bits."""
+    return struct.unpack("<f", struct.pack("<f", valor))[0]
+
+
+# Los quirks de nivel (/Game/Quirks/*_Quirk, blueprints del juego) que cambian cifras del panel: cada uno modifica un
+# campo de la copia de StatsData, sumando su valor o multiplicando por (1 + valor). El juego los aplica en el
+# orden de la lista del QuirkSet, cada uno sobre el resultado del anterior (MWWeaponDataAsset, 0x141181680 en el
+# ejecutable), y solo a las familias para las que el blueprint del quirk tiene función (QuirkTraceWeapon...).
+QUIRKS_DE_NIVEL = {
+    "Damage": ("damage", "suma", ("trace", "projectile", "missile", "melee")),
+    "DamagePercentage": ("damage", "producto", ("trace", "projectile", "missile", "melee")),
+    "HeatGeneratedPercentage": ("heat", "producto", ("trace", "projectile", "missile")),
+    "Cooldown": ("cooldown", "suma", ("trace", "projectile", "missile", "melee")),
+    "CooldownPercentage": ("cooldown", "producto", ("trace", "projectile", "missile", "melee")),
+    "RangePercentage": ("ranges", "producto", ("trace", "projectile", "missile")),
+    "RangeAndSpeedPercentage": ("ranges", "producto", ("trace", "projectile", "missile")),
+    "DurationPercentage": ("duration", "producto", ("trace",)),
+}
+
+
+def cifras_de_nivel(familia, propiedades):
+    """Las cifras de un nivel de un arma como las enseña el juego (GetDisplayedDamage y GetDisplayedHeat de cada
+    clase, desensambladas del ejecutable), sobre StatsData con los quirks del QuirkSet aplicados en orden."""
+    datos = propiedades.get("StatsData") or {}
+    if familia == "ams":
+        alcances = propiedades.get("Ranges") or {}
+        return {"damage": 0, "heat": 0, "cooldown": f32(propiedades.get("Cooldown") or 0),
+                "optimalRange": f32((alcances.get("OptimalRange") or 0) / 100),
+                "maxRange": f32((alcances.get("MaxRange") or alcances.get("OptimalRange") or 0) / 100),
+                "amsRate": f32(propiedades.get("MissileDestructionRate") or 0)}
+    misiles = datos.get("MissileStats") or {}
+    proyectil = misiles.get("Projectile") or datos.get("Projectile") or {}
+    rayo = datos.get("Trace") or {}
+    golpe = datos.get("Melee") or {}
+    alcances = (datos.get("Ranges") if familia in ("trace", "melee") else datos.get("Range")) or {}
+    campos = {
+        "cooldown": f32(datos.get("Cooldown") or 0),
+        "optimalRange": f32(alcances.get("OptimalRange") or 0),
+        "maxRange": f32(alcances.get("MaxRange") or 0),
+    }
+    if familia == "trace":
+        campos.update(damage=f32(rayo.get("DamageOverDuration", 0)), heat=f32(rayo.get("HeatGeneratedOverDuration", 0)),
+                      duration=f32(rayo.get("Duration", 0)))
+    elif familia == "melee":
+        campos.update(damage=f32(golpe.get("Damage", 0)), heat=0)
+    else:
+        campos.update(damage=f32(proyectil.get("Damage", 0)), heat=f32(proyectil.get("HeatGenerated", 0)))
+
+    for quirk in (propiedades.get("QuirkSet") or {}).get("QuirkList", []):
+        coincidencia = QUIRK_DE_NIVEL.search(quirk.get("Quirk") or "")
+        regla = QUIRKS_DE_NIVEL.get(coincidencia.group(1)) if coincidencia else None
+        if not regla or familia not in regla[2]:
+            continue
+        campo, operacion, _ = regla
+        valor = f32(quirk.get("Value", 0.0))
+        for nombre in (("optimalRange", "maxRange") if campo == "ranges" else (campo,)):
+            campos[nombre] = f32(campos[nombre] + valor) if operacion == "suma" else f32(f32(valor + 1) * campos[nombre])
+
+    cifras = {"cooldown": campos["cooldown"], "optimalRange": f32(campos["optimalRange"] / 100),
+              "maxRange": f32((campos["maxRange"] or campos["optimalRange"]) / 100)}
+    if familia == "trace":
+        cifras.update(damage=campos["damage"], heat=campos["heat"], duration=campos["duration"])
+    elif familia == "melee":
+        # La duración del golpe es la del asset sin quirks (GetBaseWeaponData en GetAlphaStrikeStats).
+        cifras.update(damage=campos["damage"], heat=0, duration=f32(golpe.get("Duration", 0)))
+    elif familia == "projectile":
+        # (Damage + CachedExplosionDamageDisplay) × disparos de la ráfaga × proyectiles; el calor, × disparos.
+        disparos = proyectil.get("NumberOfTimesToFire") or 0
+        explosion = f32(proyectil.get("CachedExplosionDamageDisplay", 0))
+        por_disparo = f32(f32(disparos * explosion) + f32(campos["damage"] * disparos)) if disparos > 0 else f32(explosion + campos["damage"])
+        cifras.update(damage=f32(por_disparo * (proyectil.get("NumberOfProjectiles") or 0)),
+                      heat=f32(campos["heat"] * disparos) if disparos > 0 else campos["heat"])
+    else:
+        # Misiles × disparos (si hay más de uno) × Damage, o × CachedExplosionDamageDisplay si no hacen daño
+        # directo (Arrow IV); el calor, misiles × HeatGenerated × disparos.
+        numero = misiles.get("NumberOfMissiles") or 0
+        disparos = proyectil.get("NumberOfTimesToFire") or 0
+        total = numero * disparos if disparos > 1 else numero
+        dano = f32(total * campos["damage"])
+        calor = f32(numero * campos["heat"])
+        cifras.update(damage=dano if dano > 0 else f32(total * f32(proyectil.get("CachedExplosionDamageDisplay", 0))),
+                      heat=f32(calor * disparos) if disparos > 1 else calor)
+    # Con nueve decimales, los float32 del juego quedan tal cual: deciden los empates del panel (siete Medium
+    # Laser de nivel 3 dan 14,1749999 de calor alfa, 14.17; el AMS de nivel 3 intercepta 4,025000095, 4.03).
+    return {campo: round(valor, 9) for campo, valor in cifras.items()}
+
+
+def combate_del_arma(nombre, niveles):
+    """Las estadísticas de combate de un arma a partir de los assets de sus niveles ({nivel: asset})."""
+    base = niveles.get("1") or niveles[min(niveles)]
+    familia = FAMILIAS_DE_ARMA.get(base["clase"])
+    if not familia:
+        return None
+    propiedades = base["propiedades"]
+    etiqueta = propiedades.get("WeaponType") or ""
+    datos = propiedades.get("StatsData") or {}
+    combate = {
+        "family": familia, "weaponType": etiqueta, "techBase": propiedades.get("TechBase") or "",
+        "rangeRule": regla_de_alcance(familia, nombre, etiqueta),
+        "tiers": {nivel: cifras_de_nivel(familia, asset["propiedades"]) for nivel, asset in sorted(niveles.items())},
+    }
+    # Lo que dura la salva y se suma al ciclo de disparo (GetAlphaStrikeStats).
+    misiles = datos.get("MissileStats") or {}
+    proyectil = datos.get("Projectile") or {}
+    salva = (misiles.get("NumberOfMissiles") or 0) * (misiles.get("MissileInterval") or 0) if familia == "missile" \
+        else (proyectil.get("NumberOfTimesToFire") or 0) * (proyectil.get("DelayBetweenFiring") or 0)
+    if salva:
+        combate["volleyTime"] = round(salva, 4)
+    return combate
+
+
+def niveles_de_armas():
+    """Los assets de arma del juego y de los mods (que los sustituyen por ruta), por nombre sin nivel y nivel."""
+    assets = leer(os.path.join(RUTA_YAML, "juego", "armas.json"))
+    assets.update(cargar_categoria("armas"))
+    armas = {}
+    for ruta, valor in assets.items():
+        nombre = ruta.rsplit("/", 1)[1]
+        nivel = NIVEL_DE_ARMA.search(nombre)
+        armas.setdefault(NIVEL_DE_ARMA.sub("", nombre), {})[nivel.group(1) if nivel else "1"] = valor
+    return armas
+
+
+# RichCurveKey: modo de interpolación, de tangente y de peso de tangente, tiempo y valor. Las curvas de
+# aceleración de los retrorreactores son lineales.
+INTERPOLACION_LINEAL = 0
+
+
+def datos_de_retrorreactores():
+    """Velocidad inicial (cm/s), tiempo de encendido (s) y curva de aceleración vertical (cm/s² por número de
+    retrorreactores) de cada retrorreactor del juego y de los mods: con ellas estima el juego la altura de salto."""
+    curvas = leer(os.path.join(RUTA_YAML, "juego", "curvas.json"))
+    curvas.update(cargar_categoria("curvas"))
+    equipo = leer(os.path.join(RUTA_YAML, "juego", "equipo.json"))
+    equipo.update(cargar_categoria("equipo"))
+    retrorreactores = {}
+    for ruta, valor in equipo.items():
+        if valor["clase"] != "MWJumpJetDataAsset":
+            continue
+        datos = valor["propiedades"]
+        curva = curvas.get((datos.get("AccelZCurve") or "").split(".")[0], {}).get("propiedades", {})
+        claves = (curva.get("FloatCurve") or {}).get("Keys", [])
+        if any(clave[0] != INTERPOLACION_LINEAL for clave in claves):
+            raise ValueError(f"Curva de aceleración no lineal en {ruta}")
+        retrorreactores[ruta.rsplit("/", 1)[1]] = {
+            "initialVelocityZ": datos.get("InitialVelocityZ", 0), "burnTime": round(datos.get("BurnTime", 0), 6),
+            "accelZ": [[clave[3], clave[4]] for clave in claves],
+        }
+    return retrorreactores
+
+
+# Lo que el panel y el peso leen de las propiedades de YAML (*_Properties.json), además de las de armas,
+# movimiento y sensores.
+PROPIEDADES_DE_OBJETO = BONIFICACIONES_DE_EQUIPO + (
+    "armorComponentFrontMulti", "armorComponentRearMulti", "structureComponentMulti", "componentArmorWeightMulti",
+    "relativeWeight", "roundWeightType", "roundWeightUp", "engineRelativeWeight", "structureWeightMulti", "structureMulti",
+    "armorWeightMulti", "armorPerTon", "armorMulti", "engineHeatsinkEfficiency", "engineHeatsinkCapacity", "heatEfficiency",
+    "fixed", "coolingMulti", "coolingMultiScope", "heatCapacityBonus", "bundledHeatsinks", "internalHeatsinkBonus",
+    "topSpeedMulti", "engineHealthType",
+)
+CAMPOS_DE_TEXTO = ("roundWeightType", "coolingMultiScope", "engineHealthType")
+REGEX_EXPORTACION = {
+    "clase": re.compile(r"^Begin Object Class=/Script/\w+\.(\w+)"),
+    "equipmentType": re.compile(r'EquipmentType=\(TagName="([^"]+)"'),
+    "ammoType": re.compile(r'AmmoType=\(TagName="([^"]+)"'),
+    "techLevel": re.compile(r"\bTechLevel=(-?\d+)"),
+}
+
+
+def propiedades_combinadas(globales, nombre, etiquetas, sin_nivel=None):
+    """Las propiedades de un objeto como FindEquipmentProperties de YAML: las de cada antecesor de sus etiquetas
+    (AmmoType y EquipmentType en la munición, EquipmentType en el equipo, WeaponType en las armas), con la más
+    concreta por encima; encima, las de su nombre; y debajo, en las armas, las de su id sin nivel. Object_Merge
+    deja ganar al segundo objeto (desensamblado del ejecutable)."""
+    combinadas = {}
+    for etiqueta in etiquetas:
+        partes = etiqueta.split(".") if etiqueta else []
+        for fin in range(len(partes), 0, -1):
+            combinadas = {**globales.get(".".join(partes[:fin]), {}), **combinadas}
+    combinadas = {**combinadas, **globales.get(nombre, {})}
+    if sin_nivel and sin_nivel != nombre:
+        combinadas = {**globales.get(sin_nivel, {}), **combinadas}
+    return combinadas
+
+
+def como_numero(valor):
+    """Algunas propiedades vienen como texto («0.05», «true»); YAML las convierte al leerlas."""
+    if isinstance(valor, str):
+        if valor.lower() in ("true", "false"):
+            return valor.lower() == "true"
+        try:
+            return float(valor)
+        except ValueError:
+            return valor
+    return valor
+
+
+def aplicar_propiedades(objeto, combinadas, equipo):
+    """Pasa al objeto lo que leen el panel y el peso. Al arrancar, YAML (UpdateEquipmentNames) sobrescribe además
+    el nombre, las ranuras, el peso (equipmentTons) y la capacidad de munición (ammoCapacity) del equipo."""
+    for campo in PROPIEDADES_DE_OBJETO:
+        if campo in combinadas:
+            objeto[campo] = combinadas[campo] if campo in CAMPOS_DE_TEXTO else como_numero(combinadas[campo])
+    armas = combinadas.get("weapons") or {}
+    if armas.get("groups"):
+        objeto["weapons"] = {"scope": armas.get("scope", "mech"), "groups": armas["groups"]}
+    if "fillerSlots" in combinadas:
+        # Las ranuras fijas van por ubicación con los nombres del juego (LeftTorso); se pasan a los de la web.
+        objeto["fillerSlots"] = {CAMPOS_ZONA.get(clave, clave): valor for clave, valor in combinadas["fillerSlots"].items()}
+    if equipo:
+        if combinadas.get("name"):
+            objeto["name"] = combinadas["name"]
+        if "slots" in combinadas:
+            objeto["slots"] = int(como_numero(combinadas["slots"]))
+        if "equipmentTons" in combinadas:
+            objeto["tons"] = como_numero(combinadas["equipmentTons"])
+        if "ammoCapacity" in combinadas and objeto.get("kind") == "ammo":
+            objeto["capacity"] = como_numero(combinadas["ammoCapacity"])
+
+
+def leer_exportacion(ruta):
+    """Las exportaciones del juego (.copy) vienen en UTF-8 o, algunas, en UTF-16 con BOM."""
+    with open(ruta, "rb") as archivo:
+        crudo = archivo.read()
+    return crudo.decode("utf-16") if crudo.startswith((b"\xff\xfe", b"\xfe\xff")) else crudo.decode("utf-8")
+
+
+def datos_de_equipo(objeto, etiqueta, nivel_tecnico, clase):
+    """La etiqueta (EquipmentType), el TechLevel y si es un disipador (MWHeatSinkDataAsset) del equipo: el peso, la
+    refrigeración y la velocidad de YAML los usan cuando no hay propiedad (TechLevel / 100) y para reconocer cada
+    pieza (kit de refrigeración, armadura, estructura, núcleo y tipo de motor, giroscopio)."""
+    if etiqueta:
+        objeto["category"] = etiqueta
+    if nivel_tecnico is not None:
+        objeto["techLevel"] = int(nivel_tecnico)
+    if clase == "MWHeatSinkDataAsset":
+        objeto["heatSinkAsset"] = True
+
+
 def construir_objetos(catalogo_juego, reglas, tamanos):
     objetos = {}
     propiedades_de_armas = cargar_recursos("Weapon_Properties.json")
+    propiedades = cargar_recursos("Equipment_Properties.json")
+    # LoadEquipmentProperties de YAML junta todos los *_Properties.json (equipo y armas) por clave.
+    globales = cargar_recursos("_Properties.json")
+    # Por objeto: sus etiquetas, su id sin nivel y si es equipo (para la pasada final de propiedades).
+    origen = {}
+    armas_por_nivel = niveles_de_armas()
+    retrorreactores = datos_de_retrorreactores()
+    minusculas = {nombre.lower(): nombre for nombre in armas_por_nivel}
     # Armas y equipo del juego base: sus cifras están en el catálogo de MW5; el tipo de ranura de las
     # armas, en sus exportaciones.
     for id_objeto, objeto in catalogo_juego.items():
         nuevo = {"name": objeto["name"], "kind": objeto["type"], "tons": objeto.get("tonnage") or 0}
+        ruta = os.path.join(RUTA_ITEMS_JUEGO, id_objeto + ".copy")
+        exportado = leer_exportacion(ruta) if os.path.exists(ruta) else ""
+        exportacion = {campo: (regex.search(exportado) or [None, None])[1] for campo, regex in REGEX_EXPORTACION.items()}
         if objeto["type"] == "weapon":
-            ruta = os.path.join(RUTA_ITEMS_JUEGO, id_objeto + ".copy")
-            exportado = ""
-            if os.path.exists(ruta):
-                with open(ruta, encoding="utf-8") as archivo:
-                    exportado = archivo.read()
             ranura = (REGEX_PROPIEDAD["slotType"].search(exportado) or [None, None])[1]
             etiqueta = (REGEX_PROPIEDAD["weaponType"].search(exportado) or [None, None])[1]
             ranura = ranura_de_arma(id_objeto, etiqueta, ranura, reglas)
             nuevo.update({"hardpoint": objeto.get("weaponType"), "slotType": ranura, "slots": tamanos.get(ranura, 1),
                           "ammoTypes": municiones_del_arma(objeto.get("ammoType"), etiqueta, propiedades_de_armas)})
+            niveles = armas_por_nivel.get(id_objeto) or armas_por_nivel.get(minusculas.get(id_objeto.lower(), ""))
+            combate = niveles and combate_del_arma(id_objeto, niveles)
+            if combate:
+                nuevo["combat"] = combate
+            origen[id_objeto] = ([etiqueta], NIVEL_DE_ARMA.sub("", id_objeto), False)
         else:
             nuevo.update({"slots": objeto.get("slots") or 1, "slotTypes": objeto.get("specialSlotTypes") or [RANURA_GENERAL]})
             for campo in ("cooling", "heatCapacity", "capacity", "ammoType"):
                 if objeto.get(campo) is not None:
                     nuevo[campo] = objeto[campo]
+            datos_de_equipo(nuevo, exportacion["equipmentType"], exportacion["techLevel"], exportacion["clase"])
+            origen[id_objeto] = ([exportacion["ammoType"], exportacion["equipmentType"]], None, True)
+            if id_objeto in retrorreactores:
+                nuevo["jumpJet"] = retrorreactores[id_objeto]
+            # Sondas: DLCMechSensorRange de YAML suma lo que su SensorRangeModifier pasa de 1 al final.
+            sonda = (objeto.get("probe") or {}).get("sensorRange", 1) - 1
+            if sonda:
+                nuevo["sensorRangePercent"] = round(sonda, 6)
+            # Computadores de puntería: su rasgo (TargetingComputerTrait_BP) da su porcentaje por
+            # UI_GetIncreasedSensorRangePercent, que GetSensorRange del juego suma a la base de 800 m.
+            computador = (objeto.get("targetingComputer") or {}).get("sensorRange", 0)
+            if computador:
+                nuevo["sensorTraitPercent"] = round(computador, 6)
         objetos[id_objeto] = nuevo
 
     # Armas de cuerpo a cuerpo del juego (manos, antebrazos, hachas...): el catálogo de MW5 no las trae. Las
     # de los actuadores (la «Mano de asalto») van en la mano o el antebrazo y no ocupan ranuras generales.
     for nombre, valor in por_nombre(leer(os.path.join(RUTA_YAML, "juego", "armas.json"))).items():
-        if NIVEL_DE_ARMA.search(nombre):
+        if NIVEL_DE_ARMA.search(nombre) or valor["clase"] != "MWMeleeWeaponDataAsset":
             continue
         datos = valor["propiedades"]
         ranura = (datos.get("WeaponSlotTypeAssetId") or {}).get("Id", {}).get("PrimaryAssetName")
@@ -262,9 +578,17 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "meleeDamage": (estadisticas.get("Melee") or {}).get("Damage", 0), "cooldown": estadisticas.get("Cooldown"),
             **({"actuator": True} if actuador else {}),
         }
+        combate = combate_del_arma(nombre, armas_por_nivel.get(nombre) or {"1": valor})
+        if combate:
+            objetos[nombre]["combat"] = combate
+        origen[nombre] = ([datos.get("WeaponType")], nombre, False)
 
     # Armas de Yet Another Weapon y su versión Clan.
     for nombre, valor in por_nombre(cargar_categoria("armas")).items():
+        # Como en el juego base, cada arma es un objeto con sus niveles (CEERPPC79_Lvl3 es CEERPPC79 en nivel 3).
+        base = NIVEL_DE_ARMA.sub("", nombre)
+        if base != nombre and "1" in armas_por_nivel.get(base, {}):
+            continue
         datos = valor["propiedades"]
         etiqueta = datos.get("WeaponType")
         ranura = ranura_de_arma(nombre, etiqueta, datos.get("WeaponSlotTypeAssetId", {}).get("Id", {}).get("PrimaryAssetName"), reglas)
@@ -275,50 +599,53 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "slotType": ranura, "slots": tamanos.get(ranura, 1),
             "ammoTypes": municiones_del_arma((datos.get("StatsData") or {}).get("AmmoType"), etiqueta, propiedades_de_armas),
         }
+        combate = combate_del_arma(nombre, armas_por_nivel.get(nombre) or {"1": valor})
+        if combate:
+            objetos[nombre]["combat"] = combate
+        origen[nombre] = ([etiqueta], base, False)
 
     for nombre, valor in por_nombre(cargar_categoria("municion")).items():
         datos = valor["propiedades"]
         objetos[nombre] = {"mod": valor["mod"], "name": texto(datos.get("Name")) or nombre, "kind": "ammo", "tons": datos.get("Tons") or 0,
-                           "ammoType": datos.get("AmmoType"),
+                           "ammoType": datos.get("AmmoType"), "capacity": datos.get("Capacity") or 0,
                            "slots": datos.get("Slots") or 1, "slotTypes": [RANURA_GENERAL]}
+        origen[nombre] = ([datos.get("AmmoType"), datos.get("EquipmentType")], None, True)
 
     # Equipo de YAML con sus propiedades (Resources/*Equipment_Properties.json).
-    propiedades = cargar_recursos("Equipment_Properties.json")
     for nombre, valor in por_nombre(cargar_categoria("equipo")).items():
         # Los rasgos de 'Mech (rol de la IA, computadores de puntería de la cantina) no se montan en ranuras.
         if valor["clase"] == "MWMechTraitDataAsset":
             continue
         datos = valor["propiedades"]
-        extra = propiedades.get(nombre, {})
         objeto = {
             "mod": valor["mod"],
-            "name": extra.get("name") or texto(datos.get("Name")) or nombre, "kind": "equipment",
-            "category": datos.get("EquipmentType"),
-            "tons": extra.get("equipmentTons", datos.get("Tons") or 0),
-            "slots": extra.get("slots", datos.get("Slots") or 1),
+            "name": texto(datos.get("Name")) or nombre, "kind": "equipment",
+            "tons": datos.get("Tons") or 0, "slots": datos.get("Slots") or 1,
             "slotTypes": [s["Id"]["PrimaryAssetName"] for s in datos.get("SupportedSlotTypesAssetId", [])] or [RANURA_GENERAL],
         }
+        datos_de_equipo(objeto, datos.get("EquipmentType"), datos.get("TechLevel"), valor["clase"])
+        origen[nombre] = ([datos.get("EquipmentType")], None, True)
+        if nombre in retrorreactores:
+            objeto["jumpJet"] = retrorreactores[nombre]
+        if (datos.get("SensorRangeModifier") or 0) > 0:
+            objeto["sensorRangePercent"] = round(datos["SensorRangeModifier"] - 1, 4)
         # YAML monta casi todo su equipo como disipadores: el que refrigera por sí mismo (el Royal DHS Kit,
         # «Heat efficiency 0.2») lo dice en el asset, no en las propiedades.
         disipador = datos.get("HeatSink") or {}
         if disipador.get("HealthyEfficiency"):
-            objeto["cooling"] = round(disipador["HealthyEfficiency"], 4)
+            objeto["cooling"] = round(disipador["HealthyEfficiency"], 6)
         if disipador.get("HealthyCapacity"):
-            objeto["heatCapacity"] = round(disipador["HealthyCapacity"], 4)
+            objeto["heatCapacity"] = round(disipador["HealthyCapacity"], 6)
         color = color_propio(nombre, datos.get("EquipmentType"), propiedades)
         if color:
             objeto["color"] = color
         if (datos.get("EquipmentType") or "").startswith("Equipment.Engine.Core"):
-            objeto["rating"] = datos.get("TechLevel")
-        if "fillerSlots" in extra:
-            # Las ranuras fijas van por ubicación con los nombres del juego (LeftTorso); se pasan a los de la web.
-            objeto["fillerSlots"] = {CAMPOS_ZONA.get(clave, clave): valor for clave, valor in extra["fillerSlots"].items()}
-        for campo in ("engineRelativeWeight", "relativeWeight", "structureWeightMulti", "structureMulti",
-                      "armorWeightMulti", "armorPerTon", "armorMulti", "engineHeatsinkEfficiency", "engineHeatsinkCapacity",
-                      "heatEfficiency", "fixed"):
-            if campo in extra:
-                objeto[campo] = extra[campo]
+            # DLCGetInstalledInternals: la potencia es el TechLevel del núcleo en valor absoluto.
+            objeto["rating"] = abs(datos.get("TechLevel") or 0)
         objetos[nombre] = objeto
+
+    for nombre, (etiquetas, sin_nivel, equipo) in origen.items():
+        aplicar_propiedades(objetos[nombre], propiedades_combinadas(globales, nombre, [e for e in etiquetas if e], sin_nivel), equipo)
     return objetos
 
 
@@ -443,6 +770,20 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech):
     return {"internal": {tipo: pieza for tipo, pieza in internas.items() if pieza}, "items": piezas, "weapons": armas, "armor": armadura}
 
 
+def movimiento(datos):
+    """Giro, giro del torso y ángulos del torso y los brazos del MDA, que el panel del juego multiplica por
+    las bonificaciones (CalculateMechStats). Un torso sin límite (bIsYawUnbound) gira 360°."""
+    estadisticas = datos["MechDataStats"]
+    torso = estadisticas.get("TorsoStats") or {}
+    limites = torso.get("TorsoTwistBounds") or {}
+    return {
+        "turnSpeed": round((estadisticas.get("MoveStats") or {}).get("TurnSpeed", 0), 4),
+        "torsoTwistRate": round((torso.get("TorsoTwistRate") or {}).get("Yaw", 0), 4),
+        "torsoYaw": 360 if limites.get("bIsYawUnbound") else round((limites.get("High") or {}).get("Yaw", 0), 4),
+        "armYaw": round(((torso.get("ArmTwistBounds") or {}).get("High") or {}).get("Yaw", 0), 4),
+    }
+
+
 def quirks_de(variante, modelo, asignaciones):
     nombres = []
     for clave in (modelo, variante):
@@ -491,6 +832,7 @@ def main():
             "quirks": quirks_de(id_mech, modelo, asignaciones),
             "zones": construir_zonas(datos),
             "stock": construir_build_de_serie(datos, loadout, objetos, avisos, id_mech),
+            "movement": movimiento(datos),
         })
 
     usados = {q for mech in mechs for q in mech["quirks"]}

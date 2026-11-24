@@ -182,3 +182,51 @@
 .yaml-mechlab .board-right-arm { grid-area: left-arm; }
 .yaml-mechlab .board-left-leg { grid-area: right-leg; }
 .yaml-mechlab .board-right-leg { grid-area: left-leg; }
+
+/* El panel de estadísticas del juego en la caja de cifras de MW5: arriba el peso, las ranuras libres y los
+   rellenos dinámicos; debajo las 21 cifras. Las filas del juego (Armor, Structure, Melee dmg avg...) van en
+   columnas de tres para que el panel quepa a lo ancho; en el móvil, en sus filas de tres, como en el juego. */
+.readout-strip.yaml-stats { display: block; }
+
+.yaml-stats-header {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid var(--work-line);
+}
+
+.yaml-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+}
+
+.yaml-stats .readout-cell { position: relative; border: 0; }
+.yaml-stats-header .readout-cell + .readout-cell { border-left: 1px solid var(--work-line); }
+.yaml-stats-grid .readout-cell:nth-child(n + 4) { border-left: 1px solid var(--work-line); }
+.yaml-stats-grid .readout-cell:not(:nth-child(3n + 1)) { border-top: 1px solid var(--work-line); }
+.yaml-stats-grid .readout-cell strong { font-size: 14px; }
+
+/* La barra del juego bajo cada cifra, llena en proporción a su tope. */
+.yaml-stat-bar {
+  position: absolute;
+  right: 12px;
+  bottom: 3px;
+  left: 12px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--work-lime) calc(var(--stat-ratio) * 100%), rgba(255, 255, 255, 0.08) 0);
+}
+
+@media (max-width: 1100px) {
+  .yaml-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: none; grid-auto-flow: row; }
+  .yaml-stats-grid .readout-cell:nth-child(n) { border-top: 1px solid var(--work-line); border-left: 1px solid var(--work-line); }
+  .yaml-stats-grid .readout-cell:nth-child(-n + 3) { border-top: 0; }
+  .yaml-stats-grid .readout-cell:nth-child(3n + 1) { border-left: 0; }
+}
+
+/* El nivel de las armas montadas, con las rayitas del juego. */
+.yaml-tier-pips { display: inline-flex; flex: none; gap: 2px; margin-left: 6px; vertical-align: middle; }
+.yaml-tier-pips span { width: 7px; height: 3px; border: 1px solid var(--work-muted); }
+.yaml-tier-pips span.is-filled { border-color: var(--work-text); background: var(--work-text); }
+.yaml-tier-pips.is-legendary span { border-color: #ff9d00; background: #ff9d00; }
+.yaml-weapon-tier { color: var(--work-muted); font: 500 10px var(--work-mono); }

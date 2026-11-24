@@ -45,6 +45,14 @@ export interface YamlBuild {
   armor: Record<Zone, { front: number; rear: number }>;
 }
 
+// Movimiento del MDA: giro (°/s), giro del torso (°/s) y ángulos máximos del torso y los brazos (°).
+export interface YamlMovement {
+  turnSpeed: number;
+  torsoTwistRate: number;
+  torsoYaw: number;
+  armYaw: number;
+}
+
 export interface YamlMech {
   id: string;
   chassis: string;
@@ -54,9 +62,53 @@ export interface YamlMech {
   quirks: string[];
   zones: Record<Zone, YamlZoneData>;
   stock: YamlBuild;
+  movement: YamlMovement;
 }
 
 export type YamlItemKind = 'weapon' | 'ammo' | 'equipment';
+
+// Cifras de un nivel de un arma, con los quirks del nivel: daño y calor por disparo (por segundo en los rayos
+// sin duración, como las ametralladoras), enfriamiento, duración del rayo o del golpe y alcances en metros.
+export interface YamlWeaponTier {
+  damage: number;
+  heat: number;
+  cooldown: number;
+  duration?: number;
+  optimalRange: number;
+  maxRange: number;
+  // AMS: misiles destruidos por segundo.
+  amsRate?: number;
+}
+
+export type YamlWeaponFamily = 'trace' | 'projectile' | 'missile' | 'ams' | 'melee';
+// Cómo sale el alcance máximo (docs/specs/estadisticas-yaml.md): el doble o el triple del óptimo, el óptimo,
+// el de los Gauss mejorados (el óptimo ya es el triple) o el máximo del asset.
+export type YamlRangeRule = 'double' | 'optimal' | 'gauss' | 'gaussImproved' | 'max';
+
+export interface YamlCombat {
+  family: YamlWeaponFamily;
+  weaponType: string;
+  techBase: string;
+  rangeRule: YamlRangeRule;
+  // Por nivel: "1" es el asset sin sufijo y "0", "2"... los _LvlN.
+  tiers: Record<string, YamlWeaponTier>;
+  // Lo que dura la salva (ráfagas y misiles), que se suma al ciclo de disparo.
+  volleyTime?: number;
+}
+
+// Un grupo de bonificaciones de armas de un quirk o del equipo (Equipment_Properties.json).
+export interface YamlWeaponGroup {
+  tags: string[];
+  excludeTags?: string[];
+  mechParts?: string[];
+  cooldownMulti?: number;
+  heatMulti?: number;
+  damageMulti?: number;
+  durationMulti?: number;
+  optimalRangeMulti?: number;
+  maxRangeMulti?: number;
+  missilesDestroyedMulti?: number;
+}
 
 export interface YamlItem {
   name: string;
@@ -99,6 +151,52 @@ export interface YamlItem {
   heatCapacity?: number;
   capacity?: number;
   fixed?: boolean;
+  // Armas: sus estadísticas de combate por nivel.
+  combat?: YamlCombat;
+  // Equipo: bonificaciones a las armas (para todo el 'Mech o, con scope "component", para su ubicación), al
+  // movimiento y a los sensores; las sondas y los computadores de puntería, su porcentaje de sensores.
+  weapons?: { scope: string; groups: YamlWeaponGroup[] };
+  turnSpeedMulti?: number;
+  torsoTwistRateMulti?: number;
+  torsoTwistRateYawMulti?: number;
+  torsoTwistAngleMulti?: number;
+  torsoTwistAngleYawMulti?: number;
+  armTwistAngleMulti?: number;
+  armTwistAngleYawMulti?: number;
+  sensorRangeBonus?: number;
+  sensorRangeMulti?: number;
+  sensorRangeBonusLance?: number;
+  sensorRangeMultiLance?: number;
+  // Sondas: lo que su SensorRangeModifier pasa de 1. Computadores de puntería: el porcentaje de su rasgo.
+  sensorRangePercent?: number;
+  sensorTraitPercent?: number;
+  // Armadura y estructura que suma a su ubicación (las armas cuerpo a cuerpo, por ejemplo); no pesan.
+  armorComponentFront?: number;
+  armorComponentRear?: number;
+  structureComponent?: number;
+  // Multiplicadores de la altura de salto (equipo y quirks).
+  jumpJetFuelBurnTimeMulti?: number;
+  jumpJetZAccelMulti?: number;
+  // Lo que YAML lee de cada pieza para el peso, la refrigeración y la velocidad (docs/specs/estadisticas-yaml.md):
+  // su TechLevel (lo que vale una propiedad que falta: TechLevel / 100) y si es un disipador (MWHeatSinkDataAsset).
+  techLevel?: number;
+  heatSinkAsset?: boolean;
+  roundWeightType?: string;
+  roundWeightUp?: number | boolean;
+  coolingMulti?: number;
+  coolingMultiScope?: string;
+  heatCapacityBonus?: number;
+  bundledHeatsinks?: number;
+  internalHeatsinkBonus?: number;
+  topSpeedMulti?: number;
+  engineHealthType?: string;
+  armorComponentFrontMulti?: number;
+  armorComponentRearMulti?: number;
+  structureComponentMulti?: number;
+  componentArmorWeightMulti?: number;
+  // Retrorreactores: velocidad inicial vertical (cm/s), tiempo de encendido (s) y curva de aceleración vertical
+  // (cm/s² por número de retrorreactores montados).
+  jumpJet?: { initialVelocityZ: number; burnTime: number; accelZ: [number, number][] };
 }
 
 export interface YamlQuirk {

@@ -12,6 +12,13 @@ import {
 const nightstar = findYamlMech('NSR-9J')!;
 const stock = createStockBuild(nightstar);
 
+// El juego calcula en float32 y enseña dos decimales: se compara a dos decimales.
+const twoDecimals = (value: number) => Number(value.toFixed(2));
+const heatOf = (mech: Parameters<typeof getHeat>[0], current: YamlBuild) => {
+  const { cooling, capacity } = getHeat(mech, current);
+  return { cooling: twoDecimals(cooling), capacity: twoDecimals(capacity) };
+};
+
 function build(result: { build?: YamlBuild; error?: string }): YamlBuild {
   expect(result.error).toBeUndefined();
   return result.build!;
@@ -30,7 +37,7 @@ function emptyWithoutCore(): YamlBuild {
 describe('referencia del juego: Nightstar NSR-9J con YAML', () => {
   it('CA1: la build de serie pesa 95 de 95 t, va a 48,6 km/h y lleva núcleo 285 con motor XL', () => {
     expect(getBuildTonnage(nightstar, stock)).toBe(95);
-    expect(getTopSpeed(nightstar, stock)).toBe(48.6);
+    expect(twoDecimals(getTopSpeed(nightstar, stock))).toBe(48.6);
     expect(getArmorPoints(nightstar, stock)).toEqual({ installed: 592, bonus: 7 });
     expect(getStructurePoints(nightstar, stock).total).toBe(304);
     expect(stock.internal.Engine).toBe('std285');
@@ -106,14 +113,14 @@ describe('referencia del juego: Nightstar NSR-9J con YAML', () => {
   it('CA11: vacío con motor XL, giroscopio estándar y sin núcleo pesa 31 t, con 0 de refrigeración y 30 de capacidad', () => {
     const empty = emptyWithoutCore();
     expect(getBuildTonnage(nightstar, empty)).toBe(31);
-    expect(getHeat(nightstar, empty)).toEqual({ cooling: 0, capacity: 30 });
+    expect(heatOf(nightstar, empty)).toEqual({ cooling: 0, capacity: 30 });
   });
 
   it('CA12: con el núcleo 285 pesa 42,5 t; con el giroscopio Agility, igual; con el XL, 41 t', () => {
     const core285 = setInternal(emptyWithoutCore(), 'Engine', 'std285');
     expect(getBuildTonnage(nightstar, core285)).toBe(42.5);
-    expect(getTopSpeed(nightstar, core285)).toBe(48.6);
-    expect(getHeat(nightstar, core285)).toEqual({ cooling: 1, capacity: 40 });
+    expect(twoDecimals(getTopSpeed(nightstar, core285))).toBe(48.6);
+    expect(heatOf(nightstar, core285)).toEqual({ cooling: 1, capacity: 40 });
     expect(getBuildTonnage(nightstar, setInternal(core285, 'Gyro', 'GYRO2'))).toBe(42.5);
     expect(getBuildTonnage(nightstar, setInternal(core285, 'Gyro', 'GYRO_XL'))).toBe(41);
   });
@@ -122,8 +129,8 @@ describe('referencia del juego: Nightstar NSR-9J con YAML', () => {
     const core105 = setInternal(emptyWithoutCore(), 'Engine', 'std105');
     expect(getBuildTonnage(nightstar, core105)).toBe(29);
     expect(getBuildTonnage(nightstar, setInternal(core105, 'Gyro', 'GYRO_XL'))).toBe(28);
-    expect(getTopSpeed(nightstar, core105)).toBe(17.91);
-    expect(getHeat(nightstar, core105)).toEqual({ cooling: 0.4, capacity: 34 });
+    expect(twoDecimals(getTopSpeed(nightstar, core105))).toBe(17.91);
+    expect(heatOf(nightstar, core105)).toEqual({ cooling: 0.4, capacity: 34 });
     expect(getBuildTonnage(nightstar, setInternal(core105, 'EngineTypeSlot', 'ENGINE_FIXED'))).toBe(30.5);
   });
 
@@ -131,17 +138,17 @@ describe('referencia del juego: Nightstar NSR-9J con YAML', () => {
     const core285 = setInternal(emptyWithoutCore(), 'Engine', 'std285');
     const doubleKit = setInternal(core285, 'enginecooling', 'Cooling_diss100');
     expect(getBuildTonnage(nightstar, doubleKit)).toBe(42.5);
-    expect(getHeat(nightstar, doubleKit)).toEqual({ cooling: 2, capacity: 50 });
+    expect(heatOf(nightstar, doubleKit)).toEqual({ cooling: 2, capacity: 50 });
     const royal = setInternal(core285, 'enginecooling', 'ROYAL_DHS_KIT');
-    expect(getHeat(nightstar, royal)).toEqual({ cooling: 2.2, capacity: 50 });
+    expect(heatOf(nightstar, royal)).toEqual({ cooling: 2.2, capacity: 50 });
     const withHeatSink = build(mountItem(nightstar, royal, 'rightTorso', 'DoubleHeatSink'));
     expect(getBuildTonnage(nightstar, withHeatSink)).toBe(43.5);
-    expect(getHeat(nightstar, withHeatSink).capacity).toBe(52);
+    expect(heatOf(nightstar, withHeatSink).capacity).toBe(52);
   });
 
   it('la build de serie con los disipadores de sus torsos: 3 de refrigeración y 58 de capacidad con el Royal DHS Kit', () => {
     const royal = setInternal(stock, 'enginecooling', 'ROYAL_DHS_KIT');
-    expect(getHeat(nightstar, royal)).toEqual({ cooling: 3, capacity: 58 });
-    expect(getHeat(nightstar, setInternal(stock, 'enginecooling', 'SHS_KIT_FIXED'))).toEqual({ cooling: 1.8, capacity: 48 });
+    expect(heatOf(nightstar, royal)).toEqual({ cooling: 3, capacity: 58 });
+    expect(heatOf(nightstar, setInternal(stock, 'enginecooling', 'SHS_KIT_FIXED'))).toEqual({ cooling: 1.8, capacity: 48 });
   });
 });

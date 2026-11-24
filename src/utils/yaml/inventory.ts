@@ -58,11 +58,12 @@ export function getYamlInventoryCategory(item: YamlItem): YamlInventoryCategory 
   return 'missile';
 }
 
-// Montar un objeto en una ubicación (o en el anclaje elegido), con el motivo si no cabe.
-export function placeYamlItem(mech: YamlMech, build: YamlBuild, id: string, zone: Zone, hardpoint: string | null = null): MountResult {
+// Montar un objeto en una ubicación (o en el anclaje elegido), con el motivo si no cabe. Las armas van con el
+// nivel elegido en el inventario.
+export function placeYamlItem(mech: YamlMech, build: YamlBuild, id: string, zone: Zone, hardpoint: string | null = null, tier?: number): MountResult {
   const item = getYamlItem(id);
   if (!item) return { error: 'Unknown item' };
-  return item.kind === 'weapon' ? mountWeapon(mech, build, zone, id, hardpoint ?? undefined) : mountItem(mech, build, zone, id);
+  return item.kind === 'weapon' ? mountWeapon(mech, build, zone, id, hardpoint ?? undefined, tier) : mountItem(mech, build, zone, id);
 }
 
 // Una caja de munición sirve si alguna arma montada usa su tipo, como en el inventario de MW5.
@@ -81,9 +82,9 @@ export function getYamlDropZones(mech: YamlMech, build: YamlBuild, id: string): 
 }
 
 // El clic derecho de MW5: en la primera ubicación donde cabe.
-export function autoPlaceYamlItem(mech: YamlMech, build: YamlBuild, id: string): MountResult & { zone?: Zone } {
+export function autoPlaceYamlItem(mech: YamlMech, build: YamlBuild, id: string, tier?: number): MountResult & { zone?: Zone } {
   for (const zone of ZONES) {
-    const result = placeYamlItem(mech, build, id, zone);
+    const result = placeYamlItem(mech, build, id, zone, null, tier);
     if (result.build) return { ...result, zone };
   }
   return { error: `${getYamlItem(id)?.name ?? id} does not fit anywhere` };

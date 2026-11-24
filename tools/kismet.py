@@ -7,7 +7,12 @@ import struct
 #
 # Solo se usa con assets cocinados: las referencias a objetos son índices de paquete de 4 bytes y las
 # propiedades, rutas de campos (FFieldPath). Los saltos guardan desplazamientos de memoria, que no
-# coinciden con los del archivo, así que no se siguen: las sentencias se leen en orden.
+# coinciden con los del archivo: en memoria un nombre (FScriptName) ocupa 12 bytes en vez de 8 y una
+# referencia a objeto o a propiedad es un puntero de 8. El desensamblador lleva las dos cuentas para dar la
+# posición en memoria de cada sentencia, la que usan los saltos; al acabar debe coincidir con el tamaño en
+# memoria que guarda la función.
+TAMANO_NOMBRE_EN_MEMORIA = 12
+TAMANO_PUNTERO = 8
 
 FIN_DE_PARAMETROS = 0x16
 FIN_DE_SCRIPT = 0x53
@@ -37,29 +42,37 @@ class Desensamblador:
         self.referencia = referencia
         self.datos = datos
         self.posicion = 0
+        self.memoria = 0
 
     def _leer(self, formato):
         valor = struct.unpack_from("<" + formato, self.datos, self.posicion)[0]
         self.posicion += struct.calcsize("<" + formato)
+        self.memoria += struct.calcsize("<" + formato)
         return valor
 
     def _nombre(self):
         indice, numero = struct.unpack_from("<ii", self.datos, self.posicion)
         self.posicion += 8
+        self.memoria += TAMANO_NOMBRE_EN_MEMORIA
         nombre = self.nombres[indice]
         return nombre if numero == 0 else f"{nombre}_{numero - 1}"
 
     def _objeto(self):
-        return self.referencia(self._leer("i"))
+        valor = self.referencia(self._leer("i"))
+        self.memoria += TAMANO_PUNTERO - 4
+        return valor
 
     def _propiedad(self):
+        inicio = self.memoria
         ruta = [self._nombre() for _ in range(self._leer("i"))]
         self._leer("i")
+        self.memoria = inicio + TAMANO_PUNTERO
         return ".".join(ruta)
 
     def _cadena(self):
         fin = self.datos.index(b"\0", self.posicion)
         texto = self.datos[self.posicion:fin].decode("latin-1")
+        self.memoria += fin + 1 - self.posicion
         self.posicion = fin + 1
         return texto
 
@@ -68,6 +81,7 @@ class Desensamblador:
         while self.datos[fin:fin + 2] != b"\0\0":
             fin += 2
         texto = self.datos[self.posicion:fin].decode("utf-16-le")
+        self.memoria += fin + 2 - self.posicion
         self.posicion = fin + 2
         return texto
 
@@ -76,6 +90,7 @@ class Desensamblador:
         while self.datos[self.posicion] != fin:
             elementos.append(self.expresion())
         self.posicion += 1
+        self.memoria += 1
         return elementos
 
     def expresion(self):
@@ -252,19 +267,31 @@ class Desensamblador:
         return ("switch", indice, resultado, self.expresion())
 
     def sentencias(self):
+        return [sentencia for _, sentencia in self.sentencias_con_posicion()]
+
+    def sentencias_con_posicion(self):
+        """Las sentencias con su posición en memoria, la que usan los saltos (goto, if_not, push)."""
         resultado = []
         while self.posicion < len(self.datos):
-            resultado.append(self.expresion())
+            inicio = self.memoria
+            resultado.append((inicio, self.expresion()))
         return resultado
 
 
-def bytecode_de_funcion(datos):
-    """El bytecode de un export UFunction: va tras su tamaño en memoria y en el archivo (dos int32)."""
+def candidatos_de_bytecode(datos):
+    """Posibles bytecodes de un export UFunction: van tras su tamaño en memoria y en el archivo (dos int32) y
+    acaban en EX_EndOfScript cerca del final del export. Puede haber falsos positivos antes del bueno."""
     for inicio in range(len(datos) - 8):
-        tamano = struct.unpack_from("<i", datos, inicio + 4)[0]
+        en_memoria, tamano = struct.unpack_from("<ii", datos, inicio)
         fin = inicio + 8 + tamano
         if tamano > 0 and 0 <= len(datos) - fin <= COLA_MAXIMA_DE_FUNCION and datos[fin - 1] == FIN_DE_SCRIPT:
-            return datos[inicio + 8:fin]
+            yield datos[inicio + 8:fin], en_memoria
+
+
+def bytecode_de_funcion(datos, con_tamano_en_memoria=False):
+    """El bytecode de un export UFunction (el primer candidato; desensamblar_con_posiciones los comprueba)."""
+    for bytecode, en_memoria in candidatos_de_bytecode(datos):
+        return (bytecode, en_memoria) if con_tamano_en_memoria else bytecode
     raise ValueError("El export no contiene bytecode de Kismet")
 
 
@@ -276,6 +303,29 @@ def desensamblar(asset, funcion):
         return asset.orden[indice - 1] if indice > 0 else None
 
     return Desensamblador(asset.nombres, referencia, bytecode_de_funcion(asset.bytes_de(funcion))).sentencias()
+
+
+def desensamblar_con_posiciones(asset, funcion):
+    """Las sentencias con su posición en memoria. Falla si las cuentas no llegan al tamaño en memoria de la
+    función: entonces las posiciones de los saltos no serían fiables."""
+    def referencia(indice):
+        if indice < 0:
+            return asset.imports[-indice - 1][0]
+        return asset.orden[indice - 1] if indice > 0 else None
+
+    # El bueno es el candidato que se desensambla entero y cuadra con su tamaño en memoria.
+    error = None
+    for datos, en_memoria in candidatos_de_bytecode(asset.bytes_de(funcion)):
+        desensamblador = Desensamblador(asset.nombres, referencia, datos)
+        try:
+            sentencias = desensamblador.sentencias_con_posicion()
+        except (IndexError, ValueError, struct.error) as fallo:
+            error = fallo
+            continue
+        if desensamblador.memoria == en_memoria:
+            return sentencias
+        error = ValueError(f"{funcion}: {desensamblador.memoria} bytes en memoria y la función dice {en_memoria}")
+    raise error or ValueError("El export no contiene bytecode de Kismet")
 
 
 def id_de_asset(nodo):

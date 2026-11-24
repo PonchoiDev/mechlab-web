@@ -1,9 +1,13 @@
 import type { ReactNode } from 'react';
-import type { EquippedItem } from '../types/mech';
+import type { Item } from '../types/item';
 import { isClanTech } from '../utils/items';
 
+// Lo que necesita el selector de un arma: su nombre, su tecnología y sus niveles. Lo usan los MechLabs de MW5
+// y de YAML.
+export type TierSelectable = Pick<Item, 'name' | 'techBase' | 'tier'> & { tiers?: Record<string, unknown> | null };
+
 interface TierSelectorProps {
-  item: EquippedItem;
+  item: TierSelectable;
   onChange: (tier: string) => void;
 }
 
@@ -47,9 +51,9 @@ export function TierSelector({ item, onChange }: TierSelectorProps) {
   return (
     <div role="group" aria-label={`${item.name} tier`} className={tierClass}>
       <span className="tier-selector-label">T</span>
-      {tiers['0'] && renderButton('0', 'Tier 0', 'tier-label tier-label-zero', '0')}
-      {PIP_TIERS.filter(tier => tiers[tier]).map(tier => renderButton(tier, `Tier ${tier}`, pipClass(tier)))}
-      {tiers['5'] && renderButton('5', 'Lost Tech tier', 'tier-label tier-label-legendary', '5')}
+      {'0' in tiers && renderButton('0', 'Tier 0', 'tier-label tier-label-zero', '0')}
+      {PIP_TIERS.filter(tier => tier in tiers).map(tier => renderButton(tier, `Tier ${tier}`, pipClass(tier)))}
+      {'5' in tiers && renderButton('5', 'Lost Tech tier', 'tier-label tier-label-legendary', '5')}
       {clanTier && renderButton(clanTier, 'Clan tier', 'tier-label tier-label-clan', 'C')}
     </div>
   );

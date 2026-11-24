@@ -62,7 +62,7 @@ Cada regla marcada con ✔ está comprobada con capturas del juego, con YAML 0.9
 - **Giroscopio (✔):** potencia / 100 redondeado hacia arriba, × `relativeWeight` del giroscopio (el estándar y el Agility, × 1; el XL, × 0,5). Sin núcleo pesa 0. En 285: estándar 3, XL 1,5; en 105: estándar 2, XL 1.
 - **Disipadores del motor (✔):** el núcleo trae ⌊potencia / 25⌋ disipadores, como mucho 10, del tipo de su kit de refrigeración (Engine Single Heat Sinks, Royal DHS Kit...). **Cada disipador que falta hasta 10 resta 1 t** (con el núcleo 105, 4 disipadores y −6 t). Con disipadores simples, cada uno da 0,1 de refrigeración y 1 de capacidad sobre una base de 30: núcleo 285, 1,0 y 40; núcleo 105, 0,4 y 34.
 - **Kits dobles (✔):** con el Double Heat Sink Kit, cada disipador del motor da 0,2 de refrigeración y 2 de capacidad (`engineHeatsinkEfficiency`, `engineHeatsinkCapacity`): núcleo 285, 2,0 y 50. El Royal DHS Kit da lo mismo, +0,2 de refrigeración («Heat efficiency») y −8 % de calor de las armas: 2,2 y 50.
-- **Disipadores fuera del motor (por calibrar):** un disipador doble en un torso pesa 1 t y suma 2 de capacidad, pero el juego sigue enseñando 2,2 de refrigeración con el Royal DHS Kit. El NSR-9J de serie, con 4 disipadores dobles fuera del motor, marca 3 de refrigeración y 58 de capacidad; con Engine Single Heat Sinks, 1,8 y 48.
+- **Disipadores fuera del motor (✔):** leídos de `MechCalculateCoolingCapacity`, con las demás reglas de peso, refrigeración, velocidad, armadura y estructura, en [estadisticas-yaml.md](estadisticas-yaml.md).
 - **Quirks (✔ en parte):** los del `mechs.json` de los mods se enseñan en el tablero, y sus bonificaciones de armadura y estructura se suman («15+5/15»). Los modificadores de combate se enseñan como texto.
 - **Peso total:** la suma de motor, giroscopio, cabina, estructura, armadura, armas, munición y equipo. Se puede pasar del tonelaje, como en el MechLab de MW5.
 
@@ -121,10 +121,9 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 
 ## Pendiente de comprobar en el juego
 
-- Las builds de serie que no pesan su tonelaje: con estas reglas, 343 de 639 lo dan exacto; 77 se desvían 0,01 o 0,02 t (¿redondeo de la Ferro?) y el resto de 0,5 a 11 t (manos de combate pesadas como el BL-6-KNT, Champion, piezas especiales).
+- Las builds de serie que no pesan su tonelaje: con las reglas de peso leídas de `CalculateMechTonnage` ([estadisticas-yaml.md](estadisticas-yaml.md)), 434 de 639 lo dan exacto; las desviaciones de 0,01 o 0,02 t eran el ajuste al máximo. El resto son sobre todo omnimechs Clan, por la conversión de serie que YAML hace al cargar, que está por leer.
 
 - El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
-- La refrigeración de los disipadores fuera del motor (el juego no la sube al montar uno doble en un torso).
 - Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
 - Quitar actuadores de los brazos (antebrazo y mano) para montar armas grandes.
 
