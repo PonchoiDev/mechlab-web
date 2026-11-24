@@ -222,9 +222,154 @@ def municiones_del_arma(propia, etiqueta, propiedades_de_armas):
     return tipos
 
 
+# Estadísticas de combate (docs/specs/estadisticas-yaml.md). Con YAML, las cifras del mechlab las
+# calcula el mod (MechAlphaStats y YAWFunctionsYAML) a partir de los datos de cada asset de arma, con los
+# quirks de su nivel ya aplicados; la web aplica después las bonificaciones de los quirks y del equipo.
+FAMILIAS_DE_ARMA = {
+    "MWTraceWeaponDataAsset": "trace", "MWProjectileWeaponDataAsset": "projectile",
+    "MWMissileWeaponDataAsset": "missile", "MWAMSWeaponDataAsset": "ams", "MWMeleeWeaponDataAsset": "melee",
+}
+# Rayos cuyo alcance máximo es el óptimo (YAWTrace): el resto llega al doble.
+RAYOS_SIN_ALCANCE_MAXIMO = (
+    "Weapon.Energy.Flamer", "Weapon.Energy.TAG", "Weapon.Energy.TSEMP", "Weapon.Energy.Laser.Pulse.Large.Variable",
+    "Weapon.Energy.Laser.Pulse.Medium.Variable", "Weapon.Energy.Laser.Pulse.Small.Variable",
+)
+# Gauss que YAWBallistic trata aparte: su alcance óptimo ya es el triple y llega hasta ahí.
+GAUSS_MEJORADOS = (
+    "Weapon.Ballistic.GaussRifle.Gauss.Improved", "Weapon.Ballistic.GaussRifle.HeavyGauss.Improved",
+    "Weapon.Ballistic.GaussRifle.HeavyGauss.Railgun", "Weapon.Ballistic.GaussRifle.Railgun",
+    *(f"Weapon.Ballistic.GaussRifle.Gauss.Hyper.Clan.{calibre}.Improved" for calibre in range(5, 85, 5)),
+)
+# Bonificaciones del equipo que cambian las cifras del panel del juego.
+BONIFICACIONES_DE_EQUIPO = (
+    "turnSpeedMulti", "torsoTwistRateMulti", "torsoTwistRateYawMulti", "torsoTwistAngleMulti", "torsoTwistAngleYawMulti",
+    "armTwistAngleMulti", "armTwistAngleYawMulti", "sensorRangeBonus", "sensorRangeMulti",
+)
+QUIRK_DE_NIVEL = re.compile(r"\.(\w+)_Quirk_C$")
+
+
+def de_la_etiqueta(etiqueta, padres):
+    """Las etiquetas del juego son jerárquicas: Weapon.Energy.Flamer.X es de Weapon.Energy.Flamer."""
+    return any(etiqueta == padre or etiqueta.startswith(padre + ".") for padre in padres)
+
+
+def regla_de_alcance(familia, nombre, etiqueta):
+    """Cómo sale el alcance máximo del óptimo (YAWTrace y YAWBallistic), o "max" si es el del asset."""
+    if familia == "trace":
+        return "optimal" if de_la_etiqueta(etiqueta, RAYOS_SIN_ALCANCE_MAXIMO) else "double"
+    if familia == "projectile":
+        # YAWBallistic mira el nombre del asset, sin distinguir mayúsculas.
+        if "ppc" in nombre.lower():
+            return "double"
+        if "mrm" in nombre.lower():
+            return "optimal"
+        if de_la_etiqueta(etiqueta, ("Weapon.Ballistic.GaussRifle",)):
+            return "gaussImproved" if de_la_etiqueta(etiqueta, GAUSS_MEJORADOS) else "gauss"
+        return "double"
+    return "max"
+
+
+def cifras_de_nivel(familia, propiedades):
+    """Las cifras de un nivel de un arma, con los quirks de su QuirkSet aplicados como en el MechLab de MW5
+    (tools/generar_items.py): los porcentajes multiplican y Damage_Quirk y Cooldown_Quirk suman."""
+    quirks = {}
+    for quirk in (propiedades.get("QuirkSet") or {}).get("QuirkList", []):
+        coincidencia = QUIRK_DE_NIVEL.search(quirk.get("Quirk") or "")
+        if coincidencia:
+            quirks[coincidencia.group(1)] = quirk.get("Value", 0.0)
+    q_rango = quirks.get("RangePercentage", quirks.get("RangeAndSpeedPercentage", 0.0))
+    datos = propiedades.get("StatsData") or {}
+
+    def dano(base, por_salva=1):
+        return (base + quirks.get("Damage", 0.0)) * (1 + quirks.get("DamagePercentage", 0.0)) * por_salva
+
+    def calor(base, por_salva=1):
+        return base * (1 + quirks.get("HeatGeneratedPercentage", 0.0)) * por_salva
+
+    if familia == "ams":
+        alcances = propiedades.get("Ranges") or {}
+        cifras = {"damage": 0, "heat": 0, "cooldown": propiedades.get("Cooldown") or 0}
+    elif familia == "melee":
+        golpe = datos.get("Melee") or {}
+        alcances = datos.get("Ranges") or {}
+        cifras = {"damage": dano(golpe.get("Damage", 0.0)), "heat": 0, "duration": golpe.get("Duration", 0.0)}
+    elif familia == "trace":
+        rayo = datos.get("Trace") or {}
+        alcances = datos.get("Ranges") or {}
+        cifras = {"damage": dano(rayo.get("DamageOverDuration", 0.0)), "heat": calor(rayo.get("HeatGeneratedOverDuration", 0.0)),
+                  "duration": rayo.get("Duration", 0.0) * (1 + quirks.get("DurationPercentage", 0.0))}
+    else:
+        misiles = datos.get("MissileStats") or {}
+        proyectil = misiles.get("Projectile") or datos.get("Projectile") or {}
+        disparos = proyectil.get("NumberOfTimesToFire") or 1
+        # El daño es por proyectil (misil o perdigón) y el calor, por misil y por disparo: un LB-X genera
+        # el calor de un disparo aunque lance varios perdigones.
+        numero = misiles.get("NumberOfMissiles") or proyectil.get("NumberOfProjectiles") or 1
+        alcances = datos.get("Range") or {}
+        cifras = {"damage": dano(proyectil.get("Damage", 0.0), numero * disparos),
+                  "heat": calor(proyectil.get("HeatGenerated", 0.0), (misiles.get("NumberOfMissiles") or 1) * disparos)}
+    if familia != "ams":
+        cifras["cooldown"] = ((datos.get("Cooldown") or 0.0) + quirks.get("Cooldown", 0.0)) * (1 + quirks.get("CooldownPercentage", 0.0))
+    optimo = alcances.get("OptimalRange") or 0.0
+    cifras["optimalRange"] = optimo / 100 * (1 + q_rango)
+    cifras["maxRange"] = (alcances.get("MaxRange") or optimo) / 100 * (1 + q_rango)
+    # Los assets guardan floats de 32 bits (2.5999999046 es 2.6).
+    return {campo: round(valor, 4) for campo, valor in cifras.items()}
+
+
+def combate_del_arma(nombre, niveles):
+    """Las estadísticas de combate de un arma a partir de los assets de sus niveles ({nivel: asset})."""
+    base = niveles.get("1") or niveles[min(niveles)]
+    familia = FAMILIAS_DE_ARMA.get(base["clase"])
+    if not familia:
+        return None
+    propiedades = base["propiedades"]
+    etiqueta = propiedades.get("WeaponType") or ""
+    datos = propiedades.get("StatsData") or {}
+    combate = {
+        "family": familia, "weaponType": etiqueta, "techBase": propiedades.get("TechBase") or "",
+        "rangeRule": regla_de_alcance(familia, nombre, etiqueta),
+        "tiers": {nivel: cifras_de_nivel(familia, asset["propiedades"]) for nivel, asset in sorted(niveles.items())},
+    }
+    # Lo que dura la salva y se suma al ciclo de disparo (GetAlphaStrikeStats).
+    misiles = datos.get("MissileStats") or {}
+    proyectil = datos.get("Projectile") or {}
+    salva = (misiles.get("NumberOfMissiles") or 0) * (misiles.get("MissileInterval") or 0) if familia == "missile" \
+        else (proyectil.get("NumberOfTimesToFire") or 0) * (proyectil.get("DelayBetweenFiring") or 0)
+    if salva:
+        combate["volleyTime"] = round(salva, 4)
+    if familia == "ams":
+        combate["amsRate"] = round(propiedades.get("MissileDestructionRate") or 0, 4)
+    return combate
+
+
+def niveles_de_armas():
+    """Los assets de arma del juego y de los mods (que los sustituyen por ruta), por nombre sin nivel y nivel."""
+    assets = leer(os.path.join(RUTA_YAML, "juego", "armas.json"))
+    assets.update(cargar_categoria("armas"))
+    armas = {}
+    for ruta, valor in assets.items():
+        nombre = ruta.rsplit("/", 1)[1]
+        nivel = NIVEL_DE_ARMA.search(nombre)
+        armas.setdefault(NIVEL_DE_ARMA.sub("", nombre), {})[nivel.group(1) if nivel else "1"] = valor
+    return armas
+
+
+def bonificaciones_del_equipo(extra):
+    """Lo de Equipment_Properties.json que cambia las cifras del panel: armas, movimiento y sensores."""
+    bonificaciones = {campo: extra[campo] for campo in BONIFICACIONES_DE_EQUIPO if campo in extra}
+    armas = extra.get("weapons") or {}
+    if armas.get("groups"):
+        bonificaciones["weapons"] = {"scope": armas.get("scope", "mech"), "groups": armas["groups"]}
+    return bonificaciones
+
+
 def construir_objetos(catalogo_juego, reglas, tamanos):
     objetos = {}
     propiedades_de_armas = cargar_recursos("Weapon_Properties.json")
+    propiedades = cargar_recursos("Equipment_Properties.json")
+    armas_por_nivel = niveles_de_armas()
+    minusculas = {nombre.lower(): nombre for nombre in armas_por_nivel}
     # Armas y equipo del juego base: sus cifras están en el catálogo de MW5; el tipo de ranura de las
     # armas, en sus exportaciones.
     for id_objeto, objeto in catalogo_juego.items():
@@ -240,17 +385,27 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             ranura = ranura_de_arma(id_objeto, etiqueta, ranura, reglas)
             nuevo.update({"hardpoint": objeto.get("weaponType"), "slotType": ranura, "slots": tamanos.get(ranura, 1),
                           "ammoTypes": municiones_del_arma(objeto.get("ammoType"), etiqueta, propiedades_de_armas)})
+            niveles = armas_por_nivel.get(id_objeto) or armas_por_nivel.get(minusculas.get(id_objeto.lower(), ""))
+            combate = niveles and combate_del_arma(id_objeto, niveles)
+            if combate:
+                nuevo["combat"] = combate
         else:
             nuevo.update({"slots": objeto.get("slots") or 1, "slotTypes": objeto.get("specialSlotTypes") or [RANURA_GENERAL]})
             for campo in ("cooling", "heatCapacity", "capacity", "ammoType"):
                 if objeto.get(campo) is not None:
                     nuevo[campo] = objeto[campo]
+            nuevo.update(bonificaciones_del_equipo(propiedades.get(id_objeto, {})))
+            # Sondas y computadores de puntería del juego: DLCMechSensorRange suma lo que la sonda pasa de 1
+            # (SensorRangeModifier) y el porcentaje del rasgo del computador.
+            sensores = (objeto.get("probe") or {}).get("sensorRange", 1) - 1 + (objeto.get("targetingComputer") or {}).get("sensorRange", 0)
+            if sensores:
+                nuevo["sensorRangePercent"] = round(sensores, 4)
         objetos[id_objeto] = nuevo
 
     # Armas de cuerpo a cuerpo del juego (manos, antebrazos, hachas...): el catálogo de MW5 no las trae. Las
     # de los actuadores (la «Mano de asalto») van en la mano o el antebrazo y no ocupan ranuras generales.
     for nombre, valor in por_nombre(leer(os.path.join(RUTA_YAML, "juego", "armas.json"))).items():
-        if NIVEL_DE_ARMA.search(nombre):
+        if NIVEL_DE_ARMA.search(nombre) or valor["clase"] != "MWMeleeWeaponDataAsset":
             continue
         datos = valor["propiedades"]
         ranura = (datos.get("WeaponSlotTypeAssetId") or {}).get("Id", {}).get("PrimaryAssetName")
@@ -262,9 +417,16 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "meleeDamage": (estadisticas.get("Melee") or {}).get("Damage", 0), "cooldown": estadisticas.get("Cooldown"),
             **({"actuator": True} if actuador else {}),
         }
+        combate = combate_del_arma(nombre, armas_por_nivel.get(nombre) or {"1": valor})
+        if combate:
+            objetos[nombre]["combat"] = combate
 
     # Armas de Yet Another Weapon y su versión Clan.
     for nombre, valor in por_nombre(cargar_categoria("armas")).items():
+        # Como en el juego base, cada arma es un objeto con sus niveles (CEERPPC79_Lvl3 es CEERPPC79 en nivel 3).
+        base = NIVEL_DE_ARMA.sub("", nombre)
+        if base != nombre and "1" in armas_por_nivel.get(base, {}):
+            continue
         datos = valor["propiedades"]
         etiqueta = datos.get("WeaponType")
         ranura = ranura_de_arma(nombre, etiqueta, datos.get("WeaponSlotTypeAssetId", {}).get("Id", {}).get("PrimaryAssetName"), reglas)
@@ -275,15 +437,17 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "slotType": ranura, "slots": tamanos.get(ranura, 1),
             "ammoTypes": municiones_del_arma((datos.get("StatsData") or {}).get("AmmoType"), etiqueta, propiedades_de_armas),
         }
+        combate = combate_del_arma(nombre, armas_por_nivel.get(nombre) or {"1": valor})
+        if combate:
+            objetos[nombre]["combat"] = combate
 
     for nombre, valor in por_nombre(cargar_categoria("municion")).items():
         datos = valor["propiedades"]
         objetos[nombre] = {"mod": valor["mod"], "name": texto(datos.get("Name")) or nombre, "kind": "ammo", "tons": datos.get("Tons") or 0,
-                           "ammoType": datos.get("AmmoType"),
+                           "ammoType": datos.get("AmmoType"), "capacity": datos.get("Capacity") or 0,
                            "slots": datos.get("Slots") or 1, "slotTypes": [RANURA_GENERAL]}
 
     # Equipo de YAML con sus propiedades (Resources/*Equipment_Properties.json).
-    propiedades = cargar_recursos("Equipment_Properties.json")
     for nombre, valor in por_nombre(cargar_categoria("equipo")).items():
         # Los rasgos de 'Mech (rol de la IA, computadores de puntería de la cantina) no se montan en ranuras.
         if valor["clase"] == "MWMechTraitDataAsset":
@@ -297,7 +461,10 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "tons": extra.get("equipmentTons", datos.get("Tons") or 0),
             "slots": extra.get("slots", datos.get("Slots") or 1),
             "slotTypes": [s["Id"]["PrimaryAssetName"] for s in datos.get("SupportedSlotTypesAssetId", [])] or [RANURA_GENERAL],
+            **bonificaciones_del_equipo(extra),
         }
+        if (datos.get("SensorRangeModifier") or 0) > 0:
+            objeto["sensorRangePercent"] = round(datos["SensorRangeModifier"] - 1, 4)
         # YAML monta casi todo su equipo como disipadores: el que refrigera por sí mismo (el Royal DHS Kit,
         # «Heat efficiency 0.2») lo dice en el asset, no en las propiedades.
         disipador = datos.get("HeatSink") or {}
@@ -443,6 +610,20 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech):
     return {"internal": {tipo: pieza for tipo, pieza in internas.items() if pieza}, "items": piezas, "weapons": armas, "armor": armadura}
 
 
+def movimiento(datos):
+    """Giro, giro del torso y ángulos del torso y los brazos del MDA, que el panel del juego multiplica por
+    las bonificaciones (CalculateMechStats). Un torso sin límite (bIsYawUnbound) gira 360°."""
+    estadisticas = datos["MechDataStats"]
+    torso = estadisticas.get("TorsoStats") or {}
+    limites = torso.get("TorsoTwistBounds") or {}
+    return {
+        "turnSpeed": round((estadisticas.get("MoveStats") or {}).get("TurnSpeed", 0), 4),
+        "torsoTwistRate": round((torso.get("TorsoTwistRate") or {}).get("Yaw", 0), 4),
+        "torsoYaw": 360 if limites.get("bIsYawUnbound") else round((limites.get("High") or {}).get("Yaw", 0), 4),
+        "armYaw": round(((torso.get("ArmTwistBounds") or {}).get("High") or {}).get("Yaw", 0), 4),
+    }
+
+
 def quirks_de(variante, modelo, asignaciones):
     nombres = []
     for clave in (modelo, variante):
@@ -491,6 +672,7 @@ def main():
             "quirks": quirks_de(id_mech, modelo, asignaciones),
             "zones": construir_zonas(datos),
             "stock": construir_build_de_serie(datos, loadout, objetos, avisos, id_mech),
+            "movement": movimiento(datos),
         })
 
     usados = {q for mech in mechs for q in mech["quirks"]}

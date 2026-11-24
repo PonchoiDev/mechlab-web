@@ -101,14 +101,14 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
-| CA1 | La build de referencia | se calcula el panel | Armor 599, Structure 304, Melee dmg avg 0, Alpha damage 62,1, Damage/s 16,47, Melee dmg/s avg 0, Weapon heat/s 4,02, Turn rate 53,9, Alpha heat 13,99, Heat capacity 58, Torso twist 67,5, Jump height 0, Speed 48,6, Torso yaw 95, Weapon range 2.395, Sensor range 950, Arm yaw 30, AMS intercept/s 0, AMS range 0, Ammo 182 |
+| CA1 | La build de referencia | se calcula el panel | Armor 599, Structure 304, Melee dmg avg 0, Alpha damage 62,1, Damage/s 16,47, Melee dmg/s avg 0, Weapon heat/s 4,02, Cooling heat/s 3, Turn rate 53,9, Alpha heat 13,99, Heat capacity 58, Torso twist 67,5, Jump height 0, Speed 48,6, Torso yaw 95, Weapon range 2.395, Sensor range 950, Arm yaw 30, AMS intercept/s 0, AMS range 0, Ammo 182 |
 | CA2 | El panel | se pinta | tiene las 21 cifras con los títulos y el orden del juego |
 | CA3 | El Gauss Rifle, el ER PPC y el Medium Pulse Laser | se consultan en nivel 3 | Gauss: 17,1 de daño, 0,9 de calor, 5,7 s y 726 m; ER PPC: 11,4, 9,9, 4,75 s y 825 m; Medium Pulse Laser: 6,6, 2,34, 3,0875 s, 0,585 s de rayo y 242 m. En nivel 1, las cifras del asset (Gauss 15, 1, 6 s y 660 m) |
 | CA4 | Los quirks del NSR-9J y el Royal DHS Kit | se suman sus bonificaciones para un arma | enfriamiento × 0,8, calor × 0,82, alcance óptimo y máximo × 1,1 |
 | CA5 | La build de referencia | se calcula cada arma | Gauss: 3,75 de daño por segundo y 2.395,8 m de alcance máximo; ER PPC: 3 de daño por segundo y 1.815 m; Medium Pulse Laser: rayo de 0,41 s, 2,29 de daño por segundo y 532,4 m |
 | CA6 | Un arma de un mod con niveles (Cap ER PPC) | se busca en el inventario | sale una vez, con sus niveles del 1 al 5 |
 | CA7 | Un arma en nivel 3 | se monta, se codifica la build y se decodifica | sigue en nivel 3, y el panel cambia con el nivel |
-| CA8 | La build de referencia | se calcula el daño por alcance | a 500 m llega el daño de las seis armas salvo el Small Laser, con el Medium Pulse Laser ya bajando; a 2.400 m no llega ninguna |
+| CA8 | La build de referencia | se calcula el daño por alcance | a 500 m llega el daño de las seis armas salvo el Small Laser, con el Medium Pulse Laser ya bajando; a 2.400 m no llega ninguna; el radar tiene diez anillos de 250 m |
 | CA9 | La tabla de análisis | se suman sus filas | dan el daño alfa, el daño por segundo y el calor del panel |
 
 ## Fuera de alcance
@@ -121,7 +121,6 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 ## Pendiente de comprobar en el juego
 
 - **Jump height:** la calcula el juego (`EstimateMaxJumpJetHeight`) con el empuje de los retrorreactores y el peso del 'Mech. Sin retrorreactores es 0; con ellos, la web no enseña cifra hasta tener una captura con la que calibrarla.
-- La refrigeración de la build de serie: la web da 2,8 y el juego 3 (ver la especificación del MechLab).
 - Las cifras con armas de misiles, AMS y cuerpo a cuerpo montadas.
 
 ## Plan de pruebas
