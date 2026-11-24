@@ -170,9 +170,12 @@ export interface YamlItem {
   armorComponentFront?: number;
   armorComponentRear?: number;
   structureComponent?: number;
-  // Retrorreactores: multiplicadores de la altura de salto.
+  // Multiplicadores de la altura de salto (equipo y quirks).
   jumpJetFuelBurnTimeMulti?: number;
   jumpJetZAccelMulti?: number;
+  // Retrorreactores: velocidad inicial vertical (cm/s), tiempo de encendido (s) y curva de aceleración vertical
+  // (cm/s² por número de retrorreactores montados).
+  jumpJet?: { initialVelocityZ: number; burnTime: number; accelZ: [number, number][] };
 }
 
 export interface YamlQuirk {

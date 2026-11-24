@@ -54,6 +54,8 @@ CATEGORIAS = {
     "MWMechTraitDataAsset": "equipo",
     "MWTechBaseRequirementDataAsset": "tecnologia",
     "DataTable": "tablas",
+    # Curvas de aceleración vertical de los retrorreactores, con las que el juego estima la altura de salto.
+    "CurveFloat": "curvas",
     # Los nombres de las armas de YAW Clan y de parte del equipo están en tablas de textos.
     "StringTable": "textos",
 }
@@ -124,6 +126,9 @@ def extraer_pak(ruta_pak, solo=None):
         export, clase = clase_principal(Asset(pak.leer_archivo(ruta), b""), nombre)
         destino = categoria(clase)
         if destino is None or (solo and destino not in solo) or (clase == "DataTable" and any(texto in ruta for texto in TABLAS_IGNORADAS)):
+            continue
+        # De las curvas solo hacen falta las de aceleración vertical de los retrorreactores.
+        if destino == "curvas" and "AccelZ" not in ruta:
             continue
         asset = Asset.desde_pak(pak, ruta[: -len(".uasset")])
         if clase == "DataTable":
@@ -287,7 +292,10 @@ def extraer_juego(carpeta_juego, destino):
     # Todas las armas del juego, con cada nivel: las de cuerpo a cuerpo no están en el catálogo del MechLab
     # de MW5, y de las demás hacen falta cifras que ese catálogo no guarda (la duración del rayo, el tiempo
     # de la salva), con las que YAML calcula su panel de estadísticas.
-    datos = extraer_pak(os.path.join(carpeta_juego, PAK_DEL_JUEGO), solo={"ranuras", "loadouts", "armas"})
+    # Del equipo del juego, los retrorreactores: su velocidad inicial, su tiempo de encendido y su curva de
+    # aceleración vertical dan la altura de salto (EstimateMaxJumpJetHeight), y el catálogo de MW5 no las guarda.
+    datos = extraer_pak(os.path.join(carpeta_juego, PAK_DEL_JUEGO), solo={"ranuras", "loadouts", "armas", "equipo", "curvas"})
+    datos["equipo"] = {ruta: valor for ruta, valor in datos.get("equipo", {}).items() if valor["clase"] == "MWJumpJetDataAsset"}
     os.makedirs(destino, exist_ok=True)
     for categoria, assets in datos.items():
         escribir(os.path.join(destino, categoria + ".json"), assets)

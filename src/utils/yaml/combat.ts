@@ -22,11 +22,6 @@ const MIN_MULTIPLIER = 0.001;
 // El alcance de sensores de un 'Mech sin bonificaciones (GetSensorRange del juego, 80.000 cm).
 const BASE_SENSOR_RANGE = 800;
 const PULSE_LASER_TAG = 'Weapon.Energy.Laser.Pulse';
-// La altura de salto que estima el juego (EstimateMaxJumpJetHeight, nativo): 34 m más 8 por retrorreactor, de
-// tres capturas (GHR-5J con dos y con cuatro de clase III, 50 y 66 m; JVN-11A con seis de clase V, 82 m).
-// Todas las clases tienen el mismo empuje y van con su tramo de tonelaje, así que el tonelaje no cuenta.
-const JUMP_BASE_HEIGHT = 34;
-const JUMP_HEIGHT_PER_JET = 8;
 // Las ubicaciones con los nombres que usan los quirks en «mechParts».
 const MECH_PART_NAMES: Record<Zone, string> = {
   head: 'Head', centerTorso: 'CenterTorso', leftTorso: 'LeftTorso', rightTorso: 'RightTorso',
@@ -284,13 +279,35 @@ export interface YamlMechStats {
   ammo: number;
 }
 
-// EstimateJumpJetHeightFromLoadout: la estimación del juego por los multiplicadores de combustible y empuje
-// vertical del equipo y los quirks, redondeada al metro.
+// Una curva lineal de Unreal: interpola entre sus claves y, fuera de ellas, se queda en la primera o la última.
+function evalLinearCurve(keys: [number, number][], x: number): number {
+  if (keys.length === 0) return 0;
+  if (x <= keys[0][0]) return keys[0][1];
+  for (let index = 1; index < keys.length; index++) {
+    const [x1, y1] = keys[index];
+    if (x <= x1) {
+      const [x0, y0] = keys[index - 1];
+      return y0 + (y1 - y0) * (x - x0) / (x1 - x0);
+    }
+  }
+  return keys[keys.length - 1][1];
+}
+
+// La altura de salto en metros. EstimateMaxJumpJetHeight, código nativo del juego desensamblado del ejecutable,
+// es el tiro vertical h = v0·t + ½·a·t² en cm, truncado: v0 es la velocidad inicial vertical del retrorreactor, t
+// su tiempo de encendido y a su curva de aceleración evaluada en el número de retrorreactores montados (con la
+// de los rasgos del 'Mech, que no tenemos: × 1). Si hay varios tipos, cuenta el último que recorre. YAML
+// (EstimateJumpJetHeightFromLoadout) la multiplica por las bonificaciones de combustible y empuje vertical y la
+// redondea, y el panel la pasa a metros con una división entera.
 function getJumpHeight(equipment: YamlItem[], properties: Record<string, unknown>[]): number {
-  const jets = equipment.filter(item => item.slotTypes?.some(slotType => /jumpjet/i.test(slotType))).length;
-  if (jets === 0) return 0;
-  return Math.round((JUMP_BASE_HEIGHT + JUMP_HEIGHT_PER_JET * jets)
-    * sumMultiplier(properties, 'jumpJetFuelBurnTimeMulti') * sumMultiplier(properties, 'jumpJetZAccelMulti'));
+  const jets = equipment.filter(item => item.jumpJet);
+  if (jets.length === 0) return 0;
+  const { initialVelocityZ, burnTime, accelZ } = jets[jets.length - 1].jumpJet!;
+  const time = f(burnTime);
+  const acceleration = f(evalLinearCurve(accelZ, jets.length));
+  const estimate = Math.trunc(f(f(f(f(time * time) * acceleration) * 0.5) + f(time * f(initialVelocityZ))));
+  const centimetres = Math.round(f(f(sumMultiplier(properties, 'jumpJetFuelBurnTimeMulti') * estimate) * sumMultiplier(properties, 'jumpJetZAccelMulti')));
+  return Math.trunc(centimetres / 100);
 }
 
 // DecimalRounder de YAML: a un decimal.

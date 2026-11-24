@@ -373,6 +373,34 @@ def niveles_de_armas():
     return armas
 
 
+# RichCurveKey: modo de interpolación, de tangente y de peso de tangente, tiempo y valor. Las curvas de
+# aceleración de los retrorreactores son lineales.
+INTERPOLACION_LINEAL = 0
+
+
+def datos_de_retrorreactores():
+    """Velocidad inicial (cm/s), tiempo de encendido (s) y curva de aceleración vertical (cm/s² por número de
+    retrorreactores) de cada retrorreactor del juego y de los mods: con ellas estima el juego la altura de salto."""
+    curvas = leer(os.path.join(RUTA_YAML, "juego", "curvas.json"))
+    curvas.update(cargar_categoria("curvas"))
+    equipo = leer(os.path.join(RUTA_YAML, "juego", "equipo.json"))
+    equipo.update(cargar_categoria("equipo"))
+    retrorreactores = {}
+    for ruta, valor in equipo.items():
+        if valor["clase"] != "MWJumpJetDataAsset":
+            continue
+        datos = valor["propiedades"]
+        curva = curvas.get((datos.get("AccelZCurve") or "").split(".")[0], {}).get("propiedades", {})
+        claves = (curva.get("FloatCurve") or {}).get("Keys", [])
+        if any(clave[0] != INTERPOLACION_LINEAL for clave in claves):
+            raise ValueError(f"Curva de aceleración no lineal en {ruta}")
+        retrorreactores[ruta.rsplit("/", 1)[1]] = {
+            "initialVelocityZ": datos.get("InitialVelocityZ", 0), "burnTime": round(datos.get("BurnTime", 0), 6),
+            "accelZ": [[clave[3], clave[4]] for clave in claves],
+        }
+    return retrorreactores
+
+
 def bonificaciones_del_equipo(extra):
     """Lo de Equipment_Properties.json que cambia las cifras del panel: armas, movimiento y sensores."""
     bonificaciones = {campo: extra[campo] for campo in BONIFICACIONES_DE_EQUIPO if campo in extra}
@@ -387,6 +415,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
     propiedades_de_armas = cargar_recursos("Weapon_Properties.json")
     propiedades = cargar_recursos("Equipment_Properties.json")
     armas_por_nivel = niveles_de_armas()
+    retrorreactores = datos_de_retrorreactores()
     minusculas = {nombre.lower(): nombre for nombre in armas_por_nivel}
     # Armas y equipo del juego base: sus cifras están en el catálogo de MW5; el tipo de ranura de las
     # armas, en sus exportaciones.
@@ -417,6 +446,8 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             if "ammoCapacity" in propiedades.get(id_objeto, {}):
                 nuevo["capacity"] = propiedades[id_objeto]["ammoCapacity"]
             nuevo.update(bonificaciones_del_equipo(propiedades.get(id_objeto, {})))
+            if id_objeto in retrorreactores:
+                nuevo["jumpJet"] = retrorreactores[id_objeto]
             # Sondas y computadores de puntería del juego: DLCMechSensorRange suma lo que la sonda pasa de 1
             # (SensorRangeModifier) y el porcentaje del rasgo del computador.
             sensores = (objeto.get("probe") or {}).get("sensorRange", 1) - 1 + (objeto.get("targetingComputer") or {}).get("sensorRange", 0)
@@ -488,6 +519,8 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "slotTypes": [s["Id"]["PrimaryAssetName"] for s in datos.get("SupportedSlotTypesAssetId", [])] or [RANURA_GENERAL],
             **bonificaciones_del_equipo(extra),
         }
+        if nombre in retrorreactores:
+            objeto["jumpJet"] = retrorreactores[nombre]
         if (datos.get("SensorRangeModifier") or 0) > 0:
             objeto["sensorRangePercent"] = round(datos["SensorRangeModifier"] - 1, 4)
         # YAML monta casi todo su equipo como disipadores: el que refrigera por sí mismo (el Royal DHS Kit,
