@@ -23,6 +23,7 @@ python3 tools/generar_unidades.py # src/data/units.json (lee items.json y sarna.
 python3 tools/extraer_pilotos.py "<carpeta del juego>"  # tools/datos-juego/pilotos/ (rasgos y pilotos hero), del .pak
 python3 tools/generar_pilotos.py  # src/data/pilots.json (lee las academias de tools/datos-juego/starmap/)
 python3 tools/extraer_iconos_inventario.py "<carpeta del juego>"  # public/mechlab/inventory/, iconos de las pestañas del inventario, del .pak
+python3 tools/extraer_yaml.py "<steamapps/workshop/content/784080>"  # tools/datos-juego/yaml/, de los .pak y Resources de YAML y sus mods
 python3 tools/extraer_mapa_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/starmap/ y sus logos
 python3 tools/generar_mapa_battletech.py  # src/data/battletech/starmap.json
 python3 tools/extraer_argo_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/argo/ y battletech/public/argo/

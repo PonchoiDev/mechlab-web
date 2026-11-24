@@ -33,3 +33,7 @@ coverage
 
 # Copias de trabajo de los agentes de Claude Code
 .claude/worktrees/
+
+# Volcado de los mods de YAML: es trabajo de sus autores y no se redistribuye. Se regenera con
+# tools/extraer_yaml.py desde el Workshop; la web publica solo los datos que se generan a partir de él.
+tools/datos-juego/yaml/
