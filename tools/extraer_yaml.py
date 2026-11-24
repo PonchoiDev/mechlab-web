@@ -15,7 +15,7 @@ from ue4 import Asset, Pak
 # repositorio (.gitignore): los datos son de los autores de los mods y cada uno la regenera desde su
 # Workshop.
 #
-#   python3 tools/extraer_yaml.py "/ruta/a/steamapps/workshop/content/784080"
+#   python3 tools/extraer_yaml.py "/ruta/a/steamapps/workshop/content/784080" "/ruta/a/MechWarrior 5 Mercenaries"
 #
 # Los mods del juego base se cocinan con el editor de modding y se montan encima del juego: un asset con
 # la misma ruta que uno del juego (o de un mod con menor prioridad) lo sustituye. Por eso cada asset se
@@ -62,6 +62,12 @@ TABLAS_IGNORADAS = ("NewsFeed", "VersionLog", "Icons", "Filters", "/LevelGenerat
 # YAML no guarda en datos el tamaño en ranuras de las armas del juego: al arrancar, dos funciones de
 # este blueprint cambian el tamaño de los tipos de ranura del juego base (el AC/10 pasa de 4 a 7, como
 # en el juego de mesa) y asignan a las armas de los DLC tipos de ranura propios. Se leen de su bytecode.
+# Del juego base solo hacen falta los tipos de ranura: YAML los usa en sus anclajes y en sus 'Mechs
+# (115 de 130 no están en los mods) y cambia su tamaño al arrancar. Las armas y el equipo del juego ya
+# están en tools/datos-juego/items/.
+PAK_DEL_JUEGO = os.path.join("MW5Mercs", "Content", "Paks", "MW5Mercs-WindowsNoEditor.pak")
+CONTENIDO_DEL_JUEGO = "MW5Mercs/Content/"
+CARPETA_DEL_JUEGO = "juego"
 BLUEPRINT_DE_REGLAS = "Plugins/YetAnotherMechlab/Content/Functions/EquipmentUtilities"
 FUNCION_TAMANOS_DE_RANURAS = "Fix Vanilla SlotTypes Sizes"
 FUNCION_RANURAS_DE_ARMAS = "Fix Vanilla Weapon Sizes"
@@ -73,10 +79,11 @@ EXTENSIONES_RECURSOS = (".json",)
 
 
 def ruta_montada(ruta):
-    """Content/X del .pak se monta en /Game/X; Plugins/<Mod>/Content/X, en /<Mod>/X."""
+    """Content/X del .pak se monta en /Game/X (MW5Mercs/Content/X en el del juego); Plugins/<Mod>/Content/X, en /<Mod>/X."""
     sin_extension = ruta[: -len(".uasset")]
-    if sin_extension.startswith("Content/"):
-        return "/Game/" + sin_extension[len("Content/"):]
+    for prefijo in ("Content/", CONTENIDO_DEL_JUEGO):
+        if sin_extension.startswith(prefijo):
+            return "/Game/" + sin_extension[len(prefijo):]
     partes = sin_extension.split("/")
     if partes[0] == "Plugins" and len(partes) > 3 and partes[2] == "Content":
         return "/" + partes[1] + "/" + "/".join(partes[3:])
@@ -98,7 +105,8 @@ def categoria(clase):
     return CATEGORIAS.get(clase)
 
 
-def extraer_pak(ruta_pak):
+def extraer_pak(ruta_pak, solo=None):
+    """Los assets de las categorías que interesan; con solo, únicamente los de esas categorías."""
     pak = Pak(ruta_pak)
     resultado = {}
     for ruta in sorted(pak.archivos):
@@ -108,7 +116,7 @@ def extraer_pak(ruta_pak):
         # La cabecera basta para saber la clase: el .uexp solo se lee si el asset interesa.
         export, clase = clase_principal(Asset(pak.leer_archivo(ruta), b""), nombre)
         destino = categoria(clase)
-        if destino is None or (clase == "DataTable" and any(texto in ruta for texto in TABLAS_IGNORADAS)):
+        if destino is None or (solo and destino not in solo) or (clase == "DataTable" and any(texto in ruta for texto in TABLAS_IGNORADAS)):
             continue
         asset = Asset.desde_pak(pak, ruta[: -len(".uasset")])
         if clase == "DataTable":
@@ -263,11 +271,18 @@ def extraer_mod(carpeta_mod, destino):
     return resumen
 
 
+def extraer_juego(carpeta_juego, destino):
+    ranuras = extraer_pak(os.path.join(carpeta_juego, PAK_DEL_JUEGO), solo={"ranuras"}).get("ranuras", {})
+    os.makedirs(destino, exist_ok=True)
+    escribir(os.path.join(destino, "ranuras.json"), ranuras)
+    return len(ranuras)
+
+
 def main():
-    if len(sys.argv) != 2:
-        print("Uso: python3 tools/extraer_yaml.py \"<steamapps/workshop/content/784080>\"")
+    if len(sys.argv) != 3:
+        print("Uso: python3 tools/extraer_yaml.py \"<steamapps/workshop/content/784080>\" \"<carpeta de MW5 Mercenaries>\"")
         sys.exit(1)
-    carpeta = sys.argv[1]
+    carpeta, carpeta_juego = sys.argv[1], sys.argv[2]
     faltan = [id_mod for id_mod in MODS if not os.path.isdir(os.path.join(carpeta, id_mod))]
     if faltan:
         print("Faltan mods en el Workshop (suscríbete a ellos): " + ", ".join(faltan))
@@ -276,6 +291,8 @@ def main():
         resumen = extraer_mod(os.path.join(carpeta, id_mod), os.path.join(RUTA_DESTINO, nombre))
         categorias = ", ".join(f"{n} {c}" for n, c in resumen["categorias"].items())
         print(f"{resumen['nombre']} {resumen['version']}: {categorias}")
+    total = extraer_juego(carpeta_juego, os.path.join(RUTA_DESTINO, CARPETA_DEL_JUEGO))
+    print(f"Juego base: {total} tipos de ranura")
 
 
 if __name__ == "__main__":
