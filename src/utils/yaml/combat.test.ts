@@ -56,10 +56,13 @@ describe('estadísticas del MechLab de YAML', () => {
   });
 
   it('CA3: las cifras de cada nivel salen del asset con los quirks del nivel', () => {
-    expect(getWeaponTierStats('GaussRifle', 3)).toMatchObject({ damage: 17.1, heat: 0.9, cooldown: 5.7, optimalRange: 726 });
-    expect(getWeaponTierStats('ERPPC', 3)).toMatchObject({ damage: 11.4, heat: 9.9, cooldown: 4.75, optimalRange: 825 });
-    expect(getWeaponTierStats('MediumPulseLaser', 3)).toMatchObject({ damage: 6.6, heat: 2.34, cooldown: 3.0875, duration: 0.585, optimalRange: 242 });
-    expect(getWeaponTierStats('GaussRifle', 1)).toMatchObject({ damage: 15, heat: 1, cooldown: 6, optimalRange: 660 });
+    // Los datos guardan el error de los float32 del juego (2,024999997): se comparan a cuatro decimales.
+    const tierStats = (id: string, tier?: number) =>
+      Object.fromEntries(Object.entries(getWeaponTierStats(id, tier)!).map(([key, value]) => [key, Number(value.toFixed(4))]));
+    expect(tierStats('GaussRifle', 3)).toMatchObject({ damage: 17.1, heat: 0.9, cooldown: 5.7, optimalRange: 726 });
+    expect(tierStats('ERPPC', 3)).toMatchObject({ damage: 11.4, heat: 9.9, cooldown: 4.75, optimalRange: 825 });
+    expect(tierStats('MediumPulseLaser', 3)).toMatchObject({ damage: 6.6, heat: 2.34, cooldown: 3.0875, duration: 0.585, optimalRange: 242 });
+    expect(tierStats('GaussRifle', 1)).toMatchObject({ damage: 15, heat: 1, cooldown: 6, optimalRange: 660 });
     expect(getWeaponTierStats('GaussRifle')).toEqual(getWeaponTierStats('GaussRifle', 1));
   });
 
@@ -160,5 +163,25 @@ describe('estadísticas del MechLab de YAML', () => {
     };
     expect(values(withKnuckles)).toEqual({ ...ranged, 'Armor': '376', 'Structure': '325', 'Melee dmg avg': '64.62', 'Melee dmg/s avg': '12.82' });
     expect(values(withSword)).toEqual({ ...ranged, 'Armor': '366', 'Structure': '317', 'Melee dmg avg': '93.5', 'Melee dmg/s avg': '17.48' });
+  });
+
+  it('CA12: el JVN-11A con siete Medium Laser de nivel 3 redondea el calor alfa como el juego', () => {
+    const javelin = findYamlMech('JVN-11A')!;
+    const jvnStock = createStockBuild(javelin);
+    const jvn = jvnStock.weapons
+      .filter(mounted => !getYamlItem(mounted.item)?.actuator)
+      .reduce((current, mounted) => setWeaponTier(current, mounted.hardpoint, 3), jvnStock);
+    const values = Object.fromEntries(getYamlStatsPanel(javelin, jvn).flat().map(cell => [cell.label, cell.value]));
+    expect(values).toEqual({
+      'Armor': '179', 'Structure': '111', 'Melee dmg avg': '0',
+      'Alpha damage': '38.5', 'Damage/s': '8.19', 'Melee dmg/s avg': '0',
+      // 7 × 2,0249999 en float32: 14,1749999, por debajo del empate.
+      'Weapon heat/s': '3.02', 'Cooling heat/s': '2', 'Turn rate °/s': '126.8',
+      'Alpha heat': '14.17', 'Heat capacity': '50', 'Torso twist °/s': '150.7',
+      // Con retrorreactores, sin cifra hasta calibrarla (el juego marca 82).
+      'Jump height (m)': '-', 'Speed (km/h)': '97.2', 'Torso yaw °': '110',
+      'Weapon range (m)': '594', 'Sensor range (m)': '800', 'Arm yaw °': '35',
+      'AMS intercept/s': '0', 'AMS range (m)': '0', 'Ammo': '0'
+    });
   });
 });

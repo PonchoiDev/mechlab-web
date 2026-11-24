@@ -74,6 +74,7 @@ Las 21 cifras de `MechLabStatsPanelWidget`, con sus títulos y en su orden (7 fi
 
 - **Alpha damage, Alpha heat:** la suma del daño y el calor por disparo de las armas a distancia.
 - **Damage/s, Weapon heat/s:** la suma de las de cada arma.
+- **Redondeo (✔):** el juego calcula en float32 y enseña dos decimales con el redondeo al par de Unreal. Por eso los empates dependen del error de los float32: siete Medium Laser de nivel 3 dan 14,1749999 de calor alfa (14.17); la media de cuerpo a cuerpo del CP-10-P es 64,625 justo (64.62, al par); el AMS de nivel 3 intercepta 4,025000095 misiles/s (4.03). La web guarda las cifras de nivel con ese error y calcula en float32.
 - **Weapon range (✔):** el mayor alcance máximo, **truncado** al metro (el juego lo redondea a centímetros y lo divide como entero: 2.395,8 → 2.395).
 - **Melee dmg avg, Melee dmg/s avg:** la media de las armas de cuerpo a cuerpo; 0 sin ninguna.
 - **AMS intercept/s:** la suma de misiles destruidos por segundo de los AMS (`MissileDestructionRate` × `missilesDestroyedMulti`); **AMS range**, el mayor alcance.
@@ -114,6 +115,7 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 | CA9 | La tabla de análisis | se suman sus filas | dan el daño alfa, el daño por segundo y el calor del panel |
 | CA10 | El GHR-5J de serie con sus armas en nivel 3 (Streak SRM 2, ER Large Laser, AMS y dos Medium Laser), motor estándar y cuatro retrorreactores de clase III | se calcula el panel | Armor 416, Structure 223, Melee dmg avg 0, Alpha damage 27,28, Damage/s 7,03, Melee dmg/s avg 0, Weapon heat/s 3,27, Cooling heat/s 2,2, Turn rate 85,9, Alpha heat 15,12, Heat capacity 52, Torso twist 108, Speed 64,8, Torso yaw 120, Weapon range 1.485, Sensor range 800, Arm yaw 30, AMS intercept/s 4,03, AMS range 220, Ammo 5.640 |
 | CA11 | El CP-10-P de serie con una gran espada de asalto de nivel 1 en el brazo izquierdo en lugar de la claymore, con y sin nudilleras de asalto de nivel 2 en la mano derecha | se calcula el panel | con nudilleras: Armor 376, Structure 325, Melee dmg avg 64,62 y Melee dmg/s avg 12,82; sin ellas: 366, 317, 93,5 y 17,48. En los dos: Alpha damage 36,6, Damage/s 10,16, Weapon heat/s 3,14, Alpha heat 11,55, Cooling 1, Heat capacity 40, Turn rate 71,6, Torso twist 90, Torso yaw 80, Arm yaw 20, Weapon range 900, Sensor range 900, Ammo 880 |
+| CA12 | El JVN-11A de serie con sus siete Medium Laser en nivel 3, Ferro, el Double Heat Sink Kit y seis retrorreactores de clase V | se calcula el panel | Armor 179, Structure 111, Alpha damage 38,5, Damage/s 8,19, Weapon heat/s 3,02, Cooling 2, Turn rate 126,8, Alpha heat 14,17, Heat capacity 50, Torso twist 150,7, Speed 97,2, Torso yaw 110, Weapon range 594, Sensor range 800, Arm yaw 35, Ammo 0 |
 
 ## Fuera de alcance
 
@@ -124,7 +126,7 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 
 ## Pendiente de comprobar en el juego
 
-- **Jump height:** la calcula el juego (`EstimateMaxJumpJetHeight`) con el empuje de los retrorreactores y el peso del 'Mech. Sin retrorreactores es 0; con ellos, la web no enseña cifra hasta calibrarla. El GHR-5J (70 t) con cuatro de clase III da 66 m; con un solo dato no se separa el efecto del número de retrorreactores, de su clase y del tonelaje.
+- **Jump height:** la calcula el juego (`EstimateMaxJumpJetHeight`) con el empuje de los retrorreactores y el peso del 'Mech. Sin retrorreactores es 0; con ellos, la web no enseña cifra hasta calibrarla. El GHR-5J (70 t) con cuatro de clase III da 66 m y el JVN-11A (30 t) con seis de clase V, 82 m. Todas las clases tienen el mismo empuje y tiempo de encendido, así que hace falta otra captura que cambie solo el número de retrorreactores para separar su efecto del tonelaje.
 - **Ranuras de los brazos con armas cuerpo a cuerpo:** el MDA del CP-10-P da 3 ranuras generales al brazo izquierdo, y el mechlab de YAML enseña la gran espada (6 ranuras, aunque su tipo de ranura dice 7) y 3 libres; las nudilleras ocupan 1 (su tipo dice 2). La regla con la que YAML añade esas ranuras está por encontrar; mientras, la web no deja montar la gran espada en ese brazo.
 
 ## Plan de pruebas
