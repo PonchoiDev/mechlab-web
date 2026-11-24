@@ -4,11 +4,13 @@ import os
 import shutil
 import sys
 
+from kismet import base, desensamblar, etiqueta, id_de_asset, recorrer, ultimo_nombre
 from ue4 import Asset, Pak
 
 # Extrae de los mods de Yet Another Mechlab (YAML) del Workshop de Steam los datos que necesita el
 # MechLab con sus reglas: 'Mechs (MDA, loadouts, anclajes y modelos), armas, munición, equipo, tipos de
-# ranura y las tablas de estadísticas de las armas. Lo guarda en tools/datos-juego/yaml/, un archivo por
+# ranura y las tablas de estadísticas de las armas, más las reglas de tamaño de las armas que YAML
+# aplica desde su blueprint (reglas.json). Lo guarda en tools/datos-juego/yaml/, un archivo por
 # mod y categoría, para que los generadores trabajen sin tocar la instalación. Esa carpeta no se sube al
 # repositorio (.gitignore): los datos son de los autores de los mods y cada uno la regenera desde su
 # Workshop.
@@ -57,6 +59,15 @@ SUFIJO_ARMA = "WeaponDataAsset"
 # Tablas que no son del mechlab: noticias, historial de versiones, iconos y filtros de la interfaz,
 # generadores de escenarios y vehículos. Las de noticias, además, no siguen el formato de filas.
 TABLAS_IGNORADAS = ("NewsFeed", "VersionLog", "Icons", "Filters", "/LevelGenerators/", "/Tanks/")
+# YAML no guarda en datos el tamaño en ranuras de las armas del juego: al arrancar, dos funciones de
+# este blueprint cambian el tamaño de los tipos de ranura del juego base (el AC/10 pasa de 4 a 7, como
+# en el juego de mesa) y asignan a las armas de los DLC tipos de ranura propios. Se leen de su bytecode.
+BLUEPRINT_DE_REGLAS = "Plugins/YetAnotherMechlab/Content/Functions/EquipmentUtilities"
+FUNCION_TAMANOS_DE_RANURAS = "Fix Vanilla SlotTypes Sizes"
+FUNCION_RANURAS_DE_ARMAS = "Fix Vanilla Weapon Sizes"
+# Las listas de armas de un bloque que no termina en una regla (p. ej. las que solo cambian de DLC) no
+# deben pasar a la regla siguiente.
+PROPIEDADES_QUE_CIERRAN_BLOQUE = ("AssociatedDLC",)
 # Los archivos de Resources que lee YAML de cada mod activo (equipo, armas, quirks y su asignación).
 EXTENSIONES_RECURSOS = (".json",)
 
@@ -130,6 +141,72 @@ def limpiar(destino, propiedades):
     return propiedades
 
 
+def tamanos_de_tipos_de_ranura(sentencias):
+    """Reglas "si el tipo de ranura se llama A o B, su tamaño pasa a N", en el orden en que se aplican."""
+    reglas = []
+    nombres = []
+    for sentencia in sentencias:
+        for nodo in recorrer(sentencia):
+            if nodo[0] == "call" and nodo[1] == "EqualEqual_StrStr":
+                nombres.extend(argumento[1] for argumento in nodo[2] if argumento[0] == "str")
+        if sentencia[0] == "let" and ultimo_nombre(sentencia[1]) == "SlotSize":
+            if sentencia[2][0] != "int" or not nombres:
+                raise ValueError(f"Regla de tamaño de ranura que no se entiende: {sentencia}")
+            reglas.append({"tiposDeRanura": nombres, "ranuras": sentencia[2][1]})
+            nombres = []
+    return reglas
+
+
+def ranuras_de_armas(sentencias):
+    """Reglas "las armas X (o con la etiqueta T) usan el tipo de ranura R", en orden."""
+    tipos_de_ranura = {}
+    armas = []
+    etiquetas = []
+    reglas = []
+    for sentencia in sentencias:
+        for nodo in recorrer(sentencia):
+            if nodo[0] == "call" and nodo[1] == "HasTag":
+                nombres = [etiqueta(argumento) for argumento in nodo[2]]
+                exacta = [argumento[1] for argumento in nodo[2] if argumento[0] == "bool"]
+                etiquetas.extend({"etiqueta": nombre, "exacta": exacta == [True]} for nombre in nombres if nombre)
+        if sentencia[0] != "let":
+            continue
+        destino, valor = sentencia[1], sentencia[2]
+        asignado = ultimo_nombre(destino)
+        identificador = id_de_asset(valor)
+        if identificador and asignado == "Id":
+            if identificador[0] == "MWSlotTypeDataAsset":
+                tipos_de_ranura[base(destino)] = identificador[1]
+            elif identificador[0].endswith("WeaponDataAsset"):
+                armas.append(identificador[1])
+        elif valor[0] == "array":
+            armas.extend(i[1] for i in map(id_de_asset, valor[1]) if i and i[0].endswith("WeaponDataAsset"))
+        elif asignado == "WeaponSlotTypeAssetId" and valor[0] == "variable" and valor[2] in tipos_de_ranura:
+            if not armas and not etiquetas:
+                raise ValueError(f"Regla de ranuras de armas sin armas: {sentencia}")
+            # Las listas se repiten dentro y fuera de los bucles del blueprint.
+            reglas.append({
+                "armas": list(dict.fromkeys(armas)),
+                "etiquetas": [dict(t) for t in dict.fromkeys(tuple(e.items()) for e in etiquetas)],
+                "tipoDeRanura": tipos_de_ranura[valor[2]],
+            })
+            armas, etiquetas = [], []
+        elif asignado in PROPIEDADES_QUE_CIERRAN_BLOQUE:
+            armas, etiquetas = [], []
+    return reglas
+
+
+def extraer_reglas(ruta_pak):
+    pak = Pak(ruta_pak)
+    if BLUEPRINT_DE_REGLAS + ".uasset" not in pak.archivos:
+        return None
+    asset = Asset.desde_pak(pak, BLUEPRINT_DE_REGLAS)
+    return {
+        "tamanosDeTiposDeRanura": tamanos_de_tipos_de_ranura(desensamblar(asset, FUNCION_TAMANOS_DE_RANURAS)),
+        "ranurasDeArmas": ranuras_de_armas(desensamblar(asset, FUNCION_RANURAS_DE_ARMAS)),
+    }
+
+
 def escribir(ruta, datos):
     # Una entrada por línea: los archivos son grandes y así los cambios entre versiones del mod se leen
     # en el diff.
@@ -152,6 +229,14 @@ def extraer_mod(carpeta_mod, destino):
     for nombre, assets in categorias.items():
         escribir(os.path.join(destino, nombre + ".json"), assets)
 
+    reglas = None
+    for ruta_pak in sorted(glob.glob(os.path.join(carpeta_mod, "Paks", "*.pak"))):
+        reglas = extraer_reglas(ruta_pak) or reglas
+    if reglas:
+        with open(os.path.join(destino, "reglas.json"), "w", encoding="utf-8") as archivo:
+            json.dump(reglas, archivo, ensure_ascii=False, indent=2)
+            archivo.write("\n")
+
     recursos = os.path.join(carpeta_mod, "Resources")
     copiados = []
     if os.path.isdir(recursos):
@@ -170,6 +255,7 @@ def extraer_mod(carpeta_mod, destino):
         "versionDelJuego": info.get("gameVersion"),
         "categorias": {nombre: len(assets) for nombre, assets in sorted(categorias.items())},
         "recursos": copiados,
+        "reglas": sorted(reglas) if reglas else [],
     }
     with open(os.path.join(destino, "mod.json"), "w", encoding="utf-8") as archivo:
         json.dump(resumen, archivo, ensure_ascii=False, indent=2)
