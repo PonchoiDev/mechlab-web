@@ -54,9 +54,8 @@ TIPO_DE_MOTOR = {False: "ENGINE_FIXED", True: "ENGINE_XL"}
 # Piezas de los loadouts que no son equipo del jugador: el contrapeso con el que YAML compensa el peso
 # de los 'Mechs del juego al convertirlos (−1000 t) y los rellenos, que el mechlab recoloca solo.
 PIEZAS_TECNICAS = re.compile(r"COUNTERWEIGHT|UAVCOMPONENT|_filler$|^DYNAMIC_FILLER|^XLfiller$", re.IGNORECASE)
-# Los ataques cuerpo a cuerpo de las manos y los antebrazos van en sus actuadores, no son armas del
-# inventario.
-CUERPO_A_CUERPO = re.compile(r"_MeleeWeaponDataAsset$")
+# Los ataques de las manos y los antebrazos (MechHandAssault_MeleeWeaponDataAsset...) van en sus actuadores.
+ACTUADOR_DE_CUERPO_A_CUERPO = re.compile(r"^Mech(Hand|LowerArm)")
 NIVEL_DE_ARMA = re.compile(r"_Lvl(\d+)$", re.IGNORECASE)
 # Motores del juego en los loadouts: YAML los separa en núcleo y tipo.
 MOTOR_DEL_JUEGO = re.compile(r"^(XL|STD|Std|Light|LFE|XXL)(\d+)$")
@@ -78,7 +77,8 @@ def cargar_categoria(categoria):
     for mod in MODS:
         ruta = os.path.join(RUTA_YAML, mod, categoria + ".json")
         if os.path.exists(ruta):
-            assets.update(leer(ruta))
+            for clave, valor in leer(ruta).items():
+                assets[clave] = {**valor, "mod": mod}
     return assets
 
 
@@ -93,6 +93,74 @@ def cargar_recursos(nombre):
         for ruta in sorted(glob.glob(os.path.join(RUTA_YAML, mod, "resources", "*" + nombre))):
             datos.update(leer(ruta))
     return datos
+
+
+def a_srgb(componente):
+    """El juego guarda los colores en espacio lineal (LinearColor) y los enseña en sRGB."""
+    componente = max(0.0, min(1.0, componente))
+    return 12.92 * componente if componente <= 0.0031308 else 1.055 * componente ** (1 / 2.4) - 0.055
+
+
+def color_hex(lineal):
+    """«#rrggbb» de un color lineal: una lista [R, G, B, A] o un texto «(R=0.31,G=0.35,B=0.42,A=1)»."""
+    if isinstance(lineal, str):
+        valores = dict(re.findall(r"([RGBA])=([0-9.]+)", lineal))
+        lineal = [float(valores.get(canal, 0)) for canal in "RGB"]
+    if not lineal:
+        return None
+    return "#" + "".join(f"{round(a_srgb(canal) * 255):02x}" for canal in lineal[:3])
+
+
+# El color de cada tipo de anclaje en el mechlab: con los ajustes por defecto («MW5 default colors»), el de
+# los tipos de ranura de sus armas.
+RANURA_DEL_ANCLAJE = {
+    "ballistic": "GaussRifle_SlotType", "energy": "ERPPC_SlotType", "missile": "LRM20_SlotType", "ams": "AMS_SlotType",
+    "artillery": "ArtilleryMissile_SlotType", "melee": "Assault_Melee_Weapon_SlotType", "omni": "OmniSlotType_79",
+}
+
+
+def ajuste_de_yaml(nombre):
+    """El valor por defecto de un ajuste de YAML (Resources/gui_config.ini)."""
+    configuracion = leer(os.path.join(RUTA_YAML, "yet-another-mechlab", "resources", "gui_config.ini"))
+    pendientes = [configuracion]
+    while pendientes:
+        nodo = pendientes.pop()
+        if isinstance(nodo, dict):
+            if nodo.get("Var") == nombre:
+                return nodo.get("Default")
+            pendientes.extend(nodo.values())
+        elif isinstance(nodo, list):
+            pendientes.extend(nodo)
+    return None
+
+
+def construir_colores():
+    """Los colores del mechlab de YAML: el de las ranuras generales y su equipo, la opacidad del relleno de
+    las piezas, el de cada tipo de ranura (armadura roja, estructura azul, giroscopio verde...) y el de cada
+    tipo de anclaje."""
+    ranuras = por_nombre(leer(os.path.join(RUTA_YAML, "juego", "ranuras.json")))
+    ranuras.update(por_nombre(cargar_categoria("ranuras")))
+    por_tipo = {}
+    for nombre, valor in sorted(ranuras.items()):
+        datos = valor["propiedades"]
+        color = color_hex(datos.get("SlotColour"))
+        if color:
+            por_tipo[nombre] = {"name": texto(datos.get("SlotName")) or nombre, "color": color}
+    return {
+        "general": color_hex(ajuste_de_yaml("generalSlotColor")),
+        "tintOpacity": ajuste_de_yaml("yamlEquipmentInnterTintOpacity"),
+        "slots": por_tipo,
+        "hardpoints": {tipo: por_tipo[ranura]["color"] for tipo, ranura in RANURA_DEL_ANCLAJE.items() if ranura in por_tipo},
+    }
+
+
+def color_propio(nombre, categoria, propiedades):
+    """El color que da Equipment_Properties a una pieza, por su nombre o por su etiqueta (la más concreta)."""
+    if "color" in propiedades.get(nombre, {}):
+        return color_hex(propiedades[nombre]["color"])
+    etiquetas = [clave for clave in propiedades if categoria and "color" in propiedades[clave]
+                 and (categoria == clave or categoria.startswith(clave + "."))]
+    return color_hex(propiedades[max(etiquetas, key=len)]["color"]) if etiquetas else None
 
 
 def tamanos_de_ranuras(reglas):
@@ -144,8 +212,19 @@ def texto(valor):
     return valor
 
 
+def municiones_del_arma(propia, etiqueta, propiedades_de_armas):
+    """La munición que usa un arma: la suya y la que le añade YAW por su etiqueta (el MML usa la de LRM y
+    la de SRM, con «ammoTypes» en Weapon_Properties.json)."""
+    tipos = [propia] if propia else []
+    for clave, valores in propiedades_de_armas.items():
+        if etiqueta and (etiqueta == clave or etiqueta.startswith(clave + ".")):
+            tipos.extend(tipo for tipo in valores.get("ammoTypes", []) if tipo not in tipos)
+    return tipos
+
+
 def construir_objetos(catalogo_juego, reglas, tamanos):
     objetos = {}
+    propiedades_de_armas = cargar_recursos("Weapon_Properties.json")
     # Armas y equipo del juego base: sus cifras están en el catálogo de MW5; el tipo de ranura de las
     # armas, en sus exportaciones.
     for id_objeto, objeto in catalogo_juego.items():
@@ -159,7 +238,8 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             ranura = (REGEX_PROPIEDAD["slotType"].search(exportado) or [None, None])[1]
             etiqueta = (REGEX_PROPIEDAD["weaponType"].search(exportado) or [None, None])[1]
             ranura = ranura_de_arma(id_objeto, etiqueta, ranura, reglas)
-            nuevo.update({"hardpoint": objeto.get("weaponType"), "slotType": ranura, "slots": tamanos.get(ranura, 1)})
+            nuevo.update({"hardpoint": objeto.get("weaponType"), "slotType": ranura, "slots": tamanos.get(ranura, 1),
+                          "ammoTypes": municiones_del_arma(objeto.get("ammoType"), etiqueta, propiedades_de_armas)})
         else:
             nuevo.update({"slots": objeto.get("slots") or 1, "slotTypes": objeto.get("specialSlotTypes") or [RANURA_GENERAL]})
             for campo in ("cooling", "heatCapacity", "capacity", "ammoType"):
@@ -167,20 +247,39 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
                     nuevo[campo] = objeto[campo]
         objetos[id_objeto] = nuevo
 
+    # Armas de cuerpo a cuerpo del juego (manos, antebrazos, hachas...): el catálogo de MW5 no las trae. Las
+    # de los actuadores (la «Mano de asalto») van en la mano o el antebrazo y no ocupan ranuras generales.
+    for nombre, valor in por_nombre(leer(os.path.join(RUTA_YAML, "juego", "armas.json"))).items():
+        if NIVEL_DE_ARMA.search(nombre):
+            continue
+        datos = valor["propiedades"]
+        ranura = (datos.get("WeaponSlotTypeAssetId") or {}).get("Id", {}).get("PrimaryAssetName")
+        estadisticas = datos.get("StatsData") or {}
+        actuador = bool(ACTUADOR_DE_CUERPO_A_CUERPO.search(nombre))
+        objetos[nombre] = {
+            "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon", "hardpoint": "melee",
+            "tons": datos.get("Tonnage") or 0, "slotType": ranura, "slots": 0 if actuador else tamanos.get(ranura, 1),
+            "meleeDamage": (estadisticas.get("Melee") or {}).get("Damage", 0), "cooldown": estadisticas.get("Cooldown"),
+            **({"actuator": True} if actuador else {}),
+        }
+
     # Armas de Yet Another Weapon y su versión Clan.
     for nombre, valor in por_nombre(cargar_categoria("armas")).items():
         datos = valor["propiedades"]
         etiqueta = datos.get("WeaponType")
         ranura = ranura_de_arma(nombre, etiqueta, datos.get("WeaponSlotTypeAssetId", {}).get("Id", {}).get("PrimaryAssetName"), reglas)
         objetos[nombre] = {
+            "mod": valor["mod"],
             "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon",
             "tons": datos.get("Tonnage") or 0, "hardpoint": tipo_de_anclaje(etiqueta),
             "slotType": ranura, "slots": tamanos.get(ranura, 1),
+            "ammoTypes": municiones_del_arma((datos.get("StatsData") or {}).get("AmmoType"), etiqueta, propiedades_de_armas),
         }
 
     for nombre, valor in por_nombre(cargar_categoria("municion")).items():
         datos = valor["propiedades"]
-        objetos[nombre] = {"name": texto(datos.get("Name")) or nombre, "kind": "ammo", "tons": datos.get("Tons") or 0,
+        objetos[nombre] = {"mod": valor["mod"], "name": texto(datos.get("Name")) or nombre, "kind": "ammo", "tons": datos.get("Tons") or 0,
+                           "ammoType": datos.get("AmmoType"),
                            "slots": datos.get("Slots") or 1, "slotTypes": [RANURA_GENERAL]}
 
     # Equipo de YAML con sus propiedades (Resources/*Equipment_Properties.json).
@@ -192,6 +291,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         datos = valor["propiedades"]
         extra = propiedades.get(nombre, {})
         objeto = {
+            "mod": valor["mod"],
             "name": extra.get("name") or texto(datos.get("Name")) or nombre, "kind": "equipment",
             "category": datos.get("EquipmentType"),
             "tons": extra.get("equipmentTons", datos.get("Tons") or 0),
@@ -205,6 +305,9 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             objeto["cooling"] = round(disipador["HealthyEfficiency"], 4)
         if disipador.get("HealthyCapacity"):
             objeto["heatCapacity"] = round(disipador["HealthyCapacity"], 4)
+        color = color_propio(nombre, datos.get("EquipmentType"), propiedades)
+        if color:
+            objeto["color"] = color
         if (datos.get("EquipmentType") or "").startswith("Equipment.Engine.Core"):
             objeto["rating"] = datos.get("TechLevel")
         if "fillerSlots" in extra:
@@ -318,7 +421,7 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech):
     armas = []
     for arma in loadout.get("InstalledWeapons", []):
         pieza = arma["WeaponData"]["WeaponId"]["Id"]["PrimaryAssetName"]
-        if not pieza or pieza == "None" or CUERPO_A_CUERPO.search(pieza):
+        if not pieza or pieza == "None":
             continue
         # Las armas con nivel (MediumLaser_Lvl2) son la misma arma: el catálogo guarda los niveles dentro.
         nivel = NIVEL_DE_ARMA.search(pieza)
@@ -394,7 +497,8 @@ def main():
     datos_quirks = {nombre: {"name": quirks[nombre].get("name", nombre), "description": quirks[nombre].get("description", ""),
                              "properties": quirks[nombre].get("properties", {})} for nombre in sorted(usados) if nombre in quirks}
     os.makedirs(RUTA_DESTINO, exist_ok=True)
-    for nombre, datos in (("mechs.json", mechs), ("items.json", objetos), ("quirks.json", datos_quirks)):
+    colores = construir_colores()
+    for nombre, datos in (("mechs.json", mechs), ("items.json", objetos), ("quirks.json", datos_quirks), ("colors.json", colores)):
         with open(os.path.join(RUTA_DESTINO, nombre), "w", encoding="utf-8") as archivo:
             json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
             archivo.write("\n")

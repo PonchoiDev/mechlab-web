@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  distributeDynamicFillers, getBuildIssues, getHardpointUsage, getInternalLabel, getInternalOptions, getMountOptions,
+  distributeDynamicFillerGroups, distributeDynamicFillers, getBuildIssues, getHardpointUsage, getInternalLabel,
   getZoneRows, removeItemAt, setArmor, setMaxArmor
 } from './board';
 import { createStockBuild, setInternal, stripBuild } from './build';
@@ -11,21 +11,15 @@ const nightstar = findYamlMech('NSR-9J')!;
 const stock = createStockBuild(nightstar);
 
 describe('tablero del MechLab de YAML', () => {
-  it('cada ranura interna ofrece sus piezas, una por nombre, y sin pieza dice la estándar', () => {
-    const structures = getInternalOptions('Structureslot').map(option => option.name);
-    expect(structures).toContain('Structure Endo');
-    expect(structures).toContain('Structure Reinforced');
-    expect(new Set(structures).size).toBe(structures.length);
-    const ratings = getInternalOptions('Engine').map(option => Number(option.id.replace('std', '')));
-    expect(ratings).toEqual([...ratings].sort((a, b) => a - b));
+  it('sin pieza, cada ranura interna dice la estándar', () => {
     expect(getInternalLabel(stock, 'Gyro')).toBe('Gyro standard');
     expect(getInternalLabel(stock, 'EngineTypeSlot')).toBe('XL Engine');
   });
 
   it('las filas de una ubicación: armas, equipo, rellenos fijos del motor y ranuras libres', () => {
-    const fillers = distributeDynamicFillers(nightstar, stock);
+    const fillers = distributeDynamicFillerGroups(nightstar, stock);
     const leftTorso = getZoneRows(nightstar, stock, 'leftTorso', fillers);
-    expect(leftTorso.filter(row => row.kind === 'fixedFiller')).toEqual([{ kind: 'fixedFiller', label: 'XL Engine', slots: 3 }]);
+    expect(leftTorso.filter(row => row.kind === 'fixedFiller')).toEqual([{ kind: 'fixedFiller', label: 'XL Engine', slots: 3, slotType: 'EngineTypeSlot' }]);
     expect(leftTorso.reduce((sum, row) => sum + row.slots, 0)).toBe(12);
     const rightArm = getZoneRows(nightstar, stock, 'rightArm', fillers);
     expect(rightArm.filter(row => row.kind === 'weapon').map(row => row.slots).sort()).toEqual([1, 7]);
@@ -35,7 +29,9 @@ describe('tablero del MechLab de YAML', () => {
     const endo = setInternal(stripBuild(stock), 'Structureslot', 'ENDO');
     const fillers = distributeDynamicFillers(nightstar, endo);
     expect(Object.values(fillers).reduce((sum, count) => sum + count, 0)).toBe(14);
-    expect(getZoneRows(nightstar, endo, 'rightTorso', fillers).some(row => row.kind === 'dynamicFiller')).toBe(true);
+    const groups = distributeDynamicFillerGroups(nightstar, endo);
+    expect(getZoneRows(nightstar, endo, 'rightTorso', groups).filter(row => row.kind === 'dynamicFiller'))
+      .toEqual([{ kind: 'dynamicFiller', label: 'Structure Endo', slots: fillers.rightTorso, slotType: 'Structureslot' }]);
   });
 
   it('el uso de anclajes no cuenta los de cuerpo a cuerpo', () => {
@@ -43,20 +39,6 @@ describe('tablero del MechLab de YAML', () => {
       { type: 'ballistic', used: 1, total: 1 },
       { type: 'energy', used: 1, total: 2 }
     ]);
-  });
-
-  it('el selector enseña las armas de los anclajes de la ubicación, con el motivo de las que no caben', () => {
-    const empty = stripBuild(stock);
-    // El AC/20 ocupa 10 ranuras y el brazo tiene 8; el Ultra AC/20 de los Clanes, 8, y sí cabe.
-    const options = getMountOptions(nightstar, empty, 'rightArm', 'weapons', 'ac/20');
-    expect(options.find(option => option.id === 'Autocannon20')!.error).toMatch(/10 slots/);
-    expect(options.find(option => option.id === 'C-UltraAutocannon20')!.error).toBeUndefined();
-    expect(options.some(option => /_Lvl\d/.test(option.id))).toBe(false);
-    expect(getMountOptions(nightstar, empty, 'leftTorso', 'weapons').every(option => option.item.hardpoint === 'ams')).toBe(true);
-    expect(getMountOptions(nightstar, empty, 'rightArm', 'weapons', 'gauss').some(option => !option.error)).toBe(true);
-    const equipment = getMountOptions(nightstar, empty, 'leftTorso', 'equipment');
-    expect(equipment.some(option => option.id === 'DoubleHeatSink' && !option.error)).toBe(true);
-    expect(equipment.some(option => option.item.slotTypes?.includes('Structureslot'))).toBe(false);
   });
 
   it('la armadura de delante y la de detrás comparten el máximo de la ubicación', () => {

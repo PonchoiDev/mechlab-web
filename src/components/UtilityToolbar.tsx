@@ -13,14 +13,15 @@ interface UtilityToolbarProps {
   upgradeSlots?: { used: number; capacity: number };
   isUpgradesOpen?: boolean;
   onToggleUpgrades?: () => void;
-  isCompareOpen: boolean;
-  onToggleCompare: () => void;
-  savedBuildCount: number;
-  onSaveBuild: () => void;
-  onOpenBuilds: () => void;
+  // Comparar, guardar y publicar: un MechLab que aún no los tiene (el de YAML) no los pasa y no salen.
+  isCompareOpen?: boolean;
+  onToggleCompare?: () => void;
+  savedBuildCount?: number;
+  onSaveBuild?: () => void;
+  onOpenBuilds?: () => void;
   // Publicar en la página de builds del juego; sin equipo montado no hay nada que publicar.
-  canPublish: boolean;
-  onPublish: () => void;
+  canPublish?: boolean;
+  onPublish?: () => void;
   onShare: (anchor: DOMRect) => void;
 }
 
@@ -104,7 +105,7 @@ export function UtilityToolbar({
       </div>}
       <div className="utility-group">
         <span className="utility-label">BUILD</span>
-        <button
+        {onToggleCompare && <button
           type="button"
           className="utility-button"
           aria-expanded={isCompareOpen}
@@ -112,14 +113,14 @@ export function UtilityToolbar({
           onClick={onToggleCompare}
         >
           Compare
-        </button>
-        <button type="button" className="utility-button" aria-haspopup="dialog" onClick={onSaveBuild}>
+        </button>}
+        {onSaveBuild && <button type="button" className="utility-button" aria-haspopup="dialog" onClick={onSaveBuild}>
           Save build
-        </button>
-        <button type="button" className="utility-button" aria-haspopup="dialog" onClick={onOpenBuilds}>
-          My builds{savedBuildCount > 0 && <span className="utility-count">{savedBuildCount}</span>}
-        </button>
-        <button
+        </button>}
+        {onOpenBuilds && <button type="button" className="utility-button" aria-haspopup="dialog" onClick={onOpenBuilds}>
+          My builds{!!savedBuildCount && <span className="utility-count">{savedBuildCount}</span>}
+        </button>}
+        {onPublish && <button
           type="button"
           className="utility-button"
           aria-haspopup="dialog"
@@ -128,7 +129,7 @@ export function UtilityToolbar({
           onClick={onPublish}
         >
           Publish
-        </button>
+        </button>}
         <button
           type="button"
           className="utility-button utility-button-primary"

@@ -58,7 +58,7 @@ function structureTons(mech: YamlMech, build: YamlBuild): number {
   return roundUpToHalf(mech.tonnage / 10 * (internal(build, 'Structureslot')?.structureWeightMulti ?? 1));
 }
 
-function armorTons(build: YamlBuild): number {
+export function getArmorTons(build: YamlBuild): number {
   const armor = internal(build, 'Armorslot');
   const points = Object.values(build.armor).reduce((sum, side) => sum + side.front + side.rear, 0);
   return points / (armor?.armorPerTon ?? STANDARD_ARMOR_PER_TON) * (armor?.armorWeightMulti ?? 1);
@@ -71,7 +71,7 @@ export function getBuildTonnage(mech: YamlMech, build: YamlBuild): number {
   const mounted = [...build.items, ...build.weapons].reduce((sum, mountedItem) => sum + (getYamlItem(mountedItem.item)?.tons ?? 0), 0);
   const missingHeatSinks = getEngineRating(build) ? FREE_HEAT_SINKS - getEngineHeatSinks(build) : 0;
   return round2(engineTons(build) + gyroTons(build) + COCKPIT_TONS + (internal(build, 'cockpit')?.tons ?? 0)
-    + structureTons(mech, build) + armorTons(build) + otherInternals + mounted - missingHeatSinks);
+    + structureTons(mech, build) + getArmorTons(build) + otherInternals + mounted - missingHeatSinks);
 }
 
 export function getTopSpeed(mech: YamlMech, build: YamlBuild): number {

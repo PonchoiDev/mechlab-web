@@ -60,12 +60,24 @@ export type YamlItemKind = 'weapon' | 'ammo' | 'equipment';
 
 export interface YamlItem {
   name: string;
+  // Mod del que viene (yet-another-mechlab...); las del juego base no lo llevan.
+  mod?: string;
+  // Color propio en el mechlab (Equipment_Properties), si lo tiene.
+  color?: string;
   kind: YamlItemKind;
   tons: number;
   slots: number;
   // Armas: el tipo de anclaje y el tipo de ranura que fija su tamaño.
   hardpoint?: YamlHardpointType;
   slotType?: string;
+  // Armas: la munición que usan; munición: su tipo. Una caja sirve a las armas que usan su tipo.
+  ammoTypes?: string[];
+  ammoType?: string;
+  // Cuerpo a cuerpo: el daño y el enfriamiento del golpe; las de los actuadores (la mano o el antebrazo) no
+  // ocupan ranuras generales.
+  meleeDamage?: number;
+  cooldown?: number;
+  actuator?: boolean;
   // Munición y equipo: los tipos de ranura donde se monta.
   slotTypes?: string[];
   category?: string;

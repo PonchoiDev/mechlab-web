@@ -1,318 +1,184 @@
-/* MechLab de YAML: el aspecto de las unidades enemigas con el amarillo de YAML como acento. El tablero
-   coloca las ubicaciones como el mechlab del juego: brazos a los lados, torsos y cabeza en el centro y
-   las piernas debajo de los torsos laterales. */
-:root {
-  --units-accent: #f0b429;
-  --yaml-slot: 26px;
+/* MechLab de YAML: los estilos del MechLab de MW5 (index.css y App.css), como el de BATTLETECH. Aquí solo
+   va lo propio de YAML: el resumen de anclajes de cada ubicación, las ranuras internas (motor, giroscopio,
+   cabina...), los rellenos fijos y dinámicos, los quirks de la ficha y la nota de las reglas. */
+
+.yaml-rules-note {
+  max-width: 900px;
+  margin: 8px 0 0;
+  color: var(--work-muted);
+  font: 500 12px/1.5 var(--work-mono);
 }
 
-.yaml-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  gap: 8px;
-  margin-bottom: 14px;
-}
+.yaml-rules-note strong { color: var(--work-text); }
 
-.yaml-toolbar button,
-.yaml-tabs button {
-  min-height: 36px;
-  padding: 0 14px;
-  border: 1px solid var(--units-line);
-  background: var(--units-panel);
-  cursor: pointer;
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+/* Anclajes usados y totales de cada tipo, con el icono del inventario de MW5 en el color de su tipo. */
+.yaml-location-hardpoints { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; }
 
-.yaml-toolbar button:hover,
-.yaml-tabs button:hover,
-.yaml-tabs button[aria-selected='true'] {
-  border-color: var(--units-accent);
-}
-
-.yaml-picker {
-  display: grid;
-  gap: 2px;
-  min-width: min(360px, 100%);
-  flex: 1 1 280px;
-  color: var(--units-muted);
-  font-size: 14px;
-  text-transform: uppercase;
-}
-
-.yaml-picker select,
-.yaml-selector input,
-.yaml-internals select,
-.yaml-armor input {
-  min-height: 34px;
-  border: 1px solid var(--units-line);
-  background: #0b0e15;
-  font-size: 17px;
-}
-
-.yaml-readout {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 6px;
-  margin-bottom: 12px;
-}
-
-.yaml-readout div {
-  display: grid;
-  padding: 8px 10px;
-  border: 1px solid var(--units-line);
-  background: var(--units-panel);
-}
-
-.yaml-readout span {
-  color: var(--units-muted);
-  font-size: 14px;
-  text-transform: uppercase;
-}
-
-.yaml-readout strong { font-size: 24px; }
-.yaml-readout .is-bad strong { color: var(--units-accent); }
-
-.yaml-quirks,
-.yaml-issues {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 0 0 12px;
-  padding: 0;
-  list-style: none;
-}
-
-.yaml-quirks li {
-  padding: 3px 10px;
-  border: 1px solid var(--units-line);
-  background: var(--units-panel);
-  cursor: help;
-  font-size: 16px;
-}
-
-.yaml-issues li {
-  padding: 4px 10px;
-  border-left: 3px solid var(--units-yellow);
-  background: var(--units-panel);
-  font-size: 17px;
-}
-
-.yaml-issues .is-error { border-left-color: #ff5a3c; }
-
-.yaml-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  gap: 14px;
-  align-items: start;
-}
-
-.yaml-board {
-  min-width: 0;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  grid-template-areas:
-    'rightArm rightTorso head leftTorso leftArm'
-    'rightArm rightTorso centerTorso leftTorso leftArm'
-    '. rightLeg centerTorso leftLeg .';
-  gap: 8px;
-  align-items: start;
-}
-
-.yaml-zone-head { grid-area: head; }
-.yaml-zone-centerTorso { grid-area: centerTorso; }
-.yaml-zone-leftTorso { grid-area: leftTorso; }
-.yaml-zone-rightTorso { grid-area: rightTorso; }
-.yaml-zone-leftArm { grid-area: leftArm; }
-.yaml-zone-rightArm { grid-area: rightArm; }
-.yaml-zone-leftLeg { grid-area: leftLeg; }
-.yaml-zone-rightLeg { grid-area: rightLeg; }
-
-.yaml-zone {
-  min-width: 0;
-  padding: 8px;
-  border: 1px solid var(--units-line);
-  background: var(--units-panel);
-  cursor: pointer;
-}
-
-.yaml-zone.is-selected { border-color: var(--units-accent); }
-
-.yaml-zone header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px;
-}
-
-.yaml-zone h3 {
-  margin: 0;
-  font-size: 19px;
-  text-transform: uppercase;
-}
-
-.yaml-hardpoints {
-  display: flex;
-  gap: 6px;
-  color: var(--units-muted);
-  font-size: 15px;
-}
-
-.yaml-armor {
-  display: flex;
-  flex-wrap: wrap;
+.yaml-location-hardpoint {
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin: 6px 0;
-  color: var(--units-muted);
-  font-size: 15px;
+  gap: 4px;
+  color: var(--weapon-color, var(--work-text));
+  font: 600 12px var(--work-mono);
 }
 
-.yaml-armor label { display: flex; align-items: center; gap: 4px; }
-.yaml-armor input { width: 58px; min-height: 28px; font-size: 16px; }
-.yaml-structure { margin-left: auto; }
+.yaml-location-hardpoint i {
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: var(--icon) center / contain no-repeat;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+}
 
+/* Las ranuras internas, una por línea, con su tipo en pequeño encima: se pulsan para cambiarlas desde el
+   inventario, como el panel «Equipping to» del juego. */
 .yaml-internals {
   display: grid;
-  gap: 4px;
-  margin-bottom: 6px;
+  gap: 3px;
+  margin: 0 0 8px;
 }
 
-.yaml-internals label {
-  min-width: 0;
+/* En una línea, con el tipo de ranura a la izquierda: la cabeza y el torso central tienen cinco o seis y,
+   en dos líneas, su tarjeta empujaba hacia abajo las de los torsos. */
+.yaml-internals .component-card-item {
   display: grid;
-  gap: 1px;
-  color: var(--units-muted);
-  font-size: 13px;
+  grid-template-columns: 84px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 6px;
+  width: 100%;
+  min-height: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.yaml-internals .component-card-item small {
+  color: var(--work-muted);
+  font: 500 9px var(--work-mono);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.yaml-internals select {
-  width: 100%;
-  min-width: 0;
-  min-height: 28px;
-  color: var(--units-text);
-  font-size: 15px;
-  text-transform: none;
+.yaml-internals .component-card-item.is-selected { border-color: var(--work-lime); }
+
+/* Los actuadores, fijos y en gris, encima de las ranuras de brazos y piernas, como en el juego. */
+.yaml-actuator {
+  color: var(--work-muted);
+  font: 600 11px var(--work-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-.yaml-actuators {
-  margin: 0 0 6px;
-  color: var(--units-muted);
-  font-size: 13px;
+/* Ranuras plegadas, como en el juego: el tamaño de la pieza en pequeño encima de su nombre. */
+.yaml-collapsed-size {
+  display: block;
+  color: var(--work-muted);
+  font: 500 9px var(--work-mono);
+  font-style: normal;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-.yaml-slots {
-  display: grid;
-  gap: 2px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.yaml-melee { color: var(--work-text); }
+
+/* Rellenos: los del motor XL rayados en ámbar, los dinámicos del Endo y el Ferro en azul. */
+.component-card-item.yaml-filler {
+  background: repeating-linear-gradient(135deg, rgba(240, 180, 41, 0.14) 0 6px, transparent 6px 12px);
 }
 
-.yaml-slots li {
-  position: relative;
+.component-card-item.yaml-filler.is-dynamic {
+  background: repeating-linear-gradient(135deg, rgba(90, 169, 255, 0.14) 0 6px, transparent 6px 12px);
+}
+
+.yaml-reference .yaml-quirks {
   display: flex;
-  align-items: start;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 4px;
-  min-height: calc(var(--slots) * var(--yaml-slot));
-  padding: 3px 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
-  font-size: 15px;
-}
-
-.yaml-slots small { color: var(--units-muted); white-space: nowrap; }
-.yaml-slots .is-weapon { border-left: 3px solid #5aa9ff; }
-.yaml-slots .is-item { border-left: 3px solid #b38cff; }
-.yaml-slots .is-fixedFiller { background: repeating-linear-gradient(135deg, rgba(240, 180, 41, 0.12) 0 6px, transparent 6px 12px); }
-.yaml-slots .is-dynamicFiller { background: repeating-linear-gradient(135deg, rgba(90, 169, 255, 0.12) 0 6px, transparent 6px 12px); }
-.yaml-slots .is-free { color: var(--units-muted); border-style: dashed; }
-
-.yaml-slots button {
-  border: 0;
-  background: none;
-  cursor: pointer;
-  color: var(--units-muted);
-  font-size: 18px;
-  line-height: 1;
-}
-
-.yaml-slots button:hover { color: var(--units-accent); }
-
-.yaml-selector {
-  min-width: 0;
-  position: sticky;
-  top: 12px;
-  display: grid;
-  grid-template-rows: auto auto auto minmax(0, 1fr);
-  gap: 8px;
-  max-height: calc(100vh - 24px);
-  padding: 10px;
-  border: 1px solid var(--units-line);
-  background: var(--units-panel);
-}
-
-.yaml-selector h2 { margin: 0; font-size: 22px; text-transform: uppercase; }
-.yaml-tabs { display: flex; gap: 4px; }
-.yaml-tabs button { flex: 1; min-width: 0; padding: 0 6px; font-size: 15px; }
-.yaml-selector input { width: 100%; min-width: 0; }
-
-.yaml-options {
-  min-height: 0;
-  align-content: start;
-  display: grid;
-  gap: 3px;
-  margin: 0;
+  margin: 8px 0 0;
   padding: 0;
-  overflow-y: auto;
   list-style: none;
 }
 
-.yaml-options button {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 8px;
-  width: 100%;
-  padding: 5px 8px;
-  border: 1px solid var(--units-line);
-  background: #0b0e15;
-  cursor: pointer;
-  text-align: left;
-  font-size: 16px;
+.yaml-reference .yaml-quirks li {
+  padding: 2px 8px;
+  border: 1px solid var(--work-line, rgba(255, 255, 255, 0.18));
+  cursor: help;
+  font: 500 11px var(--work-mono);
 }
 
-.yaml-options button:hover:not(:disabled) { border-color: var(--units-accent); }
-.yaml-options button:disabled { cursor: not-allowed; opacity: 0.55; }
-.yaml-options small { display: block; padding: 0 8px 2px; color: var(--units-muted); font-size: 13px; }
-.yaml-option-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.yaml-empty { color: var(--units-muted); }
+/* Inventario: el de MW5 con tres columnas (nombre, ranuras y peso). */
+.yaml-inventory { --inventory-columns: minmax(0, 1fr) 44px 48px; }
+.yaml-inventory .inventory-row.is-blocked .inventory-item { opacity: 0.55; cursor: not-allowed; }
+.yaml-choice-reason { display: block; color: var(--work-muted); font: 500 10px var(--work-mono); }
 
-@media (max-width: 1100px) {
-  .yaml-layout { grid-template-columns: minmax(0, 1fr); }
-  .yaml-selector { position: static; max-height: none; }
-  .yaml-options { max-height: 420px; }
+/* Colores del mechlab de YAML con sus ajustes por defecto (src/data/yaml/colors.json): los anclajes del
+   color de las ranuras de sus armas, cada pieza del de su ranura o el suyo propio, y el relleno de las
+   piezas con ese color al 20 % («Equipment Tint Opacity»). */
+.yaml-mechlab [data-weapon-type="ballistic"] { --weapon-color: var(--yaml-ballistic); }
+.yaml-mechlab [data-weapon-type="energy"] { --weapon-color: var(--yaml-energy); }
+.yaml-mechlab [data-weapon-type="missile"] { --weapon-color: var(--yaml-missile); }
+.yaml-mechlab [data-weapon-type="ams"] { --weapon-color: var(--yaml-ams); }
+.yaml-mechlab [data-weapon-type="artillery"] { --weapon-color: var(--yaml-artillery); }
+.yaml-mechlab [data-weapon-type="omni"] { --weapon-color: var(--yaml-omni); }
+
+.yaml-mechlab .component-card-item {
+  --item-color: var(--yaml-general);
+  background: color-mix(in srgb, var(--item-color) var(--yaml-tint), var(--work-panel-raised));
 }
 
-@media (max-width: 760px) {
-  .yaml-board {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-areas:
-      'head centerTorso'
-      'rightTorso leftTorso'
-      'rightArm leftArm'
-      'rightLeg leftLeg';
-  }
+.yaml-mechlab .hardpoint-chip.is-occupied {
+  background: color-mix(in srgb, var(--weapon-color) var(--yaml-tint), #1c211c);
 }
 
-@media (max-width: 520px) {
-  .yaml-board {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'head' 'centerTorso' 'rightTorso' 'leftTorso' 'rightArm' 'leftArm' 'rightLeg' 'leftLeg';
-  }
+/* Los rellenos, rayados del color de su pieza («Color Mechlab fillers»). */
+.yaml-mechlab .component-card-item.yaml-filler,
+.yaml-mechlab .component-card-item.yaml-filler.is-dynamic {
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--item-color) 30%, transparent) 0 6px, transparent 6px 12px);
 }
+
+.yaml-mechlab .inventory-row .inventory-item { border-left: 3px solid var(--item-color, var(--yaml-general)); }
+
+/* El logo del mod de cada pieza, a la derecha, como en el mechlab del juego. */
+.yaml-mod-logo {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.yaml-internals .component-card-item {
+  grid-template-columns: 84px minmax(0, 1fr) auto;
+}
+
+.yaml-internal-name { overflow: hidden; text-overflow: ellipsis; }
+.component-card-item:has(.yaml-mod-logo),
+.inventory-item-name:has(.yaml-mod-logo),
+.hardpoint-chip-content:has(.yaml-mod-logo) { display: flex; align-items: center; gap: 6px; }
+.yaml-internals .component-card-item:has(.yaml-mod-logo) { display: grid; }
+
+.yaml-filler-text { display: grid; min-width: 0; gap: 1px; }
+.yaml-filler-text small { font: 500 9px var(--work-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+.yaml-filler-text span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Con el inventario abierto las tarjetas se estrechan: el tipo de ranura de las piezas internas cede su
+   sitio al nombre, que es lo que importa. */
+.yaml-mechlab .component-card { container-type: inline-size; }
+
+@container (max-width: 230px) {
+  .yaml-internals .component-card-item { grid-template-columns: minmax(0, 1fr) auto; }
+  .yaml-internals .component-card-item > small { display: none; }
+}
+
+/* El tablero en el sentido del mechlab del juego, que mira al 'Mech de frente: el brazo, el torso y la pierna
+   derechos a la izquierda. */
+.yaml-mechlab .board-left-torso { grid-area: right-torso; }
+.yaml-mechlab .board-right-torso { grid-area: left-torso; }
+.yaml-mechlab .board-left-arm { grid-area: right-arm; }
+.yaml-mechlab .board-right-arm { grid-area: left-arm; }
+.yaml-mechlab .board-left-leg { grid-area: right-leg; }
+.yaml-mechlab .board-right-leg { grid-area: left-leg; }

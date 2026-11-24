@@ -1,12 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-// La cabecera y el aspecto son los de las unidades enemigas; yaml.css añade el tablero y el selector.
-import '../units/units.css'
+// El aspecto es el del MechLab de MW5 (sus estilos generales y los de App.css), como el de BATTLETECH;
+// yaml.css añade lo propio de YAML: las ranuras internas, los rellenos y el resumen de anclajes.
+import '../index.css'
+import '../App.css'
 import './yaml.css'
-import { YamlApp } from './YamlApp.tsx'
+import { YamlMechLabApp } from './YamlMechLabApp.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <YamlApp />
+    <YamlMechLabApp />
   </StrictMode>,
 )
