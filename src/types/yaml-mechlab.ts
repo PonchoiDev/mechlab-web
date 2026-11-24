@@ -165,7 +165,11 @@ export interface YamlItem {
   armTwistAngleYawMulti?: number;
   sensorRangeBonus?: number;
   sensorRangeMulti?: number;
+  sensorRangeBonusLance?: number;
+  sensorRangeMultiLance?: number;
+  // Sondas: lo que su SensorRangeModifier pasa de 1. Computadores de puntería: el porcentaje de su rasgo.
   sensorRangePercent?: number;
+  sensorTraitPercent?: number;
   // Armadura y estructura que suma a su ubicación (las armas cuerpo a cuerpo, por ejemplo); no pesan.
   armorComponentFront?: number;
   armorComponentRear?: number;
@@ -173,6 +177,23 @@ export interface YamlItem {
   // Multiplicadores de la altura de salto (equipo y quirks).
   jumpJetFuelBurnTimeMulti?: number;
   jumpJetZAccelMulti?: number;
+  // Lo que YAML lee de cada pieza para el peso, la refrigeración y la velocidad (docs/specs/estadisticas-yaml.md):
+  // su TechLevel (lo que vale una propiedad que falta: TechLevel / 100) y si es un disipador (MWHeatSinkDataAsset).
+  techLevel?: number;
+  heatSinkAsset?: boolean;
+  roundWeightType?: string;
+  roundWeightUp?: number | boolean;
+  coolingMulti?: number;
+  coolingMultiScope?: string;
+  heatCapacityBonus?: number;
+  bundledHeatsinks?: number;
+  internalHeatsinkBonus?: number;
+  topSpeedMulti?: number;
+  engineHealthType?: string;
+  armorComponentFrontMulti?: number;
+  armorComponentRearMulti?: number;
+  structureComponentMulti?: number;
+  componentArmorWeightMulti?: number;
   // Retrorreactores: velocidad inicial vertical (cm/s), tiempo de encendido (s) y curva de aceleración vertical
   // (cm/s² por número de retrorreactores montados).
   jumpJet?: { initialVelocityZ: number; burnTime: number; accelZ: [number, number][] };

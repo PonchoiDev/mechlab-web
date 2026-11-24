@@ -3,8 +3,10 @@ import type {
   YamlBuild, YamlCombat, YamlItem, YamlMech, YamlWeaponFamily, YamlWeaponGroup, YamlWeaponTier
 } from '../../types/yaml-mechlab';
 import { getRangeStep, type RangeProfileEntry } from '../rangeRadar';
-import { getYamlItem, getYamlQuirk } from './data';
-import { getArmorPoints, getHeat, getStructurePoints, getTopSpeed } from './stats';
+import { getYamlItem } from './data';
+import {
+  getArmorPoints, getHeat, getInstalledEquipment, getLoadoutProperties, getQuirkProperties, getStructurePoints, getTopSpeed
+} from './stats';
 
 // Las estadísticas de combate del mechlab del juego con YAML (docs/specs/estadisticas-yaml.md). Las
 // calcula el propio mod (MechAlphaStats de YAML y YAWFunctionsYAML) con las reglas de Yet Another Weapon:
@@ -22,6 +24,9 @@ const MIN_MULTIPLIER = 0.001;
 // El alcance de sensores de un 'Mech sin bonificaciones (GetSensorRange del juego, 80.000 cm).
 const BASE_SENSOR_RANGE = 800;
 const PULSE_LASER_TAG = 'Weapon.Energy.Laser.Pulse';
+const LASER_AMS_TAG = 'Weapon.AMS.LAMS';
+// Las etiquetas del juego son jerárquicas (HasTag sin coincidencia exacta).
+const hasTag = (tag: string, parent: string) => tag === parent || tag.startsWith(`${parent}.`);
 // Las ubicaciones con los nombres que usan los quirks en «mechParts».
 const MECH_PART_NAMES: Record<Zone, string> = {
   head: 'Head', centerTorso: 'CenterTorso', leftTorso: 'LeftTorso', rightTorso: 'RightTorso',
@@ -62,26 +67,9 @@ const BONUS_FIELDS: Record<keyof YamlWeaponBonuses, string> = {
   missilesDestroyed: 'missilesdestroyedmulti'
 };
 
-// Lo que lleva montado el 'Mech: las piezas internas (en la ubicación de su ranura propia) y el equipo y la
-// munición de las ranuras.
-function mountedEquipment(mech: YamlMech, build: YamlBuild): { zone: Zone; item: YamlItem }[] {
-  const zones = Object.keys(mech.zones) as Zone[];
-  const internals = Object.entries(build.internal).map(([slotType, id]) => ({
-    zone: zones.find(zone => (mech.zones[zone].special[slotType] ?? 0) > 0) ?? 'centerTorso',
-    item: getYamlItem(id)
-  }));
-  const slotted = build.items.map(mounted => ({ zone: mounted.zone, item: getYamlItem(mounted.item) }));
-  return [...internals, ...slotted].filter((entry): entry is { zone: Zone; item: YamlItem } => !!entry.item);
-}
-
-function quirkProperties(mech: YamlMech): Record<string, unknown>[] {
-  return mech.quirks.map(id => getYamlQuirk(id)?.properties ?? {});
-}
-
-// Las bonificaciones al movimiento y a los sensores salen de todo lo montado y de los quirks.
-function loadoutProperties(mech: YamlMech, build: YamlBuild): Record<string, unknown>[] {
-  return [...mountedEquipment(mech, build).map(({ item }) => item as unknown as Record<string, unknown>), ...quirkProperties(mech)];
-}
+const mountedEquipment = getInstalledEquipment;
+const quirkProperties = getQuirkProperties;
+const loadoutProperties = getLoadoutProperties;
 
 // AddMulti de YAML: los multiplicadores se suman (a + b − 1), no se multiplican.
 // El juego calcula en coma flotante de 32 bits, y eso decide los empates al redondear el panel: siete Medium
@@ -192,7 +180,8 @@ function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoi
     const damage = f(f(stats.damage) * bonuses.damage);
     // Rayos sin duración (ametralladoras, lanzallamas): su daño y su calor ya son por segundo.
     if (!stats.duration) return { ...base, damage, heat, cooldown: 0, duration: 0, dps: damage, heatPerSecond: heat };
-    const pulse = combat.weaponType === PULSE_LASER_TAG || combat.weaponType.startsWith(`${PULSE_LASER_TAG}.`);
+    // YAWTrace: los láseres de pulsos y los AMS láser ofensivos (YAWCE AMS Type 0, nombre con «Offensive»).
+    const pulse = hasTag(combat.weaponType, PULSE_LASER_TAG) || (hasTag(combat.weaponType, LASER_AMS_TAG) && /offensive/i.test(itemId));
     const duration = f(f(f(stats.duration) * bonuses.duration) * f(pulse ? PULSE_LASER_DURATION_MULTIPLIER : 1));
     const cycle = f(cooldown + duration);
     return { ...base, damage, heat, cooldown, duration, dps: perSecond(damage, cycle), heatPerSecond: perSecond(heat, cycle) };
@@ -325,8 +314,13 @@ export function getYamlMechStats(mech: YamlMech, build: YamlBuild): YamlMechStat
   const armor = getArmorPoints(mech, build);
   const heat = getHeat(mech, build);
   const equipment = mountedEquipment(mech, build).map(({ item }) => item);
-  const sensorBase = (BASE_SENSOR_RANGE + sum(properties.map(entry => typeof entry.sensorRangeBonus === 'number' ? entry.sensorRangeBonus : 0)))
-    * sumMultiplier(properties, 'sensorRangeMulti');
+  // GetSensorRange del juego: la base (MW.TargetSystem.DefaultSensorRange, 80.000 cm) × (1 + los rasgos con
+  // UI_GetIncreasedSensorRangePercent, los de los computadores de puntería). GetSensorBonusesFromLoadout de YAML
+  // suma los sensorRangeBonus del equipo y los quirks (también los de lanza) y suma sus multiplicadores.
+  const gameSensorRange = f(BASE_SENSOR_RANGE * Math.max(0, sum([1, ...equipment.map(item => item.sensorTraitPercent ?? 0)])));
+  const numberOf = (entry: Record<string, unknown>, key: string) => typeof entry[key] === 'number' ? entry[key] as number : 0;
+  const sensorBonus = sum(properties.flatMap(entry => [numberOf(entry, 'sensorRangeBonus'), numberOf(entry, 'sensorRangeBonusLance')]));
+  const sensorBase = f(f(gameSensorRange + sensorBonus) * sumMultiplier(properties, 'sensorRangeMulti', 'sensorRangeMultiLance'));
   const { movement } = mech;
   return {
     armor: armor.installed + armor.bonus,
@@ -347,8 +341,8 @@ export function getYamlMechStats(mech: YamlMech, build: YamlBuild): YamlMechStat
     speed: getTopSpeed(mech, build),
     // El juego redondea a centímetros y divide entre 100 como entero: 2.395,8 m es 2.395.
     weaponRange: Math.max(0, ...ranged.map(weapon => Math.trunc(Math.round(weapon.maxRange * 100) / 100))),
-    // DLCMechSensorRange: las sondas y los computadores de puntería suman su porcentaje sobre el resto.
-    sensorRange: sensorBase * (1 + sum(equipment.map(item => item.sensorRangePercent ?? 0))),
+    // DLCMechSensorRange de YAML: las sondas suman sobre el resto lo que su SensorRangeModifier pasa de 1.
+    sensorRange: f(sensorBase + f(sensorBase * sum(equipment.map(item => item.sensorRangePercent ?? 0)))),
     amsIntercept: sum(ams.map(weapon => weapon.amsRate)),
     amsRange: Math.max(0, ...ams.map(weapon => weapon.maxRange)),
     ammo: sum(build.items.map(mounted => getYamlItem(mounted.item)).filter(item => item?.kind === 'ammo').map(item => item?.capacity ?? 0))
@@ -382,13 +376,15 @@ export interface YamlStatCell {
   ratio: number;
 }
 
-// Hasta dos decimales, sin ceros de más: 62.1, 16.47, 950. Como el texto de Unreal, un empate exacto va al
-// par (64,625 es 64.62); los que el float32 deja un poco por encima o por debajo, no (4,025000095 es 4.03).
+// Como MechStatWidget del mechlab (Conv_FloatToText: HalfToEven, separador de miles y de 0 a 2 decimales):
+// 62.1, 16.47, 2,395. Un empate exacto va al par (64,625 es 64.62); lo que el float32 deja un poco por encima o
+// por debajo, no (4,025000095 es 4.03).
+const STAT_FORMAT = new Intl.NumberFormat('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 export const formatYamlStat = (value: number) => {
   const scaled = value * 100;
   const floor = Math.floor(scaled);
   const rounded = scaled - floor === 0.5 ? (floor % 2 === 0 ? floor : floor + 1) : Math.round(scaled);
-  return String(Number((rounded / 100).toFixed(2)));
+  return STAT_FORMAT.format(rounded / 100);
 };
 
 export function getYamlStatsPanel(mech: YamlMech, build: YamlBuild): YamlStatCell[][] {
