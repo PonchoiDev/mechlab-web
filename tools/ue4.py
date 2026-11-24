@@ -193,11 +193,19 @@ class Asset:
         """El objeto del asset cuando solo hay uno, aunque no se llame como el archivo."""
         return next(nombre for nombre in self.exports if not nombre.startswith("Default__"))
 
-    def lector(self, export):
-        return LectorPropiedades(self.nombres, Lector(self.datos, self.exports[export]))
+    def ruta_objeto(self, indice):
+        """Una referencia a objeto como texto: "paquete.objeto" si es un import, el nombre si es un export."""
+        if indice < 0:
+            paquete, nombre = self.ruta_import(indice)
+            return f"{paquete}.{nombre}"
+        return self.orden[indice - 1] if indice > 0 else None
 
-    def propiedades(self, export):
-        return self.lector(export).propiedades()
+    def lector(self, export, rutas=False):
+        return LectorPropiedades(self.nombres, Lector(self.datos, self.exports[export]), self.ruta_objeto if rutas else None)
+
+    def propiedades(self, export, rutas=False):
+        """Con rutas=True, las referencias a objetos salen como texto en lugar de como índice."""
+        return self.lector(export, rutas).propiedades()
 
     def filas(self, export):
         """Filas de una DataTable, por nombre de fila."""
@@ -224,9 +232,10 @@ class Asset:
 
 
 class LectorPropiedades:
-    def __init__(self, nombres, lector):
+    def __init__(self, nombres, lector, ruta_objeto=None):
         self.nombres = nombres
         self.lector = lector
+        self.ruta_objeto = ruta_objeto
 
     def nombre(self):
         indice, numero = self.lector.varios("ii")
@@ -276,7 +285,8 @@ class LectorPropiedades:
         if tipo == "ByteProperty":
             return self.nombre() if etiquetado and extra.get("enum") not in (None, "None") else lector.leer("B")
         if tipo == "ObjectProperty":
-            return lector.leer("i")
+            indice = lector.leer("i")
+            return self.ruta_objeto(indice) if self.ruta_objeto else indice
         if tipo == "SoftObjectProperty":
             ruta = self.nombre()
             lector.cadena()
@@ -302,8 +312,15 @@ class LectorPropiedades:
             return [self.valor(extra["interno"], {}) for _ in range(total)]
         if tipo == "MapProperty":
             lector.leer("i")
-            return [[self.valor(extra["interno"], {}), self.valor(extra["valor"], {})] for _ in range(lector.leer("i"))]
+            return [[self.elemento_de_mapa(extra["interno"]), self.elemento_de_mapa(extra["valor"])] for _ in range(lector.leer("i"))]
         return None
+
+    def elemento_de_mapa(self, tipo):
+        # Un ByteProperty en un mapa es casi siempre un enum (p. ej. TMap<EMechParts, ...> en los modelos
+        # de los 'Mechs) y se guarda como nombre, no como byte, aunque la etiqueta no diga el enum.
+        if tipo == "ByteProperty":
+            return self.nombre()
+        return self.valor(tipo, {})
 
     def struct(self, nombre):
         if nombre in STRUCTS_BINARIOS:
@@ -314,6 +331,13 @@ class LectorPropiedades:
             self.lector.posicion += 16
             return None
         if nombre == "GameplayTag":
+            # El juego guarda la etiqueta como un nombre suelto; los mods cocinados con el editor de
+            # modding la guardan como propiedades etiquetadas (TagName = NameProperty).
+            inicio = self.lector.posicion
+            if self.nombre() == "TagName" and self.nombre() == "NameProperty":
+                self.lector.posicion = inicio
+                return self.propiedades().get("TagName")
+            self.lector.posicion = inicio
             return self.nombre()
         if nombre == "GameplayTagContainer":
             return [self.nombre() for _ in range(self.lector.leer("i"))]
