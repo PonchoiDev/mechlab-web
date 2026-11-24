@@ -64,11 +64,16 @@
 
 .yaml-internals .component-card-item.is-selected { border-color: var(--work-lime); }
 
-.yaml-actuators {
-  margin: 0 0 8px;
+/* Los actuadores, fijos y en gris, encima de las ranuras de brazos y piernas, como en el juego. */
+.yaml-actuator {
   color: var(--work-muted);
-  font: 500 10px var(--work-mono);
+  font: 600 11px var(--work-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
+
+/* Las piezas de las ranuras propias (los disipadores del motor) con el alto de su tamaño, como en el juego. */
+.yaml-internals .component-card-item[style*="--slots"] { min-height: calc(var(--slots) * 22px); align-items: start; }
 
 /* Rellenos: los del motor XL rayados en ámbar, los dinámicos del Endo y el Ferro en azul. */
 .component-card-item.yaml-filler {
@@ -159,3 +164,12 @@
   .yaml-internals .component-card-item { grid-template-columns: minmax(0, 1fr) auto; }
   .yaml-internals .component-card-item > small { display: none; }
 }
+
+/* El tablero en el sentido del mechlab del juego, que mira al 'Mech de frente: el brazo, el torso y la pierna
+   derechos a la izquierda. */
+.yaml-mechlab .board-left-torso { grid-area: right-torso; }
+.yaml-mechlab .board-right-torso { grid-area: left-torso; }
+.yaml-mechlab .board-left-arm { grid-area: right-arm; }
+.yaml-mechlab .board-right-arm { grid-area: left-arm; }
+.yaml-mechlab .board-left-leg { grid-area: right-leg; }
+.yaml-mechlab .board-right-leg { grid-area: left-leg; }

@@ -73,28 +73,35 @@ export type ZoneRow =
   | { kind: 'free'; slots: number };
 
 // Lo que ocupa las ranuras generales y las propias de equipo (no las internas) de una ubicación.
+// Las ranuras generales de una ubicación en el orden del mechlab del juego: el relleno fijo del motor, las
+// piezas de mayor a menor (a igual tamaño, el arma delante: ER PPC y luego el disipador doble), los rellenos
+// dinámicos y las ranuras libres. Detrás, lo montado en ranuras propias (los disipadores del motor), que el
+// juego enseña con su tamaño aunque no ocupe ranuras generales.
 export function getZoneRows(mech: YamlMech, build: YamlBuild, zone: Zone, fillers: Record<Zone, FillerGroup[]>): ZoneRow[] {
   const rows: ZoneRow[] = [];
-  for (const weapon of build.weapons.filter(mounted => mounted.zone === zone)) {
-    const item = getYamlItem(weapon.item);
-    rows.push({ kind: 'weapon', label: item?.name ?? weapon.item, slots: item?.slots ?? 1, hardpoint: weapon.hardpoint, item: weapon.item });
-  }
-  build.items.forEach((mounted, index) => {
-    if (mounted.zone !== zone) return;
-    const item = getYamlItem(mounted.item);
-    const slots = mounted.slotType === GENERAL_SLOT ? item?.slots ?? 1 : 1;
-    rows.push({ kind: 'item', label: item?.name ?? mounted.item, slots, index, slotType: mounted.slotType });
-  });
   for (const [slotType, id] of Object.entries(build.internal)) {
     const fixed = getYamlItem(id)?.fillerSlots?.[zone];
     if (fixed) rows.push({ kind: 'fixedFiller', label: getYamlItem(id)!.name, slots: fixed, slotType });
   }
+  const pieces: ZoneRow[] = [];
+  for (const weapon of build.weapons.filter(mounted => mounted.zone === zone)) {
+    const item = getYamlItem(weapon.item);
+    pieces.push({ kind: 'weapon', label: item?.name ?? weapon.item, slots: item?.slots ?? 1, hardpoint: weapon.hardpoint, item: weapon.item });
+  }
+  const special: ZoneRow[] = [];
+  build.items.forEach((mounted, index) => {
+    if (mounted.zone !== zone) return;
+    const item = getYamlItem(mounted.item);
+    const row: ZoneRow = { kind: 'item', label: item?.name ?? mounted.item, slots: item?.slots ?? 1, index, slotType: mounted.slotType };
+    (mounted.slotType === GENERAL_SLOT ? pieces : special).push(row);
+  });
+  rows.push(...pieces.sort((a, b) => b.slots - a.slots || Number(b.kind === 'weapon') - Number(a.kind === 'weapon')));
   for (const group of fillers[zone]) {
     rows.push({ kind: 'dynamicFiller', label: getInternalLabel(build, group.slotType), slots: group.slots, slotType: group.slotType });
   }
   const free = getFreeGeneralSlots(mech, build, zone) - fillers[zone].reduce((sum, group) => sum + group.slots, 0);
   if (free > 0) rows.push({ kind: 'free', slots: free });
-  return rows;
+  return [...rows, ...special];
 }
 
 export interface HardpointUsage {

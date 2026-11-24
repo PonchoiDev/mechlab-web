@@ -86,16 +86,26 @@ function rowItemId(row: ZoneRow, build: YamlBuild): string | undefined {
   return undefined;
 }
 
-function RowItem({ row, build, inCells = false, onSelect, onRemove }: { row: ZoneRow; build: YamlBuild; inCells?: boolean; onSelect: () => void; onRemove?: () => void }) {
+function RowItem({ row, build, inCells = false, isSelected = false, onSelect, onRemove }: {
+  row: ZoneRow;
+  build: YamlBuild;
+  inCells?: boolean;
+  isSelected?: boolean;
+  onSelect: () => void;
+  onRemove?: () => void;
+}) {
   if (row.kind === 'free') return null;
   const fixed = row.kind === 'fixedFiller' || row.kind === 'dynamicFiller';
   return (
     <button
       type="button"
-      className={['component-card-item', inCells ? 'slot-cell-item' : '', fixed ? 'is-built-in yaml-filler' : '', row.kind === 'dynamicFiller' ? 'is-dynamic' : ''].filter(Boolean).join(' ')}
+      className={['component-card-item', inCells ? 'slot-cell-item' : '', fixed ? 'is-built-in yaml-filler' : '', row.kind === 'dynamicFiller' ? 'is-dynamic' : '', isSelected ? 'is-selected' : ''].filter(Boolean).join(' ')}
       style={{ '--slots': row.slots, '--item-color': rowColor(row, build) } as CSSProperties}
       data-category={row.kind === 'item' ? 'equipment' : undefined}
-      title={fixed ? `${row.label}: ${slotsLabel(row.slots)} the ${row.kind === 'dynamicFiller' ? 'Endo or Ferro takes' : 'engine fixes here'}` : `${row.label}: middle-click to remove`}
+      aria-pressed={row.kind === 'weapon' ? isSelected : undefined}
+      title={fixed
+        ? `${row.label}: ${slotsLabel(row.slots)} the ${row.kind === 'dynamicFiller' ? 'Endo or Ferro takes' : 'engine fixes here'}`
+        : `${row.label}: ${row.kind === 'weapon' ? 'click to swap it from the inventory, ' : ''}middle-click to remove`}
       onClick={(event) => { event.stopPropagation(); onSelect(); }}
       {...(onRemove ? removeOnMiddleClick(onRemove) : {})}
     >
@@ -116,6 +126,20 @@ function RowItem({ row, build, inCells = false, onSelect, onRemove }: { row: Zon
   );
 }
 
+// Los actuadores con el nombre del mechlab del juego: Shoulder, Upper arm, Lower arm, Hand; Hip, Upper
+// leg, Lower leg, Foot.
+function actuatorLabel(actuator: string, zone: Zone): string {
+  const limb = zone.endsWith('Arm') ? 'arm' : 'leg';
+  if (actuator === 'UpperActuator') return `Upper ${limb}`;
+  if (actuator === 'LowerActuator') return `Lower ${limb}`;
+  return actuator.replace('Actuator', '');
+}
+
+// Una ubicación con la lista de ranuras del mechlab del juego, de arriba abajo: en brazos y piernas, los
+// actuadores y luego las ranuras generales; en la cabeza y el torso central, las generales y luego las
+// internas (cabeza: defensa, sensores, FCS, soporte vital y cabina; torso central: armadura, estructura,
+// disipadores del motor, giroscopio, motor y núcleo); en los torsos laterales, solo las generales. Las armas
+// van en la lista con sus ranuras, como en el juego, y los anclajes quedan como recuento en la cabecera.
 function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zone: Zone; label: string; position: string }) {
   const { mech, build, target, expandedSlots, fillers, dropZones, onSelect, onPlace, onArmorChange, onRemoveWeapon, onRemoveItem } = props;
   const data = mech.zones[zone];
@@ -124,21 +148,91 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
   const free = getFreeGeneralSlots(mech, build, zone) - fillers[zone].reduce((sum, group) => sum + group.slots, 0);
   const used = data.general - free;
   const internals = INTERNAL_SLOTS.filter(slotType => data.special[slotType]);
-  // Lo montado en ranuras propias (disipadores del motor, retrorreactores...) va con las internas: no ocupa
-  // ranuras generales.
   const isGeneral = (row: ZoneRow) => row.kind !== 'item' || row.slotType === GENERAL_SLOT;
+  const generalRows = rows.filter(row => row.kind !== 'free' && isGeneral(row));
   const specialRows = rows.filter(row => !isGeneral(row));
-  const usedHardpoints = new Map(build.weapons.filter(weapon => weapon.zone === zone).map(weapon => [weapon.hardpoint, weapon]));
-  const hardpoints = data.hardpoints.filter(hardpoint => hardpoint.type !== 'melee');
+  const hasFreeHardpoint = getHardpointUsage(mech, build, zone).some(usage => usage.used < usage.total);
   const armor = build.armor[zone];
   const armorTotal = armor.front + armor.rear;
   const placing = dropZones !== null;
   const accepts = !!dropZones?.includes(zone);
-  const stateClass = free < 0 ? 'is-over' : free > 0 || hardpoints.some(hardpoint => !usedHardpoints.has(hardpoint.id)) ? 'has-free-space' : 'is-full';
+  const stateClass = free < 0 ? 'is-over' : free > 0 || hasFreeHardpoint ? 'has-free-space' : 'is-full';
   const select = (hardpoint: string | null = null, internal: string | null = null) => {
     if (placing) onPlace(zone, hardpoint);
     else onSelect({ zone, hardpoint, internal });
   };
+  const rowProps = (row: ZoneRow) => ({
+    row,
+    build,
+    isSelected: isActive && row.kind === 'weapon' && target?.hardpoint === row.hardpoint,
+    onSelect: () => select(row.kind === 'weapon' ? row.hardpoint : null),
+    onRemove: rowRemover(row, onRemoveWeapon, onRemoveItem)
+  });
+
+  const actuators = data.actuators.length > 0 && (
+    <div className="yaml-internals yaml-actuators" aria-label="Actuators">
+      {data.actuators.map(actuator => (
+        <span key={actuator} className="component-card-item is-built-in yaml-actuator">{actuatorLabel(actuator, zone)}</span>
+      ))}
+    </div>
+  );
+
+  const general = expandedSlots ? (
+    <div className="component-card-slots">
+      <div className="slot-cells" aria-label={`Slots: ${used} of ${data.general}`}>
+        <span className="slot-cells-label">Slots <small>{used}/{data.general}</small></span>
+        {generalRows.map((row, index) => <RowItem key={index} {...rowProps(row)} inCells />)}
+        {Array.from({ length: Math.max(0, free) }, (_, index) => <span key={`empty-${index}`} className="slot-cell-empty" aria-hidden="true" />)}
+      </div>
+    </div>
+  ) : (
+    <>
+      {generalRows.length > 0 && (
+        <div className="component-card-equipment yaml-general">
+          {generalRows.map((row, index) => <RowItem key={index} {...rowProps(row)} />)}
+        </div>
+      )}
+      <div className="component-card-footer">
+        <SlotBar used={used} capacity={data.general} label="Slots" />
+      </div>
+    </>
+  );
+
+  const internalSlots = (internals.length > 0 || specialRows.length > 0) && (
+    <div className="yaml-internals" aria-label="Internal slots">
+      {internals.map(slotType => (
+        <button
+          key={slotType}
+          type="button"
+          className={isActive && target?.internal === slotType ? 'component-card-item yaml-internal is-selected' : 'component-card-item yaml-internal'}
+          data-slot={slotType}
+          style={{ '--item-color': getYamlItem(build.internal[slotType])?.color ?? getSlotColor(slotType) } as CSSProperties}
+          title={`${INTERNAL_SLOT_LABELS[slotType]}: click to change it from the inventory`}
+          onClick={(event) => { event.stopPropagation(); if (!placing) onSelect({ zone, hardpoint: null, internal: slotType }); }}
+        >
+          <small>{INTERNAL_SLOT_LABELS[slotType]}</small>
+          <span className="yaml-internal-name">{getInternalLabel(build, slotType)}</span>
+          <ModLogo id={build.internal[slotType]} />
+        </button>
+      ))}
+      {specialRows.map((row, index) => row.kind === 'item' && (
+        <button
+          key={`special-${index}`}
+          type="button"
+          className="component-card-item yaml-internal"
+          data-category="equipment"
+          style={{ '--item-color': getItemColor(build.items[row.index].item, row.slotType), '--slots': row.slots } as CSSProperties}
+          title={`${row.label}: middle-click to remove`}
+          onClick={(event) => { event.stopPropagation(); select(); }}
+          {...removeOnMiddleClick(() => onRemoveItem(row.index))}
+        >
+          <small>{SPECIAL_SLOT_LABELS[row.slotType] ?? 'Special'}</small>
+          <span className="yaml-internal-name">{row.label}</span>
+          <ModLogo id={build.items[row.index].item} />
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <div
@@ -158,102 +252,9 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
         <LocationHardpoints mech={mech} build={build} zone={zone} />
       </div>
 
-      {hardpoints.length > 0 && (
-        <div className="component-card-hardpoints">
-          {hardpoints.map(hardpoint => {
-            const mounted = usedHardpoints.get(hardpoint.id);
-            const item = mounted && getYamlItem(mounted.item);
-            const isSelected = isActive && target?.hardpoint === hardpoint.id;
-            return (
-              <div
-                key={hardpoint.id}
-                role="button"
-                tabIndex={0}
-                className={['hardpoint-chip', item ? 'is-occupied is-emphasized' : 'is-free', isSelected ? 'is-selected' : ''].filter(Boolean).join(' ')}
-                data-weapon-type={hardpoint.type}
-                style={mounted ? { '--weapon-color': getItemColor(mounted.item) } as CSSProperties : undefined}
-                aria-pressed={isSelected}
-                title={`${HARDPOINT_LABELS[hardpoint.type]} hardpoint: ${item ? `${item.name}, ${slotsLabel(item.slots)}. Middle-click to remove` : 'free'}`}
-                onClick={(event) => { event.stopPropagation(); select(hardpoint.id); }}
-                onKeyDown={(event) => { if (event.key === 'Enter') { event.stopPropagation(); select(hardpoint.id); } }}
-                {...(mounted ? removeOnMiddleClick(() => onRemoveWeapon(hardpoint.id)) : {})}
-              >
-                {!item && <span className="hardpoint-chip-label">{HARDPOINT_LABELS[hardpoint.type]}</span>}
-                <span className="hardpoint-chip-content">
-                  {item && <span className="hardpoint-chip-name">{item.name}</span>}
-                  {item && <span className="hardpoint-chip-tier">{slotsLabel(item.slots)}</span>}
-                  {mounted && <ModLogo id={mounted.item} />}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {(internals.length > 0 || specialRows.length > 0) && (
-        <div className="yaml-internals" aria-label="Internal slots">
-          {internals.map(slotType => (
-            <button
-              key={slotType}
-              type="button"
-              className={isActive && target?.internal === slotType ? 'component-card-item yaml-internal is-selected' : 'component-card-item yaml-internal'}
-              data-slot={slotType}
-              style={{ '--item-color': getYamlItem(build.internal[slotType])?.color ?? getSlotColor(slotType) } as CSSProperties}
-              title={`${INTERNAL_SLOT_LABELS[slotType]}: click to change it from the inventory`}
-              onClick={(event) => { event.stopPropagation(); if (!placing) onSelect({ zone, hardpoint: null, internal: slotType }); }}
-            >
-              <small>{INTERNAL_SLOT_LABELS[slotType]}</small>
-              <span className="yaml-internal-name">{getInternalLabel(build, slotType)}</span>
-              <ModLogo id={build.internal[slotType]} />
-            </button>
-          ))}
-          {specialRows.map((row, index) => row.kind === 'item' && (
-            <button
-              key={`special-${index}`}
-              type="button"
-              className="component-card-item yaml-internal"
-              data-category="equipment"
-              style={{ '--item-color': getItemColor(build.items[row.index].item, row.slotType) } as CSSProperties}
-              title={`${row.label}: middle-click to remove`}
-              onClick={(event) => { event.stopPropagation(); select(); }}
-              {...removeOnMiddleClick(() => onRemoveItem(row.index))}
-            >
-              <small>{SPECIAL_SLOT_LABELS[row.slotType] ?? 'Special'}</small>
-              <span className="yaml-internal-name">{row.label}</span>
-              <ModLogo id={build.items[row.index].item} />
-            </button>
-          ))}
-        </div>
-      )}
-
-      {data.actuators.length > 0 && (
-        <p className="yaml-actuators" title="Actuators">{data.actuators.map(actuator => actuator.replace('Actuator', '')).join(' · ')}</p>
-      )}
-
-      {expandedSlots ? (
-        <div className="component-card-slots">
-          <div className="slot-cells" aria-label={`Slots: ${used} of ${data.general}`}>
-            <span className="slot-cells-label">Slots <small>{used}/{data.general}</small></span>
-            {rows.filter(row => row.kind !== 'free' && isGeneral(row)).map((row, index) => (
-              <RowItem key={index} row={row} build={build} inCells onSelect={() => select()} onRemove={rowRemover(row, onRemoveWeapon, onRemoveItem)} />
-            ))}
-            {Array.from({ length: Math.max(0, free) }, (_, index) => <span key={`empty-${index}`} className="slot-cell-empty" aria-hidden="true" />)}
-          </div>
-        </div>
-      ) : (
-        <>
-          {rows.some(row => row.kind !== 'free' && row.kind !== 'weapon' && isGeneral(row)) && (
-            <div className="component-card-equipment">
-              {rows.filter(row => row.kind !== 'free' && row.kind !== 'weapon' && isGeneral(row)).map((row, index) => (
-                <RowItem key={index} row={row} build={build} onSelect={() => select()} onRemove={rowRemover(row, onRemoveWeapon, onRemoveItem)} />
-              ))}
-            </div>
-          )}
-          <div className="component-card-footer">
-            <SlotBar used={used} capacity={data.general} label="Slots" />
-          </div>
-        </>
-      )}
+      {actuators}
+      {general}
+      {internalSlots}
 
       <div className={armorTotal < data.maxArmor ? 'component-card-armor is-low' : 'component-card-armor'}>
         <span className="component-card-armor-total" title={`Armor ${armorTotal} / ${data.maxArmor}`}>
