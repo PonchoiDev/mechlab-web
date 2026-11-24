@@ -38,25 +38,42 @@ export function getInternalLabel(build: YamlBuild, slotType: string): string {
   return id ? getYamlItem(id)?.name ?? id : EMPTY_INTERNAL_LABELS[slotType] ?? slotType;
 }
 
-export function distributeDynamicFillers(mech: YamlMech, build: YamlBuild): Record<Zone, number> {
-  let remaining = getDynamicFillers(build);
-  const placed = Object.fromEntries(ZONES.map(zone => [zone, 0])) as Record<Zone, number>;
-  for (const zone of FILLER_ORDER) {
-    const amount = Math.min(remaining, Math.max(0, getFreeGeneralSlots(mech, build, zone)));
-    placed[zone] = amount;
-    remaining -= amount;
+export interface FillerGroup {
+  // La ranura de la pieza que los pide (Structureslot del Endo, Armorslot del Ferro): da su color.
+  slotType: string;
+  slots: number;
+}
+
+// Los rellenos dinámicos de cada pieza, uno tras otro, en las ranuras libres de cada ubicación.
+export function distributeDynamicFillerGroups(mech: YamlMech, build: YamlBuild): Record<Zone, FillerGroup[]> {
+  const placed = Object.fromEntries(ZONES.map(zone => [zone, []])) as unknown as Record<Zone, FillerGroup[]>;
+  const free = Object.fromEntries(FILLER_ORDER.map(zone => [zone, Math.max(0, getFreeGeneralSlots(mech, build, zone))])) as Record<Zone, number>;
+  for (const [slotType, id] of Object.entries(build.internal)) {
+    let remaining = getYamlItem(id)?.fillerSlots?.dynamic ?? 0;
+    for (const zone of FILLER_ORDER) {
+      const amount = Math.min(remaining, free[zone]);
+      if (amount === 0) continue;
+      placed[zone].push({ slotType, slots: amount });
+      free[zone] -= amount;
+      remaining -= amount;
+    }
   }
   return placed;
+}
+
+export function distributeDynamicFillers(mech: YamlMech, build: YamlBuild): Record<Zone, number> {
+  const groups = distributeDynamicFillerGroups(mech, build);
+  return Object.fromEntries(ZONES.map(zone => [zone, groups[zone].reduce((sum, group) => sum + group.slots, 0)])) as Record<Zone, number>;
 }
 
 export type ZoneRow =
   | { kind: 'weapon'; label: string; slots: number; hardpoint: string; item: string }
   | { kind: 'item'; label: string; slots: number; index: number; slotType: string }
-  | { kind: 'fixedFiller' | 'dynamicFiller'; label: string; slots: number }
+  | { kind: 'fixedFiller' | 'dynamicFiller'; label: string; slots: number; slotType: string }
   | { kind: 'free'; slots: number };
 
 // Lo que ocupa las ranuras generales y las propias de equipo (no las internas) de una ubicación.
-export function getZoneRows(mech: YamlMech, build: YamlBuild, zone: Zone, dynamicFillers: Record<Zone, number>): ZoneRow[] {
+export function getZoneRows(mech: YamlMech, build: YamlBuild, zone: Zone, fillers: Record<Zone, FillerGroup[]>): ZoneRow[] {
   const rows: ZoneRow[] = [];
   for (const weapon of build.weapons.filter(mounted => mounted.zone === zone)) {
     const item = getYamlItem(weapon.item);
@@ -68,12 +85,14 @@ export function getZoneRows(mech: YamlMech, build: YamlBuild, zone: Zone, dynami
     const slots = mounted.slotType === GENERAL_SLOT ? item?.slots ?? 1 : 1;
     rows.push({ kind: 'item', label: item?.name ?? mounted.item, slots, index, slotType: mounted.slotType });
   });
-  for (const id of Object.values(build.internal)) {
+  for (const [slotType, id] of Object.entries(build.internal)) {
     const fixed = getYamlItem(id)?.fillerSlots?.[zone];
-    if (fixed) rows.push({ kind: 'fixedFiller', label: getYamlItem(id)!.name, slots: fixed });
+    if (fixed) rows.push({ kind: 'fixedFiller', label: getYamlItem(id)!.name, slots: fixed, slotType });
   }
-  if (dynamicFillers[zone]) rows.push({ kind: 'dynamicFiller', label: 'Dynamic filler', slots: dynamicFillers[zone] });
-  const free = getFreeGeneralSlots(mech, build, zone) - dynamicFillers[zone];
+  for (const group of fillers[zone]) {
+    rows.push({ kind: 'dynamicFiller', label: getInternalLabel(build, group.slotType), slots: group.slots, slotType: group.slotType });
+  }
+  const free = getFreeGeneralSlots(mech, build, zone) - fillers[zone].reduce((sum, group) => sum + group.slots, 0);
   if (free > 0) rows.push({ kind: 'free', slots: free });
   return rows;
 }

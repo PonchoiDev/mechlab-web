@@ -78,7 +78,8 @@ def cargar_categoria(categoria):
     for mod in MODS:
         ruta = os.path.join(RUTA_YAML, mod, categoria + ".json")
         if os.path.exists(ruta):
-            assets.update(leer(ruta))
+            for clave, valor in leer(ruta).items():
+                assets[clave] = {**valor, "mod": mod}
     return assets
 
 
@@ -93,6 +94,74 @@ def cargar_recursos(nombre):
         for ruta in sorted(glob.glob(os.path.join(RUTA_YAML, mod, "resources", "*" + nombre))):
             datos.update(leer(ruta))
     return datos
+
+
+def a_srgb(componente):
+    """El juego guarda los colores en espacio lineal (LinearColor) y los enseña en sRGB."""
+    componente = max(0.0, min(1.0, componente))
+    return 12.92 * componente if componente <= 0.0031308 else 1.055 * componente ** (1 / 2.4) - 0.055
+
+
+def color_hex(lineal):
+    """«#rrggbb» de un color lineal: una lista [R, G, B, A] o un texto «(R=0.31,G=0.35,B=0.42,A=1)»."""
+    if isinstance(lineal, str):
+        valores = dict(re.findall(r"([RGBA])=([0-9.]+)", lineal))
+        lineal = [float(valores.get(canal, 0)) for canal in "RGB"]
+    if not lineal:
+        return None
+    return "#" + "".join(f"{round(a_srgb(canal) * 255):02x}" for canal in lineal[:3])
+
+
+# El color de cada tipo de anclaje en el mechlab: con los ajustes por defecto («MW5 default colors»), el de
+# los tipos de ranura de sus armas.
+RANURA_DEL_ANCLAJE = {
+    "ballistic": "GaussRifle_SlotType", "energy": "ERPPC_SlotType", "missile": "LRM20_SlotType", "ams": "AMS_SlotType",
+    "artillery": "ArtilleryMissile_SlotType", "melee": "Assault_Melee_Weapon_SlotType", "omni": "OmniSlotType_79",
+}
+
+
+def ajuste_de_yaml(nombre):
+    """El valor por defecto de un ajuste de YAML (Resources/gui_config.ini)."""
+    configuracion = leer(os.path.join(RUTA_YAML, "yet-another-mechlab", "resources", "gui_config.ini"))
+    pendientes = [configuracion]
+    while pendientes:
+        nodo = pendientes.pop()
+        if isinstance(nodo, dict):
+            if nodo.get("Var") == nombre:
+                return nodo.get("Default")
+            pendientes.extend(nodo.values())
+        elif isinstance(nodo, list):
+            pendientes.extend(nodo)
+    return None
+
+
+def construir_colores():
+    """Los colores del mechlab de YAML: el de las ranuras generales y su equipo, la opacidad del relleno de
+    las piezas, el de cada tipo de ranura (armadura roja, estructura azul, giroscopio verde...) y el de cada
+    tipo de anclaje."""
+    ranuras = por_nombre(leer(os.path.join(RUTA_YAML, "juego", "ranuras.json")))
+    ranuras.update(por_nombre(cargar_categoria("ranuras")))
+    por_tipo = {}
+    for nombre, valor in sorted(ranuras.items()):
+        datos = valor["propiedades"]
+        color = color_hex(datos.get("SlotColour"))
+        if color:
+            por_tipo[nombre] = {"name": texto(datos.get("SlotName")) or nombre, "color": color}
+    return {
+        "general": color_hex(ajuste_de_yaml("generalSlotColor")),
+        "tintOpacity": ajuste_de_yaml("yamlEquipmentInnterTintOpacity"),
+        "slots": por_tipo,
+        "hardpoints": {tipo: por_tipo[ranura]["color"] for tipo, ranura in RANURA_DEL_ANCLAJE.items() if ranura in por_tipo},
+    }
+
+
+def color_propio(nombre, categoria, propiedades):
+    """El color que da Equipment_Properties a una pieza, por su nombre o por su etiqueta (la más concreta)."""
+    if "color" in propiedades.get(nombre, {}):
+        return color_hex(propiedades[nombre]["color"])
+    etiquetas = [clave for clave in propiedades if categoria and "color" in propiedades[clave]
+                 and (categoria == clave or categoria.startswith(clave + "."))]
+    return color_hex(propiedades[max(etiquetas, key=len)]["color"]) if etiquetas else None
 
 
 def tamanos_de_ranuras(reglas):
@@ -173,6 +242,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         etiqueta = datos.get("WeaponType")
         ranura = ranura_de_arma(nombre, etiqueta, datos.get("WeaponSlotTypeAssetId", {}).get("Id", {}).get("PrimaryAssetName"), reglas)
         objetos[nombre] = {
+            "mod": valor["mod"],
             "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon",
             "tons": datos.get("Tonnage") or 0, "hardpoint": tipo_de_anclaje(etiqueta),
             "slotType": ranura, "slots": tamanos.get(ranura, 1),
@@ -180,7 +250,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
 
     for nombre, valor in por_nombre(cargar_categoria("municion")).items():
         datos = valor["propiedades"]
-        objetos[nombre] = {"name": texto(datos.get("Name")) or nombre, "kind": "ammo", "tons": datos.get("Tons") or 0,
+        objetos[nombre] = {"mod": valor["mod"], "name": texto(datos.get("Name")) or nombre, "kind": "ammo", "tons": datos.get("Tons") or 0,
                            "slots": datos.get("Slots") or 1, "slotTypes": [RANURA_GENERAL]}
 
     # Equipo de YAML con sus propiedades (Resources/*Equipment_Properties.json).
@@ -192,6 +262,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         datos = valor["propiedades"]
         extra = propiedades.get(nombre, {})
         objeto = {
+            "mod": valor["mod"],
             "name": extra.get("name") or texto(datos.get("Name")) or nombre, "kind": "equipment",
             "category": datos.get("EquipmentType"),
             "tons": extra.get("equipmentTons", datos.get("Tons") or 0),
@@ -205,6 +276,9 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             objeto["cooling"] = round(disipador["HealthyEfficiency"], 4)
         if disipador.get("HealthyCapacity"):
             objeto["heatCapacity"] = round(disipador["HealthyCapacity"], 4)
+        color = color_propio(nombre, datos.get("EquipmentType"), propiedades)
+        if color:
+            objeto["color"] = color
         if (datos.get("EquipmentType") or "").startswith("Equipment.Engine.Core"):
             objeto["rating"] = datos.get("TechLevel")
         if "fillerSlots" in extra:
@@ -394,7 +468,8 @@ def main():
     datos_quirks = {nombre: {"name": quirks[nombre].get("name", nombre), "description": quirks[nombre].get("description", ""),
                              "properties": quirks[nombre].get("properties", {})} for nombre in sorted(usados) if nombre in quirks}
     os.makedirs(RUTA_DESTINO, exist_ok=True)
-    for nombre, datos in (("mechs.json", mechs), ("items.json", objetos), ("quirks.json", datos_quirks)):
+    colores = construir_colores()
+    for nombre, datos in (("mechs.json", mechs), ("items.json", objetos), ("quirks.json", datos_quirks), ("colors.json", colores)):
         with open(os.path.join(RUTA_DESTINO, nombre), "w", encoding="utf-8") as archivo:
             json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
             archivo.write("\n")

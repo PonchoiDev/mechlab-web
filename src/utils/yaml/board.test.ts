@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  distributeDynamicFillers, getBuildIssues, getHardpointUsage, getInternalLabel,
+  distributeDynamicFillerGroups, distributeDynamicFillers, getBuildIssues, getHardpointUsage, getInternalLabel,
   getZoneRows, removeItemAt, setArmor, setMaxArmor
 } from './board';
 import { createStockBuild, setInternal, stripBuild } from './build';
@@ -17,9 +17,9 @@ describe('tablero del MechLab de YAML', () => {
   });
 
   it('las filas de una ubicación: armas, equipo, rellenos fijos del motor y ranuras libres', () => {
-    const fillers = distributeDynamicFillers(nightstar, stock);
+    const fillers = distributeDynamicFillerGroups(nightstar, stock);
     const leftTorso = getZoneRows(nightstar, stock, 'leftTorso', fillers);
-    expect(leftTorso.filter(row => row.kind === 'fixedFiller')).toEqual([{ kind: 'fixedFiller', label: 'XL Engine', slots: 3 }]);
+    expect(leftTorso.filter(row => row.kind === 'fixedFiller')).toEqual([{ kind: 'fixedFiller', label: 'XL Engine', slots: 3, slotType: 'EngineTypeSlot' }]);
     expect(leftTorso.reduce((sum, row) => sum + row.slots, 0)).toBe(12);
     const rightArm = getZoneRows(nightstar, stock, 'rightArm', fillers);
     expect(rightArm.filter(row => row.kind === 'weapon').map(row => row.slots).sort()).toEqual([1, 7]);
@@ -29,7 +29,9 @@ describe('tablero del MechLab de YAML', () => {
     const endo = setInternal(stripBuild(stock), 'Structureslot', 'ENDO');
     const fillers = distributeDynamicFillers(nightstar, endo);
     expect(Object.values(fillers).reduce((sum, count) => sum + count, 0)).toBe(14);
-    expect(getZoneRows(nightstar, endo, 'rightTorso', fillers).some(row => row.kind === 'dynamicFiller')).toBe(true);
+    const groups = distributeDynamicFillerGroups(nightstar, endo);
+    expect(getZoneRows(nightstar, endo, 'rightTorso', groups).filter(row => row.kind === 'dynamicFiller'))
+      .toEqual([{ kind: 'dynamicFiller', label: 'Structure Endo', slots: fillers.rightTorso, slotType: 'Structureslot' }]);
   });
 
   it('el uso de anclajes no cuenta los de cuerpo a cuerpo', () => {

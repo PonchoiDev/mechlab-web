@@ -78,7 +78,11 @@ FUNCION_RANURAS_DE_ARMAS = "Fix Vanilla Weapon Sizes"
 # deben pasar a la regla siguiente.
 PROPIEDADES_QUE_CIERRAN_BLOQUE = ("AssociatedDLC",)
 # Los archivos de Resources que lee YAML de cada mod activo (equipo, armas, quirks y su asignación).
-EXTENSIONES_RECURSOS = (".json",)
+# gui_config.ini también es JSON: trae los ajustes de YAML, con los colores del mechlab por defecto.
+EXTENSIONES_RECURSOS = (".json", ".ini")
+# El logo de cada mod, que el mechlab del juego pone en cada pieza («YA ML», «YA EC»): blanco y en color.
+LOGOS_DE_MOD = {"modicon128.png": "{}.png", "modicon128c.png": "{}-color.png"}
+RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "mechlab", "yaml", "mods")
 
 
 def ruta_montada(ruta):
@@ -258,6 +262,9 @@ def extraer_mod(carpeta_mod, destino):
             if archivo.lower().endswith(EXTENSIONES_RECURSOS):
                 shutil.copyfile(os.path.join(recursos, archivo), os.path.join(destino, "resources", archivo))
                 copiados.append(archivo)
+            elif archivo in LOGOS_DE_MOD:
+                os.makedirs(RUTA_LOGOS, exist_ok=True)
+                shutil.copyfile(os.path.join(recursos, archivo), os.path.join(RUTA_LOGOS, LOGOS_DE_MOD[archivo].format(os.path.basename(destino))))
 
     # La versión y el orden de carga del mod: el orden decide qué mod gana cuando dos traen el mismo asset.
     resumen = {

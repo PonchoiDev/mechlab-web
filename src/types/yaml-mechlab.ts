@@ -60,6 +60,10 @@ export type YamlItemKind = 'weapon' | 'ammo' | 'equipment';
 
 export interface YamlItem {
   name: string;
+  // Mod del que viene (yet-another-mechlab...); las del juego base no lo llevan.
+  mod?: string;
+  // Color propio en el mechlab (Equipment_Properties), si lo tiene.
+  color?: string;
   kind: YamlItemKind;
   tons: number;
   slots: number;

@@ -1,3 +1,4 @@
+import colorsData from '../../data/yaml/colors.json';
 import itemsData from '../../data/yaml/items.json';
 import mechsData from '../../data/yaml/mechs.json';
 import quirksData from '../../data/yaml/quirks.json';
@@ -22,4 +23,35 @@ export function yamlItemIds(): string[] {
 
 export function getYamlQuirk(id: string): YamlQuirk | undefined {
   return QUIRKS[id];
+}
+
+// Los colores del mechlab de YAML con sus ajustes por defecto (tools/generar_yaml.py, construir_colores):
+// cada pieza interna del color de su ranura, las armas del de su tipo de ranura y el resto del equipo de las
+// ranuras generales del color general, salvo que tenga uno propio.
+interface YamlColors {
+  general: string;
+  tintOpacity: number;
+  slots: Record<string, { name: string; color: string }>;
+  hardpoints: Record<string, string>;
+}
+
+export const YAML_COLORS = colorsData as YamlColors;
+// Los MDA escriben a veces el tipo de ranura en minúsculas (cockpit, y el asset es Cockpit).
+const SLOT_COLORS = new Map(Object.entries(YAML_COLORS.slots).map(([slotType, slot]) => [slotType.toLowerCase(), slot.color]));
+
+export function getSlotColor(slotType: string): string | undefined {
+  return SLOT_COLORS.get(slotType.toLowerCase());
+}
+
+export function getItemColor(id: string, slotType = 'General_SlotType'): string {
+  const item = ITEMS[id];
+  if (item?.kind === 'weapon') return (item.slotType && getSlotColor(item.slotType)) ?? YAML_COLORS.hardpoints[item.hardpoint ?? ''] ?? YAML_COLORS.general;
+  if (item?.color) return item.color;
+  return slotType === 'General_SlotType' ? YAML_COLORS.general : getSlotColor(slotType) ?? YAML_COLORS.general;
+}
+
+// El logo del mod de cada pieza («YA ML», «YA EC»...), como en el mechlab del juego; las del juego base no llevan.
+export function getModLogo(id: string | undefined): string | undefined {
+  const mod = id ? ITEMS[id]?.mod : undefined;
+  return mod ? `${import.meta.env.BASE_URL}mechlab/yaml/mods/${mod}.png` : undefined;
 }
