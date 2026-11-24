@@ -87,27 +87,28 @@ Cada regla marcada con ✔ está comprobada con capturas del juego, con YAML 0.9
 
 ## Criterios de aceptación
 
-Las cifras de CA1 a CA13 salen de capturas del mechlab del juego con el NSR-9J (95 t) y van en `src/utils/yaml/gameReference.test.ts`.
+Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (95 t) y van en `src/utils/yaml/gameReference.test.ts`.
 
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
-| CA1 | El NSR-9J de serie | se carga | pesa 95 de 95 t, va a 48,6 km/h, tiene 599 puntos de armadura (592 instalados y 7 del quirk de la cabeza) y 304 de estructura; lleva núcleo 285 con motor XL, con 3 ranuras fijas en cada torso lateral |
-| CA2 | El NSR-9J | se cuentan sus ranuras | cada torso lateral tiene 12 generales, el torso central 2, cada brazo 8 (más hombro, brazo, antebrazo y mano), cada pierna 2 (más cadera, muslo, pierna y pie) y la cabeza 1 |
-| CA3 | Las armas del inventario | se consulta su tamaño | AC/10 7 ranuras y 12 t, AC/2 1 y 6 t, AC/20 10 y 14 t, AC/5 BF 4 y 8 t, ametralladora 1 y 0,5 t, Gauss 7 y 15 t, Light Gauss 5 y 12 t, LB 2-X 3 y 6 t, LB 20-X 11 y 14 t, ER PPC 3 y 7 t |
-| CA4 | El NSR-9J de serie | se cambian las dos Gauss por dos AC/2 | pesa 77 t |
-| CA5 | El NSR-9J de serie | se quitan las dos Gauss y el Medium Pulse Laser del brazo derecho y se pone un AC/10 en el brazo derecho y un AC/2 en el izquierdo | pesa 81 t |
-| CA6 | El NSR-9J de serie | se cambia la armadura por la Primitive (× 1,495) | pesa 104,16 t |
-| CA7 | El NSR-9J de serie | se cambia la estructura por la reforzada | pesa 100 t y tiene 603 puntos de estructura (+299) |
-| CA8 | El NSR-9J vacío, sin núcleo de motor, con armadura Heavy Ferro | se calcula | pesa 27,42 t y ocupa 21 ranuras con rellenos dinámicos |
-| CA9 | El NSR-9J vacío, sin núcleo de motor, con estructura Endo y armadura estándar | se calcula | pesa 26,5 t y ocupa 14 ranuras con rellenos dinámicos |
-| CA10 | El NSR-9J vacío, con armadura y estructura estándar, motor XL, giroscopio estándar y sin núcleo | se calcula | pesa 31 t, con 0 de refrigeración y 30 de capacidad |
-| CA11 | El de CA10 | se pone el núcleo 285 | pesa 42,5 t, va a 48,6 km/h y tiene 1,0 de refrigeración y 40 de capacidad; con el giroscopio Agility sigue en 42,5 t y gira 5,3 °/s más; con el giroscopio XL pesa 41 t |
-| CA12 | El de CA10 con el núcleo 105 | se calcula | con el giroscopio estándar pesa 29 t y con el XL 28 t; va a 17,91 km/h y tiene 0,4 de refrigeración y 34 de capacidad; cambiar el motor XL por el estándar suma 1,5 t |
-| CA13 | El de CA10 con el núcleo 285 | se pone el Double Heat Sink Kit / el Royal DHS Kit / el Royal DHS Kit y un disipador doble en el torso derecho | pesa 42,5 t con 2,0 de refrigeración y 50 de capacidad / 42,5 t, 2,2 y 50 / 43,5 t y 52 de capacidad |
-| CA14 | Un 'Mech con Endo y sin 14 ranuras generales libres | se intenta montar | no cabe, y el motivo dice cuántas ranuras faltan |
-| CA15 | Un arma | se monta | necesita un anclaje libre de su tipo y sus ranuras libres en la misma ubicación; un AC/20 (10) no cabe en un brazo con 8 ranuras |
-| CA16 | Los datos | se generan | las variantes tienen los mismos ids que en el MechLab de MW5; ninguna es de campaña, tutorial, jefe ni cinemática; las reglas de `reglas.json` están aplicadas a los tipos de ranura |
-| CA17 | Una build | se codifica y se decodifica | sale la misma build; un código del MechLab de MW5 no se abre como build de YAML |
+| CA1 | El NSR-9J de serie | se carga | pesa 95 de 95 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 37,5 de armas con el Small Laser de la cabeza, 7 de munición y 4 disipadores dobles), va a 48,6 km/h, tiene 599 puntos de armadura (592 instalados y 7 del quirk de la cabeza) y 304 de estructura; lleva núcleo 285 con motor XL, con 3 ranuras fijas en cada torso lateral |
+| CA2 | El NSR-9J de serie sin sus tres láseres (Small Laser de la cabeza y Medium Pulse Laser de cada brazo), como lo monta el «Default loadout» del juego | se calcula | pesa 90,5 t |
+| CA3 | El NSR-9J | se cuentan sus ranuras | cada torso lateral tiene 12 generales, el torso central 2, cada brazo 8 (más hombro, brazo, antebrazo y mano), cada pierna 2 (más cadera, muslo, pierna y pie) y la cabeza 1 |
+| CA4 | Las armas del inventario | se consulta su tamaño | AC/10 7 ranuras y 12 t, AC/2 1 y 6 t, AC/20 10 y 14 t, AC/5 BF 4 y 8 t, ametralladora 1 y 0,5 t, Gauss 7 y 15 t, Light Gauss 5 y 12 t, LB 2-X 3 y 6 t, LB 20-X 11 y 14 t, ER PPC 3 y 7 t |
+| CA5 | El NSR-9J de serie | se cambian las dos Gauss por dos AC/2 | pesa 77 t |
+| CA6 | El NSR-9J de serie | se quitan las dos Gauss y el Medium Pulse Laser del brazo derecho y se pone un AC/10 en el brazo derecho y un AC/2 en el izquierdo | pesa 81 t |
+| CA7 | El NSR-9J de serie | se cambia la armadura por la Primitive (× 1,495) | pesa 104,16 t |
+| CA8 | El NSR-9J de serie | se cambia la estructura por la reforzada | pesa 100 t y tiene 603 puntos de estructura (+299) |
+| CA9 | El NSR-9J vacío, sin núcleo de motor, con armadura Heavy Ferro | se calcula | pesa 27,42 t y ocupa 21 ranuras con rellenos dinámicos |
+| CA10 | El NSR-9J vacío, sin núcleo de motor, con estructura Endo y armadura estándar | se calcula | pesa 26,5 t y ocupa 14 ranuras con rellenos dinámicos |
+| CA11 | El NSR-9J vacío, con armadura y estructura estándar, motor XL, giroscopio estándar y sin núcleo | se calcula | pesa 31 t, con 0 de refrigeración y 30 de capacidad |
+| CA12 | El de CA11 | se pone el núcleo 285 | pesa 42,5 t, va a 48,6 km/h y tiene 1,0 de refrigeración y 40 de capacidad; con el giroscopio Agility sigue en 42,5 t y gira 5,3 °/s más; con el giroscopio XL pesa 41 t |
+| CA13 | El de CA11 con el núcleo 105 | se calcula | con el giroscopio estándar pesa 29 t y con el XL 28 t; va a 17,91 km/h y tiene 0,4 de refrigeración y 34 de capacidad; cambiar el motor XL por el estándar suma 1,5 t |
+| CA14 | El de CA11 con el núcleo 285 | se pone el Double Heat Sink Kit / el Royal DHS Kit / el Royal DHS Kit y un disipador doble en el torso derecho | pesa 42,5 t con 2,0 de refrigeración y 50 de capacidad / 42,5 t, 2,2 y 50 / 43,5 t y 52 de capacidad |
+| CA15 | Un 'Mech con Endo y sin 14 ranuras generales libres | se intenta montar | no cabe, y el motivo dice cuántas ranuras faltan |
+| CA16 | Un arma | se monta | necesita un anclaje libre de su tipo y sus ranuras libres en la misma ubicación; un AC/20 (10) no cabe en un brazo con 8 ranuras |
+| CA17 | Los datos | se generan | las variantes tienen los mismos ids que en el MechLab de MW5; ninguna es de campaña, tutorial, jefe ni cinemática; las reglas de `reglas.json` están aplicadas a los tipos de ranura |
+| CA18 | Una build | se codifica y se decodifica | sale la misma build; un código del MechLab de MW5 no se abre como build de YAML |
 
 ## Fuera de alcance
 
@@ -126,5 +127,5 @@ Las cifras de CA1 a CA13 salen de capturas del mechlab del juego con el NSR-9J (
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA13, con las cifras de las capturas) y `src/utils/yaml/mechlab.test.ts` (CA14 a CA17).
+1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas) y `src/utils/yaml/mechlab.test.ts` (CA15 a CA18).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, compartir y guardar una build.
