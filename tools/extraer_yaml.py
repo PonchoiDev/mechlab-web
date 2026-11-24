@@ -62,9 +62,10 @@ TABLAS_IGNORADAS = ("NewsFeed", "VersionLog", "Icons", "Filters", "/LevelGenerat
 # YAML no guarda en datos el tamaño en ranuras de las armas del juego: al arrancar, dos funciones de
 # este blueprint cambian el tamaño de los tipos de ranura del juego base (el AC/10 pasa de 4 a 7, como
 # en el juego de mesa) y asignan a las armas de los DLC tipos de ranura propios. Se leen de su bytecode.
-# Del juego base solo hacen falta los tipos de ranura: YAML los usa en sus anclajes y en sus 'Mechs
-# (115 de 130 no están en los mods) y cambia su tamaño al arrancar. Las armas y el equipo del juego ya
-# están en tools/datos-juego/items/.
+# Del juego base hacen falta los tipos de ranura, que YAML usa en sus anclajes y en sus 'Mechs (115 de
+# 130 no están en los mods) y cuyo tamaño cambia al arrancar, y los loadouts de serie: YAML sustituye
+# 718 y el resto los convierte al cargar. Las armas y el equipo del juego ya están en
+# tools/datos-juego/items/.
 PAK_DEL_JUEGO = os.path.join("MW5Mercs", "Content", "Paks", "MW5Mercs-WindowsNoEditor.pak")
 CONTENIDO_DEL_JUEGO = "MW5Mercs/Content/"
 CARPETA_DEL_JUEGO = "juego"
@@ -272,10 +273,11 @@ def extraer_mod(carpeta_mod, destino):
 
 
 def extraer_juego(carpeta_juego, destino):
-    ranuras = extraer_pak(os.path.join(carpeta_juego, PAK_DEL_JUEGO), solo={"ranuras"}).get("ranuras", {})
+    datos = extraer_pak(os.path.join(carpeta_juego, PAK_DEL_JUEGO), solo={"ranuras", "loadouts"})
     os.makedirs(destino, exist_ok=True)
-    escribir(os.path.join(destino, "ranuras.json"), ranuras)
-    return len(ranuras)
+    for categoria, assets in datos.items():
+        escribir(os.path.join(destino, categoria + ".json"), assets)
+    return {categoria: len(assets) for categoria, assets in datos.items()}
 
 
 def main():
@@ -291,8 +293,8 @@ def main():
         resumen = extraer_mod(os.path.join(carpeta, id_mod), os.path.join(RUTA_DESTINO, nombre))
         categorias = ", ".join(f"{n} {c}" for n, c in resumen["categorias"].items())
         print(f"{resumen['nombre']} {resumen['version']}: {categorias}")
-    total = extraer_juego(carpeta_juego, os.path.join(RUTA_DESTINO, CARPETA_DEL_JUEGO))
-    print(f"Juego base: {total} tipos de ranura")
+    totales = extraer_juego(carpeta_juego, os.path.join(RUTA_DESTINO, CARPETA_DEL_JUEGO))
+    print("Juego base: " + ", ".join(f"{categoria} {total}" for categoria, total in sorted(totales.items())))
 
 
 if __name__ == "__main__":
