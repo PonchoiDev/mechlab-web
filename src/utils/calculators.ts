@@ -4,6 +4,7 @@ import type { Upgrade } from '../types/upgrade';
 import { getHardpointViews } from './equipment';
 import { getAmmoLabel, isJumpJet } from './items';
 import { getUpgradeModifiers, getWeaponBonus, NO_UPGRADE_MODIFIERS, type UpgradeModifiers } from './upgrades';
+import { getRangeStep } from './rangeRadar';
 import { mapZones } from './zones';
 
 const ARMOR_POINTS_PER_TON = 32;
@@ -317,12 +318,7 @@ export const getHeatTimes = ({ heatCapacity, heatPerSecond, coolingRate }: { hea
 // Daño por alcance para el radar del análisis. En MW5, un arma hace todo su daño hasta su alcance óptimo
 // y, entre el óptimo y el máximo, un daño que baja en línea recta hasta cero (la caída de daño del juego).
 // El cuerpo a cuerpo no cuenta. No hay alcance mínimo, así que belowMin es siempre 0 (en BATTLETECH no).
-const RANGE_STEPS = [50, 100, 150, 200, 250, 300, 500, 750, 1000];
-const MAX_RANGE_RINGS = 10;
-
-// El primer paso con el que el alcance máximo cabe en 10 anillos o menos.
-export const getRangeStep = (maxRange: number): number =>
-  RANGE_STEPS.find(step => Math.ceil(maxRange / step) <= MAX_RANGE_RINGS) ?? RANGE_STEPS[RANGE_STEPS.length - 1];
+export { getRangeStep };
 
 const damageAt = (weapon: WeaponPerformance, distance: number): number => {
   const full = weapon.range ?? 0;

@@ -49,8 +49,14 @@ function acceptsWeapon(hardpointType: YamlHardpointType, weaponType: YamlHardpoi
   return hardpointType === weaponType || (hardpointType === 'omni' && !!weaponType && OMNI_TYPES.includes(weaponType));
 }
 
+// El nivel de un arma montada, que cambia sus cifras (docs/specs/estadisticas-yaml.md).
+export function setWeaponTier(build: YamlBuild, hardpoint: string, tier: number): YamlBuild {
+  return { ...build, weapons: build.weapons.map(weapon => weapon.hardpoint === hardpoint ? { ...weapon, tier } : weapon) };
+}
+
 // Con un anclaje elegido, el arma va en él (sustituyendo la que tenga); si no, en el primero libre de su tipo.
-export function mountWeapon(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: string, hardpointId?: string): MountResult {
+// Sin nivel, el arma va en el suyo por defecto.
+export function mountWeapon(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: string, hardpointId?: string, tier?: number): MountResult {
   const item = getYamlItem(itemId);
   if (!item || item.kind !== 'weapon') return { error: 'Not a weapon' };
   if (hardpointId) build = removeWeapon(build, hardpointId);
@@ -60,7 +66,7 @@ export function mountWeapon(mech: YamlMech, build: YamlBuild, zone: Zone, itemId
   if (!hardpoint) return { error: `No free ${item.hardpoint} hardpoint` };
   const free = getFreeGeneralSlots(mech, build, zone);
   if (free < item.slots) return { error: `Needs ${item.slots} slots; only ${free} free` };
-  const next = { ...build, weapons: [...build.weapons, { zone, hardpoint: hardpoint.id, item: itemId }] };
+  const next = { ...build, weapons: [...build.weapons, { zone, hardpoint: hardpoint.id, item: itemId, ...(tier === undefined ? {} : { tier }) }] };
   const fillers = dynamicFillersProblem(mech, next);
   return fillers ? { error: fillers } : { build: next };
 }
