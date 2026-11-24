@@ -246,7 +246,7 @@ GAUSS_MEJORADOS = (
 BONIFICACIONES_DE_EQUIPO = (
     "turnSpeedMulti", "torsoTwistRateMulti", "torsoTwistRateYawMulti", "torsoTwistAngleMulti", "torsoTwistAngleYawMulti",
     "armTwistAngleMulti", "armTwistAngleYawMulti", "sensorRangeBonus", "sensorRangeMulti",
-    "armorComponentFront", "armorComponentRear", "structureComponent",
+    "armorComponentFront", "armorComponentRear", "structureComponent", "jumpJetFuelBurnTimeMulti", "jumpJetZAccelMulti",
 )
 # Armadura y estructura que da un arma a su ubicación, de Weapon_Properties.json por su etiqueta: la gran espada
 # de asalto, +40 y +32; los puños, +10 y +8 (comprobado con el CP-10-P en el mechlab del juego).

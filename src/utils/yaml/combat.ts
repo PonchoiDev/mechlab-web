@@ -2,7 +2,6 @@ import type { Zone } from '../../types/mech';
 import type {
   YamlBuild, YamlCombat, YamlItem, YamlMech, YamlWeaponFamily, YamlWeaponGroup, YamlWeaponTier
 } from '../../types/yaml-mechlab';
-import { EMPTY_VALUE } from '../format';
 import { getRangeStep, type RangeProfileEntry } from '../rangeRadar';
 import { getYamlItem, getYamlQuirk } from './data';
 import { getArmorPoints, getHeat, getStructurePoints, getTopSpeed } from './stats';
@@ -23,6 +22,11 @@ const MIN_MULTIPLIER = 0.001;
 // El alcance de sensores de un 'Mech sin bonificaciones (GetSensorRange del juego, 80.000 cm).
 const BASE_SENSOR_RANGE = 800;
 const PULSE_LASER_TAG = 'Weapon.Energy.Laser.Pulse';
+// La altura de salto que estima el juego (EstimateMaxJumpJetHeight, nativo): 34 m más 8 por retrorreactor, de
+// tres capturas (GHR-5J con dos y con cuatro de clase III, 50 y 66 m; JVN-11A con seis de clase V, 82 m).
+// Todas las clases tienen el mismo empuje y van con su tramo de tonelaje, así que el tonelaje no cuenta.
+const JUMP_BASE_HEIGHT = 34;
+const JUMP_HEIGHT_PER_JET = 8;
 // Las ubicaciones con los nombres que usan los quirks en «mechParts».
 const MECH_PART_NAMES: Record<Zone, string> = {
   head: 'Head', centerTorso: 'CenterTorso', leftTorso: 'LeftTorso', rightTorso: 'RightTorso',
@@ -269,8 +273,7 @@ export interface YamlMechStats {
   alphaHeat: number;
   heatCapacity: number;
   torsoTwistRate: number;
-  // Sin cifra con retrorreactores: el juego la estima con su empuje y aún no está calibrada.
-  jumpHeight: number | null;
+  jumpHeight: number;
   speed: number;
   torsoYaw: number;
   weaponRange: number;
@@ -279,6 +282,15 @@ export interface YamlMechStats {
   amsIntercept: number;
   amsRange: number;
   ammo: number;
+}
+
+// EstimateJumpJetHeightFromLoadout: la estimación del juego por los multiplicadores de combustible y empuje
+// vertical del equipo y los quirks, redondeada al metro.
+function getJumpHeight(equipment: YamlItem[], properties: Record<string, unknown>[]): number {
+  const jets = equipment.filter(item => item.slotTypes?.some(slotType => /jumpjet/i.test(slotType))).length;
+  if (jets === 0) return 0;
+  return Math.round((JUMP_BASE_HEIGHT + JUMP_HEIGHT_PER_JET * jets)
+    * sumMultiplier(properties, 'jumpJetFuelBurnTimeMulti') * sumMultiplier(properties, 'jumpJetZAccelMulti'));
 }
 
 // DecimalRounder de YAML: a un decimal.
@@ -314,7 +326,7 @@ export function getYamlMechStats(mech: YamlMech, build: YamlBuild): YamlMechStat
     torsoTwistRate: roundToTenth(movement.torsoTwistRate * sumMultiplier(properties, 'torsoTwistRateMulti', 'torsoTwistRateYawMulti')),
     torsoYaw: movement.torsoYaw >= 360 ? 360 : roundToTenth(movement.torsoYaw * sumMultiplier(properties, 'torsoTwistAngleMulti', 'torsoTwistAngleYawMulti')),
     armYaw: roundToTenth(movement.armYaw * sumMultiplier(properties, 'armTwistAngleMulti', 'armTwistAngleYawMulti')),
-    jumpHeight: equipment.some(item => item.slotTypes?.some(slotType => /jumpjet/i.test(slotType))) ? null : 0,
+    jumpHeight: getJumpHeight(equipment, properties),
     speed: getTopSpeed(mech, build),
     // El juego redondea a centímetros y divide entre 100 como entero: 2.395,8 m es 2.395.
     weaponRange: Math.max(0, ...ranged.map(weapon => Math.trunc(Math.round(weapon.maxRange * 100) / 100))),
@@ -366,7 +378,7 @@ export function getYamlStatsPanel(mech: YamlMech, build: YamlBuild): YamlStatCel
   const stats = getYamlMechStats(mech, build);
   return PANEL.map(row => row.map(({ key, label, max }) => {
     const value = stats[key];
-    const ratio = value === null ? 0 : max === null ? (value > 0 ? 1 : 0) : Math.min(1, Math.max(0, value / max));
-    return { key, label, value: value === null ? EMPTY_VALUE : formatYamlStat(value), ratio };
+    const ratio = max === null ? (value > 0 ? 1 : 0) : Math.min(1, Math.max(0, value / max));
+    return { key, label, value: formatYamlStat(value), ratio };
   }));
 }
