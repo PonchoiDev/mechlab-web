@@ -180,9 +180,19 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "slots": extra.get("slots", datos.get("Slots") or 1),
             "slotTypes": [s["Id"]["PrimaryAssetName"] for s in datos.get("SupportedSlotTypesAssetId", [])] or [RANURA_GENERAL],
         }
+        # YAML monta casi todo su equipo como disipadores: el que refrigera por sí mismo (el Royal DHS Kit,
+        # «Heat efficiency 0.2») lo dice en el asset, no en las propiedades.
+        disipador = datos.get("HeatSink") or {}
+        if disipador.get("HealthyEfficiency"):
+            objeto["cooling"] = round(disipador["HealthyEfficiency"], 4)
+        if disipador.get("HealthyCapacity"):
+            objeto["heatCapacity"] = round(disipador["HealthyCapacity"], 4)
         if (datos.get("EquipmentType") or "").startswith("Equipment.Engine.Core"):
             objeto["rating"] = datos.get("TechLevel")
-        for campo in ("fillerSlots", "engineRelativeWeight", "relativeWeight", "structureWeightMulti", "structureMulti",
+        if "fillerSlots" in extra:
+            # Las ranuras fijas van por ubicación con los nombres del juego (LeftTorso); se pasan a los de la web.
+            objeto["fillerSlots"] = {CAMPOS_ZONA.get(clave, clave): valor for clave, valor in extra["fillerSlots"].items()}
+        for campo in ("engineRelativeWeight", "relativeWeight", "structureWeightMulti", "structureMulti",
                       "armorWeightMulti", "armorPerTon", "armorMulti", "engineHeatsinkEfficiency", "engineHeatsinkCapacity",
                       "heatEfficiency", "fixed"):
             if campo in extra:
