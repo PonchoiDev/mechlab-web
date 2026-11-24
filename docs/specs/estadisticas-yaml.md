@@ -53,7 +53,8 @@ Todas comprobadas con la captura del NSR-9J de serie con sus armas en nivel 3 y 
   - Resto de balísticas: óptimo × 2.
   - Misiles: el máximo del nivel × `maxRangeMulti`.
   - AMS: el máximo × `maxRangeMulti`.
-- **Cuerpo a cuerpo:** daño × `damageMulti` y enfriamiento × `cooldownMulti`; daño por segundo = daño / (`Melee.Duration` + enfriamiento). Cuentan las armas montadas en anclajes de cuerpo a cuerpo, no los actuadores (manos y antebrazos).
+- **Cuerpo a cuerpo (✔):** daño × `damageMulti` y enfriamiento × `cooldownMulti`; daño por segundo = daño / (`Melee.Duration` + enfriamiento). Cuentan las armas montadas en anclajes de cuerpo a cuerpo, también las nudilleras de la mano, pero no los ataques de los actuadores (la «Mano de asalto»). Con el quirk Melee Specialization (+10 % de daño y −10 % de enfriamiento), la gran espada de asalto de nivel 1 hace 93,5 de daño y 17,48 por segundo.
+- **Armadura y estructura de las armas (✔):** las armas cuerpo a cuerpo suman armadura y estructura a su ubicación, sin peso (`armorComponentFront` y `structureComponent` de `Weapon_Properties.json`, por etiqueta): la gran espada de asalto +40 y +32, los puños de asalto +10 y +8. El equipo con esas propiedades también las suma.
 - **Movimiento:** cada cifra del MDA × su multiplicador (suma de los del equipo y los quirks), redondeada a un decimal.
 - **Sensores (✔):** (800 m + `sensorRangeBonus`) × `sensorRangeMulti` × (1 + (`SensorRangeModifier` − 1) de cada sonda + porcentaje de los computadores de puntería). NSR-9J: 800 + 50 (Command 'Mech) + 100 (SLDF) = 950 m.
 
@@ -112,6 +113,7 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 | CA8 | La build de referencia | se calcula el daño por alcance | a 500 m llega el daño de las seis armas salvo el Small Laser, con el Medium Pulse Laser ya bajando; a 2.400 m no llega ninguna; el radar tiene diez anillos de 250 m |
 | CA9 | La tabla de análisis | se suman sus filas | dan el daño alfa, el daño por segundo y el calor del panel |
 | CA10 | El GHR-5J de serie con sus armas en nivel 3 (Streak SRM 2, ER Large Laser, AMS y dos Medium Laser), motor estándar y cuatro retrorreactores de clase III | se calcula el panel | Armor 416, Structure 223, Melee dmg avg 0, Alpha damage 27,28, Damage/s 7,03, Melee dmg/s avg 0, Weapon heat/s 3,27, Cooling heat/s 2,2, Turn rate 85,9, Alpha heat 15,12, Heat capacity 52, Torso twist 108, Speed 64,8, Torso yaw 120, Weapon range 1.485, Sensor range 800, Arm yaw 30, AMS intercept/s 4,03, AMS range 220, Ammo 5.640 |
+| CA11 | El CP-10-P de serie con una gran espada de asalto de nivel 1 en el brazo izquierdo en lugar de la claymore, con y sin nudilleras de asalto de nivel 2 en la mano derecha | se calcula el panel | con nudilleras: Armor 376, Structure 325, Melee dmg avg 64,62 y Melee dmg/s avg 12,82; sin ellas: 366, 317, 93,5 y 17,48. En los dos: Alpha damage 36,6, Damage/s 10,16, Weapon heat/s 3,14, Alpha heat 11,55, Cooling 1, Heat capacity 40, Turn rate 71,6, Torso twist 90, Torso yaw 80, Arm yaw 20, Weapon range 900, Sensor range 900, Ammo 880 |
 
 ## Fuera de alcance
 
@@ -123,7 +125,7 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 ## Pendiente de comprobar en el juego
 
 - **Jump height:** la calcula el juego (`EstimateMaxJumpJetHeight`) con el empuje de los retrorreactores y el peso del 'Mech. Sin retrorreactores es 0; con ellos, la web no enseña cifra hasta calibrarla. El GHR-5J (70 t) con cuatro de clase III da 66 m; con un solo dato no se separa el efecto del número de retrorreactores, de su clase y del tonelaje.
-- Las cifras con armas de cuerpo a cuerpo montadas.
+- **Ranuras de los brazos con armas cuerpo a cuerpo:** el MDA del CP-10-P da 3 ranuras generales al brazo izquierdo, y el mechlab de YAML enseña la gran espada (6 ranuras, aunque su tipo de ranura dice 7) y 3 libres; las nudilleras ocupan 1 (su tipo dice 2). La regla con la que YAML añade esas ranuras está por encontrar; mientras, la web no deja montar la gran espada en ese brazo.
 
 ## Plan de pruebas
 

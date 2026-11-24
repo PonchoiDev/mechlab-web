@@ -140,4 +140,25 @@ describe('estadísticas del MechLab de YAML', () => {
       'AMS intercept/s': '4.03', 'AMS range (m)': '220', 'Ammo': '5640'
     });
   });
+
+  it('CA11: el CP-10-P con gran espada y nudilleras da las cifras de cuerpo a cuerpo del juego', () => {
+    const cyclops = findYamlMech('CP-10-P')!;
+    const cpStock = createStockBuild(cyclops);
+    // La gran espada va en el anclaje de la claymore. Se pone sin mountWeapon: la web aún no da al brazo las
+    // ranuras que le añade YAML (docs/specs/estadisticas-yaml.md, pendiente).
+    const withSword: YamlBuild = {
+      ...cpStock,
+      weapons: cpStock.weapons.map(mounted => mounted.item === 'Claymore_Assault' ? { ...mounted, item: 'Greatsword_Assault', tier: 1 } : mounted)
+    };
+    const withKnuckles = mountWeapon(cyclops, withSword, 'rightArm', 'Knuckles_Assault', undefined, 2).build!;
+    const values = (build: YamlBuild) => Object.fromEntries(getYamlStatsPanel(cyclops, build).flat().map(cell => [cell.label, cell.value]));
+    const ranged = {
+      'Alpha damage': '36.6', 'Damage/s': '10.16', 'Weapon heat/s': '3.14', 'Cooling heat/s': '1', 'Turn rate °/s': '71.6',
+      'Alpha heat': '11.55', 'Heat capacity': '40', 'Torso twist °/s': '90', 'Jump height (m)': '0', 'Speed (km/h)': '64.8',
+      'Torso yaw °': '80', 'Weapon range (m)': '900', 'Sensor range (m)': '900', 'Arm yaw °': '20',
+      'AMS intercept/s': '0', 'AMS range (m)': '0', 'Ammo': '880'
+    };
+    expect(values(withKnuckles)).toEqual({ ...ranged, 'Armor': '376', 'Structure': '325', 'Melee dmg avg': '64.62', 'Melee dmg/s avg': '12.82' });
+    expect(values(withSword)).toEqual({ ...ranged, 'Armor': '366', 'Structure': '317', 'Melee dmg avg': '93.5', 'Melee dmg/s avg': '17.48' });
+  });
 });
