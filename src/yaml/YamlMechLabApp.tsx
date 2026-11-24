@@ -1,0 +1,275 @@
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { BrandMark } from '../components/BrandMark';
+import { BuildStatus } from '../components/BuildStatus';
+import { ContextMenu, type MenuEntry } from '../components/ContextMenu';
+import { FeedbackDialog } from '../components/FeedbackDialog';
+import { SiteNav } from '../components/SiteNav';
+import { SupportLink } from '../components/SupportLink';
+import { Toast } from '../components/Toast';
+import { UtilityToolbar } from '../components/UtilityToolbar';
+import { useViewPreferences } from '../hooks/useViewPreferences';
+import { copyText } from '../services/clipboard';
+import type { Zone } from '../types/mech';
+import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
+import { distributeDynamicFillers, removeItemAt, setArmor, setMaxArmor } from '../utils/yaml/board';
+import { clearArmor, createStockBuild, removeKind, removeWeapon, type MountResult } from '../utils/yaml/build';
+import { decodeYamlBuild, encodeYamlBuild } from '../utils/yaml/buildCode';
+import { findYamlMech, getYamlItem, yamlMechs } from '../utils/yaml/data';
+import { autoPlaceYamlItem, chooseYamlInternal, getYamlDropZones, placeYamlItem, type YamlInventoryTarget } from '../utils/yaml/inventory';
+import { getYamlBuildIssues, getYamlReadouts } from '../utils/yaml/readouts';
+import { ZONE_LABELS } from '../utils/zones';
+import { YamlBoard } from './YamlBoard';
+import { YamlInventoryPanel } from './YamlInventoryPanel';
+import { YamlMechPicker } from './YamlMechPicker';
+
+const DEFAULT_MECH = 'NSR-9J';
+// La vista (celdas, tablero compacto, inventario y su lado) se guarda aparte de la de MW5 y BATTLETECH.
+const YAML_VIEW_KEY = 'mw-builder:yaml:view';
+// Pulsar aquí no quita la ubicación elegida: el inventario, el tablero y cualquier control, como en MW5.
+const KEEPS_TARGET = ['.inventory-panel', '.component-card', '.mech-picker', '.context-menu', 'button', 'a', 'input', 'select', 'label', '[role="button"]'].join(', ');
+
+// La build sale del enlace: compartida (?b=) o la de serie de una variante (?mech=). Después, la dirección
+// lleva siempre la build actual.
+function initialState(): { mech: YamlMech; build: YamlBuild } {
+  const params = new URLSearchParams(window.location.search);
+  const shared = params.get('b') ? decodeYamlBuild(params.get('b')!) : null;
+  const sharedMech = shared ? findYamlMech(shared.mechId) : undefined;
+  if (shared && sharedMech) return { mech: sharedMech, build: shared.build };
+  const mech = findYamlMech(params.get('mech') ?? '') ?? findYamlMech(DEFAULT_MECH)!;
+  return { mech, build: createStockBuild(mech) };
+}
+
+export function YamlMechLabApp() {
+  const [{ mech, build }, setState] = useState(initialState);
+  const [target, setTarget] = useState<YamlInventoryTarget | null>(null);
+  const [pickedItem, setPickedItem] = useState<string | null>(null);
+  const [dragged, setDragged] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ id: number; message: string } | null>(null);
+  const [menu, setMenu] = useState<{ title: string; x: number; y: number; entries: MenuEntry[] } | null>(null);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const view = useViewPreferences(YAML_VIEW_KEY);
+
+  const setBuild = (next: YamlBuild) => setState({ mech, build: next });
+  const showToast = useCallback((message: string) => setToast(current => ({ id: (current?.id ?? 0) + 1, message })), []);
+  const buildCode = encodeYamlBuild(mech.id, build);
+  const stockCode = useMemo(() => encodeYamlBuild(mech.id, createStockBuild(mech)), [mech]);
+  const buildUrl = `${window.location.origin}${window.location.pathname}?b=${buildCode}`;
+  const readouts = useMemo(() => getYamlReadouts(mech, build), [mech, build]);
+  const issues = useMemo(() => getYamlBuildIssues(mech, build), [mech, build]);
+  const fillers = useMemo(() => distributeDynamicFillers(mech, build), [mech, build]);
+  const held = dragged ?? pickedItem;
+  const dropZones = useMemo(() => held ? getYamlDropZones(mech, build, held) : null, [mech, build, held]);
+
+  useEffect(() => {
+    window.history.replaceState(null, '', `?b=${buildCode}`);
+  }, [buildCode]);
+
+  const clearTarget = useCallback(() => setTarget(null), []);
+  useEffect(() => {
+    if (!target) return;
+    const handleKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape' && !event.defaultPrevented && !pickedItem) clearTarget(); };
+    const handleClick = (event: MouseEvent) => {
+      const element = event.target;
+      if (!(element instanceof Element) || !element.isConnected || element.closest(KEEPS_TARGET)) return;
+      clearTarget();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('click', handleClick);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('click', handleClick);
+    };
+  }, [target, pickedItem, clearTarget]);
+
+  // Como en MW5: si no se puede, avisa del motivo.
+  const apply = (result: MountResult, announce?: string) => {
+    if (!result.build) {
+      showToast(result.error);
+      return false;
+    }
+    setBuild(result.build);
+    if (announce) showToast(announce);
+    return true;
+  };
+  const selectTarget = (next: YamlInventoryTarget) => {
+    setTarget(next);
+    setPickedItem(null);
+    view.openInventory();
+  };
+  const placeHeld = (zone: Zone, hardpoint: string | null) => {
+    if (!held) return;
+    setDragged(null);
+    setPickedItem(null);
+    apply(placeYamlItem(mech, build, held, zone, hardpoint));
+  };
+  const equipInTarget = (id: string) => {
+    if (target) apply(placeYamlItem(mech, build, id, target.zone, target.hardpoint));
+  };
+  const quickEquip = (id: string) => {
+    if (target) {
+      equipInTarget(id);
+      return;
+    }
+    const result = autoPlaceYamlItem(mech, build, id);
+    apply(result, result.zone && `${getYamlItem(id)?.name} equipped in ${ZONE_LABELS[result.zone]}`);
+  };
+  const toggleInventory = () => {
+    if (view.inventoryOpen) {
+      setPickedItem(null);
+      clearTarget();
+    }
+    view.toggleInventory();
+  };
+  const copyLink = async () => showToast(await copyText(buildUrl) ? 'Build link copied' : 'Could not copy the link');
+  const hasKind = (kind: 'ammo' | 'equipment') => build.items.some(mounted => (getYamlItem(mounted.item)?.kind === 'ammo') === (kind === 'ammo'));
+  const armorPoints = Object.values(build.armor).reduce((sum, side) => sum + side.front + side.rear, 0);
+  const maxArmorPoints = Object.values(mech.zones).reduce((sum, zone) => sum + zone.maxArmor, 0);
+
+  return (
+    <div className={['mechlab-shell', 'yaml-mechlab', view.inventoryOpen ? `has-inventory is-inventory-${view.editorSide}` : ''].filter(Boolean).join(' ')}>
+      <header className="topbar">
+        <div className="topbar-start">
+          <a className="brand-lockup" href="/" title="Back to MW Builder">
+            <BrandMark />
+            <div>
+              <p className="eyebrow">FIELD CONFIGURATION SYSTEM</p>
+              <h1>MechLab <span>YAML</span></h1>
+            </div>
+          </a>
+          <SiteNav game="mercs" current="mechlab" className="topbar-links" />
+        </div>
+        <div className="topbar-tools">
+          <button type="button" className="feedback-button" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>
+          <SupportLink compact />
+        </div>
+      </header>
+
+      <section className="mech-select-bar" aria-label="'Mech">
+        <YamlMechPicker
+          mechs={yamlMechs}
+          current={mech}
+          onSelect={(next) => {
+            setTarget(null);
+            setState({ mech: next, build: createStockBuild(next) });
+          }}
+        />
+        <p className="yaml-rules-note">
+          Rules of the <strong>Yet Another Mechlab</strong> mod 0.99.4.3, with Yet Another Weapon, its Clan version and
+          Yet Another Equipment Collection: weapons take critical slots, the engine is a core plus a type, and Endo and
+          Ferro take filler slots anywhere in the 'Mech.
+        </p>
+      </section>
+
+      <BuildStatus
+        issues={issues}
+        onSelectZone={(zone) => selectTarget({ zone, hardpoint: null, internal: null })}
+        readyMessage="Nothing to note: the build is within its tonnage and every filler fits."
+      />
+
+      <UtilityToolbar
+        canClearArmor={armorPoints > 0}
+        canMaximizeArmor={armorPoints < maxArmorPoints}
+        hasWeapons={build.weapons.length > 0}
+        hasAmmo={hasKind('ammo')}
+        hasEquipment={hasKind('equipment')}
+        onClearArmor={() => setBuild(clearArmor(build))}
+        onMaximizeArmor={() => setBuild(setMaxArmor(mech, build))}
+        onRemoveItems={(kind) => setBuild(removeKind(build, kind))}
+        canLoadStock={buildCode !== stockCode}
+        onLoadStock={() => {
+          setBuild(createStockBuild(mech));
+          showToast(`Loaded the stock ${mech.variant} loadout`);
+        }}
+        onShare={(anchor) => setMenu({
+          title: 'Share build',
+          x: anchor.left,
+          y: anchor.bottom + 4,
+          entries: [{ kind: 'action', label: 'Copy build link', onSelect: () => { setMenu(null); copyLink(); } }]
+        })}
+      />
+
+      <section className="readout-strip" aria-label="Mech statistics">
+        {readouts.map(readout => (
+          <div key={readout.label} className="readout-cell">
+            <span className="readout-label" title={readout.title}>{readout.label}</span>
+            <strong className={readout.warn ? 'readout-warning' : ''}>{readout.value}{readout.unit && <> <small>{readout.unit}</small></>}</strong>
+          </div>
+        ))}
+      </section>
+
+      <main className="workspace">
+        <div className="view-toggles" aria-label="View options">
+          <button type="button" className="utility-button inventory-toggle" aria-pressed={view.inventoryOpen}
+            title="Every weapon, piece of equipment and ammo, to drag onto the board" onClick={toggleInventory}>
+            Inventory
+          </button>
+          <span className="utility-label">VIEW</span>
+          <button type="button" className="utility-button" aria-pressed={view.expandedSlots} title="Show every slot as a cell, like the in-game mechlab" onClick={view.toggleExpandedSlots}>
+            {view.expandedSlots ? 'Hide slot cells' : 'Show slot cells'}
+          </button>
+          <button type="button" className="utility-button" aria-pressed={view.compactBoard} title="Hide the quirks and lay the locations out in five columns" onClick={view.toggleCompactBoard}>
+            Compact board
+          </button>
+          <button type="button" className="utility-button" title="Side of the screen where the inventory opens" onClick={view.toggleEditorSide}>
+            Inventory {view.editorSide} ⇄
+          </button>
+        </div>
+        <YamlBoard
+          mech={mech}
+          build={build}
+          target={target}
+          expandedSlots={view.expandedSlots}
+          compact={view.compactBoard}
+          fillers={fillers}
+          dropZones={dropZones}
+          onSelect={selectTarget}
+          onPlace={placeHeld}
+          onArmorChange={(zone, side, value) => setBuild(setArmor(mech, build, zone, side, value))}
+          onRemoveWeapon={(hardpoint) => setBuild(removeWeapon(build, hardpoint))}
+          onRemoveItem={(index) => setBuild(removeItemAt(build, index))}
+        />
+      </main>
+
+      {view.inventoryOpen && (
+        <YamlInventoryPanel
+          mech={mech}
+          build={build}
+          side={view.editorSide}
+          target={target}
+          fillers={fillers}
+          onClearTarget={clearTarget}
+          pickedItem={pickedItem}
+          onPick={setPickedItem}
+          onEquip={equipInTarget}
+          onQuickEquip={quickEquip}
+          onChooseInternal={(slotType, id) => apply(chooseYamlInternal(mech, build, slotType, id))}
+          onDragStart={setDragged}
+          onDragEnd={() => setDragged(null)}
+          onRemoveWeapon={(hardpoint) => setBuild(removeWeapon(build, hardpoint))}
+          onRemoveItem={(index) => setBuild(removeItemAt(build, index))}
+          onToggleSide={view.toggleEditorSide}
+          onClose={toggleInventory}
+        />
+      )}
+
+      <footer className="site-footer">
+        <p className="support-note">
+          <span>Life in the Inner Sphere is rough. MechLab is free and ad-free, so if it helps you, consider supporting this merc!</span>
+          <SupportLink />
+        </p>
+        <p className="feedback-note">
+          Found a bug or a wrong number, or have an idea?
+          <button type="button" className="feedback-inline" onClick={() => setIsFeedbackOpen(true)}>Send feedback</button>
+        </p>
+        <p>
+          Fan-made tool, not affiliated with or endorsed by Piranha Games, the authors of the Yet Another Mechlab mods or
+          the BattleTech trademark holders. Game and mod data belong to their respective owners.
+        </p>
+      </footer>
+
+      {isFeedbackOpen && <FeedbackDialog buildUrl={buildUrl} onMessage={showToast} onClose={() => setIsFeedbackOpen(false)} />}
+      {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={() => setMenu(null)} />}
+      {toast && <Toast key={toast.id} message={toast.message} onDismiss={() => setToast(null)} />}
+    </div>
+  );
+}
