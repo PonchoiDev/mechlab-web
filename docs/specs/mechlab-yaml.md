@@ -53,13 +53,14 @@ Cada regla marcada con ✔ está comprobada con capturas del juego, con YAML 0.9
 - **Ranuras por ubicación (✔):** las del MDA. En el NSR-9J, 12 generales en cada torso lateral, 2 en el torso central, 8 en cada brazo (más los 4 actuadores), 2 en cada pierna (más los 4 actuadores) y 1 en la cabeza, como en el juego de mesa. La cabeza y el torso central tienen además ranuras propias para la cabina, los sensores, el FCS, el soporte vital, el giroscopio, el motor, la armadura y la estructura.
 - **Armas (✔):** necesitan un anclaje libre de su tipo **y** tantas ranuras libres de su ubicación como el tamaño de su tipo de ranura, con las reglas de `reglas.json` aplicadas (AC/10 7, AC/20 10, Gauss 7, ER PPC 3, AC/2 1). Los anclajes se siguen contando por tipo.
 - **Tamaño de arma y anclaje (por confirmar):** YAML cambia el tamaño de arma (`WeaponSize`) de todos los tipos de ranura de armas, así que en principio el tamaño ya no limita qué arma cabe en un anclaje; lo limitan las ranuras.
-- **Motor (✔ en parte):** un núcleo (`stdNNN`, con el peso del motor estándar de esa potencia: `std285` pesa 16,5 t) y un tipo que multiplica ese peso por `1 + engineRelativeWeight` (XL × 0,5) y ocupa ranuras fijas (`fillerSlots`: el XL, 3 en cada torso lateral). Velocidad máxima = potencia / tonelaje × 16,2 (✔ NSR-9J: 285 / 95 × 16,2 = 48,6 km/h).
+- **Motor (✔):** un núcleo (`stdNNN`, con el peso del motor estándar de esa potencia: `std285` pesa 16,5 t y `std105` 3,5 t) y un tipo que multiplica ese peso por `1 + engineRelativeWeight` (XL × 0,5), **redondeado hacia arriba a la media tonelada** (XL 285: 8,25 → 8,5; XL 105: 1,75 → 2,0), y ocupa ranuras fijas (`fillerSlots`: el XL, 3 en cada torso lateral). Sin núcleo, el motor pesa 0. Velocidad máxima = potencia / tonelaje × 16,2 (NSR-9J: 285 / 95 × 16,2 = 48,6 km/h; 105 / 95 × 16,2 = 17,91 km/h).
 - **Estructura (✔):** 10 % del tonelaje × `structureWeightMulti`, **redondeado hacia arriba a la media tonelada**. En 95 t: estándar 9,5; Endo (× 0,5) 4,75 → 5,0; reforzada (× 1,5) 14,25 → 14,5. Los puntos de estructura se multiplican por `structureMulti` (la reforzada, × 2).
 - **Armadura (✔):** puntos instalados / `armorPerTon` (32 la estándar) × `armorWeightMulti`, **sin redondeo**. Los puntos de los quirks (`armorBonus`) no pesan ni cuentan para el máximo: la cabeza del NSR-9J enseña «24+7/30».
 - **Ranuras dinámicas (✔):** el equipo con `fillerSlots.dynamic` (Endo 14, Ferro 14, Heavy Ferro 21, sus versiones Clan 7) necesita ese número de ranuras generales libres en cualquier ubicación, que el mechlab rellena con «Dynamic filler».
 - **Cabina (✔):** la estándar pesa 3 t. El inventario del juego enseña la Small a −1,0 t y la Primitive a +2,0 t respecto a ella.
-- **Giroscopio (✔ en parte):** pesa 0 t sin núcleo de motor. Con núcleo, el del juego de mesa (potencia / 100 redondeado hacia arriba) × `1 + relativeWeight`, **por confirmar**.
-- **Disipadores y refrigeración (por calibrar):** el kit de refrigeración del motor (Royal DHS Kit, Engine Single Heat Sinks...) define la eficiencia y la capacidad de los disipadores del motor. El NSR-9J de serie marca 3 de refrigeración y 58 de capacidad; con Engine Single Heat Sinks, 1,8 y 48. Falta la fórmula y cuántos disipadores son gratuitos.
+- **Giroscopio (✔):** potencia / 100 redondeado hacia arriba, × `relativeWeight` del giroscopio (el estándar y el Agility, × 1; el XL, × 0,5). Sin núcleo pesa 0. En 285: estándar 3, XL 1,5; en 105: estándar 2, XL 1.
+- **Disipadores del motor (✔):** el núcleo trae ⌊potencia / 25⌋ disipadores, como mucho 10, del tipo de su kit de refrigeración (Engine Single Heat Sinks, Royal DHS Kit...). **Cada disipador que falta hasta 10 resta 1 t** (con el núcleo 105, 4 disipadores y −6 t). Con disipadores simples, cada uno da 0,1 de refrigeración y 1 de capacidad sobre una base de 30: núcleo 285, 1,0 y 40; núcleo 105, 0,4 y 34.
+- **Refrigeración con otros kits (por calibrar):** el NSR-9J de serie, con el Royal DHS Kit y 4 disipadores dobles más, marca 3 de refrigeración y 58 de capacidad; con Engine Single Heat Sinks, 1,8 y 48. Falta la fórmula de los disipadores dobles.
 - **Quirks (✔ en parte):** los del `mechs.json` de los mods se enseñan en el tablero, y sus bonificaciones de armadura y estructura se suman («15+5/15»). Los modificadores de combate se enseñan como texto.
 - **Peso total:** la suma de motor, giroscopio, cabina, estructura, armadura, armas, munición y equipo. Se puede pasar del tonelaje, como en el MechLab de MW5.
 
@@ -85,7 +86,7 @@ Cada regla marcada con ✔ está comprobada con capturas del juego, con YAML 0.9
 
 ## Criterios de aceptación
 
-Las cifras de CA1 a CA9 salen de capturas del mechlab del juego con el NSR-9J (95 t) y van en `src/utils/yaml/gameReference.test.ts`.
+Las cifras de CA1 a CA12 salen de capturas del mechlab del juego con el NSR-9J (95 t) y van en `src/utils/yaml/gameReference.test.ts`.
 
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
@@ -98,10 +99,13 @@ Las cifras de CA1 a CA9 salen de capturas del mechlab del juego con el NSR-9J (9
 | CA7 | El NSR-9J de serie | se cambia la estructura por la reforzada | pesa 100 t y tiene 603 puntos de estructura (+299) |
 | CA8 | El NSR-9J vacío, sin núcleo de motor, con armadura Heavy Ferro | se calcula | pesa 27,42 t y ocupa 21 ranuras con rellenos dinámicos |
 | CA9 | El NSR-9J vacío, sin núcleo de motor, con estructura Endo y armadura estándar | se calcula | pesa 26,5 t y ocupa 14 ranuras con rellenos dinámicos |
-| CA10 | Un 'Mech con Endo y sin 14 ranuras generales libres | se intenta montar | no cabe, y el motivo dice cuántas ranuras faltan |
-| CA11 | Un arma | se monta | necesita un anclaje libre de su tipo y sus ranuras libres en la misma ubicación; un AC/20 (10) no cabe en un brazo con 8 ranuras |
-| CA12 | Los datos | se generan | las variantes tienen los mismos ids que en el MechLab de MW5; ninguna es de campaña, tutorial, jefe ni cinemática; las reglas de `reglas.json` están aplicadas a los tipos de ranura |
-| CA13 | Una build | se codifica y se decodifica | sale la misma build; un código del MechLab de MW5 no se abre como build de YAML |
+| CA10 | El NSR-9J vacío, con armadura y estructura estándar, motor XL, giroscopio estándar y sin núcleo | se calcula | pesa 31 t, con 0 de refrigeración y 30 de capacidad |
+| CA11 | El de CA10 | se pone el núcleo 285 | pesa 42,5 t, va a 48,6 km/h y tiene 1,0 de refrigeración y 40 de capacidad; con el giroscopio Agility sigue en 42,5 t y gira 5,3 °/s más; con el giroscopio XL pesa 41 t |
+| CA12 | El de CA10 con el núcleo 105 | se calcula | con el giroscopio estándar pesa 29 t y con el XL 28 t; va a 17,91 km/h y tiene 0,4 de refrigeración y 34 de capacidad; cambiar el motor XL por el estándar suma 1,5 t |
+| CA13 | Un 'Mech con Endo y sin 14 ranuras generales libres | se intenta montar | no cabe, y el motivo dice cuántas ranuras faltan |
+| CA14 | Un arma | se monta | necesita un anclaje libre de su tipo y sus ranuras libres en la misma ubicación; un AC/20 (10) no cabe en un brazo con 8 ranuras |
+| CA15 | Los datos | se generan | las variantes tienen los mismos ids que en el MechLab de MW5; ninguna es de campaña, tutorial, jefe ni cinemática; las reglas de `reglas.json` están aplicadas a los tipos de ranura |
+| CA16 | Una build | se codifica y se decodifica | sale la misma build; un código del MechLab de MW5 no se abre como build de YAML |
 
 ## Fuera de alcance
 
@@ -113,13 +117,13 @@ Las cifras de CA1 a CA9 salen de capturas del mechlab del juego con el NSR-9J (9
 
 ## Pendiente de comprobar en el juego
 
-- El peso del giroscopio con núcleo de motor.
-- La fórmula de la refrigeración y la capacidad de calor, y cuántos disipadores son gratuitos.
+- El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
+- La refrigeración y la capacidad de los disipadores dobles y de los kits que no son simples.
 - Si el tamaño de arma deja de limitar los anclajes.
 - Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
 - Quitar actuadores de los brazos (antebrazo y mano) para montar armas grandes.
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA9, con las cifras de las capturas) y `src/utils/yaml/mechlab.test.ts` (CA10 a CA13).
+1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA12, con las cifras de las capturas) y `src/utils/yaml/mechlab.test.ts` (CA13 a CA16).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, compartir y guardar una build.
