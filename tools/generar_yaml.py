@@ -321,9 +321,11 @@ def cifras_de_nivel(familia, propiedades):
     optimo = alcances.get("OptimalRange") or 0.0
     cifras["optimalRange"] = optimo / 100 * (1 + q_rango)
     cifras["maxRange"] = (alcances.get("MaxRange") or optimo) / 100 * (1 + q_rango)
-    # Los assets guardan floats de 32 bits (2.5999999046 es 2.6). La cadencia del AMS va entera: la del nivel 3
-    # es 4,025000095 y el juego enseña 4.03; redondeada a 4,025 sería un empate y saldría 4.02.
-    return {campo: valor if campo == "amsRate" else round(valor, 4) for campo, valor in cifras.items()}
+    # Los assets guardan floats de 32 bits (2.5999999046 en vez de 2.6) y el juego calcula con ellos. Se guarda
+    # ese error, a nueve decimales, porque decide los empates del panel: el −10 % de calor del nivel 3 es
+    # −0,100000001 y siete Medium Laser dan 14,1749999 de calor alfa, 14.17 en el juego; la cadencia del AMS de
+    # nivel 3 es 4,025000095, 4.03.
+    return {campo: round(valor, 9) for campo, valor in cifras.items()}
 
 
 def refuerzos_del_arma(etiqueta, propiedades_de_armas):

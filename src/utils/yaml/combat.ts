@@ -85,8 +85,13 @@ function loadoutProperties(mech: YamlMech, build: YamlBuild): Record<string, unk
 }
 
 // AddMulti de YAML: los multiplicadores se suman (a + b − 1), no se multiplican.
+// El juego calcula en coma flotante de 32 bits, y eso decide los empates al redondear el panel: siete Medium
+// Laser de nivel 3 dan 14,1749999 de calor alfa (14.17) y la media de cuerpo a cuerpo del CP-10-P, 64,625 justos
+// (64.62, con el redondeo al par de Unreal). Las cuentas de las armas van en float32 (f).
+const f = Math.fround;
+
 function addMultipliers(values: number[]): number {
-  return Math.max(MIN_MULTIPLIER, values.reduce((total, value) => total + value - 1, 1));
+  return Math.max(MIN_MULTIPLIER, values.reduce((total, value) => f(total + f(f(value) - 1)), 1));
 }
 
 function sumMultiplier(properties: Record<string, unknown>[], ...names: string[]): number {
@@ -171,30 +176,32 @@ function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoi
     zone, hardpoint, item: itemId, name: item.name, tier, family: combat.family,
     optimalRange, maxRange: maxRangeOf(combat, stats, optimalRange, bonuses), amsRate: 0
   };
-  const cooldown = Math.max(MIN_COOLDOWN, stats.cooldown * bonuses.cooldown);
+  const cooldown = Math.max(MIN_COOLDOWN, f(f(stats.cooldown) * bonuses.cooldown));
+  // GetAlphaStrikeStats: disparos por minuto = 60 / ciclo, y por segundo, × valor / 60.
+  const perSecond = (value: number, cycle: number) => f(f(value * f(60 / cycle)) / 60);
   if (combat.family === 'ams') {
-    return { ...base, damage: 0, heat: 0, cooldown, duration: 0, dps: 0, heatPerSecond: 0, amsRate: (stats.amsRate ?? 0) * bonuses.missilesDestroyed };
+    return { ...base, damage: 0, heat: 0, cooldown, duration: 0, dps: 0, heatPerSecond: 0, amsRate: f(f(stats.amsRate ?? 0) * bonuses.missilesDestroyed) };
   }
   if (combat.family === 'melee') {
-    const damage = stats.damage * bonuses.damage;
-    const meleeCooldown = stats.cooldown * bonuses.cooldown;
-    const duration = stats.duration ?? 0;
-    return { ...base, damage, heat: 0, cooldown: meleeCooldown, duration, dps: damage / (duration + meleeCooldown), heatPerSecond: 0 };
+    const damage = f(f(stats.damage) * bonuses.damage);
+    const meleeCooldown = f(f(stats.cooldown) * bonuses.cooldown);
+    const duration = f(stats.duration ?? 0);
+    return { ...base, damage, heat: 0, cooldown: meleeCooldown, duration, dps: perSecond(damage, f(duration + meleeCooldown)), heatPerSecond: 0 };
   }
-  const heat = stats.heat * bonuses.heat;
+  const heat = f(f(stats.heat) * bonuses.heat);
   if (combat.family === 'trace') {
-    const damage = stats.damage * bonuses.damage;
+    const damage = f(f(stats.damage) * bonuses.damage);
     // Rayos sin duración (ametralladoras, lanzallamas): su daño y su calor ya son por segundo.
     if (!stats.duration) return { ...base, damage, heat, cooldown: 0, duration: 0, dps: damage, heatPerSecond: heat };
     const pulse = combat.weaponType === PULSE_LASER_TAG || combat.weaponType.startsWith(`${PULSE_LASER_TAG}.`);
-    const duration = stats.duration * bonuses.duration * (pulse ? PULSE_LASER_DURATION_MULTIPLIER : 1);
-    const cycle = cooldown + duration;
-    return { ...base, damage, heat, cooldown, duration, dps: damage / cycle, heatPerSecond: heat / cycle };
+    const duration = f(f(f(stats.duration) * bonuses.duration) * f(pulse ? PULSE_LASER_DURATION_MULTIPLIER : 1));
+    const cycle = f(cooldown + duration);
+    return { ...base, damage, heat, cooldown, duration, dps: perSecond(damage, cycle), heatPerSecond: perSecond(heat, cycle) };
   }
   // YAWBallistic multiplica también el daño de balísticas y PPC por heatDamageMulti; YAWMissile no.
-  const damage = stats.damage * bonuses.damage * (combat.family === 'projectile' ? bonuses.heatDamage : 1);
-  const cycle = cooldown + (combat.volleyTime ?? 0);
-  return { ...base, damage, heat, cooldown, duration: 0, dps: damage / cycle, heatPerSecond: heat / cycle };
+  const damage = f(f(f(stats.damage) * bonuses.damage) * (combat.family === 'projectile' ? bonuses.heatDamage : 1));
+  const cycle = f(cooldown + f(combat.volleyTime ?? 0));
+  return { ...base, damage, heat, cooldown, duration: 0, dps: perSecond(damage, cycle), heatPerSecond: perSecond(heat, cycle) };
 }
 
 // Las armas montadas, sin los ataques de los actuadores (manos y antebrazos), que el juego no cuenta.
@@ -276,8 +283,9 @@ export interface YamlMechStats {
 
 // DecimalRounder de YAML: a un decimal.
 const roundToTenth = (value: number) => Math.round(value * 10) / 10;
-const sum = (values: number[]) => values.reduce((total, value) => total + value, 0);
-const average = (values: number[]) => values.length > 0 ? sum(values) / values.length : 0;
+// VictoryFloatPlusEquals: sumas en float32.
+const sum = (values: number[]) => values.reduce((total, value) => f(total + value), 0);
+const average = (values: number[]) => values.length > 0 ? f(sum(values) / values.length) : 0;
 
 export function getYamlMechStats(mech: YamlMech, build: YamlBuild): YamlMechStats {
   const weapons = getWeaponPerformance(mech, build);
@@ -345,14 +353,12 @@ export interface YamlStatCell {
   ratio: number;
 }
 
-// Hasta dos decimales, sin ceros de más: 62.1, 16.47, 950. Como el texto de Unreal, los empates van al par
-// (64,625 es 64.62 en el panel del CP-10-P), pero no lo que pasa un poco del empate (la cadencia del AMS de
-// nivel 3, 4,025000095, es 4.03). El margen solo absorbe los errores de coma flotante de las cuentas.
+// Hasta dos decimales, sin ceros de más: 62.1, 16.47, 950. Como el texto de Unreal, un empate exacto va al
+// par (64,625 es 64.62); los que el float32 deja un poco por encima o por debajo, no (4,025000095 es 4.03).
 export const formatYamlStat = (value: number) => {
   const scaled = value * 100;
   const floor = Math.floor(scaled);
-  const isTie = Math.abs(scaled - floor - 0.5) < 1e-9;
-  const rounded = isTie ? (floor % 2 === 0 ? floor : floor + 1) : Math.round(scaled);
+  const rounded = scaled - floor === 0.5 ? (floor % 2 === 0 ? floor : floor + 1) : Math.round(scaled);
   return String(Number((rounded / 100).toFixed(2)));
 };
 
