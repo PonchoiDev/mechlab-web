@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { BrandMark } from '../components/BrandMark';
 import { BuildStatus } from '../components/BuildStatus';
 import { ContextMenu, type MenuEntry } from '../components/ContextMenu';
@@ -11,10 +11,10 @@ import { useViewPreferences } from '../hooks/useViewPreferences';
 import { copyText } from '../services/clipboard';
 import type { Zone } from '../types/mech';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
-import { distributeDynamicFillers, removeItemAt, setArmor, setMaxArmor } from '../utils/yaml/board';
+import { distributeDynamicFillerGroups, removeItemAt, setArmor, setMaxArmor } from '../utils/yaml/board';
 import { clearArmor, createStockBuild, removeKind, removeWeapon, type MountResult } from '../utils/yaml/build';
 import { decodeYamlBuild, encodeYamlBuild } from '../utils/yaml/buildCode';
-import { findYamlMech, getYamlItem, yamlMechs } from '../utils/yaml/data';
+import { findYamlMech, getYamlItem, YAML_COLORS, yamlMechs } from '../utils/yaml/data';
 import { autoPlaceYamlItem, chooseYamlInternal, getYamlDropZones, placeYamlItem, type YamlInventoryTarget } from '../utils/yaml/inventory';
 import { getYamlBuildIssues, getYamlReadouts } from '../utils/yaml/readouts';
 import { ZONE_LABELS } from '../utils/zones';
@@ -23,6 +23,12 @@ import { YamlInventoryPanel } from './YamlInventoryPanel';
 import { YamlMechPicker } from './YamlMechPicker';
 
 const DEFAULT_MECH = 'NSR-9J';
+// Los colores de anclaje y el relleno de las piezas del mechlab de YAML, para yaml.css.
+const SHELL_COLORS = {
+  ...Object.fromEntries(Object.entries(YAML_COLORS.hardpoints).map(([type, color]) => [`--yaml-${type}`, color])),
+  '--yaml-general': YAML_COLORS.general,
+  '--yaml-tint': `${Math.round(YAML_COLORS.tintOpacity * 100)}%`
+} as CSSProperties;
 // La vista (celdas, tablero compacto, inventario y su lado) se guarda aparte de la de MW5 y BATTLETECH.
 const YAML_VIEW_KEY = 'mw-builder:yaml:view';
 // Pulsar aquí no quita la ubicación elegida: el inventario, el tablero y cualquier control, como en MW5.
@@ -56,7 +62,7 @@ export function YamlMechLabApp() {
   const buildUrl = `${window.location.origin}${window.location.pathname}?b=${buildCode}`;
   const readouts = useMemo(() => getYamlReadouts(mech, build), [mech, build]);
   const issues = useMemo(() => getYamlBuildIssues(mech, build), [mech, build]);
-  const fillers = useMemo(() => distributeDynamicFillers(mech, build), [mech, build]);
+  const fillers = useMemo(() => distributeDynamicFillerGroups(mech, build), [mech, build]);
   const held = dragged ?? pickedItem;
   const dropZones = useMemo(() => held ? getYamlDropZones(mech, build, held) : null, [mech, build, held]);
 
@@ -126,7 +132,10 @@ export function YamlMechLabApp() {
   const maxArmorPoints = Object.values(mech.zones).reduce((sum, zone) => sum + zone.maxArmor, 0);
 
   return (
-    <div className={['mechlab-shell', 'yaml-mechlab', view.inventoryOpen ? `has-inventory is-inventory-${view.editorSide}` : ''].filter(Boolean).join(' ')}>
+    <div
+      className={['mechlab-shell', 'yaml-mechlab', view.inventoryOpen ? `has-inventory is-inventory-${view.editorSide}` : ''].filter(Boolean).join(' ')}
+      style={SHELL_COLORS}
+    >
       <header className="topbar">
         <div className="topbar-start">
           <a className="brand-lockup" href="/" title="Back to MW Builder">

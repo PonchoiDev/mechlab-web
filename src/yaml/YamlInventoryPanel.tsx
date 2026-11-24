@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState, type DragEvent, type KeyboardEvent, type MouseEvent } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties, type DragEvent, type KeyboardEvent, type MouseEvent } from 'react';
 import type { YamlBuild, YamlItem, YamlMech } from '../types/yaml-mechlab';
 import { ZONE_LABELS } from '../utils/zones';
-import { getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS } from '../utils/yaml/board';
-import { getYamlItem } from '../utils/yaml/data';
+import { getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, type FillerGroup } from '../utils/yaml/board';
+import { getItemColor, getModLogo, getSlotColor, getYamlItem } from '../utils/yaml/data';
 import {
   countYamlByCategory, filterYamlInventory, getYamlInternalChoices, getYamlInventoryCategory, getYamlInventoryItems,
   sortYamlInventory, YAML_INVENTORY_CATEGORIES, type YamlInventoryCategory, type YamlInventoryFilters,
@@ -18,7 +18,7 @@ interface YamlInventoryPanelProps {
   build: YamlBuild;
   side: 'left' | 'right';
   target: YamlInventoryTarget | null;
-  fillers: Record<string, number>;
+  fillers: Record<string, FillerGroup[]>;
   onClearTarget: () => void;
   pickedItem: string | null;
   onPick: (id: string | null) => void;
@@ -39,6 +39,12 @@ const CATEGORY_LABELS: Record<YamlInventoryCategory, string> = {
 };
 const HAS_ICON: YamlInventoryCategory[] = ['energy', 'ballistic', 'missile', 'ams', 'equipment'];
 const COLUMNS: [YamlSortKey, string, string][] = [['name', 'Name', 'Name'], ['slots', 'Slots', 'Critical slots'], ['tons', 'Tons', 'Tonnage']];
+// El logo del mod de la pieza, como en el mechlab del juego.
+export function ModLogo({ id }: { id: string | undefined }) {
+  const logo = getModLogo(id);
+  return logo ? <img className="yaml-mod-logo" src={logo} alt="" width={22} height={22} /> : null;
+}
+
 const DEFAULT_FILTERS: YamlInventoryFilters = { category: 'all', search: '', fitsOnly: true };
 const formatTons = (tons: number) => String(Number(tons.toFixed(2)));
 const weaponType = (item: YamlItem) => item.kind === 'weapon' ? item.hardpoint : undefined;
@@ -54,7 +60,8 @@ function InventoryRow({ id, item, isPicked, hint, onActivate, onContextMenu, onD
   onDragEnd: () => void;
 }) {
   return (
-    <li className={isPicked ? 'inventory-row is-picked' : 'inventory-row'} data-weapon-type={weaponType(item)} data-category={item.kind}>
+    <li className={isPicked ? 'inventory-row is-picked' : 'inventory-row'} data-weapon-type={weaponType(item)} data-category={item.kind}
+      style={{ '--item-color': getItemColor(id), '--weapon-color': getItemColor(id) } as CSSProperties}>
       {/* Un div y no un botón: Firefox no deja arrastrar botones. */}
       <div
         role="button"
@@ -74,7 +81,7 @@ function InventoryRow({ id, item, isPicked, hint, onActivate, onContextMenu, onD
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
       >
-        <span className="inventory-item-name">{item.name}</span>
+        <span className="inventory-item-name">{item.name}<ModLogo id={id} /></span>
         <span>{item.slots}</span>
         <span>{formatTons(item.tons)}</span>
       </div>
@@ -87,7 +94,7 @@ function TargetSection({ mech, build, target, fillers, onClear, onRemoveWeapon, 
   mech: YamlMech;
   build: YamlBuild;
   target: YamlInventoryTarget;
-  fillers: Record<string, number>;
+  fillers: Record<string, FillerGroup[]>;
   onClear: () => void;
   onRemoveWeapon: (hardpoint: string) => void;
   onRemoveItem: (index: number) => void;
@@ -144,7 +151,8 @@ function InternalChoices({ mech, build, slotType, onChoose }: { mech: YamlMech; 
           </li>
         )}
         {choices.map(choice => (
-          <li key={choice.id} className={[choice.id === current ? 'inventory-row is-picked' : 'inventory-row', choice.error ? 'is-blocked' : ''].filter(Boolean).join(' ')}>
+          <li key={choice.id} className={[choice.id === current ? 'inventory-row is-picked' : 'inventory-row', choice.error ? 'is-blocked' : ''].filter(Boolean).join(' ')}
+            style={{ '--item-color': getYamlItem(choice.id)?.color ?? getSlotColor(slotType) } as CSSProperties}>
             <div
               role="button"
               tabIndex={0}
@@ -153,7 +161,7 @@ function InternalChoices({ mech, build, slotType, onChoose }: { mech: YamlMech; 
               title={choice.error ?? `Install ${choice.name}`}
               onClick={() => onChoose(choice.id)}
             >
-              <span className="inventory-item-name">{choice.name}{choice.error && <small className="yaml-choice-reason">{choice.error}</small>}</span>
+              <span className="inventory-item-name">{choice.name}<ModLogo id={choice.id} />{choice.error && <small className="yaml-choice-reason">{choice.error}</small>}</span>
               <span>{formatTons(choice.tons)}</span>
             </div>
           </li>

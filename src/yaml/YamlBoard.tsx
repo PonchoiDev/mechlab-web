@@ -4,9 +4,10 @@ import { SlotBar } from '../components/SlotBar';
 import type { Zone } from '../types/mech';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
 import { ZONES } from '../utils/zones';
-import { getHardpointUsage, getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, INTERNAL_SLOTS, type ZoneRow } from '../utils/yaml/board';
+import { getHardpointUsage, getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, INTERNAL_SLOTS, type FillerGroup, type ZoneRow } from '../utils/yaml/board';
 import { GENERAL_SLOT } from '../utils/yaml/stats';
-import { getYamlItem, getYamlQuirk } from '../utils/yaml/data';
+import { getItemColor, getSlotColor, getYamlItem, getYamlQuirk } from '../utils/yaml/data';
+import { ModLogo } from './YamlInventoryPanel';
 import type { YamlInventoryTarget } from '../utils/yaml/inventory';
 import { getEngineRating, getFreeGeneralSlots, getStructurePoints } from '../utils/yaml/stats';
 
@@ -32,7 +33,7 @@ interface YamlBoardProps {
   target: YamlInventoryTarget | null;
   expandedSlots: boolean;
   compact: boolean;
-  fillers: Record<Zone, number>;
+  fillers: Record<Zone, FillerGroup[]>;
   // Mientras se coloca un objeto (arrastrado o elegido en el inventario): las ubicaciones donde cabe.
   dropZones: Zone[] | null;
   onSelect: (target: YamlInventoryTarget) => void;
@@ -66,21 +67,51 @@ function LocationHardpoints({ mech, build, zone }: { mech: YamlMech; build: Yaml
   );
 }
 
-function RowItem({ row, inCells = false, onSelect, onRemove }: { row: ZoneRow; inCells?: boolean; onSelect: () => void; onRemove?: () => void }) {
+// El color de una fila como en el mechlab del juego: el arma, el de su tipo de ranura; el equipo, el suyo o
+// el general; los rellenos, el de la pieza que los pide (motor XL naranja, Endo azul, Ferro rojo).
+function rowColor(row: ZoneRow, build: YamlBuild): string | undefined {
+  if (row.kind === 'weapon') return getItemColor(row.item);
+  if (row.kind === 'item') return getItemColor(build.items[row.index].item, row.slotType);
+  if (row.kind === 'fixedFiller' || row.kind === 'dynamicFiller') {
+    const owner = build.internal[row.slotType];
+    return getYamlItem(owner)?.color ?? getSlotColor(row.slotType);
+  }
+  return undefined;
+}
+
+function rowItemId(row: ZoneRow, build: YamlBuild): string | undefined {
+  if (row.kind === 'weapon') return row.item;
+  if (row.kind === 'item') return build.items[row.index].item;
+  if (row.kind === 'fixedFiller' || row.kind === 'dynamicFiller') return build.internal[row.slotType];
+  return undefined;
+}
+
+function RowItem({ row, build, inCells = false, onSelect, onRemove }: { row: ZoneRow; build: YamlBuild; inCells?: boolean; onSelect: () => void; onRemove?: () => void }) {
   if (row.kind === 'free') return null;
   const fixed = row.kind === 'fixedFiller' || row.kind === 'dynamicFiller';
   return (
     <button
       type="button"
       className={['component-card-item', inCells ? 'slot-cell-item' : '', fixed ? 'is-built-in yaml-filler' : '', row.kind === 'dynamicFiller' ? 'is-dynamic' : ''].filter(Boolean).join(' ')}
-      style={{ '--slots': row.slots } as CSSProperties}
+      style={{ '--slots': row.slots, '--item-color': rowColor(row, build) } as CSSProperties}
       data-category={row.kind === 'item' ? 'equipment' : undefined}
       title={fixed ? `${row.label}: ${slotsLabel(row.slots)} the ${row.kind === 'dynamicFiller' ? 'Endo or Ferro takes' : 'engine fixes here'}` : `${row.label}: middle-click to remove`}
       onClick={(event) => { event.stopPropagation(); onSelect(); }}
       {...(onRemove ? removeOnMiddleClick(onRemove) : {})}
     >
-      {row.kind === 'dynamicFiller' ? 'Dynamic filler' : row.label}
-      <small>{fixed ? slotsLabel(row.slots) : row.slots > 1 ? slotsLabel(row.slots) : ''}</small>
+      {fixed ? (
+        // Como en el juego: «DYNAMIC FILLER» o «FIXED FILLER» en pequeño y debajo la pieza que lo pide.
+        <span className="yaml-filler-text">
+          <small>{row.kind === 'dynamicFiller' ? 'Dynamic filler' : 'Fixed filler'} · {slotsLabel(row.slots)}</small>
+          <span>{row.label}</span>
+        </span>
+      ) : (
+        <>
+          {row.label}
+          <small>{row.slots > 1 ? slotsLabel(row.slots) : ''}</small>
+        </>
+      )}
+      <ModLogo id={rowItemId(row, build)} />
     </button>
   );
 }
@@ -90,7 +121,7 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
   const data = mech.zones[zone];
   const isActive = target?.zone === zone;
   const rows = getZoneRows(mech, build, zone, fillers);
-  const free = getFreeGeneralSlots(mech, build, zone) - fillers[zone];
+  const free = getFreeGeneralSlots(mech, build, zone) - fillers[zone].reduce((sum, group) => sum + group.slots, 0);
   const used = data.general - free;
   const internals = INTERNAL_SLOTS.filter(slotType => data.special[slotType]);
   // Lo montado en ranuras propias (disipadores del motor, retrorreactores...) va con las internas: no ocupa
@@ -140,6 +171,7 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
                 tabIndex={0}
                 className={['hardpoint-chip', item ? 'is-occupied is-emphasized' : 'is-free', isSelected ? 'is-selected' : ''].filter(Boolean).join(' ')}
                 data-weapon-type={hardpoint.type}
+                style={mounted ? { '--weapon-color': getItemColor(mounted.item) } as CSSProperties : undefined}
                 aria-pressed={isSelected}
                 title={`${HARDPOINT_LABELS[hardpoint.type]} hardpoint: ${item ? `${item.name}, ${slotsLabel(item.slots)}. Middle-click to remove` : 'free'}`}
                 onClick={(event) => { event.stopPropagation(); select(hardpoint.id); }}
@@ -150,6 +182,7 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
                 <span className="hardpoint-chip-content">
                   {item && <span className="hardpoint-chip-name">{item.name}</span>}
                   {item && <span className="hardpoint-chip-tier">{slotsLabel(item.slots)}</span>}
+                  {mounted && <ModLogo id={mounted.item} />}
                 </span>
               </div>
             );
@@ -165,11 +198,13 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
               type="button"
               className={isActive && target?.internal === slotType ? 'component-card-item yaml-internal is-selected' : 'component-card-item yaml-internal'}
               data-slot={slotType}
+              style={{ '--item-color': getYamlItem(build.internal[slotType])?.color ?? getSlotColor(slotType) } as CSSProperties}
               title={`${INTERNAL_SLOT_LABELS[slotType]}: click to change it from the inventory`}
               onClick={(event) => { event.stopPropagation(); if (!placing) onSelect({ zone, hardpoint: null, internal: slotType }); }}
             >
               <small>{INTERNAL_SLOT_LABELS[slotType]}</small>
-              {getInternalLabel(build, slotType)}
+              <span className="yaml-internal-name">{getInternalLabel(build, slotType)}</span>
+              <ModLogo id={build.internal[slotType]} />
             </button>
           ))}
           {specialRows.map((row, index) => row.kind === 'item' && (
@@ -178,12 +213,14 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
               type="button"
               className="component-card-item yaml-internal"
               data-category="equipment"
+              style={{ '--item-color': getItemColor(build.items[row.index].item, row.slotType) } as CSSProperties}
               title={`${row.label}: middle-click to remove`}
               onClick={(event) => { event.stopPropagation(); select(); }}
               {...removeOnMiddleClick(() => onRemoveItem(row.index))}
             >
               <small>{SPECIAL_SLOT_LABELS[row.slotType] ?? 'Special'}</small>
-              {row.label}
+              <span className="yaml-internal-name">{row.label}</span>
+              <ModLogo id={build.items[row.index].item} />
             </button>
           ))}
         </div>
@@ -198,7 +235,7 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
           <div className="slot-cells" aria-label={`Slots: ${used} of ${data.general}`}>
             <span className="slot-cells-label">Slots <small>{used}/{data.general}</small></span>
             {rows.filter(row => row.kind !== 'free' && isGeneral(row)).map((row, index) => (
-              <RowItem key={index} row={row} inCells onSelect={() => select()} onRemove={rowRemover(row, onRemoveWeapon, onRemoveItem)} />
+              <RowItem key={index} row={row} build={build} inCells onSelect={() => select()} onRemove={rowRemover(row, onRemoveWeapon, onRemoveItem)} />
             ))}
             {Array.from({ length: Math.max(0, free) }, (_, index) => <span key={`empty-${index}`} className="slot-cell-empty" aria-hidden="true" />)}
           </div>
@@ -208,7 +245,7 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
           {rows.some(row => row.kind !== 'free' && row.kind !== 'weapon' && isGeneral(row)) && (
             <div className="component-card-equipment">
               {rows.filter(row => row.kind !== 'free' && row.kind !== 'weapon' && isGeneral(row)).map((row, index) => (
-                <RowItem key={index} row={row} onSelect={() => select()} onRemove={rowRemover(row, onRemoveWeapon, onRemoveItem)} />
+                <RowItem key={index} row={row} build={build} onSelect={() => select()} onRemove={rowRemover(row, onRemoveWeapon, onRemoveItem)} />
               ))}
             </div>
           )}

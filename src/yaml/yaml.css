@@ -99,3 +99,63 @@
 .yaml-inventory { --inventory-columns: minmax(0, 1fr) 44px 48px; }
 .yaml-inventory .inventory-row.is-blocked .inventory-item { opacity: 0.55; cursor: not-allowed; }
 .yaml-choice-reason { display: block; color: var(--work-muted); font: 500 10px var(--work-mono); }
+
+/* Colores del mechlab de YAML con sus ajustes por defecto (src/data/yaml/colors.json): los anclajes del
+   color de las ranuras de sus armas, cada pieza del de su ranura o el suyo propio, y el relleno de las
+   piezas con ese color al 20 % («Equipment Tint Opacity»). */
+.yaml-mechlab [data-weapon-type="ballistic"] { --weapon-color: var(--yaml-ballistic); }
+.yaml-mechlab [data-weapon-type="energy"] { --weapon-color: var(--yaml-energy); }
+.yaml-mechlab [data-weapon-type="missile"] { --weapon-color: var(--yaml-missile); }
+.yaml-mechlab [data-weapon-type="ams"] { --weapon-color: var(--yaml-ams); }
+.yaml-mechlab [data-weapon-type="artillery"] { --weapon-color: var(--yaml-artillery); }
+.yaml-mechlab [data-weapon-type="omni"] { --weapon-color: var(--yaml-omni); }
+
+.yaml-mechlab .component-card-item {
+  --item-color: var(--yaml-general);
+  background: color-mix(in srgb, var(--item-color) var(--yaml-tint), var(--work-panel-raised));
+}
+
+.yaml-mechlab .hardpoint-chip.is-occupied {
+  background: color-mix(in srgb, var(--weapon-color) var(--yaml-tint), #1c211c);
+}
+
+/* Los rellenos, rayados del color de su pieza («Color Mechlab fillers»). */
+.yaml-mechlab .component-card-item.yaml-filler,
+.yaml-mechlab .component-card-item.yaml-filler.is-dynamic {
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--item-color) 30%, transparent) 0 6px, transparent 6px 12px);
+}
+
+.yaml-mechlab .inventory-row .inventory-item { border-left: 3px solid var(--item-color, var(--yaml-general)); }
+
+/* El logo del mod de cada pieza, a la derecha, como en el mechlab del juego. */
+.yaml-mod-logo {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.yaml-internals .component-card-item {
+  grid-template-columns: 84px minmax(0, 1fr) auto;
+}
+
+.yaml-internal-name { overflow: hidden; text-overflow: ellipsis; }
+.component-card-item:has(.yaml-mod-logo),
+.inventory-item-name:has(.yaml-mod-logo),
+.hardpoint-chip-content:has(.yaml-mod-logo) { display: flex; align-items: center; gap: 6px; }
+.yaml-internals .component-card-item:has(.yaml-mod-logo) { display: grid; }
+
+.yaml-filler-text { display: grid; min-width: 0; gap: 1px; }
+.yaml-filler-text small { font: 500 9px var(--work-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+.yaml-filler-text span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Con el inventario abierto las tarjetas se estrechan: el tipo de ranura de las piezas internas cede su
+   sitio al nombre, que es lo que importa. */
+.yaml-mechlab .component-card { container-type: inline-size; }
+
+@container (max-width: 230px) {
+  .yaml-internals .component-card-item { grid-template-columns: minmax(0, 1fr) auto; }
+  .yaml-internals .component-card-item > small { display: none; }
+}
