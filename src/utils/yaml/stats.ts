@@ -1,6 +1,6 @@
 import type { Zone } from '../../types/mech';
 import type { YamlBuild, YamlItem, YamlMech } from '../../types/yaml-mechlab';
-import { getYamlItem, getYamlQuirk } from './data';
+import { getYamlItem, getYamlQuirk, getYamlSlotType } from './data';
 
 // Peso, motor, refrigeración, velocidad, armadura y estructura como los calcula YAML, leídos de sus blueprints
 // (desensamblados con tools/kismet.py): CalculateMechTonnage y GetEquipmentWeightInternal (MechlabArmorHandling),
@@ -56,6 +56,30 @@ export function getInstalledEquipment(mech: YamlMech, build: YamlBuild): Install
   }));
   const slotted = build.items.map(mounted => ({ zone: mounted.zone, item: getYamlItem(mounted.item) }));
   return [...internals, ...slotted].filter((entry): entry is InstalledEquipment => !!entry.item);
+}
+
+// GetOpenCritSlots: las ranuras propias que cuentan restan su tamaño de las generales (los datos ya lo descuentan
+// con las ranuras vacías). La pieza montada en una ocupa sus Slots, o el tamaño de esa ranura si ignora el de la
+// pieza, en lugar de los tamaños de las ranuras propias que admite: el giroscopio XL (5) quita 2 generales del
+// torso central y el Compact (1) le da 2.
+function mountedSpecialSlots(slotType: string, item: YamlItem): number {
+  const slot = getYamlSlotType(slotType);
+  if (!slot) return 0;
+  const supported = (item.slotTypes ?? [slotType]).reduce((sum, type) => sum + (getYamlSlotType(type)?.size ?? 0), 0);
+  return (slot.ignoreItemSlots ? slot.size : item.slots) - supported;
+}
+
+// Las ranuras generales de una ubicación con lo montado en sus ranuras propias.
+export function getGeneralSlots(mech: YamlMech, build: YamlBuild, zone: Zone): number {
+  const zones = Object.keys(mech.zones) as Zone[];
+  const internals = Object.entries(build.internal).map(([slotType, id]) => ({
+    zone: zones.find(candidate => (mech.zones[candidate].special[slotType] ?? 0) > 0) ?? 'centerTorso', slotType, id
+  }));
+  const slotted = build.items.filter(mounted => mounted.slotType !== GENERAL_SLOT).map(mounted => ({ zone: mounted.zone, slotType: mounted.slotType, id: mounted.item }));
+  return [...internals, ...slotted].filter(entry => entry.zone === zone).reduce((general, entry) => {
+    const item = getYamlItem(entry.id);
+    return item ? general - mountedSpecialSlots(entry.slotType, item) : general;
+  }, mech.zones[zone].general);
 }
 
 export function getQuirkProperties(mech: YamlMech): Record<string, unknown>[] {
@@ -364,7 +388,7 @@ export function getFreeGeneralSlots(mech: YamlMech, build: YamlBuild, zone: Zone
   const items = build.items.filter(item => item.zone === zone && item.slotType === GENERAL_SLOT);
   const weapons = build.weapons.filter(weapon => weapon.zone === zone);
   const used = [...items, ...weapons].reduce((sum, mounted) => sum + (getYamlItem(mounted.item)?.slots ?? 1), 0);
-  return mech.zones[zone].general - getFixedFillers(build, zone) - used;
+  return getGeneralSlots(mech, build, zone) - getFixedFillers(build, zone) - used;
 }
 
 export function getTotalFreeGeneralSlots(mech: YamlMech, build: YamlBuild): number {

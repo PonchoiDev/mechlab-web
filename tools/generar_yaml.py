@@ -69,12 +69,31 @@ ETIQUETAS_DE_UNA_RANURA = ("Equipment.SuperCharger", "Equipment.ArenaSuperCharge
 
 
 @functools.cache
-def tipos_de_ranura_de_yaml():
-    """La tabla YAMLSlotTypeDatas de YAML: los tipos de ranura que oculta (hideSlot), en minúsculas."""
+def datos_de_tipos_de_ranura(columna):
+    """La tabla YAMLSlotTypeDatas de YAML: los tipos de ranura (en minúsculas) con la columna a verdadero."""
     tablas = leer(os.path.join(RUTA_YAML, "yet-another-mechlab", "tablas.json"))
     filas = tablas["/YetAnotherMechlab/Mechlab/YAMLSlotTypeDatas"]["filas"].values()
     campo = lambda fila, nombre: next(valor for clave, valor in fila.items() if clave.split("_")[0] == nombre)
-    return {campo(fila, "slotType")["Id"]["PrimaryAssetName"].lower() for fila in filas if campo(fila, "hideSlot")}
+    return {campo(fila, "slotType")["Id"]["PrimaryAssetName"].lower() for fila in filas if campo(fila, columna)}
+
+
+def tipos_de_ranura_de_yaml():
+    """Los tipos de ranura que YAML oculta (hideSlot): no se pintan ni cuentan."""
+    return datos_de_tipos_de_ranura("hideSlot")
+
+
+def ranuras_propias_que_cuentan(tamanos, objetos, mechs):
+    """SlotTypeRelevantForCritCalc: los tipos de ranura propios que restan de las generales (todos salvo las
+    generales, las de disipadores del motor, las de retrorreactores y las ocultas), con su tamaño y si cuentan ese
+    tamaño en vez de los Slots de la pieza montada (ignoreEquipSlots: armadura, estructura y refrigeración)."""
+    ocultos, ignoran = tipos_de_ranura_de_yaml(), datos_de_tipos_de_ranura("ignoreEquipSlots")
+    # Solo las que puede ocupar el equipo o que tiene alguna ubicación: las de las armas no hacen falta.
+    usados = {tipo.lower() for objeto in objetos.values() if objeto["kind"] == "equipment" for tipo in objeto.get("slotTypes", [])}
+    usados |= {tipo.lower() for mech in mechs for zona in mech["zones"].values() for tipo in zona["special"]}
+    return {tipo.lower(): {"size": tamano, **({"ignoreItemSlots": True} if tipo.lower() in ignoran else {})}
+            for tipo, tamano in sorted(tamanos.items())
+            if tipo != RANURA_GENERAL and tipo != "EngineHeatsink_SlotType" and not tipo.startswith("JumpJet")
+            and tipo.lower() not in ocultos and tipo.lower() in usados}
 
 
 def tiene_etiqueta(categoria, etiquetas):
@@ -213,11 +232,24 @@ def color_propio(nombre, categoria, propiedades):
     return color_hex(propiedades[max(etiquetas, key=len)]["color"]) if etiquetas else None
 
 
+def ranuras_cuerpo_a_cuerpo(ranura, tamanos):
+    """GetWeaponCrits: un arma cuerpo a cuerpo ocupa el tamaño de su ranura menos 1 (la mano de serie, 0)."""
+    return max(tamanos.get(ranura, 1) - 1, 0)
+
+
 def tamanos_de_ranuras(reglas):
     """Tamaño de cada tipo de ranura: el del juego, el de los mods y las reglas que aplica YAML al arrancar."""
     ranuras = por_nombre(leer(os.path.join(RUTA_YAML, "juego", "ranuras.json")))
     ranuras.update(por_nombre(cargar_categoria("ranuras")))
     tamanos = {nombre: valor["propiedades"].get("SlotSize", 1) for nombre, valor in ranuras.items()}
+    # Inject Actuator Slots: si la ranura de mano de asalto ocupa más de 1, las ranuras de armas cuerpo a cuerpo
+    # (Weapon.Melee) que no son de antebrazo («Lower Arm») ocupan 1 menos, como mínimo 1. Va antes de las reglas.
+    if tamanos.get("MeleeHandActuatorAssault_SlotType", 1) > 1:
+        for nombre, valor in ranuras.items():
+            propiedades = valor["propiedades"]
+            etiquetas = json.dumps(propiedades.get("WeaponTypesTagContainer") or {})
+            if '"Weapon.Melee' in etiquetas and "Lower Arm" not in (texto(propiedades.get("SlotName")) or ""):
+                tamanos[nombre] = max(tamanos[nombre] - 1, 1)
     for regla in reglas["tamanosDeTiposDeRanura"]:
         for tipo in regla["tiposDeRanura"]:
             tamanos[tipo] = regla["ranuras"]
@@ -627,7 +659,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         actuador = bool(ACTUADOR_DE_CUERPO_A_CUERPO.search(nombre))
         objetos[nombre] = {
             "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon", "hardpoint": "melee",
-            "tons": datos.get("Tonnage") or 0, "slotType": ranura, "slots": 0 if actuador else tamanos.get(ranura, 1),
+            "tons": datos.get("Tonnage") or 0, "slotType": ranura, "slots": ranuras_cuerpo_a_cuerpo(ranura, tamanos),
             "meleeDamage": (estadisticas.get("Melee") or {}).get("Damage", 0), "cooldown": estadisticas.get("Cooldown"),
             **({"actuator": True} if actuador else {}),
         }
@@ -649,7 +681,8 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "mod": valor["mod"],
             "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon",
             "tons": datos.get("Tonnage") or 0, "hardpoint": tipo_de_anclaje(etiqueta),
-            "slotType": ranura, "slots": tamanos.get(ranura, 1),
+            "slotType": ranura,
+            "slots": ranuras_cuerpo_a_cuerpo(ranura, tamanos) if tipo_de_anclaje(etiqueta) == "melee" else tamanos.get(ranura, 1),
             "ammoTypes": municiones_del_arma((datos.get("StatsData") or {}).get("AmmoType"), etiqueta, propiedades_de_armas),
         }
         combate = combate_del_arma(nombre, armas_por_nivel.get(nombre) or {"1": valor})
@@ -965,7 +998,8 @@ def main():
                              "properties": quirks[nombre].get("properties", {})} for nombre in sorted(usados) if nombre in quirks}
     os.makedirs(RUTA_DESTINO, exist_ok=True)
     colores = construir_colores()
-    for nombre, datos in (("mechs.json", mechs), ("items.json", objetos), ("quirks.json", datos_quirks), ("colors.json", colores)):
+    for nombre, datos in (("mechs.json", mechs), ("items.json", objetos), ("quirks.json", datos_quirks), ("colors.json", colores),
+                          ("slots.json", ranuras_propias_que_cuentan(tamanos, objetos, mechs))):
         with open(os.path.join(RUTA_DESTINO, nombre), "w", encoding="utf-8") as archivo:
             json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
             archivo.write("\n")
