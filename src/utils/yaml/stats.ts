@@ -83,6 +83,24 @@ export function getGeneralSlots(mech: YamlMech, build: YamlBuild, zone: Zone): n
   }, mech.zones[zone].general);
 }
 
+// GetActuatorSlotTypeForInternalEquipment: la ranura de cada actuador del MDA, en brazos y piernas.
+const ACTUATOR_SLOTS: Record<'arm' | 'leg', Record<string, string>> = {
+  arm: { Shoulder: 'Shoulder_SlotType', UpperActuator: 'UpperArm_SlotType', LowerActuator: 'LowerArm_SlotType', HandActuator: 'Hand_SlotType' },
+  leg: { Hip: 'Hip_SlotType', UpperActuator: 'UpperLeg_SlotType', LowerActuator: 'LowerLeg_SlotType', FootActuator: 'Foot_SlotType' }
+};
+export const ACTUATOR_SLOT_TYPES = new Set([...Object.values(ACTUATOR_SLOTS.arm), ...Object.values(ACTUATOR_SLOTS.leg)]);
+
+// La ranura de un actuador del MDA (Shoulder, UpperActuator...) en una ubicación.
+export function getActuatorSlotType(zone: Zone, actuator: string): string | undefined {
+  const limb = zone.endsWith('Arm') ? 'arm' : zone.endsWith('Leg') ? 'leg' : null;
+  return limb ? ACTUATOR_SLOTS[limb][actuator] : undefined;
+}
+
+// Las ranuras de actuador de una ubicación, las de los actuadores que tiene en el MDA.
+export function getActuatorSlotTypes(mech: YamlMech, zone: Zone): string[] {
+  return mech.zones[zone].actuators.flatMap(actuator => getActuatorSlotType(zone, actuator) ?? []);
+}
+
 export function getQuirkProperties(mech: YamlMech): Record<string, unknown>[] {
   return mech.quirks.map(id => getYamlQuirk(id)?.properties ?? {});
 }

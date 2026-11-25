@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import type { Zone } from '../../types/mech';
-import { createStockBuild, mountWeapon, removeWeapon, setInternal } from './build';
+import { createStockBuild, mountItem, mountWeapon, removeWeapon, setInternal } from './build';
 import { distributeDynamicFillerGroups } from './board';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlBuildIssues } from './readouts';
 import { getBuildTonnage, getCritSplitFillers, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
 
-// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA37 de docs/specs/mechlab-yaml.md. Las
+// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA39 de docs/specs/mechlab-yaml.md. Las
 // ranuras libres salen de contar las filas vacías de las capturas del mechlab del juego.
 const generalSlots = (id: string) => {
   const zones = findYamlMech(id)!.zones;
@@ -155,5 +155,26 @@ describe('Rellenos dinámicos', () => {
     expect(total).toBe(14);
     expect(changed.rightArm.Structureslot).toBeLessThan(7);
     expect(changed.head).toEqual({ Structureslot: 1 });
+  });
+});
+
+describe('Equipo de actuadores', () => {
+  it('CA38: el Compact Actuators Hand deja 3 ranuras más en el brazo y ocupa el hombro', () => {
+    const nightstar = findYamlMech('NSR-9J')!;
+    const stock = createStockBuild(nightstar);
+    expect(getGeneralSlots(nightstar, stock, 'leftArm')).toBe(8);
+    const compact = mountItem(nightstar, stock, 'leftArm', 'COMPACT_ACTUATOR_HAND_QS').build!;
+    expect(getGeneralSlots(nightstar, compact, 'leftArm')).toBe(11);
+    expect(getFreeGeneralSlots(nightstar, compact, 'leftArm')).toBe(getFreeGeneralSlots(nightstar, stock, 'leftArm') + 3);
+    expect(mountItem(nightstar, compact, 'leftArm', 'SHOULDER_ARMORED').error).toBeDefined();
+    expect(mountItem(nightstar, stock, 'leftArm', 'SHOULDER_ARMORED').build).toBeDefined();
+  });
+
+  it('CA39: sin actuador de mano no cabe el Compact Actuators Hand; los Improved Actuators no cambian las ranuras', () => {
+    const warhammer = findYamlMech('WHM-DNC')!;
+    const stock = createStockBuild(warhammer);
+    expect(mountItem(warhammer, stock, 'leftArm', 'COMPACT_ACTUATOR_HAND_QS').error).toBeDefined();
+    const improved = mountItem(warhammer, stock, 'leftArm', 'IMPROVED_ACTUATORS').build!;
+    expect(getGeneralSlots(warhammer, improved, 'leftArm')).toBe(getGeneralSlots(warhammer, stock, 'leftArm'));
   });
 });
