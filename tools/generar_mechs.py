@@ -162,8 +162,12 @@ def obtener_nombre_sarna(contenido, chasis, variante, tech_base):
     return quitar_sufijo_variante(chasis, variante)
 
 
-def obtener_parte_cuerpo(hp_str):
+def obtener_parte_cuerpo(hp_str, partes_anclajes=None):
+    # La ubicación que da el HPS del modelo (MechPart de cada anclaje); si el anclaje no está ahí, se deduce del
+    # nombre. El nombre engaña en algunos: Clavicle_Right_EH5_flamer del CRD-5M va en el brazo derecho.
     hp_lower = hp_str.lower()
+    if partes_anclajes and hp_lower in partes_anclajes:
+        return partes_anclajes[hp_lower]
     # Anclajes de los mechs Hero (Banshee BNC-LM, BNC-SR): Hero_Left/Hero_Right van en el brazo
     # de ese lado y Hero_ sin lado en la cabeza, según el mechlab del juego.
     if hp_lower.startswith("hero_"):
@@ -285,7 +289,7 @@ def obtener_ranuras(contenido):
     return ranuras_generales, ranuras_especiales
 
 
-def obtener_hardpoints(contenido, clase_de_peso, tamanos_anclajes=None):
+def obtener_hardpoints(contenido, clase_de_peso, tamanos_anclajes=None, partes_anclajes=None):
     # tamanos_anclajes: tamaño de cada anclaje del modelo (HPS), por su nombre en minúsculas. Si un
     # anclaje no está ahí, el tamaño se deduce del nombre.
     tamanos_anclajes = tamanos_anclajes or {}
@@ -293,7 +297,7 @@ def obtener_hardpoints(contenido, clase_de_peso, tamanos_anclajes=None):
     coincidencia = REGEX_HARDPOINTS.search(contenido)
     if coincidencia:
         for hp in re.findall(r'"([^"]+)"', coincidencia.group(1)):
-            parte = obtener_parte_cuerpo(hp)
+            parte = obtener_parte_cuerpo(hp, partes_anclajes)
             tipo = obtener_tipo_arma(hp)
             if not parte or not tipo:
                 continue
@@ -372,6 +376,23 @@ def cargar_tamanos_anclajes():
     return por_modelo
 
 
+REGEX_PARTE_ANCLAJE = re.compile(r'HardpointSlotID="([^"]+)",MechSkeletonSocketID="[^"]*",MechPart=(\w+)')
+
+
+def cargar_partes_anclajes():
+    # Por modelo (Atlas_MDL), la ubicación de cada anclaje según su HPS (MechPart), por su nombre en minúsculas.
+    modelos = cargar_archivos_por_nombre(RUTA_MODELOS)
+    asset_anclajes = cargar_archivos_por_nombre(RUTA_ANCLAJES)
+    por_modelo = {}
+    for modelo, ruta in modelos.items():
+        hps = (buscar_texto(REGEX_ASSET_ANCLAJES, leer_archivo(ruta)) or "").lower()
+        if hps in asset_anclajes:
+            por_modelo[modelo] = {anclaje.lower(): MAPA_COMPONENTES[parte]
+                                  for anclaje, parte in REGEX_PARTE_ANCLAJE.findall(leer_archivo(asset_anclajes[hps]))
+                                  if parte in MAPA_COMPONENTES}
+    return por_modelo
+
+
 REGEX_CLAVE_ANCLAJE = re.compile(r'^(.*?_[a-z]{2}\d+)')
 
 
@@ -381,7 +402,7 @@ def clave_anclaje(nombre):
     return coincidencia.group(1) if coincidencia else nombre.lower()
 
 
-def obtener_indices_anclajes(contenido):
+def obtener_indices_anclajes(contenido, partes_anclajes=None):
     # Mismo recorrido que obtener_hardpoints: para cada anclaje, su componente y su índice, por su
     # nombre completo y por su clave (por si el loadout lo nombra con otra arma al final).
     indices = {}
@@ -389,7 +410,7 @@ def obtener_indices_anclajes(contenido):
     coincidencia = REGEX_HARDPOINTS.search(contenido)
     if coincidencia:
         for hp in re.findall(r'"([^"]+)"', coincidencia.group(1)):
-            parte = obtener_parte_cuerpo(hp)
+            parte = obtener_parte_cuerpo(hp, partes_anclajes)
             if not parte or not obtener_tipo_arma(hp):
                 continue
             indices[hp.lower()] = (parte, contadores[parte])
@@ -398,11 +419,11 @@ def obtener_indices_anclajes(contenido):
     return indices
 
 
-def construir_componentes(contenido, clase_de_peso, tamanos_anclajes=None):
+def construir_componentes(contenido, clase_de_peso, tamanos_anclajes=None, partes_anclajes=None):
     ranuras_generales, ranuras_especiales = obtener_ranuras(contenido)
     armadura = obtener_valores_por_componente(REGEX_MAX_ARMOR, contenido)
     estructura = obtener_valores_por_componente(REGEX_MAX_STRUCT, contenido)
-    hardpoints = obtener_hardpoints(contenido, clase_de_peso, tamanos_anclajes)
+    hardpoints = obtener_hardpoints(contenido, clase_de_peso, tamanos_anclajes, partes_anclajes)
 
     componentes = {}
     for componente in MAPA_COMPONENTES.values():
@@ -474,7 +495,7 @@ def obtener_potencia_motor(contenido, velocidad_raw, tonelaje):
     return potencias[0] if potencias else 0
 
 
-def parsear_mech(contenido, variante, tamanos_anclajes=None, textos=None):
+def parsear_mech(contenido, variante, tamanos_anclajes=None, textos=None, partes_anclajes=None):
     chasis = obtener_chasis(contenido, variante, textos)
     tech_base = buscar_texto(REGEX_TECH_BASE, contenido)
     refrigeracion_base = buscar_numero(REGEX_BASE_COOLING_RATE, contenido, None)
@@ -488,7 +509,7 @@ def parsear_mech(contenido, variante, tamanos_anclajes=None, textos=None):
         "tonnageMax": tonelaje,
         "baseTonnage": buscar_numero(REGEX_BASE_TONS, contenido, 0.0),
         "baseSpeed": round((velocidad_raw / 3150.0) * 97.2, 4) if velocidad_raw > 0 else 0.0,
-        "components": construir_componentes(contenido, obtener_clase_de_peso(tonelaje), tamanos_anclajes)
+        "components": construir_componentes(contenido, obtener_clase_de_peso(tonelaje), tamanos_anclajes, partes_anclajes)
     }
     if refrigeracion_base is not None:
         mech["BaseCoolingRate"] = refrigeracion_base
@@ -620,11 +641,11 @@ def corregir_lados_con_loadout(contenido_mda, contenido_loadout, ajustes, varian
     return contenido_mda.replace(bloque, corregido)
 
 
-def construir_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, avisos):
+def construir_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, avisos, partes_anclajes=None):
     variante = mech["id"]
     # Genera el mismo código que el enlace de Share (src/utils/buildCode.ts), para que la web la
     # reconstruya con las reglas del taller.
-    indices = obtener_indices_anclajes(contenido_mda)
+    indices = obtener_indices_anclajes(contenido_mda, partes_anclajes)
     zonas = {zona: [] for zona in ZONAS_BUILD}
 
     for anclaje, arma_id in REGEX_ARMA_INSTALADA.findall(contenido_loadout):
@@ -692,12 +713,12 @@ def rasgos_instalados(contenido_loadout):
 ORDEN_TAMANOS = {"small": 0, "medium": 1, "large": 2}
 
 
-def ajustar_a_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, ajustes, tamanos_anclajes=None):
+def ajustar_a_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo, ajustes, tamanos_anclajes=None, partes_anclajes=None):
     # Cuando el tamaño de un anclaje se deduce de su nombre (no está en el HPS), la build de fábrica
     # muestra lo que el juego monta, así que el anclaje es al menos del tamaño de su arma de serie.
     # Los tamaños del HPS no se tocan: el loadout del KFX-S pone un láser grande en un omni mediano
     # y el juego muestra el anclaje mediano.
-    indices = obtener_indices_anclajes(contenido_mda)
+    indices = obtener_indices_anclajes(contenido_mda, partes_anclajes)
     del_modelo = {posicion for nombre, posicion in indices.items() if nombre in (tamanos_anclajes or {})}
     for anclaje, arma_id in REGEX_ARMA_INSTALADA.findall(contenido_loadout):
         item, _ = buscar_item(catalogo, arma_id)
@@ -750,6 +771,7 @@ def main():
     loadouts = cargar_archivos_por_nombre(RUTA_LOADOUTS)
     unit_cards = cargar_unit_cards(cargar_archivos_por_nombre(RUTA_UNIT_CARDS))
     tamanos_por_modelo = cargar_tamanos_anclajes()
+    partes_por_modelo = cargar_partes_anclajes()
     textos = cargar_textos()
     sin_nombre = []
     sin_modelo = []
@@ -790,12 +812,13 @@ def main():
             modelo = (buscar_texto(REGEX_MODELO, contenido) or "").lower()
             if modelo not in tamanos_por_modelo:
                 sin_modelo.append(variante)
-            mech = parsear_mech(contenido, variante, tamanos_por_modelo.get(modelo), textos)
+            partes = partes_por_modelo.get(modelo)
+            mech = parsear_mech(contenido, variante, tamanos_por_modelo.get(modelo), textos, partes)
             if not buscar_texto(REGEX_CHASIS, contenido) and buscar_texto(REGEX_CLAVE_CHASIS, contenido) not in textos:
                 sin_nombre.append(variante)
             if contenido_loadout:
-                ajustar_a_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, ajustes_fabrica, tamanos_por_modelo.get(modelo))
-                mech["stockBuild"] = construir_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, avisos_builds)
+                ajustar_a_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, ajustes_fabrica, tamanos_por_modelo.get(modelo), partes)
+                mech["stockBuild"] = construir_build_de_fabrica(mech, contenido, contenido_loadout, catalogo, avisos_builds, partes)
             else:
                 sin_build.append(variante)
             if loadout in unit_cards:

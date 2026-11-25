@@ -5222,10 +5222,6 @@
           {
             "type": "missile",
             "size": "large"
-          },
-          {
-            "type": "ams",
-            "size": "small"
           }
         ]
       },
@@ -5256,6 +5252,10 @@
           {
             "type": "energy",
             "size": "large"
+          },
+          {
+            "type": "ams",
+            "size": "small"
           },
           {
             "type": "melee",
@@ -5324,7 +5324,7 @@
     "baseHeatCapacity": 40.0,
     "upgradeSlots": 6,
     "techBase": "InnerSphere",
-    "stockBuild": "WzEsIkFTNy1LIixbMTgsMCw5NCwyOCw2NCwyMCw2NCwyMCw2OCwwLDY4LDAsODIsMCw4MiwwXSxbW10sW1siTWVkaXVtUHVsc2VMYXNlciIsMF0sWyJNZWRpdW1QdWxzZUxhc2VyIiwxXSwiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdLFtbIkxSTTIwX1N0cmVhbSIsMF0sWyJBbnRpTWlzc2lsZVN5c3RlbSIsMV0sIkFNU19BbW1vRXF1aXBtZW50IiwiTFJNX0FtbW9FcXVpcG1lbnQiLCJMUk1fQW1tb0VxdWlwbWVudCJdLFtbIkdhdXNzUmlmbGUiLDBdLCJHYXVzc19TdGFuZGFyZF9BbW1vRXF1aXBtZW50Il0sW1siRVJMYXJnZUxhc2VyIiwwXSwiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdLFtbIkVSTGFyZ2VMYXNlciIsMF0sIlNpbmdsZUhlYXRTaW5rIiwiU2luZ2xlSGVhdFNpbmsiLCJHYXVzc19TdGFuZGFyZF9BbW1vRXF1aXBtZW50IiwiR2F1c3NfU3RhbmRhcmRfQW1tb0VxdWlwbWVudCJdLFsiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdLFsiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdXV0",
+    "stockBuild": "WzEsIkFTNy1LIixbMTgsMCw5NCwyOCw2NCwyMCw2NCwyMCw2OCwwLDY4LDAsODIsMCw4MiwwXSxbW10sW1siTWVkaXVtUHVsc2VMYXNlciIsMF0sWyJNZWRpdW1QdWxzZUxhc2VyIiwxXSwiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdLFtbIkxSTTIwX1N0cmVhbSIsMF0sIkFNU19BbW1vRXF1aXBtZW50IiwiTFJNX0FtbW9FcXVpcG1lbnQiLCJMUk1fQW1tb0VxdWlwbWVudCJdLFtbIkdhdXNzUmlmbGUiLDBdLCJHYXVzc19TdGFuZGFyZF9BbW1vRXF1aXBtZW50Il0sW1siRVJMYXJnZUxhc2VyIiwwXSxbIkFudGlNaXNzaWxlU3lzdGVtIiwxXSwiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdLFtbIkVSTGFyZ2VMYXNlciIsMF0sIlNpbmdsZUhlYXRTaW5rIiwiU2luZ2xlSGVhdFNpbmsiLCJHYXVzc19TdGFuZGFyZF9BbW1vRXF1aXBtZW50IiwiR2F1c3NfU3RhbmRhcmRfQW1tb0VxdWlwbWVudCJdLFsiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdLFsiU2luZ2xlSGVhdFNpbmsiLCJTaW5nbGVIZWF0U2luayJdXV0",
     "introYear": 3049,
     "role": "Sniper"
   },
@@ -25532,10 +25532,6 @@
           {
             "type": "missile",
             "size": "small"
-          },
-          {
-            "type": "energy",
-            "size": "small"
           }
         ]
       },
@@ -25575,6 +25571,10 @@
           {
             "type": "energy",
             "size": "medium"
+          },
+          {
+            "type": "energy",
+            "size": "small"
           },
           {
             "type": "missile",
@@ -25630,7 +25630,7 @@
     "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "InnerSphere",
-    "stockBuild": "WzEsIkNSRC01TSIsWzE4LDAsNjYsMTYsNDgsMTIsNDgsMTIsNDAsMCw0MCwwLDQyLDAsNDIsMF0sW1tbIkFudGlNaXNzaWxlU3lzdGVtIiwwXV0sW10sW1siU3RyZWFrU1JNMiIsMF0sIkRvdWJsZUhlYXRTaW5rIiwiU1JNX1N0cmVha19BbW1vRXF1aXBtZW50IiwiTFJNX0FtbW9FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzM19FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzM19FcXVpcG1lbnQiXSxbWyJTdHJlYWtTUk0yIiwwXSxbIkZsYW1lciIsMV0sIkRvdWJsZUhlYXRTaW5rIiwiTFJNX0FtbW9FcXVpcG1lbnQiLCJMUk1fQW1tb0VxdWlwbWVudCIsIkFNU19BbW1vRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50Il0sW1siTWVkaXVtTGFzZXIiLDBdLFsiTFJNMTUiLDFdLCJEb3VibGVIZWF0U2luayJdLFtbIk1lZGl1bUxhc2VyIiwwXSxbIkxSTTE1IiwxXSxbIk1hY2hpbmVHdW4iLDJdLCJNYWNoaW5lR3VuX1N0YW5kYXJkX0hhbGZfQW1tb0VxdWlwbWVudCJdLFtdLFtdXV0",
+    "stockBuild": "WzEsIkNSRC01TSIsWzE4LDAsNjYsMTYsNDgsMTIsNDgsMTIsNDAsMCw0MCwwLDQyLDAsNDIsMF0sW1tbIkFudGlNaXNzaWxlU3lzdGVtIiwwXV0sW10sW1siU3RyZWFrU1JNMiIsMF0sIkRvdWJsZUhlYXRTaW5rIiwiU1JNX1N0cmVha19BbW1vRXF1aXBtZW50IiwiTFJNX0FtbW9FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzM19FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzM19FcXVpcG1lbnQiXSxbWyJTdHJlYWtTUk0yIiwwXSwiRG91YmxlSGVhdFNpbmsiLCJMUk1fQW1tb0VxdWlwbWVudCIsIkxSTV9BbW1vRXF1aXBtZW50IiwiQU1TX0FtbW9FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzM19FcXVpcG1lbnQiLCJKdW1wSmV0X0NsYXNzM19FcXVpcG1lbnQiXSxbWyJNZWRpdW1MYXNlciIsMF0sWyJMUk0xNSIsMV0sIkRvdWJsZUhlYXRTaW5rIl0sW1siTWVkaXVtTGFzZXIiLDBdLFsiRmxhbWVyIiwxXSxbIkxSTTE1IiwyXSxbIk1hY2hpbmVHdW4iLDNdLCJNYWNoaW5lR3VuX1N0YW5kYXJkX0hhbGZfQW1tb0VxdWlwbWVudCJdLFtdLFtdXV0",
     "introYear": 3049,
     "role": "Skirmisher"
   },
@@ -25689,10 +25689,6 @@
           {
             "type": "missile",
             "size": "medium"
-          },
-          {
-            "type": "energy",
-            "size": "small"
           }
         ]
       },
@@ -25732,6 +25728,10 @@
           {
             "type": "energy",
             "size": "medium"
+          },
+          {
+            "type": "energy",
+            "size": "small"
           },
           {
             "type": "missile",
@@ -25783,7 +25783,7 @@
     "baseHeatCapacity": 50.0,
     "upgradeSlots": 7,
     "techBase": "InnerSphere",
-    "stockBuild": "WzEsIkNSRC01UyIsWzE4LDAsNjYsMTYsNDgsMTIsNDgsMTIsNDAsMCw0MCwwLDQyLDAsNDIsMF0sW1tdLFsiU1JNX0FtbW9FcXVpcG1lbnQiLCJTUk1fQW1tb0VxdWlwbWVudCJdLFtbIlNSTTYiLDBdXSxbWyJTUk02IiwwXSxbIkZsYW1lciIsMV0sIkxSTV9BbW1vRXF1aXBtZW50IiwiTFJNX0FtbW9FcXVpcG1lbnQiXSxbWyJNZWRpdW1MYXNlciIsMF0sWyJMUk0xNSIsMV1dLFtbIk1lZGl1bUxhc2VyIiwwXSxbIkxSTTE1IiwxXV0sW10sW11dXQ",
+    "stockBuild": "WzEsIkNSRC01UyIsWzE4LDAsNjYsMTYsNDgsMTIsNDgsMTIsNDAsMCw0MCwwLDQyLDAsNDIsMF0sW1tdLFsiU1JNX0FtbW9FcXVpcG1lbnQiLCJTUk1fQW1tb0VxdWlwbWVudCJdLFtbIlNSTTYiLDBdXSxbWyJTUk02IiwwXSwiTFJNX0FtbW9FcXVpcG1lbnQiLCJMUk1fQW1tb0VxdWlwbWVudCJdLFtbIk1lZGl1bUxhc2VyIiwwXSxbIkxSTTE1IiwxXV0sW1siTWVkaXVtTGFzZXIiLDBdLFsiTFJNMTUiLDJdLFsiRmxhbWVyIiwxXV0sW10sW11dXQ",
     "introYear": 3049,
     "role": "Missile Boat"
   },
@@ -25832,14 +25832,6 @@
           {
             "type": "energy",
             "size": "medium"
-          },
-          {
-            "type": "energy",
-            "size": "medium"
-          },
-          {
-            "type": "energy",
-            "size": "medium"
           }
         ]
       },
@@ -25854,14 +25846,6 @@
         "structure": 30.0,
         "hasRearArmor": true,
         "hardpoints": [
-          {
-            "type": "energy",
-            "size": "medium"
-          },
-          {
-            "type": "energy",
-            "size": "medium"
-          },
           {
             "type": "energy",
             "size": "medium"
@@ -25894,6 +25878,14 @@
             "size": "medium"
           },
           {
+            "type": "energy",
+            "size": "medium"
+          },
+          {
+            "type": "energy",
+            "size": "medium"
+          },
+          {
             "type": "melee",
             "size": "medium",
             "weightClass": "heavy"
@@ -25909,6 +25901,14 @@
         "structure": 20.0,
         "hasRearArmor": false,
         "hardpoints": [
+          {
+            "type": "energy",
+            "size": "medium"
+          },
+          {
+            "type": "energy",
+            "size": "medium"
+          },
           {
             "type": "energy",
             "size": "medium"
@@ -25970,7 +25970,7 @@
     "baseHeatCapacity": 50.0,
     "upgradeSlots": 7,
     "techBase": "InnerSphere",
-    "stockBuild": "WzEsIkNSRC02VCIsWzE4LDAsNjYsMTYsNDgsMTIsNDgsMTIsNDAsMCw0MCwwLDUwLDAsNTAsMF0sW1tdLFsiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50IiwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayIsIkRvdWJsZUhlYXRTaW5rIl0sW1siTWVkaXVtTGFzZXIiLDBdLFsiTWVkaXVtTGFzZXIiLDFdLFsiRmxhbWVyIiwyXSwiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50IiwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayJdLFtbIk1lZGl1bUxhc2VyIiwwXSxbIk1lZGl1bUxhc2VyIiwxXSxbIkZsYW1lciIsMl0sIkp1bXBKZXRfQ2xhc3MzX0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3MzX0VxdWlwbWVudCIsIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiXSxbWyJNZWRpdW1MYXNlciIsMF0sWyJNZWRpdW1MYXNlciIsMV0sWyJNZWRpdW1MYXNlciIsMl0sWyJNZWRpdW1MYXNlciIsM11dLFtbIk1lZGl1bUxhc2VyIiwwXSxbIk1lZGl1bUxhc2VyIiwxXSxbIk1lZGl1bUxhc2VyIiwyXSxbIk1lZGl1bUxhc2VyIiwzXV0sW10sW11dXQ",
+    "stockBuild": "WzEsIkNSRC02VCIsWzE4LDAsNjYsMTYsNDgsMTIsNDgsMTIsNDAsMCw0MCwwLDUwLDAsNTAsMF0sW1tdLFsiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50IiwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayIsIkRvdWJsZUhlYXRTaW5rIl0sW1siRmxhbWVyIiwwXSwiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50IiwiSnVtcEpldF9DbGFzczNfRXF1aXBtZW50IiwiRG91YmxlSGVhdFNpbmsiLCJEb3VibGVIZWF0U2luayJdLFtbIkZsYW1lciIsMF0sIkp1bXBKZXRfQ2xhc3MzX0VxdWlwbWVudCIsIkp1bXBKZXRfQ2xhc3MzX0VxdWlwbWVudCIsIkRvdWJsZUhlYXRTaW5rIiwiRG91YmxlSGVhdFNpbmsiXSxbWyJNZWRpdW1MYXNlciIsMF0sWyJNZWRpdW1MYXNlciIsMV0sWyJNZWRpdW1MYXNlciIsMl0sWyJNZWRpdW1MYXNlciIsM10sWyJNZWRpdW1MYXNlciIsNF0sWyJNZWRpdW1MYXNlciIsNV1dLFtbIk1lZGl1bUxhc2VyIiwwXSxbIk1lZGl1bUxhc2VyIiwxXSxbIk1lZGl1bUxhc2VyIiwyXSxbIk1lZGl1bUxhc2VyIiwzXSxbIk1lZGl1bUxhc2VyIiw0XSxbIk1lZGl1bUxhc2VyIiw1XV0sW10sW11dXQ",
     "introYear": 3053,
     "role": "Skirmisher"
   },
@@ -64408,7 +64408,12 @@
         "maxArmor": 100.0,
         "structure": 50.0,
         "hasRearArmor": true,
-        "hardpoints": []
+        "hardpoints": [
+          {
+            "type": "ams",
+            "size": "small"
+          }
+        ]
       },
       "leftTorso": {
         "maxSlots": 10,
@@ -64418,12 +64423,7 @@
         "maxArmor": 68.0,
         "structure": 34.0,
         "hasRearArmor": true,
-        "hardpoints": [
-          {
-            "type": "ams",
-            "size": "small"
-          }
-        ]
+        "hardpoints": []
       },
       "rightTorso": {
         "maxSlots": 6,
@@ -64527,7 +64527,7 @@
     "baseHeatCapacity": 50.0,
     "upgradeSlots": 6,
     "techBase": "Clan",
-    "stockBuild": "WzEsIk5HQS1JSS1CIixbMTgsMCwzNCwyMCwzMCwxOCwzMCwxOCwyOCwwLDI4LDAsMzIsMCwzMiwwXSxbW10sWyJDbGFuRG91YmxlSGVhdFNpbmsiLCJDbGFuRG91YmxlSGVhdFNpbmsiXSxbWyJDLUFudGlNaXNzaWxlU3lzdGVtIiwwXSwiQy1BTVNfQW1tb0VxdWlwbWVudCIsIkNsYW5fTFJNX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0xSTV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9MUk1fQW1tb0VxdWlwbWVudCJdLFtbIkMtTmFyY0JlYWNvbiIsMF0sIkNsYW5fTkFSQ19BbW1vRXF1aXBtZW50IiwiQ2xhbl9OQVJDX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0xSTV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9MUk1fQW1tb0VxdWlwbWVudCIsIkNsYW5fTFJNX0FtbW9FcXVpcG1lbnQiXSxbWyJDLUxSTTIwIiwwXSxbIkMtTFJNMjAiLDFdXSxbWyJDLUxSTTIwIiwwXSxbIkMtTFJNMjAiLDFdXSxbXSxbXV1d",
+    "stockBuild": "WzEsIk5HQS1JSS1CIixbMTgsMCwzNCwyMCwzMCwxOCwzMCwxOCwyOCwwLDI4LDAsMzIsMCwzMiwwXSxbW10sW1siQy1BbnRpTWlzc2lsZVN5c3RlbSIsMF0sIkNsYW5Eb3VibGVIZWF0U2luayIsIkNsYW5Eb3VibGVIZWF0U2luayJdLFsiQy1BTVNfQW1tb0VxdWlwbWVudCIsIkNsYW5fTFJNX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0xSTV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9MUk1fQW1tb0VxdWlwbWVudCJdLFtbIkMtTmFyY0JlYWNvbiIsMF0sIkNsYW5fTkFSQ19BbW1vRXF1aXBtZW50IiwiQ2xhbl9OQVJDX0FtbW9FcXVpcG1lbnQiLCJDbGFuX0xSTV9BbW1vRXF1aXBtZW50IiwiQ2xhbl9MUk1fQW1tb0VxdWlwbWVudCIsIkNsYW5fTFJNX0FtbW9FcXVpcG1lbnQiXSxbWyJDLUxSTTIwIiwwXSxbIkMtTFJNMjAiLDFdXSxbWyJDLUxSTTIwIiwwXSxbIkMtTFJNMjAiLDFdXSxbXSxbXV1d",
     "introYear": 3055,
     "role": "Missile Boat"
   },

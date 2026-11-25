@@ -169,7 +169,6 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 - Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
 - Dónde coloca el juego los rellenos dinámicos (`GetMechpartsInFillerPositioningOrder`): en el WHM-DNC de serie el juego pone 2 de Ferro en cada brazo y la web los junta en el brazo derecho. El número y las ranuras libres sí coinciden.
 - Las armas que no caben en su ubicación y reparten ranuras con la contigua (`critSplitSlots` de `GetOpenCritSlots`): el AC/20 del SD1-O (9 en el brazo izquierdo y 1 en el torso) y el C-Arrow IV del NGA-PRIME (10 en cada brazo y 2 en cada torso).
-- La ubicación de algunos anclajes: el generador la deduce del nombre y los datos del juego (`MechPart` de `*_HPS`) dicen otra en 29 de 3.248, como el Flamer del CRD-5M (`Clavicle_Right`, brazo derecho).
 - El peso del JR7-IIC-FY de serie: 34,43 t en el juego y 34,93 en la web.
 - Quitar actuadores de los brazos (antebrazo y mano) para montar armas grandes.
 - Las ranuras del WHM-DNC de serie: la web avisa de que los rellenos dinámicos necesitan 14 ranuras libres y solo quedan 3, y de que no caben las 3 fijas del motor XL en los torsos; en el juego caben. Puede ser el mismo descuadre que las ranuras de los brazos con cuerpo a cuerpo.
