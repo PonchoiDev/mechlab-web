@@ -1,7 +1,7 @@
 import type { Zone } from '../../types/mech';
 import type { YamlBuild, YamlHardpointType, YamlMech } from '../../types/yaml-mechlab';
 import { getYamlItem } from './data';
-import { GENERAL_SLOT, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots } from './stats';
+import { GENERAL_SLOT, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots, getUnplacedCritSplits } from './stats';
 
 export type MountResult = { build: YamlBuild; error?: undefined } | { build?: undefined; error: string };
 
@@ -65,8 +65,12 @@ export function mountWeapon(mech: YamlMech, build: YamlBuild, zone: Zone, itemId
     && (!hardpointId || point.id === hardpointId));
   if (!hardpoint) return { error: `No free ${item.hardpoint} hardpoint` };
   const free = getFreeGeneralSlots(mech, build, zone);
-  if (free < item.slots) return { error: `Needs ${item.slots} slots; only ${free} free` };
   const next = { ...build, weapons: [...build.weapons, { zone, hardpoint: hardpoint.id, item: itemId, ...(tier === undefined ? {} : { tier }) }] };
+  // Un arma de más de 7 ranuras lleva el resto a una ubicación contigua si en la suya no cabe.
+  if (getUnplacedCritSplits(mech, next).some(split => split.from === zone)) {
+    return { error: `Needs ${item.slots} slots; only ${free} free here and no adjacent location with room for the rest` };
+  }
+  if (getFreeGeneralSlots(mech, next, zone) < 0) return { error: `Needs ${item.slots} slots; only ${free} free` };
   const fillers = dynamicFillersProblem(mech, next);
   return fillers ? { error: fillers } : { build: next };
 }

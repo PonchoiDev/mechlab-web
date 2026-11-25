@@ -886,11 +886,21 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks, r
     minusculas = {id_objeto.lower(): id_objeto for id_objeto in objetos}
     internas = dict(INTERNAS_DE_SERIE)
     huecos = []
+    # Las ranuras del MDA de cada tipo en cada ubicación. Una pieza de serie en una ranura oculta (retrorreactores,
+    # ECM, sonda, MASC) que el MDA no tiene ahí no llega al mechlab, como en el MechLab de MW5: el retrorreactor del
+    # torso central del loadout del JR7-IIC-FY no está en el juego (6 de 9 y 34,43 t).
+    ranuras_mda = {}
+    for bloque in datos.get("EquipmentAllocation", {}).get("SlotData", []):
+        for parte_mda, cantidad in bloque["SlotCounts"]:
+            ranuras_mda[(parte_mda, bloque["SlotTypeDataAssetId"]["Id"]["PrimaryAssetName"].lower())] = cantidad
     for parte in loadout.get("Equipment", {}).get("MechPartEquipment", []):
         for hueco in parte["SlottedEquipment"]:
             tipo = hueco["SlotTypeAssetId"]["Id"]["PrimaryAssetName"]
             pieza = hueco["EquipmentData"]["EquipmentId"]["Id"]["PrimaryAssetName"]
             if not pieza or pieza == "None" or PIEZAS_TECNICAS.search(pieza):
+                continue
+            if tipo.lower() in tipos_de_ranura_de_yaml() and not ranuras_mda.get((parte["MechPart"], tipo.lower())):
+                avisos.append(f"{id_mech}: {pieza} en {tipo} de {parte['MechPart']}, que el MDA no tiene")
                 continue
             # ReplaceLoadoutLegacyEquipment: una pieza que no existe y acaba en _H, _M o _L (las versiones antiguas
             # de calidad, ENDO_M) pasa a la misma sin el sufijo.

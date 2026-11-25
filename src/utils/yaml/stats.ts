@@ -394,12 +394,94 @@ export function getFixedFillers(build: YamlBuild, zone: Zone): number {
   return Object.values(build.internal).reduce((sum, id) => sum + (getYamlItem(id)?.fillerSlots?.[zone] ?? 0), 0);
 }
 
+// GetCritSplitMinWeaponSize: un arma de más de 7 ranuras ocupa 7 en su ubicación y reparte el resto.
+const CRIT_SPLIT_MIN_SLOTS = 7;
+// GetAdjacentMechParts, en su orden: la cabeza y las piernas no tienen ubicaciones contiguas.
+const ADJACENT_ZONES: Partial<Record<Zone, Zone[]>> = {
+  centerTorso: ['leftTorso', 'rightTorso'], leftTorso: ['centerTorso', 'leftArm'], rightTorso: ['centerTorso', 'rightArm'],
+  leftArm: ['leftTorso'], rightArm: ['rightTorso']
+};
+// El orden de EMechParts, en el que GetOpenCritSlots recorre las ubicaciones.
+const PART_ORDER: Zone[] = ['head', 'centerTorso', 'leftTorso', 'leftArm', 'leftLeg', 'rightTorso', 'rightArm', 'rightLeg'];
+
+// El relleno fijo que deja en una ubicación contigua un arma que no cabe en la suya.
+export interface CritSplitFiller {
+  zone: Zone;
+  from: Zone;
+  item: string;
+  slots: number;
+}
+
+interface SlotLayout {
+  free: Record<Zone, number>;
+  fillers: CritSplitFiller[];
+  // Lo que no cabe en ninguna ubicación contigua.
+  unplaced: CritSplitFiller[];
+}
+
+// GetOpenCritSlots e InstallRequiredFillers de YAML: las ranuras generales libres de cada ubicación, con lo montado
+// y los rellenos fijos del motor, y el reparto de las armas grandes. Cada arma ocupa en su ubicación hasta 7; el
+// resto de cada ubicación va primero a sus ranuras libres y lo que quede, entero, a la primera contigua con sitio.
+function getSlotLayout(mech: YamlMech, build: YamlBuild): SlotLayout {
+  const free = {} as Record<Zone, number>;
+  const split = new Map<Zone, { slots: number; item: string }>();
+  for (const zone of Object.keys(mech.zones) as Zone[]) {
+    const items = build.items.filter(item => item.zone === zone && item.slotType === GENERAL_SLOT);
+    const used = items.reduce((sum, mounted) => sum + (getYamlItem(mounted.item)?.slots ?? 1), 0);
+    free[zone] = getGeneralSlots(mech, build, zone) - getFixedFillers(build, zone) - used;
+  }
+  for (const weapon of build.weapons) {
+    const slots = getYamlItem(weapon.item)?.slots ?? 1;
+    free[weapon.zone] -= Math.min(slots, CRIT_SPLIT_MIN_SLOTS);
+    if (slots > CRIT_SPLIT_MIN_SLOTS) {
+      const current = split.get(weapon.zone);
+      split.set(weapon.zone, { slots: (current?.slots ?? 0) + slots - CRIT_SPLIT_MIN_SLOTS, item: current?.item ?? weapon.item });
+    }
+  }
+  for (const zone of PART_ORDER) {
+    const pending = split.get(zone);
+    if (!pending || free[zone] <= 0) continue;
+    const moved = Math.min(free[zone], pending.slots);
+    free[zone] -= moved;
+    pending.slots -= moved;
+  }
+  const fillers: CritSplitFiller[] = [];
+  const unplaced: CritSplitFiller[] = [];
+  for (const [from, { slots, item }] of split) {
+    if (slots <= 0) continue;
+    const zone = (ADJACENT_ZONES[from] ?? []).find(candidate => (free[candidate] ?? 0) >= slots);
+    if (zone) {
+      free[zone] -= slots;
+      fillers.push({ zone, from, item, slots });
+    } else {
+      unplaced.push({ zone: from, from, item, slots });
+    }
+  }
+  return { free, fillers, unplaced };
+}
+
+// Los rellenos de las armas repartidas y lo que no cabe en ninguna ubicación contigua.
+export function getCritSplitFillers(mech: YamlMech, build: YamlBuild): CritSplitFiller[] {
+  return getSlotLayout(mech, build).fillers;
+}
+
+export function getUnplacedCritSplits(mech: YamlMech, build: YamlBuild): CritSplitFiller[] {
+  return getSlotLayout(mech, build).unplaced;
+}
+
+// Las ranuras que ocupa un arma en su ubicación: todas menos las que lleva a la contigua.
+export function getWeaponSlotsInZone(mech: YamlMech, build: YamlBuild, hardpoint: string): number {
+  const weapon = build.weapons.find(mounted => mounted.hardpoint === hardpoint);
+  if (!weapon) return 0;
+  const slots = getYamlItem(weapon.item)?.slots ?? 1;
+  const outside = getSlotLayout(mech, build).fillers.filter(filler => filler.from === weapon.zone && filler.item === weapon.item)
+    .reduce((sum, filler) => sum + filler.slots, 0);
+  return slots - outside;
+}
+
 // Ranuras generales libres de una ubicación, antes de colocar los rellenos dinámicos.
 export function getFreeGeneralSlots(mech: YamlMech, build: YamlBuild, zone: Zone): number {
-  const items = build.items.filter(item => item.zone === zone && item.slotType === GENERAL_SLOT);
-  const weapons = build.weapons.filter(weapon => weapon.zone === zone);
-  const used = [...items, ...weapons].reduce((sum, mounted) => sum + (getYamlItem(mounted.item)?.slots ?? 1), 0);
-  return getGeneralSlots(mech, build, zone) - getFixedFillers(build, zone) - used;
+  return getSlotLayout(mech, build).free[zone];
 }
 
 export function getTotalFreeGeneralSlots(mech: YamlMech, build: YamlBuild): number {
