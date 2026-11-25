@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import type { Zone } from '../../types/mech';
 import { createStockBuild, mountWeapon, removeWeapon, setInternal } from './build';
+import { distributeDynamicFillerGroups } from './board';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlBuildIssues } from './readouts';
 import { getBuildTonnage, getCritSplitFillers, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
 
-// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA34 de docs/specs/mechlab-yaml.md. Las
+// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA37 de docs/specs/mechlab-yaml.md. Las
 // ranuras libres salen de contar las filas vacías de las capturas del mechlab del juego.
 const generalSlots = (id: string) => {
   const zones = findYamlMech(id)!.zones;
@@ -111,5 +112,48 @@ describe('Equipo de serie sin ranura', () => {
     expect(stock.items.filter(mounted => getYamlItem(mounted.item)?.jumpJet)).toHaveLength(6);
     expect(getBuildTonnage(jenner, stock)).toBe(34.43);
     expect(getYamlBuildIssues(jenner, stock)).toEqual([]);
+  });
+});
+
+describe('Rellenos dinámicos', () => {
+  // Por ubicación, cuántos rellenos pide cada ranura de pieza (Armorslot: Ferro, Structureslot: Endo).
+  const fillers = (id: string, build = createStockBuild(findYamlMech(id)!)) => {
+    const groups = distributeDynamicFillerGroups(findYamlMech(id)!, build);
+    return Object.fromEntries(Object.entries(groups).filter(([, list]) => list.length > 0)
+      .map(([zone, list]) => [zone, Object.fromEntries(list.map(group => [group.slotType, group.slots]))]));
+  };
+
+  it('CA35: sin rellenos en el loadout, uno por ubicación en cada vuelta, como en las capturas', () => {
+    expect(fillers('WHM-DNC')).toEqual({
+      centerTorso: { Armorslot: 2 }, leftTorso: { Armorslot: 2 }, rightTorso: { Armorslot: 3 }, leftLeg: { Armorslot: 1 },
+      rightLeg: { Armorslot: 1 }, leftArm: { Armorslot: 2 }, rightArm: { Armorslot: 2 }, head: { Armorslot: 1 }
+    });
+    expect(fillers('INC-A')).toEqual({
+      centerTorso: { Armorslot: 2 }, leftTorso: { Armorslot: 2 }, rightTorso: { Armorslot: 2 },
+      leftLeg: { Armorslot: 1, Structureslot: 1 }, rightLeg: { Structureslot: 2 }, leftArm: { Structureslot: 2 },
+      rightArm: { Structureslot: 1 }, head: { Structureslot: 1 }
+    });
+  });
+
+  it('CA36: la build de serie de un loadout con rellenos los tiene donde los trae, como en las capturas', () => {
+    expect(fillers('HBK-VEST')).toEqual({
+      leftTorso: { Structureslot: 2 }, rightTorso: { Structureslot: 1 }, centerTorso: { Structureslot: 2 },
+      leftArm: { Structureslot: 2 }, rightArm: { Structureslot: 7 }
+    });
+    expect(fillers('KFX-C')).toEqual({
+      leftTorso: { Structureslot: 3 }, rightArm: { Structureslot: 2 }, rightTorso: { Structureslot: 2 },
+      leftLeg: { Armorslot: 2 }, rightLeg: { Armorslot: 2 }, leftArm: { Armorslot: 2 }, head: { Armorslot: 1 }
+    });
+  });
+
+  it('CA37: con cualquier cambio, los rellenos se vuelven a poner uno por ubicación en cada vuelta', () => {
+    const hunchback = findYamlMech('HBK-VEST')!;
+    const stock = createStockBuild(hunchback);
+    const headLaser = stock.weapons.find(weapon => weapon.zone === 'head')!;
+    const changed = fillers('HBK-VEST', removeWeapon(stock, headLaser.hardpoint));
+    const total = Object.values(changed).reduce((sum, slots) => sum + (slots.Structureslot ?? 0), 0);
+    expect(total).toBe(14);
+    expect(changed.rightArm.Structureslot).toBeLessThan(7);
+    expect(changed.head).toEqual({ Structureslot: 1 });
   });
 });
