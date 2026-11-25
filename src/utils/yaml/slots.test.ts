@@ -3,9 +3,9 @@ import type { Zone } from '../../types/mech';
 import { createStockBuild, mountWeapon, removeWeapon, setInternal } from './build';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlBuildIssues } from './readouts';
-import { getCritSplitFillers, getDynamicFillers, getFixedFillers, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
+import { getBuildTonnage, getCritSplitFillers, getDynamicFillers, getFixedFillers, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
 
-// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA32 de docs/specs/mechlab-yaml.md. Las
+// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA33 de docs/specs/mechlab-yaml.md. Las
 // ranuras libres salen de contar las filas vacías de las capturas del mechlab del juego.
 const generalSlots = (id: string) => {
   const zones = findYamlMech(id)!.zones;
@@ -94,5 +94,15 @@ describe('Armas repartidas', () => {
     const gauss = stock.weapons.find(weapon => weapon.zone === 'rightArm' && weapon.item === 'GaussRifle')!;
     const result = mountWeapon(nightstar, removeWeapon(stock, gauss.hardpoint), 'rightArm', 'Autocannon20');
     expect(result.error).toMatch(/adjacent/i);
+  });
+});
+
+describe('Equipo de serie sin ranura', () => {
+  it('CA33: el retrorreactor del torso central del JR7-IIC-FY no llega al mechlab, como en la captura', () => {
+    const jenner = findYamlMech('JR7-IIC-FY')!;
+    const stock = createStockBuild(jenner);
+    expect(stock.items.filter(mounted => getYamlItem(mounted.item)?.jumpJet)).toHaveLength(6);
+    expect(getBuildTonnage(jenner, stock)).toBe(34.43);
+    expect(getYamlBuildIssues(jenner, stock)).toEqual([]);
   });
 });

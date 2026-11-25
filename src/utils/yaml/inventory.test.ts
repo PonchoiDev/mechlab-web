@@ -25,7 +25,8 @@ describe('inventario del MechLab de YAML', () => {
     const target = { zone: 'rightArm' as const, hardpoint: null, internal: null };
     const fits = filterYamlInventory(catalog, { ...all, fitsOnly: true }, nightstar, empty, target);
     expect(fits.some(({ id }) => id === 'GaussRifle')).toBe(true);
-    expect(fits.some(({ id }) => id === 'Autocannon20')).toBe(false);
+    // El AC/20 (10) cabe: ocupa las 8 ranuras del brazo y lleva 2 al torso derecho.
+    expect(fits.some(({ id }) => id === 'Autocannon20')).toBe(true);
     expect(fits.some(({ id }) => id === 'AntiMissileSystem')).toBe(false);
     const counts = countYamlByCategory(fits);
     expect(counts.all).toBe(fits.length);
