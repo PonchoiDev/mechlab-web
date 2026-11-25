@@ -138,6 +138,7 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 | CA22 | El GHR-5J, de la Esfera Interior con motor estándar | se genera su build de serie | solo lleva el núcleo `std280`: armadura, estructura, tipo de motor, refrigeración y giroscopio quedan vacíos |
 | CA23 | El ARC-T, con `ENDO_H` en su loadout | se genera su build de serie | lleva la estructura `ENDO` |
 | CA24 | Las 639 builds de serie | se calculan | al menos 610 pesan su tonelaje exacto |
+| CA25 | Las builds de serie del KFX-C, el INC-A y el WHM-DNC, con capturas del juego | se calculan | pesan 30 de 30, 29,97 de 30 y 61,99 de 70 t; las 21 cifras del panel del KFX-C y el INC-A coinciden con el juego, y en el WHM-DNC todas menos armadura, estructura y velocidad |
 
 ## Fuera de alcance
 
@@ -149,7 +150,8 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 
 ## Pendiente de comprobar en el juego
 
-- Las builds de serie que no pesan su tonelaje: con la conversión de serie y las reglas de peso de `CalculateMechTonnage` ([estadisticas-yaml.md](estadisticas-yaml.md)), 610 de 639 lo dan exacto. De las otras 29, 28 se quedan entre 0,03 y 0,2 t por debajo (KFX, HMN, INC, EXE-B, TBR...) y el WHM-DNC pesa 61,99 de 70 t: su MDA tiene 3 ranuras laterales de motor, YAML le pone motor XL y el loadout del juego no llena las 8 t que libera. Hace falta una captura del juego para cada caso.
+- Las builds de serie que no pesan su tonelaje: con la conversión de serie y las reglas de peso de `CalculateMechTonnage` ([estadisticas-yaml.md](estadisticas-yaml.md)), 610 de 639 lo dan exacto. Las otras 29 se quedan por debajo; dos están comprobadas con capturas del juego, que marca lo mismo (CA25): el INC-A pesa 29,97 de 30 t y el WHM-DNC 61,99 de 70 (YAML le pone motor XL, por sus 3 ranuras laterales, y el loadout del juego no llena las 8 t que libera).
+- La armadura, la estructura y la velocidad del WHM-DNC de la captura (375,9, 299,2 y 85,7 km/h) son las de la web por 1,05, 1,1 y 1,15. Ningún quirk de YAML ni el MDA dan esos multiplicadores: pueden ser rasgos de 'Mech de la partida instalados en ese WHM-DNC.
 
 - El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
 - Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
@@ -157,5 +159,5 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA24, la conversión de serie).
+1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, compartir y guardar una build.
