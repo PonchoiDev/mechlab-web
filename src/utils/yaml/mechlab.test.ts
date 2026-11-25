@@ -39,8 +39,9 @@ describe('MechLab de YAML', () => {
 
   it('CA17: las variantes son las del MechLab de MW5, con su id, y las reglas de YAML están aplicadas', () => {
     const mw5Ids = new Set(mw5Mechs.map(mech => mech.id));
-    expect(yamlMechs.length).toBe(639);
-    expect(yamlMechs.every(mech => mw5Ids.has(mech.id))).toBe(true);
+    // Las 639 del MechLab de MW5 están, con su id; las demás son las variantes nuevas de YAML (CA40).
+    const yamlIds = new Set(yamlMechs.map(mech => mech.id));
+    expect([...mw5Ids].filter(id => !yamlIds.has(id))).toEqual([]);
     expect(yamlMechs.some(mech => /tutorial|boss/i.test(mech.id))).toBe(false);
     // YAML cambia al arrancar el tamaño de los tipos de ranura del juego: el AC/10 pasa de 4 a 7.
     expect(getYamlItem('Autocannon10')!.slots).toBe(7);
@@ -53,5 +54,14 @@ describe('MechLab de YAML', () => {
     expect(decodeYamlBuild('garbage')).toBeNull();
     const mw5Code = mw5Mechs.find(mech => mech.id === 'NSR-9J')!.stockBuild!;
     expect(decodeYamlBuild(mw5Code)).toBeNull();
+  });
+
+  it('CA40: las variantes nuevas de YAML, sin rellenos técnicos, superpesados ni repetidas', () => {
+    const annihilator = findYamlMech('ANH-1G')!;
+    expect(annihilator).toMatchObject({ chassis: 'Annihilator', variant: 'ANH-1G', tonnage: 100 });
+    expect(annihilator.stock.weapons.length).toBeGreaterThan(0);
+    for (const id of ['Partial Mech Salvage', 'None', 'ANH-1GT', 'COR-ROAM']) expect(findYamlMech(id), id).toBeUndefined();
+    expect(yamlMechs.filter(mech => mech.id === 'AS7-D-H')).toHaveLength(1);
+    expect(new Set(yamlMechs.map(mech => mech.id)).size).toBe(yamlMechs.length);
   });
 });
