@@ -89,4 +89,12 @@ describe('MechLab de YAML', () => {
       expect(mech.stock.weapons.length, id).toBeGreaterThan(0);
     }
   });
+
+  it('CA45: la cabina que el loadout trae en «Cockpit» va en la ranura de cabina, como en la captura del CN9-CALM', () => {
+    const centurion = findYamlMech('CN9-CALM')!;
+    const stock = createStockBuild(centurion);
+    expect(stock.internal.cockpit).toBe('COCKPIT_SMALL');
+    expect(stock.items.filter(mounted => mounted.zone === 'head')).toEqual([]);
+    expect(getFreeGeneralSlots(centurion, stock, 'head')).toBe(2);
+  });
 });
