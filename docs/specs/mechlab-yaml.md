@@ -178,6 +178,7 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 
 - Las builds de serie que no pesan su tonelaje: con la conversión de serie y las reglas de peso de `CalculateMechTonnage` ([estadisticas-yaml.md](estadisticas-yaml.md)), 610 de 639 lo dan exacto. Las otras 29 se quedan por debajo; tres están comprobadas con capturas del juego, que marca lo mismo: el INC-A pesa 29,97 de 30 t, el WHM-DNC 61,99 de 70 (YAML le pone motor XL, por sus 3 ranuras laterales, y el loadout del juego no llena las 8 t que libera) y el JR7-IIC-FY 34,43 de 35 (CA25 y CA33).
 - Las ranuras fijas en los torsos laterales del XXL de la Esfera Interior (6) y del Compact (ninguna). Las del XL (3), el Light (2), el XL Clan (2) y el XXL Clan (4) están comprobadas con capturas.
+- Las variantes nuevas de YAML: 132 de 146 builds de serie pesan su tonelaje, y 5 tienen avisos de ranuras (ANH-1P, WHM-IIC-3, HGN-BP, PXH-7S y CN9-CALM). Hace falta una captura del juego para cada una.
 
 ## Plan de pruebas
 

@@ -6,7 +6,7 @@ import re
 import struct
 import sys
 
-from generar_mechs import ARCHIVOS_NO_JUGABLES, cargar_partes_anclajes, obtener_parte_cuerpo, obtener_tipo_arma, obtener_variante
+from generar_mechs import ARCHIVOS_NO_JUGABLES, cargar_partes_anclajes, cargar_textos as cargar_textos_del_juego, obtener_parte_cuerpo, obtener_tipo_arma, obtener_variante
 
 # Genera los datos del MechLab con las reglas de YAML (src/data/yaml/) a partir del volcado de los mods
 # (tools/datos-juego/yaml/, de extraer_yaml.py), de los MDA exportados del juego (tools/datos-juego/mda/)
@@ -965,6 +965,29 @@ ORDEN_DE_LA_CONVERSION = ["Engine", "EngineTypeSlot", "enginecooling", "Gyro", "
 REGEX_RELLENO = re.compile(r"^DYNAMIC_FILLER_SIZE_(\d+)$", re.IGNORECASE)
 
 
+# Rellenos técnicos de YAML, que no son 'Mechs: el que ejecuta código al arrancar y el de chatarra del desguace.
+MDA_TECNICOS = {"YAML_RUNONCE_DUMMY_MDA", "PARTIAL_SALVAGE_MDA"}
+# Los superpesados (más de 100 t) quedan fuera del MechLab.
+TONELAJE_MAXIMO = 100
+
+
+def construir_variante(id_mech, chasis, variante, dlc, datos, loadout, nombre_mda, objetos, avisos, asignaciones, tamanos, ocultos, rasgos):
+    modelo = (datos.get("MechModel") or "").rsplit(".", 1)[-1]
+    stock = construir_build_de_serie(datos, loadout, objetos, avisos, id_mech,
+                                     quirks_de(id_mech, modelo, asignaciones, nombre_mda), rasgos)
+    return {
+        "id": id_mech, "chassis": chasis, "variant": variante,
+        "tonnage": datos["MechDataStats"]["BaseStats"]["Tons"],
+        **({"dlc": dlc} if dlc else {}),
+        "quirks": quirks_de(id_mech, modelo, asignaciones),
+        "zones": ranuras_de_yaml(construir_zonas(datos), tamanos, ocultos),
+        "stock": stock,
+        "movement": movimiento(datos),
+        **rellenos_de(stock),
+        "upgradeSlots": min(datos.get("EquipmentAllocation", {}).get("TotalTraitSlots", 0), MAXIMO_DE_HUECOS_DE_RASGO),
+    }
+
+
 def rellenos_de(stock):
     """Saca de la build de serie los datos de los rellenos, que van en la variante y no en la build."""
     rellenos = stock.pop("_rellenos")
@@ -1081,20 +1104,34 @@ def main():
             avisos.append(f"{id_mech}: sin loadout {nombre_loadout}")
             continue
         vistos.add(id_mech)
-        modelo = (datos.get("MechModel") or "").rsplit(".", 1)[-1]
         mech_juego = mechs_juego[id_mech]
-        mechs.append({
-            "id": id_mech, "chassis": mech_juego["name"], "variant": mech_juego["variant"],
-            "tonnage": datos["MechDataStats"]["BaseStats"]["Tons"],
-            **({"dlc": mech_juego["dlc"]} if mech_juego.get("dlc") else {}),
-            "quirks": quirks_de(id_mech, modelo, asignaciones),
-            "zones": ranuras_de_yaml(construir_zonas(datos), tamanos, ocultos),
-            "stock": (stock := construir_build_de_serie(datos, loadout, objetos, avisos, id_mech,
-                                              quirks_de(id_mech, modelo, asignaciones, nombre_mda), rasgos)),
-            "movement": movimiento(datos),
-            **rellenos_de(stock),
-            "upgradeSlots": min(datos.get("EquipmentAllocation", {}).get("TotalTraitSlots", 0), MAXIMO_DE_HUECOS_DE_RASGO),
-        })
+        mechs.append(construir_variante(id_mech, mech_juego["name"], mech_juego["variant"], mech_juego.get("dlc"), datos, loadout,
+                                        nombre_mda, objetos, avisos, asignaciones, tamanos, ocultos, rasgos))
+
+    # Las variantes nuevas de YAML, sin los rellenos técnicos, los superpesados ni las que repiten una que ya está.
+    textos_del_juego = cargar_textos_del_juego()
+    # Algunos MDA nuevos escriben el chasis en mayúsculas (DAISHI, LOKI): el del MechLab de MW5 si lo hay.
+    chasis_conocidos = {mech["name"].lower(): mech["name"] for mech in mechs_juego.values()}
+    for ruta, valor in sorted(cargar_categoria("mechs").items()):
+        nombre_mda = ruta.rsplit("/", 1)[1]
+        datos = valor["propiedades"].get("MutableMechData") or {}
+        id_mech = texto(datos.get("VariantName"))
+        toneladas = datos.get("MechDataStats", {}).get("BaseStats", {}).get("Tons")
+        if (not ruta.startswith("/YetAnotherMechlab/") or nombre_mda in MDA_TECNICOS or not id_mech or not toneladas
+                or toneladas > TONELAJE_MAXIMO or id_mech in vistos or id_mech in mechs_juego):
+            continue
+        nombre_loadout = datos.get("DefaultMech", {}).get("Id", {}).get("PrimaryAssetName") or nombre_mda.replace("_MDA", "_Loadout")
+        loadout = loadouts.get(nombre_loadout.lower(), {}).get("propiedades", {}).get("MechLoadout")
+        if not loadout:
+            avisos.append(f"{id_mech}: sin loadout {nombre_loadout}")
+            continue
+        vistos.add(id_mech)
+        chasis = datos.get("ChassisFullName")
+        nombre_chasis = textos_del_juego.get(chasis.get("clave")) if isinstance(chasis, dict) else None
+        nombre_chasis = nombre_chasis or texto(chasis)
+        nombre_chasis = chasis_conocidos.get(nombre_chasis.lower(), nombre_chasis)
+        mechs.append(construir_variante(id_mech, nombre_chasis, id_mech, None, datos, loadout,
+                                        nombre_mda, objetos, avisos, asignaciones, tamanos, ocultos, rasgos))
 
     usados = {q for mech in mechs for q in mech["quirks"]}
     datos_quirks = {nombre: {"name": quirks[nombre].get("name", nombre), "description": quirks[nombre].get("description", ""),
