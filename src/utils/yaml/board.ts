@@ -32,9 +32,8 @@ const EMPTY_INTERNAL_LABELS: Record<string, string> = {
   EngineTypeSlot: 'Standard engine', Engine: 'No core installed'
 };
 
-// Los rellenos dinámicos van en las ranuras libres; el juego los reparte por todo el 'Mech y aquí se
-// colocan de las ubicaciones con más ranuras a las de menos.
-const FILLER_ORDER: Zone[] = ['rightTorso', 'leftTorso', 'rightArm', 'leftArm', 'centerTorso', 'rightLeg', 'leftLeg', 'head'];
+// GetMechpartsInFillerPositioningOrder: el orden en que InstallRequiredFillers pone los rellenos dinámicos.
+const FILLER_ORDER: Zone[] = ['centerTorso', 'leftTorso', 'rightTorso', 'leftLeg', 'rightLeg', 'leftArm', 'rightArm', 'head'];
 export function getInternalLabel(build: YamlBuild, slotType: string): string {
   const id = build.internal[slotType];
   return id ? getYamlItem(id)?.name ?? id : EMPTY_INTERNAL_LABELS[slotType] ?? slotType;
@@ -46,18 +45,56 @@ export interface FillerGroup {
   slots: number;
 }
 
-// Los rellenos dinámicos de cada pieza, uno tras otro, en las ranuras libres de cada ubicación.
+// La build de serie sin cambios en lo montado: conserva los rellenos que trae su loadout.
+function isStockLoadout(mech: YamlMech, build: YamlBuild): boolean {
+  const key = (value: YamlBuild) => JSON.stringify([
+    Object.entries(value.internal).sort(),
+    value.items.map(item => `${item.zone}|${item.slotType}|${item.item}`).sort(),
+    value.weapons.map(weapon => `${weapon.zone}|${weapon.hardpoint}|${weapon.item}|${weapon.tier ?? ''}`).sort()
+  ]);
+  return key(build) === key(mech.stock);
+}
+
+// Los rellenos dinámicos de cada pieza en cada ubicación. Con cualquier cambio, YAML los quita y los vuelve a poner
+// (UpdateFillersOnLoadout): InstallRequiredFillers pone uno de una ranura en cada ubicación con sitio por vuelta, en
+// el orden de FILLER_ORDER, y BuildFillerEquipmentMapping los reparte entre las piezas recorriendo las ubicaciones
+// en el orden del loadout (las nuevas, al final, en el orden en que reciben rellenos) y las piezas en el suyo.
 export function distributeDynamicFillerGroups(mech: YamlMech, build: YamlBuild): Record<Zone, FillerGroup[]> {
   const placed = Object.fromEntries(ZONES.map(zone => [zone, []])) as unknown as Record<Zone, FillerGroup[]>;
+  if (mech.stockFillers && isStockLoadout(mech, build)) {
+    for (const { zone, slotType, slots } of mech.stockFillers) placed[zone].push({ slotType, slots });
+    return placed;
+  }
+  const dynamic = (slotType: string) => getYamlItem(build.internal[slotType])?.fillerSlots?.dynamic ?? 0;
+  const owners = [...(mech.fillerOwners ?? []), ...Object.keys(build.internal)]
+    .filter((slotType, index, list) => list.indexOf(slotType) === index && dynamic(slotType) > 0);
+  let remaining = owners.reduce((sum, slotType) => sum + dynamic(slotType), 0);
   const free = Object.fromEntries(FILLER_ORDER.map(zone => [zone, Math.max(0, getFreeGeneralSlots(mech, build, zone))])) as Record<Zone, number>;
-  for (const [slotType, id] of Object.entries(build.internal)) {
-    let remaining = getYamlItem(id)?.fillerSlots?.dynamic ?? 0;
+  const counts = Object.fromEntries(ZONES.map(zone => [zone, 0])) as Record<Zone, number>;
+  const firstPlaced: Zone[] = [];
+  for (let progress = true; remaining > 0 && progress;) {
+    progress = false;
     for (const zone of FILLER_ORDER) {
-      const amount = Math.min(remaining, free[zone]);
-      if (amount === 0) continue;
-      placed[zone].push({ slotType, slots: amount });
-      free[zone] -= amount;
-      remaining -= amount;
+      if (remaining === 0 || free[zone] < 1) continue;
+      if (counts[zone] === 0) firstPlaced.push(zone);
+      counts[zone]++;
+      free[zone]--;
+      remaining--;
+      progress = true;
+    }
+  }
+  const zoneOrder = [...(mech.fillerZoneOrder ?? []), ...firstPlaced].filter((zone, index, list) => list.indexOf(zone) === index);
+  let owner = 0;
+  let left = owners.length > 0 ? dynamic(owners[0]) : 0;
+  for (const zone of zoneOrder) {
+    for (let slots = counts[zone]; slots > 0 && owner < owners.length;) {
+      const take = Math.min(slots, left);
+      const last = placed[zone][placed[zone].length - 1];
+      if (last?.slotType === owners[owner]) last.slots += take;
+      else placed[zone].push({ slotType: owners[owner], slots: take });
+      slots -= take;
+      left -= take;
+      if (left === 0 && ++owner < owners.length) left = dynamic(owners[owner]);
     }
   }
   return placed;

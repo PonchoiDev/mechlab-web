@@ -67,6 +67,12 @@ export interface YamlMech {
   movement: YamlMovement;
   // Huecos de rasgo del MDA de YAML (TotalTraitSlots).
   upgradeSlots: number;
+  // Para repartir los rellenos dinámicos como BuildFillerEquipmentMapping: el orden en que el loadout guarda sus
+  // ubicaciones y sus piezas con rellenos (las ranuras: Armorslot, Structureslot...).
+  fillerZoneOrder?: Zone[];
+  fillerOwners?: string[];
+  // Los rellenos dinámicos que trae el loadout de serie (los de los mods), hasta el primer cambio de la build.
+  stockFillers?: { zone: Zone; slotType: string; slots: number }[];
 }
 
 export type YamlItemKind = 'weapon' | 'ammo' | 'equipment';
