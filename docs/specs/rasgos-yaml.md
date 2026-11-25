@@ -1,7 +1,7 @@
 # Especificación: rasgos de 'Mech en el MechLab de YAML
 
 - **Issue:** [#175](https://github.com/PonchoiDev/mechlab-web/issues/175)
-- **Estado:** en curso
+- **Estado:** implementada
 - **Depende de:** el MechLab de YAML ([mechlab-yaml.md](mechlab-yaml.md)) y sus estadísticas ([estadisticas-yaml.md](estadisticas-yaml.md))
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/yaml/traits.test.ts` y `src/utils/upgrades.test.ts`) y por último el código, en commits separados.
 
@@ -38,7 +38,7 @@ Las fórmulas salen del código: el bytecode de YAML (`MechAlphaStats.CalculateM
 
 ## Interfaz
 
-El MechLab de YAML tiene el botón de mejoras de la barra de herramientas y el panel de mejoras del MechLab de MW5, con los huecos de su MDA. El panel avisa de que los rasgos de armas solo actúan en misión. Cargar la build de serie carga también sus rasgos. El código de la build lleva los rasgos, y una build sin rasgos tiene el mismo código que antes.
+El MechLab de YAML tiene el botón de mejoras de la barra de herramientas y el panel de mejoras del MechLab de MW5, con los huecos de su MDA. El panel avisa de que los rasgos de armas solo actúan en misión. Los rasgos de serie entran al abrir la variante; después, cargar la build de serie no cambia los rasgos, como en el MechLab de MW5 (en el juego se instalan aparte del loadout). El código de la build lleva los rasgos, y una build sin rasgos tiene el mismo código que antes.
 
 ## Criterios de aceptación
 

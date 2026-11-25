@@ -156,6 +156,7 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 - El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
 - Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
 - Quitar actuadores de los brazos (antebrazo y mano) para montar armas grandes.
+- Las ranuras del WHM-DNC de serie: la web avisa de que los rellenos dinámicos necesitan 14 ranuras libres y solo quedan 3, y de que no caben las 3 fijas del motor XL en los torsos; en el juego caben. Puede ser el mismo descuadre que las ranuras de los brazos con cuerpo a cuerpo.
 
 ## Plan de pruebas
 

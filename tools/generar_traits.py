@@ -19,8 +19,8 @@ REGEX_QUIRK = re.compile(r"/Game/Quirks/([A-Za-z]+)_Quirk\.[^\"]+\"',Value=([+-]
 REGEX_ARMAS = re.compile(r'SupportedWeapons=\(GameplayTags=\((.*?)\)\)\n')
 REGEX_ETIQUETA_ARMA = re.compile(r'TagName="Weapon\.([A-Za-z]+)(?:\.([A-Za-z]+))?"')
 
-# Efectos que cambian las estadísticas de la web. El resto (aceleración, saltos, duración del láser,
-# dispersión de misiles) solo se describe.
+# Efectos que cambian las estadísticas de la web. El resto (aceleración, empuje horizontal y combustible
+# de los saltos, duración del láser, dispersión de misiles) solo se describe.
 ESTADISTICA_DE_PARAMETRO = {
     "Increased Armor Percent": "armor",
     "Increased Structure Percent": "structure",
@@ -33,6 +33,8 @@ ESTADISTICA_DE_PARAMETRO = {
     "Increased Sensor Range Percent": "sensorRange",
     "Increased Lock Retention Time Percent": "lockRetention",
     "Increased Lose Lock Time Percent": "loseLockTime",
+    # La altura de salto (EstimateMaxJumpJetHeight) multiplica la aceleración vertical; la horizontal no cuenta.
+    "Jump Jet Accel Z Percent": "jumpAccelZ",
 }
 ESTADISTICA_DE_QUIRK = {
     "DamagePercentage": "damage",
