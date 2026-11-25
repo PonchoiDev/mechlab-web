@@ -151,7 +151,7 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 ## Pendiente de comprobar en el juego
 
 - Las builds de serie que no pesan su tonelaje: con la conversión de serie y las reglas de peso de `CalculateMechTonnage` ([estadisticas-yaml.md](estadisticas-yaml.md)), 610 de 639 lo dan exacto. Las otras 29 se quedan por debajo; dos están comprobadas con capturas del juego, que marca lo mismo (CA25): el INC-A pesa 29,97 de 30 t y el WHM-DNC 61,99 de 70 (YAML le pone motor XL, por sus 3 ranuras laterales, y el loadout del juego no llena las 8 t que libera).
-- La armadura, la estructura y la velocidad del WHM-DNC de la captura (375,9, 299,2 y 85,7 km/h) son las de la web por 1,05, 1,1 y 1,15. Ningún quirk de YAML ni el MDA dan esos multiplicadores: pueden ser rasgos de 'Mech de la partida instalados en ese WHM-DNC.
+- La armadura, la estructura y la velocidad del WHM-DNC de la captura (375,9, 299,2 y 85,7 km/h) son las de la web por 1,05, 1,1 y 1,15. Son los tres rasgos de 'Mech que trae instalados su loadout del juego (`InstalledTraits`: Refined Armor II, +5 % de armadura; Fortified Internal Structure II, +10 % de estructura; Boosted Top Speed, +15 % de velocidad), que la web todavía no lee.
 
 - El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
 - Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
