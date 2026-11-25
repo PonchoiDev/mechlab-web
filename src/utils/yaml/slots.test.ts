@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import type { Zone } from '../../types/mech';
-import { createStockBuild } from './build';
+import { createStockBuild, setInternal } from './build';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlBuildIssues } from './readouts';
-import { getDynamicFillers, getTotalFreeGeneralSlots } from './stats';
+import { getDynamicFillers, getFixedFillers, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
 
-// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA28 de docs/specs/mechlab-yaml.md. Las
+// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA30 de docs/specs/mechlab-yaml.md. Las
 // ranuras libres salen de contar las filas vacías de las capturas del mechlab del juego.
 const generalSlots = (id: string) => {
   const zones = findYamlMech(id)!.zones;
@@ -46,5 +46,29 @@ describe('Equipo de ranuras ocultas', () => {
     const kitFox = createStockBuild(findYamlMech('KFX-C')!);
     const ecm = kitFox.items.find(mounted => getYamlItem(mounted.item)?.category?.startsWith('Equipment.ECM'));
     expect(ecm).toMatchObject({ zone: 'rightArm', slotType: 'General_SlotType' });
+  });
+});
+
+describe('Piezas propias y armas cuerpo a cuerpo', () => {
+  it('CA29: el giroscopio y el tipo de motor ocupan sus Slots en el torso central', () => {
+    const nightstar = findYamlMech('NSR-9J')!;
+    const stock = createStockBuild(nightstar);
+    const centerTorso = (build: ReturnType<typeof createStockBuild>) => getGeneralSlots(nightstar, build, 'centerTorso');
+    expect(centerTorso(stock)).toBe(2);
+    expect(centerTorso(setInternal(stock, 'Gyro', 'GYRO_COMPACT'))).toBe(4);
+    expect(centerTorso(setInternal(stock, 'Gyro', 'GYRO_XL'))).toBe(0);
+    const light = setInternal(stock, 'EngineTypeSlot', 'ENGINE_LIGHT');
+    expect(centerTorso(light)).toBe(2);
+    expect(getFixedFillers(light, 'leftTorso')).toBe(2);
+    expect(getFixedFillers(light, 'rightTorso')).toBe(2);
+  });
+
+  it('CA30: un arma cuerpo a cuerpo ocupa el tamaño de su ranura menos 1', () => {
+    expect(getYamlItem('Lance_Medium')!.slots).toBe(2);
+    expect(getYamlItem('ArenaFist_Assault')!.slots).toBe(0);
+    expect(freeAfterFillers('HBK-VEST')).toBe(0);
+    expect(freeAfterFillers('CRD-5M')).toBe(10);
+    const hunchback = findYamlMech('HBK-VEST')!;
+    expect(getYamlBuildIssues(hunchback, createStockBuild(hunchback))).toEqual([]);
   });
 });
