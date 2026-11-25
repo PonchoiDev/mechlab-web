@@ -97,7 +97,7 @@ export function mountItem(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: 
     const covered = new Set(build.items.filter(mounted => mounted.zone === zone && mounted.slotType !== GENERAL_SLOT)
       .flatMap(mounted => getYamlItem(mounted.item)?.slotTypes ?? []));
     const missing = actuatorTypes.find(type => !present.includes(type) || covered.has(type));
-    if (missing) return { error: `${item.name} needs a free ${missing.replace('_SlotType', '').replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} actuator slot` };
+    if (missing) return { error: `${item.name} needs a free ${missing.replace('Superheavy_', '').replace('_SlotType', '').replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} actuator slot` };
     const next = { ...build, items: [...build.items, { zone, slotType: actuatorTypes[0], item: itemId }] };
     if (getFreeGeneralSlots(mech, next, zone) < 0) return { error: `No free slot for ${item.name}` };
     const fillers = dynamicFillersProblem(mech, next);

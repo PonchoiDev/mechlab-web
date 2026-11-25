@@ -181,7 +181,7 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
   const specialRows = rows.filter(row => !isGeneral(row) && !isActuatorRow(row));
   const actuatorRows = rows.filter(isActuatorRow);
   const coveringRow = (actuator: string) => {
-    const slotType = getActuatorSlotType(zone, actuator);
+    const slotType = getActuatorSlotType(mech, zone, actuator);
     return actuatorRows.find(row => row.kind === 'item' && slotType && (getYamlItem(build.items[row.index].item)?.slotTypes ?? []).includes(slotType));
   };
   const hasFreeHardpoint = getHardpointUsage(mech, build, zone).some(usage => usage.used < usage.total);
