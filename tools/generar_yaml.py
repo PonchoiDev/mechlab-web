@@ -1,3 +1,4 @@
+import functools
 import glob
 import json
 import os
@@ -47,6 +48,39 @@ INTERNAS_DE_SERIE = {
     "Defensive_SlotType": None, "LifeSupport": None, "Sensors": None, "Targeting": None, "cockpit": None,
     "Gyro": None, "Engine": None, "EngineTypeSlot": None, "Armorslot": None, "Structureslot": None, "enginecooling": None,
 }
+# FixMdaGeneralSlots sube las ranuras generales del MDA a las del juego de mesa (sin contar superpesados ni
+# cuadrúpedos, que quedan fuera); GetOpenCritSlots les resta lo que ocupan las ranuras propias.
+MINIMO_DE_GENERALES = {"head": 6, "centerTorso": 13, "leftTorso": 12, "rightTorso": 12,
+                       "leftArm": 12, "rightArm": 12, "leftLeg": 6, "rightLeg": 6}
+# Fix Special Slot Counts: una ranura propia de cada una en la cabeza y en el torso central (con los nombres de las
+# piezas internas de la web: la cabina es «cockpit»).
+RANURAS_PROPIAS_DE_YAML = {"head": ["Sensors", "Targeting", "cockpit", "LifeSupport", "Defensive_SlotType"],
+                           "centerTorso": ["Armorslot", "Structureslot", "Gyro", "enginecooling", "Engine"]}
+# GetActuatorSlotTypeForInternalEquipment: la ranura de cada actuador del MDA.
+RANURA_DE_ACTUADOR = {("arm", "Shoulder"): "Shoulder_SlotType", ("arm", "UpperActuator"): "UpperArm_SlotType",
+                      ("arm", "LowerActuator"): "LowerArm_SlotType", ("arm", "HandActuator"): "Hand_SlotType",
+                      ("leg", "Hip"): "Hip_SlotType", ("leg", "UpperActuator"): "UpperLeg_SlotType",
+                      ("leg", "LowerActuator"): "LowerLeg_SlotType", ("leg", "FootActuator"): "Foot_SlotType"}
+# SetSpecialEquipmentSlotType: el equipo con estas etiquetas pierde sus tipos de ranura ocultos y, si no le queda
+# ninguno, va en las generales; los superchargers ocupan 1 ranura.
+ETIQUETAS_DE_RANURAS_OCULTAS = ("Equipment.JumpJets", "Equipment.MASC", "Equipment.SuperCharger", "Equipment.ECM",
+                                "Equipment.BAP", "Equipment.ArenaSuperCharger")
+ETIQUETAS_DE_UNA_RANURA = ("Equipment.SuperCharger", "Equipment.ArenaSuperCharger")
+
+
+@functools.cache
+def tipos_de_ranura_de_yaml():
+    """La tabla YAMLSlotTypeDatas de YAML: los tipos de ranura que oculta (hideSlot), en minúsculas."""
+    tablas = leer(os.path.join(RUTA_YAML, "yet-another-mechlab", "tablas.json"))
+    filas = tablas["/YetAnotherMechlab/Mechlab/YAMLSlotTypeDatas"]["filas"].values()
+    campo = lambda fila, nombre: next(valor for clave, valor in fila.items() if clave.split("_")[0] == nombre)
+    return {campo(fila, "slotType")["Id"]["PrimaryAssetName"].lower() for fila in filas if campo(fila, "hideSlot")}
+
+
+def tiene_etiqueta(categoria, etiquetas):
+    return any(categoria == etiqueta or categoria.startswith(etiqueta + ".") for etiqueta in etiquetas)
+
+
 # FixVanillaLoadouts (EquipmentUtilities de YAML) convierte al cargar los loadouts que no traen núcleo de motor en
 # el torso central, según el tipo de 'Mech (MechTypeOmni): 0 de la Esfera Interior, 1 omni de la Esfera Interior,
 # 2 Clan y 3 omni Clan. Cada tabla da la pieza de cada tipo; None deja la ranura vacía (la pieza estándar).
@@ -515,10 +549,16 @@ def leer_exportacion(ruta):
     return crudo.decode("utf-16") if crudo.startswith((b"\xff\xfe", b"\xfe\xff")) else crudo.decode("utf-8")
 
 
+# La etiqueta que pone el constructor de la clase (desensamblado del ejecutable) a los assets que no la exportan,
+# como el Guardian ECM y el Beagle Active Probe del juego.
+ETIQUETA_DE_CLASE = {"MWECMDataAsset": "Equipment.ECM", "MWBAPDataAsset": "Equipment.BAP"}
+
+
 def datos_de_equipo(objeto, etiqueta, nivel_tecnico, clase):
     """La etiqueta (EquipmentType), el TechLevel y si es un disipador (MWHeatSinkDataAsset) del equipo: el peso, la
     refrigeración y la velocidad de YAML los usan cuando no hay propiedad (TechLevel / 100) y para reconocer cada
     pieza (kit de refrigeración, armadura, estructura, núcleo y tipo de motor, giroscopio)."""
+    etiqueta = etiqueta or ETIQUETA_DE_CLASE.get(clase)
     if etiqueta:
         objeto["category"] = etiqueta
     if nivel_tecnico is not None:
@@ -659,6 +699,14 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
 
     for nombre, (etiquetas, sin_nivel, equipo) in origen.items():
         aplicar_propiedades(objetos[nombre], propiedades_combinadas(globales, nombre, [e for e in etiquetas if e], sin_nivel), equipo)
+    ocultos = tipos_de_ranura_de_yaml()
+    for objeto in objetos.values():
+        categoria = objeto.get("category") or ""
+        if objeto["kind"] != "equipment" or not tiene_etiqueta(categoria, ETIQUETAS_DE_RANURAS_OCULTAS):
+            continue
+        objeto["slotTypes"] = [tipo for tipo in objeto["slotTypes"] if tipo.lower() not in ocultos] or [RANURA_GENERAL]
+        if tiene_etiqueta(categoria, ETIQUETAS_DE_UNA_RANURA):
+            objeto["slots"] = 1
     return objetos
 
 
@@ -677,6 +725,25 @@ def ids_del_juego():
 
 def zona_vacia():
     return {"general": 0, "actuators": [], "special": {}, "hardpoints": [], "maxArmor": 0, "structure": 0, "rear": False}
+
+
+def ranuras_de_yaml(zonas, tamanos, ocultos):
+    """Las ranuras como las deja YAML al cargar: las propias de Fix Special Slot Counts, las generales subidas al
+    mínimo de FixMdaGeneralSlots y, como GetOpenCritSlots, menos lo que ocupan las propias que cuentan (cuántas ×
+    su tamaño; no cuentan las de disipadores del motor, las de retrorreactores ni las ocultas) y los actuadores.
+    Las ranuras ocultas no se pintan ni se usan: su equipo va en las generales."""
+    for zona, datos in zonas.items():
+        for tipo in RANURAS_PROPIAS_DE_YAML.get(zona, []):
+            datos["special"].setdefault(tipo, 1)
+        datos["special"] = {tipo: n for tipo, n in datos["special"].items()
+                            if tipo.lower() not in ocultos and not tipo.startswith("JumpJet")}
+        miembro = "arm" if zona.endswith("Arm") else "leg" if zona.endswith("Leg") else None
+        actuadores = [RANURA_DE_ACTUADOR.get((miembro, actuador)) for actuador in datos["actuators"]]
+        ocupadas = sum(n * (tamanos.get(tipo) or 1) for tipo, n in datos["special"].items()
+                       if tipo not in (RANURA_GENERAL, "EngineHeatsink_SlotType"))
+        ocupadas += sum(tamanos.get(tipo) or 1 for tipo in actuadores)
+        datos["general"] = max(datos["general"], MINIMO_DE_GENERALES[zona]) - ocupadas
+    return zonas
 
 
 def construir_zonas(datos):
@@ -794,6 +861,9 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks):
         if not pieza:
             avisos.append(f"{id_mech}: pieza desconocida {original} en {tipo}")
             continue
+        # FixVanillaLoadouts pasa a las generales el equipo que el loadout trae en ranuras ocultas.
+        if tipo.lower() in tipos_de_ranura_de_yaml():
+            tipo = RANURA_GENERAL
         piezas.append({"zone": ZONAS.get(parte), "slotType": tipo, "item": pieza})
     armas = []
     for arma in loadout.get("InstalledWeapons", []):
@@ -851,6 +921,7 @@ def main():
     reglas = leer(os.path.join(RUTA_YAML, "yet-another-mechlab", "reglas.json"))
     tamanos = tamanos_de_ranuras(reglas)
     objetos = construir_objetos(leer(os.path.join(RUTA_DATOS, "items.json")), reglas, tamanos)
+    ocultos = tipos_de_ranura_de_yaml()
     mechs_juego = {mech["id"]: mech for mech in leer(os.path.join(RUTA_DATOS, "mechs.json"))}
     ids = ids_del_juego()
     # Los loadouts del juego, y encima los de los mods, que los sustituyen.
@@ -883,7 +954,7 @@ def main():
             "tonnage": datos["MechDataStats"]["BaseStats"]["Tons"],
             **({"dlc": mech_juego["dlc"]} if mech_juego.get("dlc") else {}),
             "quirks": quirks_de(id_mech, modelo, asignaciones),
-            "zones": construir_zonas(datos),
+            "zones": ranuras_de_yaml(construir_zonas(datos), tamanos, ocultos),
             "stock": construir_build_de_serie(datos, loadout, objetos, avisos, id_mech,
                                               quirks_de(id_mech, modelo, asignaciones, nombre_mda)),
             "movement": movimiento(datos),

@@ -187,7 +187,7 @@ describe('estadísticas del MechLab de YAML', () => {
   it('CA13: la altura de salto, con la fórmula del juego y los datos de cada retrorreactor', () => {
     const grasshopper = findYamlMech('GHR-5J')!;
     const ghrStock = createStockBuild(grasshopper);
-    const jumpJet = (index: number) => getYamlItem(ghrStock.items[index].item)?.slotTypes?.some(slotType => /jumpjet/i.test(slotType));
+    const jumpJet = (index: number) => !!getYamlItem(ghrStock.items[index].item)?.jumpJet;
     // Uno menos en cada pierna.
     const removed = new Set(['leftLeg', 'rightLeg'].map(zone => ghrStock.items.findIndex((mounted, index) => mounted.zone === zone && jumpJet(index))));
     const twoJets = { ...ghrStock, items: ghrStock.items.filter((_, index) => !removed.has(index)) };
