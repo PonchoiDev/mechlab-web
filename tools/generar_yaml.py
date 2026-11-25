@@ -956,7 +956,71 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks, r
     de_serie = rasgos_de_serie(loadout, rasgos)
     if de_serie:
         build["traits"] = de_serie
+    build["_rellenos"] = orden_de_rellenos(loadout, build, objetos, minusculas, not con_motor)
     return build
+
+
+# FixVanillaLoadouts monta las piezas de la conversión en este orden, al final del torso central.
+ORDEN_DE_LA_CONVERSION = ["Engine", "EngineTypeSlot", "enginecooling", "Gyro", "Armorslot", "Structureslot"]
+REGEX_RELLENO = re.compile(r"^DYNAMIC_FILLER_SIZE_(\d+)$", re.IGNORECASE)
+
+
+def rellenos_de(stock):
+    """Saca de la build de serie los datos de los rellenos, que van en la variante y no en la build."""
+    rellenos = stock.pop("_rellenos")
+    datos = {"fillerZoneOrder": rellenos["zoneOrder"], "fillerOwners": rellenos["owners"]}
+    if "stock" in rellenos:
+        datos["stockFillers"] = rellenos["stock"]
+    return datos
+
+
+def orden_de_rellenos(loadout, build, objetos, minusculas, convertido):
+    """Lo que necesita la web para repartir los rellenos dinámicos como BuildFillerEquipmentMapping: el orden en que
+    el loadout guarda sus ubicaciones y sus piezas internas, y, si el loadout ya trae rellenos (los de los mods), cuántos
+    de cada pieza hay en cada ubicación, que la build de serie conserva hasta el primer cambio."""
+    partes = loadout.get("Equipment", {}).get("MechPartEquipment", [])
+    zonas = [ZONAS[parte["MechPart"]] for parte in partes if parte["MechPart"] in ZONAS]
+    piezas = [hueco["SlotTypeAssetId"]["Id"]["PrimaryAssetName"] for parte in partes for hueco in parte["SlottedEquipment"]]
+    duenos = [tipo for tipo in piezas if tipo in build["internal"]]
+    if convertido:
+        if "centerTorso" not in zonas:
+            zonas.append("centerTorso")
+        duenos += [tipo for tipo in ORDEN_DE_LA_CONVERSION if tipo in build["internal"] and tipo not in duenos]
+    dinamicos = {tipo: (objetos.get(build["internal"][tipo], {}).get("fillerSlots") or {}).get("dynamic", 0) for tipo in duenos}
+    duenos = [tipo for tipo in dinamicos if dinamicos[tipo] > 0]
+    resultado = {"zoneOrder": zonas, "owners": duenos}
+    # Los rellenos del loadout, por ubicación y en su orden, sin los fijos del motor (el primero de su tamaño).
+    fijos = {}
+    for pieza in build["internal"].values():
+        for zona, ranuras in (objetos.get(pieza, {}).get("fillerSlots") or {}).items():
+            if zona != "dynamic":
+                fijos[zona] = fijos.get(zona, 0) + ranuras
+    por_zona = []
+    for parte in partes:
+        zona = ZONAS.get(parte["MechPart"])
+        tamanos = [int(m.group(1)) for hueco in parte["SlottedEquipment"]
+                   if (m := REGEX_RELLENO.match(hueco["EquipmentData"]["EquipmentId"]["Id"]["PrimaryAssetName"]))]
+        if fijos.get(zona) in tamanos:
+            tamanos.remove(fijos[zona])
+        if zona and tamanos:
+            por_zona.append((zona, sum(tamanos)))
+    pedidos = [dinamicos[tipo] for tipo in duenos]
+    if por_zona and sum(n for _, n in por_zona) == sum(pedidos):
+        rellenos, indice, quedan = [], 0, pedidos[0]
+        for zona, ranuras in por_zona:
+            while ranuras > 0:
+                toma = min(ranuras, quedan)
+                if rellenos and rellenos[-1]["zone"] == zona and rellenos[-1]["slotType"] == duenos[indice]:
+                    rellenos[-1]["slots"] += toma
+                else:
+                    rellenos.append({"zone": zona, "slotType": duenos[indice], "slots": toma})
+                ranuras -= toma
+                quedan -= toma
+                if quedan == 0 and indice + 1 < len(duenos):
+                    indice += 1
+                    quedan = pedidos[indice]
+        resultado["stock"] = rellenos
+    return resultado
 
 
 def movimiento(datos):
@@ -1025,9 +1089,10 @@ def main():
             **({"dlc": mech_juego["dlc"]} if mech_juego.get("dlc") else {}),
             "quirks": quirks_de(id_mech, modelo, asignaciones),
             "zones": ranuras_de_yaml(construir_zonas(datos), tamanos, ocultos),
-            "stock": construir_build_de_serie(datos, loadout, objetos, avisos, id_mech,
-                                              quirks_de(id_mech, modelo, asignaciones, nombre_mda), rasgos),
+            "stock": (stock := construir_build_de_serie(datos, loadout, objetos, avisos, id_mech,
+                                              quirks_de(id_mech, modelo, asignaciones, nombre_mda), rasgos)),
             "movement": movimiento(datos),
+            **rellenos_de(stock),
             "upgradeSlots": min(datos.get("EquipmentAllocation", {}).get("TotalTraitSlots", 0), MAXIMO_DE_HUECOS_DE_RASGO),
         })
 
