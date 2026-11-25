@@ -1,7 +1,7 @@
 import type { Zone } from '../../types/mech';
 import type { YamlBuild, YamlHardpointType, YamlMech } from '../../types/yaml-mechlab';
 import { getYamlItem } from './data';
-import { GENERAL_SLOT, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots, getUnplacedCritSplits } from './stats';
+import { ACTUATOR_SLOT_TYPES, GENERAL_SLOT, getActuatorSlotTypes, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots, getUnplacedCritSplits } from './stats';
 
 export type MountResult = { build: YamlBuild; error?: undefined } | { build?: undefined; error: string };
 
@@ -87,6 +87,21 @@ export function mountItem(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: 
       const fillers = dynamicFillersProblem(mech, next);
       return fillers ? { error: fillers } : { build: next };
     }
+  }
+  // Equipo de actuadores: necesita libres en la ubicación todas las ranuras de actuador que admite
+  // (InstallWeaponOrEquipmentIntoSpecificSlot de YAML); una pieza montada ocupa todas las que admite
+  // (GetFreeSlotsForType). Va en la primera de ellas.
+  const actuatorTypes = slotTypes.filter(type => ACTUATOR_SLOT_TYPES.has(type));
+  if (actuatorTypes.length > 0) {
+    const present = getActuatorSlotTypes(mech, zone);
+    const covered = new Set(build.items.filter(mounted => mounted.zone === zone && mounted.slotType !== GENERAL_SLOT)
+      .flatMap(mounted => getYamlItem(mounted.item)?.slotTypes ?? []));
+    const missing = actuatorTypes.find(type => !present.includes(type) || covered.has(type));
+    if (missing) return { error: `${item.name} needs a free ${missing.replace('_SlotType', '').replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} actuator slot` };
+    const next = { ...build, items: [...build.items, { zone, slotType: actuatorTypes[0], item: itemId }] };
+    if (getFreeGeneralSlots(mech, next, zone) < 0) return { error: `No free slot for ${item.name}` };
+    const fillers = dynamicFillersProblem(mech, next);
+    return fillers ? { error: fillers } : { build: next };
   }
   for (const slotType of slotTypes.filter(type => type !== GENERAL_SLOT)) {
     const capacity = mech.zones[zone].special[slotType] ?? 0;

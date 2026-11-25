@@ -10,7 +10,7 @@ import { getWeaponTiers } from '../utils/yaml/combat';
 import { getItemColor, getSlotColor, getYamlItem, getYamlQuirk } from '../utils/yaml/data';
 import { ModLogo } from './YamlInventoryPanel';
 import type { YamlInventoryTarget } from '../utils/yaml/inventory';
-import { getEngineRating, getFreeGeneralSlots, getGeneralSlots, getStructurePoints } from '../utils/yaml/stats';
+import { ACTUATOR_SLOT_TYPES, getActuatorSlotType, getEngineRating, getFreeGeneralSlots, getGeneralSlots, getStructurePoints } from '../utils/yaml/stats';
 
 // Tablero del MechLab de YAML con el marcado del de MW5 (MechBoard y ComponentCard): las ocho ubicaciones
 // alrededor de la ficha del 'Mech. En YAML las armas ocupan ranuras y cada ubicación tiene además sus
@@ -176,7 +176,14 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
   const internals = INTERNAL_SLOTS.filter(slotType => data.special[slotType]);
   const isGeneral = (row: ZoneRow) => row.kind !== 'item' || row.slotType === GENERAL_SLOT;
   const generalRows = rows.filter(row => row.kind !== 'free' && isGeneral(row));
-  const specialRows = rows.filter(row => !isGeneral(row));
+  // El equipo de actuadores va en las filas de los actuadores que ocupa, no en la lista de piezas propias.
+  const isActuatorRow = (row: ZoneRow) => row.kind === 'item' && ACTUATOR_SLOT_TYPES.has(row.slotType);
+  const specialRows = rows.filter(row => !isGeneral(row) && !isActuatorRow(row));
+  const actuatorRows = rows.filter(isActuatorRow);
+  const coveringRow = (actuator: string) => {
+    const slotType = getActuatorSlotType(zone, actuator);
+    return actuatorRows.find(row => row.kind === 'item' && slotType && (getYamlItem(build.items[row.index].item)?.slotTypes ?? []).includes(slotType));
+  };
   const hasFreeHardpoint = getHardpointUsage(mech, build, zone).some(usage => usage.used < usage.total);
   const armor = build.armor[zone];
   const armorTotal = armor.front + armor.rear;
@@ -198,9 +205,13 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
   // Los actuadores y, debajo de la mano, su ataque de cuerpo a cuerpo («Assault Hand»), como en el juego.
   const actuators = data.actuators.length > 0 && (
     <div className="yaml-internals yaml-actuators" aria-label="Actuators">
-      {data.actuators.map(actuator => (
-        <span key={actuator} className="component-card-item is-built-in yaml-actuator">{actuatorLabel(actuator, zone)}</span>
-      ))}
+      {data.actuators.map((actuator, index) => {
+        const covering = coveringRow(actuator);
+        if (!covering) return <span key={actuator} className="component-card-item is-built-in yaml-actuator">{actuatorLabel(actuator, zone)}</span>;
+        // Una pieza que ocupa varios actuadores sale una vez, en el primero.
+        if (data.actuators.slice(0, index).some(previous => coveringRow(previous) === covering)) return null;
+        return <RowItem key={actuator} {...rowProps(covering)} />;
+      })}
       {getActuatorWeapons(build, zone).map(weapon => (
         <span
           key={weapon.hardpoint}
