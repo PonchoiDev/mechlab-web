@@ -144,9 +144,7 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 
 ## Pendiente de comprobar en el juego
 
-- **Builds de serie:** con estas reglas y la conversión de serie de YAML ([mechlab-yaml.md](mechlab-yaml.md#conversión-de-serie)), 610 de 639 pesan su tonelaje (eran 343, y 434 antes de leer la conversión).
-
-- **Ranuras de los brazos con armas cuerpo a cuerpo:** el MDA del CP-10-P da 3 ranuras generales al brazo izquierdo, y el mechlab de YAML enseña la gran espada (6 ranuras, aunque su tipo de ranura dice 7) y 3 libres; las nudilleras ocupan 1 (su tipo dice 2). La regla con la que YAML añade esas ranuras está por encontrar; mientras, la web no deja montar la gran espada en ese brazo.
+- **Builds de serie:** con estas reglas y la conversión de serie de YAML ([mechlab-yaml.md](mechlab-yaml.md#conversión-de-serie)), 610 de 639 pesan su tonelaje (eran 343, y 434 antes de leer la conversión); las demás, en la especificación del MechLab. Las ranuras de los brazos con armas cuerpo a cuerpo (el CP-10-P) ya cuadran con las reglas de ranuras de YAML (CA34 de [mechlab-yaml.md](mechlab-yaml.md)).
 
 ## Plan de pruebas
 

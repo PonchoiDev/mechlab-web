@@ -156,6 +156,7 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 | CA31 | El SD1-O y el NGA-PRIME de serie | se cuentan sus ranuras | el AC/20 del SD1-O deja 1 ranura de relleno en el torso izquierdo y el C-Arrow IV del NGA-PRIME, 2 en cada torso lateral, como en las capturas; ninguno tiene avisos de ranuras |
 | CA32 | Un arma de más de 7 ranuras | no hay sitio para su resto en ninguna ubicación contigua | no se puede montar y el aviso lo dice |
 | CA33 | El JR7-IIC-FY de serie | se calcula | lleva 6 retrorreactores, pesa 34,43 de 35 t como en la captura y no tiene avisos de ranuras |
+| CA34 | El CP-10-P de serie | se cuentan las ranuras de su brazo izquierdo | la Claymore ocupa 5 de sus 8 ranuras generales (su ranura de 7 queda en 6 y ocupa 1 menos) y quedan 3 libres, como en el juego |
 
 ## Fuera de alcance
 
@@ -167,16 +168,12 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 
 ## Pendiente de comprobar en el juego
 
-- Las builds de serie que no pesan su tonelaje: con la conversión de serie y las reglas de peso de `CalculateMechTonnage` ([estadisticas-yaml.md](estadisticas-yaml.md)), 610 de 639 lo dan exacto. Las otras 29 se quedan por debajo; dos están comprobadas con capturas del juego, que marca lo mismo (CA25): el INC-A pesa 29,97 de 30 t y el WHM-DNC 61,99 de 70 (YAML le pone motor XL, por sus 3 ranuras laterales, y el loadout del juego no llena las 8 t que libera).
-- La armadura, la estructura y la velocidad del WHM-DNC de la captura (375,9, 299,2 y 85,7 km/h) son las de la web por 1,05, 1,1 y 1,15. Son los tres rasgos de 'Mech que trae instalados su loadout del juego (`InstalledTraits`: Refined Armor II, +5 % de armadura; Fortified Internal Structure II, +10 % de estructura; Boosted Top Speed, +15 % de velocidad), que la web todavía no lee.
-
-- El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
-- Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
+- Las builds de serie que no pesan su tonelaje: con la conversión de serie y las reglas de peso de `CalculateMechTonnage` ([estadisticas-yaml.md](estadisticas-yaml.md)), 610 de 639 lo dan exacto. Las otras 29 se quedan por debajo; tres están comprobadas con capturas del juego, que marca lo mismo: el INC-A pesa 29,97 de 30 t, el WHM-DNC 61,99 de 70 (YAML le pone motor XL, por sus 3 ranuras laterales, y el loadout del juego no llena las 8 t que libera) y el JR7-IIC-FY 34,43 de 35 (CA25 y CA33).
+- Las ranuras fijas en los torsos laterales del XXL de la Esfera Interior (6) y del Compact (ninguna). Las del XL (3), el Light (2), el XL Clan (2) y el XXL Clan (4) están comprobadas con capturas.
 - Dónde coloca el juego los rellenos dinámicos (`GetMechpartsInFillerPositioningOrder`): en el WHM-DNC de serie el juego pone 2 de Ferro en cada brazo y la web los junta en el brazo derecho. El número y las ranuras libres sí coinciden.
 - Quitar actuadores de los brazos (antebrazo y mano) para montar armas grandes.
-- Las ranuras del WHM-DNC de serie: la web avisa de que los rellenos dinámicos necesitan 14 ranuras libres y solo quedan 3, y de que no caben las 3 fijas del motor XL en los torsos; en el juego caben. Puede ser el mismo descuadre que las ranuras de los brazos con cuerpo a cuerpo.
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA33, las ranuras).
+1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA34, las ranuras).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, compartir y guardar una build.
