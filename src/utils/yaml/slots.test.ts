@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import type { Zone } from '../../types/mech';
-import { createStockBuild, setInternal } from './build';
+import { createStockBuild, mountWeapon, removeWeapon, setInternal } from './build';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlBuildIssues } from './readouts';
-import { getDynamicFillers, getFixedFillers, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
+import { getCritSplitFillers, getDynamicFillers, getFixedFillers, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
 
-// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA30 de docs/specs/mechlab-yaml.md. Las
+// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA32 de docs/specs/mechlab-yaml.md. Las
 // ranuras libres salen de contar las filas vacías de las capturas del mechlab del juego.
 const generalSlots = (id: string) => {
   const zones = findYamlMech(id)!.zones;
@@ -70,5 +70,29 @@ describe('Piezas propias y armas cuerpo a cuerpo', () => {
     expect(freeAfterFillers('CRD-5M')).toBe(10);
     const hunchback = findYamlMech('HBK-VEST')!;
     expect(getYamlBuildIssues(hunchback, createStockBuild(hunchback))).toEqual([]);
+  });
+});
+
+describe('Armas repartidas', () => {
+  it('CA31: las armas de más de 7 ranuras llevan el resto a la ubicación contigua, como en las capturas', () => {
+    const sunder = findYamlMech('SD1-O')!;
+    expect(getCritSplitFillers(sunder, createStockBuild(sunder))).toEqual([
+      { zone: 'leftTorso', from: 'leftArm', item: 'Autocannon20', slots: 1 }
+    ]);
+    const naga = findYamlMech('NGA-PRIME')!;
+    expect(getCritSplitFillers(naga, createStockBuild(naga)).map(({ zone, from, slots }) => ({ zone, from, slots }))).toEqual([
+      { zone: 'leftTorso', from: 'leftArm', slots: 2 },
+      { zone: 'rightTorso', from: 'rightArm', slots: 2 }
+    ]);
+    for (const mech of [sunder, naga]) expect(getYamlBuildIssues(mech, createStockBuild(mech)), mech.id).toEqual([]);
+  });
+
+  it('CA32: sin sitio en ninguna ubicación contigua, el arma no se puede montar', () => {
+    const nightstar = findYamlMech('NSR-9J')!;
+    const stock = createStockBuild(nightstar);
+    // Sin la Gauss quedan 7 ranuras en el brazo derecho y el torso derecho de serie está lleno.
+    const gauss = stock.weapons.find(weapon => weapon.zone === 'rightArm' && weapon.item === 'GaussRifle')!;
+    const result = mountWeapon(nightstar, removeWeapon(stock, gauss.hardpoint), 'rightArm', 'Autocannon20');
+    expect(result.error).toMatch(/adjacent/i);
   });
 });
