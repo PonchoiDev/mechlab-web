@@ -45,23 +45,36 @@ RANURAS_INYECTADAS = {"head": ["Defensive_SlotType", "LifeSupport"], "centerTors
 # Piezas internas de serie cuando el loadout no trae otra en su ranura (las «Standard» del mechlab).
 INTERNAS_DE_SERIE = {
     "Defensive_SlotType": None, "LifeSupport": None, "Sensors": None, "Targeting": None, "cockpit": None,
-    "Gyro": None,
+    "Gyro": None, "Engine": None, "EngineTypeSlot": None, "Armorslot": None, "Structureslot": None, "enginecooling": None,
 }
-# Armadura y estructura del MDA del juego y la pieza de YAML que las sustituye al convertir.
-ARMADURAS = {"StandardArmor": "ARMOR_STANDARD_FIXED", "FerroFibrousArmor": "FERRO", "StealthArmor": "ARMOR_STEALTH"}
-ESTRUCTURAS = {"StandardStructure": "STRUCTURE_STANDARD_FIXED", "EndoSteelStructure": "ENDO"}
-KITS_DE_REFRIGERACION = {"single": "SHS_KIT_FIXED", "double": "Cooling_diss100", "clanDouble": "CLAN_DHS_KIT_FIXED"}
-# Con motor estándar, los loadouts de YAML dejan vacía la ranura del tipo de motor: ENGINE_FIXED resta un 5 %
-# al calor de las armas y el mechlab del juego no lo aplica al GHR-5J de serie.
-TIPO_DE_MOTOR = {False: None, True: "ENGINE_XL"}
+# FixVanillaLoadouts (EquipmentUtilities de YAML) convierte al cargar los loadouts que no traen núcleo de motor en
+# el torso central, según el tipo de 'Mech (MechTypeOmni): 0 de la Esfera Interior, 1 omni de la Esfera Interior,
+# 2 Clan y 3 omni Clan. Cada tabla da la pieza de cada tipo; None deja la ranura vacía (la pieza estándar).
+ARMADURA_FERRO = ("FERRO", "FERRO_FIXED", "CFERRO", "CFERRO_FIXED")
+ARMADURA_ESTANDAR = (None, "ARMOR_STANDARD_FIXED", None, "ARMOR_STANDARD_CLAN_FIXED")
+ESTRUCTURA_ENDO = ("ENDO", "ENDO_FIXED", "C79ENDO", "C79ENDO_FIXED")
+ESTRUCTURA_ESTANDAR = (None, "STRUCTURE_STANDARD_FIXED", None, "STRUCTURE_CLAN_FIXED")
+KIT_DOBLE = ("Cooling_diss100", "Cooling_diss100_FIXED", "CLAN_DHS_KIT", "CLAN_DHS_KIT_FIXED")
+KIT_SIMPLE = (None, "SHS_KIT_FIXED", None, "CLAN_SHS_KIT_FIXED")
+GIROSCOPIO = (None, "OMNI_GYRO_FIXED", None, "CLAN_OMNI_GYRO_FIXED")
+# GetEngineAsset: el tipo de motor sale de las ranuras del motor en cada torso lateral (EngineSideTorsoSlots, 0 si
+# el MDA no lo trae, como en el constructor de FMechData); con 2, ligero en la Esfera Interior y XL en los Clanes.
+TIPOS_DE_MOTOR = {
+    "std": (None, "ENGINE_FIXED", None, "ENGINE_CLAN_FIXED"),
+    "light": ("ENGINE_LIGHT", "ENGINE_LIGHT_FIXED", "ENGINE_LIGHT", "ENGINE_LIGHT_FIXED"),
+    "xl": ("ENGINE_XL", "ENGINE_XL_FIXED", "ENGINE_XL_CLAN", "ENGINE_XL_CLAN_FIXED"),
+    "xxl": ("ENGINE_XXL", "ENGINE_XXL_FIXED", "ENGINE_XXL_CLAN", "ENGINE_XXL_CLAN_FIXED"),
+}
 # Piezas de los loadouts que no son equipo del jugador: el contrapeso con el que YAML compensa el peso
 # de los 'Mechs del juego al convertirlos (−1000 t) y los rellenos, que el mechlab recoloca solo.
 PIEZAS_TECNICAS = re.compile(r"COUNTERWEIGHT|UAVCOMPONENT|_filler$|^DYNAMIC_FILLER|^XLfiller$", re.IGNORECASE)
 # Los ataques de las manos y los antebrazos (MechHandAssault_MeleeWeaponDataAsset...) van en sus actuadores.
 ACTUADOR_DE_CUERPO_A_CUERPO = re.compile(r"^Mech(Hand|LowerArm)")
 NIVEL_DE_ARMA = re.compile(r"_Lvl(\d+)$", re.IGNORECASE)
-# Motores del juego en los loadouts: YAML los separa en núcleo y tipo.
-MOTOR_DEL_JUEGO = re.compile(r"^(XL|STD|Std|Light|LFE|XXL)(\d+)$")
+# Motores antiguos de YAML en los loadouts de los mods: ReplaceAllLegacyEquipment (GetTypeFromLegacyEngine) los
+# separa en el núcleo std con la potencia de las tres cifras tras el prefijo y el tipo, antes de FixVanillaLoadouts.
+MOTORES_ANTIGUOS = (("lfe", "ENGINE_LIGHT"), ("xl", "ENGINE_XL"), ("xxl", "ENGINE_XXL"),
+                    ("meowsclanxl", "ENGINE_XL_CLAN"), ("clanxxl", "ENGINE_XXL_CLAN"), ("engine_compact_", "ENGINE_COMPACT"))
 
 REGEX_PROPIEDAD = {
     "slotType": re.compile(r'WeaponSlotTypeAssetId=\(Id="MWSlotTypeDataAsset:([^"]+)"'),
@@ -707,44 +720,81 @@ def canonico(pieza, objetos, minusculas):
     return pieza if pieza in objetos else minusculas.get(pieza.lower())
 
 
-def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech):
-    minusculas = {id_objeto.lower(): id_objeto for id_objeto in objetos}
-    importado = datos["MechDataStats"].get("MechImportData", {}).get("BaseMechInformation", {})
-    potencia = importado.get("EngineRating")
+def motor_antiguo(pieza, objetos, minusculas):
+    """GetTypeFromLegacyEngine: el núcleo y el tipo de un motor antiguo, o None si no lo es o no existen."""
+    nombre = pieza.lower()
+    for prefijo, tipo in MOTORES_ANTIGUOS:
+        if nombre.startswith(prefijo):
+            cifras = re.match(r"\d+", pieza[len(prefijo):len(prefijo) + 3])
+            nucleo = canonico(f"std{cifras.group(0)}", objetos, minusculas) if cifras and int(cifras.group(0)) > 0 else None
+            return (nucleo, tipo) if nucleo and tipo in objetos else None
+    return None
+
+
+def tipo_de_mech(datos, quirks):
+    """MechTypeOmni de FixVanillaLoadouts: por los quirks del 'Mech (Array_Contains compara sin mayúsculas) y, sin
+    el de clan, por la tecnología del MDA."""
+    quirks = {quirk.lower() for quirk in quirks}
+    omni, clan = "omni-mech" in quirks, "clan-mech" in quirks
+    if omni:
+        return 3 if clan else 1
+    return 2 if clan or datos.get("TechBase") == "TechBase.Clan" else 0
+
+
+def internas_de_conversion(datos, tipo):
+    """Las piezas que FixVanillaLoadouts monta en el torso central de un loadout sin núcleo de motor."""
     asignacion = datos.get("EquipmentAllocation", {})
-    armadura_mda = asignacion.get("ArmorDataAssetId", {}).get("Id", {}).get("PrimaryAssetName")
-    estructura_mda = asignacion.get("StructureDataAssetId", {}).get("Id", {}).get("PrimaryAssetName")
-    disipadores = (asignacion.get("AllowedHeatSinkType") or "").rsplit(".", 1)[-1]
-    internas = {
-        "Engine": f"std{potencia}" if potencia else None,
-        "EngineTypeSlot": TIPO_DE_MOTOR[bool(importado.get("bXLEngine"))],
-        "Armorslot": ARMADURAS.get(armadura_mda, "ARMOR_STANDARD_FIXED"),
-        "Structureslot": ESTRUCTURAS.get(estructura_mda, "STRUCTURE_STANDARD_FIXED"),
-        "enginecooling": KITS_DE_REFRIGERACION.get({"Single": "single", "Double": "double", "ClanDouble": "clanDouble"}.get(disipadores, "single")),
-        **INTERNAS_DE_SERIE,
+    armadura = asignacion.get("ArmorDataAssetId", {}).get("Id", {}).get("PrimaryAssetName")
+    estructura = asignacion.get("StructureDataAssetId", {}).get("Id", {}).get("PrimaryAssetName")
+    disipadores = asignacion.get("AllowedHeatSinkType") or ""
+    laterales = datos.get("EngineSideTorsoSlots", 0)
+    clase = {2: "light" if tipo in (0, 1) else "xl", 3: "xl", 4: "xxl", 5: "xxl", 6: "xxl"}.get(laterales, "std")
+    potencia = datos.get("EngineRating")
+    return {
+        "Engine": f"std{potencia}{'_FIXED' if tipo in (1, 3) else ''}" if potencia else None,
+        "EngineTypeSlot": TIPOS_DE_MOTOR[clase][tipo],
+        "Armorslot": (ARMADURA_FERRO if armadura in ("FerroFibrousArmor", "ClanFerroFibrousArmor") else ARMADURA_ESTANDAR)[tipo],
+        "Structureslot": (ESTRUCTURA_ENDO if estructura in ("EndoSteelStructure", "ClanEndoSteelStructure") else ESTRUCTURA_ESTANDAR)[tipo],
+        "enginecooling": (KIT_DOBLE if disipadores in ("Equipment.HeatSinks.Double", "Equipment.HeatSinks.Double.Clan") else KIT_SIMPLE)[tipo],
+        "Gyro": GIROSCOPIO[tipo],
     }
-    piezas = []
+
+
+def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks):
+    minusculas = {id_objeto.lower(): id_objeto for id_objeto in objetos}
+    internas = dict(INTERNAS_DE_SERIE)
+    huecos = []
     for parte in loadout.get("Equipment", {}).get("MechPartEquipment", []):
-        zona = ZONAS.get(parte["MechPart"])
         for hueco in parte["SlottedEquipment"]:
             tipo = hueco["SlotTypeAssetId"]["Id"]["PrimaryAssetName"]
             pieza = hueco["EquipmentData"]["EquipmentId"]["Id"]["PrimaryAssetName"]
             if not pieza or pieza == "None" or PIEZAS_TECNICAS.search(pieza):
                 continue
-            motor = MOTOR_DEL_JUEGO.match(pieza)
-            if motor and tipo == "Engine":
-                internas["Engine"] = f"std{motor.group(2)}"
-                if motor.group(1) == "XL":
-                    internas["EngineTypeSlot"] = "ENGINE_XL"
-                continue
-            if tipo in internas:
-                internas[tipo] = canonico(pieza, objetos, minusculas) or pieza
-                continue
-            pieza = canonico(pieza, objetos, minusculas)
-            if not pieza:
-                avisos.append(f"{id_mech}: pieza desconocida {hueco['EquipmentData']['EquipmentId']['Id']['PrimaryAssetName']} en {tipo}")
-                continue
-            piezas.append({"zone": zona, "slotType": tipo, "item": pieza})
+            # ReplaceLoadoutLegacyEquipment: una pieza que no existe y acaba en _H, _M o _L (las versiones antiguas
+            # de calidad, ENDO_M) pasa a la misma sin el sufijo.
+            if not canonico(pieza, objetos, minusculas) and pieza.endswith(("_H", "_M", "_L")):
+                pieza = canonico(pieza[:-2], objetos, minusculas) or pieza
+            antiguo = motor_antiguo(pieza, objetos, minusculas) if tipo == "Engine" else None
+            if antiguo:
+                huecos.append((parte["MechPart"], "Engine", antiguo[0]))
+                huecos.append((parte["MechPart"], "EngineTypeSlot", antiguo[1]))
+            else:
+                huecos.append((parte["MechPart"], tipo, pieza))
+    # FindEngineInLoadout: con un núcleo de motor en el torso central, YAML deja el loadout como está.
+    con_motor = any(ZONAS.get(parte) == "centerTorso" and objetos.get(canonico(pieza, objetos, minusculas) or "", {})
+                    .get("category", "").startswith("Equipment.Engine.Core") for parte, _, pieza in huecos)
+    if not con_motor:
+        internas.update(internas_de_conversion(datos, tipo_de_mech(datos, quirks)))
+    piezas = []
+    for parte, tipo, pieza in huecos:
+        if tipo in internas:
+            internas[tipo] = canonico(pieza, objetos, minusculas) or pieza
+            continue
+        original, pieza = pieza, canonico(pieza, objetos, minusculas)
+        if not pieza:
+            avisos.append(f"{id_mech}: pieza desconocida {original} en {tipo}")
+            continue
+        piezas.append({"zone": ZONAS.get(parte), "slotType": tipo, "item": pieza})
     armas = []
     for arma in loadout.get("InstalledWeapons", []):
         pieza = arma["WeaponData"]["WeaponId"]["Id"]["PrimaryAssetName"]
@@ -784,10 +834,13 @@ def movimiento(datos):
     }
 
 
-def quirks_de(variante, modelo, asignaciones):
+def quirks_de(variante, modelo, asignaciones, mda=None):
+    """Los quirks del modelo y la variante (y del MDA), como GetEffectiveMechPropertiesForLoadout. Las claves de
+    mechs.json se buscan sin mayúsculas, como en un TMap de FString."""
+    minusculas = {clave.lower(): valor for clave, valor in asignaciones.items()}
     nombres = []
-    for clave in (modelo, variante):
-        for quirk in asignaciones.get(clave, {}).get("quirks", []):
+    for clave in (mda, modelo, variante):
+        for quirk in minusculas.get((clave or "").lower(), {}).get("quirks", []):
             if quirk not in nombres:
                 nombres.append(quirk)
     return nombres
@@ -831,7 +884,8 @@ def main():
             **({"dlc": mech_juego["dlc"]} if mech_juego.get("dlc") else {}),
             "quirks": quirks_de(id_mech, modelo, asignaciones),
             "zones": construir_zonas(datos),
-            "stock": construir_build_de_serie(datos, loadout, objetos, avisos, id_mech),
+            "stock": construir_build_de_serie(datos, loadout, objetos, avisos, id_mech,
+                                              quirks_de(id_mech, modelo, asignaciones, nombre_mda)),
             "movement": movimiento(datos),
         })
 

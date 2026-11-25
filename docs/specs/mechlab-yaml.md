@@ -43,7 +43,7 @@ Un asset con la misma ruta que otro del juego, o que otro de un mod con menor or
 **Decisiones sobre los datos:**
 
 - **Variantes disponibles:** las 639 del MechLab de MW5 (sin las de campaña, tutorial, jefes ni cinemáticas), con el MDA de YAML y, si YAML no trae otro, el loadout del juego. Las 183 variantes nuevas de YAML quedan para más adelante: entre ellas hay jefes, rellenos técnicos (`YAML_RUNONCE_DUMMY`, `PARTIAL_SALVAGE`) y versiones de lore que hay que filtrar una a una.
-- **Build de serie:** las piezas del juego base de los loadouts se convierten como en el juego (el motor `XL285` pasa a núcleo `std285` y motor XL; las armas con nivel, `MediumLaser_Lvl2`, son el arma con su nivel). Los contrapesos con los que YAML compensa el peso al convertir (`YAML_VANILLA_COUNTERWEIGHT`, −1000 t) y los rellenos de los loadouts no se guardan: los rellenos los coloca la web.
+- **Build de serie:** el loadout se convierte como lo hace YAML al cargar (`YAMLGlobals`): primero `ReplaceAllLegacyEquipment` y después `FixVanillaLoadouts`, de `EquipmentUtilities`; las armas con nivel, `MediumLaser_Lvl2`, son el arma con su nivel. Las reglas están en [Conversión de serie](#conversión-de-serie). Los contrapesos con los que YAML compensa el peso al convertir (`YAML_VANILLA_COUNTERWEIGHT`, −1000 t) y los rellenos de los loadouts no se guardan: los rellenos los coloca la web.
 - **Ids:** los mismos ids de variante que en el MechLab de MW5.
 - **Ajustes de la partida:** se usan los valores por defecto de YAML. Los ajustes de `gui_config.ini` que cambian el mechlab (multiplicador de ranuras críticas, anclajes omni, armas de una ranura, niveles de permiso del mechlab) quedan fuera.
 
@@ -86,6 +86,28 @@ Cada regla marcada con ✔ está comprobada con capturas del juego, con YAML 0.9
 - **RNF5.** Funciona a 1440 × 900 y a 390 × 844.
 - **RNF6.** Los datos de `src/data/yaml/` no se editan a mano: salen de los scripts.
 
+## Conversión de serie
+
+Reglas leídas del bytecode de `EquipmentUtilities` (YAML), en el orden en que se aplican:
+
+1. **Piezas antiguas** (`ReplaceLoadoutLegacyEquipment`). Un motor antiguo en la ranura del motor se separa en el núcleo `std` con la potencia de las tres cifras que siguen al prefijo y su tipo: `lfe` Light, `xl` XL, `xxl` XXL, `MeowsClanXL` XL Clan, `ClanXXL` XXL Clan y `engine_compact_` Compact (`GetTypeFromLegacyEngine`). Una pieza que no existe y acaba en `_H`, `_M` o `_L` pasa a la misma sin el sufijo (`ENDO_M` es `ENDO`).
+2. **Loadouts ya convertidos.** Si el torso central lleva un núcleo de motor (`FindEngineInLoadout`, etiqueta `Equipment.Engine.Core`), el loadout se queda como está.
+3. **Tipo de 'Mech** (`MechTypeOmni`), por los quirks del MDA, el modelo y la variante en `mechs.json` (sin distinguir mayúsculas): 3 con `OMNI-MECH` y `CLAN-MECH`; 1 con `OMNI-MECH`; 2 con `CLAN-MECH` o con la tecnología `TechBase.Clan` del MDA; 0 en otro caso.
+4. **Piezas del torso central** según el tipo (0 / 1 / 2 / 3; un guion deja la ranura vacía, que es la pieza estándar):
+
+| Ranura | Condición del MDA | 0 | 1 | 2 | 3 |
+|---|---|---|---|---|---|
+| Armadura | Ferro o Ferro Clan | `FERRO` | `FERRO_FIXED` | `CFERRO` | `CFERRO_FIXED` |
+| Armadura | otra | - | `ARMOR_STANDARD_FIXED` | - | `ARMOR_STANDARD_CLAN_FIXED` |
+| Estructura | Endo o Endo Clan | `ENDO` | `ENDO_FIXED` | `C79ENDO` | `C79ENDO_FIXED` |
+| Estructura | otra | - | `STRUCTURE_STANDARD_FIXED` | - | `STRUCTURE_CLAN_FIXED` |
+| Núcleo | `EngineRating` | `std<potencia>` | `std<potencia>_FIXED` | `std<potencia>` | `std<potencia>_FIXED` |
+| Refrigeración | disipadores dobles o dobles Clan | `Cooling_diss100` | `Cooling_diss100_FIXED` | `CLAN_DHS_KIT` | `CLAN_DHS_KIT_FIXED` |
+| Refrigeración | otros | - | `SHS_KIT_FIXED` | - | `CLAN_SHS_KIT_FIXED` |
+| Giroscopio | | - | `OMNI_GYRO_FIXED` | - | `CLAN_OMNI_GYRO_FIXED` |
+
+5. **Tipo de motor** (`GetEngineAsset`), por las ranuras del motor en cada torso lateral (`EngineSideTorsoSlots`; 0 si el MDA no lo trae, porque el constructor de `FMechData` no lo inicializa): 0 o 1 estándar (vacío en los tipos 0 y 2, `ENGINE_FIXED` en el 1 y `ENGINE_CLAN_FIXED` en el 3); 2 Light en la Esfera Interior (`ENGINE_LIGHT`, `_FIXED` en el 1) y XL en los Clanes; 3 XL (`ENGINE_XL`, `ENGINE_XL_FIXED`, `ENGINE_XL_CLAN`, `ENGINE_XL_CLAN_FIXED`); de 4 a 6 XXL, con los mismos sufijos. Ningún 'Mech de los mods trae la configuración `autoconv` de `mechs.json`, que cambiaría el motor, el giroscopio o el número de núcleos.
+
 ## Criterios de aceptación
 
 Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (95 t) y van en `src/utils/yaml/gameReference.test.ts`.
@@ -110,6 +132,13 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 | CA16 | Un arma | se monta | necesita un anclaje libre de su tipo y sus ranuras libres en la misma ubicación; un AC/20 (10) no cabe en un brazo con 8 ranuras |
 | CA17 | Los datos | se generan | las variantes tienen los mismos ids que en el MechLab de MW5; ninguna es de campaña, tutorial, jefe ni cinemática; las reglas de `reglas.json` están aplicadas a los tipos de ranura |
 | CA18 | Una build | se codifica y se decodifica | sale la misma build; un código del MechLab de MW5 no se abre como build de YAML |
+| CA19 | El SD1-O, omnimech de la Esfera Interior con el loadout del juego | se genera su build de serie | lleva `std360_FIXED`, `ENGINE_XL_FIXED`, `OMNI_GYRO_FIXED`, `ARMOR_STANDARD_FIXED`, `STRUCTURE_STANDARD_FIXED` y `Cooling_diss100_FIXED` |
+| CA20 | El EBJ-PRIME, omnimech Clan | se genera su build de serie | lleva `std325_FIXED`, `ENGINE_XL_CLAN_FIXED`, `CLAN_OMNI_GYRO_FIXED`, `CFERRO_FIXED`, `C79ENDO_FIXED` y `CLAN_DHS_KIT_FIXED`, y pesa 65 de 65 t |
+| CA21 | El INC-1, Clan sin ser omni | se genera su build de serie | lleva `std270`, `ENGINE_XL_CLAN`, `CFERRO`, `C79ENDO` y `CLAN_DHS_KIT`, sin giroscopio |
+| CA22 | El GHR-5J, de la Esfera Interior con motor estándar | se genera su build de serie | solo lleva el núcleo `std280`: armadura, estructura, tipo de motor, refrigeración y giroscopio quedan vacíos |
+| CA23 | El ARC-T, con `ENDO_H` en su loadout | se genera su build de serie | lleva la estructura `ENDO` |
+| CA24 | Las 639 builds de serie | se calculan | al menos 610 pesan su tonelaje exacto |
+| CA25 | Las builds de serie del KFX-C, el INC-A y el WHM-DNC, con capturas del juego | se calculan | pesan 30 de 30, 29,97 de 30 y 61,99 de 70 t; las 21 cifras del panel del KFX-C y el INC-A coinciden con el juego, y en el WHM-DNC todas menos armadura, estructura y velocidad |
 
 ## Fuera de alcance
 
@@ -121,7 +150,8 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 
 ## Pendiente de comprobar en el juego
 
-- Las builds de serie que no pesan su tonelaje: con las reglas de peso leídas de `CalculateMechTonnage` ([estadisticas-yaml.md](estadisticas-yaml.md)), 434 de 639 lo dan exacto; las desviaciones de 0,01 o 0,02 t eran el ajuste al máximo. El resto son sobre todo omnimechs Clan, por la conversión de serie que YAML hace al cargar, que está por leer.
+- Las builds de serie que no pesan su tonelaje: con la conversión de serie y las reglas de peso de `CalculateMechTonnage` ([estadisticas-yaml.md](estadisticas-yaml.md)), 610 de 639 lo dan exacto. Las otras 29 se quedan por debajo; dos están comprobadas con capturas del juego, que marca lo mismo (CA25): el INC-A pesa 29,97 de 30 t y el WHM-DNC 61,99 de 70 (YAML le pone motor XL, por sus 3 ranuras laterales, y el loadout del juego no llena las 8 t que libera).
+- La armadura, la estructura y la velocidad del WHM-DNC de la captura (375,9, 299,2 y 85,7 km/h) son las de la web por 1,05, 1,1 y 1,15. Son los tres rasgos de 'Mech que trae instalados su loadout del juego (`InstalledTraits`: Refined Armor II, +5 % de armadura; Fortified Internal Structure II, +10 % de estructura; Boosted Top Speed, +15 % de velocidad), que la web todavía no lee.
 
 - El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
 - Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
@@ -129,5 +159,5 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas) y `src/utils/yaml/mechlab.test.ts` (CA15 a CA18).
+1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, compartir y guardar una build.
