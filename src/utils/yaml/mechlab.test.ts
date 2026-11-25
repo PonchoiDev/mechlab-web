@@ -57,11 +57,11 @@ describe('MechLab de YAML', () => {
     expect(decodeYamlBuild(mw5Code)).toBeNull();
   });
 
-  it('CA40: las variantes nuevas de YAML, sin rellenos técnicos ni superpesados', () => {
+  it('CA40: las variantes nuevas de YAML, sin rellenos técnicos', () => {
     const annihilator = findYamlMech('ANH-1G')!;
     expect(annihilator).toMatchObject({ chassis: 'Annihilator', variant: 'ANH-1G', tonnage: 100 });
     expect(annihilator.stock.weapons.length).toBeGreaterThan(0);
-    for (const id of ['Partial Mech Salvage', 'None', 'ANH-1GT', 'COR-ROAM']) expect(findYamlMech(id), id).toBeUndefined();
+    for (const id of ['Partial Mech Salvage', 'None']) expect(findYamlMech(id), id).toBeUndefined();
     expect(yamlMechs.filter(mech => mech.id === 'AS7-D-H')).toHaveLength(1);
     expect(new Set(yamlMechs.map(mech => mech.id)).size).toBe(yamlMechs.length);
   });

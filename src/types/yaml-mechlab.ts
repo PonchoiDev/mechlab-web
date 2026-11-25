@@ -61,6 +61,8 @@ export interface YamlMech {
   variant: string;
   tonnage: number;
   dlc?: number;
+  // SuperheavyCheck de YAML: 105 t o más y sin el quirk «ILLEGAL». Cambia las ranuras, los actuadores y el peso.
+  superheavy?: boolean;
   quirks: string[];
   zones: Record<Zone, YamlZoneData>;
   stock: YamlBuild;

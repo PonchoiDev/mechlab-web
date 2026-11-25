@@ -48,10 +48,19 @@ INTERNAS_DE_SERIE = {
     "Defensive_SlotType": None, "LifeSupport": None, "Sensors": None, "Targeting": None, "cockpit": None,
     "Gyro": None, "Engine": None, "EngineTypeSlot": None, "Armorslot": None, "Structureslot": None, "enginecooling": None,
 }
-# FixMdaGeneralSlots sube las ranuras generales del MDA a las del juego de mesa (sin contar superpesados ni
-# cuadrúpedos, que quedan fuera); GetOpenCritSlots les resta lo que ocupan las ranuras propias.
+# FixMdaGeneralSlots sube las ranuras generales del MDA a las del juego de mesa (sin contar los cuadrúpedos, que
+# quedan fuera); GetOpenCritSlots les resta lo que ocupan las ranuras propias. Los superpesados tienen otros
+# mínimos.
 MINIMO_DE_GENERALES = {"head": 6, "centerTorso": 13, "leftTorso": 12, "rightTorso": 12,
                        "leftArm": 12, "rightArm": 12, "leftLeg": 6, "rightLeg": 6}
+MINIMO_DE_GENERALES_SUPERPESADO = {"head": 7, "centerTorso": 20, "leftTorso": 24, "rightTorso": 24,
+                                   "leftArm": 24, "rightArm": 24, "leftLeg": 12, "rightLeg": 12}
+# SuperheavyCheck: un 'Mech de 105 t o más es superpesado si ninguno de sus quirks es «ILLEGAL».
+TONELAJE_SUPERPESADO = 105
+QUIRK_NO_SUPERPESADO = "illegal"
+# GetActuatorSlotTypeForInternalEquipment da a los superpesados sus propias ranuras de actuador
+# (Superheavy_Shoulder_SlotType...), de 2.
+PREFIJO_ACTUADOR_SUPERPESADO = "Superheavy_"
 # Fix Special Slot Counts: una ranura propia de cada una en la cabeza y en el torso central (con los nombres de las
 # piezas internas de la web: la cabina es «cockpit»).
 RANURAS_PROPIAS_DE_YAML = {"head": ["Sensors", "Targeting", "cockpit", "LifeSupport", "Defensive_SlotType"],
@@ -772,7 +781,12 @@ def partes_del_mda(datos):
     return partes_por_modelo().get((datos.get("MechModel") or "").rsplit(".", 1)[-1].lower())
 
 
-def ranuras_de_yaml(zonas, tamanos, ocultos):
+def es_superpesado(datos, quirks):
+    toneladas = datos.get("MechDataStats", {}).get("BaseStats", {}).get("Tons") or 0
+    return toneladas >= TONELAJE_SUPERPESADO and QUIRK_NO_SUPERPESADO not in {quirk.lower() for quirk in quirks}
+
+
+def ranuras_de_yaml(zonas, tamanos, ocultos, superpesado=False):
     """Las ranuras como las deja YAML al cargar: las propias de Fix Special Slot Counts, las generales subidas al
     mínimo de FixMdaGeneralSlots y, como GetOpenCritSlots, menos lo que ocupan las propias que cuentan (cuántas ×
     su tamaño; no cuentan las de disipadores del motor, las de retrorreactores ni las ocultas) y los actuadores.
@@ -784,10 +798,13 @@ def ranuras_de_yaml(zonas, tamanos, ocultos):
                             if tipo.lower() not in ocultos and not tipo.startswith("JumpJet")}
         miembro = "arm" if zona.endswith("Arm") else "leg" if zona.endswith("Leg") else None
         actuadores = [RANURA_DE_ACTUADOR.get((miembro, actuador)) for actuador in datos["actuators"]]
+        if superpesado:
+            actuadores = [PREFIJO_ACTUADOR_SUPERPESADO + tipo for tipo in actuadores if tipo]
         ocupadas = sum(n * (tamanos.get(tipo) or 1) for tipo, n in datos["special"].items()
                        if tipo not in (RANURA_GENERAL, "EngineHeatsink_SlotType"))
         ocupadas += sum(tamanos.get(tipo) or 1 for tipo in actuadores)
-        datos["general"] = max(datos["general"], MINIMO_DE_GENERALES[zona]) - ocupadas
+        minimo = (MINIMO_DE_GENERALES_SUPERPESADO if superpesado else MINIMO_DE_GENERALES)[zona]
+        datos["general"] = max(datos["general"], minimo) - ocupadas
     return zonas
 
 
@@ -923,10 +940,14 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks, r
     # Los tipos de ranura son FName, que no distinguen mayúsculas: el loadout del CN9-CALM trae su cabina Small en
     # «Cockpit» y la ranura de YAML es «cockpit».
     tipos_internos = {tipo.lower(): tipo for tipo in internas}
+    del_loadout = set()
     for parte, tipo, pieza in huecos:
         tipo = tipos_internos.get(tipo.lower(), tipo)
-        if tipo in internas:
+        # Los superpesados traen dos núcleos de motor en el torso central: el segundo va como equipo de esa
+        # ranura, y DLCGetInstalledInternals cuenta todos los núcleos montados ahí.
+        if tipo in internas and not (tipo == "Engine" and tipo in del_loadout):
             internas[tipo] = canonico(pieza, objetos, minusculas) or pieza
+            del_loadout.add(tipo)
             continue
         original, pieza = pieza, canonico(pieza, objetos, minusculas)
         if not pieza:
@@ -973,20 +994,20 @@ REGEX_RELLENO = re.compile(r"^DYNAMIC_FILLER_SIZE_(\d+)$", re.IGNORECASE)
 
 # Rellenos técnicos de YAML, que no son 'Mechs: el que ejecuta código al arrancar y el de chatarra del desguace.
 MDA_TECNICOS = {"YAML_RUNONCE_DUMMY_MDA", "PARTIAL_SALVAGE_MDA"}
-# Los superpesados (más de 100 t) quedan fuera del MechLab.
-TONELAJE_MAXIMO = 100
 
 
 def construir_variante(id_mech, chasis, variante, dlc, datos, loadout, nombre_mda, objetos, avisos, asignaciones, tamanos, ocultos, rasgos):
     modelo = (datos.get("MechModel") or "").rsplit(".", 1)[-1]
-    stock = construir_build_de_serie(datos, loadout, objetos, avisos, id_mech,
-                                     quirks_de(variante, modelo, asignaciones, nombre_mda), rasgos)
+    quirks = quirks_de(variante, modelo, asignaciones, nombre_mda)
+    stock = construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks, rasgos)
+    superpesado = es_superpesado(datos, quirks)
     return {
         "id": id_mech, "chassis": chasis, "variant": variante,
         "tonnage": datos["MechDataStats"]["BaseStats"]["Tons"],
         **({"dlc": dlc} if dlc else {}),
         "quirks": quirks_de(variante, modelo, asignaciones),
-        "zones": ranuras_de_yaml(construir_zonas(datos), tamanos, ocultos),
+        **({"superheavy": True} if superpesado else {}),
+        "zones": ranuras_de_yaml(construir_zonas(datos), tamanos, ocultos, superpesado),
         "stock": stock,
         "movement": movimiento(datos),
         **rellenos_de(stock),
@@ -1135,7 +1156,7 @@ def main():
         mechs.append(construir_variante(id_mech, mech_juego["name"], variante, mech_juego.get("dlc"), datos, loadout,
                                         nombre_mda, objetos, avisos, asignaciones, tamanos, ocultos, rasgos))
 
-    # Las variantes nuevas de YAML, sin los rellenos técnicos ni los superpesados. Las que se llaman como una del
+    # Las variantes nuevas de YAML, sin los rellenos técnicos. Las que se llaman como una del
     # MechLab de MW5 (AS7-D-H, CPLT-C3) son otras: su id es el de su MDA y enseñan su nombre, como en el juego.
     # Algunos MDA nuevos escriben el chasis en mayúsculas (DAISHI, LOKI): el del MechLab de MW5 si lo hay.
     chasis_conocidos = {mech["name"].lower(): mech["name"] for mech in mechs_juego.values()}
@@ -1148,7 +1169,7 @@ def main():
             id_mech = nombre_mda.removesuffix("_MDA")
         toneladas = datos.get("MechDataStats", {}).get("BaseStats", {}).get("Tons")
         if (not ruta.startswith("/YetAnotherMechlab/") or nombre_mda in MDA_TECNICOS or not variante or not toneladas
-                or toneladas > TONELAJE_MAXIMO or id_mech in vistos or id_mech in mechs_juego):
+                or id_mech in vistos or id_mech in mechs_juego):
             continue
         nombre_loadout = loadout_de_serie(variante, datos, nombre_mda, asignaciones, loadouts)
         loadout = loadouts.get(nombre_loadout.lower(), {}).get("propiedades", {}).get("MechLoadout")

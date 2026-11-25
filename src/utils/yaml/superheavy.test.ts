@@ -1,0 +1,86 @@
+import { describe, expect, it } from 'vitest';
+import type { Zone } from '../../types/mech';
+import type { YamlBuild, YamlMech } from '../../types/yaml-mechlab';
+import yamlMechs from '../../data/yaml/mechs.json';
+import { createStockBuild, mountItem, setInternal } from './build';
+import { getYamlStatsPanel } from './combat';
+import { findYamlMech } from './data';
+import { getActuatorSlotTypes, getArmorPoints, getBuildTonnage, getFreeGeneralSlots, getGeneralSlots, getHeat, getTopSpeed } from './stats';
+
+// Criterios de aceptación de docs/specs/superpesados-yaml.md, con las cifras de las capturas del mechlab del juego
+// del MAD-BARA2 y el MAD-TF (YAML 0.99.4.3).
+
+const panelOf = (mech: YamlMech, build: YamlBuild) =>
+  Object.fromEntries(getYamlStatsPanel(mech, build).flat().map(cell => [cell.key, cell.value]));
+
+describe('superpesados de YAML', () => {
+  it('CA1: están los cuatro superpesados, y solo ellos', () => {
+    const superheavies = (yamlMechs as unknown as YamlMech[]).filter(mech => mech.superheavy).map(mech => [mech.id, mech.tonnage]);
+    expect(superheavies.sort()).toEqual([['ANH-1GT', 200], ['COR-ROAM', 115], ['MAD-BARA2', 125], ['MAD-TF', 125]]);
+  });
+
+  it('CA2: el MAD-BARA2 tiene las ranuras y los actuadores de los superpesados, como en la captura', () => {
+    const mech = findYamlMech('MAD-BARA2')!;
+    const build = createStockBuild(mech);
+    const slots = (zone: Zone) => [getGeneralSlots(mech, build, zone), getFreeGeneralSlots(mech, build, zone)];
+    expect(slots('head')).toEqual([2, 0]);
+    expect(slots('centerTorso')).toEqual([9, 1]);
+    expect(slots('leftTorso')).toEqual([24, 16]);
+    expect(slots('rightTorso')).toEqual([24, 5]);
+    for (const zone of ['leftArm', 'rightArm'] as Zone[]) expect(slots(zone), zone).toEqual([18, 12]);
+    for (const zone of ['leftLeg', 'rightLeg'] as Zone[]) expect(slots(zone), zone).toEqual([4, 3]);
+    expect(getActuatorSlotTypes(mech, 'leftArm')).toEqual(['Superheavy_Shoulder_SlotType', 'Superheavy_UpperArm_SlotType', 'Superheavy_LowerArm_SlotType']);
+    expect(getActuatorSlotTypes(mech, 'rightLeg')).toEqual(['Superheavy_Hip_SlotType', 'Superheavy_UpperLeg_SlotType', 'Superheavy_LowerLeg_SlotType', 'Superheavy_Foot_SlotType']);
+  });
+
+  it('CA3: el panel del MAD-BARA2 de serie, con sus dos núcleos, como en la captura', () => {
+    const mech = findYamlMech('MAD-BARA2')!;
+    const build = createStockBuild(mech);
+    expect(getBuildTonnage(mech, build)).toBe(125);
+    expect(panelOf(mech, build)).toMatchObject({
+      armor: '720', structure: '495', alphaDamage: '179.5', dps: '43.23', heatPerSecond: '10.5', cooling: '5.6', turnRate: '50.4',
+      alphaHeat: '43.23', heatCapacity: '86', torsoTwistRate: '63', speed: '77.76', torsoYaw: '70', weaponRange: '2,475',
+      sensorRange: '1,328.12', armYaw: '26', amsIntercept: '12.25', amsRange: '300', ammo: '5,336'
+    });
+  });
+
+  it('CA4: el panel del MAD-TF de serie, con armadura Hardened, como en la captura', () => {
+    const mech = findYamlMech('MAD-TF')!;
+    const build = createStockBuild(mech);
+    expect(getBuildTonnage(mech, build)).toBe(125);
+    expect(panelOf(mech, build)).toMatchObject({
+      armor: '1,736', structure: '384', alphaDamage: '186.6', dps: '56.95', heatPerSecond: '10.36', cooling: '4.2', turnRate: '46.9',
+      alphaHeat: '37.26', heatCapacity: '72', torsoTwistRate: '58.6', speed: '68.04', torsoYaw: '70', weaponRange: '1,125',
+      sensorRange: '2,109.38', armYaw: '26', amsIntercept: '12.25', amsRange: '300', ammo: '1,820'
+    });
+  });
+
+  it('CA5: sin el segundo núcleo, el MAD-BARA2 va a la mitad y su motor da la mitad de disipadores', () => {
+    const mech = findYamlMech('MAD-BARA2')!;
+    const stock = createStockBuild(mech);
+    const oneCore = { ...stock, items: stock.items.filter(item => item.slotType !== 'Engine') };
+    expect(oneCore.items).toHaveLength(stock.items.length - 1);
+    expect(getTopSpeed(mech, oneCore)).toBeCloseTo(38.88, 4);
+    const heat = getHeat(mech, oneCore);
+    expect(heat.cooling).toBeCloseTo(3.6, 4);
+    expect(heat.capacity).toBe(66);
+    expect(getBuildTonnage(mech, oneCore)).toBe(115.5);
+  });
+
+  it('CA6: el equipo de actuadores de los superpesados solo cabe en ellos, y el normal solo en los demás', () => {
+    const bara = findYamlMech('MAD-BARA2')!;
+    const baraStock = createStockBuild(bara);
+    expect(mountItem(bara, baraStock, 'leftArm', 'SH_IMPROVED_ACTUATORS').error).toBeUndefined();
+    expect(mountItem(bara, baraStock, 'leftArm', 'IMPROVED_ACTUATORS').error).toMatch(/actuator slot/);
+    const nsr = findYamlMech('NSR-9J')!;
+    const nsrStock = createStockBuild(nsr);
+    expect(mountItem(nsr, nsrStock, 'leftArm', 'IMPROVED_ACTUATORS').error).toBeUndefined();
+    expect(mountItem(nsr, nsrStock, 'leftArm', 'SH_IMPROVED_ACTUATORS').error).toMatch(/actuator slot/);
+  });
+
+  it('CA7: la armadura Hardened dobla los puntos de cualquier \'Mech', () => {
+    const mech = findYamlMech('NSR-9J')!;
+    const { installed, bonus } = getArmorPoints(mech, setInternal(createStockBuild(mech), 'Armorslot', 'HARDENED'));
+    expect(installed + bonus).toBe(1198);
+  });
+});

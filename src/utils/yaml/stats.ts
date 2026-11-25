@@ -10,9 +10,15 @@ import { getTraitMultiplier, getTraitPercent } from './traits';
 // gameReference.test.ts y combat.test.ts.
 
 export const GENERAL_SLOT = 'General_SlotType';
-// CalculateMechTonnage: la cabina estándar pesa 3 t (las demás suman su peso) y la armadura, 32 puntos por
-// tonelada si la pieza de armadura no dice otra cosa.
+// CalculateMechTonnage: la cabina estándar pesa 3 t, 4 en los superpesados (las demás suman su peso), y la
+// armadura, 32 puntos por tonelada si la pieza de armadura no dice otra cosa.
 const COCKPIT_TONS = 3;
+const SUPERHEAVY_COCKPIT_TONS = 4;
+// GetStandardGyroWeightFromEngine: el giroscopio estándar pesa la potencia / 100, / 50 en los superpesados.
+const GYRO_RATING_DIVISOR = 100;
+const SUPERHEAVY_GYRO_RATING_DIVISOR = 50;
+// CalculateMechTonnage: la estructura de los superpesados pesa el doble.
+const SUPERHEAVY_STRUCTURE_MULTI = 2;
 const STANDARD_ARMOR_PER_TON = 32;
 // MechCalculateCoolingCapacity: capacidad sin disipadores (yamlDefaultHeatCapacity) y lo que da cada disipador
 // del motor sin kit (0,1 de refrigeración y 1 de capacidad).
@@ -88,17 +94,21 @@ const ACTUATOR_SLOTS: Record<'arm' | 'leg', Record<string, string>> = {
   arm: { Shoulder: 'Shoulder_SlotType', UpperActuator: 'UpperArm_SlotType', LowerActuator: 'LowerArm_SlotType', HandActuator: 'Hand_SlotType' },
   leg: { Hip: 'Hip_SlotType', UpperActuator: 'UpperLeg_SlotType', LowerActuator: 'LowerLeg_SlotType', FootActuator: 'Foot_SlotType' }
 };
-export const ACTUATOR_SLOT_TYPES = new Set([...Object.values(ACTUATOR_SLOTS.arm), ...Object.values(ACTUATOR_SLOTS.leg)]);
+// Los superpesados tienen sus propias ranuras de actuador, de 2 (Superheavy_Shoulder_SlotType...).
+const SUPERHEAVY_ACTUATOR_PREFIX = 'Superheavy_';
+const NORMAL_ACTUATOR_SLOT_TYPES = [...Object.values(ACTUATOR_SLOTS.arm), ...Object.values(ACTUATOR_SLOTS.leg)];
+export const ACTUATOR_SLOT_TYPES = new Set([...NORMAL_ACTUATOR_SLOT_TYPES, ...NORMAL_ACTUATOR_SLOT_TYPES.map(type => SUPERHEAVY_ACTUATOR_PREFIX + type)]);
 
-// La ranura de un actuador del MDA (Shoulder, UpperActuator...) en una ubicación.
-export function getActuatorSlotType(zone: Zone, actuator: string): string | undefined {
+// La ranura de un actuador del MDA (Shoulder, UpperActuator...) en una ubicación del 'Mech.
+export function getActuatorSlotType(mech: YamlMech, zone: Zone, actuator: string): string | undefined {
   const limb = zone.endsWith('Arm') ? 'arm' : zone.endsWith('Leg') ? 'leg' : null;
-  return limb ? ACTUATOR_SLOTS[limb][actuator] : undefined;
+  const slotType = limb ? ACTUATOR_SLOTS[limb][actuator] : undefined;
+  return slotType && mech.superheavy ? SUPERHEAVY_ACTUATOR_PREFIX + slotType : slotType;
 }
 
 // Las ranuras de actuador de una ubicación, las de los actuadores que tiene en el MDA.
 export function getActuatorSlotTypes(mech: YamlMech, zone: Zone): string[] {
-  return mech.zones[zone].actuators.flatMap(actuator => getActuatorSlotType(zone, actuator) ?? []);
+  return mech.zones[zone].actuators.flatMap(actuator => getActuatorSlotType(mech, zone, actuator) ?? []);
 }
 
 export function getQuirkProperties(mech: YamlMech): Record<string, unknown>[] {
@@ -144,11 +154,18 @@ export function getEngineRating(build: YamlBuild): number {
   return engineCore(build)?.rating ?? 0;
 }
 
+// DLCGetInstalledInternals cuenta todos los núcleos montados en el torso central: los superpesados traen dos.
+export function getEngineCores(mech: YamlMech, build: YamlBuild): number {
+  if (!engineCore(build)) return 0;
+  return getInstalledEquipment(mech, build).filter(({ zone, item }) => zone === 'centerTorso' && hasTag(item.category, 'Equipment.Engine.Core')).length;
+}
+
 // DLCGetInstalledInternals: los disipadores del motor (bundledHeatsinks del kit por cada 25 de potencia, como mucho
-// 10, más internalHeatsinkBonus) y los que faltan hasta 10, que restan 1 t cada uno.
+// 10, más internalHeatsinkBonus), por cada núcleo, y los que faltan hasta 10 en uno, que restan 1 t cada uno.
 function engineInternals(mech: YamlMech, build: YamlBuild): { heatSinks: number; missing: number; cores: number } {
   const core = engineCore(build);
   if (!core) return { heatSinks: 0, missing: 0, cores: 0 };
+  const cores = getEngineCores(mech, build);
   const kit = getInstalledEquipment(mech, build).filter(({ zone, item }) => zone === 'centerTorso' && tagContains(item.category, 'Equipment.Cooling')).at(-1)?.item;
   const bundled = kit?.bundledHeatsinks ?? 1;
   const bonus = getLoadoutProperties(mech, build).reduce((total, entry) => total + (numberOf(entry, 'internalHeatsinkBonus') ?? 0), 0);
@@ -163,7 +180,7 @@ function engineInternals(mech: YamlMech, build: YamlBuild): { heatSinks: number;
     missing = Math.max(room, 0);
     heatSinks += Math.min(room, 0);
   }
-  return { heatSinks, missing, cores: 1 };
+  return { heatSinks: heatSinks * cores, missing, cores };
 }
 
 export function getEngineHeatSinks(build: YamlBuild, mech?: YamlMech): number {
@@ -254,14 +271,16 @@ export function getBuildTonnage(mech: YamlMech, build: YamlBuild): number {
   const core = engineCore(build);
   const { missing, cores } = engineInternals(mech, build);
   let tons = build.weapons.reduce((sum, weapon) => sum + (getYamlItem(weapon.item)?.tons ?? 0), 0);
-  tons += COCKPIT_TONS;
-  // GetStandardGyroWeightFromEngine: potencia / 100 hacia arriba.
-  const standardGyro = core ? Math.ceil(f((core.rating ?? 0) / 100)) : 0;
+  tons += mech.superheavy ? SUPERHEAVY_COCKPIT_TONS : COCKPIT_TONS;
+  // GetStandardGyroWeightFromEngine: la potencia de un núcleo / 100 (/ 50 en los superpesados), hacia arriba.
+  const standardGyro = core ? Math.ceil(f((core.rating ?? 0) / (mech.superheavy ? SUPERHEAVY_GYRO_RATING_DIVISOR : GYRO_RATING_DIVISOR))) : 0;
   tons += standardGyro;
-  let structureMulti = 1;
+  const superheavyMulti = mech.superheavy ? SUPERHEAVY_STRUCTURE_MULTI : 1;
+  let structureMulti = superheavyMulti;
   for (const { item } of getInstalledEquipment(mech, build)) {
     tons += equipmentWeight(item, build, maxTonnage, standardGyro, cores);
-    structureMulti = structureWeightMulti(item) ?? structureMulti;
+    const multi = structureWeightMulti(item);
+    if (multi !== undefined) structureMulti = f(multi * superheavyMulti);
   }
   tons -= missing;
   tons += roundTo(f(f(maxTonnage / 10) * structureMulti), 2, false);
@@ -272,15 +291,15 @@ export function getBuildTonnage(mech: YamlMech, build: YamlBuild): number {
   return ueRound(tons * 100) / 100;
 }
 
-// DLCGetInstalledInternals: potencia (la de los primitivos, rebajada) / tonelaje × 16,2, × (1 + TopSpeedPercent),
-// con TopSpeedPercent = topSpeedMulti de lo montado y los quirks − 1.
+// DLCGetInstalledInternals: potencia (la de los primitivos, rebajada) / tonelaje × 16,2 × núcleos, × (1 +
+// TopSpeedPercent), con TopSpeedPercent = topSpeedMulti de lo montado y los quirks − 1.
 export function getTopSpeed(mech: YamlMech, build: YamlBuild): number {
   const core = engineCore(build);
   if (!core) return 0;
   const rating = core.rating ?? 0;
   const primitive = engineType(build)?.engineHealthType?.toLowerCase() === 'primitive';
   const effectiveRating = primitive ? Math.ceil(Math.trunc(f(rating / PRIMITIVE_RATING_DIVISOR)) / 5) * 5 : rating;
-  const maxSpeed = f(f(effectiveRating / mech.tonnage) * f(SPEED_FACTOR));
+  const maxSpeed = f(f(f(effectiveRating / mech.tonnage) * f(SPEED_FACTOR)) * getEngineCores(mech, build));
   // Con rasgos: topSpeedMulti × (1 + los de velocidad) − 1. El rasgo multiplica, no suma.
   const topSpeedPercent = f(f(sumMultiplier(getLoadoutProperties(mech, build), 'topSpeedMulti') * getTraitMultiplier(build, 'topSpeed')) - 1);
   return f(maxSpeed + f(maxSpeed * topSpeedPercent));
@@ -353,7 +372,9 @@ function getBonuses(mech: YamlMech, build: YamlBuild, structure: boolean) {
     const frontMulti = structure ? item.structureComponentMulti : item.armorComponentFrontMulti;
     if (frontMulti !== undefined) multiply(`${zone}:front`, frontMulti);
   }
-  let mechMulti = 1;
+  // GetEquipmentArmorMulti: el armorMulti de cada pieza montada (la Hardened, 2) multiplica la armadura de todo el
+  // 'Mech, como el de los quirks.
+  let mechMulti = structure ? 1 : sources.reduce((total, { item }) => item.armorMulti === undefined ? total : addMulti(item.armorMulti, total), 1);
   for (const properties of getQuirkProperties(mech)) {
     const perPart = properties[structure ? 'structureBonus' : 'armorBonus'] as Record<string, number> | undefined;
     for (const [part, value] of Object.entries(perPart ?? {})) if (PART_NAMES[part]) add(`${PART_NAMES[part]}:front`, value);
