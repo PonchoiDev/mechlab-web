@@ -55,6 +55,8 @@ Cada regla marcada con ✔ está comprobada con capturas del juego, con YAML 0.9
   - `FixMdaGeneralSlots` sube las ranuras generales del MDA a un mínimo: 6 en la cabeza, 13 en el torso central, 12 en cada torso lateral y cada brazo, y 6 en cada pierna (los superpesados y los cuadrúpedos tienen otros mínimos y quedan fuera).
   - `Fix Special Slot Counts` pone una ranura propia de sensores, FCS, cabina, soporte vital y defensa en la cabeza y una de armadura, estructura, giroscopio, refrigeración y motor en el torso central; `Inject Actuator Slots`, una por actuador.
   - `GetOpenCritSlots` resta a las generales lo que ocupan las ranuras propias que cuentan (cuántas × su tamaño): todas salvo las generales, las de disipadores del motor, las de retrorreactores y las que YAML oculta (`hideSlot` de la tabla `YAMLSlotTypeDatas`: brazo, pierna, ECM, sonda, MASC y contrapeso). Con el tipo de motor de 4, el giroscopio de 3 y el resto de 1, quedan las del juego de mesa: 1 en la cabeza, 2 en el torso central y 8 en cada brazo y 2 en cada pierna con sus 4 actuadores.
+  - Una pieza montada en una ranura propia que cuenta ocupa sus `Slots` en lugar del tamaño de las ranuras que admite, salvo en las que ignoran el de la pieza (`ignoreEquipSlots`: armadura, estructura y refrigeración). En el torso central del NSR-9J quedan 2 generales con el giroscopio estándar (3), 4 con el Compact (1) y 0 con el XL (5); los tipos de motor XL, XXL y Light ocupan los 4 de su ranura.
+  - Un arma cuerpo a cuerpo ocupa el tamaño de su ranura − 1 (`GetWeaponCrits`). Antes, `Inject Actuator Slots` resta 1 al tamaño de las ranuras cuerpo a cuerpo que no son de antebrazo, porque la de mano de asalto ocupa más de 1: un arma mediana (4 → 3) ocupa 2 y las manos y antebrazos, 0.
   - Los MDA propios de YAML (NSR-9J) ya traen esas cifras; los del juego base (WHM-DNC: 4 generales en el torso izquierdo y 6 en cada brazo) se quedan con 12 y 9 en el juego.
 - **Equipo de ranuras ocultas:** `SetSpecialEquipmentSlotType` quita al equipo de retrorreactores, MASC, superchargers, ECM y sondas (`Equipment.JumpJets`, `.MASC`, `.SuperCharger`, `.ArenaSuperCharger`, `.ECM`, `.BAP`) sus tipos de ranura ocultos; si no le queda ninguno, va en las generales. Los superchargers ocupan 1 ranura. `FixVanillaLoadouts` pasa también a las generales el equipo de serie que el loadout trae en ranuras ocultas.
 - **Armas (✔):** necesitan un anclaje libre de su tipo **y** tantas ranuras libres de su ubicación como el tamaño de su tipo de ranura, con las reglas de `reglas.json` aplicadas (AC/10 7, AC/20 10, Gauss 7, ER PPC 3, AC/2 1). Los anclajes se siguen contando por tipo.
@@ -147,6 +149,8 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 | CA26 | El NSR-9J y el GHR-5J, con MDA de YAML | se cuentan sus ranuras | siguen como en CA3 |
 | CA27 | Los WHM-DNC, KFX-C e INC-A de serie, con MDA del juego base | se cuentan sus ranuras | el WHM-DNC tiene 12 generales en cada torso lateral y 9 en cada brazo, el KFX-C 12 en cada torso lateral y 8 en cada brazo, y el INC-A 12 en cada torso lateral y 8 en cada brazo; después de los rellenos dinámicos les quedan 8, 8 y 22 libres, como en las capturas del juego, y ninguno tiene avisos de ranuras |
 | CA28 | El ECM, la sonda activa, el MASC y los retrorreactores | se montan | van en las ranuras generales y ocupan sus ranuras; el ECM de serie del KFX-C está en las generales del brazo derecho |
+| CA29 | El NSR-9J de serie | se cambia el giroscopio por el Compact o el XL, o el motor por el Light | el torso central tiene 4 o 0 generales en vez de 2; con el Light sigue con 2, y le quedan 2 fijas en cada torso lateral, como en las capturas |
+| CA30 | El HBK-VEST y el CRD-5M de serie | se cuentan sus ranuras | la Escuadra Mediana del HBK-VEST ocupa 2 en su brazo y caben los 14 rellenos Endo sin dejar ninguna libre; al CRD-5M le quedan 10 libres, como en las capturas |
 
 ## Fuera de alcance
 
@@ -164,10 +168,12 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 - El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
 - Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
 - Dónde coloca el juego los rellenos dinámicos (`GetMechpartsInFillerPositioningOrder`): en el WHM-DNC de serie el juego pone 2 de Ferro en cada brazo y la web los junta en el brazo derecho. El número y las ranuras libres sí coinciden.
-- Las piezas propias que no ocupan lo mismo que su ranura (`GetOpenCritSlots` cuenta los `Slots` de la pieza montada salvo en armadura, estructura y refrigeración) y las ranuras de las armas cuerpo a cuerpo (el tamaño de su ranura − 1).
+- Las armas que no caben en su ubicación y reparten ranuras con la contigua (`critSplitSlots` de `GetOpenCritSlots`): el AC/20 del SD1-O (9 en el brazo izquierdo y 1 en el torso) y el C-Arrow IV del NGA-PRIME (10 en cada brazo y 2 en cada torso).
+- La ubicación de algunos anclajes: el generador la deduce del nombre y los datos del juego (`MechPart` de `*_HPS`) dicen otra en 29 de 3.248, como el Flamer del CRD-5M (`Clavicle_Right`, brazo derecho).
+- El peso del JR7-IIC-FY de serie: 34,43 t en el juego y 34,93 en la web.
 - Quitar actuadores de los brazos (antebrazo y mano) para montar armas grandes.
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA28, las ranuras).
+1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA30, las ranuras).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, compartir y guardar una build.
