@@ -78,4 +78,11 @@ describe('Conversión de serie de YAML', () => {
       sensorRange: '900', armYaw: '25', ammo: '80'
     });
   });
+
+  it('los anclajes van en la ubicación del HPS del modelo: el Flamer del CRD-5M en el brazo derecho', () => {
+    const crusader = findYamlMech('CRD-5M')!;
+    expect(crusader.stock.weapons.find(weapon => weapon.item === 'Flamer')?.zone).toBe('rightArm');
+    expect(crusader.zones.rightArm.hardpoints.map(hardpoint => hardpoint.id)).toContain('Clavicle_Right_EH5_flamer');
+    expect(findYamlMech('AS7-D')!.zones.leftArm.hardpoints.map(hardpoint => hardpoint.type)).toContain('ams');
+  });
 });
