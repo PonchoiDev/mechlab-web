@@ -1,7 +1,7 @@
 import type { BuildIssue } from '../issues';
 import type { YamlBuild, YamlMech } from '../../types/yaml-mechlab';
 import { getBuildIssues, ZONES } from './board';
-import { getBuildTonnage, getDynamicFillers, getTotalFreeGeneralSlots } from './stats';
+import { getBuildTonnage, getDynamicFillers, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
 
 // La cabecera del panel de estadísticas: el peso, donde lo enseña el juego, y las ranuras libres y los
 // rellenos dinámicos, que en YAML deciden qué cabe. Las 21 cifras del panel están en combat.ts.
@@ -22,7 +22,7 @@ export function getYamlReadouts(mech: YamlMech, build: YamlBuild): YamlReadout[]
     {
       label: 'FREE SLOTS',
       value: String(free - fillers),
-      unit: `/ ${ZONES.reduce((sum, zone) => sum + mech.zones[zone].general, 0)}`,
+      unit: `/ ${ZONES.reduce((sum, zone) => sum + getGeneralSlots(mech, build, zone), 0)}`,
       title: 'Free general slots, after the fixed and dynamic fillers',
       warn: free < fillers
     },

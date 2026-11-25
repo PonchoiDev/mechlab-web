@@ -2,6 +2,7 @@ import colorsData from '../../data/yaml/colors.json';
 import itemsData from '../../data/yaml/items.json';
 import mechsData from '../../data/yaml/mechs.json';
 import quirksData from '../../data/yaml/quirks.json';
+import slotsData from '../../data/yaml/slots.json';
 import type { YamlItem, YamlMech, YamlQuirk } from '../../types/yaml-mechlab';
 
 export const yamlMechs = mechsData as unknown as YamlMech[];
@@ -19,6 +20,18 @@ export function getYamlItem(id: string | undefined): YamlItem | undefined {
 
 export function yamlItemIds(): string[] {
   return Object.keys(ITEMS);
+}
+
+// Tipos de ranura propios que restan de las generales (SlotTypeRelevantForCritCalc de YAML), por nombre en
+// minúsculas: su tamaño y si cuentan ese tamaño en vez de los Slots de la pieza montada (ignoreEquipSlots).
+export interface YamlSlotTypeData {
+  size: number;
+  ignoreItemSlots?: boolean;
+}
+const slotTypes = slotsData as Record<string, YamlSlotTypeData>;
+
+export function getYamlSlotType(slotType: string): YamlSlotTypeData | undefined {
+  return slotTypes[slotType.toLowerCase()];
 }
 
 export function getYamlQuirk(id: string): YamlQuirk | undefined {

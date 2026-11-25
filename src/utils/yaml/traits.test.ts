@@ -61,7 +61,7 @@ describe('Instalación', () => {
 
 describe('Cómo cuentan', () => {
   const jumpJet = (index: number) =>
-    getYamlItem(grasshopperStock.items[index].item)?.slotTypes?.some(slotType => /jumpjet/i.test(slotType));
+    !!getYamlItem(grasshopperStock.items[index].item)?.jumpJet;
   const removed = new Set(['leftLeg', 'rightLeg'].map(zone =>
     grasshopperStock.items.findIndex((mounted, index) => mounted.zone === zone && jumpJet(index))));
   const twoJets = { ...grasshopperStock, items: grasshopperStock.items.filter((_, index) => !removed.has(index)) };
