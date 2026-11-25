@@ -3,9 +3,9 @@ import type { Zone } from '../../types/mech';
 import { createStockBuild, mountWeapon, removeWeapon, setInternal } from './build';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlBuildIssues } from './readouts';
-import { getBuildTonnage, getCritSplitFillers, getDynamicFillers, getFixedFillers, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
+import { getBuildTonnage, getCritSplitFillers, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
 
-// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA33 de docs/specs/mechlab-yaml.md. Las
+// Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA34 de docs/specs/mechlab-yaml.md. Las
 // ranuras libres salen de contar las filas vacías de las capturas del mechlab del juego.
 const generalSlots = (id: string) => {
   const zones = findYamlMech(id)!.zones;
@@ -61,6 +61,13 @@ describe('Piezas propias y armas cuerpo a cuerpo', () => {
     expect(centerTorso(light)).toBe(2);
     expect(getFixedFillers(light, 'leftTorso')).toBe(2);
     expect(getFixedFillers(light, 'rightTorso')).toBe(2);
+  });
+
+  it('CA34: la Claymore del CP-10-P ocupa 5 de las 8 ranuras de su brazo y deja 3 libres, como en el juego', () => {
+    const cyclops = findYamlMech('CP-10-P')!;
+    expect(getYamlItem('Claymore_Assault')!.slots).toBe(5);
+    expect(getGeneralSlots(cyclops, createStockBuild(cyclops), 'leftArm')).toBe(8);
+    expect(getFreeGeneralSlots(cyclops, createStockBuild(cyclops), 'leftArm')).toBe(3);
   });
 
   it('CA30: un arma cuerpo a cuerpo ocupa el tamaño de su ranura menos 1', () => {
