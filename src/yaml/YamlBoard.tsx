@@ -10,7 +10,7 @@ import { getWeaponTiers } from '../utils/yaml/combat';
 import { getItemColor, getSlotColor, getYamlItem, getYamlQuirk } from '../utils/yaml/data';
 import { ModLogo } from './YamlInventoryPanel';
 import type { YamlInventoryTarget } from '../utils/yaml/inventory';
-import { getEngineRating, getFreeGeneralSlots, getStructurePoints } from '../utils/yaml/stats';
+import { getEngineRating, getFreeGeneralSlots, getGeneralSlots, getStructurePoints } from '../utils/yaml/stats';
 
 // Tablero del MechLab de YAML con el marcado del de MW5 (MechBoard y ComponentCard): las ocho ubicaciones
 // alrededor de la ficha del 'Mech. En YAML las armas ocupan ranuras y cada ubicación tiene además sus
@@ -169,7 +169,8 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
   const isActive = target?.zone === zone;
   const rows = getZoneRows(mech, build, zone, fillers);
   const free = getFreeGeneralSlots(mech, build, zone) - fillers[zone].reduce((sum, group) => sum + group.slots, 0);
-  const used = data.general - free;
+  const generalSlots = getGeneralSlots(mech, build, zone);
+  const used = generalSlots - free;
   const internals = INTERNAL_SLOTS.filter(slotType => data.special[slotType]);
   const isGeneral = (row: ZoneRow) => row.kind !== 'item' || row.slotType === GENERAL_SLOT;
   const generalRows = rows.filter(row => row.kind !== 'free' && isGeneral(row));
@@ -214,8 +215,8 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
 
   const general = expandedSlots ? (
     <div className="component-card-slots">
-      <div className="slot-cells" aria-label={`Slots: ${used} of ${data.general}`}>
-        <span className="slot-cells-label">Slots <small>{used}/{data.general}</small></span>
+      <div className="slot-cells" aria-label={`Slots: ${used} of ${generalSlots}`}>
+        <span className="slot-cells-label">Slots <small>{used}/{generalSlots}</small></span>
         {generalRows.map((row, index) => <RowItem key={index} {...rowProps(row)} inCells />)}
         {Array.from({ length: Math.max(0, free) }, (_, index) => <span key={`empty-${index}`} className="slot-cell-empty" aria-hidden="true" />)}
       </div>
@@ -228,7 +229,7 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
         </div>
       )}
       <div className="component-card-footer">
-        <SlotBar used={used} capacity={data.general} label="Slots" />
+        <SlotBar used={used} capacity={generalSlots} label="Slots" />
       </div>
     </>
   );
