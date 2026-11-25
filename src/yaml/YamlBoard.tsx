@@ -20,7 +20,8 @@ const ICON_BASE = `${import.meta.env.BASE_URL}mechlab/inventory/`;
 const HARDPOINT_LABELS: Record<string, string> = {
   ballistic: 'Ballistic', energy: 'Energy', missile: 'Missile', omni: 'Omni', ams: 'AMS', artillery: 'Artillery'
 };
-// Las ranuras propias de equipo que no son internas: disipadores del motor, retrorreactores, brazos y piernas.
+// Las ranuras propias de equipo que no son internas: disipadores del motor, retrorreactores, brazos y piernas. El
+// segundo núcleo de los superpesados va como equipo en la ranura del motor y lleva su etiqueta de pieza interna.
 const SPECIAL_SLOT_LABELS: Record<string, string> = {
   EngineHeatsink_SlotType: 'Engine HS', armslot: 'Arm', legslot: 'Leg', ECM_SlotType: 'ECM',
   JumpJetClass1_SlotType: 'Jump jet', JumpJetClass2_SlotType: 'Jump jet', JumpJetClass3_SlotType: 'Jump jet',
@@ -278,7 +279,7 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
           onClick={(event) => { event.stopPropagation(); select(); }}
           {...removeOnMiddleClick(() => onRemoveItem(row.index))}
         >
-          <small>{SPECIAL_SLOT_LABELS[row.slotType] ?? 'Special'}</small>
+          <small>{SPECIAL_SLOT_LABELS[row.slotType] ?? INTERNAL_SLOT_LABELS[row.slotType] ?? 'Special'}</small>
           <span className="yaml-internal-name">{row.slots > 1 && <em className="yaml-collapsed-size">{slotsLabel(row.slots)}</em>}{row.label}</span>
           <ModLogo id={build.items[row.index].item} />
         </button>
