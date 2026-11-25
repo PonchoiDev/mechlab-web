@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-25-hardpoint-locations',
+    date: '2026-11-25',
+    title: 'Hardpoint locations',
+    items: [
+      "Shoulder hardpoints are in the arm, as in the game: the Flamer of the Crusader CRD-5M and CRD-5S, the AMS of the Atlas AS7-K and the energy hardpoints of the CRD-6T. The AMS of the Naga NGA-II-B is in the center torso",
+      'Shared links and saved builds of these five variants drop the weapon of a hardpoint that moved; mount it again in its new location'
+    ]
+  },
+  {
     id: '2026-11-25-stock-upgrades',
     date: '2026-11-25',
     title: 'Stock cantina upgrades',

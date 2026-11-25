@@ -1,3 +1,4 @@
+import functools
 import glob
 import json
 import os
@@ -5,7 +6,7 @@ import re
 import struct
 import sys
 
-from generar_mechs import ARCHIVOS_NO_JUGABLES, obtener_parte_cuerpo, obtener_tipo_arma, obtener_variante
+from generar_mechs import ARCHIVOS_NO_JUGABLES, cargar_partes_anclajes, obtener_parte_cuerpo, obtener_tipo_arma, obtener_variante
 
 # Genera los datos del MechLab con las reglas de YAML (src/data/yaml/) a partir del volcado de los mods
 # (tools/datos-juego/yaml/, de extraer_yaml.py), de los MDA exportados del juego (tools/datos-juego/mda/)
@@ -679,6 +680,16 @@ def zona_vacia():
     return {"general": 0, "actuators": [], "special": {}, "hardpoints": [], "maxArmor": 0, "structure": 0, "rear": False}
 
 
+@functools.cache
+def partes_por_modelo():
+    return cargar_partes_anclajes()
+
+
+def partes_del_mda(datos):
+    """La ubicación de cada anclaje según el HPS del modelo del MDA (Crusader_MDL), como el juego."""
+    return partes_por_modelo().get((datos.get("MechModel") or "").rsplit(".", 1)[-1].lower())
+
+
 def construir_zonas(datos):
     zonas = {zona: zona_vacia() for zona in ZONAS.values()}
     estadisticas = datos["MechDataStats"]
@@ -709,7 +720,7 @@ def construir_zonas(datos):
             if zona:
                 zonas[zona]["actuators"].append(actuador)
     for anclaje in datos.get("SelectedWeaponHardPoints", []):
-        zona, tipo = obtener_parte_cuerpo(anclaje), obtener_tipo_arma(anclaje)
+        zona, tipo = obtener_parte_cuerpo(anclaje, partes_del_mda(datos)), obtener_tipo_arma(anclaje)
         if zona and tipo:
             zonas[zona]["hardpoints"].append({"id": anclaje, "type": tipo})
     return zonas
@@ -818,7 +829,7 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks, r
         if not pieza:
             avisos.append(f"{id_mech}: arma desconocida {original}")
             continue
-        montada = {"zone": obtener_parte_cuerpo(arma["HardpointSlotID"]), "hardpoint": arma["HardpointSlotID"], "item": pieza}
+        montada = {"zone": obtener_parte_cuerpo(arma["HardpointSlotID"], partes_del_mda(datos)), "hardpoint": arma["HardpointSlotID"], "item": pieza}
         if nivel:
             montada["tier"] = int(nivel.group(1))
         armas.append(montada)
