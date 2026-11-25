@@ -17,12 +17,12 @@ export const getUsedUpgradeSlots = (upgrades: Upgrade[]): number =>
 
 // En el juego cada mejora se instala una sola vez (la I y la II sí se pueden combinar) y entre
 // todas no pueden pasar de las ranuras de mejora del mech.
-export const canInstallUpgrade = (mech: Mech, installed: Upgrade[], upgrade: Upgrade): boolean =>
+export const canInstallUpgrade = (mech: Pick<Mech, 'upgradeSlots'>, installed: Upgrade[], upgrade: Upgrade): boolean =>
   !installed.some(current => current.id === upgrade.id) &&
   getUsedUpgradeSlots(installed) + upgrade.slots <= (mech.upgradeSlots ?? 0);
 
 // Quita lo que ya no existe, se repite o no cabe, en el orden en que se instaló.
-export const sanitizeUpgrades = (mech: Mech, ids: unknown): string[] => {
+export const sanitizeUpgrades = (mech: Pick<Mech, 'upgradeSlots'>, ids: unknown): string[] => {
   if (!Array.isArray(ids)) return [];
   const installed: Upgrade[] = [];
   for (const id of ids) {
@@ -52,6 +52,7 @@ const createModifiers = (): UpgradeModifiers => ({
   sensorRange: 0,
   lockRetention: 0,
   loseLockTime: 0,
+  jumpAccelZ: 0,
   weapon: { damage: {}, range: {}, cooldown: {}, heat: {} }
 });
 

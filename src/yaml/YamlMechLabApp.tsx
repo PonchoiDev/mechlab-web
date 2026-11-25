@@ -6,6 +6,7 @@ import { FeedbackDialog } from '../components/FeedbackDialog';
 import { SiteNav } from '../components/SiteNav';
 import { SupportLink } from '../components/SupportLink';
 import { Toast } from '../components/Toast';
+import { UpgradesPanel } from '../components/UpgradesPanel';
 import { UtilityToolbar } from '../components/UtilityToolbar';
 import { useViewPreferences } from '../hooks/useViewPreferences';
 import { copyText } from '../services/clipboard';
@@ -17,6 +18,8 @@ import { decodeYamlBuild, encodeYamlBuild } from '../utils/yaml/buildCode';
 import { findYamlMech, getYamlItem, YAML_COLORS, yamlMechs } from '../utils/yaml/data';
 import { autoPlaceYamlItem, chooseYamlInternal, getYamlDropZones, placeYamlItem, type YamlInventoryTarget } from '../utils/yaml/inventory';
 import { getYamlBuildIssues } from '../utils/yaml/readouts';
+import { getYamlUpgrades, toggleYamlUpgrade } from '../utils/yaml/traits';
+import { getUsedUpgradeSlots, sanitizeUpgrades } from '../utils/upgrades';
 import { ZONE_LABELS } from '../utils/zones';
 import { YamlAnalysis } from './YamlAnalysis';
 import { YamlBoard } from './YamlBoard';
@@ -42,7 +45,8 @@ function initialState(): { mech: YamlMech; build: YamlBuild } {
   const params = new URLSearchParams(window.location.search);
   const shared = params.get('b') ? decodeYamlBuild(params.get('b')!) : null;
   const sharedMech = shared ? findYamlMech(shared.mechId) : undefined;
-  if (shared && sharedMech) return { mech: sharedMech, build: shared.build };
+  // Los rasgos que no existen, se repiten o no caben en los huecos del 'Mech se quitan.
+  if (shared && sharedMech) return { mech: sharedMech, build: { ...shared.build, traits: sanitizeUpgrades(sharedMech, shared.build.traits) } };
   const mech = findYamlMech(params.get('mech') ?? '') ?? findYamlMech(DEFAULT_MECH)!;
   return { mech, build: createStockBuild(mech) };
 }
@@ -55,6 +59,7 @@ export function YamlMechLabApp() {
   const [toast, setToast] = useState<{ id: number; message: string } | null>(null);
   const [menu, setMenu] = useState<{ title: string; x: number; y: number; entries: MenuEntry[] } | null>(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isUpgradesOpen, setIsUpgradesOpen] = useState(false);
   // El nivel elegido en el inventario para cada arma, con el que se monta, como en MW5.
   const [inventoryTiers, setInventoryTiers] = useState<Record<string, number>>({});
   const view = useViewPreferences(YAML_VIEW_KEY);
@@ -62,7 +67,11 @@ export function YamlMechLabApp() {
   const setBuild = (next: YamlBuild) => setState({ mech, build: next });
   const showToast = useCallback((message: string) => setToast(current => ({ id: (current?.id ?? 0) + 1, message })), []);
   const buildCode = encodeYamlBuild(mech.id, build);
-  const stockCode = useMemo(() => encodeYamlBuild(mech.id, createStockBuild(mech)), [mech]);
+  // Cargar la de serie no cambia los rasgos, como en el MechLab de MW5: en el juego se instalan aparte. Los de
+  // serie entran al abrir la variante.
+  const stockBuild = useMemo(() => ({ ...createStockBuild(mech), traits: build.traits }), [mech, build.traits]);
+  const stockCode = encodeYamlBuild(mech.id, stockBuild);
+  const upgrades = useMemo(() => getYamlUpgrades(build), [build]);
   const buildUrl = `${window.location.origin}${window.location.pathname}?b=${buildCode}`;
   const issues = useMemo(() => getYamlBuildIssues(mech, build), [mech, build]);
   const fillers = useMemo(() => distributeDynamicFillerGroups(mech, build), [mech, build]);
@@ -189,9 +198,12 @@ export function YamlMechLabApp() {
         onRemoveItems={(kind) => setBuild(removeKind(build, kind))}
         canLoadStock={buildCode !== stockCode}
         onLoadStock={() => {
-          setBuild(createStockBuild(mech));
+          setBuild(stockBuild);
           showToast(`Loaded the stock ${mech.variant} loadout`);
         }}
+        upgradeSlots={{ used: getUsedUpgradeSlots(upgrades), capacity: mech.upgradeSlots }}
+        isUpgradesOpen={isUpgradesOpen}
+        onToggleUpgrades={() => setIsUpgradesOpen(open => !open)}
         onShare={(anchor) => setMenu({
           title: 'Share build',
           x: anchor.left,
@@ -201,6 +213,17 @@ export function YamlMechLabApp() {
       />
 
       <YamlStatsPanel mech={mech} build={build} />
+
+      {isUpgradesOpen && (
+        <UpgradesPanel
+          mech={mech}
+          installed={upgrades}
+          onToggle={(upgrade) => setBuild(toggleYamlUpgrade(mech, build, upgrade.id))}
+          onClear={() => setBuild({ ...build, traits: [] })}
+          onClose={() => setIsUpgradesOpen(false)}
+          hint="Effects show in the stats above; weapon upgrades only act in missions, as in the game's mechlab."
+        />
+      )}
 
       <main className="workspace">
         <div className="view-toggles" aria-label="View options">

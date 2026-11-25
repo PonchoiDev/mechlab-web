@@ -543,6 +543,11 @@ VERSION_CODIGO_BUILD = 1
 REGEX_DEFAULT_MECH = re.compile(r'DefaultMech=\(Id="MWMechLoadoutAsset:([^"]+)"')
 REGEX_ARMADURA_INSTALADA = re.compile(r'InstalledArmor=\(([^)]*)\)')
 REGEX_ARMADURA_TRASERA = re.compile(r'InstalledRearArmor=\(([^)]*)\)')
+# Rasgos de 'Mech que trae instalados el loadout (el WHM-DNC sale con tres). Solo cuentan los de la cantina
+# (src/data/traits.json): los de equipo, como los computadores de puntería, no son mejoras.
+REGEX_RASGOS_INSTALADOS = re.compile(r'InstalledTraits=\(((?:\(Id="[^"]*"\),?)*)\)')
+REGEX_RASGO = re.compile(r'Id="MWMechTraitDataAsset:([^"]+)"')
+RUTA_RASGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "src", "data", "traits.json")
 REGEX_ARMA_INSTALADA = re.compile(r'\(HardpointSlotID="([^"]+)",WeaponData=\(WeaponId=\(Id="MW[A-Za-z]+:([^"]+)"\)')
 REGEX_EQUIPO_CON_RANURA = re.compile(r'SlotTypeAssetId=\(Id="MWSlotTypeDataAsset:([^"]+)"\),EquipmentData=\(EquipmentId=\(Id="MW[A-Za-z]+:([^"]+)"\)')
 REGEX_NIVEL = re.compile(r'_Lvl(\d+)$', re.IGNORECASE)
@@ -670,7 +675,18 @@ def construir_build_de_fabrica(mech, contenido_mda, contenido_loadout, catalogo,
     frontal = valores_armadura(REGEX_ARMADURA_INSTALADA, contenido_loadout)
     trasera = valores_armadura(REGEX_ARMADURA_TRASERA, contenido_loadout, "Rear")
     armadura = [valor for zona in ZONAS_BUILD for valor in (frontal.get(zona, 0), trasera.get(zona, 0))]
-    return codificar_build([VERSION_CODIGO_BUILD, variante, armadura, [zonas[zona] for zona in ZONAS_BUILD]])
+    build = [VERSION_CODIGO_BUILD, variante, armadura, [zonas[zona] for zona in ZONAS_BUILD]]
+    rasgos = rasgos_instalados(contenido_loadout)
+    if rasgos:
+        build.append(rasgos)
+    return codificar_build(build)
+
+
+def rasgos_instalados(contenido_loadout):
+    with open(RUTA_RASGOS, encoding="utf-8") as archivo:
+        de_la_cantina = {rasgo["id"] for rasgo in json.load(archivo)}
+    lista = REGEX_RASGOS_INSTALADOS.search(contenido_loadout)
+    return [rasgo for rasgo in REGEX_RASGO.findall(lista.group(1)) if rasgo in de_la_cantina] if lista else []
 
 
 ORDEN_TAMANOS = {"small": 0, "medium": 1, "large": 2}

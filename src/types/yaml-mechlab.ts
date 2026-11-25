@@ -43,6 +43,8 @@ export interface YamlBuild {
   items: YamlMountedItem[];
   weapons: YamlMountedWeapon[];
   armor: Record<Zone, { front: number; rear: number }>;
+  // Rasgos de 'Mech (mejoras de la cantina) instalados, por id de src/data/traits.json.
+  traits?: string[];
 }
 
 // Movimiento del MDA: giro (°/s), giro del torso (°/s) y ángulos máximos del torso y los brazos (°).
@@ -63,6 +65,8 @@ export interface YamlMech {
   zones: Record<Zone, YamlZoneData>;
   stock: YamlBuild;
   movement: YamlMovement;
+  // Huecos de rasgo del MDA de YAML (TotalTraitSlots).
+  upgradeSlots: number;
 }
 
 export type YamlItemKind = 'weapon' | 'ammo' | 'equipment';

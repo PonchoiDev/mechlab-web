@@ -9,6 +9,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-25-stock-upgrades',
+    date: '2026-11-25',
+    title: 'Stock cantina upgrades',
+    items: ["The stock build of the Warhammer WHM-DNC comes with the three cantina upgrades the game installs on it: Refined Armor II, Fortified Internal Structure II and Boosted Top Speed"]
+  },
+  {
     id: '2026-11-23-mechlab-background',
     date: '2026-11-23',
     title: 'MechLab background',

@@ -16,14 +16,17 @@ function fromBase64Url(code: string): string {
   return new TextDecoder().decode(Uint8Array.from(binary, char => char.charCodeAt(0)));
 }
 
+// Sin rasgos, el código no lleva el campo: los enlaces de antes de los rasgos siguen siendo los mismos.
 export function encodeYamlBuild(mechId: string, build: YamlBuild): string {
-  return PREFIX + toBase64Url(JSON.stringify({ m: mechId, b: build }));
+  const { traits, ...rest } = build;
+  return PREFIX + toBase64Url(JSON.stringify({ m: mechId, b: traits?.length ? { ...rest, traits } : rest }));
 }
 
 function isBuild(value: unknown): value is YamlBuild {
   const build = value as YamlBuild;
   return !!build && typeof build === 'object' && typeof build.internal === 'object'
-    && Array.isArray(build.items) && Array.isArray(build.weapons) && typeof build.armor === 'object';
+    && Array.isArray(build.items) && Array.isArray(build.weapons) && typeof build.armor === 'object'
+    && (build.traits === undefined || (Array.isArray(build.traits) && build.traits.every(id => typeof id === 'string')));
 }
 
 export function decodeYamlBuild(code: string): { mechId: string; build: YamlBuild } | null {

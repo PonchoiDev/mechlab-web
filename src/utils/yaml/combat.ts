@@ -4,6 +4,7 @@ import type {
 } from '../../types/yaml-mechlab';
 import { getRangeStep, type RangeProfileEntry } from '../rangeRadar';
 import { getYamlItem } from './data';
+import { getTraitMultiplier, getTraitPercent } from './traits';
 import {
   getArmorPoints, getHeat, getInstalledEquipment, getLoadoutProperties, getQuirkProperties, getStructurePoints, getTopSpeed
 } from './stats';
@@ -285,15 +286,15 @@ function evalLinearCurve(keys: [number, number][], x: number): number {
 // La altura de salto en metros. EstimateMaxJumpJetHeight, código nativo del juego desensamblado del ejecutable,
 // es el tiro vertical h = v0·t + ½·a·t² en cm, truncado: v0 es la velocidad inicial vertical del retrorreactor, t
 // su tiempo de encendido y a su curva de aceleración evaluada en el número de retrorreactores montados (con la
-// de los rasgos del 'Mech, que no tenemos: × 1). Si hay varios tipos, cuenta el último que recorre. YAML
+// de los rasgos del 'Mech: × (1 + Jump Jet Thrust)). Si hay varios tipos, cuenta el último que recorre. YAML
 // (EstimateJumpJetHeightFromLoadout) la multiplica por las bonificaciones de combustible y empuje vertical y la
 // redondea, y el panel la pasa a metros con una división entera.
-function getJumpHeight(equipment: YamlItem[], properties: Record<string, unknown>[]): number {
+function getJumpHeight(equipment: YamlItem[], properties: Record<string, unknown>[], traitMulti: number): number {
   const jets = equipment.filter(item => item.jumpJet);
   if (jets.length === 0) return 0;
   const { initialVelocityZ, burnTime, accelZ } = jets[jets.length - 1].jumpJet!;
   const time = f(burnTime);
-  const acceleration = f(evalLinearCurve(accelZ, jets.length));
+  const acceleration = f(f(evalLinearCurve(accelZ, jets.length)) * traitMulti);
   const estimate = Math.trunc(f(f(f(f(time * time) * acceleration) * 0.5) + f(time * f(initialVelocityZ))));
   const centimetres = Math.round(f(f(sumMultiplier(properties, 'jumpJetFuelBurnTimeMulti') * estimate) * sumMultiplier(properties, 'jumpJetZAccelMulti')));
   return Math.trunc(centimetres / 100);
@@ -315,9 +316,11 @@ export function getYamlMechStats(mech: YamlMech, build: YamlBuild): YamlMechStat
   const heat = getHeat(mech, build);
   const equipment = mountedEquipment(mech, build).map(({ item }) => item);
   // GetSensorRange del juego: la base (MW.TargetSystem.DefaultSensorRange, 80.000 cm) × (1 + los rasgos con
-  // UI_GetIncreasedSensorRangePercent, los de los computadores de puntería). GetSensorBonusesFromLoadout de YAML
-  // suma los sensorRangeBonus del equipo y los quirks (también los de lanza) y suma sus multiplicadores.
-  const gameSensorRange = f(BASE_SENSOR_RANGE * Math.max(0, sum([1, ...equipment.map(item => item.sensorTraitPercent ?? 0)])));
+  // UI_GetIncreasedSensorRangePercent: los de los computadores de puntería y los de la cantina).
+  // GetSensorBonusesFromLoadout de YAML suma los sensorRangeBonus del equipo y los quirks (también los de lanza) y
+  // suma sus multiplicadores.
+  const sensorTraits = [...equipment.map(item => item.sensorTraitPercent ?? 0), getTraitPercent(build, 'sensorRange')];
+  const gameSensorRange = f(BASE_SENSOR_RANGE * Math.max(0, sum([1, ...sensorTraits])));
   const numberOf = (entry: Record<string, unknown>, key: string) => typeof entry[key] === 'number' ? entry[key] as number : 0;
   const sensorBonus = sum(properties.flatMap(entry => [numberOf(entry, 'sensorRangeBonus'), numberOf(entry, 'sensorRangeBonusLance')]));
   const sensorBase = f(f(gameSensorRange + sensorBonus) * sumMultiplier(properties, 'sensorRangeMulti', 'sensorRangeMultiLance'));
@@ -333,11 +336,12 @@ export function getYamlMechStats(mech: YamlMech, build: YamlBuild): YamlMechStat
     heatPerSecond: sum(ranged.map(weapon => weapon.heatPerSecond)),
     cooling: heat.cooling,
     heatCapacity: heat.capacity,
-    turnRate: roundToTenth(movement.turnSpeed * sumMultiplier(properties, 'turnSpeedMulti')),
-    torsoTwistRate: roundToTenth(movement.torsoTwistRate * sumMultiplier(properties, 'torsoTwistRateMulti', 'torsoTwistRateYawMulti')),
+    // GetTurnSpeed y GetTorsoTwistSpeed del juego llevan ya los rasgos; YAML multiplica por sus bonificaciones.
+    turnRate: roundToTenth(f(movement.turnSpeed * getTraitMultiplier(build, 'turnSpeed')) * sumMultiplier(properties, 'turnSpeedMulti')),
+    torsoTwistRate: roundToTenth(f(movement.torsoTwistRate * getTraitMultiplier(build, 'torsoTwist')) * sumMultiplier(properties, 'torsoTwistRateMulti', 'torsoTwistRateYawMulti')),
     torsoYaw: movement.torsoYaw >= 360 ? 360 : roundToTenth(movement.torsoYaw * sumMultiplier(properties, 'torsoTwistAngleMulti', 'torsoTwistAngleYawMulti')),
     armYaw: roundToTenth(movement.armYaw * sumMultiplier(properties, 'armTwistAngleMulti', 'armTwistAngleYawMulti')),
-    jumpHeight: getJumpHeight(equipment, properties),
+    jumpHeight: getJumpHeight(equipment, properties, getTraitMultiplier(build, 'jumpAccelZ')),
     speed: getTopSpeed(mech, build),
     // El juego redondea a centímetros y divide entre 100 como entero: 2.395,8 m es 2.395.
     weaponRange: Math.max(0, ...ranged.map(weapon => Math.trunc(Math.round(weapon.maxRange * 100) / 100))),

@@ -2,8 +2,9 @@ import type { WeaponType } from './item';
 
 export type UpgradeCategory = 'Firepower' | 'Defense' | 'Heat' | 'Mobility' | 'Targeting';
 
-// Estadísticas que cambia una mejora. Las demás (aceleración, saltos, duración del láser, dispersión)
-// solo se describen. heatGeneration es el multiplicador de calor generado de todo el mech.
+// Estadísticas que cambia una mejora. Las demás (aceleración, empuje horizontal y combustible de los saltos,
+// duración del láser, dispersión) solo se describen. heatGeneration es el multiplicador de calor generado de todo
+// el mech; jumpAccelZ, la aceleración vertical de los saltos (solo la usa el MechLab de YAML).
 export type MechUpgradeStat =
   | 'armor'
   | 'structure'
@@ -15,7 +16,8 @@ export type MechUpgradeStat =
   | 'torsoTwist'
   | 'sensorRange'
   | 'lockRetention'
-  | 'loseLockTime';
+  | 'loseLockTime'
+  | 'jumpAccelZ';
 
 // Por tipo de arma. range sube también la velocidad del proyectil.
 export type WeaponUpgradeStat = 'damage' | 'range' | 'cooldown' | 'heat';

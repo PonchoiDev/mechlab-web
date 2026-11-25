@@ -1,6 +1,7 @@
 import type { Zone } from '../../types/mech';
 import type { YamlBuild, YamlItem, YamlMech } from '../../types/yaml-mechlab';
 import { getYamlItem, getYamlQuirk } from './data';
+import { getTraitMultiplier, getTraitPercent } from './traits';
 
 // Peso, motor, refrigeración, velocidad, armadura y estructura como los calcula YAML, leídos de sus blueprints
 // (desensamblados con tools/kismet.py): CalculateMechTonnage y GetEquipmentWeightInternal (MechlabArmorHandling),
@@ -238,7 +239,8 @@ export function getTopSpeed(mech: YamlMech, build: YamlBuild): number {
   const primitive = engineType(build)?.engineHealthType?.toLowerCase() === 'primitive';
   const effectiveRating = primitive ? Math.ceil(Math.trunc(f(rating / PRIMITIVE_RATING_DIVISOR)) / 5) * 5 : rating;
   const maxSpeed = f(f(effectiveRating / mech.tonnage) * f(SPEED_FACTOR));
-  const topSpeedPercent = f(sumMultiplier(getLoadoutProperties(mech, build), 'topSpeedMulti') - 1);
+  // Con rasgos: topSpeedMulti × (1 + los de velocidad) − 1. El rasgo multiplica, no suma.
+  const topSpeedPercent = f(f(sumMultiplier(getLoadoutProperties(mech, build), 'topSpeedMulti') * getTraitMultiplier(build, 'topSpeed')) - 1);
   return f(maxSpeed + f(maxSpeed * topSpeedPercent));
 }
 
@@ -277,6 +279,9 @@ export function getHeat(mech: YamlMech, build: YamlBuild): { cooling: number; ca
     capacity = f(capacity + (item.heatCapacity ?? 0));
   }
   for (const entry of getLoadoutProperties(mech, build)) capacity = f(capacity + (numberOf(entry, 'heatCapacityBonus') ?? 0));
+  // DLCMechCoolingQuirks en CalculateMechStats: los rasgos suman su parte a la refrigeración y a la capacidad.
+  cooling = f(cooling + f(getTraitPercent(build, 'cooling') * cooling));
+  capacity = f(capacity + f(getTraitPercent(build, 'heatCapacity') * capacity));
   return { cooling, capacity };
 }
 
@@ -317,9 +322,11 @@ function getBonuses(mech: YamlMech, build: YamlBuild, structure: boolean) {
 }
 
 // GetTotalArmorWithBonuses: por superficie, (instalada + bonus) × su multiplicador; todo × el de los quirks. Los
-// bonus no pesan ni cuentan para el máximo («24+7/30»).
+// bonus no pesan ni cuentan para el máximo («24+7/30»). Los rasgos multiplican la instalada (GetInstalledArmorForPart
+// nativa) y los bonus (GetArmorTraitMultiplier de YAML); lo que suman cuenta como bonus.
 export function getArmorPoints(mech: YamlMech, build: YamlBuild): { installed: number; bonus: number } {
   const { bonuses, multis, mechMulti } = getBonuses(mech, build, false);
+  const traitMulti = getTraitMultiplier(build, 'armor');
   let installed = 0;
   let total = 0;
   for (const zone of Object.keys(build.armor) as Zone[]) {
@@ -327,24 +334,28 @@ export function getArmorPoints(mech: YamlMech, build: YamlBuild): { installed: n
       const points = build.armor[zone][side];
       const surface: Surface = `${zone}:${side}`;
       installed += points;
-      total = f(total + f(f(points + (bonuses.get(surface) ?? 0)) * (multis.get(surface) ?? 1)));
+      const withTraits = f(f(points * traitMulti) + f((bonuses.get(surface) ?? 0) * traitMulti));
+      total = f(total + f(withTraits * (multis.get(surface) ?? 1)));
     }
   }
   return { installed, bonus: f(total * mechMulti) - installed };
 }
 
 // Get Total Struct With Bonuses: por ubicación, la máxima (× el structureMulti de la estructura montada) × su
-// multiplicador × el de los quirks, más su bonus.
+// multiplicador × el de los quirks, más su bonus. Los rasgos multiplican la máxima (GetMaxStructureForPart nativa)
+// y el bonus (ApplyEquipmentPropertiesStructureBonuses de YAML).
 export function getStructurePoints(mech: YamlMech, build: YamlBuild): { base: number; total: number } {
   const { bonuses, multis, mechMulti } = getBonuses(mech, build, true);
   const itemMulti = internal(build, 'Structureslot')?.structureMulti ?? 1;
+  const traitMulti = getTraitMultiplier(build, 'structure');
   let base = 0;
   let total = 0;
   for (const zone of Object.keys(mech.zones) as Zone[]) {
     const surface: Surface = `${zone}:front`;
     const bonus = bonuses.get(surface) ?? 0;
     base += mech.zones[zone].structure + bonus;
-    total = f(total + f(f(f(mech.zones[zone].structure * itemMulti) * (multis.get(surface) ?? 1)) * mechMulti) + bonus);
+    const maximum = f(f(mech.zones[zone].structure * itemMulti) * traitMulti);
+    total = f(total + f(f(f(maximum * (multis.get(surface) ?? 1)) * mechMulti) + f(bonus * traitMulti)));
   }
   return { base, total };
 }
