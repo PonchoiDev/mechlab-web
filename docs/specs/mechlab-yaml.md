@@ -58,6 +58,7 @@ Cada regla marcada con ✔ está comprobada con capturas del juego, con YAML 0.9
   - Una pieza montada en una ranura propia que cuenta ocupa sus `Slots` en lugar del tamaño de las ranuras que admite, salvo en las que ignoran el de la pieza (`ignoreEquipSlots`: armadura, estructura y refrigeración). En el torso central del NSR-9J quedan 2 generales con el giroscopio estándar (3), 4 con el Compact (1) y 0 con el XL (5); los tipos de motor XL, XXL y Light ocupan los 4 de su ranura.
   - Un arma cuerpo a cuerpo ocupa el tamaño de su ranura − 1 (`GetWeaponCrits`). Antes, `Inject Actuator Slots` resta 1 al tamaño de las ranuras cuerpo a cuerpo que no son de antebrazo, porque la de mano de asalto ocupa más de 1: un arma mediana (4 → 3) ocupa 2 y las manos y antebrazos, 0.
   - Los MDA propios de YAML (NSR-9J) ya traen esas cifras; los del juego base (WHM-DNC: 4 generales en el torso izquierdo y 6 en cada brazo) se quedan con 12 y 9 en el juego.
+- **Armas repartidas:** un arma de más de 7 ranuras (`GetCritSplitMinWeaponSize`) ocupa 7 en su ubicación y el resto, primero en las ranuras libres de esa misma ubicación (`GetOpenCritSlots`) y lo que quede, entero, como relleno fijo en la primera ubicación contigua con sitio (`InstallRequiredFillers`); si no cabe en ninguna, el arma no cabe. Contiguas (`GetAdjacentMechParts`): del torso central, los torsos laterales; de cada torso lateral, el central y su brazo; de cada brazo, su torso lateral; la cabeza y las piernas no tienen. El AC/20 del SD1-O ocupa 9 en el brazo izquierdo y 1 en el torso izquierdo, y el C-Arrow IV del NGA-PRIME, 10 en cada brazo y 2 en cada torso lateral. Los rellenos dinámicos van después.
 - **Equipo de ranuras ocultas:** `SetSpecialEquipmentSlotType` quita al equipo de retrorreactores, MASC, superchargers, ECM y sondas (`Equipment.JumpJets`, `.MASC`, `.SuperCharger`, `.ArenaSuperCharger`, `.ECM`, `.BAP`) sus tipos de ranura ocultos; si no le queda ninguno, va en las generales. Los superchargers ocupan 1 ranura. `FixVanillaLoadouts` pasa también a las generales el equipo de serie que el loadout trae en ranuras ocultas.
 - **Armas (✔):** necesitan un anclaje libre de su tipo **y** tantas ranuras libres de su ubicación como el tamaño de su tipo de ranura, con las reglas de `reglas.json` aplicadas (AC/10 7, AC/20 10, Gauss 7, ER PPC 3, AC/2 1). Los anclajes se siguen contando por tipo.
 - **Tamaño de arma y anclaje (✔):** YAML cambia el tamaño de arma (`WeaponSize`) de todos los tipos de ranura de armas, así que el tamaño ya no limita qué arma cabe en un anclaje: basta con un anclaje de su tipo y sus ranuras libres. Un AC/20 (10 ranuras) cabe en un brazo con anclaje balístico solo si tiene 10 ranuras libres; los 8 generales del brazo del NSR-9J no bastan.
@@ -136,7 +137,7 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 | CA13 | El de CA11 con el núcleo 105 | se calcula | con el giroscopio estándar pesa 29 t y con el XL 28 t; va a 17,91 km/h y tiene 0,4 de refrigeración y 34 de capacidad; cambiar el motor XL por el estándar suma 1,5 t |
 | CA14 | El de CA11 con el núcleo 285 | se pone el Double Heat Sink Kit / el Royal DHS Kit / el Royal DHS Kit y un disipador doble en el torso derecho | pesa 42,5 t con 2,0 de refrigeración y 50 de capacidad / 42,5 t, 2,2 y 50 / 43,5 t y 52 de capacidad |
 | CA15 | Un 'Mech con Endo y sin 14 ranuras generales libres | se intenta montar | no cabe, y el motivo dice cuántas ranuras faltan |
-| CA16 | Un arma | se monta | necesita un anclaje libre de su tipo y sus ranuras libres en la misma ubicación; un AC/20 (10) no cabe en un brazo con 8 ranuras |
+| CA16 | Un arma | se monta | necesita un anclaje libre de su tipo y sus ranuras libres; en el NSR-9J vacío, un AC/20 (10) en el brazo derecho ocupa sus 8 ranuras y 2 del torso derecho |
 | CA17 | Los datos | se generan | las variantes tienen los mismos ids que en el MechLab de MW5; ninguna es de campaña, tutorial, jefe ni cinemática; las reglas de `reglas.json` están aplicadas a los tipos de ranura |
 | CA18 | Una build | se codifica y se decodifica | sale la misma build; un código del MechLab de MW5 no se abre como build de YAML |
 | CA19 | El SD1-O, omnimech de la Esfera Interior con el loadout del juego | se genera su build de serie | lleva `std360_FIXED`, `ENGINE_XL_FIXED`, `OMNI_GYRO_FIXED`, `ARMOR_STANDARD_FIXED`, `STRUCTURE_STANDARD_FIXED` y `Cooling_diss100_FIXED` |
@@ -151,6 +152,8 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 | CA28 | El ECM, la sonda activa, el MASC y los retrorreactores | se montan | van en las ranuras generales y ocupan sus ranuras; el ECM de serie del KFX-C está en las generales del brazo derecho |
 | CA29 | El NSR-9J de serie | se cambia el giroscopio por el Compact o el XL, o el motor por el Light | el torso central tiene 4 o 0 generales en vez de 2; con el Light sigue con 2, y le quedan 2 fijas en cada torso lateral, como en las capturas |
 | CA30 | El HBK-VEST y el CRD-5M de serie | se cuentan sus ranuras | la Escuadra Mediana del HBK-VEST ocupa 2 en su brazo y caben los 14 rellenos Endo sin dejar ninguna libre; al CRD-5M le quedan 10 libres, como en las capturas |
+| CA31 | El SD1-O y el NGA-PRIME de serie | se cuentan sus ranuras | el AC/20 del SD1-O deja 1 ranura de relleno en el torso izquierdo y el C-Arrow IV del NGA-PRIME, 2 en cada torso lateral, como en las capturas; ninguno tiene avisos de ranuras |
+| CA32 | Un arma de más de 7 ranuras | no hay sitio para su resto en ninguna ubicación contigua | no se puede montar y el aviso lo dice |
 
 ## Fuera de alcance
 
@@ -168,12 +171,11 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 - El peso de serie del NSR-9J: con estas reglas suma 95,5 t (8,5 de motor, 3 de giroscopio, 3 de cabina, 9,5 de estructura, 18,5 de armadura, 42 de armas, 7 de munición y 4 disipadores dobles) y el juego marca 95. Puede que uno de los disipadores dobles esté en una ranura del motor y no pese, como los disipadores del motor en el juego de mesa.
 - Las ranuras fijas de los motores XXL, Light y Compact, y de los motores Clan.
 - Dónde coloca el juego los rellenos dinámicos (`GetMechpartsInFillerPositioningOrder`): en el WHM-DNC de serie el juego pone 2 de Ferro en cada brazo y la web los junta en el brazo derecho. El número y las ranuras libres sí coinciden.
-- Las armas que no caben en su ubicación y reparten ranuras con la contigua (`critSplitSlots` de `GetOpenCritSlots`): el AC/20 del SD1-O (9 en el brazo izquierdo y 1 en el torso) y el C-Arrow IV del NGA-PRIME (10 en cada brazo y 2 en cada torso).
 - El peso del JR7-IIC-FY de serie: 34,43 t en el juego y 34,93 en la web.
 - Quitar actuadores de los brazos (antebrazo y mano) para montar armas grandes.
 - Las ranuras del WHM-DNC de serie: la web avisa de que los rellenos dinámicos necesitan 14 ranuras libres y solo quedan 3, y de que no caben las 3 fijas del motor XL en los torsos; en el juego caben. Puede ser el mismo descuadre que las ranuras de los brazos con cuerpo a cuerpo.
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA30, las ranuras).
+1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA32, las ranuras).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, compartir y guardar una build.
