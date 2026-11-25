@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Zone } from '../../types/mech';
 import { createStockBuild, mountItem, mountWeapon, removeWeapon, setInternal } from './build';
+import { getYamlStatsPanel } from './combat';
 import { distributeDynamicFillerGroups } from './board';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlBuildIssues } from './readouts';
@@ -144,6 +145,38 @@ describe('Rellenos dinámicos', () => {
       leftTorso: { Structureslot: 3 }, rightArm: { Structureslot: 2 }, rightTorso: { Structureslot: 2 },
       leftLeg: { Armorslot: 2 }, rightLeg: { Armorslot: 2 }, leftArm: { Armorslot: 2 }, head: { Armorslot: 1 }
     });
+  });
+
+  it('CA42: los rellenos del motor del loadout no son equipo: el PXH-7S, como en la captura', () => {
+    const phoenixHawk = findYamlMech('PXH-7S')!;
+    const stock = createStockBuild(phoenixHawk);
+    expect(stock.items.some(mounted => /filler$/i.test(mounted.item))).toBe(false);
+    expect(getFixedFillers(stock, 'leftTorso')).toBe(2);
+    expect(getFixedFillers(stock, 'rightTorso')).toBe(2);
+    expect(fillers('PXH-7S')).toEqual({
+      leftTorso: { Structureslot: 8 }, rightTorso: { Structureslot: 6, Armorslot: 2 },
+      leftArm: { Armorslot: 6 }, rightArm: { Armorslot: 6 }
+    });
+    expect(getYamlBuildIssues(phoenixHawk, stock)).toEqual([]);
+    expect(getBuildTonnage(phoenixHawk, stock)).toBe(44.87);
+    const panel = Object.fromEntries(getYamlStatsPanel(phoenixHawk, stock).flat().map(cell => [cell.key, cell.value]));
+    expect(panel).toMatchObject({ armor: '318', structure: '159', alphaDamage: '35', speed: '97.2', jumpHeight: '82' });
+  });
+
+  it('CA43: al cargar, los rellenos que no caben se quedan fuera sin avisar, como en las capturas', () => {
+    expect(fillers('CN9-CALM')).toEqual({
+      head: { Armorslot: 2 }, leftTorso: { Structureslot: 3 }, rightTorso: { Structureslot: 3 },
+      leftArm: { Structureslot: 4, Armorslot: 4 }, rightArm: { Armorslot: 4 }, leftLeg: { Structureslot: 2 }, rightLeg: { Structureslot: 2 }
+    });
+    expect(fillers('WHM-IIC-3')).toEqual({
+      leftTorso: { Structureslot: 4 }, rightTorso: { Structureslot: 1 }, leftArm: { Armorslot: 4 }, rightArm: { Armorslot: 3, Structureslot: 1 }
+    });
+    for (const id of ['CN9-CALM', 'WHM-IIC-3']) {
+      const mech = findYamlMech(id)!;
+      expect(getYamlBuildIssues(mech, createStockBuild(mech)), id).toEqual([]);
+    }
+    const centurion = findYamlMech('CN9-CALM')!;
+    expect(mountItem(centurion, createStockBuild(centurion), 'leftLeg', 'SingleHeatSink').error).toBeDefined();
   });
 
   it('CA37: con cualquier cambio, los rellenos se vuelven a poner uno por ubicación en cada vuelta', () => {

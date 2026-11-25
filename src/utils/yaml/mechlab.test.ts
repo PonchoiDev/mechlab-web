@@ -3,8 +3,9 @@ import mw5Mechs from '../../data/mechs.json';
 import yamlMechs from '../../data/yaml/mechs.json';
 import { checkInternal, createStockBuild, mountWeapon, removeWeapon, setInternal, stripBuild } from './build';
 import { decodeYamlBuild, encodeYamlBuild } from './buildCode';
+import { getYamlStatsPanel } from './combat';
 import { findYamlMech, getYamlItem } from './data';
-import { getFreeGeneralSlots } from './stats';
+import { getBuildTonnage, getFreeGeneralSlots } from './stats';
 
 // Reglas del MechLab de YAML que no salen de una captura concreta: criterios CA15 a CA18 de
 // docs/specs/mechlab-yaml.md.
@@ -56,12 +57,36 @@ describe('MechLab de YAML', () => {
     expect(decodeYamlBuild(mw5Code)).toBeNull();
   });
 
-  it('CA40: las variantes nuevas de YAML, sin rellenos técnicos, superpesados ni repetidas', () => {
+  it('CA40: las variantes nuevas de YAML, sin rellenos técnicos ni superpesados', () => {
     const annihilator = findYamlMech('ANH-1G')!;
     expect(annihilator).toMatchObject({ chassis: 'Annihilator', variant: 'ANH-1G', tonnage: 100 });
     expect(annihilator.stock.weapons.length).toBeGreaterThan(0);
     for (const id of ['Partial Mech Salvage', 'None', 'ANH-1GT', 'COR-ROAM']) expect(findYamlMech(id), id).toBeUndefined();
     expect(yamlMechs.filter(mech => mech.id === 'AS7-D-H')).toHaveLength(1);
     expect(new Set(yamlMechs.map(mech => mech.id)).size).toBe(yamlMechs.length);
+  });
+
+  it('CA41: el ANH-1P sale con el loadout de reemplazo de Yet Another Weapon, como en la captura', () => {
+    const annihilator = findYamlMech('ANH-1P')!;
+    const build = createStockBuild(annihilator);
+    expect(getBuildTonnage(annihilator, build)).toBe(100);
+    const panel = Object.fromEntries(getYamlStatsPanel(annihilator, build).flat().map(cell => [cell.key, cell.value]));
+    expect(panel).toMatchObject({
+      armor: '400', structure: '313', alphaDamage: '35.2', dps: '41.75', heatPerSecond: '13.13', alphaHeat: '18.12',
+      speed: '48.6', weaponRange: '1,080', ammo: '2,670'
+    });
+  });
+
+  it('CA44: el nombre de YAML de cada variante, con sus quirks, y las nuevas que se llaman como una del juego', () => {
+    expect(findYamlMech('AS7-D-H')).toMatchObject({ variant: 'AS7-D-H(S)' });
+    expect(findYamlMech('AS7-D-H')!.quirks).toEqual(expect.arrayContaining(['AS7-D-HS', 'AS7-II-HERO']));
+    expect(findYamlMech('CPLT-C3')).toMatchObject({ variant: 'CPLT-C3CS' });
+    expect(findYamlMech('CPLT-C3')!.quirks).toContain('CLANBUSTER');
+    expect(findYamlMech('BSK-1')).toMatchObject({ variant: 'BSK-M1' });
+    for (const [id, chassis, variant] of [['AS7-D-H_YAML', 'Atlas II', 'AS7-D-H'], ['CPLT-C3L', 'Catapult', 'CPLT-C3']]) {
+      const mech = findYamlMech(id)!;
+      expect(mech, id).toMatchObject({ chassis, variant });
+      expect(mech.stock.weapons.length, id).toBeGreaterThan(0);
+    }
   });
 });
