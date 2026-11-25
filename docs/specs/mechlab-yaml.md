@@ -42,7 +42,7 @@ Un asset con la misma ruta que otro del juego, o que otro de un mod con menor or
 
 **Decisiones sobre los datos:**
 
-- **Variantes disponibles:** las 639 del MechLab de MW5 (sin las de campaña, tutorial, jefes ni cinemáticas), con el MDA de YAML y, si YAML no trae otro, el loadout del juego. Las 183 variantes nuevas de YAML quedan para más adelante: entre ellas hay jefes, rellenos técnicos (`YAML_RUNONCE_DUMMY`, `PARTIAL_SALVAGE`) y versiones de lore que hay que filtrar una a una.
+- **Variantes disponibles:** las 639 del MechLab de MW5 (sin las de campaña, tutorial, jefes ni cinemáticas), con el MDA de YAML y, si YAML no trae otro, el loadout del juego. Además, las variantes nuevas de YAML (sus MDA de `/YetAnotherMechlab/`), con su variante como id, el nombre de su chasis de la tabla de textos del juego y su loadout. Quedan fuera los rellenos técnicos (`YAML_RUNONCE_DUMMY`, sin tonelaje, y `PARTIAL_SALVAGE`, el 'Mech de chatarra del desguace), los superpesados de más de 100 t (ANH-1GT, COR-ROAM, MAD-BARA2 y MAD-TF, fuera de alcance) y las que repiten una variante que ya está (AS7-D-H y CPLT-C3). Las de las rutas del juego que no están en el MechLab de MW5 (jefes, tutoriales, cinemáticas y campaña) siguen fuera.
 - **Build de serie:** el loadout se convierte como lo hace YAML al cargar (`YAMLGlobals`): primero `ReplaceAllLegacyEquipment` y después `FixVanillaLoadouts`, de `EquipmentUtilities`; las armas con nivel, `MediumLaser_Lvl2`, son el arma con su nivel. Las reglas están en [Conversión de serie](#conversión-de-serie). Los contrapesos con los que YAML compensa el peso al convertir (`YAML_VANILLA_COUNTERWEIGHT`, −1000 t) y los rellenos de los loadouts no se guardan: los rellenos los coloca la web.
 - **Ids:** los mismos ids de variante que en el MechLab de MW5.
 - **Ajustes de la partida:** se usan los valores por defecto de YAML. Los ajustes de `gui_config.ini` que cambian el mechlab (multiplicador de ranuras críticas, anclajes omni, armas de una ranura, niveles de permiso del mechlab) quedan fuera.
@@ -164,6 +164,7 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 | CA37 | El HBK-VEST de serie | se cambia algo de la build | los rellenos se vuelven a poner, uno por ubicación en cada vuelta |
 | CA38 | El NSR-9J de serie | se monta el Compact Actuators Hand (QS) en el brazo izquierdo | el brazo pasa de 8 a 11 ranuras generales y caben 3 más; después no se puede montar el Alu-Ceramic Shoulder en ese brazo, porque su hombro ya está ocupado |
 | CA39 | Un brazo sin actuador de mano (el del WHM-DNC) | se intenta montar el Compact Actuators Hand (QS) | no cabe; los Improved Actuators sí, y no cambian sus ranuras generales |
+| CA40 | Las variantes nuevas de YAML | se generan los datos | está el ANH-1G (Annihilator, 100 t) con su build de serie, y no están `PARTIAL_SALVAGE`, `YAML_RUNONCE_DUMMY` ni el ANH-1GT (200 t); el AS7-D-H sigue siendo el del juego |
 
 ## Fuera de alcance
 
@@ -180,5 +181,5 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA39, las ranuras).
+1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18) y `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA39, las ranuras; CA40, las variantes nuevas).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, compartir y guardar una build.
