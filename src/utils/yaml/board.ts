@@ -3,7 +3,8 @@ import type { YamlBuild, YamlHardpointType, YamlMech } from '../../types/yaml-me
 import { getDefaultTier } from './combat';
 import { getYamlItem } from './data';
 import {
-  GENERAL_SLOT, getBuildTonnage, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots
+  GENERAL_SLOT, getBuildTonnage, getCritSplitFillers, getDynamicFillers, getFixedFillers, getFreeGeneralSlots,
+  getTotalFreeGeneralSlots, getUnplacedCritSplits, getWeaponSlotsInZone
 } from './stats';
 
 // Lo que necesita la página del MechLab de YAML para pintar el tablero.
@@ -68,7 +69,10 @@ export function distributeDynamicFillers(mech: YamlMech, build: YamlBuild): Reco
 }
 
 export type ZoneRow =
-  | { kind: 'weapon'; label: string; slots: number; hardpoint: string; item: string; tier: number }
+  // slots: las que ocupa en su ubicación; totalSlots, las del arma, si reparte el resto con una contigua.
+  | { kind: 'weapon'; label: string; slots: number; totalSlots: number; hardpoint: string; item: string; tier: number }
+  // El resto de un arma repartida, en la ubicación contigua.
+  | { kind: 'splitFiller'; label: string; slots: number; item: string; from: Zone }
   | { kind: 'item'; label: string; slots: number; index: number; slotType: string }
   | { kind: 'fixedFiller' | 'dynamicFiller'; label: string; slots: number; slotType: string }
   | { kind: 'free'; slots: number };
@@ -84,11 +88,15 @@ export function getZoneRows(mech: YamlMech, build: YamlBuild, zone: Zone, filler
     const fixed = getYamlItem(id)?.fillerSlots?.[zone];
     if (fixed) rows.push({ kind: 'fixedFiller', label: getYamlItem(id)!.name, slots: fixed, slotType });
   }
+  for (const filler of getCritSplitFillers(mech, build).filter(split => split.zone === zone)) {
+    rows.push({ kind: 'splitFiller', label: getYamlItem(filler.item)?.name ?? filler.item, slots: filler.slots, item: filler.item, from: filler.from });
+  }
   const pieces: ZoneRow[] = [];
   for (const weapon of build.weapons.filter(mounted => mounted.zone === zone && !getYamlItem(mounted.item)?.actuator)) {
     const item = getYamlItem(weapon.item);
     pieces.push({
-      kind: 'weapon', label: item?.name ?? weapon.item, slots: item?.slots ?? 1, hardpoint: weapon.hardpoint, item: weapon.item,
+      kind: 'weapon', label: item?.name ?? weapon.item, slots: getWeaponSlotsInZone(mech, build, weapon.hardpoint),
+      totalSlots: item?.slots ?? 1, hardpoint: weapon.hardpoint, item: weapon.item,
       tier: weapon.tier ?? getDefaultTier(weapon.item)
     });
   }
@@ -168,6 +176,10 @@ export function getBuildIssues(mech: YamlMech, build: YamlBuild): BuildIssue[] {
     if (getFreeGeneralSlots(mech, build, zone) < 0) {
       issues.push({ severity: 'error', message: `${zone}: not enough slots (${getFixedFillers(build, zone)} fixed by the engine)`, zone });
     }
+  }
+  for (const split of getUnplacedCritSplits(mech, build)) {
+    const name = getYamlItem(split.item)?.name ?? split.item;
+    issues.push({ severity: 'error', message: `${split.zone}: ${name} needs ${split.slots} more slots in an adjacent location`, zone: split.zone });
   }
   if (!build.internal.Engine) issues.push({ severity: 'warning', message: 'No engine core installed' });
   return issues;

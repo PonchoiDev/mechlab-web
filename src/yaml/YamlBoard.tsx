@@ -3,7 +3,7 @@ import { ArmorControl } from '../components/ArmorControl';
 import { SlotBar } from '../components/SlotBar';
 import type { Zone } from '../types/mech';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
-import { ZONES } from '../utils/zones';
+import { ZONE_LABELS, ZONES } from '../utils/zones';
 import { getActuatorWeapons, getHardpointUsage, getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, INTERNAL_SLOTS, type FillerGroup, type ZoneRow } from '../utils/yaml/board';
 import { GENERAL_SLOT } from '../utils/yaml/stats';
 import { getWeaponTiers } from '../utils/yaml/combat';
@@ -71,7 +71,7 @@ function LocationHardpoints({ mech, build, zone }: { mech: YamlMech; build: Yaml
 // El color de una fila como en el mechlab del juego: el arma, el de su tipo de ranura; el equipo, el suyo o
 // el general; los rellenos, el de la pieza que los pide (motor XL naranja, Endo azul, Ferro rojo).
 function rowColor(row: ZoneRow, build: YamlBuild): string | undefined {
-  if (row.kind === 'weapon') return getItemColor(row.item);
+  if (row.kind === 'weapon' || row.kind === 'splitFiller') return getItemColor(row.item);
   if (row.kind === 'item') return getItemColor(build.items[row.index].item, row.slotType);
   if (row.kind === 'fixedFiller' || row.kind === 'dynamicFiller') {
     const owner = build.internal[row.slotType];
@@ -81,7 +81,7 @@ function rowColor(row: ZoneRow, build: YamlBuild): string | undefined {
 }
 
 function rowItemId(row: ZoneRow, build: YamlBuild): string | undefined {
-  if (row.kind === 'weapon') return row.item;
+  if (row.kind === 'weapon' || row.kind === 'splitFiller') return row.item;
   if (row.kind === 'item') return build.items[row.index].item;
   if (row.kind === 'fixedFiller' || row.kind === 'dynamicFiller') return build.internal[row.slotType];
   return undefined;
@@ -108,7 +108,9 @@ function RowItem({ row, build, inCells = false, isSelected = false, onSelect, on
   onRemove?: () => void;
 }) {
   if (row.kind === 'free') return null;
-  const fixed = row.kind === 'fixedFiller' || row.kind === 'dynamicFiller';
+  const fixed = row.kind === 'fixedFiller' || row.kind === 'dynamicFiller' || row.kind === 'splitFiller';
+  const fillerReason = row.kind === 'dynamicFiller' ? 'the Endo or Ferro takes'
+    : row.kind === 'splitFiller' ? `the weapon in the ${ZONE_LABELS[row.from].toLowerCase()} takes` : 'the engine fixes here';
   return (
     <button
       type="button"
@@ -117,7 +119,7 @@ function RowItem({ row, build, inCells = false, isSelected = false, onSelect, on
       data-category={row.kind === 'item' ? 'equipment' : undefined}
       aria-pressed={row.kind === 'weapon' ? isSelected : undefined}
       title={fixed
-        ? `${row.label}: ${slotsLabel(row.slots)} the ${row.kind === 'dynamicFiller' ? 'Endo or Ferro takes' : 'engine fixes here'}`
+        ? `${row.label}: ${slotsLabel(row.slots)} ${fillerReason}`
         : `${row.label}: ${row.kind === 'weapon' ? 'click to swap it from the inventory, ' : ''}middle-click to remove`}
       onClick={(event) => { event.stopPropagation(); onSelect(); }}
       {...(onRemove ? removeOnMiddleClick(onRemove) : {})}
@@ -132,7 +134,7 @@ function RowItem({ row, build, inCells = false, isSelected = false, onSelect, on
         <>
           {row.label}
           {row.kind === 'weapon' && <TierPips id={row.item} tier={row.tier} />}
-          <small>{row.slots > 1 ? slotsLabel(row.slots) : ''}</small>
+          <small>{(row.kind === 'weapon' ? row.totalSlots : row.slots) > 1 ? slotsLabel(row.kind === 'weapon' ? row.totalSlots : row.slots) : ''}</small>
         </>
       )}
       <ModLogo id={rowItemId(row, build)} />

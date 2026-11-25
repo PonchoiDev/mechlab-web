@@ -22,9 +22,11 @@ describe('MechLab de YAML', () => {
 
   it('CA16: un arma necesita un anclaje libre de su tipo y sus ranuras libres en la misma ubicación', () => {
     const empty = stripBuild(stock);
-    // Los brazos tienen anclaje balístico pero 8 ranuras generales: el AC/20 ocupa 10.
+    // Los brazos tienen anclaje balístico y 8 ranuras generales: el AC/20 (10) ocupa las 8 y 2 del torso derecho.
     expect(getFreeGeneralSlots(nightstar, empty, 'rightArm')).toBe(8);
-    expect(mountWeapon(nightstar, empty, 'rightArm', 'Autocannon20').error).toBeDefined();
+    const ac20 = mountWeapon(nightstar, empty, 'rightArm', 'Autocannon20').build!;
+    expect(getFreeGeneralSlots(nightstar, ac20, 'rightArm')).toBe(0);
+    expect(getFreeGeneralSlots(nightstar, ac20, 'rightTorso')).toBe(7);
     // Los torsos laterales tienen 9 ranuras libres (12 menos 3 del motor XL), pero ningún anclaje balístico.
     expect(getFreeGeneralSlots(nightstar, empty, 'leftTorso')).toBe(9);
     expect(mountWeapon(nightstar, empty, 'leftTorso', 'Autocannon10').error).toBeDefined();
