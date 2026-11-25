@@ -172,6 +172,7 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 - La ubicación de algunos anclajes: el generador la deduce del nombre y los datos del juego (`MechPart` de `*_HPS`) dicen otra en 29 de 3.248, como el Flamer del CRD-5M (`Clavicle_Right`, brazo derecho).
 - El peso del JR7-IIC-FY de serie: 34,43 t en el juego y 34,93 en la web.
 - Quitar actuadores de los brazos (antebrazo y mano) para montar armas grandes.
+- Las ranuras del WHM-DNC de serie: la web avisa de que los rellenos dinámicos necesitan 14 ranuras libres y solo quedan 3, y de que no caben las 3 fijas del motor XL en los torsos; en el juego caben. Puede ser el mismo descuadre que las ranuras de los brazos con cuerpo a cuerpo.
 
 ## Plan de pruebas
 

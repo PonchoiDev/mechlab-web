@@ -860,7 +860,19 @@ def internas_de_conversion(datos, tipo):
     }
 
 
-def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks):
+# FixMdaGeneralSlots limita los huecos de rasgo del MDA a yamlMaxUpgradeTraitSlots, un ajuste de YAML que por
+# defecto es 20 (YAMLGlobals) y no recorta a ningún 'Mech.
+MAXIMO_DE_HUECOS_DE_RASGO = 20
+
+
+def rasgos_de_serie(loadout, rasgos):
+    """Los rasgos de la cantina que trae instalados el loadout (InstalledTraits); los de rol de YAML
+    (MechroleTrait_*) y los de equipo no son de la cantina. FixVanillaLoadouts no los toca."""
+    ids = (rasgo.get("Id", {}).get("PrimaryAssetName") for rasgo in loadout.get("InstalledTraits") or [])
+    return [rasgo for rasgo in ids if rasgo in rasgos]
+
+
+def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks, rasgos):
     minusculas = {id_objeto.lower(): id_objeto for id_objeto in objetos}
     internas = dict(INTERNAS_DE_SERIE)
     huecos = []
@@ -920,7 +932,11 @@ def construir_build_de_serie(datos, loadout, objetos, avisos, id_mech, quirks):
     for campo, valor in loadout.get("InstalledRearArmor", {}).items():
         if campo in TRASERAS:
             armadura[TRASERAS[campo]]["rear"] = valor
-    return {"internal": {tipo: pieza for tipo, pieza in internas.items() if pieza}, "items": piezas, "weapons": armas, "armor": armadura}
+    build = {"internal": {tipo: pieza for tipo, pieza in internas.items() if pieza}, "items": piezas, "weapons": armas, "armor": armadura}
+    de_serie = rasgos_de_serie(loadout, rasgos)
+    if de_serie:
+        build["traits"] = de_serie
+    return build
 
 
 def movimiento(datos):
@@ -963,6 +979,7 @@ def main():
     loadouts = {nombre.lower(): valor for nombre, valor in loadouts.items()}
     asignaciones = cargar_recursos("mechs.json")
     quirks = cargar_recursos("quirks.json")
+    rasgos = {rasgo["id"] for rasgo in leer(os.path.join(RUTA_DATOS, "traits.json"))}
 
     mechs = []
     avisos = []
@@ -989,8 +1006,9 @@ def main():
             "quirks": quirks_de(id_mech, modelo, asignaciones),
             "zones": ranuras_de_yaml(construir_zonas(datos), tamanos, ocultos),
             "stock": construir_build_de_serie(datos, loadout, objetos, avisos, id_mech,
-                                              quirks_de(id_mech, modelo, asignaciones, nombre_mda)),
+                                              quirks_de(id_mech, modelo, asignaciones, nombre_mda), rasgos),
             "movement": movimiento(datos),
+            "upgradeSlots": min(datos.get("EquipmentAllocation", {}).get("TotalTraitSlots", 0), MAXIMO_DE_HUECOS_DE_RASGO),
         })
 
     usados = {q for mech in mechs for q in mech["quirks"]}

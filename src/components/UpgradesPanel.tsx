@@ -3,16 +3,18 @@ import type { Upgrade } from '../types/upgrade';
 import { canInstallUpgrade, getUsedUpgradeSlots, UPGRADE_CATEGORIES, UPGRADES } from '../utils/upgrades';
 
 interface UpgradesPanelProps {
-  mech: Mech;
+  mech: Pick<Mech, 'upgradeSlots'>;
   installed: Upgrade[];
   onToggle: (upgrade: Upgrade) => void;
   onClear: () => void;
   onClose: () => void;
+  // Lo que cuentan las cifras de arriba: en el MechLab de YAML, los rasgos de armas no.
+  hint?: string;
 }
 
 // Mejoras de la cantina, como la pantalla Mejoras del juego: cada una se instala una vez y ocupa
 // 1 o 2 de las ranuras de mejora del mech.
-export function UpgradesPanel({ mech, installed, onToggle, onClear, onClose }: UpgradesPanelProps) {
+export function UpgradesPanel({ mech, installed, onToggle, onClear, onClose, hint }: UpgradesPanelProps) {
   const capacity = mech.upgradeSlots ?? 0;
   const used = getUsedUpgradeSlots(installed);
   const installedIds = new Set(installed.map(upgrade => upgrade.id));
@@ -28,7 +30,7 @@ export function UpgradesPanel({ mech, installed, onToggle, onClear, onClose }: U
           <small aria-hidden="true">{used}/{capacity} slots</small>
           <span className="visually-hidden">{used} of {capacity} upgrade slots used</span>
         </span>
-        <p className="upgrades-hint">Effects show in the stats above. Each upgrade installs once; levels I and II stack.</p>
+        <p className="upgrades-hint">{hint ?? 'Effects show in the stats above.'} Each upgrade installs once; levels I and II stack.</p>
         <button type="button" className="utility-button" onClick={onClear} disabled={installed.length === 0}>
           Remove upgrades
         </button>

@@ -140,6 +140,16 @@ describe('resumen del mech en el juego', () => {
   });
 });
 
+// CA8 de docs/specs/rasgos-yaml.md: los rasgos que trae instalados el loadout del juego (InstalledTraits).
+describe('mejoras de serie', () => {
+  it('el WHM-DNC sale con Refined Armor II, Fortified Internal Structure II y Boosted Top Speed', () => {
+    const warhammer = getMech('WHM-DNC');
+    expect(getStockBuild(warhammer, allMechs, allItems)!.upgrades).toEqual([
+      'IncreasedArmor_Trait2', 'IncreasedStructure_Trait2', 'IncreasedTopSpeed_Trait1'
+    ]);
+  });
+});
+
 describe('reglas de instalación', () => {
   const [energyI, energyII] = getUpgrades(['IncreasedEnergyDamage_Trait1', 'IncreasedEnergyDamage_Trait2']);
 
