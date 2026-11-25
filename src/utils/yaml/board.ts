@@ -3,8 +3,8 @@ import type { YamlBuild, YamlHardpointType, YamlMech } from '../../types/yaml-me
 import { getDefaultTier } from './combat';
 import { getYamlItem } from './data';
 import {
-  GENERAL_SLOT, getBuildTonnage, getCritSplitFillers, getDynamicFillers, getFixedFillers, getFreeGeneralSlots,
-  getTotalFreeGeneralSlots, getUnplacedCritSplits, getWeaponSlotsInZone
+  GENERAL_SLOT, getBuildTonnage, getCritSplitFillers, getFixedFillers, getFreeGeneralSlots, getUnplacedCritSplits,
+  getWeaponSlotsInZone
 } from './stats';
 
 // Lo que necesita la página del MechLab de YAML para pintar el tablero.
@@ -206,9 +206,9 @@ export function getBuildIssues(mech: YamlMech, build: YamlBuild): BuildIssue[] {
   const issues: BuildIssue[] = [];
   const tonnage = getBuildTonnage(mech, build);
   if (tonnage > mech.tonnage) issues.push({ severity: 'error', message: `Overweight by ${Math.round((tonnage - mech.tonnage) * 100) / 100} t` });
-  const needed = getDynamicFillers(build);
-  const free = getTotalFreeGeneralSlots(mech, build);
-  if (needed > free) issues.push({ severity: 'error', message: `Dynamic fillers need ${needed} free slots; only ${free} left` });
+  // Los rellenos dinámicos que no caben no son un problema: al cargar un loadout, YAML ignora el fallo de
+  // UpdateFillersOnLoadout y se queda con los que caben (CN9-CALM, 24 de 28). Lo que no deja es montar una pieza
+  // si después no caben todos (InstallWeaponOrEquipmentIntoSpecificSlot), y eso lo comprueba build.ts.
   for (const zone of ZONES) {
     if (getFreeGeneralSlots(mech, build, zone) < 0) {
       issues.push({ severity: 'error', message: `${zone}: not enough slots (${getFixedFillers(build, zone)} fixed by the engine)`, zone });

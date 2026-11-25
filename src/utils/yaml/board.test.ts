@@ -47,11 +47,11 @@ describe('tablero del MechLab de YAML', () => {
     expect(setMaxArmor(nightstar, stripBuild(stock)).armor.head).toEqual({ front: 30, rear: 0 });
   });
 
-  it('los problemas: sobrepeso, rellenos que no caben y falta de núcleo', () => {
+  it('los problemas: sobrepeso y falta de núcleo; los rellenos que no caben, no (CA43)', () => {
     expect(getBuildIssues(nightstar, stock)).toEqual([]);
     const issues = getBuildIssues(nightstar, setInternal(setInternal(stock, 'Armorslot', 'ARMOR_PRIMITIVE'), 'Structureslot', 'ENDO'));
     expect(issues.map(issue => issue.message).join(' ')).toMatch(/Overweight/);
-    expect(issues.map(issue => issue.message).join(' ')).toMatch(/Dynamic fillers need 14/);
+    expect(issues.map(issue => issue.message).join(' ')).not.toMatch(/filler/i);
     expect(getBuildIssues(nightstar, setInternal(stock, 'Engine', null)).some(issue => /core/.test(issue.message))).toBe(true);
     expect(removeItemAt(stock, 0).items).toHaveLength(stock.items.length - 1);
   });

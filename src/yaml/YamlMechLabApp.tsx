@@ -184,7 +184,7 @@ export function YamlMechLabApp() {
       <BuildStatus
         issues={issues}
         onSelectZone={(zone) => selectTarget({ zone, hardpoint: null, internal: null })}
-        readyMessage="Nothing to note: the build is within its tonnage and every filler fits."
+        readyMessage="Nothing to note: the build is within its tonnage and every piece has room."
       />
 
       <UtilityToolbar

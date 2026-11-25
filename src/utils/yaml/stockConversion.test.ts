@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import mw5Mechs from '../../data/mechs.json';
 import { createStockBuild } from './build';
 import { findYamlMech, yamlMechs } from './data';
 import { getYamlStatsPanel } from './combat';
@@ -47,8 +48,11 @@ describe('Conversión de serie de YAML', () => {
   });
 
   it('CA24: al menos 610 de las 639 builds de serie pesan su tonelaje', () => {
-    const exact = yamlMechs.filter(mech => getBuildTonnage(mech, createStockBuild(mech)) === mech.tonnage);
-    expect(yamlMechs).toHaveLength(639);
+    // Las del MechLab de MW5; las variantes nuevas de YAML van aparte (CA40).
+    const mw5Ids = new Set(mw5Mechs.map(mech => mech.id));
+    const variants = yamlMechs.filter(mech => mw5Ids.has(mech.id));
+    const exact = variants.filter(mech => getBuildTonnage(mech, createStockBuild(mech)) === mech.tonnage);
+    expect(variants).toHaveLength(639);
     expect(exact.length).toBeGreaterThanOrEqual(610);
   });
 
