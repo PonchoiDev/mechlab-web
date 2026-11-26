@@ -23,7 +23,7 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 
   Sin capacidad de calor o sin refrigeración conocidas, las filas quedan vacías (`-`), como las demás.
 - **RF2.** La tabla de armas pone el tonelaje de cada arma junto a su nombre: «Autocannon/5 (8t)». El texto de ayuda de cada arma en el tablero lo dice también.
-- **RF3.** La tabla Stores enseña, en cada munición, el daño potencial: las salvas que da por el daño de una salva de las armas que la usan (con las mejoras de la cantina). Una munición que no usa ninguna arma no tiene daño potencial.
+- **RF3.** La tabla Stores enseña, en cada munición, el daño potencial: las salvas que da por el daño de una salva de las armas que la usan (con las mejoras de la cantina). Una munición que no usa ninguna arma no tiene daño potencial. Las ametralladoras gastan una bala en cada disparo (cada `cooldown`, 0,1 s) y su daño es por segundo, así que cada bala hace el daño por segundo por la duración del disparo: 0,15 en la Machine Gun (1,5 × 0,1).
 - **RF4.** La tabla de armas añade la columna **Damage / ton**: el daño por salva del arma (con las mejoras de la cantina) dividido por su propio tonelaje, sin la munición. Así se comparan también las armas de energía, que no llevan munición. La fila del total da el de todas las armas a distancia juntas: su daño por salva entre su tonelaje.
 - **RF5.** Las cifras nuevas siguen el formato de las demás: con las mejoras de la cantina instaladas, el valor sin mejoras se ve al lado, como ya pasa con el resto de la tabla.
 - **RF6.** La pestaña Weapons enseña el daño por alcance como el MechLab de BATTLETECH: un radar de medio círculo, con el 'Mech abajo en el centro y un anillo por distancia, más intenso cuanto más daño llega. En MW5:
@@ -55,6 +55,7 @@ La web ya calcula todo lo necesario en `getBuildSummary`: la capacidad de calor,
 | CA9 | Loadouts con alcances máximos de 405, 1500 y 5625 m | se eligen los anillos | cada 50 m (9 anillos), cada 150 m (10) y cada 750 m (8) |
 | CA10 | Un perfil de daño de 63.4, 63.4, 46.8, 39.4, 39, 39, 24, 24 y 24 cada 100 m | se agrupan sus anillos | 5 tramos: 63.4 de 100 a 200 m, 46.8 a 300 m, 39.4 a 400 m, 39 de 500 a 600 m y 24 de 700 a 900 m, cada uno con el radio interior de su primer anillo y el exterior del último |
 | CA11 | El HGN-732 de serie | se señala el anillo de 400 m | el LRM 20 y el Gauss Rifle hacen todo su daño; los dos Medium Laser, con la caída (270 m de óptimo y 405 de máximo); el SRM 6 (270 m) no llega |
+| CA12 | Una Machine Gun (1,5 de daño por segundo, 600 disparos por minuto) con una caja de 5.200 balas | se calcula el daño potencial de la munición | 780 (5.200 × 0,15), no 7.800; dura 520 s, lo mismo que dice la tabla |
 | CA7 | Una mejora de daño de la cantina | se calcula el daño por tonelada y el daño potencial | los dos usan el daño con la mejora |
 
 ## Fuera de alcance

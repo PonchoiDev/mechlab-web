@@ -302,7 +302,9 @@ export const groupAmmunition = (loadout: Loadout, modifiers = NO_UPGRADE_MODIFIE
     const ammoPerSecond = sumBy(users.map((item, index) => (item.ammoPerVolley ?? 1) * stats[index].rpm / 60), value => value);
     group.volleys = ammoPerVolley > 0 ? Math.floor(group.capacity / ammoPerVolley) : null;
     group.seconds = ammoPerSecond > 0 ? Math.round(group.capacity / ammoPerSecond) : null;
-    group.potentialDamage = group.volleys === null ? null : group.volleys * sumBy(stats, weapon => weapon.damage);
+    // Las ametralladoras gastan una bala por disparo, pero su daño es por segundo: cada bala hace lo de un disparo.
+    const volleyDamage = sumBy(users.map((item, index) => item.continuous && stats[index].rpm > 0 ? stats[index].damage * 60 / stats[index].rpm : stats[index].damage), value => value);
+    group.potentialDamage = group.volleys === null ? null : group.volleys * volleyDamage;
   }
 
   return [...groups.values()];
