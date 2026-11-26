@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-26-machine-gun-ammo',
+    date: '2026-11-26',
+    title: 'Machine gun ammo damage',
+    items: [
+      'The potential damage of machine gun ammo counts each round as one shot of the gun: a full Machine Gun bin gives 780, not 7,800'
+    ]
+  },
+  {
     id: '2026-11-26-unique-equipment',
     date: '2026-11-26',
     title: 'One targeting computer per Mech',
