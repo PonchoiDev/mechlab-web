@@ -29,11 +29,12 @@ La tecnología y el omni salen de los quirks `CLAN-MECH` y `OMNI-MECH`; los ancl
 - **RF2.** Y los propios de YAML:
   - **Variant:** **Hero**, **Omni** (OmniMechs), **Superheavy** (los superpesados) y **YAML only** (las variantes nuevas de YAML).
   - **Min hardpoints** también de **AMS** y **cuerpo a cuerpo** (Melee), que en YAML son anclajes como los demás.
-  - **Quirks:** una lista con los quirks de las variantes; con varios marcados, salen las que tienen todos.
+  - **Quirks:** una lista con los quirks de las variantes; con varios marcados, salen las que tienen todos. Son unos 350, así que el desplegable tiene un buscador que deja solo los quirks cuyo nombre contiene lo escrito, sin distinguir mayúsculas ni acentos.
 - **RF3.** Sin el filtro **Equipment** de MW5 (jump jets, ECM, AMS, sonda activa y Motive): en YAML los retrorreactores, el ECM, las sondas y el MASC van en las ranuras generales (`SetSpecialEquipmentSlotType`), así que cualquier 'Mech los monta. El AMS pasa a los anclajes mínimos.
 - **RF4.** El buscador busca en el chasis, la variante, el id y los nombres de los quirks, y entiende los atajos de MW5 que valen en YAML: `3e`, `2b`, `2m`, `1o`, `1art`, `1ams`, `hero`, `dlc7` y `base`; y los de YAML: `2mel` (cuerpo a cuerpo), `clan`, `omni`, `sh` (superpesados) y `yaml` (variantes nuevas).
 - **RF5.** Cada variante de la lista enseña sus anclajes por tipo (sin tamaño: en YAML el tamaño no limita qué arma cabe), su DLC, si es hero o nueva de YAML y, debajo, su tonelaje, su año y su rol, como en MW5.
 - **RF6.** El panel dice cuántas variantes salen y tiene **Clear filters**; la etiqueta del selector dice cuántos filtros hay activos.
+- **RF7.** Cuando una fila de filtros no cabe en una línea (los siete contadores de anclajes en el móvil), sus controles siguen en la línea de abajo alineados con el primero, no debajo de la etiqueta de la fila. Lo mismo en el selector de MW5 y en My builds, que comparten las filas.
 
 ## Criterios de aceptación
 
@@ -48,6 +49,7 @@ La tecnología y el omni salen de los quirks `CLAN-MECH` y `OMNI-MECH`; los ancl
 | CA7 | Los quirks Star League Relic (`SLDF`) y Command 'Mech (`CMD-MECH`) marcados | se filtra | solo las variantes con los dos |
 | CA8 | Available by 3025 | se filtra | no sale ningún 'Mech Clan ni ninguno con año posterior |
 | CA9 | YAML only | se filtra | salen las 151 variantes nuevas |
+| CA10 | La lista de quirks | se busca `armor` y después `ÁRMOR` | quedan los quirks con «armor» en el nombre, los mismos las dos veces; sin texto, todos |
 
 ## Fuera de alcance
 
@@ -56,5 +58,5 @@ La tecnología y el omni salen de los quirks `CLAN-MECH` y `OMNI-MECH`; los ancl
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/mechList.test.ts` (CA1 a CA9).
+1. **Datos y lógica:** `src/utils/yaml/mechList.test.ts` (CA1 a CA10).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: abrir el selector, marcar y quitar cada filtro, escribir atajos, elegir una variante.
