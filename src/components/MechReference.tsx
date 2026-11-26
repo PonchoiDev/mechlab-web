@@ -1,8 +1,7 @@
-import type { Mech } from '../types/mech';
-import type { SarnaMechAsset } from '../services/sarna';
+import type { SarnaMechAsset, SarnaMechRef } from '../services/sarna';
 
 interface MechImageProps {
-  mech: Mech;
+  mech: SarnaMechRef;
   asset: SarnaMechAsset | null;
   isLoading: boolean;
   onImageError: () => void;

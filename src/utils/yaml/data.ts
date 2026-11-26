@@ -3,12 +3,19 @@ import itemsData from '../../data/yaml/items.json';
 import mechsData from '../../data/yaml/mechs.json';
 import quirksData from '../../data/yaml/quirks.json';
 import slotsData from '../../data/yaml/slots.json';
+import type { SarnaMechRef } from '../../services/sarna';
 import type { YamlItem, YamlMech, YamlQuirk } from '../../types/yaml-mechlab';
 
 export const yamlMechs = mechsData as unknown as YamlMech[];
 const ITEMS = itemsData as unknown as Record<string, YamlItem>;
 const QUIRKS = quirksData as unknown as Record<string, YamlQuirk>;
 const MECHS_BY_ID = new Map(yamlMechs.map(mech => [mech.id, mech]));
+
+// El 'Mech de YAML como lo busca Sarna (src/services/sarna.ts). El id lleva un prefijo para que la caché no
+// lo cruce con el del MechLab de MW5, aunque hoy darían la misma imagen.
+export function getYamlSarnaMech(mech: YamlMech): SarnaMechRef {
+  return { id: `yaml:${mech.id}`, name: mech.chassis, variant: mech.variant, sarnaName: mech.sarnaName };
+}
 
 export function findYamlMech(id: string): YamlMech | undefined {
   return MECHS_BY_ID.get(id);

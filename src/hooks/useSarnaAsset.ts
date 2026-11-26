@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import type { Mech } from '../types/mech';
-import { fetchSarnaAsset, getCachedSarnaAsset, type SarnaMechAsset } from '../services/sarna';
+import { fetchSarnaAsset, getCachedSarnaAsset, type SarnaMechAsset, type SarnaMechRef } from '../services/sarna';
 
 interface LoadedAsset {
   mechId: string;
   asset: SarnaMechAsset;
 }
 
-export const useSarnaAsset = (mech: Mech) => {
+export const useSarnaAsset = (mech: SarnaMechRef) => {
   const [loaded, setLoaded] = useState<LoadedAsset | null>(null);
   const cachedAsset = getCachedSarnaAsset(mech);
   const asset = loaded?.mechId === mech.id ? loaded.asset : cachedAsset ?? null;

@@ -1,5 +1,8 @@
 import type { Mech } from '../types/mech';
 
+// Lo que hace falta de un 'Mech para buscarlo en Sarna: sirve el del MechLab de MW5 y el de YAML.
+export type SarnaMechRef = Pick<Mech, 'id' | 'name' | 'variant' | 'sarnaName'>;
+
 export interface SarnaMechAsset {
   imageUrl: string | null;
   pageUrl: string;
@@ -27,7 +30,7 @@ const SARNA_TITLE_ALIASES: Record<string, string> = {
 
 const assetCache = new Map<string, SarnaMechAsset>();
 
-export const getSarnaTitle = (mech: Mech): string => {
+export const getSarnaTitle = (mech: SarnaMechRef): string => {
   const canonicalName = mech.sarnaName ?? mech.name;
   return SARNA_TITLE_ALIASES[canonicalName.toLowerCase()] ?? canonicalName;
 };
@@ -64,9 +67,9 @@ const normalizeImageTitle = (title: string) => title
   .toLocaleLowerCase()
   .replace(/[^a-z0-9]/g, '');
 
-export const getCachedSarnaAsset = (mech: Mech): SarnaMechAsset | undefined => assetCache.get(mech.id);
+export const getCachedSarnaAsset = (mech: SarnaMechRef): SarnaMechAsset | undefined => assetCache.get(mech.id);
 
-export const fetchSarnaAsset = async (mech: Mech, signal: AbortSignal): Promise<SarnaMechAsset> => {
+export const fetchSarnaAsset = async (mech: SarnaMechRef, signal: AbortSignal): Promise<SarnaMechAsset> => {
   const sarnaTitle = getSarnaTitle(mech);
   const isClanRefit = /\(C\)$/i.test(mech.variant);
   const variantImageTerms = isClanRefit ? [...new Set([`${sarnaTitle} C`, mech.variant])] : [];
