@@ -3,6 +3,7 @@ import { BrandMark } from '../components/BrandMark';
 import { BuildStatus } from '../components/BuildStatus';
 import { ContextMenu, type MenuEntry } from '../components/ContextMenu';
 import { FeedbackDialog } from '../components/FeedbackDialog';
+import { SaveBuildDialog } from '../components/SaveBuildDialog';
 import { MechImage, SarnaSourceLink } from '../components/MechReference';
 import { SiteNav } from '../components/SiteNav';
 import { SupportLink } from '../components/SupportLink';
@@ -10,6 +11,7 @@ import { Toast } from '../components/Toast';
 import { UpgradesPanel } from '../components/UpgradesPanel';
 import { UtilityToolbar } from '../components/UtilityToolbar';
 import { useSarnaAsset } from '../hooks/useSarnaAsset';
+import { useSavedBuilds } from '../hooks/useSavedBuilds';
 import { useViewPreferences } from '../hooks/useViewPreferences';
 import { copyText } from '../services/clipboard';
 import type { Zone } from '../types/mech';
@@ -20,6 +22,8 @@ import { decodeYamlBuild, encodeYamlBuild } from '../utils/yaml/buildCode';
 import { findYamlMech, getYamlItem, getYamlSarnaMech, YAML_COLORS, yamlMechs } from '../utils/yaml/data';
 import { autoPlaceYamlItem, chooseYamlInternal, getYamlDropZones, placeYamlItem, type YamlInventoryTarget } from '../utils/yaml/inventory';
 import { getYamlBuildIssues } from '../utils/yaml/readouts';
+import { YAML_SAVED_BUILDS_KEY } from '../utils/yaml/savedBuilds';
+import { normalizeBuildName } from '../utils/savedBuildsCore';
 import { getYamlUpgrades, toggleYamlUpgrade } from '../utils/yaml/traits';
 import { getUsedUpgradeSlots, sanitizeUpgrades } from '../utils/upgrades';
 import { ZONE_LABELS } from '../utils/zones';
@@ -27,6 +31,7 @@ import { YamlAnalysis } from './YamlAnalysis';
 import { YamlBoard } from './YamlBoard';
 import { YamlInventoryPanel } from './YamlInventoryPanel';
 import { YamlMechPicker } from './YamlMechPicker';
+import { YamlMyBuildsDialog } from './YamlMyBuildsDialog';
 import { YamlStatsPanel } from './YamlStatsPanel';
 
 const DEFAULT_MECH = 'NSR-9J';
@@ -62,6 +67,11 @@ export function YamlMechLabApp() {
   const [menu, setMenu] = useState<{ title: string; x: number; y: number; entries: MenuEntry[] } | null>(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isUpgradesOpen, setIsUpgradesOpen] = useState(false);
+  const [isSaveOpen, setIsSaveOpen] = useState(false);
+  const [isBuildsOpen, setIsBuildsOpen] = useState(false);
+  // La build guardada abierta, para actualizarla al guardar (docs/specs/builds-guardadas-yaml.md).
+  const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
+  const saved = useSavedBuilds(YAML_SAVED_BUILDS_KEY);
   // El nivel elegido en el inventario para cada arma, con el que se monta, como en MW5.
   const [inventoryTiers, setInventoryTiers] = useState<Record<string, number>>({});
   const view = useViewPreferences(YAML_VIEW_KEY);
@@ -77,6 +87,11 @@ export function YamlMechLabApp() {
   // serie entran al abrir la variante.
   const stockBuild = useMemo(() => ({ ...createStockBuild(mech), traits: build.traits }), [mech, build.traits]);
   const stockCode = encodeYamlBuild(mech.id, stockBuild);
+  const hasUnsavedChanges = buildCode !== stockCode && !saved.builds.some(entry => entry.code === buildCode);
+  const activeBuild = saved.builds.find(entry => entry.id === activeSavedId) ?? null;
+  // Como en MW5 y BATTLETECH, la build guardada abierta solo se actualiza mientras se sigue en su chasis.
+  const editableBuild = activeBuild && decodeYamlBuild(activeBuild.code)?.mechId === mech.id ? activeBuild : null;
+  const defaultName = `${mech.chassis} ${mech.variant}`;
   const upgrades = useMemo(() => getYamlUpgrades(build), [build]);
   const buildUrl = `${window.location.origin}${window.location.pathname}?b=${buildCode}`;
   const issues = useMemo(() => getYamlBuildIssues(mech, build), [mech, build]);
@@ -177,6 +192,7 @@ export function YamlMechLabApp() {
           current={mech}
           onSelect={(next) => {
             setTarget(null);
+            if (next.id !== mech.id) setActiveSavedId(null);
             setState({ mech: next, build: createStockBuild(next) });
           }}
         />
@@ -210,6 +226,9 @@ export function YamlMechLabApp() {
         upgradeSlots={{ used: getUsedUpgradeSlots(upgrades), capacity: mech.upgradeSlots }}
         isUpgradesOpen={isUpgradesOpen}
         onToggleUpgrades={() => setIsUpgradesOpen(open => !open)}
+        savedBuildCount={saved.builds.length}
+        onSaveBuild={() => setIsSaveOpen(true)}
+        onOpenBuilds={() => setIsBuildsOpen(true)}
         onShare={(anchor) => setMenu({
           title: 'Share build',
           x: anchor.left,
@@ -313,6 +332,45 @@ export function YamlMechLabApp() {
       </footer>
 
       {isFeedbackOpen && <FeedbackDialog buildUrl={buildUrl} onMessage={showToast} onClose={() => setIsFeedbackOpen(false)} />}
+      {isSaveOpen && (
+        <SaveBuildDialog
+          defaultName={defaultName}
+          activeBuild={editableBuild}
+          isActiveUpToDate={activeBuild?.code === buildCode}
+          onSaveNew={(name) => {
+            const entry = saved.saveBuild(normalizeBuildName(name, defaultName), buildCode);
+            setActiveSavedId(entry.id);
+            setIsSaveOpen(false);
+            showToast(`Saved “${entry.name}”`);
+          }}
+          onUpdate={() => {
+            if (!editableBuild) return;
+            saved.updateBuild(editableBuild.id, { code: buildCode });
+            setIsSaveOpen(false);
+            showToast(`Updated “${editableBuild.name}”`);
+          }}
+          onClose={() => setIsSaveOpen(false)}
+        />
+      )}
+      {isBuildsOpen && (
+        <YamlMyBuildsDialog
+          saved={saved}
+          currentCode={buildCode}
+          hasUnsavedChanges={hasUnsavedChanges}
+          activeId={activeSavedId}
+          onActiveChange={setActiveSavedId}
+          onLoad={(nextMech, nextBuild, name) => {
+            setTarget(null);
+            // Los rasgos que no caben en el 'Mech se quitan, como al abrir un enlace.
+            setState({ mech: nextMech, build: { ...nextBuild, traits: sanitizeUpgrades(nextMech, nextBuild.traits) } });
+            setIsBuildsOpen(false);
+            showToast(`Loaded “${name}”`);
+          }}
+          onCopyLink={async (code) => showToast(await copyText(`${window.location.origin}${window.location.pathname}?b=${code}`) ? 'Build link copied' : 'Could not copy the link')}
+          onMessage={showToast}
+          onClose={() => setIsBuildsOpen(false)}
+        />
+      )}
       {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={() => setMenu(null)} />}
       {toast && <Toast key={toast.id} message={toast.message} onDismiss={() => setToast(null)} />}
     </div>
