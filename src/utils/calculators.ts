@@ -4,6 +4,7 @@ import type { Upgrade } from '../types/upgrade';
 import { getHardpointViews } from './equipment';
 import { getAmmoLabel, isJumpJet } from './items';
 import { getUpgradeModifiers, getWeaponBonus, NO_UPGRADE_MODIFIERS, type UpgradeModifiers } from './upgrades';
+import { getHeatTimes } from './heat';
 import { getRangeStep } from './rangeRadar';
 import { mapZones } from './zones';
 
@@ -310,17 +311,7 @@ export const groupAmmunition = (loadout: Loadout, modifiers = NO_UPGRADE_MODIFIE
   return [...groups.values()];
 };
 
-// Disparando sin parar también se refrigera, así que la capacidad se llena con el calor neto. Si la
-// refrigeración iguala o supera al calor disparando, no se llena nunca. Enfriarse es desde el máximo y
-// sin disparar.
-export const getHeatTimes = ({ heatCapacity, heatPerSecond, coolingRate }: { heatCapacity: number | null; heatPerSecond: number; coolingRate: number | null }) => {
-  if (heatCapacity === null || coolingRate === null) return { timeToMaxHeat: null, timeToCoolDown: null };
-  const net = heatPerSecond - coolingRate;
-  return {
-    timeToMaxHeat: net > 0 ? heatCapacity / net : 'never' as const,
-    timeToCoolDown: coolingRate > 0 ? heatCapacity / coolingRate : null
-  };
-};
+export { getHeatTimes };
 
 // Daño por alcance para el radar del análisis. En MW5, un arma hace todo su daño hasta su alcance óptimo
 // y, entre el óptimo y el máximo, un daño que baja en línea recta hasta cero (la caída de daño del juego).
