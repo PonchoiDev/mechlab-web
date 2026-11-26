@@ -5,6 +5,7 @@ import { parseBuildSort, type BuildSort } from '../utils/savedBuildsList';
 // deja guardar, se usa el de por defecto y la lista funciona igual.
 export const MERCS_BUILD_SORT_KEY = 'mw-builder:mercs:builds-sort';
 export const BT_BUILD_SORT_KEY = 'mw-builder:battletech:builds-sort';
+export const YAML_BUILD_SORT_KEY = 'mw-builder:yaml:builds-sort';
 
 export function useBuildSort(storageKey: string) {
   const [sort, setSort] = useState<BuildSort>(() => {
