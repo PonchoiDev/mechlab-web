@@ -25,6 +25,7 @@ Con YAML instalado, esas cifras las calcula el propio mod (blueprint `MechAlphaS
 | Tiempo de la salva | Proyectiles: `NumberOfTimesToFire × DelayBetweenFiring`; misiles: `NumberOfMissiles × MissileInterval` |
 | AMS | `MissileDestructionRate` de cada nivel (el nivel 3 lo trae en su asset: 4,025 frente a 3,5) y `MaxRange` |
 | Cuerpo a cuerpo | `Melee.Damage`, `Melee.Duration` y `Cooldown` |
+| Velocidad del proyectil | Proyectiles: `Projectile.Speed`; misiles: `MissileStats.Projectile.Speed`; en cm/s, con los quirks de velocidad del nivel (`SpeedPercentage` y `RangeAndSpeedPercentage`, que multiplican) |
 | Munición por salva | La regla del MechLab de MW5 (`tools/generar_items.py`): un disparo por misil (`NumberOfMissiles`, o 1) y, si el proyectil lleva `bConsumeAmmoOnSubsequentFire`, por cada disparo de la ráfaga (`NumberOfTimesToFire`). El MRM 10 de YAW gasta 10; el LRM 10 de Clan, 10 (5 × 2); el UAC/20, 1. Los perdigones de los LB-X no gastan munición propia. Solo se guarda si no es 1 |
 
 Las armas de los mods dejan de salir una vez por nivel en el inventario (`CEERPPC79`, `CEERPPC79_Lvl2`...): como las del juego, son un objeto con sus niveles. Además:
@@ -113,6 +114,7 @@ Debajo del tablero, como en el MechLab de MW5:
 
   El MML usa la munición de LRM y la de SRM: cuenta en las dos, como si disparara cada una. Una munición que no usa ninguna arma enseña solo sus disparos.
 
+- **Velocity:** la columna del MechLab de MW5, con la velocidad que enseña el mechlab del juego con YAML (`YAWBallistic` y `YAWMissile` de `YAWFunctionsYAML`): la del asset / 100 × `GlobalProjectileVelocityMultiplier` de YAW (1,25 por defecto) × `speedMulti` de las bonificaciones de armas (quirks y equipo, que se suman como los demás multiplicadores). El mechlab la enseña así también en los misiles, aunque en combate el emisor de misiles de YAW no aplica el 1,25. Los láseres, las ametralladoras, los lanzallamas, los AMS y el cuerpo a cuerpo no tienen. Las curvas de velocidad en el tiempo (Heavy Gauss, Arrow IV) y la velocidad doble del MML en modo SRM no cuentan, como en el mechlab del juego.
 - **Pestañas Weapons y 'Mech:** como en el MechLab de MW5. Weapons tiene lo anterior; 'Mech, las cifras del panel agrupadas como en el MechLab de MW5 (DEFENSE, FIREPOWER, HEAT, MOBILITY y TARGETING) con los mismos valores, y en HEAT dos más:
   - **Time to max heat:** capacidad de calor / (calor por segundo disparando − refrigeración), con «Never» si la refrigeración llega;
   - **Time to cool down:** capacidad de calor / refrigeración.
@@ -152,10 +154,12 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 | CA27 | La build de referencia | se calcula el daño por tonelada | Gauss Rifle 1,14 (17,1 / 15), ER PPC 1,63 (11,4 / 7) y 1,5 en total (62,1 / 41,5 t). La claymore del CP-10-P de serie, sin cifra |
 | CA28 | La build de referencia (capacidad 58, 4,0248 de calor por segundo, que el panel enseña como 4,02, y 3 de refrigeración) | se calcula la pestaña 'Mech | Time to max heat 56,6 s y Time to cool down 19,3 s; el resto, las cifras del panel |
 | CA29 | El JVN-11A de serie sin armas (la refrigeración llega al calor por segundo, 0) | se calcula la pestaña 'Mech | Time to max heat «Never» |
+| CA30 | El Gauss Rifle (2.000 m/s en el asset) y el LRM 10 (200 m/s) de nivel 1 | se montan en el HBK-4G y el HBK-4J vaciados, sin bonificaciones de velocidad, y se calcula su velocidad | Gauss 2.500 m/s y LRM 10 250 m/s (× 1,25); el Medium Laser y el AMS, sin velocidad |
+| CA31 | El ANH-IR de serie (quirk «All LRM Missiles», `speedMulti` 1,25) | se calcula la velocidad de sus LRM 15 Hotloaded | la del mismo arma en el HBK-4J vaciado × 1,25 |
 
 ## Fuera de alcance
 
-- La velocidad de los proyectiles (la columna Velocity del MechLab de MW5): YAW la multiplica en sus emisores por `GlobalProjectileVelocityMultiplier` (1,25 por defecto, salvo los misiles), el Heavy Gauss y el Arrow IV la cambian con curvas en el tiempo y el MML tiene una para LRM y otra para SRM.
+- Las bonificaciones de armas sueltas con prefijo de tipo fuera de los grupos (`ppcSpeedMulti` y `ppcHeatMulti` del WHM-DNC).
 - Los ajustes de Yet Another Weapon distintos de los de por defecto.
 - Los quirks de piloto y las habilidades del piloto.
 - La caída del daño de cada arma con la distancia más allá de la línea recta del radar (curvas `MWO_RangeData`, `DamageScaleAtMaxRange`).
@@ -168,5 +172,5 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/combat.test.ts` (CA1, CA3 a CA9 y CA23 a CA29).
+1. **Datos y lógica:** `src/utils/yaml/combat.test.ts` (CA1, CA3 a CA9 y CA23 a CA31).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: el panel con el NSR-9J, cambiar el nivel de un arma en el inventario y en el tablero, el análisis y el radar.
