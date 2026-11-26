@@ -64,6 +64,11 @@ export interface YamlMech {
   sarnaName?: string;
   tonnage: number;
   dlc?: number;
+  // Para los filtros del selector: año y rol de la unit card, si es hero y si es una variante nueva de YAML.
+  introYear?: number;
+  role?: string;
+  hero?: boolean;
+  yamlOnly?: boolean;
   // SuperheavyCheck de YAML: 105 t o más y sin el quirk «ILLEGAL». Cambia las ranuras, los actuadores y el peso.
   superheavy?: boolean;
   quirks: string[];

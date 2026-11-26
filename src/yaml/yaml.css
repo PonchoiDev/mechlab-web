@@ -230,3 +230,15 @@
 .yaml-tier-pips span.is-filled { border-color: var(--work-text); background: var(--work-text); }
 .yaml-tier-pips.is-legendary span { border-color: #ff9d00; background: #ff9d00; }
 .yaml-weapon-tier { color: var(--work-muted); font: 500 10px var(--work-mono); }
+
+/* Filtro de quirks del selector: la lista es larga, se desplaza dentro del desplegable. No está pegado al borde
+   derecho, como los de MW5, así que se abre hacia la derecha para no salirse por la izquierda en el móvil. */
+.yaml-quirk-filter .checkbox-dropdown-menu {
+  right: auto;
+  left: 0;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 48px));
+  max-height: min(360px, 50vh);
+  overflow-y: auto;
+}
+.yaml-mechlab [data-weapon-type="melee"] { --weapon-color: var(--yaml-melee, #9c27b0); }
