@@ -2,7 +2,7 @@
 
 - **Estado:** implementada
 - **Completa:** [builds-publicadas.md](builds-publicadas.md) (las builds publicadas de MW5 y BATTLETECH) y [builds-guardadas-yaml.md](builds-guardadas-yaml.md), que dejaba fuera publicar
-- **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`worker/builds.test.ts` y `src/utils/publishedBuilds.test.ts`) y por último el código, en commits separados.
+- **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`worker/builds.test.ts`, `src/utils/publishedBuilds.test.ts` y `src/utils/savedBuildsList.test.ts`) y por último el código, en commits separados.
 
 ## Contexto
 
@@ -15,13 +15,13 @@ El código de una build de YAML no tiene la forma de los de MW5 y BATTLETECH (`[
 - **Mismo juego, sin migración:** las builds de YAML se publican con `game: "mercs"`. Lo que las distingue es el prefijo `Y1.` de su código, que ya separa los enlaces de los dos MechLabs. Así comparten la lista, los votos, las denuncias, las claves de edición y el límite de publicaciones, y la tabla de D1 no cambia.
 - **Validación en el Worker:** un código `Y1.` vale si el resto es base64url, decodifica a un objeto con `m` (un id de variante, con el mismo patrón que los demás) y `b` (un objeto), y no pasa de 16 000 caracteres. Como con los otros, el Worker no decodifica la build entera; la página descarta las que no se pueden abrir. Un código `Y1.` solo vale para `mercs`.
 - **Datos de YAML a demanda:** la página de builds de MW5 descarga los datos de YAML (3,8 MB sin comprimir) solo si la lista trae alguna build de YAML. Mientras llegan, esas builds salen sin cifras ni botón Open, con el aviso «Loading YAML data…».
-- **Visibles desde ya:** publicar una build de YAML la enseña a todo el mundo, y con ella el MechLab de YAML.
+- **Visibles desde ya, sin anunciar:** publicar una build de YAML la enseña a todo el mundo, y con ella el MechLab de YAML. Las novedades (`src/data/changelog.ts`) aún no hablan de YAML: se anuncia cuando el MechLab de YAML salga de la beta.
 
 ## Requisitos funcionales
 
 - **RF1. Publicar desde el MechLab de YAML.** Un botón **Publish** en el grupo BUILD de la barra, como en MW5 y BATTLETECH, con la misma ventana de publicar. Sin armas ni equipo montados no se puede publicar. Cada build de My builds tiene también **Publish**, que abre la ventana con esa build sin cargarla; My builds sigue abierta debajo. Al publicar, el enlace lleva a la build en `/mercs/builds/`.
 - **RF2. Etiqueta YAML.** En `/mercs/builds/`, cada build de YAML lleva la etiqueta **YAML** delante de las demás, y sus etiquetas, armas y cifras son las de My builds de YAML ([builds-guardadas-yaml.md](builds-guardadas-yaml.md), RF5).
-- **RF3. Filtro de origen.** La página tiene un desplegable **Source** con **Vanilla** y **YAML**, con los demás filtros. Sin ninguno marcado salen todas. El resto de filtros (clase, anclajes y armas mínimos, tecnología, rol, equipo y buscador) son los de MW5 y valen para las dos.
+- **RF3. Interruptores de origen.** La fila **Source** de los filtros tiene dos interruptores con icono: el de MW5 (el «M5» de la biblioteca de Steam, sacado del ejecutable del juego) para las builds Vanilla y el de Yet Another Mechlab para las de YAML. Cada uno enseña u oculta las suyas; al principio se ven las dos, y la última visible no se puede apagar. El resto de filtros (clase, anclajes y armas mínimos, tecnología, rol, equipo y buscador) son los de MW5 y valen para las dos.
 - **RF4. Abrir y copiar el enlace.** **Open** y **Copy link** de una build de YAML llevan al MechLab de YAML (`/mercs/yaml/?b=`), y las de MW5 al de MW5, como hasta ahora.
 - **RF5. Lista de chasis.** `?mech=<id>` deja las builds de esa variante de los dos MechLabs: los ids de las variantes del juego base son los mismos en los dos.
 
@@ -41,6 +41,7 @@ El código de una build de YAML no tiene la forma de los de MW5 y BATTLETECH (`[
 | CA4 | Un código de MW5 de más de 4000 caracteres | se valida | sigue sin valer: el tope de 16 000 es solo para los de YAML |
 | CA5 | Un código | se pregunta si es de YAML | lo es si empieza por `Y1.` |
 | CA6 | Un código de YAML y uno de MW5 | se pide su enlace | el de YAML abre `/mercs/yaml/?b=` y el de MW5, `/mercs/?b=` |
+| CA7 | Los interruptores de origen con las dos visibles | se apaga YAML, se vuelve a encender, y se intenta apagar Vanilla cuando es la única visible | queda solo Vanilla; vuelven a verse las dos (sin filtro); Vanilla sigue visible |
 
 ## Fuera de alcance
 
@@ -51,5 +52,5 @@ El código de una build de YAML no tiene la forma de los de MW5 y BATTLETECH (`[
 ## Plan de pruebas
 
 1. **Worker (CA1 a CA4):** `worker/builds.test.ts`, con el almacén en memoria.
-2. **Navegador (CA5 y CA6):** `src/utils/publishedBuilds.test.ts`.
-3. **Interfaz:** en el navegador, con el servidor de desarrollo, a 1440 × 900 y a 390 × 844: publicar desde la barra y desde My builds del MechLab de YAML, ver la build en `/mercs/builds/` con la etiqueta YAML y sus cifras, filtrar por Source, abrirla en el MechLab de YAML y copiar su enlace, y comprobar que las de MW5 siguen igual.
+2. **Navegador (CA5 y CA6):** `src/utils/publishedBuilds.test.ts`; **interruptores (CA7):** `src/utils/savedBuildsList.test.ts`.
+3. **Interfaz:** en el navegador, con el servidor de desarrollo, a 1440 × 900 y a 390 × 844: publicar desde la barra y desde My builds del MechLab de YAML, ver la build en `/mercs/builds/` con la etiqueta YAML y sus cifras, enseñar y ocultar cada origen con sus interruptores, abrirla en el MechLab de YAML y copiar su enlace, y comprobar que las de MW5 siguen igual.
