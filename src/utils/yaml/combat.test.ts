@@ -331,3 +331,31 @@ describe("pestaña 'Mech y daño por tonelada", () => {
     expect(chassisValues(javelin, unarmed)['Time to max heat']).toBe('Cooling keeps up');
   });
 });
+
+describe('velocidad de los proyectiles', () => {
+  const speedOf = (mech: YamlMech, build: YamlBuild, item: string) =>
+    getWeaponPerformance(mech, build).find(performance => performance.item === item)!.speed;
+
+  it('CA30: la del asset × 1,25 de YAW, también en los misiles; los láseres y los AMS no tienen', () => {
+    const hunchback = findYamlMech('HBK-4G')!;
+    const empty = stripBuild(createStockBuild(hunchback));
+    const withGauss = mountWeapon(hunchback, empty, 'rightTorso', 'GaussRifle', undefined, 1).build!;
+    expect(speedOf(hunchback, withGauss, 'GaussRifle')).toBeCloseTo(2500, 3);
+    const missileHunchback = findYamlMech('HBK-4J')!;
+    const withLrm = mountWeapon(missileHunchback, stripBuild(createStockBuild(missileHunchback)), 'rightTorso', 'LRM10', undefined, 1).build!;
+    expect(speedOf(missileHunchback, withLrm, 'LRM10')).toBeCloseTo(250, 3);
+    expect(speedOf(nightstar, reference, 'MediumPulseLaser')).toBeNull();
+    const ghr = findYamlMech('GHR-5J')!;
+    const ams = getWeaponPerformance(ghr, createStockBuild(ghr)).find(performance => performance.family === 'ams')!;
+    expect(ams.speed).toBeNull();
+  });
+
+  it('CA31: el quirk «All LRM Missiles» del ANH-IR multiplica la de sus LRM por 1,25', () => {
+    const annihilator = findYamlMech('ANH-IR')!;
+    const stockBuild = createStockBuild(annihilator);
+    const lrm = getWeaponPerformance(annihilator, stockBuild).find(performance => performance.item === 'LRM15_Hotloaded')!;
+    const hunchback = findYamlMech('HBK-4J')!;
+    const plain = mountWeapon(hunchback, stripBuild(createStockBuild(hunchback)), 'rightTorso', 'LRM15_Hotloaded', undefined, lrm.tier).build!;
+    expect(lrm.speed).toBeCloseTo(speedOf(hunchback, plain, 'LRM15_Hotloaded')! * 1.25, 3);
+  });
+});
