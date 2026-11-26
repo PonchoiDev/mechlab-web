@@ -85,6 +85,8 @@ export interface Item {
   ammoType?: string;
   volleyProjectiles?: number;
   volleyHeatShots?: number;
+  // Rayo sin duración (ametralladoras y lanzallamas): su daño y su calor ya son por segundo.
+  continuous?: boolean;
   weightClass?: WeightClass;
   techBase?: string;
   ammoPerVolley?: number;

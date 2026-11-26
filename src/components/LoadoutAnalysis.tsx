@@ -73,7 +73,7 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
             <p className="eyebrow">05 / COMBAT DATA</p>
             <h2>Weapon performance</h2>
           </div>
-          <span className="analysis-note">NOMINAL DPS = DAMAGE × RPM / 60</span>
+          <span className="analysis-note">NOMINAL DPS = DAMAGE × RPM / 60 · MG AND FLAMER DAMAGE IS PER SECOND</span>
         </header>
         {weapons.length > 0 ? (
           <div className="analysis-overflow">

@@ -132,6 +132,9 @@ def arma_de_unidad(id_arma, arma, items):
     item = {"id": id_arma, "name": pariente.get("name", nombre), "type": "weapon", "weaponType": pariente.get("weaponType"),
             "size": pariente.get("size", "small"), "tonnage": 0, "tiers": {"1": estadisticas},
             "volleyProjectiles": proyectiles, "volleyHeatShots": calor, "tier": "1"}
+    # Rayos sin duración (ametralladoras y lanzallamas): daño y calor por segundo, como en generar_items.py.
+    if arma.get("Trace") is not None and not arma["Trace"].get("Duration"):
+        item["continuous"] = True
     if pariente.get("techBase"):
         item["techBase"] = pariente["techBase"]
     return item

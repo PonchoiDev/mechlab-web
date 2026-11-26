@@ -34,6 +34,9 @@ REGEX_MISILES = re.compile(r'(?<![A-Za-z])NumberOfMissiles=([0-9]+)')
 REGEX_PROYECTILES = re.compile(r'(?<![A-Za-z])NumberOfProjectiles=([0-9]+)')
 REGEX_DISPAROS = re.compile(r'(?<![A-Za-z])NumberOfTimesToFire=([0-9]+)')
 REGEX_CONSUME_POR_DISPARO = re.compile(r'bConsumeAmmoOnSubsequentFire=True')
+# Armas de rayo: su bloque Trace, y la duración del rayo dentro de él (no FeedbackDuration).
+REGEX_RAYO = re.compile(r'Trace=\(([^\n]*)')
+REGEX_DURACION_RAYO = re.compile(r'(?<![A-Za-z])Duration=([0-9.]+)')
 CLASE_TIPO_DE_RANURA = "MWSlotTypeDataAsset"
 REGEX_RANURAS_ADMITIDAS = re.compile(r'SupportedSlotTypesAssetId(?:\(\d+\))?=\(Id="MWSlotTypeDataAsset:([^"]+)"')
 REGEX_TECH_BASE = re.compile(r'TechBase=\(TagName="TechBase\.(\w+)"')
@@ -247,6 +250,15 @@ def obtener_multiplicadores_salva(contenido):
     return (misiles or proyectiles or 1) * disparos, (misiles or 1) * disparos
 
 
+def es_rayo_continuo(contenido):
+    # Ametralladoras y lanzallamas: rayos sin Duration. El rayo del juego hace tiempo × DamageOverDuration
+    # en cada impacto y, sin Duration, dura mientras se dispara (su límite es FLT_MAX; el tick está en
+    # 0x141187ea8 del ejecutable y el impacto en 0x14116f040). Así que su daño y su calor son por segundo,
+    # no por disparo, aunque traigan RateOfFire y un cooldown de 0,1 s.
+    rayo = REGEX_RAYO.search(contenido)
+    return bool(rayo) and not REGEX_DURACION_RAYO.search(rayo.group(1))
+
+
 def obtener_municion_por_salva(contenido):
     # Los misiles gastan uno cada uno; las ráfagas solo gastan en cada disparo si el arma lo indica,
     # y los perdigones de un LB-X no gastan munición propia.
@@ -407,6 +419,8 @@ def construir_item(id_base, tiers):
         for tier in sorted(tiers, key=int):
             item["tiers"][tier] = calcular_tier(tiers[tier], base)
         item["volleyProjectiles"], item["volleyHeatShots"] = obtener_multiplicadores_salva(contenido)
+        if es_rayo_continuo(contenido):
+            item["continuous"] = True
         clase_de_peso = buscar_texto(REGEX_CLASE_CUERPO_A_CUERPO, contenido)
         if clase_de_peso:
             item["weightClass"] = clase_de_peso.lower()

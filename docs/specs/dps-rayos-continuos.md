@@ -1,6 +1,6 @@
 # Especificación: daño y calor por segundo de ametralladoras y lanzallamas
 
-- **Estado:** en curso
+- **Estado:** implementada
 - **Método:** Spec Driven Development. Primero esta especificación, después los tests de los criterios de aceptación (`src/utils/calculators.test.ts`, `src/utils/arsenal.test.ts` y `src/utils/units.test.ts`) y por último los datos y el código, en commits separados.
 
 ## Contexto
@@ -31,7 +31,7 @@ Un jugador avisa de que el MechLab de MW5 da un DPS y un calor por segundo dispa
 |---|---|---|---|
 | CA1 | La Machine Gun / el Flamer en tier 1 | se calculan sus cifras | 1,5 de daño y 1,5 de DPS / 2 de daño, 2 de DPS y 0,4 de calor por segundo; la cadencia sigue en 600 |
 | CA2 | El Clan Heavy Machine Gun | se ve en la página de equipo en tier 1 | 4 de DPS, no 40 |
-| CA3 | Las armas en tier 1 | se ordenan por DPS | la primera ya no es una ametralladora |
+| CA3 | Las armas en tier 1 | se ordenan por DPS | la primera es el Assault Arena Fist, no una ametralladora |
 | CA4 | Un 'Mech con un Flamer y un Medium Laser | se calcula el resumen | el calor por segundo es 0,4 + 2,25 × 15 / 60 |
 | CA5 | El Medium Laser | se calculan sus cifras | no cambia: 1,25 de DPS |
 | CA6 | Una unidad enemiga con una Machine Gun | se calcula su DPS | la ametralladora suma 1,5 |
@@ -45,3 +45,9 @@ Un jugador avisa de que el MechLab de MW5 da un DPS y un calor por segundo dispa
 
 - Tests de los criterios en `src/utils/calculators.test.ts`, `src/utils/arsenal.test.ts` y `src/utils/units.test.ts`.
 - En el navegador: el MechLab con un 'Mech con ametralladoras, la página de equipo ordenada por DPS y la de unidades.
+
+## Resultado
+
+- **Datos:** `continuous` en las seis ametralladoras y lanzallamas de `items.json`, y también en el TAG y el Clan TAG, que son rayos sin duración y sin daño (su DPS sigue en 0). `units.json` lo hereda.
+- **Tests:** los seis criterios pasan.
+- **Interfaz:** la nota de la tabla de armas del MechLab dice que el daño de las ametralladoras y los lanzallamas es por segundo.

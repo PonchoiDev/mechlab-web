@@ -84,7 +84,7 @@ describe('página de armas y equipo', () => {
   it('CA7: orden por columnas, con las armas sin el dato al final', () => {
     // Las ametralladoras dan su daño por segundo (dps-rayos-continuos.md, CA2 y CA3).
     expect(tier1.find(row => row.item.name === 'C-Heavy Machine Gun')).toEqual(expect.objectContaining({ dps: 4 }));
-    expect(sortWeaponRows(tier1, { key: 'dps', dir: 'desc' })[0].item.name).not.toMatch(/Machine Gun/);
+    expect(sortWeaponRows(tier1, { key: 'dps', dir: 'desc' })[0].item.name).toBe('Assault Arena Fist');
     expect(sortWeaponRows(tier1, { key: 'damagePerTon', dir: 'desc' })[0]).toEqual(expect.objectContaining({ damagePerTon: 30 }));
     expect(sortWeaponRows(tier1, { key: 'damagePerTon', dir: 'desc' })[0].item.name).toBe('Light Knuckles');
     expect(names(sortWeaponRows(tier1, { key: 'name', dir: 'asc' })).slice(0, 3)).toEqual(['AC/10', 'AC/10 BF', 'AC/10 RF']);
