@@ -1224,6 +1224,14 @@ def main():
         mechs.append(construir_variante(id_mech, nombre_chasis, variante, None, datos, loadout,
                                         nombre_mda, objetos, avisos, asignaciones, tamanos, ocultos, rasgos))
 
+    # El nombre en Sarna, para la imagen de referencia: el de las variantes del mismo chasis en el MechLab de MW5
+    # (los 'Mechs Clan se llaman allí con su otro nombre: el Puma es el Adder). Solo si no es el del chasis.
+    nombres_en_sarna = {mech["name"]: mech["sarnaName"] for mech in mechs_juego.values() if mech.get("sarnaName")}
+    for mech in mechs:
+        nombre_en_sarna = nombres_en_sarna.get(mech["chassis"])
+        if nombre_en_sarna and nombre_en_sarna != mech["chassis"]:
+            mech["sarnaName"] = nombre_en_sarna
+
     usados = {q for mech in mechs for q in mech["quirks"]}
     datos_quirks = {nombre: {"name": quirks[nombre].get("name", nombre), "description": quirks[nombre].get("description", ""),
                              "properties": quirks[nombre].get("properties", {})} for nombre in sorted(usados) if nombre in quirks}

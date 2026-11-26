@@ -1,4 +1,4 @@
-import type { CSSProperties, MouseEvent } from 'react';
+import type { CSSProperties, MouseEvent, ReactNode } from 'react';
 import { ArmorControl } from '../components/ArmorControl';
 import { SlotBar } from '../components/SlotBar';
 import type { Zone } from '../types/mech';
@@ -43,6 +43,8 @@ interface YamlBoardProps {
   onArmorChange: (zone: Zone, side: 'front' | 'rear', value: number) => void;
   onRemoveWeapon: (hardpoint: string) => void;
   onRemoveItem: (index: number) => void;
+  // La imagen de Sarna, como en el tablero de MW5; no se enseña en el compacto.
+  reference?: ReactNode;
 }
 
 // El clic central quita lo montado, como en las tarjetas de MW5.
@@ -354,6 +356,7 @@ export function YamlBoard(props: YamlBoardProps) {
             {mech.quirks.map(id => <li key={id} title={getYamlQuirk(id)?.description}>{getYamlQuirk(id)?.name ?? id}</li>)}
           </ul>
         )}
+        {!props.compact && props.reference && <div className="mech-board-image">{props.reference}</div>}
       </div>
       {ZONES.map(({ zone, label, position }) => <LocationCard key={zone} {...props} zone={zone} label={label} position={position} />)}
     </section>

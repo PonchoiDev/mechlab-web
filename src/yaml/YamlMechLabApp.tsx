@@ -3,11 +3,13 @@ import { BrandMark } from '../components/BrandMark';
 import { BuildStatus } from '../components/BuildStatus';
 import { ContextMenu, type MenuEntry } from '../components/ContextMenu';
 import { FeedbackDialog } from '../components/FeedbackDialog';
+import { MechImage, SarnaSourceLink } from '../components/MechReference';
 import { SiteNav } from '../components/SiteNav';
 import { SupportLink } from '../components/SupportLink';
 import { Toast } from '../components/Toast';
 import { UpgradesPanel } from '../components/UpgradesPanel';
 import { UtilityToolbar } from '../components/UtilityToolbar';
+import { useSarnaAsset } from '../hooks/useSarnaAsset';
 import { useViewPreferences } from '../hooks/useViewPreferences';
 import { copyText } from '../services/clipboard';
 import type { Zone } from '../types/mech';
@@ -15,7 +17,7 @@ import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
 import { distributeDynamicFillerGroups, removeItemAt, setArmor, setMaxArmor } from '../utils/yaml/board';
 import { clearArmor, createStockBuild, dropExcessEngineHeatSinks, removeKind, removeWeapon, setWeaponTier, type MountResult } from '../utils/yaml/build';
 import { decodeYamlBuild, encodeYamlBuild } from '../utils/yaml/buildCode';
-import { findYamlMech, getYamlItem, YAML_COLORS, yamlMechs } from '../utils/yaml/data';
+import { findYamlMech, getYamlItem, getYamlSarnaMech, YAML_COLORS, yamlMechs } from '../utils/yaml/data';
 import { autoPlaceYamlItem, chooseYamlInternal, getYamlDropZones, placeYamlItem, type YamlInventoryTarget } from '../utils/yaml/inventory';
 import { getYamlBuildIssues } from '../utils/yaml/readouts';
 import { getYamlUpgrades, toggleYamlUpgrade } from '../utils/yaml/traits';
@@ -63,6 +65,9 @@ export function YamlMechLabApp() {
   // El nivel elegido en el inventario para cada arma, con el que se monta, como en MW5.
   const [inventoryTiers, setInventoryTiers] = useState<Record<string, number>>({});
   const view = useViewPreferences(YAML_VIEW_KEY);
+  // Memorizado: el hook vuelve a pedir la imagen cuando cambia el objeto.
+  const sarnaMech = useMemo(() => getYamlSarnaMech(mech), [mech]);
+  const sarna = useSarnaAsset(sarnaMech);
 
   // Como en el juego, un cambio que deja menos ranuras de disipadores del motor desmonta los que sobran.
   const setBuild = (next: YamlBuild) => setState({ mech, build: dropExcessEngineHeatSinks(mech, next) });
@@ -256,6 +261,12 @@ export function YamlMechLabApp() {
           onArmorChange={(zone, side, value) => setBuild(setArmor(mech, build, zone, side, value))}
           onRemoveWeapon={(hardpoint) => setBuild(removeWeapon(build, hardpoint))}
           onRemoveItem={(index) => setBuild(removeItemAt(build, index))}
+          reference={(
+            <>
+              <MechImage mech={sarnaMech} asset={sarna.asset} isLoading={sarna.isLoading} onImageError={sarna.markImageBroken} />
+              <SarnaSourceLink asset={sarna.asset} />
+            </>
+          )}
         />
 
         <YamlAnalysis mech={mech} build={build} />

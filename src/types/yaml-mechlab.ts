@@ -60,6 +60,8 @@ export interface YamlMech {
   id: string;
   chassis: string;
   variant: string;
+  // El nombre del chasis en Sarna, si no es el mismo (el Puma es el Adder).
+  sarnaName?: string;
   tonnage: number;
   dlc?: number;
   // SuperheavyCheck de YAML: 105 t o más y sin el quirk «ILLEGAL». Cambia las ranuras, los actuadores y el peso.
