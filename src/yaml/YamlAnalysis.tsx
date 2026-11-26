@@ -41,6 +41,7 @@ function WeaponRow({ weapon, rangeFocus }: { weapon: YamlWeaponPerformance; rang
       <td>{isAms || isMelee ? EMPTY_VALUE : formatYamlStat(weapon.heatPerSecond)}</td>
       <td>{isAms || isMelee ? EMPTY_VALUE : metres(weapon.optimalRange)}</td>
       <td>{isMelee ? EMPTY_VALUE : metres(weapon.maxRange)}</td>
+      <td>{weapon.speed === null ? EMPTY_VALUE : `${Math.round(weapon.speed)} m/s`}</td>
     </tr>
   );
 }
@@ -86,6 +87,7 @@ function WeaponsTab({ mech, build }: { mech: YamlMech; build: YamlBuild }) {
                   <th>Heat/s</th>
                   <th>Optimal range</th>
                   <th>Max range</th>
+                  <th>Velocity</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,6 +106,7 @@ function WeaponsTab({ mech, build }: { mech: YamlMech; build: YamlBuild }) {
                   <td>{formatYamlStat(stats.heatPerSecond)}</td>
                   <td>{EMPTY_VALUE}</td>
                   <td>{metres(stats.weaponRange)}</td>
+                  <td>{EMPTY_VALUE}</td>
                 </tr>
               </tfoot>
             </table>

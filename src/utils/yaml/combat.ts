@@ -22,6 +22,8 @@ const PULSE_LASER_DURATION_MULTIPLIER = 0.7;
 // YAWBallistic: los Gauss llegan a 1,5 veces el alcance máximo global.
 const GAUSS_RANGE_MULTIPLIER = 1.5;
 const MIN_COOLDOWN = 0.01;
+// GlobalProjectileVelocityMultiplier de YAW por defecto (gui_config.ini).
+const GLOBAL_PROJECTILE_VELOCITY_MULTIPLIER = 1.25;
 // AddMulti de YAML: un multiplicador nunca baja de 0,001.
 const MIN_MULTIPLIER = 0.001;
 // El alcance de sensores de un 'Mech sin bonificaciones (GetSensorRange del juego, 80.000 cm).
@@ -62,12 +64,13 @@ export interface YamlWeaponBonuses {
   maxRange: number;
   heatDamage: number;
   missilesDestroyed: number;
+  speed: number;
 }
 
 const BONUS_FIELDS: Record<keyof YamlWeaponBonuses, string> = {
   damage: 'damagemulti', heat: 'heatmulti', cooldown: 'cooldownmulti', duration: 'durationmulti',
   optimalRange: 'optimalrangemulti', maxRange: 'maxrangemulti', heatDamage: 'heatdamagemulti',
-  missilesDestroyed: 'missilesdestroyedmulti'
+  missilesDestroyed: 'missilesdestroyedmulti', speed: 'speedmulti'
 };
 
 const mountedEquipment = getInstalledEquipment;
@@ -141,6 +144,8 @@ export interface YamlWeaponPerformance {
   cycle: number;
   // Daño entre el tonelaje del arma, sin su munición; null en el cuerpo a cuerpo y los AMS.
   damagePerTon: number | null;
+  // Velocidad del proyectil en m/s; null en los rayos, los AMS y el cuerpo a cuerpo.
+  speed: number | null;
 }
 
 function maxRangeOf(combat: YamlCombat, stats: YamlWeaponTier, optimal: number, bonuses: YamlWeaponBonuses): number {
@@ -167,9 +172,12 @@ function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoi
   if (!item || !combat || !stats) return null;
   const bonuses = getWeaponBonuses(mech, build, zone, itemId);
   const optimalRange = optimalRangeOf(combat, stats, bonuses);
+  // YAWBallistic y YAWMissile: la velocidad del asset × GlobalProjectileVelocityMultiplier × speedMulti, también
+  // en los misiles (en combate, el emisor de misiles de YAW no aplica el multiplicador global).
+  const speed = stats.speed ? f(f(f(stats.speed) * GLOBAL_PROJECTILE_VELOCITY_MULTIPLIER) * bonuses.speed) : null;
   const base = {
     zone, hardpoint, item: itemId, name: item.name, tier, family: combat.family,
-    optimalRange, maxRange: maxRangeOf(combat, stats, optimalRange, bonuses), amsRate: 0
+    optimalRange, maxRange: maxRangeOf(combat, stats, optimalRange, bonuses), amsRate: 0, speed
   };
   const cooldown = Math.max(MIN_COOLDOWN, f(f(stats.cooldown) * bonuses.cooldown));
   // GetAlphaStrikeStats: disparos por minuto = 60 / ciclo, y por segundo, × valor / 60.

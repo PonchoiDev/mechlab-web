@@ -380,7 +380,8 @@ QUIRKS_DE_NIVEL = {
     "Cooldown": ("cooldown", "suma", ("trace", "projectile", "missile", "melee")),
     "CooldownPercentage": ("cooldown", "producto", ("trace", "projectile", "missile", "melee")),
     "RangePercentage": ("ranges", "producto", ("trace", "projectile", "missile")),
-    "RangeAndSpeedPercentage": ("ranges", "producto", ("trace", "projectile", "missile")),
+    "RangeAndSpeedPercentage": ("rangesAndSpeed", "producto", ("trace", "projectile", "missile")),
+    "SpeedPercentage": ("speed", "producto", ("projectile", "missile")),
     "DurationPercentage": ("duration", "producto", ("trace",)),
 }
 
@@ -404,6 +405,8 @@ def cifras_de_nivel(familia, propiedades):
         "cooldown": f32(datos.get("Cooldown") or 0),
         "optimalRange": f32(alcances.get("OptimalRange") or 0),
         "maxRange": f32(alcances.get("MaxRange") or 0),
+        # La velocidad del proyectil en cm/s (la de los misiles, en su MissileStats); los rayos no tienen.
+        "speed": f32(proyectil.get("Speed") or 0) if familia in ("projectile", "missile") else 0,
     }
     if familia == "trace":
         campos.update(damage=f32(rayo.get("DamageOverDuration", 0)), heat=f32(rayo.get("HeatGeneratedOverDuration", 0)),
@@ -420,11 +423,14 @@ def cifras_de_nivel(familia, propiedades):
             continue
         campo, operacion, _ = regla
         valor = f32(quirk.get("Value", 0.0))
-        for nombre in (("optimalRange", "maxRange") if campo == "ranges" else (campo,)):
+        nombres = {"ranges": ("optimalRange", "maxRange"), "rangesAndSpeed": ("optimalRange", "maxRange", "speed")}
+        for nombre in nombres.get(campo, (campo,)):
             campos[nombre] = f32(campos[nombre] + valor) if operacion == "suma" else f32(f32(valor + 1) * campos[nombre])
 
     cifras = {"cooldown": campos["cooldown"], "optimalRange": f32(campos["optimalRange"] / 100),
               "maxRange": f32((campos["maxRange"] or campos["optimalRange"]) / 100)}
+    if campos["speed"]:
+        cifras["speed"] = f32(campos["speed"] / 100)
     if familia == "trace":
         cifras.update(damage=campos["damage"], heat=campos["heat"], duration=campos["duration"])
     elif familia == "melee":
