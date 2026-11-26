@@ -980,8 +980,13 @@ body {
   font-size: 18px;
 }
 
+/* El panel se estira hasta la altura de los torsos y los brazos (en YAML, con sus rellenos, mucho
+   más que 320 px): la imagen ocupa todo el hueco que queda. Con alto 0 no empuja las filas del
+   tablero; el mínimo es para cuando el panel va a lo ancho, encima de las tarjetas. */
 .mech-board-reference .mech-image {
-  max-height: 320px;
+  flex: 1 1 auto;
+  height: 0;
+  min-height: 320px;
 }
 
 .component-card {

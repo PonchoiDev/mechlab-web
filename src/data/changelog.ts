@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-26-bigger-mech-image',
+    date: '2026-11-26',
+    title: "Bigger 'Mech image on the board",
+    items: [
+      "The Sarna image between the torsos now fills the whole panel instead of staying small in the middle, in the MechLab and the YAML MechLab"
+    ]
+  },
+  {
     id: '2026-11-26-filter-rows-aligned',
     date: '2026-11-26',
     title: 'Tidier filter rows',
