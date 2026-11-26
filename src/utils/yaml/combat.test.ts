@@ -3,8 +3,8 @@ import type { YamlBuild, YamlMech } from '../../types/yaml-mechlab';
 import { createStockBuild, mountItem, mountWeapon, removeWeapon, setInternal, setWeaponTier, stripBuild } from './build';
 import { decodeYamlBuild, encodeYamlBuild } from './buildCode';
 import {
-  getWeaponBonuses, getWeaponPerformance, getWeaponTiers, getWeaponTierStats, getYamlDamageAt, getYamlRangeProfile,
-  getYamlStatsPanel
+  getWeaponBonuses, getWeaponPerformance, getWeaponTiers, getWeaponTierStats, getYamlAmmunition, getYamlDamageAt,
+  getYamlRangeProfile, getYamlStatsPanel
 } from './combat';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlInventoryItems } from './inventory';
@@ -265,5 +265,34 @@ describe('estadísticas del MechLab de YAML', () => {
     expect(getEngineHeatSinkSlots(nightstar, stock)).toBe(1);
     expect(stock.items.filter(item => item.slotType === 'EngineHeatsink_SlotType')).toHaveLength(1);
     expect(mountItem(nightstar, stock, 'centerTorso', 'DoubleHeatSink').error).toMatch(/No free slot/);
+  });
+});
+
+describe('munición instalada', () => {
+  it('CA23: la build de referencia da 91 salvas, 415 s de fuego y 3.112,2 de daño potencial', () => {
+    const [gauss] = getYamlAmmunition(nightstar, reference);
+    expect(gauss).toMatchObject({ bins: 7, capacity: 182, volleys: 91, seconds: 415 });
+    expect(gauss.potentialDamage).toBeCloseTo(3112.2, 3);
+  });
+
+  it('CA24: la munición por salva sale de los misiles y de las ráfagas que gastan en cada disparo', () => {
+    const perVolley = (id: string) => getYamlItem(id)?.combat?.ammoPerVolley ?? 1;
+    expect(['MRM10-79', 'C-LRM10', 'StreakSRM2', 'GaussRifle'].map(perVolley)).toEqual([10, 10, 2, 1]);
+  });
+
+  it('CA25: cada bala de ametralladora hace el daño de un enfriamiento', () => {
+    const hunchback = findYamlMech('HBK-4G')!;
+    const withGun = mountWeapon(hunchback, stripBuild(createStockBuild(hunchback)), 'rightTorso', 'MachineGun', undefined, 1).build!;
+    const build = mountItem(hunchback, withGun, 'rightTorso', 'MachineGun_Standard_AmmoEquipment').build!;
+    const [ammo] = getYamlAmmunition(hunchback, build);
+    expect(ammo).toMatchObject({ capacity: 5200, volleys: 5200, seconds: 520 });
+    expect(ammo.potentialDamage).toBeCloseTo(780, 3);
+  });
+
+  it('CA26: una caja sin arma que la use solo enseña sus disparos', () => {
+    const build = mountItem(nightstar, stripBuild(stock), 'rightTorso', 'Gauss_Standard_AmmoEquipment').build!;
+    expect(getYamlAmmunition(nightstar, build)).toEqual([
+      { ammoType: 'Ammo.Ballistic.Gauss.Standard', label: 'Gauss Ammo', bins: 1, capacity: 26, volleys: null, seconds: null, potentialDamage: null }
+    ]);
   });
 });
