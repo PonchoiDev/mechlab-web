@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { YamlBuild } from '../../types/yaml-mechlab';
 import { createStockBuild } from './build';
 import { decodeYamlBuild, encodeYamlBuild } from './buildCode';
-import { getYamlStatsPanel } from './combat';
+import { getYamlChassisData, getYamlStatsPanel } from './combat';
 import { findYamlMech, getYamlItem } from './data';
 import { getBuildTonnage } from './stats';
 import { canInstallYamlUpgrade, getYamlUpgrades, toggleYamlUpgrade } from './traits';
@@ -103,5 +103,21 @@ describe('Enlace de la build', () => {
     const { traits: _traits, ...withoutField } = warhammerStock;
     expect(encodeYamlBuild('WHM-DNC', bare)).toBe(encodeYamlBuild('WHM-DNC', withoutField));
     expect(decodeYamlBuild(encodeYamlBuild('WHM-DNC', bare))!.build.traits ?? []).toEqual([]);
+  });
+});
+
+describe('Cifras marcadas', () => {
+  const marked = (build: YamlBuild) => Object.fromEntries(getYamlStatsPanel(warhammer, build).flat()
+    .filter(cell => cell.base !== undefined).map(cell => [cell.key, `${cell.base} ▲ ${cell.value}`]));
+
+  it('CA9: el panel marca lo que cambian los rasgos, con el valor sin ellos', () => {
+    expect(marked(warhammerStock)).toEqual({ armor: '358 ▲ 375.9', structure: '272 ▲ 299.2', speed: '74.52 ▲ 85.7' });
+    expect(marked({ ...warhammerStock, traits: [] })).toEqual({});
+  });
+
+  it("CA10: la pestaña 'Mech marca las mismas cifras", () => {
+    const tab = Object.fromEntries(getYamlChassisData(warhammer, warhammerStock).flatMap(group => group.stats)
+      .filter(stat => stat.base !== undefined).map(stat => [stat.label, `${stat.base} ▲ ${stat.value}`]));
+    expect(tab).toEqual({ 'Armor': '358 ▲ 375.9', 'Structure': '272 ▲ 299.2', 'Top speed': '74.52 ▲ 85.7' });
   });
 });

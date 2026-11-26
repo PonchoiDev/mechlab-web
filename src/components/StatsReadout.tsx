@@ -69,7 +69,7 @@ export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
       </div>
       <div className="readout-cell">
         <span className="readout-label">HEAT SPIKE</span>
-        <strong>{heatSpike}</strong>
+        <strong><UpgradedValue value={String(heatSpike)} base={base && String(base.heatSpike)} /></strong>
       </div>
       <div className="readout-cell">
         <span className="readout-label">TOTAL COOLING RATE</span>
