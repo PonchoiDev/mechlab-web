@@ -7,7 +7,7 @@
 
 ## Contexto
 
-YAML trae cuatro 'Mechs de más de 100 t: el ANH-1GT (Annihilator, 200 t), el COR-ROAM (Corsair, 115 t) y los MAD-BARA2 y MAD-TF (Marauder II, 125 t). Hasta ahora no estaban en el MechLab porque YAML les aplica reglas propias: más ranuras, actuadores más grandes, dos núcleos de motor y otro cálculo del peso.
+YAML trae cuatro 'Mechs de más de 100 t: el ANH-1GT (Annihilator, 200 t), el COR-ROAM (Corsair, 115 t) y los MAD-BARA2 y MAD-TF (Marauder II, 125 t). El ANH-1GT queda fuera: es el 'Mech de pruebas del autor de YAML («Testing for superheavy and double engines»), con un solo núcleo y 133 de 200 t, y no aparece en la lista de 'Mechs de la acción instantánea. Hasta ahora no estaban en el MechLab porque YAML les aplica reglas propias: más ranuras, actuadores más grandes, dos núcleos de motor y otro cálculo del peso.
 
 ## Reglas
 
@@ -28,7 +28,7 @@ Leídas del bytecode de YAML 0.99.4.3 (`EquipmentUtilities`, `MechlabArmorHandli
 
 ## Requisitos funcionales
 
-- **RF1.** Los cuatro superpesados están en el selector de 'Mechs del MechLab de YAML, con su build de serie y sus quirks.
+- **RF1.** Los tres superpesados jugables están en el selector de 'Mechs del MechLab de YAML, con su build de serie y sus quirks.
 - **RF2.** El tablero enseña sus ranuras y actuadores con las reglas de arriba, y el segundo núcleo como equipo del torso central.
 - **RF3.** La lectura de la build da las mismas cifras que el mechlab del juego.
 
@@ -36,7 +36,7 @@ Leídas del bytecode de YAML 0.99.4.3 (`EquipmentUtilities`, `MechlabArmorHandli
 
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
-| CA1 | Los datos de YAML | se generan | están el ANH-1GT (200 t), el COR-ROAM (115 t), el MAD-BARA2 y el MAD-TF (125 t), marcados como superpesados; ningún otro 'Mech lo está |
+| CA1 | Los datos de YAML | se generan | están el COR-ROAM (115 t), el MAD-BARA2 y el MAD-TF (125 t), marcados como superpesados; ningún otro 'Mech lo está y el ANH-1GT no está |
 | CA2 | El MAD-BARA2 de serie | se cuentan sus ranuras | la cabeza tiene 2 generales, el torso central 9, cada torso lateral 24, cada brazo 18 y cada pierna 4; sus actuadores son los de los superpesados; antes de los rellenos dinámicos le quedan 0 libres en la cabeza, 1 en el torso central, 16 en el izquierdo, 5 en el derecho, 12 en cada brazo y 3 en cada pierna, como en la captura |
 | CA3 | El MAD-BARA2 de serie | se calcula el panel | 125 de 125 t; Armor 720, Structure 495, Alpha damage 179,5, Damage/s 43,23, Weapon heat/s 10,5, Cooling 5,6, Turn rate 50,4, Alpha heat 43,23, Heat capacity 86, Torso twist 63, Speed 77,76, Torso yaw 70, Weapon range 2.475, Sensor range 1.328,12, Arm yaw 26, AMS intercept/s 12,25, AMS range 300, Ammo 5.336, como en la captura |
 | CA4 | El MAD-TF de serie, con armadura Hardened | se calcula el panel | 125 de 125 t; Armor 1.736, Structure 384, Alpha damage 186,6, Damage/s 56,95, Weapon heat/s 10,36, Cooling 4,2, Turn rate 46,9, Alpha heat 37,26, Heat capacity 72, Torso twist 58,6, Speed 68,04, Torso yaw 70, Weapon range 1.125, Sensor range 2.109,38, Arm yaw 26, AMS intercept/s 12,25, AMS range 300, Ammo 1.820, como en la captura |
@@ -52,7 +52,6 @@ Leídas del bytecode de YAML 0.99.4.3 (`EquipmentUtilities`, `MechlabArmorHandli
 ## Pendiente de comprobar en el juego
 
 - El COR-ROAM pesa 115 de 115 t con estas reglas, sin captura.
-- El ANH-1GT es el 'Mech de pruebas del autor de YAML («Testing for superheavy and double engines»): su loadout trae un solo núcleo y pesa 133 de 200 t. No está comprobado si aparece en la acción instantánea.
 
 ## Plan de pruebas
 
