@@ -5,6 +5,7 @@ import {
   createEquippedItem,
   findHardpointForWeapon,
   getAvailableSlotType,
+  getEquipConflict,
   getHardpointOccupancy,
   weaponFitsHardpoint
 } from './equipment';
@@ -109,6 +110,8 @@ export const decodeBuild = (code: string, mechs: Mech[], catalog: Item[]): Share
         continue;
       }
 
+      // Lo que el juego no deja montar junto (un segundo computador de puntería) se descarta, como al montarlo a mano.
+      if (getEquipConflict(item, loadout)) continue;
       const slotType = getAvailableSlotType(item, component, zoneItems);
       if (slotType) zoneItems.push(createEquippedItem(item, slotType));
     }

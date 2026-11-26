@@ -186,7 +186,7 @@ export const EQUIPMENT_CATEGORIES: { id: EquipmentCategory; label: string; descr
   { id: 'heatSinks', label: 'Heat sinks', description: 'Each one adds cooling and heat capacity. The engine has its own heat sink slots.' },
   { id: 'jumpJets', label: 'Jump jets', description: "Each class fits 'Mechs of a weight range, in their jump jet slots." },
   { id: 'motive', label: 'Motive upgrades', description: 'MASC and Superchargers boost speed for a while; overuse damages the legs or the center torso.' },
-  { id: 'electronics', label: 'Electronics', description: 'ECM suites and active probes, each in its own hardpoint.' },
+  { id: 'electronics', label: 'Electronics', description: "ECM suites and active probes, each in its own hardpoint. Only one active probe per 'Mech." },
   { id: 'targetingComputers', label: 'Targeting computers', description: "Only one per 'Mech. They help lasers, ballistics and PPCs at long range." },
   { id: 'ammo', label: 'Ammo', description: 'Full and half tons of ammunition. Ammo explodes when its slot is destroyed.' }
 ];

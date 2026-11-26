@@ -159,6 +159,7 @@ class Asset:
         # Clase, clase padre (en las clases de blueprint) y contenedor de cada export, como referencias:
         # negativas a imports y positivas (n) al export n-1.
         self.clases = {}
+        self.lista_exports = []
         for numero in range(total_exports):
             cabecera.posicion = inicio_exports + numero * TAMANO_EXPORT
             clase, padre, _plantilla, contenedor = cabecera.varios("iiii")
@@ -167,6 +168,8 @@ class Asset:
             self.orden.append(nombre)
             cabecera.varios("iI")
             tamano, inicio = cabecera.varios("qq")
+            # Dos exports pueden llamarse igual (solo cambia su número, que no se lee): esta lista los guarda todos.
+            self.lista_exports.append((nombre, clase, inicio - tamano_cabecera))
             # El .uexp continúa al .uasset: los desplazamientos cuentan desde el principio de los dos.
             self.exports[nombre] = inicio - tamano_cabecera
             self.tamanos[nombre] = tamano
@@ -206,6 +209,16 @@ class Asset:
     def propiedades(self, export, rutas=False):
         """Con rutas=True, las referencias a objetos salen como texto en lugar de como índice."""
         return self.lector(export, rutas).propiedades()
+
+    def subobjetos(self, prefijo_clase, rutas=False):
+        """Clase y propiedades de cada export cuya clase (un import) empieza por el prefijo, aunque se repita el nombre."""
+        resultado = []
+        for _nombre, clase, inicio in self.lista_exports:
+            if clase >= 0 or not self.imports[-clase - 1][0].startswith(prefijo_clase):
+                continue
+            lector = LectorPropiedades(self.nombres, Lector(self.datos, inicio), self.ruta_objeto if rutas else None)
+            resultado.append({"clase": self.imports[-clase - 1][0], "propiedades": lector.propiedades()})
+        return resultado
 
     def filas(self, export):
         """Filas de una DataTable, por nombre de fila."""

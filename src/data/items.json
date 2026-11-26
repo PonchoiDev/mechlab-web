@@ -1795,6 +1795,17 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
+    "equipmentTag": "Equipment.BAP.Arena",
+    "restrictions": [
+      {
+        "tag": "Equipment.AP",
+        "max": 1
+      },
+      {
+        "tag": "Equipment.BAP",
+        "max": 1
+      }
+    ],
     "description": "A cutting edge sensor enhancement suite built for arena combat. It amplifies a ‘Mech’s detection capabilities. Extends base sensor range and allows for the detection of units outside line of sight within the probe’s enhanced sensor range. Reduces the HUD disruption caused by hostile ECMs. Compatible with Active Probe hardpoints.",
     "probe": {
       "range": 550,
@@ -1816,6 +1827,7 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
+    "equipmentTag": "Equipment.ECM.Arena",
     "description": "This prototype electronic warfare suite shields the 'Mech from hostile sensors and homing missiles, serving as an effective defensive tool in arena combat. In counter mode, it suppresses sensors and disables hostile ECMs within its range. Compatible with ECM hardpoints",
     "ecm": {
       "disruptRange": 50,
@@ -1910,6 +1922,17 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
+    "equipmentTag": "Equipment.BAP",
+    "restrictions": [
+      {
+        "tag": "Equipment.AP",
+        "max": 1
+      },
+      {
+        "tag": "Equipment.BAP",
+        "max": 1
+      }
+    ],
     "description": "A top of the line sensor enhancement suite that augments a 'Mech’s detection capabilities. Extends base sensor range, and allows for the detection of units outside of line of sight within the probe's enhanced sensor range. Reduces the HUD distortion caused by hostile ECMs. Compatible with Active Probe hardpoints.",
     "probe": {
       "range": 450,
@@ -3569,6 +3592,17 @@
     ],
     "tiers": null,
     "techBase": "Clan",
+    "equipmentTag": "Equipment.BAP.Clan",
+    "restrictions": [
+      {
+        "tag": "Equipment.BAP",
+        "max": 1
+      },
+      {
+        "tag": "Equipment.AP",
+        "max": 1
+      }
+    ],
     "description": "A top of the line sensor enhancement suite that augments a 'Mech’s detection capabilities. Extends base sensor range, and allows for the detection of units outside of line of sight within the probe's enhanced sensor range. Reduces the HUD distortion caused by hostile ECMs.",
     "probe": {
       "range": 450,
@@ -3592,6 +3626,7 @@
     "heatCapacity": 2.0,
     "tiers": null,
     "techBase": "Clan",
+    "equipmentTag": "Equipment.HeatSinks.Double.Clan",
     "description": "A double heat sink. More powerful but bulkier than standard heat sinks."
   },
   "ClanECM": {
@@ -3607,6 +3642,7 @@
     ],
     "tiers": null,
     "techBase": "Clan",
+    "equipmentTag": "Equipment.ECM.Clan",
     "description": "An advanced suite of enhanced electronic countermeasures that, by default, shields friendly units within its disrupt range from hostile sensors and homing missiles. Hostiles within the disrupt range have their sensors further suppressed, and suffer accuracy penalties, against all units. Can be toggled into counter mode, which disables all hostile ECMs within its range. Compatible with ECM hardpoints.",
     "ecm": {
       "disruptRange": 220,
@@ -4415,6 +4451,7 @@
     "heatCapacity": 2.0,
     "tiers": null,
     "techBase": "InnerSphere",
+    "equipmentTag": "Equipment.HeatSinks.Double",
     "description": "A double heat sink. More powerful but bulkier than standard heat sinks."
   },
   "ERLargeLaser": {
@@ -4777,6 +4814,17 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
+    "equipmentTag": "Equipment.BAP.EWBAP",
+    "restrictions": [
+      {
+        "tag": "Equipment.AP",
+        "max": 1
+      },
+      {
+        "tag": "Equipment.BAP",
+        "max": 1
+      }
+    ],
     "description": "A prototype electronic warfare sensor enhancement suite that augments a 'Mech’s detection capabilities. Extends base sensor range, and allows for the detection of units outside of line of sight within the probe's enhanced sensor range. Reduces the HUD distortion caused by hostile ECMs. Compatible with Active Probe hardpoints.",
     "probe": {
       "range": 325,
@@ -4798,6 +4846,7 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
+    "equipmentTag": "Equipment.ECM.EWECM",
     "description": "A prototype suite of electronic warfare countermeasures that, by default, shields friendly units within its disrupt range from hostile sensors and homing missiles. Hostiles within the disrupt range have their sensors further suppressed, and suffer accuracy penalties, against all units. Can be toggled into counter mode, which disables all hostile ECMs within its range. Compatible with ECM hardpoints.",
     "ecm": {
       "disruptRange": 160,
@@ -5067,6 +5116,7 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
+    "equipmentTag": "Equipment.ECM",
     "description": "An advanced suite of enhanced electronic countermeasures that, by default, shields friendly units within its disrupt range from hostile sensors and homing missiles. Hostiles within the disrupt range have their sensors further suppressed, and suffer accuracy penalties, against all units. Can be toggled into counter mode, which disables all hostile ECMs within its range. Compatible with ECM hardpoints.",
     "ecm": {
       "disruptRange": 220,
@@ -5694,6 +5744,7 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
+    "equipmentTag": "Equipment.JumpJets.Class1",
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 90 - 100 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -5719,6 +5770,7 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
+    "equipmentTag": "Equipment.JumpJets.Class2",
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 80 - 85 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -5744,6 +5796,7 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
+    "equipmentTag": "Equipment.JumpJets.Class3",
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 60 - 75 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -5769,6 +5822,7 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
+    "equipmentTag": "Equipment.JumpJets.Class4",
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 40 - 55 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -5794,6 +5848,7 @@
     "tiers": null,
     "equipmentType": "jumpJet",
     "techBase": "InnerSphere",
+    "equipmentTag": "Equipment.JumpJets.Class5",
     "description": "A thruster that allows a 'Mech to temporarily take flight. Designed for 'Mechs weighing 20 - 35 tons.",
     "jumpJet": {
       "thrust": 12.5,
@@ -9424,6 +9479,7 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
+    "equipmentTag": "Equipment.MASC.Class1",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk I hardpoints.",
     "masc": {
       "accel": 4.0,
@@ -9449,6 +9505,7 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
+    "equipmentTag": "Equipment.MASC.Class2",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk II hardpoints.",
     "masc": {
       "accel": 4.0,
@@ -9474,6 +9531,7 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
+    "equipmentTag": "Equipment.MASC.Class3",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk III hardpoints.",
     "masc": {
       "accel": 3.85,
@@ -9499,6 +9557,7 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
+    "equipmentTag": "Equipment.MASC.Class4",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk IV hardpoints.",
     "masc": {
       "accel": 3.85,
@@ -9524,6 +9583,7 @@
     "tiers": null,
     "techBase": "LosTech",
     "dlc": 1,
+    "equipmentTag": "Equipment.MASC.Class5",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk V hardpoints.",
     "masc": {
       "accel": 3.8,
@@ -12123,6 +12183,7 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
+    "equipmentTag": "Equipment.ArenaSuperCharger.Class2",
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk II hardpoints on 30-45 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -12148,6 +12209,7 @@
     "heatCapacity": 1.0,
     "tiers": null,
     "techBase": "InnerSphere",
+    "equipmentTag": "Equipment.HeatSinks.Single",
     "description": "A standard heat sink. Both dissipates heat from the 'Mech and allows a greater build up of heat before shutdown occurs."
   },
   "SmallChemLaser_AmmoEquipment": {
@@ -12849,6 +12911,7 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
+    "equipmentTag": "Equipment.ArenaSuperCharger.Class1",
     "description": "A makeshift device created for arena combat able to override engine output levels to achieve short bursts of high speed. Sustained overuse threatens structural damage in the center torso. Compatible with Motive Upgrade Mk I hardpoints on 20-25 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -12873,6 +12936,7 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
+    "equipmentTag": "Equipment.ArenaSuperCharger.Class3",
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk III hardpoints on 50-65 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -12897,6 +12961,7 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
+    "equipmentTag": "Equipment.ArenaSuperCharger.Class4",
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk IV hardpoints on 70-85 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -12921,6 +12986,7 @@
     "tiers": null,
     "techBase": "Arena",
     "dlc": 6,
+    "equipmentTag": "Equipment.ArenaSuperCharger.Class5",
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk V hardpoints on 90-100 ton 'Mechs.",
     "masc": {
       "accel": 7.0,
@@ -12945,6 +13011,7 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
+    "equipmentTag": "Equipment.SuperCharger.Class1",
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk I hardpoints on 20-25 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -12969,6 +13036,7 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
+    "equipmentTag": "Equipment.SuperCharger.Class2",
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk II hardpoints on 30-45 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -12993,6 +13061,7 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
+    "equipmentTag": "Equipment.SuperCharger.Class3",
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk III hardpoints on 50-65 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -13017,6 +13086,7 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
+    "equipmentTag": "Equipment.SuperCharger.Class4",
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk IV hardpoints on 70-85 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -13041,6 +13111,7 @@
     "tiers": null,
     "techBase": "Retro",
     "dlc": 1,
+    "equipmentTag": "Equipment.SuperCharger.Class5",
     "description": "A patchwork device designed to override safe engine output levels to achieve short bursts of speed. Sustained overuse risks structural damage in the center torso. Compatible with Motive Upgrade Mk V hardpoints on 90-100 ton 'Mechs.",
     "masc": {
       "accel": 4.0,
@@ -13132,6 +13203,13 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
+    "equipmentTag": "Equipment.TargetingComputer.Mk1",
+    "restrictions": [
+      {
+        "tag": "Equipment.TargetingComputer",
+        "max": 1
+      }
+    ],
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.1,
@@ -13153,6 +13231,13 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
+    "equipmentTag": "Equipment.TargetingComputer.Mk2",
+    "restrictions": [
+      {
+        "tag": "Equipment.TargetingComputer",
+        "max": 1
+      }
+    ],
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.12,
@@ -13174,6 +13259,13 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
+    "equipmentTag": "Equipment.TargetingComputer.Mk3",
+    "restrictions": [
+      {
+        "tag": "Equipment.TargetingComputer",
+        "max": 1
+      }
+    ],
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.14,
@@ -13195,6 +13287,13 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
+    "equipmentTag": "Equipment.TargetingComputer.Mk4",
+    "restrictions": [
+      {
+        "tag": "Equipment.TargetingComputer",
+        "max": 1
+      }
+    ],
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.16,
@@ -13216,6 +13315,13 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
+    "equipmentTag": "Equipment.TargetingComputer.Mk5",
+    "restrictions": [
+      {
+        "tag": "Equipment.TargetingComputer",
+        "max": 1
+      }
+    ],
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.18,
@@ -13237,6 +13343,13 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
+    "equipmentTag": "Equipment.TargetingComputer.Mk6",
+    "restrictions": [
+      {
+        "tag": "Equipment.TargetingComputer",
+        "max": 1
+      }
+    ],
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.2,
@@ -13258,6 +13371,13 @@
     "tiers": null,
     "techBase": "Clan",
     "dlc": 7,
+    "equipmentTag": "Equipment.TargetingComputer.Mk7",
+    "restrictions": [
+      {
+        "tag": "Equipment.TargetingComputer",
+        "max": 1
+      }
+    ],
     "description": "A combination of advanced sensors and computer systems designed to increase sensor range and enhance the effectiveness of lasers, PPCs, autocannons, and Gauss rifles at long ranges. Only 1 targeting computer can be installed into a 'Mech.",
     "targetingComputer": {
       "sensorRange": 0.22,
@@ -13729,6 +13849,7 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
+    "equipmentTag": "Equipment.MASC.Class1",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk I hardpoints.",
     "masc": {
       "accel": 4.0,
@@ -13753,6 +13874,7 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
+    "equipmentTag": "Equipment.MASC.Class2",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk II hardpoints.",
     "masc": {
       "accel": 4.0,
@@ -13777,6 +13899,7 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
+    "equipmentTag": "Equipment.MASC.Class3",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk III hardpoints.",
     "masc": {
       "accel": 3.85,
@@ -13801,6 +13924,7 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
+    "equipmentTag": "Equipment.MASC.Class4",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk IV hardpoints.",
     "masc": {
       "accel": 3.85,
@@ -13825,6 +13949,7 @@
     "speedBoost": 0.5,
     "tiers": null,
     "techBase": "Clan",
+    "equipmentTag": "Equipment.MASC.Class5",
     "description": "Myomer Accelerator Signal Circuitry, a device used to enhance the output of the myomer musculature that propels a BattleMech’s legs, resulting in short bursts of increased mobility and ground speed. Overuse risks structural damage in the legs. Compatible with Motive Upgrade Mk V hardpoints.",
     "masc": {
       "accel": 3.8,

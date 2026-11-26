@@ -1,6 +1,7 @@
 import type { Item, WeaponType } from '../types/item';
 import type { ComponentData, EquippedItem, Hardpoint, Loadout, Zone } from '../types/mech';
 import { getItemSupportedSlotTypes, getItemWeaponType, getSizeName, getWeaponTypeName, isAmmoCompatibleWithWeapon, SIZE_RANK } from './items';
+import { describeRestrictionConflict, getRestrictionConflict } from './equipRestrictions';
 import { mapZones } from './zones';
 
 const GENERAL_SLOT_TYPE = 'General_SlotType';
@@ -152,6 +153,13 @@ export const getAvailableSlotType = (
   }
 
   return null;
+};
+
+// Por qué no se puede montar el objeto con lo que ya lleva el 'Mech (solo un computador de puntería, una sonda
+// activa...), o null si se puede. Al mover una pieza, el loadout se pasa ya sin ella.
+export const getEquipConflict = (item: Item, loadout: Loadout): string | null => {
+  const conflict = getRestrictionConflict(item, Object.values(loadout).flat().map(piece => ({ name: piece.name, tag: piece.equipmentTag })));
+  return conflict ? describeRestrictionConflict({ ...item, tag: item.equipmentTag }, conflict) : null;
 };
 
 export const canEquipItem = (item: Item, componentData: ComponentData, equippedItems: Item[]): boolean => {

@@ -56,6 +56,12 @@ FIN_DEL_JUEGO = "3060-12-31"
 REGEX_DESCRIPCION = re.compile(r'Description=NSLOCTEXT\([^,]+,\s*"[^"]+",\s*"((?:[^"\\]|\\.)*)"\)')
 REGEX_MASC = re.compile(r'MASCStats=\(([^\n]*)\)')
 REGEX_DANO_EXPLOSION = re.compile(r'(?<![A-Za-z])ExplosionDamagePerRound=([0-9.]+)')
+# Etiqueta del equipo (Equipment.TargetingComputer.Mk1): las restricciones de montaje cuentan por ella.
+REGEX_ETIQUETA_EQUIPO = re.compile(r'^\s*EquipmentType=\(TagName="([^"]+)"\)', re.MULTILINE)
+# El ECM y la sonda del juego no la exportan: la pone el constructor de su clase (generar_yaml.py).
+ETIQUETA_DE_CLASE = {"MWECMDataAsset": "Equipment.ECM", "MWBAPDataAsset": "Equipment.BAP"}
+# Restricciones de montaje (EquipRestrictions): subobjetos KelLoadoutRestrictionFunction_UniqueEquipment.
+REGEX_RESTRICCION = re.compile(r'Begin Object Class=/Script/MechWarrior\.KelLoadoutRestrictionFunction_UniqueEquipment Name="([^"]+)"')
 REGEX_RASGO_EQUIPO = re.compile(r"EquipmentTrait=[^']*'\"[^\"]*\.([A-Za-z0-9_]+)\"'")
 REGEX_QUIRK = re.compile(r"/Game/Quirks/([A-Za-z0-9_]+)\.[^\"]+\"',Value=([+-]?[0-9.]+)")
 
@@ -326,6 +332,20 @@ def leer_efectos_equipo(contenido):
     return efectos
 
 
+def leer_restricciones(contenido):
+    # KelLoadoutRestrictionFunction_UniqueEquipment (0x140f676e0 del ejecutable): el objeto no se monta si lo
+    # montado ya suma MaxEquipment piezas (1 por defecto, en el constructor de la clase) con su EquipmentTag o
+    # una etiqueta hija. Los computadores de puntería la traen con Equipment.TargetingComputer: solo uno por 'Mech.
+    restricciones = []
+    for nombre in REGEX_RESTRICCION.findall(contenido):
+        bloque = re.search(rf'Begin Object Name="{re.escape(nombre)}"(.*?)End Object', contenido, re.DOTALL)
+        etiqueta = bloque and re.search(r'EquipmentTag=\(TagName="([^"]+)"\)', bloque.group(1))
+        if etiqueta:
+            maximo = re.search(r'MaxEquipment=(\d+)', bloque.group(1))
+            restricciones.append({"tag": etiqueta.group(1), "max": int(maximo.group(1)) if maximo else 1})
+    return restricciones
+
+
 # Los nombres completos del juego solo pierden los espacios dobles («Clan SRM 4  + Artemis IV»).
 REGLAS_NOMBRE = [
     (re.compile(r"\s{2,}"), " "),
@@ -420,6 +440,12 @@ def construir_item(id_base, tiers):
         # Con varios DLC (la munición de los rifles: DLC1 y DLC6) vale el primero, el que trajo el objeto.
         item["dlc"] = int(dlc.group(1))
     if tipo_general == "equipment":
+        etiqueta = buscar_texto(REGEX_ETIQUETA_EQUIPO, contenido) or ETIQUETA_DE_CLASE.get(buscar_texto(REGEX_CLASE, contenido))
+        if etiqueta:
+            item["equipmentTag"] = etiqueta
+        restricciones = leer_restricciones(contenido)
+        if restricciones:
+            item["restrictions"] = restricciones
         descripcion = buscar_texto(REGEX_DESCRIPCION, contenido)
         if descripcion:
             item["description"] = re.sub(r'\s+', ' ', descripcion.replace("\\'", "'")).strip()
