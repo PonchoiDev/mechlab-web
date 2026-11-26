@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { filterOptionsByText } from '../utils/format';
 
 interface CheckboxDropdownProps<T extends string | number> {
   // Nombre del grupo para los lectores de pantalla (DLC, Role).
@@ -10,6 +11,8 @@ interface CheckboxDropdownProps<T extends string | number> {
   summary: string;
   onToggle: (value: T) => void;
   onClear: () => void;
+  // Con muchas opciones (los quirks de YAML), un buscador encima de la lista.
+  searchable?: boolean;
 }
 
 // Desplegable con casillas para marcar varias opciones de un filtro del selector. Las casillas son
@@ -21,9 +24,12 @@ export function CheckboxDropdown<T extends string | number>({
   selected,
   summary,
   onToggle,
-  onClear
+  onClear,
+  searchable = false
 }: CheckboxDropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const shownOptions = searchable ? filterOptionsByText(options, search) : options;
   const containerRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
@@ -58,13 +64,28 @@ export function CheckboxDropdown<T extends string | number>({
         aria-pressed={selected.length > 0}
         aria-label={`${label}: ${summary}`}
         title={title}
-        onClick={() => setIsOpen(open => !open)}
+        onClick={() => {
+          setIsOpen(open => !open);
+          setSearch('');
+        }}
       >
         {summary} <span aria-hidden="true">▾</span>
       </button>
       {isOpen && (
-        <div className="checkbox-dropdown-menu" role="group" aria-label={label}>
-          {options.map(option => {
+        <div className={searchable ? 'checkbox-dropdown-menu is-searchable' : 'checkbox-dropdown-menu'} role="group" aria-label={label}>
+          {searchable && (
+            <input
+              type="search"
+              className="checkbox-dropdown-search"
+              placeholder={`Search ${label.toLowerCase()}`}
+              aria-label={`Search ${label.toLowerCase()}`}
+              autoFocus
+              value={search}
+              onChange={event => setSearch(event.target.value)}
+            />
+          )}
+          {searchable && shownOptions.length === 0 && <span className="checkbox-dropdown-empty">No matches</span>}
+          {shownOptions.map(option => {
             const checked = selected.includes(option.value);
             return (
               <button

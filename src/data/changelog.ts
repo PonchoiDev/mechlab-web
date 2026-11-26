@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-26-filter-rows-aligned',
+    date: '2026-11-26',
+    title: 'Tidier filter rows',
+    items: [
+      "When a row of filters in the 'Mech picker or in My builds does not fit on one line, the buttons that wrap stay lined up with the first one instead of falling under the row label"
+    ]
+  },
+  {
     id: '2026-11-26-heat-spike-upgrade',
     date: '2026-11-26',
     title: 'Heat spike with cantina upgrades',

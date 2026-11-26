@@ -13,11 +13,12 @@ export function useBuildListFilters(sortKey: string) {
   const [techBase, setTechBase] = useState<'InnerSphere' | 'Clan' | null>(null);
   const [roles, setRoles] = useState<string[]>([]);
   const [features, setFeatures] = useState<string[]>([]);
+  const [parts, setParts] = useState<Record<string, string[]>>({});
   const [sort, setSort] = useBuildSort(sortKey);
 
   const filter = useMemo<BuildListFilter>(
-    () => ({ query, weightClasses, minHardpoints, minimumsOf, techBase, roles, features }),
-    [query, weightClasses, minHardpoints, minimumsOf, techBase, roles, features]
+    () => ({ query, weightClasses, minHardpoints, minimumsOf, techBase, roles, features, parts }),
+    [query, weightClasses, minHardpoints, minimumsOf, techBase, roles, features, parts]
   );
   const clear = () => {
     setQuery('');
@@ -26,9 +27,10 @@ export function useBuildListFilters(sortKey: string) {
     setTechBase(null);
     setRoles([]);
     setFeatures([]);
+    setParts({});
   };
 
-  return { filter, sort, setSort, setQuery, setWeightClasses, setMinHardpoints, setMinimumsOf, setTechBase, setRoles, setFeatures, clear };
+  return { filter, sort, setSort, setQuery, setWeightClasses, setMinHardpoints, setMinimumsOf, setTechBase, setRoles, setFeatures, setParts, clear };
 }
 
 export type BuildListFiltersState = ReturnType<typeof useBuildListFilters>;

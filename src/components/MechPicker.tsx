@@ -235,6 +235,7 @@ export function MechPicker({ mechs, selectedIndex, onSelect, prominent = false }
 
             <div className="mech-filter-row">
               <span className="mech-filter-label">EQUIPMENT</span>
+              <span className="mech-filter-group">
               <button
                 type="button"
                 className="mech-filter-chip"
@@ -282,10 +283,12 @@ export function MechPicker({ mechs, selectedIndex, onSelect, prominent = false }
               >
                 Motive
               </button>
+              </span>
             </div>
 
             <div className="mech-filter-row">
               <span className="mech-filter-label" title="Omni hardpoints count as energy, ballistic or missile">MIN HARDPOINTS</span>
+              <span className="mech-filter-group">
               {MINIMUM_TYPES.map(type => {
                 return (
                   <FilterStepper
@@ -299,6 +302,7 @@ export function MechPicker({ mechs, selectedIndex, onSelect, prominent = false }
                   />
                 );
               })}
+              </span>
             </div>
 
             <div className="mech-filter-row">

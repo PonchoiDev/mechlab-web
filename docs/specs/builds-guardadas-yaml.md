@@ -18,6 +18,7 @@ Los MechLabs de MW5 y de BATTLETECH guardan builds en el navegador, con nombre, 
   - **Anclajes mínimos** de energía, balística, misiles, omni, artillería, AMS y cuerpo a cuerpo, del 'Mech o de las armas montadas, como en MW5.
   - **Equipo montado:** Jump jets, ECM, AMS, Active probe, Motive (MASC o supercharger), TSM y Targeting computer, por la etiqueta del juego de cada pieza (`Equipment.JumpJets`, `.ECM`, `.BAP`, `.MASC`, `.SuperCharger`, `.ArenaSuperCharger`, `.TripleStrengthMyomer`, `.TargetingComputer`).
   - **De la variante:** Hero, Omni, Superheavy y YAML only, como en el selector de 'Mechs; y **Cantina upgrades**, las builds con alguna mejora de la cantina.
+  - **Piezas:** un desplegable por pieza interna, **Engine** (el tipo de motor), **Structure**, **Armor** y **Heat sinks** (el kit de refrigeración), con las que llevan las builds guardadas; con varias marcadas en una, vale cualquiera, y las de distintas piezas se suman. La lista común lo admite para cualquier MechLab (`partGroups` de `BuildListConfig`); de momento solo lo usa YAML. En el selector de 'Mechs no hace falta: las piezas de serie se cambian en el MechLab, y las fijas de los OmniMechs ya se buscan con Omni.
 - **RF5.** Cada build de la lista enseña su chasis y variante, su peso sobre el tonelaje y su daño alfa (el del panel), las armas montadas por tipo y unas etiquetas: el tipo de motor, la estructura, la armadura y el kit de refrigeración si no son los estándar, los retrorreactores con su número, y ECM, AP, MASC, SC, TSM y TC si los lleva.
 
 ## Criterios de aceptación
@@ -32,6 +33,7 @@ Los MechLabs de MW5 y de BATTLETECH guardan builds en el navegador, con nombre, 
 | CA6 | Builds de un 'Mech Clan omni, de un superpesado y de una variante nueva de YAML | se resumen | `techBase` Clan y el rasgo `omni`; el rasgo `superheavy`; el rasgo `yamlOnly` |
 | CA7 | Un código que ya no se puede abrir | se resume | sin datos del 'Mech, y la lista dice que ya no se puede abrir |
 | CA8 | Builds resumidas | se filtran con los filtros comunes | los rasgos, los mínimos (con los cuerpo a cuerpo) y la tecnología filtran como en MW5 |
+| CA9 | El NSR-9J de serie y el MAD-BARA2 de serie guardados | se filtra por Engine «XL Engine» | queda el NSR-9J; con «XL Engine» y «XL Engine (C)», los dos; con Structure «Structure standard», solo el NSR-9J |
 
 ## Fuera de alcance
 
@@ -40,5 +42,5 @@ Los MechLabs de MW5 y de BATTLETECH guardan builds en el navegador, con nombre, 
 
 ## Plan de pruebas
 
-1. **Lógica:** `src/utils/yaml/savedBuilds.test.ts` (CA1 a CA8).
+1. **Lógica:** `src/utils/yaml/savedBuilds.test.ts` (CA1 a CA9).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: guardar, actualizar, abrir My builds, filtrar, renombrar, duplicar, cargar, exportar e importar; comprobar que My builds del MechLab de MW5 no ve las de YAML.

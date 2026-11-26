@@ -41,8 +41,8 @@ const MAX_MINIMUM = 20;
 // Buscador, orden y filtros de las listas de builds guardadas (la ventana My builds y el comparador),
 // comunes a los dos MechLabs.
 export function BuildsListControls({ state, config, rows, showSearch = true, leading, byVotes }: BuildsListControlsProps) {
-  const { filter, sort, setSort, setQuery, setWeightClasses, setMinHardpoints, setMinimumsOf, setTechBase, setRoles, setFeatures } = state;
-  const { query, weightClasses, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [] } = filter;
+  const { filter, sort, setSort, setQuery, setWeightClasses, setMinHardpoints, setMinimumsOf, setTechBase, setRoles, setFeatures, setParts } = state;
+  const { query, weightClasses, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [], parts = {} } = filter;
   const minHardpoints = filter.minHardpoints ?? {};
   const counts = useMemo(() => countBuildsByWeightClass(rows), [rows]);
   // Solo los roles de las builds guardadas, para no ofrecer filtros vacíos.
@@ -50,6 +50,11 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
   // Ningún arma es omni: con Weapons ese contador no sale.
   const hardpointTypes = minimumsOf === 'weapons' ? config.hardpointTypes.filter(type => type.id !== 'omni') : config.hardpointTypes;
   const noun = minimumsOf === 'weapons' ? 'weapons' : 'hardpoints';
+  // Las piezas de cada grupo que llevan las builds guardadas.
+  const partOptions = useMemo(() => Object.fromEntries((config.partGroups ?? []).map(group => [
+    group.id,
+    [...new Set(rows.map(row => row.parts?.[group.id]).filter((value): value is string => !!value))].sort()
+  ])), [config, rows]);
 
   const toggle = (id: BuildWeightClass) =>
     setWeightClasses(weightClasses.includes(id) ? weightClasses.filter(other => other !== id) : [...weightClasses, id]);
@@ -129,6 +134,7 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
       </div>
       <div className="builds-classes" role="group" aria-label="Equipment">
         <span className="builds-filter-label">Equipment</span>
+        <span className="mech-filter-group">
         {config.featureOptions.map(option => (
           <button
             key={option.id}
@@ -141,9 +147,32 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
             {option.label}
           </button>
         ))}
+        </span>
       </div>
+      {config.partGroups && rows.length > 0 && (
+        <div className="builds-classes" role="group" aria-label="Parts">
+          <span className="builds-filter-label">Parts</span>
+          <span className="mech-filter-group">
+            {config.partGroups.map(group => (
+              <span key={group.id} className="builds-part-filter">
+                <span className="builds-filter-label">{group.label}</span>
+                <CheckboxDropdown
+                  label={group.label}
+                  title={group.title}
+                  options={(partOptions[group.id] ?? []).map(value => ({ value, label: value }))}
+                  selected={parts[group.id] ?? []}
+                  summary={describeSelection(parts[group.id] ?? [])}
+                  onToggle={value => setParts({ ...parts, [group.id]: toggleValue(parts[group.id] ?? [], value) })}
+                  onClear={() => setParts({ ...parts, [group.id]: [] })}
+                />
+              </span>
+            ))}
+          </span>
+        </div>
+      )}
       <div className="builds-hardpoints" role="group" aria-label={`Minimum ${noun}`}>
         <span className="builds-filter-label">Min</span>
+        <span className="mech-filter-group">
         <span className="builds-minimums-of" role="group" aria-label="Compare minimums with">
           {MINIMUMS_OF.map(option => (
             <button
@@ -168,6 +197,7 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
             onChange={value => setMinHardpoints({ ...minHardpoints, [type.id]: value })}
           />
         ))}
+        </span>
       </div>
     </div>
   );

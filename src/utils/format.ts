@@ -12,3 +12,12 @@ export const joinWithCounts = (names: string[]): string => {
   return [...counts].map(([name, count]) => (count > 1 ? `${name} ×${count}` : name)).join(', ');
 };
 
+
+// Sin mayúsculas ni acentos, para buscar en listas («ármor» encuentra «Armor»).
+const foldText = (text: string) => text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+// Las opciones de un desplegable cuyo nombre contiene lo escrito; sin texto, todas.
+export const filterOptionsByText = <T extends { label: string }>(options: T[], query: string): T[] => {
+  const words = foldText(query).split(/\s+/).filter(Boolean);
+  return words.length === 0 ? options : options.filter(option => words.every(word => foldText(option.label).includes(word)));
+};

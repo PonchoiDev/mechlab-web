@@ -95,4 +95,12 @@ describe('resumen para la lista', () => {
     expect(melee.every(row => (row.hardpoints?.melee ?? 0) >= 1)).toBe(true);
     expect(filterBuildRows(rows, { query: 'nightstar', weightClasses: [] })).toHaveLength(1);
   });
+
+  it('CA9: el filtro de piezas internas', () => {
+    const rows = ['NSR-9J', 'MAD-BARA2'].map(id => summarizeYamlSavedBuild(stockOf(id)).listRow);
+    const variants = (parts: Record<string, string[]>) => filterBuildRows(rows, { query: '', weightClasses: [], parts }).map(row => row.variant);
+    expect(variants({ engine: ['XL Engine'] })).toEqual(['NSR-9J']);
+    expect(variants({ engine: ['XL Engine', 'XL Engine (C)'] })).toEqual(['NSR-9J', 'MAD-BARA2']);
+    expect(variants({ engine: ['XL Engine', 'XL Engine (C)'], structure: ['Structure standard'] })).toEqual(['NSR-9J']);
+  });
 });

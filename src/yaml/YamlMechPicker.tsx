@@ -185,10 +185,14 @@ export function YamlMechPicker({ mechs, current, onSelect }: YamlMechPickerProps
             </div>
             <div className="mech-filter-row">
               <span className="mech-filter-label">VARIANT</span>
-              {flag('hero', 'Hero', "Only hero 'Mechs")}
-              {flag('omni', 'Omni', 'Only OmniMechs')}
-              {flag('superheavy', 'Superheavy', "Only superheavy 'Mechs, 105 t or more")}
-              {flag('yamlOnly', 'YAML only', 'Only the variants added by YAML')}
+              <span className="mech-filter-group">
+                {flag('hero', 'Hero', "Only hero 'Mechs")}
+                {flag('omni', 'Omni', 'Only OmniMechs')}
+                {flag('superheavy', 'Superheavy', "Only superheavy 'Mechs, 105 t or more")}
+                {flag('yamlOnly', 'YAML only', 'Only the variants added by YAML')}
+              </span>
+            </div>
+            <div className="mech-filter-row">
               <span className="mech-filter-label">QUIRKS</span>
               <span className="yaml-quirk-filter">
                 <CheckboxDropdown
@@ -199,11 +203,13 @@ export function YamlMechPicker({ mechs, current, onSelect }: YamlMechPickerProps
                   summary={describeSelection(filters.quirks.map(id => quirkOptions.find(option => option.value === id)?.label ?? id))}
                   onToggle={(quirk) => updateFilters(currentFilters => ({ quirks: toggleValue(currentFilters.quirks, quirk) }))}
                   onClear={() => updateFilters(() => ({ quirks: [] }))}
+                  searchable
                 />
               </span>
             </div>
             <div className="mech-filter-row">
               <span className="mech-filter-label" title="Omni hardpoints count as energy, ballistic or missile">MIN HARDPOINTS</span>
+              <span className="mech-filter-group">
               {YAML_HARDPOINT_FILTER_TYPES.map(type => (
                 <FilterStepper
                   key={type}
@@ -215,6 +221,7 @@ export function YamlMechPicker({ mechs, current, onSelect }: YamlMechPickerProps
                   onChange={value => updateFilters(currentFilters => ({ minHardpoints: { ...currentFilters.minHardpoints, [type]: value } }))}
                 />
               ))}
+              </span>
             </div>
             <div className="mech-filter-row">
               <label className="mech-filter-label" htmlFor={`${idPrefix}-year`}>AVAILABLE BY</label>
