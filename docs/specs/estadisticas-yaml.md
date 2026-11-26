@@ -25,6 +25,7 @@ Con YAML instalado, esas cifras las calcula el propio mod (blueprint `MechAlphaS
 | Tiempo de la salva | Proyectiles: `NumberOfTimesToFire × DelayBetweenFiring`; misiles: `NumberOfMissiles × MissileInterval` |
 | AMS | `MissileDestructionRate` de cada nivel (el nivel 3 lo trae en su asset: 4,025 frente a 3,5) y `MaxRange` |
 | Cuerpo a cuerpo | `Melee.Damage`, `Melee.Duration` y `Cooldown` |
+| Munición por salva | La regla del MechLab de MW5 (`tools/generar_items.py`): un disparo por misil (`NumberOfMissiles`, o 1) y, si el proyectil lleva `bConsumeAmmoOnSubsequentFire`, por cada disparo de la ráfaga (`NumberOfTimesToFire`). El MRM 10 de YAW gasta 10; el LRM 10 de Clan, 10 (5 × 2); el UAC/20, 1. Los perdigones de los LB-X no gastan munición propia. Solo se guarda si no es 1 |
 
 Las armas de los mods dejan de salir una vez por nivel en el inventario (`CEERPPC79`, `CEERPPC79_Lvl2`...): como las del juego, son un objeto con sus niveles. Además:
 
@@ -105,7 +106,12 @@ Debajo del tablero, como en el MechLab de MW5:
 
 - **Weapon performance:** una fila por arma montada con su ubicación, daño, calor, enfriamiento, daño por segundo, calor por segundo, alcance óptimo y máximo, y una fila de totales que da las mismas cifras que el panel.
 - **Damage by range:** el radar del MechLab de MW5 (`RangeRadar`). Cada arma hace todo su daño hasta su alcance óptimo y baja en línea recta hasta 0 en su alcance máximo (`GlobalDamageScaleAtMaxRange` de YAW es 0).
-- **Installed ammunition:** cajas y disparos de cada tipo de munición.
+- **Installed ammunition:** como en el MechLab de MW5, cajas y disparos de cada tipo de munición y, si la usa algún arma montada:
+  - **salvas:** las que da disparando a la vez todas las armas que la usan (disparos entre la munición por salva de todas, hacia abajo);
+  - **segundos de fuego:** disparos entre lo que gastan por segundo, cada arma su munición por salva cada ciclo (enfriamiento más tiempo de la salva, el mismo del daño por segundo). Las ametralladoras y los lanzallamas pesados gastan una bala en cada enfriamiento (0,1 s; 0,025 s las de cuatro cañones);
+  - **daño potencial:** las salvas por el daño de una salva de esas armas. Las ametralladoras, que hacen su daño por segundo, cuentan en cada bala el daño de un enfriamiento.
+
+  El MML usa la munición de LRM y la de SRM: cuenta en las dos, como si disparara cada una. Una munición que no usa ninguna arma enseña solo sus disparos.
 
 ## Criterios de aceptación
 
@@ -135,6 +141,10 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 | CA20 | El NSR-9J vaciado, sin núcleo, con el Royal DHS Kit | se monta un disipador doble en el torso izquierdo | Cooling 0,4 (0,2 del disipador + 0,2 del kit), Heat capacity 32 y 32 t, como en el juego |
 | CA21 | El INC-1 de serie (Clan, no omni) | se cambia la armadura por la Ferro Lamellor (C) | Structure 133,2 (111 × 1,2) y 32 t, como en la captura |
 | CA22 | El NSR-9J de serie, con núcleo 285 y un disipador doble en la ranura de disipadores del motor | se intenta montar otro disipador en esa ranura | no cabe: el núcleo 285 da 1 ranura (⌊285 / 25⌋ − 10) |
+| CA23 | La build de referencia (siete cajas de Gauss, 182 disparos, y dos Gauss Rifle con 4,56 s de ciclo) | se calcula su munición | 91 salvas, 415 s de fuego (182 / (2 / 4,56)) y 3.112,2 de daño potencial (91 × 2 × 17,1) |
+| CA24 | El MRM 10 de YAW, el LRM 10 de Clan, el Streak SRM 2 y el Gauss Rifle | se lee su munición por salva | 10, 10, 2 y 1 |
+| CA25 | El HBK-4G vaciado (sin bonificaciones de enfriamiento) con una Machine Gun de nivel 1 (1,5 de daño por segundo, 0,1 s de enfriamiento) y una caja de 5.200 balas | se calcula su munición | 520 s de fuego y 780 de daño potencial (5.200 × 1,5 × 0,1) |
+| CA26 | Una caja de munición sin arma que la use | se calcula su munición | sus disparos, sin salvas, segundos ni daño potencial |
 
 ## Fuera de alcance
 
@@ -150,5 +160,5 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/combat.test.ts` (CA1 y CA3 a CA9).
+1. **Datos y lógica:** `src/utils/yaml/combat.test.ts` (CA1, CA3 a CA9 y CA23 a CA26).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: el panel con el NSR-9J, cambiar el nivel de un arma en el inventario y en el tablero, el análisis y el radar.
