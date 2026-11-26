@@ -165,12 +165,20 @@ function optimalRangeOf(combat: YamlCombat, stats: YamlWeaponTier, bonuses: Yaml
   return combat.rangeRule === 'gaussImproved' ? optimal * GLOBAL_MAX_RANGE_MULTIPLIER * GAUSS_RANGE_MULTIPLIER : optimal;
 }
 
+// Sin quirks ni equipo que cambien el arma: las cifras del arma sola (la página de equipo de YAML).
+const NO_BONUSES: YamlWeaponBonuses = {
+  damage: 1, heat: 1, cooldown: 1, duration: 1, optimalRange: 1, maxRange: 1, heatDamage: 1, missilesDestroyed: 1, speed: 1
+};
+
 function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoint: string, itemId: string, tier: number): Omit<YamlWeaponPerformance, 'damagePerTon'> | null {
+  return performanceWith(getWeaponBonuses(mech, build, zone, itemId), zone, hardpoint, itemId, tier);
+}
+
+function performanceWith(bonuses: YamlWeaponBonuses, zone: Zone, hardpoint: string, itemId: string, tier: number): Omit<YamlWeaponPerformance, 'damagePerTon'> | null {
   const item = getYamlItem(itemId);
   const combat = item?.combat;
   const stats = getWeaponTierStats(itemId, tier);
   if (!item || !combat || !stats) return null;
-  const bonuses = getWeaponBonuses(mech, build, zone, itemId);
   const optimalRange = optimalRangeOf(combat, stats, bonuses);
   // YAWBallistic y YAWMissile: la velocidad del asset × GlobalProjectileVelocityMultiplier × speedMulti, también
   // en los misiles (en combate, el emisor de misiles de YAW no aplica el multiplicador global).
@@ -211,16 +219,24 @@ function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoi
 
 const isRanged = (weapon: Pick<YamlWeaponPerformance, 'family'>) => weapon.family !== 'melee' && weapon.family !== 'ams';
 
+const withDamagePerTon = (performance: Omit<YamlWeaponPerformance, 'damagePerTon'>): YamlWeaponPerformance => {
+  const tons = getYamlItem(performance.item)?.tons ?? 0;
+  return { ...performance, damagePerTon: isRanged(performance) && tons > 0 ? performance.damage / tons : null };
+};
+
+// Un arma sola, en su nivel, como la cuenta el MechLab sin bonificaciones (docs/specs/pagina-equipo-yaml.md).
+export function getBaseWeaponPerformance(itemId: string, tier: number): YamlWeaponPerformance | null {
+  const performance = performanceWith(NO_BONUSES, 'centerTorso', '', itemId, tier);
+  return performance && withDamagePerTon(performance);
+}
+
 // Las armas montadas, sin los ataques de los actuadores (manos y antebrazos), que el juego no cuenta.
 export function getWeaponPerformance(mech: YamlMech, build: YamlBuild): YamlWeaponPerformance[] {
   return build.weapons
     .filter(mounted => !getYamlItem(mounted.item)?.actuator)
     .map(mounted => weaponPerformance(mech, build, mounted.zone, mounted.hardpoint, mounted.item, mounted.tier ?? getDefaultTier(mounted.item)))
     .filter(performance => performance !== null)
-    .map(performance => {
-      const tons = getYamlItem(performance.item)?.tons ?? 0;
-      return { ...performance, damagePerTon: isRanged(performance) && tons > 0 ? performance.damage / tons : null };
-    });
+    .map(withDamagePerTon);
 }
 
 // El daño de todas las armas a distancia entre su tonelaje, como el total de la tabla del MechLab de MW5.
