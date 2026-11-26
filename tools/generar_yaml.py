@@ -523,6 +523,7 @@ PROPIEDADES_DE_OBJETO = BONIFICACIONES_DE_EQUIPO + (
     "relativeWeight", "roundWeightType", "roundWeightUp", "engineRelativeWeight", "structureWeightMulti", "structureMulti",
     "armorWeightMulti", "armorPerTon", "armorMulti", "engineHeatsinkEfficiency", "engineHeatsinkCapacity", "heatEfficiency",
     "fixed", "coolingMulti", "coolingMultiScope", "heatCapacityBonus", "bundledHeatsinks", "internalHeatsinkBonus",
+    "engineHeatsinkMulti",
     "topSpeedMulti", "engineHealthType",
 )
 CAMPOS_DE_TEXTO = ("roundWeightType", "coolingMultiScope", "engineHealthType")

@@ -183,6 +183,22 @@ function engineInternals(mech: YamlMech, build: YamlBuild): { heatSinks: number;
   return { heatSinks: heatSinks * cores, missing, cores };
 }
 
+// DLCGetInstalledInternals: las ranuras de disipadores del motor que se pueden usar. Por núcleo, los disipadores que
+// trae por encima de 10, en unidades de su kit (bundledHeatsinks) y × engineHeatsinkMulti; ninguna si no llega a 10.
+export function getEngineHeatSinkSlots(mech: YamlMech, build: YamlBuild): number {
+  const core = engineCore(build);
+  if (!core) return 0;
+  const kit = getInstalledEquipment(mech, build).filter(({ zone, item }) => zone === 'centerTorso' && tagContains(item.category, 'Equipment.Cooling')).at(-1)?.item;
+  const bundled = kit?.bundledHeatsinks ?? 1;
+  const internal = bundled * Math.trunc((core.rating ?? 0) / RATING_PER_ENGINE_HEAT_SINK);
+  if (internal < FREE_HEAT_SINKS) return 0;
+  const multi = getLoadoutProperties(mech, build).reduce((total, entry) => {
+    const value = numberOf(entry, 'engineHeatsinkMulti');
+    return value === undefined ? total : addMulti(total, value);
+  }, 1);
+  return Math.trunc(f(Math.trunc((internal - FREE_HEAT_SINKS) / bundled) * multi)) * getEngineCores(mech, build);
+}
+
 export function getEngineHeatSinks(build: YamlBuild, mech?: YamlMech): number {
   if (!mech) {
     const rating = getEngineRating(build);
@@ -372,9 +388,13 @@ function getBonuses(mech: YamlMech, build: YamlBuild, structure: boolean) {
     const frontMulti = structure ? item.structureComponentMulti : item.armorComponentFrontMulti;
     if (frontMulti !== undefined) multiply(`${zone}:front`, frontMulti);
   }
-  // GetEquipmentArmorMulti: el armorMulti de cada pieza montada (la Hardened, 2) multiplica la armadura de todo el
-  // 'Mech, como el de los quirks.
-  let mechMulti = structure ? 1 : sources.reduce((total, { item }) => item.armorMulti === undefined ? total : addMulti(item.armorMulti, total), 1);
+  // GetEquipmentArmorMulti y GetEquipmentStructureMulti: el armorMulti y el structureMulti de cada pieza montada (la
+  // Hardened, 2; la estructura reforzada, 2; la Ferro Lamellor Clan, 1,2 de estructura) multiplican la armadura o la
+  // estructura de todo el 'Mech, como los de los quirks.
+  let mechMulti = sources.reduce((total, { item }) => {
+    const multi = structure ? item.structureMulti : item.armorMulti;
+    return multi === undefined ? total : addMulti(multi, total);
+  }, 1);
   for (const properties of getQuirkProperties(mech)) {
     const perPart = properties[structure ? 'structureBonus' : 'armorBonus'] as Record<string, number> | undefined;
     for (const [part, value] of Object.entries(perPart ?? {})) if (PART_NAMES[part]) add(`${PART_NAMES[part]}:front`, value);
@@ -404,12 +424,11 @@ export function getArmorPoints(mech: YamlMech, build: YamlBuild): { installed: n
   return { installed, bonus: f(total * mechMulti) - installed };
 }
 
-// Get Total Struct With Bonuses: por ubicación, la máxima (× el structureMulti de la estructura montada) × su
-// multiplicador × el de los quirks, más su bonus. Los rasgos multiplican la máxima (GetMaxStructureForPart nativa)
+// Get Total Struct With Bonuses: por ubicación, la máxima × su multiplicador × el de todo el 'Mech (el equipo
+// montado y los quirks), más su bonus. Los rasgos multiplican la máxima (GetMaxStructureForPart nativa)
 // y el bonus (ApplyEquipmentPropertiesStructureBonuses de YAML).
 export function getStructurePoints(mech: YamlMech, build: YamlBuild): { base: number; total: number } {
   const { bonuses, multis, mechMulti } = getBonuses(mech, build, true);
-  const itemMulti = internal(build, 'Structureslot')?.structureMulti ?? 1;
   const traitMulti = getTraitMultiplier(build, 'structure');
   let base = 0;
   let total = 0;
@@ -417,7 +436,7 @@ export function getStructurePoints(mech: YamlMech, build: YamlBuild): { base: nu
     const surface: Surface = `${zone}:front`;
     const bonus = bonuses.get(surface) ?? 0;
     base += mech.zones[zone].structure + bonus;
-    const maximum = f(f(mech.zones[zone].structure * itemMulti) * traitMulti);
+    const maximum = f(mech.zones[zone].structure * traitMulti);
     total = f(total + f(f(f(maximum * (multis.get(surface) ?? 1)) * mechMulti) + f(bonus * traitMulti)));
   }
   return { base, total };
