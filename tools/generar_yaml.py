@@ -994,6 +994,9 @@ REGEX_RELLENO = re.compile(r"^DYNAMIC_FILLER_SIZE_(\d+)$", re.IGNORECASE)
 
 # Rellenos técnicos de YAML, que no son 'Mechs: el que ejecuta código al arrancar y el de chatarra del desguace.
 MDA_TECNICOS = {"YAML_RUNONCE_DUMMY_MDA", "PARTIAL_SALVAGE_MDA"}
+# El 'Mech de pruebas del autor de YAML («Testing for superheavy and double engines»): un solo núcleo, 133 de
+# 200 t, y no aparece en la lista de 'Mechs de la acción instantánea del juego.
+MDA_DE_PRUEBAS = {"ANH-1GT_MDA"}
 
 
 def construir_variante(id_mech, chasis, variante, dlc, datos, loadout, nombre_mda, objetos, avisos, asignaciones, tamanos, ocultos, rasgos):
@@ -1168,7 +1171,7 @@ def main():
         if id_mech in vistos or id_mech in mechs_juego:
             id_mech = nombre_mda.removesuffix("_MDA")
         toneladas = datos.get("MechDataStats", {}).get("BaseStats", {}).get("Tons")
-        if (not ruta.startswith("/YetAnotherMechlab/") or nombre_mda in MDA_TECNICOS or not variante or not toneladas
+        if (not ruta.startswith("/YetAnotherMechlab/") or nombre_mda in MDA_TECNICOS | MDA_DE_PRUEBAS or not variante or not toneladas
                 or id_mech in vistos or id_mech in mechs_juego):
             continue
         nombre_loadout = loadout_de_serie(variante, datos, nombre_mda, asignaciones, loadouts)
