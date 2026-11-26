@@ -156,6 +156,22 @@ export const countWeaponTypes = (types: (string | null | undefined)[], order: st
     .filter(entry => entry.count > 0);
 
 // Lo que cambia de un juego a otro en las listas de builds (la ventana My builds y el comparador).
+// Un interruptor de un grupo de piezas: enseña u oculta las builds con ese valor.
+export interface PartToggle {
+  value: string;
+  label: string;
+  icon: string;
+}
+
+// Los interruptores de un grupo guardan los valores visibles en el filtro del grupo, como el desplegable: sin
+// ninguno, se ven todos. El último visible no se apaga, para que la lista no se quede vacía por el filtro.
+export const togglePartVisibility = (selected: string[], value: string, all: string[]): string[] => {
+  const visible = selected.length > 0 ? all.filter(option => selected.includes(option)) : all;
+  if (visible.includes(value)) return visible.length > 1 ? visible.filter(option => option !== value) : selected;
+  const next = all.filter(option => option === value || visible.includes(option));
+  return next.length === all.length ? [] : next;
+};
+
 export interface BuildListConfig {
   // Tipos de anclaje de los mínimos, con la abreviatura del selector de 'Mechs.
   hardpointTypes: { id: string; short: string; label: string }[];
@@ -167,7 +183,8 @@ export interface BuildListConfig {
   // Los roles que se ofrecen, de entre los de las builds guardadas, en el orden de cada juego.
   orderRoles: (roles: string[]) => string[];
   // Grupos de piezas con un desplegable cada uno (BuildListRow.parts); sin ellos no sale la fila.
-  partGroups?: { id: string; label: string; title: string }[];
+  // Con toggles, el grupo son interruptores con icono, uno por valor, en lugar de un desplegable.
+  partGroups?: { id: string; label: string; title: string; toggles?: PartToggle[] }[];
   // La etiqueta de esa fila; null sin etiqueta, cuando el grupo no es una pieza (Source en la página de builds).
   partGroupsLabel?: string | null;
 }

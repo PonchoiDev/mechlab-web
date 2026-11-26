@@ -7,6 +7,7 @@ import {
   BUILD_SORTS,
   BUILD_WEIGHT_CLASSES,
   countBuildsByWeightClass,
+  togglePartVisibility,
   type BuildListConfig,
   type BuildListRow,
   type BuildMinimumsOf,
@@ -157,7 +158,26 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
             {config.partGroups.map(group => (
               <span key={group.id} className="builds-part-filter">
                 <span className="builds-filter-label">{group.label}</span>
-                <CheckboxDropdown
+                {group.toggles ? group.toggles.map(toggle => {
+                  const selected = parts[group.id] ?? [];
+                  const all = group.toggles!.map(option => option.value);
+                  const isVisible = selected.length === 0 || selected.includes(toggle.value);
+                  const isLast = isVisible && (selected.length === 1 || all.length === 1);
+                  return (
+                    <button
+                      key={toggle.value}
+                      type="button"
+                      className="mech-filter-chip builds-part-toggle"
+                      aria-pressed={isVisible}
+                      aria-label={`${toggle.label} builds`}
+                      title={isLast ? `${toggle.label} builds are the only ones shown` : `${isVisible ? 'Hide' : 'Show'} ${toggle.label} builds`}
+                      disabled={isLast}
+                      onClick={() => setParts({ ...parts, [group.id]: togglePartVisibility(selected, toggle.value, all) })}
+                    >
+                      <img src={toggle.icon} alt="" />
+                    </button>
+                  );
+                }) : <CheckboxDropdown
                   label={group.label}
                   title={group.title}
                   options={(partOptions[group.id] ?? []).map(value => ({ value, label: value }))}
@@ -165,7 +185,7 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
                   summary={describeSelection(parts[group.id] ?? [])}
                   onToggle={value => setParts({ ...parts, [group.id]: toggleValue(parts[group.id] ?? [], value) })}
                   onClear={() => setParts({ ...parts, [group.id]: [] })}
-                />
+                />}
               </span>
             ))}
           </span>

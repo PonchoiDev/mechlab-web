@@ -15,11 +15,20 @@ const mechs = mechsData as unknown as Mech[];
 const items = Object.values(itemsData) as Item[];
 const mechsById = new Map(mechs.map(mech => [mech.id, mech]));
 
-// Las builds del MechLab de YAML se publican aquí con las de MW5 (docs/specs/publicar-builds-yaml.md). El
-// desplegable Source las separa; en My builds de esta página todas son de MW5, así que no sale.
+// Las builds del MechLab de YAML se publican aquí con las de MW5 (docs/specs/publicar-builds-yaml.md). Dos
+// interruptores, con el icono de MW5 (tools/extraer_logos.py) y el de Yet Another Mechlab, enseñan u ocultan
+// cada origen; en My builds de esta página todas son de MW5, así que no salen.
 const PUBLISHED_BUILD_LIST: BuildListConfig = {
   ...MERCS_BUILD_LIST,
-  partGroups: [{ id: 'source', label: 'Source', title: 'MechLab the build was made in: the game without mods or YAML' }],
+  partGroups: [{
+    id: 'source',
+    label: 'Source',
+    title: 'MechLab the build was made in: the game without mods or YAML',
+    toggles: [
+      { value: 'Vanilla', label: 'Vanilla', icon: `${import.meta.env.BASE_URL}mechlab/mw5-icon.png` },
+      { value: 'YAML', label: 'YAML', icon: `${import.meta.env.BASE_URL}mechlab/yaml/mods/yet-another-mechlab-color.png` }
+    ]
+  }],
   partGroupsLabel: null
 };
 
