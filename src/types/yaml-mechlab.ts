@@ -203,6 +203,8 @@ export interface YamlItem {
   heatCapacityBonus?: number;
   bundledHeatsinks?: number;
   internalHeatsinkBonus?: number;
+  // DLCGetInstalledInternals: multiplica las ranuras de disipadores del motor de cada núcleo.
+  engineHeatsinkMulti?: number;
   topSpeedMulti?: number;
   engineHealthType?: string;
   armorComponentFrontMulti?: number;

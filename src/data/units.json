@@ -368,7 +368,7 @@
     "1": {
      "damage": 4.2,
      "heatPerShot": 0.375,
-     "cooldown": 2.887,
+     "cooldown": 2.8875,
      "range": 337.5,
      "maxRange": 1375.0,
      "rpm": 20.8,
@@ -395,7 +395,7 @@
     "1": {
      "damage": 15.6,
      "heatPerShot": 7.875,
-     "cooldown": 4.037,
+     "cooldown": 4.0375,
      "range": 1012.5,
      "maxRange": 1518.8,
      "rpm": 14.9,
@@ -548,6 +548,7 @@
    },
    "volleyProjectiles": 1,
    "volleyHeatShots": 1,
+   "continuous": true,
    "techBase": "Clan",
    "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan",
    "ammoPerVolley": 1,
@@ -700,7 +701,7 @@
     "1": {
      "damage": 1.68,
      "heatPerShot": 0.27,
-     "cooldown": 3.094,
+     "cooldown": 3.0938,
      "range": 1125.0,
      "maxRange": 1125.0,
      "rpm": 19.4,
@@ -790,6 +791,7 @@
    },
    "volleyProjectiles": 1,
    "volleyHeatShots": 1,
+   "continuous": true,
    "techBase": "Clan",
    "ammoType": "Ammo.Ballistic.MachineGun.Clan",
    "ammoPerVolley": 1,
@@ -989,10 +991,10 @@
     "1": {
      "damage": 1.98,
      "heatPerShot": 0.136,
-     "cooldown": 0.788,
+     "cooldown": 0.7875,
      "range": 787.5,
      "maxRange": 787.5,
-     "rpm": 76.1,
+     "rpm": 76.2,
      "speed": 1750.0,
      "manufacturer": "Type DL"
     }
@@ -1048,6 +1050,7 @@
    },
    "volleyProjectiles": 1,
    "volleyHeatShots": 1,
+   "continuous": true,
    "techBase": "InnerSphere",
    "id": "Flamer",
    "tier": "1"
@@ -1562,6 +1565,7 @@
    },
    "volleyProjectiles": 1,
    "volleyHeatShots": 1,
+   "continuous": true,
    "techBase": "InnerSphere",
    "ammoType": "Ammo.Ballistic.MachineGun.Standard",
    "ammoPerVolley": 1,

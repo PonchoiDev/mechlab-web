@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { YamlBuild } from '../../types/yaml-mechlab';
+import type { YamlBuild, YamlMech } from '../../types/yaml-mechlab';
 import { createStockBuild, mountItem, mountWeapon, removeWeapon, setInternal, setWeaponTier, stripBuild } from './build';
 import { decodeYamlBuild, encodeYamlBuild } from './buildCode';
 import {
@@ -8,7 +8,7 @@ import {
 } from './combat';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlInventoryItems } from './inventory';
-import { getBuildTonnage, getHeat } from './stats';
+import { getBuildTonnage, getEngineHeatSinkSlots, getHeat } from './stats';
 
 // Estadísticas del MechLab de YAML (docs/specs/estadisticas-yaml.md). La build de referencia es la de la
 // captura del mechlab del juego: el NSR-9J de serie con sus seis armas en nivel 3 y el Royal DHS Kit.
@@ -21,6 +21,9 @@ const reference = stock.weapons
 function panelValues(build: YamlBuild): Record<string, string> {
   return Object.fromEntries(getYamlStatsPanel(nightstar, build).flat().map(cell => [cell.label, cell.value]));
 }
+
+const panelOf = (mech: YamlMech, build: YamlBuild) =>
+  Object.fromEntries(getYamlStatsPanel(mech, build).flat().map(cell => [cell.key, cell.value]));
 
 function weapon(build: YamlBuild, item: string) {
   return getWeaponPerformance(nightstar, build).find(performance => performance.item === item)!;
@@ -247,5 +250,20 @@ describe('estadísticas del MechLab de YAML', () => {
     // 0,2 del disipador + 0,2 propios del Royal DHS Kit; 30 + 2 de capacidad.
     expect([values['Cooling heat/s'], values['Heat capacity']]).toEqual(['0.4', '32']);
     expect(getBuildTonnage(nightstar, withHeatSink)).toBe(32);
+  });
+
+  it('CA21: la Ferro Lamellor Clan multiplica la estructura de todo el \'Mech, como en la captura del INC-1', () => {
+    const vixen = findYamlMech('INC-1')!;
+    const vixenStock = createStockBuild(vixen);
+    expect(panelOf(vixen, vixenStock).structure).toBe('111');
+    const lamellor = setInternal(vixenStock, 'Armorslot', 'FERRO_LAMELLOR_CLAN');
+    expect(panelOf(vixen, lamellor).structure).toBe('133.2');
+    expect(getBuildTonnage(vixen, lamellor)).toBe(32);
+  });
+
+  it('CA22: el núcleo 285 da una sola ranura de disipadores del motor', () => {
+    expect(getEngineHeatSinkSlots(nightstar, stock)).toBe(1);
+    expect(stock.items.filter(item => item.slotType === 'EngineHeatsink_SlotType')).toHaveLength(1);
+    expect(mountItem(nightstar, stock, 'centerTorso', 'DoubleHeatSink').error).toMatch(/No free slot/);
   });
 });

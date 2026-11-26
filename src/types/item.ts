@@ -89,6 +89,8 @@ export interface Item {
   // Etiqueta del juego del equipo (EquipmentType) y sus restricciones de montaje (docs/specs/equipo-unico.md).
   equipmentTag?: string;
   restrictions?: EquipRestriction[];
+  // Rayo sin duración (ametralladoras y lanzallamas): su daño y su calor ya son por segundo.
+  continuous?: boolean;
   weightClass?: WeightClass;
   techBase?: string;
   ammoPerVolley?: number;

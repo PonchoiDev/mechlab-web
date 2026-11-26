@@ -2,10 +2,11 @@ import type { Zone } from '../../types/mech';
 import type { YamlBuild, YamlHardpointType, YamlMech } from '../../types/yaml-mechlab';
 import { describeRestrictionConflict, getRestrictionConflict } from '../equipRestrictions';
 import { getYamlItem } from './data';
-import { ACTUATOR_SLOT_TYPES, GENERAL_SLOT, getActuatorSlotTypes, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots, getUnplacedCritSplits } from './stats';
+import { ACTUATOR_SLOT_TYPES, GENERAL_SLOT, getActuatorSlotTypes, getDynamicFillers, getEngineHeatSinkSlots, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots, getUnplacedCritSplits } from './stats';
 
 export type MountResult = { build: YamlBuild; error?: undefined } | { build?: undefined; error: string };
 
+const ENGINE_HEAT_SINK_SLOT = 'EngineHeatsink_SlotType';
 // Los anclajes omni de los omnimechs admiten armas balísticas, de energía y de misiles.
 const OMNI_TYPES: YamlHardpointType[] = ['ballistic', 'energy', 'missile'];
 
@@ -118,11 +119,21 @@ export function mountItem(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: 
     return fillers ? { error: fillers } : { build: next };
   }
   for (const slotType of slotTypes.filter(type => type !== GENERAL_SLOT)) {
-    const capacity = mech.zones[zone].special[slotType] ?? 0;
+    const capacity = slotType === ENGINE_HEAT_SINK_SLOT ? (zone === 'centerTorso' ? getEngineHeatSinkSlots(mech, build) : 0) : mech.zones[zone].special[slotType] ?? 0;
     const used = build.items.filter(mounted => mounted.zone === zone && mounted.slotType === slotType).length;
     if (used < capacity) return { build: { ...build, items: [...build.items, { zone, slotType, item: itemId }] } };
   }
   return { error: `No free slot for ${item.name}` };
+}
+
+// Si un cambio deja menos ranuras de disipadores del motor que disipadores montados en ellas (quitar un núcleo,
+// bajar su potencia), el juego desmonta los que sobran, empezando por los últimos.
+export function dropExcessEngineHeatSinks(mech: YamlMech, build: YamlBuild): YamlBuild {
+  const slots = getEngineHeatSinkSlots(mech, build);
+  const mounted = build.items.flatMap((item, index) => item.slotType === ENGINE_HEAT_SINK_SLOT ? [index] : []);
+  if (mounted.length <= slots) return build;
+  const dropped = new Set(mounted.slice(slots));
+  return { ...build, items: build.items.filter((_, index) => !dropped.has(index)) };
 }
 
 export type RemovableKind = 'weapon' | 'ammo' | 'equipment';
