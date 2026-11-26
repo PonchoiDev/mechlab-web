@@ -316,11 +316,11 @@ export function getYamlMechStats(mech: YamlMech, build: YamlBuild): YamlMechStat
   const heat = getHeat(mech, build);
   const equipment = mountedEquipment(mech, build).map(({ item }) => item);
   // GetSensorRange del juego: la base (MW.TargetSystem.DefaultSensorRange, 80.000 cm) × (1 + los rasgos con
-  // UI_GetIncreasedSensorRangePercent: los de los computadores de puntería y los de la cantina).
+  // UI_GetIncreasedSensorRangePercent). Solo recorre los InstalledTraits del loadout, los de la cantina: el rasgo
+  // de los computadores de puntería lo da su pieza y no cuenta.
   // GetSensorBonusesFromLoadout de YAML suma los sensorRangeBonus del equipo y los quirks (también los de lanza) y
   // suma sus multiplicadores.
-  const sensorTraits = [...equipment.map(item => item.sensorTraitPercent ?? 0), getTraitPercent(build, 'sensorRange')];
-  const gameSensorRange = f(BASE_SENSOR_RANGE * Math.max(0, sum([1, ...sensorTraits])));
+  const gameSensorRange = f(BASE_SENSOR_RANGE * Math.max(0, 1 + getTraitPercent(build, 'sensorRange')));
   const numberOf = (entry: Record<string, unknown>, key: string) => typeof entry[key] === 'number' ? entry[key] as number : 0;
   const sensorBonus = sum(properties.flatMap(entry => [numberOf(entry, 'sensorRangeBonus'), numberOf(entry, 'sensorRangeBonusLance')]));
   const sensorBase = f(f(gameSensorRange + sensorBonus) * sumMultiplier(properties, 'sensorRangeMulti', 'sensorRangeMultiLance'));

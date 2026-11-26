@@ -179,9 +179,8 @@ export interface YamlItem {
   sensorRangeMulti?: number;
   sensorRangeBonusLance?: number;
   sensorRangeMultiLance?: number;
-  // Sondas: lo que su SensorRangeModifier pasa de 1. Computadores de puntería: el porcentaje de su rasgo.
+  // Sondas: lo que su SensorRangeModifier pasa de 1.
   sensorRangePercent?: number;
-  sensorTraitPercent?: number;
   // Armadura y estructura que suma a su ubicación (las armas cuerpo a cuerpo, por ejemplo); no pesan.
   armorComponentFront?: number;
   armorComponentRear?: number;
