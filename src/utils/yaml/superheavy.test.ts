@@ -14,9 +14,10 @@ const panelOf = (mech: YamlMech, build: YamlBuild) =>
   Object.fromEntries(getYamlStatsPanel(mech, build).flat().map(cell => [cell.key, cell.value]));
 
 describe('superpesados de YAML', () => {
-  it('CA1: están los cuatro superpesados, y solo ellos', () => {
+  it('CA1: están los tres superpesados jugables, y solo ellos', () => {
     const superheavies = (yamlMechs as unknown as YamlMech[]).filter(mech => mech.superheavy).map(mech => [mech.id, mech.tonnage]);
-    expect(superheavies.sort()).toEqual([['ANH-1GT', 200], ['COR-ROAM', 115], ['MAD-BARA2', 125], ['MAD-TF', 125]]);
+    expect(superheavies.sort()).toEqual([['COR-ROAM', 115], ['MAD-BARA2', 125], ['MAD-TF', 125]]);
+    expect(findYamlMech('ANH-1GT')).toBeUndefined();
   });
 
   it('CA2: el MAD-BARA2 tiene las ranuras y los actuadores de los superpesados, como en la captura', () => {
