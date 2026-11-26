@@ -71,7 +71,9 @@ describe('página de armas y equipo de YAML', () => {
     const withSpeed = sortYamlWeaponRows(tier1, { key: 'speed', dir: 'asc' });
     expect(withSpeed.at(-1)!.speed).toBeNull();
     expect(sortYamlWeaponRows(tier1, { key: 'speed', dir: 'desc' }).at(-1)!.speed).toBeNull();
-    expect(asc.at(-1)!.dps).toBe(maxDps);
+    // Las que no tienen DPS (los AMS) van al final también en este sentido: la mayor es la última con dato.
+    expect(asc.at(-1)!.dps).toBeNull();
+    expect(asc.filter(candidate => candidate.dps !== null).at(-1)!.dps).toBe(maxDps);
   });
 
   it('CA7: el equipo por categorías, sin rellenos ni piezas fijas', () => {

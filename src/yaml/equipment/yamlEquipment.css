@@ -1,0 +1,18 @@
+/* Lo propio de la página de equipo de YAML sobre la de MW5: el logo del origen de cada objeto. */
+.yaml-arsenal-source {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.arsenal-table td.is-source { text-align: center; }
+
+.yaml-arsenal-card-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.yaml-arsenal-card-source .yaml-arsenal-source { width: 16px; height: 16px; }
