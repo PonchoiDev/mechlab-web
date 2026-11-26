@@ -308,6 +308,13 @@ describe('un solo computador de puntería', () => {
     expect(getDropTargets(archer, withComputer, computer, { zone: 'leftTorso', instanceId: computer.instanceId }).rightTorso.component).toBe(true);
   });
 
+  it('CA9: tampoco se montan dos sondas activas', () => {
+    const withProbe = build({ leftTorso: [createEquippedItem(getItem('BeagleActiveProbe'), 'General_SlotType')] });
+    const result = placeItem(archer, withProbe, 'rightTorso', getItem('ClanActiveProbe'), null);
+    expect(result.loadout).toBe(withProbe);
+    expect(result.message).toBe("Only one active probe per 'Mech");
+  });
+
   it('CA6: sin computador se equipa uno', () => {
     expect(ids(placeItem(archer, empty, 'rightTorso', getItem('TargetingComputer_Mk5'), null).loadout.rightTorso)).toEqual(['TargetingComputer_Mk5']);
   });
