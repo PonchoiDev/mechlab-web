@@ -71,3 +71,16 @@ describe('enlace a una variante', () => {
     expect(getStockBuildById('NO-EXISTE', allMechs, allItems)).toBeNull();
   });
 });
+
+// docs/specs/equipo-unico.md
+describe('enlace con dos computadores de puntería', () => {
+  it('CA5: solo carga el primero', () => {
+    const loadout = build({
+      leftTorso: [createEquippedItem(getItem('TargetingComputer_Mk1'), 'General_SlotType')],
+      rightTorso: [createEquippedItem(getItem('TargetingComputer_Mk2'), 'General_SlotType')]
+    });
+    const decoded = decodeBuild(encodeBuild(archer, loadout, createDefaultArmor(archer.components), allItems), allMechs, allItems)!;
+    const computers = Object.values(decoded.loadout).flat().filter(item => item.id.startsWith('TargetingComputer'));
+    expect(computers.map(item => item.id)).toEqual(['TargetingComputer_Mk1']);
+  });
+});

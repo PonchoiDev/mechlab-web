@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import mw5Mechs from '../../data/mechs.json';
 import yamlMechs from '../../data/yaml/mechs.json';
-import { checkInternal, createStockBuild, mountWeapon, removeWeapon, setInternal, stripBuild } from './build';
+import { checkInternal, createStockBuild, mountItem, mountWeapon, removeWeapon, setInternal, stripBuild } from './build';
 import { decodeYamlBuild, encodeYamlBuild } from './buildCode';
 import { getYamlStatsPanel } from './combat';
 import { findYamlMech, getYamlItem } from './data';
@@ -96,5 +96,21 @@ describe('MechLab de YAML', () => {
     expect(stock.internal.cockpit).toBe('COCKPIT_SMALL');
     expect(stock.items.filter(mounted => mounted.zone === 'head')).toEqual([]);
     expect(getFreeGeneralSlots(centurion, stock, 'head')).toBe(2);
+  });
+});
+
+// docs/specs/equipo-unico.md
+describe('equipo que no se puede repetir en el MechLab de YAML', () => {
+  const empty = stripBuild(stock);
+
+  it('CA7: el Triple Strength Myomer no se monta con un MASC MK I (C)', () => {
+    const withMasc = mountItem(nightstar, empty, 'leftTorso', 'C79_MASC_MKI').build!;
+    expect(mountItem(nightstar, withMasc, 'rightTorso', 'TSMYOMER').error).toBe("Triple Strength Myomer can't be mounted with MASC MK I (C)");
+    expect(mountItem(nightstar, empty, 'rightTorso', 'TSMYOMER').build).toBeDefined();
+  });
+
+  it('CA8: el Targeting Computer Mk. 3 (C) no se monta con el Mk. 1 de YAML', () => {
+    const withComputer = mountItem(nightstar, empty, 'leftTorso', 'TCLVL1').build!;
+    expect(mountItem(nightstar, withComputer, 'rightTorso', 'TargetingComputer_Mk3').error).toBe("Only one Targeting Computer per 'Mech");
   });
 });

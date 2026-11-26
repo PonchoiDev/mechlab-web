@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   addAmmoForWeapon,
+  canPlaceEquipment,
   changeAllWeaponsTier,
   changeWeaponTier,
   countFreeHardpointsFor,
@@ -206,5 +207,23 @@ describe('sustituir el arma de un anclaje', () => {
     const result = replaceWeapon(archer, loadout, 'leftArm', 0, getItem('LRM15'));
 
     expect(result.loadout).toBe(loadout);
+  });
+});
+
+// docs/specs/equipo-unico.md
+describe('un solo computador de puntería', () => {
+  const computer = general('TargetingComputer_Mk1');
+  const loadout = build({ leftTorso: [computer] });
+
+  it('CA3: el computador se mueve a otra ubicación', () => {
+    const moved = moveEquipment(archer, loadout, 'leftTorso', computer.instanceId, 'rightTorso').loadout;
+    expect(idsIn(moved, 'rightTorso')).toEqual(['TargetingComputer_Mk1']);
+  });
+
+  it('CA4: no se puede duplicar en ninguna ubicación', () => {
+    expect(ZONE_KEYS.filter(zone => canPlaceEquipment(archer, loadout, computer, zone))).toEqual([]);
+    const result = duplicateEquipment(archer, loadout, 'leftTorso', computer.instanceId, 'rightTorso');
+    expect(result.loadout).toBe(loadout);
+    expect(result.message).toBe("Only one Targeting Computer per 'Mech");
   });
 });
