@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import mw5Mechs from '../../data/mechs.json';
+import { filterOptionsByText } from '../format';
 import { findYamlMech, yamlMechs } from './data';
 import {
-  EMPTY_YAML_FILTERS, filterYamlMechs, getYamlAvailableYear, getYamlHardpointCounts, isClanMech, isOmniMech,
+  EMPTY_YAML_FILTERS, filterYamlMechs, getYamlAvailableYear, getYamlHardpointCounts, getYamlQuirkOptions, isClanMech, isOmniMech,
   type YamlMechFilters
 } from './mechList';
 
@@ -76,5 +77,15 @@ describe('filtros del selector de YAML', () => {
 
   it('CA9: YAML only deja las 151 variantes nuevas', () => {
     expect(withFilters({ yamlOnly: true })).toHaveLength(151);
+  });
+
+  it('CA10: el buscador del desplegable de quirks, sin mayúsculas ni acentos', () => {
+    const options = getYamlQuirkOptions(yamlMechs);
+    const armor = filterOptionsByText(options, 'armor');
+    expect(armor.length).toBeGreaterThan(0);
+    expect(armor.length).toBeLessThan(options.length);
+    expect(armor.every(option => option.label.toLowerCase().includes('armor'))).toBe(true);
+    expect(filterOptionsByText(options, 'ÁRMOR')).toEqual(armor);
+    expect(filterOptionsByText(options, '  ')).toEqual(options);
   });
 });
