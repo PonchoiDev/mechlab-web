@@ -2,10 +2,10 @@ import { describe, expect, it } from 'vitest';
 import type { Zone } from '../../types/mech';
 import type { YamlBuild, YamlMech } from '../../types/yaml-mechlab';
 import yamlMechs from '../../data/yaml/mechs.json';
-import { createStockBuild, mountItem, setInternal } from './build';
+import { createStockBuild, dropExcessEngineHeatSinks, mountItem, setInternal } from './build';
 import { getYamlStatsPanel } from './combat';
 import { findYamlMech } from './data';
-import { getActuatorSlotTypes, getArmorPoints, getBuildTonnage, getFreeGeneralSlots, getGeneralSlots, getHeat, getTopSpeed } from './stats';
+import { getActuatorSlotTypes, getArmorPoints, getBuildTonnage, getEngineHeatSinkSlots, getFreeGeneralSlots, getGeneralSlots, getHeat, getTopSpeed } from './stats';
 
 // Criterios de aceptación de docs/specs/superpesados-yaml.md, con las cifras de las capturas del mechlab del juego
 // del MAD-BARA2 y el MAD-TF (YAML 0.99.4.3).
@@ -56,16 +56,18 @@ describe('superpesados de YAML', () => {
     });
   });
 
-  it('CA5: sin el segundo núcleo, el MAD-BARA2 va a la mitad y su motor da la mitad de disipadores', () => {
+  it('CA5: sin el segundo núcleo, el MAD-BARA2 va a la mitad y pierde 2 disipadores del motor, como en la captura', () => {
     const mech = findYamlMech('MAD-BARA2')!;
     const stock = createStockBuild(mech);
-    const oneCore = { ...stock, items: stock.items.filter(item => item.slotType !== 'Engine') };
-    expect(oneCore.items).toHaveLength(stock.items.length - 1);
+    expect(getEngineHeatSinkSlots(mech, stock)).toBe(4);
+    const oneCore = dropExcessEngineHeatSinks(mech, { ...stock, items: stock.items.filter(item => item.slotType !== 'Engine') });
+    expect(getEngineHeatSinkSlots(mech, oneCore)).toBe(2);
+    expect(oneCore.items.filter(item => item.slotType === 'EngineHeatsink_SlotType')).toHaveLength(2);
     expect(getTopSpeed(mech, oneCore)).toBeCloseTo(38.88, 4);
     const heat = getHeat(mech, oneCore);
-    expect(heat.cooling).toBeCloseTo(3.6, 4);
-    expect(heat.capacity).toBe(66);
-    expect(getBuildTonnage(mech, oneCore)).toBe(115.5);
+    expect(heat.cooling).toBeCloseTo(3.2, 4);
+    expect(heat.capacity).toBe(62);
+    expect(getBuildTonnage(mech, oneCore)).toBe(113.5);
   });
 
   it('CA6: el equipo de actuadores de los superpesados solo cabe en ellos, y el normal solo en los demás', () => {

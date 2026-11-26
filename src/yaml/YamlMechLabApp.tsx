@@ -13,7 +13,7 @@ import { copyText } from '../services/clipboard';
 import type { Zone } from '../types/mech';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
 import { distributeDynamicFillerGroups, removeItemAt, setArmor, setMaxArmor } from '../utils/yaml/board';
-import { clearArmor, createStockBuild, removeKind, removeWeapon, setWeaponTier, type MountResult } from '../utils/yaml/build';
+import { clearArmor, createStockBuild, dropExcessEngineHeatSinks, removeKind, removeWeapon, setWeaponTier, type MountResult } from '../utils/yaml/build';
 import { decodeYamlBuild, encodeYamlBuild } from '../utils/yaml/buildCode';
 import { findYamlMech, getYamlItem, YAML_COLORS, yamlMechs } from '../utils/yaml/data';
 import { autoPlaceYamlItem, chooseYamlInternal, getYamlDropZones, placeYamlItem, type YamlInventoryTarget } from '../utils/yaml/inventory';
@@ -64,7 +64,8 @@ export function YamlMechLabApp() {
   const [inventoryTiers, setInventoryTiers] = useState<Record<string, number>>({});
   const view = useViewPreferences(YAML_VIEW_KEY);
 
-  const setBuild = (next: YamlBuild) => setState({ mech, build: next });
+  // Como en el juego, un cambio que deja menos ranuras de disipadores del motor desmonta los que sobran.
+  const setBuild = (next: YamlBuild) => setState({ mech, build: dropExcessEngineHeatSinks(mech, next) });
   const showToast = useCallback((message: string) => setToast(current => ({ id: (current?.id ?? 0) + 1, message })), []);
   const buildCode = encodeYamlBuild(mech.id, build);
   // Cargar la de serie no cambia los rasgos, como en el MechLab de MW5: en el juego se instalan aparte. Los de
