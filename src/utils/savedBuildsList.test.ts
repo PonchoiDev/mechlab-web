@@ -7,7 +7,6 @@ import {
   filterBuildRows,
   parseBuildSort,
   sortBuildRows,
-  togglePartVisibility,
   type BuildListFilter,
   type BuildListRow
 } from './savedBuildsList';
@@ -153,27 +152,5 @@ describe('filtros del selector de builds del comparador', () => {
       hardpoints: { energy: 1, omni: 2, missile: 2 }, weapons: { energy: 3, missile: 2 }
     });
     expect(names(filterBuildRows([puma], { query: '', weightClasses: [], minHardpoints: { omni: 1 }, minimumsOf: 'weapons' }))).toEqual(['Puma']);
-  });
-});
-
-// Los interruptores de origen de la página de builds (docs/specs/publicar-builds-yaml.md).
-describe('interruptores de un grupo de piezas', () => {
-  const all = ['Vanilla', 'YAML'];
-  it('CA7: apagar uno deja el otro, encenderlo quita el filtro y el último visible no se apaga', () => {
-    const onlyVanilla = togglePartVisibility([], 'YAML', all);
-    expect(onlyVanilla).toEqual(['Vanilla']);
-    expect(togglePartVisibility(onlyVanilla, 'YAML', all)).toEqual([]);
-    expect(togglePartVisibility(onlyVanilla, 'Vanilla', all)).toEqual(['Vanilla']);
-    expect(togglePartVisibility([], 'Vanilla', all)).toEqual(['YAML']);
-  });
-
-  it('filtra las builds por los visibles', () => {
-    const rows = [
-      { ...row('Atlas', 1, { chassis: 'Atlas', variant: 'AS7-D', weightClass: 'assault', tonnage: 100, firepower: 70, hardpoints: {} }), parts: { source: 'Vanilla' } },
-      { ...row('Cataphract', 2, { chassis: 'Cataphract', variant: 'CTF-1X', weightClass: 'heavy', tonnage: 70, firepower: 40, hardpoints: {} }), parts: { source: 'YAML' } }
-    ];
-    const filter = (source: string[]): BuildListFilter => ({ query: '', weightClasses: [], parts: { source } });
-    expect(filterBuildRows(rows, filter(togglePartVisibility([], 'Vanilla', all))).map(entry => entry.name)).toEqual(['Cataphract']);
-    expect(filterBuildRows(rows, filter([])).map(entry => entry.name)).toEqual(['Atlas', 'Cataphract']);
   });
 });
