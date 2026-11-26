@@ -60,6 +60,16 @@ describe('daño potencial de la munición', () => {
   });
 });
 
+describe('pico de calor con mejoras', () => {
+  it('CA13: Reduced Heat Spikes baja el pico de calor del DRG-1G-S', () => {
+    const mech = getMech('DRG-1G-S');
+    const stock = getStockBuild(mech, allMechs, allItems)!;
+    const base = getBuildSummary(mech, stock.loadout, stock.armor);
+    const upgraded = getBuildSummary(mech, stock.loadout, stock.armor, getUpgrades(['ReducedHeatGeneration_Trait1']));
+    expect(upgraded.heatSpike).toBeLessThan(base.heatSpike);
+  });
+});
+
 describe('daño por tonelada', () => {
   it('CA6: con el tonelaje del arma, sin la munición', () => {
     const perTon = (id: string) => {
