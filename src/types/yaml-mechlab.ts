@@ -91,6 +91,8 @@ export interface YamlWeaponTier {
   maxRange: number;
   // AMS: misiles destruidos por segundo.
   amsRate?: number;
+  // Proyectiles y misiles: la velocidad del asset en m/s, con los quirks del nivel.
+  speed?: number;
 }
 
 export type YamlWeaponFamily = 'trace' | 'projectile' | 'missile' | 'ams' | 'melee';
@@ -123,6 +125,7 @@ export interface YamlWeaponGroup {
   optimalRangeMulti?: number;
   maxRangeMulti?: number;
   missilesDestroyedMulti?: number;
+  speedMulti?: number;
 }
 
 export interface YamlItem {
