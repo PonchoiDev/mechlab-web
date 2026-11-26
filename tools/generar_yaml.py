@@ -1,3 +1,4 @@
+import datetime
 import functools
 import glob
 import json
@@ -6,7 +7,7 @@ import re
 import struct
 import sys
 
-from generar_mechs import ARCHIVOS_NO_JUGABLES, cargar_partes_anclajes, cargar_textos as cargar_textos_del_juego, obtener_parte_cuerpo, obtener_tipo_arma, obtener_variante
+from generar_mechs import ARCHIVOS_NO_JUGABLES, ROLES, cargar_partes_anclajes, separar_palabras, cargar_textos as cargar_textos_del_juego, obtener_parte_cuerpo, obtener_tipo_arma, obtener_variante
 
 # Genera los datos del MechLab con las reglas de YAML (src/data/yaml/) a partir del volcado de los mods
 # (tools/datos-juego/yaml/, de extraer_yaml.py), de los MDA exportados del juego (tools/datos-juego/mda/)
@@ -1073,11 +1074,62 @@ def nombre_de_variante(datos, textos_del_juego):
     return valor
 
 
+# Ticks de .NET (100 ns) desde el 1 de enero del año 1: los IntroDate de las unit cards de los mods.
+TICKS_POR_SEGUNDO = 10_000_000
+
+
+def anio_de_ticks(ticks):
+    return (datetime.datetime(1, 1, 1) + datetime.timedelta(seconds=ticks / TICKS_POR_SEGUNDO)).year
+
+
+def fichas_por_loadout():
+    """Las unit cards de los mods por su loadout, con la prioridad de generar_mechs.py: la que se llama como el
+    loadout, después la de mercado y después cualquiera."""
+    por_loadout = {}
+    for ruta, valor in cargar_categoria("fichas").items():
+        ficha = valor["propiedades"].get("UnitCard") or {}
+        plantilla = (((ficha.get("MechLoadoutTemplate") or {}).get("Id") or {}).get("PrimaryAssetName") or "").lower()
+        if not plantilla:
+            continue
+        nombre = ruta.rsplit("/", 1)[1].lower()
+        uso = ficha.get("IntroUsage") or ""
+        prioridad = 0 if nombre == f"{plantilla.removesuffix('_loadout')}_unitcard" else 1 if uso.endswith("Market") else 2
+        actual = por_loadout.get(plantilla)
+        if actual is None or prioridad < actual[0]:
+            por_loadout[plantilla] = (prioridad, ficha)
+    return {plantilla: ficha for plantilla, (_, ficha) in por_loadout.items()}
+
+
+def datos_para_filtros(datos, nombre_mda, nombres_de_loadout, fichas, mech_juego):
+    """Año, rol y hero para los filtros del selector (docs/specs/filtros-yaml.md): los de la unit card de YAML de su
+    loadout o, si YAML no trae una, los del MechLab de MW5."""
+    mech_juego = mech_juego or {}
+    ficha = next((fichas[nombre.lower()] for nombre in nombres_de_loadout if nombre and nombre.lower() in fichas), None)
+    resultado = {}
+    if ficha and ficha.get("IntroDate"):
+        resultado["introYear"] = anio_de_ticks(ficha["IntroDate"])
+    elif mech_juego.get("introYear"):
+        resultado["introYear"] = mech_juego["introYear"]
+    rol = (ficha or {}).get("CombatRole") or []
+    if rol:
+        clave = rol[0].rsplit(".", 1)[-1]
+        resultado["role"] = ROLES.get(clave.lower(), separar_palabras(clave))
+    elif mech_juego.get("role"):
+        resultado["role"] = mech_juego["role"]
+    if datos.get("bIsHeroMech") or mech_juego.get("hero"):
+        resultado["hero"] = True
+    return resultado
+
+
+def loadout_por_defecto(datos, nombre_mda):
+    return datos.get("DefaultMech", {}).get("Id", {}).get("PrimaryAssetName") or nombre_mda.replace("_MDA", "_Loadout")
+
+
 def loadout_de_serie(variante, datos, nombre_mda, asignaciones, loadouts):
     """El loadout de serie de un MDA. Al arrancar, YAML (Replace Loadout References) busca el VariantName de cada
     'Mech en los mechs.json de Resources y, si su entrada trae «loadout» y ese loadout existe, lo pone como DefaultMech:
     así Yet Another Weapon cambia 28 variantes (ANH-1P_Loadout_YAWUpgrade, con sus RAC)."""
-    nombre = datos.get("DefaultMech", {}).get("Id", {}).get("PrimaryAssetName") or nombre_mda.replace("_MDA", "_Loadout")
+    nombre = loadout_por_defecto(datos, nombre_mda)
     minusculas = {clave.lower(): valor for clave, valor in asignaciones.items()}
     reemplazo = (minusculas.get((variante or "").lower()) or {}).get("loadout")
     return reemplazo if reemplazo and reemplazo.lower() in loadouts else nombre
@@ -1175,6 +1227,7 @@ def main():
     rasgos = {rasgo["id"] for rasgo in leer(os.path.join(RUTA_DATOS, "traits.json"))}
 
     textos_del_juego = cargar_textos_del_juego()
+    fichas = fichas_por_loadout()
     mechs = []
     avisos = []
     vistos = set()
@@ -1195,6 +1248,8 @@ def main():
         vistos.add(id_mech)
         mechs.append(construir_variante(id_mech, mech_juego["name"], variante, mech_juego.get("dlc"), datos, loadout,
                                         nombre_mda, objetos, avisos, asignaciones, tamanos, ocultos, rasgos))
+        mechs[-1].update(datos_para_filtros(datos, nombre_mda, (loadout_por_defecto(datos, nombre_mda), nombre_loadout),
+                                            fichas, mech_juego))
 
     # Las variantes nuevas de YAML, sin los rellenos técnicos. Las que se llaman como una del
     # MechLab de MW5 (AS7-D-H, CPLT-C3) son otras: su id es el de su MDA y enseñan su nombre, como en el juego.
@@ -1223,6 +1278,8 @@ def main():
         nombre_chasis = chasis_conocidos.get(nombre_chasis.lower(), nombre_chasis)
         mechs.append(construir_variante(id_mech, nombre_chasis, variante, None, datos, loadout,
                                         nombre_mda, objetos, avisos, asignaciones, tamanos, ocultos, rasgos))
+        mechs[-1].update(datos_para_filtros(datos, nombre_mda, (loadout_por_defecto(datos, nombre_mda), nombre_loadout),
+                                            fichas, None), yamlOnly=True)
 
     # El nombre en Sarna, para la imagen de referencia: el de las variantes del mismo chasis en el MechLab de MW5
     # (los 'Mechs Clan se llaman allí con su otro nombre: el Puma es el Adder). Solo si no es el del chasis.
