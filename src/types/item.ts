@@ -1,3 +1,4 @@
+import type { EquipRestriction } from '../utils/equipRestrictions';
 // La artillería (Arrow IV) solo va en sus propios anclajes, ni en los de misiles ni en los omni.
 export type WeaponType = 'energy' | 'ballistic' | 'missile' | 'artillery' | 'ams' | 'melee';
 
@@ -85,6 +86,9 @@ export interface Item {
   ammoType?: string;
   volleyProjectiles?: number;
   volleyHeatShots?: number;
+  // Etiqueta del juego del equipo (EquipmentType) y sus restricciones de montaje (docs/specs/equipo-unico.md).
+  equipmentTag?: string;
+  restrictions?: EquipRestriction[];
   // Rayo sin duración (ametralladoras y lanzallamas): su daño y su calor ya son por segundo.
   continuous?: boolean;
   weightClass?: WeightClass;

@@ -87,6 +87,10 @@ LOGOS_DE_MOD = {"modicon128.png": "{}.png", "modicon128c.png": "{}-color.png"}
 RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "mechlab", "yaml", "mods")
 
 
+# Las restricciones de montaje del mechlab del juego (KelLoadoutRestrictionFunction_UniqueEquipment...).
+PREFIJO_RESTRICCION = "KelLoadoutRestrictionFunction"
+
+
 def ruta_montada(ruta):
     """Content/X del .pak se monta en /Game/X (MW5Mercs/Content/X en el del juego); Plugins/<Mod>/Content/X, en /<Mod>/X."""
     sin_extension = ruta[: -len(".uasset")]
@@ -137,6 +141,11 @@ def extraer_pak(ruta_pak, solo=None):
             valor = {"textos": asset.textos(export)}
         else:
             valor = {"clase": clase, "propiedades": limpiar(destino, asset.propiedades(export, rutas=True))}
+            # Las restricciones del equipo (EquipRestrictions) son subobjetos del asset: la propiedad solo
+            # trae su nombre, y la etiqueta que limitan (Equipment.TargetingComputer) está en el subobjeto.
+            restricciones = asset.subobjetos(PREFIJO_RESTRICCION) if destino == "equipo" else []
+            if restricciones:
+                valor["restricciones"] = restricciones
         resultado.setdefault(destino, {})[ruta_montada(ruta)] = valor
     return resultado
 

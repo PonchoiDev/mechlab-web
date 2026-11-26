@@ -287,3 +287,35 @@ describe('anclajes de cada tarjeta', () => {
     expect(getHardpointUsage(archer.components.leftLeg, loadout.leftLeg)).toEqual([]);
   });
 });
+
+// docs/specs/equipo-unico.md
+describe('un solo computador de puntería', () => {
+  const withComputer = build({ leftTorso: [createEquippedItem(getItem('TargetingComputer_Mk1'), 'General_SlotType')] });
+
+  it('CA2: no se equipa un segundo computador y el aviso dice por qué', () => {
+    const result = placeItem(archer, withComputer, 'rightTorso', getItem('TargetingComputer_Mk5'), null);
+    expect(result.loadout).toBe(withComputer);
+    expect(result.message).toBe("Only one Targeting Computer per 'Mech");
+    expect(Object.values(getDropTargets(archer, withComputer, getItem('TargetingComputer_Mk5'))).some(target => target.component)).toBe(false);
+    expect(autoPlaceItem(archer, withComputer, getItem('TargetingComputer_Mk5')).loadout).toBe(withComputer);
+  });
+
+  it('CA3: el computador montado se puede mover a otra ubicación', () => {
+    const [computer] = withComputer.leftTorso;
+    const result = moveEquippedItem(archer, withComputer, { zone: 'leftTorso', instanceId: computer.instanceId }, 'rightTorso', null);
+    expect(ids(result.loadout.rightTorso)).toEqual(['TargetingComputer_Mk1']);
+    expect(result.loadout.leftTorso).toEqual([]);
+    expect(getDropTargets(archer, withComputer, computer, { zone: 'leftTorso', instanceId: computer.instanceId }).rightTorso.component).toBe(true);
+  });
+
+  it('CA9: tampoco se montan dos sondas activas', () => {
+    const withProbe = build({ leftTorso: [createEquippedItem(getItem('BeagleActiveProbe'), 'General_SlotType')] });
+    const result = placeItem(archer, withProbe, 'rightTorso', getItem('ClanActiveProbe'), null);
+    expect(result.loadout).toBe(withProbe);
+    expect(result.message).toBe("Only one active probe per 'Mech");
+  });
+
+  it('CA6: sin computador se equipa uno', () => {
+    expect(ids(placeItem(archer, empty, 'rightTorso', getItem('TargetingComputer_Mk5'), null).loadout.rightTorso)).toEqual(['TargetingComputer_Mk5']);
+  });
+});

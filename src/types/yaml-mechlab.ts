@@ -1,3 +1,4 @@
+import type { EquipRestriction } from '../utils/equipRestrictions';
 import type { Zone } from './mech';
 
 // MechLab con las reglas del mod Yet Another Mechlab (YAML). Los datos salen de tools/generar_yaml.py;
@@ -144,7 +145,10 @@ export interface YamlItem {
   actuator?: boolean;
   // Munición y equipo: los tipos de ranura donde se monta.
   slotTypes?: string[];
+  // Etiqueta del juego (EquipmentType) y restricciones de montaje: solo un computador de puntería, el TSM no va
+  // con un MASC... (docs/specs/equipo-unico.md).
   category?: string;
+  restrictions?: EquipRestriction[];
   // Núcleos de motor: su potencia.
   rating?: number;
   // Ranuras de relleno: dinámicas (en cualquier ubicación) y fijas por ubicación.

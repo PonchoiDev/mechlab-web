@@ -4,6 +4,7 @@ import {
   createEquippedItem,
   findHardpointForWeapon,
   getAvailableSlotType,
+  getEquipConflict,
   getHardpointOccupancy,
   weaponFitsHardpoint
 } from './equipment';
@@ -340,7 +341,7 @@ export const addAmmoForWeapon = (
 // ─── Equipo y munición ───────────────────────────────────────────────────────
 
 export const canPlaceEquipment = (mech: Mech, loadout: EquippedLoadout, item: Item, zone: Zone): boolean =>
-  getAvailableSlotType(item, mech.components[zone], loadout[zone]) !== null;
+  getEquipConflict(item, loadout) === null && getAvailableSlotType(item, mech.components[zone], loadout[zone]) !== null;
 
 export const duplicateEquipment = (
   mech: Mech,
@@ -351,6 +352,8 @@ export const duplicateEquipment = (
 ): ActionResult => {
   const item = findItem(loadout, zone, instanceId);
   if (!item) return unchanged(loadout, 'Item not found');
+  const conflict = getEquipConflict(item, loadout);
+  if (conflict) return unchanged(loadout, conflict);
   const slotType = getAvailableSlotType(item, mech.components[targetZone], loadout[targetZone]);
   if (!slotType) return unchanged(loadout, `No room for ${item.name} in ${ZONE_LABELS[targetZone]}`);
 
@@ -369,10 +372,12 @@ export const moveEquipment = (
 ): ActionResult => {
   const item = findItem(loadout, zone, instanceId);
   if (!item || targetZone === zone) return unchanged(loadout, 'Nothing to move');
+  const without = removeInstance(loadout, zone, instanceId);
+  const conflict = getEquipConflict(item, without);
+  if (conflict) return unchanged(loadout, conflict);
   const slotType = getAvailableSlotType(item, mech.components[targetZone], loadout[targetZone]);
   if (!slotType) return unchanged(loadout, `No room for ${item.name} in ${ZONE_LABELS[targetZone]}`);
 
-  const without = removeInstance(loadout, zone, instanceId);
   return {
     loadout: { ...without, [targetZone]: [...without[targetZone], copyOf(item, undefined, slotType)] },
     message: `Moved ${item.name} to ${ZONE_LABELS[targetZone]}`
@@ -397,7 +402,7 @@ export const moveAllEquipment = (
       const targetZone = targetZones[(turn + attempt) % targetZones.length];
       if (targetZone === zone) continue;
       const slotType = getAvailableSlotType(item, mech.components[targetZone], next[targetZone]);
-      if (!slotType) continue;
+      if (!slotType || getEquipConflict(item, removeInstance(next, zone, item.instanceId))) continue;
       next = removeInstance(next, zone, item.instanceId);
       next = { ...next, [targetZone]: [...next[targetZone], copyOf(item, undefined, slotType)] };
       moved.push(targetZone);

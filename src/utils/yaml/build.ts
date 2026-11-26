@@ -1,5 +1,6 @@
 import type { Zone } from '../../types/mech';
 import type { YamlBuild, YamlHardpointType, YamlMech } from '../../types/yaml-mechlab';
+import { describeRestrictionConflict, getRestrictionConflict } from '../equipRestrictions';
 import { getYamlItem } from './data';
 import { ACTUATOR_SLOT_TYPES, GENERAL_SLOT, getActuatorSlotTypes, getDynamicFillers, getEngineHeatSinkSlots, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots, getUnplacedCritSplits } from './stats';
 
@@ -76,10 +77,23 @@ export function mountWeapon(mech: YamlMech, build: YamlBuild, zone: Zone, itemId
   return fillers ? { error: fillers } : { build: next };
 }
 
+// Lo que el juego no deja montar junto (docs/specs/equipo-unico.md): cuenta el equipo y las piezas internas.
+function restrictionProblem(build: YamlBuild, itemId: string): string | null {
+  const item = getYamlItem(itemId);
+  if (!item?.restrictions) return null;
+  const mounted = [...build.items.map(mounted => mounted.item), ...Object.values(build.internal)]
+    .map(id => getYamlItem(id))
+    .flatMap(piece => piece ? [{ name: piece.name, tag: piece.category }] : []);
+  const conflict = getRestrictionConflict(item, mounted);
+  return conflict ? describeRestrictionConflict({ ...item, tag: item.category }, conflict) : null;
+}
+
 // Munición y equipo: en una ranura general si la admite y, si no, en una ranura propia libre.
 export function mountItem(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: string): MountResult {
   const item = getYamlItem(itemId);
   if (!item || item.kind === 'weapon') return { error: 'Not equipment' };
+  const restriction = restrictionProblem(build, itemId);
+  if (restriction) return { error: restriction };
   const slotTypes = item.slotTypes ?? [GENERAL_SLOT];
   if (slotTypes.includes(GENERAL_SLOT)) {
     const free = getFreeGeneralSlots(mech, build, zone);

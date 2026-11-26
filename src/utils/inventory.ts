@@ -6,6 +6,7 @@ import {
   createEquippedItem,
   findHardpointForWeapon,
   getAvailableSlotType,
+  getEquipConflict,
   getHardpointOccupancy,
   getHardpointViews,
   weaponFitsHardpoint
@@ -69,7 +70,7 @@ export const getDropTargets = (mech: Mech, current: EquippedLoadout, item: Item,
       hardpoints: component.hardpoints.flatMap((hardpoint, index) => weaponFitsHardpoint(hardpoint, item) ? [index] : [])
     };
   }
-  return { component: getAvailableSlotType(item, component, loadout[zone]) !== null, hardpoints: [] };
+  return { component: getEquipConflict(item, loadout) === null && getAvailableSlotType(item, component, loadout[zone]) !== null, hardpoints: [] };
 });
 
 // Componente o anclaje elegido en el tablero: el inventario equipa ahí.
@@ -185,6 +186,8 @@ export const placeItem = (
       : { loadout: result.loadout, message: `Added ${item.name} to ${label}`, replaced: false };
   }
 
+  const conflict = getEquipConflict(item, loadout);
+  if (conflict) return unchanged(loadout, conflict);
   const slotType = getAvailableSlotType(item, component, loadout[zone]);
   if (!slotType) return unchanged(loadout, `No room for ${item.name} in ${label}`);
   return {

@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-26-unique-equipment',
+    date: '2026-11-26',
+    title: 'One targeting computer per Mech',
+    items: [
+      "The MechLab only lets you mount one targeting computer and one active probe per 'Mech, as in the game. Shared links and saved builds with two keep only the first",
+      "The YAML MechLab also follows the mod's rules: one targeting computer, one Clan ECM and one active probe, and no Triple Strength Myomer together with a MASC"
+    ]
+  },
+  {
     id: '2026-11-26-machine-gun-dps',
     date: '2026-11-26',
     title: 'Machine gun and flamer DPS',

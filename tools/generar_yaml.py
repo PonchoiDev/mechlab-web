@@ -611,6 +611,29 @@ def datos_de_equipo(objeto, etiqueta, nivel_tecnico, clase):
         objeto["heatSinkAsset"] = True
 
 
+def restricciones_de_montaje(equipo):
+    """Las restricciones de montaje (EquipRestrictions) de cada pieza de equipo de los mods, por nombre.
+
+    Cada una es un subobjeto KelLoadoutRestrictionFunction_UniqueEquipment con su EquipmentTag y su MaxEquipment
+    (1 por defecto): la pieza no se monta si lo montado ya suma ese máximo con la etiqueta o una hija
+    (docs/specs/equipo-unico.md). Los TCLVL2 a TCLVL9 apuntan al subobjeto de TCLVL1 por su ruta.
+    """
+    def leer_subobjetos(valor):
+        return [{"tag": r["propiedades"]["EquipmentTag"], "max": r["propiedades"].get("MaxEquipment", 1)}
+                for r in valor.get("restricciones", []) if r["propiedades"].get("EquipmentTag")]
+
+    resultado = {}
+    for ruta, valor in equipo.items():
+        propias = leer_subobjetos(valor)
+        ajenas = []
+        for referencia in valor["propiedades"].get("EquipRestrictions") or []:
+            if "/" in referencia:
+                ajenas += leer_subobjetos(equipo.get(referencia.rsplit(".", 1)[0], {}))
+        if propias or ajenas:
+            resultado[ruta.rsplit("/", 1)[1]] = propias + ajenas
+    return resultado
+
+
 def construir_objetos(catalogo_juego, reglas, tamanos):
     objetos = {}
     propiedades_de_armas = cargar_recursos("Weapon_Properties.json")
@@ -642,7 +665,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             origen[id_objeto] = ([etiqueta], NIVEL_DE_ARMA.sub("", id_objeto), False)
         else:
             nuevo.update({"slots": objeto.get("slots") or 1, "slotTypes": objeto.get("specialSlotTypes") or [RANURA_GENERAL]})
-            for campo in ("cooling", "heatCapacity", "capacity", "ammoType"):
+            for campo in ("cooling", "heatCapacity", "capacity", "ammoType", "restrictions"):
                 if objeto.get(campo) is not None:
                     nuevo[campo] = objeto[campo]
             datos_de_equipo(nuevo, exportacion["equipmentType"], exportacion["techLevel"], exportacion["clase"])
@@ -705,7 +728,9 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         origen[nombre] = ([datos.get("AmmoType"), datos.get("EquipmentType")], None, True)
 
     # Equipo de YAML con sus propiedades (Resources/*Equipment_Properties.json).
-    for nombre, valor in por_nombre(cargar_categoria("equipo")).items():
+    equipo = cargar_categoria("equipo")
+    restricciones = restricciones_de_montaje(equipo)
+    for nombre, valor in por_nombre(equipo).items():
         # Los rasgos de 'Mech (rol de la IA, computadores de puntería de la cantina) no se montan en ranuras.
         if valor["clase"] == "MWMechTraitDataAsset":
             continue
@@ -717,6 +742,8 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             "slotTypes": [s["Id"]["PrimaryAssetName"] for s in datos.get("SupportedSlotTypesAssetId", [])] or [RANURA_GENERAL],
         }
         datos_de_equipo(objeto, datos.get("EquipmentType"), datos.get("TechLevel"), valor["clase"])
+        if nombre in restricciones:
+            objeto["restrictions"] = restricciones[nombre]
         origen[nombre] = ([datos.get("EquipmentType")], None, True)
         if nombre in retrorreactores:
             objeto["jumpJet"] = retrorreactores[nombre]
