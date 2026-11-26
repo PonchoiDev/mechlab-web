@@ -104,7 +104,7 @@ La página sustituye la lectura actual por este panel. El peso, las ranuras libr
 
 Debajo del tablero, como en el MechLab de MW5:
 
-- **Weapon performance:** una fila por arma montada con su ubicación, daño, calor, enfriamiento, daño por segundo, calor por segundo, alcance óptimo y máximo, y una fila de totales que da las mismas cifras que el panel.
+- **Weapon performance:** una fila por arma montada con su ubicación, daño, calor, enfriamiento, daño por segundo, calor por segundo, alcance óptimo y máximo, y una fila de totales que da las mismas cifras que el panel. Como en el MechLab de MW5, la columna **Damage / ton** da el daño de cada arma entre su tonelaje, sin la munición; en el total, el daño de las armas a distancia entre su tonelaje. Las armas cuerpo a cuerpo y los AMS no la tienen.
 - **Damage by range:** el radar del MechLab de MW5 (`RangeRadar`). Cada arma hace todo su daño hasta su alcance óptimo y baja en línea recta hasta 0 en su alcance máximo (`GlobalDamageScaleAtMaxRange` de YAW es 0).
 - **Installed ammunition:** como en el MechLab de MW5, cajas y disparos de cada tipo de munición y, si la usa algún arma montada:
   - **salvas:** las que da disparando a la vez todas las armas que la usan (disparos entre la munición por salva de todas, hacia abajo);
@@ -112,6 +112,10 @@ Debajo del tablero, como en el MechLab de MW5:
   - **daño potencial:** las salvas por el daño de una salva de esas armas. Las ametralladoras, que hacen su daño por segundo, cuentan en cada bala el daño de un enfriamiento.
 
   El MML usa la munición de LRM y la de SRM: cuenta en las dos, como si disparara cada una. Una munición que no usa ninguna arma enseña solo sus disparos.
+
+- **Pestañas Weapons y 'Mech:** como en el MechLab de MW5. Weapons tiene lo anterior; 'Mech, las cifras del panel agrupadas como en el MechLab de MW5 (DEFENSE, FIREPOWER, HEAT, MOBILITY y TARGETING) con los mismos valores, y en HEAT dos más:
+  - **Time to max heat:** capacidad de calor / (calor por segundo disparando − refrigeración), con «Never» si la refrigeración llega;
+  - **Time to cool down:** capacidad de calor / refrigeración.
 
 ## Criterios de aceptación
 
@@ -145,9 +149,13 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 | CA24 | El MRM 10 de YAW, el LRM 10 de Clan, el Streak SRM 2 y el Gauss Rifle | se lee su munición por salva | 10, 10, 2 y 1 |
 | CA25 | El HBK-4G vaciado (sin bonificaciones de enfriamiento) con una Machine Gun de nivel 1 (1,5 de daño por segundo, 0,1 s de enfriamiento) y una caja de 5.200 balas | se calcula su munición | 520 s de fuego y 780 de daño potencial (5.200 × 1,5 × 0,1) |
 | CA26 | Una caja de munición sin arma que la use | se calcula su munición | sus disparos, sin salvas, segundos ni daño potencial |
+| CA27 | La build de referencia | se calcula el daño por tonelada | Gauss Rifle 1,14 (17,1 / 15), ER PPC 1,63 (11,4 / 7) y 1,5 en total (62,1 / 41,5 t). La claymore del CP-10-P de serie, sin cifra |
+| CA28 | La build de referencia (capacidad 58, 4,0248 de calor por segundo, que el panel enseña como 4,02, y 3 de refrigeración) | se calcula la pestaña 'Mech | Time to max heat 56,6 s y Time to cool down 19,3 s; el resto, las cifras del panel |
+| CA29 | El JVN-11A de serie sin armas (la refrigeración llega al calor por segundo, 0) | se calcula la pestaña 'Mech | Time to max heat «Never» |
 
 ## Fuera de alcance
 
+- La velocidad de los proyectiles (la columna Velocity del MechLab de MW5): YAW la multiplica en sus emisores por `GlobalProjectileVelocityMultiplier` (1,25 por defecto, salvo los misiles), el Heavy Gauss y el Arrow IV la cambian con curvas en el tiempo y el MML tiene una para LRM y otra para SRM.
 - Los ajustes de Yet Another Weapon distintos de los de por defecto.
 - Los quirks de piloto y las habilidades del piloto.
 - La caída del daño de cada arma con la distancia más allá de la línea recta del radar (curvas `MWO_RangeData`, `DamageScaleAtMaxRange`).
@@ -160,5 +168,5 @@ Van en `src/utils/yaml/combat.test.ts`. La build de referencia es la del NSR-9J 
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/combat.test.ts` (CA1, CA3 a CA9 y CA23 a CA26).
+1. **Datos y lógica:** `src/utils/yaml/combat.test.ts` (CA1, CA3 a CA9 y CA23 a CA29).
 2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: el panel con el NSR-9J, cambiar el nivel de un arma en el inventario y en el tablero, el análisis y el radar.
