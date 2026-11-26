@@ -123,6 +123,13 @@ Reglas leídas del bytecode de `EquipmentUtilities` (YAML), en el orden en que s
 
 5. **Tipo de motor** (`GetEngineAsset`), por las ranuras del motor en cada torso lateral (`EngineSideTorsoSlots`; 0 si el MDA no lo trae, porque el constructor de `FMechData` no lo inicializa): 0 o 1 estándar (vacío en los tipos 0 y 2, `ENGINE_FIXED` en el 1 y `ENGINE_CLAN_FIXED` en el 3); 2 Light en la Esfera Interior (`ENGINE_LIGHT`, `_FIXED` en el 1) y XL en los Clanes; 3 XL (`ENGINE_XL`, `ENGINE_XL_FIXED`, `ENGINE_XL_CLAN`, `ENGINE_XL_CLAN_FIXED`); de 4 a 6 XXL, con los mismos sufijos. Ningún 'Mech de los mods trae la configuración `autoconv` de `mechs.json`, que cambiaría el motor, el giroscopio o el número de núcleos.
 
+## Imagen de referencia
+
+Como en el MechLab de MW5, la cabecera del tablero enseña el dibujo del 'Mech de Sarna, con el enlace a su página («Image source / Sarna»). Se busca igual (`src/services/sarna.ts`): por el nombre del chasis en Sarna y, en las variantes «(C)», la imagen de la variante.
+
+- **Nombre en Sarna:** `tools/generar_yaml.py` lo copia de `src/data/mechs.json` por chasis (`sarnaName`), solo si no es el del chasis: los 'Mechs Clan del juego se llaman en Sarna con su nombre de la Esfera Interior y al revés (el Puma es el Adder, el Hankyu el Arctic Cheetah). Las 151 variantes nuevas de YAML tienen un chasis del juego base, así que sirven las mismas reglas.
+- En el tablero compacto no se enseña, como en MW5.
+
 ## Criterios de aceptación
 
 Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (95 t) y van en `src/utils/yaml/gameReference.test.ts`.
@@ -174,6 +181,7 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 | CA43 | El CN9-CALM y el WHM-IIC-3 de serie, con más rellenos dinámicos que ranuras libres | se colocan los rellenos | sin avisos; el CN9-CALM lleva Reactive 2 en la cabeza, 4 en el brazo izquierdo y 4 en el derecho, y Endo 3 en cada torso lateral, 4 en el brazo izquierdo y 2 en cada pierna; el WHM-IIC-3, Endo 4 en el torso izquierdo, 1 en el derecho y 1 en el brazo derecho, y Ferro 4 en el brazo izquierdo y 3 en el derecho, como en las capturas; y no se puede montar una pieza de 1 ranura en el CN9-CALM |
 | CA44 | Las variantes del juego base que YAML renombra y las nuevas que se llaman igual | se generan los datos | el AS7-D-H se llama AS7-D-H(S) y lleva los quirks AS7-D-HS y AS7-II-HERO; el CPLT-C3, CPLT-C3CS con CLANBUSTER; el BSK-1, BSK-M1; están el AS7-D-H_YAML (AS7-D-H, Atlas II) y el CPLT-C3L (CPLT-C3, Catapult) con su build de serie |
 | CA45 | El CN9-CALM de serie, con la cabina en la ranura «Cockpit» del loadout | se generan los datos | su cabina es la Small, en la ranura de cabina, sin otra pieza especial en la cabeza, y la cabeza tiene 2 ranuras generales, como en la captura |
+| CA46 | Las variantes de YAML | se generan los datos | cada una se busca en Sarna con el nombre de las de su chasis en el MechLab de MW5: el ADR-A como «Adder», el ACH-PRIME como «Arctic Cheetah», el ANH-1G (nueva de YAML) como «Annihilator» |
 
 ## Fuera de alcance
 
@@ -191,5 +199,5 @@ Las cifras de CA1 a CA14 salen de capturas del mechlab del juego con el NSR-9J (
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18; CA40, CA41, CA44 y CA45, las variantes nuevas, sus nombres y sus loadouts), `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA39, CA42 y CA43, las ranuras).
-2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, compartir y guardar una build.
+1. **Datos y lógica:** `src/utils/yaml/gameReference.test.ts` (CA1 a CA14, con las cifras de las capturas), `src/utils/yaml/mechlab.test.ts` (CA15 a CA18; CA40, CA41, CA44 a CA46, las variantes nuevas, sus nombres, sus loadouts y su nombre en Sarna), `src/utils/yaml/stockConversion.test.ts` (CA19 a CA25, la conversión de serie) y `src/utils/yaml/slots.test.ts` (CA26 a CA39, CA42 y CA43, las ranuras).
+2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir un 'Mech, montar y quitar armas y equipo, cambiar el motor, la estructura y la armadura, ver los rellenos dinámicos y los avisos de lo que no cabe, la imagen de Sarna, compartir y guardar una build.
