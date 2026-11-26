@@ -112,4 +112,4 @@ La web solo cubre 'Mechs, pero en los contratos también hay tanques, aerodesliz
   - Con tres carátulas, el hueco de los próximos juegos quedaba solo en otra fila: ahora es una franja a lo ancho debajo de ellas.
   - En el móvil, el segundo enlace partía en tres líneas el título del MechLab: los enlaces van uno debajo de otro.
   - La vista (tipo, búsqueda y orden) va en la URL, para compartir una lista.
-- **Pendiente de comprobar en el juego:** el MechLab trata el daño de las ametralladoras y los lanzallamas (`DamageOverDuration`, con `RateOfFire`) como daño por disparo, lo que les da un DPS muy alto también aquí. Hace falta una captura del juego antes de cambiar el cálculo, que es el mismo en las dos páginas.
+- **Ametralladoras y lanzallamas:** su daño y su calor ya son por segundo; resuelto en [dps-rayos-continuos.md](dps-rayos-continuos.md).

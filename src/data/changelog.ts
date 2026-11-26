@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-26-machine-gun-dps',
+    date: '2026-11-26',
+    title: 'Machine gun and flamer DPS',
+    items: [
+      'Machine guns and flamers deal their damage and heat per second, as in the game, instead of per shot at 600 RPM. Their DPS and heat per second drop to their damage and heat: the Clan Heavy Machine Gun goes from 40 to 4 DPS',
+      'This fixes the DPS and heat of the MechLab, the comparison, the Equipment page and the Enemy units page'
+    ]
+  },
+  {
     id: '2026-11-25-hardpoint-locations',
     date: '2026-11-25',
     title: 'Hardpoint locations',

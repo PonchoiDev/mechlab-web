@@ -2326,6 +2326,7 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
+    "continuous": true,
     "techBase": "Clan"
   },
   "C-GaussRifle": {
@@ -2398,6 +2399,7 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
+    "continuous": true,
     "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.MachineGun.Heavy.Clan",
     "ammoPerVolley": 1
@@ -3012,6 +3014,7 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
+    "continuous": true,
     "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.MachineGun.Light.Clan",
     "ammoPerVolley": 1
@@ -3037,6 +3040,7 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
+    "continuous": true,
     "techBase": "Clan",
     "ammoType": "Ammo.Ballistic.MachineGun.Clan",
     "ammoPerVolley": 1
@@ -4874,6 +4878,7 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
+    "continuous": true,
     "techBase": "InnerSphere"
   },
   "GaussRifle": {
@@ -10002,6 +10007,7 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
+    "continuous": true,
     "techBase": "InnerSphere",
     "ammoType": "Ammo.Ballistic.MachineGun.Standard",
     "ammoPerVolley": 1
@@ -13116,6 +13122,7 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
+    "continuous": true,
     "techBase": "InnerSphere"
   },
   "TargetingComputer_Mk1": {
@@ -13856,6 +13863,7 @@
     },
     "volleyProjectiles": 1,
     "volleyHeatShots": 1,
+    "continuous": true,
     "techBase": "Clan"
   }
 }

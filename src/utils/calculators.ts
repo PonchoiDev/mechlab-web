@@ -172,6 +172,11 @@ export const calculateBoostedSpeed = (loadout: Loadout, baseSpeed: number, speed
 
 export type WeaponStats = Omit<WeaponPerformance, 'zone' | 'item'>;
 
+// Lo que hace un arma en un segundo disparando sin parar. Las ametralladoras y los lanzallamas son
+// rayos sin duración: su daño y su calor ya son por segundo, aunque disparen 600 veces por minuto.
+const perSecond = (item: Item, value: number, rpm: number): number =>
+  item.continuous ? value : value * rpm / 60;
+
 export const getWeaponStats = (item: Item): WeaponStats => {
   const stats = getTierStats(item);
   const damage = getWeaponDamage(item);
@@ -181,7 +186,7 @@ export const getWeaponStats = (item: Item): WeaponStats => {
     damage,
     heat: getWeaponHeat(item),
     rpm,
-    dps: damage * rpm / 60,
+    dps: perSecond(item, damage, rpm),
     damagePerTon: item.tonnage > 0 ? damage / item.tonnage : null,
     range: stats?.range ?? null,
     maxRange: stats?.maxRange ?? stats?.range ?? null,
@@ -203,7 +208,7 @@ const applyWeaponModifiers = (item: Item, stats: WeaponStats, modifiers: Upgrade
     damage,
     heat: stats.heat * (1 + heatBonus) * (1 + modifiers.heatGeneration),
     rpm,
-    dps: damage * rpm / 60,
+    dps: perSecond(item, damage, rpm),
     damagePerTon: item.tonnage > 0 ? damage / item.tonnage : null,
     range: scaleRange(stats.range),
     maxRange: scaleRange(stats.maxRange),
@@ -401,7 +406,7 @@ export const getBuildSummary = (mech: Mech, loadout: Loadout, armor: ArmorState,
   const scale = (value: number | undefined, bonus: number) => value === undefined ? null : value * (1 + bonus);
   const shownCooling = coolingRate === null ? null : roundTo(coolingRate * (1 + modifiers.cooling), 2);
   const shownCapacity = heatCapacity === null ? null : heatCapacity * (1 + modifiers.heatCapacity);
-  const heatPerSecond = sumBy(rangedWeapons, weapon => weapon.heat * weapon.rpm / 60);
+  const heatPerSecond = sumBy(rangedWeapons, weapon => perSecond(weapon.item, weapon.heat, weapon.rpm));
   const rangedTonnage = sumBy(rangedWeapons, weapon => weapon.item.tonnage);
 
   return {
