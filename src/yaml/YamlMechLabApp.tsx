@@ -3,6 +3,7 @@ import { BrandMark } from '../components/BrandMark';
 import { BuildStatus } from '../components/BuildStatus';
 import { ContextMenu, type MenuEntry } from '../components/ContextMenu';
 import { FeedbackDialog } from '../components/FeedbackDialog';
+import { PublishBuildDialog } from '../components/PublishBuildDialog';
 import { SaveBuildDialog } from '../components/SaveBuildDialog';
 import { MechImage, SarnaSourceLink } from '../components/MechReference';
 import { SiteNav } from '../components/SiteNav';
@@ -69,6 +70,13 @@ export function YamlMechLabApp() {
   const [isUpgradesOpen, setIsUpgradesOpen] = useState(false);
   const [isSaveOpen, setIsSaveOpen] = useState(false);
   const [isBuildsOpen, setIsBuildsOpen] = useState(false);
+  // Se publican en la página de builds de MW5, con la etiqueta YAML (docs/specs/publicar-builds-yaml.md).
+  const [publishTarget, setPublishTarget] = useState<{ code: string; name: string } | null>(null);
+  const closePublish = useCallback(() => setPublishTarget(null), []);
+  // Con la ventana de publicar encima, Escape la cierra a ella y My builds sigue abierta debajo.
+  const closeBuilds = useCallback(() => {
+    if (!publishTarget) setIsBuildsOpen(false);
+  }, [publishTarget]);
   // La build guardada abierta, para actualizarla al guardar (docs/specs/builds-guardadas-yaml.md).
   const [activeSavedId, setActiveSavedId] = useState<string | null>(null);
   const saved = useSavedBuilds(YAML_SAVED_BUILDS_KEY);
@@ -229,6 +237,8 @@ export function YamlMechLabApp() {
         savedBuildCount={saved.builds.length}
         onSaveBuild={() => setIsSaveOpen(true)}
         onOpenBuilds={() => setIsBuildsOpen(true)}
+        canPublish={build.weapons.length > 0 || build.items.length > 0}
+        onPublish={() => setPublishTarget({ code: buildCode, name: editableBuild?.name ?? defaultName })}
         onShare={(anchor) => setMenu({
           title: 'Share build',
           x: anchor.left,
@@ -367,8 +377,19 @@ export function YamlMechLabApp() {
             showToast(`Loaded “${name}”`);
           }}
           onCopyLink={async (code) => showToast(await copyText(`${window.location.origin}${window.location.pathname}?b=${code}`) ? 'Build link copied' : 'Could not copy the link')}
+          onPublish={(entry) => setPublishTarget({ code: entry.code, name: entry.name })}
           onMessage={showToast}
-          onClose={() => setIsBuildsOpen(false)}
+          onClose={closeBuilds}
+        />
+      )}
+      {publishTarget && (
+        <PublishBuildDialog
+          key={publishTarget.code}
+          game="mercs"
+          code={publishTarget.code}
+          defaultName={publishTarget.name}
+          onCopyLink={async (url) => showToast(await copyText(url) ? 'Link copied' : 'Could not copy the link')}
+          onClose={closePublish}
         />
       )}
       {menu && <ContextMenu x={menu.x} y={menu.y} title={menu.title} entries={menu.entries} onClose={() => setMenu(null)} />}

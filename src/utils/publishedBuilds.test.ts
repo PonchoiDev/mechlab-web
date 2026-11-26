@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getOwnPublishedCodes, parseOwnedKeys, parseReportedIds, parseVotedIds, sortByVotes, toSavedBuild, type PublishedBuild } from './publishedBuilds';
+import { getOwnPublishedCodes, getPublishedBuildUrl, isYamlBuildCode, parseOwnedKeys, parseReportedIds, parseVotedIds, sortByVotes, toSavedBuild, type PublishedBuild } from './publishedBuilds';
 
 const build = (id: string, votes: number, createdAt: string): PublishedBuild => ({
   id,
@@ -66,5 +66,20 @@ describe('builds publicadas en el navegador', () => {
       code: 'code',
       savedAt: '2026-11-20T10:00:00.000Z'
     });
+  });
+});
+
+// Las builds del MechLab de YAML en la página de builds de MW5 (docs/specs/publicar-builds-yaml.md).
+describe('builds publicadas de YAML', () => {
+  it('CA5: un código es de YAML si empieza por Y1.', () => {
+    expect(isYamlBuildCode('Y1.eyJtIjoiQ1RGLTFYIn0')).toBe(true);
+    expect(isYamlBuildCode('WzEsIkFTNy1EIl0')).toBe(false);
+    expect(isYamlBuildCode('Y2.eyJtIjoiQ1RGLTFYIn0')).toBe(false);
+    expect(isYamlBuildCode('')).toBe(false);
+  });
+
+  it('CA6: el enlace de una build de YAML abre el MechLab de YAML y el de MW5, el de MW5', () => {
+    expect(getPublishedBuildUrl('Y1.abc', 'https://mw-builder.com')).toBe('https://mw-builder.com/mercs/yaml/?b=Y1.abc');
+    expect(getPublishedBuildUrl('WzEsIkFTNy1EIl0', 'https://mw-builder.com')).toBe('https://mw-builder.com/mercs/?b=WzEsIkFTNy1EIl0');
   });
 });

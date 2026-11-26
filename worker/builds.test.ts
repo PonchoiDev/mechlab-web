@@ -212,3 +212,56 @@ describe('sin base de datos', () => {
     expect((await call(null, request('POST', BUILDS_PATH, { body: {} }))).status).toBe(503);
   });
 });
+
+// Las builds del MechLab de YAML (docs/specs/publicar-builds-yaml.md): `Y1.` y el JSON { m, b } en base64url.
+const yamlCodeFor = (mechId: unknown, build: unknown = { internal: {}, items: [], weapons: [], armor: {} }) =>
+  `Y1.${toBase64Url(JSON.stringify({ m: mechId, b: build }))}`;
+
+// Un código de YAML de al menos la longitud pedida (unos pocos caracteres más), con relleno en la build.
+const yamlCodeOfLength = (length: number) => {
+  const base = yamlCodeFor('ANH-1E', { internal: {}, items: [], weapons: [], armor: {}, pad: '' });
+  const extra = Math.ceil(((length - base.length) * 3) / 4);
+  const code = yamlCodeFor('ANH-1E', { internal: {}, items: [], weapons: [], armor: {}, pad: 'x'.repeat(extra) });
+  return code;
+};
+
+describe('código de build de YAML', () => {
+  it('CA1: vale con un id y una build, y no con otra forma o más de 16 000 caracteres', () => {
+    expect(parseBuildCode(yamlCodeFor('CTF-1X'))).toEqual({ mechId: 'CTF-1X' });
+    expect(parseBuildCode(yamlCodeFor('AS7-D-H_YAML'))).toEqual({ mechId: 'AS7-D-H_YAML' });
+    expect(parseBuildCode(yamlCodeFor('AS7 D<script>'))).toBeNull();
+    expect(parseBuildCode(yamlCodeFor(42))).toBeNull();
+    expect(parseBuildCode(yamlCodeFor('CTF-1X', null))).toBeNull();
+    expect(parseBuildCode(yamlCodeFor('CTF-1X', ['MediumLaser']))).toBeNull();
+    expect(parseBuildCode(yamlCodeFor('CTF-1X', 'build'))).toBeNull();
+    expect(parseBuildCode('Y1.not base64!')).toBeNull();
+    expect(parseBuildCode(`Y1.${toBase64Url('{not json')}`)).toBeNull();
+    expect(parseBuildCode(`Y1.${toBase64Url(JSON.stringify([1, 'CTF-1X', [], []]))}`)).toBeNull();
+    expect(parseBuildCode('Y1.')).toBeNull();
+    expect(parseBuildCode(yamlCodeOfLength(15990))).toEqual({ mechId: 'ANH-1E' });
+    expect(parseBuildCode(yamlCodeOfLength(16010))).toBeNull();
+  });
+
+  it('CA2: un código de YAML de 5063 caracteres se publica en mercs y sale en su lista', async () => {
+    const store = createMemoryBuildStore();
+    const code = yamlCodeOfLength(5063);
+    expect(code.length).toBeGreaterThanOrEqual(5063);
+    const { response, data } = await publish(store, { code });
+    expect(response.status).toBe(201);
+    expect(data.build).toMatchObject({ game: 'mercs', mechId: 'ANH-1E', code });
+    expect((await list(store)).map(build => build.code)).toEqual([code]);
+  });
+
+  it('CA3: un código de YAML no se publica en battletech', async () => {
+    const store = createMemoryBuildStore();
+    const { response } = await publish(store, { game: 'battletech', code: yamlCodeFor('CTF-1X') });
+    expect(response.status).toBe(400);
+    expect(await list(store, 'battletech')).toEqual([]);
+  });
+
+  it('CA4: el tope de 16 000 caracteres es solo para los códigos de YAML', () => {
+    const long = toBase64Url(JSON.stringify([1, 'AS7-D', [10, 4, 20, 6], [['x'.repeat(4000)], [], [], [], [], [], [], []]]));
+    expect(long.length).toBeGreaterThan(4000);
+    expect(parseBuildCode(long)).toBeNull();
+  });
+});

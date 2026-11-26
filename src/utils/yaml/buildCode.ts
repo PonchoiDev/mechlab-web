@@ -2,7 +2,8 @@ import type { YamlBuild } from '../../types/yaml-mechlab';
 
 // Código de una build de YAML para los enlaces. Lleva su propio prefijo para que un código del MechLab
 // de MW5 (otras reglas, otras piezas) no se abra aquí por error.
-const PREFIX = 'Y1.';
+export const YAML_BUILD_PREFIX = 'Y1.';
+const PREFIX = YAML_BUILD_PREFIX;
 
 function toBase64Url(text: string): string {
   const bytes = new TextEncoder().encode(text);

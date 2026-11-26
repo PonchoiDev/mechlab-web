@@ -53,6 +53,8 @@ interface PublishedBuildsPageProps {
   game: BuildGame;
   intro: ReactNode;
   config: BuildListConfig;
+  // Los filtros de My builds, si no son los de la lista (la de MW5 añade Source, y en My builds todas son de MW5).
+  savedConfig?: BuildListConfig;
   sortKey: string;
   summarize: (build: SavedBuild) => PublishedBuildSummary;
   // El nombre de la variante de un mechId, para el filtro ?mech= que pone la lista de chasis.
@@ -61,6 +63,8 @@ interface PublishedBuildsPageProps {
   // Las builds guardadas en el navegador (My builds) de este juego; sin clave, las de MW5.
   savedBuildsKey?: string;
   mechlabUrl: string;
+  // Avisa de las builds de la lista cada vez que cambia: la de MW5 carga así los datos de YAML si hacen falta.
+  onBuildsChange?: (builds: PublishedBuild[]) => void;
 }
 
 const dateFormat = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -69,7 +73,7 @@ type Confirming = { id: string; action: 'delete' };
 
 // La página de builds publicadas de un juego (/mercs/builds/ y /battletech/builds/): las de todos los
 // jugadores, con los filtros y el orden de My builds, votos, denuncias y las propias editables.
-export function PublishedBuildsPage({ game, intro, config, sortKey, summarize, mechName, buildUrl, savedBuildsKey, mechlabUrl }: PublishedBuildsPageProps) {
+export function PublishedBuildsPage({ game, intro, config, savedConfig = config, sortKey, summarize, mechName, buildUrl, savedBuildsKey, mechlabUrl, onBuildsChange }: PublishedBuildsPageProps) {
   const params = useMemo(() => new URLSearchParams(window.location.search), []);
   const [mechFilter, setMechFilter] = useState(params.get('mech'));
   const highlighted = params.get('build');
@@ -108,6 +112,10 @@ export function PublishedBuildsPage({ game, intro, config, sortKey, summarize, m
     });
     return () => { cancelled = true; };
   }, [game]);
+
+  useEffect(() => {
+    onBuildsChange?.(state.builds);
+  }, [state.builds, onBuildsChange]);
 
   useEffect(() => {
     if (state.status === 'ready' && highlighted) {
@@ -424,7 +432,7 @@ export function PublishedBuildsPage({ game, intro, config, sortKey, summarize, m
       {isSavedOpen && (
         <SavedBuildsPublishDialog
           entries={savedEntries}
-          config={config}
+          config={savedConfig}
           sortKey={sortKey}
           publishedCodes={publishedCodes}
           buildUrl={buildUrl}

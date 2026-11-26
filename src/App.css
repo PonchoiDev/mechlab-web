@@ -2245,6 +2245,37 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .builds-tag.is-ferro { color: #ff5a4f; }
 .builds-tag.is-ap,
 .builds-tag.is-ecm { color: var(--work-cyan); }
+/* Las builds del MechLab de YAML en la página de builds de MW5, con el color de su título. */
+.builds-tag.is-yaml { color: var(--work-lime); border-color: var(--work-lime); }
+
+/* Interruptores con icono de un grupo de piezas (el origen en la página de builds): apagados, el icono en gris. */
+.builds-part-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+
+.builds-part-toggle img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.builds-part-toggle[aria-pressed="false"] img {
+  filter: grayscale(1);
+  opacity: 0.35;
+}
+
+.builds-classes .builds-part-toggle:disabled { cursor: default; opacity: 1; }
+
+/* Encendido, un borde en lugar del relleno de los chips: los iconos tienen sus propios colores. */
+.builds-part-toggle[aria-pressed="true"] {
+  border-color: var(--work-lime);
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: inset 0 0 0 1px var(--work-lime);
+}
 
 /* Interruptor de los mínimos: anclajes del 'Mech o armas montadas. */
 .builds-minimums-of {

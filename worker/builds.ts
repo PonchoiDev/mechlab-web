@@ -18,6 +18,11 @@ const MAX_MECH_ID_LENGTH = 100;
 // Los dos juegos codifican la build como [versión, mechId, armadura, zonas] (src/utils/buildCode.ts y
 // src/utils/battletech/buildCode.ts); MW5 añade al final las mejoras de la cantina.
 const BUILD_CODE_VERSION = 1;
+// Las builds del MechLab de YAML se publican con las de MW5 (game mercs) y se distinguen por el prefijo de su
+// código: `Y1.` y el JSON { m: mechId, b: build } en base64url (src/utils/yaml/buildCode.ts). Son más largas,
+// porque guardan cada pieza con su ranura: el ANH-1E de serie con cinco mejoras de la cantina pasa de 5000.
+const YAML_CODE_PREFIX = 'Y1.';
+const MAX_YAML_CODE_LENGTH = 16000;
 const MECH_ID_PATTERN = /^[A-Za-z0-9_.-]+$/;
 const BASE64URL_PATTERN = /^[A-Za-z0-9_-]+$/;
 
@@ -92,25 +97,43 @@ export interface BuildsOptions {
   onReport?: (report: BuildReport) => Promise<void>;
 }
 
+const asRecord = (body: unknown): Record<string, unknown> | null =>
+  typeof body === 'object' && body !== null && !Array.isArray(body) ? body as Record<string, unknown> : null;
+
 const fromBase64Url = (code: string) => {
   const binary = atob(code.replace(/-/g, '+').replace(/_/g, '/'));
   return new TextDecoder().decode(Uint8Array.from(binary, char => char.charCodeAt(0)));
 };
 
-// El código tiene que tener la forma de los dos juegos. La build no se decodifica entera: necesitaría los
-// datos de los juegos, que no caben en el Worker; la página descarta las que no se pueden abrir.
-export const parseBuildCode = (code: unknown): { mechId: string } | null => {
-  if (typeof code !== 'string' || code.length === 0 || code.length > MAX_CODE_LENGTH || !BASE64URL_PATTERN.test(code)) return null;
-  let parsed: unknown;
+const isMechId = (mechId: unknown): mechId is string =>
+  typeof mechId === 'string' && mechId.length <= MAX_MECH_ID_LENGTH && MECH_ID_PATTERN.test(mechId);
+
+const decodeJson = (code: string): unknown => {
   try {
-    parsed = JSON.parse(fromBase64Url(code));
+    return JSON.parse(fromBase64Url(code));
   } catch {
-    return null;
+    return undefined;
   }
+};
+
+const parseYamlBuildCode = (code: string): { mechId: string } | null => {
+  const body = code.slice(YAML_CODE_PREFIX.length);
+  if (code.length > MAX_YAML_CODE_LENGTH || !BASE64URL_PATTERN.test(body)) return null;
+  const parsed = asRecord(decodeJson(body));
+  return parsed && isMechId(parsed.m) && asRecord(parsed.b) ? { mechId: parsed.m } : null;
+};
+
+// El código tiene que tener la forma de los dos juegos, o la del MechLab de YAML. La build no se decodifica
+// entera: necesitaría los datos de los juegos, que no caben en el Worker; la página descarta las que no se
+// pueden abrir.
+export const parseBuildCode = (code: unknown): { mechId: string } | null => {
+  if (typeof code !== 'string' || code.length === 0) return null;
+  if (code.startsWith(YAML_CODE_PREFIX)) return parseYamlBuildCode(code);
+  if (code.length > MAX_CODE_LENGTH || !BASE64URL_PATTERN.test(code)) return null;
+  const parsed = decodeJson(code);
   if (!Array.isArray(parsed) || parsed[0] !== BUILD_CODE_VERSION) return null;
   const [, mechId, armor, zones] = parsed;
-  if (typeof mechId !== 'string' || mechId.length > MAX_MECH_ID_LENGTH || !MECH_ID_PATTERN.test(mechId)) return null;
-  if (!Array.isArray(armor) || !Array.isArray(zones)) return null;
+  if (!isMechId(mechId) || !Array.isArray(armor) || !Array.isArray(zones)) return null;
   return { mechId };
 };
 
@@ -137,9 +160,6 @@ const parseTexts = (body: Record<string, unknown>): BuildTexts | null => {
 
 const isGame = (value: unknown): value is BuildGame => (BUILD_GAMES as readonly unknown[]).includes(value);
 
-const asRecord = (body: unknown): Record<string, unknown> | null =>
-  typeof body === 'object' && body !== null && !Array.isArray(body) ? body as Record<string, unknown> : null;
-
 // El motivo de una denuncia y su mensaje opcional. La denuncia no se rechaza por ellos: un motivo desconocido
 // pasa a Other.
 export const parseReportInput = (body: unknown): { reason: ReportReason; message: string } => {
@@ -154,6 +174,8 @@ export const parsePublishInput = (body: unknown): (BuildTexts & { game: BuildGam
   if (!record) return null;
   if (typeof record.website === 'string' && record.website !== '') return null;
   if (!isGame(record.game)) return null;
+  // Las builds de YAML son de MW5 Mercenaries con el mod: solo van en su página.
+  if (record.game !== 'mercs' && typeof record.code === 'string' && record.code.startsWith(YAML_CODE_PREFIX)) return null;
   const code = parseBuildCode(record.code);
   const texts = parseTexts(record);
   if (!code || !texts) return null;
