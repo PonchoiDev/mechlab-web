@@ -2,6 +2,8 @@ import type { Zone } from '../../types/mech';
 import type {
   YamlBuild, YamlCombat, YamlItem, YamlMech, YamlWeaponFamily, YamlWeaponGroup, YamlWeaponTier
 } from '../../types/yaml-mechlab';
+import { COOLING_KEEPS_UP, EMPTY_VALUE } from '../format';
+import { getHeatTimes } from '../heat';
 import { getRangeStep, type RangeProfileEntry } from '../rangeRadar';
 import { getYamlItem } from './data';
 import { getTraitMultiplier, getTraitPercent } from './traits';
@@ -137,6 +139,8 @@ export interface YamlWeaponPerformance {
   // Segundos entre salva y salva disparando sin parar: el ciclo del daño por segundo o, en los rayos sin
   // duración, el enfriamiento (cada uno gasta una bala).
   cycle: number;
+  // Daño entre el tonelaje del arma, sin su munición; null en el cuerpo a cuerpo y los AMS.
+  damagePerTon: number | null;
 }
 
 function maxRangeOf(combat: YamlCombat, stats: YamlWeaponTier, optimal: number, bonuses: YamlWeaponBonuses): number {
@@ -156,7 +160,7 @@ function optimalRangeOf(combat: YamlCombat, stats: YamlWeaponTier, bonuses: Yaml
   return combat.rangeRule === 'gaussImproved' ? optimal * GLOBAL_MAX_RANGE_MULTIPLIER * GAUSS_RANGE_MULTIPLIER : optimal;
 }
 
-function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoint: string, itemId: string, tier: number): YamlWeaponPerformance | null {
+function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoint: string, itemId: string, tier: number): Omit<YamlWeaponPerformance, 'damagePerTon'> | null {
   const item = getYamlItem(itemId);
   const combat = item?.combat;
   const stats = getWeaponTierStats(itemId, tier);
@@ -197,15 +201,26 @@ function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoi
   return { ...base, damage, heat, cooldown, duration: 0, dps: perSecond(damage, cycle), heatPerSecond: perSecond(heat, cycle), cycle };
 }
 
+const isRanged = (weapon: Pick<YamlWeaponPerformance, 'family'>) => weapon.family !== 'melee' && weapon.family !== 'ams';
+
 // Las armas montadas, sin los ataques de los actuadores (manos y antebrazos), que el juego no cuenta.
 export function getWeaponPerformance(mech: YamlMech, build: YamlBuild): YamlWeaponPerformance[] {
   return build.weapons
     .filter(mounted => !getYamlItem(mounted.item)?.actuator)
     .map(mounted => weaponPerformance(mech, build, mounted.zone, mounted.hardpoint, mounted.item, mounted.tier ?? getDefaultTier(mounted.item)))
-    .filter((performance): performance is YamlWeaponPerformance => performance !== null);
+    .filter(performance => performance !== null)
+    .map(performance => {
+      const tons = getYamlItem(performance.item)?.tons ?? 0;
+      return { ...performance, damagePerTon: isRanged(performance) && tons > 0 ? performance.damage / tons : null };
+    });
 }
 
-const isRanged = (weapon: YamlWeaponPerformance) => weapon.family !== 'melee' && weapon.family !== 'ams';
+// El daño de todas las armas a distancia entre su tonelaje, como el total de la tabla del MechLab de MW5.
+export function getYamlDamagePerTon(weapons: YamlWeaponPerformance[]): number | null {
+  const ranged = weapons.filter(isRanged);
+  const tons = ranged.reduce((sum, weapon) => sum + (getYamlItem(weapon.item)?.tons ?? 0), 0);
+  return tons > 0 ? ranged.reduce((sum, weapon) => sum + weapon.damage, 0) / tons : null;
+}
 
 // El daño de un arma a una distancia: todo hasta su alcance óptimo y en línea recta hasta 0 en el máximo
 // (GlobalDamageScaleAtMaxRange de YAW es 0).
@@ -428,5 +443,64 @@ export function getYamlStatsPanel(mech: YamlMech, build: YamlBuild): YamlStatCel
     const value = stats[key];
     const ratio = max === null ? (value > 0 ? 1 : 0) : Math.min(1, Math.max(0, value / max));
     return { key, label, value: formatYamlStat(value), ratio };
+  }));
+}
+
+export interface YamlChassisStat {
+  label: string;
+  value: string;
+  unit?: string;
+}
+
+// La pestaña 'Mech: las cifras del panel con los grupos del resumen del MechLab de MW5 (LoadoutAnalysis) y,
+// en HEAT, los tiempos de calor, que el panel no tiene.
+const CHASSIS_GROUPS: { title: string; stats: { key: keyof YamlMechStats; label: string; unit?: string }[] }[] = [
+  { title: 'DEFENSE', stats: [{ key: 'armor', label: 'Armor' }, { key: 'structure', label: 'Structure' }] },
+  {
+    title: 'FIREPOWER',
+    stats: [
+      { key: 'alphaDamage', label: 'Alpha damage' }, { key: 'dps', label: 'Damage per second' },
+      { key: 'meleeDamage', label: 'Melee damage, average' }, { key: 'meleeDps', label: 'Melee damage per second' },
+      { key: 'weaponRange', label: 'Max weapon range', unit: 'm' }, { key: 'ammo', label: 'Ammo' }
+    ]
+  },
+  {
+    title: 'HEAT',
+    stats: [
+      { key: 'cooling', label: 'Cooling rate', unit: 'heat/s' }, { key: 'heatCapacity', label: 'Heat capacity' },
+      { key: 'alphaHeat', label: 'Alpha heat' }, { key: 'heatPerSecond', label: 'Heat while firing', unit: 'heat/s' }
+    ]
+  },
+  {
+    title: 'MOBILITY',
+    stats: [
+      { key: 'speed', label: 'Top speed', unit: 'km/h' }, { key: 'turnRate', label: 'Turn speed', unit: '°/s' },
+      { key: 'torsoTwistRate', label: 'Torso twist', unit: '°/s' }, { key: 'torsoYaw', label: 'Torso yaw', unit: '°' },
+      { key: 'armYaw', label: 'Arm yaw', unit: '°' }, { key: 'jumpHeight', label: 'Jump height', unit: 'm' }
+    ]
+  },
+  {
+    title: 'TARGETING',
+    stats: [
+      { key: 'sensorRange', label: 'Sensor range', unit: 'm' }, { key: 'amsIntercept', label: 'AMS intercept', unit: 'missiles/s' },
+      { key: 'amsRange', label: 'AMS range', unit: 'm' }
+    ]
+  }
+];
+
+export function getYamlChassisData(mech: YamlMech, build: YamlBuild): { title: string; stats: YamlChassisStat[] }[] {
+  const stats = getYamlMechStats(mech, build);
+  const { timeToMaxHeat, timeToCoolDown } = getHeatTimes({ heatCapacity: stats.heatCapacity, heatPerSecond: stats.heatPerSecond, coolingRate: stats.cooling });
+  const seconds = (value: number | null) => value === null ? { value: EMPTY_VALUE } : { value: value.toFixed(1), unit: 's' };
+  const heatTimes: YamlChassisStat[] = [
+    { label: 'Time to max heat', ...(timeToMaxHeat === 'never' ? { value: COOLING_KEEPS_UP } : seconds(timeToMaxHeat)) },
+    { label: 'Time to cool down', ...seconds(timeToCoolDown) }
+  ];
+  return CHASSIS_GROUPS.map(group => ({
+    title: group.title,
+    stats: [
+      ...group.stats.map(({ key, label, unit }) => ({ label, value: formatYamlStat(stats[key]), unit })),
+      ...(group.title === 'HEAT' ? heatTimes : [])
+    ]
   }));
 }
