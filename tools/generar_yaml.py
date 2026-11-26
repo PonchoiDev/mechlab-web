@@ -473,6 +473,14 @@ def combate_del_arma(nombre, niveles):
         else (proyectil.get("NumberOfTimesToFire") or 0) * (proyectil.get("DelayBetweenFiring") or 0)
     if salva:
         combate["volleyTime"] = round(salva, 4)
+    # La munición de cada salva, con la regla del MechLab de MW5 (obtener_municion_por_salva de generar_items.py):
+    # un disparo por misil y, si el proyectil gasta en cada disparo de la ráfaga (bConsumeAmmoOnSubsequentFire, el
+    # MRM de YAW o el LRM de Clan), por cada uno. Los perdigones de los LB-X no gastan munición propia.
+    disparo = misiles.get("Projectile") or proyectil
+    por_salva = (misiles.get("NumberOfMissiles") or 1) * \
+        ((disparo.get("NumberOfTimesToFire") or 1) if disparo.get("bConsumeAmmoOnSubsequentFire") else 1)
+    if por_salva != 1:
+        combate["ammoPerVolley"] = por_salva
     return combate
 
 

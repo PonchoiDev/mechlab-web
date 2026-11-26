@@ -134,6 +134,9 @@ export interface YamlWeaponPerformance {
   maxRange: number;
   // AMS: misiles destruidos por segundo.
   amsRate: number;
+  // Segundos entre salva y salva disparando sin parar: el ciclo del daño por segundo o, en los rayos sin
+  // duración, el enfriamiento (cada uno gasta una bala).
+  cycle: number;
 }
 
 function maxRangeOf(combat: YamlCombat, stats: YamlWeaponTier, optimal: number, bonuses: YamlWeaponBonuses): number {
@@ -168,29 +171,30 @@ function weaponPerformance(mech: YamlMech, build: YamlBuild, zone: Zone, hardpoi
   // GetAlphaStrikeStats: disparos por minuto = 60 / ciclo, y por segundo, × valor / 60.
   const perSecond = (value: number, cycle: number) => f(f(value * f(60 / cycle)) / 60);
   if (combat.family === 'ams') {
-    return { ...base, damage: 0, heat: 0, cooldown, duration: 0, dps: 0, heatPerSecond: 0, amsRate: f(f(stats.amsRate ?? 0) * bonuses.missilesDestroyed) };
+    return { ...base, damage: 0, heat: 0, cooldown, duration: 0, dps: 0, heatPerSecond: 0, cycle: cooldown, amsRate: f(f(stats.amsRate ?? 0) * bonuses.missilesDestroyed) };
   }
   if (combat.family === 'melee') {
     const damage = f(f(stats.damage) * bonuses.damage);
     const meleeCooldown = f(f(stats.cooldown) * bonuses.cooldown);
     const duration = f(stats.duration ?? 0);
-    return { ...base, damage, heat: 0, cooldown: meleeCooldown, duration, dps: perSecond(damage, f(duration + meleeCooldown)), heatPerSecond: 0 };
+    const cycle = f(duration + meleeCooldown);
+    return { ...base, damage, heat: 0, cooldown: meleeCooldown, duration, dps: perSecond(damage, cycle), heatPerSecond: 0, cycle };
   }
   const heat = f(f(stats.heat) * bonuses.heat);
   if (combat.family === 'trace') {
     const damage = f(f(stats.damage) * bonuses.damage);
     // Rayos sin duración (ametralladoras, lanzallamas): su daño y su calor ya son por segundo.
-    if (!stats.duration) return { ...base, damage, heat, cooldown: 0, duration: 0, dps: damage, heatPerSecond: heat };
+    if (!stats.duration) return { ...base, damage, heat, cooldown: 0, duration: 0, dps: damage, heatPerSecond: heat, cycle: cooldown };
     // YAWTrace: los láseres de pulsos y los AMS láser ofensivos (YAWCE AMS Type 0, nombre con «Offensive»).
     const pulse = hasTag(combat.weaponType, PULSE_LASER_TAG) || (hasTag(combat.weaponType, LASER_AMS_TAG) && /offensive/i.test(itemId));
     const duration = f(f(f(stats.duration) * bonuses.duration) * f(pulse ? PULSE_LASER_DURATION_MULTIPLIER : 1));
     const cycle = f(cooldown + duration);
-    return { ...base, damage, heat, cooldown, duration, dps: perSecond(damage, cycle), heatPerSecond: perSecond(heat, cycle) };
+    return { ...base, damage, heat, cooldown, duration, dps: perSecond(damage, cycle), heatPerSecond: perSecond(heat, cycle), cycle };
   }
   // YAWBallistic multiplica también el daño de balísticas y PPC por heatDamageMulti; YAWMissile no.
   const damage = f(f(f(stats.damage) * bonuses.damage) * (combat.family === 'projectile' ? bonuses.heatDamage : 1));
   const cycle = f(cooldown + f(combat.volleyTime ?? 0));
-  return { ...base, damage, heat, cooldown, duration: 0, dps: perSecond(damage, cycle), heatPerSecond: perSecond(heat, cycle) };
+  return { ...base, damage, heat, cooldown, duration: 0, dps: perSecond(damage, cycle), heatPerSecond: perSecond(heat, cycle), cycle };
 }
 
 // Las armas montadas, sin los ataques de los actuadores (manos y antebrazos), que el juego no cuenta.
@@ -233,7 +237,21 @@ export function getYamlRangeProfile(weapons: YamlWeaponPerformance[]): RangeProf
 }
 
 // Las cajas de munición montadas por tipo: cuántas y cuántos disparos suman, como en el análisis de MW5.
-export function getYamlAmmunition(build: YamlBuild): { ammoType: string; label: string; bins: number; capacity: number }[] {
+export interface YamlAmmunitionGroup {
+  ammoType: string;
+  label: string;
+  bins: number;
+  capacity: number;
+  // Como en el MechLab de MW5 (groupAmmunition): salvas disparando a la vez todas las armas que la usan, segundos
+  // de fuego sin parar y el daño de todas las salvas. null si no la usa ningún arma montada.
+  volleys: number | null;
+  seconds: number | null;
+  potentialDamage: number | null;
+}
+
+// Las ametralladoras hacen su daño por segundo pero gastan una bala cada enfriamiento: cada bala hace lo de
+// un enfriamiento. El MML usa dos municiones y cuenta en las dos, como si disparara cada una.
+export function getYamlAmmunition(mech: YamlMech, build: YamlBuild): YamlAmmunitionGroup[] {
   const byType = new Map<string, { label: string; bins: number; capacity: number }>();
   for (const mounted of build.items) {
     const item = getYamlItem(mounted.item);
@@ -242,7 +260,20 @@ export function getYamlAmmunition(build: YamlBuild): { ammoType: string; label: 
     const entry = byType.get(key) ?? { label: item.name, bins: 0, capacity: 0 };
     byType.set(key, { ...entry, bins: entry.bins + 1, capacity: entry.capacity + (item.capacity ?? 0) });
   }
-  return [...byType.entries()].map(([ammoType, entry]) => ({ ammoType, ...entry }));
+  const weapons = byType.size > 0 ? getWeaponPerformance(mech, build) : [];
+  return [...byType.entries()].map(([ammoType, entry]) => {
+    const users = weapons.filter(weapon => getYamlItem(weapon.item)?.ammoTypes?.includes(ammoType));
+    const perVolley = (weapon: YamlWeaponPerformance) => getYamlItem(weapon.item)?.combat?.ammoPerVolley ?? 1;
+    const ammoPerVolley = users.reduce((sum, weapon) => sum + perVolley(weapon), 0);
+    const ammoPerSecond = users.reduce((sum, weapon) => sum + (weapon.cycle > 0 ? perVolley(weapon) / weapon.cycle : 0), 0);
+    const volleyDamage = users.reduce((sum, weapon) => sum + (weapon.family === 'trace' && weapon.duration === 0 ? weapon.damage * weapon.cycle : weapon.damage), 0);
+    const volleys = ammoPerVolley > 0 ? Math.floor(entry.capacity / ammoPerVolley) : null;
+    return {
+      ammoType, ...entry, volleys,
+      seconds: ammoPerSecond > 0 ? Math.round(entry.capacity / ammoPerSecond) : null,
+      potentialDamage: volleys === null ? null : volleys * volleyDamage
+    };
+  });
 }
 
 export interface YamlMechStats {

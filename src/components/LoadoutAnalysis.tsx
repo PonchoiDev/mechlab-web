@@ -7,11 +7,7 @@ import { getWeaponLabel } from '../utils/items';
 import { ZONE_LABELS } from '../utils/zones';
 import { COOLING_KEEPS_UP, EMPTY_VALUE, joinWithCounts } from '../utils/format';
 import { UpgradedValue } from './UpgradedValue';
-
-const formatDuration = (seconds: number): string => {
-  const minutes = Math.floor(seconds / 60);
-  return minutes > 0 ? `${minutes}m ${String(seconds % 60).padStart(2, '0')}s` : `${seconds}s`;
-};
+import { AmmunitionList } from './AmmunitionList';
 
 // Número con hasta dos decimales, sin ceros de más (8.97, 18.5, 66).
 const formatNumber = (value: number, decimals = 2) => String(Number(value.toFixed(decimals)));
@@ -141,34 +137,7 @@ function WeaponsTab({ summary, base }: { summary: BuildSummary; base?: BuildSumm
           </>
         )}
       </div>
-      {ammunition.length > 0 && (
-        <div className="ammunition-list">
-          <header className="analysis-heading">
-            <div>
-              <p className="eyebrow">STORES</p>
-              <h2>Installed ammunition</h2>
-            </div>
-          </header>
-          {ammunition.map(({ ammoType, label, capacity, bins, volleys, seconds, potentialDamage }) => (
-            <div className="ammunition-row" key={ammoType}>
-              <span>{label}<small>{bins} {bins === 1 ? 'bin' : 'bins'}</small></span>
-              <span className="ammunition-amount">
-                <strong>{capacity} rounds</strong>
-                <small>
-                  {volleys === null
-                    ? 'no weapon uses it'
-                    : `${volleys} ${volleys === 1 ? 'volley' : 'volleys'}${seconds !== null ? ` · ${formatDuration(seconds)} of fire` : ''}`}
-                </small>
-                {potentialDamage !== null && (
-                  <small className="ammunition-potential" title="Every volley times the volley damage of the weapons that use it">
-                    {formatNumber(potentialDamage, 0)} potential damage
-                  </small>
-                )}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
+      {ammunition.length > 0 && <AmmunitionList ammunition={ammunition} />}
     </div>
   );
 }

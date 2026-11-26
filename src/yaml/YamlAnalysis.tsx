@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { AmmunitionList } from '../components/AmmunitionList';
 import { RangeRadar } from '../components/RangeRadar';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
 import { EMPTY_VALUE, joinWithCounts } from '../utils/format';
@@ -46,7 +47,7 @@ export function YamlAnalysis({ mech, build }: { mech: YamlMech; build: YamlBuild
   const weapons = useMemo(() => getWeaponPerformance(mech, build), [mech, build]);
   const stats = useMemo(() => getYamlMechStats(mech, build), [mech, build]);
   const profile = useMemo(() => getYamlRangeProfile(weapons), [weapons]);
-  const ammunition = useMemo(() => getYamlAmmunition(build), [build]);
+  const ammunition = useMemo(() => getYamlAmmunition(mech, build), [mech, build]);
   // Anillo del radar señalado: la tabla resalta las armas que llegan y apaga las demás.
   const [rangeFocus, setRangeFocus] = useState<number | null>(null);
   const describeWeapons = (distance: number) => {
@@ -119,22 +120,7 @@ export function YamlAnalysis({ mech, build }: { mech: YamlMech; build: YamlBuild
             </>
           )}
         </div>
-        {ammunition.length > 0 && (
-          <div className="ammunition-list">
-            <header className="analysis-heading">
-              <div>
-                <p className="eyebrow">STORES</p>
-                <h2>Installed ammunition</h2>
-              </div>
-            </header>
-            {ammunition.map(({ ammoType, label, bins, capacity }) => (
-              <div className="ammunition-row" key={ammoType}>
-                <span>{label}<small>{bins} {bins === 1 ? 'bin' : 'bins'}</small></span>
-                <span className="ammunition-amount"><strong>{capacity} rounds</strong></span>
-              </div>
-            ))}
-          </div>
-        )}
+        {ammunition.length > 0 && <AmmunitionList ammunition={ammunition} />}
       </div>
     </section>
   );
