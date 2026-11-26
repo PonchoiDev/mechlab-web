@@ -54,6 +54,11 @@ describe('unidades enemigas', () => {
     expect(autocannon.dps).toBeCloseTo(20 / 9.6, 1);
   });
 
+  it('CA6 (dps-rayos-continuos): la ametralladora de una unidad suma su daño por segundo', () => {
+    const machineGun = getUnitWeapons(data, unit('Condor (Liao)')).find(weapon => weapon.name === 'Machine Gun');
+    expect(machineGun?.dps).toBeCloseTo(machineGun!.damage);
+  });
+
   it('CA6: las armas con nivel son las del MechLab en ese tier', () => {
     const [srm] = getUnitWeapons(data, unit('Turret 2 x SRM2'));
     const mechlab = getWeaponStats({ ...items.SRM2, tier: '0' });

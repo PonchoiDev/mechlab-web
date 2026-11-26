@@ -248,6 +248,20 @@ describe('getWeaponPerformance', () => {
     expect(performance).toMatchObject({ rpm: 15, dps: 2.5, range: null });
   });
 
+  it('CA1 (dps-rayos-continuos): las ametralladoras y los lanzallamas ya dan su daño y su calor por segundo', () => {
+    const [machineGun] = getWeaponPerformance(makeLoadout({ leftArm: [getItem('MachineGun')] }));
+    const [flamer] = getWeaponPerformance(makeLoadout({ leftArm: [getItem('Flamer')] }));
+
+    expect(machineGun).toMatchObject({ damage: 1.5, rpm: 600, dps: 1.5 });
+    expect(flamer).toMatchObject({ damage: 2, heat: 0.4, rpm: 600, dps: 2 });
+  });
+
+  it('CA5 (dps-rayos-continuos): el Medium Laser no cambia', () => {
+    const [laser] = getWeaponPerformance(makeLoadout({ leftArm: [getItem('MediumLaser')] }));
+
+    expect(laser).toMatchObject({ damage: 5, rpm: 15, dps: 1.25 });
+  });
+
   it('usa los valores base del item si no tiene tiers', () => {
     const weapon = makeItem({ type: 'weapon', weaponType: 'ballistic', damage: 7, heat: 3, tiers: null });
     const [performance] = getWeaponPerformance(makeLoadout({ head: [weapon] }));
@@ -314,6 +328,13 @@ describe('getBuildSummary', () => {
     });
     expect(summary.weapons.map(weapon => weapon.item.id)).toEqual(['LRM20', 'MediumLaser']);
     expect(summary.ammunition).toEqual(groupAmmunition(loadout));
+  });
+
+  it('CA4 (dps-rayos-continuos): el calor por segundo de un lanzallamas es su calor', () => {
+    const mech = getMech('AS7-D');
+    const loadout = makeLoadout({ leftArm: [getItem('Flamer'), getItem('MediumLaser')] });
+
+    expect(getBuildSummary(mech, loadout, createDefaultArmor(mech.components)).heatPerSecond).toBeCloseTo(0.4 + 2.25 * 15 / 60);
   });
 
   it('no tiene alcance máximo sin armas', () => {
