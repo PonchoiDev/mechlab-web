@@ -2245,6 +2245,8 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 .builds-tag.is-ferro { color: #ff5a4f; }
 .builds-tag.is-ap,
 .builds-tag.is-ecm { color: var(--work-cyan); }
+/* Las builds del MechLab de YAML en la página de builds de MW5, con el color de su título. */
+.builds-tag.is-yaml { color: var(--work-lime); border-color: var(--work-lime); }
 
 /* Interruptor de los mínimos: anclajes del 'Mech o armas montadas. */
 .builds-minimums-of {

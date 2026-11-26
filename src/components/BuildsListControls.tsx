@@ -50,6 +50,7 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
   // Ningún arma es omni: con Weapons ese contador no sale.
   const hardpointTypes = minimumsOf === 'weapons' ? config.hardpointTypes.filter(type => type.id !== 'omni') : config.hardpointTypes;
   const noun = minimumsOf === 'weapons' ? 'weapons' : 'hardpoints';
+  const partGroupsLabel = config.partGroupsLabel === undefined ? 'Parts' : config.partGroupsLabel;
   // Las piezas de cada grupo que llevan las builds guardadas.
   const partOptions = useMemo(() => Object.fromEntries((config.partGroups ?? []).map(group => [
     group.id,
@@ -150,8 +151,8 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
         </span>
       </div>
       {config.partGroups && rows.length > 0 && (
-        <div className="builds-classes" role="group" aria-label="Parts">
-          <span className="builds-filter-label">Parts</span>
+        <div className="builds-classes" role="group" aria-label={partGroupsLabel ?? config.partGroups.map(group => group.label).join(', ')}>
+          {partGroupsLabel && <span className="builds-filter-label">{partGroupsLabel}</span>}
           <span className="mech-filter-group">
             {config.partGroups.map(group => (
               <span key={group.id} className="builds-part-filter">

@@ -168,6 +168,8 @@ export interface BuildListConfig {
   orderRoles: (roles: string[]) => string[];
   // Grupos de piezas con un desplegable cada uno (BuildListRow.parts); sin ellos no sale la fila.
   partGroups?: { id: string; label: string; title: string }[];
+  // La etiqueta de esa fila; null sin etiqueta, cuando el grupo no es una pieza (Source en la página de builds).
+  partGroupsLabel?: string | null;
 }
 
 // Las builds que cumplen el filtro, en el orden elegido. Las de alwaysShow se ven aunque el filtro las esconda.

@@ -19,6 +19,7 @@ interface YamlMyBuildsDialogProps {
   onActiveChange: (id: string | null) => void;
   onLoad: (mech: YamlMech, build: YamlBuild, name: string) => void;
   onCopyLink: (code: string) => void;
+  onPublish: (build: SavedBuild) => void;
   onMessage: (message: string) => void;
   onClose: () => void;
 }
@@ -35,7 +36,7 @@ const downloadFile = (content: string, fileName: string) => {
 };
 
 // Las builds guardadas del MechLab de YAML (docs/specs/builds-guardadas-yaml.md), con las acciones de los diálogos
-// de MW5 y BATTLETECH salvo comparar y publicar, que el MechLab de YAML aún no tiene.
+// de MW5 y BATTLETECH salvo comparar, que el MechLab de YAML aún no tiene.
 export function YamlMyBuildsDialog({
   saved,
   currentCode,
@@ -44,6 +45,7 @@ export function YamlMyBuildsDialog({
   onActiveChange,
   onLoad,
   onCopyLink,
+  onPublish,
   onMessage,
   onClose
 }: YamlMyBuildsDialogProps) {
@@ -231,6 +233,7 @@ export function YamlMyBuildsDialog({
                   </button>
                   <button type="button" className="utility-button" onClick={() => setEditing({ id: build.id, name: build.name })}>Rename</button>
                   <button type="button" className="utility-button" disabled={!decoded} onClick={() => onCopyLink(build.code)}>Copy link</button>
+                  <button type="button" className="utility-button" disabled={!decoded} title="Publish this build in the community builds" onClick={() => onPublish(build)}>Publish</button>
                   <button type="button" className="utility-button" onClick={() => setConfirming({ id: build.id, action: 'delete' })}>Delete</button>
                 </div>
               )}

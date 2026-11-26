@@ -1,5 +1,6 @@
 import { REPORT_REASONS, type BuildGame, type PublishedBuild, type ReportReason } from '../../worker/builds';
 import type { SavedBuild } from './savedBuildsCore';
+import { YAML_BUILD_PREFIX } from './yaml/buildCode';
 
 // Builds publicadas, del lado del navegador: las llamadas a la API del Worker (worker/builds.ts) y lo que se
 // guarda en el navegador. Sin cuentas: la clave de edición de cada build publicada se queda aquí, y también
@@ -102,6 +103,14 @@ export const getBuildsPageUrl = (game: BuildGame, params: Record<string, string>
   const query = new URLSearchParams(params).toString();
   return `/${game}/builds/${query ? `?${query}` : ''}`;
 };
+
+// Las builds del MechLab de YAML se publican con las de MW5 y se distinguen por su código
+// (docs/specs/publicar-builds-yaml.md).
+export const isYamlBuildCode = (code: string) => code.startsWith(YAML_BUILD_PREFIX);
+
+// El enlace de una build publicada en la página de MW5: las de YAML se abren en su MechLab.
+export const getPublishedBuildUrl = (code: string, origin = window.location.origin) =>
+  `${origin}/mercs/${isYamlBuildCode(code) ? 'yaml/' : ''}?b=${encodeURIComponent(code)}`;
 
 const apiUrl = (game: BuildGame, path = '') => `/${game}/api/builds${path}`;
 
