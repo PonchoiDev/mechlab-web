@@ -11,7 +11,7 @@ Los MechLabs de MW5 y de BATTLETECH guardan builds en el navegador, con nombre, 
 ## Requisitos funcionales
 
 - **RF1.** La barra de herramientas tiene **Save build** y **My builds**, con la misma ventana de guardar que MW5 y BATTLETECH: guardar como nueva o actualizar la build guardada abierta, si sigue en su chasis.
-- **RF2.** **My builds** tiene las acciones de BATTLETECH salvo **Compare** y **Publish**, que el MechLab de YAML aún no tiene: cargar (avisando si la build actual no está guardada), duplicar, renombrar, copiar el enlace, borrar, importar y exportar.
+- **RF2.** **My builds** tiene las acciones de BATTLETECH salvo **Compare**, que el MechLab de YAML aún no tiene (**Publish**, en [publicar-builds-yaml.md](publicar-builds-yaml.md)): cargar (avisando si la build actual no está guardada), duplicar, renombrar, copiar el enlace, borrar, importar y exportar.
 - **RF3.** Las builds se guardan en su propia clave del navegador, `mw-builder:yaml:saved-builds`, con el formato común (nombre, código de enlace y fecha). El archivo exportado lleva `game: "mw5-yaml"`: el MechLab de YAML no importa archivos de MW5 ni de BATTLETECH, y los de MW5 y BATTLETECH no importan los de YAML. Una build cuyo código ya no se puede abrir se cuenta como no válida al importar.
 - **RF4.** La lista tiene el buscador, el orden (también recordado, en `mw-builder:yaml:builds-sort`) y los filtros comunes de [buscar-builds-guardadas.md](buscar-builds-guardadas.md), con los datos de YAML:
   - **Clase** por el tonelaje del chasis (los superpesados son de asalto), **tecnología** (Clan por el quirk `CLAN-MECH`) y **rol** (el de la unit card, [filtros-yaml.md](filtros-yaml.md)).
