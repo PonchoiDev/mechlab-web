@@ -51,6 +51,13 @@ describe('daño potencial de la munición', () => {
     const summary = getBuildSummary(getMech('DRG-1G-S'), makeLoadout({ leftTorso: [getItem('AC20_Standard_AmmoEquipment')] }), stockArmor());
     expect(summary.ammunition[0].potentialDamage).toBeNull();
   });
+
+  it('CA12: cada bala de ametralladora hace el daño por segundo durante un disparo', () => {
+    const loadout = makeLoadout({ rightArm: [getItem('MachineGun')], rightTorso: [getItem('MachineGun_Standard_AmmoEquipment')] });
+    const [ammo] = getBuildSummary(getMech('DRG-1G-S'), loadout, stockArmor()).ammunition;
+    expect(ammo.seconds).toBe(520);
+    expect(ammo.potentialDamage).toBeCloseTo(780, 5);
+  });
 });
 
 describe('daño por tonelada', () => {
