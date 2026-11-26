@@ -1,6 +1,7 @@
 import type { YamlBuild, YamlMech } from '../../types/yaml-mechlab';
 import type { SavedBuild } from '../savedBuildsCore';
 import { countWeaponTypes, type BuildListConfig, type BuildListRow, type BuildTag } from '../savedBuildsList';
+import { getInternalLabel } from './board';
 import { decodeYamlBuild } from './buildCode';
 import { getYamlMechStats } from './combat';
 import { findYamlMech, getYamlItem } from './data';
@@ -34,8 +35,17 @@ export const YAML_BUILD_LIST: BuildListConfig = {
   hasTechBase: true,
   weaponShort: Object.fromEntries(WEAPON_TYPES.map(type => [type, SHORT[type]])),
   weaponLabels: Object.fromEntries(WEAPON_TYPES.map(type => [type, type === 'ams' ? 'AMS' : type])),
-  orderRoles: roles => [...roles].sort()
+  orderRoles: roles => [...roles].sort(),
+  partGroups: [
+    { id: 'engine', label: 'Engine', title: 'Engine type' },
+    { id: 'structure', label: 'Structure', title: 'Internal structure' },
+    { id: 'armor', label: 'Armor', title: 'Armor type' },
+    { id: 'cooling', label: 'Heat sinks', title: 'Heat sink kit of the engine' }
+  ]
 };
+
+// Las piezas internas de cada grupo del filtro, con el nombre del mechlab (las estándar también).
+const PART_SLOTS: Record<string, string> = { engine: 'EngineTypeSlot', structure: 'Structureslot', armor: 'Armorslot', cooling: 'enginecooling' };
 
 export interface YamlSavedBuildEntry {
   build: SavedBuild;
@@ -131,7 +141,8 @@ export function summarizeYamlSavedBuild(saved: SavedBuild): YamlSavedBuildEntry 
     weapons: Object.fromEntries(weaponCounts.map(({ type, count }) => [type, count])),
     techBase: isClanMech(mech!) ? 'Clan' : 'InnerSphere',
     roles: mech!.role ? [mech!.role] : [],
-    features
+    features,
+    parts: Object.fromEntries(Object.entries(PART_SLOTS).map(([group, slotType]) => [group, getInternalLabel(build, slotType)]))
   };
   return {
     build: saved,

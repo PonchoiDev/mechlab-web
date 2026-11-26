@@ -32,6 +32,8 @@ export interface BuildListRow {
   roles: string[];
   // Lo que lleva montado o lo que es la variante: jumpJets, ecm, ams, hero.
   features: string[];
+  // La pieza de cada grupo de partGroups (en YAML, el motor, la estructura, la armadura y el kit de refrigeración).
+  parts?: Record<string, string>;
 }
 
 export type BuildSort = 'newest' | 'oldest' | 'name' | 'chassis' | 'tonnage' | 'firepower';
@@ -90,6 +92,8 @@ export interface BuildListFilter {
   roles?: string[];
   // Tiene que cumplirlos todos.
   features?: string[];
+  // Por grupo de piezas, las marcadas: vale cualquiera de un grupo, y tiene que cumplir todos los grupos.
+  parts?: Record<string, string[]>;
 }
 
 export type BuildMinimumsOf = 'hardpoints' | 'weapons';
@@ -99,7 +103,7 @@ const meetsWeaponMinimums = (weapons: Partial<Record<string, number>>, minimums:
   Object.entries(minimums).every(([type, minimum]) => (weapons[type] ?? 0) >= (minimum ?? 0));
 
 // Cada palabra tiene que estar en el nombre, el chasis o la variante: «atlas brawl».
-export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, minHardpoints: requested = {}, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [] }: BuildListFilter): BuildListRow[] => {
+export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, minHardpoints: requested = {}, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [], parts = {} }: BuildListFilter): BuildListRow[] => {
   const words = normalize(query).split(/\s+/).filter(Boolean);
   // Ningún arma es omni: con Weapons ese mínimo no cuenta.
   const minHardpoints = minimumsOf === 'weapons' ? { ...requested, omni: 0 } : requested;
@@ -109,6 +113,7 @@ export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, mi
     if (techBase && row.techBase !== techBase) return false;
     if (roles.length > 0 && !roles.some(role => row.roles.includes(role))) return false;
     if (!features.every(feature => row.features.includes(feature))) return false;
+    if (!Object.entries(parts).every(([group, values]) => values.length === 0 || (row.parts?.[group] !== undefined && values.includes(row.parts[group])))) return false;
     if (hasMinimums) {
       const counts = minimumsOf === 'weapons' ? row.weapons : row.hardpoints;
       if (counts === null) return false;
@@ -122,11 +127,12 @@ export const filterBuildRows = (rows: BuildListRow[], { query, weightClasses, mi
 
 // Como en el selector de 'Mechs: cada clase y cada botón de equipo cuentan uno, los roles juntos uno y cada
 // mínimo mayor que cero uno. El buscador no es un filtro: se ve escrito.
-export const countBuildListFilters = ({ weightClasses, minHardpoints = {}, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [] }: BuildListFilter): number =>
+export const countBuildListFilters = ({ weightClasses, minHardpoints = {}, minimumsOf = 'hardpoints', techBase = null, roles = [], features = [], parts = {} }: BuildListFilter): number =>
   weightClasses.length
   + (techBase ? 1 : 0)
   + (roles.length > 0 ? 1 : 0)
   + features.length
+  + Object.values(parts).filter(values => values.length > 0).length
   + Object.entries(minHardpoints).filter(([type, value]) => (value ?? 0) > 0 && !(minimumsOf === 'weapons' && type === 'omni')).length;
 
 export const countBuildsByWeightClass = (rows: BuildListRow[]): Record<BuildWeightClass, number> => {
@@ -160,6 +166,8 @@ export interface BuildListConfig {
   weaponLabels: Record<string, string>;
   // Los roles que se ofrecen, de entre los de las builds guardadas, en el orden de cada juego.
   orderRoles: (roles: string[]) => string[];
+  // Grupos de piezas con un desplegable cada uno (BuildListRow.parts); sin ellos no sale la fila.
+  partGroups?: { id: string; label: string; title: string }[];
 }
 
 // Las builds que cumplen el filtro, en el orden elegido. Las de alwaysShow se ven aunque el filtro las esconda.

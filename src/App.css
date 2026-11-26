@@ -243,6 +243,23 @@ body {
   gap: 5px;
 }
 
+/* Los controles de una fila que no caben en una línea siguen alineados con el primero, no bajo la etiqueta. */
+.mech-filter-group {
+  display: flex;
+  flex: 1 1 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+/* Con el grupo en varias líneas, la etiqueta se queda a la altura de la primera. */
+.mech-filter-row:has(> .mech-filter-group),
+.builds-classes:has(> .mech-filter-group),
+.builds-hardpoints:has(> .mech-filter-group) {
+  align-items: baseline;
+}
+
 .mech-filter-label {
   margin-right: 2px;
   color: var(--work-muted);
@@ -3068,6 +3085,26 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
+/* El buscador se queda arriba mientras la lista se desplaza. */
+.checkbox-dropdown-search {
+  position: sticky;
+  top: -6px;
+  z-index: 1;
+  margin: -6px -6px 4px;
+  padding: 8px;
+  color: var(--work-text);
+  background: var(--work-panel-raised);
+  border: 0;
+  border-bottom: 1px solid var(--work-line);
+  font: 500 12px var(--work-sans);
+}
+
+.checkbox-dropdown-empty {
+  padding: 6px 8px;
+  color: var(--work-muted);
+  font: 500 12px var(--work-sans);
+}
+
 .checkbox-dropdown-option {
   display: flex;
   align-items: center;
@@ -3813,3 +3850,10 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 }
 
 .hardpoint-summary.is-full { opacity: 0.55; }
+
+/* Cada pieza del filtro de piezas de My builds, con su nombre junto al desplegable. */
+.builds-part-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
