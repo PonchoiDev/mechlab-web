@@ -4,7 +4,8 @@ import yamlMechs from '../../data/yaml/mechs.json';
 import { checkInternal, createStockBuild, mountItem, mountWeapon, removeWeapon, setInternal, stripBuild } from './build';
 import { decodeYamlBuild, encodeYamlBuild } from './buildCode';
 import { getYamlStatsPanel } from './combat';
-import { findYamlMech, getYamlItem } from './data';
+import { getSarnaTitle } from '../../services/sarna';
+import { findYamlMech, getYamlItem, getYamlSarnaMech, yamlMechs as allYamlMechs } from './data';
 import { getBuildTonnage, getFreeGeneralSlots } from './stats';
 
 // Reglas del MechLab de YAML que no salen de una captura concreta: criterios CA15 a CA18 de
@@ -112,5 +113,14 @@ describe('equipo que no se puede repetir en el MechLab de YAML', () => {
   it('CA8: el Targeting Computer Mk. 3 (C) no se monta con el Mk. 1 de YAML', () => {
     const withComputer = mountItem(nightstar, empty, 'leftTorso', 'TCLVL1').build!;
     expect(mountItem(nightstar, withComputer, 'rightTorso', 'TargetingComputer_Mk3').error).toBe("Only one Targeting Computer per 'Mech");
+  });
+});
+
+describe('imagen de Sarna', () => {
+  it('CA46: cada variante se busca en Sarna con el nombre de las de su chasis en el MechLab de MW5', () => {
+    const titleOf = (id: string) => getSarnaTitle(getYamlSarnaMech(findYamlMech(id)!));
+    expect([titleOf('ADR-A'), titleOf('ACH-PRIME'), titleOf('ANH-1G')]).toEqual(['Adder', 'Arctic Cheetah', 'Annihilator']);
+    const mw5Titles = new Map(mw5Mechs.map(mech => [mech.name, getSarnaTitle(mech as Parameters<typeof getSarnaTitle>[0])]));
+    for (const mech of allYamlMechs) expect(getSarnaTitle(getYamlSarnaMech(mech)), mech.id).toBe(mw5Titles.get(mech.chassis));
   });
 });
