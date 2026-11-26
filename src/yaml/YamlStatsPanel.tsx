@@ -1,4 +1,5 @@
 import { useMemo, type CSSProperties } from 'react';
+import { UpgradedValue } from '../components/UpgradedValue';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
 import { getYamlStatsPanel } from '../utils/yaml/combat';
 import { getYamlReadouts } from '../utils/yaml/readouts';
@@ -23,7 +24,7 @@ export function YamlStatsPanel({ mech, build }: { mech: YamlMech; build: YamlBui
         {panel.flat().map(cell => (
           <div key={cell.key} className="readout-cell yaml-stat" style={{ '--stat-ratio': cell.ratio } as CSSProperties}>
             <span className="readout-label">{cell.label}</span>
-            <strong>{cell.value}</strong>
+            <strong><UpgradedValue value={cell.value} base={cell.base} /></strong>
             <span className="yaml-stat-bar" aria-hidden="true" />
           </div>
         ))}

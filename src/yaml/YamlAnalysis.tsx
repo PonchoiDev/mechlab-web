@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { AmmunitionList } from '../components/AmmunitionList';
 import { RangeRadar } from '../components/RangeRadar';
+import { UpgradedValue } from '../components/UpgradedValue';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
 import { COOLING_KEEPS_UP, EMPTY_VALUE, joinWithCounts } from '../utils/format';
 import {
@@ -150,7 +151,7 @@ function MechTab({ mech, build }: { mech: YamlMech; build: YamlBuild }) {
               {group.stats.map(stat => (
                 <div key={stat.label} className="mech-stat">
                   <dt>{stat.label}</dt>
-                  <dd>{stat.value}{stat.unit && ![EMPTY_VALUE, COOLING_KEEPS_UP].includes(stat.value) && <small> {stat.unit}</small>}</dd>
+                  <dd><UpgradedValue value={stat.value} base={stat.base} />{stat.unit && ![EMPTY_VALUE, COOLING_KEEPS_UP].includes(stat.value) && <small> {stat.unit}</small>}</dd>
                 </div>
               ))}
             </dl>
@@ -172,6 +173,7 @@ export function YamlAnalysis({ mech, build }: { mech: YamlMech; build: YamlBuild
         <button type="button" className="analysis-tab" aria-pressed={tab === 'mech'} onClick={() => setTab('mech')}>
           'Mech
         </button>
+        {(build.traits?.length ?? 0) > 0 && <span className="analysis-note">GREEN ▲ VALUES INCLUDE CANTINA UPGRADES</span>}
       </div>
       {tab === 'weapons' ? <WeaponsTab mech={mech} build={build} /> : <MechTab mech={mech} build={build} />}
     </section>

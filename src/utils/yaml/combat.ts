@@ -430,6 +430,8 @@ export interface YamlStatCell {
   key: keyof YamlMechStats;
   label: string;
   value: string;
+  // Con rasgos de la cantina que la cambian, el valor sin ellos (como UpgradedValue del MechLab de MW5).
+  base?: string;
   // Lo lleno de la barra, de 0 a 1.
   ratio: number;
 }
@@ -445,18 +447,29 @@ export const formatYamlStat = (value: number) => {
   return STAT_FORMAT.format(rounded / 100);
 };
 
+// Las cifras sin los rasgos de la cantina, si hay alguno instalado.
+const statsWithoutTraits = (mech: YamlMech, build: YamlBuild) =>
+  build.traits?.length ? getYamlMechStats(mech, { ...build, traits: [] }) : undefined;
+
+const baseValue = (value: string, base: YamlMechStats | undefined, key: keyof YamlMechStats) => {
+  const formatted = base && formatYamlStat(base[key]);
+  return formatted !== undefined && formatted !== value ? { base: formatted } : {};
+};
+
 export function getYamlStatsPanel(mech: YamlMech, build: YamlBuild): YamlStatCell[][] {
   const stats = getYamlMechStats(mech, build);
+  const base = statsWithoutTraits(mech, build);
   return PANEL.map(row => row.map(({ key, label, max }) => {
     const value = stats[key];
     const ratio = max === null ? (value > 0 ? 1 : 0) : Math.min(1, Math.max(0, value / max));
-    return { key, label, value: formatYamlStat(value), ratio };
+    return { key, label, value: formatYamlStat(value), ...baseValue(formatYamlStat(value), base, key), ratio };
   }));
 }
 
 export interface YamlChassisStat {
   label: string;
   value: string;
+  base?: string;
   unit?: string;
 }
 
@@ -496,18 +509,26 @@ const CHASSIS_GROUPS: { title: string; stats: { key: keyof YamlMechStats; label:
   }
 ];
 
-export function getYamlChassisData(mech: YamlMech, build: YamlBuild): { title: string; stats: YamlChassisStat[] }[] {
-  const stats = getYamlMechStats(mech, build);
+const seconds = (value: number | null) => value === null ? { value: EMPTY_VALUE } : { value: value.toFixed(1), unit: 's' };
+
+function heatTimesOf(stats: YamlMechStats): YamlChassisStat[] {
   const { timeToMaxHeat, timeToCoolDown } = getHeatTimes({ heatCapacity: stats.heatCapacity, heatPerSecond: stats.heatPerSecond, coolingRate: stats.cooling });
-  const seconds = (value: number | null) => value === null ? { value: EMPTY_VALUE } : { value: value.toFixed(1), unit: 's' };
-  const heatTimes: YamlChassisStat[] = [
+  return [
     { label: 'Time to max heat', ...(timeToMaxHeat === 'never' ? { value: COOLING_KEEPS_UP } : seconds(timeToMaxHeat)) },
     { label: 'Time to cool down', ...seconds(timeToCoolDown) }
   ];
+}
+
+export function getYamlChassisData(mech: YamlMech, build: YamlBuild): { title: string; stats: YamlChassisStat[] }[] {
+  const stats = getYamlMechStats(mech, build);
+  const base = statsWithoutTraits(mech, build);
+  const baseTimes = base && heatTimesOf(base);
+  const heatTimes = heatTimesOf(stats).map((time, index) =>
+    baseTimes && baseTimes[index].value !== time.value ? { ...time, base: baseTimes[index].value } : time);
   return CHASSIS_GROUPS.map(group => ({
     title: group.title,
     stats: [
-      ...group.stats.map(({ key, label, unit }) => ({ label, value: formatYamlStat(stats[key]), unit })),
+      ...group.stats.map(({ key, label, unit }) => ({ label, value: formatYamlStat(stats[key]), ...baseValue(formatYamlStat(stats[key]), base, key), unit })),
       ...(group.title === 'HEAT' ? heatTimes : [])
     ]
   }));

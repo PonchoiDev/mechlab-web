@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-26-heat-spike-upgrade',
+    date: '2026-11-26',
+    title: 'Heat spike with cantina upgrades',
+    items: [
+      'The HEAT SPIKE readout above the board shows the value without cantina upgrades next to the upgraded one, like the other readouts, when Reduced Heat Spikes is installed'
+    ]
+  },
+  {
     id: '2026-11-26-machine-gun-ammo',
     date: '2026-11-26',
     title: 'Machine gun ammo damage',
