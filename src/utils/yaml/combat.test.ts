@@ -220,10 +220,17 @@ describe('estadísticas del MechLab de YAML', () => {
     expect(getBuildTonnage(nightstar, withShoulder) - getBuildTonnage(nightstar, stock)).toBeCloseTo(1);
   });
 
-  it('CA18: el computador de puntería multiplica la base de sensores antes de los bonus de los quirks', () => {
-    const withComputer = mountItem(nightstar, stripBuild(stock), 'leftTorso', 'TargetingComputer_Mk3').build!;
-    // (800 × 1,14) + 50 + 100.
-    expect(panelValues(withComputer)['Sensor range (m)']).toBe('1,062');
+  it('CA18: los computadores de puntería no cambian el alcance de sensores, como en las capturas', () => {
+    // 800 + 50 (Command 'Mech) + 100 (SLDF): el rasgo del computador no está en InstalledTraits.
+    const stripped = stripBuild(stock);
+    expect(panelValues(stripped)['Sensor range (m)']).toBe('950');
+    for (const computer of ['TargetingComputer_Mk1', 'TargetingComputer_Mk3', 'TargetingComputer_Mk5']) {
+      const withComputer = mountItem(nightstar, stripped, 'leftTorso', computer).build!;
+      expect(panelValues(withComputer)['Sensor range (m)'], computer).toBe('950');
+    }
+    const warhammer = findYamlMech('WHM-IIC-3')!;
+    expect(warhammer.stock.items.map(mounted => mounted.item)).toContain('TargetingComputer_Mk5');
+    expect(getYamlStatsPanel(warhammer, createStockBuild(warhammer)).flat().find(cell => cell.key === 'sensorRange')?.value).toBe('800');
   });
 
   it('CA19: coolingMulti de una ubicación multiplica la refrigeración de sus disipadores', () => {

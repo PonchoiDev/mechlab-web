@@ -652,11 +652,6 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             sonda = (objeto.get("probe") or {}).get("sensorRange", 1) - 1
             if sonda:
                 nuevo["sensorRangePercent"] = round(sonda, 6)
-            # Computadores de puntería: su rasgo (TargetingComputerTrait_BP) da su porcentaje por
-            # UI_GetIncreasedSensorRangePercent, que GetSensorRange del juego suma a la base de 800 m.
-            computador = (objeto.get("targetingComputer") or {}).get("sensorRange", 0)
-            if computador:
-                nuevo["sensorTraitPercent"] = round(computador, 6)
         objetos[id_objeto] = nuevo
 
     # Armas de cuerpo a cuerpo del juego (manos, antebrazos, hachas...): el catálogo de MW5 no las trae. Las
