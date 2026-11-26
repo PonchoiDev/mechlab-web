@@ -3,8 +3,8 @@ import type { YamlBuild, YamlMech } from '../../types/yaml-mechlab';
 import { createStockBuild, mountItem, mountWeapon, removeWeapon, setInternal, setWeaponTier, stripBuild } from './build';
 import { decodeYamlBuild, encodeYamlBuild } from './buildCode';
 import {
-  getWeaponBonuses, getWeaponPerformance, getWeaponTiers, getWeaponTierStats, getYamlAmmunition, getYamlDamageAt,
-  getYamlRangeProfile, getYamlStatsPanel
+  getWeaponBonuses, getWeaponPerformance, getWeaponTiers, getWeaponTierStats, getYamlAmmunition, getYamlChassisData,
+  getYamlDamageAt, getYamlDamagePerTon, getYamlRangeProfile, getYamlStatsPanel
 } from './combat';
 import { findYamlMech, getYamlItem } from './data';
 import { getYamlInventoryItems } from './inventory';
@@ -294,5 +294,40 @@ describe('munición instalada', () => {
     expect(getYamlAmmunition(nightstar, build)).toEqual([
       { ammoType: 'Ammo.Ballistic.Gauss.Standard', label: 'Gauss Ammo', bins: 1, capacity: 26, volleys: null, seconds: null, potentialDamage: null }
     ]);
+  });
+});
+
+describe("pestaña 'Mech y daño por tonelada", () => {
+  const chassisValues = (mech: YamlMech, build: YamlBuild) =>
+    Object.fromEntries(getYamlChassisData(mech, build).flatMap(group => group.stats).map(stat => [stat.label, stat.value]));
+
+  it('CA27: el daño de cada arma entre su tonelaje, y el total de las armas a distancia', () => {
+    const weapons = getWeaponPerformance(nightstar, reference);
+    const perTon = (item: string) => weapons.find(performance => performance.item === item)!.damagePerTon;
+    expect(perTon('GaussRifle')).toBeCloseTo(17.1 / 15, 4);
+    expect(perTon('ERPPC')).toBeCloseTo(11.4 / 7, 4);
+    expect(getYamlDamagePerTon(weapons)).toBeCloseTo(62.1 / 41.5, 3);
+    const cyclops = findYamlMech('CP-10-P')!;
+    const melee = getWeaponPerformance(cyclops, createStockBuild(cyclops)).filter(performance => performance.family === 'melee');
+    expect(melee.length).toBeGreaterThan(0);
+    expect(melee.every(performance => performance.damagePerTon === null)).toBe(true);
+  });
+
+  it("CA28: la pestaña 'Mech da los tiempos de calor y las cifras del panel", () => {
+    const values = chassisValues(nightstar, reference);
+    expect(values['Time to max heat']).toBe('56.6');
+    expect(values['Time to cool down']).toBe('19.3');
+    const panel = Object.fromEntries(getYamlStatsPanel(nightstar, reference).flat().map(cell => [cell.key, cell.value]));
+    expect(values['Armor']).toBe(panel.armor);
+    expect(values['Alpha damage']).toBe(panel.alphaDamage);
+    expect(values['Cooling rate']).toBe(panel.cooling);
+    expect(values['Sensor range']).toBe(panel.sensorRange);
+    expect(getYamlChassisData(nightstar, reference).map(group => group.title)).toEqual(['DEFENSE', 'FIREPOWER', 'HEAT', 'MOBILITY', 'TARGETING']);
+  });
+
+  it('CA29: sin calor de armas, nunca llega al máximo', () => {
+    const javelin = findYamlMech('JVN-11A')!;
+    const unarmed = { ...createStockBuild(javelin), weapons: [] };
+    expect(chassisValues(javelin, unarmed)['Time to max heat']).toBe('Cooling keeps up');
   });
 });
