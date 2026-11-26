@@ -40,6 +40,8 @@ Las fórmulas salen del código: el bytecode de YAML (`MechAlphaStats.CalculateM
 
 El MechLab de YAML tiene el botón de mejoras de la barra de herramientas y el panel de mejoras del MechLab de MW5, con los huecos de su MDA. El panel avisa de que los rasgos de armas solo actúan en misión. Los rasgos de serie entran al abrir la variante; después, cargar la build de serie no cambia los rasgos, como en el MechLab de MW5 (en el juego se instalan aparte del loadout). El código de la build lleva los rasgos, y una build sin rasgos tiene el mismo código que antes.
 
+Como en el MechLab de MW5, las cifras que cambian los rasgos se marcan: el valor sin rasgos y, en verde, el valor con ellos («358 ▲ 375,9»). Vale para el panel de 21 cifras y para la pestaña 'Mech del análisis, que avisa además «GREEN ▲ VALUES INCLUDE CANTINA UPGRADES» si hay algún rasgo. Sin rasgos, o si una cifra no cambia, solo se ve el valor.
+
 ## Criterios de aceptación
 
 | # | Dado | Cuando | Entonces |
@@ -52,6 +54,8 @@ El MechLab de YAML tiene el botón de mejoras de la barra de herramientas y el p
 | CA6 | El GHR-5J de serie | se instalan rasgos de armas | el daño, el calor, el enfriamiento y el alcance de las armas no cambian |
 | CA7 | Una build de YAML con rasgos | se codifica y se decodifica | conserva sus rasgos; sin rasgos, el código es el de antes |
 | CA8 | El WHM-DNC del MechLab de MW5 | se carga su build de serie | lleva sus tres rasgos |
+| CA9 | El WHM-DNC de serie | se calcula el panel | Armor 358 ▲ 375,9, Structure 272 ▲ 299,2 y Speed 74,52 ▲ 85,7; el resto de cifras, sin marcar. Sin sus rasgos, ninguna cifra marcada |
+| CA10 | El WHM-DNC de serie | se calcula la pestaña 'Mech | las mismas cifras marcadas que en el panel |
 
 ## Fuera de alcance
 
@@ -61,5 +65,5 @@ El MechLab de YAML tiene el botón de mejoras de la barra de herramientas y el p
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/traits.test.ts` (CA1 a CA7) y `src/utils/upgrades.test.ts` (CA8).
+1. **Datos y lógica:** `src/utils/yaml/traits.test.ts` (CA1 a CA7, CA9 y CA10) y `src/utils/upgrades.test.ts` (CA8).
 2. **Navegador:** abrir el WHM-DNC en /mercs/yaml/, comprobar las cifras de serie, quitar y poner rasgos y cargar un enlace con rasgos; abrir el WHM-DNC en /mercs/ y cargar su build de serie.
