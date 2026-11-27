@@ -6,6 +6,7 @@ import {
   filterBtInventory,
   getBtDropTargets,
   getBtInventoryItems,
+  getBtTargetCategory,
   getNextFreeBtHardpoint,
   moveBtItem,
   placeBtItem,
@@ -135,5 +136,17 @@ describe('destinos y colocación en BATTLETECH', () => {
 
     expect(getHardpointViews(mech, result.loadout, 'rightTorso')[1].item).not.toBeNull();
     expect(getNextFreeBtHardpoint(mech, result.loadout, 'rightTorso', 1)).toBe(2);
+  });
+
+  // docs/specs/filtro-del-anclaje.md
+  it('CA2: al elegir un anclaje, la pestaña de su tipo; sin anclaje, All', () => {
+    const target = (type: string) => {
+      const zone = (['rightTorso', 'leftTorso', 'leftArm', 'rightArm', 'centerTorso', 'head'] as const)
+        .find(candidate => mech.locations[candidate].hardpoints.includes(type as never))!;
+      return { zone, hardpointIndex: getHardpointViews(mech, loadout, zone).findIndex(view => view.type === type) };
+    };
+    expect(getBtTargetCategory(mech, loadout, target('ballistic'))).toBe('ballistic');
+    expect(getBtTargetCategory(mech, loadout, target('energy'))).toBe('energy');
+    expect(getBtTargetCategory(mech, loadout, { zone: 'rightTorso', hardpointIndex: null })).toBe('all');
   });
 });
