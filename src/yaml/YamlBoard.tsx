@@ -7,7 +7,7 @@ import { ZONE_LABELS, ZONES } from '../utils/zones';
 import { getActuatorWeapons, getHardpointUsage, getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, INTERNAL_SLOTS, type FillerGroup, type ZoneRow } from '../utils/yaml/board';
 import { GENERAL_SLOT } from '../utils/yaml/stats';
 import { getWeaponTiers } from '../utils/yaml/combat';
-import { getItemColor, getSlotColor, getYamlItem, getYamlQuirk } from '../utils/yaml/data';
+import { getItemColor, getSlotColor, getYamlItem, getYamlQuirk, getYamlQuirkColor } from '../utils/yaml/data';
 import { ModLogo } from './YamlInventoryPanel';
 import type { YamlInventoryTarget } from '../utils/yaml/inventory';
 import { getYamlMechDisplayName } from '../utils/yaml/mechList';
@@ -368,7 +368,11 @@ export function YamlBoard(props: YamlBoardProps) {
         </span>
         {!props.compact && mech.quirks.length > 0 && (
           <ul className="yaml-quirks" aria-label="Quirks">
-            {mech.quirks.map(id => <li key={id} title={getYamlQuirk(id)?.description}>{getYamlQuirk(id)?.name ?? id}</li>)}
+            {mech.quirks.map(id => (
+              <li key={id} title={getYamlQuirk(id)?.description} style={{ '--item-color': getYamlQuirkColor(id) } as CSSProperties}>
+                {getYamlQuirk(id)?.name ?? id}
+              </li>
+            ))}
           </ul>
         )}
         {!props.compact && props.reference && <div className="mech-board-image">{props.reference}</div>}

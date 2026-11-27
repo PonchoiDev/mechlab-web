@@ -231,5 +231,7 @@ export interface YamlItem {
 export interface YamlQuirk {
   name: string;
   description: string;
+  // El color de su etiqueta en el mechlab, en sRGB; sin él, el general.
+  color?: string;
   properties: Record<string, unknown>;
 }

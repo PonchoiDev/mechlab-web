@@ -102,18 +102,27 @@
 
 .yaml-reference .yaml-quirks {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 4px;
   margin: 8px 0 0;
   padding: 0;
   list-style: none;
 }
 
+/* Los quirks como en el mechlab de YAML: uno debajo de otro, cada uno con el borde de su color y el fondo de
+   ese color al 20 %, como las piezas (docs/specs/quirks-colores-yaml.md). */
 .yaml-reference .yaml-quirks li {
+  --item-color: var(--yaml-general);
+  max-width: 100%;
+  overflow: hidden;
   padding: 2px 8px;
-  border: 1px solid var(--work-line, rgba(255, 255, 255, 0.18));
+  border: 1px solid var(--item-color);
+  background: color-mix(in srgb, var(--item-color) var(--yaml-tint), var(--work-panel-raised));
   cursor: help;
   font: 500 11px var(--work-mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Inventario: el de MW5 con tres columnas (nombre, ranuras y peso). */
