@@ -88,116 +88,125 @@ export function BuildsListControls({ state, config, rows, showSearch = true, lea
           </select>
         </label>
       </div>
-      <div className="builds-classes" role="group" aria-label="Class, tech and role">
-        {BUILD_WEIGHT_CLASSES.map(option => (
-          <button
-            key={option.id}
-            type="button"
-            className="mech-filter-chip"
-            aria-pressed={weightClasses.includes(option.id)}
-            disabled={counts[option.id] === 0 && !weightClasses.includes(option.id)}
-            onClick={() => toggle(option.id)}
-          >
-            {option.label} <span className="utility-count">{counts[option.id]}</span>
-          </button>
-        ))}
-        {config.hasTechBase && (
-          <>
-            <span className="builds-filter-label">Tech</span>
-            {(['InnerSphere', 'Clan'] as const).map(value => (
-              <button
-                key={value}
-                type="button"
-                className="mech-filter-chip"
-                aria-pressed={techBase === value}
-                onClick={() => setTechBase(techBase === value ? null : value)}
-              >
-                {value === 'InnerSphere' ? 'IS' : 'Clan'}
-              </button>
-            ))}
-          </>
-        )}
-        {roleOptions.length > 0 && (
-          <>
-            <span className="builds-filter-label">Role</span>
-            <CheckboxDropdown
-              label="Role"
-              title="Role of the build's 'Mech"
-              options={roleOptions.map(role => ({ value: role, label: role }))}
-              selected={roles}
-              summary={describeSelection(roles)}
-              onToggle={role => setRoles(toggleValue(roles, role))}
-              onClear={() => setRoles([])}
-            />
-          </>
-        )}
-      </div>
-      <div className="builds-classes" role="group" aria-label="Equipment">
-        <span className="builds-filter-label">Equipment</span>
-        <span className="mech-filter-group">
-        {config.featureOptions.map(option => (
-          <button
-            key={option.id}
-            type="button"
-            className="mech-filter-chip"
-            aria-pressed={features.includes(option.id)}
-            title={option.title}
-            onClick={() => setFeatures(toggleValue(features, option.id))}
-          >
-            {option.label}
-          </button>
-        ))}
-        </span>
-      </div>
-      {config.partGroups && rows.length > 0 && (
-        <div className="builds-classes" role="group" aria-label="Parts">
-          <span className="builds-filter-label">Parts</span>
+      {/* Cada fila con su etiqueta en una columna del mismo ancho: los controles de todas empiezan a la misma
+          altura y, si no caben, siguen debajo alineados con el primero. */}
+      <div className="builds-filters">
+        <div className="builds-filter-row" role="group" aria-label="Class, tech and role">
+          <span className="builds-filter-label">Class</span>
           <span className="mech-filter-group">
-            {config.partGroups.map(group => (
-              <span key={group.id} className="builds-part-filter">
-                <span className="builds-filter-label">{group.label}</span>
+            <span className="builds-filter-pair">
+              {BUILD_WEIGHT_CLASSES.map(option => (
+                <button
+                  key={option.id}
+                  type="button"
+                  className="mech-filter-chip"
+                  aria-pressed={weightClasses.includes(option.id)}
+                  disabled={counts[option.id] === 0 && !weightClasses.includes(option.id)}
+                  onClick={() => toggle(option.id)}
+                >
+                  {option.label} <span className="utility-count">{counts[option.id]}</span>
+                </button>
+              ))}
+            </span>
+            {config.hasTechBase && (
+              <span className="builds-filter-pair">
+                <span className="builds-filter-sublabel">Tech</span>
+                {(['InnerSphere', 'Clan'] as const).map(value => (
+                  <button
+                    key={value}
+                    type="button"
+                    className="mech-filter-chip"
+                    aria-pressed={techBase === value}
+                    onClick={() => setTechBase(techBase === value ? null : value)}
+                  >
+                    {value === 'InnerSphere' ? 'IS' : 'Clan'}
+                  </button>
+                ))}
+              </span>
+            )}
+            {roleOptions.length > 0 && (
+              <span className="builds-filter-pair">
+                <span className="builds-filter-sublabel">Role</span>
                 <CheckboxDropdown
-                  label={group.label}
-                  title={group.title}
-                  options={(partOptions[group.id] ?? []).map(value => ({ value, label: value }))}
-                  selected={parts[group.id] ?? []}
-                  summary={describeSelection(parts[group.id] ?? [])}
-                  onToggle={value => setParts({ ...parts, [group.id]: toggleValue(parts[group.id] ?? [], value) })}
-                  onClear={() => setParts({ ...parts, [group.id]: [] })}
+                  label="Role"
+                  title="Role of the build's 'Mech"
+                  options={roleOptions.map(role => ({ value: role, label: role }))}
+                  selected={roles}
+                  summary={describeSelection(roles)}
+                  onToggle={role => setRoles(toggleValue(roles, role))}
+                  onClear={() => setRoles([])}
                 />
               </span>
+            )}
+          </span>
+        </div>
+        <div className="builds-filter-row" role="group" aria-label="Equipment">
+          <span className="builds-filter-label">Equipment</span>
+          <span className="mech-filter-group">
+            {config.featureOptions.map(option => (
+              <button
+                key={option.id}
+                type="button"
+                className="mech-filter-chip"
+                aria-pressed={features.includes(option.id)}
+                title={option.title}
+                onClick={() => setFeatures(toggleValue(features, option.id))}
+              >
+                {option.label}
+              </button>
             ))}
           </span>
         </div>
-      )}
-      <div className="builds-hardpoints" role="group" aria-label={`Minimum ${noun}`}>
-        <span className="builds-filter-label">Min</span>
-        <span className="mech-filter-group">
-        <span className="builds-minimums-of" role="group" aria-label="Compare minimums with">
-          {MINIMUMS_OF.map(option => (
-            <button
-              key={option.id}
-              type="button"
-              aria-pressed={minimumsOf === option.id}
-              title={option.title}
-              onClick={() => setMinimumsOf(option.id)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </span>
-        {hardpointTypes.map(type => (
-          <FilterStepper
-            key={type.id}
-            type={type.id}
-            label={`${type.label} ${noun}`}
-            short={type.short}
-            value={minHardpoints[type.id] ?? 0}
-            max={MAX_MINIMUM}
-            onChange={value => setMinHardpoints({ ...minHardpoints, [type.id]: value })}
-          />
-        ))}
-        </span>
+        {config.partGroups && rows.length > 0 && (
+          <div className="builds-filter-row" role="group" aria-label="Parts">
+            <span className="builds-filter-label">Parts</span>
+            <span className="mech-filter-group">
+              {config.partGroups.map(group => (
+                <span key={group.id} className="builds-filter-pair">
+                  <span className="builds-filter-sublabel">{group.label}</span>
+                  <CheckboxDropdown
+                    label={group.label}
+                    title={group.title}
+                    options={(partOptions[group.id] ?? []).map(value => ({ value, label: value }))}
+                    selected={parts[group.id] ?? []}
+                    summary={describeSelection(parts[group.id] ?? [])}
+                    onToggle={value => setParts({ ...parts, [group.id]: toggleValue(parts[group.id] ?? [], value) })}
+                    onClear={() => setParts({ ...parts, [group.id]: [] })}
+                  />
+                </span>
+              ))}
+            </span>
+          </div>
+        )}
+        <div className="builds-filter-row" role="group" aria-label={`Minimum ${noun}`}>
+          <span className="builds-filter-label">Min</span>
+          <span className="mech-filter-group">
+            <span className="builds-minimums-of" role="group" aria-label="Compare minimums with">
+              {MINIMUMS_OF.map(option => (
+                <button
+                  key={option.id}
+                  type="button"
+                  aria-pressed={minimumsOf === option.id}
+                  title={option.title}
+                  onClick={() => setMinimumsOf(option.id)}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </span>
+            {hardpointTypes.map(type => (
+              <FilterStepper
+                key={type.id}
+                type={type.id}
+                label={`${type.label} ${noun}`}
+                short={type.short}
+                value={minHardpoints[type.id] ?? 0}
+                max={MAX_MINIMUM}
+                onChange={value => setMinHardpoints({ ...minHardpoints, [type.id]: value })}
+              />
+            ))}
+          </span>
+        </div>
       </div>
     </div>
   );
