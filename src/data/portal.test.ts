@@ -15,6 +15,10 @@ import btItemsJson from './battletech/items.json';
 import btMechs from './battletech/mechs.json';
 import btStarmap from './battletech/starmap.json';
 import btUnits from './battletech/units.json';
+import yamlMechs from './yaml/mechs.json';
+import yamlIndex from '../../yaml/index.html?raw';
+import yamlEquipmentIndex from '../../yaml/equipment/index.html?raw';
+import { getYamlWeaponRows, groupYamlEquipment } from '../utils/yaml/arsenal';
 
 // La portada es HTML estático (site/index.html): sus cifras se escriben a mano. Estos tests las comparan con
 // los datos que usa la página de cada herramienta, para que no se queden atrás cuando se regeneran.
@@ -39,6 +43,14 @@ const metaOf = (html: string, className: string): string[] => {
 const toolRows = (game: string): [string, string[]][] =>
   [...toolList(game).matchAll(/<a class="tool[^"]*" href="([^"]+)">([\s\S]*?)<\/a>/g)].map(row => [row[1], metaOf(row[2], 'tool-meta')]);
 
+// Las versiones YAML van en la mitad derecha de su fila, como {enlace: cifras}.
+const modRows = (game: string): [string, string[]][] =>
+  [...toolList(game).matchAll(/<a class="mod-link[^"]*" href="([^"]+)">([\s\S]*?)<\/a>/g)].map(row => [row[1], metaOf(row[2], 'tool-meta')]);
+
+// La fila (li) de la portada en la que va cada enlace YAML: la de la herramienta de la que es versión.
+const rowOf = (game: string, href: string): string | undefined =>
+  [...toolList(game).matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)].find(row => row[1].includes(`href="${href}"`))?.[1];
+
 const gameCover = (game: string): string => {
   const match = portal.match(new RegExp(`<button[^>]*class="game-cover[^"]*"[^>]*data-game="${game}"[^>]*>([\\s\\S]*?)</button>`));
   if (!match) throw new Error(`No hay carátula de ${game}`);
@@ -49,6 +61,8 @@ const year = (date: string) => date.slice(0, 4);
 const items = Object.values(itemsJson as unknown as Record<string, Item>);
 const btItems = btItemsJson as unknown as BtItem[];
 const equipmentCount = groupEquipment(items, { category: 'all', query: '', tech: 'all', dlc: 'all' })
+  .reduce((total, group) => total + group.items.length, 0);
+const yamlEquipmentCount = groupYamlEquipment({ category: 'all', query: '', tech: 'all', source: 'all' })
   .reduce((total, group) => total + group.items.length, 0);
 const btEquipmentCount = groupBtEquipment(btItems, { category: 'all', query: '', plus: 'all', source: 'all', rarity: 'all' })
   .reduce((total, group) => total + group.items.length, 0);
@@ -63,14 +77,39 @@ describe('portada', () => {
     expect(portal).toContain('id="tools-battletech"');
   });
 
-  it('enlaza a las ocho herramientas de cada juego, con el MechLab primero y las builds publicadas después', () => {
+  it('enlaza a las ocho herramientas de cada juego: MechLab, builds, chasis y equipo primero', () => {
     expect(toolRows('mw5').map(([href]) => href)).toEqual([
-      '/mercs/', '/mercs/builds/', '/mercs/chassis/', '/mercs/campaigns/', '/mercs/starmap/', '/mercs/units/', '/mercs/pilots/', '/mercs/equipment/'
+      '/mercs/', '/mercs/builds/', '/mercs/chassis/', '/mercs/equipment/', '/mercs/campaigns/', '/mercs/starmap/', '/mercs/units/', '/mercs/pilots/'
     ]);
     expect(toolRows('battletech').map(([href]) => href)).toEqual([
-      '/battletech/', '/battletech/builds/', '/battletech/chassis/', '/battletech/flashpoints/', '/battletech/starmap/', '/battletech/units/',
-      '/battletech/argo/', '/battletech/equipment/'
+      '/battletech/', '/battletech/builds/', '/battletech/chassis/', '/battletech/equipment/', '/battletech/flashpoints/', '/battletech/starmap/',
+      '/battletech/units/', '/battletech/argo/'
     ]);
+  });
+
+  it('parte en dos las filas del MechLab y del equipo de MW5, con su versión YAML a la derecha', () => {
+    expect(modRows('mw5').map(([href]) => href)).toEqual(['/mercs/yaml/', '/mercs/yaml/equipment/']);
+    expect(rowOf('mw5', '/mercs/yaml/')).toContain('href="/mercs/"');
+    expect(rowOf('mw5', '/mercs/yaml/equipment/')).toContain('href="/mercs/equipment/"');
+    expect(modRows('battletech')).toEqual([]);
+  });
+
+  it('da las cifras de los datos de YAML', () => {
+    expect(Object.fromEntries(modRows('mw5'))).toEqual({
+      '/mercs/yaml/': [`${yamlMechs.length} variants`, 'Mod rules'],
+      '/mercs/yaml/equipment/': [`${getYamlWeaponRows('1').length} weapons`, `${yamlEquipmentCount} equipment`]
+    });
+  });
+
+  it('lleva el sello YAML compatible en la carátula de MW5', () => {
+    const cover = gameCover('mw5');
+    expect(cover).toMatch(/class="yaml-badge"[\s\S]*yet-another-mechlab-color\.png[\s\S]*YAML compatible/);
+    expect(gameCover('battletech')).not.toContain('yaml-badge');
+  });
+
+  it('deja indexar las páginas de YAML', () => {
+    expect(yamlIndex).not.toContain('noindex');
+    expect(yamlEquipmentIndex).not.toContain('noindex');
   });
 
   it('no tiene etiquetas NEW ni la franja de más juegos', () => {
@@ -83,11 +122,11 @@ describe('portada', () => {
       '/mercs/': [`${mechs.length} variants`, 'Save & share builds'],
       '/mercs/builds/': ['Community builds', 'Filters', 'Votes'],
       '/mercs/chassis/': ['Stats', 'Filters', 'Builds'],
+      '/mercs/equipment/': [`${getWeaponRows(items, '1').length} weapons`, `${equipmentCount} equipment`, 'Stats'],
       '/mercs/campaigns/': [`${starmap.quests.length} quests`, `${starmap.campaigns.length} DLC campaigns`],
       '/mercs/starmap/': [`${year(starmap.range.start)} to ${year(starmap.range.end)}`, 'Borders by date'],
       '/mercs/units/': [`${units.units.length} units`, 'Tanks', 'VTOLs', 'Turrets'],
-      '/mercs/pilots/': [`${pilots.traits.length} traits`, `${pilots.heroes.length} hero pilots`, `${starmap.academies.length} academies`],
-      '/mercs/equipment/': [`${getWeaponRows(items, '1').length} weapons`, `${equipmentCount} equipment`, 'Stats']
+      '/mercs/pilots/': [`${pilots.traits.length} traits`, `${pilots.heroes.length} hero pilots`, `${starmap.academies.length} academies`]
     });
     expect(metaOf(gameCover('mw5'), 'game-meta')).toEqual([`${mechs.length} variants`, `${starmap.campaigns.length} DLC campaigns`, 'DLC 9 ready']);
   });
