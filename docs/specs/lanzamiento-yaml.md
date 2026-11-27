@@ -11,11 +11,11 @@ Además, el orden de la lista pone las herramientas de consulta (campañas, mapa
 
 ## Requisitos funcionales
 
-- **RF1. Sello YAML en la carátula de MW5.** Debajo de las cifras de la carátula de MW5 va un sello «YAML compatible» con el logo del mod Yet Another Mechlab (`public/mechlab/yaml/mods/yet-another-mechlab-color.png`), alineado a la derecha como el resto del texto de la carátula.
+- **RF1. Sello YAML en la carátula de MW5.** Debajo de las cifras de la carátula de MW5 va un sello con el logo del mod Yet Another Mechlab (`public/mechlab/yaml/mods/yet-another-mechlab-color.png`) y la palabra «Compatible»: el logo ya dice YAML. Va alineado a la derecha como el resto del texto de la carátula.
 - **RF2. Nuevo orden.** Las herramientas de cada juego van en este orden, en la portada y en la cabecera de todas las páginas:
   - MW5: MechLab, Builds, Chassis, Equipment, HRQ & Campaigns, Star map, Enemy units, Pilots.
   - BATTLETECH, igual que MW5 para que los dos juegos se lean igual: MechLab, Builds, Chassis, Equipment, Flashpoints, Star map, Enemy units, Argo.
-- **RF3. Filas partidas.** Las filas del MechLab y del equipo de MW5 se parten en dos: a la izquierda la herramienta de siempre, con su miniatura, nombre y cifras; a la derecha, su versión YAML, con el logo del mod, el nombre y sus cifras, y su propio «Open». Cada mitad es un enlace aparte y se ilumina sola al pasar el ratón. En móvil la mitad YAML baja debajo de la otra.
+- **RF3. Filas partidas.** Las filas del MechLab y del equipo de MW5 se parten en dos: a la izquierda la herramienta de siempre, con su miniatura, nombre y cifras; a la derecha, su versión YAML, con el logo del mod, el nombre de la herramienta («MechLab», «Equipment») en el naranja del mod y sus cifras, y su propio «Open». Sin «YAML mod» ni «YAML» en el texto: el logo ya lo dice, y repetirlo hacía ruido. Cada mitad es un enlace aparte y se ilumina sola al pasar el ratón. En móvil la mitad YAML baja debajo de la otra.
   - MechLab YAML (`/mercs/yaml/`): «N variants · Mod rules».
   - Equipo YAML (`/mercs/yaml/equipment/`): «N weapons · N equipment».
 - **RF4. Indexable.** Las dos páginas de YAML pierden el `noindex`.
@@ -32,9 +32,9 @@ Además, el orden de la lista pone las herramientas de consulta (campañas, mapa
 
 | # | Dado | Cuando | Entonces |
 |---|---|---|---|
-| CA1 | La carátula de MW5 | se lee | lleva el sello «YAML compatible» con el logo de Yet Another Mechlab |
+| CA1 | La carátula de MW5 | se lee | lleva el sello con el logo de Yet Another Mechlab (texto alternativo «YAML») y «Compatible» |
 | CA2 | Las listas de la portada | se leen sus enlaces principales | van en el orden de RF2, y la cabecera de las páginas en el mismo |
-| CA3 | La lista de MW5 | se leen sus enlaces YAML | hay dos, `/mercs/yaml/` en la fila del MechLab y `/mercs/yaml/equipment/` en la del equipo, y ninguno en BATTLETECH |
+| CA3 | La lista de MW5 | se leen sus enlaces YAML | hay dos, `/mercs/yaml/` en la fila del MechLab y `/mercs/yaml/equipment/` en la del equipo, y ninguno en BATTLETECH; su texto no repite «YAML» (lo lleva el logo, como texto alternativo) |
 | CA4 | Las cifras de las mitades YAML | se comparan con los datos | coinciden: variantes de `src/data/yaml/mechs.json`, armas y equipo de la página de equipo de YAML |
 | CA5 | `yaml/index.html` y `yaml/equipment/index.html` | se busca `noindex` | no está |
 | CA6 | La cabecera de MW5 en modo YAML | se leen sus enlaces | «MechLab» va a `/mercs/yaml/` y «Equipment» a `/mercs/yaml/equipment/`, los dos marcados como YAML, y el resto como en vanilla, en el mismo orden |
