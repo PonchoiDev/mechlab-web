@@ -9,14 +9,6 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
-    id: '2026-11-27-clan-name-search',
-    date: '2026-11-27',
-    title: "Find Clan 'Mechs by their Clan name",
-    items: [
-      "The 'Mech search matches each word on its own, so Clan names work together with the variant: \"timber wolf prime\" or \"summoner b\" find the Mad Cat and the Thor"
-    ]
-  },
-  {
     id: '2026-11-26-bigger-mech-image',
     date: '2026-11-26',
     title: "Bigger 'Mech image on the board",
