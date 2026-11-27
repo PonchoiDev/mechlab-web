@@ -29,7 +29,7 @@ La tecnología y el omni salen de los quirks `CLAN-MECH` y `OMNI-MECH`; los ancl
 - **RF2.** Y los propios de YAML:
   - **Variant:** **Hero**, **Omni** (OmniMechs), **Superheavy** (los superpesados) y **YAML only** (las variantes nuevas de YAML).
   - **Min hardpoints** también de **AMS** y **cuerpo a cuerpo** (Melee), que en YAML son anclajes como los demás.
-  - **Quirks:** una lista con los quirks de las variantes; con varios marcados, salen las que tienen todos. Son unos 350, así que el desplegable tiene un buscador que deja solo los quirks cuyo nombre contiene lo escrito, sin distinguir mayúsculas ni acentos.
+  - **Quirks:** una lista con los quirks que tienen variantes de al menos dos chasis; con varios marcados, salen las que tienen todos. De los unos 350 quirks, 296 son de un solo chasis (los de las variantes hero, los nombres propios...): para esos basta con buscar el chasis, y en la lista solo estorban. Siguen encontrándose con el buscador de texto (RF4). Quedan unos 50, y el desplegable tiene un buscador que deja solo los quirks cuyo nombre contiene lo escrito, sin distinguir mayúsculas ni acentos.
 - **RF3.** Sin el filtro **Equipment** de MW5 (jump jets, ECM, AMS, sonda activa y Motive): en YAML los retrorreactores, el ECM, las sondas y el MASC van en las ranuras generales (`SetSpecialEquipmentSlotType`), así que cualquier 'Mech los monta. El AMS pasa a los anclajes mínimos.
 - **RF4.** El buscador busca en el chasis, la variante, el id y los nombres de los quirks, y entiende los atajos de MW5 que valen en YAML: `3e`, `2b`, `2m`, `1o`, `1art`, `1ams`, `hero`, `dlc7` y `base`; y los de YAML: `2mel` (cuerpo a cuerpo), `clan`, `omni`, `sh` (superpesados) y `yaml` (variantes nuevas).
 - **RF5.** Cada variante de la lista enseña sus anclajes por tipo (sin tamaño: en YAML el tamaño no limita qué arma cabe), su DLC, si es hero o nueva de YAML y, debajo, su tonelaje, su año y su rol, como en MW5.
@@ -50,6 +50,8 @@ La tecnología y el omni salen de los quirks `CLAN-MECH` y `OMNI-MECH`; los ancl
 | CA8 | Available by 3025 | se filtra | no sale ningún 'Mech Clan ni ninguno con año posterior |
 | CA9 | YAML only | se filtra | salen las 151 variantes nuevas |
 | CA10 | La lista de quirks | se busca `armor` y después `ÁRMOR` | quedan los quirks con «armor» en el nombre, los mismos las dos veces; sin texto, todos |
+| CA11 | La lista de quirks | se abre | están Star League Relic y Command 'Mech, que llevan variantes de muchos chasis, y no está 360 Torso Twist, que solo lleva el UrbanMech; cada quirk de la lista lo tienen variantes de dos chasis o más |
+| CA12 | El buscador | se escribe `360 torso` | salen las variantes del UrbanMech con ese quirk, aunque no esté en la lista |
 
 ## Fuera de alcance
 
