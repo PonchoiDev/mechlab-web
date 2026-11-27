@@ -4,8 +4,9 @@ import os
 import shutil
 import sys
 
+from extraer_mapa import escribir_png, reducir
 from kismet import base, desensamblar, etiqueta, id_de_asset, recorrer, ultimo_nombre
-from ue4 import Asset, Pak
+from ue4 import Asset, Pak, leer_textura
 
 # Extrae de los mods de Yet Another Mechlab (YAML) del Workshop de Steam los datos que necesita el
 # MechLab con sus reglas: 'Mechs (MDA, loadouts, anclajes y modelos), armas, munición, equipo, tipos de
@@ -86,6 +87,14 @@ EXTENSIONES_RECURSOS = (".json", ".ini")
 LOGOS_DE_MOD = {"modicon128.png": "{}.png", "modicon128c.png": "{}-color.png"}
 RUTA_LOGOS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "mechlab", "yaml", "mods")
 
+
+# Los filtros del inventario del mechlab que pone YAML (tres filas: armas, equipo y varios), con su texto de
+# ayuda, sus etiquetas, su color y su icono. Los iconos son texturas del juego base: se sacan de su .pak a
+# public/mechlab/yaml/inventory/, uno por filtro, en blanco sobre transparente como los del juego.
+TABLA_DE_FILTROS = "Plugins/YetAnotherMechlab/Content/Mechlab/UI/YamlInventoryFilters"
+RUTA_ICONOS_DE_FILTROS = os.path.join(DIRECTORIO_SCRIPT, "..", "public", "mechlab", "yaml", "inventory")
+# 48 px, el tamaño de casi todos en el juego.
+TAMANO_ICONO = 48
 
 # Las restricciones de montaje del mechlab del juego (KelLoadoutRestrictionFunction_UniqueEquipment...).
 PREFIJO_RESTRICCION = "KelLoadoutRestrictionFunction"
@@ -246,6 +255,52 @@ def escribir(ruta, datos):
         archivo.write("{\n" + ",\n".join(lineas) + "\n}\n")
 
 
+def extraer_filtros(ruta_pak):
+    """Las filas de la tabla de filtros del inventario, en su orden, con el icono como ruta de asset."""
+    pak = Pak(ruta_pak)
+    if TABLA_DE_FILTROS + ".uasset" not in pak.archivos:
+        return None
+    asset = Asset.desde_pak(pak, TABLA_DE_FILTROS)
+    filas = []
+    for nombre, fila in asset.filas(asset.principal()).items():
+        # Las columnas llevan el sufijo que les pone el editor a los campos de un struct de blueprint.
+        campos = {clave.split("_")[0]: valor for clave, valor in fila.items()}
+        icono = campos.get("icon")
+        filas.append({
+            "fila": nombre, "category": campos["category"], "subCategory": campos["subCategory"], "text": campos["text"],
+            "tooltip": campos["tooltip"], "tags": campos["tags"], "color": campos["color"],
+            "isAmmoFilter": campos["isAmmoFilter"], "icon": asset.ruta_objeto(icono) if icono else None,
+        })
+    return filas
+
+
+def cuadrar(ancho, alto, pixeles):
+    """Centra una imagen RGBA en un lienzo cuadrado transparente: dos iconos de filtros no son cuadrados."""
+    lado = max(ancho, alto)
+    if ancho == alto:
+        return lado, pixeles
+    salida = bytearray(lado * lado * 4)
+    x0, y0 = (lado - ancho) // 2, (lado - alto) // 2
+    for y in range(alto):
+        inicio = ((y + y0) * lado + x0) * 4
+        salida[inicio:inicio + ancho * 4] = pixeles[y * ancho * 4:(y + 1) * ancho * 4]
+    return lado, salida
+
+
+def extraer_iconos_de_filtros(filtros, carpeta_juego):
+    """El icono de cada filtro, del .pak del juego (/Game/X es MW5Mercs/Content/X), con el id que usa la web."""
+    pak = Pak(os.path.join(carpeta_juego, PAK_DEL_JUEGO))
+    os.makedirs(RUTA_ICONOS_DE_FILTROS, exist_ok=True)
+    for filtro in filtros:
+        if not filtro["icon"]:
+            continue
+        ruta = CONTENIDO_DEL_JUEGO + filtro["icon"].split(".", 1)[0].removeprefix("/Game/")
+        ancho, alto, pixeles = leer_textura(pak, ruta)
+        lado, pixeles = cuadrar(ancho, alto, pixeles)
+        nombre = filtro["subCategory"].replace(".", "-") + ".png"
+        escribir_png(os.path.join(RUTA_ICONOS_DE_FILTROS, nombre), TAMANO_ICONO, reducir(lado, lado, pixeles, TAMANO_ICONO))
+
+
 def extraer_mod(carpeta_mod, destino):
     with open(os.path.join(carpeta_mod, "mod.json"), encoding="utf-8-sig") as archivo:
         info = json.load(archivo)
@@ -261,8 +316,14 @@ def extraer_mod(carpeta_mod, destino):
         escribir(os.path.join(destino, nombre + ".json"), assets)
 
     reglas = None
+    filtros = None
     for ruta_pak in sorted(glob.glob(os.path.join(carpeta_mod, "Paks", "*.pak"))):
         reglas = extraer_reglas(ruta_pak) or reglas
+        filtros = extraer_filtros(ruta_pak) or filtros
+    if filtros:
+        with open(os.path.join(destino, "filtros.json"), "w", encoding="utf-8") as archivo:
+            json.dump(filtros, archivo, ensure_ascii=False, indent=2)
+            archivo.write("\n")
     if reglas:
         with open(os.path.join(destino, "reglas.json"), "w", encoding="utf-8") as archivo:
             json.dump(reglas, archivo, ensure_ascii=False, indent=2)
@@ -290,6 +351,7 @@ def extraer_mod(carpeta_mod, destino):
         "categorias": {nombre: len(assets) for nombre, assets in sorted(categorias.items())},
         "recursos": copiados,
         "reglas": sorted(reglas) if reglas else [],
+        "filtros": len(filtros or []),
     }
     with open(os.path.join(destino, "mod.json"), "w", encoding="utf-8") as archivo:
         json.dump(resumen, archivo, ensure_ascii=False, indent=2)
@@ -324,6 +386,8 @@ def main():
         resumen = extraer_mod(os.path.join(carpeta, id_mod), os.path.join(RUTA_DESTINO, nombre))
         categorias = ", ".join(f"{n} {c}" for n, c in resumen["categorias"].items())
         print(f"{resumen['nombre']} {resumen['version']}: {categorias}")
+    with open(os.path.join(RUTA_DESTINO, MODS["2549720490"], "filtros.json"), encoding="utf-8") as archivo:
+        extraer_iconos_de_filtros(json.load(archivo), carpeta_juego)
     totales = extraer_juego(carpeta_juego, os.path.join(RUTA_DESTINO, CARPETA_DEL_JUEGO))
     print("Juego base: " + ", ".join(f"{categoria} {total}" for categoria, total in sorted(totales.items())))
 

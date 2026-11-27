@@ -1,8 +1,10 @@
 import type { Zone } from '../../types/mech';
-import type { YamlBuild, YamlHardpointType, YamlItem, YamlMech } from '../../types/yaml-mechlab';
+import type { YamlBuild, YamlItem, YamlMech } from '../../types/yaml-mechlab';
 import { INTERNAL_SLOTS, ZONES } from './board';
+import filtersData from '../../data/yaml/filters.json';
 import { checkInternal, mountItem, mountWeapon, setInternal, type MountResult } from './build';
 import { getYamlItem, yamlItemIds } from './data';
+import { GENERAL_SLOT } from './stats';
 
 // El inventario del MechLab de YAML, el mismo que el de MW5 y BATTLETECH (components/InventoryPanel.tsx,
 // battletech/mechlab/BtInventoryPanel.tsx) con las reglas de YAML: además de las armas, la munición y el
@@ -13,8 +15,45 @@ export interface YamlInventoryEntry {
   item: YamlItem;
 }
 
-export type YamlInventoryCategory = 'all' | 'energy' | 'ballistic' | 'missile' | 'ams' | 'melee' | 'equipment' | 'ammo';
-export const YAML_INVENTORY_CATEGORIES: YamlInventoryCategory[] = ['all', 'energy', 'ballistic', 'missile', 'ams', 'melee', 'equipment', 'ammo'];
+// Los filtros del inventario que pone el mod Yet Another Mechlab en el mechlab del juego (tabla
+// YamlInventoryFilters, sacada por tools/generar_yaml.py), en tres filas: armas, equipo y varios
+// (docs/specs/filtros-inventario-yaml.md).
+export interface YamlInventoryFilter {
+  id: string;
+  row: 'weapon' | 'equipment' | 'misc';
+  category: 'weapon' | 'equipment';
+  subCategory: string;
+  tooltip: string;
+  tags: string[];
+  color: string;
+  // Los dos «ALL» llevan texto; los demás, el icono del juego.
+  text?: string;
+  icon?: string;
+  ammo?: boolean;
+}
+
+export const YAML_INVENTORY_FILTERS = filtersData as YamlInventoryFilter[];
+const FILTERS_BY_ID = new Map(YAML_INVENTORY_FILTERS.map(filter => [filter.id, filter]));
+
+// HasAnyTags de Unreal: la etiqueta de la pieza entra si es la del filtro o una hija suya; con bExactMatch, solo
+// si es la misma.
+const matchesTag = (tag: string, filterTag: string, exact: boolean) => tag === filterTag || (!exact && tag.startsWith(`${filterTag}.`));
+const EQUIPMENT_AMMO = 'Equipment.Ammo';
+
+// EquipmentMatchesUiFilter del mod: las armas, por su etiqueta de tipo (GetInventoryWeaponsByTag); el equipo y la
+// munición, por la categoría de las propiedades del mod si la tienen («equipment.» y la subcategoría del filtro al
+// principio, sin distinguir mayúsculas: Misc deja también los núcleos y los tipos de motor) y, si no, por su
+// etiqueta. En el filtro de munición la etiqueta tiene que ser exactamente una de las suyas, salvo que el filtro
+// solo lleve Equipment.Ammo: así los consumibles (Ammo.Consumable) no salen entre la munición.
+export function matchesYamlInventoryFilter(item: YamlItem, filter: YamlInventoryFilter): boolean {
+  if (item.kind === 'weapon') {
+    return filter.category === 'weapon' && !!item.weaponType && filter.tags.some(tag => matchesTag(item.weaponType!, tag, false));
+  }
+  if (filter.category !== 'equipment') return false;
+  if (item.uiCategory) return item.uiCategory.toLowerCase().startsWith(`equipment.${filter.subCategory}`.toLowerCase());
+  const exact = !!filter.ammo && !(filter.tags.length === 1 && filter.tags[0] === EQUIPMENT_AMMO);
+  return !!item.category && filter.tags.some(tag => matchesTag(item.category!, tag, exact));
+}
 
 // Destino elegido en el tablero: una ubicación, uno de sus anclajes (para cambiar el arma) o una de sus
 // ranuras internas (para cambiar el motor, el giroscopio, la armadura...).
@@ -25,7 +64,8 @@ export interface YamlInventoryTarget {
 }
 
 export interface YamlInventoryFilters {
-  category: YamlInventoryCategory;
+  // El id del filtro marcado; sin ninguno, salen todas las piezas.
+  filter: string | null;
   search: string;
   fitsOnly: boolean;
 }
@@ -36,34 +76,36 @@ export type YamlSortDirection = 'asc' | 'desc';
 // Versiones que no se eligen en el inventario: los niveles de las armas (el nivel va en la build) y las
 // armas de vehículos, torretas y armaduras de combate.
 const HIDDEN_IDS = /_Lvl\d+$|_Turret|Vehicle|Elemental/i;
-// Equipo que no se monta a mano: los rellenos y la chatarra para reparar.
+// Equipo que no se monta a mano: los rellenos (IsFillerEquipment) y la chatarra para reparar.
 const HIDDEN_CATEGORIES = /^Equipment\.(Filler|Salvage)/;
 const INTERNAL = new Set<string>(INTERNAL_SLOTS);
 
-const isInternal = (item: YamlItem) => (item.slotTypes ?? []).some(slotType => INTERNAL.has(slotType));
+// La ranura interna de una pieza que solo va en una (núcleo y tipo de motor, giroscopio, armadura...).
+const getInternalSlot = (item: YamlItem): string | undefined =>
+  item.kind === 'equipment' && !(item.slotTypes ?? []).includes(GENERAL_SLOT)
+    ? item.slotTypes?.find(slotType => INTERNAL.has(slotType))
+    : undefined;
 
-// Armas, munición y equipo que se montan en ranuras (no las piezas internas, que van aparte).
+// Armas, munición y equipo, con las piezas internas, como el inventario del mod. Sin las piezas «fixed» (las de
+// serie de algunos 'Mechs, que no se compran: GetEquipmentInventoryNewItems las salta) ni los rellenos.
 export function getYamlInventoryItems(): YamlInventoryEntry[] {
   return yamlItemIds()
     .map(id => ({ id, item: getYamlItem(id)! }))
-    .filter(({ id, item }) => !HIDDEN_IDS.test(id) && !HIDDEN_CATEGORIES.test(item.category ?? '')
-      && !item.actuator && !(item.kind === 'equipment' && isInternal(item)));
-}
-
-export function getYamlInventoryCategory(item: YamlItem): YamlInventoryCategory {
-  if (item.kind === 'ammo') return 'ammo';
-  if (item.kind === 'equipment') return 'equipment';
-  const type: YamlHardpointType | undefined = item.hardpoint;
-  if (type === 'energy' || type === 'ballistic' || type === 'ams' || type === 'melee') return type;
-  return 'missile';
+    .filter(({ id, item }) => !HIDDEN_IDS.test(id) && !HIDDEN_CATEGORIES.test(item.category ?? '') && !item.actuator && !item.fixed);
 }
 
 // Montar un objeto en una ubicación (o en el anclaje elegido), con el motivo si no cabe. Las armas van con el
-// nivel elegido en el inventario.
+// nivel elegido en el inventario. Una pieza interna va en su ranura, si la ubicación la tiene, en lugar de la
+// que haya, como al elegirla desde la ranura.
 export function placeYamlItem(mech: YamlMech, build: YamlBuild, id: string, zone: Zone, hardpoint: string | null = null, tier?: number): MountResult {
   const item = getYamlItem(id);
   if (!item) return { error: 'Unknown item' };
-  return item.kind === 'weapon' ? mountWeapon(mech, build, zone, id, hardpoint ?? undefined, tier) : mountItem(mech, build, zone, id);
+  if (item.kind === 'weapon') return mountWeapon(mech, build, zone, id, hardpoint ?? undefined, tier);
+  const internalSlot = getInternalSlot(item);
+  if (internalSlot) {
+    return mech.zones[zone].special[internalSlot] ? chooseYamlInternal(mech, build, internalSlot, id) : { error: `${item.name} does not go in this location` };
+  }
+  return mountItem(mech, build, zone, id);
 }
 
 // Una caja de munición sirve si alguna arma montada usa su tipo, como en el inventario de MW5.
@@ -98,8 +140,9 @@ export function filterYamlInventory(
   target: YamlInventoryTarget | null
 ): YamlInventoryEntry[] {
   const text = filters.search.trim().toLowerCase();
+  const filter = filters.filter ? FILTERS_BY_ID.get(filters.filter) : undefined;
   return entries.filter(({ id, item }) => {
-    if (filters.category !== 'all' && getYamlInventoryCategory(item) !== filters.category) return false;
+    if (filter && !matchesYamlInventoryFilter(item, filter)) return false;
     if (text && !item.name.toLowerCase().includes(text)) return false;
     if (!filters.fitsOnly) return true;
     if (!isUseful(build, id)) return false;
@@ -108,13 +151,9 @@ export function filterYamlInventory(
   });
 }
 
-export function countYamlByCategory(entries: YamlInventoryEntry[]): Record<YamlInventoryCategory, number> {
-  const counts = Object.fromEntries(YAML_INVENTORY_CATEGORIES.map(category => [category, 0])) as Record<YamlInventoryCategory, number>;
-  for (const { item } of entries) {
-    counts.all += 1;
-    counts[getYamlInventoryCategory(item)] += 1;
-  }
-  return counts;
+// Las piezas que deja cada filtro, por su id.
+export function countYamlByFilter(entries: YamlInventoryEntry[]): Record<string, number> {
+  return Object.fromEntries(YAML_INVENTORY_FILTERS.map(filter => [filter.id, entries.filter(({ item }) => matchesYamlInventoryFilter(item, filter)).length]));
 }
 
 export function sortYamlInventory(entries: YamlInventoryEntry[], key: YamlSortKey, direction: YamlSortDirection): YamlInventoryEntry[] {

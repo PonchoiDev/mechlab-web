@@ -6,8 +6,8 @@ import { getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, type FillerGroup }
 import { getDefaultTier, getWeaponTiers } from '../utils/yaml/combat';
 import { getItemColor, getModLogo, getSlotColor, getYamlItem } from '../utils/yaml/data';
 import {
-  countYamlByCategory, filterYamlInventory, getYamlInternalChoices, getYamlInventoryCategory, getYamlInventoryItems,
-  sortYamlInventory, YAML_INVENTORY_CATEGORIES, type YamlInventoryCategory, type YamlInventoryFilters,
+  countYamlByFilter, filterYamlInventory, getYamlInternalChoices, getYamlInventoryItems, matchesYamlInventoryFilter,
+  sortYamlInventory, YAML_INVENTORY_FILTERS, type YamlInventoryFilter, type YamlInventoryFilters,
   type YamlInventoryTarget, type YamlSortDirection, type YamlSortKey
 } from '../utils/yaml/inventory';
 
@@ -39,11 +39,10 @@ interface YamlInventoryPanelProps {
   onClose: () => void;
 }
 
-const ICON_BASE = `${import.meta.env.BASE_URL}mechlab/inventory/`;
-const CATEGORY_LABELS: Record<YamlInventoryCategory, string> = {
-  all: 'All', energy: 'Energy', ballistic: 'Ballistic', missile: 'Missile', ams: 'AMS', melee: 'Melee', equipment: 'Equipment', ammo: 'Ammo'
-};
-const HAS_ICON: YamlInventoryCategory[] = ['energy', 'ballistic', 'missile', 'ams', 'melee', 'equipment'];
+// Los iconos de los filtros del mod, texturas del juego que saca tools/extraer_yaml.py.
+const FILTER_ICON_BASE = `${import.meta.env.BASE_URL}mechlab/yaml/inventory/`;
+const FILTER_ROWS: YamlInventoryFilter['row'][] = ['weapon', 'equipment', 'misc'];
+const ROW_LABELS: Record<YamlInventoryFilter['row'], string> = { weapon: 'Weapons', equipment: 'Equipment', misc: 'Misc' };
 const COLUMNS: [YamlSortKey, string, string][] = [['name', 'Name', 'Name'], ['slots', 'Slots', 'Critical slots'], ['tons', 'Tons', 'Tonnage']];
 // El logo del mod de la pieza, como en el mechlab del juego.
 export function ModLogo({ id }: { id: string | undefined }) {
@@ -59,7 +58,7 @@ function WeaponTierSelector({ id, tier, onChange }: { id: string; tier: number; 
   return <TierSelector item={item} onChange={(value) => onChange(Number(value))} />;
 }
 
-const DEFAULT_FILTERS: YamlInventoryFilters = { category: 'all', search: '', fitsOnly: true };
+const DEFAULT_FILTERS: YamlInventoryFilters = { filter: null, search: '', fitsOnly: true };
 const formatTons = (tons: number) => String(Number(tons.toFixed(2)));
 const weaponType = (item: YamlItem) => item.kind === 'weapon' ? item.hardpoint : undefined;
 
@@ -202,21 +201,22 @@ export function YamlInventoryPanel(props: YamlInventoryPanelProps) {
   const [sortDirection, setSortDirection] = useState<YamlSortDirection>('asc');
   const catalog = useMemo(() => getYamlInventoryItems(), []);
 
-  // Al elegir un destino, la casilla se marca y la pestaña vuelve a All, como en MW5.
+  // Al elegir un destino, la casilla se marca y el filtro se quita, como la pestaña All en MW5.
   const targetKey = target ? `${target.zone}:${target.hardpoint}:${target.internal}` : null;
   const [lastTargetKey, setLastTargetKey] = useState(targetKey);
   if (targetKey !== lastTargetKey) {
     setLastTargetKey(targetKey);
-    if (targetKey) setFilters(current => ({ ...current, category: 'all', fitsOnly: true }));
+    if (targetKey) setFilters(current => ({ ...current, filter: null, fitsOnly: true }));
   }
 
   const matching = useMemo(
-    () => filterYamlInventory(catalog, { ...filters, category: 'all' }, mech, build, target),
+    () => filterYamlInventory(catalog, { ...filters, filter: null }, mech, build, target),
     [catalog, filters, mech, build, target]
   );
-  const counts = countYamlByCategory(matching);
+  const counts = useMemo(() => countYamlByFilter(matching), [matching]);
+  const activeFilter = YAML_INVENTORY_FILTERS.find(filter => filter.id === filters.filter);
   const shown = sortYamlInventory(
-    filters.category === 'all' ? matching : matching.filter(({ item }) => getYamlInventoryCategory(item) === filters.category),
+    activeFilter ? matching.filter(({ item }) => matchesYamlInventoryFilter(item, activeFilter)) : matching,
     sortKey,
     sortDirection
   );
@@ -281,22 +281,30 @@ export function YamlInventoryPanel(props: YamlInventoryPanelProps) {
             </div>
           </div>
 
-          <div className="inventory-tabs" role="group" aria-label="Item type">
-            {YAML_INVENTORY_CATEGORIES.map(category => (
-              <button
-                key={category}
-                type="button"
-                className={filters.category === category ? 'inventory-tab is-active' : 'inventory-tab'}
-                aria-pressed={filters.category === category}
-                aria-label={`${CATEGORY_LABELS[category]} (${counts[category]})`}
-                title={`${CATEGORY_LABELS[category]}: ${counts[category]}`}
-                data-category={category}
-                disabled={counts[category] === 0 && filters.category !== category}
-                onClick={() => update({ category })}
-              >
-                {HAS_ICON.includes(category) ? <img src={`${ICON_BASE}${category}.png`} alt="" width={22} height={22} /> : CATEGORY_LABELS[category]}
-                <small>{counts[category]}</small>
-              </button>
+          {/* Los filtros del mod en sus tres filas, con su icono y su color. Pulsar el marcado lo quita. */}
+          <div className="inventory-tabs yaml-inventory-filters">
+            {FILTER_ROWS.map(row => (
+              <div key={row} className="yaml-filter-row" role="group" aria-label={ROW_LABELS[row]}>
+                {YAML_INVENTORY_FILTERS.filter(filter => filter.row === row).map(filter => {
+                  const isActive = filters.filter === filter.id;
+                  return (
+                    <button
+                      key={filter.id}
+                      type="button"
+                      className={isActive ? 'inventory-tab yaml-filter is-active' : 'inventory-tab yaml-filter'}
+                      style={{ '--tab-color': filter.color } as CSSProperties}
+                      aria-pressed={isActive}
+                      aria-label={`${filter.tooltip} (${counts[filter.id]})`}
+                      title={`${filter.tooltip}: ${counts[filter.id]}`}
+                      disabled={counts[filter.id] === 0 && !isActive}
+                      onClick={() => update({ filter: isActive ? null : filter.id })}
+                    >
+                      {filter.icon ? <img src={`${FILTER_ICON_BASE}${filter.icon}`} alt="" width={20} height={20} /> : <span className="yaml-filter-text">{filter.text}</span>}
+                      <small>{counts[filter.id]}</small>
+                    </button>
+                  );
+                })}
+              </div>
             ))}
           </div>
 

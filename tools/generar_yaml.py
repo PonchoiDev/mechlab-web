@@ -592,6 +592,10 @@ def aplicar_propiedades(objeto, combinadas, equipo):
         # Las ranuras fijas van por ubicación con los nombres del juego (LeftTorso); se pasan a los de la web.
         objeto["fillerSlots"] = {CAMPOS_ZONA.get(clave, clave): valor for clave, valor in combinadas["fillerSlots"].items()}
     if equipo:
+        # La categoría de los filtros del inventario de YAML (EquipmentMatchesUiFilter): si la tiene, manda
+        # sobre la etiqueta de la pieza.
+        if combinadas.get("category"):
+            objeto["uiCategory"] = combinadas["category"]
         if combinadas.get("name"):
             objeto["name"] = combinadas["name"]
         if "slots" in combinadas:
@@ -672,7 +676,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
             ranura = (REGEX_PROPIEDAD["slotType"].search(exportado) or [None, None])[1]
             etiqueta = (REGEX_PROPIEDAD["weaponType"].search(exportado) or [None, None])[1]
             ranura = ranura_de_arma(id_objeto, etiqueta, ranura, reglas)
-            nuevo.update({"hardpoint": objeto.get("weaponType"), "slotType": ranura, "slots": tamanos.get(ranura, 1),
+            nuevo.update({"hardpoint": objeto.get("weaponType"), "weaponType": etiqueta, "slotType": ranura, "slots": tamanos.get(ranura, 1),
                           "ammoTypes": municiones_del_arma(objeto.get("ammoType"), etiqueta, propiedades_de_armas)})
             niveles = armas_por_nivel.get(id_objeto) or armas_por_nivel.get(minusculas.get(id_objeto.lower(), ""))
             combate = niveles and combate_del_arma(id_objeto, niveles)
@@ -705,6 +709,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         actuador = bool(ACTUADOR_DE_CUERPO_A_CUERPO.search(nombre))
         objetos[nombre] = {
             "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon", "hardpoint": "melee",
+            "weaponType": datos.get("WeaponType"),
             "tons": datos.get("Tonnage") or 0, "slotType": ranura, "slots": ranuras_cuerpo_a_cuerpo(ranura, tamanos),
             "meleeDamage": (estadisticas.get("Melee") or {}).get("Damage", 0), "cooldown": estadisticas.get("Cooldown"),
             **({"actuator": True} if actuador else {}),
@@ -725,7 +730,7 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         ranura = ranura_de_arma(nombre, etiqueta, datos.get("WeaponSlotTypeAssetId", {}).get("Id", {}).get("PrimaryAssetName"), reglas)
         objetos[nombre] = {
             "mod": valor["mod"],
-            "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon",
+            "name": texto(datos.get("ShortName")) or texto(datos.get("Name")) or nombre, "kind": "weapon", "weaponType": etiqueta,
             "tons": datos.get("Tonnage") or 0, "hardpoint": tipo_de_anclaje(etiqueta),
             "slotType": ranura,
             "slots": ranuras_cuerpo_a_cuerpo(ranura, tamanos) if tipo_de_anclaje(etiqueta) == "melee" else tamanos.get(ranura, 1),
@@ -741,6 +746,8 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         objetos[nombre] = {"mod": valor["mod"], "name": texto(datos.get("Name")) or nombre, "kind": "ammo", "tons": datos.get("Tons") or 0,
                            "ammoType": datos.get("AmmoType"), "capacity": datos.get("Capacity") or 0,
                            "slots": datos.get("Slots") or 1, "slotTypes": [RANURA_GENERAL]}
+        if datos.get("EquipmentType"):
+            objetos[nombre]["category"] = datos["EquipmentType"]
         origen[nombre] = ([datos.get("AmmoType"), datos.get("EquipmentType")], None, True)
 
     # Equipo de YAML con sus propiedades (Resources/*Equipment_Properties.json).
@@ -791,6 +798,25 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
         if tiene_etiqueta(categoria, ETIQUETAS_DE_UNA_RANURA):
             objeto["slots"] = 1
     return objetos
+
+
+def construir_filtros():
+    """Los filtros del inventario del mechlab de YAML (tabla YamlInventoryFilters), en su orden y en las tres filas
+    del juego: armas, equipo y varios (las subcategorías «misc.»). El color pasa de lineal a sRGB; el icono es el
+    que saca extraer_yaml.py a public/mechlab/yaml/inventory/. Los dos «ALL» llevan texto en lugar de icono."""
+    filtros = []
+    for fila in leer(os.path.join(RUTA_YAML, "yet-another-mechlab", "filtros.json")):
+        sub = fila["subCategory"]
+        categoria = fila["category"]
+        filtros.append({
+            "id": sub or ("weapons" if categoria == "weapon" else "equipment"),
+            "row": "weapon" if categoria == "weapon" else "misc" if sub.split(".")[0] == "misc" else "equipment",
+            "category": categoria, "subCategory": sub,
+            "tooltip": fila["tooltip"], "tags": fila["tags"], "color": color_hex(fila["color"]),
+            **({"text": fila["text"]} if fila["text"] else {"icon": sub.replace(".", "-") + ".png"}),
+            **({"ammo": True} if fila["isAmmoFilter"] else {}),
+        })
+    return filtros
 
 
 def ids_del_juego():
@@ -1297,8 +1323,9 @@ def main():
                              "properties": quirks[nombre].get("properties", {})} for nombre in sorted(usados) if nombre in quirks}
     os.makedirs(RUTA_DESTINO, exist_ok=True)
     colores = construir_colores()
+    filtros = construir_filtros()
     for nombre, datos in (("mechs.json", mechs), ("items.json", objetos), ("quirks.json", datos_quirks), ("colors.json", colores),
-                          ("slots.json", ranuras_propias_que_cuentan(tamanos, objetos, mechs))):
+                          ("slots.json", ranuras_propias_que_cuentan(tamanos, objetos, mechs)), ("filters.json", filtros)):
         with open(os.path.join(RUTA_DESTINO, nombre), "w", encoding="utf-8") as archivo:
             json.dump(datos, archivo, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
             archivo.write("\n")
