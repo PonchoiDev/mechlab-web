@@ -79,6 +79,14 @@ export interface InventoryTarget {
   hardpointIndex: number | null;
 }
 
+// La pestaña al elegir un destino: la del tipo del anclaje, que es lo único que admite; en uno omni, que admite
+// varios, o en un componente, All (docs/specs/filtro-del-anclaje.md).
+export const getTargetCategory = (mech: Mech, target: InventoryTarget): InventoryCategory => {
+  if (target.hardpointIndex === null) return 'all';
+  const type = mech.components[target.zone].hardpoints[target.hardpointIndex]?.type;
+  return type && type !== 'omni' ? type : 'all';
+};
+
 const usesEquippedWeapon = (loadout: EquippedLoadout, ammo: Item) =>
   Object.values(loadout).flat().some(equipped => isAmmoCompatibleWithWeapon(ammo, equipped));
 

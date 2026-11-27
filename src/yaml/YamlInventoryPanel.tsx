@@ -6,7 +6,7 @@ import { getInternalLabel, getZoneRows, INTERNAL_SLOT_LABELS, type FillerGroup }
 import { getDefaultTier, getWeaponTiers } from '../utils/yaml/combat';
 import { getItemColor, getModLogo, getSlotColor, getYamlItem } from '../utils/yaml/data';
 import {
-  countYamlByFilter, filterYamlInventory, getYamlInternalChoices, getYamlInventoryItems, matchesYamlInventoryFilter,
+  countYamlByFilter, filterYamlInventory, getYamlInternalChoices, getYamlInventoryItems, getYamlTargetFilter, matchesYamlInventoryFilter,
   sortYamlInventory, YAML_INVENTORY_FILTERS, type YamlInventoryFilter, type YamlInventoryFilters,
   type YamlInventoryTarget, type YamlSortDirection, type YamlSortKey
 } from '../utils/yaml/inventory';
@@ -201,12 +201,12 @@ export function YamlInventoryPanel(props: YamlInventoryPanelProps) {
   const [sortDirection, setSortDirection] = useState<YamlSortDirection>('asc');
   const catalog = useMemo(() => getYamlInventoryItems(), []);
 
-  // Al elegir un destino, la casilla se marca y el filtro se quita, como la pestaña All en MW5.
+  // Al elegir un destino, la casilla se marca y el filtro pasa al del tipo del anclaje o se quita, como en MW5.
   const targetKey = target ? `${target.zone}:${target.hardpoint}:${target.internal}` : null;
   const [lastTargetKey, setLastTargetKey] = useState(targetKey);
   if (targetKey !== lastTargetKey) {
     setLastTargetKey(targetKey);
-    if (targetKey) setFilters(current => ({ ...current, filter: null, fitsOnly: true }));
+    if (target) setFilters(current => ({ ...current, filter: getYamlTargetFilter(mech, target), fitsOnly: true }));
   }
 
   const matching = useMemo(

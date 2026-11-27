@@ -132,6 +132,14 @@ export function autoPlaceYamlItem(mech: YamlMech, build: YamlBuild, id: string, 
   return { error: `${getYamlItem(id)?.name ?? id} does not fit anywhere` };
 }
 
+// El filtro al elegir un destino: el del tipo del anclaje; en uno omni, ALL W; en una ubicación, ninguno
+// (docs/specs/filtro-del-anclaje.md).
+export function getYamlTargetFilter(mech: YamlMech, target: YamlInventoryTarget): string | null {
+  if (!target.hardpoint) return null;
+  const type = mech.zones[target.zone].hardpoints.find(hardpoint => hardpoint.id === target.hardpoint)?.type;
+  return type && FILTERS_BY_ID.has(type) ? type : 'weapons';
+}
+
 export function filterYamlInventory(
   entries: YamlInventoryEntry[],
   filters: YamlInventoryFilters,
@@ -146,6 +154,8 @@ export function filterYamlInventory(
     if (text && !item.name.toLowerCase().includes(text)) return false;
     if (!filters.fitsOnly) return true;
     if (!isUseful(build, id)) return false;
+    // En un anclaje solo van armas: el equipo y la munición se montan apuntando a la ubicación, como en MW5.
+    if (target?.hardpoint && item.kind !== 'weapon') return false;
     if (target) return !!placeYamlItem(mech, build, id, target.zone, target.hardpoint).build;
     return getYamlDropZones(mech, build, id).length > 0;
   });

@@ -22,6 +22,10 @@ export const getBtInventoryCategory = (item: BtItem): Exclude<BtInventoryCategor
   return 'equipment';
 };
 
+// La pestaña al elegir un destino: la del tipo del anclaje; en una ubicación, All (docs/specs/filtro-del-anclaje.md).
+export const getBtTargetCategory = (mech: BtMech, loadout: BtLoadout, target: { zone: Zone; hardpointIndex: number | null }): BtInventoryCategory =>
+  target.hardpointIndex === null ? 'all' : getHardpointViews(mech, loadout, target.zone)[target.hardpointIndex]?.type ?? 'all';
+
 export const countBtByCategory = (items: BtItem[]): Record<BtInventoryCategory, number> => {
   const counts = Object.fromEntries(BT_INVENTORY_CATEGORIES.map(category => [category, 0])) as Record<BtInventoryCategory, number>;
   for (const item of items) {

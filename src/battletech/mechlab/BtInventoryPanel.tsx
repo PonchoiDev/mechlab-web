@@ -9,6 +9,7 @@ import {
   filterBtInventory,
   getBtInventoryCategory,
   getBtInventoryItems,
+  getBtTargetCategory,
   getVolleyDamage,
   sortBtInventory,
   type BtInventoryCategory,
@@ -223,12 +224,12 @@ export function BtInventoryPanel({
   const [sortDirection, setSortDirection] = useState<BtSortDirection>('asc');
   const catalog = useMemo(() => getBtInventoryItems(), []);
 
-  // Al elegir un destino, la casilla se marca y la pestaña vuelve a All, como en MW5.
+  // Al elegir un destino, la casilla se marca y la pestaña pasa a la del tipo del anclaje o a All, como en MW5.
   const targetKey = target ? `${target.zone}:${target.hardpointIndex}` : null;
   const [lastTargetKey, setLastTargetKey] = useState(targetKey);
   if (targetKey !== lastTargetKey) {
     setLastTargetKey(targetKey);
-    if (targetKey) setFilters(current => ({ ...current, category: 'all', fitsOnly: true }));
+    if (target) setFilters(current => ({ ...current, category: getBtTargetCategory(mech, loadout, target), fitsOnly: true }));
   }
 
   // Los números de las pestañas cuentan con el resto de filtros aplicados.

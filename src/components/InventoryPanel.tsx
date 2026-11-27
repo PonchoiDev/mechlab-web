@@ -8,6 +8,7 @@ import {
   countByCategory,
   filterInventory,
   getInventoryCategory,
+  getTargetCategory,
   INVENTORY_CATEGORIES,
   sortInventory,
   type InventoryCategory,
@@ -231,13 +232,14 @@ export function InventoryPanel({
   // Tier elegido para cada arma, que se mantiene al cambiar de fila.
   const [tiers, setTiers] = useState<Record<string, string>>({});
 
-  // Al elegir un destino, la casilla se marca para ver solo lo que cabe en él, y la pestaña vuelve a All: la del
-  // destino anterior (la munición de otro componente) podría dejar la lista vacía.
+  // Al elegir un destino, la casilla se marca para ver solo lo que cabe en él, y la pestaña pasa a la del tipo del
+  // anclaje o, en un componente, a All: la del destino anterior (la munición de otro componente) podría dejar la
+  // lista vacía (docs/specs/filtro-del-anclaje.md).
   const targetKey = target ? `${target.zone}:${target.hardpointIndex}` : null;
   const [lastTargetKey, setLastTargetKey] = useState(targetKey);
   if (targetKey !== lastTargetKey) {
     setLastTargetKey(targetKey);
-    if (targetKey) setFilters(current => ({ ...current, category: 'all', fitsOnly: true }));
+    if (target) setFilters(current => ({ ...current, category: getTargetCategory(mech, target), fitsOnly: true }));
   }
 
   // Los números de las pestañas cuentan con el resto de filtros aplicados.
