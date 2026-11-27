@@ -3,7 +3,7 @@ import type { SavedBuild } from '../savedBuildsCore';
 import { countWeaponTypes, type BuildListConfig, type BuildListRow, type BuildTag } from '../savedBuildsList';
 import { getInternalLabel } from './board';
 import { decodeYamlBuild } from './buildCode';
-import { getYamlMechStats } from './combat';
+import { formatYamlStat, getYamlMechStats } from './combat';
 import { findYamlMech, getYamlItem } from './data';
 import { getWeightClass, getYamlHardpointCounts, getYamlMechDisplayName, isClanMech, isOmniMech, YAML_HARDPOINT_FILTER_TYPES } from './mechList';
 import { getBuildTonnage } from './stats';
@@ -148,6 +148,6 @@ export function summarizeYamlSavedBuild(saved: SavedBuild): YamlSavedBuildEntry 
     listRow,
     weaponCounts,
     tags: getYamlBuildTags(build, categories),
-    meta: `${getYamlMechDisplayName(mech!)} ${mech!.variant} · ${tonnage.toFixed(2)} / ${mech!.tonnage} t · ${stats.alphaDamage} alpha`
+    meta: `${getYamlMechDisplayName(mech!)} ${mech!.variant} · ${tonnage.toFixed(2)} / ${mech!.tonnage} t · ${formatYamlStat(stats.alphaDamage)} alpha`
   };
 }
