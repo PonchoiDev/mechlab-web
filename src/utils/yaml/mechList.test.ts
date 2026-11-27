@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import mw5Mechs from '../../data/mechs.json';
 import { filterOptionsByText } from '../format';
-import { findYamlMech, yamlMechs } from './data';
+import { findYamlMech, getYamlQuirk, yamlMechs } from './data';
 import {
   EMPTY_YAML_FILTERS, filterYamlMechs, getYamlAvailableYear, getYamlHardpointCounts, getYamlQuirkOptions, isClanMech, isOmniMech,
   type YamlMechFilters
@@ -87,5 +87,21 @@ describe('filtros del selector de YAML', () => {
     expect(armor.every(option => option.label.toLowerCase().includes('armor'))).toBe(true);
     expect(filterOptionsByText(options, 'ÁRMOR')).toEqual(armor);
     expect(filterOptionsByText(options, '  ')).toEqual(options);
+  });
+
+  it('CA11: la lista de quirks deja fuera los de un solo chasis', () => {
+    const options = getYamlQuirkOptions(yamlMechs);
+    const labels = options.map(option => option.label);
+    expect(labels).toEqual(expect.arrayContaining([getYamlQuirk('SLDF')!.name, getYamlQuirk('CMD-MECH')!.name]));
+    expect(labels).not.toContain('360 Torso Twist');
+    for (const { value } of options) {
+      expect(new Set(yamlMechs.filter(mech => mech.quirks.includes(value)).map(mech => mech.chassis)).size, value).toBeGreaterThan(1);
+    }
+  });
+
+  it('CA12: el buscador sigue encontrando los quirks de un solo chasis', () => {
+    const found = withFilters({}, '360 torso');
+    expect(found.length).toBeGreaterThan(0);
+    expect(new Set(found.map(mech => mech.chassis))).toEqual(new Set(['UrbanMech']));
   });
 });
