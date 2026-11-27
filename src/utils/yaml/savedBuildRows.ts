@@ -3,7 +3,7 @@ import type { SavedBuild } from '../savedBuildsCore';
 import { countWeaponTypes, type BuildListConfig, type BuildListRow, type BuildTag } from '../savedBuildsList';
 import { getInternalLabel } from './board';
 import { decodeYamlBuild } from './buildCode';
-import { getYamlMechStats } from './combat';
+import { formatYamlStat, getYamlMechStats } from './combat';
 import { findYamlMech, getYamlItem } from './data';
 import { getWeightClass, getYamlHardpointCounts, getYamlMechDisplayName, isClanMech, isOmniMech, YAML_HARDPOINT_FILTER_TYPES } from './mechList';
 import { getBuildTonnage } from './stats';
@@ -29,8 +29,7 @@ export const YAML_BUILD_LIST: BuildListConfig = {
     { id: 'upgrades', label: 'Cantina upgrades', title: 'Builds with cantina upgrades installed' },
     { id: 'hero', label: 'Hero', title: 'Hero variants' },
     { id: 'omni', label: 'Omni', title: 'OmniMechs' },
-    { id: 'superheavy', label: 'Superheavy', title: "Superheavy 'Mechs" },
-    { id: 'yamlOnly', label: 'YAML only', title: 'Variants added by YAML' }
+    { id: 'superheavy', label: 'Superheavy', title: "Superheavy 'Mechs" }
   ],
   hasTechBase: true,
   weaponShort: Object.fromEntries(WEAPON_TYPES.map(type => [type, SHORT[type]])),
@@ -125,8 +124,7 @@ export function summarizeYamlSavedBuild(saved: SavedBuild): YamlSavedBuildEntry 
     (build.traits?.length ?? 0) > 0 && 'upgrades',
     mech!.hero && 'hero',
     isOmniMech(mech!) && 'omni',
-    mech!.superheavy && 'superheavy',
-    mech!.yamlOnly && 'yamlOnly'
+    mech!.superheavy && 'superheavy'
   ].filter((feature): feature is string => typeof feature === 'string');
   const listRow: BuildListRow = {
     id: saved.id,
@@ -150,6 +148,6 @@ export function summarizeYamlSavedBuild(saved: SavedBuild): YamlSavedBuildEntry 
     listRow,
     weaponCounts,
     tags: getYamlBuildTags(build, categories),
-    meta: `${getYamlMechDisplayName(mech!)} ${mech!.variant} · ${tonnage.toFixed(2)} / ${mech!.tonnage} t · ${stats.alphaDamage} alpha`
+    meta: `${getYamlMechDisplayName(mech!)} ${mech!.variant} · ${tonnage.toFixed(2)} / ${mech!.tonnage} t · ${formatYamlStat(stats.alphaDamage)} alpha`
   };
 }
