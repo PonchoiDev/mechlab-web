@@ -62,11 +62,18 @@ export function getYamlHardpointCounts(mech: YamlMech): Record<YamlHardpointFilt
 export const getYamlRoles = (mechs: YamlMech[]): string[] =>
   [...new Set(mechs.map(mech => mech.role).filter((role): role is string => !!role))].sort();
 
-// Los quirks de las variantes, por nombre, para la lista del filtro.
-export const getYamlQuirkOptions = (mechs: YamlMech[]): { value: string; label: string }[] =>
-  [...new Set(mechs.flatMap(mech => mech.quirks))]
-    .map(id => ({ value: id, label: getYamlQuirk(id)?.name ?? id }))
+// Los quirks de las variantes, por nombre, para la lista del filtro: solo los que llevan variantes de dos chasis
+// o más. Los de un solo chasis (los de las hero, los nombres propios...) son casi todos y se encuentran mejor
+// buscando el chasis; el buscador de texto los sigue encontrando.
+export function getYamlQuirkOptions(mechs: YamlMech[]): { value: string; label: string }[] {
+  const chassis = new Map<string, Set<string>>();
+  for (const mech of mechs) {
+    for (const id of mech.quirks) chassis.set(id, (chassis.get(id) ?? new Set()).add(mech.chassis));
+  }
+  return [...chassis].filter(([, names]) => names.size > 1)
+    .map(([id]) => ({ value: id, label: getYamlQuirk(id)?.name ?? id }))
     .sort((a, b) => a.label.localeCompare(b.label));
+}
 
 export function countYamlFilters(filters: YamlMechFilters): number {
   return filters.weightClasses.length + (filters.techBase ? 1 : 0) + filters.roles.length + (filters.maxYear !== null ? 1 : 0) +
