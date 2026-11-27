@@ -3,6 +3,7 @@ import type { YamlBuild, YamlHardpointType, YamlMech } from '../../types/yaml-me
 import { describeRestrictionConflict, getRestrictionConflict } from '../equipRestrictions';
 import { getYamlItem } from './data';
 import { ACTUATOR_SLOT_TYPES, GENERAL_SLOT, getActuatorSlotTypes, getDynamicFillers, getEngineHeatSinkSlots, getFixedFillers, getFreeGeneralSlots, getTotalFreeGeneralSlots, getUnplacedCritSplits } from './stats';
+import { getYamlWeightClassProblem } from './weightClass';
 
 export type MountResult = { build: YamlBuild; error?: undefined } | { build?: undefined; error: string };
 
@@ -39,6 +40,8 @@ function dynamicFillersProblem(mech: YamlMech, build: YamlBuild): string | null 
 // Por qué no cabe una pieza interna (motor, estructura, armadura...), o null si cabe: sus rellenos fijos
 // tienen que caber en su ubicación y los dinámicos en las ranuras libres del 'Mech.
 export function checkInternal(mech: YamlMech, build: YamlBuild, slotType: string, itemId: string): string | null {
+  const weightClass = getYamlWeightClassProblem(mech, itemId);
+  if (weightClass) return weightClass;
   const candidate = setInternal(build, slotType, itemId);
   for (const zone of Object.keys(mech.zones) as Zone[]) {
     const free = getFreeGeneralSlots(mech, candidate, zone);
@@ -92,6 +95,8 @@ function restrictionProblem(build: YamlBuild, itemId: string): string | null {
 export function mountItem(mech: YamlMech, build: YamlBuild, zone: Zone, itemId: string): MountResult {
   const item = getYamlItem(itemId);
   if (!item || item.kind === 'weapon') return { error: 'Not equipment' };
+  const weightClass = getYamlWeightClassProblem(mech, itemId);
+  if (weightClass) return { error: weightClass };
   const restriction = restrictionProblem(build, itemId);
   if (restriction) return { error: restriction };
   const slotTypes = item.slotTypes ?? [GENERAL_SLOT];

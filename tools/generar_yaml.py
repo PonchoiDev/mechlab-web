@@ -789,6 +789,13 @@ def construir_objetos(catalogo_juego, reglas, tamanos):
 
     for nombre, (etiquetas, sin_nivel, equipo) in origen.items():
         aplicar_propiedades(objetos[nombre], propiedades_combinadas(globales, nombre, [e for e in etiquetas if e], sin_nivel), equipo)
+    # El tonelaje mínimo y máximo del 'Mech que lleva la pieza (CheckEquipmentWeight): GetEquipmentProperty lo busca por
+    # el nombre exacto de la pieza, sin recorrer sus etiquetas (docs/specs/clase-de-peso-yaml.md).
+    for nombre, objeto in objetos.items():
+        propias = globales.get(nombre) or {}
+        for campo in ("minTonnage", "maxTonnage"):
+            if objeto["kind"] != "weapon" and campo in propias:
+                objeto[campo] = como_numero(propias[campo])
     ocultos = tipos_de_ranura_de_yaml()
     for objeto in objetos.values():
         categoria = objeto.get("category") or ""
