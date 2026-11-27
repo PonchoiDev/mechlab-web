@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getItemColor, getModLogo, getSlotColor, YAML_COLORS } from './data';
+import { getItemColor, getModLogo, getSlotColor, getYamlQuirkColor, YAML_COLORS, yamlMechs } from './data';
 
 // Los colores y logos del mechlab de YAML con sus ajustes por defecto, sacados de los datos de los mods:
 // los de las capturas del juego (armadura roja, estructura azul, balísticas lavanda, «YA ML» en el Endo).
@@ -26,5 +26,30 @@ describe('colores del MechLab de YAML', () => {
     expect(getModLogo('ARMOR_STANDARD_FIXED')).toBeUndefined();
     expect(getModLogo('ENGINE_FIXED')).toBeUndefined();
     expect(getModLogo('ENGINE_XL')).toBeDefined();
+  });
+});
+
+// docs/specs/quirks-colores-yaml.md
+describe('colores de los quirks de YAML', () => {
+  it('CA1: el color de cada quirk, del lineal del juego a sRGB', () => {
+    expect(getYamlQuirkColor('SLDF')).toBe('#ffaa00');
+    expect(getYamlQuirkColor('CMD-MECH')).toBe('#00a2ff');
+  });
+
+  it('CA2: un color con un paréntesis de más', () => {
+    expect(getYamlQuirkColor('BATTLECOMP')).toBe(getYamlQuirkColor('CMD-MECH'));
+  });
+
+  it('CA3: dos quirks con el mismo nombre, cada uno con su color', () => {
+    expect(getYamlQuirkColor('DIFFICULTTOMAINTAIN')).toBe('#ff00aa');
+    expect(getYamlQuirkColor('NSR-DIFFICULTTOMAINTAIN')).toBe('#ffbc00');
+  });
+
+  it('CA4: sin color, el general del mechlab', () => {
+    expect(getYamlQuirkColor('EXTENDED-TORSO-TWIST')).toBe(YAML_COLORS.general);
+  });
+
+  it('CA5: todos los quirks de las variantes tienen color', () => {
+    for (const id of new Set(yamlMechs.flatMap(mech => mech.quirks))) expect(getYamlQuirkColor(id), id).toMatch(/^#[0-9a-f]{6}$/);
   });
 });
