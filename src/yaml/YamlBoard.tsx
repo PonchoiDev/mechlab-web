@@ -10,6 +10,7 @@ import { getWeaponTiers } from '../utils/yaml/combat';
 import { getItemColor, getSlotColor, getYamlItem, getYamlQuirk } from '../utils/yaml/data';
 import { ModLogo } from './YamlInventoryPanel';
 import type { YamlInventoryTarget } from '../utils/yaml/inventory';
+import { getYamlMechDisplayName } from '../utils/yaml/mechList';
 import { ACTUATOR_SLOT_TYPES, getActuatorSlotType, getEngineRating, getFreeGeneralSlots, getGeneralSlots, getStructurePoints } from '../utils/yaml/stats';
 
 // Tablero del MechLab de YAML con el marcado del de MW5 (MechBoard y ComponentCard): las ocho ubicaciones
@@ -340,7 +341,7 @@ export function YamlBoard(props: YamlBoardProps) {
     <section className={['mech-board', props.compact ? 'is-compact' : '', props.dropZones ? 'is-placing' : ''].filter(Boolean).join(' ')} aria-label={`${mech.chassis} ${mech.variant} components`}>
       <div className="mech-board-reference yaml-reference">
         <div className="mech-board-title">
-          <h2>{mech.chassis}</h2>
+          <h2>{getYamlMechDisplayName(mech)}</h2>
           <span className="variant-tag">{mech.variant}</span>
         </div>
         {/* Donde MW5 pone motor, disipadores y estructura (MechSpecs), con las piezas internas de YAML. */}

@@ -1,18 +1,19 @@
 import { meetsHardpointMinimums } from './hardpointMinimums';
 import type { Mech } from '../types/mech';
-import { getSarnaTitle } from '../services/sarna';
+import { getSarnaTitle, type SarnaMechRef } from '../services/sarna';
 
-export const getMechDisplayName = (mech: Mech): string => {
+// El chasis con el nombre Clan entre paréntesis si MW5 usa el de la Esfera Interior: «Mad Cat (Timber Wolf)».
+export const getMechDisplayName = (mech: SarnaMechRef): string => {
   const sarnaTitle = getSarnaTitle(mech);
   return sarnaTitle.toLocaleLowerCase() !== mech.name.toLocaleLowerCase()
     ? `${mech.name} (${sarnaTitle})`
     : mech.name;
 };
 
+// Cada palabra tiene que estar en el chasis, el nombre Clan (el de Sarna), la variante o el id: «timber wolf prime».
 export const matchesMechQuery = (mech: Mech, query: string): boolean => {
-  const normalizedQuery = query.trim().toLocaleLowerCase();
-  return !normalizedQuery || [mech.name, mech.sarnaName ?? mech.name, getSarnaTitle(mech), mech.variant, mech.id]
-    .some(value => value.toLocaleLowerCase().includes(normalizedQuery));
+  const text = [mech.name, mech.sarnaName ?? mech.name, getSarnaTitle(mech), mech.variant, mech.id].join(' ').toLocaleLowerCase();
+  return query.toLocaleLowerCase().split(/\s+/).filter(Boolean).every(word => text.includes(word));
 };
 
 export type WeightClassName = 'light' | 'medium' | 'heavy' | 'assault';

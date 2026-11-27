@@ -7,7 +7,7 @@ import {
   BASE_GAME, CONTENT_SOURCES, describeContentSources, describeSelection, GAME_START_YEAR, getContentSourceLabel, HARDPOINT_ABBREVIATIONS
 } from '../utils/mechs';
 import {
-  countYamlFilters, EMPTY_YAML_FILTERS, filterYamlMechs, getYamlAvailableYear, getYamlHardpointCounts, getYamlQuirkOptions,
+  countYamlFilters, EMPTY_YAML_FILTERS, filterYamlMechs, getYamlAvailableYear, getYamlHardpointCounts, getYamlMechDisplayName, getYamlQuirkOptions,
   getYamlRoles, WEIGHT_CLASSES, YAML_HARDPOINT_FILTER_TYPES, type YamlHardpointFilterType, type YamlMechFilters, type YamlWeightClass
 } from '../utils/yaml/mechList';
 
@@ -129,7 +129,7 @@ export function YamlMechPicker({ mechs, current, onSelect }: YamlMechPickerProps
         autoComplete="off"
         className="mech-picker-input"
         placeholder="Name, variant, quirk or 3e 2mel sh"
-        value={isOpen ? query : `${current.chassis} / ${current.variant}`}
+        value={isOpen ? query : `${getYamlMechDisplayName(current)} / ${current.variant}`}
         onFocus={open}
         onClick={open}
         onChange={(event) => {
@@ -269,7 +269,7 @@ export function YamlMechPicker({ mechs, current, onSelect }: YamlMechPickerProps
                 onMouseMove={() => setActiveOption(index)}
                 onClick={() => select(mech)}
               >
-                <span>{mech.chassis}</span>
+                <span>{getYamlMechDisplayName(mech)}</span>
                 <strong>
                   {mech.hero && <span className="mech-hero-tag" title="Hero 'Mech">HERO</span>}
                   {mech.variant}
