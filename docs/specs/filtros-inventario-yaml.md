@@ -38,7 +38,7 @@ Los filtros están en la tabla `YamlInventoryFilters` del .pak del mod (`Plugins
 |---|---|---|---|
 | CA1 | Los filtros generados | se leen | son diecinueve, en tres filas de 7, 7 y 5, con los ids del mod (ballistic, energy, missile, ams, melee, artillery, ammo, cooling, mobility, electronics, sensorstargeting, internal, misc, misc.enginecore, misc.enginetype, misc.consumable, misc.defense y los dos ALL), cada uno con icono (salvo los ALL), color y texto de ayuda |
 | CA2 | Un arma de artillería balística (etiqueta Weapon.Ballistic.Artillery) | se filtra | sale en Ballistic, en Artillery y en ALL W, y no en ALL E |
-| CA3 | Una caja de munición y un consumible | se filtra por Ammunition | sale la caja y no el consumible |
+| CA3 | Una caja de munición y un disipador | se filtra por Ammunition | sale la caja y no el disipador; la caja sale también en ALL E |
 | CA4 | Un núcleo de motor | se filtra | sale en Engine cores, en Misc y en ALL E, y no en Engine types |
 | CA5 | El PPC Capacitor (etiqueta Equipment.Misc, categoría `equipment.electronics` en las propiedades del mod) | se filtra | sale en Electronic warfare y no en Misc ni en Consumables and misc: manda la categoría del mod |
 | CA6 | El inventario | se lee | lleva los núcleos de motor y no las piezas «fixed» ni los rellenos |
