@@ -250,7 +250,7 @@ export function YamlEquipmentApp() {
           <span>MW Builder</span>
         </a>
         <h1>YAML Equipment</h1>
-        <SiteNav game="mercs" current="equipment" className="units-links" />
+        <SiteNav game="mercs" current="equipment" className="units-links" mode="yaml" />
         <div className="units-actions">
           <WhatsNew />
           <button type="button" className="units-feedback" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>

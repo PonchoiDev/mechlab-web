@@ -184,7 +184,7 @@ export function YamlMechLabApp() {
               <h1>MechLab <span>YAML</span></h1>
             </div>
           </a>
-          <SiteNav game="mercs" current="mechlab" className="topbar-links" />
+          <SiteNav game="mercs" current="mechlab" className="topbar-links" mode="yaml" />
         </div>
         <div className="topbar-tools">
           <button type="button" className="feedback-button" aria-haspopup="dialog" onClick={() => setIsFeedbackOpen(true)}>Feedback</button>
