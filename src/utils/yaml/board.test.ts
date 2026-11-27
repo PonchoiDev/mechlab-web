@@ -4,7 +4,9 @@ import {
   getZoneRows, removeItemAt, setArmor, setMaxArmor
 } from './board';
 import { createStockBuild, setInternal, stripBuild } from './build';
-import { findYamlMech } from './data';
+import { findYamlMech, getYamlItem } from './data';
+import { GENERAL_SLOT } from './stats';
+import { ZONE_LABELS } from '../zones';
 
 // Lo que pinta la página del MechLab de YAML a partir de la build del NSR-9J.
 const nightstar = findYamlMech('NSR-9J')!;
@@ -48,11 +50,71 @@ describe('tablero del MechLab de YAML', () => {
   });
 
   it('los problemas: sobrepeso y falta de núcleo; los rellenos que no caben, no (CA43)', () => {
-    expect(getBuildIssues(nightstar, stock)).toEqual([]);
+    expect(getBuildIssues(nightstar, stock).filter(issue => issue.severity === 'error')).toEqual([]);
     const issues = getBuildIssues(nightstar, setInternal(setInternal(stock, 'Armorslot', 'ARMOR_PRIMITIVE'), 'Structureslot', 'ENDO'));
-    expect(issues.map(issue => issue.message).join(' ')).toMatch(/Overweight/);
+    expect(issues.map(issue => issue.message).join(' ')).toMatch(/Over tonnage/);
     expect(issues.map(issue => issue.message).join(' ')).not.toMatch(/filler/i);
     expect(getBuildIssues(nightstar, setInternal(stock, 'Engine', null)).some(issue => /core/.test(issue.message))).toBe(true);
     expect(removeItemAt(stock, 0).items).toHaveLength(stock.items.length - 1);
   });
 });
+
+// docs/specs/avisos-yaml.md
+describe('avisos del MechLab de YAML', () => {
+  const archer = findYamlMech('ARC-T')!;
+  const archerStock = createStockBuild(archer);
+  const withoutAmmo = { ...archerStock, items: archerStock.items.filter(mounted => getYamlItem(mounted.item)?.kind !== 'ammo') };
+
+  it('CA1: los avisos nombran la ubicación con su etiqueta', () => {
+    const crammed = { ...stock, items: [...stock.items, ...Array.from({ length: 12 }, () => ({ zone: 'head' as const, slotType: GENERAL_SLOT, item: 'LRM_AmmoEquipment' }))] };
+    const slots = getBuildIssues(nightstar, crammed).filter(issue => /slots/.test(issue.message));
+    expect(slots.length).toBeGreaterThan(0);
+    for (const issue of slots) expect(issue.message.startsWith(`${ZONE_LABELS[issue.zone!]}:`)).toBe(true);
+  });
+
+  it('CA2: un aviso por arma distinta sin munición, en la ubicación de la primera', () => {
+    const ammo = getBuildIssues(archer, withoutAmmo).filter(issue => /ammo/.test(issue.message));
+    expect(ammo).toEqual([expect.objectContaining({ severity: 'warning', zone: 'leftTorso', message: 'LRM 20 has no ammo' })]);
+  });
+
+  it('CA3: avisa de la munición que no usa ningún arma', () => {
+    const extra = { ...archerStock, items: [...archerStock.items, { zone: 'leftLeg' as const, slotType: GENERAL_SLOT, item: 'AC20_Standard_AmmoEquipment' }] };
+    const name = getYamlItem('AC20_Standard_AmmoEquipment')!.name;
+    expect(getBuildIssues(archer, extra)).toContainEqual(expect.objectContaining({
+      severity: 'warning', zone: 'leftLeg', message: `${name} is not used by any weapon`
+    }));
+  });
+
+  it('CA4: las cargas de consumibles no son munición sin uso', () => {
+    const assault = findYamlMech('AS7-SP')!;
+    expect(getBuildIssues(assault, createStockBuild(assault)).filter(issue => /ammo|weapon/.test(issue.message))).toEqual([]);
+  });
+
+  it('CA5: sin aviso de anclajes libres y un solo aviso de armadura', () => {
+    const issues = getBuildIssues(archer, archerStock);
+    expect(issues.some(issue => /hardpoint/i.test(issue.message))).toBe(false);
+    expect(issues.filter(issue => /Armor/.test(issue.message))).toEqual([
+      expect.objectContaining({ severity: 'warning', zone: 'head', message: 'Armor below max in 4 components' })
+    ]);
+  });
+
+  it('CA6 y CA7: la armadura al máximo salvo la cabeza, y entera', () => {
+    const maxed = setMaxArmor(archer, archerStock);
+    const headless = setArmor(archer, maxed, 'head', 'front', 10);
+    expect(getBuildIssues(archer, headless).find(issue => /Armor/.test(issue.message))?.message).toBe('Armor below max: Head');
+    expect(getBuildIssues(archer, maxed).some(issue => /Armor/.test(issue.message))).toBe(false);
+  });
+
+  it('CA8: los errores primero y los ids sin repetir', () => {
+    const heavy = setInternal(setInternal(stock, 'Armorslot', 'ARMOR_PRIMITIVE'), 'Structureslot', 'ENDO');
+    const issues = getBuildIssues(nightstar, stripArmor(heavy));
+    expect(issues[0].message).toMatch(/Over tonnage/);
+    expect(issues.map(issue => issue.severity)).toEqual([...issues.map(issue => issue.severity)].sort());
+    expect(new Set(issues.map(issue => issue.id)).size).toBe(issues.length);
+    expect(issues.some(issue => /Armor/.test(issue.message))).toBe(true);
+  });
+});
+
+function stripArmor(build: ReturnType<typeof createStockBuild>) {
+  return { ...build, armor: { ...build.armor, head: { front: 0, rear: 0 } } };
+}
