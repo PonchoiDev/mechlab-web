@@ -160,6 +160,11 @@ export interface YamlItem {
   // Etiqueta del juego (EquipmentType) y restricciones de montaje: solo un computador de puntería, el TSM no va
   // con un MASC... (docs/specs/equipo-unico.md).
   category?: string;
+  // Armas: su etiqueta de tipo (Weapon.Ballistic.Artillery.LongTom.Cannon), con la que las reparten los filtros
+  // del inventario. Equipo: la categoría de esos filtros en las propiedades del mod (equipment.electronics), que
+  // manda sobre la etiqueta (docs/specs/filtros-inventario-yaml.md).
+  weaponType?: string;
+  uiCategory?: string;
   restrictions?: EquipRestriction[];
   // Núcleos de motor: su potencia.
   rating?: number;

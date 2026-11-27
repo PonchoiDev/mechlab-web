@@ -23,7 +23,7 @@ python3 tools/generar_unidades.py # src/data/units.json (lee items.json y sarna.
 python3 tools/extraer_pilotos.py "<carpeta del juego>"  # tools/datos-juego/pilotos/ (rasgos y pilotos hero), del .pak
 python3 tools/generar_pilotos.py  # src/data/pilots.json (lee las academias de tools/datos-juego/starmap/)
 python3 tools/extraer_iconos_inventario.py "<carpeta del juego>"  # public/mechlab/inventory/, iconos de las pestañas del inventario, del .pak
-python3 tools/extraer_yaml.py "<steamapps/workshop/content/784080>" "<carpeta del juego>"  # tools/datos-juego/yaml/, de los .pak y Resources de YAML y sus mods, y los tipos de ranura y loadouts del juego; los logos de los mods, en public/mechlab/yaml/mods/
+python3 tools/extraer_yaml.py "<steamapps/workshop/content/784080>" "<carpeta del juego>"  # tools/datos-juego/yaml/, de los .pak y Resources de YAML y sus mods, y los tipos de ranura y loadouts del juego; los logos de los mods, en public/mechlab/yaml/mods/, y los iconos de los filtros de su inventario, en public/mechlab/yaml/inventory/
 python3 tools/generar_yaml.py      # src/data/yaml/ (lee el volcado de YAML, los MDA del juego, items.json y mechs.json: va después)
 python3 tools/extraer_mapa_battletech.py "<carpeta de BATTLETECH>"  # tools/datos-juego/battletech/starmap/ y sus logos
 python3 tools/generar_mapa_battletech.py  # src/data/battletech/starmap.json
