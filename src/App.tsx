@@ -306,7 +306,7 @@ export default function App() {
               <h1>MechLab <span>MW5: MERCENARIES</span></h1>
             </div>
           </a>
-          <SiteNav game="mercs" current="mechlab" className="topbar-links" />
+          <SiteNav game="mercs" current="mechlab" className="topbar-links" mode="vanilla" />
         </div>
         <div className="topbar-tools">
           <WhatsNew />

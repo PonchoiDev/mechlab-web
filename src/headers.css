@@ -5,7 +5,7 @@
    (units-links, topbar-links de los MechLabs y starmap-links de los mapas) y para las páginas nuevas sin tocarlas.
    El prefijo con el nombre del juego (<small>) sigue en gris. */
 :is(.units-links, .topbar-links, .starmap-links) a { --section: currentColor; }
-:is(.units-links, .topbar-links, .starmap-links) a:is([href='/mercs/'], [href='/battletech/']) { --section: #c3ed62; }
+:is(.units-links, .topbar-links, .starmap-links) a:is([href='/mercs/'], [href='/mercs/yaml/'], [href='/battletech/']) { --section: #c3ed62; }
 :is(.units-links, .topbar-links, .starmap-links) a[href$='/builds/'] { --section: #69d9ce; }
 :is(.units-links, .topbar-links, .starmap-links) a[href$='/chassis/'] { --section: #ff9f1c; }
 :is(.units-links, .topbar-links, .starmap-links) a:is([href$='/campaigns/'], [href$='/flashpoints/']) { --section: #ff4fa3; }
@@ -17,6 +17,24 @@
 
 /* a[href] da a estas reglas más peso que las de cada cabecera, que van después de este @import. */
 :is(.units-links, .topbar-links, .starmap-links) a[href] { color: var(--section); }
+
+/* En modo YAML, el MechLab y el equipo de la cabecera llevan a sus versiones YAML: una marca del naranja del
+   logo de Yet Another Mechlab lo dice, para que se sepa adónde lleva el enlace. */
+.site-nav-mod {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 0 3px;
+  border: 1px solid #ff7a1a;
+  border-radius: 2px;
+  color: #ff7a1a;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  vertical-align: 0.1em;
+}
+
+:is(.units-links, .starmap-links) a[href]:is(:hover, :focus-visible) .site-nav-mod { border-color: #000; color: #000; }
 
 /* Páginas de consulta y mapas: al pasar el ratón, el enlace se rellena con su color. */
 :is(.units-links, .starmap-links) a[href]:is(:hover, :focus-visible) { color: #000; background: var(--section); }
