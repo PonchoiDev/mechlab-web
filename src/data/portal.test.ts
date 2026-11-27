@@ -92,6 +92,11 @@ describe('portada', () => {
     expect(rowOf('mw5', '/mercs/yaml/')).toContain('href="/mercs/"');
     expect(rowOf('mw5', '/mercs/yaml/equipment/')).toContain('href="/mercs/equipment/"');
     expect(modRows('battletech')).toEqual([]);
+    // El logo dice YAML (y lo lleva de texto alternativo): el texto de la fila no lo repite.
+    for (const [, html] of toolList('mw5').matchAll(/<a class="mod-link[^"]*" href="[^"]+">([\s\S]*?)<\/a>/g)) {
+      expect(html).toMatch(/<img[^>]*alt="YAML"/);
+      expect(html.replace(/<[^>]*>/g, ' ')).not.toMatch(/YAML/i);
+    }
   });
 
   it('da las cifras de los datos de YAML', () => {
@@ -103,7 +108,7 @@ describe('portada', () => {
 
   it('lleva el sello YAML compatible en la carátula de MW5', () => {
     const cover = gameCover('mw5');
-    expect(cover).toMatch(/class="yaml-badge"[\s\S]*yet-another-mechlab-color\.png[\s\S]*YAML compatible/);
+    expect(cover).toMatch(/<span class="yaml-badge"><img[^>]*yet-another-mechlab-color\.png"[^>]*alt="YAML"[^>]*\/>Compatible<\/span>/);
     expect(gameCover('battletech')).not.toContain('yaml-badge');
   });
 
