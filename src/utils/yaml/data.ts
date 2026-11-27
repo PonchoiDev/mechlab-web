@@ -70,6 +70,11 @@ export function getItemColor(id: string, slotType = 'General_SlotType'): string 
   return slotType === 'General_SlotType' ? YAML_COLORS.general : getSlotColor(slotType) ?? YAML_COLORS.general;
 }
 
+// El color de la etiqueta de un quirk en el mechlab (docs/specs/quirks-colores-yaml.md).
+export function getYamlQuirkColor(id: string): string {
+  return QUIRKS[id]?.color ?? YAML_COLORS.general;
+}
+
 // El logo del mod de cada pieza («YA ML», «YA EC»...), como en el mechlab del juego. No lo llevan las del juego
 // base ni las piezas estándar fijas de YAML (Armor Standard, Standard Engine...), que el juego enseña sin él.
 export function getModLogo(id: string | undefined): string | undefined {

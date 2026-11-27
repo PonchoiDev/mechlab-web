@@ -185,7 +185,8 @@ def a_srgb(componente):
 def color_hex(lineal):
     """«#rrggbb» de un color lineal: una lista [R, G, B, A] o un texto «(R=0.31,G=0.35,B=0.42,A=1)»."""
     if isinstance(lineal, str):
-        valores = dict(re.findall(r"([RGBA])=([0-9.]+)", lineal))
+        # El número hasta el segundo punto, como lo lee Unreal: el mod escribe «B=0.250000.0» en Illegal Design.
+        valores = dict(re.findall(r"([RGBA])=([0-9]+(?:\.[0-9]+)?)", lineal))
         lineal = [float(valores.get(canal, 0)) for canal in "RGB"]
     if not lineal:
         return None
@@ -1290,7 +1291,9 @@ def main():
             mech["sarnaName"] = nombre_en_sarna
 
     usados = {q for mech in mechs for q in mech["quirks"]}
+    # El color de la etiqueta del quirk en el mechlab, en sRGB; sin él, la web usa el general.
     datos_quirks = {nombre: {"name": quirks[nombre].get("name", nombre), "description": quirks[nombre].get("description", ""),
+                             **({"color": color_hex(quirks[nombre]["color"])} if quirks[nombre].get("color") else {}),
                              "properties": quirks[nombre].get("properties", {})} for nombre in sorted(usados) if nombre in quirks}
     os.makedirs(RUTA_DESTINO, exist_ok=True)
     colores = construir_colores()
