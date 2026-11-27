@@ -16,21 +16,21 @@ const PAGES: Record<SiteGame, [SitePage, string][]> = {
     ['mechlab', 'MechLab'],
     ['builds', 'Builds'],
     ['chassis', 'Chassis'],
+    ['equipment', 'Equipment'],
     ['campaigns', 'HRQ & Campaigns'],
     ['starmap', 'Star map'],
     ['units', 'Enemy units'],
-    ['pilots', 'Pilots'],
-    ['equipment', 'Equipment']
+    ['pilots', 'Pilots']
   ],
   battletech: [
     ['mechlab', 'MechLab'],
     ['builds', 'Builds'],
     ['chassis', 'Chassis'],
+    ['equipment', 'Equipment'],
     ['flashpoints', 'Flashpoints'],
     ['starmap', 'Star map'],
     ['units', 'Enemy units'],
-    ['argo', 'Argo'],
-    ['equipment', 'Equipment']
+    ['argo', 'Argo']
   ]
 };
 

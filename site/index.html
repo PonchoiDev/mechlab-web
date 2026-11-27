@@ -33,6 +33,8 @@
         --amber: #f2b75e;
         --mw5: #f0482a;
         --battletech: #f6a21c;
+        /* El naranja del logo de Yet Another Mechlab. */
+        --yaml: #ff7a1a;
         --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
         --sans: 'Manrope', 'Segoe UI', sans-serif;
         color-scheme: dark;
@@ -949,6 +951,59 @@
       .tool.is-argo { --tool: #35c9c1; }
       .tool.is-builds { --tool: #69d9ce; --art-filter: invert(1) sepia(1) hue-rotate(130deg) saturate(3) brightness(0.95); }
 
+      /* Sello de la carátula de MW5: el MechLab y el equipo también siguen las reglas del mod Yet Another Mechlab. */
+      .yaml-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 12px;
+        padding: 4px 10px 4px 5px;
+        border: 1px solid color-mix(in srgb, var(--yaml) 70%, transparent);
+        border-radius: 3px;
+        background: rgba(16, 19, 16, 0.75);
+        color: var(--yaml);
+        font: 600 10px var(--mono);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .yaml-badge img { width: 22px; height: 22px; }
+
+      /* Filas partidas: a la izquierda la herramienta y a la derecha su versión para el mod YAML, cada una con su
+         enlace. La de la izquierda lleva las cifras debajo del nombre, como en tableta, para dejar sitio. */
+      .tool-split { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+      .tool-split .tool { grid-template-columns: 132px minmax(0, 1fr) auto; gap: 6px 22px; }
+      .tool-split .tool .tool-name { align-self: end; }
+      .tool-split .tool .tool-meta { grid-column: 2; grid-row: 2; align-self: start; }
+      .tool-split .tool .tool-open { grid-column: 3; grid-row: 1 / 3; }
+      .tool-split .tool .tool-thumb { grid-row: 1 / 3; }
+
+      .mod-link {
+        --tool: var(--yaml);
+        position: relative;
+        display: grid;
+        grid-template-columns: 52px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 6px 18px;
+        padding: 0 22px 0 20px;
+        border-left: 1px solid var(--line);
+        color: inherit;
+        text-decoration: none;
+        transition: background-color 160ms ease;
+      }
+
+      .mod-link .tool-name { align-self: end; }
+      .mod-link .tool-meta { grid-column: 2; grid-row: 2; align-self: start; }
+      .mod-link .tool-open { grid-column: 3; grid-row: 1 / 3; }
+      .mod-logo { grid-row: 1 / 3; display: grid; place-items: center; }
+      .mod-logo img { width: 52px; height: 52px; opacity: 0.85; transition: opacity 160ms ease, transform 300ms ease; }
+      .tool.is-primary + .mod-link .tool-name strong { font-size: 23px; }
+
+      .mod-link:hover,
+      .mod-link:focus-visible { background: var(--raised); outline: none; }
+      .mod-link:hover .mod-logo img { opacity: 1; transform: scale(1.06); }
+      .mod-link:hover .tool-open .arrow { transform: translateX(4px); }
+
       .site-footer {
         margin-top: 48px;
         padding: 14px 0 4px;
@@ -984,6 +1039,14 @@
         .tool-meta { grid-column: 2; grid-row: 2; padding-bottom: 12px; }
         .tool-open { grid-column: 3; grid-row: 1 / 3; }
         .tool-thumb { grid-row: 1 / 3; }
+        .tool-split .tool { grid-template-columns: 104px minmax(0, 1fr) auto; gap: 6px 16px; }
+        .mod-link { grid-template-columns: 40px minmax(0, 1fr) auto; gap: 6px 14px; padding: 0 16px; }
+        .mod-logo img { width: 40px; height: 40px; }
+        /* Partidas no caben la palabra Open ni el nombre grande del MechLab: queda la flecha, como en móvil. */
+        .tool-split .tool-open .word { display: none; }
+        .tool-split .tool-name strong,
+        .tool-split .tool.is-primary .tool-name strong,
+        .tool.is-primary + .mod-link .tool-name strong { font-size: 18px; }
       }
 
       /* Móvil: carátulas apiladas, cada lista justo debajo de la suya. */
@@ -1012,6 +1075,13 @@
         .tool-name strong,
         .tool.is-primary .tool-name strong { font-size: 16px; }
         .tool-open .word { display: none; }
+        /* La versión YAML baja debajo de su herramienta, como una fila más, alineada con su miniatura. */
+        .tool-split { grid-template-columns: minmax(0, 1fr); }
+        .tool-split .tool { grid-template-columns: 76px minmax(0, 1fr) auto; gap: 4px 12px; padding-bottom: 0; }
+        .mod-link { grid-template-columns: 76px minmax(0, 1fr) auto; gap: 4px 12px; min-height: 64px; padding: 0 14px 0 0; border-left: 0; border-top: 1px dashed var(--line); }
+        .tool-split .tool-name strong,
+        .tool-split .tool.is-primary .tool-name strong,
+        .tool.is-primary + .mod-link .tool-name strong { font-size: 16px; }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -1170,6 +1240,7 @@
               <small>PIRANHA GAMES</small>
               <strong class="cover-logo"><img src="/mw5-logo.png" alt="MechWarrior 5: Mercenaries" width="1200" height="160" /></strong>
               <span class="game-meta"><span>639 variants</span><span>6 DLC campaigns</span><span>DLC 9 ready</span></span>
+              <span class="yaml-badge"><img src="/mercs/mechlab/yaml/mods/yet-another-mechlab-color.png" alt="" onerror="this.remove()" />YAML compatible</span>
             </span>
             <span class="game-action">
               <span><span class="label-closed">Show tools</span><span class="label-open">Hide tools</span></span>
@@ -1204,13 +1275,19 @@
 
           <!-- Sin JavaScript se ven las dos listas: el script las pliega al cargar. -->
           <ul class="tool-list" id="tools-mw5" data-game="mw5" aria-label="MW5: Mercenaries tools">
-            <li style="--i: 0">
+            <li class="tool-split" style="--i: 0">
               <a class="tool is-primary" href="/mercs/">
                 <span class="tool-thumb">
                   <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fa%2Fa0%2FJI-100_Transportable_Field_Repair_Unit.jpg" alt="" onerror="this.remove()" />
                 </span>
                 <span class="tool-name"><small>MechLab</small><strong>Mercenaries <span>MechLab</span></strong></span>
                 <p class="tool-meta"><span>639 variants</span><span>Save &amp; share builds</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+              <a class="mod-link" href="/mercs/yaml/">
+                <span class="mod-logo"><img src="/mercs/mechlab/yaml/mods/yet-another-mechlab-color.png" alt="" onerror="this.remove()" /></span>
+                <span class="tool-name"><small>YAML mod</small><strong>YAML <span>MechLab</span></strong></span>
+                <p class="tool-meta"><span>790 variants</span><span>Mod rules</span></p>
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
@@ -1234,7 +1311,23 @@
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
-            <li style="--i: 3">
+            <li class="tool-split" style="--i: 3">
+              <a class="tool is-equipment" href="/mercs/equipment/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F8a%2FWeapn-largelaser.png" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Equipment</small><strong>Weapons <span>&amp; Equipment</span></strong></span>
+                <p class="tool-meta"><span>190 weapons</span><span>149 equipment</span><span>Stats</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+              <a class="mod-link" href="/mercs/yaml/equipment/">
+                <span class="mod-logo"><img src="/mercs/mechlab/yaml/mods/yet-another-mechlab-color.png" alt="" onerror="this.remove()" /></span>
+                <span class="tool-name"><small>YAML mod</small><strong>YAML <span>Equipment</span></strong></span>
+                <p class="tool-meta"><span>380 weapons</span><span>665 equipment</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 4">
               <a class="tool is-campaigns" href="/mercs/campaigns/">
                 <span class="tool-thumb">
                   <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F81%2FLeopard_TRO3025CE.png" alt="" onerror="this.remove()" />
@@ -1244,7 +1337,7 @@
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
-            <li style="--i: 4">
+            <li style="--i: 5">
               <a class="tool is-starmap is-photo" href="/mercs/starmap/">
                 <span class="tool-thumb"><img src="/starmap-cover.jpg" alt="" onerror="this.remove()" /></span>
                 <span class="tool-name"><small>Star Map</small><strong>Inner Sphere <span>Star Map</span></strong></span>
@@ -1252,7 +1345,7 @@
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
-            <li style="--i: 5">
+            <li style="--i: 6">
               <a class="tool is-units" href="/mercs/units/">
                 <span class="tool-thumb">
                   <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Fd%2Fd4%2FDemolisher_RGilClan_v25.jpg" alt="" onerror="this.remove()" />
@@ -1262,23 +1355,13 @@
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
-            <li style="--i: 6">
+            <li style="--i: 7">
               <a class="tool is-pilots" href="/mercs/pilots/">
                 <span class="tool-thumb">
                   <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F9%2F91%2FStandard_Neurohelmet.jpg" alt="" onerror="this.remove()" />
                 </span>
                 <span class="tool-name"><small>Pilots</small><strong>Pilot traits <span>&amp; Academies</span></strong></span>
                 <p class="tool-meta"><span>184 traits</span><span>18 hero pilots</span><span>93 academies</span></p>
-                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
-              </a>
-            </li>
-            <li style="--i: 7">
-              <a class="tool is-equipment" href="/mercs/equipment/">
-                <span class="tool-thumb">
-                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F8a%2FWeapn-largelaser.png" alt="" onerror="this.remove()" />
-                </span>
-                <span class="tool-name"><small>Equipment</small><strong>Weapons <span>&amp; Equipment</span></strong></span>
-                <p class="tool-meta"><span>190 weapons</span><span>149 equipment</span><span>Stats</span></p>
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
@@ -1314,6 +1397,16 @@
               </a>
             </li>
             <li style="--i: 3">
+              <a class="tool is-equipment" href="/battletech/equipment/">
+                <span class="tool-thumb">
+                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Ff%2Ffe%2FInverted_PPC.jpg" alt="" onerror="this.remove()" />
+                </span>
+                <span class="tool-name"><small>Equipment</small><strong>Weapons <span>&amp; Equipment</span></strong></span>
+                <p class="tool-meta"><span>210 weapons</span><span>100 equipment</span><span>Stats</span></p>
+                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li style="--i: 4">
               <a class="tool is-campaigns" href="/battletech/flashpoints/">
                 <span class="tool-thumb">
                   <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F8%2F81%2FLeopard_TRO3025CE.png" alt="" onerror="this.remove()" />
@@ -1323,7 +1416,7 @@
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
-            <li style="--i: 4">
+            <li style="--i: 5">
               <a class="tool is-starmap is-photo" href="/battletech/starmap/">
                 <span class="tool-thumb"><img src="/battletech-starmap-cover.jpg" alt="" onerror="this.remove()" /></span>
                 <span class="tool-name"><small>Star Map</small><strong>Aurigan Reach <span>Star Map</span></strong></span>
@@ -1331,7 +1424,7 @@
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
-            <li style="--i: 5">
+            <li style="--i: 6">
               <a class="tool is-units" href="/battletech/units/">
                 <span class="tool-thumb">
                   <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2F0%2F09%2FManticore_RGilClan_v31.jpg" alt="" onerror="this.remove()" />
@@ -1341,21 +1434,11 @@
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
-            <li style="--i: 6">
+            <li style="--i: 7">
               <a class="tool is-argo is-photo" href="/battletech/argo/">
                 <span class="tool-thumb"><img src="/battletech-argo-cover.jpg" alt="" onerror="this.remove()" /></span>
                 <span class="tool-name"><small>Argo</small><strong>Ship <span>Upgrades</span></strong></span>
                 <p class="tool-meta"><span>35 upgrades</span><span>Refit planner</span></p>
-                <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
-              </a>
-            </li>
-            <li style="--i: 7">
-              <a class="tool is-equipment" href="/battletech/equipment/">
-                <span class="tool-thumb">
-                  <img src="/mercs/api/sarna-image?url=https%3A%2F%2Fcfw.sarna.net%2Fwiki%2Fimages%2Ff%2Ffe%2FInverted_PPC.jpg" alt="" onerror="this.remove()" />
-                </span>
-                <span class="tool-name"><small>Equipment</small><strong>Weapons <span>&amp; Equipment</span></strong></span>
-                <p class="tool-meta"><span>210 weapons</span><span>100 equipment</span><span>Stats</span></p>
                 <span class="tool-open"><span class="word">Open</span><span class="arrow" aria-hidden="true">→</span></span>
               </a>
             </li>
