@@ -1,6 +1,5 @@
-import type { BuildIssue } from '../issues';
 import type { YamlBuild, YamlMech } from '../../types/yaml-mechlab';
-import { getBuildIssues, ZONES } from './board';
+import { ZONES } from './board';
 import { getBuildTonnage, getDynamicFillers, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
 
 // La cabecera del panel de estadísticas: el peso, donde lo enseña el juego, y las ranuras libres y los
@@ -37,9 +36,4 @@ export function getYamlReadouts(mech: YamlMech, build: YamlBuild): YamlReadout[]
         : 'General slots that Endo, Ferro and similar take anywhere in the \'Mech'
     }
   ];
-}
-
-// Los avisos de BuildStatus, con la ubicación a la que llevan al pulsarlos.
-export function getYamlBuildIssues(mech: YamlMech, build: YamlBuild): BuildIssue[] {
-  return getBuildIssues(mech, build).map((issue, index) => ({ id: `yaml-${index}`, severity: issue.severity, message: issue.message, zone: issue.zone }));
 }

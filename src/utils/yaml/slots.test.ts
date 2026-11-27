@@ -4,7 +4,7 @@ import { createStockBuild, mountItem, mountWeapon, removeWeapon, setInternal } f
 import { getYamlStatsPanel } from './combat';
 import { distributeDynamicFillerGroups } from './board';
 import { findYamlMech, getYamlItem } from './data';
-import { getYamlBuildIssues } from './readouts';
+import { getBuildIssues } from './board';
 import { getBuildTonnage, getCritSplitFillers, getDynamicFillers, getFixedFillers, getFreeGeneralSlots, getGeneralSlots, getTotalFreeGeneralSlots } from './stats';
 
 // Ranuras por ubicación como las deja YAML al cargar, criterios CA26 a CA39 de docs/specs/mechlab-yaml.md. Las
@@ -35,7 +35,7 @@ describe('Ranuras por ubicación', () => {
     expect(freeAfterFillers('INC-A')).toBe(22);
     for (const id of ['WHM-DNC', 'KFX-C', 'INC-A']) {
       const mech = findYamlMech(id)!;
-      expect(getYamlBuildIssues(mech, createStockBuild(mech)), id).toEqual([]);
+      expect(errors(mech, createStockBuild(mech)), id).toEqual([]);
     }
   });
 });
@@ -78,7 +78,7 @@ describe('Piezas propias y armas cuerpo a cuerpo', () => {
     expect(freeAfterFillers('HBK-VEST')).toBe(0);
     expect(freeAfterFillers('CRD-5M')).toBe(10);
     const hunchback = findYamlMech('HBK-VEST')!;
-    expect(getYamlBuildIssues(hunchback, createStockBuild(hunchback))).toEqual([]);
+    expect(errors(hunchback, createStockBuild(hunchback))).toEqual([]);
   });
 });
 
@@ -93,7 +93,7 @@ describe('Armas repartidas', () => {
       { zone: 'leftTorso', from: 'leftArm', slots: 2 },
       { zone: 'rightTorso', from: 'rightArm', slots: 2 }
     ]);
-    for (const mech of [sunder, naga]) expect(getYamlBuildIssues(mech, createStockBuild(mech)), mech.id).toEqual([]);
+    for (const mech of [sunder, naga]) expect(errors(mech, createStockBuild(mech)), mech.id).toEqual([]);
   });
 
   it('CA32: sin sitio en ninguna ubicación contigua, el arma no se puede montar', () => {
@@ -112,7 +112,7 @@ describe('Equipo de serie sin ranura', () => {
     const stock = createStockBuild(jenner);
     expect(stock.items.filter(mounted => getYamlItem(mounted.item)?.jumpJet)).toHaveLength(6);
     expect(getBuildTonnage(jenner, stock)).toBe(34.43);
-    expect(getYamlBuildIssues(jenner, stock)).toEqual([]);
+    expect(errors(jenner, stock)).toEqual([]);
   });
 });
 
@@ -157,7 +157,7 @@ describe('Rellenos dinámicos', () => {
       leftTorso: { Structureslot: 8 }, rightTorso: { Structureslot: 6, Armorslot: 2 },
       leftArm: { Armorslot: 6 }, rightArm: { Armorslot: 6 }
     });
-    expect(getYamlBuildIssues(phoenixHawk, stock)).toEqual([]);
+    expect(errors(phoenixHawk, stock)).toEqual([]);
     expect(getBuildTonnage(phoenixHawk, stock)).toBe(44.87);
     const panel = Object.fromEntries(getYamlStatsPanel(phoenixHawk, stock).flat().map(cell => [cell.key, cell.value]));
     expect(panel).toMatchObject({ armor: '318', structure: '159', alphaDamage: '35', speed: '97.2', jumpHeight: '82' });
@@ -173,7 +173,7 @@ describe('Rellenos dinámicos', () => {
     });
     for (const id of ['CN9-CALM', 'WHM-IIC-3']) {
       const mech = findYamlMech(id)!;
-      expect(getYamlBuildIssues(mech, createStockBuild(mech)), id).toEqual([]);
+      expect(errors(mech, createStockBuild(mech)), id).toEqual([]);
     }
     const centurion = findYamlMech('CN9-CALM')!;
     expect(mountItem(centurion, createStockBuild(centurion), 'leftLeg', 'SingleHeatSink').error).toBeDefined();
@@ -211,3 +211,8 @@ describe('Equipo de actuadores', () => {
     expect(getGeneralSlots(warhammer, improved, 'leftArm')).toBe(getGeneralSlots(warhammer, stock, 'leftArm'));
   });
 });
+
+// Las builds de serie no tienen errores; los avisos (armadura por debajo del máximo...) son normales.
+function errors(...args: Parameters<typeof getBuildIssues>) {
+  return getBuildIssues(...args).filter(issue => issue.severity === 'error');
+}

@@ -17,12 +17,11 @@ import { useViewPreferences } from '../hooks/useViewPreferences';
 import { copyText } from '../services/clipboard';
 import type { Zone } from '../types/mech';
 import type { YamlBuild, YamlMech } from '../types/yaml-mechlab';
-import { distributeDynamicFillerGroups, removeItemAt, setArmor, setMaxArmor } from '../utils/yaml/board';
+import { distributeDynamicFillerGroups, getBuildIssues, removeItemAt, setArmor, setMaxArmor } from '../utils/yaml/board';
 import { clearArmor, createStockBuild, dropExcessEngineHeatSinks, removeKind, removeWeapon, setWeaponTier, type MountResult } from '../utils/yaml/build';
 import { decodeYamlBuild, encodeYamlBuild } from '../utils/yaml/buildCode';
 import { findYamlMech, getYamlItem, getYamlSarnaMech, YAML_COLORS, yamlMechs } from '../utils/yaml/data';
 import { autoPlaceYamlItem, chooseYamlInternal, getYamlDropZones, placeYamlItem, type YamlInventoryTarget } from '../utils/yaml/inventory';
-import { getYamlBuildIssues } from '../utils/yaml/readouts';
 import { YAML_SAVED_BUILDS_KEY } from '../utils/yaml/savedBuilds';
 import { normalizeBuildName } from '../utils/savedBuildsCore';
 import { getYamlUpgrades, toggleYamlUpgrade } from '../utils/yaml/traits';
@@ -102,7 +101,7 @@ export function YamlMechLabApp() {
   const defaultName = `${mech.chassis} ${mech.variant}`;
   const upgrades = useMemo(() => getYamlUpgrades(build), [build]);
   const buildUrl = `${window.location.origin}${window.location.pathname}?b=${buildCode}`;
-  const issues = useMemo(() => getYamlBuildIssues(mech, build), [mech, build]);
+  const issues = useMemo(() => getBuildIssues(mech, build), [mech, build]);
   const fillers = useMemo(() => distributeDynamicFillerGroups(mech, build), [mech, build]);
   const held = dragged ?? pickedItem;
   const dropZones = useMemo(() => held ? getYamlDropZones(mech, build, held) : null, [mech, build, held]);
@@ -215,7 +214,7 @@ export function YamlMechLabApp() {
       <BuildStatus
         issues={issues}
         onSelectZone={(zone) => selectTarget({ zone, hardpoint: null, internal: null })}
-        readyMessage="Nothing to note: the build is within its tonnage and every piece has room."
+        readyMessage="Nothing to note: the build is within its tonnage, every piece has room, weapons have ammo and armor is maxed."
       />
 
       <UtilityToolbar

@@ -1,4 +1,6 @@
 import type { Zone } from '../../types/mech';
+import type { BuildIssue } from '../issues';
+import { ZONE_LABELS } from '../zones';
 import type { YamlBuild, YamlHardpointType, YamlMech } from '../../types/yaml-mechlab';
 import { getDefaultTier } from './combat';
 import { getYamlItem } from './data';
@@ -196,29 +198,69 @@ export function setMaxArmor(mech: YamlMech, build: YamlBuild): YamlBuild {
   return { ...build, armor };
 }
 
-export interface BuildIssue {
-  severity: 'error' | 'warning';
-  message: string;
-  zone?: Zone;
-}
+// Las cargas de los consumibles (Coolant Pod, UAV) son munición en los datos, pero no las gasta ningún arma.
+const CONSUMABLE_AMMO = 'Ammo.Consumable.';
 
+// Lo que falta o sobra para terminar la build, como en el MechLab de MW5 (utils/issues.ts): primero los errores
+// y después los avisos. Sin aviso de anclajes libres: YAML añade anclajes a casi todas las variantes y las armas
+// ocupan ranuras, así que un anclaje vacío es una opción más, no algo que falte (docs/specs/avisos-yaml.md).
 export function getBuildIssues(mech: YamlMech, build: YamlBuild): BuildIssue[] {
   const issues: BuildIssue[] = [];
   const tonnage = getBuildTonnage(mech, build);
-  if (tonnage > mech.tonnage) issues.push({ severity: 'error', message: `Overweight by ${Math.round((tonnage - mech.tonnage) * 100) / 100} t` });
+  if (tonnage > mech.tonnage) {
+    issues.push({ id: 'overweight', severity: 'error', message: `Over tonnage by ${Math.round((tonnage - mech.tonnage) * 100) / 100} t` });
+  }
   // Los rellenos dinámicos que no caben no son un problema: al cargar un loadout, YAML ignora el fallo de
   // UpdateFillersOnLoadout y se queda con los que caben (CN9-CALM, 24 de 28). Lo que no deja es montar una pieza
   // si después no caben todos (InstallWeaponOrEquipmentIntoSpecificSlot), y eso lo comprueba build.ts.
   for (const zone of ZONES) {
     if (getFreeGeneralSlots(mech, build, zone) < 0) {
-      issues.push({ severity: 'error', message: `${zone}: not enough slots (${getFixedFillers(build, zone)} fixed by the engine)`, zone });
+      issues.push({
+        id: `slots-${zone}`, severity: 'error', zone,
+        message: `${ZONE_LABELS[zone]}: not enough slots (${getFixedFillers(build, zone)} fixed by the engine)`
+      });
     }
   }
   for (const split of getUnplacedCritSplits(mech, build)) {
     const name = getYamlItem(split.item)?.name ?? split.item;
-    issues.push({ severity: 'error', message: `${split.zone}: ${name} needs ${split.slots} more slots in an adjacent location`, zone: split.zone });
+    issues.push({
+      id: `split-${split.zone}-${split.item}`, severity: 'error', zone: split.zone,
+      message: `${ZONE_LABELS[split.zone]}: ${name} needs ${split.slots} more slots in an adjacent location`
+    });
   }
-  if (!build.internal.Engine) issues.push({ severity: 'warning', message: 'No engine core installed' });
+  if (!build.internal.Engine) issues.push({ id: 'engine-core', severity: 'warning', message: 'No engine core installed' });
+
+  const ammoTypes = new Set(build.items.map(mounted => getYamlItem(mounted.item))
+    .filter(item => item?.kind === 'ammo').map(item => item?.ammoType));
+  const usedTypes = new Set(build.weapons.flatMap(weapon => getYamlItem(weapon.item)?.ammoTypes ?? []));
+  const warned = new Set<string>();
+  const warnOnce = (id: string, zone: Zone, message: string) => {
+    if (warned.has(id)) return;
+    warned.add(id);
+    issues.push({ id, severity: 'warning', zone, message });
+  };
+  for (const weapon of build.weapons) {
+    const item = getYamlItem(weapon.item);
+    const types = item?.ammoTypes ?? [];
+    if (types.length > 0 && !types.some(type => ammoTypes.has(type))) {
+      warnOnce(`missing-ammo-${weapon.item}`, weapon.zone, `${item?.name ?? weapon.item} has no ammo`);
+    }
+  }
+  for (const mounted of build.items) {
+    const item = getYamlItem(mounted.item);
+    if (item?.kind !== 'ammo' || !item.ammoType || item.ammoType.startsWith(CONSUMABLE_AMMO) || usedTypes.has(item.ammoType)) continue;
+    warnOnce(`unused-ammo-${mounted.item}`, mounted.zone, `${item.name} is not used by any weapon`);
+  }
+
+  const lowArmor = ZONES.filter(zone => build.armor[zone].front + build.armor[zone].rear < mech.zones[zone].maxArmor);
+  if (lowArmor.length > 0) {
+    issues.push({
+      id: 'armor', severity: 'warning', zone: lowArmor[0],
+      message: lowArmor.length <= 2
+        ? `Armor below max: ${lowArmor.map(zone => ZONE_LABELS[zone]).join(', ')}`
+        : `Armor below max in ${lowArmor.length} components`
+    });
+  }
   return issues;
 }
 
