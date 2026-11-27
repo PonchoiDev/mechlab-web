@@ -11,6 +11,12 @@
 
 .yaml-rules-note strong { color: var(--work-text); }
 
+/* El enlace a la página de equipo, en el lima de los enlaces del MechLab: el morado del navegador no se leía
+   sobre el fondo oscuro. */
+.yaml-rules-note a { color: var(--work-lime); text-decoration: underline; text-underline-offset: 2px; }
+.yaml-rules-note a:hover,
+.yaml-rules-note a:focus-visible { color: var(--work-text); }
+
 /* Anclajes usados y totales de cada tipo, con el icono del inventario de MW5 en el color de su tipo. */
 .yaml-location-hardpoints { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; }
 

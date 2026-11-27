@@ -204,8 +204,7 @@ export function YamlMechLabApp() {
         />
         <p className="yaml-rules-note">
           Rules of the <strong>Yet Another Mechlab</strong> mod 0.99.4.3, with Yet Another Weapon, its Clan version and
-          Yet Another Equipment Collection: weapons take critical slots, the engine is a core plus a type, and Endo and
-          Ferro take filler slots anywhere in the 'Mech. Every weapon and piece of equipment is on
+          Yet Another Equipment Collection. Every weapon and piece of equipment is on
           the <a href={`${import.meta.env.BASE_URL}yaml/equipment/`}>YAML equipment page</a>.
         </p>
       </section>
