@@ -16,6 +16,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       'New MechLab with the rules of Yet Another Mechlab, Yet Another Weapon (and its Clan pack) and Yet Another Equipment Collection: weapons take critical slots, engines split into core and type, gyros, cockpits, Endo and Ferro fillers, superheavies and quirks',
       'New YAML Equipment list with every weapon by tier and every piece of equipment, filtered by mod',
       'YAML builds can be saved, shared in one link and published to Community Builds, tagged YAML',
+      'Once you open a YAML page, the MechLab and Equipment links in every page header take you back to the YAML versions, marked YAML, until you open the regular ones again',
       'Both are on the home page, next to the MechLab and the Equipment list. The tool order is now MechLab, Builds, Chassis and Equipment first, also in the page headers'
     ]
   },
