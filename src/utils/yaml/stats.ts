@@ -106,6 +106,13 @@ export function getActuatorSlotType(mech: YamlMech, zone: Zone, actuator: string
   return slotType && mech.superheavy ? SUPERHEAVY_ACTUATOR_PREFIX + slotType : slotType;
 }
 
+// Las ranuras que ocupa un actuador: el tamaño de su tipo de ranura (2 en los superpesados), que es el alto
+// con el que lo dibuja el mechlab del juego.
+export function getActuatorSlots(mech: YamlMech, zone: Zone, actuator: string): number {
+  const slotType = getActuatorSlotType(mech, zone, actuator);
+  return (slotType && getYamlSlotType(slotType)?.size) || 1;
+}
+
 // Las ranuras de actuador de una ubicación, las de los actuadores que tiene en el MDA.
 export function getActuatorSlotTypes(mech: YamlMech, zone: Zone): string[] {
   return mech.zones[zone].actuators.flatMap(actuator => getActuatorSlotType(mech, zone, actuator) ?? []);

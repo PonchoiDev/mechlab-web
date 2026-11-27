@@ -64,6 +64,13 @@
 
 .yaml-internals .component-card-item.is-selected { border-color: var(--work-lime); }
 
+/* Con las ranuras desplegadas, los actuadores de dos ranuras de los superpesados miden dos celdas. */
+.yaml-actuators { --slot-cell: 26px; }
+.yaml-actuators .yaml-actuator.slot-cell-item {
+  align-items: start;
+  min-height: calc(var(--slots) * var(--slot-cell) + (var(--slots) - 1) * 3px);
+}
+
 /* Los actuadores, fijos y en gris, encima de las ranuras de brazos y piernas, como en el juego. */
 .yaml-actuator {
   color: var(--work-muted);
