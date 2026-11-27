@@ -81,6 +81,12 @@ describe('resumen para la lista', () => {
     expect(YAML_BUILD_LIST.featureOptions.map(option => option.id)).not.toContain('yamlOnly');
   });
 
+  // El daño alfa sale de multiplicadores en coma flotante (el AS7-D de serie daba 78.4000015258789): la lista lo
+  // redondea como el panel de estadísticas.
+  it('el daño alfa de la lista va redondeado como en el panel', () => {
+    expect(summarizeYamlSavedBuild(stockOf('AS7-D')).meta).toMatch(/ · 78\.4 alpha$/);
+  });
+
   it('CA7: un código que ya no se puede abrir', () => {
     const entry = summarizeYamlSavedBuild(saved('yaml-roto'));
     expect(entry.decoded).toBeNull();
