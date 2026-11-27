@@ -57,6 +57,15 @@ describe('matchesMechQuery', () => {
   it('descarta los mechs que no coinciden', () => {
     expect(matchesMechQuery(adder, 'atlas')).toBe(false);
   });
+
+  // docs/specs/buscar-nombres-clan.md
+  it('CA1: cada palabra vale en el chasis, el nombre Clan, la variante o el id', () => {
+    const timberWolf = getMech('TBR-PRIME');
+    expect(matchesMechQuery(timberWolf, 'timber wolf prime')).toBe(true);
+    expect(matchesMechQuery(timberWolf, 'mad cat tbr-prime')).toBe(true);
+    expect(matchesMechQuery(timberWolf, 'TIMBER')).toBe(true);
+    expect(matchesMechQuery(timberWolf, 'timber atlas')).toBe(false);
+  });
 });
 
 describe('filtros del selector de chasis', () => {

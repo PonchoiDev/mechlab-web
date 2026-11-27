@@ -104,3 +104,12 @@ describe('resumen para la lista', () => {
     expect(variants({ engine: ['XL Engine', 'XL Engine (C)'], structure: ['Structure standard'] })).toEqual(['NSR-9J']);
   });
 });
+
+// docs/specs/buscar-nombres-clan.md
+describe('nombres Clan en Mis builds de YAML', () => {
+  it('CA5: el chasis lleva el nombre Clan y se encuentra por él', () => {
+    const row = summarizeYamlSavedBuild(stockOf('TBR-PRIME')).listRow;
+    expect(row.chassis).toBe('Mad Cat (Timber Wolf)');
+    expect(filterBuildRows([row], { query: 'timber wolf', weightClasses: [] })).toHaveLength(1);
+  });
+});

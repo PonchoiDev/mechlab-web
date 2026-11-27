@@ -8,6 +8,7 @@ import {
   formatYamlStat, getWeaponPerformance, getYamlAmmunition, getYamlChassisData, getYamlDamagePerTon, getYamlMechStats,
   getYamlRangeProfile, getYamlRangeState, type YamlWeaponPerformance
 } from '../utils/yaml/combat';
+import { getYamlMechDisplayName } from '../utils/yaml/mechList';
 import { ZONE_LABELS } from '../utils/zones';
 
 // El análisis del MechLab de MW5 (LoadoutAnalysis) con las cifras de YAML. Weapons: una fila por arma, el
@@ -140,7 +141,7 @@ function MechTab({ mech, build }: { mech: YamlMech; build: YamlBuild }) {
       <header className="analysis-heading">
         <div>
           <p className="eyebrow">05 / CHASSIS DATA</p>
-          <h2>{mech.chassis} {mech.variant}</h2>
+          <h2>{getYamlMechDisplayName(mech)} {mech.variant}</h2>
         </div>
       </header>
       <div className="mech-stats">

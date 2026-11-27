@@ -5,7 +5,7 @@ import { getInternalLabel } from './board';
 import { decodeYamlBuild } from './buildCode';
 import { getYamlMechStats } from './combat';
 import { findYamlMech, getYamlItem } from './data';
-import { getWeightClass, getYamlHardpointCounts, isClanMech, isOmniMech, YAML_HARDPOINT_FILTER_TYPES } from './mechList';
+import { getWeightClass, getYamlHardpointCounts, getYamlMechDisplayName, isClanMech, isOmniMech, YAML_HARDPOINT_FILTER_TYPES } from './mechList';
 import { getBuildTonnage } from './stats';
 
 // Una build guardada del MechLab de YAML resumida para la ventana My builds, como las de MW5 (utils/savedBuildRows.ts)
@@ -132,7 +132,7 @@ export function summarizeYamlSavedBuild(saved: SavedBuild): YamlSavedBuildEntry 
     id: saved.id,
     name: saved.name,
     savedAt: saved.savedAt,
-    chassis: mech!.chassis,
+    chassis: getYamlMechDisplayName(mech!),
     variant: mech!.variant,
     weightClass: getWeightClass(mech!.tonnage),
     tonnage,
@@ -150,6 +150,6 @@ export function summarizeYamlSavedBuild(saved: SavedBuild): YamlSavedBuildEntry 
     listRow,
     weaponCounts,
     tags: getYamlBuildTags(build, categories),
-    meta: `${mech!.chassis} ${mech!.variant} · ${tonnage.toFixed(2)} / ${mech!.tonnage} t · ${stats.alphaDamage} alpha`
+    meta: `${getYamlMechDisplayName(mech!)} ${mech!.variant} · ${tonnage.toFixed(2)} / ${mech!.tonnage} t · ${stats.alphaDamage} alpha`
   };
 }

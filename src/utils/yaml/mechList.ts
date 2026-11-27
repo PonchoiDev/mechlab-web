@@ -1,7 +1,7 @@
 import type { YamlHardpointType, YamlMech } from '../../types/yaml-mechlab';
 import { meetsHardpointMinimums } from '../hardpointMinimums';
-import { BASE_GAME, CLAN_INVASION_YEAR, GAME_START_YEAR } from '../mechs';
-import { getYamlQuirk } from './data';
+import { BASE_GAME, CLAN_INVASION_YEAR, GAME_START_YEAR, getMechDisplayName } from '../mechs';
+import { getYamlQuirk, getYamlSarnaMech } from './data';
 
 // Búsqueda y filtros del selector de 'Mechs del MechLab de YAML (docs/specs/filtros-yaml.md): los del selector de
 // MW5 que tienen sentido con YAML y los propios de YAML (quirks, variantes nuevas, superpesados, omni y anclajes
@@ -144,8 +144,11 @@ function mergeYamlFilters(filters: YamlMechFilters, extra: Partial<YamlMechFilte
   };
 }
 
+// El chasis como en el MechLab de MW5, con el nombre Clan si lo tiene: «Mad Cat (Timber Wolf)».
+export const getYamlMechDisplayName = (mech: YamlMech): string => getMechDisplayName(getYamlSarnaMech(mech));
+
 const searchText = (mech: YamlMech) =>
-  [mech.chassis, mech.variant, mech.id, ...mech.quirks, ...mech.quirks.map(id => getYamlQuirk(id)?.name ?? '')].join(' ').toLowerCase();
+  [mech.chassis, mech.sarnaName ?? '', mech.variant, mech.id, ...mech.quirks, ...mech.quirks.map(id => getYamlQuirk(id)?.name ?? '')].join(' ').toLowerCase();
 
 export function filterYamlMechs(mechs: YamlMech[], query: string, filters: YamlMechFilters = EMPTY_YAML_FILTERS): YamlMech[] {
   const parsed = parseYamlQuery(query);

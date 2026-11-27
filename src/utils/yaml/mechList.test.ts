@@ -3,7 +3,7 @@ import mw5Mechs from '../../data/mechs.json';
 import { filterOptionsByText } from '../format';
 import { findYamlMech, getYamlQuirk, yamlMechs } from './data';
 import {
-  EMPTY_YAML_FILTERS, filterYamlMechs, getYamlAvailableYear, getYamlHardpointCounts, getYamlQuirkOptions, isClanMech, isOmniMech,
+  EMPTY_YAML_FILTERS, filterYamlMechs, getYamlAvailableYear, getYamlMechDisplayName, getYamlHardpointCounts, getYamlQuirkOptions, isClanMech, isOmniMech,
   type YamlMechFilters
 } from './mechList';
 
@@ -103,5 +103,23 @@ describe('filtros del selector de YAML', () => {
     const found = withFilters({}, '360 torso');
     expect(found.length).toBeGreaterThan(0);
     expect(new Set(found.map(mech => mech.chassis))).toEqual(new Set(['UrbanMech']));
+  });
+});
+
+// docs/specs/buscar-nombres-clan.md
+describe('nombres Clan en el selector de YAML', () => {
+  it('CA2: el nombre Clan encuentra el chasis', () => {
+    const found = withFilters({}, 'timber wolf');
+    expect(found.length).toBeGreaterThan(0);
+    expect(ids(found)).toEqual(ids(yamlMechs.filter(mech => mech.chassis === 'Mad Cat')));
+  });
+
+  it('CA3: con el nombre Clan y la variante', () => {
+    expect(ids(withFilters({}, 'adder prime'))).toEqual(['ADR-PRIME']);
+  });
+
+  it('CA4: el nombre del chasis, con el Clan entre paréntesis como en MW5', () => {
+    expect(getYamlMechDisplayName(findYamlMech('TBR-PRIME')!)).toBe('Mad Cat (Timber Wolf)');
+    expect(getYamlMechDisplayName(findYamlMech('AS7-D')!)).toBe('Atlas');
   });
 });
