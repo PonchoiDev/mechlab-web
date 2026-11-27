@@ -20,6 +20,7 @@ Además, el orden de la lista pone las herramientas de consulta (campañas, mapa
   - Equipo YAML (`/mercs/yaml/equipment/`): «N weapons · N equipment».
 - **RF4. Indexable.** Las dos páginas de YAML pierden el `noindex`.
 - **RF5. Novedad.** Una entrada en la campana anuncia el MechLab de YAML, su página de equipo y las builds de YAML publicadas en `/mercs/builds/`.
+- **RF6. Cabecera en modo YAML.** La web recuerda en el navegador con qué versión de MW5 se trabaja. Abrir el MechLab o el equipo de YAML la pone en modo YAML; abrir el MechLab o el equipo de siempre la devuelve al vanilla; las demás páginas no la cambian. En modo YAML, «MechLab» y «Equipment» de la cabecera de las páginas de MW5 llevan a `/mercs/yaml/` y `/mercs/yaml/equipment/` y llevan una marca «YAML» del naranja del mod, para que se vea en qué modo se está. Así, quien entra por YAML sigue en YAML al volver desde el mapa, las unidades o cualquier otra página. La cabecera de BATTLETECH no cambia. Sin almacenamiento en el navegador, la cabecera va siempre al vanilla, salvo en las propias páginas de YAML.
 
 ## Requisitos no funcionales
 
@@ -36,13 +37,17 @@ Además, el orden de la lista pone las herramientas de consulta (campañas, mapa
 | CA3 | La lista de MW5 | se leen sus enlaces YAML | hay dos, `/mercs/yaml/` en la fila del MechLab y `/mercs/yaml/equipment/` en la del equipo, y ninguno en BATTLETECH |
 | CA4 | Las cifras de las mitades YAML | se comparan con los datos | coinciden: variantes de `src/data/yaml/mechs.json`, armas y equipo de la página de equipo de YAML |
 | CA5 | `yaml/index.html` y `yaml/equipment/index.html` | se busca `noindex` | no está |
+| CA6 | La cabecera de MW5 en modo YAML | se leen sus enlaces | «MechLab» va a `/mercs/yaml/` y «Equipment» a `/mercs/yaml/equipment/`, los dos marcados como YAML, y el resto como en vanilla, en el mismo orden |
+| CA7 | La cabecera de BATTLETECH | se pide en modo YAML | es la misma que en vanilla |
+| CA8 | El modo guardado | se lee | vale `yaml` solo si se guardó YAML; cualquier otro valor, o ninguno, es vanilla |
 
 ## Fuera de alcance
 
-- Enlaces a las páginas de YAML en la cabecera de las demás páginas.
+- Un interruptor vanilla/YAML en la cabecera: el modo se cambia abriendo la versión que se quiere, desde la portada o desde su página.
 - Una carátula propia para YAML.
 
 ## Plan de pruebas
 
-1. **Contenido (CA1 a CA5):** `src/data/portal.test.ts` y `src/utils/siteNav.test.ts`.
-2. **Interfaz:** en el navegador, en escritorio, tableta y móvil: las filas partidas, el resalte de cada mitad y el sello de la carátula.
+1. **Contenido (CA1 a CA5):** `src/data/portal.test.ts`.
+2. **Cabecera (CA6 a CA8):** `src/utils/siteNav.test.ts`.
+3. **Interfaz:** en el navegador, en escritorio, tableta y móvil: las filas partidas, el resalte de cada mitad y el sello de la carátula; abrir el MechLab de YAML, ir al mapa y volver por «MechLab» de la cabecera, y lo mismo desde el MechLab vanilla.
