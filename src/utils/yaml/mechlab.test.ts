@@ -104,9 +104,10 @@ describe('MechLab de YAML', () => {
 describe('equipo que no se puede repetir en el MechLab de YAML', () => {
   const empty = stripBuild(stock);
 
-  it('CA7: el Triple Strength Myomer no se monta con un MASC MK I (C)', () => {
-    const withMasc = mountItem(nightstar, empty, 'leftTorso', 'C79_MASC_MKI').build!;
-    expect(mountItem(nightstar, withMasc, 'rightTorso', 'TSMYOMER').error).toBe("Triple Strength Myomer can't be mounted with MASC MK I (C)");
+  // El MASC de la clase del NSR-9J (95 t, clase 5: docs/specs/clase-de-peso-yaml.md).
+  it('CA7: el Triple Strength Myomer no se monta con un MASC MK V (C)', () => {
+    const withMasc = mountItem(nightstar, empty, 'leftTorso', 'C79_MASC_MKV').build!;
+    expect(mountItem(nightstar, withMasc, 'rightTorso', 'TSMYOMER').error).toBe("Triple Strength Myomer can't be mounted with MASC MK V (C)");
     expect(mountItem(nightstar, empty, 'rightTorso', 'TSMYOMER').build).toBeDefined();
   });
 

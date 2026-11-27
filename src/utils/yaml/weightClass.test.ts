@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { getBuildIssues } from './board';
 import { createStockBuild, mountItem, stripBuild } from './build';
 import { findYamlMech, getYamlItem, yamlItemIds } from './data';
-import { filterYamlInventory, getYamlInternalChoices, getYamlInventoryItems, placeYamlItem } from './inventory';
+import { filterYamlInventory, getYamlDropZones, getYamlInternalChoices, getYamlInventoryItems, placeYamlItem } from './inventory';
 import { getYamlEquipmentClass, getYamlWeightClassProblem } from './weightClass';
 
 // Piezas por clase de peso en el MechLab de YAML (docs/specs/clase-de-peso-yaml.md).
@@ -27,7 +27,7 @@ describe('piezas por clase de peso en el MechLab de YAML', () => {
       expect(getYamlWeightClassProblem(firestarter, id)).toMatch(/class 3/);
       expect(mountItem(firestarter, emptyOf('FS9-S1'), 'centerTorso', id).error).toMatch(/class 3/);
     }
-    expect(mountItem(griffin, emptyOf('GRF-2N'), 'centerTorso', 'MASC_MKIII').build).toBeDefined();
+    expect(getYamlDropZones(griffin, emptyOf('GRF-2N'), 'MASC_MKIII').length).toBeGreaterThan(0);
   });
 
   it('CA3: los supercargadores de arena, también por clase', () => {
@@ -64,11 +64,14 @@ describe('piezas por clase de peso en el MechLab de YAML', () => {
     expect(shown).toContain('MASC_MKII');
   });
 
-  it('CA8: una build que ya lleva una pieza de otra clase avisa', () => {
-    const build = emptyOf('FS9-S1');
-    const loaded = { ...build, items: [...build.items, { zone: 'centerTorso' as const, slotType: 'General_SlotType', item: 'MASC_MKIII' }] };
-    const issue = getBuildIssues(firestarter, loaded).find(entry => entry.id === 'weight-class-MASC_MKIII');
-    expect(issue?.message).toMatch(/MASC MK III/);
-    expect(getBuildIssues(firestarter, build).some(entry => entry.id.startsWith('weight-class'))).toBe(false);
+  // El juego solo lo comprueba al montar: la build de serie lo conserva sin aviso.
+  it('CA8: el Executioner de serie conserva su MASC MK IV (C), pero no se puede volver a montar', () => {
+    const executioner = mechOf('EXE-PRIME');
+    const stock = createStockBuild(executioner);
+    const index = stock.items.findIndex(mounted => mounted.item === 'c-MASC_MKIV');
+    expect(index).toBeGreaterThanOrEqual(0);
+    expect(getBuildIssues(executioner, stock).map(issue => issue.message).join(' ')).not.toMatch(/class 4/);
+    const without = { ...stock, items: stock.items.filter((_, position) => position !== index) };
+    expect(getYamlDropZones(executioner, without, 'c-MASC_MKIV')).toEqual([]);
   });
 });

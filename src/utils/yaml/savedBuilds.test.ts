@@ -61,7 +61,7 @@ describe('resumen para la lista', () => {
 
   it('CA5: el equipo montado y las mejoras de la cantina', () => {
     let build = stripBuild(createStockBuild(nightstar));
-    for (const [zone, item] of [['leftTorso', 'JumpJet_Class3_Equipment'], ['leftTorso', 'JumpJet_Class3_Equipment'], ['rightTorso', 'GuardianECM'], ['leftTorso', 'MASC_MKIII']] as const) {
+    for (const [zone, item] of [['leftTorso', 'JumpJet_Class3_Equipment'], ['leftTorso', 'JumpJet_Class3_Equipment'], ['rightTorso', 'GuardianECM'], ['leftTorso', 'MASC_MKV']] as const) {
       build = mountItem(nightstar, build, zone, item).build!;
     }
     build = { ...build, traits: ['ReducedHeatGeneration_Trait1'] };

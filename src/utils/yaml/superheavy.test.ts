@@ -78,7 +78,8 @@ describe('superpesados de YAML', () => {
     const nsr = findYamlMech('NSR-9J')!;
     const nsrStock = createStockBuild(nsr);
     expect(mountItem(nsr, nsrStock, 'leftArm', 'IMPROVED_ACTUATORS').error).toBeUndefined();
-    expect(mountItem(nsr, nsrStock, 'leftArm', 'SH_IMPROVED_ACTUATORS').error).toMatch(/actuator slot/);
+    // Antes que la ranura, su tonelaje mínimo: solo va en 'Mechs de 105 t o más (docs/specs/clase-de-peso-yaml.md).
+    expect(mountItem(nsr, nsrStock, 'leftArm', 'SH_IMPROVED_ACTUATORS').error).toMatch(/105 t or more/);
   });
 
   it('CA7: la armadura Hardened dobla los puntos de cualquier \'Mech', () => {
