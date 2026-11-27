@@ -29,8 +29,7 @@ export const YAML_BUILD_LIST: BuildListConfig = {
     { id: 'upgrades', label: 'Cantina upgrades', title: 'Builds with cantina upgrades installed' },
     { id: 'hero', label: 'Hero', title: 'Hero variants' },
     { id: 'omni', label: 'Omni', title: 'OmniMechs' },
-    { id: 'superheavy', label: 'Superheavy', title: "Superheavy 'Mechs" },
-    { id: 'yamlOnly', label: 'YAML only', title: 'Variants added by YAML' }
+    { id: 'superheavy', label: 'Superheavy', title: "Superheavy 'Mechs" }
   ],
   hasTechBase: true,
   weaponShort: Object.fromEntries(WEAPON_TYPES.map(type => [type, SHORT[type]])),
@@ -125,8 +124,7 @@ export function summarizeYamlSavedBuild(saved: SavedBuild): YamlSavedBuildEntry 
     (build.traits?.length ?? 0) > 0 && 'upgrades',
     mech!.hero && 'hero',
     isOmniMech(mech!) && 'omni',
-    mech!.superheavy && 'superheavy',
-    mech!.yamlOnly && 'yamlOnly'
+    mech!.superheavy && 'superheavy'
   ].filter((feature): feature is string => typeof feature === 'string');
   const listRow: BuildListRow = {
     id: saved.id,

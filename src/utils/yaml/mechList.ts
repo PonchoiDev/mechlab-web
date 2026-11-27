@@ -33,7 +33,6 @@ export interface YamlMechFilters {
   hero: boolean;
   omni: boolean;
   superheavy: boolean;
-  yamlOnly: boolean;
   // Quirks marcados: las variantes que los tienen todos.
   quirks: string[];
   minHardpoints: Partial<Record<YamlHardpointFilterType, number>>;
@@ -41,7 +40,7 @@ export interface YamlMechFilters {
 
 export const EMPTY_YAML_FILTERS: YamlMechFilters = {
   weightClasses: [], techBase: null, roles: [], maxYear: null, dlcs: [], hero: false, omni: false, superheavy: false,
-  yamlOnly: false, quirks: [], minHardpoints: {}
+  quirks: [], minHardpoints: {}
 };
 
 export const isClanMech = (mech: YamlMech): boolean => mech.quirks.includes('CLAN-MECH');
@@ -77,7 +76,7 @@ export function getYamlQuirkOptions(mechs: YamlMech[]): { value: string; label: 
 
 export function countYamlFilters(filters: YamlMechFilters): number {
   return filters.weightClasses.length + (filters.techBase ? 1 : 0) + filters.roles.length + (filters.maxYear !== null ? 1 : 0) +
-    filters.dlcs.length + [filters.hero, filters.omni, filters.superheavy, filters.yamlOnly].filter(Boolean).length +
+    filters.dlcs.length + [filters.hero, filters.omni, filters.superheavy].filter(Boolean).length +
     filters.quirks.length + Object.values(filters.minHardpoints).filter(value => (value ?? 0) > 0).length;
 }
 
@@ -90,7 +89,6 @@ export function matchesYamlFilters(mech: YamlMech, filters: YamlMechFilters): bo
     (!filters.hero || mech.hero === true) &&
     (!filters.omni || isOmniMech(mech)) &&
     (!filters.superheavy || mech.superheavy === true) &&
-    (!filters.yamlOnly || mech.yamlOnly === true) &&
     filters.quirks.every(quirk => mech.quirks.includes(quirk)) &&
     meetsHardpointMinimums(getYamlHardpointCounts(mech), filters.minHardpoints);
 }
@@ -101,7 +99,7 @@ const TOKEN_TYPES: Record<string, YamlHardpointFilterType> = {
   e: 'energy', b: 'ballistic', m: 'missile', o: 'omni', art: 'artillery', ams: 'ams', mel: 'melee'
 };
 const FLAG_TOKENS: Record<string, Partial<YamlMechFilters>> = {
-  hero: { hero: true }, omni: { omni: true }, sh: { superheavy: true }, yaml: { yamlOnly: true }, clan: { techBase: 'Clan' }
+  hero: { hero: true }, omni: { omni: true }, sh: { superheavy: true }, clan: { techBase: 'Clan' }
 };
 
 // Separa del texto los atajos de filtro, como el buscador de MW5 («3e 2mel sh»); el resto se busca en el chasis,
@@ -137,7 +135,6 @@ function mergeYamlFilters(filters: YamlMechFilters, extra: Partial<YamlMechFilte
     hero: filters.hero || !!extra.hero,
     omni: filters.omni || !!extra.omni,
     superheavy: filters.superheavy || !!extra.superheavy,
-    yamlOnly: filters.yamlOnly || !!extra.yamlOnly,
     techBase: extra.techBase ?? filters.techBase,
     dlcs: [...new Set([...filters.dlcs, ...(extra.dlcs ?? [])])],
     minHardpoints

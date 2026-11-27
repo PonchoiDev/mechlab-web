@@ -84,7 +84,7 @@ export function YamlMechPicker({ mechs, current, onSelect }: YamlMechPickerProps
     setFilters(currentFilters => ({ ...currentFilters, ...change(currentFilters) }));
     setActiveOption(0);
   };
-  const flag = (key: 'hero' | 'omni' | 'superheavy' | 'yamlOnly', label: string, title: string) => (
+  const flag = (key: 'hero' | 'omni' | 'superheavy', label: string, title: string) => (
     <button
       type="button"
       className="mech-filter-chip"
@@ -189,7 +189,6 @@ export function YamlMechPicker({ mechs, current, onSelect }: YamlMechPickerProps
                 {flag('hero', 'Hero', "Only hero 'Mechs")}
                 {flag('omni', 'Omni', 'Only OmniMechs')}
                 {flag('superheavy', 'Superheavy', "Only superheavy 'Mechs, 105 t or more")}
-                {flag('yamlOnly', 'YAML only', 'Only the variants added by YAML')}
               </span>
             </div>
             <div className="mech-filter-row">

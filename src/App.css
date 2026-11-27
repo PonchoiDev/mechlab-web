@@ -254,9 +254,7 @@ body {
 }
 
 /* Con el grupo en varias líneas, la etiqueta se queda a la altura de la primera. */
-.mech-filter-row:has(> .mech-filter-group),
-.builds-classes:has(> .mech-filter-group),
-.builds-hardpoints:has(> .mech-filter-group) {
+.mech-filter-row:has(> .mech-filter-group) {
   align-items: baseline;
 }
 
@@ -2192,16 +2190,45 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   text-transform: uppercase;
 }
 
-.builds-classes {
-  display: flex;
+/* Los filtros, debajo del buscador y separados de él: una fila por grupo, con la etiqueta en una columna del
+   mismo ancho para que los controles de todas empiecen a la misma altura. */
+.builds-filters {
+  display: grid;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--work-line);
+}
+
+.builds-filter-row {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+}
+
+/* La etiqueta a la altura del centro de la primera línea de controles (los chips miden 26 px). */
+.builds-filter-row > .builds-filter-label { line-height: 26px; }
+.builds-filter-row > .mech-filter-group { gap: 6px; }
+
+/* Cada grupo de controles con su nombre (clase, tecnología, rol, cada pieza) baja entero si no cabe, y deja
+   un hueco con el siguiente. */
+.builds-filter-pair {
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
+  margin-right: 12px;
 }
 
-.builds-classes .builds-filter-label:not(:first-child) { margin-left: 8px; }
+.builds-filter-pair:last-child { margin-right: 0; }
 
-.builds-classes .mech-filter-chip:disabled { opacity: 0.4; cursor: default; }
+/* El nombre de un control dentro de una fila, más discreto que la etiqueta de la fila para no confundirse. */
+.builds-filter-sublabel {
+  color: var(--work-muted);
+  font: 500 11px var(--work-mono);
+}
+
+.builds-filter-row .mech-filter-chip:disabled { opacity: 0.4; cursor: default; }
 
 .builds-list { flex: 1; align-content: start; }
 
@@ -2297,13 +2324,6 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .mech-filter-stepper input:focus-visible { border-bottom-color: var(--weapon-color); outline: none; }
 
-.builds-hardpoints {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-}
-
 .builds-filter-label {
   margin-right: 2px;
   color: var(--work-muted);
@@ -2311,7 +2331,7 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.builds-classes .mech-filter-chip[aria-pressed='true'] .utility-count { color: #18200f; }
+.builds-filter-row .mech-filter-chip[aria-pressed='true'] .utility-count { color: #18200f; }
 
 .builds-empty button {
   margin-top: 8px;
@@ -3858,9 +3878,8 @@ button.build-issue.is-error:hover { background: rgba(255, 121, 108, 0.18); }
 
 .hardpoint-summary.is-full { opacity: 0.55; }
 
-/* Cada pieza del filtro de piezas de My builds, con su nombre junto al desplegable. */
-.builds-part-filter {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+/* En el móvil no cabe la columna de etiquetas: cada etiqueta va encima de sus controles. */
+@media (max-width: 600px) {
+  .builds-filter-row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .builds-filter-row > .builds-filter-label { line-height: 1.4; }
 }
