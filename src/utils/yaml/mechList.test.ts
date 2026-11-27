@@ -3,7 +3,7 @@ import mw5Mechs from '../../data/mechs.json';
 import { filterOptionsByText } from '../format';
 import { findYamlMech, getYamlQuirk, yamlMechs } from './data';
 import {
-  EMPTY_YAML_FILTERS, filterYamlMechs, getYamlAvailableYear, getYamlMechDisplayName, getYamlHardpointCounts, getYamlQuirkOptions, isClanMech, isOmniMech,
+  EMPTY_YAML_FILTERS, filterYamlMechs, parseYamlQuery, getYamlAvailableYear, getYamlMechDisplayName, getYamlHardpointCounts, getYamlQuirkOptions, isClanMech, isOmniMech,
   type YamlMechFilters
 } from './mechList';
 
@@ -49,8 +49,8 @@ describe('filtros del selector de YAML', () => {
     const typed = withFilters({}, '3e 2mel sh');
     const clicked = withFilters({ minHardpoints: { energy: 3, melee: 2 }, superheavy: true });
     expect(ids(typed)).toEqual(ids(clicked));
-    expect(ids(withFilters({}, 'clan omni yaml hero 1ams dlc7'))).toEqual(ids(withFilters({
-      techBase: 'Clan', omni: true, yamlOnly: true, hero: true, minHardpoints: { ams: 1 }, dlcs: [7]
+    expect(ids(withFilters({}, 'clan omni hero 1ams dlc7'))).toEqual(ids(withFilters({
+      techBase: 'Clan', omni: true, hero: true, minHardpoints: { ams: 1 }, dlcs: [7]
     })));
     expect(withFilters({}, 'atlas 2b').every(mech => mech.chassis.toLowerCase().includes('atlas'))).toBe(true);
   });
@@ -75,8 +75,10 @@ describe('filtros del selector de YAML', () => {
     expect(early.every(mech => getYamlAvailableYear(mech) <= 3025)).toBe(true);
   });
 
-  it('CA9: YAML only deja las 151 variantes nuevas', () => {
-    expect(withFilters({ yamlOnly: true })).toHaveLength(151);
+  // Quitado en docs/specs/filtros-builds-ordenados.md: confundía, y las variantes nuevas ya llevan su etiqueta.
+  it('CA9: no hay filtro de variantes nuevas de YAML (filtros-builds-ordenados CA1 y CA2)', () => {
+    expect(EMPTY_YAML_FILTERS).not.toHaveProperty('yamlOnly');
+    expect(parseYamlQuery('yaml')).toEqual({ text: 'yaml', filters: {} });
   });
 
   it('CA10: el buscador del desplegable de quirks, sin mayúsculas ni acentos', () => {

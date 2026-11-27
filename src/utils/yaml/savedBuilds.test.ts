@@ -8,7 +8,7 @@ import { createStockBuild, mountItem, stripBuild } from './build';
 import { encodeYamlBuild } from './buildCode';
 import { findYamlMech, yamlMechs } from './data';
 import { getYamlHardpointCounts } from './mechList';
-import { summarizeYamlSavedBuild } from './savedBuildRows';
+import { summarizeYamlSavedBuild, YAML_BUILD_LIST } from './savedBuildRows';
 import { createYamlExportFile, parseYamlImportFile } from './savedBuilds';
 
 // Builds guardadas del MechLab de YAML (docs/specs/builds-guardadas-yaml.md).
@@ -71,12 +71,14 @@ describe('resumen para la lista', () => {
     expect(tags.map(tag => tag.label)).toEqual(expect.arrayContaining(['JJ 2', 'ECM', 'MASC']));
   });
 
-  it('CA6: Clan omni, superpesado y variante nueva de YAML', () => {
+  it('CA6: Clan omni y superpesado, sin rasgo de variante nueva de YAML', () => {
     const omni = yamlMechs.find(mech => mech.quirks.includes('OMNI-MECH') && mech.quirks.includes('CLAN-MECH'))!;
     expect(summarizeYamlSavedBuild(stockOf(omni.id)).listRow).toMatchObject({ techBase: 'Clan' });
     expect(summarizeYamlSavedBuild(stockOf(omni.id)).listRow.features).toContain('omni');
     expect(summarizeYamlSavedBuild(stockOf('MAD-BARA2')).listRow.features).toContain('superheavy');
-    expect(summarizeYamlSavedBuild(stockOf('ANH-1G')).listRow.features).toContain('yamlOnly');
+    // Sin filtro de variantes nuevas (docs/specs/filtros-builds-ordenados.md, CA3).
+    expect(summarizeYamlSavedBuild(stockOf('ANH-1G')).listRow.features).not.toContain('yamlOnly');
+    expect(YAML_BUILD_LIST.featureOptions.map(option => option.id)).not.toContain('yamlOnly');
   });
 
   it('CA7: un código que ya no se puede abrir', () => {
