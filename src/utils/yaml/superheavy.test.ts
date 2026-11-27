@@ -5,7 +5,7 @@ import yamlMechs from '../../data/yaml/mechs.json';
 import { createStockBuild, dropExcessEngineHeatSinks, mountItem, setInternal } from './build';
 import { getYamlStatsPanel } from './combat';
 import { findYamlMech } from './data';
-import { getActuatorSlotTypes, getArmorPoints, getBuildTonnage, getEngineHeatSinkSlots, getFreeGeneralSlots, getGeneralSlots, getHeat, getTopSpeed } from './stats';
+import { getActuatorSlots, getActuatorSlotTypes, getArmorPoints, getBuildTonnage, getEngineHeatSinkSlots, getFreeGeneralSlots, getGeneralSlots, getHeat, getTopSpeed } from './stats';
 
 // Criterios de aceptación de docs/specs/superpesados-yaml.md, con las cifras de las capturas del mechlab del juego
 // del MAD-BARA2 y el MAD-TF (YAML 0.99.4.3).
@@ -85,5 +85,17 @@ describe('superpesados de YAML', () => {
     const mech = findYamlMech('NSR-9J')!;
     const { installed, bonus } = getArmorPoints(mech, setInternal(createStockBuild(mech), 'Armorslot', 'HARDENED'));
     expect(installed + bonus).toBe(1198);
+  });
+
+  it('CA8: los actuadores de los superpesados ocupan dos ranuras', () => {
+    const slotsOf = (mech: YamlMech, zone: Zone) => mech.zones[zone].actuators.map(actuator => getActuatorSlots(mech, zone, actuator));
+    const corsair = findYamlMech('COR-ROAM')!;
+    const nightstar = findYamlMech('NSR-9J')!;
+    for (const zone of ['leftArm', 'rightLeg'] as const) {
+      expect(slotsOf(corsair, zone).length).toBeGreaterThan(0);
+      expect(slotsOf(corsair, zone).every(slots => slots === 2)).toBe(true);
+      expect(slotsOf(nightstar, zone).length).toBeGreaterThan(0);
+      expect(slotsOf(nightstar, zone).every(slots => slots === 1)).toBe(true);
+    }
   });
 });

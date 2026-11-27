@@ -29,7 +29,7 @@ Leídas del bytecode de YAML 0.99.4.3 (`EquipmentUtilities`, `MechlabArmorHandli
 ## Requisitos funcionales
 
 - **RF1.** Los tres superpesados jugables están en el selector de 'Mechs del MechLab de YAML, con su build de serie y sus quirks.
-- **RF2.** El tablero enseña sus ranuras y actuadores con las reglas de arriba, y el segundo núcleo como equipo del torso central.
+- **RF2.** El tablero enseña sus ranuras y actuadores con las reglas de arriba, y el segundo núcleo como equipo del torso central. Cada actuador ocupa las ranuras de su tipo (`size` de `slots.json`: 2 en los superpesados y 1 en el resto), y el juego lo dibuja con ese alto. La web lo enseña como el resto de piezas de varias ranuras: en una línea con «2 slots» al lado y, con las ranuras desplegadas, con el alto de dos celdas.
 - **RF3.** La lectura de la build da las mismas cifras que el mechlab del juego.
 
 ## Criterios de aceptación
@@ -43,6 +43,7 @@ Leídas del bytecode de YAML 0.99.4.3 (`EquipmentUtilities`, `MechlabArmorHandli
 | CA5 | El MAD-BARA2 de serie | se quita el segundo núcleo | le quedan 2 ranuras de disipadores del motor y se desmontan 2 de sus 4 disipadores dobles de esas ranuras; va a 38,88 km/h, con 3,2 de refrigeración y 62 de capacidad, y pesa 113,5 t, como en la captura |
 | CA6 | Un brazo del MAD-BARA2 | se monta equipo de actuadores | caben los Superheavy Improved Actuators y no los Improved Actuators; en el NSR-9J, al revés |
 | CA7 | El NSR-9J de serie | se cambia la armadura por la Hardened | tiene 1.198 puntos de armadura (599 × 2) |
+| CA8 | Los actuadores del COR-ROAM y del NSR-9J | se cuentan sus ranuras | cada actuador del brazo y de la pierna del COR-ROAM ocupa 2; los del NSR-9J, 1 |
 
 ## Fuera de alcance
 
@@ -55,5 +56,5 @@ Leídas del bytecode de YAML 0.99.4.3 (`EquipmentUtilities`, `MechlabArmorHandli
 
 ## Plan de pruebas
 
-1. **Datos y lógica:** `src/utils/yaml/superheavy.test.ts` (CA1 a CA7).
-2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir el MAD-BARA2, ver sus ranuras y actuadores, quitar el segundo núcleo y volver a la build de serie, y montar equipo de actuadores.
+1. **Datos y lógica:** `src/utils/yaml/superheavy.test.ts` (CA1 a CA8).
+2. **Interfaz:** en el navegador, a 1440 × 900 y a 390 × 844: elegir el MAD-BARA2, ver sus ranuras y actuadores, quitar el segundo núcleo y volver a la build de serie, montar equipo de actuadores y ver los actuadores con el alto de dos ranuras, plegados y desplegados.

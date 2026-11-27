@@ -11,7 +11,7 @@ import { getItemColor, getSlotColor, getYamlItem, getYamlQuirk } from '../utils/
 import { ModLogo } from './YamlInventoryPanel';
 import type { YamlInventoryTarget } from '../utils/yaml/inventory';
 import { getYamlMechDisplayName } from '../utils/yaml/mechList';
-import { ACTUATOR_SLOT_TYPES, getActuatorSlotType, getEngineRating, getFreeGeneralSlots, getGeneralSlots, getStructurePoints } from '../utils/yaml/stats';
+import { ACTUATOR_SLOT_TYPES, getActuatorSlots, getActuatorSlotType, getEngineRating, getFreeGeneralSlots, getGeneralSlots, getStructurePoints } from '../utils/yaml/stats';
 
 // Tablero del MechLab de YAML con el marcado del de MW5 (MechBoard y ComponentCard): las ocho ubicaciones
 // alrededor de la ficha del 'Mech. En YAML las armas ocupan ranuras y cada ubicación tiene además sus
@@ -211,7 +211,21 @@ function LocationCard({ zone, label, position, ...props }: YamlBoardProps & { zo
     <div className="yaml-internals yaml-actuators" aria-label="Actuators">
       {data.actuators.map((actuator, index) => {
         const covering = coveringRow(actuator);
-        if (!covering) return <span key={actuator} className="component-card-item is-built-in yaml-actuator">{actuatorLabel(actuator, zone)}</span>;
+        if (!covering) {
+          // Los de los superpesados ocupan dos ranuras: como las demás piezas grandes, con su tamaño al lado y,
+          // con las ranuras desplegadas, con el alto de dos celdas, como los dibuja el juego.
+          const slots = getActuatorSlots(mech, zone, actuator);
+          return (
+            <span
+              key={actuator}
+              className={['component-card-item is-built-in yaml-actuator', expandedSlots ? 'slot-cell-item' : ''].filter(Boolean).join(' ')}
+              style={{ '--slots': slots } as CSSProperties}
+            >
+              {actuatorLabel(actuator, zone)}
+              {slots > 1 && <small>{slotsLabel(slots)}</small>}
+            </span>
+          );
+        }
         // Una pieza que ocupa varios actuadores sale una vez, en el primero.
         if (data.actuators.slice(0, index).some(previous => coveringRow(previous) === covering)) return null;
         return <RowItem key={actuator} {...rowProps(covering)} />;
