@@ -22,6 +22,12 @@ const createId = () =>
 export const useSavedBuilds = (storageKey = MERCS_STORAGE_KEY) => {
   const [builds, setBuilds] = useState<SavedBuild[]>(() => readStorage(storageKey));
   const [storageFailed, setStorageFailed] = useState(false);
+  // La página de builds de MW5 cambia de clave al pasar de las builds Vanilla a las de YAML.
+  const [readKey, setReadKey] = useState(storageKey);
+  if (readKey !== storageKey) {
+    setReadKey(storageKey);
+    setBuilds(readStorage(storageKey));
+  }
 
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {

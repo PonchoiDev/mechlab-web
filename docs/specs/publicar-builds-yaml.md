@@ -21,14 +21,14 @@ El código de una build de YAML no tiene la forma de los de MW5 y BATTLETECH (`[
 
 - **RF1. Publicar desde el MechLab de YAML.** Un botón **Publish** en el grupo BUILD de la barra, como en MW5 y BATTLETECH, con la misma ventana de publicar. Sin armas ni equipo montados no se puede publicar. Cada build de My builds tiene también **Publish**, que abre la ventana con esa build sin cargarla; My builds sigue abierta debajo. Al publicar, el enlace lleva a la build en `/mercs/builds/`.
 - **RF2. Etiqueta YAML.** En `/mercs/builds/`, cada build de YAML lleva la etiqueta **YAML** delante de las demás, y sus etiquetas, armas y cifras son las de My builds de YAML ([builds-guardadas-yaml.md](builds-guardadas-yaml.md), RF5).
-- **RF3. Interruptores de origen.** La fila **Source** de los filtros tiene dos interruptores con icono: el de MW5 (el «M5» de la biblioteca de Steam, sacado del ejecutable del juego) para las builds Vanilla y el de Yet Another Mechlab para las de YAML. Cada uno enseña u oculta las suyas; al principio se ven las dos, y la última visible no se puede apagar. El resto de filtros (clase, anclajes y armas mínimos, tecnología, rol, equipo y buscador) son los de MW5 y valen para las dos.
+- **RF3. Interruptores de origen.** *Sustituido por un selector exclusivo en [origen-builds-publicadas.md](origen-builds-publicadas.md).* La fila **Source** de los filtros tiene dos interruptores con icono: el de MW5 (el «M5» de la biblioteca de Steam, sacado del ejecutable del juego) para las builds Vanilla y el de Yet Another Mechlab para las de YAML. Cada uno enseña u oculta las suyas; al principio se ven las dos, y la última visible no se puede apagar. El resto de filtros (clase, anclajes y armas mínimos, tecnología, rol, equipo y buscador) son los de MW5 y valen para las dos.
 - **RF4. Abrir y copiar el enlace.** **Open** y **Copy link** de una build de YAML llevan al MechLab de YAML (`/mercs/yaml/?b=`), y las de MW5 al de MW5, como hasta ahora.
 - **RF5. Lista de chasis.** `?mech=<id>` deja las builds de esa variante de los dos MechLabs: los ids de las variantes del juego base son los mismos en los dos.
 
 ## Requisitos no funcionales
 
 - **RNF1.** La validación del código va en `worker/builds.ts`, con sus tests. Distinguir un código de YAML y elegir su enlace, en `src/utils/publishedBuilds.ts`, también con tests.
-- **RNF2.** El MechLab de MW5 y la ventana My builds de la página de builds no cambian: siguen publicando y listando solo builds de MW5.
+- **RNF2.** El MechLab de MW5 no cambia: sigue publicando solo builds de MW5. La ventana My builds de la página de builds lista las del origen elegido desde [origen-builds-publicadas.md](origen-builds-publicadas.md).
 - **RNF3.** Textos de la interfaz en inglés y sin guiones largos.
 
 ## Criterios de aceptación
@@ -41,12 +41,11 @@ El código de una build de YAML no tiene la forma de los de MW5 y BATTLETECH (`[
 | CA4 | Un código de MW5 de más de 4000 caracteres | se valida | sigue sin valer: el tope de 16 000 es solo para los de YAML |
 | CA5 | Un código | se pregunta si es de YAML | lo es si empieza por `Y1.` |
 | CA6 | Un código de YAML y uno de MW5 | se pide su enlace | el de YAML abre `/mercs/yaml/?b=` y el de MW5, `/mercs/?b=` |
-| CA7 | Los interruptores de origen con las dos visibles | se apaga YAML, se vuelve a encender, y se intenta apagar Vanilla cuando es la única visible | queda solo Vanilla; vuelven a verse las dos (sin filtro); Vanilla sigue visible |
+| CA7 | *(Sustituido por [origen-builds-publicadas.md](origen-builds-publicadas.md))* Los interruptores de origen con las dos visibles | se apaga YAML, se vuelve a encender, y se intenta apagar Vanilla cuando es la única visible | queda solo Vanilla; vuelven a verse las dos (sin filtro); Vanilla sigue visible |
 
 ## Fuera de alcance
 
-- Las builds de YAML guardadas en el navegador en la ventana My builds de la página de builds (RF2b de [builds-publicadas.md](builds-publicadas.md)): se publican desde el MechLab de YAML.
-- Filtros propios de YAML en la página de builds (las piezas internas, los anclajes de artillería, AMS y cuerpo a cuerpo o los rasgos de la variante): ya están en My builds de YAML.
+- Las builds de YAML guardadas en el navegador en la ventana My builds de la página de builds y los filtros propios de YAML en esa página: llegaron con [origen-builds-publicadas.md](origen-builds-publicadas.md).
 - Comparar builds de YAML.
 
 ## Plan de pruebas
