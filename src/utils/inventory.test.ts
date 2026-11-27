@@ -7,6 +7,7 @@ import {
   getHardpointUsage,
   getNextFreeHardpoint,
   getInventoryCategory,
+  getTargetCategory,
   INVENTORY_CATEGORIES,
   moveEquippedItem,
   placeItem,
@@ -317,5 +318,22 @@ describe('un solo computador de puntería', () => {
 
   it('CA6: sin computador se equipa uno', () => {
     expect(ids(placeItem(archer, empty, 'rightTorso', getItem('TargetingComputer_Mk5'), null).loadout.rightTorso)).toEqual(['TargetingComputer_Mk5']);
+  });
+
+  // docs/specs/filtro-del-anclaje.md
+  it('CA1: al elegir un anclaje, la pestaña de su tipo; en uno omni o sin anclaje, All', () => {
+    const indexOf = (mech: typeof archer, zone: 'leftArm' | 'rightArm' | 'leftTorso' | 'rightTorso' | 'centerTorso', type: string) =>
+      mech.components[zone].hardpoints.findIndex(hardpoint => hardpoint.type === type);
+    const zones = ['leftArm', 'rightArm', 'leftTorso', 'rightTorso', 'centerTorso'] as const;
+    const find = (mech: typeof archer, type: string) => {
+      const zone = zones.find(candidate => indexOf(mech, candidate, type) >= 0)!;
+      return { zone, hardpointIndex: indexOf(mech, zone, type) };
+    };
+    const hunchback = getMech('HBK-4G');
+    expect(getTargetCategory(hunchback, find(hunchback, 'ballistic'))).toBe('ballistic');
+    expect(getTargetCategory(hunchback, find(hunchback, 'energy'))).toBe('energy');
+    const omni = getMech('ACH-PRIME');
+    expect(getTargetCategory(omni, find(omni, 'omni'))).toBe('all');
+    expect(getTargetCategory(hunchback, { zone: 'rightTorso', hardpointIndex: null })).toBe('all');
   });
 });

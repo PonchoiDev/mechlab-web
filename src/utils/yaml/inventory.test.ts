@@ -3,7 +3,7 @@ import { createStockBuild, stripBuild } from './build';
 import { findYamlMech, getYamlItem } from './data';
 import {
   autoPlaceYamlItem, chooseYamlInternal, countYamlByFilter, filterYamlInventory, getYamlDropZones, getYamlInternalChoices,
-  getYamlInventoryItems, isAmmoForMountedWeapon, matchesYamlInventoryFilter, placeYamlItem, sortYamlInventory, YAML_INVENTORY_FILTERS
+  getYamlInventoryItems, getYamlTargetFilter, isAmmoForMountedWeapon, matchesYamlInventoryFilter, placeYamlItem, sortYamlInventory, YAML_INVENTORY_FILTERS
 } from './inventory';
 
 // El inventario del MechLab de YAML con el NSR-9J: lo mismo que el de MW5 con las reglas de YAML.
@@ -119,5 +119,21 @@ describe('inventario del MechLab de YAML', () => {
 
   it('CA8: los colores lineales del mod pasados a sRGB', () => {
     expect(YAML_INVENTORY_FILTERS.find(filter => filter.id === 'ballistic')!.color).toBe('#9781b8');
+  });
+
+  // docs/specs/filtro-del-anclaje.md
+  const gaussTarget = { zone: 'rightArm' as const, hardpoint: 'Forearm_Right_BH1_gaussrifle', internal: null };
+
+  it('CA3: al elegir un anclaje, el filtro de su tipo; sin anclaje, ninguno', () => {
+    expect(getYamlTargetFilter(nightstar, gaussTarget)).toBe('ballistic');
+    expect(getYamlTargetFilter(nightstar, { ...gaussTarget, hardpoint: 'Forearm_Right_EH1_mediumpulselaser' })).toBe('energy');
+    expect(getYamlTargetFilter(nightstar, { ...gaussTarget, hardpoint: null })).toBeNull();
+  });
+
+  it('CA4: en un anclaje, con «Fits», solo las armas que admite', () => {
+    const fits = filterYamlInventory(catalog, { ...all, fitsOnly: true }, nightstar, stock, gaussTarget);
+    expect(fits.length).toBeGreaterThan(0);
+    expect(fits.every(({ item }) => item.kind === 'weapon' && item.hardpoint === 'ballistic')).toBe(true);
+    expect(fits.some(({ item }) => item.name === 'Alu-Ceramic Shoulder' || item.name === 'Battle Fist')).toBe(false);
   });
 });
