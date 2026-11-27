@@ -5,6 +5,7 @@ import filtersData from '../../data/yaml/filters.json';
 import { checkInternal, mountItem, mountWeapon, setInternal, type MountResult } from './build';
 import { getYamlItem, yamlItemIds } from './data';
 import { GENERAL_SLOT } from './stats';
+import { getYamlWeightClassProblem } from './weightClass';
 
 // El inventario del MechLab de YAML, el mismo que el de MW5 y BATTLETECH (components/InventoryPanel.tsx,
 // battletech/mechlab/BtInventoryPanel.tsx) con las reglas de YAML: además de las armas, la munición y el
@@ -143,6 +144,8 @@ export function filterYamlInventory(
   const filter = filters.filter ? FILTERS_BY_ID.get(filters.filter) : undefined;
   return entries.filter(({ id, item }) => {
     if (filter && !matchesYamlInventoryFilter(item, filter)) return false;
+    // Lo que el 'Mech no puede llevar por su clase de peso no sale, como en el juego (EquipmentMatchesUiFilter).
+    if (getYamlWeightClassProblem(mech, id)) return false;
     if (text && !item.name.toLowerCase().includes(text)) return false;
     if (!filters.fitsOnly) return true;
     if (!isUseful(build, id)) return false;

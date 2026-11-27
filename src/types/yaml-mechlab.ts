@@ -165,6 +165,9 @@ export interface YamlItem {
   // manda sobre la etiqueta (docs/specs/filtros-inventario-yaml.md).
   weaponType?: string;
   uiCategory?: string;
+  // El tonelaje del 'Mech que admite la pieza, si lo limita (docs/specs/clase-de-peso-yaml.md).
+  minTonnage?: number;
+  maxTonnage?: number;
   restrictions?: EquipRestriction[];
   // Núcleos de motor: su potencia.
   rating?: number;
