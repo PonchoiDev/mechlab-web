@@ -18,6 +18,9 @@ export interface ImportResult {
 }
 
 export const EXPORT_FORMAT = 'mw-builder-builds';
+// Aquí y no con el resto de las builds de YAML (utils/yaml/savedBuilds.ts), que cargan sus datos: la página de
+// builds de MW5 la necesita antes de descargarlos.
+export const YAML_SAVED_BUILDS_KEY = 'mw-builder:yaml:saved-builds';
 const MAX_NAME_LENGTH = 80;
 
 export const normalizeBuildName = (name: string, fallback: string): string =>

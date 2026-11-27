@@ -3,9 +3,9 @@ import { decodeYamlBuild } from './buildCode';
 import { findYamlMech } from './data';
 
 // Las builds guardadas del MechLab de YAML (docs/specs/builds-guardadas-yaml.md) usan el formato común (nombre y
-// código de enlace) en su propia clave del navegador y con game: mw5-yaml en el archivo exportado: no son builds
-// de MW5 (otras piezas, otras reglas y otro código), así que un archivo de un MechLab no se importa en otro.
-export const YAML_SAVED_BUILDS_KEY = 'mw-builder:yaml:saved-builds';
+// código de enlace) en su propia clave del navegador (YAML_SAVED_BUILDS_KEY) y con game: mw5-yaml en el archivo
+// exportado: no son builds de MW5 (otras piezas, otras reglas y otro código), así que un archivo de un MechLab no
+// se importa en otro.
 const EXPORT_VERSION = 1;
 const GAME = 'mw5-yaml';
 

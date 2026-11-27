@@ -52,9 +52,8 @@ export interface PublishedBuildSummary {
 interface PublishedBuildsPageProps {
   game: BuildGame;
   intro: ReactNode;
+  // Los filtros de la lista y de My builds; al cambiar (el origen de la página de MW5), se borran los elegidos.
   config: BuildListConfig;
-  // Los filtros de My builds, si no son los de la lista (la de MW5 añade Source, y en My builds todas son de MW5).
-  savedConfig?: BuildListConfig;
   sortKey: string;
   summarize: (build: SavedBuild) => PublishedBuildSummary;
   // El nombre de la variante de un mechId, para el filtro ?mech= que pone la lista de chasis.
@@ -63,8 +62,12 @@ interface PublishedBuildsPageProps {
   // Las builds guardadas en el navegador (My builds) de este juego; sin clave, las de MW5.
   savedBuildsKey?: string;
   mechlabUrl: string;
-  // Avisa de las builds de la lista cada vez que cambia: la de MW5 carga así los datos de YAML si hacen falta.
+  // Avisa de las builds de la lista cada vez que cambia: la de MW5 elige así el origen de un enlace ?build=.
   onBuildsChange?: (builds: PublishedBuild[]) => void;
+  // Las builds que se enseñan de las publicadas; la de MW5, las de un origen.
+  include?: (build: PublishedBuild) => boolean;
+  // Encima de la lista: el selector de origen de la de MW5.
+  controls?: ReactNode;
 }
 
 const dateFormat = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -73,7 +76,7 @@ type Confirming = { id: string; action: 'delete' };
 
 // La página de builds publicadas de un juego (/mercs/builds/ y /battletech/builds/): las de todos los
 // jugadores, con los filtros y el orden de My builds, votos, denuncias y las propias editables.
-export function PublishedBuildsPage({ game, intro, config, savedConfig = config, sortKey, summarize, mechName, buildUrl, savedBuildsKey, mechlabUrl, onBuildsChange }: PublishedBuildsPageProps) {
+export function PublishedBuildsPage({ game, intro, config, sortKey, summarize, mechName, buildUrl, savedBuildsKey, mechlabUrl, onBuildsChange, include, controls }: PublishedBuildsPageProps) {
   const params = useMemo(() => new URLSearchParams(window.location.search), []);
   const [mechFilter, setMechFilter] = useState(params.get('mech'));
   const highlighted = params.get('build');
@@ -100,6 +103,11 @@ export function PublishedBuildsPage({ game, intro, config, savedConfig = config,
     if (!publishTarget) setIsSavedOpen(false);
   }, [publishTarget]);
   const filters = useBuildListFilters(sortKey);
+  const [filtersConfig, setFiltersConfig] = useState(config);
+  if (filtersConfig !== config) {
+    setFiltersConfig(config);
+    filters.clear();
+  }
   const showToast = useCallback((message: string) => setToast({ id: Date.now(), message }), []);
 
   useEffect(() => {
@@ -125,9 +133,9 @@ export function PublishedBuildsPage({ game, intro, config, savedConfig = config,
 
   const entries = useMemo(
     () => state.builds
-      .filter(build => !reported.has(build.id) && (!mechFilter || build.mechId === mechFilter))
+      .filter(build => !reported.has(build.id) && (!mechFilter || build.mechId === mechFilter) && (!include || include(build)))
       .map(build => ({ published: build, ...summarize(toSavedBuild(build)) })),
-    [state.builds, reported, mechFilter, summarize]
+    [state.builds, reported, mechFilter, include, summarize]
   );
   const listRows = useMemo(() => entries.map(entry => entry.listRow), [entries]);
   const shown = useMemo(() => {
@@ -260,6 +268,8 @@ export function PublishedBuildsPage({ game, intro, config, savedConfig = config,
             }}>Show all</button>
           </p>
         )}
+
+        {controls}
 
         {state.status === 'ready' && (
           <div className="builds-list-header published-header">
@@ -432,7 +442,7 @@ export function PublishedBuildsPage({ game, intro, config, savedConfig = config,
       {isSavedOpen && (
         <SavedBuildsPublishDialog
           entries={savedEntries}
-          config={savedConfig}
+          config={config}
           sortKey={sortKey}
           publishedCodes={publishedCodes}
           buildUrl={buildUrl}

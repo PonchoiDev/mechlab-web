@@ -23,7 +23,7 @@ import { decodeYamlBuild, encodeYamlBuild } from '../utils/yaml/buildCode';
 import { findYamlMech, getYamlItem, getYamlSarnaMech, YAML_COLORS, yamlMechs } from '../utils/yaml/data';
 import { autoPlaceYamlItem, chooseYamlInternal, getYamlDropZones, placeYamlItem, type YamlInventoryTarget } from '../utils/yaml/inventory';
 import { getYamlBuildIssues } from '../utils/yaml/readouts';
-import { YAML_SAVED_BUILDS_KEY } from '../utils/yaml/savedBuilds';
+import { YAML_SAVED_BUILDS_KEY } from '../utils/savedBuildsCore';
 import { normalizeBuildName } from '../utils/savedBuildsCore';
 import { getYamlUpgrades, toggleYamlUpgrade } from '../utils/yaml/traits';
 import { getUsedUpgradeSlots, sanitizeUpgrades } from '../utils/upgrades';
