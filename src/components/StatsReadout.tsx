@@ -1,6 +1,6 @@
 import type { Mech } from '../types/mech';
 import { EMPTY_VALUE } from '../utils/format';
-import { formatArmorPoints, formatCoolingRate, truncateTo, type BuildSummary } from '../utils/calculators';
+import { formatArmorPoints, formatCoolingRate, isOverTonnage, truncateTo, type BuildSummary } from '../utils/calculators';
 import { UpgradedValue } from './UpgradedValue';
 
 interface StatsReadoutProps {
@@ -33,7 +33,7 @@ export function StatsReadout({ mech, summary, base }: StatsReadoutProps) {
     <section className="readout-strip" aria-label="Mech statistics">
       <div className="readout-cell">
         <span className="readout-label">TONNAGE</span>
-        <strong className={totalWeight > mech.tonnageMax ? 'readout-warning' : ''}>
+        <strong className={isOverTonnage(totalWeight, mech.tonnageMax) ? 'readout-warning' : ''}>
           {truncateTo(totalWeight, 2).toFixed(2)} <small>/ {mech.tonnageMax} t</small>
         </strong>
       </div>

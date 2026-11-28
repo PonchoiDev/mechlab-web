@@ -48,4 +48,25 @@ describe('getBuildIssues', () => {
 
     expect(first).toMatchObject({ id: 'overweight', severity: 'error' });
   });
+
+  // El juego trunca el peso a centésimas antes de compararlo con el máximo (GetCurrentTonnage e IsOverMaxTonnage).
+  it('no marca sobrepeso si el peso truncado a centésimas es el máximo', () => {
+    const huntsman = getMech('HMN-PRIME');
+    // 340 puntos de Ferro son 9,4866 t: con 26 t de equipo, 50,0066 t, que el juego muestra como 50,00.
+    const withEquipment = { ...huntsman, baseTonnage: huntsman.baseTonnage + 26 };
+    const armor = { ...createEmptyArmor(), centerTorso: { front: 340, rear: 0 } };
+    const issues = getBuildIssues(withEquipment, createEmptyLoadout(), armor);
+
+    expect(issues.some(issue => issue.id === 'overweight')).toBe(false);
+  });
+
+  it('da el sobrepeso con el peso truncado', () => {
+    const huntsman = getMech('HMN-PRIME');
+    // 341 puntos son 9,5145 t: 50,0345 t, que el juego muestra como 50,03.
+    const withEquipment = { ...huntsman, baseTonnage: huntsman.baseTonnage + 26 };
+    const armor = { ...createEmptyArmor(), centerTorso: { front: 341, rear: 0 } };
+    const [first] = getBuildIssues(withEquipment, createEmptyLoadout(), armor);
+
+    expect(first).toMatchObject({ id: 'overweight', message: 'Over tonnage by 0.03 t' });
+  });
 });

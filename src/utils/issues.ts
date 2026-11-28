@@ -1,5 +1,5 @@
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
-import { calculateArmorWeight, calculateEquippedWeight, getArmorPointsPerTon } from './calculators';
+import { calculateArmorWeight, calculateEquippedWeight, getArmorPointsPerTon, getGameTonnage } from './calculators';
 import { getAmmoWarnings, getComponentStatus } from './equipment';
 import { ZONE_LABELS, ZONE_KEYS } from './zones';
 
@@ -20,7 +20,7 @@ const plural = (count: number, singular: string, pluralForm = `${singular}s`) =>
 export const getBuildIssues = (mech: Mech, loadout: EquippedLoadout, armor: ArmorState): BuildIssue[] => {
   const issues: BuildIssue[] = [];
   const totalWeight = mech.baseTonnage + calculateEquippedWeight(loadout) + calculateArmorWeight(armor, getArmorPointsPerTon(mech));
-  const overweight = Math.round((totalWeight - mech.tonnageMax) * 100) / 100;
+  const overweight = Math.round((getGameTonnage(totalWeight) - mech.tonnageMax) * 100) / 100;
 
   if (overweight > 0) {
     issues.push({ id: 'overweight', severity: 'error', message: `Over tonnage by ${overweight} t` });

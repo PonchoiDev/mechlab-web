@@ -9,6 +9,14 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: '2026-11-28-exact-tonnage',
+    date: '2026-11-28',
+    title: 'Builds at exact tonnage',
+    items: [
+      'A build that weighs 50.00 of 50 t is no longer marked over tonnage by 0.01 t: like the game, the MechLab cuts the weight to hundredths before comparing it with the maximum'
+    ]
+  },
+  {
     id: '2026-11-27-yaml-mods',
     date: '2026-11-27',
     title: 'YAML mods support',
