@@ -6,7 +6,7 @@ import {
 import { EMPTY_VALUE } from '../utils/format';
 import type { ArmorState, EquippedLoadout, Mech, Zone } from '../types/mech';
 import type { Upgrade } from '../types/upgrade';
-import { formatArmorPoints, formatCoolingRate, getArmorScale, scaleArmorPoints, truncateTo, type BuildSummary } from '../utils/calculators';
+import { formatArmorPoints, formatCoolingRate, getArmorScale, isOverTonnage, scaleArmorPoints, truncateTo, type BuildSummary } from '../utils/calculators';
 import {
   getAmmoWarnings,
   getComponentStatus,
@@ -267,7 +267,7 @@ const layoutCard = (measuring: Context, input: BuildImageInput, zone: Zone, widt
 // --- Composición ---------------------------------------------------------------------------------
 
 const getReadouts = ({ mech, summary }: BuildImageInput) => [
-  { label: 'TONNAGE', value: truncateTo(summary.totalWeight, 2).toFixed(2), unit: `/ ${mech.tonnageMax} t`, warn: summary.totalWeight > mech.tonnageMax },
+  { label: 'TONNAGE', value: truncateTo(summary.totalWeight, 2).toFixed(2), unit: `/ ${mech.tonnageMax} t`, warn: isOverTonnage(summary.totalWeight, mech.tonnageMax) },
   { label: 'ARMOR POINTS', value: formatArmorPoints(summary.armorPoints), unit: `/ ${formatArmorPoints(summary.maxArmorPoints)}` },
   { label: 'ARMOR MASS', value: truncateTo(summary.armorWeight, 2).toFixed(2), unit: 't' },
   {

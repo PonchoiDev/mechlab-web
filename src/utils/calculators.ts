@@ -54,6 +54,12 @@ export const truncateTo = (value: number, decimals: number): number => {
   return Math.floor(value * factor + 1e-6) / factor;
 };
 
+// GetCurrentTonnage suma el peso × 100, lo trunca (truncf) y lo multiplica por 0,01; IsOverMaxTonnage compara ese
+// valor con el máximo. Por eso 50,0066 t (HMN-PRIME con 340 puntos de Ferro) son 50,00 y no hay sobrepeso.
+export const getGameTonnage = (weight: number): number => truncateTo(weight, 2);
+
+export const isOverTonnage = (weight: number, maxTonnage: number): boolean => getGameTonnage(weight) > maxTonnage;
+
 const sumBy = <T>(values: T[], getValue: (value: T) => number): number =>
   values.reduce((total, value) => total + getValue(value), 0);
 
